@@ -3185,6 +3185,11 @@ type ScalingConfiguration struct {
 	// 384. The minimum capacity must be less than or equal to the maximum capacity.
 	MinCapacity *int32
 
+	// The amount of time, in seconds, that Aurora Serverless tries to find a scaling
+	// point to perform seamless scaling before enforcing the timeout action. The
+	// default is 300. Specify a value between 60 and 600 seconds.
+	SecondsBeforeTimeout *int32
+
 	// The time, in seconds, before an Aurora DB cluster in serverless mode is paused.
 	// Specify a value between 300 and 86,400 seconds.
 	SecondsUntilAutoPause *int32
@@ -3220,13 +3225,21 @@ type ScalingConfigurationInfo struct {
 	// The maximum capacity for the Aurora DB cluster in serverless DB engine mode.
 	MinCapacity *int32
 
+	// The number of seconds before scaling times out. What happens when an attempted
+	// scaling action times out is determined by the TimeoutAction setting.
+	SecondsBeforeTimeout *int32
+
 	// The remaining amount of time, in seconds, before the Aurora DB cluster in
 	// serverless mode is paused. A DB cluster can be paused only when it's idle (it
 	// has no connections).
 	SecondsUntilAutoPause *int32
 
-	// The timeout action of a call to ModifyCurrentDBClusterCapacity, either
-	// ForceApplyCapacityChange or RollbackCapacityChange.
+	// The action that occurs when Aurora times out while attempting to change the
+	// capacity of an Aurora Serverless cluster. The value is either
+	// ForceApplyCapacityChange or RollbackCapacityChange. ForceApplyCapacityChange,
+	// the default, sets the capacity to the specified value as soon as possible.
+	// RollbackCapacityChange ignores the capacity change if a scaling point isn't
+	// found in the timeout period.
 	TimeoutAction *string
 
 	noSmithyDocumentSerde

@@ -41,8 +41,8 @@ type ListModelsInput struct {
 	// The maximum number of models to return in the response.
 	MaxResults *int32
 
-	// A string in the training job name. This filter returns only models in the
-	// training job whose name contains the specified string.
+	// A string in the model name. This filter returns only models whose name contains
+	// the specified string.
 	NameContains *string
 
 	// If the response to a previous ListModels request was truncated, the response

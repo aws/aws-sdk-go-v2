@@ -273,6 +273,7 @@ const (
 	DataSourceTypeTeradata            DataSourceType = "TERADATA"
 	DataSourceTypeTwitter             DataSourceType = "TWITTER"
 	DataSourceTypeTimestream          DataSourceType = "TIMESTREAM"
+	DataSourceTypeAmazonOpensearch    DataSourceType = "AMAZON_OPENSEARCH"
 )
 
 // Values returns all known values for DataSourceType. Note that this can be
@@ -303,6 +304,7 @@ func (DataSourceType) Values() []DataSourceType {
 		"TERADATA",
 		"TWITTER",
 		"TIMESTREAM",
+		"AMAZON_OPENSEARCH",
 	}
 }
 

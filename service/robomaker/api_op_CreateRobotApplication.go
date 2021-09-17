@@ -40,9 +40,11 @@ type CreateRobotApplicationInput struct {
 	// This member is required.
 	RobotSoftwareSuite *types.RobotSoftwareSuite
 
+	// The object that contains that URI of the Docker image that you use for your
+	// robot application.
+	Environment *types.Environment
+
 	// The sources of the robot application.
-	//
-	// This member is required.
 	Sources []types.SourceConfig
 
 	// A map that contains tag keys and tag values that are attached to the robot
@@ -56,6 +58,10 @@ type CreateRobotApplicationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the robot application.
 	Arn *string
+
+	// An object that contains the Docker image URI used to a create your robot
+	// application.
+	Environment *types.Environment
 
 	// The time, in milliseconds since the epoch, when the robot application was last
 	// updated.

@@ -1723,9 +1723,6 @@ func validateOpCreateRobotApplicationInput(v *CreateRobotApplicationInput) error
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.Sources == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Sources"))
-	}
 	if v.RobotSoftwareSuite == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RobotSoftwareSuite"))
 	}
@@ -1779,9 +1776,6 @@ func validateOpCreateSimulationApplicationInput(v *CreateSimulationApplicationIn
 	invalidParams := smithy.InvalidParamsError{Context: "CreateSimulationApplicationInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if v.Sources == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Sources"))
 	}
 	if v.SimulationSoftwareSuite == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SimulationSoftwareSuite"))
@@ -2294,9 +2288,6 @@ func validateOpUpdateRobotApplicationInput(v *UpdateRobotApplicationInput) error
 	if v.Application == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Application"))
 	}
-	if v.Sources == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Sources"))
-	}
 	if v.RobotSoftwareSuite == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RobotSoftwareSuite"))
 	}
@@ -2314,9 +2305,6 @@ func validateOpUpdateSimulationApplicationInput(v *UpdateSimulationApplicationIn
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateSimulationApplicationInput"}
 	if v.Application == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Application"))
-	}
-	if v.Sources == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Sources"))
 	}
 	if v.SimulationSoftwareSuite == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SimulationSoftwareSuite"))

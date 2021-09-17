@@ -8143,6 +8143,11 @@ func awsAwsquery_serializeDocumentScalingConfiguration(v *types.ScalingConfigura
 		objectKey.Integer(*v.MinCapacity)
 	}
 
+	if v.SecondsBeforeTimeout != nil {
+		objectKey := object.Key("SecondsBeforeTimeout")
+		objectKey.Integer(*v.SecondsBeforeTimeout)
+	}
+
 	if v.SecondsUntilAutoPause != nil {
 		objectKey := object.Key("SecondsUntilAutoPause")
 		objectKey.Integer(*v.SecondsUntilAutoPause)

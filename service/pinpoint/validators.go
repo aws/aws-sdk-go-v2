@@ -110,6 +110,26 @@ func (m *validateOpCreateImportJob) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateInAppTemplate struct {
+}
+
+func (*validateOpCreateInAppTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateInAppTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateInAppTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateInAppTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateJourney struct {
 }
 
@@ -485,6 +505,26 @@ func (m *validateOpDeleteGcmChannel) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteGcmChannelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteInAppTemplate struct {
+}
+
+func (*validateOpDeleteInAppTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteInAppTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteInAppTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteInAppTemplateInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1165,6 +1205,46 @@ func (m *validateOpGetImportJobs) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetImportJobsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetInAppMessages struct {
+}
+
+func (*validateOpGetInAppMessages) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetInAppMessages) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetInAppMessagesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetInAppMessagesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetInAppTemplate struct {
+}
+
+func (*validateOpGetInAppTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetInAppTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetInAppTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetInAppTemplateInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1990,6 +2070,26 @@ func (m *validateOpUpdateGcmChannel) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateInAppTemplate struct {
+}
+
+func (*validateOpUpdateInAppTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateInAppTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateInAppTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateInAppTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateJourney struct {
 }
 
@@ -2210,6 +2310,10 @@ func addOpCreateImportJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateImportJob{}, middleware.After)
 }
 
+func addOpCreateInAppTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateInAppTemplate{}, middleware.After)
+}
+
 func addOpCreateJourneyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateJourney{}, middleware.After)
 }
@@ -2284,6 +2388,10 @@ func addOpDeleteEventStreamValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteGcmChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteGcmChannel{}, middleware.After)
+}
+
+func addOpDeleteInAppTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteInAppTemplate{}, middleware.After)
 }
 
 func addOpDeleteJourneyValidationMiddleware(stack *middleware.Stack) error {
@@ -2420,6 +2528,14 @@ func addOpGetImportJobValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetImportJobsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetImportJobs{}, middleware.After)
+}
+
+func addOpGetInAppMessagesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetInAppMessages{}, middleware.After)
+}
+
+func addOpGetInAppTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetInAppTemplate{}, middleware.After)
 }
 
 func addOpGetJourneyDateRangeKpiValidationMiddleware(stack *middleware.Stack) error {
@@ -2586,6 +2702,10 @@ func addOpUpdateGcmChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateGcmChannel{}, middleware.After)
 }
 
+func addOpUpdateInAppTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateInAppTemplate{}, middleware.After)
+}
+
 func addOpUpdateJourneyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateJourney{}, middleware.After)
 }
@@ -2726,6 +2846,23 @@ func validateCampaignEventFilter(v *types.CampaignEventFilter) error {
 	}
 }
 
+func validateCampaignInAppMessage(v *types.CampaignInAppMessage) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CampaignInAppMessage"}
+	if v.Content != nil {
+		if err := validateListOfInAppMessageContent(v.Content); err != nil {
+			invalidParams.AddNested("Content", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCondition(v *types.Condition) error {
 	if v == nil {
 		return nil
@@ -2800,6 +2937,24 @@ func validateCustomDeliveryConfiguration(v *types.CustomDeliveryConfiguration) e
 	invalidParams := smithy.InvalidParamsError{Context: "CustomDeliveryConfiguration"}
 	if v.DeliveryUri == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DeliveryUri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDefaultButtonConfiguration(v *types.DefaultButtonConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DefaultButtonConfiguration"}
+	if len(v.ButtonAction) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ButtonAction"))
+	}
+	if v.Text == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Text"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3085,6 +3240,146 @@ func validateImportJobRequest(v *types.ImportJobRequest) error {
 	}
 }
 
+func validateInAppMessageBodyConfig(v *types.InAppMessageBodyConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InAppMessageBodyConfig"}
+	if len(v.Alignment) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Alignment"))
+	}
+	if v.Body == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Body"))
+	}
+	if v.TextColor == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TextColor"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInAppMessageButton(v *types.InAppMessageButton) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InAppMessageButton"}
+	if v.Android != nil {
+		if err := validateOverrideButtonConfiguration(v.Android); err != nil {
+			invalidParams.AddNested("Android", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DefaultConfig != nil {
+		if err := validateDefaultButtonConfiguration(v.DefaultConfig); err != nil {
+			invalidParams.AddNested("DefaultConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.IOS != nil {
+		if err := validateOverrideButtonConfiguration(v.IOS); err != nil {
+			invalidParams.AddNested("IOS", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Web != nil {
+		if err := validateOverrideButtonConfiguration(v.Web); err != nil {
+			invalidParams.AddNested("Web", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInAppMessageContent(v *types.InAppMessageContent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InAppMessageContent"}
+	if v.BodyConfig != nil {
+		if err := validateInAppMessageBodyConfig(v.BodyConfig); err != nil {
+			invalidParams.AddNested("BodyConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.HeaderConfig != nil {
+		if err := validateInAppMessageHeaderConfig(v.HeaderConfig); err != nil {
+			invalidParams.AddNested("HeaderConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PrimaryBtn != nil {
+		if err := validateInAppMessageButton(v.PrimaryBtn); err != nil {
+			invalidParams.AddNested("PrimaryBtn", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SecondaryBtn != nil {
+		if err := validateInAppMessageButton(v.SecondaryBtn); err != nil {
+			invalidParams.AddNested("SecondaryBtn", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInAppMessageHeaderConfig(v *types.InAppMessageHeaderConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InAppMessageHeaderConfig"}
+	if len(v.Alignment) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Alignment"))
+	}
+	if v.Header == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Header"))
+	}
+	if v.TextColor == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TextColor"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInAppTemplateRequest(v *types.InAppTemplateRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InAppTemplateRequest"}
+	if v.Content != nil {
+		if err := validateListOfInAppMessageContent(v.Content); err != nil {
+			invalidParams.AddNested("Content", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateListOfInAppMessageContent(v []types.InAppMessageContent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfInAppMessageContent"}
+	for i := range v {
+		if err := validateInAppMessageContent(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateListOfMultiConditionalBranch(v []types.MultiConditionalBranch) error {
 	if v == nil {
 		return nil
@@ -3277,6 +3572,23 @@ func validateMapOfMetricDimension(v map[string]types.MetricDimension) error {
 	}
 }
 
+func validateMessageConfiguration(v *types.MessageConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MessageConfiguration"}
+	if v.InAppMessage != nil {
+		if err := validateCampaignInAppMessage(v.InAppMessage); err != nil {
+			invalidParams.AddNested("InAppMessage", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMessageRequest(v *types.MessageRequest) error {
 	if v == nil {
 		return nil
@@ -3333,6 +3645,21 @@ func validateMultiConditionalSplitActivity(v *types.MultiConditionalSplitActivit
 		if err := validateListOfMultiConditionalBranch(v.Branches); err != nil {
 			invalidParams.AddNested("Branches", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOverrideButtonConfiguration(v *types.OverrideButtonConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OverrideButtonConfiguration"}
+	if len(v.ButtonAction) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ButtonAction"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3719,6 +4046,11 @@ func validateWriteCampaignRequest(v *types.WriteCampaignRequest) error {
 			invalidParams.AddNested("CustomDeliveryConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.MessageConfiguration != nil {
+		if err := validateMessageConfiguration(v.MessageConfiguration); err != nil {
+			invalidParams.AddNested("MessageConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Schedule != nil {
 		if err := validateSchedule(v.Schedule); err != nil {
 			invalidParams.AddNested("Schedule", err.(smithy.InvalidParamsError))
@@ -3804,6 +4136,11 @@ func validateWriteTreatmentResource(v *types.WriteTreatmentResource) error {
 	if v.CustomDeliveryConfiguration != nil {
 		if err := validateCustomDeliveryConfiguration(v.CustomDeliveryConfiguration); err != nil {
 			invalidParams.AddNested("CustomDeliveryConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MessageConfiguration != nil {
+		if err := validateMessageConfiguration(v.MessageConfiguration); err != nil {
+			invalidParams.AddNested("MessageConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Schedule != nil {
@@ -3913,6 +4250,28 @@ func validateOpCreateImportJobInput(v *CreateImportJobInput) error {
 		if err := validateImportJobRequest(v.ImportJobRequest); err != nil {
 			invalidParams.AddNested("ImportJobRequest", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateInAppTemplateInput(v *CreateInAppTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateInAppTemplateInput"}
+	if v.InAppTemplateRequest == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InAppTemplateRequest"))
+	} else if v.InAppTemplateRequest != nil {
+		if err := validateInAppTemplateRequest(v.InAppTemplateRequest); err != nil {
+			invalidParams.AddNested("InAppTemplateRequest", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TemplateName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4231,6 +4590,21 @@ func validateOpDeleteGcmChannelInput(v *DeleteGcmChannelInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteGcmChannelInput"}
 	if v.ApplicationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteInAppTemplateInput(v *DeleteInAppTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteInAppTemplateInput"}
+	if v.TemplateName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4783,6 +5157,39 @@ func validateOpGetImportJobsInput(v *GetImportJobsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetImportJobsInput"}
 	if v.ApplicationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetInAppMessagesInput(v *GetInAppMessagesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetInAppMessagesInput"}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if v.EndpointId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetInAppTemplateInput(v *GetInAppTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetInAppTemplateInput"}
+	if v.TemplateName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5553,6 +5960,28 @@ func validateOpUpdateGcmChannelInput(v *UpdateGcmChannelInput) error {
 		if err := validateGCMChannelRequest(v.GCMChannelRequest); err != nil {
 			invalidParams.AddNested("GCMChannelRequest", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateInAppTemplateInput(v *UpdateInAppTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateInAppTemplateInput"}
+	if v.InAppTemplateRequest == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InAppTemplateRequest"))
+	} else if v.InAppTemplateRequest != nil {
+		if err := validateInAppTemplateRequest(v.InAppTemplateRequest); err != nil {
+			invalidParams.AddNested("InAppTemplateRequest", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TemplateName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

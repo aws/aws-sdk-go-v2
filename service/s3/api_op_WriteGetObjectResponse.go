@@ -18,8 +18,8 @@ import (
 )
 
 // Passes transformed objects to a GetObject operation when using Object Lambda
-// Access Points. For information about Object Lambda Access Points, see
-// Transforming objects with Object Lambda Access Points
+// access points. For information about Object Lambda access points, see
+// Transforming objects with Object Lambda access points
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/transforming-objects.html)
 // in the Amazon S3 User Guide. This operation supports metadata that can be
 // returned by GetObject
@@ -38,7 +38,7 @@ import (
 // (PII) and decompress S3 objects. These Lambda functions are available in the
 // Amazon Web Services Serverless Application Repository, and can be selected
 // through the Amazon Web Services Management Console when you create your Object
-// Lambda Access Point. Example 1: PII Access Control - This Lambda function uses
+// Lambda access point. Example 1: PII Access Control - This Lambda function uses
 // Amazon Comprehend, a natural language processing (NLP) service using machine
 // learning to find insights and relationships in text. It automatically detects
 // personally identifiable information (PII) such as names, addresses, dates,
@@ -194,8 +194,8 @@ type WriteGetObjectResponseInput struct {
 	SSECustomerKeyMD5 *string
 
 	// If present, specifies the ID of the Amazon Web Services Key Management Service
-	// (Amazon Web Services KMS) symmetric customer managed customer master key (CMK)
-	// that was used for stored in Amazon S3 object.
+	// (Amazon Web Services KMS) symmetric customer managed key that was used for
+	// stored in Amazon S3 object.
 	SSEKMSKeyId *string
 
 	// The server-side encryption algorithm used when storing requested object in

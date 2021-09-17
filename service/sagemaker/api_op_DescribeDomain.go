@@ -80,7 +80,7 @@ type DescribeDomainOutput struct {
 	// Deprecated: This property is deprecated, use KmsKeyId instead.
 	HomeEfsFileSystemKmsKeyId *string
 
-	// The Amazon Web Services KMS customer managed CMK used to encrypt the EFS volume
+	// The Amazon Web Services KMS customer managed key used to encrypt the EFS volume
 	// attached to the domain.
 	KmsKeyId *string
 

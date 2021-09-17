@@ -50,8 +50,9 @@ type CompleteLayerUploadInput struct {
 	// This member is required.
 	UploadId *string
 
-	// The AWS account ID associated with the registry to which to upload layers. If
-	// you do not specify a registry, the default registry is assumed.
+	// The Amazon Web Services account ID associated with the registry to which to
+	// upload layers. If you do not specify a registry, the default registry is
+	// assumed.
 	RegistryId *string
 
 	noSmithyDocumentSerde

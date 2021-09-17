@@ -138,24 +138,25 @@ type DescribeInstanceTypesInput struct {
 	//
 	// *
 	// network-info.encryption-in-transit-supported - Indicates whether the instance
-	// type automatically encrypts in-transit traffic between instances.
+	// type automatically encrypts in-transit traffic between instances (true |
+	// false).
+	//
+	// * network-info.ipv4-addresses-per-interface - The maximum number of
+	// private IPv4 addresses per network interface.
 	//
 	// *
-	// network-info.ipv4-addresses-per-interface - The maximum number of private IPv4
+	// network-info.ipv6-addresses-per-interface - The maximum number of private IPv6
 	// addresses per network interface.
 	//
-	// * network-info.ipv6-addresses-per-interface -
-	// The maximum number of private IPv6 addresses per network interface.
+	// * network-info.ipv6-supported - Indicates
+	// whether the instance type supports IPv6 (true | false).
 	//
 	// *
-	// network-info.ipv6-supported - Indicates whether the instance type supports IPv6
-	// (true | false).
+	// network-info.maximum-network-interfaces - The maximum number of network
+	// interfaces per instance.
 	//
-	// * network-info.maximum-network-interfaces - The maximum number
-	// of network interfaces per instance.
-	//
-	// * network-info.network-performance - The
-	// network performance (for example, "25 Gigabit").
+	// * network-info.network-performance - The network
+	// performance (for example, "25 Gigabit").
 	//
 	// *
 	// processor-info.supported-architecture - The CPU architecture (arm64 | i386 |

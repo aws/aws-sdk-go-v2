@@ -177,6 +177,9 @@
                 "smithy.api#documentation": "<p>A container for information about access control for replicas.</p>"
             }
         },
+        "com.amazonaws.s3#AccessPointArn": {
+            "type": "string"
+        },
         "com.amazonaws.s3#AccountId": {
             "type": "string"
         },
@@ -1193,7 +1196,7 @@
                 "ServerSideEncryption": {
                     "target": "com.amazonaws.s3#ServerSideEncryption",
                     "traits": {
-                        "smithy.api#documentation": "<p>If you specified server-side encryption either with an Amazon S3-managed encryption key or an\n         Amazon Web Services KMS customer master key (CMK) in your initiate multipart upload request, the response\n         includes this header. It confirms the encryption algorithm that Amazon S3 used to encrypt the\n         object.</p>",
+                        "smithy.api#documentation": "<p>If you specified server-side encryption either with an Amazon S3-managed encryption key or an\n         Amazon Web Services KMS key in your initiate multipart upload request, the response\n         includes this header. It confirms the encryption algorithm that Amazon S3 used to encrypt the\n         object.</p>",
                         "smithy.api#httpHeader": "x-amz-server-side-encryption"
                     }
                 },
@@ -1207,7 +1210,7 @@
                 "SSEKMSKeyId": {
                     "target": "com.amazonaws.s3#SSEKMSKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>If present, specifies the ID of the Amazon Web Services Key Management Service (Amazon Web Services KMS) symmetric\n         customer managed customer master key (CMK) that was used for the object.</p>",
+                        "smithy.api#documentation": "<p>If present, specifies the ID of the Amazon Web Services Key Management Service (Amazon Web Services KMS) symmetric\n         customer managed key that was used for the object.</p>",
                         "smithy.api#httpHeader": "x-amz-server-side-encryption-aws-kms-key-id"
                     }
                 },
@@ -1468,7 +1471,7 @@
                 "SSEKMSKeyId": {
                     "target": "com.amazonaws.s3#SSEKMSKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>If present, specifies the ID of the Amazon Web Services Key Management Service (Amazon Web Services KMS) symmetric\n         customer managed customer master key (CMK) that was used for the object.</p>",
+                        "smithy.api#documentation": "<p>If present, specifies the ID of the Amazon Web Services Key Management Service (Amazon Web Services KMS) symmetric\n         customer managed key that was used for the object.</p>",
                         "smithy.api#httpHeader": "x-amz-server-side-encryption-aws-kms-key-id"
                     }
                 },
@@ -1926,6 +1929,14 @@
                         "smithy.api#required": {}
                     }
                 },
+                "CreateBucketConfiguration": {
+                    "target": "com.amazonaws.s3#CreateBucketConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration information for the bucket.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#xmlName": "CreateBucketConfiguration"
+                    }
+                },
                 "GrantFullControl": {
                     "target": "com.amazonaws.s3#GrantFullControl",
                     "traits": {
@@ -1967,14 +1978,6 @@
                         "smithy.api#documentation": "<p>Specifies whether you want S3 Object Lock to be enabled for the new bucket.</p>",
                         "smithy.api#httpHeader": "x-amz-bucket-object-lock-enabled"
                     }
-                },
-                "CreateBucketConfiguration": {
-                    "target": "com.amazonaws.s3#CreateBucketConfiguration",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The configuration information for the bucket.</p>",
-                        "smithy.api#httpPayload": {},
-                        "smithy.api#xmlName": "CreateBucketConfiguration"
-                    }
                 }
             }
         },
@@ -1987,7 +1990,7 @@
                 "target": "com.amazonaws.s3#CreateMultipartUploadOutput"
             },
             "traits": {
-                "smithy.api#documentation": "<p>This action initiates a multipart upload and returns an upload ID. This upload ID is\n         used to associate all of the parts in the specific multipart upload. You specify this\n         upload ID in each of your subsequent upload part requests (see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html\">UploadPart</a>). You also include this\n         upload ID in the final request to either complete or abort the multipart upload\n         request.</p>\n\n         <p>For more information about multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html\">Multipart Upload Overview</a>.</p>\n\n         <p>If you have configured a lifecycle rule to abort incomplete multipart uploads, the\n         upload must complete within the number of days specified in the bucket lifecycle\n         configuration. Otherwise, the incomplete multipart upload becomes eligible for an abort\n         action and Amazon S3 aborts the multipart upload. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config\">Aborting\n            Incomplete Multipart Uploads Using a Bucket Lifecycle Policy</a>.</p>\n\n         <p>For information about the permissions required to use the multipart upload API, see\n            <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html\">Multipart Upload and\n            Permissions</a>.</p>\n\n         <p>For request signing, multipart upload is just a series of regular requests. You initiate\n         a multipart upload, send one or more requests to upload parts, and then complete the\n         multipart upload process. You sign each request individually. There is nothing special\n         about signing multipart upload requests. For more information about signing, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html\">Authenticating\n            Requests (Amazon Web Services Signature Version 4)</a>.</p>\n\n         <note>\n            <p> After you initiate a multipart upload and upload one or more parts, to stop being\n            charged for storing the uploaded parts, you must either complete or abort the multipart\n            upload. Amazon S3 frees up the space used to store the parts and stop charging you for\n            storing them only after you either complete or abort a multipart upload. </p>\n         </note>\n\n         <p>You can optionally request server-side encryption. For server-side encryption, Amazon S3\n         encrypts your data as it writes it to disks in its data centers and decrypts it when you\n         access it. You can provide your own encryption key, or use Amazon Web Services Key Management Service (Amazon Web Services\n         KMS) customer master keys (CMKs) or Amazon S3-managed encryption keys. If you choose to provide\n         your own encryption key, the request headers you provide in <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html\">UploadPart</a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html\">UploadPartCopy</a> requests must match the headers you used in the request to\n         initiate the upload by using <code>CreateMultipartUpload</code>. </p>\n         <p>To perform a multipart upload with encryption using an Amazon Web Services KMS CMK, the requester must\n         have permission to the <code>kms:Decrypt</code> and <code>kms:GenerateDataKey*</code>\n         actions on the key. These permissions are required because Amazon S3 must decrypt and read data\n         from the encrypted file parts before it completes the multipart upload. For more\n         information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html#mpuAndPermissions\">Multipart upload API\n            and permissions</a> in the <i>Amazon S3 User Guide</i>.</p>\n\n         <p>If your Identity and Access Management (IAM) user or role is in the same Amazon Web Services account\n         as the Amazon Web Services KMS CMK, then you must have these permissions on the key policy. If your IAM\n         user or role belongs to a different account than the key, then you must have the\n         permissions on both the key policy and your IAM user or role.</p>\n\n\n         <p> For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html\">Protecting\n            Data Using Server-Side Encryption</a>.</p>\n\n         <dl>\n            <dt>Access Permissions</dt>\n            <dd>\n               <p>When copying an object, you can optionally specify the accounts or groups that\n                  should be granted specific permissions on the new object. There are two ways to\n                  grant the permissions using the request headers:</p>\n               <ul>\n                  <li>\n                     <p>Specify a canned ACL with the <code>x-amz-acl</code> request header. For\n                        more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL\">Canned ACL</a>.</p>\n                  </li>\n                  <li>\n                     <p>Specify access permissions explicitly with the\n                           <code>x-amz-grant-read</code>, <code>x-amz-grant-read-acp</code>,\n                           <code>x-amz-grant-write-acp</code>, and\n                           <code>x-amz-grant-full-control</code> headers. These parameters map to\n                        the set of permissions that Amazon S3 supports in an ACL. For more information,\n                        see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html\">Access Control List (ACL)\n                           Overview</a>.</p>\n                  </li>\n               </ul>\n               <p>You can use either a canned ACL or specify access permissions explicitly. You\n                  cannot do both.</p>\n            </dd>\n            <dt>Server-Side- Encryption-Specific Request Headers</dt>\n            <dd>\n               <p>You can optionally tell Amazon S3 to encrypt data at rest using server-side\n                  encryption. Server-side encryption is for data encryption at rest. Amazon S3 encrypts\n                  your data as it writes it to disks in its data centers and decrypts it when you\n                  access it. The option you use depends on whether you want to use Amazon Web Services managed\n                  encryption keys or provide your own encryption key. </p>\n               <ul>\n                  <li>\n                     <p>Use encryption keys managed by Amazon S3 or customer master keys (CMKs) stored\n                        in Amazon Web Services Key Management Service (Amazon Web Services KMS) – If you want Amazon Web Services to manage the keys\n                        used to encrypt data, specify the following headers in the request.</p>\n                     <ul>\n                        <li>\n                           <p>x-amz-server-side-encryption</p>\n                        </li>\n                        <li>\n                           <p>x-amz-server-side-encryption-aws-kms-key-id</p>\n                        </li>\n                        <li>\n                           <p>x-amz-server-side-encryption-context</p>\n                        </li>\n                     </ul>\n                     <note>\n                        <p>If you specify <code>x-amz-server-side-encryption:aws:kms</code>, but\n                           don't provide <code>x-amz-server-side-encryption-aws-kms-key-id</code>,\n                           Amazon S3 uses the Amazon Web Services managed CMK in Amazon Web Services KMS to protect the data.</p>\n                     </note>\n                     <important>\n                        <p>All GET and PUT requests for an object protected by Amazon Web Services KMS fail if\n                           you don't make them with SSL or by using SigV4.</p>\n                     </important>\n                     <p>For more information about server-side encryption with CMKs stored in Amazon Web Services\n                        KMS (SSE-KMS), see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html\">Protecting Data Using Server-Side Encryption with CMKs stored in Amazon Web Services\n                           KMS</a>.</p>\n                  </li>\n                  <li>\n                     <p>Use customer-provided encryption keys – If you want to manage your own\n                        encryption keys, provide all the following headers in the request.</p>\n                     <ul>\n                        <li>\n                           <p>x-amz-server-side-encryption-customer-algorithm</p>\n                        </li>\n                        <li>\n                           <p>x-amz-server-side-encryption-customer-key</p>\n                        </li>\n                        <li>\n                           <p>x-amz-server-side-encryption-customer-key-MD5</p>\n                        </li>\n                     </ul>\n                     <p>For more information about server-side encryption with CMKs stored in Amazon Web Services\n                        KMS (SSE-KMS), see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html\">Protecting Data Using Server-Side Encryption with CMKs stored in Amazon Web Services\n                           KMS</a>.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>Access-Control-List (ACL)-Specific Request Headers</dt>\n            <dd>\n               <p>You also can use the following access control–related headers with this\n                  operation. By default, all objects are private. Only the owner has full access\n                  control. When adding a new object, you can grant permissions to individual Amazon Web Services accounts or to predefined groups defined by Amazon S3. These permissions are then added\n                  to the access control list (ACL) on the object. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/S3_ACLs_UsingACLs.html\">Using ACLs</a>. With this\n                  operation, you can grant access permissions using one of the following two\n                  methods:</p>\n               <ul>\n                  <li>\n                     <p>Specify a canned ACL (<code>x-amz-acl</code>) — Amazon S3 supports a set of\n                        predefined ACLs, known as <i>canned ACLs</i>. Each canned ACL\n                        has a predefined set of grantees and permissions. For more information, see\n                           <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL\">Canned\n                        ACL</a>.</p>\n                  </li>\n                  <li>\n                     <p>Specify access permissions explicitly — To explicitly grant access\n                        permissions to specific Amazon Web Services accounts or groups, use the following headers.\n                        Each header maps to specific permissions that Amazon S3 supports in an ACL. For\n                        more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html\">Access\n                           Control List (ACL) Overview</a>. In the header, you specify a list of\n                        grantees who get the specific permission. To grant permissions explicitly,\n                        use:</p>\n                     <ul>\n                        <li>\n                           <p>x-amz-grant-read</p>\n                        </li>\n                        <li>\n                           <p>x-amz-grant-write</p>\n                        </li>\n                        <li>\n                           <p>x-amz-grant-read-acp</p>\n                        </li>\n                        <li>\n                           <p>x-amz-grant-write-acp</p>\n                        </li>\n                        <li>\n                           <p>x-amz-grant-full-control</p>\n                        </li>\n                     </ul>\n                     <p>You specify each grantee as a type=value pair, where the type is one of\n                        the following:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>id</code> – if the value specified is the canonical user ID\n                              of an Amazon Web Services account</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>uri</code> – if you are granting permissions to a predefined\n                              group</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>emailAddress</code> – if the value specified is the email\n                              address of an Amazon Web Services account</p>\n                           <note>\n                              <p>Using email addresses to specify a grantee is only supported in the following Amazon Web Services Regions: </p> \n                              <ul>\n                                 <li>\n                                    <p>US East (N. Virginia)</p>\n                                 </li>\n                                 <li>\n                                    <p>US West (N. California)</p>\n                                 </li>\n                                 <li>\n                                    <p> US West (Oregon)</p>\n                                 </li>\n                                 <li>\n                                    <p> Asia Pacific (Singapore)</p>\n                                 </li>\n                                 <li>\n                                    <p>Asia Pacific (Sydney)</p>\n                                 </li>\n                                 <li>\n                                    <p>Asia Pacific (Tokyo)</p>\n                                 </li>\n                                 <li>\n                                    <p>Europe (Ireland)</p>\n                                 </li>\n                                 <li>\n                                    <p>South America (São Paulo)</p>\n                                 </li>\n                              </ul> \n                              <p>For a list of all the Amazon S3 supported Regions and endpoints, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region\">Regions and Endpoints</a> in the Amazon Web Services General Reference.</p>\n                           </note>\n                        </li>\n                     </ul> \n                     <p>For example, the following <code>x-amz-grant-read</code> header grants the Amazon Web Services accounts identified by account IDs permissions to read object data and its metadata:</p> \n                     <p>\n                        <code>x-amz-grant-read: id=\"11112222333\", id=\"444455556666\" </code>\n                     </p> \n                  </li>\n               </ul>\n\n            </dd>\n         </dl>\n\n         <p>The following operations are related to <code>CreateMultipartUpload</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html\">UploadPart</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_CompleteMultipartUpload.html\">CompleteMultipartUpload</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html\">AbortMultipartUpload</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html\">ListParts</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html\">ListMultipartUploads</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>This action initiates a multipart upload and returns an upload ID. This upload ID is\n         used to associate all of the parts in the specific multipart upload. You specify this\n         upload ID in each of your subsequent upload part requests (see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html\">UploadPart</a>). You also include this\n         upload ID in the final request to either complete or abort the multipart upload\n         request.</p>\n\n         <p>For more information about multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html\">Multipart Upload Overview</a>.</p>\n\n         <p>If you have configured a lifecycle rule to abort incomplete multipart uploads, the\n         upload must complete within the number of days specified in the bucket lifecycle\n         configuration. Otherwise, the incomplete multipart upload becomes eligible for an abort\n         action and Amazon S3 aborts the multipart upload. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config\">Aborting\n            Incomplete Multipart Uploads Using a Bucket Lifecycle Policy</a>.</p>\n\n         <p>For information about the permissions required to use the multipart upload API, see\n            <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html\">Multipart Upload and\n            Permissions</a>.</p>\n\n         <p>For request signing, multipart upload is just a series of regular requests. You initiate\n         a multipart upload, send one or more requests to upload parts, and then complete the\n         multipart upload process. You sign each request individually. There is nothing special\n         about signing multipart upload requests. For more information about signing, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html\">Authenticating\n            Requests (Amazon Web Services Signature Version 4)</a>.</p>\n\n         <note>\n            <p> After you initiate a multipart upload and upload one or more parts, to stop being\n            charged for storing the uploaded parts, you must either complete or abort the multipart\n            upload. Amazon S3 frees up the space used to store the parts and stop charging you for\n            storing them only after you either complete or abort a multipart upload. </p>\n         </note>\n\n         <p>You can optionally request server-side encryption. For server-side encryption, Amazon S3\n         encrypts your data as it writes it to disks in its data centers and decrypts it when you\n         access it. You can provide your own encryption key, or use Amazon Web Services KMS keys or Amazon S3-managed encryption keys. If you choose to provide\n         your own encryption key, the request headers you provide in <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html\">UploadPart</a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html\">UploadPartCopy</a> requests must match the headers you used in the request to\n         initiate the upload by using <code>CreateMultipartUpload</code>. </p>\n         <p>To perform a multipart upload with encryption using an Amazon Web Services KMS key, the requester must\n         have permission to the <code>kms:Decrypt</code> and <code>kms:GenerateDataKey*</code>\n         actions on the key. These permissions are required because Amazon S3 must decrypt and read data\n         from the encrypted file parts before it completes the multipart upload. For more\n         information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html#mpuAndPermissions\">Multipart upload API\n            and permissions</a> in the <i>Amazon S3 User Guide</i>.</p>\n\n         <p>If your Identity and Access Management (IAM) user or role is in the same Amazon Web Services account\n         as the KMS key, then you must have these permissions on the key policy. If your IAM\n         user or role belongs to a different account than the key, then you must have the\n         permissions on both the key policy and your IAM user or role.</p>\n\n\n         <p> For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html\">Protecting\n            Data Using Server-Side Encryption</a>.</p>\n\n         <dl>\n            <dt>Access Permissions</dt>\n            <dd>\n               <p>When copying an object, you can optionally specify the accounts or groups that\n                  should be granted specific permissions on the new object. There are two ways to\n                  grant the permissions using the request headers:</p>\n               <ul>\n                  <li>\n                     <p>Specify a canned ACL with the <code>x-amz-acl</code> request header. For\n                        more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL\">Canned ACL</a>.</p>\n                  </li>\n                  <li>\n                     <p>Specify access permissions explicitly with the\n                           <code>x-amz-grant-read</code>, <code>x-amz-grant-read-acp</code>,\n                           <code>x-amz-grant-write-acp</code>, and\n                           <code>x-amz-grant-full-control</code> headers. These parameters map to\n                        the set of permissions that Amazon S3 supports in an ACL. For more information,\n                        see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html\">Access Control List (ACL)\n                           Overview</a>.</p>\n                  </li>\n               </ul>\n               <p>You can use either a canned ACL or specify access permissions explicitly. You\n                  cannot do both.</p>\n            </dd>\n            <dt>Server-Side- Encryption-Specific Request Headers</dt>\n            <dd>\n               <p>You can optionally tell Amazon S3 to encrypt data at rest using server-side\n                  encryption. Server-side encryption is for data encryption at rest. Amazon S3 encrypts\n                  your data as it writes it to disks in its data centers and decrypts it when you\n                  access it. The option you use depends on whether you want to use Amazon Web Services managed\n                  encryption keys or provide your own encryption key. </p>\n               <ul>\n                  <li>\n                     <p>Use encryption keys managed by Amazon S3 or customer managed key stored\n                        in Amazon Web Services Key Management Service (Amazon Web Services KMS) – If you want Amazon Web Services to manage the keys\n                        used to encrypt data, specify the following headers in the request.</p>\n                     <ul>\n                        <li>\n                           <p>x-amz-server-side-encryption</p>\n                        </li>\n                        <li>\n                           <p>x-amz-server-side-encryption-aws-kms-key-id</p>\n                        </li>\n                        <li>\n                           <p>x-amz-server-side-encryption-context</p>\n                        </li>\n                     </ul>\n                     <note>\n                        <p>If you specify <code>x-amz-server-side-encryption:aws:kms</code>, but\n                           don't provide <code>x-amz-server-side-encryption-aws-kms-key-id</code>,\n                           Amazon S3 uses the Amazon Web Services managed key in Amazon Web Services KMS to protect the data.</p>\n                     </note>\n                     <important>\n                        <p>All GET and PUT requests for an object protected by Amazon Web Services KMS fail if\n                           you don't make them with SSL or by using SigV4.</p>\n                     </important>\n                     <p>For more information about server-side encryption with KMS key (SSE-KMS),\n                        see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html\">Protecting Data Using Server-Side Encryption with KMS keys</a>.</p>\n                  </li>\n                  <li>\n                     <p>Use customer-provided encryption keys – If you want to manage your own\n                        encryption keys, provide all the following headers in the request.</p>\n                     <ul>\n                        <li>\n                           <p>x-amz-server-side-encryption-customer-algorithm</p>\n                        </li>\n                        <li>\n                           <p>x-amz-server-side-encryption-customer-key</p>\n                        </li>\n                        <li>\n                           <p>x-amz-server-side-encryption-customer-key-MD5</p>\n                        </li>\n                     </ul>\n                     <p>For more information about server-side encryption with KMS keys (SSE-KMS),\n                        see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html\">Protecting Data Using Server-Side Encryption with KMS keys</a>.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>Access-Control-List (ACL)-Specific Request Headers</dt>\n            <dd>\n               <p>You also can use the following access control–related headers with this\n                  operation. By default, all objects are private. Only the owner has full access\n                  control. When adding a new object, you can grant permissions to individual Amazon Web Services accounts or to predefined groups defined by Amazon S3. These permissions are then added\n                  to the access control list (ACL) on the object. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/S3_ACLs_UsingACLs.html\">Using ACLs</a>. With this\n                  operation, you can grant access permissions using one of the following two\n                  methods:</p>\n               <ul>\n                  <li>\n                     <p>Specify a canned ACL (<code>x-amz-acl</code>) — Amazon S3 supports a set of\n                        predefined ACLs, known as <i>canned ACLs</i>. Each canned ACL\n                        has a predefined set of grantees and permissions. For more information, see\n                           <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL\">Canned\n                        ACL</a>.</p>\n                  </li>\n                  <li>\n                     <p>Specify access permissions explicitly — To explicitly grant access\n                        permissions to specific Amazon Web Services accounts or groups, use the following headers.\n                        Each header maps to specific permissions that Amazon S3 supports in an ACL. For\n                        more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html\">Access\n                           Control List (ACL) Overview</a>. In the header, you specify a list of\n                        grantees who get the specific permission. To grant permissions explicitly,\n                        use:</p>\n                     <ul>\n                        <li>\n                           <p>x-amz-grant-read</p>\n                        </li>\n                        <li>\n                           <p>x-amz-grant-write</p>\n                        </li>\n                        <li>\n                           <p>x-amz-grant-read-acp</p>\n                        </li>\n                        <li>\n                           <p>x-amz-grant-write-acp</p>\n                        </li>\n                        <li>\n                           <p>x-amz-grant-full-control</p>\n                        </li>\n                     </ul>\n                     <p>You specify each grantee as a type=value pair, where the type is one of\n                        the following:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>id</code> – if the value specified is the canonical user ID\n                              of an Amazon Web Services account</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>uri</code> – if you are granting permissions to a predefined\n                              group</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>emailAddress</code> – if the value specified is the email\n                              address of an Amazon Web Services account</p>\n                           <note>\n                              <p>Using email addresses to specify a grantee is only supported in the following Amazon Web Services Regions: </p> \n                              <ul>\n                                 <li>\n                                    <p>US East (N. Virginia)</p>\n                                 </li>\n                                 <li>\n                                    <p>US West (N. California)</p>\n                                 </li>\n                                 <li>\n                                    <p> US West (Oregon)</p>\n                                 </li>\n                                 <li>\n                                    <p> Asia Pacific (Singapore)</p>\n                                 </li>\n                                 <li>\n                                    <p>Asia Pacific (Sydney)</p>\n                                 </li>\n                                 <li>\n                                    <p>Asia Pacific (Tokyo)</p>\n                                 </li>\n                                 <li>\n                                    <p>Europe (Ireland)</p>\n                                 </li>\n                                 <li>\n                                    <p>South America (São Paulo)</p>\n                                 </li>\n                              </ul> \n                              <p>For a list of all the Amazon S3 supported Regions and endpoints, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region\">Regions and Endpoints</a> in the Amazon Web Services General Reference.</p>\n                           </note>\n                        </li>\n                     </ul> \n                     <p>For example, the following <code>x-amz-grant-read</code> header grants the Amazon Web Services accounts identified by account IDs permissions to read object data and its metadata:</p> \n                     <p>\n                        <code>x-amz-grant-read: id=\"11112222333\", id=\"444455556666\" </code>\n                     </p> \n                  </li>\n               </ul>\n\n            </dd>\n         </dl>\n\n         <p>The following operations are related to <code>CreateMultipartUpload</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html\">UploadPart</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_CompleteMultipartUpload.html\">CompleteMultipartUpload</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html\">AbortMultipartUpload</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html\">ListParts</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html\">ListMultipartUploads</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/{Bucket}/{Key+}?uploads&x-id=CreateMultipartUpload",
@@ -2055,7 +2058,7 @@
                 "SSEKMSKeyId": {
                     "target": "com.amazonaws.s3#SSEKMSKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>If present, specifies the ID of the Amazon Web Services Key Management Service (Amazon Web Services KMS) symmetric\n         customer managed customer master key (CMK) that was used for the object.</p>",
+                        "smithy.api#documentation": "<p>If present, specifies the ID of the Amazon Web Services Key Management Service (Amazon Web Services KMS) symmetric\n         customer managed key that was used for the object.</p>",
                         "smithy.api#httpHeader": "x-amz-server-side-encryption-aws-kms-key-id"
                     }
                 },
@@ -2232,7 +2235,7 @@
                 "SSEKMSKeyId": {
                     "target": "com.amazonaws.s3#SSEKMSKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ID of the symmetric customer managed Amazon Web Services KMS CMK to use for object\n         encryption. All GET and PUT requests for an object protected by Amazon Web Services KMS will fail if not\n         made via SSL or using SigV4. For information about configuring using any of the officially\n         supported Amazon Web Services SDKs and Amazon Web Services CLI, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version\">Specifying the Signature Version in Request Authentication</a>\n         in the <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>Specifies the ID of the symmetric customer managed key to use for object\n         encryption. All GET and PUT requests for an object protected by Amazon Web Services KMS will fail if not\n         made via SSL or using SigV4. For information about configuring using any of the officially\n         supported Amazon Web Services SDKs and Amazon Web Services CLI, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version\">Specifying the Signature Version in Request Authentication</a>\n         in the <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#httpHeader": "x-amz-server-side-encryption-aws-kms-key-id"
                     }
                 },
@@ -2487,7 +2490,7 @@
                 "target": "com.amazonaws.s3#DeleteBucketIntelligentTieringConfigurationRequest"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the S3 Intelligent-Tiering configuration from the specified bucket.</p>\n         <p>The S3 Intelligent-Tiering storage class is designed to optimize storage costs by automatically moving data to the most cost-effective storage access tier, without additional operational overhead. S3 Intelligent-Tiering delivers automatic cost savings by moving data between access tiers, when access patterns change.</p>\n         <p>The S3 Intelligent-Tiering storage class is suitable for objects larger than 128 KB that you plan to store for at least 30 days. If the size of an object is less than 128 KB, it is not eligible for auto-tiering. Smaller objects can be stored, but they are always charged at the frequent access tier rates in the S3 Intelligent-Tiering storage class. </p>\n         <p>If you delete an object before the end of the 30-day minimum storage duration period, you are charged for 30 days. For more information, see  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html#sc-dynamic-data-access\">Storage class for automatically optimizing frequently and infrequently accessed objects</a>.</p> \n         <p>Operations related to\n            <code>DeleteBucketIntelligentTieringConfiguration</code> include: </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketIntelligentTieringConfiguration.html\">GetBucketIntelligentTieringConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketIntelligentTieringConfiguration.html\">PutBucketIntelligentTieringConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketIntelligentTieringConfigurations.html\">ListBucketIntelligentTieringConfigurations</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Deletes the S3 Intelligent-Tiering configuration from the specified bucket.</p>\n         <p>The S3 Intelligent-Tiering storage class is designed to optimize storage costs by automatically moving data to the most cost-effective storage access tier, without performance impact or operational overhead. S3 Intelligent-Tiering delivers automatic cost savings in two low latency and high throughput access tiers. For data that can be accessed asynchronously, you can choose to activate automatic archiving capabilities within the S3 Intelligent-Tiering storage class.</p>\n         <p>The S3 Intelligent-Tiering storage class is  the ideal storage class for data with unknown, changing, or unpredictable access patterns, independent of object size or retention period. If the size of an object is less than 128 KB, it is not eligible for auto-tiering. Smaller objects can be stored, but they are always charged at the Frequent Access tier rates in the S3 Intelligent-Tiering storage class.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html#sc-dynamic-data-access\">Storage class for automatically optimizing frequently and infrequently accessed objects</a>.</p> \n         <p>Operations related to\n            <code>DeleteBucketIntelligentTieringConfiguration</code> include: </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketIntelligentTieringConfiguration.html\">GetBucketIntelligentTieringConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketIntelligentTieringConfiguration.html\">PutBucketIntelligentTieringConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketIntelligentTieringConfigurations.html\">ListBucketIntelligentTieringConfigurations</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/{Bucket}?intelligent-tiering",
@@ -3122,6 +3125,15 @@
                         "smithy.api#required": {}
                     }
                 },
+                "Delete": {
+                    "target": "com.amazonaws.s3#Delete",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Container for the request.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "Delete"
+                    }
+                },
                 "MFA": {
                     "target": "com.amazonaws.s3#MFA",
                     "traits": {
@@ -3147,15 +3159,6 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
                         "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
-                    }
-                },
-                "Delete": {
-                    "target": "com.amazonaws.s3#Delete",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Container for the request.</p>",
-                        "smithy.api#httpPayload": {},
-                        "smithy.api#required": {},
-                        "smithy.api#xmlName": "Delete"
                     }
                 }
             }
@@ -3326,7 +3329,7 @@
                 "KMSKeyId": {
                     "target": "com.amazonaws.s3#SSEKMSKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the encryption type is <code>aws:kms</code>, this optional value specifies the ID of\n         the symmetric customer managed Amazon Web Services KMS CMK to use for encryption of job results. Amazon S3 only\n         supports symmetric CMKs. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">Using symmetric and\n            asymmetric keys</a> in the <i>Amazon Web Services Key Management Service Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>If the encryption type is <code>aws:kms</code>, this optional value specifies the ID of\n         the symmetric customer managed key to use for encryption of job results. Amazon S3 only\n         supports symmetric keys. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">Using symmetric and\n            asymmetric keys</a> in the <i>Amazon Web Services Key Management Service Developer Guide</i>.</p>"
                     }
                 },
                 "KMSContext": {
@@ -3913,7 +3916,7 @@
                 "target": "com.amazonaws.s3#GetBucketIntelligentTieringConfigurationOutput"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Gets the S3 Intelligent-Tiering configuration from the specified bucket.</p>\n         <p>The S3 Intelligent-Tiering storage class is designed to optimize storage costs by automatically moving data to the most cost-effective storage access tier, without additional operational overhead. S3 Intelligent-Tiering delivers automatic cost savings by moving data between access tiers, when access patterns change.</p>\n         <p>The S3 Intelligent-Tiering storage class is suitable for objects larger than 128 KB that you plan to store for at least 30 days. If the size of an object is less than 128 KB, it is not eligible for auto-tiering. Smaller objects can be stored, but they are always charged at the frequent access tier rates in the S3 Intelligent-Tiering storage class. </p>\n         <p>If you delete an object before the end of the 30-day minimum storage duration period, you are charged for 30 days. For more information, see  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html#sc-dynamic-data-access\">Storage class for automatically optimizing frequently and infrequently accessed objects</a>.</p> \n         <p>Operations related to\n            <code>GetBucketIntelligentTieringConfiguration</code> include: </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketIntelligentTieringConfiguration.html\">DeleteBucketIntelligentTieringConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketIntelligentTieringConfiguration.html\">PutBucketIntelligentTieringConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketIntelligentTieringConfigurations.html\">ListBucketIntelligentTieringConfigurations</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Gets the S3 Intelligent-Tiering configuration from the specified bucket.</p>\n         <p>The S3 Intelligent-Tiering storage class is designed to optimize storage costs by automatically moving data to the most cost-effective storage access tier, without performance impact or operational overhead. S3 Intelligent-Tiering delivers automatic cost savings in two low latency and high throughput access tiers. For data that can be accessed asynchronously, you can choose to activate automatic archiving capabilities within the S3 Intelligent-Tiering storage class.</p>\n         <p>The S3 Intelligent-Tiering storage class is  the ideal storage class for data with unknown, changing, or unpredictable access patterns, independent of object size or retention period. If the size of an object is less than 128 KB, it is not eligible for auto-tiering. Smaller objects can be stored, but they are always charged at the Frequent Access tier rates in the S3 Intelligent-Tiering storage class.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html#sc-dynamic-data-access\">Storage class for automatically optimizing frequently and infrequently accessed objects</a>.</p> \n         <p>Operations related to\n            <code>GetBucketIntelligentTieringConfiguration</code> include: </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketIntelligentTieringConfiguration.html\">DeleteBucketIntelligentTieringConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketIntelligentTieringConfiguration.html\">PutBucketIntelligentTieringConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketIntelligentTieringConfigurations.html\">ListBucketIntelligentTieringConfigurations</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/{Bucket}?intelligent-tiering&x-id=GetBucketIntelligentTieringConfiguration",
@@ -4700,7 +4703,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves objects from Amazon S3. To use <code>GET</code>, you must have <code>READ</code>\n         access to the object. If you grant <code>READ</code> access to the anonymous user, you can\n         return the object without using an authorization header.</p>\n\n         <p>An Amazon S3 bucket has no directory hierarchy such as you would find in a typical computer\n         file system. You can, however, create a logical hierarchy by using object key names that\n         imply a folder structure. For example, instead of naming an object <code>sample.jpg</code>,\n         you can name it <code>photos/2006/February/sample.jpg</code>.</p>\n\n         <p>To get an object from such a logical hierarchy, specify the full key name for the object\n         in the <code>GET</code> operation. For a virtual hosted-style request example, if you have\n         the object <code>photos/2006/February/sample.jpg</code>, specify the resource as\n            <code>/photos/2006/February/sample.jpg</code>. For a path-style request example, if you\n         have the object <code>photos/2006/February/sample.jpg</code> in the bucket named\n            <code>examplebucket</code>, specify the resource as\n            <code>/examplebucket/photos/2006/February/sample.jpg</code>. For more information about\n         request types, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html#VirtualHostingSpecifyBucket\">HTTP Host Header Bucket Specification</a>.</p>\n\n         <p>To distribute large files to many people, you can save bandwidth costs by using\n         BitTorrent. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/S3Torrent.html\">Amazon S3\n            Torrent</a>. For more information about returning the ACL of an object, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAcl.html\">GetObjectAcl</a>.</p>\n\n         <p>If the object you are retrieving is stored in the S3 Glacier or\n         S3 Glacier Deep Archive storage class, or S3 Intelligent-Tiering Archive or\n         S3 Intelligent-Tiering Deep Archive tiers, before you can retrieve the object you must first restore a\n         copy using <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html\">RestoreObject</a>. Otherwise, this action returns an\n            <code>InvalidObjectStateError</code> error. For information about restoring archived\n         objects, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html\">Restoring Archived\n            Objects</a>.</p>\n\n         <p>Encryption request headers, like <code>x-amz-server-side-encryption</code>, should not\n         be sent for GET requests if your object uses server-side encryption with CMKs stored in Amazon Web Services\n         KMS (SSE-KMS) or server-side encryption with Amazon S3–managed encryption keys (SSE-S3). If your\n         object does use these types of keys, you’ll get an HTTP 400 BadRequest error.</p>\n         <p>If you encrypt an object by using server-side encryption with customer-provided\n         encryption keys (SSE-C) when you store the object in Amazon S3, then when you GET the object,\n         you must use the following headers:</p>\n         <ul>\n            <li>\n               <p>x-amz-server-side-encryption-customer-algorithm</p>\n            </li>\n            <li>\n               <p>x-amz-server-side-encryption-customer-key</p>\n            </li>\n            <li>\n               <p>x-amz-server-side-encryption-customer-key-MD5</p>\n            </li>\n         </ul>\n         <p>For more information about SSE-C, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html\">Server-Side Encryption (Using\n            Customer-Provided Encryption Keys)</a>.</p>\n\n         <p>Assuming you have the relevant permission to read object tags, the response also returns the\n            <code>x-amz-tagging-count</code> header that provides the count of number of tags\n         associated with the object. You can use <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectTagging.html\">GetObjectTagging</a> to retrieve\n         the tag set associated with an object.</p>\n\n         <p>\n            <b>Permissions</b>\n         </p>\n         <p>You need the relevant read object (or version) permission for this operation. For more\n         information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html\">Specifying Permissions\n            in a Policy</a>. If the object you request does not exist, the error Amazon S3 returns\n         depends on whether you also have the <code>s3:ListBucket</code> permission.</p>\n         <ul>\n            <li>\n               <p>If you have the <code>s3:ListBucket</code> permission on the bucket, Amazon S3 will\n               return an HTTP status code 404 (\"no such key\") error.</p>\n            </li>\n            <li>\n               <p>If you don’t have the <code>s3:ListBucket</code> permission, Amazon S3 will return an\n               HTTP status code 403 (\"access denied\") error.</p>\n            </li>\n         </ul>\n\n\n         <p>\n            <b>Versioning</b>\n         </p>\n         <p>By default, the GET action returns the current version of an object. To return a\n         different version, use the <code>versionId</code> subresource.</p>\n\n         <note>\n            <ul>\n               <li>\n                  <p>You need the <code>s3:GetObjectVersion</code> permission to access a specific version of an object.\n            </p>\n               </li>\n               <li>\n                  <p>If the current version of the object is a delete marker, Amazon S3 behaves as if the\n            object was deleted and includes <code>x-amz-delete-marker: true</code> in the\n            response.</p>\n               </li>\n            </ul>\n         </note>\n\n\n         <p>For more information about versioning, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketVersioning.html\">PutBucketVersioning</a>. </p>\n\n         <p>\n            <b>Overriding Response Header Values</b>\n         </p>\n         <p>There are times when you want to override certain response header values in a GET\n         response. For example, you might override the Content-Disposition response header value in\n         your GET request.</p>\n\n         <p>You can override values for a set of response headers using the following query\n         parameters. These response header values are sent only on a successful request, that is,\n         when status code 200 OK is returned. The set of headers you can override using these\n         parameters is a subset of the headers that Amazon S3 accepts when you create an object. The\n         response headers that you can override for the GET response are <code>Content-Type</code>,\n            <code>Content-Language</code>, <code>Expires</code>, <code>Cache-Control</code>,\n            <code>Content-Disposition</code>, and <code>Content-Encoding</code>. To override these\n         header values in the GET response, you use the following request parameters.</p>\n\n         <note>\n            <p>You must sign the request, either using an Authorization header or a presigned URL,\n            when using these parameters. They cannot be used with an unsigned (anonymous)\n            request.</p>\n         </note>\n         <ul>\n            <li>\n               <p>\n                  <code>response-content-type</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>response-content-language</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>response-expires</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>response-cache-control</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>response-content-disposition</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>response-content-encoding</code>\n               </p>\n            </li>\n         </ul>\n\n         <p>\n            <b>Additional Considerations about Request Headers</b>\n         </p>\n\n         <p>If both of the <code>If-Match</code> and <code>If-Unmodified-Since</code> headers are\n         present in the request as follows: <code>If-Match</code> condition evaluates to\n            <code>true</code>, and; <code>If-Unmodified-Since</code> condition evaluates to\n            <code>false</code>; then, S3 returns 200 OK and the data requested. </p>\n\n         <p>If both of the <code>If-None-Match</code> and <code>If-Modified-Since</code> headers are\n         present in the request as follows:<code> If-None-Match</code> condition evaluates to\n            <code>false</code>, and; <code>If-Modified-Since</code> condition evaluates to\n            <code>true</code>; then, S3 returns 304 Not Modified response code.</p>\n\n         <p>For more information about conditional requests, see <a href=\"https://tools.ietf.org/html/rfc7232\">RFC 7232</a>.</p>\n\n         <p>The following operations are related to <code>GetObject</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBuckets.html\">ListBuckets</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAcl.html\">GetObjectAcl</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Retrieves objects from Amazon S3. To use <code>GET</code>, you must have <code>READ</code>\n         access to the object. If you grant <code>READ</code> access to the anonymous user, you can\n         return the object without using an authorization header.</p>\n\n         <p>An Amazon S3 bucket has no directory hierarchy such as you would find in a typical computer\n         file system. You can, however, create a logical hierarchy by using object key names that\n         imply a folder structure. For example, instead of naming an object <code>sample.jpg</code>,\n         you can name it <code>photos/2006/February/sample.jpg</code>.</p>\n\n         <p>To get an object from such a logical hierarchy, specify the full key name for the object\n         in the <code>GET</code> operation. For a virtual hosted-style request example, if you have\n         the object <code>photos/2006/February/sample.jpg</code>, specify the resource as\n            <code>/photos/2006/February/sample.jpg</code>. For a path-style request example, if you\n         have the object <code>photos/2006/February/sample.jpg</code> in the bucket named\n            <code>examplebucket</code>, specify the resource as\n            <code>/examplebucket/photos/2006/February/sample.jpg</code>. For more information about\n         request types, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html#VirtualHostingSpecifyBucket\">HTTP Host Header Bucket Specification</a>.</p>\n\n         <p>To distribute large files to many people, you can save bandwidth costs by using\n         BitTorrent. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/S3Torrent.html\">Amazon S3\n            Torrent</a>. For more information about returning the ACL of an object, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAcl.html\">GetObjectAcl</a>.</p>\n\n         <p>If the object you are retrieving is stored in the S3 Glacier or\n         S3 Glacier Deep Archive storage class, or S3 Intelligent-Tiering Archive or\n         S3 Intelligent-Tiering Deep Archive tiers, before you can retrieve the object you must first restore a\n         copy using <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html\">RestoreObject</a>. Otherwise, this action returns an\n            <code>InvalidObjectStateError</code> error. For information about restoring archived\n         objects, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html\">Restoring Archived\n            Objects</a>.</p>\n\n         <p>Encryption request headers, like <code>x-amz-server-side-encryption</code>, should not\n         be sent for GET requests if your object uses server-side encryption with KMS keys (SSE-KMS) \n         or server-side encryption with Amazon S3–managed encryption keys (SSE-S3). If your\n         object does use these types of keys, you’ll get an HTTP 400 BadRequest error.</p>\n         <p>If you encrypt an object by using server-side encryption with customer-provided\n         encryption keys (SSE-C) when you store the object in Amazon S3, then when you GET the object,\n         you must use the following headers:</p>\n         <ul>\n            <li>\n               <p>x-amz-server-side-encryption-customer-algorithm</p>\n            </li>\n            <li>\n               <p>x-amz-server-side-encryption-customer-key</p>\n            </li>\n            <li>\n               <p>x-amz-server-side-encryption-customer-key-MD5</p>\n            </li>\n         </ul>\n         <p>For more information about SSE-C, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html\">Server-Side Encryption (Using\n            Customer-Provided Encryption Keys)</a>.</p>\n\n         <p>Assuming you have the relevant permission to read object tags, the response also returns the\n            <code>x-amz-tagging-count</code> header that provides the count of number of tags\n         associated with the object. You can use <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectTagging.html\">GetObjectTagging</a> to retrieve\n         the tag set associated with an object.</p>\n\n         <p>\n            <b>Permissions</b>\n         </p>\n         <p>You need the relevant read object (or version) permission for this operation. For more\n         information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html\">Specifying Permissions\n            in a Policy</a>. If the object you request does not exist, the error Amazon S3 returns\n         depends on whether you also have the <code>s3:ListBucket</code> permission.</p>\n         <ul>\n            <li>\n               <p>If you have the <code>s3:ListBucket</code> permission on the bucket, Amazon S3 will\n               return an HTTP status code 404 (\"no such key\") error.</p>\n            </li>\n            <li>\n               <p>If you don’t have the <code>s3:ListBucket</code> permission, Amazon S3 will return an\n               HTTP status code 403 (\"access denied\") error.</p>\n            </li>\n         </ul>\n\n\n         <p>\n            <b>Versioning</b>\n         </p>\n         <p>By default, the GET action returns the current version of an object. To return a\n         different version, use the <code>versionId</code> subresource.</p>\n\n         <note>\n            <ul>\n               <li>\n                  <p>You need the <code>s3:GetObjectVersion</code> permission to access a specific version of an object.\n            </p>\n               </li>\n               <li>\n                  <p>If the current version of the object is a delete marker, Amazon S3 behaves as if the\n            object was deleted and includes <code>x-amz-delete-marker: true</code> in the\n            response.</p>\n               </li>\n            </ul>\n         </note>\n\n\n         <p>For more information about versioning, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketVersioning.html\">PutBucketVersioning</a>. </p>\n\n         <p>\n            <b>Overriding Response Header Values</b>\n         </p>\n         <p>There are times when you want to override certain response header values in a GET\n         response. For example, you might override the Content-Disposition response header value in\n         your GET request.</p>\n\n         <p>You can override values for a set of response headers using the following query\n         parameters. These response header values are sent only on a successful request, that is,\n         when status code 200 OK is returned. The set of headers you can override using these\n         parameters is a subset of the headers that Amazon S3 accepts when you create an object. The\n         response headers that you can override for the GET response are <code>Content-Type</code>,\n            <code>Content-Language</code>, <code>Expires</code>, <code>Cache-Control</code>,\n            <code>Content-Disposition</code>, and <code>Content-Encoding</code>. To override these\n         header values in the GET response, you use the following request parameters.</p>\n\n         <note>\n            <p>You must sign the request, either using an Authorization header or a presigned URL,\n            when using these parameters. They cannot be used with an unsigned (anonymous)\n            request.</p>\n         </note>\n         <ul>\n            <li>\n               <p>\n                  <code>response-content-type</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>response-content-language</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>response-expires</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>response-cache-control</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>response-content-disposition</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>response-content-encoding</code>\n               </p>\n            </li>\n         </ul>\n\n         <p>\n            <b>Additional Considerations about Request Headers</b>\n         </p>\n\n         <p>If both of the <code>If-Match</code> and <code>If-Unmodified-Since</code> headers are\n         present in the request as follows: <code>If-Match</code> condition evaluates to\n            <code>true</code>, and; <code>If-Unmodified-Since</code> condition evaluates to\n            <code>false</code>; then, S3 returns 200 OK and the data requested. </p>\n\n         <p>If both of the <code>If-None-Match</code> and <code>If-Modified-Since</code> headers are\n         present in the request as follows:<code> If-None-Match</code> condition evaluates to\n            <code>false</code>, and; <code>If-Modified-Since</code> condition evaluates to\n            <code>true</code>; then, S3 returns 304 Not Modified response code.</p>\n\n         <p>For more information about conditional requests, see <a href=\"https://tools.ietf.org/html/rfc7232\">RFC 7232</a>.</p>\n\n         <p>The following operations are related to <code>GetObject</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBuckets.html\">ListBuckets</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAcl.html\">GetObjectAcl</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/{Bucket}/{Key+}?x-id=GetObject",
@@ -5077,7 +5080,7 @@
                 "SSEKMSKeyId": {
                     "target": "com.amazonaws.s3#SSEKMSKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>If present, specifies the ID of the Amazon Web Services Key Management Service (Amazon Web Services KMS) symmetric\n         customer managed customer master key (CMK) that was used for the object.</p>",
+                        "smithy.api#documentation": "<p>If present, specifies the ID of the Amazon Web Services Key Management Service (Amazon Web Services KMS) symmetric\n         customer managed key that was used for the object.</p>",
                         "smithy.api#httpHeader": "x-amz-server-side-encryption-aws-kms-key-id"
                     }
                 },
@@ -5151,7 +5154,7 @@
                 "Bucket": {
                     "target": "com.amazonaws.s3#BucketName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The bucket name containing the object. </p>\n         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this action using S3 on Outposts through the Amazon Web Services SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The bucket name containing the object. </p>\n         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <p>When using an Object Lambda access point the hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-object-lambda.<i>Region</i>.amazonaws.com.</p>\n         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this action using S3 on Outposts through the Amazon Web Services SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5749,7 +5752,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The HEAD action retrieves metadata from an object without returning the object\n         itself. This action is useful if you're only interested in an object's metadata. To use\n         HEAD, you must have READ access to the object.</p>\n\n         <p>A <code>HEAD</code> request has the same options as a <code>GET</code> action on an\n         object. The response is identical to the <code>GET</code> response except that there is no\n         response body. Because of this, if the <code>HEAD</code> request generates an error, it\n         returns a generic <code>404 Not Found</code> or <code>403 Forbidden</code> code. It is not \n         possible to retrieve the exact exception beyond these error codes.</p>\n\n         <p>If you encrypt an object by using server-side encryption with customer-provided\n         encryption keys (SSE-C) when you store the object in Amazon S3, then when you retrieve the\n         metadata from the object, you must use the following headers:</p>\n         <ul>\n            <li>\n               <p>x-amz-server-side-encryption-customer-algorithm</p>\n            </li>\n            <li>\n               <p>x-amz-server-side-encryption-customer-key</p>\n            </li>\n            <li>\n               <p>x-amz-server-side-encryption-customer-key-MD5</p>\n            </li>\n         </ul>\n         <p>For more information about SSE-C, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html\">Server-Side Encryption (Using\n            Customer-Provided Encryption Keys)</a>.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>Encryption request headers, like <code>x-amz-server-side-encryption</code>, should\n            not be sent for GET requests if your object uses server-side encryption with CMKs stored\n            in Amazon Web Services KMS (SSE-KMS) or server-side encryption with Amazon S3–managed encryption keys\n            (SSE-S3). If your object does use these types of keys, you’ll get an HTTP 400 BadRequest\n            error.</p>\n               </li>\n               <li>\n                  <p>\n               The last modified property in this case is the creation date of the object.</p> \n               </li>\n            </ul>\n         </note>\n\n\n         <p>Request headers are limited to 8 KB in size. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/RESTCommonRequestHeaders.html\">Common Request\n            Headers</a>.</p>\n         <p>Consider the following when using request headers:</p>\n         <ul>\n            <li>\n               <p> Consideration 1 – If both of the <code>If-Match</code> and\n                  <code>If-Unmodified-Since</code> headers are present in the request as\n               follows:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>If-Match</code> condition evaluates to <code>true</code>, and;</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>If-Unmodified-Since</code> condition evaluates to\n                     <code>false</code>;</p>\n                  </li>\n               </ul>\n               <p>Then Amazon S3 returns <code>200 OK</code> and the data requested.</p>\n            </li>\n            <li>\n               <p> Consideration 2 – If both of the <code>If-None-Match</code> and\n                  <code>If-Modified-Since</code> headers are present in the request as\n               follows:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>If-None-Match</code> condition evaluates to <code>false</code>,\n                     and;</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>If-Modified-Since</code> condition evaluates to\n                     <code>true</code>;</p>\n                  </li>\n               </ul>\n               <p>Then Amazon S3 returns the <code>304 Not Modified</code> response code.</p>\n            </li>\n         </ul>\n\n         <p>For more information about conditional requests, see <a href=\"https://tools.ietf.org/html/rfc7232\">RFC 7232</a>.</p>\n\n         <p>\n            <b>Permissions</b>\n         </p>\n         <p>You need the relevant read object (or version) permission for this operation. For more\n         information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html\">Specifying Permissions\n            in a Policy</a>. If the object you request does not exist, the error Amazon S3 returns\n         depends on whether you also have the s3:ListBucket permission.</p>\n         <ul>\n            <li>\n               <p>If you have the <code>s3:ListBucket</code> permission on the bucket, Amazon S3 returns\n               an HTTP status code 404 (\"no such key\") error.</p>\n            </li>\n            <li>\n               <p>If you don’t have the <code>s3:ListBucket</code> permission, Amazon S3 returns an HTTP\n               status code 403 (\"access denied\") error.</p>\n            </li>\n         </ul>\n\n         <p>The following action is related to <code>HeadObject</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html\">GetObject</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>The HEAD action retrieves metadata from an object without returning the object\n         itself. This action is useful if you're only interested in an object's metadata. To use\n         HEAD, you must have READ access to the object.</p>\n\n         <p>A <code>HEAD</code> request has the same options as a <code>GET</code> action on an\n         object. The response is identical to the <code>GET</code> response except that there is no\n         response body. Because of this, if the <code>HEAD</code> request generates an error, it\n         returns a generic <code>404 Not Found</code> or <code>403 Forbidden</code> code. It is not \n         possible to retrieve the exact exception beyond these error codes.</p>\n\n         <p>If you encrypt an object by using server-side encryption with customer-provided\n         encryption keys (SSE-C) when you store the object in Amazon S3, then when you retrieve the\n         metadata from the object, you must use the following headers:</p>\n         <ul>\n            <li>\n               <p>x-amz-server-side-encryption-customer-algorithm</p>\n            </li>\n            <li>\n               <p>x-amz-server-side-encryption-customer-key</p>\n            </li>\n            <li>\n               <p>x-amz-server-side-encryption-customer-key-MD5</p>\n            </li>\n         </ul>\n         <p>For more information about SSE-C, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html\">Server-Side Encryption (Using\n            Customer-Provided Encryption Keys)</a>.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>Encryption request headers, like <code>x-amz-server-side-encryption</code>, should\n            not be sent for GET requests if your object uses server-side encryption with KMS keys (SSE-KMS)\n            or server-side encryption with Amazon S3–managed encryption keys\n            (SSE-S3). If your object does use these types of keys, you’ll get an HTTP 400 BadRequest\n            error.</p>\n               </li>\n               <li>\n                  <p>\n               The last modified property in this case is the creation date of the object.</p> \n               </li>\n            </ul>\n         </note>\n\n\n         <p>Request headers are limited to 8 KB in size. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/RESTCommonRequestHeaders.html\">Common Request\n            Headers</a>.</p>\n         <p>Consider the following when using request headers:</p>\n         <ul>\n            <li>\n               <p> Consideration 1 – If both of the <code>If-Match</code> and\n                  <code>If-Unmodified-Since</code> headers are present in the request as\n               follows:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>If-Match</code> condition evaluates to <code>true</code>, and;</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>If-Unmodified-Since</code> condition evaluates to\n                     <code>false</code>;</p>\n                  </li>\n               </ul>\n               <p>Then Amazon S3 returns <code>200 OK</code> and the data requested.</p>\n            </li>\n            <li>\n               <p> Consideration 2 – If both of the <code>If-None-Match</code> and\n                  <code>If-Modified-Since</code> headers are present in the request as\n               follows:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>If-None-Match</code> condition evaluates to <code>false</code>,\n                     and;</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>If-Modified-Since</code> condition evaluates to\n                     <code>true</code>;</p>\n                  </li>\n               </ul>\n               <p>Then Amazon S3 returns the <code>304 Not Modified</code> response code.</p>\n            </li>\n         </ul>\n\n         <p>For more information about conditional requests, see <a href=\"https://tools.ietf.org/html/rfc7232\">RFC 7232</a>.</p>\n\n         <p>\n            <b>Permissions</b>\n         </p>\n         <p>You need the relevant read object (or version) permission for this operation. For more\n         information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html\">Specifying Permissions\n            in a Policy</a>. If the object you request does not exist, the error Amazon S3 returns\n         depends on whether you also have the s3:ListBucket permission.</p>\n         <ul>\n            <li>\n               <p>If you have the <code>s3:ListBucket</code> permission on the bucket, Amazon S3 returns\n               an HTTP status code 404 (\"no such key\") error.</p>\n            </li>\n            <li>\n               <p>If you don’t have the <code>s3:ListBucket</code> permission, Amazon S3 returns an HTTP\n               status code 403 (\"access denied\") error.</p>\n            </li>\n         </ul>\n\n         <p>The following action is related to <code>HeadObject</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html\">GetObject</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "HEAD",
                     "uri": "/{Bucket}/{Key+}",
@@ -5912,7 +5915,7 @@
                 "ServerSideEncryption": {
                     "target": "com.amazonaws.s3#ServerSideEncryption",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the object is stored using server-side encryption either with an Amazon Web Services KMS customer\n         master key (CMK) or an Amazon S3-managed encryption key, the response includes this header with\n         the value of the server-side encryption algorithm used when storing this object in Amazon\n         S3 (for example, AES256, aws:kms).</p>",
+                        "smithy.api#documentation": "<p>If the object is stored using server-side encryption either with an Amazon Web Services KMS key or \n         an Amazon S3-managed encryption key, the response includes this header with\n         the value of the server-side encryption algorithm used when storing this object in Amazon\n         S3 (for example, AES256, aws:kms).</p>",
                         "smithy.api#httpHeader": "x-amz-server-side-encryption"
                     }
                 },
@@ -5940,7 +5943,7 @@
                 "SSEKMSKeyId": {
                     "target": "com.amazonaws.s3#SSEKMSKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>If present, specifies the ID of the Amazon Web Services Key Management Service (Amazon Web Services KMS) symmetric\n         customer managed customer master key (CMK) that was used for the object.</p>",
+                        "smithy.api#documentation": "<p>If present, specifies the ID of the Amazon Web Services Key Management Service (Amazon Web Services KMS) symmetric\n         customer managed key that was used for the object.</p>",
                         "smithy.api#httpHeader": "x-amz-server-side-encryption-aws-kms-key-id"
                     }
                 },
@@ -6958,7 +6961,7 @@
                 "target": "com.amazonaws.s3#ListBucketIntelligentTieringConfigurationsOutput"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Lists the S3 Intelligent-Tiering configuration from the specified bucket.</p>\n         <p>The S3 Intelligent-Tiering storage class is designed to optimize storage costs by automatically moving data to the most cost-effective storage access tier, without additional operational overhead. S3 Intelligent-Tiering delivers automatic cost savings by moving data between access tiers, when access patterns change.</p>\n         <p>The S3 Intelligent-Tiering storage class is suitable for objects larger than 128 KB that you plan to store for at least 30 days. If the size of an object is less than 128 KB, it is not eligible for auto-tiering. Smaller objects can be stored, but they are always charged at the frequent access tier rates in the S3 Intelligent-Tiering storage class. </p>\n         <p>If you delete an object before the end of the 30-day minimum storage duration period, you are charged for 30 days. For more information, see  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html#sc-dynamic-data-access\">Storage class for automatically optimizing frequently and infrequently accessed objects</a>.</p> \n         <p>Operations related to\n            <code>ListBucketIntelligentTieringConfigurations</code> include: </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketIntelligentTieringConfiguration.html\">DeleteBucketIntelligentTieringConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketIntelligentTieringConfiguration.html\">PutBucketIntelligentTieringConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketIntelligentTieringConfiguration.html\">GetBucketIntelligentTieringConfiguration</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Lists the S3 Intelligent-Tiering configuration from the specified bucket.</p>\n         <p>The S3 Intelligent-Tiering storage class is designed to optimize storage costs by automatically moving data to the most cost-effective storage access tier, without performance impact or operational overhead. S3 Intelligent-Tiering delivers automatic cost savings in two low latency and high throughput access tiers. For data that can be accessed asynchronously, you can choose to activate automatic archiving capabilities within the S3 Intelligent-Tiering storage class.</p>\n         <p>The S3 Intelligent-Tiering storage class is  the ideal storage class for data with unknown, changing, or unpredictable access patterns, independent of object size or retention period. If the size of an object is less than 128 KB, it is not eligible for auto-tiering. Smaller objects can be stored, but they are always charged at the Frequent Access tier rates in the S3 Intelligent-Tiering storage class.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html#sc-dynamic-data-access\">Storage class for automatically optimizing frequently and infrequently accessed objects</a>.</p> \n         <p>Operations related to\n            <code>ListBucketIntelligentTieringConfigurations</code> include: </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketIntelligentTieringConfiguration.html\">DeleteBucketIntelligentTieringConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketIntelligentTieringConfiguration.html\">PutBucketIntelligentTieringConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketIntelligentTieringConfiguration.html\">GetBucketIntelligentTieringConfiguration</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/{Bucket}?intelligent-tiering&x-id=ListBucketIntelligentTieringConfigurations",
@@ -8222,6 +8225,12 @@
                         "smithy.api#xmlFlattened": {},
                         "smithy.api#xmlName": "Tag"
                     }
+                },
+                "AccessPointArn": {
+                    "target": "com.amazonaws.s3#AccessPointArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The access point ARN used when evaluating an AND predicate.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8241,12 +8250,12 @@
                 "Filter": {
                     "target": "com.amazonaws.s3#MetricsFilter",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a metrics configuration filter. The metrics configuration will only include\n         objects that meet the filter's criteria. A filter must be a prefix, a tag, or a conjunction\n         (MetricsAndOperator).</p>"
+                        "smithy.api#documentation": "<p>Specifies a metrics configuration filter. The metrics configuration will only include\n         objects that meet the filter's criteria. A filter must be a prefix, an object tag, an access point ARN, or a conjunction\n         (MetricsAndOperator).</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies a metrics configuration for the CloudWatch request metrics (specified by the\n         metrics configuration ID) from an Amazon S3 bucket. If you're updating an existing metrics\n         configuration, note that this is a full replacement of the existing metrics configuration.\n         If you don't include the elements you want to keep, they are erased. For more information,\n         see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTMetricConfiguration.html\"> PUT Bucket\n            metrics</a> in the <i>Amazon S3 API Reference</i>.</p>"
+                "smithy.api#documentation": "<p>Specifies a metrics configuration for the CloudWatch request metrics (specified by the\n         metrics configuration ID) from an Amazon S3 bucket. If you're updating an existing metrics\n         configuration, note that this is a full replacement of the existing metrics configuration.\n         If you don't include the elements you want to keep, they are erased. For more information,\n         see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTMetricConfiguration.html\">PutBucketMetricsConfiguration</a>.</p>"
             }
         },
         "com.amazonaws.s3#MetricsConfigurationList": {
@@ -8270,6 +8279,12 @@
                         "smithy.api#documentation": "<p>The tag used when evaluating a metrics filter.</p>"
                     }
                 },
+                "AccessPointArn": {
+                    "target": "com.amazonaws.s3#AccessPointArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The access point ARN used when evaluating a metrics filter.</p>"
+                    }
+                },
                 "And": {
                     "target": "com.amazonaws.s3#MetricsAndOperator",
                     "traits": {
@@ -8278,7 +8293,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies a metrics configuration filter. The metrics configuration only includes\n         objects that meet the filter's criteria. A filter must be a prefix, a tag, or a conjunction\n         (MetricsAndOperator).</p>"
+                "smithy.api#documentation": "<p>Specifies a metrics configuration filter. The metrics configuration only includes\n         objects that meet the filter's criteria. A filter must be a prefix, an object tag, an access point ARN, or a conjunction\n         (MetricsAndOperator). For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketMetricsConfiguration.html\">PutBucketMetricsConfiguration</a>.</p>"
             }
         },
         "com.amazonaws.s3#MetricsId": {
@@ -9242,13 +9257,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "ExpectedBucketOwner": {
-                    "target": "com.amazonaws.s3#AccountId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
-                        "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
-                    }
-                },
                 "AccelerateConfiguration": {
                     "target": "com.amazonaws.s3#AccelerateConfiguration",
                     "traits": {
@@ -9256,6 +9264,13 @@
                         "smithy.api#httpPayload": {},
                         "smithy.api#required": {},
                         "smithy.api#xmlName": "AccelerateConfiguration"
+                    }
+                },
+                "ExpectedBucketOwner": {
+                    "target": "com.amazonaws.s3#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
+                        "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
                     }
                 }
             }
@@ -9283,6 +9298,14 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The canned ACL to apply to the bucket.</p>",
                         "smithy.api#httpHeader": "x-amz-acl"
+                    }
+                },
+                "AccessControlPolicy": {
+                    "target": "com.amazonaws.s3#AccessControlPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the elements that set the ACL permissions for an object per grantee.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#xmlName": "AccessControlPolicy"
                     }
                 },
                 "Bucket": {
@@ -9341,14 +9364,6 @@
                         "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
                         "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
                     }
-                },
-                "AccessControlPolicy": {
-                    "target": "com.amazonaws.s3#AccessControlPolicy",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Contains the elements that set the ACL permissions for an object per grantee.</p>",
-                        "smithy.api#httpPayload": {},
-                        "smithy.api#xmlName": "AccessControlPolicy"
-                    }
                 }
             }
         },
@@ -9385,13 +9400,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "ExpectedBucketOwner": {
-                    "target": "com.amazonaws.s3#AccountId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
-                        "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
-                    }
-                },
                 "AnalyticsConfiguration": {
                     "target": "com.amazonaws.s3#AnalyticsConfiguration",
                     "traits": {
@@ -9399,6 +9407,13 @@
                         "smithy.api#httpPayload": {},
                         "smithy.api#required": {},
                         "smithy.api#xmlName": "AnalyticsConfiguration"
+                    }
+                },
+                "ExpectedBucketOwner": {
+                    "target": "com.amazonaws.s3#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
+                        "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
                     }
                 }
             }
@@ -9429,6 +9444,15 @@
                         "smithy.api#required": {}
                     }
                 },
+                "CORSConfiguration": {
+                    "target": "com.amazonaws.s3#CORSConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the cross-origin access configuration for objects in an Amazon S3 bucket. For more\n         information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html\">Enabling Cross-Origin Resource\n            Sharing</a> in the <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "CORSConfiguration"
+                    }
+                },
                 "ContentMD5": {
                     "target": "com.amazonaws.s3#ContentMD5",
                     "traits": {
@@ -9442,15 +9466,6 @@
                         "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
                         "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
                     }
-                },
-                "CORSConfiguration": {
-                    "target": "com.amazonaws.s3#CORSConfiguration",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Describes the cross-origin access configuration for objects in an Amazon S3 bucket. For more\n         information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html\">Enabling Cross-Origin Resource\n            Sharing</a> in the <i>Amazon S3 User Guide</i>.</p>",
-                        "smithy.api#httpPayload": {},
-                        "smithy.api#required": {},
-                        "smithy.api#xmlName": "CORSConfiguration"
-                    }
                 }
             }
         },
@@ -9460,7 +9475,7 @@
                 "target": "com.amazonaws.s3#PutBucketEncryptionRequest"
             },
             "traits": {
-                "smithy.api#documentation": "<p>This action uses the <code>encryption</code> subresource to configure default\n         encryption and Amazon S3 Bucket Key for an existing bucket.</p>\n         <p>Default encryption for a bucket can use server-side encryption with Amazon S3-managed keys\n         (SSE-S3) or Amazon Web Services KMS customer master keys (SSE-KMS). If you specify default encryption\n         using SSE-KMS, you can also configure Amazon S3 Bucket Key. For information about default\n         encryption, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html\">Amazon S3 default bucket encryption</a>\n         in the <i>Amazon S3 User Guide</i>. For more information about S3 Bucket Keys,\n         see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html\">Amazon S3 Bucket Keys</a> in the <i>Amazon S3 User Guide</i>.</p> \n         <important>\n            <p>This action requires Amazon Web Services Signature Version 4. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html\"> Authenticating Requests (Amazon Web Services Signature\n               Version 4)</a>. </p>\n         </important>\n         <p>To use this operation, you must have permissions to perform the\n            <code>s3:PutEncryptionConfiguration</code> action. The bucket owner has this permission\n         by default. The bucket owner can grant this permission to others. For more information\n         about permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources\">Permissions Related to Bucket Subresource Operations</a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html\">Managing Access Permissions to Your Amazon S3\n            Resources</a> in the Amazon S3 User Guide. </p>\n      \n         <p class=\"title\">\n            <b>Related Resources</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketEncryption.html\">GetBucketEncryption</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketEncryption.html\">DeleteBucketEncryption</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>This action uses the <code>encryption</code> subresource to configure default\n         encryption and Amazon S3 Bucket Key for an existing bucket.</p>\n         <p>Default encryption for a bucket can use server-side encryption with Amazon S3-managed keys\n         (SSE-S3) or customer managed keys (SSE-KMS). If you specify default encryption\n         using SSE-KMS, you can also configure Amazon S3 Bucket Key. For information about default\n         encryption, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html\">Amazon S3 default bucket encryption</a>\n         in the <i>Amazon S3 User Guide</i>. For more information about S3 Bucket Keys,\n         see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html\">Amazon S3 Bucket Keys</a> in the <i>Amazon S3 User Guide</i>.</p> \n         <important>\n            <p>This action requires Amazon Web Services Signature Version 4. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html\"> Authenticating Requests (Amazon Web Services Signature\n               Version 4)</a>. </p>\n         </important>\n         <p>To use this operation, you must have permissions to perform the\n            <code>s3:PutEncryptionConfiguration</code> action. The bucket owner has this permission\n         by default. The bucket owner can grant this permission to others. For more information\n         about permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources\">Permissions Related to Bucket Subresource Operations</a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html\">Managing Access Permissions to Your Amazon S3\n            Resources</a> in the Amazon S3 User Guide. </p>\n      \n         <p class=\"title\">\n            <b>Related Resources</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketEncryption.html\">GetBucketEncryption</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketEncryption.html\">DeleteBucketEncryption</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/{Bucket}?encryption",
@@ -9475,7 +9490,7 @@
                 "Bucket": {
                     "target": "com.amazonaws.s3#BucketName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies default encryption for a bucket using server-side encryption with Amazon S3-managed\n         keys (SSE-S3) or customer master keys stored in Amazon Web Services KMS (SSE-KMS). For information about\n         the Amazon S3 default encryption feature, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html\">Amazon S3 Default Bucket Encryption</a>\n         in the <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>Specifies default encryption for a bucket using server-side encryption with Amazon S3-managed\n         keys (SSE-S3) or customer managed keys (SSE-KMS). For information about\n         the Amazon S3 default encryption feature, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html\">Amazon S3 Default Bucket Encryption</a>\n         in the <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -9487,19 +9502,19 @@
                         "smithy.api#httpHeader": "Content-MD5"
                     }
                 },
-                "ExpectedBucketOwner": {
-                    "target": "com.amazonaws.s3#AccountId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
-                        "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
-                    }
-                },
                 "ServerSideEncryptionConfiguration": {
                     "target": "com.amazonaws.s3#ServerSideEncryptionConfiguration",
                     "traits": {
                         "smithy.api#httpPayload": {},
                         "smithy.api#required": {},
                         "smithy.api#xmlName": "ServerSideEncryptionConfiguration"
+                    }
+                },
+                "ExpectedBucketOwner": {
+                    "target": "com.amazonaws.s3#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
+                        "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
                     }
                 }
             }
@@ -9510,7 +9525,7 @@
                 "target": "com.amazonaws.s3#PutBucketIntelligentTieringConfigurationRequest"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Puts a S3 Intelligent-Tiering configuration to the specified bucket.\n      You can have up to 1,000 S3 Intelligent-Tiering configurations per bucket.</p>\n         <p>The S3 Intelligent-Tiering storage class is designed to optimize storage costs by automatically moving data to the most cost-effective storage access tier, without additional operational overhead. S3 Intelligent-Tiering delivers automatic cost savings by moving data between access tiers, when access patterns change.</p>\n         <p>The S3 Intelligent-Tiering storage class is suitable for objects larger than 128 KB that you plan to store for at least 30 days. If the size of an object is less than 128 KB, it is not eligible for auto-tiering. Smaller objects can be stored, but they are always charged at the frequent access tier rates in the S3 Intelligent-Tiering storage class. </p>\n         <p>If you delete an object before the end of the 30-day minimum storage duration period, you are charged for 30 days. For more information, see  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html#sc-dynamic-data-access\">Storage class for automatically optimizing frequently and infrequently accessed objects</a>.</p> \n         <p>Operations related to\n            <code>PutBucketIntelligentTieringConfiguration</code> include: </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketIntelligentTieringConfiguration.html\">DeleteBucketIntelligentTieringConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketIntelligentTieringConfiguration.html\">GetBucketIntelligentTieringConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketIntelligentTieringConfigurations.html\">ListBucketIntelligentTieringConfigurations</a>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>You only need S3 Intelligent-Tiering enabled on a bucket if you want to automatically\n            move objects stored in the S3 Intelligent-Tiering storage class to the\n            Archive Access or Deep Archive Access tier.</p>\n         </note>\n      \n         <p class=\"title\">\n            <b>Special Errors</b>\n         </p>\n         <ul>\n            <li>\n               <p class=\"title\">\n                  <b>HTTP 400 Bad Request Error</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Code:</i> InvalidArgument</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Cause:</i> Invalid Argument</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p class=\"title\">\n                  <b>HTTP 400 Bad Request Error</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Code:</i> TooManyConfigurations</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Cause:</i> You are attempting to create a new configuration\n                     but have already reached the 1,000-configuration limit. </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p class=\"title\">\n                  <b>HTTP 403 Forbidden Error</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Code:</i> AccessDenied</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Cause:</i> You are not the owner of the specified bucket,\n                     or you do not have the <code>s3:PutIntelligentTieringConfiguration</code> bucket\n                     permission to set the configuration on the bucket. </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Puts a S3 Intelligent-Tiering configuration to the specified bucket.\n      You can have up to 1,000 S3 Intelligent-Tiering configurations per bucket.</p>\n         <p>The S3 Intelligent-Tiering storage class is designed to optimize storage costs by automatically moving data to the most cost-effective storage access tier, without performance impact or operational overhead. S3 Intelligent-Tiering delivers automatic cost savings in two low latency and high throughput access tiers. For data that can be accessed asynchronously, you can choose to activate automatic archiving capabilities within the S3 Intelligent-Tiering storage class.</p>\n         <p>The S3 Intelligent-Tiering storage class is  the ideal storage class for data with unknown, changing, or unpredictable access patterns, independent of object size or retention period. If the size of an object is less than 128 KB, it is not eligible for auto-tiering. Smaller objects can be stored, but they are always charged at the Frequent Access tier rates in the S3 Intelligent-Tiering storage class.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html#sc-dynamic-data-access\">Storage class for automatically optimizing frequently and infrequently accessed objects</a>.</p> \n         <p>Operations related to\n            <code>PutBucketIntelligentTieringConfiguration</code> include: </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketIntelligentTieringConfiguration.html\">DeleteBucketIntelligentTieringConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketIntelligentTieringConfiguration.html\">GetBucketIntelligentTieringConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketIntelligentTieringConfigurations.html\">ListBucketIntelligentTieringConfigurations</a>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>You only need S3 Intelligent-Tiering enabled on a bucket if you want to automatically\n            move objects stored in the S3 Intelligent-Tiering storage class to the\n            Archive Access or Deep Archive Access tier.</p>\n         </note>\n      \n         <p class=\"title\">\n            <b>Special Errors</b>\n         </p>\n         <ul>\n            <li>\n               <p class=\"title\">\n                  <b>HTTP 400 Bad Request Error</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Code:</i> InvalidArgument</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Cause:</i> Invalid Argument</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p class=\"title\">\n                  <b>HTTP 400 Bad Request Error</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Code:</i> TooManyConfigurations</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Cause:</i> You are attempting to create a new configuration\n                     but have already reached the 1,000-configuration limit. </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p class=\"title\">\n                  <b>HTTP 403 Forbidden Error</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Code:</i> AccessDenied</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Cause:</i> You are not the owner of the specified bucket,\n                     or you do not have the <code>s3:PutIntelligentTieringConfiguration</code> bucket\n                     permission to set the configuration on the bucket. </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/{Bucket}?intelligent-tiering",
@@ -9581,13 +9596,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "ExpectedBucketOwner": {
-                    "target": "com.amazonaws.s3#AccountId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
-                        "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
-                    }
-                },
                 "InventoryConfiguration": {
                     "target": "com.amazonaws.s3#InventoryConfiguration",
                     "traits": {
@@ -9595,6 +9603,13 @@
                         "smithy.api#httpPayload": {},
                         "smithy.api#required": {},
                         "smithy.api#xmlName": "InventoryConfiguration"
+                    }
+                },
+                "ExpectedBucketOwner": {
+                    "target": "com.amazonaws.s3#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
+                        "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
                     }
                 }
             }
@@ -9625,19 +9640,19 @@
                         "smithy.api#required": {}
                     }
                 },
-                "ExpectedBucketOwner": {
-                    "target": "com.amazonaws.s3#AccountId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
-                        "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
-                    }
-                },
                 "LifecycleConfiguration": {
                     "target": "com.amazonaws.s3#BucketLifecycleConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Container for lifecycle rules. You can add as many as 1,000 rules.</p>",
                         "smithy.api#httpPayload": {},
                         "smithy.api#xmlName": "LifecycleConfiguration"
+                    }
+                },
+                "ExpectedBucketOwner": {
+                    "target": "com.amazonaws.s3#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
+                        "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
                     }
                 }
             }
@@ -9668,6 +9683,15 @@
                         "smithy.api#required": {}
                     }
                 },
+                "BucketLoggingStatus": {
+                    "target": "com.amazonaws.s3#BucketLoggingStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Container for logging status information.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "BucketLoggingStatus"
+                    }
+                },
                 "ContentMD5": {
                     "target": "com.amazonaws.s3#ContentMD5",
                     "traits": {
@@ -9681,15 +9705,6 @@
                         "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
                         "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
                     }
-                },
-                "BucketLoggingStatus": {
-                    "target": "com.amazonaws.s3#BucketLoggingStatus",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Container for logging status information.</p>",
-                        "smithy.api#httpPayload": {},
-                        "smithy.api#required": {},
-                        "smithy.api#xmlName": "BucketLoggingStatus"
-                    }
                 }
             }
         },
@@ -9699,7 +9714,7 @@
                 "target": "com.amazonaws.s3#PutBucketMetricsConfigurationRequest"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Sets a metrics configuration (specified by the metrics configuration ID) for the bucket.\n         You can have up to 1,000 metrics configurations per bucket. If you're updating an existing\n         metrics configuration, note that this is a full replacement of the existing metrics\n         configuration. If you don't include the elements you want to keep, they are erased.</p>\n\n         <p>To use this operation, you must have permissions to perform the\n            <code>s3:PutMetricsConfiguration</code> action. The bucket owner has this permission by\n         default. The bucket owner can grant this permission to others. For more information about\n         permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources\">Permissions Related to Bucket Subresource Operations</a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html\">Managing Access Permissions to Your Amazon S3\n            Resources</a>.</p>\n\n         <p>For information about CloudWatch request metrics for Amazon S3, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/cloudwatch-monitoring.html\">Monitoring Metrics with Amazon\n            CloudWatch</a>.</p>\n\n         <p>The following operations are related to\n         <code>PutBucketMetricsConfiguration</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetricsConfiguration.html\">DeleteBucketMetricsConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketMetricsConfiguration.html\">PutBucketMetricsConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketMetricsConfigurations.html\">ListBucketMetricsConfigurations</a>\n               </p>\n            </li>\n         </ul>\n\n         <p>\n            <code>GetBucketLifecycle</code> has the following special error:</p>\n         <ul>\n            <li>\n               <p>Error code: <code>TooManyConfigurations</code>\n               </p>\n               <ul>\n                  <li>\n                     <p>Description: You are attempting to create a new configuration but have\n                     already reached the 1,000-configuration limit.</p>\n                  </li>\n                  <li>\n                     <p>HTTP Status Code: HTTP 400 Bad Request</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Sets a metrics configuration (specified by the metrics configuration ID) for the bucket.\n         You can have up to 1,000 metrics configurations per bucket. If you're updating an existing\n         metrics configuration, note that this is a full replacement of the existing metrics\n         configuration. If you don't include the elements you want to keep, they are erased.</p>\n\n         <p>To use this operation, you must have permissions to perform the\n            <code>s3:PutMetricsConfiguration</code> action. The bucket owner has this permission by\n         default. The bucket owner can grant this permission to others. For more information about\n         permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources\">Permissions Related to Bucket Subresource Operations</a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html\">Managing Access Permissions to Your Amazon S3\n            Resources</a>.</p>\n\n         <p>For information about CloudWatch request metrics for Amazon S3, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/cloudwatch-monitoring.html\">Monitoring Metrics with Amazon\n            CloudWatch</a>.</p>\n\n         <p>The following operations are related to\n         <code>PutBucketMetricsConfiguration</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetricsConfiguration.html\">DeleteBucketMetricsConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetricsConfiguration.html\">GetBucketMetricsConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketMetricsConfigurations.html\">ListBucketMetricsConfigurations</a>\n               </p>\n            </li>\n         </ul>\n\n         <p>\n            <code>GetBucketLifecycle</code> has the following special error:</p>\n         <ul>\n            <li>\n               <p>Error code: <code>TooManyConfigurations</code>\n               </p>\n               <ul>\n                  <li>\n                     <p>Description: You are attempting to create a new configuration but have\n                     already reached the 1,000-configuration limit.</p>\n                  </li>\n                  <li>\n                     <p>HTTP Status Code: HTTP 400 Bad Request</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/{Bucket}?metrics",
@@ -9726,13 +9741,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "ExpectedBucketOwner": {
-                    "target": "com.amazonaws.s3#AccountId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
-                        "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
-                    }
-                },
                 "MetricsConfiguration": {
                     "target": "com.amazonaws.s3#MetricsConfiguration",
                     "traits": {
@@ -9740,6 +9748,13 @@
                         "smithy.api#httpPayload": {},
                         "smithy.api#required": {},
                         "smithy.api#xmlName": "MetricsConfiguration"
+                    }
+                },
+                "ExpectedBucketOwner": {
+                    "target": "com.amazonaws.s3#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
+                        "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
                     }
                 }
             }
@@ -9769,19 +9784,19 @@
                         "smithy.api#required": {}
                     }
                 },
-                "ExpectedBucketOwner": {
-                    "target": "com.amazonaws.s3#AccountId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
-                        "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
-                    }
-                },
                 "NotificationConfiguration": {
                     "target": "com.amazonaws.s3#NotificationConfiguration",
                     "traits": {
                         "smithy.api#httpPayload": {},
                         "smithy.api#required": {},
                         "smithy.api#xmlName": "NotificationConfiguration"
+                    }
+                },
+                "ExpectedBucketOwner": {
+                    "target": "com.amazonaws.s3#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
+                        "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
                     }
                 }
             }
@@ -9900,7 +9915,7 @@
                 "target": "com.amazonaws.s3#PutBucketReplicationRequest"
             },
             "traits": {
-                "smithy.api#documentation": "<p> Creates a replication configuration or replaces an existing one. For more information,\n         see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html\">Replication</a> in the <i>Amazon S3 User Guide</i>. </p>\n      \n         <p>Specify the replication configuration in the request body. In the replication\n         configuration, you provide the name of the destination bucket or buckets where you want\n         Amazon S3 to replicate objects, the IAM role that Amazon S3 can assume to replicate objects on your\n         behalf, and other relevant information.</p>\n\n\n         <p>A replication configuration must include at least one rule, and can contain a maximum of\n         1,000. Each rule identifies a subset of objects to replicate by filtering the objects in\n         the source bucket. To choose additional subsets of objects to replicate, add a rule for\n         each subset.</p>\n\n         <p>To specify a subset of the objects in the source bucket to apply a replication rule to,\n         add the Filter element as a child of the Rule element. You can filter objects based on an\n         object key prefix, one or more object tags, or both. When you add the Filter element in the\n         configuration, you must also add the following elements:\n            <code>DeleteMarkerReplication</code>, <code>Status</code>, and\n         <code>Priority</code>.</p>\n         <note>\n            <p>If you are using an earlier version of the replication configuration, Amazon S3 handles\n            replication of delete markers differently. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations\">Backward Compatibility</a>.</p>\n         </note>\n         <p>For information about enabling versioning on a bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html\">Using Versioning</a>.</p>\n\n         <p>\n            <b>Handling Replication of Encrypted Objects</b>\n         </p>\n         <p>By default, Amazon S3 doesn't replicate objects that are stored at rest using server-side\n         encryption with CMKs stored in Amazon Web Services KMS. To replicate Amazon Web Services KMS-encrypted objects, add the\n         following: <code>SourceSelectionCriteria</code>, <code>SseKmsEncryptedObjects</code>,\n            <code>Status</code>, <code>EncryptionConfiguration</code>, and\n            <code>ReplicaKmsKeyID</code>. For information about replication configuration, see\n            <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-config-for-kms-objects.html\">Replicating Objects\n            Created with SSE Using CMKs stored in Amazon Web Services KMS</a>.</p>\n\n         <p>For information on <code>PutBucketReplication</code> errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ReplicationErrorCodeList\">List of\n            replication-related error codes</a>\n         </p>\n\n         <p>\n            <b>Permissions</b>\n         </p>\n         <p>To create a <code>PutBucketReplication</code> request, you must have <code>s3:PutReplicationConfiguration</code> \n         permissions for the bucket. \n         </p>\n         <p>By default, a resource owner, in this case the Amazon Web Services account that created the bucket, can\n         perform this operation. The resource owner can also grant others permissions to perform the\n         operation. For more information about permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html\">Specifying Permissions in a Policy</a>\n         and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html\">Managing Access Permissions to Your\n            Amazon S3 Resources</a>.</p>\n         <note>\n            <p>To perform this operation, the user or role performing the action must have the\n               <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html\">iam:PassRole</a> permission.</p>\n         </note>\n\n         <p>The following operations are related to <code>PutBucketReplication</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketReplication.html\">GetBucketReplication</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketReplication.html\">DeleteBucketReplication</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p> Creates a replication configuration or replaces an existing one. For more information,\n         see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html\">Replication</a> in the <i>Amazon S3 User Guide</i>. </p>\n      \n         <p>Specify the replication configuration in the request body. In the replication\n         configuration, you provide the name of the destination bucket or buckets where you want\n         Amazon S3 to replicate objects, the IAM role that Amazon S3 can assume to replicate objects on your\n         behalf, and other relevant information.</p>\n\n\n         <p>A replication configuration must include at least one rule, and can contain a maximum of\n         1,000. Each rule identifies a subset of objects to replicate by filtering the objects in\n         the source bucket. To choose additional subsets of objects to replicate, add a rule for\n         each subset.</p>\n\n         <p>To specify a subset of the objects in the source bucket to apply a replication rule to,\n         add the Filter element as a child of the Rule element. You can filter objects based on an\n         object key prefix, one or more object tags, or both. When you add the Filter element in the\n         configuration, you must also add the following elements:\n            <code>DeleteMarkerReplication</code>, <code>Status</code>, and\n         <code>Priority</code>.</p>\n         <note>\n            <p>If you are using an earlier version of the replication configuration, Amazon S3 handles\n            replication of delete markers differently. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations\">Backward Compatibility</a>.</p>\n         </note>\n         <p>For information about enabling versioning on a bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html\">Using Versioning</a>.</p>\n\n         <p>\n            <b>Handling Replication of Encrypted Objects</b>\n         </p>\n         <p>By default, Amazon S3 doesn't replicate objects that are stored at rest using server-side\n         encryption with KMS keys. To replicate Amazon Web Services KMS-encrypted objects, add the\n         following: <code>SourceSelectionCriteria</code>, <code>SseKmsEncryptedObjects</code>,\n            <code>Status</code>, <code>EncryptionConfiguration</code>, and\n            <code>ReplicaKmsKeyID</code>. For information about replication configuration, see\n            <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-config-for-kms-objects.html\">Replicating Objects\n               Created with SSE Using KMS keys</a>.</p>\n\n         <p>For information on <code>PutBucketReplication</code> errors, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ReplicationErrorCodeList\">List of\n            replication-related error codes</a>\n         </p>\n\n         <p>\n            <b>Permissions</b>\n         </p>\n         <p>To create a <code>PutBucketReplication</code> request, you must have <code>s3:PutReplicationConfiguration</code> \n         permissions for the bucket. \n         </p>\n         <p>By default, a resource owner, in this case the Amazon Web Services account that created the bucket, can\n         perform this operation. The resource owner can also grant others permissions to perform the\n         operation. For more information about permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html\">Specifying Permissions in a Policy</a>\n         and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html\">Managing Access Permissions to Your\n            Amazon S3 Resources</a>.</p>\n         <note>\n            <p>To perform this operation, the user or role performing the action must have the\n               <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html\">iam:PassRole</a> permission.</p>\n         </note>\n\n         <p>The following operations are related to <code>PutBucketReplication</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketReplication.html\">GetBucketReplication</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketReplication.html\">DeleteBucketReplication</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/{Bucket}?replication",
@@ -9927,6 +9942,14 @@
                         "smithy.api#httpHeader": "Content-MD5"
                     }
                 },
+                "ReplicationConfiguration": {
+                    "target": "com.amazonaws.s3#ReplicationConfiguration",
+                    "traits": {
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "ReplicationConfiguration"
+                    }
+                },
                 "Token": {
                     "target": "com.amazonaws.s3#ObjectLockToken",
                     "traits": {
@@ -9939,14 +9962,6 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
                         "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
-                    }
-                },
-                "ReplicationConfiguration": {
-                    "target": "com.amazonaws.s3#ReplicationConfiguration",
-                    "traits": {
-                        "smithy.api#httpPayload": {},
-                        "smithy.api#required": {},
-                        "smithy.api#xmlName": "ReplicationConfiguration"
                     }
                 }
             }
@@ -9984,13 +9999,6 @@
                         "smithy.api#httpHeader": "Content-MD5"
                     }
                 },
-                "ExpectedBucketOwner": {
-                    "target": "com.amazonaws.s3#AccountId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
-                        "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
-                    }
-                },
                 "RequestPaymentConfiguration": {
                     "target": "com.amazonaws.s3#RequestPaymentConfiguration",
                     "traits": {
@@ -9998,6 +10006,13 @@
                         "smithy.api#httpPayload": {},
                         "smithy.api#required": {},
                         "smithy.api#xmlName": "RequestPaymentConfiguration"
+                    }
+                },
+                "ExpectedBucketOwner": {
+                    "target": "com.amazonaws.s3#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
+                        "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
                     }
                 }
             }
@@ -10035,13 +10050,6 @@
                         "smithy.api#httpHeader": "Content-MD5"
                     }
                 },
-                "ExpectedBucketOwner": {
-                    "target": "com.amazonaws.s3#AccountId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
-                        "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
-                    }
-                },
                 "Tagging": {
                     "target": "com.amazonaws.s3#Tagging",
                     "traits": {
@@ -10049,6 +10057,13 @@
                         "smithy.api#httpPayload": {},
                         "smithy.api#required": {},
                         "smithy.api#xmlName": "Tagging"
+                    }
+                },
+                "ExpectedBucketOwner": {
+                    "target": "com.amazonaws.s3#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
+                        "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
                     }
                 }
             }
@@ -10093,13 +10108,6 @@
                         "smithy.api#httpHeader": "x-amz-mfa"
                     }
                 },
-                "ExpectedBucketOwner": {
-                    "target": "com.amazonaws.s3#AccountId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
-                        "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
-                    }
-                },
                 "VersioningConfiguration": {
                     "target": "com.amazonaws.s3#VersioningConfiguration",
                     "traits": {
@@ -10107,6 +10115,13 @@
                         "smithy.api#httpPayload": {},
                         "smithy.api#required": {},
                         "smithy.api#xmlName": "VersioningConfiguration"
+                    }
+                },
+                "ExpectedBucketOwner": {
+                    "target": "com.amazonaws.s3#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
+                        "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
                     }
                 }
             }
@@ -10144,13 +10159,6 @@
                         "smithy.api#httpHeader": "Content-MD5"
                     }
                 },
-                "ExpectedBucketOwner": {
-                    "target": "com.amazonaws.s3#AccountId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
-                        "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
-                    }
-                },
                 "WebsiteConfiguration": {
                     "target": "com.amazonaws.s3#WebsiteConfiguration",
                     "traits": {
@@ -10158,6 +10166,13 @@
                         "smithy.api#httpPayload": {},
                         "smithy.api#required": {},
                         "smithy.api#xmlName": "WebsiteConfiguration"
+                    }
+                },
+                "ExpectedBucketOwner": {
+                    "target": "com.amazonaws.s3#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
+                        "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
                     }
                 }
             }
@@ -10221,6 +10236,14 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The canned ACL to apply to the object. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL\">Canned ACL</a>.</p>",
                         "smithy.api#httpHeader": "x-amz-acl"
+                    }
+                },
+                "AccessControlPolicy": {
+                    "target": "com.amazonaws.s3#AccessControlPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the elements that set the ACL permissions for an object per grantee.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#xmlName": "AccessControlPolicy"
                     }
                 },
                 "Bucket": {
@@ -10300,14 +10323,6 @@
                         "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
                         "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
                     }
-                },
-                "AccessControlPolicy": {
-                    "target": "com.amazonaws.s3#AccessControlPolicy",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Contains the elements that set the ACL permissions for an object per grantee.</p>",
-                        "smithy.api#httpPayload": {},
-                        "smithy.api#xmlName": "AccessControlPolicy"
-                    }
                 }
             }
         },
@@ -10359,6 +10374,14 @@
                         "smithy.api#required": {}
                     }
                 },
+                "LegalHold": {
+                    "target": "com.amazonaws.s3#ObjectLockLegalHold",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Container element for the Legal Hold configuration you want to apply to the specified\n         object.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#xmlName": "LegalHold"
+                    }
+                },
                 "RequestPayer": {
                     "target": "com.amazonaws.s3#RequestPayer",
                     "traits": {
@@ -10384,14 +10407,6 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
                         "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
-                    }
-                },
-                "LegalHold": {
-                    "target": "com.amazonaws.s3#ObjectLockLegalHold",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Container element for the Legal Hold configuration you want to apply to the specified\n         object.</p>",
-                        "smithy.api#httpPayload": {},
-                        "smithy.api#xmlName": "LegalHold"
                     }
                 }
             }
@@ -10436,6 +10451,14 @@
                         "smithy.api#required": {}
                     }
                 },
+                "ObjectLockConfiguration": {
+                    "target": "com.amazonaws.s3#ObjectLockConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Object Lock configuration that you want to apply to the specified bucket.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#xmlName": "ObjectLockConfiguration"
+                    }
+                },
                 "RequestPayer": {
                     "target": "com.amazonaws.s3#RequestPayer",
                     "traits": {
@@ -10462,14 +10485,6 @@
                         "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
                         "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
                     }
-                },
-                "ObjectLockConfiguration": {
-                    "target": "com.amazonaws.s3#ObjectLockConfiguration",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The Object Lock configuration that you want to apply to the specified bucket.</p>",
-                        "smithy.api#httpPayload": {},
-                        "smithy.api#xmlName": "ObjectLockConfiguration"
-                    }
                 }
             }
         },
@@ -10493,7 +10508,7 @@
                 "ServerSideEncryption": {
                     "target": "com.amazonaws.s3#ServerSideEncryption",
                     "traits": {
-                        "smithy.api#documentation": "<p>If you specified server-side encryption either with an Amazon Web Services KMS customer master key (CMK)\n         or Amazon S3-managed encryption key in your PUT request, the response includes this header. It\n         confirms the encryption algorithm that Amazon S3 used to encrypt the object.</p>",
+                        "smithy.api#documentation": "<p>If you specified server-side encryption either with an Amazon Web Services KMS key\n         or Amazon S3-managed encryption key in your PUT request, the response includes this header. It\n         confirms the encryption algorithm that Amazon S3 used to encrypt the object.</p>",
                         "smithy.api#httpHeader": "x-amz-server-side-encryption"
                     }
                 },
@@ -10521,7 +10536,7 @@
                 "SSEKMSKeyId": {
                     "target": "com.amazonaws.s3#SSEKMSKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>x-amz-server-side-encryption</code> is present and has the value of\n            <code>aws:kms</code>, this header specifies the ID of the Amazon Web Services Key Management Service\n         (Amazon Web Services KMS) symmetric customer managed customer master key (CMK) that was used for the\n         object. </p>",
+                        "smithy.api#documentation": "<p>If <code>x-amz-server-side-encryption</code> is present and has the value of\n            <code>aws:kms</code>, this header specifies the ID of the Amazon Web Services Key Management Service\n         (Amazon Web Services KMS) symmetric customer managed key that was used for the\n         object. </p>",
                         "smithy.api#httpHeader": "x-amz-server-side-encryption-aws-kms-key-id"
                     }
                 },
@@ -10716,7 +10731,7 @@
                 "SSEKMSKeyId": {
                     "target": "com.amazonaws.s3#SSEKMSKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>x-amz-server-side-encryption</code> is present and has the value of\n         <code>aws:kms</code>, this header specifies the ID of the Amazon Web Services Key Management Service\n         (Amazon Web Services KMS) symmetrical customer managed customer master key (CMK) that was used for the\n         object. If you specify <code>x-amz-server-side-encryption:aws:kms</code>, but do not\n         provide<code> x-amz-server-side-encryption-aws-kms-key-id</code>, Amazon S3 uses the Amazon Web Services\n         managed CMK in Amazon Web Services to protect the data. If the KMS key does not exist in the same account\n         issuing the command, you must use the full ARN and not just the ID.\n      </p>",
+                        "smithy.api#documentation": "<p>If <code>x-amz-server-side-encryption</code> is present and has the value of\n         <code>aws:kms</code>, this header specifies the ID of the Amazon Web Services Key Management Service\n         (Amazon Web Services KMS) symmetrical customer managed key that was used for the\n         object. If you specify <code>x-amz-server-side-encryption:aws:kms</code>, but do not\n         provide<code> x-amz-server-side-encryption-aws-kms-key-id</code>, Amazon S3 uses the Amazon Web Services\n         managed key to protect the data. If the KMS key does not exist in the same account\n         issuing the command, you must use the full ARN and not just the ID.\n      </p>",
                         "smithy.api#httpHeader": "x-amz-server-side-encryption-aws-kms-key-id"
                     }
                 },
@@ -10825,6 +10840,14 @@
                         "smithy.api#required": {}
                     }
                 },
+                "Retention": {
+                    "target": "com.amazonaws.s3#ObjectLockRetention",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container element for the Object Retention configuration.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#xmlName": "Retention"
+                    }
+                },
                 "RequestPayer": {
                     "target": "com.amazonaws.s3#RequestPayer",
                     "traits": {
@@ -10857,14 +10880,6 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
                         "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
-                    }
-                },
-                "Retention": {
-                    "target": "com.amazonaws.s3#ObjectLockRetention",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The container element for the Object Retention configuration.</p>",
-                        "smithy.api#httpPayload": {},
-                        "smithy.api#xmlName": "Retention"
                     }
                 }
             }
@@ -10932,6 +10947,15 @@
                         "smithy.api#httpHeader": "Content-MD5"
                     }
                 },
+                "Tagging": {
+                    "target": "com.amazonaws.s3#Tagging",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Container for the <code>TagSet</code> and <code>Tag</code> elements</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "Tagging"
+                    }
+                },
                 "ExpectedBucketOwner": {
                     "target": "com.amazonaws.s3#AccountId",
                     "traits": {
@@ -10943,15 +10967,6 @@
                     "target": "com.amazonaws.s3#RequestPayer",
                     "traits": {
                         "smithy.api#httpHeader": "x-amz-request-payer"
-                    }
-                },
-                "Tagging": {
-                    "target": "com.amazonaws.s3#Tagging",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Container for the <code>TagSet</code> and <code>Tag</code> elements</p>",
-                        "smithy.api#httpPayload": {},
-                        "smithy.api#required": {},
-                        "smithy.api#xmlName": "Tagging"
                     }
                 }
             }
@@ -10989,13 +11004,6 @@
                         "smithy.api#httpHeader": "Content-MD5"
                     }
                 },
-                "ExpectedBucketOwner": {
-                    "target": "com.amazonaws.s3#AccountId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
-                        "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
-                    }
-                },
                 "PublicAccessBlockConfiguration": {
                     "target": "com.amazonaws.s3#PublicAccessBlockConfiguration",
                     "traits": {
@@ -11003,6 +11011,13 @@
                         "smithy.api#httpPayload": {},
                         "smithy.api#required": {},
                         "smithy.api#xmlName": "PublicAccessBlockConfiguration"
+                    }
+                },
+                "ExpectedBucketOwner": {
+                    "target": "com.amazonaws.s3#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
+                        "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
                     }
                 }
             }
@@ -11249,7 +11264,7 @@
                 "SourceSelectionCriteria": {
                     "target": "com.amazonaws.s3#SourceSelectionCriteria",
                     "traits": {
-                        "smithy.api#documentation": "<p>A container that describes additional filters for identifying the source objects that\n         you want to replicate. You can choose to enable or disable the replication of these\n         objects. Currently, Amazon S3 supports only the filter that you can specify for objects created\n         with server-side encryption using a customer master key (CMK) stored in Amazon Web Services Key Management\n         Service (SSE-KMS).</p>"
+                        "smithy.api#documentation": "<p>A container that describes additional filters for identifying the source objects that\n         you want to replicate. You can choose to enable or disable the replication of these\n         objects. Currently, Amazon S3 supports only the filter that you can specify for objects created\n         with server-side encryption using a customer managed key stored in Amazon Web Services Key Management\n         Service (SSE-KMS).</p>"
                     }
                 },
                 "ExistingObjectReplication": {
@@ -11565,6 +11580,13 @@
                         "smithy.api#httpQuery": "versionId"
                     }
                 },
+                "RestoreRequest": {
+                    "target": "com.amazonaws.s3#RestoreRequest",
+                    "traits": {
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#xmlName": "RestoreRequest"
+                    }
+                },
                 "RequestPayer": {
                     "target": "com.amazonaws.s3#RequestPayer",
                     "traits": {
@@ -11576,13 +11598,6 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
                         "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
-                    }
-                },
-                "RestoreRequest": {
-                    "target": "com.amazonaws.s3#RestoreRequest",
-                    "traits": {
-                        "smithy.api#httpPayload": {},
-                        "smithy.api#xmlName": "RestoreRequest"
                     }
                 }
             }
@@ -11772,7 +11787,7 @@
                 "KeyId": {
                     "target": "com.amazonaws.s3#SSEKMSKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ID of the Amazon Web Services Key Management Service (Amazon Web Services KMS) symmetric customer managed\n         customer master key (CMK) to use for encrypting inventory reports.</p>",
+                        "smithy.api#documentation": "<p>Specifies the ID of the Amazon Web Services Key Management Service (Amazon Web Services KMS) symmetric customer managed key\n         to use for encrypting inventory reports.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -11831,7 +11846,7 @@
                 "target": "com.amazonaws.s3#SelectObjectContentOutput"
             },
             "traits": {
-                "smithy.api#documentation": "<p>This action filters the contents of an Amazon S3 object based on a simple structured query\n         language (SQL) statement. In the request, along with the SQL expression, you must also\n         specify a data serialization format (JSON, CSV, or Apache Parquet) of the object. Amazon S3 uses\n         this format to parse object data into records, and returns only records that match the\n         specified SQL expression. You must also specify the data serialization format for the\n         response.</p> \n         <p>This action is not supported by Amazon S3 on Outposts.</p> \n         <p>For more information about Amazon S3 Select,\n         see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/selecting-content-from-objects.html\">Selecting Content from\n            Objects</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <p>For more information about using SQL with Amazon S3 Select, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-glacier-select-sql-reference.html\"> SQL Reference for Amazon S3 Select\n            and S3 Glacier Select</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <p></p>\n         <p>\n            <b>Permissions</b>\n         </p>\n         <p>You must have <code>s3:GetObject</code> permission for this operation. Amazon S3 Select does\n         not support anonymous access. For more information about permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html\">Specifying Permissions in a Policy</a>\n         in the <i>Amazon S3 User Guide</i>.</p>\n         <p></p>\n         <p>\n            <i>Object Data Formats</i>\n         </p>\n         <p>You can use Amazon S3 Select to query objects that have the following format\n         properties:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>CSV, JSON, and Parquet</i> - Objects must be in CSV, JSON, or\n               Parquet format.</p>\n            </li>\n            <li>\n               <p>\n                  <i>UTF-8</i> - UTF-8 is the only encoding type Amazon S3 Select\n               supports.</p>\n            </li>\n            <li>\n               <p>\n                  <i>GZIP or BZIP2</i> - CSV and JSON files can be compressed using\n               GZIP or BZIP2. GZIP and BZIP2 are the only compression formats that Amazon S3 Select\n               supports for CSV and JSON files. Amazon S3 Select supports columnar compression for\n               Parquet using GZIP or Snappy. Amazon S3 Select does not support whole-object compression\n               for Parquet objects.</p>\n            </li>\n            <li>\n               <p>\n                  <i>Server-side encryption</i> - Amazon S3 Select supports querying\n               objects that are protected with server-side encryption.</p>\n               <p>For objects that are encrypted with customer-provided encryption keys (SSE-C), you\n               must use HTTPS, and you must use the headers that are documented in the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html\">GetObject</a>. For more information about SSE-C, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html\">Server-Side Encryption\n                  (Using Customer-Provided Encryption Keys)</a> in the\n                  <i>Amazon S3 User Guide</i>.</p>\n               <p>For objects that are encrypted with Amazon S3 managed encryption keys (SSE-S3) and\n               customer master keys (CMKs) stored in Amazon Web Services Key Management Service (SSE-KMS),\n               server-side encryption is handled transparently, so you don't need to specify\n               anything. For more information about server-side encryption, including SSE-S3 and\n               SSE-KMS, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html\">Protecting Data Using\n                  Server-Side Encryption</a> in the <i>Amazon S3 User Guide</i>.</p>\n            </li>\n         </ul>\n\n         <p>\n            <b>Working with the Response Body</b>\n         </p>\n         <p>Given the response size is unknown, Amazon S3 Select streams the response as a series of\n         messages and includes a <code>Transfer-Encoding</code> header with <code>chunked</code> as\n         its value in the response. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/RESTSelectObjectAppendix.html\">Appendix: SelectObjectContent\n            Response</a>.</p>\n\n         <p></p>\n         <p>\n            <b>GetObject Support</b>\n         </p>\n         <p>The <code>SelectObjectContent</code> action does not support the following\n            <code>GetObject</code> functionality. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html\">GetObject</a>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Range</code>: Although you can specify a scan range for an Amazon S3 Select request\n               (see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_SelectObjectContent.html#AmazonS3-SelectObjectContent-request-ScanRange\">SelectObjectContentRequest - ScanRange</a> in the request parameters),\n               you cannot specify the range of bytes of an object to return. </p>\n            </li>\n            <li>\n               <p>GLACIER, DEEP_ARCHIVE and REDUCED_REDUNDANCY storage classes: You cannot specify\n               the GLACIER, DEEP_ARCHIVE, or <code>REDUCED_REDUNDANCY</code> storage classes. For\n               more information, about storage classes see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#storage-class-intro\">Storage Classes</a>\n               in the <i>Amazon S3 User Guide</i>.</p>\n            </li>\n         </ul>\n         <p></p>\n         <p>\n            <b>Special Errors</b>\n         </p>\n\n         <p>For a list of special errors for this operation, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#SelectObjectContentErrorCodeList\">List of\n            SELECT Object Content Error Codes</a>\n         </p>\n         <p class=\"title\">\n            <b>Related Resources</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html\">GetObject</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLifecycleConfiguration.html\">GetBucketLifecycleConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycleConfiguration.html\">PutBucketLifecycleConfiguration</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>This action filters the contents of an Amazon S3 object based on a simple structured query\n         language (SQL) statement. In the request, along with the SQL expression, you must also\n         specify a data serialization format (JSON, CSV, or Apache Parquet) of the object. Amazon S3 uses\n         this format to parse object data into records, and returns only records that match the\n         specified SQL expression. You must also specify the data serialization format for the\n         response.</p> \n         <p>This action is not supported by Amazon S3 on Outposts.</p> \n         <p>For more information about Amazon S3 Select,\n         see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/selecting-content-from-objects.html\">Selecting Content from\n            Objects</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <p>For more information about using SQL with Amazon S3 Select, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-glacier-select-sql-reference.html\"> SQL Reference for Amazon S3 Select\n            and S3 Glacier Select</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <p></p>\n         <p>\n            <b>Permissions</b>\n         </p>\n         <p>You must have <code>s3:GetObject</code> permission for this operation. Amazon S3 Select does\n         not support anonymous access. For more information about permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html\">Specifying Permissions in a Policy</a>\n         in the <i>Amazon S3 User Guide</i>.</p>\n         <p></p>\n         <p>\n            <i>Object Data Formats</i>\n         </p>\n         <p>You can use Amazon S3 Select to query objects that have the following format\n         properties:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>CSV, JSON, and Parquet</i> - Objects must be in CSV, JSON, or\n               Parquet format.</p>\n            </li>\n            <li>\n               <p>\n                  <i>UTF-8</i> - UTF-8 is the only encoding type Amazon S3 Select\n               supports.</p>\n            </li>\n            <li>\n               <p>\n                  <i>GZIP or BZIP2</i> - CSV and JSON files can be compressed using\n               GZIP or BZIP2. GZIP and BZIP2 are the only compression formats that Amazon S3 Select\n               supports for CSV and JSON files. Amazon S3 Select supports columnar compression for\n               Parquet using GZIP or Snappy. Amazon S3 Select does not support whole-object compression\n               for Parquet objects.</p>\n            </li>\n            <li>\n               <p>\n                  <i>Server-side encryption</i> - Amazon S3 Select supports querying\n               objects that are protected with server-side encryption.</p>\n               <p>For objects that are encrypted with customer-provided encryption keys (SSE-C), you\n               must use HTTPS, and you must use the headers that are documented in the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html\">GetObject</a>. For more information about SSE-C, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html\">Server-Side Encryption\n                  (Using Customer-Provided Encryption Keys)</a> in the\n                  <i>Amazon S3 User Guide</i>.</p>\n               <p>For objects that are encrypted with Amazon S3 managed encryption keys (SSE-S3) and\n               Amazon Web Services KMS keys (SSE-KMS),\n               server-side encryption is handled transparently, so you don't need to specify\n               anything. For more information about server-side encryption, including SSE-S3 and\n               SSE-KMS, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html\">Protecting Data Using\n                  Server-Side Encryption</a> in the <i>Amazon S3 User Guide</i>.</p>\n            </li>\n         </ul>\n\n         <p>\n            <b>Working with the Response Body</b>\n         </p>\n         <p>Given the response size is unknown, Amazon S3 Select streams the response as a series of\n         messages and includes a <code>Transfer-Encoding</code> header with <code>chunked</code> as\n         its value in the response. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/RESTSelectObjectAppendix.html\">Appendix: SelectObjectContent\n            Response</a>.</p>\n\n         <p></p>\n         <p>\n            <b>GetObject Support</b>\n         </p>\n         <p>The <code>SelectObjectContent</code> action does not support the following\n            <code>GetObject</code> functionality. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html\">GetObject</a>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Range</code>: Although you can specify a scan range for an Amazon S3 Select request\n               (see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_SelectObjectContent.html#AmazonS3-SelectObjectContent-request-ScanRange\">SelectObjectContentRequest - ScanRange</a> in the request parameters),\n               you cannot specify the range of bytes of an object to return. </p>\n            </li>\n            <li>\n               <p>GLACIER, DEEP_ARCHIVE and REDUCED_REDUNDANCY storage classes: You cannot specify\n               the GLACIER, DEEP_ARCHIVE, or <code>REDUCED_REDUNDANCY</code> storage classes. For\n               more information, about storage classes see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#storage-class-intro\">Storage Classes</a>\n               in the <i>Amazon S3 User Guide</i>.</p>\n            </li>\n         </ul>\n         <p></p>\n         <p>\n            <b>Special Errors</b>\n         </p>\n\n         <p>For a list of special errors for this operation, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#SelectObjectContentErrorCodeList\">List of\n            SELECT Object Content Error Codes</a>\n         </p>\n         <p class=\"title\">\n            <b>Related Resources</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html\">GetObject</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLifecycleConfiguration.html\">GetBucketLifecycleConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycleConfiguration.html\">PutBucketLifecycleConfiguration</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/{Bucket}/{Key+}?select&select-type=2&x-id=SelectObjectContent",
@@ -12101,7 +12116,7 @@
             "type": "boolean"
         },
         "com.amazonaws.s3#Size": {
-            "type": "integer"
+            "type": "long"
         },
         "com.amazonaws.s3#SourceSelectionCriteria": {
             "type": "structure",
@@ -12120,7 +12135,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A container that describes additional filters for identifying the source objects that\n         you want to replicate. You can choose to enable or disable the replication of these\n         objects. Currently, Amazon S3 supports only the filter that you can specify for objects created\n         with server-side encryption using a customer master key (CMK) stored in Amazon Web Services Key Management\n         Service (SSE-KMS).</p>"
+                "smithy.api#documentation": "<p>A container that describes additional filters for identifying the source objects that\n         you want to replicate. You can choose to enable or disable the replication of these\n         objects. Currently, Amazon S3 supports only the filter that you can specify for objects created\n         with server-side encryption using a customer managed key stored in Amazon Web Services Key Management\n         Service (SSE-KMS).</p>"
             }
         },
         "com.amazonaws.s3#SseKmsEncryptedObjects": {
@@ -12650,7 +12665,7 @@
                 "SSEKMSKeyId": {
                     "target": "com.amazonaws.s3#SSEKMSKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>If present, specifies the ID of the Amazon Web Services Key Management Service (Amazon Web Services KMS) symmetric\n         customer managed customer master key (CMK) that was used for the object.</p>",
+                        "smithy.api#documentation": "<p>If present, specifies the ID of the Amazon Web Services Key Management Service (Amazon Web Services KMS) symmetric\n         customer managed key that was used for the object.</p>",
                         "smithy.api#httpHeader": "x-amz-server-side-encryption-aws-kms-key-id"
                     }
                 },
@@ -12845,7 +12860,7 @@
                 "SSEKMSKeyId": {
                     "target": "com.amazonaws.s3#SSEKMSKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>If present, specifies the ID of the Amazon Web Services Key Management Service (Amazon Web Services KMS) symmetric\n         customer managed customer master key (CMK) was used for the object.</p>",
+                        "smithy.api#documentation": "<p>If present, specifies the ID of the Amazon Web Services Key Management Service (Amazon Web Services KMS) symmetric\n         customer managed key was used for the object.</p>",
                         "smithy.api#httpHeader": "x-amz-server-side-encryption-aws-kms-key-id"
                     }
                 },
@@ -13037,7 +13052,7 @@
                 "smithy.api#auth": [
                     "aws.auth#sigv4"
                 ],
-                "smithy.api#documentation": "<p>Passes transformed\n         objects to a <code>GetObject</code> operation when using Object Lambda Access Points. For information about\n         Object Lambda Access Points, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/transforming-objects.html\">Transforming objects with\n            Object Lambda Access Points</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <p>This operation supports metadata that can be returned by <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html\">GetObject</a>, in addition to\n           <code>RequestRoute</code>, <code>RequestToken</code>, <code>StatusCode</code>,\n           <code>ErrorCode</code>, and <code>ErrorMessage</code>. The <code>GetObject</code>\n        response metadata is supported so that the <code>WriteGetObjectResponse</code> caller,\n        typically an Lambda function, can provide the same metadata when it internally invokes\n           <code>GetObject</code>. When <code>WriteGetObjectResponse</code> is called by a\n        customer-owned Lambda function, the metadata returned to the end user\n           <code>GetObject</code> call might differ from what Amazon S3 would normally return.</p>\n         <p>You can include any number of metadata headers. When including a metadata header, it should be\n         prefaced with <code>x-amz-meta</code>. For example, <code>x-amz-meta-my-custom-header: MyCustomValue</code>.\n         The primary use case for this is to forward <code>GetObject</code> metadata.</p>\n         <p>Amazon Web Services provides some prebuilt Lambda functions that you can use with S3 Object Lambda to detect and redact\n         personally identifiable information (PII) and decompress S3 objects. These Lambda functions\n         are available in the Amazon Web Services Serverless Application Repository, and can be selected through the Amazon Web Services Management Console when you create your\n         Object Lambda Access Point.</p>\n         <p>Example 1: PII Access Control - This Lambda function uses Amazon Comprehend, a natural language processing (NLP) service using machine learning to find insights and relationships in text. It automatically detects personally identifiable information (PII) such as names, addresses, dates, credit card numbers, and social security numbers from documents in your Amazon S3 bucket. </p>\n         <p>Example 2: PII Redaction - This Lambda function uses Amazon Comprehend, a natural language processing (NLP) service using machine learning to find insights and relationships in text. It automatically redacts personally identifiable information (PII) such as names, addresses, dates, credit card numbers, and social security numbers from documents in your Amazon S3 bucket. </p>\n         <p>Example 3: Decompression - The Lambda function S3ObjectLambdaDecompression, is equipped to decompress objects stored in S3 in one of six compressed file formats including bzip2, gzip, snappy, zlib, zstandard and ZIP. </p>\n         <p>For information on how to view and use these functions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/olap-examples.html\">Using Amazon Web Services built Lambda functions</a> in the <i>Amazon S3 User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Passes transformed\n         objects to a <code>GetObject</code> operation when using Object Lambda access points. For information about\n         Object Lambda access points, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/transforming-objects.html\">Transforming objects with\n            Object Lambda access points</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <p>This operation supports metadata that can be returned by <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html\">GetObject</a>, in addition to\n           <code>RequestRoute</code>, <code>RequestToken</code>, <code>StatusCode</code>,\n           <code>ErrorCode</code>, and <code>ErrorMessage</code>. The <code>GetObject</code>\n        response metadata is supported so that the <code>WriteGetObjectResponse</code> caller,\n        typically an Lambda function, can provide the same metadata when it internally invokes\n           <code>GetObject</code>. When <code>WriteGetObjectResponse</code> is called by a\n        customer-owned Lambda function, the metadata returned to the end user\n           <code>GetObject</code> call might differ from what Amazon S3 would normally return.</p>\n         <p>You can include any number of metadata headers. When including a metadata header, it should be\n         prefaced with <code>x-amz-meta</code>. For example, <code>x-amz-meta-my-custom-header: MyCustomValue</code>.\n         The primary use case for this is to forward <code>GetObject</code> metadata.</p>\n         <p>Amazon Web Services provides some prebuilt Lambda functions that you can use with S3 Object Lambda to detect and redact\n         personally identifiable information (PII) and decompress S3 objects. These Lambda functions\n         are available in the Amazon Web Services Serverless Application Repository, and can be selected through the Amazon Web Services Management Console when you create your\n         Object Lambda access point.</p>\n         <p>Example 1: PII Access Control - This Lambda function uses Amazon Comprehend, a natural language processing (NLP) service using machine learning to find insights and relationships in text. It automatically detects personally identifiable information (PII) such as names, addresses, dates, credit card numbers, and social security numbers from documents in your Amazon S3 bucket. </p>\n         <p>Example 2: PII Redaction - This Lambda function uses Amazon Comprehend, a natural language processing (NLP) service using machine learning to find insights and relationships in text. It automatically redacts personally identifiable information (PII) such as names, addresses, dates, credit card numbers, and social security numbers from documents in your Amazon S3 bucket. </p>\n         <p>Example 3: Decompression - The Lambda function S3ObjectLambdaDecompression, is equipped to decompress objects stored in S3 in one of six compressed file formats including bzip2, gzip, snappy, zlib, zstandard and ZIP. </p>\n         <p>For information on how to view and use these functions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/olap-examples.html\">Using Amazon Web Services built Lambda functions</a> in the <i>Amazon S3 User Guide</i>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{RequestRoute}."
                 },
@@ -13266,7 +13281,7 @@
                 "SSEKMSKeyId": {
                     "target": "com.amazonaws.s3#SSEKMSKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p> If present, specifies the ID of the Amazon Web Services Key Management Service (Amazon Web Services KMS) symmetric customer managed customer master key (CMK) that was used for stored in Amazon S3 object. </p>",
+                        "smithy.api#documentation": "<p> If present, specifies the ID of the Amazon Web Services Key Management Service (Amazon Web Services KMS) symmetric customer managed key that was used for stored in Amazon S3 object. </p>",
                         "smithy.api#httpHeader": "x-amz-fwd-header-x-amz-server-side-encryption-aws-kms-key-id"
                     }
                 },

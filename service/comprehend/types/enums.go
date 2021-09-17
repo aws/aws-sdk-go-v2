@@ -2,6 +2,25 @@
 
 package types
 
+type AugmentedManifestsDocumentTypeFormat string
+
+// Enum values for AugmentedManifestsDocumentTypeFormat
+const (
+	AugmentedManifestsDocumentTypeFormatPlainTextDocument      AugmentedManifestsDocumentTypeFormat = "PLAIN_TEXT_DOCUMENT"
+	AugmentedManifestsDocumentTypeFormatSemiStructuredDocument AugmentedManifestsDocumentTypeFormat = "SEMI_STRUCTURED_DOCUMENT"
+)
+
+// Values returns all known values for AugmentedManifestsDocumentTypeFormat. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AugmentedManifestsDocumentTypeFormat) Values() []AugmentedManifestsDocumentTypeFormat {
+	return []AugmentedManifestsDocumentTypeFormat{
+		"PLAIN_TEXT_DOCUMENT",
+		"SEMI_STRUCTURED_DOCUMENT",
+	}
+}
+
 type DocumentClassifierDataFormat string
 
 // Enum values for DocumentClassifierDataFormat
@@ -35,6 +54,60 @@ func (DocumentClassifierMode) Values() []DocumentClassifierMode {
 	return []DocumentClassifierMode{
 		"MULTI_CLASS",
 		"MULTI_LABEL",
+	}
+}
+
+type DocumentReadAction string
+
+// Enum values for DocumentReadAction
+const (
+	DocumentReadActionTextractDetectDocumentText DocumentReadAction = "TEXTRACT_DETECT_DOCUMENT_TEXT"
+	DocumentReadActionTextractAnalyzeDocument    DocumentReadAction = "TEXTRACT_ANALYZE_DOCUMENT"
+)
+
+// Values returns all known values for DocumentReadAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DocumentReadAction) Values() []DocumentReadAction {
+	return []DocumentReadAction{
+		"TEXTRACT_DETECT_DOCUMENT_TEXT",
+		"TEXTRACT_ANALYZE_DOCUMENT",
+	}
+}
+
+type DocumentReadFeatureTypes string
+
+// Enum values for DocumentReadFeatureTypes
+const (
+	DocumentReadFeatureTypesTables DocumentReadFeatureTypes = "TABLES"
+	DocumentReadFeatureTypesForms  DocumentReadFeatureTypes = "FORMS"
+)
+
+// Values returns all known values for DocumentReadFeatureTypes. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DocumentReadFeatureTypes) Values() []DocumentReadFeatureTypes {
+	return []DocumentReadFeatureTypes{
+		"TABLES",
+		"FORMS",
+	}
+}
+
+type DocumentReadMode string
+
+// Enum values for DocumentReadMode
+const (
+	DocumentReadModeServiceDefault          DocumentReadMode = "SERVICE_DEFAULT"
+	DocumentReadModeForceDocumentReadAction DocumentReadMode = "FORCE_DOCUMENT_READ_ACTION"
+)
+
+// Values returns all known values for DocumentReadMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DocumentReadMode) Values() []DocumentReadMode {
+	return []DocumentReadMode{
+		"SERVICE_DEFAULT",
+		"FORCE_DOCUMENT_READ_ACTION",
 	}
 }
 

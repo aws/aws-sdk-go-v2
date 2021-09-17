@@ -45,27 +45,26 @@ import (
 // multipart upload. You can optionally request server-side encryption. For
 // server-side encryption, Amazon S3 encrypts your data as it writes it to disks in
 // its data centers and decrypts it when you access it. You can provide your own
-// encryption key, or use Amazon Web Services Key Management Service (Amazon Web
-// Services KMS) customer master keys (CMKs) or Amazon S3-managed encryption keys.
-// If you choose to provide your own encryption key, the request headers you
-// provide in UploadPart
+// encryption key, or use Amazon Web Services KMS keys or Amazon S3-managed
+// encryption keys. If you choose to provide your own encryption key, the request
+// headers you provide in UploadPart
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html) and
 // UploadPartCopy
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html)
 // requests must match the headers you used in the request to initiate the upload
 // by using CreateMultipartUpload. To perform a multipart upload with encryption
-// using an Amazon Web Services KMS CMK, the requester must have permission to the
+// using an Amazon Web Services KMS key, the requester must have permission to the
 // kms:Decrypt and kms:GenerateDataKey* actions on the key. These permissions are
 // required because Amazon S3 must decrypt and read data from the encrypted file
 // parts before it completes the multipart upload. For more information, see
 // Multipart upload API and permissions
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html#mpuAndPermissions)
 // in the Amazon S3 User Guide. If your Identity and Access Management (IAM) user
-// or role is in the same Amazon Web Services account as the Amazon Web Services
-// KMS CMK, then you must have these permissions on the key policy. If your IAM
-// user or role belongs to a different account than the key, then you must have the
-// permissions on both the key policy and your IAM user or role. For more
-// information, see Protecting Data Using Server-Side Encryption
+// or role is in the same Amazon Web Services account as the KMS key, then you must
+// have these permissions on the key policy. If your IAM user or role belongs to a
+// different account than the key, then you must have the permissions on both the
+// key policy and your IAM user or role. For more information, see Protecting Data
+// Using Server-Side Encryption
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html).
 // Access Permissions When copying an object, you can optionally specify the
 // accounts or groups that should be granted specific permissions on the new
@@ -93,10 +92,10 @@ import (
 // encryption keys or provide your own encryption key.
 //
 // * Use encryption keys
-// managed by Amazon S3 or customer master keys (CMKs) stored in Amazon Web
-// Services Key Management Service (Amazon Web Services KMS) – If you want Amazon
-// Web Services to manage the keys used to encrypt data, specify the following
-// headers in the request.
+// managed by Amazon S3 or customer managed key stored in Amazon Web Services Key
+// Management Service (Amazon Web Services KMS) – If you want Amazon Web Services
+// to manage the keys used to encrypt data, specify the following headers in the
+// request.
 //
 // * x-amz-server-side-encryption
 //
@@ -109,12 +108,11 @@ import (
 // If you specify
 // x-amz-server-side-encryption:aws:kms, but don't provide
 // x-amz-server-side-encryption-aws-kms-key-id, Amazon S3 uses the Amazon Web
-// Services managed CMK in Amazon Web Services KMS to protect the data. All GET and
+// Services managed key in Amazon Web Services KMS to protect the data. All GET and
 // PUT requests for an object protected by Amazon Web Services KMS fail if you
 // don't make them with SSL or by using SigV4. For more information about
-// server-side encryption with CMKs stored in Amazon Web Services KMS (SSE-KMS),
-// see Protecting Data Using Server-Side Encryption with CMKs stored in Amazon Web
-// Services KMS
+// server-side encryption with KMS key (SSE-KMS), see Protecting Data Using
+// Server-Side Encryption with KMS keys
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html).
 //
 // *
@@ -131,9 +129,8 @@ import (
 // x-amz-server-side-encryption-customer-key-MD5
 //
 // For more information about
-// server-side encryption with CMKs stored in Amazon Web Services KMS (SSE-KMS),
-// see Protecting Data Using Server-Side Encryption with CMKs stored in Amazon Web
-// Services KMS
+// server-side encryption with KMS keys (SSE-KMS), see Protecting Data Using
+// Server-Side Encryption with KMS keys
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html).
 //
 // Access-Control-List
@@ -371,12 +368,12 @@ type CreateMultipartUploadInput struct {
 	// JSON with the encryption context key-value pairs.
 	SSEKMSEncryptionContext *string
 
-	// Specifies the ID of the symmetric customer managed Amazon Web Services KMS CMK
-	// to use for object encryption. All GET and PUT requests for an object protected
-	// by Amazon Web Services KMS will fail if not made via SSL or using SigV4. For
-	// information about configuring using any of the officially supported Amazon Web
-	// Services SDKs and Amazon Web Services CLI, see Specifying the Signature Version
-	// in Request Authentication
+	// Specifies the ID of the symmetric customer managed key to use for object
+	// encryption. All GET and PUT requests for an object protected by Amazon Web
+	// Services KMS will fail if not made via SSL or using SigV4. For information about
+	// configuring using any of the officially supported Amazon Web Services SDKs and
+	// Amazon Web Services CLI, see Specifying the Signature Version in Request
+	// Authentication
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version)
 	// in the Amazon S3 User Guide.
 	SSEKMSKeyId *string
@@ -469,8 +466,8 @@ type CreateMultipartUploadOutput struct {
 	SSEKMSEncryptionContext *string
 
 	// If present, specifies the ID of the Amazon Web Services Key Management Service
-	// (Amazon Web Services KMS) symmetric customer managed customer master key (CMK)
-	// that was used for the object.
+	// (Amazon Web Services KMS) symmetric customer managed key that was used for the
+	// object.
 	SSEKMSKeyId *string
 
 	// The server-side encryption algorithm used when storing this object in Amazon S3

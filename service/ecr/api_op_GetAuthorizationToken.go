@@ -16,8 +16,8 @@ import (
 // that your IAM principal has access to. The authorization token is valid for 12
 // hours. The authorizationToken returned is a base64 encoded string that can be
 // decoded and used in a docker login command to authenticate to a registry. The
-// AWS CLI offers an get-login-password command that simplifies the login process.
-// For more information, see Registry Authentication
+// CLI offers an get-login-password command that simplifies the login process. For
+// more information, see Registry authentication
 // (https://docs.aws.amazon.com/AmazonECR/latest/userguide/Registries.html#registry_auth)
 // in the Amazon Elastic Container Registry User Guide.
 func (c *Client) GetAuthorizationToken(ctx context.Context, params *GetAuthorizationTokenInput, optFns ...func(*Options)) (*GetAuthorizationTokenOutput, error) {
@@ -37,9 +37,9 @@ func (c *Client) GetAuthorizationToken(ctx context.Context, params *GetAuthoriza
 
 type GetAuthorizationTokenInput struct {
 
-	// A list of AWS account IDs that are associated with the registries for which to
-	// get AuthorizationData objects. If you do not specify a registry, the default
-	// registry is assumed.
+	// A list of Amazon Web Services account IDs that are associated with the
+	// registries for which to get AuthorizationData objects. If you do not specify a
+	// registry, the default registry is assumed.
 	//
 	// Deprecated: This field is deprecated. The returned authorization token can be
 	// used to access any Amazon ECR registry that the IAM principal has access to,

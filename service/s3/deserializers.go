@@ -15961,6 +15961,19 @@ func awsRestxml_deserializeDocumentMetricsAndOperator(v **types.MetricsAndOperat
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("AccessPointArn", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.AccessPointArn = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("Prefix", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -16139,6 +16152,22 @@ func awsRestxml_deserializeDocumentMetricsFilter(v *types.MetricsFilter, decoder
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("AccessPointArn", t.Name.Local):
+			var mv string
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				mv = xtv
+			}
+			uv = &types.MetricsFilterMemberAccessPointArn{Value: mv}
+			memberFound = true
+
 		case strings.EqualFold("And", t.Name.Local):
 			var mv types.MetricsAndOperator
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)

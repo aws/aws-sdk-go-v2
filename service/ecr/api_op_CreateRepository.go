@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a repository. For more information, see Amazon ECR Repositories
+// Creates a repository. For more information, see Amazon ECR repositories
 // (https://docs.aws.amazon.com/AmazonECR/latest/userguide/Repositories.html) in
 // the Amazon Elastic Container Registry User Guide.
 func (c *Client) CreateRepository(ctx context.Context, params *CreateRepositoryInput, optFns ...func(*Options)) (*CreateRepositoryOutput, error) {

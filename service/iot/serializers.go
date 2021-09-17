@@ -17075,6 +17075,13 @@ func awsRestjson1_serializeDocumentAction(v *types.Action, value smithyjson.Valu
 		}
 	}
 
+	if v.OpenSearch != nil {
+		ok := object.Key("openSearch")
+		if err := awsRestjson1_serializeDocumentOpenSearchAction(v.OpenSearch, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Republish != nil {
 		ok := object.Key("republish")
 		if err := awsRestjson1_serializeDocumentRepublishAction(v.Republish, ok); err != nil {
@@ -18904,6 +18911,38 @@ func awsRestjson1_serializeDocumentNumberList(v []float64, value smithyjson.Valu
 
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOpenSearchAction(v *types.OpenSearchAction, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Endpoint != nil {
+		ok := object.Key("endpoint")
+		ok.String(*v.Endpoint)
+	}
+
+	if v.Id != nil {
+		ok := object.Key("id")
+		ok.String(*v.Id)
+	}
+
+	if v.Index != nil {
+		ok := object.Key("index")
+		ok.String(*v.Index)
+	}
+
+	if v.RoleArn != nil {
+		ok := object.Key("roleArn")
+		ok.String(*v.RoleArn)
+	}
+
+	if v.Type != nil {
+		ok := object.Key("type")
+		ok.String(*v.Type)
+	}
+
 	return nil
 }
 

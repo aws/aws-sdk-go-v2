@@ -22,7 +22,8 @@ type ActionCondition struct {
 // Inspect all of the elements that WAF has parsed and extracted from the web
 // request JSON body that are within the JsonBodyMatchScope. This is used with the
 // FieldToMatch option JsonBody. This is used only to indicate the web request
-// component for WAF to inspect, in the FieldToMatch specification.
+// component for WAF to inspect, in the FieldToMatch specification. JSON
+// specification: "All": {}
 type All struct {
 	noSmithyDocumentSerde
 }
@@ -43,7 +44,8 @@ type AllowAction struct {
 }
 
 // All query arguments of a web request. This is used only to indicate the web
-// request component for WAF to inspect, in the FieldToMatch specification.
+// request component for WAF to inspect, in the FieldToMatch specification. JSON
+// specification: "AllQueryArguments": {}
 type AllQueryArguments struct {
 	noSmithyDocumentSerde
 }
@@ -79,7 +81,7 @@ type BlockAction struct {
 
 // The body of a web request. This immediately follows the request headers. This is
 // used only to indicate the web request component for WAF to inspect, in the
-// FieldToMatch specification.
+// FieldToMatch specification. JSON specification: "Body": {}
 type Body struct {
 	noSmithyDocumentSerde
 }
@@ -325,6 +327,9 @@ type ExcludedRule struct {
 // needed, according to the type. You specify a single request component in
 // FieldToMatch for each rule statement that requires it. To inspect more than one
 // component of a web request, create a separate rule statement for each component.
+// JSON specification for a QueryString field to match:  "FieldToMatch": {
+// "QueryString": {} } Example JSON for a Method field to match specification:
+// "FieldToMatch": { "Method": { "Name": "DELETE" } }
 type FieldToMatch struct {
 
 	// Inspect all query arguments.
@@ -469,8 +474,8 @@ type FirewallManagerStatement struct {
 	// A rule statement used to run the rules that are defined in a RuleGroup. To use
 	// this, create a rule group with your rules, then provide the ARN of the rule
 	// group in this statement. You cannot nest a RuleGroupReferenceStatement, for
-	// example for use inside a NotStatement or OrStatement. It can only be referenced
-	// as a top-level statement within a rule.
+	// example for use inside a NotStatement or OrStatement. You can only use a rule
+	// group reference statement at the top level inside a web ACL.
 	RuleGroupReferenceStatement *RuleGroupReferenceStatement
 
 	noSmithyDocumentSerde
@@ -760,7 +765,8 @@ type IPSetSummary struct {
 // request headers. This is used in the FieldToMatch specification. Use the
 // specifications in this object to indicate which parts of the JSON body to
 // inspect using the rule's inspection criteria. WAF inspects only the parts of the
-// JSON that result from the matches that you indicate.
+// JSON that result from the matches that you indicate. Example JSON: "JsonBody": {
+// "MatchPattern": { "All": {} }, "MatchScope": "ALL" }
 type JsonBody struct {
 
 	// The patterns to look for in the JSON body. WAF inspects the results of these
@@ -941,8 +947,9 @@ type LoggingConfiguration struct {
 	ManagedByFirewallManager bool
 
 	// The parts of the request that you want to keep out of the logs. For example, if
-	// you redact the HEADER field, the HEADER field in the firehose will be xxx. You
-	// must use one of the following values: URI, QUERY_STRING, HEADER, or METHOD.
+	// you redact the SingleHeader field, the HEADER field in the firehose will be xxx.
+	// You can specify only the following fields for redaction: UriPath, QueryString,
+	// SingleHeader, Method, and JsonBody.
 	RedactedFields []FieldToMatch
 
 	noSmithyDocumentSerde
@@ -1013,12 +1020,13 @@ type ManagedRuleGroupStatement struct {
 // ListAvailableManagedRuleGroups. This provides information like the name and
 // vendor name, that you provide when you add a ManagedRuleGroupStatement to a web
 // ACL. Managed rule groups include Amazon Web Services Managed Rules rule groups,
-// which are free of charge to WAF customers, and Marketplace managed rule groups,
-// which you can subscribe to through Marketplace.
+// which are free of charge to WAF customers, and Amazon Web Services Marketplace
+// managed rule groups, which you can subscribe to through Amazon Web Services
+// Marketplace.
 type ManagedRuleGroupSummary struct {
 
 	// The description of the managed rule group, provided by Amazon Web Services
-	// Managed Rules or the Marketplace seller who manages it.
+	// Managed Rules or the Amazon Web Services Marketplace seller who manages it.
 	Description *string
 
 	// The name of the managed rule group. You use this, along with the vendor name, to
@@ -1045,13 +1053,14 @@ type ManagedRuleGroupVersion struct {
 	noSmithyDocumentSerde
 }
 
-// A set of rules that is managed by Amazon Web Services and Marketplace sellers to
-// provide versioned managed rule groups for customers of WAF. This is intended for
-// use only by vendors of managed rule sets. Vendors are Amazon Web Services and
-// Marketplace sellers. Vendors, you can use the managed rule set APIs to provide
-// controlled rollout of your versioned managed rule group offerings for your
-// customers. The APIs are ListManagedRuleSets, GetManagedRuleSet,
-// PutManagedRuleSetVersions, and UpdateManagedRuleSetVersionExpiryDate.
+// A set of rules that is managed by Amazon Web Services and Amazon Web Services
+// Marketplace sellers to provide versioned managed rule groups for customers of
+// WAF. This is intended for use only by vendors of managed rule sets. Vendors are
+// Amazon Web Services and Amazon Web Services Marketplace sellers. Vendors, you
+// can use the managed rule set APIs to provide controlled rollout of your
+// versioned managed rule group offerings for your customers. The APIs are
+// ListManagedRuleSets, GetManagedRuleSet, PutManagedRuleSetVersions, and
+// UpdateManagedRuleSetVersionExpiryDate.
 type ManagedRuleSet struct {
 
 	// The Amazon Resource Name (ARN) of the entity.
@@ -1100,11 +1109,11 @@ type ManagedRuleSet struct {
 }
 
 // High-level information for a managed rule set. This is intended for use only by
-// vendors of managed rule sets. Vendors are Amazon Web Services and Marketplace
-// sellers. Vendors, you can use the managed rule set APIs to provide controlled
-// rollout of your versioned managed rule group offerings for your customers. The
-// APIs are ListManagedRuleSets, GetManagedRuleSet, PutManagedRuleSetVersions, and
-// UpdateManagedRuleSetVersionExpiryDate.
+// vendors of managed rule sets. Vendors are Amazon Web Services and Amazon Web
+// Services Marketplace sellers. Vendors, you can use the managed rule set APIs to
+// provide controlled rollout of your versioned managed rule group offerings for
+// your customers. The APIs are ListManagedRuleSets, GetManagedRuleSet,
+// PutManagedRuleSetVersions, and UpdateManagedRuleSetVersionExpiryDate.
 type ManagedRuleSetSummary struct {
 
 	// The Amazon Resource Name (ARN) of the entity.
@@ -1150,10 +1159,10 @@ type ManagedRuleSetSummary struct {
 }
 
 // Information for a single version of a managed rule set. This is intended for use
-// only by vendors of managed rule sets. Vendors are Amazon Web Services and
-// Marketplace sellers. Vendors, you can use the managed rule set APIs to provide
-// controlled rollout of your versioned managed rule group offerings for your
-// customers. The APIs are ListManagedRuleSets, GetManagedRuleSet,
+// only by vendors of managed rule sets. Vendors are Amazon Web Services and Amazon
+// Web Services Marketplace sellers. Vendors, you can use the managed rule set APIs
+// to provide controlled rollout of your versioned managed rule group offerings for
+// your customers. The APIs are ListManagedRuleSets, GetManagedRuleSet,
 // PutManagedRuleSetVersions, and UpdateManagedRuleSetVersionExpiryDate.
 type ManagedRuleSetVersion struct {
 
@@ -1195,6 +1204,7 @@ type ManagedRuleSetVersion struct {
 // The HTTP method of a web request. The method indicates the type of operation
 // that the request is asking the origin to perform. This is used only to indicate
 // the web request component for WAF to inspect, in the FieldToMatch specification.
+// JSON specification: "Method": {}
 type Method struct {
 	noSmithyDocumentSerde
 }
@@ -1202,7 +1212,7 @@ type Method struct {
 // Specifies that WAF should do nothing. This is generally used to try out a rule
 // without performing any actions. You set the OverrideAction on the Rule. This is
 // used in the context of other settings, for example to specify values for
-// RuleAction and web ACL DefaultAction.
+// RuleAction and web ACL DefaultAction. JSON specification: "None": {}
 type NoneAction struct {
 	noSmithyDocumentSerde
 }
@@ -1258,7 +1268,8 @@ type OverrideAction struct {
 
 // The query string of a web request. This is the part of a URL that appears after
 // a ? character, if any. This is used only to indicate the web request component
-// for WAF to inspect, in the FieldToMatch specification.
+// for WAF to inspect, in the FieldToMatch specification. JSON specification:
+// "QueryString": {}
 type QueryString struct {
 	noSmithyDocumentSerde
 }
@@ -1267,28 +1278,35 @@ type QueryString struct {
 // and triggers the rule action when the rate exceeds a limit that you specify on
 // the number of requests in any 5-minute time span. You can use this to put a
 // temporary block on requests from an IP address that is sending excessive
-// requests. When the rule action triggers, WAF blocks additional requests from the
-// IP address until the request rate falls below the limit. You can optionally nest
-// another statement inside the rate-based statement, to narrow the scope of the
-// rule so that it only counts requests that match the nested statement. For
-// example, based on recent requests that you have seen from an attacker, you might
-// create a rate-based rule with a nested AND rule statement that contains the
-// following nested statements:
+// requests. WAF tracks and manages web requests separately for each instance of a
+// rate-based rule that you use. For example, if you provide the same rate-based
+// rule settings in two web ACLs, each of the two rule statements represents a
+// separate instance of the rate-based rule and gets its own tracking and
+// management by WAF. If you define a rate-based rule inside a rule group, and then
+// use that rule group in multiple places, each use creates a separate instance of
+// the rate-based rule that gets its own tracking and management by WAF. When the
+// rule action triggers, WAF blocks additional requests from the IP address until
+// the request rate falls below the limit. You can optionally nest another
+// statement inside the rate-based statement, to narrow the scope of the rule so
+// that it only counts requests that match the nested statement. For example, based
+// on recent requests that you have seen from an attacker, you might create a
+// rate-based rule with a nested AND rule statement that contains the following
+// nested statements:
 //
-// * An IP match statement with an IP set that
-// specified the address 192.0.2.44.
+// * An IP match statement with an IP set that specified the
+// address 192.0.2.44.
 //
-// * A string match statement that searches in
-// the User-Agent header for the string BadBot.
+// * A string match statement that searches in the User-Agent
+// header for the string BadBot.
 //
-// In this rate-based rule, you also
-// define a rate limit. For this example, the rate limit is 1,000. Requests that
-// meet both of the conditions in the statements are counted. If the count exceeds
-// 1,000 requests per five minutes, the rule action triggers. Requests that do not
-// meet both conditions are not counted towards the rate limit and are not affected
-// by this rule. You cannot nest a RateBasedStatement, for example for use inside a
-// NotStatement or OrStatement. It can only be referenced as a top-level statement
-// within a rule.
+// In this rate-based rule, you also define a rate
+// limit. For this example, the rate limit is 1,000. Requests that meet both of the
+// conditions in the statements are counted. If the count exceeds 1,000 requests
+// per five minutes, the rule action triggers. Requests that do not meet both
+// conditions are not counted towards the rate limit and are not affected by this
+// rule. You cannot nest a RateBasedStatement inside another statement, for example
+// inside a NotStatement or OrStatement. You can define a RateBasedStatement inside
+// a web ACL and inside a rule group.
 type RateBasedStatement struct {
 
 	// Setting that indicates how to aggregate the request counts. The options are the
@@ -1329,7 +1347,7 @@ type RateBasedStatement struct {
 	noSmithyDocumentSerde
 }
 
-// The set of IP addresses that are currently blocked for a rate-based statement.
+// The set of IP addresses that are currently blocked for a RateBasedStatement.
 type RateBasedStatementManagedKeysIPSet struct {
 
 	// The IP addresses that are currently blocked.
@@ -1638,8 +1656,8 @@ type RuleGroup struct {
 // A rule statement used to run the rules that are defined in a RuleGroup. To use
 // this, create a rule group with your rules, then provide the ARN of the rule
 // group in this statement. You cannot nest a RuleGroupReferenceStatement, for
-// example for use inside a NotStatement or OrStatement. It can only be referenced
-// as a top-level statement within a rule.
+// example for use inside a NotStatement or OrStatement. You can only use a rule
+// group reference statement at the top level inside a web ACL.
 type RuleGroupReferenceStatement struct {
 
 	// The Amazon Resource Name (ARN) of the entity.
@@ -1754,6 +1772,7 @@ type SampledHTTPRequest struct {
 // One of the headers in a web request, identified by name, for example, User-Agent
 // or Referer. This setting isn't case sensitive. This is used only to indicate the
 // web request component for WAF to inspect, in the FieldToMatch specification.
+// Example JSON: "SingleHeader": { "Name": "haystack" }
 type SingleHeader struct {
 
 	// The name of the query header to inspect.
@@ -1766,6 +1785,7 @@ type SingleHeader struct {
 
 // One query argument in a web request, identified by name, for example UserName or
 // SalesRegion. The name can be up to 30 characters long and isn't case sensitive.
+// Example JSON: "SingleQueryArgument": { "Name": "myArgument" }
 type SingleQueryArgument struct {
 
 	// The name of the query argument to inspect.
@@ -1902,28 +1922,35 @@ type Statement struct {
 	// and triggers the rule action when the rate exceeds a limit that you specify on
 	// the number of requests in any 5-minute time span. You can use this to put a
 	// temporary block on requests from an IP address that is sending excessive
-	// requests. When the rule action triggers, WAF blocks additional requests from the
-	// IP address until the request rate falls below the limit. You can optionally nest
-	// another statement inside the rate-based statement, to narrow the scope of the
-	// rule so that it only counts requests that match the nested statement. For
-	// example, based on recent requests that you have seen from an attacker, you might
-	// create a rate-based rule with a nested AND rule statement that contains the
-	// following nested statements:
+	// requests. WAF tracks and manages web requests separately for each instance of a
+	// rate-based rule that you use. For example, if you provide the same rate-based
+	// rule settings in two web ACLs, each of the two rule statements represents a
+	// separate instance of the rate-based rule and gets its own tracking and
+	// management by WAF. If you define a rate-based rule inside a rule group, and then
+	// use that rule group in multiple places, each use creates a separate instance of
+	// the rate-based rule that gets its own tracking and management by WAF. When the
+	// rule action triggers, WAF blocks additional requests from the IP address until
+	// the request rate falls below the limit. You can optionally nest another
+	// statement inside the rate-based statement, to narrow the scope of the rule so
+	// that it only counts requests that match the nested statement. For example, based
+	// on recent requests that you have seen from an attacker, you might create a
+	// rate-based rule with a nested AND rule statement that contains the following
+	// nested statements:
 	//
-	// * An IP match statement with an IP set that
-	// specified the address 192.0.2.44.
+	// * An IP match statement with an IP set that specified the
+	// address 192.0.2.44.
 	//
-	// * A string match statement that searches in
-	// the User-Agent header for the string BadBot.
+	// * A string match statement that searches in the User-Agent
+	// header for the string BadBot.
 	//
-	// In this rate-based rule, you also
-	// define a rate limit. For this example, the rate limit is 1,000. Requests that
-	// meet both of the conditions in the statements are counted. If the count exceeds
-	// 1,000 requests per five minutes, the rule action triggers. Requests that do not
-	// meet both conditions are not counted towards the rate limit and are not affected
-	// by this rule. You cannot nest a RateBasedStatement, for example for use inside a
-	// NotStatement or OrStatement. It can only be referenced as a top-level statement
-	// within a rule.
+	// In this rate-based rule, you also define a rate
+	// limit. For this example, the rate limit is 1,000. Requests that meet both of the
+	// conditions in the statements are counted. If the count exceeds 1,000 requests
+	// per five minutes, the rule action triggers. Requests that do not meet both
+	// conditions are not counted towards the rate limit and are not affected by this
+	// rule. You cannot nest a RateBasedStatement inside another statement, for example
+	// inside a NotStatement or OrStatement. You can define a RateBasedStatement inside
+	// a web ACL and inside a rule group.
 	RateBasedStatement *RateBasedStatement
 
 	// A rule statement used to search web request components for matches with regular
@@ -1940,8 +1967,8 @@ type Statement struct {
 	// A rule statement used to run the rules that are defined in a RuleGroup. To use
 	// this, create a rule group with your rules, then provide the ARN of the rule
 	// group in this statement. You cannot nest a RuleGroupReferenceStatement, for
-	// example for use inside a NotStatement or OrStatement. It can only be referenced
-	// as a top-level statement within a rule.
+	// example for use inside a NotStatement or OrStatement. You can only use a rule
+	// group reference statement at the top level inside a web ACL.
 	RuleGroupReferenceStatement *RuleGroupReferenceStatement
 
 	// A rule statement that compares a number of bytes against the size of a request
@@ -2177,18 +2204,18 @@ type TimeWindow struct {
 // The path component of the URI of a web request. This is the part of a web
 // request that identifies a resource. For example, /images/daily-ad.jpg. This is
 // used only to indicate the web request component for WAF to inspect, in the
-// FieldToMatch specification.
+// FieldToMatch specification. JSON specification: "UriPath": {}
 type UriPath struct {
 	noSmithyDocumentSerde
 }
 
 // A version of the named managed rule group, that the rule group's vendor
 // publishes for use by customers. This is intended for use only by vendors of
-// managed rule sets. Vendors are Amazon Web Services and Marketplace sellers.
-// Vendors, you can use the managed rule set APIs to provide controlled rollout of
-// your versioned managed rule group offerings for your customers. The APIs are
-// ListManagedRuleSets, GetManagedRuleSet, PutManagedRuleSetVersions, and
-// UpdateManagedRuleSetVersionExpiryDate.
+// managed rule sets. Vendors are Amazon Web Services and Amazon Web Services
+// Marketplace sellers. Vendors, you can use the managed rule set APIs to provide
+// controlled rollout of your versioned managed rule group offerings for your
+// customers. The APIs are ListManagedRuleSets, GetManagedRuleSet,
+// PutManagedRuleSetVersions, and UpdateManagedRuleSetVersionExpiryDate.
 type VersionToPublish struct {
 
 	// The Amazon Resource Name (ARN) of the vendor's rule group that's used in the

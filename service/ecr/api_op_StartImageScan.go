@@ -12,8 +12,8 @@ import (
 )
 
 // Starts an image vulnerability scan. An image scan can only be started once per
-// day on an individual image. This limit includes if an image was scanned on
-// initial push. For more information, see Image Scanning
+// 24 hours on an individual image. This limit includes if an image was scanned on
+// initial push. For more information, see Image scanning
 // (https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html) in
 // the Amazon Elastic Container Registry User Guide.
 func (c *Client) StartImageScan(ctx context.Context, params *StartImageScanInput, optFns ...func(*Options)) (*StartImageScanOutput, error) {
@@ -43,9 +43,9 @@ type StartImageScanInput struct {
 	// This member is required.
 	RepositoryName *string
 
-	// The AWS account ID associated with the registry that contains the repository in
-	// which to start an image scan request. If you do not specify a registry, the
-	// default registry is assumed.
+	// The Amazon Web Services account ID associated with the registry that contains
+	// the repository in which to start an image scan request. If you do not specify a
+	// registry, the default registry is assumed.
 	RegistryId *string
 
 	noSmithyDocumentSerde

@@ -40,8 +40,8 @@ type DescribePipelineExecutionInput struct {
 
 type DescribePipelineExecutionOutput struct {
 
-	// Information about the user who created or modified an experiment, trial, or
-	// trial component.
+	// Information about the user who created or modified an experiment, trial, trial
+	// component, or project.
 	CreatedBy *types.UserContext
 
 	// The time when the pipeline execution was created.
@@ -50,8 +50,8 @@ type DescribePipelineExecutionOutput struct {
 	// If the execution failed, a message describing why.
 	FailureReason *string
 
-	// Information about the user who created or modified an experiment, trial, or
-	// trial component.
+	// Information about the user who created or modified an experiment, trial, trial
+	// component, or project.
 	LastModifiedBy *types.UserContext
 
 	// The time when the pipeline execution was modified last.

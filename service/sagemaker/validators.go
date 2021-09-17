@@ -810,6 +810,26 @@ func (m *validateOpCreateProject) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateStudioLifecycleConfig struct {
+}
+
+func (*validateOpCreateStudioLifecycleConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateStudioLifecycleConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateStudioLifecycleConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateStudioLifecycleConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateTrainingJob struct {
 }
 
@@ -1565,6 +1585,26 @@ func (m *validateOpDeleteProject) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteProjectInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteStudioLifecycleConfig struct {
+}
+
+func (*validateOpDeleteStudioLifecycleConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteStudioLifecycleConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteStudioLifecycleConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteStudioLifecycleConfigInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2470,6 +2510,26 @@ func (m *validateOpDescribeProject) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeStudioLifecycleConfig struct {
+}
+
+func (*validateOpDescribeStudioLifecycleConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeStudioLifecycleConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeStudioLifecycleConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeStudioLifecycleConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeSubscribedWorkteam struct {
 }
 
@@ -2905,6 +2965,26 @@ func (m *validateOpRenderUiTemplate) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpRenderUiTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRetryPipelineExecution struct {
+}
+
+func (*validateOpRetryPipelineExecution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRetryPipelineExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RetryPipelineExecutionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRetryPipelineExecutionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3890,6 +3970,10 @@ func addOpCreateProjectValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateProject{}, middleware.After)
 }
 
+func addOpCreateStudioLifecycleConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateStudioLifecycleConfig{}, middleware.After)
+}
+
 func addOpCreateTrainingJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateTrainingJob{}, middleware.After)
 }
@@ -4040,6 +4124,10 @@ func addOpDeletePipelineValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteProjectValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteProject{}, middleware.After)
+}
+
+func addOpDeleteStudioLifecycleConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteStudioLifecycleConfig{}, middleware.After)
 }
 
 func addOpDeleteTagsValidationMiddleware(stack *middleware.Stack) error {
@@ -4222,6 +4310,10 @@ func addOpDescribeProjectValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeProject{}, middleware.After)
 }
 
+func addOpDescribeStudioLifecycleConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeStudioLifecycleConfig{}, middleware.After)
+}
+
 func addOpDescribeSubscribedWorkteamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeSubscribedWorkteam{}, middleware.After)
 }
@@ -4308,6 +4400,10 @@ func addOpRegisterDevicesValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpRenderUiTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRenderUiTemplate{}, middleware.After)
+}
+
+func addOpRetryPipelineExecutionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRetryPipelineExecution{}, middleware.After)
 }
 
 func addOpSearchValidationMiddleware(stack *middleware.Stack) error {
@@ -9680,6 +9776,32 @@ func validateOpCreateProjectInput(v *CreateProjectInput) error {
 	}
 }
 
+func validateOpCreateStudioLifecycleConfigInput(v *CreateStudioLifecycleConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateStudioLifecycleConfigInput"}
+	if v.StudioLifecycleConfigName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StudioLifecycleConfigName"))
+	}
+	if v.StudioLifecycleConfigContent == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StudioLifecycleConfigContent"))
+	}
+	if len(v.StudioLifecycleConfigAppType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("StudioLifecycleConfigAppType"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateTrainingJobInput(v *CreateTrainingJobInput) error {
 	if v == nil {
 		return nil
@@ -10447,6 +10569,21 @@ func validateOpDeleteProjectInput(v *DeleteProjectInput) error {
 	}
 }
 
+func validateOpDeleteStudioLifecycleConfigInput(v *DeleteStudioLifecycleConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteStudioLifecycleConfigInput"}
+	if v.StudioLifecycleConfigName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StudioLifecycleConfigName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteTagsInput(v *DeleteTagsInput) error {
 	if v == nil {
 		return nil
@@ -11143,6 +11280,21 @@ func validateOpDescribeProjectInput(v *DescribeProjectInput) error {
 	}
 }
 
+func validateOpDescribeStudioLifecycleConfigInput(v *DescribeStudioLifecycleConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeStudioLifecycleConfigInput"}
+	if v.StudioLifecycleConfigName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StudioLifecycleConfigName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeSubscribedWorkteamInput(v *DescribeSubscribedWorkteamInput) error {
 	if v == nil {
 		return nil
@@ -11503,6 +11655,24 @@ func validateOpRenderUiTemplateInput(v *RenderUiTemplateInput) error {
 	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRetryPipelineExecutionInput(v *RetryPipelineExecutionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RetryPipelineExecutionInput"}
+	if v.PipelineExecutionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PipelineExecutionArn"))
+	}
+	if v.ClientRequestToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

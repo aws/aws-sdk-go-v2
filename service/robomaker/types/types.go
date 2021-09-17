@@ -185,6 +185,16 @@ type DeploymentLaunchConfig struct {
 	noSmithyDocumentSerde
 }
 
+// The object that contains the Docker image URI for either your robot or
+// simulation applications.
+type Environment struct {
+
+	// The Docker image URI for either your robot or simulation applications.
+	Uri *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about a failed create simulation job request.
 type FailedCreateSimulationJobRequest struct {
 

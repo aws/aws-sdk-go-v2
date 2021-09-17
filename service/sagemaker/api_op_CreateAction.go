@@ -16,10 +16,6 @@ import (
 // action involves at least one input or output artifact. For more information, see
 // Amazon SageMaker ML Lineage Tracking
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking.html).
-// CreateAction can only be invoked from within an SageMaker managed environment.
-// This includes SageMaker training jobs, processing jobs, transform jobs, and
-// SageMaker notebooks. A call to CreateAction from outside one of these
-// environments results in an error.
 func (c *Client) CreateAction(ctx context.Context, params *CreateActionInput, optFns ...func(*Options)) (*CreateActionOutput, error) {
 	if params == nil {
 		params = &CreateActionInput{}

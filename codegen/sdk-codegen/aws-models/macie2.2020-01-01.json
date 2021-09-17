@@ -447,7 +447,7 @@
                 "ids": {
                     "target": "com.amazonaws.macie2#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of strings that lists the unique identifiers for the custom data identifiers to retrieve information about.</p>",
+                        "smithy.api#documentation": "<p>An array of custom data identifier IDs, one for each custom data identifier to retrieve information about.</p>",
                         "smithy.api#jsonName": "ids"
                     }
                 }
@@ -466,7 +466,7 @@
                 "notFoundIdentifierIds": {
                     "target": "com.amazonaws.macie2#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of identifiers, one for each identifier that was specified in the request, but doesn't correlate to an existing custom data identifier.</p>",
+                        "smithy.api#documentation": "<p>An array of custom data identifier IDs, one for each custom data identifier that was specified in the request but doesn't correlate to an existing custom data identifier.</p>",
                         "smithy.api#jsonName": "notFoundIdentifierIds"
                     }
                 }
@@ -1255,7 +1255,7 @@
                 "customDataIdentifierIds": {
                     "target": "com.amazonaws.macie2#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The custom data identifiers to use for data analysis and classification.</p>",
+                        "smithy.api#documentation": "<p>An array of unique identifiers, one for each custom data identifier for the job to use when it analyzes data. To use only managed data identifiers, don't specify a value for this property and specify a value other than NONE for the managedDataIdentifierSelector property.</p>",
                         "smithy.api#jsonName": "customDataIdentifierIds"
                     }
                 },
@@ -1269,7 +1269,7 @@
                 "initialRun": {
                     "target": "com.amazonaws.macie2#__boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to analyze all existing, eligible objects immediately after the job is created.</p>",
+                        "smithy.api#documentation": "<p>For a recurring job, specifies whether to analyze all existing, eligible objects immediately after the job is created (true). To analyze only those objects that are created or changed after you create the job and before the job's first scheduled run, set this value to false.</p><p>If you configure the job to run only once, don't specify a value for this property.</p>",
                         "smithy.api#jsonName": "initialRun"
                     }
                 },
@@ -1279,6 +1279,20 @@
                         "smithy.api#documentation": "<p>The schedule for running the job. Valid values are:</p> <ul><li><p>ONE_TIME - Run the job only once. If you specify this value, don't specify a value for the scheduleFrequency property.</p></li> <li><p>SCHEDULED - Run the job on a daily, weekly, or monthly basis. If you specify this value, use the scheduleFrequency property to define the recurrence pattern for the job.</p></li></ul>",
                         "smithy.api#jsonName": "jobType",
                         "smithy.api#required": {}
+                    }
+                },
+                "managedDataIdentifierIds": {
+                    "target": "com.amazonaws.macie2#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of unique identifiers, one for each managed data identifier for the job to include (use) or exclude (not use) when it analyzes data. Inclusion or exclusion depends on the managed data identifier selection type that you specify for the job (managedDataIdentifierSelector).</p><p>To retrieve a list of valid values for this property, use the ListManagedDataIdentifiers operation.</p>",
+                        "smithy.api#jsonName": "managedDataIdentifierIds"
+                    }
+                },
+                "managedDataIdentifierSelector": {
+                    "target": "com.amazonaws.macie2#ManagedDataIdentifierSelector",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The selection type to apply when determining which managed data identifiers the job uses to analyze data. Valid values are:</p> <ul><li><p>ALL - Use all the managed data identifiers that Amazon Macie provides. If you specify this value, don't specify any values for the managedDataIdentifierIds property.</p></li> <li><p>EXCLUDE - Use all the managed data identifiers that Macie provides except the managed data identifiers specified by the managedDataIdentifierIds property.</p></li> <li><p>INCLUDE - Use only the managed data identifiers specified by the managedDataIdentifierIds property.</p></li> <li><p>NONE - Don't use any managed data identifiers. If you specify this value, specify at least one custom data identifier for the job (customDataIdentifierIds) and don't specify any values for the managedDataIdentifierIds property.</p></li></ul> <p>If you don't specify a value for this property, the job uses all managed data identifiers. If you don't specify a value for this property or you specify ALL or EXCLUDE for a recurring job, the job also uses new managed data identifiers as they are released.</p>",
+                        "smithy.api#jsonName": "managedDataIdentifierSelector"
                     }
                 },
                 "name": {
@@ -1300,7 +1314,7 @@
                 "samplingPercentage": {
                     "target": "com.amazonaws.macie2#__integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The sampling depth, as a percentage, to apply when processing objects. This value determines the percentage of eligible objects that the job analyzes. If this value is less than 100, Amazon Macie selects the objects to analyze at random, up to the specified percentage, and analyzes all the data in those objects.</p>",
+                        "smithy.api#documentation": "<p>The sampling depth, as a percentage, for the job to apply when processing objects. This value determines the percentage of eligible objects that the job analyzes. If this value is less than 100, Amazon Macie selects the objects to analyze at random, up to the specified percentage, and analyzes all the data in those objects.</p>",
                         "smithy.api#jsonName": "samplingPercentage"
                     }
                 },
@@ -1400,21 +1414,21 @@
                 "ignoreWords": {
                     "target": "com.amazonaws.macie2#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4-90 characters. Ignore words are case sensitive.</p>",
+                        "smithy.api#documentation": "<p>An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4-90 UTF-8 characters. Ignore words are case sensitive.</p>",
                         "smithy.api#jsonName": "ignoreWords"
                     }
                 },
                 "keywords": {
                     "target": "com.amazonaws.macie2#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3-90 characters. Keywords aren't case sensitive.</p>",
+                        "smithy.api#documentation": "<p>An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3-90 UTF-8 characters. Keywords aren't case sensitive.</p>",
                         "smithy.api#jsonName": "keywords"
                     }
                 },
                 "maximumMatchDistance": {
                     "target": "com.amazonaws.macie2#__integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1-300 characters. The default value is 50.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Amazon Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1-300 characters. The default value is 50.</p>",
                         "smithy.api#jsonName": "maximumMatchDistance"
                     }
                 },
@@ -2138,7 +2152,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides information about a type of sensitive data that was detected by managed data identifiers and produced a sensitive data finding.</p>"
+                "smithy.api#documentation": "<p>Provides information about a type of sensitive data that was detected by a managed data identifier and produced a sensitive data finding.</p>"
             }
         },
         "com.amazonaws.macie2#DefaultDetections": {
@@ -2558,7 +2572,7 @@
                 "customDataIdentifierIds": {
                     "target": "com.amazonaws.macie2#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The custom data identifiers that the job uses to analyze data.</p>",
+                        "smithy.api#documentation": "<p>An array of unique identifiers, one for each custom data identifier that the job uses to analyze data. This value is null if the job uses only managed data identifiers to analyze data.</p>",
                         "smithy.api#jsonName": "customDataIdentifierIds"
                     }
                 },
@@ -2572,7 +2586,7 @@
                 "initialRun": {
                     "target": "com.amazonaws.macie2#__boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the job is configured to analyze all existing, eligible objects immediately after it's created.</p>",
+                        "smithy.api#documentation": "<p>For a recurring job, specifies whether you configured the job to analyze all existing, eligible objects immediately after the job was created (true). If you configured the job to analyze only those objects that were created or changed after the job was created and before the job's first scheduled run, this value is false. This value is also false for a one-time job.</p>",
                         "smithy.api#jsonName": "initialRun"
                     }
                 },
@@ -2593,7 +2607,7 @@
                 "jobStatus": {
                     "target": "com.amazonaws.macie2#JobStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the job. Possible values are:</p> <ul><li><p>CANCELLED - You cancelled the job or, if it's a one-time job, you paused the job and didn't resume it within 30 days.</p></li> <li><p>COMPLETE - For a one-time job, Amazon Macie finished processing the data specified for the job. This value doesn't apply to recurring jobs.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to one-time jobs.</p></li> <li><p>PAUSED - Amazon Macie started running the job but additional processing would exceed the monthly sensitive data discovery quota for your account or one or more member accounts that the job analyzes data for.</p></li> <li><p>RUNNING - For a one-time job, the job is in progress. For a recurring job, a scheduled run is in progress.</p></li> <li><p>USER_PAUSED - You paused the job. If you paused the job while it had a status of RUNNING and you don't resume it within 30 days of pausing it, the job or job run will expire and be cancelled, depending on the job's type. To check the expiration date, refer to the UserPausedDetails.jobExpiresAt property.</p></li></ul>",
+                        "smithy.api#documentation": "<p>The current status of the job. Possible values are:</p> <ul><li><p>CANCELLED - You cancelled the job or, if it's a one-time job, you paused the job and didn't resume it within 30 days.</p></li> <li><p>COMPLETE - For a one-time job, Amazon Macie finished processing the data specified for the job. This value doesn't apply to recurring jobs.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to one-time jobs.</p></li> <li><p>PAUSED - Macie started running the job but additional processing would exceed the monthly sensitive data discovery quota for your account or one or more member accounts that the job analyzes data for.</p></li> <li><p>RUNNING - For a one-time job, the job is in progress. For a recurring job, a scheduled run is in progress.</p></li> <li><p>USER_PAUSED - You paused the job. If you paused the job while it had a status of RUNNING and you don't resume it within 30 days of pausing it, the job or job run will expire and be cancelled, depending on the job's type. To check the expiration date, refer to the UserPausedDetails.jobExpiresAt property.</p></li></ul>",
                         "smithy.api#jsonName": "jobStatus"
                     }
                 },
@@ -2616,6 +2630,20 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time, in UTC and extended ISO 8601 format, when the job started. If the job is a recurring job, this value indicates when the most recent run started.</p>",
                         "smithy.api#jsonName": "lastRunTime"
+                    }
+                },
+                "managedDataIdentifierIds": {
+                    "target": "com.amazonaws.macie2#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of unique identifiers, one for each managed data identifier that the job is explicitly configured to include (use) or exclude (not use) when it analyzes data. Inclusion or exclusion depends on the managed data identifier selection type specified for the job (managedDataIdentifierSelector). This value is null if the job's managed data identifier selection type is ALL or the job uses only custom data identifiers (customDataIdentifierIds) to analyze data.</p>",
+                        "smithy.api#jsonName": "managedDataIdentifierIds"
+                    }
+                },
+                "managedDataIdentifierSelector": {
+                    "target": "com.amazonaws.macie2#ManagedDataIdentifierSelector",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The selection type that determines which managed data identifiers the job uses to analyze data. Possible values are:</p> <ul><li><p>ALL - Use all the managed data identifiers that Amazon Macie provides.</p></li> <li><p>EXCLUDE - Use all the managed data identifiers that Macie provides except the managed data identifiers specified by the managedDataIdentifierIds property.</p></li> <li><p>INCLUDE - Use only the managed data identifiers specified by the managedDataIdentifierIds property.</p></li> <li><p>NONE - Don't use any managed data identifiers.</p></li></ul> <p>If this value is null, the job uses all managed data identifiers. If this value is null, ALL, or EXCLUDE for a recurring job, the job also uses new managed data identifiers as they are released.</p>",
+                        "smithy.api#jsonName": "managedDataIdentifierSelector"
                     }
                 },
                 "name": {
@@ -2642,7 +2670,7 @@
                 "scheduleFrequency": {
                     "target": "com.amazonaws.macie2#JobScheduleFrequency",
                     "traits": {
-                        "smithy.api#documentation": "<p>The recurrence pattern for running the job. If the job is configured to run only once, this value is null.</p>",
+                        "smithy.api#documentation": "<p>The recurrence pattern for running the job. This value is null if the job is configured to run only once.</p>",
                         "smithy.api#jsonName": "scheduleFrequency"
                     }
                 },
@@ -4004,7 +4032,7 @@
                 "maximumMatchDistance": {
                     "target": "com.amazonaws.macie2#__integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Amazon Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern.</p>",
                         "smithy.api#jsonName": "maximumMatchDistance"
                     }
                 },
@@ -5370,7 +5398,7 @@
                 "jobStatus": {
                     "target": "com.amazonaws.macie2#JobStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the job. Possible values are:</p> <ul><li><p>CANCELLED - You cancelled the job or, if it's a one-time job, you paused the job and didn't resume it within 30 days.</p></li> <li><p>COMPLETE - For a one-time job, Amazon Macie finished processing the data specified for the job. This value doesn't apply to recurring jobs.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to one-time jobs.</p></li> <li><p>PAUSED - Amazon Macie started running the job but additional processing would exceed the monthly sensitive data discovery quota for your account or one or more member accounts that the job analyzes data for.</p></li> <li><p>RUNNING - For a one-time job, the job is in progress. For a recurring job, a scheduled run is in progress.</p></li> <li><p>USER_PAUSED - You paused the job. If you paused the job while it had a status of RUNNING and you don't resume it within 30 days of pausing it, the job or job run will expire and be cancelled, depending on the job's type. To check the expiration date, refer to the UserPausedDetails.jobExpiresAt property.</p></li></ul>",
+                        "smithy.api#documentation": "<p>The current status of the job. Possible values are:</p> <ul><li><p>CANCELLED - You cancelled the job or, if it's a one-time job, you paused the job and didn't resume it within 30 days.</p></li> <li><p>COMPLETE - For a one-time job, Amazon Macie finished processing the data specified for the job. This value doesn't apply to recurring jobs.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to one-time jobs.</p></li> <li><p>PAUSED - Macie started running the job but additional processing would exceed the monthly sensitive data discovery quota for your account or one or more member accounts that the job analyzes data for.</p></li> <li><p>RUNNING - For a one-time job, the job is in progress. For a recurring job, a scheduled run is in progress.</p></li> <li><p>USER_PAUSED - You paused the job. If you paused the job while it had a status of RUNNING and you don't resume it within 30 days of pausing it, the job or job run will expire and be cancelled, depending on the job's type. To check the expiration date, refer to the UserPausedDetails.jobExpiresAt property.</p></li></ul>",
                         "smithy.api#jsonName": "jobStatus"
                     }
                 },
@@ -5888,7 +5916,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves information about all the Amazon Macie membership invitations that were received by an account.</p>",
+                "smithy.api#documentation": "<p>Retrieves information about the Amazon Macie membership invitations that were received by an account.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/invitations",
@@ -6059,6 +6087,54 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies criteria for sorting the results of a request for information about classification jobs.</p>"
+            }
+        },
+        "com.amazonaws.macie2#ListManagedDataIdentifiers": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.macie2#ListManagedDataIdentifiersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.macie2#ListManagedDataIdentifiersResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves information about all the managed data identifiers that Amazon Macie currently provides.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/managed-data-identifiers/list",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.macie2#ListManagedDataIdentifiersRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.macie2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The nextToken string that specifies which page of results to return in a paginated response.</p>",
+                        "smithy.api#jsonName": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.macie2#ListManagedDataIdentifiersResponse": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.macie2#__listOfManagedDataIdentifierSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects, one for each managed data identifier.</p>",
+                        "smithy.api#jsonName": "items"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.macie2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.</p>",
+                        "smithy.api#jsonName": "nextToken"
+                    }
+                }
             }
         },
         "com.amazonaws.macie2#ListMembers": {
@@ -6409,6 +6485,9 @@
                     "target": "com.amazonaws.macie2#ListInvitations"
                 },
                 {
+                    "target": "com.amazonaws.macie2#ListManagedDataIdentifiers"
+                },
+                {
                     "target": "com.amazonaws.macie2#ListMembers"
                 },
                 {
@@ -6481,6 +6560,52 @@
                         "name": "ENABLED"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.macie2#ManagedDataIdentifierSelector": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The selection type that determines which managed data identifiers a classification job uses to analyze data. Valid values are:</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "ALL",
+                        "name": "ALL"
+                    },
+                    {
+                        "value": "EXCLUDE",
+                        "name": "EXCLUDE"
+                    },
+                    {
+                        "value": "INCLUDE",
+                        "name": "INCLUDE"
+                    },
+                    {
+                        "value": "NONE",
+                        "name": "NONE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.macie2#ManagedDataIdentifierSummary": {
+            "type": "structure",
+            "members": {
+                "category": {
+                    "target": "com.amazonaws.macie2#SensitiveDataItemCategory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category of sensitive data that the managed data identifier detects: CREDENTIALS, for credentials data such as private keys or Amazon Web Services secret keys; FINANCIAL_INFORMATION, for financial data such as credit card numbers; or, PERSONAL_INFORMATION, for personal health information, such as health insurance identification numbers, or personally identifiable information, such as passport numbers.</p>",
+                        "smithy.api#jsonName": "category"
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.macie2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the managed data identifier. This is a string that describes the type of sensitive data that the managed data identifier detects. For example: OPENSSH_PRIVATE_KEY for OpenSSH private keys, CREDIT_CARD_NUMBER for credit card numbers, or USA_PASSPORT_NUMBER for US passport numbers.</p>",
+                        "smithy.api#jsonName": "id"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about a managed data identifier. For additional information, see <a href=\"https://docs.aws.amazon.com/macie/latest/user/managed-data-identifiers.html\">Using managed data identifiers</a> in the <i>Amazon Macie User Guide</i>.</p>"
             }
         },
         "com.amazonaws.macie2#MatchingBucket": {
@@ -6790,7 +6915,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the location of 1-15 occurrences of sensitive data that was detected by managed data identifiers or a custom data identifier and produced a sensitive data finding.</p>"
+                "smithy.api#documentation": "<p>Specifies the location of 1-15 occurrences of sensitive data that was detected by a managed data identifier or a custom data identifier and produced a sensitive data finding.</p>"
             }
         },
         "com.amazonaws.macie2#OrderBy": {
@@ -7217,7 +7342,7 @@
                 "owner": {
                     "target": "com.amazonaws.macie2#S3BucketOwner",
                     "traits": {
-                        "smithy.api#documentation": "<p>The display name and Amazon Web Services account ID for the user who owns the bucket.</p>",
+                        "smithy.api#documentation": "<p>The display name and canonical user ID for the Amazon Web Services account that owns the bucket.</p>",
                         "smithy.api#jsonName": "owner"
                     }
                 },
@@ -7292,20 +7417,20 @@
                 "displayName": {
                     "target": "com.amazonaws.macie2#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The display name of the user who owns the bucket.</p>",
+                        "smithy.api#documentation": "<p>The display name of the account that owns the bucket.</p>",
                         "smithy.api#jsonName": "displayName"
                     }
                 },
                 "id": {
                     "target": "com.amazonaws.macie2#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services account ID for the user who owns the bucket.</p>",
+                        "smithy.api#documentation": "<p>The canonical user ID for the account that owns the bucket.</p>",
                         "smithy.api#jsonName": "id"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides information about the user who owns an S3 bucket.</p>"
+                "smithy.api#documentation": "<p>Provides information about the Amazon Web Services account that owns an S3 bucket.</p>"
             }
         },
         "com.amazonaws.macie2#S3Destination": {
@@ -7861,7 +7986,7 @@
                 "category": {
                     "target": "com.amazonaws.macie2#SensitiveDataItemCategory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The category of sensitive data that was detected. For example: CREDENTIALS, for credentials data such as private keys or Amazon Web Services secret keys; FINANCIAL_INFORMATION, for financial data such as credit card numbers; or, PERSONAL_INFORMATION, for personal health information, such as health insurance identification numbers, or personally identifiable information, such as driver's license identification numbers.</p>",
+                        "smithy.api#documentation": "<p>The category of sensitive data that was detected. For example: CREDENTIALS, for credentials data such as private keys or Amazon Web Services secret keys; FINANCIAL_INFORMATION, for financial data such as credit card numbers; or, PERSONAL_INFORMATION, for personal health information, such as health insurance identification numbers, or personally identifiable information, such as passport numbers.</p>",
                         "smithy.api#jsonName": "category"
                     }
                 },
@@ -7887,7 +8012,7 @@
         "com.amazonaws.macie2#SensitiveDataItemCategory": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The category of sensitive data that was detected and produced the finding. Possible values are:</p>",
+                "smithy.api#documentation": "<p>For a finding, the category of sensitive data that was detected and produced the finding. For a managed data identifier, the category of sensitive data that the managed data identifier detects. Possible values are:</p>",
                 "smithy.api#enum": [
                     {
                         "value": "FINANCIAL_INFORMATION",
@@ -8504,21 +8629,21 @@
                 "ignoreWords": {
                     "target": "com.amazonaws.macie2#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4-90 characters. Ignore words are case sensitive.</p>",
+                        "smithy.api#documentation": "<p>An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4-90 UTF-8 characters. Ignore words are case sensitive.</p>",
                         "smithy.api#jsonName": "ignoreWords"
                     }
                 },
                 "keywords": {
                     "target": "com.amazonaws.macie2#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3-90 characters. Keywords aren't case sensitive.</p>",
+                        "smithy.api#documentation": "<p>An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3-90 UTF-8 characters. Keywords aren't case sensitive.</p>",
                         "smithy.api#jsonName": "keywords"
                     }
                 },
                 "maximumMatchDistance": {
                     "target": "com.amazonaws.macie2#__integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1-300 characters. The default value is 50.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Amazon Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1-300 characters. The default value is 50.</p>",
                         "smithy.api#jsonName": "maximumMatchDistance"
                     }
                 },
@@ -9566,6 +9691,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.macie2#ListJobsFilterTerm"
+            }
+        },
+        "com.amazonaws.macie2#__listOfManagedDataIdentifierSummary": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.macie2#ManagedDataIdentifierSummary"
             }
         },
         "com.amazonaws.macie2#__listOfMatchingResource": {

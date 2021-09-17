@@ -23,13 +23,9 @@ import (
 // you also assign a VariantWeight to specify how much traffic you want to allocate
 // to each model. For example, suppose that you want to host two models, A and B,
 // and you assign traffic weight 2 for model A and 1 for model B. Amazon SageMaker
-// distributes two-thirds of the traffic to Model A, and one-third to model B. For
-// an example that calls this method when deploying a model to Amazon SageMaker
-// hosting services, see Deploy the Model to Amazon SageMaker Hosting Services
-// (Amazon Web Services SDK for Python (Boto 3)).
-// (https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-deploy-model.html#ex1-deploy-model-boto)
-// When you call CreateEndpoint, a load call is made to DynamoDB to verify that
-// your endpoint configuration exists. When you read data from a DynamoDB table
+// distributes two-thirds of the traffic to Model A, and one-third to model B. When
+// you call CreateEndpoint, a load call is made to DynamoDB to verify that your
+// endpoint configuration exists. When you read data from a DynamoDB table
 // supporting Eventually Consistent Reads
 // (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html),
 // the response might not reflect the results of a recently completed write

@@ -46,6 +46,14 @@ type DescribeSimulationApplicationOutput struct {
 	// The Amazon Resource Name (ARN) of the robot simulation application.
 	Arn *string
 
+	// The object that contains the Docker image URI used to create the simulation
+	// application.
+	Environment *types.Environment
+
+	// A SHA256 identifier for the Docker image that you use for your simulation
+	// application.
+	ImageDigest *string
+
 	// The time, in milliseconds since the epoch, when the simulation application was
 	// last updated.
 	LastUpdatedAt *time.Time

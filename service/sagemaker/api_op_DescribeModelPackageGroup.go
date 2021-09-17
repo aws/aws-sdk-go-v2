@@ -40,8 +40,8 @@ type DescribeModelPackageGroupInput struct {
 
 type DescribeModelPackageGroupOutput struct {
 
-	// Information about the user who created or modified an experiment, trial, or
-	// trial component.
+	// Information about the user who created or modified an experiment, trial, trial
+	// component, or project.
 	//
 	// This member is required.
 	CreatedBy *types.UserContext

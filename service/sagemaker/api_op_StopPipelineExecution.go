@@ -45,7 +45,7 @@ func (c *Client) StopPipelineExecution(ctx context.Context, params *StopPipeline
 type StopPipelineExecutionInput struct {
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the operation. An idempotent operation completes no more than one time.
+	// of the operation. An idempotent operation completes no more than once.
 	//
 	// This member is required.
 	ClientRequestToken *string

@@ -2036,6 +2036,17 @@ func awsAwsjson11_serializeDocumentJobExecutionSettings(v *types.JobExecutionSet
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentKMSEncryptionContextMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentLanguageOptions(v []types.LanguageCode, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -2338,6 +2349,31 @@ func awsAwsjson11_serializeDocumentStringTargetList(v []string, value smithyjson
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSubtitleFormats(v []types.SubtitleFormat, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSubtitles(v *types.Subtitles, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Formats != nil {
+		ok := object.Key("Formats")
+		if err := awsAwsjson11_serializeDocumentSubtitleFormats(v.Formats, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -3054,6 +3090,13 @@ func awsAwsjson11_serializeOpDocumentStartMedicalTranscriptionJobInput(v *StartM
 		ok.String(string(v.ContentIdentificationType))
 	}
 
+	if v.KMSEncryptionContext != nil {
+		ok := object.Key("KMSEncryptionContext")
+		if err := awsAwsjson11_serializeDocumentKMSEncryptionContextMap(v.KMSEncryptionContext, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.LanguageCode) > 0 {
 		ok := object.Key("LanguageCode")
 		ok.String(string(v.LanguageCode))
@@ -3146,6 +3189,13 @@ func awsAwsjson11_serializeOpDocumentStartTranscriptionJobInput(v *StartTranscri
 		}
 	}
 
+	if v.KMSEncryptionContext != nil {
+		ok := object.Key("KMSEncryptionContext")
+		if err := awsAwsjson11_serializeDocumentKMSEncryptionContextMap(v.KMSEncryptionContext, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.LanguageCode) > 0 {
 		ok := object.Key("LanguageCode")
 		ok.String(string(v.LanguageCode))
@@ -3200,6 +3250,13 @@ func awsAwsjson11_serializeOpDocumentStartTranscriptionJobInput(v *StartTranscri
 	if v.Settings != nil {
 		ok := object.Key("Settings")
 		if err := awsAwsjson11_serializeDocumentSettings(v.Settings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Subtitles != nil {
+		ok := object.Key("Subtitles")
+		if err := awsAwsjson11_serializeDocumentSubtitles(v.Subtitles, ok); err != nil {
 			return err
 		}
 	}

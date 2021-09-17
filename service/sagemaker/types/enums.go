@@ -3095,6 +3095,7 @@ const (
 	ResourceTypePipeline                 ResourceType = "Pipeline"
 	ResourceTypePipelineExecution        ResourceType = "PipelineExecution"
 	ResourceTypeFeatureGroup             ResourceType = "FeatureGroup"
+	ResourceTypeProject                  ResourceType = "Project"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -3112,6 +3113,7 @@ func (ResourceType) Values() []ResourceType {
 		"Pipeline",
 		"PipelineExecution",
 		"FeatureGroup",
+		"Project",
 	}
 }
 
@@ -3572,6 +3574,44 @@ func (StepStatus) Values() []StepStatus {
 	}
 }
 
+type StudioLifecycleConfigAppType string
+
+// Enum values for StudioLifecycleConfigAppType
+const (
+	StudioLifecycleConfigAppTypeJupyterServer StudioLifecycleConfigAppType = "JupyterServer"
+	StudioLifecycleConfigAppTypeKernelGateway StudioLifecycleConfigAppType = "KernelGateway"
+)
+
+// Values returns all known values for StudioLifecycleConfigAppType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StudioLifecycleConfigAppType) Values() []StudioLifecycleConfigAppType {
+	return []StudioLifecycleConfigAppType{
+		"JupyterServer",
+		"KernelGateway",
+	}
+}
+
+type StudioLifecycleConfigSortKey string
+
+// Enum values for StudioLifecycleConfigSortKey
+const (
+	StudioLifecycleConfigSortKeyCreationTime     StudioLifecycleConfigSortKey = "CreationTime"
+	StudioLifecycleConfigSortKeyLastModifiedTime StudioLifecycleConfigSortKey = "LastModifiedTime"
+	StudioLifecycleConfigSortKeyName             StudioLifecycleConfigSortKey = "Name"
+)
+
+// Values returns all known values for StudioLifecycleConfigSortKey. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StudioLifecycleConfigSortKey) Values() []StudioLifecycleConfigSortKey {
+	return []StudioLifecycleConfigSortKey{
+		"CreationTime",
+		"LastModifiedTime",
+		"Name",
+	}
+}
+
 type TargetDevice string
 
 // Enum values for TargetDevice
@@ -3606,6 +3646,7 @@ const (
 	TargetDeviceX86Win64      TargetDevice = "x86_win64"
 	TargetDeviceCoreml        TargetDevice = "coreml"
 	TargetDeviceJacintoTda4vm TargetDevice = "jacinto_tda4vm"
+	TargetDeviceImx8mplus     TargetDevice = "imx8mplus"
 )
 
 // Values returns all known values for TargetDevice. Note that this can be expanded
@@ -3643,6 +3684,7 @@ func (TargetDevice) Values() []TargetDevice {
 		"x86_win64",
 		"coreml",
 		"jacinto_tda4vm",
+		"imx8mplus",
 	}
 }
 

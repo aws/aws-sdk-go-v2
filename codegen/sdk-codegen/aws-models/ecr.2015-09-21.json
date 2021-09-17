@@ -148,7 +148,7 @@
                     "name": "ecr"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>Amazon Elastic Container Registry</fullname>\n        <p>Amazon Elastic Container Registry (Amazon ECR) is a managed container image registry service. Customers can use the\n            familiar Docker CLI, or their preferred client, to push, pull, and manage images. Amazon ECR\n            provides a secure, scalable, and reliable registry for your Docker or Open Container\n            Initiative (OCI) images. Amazon ECR supports private repositories with resource-based\n            permissions using IAM so that specific users or Amazon EC2 instances can access\n            repositories and images.</p>",
+                "smithy.api#documentation": "<fullname>Amazon Elastic Container Registry</fullname>\n        <p>Amazon Elastic Container Registry (Amazon ECR) is a managed container image registry service. Customers can use the\n            familiar Docker CLI, or their preferred client, to push, pull, and manage images. Amazon ECR\n            provides a secure, scalable, and reliable registry for your Docker or Open Container\n            Initiative (OCI) images. Amazon ECR supports private repositories with resource-based\n            permissions using IAM so that specific users or Amazon EC2 instances can access\n            repositories and images.</p>\n        <p>Amazon ECR has service endpoints in each supported Region. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/ecr.html\">Amazon ECR endpoints</a> in the\n                <i>Amazon Web Services General Reference</i>.</p>",
                 "smithy.api#title": "Amazon EC2 Container Registry",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://ecr.amazonaws.com/doc/2015-09-21/"
@@ -276,7 +276,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecr#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the registry that contains the image layers to\n            check. If you do not specify a registry, the default registry is assumed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the image layers to\n            check. If you do not specify a registry, the default registry is assumed.</p>"
                     }
                 },
                 "repositoryName": {
@@ -341,7 +341,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecr#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the registry that contains the image to delete.\n            If you do not specify a registry, the default registry is assumed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the image to delete.\n            If you do not specify a registry, the default registry is assumed.</p>"
                     }
                 },
                 "repositoryName": {
@@ -409,7 +409,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecr#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the registry that contains the images to describe.\n            If you do not specify a registry, the default registry is assumed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the images to\n            describe. If you do not specify a registry, the default registry is assumed.</p>"
                     }
                 },
                 "repositoryName": {
@@ -519,7 +519,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecr#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the registry to which to upload layers.\n            If you do not specify a registry, the default registry is assumed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry to which to upload layers.\n            If you do not specify a registry, the default registry is assumed.</p>"
                     }
                 },
                 "repositoryName": {
@@ -606,7 +606,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a repository. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/Repositories.html\">Amazon ECR Repositories</a> in the\n                <i>Amazon Elastic Container Registry User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates a repository. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/Repositories.html\">Amazon ECR repositories</a> in the\n                <i>Amazon Elastic Container Registry User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ecr#CreateRepositoryRequest": {
@@ -691,7 +691,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecr#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the registry that contains the repository.\n            If you do not specify a registry, the default registry is assumed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the repository.\n            If you do not specify a registry, the default registry is assumed.</p>"
                     }
                 },
                 "repositoryName": {
@@ -837,7 +837,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecr#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the registry that contains the repository policy to\n            delete. If you do not specify a registry, the default registry is assumed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the repository policy\n            to delete. If you do not specify a registry, the default registry is assumed.</p>"
                     }
                 },
                 "repositoryName": {
@@ -878,7 +878,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecr#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the registry that contains the repository to\n            delete. If you do not specify a registry, the default registry is assumed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the repository to\n            delete. If you do not specify a registry, the default registry is assumed.</p>"
                     }
                 },
                 "repositoryName": {
@@ -976,7 +976,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecr#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the registry that contains the repository in\n            which to describe the image scan findings for. If you do not specify a registry, the\n            default registry is assumed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the repository in\n            which to describe the image scan findings for. If you do not specify a registry, the default registry is assumed.</p>"
                     }
                 },
                 "repositoryName": {
@@ -1096,7 +1096,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecr#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the registry that contains the repository in which\n            to describe images. If you do not specify a registry, the default registry is assumed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the repository in\n            which to describe images. If you do not specify a registry, the default registry is assumed.</p>"
                     }
                 },
                 "repositoryName": {
@@ -1228,7 +1228,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecr#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the registry that contains the repositories to be\n            described. If you do not specify a registry, the default registry is assumed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the repositories to be\n            described. If you do not specify a registry, the default registry is assumed.</p>"
                     }
                 },
                 "repositoryNames": {
@@ -1289,19 +1289,19 @@
                 "encryptionType": {
                     "target": "com.amazonaws.ecr#EncryptionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The encryption type to use.</p>\n        <p>If you use the <code>KMS</code> encryption type, the contents of the repository will\n            be encrypted using server-side encryption with customer master keys (CMKs) stored in\n            AWS KMS. When you use AWS KMS to encrypt your data, you can either use the default AWS\n            managed CMK for Amazon ECR, or specify your own CMK, which you already created. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html\">Protecting Data Using Server-Side\n                Encryption with CMKs Stored in AWS Key Management Service (SSE-KMS)</a> in the\n                <i>Amazon Simple Storage Service Console Developer Guide.</i>.</p>\n        <p>If you use the <code>AES256</code> encryption type, Amazon ECR uses server-side encryption\n            with Amazon S3-managed encryption keys which encrypts the images in the repository using an\n            AES-256 encryption algorithm. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html\">Protecting Data Using\n                Server-Side Encryption with Amazon S3-Managed Encryption Keys (SSE-S3)</a> in\n            the <i>Amazon Simple Storage Service Console Developer Guide.</i>.</p>",
+                        "smithy.api#documentation": "<p>The encryption type to use.</p>\n        <p>If you use the <code>KMS</code> encryption type, the contents of the repository will\n            be encrypted using server-side encryption with Key Management Service key stored in KMS. When you\n            use KMS to encrypt your data, you can either use the default Amazon Web Services managed KMS key\n            for Amazon ECR, or specify your own KMS key, which you already created. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html\">Protecting data using server-side\n                encryption with an KMS key stored in Key Management Service (SSE-KMS)</a> in the\n                <i>Amazon Simple Storage Service Console Developer Guide.</i>.</p>\n        <p>If you use the <code>AES256</code> encryption type, Amazon ECR uses server-side encryption\n            with Amazon S3-managed encryption keys which encrypts the images in the repository using an\n            AES-256 encryption algorithm. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html\">Protecting data using\n                server-side encryption with Amazon S3-managed encryption keys (SSE-S3)</a> in the\n                <i>Amazon Simple Storage Service Console Developer Guide.</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "kmsKey": {
                     "target": "com.amazonaws.ecr#KmsKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>If you use the <code>KMS</code> encryption type, specify the CMK to use for\n            encryption. The alias, key ID, or full ARN of the CMK can be specified. The key must\n            exist in the same Region as the repository. If no key is specified, the default AWS\n            managed CMK for Amazon ECR will be used.</p>"
+                        "smithy.api#documentation": "<p>If you use the <code>KMS</code> encryption type, specify the KMS key to use for\n            encryption. The alias, key ID, or full ARN of the KMS key can be specified. The key\n            must exist in the same Region as the repository. If no key is specified, the default\n            Amazon Web Services managed KMS key for Amazon ECR will be used.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The encryption configuration for the repository. This determines how the contents of\n            your repository are encrypted at rest.</p>\n        <p>By default, when no encryption configuration is set or the <code>AES256</code>\n            encryption type is used, Amazon ECR uses server-side encryption with Amazon S3-managed encryption\n            keys which encrypts your data at rest using an AES-256 encryption algorithm. This does\n            not require any action on your part.</p>\n        <p>For more control over the encryption of the contents of your repository, you can use\n            server-side encryption with customer master keys (CMKs) stored in AWS Key Management Service (AWS KMS) to\n            encrypt your images. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/encryption-at-rest.html\">Amazon ECR encryption at\n                rest</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>The encryption configuration for the repository. This determines how the contents of\n            your repository are encrypted at rest.</p>\n        <p>By default, when no encryption configuration is set or the <code>AES256</code>\n            encryption type is used, Amazon ECR uses server-side encryption with Amazon S3-managed encryption\n            keys which encrypts your data at rest using an AES-256 encryption algorithm. This does\n            not require any action on your part.</p>\n        <p>For more control over the encryption of the contents of your repository, you can use\n            server-side encryption with Key Management Service key stored in Key Management Service (KMS) to encrypt your\n            images. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/encryption-at-rest.html\">Amazon ECR encryption at\n                rest</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ecr#EncryptionType": {
@@ -1394,7 +1394,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves an authorization token. An authorization token represents your IAM\n            authentication credentials and can be used to access any Amazon ECR registry that your IAM\n            principal has access to. The authorization token is valid for 12 hours.</p>\n        <p>The <code>authorizationToken</code> returned is a base64 encoded string that can be\n            decoded and used in a <code>docker login</code> command to authenticate to a registry.\n            The AWS CLI offers an <code>get-login-password</code> command that simplifies the login\n            process. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/Registries.html#registry_auth\">Registry\n                Authentication</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Retrieves an authorization token. An authorization token represents your IAM\n            authentication credentials and can be used to access any Amazon ECR registry that your IAM\n            principal has access to. The authorization token is valid for 12 hours.</p>\n        <p>The <code>authorizationToken</code> returned is a base64 encoded string that can be\n            decoded and used in a <code>docker login</code> command to authenticate to a registry.\n            The CLI offers an <code>get-login-password</code> command that simplifies the login\n            process. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/Registries.html#registry_auth\">Registry\n                authentication</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ecr#GetAuthorizationTokenRegistryIdList": {
@@ -1418,7 +1418,7 @@
                         "smithy.api#deprecated": {
                             "message": "This field is deprecated. The returned authorization token can be used to access any Amazon ECR registry that the IAM principal has access to, specifying a registry ID doesn't change the permissions scope of the authorization token."
                         },
-                        "smithy.api#documentation": "<p>A list of AWS account IDs that are associated with the registries for which to get\n            AuthorizationData objects. If you do not specify a registry, the default registry is assumed.</p>"
+                        "smithy.api#documentation": "<p>A list of Amazon Web Services account IDs that are associated with the registries for which to get\n            AuthorizationData objects. If you do not specify a registry, the default registry is assumed.</p>"
                     }
                 }
             }
@@ -1460,7 +1460,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the pre-signed Amazon S3 download URL corresponding to an image layer. You\n            can only get URLs for image layers that are referenced in an image.</p>\n        <p>When an image is pulled, the GetDownloadUrlForLayer API is called once per image layer\n            that is not already cached.</p> \n         <note>\n            <p>This operation is used by the Amazon ECR proxy and is not generally used by\n        customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Retrieves the pre-signed Amazon S3 download URL corresponding to an image layer. You can\n            only get URLs for image layers that are referenced in an image.</p>\n        <p>When an image is pulled, the GetDownloadUrlForLayer API is called once per image layer\n            that is not already cached.</p> \n         <note>\n            <p>This operation is used by the Amazon ECR proxy and is not generally used by\n        customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p>\n         </note>"
             }
         },
         "com.amazonaws.ecr#GetDownloadUrlForLayerRequest": {
@@ -1469,7 +1469,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecr#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the registry that contains the image layer to\n            download. If you do not specify a registry, the default registry is assumed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the image layer to\n            download. If you do not specify a registry, the default registry is assumed.</p>"
                     }
                 },
                 "repositoryName": {
@@ -1597,7 +1597,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecr#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the registry that contains the repository.\n            If you do not specify a registry, the default registry is assumed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the repository.\n            If you do not specify a registry, the default registry is assumed.</p>"
                     }
                 },
                 "repositoryName": {
@@ -1686,7 +1686,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecr#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the registry that contains the repository.\n            If you do not specify a registry, the default registry is assumed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the repository.\n            If you do not specify a registry, the default registry is assumed.</p>"
                     }
                 },
                 "repositoryName": {
@@ -1803,7 +1803,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecr#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the registry that contains the repository.\n            If you do not specify a registry, the default registry is assumed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the repository.\n            If you do not specify a registry, the default registry is assumed.</p>"
                     }
                 },
                 "repositoryName": {
@@ -1844,7 +1844,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecr#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the registry containing the image.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry containing the image.</p>"
                     }
                 },
                 "repositoryName": {
@@ -1917,7 +1917,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecr#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the registry to which this image belongs.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry to which this image belongs.</p>"
                     }
                 },
                 "repositoryName": {
@@ -2257,7 +2257,7 @@
                 "scanOnPush": {
                     "target": "com.amazonaws.ecr#ScanOnPushFlag",
                     "traits": {
-                        "smithy.api#documentation": "<p>The setting that determines whether images are scanned after being pushed to a\n            repository. If set to <code>true</code>, images will be scanned after being pushed. If\n            this parameter is not specified, it will default to <code>false</code> and images will\n            not be scanned unless a scan is manually started with the <a>StartImageScan</a> API.</p>"
+                        "smithy.api#documentation": "<p>The setting that determines whether images are scanned after being pushed to a\n            repository. If set to <code>true</code>, images will be scanned after being pushed. If\n            this parameter is not specified, it will default to <code>false</code> and images will\n            not be scanned unless a scan is manually started with the <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/APIReference/API_StartImageScan.html\">API_StartImageScan</a> API.</p>"
                     }
                 }
             },
@@ -2345,7 +2345,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecr#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the registry to which you intend to upload layers.\n            If you do not specify a registry, the default registry is assumed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry to which you intend to upload\n            layers. If you do not specify a registry, the default registry is assumed.</p>"
                     }
                 },
                 "repositoryName": {
@@ -2467,7 +2467,7 @@
                 "kmsError": {
                     "target": "com.amazonaws.ecr#KmsError",
                     "traits": {
-                        "smithy.api#documentation": "<p>The error code returned by AWS KMS.</p>"
+                        "smithy.api#documentation": "<p>The error code returned by KMS.</p>"
                     }
                 }
             },
@@ -2550,7 +2550,7 @@
         "com.amazonaws.ecr#LayerDigest": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[a-zA-Z0-9-_+.]+:[a-fA-F0-9]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9-_+.]+:[a-fA-F0-9]+$"
             }
         },
         "com.amazonaws.ecr#LayerDigestList": {
@@ -2865,7 +2865,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The operation did not succeed because it would have exceeded a service limit for your\n            account. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/service-quotas.html\">Amazon ECR Service Quotas</a> in\n            the Amazon Elastic Container Registry User Guide.</p>",
+                "smithy.api#documentation": "<p>The operation did not succeed because it would have exceeded a service limit for your\n            account. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/service-quotas.html\">Amazon ECR service quotas</a> in\n            the Amazon Elastic Container Registry User Guide.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -2918,7 +2918,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecr#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the registry that contains the repository in which\n            to list images. If you do not specify a registry, the default registry is assumed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the repository in\n            which to list images. If you do not specify a registry, the default registry is assumed.</p>"
                     }
                 },
                 "repositoryName": {
@@ -3104,7 +3104,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecr#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the registry that contains the repository in which\n            to put the image. If you do not specify a registry, the default registry is assumed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the repository in\n            which to put the image. If you do not specify a registry, the default registry is assumed.</p>"
                     }
                 },
                 "repositoryName": {
@@ -3181,7 +3181,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecr#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the registry that contains the repository in\n            which to update the image scanning configuration setting.\n            If you do not specify a registry, the default registry is assumed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the repository in\n            which to update the image scanning configuration setting.\n            If you do not specify a registry, the default registry is assumed.</p>"
                     }
                 },
                 "repositoryName": {
@@ -3243,7 +3243,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the image tag mutability settings for the specified repository. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-tag-mutability.html\">Image Tag\n                Mutability</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Updates the image tag mutability settings for the specified repository. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-tag-mutability.html\">Image tag\n                mutability</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ecr#PutImageTagMutabilityRequest": {
@@ -3252,7 +3252,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecr#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the registry that contains the repository in which\n            to update the image tag mutability settings. If you do not specify a registry, the default registry is assumed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the repository in\n            which to update the image tag mutability settings. If you do not specify a registry, the default registry is assumed.</p>"
                     }
                 },
                 "repositoryName": {
@@ -3314,7 +3314,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates the lifecycle policy for the specified repository. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/LifecyclePolicies.html\">Lifecycle Policy\n                Template</a>.</p>"
+                "smithy.api#documentation": "<p>Creates or updates the lifecycle policy for the specified repository. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/LifecyclePolicies.html\">Lifecycle policy\n                template</a>.</p>"
             }
         },
         "com.amazonaws.ecr#PutLifecyclePolicyRequest": {
@@ -3323,7 +3323,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecr#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the registry that contains the repository. If you\n            do\u2028 not specify a registry, the default registry is assumed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the repository. If you\n            do\u2028 not specify a registry, the default registry is assumed.</p>"
                     }
                 },
                 "repositoryName": {
@@ -3382,7 +3382,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates the permissions policy for your registry.</p>\n        <p>A registry policy is used to specify permissions for another AWS account and is used\n            when configuring cross-account replication. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry-permissions.html\">Registry permissions</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates or updates the permissions policy for your registry.</p>\n        <p>A registry policy is used to specify permissions for another Amazon Web Services account and is used\n            when configuring cross-account replication. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry-permissions.html\">Registry permissions</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ecr#PutRegistryPolicyRequest": {
@@ -3434,7 +3434,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates the replication configuration for a registry. The existing\n            replication configuration for a repository can be retrieved with the <a>DescribeRegistry</a> API action. The first time the\n            PutReplicationConfiguration API is called, a service-linked IAM role is created in\n            your account for the replication process. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/using-service-linked-roles.html\">Using\n                Service-Linked Roles for Amazon ECR</a> in the\n            <i>Amazon Elastic Container Registry User Guide</i>.</p>\n        <note>\n            <p>When configuring cross-account replication, the destination account must grant the\n                source account permission to replicate. This permission is controlled using a\n                registry permissions policy. For more information, see <a>PutRegistryPolicy</a>.</p>\n        </note>"
+                "smithy.api#documentation": "<p>Creates or updates the replication configuration for a registry. The existing\n            replication configuration for a repository can be retrieved with the <a>DescribeRegistry</a> API action. The first time the\n            PutReplicationConfiguration API is called, a service-linked IAM role is created in\n            your account for the replication process. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/using-service-linked-roles.html\">Using\n                service-linked roles for Amazon ECR</a> in the\n            <i>Amazon Elastic Container Registry User Guide</i>.</p>\n        <note>\n            <p>When configuring cross-account replication, the destination account must grant the\n                source account permission to replicate. This permission is controlled using a\n                registry permissions policy. For more information, see <a>PutRegistryPolicy</a>.</p>\n        </note>"
             }
         },
         "com.amazonaws.ecr#PutReplicationConfigurationRequest": {
@@ -3479,13 +3479,13 @@
                     "min": 2,
                     "max": 25
                 },
-                "smithy.api#pattern": "[0-9a-z-]{2,25}"
+                "smithy.api#pattern": "^[0-9a-z-]{2,25}$"
             }
         },
         "com.amazonaws.ecr#RegistryId": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[0-9]{12}"
+                "smithy.api#pattern": "^[0-9]{12}$"
             }
         },
         "com.amazonaws.ecr#RegistryPolicyNotFoundException": {
@@ -3591,13 +3591,13 @@
                 "repositoryArn": {
                     "target": "com.amazonaws.ecr#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the repository. The ARN contains the <code>arn:aws:ecr</code> namespace, followed by the region of the\n    repository, AWS account ID of the repository owner, repository namespace, and repository name.\n    For example, <code>arn:aws:ecr:region:012345678910:repository/test</code>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the repository. The ARN contains the <code>arn:aws:ecr</code> namespace, followed by the region of the\n    repository, Amazon Web Services account ID of the repository owner, repository namespace, and repository name.\n    For example, <code>arn:aws:ecr:region:012345678910:repository/test</code>.</p>"
                     }
                 },
                 "registryId": {
                     "target": "com.amazonaws.ecr#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the registry that contains the repository.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the repository.</p>"
                     }
                 },
                 "repositoryName": {
@@ -3666,7 +3666,7 @@
                     "min": 2,
                     "max": 256
                 },
-                "smithy.api#pattern": "(?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*"
+                "smithy.api#pattern": "^(?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*$"
             }
         },
         "com.amazonaws.ecr#RepositoryNameList": {
@@ -3810,7 +3810,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Applies a repository policy to the specified repository to control access permissions.\n            For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policies.html\">Amazon ECR Repository\n                Policies</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Applies a repository policy to the specified repository to control access permissions.\n            For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policies.html\">Amazon ECR Repository\n                policies</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ecr#SetRepositoryPolicyRequest": {
@@ -3819,7 +3819,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecr#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the registry that contains the repository.\n            If you do not specify a registry, the default registry is assumed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the repository.\n            If you do not specify a registry, the default registry is assumed.</p>"
                     }
                 },
                 "repositoryName": {
@@ -3832,7 +3832,7 @@
                 "policyText": {
                     "target": "com.amazonaws.ecr#RepositoryPolicyText",
                     "traits": {
-                        "smithy.api#documentation": "<p>The JSON repository policy text to apply to the repository. For more information, see\n                <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policy-examples.html\">Amazon ECR Repository\n                Policies</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The JSON repository policy text to apply to the repository. For more information, see\n                <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policy-examples.html\">Amazon ECR repository\n                policies</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3905,7 +3905,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts an image vulnerability scan. An image scan can only be started once per day on\n            an individual image. This limit includes if an image was scanned on initial push. For\n            more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html\">Image Scanning</a> in the\n                <i>Amazon Elastic Container Registry User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Starts an image vulnerability scan. An image scan can only be started once per 24\n            hours on an individual image. This limit includes if an image was scanned on initial\n            push. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html\">Image scanning</a> in the\n                <i>Amazon Elastic Container Registry User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ecr#StartImageScanRequest": {
@@ -3914,7 +3914,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecr#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the registry that contains the repository in\n            which to start an image scan request. If you do not specify a registry, the default registry is assumed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the repository in\n            which to start an image scan request. If you do not specify a registry, the default registry is assumed.</p>"
                     }
                 },
                 "repositoryName": {
@@ -3993,7 +3993,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecr#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the registry that contains the repository.\n            If you do not specify a registry, the default registry is assumed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the repository.\n            If you do not specify a registry, the default registry is assumed.</p>"
                     }
                 },
                 "repositoryName": {
@@ -4228,7 +4228,7 @@
         "com.amazonaws.ecr#UploadId": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"
+                "smithy.api#pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
             }
         },
         "com.amazonaws.ecr#UploadLayerPart": {
@@ -4272,7 +4272,7 @@
                 "registryId": {
                     "target": "com.amazonaws.ecr#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID associated with the registry to which you are uploading layer\n            parts. If you do not specify a registry, the default registry is assumed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry to which you are uploading layer\n            parts. If you do not specify a registry, the default registry is assumed.</p>"
                     }
                 },
                 "repositoryName": {

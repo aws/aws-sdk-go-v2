@@ -949,15 +949,18 @@ type OrderedPhoneNumber struct {
 }
 
 // Origination settings enable your SIP hosts to receive inbound calls using your
-// Amazon Chime Voice Connector.
+// Amazon Chime Voice Connector. The parameters listed below are not required, but
+// you must use at least one.
 type Origination struct {
 
 	// When origination settings are disabled, inbound calls are not enabled for your
-	// Amazon Chime Voice Connector.
+	// Amazon Chime Voice Connector. This parameter is not required, but you must
+	// specify this parameter or Routes.
 	Disabled *bool
 
 	// The call distribution properties defined for your SIP hosts. Valid range:
-	// Minimum value of 1. Maximum value of 20.
+	// Minimum value of 1. Maximum value of 20. This parameter is not required, but you
+	// must specify this parameter or Disabled.
 	Routes []OriginationRoute
 
 	noSmithyDocumentSerde
@@ -965,7 +968,8 @@ type Origination struct {
 
 // Origination routes define call distribution properties for your SIP hosts to
 // receive inbound calls using your Amazon Chime Voice Connector. Limit: Ten
-// origination routes for each Amazon Chime Voice Connector.
+// origination routes for each Amazon Chime Voice Connector. The parameters listed
+// below are not required, but you must use at least one.
 type OriginationRoute struct {
 
 	// The FQDN or IP address to contact for origination traffic.
@@ -1508,7 +1512,7 @@ type TerminationHealth struct {
 // EngineTranscribeSettings or EngineTranscribeMedicalSettings.
 type TranscriptionConfiguration struct {
 
-	// The transcription configuration settings passed to Amazon Transcribe.
+	// The transcription configuration settings passed to Amazon Transcribe Medical.
 	EngineTranscribeMedicalSettings *EngineTranscribeMedicalSettings
 
 	// The transcription configuration settings passed to Amazon Transcribe.

@@ -21,9 +21,9 @@ import (
 // directory within the EFS volume for notebooks, Git repositories, and data files.
 // SageMaker uses the Amazon Web Services Key Management Service (Amazon Web
 // Services KMS) to encrypt the EFS volume attached to the domain with an Amazon
-// Web Services managed customer master key (CMK) by default. For more control, you
-// can specify a customer managed CMK. For more information, see Protect Data at
-// Rest Using Encryption
+// Web Services managed key by default. For more control, you can specify a
+// customer managed key. For more information, see Protect Data at Rest Using
+// Encryption
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/encryption-at-rest.html). VPC
 // configuration All SageMaker Studio traffic between the domain and the EFS volume
 // is through the specified VPC and subnets. For other Studio traffic, you can
@@ -110,8 +110,8 @@ type CreateDomainInput struct {
 	HomeEfsFileSystemKmsKeyId *string
 
 	// SageMaker uses Amazon Web Services KMS to encrypt the EFS volume attached to the
-	// domain with an Amazon Web Services managed customer master key (CMK) by default.
-	// For more control, specify a customer managed CMK.
+	// domain with an Amazon Web Services managed key by default. For more control,
+	// specify a customer managed key.
 	KmsKeyId *string
 
 	// Tags to associated with the Domain. Each tag consists of a key and an optional

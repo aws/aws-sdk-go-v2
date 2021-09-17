@@ -67,7 +67,10 @@ type Action struct {
 	// DynamoDB column.
 	DynamoDBv2 *DynamoDBv2Action
 
-	// Write data to an Amazon Elasticsearch Service domain.
+	// Write data to an Amazon Elasticsearch Service domain. This action is deprecated.
+	// Use the OpenSearch action
+	// (https://docs.aws.amazon.com/iot/latest/apireference/API_OpenSearchAction.html)
+	// instead.
 	Elasticsearch *ElasticsearchAction
 
 	// Write to an Amazon Kinesis Firehose stream.
@@ -95,6 +98,9 @@ type Action struct {
 
 	// Invoke a Lambda function.
 	Lambda *LambdaAction
+
+	// Write data to an Amazon OpenSearch Service domain.
+	OpenSearch *OpenSearchAction
 
 	// Publish to another MQTT topic.
 	Republish *RepublishAction
@@ -1410,6 +1416,9 @@ type EffectivePolicy struct {
 }
 
 // Describes an action that writes data to an Amazon Elasticsearch Service domain.
+// This action is deprecated. Use the OpenSearch action
+// (https://docs.aws.amazon.com/iot/latest/apireference/API_OpenSearchAction.html)
+// instead.
 type ElasticsearchAction struct {
 
 	// The endpoint of your Elasticsearch domain.
@@ -2324,6 +2333,37 @@ type NonCompliantResource struct {
 
 	// The type of the noncompliant resource.
 	ResourceType ResourceType
+
+	noSmithyDocumentSerde
+}
+
+// Describes an action that writes data to an Amazon OpenSearch Service domain.
+type OpenSearchAction struct {
+
+	// The endpoint of your OpenSearch domain.
+	//
+	// This member is required.
+	Endpoint *string
+
+	// The unique identifier for the document you are storing.
+	//
+	// This member is required.
+	Id *string
+
+	// The OpenSearch index where you want to store your data.
+	//
+	// This member is required.
+	Index *string
+
+	// The IAM role ARN that has access to OpenSearch.
+	//
+	// This member is required.
+	RoleArn *string
+
+	// The type of document you are storing.
+	//
+	// This member is required.
+	Type *string
 
 	noSmithyDocumentSerde
 }
@@ -3261,7 +3301,8 @@ type ThingConnectivity struct {
 	// false if it is not connected.
 	Connected bool
 
-	// The reason why the client is disconnected.
+	// The reason why the client is disconnected. If the thing has been disconnected
+	// for approximately an hour, the disconnectReason value might be missing.
 	DisconnectReason *string
 
 	// The epoch time (in milliseconds) when the thing last connected or disconnected.

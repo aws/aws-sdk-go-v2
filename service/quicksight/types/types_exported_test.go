@@ -14,6 +14,9 @@ func ExampleDataSourceParameters_outputUsage() {
 	case *types.DataSourceParametersMemberAmazonElasticsearchParameters:
 		_ = v.Value // Value is types.AmazonElasticsearchParameters
 
+	case *types.DataSourceParametersMemberAmazonOpenSearchParameters:
+		_ = v.Value // Value is types.AmazonOpenSearchParameters
+
 	case *types.DataSourceParametersMemberAthenaParameters:
 		_ = v.Value // Value is types.AthenaParameters
 
@@ -83,6 +86,7 @@ func ExampleDataSourceParameters_outputUsage() {
 var _ *types.AmazonElasticsearchParameters
 var _ *types.MariaDbParameters
 var _ *types.RdsParameters
+var _ *types.AmazonOpenSearchParameters
 var _ *types.RedshiftParameters
 var _ *types.OracleParameters
 var _ *types.JiraParameters

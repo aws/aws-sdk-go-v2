@@ -11,7 +11,7 @@ import (
 )
 
 // Creates or updates the lifecycle policy for the specified repository. For more
-// information, see Lifecycle Policy Template
+// information, see Lifecycle policy template
 // (https://docs.aws.amazon.com/AmazonECR/latest/userguide/LifecyclePolicies.html).
 func (c *Client) PutLifecyclePolicy(ctx context.Context, params *PutLifecyclePolicyInput, optFns ...func(*Options)) (*PutLifecyclePolicyOutput, error) {
 	if params == nil {
@@ -40,8 +40,9 @@ type PutLifecyclePolicyInput struct {
 	// This member is required.
 	RepositoryName *string
 
-	// The AWS account ID associated with the registry that contains the repository. If
-	// you do  not specify a registry, the default registry is assumed.
+	// The Amazon Web Services account ID associated with the registry that contains
+	// the repository. If you do  not specify a registry, the default registry is
+	// assumed.
 	RegistryId *string
 
 	noSmithyDocumentSerde

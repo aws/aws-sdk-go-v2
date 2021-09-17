@@ -25,7 +25,8 @@ import (
 // finding a scaling point might be dropped. For more information about scaling
 // points, see  Autoscaling for Aurora Serverless
 // (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.how-it-works.html#aurora-serverless.how-it-works.auto-scaling)
-// in the Amazon Aurora User Guide. This action only applies to Aurora DB clusters.
+// in the Amazon Aurora User Guide. This action only applies to Aurora Serverless
+// DB clusters.
 func (c *Client) ModifyCurrentDBClusterCapacity(ctx context.Context, params *ModifyCurrentDBClusterCapacityInput, optFns ...func(*Options)) (*ModifyCurrentDBClusterCapacityOutput, error) {
 	if params == nil {
 		params = &ModifyCurrentDBClusterCapacityInput{}
@@ -64,9 +65,7 @@ type ModifyCurrentDBClusterCapacityInput struct {
 
 	// The amount of time, in seconds, that Aurora Serverless tries to find a scaling
 	// point to perform seamless scaling before enforcing the timeout action. The
-	// default is 300.
-	//
-	// * Value must be from 10 through 600.
+	// default is 300. Specify a value between 10 and 600 seconds.
 	SecondsBeforeTimeout *int32
 
 	// The action to take when the timeout is reached, either ForceApplyCapacityChange

@@ -808,6 +808,13 @@ func awsRestjson1_serializeOpDocumentCreateRobotApplicationInput(v *CreateRobotA
 	object := value.Object()
 	defer object.Close()
 
+	if v.Environment != nil {
+		ok := object.Key("environment")
+		if err := awsRestjson1_serializeDocumentEnvironment(v.Environment, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -907,6 +914,18 @@ func awsRestjson1_serializeOpDocumentCreateRobotApplicationVersionInput(v *Creat
 		ok.String(*v.CurrentRevisionId)
 	}
 
+	if v.ImageDigest != nil {
+		ok := object.Key("imageDigest")
+		ok.String(*v.ImageDigest)
+	}
+
+	if v.S3Etags != nil {
+		ok := object.Key("s3Etags")
+		if err := awsRestjson1_serializeDocumentS3Etags(v.S3Etags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -969,6 +988,13 @@ func awsRestjson1_serializeOpHttpBindingsCreateSimulationApplicationInput(v *Cre
 func awsRestjson1_serializeOpDocumentCreateSimulationApplicationInput(v *CreateSimulationApplicationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Environment != nil {
+		ok := object.Key("environment")
+		if err := awsRestjson1_serializeDocumentEnvironment(v.Environment, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Name != nil {
 		ok := object.Key("name")
@@ -1081,6 +1107,18 @@ func awsRestjson1_serializeOpDocumentCreateSimulationApplicationVersionInput(v *
 	if v.CurrentRevisionId != nil {
 		ok := object.Key("currentRevisionId")
 		ok.String(*v.CurrentRevisionId)
+	}
+
+	if v.ImageDigest != nil {
+		ok := object.Key("imageDigest")
+		ok.String(*v.ImageDigest)
+	}
+
+	if v.S3Etags != nil {
+		ok := object.Key("s3Etags")
+		if err := awsRestjson1_serializeDocumentS3Etags(v.S3Etags, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -4220,6 +4258,13 @@ func awsRestjson1_serializeOpDocumentUpdateRobotApplicationInput(v *UpdateRobotA
 		ok.String(*v.CurrentRevisionId)
 	}
 
+	if v.Environment != nil {
+		ok := object.Key("environment")
+		if err := awsRestjson1_serializeDocumentEnvironment(v.Environment, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RobotSoftwareSuite != nil {
 		ok := object.Key("robotSoftwareSuite")
 		if err := awsRestjson1_serializeDocumentRobotSoftwareSuite(v.RobotSoftwareSuite, ok); err != nil {
@@ -4305,6 +4350,13 @@ func awsRestjson1_serializeOpDocumentUpdateSimulationApplicationInput(v *UpdateS
 	if v.CurrentRevisionId != nil {
 		ok := object.Key("currentRevisionId")
 		ok.String(*v.CurrentRevisionId)
+	}
+
+	if v.Environment != nil {
+		ok := object.Key("environment")
+		if err := awsRestjson1_serializeDocumentEnvironment(v.Environment, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.RenderingEngine != nil {
@@ -4613,6 +4665,18 @@ func awsRestjson1_serializeDocumentDeploymentLaunchConfig(v *types.DeploymentLau
 	return nil
 }
 
+func awsRestjson1_serializeDocumentEnvironment(v *types.Environment, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Uri != nil {
+		ok := object.Key("uri")
+		ok.String(*v.Uri)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentEnvironmentVariableMap(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4873,6 +4937,17 @@ func awsRestjson1_serializeDocumentRobotSoftwareSuite(v *types.RobotSoftwareSuit
 		ok.String(string(v.Version))
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentS3Etags(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 

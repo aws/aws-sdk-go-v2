@@ -229,14 +229,14 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Inspect all of the elements that WAF has parsed and extracted from the web request\n         JSON body that are within the <a>JsonBody</a>\n            <code>MatchScope</code>. This is used with the <a>FieldToMatch</a> option\n            <code>JsonBody</code>.\n         \n      </p>\n         <p>This is used only to indicate the web request component for WAF to inspect, in the <a>FieldToMatch</a> specification. </p>"
+                "smithy.api#documentation": "<p>Inspect all of the elements that WAF has parsed and extracted from the web request\n         JSON body that are within the <a>JsonBody</a>\n            <code>MatchScope</code>. This is used with the <a>FieldToMatch</a> option\n            <code>JsonBody</code>.\n         \n      </p>\n         <p>This is used only to indicate the web request component for WAF to inspect, in the <a>FieldToMatch</a> specification. </p> \n         <p>JSON specification: <code>\"All\": {}</code>\n         </p>"
             }
         },
         "com.amazonaws.wafv2#AllQueryArguments": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>All query arguments of a web request. </p>\n         <p>This is used only to indicate the web request component for WAF to inspect, in the <a>FieldToMatch</a> specification. </p>"
+                "smithy.api#documentation": "<p>All query arguments of a web request. </p>\n           <p>This is used only to indicate the web request component for WAF to inspect, in the <a>FieldToMatch</a> specification. </p> \n         <p>JSON specification: <code>\"AllQueryArguments\": {}</code>\n         </p>"
             }
         },
         "com.amazonaws.wafv2#AllowAction": {
@@ -338,7 +338,7 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>The body of a web request. This immediately follows the request headers.</p>\n         <p>This is used only to indicate the web request component for WAF to inspect, in the <a>FieldToMatch</a> specification. </p>"
+                "smithy.api#documentation": "<p>The body of a web request. This immediately follows the request headers.</p>\n         <p>This is used only to indicate the web request component for WAF to inspect, in the <a>FieldToMatch</a> specification. </p> \n         <p>JSON specification: <code>\"Body\": {}</code>\n         </p>"
             }
         },
         "com.amazonaws.wafv2#BodyParsingFallbackBehavior": {
@@ -2862,7 +2862,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The part of a web request that you want WAF to inspect. Include the single\n            <code>FieldToMatch</code> type that you want to inspect, with additional specifications\n         as needed, according to the type. You specify a single request component in\n            <code>FieldToMatch</code> for each rule statement that requires it. To inspect more than\n         one component of a web request, create a separate rule statement for each component.</p>"
+                "smithy.api#documentation": "<p>The part of a web request that you want WAF to inspect. Include the single <code>FieldToMatch</code> type that you want to inspect, with additional specifications as needed, according to the type. You specify a single request component in <code>FieldToMatch</code> for each rule statement that requires it. To inspect more than one component of a web request, create a separate rule statement for each component.</p>\n         <p>JSON specification for a <code>QueryString</code> field to match: </p>\n         <p>\n            <code>    \"FieldToMatch\": { \"QueryString\": {} }</code>\n         </p>\n         <p>Example JSON for a <code>Method</code> field to match specification:</p>\n         <p>\n            <code>    \"FieldToMatch\": { \"Method\": { \"Name\": \"DELETE\" } }</code>\n         </p>"
             }
         },
         "com.amazonaws.wafv2#FieldToMatchData": {
@@ -3006,7 +3006,7 @@
                 "RuleGroupReferenceStatement": {
                     "target": "com.amazonaws.wafv2#RuleGroupReferenceStatement",
                     "traits": {
-                        "smithy.api#documentation": "<p>A rule statement used to run the rules that are defined in a <a>RuleGroup</a>. To use this, create a rule group with your rules, then provide the ARN of the rule group in this statement.</p>\n         <p>You cannot nest a <code>RuleGroupReferenceStatement</code>, for example for use inside a <code>NotStatement</code> or <code>OrStatement</code>. It can only be referenced as a top-level statement within a rule.</p>"
+                        "smithy.api#documentation": "<p>A rule statement used to run the rules that are defined in a <a>RuleGroup</a>. To use this, create a rule group with your rules, then provide the ARN of the rule group in this statement.</p>\n         <p>You cannot nest a <code>RuleGroupReferenceStatement</code>, for example for use inside a <code>NotStatement</code> or <code>OrStatement</code>. You \n      can only use a rule group reference statement at the top level inside a web ACL. </p>"
                     }
                 }
             },
@@ -3226,7 +3226,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the specified managed rule set. </p>\n         <note>\n            <p>This is intended for use only by vendors of managed rule sets. Vendors are Amazon Web Services and Marketplace sellers. </p>\n            <p>Vendors, you can use the managed rule set APIs to provide controlled rollout of your versioned managed rule group offerings for your customers. The APIs are <code>ListManagedRuleSets</code>, <code>GetManagedRuleSet</code>, <code>PutManagedRuleSetVersions</code>, and <code>UpdateManagedRuleSetVersionExpiryDate</code>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Retrieves the specified managed rule set. </p>\n         <note>\n            <p>This is intended for use only by vendors of managed rule sets. Vendors are Amazon Web Services and Amazon Web Services Marketplace sellers. </p>\n            <p>Vendors, you can use the managed rule set APIs to provide controlled rollout of your versioned managed rule group offerings for your customers. The APIs are <code>ListManagedRuleSets</code>, <code>GetManagedRuleSet</code>, <code>PutManagedRuleSetVersions</code>, and <code>UpdateManagedRuleSetVersionExpiryDate</code>.</p>\n         </note>"
             }
         },
         "com.amazonaws.wafv2#GetManagedRuleSetRequest": {
@@ -3341,7 +3341,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the keys that are currently blocked by a rate-based rule. The maximum number\n         of managed keys that can be blocked for a single rate-based rule is 10,000. If more than\n         10,000 addresses exceed the rate limit, those with the highest rates are blocked.</p>"
+                "smithy.api#documentation": "<p>Retrieves the keys that are currently blocked by a rate-based rule instance. The maximum number of managed keys that can be blocked for a single rate-based rule instance is 10,000. If more than 10,000 addresses exceed the rate limit, those with the highest rates are blocked.</p>\n         <p>For a rate-based rule that you've defined inside a rule group, provide the name of the rule group reference statement in your request, in addition to the rate-based rule name and the web ACL name. </p>\n         <p>WAF monitors web requests and manages keys independently for each unique combination of web ACL, optional rule group, and rate-based rule. For example, if you define a rate-based rule inside a rule group, and then use the rule group in a web ACL, WAF monitors web requests and manages keys for that web ACL, rule group reference statement, and rate-based rule instance. If you use the same rule group in a second web ACL, WAF monitors web requests and manages keys for this second usage completely independent of your first.  </p>"
             }
         },
         "com.amazonaws.wafv2#GetRateBasedStatementManagedKeysRequest": {
@@ -3368,10 +3368,16 @@
                         "smithy.api#required": {}
                     }
                 },
+                "RuleGroupRuleName": {
+                    "target": "com.amazonaws.wafv2#EntityName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the rule group reference statement in your web ACL. This is required only when you have the rate-based rule nested \ninside a rule group. </p>"
+                    }
+                },
                 "RuleName": {
                     "target": "com.amazonaws.wafv2#EntityName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the rate-based rule to get the keys for.</p>",
+                        "smithy.api#documentation": "<p>The name of the rate-based rule to get the keys for. If you have the rule defined inside a rule group that you're using in your web ACL, also provide the name of the rule group reference statement in the request parameter <code>RuleGroupRuleName</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4026,7 +4032,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The body of a web request, inspected as JSON. The body immediately follows the request\n         headers. This is used in the <a>FieldToMatch</a> specification.</p>\n         <p>Use the specifications in this object to indicate which parts of the JSON body to\n         inspect using the rule's inspection criteria. WAF inspects only the parts of the JSON\n         that result from the matches that you\n         indicate.\n      </p>"
+                "smithy.api#documentation": "<p>The body of a web request, inspected as JSON. The body immediately follows the request\n         headers. This is used in the <a>FieldToMatch</a> specification.</p>\n         <p>Use the specifications in this object to indicate which parts of the JSON body to\n         inspect using the rule's inspection criteria. WAF inspects only the parts of the JSON\n         that result from the matches that you\n         indicate.\n      </p>\n         <p>Example JSON: <code>\"JsonBody\": { \"MatchPattern\": { \"All\": {} }, \"MatchScope\": \"ALL\" }</code>\n         </p>"
             }
         },
         "com.amazonaws.wafv2#JsonMatchPattern": {
@@ -4300,7 +4306,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves an array of managed rule groups that are available for you to use. This list\n         includes all Amazon Web Services Managed Rules rule groups and all of the Marketplace managed rule groups that you're\n         subscribed to.</p>"
+                "smithy.api#documentation": "<p>Retrieves an array of managed rule groups that are available for you to use. This list\n         includes all Amazon Web Services Managed Rules rule groups and all of the Amazon Web Services Marketplace managed rule groups that you're\n         subscribed to.</p>"
             }
         },
         "com.amazonaws.wafv2#ListAvailableManagedRuleGroupsRequest": {
@@ -4491,7 +4497,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the managed rule sets that you own. </p>\n         <note>\n            <p>This is intended for use only by vendors of managed rule sets. Vendors are Amazon Web Services and Marketplace sellers. </p>\n            <p>Vendors, you can use the managed rule set APIs to provide controlled rollout of your versioned managed rule group offerings for your customers. The APIs are <code>ListManagedRuleSets</code>, <code>GetManagedRuleSet</code>, <code>PutManagedRuleSetVersions</code>, and <code>UpdateManagedRuleSetVersionExpiryDate</code>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Retrieves the managed rule sets that you own. </p>\n         <note>\n            <p>This is intended for use only by vendors of managed rule sets. Vendors are Amazon Web Services and Amazon Web Services Marketplace sellers. </p>\n            <p>Vendors, you can use the managed rule set APIs to provide controlled rollout of your versioned managed rule group offerings for your customers. The APIs are <code>ListManagedRuleSets</code>, <code>GetManagedRuleSet</code>, <code>PutManagedRuleSetVersions</code>, and <code>UpdateManagedRuleSetVersionExpiryDate</code>.</p>\n         </note>"
             }
         },
         "com.amazonaws.wafv2#ListManagedRuleSetsRequest": {
@@ -4906,7 +4912,7 @@
                 "RedactedFields": {
                     "target": "com.amazonaws.wafv2#RedactedFields",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parts of the request that you want to keep out of the logs. For example, if you\n         redact the <code>HEADER</code> field, the <code>HEADER</code> field in the firehose will be\n            <code>xxx</code>. </p>\n         <note>\n            <p>You must use one of the following values: <code>URI</code>,\n            <code>QUERY_STRING</code>, <code>HEADER</code>, or <code>METHOD</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The parts of the request that you want to keep out of the logs. For\n          example, if you redact the <code>SingleHeader</code> field, the <code>HEADER</code> field in the firehose will be <code>xxx</code>. </p>\n         <note>\n           <p>You can specify only the following fields for redaction: <code>UriPath</code>, <code>QueryString</code>, <code>SingleHeader</code>, <code>Method</code>, and <code>JsonBody</code>.</p>\n         </note>"
                     }
                 },
                 "ManagedByFirewallManager": {
@@ -5018,12 +5024,12 @@
                 "Description": {
                     "target": "com.amazonaws.wafv2#EntityDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description of the managed rule group, provided by Amazon Web Services Managed Rules or the Marketplace seller who manages it.</p>"
+                        "smithy.api#documentation": "<p>The description of the managed rule group, provided by Amazon Web Services Managed Rules or the Amazon Web Services Marketplace seller who manages it.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>High-level information about a managed rule group, returned by <a>ListAvailableManagedRuleGroups</a>. This provides information like the name and vendor name, that you provide when you add a <a>ManagedRuleGroupStatement</a> to a web ACL. Managed rule groups include Amazon Web Services Managed Rules rule groups, which are free of charge to WAF customers, and Marketplace managed rule groups, which you can subscribe to through Marketplace. </p>"
+                "smithy.api#documentation": "<p>High-level information about a managed rule group, returned by <a>ListAvailableManagedRuleGroups</a>. This provides information like the name and vendor name, that you provide when you add a <a>ManagedRuleGroupStatement</a> to a web ACL. Managed rule groups include Amazon Web Services Managed Rules rule groups, which are free of charge to WAF customers, and Amazon Web Services Marketplace managed rule groups, which you can subscribe to through Amazon Web Services Marketplace. </p>"
             }
         },
         "com.amazonaws.wafv2#ManagedRuleGroupVersion": {
@@ -5102,7 +5108,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A set of rules that is managed by Amazon Web Services and Marketplace sellers to provide versioned managed\n         rule groups for customers of WAF.</p>\n         <note>\n            <p>This is intended for use only by vendors of managed rule sets. Vendors are Amazon Web Services and Marketplace sellers. </p>\n            <p>Vendors, you can use the managed rule set APIs to provide controlled rollout of your versioned managed rule group offerings for your customers. The APIs are <code>ListManagedRuleSets</code>, <code>GetManagedRuleSet</code>, <code>PutManagedRuleSetVersions</code>, and <code>UpdateManagedRuleSetVersionExpiryDate</code>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>A set of rules that is managed by Amazon Web Services and Amazon Web Services Marketplace sellers to provide versioned managed\n         rule groups for customers of WAF.</p>\n         <note>\n            <p>This is intended for use only by vendors of managed rule sets. Vendors are Amazon Web Services and Amazon Web Services Marketplace sellers. </p>\n            <p>Vendors, you can use the managed rule set APIs to provide controlled rollout of your versioned managed rule group offerings for your customers. The APIs are <code>ListManagedRuleSets</code>, <code>GetManagedRuleSet</code>, <code>PutManagedRuleSetVersions</code>, and <code>UpdateManagedRuleSetVersionExpiryDate</code>.</p>\n         </note>"
             }
         },
         "com.amazonaws.wafv2#ManagedRuleSetSummaries": {
@@ -5152,7 +5158,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>High-level information for a managed rule set. </p>\n         <note>\n            <p>This is intended for use only by vendors of managed rule sets. Vendors are Amazon Web Services and Marketplace sellers. </p>\n            <p>Vendors, you can use the managed rule set APIs to provide controlled rollout of your versioned managed rule group offerings for your customers. The APIs are <code>ListManagedRuleSets</code>, <code>GetManagedRuleSet</code>, <code>PutManagedRuleSetVersions</code>, and <code>UpdateManagedRuleSetVersionExpiryDate</code>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>High-level information for a managed rule set. </p>\n         <note>\n            <p>This is intended for use only by vendors of managed rule sets. Vendors are Amazon Web Services and Amazon Web Services Marketplace sellers. </p>\n            <p>Vendors, you can use the managed rule set APIs to provide controlled rollout of your versioned managed rule group offerings for your customers. The APIs are <code>ListManagedRuleSets</code>, <code>GetManagedRuleSet</code>, <code>PutManagedRuleSetVersions</code>, and <code>UpdateManagedRuleSetVersionExpiryDate</code>.</p>\n         </note>"
             }
         },
         "com.amazonaws.wafv2#ManagedRuleSetVersion": {
@@ -5196,14 +5202,14 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information for a single version of a managed rule set. </p>\n         <note>\n            <p>This is intended for use only by vendors of managed rule sets. Vendors are Amazon Web Services and Marketplace sellers. </p>\n            <p>Vendors, you can use the managed rule set APIs to provide controlled rollout of your versioned managed rule group offerings for your customers. The APIs are <code>ListManagedRuleSets</code>, <code>GetManagedRuleSet</code>, <code>PutManagedRuleSetVersions</code>, and <code>UpdateManagedRuleSetVersionExpiryDate</code>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Information for a single version of a managed rule set. </p>\n         <note>\n            <p>This is intended for use only by vendors of managed rule sets. Vendors are Amazon Web Services and Amazon Web Services Marketplace sellers. </p>\n            <p>Vendors, you can use the managed rule set APIs to provide controlled rollout of your versioned managed rule group offerings for your customers. The APIs are <code>ListManagedRuleSets</code>, <code>GetManagedRuleSet</code>, <code>PutManagedRuleSetVersions</code>, and <code>UpdateManagedRuleSetVersionExpiryDate</code>.</p>\n         </note>"
             }
         },
         "com.amazonaws.wafv2#Method": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>The HTTP method of a web request. The method indicates the type of operation that the\n         request is asking the origin to perform. </p>\n         <p>This is used only to indicate the web request component for WAF to inspect, in the <a>FieldToMatch</a> specification. </p>"
+                "smithy.api#documentation": "<p>The HTTP method of a web request. The method indicates the type of operation that the request is asking the origin to perform. </p>\n           <p>This is used only to indicate the web request component for WAF to inspect, in the <a>FieldToMatch</a> specification. </p> \n         <p>JSON specification: <code>\"Method\": {}</code>\n         </p>"
             }
         },
         "com.amazonaws.wafv2#MetricName": {
@@ -5230,7 +5236,7 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Specifies that WAF should do nothing. This is generally used to try out a rule\n         without performing any actions. You set the <code>OverrideAction</code> on the <a>Rule</a>. </p>\n         <p>This is used in the context of other settings, for example to specify values for <a>RuleAction</a> and web ACL <a>DefaultAction</a>. </p>"
+                "smithy.api#documentation": "<p>Specifies that WAF should do nothing. This is generally used to try out a rule\n         without performing any actions. You set the <code>OverrideAction</code> on the <a>Rule</a>. </p>\n         <p>This is used in the context of other settings, for example to specify values for <a>RuleAction</a> and web ACL <a>DefaultAction</a>. </p> \n         <p>JSON specification: <code>\"None\": {}</code>\n         </p>"
             }
         },
         "com.amazonaws.wafv2#NotStatement": {
@@ -5508,6 +5514,18 @@
                     {
                         "value": "FILTER_CONDITION",
                         "name": "FILTER_CONDITION"
+                    },
+                    {
+                        "value": "EXPIRE_TIMESTAMP",
+                        "name": "EXPIRE_TIMESTAMP"
+                    },
+                    {
+                        "value": "CHANGE_PROPAGATION_STATUS",
+                        "name": "CHANGE_PROPAGATION_STATUS"
+                    },
+                    {
+                        "value": "ASSOCIABLE_RESOURCE",
+                        "name": "ASSOCIABLE_RESOURCE"
                     }
                 ]
             }
@@ -5653,7 +5671,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Defines the versions of your managed rule set that you are offering to the customers.\n         Customers see your offerings as managed rule groups with versioning.</p>\n         <note>\n            <p>This is intended for use only by vendors of managed rule sets. Vendors are Amazon Web Services and Marketplace sellers. </p>\n            <p>Vendors, you can use the managed rule set APIs to provide controlled rollout of your versioned managed rule group offerings for your customers. The APIs are <code>ListManagedRuleSets</code>, <code>GetManagedRuleSet</code>, <code>PutManagedRuleSetVersions</code>, and <code>UpdateManagedRuleSetVersionExpiryDate</code>.</p>\n         </note> \n         <p>Customers retrieve their managed rule group list by calling <a>ListAvailableManagedRuleGroups</a>. The name that you provide here for your\n         managed rule set is the name the customer sees for the corresponding managed rule group.\n         Customers can retrieve the available versions for a managed rule group by calling <a>ListAvailableManagedRuleGroupVersions</a>. You provide a rule group\n         specification for each version. For each managed rule set, you must specify a version that\n         you recommend using. </p>\n         <p>To initiate the expiration of a managed rule group version, use <a>UpdateManagedRuleSetVersionExpiryDate</a>.</p>"
+                "smithy.api#documentation": "<p>Defines the versions of your managed rule set that you are offering to the customers.\n         Customers see your offerings as managed rule groups with versioning.</p>\n         <note>\n            <p>This is intended for use only by vendors of managed rule sets. Vendors are Amazon Web Services and Amazon Web Services Marketplace sellers. </p>\n            <p>Vendors, you can use the managed rule set APIs to provide controlled rollout of your versioned managed rule group offerings for your customers. The APIs are <code>ListManagedRuleSets</code>, <code>GetManagedRuleSet</code>, <code>PutManagedRuleSetVersions</code>, and <code>UpdateManagedRuleSetVersionExpiryDate</code>.</p>\n         </note> \n         <p>Customers retrieve their managed rule group list by calling <a>ListAvailableManagedRuleGroups</a>. The name that you provide here for your\n         managed rule set is the name the customer sees for the corresponding managed rule group.\n         Customers can retrieve the available versions for a managed rule group by calling <a>ListAvailableManagedRuleGroupVersions</a>. You provide a rule group\n         specification for each version. For each managed rule set, you must specify a version that\n         you recommend using. </p>\n         <p>To initiate the expiration of a managed rule group version, use <a>UpdateManagedRuleSetVersionExpiryDate</a>.</p>"
             }
         },
         "com.amazonaws.wafv2#PutManagedRuleSetVersionsRequest": {
@@ -5765,7 +5783,7 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>The query string of a web request. This is the part of a URL that appears after a\n            <code>?</code> character, if any.</p>\n         <p>This is used only to indicate the web request component for WAF to inspect, in the <a>FieldToMatch</a> specification. </p>"
+                "smithy.api#documentation": "<p>The query string of a web request. This is the part of a URL that appears after a <code>?</code> character, if any.</p>\n           <p>This is used only to indicate the web request component for WAF to inspect, in the <a>FieldToMatch</a> specification. </p> \n         <p>JSON specification: <code>\"QueryString\": {}</code>\n         </p>"
             }
         },
         "com.amazonaws.wafv2#RateBasedStatement": {
@@ -5799,7 +5817,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A rate-based rule tracks the rate of requests for each originating IP address, and triggers the rule action when the rate exceeds a limit that you specify on the number of requests in any 5-minute time span. You can use this to put a temporary block on requests from an IP address that is sending excessive requests.</p>\n         <p>When the rule action triggers, WAF blocks additional requests from the IP address until the request rate falls below the limit.</p>\n         <p>You can optionally nest another statement inside the rate-based statement, to narrow the scope of the rule so that it only counts requests that match the nested statement. For example, based on recent requests that you have seen from an attacker, you might create a rate-based rule with a nested AND rule statement that contains the following nested statements:</p>\n         <ul>\n            <li>\n               <p>An IP match statement with an IP set that specified the address 192.0.2.44.</p>\n            </li>\n            <li>\n               <p>A string match statement that searches in the User-Agent header for the string BadBot.</p>\n            </li>\n         </ul>\n         <p>In this rate-based rule, you also define a rate limit. For this example, the rate limit is 1,000. Requests that meet both of the conditions in the statements are counted. If the count exceeds 1,000 requests per five minutes, the rule action triggers. Requests that do not meet both conditions are not counted towards the rate limit and are not affected by this rule.</p>\n         <p>You cannot nest a <code>RateBasedStatement</code>, for example for use inside a <code>NotStatement</code> or <code>OrStatement</code>. It can only be referenced as a top-level statement within a rule.</p>"
+                "smithy.api#documentation": "<p>A rate-based rule tracks the rate of requests for each originating IP address, and triggers the rule action when the rate exceeds a limit that you specify on the number of requests in any 5-minute time span. You can use this to put a temporary block on requests from an IP address that is sending excessive requests. </p>\n         <p>WAF tracks and manages web requests separately for each instance of a rate-based rule that you use. For example, if you provide the same rate-based rule settings in two web ACLs, each of the two rule statements represents a separate instance of the rate-based rule and gets its own tracking and management by WAF. If you define a rate-based rule inside a rule group, and then use that rule group in multiple places, each use creates a separate instance of the rate-based rule that gets its own tracking and management by WAF. </p> \n         <p>When the rule action triggers, WAF blocks additional requests from the IP address until the request rate falls below the limit.</p>\n         <p>You can optionally nest another statement inside the rate-based statement, to narrow the scope of the rule so that it only counts requests that match the nested statement. For example, based on recent requests that you have seen from an attacker, you might create a rate-based rule with a nested AND rule statement that contains the following nested statements:</p>\n         <ul>\n            <li>\n               <p>An IP match statement with an IP set that specified the address 192.0.2.44.</p>\n            </li>\n            <li>\n               <p>A string match statement that searches in the User-Agent header for the string BadBot.</p>\n            </li>\n         </ul>\n         <p>In this rate-based rule, you also define a rate limit. For this example, the rate limit is 1,000. Requests that meet both of the conditions in the statements are counted. If the count exceeds 1,000 requests per five minutes, the rule action triggers. Requests that do not meet both conditions are not counted towards the rate limit and are not affected by this rule.</p>\n         <p>You cannot nest a <code>RateBasedStatement</code> inside another statement, for example inside a <code>NotStatement</code> or <code>OrStatement</code>. You can define a <code>RateBasedStatement</code> inside a web ACL and inside a rule group. </p>"
             }
         },
         "com.amazonaws.wafv2#RateBasedStatementAggregateKeyType": {
@@ -5834,7 +5852,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The set of IP addresses that are currently blocked for a rate-based statement.</p>"
+                "smithy.api#documentation": "<p>The set of IP addresses that are currently blocked for a <a>RateBasedStatement</a>.</p>"
             }
         },
         "com.amazonaws.wafv2#RateLimit": {
@@ -6250,7 +6268,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A rule statement used to run the rules that are defined in a <a>RuleGroup</a>. To use this, create a rule group with your rules, then provide the ARN of the rule group in this statement.</p>\n         <p>You cannot nest a <code>RuleGroupReferenceStatement</code>, for example for use inside a <code>NotStatement</code> or <code>OrStatement</code>. It can only be referenced as a top-level statement within a rule.</p>"
+                "smithy.api#documentation": "<p>A rule statement used to run the rules that are defined in a <a>RuleGroup</a>. To use this, create a rule group with your rules, then provide the ARN of the rule group in this statement.</p>\n         <p>You cannot nest a <code>RuleGroupReferenceStatement</code>, for example for use inside a <code>NotStatement</code> or <code>OrStatement</code>. You \n      can only use a rule group reference statement at the top level inside a web ACL. </p>"
             }
         },
         "com.amazonaws.wafv2#RuleGroupSummaries": {
@@ -6439,7 +6457,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>One of the headers in a web request, identified by name, for example,\n            <code>User-Agent</code> or <code>Referer</code>. This setting isn't case\n         sensitive.</p>\n         <p>This is used only to indicate the web request component for WAF to inspect, in the <a>FieldToMatch</a> specification. </p>"
+                "smithy.api#documentation": "<p>One of the headers in a web request, identified by name, for example,\n            <code>User-Agent</code> or <code>Referer</code>. This setting isn't case\n         sensitive.</p>\n         <p>This is used only to indicate the web request component for WAF to inspect, in the <a>FieldToMatch</a> specification. </p> \n         <p>Example JSON: <code>\"SingleHeader\": { \"Name\": \"haystack\" }</code>\n         </p>"
             }
         },
         "com.amazonaws.wafv2#SingleQueryArgument": {
@@ -6454,7 +6472,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>One query argument in a web request, identified by name, for example\n            <i>UserName</i> or <i>SalesRegion</i>. The name can be up to\n         30 characters long and isn't case sensitive. </p>"
+                "smithy.api#documentation": "<p>One query argument in a web request, identified by name, for example\n            <i>UserName</i> or <i>SalesRegion</i>. The name can be up to\n         30 characters long and isn't case sensitive. </p>\n         <p>Example JSON: <code>\"SingleQueryArgument\": { \"Name\": \"myArgument\" }</code>\n         </p>"
             }
         },
         "com.amazonaws.wafv2#Size": {
@@ -6560,7 +6578,7 @@
                 "RuleGroupReferenceStatement": {
                     "target": "com.amazonaws.wafv2#RuleGroupReferenceStatement",
                     "traits": {
-                        "smithy.api#documentation": "<p>A rule statement used to run the rules that are defined in a <a>RuleGroup</a>. To use this, create a rule group with your rules, then provide the ARN of the rule group in this statement.</p>\n         <p>You cannot nest a <code>RuleGroupReferenceStatement</code>, for example for use inside a <code>NotStatement</code> or <code>OrStatement</code>. It can only be referenced as a top-level statement within a rule.</p>"
+                        "smithy.api#documentation": "<p>A rule statement used to run the rules that are defined in a <a>RuleGroup</a>. To use this, create a rule group with your rules, then provide the ARN of the rule group in this statement.</p>\n         <p>You cannot nest a <code>RuleGroupReferenceStatement</code>, for example for use inside a <code>NotStatement</code> or <code>OrStatement</code>. You \n      can only use a rule group reference statement at the top level inside a web ACL. </p>"
                     }
                 },
                 "IPSetReferenceStatement": {
@@ -6578,7 +6596,7 @@
                 "RateBasedStatement": {
                     "target": "com.amazonaws.wafv2#RateBasedStatement",
                     "traits": {
-                        "smithy.api#documentation": "<p>A rate-based rule tracks the rate of requests for each originating IP address, and triggers the rule action when the rate exceeds a limit that you specify on the number of requests in any 5-minute time span. You can use this to put a temporary block on requests from an IP address that is sending excessive requests.</p>\n         <p>When the rule action triggers, WAF blocks additional requests from the IP address until the request rate falls below the limit.</p>\n         <p>You can optionally nest another statement inside the rate-based statement, to narrow the scope of the rule so that it only counts requests that match the nested statement. For example, based on recent requests that you have seen from an attacker, you might create a rate-based rule with a nested AND rule statement that contains the following nested statements:</p>\n         <ul>\n            <li>\n               <p>An IP match statement with an IP set that specified the address 192.0.2.44.</p>\n            </li>\n            <li>\n               <p>A string match statement that searches in the User-Agent header for the string BadBot.</p>\n            </li>\n         </ul>\n         <p>In this rate-based rule, you also define a rate limit. For this example, the rate limit is 1,000. Requests that meet both of the conditions in the statements are counted. If the count exceeds 1,000 requests per five minutes, the rule action triggers. Requests that do not meet both conditions are not counted towards the rate limit and are not affected by this rule.</p>\n         <p>You cannot nest a <code>RateBasedStatement</code>, for example for use inside a <code>NotStatement</code> or <code>OrStatement</code>. It can only be referenced as a top-level statement within a rule.</p>"
+                        "smithy.api#documentation": "<p>A rate-based rule tracks the rate of requests for each originating IP address, and triggers the rule action when the rate exceeds a limit that you specify on the number of requests in any 5-minute time span. You can use this to put a temporary block on requests from an IP address that is sending excessive requests. </p>\n         <p>WAF tracks and manages web requests separately for each instance of a rate-based rule that you use. For example, if you provide the same rate-based rule settings in two web ACLs, each of the two rule statements represents a separate instance of the rate-based rule and gets its own tracking and management by WAF. If you define a rate-based rule inside a rule group, and then use that rule group in multiple places, each use creates a separate instance of the rate-based rule that gets its own tracking and management by WAF. </p> \n         <p>When the rule action triggers, WAF blocks additional requests from the IP address until the request rate falls below the limit.</p>\n         <p>You can optionally nest another statement inside the rate-based statement, to narrow the scope of the rule so that it only counts requests that match the nested statement. For example, based on recent requests that you have seen from an attacker, you might create a rate-based rule with a nested AND rule statement that contains the following nested statements:</p>\n         <ul>\n            <li>\n               <p>An IP match statement with an IP set that specified the address 192.0.2.44.</p>\n            </li>\n            <li>\n               <p>A string match statement that searches in the User-Agent header for the string BadBot.</p>\n            </li>\n         </ul>\n         <p>In this rate-based rule, you also define a rate limit. For this example, the rate limit is 1,000. Requests that meet both of the conditions in the statements are counted. If the count exceeds 1,000 requests per five minutes, the rule action triggers. Requests that do not meet both conditions are not counted towards the rate limit and are not affected by this rule.</p>\n         <p>You cannot nest a <code>RateBasedStatement</code> inside another statement, for example inside a <code>NotStatement</code> or <code>OrStatement</code>. You can define a <code>RateBasedStatement</code> inside a web ACL and inside a rule group. </p>"
                     }
                 },
                 "AndStatement": {
@@ -6613,7 +6631,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The processing guidance for a <a>Rule</a>, used by WAF to determine\n         whether a web request matches the rule. </p>"
+                "smithy.api#documentation": "<p>The processing guidance for a <a>Rule</a>, used by WAF to determine whether a web request matches the rule. </p>"
             }
         },
         "com.amazonaws.wafv2#Statements": {
@@ -7106,7 +7124,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the expiration information for your managed rule set. Use this to initiate the\n         expiration of a managed rule group version. After you initiate expiration for a version,\n         WAF excludes it from the reponse to <a>ListAvailableManagedRuleGroupVersions</a> for the managed rule group. </p>\n         <note>\n            <p>This is intended for use only by vendors of managed rule sets. Vendors are Amazon Web Services and Marketplace sellers. </p>\n            <p>Vendors, you can use the managed rule set APIs to provide controlled rollout of your versioned managed rule group offerings for your customers. The APIs are <code>ListManagedRuleSets</code>, <code>GetManagedRuleSet</code>, <code>PutManagedRuleSetVersions</code>, and <code>UpdateManagedRuleSetVersionExpiryDate</code>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Updates the expiration information for your managed rule set. Use this to initiate the\n         expiration of a managed rule group version. After you initiate expiration for a version,\n         WAF excludes it from the reponse to <a>ListAvailableManagedRuleGroupVersions</a> for the managed rule group. </p>\n         <note>\n            <p>This is intended for use only by vendors of managed rule sets. Vendors are Amazon Web Services and Amazon Web Services Marketplace sellers. </p>\n            <p>Vendors, you can use the managed rule set APIs to provide controlled rollout of your versioned managed rule group offerings for your customers. The APIs are <code>ListManagedRuleSets</code>, <code>GetManagedRuleSet</code>, <code>PutManagedRuleSetVersions</code>, and <code>UpdateManagedRuleSetVersionExpiryDate</code>.</p>\n         </note>"
             }
         },
         "com.amazonaws.wafv2#UpdateManagedRuleSetVersionExpiryDateRequest": {
@@ -7508,7 +7526,7 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>The path component of the URI of a web request. This is the part of a web request that identifies a resource. For example, <code>/images/daily-ad.jpg</code>.</p>\n         <p>This is used only to indicate the web request component for WAF to inspect, in the <a>FieldToMatch</a> specification. </p>"
+                "smithy.api#documentation": "<p>The path component of the URI of a web request. This is the part of a web request that identifies a resource. For example, <code>/images/daily-ad.jpg</code>.</p>\n         <p>This is used only to indicate the web request component for WAF to inspect, in the <a>FieldToMatch</a> specification. </p> \n         <p>JSON specification: <code>\"UriPath\": {}</code>\n         </p>"
             }
         },
         "com.amazonaws.wafv2#VendorName": {
@@ -7548,7 +7566,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A version of the named managed rule group, that the rule group's vendor publishes for\n         use by customers. </p>\n         <note>\n            <p>This is intended for use only by vendors of managed rule sets. Vendors are Amazon Web Services and Marketplace sellers. </p>\n            <p>Vendors, you can use the managed rule set APIs to provide controlled rollout of your versioned managed rule group offerings for your customers. The APIs are <code>ListManagedRuleSets</code>, <code>GetManagedRuleSet</code>, <code>PutManagedRuleSetVersions</code>, and <code>UpdateManagedRuleSetVersionExpiryDate</code>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>A version of the named managed rule group, that the rule group's vendor publishes for\n         use by customers. </p>\n         <note>\n            <p>This is intended for use only by vendors of managed rule sets. Vendors are Amazon Web Services and Amazon Web Services Marketplace sellers. </p>\n            <p>Vendors, you can use the managed rule set APIs to provide controlled rollout of your versioned managed rule group offerings for your customers. The APIs are <code>ListManagedRuleSets</code>, <code>GetManagedRuleSet</code>, <code>PutManagedRuleSetVersions</code>, and <code>UpdateManagedRuleSetVersionExpiryDate</code>.</p>\n         </note>"
             }
         },
         "com.amazonaws.wafv2#VersionsToPublish": {

@@ -812,8 +812,7 @@
                 "sources": {
                     "target": "com.amazonaws.robomaker#SourceConfigs",
                     "traits": {
-                        "smithy.api#documentation": "<p>The sources of the robot application.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The sources of the robot application.</p>"
                     }
                 },
                 "robotSoftwareSuite": {
@@ -827,6 +826,12 @@
                     "target": "com.amazonaws.robomaker#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>A map that contains tag keys and tag values that are attached to the robot\n         application.</p>"
+                    }
+                },
+                "environment": {
+                    "target": "com.amazonaws.robomaker#Environment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object that contains that URI of the Docker image that you use for your robot application.</p>"
                     }
                 }
             }
@@ -881,6 +886,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The list of all tags added to the robot application.</p>"
                     }
+                },
+                "environment": {
+                    "target": "com.amazonaws.robomaker#Environment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains the Docker image URI used to a create your robot application.</p>"
+                    }
                 }
             }
         },
@@ -933,6 +944,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The current revision id for the robot application. If you provide a value and it matches\n         the latest revision ID, a new version will be created.</p>"
                     }
+                },
+                "s3Etags": {
+                    "target": "com.amazonaws.robomaker#S3Etags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 identifier for the zip file bundle that you use for your robot application.</p>"
+                    }
+                },
+                "imageDigest": {
+                    "target": "com.amazonaws.robomaker#ImageDigest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A SHA256 identifier for the Docker image that you use for your robot application.</p>"
+                    }
                 }
             }
         },
@@ -979,6 +1002,12 @@
                     "target": "com.amazonaws.robomaker#RevisionId",
                     "traits": {
                         "smithy.api#documentation": "<p>The revision id of the robot application.</p>"
+                    }
+                },
+                "environment": {
+                    "target": "com.amazonaws.robomaker#Environment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object that contains the Docker image URI used to create your robot application.</p>"
                     }
                 }
             }
@@ -1106,8 +1135,7 @@
                 "sources": {
                     "target": "com.amazonaws.robomaker#SourceConfigs",
                     "traits": {
-                        "smithy.api#documentation": "<p>The sources of the simulation application.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The sources of the simulation application.</p>"
                     }
                 },
                 "simulationSoftwareSuite": {
@@ -1134,6 +1162,12 @@
                     "target": "com.amazonaws.robomaker#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>A map that contains tag keys and tag values that are attached to the simulation\n         application.</p>"
+                    }
+                },
+                "environment": {
+                    "target": "com.amazonaws.robomaker#Environment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object that contains the Docker image URI used to create your simulation application.</p>"
                     }
                 }
             }
@@ -1200,6 +1234,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The list of all tags added to the simulation application.</p>"
                     }
+                },
+                "environment": {
+                    "target": "com.amazonaws.robomaker#Environment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object that contains the Docker image URI that you used to create your simulation application.</p>"
+                    }
                 }
             }
         },
@@ -1251,6 +1291,18 @@
                     "target": "com.amazonaws.robomaker#RevisionId",
                     "traits": {
                         "smithy.api#documentation": "<p>The current revision id for the simulation application. If you provide a value and it\n         matches the latest revision ID, a new version will be created.</p>"
+                    }
+                },
+                "s3Etags": {
+                    "target": "com.amazonaws.robomaker#S3Etags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 eTag identifier for the zip file bundle that you use to create the simulation application.</p>"
+                    }
+                },
+                "imageDigest": {
+                    "target": "com.amazonaws.robomaker#ImageDigest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SHA256 digest used to identify the Docker image URI used to created the simulation application.</p>"
                     }
                 }
             }
@@ -1310,6 +1362,12 @@
                     "target": "com.amazonaws.robomaker#RevisionId",
                     "traits": {
                         "smithy.api#documentation": "<p>The revision ID of the simulation application.</p>"
+                    }
+                },
+                "environment": {
+                    "target": "com.amazonaws.robomaker#Environment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object that contains the Docker image URI used to create the simulation application.</p>"
                     }
                 }
             }
@@ -2977,6 +3035,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The list of all tags added to the specified robot application.</p>"
                     }
+                },
+                "environment": {
+                    "target": "com.amazonaws.robomaker#Environment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object that contains the Docker image URI used to create the robot application.</p>"
+                    }
+                },
+                "imageDigest": {
+                    "target": "com.amazonaws.robomaker#ImageDigest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A SHA256 identifier for the Docker image that you use for your robot application.</p>"
+                    }
                 }
             }
         },
@@ -3167,6 +3237,18 @@
                     "target": "com.amazonaws.robomaker#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of all tags added to the specified simulation application.</p>"
+                    }
+                },
+                "environment": {
+                    "target": "com.amazonaws.robomaker#Environment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object that contains the Docker image URI used to create the simulation application.</p>"
+                    }
+                },
+                "imageDigest": {
+                    "target": "com.amazonaws.robomaker#ImageDigest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A SHA256 identifier for the Docker image that you use for your simulation application.</p>"
                     }
                 }
             }
@@ -3855,6 +3937,20 @@
                 }
             }
         },
+        "com.amazonaws.robomaker#Environment": {
+            "type": "structure",
+            "members": {
+                "uri": {
+                    "target": "com.amazonaws.robomaker#RepositoryUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Docker image URI for either your robot or simulation applications.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The object that contains the Docker image URI for either your robot or simulation applications.</p>"
+            }
+        },
         "com.amazonaws.robomaker#EnvironmentVariableKey": {
             "type": "string",
             "traits": {
@@ -4219,6 +4315,16 @@
                 "smithy.api#documentation": "<p>The request uses the same client token as a previous, but non-identical request. Do not\n         reuse a client token with different requests, unless the requests are identical. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.robomaker#ImageDigest": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 72
+                },
+                "smithy.api#pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"
             }
         },
         "com.amazonaws.robomaker#Integer": {
@@ -5549,6 +5655,16 @@
                 "smithy.api#pattern": "^1.x$"
             }
         },
+        "com.amazonaws.robomaker#RepositoryUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^.+$"
+            }
+        },
         "com.amazonaws.robomaker#ResourceAlreadyExistsException": {
             "type": "structure",
             "members": {
@@ -6025,6 +6141,12 @@
         },
         "com.amazonaws.robomaker#S3Etag": {
             "type": "string"
+        },
+        "com.amazonaws.robomaker#S3Etags": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.robomaker#S3Etag"
+            }
         },
         "com.amazonaws.robomaker#S3Key": {
             "type": "string",
@@ -7560,8 +7682,7 @@
                 "sources": {
                     "target": "com.amazonaws.robomaker#SourceConfigs",
                     "traits": {
-                        "smithy.api#documentation": "<p>The sources of the robot application.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The sources of the robot application.</p>"
                     }
                 },
                 "robotSoftwareSuite": {
@@ -7575,6 +7696,12 @@
                     "target": "com.amazonaws.robomaker#RevisionId",
                     "traits": {
                         "smithy.api#documentation": "<p>The revision id for the robot application.</p>"
+                    }
+                },
+                "environment": {
+                    "target": "com.amazonaws.robomaker#Environment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object that contains the Docker image URI for your robot application.</p>"
                     }
                 }
             }
@@ -7622,6 +7749,12 @@
                     "target": "com.amazonaws.robomaker#RevisionId",
                     "traits": {
                         "smithy.api#documentation": "<p>The revision id of the robot application.</p>"
+                    }
+                },
+                "environment": {
+                    "target": "com.amazonaws.robomaker#Environment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object that contains the Docker image URI for your robot application.</p>"
                     }
                 }
             }
@@ -7673,8 +7806,7 @@
                 "sources": {
                     "target": "com.amazonaws.robomaker#SourceConfigs",
                     "traits": {
-                        "smithy.api#documentation": "<p>The sources of the simulation application.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The sources of the simulation application.</p>"
                     }
                 },
                 "simulationSoftwareSuite": {
@@ -7701,6 +7833,12 @@
                     "target": "com.amazonaws.robomaker#RevisionId",
                     "traits": {
                         "smithy.api#documentation": "<p>The revision id for the robot application.</p>"
+                    }
+                },
+                "environment": {
+                    "target": "com.amazonaws.robomaker#Environment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object that contains the Docker image URI for your simulation application.</p>"
                     }
                 }
             }
@@ -7760,6 +7898,12 @@
                     "target": "com.amazonaws.robomaker#RevisionId",
                     "traits": {
                         "smithy.api#documentation": "<p>The revision id of the simulation application.</p>"
+                    }
+                },
+                "environment": {
+                    "target": "com.amazonaws.robomaker#Environment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object that contains the Docker image URI used for your simulation application.</p>"
                     }
                 }
             }

@@ -3045,6 +3045,10 @@
                     {
                         "value": "arm64",
                         "name": "arm64"
+                    },
+                    {
+                        "value": "x86_64_mac",
+                        "name": "x86_64_mac"
                     }
                 ]
             }
@@ -8409,7 +8413,7 @@
                 "target": "com.amazonaws.ec2#CopyImageResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Initiates the copy of an AMI. You can copy an AMI from one Region to another, or from a\n      Region to an AWS Outpost. You can't copy an AMI from an Outpost to a Region, from one Outpost\n      to another, or within the same Outpost. To copy an AMI to another partition, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateStoreImageTask.html\">CreateStoreImageTask</a>.</p>\n     \t\n     \t   <p>To copy an AMI from one Region to another, specify the source Region using the  \n     \t\t<b>SourceRegion</b> parameter, and specify the \n     \t\tdestination Region using its endpoint. Copies of encrypted backing snapshots for\n     \t\tthe AMI are encrypted. Copies of unencrypted backing snapshots remain unencrypted, \n     \t\tunless you set <code>Encrypted</code> during the copy operation. You cannot \n     \t\tcreate an unencrypted copy of an encrypted backing snapshot.</p>\n   \t\n   \t     <p>To copy an AMI from a Region to an Outpost, specify the source Region using the  \n   \t\t<b>SourceRegion</b> parameter, and specify the \n   \t\tARN of the destination Outpost using <b>DestinationOutpostArn</b>. \n   \t\tBacking snapshots copied to an Outpost are encrypted by default using the default\n   \t\tencryption key for the Region, or a different key that you specify in the request using \n   \t\t<b>KmsKeyId</b>. Outposts do not support unencrypted \n   \t\tsnapshots. For more information, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#ami\">\n   \t\t\tAmazon EBS local snapshots on Outposts</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n   \n         <p>For more information about the prerequisites and limits when copying an AMI, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html\">Copying an AMI</a>\n        in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Initiates the copy of an AMI. You can copy an AMI from one Region to another, or from a\n      Region to an Outpost. You can't copy an AMI from an Outpost to a Region, from one Outpost\n      to another, or within the same Outpost. To copy an AMI to another partition, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateStoreImageTask.html\">CreateStoreImageTask</a>.</p>\n     \t\n     \t   <p>To copy an AMI from one Region to another, specify the source Region using the  \n     \t\t<b>SourceRegion</b> parameter, and specify the \n     \t\tdestination Region using its endpoint. Copies of encrypted backing snapshots for\n     \t\tthe AMI are encrypted. Copies of unencrypted backing snapshots remain unencrypted, \n     \t\tunless you set <code>Encrypted</code> during the copy operation. You cannot \n     \t\tcreate an unencrypted copy of an encrypted backing snapshot.</p>\n   \t\n   \t     <p>To copy an AMI from a Region to an Outpost, specify the source Region using the  \n   \t\t<b>SourceRegion</b> parameter, and specify the \n   \t\tARN of the destination Outpost using <b>DestinationOutpostArn</b>. \n   \t\tBacking snapshots copied to an Outpost are encrypted by default using the default\n   \t\tencryption key for the Region, or a different key that you specify in the request using \n   \t\t<b>KmsKeyId</b>. Outposts do not support unencrypted \n   \t\tsnapshots. For more information, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#ami\">\n   \t\t\tAmazon EBS local snapshots on Outposts</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n   \n         <p>For more information about the prerequisites and limits when copying an AMI, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html\">Copying an AMI</a>\n        in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#CopyImageRequest": {
@@ -8431,7 +8435,7 @@
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
                         "aws.protocols#ec2QueryName": "Encrypted",
-                        "smithy.api#documentation": "<p>Specifies whether the destination snapshots of the copied image should be encrypted.\n       You can encrypt a copy of an unencrypted snapshot, but you cannot create an unencrypted\n       copy of an encrypted snapshot. The default CMK for EBS is used unless you specify a non-default \n       AWS Key Management Service (AWS KMS) CMK using <code>KmsKeyId</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html\">Amazon EBS Encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether the destination snapshots of the copied image should be encrypted.\n       You can encrypt a copy of an unencrypted snapshot, but you cannot create an unencrypted\n       copy of an encrypted snapshot. The default KMS key for Amazon EBS is used unless you specify a non-default \n       Key Management Service (KMS) KMS key using <code>KmsKeyId</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html\">Amazon EBS Encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
                         "smithy.api#xmlName": "encrypted"
                     }
                 },
@@ -8439,7 +8443,7 @@
                     "target": "com.amazonaws.ec2#KmsKeyId",
                     "traits": {
                         "aws.protocols#ec2QueryName": "KmsKeyId",
-                        "smithy.api#documentation": "<p>The identifier of the symmetric AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating\n      encrypted volumes. If this parameter is not specified, your AWS managed CMK for EBS is used. \n      If you specify a CMK, you must also set the encrypted state to <code>true</code>.</p>\n   \t     <p>You can specify a CMK using any of the following:</p>\n   \t     <ul>\n            <li>\n   \t\t\t         <p>Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.</p>\n   \t\t       </li>\n            <li>\n   \t           <p>Key alias. For example, alias/ExampleAlias.</p>\n   \t        </li>\n            <li>\n   \t           <p>Key ARN. For example, arn:aws:kms:us-east-1:012345678910:key/1234abcd-12ab-34cd-56ef-1234567890ab.</p>\n   \t\t       </li>\n            <li>\n   \t\t          <p>Alias ARN. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.</p>\n   \t\t       </li>\n         </ul>\n         <p>AWS authenticates the CMK asynchronously. Therefore, if you specify an identifier that is not valid,\n      the action can appear to complete, but eventually fails.</p>\n         <p>The specified CMK must exist in the destination Region.</p>\n         <p>Amazon EBS does not support asymmetric CMKs.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the symmetric Key Management Service (KMS) KMS key to use when creating\n   \t\tencrypted volumes. If this parameter is not specified, your Amazon Web Services managed KMS key for Amazon EBS is used. \n   \t\tIf you specify a KMS key, you must also set the encrypted state to <code>true</code>.</p>\n   \t     <p>You can specify a KMS key using any of the following:</p>\n   \t     <ul>\n            <li>\n   \t\t\t         <p>Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.</p>\n   \t\t       </li>\n            <li>\n   \t           <p>Key alias. For example, alias/ExampleAlias.</p>\n   \t        </li>\n            <li>\n   \t           <p>Key ARN. For example, arn:aws:kms:us-east-1:012345678910:key/1234abcd-12ab-34cd-56ef-1234567890ab.</p>\n   \t\t       </li>\n            <li>\n   \t\t          <p>Alias ARN. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.</p>\n   \t\t       </li>\n         </ul>\n   \t     <p>Amazon Web Services authenticates the KMS key asynchronously. Therefore, if you specify an identifier that is not valid,\n      the action can appear to complete, but eventually fails.</p>\n   \t     <p>The specified KMS key must exist in the destination Region.</p>\n   \t     <p>Amazon EBS does not support asymmetric KMS keys.</p>",
                         "smithy.api#xmlName": "kmsKeyId"
                     }
                 },
@@ -8467,7 +8471,7 @@
                 "DestinationOutpostArn": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Outpost to which to copy the AMI. Only \n  \t\tspecify this parameter when copying an AMI from an AWS Region to an Outpost. \n  \t\tThe AMI must be in the Region of the destination Outpost. You cannot copy an \n  \t\tAMI from an Outpost to a Region, from one Outpost to another, or within the same \n  \t\tOutpost.</p>\n  \t\n  \t      <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#copy-amis\">\n  \t\tCopying AMIs from an AWS Region to an Outpost</a> in the \n  \t\t<i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Outpost to which to copy the AMI. Only \n  \t\tspecify this parameter when copying an AMI from an Amazon Web Services Region to an Outpost. \n  \t\tThe AMI must be in the Region of the destination Outpost. You cannot copy an \n  \t\tAMI from an Outpost to a Region, from one Outpost to another, or within the same \n  \t\tOutpost.</p>\n  \t\n  \t      <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#copy-amis\">\n  \t\tCopying AMIs from an Amazon Web Services Region to an Outpost</a> in the \n  \t\t<i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
                     }
                 },
                 "DryRun": {
@@ -9814,7 +9818,7 @@
                 "target": "com.amazonaws.ec2#CreateImageResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon EBS-backed AMI from an Amazon EBS-backed instance \n     \tthat is either running or stopped.</p>\n     \n     \n   \n   \t\n   \t     <p>If you customized your instance with instance store volumes or EBS volumes in addition to the root device volume, the \n     \tnew AMI contains block device mapping information for those volumes. When you launch an instance from this new AMI, \n     \tthe instance automatically launches with those additional volumes.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html\">Creating Amazon EBS-Backed Linux AMIs</a> \n\t\t\t\tin the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates an Amazon EBS-backed AMI from an Amazon EBS-backed instance \n     \tthat is either running or stopped.</p>\n     \n     \n   \n   \t\n   \t     <p>If you customized your instance with instance store volumes or Amazon EBS volumes in addition to the root device volume, the \n     \tnew AMI contains block device mapping information for those volumes. When you launch an instance from this new AMI, \n     \tthe instance automatically launches with those additional volumes.</p>\n   \t     <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html\">Creating Amazon EBS-Backed Linux AMIs</a> \n\t\t\t\tin the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#CreateImageRequest": {
@@ -9866,14 +9870,14 @@
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
                         "aws.protocols#ec2QueryName": "NoReboot",
-                        "smithy.api#documentation": "<p>By default, Amazon EC2 attempts to shut down and reboot the instance before creating the image. If the <code>No Reboot</code> option is set, Amazon EC2 doesn't shut down the instance before creating the image. When this option is used, file system integrity on the created image can't be guaranteed.</p>",
+                        "smithy.api#documentation": "<p>By default, Amazon EC2 attempts to shut down and reboot the instance before creating the image. \n       If the <code>No Reboot</code> option is set, Amazon EC2 doesn't shut down the instance before creating \n       the image. Without a reboot, the AMI will be crash consistent (all the volumes are snapshotted \n       at the same time), but not application consistent (all the operating system buffers are not flushed \n       to disk before the snapshots are created).</p>",
                         "smithy.api#xmlName": "noReboot"
                     }
                 },
                 "TagSpecifications": {
                     "target": "com.amazonaws.ec2#TagSpecificationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags to apply to the AMI and snapshots on creation. You can tag the AMI, the\n      snapshots, or both.</p>\n         <ul>\n            <li>\n               <p>To tag the AMI, the value for <code>ResourceType</code> must be\n          <code>image</code>.</p>\n            </li>\n            <li>\n               <p>To tag the snapshots that are created of the root volume and of other EBS volumes that\n          are attached to the instance, the value for <code>ResourceType</code> must be\n            <code>snapshot</code>. The same tag is applied to all of the snapshots that are\n          created.</p>\n            </li>\n         </ul>\n         <p>If you specify other values for <code>ResourceType</code>, the request fails.</p>\n         <p>To tag an AMI or snapshot after it has been created, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html\">CreateTags</a>. </p>",
+                        "smithy.api#documentation": "<p>The tags to apply to the AMI and snapshots on creation. You can tag the AMI, the\n      snapshots, or both.</p>\n         <ul>\n            <li>\n               <p>To tag the AMI, the value for <code>ResourceType</code> must be\n          <code>image</code>.</p>\n            </li>\n            <li>\n      \t        <p>To tag the snapshots that are created of the root volume and of other Amazon EBS volumes that\n          are attached to the instance, the value for <code>ResourceType</code> must be\n            <code>snapshot</code>. The same tag is applied to all of the snapshots that are\n          created.</p>\n            </li>\n         </ul>\n         <p>If you specify other values for <code>ResourceType</code>, the request fails.</p>\n         <p>To tag an AMI or snapshot after it has been created, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html\">CreateTags</a>. </p>",
                         "smithy.api#xmlName": "TagSpecification"
                     }
                 }
@@ -10397,7 +10401,7 @@
                 "target": "com.amazonaws.ec2#CreateManagedPrefixListResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a managed prefix list. You can specify one or more entries for the prefix list. Each entry consists of a CIDR block and an optional description.</p>\n        <p>You must specify the maximum number of entries for the prefix list. The maximum number of entries cannot be changed later.</p>"
+                "smithy.api#documentation": "<p>Creates a managed prefix list. You can specify one or more entries for the prefix list. \n            Each entry consists of a CIDR block and an optional description.</p>"
             }
         },
         "com.amazonaws.ec2#CreateManagedPrefixListRequest": {
@@ -11225,7 +11229,7 @@
                 "target": "com.amazonaws.ec2#CreateRestoreImageTaskResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Starts a task that restores an AMI from an S3 object that was previously created by using\n      <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateStoreImageTask.html\">CreateStoreImageTask</a>.</p>\n         <p>To use this API, you must have the required permissions. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html#ami-s3-permissions\">Permissions for storing and restoring AMIs using S3</a> in the\n        <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html\">Store and restore an AMI using\n      S3</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Starts a task that restores an AMI from an Amazon S3 object that was previously created by using\n      <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateStoreImageTask.html\">CreateStoreImageTask</a>.</p>\n         <p>To use this API, you must have the required permissions. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html#ami-s3-permissions\">Permissions for storing and restoring AMIs using Amazon S3</a> in the\n        <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html\">Store and restore an AMI using\n    \tAmazon S3</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#CreateRestoreImageTaskRequest": {
@@ -11234,7 +11238,7 @@
                 "Bucket": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the S3 bucket that contains the stored AMI object.</p>",
+                        "smithy.api#documentation": "<p>The name of the Amazon S3 bucket that contains the stored AMI object.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -11737,7 +11741,7 @@
                 "target": "com.amazonaws.ec2#CreateStoreImageTaskResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Stores an AMI as a single object in an S3 bucket.</p>\n         <p>To use this API, you must have the required permissions. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html#ami-s3-permissions\">Permissions for storing and restoring AMIs using S3</a> in the\n        <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html\">Store and restore an AMI using\n        S3</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Stores an AMI as a single object in an Amazon S3 bucket.</p>\n         <p>To use this API, you must have the required permissions. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html#ami-s3-permissions\">Permissions for storing and restoring AMIs using Amazon S3</a> in the\n        <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html\">Store and restore an AMI using\n    \tAmazon S3</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#CreateStoreImageTaskRequest": {
@@ -11753,14 +11757,14 @@
                 "Bucket": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the S3 bucket in which the AMI object will be stored. The bucket must be in\n      the Region in which the request is being made. The AMI object appears in the bucket only after\n      the upload task has completed. </p>",
+                        "smithy.api#documentation": "<p>The name of the Amazon S3 bucket in which the AMI object will be stored. The bucket must be in\n      the Region in which the request is being made. The AMI object appears in the bucket only after\n      the upload task has completed. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "S3ObjectTags": {
                     "target": "com.amazonaws.ec2#S3ObjectTagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags to apply to the AMI object that will be stored in the S3 bucket. </p>",
+                        "smithy.api#documentation": "<p>The tags to apply to the AMI object that will be stored in the Amazon S3 bucket. </p>",
                         "smithy.api#xmlName": "S3ObjectTag"
                     }
                 },
@@ -13481,6 +13485,13 @@
         "com.amazonaws.ec2#CreateVpcRequest": {
             "type": "structure",
             "members": {
+                "CidrBlock": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv4 network range for the VPC, in CIDR notation. For example,\n\t\t        <code>10.0.0.0/16</code>. We modify the specified CIDR block to its canonical form; for example, if you specify <code>100.68.0.18/18</code>, we modify it to <code>100.68.0.0/18</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
                 "AmazonProvidedIpv6CidrBlock": {
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
@@ -13528,13 +13539,6 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tags to assign to the VPC.</p>",
                         "smithy.api#xmlName": "TagSpecification"
-                    }
-                },
-                "CidrBlock": {
-                    "target": "com.amazonaws.ec2#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The IPv4 network range for the VPC, in CIDR notation. For example,\n\t\t        <code>10.0.0.0/16</code>. We modify the specified CIDR block to its canonical form; for example, if you specify <code>100.68.0.18/18</code>, we modify it to <code>100.68.0.0/18</code>.</p>",
-                        "smithy.api#required": {}
                     }
                 }
             }
@@ -16638,7 +16642,7 @@
                 "target": "com.amazonaws.ec2#DeregisterImageRequest"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Deregisters the specified AMI. After you deregister an AMI, it can't be used to launch\n\t\t\tnew instances; however, it doesn't affect any instances that you've already launched\n\t\t\tfrom the AMI. You'll continue to incur usage costs for those instances until you\n\t\t\tterminate them.</p>\n         <p>When you deregister an Amazon EBS-backed AMI, it doesn't affect the snapshot that was\n\t\t\tcreated for the root volume of the instance during the AMI creation process. When you\n\t\t\tderegister an instance store-backed AMI, it doesn't affect the files that you uploaded\n\t\t\tto Amazon S3 when you created the AMI.</p>"
+                "smithy.api#documentation": "<p>Deregisters the specified AMI. After you deregister an AMI, it can't be used to launch\n\t\t\tnew instances; however, it doesn't affect any instances that you've already launched\n\t\t\tfrom the AMI. You'll continue to incur usage costs for those instances until you\n\t\t\tterminate them.</p>\n   \t     <p>When you deregister an Amazon EBS-backed AMI, it doesn't affect the snapshot that was\n\t\t\tcreated for the root volume of the instance during the AMI creation process. When you\n\t\t\tderegister an instance store-backed AMI, it doesn't affect the files that you uploaded\n\t\t\tto Amazon S3 when you created the AMI.</p>"
             }
         },
         "com.amazonaws.ec2#DeregisterImageRequest": {
@@ -19879,7 +19883,7 @@
                 "target": "com.amazonaws.ec2#DescribeImagesResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the specified images (AMIs, AKIs, and ARIs) available to you or all of the images available to you.</p> \n         <p>The images available to you include public images, private images that you own, and private images owned by other AWS accounts for which you have explicit launch permissions.</p>\n         <p>Recently deregistered images appear in the returned results for a short interval and then\n      return empty results. After all instances that reference a deregistered AMI are terminated,\n      specifying the ID of the image will eventually return an error indicating that the AMI ID\n      cannot be found.</p>",
+                "smithy.api#documentation": "<p>Describes the specified images (AMIs, AKIs, and ARIs) available to you or all of the images available to you.</p> \n         <p>The images available to you include public images, private images that you own, and private images owned by other \n       Amazon Web Services accounts for which you have explicit launch permissions.</p>\n         <p>Recently deregistered images appear in the returned results for a short interval and then\n      return empty results. After all instances that reference a deregistered AMI are terminated,\n      specifying the ID of the image will eventually return an error indicating that the AMI ID\n      cannot be found.</p>",
                 "smithy.api#suppress": [
                     "WaitableTraitInvalidErrorType"
                 ],
@@ -19939,14 +19943,14 @@
                 "ExecutableUsers": {
                     "target": "com.amazonaws.ec2#ExecutableByStringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Scopes the images by users with explicit launch permissions. \n\t\t\t\tSpecify an AWS account ID, <code>self</code> (the sender of the request),\n\t\t\t\tor <code>all</code> (public AMIs).</p>",
+                        "smithy.api#documentation": "<p>Scopes the images by users with explicit launch permissions. \n       Specify an Amazon Web Services account ID, <code>self</code> (the sender of the request),\n\t\t\t\tor <code>all</code> (public AMIs).</p>",
                         "smithy.api#xmlName": "ExecutableBy"
                     }
                 },
                 "Filters": {
                     "target": "com.amazonaws.ec2#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>architecture</code> - The image architecture (<code>i386</code> |\n            <code>x86_64</code> | <code>arm64</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.delete-on-termination</code> - A Boolean value that indicates\n          whether the Amazon EBS volume is deleted on instance termination.</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.device-name</code> - The device name specified in the block device mapping (for\n          example, <code>/dev/sdh</code> or <code>xvdh</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.snapshot-id</code> - The ID of the snapshot used for the EBS\n          volume.</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.volume-size</code> - The volume size of the EBS volume, in GiB.</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.volume-type</code> - The volume type of the EBS volume\n            (<code>gp2</code> | <code>io1</code> | <code>io2</code> | <code>st1 </code>| <code>sc1</code> |\n            <code>standard</code>).</p>\n            </li>\n            <li>\n    \t\t         <p>\n    \t\t\t           <code>block-device-mapping.encrypted</code> - A Boolean that indicates whether the EBS volume is encrypted.</p>\n    \t       </li>\n            <li>\n               <p>\n                  <code>description</code> - The description of the image (provided during image\n          creation).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ena-support</code> - A Boolean that indicates whether enhanced networking\n          with ENA is enabled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>hypervisor</code> - The hypervisor type (<code>ovm</code> |\n          <code>xen</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>image-id</code> - The ID of the image.</p>\n            </li>\n            <li>\n               <p>\n                  <code>image-type</code> - The image type (<code>machine</code> | <code>kernel</code> |\n            <code>ramdisk</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>is-public</code> - A Boolean that indicates whether the image is public.</p>\n            </li>\n            <li>\n               <p>\n                  <code>kernel-id</code> - The kernel ID.</p>\n            </li>\n            <li>\n               <p>\n                  <code>manifest-location</code> - The location of the image manifest.</p>\n            </li>\n            <li>\n               <p>\n                  <code>name</code> - The name of the AMI (provided during image creation).</p>\n            </li>\n            <li>\n               <p>\n                  <code>owner-alias</code> - The owner alias (<code>amazon</code> | <code>aws-marketplace</code>). \n        \tThe valid aliases are defined in an Amazon-maintained list. This is not the AWS account alias that can be \n        \tset using the IAM console. We recommend that you use the <b>Owner</b> \n        \trequest parameter instead of this filter.</p>\n            </li>\n            <li>\n      \t        <p>\n                  <code>owner-id</code> - The AWS account ID of the owner. We recommend that you use the \n      \t\t<b>Owner</b> request parameter instead of this filter.</p>\n            </li>\n            <li>\n               <p>\n                  <code>platform</code> - The platform. To only list Windows-based AMIs, use\n            <code>windows</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>product-code</code> - The product code.</p>\n            </li>\n            <li>\n               <p>\n                  <code>product-code.type</code> - The type of the product code (<code>devpay</code> |\n            <code>marketplace</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ramdisk-id</code> - The RAM disk ID.</p>\n            </li>\n            <li>\n               <p>\n                  <code>root-device-name</code> - The device name of the root device volume (for example, <code>/dev/sda1</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>root-device-type</code> - The type of the root device volume (<code>ebs</code> |\n            <code>instance-store</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>state</code> - The state of the image (<code>available</code> | <code>pending</code>\n          | <code>failed</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>state-reason-code</code> - The reason code for the state change.</p>\n            </li>\n            <li>\n               <p>\n                  <code>state-reason-message</code> - The message for the state change.</p>\n            </li>\n            <li>\n                <p>\n                  <code>sriov-net-support</code> - A value of <code>simple</code> indicates\n                    that enhanced networking with the Intel 82599 VF interface is enabled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>virtualization-type</code> - The virtualization type (<code>paravirtual</code> |\n            <code>hvm</code>).</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>architecture</code> - The image architecture (<code>i386</code> |\n            <code>x86_64</code> | <code>arm64</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.delete-on-termination</code> - A Boolean value that indicates\n        \twhether the Amazon EBS volume is deleted on instance termination.</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.device-name</code> - The device name specified in the block device mapping (for\n          example, <code>/dev/sdh</code> or <code>xvdh</code>).</p>\n            </li>\n            <li>\n               <p>\n        \t         <code>block-device-mapping.snapshot-id</code> - The ID of the snapshot used for the Amazon EBS\n          volume.</p>\n            </li>\n            <li>\n               <p>\n        \t         <code>block-device-mapping.volume-size</code> - The volume size of the Amazon EBS volume, in GiB.</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.volume-type</code> - The volume type of the Amazon EBS volume\n            (<code>io1</code> | <code>io2</code> | <code>gp2</code> | <code>gp3</code> | <code>sc1\n          </code>| <code>st1</code> | <code>standard</code>).</p>\n            </li>\n            <li>\n    \t\t         <p>\n    \t\t\t           <code>block-device-mapping.encrypted</code> - A Boolean that indicates whether the Amazon EBS volume is encrypted.</p>\n    \t       </li>\n            <li>\n               <p>\n                  <code>description</code> - The description of the image (provided during image\n          creation).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ena-support</code> - A Boolean that indicates whether enhanced networking\n          with ENA is enabled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>hypervisor</code> - The hypervisor type (<code>ovm</code> |\n          <code>xen</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>image-id</code> - The ID of the image.</p>\n            </li>\n            <li>\n               <p>\n                  <code>image-type</code> - The image type (<code>machine</code> | <code>kernel</code> |\n            <code>ramdisk</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>is-public</code> - A Boolean that indicates whether the image is public.</p>\n            </li>\n            <li>\n               <p>\n                  <code>kernel-id</code> - The kernel ID.</p>\n            </li>\n            <li>\n               <p>\n                  <code>manifest-location</code> - The location of the image manifest.</p>\n            </li>\n            <li>\n               <p>\n                  <code>name</code> - The name of the AMI (provided during image creation).</p>\n            </li>\n            <li>\n               <p>\n                  <code>owner-alias</code> - The owner alias (<code>amazon</code> | <code>aws-marketplace</code>). \n          The valid aliases are defined in an Amazon-maintained list. This is not the Amazon Web Services account alias that can be \n        \tset using the IAM console. We recommend that you use the <b>Owner</b> \n        \trequest parameter instead of this filter.</p>\n            </li>\n            <li>\n               <p>\n                  <code>owner-id</code> - The Amazon Web Services account ID of the owner. We recommend that you use the \n      \t\t<b>Owner</b> request parameter instead of this filter.</p>\n            </li>\n            <li>\n               <p>\n                  <code>platform</code> - The platform. To only list Windows-based AMIs, use\n            <code>windows</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>product-code</code> - The product code.</p>\n            </li>\n            <li>\n               <p>\n                  <code>product-code.type</code> - The type of the product code (<code>marketplace</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ramdisk-id</code> - The RAM disk ID.</p>\n            </li>\n            <li>\n               <p>\n                  <code>root-device-name</code> - The device name of the root device volume (for example, <code>/dev/sda1</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>root-device-type</code> - The type of the root device volume (<code>ebs</code> |\n            <code>instance-store</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>state</code> - The state of the image (<code>available</code> | <code>pending</code>\n          | <code>failed</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>state-reason-code</code> - The reason code for the state change.</p>\n            </li>\n            <li>\n               <p>\n                  <code>state-reason-message</code> - The message for the state change.</p>\n            </li>\n            <li>\n                <p>\n                  <code>sriov-net-support</code> - A value of <code>simple</code> indicates\n                    that enhanced networking with the Intel 82599 VF interface is enabled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>virtualization-type</code> - The virtualization type (<code>paravirtual</code> |\n            <code>hvm</code>).</p>\n            </li>\n         </ul>",
                         "smithy.api#xmlName": "Filter"
                     }
                 },
@@ -19960,7 +19964,7 @@
                 "Owners": {
                     "target": "com.amazonaws.ec2#OwnerStringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Scopes the results to images with the specified owners. You can specify a combination of  \n      AWS account IDs, <code>self</code>, <code>amazon</code>, and <code>aws-marketplace</code>. \n      If you omit this parameter, the results include all images for which you have launch permissions, \n      regardless of ownership.</p>",
+                        "smithy.api#documentation": "<p>Scopes the results to images with the specified owners. You can specify a combination of  \n      Amazon Web Services account IDs, <code>self</code>, <code>amazon</code>, and <code>aws-marketplace</code>. \n      If you omit this parameter, the results include all images for which you have launch permissions, \n      regardless of ownership.</p>",
                         "smithy.api#xmlName": "Owner"
                     }
                 },
@@ -20627,7 +20631,7 @@
                 "Filters": {
                     "target": "com.amazonaws.ec2#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more filters. Filter names and values are case-sensitive.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>auto-recovery-supported</code> - Indicates whether auto recovery is supported\n      (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>bare-metal</code> - Indicates whether it is a bare metal instance type\n      (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>burstable-performance-supported</code> - Indicates whether it is a burstable\n     performance instance type  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>current-generation</code> - Indicates whether this instance type is the latest\n     generation instance type of an instance family  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.baseline-bandwidth-in-mbps</code> - The baseline\n                    bandwidth performance for an EBS-optimized instance type, in Mbps.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.baseline-iops</code> - The baseline input/output storage\n     operations per second for an EBS-optimized instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.baseline-throughput-in-mbps</code> - The baseline\n     throughput performance for an EBS-optimized instance type, in MB/s.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.maximum-bandwidth-in-mbps</code> - The maximum bandwidth\n                    performance for an EBS-optimized instance type, in Mbps.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.maximum-iops</code> - The maximum input/output storage\n                    operations per second for an EBS-optimized instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.maximum-throughput-in-mbps</code> - The maximum\n     throughput performance for an EBS-optimized instance type, in MB/s.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-support</code> - Indicates whether the instance type is\n     EBS-optimized (<code>supported</code> | <code>unsupported</code> |\n     <code>default</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.encryption-support</code> - Indicates whether EBS encryption is supported\n      (<code>supported</code> | <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.nvme-support</code> - Indicates whether non-volatile memory express (NVMe)\n     is supported for EBS volumes (<code>required</code> | <code>supported</code> |\n      <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>free-tier-eligible</code> - Indicates whether the instance type is eligible to use\n     in the free tier  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>hibernation-supported</code> - Indicates whether On-Demand hibernation is supported\n      (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>hypervisor</code> - The hypervisor (<code>nitro</code> | <code>xen</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.disk.count</code> - The number of local disks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.disk.size-in-gb</code> - The storage size of each instance storage disk, in\n     GB.</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.disk.type</code> - The storage technology for the local\n     instance storage disks (<code>hdd</code> | <code>ssd</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.nvme-support</code> - Indicates whether non-volatile memory\n     express (NVMe) is supported for instance store (<code>required</code> | <code>supported</code>)\n     | <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.total-size-in-gb</code> - The total amount of storage available from all local\n     instance storage, in GB.</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-supported</code> - Indicates whether the instance type has local\n     instance storage  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-type</code> - The instance type (for example <code>c5.2xlarge</code> or\n     c5*).</p>\n            </li>\n            <li>\n               <p>\n                  <code>memory-info.size-in-mib</code> - The memory size.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.efa-info.maximum-efa-interfaces</code> - The maximum number of Elastic \n     Fabric Adapters (EFAs) per instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.efa-supported</code> - Indicates whether the instance type supports\n     Elastic Fabric Adapter (EFA)  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.ena-support</code> - Indicates whether Elastic Network Adapter (ENA) is\n     supported or required (<code>required</code> | <code>supported</code> |\n      <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.encryption-in-transit-supported</code> - Indicates whether the instance type \n     automatically encrypts in-transit traffic between instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.ipv4-addresses-per-interface</code> - The maximum number of private IPv4 addresses per\n     network interface.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.ipv6-addresses-per-interface</code> - The maximum number of private IPv6 addresses per\n     network interface.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.ipv6-supported</code> - Indicates whether the instance type supports\n     IPv6  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.maximum-network-interfaces</code> - The maximum number of network interfaces per instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.network-performance</code> - The network performance (for example, \"25\n     Gigabit\").</p>\n            </li>\n            <li>\n               <p>\n                  <code>processor-info.supported-architecture</code> - The CPU architecture\n      (<code>arm64</code> | <code>i386</code> | <code>x86_64</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>processor-info.sustained-clock-speed-in-ghz</code> - The CPU clock speed, in GHz.</p>\n            </li>\n            <li>\n               <p>\n                  <code>supported-boot-mode</code> - The boot mode (<code>legacy-bios</code> |\n      <code>uefi</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>supported-root-device-type</code> - The root device type (<code>ebs</code> |\n      <code>instance-store</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>supported-usage-class</code> - The usage class (<code>on-demand</code> |\n      <code>spot</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>supported-virtualization-type</code> - The virtualization type (<code>hvm</code> |\n      <code>paravirtual</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.default-cores</code> - The default number of cores for the instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.default-threads-per-core</code> - The default number of threads per core for the instance\n     type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.default-vcpus</code> - The default number of vCPUs for the instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.valid-cores</code> - The number of cores that can be configured for the instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.valid-threads-per-core</code> - The number of threads per core that can be configured for the instance type.\n        For example, \"1\" or \"1,2\".</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>One or more filters. Filter names and values are case-sensitive.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>auto-recovery-supported</code> - Indicates whether auto recovery is supported  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>bare-metal</code> - Indicates whether it is a bare metal instance type  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>burstable-performance-supported</code> - Indicates whether it is a burstable\n     performance instance type  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>current-generation</code> - Indicates whether this instance type is the latest\n     generation instance type of an instance family  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.baseline-bandwidth-in-mbps</code> - The baseline\n                    bandwidth performance for an EBS-optimized instance type, in Mbps.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.baseline-iops</code> - The baseline input/output storage\n     operations per second for an EBS-optimized instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.baseline-throughput-in-mbps</code> - The baseline\n     throughput performance for an EBS-optimized instance type, in MB/s.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.maximum-bandwidth-in-mbps</code> - The maximum bandwidth\n                    performance for an EBS-optimized instance type, in Mbps.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.maximum-iops</code> - The maximum input/output storage\n                    operations per second for an EBS-optimized instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.maximum-throughput-in-mbps</code> - The maximum\n     throughput performance for an EBS-optimized instance type, in MB/s.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-support</code> - Indicates whether the instance type is\n     EBS-optimized (<code>supported</code> | <code>unsupported</code> |\n     <code>default</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.encryption-support</code> - Indicates whether EBS encryption is supported\n      (<code>supported</code> | <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.nvme-support</code> - Indicates whether non-volatile memory express (NVMe)\n     is supported for EBS volumes (<code>required</code> | <code>supported</code> | <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>free-tier-eligible</code> - Indicates whether the instance type is eligible to use\n     in the free tier  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>hibernation-supported</code> - Indicates whether On-Demand hibernation is supported  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>hypervisor</code> - The hypervisor (<code>nitro</code> | <code>xen</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.disk.count</code> - The number of local disks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.disk.size-in-gb</code> - The storage size of each instance storage disk, in\n     GB.</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.disk.type</code> - The storage technology for the local\n     instance storage disks (<code>hdd</code> | <code>ssd</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.nvme-support</code> - Indicates whether non-volatile memory\n     express (NVMe) is supported for instance store (<code>required</code> | <code>supported</code>)\n     | <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.total-size-in-gb</code> - The total amount of storage available from all local\n     instance storage, in GB.</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-supported</code> - Indicates whether the instance type has local\n     instance storage  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-type</code> - The instance type (for example <code>c5.2xlarge</code> or\n     c5*).</p>\n            </li>\n            <li>\n               <p>\n                  <code>memory-info.size-in-mib</code> - The memory size.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.efa-info.maximum-efa-interfaces</code> - The maximum number of Elastic \n     Fabric Adapters (EFAs) per instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.efa-supported</code> - Indicates whether the instance type supports\n     Elastic Fabric Adapter (EFA)  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.ena-support</code> - Indicates whether Elastic Network Adapter (ENA) is\n     supported or required (<code>required</code> | <code>supported</code> |\n      <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.encryption-in-transit-supported</code> - Indicates whether the instance type \n     automatically encrypts in-transit traffic between instances  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.ipv4-addresses-per-interface</code> - The maximum number of private IPv4 addresses per\n     network interface.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.ipv6-addresses-per-interface</code> - The maximum number of private IPv6 addresses per\n     network interface.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.ipv6-supported</code> - Indicates whether the instance type supports IPv6  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.maximum-network-interfaces</code> - The maximum number of network interfaces per instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.network-performance</code> - The network performance (for example, \"25\n     Gigabit\").</p>\n            </li>\n            <li>\n               <p>\n                  <code>processor-info.supported-architecture</code> - The CPU architecture\n      (<code>arm64</code> | <code>i386</code> | <code>x86_64</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>processor-info.sustained-clock-speed-in-ghz</code> - The CPU clock speed, in GHz.</p>\n            </li>\n            <li>\n               <p>\n                  <code>supported-boot-mode</code> - The boot mode (<code>legacy-bios</code> |\n      <code>uefi</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>supported-root-device-type</code> - The root device type (<code>ebs</code> |\n      <code>instance-store</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>supported-usage-class</code> - The usage class (<code>on-demand</code> |\n      <code>spot</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>supported-virtualization-type</code> - The virtualization type (<code>hvm</code> |\n      <code>paravirtual</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.default-cores</code> - The default number of cores for the instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.default-threads-per-core</code> - The default number of threads per core for the instance\n     type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.default-vcpus</code> - The default number of vCPUs for the instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.valid-cores</code> - The number of cores that can be configured for the instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.valid-threads-per-core</code> - The number of threads per core that can be configured for the instance type.\n        For example, \"1\" or \"1,2\".</p>\n            </li>\n         </ul>",
                         "smithy.api#xmlName": "Filter"
                     }
                 },
@@ -24872,7 +24876,7 @@
                 "target": "com.amazonaws.ec2#DescribeStoreImageTasksResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the progress of the AMI store tasks. You can describe the store tasks for\n      specified AMIs. If you don't specify the AMIs, you get a paginated list of store tasks from\n      the last 31 days.</p>\n         <p>For each AMI task, the response indicates if the task is <code>InProgress</code>,\n        <code>Completed</code>, or <code>Failed</code>. For tasks <code>InProgress</code>, the\n      response shows the estimated progress as a percentage.</p>\n         <p>Tasks are listed in reverse chronological order. Currently, only tasks from the past 31\n      days can be viewed.</p>\n         <p>To use this API, you must have the required permissions. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html#ami-s3-permissions\">Permissions for storing and restoring AMIs using S3</a> in the\n        <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html\">Store and restore an AMI using\n        S3</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Describes the progress of the AMI store tasks. You can describe the store tasks for\n      specified AMIs. If you don't specify the AMIs, you get a paginated list of store tasks from\n      the last 31 days.</p>\n         <p>For each AMI task, the response indicates if the task is <code>InProgress</code>,\n        <code>Completed</code>, or <code>Failed</code>. For tasks <code>InProgress</code>, the\n      response shows the estimated progress as a percentage.</p>\n         <p>Tasks are listed in reverse chronological order. Currently, only tasks from the past 31\n      days can be viewed.</p>\n         <p>To use this API, you must have the required permissions. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html#ami-s3-permissions\">Permissions for storing and restoring AMIs using Amazon S3</a> in the\n        <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html\">Store and restore an AMI using\n    \tAmazon S3</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -29300,7 +29304,7 @@
                     }
                 },
                 "SnapshotId": {
-                    "target": "com.amazonaws.ec2#String",
+                    "target": "com.amazonaws.ec2#SnapshotId",
                     "traits": {
                         "aws.protocols#ec2QueryName": "SnapshotId",
                         "smithy.api#documentation": "<p>The ID of the snapshot.</p>",
@@ -30699,7 +30703,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "EventSubType",
-                        "smithy.api#documentation": "<p>The event.</p>\n\n        <p>The following are the <code>error</code> events:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>iamFleetRoleInvalid</code> - The EC2 Fleet or Spot Fleet did not have the required\n                    permissions either to launch or terminate an instance.</p>\n            </li>\n            <li>\n                <p>\n                    <code>spotFleetRequestConfigurationInvalid</code> - The configuration is not\n                    valid. For more information, see the description of the event.</p>\n            </li>\n            <li>\n                <p>\n                    <code>spotInstanceCountLimitExceeded</code> - You've reached the limit on the\n                    number of Spot Instances that you can launch.</p>\n            </li>\n         </ul>\n\n        <p>The following are the <code>fleetRequestChange</code> events:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>active</code> - The EC2 Fleet or Spot Fleet request has been validated and Amazon EC2 is\n                    attempting to maintain the target number of running Spot Instances.</p>\n            </li>\n            <li>\n                <p>\n                    <code>cancelled</code> - The EC2 Fleet or Spot Fleet request is canceled and has no running\n                    Spot Instances. The EC2 Fleet or Spot Fleet will be deleted two days after its instances\n                    were terminated.</p>\n            </li>\n            <li>\n                <p>\n                    <code>cancelled_running</code> - The EC2 Fleet or Spot Fleet request is canceled and does\n                    not launch additional Spot Instances. Existing Spot Instances continue to run\n                    until they are interrupted or terminated.</p>\n            </li>\n            <li>\n                <p>\n                    <code>cancelled_terminating</code> - The EC2 Fleet or Spot Fleet request is canceled and\n                    its Spot Instances are terminating.</p>\n            </li>\n            <li>\n                <p>\n                    <code>expired</code> - The EC2 Fleet or Spot Fleet request has expired. A subsequent event\n                    indicates that the instances were terminated, if the request was created with\n                        <code>TerminateInstancesWithExpiration</code> set.</p>\n            </li>\n            <li>\n                <p>\n                    <code>modify_in_progress</code> - A request to modify the EC2 Fleet or Spot Fleet request\n                    was accepted and is in progress.</p>\n            </li>\n            <li>\n                <p>\n                    <code>modify_succeeded</code> - The EC2 Fleet or Spot Fleet request was modified.</p>\n            </li>\n            <li>\n                <p>\n                    <code>price_update</code> - The price for a launch configuration was adjusted\n                    because it was too high. This change is permanent.</p>\n            </li>\n            <li>\n                <p>\n                    <code>submitted</code> - The EC2 Fleet or Spot Fleet request is being evaluated and Amazon EC2\n                    is preparing to launch the target number of Spot Instances.</p>\n            </li>\n         </ul>\n\n        <p>The following are the <code>instanceChange</code> events:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>launched</code> - A request was fulfilled and a new instance was\n                    launched.</p>\n            </li>\n            <li>\n                <p>\n                  <code>terminated</code> - An instance was terminated by the user.</p>\n            </li>\n         </ul>\n\n        <p>The following are the <code>Information</code> events:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>launchSpecTemporarilyBlacklisted</code> - The configuration is not valid\n                    and several attempts to launch instances have failed. For more information, see\n                    the description of the event.</p>\n            </li>\n            <li>\n                <p>\n                  <code>launchSpecUnusable</code> - The price in a launch specification is not\n                    valid because it is below the Spot price or the Spot price is above the\n                    On-Demand price.</p>\n            </li>\n            <li>\n                <p>\n                  <code>fleetProgressHalted</code> - The price in every launch specification is\n                    not valid. A launch specification might become valid if the Spot price\n                    changes.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The event.</p>\n\n        <p>The following are the <code>error</code> events:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>iamFleetRoleInvalid</code> - The EC2 Fleet or Spot Fleet did not have the required\n                    permissions either to launch or terminate an instance.</p>\n            </li>\n            <li>\n                <p>\n                    <code>spotFleetRequestConfigurationInvalid</code> - The configuration is not\n                    valid. For more information, see the description of the event.</p>\n            </li>\n            <li>\n                <p>\n                    <code>spotInstanceCountLimitExceeded</code> - You've reached the limit on the\n                    number of Spot Instances that you can launch.</p>\n            </li>\n         </ul>\n\n        <p>The following are the <code>fleetRequestChange</code> events:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>active</code> - The EC2 Fleet or Spot Fleet request has been validated and Amazon EC2 is\n                    attempting to maintain the target number of running Spot Instances.</p>\n            </li>\n            <li>\n                <p>\n                    <code>cancelled</code> - The EC2 Fleet or Spot Fleet request is canceled and has no running\n                    Spot Instances. The EC2 Fleet or Spot Fleet will be deleted two days after its instances\n                    were terminated.</p>\n            </li>\n            <li>\n                <p>\n                    <code>cancelled_running</code> - The EC2 Fleet or Spot Fleet request is canceled and does\n                    not launch additional Spot Instances. Existing Spot Instances continue to run\n                    until they are interrupted or terminated.</p>\n            </li>\n            <li>\n                <p>\n                    <code>cancelled_terminating</code> - The EC2 Fleet or Spot Fleet request is canceled and\n                    its Spot Instances are terminating.</p>\n            </li>\n            <li>\n                <p>\n                    <code>expired</code> - The EC2 Fleet or Spot Fleet request has expired. A subsequent event\n                    indicates that the instances were terminated, if the request was created with\n                        <code>TerminateInstancesWithExpiration</code> set.</p>\n            </li>\n            <li>\n                <p>\n                    <code>modify_in_progress</code> - A request to modify the EC2 Fleet or Spot Fleet request\n                    was accepted and is in progress.</p>\n            </li>\n            <li>\n                <p>\n                    <code>modify_succeeded</code> - The EC2 Fleet or Spot Fleet request was modified.</p>\n            </li>\n            <li>\n                <p>\n                    <code>submitted</code> - The EC2 Fleet or Spot Fleet request is being evaluated and Amazon EC2\n                    is preparing to launch the target number of Spot Instances.</p>\n            </li>\n         </ul>\n\n        <p>The following are the <code>instanceChange</code> events:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>launched</code> - A request was fulfilled and a new instance was\n                    launched.</p>\n            </li>\n            <li>\n                <p>\n                  <code>terminated</code> - An instance was terminated by the user.</p>\n            </li>\n         </ul>\n\n        <p>The following are the <code>Information</code> events:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>launchSpecTemporarilyBlacklisted</code> - The configuration is not valid\n                    and several attempts to launch instances have failed. For more information, see\n                    the description of the event.</p>\n            </li>\n            <li>\n                <p>\n                  <code>launchSpecUnusable</code> - The price in a launch specification is not\n                    valid because it is below the Spot price or the Spot price is above the\n                    On-Demand price.</p>\n            </li>\n            <li>\n                <p>\n                  <code>fleetProgressHalted</code> - The price in every launch specification is\n                    not valid. A launch specification might become valid if the Spot price\n                    changes.</p>\n            </li>\n         </ul>",
                         "smithy.api#xmlName": "eventSubType"
                     }
                 },
@@ -35933,7 +35937,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "ImageOwnerId",
-                        "smithy.api#documentation": "<p>The AWS account ID of the image owner.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the image.</p>",
                         "smithy.api#xmlName": "imageOwnerId"
                     }
                 },
@@ -35949,7 +35953,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "PlatformDetails",
-                        "smithy.api#documentation": "<p>The platform details associated with the billing code of the AMI. For more information,\n      see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-billing-info.html\">Obtaining\n        Billing Information</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The platform details associated with the billing code of the AMI. For more information,\n      see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-billing-info.html\">Understanding \n        AMI billing</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
                         "smithy.api#xmlName": "platformDetails"
                     }
                 },
@@ -35957,7 +35961,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "UsageOperation",
-                        "smithy.api#documentation": "<p>The operation of the Amazon EC2 instance and the billing code that is associated with the AMI.\n        <code>usageOperation</code> corresponds to the <a href=\"https://docs.aws.amazon.com/cur/latest/userguide/Lineitem-columns.html#Lineitem-details-O-Operation\">lineitem/Operation</a> column on your AWS Cost and Usage Report and in the <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/price-changes.html\">AWS Price\n        List API</a>. For the list of <code>UsageOperation</code> codes, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-billing-info.html#billing-info\">Platform Details and Usage Operation Billing Codes</a> in the\n        <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The operation of the Amazon EC2 instance and the billing code that is associated with the AMI.\n        <code>usageOperation</code> corresponds to the <a href=\"https://docs.aws.amazon.com/cur/latest/userguide/Lineitem-columns.html#Lineitem-details-O-Operation\">lineitem/Operation</a> column on your Amazon Web Services Cost and Usage Report and in the <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/price-changes.html\">Amazon Web Services Price\n        \tList API</a>. You can view these fields on the <b>Instances</b> or \n    \t<b>AMIs</b> pages in the Amazon EC2 console, or in the responses that are \n    \treturned by the <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImages.html\">DescribeImages</a> \n    \tcommand in the Amazon EC2 API, or the <a href=\"https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-images.html\">describe-images</a> \n    \tcommand in the CLI.</p>",
                         "smithy.api#xmlName": "usageOperation"
                     }
                 },
@@ -36021,7 +36025,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "ImageOwnerAlias",
-                        "smithy.api#documentation": "<p>The AWS account alias (for example, <code>amazon</code>, <code>self</code>) or\n        the AWS account ID of the AMI owner.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account alias (for example, <code>amazon</code>, <code>self</code>) or\n       the Amazon Web Services account ID of the AMI owner.</p>",
                         "smithy.api#xmlName": "imageOwnerAlias"
                     }
                 },
@@ -36045,7 +36049,7 @@
                     "target": "com.amazonaws.ec2#DeviceType",
                     "traits": {
                         "aws.protocols#ec2QueryName": "RootDeviceType",
-                        "smithy.api#documentation": "<p>The type of root device used by the AMI. The AMI can use an EBS volume or an instance store volume.</p>",
+                        "smithy.api#documentation": "<p>The type of root device used by the AMI. The AMI can use an Amazon EBS volume or an instance store volume.</p>",
                         "smithy.api#xmlName": "rootDeviceType"
                     }
                 },
@@ -38406,7 +38410,7 @@
                 "CpuCredits": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The credit option for CPU usage of the instance. Valid values are\n                <code>standard</code> and <code>unlimited</code>.</p>"
+                        "smithy.api#documentation": "<p>The credit option for CPU usage of the instance. Valid values are\n                <code>standard</code> and <code>unlimited</code>.</p>\n        <p>T3 instances with <code>host</code> tenancy do not support the <code>unlimited</code> \n            CPU credit option.</p>"
                     }
                 }
             },
@@ -41703,6 +41707,18 @@
                     {
                         "value": "x2gd.metal",
                         "name": "x2gd_metal"
+                    },
+                    {
+                        "value": "vt1.3xlarge",
+                        "name": "vt1_3xlarge"
+                    },
+                    {
+                        "value": "vt1.6xlarge",
+                        "name": "vt1_6xlarge"
+                    },
+                    {
+                        "value": "vt1.24xlarge",
+                        "name": "vt1_24xlarge"
                     }
                 ]
             }
@@ -42828,7 +42844,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "UserId",
-                        "smithy.api#documentation": "<p>The AWS account ID.</p>\n         <p>Constraints: Up to 10 000 account IDs can be specified in a single request.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID.</p>\n         <p>Constraints: Up to 10 000 account IDs can be specified in a single request.</p>",
                         "smithy.api#xmlName": "userId"
                     }
                 }
@@ -42852,13 +42868,13 @@
                 "Add": {
                     "target": "com.amazonaws.ec2#LaunchPermissionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID to add to the list of launch permissions for the AMI.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID to add to the list of launch permissions for the AMI.</p>"
                     }
                 },
                 "Remove": {
                     "target": "com.amazonaws.ec2#LaunchPermissionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID to remove from the list of launch permissions for the AMI.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID to remove from the list of launch permissions for the AMI.</p>"
                     }
                 }
             },
@@ -45586,7 +45602,7 @@
                     "target": "com.amazonaws.ec2#PrefixListState",
                     "traits": {
                         "aws.protocols#ec2QueryName": "State",
-                        "smithy.api#documentation": "<p>The state of the prefix list.</p>",
+                        "smithy.api#documentation": "<p>The current state of the prefix list.</p>",
                         "smithy.api#xmlName": "state"
                     }
                 },
@@ -45904,7 +45920,7 @@
                 "InstanceCount": {
                     "target": "com.amazonaws.ec2#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of instances for which to reserve capacity.</p>\n\t  \t     <p>Valid range: 1 - 1000</p>"
+                        "smithy.api#documentation": "<p>The number of instances for which to reserve capacity. The number of instances can't be increased or \n\t\t    \tdecreased by more than <code>1000</code> in a single request.</p>"
                     }
                 },
                 "EndDate": {
@@ -46453,7 +46469,7 @@
                 "target": "com.amazonaws.ec2#ModifyImageAttributeRequest"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Modifies the specified attribute of the specified AMI. You can specify only one attribute at a time.\n       You can use the <code>Attribute</code> parameter to specify the attribute or one of the following parameters: \n       <code>Description</code>, <code>LaunchPermission</code>, or <code>ProductCode</code>.</p>\n         <p>AWS Marketplace product codes cannot be modified. Images with an AWS Marketplace product code cannot be made public.</p>\n         <p>To enable the SriovNetSupport enhanced networking attribute of an image, enable SriovNetSupport on an instance \n       and create an AMI from the instance.</p>"
+                "smithy.api#documentation": "<p>Modifies the specified attribute of the specified AMI. You can specify only one attribute at a time.\n       You can use the <code>Attribute</code> parameter to specify the attribute or one of the following parameters: \n       <code>Description</code> or <code>LaunchPermission</code>.</p>\n   \t     <p>Images with an Amazon Web Services Marketplace product code cannot be made public.</p>\n         <p>To enable the SriovNetSupport enhanced networking attribute of an image, enable SriovNetSupport on an instance \n       and create an AMI from the instance.</p>"
             }
         },
         "com.amazonaws.ec2#ModifyImageAttributeRequest": {
@@ -46462,7 +46478,7 @@
                 "Attribute": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the attribute to modify. \n       The valid values are <code>description</code>, <code>launchPermission</code>, and <code>productCodes</code>.</p>"
+                        "smithy.api#documentation": "<p>The name of the attribute to modify. \n       The valid values are <code>description</code> and <code>launchPermission</code>.</p>"
                     }
                 },
                 "Description": {
@@ -46493,7 +46509,7 @@
                 "ProductCodes": {
                     "target": "com.amazonaws.ec2#ProductCodeStringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The DevPay product codes. After you add a product code to an AMI, it can't be removed.</p>",
+                        "smithy.api#documentation": "<p>Not supported.</p>",
                         "smithy.api#xmlName": "ProductCode"
                     }
                 },
@@ -46507,14 +46523,14 @@
                 "UserIds": {
                     "target": "com.amazonaws.ec2#UserIdStringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account IDs. \n       This parameter can be used only when the <code>Attribute</code> parameter is <code>launchPermission</code>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account IDs. \n       This parameter can be used only when the <code>Attribute</code> parameter is <code>launchPermission</code>.</p>",
                         "smithy.api#xmlName": "UserId"
                     }
                 },
                 "Value": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value of the attribute being modified. \n       This parameter can be used only when the <code>Attribute</code> parameter is <code>description</code> or <code>productCodes</code>.</p>"
+                        "smithy.api#documentation": "<p>The value of the attribute being modified. \n       This parameter can be used only when the <code>Attribute</code> parameter is <code>description</code>.</p>"
                     }
                 },
                 "DryRun": {
@@ -47021,7 +47037,7 @@
                     "target": "com.amazonaws.ec2#HostTenancy",
                     "traits": {
                         "aws.protocols#ec2QueryName": "Tenancy",
-                        "smithy.api#documentation": "<p>The tenancy for the instance.</p>",
+                        "smithy.api#documentation": "<p>The tenancy for the instance.</p>\n        \n        <p>For T3 instances, you can't change the tenancy from <code>dedicated</code> to \n            <code>host</code>, or from <code>host</code> to <code>dedicated</code>. Attempting \n            to make one of these unsupported tenancy changes results in the <code>InvalidTenancy</code> \n            error code.</p>",
                         "smithy.api#xmlName": "tenancy"
                     }
                 },
@@ -47170,7 +47186,7 @@
                 "MaxEntries": {
                     "target": "com.amazonaws.ec2#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of entries for the prefix list. You cannot modify the entries  \n            of a prefix list and modify the size of a prefix list at the same time.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of entries for the prefix list. You cannot modify the entries  \n            of a prefix list and modify the size of a prefix list at the same time.</p>\n        <p>If any of the resources that reference the prefix list cannot support the new\n            maximum size, the modify operation fails. Check the state message for the IDs of \n            the first ten resources that do not support the new maximum size.</p>"
                     }
                 }
             }
@@ -51547,7 +51563,7 @@
                     "target": "com.amazonaws.ec2#Tenancy",
                     "traits": {
                         "aws.protocols#ec2QueryName": "Tenancy",
-                        "smithy.api#documentation": "<p>The tenancy of the instance (if the instance is running in a VPC). An instance with a\n            tenancy of <code>dedicated</code> runs on single-tenant hardware. The <code>host</code>\n            tenancy is not supported for the <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html\">ImportInstance</a> command.</p>\n        <p>This parameter is not supported by <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet\">CreateFleet</a>.</p>",
+                        "smithy.api#documentation": "<p>The tenancy of the instance (if the instance is running in a VPC). An instance with a\n            tenancy of <code>dedicated</code> runs on single-tenant hardware. The <code>host</code>\n            tenancy is not supported for the <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html\">ImportInstance</a> command.</p>\n        <p>This parameter is not supported by <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet\">CreateFleet</a>.</p>\n        \n        <p>T3 instances that use the <code>unlimited</code> CPU credit option do not support <code>host</code> tenancy.</p>",
                         "smithy.api#xmlName": "tenancy"
                     }
                 },
@@ -51729,7 +51745,7 @@
             "type": "structure",
             "members": {
                 "GroupName": {
-                    "target": "com.amazonaws.ec2#String",
+                    "target": "com.amazonaws.ec2#PlacementGroupName",
                     "traits": {
                         "aws.protocols#ec2QueryName": "GroupName",
                         "smithy.api#documentation": "<p>The name of the placement group that the instance is in.</p>",
@@ -53384,7 +53400,7 @@
                 "target": "com.amazonaws.ec2#RegisterImageResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Registers an AMI. When you're creating an AMI, this is the final step you must complete\n      before you can launch an instance from the AMI. For more information about creating AMIs, see\n        <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami.html\">Creating your\n        own AMIs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n         <note>\n            <p>For Amazon EBS-backed instances, <a>CreateImage</a> creates and registers \n         \tthe AMI in a single request, so you don't have to register the AMI yourself.</p>\n         </note>\n\n         <p>If needed, you can deregister an AMI at any time. Any modifications you make to an AMI backed by an instance store volume invalidates its registration. \n       If you make changes to an image, deregister the previous image and register the new image.</p>\n\n         <p>\n            <b>Register a snapshot of a root device volume</b>\n         </p>\n         <p>You can use <code>RegisterImage</code> to create an Amazon EBS-backed Linux AMI from\n       a snapshot of a root device volume. You specify the snapshot using a block device mapping.\n       You can't set the encryption state of the volume using the block device mapping. If the \n       snapshot is encrypted, or encryption by default is enabled, the root volume of an instance \n       launched from the AMI is encrypted.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html#creating-launching-ami-from-snapshot\">Create a Linux AMI from a snapshot</a> and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIEncryption.html\">Use encryption with EBS-backed AMIs</a>\n       in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n     \n         <p>\n            <b>AWS Marketplace product codes</b>\n         </p>\n         <p>If any snapshots have AWS Marketplace product codes, they are copied to the new\n      AMI.</p>\n         <p>Windows and some Linux distributions, such as Red Hat Enterprise Linux (RHEL) and SUSE\n      Linux Enterprise Server (SLES), use the EC2 billing product code associated with an AMI to\n      verify the subscription status for package updates. To create a new AMI for operating systems\n      that require a billing product code, instead of registering the AMI, do the following to\n      preserve the billing product code association:</p>\n         <ol>\n            <li>\n               <p>Launch an instance from an existing AMI with that billing product code.</p>\n            </li>\n            <li>\n               <p>Customize the instance.</p>\n            </li>\n            <li>\n               <p>Create an AMI from the instance using <a>CreateImage</a>.</p>\n            </li>\n         </ol>\n         <p>If you purchase a Reserved Instance to apply to an On-Demand Instance that was launched\n      from an AMI with a billing product code, make sure that the Reserved Instance has the matching\n      billing product code. If you purchase a Reserved Instance without the matching billing product\n      code, the Reserved Instance will not be applied to the On-Demand Instance. For information\n      about how to obtain the platform details and billing information of an AMI, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-billing-info.html\">Obtaining billing\n        information</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Registers an AMI. When you're creating an AMI, this is the final step you must complete\n      before you can launch an instance from the AMI. For more information about creating AMIs, see\n        <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami.html\">Creating your\n        own AMIs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n         <note>\n     \t      <p>For Amazon EBS-backed instances, <a>CreateImage</a> creates and registers \n         \tthe AMI in a single request, so you don't have to register the AMI yourself.</p>\n         </note>\n\n         <p>If needed, you can deregister an AMI at any time. Any modifications you make to an AMI backed by an instance store volume invalidates its registration. \n       If you make changes to an image, deregister the previous image and register the new image.</p>\n\n         <p>\n            <b>Register a snapshot of a root device volume</b>\n         </p>\n   \t     <p>You can use <code>RegisterImage</code> to create an Amazon EBS-backed Linux AMI from\n       a snapshot of a root device volume. You specify the snapshot using a block device mapping.\n       You can't set the encryption state of the volume using the block device mapping. If the \n       snapshot is encrypted, or encryption by default is enabled, the root volume of an instance \n       launched from the AMI is encrypted.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html#creating-launching-ami-from-snapshot\">Create a Linux AMI from a snapshot</a> and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIEncryption.html\">Use encryption with Amazon EBS-backed AMIs</a>\n       in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n     \n   \t     <p>\n            <b>Amazon Web Services Marketplace product codes</b>\n         </p>\n   \t     <p>If any snapshots have Amazon Web Services Marketplace product codes, they are copied to the new\n      AMI.</p>\n         <p>Windows and some Linux distributions, such as Red Hat Enterprise Linux (RHEL) and SUSE\n      Linux Enterprise Server (SLES), use the Amazon EC2 billing product code associated with an AMI to\n      verify the subscription status for package updates. To create a new AMI for operating systems\n      that require a billing product code, instead of registering the AMI, do the following to\n      preserve the billing product code association:</p>\n         <ol>\n            <li>\n               <p>Launch an instance from an existing AMI with that billing product code.</p>\n            </li>\n            <li>\n               <p>Customize the instance.</p>\n            </li>\n            <li>\n               <p>Create an AMI from the instance using <a>CreateImage</a>.</p>\n            </li>\n         </ol>\n         <p>If you purchase a Reserved Instance to apply to an On-Demand Instance that was launched\n      from an AMI with a billing product code, make sure that the Reserved Instance has the matching\n      billing product code. If you purchase a Reserved Instance without the matching billing product\n      code, the Reserved Instance will not be applied to the On-Demand Instance. For information\n      about how to obtain the platform details and billing information of an AMI, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-billing-info.html\">Understanding AMI \n      \tbilling</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#RegisterImageRequest": {
@@ -53400,14 +53416,14 @@
                     "target": "com.amazonaws.ec2#ArchitectureValues",
                     "traits": {
                         "aws.protocols#ec2QueryName": "Architecture",
-                        "smithy.api#documentation": "<p>The architecture of the AMI.</p>\n         <p>Default: For Amazon EBS-backed AMIs, <code>i386</code>.\n        For instance store-backed AMIs, the architecture specified in the manifest file.</p>",
+                        "smithy.api#documentation": "<p>The architecture of the AMI.</p>\n   \t     <p>Default: For Amazon EBS-backed AMIs, <code>i386</code>.\n        For instance store-backed AMIs, the architecture specified in the manifest file.</p>",
                         "smithy.api#xmlName": "architecture"
                     }
                 },
                 "BlockDeviceMappings": {
                     "target": "com.amazonaws.ec2#BlockDeviceMappingRequestList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The block device mapping entries.</p>\n         <p>If you specify an EBS volume using the ID of an EBS snapshot, you can't specify the encryption state of the volume.</p>\n         <p>If you create an AMI on an Outpost, then all backing snapshots must be on the same Outpost or in the Region \n    \t of that Outpost. AMIs on an Outpost that include local snapshots can be used to launch instances on the same Outpost \n    \t only. For more information, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#ami\">\n    \t \tAmazon EBS local snapshots on Outposts</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The block device mapping entries.</p>\n   \t     <p>If you specify an Amazon EBS volume using the ID of an Amazon EBS snapshot, you can't specify the encryption state of the volume.</p>\n         <p>If you create an AMI on an Outpost, then all backing snapshots must be on the same Outpost or in the Region \n    \t of that Outpost. AMIs on an Outpost that include local snapshots can be used to launch instances on the same Outpost \n    \t only. For more information, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#ami\">\n    \t \tAmazon EBS local snapshots on Outposts</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
                         "smithy.api#xmlName": "BlockDeviceMapping"
                     }
                 },
@@ -53455,7 +53471,7 @@
                 "BillingProducts": {
                     "target": "com.amazonaws.ec2#BillingProductList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The billing product codes. Your account must be authorized to specify billing product codes. Otherwise,\n         you can use the AWS Marketplace to bill for the use of an AMI.</p>",
+                        "smithy.api#documentation": "<p>The billing product codes. Your account must be authorized to specify billing product codes. Otherwise,\n     \tyou can use the Amazon Web Services Marketplace to bill for the use of an AMI.</p>",
                         "smithy.api#xmlName": "BillingProduct"
                     }
                 },
@@ -56288,7 +56304,7 @@
                 "target": "com.amazonaws.ec2#ResetImageAttributeRequest"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Resets an attribute of an AMI to its default value.</p>\n         <note>\n            <p>The productCodes attribute can't be reset.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Resets an attribute of an AMI to its default value.</p>"
             }
         },
         "com.amazonaws.ec2#ResetImageAttributeName": {
@@ -56479,12 +56495,20 @@
             "traits": {
                 "smithy.api#enum": [
                     {
+                        "value": "capacity-reservation",
+                        "name": "capacity_reservation"
+                    },
+                    {
                         "value": "client-vpn-endpoint",
                         "name": "client_vpn_endpoint"
                     },
                     {
                         "value": "customer-gateway",
                         "name": "customer_gateway"
+                    },
+                    {
+                        "value": "carrier-gateway",
+                        "name": "carrier_gateway"
                     },
                     {
                         "value": "dedicated-host",
@@ -56551,6 +56575,14 @@
                         "name": "internet_gateway"
                     },
                     {
+                        "value": "ipv4pool-ec2",
+                        "name": "ipv4pool_ec2"
+                    },
+                    {
+                        "value": "ipv6pool-ec2",
+                        "name": "ipv6pool_ec2"
+                    },
+                    {
                         "value": "key-pair",
                         "name": "key_pair"
                     },
@@ -56559,8 +56591,28 @@
                         "name": "launch_template"
                     },
                     {
+                        "value": "local-gateway",
+                        "name": "local_gateway"
+                    },
+                    {
+                        "value": "local-gateway-route-table",
+                        "name": "local_gateway_route_table"
+                    },
+                    {
+                        "value": "local-gateway-virtual-interface",
+                        "name": "local_gateway_virtual_interface"
+                    },
+                    {
+                        "value": "local-gateway-virtual-interface-group",
+                        "name": "local_gateway_virtual_interface_group"
+                    },
+                    {
                         "value": "local-gateway-route-table-vpc-association",
                         "name": "local_gateway_route_table_vpc_association"
+                    },
+                    {
+                        "value": "local-gateway-route-table-virtual-interface-group-association",
+                        "name": "local_gateway_route_table_virtual_interface_group_association"
                     },
                     {
                         "value": "natgateway",
@@ -56585,6 +56637,14 @@
                     {
                         "value": "placement-group",
                         "name": "placement_group"
+                    },
+                    {
+                        "value": "prefix-list",
+                        "name": "prefix_list"
+                    },
+                    {
+                        "value": "replace-root-volume-task",
+                        "name": "replace_root_volume_task"
                     },
                     {
                         "value": "reserved-instances",
@@ -56657,6 +56717,14 @@
                     {
                         "value": "vpc",
                         "name": "vpc"
+                    },
+                    {
+                        "value": "vpc-endpoint",
+                        "name": "vpc_endpoint"
+                    },
+                    {
+                        "value": "vpc-endpoint-service",
+                        "name": "vpc_endpoint_service"
                     },
                     {
                         "value": "vpc-peering-connection",
@@ -58016,7 +58084,7 @@
                 "CreditSpecification": {
                     "target": "com.amazonaws.ec2#CreditSpecificationRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>The credit option for CPU usage of the burstable performance instance. Valid values\n            are <code>standard</code> and <code>unlimited</code>. To change this attribute after\n            launch, use <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceCreditSpecification.html\">\n                ModifyInstanceCreditSpecification</a>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html\">Burstable\n                performance instances</a> in the <i>Amazon EC2 User Guide</i>.</p>\n        <p>Default: <code>standard</code> (T2 instances) or <code>unlimited</code> (T3/T3a\n            instances)</p>"
+                        "smithy.api#documentation": "<p>The credit option for CPU usage of the burstable performance instance. Valid values\n            are <code>standard</code> and <code>unlimited</code>. To change this attribute after\n            launch, use <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceCreditSpecification.html\">\n                ModifyInstanceCreditSpecification</a>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html\">Burstable\n                performance instances</a> in the <i>Amazon EC2 User Guide</i>.</p>\n        <p>Default: <code>standard</code> (T2 instances) or <code>unlimited</code> (T3/T3a\n            instances)</p>\n        \n        <p>For T3 instances with <code>host</code> tenancy, only <code>standard</code> is \n            supported.</p>"
                     }
                 },
                 "CpuOptions": {
@@ -58144,7 +58212,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The tags to apply to the AMI object that will be stored in the S3 bucket. For more\n      information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-tagging.html\">Categorizing your storage using\n        tags</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>The tags to apply to the AMI object that will be stored in the Amazon S3 bucket. For more\n      information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-tagging.html\">Categorizing your storage using\n        tags</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#S3ObjectTagList": {
@@ -58162,7 +58230,7 @@
                 "AWSAccessKeyId": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The access key ID of the owner of the bucket. Before you specify a value for your access key ID, review and follow the guidance  \n       in <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html\">Best Practices for Managing AWS Access Keys</a>.</p>"
+                        "smithy.api#documentation": "<p>The access key ID of the owner of the bucket. Before you specify a value for your access key ID, review and follow the guidance  \n       in <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html\">Best Practices for Managing Amazon Web Services Access Keys</a>.</p>"
                     }
                 },
                 "Bucket": {
@@ -58199,7 +58267,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the storage parameters for S3 and S3 buckets for an instance store-backed AMI.</p>"
+                "smithy.api#documentation": "<p>Describes the storage parameters for Amazon S3 and Amazon S3 buckets for an instance store-backed AMI.</p>"
             }
         },
         "com.amazonaws.ec2#ScheduledInstance": {
@@ -60634,7 +60702,7 @@
                     }
                 },
                 "ImageId": {
-                    "target": "com.amazonaws.ec2#String",
+                    "target": "com.amazonaws.ec2#ImageId",
                     "traits": {
                         "aws.protocols#ec2QueryName": "ImageId",
                         "smithy.api#documentation": "<p>The ID of the AMI.</p>",
@@ -60658,7 +60726,7 @@
                     }
                 },
                 "KeyName": {
-                    "target": "com.amazonaws.ec2#String",
+                    "target": "com.amazonaws.ec2#KeyPairName",
                     "traits": {
                         "aws.protocols#ec2QueryName": "KeyName",
                         "smithy.api#documentation": "<p>The name of the key pair.</p>",
@@ -60706,7 +60774,7 @@
                     }
                 },
                 "SubnetId": {
-                    "target": "com.amazonaws.ec2#String",
+                    "target": "com.amazonaws.ec2#SubnetId",
                     "traits": {
                         "aws.protocols#ec2QueryName": "SubnetId",
                         "smithy.api#documentation": "<p>The IDs of the subnets in which to launch the instances. To specify multiple subnets, separate\n          them using commas; for example, \"subnet-1234abcdeexample1, subnet-0987cdef6example2\".</p>",
@@ -61569,7 +61637,7 @@
                     }
                 },
                 "GroupName": {
-                    "target": "com.amazonaws.ec2#String",
+                    "target": "com.amazonaws.ec2#PlacementGroupName",
                     "traits": {
                         "aws.protocols#ec2QueryName": "GroupName",
                         "smithy.api#documentation": "<p>The name of the placement group.</p>",
@@ -61785,7 +61853,7 @@
                 "target": "com.amazonaws.ec2#StartInstancesResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Starts an Amazon EBS-backed instance that you've previously stopped.</p>\n        <p>Instances that use Amazon EBS volumes as their root devices can be quickly stopped and\n            started. When an instance is stopped, the compute resources are released and you are not\n            billed for instance usage. However, your root partition Amazon EBS volume remains and\n            continues to persist your data, and you are charged for Amazon EBS volume usage. You can\n            restart your instance at any time. Every time you start your instance, Amazon EC2\n            charges a one-minute minimum for instance usage, and thereafter charges per second for\n            instance usage.</p>\n        <p>Before stopping an instance, make sure it is in a state from which it can be\n            restarted. Stopping an instance does not preserve data stored in RAM.</p>\n        <p>Performing this operation on an instance that uses an instance store as its root\n            device returns an error.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html\">Stopping instances</a> in the\n                <i>Amazon EC2 User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Starts an Amazon EBS-backed instance that you've previously stopped.</p>\n        <p>Instances that use Amazon EBS volumes as their root devices can be quickly stopped and\n            started. When an instance is stopped, the compute resources are released and you are not\n            billed for instance usage. However, your root partition Amazon EBS volume remains and\n            continues to persist your data, and you are charged for Amazon EBS volume usage. You can\n            restart your instance at any time. Every time you start your instance, Amazon EC2\n            charges a one-minute minimum for instance usage, and thereafter charges per second for\n            instance usage.</p>\n        <p>Before stopping an instance, make sure it is in a state from which it can be\n            restarted. Stopping an instance does not preserve data stored in RAM.</p>\n        <p>Performing this operation on an instance that uses an instance store as its root\n            device returns an error.</p>\n        \n        <p>If you attempt to start a T3 instance with <code>host</code> tenancy and the <code>unlimted</code> \n            CPU credit option, the request fails. The <code>unlimited</code> CPU credit option is not \n            supported on Dedicated Hosts. Before you start the instance, either change its CPU credit \n            option to <code>standard</code>, or change its tenancy to <code>default</code> or <code>dedicated</code>.</p>\n        \n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html\">Stopping instances</a> in the\n                <i>Amazon EC2 User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#StartInstancesRequest": {
@@ -62187,7 +62255,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "Bucket",
-                        "smithy.api#documentation": "<p>The name of the S3 bucket that contains the stored AMI object.</p>",
+                        "smithy.api#documentation": "<p>The name of the Amazon S3 bucket that contains the stored AMI object.</p>",
                         "smithy.api#xmlName": "bucket"
                     }
                 },
@@ -62818,7 +62886,7 @@
                     "target": "com.amazonaws.ec2#ResourceType",
                     "traits": {
                         "aws.protocols#ec2QueryName": "ResourceType",
-                        "smithy.api#documentation": "<p>The type of resource to tag. Currently, the resource types that support tagging on\n         creation are: <code>capacity-reservation</code> | <code>carrier-gateway</code> |\n            <code>client-vpn-endpoint</code> |  <code>customer-gateway</code> |\n    \t   <code>dedicated-host</code> | <code>dhcp-options</code> | <code>egress-only-internet-gateway</code> | <code>elastic-ip</code> | <code>elastic-gpu</code> |\n    \t   <code>export-image-task</code>\n         | <code>export-instance-task</code> | <code>fleet</code> | <code>fpga-image</code> |\n    \t   <code>host-reservation</code> | <code>image</code>| <code>import-image-task</code> |\n    \t   <code>import-snapshot-task</code> | <code>instance</code> | <code>instance-event-window</code> |\n            <code>internet-gateway</code> | <code>ipv4pool-ec2</code> | <code>ipv6pool-ec2</code> |\n    \t   <code>key-pair</code> | <code>launch-template</code> | <code>local-gateway-route-table-vpc-association</code> | <code>placement-group</code> |\n    \t   <code>prefix-list</code> | <code>natgateway</code> | <code>network-acl</code> | <code>network-interface</code> | \n    \t   <code>reserved-instances</code> |<code>route-table</code> | <code>security-group</code>| <code>snapshot</code> | <code>spot-fleet-request</code>\n         | <code>spot-instances-request</code> | <code>snapshot</code> | <code>subnet</code> |\n            <code>traffic-mirror-filter</code> | <code>traffic-mirror-session</code> |\n            <code>traffic-mirror-target</code> | <code>transit-gateway</code> |\n    \t   <code>transit-gateway-attachment</code> | <code>transit-gateway-multicast-domain</code> | <code>transit-gateway-route-table</code> |\n            <code>volume</code> |<code>vpc</code> | <code> vpc-peering-connection</code> |\n            <code>vpc-endpoint</code> (for interface and gateway endpoints) |\n    \t   <code>vpc-endpoint-service</code> (for Amazon Web Services PrivateLink) | <code>vpc-flow-log</code> |\n            <code>vpn-connection</code> | <code>vpn-gateway</code>.</p>\n         <p>To tag a resource after it has been created, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html\">CreateTags</a>.</p>",
+                        "smithy.api#documentation": "<p>The type of resource to tag on creation. The possible values are: \n    \t   <code>capacity-reservation</code> | <code>carrier-gateway</code> |\n          <code>client-vpn-endpoint</code> | <code>customer-gateway</code> |\n    \t   <code>dedicated-host</code> | <code>dhcp-options</code> | \n    \t   <code>egress-only-internet-gateway</code> | <code>elastic-gpu</code> | \n    \t   <code>elastic-ip</code> | <code>export-image-task</code> |\n          <code>export-instance-task</code> | <code>fleet</code> | <code>fpga-image</code> |\n    \t   <code>host-reservation</code> | <code>image</code> | <code>import-image-task</code> |\n    \t   <code>import-snapshot-task</code> | <code>instance</code> | <code>instance-event-window</code> |\n          <code>internet-gateway</code> | <code>ipv4pool-ec2</code> | <code>ipv6pool-ec2</code> |\n    \t   <code>key-pair</code> | <code>launch-template</code> | <code>local-gateway-route-table-vpc-association</code> |\n    \t   <code>natgateway</code> | <code>network-acl</code> | <code>network-insights-analysis</code> | \n    \t   <code>network-insights-path</code> | <code>network-interface</code> | \n    \t   <code>placement-group</code> | <code>prefix-list</code> | <code>reserved-instances</code> | \n    \t   <code>route-table</code> | <code>security-group</code> | <code>security-group-rule</code> | \n    \t   <code>snapshot</code> | <code>spot-fleet-request</code> | <code>spot-instances-request</code> | <code>subnet</code> | \n          <code>traffic-mirror-filter</code> | <code>traffic-mirror-session</code> | <code>traffic-mirror-target</code> | \n    \t   <code>transit-gateway</code> | <code>transit-gateway-attachment</code> | \n    \t   <code>transit-gateway-multicast-domain</code> | <code>transit-gateway-route-table</code> |\n          <code>volume</code> | <code>vpc</code> | <code>vpc-endpoint</code> | <code>vpc-endpoint-service</code> | \n    \t   <code>vpc-flow-log</code> | <code>vpc-peering-connection</code> |\n    \t   <code>vpn-connection</code> | <code>vpn-gateway</code>.</p>\n         <p>To tag a resource after it has been created, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html\">CreateTags</a>.</p>",
                         "smithy.api#xmlName": "resourceType"
                     }
                 },
@@ -62949,7 +63017,7 @@
                 "InstanceCount": {
                     "target": "com.amazonaws.ec2#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of instances the Covertible Reserved Instance offering can be applied to. This parameter is reserved and cannot \n      be specified in a request</p>"
+                        "smithy.api#documentation": "<p>The number of instances the Convertible Reserved Instance offering can be applied to. This parameter is reserved and cannot \n      be specified in a request</p>"
                     }
                 },
                 "OfferingId": {

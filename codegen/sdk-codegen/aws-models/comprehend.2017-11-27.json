@@ -45,7 +45,22 @@
                     "min": 1,
                     "max": 63
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*"
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"
+            }
+        },
+        "com.amazonaws.comprehend#AugmentedManifestsDocumentTypeFormat": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PLAIN_TEXT_DOCUMENT",
+                        "name": "PLAIN_TEXT_DOCUMENT"
+                    },
+                    {
+                        "value": "SEMI_STRUCTURED_DOCUMENT",
+                        "name": "SEMI_STRUCTURED_DOCUMENT"
+                    }
+                ]
             }
         },
         "com.amazonaws.comprehend#AugmentedManifestsListItem": {
@@ -63,6 +78,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The JSON attribute that contains the annotations for your training documents. The number\n      of attribute names that you specify depends on whether your augmented manifest file is the\n      output of a single labeling job or a chained labeling job.</p>\n         <p>If your file is the output of a single labeling job, specify the LabelAttributeName key\n      that was used when the job was created in Ground Truth.</p>\n         <p>If your file is the output of a chained labeling job, specify the LabelAttributeName key\n      for one or more jobs in the chain. Each LabelAttributeName key provides the annotations from\n      an individual job.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "AnnotationDataS3Uri": {
+                    "target": "com.amazonaws.comprehend#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 prefix to the annotation files that are referred in the augmented manifest file.</p>"
+                    }
+                },
+                "SourceDocumentsS3Uri": {
+                    "target": "com.amazonaws.comprehend#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 prefix to the source files (PDFs) that are referred to in the augmented manifest file.</p>"
+                    }
+                },
+                "DocumentType": {
+                    "target": "com.amazonaws.comprehend#AugmentedManifestsDocumentTypeFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of augmented manifest. PlainTextDocument or SemiStructuredDocument. If you don't specify, the default is PlainTextDocument. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>PLAIN_TEXT_DOCUMENT</code> A document type that represents any unicode text that is encoded in UTF-8.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SEMI_STRUCTURED_DOCUMENT</code> A document type with positional and structural context, like a PDF. For training with Amazon Comprehend, only PDFs are supported. \n         For inference, Amazon Comprehend support PDFs, DOCX and TXT.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -732,7 +765,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:[a-zA-Z0-9-]{1,64}/[a-zA-Z0-9](-*[a-zA-Z0-9])*"
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:[a-zA-Z0-9-]{1,64}/[a-zA-Z0-9](-*[a-zA-Z0-9])*$"
             }
         },
         "com.amazonaws.comprehend#ComprehendArnName": {
@@ -752,7 +785,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:(document-classifier-endpoint|entity-recognizer-endpoint)/[a-zA-Z0-9](-*[a-zA-Z0-9])*"
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:(document-classifier-endpoint|entity-recognizer-endpoint)/[a-zA-Z0-9](-*[a-zA-Z0-9])*$"
             }
         },
         "com.amazonaws.comprehend#ComprehendEndpointName": {
@@ -772,7 +805,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:(document-classifier|entity-recognizer)/[a-zA-Z0-9](-*[a-zA-Z0-9])*"
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:(document-classifier|entity-recognizer)/[a-zA-Z0-9](-*[a-zA-Z0-9])*$"
             }
         },
         "com.amazonaws.comprehend#Comprehend_20171127": {
@@ -2581,7 +2614,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:document-classifier/[a-zA-Z0-9](-*[a-zA-Z0-9])*"
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:document-classifier/[a-zA-Z0-9](-*[a-zA-Z0-9])*(/version/[a-zA-Z0-9](-*[a-zA-Z0-9])*)?$"
             }
         },
         "com.amazonaws.comprehend#DocumentClassifierAugmentedManifestsList": {
@@ -2612,7 +2645,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:document-classifier-endpoint/[a-zA-Z0-9](-*[a-zA-Z0-9])*"
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:document-classifier-endpoint/[a-zA-Z0-9](-*[a-zA-Z0-9])*$"
             }
         },
         "com.amazonaws.comprehend#DocumentClassifierFilter": {
@@ -2836,6 +2869,79 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies one of the label or labels that categorize the document being analyzed.</p>"
+            }
+        },
+        "com.amazonaws.comprehend#DocumentReadAction": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "TEXTRACT_DETECT_DOCUMENT_TEXT",
+                        "name": "TEXTRACT_DETECT_DOCUMENT_TEXT"
+                    },
+                    {
+                        "value": "TEXTRACT_ANALYZE_DOCUMENT",
+                        "name": "TEXTRACT_ANALYZE_DOCUMENT"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.comprehend#DocumentReadFeatureTypes": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>A list of the types of analyses to perform. This field specifies what feature types need to be extracted from the document where entity recognition is \n      expected.</p>\n    \n         <ul>\n            <li>\n               <p>\n                  <code>TABLES</code> - Add TABLES to the list to return information about the tables\n          that are detected in the input document. </p>\n            </li>\n            <li>\n               <p>\n                  <code>FORMS</code> - Add FORMS to return detected form data. </p>\n            </li>\n         </ul>",
+                "smithy.api#enum": [
+                    {
+                        "value": "TABLES",
+                        "name": "TABLES"
+                    },
+                    {
+                        "value": "FORMS",
+                        "name": "FORMS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.comprehend#DocumentReadMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SERVICE_DEFAULT",
+                        "name": "SERVICE_DEFAULT"
+                    },
+                    {
+                        "value": "FORCE_DOCUMENT_READ_ACTION",
+                        "name": "FORCE_DOCUMENT_READ_ACTION"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.comprehend#DocumentReaderConfig": {
+            "type": "structure",
+            "members": {
+                "DocumentReadAction": {
+                    "target": "com.amazonaws.comprehend#DocumentReadAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This enum field will start with two values which will apply to PDFs:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TEXTRACT_DETECT_DOCUMENT_TEXT</code> - The service calls DetectDocumentText for PDF documents per page.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TEXTRACT_ANALYZE_DOCUMENT</code> - The service calls AnalyzeDocument for PDF documents per page.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DocumentReadMode": {
+                    "target": "com.amazonaws.comprehend#DocumentReadMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This enum field provides two values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SERVICE_DEFAULT</code> - use service defaults for Document reading. For Digital PDF it would mean using an internal parser instead of Textract APIs</p>\n            </li>\n            <li>\n               <p>\n                  <code>FORCE_DOCUMENT_READ_ACTION</code> - Always use specified action for DocumentReadAction, including Digital PDF.\n        </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "FeatureTypes": {
+                    "target": "com.amazonaws.comprehend#ListOfDocumentReadFeatureTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how the text in an input file should be processed:</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input properties for a topic detection job.</p>"
             }
         },
         "com.amazonaws.comprehend#DominantLanguage": {
@@ -3319,7 +3425,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:entity-recognizer/[a-zA-Z0-9](-*[a-zA-Z0-9])*"
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:entity-recognizer/[a-zA-Z0-9](-*[a-zA-Z0-9])*(/version/[a-zA-Z0-9](-*[a-zA-Z0-9])*)?$"
             }
         },
         "com.amazonaws.comprehend#EntityRecognizerAugmentedManifestsList": {
@@ -3365,7 +3471,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:entity-recognizer-endpoint/[a-zA-Z0-9](-*[a-zA-Z0-9])*"
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:entity-recognizer-endpoint/[a-zA-Z0-9](-*[a-zA-Z0-9])*$"
             }
         },
         "com.amazonaws.comprehend#EntityRecognizerEntityList": {
@@ -3750,7 +3856,7 @@
                     "min": 1,
                     "max": 40
                 },
-                "smithy.api#pattern": "[A-Z_]*"
+                "smithy.api#pattern": "^[A-Z_]*$"
             }
         },
         "com.amazonaws.comprehend#EventsDetectionJobFilter": {
@@ -3884,7 +3990,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+"
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+$"
             }
         },
         "com.amazonaws.comprehend#InferenceUnitsInteger": {
@@ -3911,10 +4017,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies how the text in an input file should be processed:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ONE_DOC_PER_FILE</code> - Each file is considered a separate document. Use\n          this option when you are processing large documents, such as newspaper articles or\n          scientific papers.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ONE_DOC_PER_LINE</code> - Each line in a file is considered a separate\n          document. Use this option when you are processing many short documents, such as text\n          messages.</p>\n            </li>\n         </ul>"
                     }
+                },
+                "DocumentReaderConfig": {
+                    "target": "com.amazonaws.comprehend#DocumentReaderConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The document reader config field applies only for InputDataConfig of StartEntitiesDetectionJob. </p>\n         <p>Use DocumentReaderConfig to provide specifications about how you want your inference documents read.\n      Currently it applies for PDF documents in StartEntitiesDetectionJob custom inference.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The input properties for a topic detection job.</p>"
+                "smithy.api#documentation": "<p>The input properties for an inference job.</p>"
             }
         },
         "com.amazonaws.comprehend#InputFormat": {
@@ -4203,7 +4315,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 2048
-                }
+                },
+                "smithy.api#pattern": ".*"
             }
         },
         "com.amazonaws.comprehend#KmsKeyValidationException": {
@@ -4880,6 +4993,18 @@
                 "target": "com.amazonaws.comprehend#BatchDetectSyntaxItemResult"
             }
         },
+        "com.amazonaws.comprehend#ListOfDocumentReadFeatureTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.comprehend#DocumentReadFeatureTypes"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
+            }
+        },
         "com.amazonaws.comprehend#ListOfDominantLanguages": {
             "type": "list",
             "member": {
@@ -5195,7 +5320,7 @@
                     "min": 1,
                     "max": 1
                 },
-                "smithy.api#pattern": "[!@#$%&*]"
+                "smithy.api#pattern": "^[!@#$%&*]$"
             }
         },
         "com.amazonaws.comprehend#MaxResultsInteger": {
@@ -5764,7 +5889,7 @@
                     "min": 0,
                     "max": 1024
                 },
-                "smithy.api#pattern": "s3://[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9](/.*)?"
+                "smithy.api#pattern": "^s3://[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9](/.*)?$"
             }
         },
         "com.amazonaws.comprehend#SecurityGroupId": {
@@ -5774,7 +5899,7 @@
                     "min": 1,
                     "max": 32
                 },
-                "smithy.api#pattern": "[-0-9a-zA-Z]+"
+                "smithy.api#pattern": "^[-0-9a-zA-Z]+$"
             }
         },
         "com.amazonaws.comprehend#SecurityGroupIds": {
@@ -7313,7 +7438,7 @@
                     "min": 1,
                     "max": 32
                 },
-                "smithy.api#pattern": "[-0-9a-zA-Z]+"
+                "smithy.api#pattern": "^[-0-9a-zA-Z]+$"
             }
         },
         "com.amazonaws.comprehend#Subnets": {

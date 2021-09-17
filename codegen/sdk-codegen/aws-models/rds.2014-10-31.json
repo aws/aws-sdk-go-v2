@@ -13160,7 +13160,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Set the capacity of an Aurora Serverless DB cluster to a specific value.</p>\n         <p>Aurora Serverless scales seamlessly based on the workload on the DB cluster. In some cases, the capacity might not scale \n        fast enough to meet a sudden change in workload, such as a large number of new transactions. Call <code>ModifyCurrentDBClusterCapacity</code> \n        to set the capacity explicitly.</p>\n         <p>After this call sets the DB cluster capacity, Aurora Serverless can automatically scale\n            the DB cluster based on the cooldown period for scaling up and the cooldown period\n            for scaling down.</p>\n         <p>For more information about Aurora Serverless, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html\">Using Amazon Aurora Serverless</a> in the \n          <i>Amazon Aurora User Guide</i>.</p>\n         <important>\n            <p>If you call <code>ModifyCurrentDBClusterCapacity</code> with the default <code>TimeoutAction</code>, connections that \n              prevent Aurora Serverless from finding a scaling point might be dropped. For more information about scaling points, \n              see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.how-it-works.html#aurora-serverless.how-it-works.auto-scaling\">\n                  Autoscaling for Aurora Serverless</a> in the <i>Amazon Aurora User Guide</i>.</p>\n         </important>\n         <note>\n            <p>This action only applies to Aurora DB clusters.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Set the capacity of an Aurora Serverless DB cluster to a specific value.</p>\n         <p>Aurora Serverless scales seamlessly based on the workload on the DB cluster. In some cases, the capacity might not scale \n        fast enough to meet a sudden change in workload, such as a large number of new transactions. Call <code>ModifyCurrentDBClusterCapacity</code> \n        to set the capacity explicitly.</p>\n         <p>After this call sets the DB cluster capacity, Aurora Serverless can automatically scale\n            the DB cluster based on the cooldown period for scaling up and the cooldown period\n            for scaling down.</p>\n         <p>For more information about Aurora Serverless, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html\">Using Amazon Aurora Serverless</a> in the \n          <i>Amazon Aurora User Guide</i>.</p>\n         <important>\n            <p>If you call <code>ModifyCurrentDBClusterCapacity</code> with the default <code>TimeoutAction</code>, connections that \n              prevent Aurora Serverless from finding a scaling point might be dropped. For more information about scaling points, \n              see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.how-it-works.html#aurora-serverless.how-it-works.auto-scaling\">\n                  Autoscaling for Aurora Serverless</a> in the <i>Amazon Aurora User Guide</i>.</p>\n         </important>\n         <note>\n            <p>This action only applies to Aurora Serverless DB clusters.</p>\n         </note>"
             }
         },
         "com.amazonaws.rds#ModifyCurrentDBClusterCapacityMessage": {
@@ -13182,7 +13182,7 @@
                 "SecondsBeforeTimeout": {
                     "target": "com.amazonaws.rds#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of time, in seconds, that Aurora Serverless tries to find a scaling point\n            to perform seamless scaling before enforcing the timeout action. The default is\n            300.</p>\n        <ul>\n            <li>\n                <p>Value must be from 10 through 600.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The amount of time, in seconds, that Aurora Serverless tries to find a scaling point\n            to perform seamless scaling before enforcing the timeout action. The default is\n            300.</p>\n        <p>Specify a value between 10 and 600 seconds.</p>"
                     }
                 },
                 "TimeoutAction": {
@@ -18583,7 +18583,7 @@
                 "AutoPause": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that indicates whether to allow or disallow automatic pause for an Aurora DB cluster in <code>serverless</code> DB engine mode. \n            A DB cluster can be paused only when it's idle (it has no connections).</p>\n        <note>\n            <p>If a DB cluster is paused for more than seven days, the DB cluster might be backed up with a snapshot. \n                In this case, the DB cluster is restored when there is a request to connect to it. </p>\n        </note>"
+                        "smithy.api#documentation": "<p>A value that indicates whether to allow or disallow automatic pause for an Aurora DB cluster in <code>serverless</code> DB engine mode.\n            A DB cluster can be paused only when it's idle (it has no connections).</p>\n        <note>\n            <p>If a DB cluster is paused for more than seven days, the DB cluster might be backed up with a snapshot.\n                In this case, the DB cluster is restored when there is a request to connect to it. </p>\n        </note>"
                     }
                 },
                 "SecondsUntilAutoPause": {
@@ -18595,12 +18595,18 @@
                 "TimeoutAction": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The action to take when the timeout is reached, either <code>ForceApplyCapacityChange</code> or <code>RollbackCapacityChange</code>.</p>\n        <p>\n            <code>ForceApplyCapacityChange</code> sets the capacity to the specified value as soon as possible.</p>\n        <p>\n            <code>RollbackCapacityChange</code>, the default, ignores the capacity change if a scaling point isn't found in the timeout period.</p>\n        <important>\n            <p>If you specify <code>ForceApplyCapacityChange</code>, connections that \n                prevent Aurora Serverless from finding a scaling point might be dropped.</p>\n        </important>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.how-it-works.html#aurora-serverless.how-it-works.auto-scaling\">\n                    Autoscaling for Aurora Serverless</a> in the <i>Amazon Aurora User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The action to take when the timeout is reached, either <code>ForceApplyCapacityChange</code> or <code>RollbackCapacityChange</code>.</p>\n        <p>\n            <code>ForceApplyCapacityChange</code> sets the capacity to the specified value as soon as possible.</p>\n        <p>\n            <code>RollbackCapacityChange</code>, the default, ignores the capacity change if a scaling point isn't found in the timeout period.</p>\n        <important>\n            <p>If you specify <code>ForceApplyCapacityChange</code>, connections that\n                prevent Aurora Serverless from finding a scaling point might be dropped.</p>\n        </important>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.how-it-works.html#aurora-serverless.how-it-works.auto-scaling\">\n                    Autoscaling for Aurora Serverless</a> in the <i>Amazon Aurora User Guide</i>.</p>"
+                    }
+                },
+                "SecondsBeforeTimeout": {
+                    "target": "com.amazonaws.rds#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of time, in seconds, that Aurora Serverless tries to find a scaling point\n            to perform seamless scaling before enforcing the timeout action. The default is 300.</p>\n        <p>Specify a value between 60 and 600 seconds.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the scaling configuration of an Aurora Serverless DB cluster.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html\">Using Amazon Aurora Serverless</a> in the \n            <i>Amazon Aurora User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Contains the scaling configuration of an Aurora Serverless DB cluster.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html\">Using Amazon Aurora Serverless</a> in the\n            <i>Amazon Aurora User Guide</i>.</p>"
             }
         },
         "com.amazonaws.rds#ScalingConfigurationInfo": {
@@ -18621,7 +18627,7 @@
                 "AutoPause": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that indicates whether automatic pause is allowed for the Aurora DB cluster\n            in <code>serverless</code> DB engine mode.</p>    \n        <p>When the value is set to false for an Aurora Serverless DB cluster, the DB cluster automatically resumes.</p>"
+                        "smithy.api#documentation": "<p>A value that indicates whether automatic pause is allowed for the Aurora DB cluster\n            in <code>serverless</code> DB engine mode.</p>\n        <p>When the value is set to false for an Aurora Serverless DB cluster, the DB cluster automatically resumes.</p>"
                     }
                 },
                 "SecondsUntilAutoPause": {
@@ -18633,12 +18639,18 @@
                 "TimeoutAction": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timeout action of a call to <code>ModifyCurrentDBClusterCapacity</code>, either \n                <code>ForceApplyCapacityChange</code> or <code>RollbackCapacityChange</code>.</p>"
+                        "smithy.api#documentation": "<p>The action that occurs when Aurora times out while attempting to change the capacity of an\n            Aurora Serverless cluster. The value is either <code>ForceApplyCapacityChange</code> or\n            <code>RollbackCapacityChange</code>.</p>\n        <p>\n            <code>ForceApplyCapacityChange</code>, the default, sets the capacity to the specified value as soon as possible.</p>\n        <p>\n            <code>RollbackCapacityChange</code> ignores the capacity change if a scaling point isn't found in the timeout period.</p>"
+                    }
+                },
+                "SecondsBeforeTimeout": {
+                    "target": "com.amazonaws.rds#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of seconds before scaling times out. What happens when an attempted scaling action times out\n            is determined by the <code>TimeoutAction</code> setting.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Shows the scaling configuration for an Aurora DB cluster in <code>serverless</code> DB engine mode.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html\">Using Amazon Aurora Serverless</a> in the \n            <i>Amazon Aurora User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Shows the scaling configuration for an Aurora DB cluster in <code>serverless</code> DB engine mode.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html\">Using Amazon Aurora Serverless</a> in the\n            <i>Amazon Aurora User Guide</i>.</p>"
             }
         },
         "com.amazonaws.rds#SharedSnapshotQuotaExceededFault": {

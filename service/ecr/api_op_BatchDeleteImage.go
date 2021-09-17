@@ -46,8 +46,9 @@ type BatchDeleteImageInput struct {
 	// This member is required.
 	RepositoryName *string
 
-	// The AWS account ID associated with the registry that contains the image to
-	// delete. If you do not specify a registry, the default registry is assumed.
+	// The Amazon Web Services account ID associated with the registry that contains
+	// the image to delete. If you do not specify a registry, the default registry is
+	// assumed.
 	RegistryId *string
 
 	noSmithyDocumentSerde

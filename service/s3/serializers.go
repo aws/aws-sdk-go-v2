@@ -10023,6 +10023,17 @@ func awsRestxml_serializeDocumentMetrics(v *types.Metrics, value smithyxml.Value
 
 func awsRestxml_serializeDocumentMetricsAndOperator(v *types.MetricsAndOperator, value smithyxml.Value) error {
 	defer value.Close()
+	if v.AccessPointArn != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "AccessPointArn",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.AccessPointArn)
+	}
 	if v.Prefix != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
@@ -10082,6 +10093,17 @@ func awsRestxml_serializeDocumentMetricsConfiguration(v *types.MetricsConfigurat
 func awsRestxml_serializeDocumentMetricsFilter(v types.MetricsFilter, value smithyxml.Value) error {
 	defer value.Close()
 	switch uv := v.(type) {
+	case *types.MetricsFilterMemberAccessPointArn:
+		customMemberNameAttr := []smithyxml.Attr{}
+		customMemberName := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "AccessPointArn",
+			},
+			Attr: customMemberNameAttr,
+		}
+		av := value.MemberElement(customMemberName)
+		av.String(uv.Value)
+
 	case *types.MetricsFilterMemberAnd:
 		customMemberNameAttr := []smithyxml.Attr{}
 		customMemberName := smithyxml.StartElement{

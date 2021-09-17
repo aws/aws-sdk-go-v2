@@ -15,7 +15,7 @@ import (
 // replication configuration for a repository can be retrieved with the
 // DescribeRegistry API action. The first time the PutReplicationConfiguration API
 // is called, a service-linked IAM role is created in your account for the
-// replication process. For more information, see Using Service-Linked Roles for
+// replication process. For more information, see Using service-linked roles for
 // Amazon ECR
 // (https://docs.aws.amazon.com/AmazonECR/latest/userguide/using-service-linked-roles.html)
 // in the Amazon Elastic Container Registry User Guide. When configuring

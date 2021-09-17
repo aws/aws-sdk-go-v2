@@ -40,13 +40,14 @@ type UpdateRobotApplicationInput struct {
 	// This member is required.
 	RobotSoftwareSuite *types.RobotSoftwareSuite
 
-	// The sources of the robot application.
-	//
-	// This member is required.
-	Sources []types.SourceConfig
-
 	// The revision id for the robot application.
 	CurrentRevisionId *string
+
+	// The object that contains the Docker image URI for your robot application.
+	Environment *types.Environment
+
+	// The sources of the robot application.
+	Sources []types.SourceConfig
 
 	noSmithyDocumentSerde
 }
@@ -55,6 +56,9 @@ type UpdateRobotApplicationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated robot application.
 	Arn *string
+
+	// The object that contains the Docker image URI for your robot application.
+	Environment *types.Environment
 
 	// The time, in milliseconds since the epoch, when the robot application was last
 	// updated.

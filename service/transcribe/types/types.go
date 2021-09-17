@@ -327,8 +327,9 @@ type JobExecutionSettings struct {
 	// concurrent execution limit is exceeded. When the AllowDeferredExecution field is
 	// true, jobs are queued and executed when the number of executing jobs falls below
 	// the concurrent execution limit. If the field is false, Amazon Transcribe returns
-	// a LimitExceededException exception. If you specify the AllowDeferredExecution
-	// field, you must specify the DataAccessRoleArn field.
+	// a LimitExceededException exception. Note that job queuing is enabled by default
+	// for call analytics jobs. If you specify the AllowDeferredExecution field, you
+	// must specify the DataAccessRoleArn field.
 	AllowDeferredExecution *bool
 
 	// The Amazon Resource Name (ARN) of a role that has access to the S3 bucket that
@@ -826,6 +827,29 @@ type Settings struct {
 	noSmithyDocumentSerde
 }
 
+// Generate subtitles for your batch transcription job.
+type Subtitles struct {
+
+	// Specify the output format for your subtitle file.
+	Formats []SubtitleFormat
+
+	noSmithyDocumentSerde
+}
+
+// Specify the output format for your subtitle file.
+type SubtitlesOutput struct {
+
+	// Specify the output format for your subtitle file; if you select both SRT and VTT
+	// formats, two output files are genereated.
+	Formats []SubtitleFormat
+
+	// Choose the output location for your subtitle file. This location must be an S3
+	// bucket.
+	SubtitleFileUris []string
+
+	noSmithyDocumentSerde
+}
+
 // A key:value pair that adds metadata to a resource used by Amazon Transcribe. For
 // example, a tag with the key:value pair ‘Department’:’Sales’ might be added to a
 // resource to indicate its use by your organization's sales department.
@@ -992,6 +1016,9 @@ type TranscriptionJob struct {
 
 	// A timestamp that shows when the job started processing.
 	StartTime *time.Time
+
+	// Generate subtitles for your batch transcription job.
+	Subtitles *SubtitlesOutput
 
 	// A key:value pair assigned to a given transcription job.
 	Tags []Tag

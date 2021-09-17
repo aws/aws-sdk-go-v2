@@ -204,9 +204,10 @@ type ArchitectureValues string
 
 // Enum values for ArchitectureValues
 const (
-	ArchitectureValuesI386  ArchitectureValues = "i386"
-	ArchitectureValuesX8664 ArchitectureValues = "x86_64"
-	ArchitectureValuesArm64 ArchitectureValues = "arm64"
+	ArchitectureValuesI386     ArchitectureValues = "i386"
+	ArchitectureValuesX8664    ArchitectureValues = "x86_64"
+	ArchitectureValuesArm64    ArchitectureValues = "arm64"
+	ArchitectureValuesX8664Mac ArchitectureValues = "x86_64_mac"
 )
 
 // Values returns all known values for ArchitectureValues. Note that this can be
@@ -217,6 +218,7 @@ func (ArchitectureValues) Values() []ArchitectureValues {
 		"i386",
 		"x86_64",
 		"arm64",
+		"x86_64_mac",
 	}
 }
 
@@ -2560,6 +2562,9 @@ const (
 	InstanceTypeX2gd12xlarge    InstanceType = "x2gd.12xlarge"
 	InstanceTypeX2gd16xlarge    InstanceType = "x2gd.16xlarge"
 	InstanceTypeX2gdMetal       InstanceType = "x2gd.metal"
+	InstanceTypeVt13xlarge      InstanceType = "vt1.3xlarge"
+	InstanceTypeVt16xlarge      InstanceType = "vt1.6xlarge"
+	InstanceTypeVt124xlarge     InstanceType = "vt1.24xlarge"
 )
 
 // Values returns all known values for InstanceType. Note that this can be expanded
@@ -2984,6 +2989,9 @@ func (InstanceType) Values() []InstanceType {
 		"x2gd.12xlarge",
 		"x2gd.16xlarge",
 		"x2gd.metal",
+		"vt1.3xlarge",
+		"vt1.6xlarge",
+		"vt1.24xlarge",
 	}
 }
 
@@ -4073,55 +4081,68 @@ type ResourceType string
 
 // Enum values for ResourceType
 const (
-	ResourceTypeClientVpnEndpoint                    ResourceType = "client-vpn-endpoint"
-	ResourceTypeCustomerGateway                      ResourceType = "customer-gateway"
-	ResourceTypeDedicatedHost                        ResourceType = "dedicated-host"
-	ResourceTypeDhcpOptions                          ResourceType = "dhcp-options"
-	ResourceTypeEgressOnlyInternetGateway            ResourceType = "egress-only-internet-gateway"
-	ResourceTypeElasticIp                            ResourceType = "elastic-ip"
-	ResourceTypeElasticGpu                           ResourceType = "elastic-gpu"
-	ResourceTypeExportImageTask                      ResourceType = "export-image-task"
-	ResourceTypeExportInstanceTask                   ResourceType = "export-instance-task"
-	ResourceTypeFleet                                ResourceType = "fleet"
-	ResourceTypeFpgaImage                            ResourceType = "fpga-image"
-	ResourceTypeHostReservation                      ResourceType = "host-reservation"
-	ResourceTypeImage                                ResourceType = "image"
-	ResourceTypeImportImageTask                      ResourceType = "import-image-task"
-	ResourceTypeImportSnapshotTask                   ResourceType = "import-snapshot-task"
-	ResourceTypeInstance                             ResourceType = "instance"
-	ResourceTypeInstanceEventWindow                  ResourceType = "instance-event-window"
-	ResourceTypeInternetGateway                      ResourceType = "internet-gateway"
-	ResourceTypeKeyPair                              ResourceType = "key-pair"
-	ResourceTypeLaunchTemplate                       ResourceType = "launch-template"
-	ResourceTypeLocalGatewayRouteTableVpcAssociation ResourceType = "local-gateway-route-table-vpc-association"
-	ResourceTypeNatgateway                           ResourceType = "natgateway"
-	ResourceTypeNetworkAcl                           ResourceType = "network-acl"
-	ResourceTypeNetworkInterface                     ResourceType = "network-interface"
-	ResourceTypeNetworkInsightsAnalysis              ResourceType = "network-insights-analysis"
-	ResourceTypeNetworkInsightsPath                  ResourceType = "network-insights-path"
-	ResourceTypePlacementGroup                       ResourceType = "placement-group"
-	ResourceTypeReservedInstances                    ResourceType = "reserved-instances"
-	ResourceTypeRouteTable                           ResourceType = "route-table"
-	ResourceTypeSecurityGroup                        ResourceType = "security-group"
-	ResourceTypeSecurityGroupRule                    ResourceType = "security-group-rule"
-	ResourceTypeSnapshot                             ResourceType = "snapshot"
-	ResourceTypeSpotFleetRequest                     ResourceType = "spot-fleet-request"
-	ResourceTypeSpotInstancesRequest                 ResourceType = "spot-instances-request"
-	ResourceTypeSubnet                               ResourceType = "subnet"
-	ResourceTypeTrafficMirrorFilter                  ResourceType = "traffic-mirror-filter"
-	ResourceTypeTrafficMirrorSession                 ResourceType = "traffic-mirror-session"
-	ResourceTypeTrafficMirrorTarget                  ResourceType = "traffic-mirror-target"
-	ResourceTypeTransitGateway                       ResourceType = "transit-gateway"
-	ResourceTypeTransitGatewayAttachment             ResourceType = "transit-gateway-attachment"
-	ResourceTypeTransitGatewayConnectPeer            ResourceType = "transit-gateway-connect-peer"
-	ResourceTypeTransitGatewayMulticastDomain        ResourceType = "transit-gateway-multicast-domain"
-	ResourceTypeTransitGatewayRouteTable             ResourceType = "transit-gateway-route-table"
-	ResourceTypeVolume                               ResourceType = "volume"
-	ResourceTypeVpc                                  ResourceType = "vpc"
-	ResourceTypeVpcPeeringConnection                 ResourceType = "vpc-peering-connection"
-	ResourceTypeVpnConnection                        ResourceType = "vpn-connection"
-	ResourceTypeVpnGateway                           ResourceType = "vpn-gateway"
-	ResourceTypeVpcFlowLog                           ResourceType = "vpc-flow-log"
+	ResourceTypeCapacityReservation                                    ResourceType = "capacity-reservation"
+	ResourceTypeClientVpnEndpoint                                      ResourceType = "client-vpn-endpoint"
+	ResourceTypeCustomerGateway                                        ResourceType = "customer-gateway"
+	ResourceTypeCarrierGateway                                         ResourceType = "carrier-gateway"
+	ResourceTypeDedicatedHost                                          ResourceType = "dedicated-host"
+	ResourceTypeDhcpOptions                                            ResourceType = "dhcp-options"
+	ResourceTypeEgressOnlyInternetGateway                              ResourceType = "egress-only-internet-gateway"
+	ResourceTypeElasticIp                                              ResourceType = "elastic-ip"
+	ResourceTypeElasticGpu                                             ResourceType = "elastic-gpu"
+	ResourceTypeExportImageTask                                        ResourceType = "export-image-task"
+	ResourceTypeExportInstanceTask                                     ResourceType = "export-instance-task"
+	ResourceTypeFleet                                                  ResourceType = "fleet"
+	ResourceTypeFpgaImage                                              ResourceType = "fpga-image"
+	ResourceTypeHostReservation                                        ResourceType = "host-reservation"
+	ResourceTypeImage                                                  ResourceType = "image"
+	ResourceTypeImportImageTask                                        ResourceType = "import-image-task"
+	ResourceTypeImportSnapshotTask                                     ResourceType = "import-snapshot-task"
+	ResourceTypeInstance                                               ResourceType = "instance"
+	ResourceTypeInstanceEventWindow                                    ResourceType = "instance-event-window"
+	ResourceTypeInternetGateway                                        ResourceType = "internet-gateway"
+	ResourceTypeIpv4poolEc2                                            ResourceType = "ipv4pool-ec2"
+	ResourceTypeIpv6poolEc2                                            ResourceType = "ipv6pool-ec2"
+	ResourceTypeKeyPair                                                ResourceType = "key-pair"
+	ResourceTypeLaunchTemplate                                         ResourceType = "launch-template"
+	ResourceTypeLocalGateway                                           ResourceType = "local-gateway"
+	ResourceTypeLocalGatewayRouteTable                                 ResourceType = "local-gateway-route-table"
+	ResourceTypeLocalGatewayVirtualInterface                           ResourceType = "local-gateway-virtual-interface"
+	ResourceTypeLocalGatewayVirtualInterfaceGroup                      ResourceType = "local-gateway-virtual-interface-group"
+	ResourceTypeLocalGatewayRouteTableVpcAssociation                   ResourceType = "local-gateway-route-table-vpc-association"
+	ResourceTypeLocalGatewayRouteTableVirtualInterfaceGroupAssociation ResourceType = "local-gateway-route-table-virtual-interface-group-association"
+	ResourceTypeNatgateway                                             ResourceType = "natgateway"
+	ResourceTypeNetworkAcl                                             ResourceType = "network-acl"
+	ResourceTypeNetworkInterface                                       ResourceType = "network-interface"
+	ResourceTypeNetworkInsightsAnalysis                                ResourceType = "network-insights-analysis"
+	ResourceTypeNetworkInsightsPath                                    ResourceType = "network-insights-path"
+	ResourceTypePlacementGroup                                         ResourceType = "placement-group"
+	ResourceTypePrefixList                                             ResourceType = "prefix-list"
+	ResourceTypeReplaceRootVolumeTask                                  ResourceType = "replace-root-volume-task"
+	ResourceTypeReservedInstances                                      ResourceType = "reserved-instances"
+	ResourceTypeRouteTable                                             ResourceType = "route-table"
+	ResourceTypeSecurityGroup                                          ResourceType = "security-group"
+	ResourceTypeSecurityGroupRule                                      ResourceType = "security-group-rule"
+	ResourceTypeSnapshot                                               ResourceType = "snapshot"
+	ResourceTypeSpotFleetRequest                                       ResourceType = "spot-fleet-request"
+	ResourceTypeSpotInstancesRequest                                   ResourceType = "spot-instances-request"
+	ResourceTypeSubnet                                                 ResourceType = "subnet"
+	ResourceTypeTrafficMirrorFilter                                    ResourceType = "traffic-mirror-filter"
+	ResourceTypeTrafficMirrorSession                                   ResourceType = "traffic-mirror-session"
+	ResourceTypeTrafficMirrorTarget                                    ResourceType = "traffic-mirror-target"
+	ResourceTypeTransitGateway                                         ResourceType = "transit-gateway"
+	ResourceTypeTransitGatewayAttachment                               ResourceType = "transit-gateway-attachment"
+	ResourceTypeTransitGatewayConnectPeer                              ResourceType = "transit-gateway-connect-peer"
+	ResourceTypeTransitGatewayMulticastDomain                          ResourceType = "transit-gateway-multicast-domain"
+	ResourceTypeTransitGatewayRouteTable                               ResourceType = "transit-gateway-route-table"
+	ResourceTypeVolume                                                 ResourceType = "volume"
+	ResourceTypeVpc                                                    ResourceType = "vpc"
+	ResourceTypeVpcEndpoint                                            ResourceType = "vpc-endpoint"
+	ResourceTypeVpcEndpointService                                     ResourceType = "vpc-endpoint-service"
+	ResourceTypeVpcPeeringConnection                                   ResourceType = "vpc-peering-connection"
+	ResourceTypeVpnConnection                                          ResourceType = "vpn-connection"
+	ResourceTypeVpnGateway                                             ResourceType = "vpn-gateway"
+	ResourceTypeVpcFlowLog                                             ResourceType = "vpc-flow-log"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -4129,8 +4150,10 @@ const (
 // this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
+		"capacity-reservation",
 		"client-vpn-endpoint",
 		"customer-gateway",
+		"carrier-gateway",
 		"dedicated-host",
 		"dhcp-options",
 		"egress-only-internet-gateway",
@@ -4147,15 +4170,24 @@ func (ResourceType) Values() []ResourceType {
 		"instance",
 		"instance-event-window",
 		"internet-gateway",
+		"ipv4pool-ec2",
+		"ipv6pool-ec2",
 		"key-pair",
 		"launch-template",
+		"local-gateway",
+		"local-gateway-route-table",
+		"local-gateway-virtual-interface",
+		"local-gateway-virtual-interface-group",
 		"local-gateway-route-table-vpc-association",
+		"local-gateway-route-table-virtual-interface-group-association",
 		"natgateway",
 		"network-acl",
 		"network-interface",
 		"network-insights-analysis",
 		"network-insights-path",
 		"placement-group",
+		"prefix-list",
+		"replace-root-volume-task",
 		"reserved-instances",
 		"route-table",
 		"security-group",
@@ -4174,6 +4206,8 @@ func (ResourceType) Values() []ResourceType {
 		"transit-gateway-route-table",
 		"volume",
 		"vpc",
+		"vpc-endpoint",
+		"vpc-endpoint-service",
 		"vpc-peering-connection",
 		"vpn-connection",
 		"vpn-gateway",

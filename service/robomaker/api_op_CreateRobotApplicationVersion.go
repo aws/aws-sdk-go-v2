@@ -39,6 +39,14 @@ type CreateRobotApplicationVersionInput struct {
 	// matches the latest revision ID, a new version will be created.
 	CurrentRevisionId *string
 
+	// A SHA256 identifier for the Docker image that you use for your robot
+	// application.
+	ImageDigest *string
+
+	// The Amazon S3 identifier for the zip file bundle that you use for your robot
+	// application.
+	S3Etags []string
+
 	noSmithyDocumentSerde
 }
 
@@ -46,6 +54,10 @@ type CreateRobotApplicationVersionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the robot application.
 	Arn *string
+
+	// The object that contains the Docker image URI used to create your robot
+	// application.
+	Environment *types.Environment
 
 	// The time, in milliseconds since the epoch, when the robot application was last
 	// updated.

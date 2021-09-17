@@ -1429,6 +1429,24 @@ type CampaignHook struct {
 	noSmithyDocumentSerde
 }
 
+// In-app message configuration.
+type CampaignInAppMessage struct {
+
+	// The message body of the notification, the email body or the text message.
+	Body *string
+
+	// In-app message content.
+	Content []InAppMessageContent
+
+	// Custom config to be sent to client.
+	CustomConfig map[string]string
+
+	// In-app message layout.
+	Layout Layout
+
+	noSmithyDocumentSerde
+}
+
 // For a campaign, specifies limits on the messages that the campaign can send. For
 // an application, specifies the default limits for messages that campaigns in the
 // application can send.
@@ -1450,6 +1468,10 @@ type CampaignLimits struct {
 	// that campaigns can send each second. The minimum value is 50. The maximum value
 	// is 20,000.
 	MessagesPerSecond int32
+
+	// The maximum total number of messages that the campaign can send per user
+	// session.
+	Session int32
 
 	// The maximum number of messages that a campaign can send to a single endpoint
 	// during the course of the campaign. If a campaign recurs, this setting applies to
@@ -1533,6 +1555,11 @@ type CampaignResponse struct {
 
 	// The name of the campaign.
 	Name *string
+
+	// Defines the priority of the campaign, used to decide the order of messages
+	// displayed to user if there are multiple messages scheduled to be displayed at
+	// the same moment.
+	Priority int32
 
 	// The schedule settings for the campaign.
 	Schedule *Schedule
@@ -1916,6 +1943,34 @@ type CustomMessageActivity struct {
 	// reviewed and approved for use, depending on your workflow. It isn't necessarily
 	// the latest version of a template.
 	TemplateVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// Default button configuration.
+type DefaultButtonConfiguration struct {
+
+	// Action triggered by the button.
+	//
+	// This member is required.
+	ButtonAction ButtonAction
+
+	// Button text.
+	//
+	// This member is required.
+	Text *string
+
+	// The background color of the button.
+	BackgroundColor *string
+
+	// The border radius of the button.
+	BorderRadius int32
+
+	// Button destination.
+	Link *string
+
+	// The text color of the button.
+	TextColor *string
 
 	noSmithyDocumentSerde
 }
@@ -3535,6 +3590,238 @@ type ImportJobsResponse struct {
 	noSmithyDocumentSerde
 }
 
+// Schedule of the campaign.
+type InAppCampaignSchedule struct {
+
+	// The scheduled time after which the in-app message should not be shown. Timestamp
+	// is in ISO 8601 format.
+	EndDate *string
+
+	// The event filter the SDK has to use to show the in-app message in the
+	// application.
+	EventFilter *CampaignEventFilter
+
+	// Time during which the in-app message should not be shown to the user.
+	QuietTime *QuietTime
+
+	noSmithyDocumentSerde
+}
+
+// Provides all fields required for building an in-app message.
+type InAppMessage struct {
+
+	// In-app message content.
+	Content []InAppMessageContent
+
+	// Custom config to be sent to SDK.
+	CustomConfig map[string]string
+
+	// The layout of the message.
+	Layout Layout
+
+	noSmithyDocumentSerde
+}
+
+// Text config for Message Body.
+type InAppMessageBodyConfig struct {
+
+	// The alignment of the text. Valid values: LEFT, CENTER, RIGHT.
+	//
+	// This member is required.
+	Alignment Alignment
+
+	// Message Body.
+	//
+	// This member is required.
+	Body *string
+
+	// The text color.
+	//
+	// This member is required.
+	TextColor *string
+
+	noSmithyDocumentSerde
+}
+
+// Button Config for an in-app message.
+type InAppMessageButton struct {
+
+	// Default button content.
+	Android *OverrideButtonConfiguration
+
+	// Default button content.
+	DefaultConfig *DefaultButtonConfiguration
+
+	// Default button content.
+	IOS *OverrideButtonConfiguration
+
+	// Default button content.
+	Web *OverrideButtonConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Targeted in-app message campaign.
+type InAppMessageCampaign struct {
+
+	// Campaign id of the corresponding campaign.
+	CampaignId *string
+
+	// Daily cap which controls the number of times any in-app messages can be shown to
+	// the endpoint during a day.
+	DailyCap int32
+
+	// In-app message content with all fields required for rendering an in-app message.
+	InAppMessage *InAppMessage
+
+	// Priority of the in-app message.
+	Priority int32
+
+	// Schedule of the campaign.
+	Schedule *InAppCampaignSchedule
+
+	// Session cap which controls the number of times an in-app message can be shown to
+	// the endpoint during an application session.
+	SessionCap int32
+
+	// Total cap which controls the number of times an in-app message can be shown to
+	// the endpoint.
+	TotalCap int32
+
+	// Treatment id of the campaign.
+	TreatmentId *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for the message content.
+type InAppMessageContent struct {
+
+	// The background color for the message.
+	BackgroundColor *string
+
+	// The configuration for the message body.
+	BodyConfig *InAppMessageBodyConfig
+
+	// The configuration for the message header.
+	HeaderConfig *InAppMessageHeaderConfig
+
+	// The image url for the background of message.
+	ImageUrl *string
+
+	// The first button inside the message.
+	PrimaryBtn *InAppMessageButton
+
+	// The second button inside message.
+	SecondaryBtn *InAppMessageButton
+
+	noSmithyDocumentSerde
+}
+
+// Text config for Message Header.
+type InAppMessageHeaderConfig struct {
+
+	// The alignment of the text. Valid values: LEFT, CENTER, RIGHT.
+	//
+	// This member is required.
+	Alignment Alignment
+
+	// Message Header.
+	//
+	// This member is required.
+	Header *string
+
+	// The text color.
+	//
+	// This member is required.
+	TextColor *string
+
+	noSmithyDocumentSerde
+}
+
+// Get in-app messages response object.
+type InAppMessagesResponse struct {
+
+	// List of targeted in-app message campaigns.
+	InAppMessageCampaigns []InAppMessageCampaign
+
+	noSmithyDocumentSerde
+}
+
+// InApp Template Request.
+type InAppTemplateRequest struct {
+
+	// The content of the message, can include up to 5 modals. Each modal must contain
+	// a message, a header, and background color. ImageUrl and buttons are optional.
+	Content []InAppMessageContent
+
+	// Custom config to be sent to client.
+	CustomConfig map[string]string
+
+	// The layout of the message.
+	Layout Layout
+
+	// A string-to-string map of key-value pairs that defines the tags to associate
+	// with the message template. Each tag consists of a required tag key and an
+	// associated tag value.
+	Tags map[string]string
+
+	// The description of the template.
+	TemplateDescription *string
+
+	noSmithyDocumentSerde
+}
+
+// In-App Template Response.
+type InAppTemplateResponse struct {
+
+	// The creation date of the template.
+	//
+	// This member is required.
+	CreationDate *string
+
+	// The last modified date of the template.
+	//
+	// This member is required.
+	LastModifiedDate *string
+
+	// The name of the template.
+	//
+	// This member is required.
+	TemplateName *string
+
+	// The type of the template.
+	//
+	// This member is required.
+	TemplateType TemplateType
+
+	// The resource arn of the template.
+	Arn *string
+
+	// The content of the message, can include up to 5 modals. Each modal must contain
+	// a message, a header, and background color. ImageUrl and buttons are optional.
+	Content []InAppMessageContent
+
+	// Custom config to be sent to client.
+	CustomConfig map[string]string
+
+	// The layout of the message.
+	Layout Layout
+
+	// A string-to-string map of key-value pairs that defines the tags to associate
+	// with the message template. Each tag consists of a required tag key and an
+	// associated tag value.
+	Tags map[string]string
+
+	// The description of the template.
+	TemplateDescription *string
+
+	// The version id of the template.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
 // Provides information about the results of a request to create or update an
 // endpoint that's associated with an event.
 type ItemResponse struct {
@@ -4091,6 +4378,9 @@ type MessageConfiguration struct {
 	// message overrides the default message.
 	GCMMessage *Message
 
+	// The in-app message configuration.
+	InAppMessage *CampaignInAppMessage
+
 	// The message that the campaign sends through the SMS channel. If specified, this
 	// message overrides the default message.
 	SMSMessage *CampaignSmsMessage
@@ -4348,6 +4638,20 @@ type NumberValidateResponse struct {
 	// The postal or ZIP code for the location where the phone number was originally
 	// registered.
 	ZipCode *string
+
+	noSmithyDocumentSerde
+}
+
+// Override button configuration.
+type OverrideButtonConfiguration struct {
+
+	// Action triggered by the button.
+	//
+	// This member is required.
+	ButtonAction ButtonAction
+
+	// Button destination.
+	Link *string
 
 	noSmithyDocumentSerde
 }
@@ -5578,6 +5882,22 @@ type TemplateConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Provides information about a request to create a message template.
+type TemplateCreateMessageBody struct {
+
+	// The Amazon Resource Name (ARN) of the message template that was created.
+	Arn *string
+
+	// The message that's returned from the API for the request to create the message
+	// template.
+	Message *string
+
+	// The unique identifier for the request to create the message template.
+	RequestID *string
+
+	noSmithyDocumentSerde
+}
+
 // Provides information about a message template that's associated with your Amazon
 // Pinpoint account.
 type TemplateResponse struct {
@@ -6175,6 +6495,11 @@ type WriteCampaignRequest struct {
 
 	// A custom name for the campaign.
 	Name *string
+
+	// Defines the priority of the campaign, used to decide the order of messages
+	// displayed to user if there are multiple messages scheduled to be displayed at
+	// the same moment.
+	Priority int32
 
 	// The schedule settings for the campaign.
 	Schedule *Schedule

@@ -4804,13 +4804,13 @@ func validateOpPutBucketAclInput(v *PutBucketAclInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutBucketAclInput"}
-	if v.Bucket == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
-	}
 	if v.AccessControlPolicy != nil {
 		if err := validateAccessControlPolicy(v.AccessControlPolicy); err != nil {
 			invalidParams.AddNested("AccessControlPolicy", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5178,16 +5178,16 @@ func validateOpPutObjectAclInput(v *PutObjectAclInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutObjectAclInput"}
+	if v.AccessControlPolicy != nil {
+		if err := validateAccessControlPolicy(v.AccessControlPolicy); err != nil {
+			invalidParams.AddNested("AccessControlPolicy", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Bucket == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
-	}
-	if v.AccessControlPolicy != nil {
-		if err := validateAccessControlPolicy(v.AccessControlPolicy); err != nil {
-			invalidParams.AddNested("AccessControlPolicy", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

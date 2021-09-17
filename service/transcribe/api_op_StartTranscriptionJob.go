@@ -55,6 +55,10 @@ type StartTranscriptionJobInput struct {
 	// limit is reached and there are no slots available to immediately run the job.
 	JobExecutionSettings *types.JobExecutionSettings
 
+	// A map of plain text, non-secret key:value pairs, known as encryption context
+	// pairs, that provide an added layer of security for your data.
+	KMSEncryptionContext map[string]string
+
 	// The language code for the language used in the input media file. To transcribe
 	// speech in Modern Standard Arabic (ar-SA), your audio or video file must be
 	// encoded at a sample rate of 16,000 Hz or higher.
@@ -145,6 +149,9 @@ type StartTranscriptionJobInput struct {
 
 	// A Settings object that provides optional settings for a transcription job.
 	Settings *types.Settings
+
+	// Add subtitles to your batch transcription job.
+	Subtitles *types.Subtitles
 
 	// Add tags to an Amazon Transcribe transcription job.
 	Tags []types.Tag

@@ -3968,6 +3968,11 @@ func awsAwsjson11_serializeOpDocumentGetRateBasedStatementManagedKeysInput(v *Ge
 	object := value.Object()
 	defer object.Close()
 
+	if v.RuleGroupRuleName != nil {
+		ok := object.Key("RuleGroupRuleName")
+		ok.String(*v.RuleGroupRuleName)
+	}
+
 	if v.RuleName != nil {
 		ok := object.Key("RuleName")
 		ok.String(*v.RuleName)

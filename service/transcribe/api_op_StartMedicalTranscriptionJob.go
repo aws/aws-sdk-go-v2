@@ -85,6 +85,10 @@ type StartMedicalTranscriptionJobInput struct {
 	// output.
 	ContentIdentificationType types.MedicalContentIdentificationType
 
+	// A map of plain text, non-secret key:value pairs, known as encryption context
+	// pairs, that provide an added layer of security for your data.
+	KMSEncryptionContext map[string]string
+
 	// The audio format of the input media file.
 	MediaFormat types.MediaFormat
 
