@@ -1,3 +1,52 @@
+# Release (2021-09-17)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/chime`: [v1.10.0](service/chime/CHANGELOG.md#v1100-2021-09-17)
+  * **Feature**: Updated API client and endpoints to latest revision.
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.10.1](service/cloudformation/CHANGELOG.md#v1101-2021-09-17)
+  * **Documentation**: Updated API client documentation.
+* `github.com/aws/aws-sdk-go-v2/service/comprehend`: [v1.7.0](service/comprehend/CHANGELOG.md#v170-2021-09-17)
+  * **Feature**: Updated API client and endpoints to latest revision.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.17.0](service/ec2/CHANGELOG.md#v1170-2021-09-17)
+  * **Feature**: Updated API client and endpoints to latest revision.
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.6.0](service/ecr/CHANGELOG.md#v160-2021-09-17)
+  * **Feature**: Updated API client and endpoints to latest revision.
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.12.0](service/iot/CHANGELOG.md#v1120-2021-09-17)
+  * **Feature**: Updated API client and endpoints to latest revision.
+* `github.com/aws/aws-sdk-go-v2/service/kafkaconnect`: [v1.0.0](service/kafkaconnect/CHANGELOG.md#v100-2021-09-17)
+  * **Release**: New AWS service client module
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelsv2`: [v1.7.0](service/lexmodelsv2/CHANGELOG.md#v170-2021-09-17)
+  * **Feature**: Updated API client and endpoints to latest revision.
+* `github.com/aws/aws-sdk-go-v2/service/lexruntimev2`: [v1.4.0](service/lexruntimev2/CHANGELOG.md#v140-2021-09-17)
+  * **Feature**: Updated API client and endpoints to latest revision.
+* `github.com/aws/aws-sdk-go-v2/service/macie2`: [v1.10.0](service/macie2/CHANGELOG.md#v1100-2021-09-17)
+  * **Feature**: Updated API client and endpoints to latest revision.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagevod`: [v1.8.0](service/mediapackagevod/CHANGELOG.md#v180-2021-09-17)
+  * **Feature**: Updated API client and endpoints to latest revision.
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.6.0](service/networkfirewall/CHANGELOG.md#v160-2021-09-17)
+  * **Feature**: Updated API client and endpoints to latest revision.
+* `github.com/aws/aws-sdk-go-v2/service/pinpoint`: [v1.7.0](service/pinpoint/CHANGELOG.md#v170-2021-09-17)
+  * **Feature**: Updated API client and endpoints to latest revision.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.11.0](service/quicksight/CHANGELOG.md#v1110-2021-09-17)
+  * **Feature**: Updated API client and endpoints to latest revision.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.9.0](service/rds/CHANGELOG.md#v190-2021-09-17)
+  * **Feature**: Updated API client and endpoints to latest revision.
+* `github.com/aws/aws-sdk-go-v2/service/robomaker`: [v1.9.0](service/robomaker/CHANGELOG.md#v190-2021-09-17)
+  * **Feature**: Updated API client and endpoints to latest revision.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.16.0](service/s3/CHANGELOG.md#v1160-2021-09-17)
+  * **Feature**: Updated API client and endpoints to latest revision.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.15.0](service/sagemaker/CHANGELOG.md#v1150-2021-09-17)
+  * **Feature**: Updated API client and endpoints to latest revision.
+* `github.com/aws/aws-sdk-go-v2/service/ssooidc`: [v1.5.0](service/ssooidc/CHANGELOG.md#v150-2021-09-17)
+  * **Feature**: Updated API client and endpoints to latest revision.
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.8.0](service/transcribe/CHANGELOG.md#v180-2021-09-17)
+  * **Feature**: Updated API client and endpoints to latest revision.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.9.0](service/wafv2/CHANGELOG.md#v190-2021-09-17)
+  * **Feature**: Updated API client and endpoints to latest revision.
+
 # Release (2021-09-10)
 
 ## General Highlights

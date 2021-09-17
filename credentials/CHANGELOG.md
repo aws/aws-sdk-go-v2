@@ -1,3 +1,7 @@
+# v1.4.2 (2021-09-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.4.1 (2021-09-10)
 
 * **Documentation**: Fixes the AssumeRoleProvider's documentation for using custom TokenProviders.
