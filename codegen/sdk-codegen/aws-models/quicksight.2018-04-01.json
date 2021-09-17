@@ -183,6 +183,17 @@
                 "smithy.api#documentation": "<p>The parameters for Elasticsearch.</p>"
             }
         },
+        "com.amazonaws.quicksight#AmazonOpenSearchParameters": {
+            "type": "structure",
+            "members": {
+                "Domain": {
+                    "target": "com.amazonaws.quicksight#Domain",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.quicksight#Analysis": {
             "type": "structure",
             "members": {
@@ -4405,6 +4416,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The parameters for Twitter.</p>"
                     }
+                },
+                "AmazonOpenSearchParameters": {
+                    "target": "com.amazonaws.quicksight#AmazonOpenSearchParameters"
                 }
             },
             "traits": {
@@ -4518,6 +4532,10 @@
                     {
                         "value": "TIMESTREAM",
                         "name": "TIMESTREAM"
+                    },
+                    {
+                        "value": "AMAZON_OPENSEARCH",
+                        "name": "AMAZON_OPENSEARCH"
                     }
                 ]
             }

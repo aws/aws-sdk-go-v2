@@ -979,7 +979,7 @@
                 "elasticsearch": {
                     "target": "com.amazonaws.iot#ElasticsearchAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>Write data to an Amazon Elasticsearch Service domain.</p>"
+                        "smithy.api#documentation": "<p>Write data to an Amazon Elasticsearch Service domain.</p>\n         <note>\n            <p>This action is deprecated. Use the <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_OpenSearchAction.html\">OpenSearch action</a> instead.</p>\n         </note>"
                     }
                 },
                 "salesforce": {
@@ -1028,6 +1028,12 @@
                     "target": "com.amazonaws.iot#KafkaAction",
                     "traits": {
                         "smithy.api#documentation": "<p>Send messages to an Amazon Managed Streaming for Apache Kafka (Amazon MSK) or self-managed Apache Kafka cluster.</p>"
+                    }
+                },
+                "openSearch": {
+                    "target": "com.amazonaws.iot#OpenSearchAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Write data to an Amazon OpenSearch Service domain.</p>"
                     }
                 }
             },
@@ -13118,7 +13124,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes an action that writes data to an Amazon Elasticsearch Service\n         domain.</p>"
+                "smithy.api#documentation": "<p>Describes an action that writes data to an Amazon Elasticsearch Service\n         domain.</p>\n         <note>\n            <p>This action is deprecated. Use the <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_OpenSearchAction.html\">OpenSearch action</a> instead.</p>\n         </note>"
             }
         },
         "com.amazonaws.iot#ElasticsearchEndpoint": {
@@ -22007,6 +22013,49 @@
                 "target": "com.amazonaws.iot#OTAUpdateSummary"
             }
         },
+        "com.amazonaws.iot#OpenSearchAction": {
+            "type": "structure",
+            "members": {
+                "roleArn": {
+                    "target": "com.amazonaws.iot#AwsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM role ARN that has access to OpenSearch.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "endpoint": {
+                    "target": "com.amazonaws.iot#ElasticsearchEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint of your OpenSearch domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "index": {
+                    "target": "com.amazonaws.iot#ElasticsearchIndex",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OpenSearch index where you want to store your data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.iot#ElasticsearchType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of document you are storing.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.iot#ElasticsearchId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the document you are storing.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an action that writes data to an Amazon OpenSearch Service\n         domain.</p>"
+            }
+        },
         "com.amazonaws.iot#OptionalVersion": {
             "type": "long",
             "traits": {
@@ -26185,7 +26234,7 @@
                 "disconnectReason": {
                     "target": "com.amazonaws.iot#DisconnectReason",
                     "traits": {
-                        "smithy.api#documentation": "<p>The reason why the client is disconnected.</p>"
+                        "smithy.api#documentation": "<p>The reason why the client is disconnected. If the thing has been disconnected for approximately an hour, the <code>disconnectReason</code> value might be missing.</p>"
                     }
                 }
             },

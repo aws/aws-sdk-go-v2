@@ -1886,7 +1886,7 @@
                 "AllowDeferredExecution": {
                     "target": "com.amazonaws.transcribe#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether a job should be queued by Amazon Transcribe when the concurrent execution limit is exceeded. When the\n            <code>AllowDeferredExecution</code> field is true, jobs are queued and executed when the number of executing\n            jobs falls below the concurrent execution limit. If the field is false, Amazon Transcribe returns a <code>LimitExceededException</code>\n            exception.</p>\n        <p>If you specify the <code>AllowDeferredExecution</code> field, you must specify the \n            <code>DataAccessRoleArn</code> field.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether a job should be queued by Amazon Transcribe when the concurrent execution limit is exceeded. When the\n            <code>AllowDeferredExecution</code> field is true, jobs are queued and executed when the number of executing\n            jobs falls below the concurrent execution limit. If the field is false, Amazon Transcribe returns a \n            <code>LimitExceededException</code> exception.</p>\n        <p>Note that job queuing is enabled by default for call analytics jobs.</p>\n        <p>If you specify the <code>AllowDeferredExecution</code> field, you must specify the \n            <code>DataAccessRoleArn</code> field.</p>"
                     }
                 },
                 "DataAccessRoleArn": {
@@ -1898,6 +1898,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides information about when a transcription job should be executed.</p>"
+            }
+        },
+        "com.amazonaws.transcribe#KMSEncryptionContextMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.transcribe#NonEmptyString"
+            },
+            "value": {
+                "target": "com.amazonaws.transcribe#NonEmptyString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.transcribe#KMSKeyId": {
@@ -3852,6 +3867,12 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Key Management Service (KMS) key used to \n            encrypt the output of the transcription job. The user calling the <a>StartMedicalTranscriptionJob</a> \n            operation must have permission to use the specified KMS key.</p>\n        <p>You use either of the following to identify a KMS key in the current account:</p>\n        <ul>\n            <li>\n                <p>KMS Key ID: \"1234abcd-12ab-34cd-56ef-1234567890ab\"</p>\n            </li>\n            <li>\n                <p>KMS Key Alias: \"alias/ExampleAlias\"</p>\n            </li>\n         </ul>\n        <p>You can use either of the following to identify a KMS key in the current account or another account:</p>\n        <ul>\n            <li>\n                <p>Amazon Resource Name (ARN) of a KMS key in the current account or another\n                    account: \"arn:aws:kms:region:account ID:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</p>\n            </li>\n            <li>\n                <p>ARN of a KMS Key Alias: \"arn:aws:kms:region:account ID:alias/ExampleAlias\"</p>\n            </li>\n         </ul>\n        <p>If you don't specify an encryption key, the output of the medical transcription job is encrypted with the default Amazon S3 \n            key (SSE-S3).</p>\n        <p>If you specify a KMS key to encrypt your output, you must also specify an output location in the \n            <code>OutputBucketName</code> parameter.</p>"
                     }
                 },
+                "KMSEncryptionContext": {
+                    "target": "com.amazonaws.transcribe#KMSEncryptionContextMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of plain text, non-secret key:value pairs, known as encryption context pairs, that provide an added\n            layer of security for your data.</p>"
+                    }
+                },
                 "Settings": {
                     "target": "com.amazonaws.transcribe#MedicalTranscriptionSetting",
                     "traits": {
@@ -3982,6 +4003,12 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Key Management Service (KMS) key used to \n            encrypt the output of the transcription job. The user calling the <code>StartTranscriptionJob</code> \n            operation must have permission to use the specified KMS key.</p>\n        <p>You can use either of the following to identify a KMS key in the current account:</p>\n        <ul>\n            <li>\n                <p>KMS Key ID: \"1234abcd-12ab-34cd-56ef-1234567890ab\"</p>\n            </li>\n            <li>\n                <p>KMS Key Alias: \"alias/ExampleAlias\"</p>\n            </li>\n         </ul>\n        <p>You can use either of the following to identify a KMS key in the current account or another account:</p>\n        <ul>\n            <li>\n                <p>Amazon Resource Name (ARN) of a KMS Key: \"arn:aws:kms:region:account\n                    ID:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</p>\n            </li>\n            <li>\n                <p>ARN of a KMS Key Alias: \"arn:aws:kms:region:account ID:alias/ExampleAlias\"</p>\n            </li>\n         </ul>\n        <p>If you don't specify an encryption key, the output of the transcription job is encrypted with the default \n            Amazon S3 key (SSE-S3).</p>\n        <p>If you specify a KMS key to encrypt your output, you must also specify an output location in the \n            <code>OutputBucketName</code> parameter.</p>"
                     }
                 },
+                "KMSEncryptionContext": {
+                    "target": "com.amazonaws.transcribe#KMSEncryptionContextMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of plain text, non-secret key:value pairs, known as encryption context pairs, that provide an added\n            layer of security for your data.</p>"
+                    }
+                },
                 "Settings": {
                     "target": "com.amazonaws.transcribe#Settings",
                     "traits": {
@@ -4018,6 +4045,12 @@
                         "smithy.api#documentation": "<p>An object containing a list of languages that might be present in your collection of audio files. Automatic language\n            identification chooses a language that best matches the source audio from that list.</p>\n        <p>To transcribe speech in Modern Standard Arabic (ar-SA), your audio or video file must be encoded at a sample \n            rate of 16,000 Hz or higher.</p>"
                     }
                 },
+                "Subtitles": {
+                    "target": "com.amazonaws.transcribe#Subtitles",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Add subtitles to your batch transcription job.</p>"
+                    }
+                },
                 "Tags": {
                     "target": "com.amazonaws.transcribe#TagList",
                     "traits": {
@@ -4049,6 +4082,67 @@
                 "smithy.api#length": {
                     "min": 1
                 }
+            }
+        },
+        "com.amazonaws.transcribe#SubtitleFileUris": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transcribe#Uri"
+            }
+        },
+        "com.amazonaws.transcribe#SubtitleFormat": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "vtt",
+                        "name": "VTT"
+                    },
+                    {
+                        "value": "srt",
+                        "name": "SRT"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.transcribe#SubtitleFormats": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transcribe#SubtitleFormat"
+            }
+        },
+        "com.amazonaws.transcribe#Subtitles": {
+            "type": "structure",
+            "members": {
+                "Formats": {
+                    "target": "com.amazonaws.transcribe#SubtitleFormats",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the output format for your subtitle file.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Generate subtitles for your batch transcription job.</p>"
+            }
+        },
+        "com.amazonaws.transcribe#SubtitlesOutput": {
+            "type": "structure",
+            "members": {
+                "Formats": {
+                    "target": "com.amazonaws.transcribe#SubtitleFormats",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the output format for your subtitle file; if you select both SRT and VTT formats, two output files are genereated.</p>"
+                    }
+                },
+                "SubtitleFileUris": {
+                    "target": "com.amazonaws.transcribe#SubtitleFileUris",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Choose the output location for your subtitle file. This location must be an S3 bucket.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specify the output format for your subtitle file.</p>"
             }
         },
         "com.amazonaws.transcribe#Tag": {
@@ -4523,6 +4617,12 @@
                     "target": "com.amazonaws.transcribe#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>A key:value pair assigned to a given transcription job.</p>"
+                    }
+                },
+                "Subtitles": {
+                    "target": "com.amazonaws.transcribe#SubtitlesOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Generate subtitles for your batch transcription job.</p>"
                     }
                 }
             },
