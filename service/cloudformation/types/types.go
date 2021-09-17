@@ -10,7 +10,7 @@ import (
 // Structure that contains the results of the account gate function which
 // CloudFormation invokes, if present, before proceeding with a stack set operation
 // in an account and Region. For each account and Region, CloudFormation lets you
-// specify a Lamdba function that encapsulates any requirements that must be met
+// specify a Lambda function that encapsulates any requirements that must be met
 // before CloudFormation can proceed with a stack set operation in that account and
 // Region. CloudFormation invokes the function each time a stack set operation is
 // requested for that account and Region; if the function returns FAILED,
