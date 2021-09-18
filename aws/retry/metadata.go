@@ -1,8 +1,9 @@
 package retry
 
 import (
-	awsmiddle "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/smithy-go/middleware"
+
+	awsmiddle "github.com/aws/aws-sdk-go-v2/aws/middleware"
 )
 
 // attemptResultsKey is a metadata accessor key to retrieve metadata
@@ -39,6 +40,10 @@ type AttemptResult struct {
 
 	// ResponseMetadata is any existing metadata passed via the response middlewares.
 	ResponseMetadata middleware.Metadata
+
+	// ReleaseRetryTokenFn if defined, needs to be called on success to release possible
+	// spent capacity.
+	ReleaseRetryTokenFn func(error) error
 }
 
 // addAttemptResults adds attempt results to middleware metadata

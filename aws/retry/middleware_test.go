@@ -2,6 +2,7 @@ package retry
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"net/http"
 	"reflect"
@@ -10,11 +11,13 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"github.com/google/go-cmp/cmp"
+
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/ratelimit"
+	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 )
 
 func TestMetricsHeaderMiddleware(t *testing.T) {
@@ -427,13 +430,27 @@ func TestAttemptMiddleware(t *testing.T) {
 			if diff := cmp.Diff(recorded, tt.Expect); len(diff) > 0 {
 				t.Error(diff)
 			}
-
 			attemptResults, ok := GetAttemptResults(metadata)
 			if !ok {
 				t.Fatalf("expected metadata to contain attempt results, got none")
 			}
-			if e, a := tt.ExpectResults, attemptResults; !reflect.DeepEqual(e, a) {
-				t.Fatalf("expected %v, got %v", e, a)
+			e, a := tt.ExpectResults, attemptResults
+			if len(e.Results) != len(a.Results) {
+				t.Fatalf("expected len %d got %d", len(e.Results), len(a.Results))
+			}
+			for i, eRes := range e.Results {
+				if eRes.Retried != a.Results[i].Retried {
+					t.Fatalf("expected retried %v got %v", eRes.Retried, a.Results[i].Retried)
+				}
+				if eRes.Retryable != a.Results[i].Retryable {
+					t.Fatalf("expected retryable %v got %v", eRes.Retryable, a.Results[i].Retryable)
+				}
+				if eRes.Err != nil && eRes.Err.Error() != a.Results[i].Err.Error() {
+					t.Fatalf("expected err %v got %v", eRes.Err, a.Results[i].Err)
+				}
+				if !reflect.DeepEqual(eRes.ResponseMetadata, a.Results[i].ResponseMetadata) {
+					t.Fatalf("expected response metadata %v got %v", eRes.ResponseMetadata, a.Results[i].ResponseMetadata)
+				}
 			}
 
 			for i, attempt := range attemptResults.Results {
@@ -443,6 +460,40 @@ func TestAttemptMiddleware(t *testing.T) {
 				}
 			}
 		})
+	}
+}
+
+func TestReleaseRetryLock(t *testing.T) {
+	standard := NewStandard(func(s *StandardOptions) {
+		s.MaxAttempts = 3
+		s.RateLimiter = ratelimit.NewTokenRateLimit(10)
+		s.RetryCost = 10
+	})
+	am := NewAttemptMiddleware(standard, func(i interface{}) interface{} {
+		return i
+	})
+	f := func(retries *[]retryMetadata) middleware.FinalizeHandler {
+		num := 0
+		return middleware.FinalizeHandlerFunc(func(ctx context.Context, in middleware.FinalizeInput) (out middleware.FinalizeOutput, metadata middleware.Metadata, err error) {
+			m, ok := getRetryMetadata(ctx)
+			if ok {
+				*retries = append(*retries, m)
+			}
+			if num > 0 {
+				return out, metadata, err
+			}
+			num++
+			return out, metadata, mockRetryableError{b: true}
+		})
+	}
+	var recorded []retryMetadata
+	_, _, err := am.HandleFinalize(context.Background(), middleware.FinalizeInput{}, f(&recorded))
+	if err != nil {
+		t.Fatal(err)
+	}
+	_, err = standard.GetRetryToken(context.Background(), errors.New("retryme"))
+	if err != nil {
+		t.Fatal(err)
 	}
 }
 

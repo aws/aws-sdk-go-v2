@@ -7,13 +7,14 @@ import (
 	"strings"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	awsmiddle "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/middleware"
 	smithymiddle "github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/transport/http"
+
+	"github.com/aws/aws-sdk-go-v2/aws"
+	awsmiddle "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 )
 
 // RequestCloner is a function that can take an input request type and clone the request
@@ -34,8 +35,9 @@ type Attempt struct {
 	// This will include logging retry attempts, unretryable errors, and when max attempts are reached.
 	LogAttempts bool
 
-	retryer       aws.Retryer
-	requestCloner RequestCloner
+	retryer           aws.Retryer
+	requestCloner     RequestCloner
+	releaseRetryToken func(error) error
 }
 
 // NewAttemptMiddleware returns a new Attempt retry middleware.
@@ -84,7 +86,9 @@ func (r Attempt) HandleFinalize(ctx context.Context, in smithymiddle.FinalizeInp
 		var attemptResult AttemptResult
 
 		out, attemptResult, err = r.handleAttempt(attemptCtx, attemptInput, next)
-
+		if attemptResult.ReleaseRetryTokenFn != nil {
+			r.releaseRetryToken = attemptResult.ReleaseRetryTokenFn
+		}
 		var ok bool
 		attemptClockSkew, ok = awsmiddle.GetAttemptSkew(attemptResult.ResponseMetadata)
 		if !ok {
@@ -117,7 +121,7 @@ func (r Attempt) handleAttempt(ctx context.Context, in smithymiddle.FinalizeInpu
 		attemptResult.Err = err
 	}()
 
-	relRetryToken := r.retryer.GetInitialToken()
+	relInitialToken := r.retryer.GetInitialToken()
 	logger := smithymiddle.GetLogger(ctx)
 	service, operation := awsmiddle.GetServiceID(ctx), awsmiddle.GetOperationName(ctx)
 
@@ -140,9 +144,15 @@ func (r Attempt) handleAttempt(ctx context.Context, in smithymiddle.FinalizeInpu
 	out, metadata, err = next.HandleFinalize(ctx, in)
 	attemptResult.ResponseMetadata = metadata
 
-	if releaseError := relRetryToken(err); releaseError != nil && err != nil {
+	if releaseError := relInitialToken(err); releaseError != nil && err != nil {
 		err = fmt.Errorf("failed to release token after request error, %w", err)
 		return out, attemptResult, err
+	}
+
+	if r.releaseRetryToken != nil {
+		if err := r.releaseRetryToken(err); err != nil {
+			return out, attemptResult, err
+		}
 	}
 
 	if err == nil {
@@ -171,6 +181,8 @@ func (r Attempt) handleAttempt(ctx context.Context, in smithymiddle.FinalizeInpu
 	if reqErr != nil {
 		return out, attemptResult, reqErr
 	}
+
+	attemptResult.ReleaseRetryTokenFn = relRetryToken
 
 	retryDelay, reqErr := r.retryer.RetryDelay(attemptNum, err)
 	if reqErr != nil {
