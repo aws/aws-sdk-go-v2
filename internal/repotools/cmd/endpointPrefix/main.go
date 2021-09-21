@@ -10,7 +10,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/aws/aws-sdk-go-v2/internal/repotools"
+	repotools "github.com/awslabs/aws-go-multi-module-repository-tools"
 )
 
 var (
