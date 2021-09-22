@@ -1,0 +1,8 @@
+{
+    "id": "9d263ccf-04b8-44d5-a4fa-0b05cdb49223",
+    "type": "documentation",
+    "description": "Fixes typo in NameBuilder.NamesList example documentation to use the correct variable name.",
+    "modules": [
+        "feature/dynamodb/expression"
+    ]
+}
