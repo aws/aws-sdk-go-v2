@@ -208,15 +208,15 @@ type SimulatePrincipalPolicyInput struct {
 	// subnet, volume
 	ResourceHandlingOption *string
 
-	// An account ID that specifies the owner of any simulated resource that does not
-	// identify its owner in the resource ARN. Examples of resource ARNs include an S3
-	// bucket or object. If ResourceOwner is specified, it is also used as the account
-	// owner of any ResourcePolicy included in the simulation. If the ResourceOwner
-	// parameter is not specified, then the owner of the resources and the resource
-	// policy defaults to the account of the identity provided in CallerArn. This
-	// parameter is required only if you specify a resource-based policy and account
-	// that owns the resource is different from the account that owns the simulated
-	// calling user CallerArn.
+	// An Amazon Web Services account ID that specifies the owner of any simulated
+	// resource that does not identify its owner in the resource ARN. Examples of
+	// resource ARNs include an S3 bucket or object. If ResourceOwner is specified, it
+	// is also used as the account owner of any ResourcePolicy included in the
+	// simulation. If the ResourceOwner parameter is not specified, then the owner of
+	// the resources and the resource policy defaults to the account of the identity
+	// provided in CallerArn. This parameter is required only if you specify a
+	// resource-based policy and account that owns the resource is different from the
+	// account that owns the simulated calling user CallerArn.
 	ResourceOwner *string
 
 	// A resource-based policy to include in the simulation provided as a string. Each

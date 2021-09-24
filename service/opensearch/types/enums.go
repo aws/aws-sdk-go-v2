@@ -136,6 +136,24 @@ func (DomainPackageStatus) Values() []DomainPackageStatus {
 	}
 }
 
+type EngineType string
+
+// Enum values for EngineType
+const (
+	EngineTypeOpenSearch    EngineType = "OpenSearch"
+	EngineTypeElasticsearch EngineType = "Elasticsearch"
+)
+
+// Values returns all known values for EngineType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (EngineType) Values() []EngineType {
+	return []EngineType{
+		"OpenSearch",
+		"Elasticsearch",
+	}
+}
+
 type InboundConnectionStatusCode string
 
 // Enum values for InboundConnectionStatusCode

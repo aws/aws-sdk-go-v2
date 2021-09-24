@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Reloads the target database table with the source data.
+// Reloads the target database table with the source data. You can only use this
+// operation with a task in the RUNNING state, otherwise the service will throw an
+// InvalidResourceStateFault exception.
 func (c *Client) ReloadTables(ctx context.Context, params *ReloadTablesInput, optFns ...func(*Options)) (*ReloadTablesOutput, error) {
 	if params == nil {
 		params = &ReloadTablesInput{}

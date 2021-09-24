@@ -189,6 +189,7 @@
         "api_op_ListTopicRules.go",
         "api_op_ListV2LoggingLevels.go",
         "api_op_ListViolationEvents.go",
+        "api_op_PutVerificationStateOnViolation.go",
         "api_op_RegisterCACertificate.go",
         "api_op_RegisterCertificate.go",
         "api_op_RegisterCertificateWithoutCA.go",

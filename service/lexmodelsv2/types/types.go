@@ -7,6 +7,82 @@ import (
 	"time"
 )
 
+// Filters responses returned by the ListAggregatedUtterances operation.
+type AggregatedUtterancesFilter struct {
+
+	// The name of the field to filter the utterance list.
+	//
+	// This member is required.
+	Name AggregatedUtterancesFilterName
+
+	// The operator to use for the filter. Specify EQ when the ListAggregatedUtterances
+	// operation should return only utterances that equal the specified value. Specify
+	// CO when the ListAggregatedUtterances operation should return utterances that
+	// contain the specified value.
+	//
+	// This member is required.
+	Operator AggregatedUtterancesFilterOperator
+
+	// The value to use for filtering the list of bots.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies attributes for sorting a list of utterances.
+type AggregatedUtterancesSortBy struct {
+
+	// The utterance attribute to sort by.
+	//
+	// This member is required.
+	Attribute AggregatedUtterancesSortAttribute
+
+	// Specifies whether to sort the aggregated utterances in ascending or descending
+	// order.
+	//
+	// This member is required.
+	Order SortOrder
+
+	noSmithyDocumentSerde
+}
+
+// Provides summary information for aggregated utterances. The
+// ListAggregatedUtterances operations combines all instances of the same utterance
+// into a single aggregated summary.
+type AggregatedUtterancesSummary struct {
+
+	// Aggregated utterance data may contain utterances from versions of your bot that
+	// have since been deleted. When the aggregated contains this kind of data, this
+	// field is set to true.
+	ContainsDataFromDeletedResources *bool
+
+	// The number of times that the utterance was detected by Amazon Lex during the
+	// time period. When an utterance is detected, it activates an intent or a slot.
+	HitCount *int32
+
+	// The number of times that the utterance was missed by Amazon Lex An utterance is
+	// missed when it doesn't activate an intent or slot.
+	MissedCount *int32
+
+	// The text of the utterance. If the utterance was used with the RecognizeUtterance
+	// operation, the text is the transcription of the audio utterance.
+	Utterance *string
+
+	// The date and time that the utterance was first recorded in the time window for
+	// aggregation. An utterance may have been sent to Amazon Lex before that time, but
+	// only utterances within the time window are counted.
+	UtteranceFirstRecordedInAggregationDuration *time.Time
+
+	// The last date and time that an utterance was recorded in the time window for
+	// aggregation. An utterance may be sent to Amazon Lex after that time, but only
+	// utterances within the time window are counted.
+	UtteranceLastRecordedInAggregationDuration *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // The location of audio log files collected when conversation logging is enabled
 // for a bot.
 type AudioLogDestination struct {
@@ -1109,6 +1185,47 @@ type PromptSpecification struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the time window that utterance statistics are returned for. The time
+// window is always relative to the last time that the that utterances were
+// aggregated. For example, if the ListAggregatedUtterances operation is called at
+// 1600, the time window is set to 1 hour, and the last refresh time was 1530, only
+// utterances made between 1430 and 1530 are returned. You can choose the time
+// window that statistics should be returned for.
+//
+// * Hours - You can request
+// utterance statistics for 1, 3, 6, 12, or 24 hour time windows. Statistics are
+// refreshed every half hour for 1 hour time windows, and hourly for the other time
+// windows.
+//
+// * Days - You can request utterance statistics for 3 days. Statistics
+// are refreshed every 6 hours.
+//
+// * Weeks - You can see statistics for one or two
+// weeks. Statistics are refreshed every 12 hours for one week time windows, and
+// once per day for two week time windows.
+type RelativeAggregationDuration struct {
+
+	// The type of time period that the timeValue field represents.
+	//
+	// This member is required.
+	TimeDimension TimeDimension
+
+	// The period of the time window to gather statistics for. The valid value depends
+	// on the setting of the timeDimension field.
+	//
+	// * Hours - 1/3/6/12/24
+	//
+	// * Days - 3
+	//
+	// *
+	// Weeks - 1/2
+	//
+	// This member is required.
+	TimeValue int32
+
+	noSmithyDocumentSerde
+}
+
 // Specifies a list of message groups that Amazon Lex uses to respond the user
 // input.
 type ResponseSpecification struct {
@@ -1514,6 +1631,18 @@ type TextLogSetting struct {
 	//
 	// This member is required.
 	Enabled bool
+
+	noSmithyDocumentSerde
+}
+
+// Provides parameters for setting the time window and duration for aggregating
+// utterance data.
+type UtteranceAggregationDuration struct {
+
+	// The desired time window for aggregating utterances.
+	//
+	// This member is required.
+	RelativeAggregationDuration *RelativeAggregationDuration
 
 	noSmithyDocumentSerde
 }

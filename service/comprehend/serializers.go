@@ -1519,6 +1519,53 @@ func (m *awsAwsjson11_serializeOpListDocumentClassifiers) HandleSerialize(ctx co
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpListDocumentClassifierSummaries struct {
+}
+
+func (*awsAwsjson11_serializeOpListDocumentClassifierSummaries) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListDocumentClassifierSummaries) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListDocumentClassifierSummariesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.ListDocumentClassifierSummaries")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListDocumentClassifierSummariesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpListDominantLanguageDetectionJobs struct {
 }
 
@@ -1692,6 +1739,53 @@ func (m *awsAwsjson11_serializeOpListEntityRecognizers) HandleSerialize(ctx cont
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentListEntityRecognizersInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpListEntityRecognizerSummaries struct {
+}
+
+func (*awsAwsjson11_serializeOpListEntityRecognizerSummaries) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListEntityRecognizerSummaries) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListEntityRecognizerSummariesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.ListEntityRecognizerSummaries")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListEntityRecognizerSummariesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2923,6 +3017,11 @@ func awsAwsjson11_serializeDocumentAugmentedManifestsListItem(v *types.Augmented
 		ok.String(*v.SourceDocumentsS3Uri)
 	}
 
+	if len(v.Split) > 0 {
+		ok := object.Key("Split")
+		ok.String(string(v.Split))
+	}
+
 	return nil
 }
 
@@ -2981,6 +3080,11 @@ func awsAwsjson11_serializeDocumentDocumentClassifierFilter(v *types.DocumentCla
 	object := value.Object()
 	defer object.Close()
 
+	if v.DocumentClassifierName != nil {
+		ok := object.Key("DocumentClassifierName")
+		ok.String(*v.DocumentClassifierName)
+	}
+
 	if len(v.Status) > 0 {
 		ok := object.Key("Status")
 		ok.String(string(v.Status))
@@ -3023,6 +3127,11 @@ func awsAwsjson11_serializeDocumentDocumentClassifierInputDataConfig(v *types.Do
 	if v.S3Uri != nil {
 		ok := object.Key("S3Uri")
 		ok.String(*v.S3Uri)
+	}
+
+	if v.TestS3Uri != nil {
+		ok := object.Key("TestS3Uri")
+		ok.String(*v.TestS3Uri)
 	}
 
 	return nil
@@ -3159,6 +3268,11 @@ func awsAwsjson11_serializeDocumentEntityRecognizerAnnotations(v *types.EntityRe
 		ok.String(*v.S3Uri)
 	}
 
+	if v.TestS3Uri != nil {
+		ok := object.Key("TestS3Uri")
+		ok.String(*v.TestS3Uri)
+	}
+
 	return nil
 }
 
@@ -3179,9 +3293,19 @@ func awsAwsjson11_serializeDocumentEntityRecognizerDocuments(v *types.EntityReco
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.InputFormat) > 0 {
+		ok := object.Key("InputFormat")
+		ok.String(string(v.InputFormat))
+	}
+
 	if v.S3Uri != nil {
 		ok := object.Key("S3Uri")
 		ok.String(*v.S3Uri)
+	}
+
+	if v.TestS3Uri != nil {
+		ok := object.Key("TestS3Uri")
+		ok.String(*v.TestS3Uri)
 	}
 
 	return nil
@@ -3202,6 +3326,11 @@ func awsAwsjson11_serializeDocumentEntityRecognizerEntityList(v *types.EntityRec
 func awsAwsjson11_serializeDocumentEntityRecognizerFilter(v *types.EntityRecognizerFilter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.RecognizerName != nil {
+		ok := object.Key("RecognizerName")
+		ok.String(*v.RecognizerName)
+	}
 
 	if len(v.Status) > 0 {
 		ok := object.Key("Status")
@@ -3789,6 +3918,11 @@ func awsAwsjson11_serializeOpDocumentCreateDocumentClassifierInput(v *CreateDocu
 		}
 	}
 
+	if v.VersionName != nil {
+		ok := object.Key("VersionName")
+		ok.String(*v.VersionName)
+	}
+
 	if v.VolumeKmsKeyId != nil {
 		ok := object.Key("VolumeKmsKeyId")
 		ok.String(*v.VolumeKmsKeyId)
@@ -3884,6 +4018,11 @@ func awsAwsjson11_serializeOpDocumentCreateEntityRecognizerInput(v *CreateEntity
 		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.VersionName != nil {
+		ok := object.Key("VersionName")
+		ok.String(*v.VersionName)
 	}
 
 	if v.VolumeKmsKeyId != nil {
@@ -4219,6 +4358,23 @@ func awsAwsjson11_serializeOpDocumentListDocumentClassifiersInput(v *ListDocumen
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentListDocumentClassifierSummariesInput(v *ListDocumentClassifierSummariesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentListDominantLanguageDetectionJobsInput(v *ListDominantLanguageDetectionJobsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4301,6 +4457,23 @@ func awsAwsjson11_serializeOpDocumentListEntityRecognizersInput(v *ListEntityRec
 			return err
 		}
 	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListEntityRecognizerSummariesInput(v *ListEntityRecognizerSummariesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
 
 	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
@@ -5060,9 +5233,19 @@ func awsAwsjson11_serializeOpDocumentUpdateEndpointInput(v *UpdateEndpointInput,
 	object := value.Object()
 	defer object.Close()
 
+	if v.DesiredDataAccessRoleArn != nil {
+		ok := object.Key("DesiredDataAccessRoleArn")
+		ok.String(*v.DesiredDataAccessRoleArn)
+	}
+
 	if v.DesiredInferenceUnits != nil {
 		ok := object.Key("DesiredInferenceUnits")
 		ok.Integer(*v.DesiredInferenceUnits)
+	}
+
+	if v.DesiredModelArn != nil {
+		ok := object.Key("DesiredModelArn")
+		ok.String(*v.DesiredModelArn)
 	}
 
 	if v.EndpointArn != nil {

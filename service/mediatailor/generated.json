@@ -5,6 +5,7 @@
     },
     "files": [
         "api_client.go",
+        "api_op_ConfigureLogsForPlaybackConfiguration.go",
         "api_op_CreateChannel.go",
         "api_op_CreateProgram.go",
         "api_op_CreateSourceLocation.go",

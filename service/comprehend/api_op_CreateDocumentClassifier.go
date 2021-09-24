@@ -90,6 +90,12 @@ type CreateDocumentClassifierInput struct {
 	// indicate its use by the sales department.
 	Tags []types.Tag
 
+	// The version name given to the newly created classifier. Version names can have a
+	// maximum of 256 characters. Alphanumeric characters, hyphens (-) and underscores
+	// (_) are allowed. The version name must be unique among all models with the same
+	// classifier name in the account/AWS Region.
+	VersionName *string
+
 	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
 	// encrypt data on the storage volume attached to the ML compute instance(s) that
 	// process the analysis job. The VolumeKmsKeyId can be either of the following

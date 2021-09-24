@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new report generator.
+// Creates a report generator.
 func (c *Client) CreateLicenseManagerReportGenerator(ctx context.Context, params *CreateLicenseManagerReportGeneratorInput, optFns ...func(*Options)) (*CreateLicenseManagerReportGeneratorOutput, error) {
 	if params == nil {
 		params = &CreateLicenseManagerReportGeneratorInput{}
@@ -54,11 +54,11 @@ type CreateLicenseManagerReportGeneratorInput struct {
 	// Type of reports to generate. The following report types an be generated:
 	//
 	// *
-	// License configuration report - Reports on the number and details of consumed
+	// License configuration report - Reports the number and details of consumed
 	// licenses for a license configuration.
 	//
-	// * Resource report - Reports on the
-	// tracked licenses and resource consumption for a license configuration.
+	// * Resource report - Reports the tracked
+	// licenses and resource consumption for a license configuration.
 	//
 	// This member is required.
 	Type []types.ReportType
@@ -74,7 +74,7 @@ type CreateLicenseManagerReportGeneratorInput struct {
 
 type CreateLicenseManagerReportGeneratorOutput struct {
 
-	// The Amazon Resource Number (ARN) of the new report generator.
+	// The Amazon Resource Name (ARN) of the new report generator.
 	LicenseManagerReportGeneratorArn *string
 
 	// Metadata pertaining to the operation's result.

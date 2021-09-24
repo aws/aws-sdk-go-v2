@@ -52,6 +52,9 @@ type ListActiveViolationsInput struct {
 	// The name of the thing whose active violations are listed.
 	ThingName *string
 
+	// The verification state of the violation (detect alarm).
+	VerificationState types.VerificationState
+
 	noSmithyDocumentSerde
 }
 

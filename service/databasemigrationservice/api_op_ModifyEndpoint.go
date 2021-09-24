@@ -50,12 +50,12 @@ type ModifyEndpointInput struct {
 	// The settings in JSON format for the DMS transfer type of source endpoint.
 	// Attributes include the following:
 	//
-	// * serviceAccessRoleArn - The Identity and
-	// Access Management (IAM) role that has permission to access the Amazon S3 bucket.
-	// The role must allow the iam:PassRole action.
+	// * serviceAccessRoleArn - The Amazon Resource
+	// Name (ARN) used by the service access IAM role. The role must allow the
+	// iam:PassRole action.
 	//
-	// * BucketName - The name of the S3
-	// bucket to use.
+	// * BucketName - The name of the S3 bucket to
+	// use.
 	//
 	// Shorthand syntax for these settings is as follows:
 	// ServiceAccessRoleArn=string ,BucketName=string JSON syntax for these settings is

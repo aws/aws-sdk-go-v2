@@ -7,7 +7,9 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-//
+// The action that you tried to perform couldn't be completed because the resource
+// is in a conflicting state. For example, deleting a bot that is in the CREATING
+// state. Try your request again.
 type ConflictException struct {
 	Message *string
 
@@ -26,7 +28,7 @@ func (e *ConflictException) ErrorMessage() string {
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
+// The service encountered an unexpected condition. Try your request again.
 type InternalServerException struct {
 	Message *string
 
@@ -45,7 +47,8 @@ func (e *InternalServerException) ErrorMessage() string {
 func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-//
+// Your request couldn't be completed because one or more request fields aren't
+// valid. Check the fields in your request and try again.
 type PreconditionFailedException struct {
 	Message *string
 
@@ -64,7 +67,8 @@ func (e *PreconditionFailedException) ErrorMessage() string {
 func (e *PreconditionFailedException) ErrorCode() string             { return "PreconditionFailedException" }
 func (e *PreconditionFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
+// You asked to describe a resource that doesn't exist. Check the resource that you
+// are requesting and try again.
 type ResourceNotFoundException struct {
 	Message *string
 
@@ -83,7 +87,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
+// You have reached a quota for your bot.
 type ServiceQuotaExceededException struct {
 	Message *string
 
@@ -102,7 +106,7 @@ func (e *ServiceQuotaExceededException) ErrorMessage() string {
 func (e *ServiceQuotaExceededException) ErrorCode() string             { return "ServiceQuotaExceededException" }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
+// Your request rate is too high. Reduce the frequency of requests.
 type ThrottlingException struct {
 	Message *string
 
@@ -123,7 +127,8 @@ func (e *ThrottlingException) ErrorMessage() string {
 func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
+// One of the input parameters in your request isn't valid. Check the parameters
+// and try your request again.
 type ValidationException struct {
 	Message *string
 

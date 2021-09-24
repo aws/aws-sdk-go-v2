@@ -3038,6 +3038,11 @@ func awsRestjson1_serializeDocumentBurninDestinationSettings(v *types.BurninDest
 		ok.String(string(v.Alignment))
 	}
 
+	if len(v.ApplyFontColor) > 0 {
+		ok := object.Key("applyFontColor")
+		ok.String(string(v.ApplyFontColor))
+	}
+
 	if len(v.BackgroundColor) > 0 {
 		ok := object.Key("backgroundColor")
 		ok.String(string(v.BackgroundColor))
@@ -3046,6 +3051,11 @@ func awsRestjson1_serializeDocumentBurninDestinationSettings(v *types.BurninDest
 	if v.BackgroundOpacity != 0 {
 		ok := object.Key("backgroundOpacity")
 		ok.Integer(v.BackgroundOpacity)
+	}
+
+	if len(v.FallbackFont) > 0 {
+		ok := object.Key("fallbackFont")
+		ok.String(string(v.FallbackFont))
 	}
 
 	if len(v.FontColor) > 0 {
@@ -3071,6 +3081,11 @@ func awsRestjson1_serializeDocumentBurninDestinationSettings(v *types.BurninDest
 	if v.FontSize != 0 {
 		ok := object.Key("fontSize")
 		ok.Integer(v.FontSize)
+	}
+
+	if v.HexFontColor != nil {
+		ok := object.Key("hexFontColor")
+		ok.String(*v.HexFontColor)
 	}
 
 	if len(v.OutlineColor) > 0 {
@@ -3101,6 +3116,11 @@ func awsRestjson1_serializeDocumentBurninDestinationSettings(v *types.BurninDest
 	if v.ShadowYOffset != 0 {
 		ok := object.Key("shadowYOffset")
 		ok.Integer(v.ShadowYOffset)
+	}
+
+	if len(v.StylePassthrough) > 0 {
+		ok := object.Key("stylePassthrough")
+		ok.String(string(v.StylePassthrough))
 	}
 
 	if len(v.TeletextSpacing) > 0 {
@@ -3490,6 +3510,13 @@ func awsRestjson1_serializeDocumentCmafGroupSettings(v *types.CmafGroupSettings,
 		ok.String(string(v.ImageBasedTrickPlay))
 	}
 
+	if v.ImageBasedTrickPlaySettings != nil {
+		ok := object.Key("imageBasedTrickPlaySettings")
+		if err := awsRestjson1_serializeDocumentCmafImageBasedTrickPlaySettings(v.ImageBasedTrickPlaySettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.ManifestCompression) > 0 {
 		ok := object.Key("manifestCompression")
 		ok.String(string(v.ManifestCompression))
@@ -3571,6 +3598,56 @@ func awsRestjson1_serializeDocumentCmafGroupSettings(v *types.CmafGroupSettings,
 	if len(v.WriteSegmentTimelineInRepresentation) > 0 {
 		ok := object.Key("writeSegmentTimelineInRepresentation")
 		ok.String(string(v.WriteSegmentTimelineInRepresentation))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCmafImageBasedTrickPlaySettings(v *types.CmafImageBasedTrickPlaySettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.IntervalCadence) > 0 {
+		ok := object.Key("intervalCadence")
+		ok.String(string(v.IntervalCadence))
+	}
+
+	if v.ThumbnailHeight != 0 {
+		ok := object.Key("thumbnailHeight")
+		ok.Integer(v.ThumbnailHeight)
+	}
+
+	if v.ThumbnailInterval != 0 {
+		ok := object.Key("thumbnailInterval")
+		switch {
+		case math.IsNaN(v.ThumbnailInterval):
+			ok.String("NaN")
+
+		case math.IsInf(v.ThumbnailInterval, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.ThumbnailInterval, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.ThumbnailInterval)
+
+		}
+	}
+
+	if v.ThumbnailWidth != 0 {
+		ok := object.Key("thumbnailWidth")
+		ok.Integer(v.ThumbnailWidth)
+	}
+
+	if v.TileHeight != 0 {
+		ok := object.Key("tileHeight")
+		ok.Integer(v.TileHeight)
+	}
+
+	if v.TileWidth != 0 {
+		ok := object.Key("tileWidth")
+		ok.Integer(v.TileWidth)
 	}
 
 	return nil
@@ -3828,6 +3905,13 @@ func awsRestjson1_serializeDocumentDashIsoGroupSettings(v *types.DashIsoGroupSet
 		ok.String(string(v.ImageBasedTrickPlay))
 	}
 
+	if v.ImageBasedTrickPlaySettings != nil {
+		ok := object.Key("imageBasedTrickPlaySettings")
+		if err := awsRestjson1_serializeDocumentDashIsoImageBasedTrickPlaySettings(v.ImageBasedTrickPlaySettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MinBufferTime != 0 {
 		ok := object.Key("minBufferTime")
 		ok.Integer(v.MinBufferTime)
@@ -3879,6 +3963,56 @@ func awsRestjson1_serializeDocumentDashIsoGroupSettings(v *types.DashIsoGroupSet
 	if len(v.WriteSegmentTimelineInRepresentation) > 0 {
 		ok := object.Key("writeSegmentTimelineInRepresentation")
 		ok.String(string(v.WriteSegmentTimelineInRepresentation))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDashIsoImageBasedTrickPlaySettings(v *types.DashIsoImageBasedTrickPlaySettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.IntervalCadence) > 0 {
+		ok := object.Key("intervalCadence")
+		ok.String(string(v.IntervalCadence))
+	}
+
+	if v.ThumbnailHeight != 0 {
+		ok := object.Key("thumbnailHeight")
+		ok.Integer(v.ThumbnailHeight)
+	}
+
+	if v.ThumbnailInterval != 0 {
+		ok := object.Key("thumbnailInterval")
+		switch {
+		case math.IsNaN(v.ThumbnailInterval):
+			ok.String("NaN")
+
+		case math.IsInf(v.ThumbnailInterval, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.ThumbnailInterval, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.ThumbnailInterval)
+
+		}
+	}
+
+	if v.ThumbnailWidth != 0 {
+		ok := object.Key("thumbnailWidth")
+		ok.Integer(v.ThumbnailWidth)
+	}
+
+	if v.TileHeight != 0 {
+		ok := object.Key("tileHeight")
+		ok.Integer(v.TileHeight)
+	}
+
+	if v.TileWidth != 0 {
+		ok := object.Key("tileWidth")
+		ok.Integer(v.TileWidth)
 	}
 
 	return nil
@@ -4019,6 +4153,11 @@ func awsRestjson1_serializeDocumentDvbSubDestinationSettings(v *types.DvbSubDest
 		ok.String(string(v.Alignment))
 	}
 
+	if len(v.ApplyFontColor) > 0 {
+		ok := object.Key("applyFontColor")
+		ok.String(string(v.ApplyFontColor))
+	}
+
 	if len(v.BackgroundColor) > 0 {
 		ok := object.Key("backgroundColor")
 		ok.String(string(v.BackgroundColor))
@@ -4042,6 +4181,11 @@ func awsRestjson1_serializeDocumentDvbSubDestinationSettings(v *types.DvbSubDest
 	if v.DdsYCoordinate != 0 {
 		ok := object.Key("ddsYCoordinate")
 		ok.Integer(v.DdsYCoordinate)
+	}
+
+	if len(v.FallbackFont) > 0 {
+		ok := object.Key("fallbackFont")
+		ok.String(string(v.FallbackFont))
 	}
 
 	if len(v.FontColor) > 0 {
@@ -4074,6 +4218,11 @@ func awsRestjson1_serializeDocumentDvbSubDestinationSettings(v *types.DvbSubDest
 		ok.Integer(v.Height)
 	}
 
+	if v.HexFontColor != nil {
+		ok := object.Key("hexFontColor")
+		ok.String(*v.HexFontColor)
+	}
+
 	if len(v.OutlineColor) > 0 {
 		ok := object.Key("outlineColor")
 		ok.String(string(v.OutlineColor))
@@ -4102,6 +4251,11 @@ func awsRestjson1_serializeDocumentDvbSubDestinationSettings(v *types.DvbSubDest
 	if v.ShadowYOffset != 0 {
 		ok := object.Key("shadowYOffset")
 		ok.Integer(v.ShadowYOffset)
+	}
+
+	if len(v.StylePassthrough) > 0 {
+		ok := object.Key("stylePassthrough")
+		ok.String(string(v.StylePassthrough))
 	}
 
 	if len(v.SubtitlingType) > 0 {
@@ -5431,6 +5585,13 @@ func awsRestjson1_serializeDocumentHlsGroupSettings(v *types.HlsGroupSettings, v
 		ok.String(string(v.ImageBasedTrickPlay))
 	}
 
+	if v.ImageBasedTrickPlaySettings != nil {
+		ok := object.Key("imageBasedTrickPlaySettings")
+		if err := awsRestjson1_serializeDocumentHlsImageBasedTrickPlaySettings(v.ImageBasedTrickPlaySettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.ManifestCompression) > 0 {
 		ok := object.Key("manifestCompression")
 		ok.String(string(v.ManifestCompression))
@@ -5522,6 +5683,56 @@ func awsRestjson1_serializeDocumentHlsGroupSettings(v *types.HlsGroupSettings, v
 	if v.TimestampDeltaMilliseconds != 0 {
 		ok := object.Key("timestampDeltaMilliseconds")
 		ok.Integer(v.TimestampDeltaMilliseconds)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHlsImageBasedTrickPlaySettings(v *types.HlsImageBasedTrickPlaySettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.IntervalCadence) > 0 {
+		ok := object.Key("intervalCadence")
+		ok.String(string(v.IntervalCadence))
+	}
+
+	if v.ThumbnailHeight != 0 {
+		ok := object.Key("thumbnailHeight")
+		ok.Integer(v.ThumbnailHeight)
+	}
+
+	if v.ThumbnailInterval != 0 {
+		ok := object.Key("thumbnailInterval")
+		switch {
+		case math.IsNaN(v.ThumbnailInterval):
+			ok.String("NaN")
+
+		case math.IsInf(v.ThumbnailInterval, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.ThumbnailInterval, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.ThumbnailInterval)
+
+		}
+	}
+
+	if v.ThumbnailWidth != 0 {
+		ok := object.Key("thumbnailWidth")
+		ok.Integer(v.ThumbnailWidth)
+	}
+
+	if v.TileHeight != 0 {
+		ok := object.Key("tileHeight")
+		ok.Integer(v.TileHeight)
+	}
+
+	if v.TileWidth != 0 {
+		ok := object.Key("tileWidth")
+		ok.Integer(v.TileWidth)
 	}
 
 	return nil

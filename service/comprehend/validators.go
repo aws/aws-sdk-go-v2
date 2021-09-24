@@ -2541,9 +2541,6 @@ func validateOpUpdateEndpointInput(v *UpdateEndpointInput) error {
 	if v.EndpointArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndpointArn"))
 	}
-	if v.DesiredInferenceUnits == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DesiredInferenceUnits"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

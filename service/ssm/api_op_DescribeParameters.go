@@ -18,7 +18,10 @@ import (
 // can be between zero and the value of MaxResults. If the service reaches an
 // internal limit while processing the results, it stops the operation and returns
 // the matching values up to that point and a NextToken. You can specify the
-// NextToken in a subsequent call to get the next set of results.
+// NextToken in a subsequent call to get the next set of results. If you change the
+// KMS key alias for the KMS key used to encrypt a parameter, then you must also
+// update the key alias the parameter uses to reference KMS. Otherwise,
+// DescribeParameters retrieves whatever the original key alias was referencing.
 func (c *Client) DescribeParameters(ctx context.Context, params *DescribeParametersInput, optFns ...func(*Options)) (*DescribeParametersOutput, error) {
 	if params == nil {
 		params = &DescribeParametersInput{}

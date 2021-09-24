@@ -4,6 +4,7 @@ package ssm
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
@@ -532,6 +533,13 @@ func commandExecutedStateRetryable(ctx context.Context, input *GetCommandInvocat
 
 		if string(value) == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
+		}
+	}
+
+	if err != nil {
+		var errorType *types.InvocationDoesNotExist
+		if errors.As(err, &errorType) {
+			return true, nil
 		}
 	}
 

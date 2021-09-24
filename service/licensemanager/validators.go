@@ -150,6 +150,26 @@ func (m *validateOpCreateLicenseConfiguration) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateLicenseConversionTaskForResource struct {
+}
+
+func (*validateOpCreateLicenseConversionTaskForResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateLicenseConversionTaskForResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateLicenseConversionTaskForResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateLicenseConversionTaskForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateLicense struct {
 }
 
@@ -405,6 +425,26 @@ func (m *validateOpGetLicenseConfiguration) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetLicenseConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetLicenseConversionTask struct {
+}
+
+func (*validateOpGetLicenseConversionTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetLicenseConversionTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetLicenseConversionTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetLicenseConversionTaskInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -778,6 +818,10 @@ func addOpCreateLicenseConfigurationValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpCreateLicenseConfiguration{}, middleware.After)
 }
 
+func addOpCreateLicenseConversionTaskForResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateLicenseConversionTaskForResource{}, middleware.After)
+}
+
 func addOpCreateLicenseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateLicense{}, middleware.After)
 }
@@ -828,6 +872,10 @@ func addOpGetGrantValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetLicenseConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetLicenseConfiguration{}, middleware.After)
+}
+
+func addOpGetLicenseConversionTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetLicenseConversionTask{}, middleware.After)
 }
 
 func addOpGetLicenseValidationMiddleware(stack *middleware.Stack) error {
@@ -1381,6 +1429,27 @@ func validateOpCreateLicenseConfigurationInput(v *CreateLicenseConfigurationInpu
 	}
 }
 
+func validateOpCreateLicenseConversionTaskForResourceInput(v *CreateLicenseConversionTaskForResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateLicenseConversionTaskForResourceInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.SourceLicenseContext == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceLicenseContext"))
+	}
+	if v.DestinationLicenseContext == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationLicenseContext"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateLicenseInput(v *CreateLicenseInput) error {
 	if v == nil {
 		return nil
@@ -1679,6 +1748,21 @@ func validateOpGetLicenseConfigurationInput(v *GetLicenseConfigurationInput) err
 	invalidParams := smithy.InvalidParamsError{Context: "GetLicenseConfigurationInput"}
 	if v.LicenseConfigurationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LicenseConfigurationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetLicenseConversionTaskInput(v *GetLicenseConversionTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetLicenseConversionTaskInput"}
+	if v.LicenseConversionTaskId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LicenseConversionTaskId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

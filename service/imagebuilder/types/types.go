@@ -8,19 +8,20 @@ import (
 
 // In addition to your infrastruction configuration, these settings provide an
 // extra layer of control over your build instances. For instances where Image
-// Builder installs the SSM agent, you can choose whether to keep it for the AMI
-// that you create. You can also specify commands to run on launch for all of your
-// build instances.
+// Builder installs the Systems Manager agent, you can choose whether to keep it
+// for the AMI that you create. You can also specify commands to run on launch for
+// all of your build instances.
 type AdditionalInstanceConfiguration struct {
 
-	// Contains settings for the SSM agent on your build instance.
+	// Contains settings for the Systems Manager agent on your build instance.
 	SystemsManagerAgent *SystemsManagerAgent
 
 	// Use this property to provide commands or a command script to run when you launch
 	// your build instance. The userDataOverride property replaces any commands that
-	// Image Builder might have added to ensure that SSM is installed on your Linux
-	// build instance. If you override the user data, make sure that you add commands
-	// to install SSM, if it is not pre-installed on your source image.
+	// Image Builder might have added to ensure that Systems Manager is installed on
+	// your Linux build instance. If you override the user data, make sure that you add
+	// commands to install Systems Manager, if it is not pre-installed on your source
+	// image.
 	UserDataOverride *string
 
 	noSmithyDocumentSerde
@@ -114,6 +115,10 @@ type Component struct {
 	// The platform of the component.
 	Platform Platform
 
+	// Describes the current status of the component. This is used for components that
+	// are no longer active.
+	State *ComponentState
+
 	// The operating system (OS) version supported by the component. If the OS
 	// information is available, a prefix match is performed against the parent image
 	// OS version during image recipe creation.
@@ -187,6 +192,19 @@ type ComponentParameterDetail struct {
 	noSmithyDocumentSerde
 }
 
+// A group of fields that describe the current status of components that are no
+// longer active.
+type ComponentState struct {
+
+	// Describes how or why the component changed state.
+	Reason *string
+
+	// The current state of the component.
+	Status ComponentStatus
+
+	noSmithyDocumentSerde
+}
+
 // A high-level summary of a component.
 type ComponentSummary struct {
 
@@ -210,6 +228,9 @@ type ComponentSummary struct {
 
 	// The platform of the component.
 	Platform Platform
+
+	// Describes the current status of the component.
+	State *ComponentState
 
 	// The operating system (OS) version supported by the component. If the OS
 	// information is available, a prefix match is performed against the parent image
@@ -276,16 +297,14 @@ type ComponentVersion struct {
 	// You can assign values for the first three, and can filter on all of them.
 	// Assignment: For the first three nodes you can assign any positive integer value,
 	// including zero, with an upper limit of 2^30-1, or 1073741823 for each node.
-	// Image Builder automatically assigns the build number, and that is not open for
-	// updates. Patterns: You can use any numeric pattern that adheres to the
-	// assignment requirements for the nodes that you can assign. For example, you
-	// might choose a software version pattern, such as 1.0.0, or a date, such as
-	// 2021.01.01. Filtering: When you retrieve or reference a resource with a semantic
-	// version, you can use wildcards (x) to filter your results. When you use a
-	// wildcard in any node, all nodes to the right of the first wildcard must also be
-	// wildcards. For example, specifying "1.2.x", or "1.x.x" works to filter list
-	// results, but neither "1.x.2", nor "x.2.x" will work. You do not have to specify
-	// the build - Image Builder automatically uses a wildcard for that, if applicable.
+	// Image Builder automatically assigns the build number to the fourth node.
+	// Patterns: You can use any numeric pattern that adheres to the assignment
+	// requirements for the nodes that you can assign. For example, you might choose a
+	// software version pattern, such as 1.0.0, or a date, such as 2021.01.01.
+	// Filtering: With semantic versioning, you have the flexibility to use wildcards
+	// (x) to specify the most recent versions or nodes when selecting the source image
+	// or components for your recipe. When you use a wildcard in any node, all nodes to
+	// the right of the first wildcard must also be wildcards.
 	Version *string
 
 	noSmithyDocumentSerde
@@ -391,16 +410,14 @@ type ContainerRecipe struct {
 	// nodes: ../. You can assign values for the first three, and can filter on all of
 	// them. Assignment: For the first three nodes you can assign any positive integer
 	// value, including zero, with an upper limit of 2^30-1, or 1073741823 for each
-	// node. Image Builder automatically assigns the build number, and that is not open
-	// for updates. Patterns: You can use any numeric pattern that adheres to the
-	// assignment requirements for the nodes that you can assign. For example, you
-	// might choose a software version pattern, such as 1.0.0, or a date, such as
-	// 2021.01.01. Filtering: When you retrieve or reference a resource with a semantic
-	// version, you can use wildcards (x) to filter your results. When you use a
-	// wildcard in any node, all nodes to the right of the first wildcard must also be
-	// wildcards. For example, specifying "1.2.x", or "1.x.x" works to filter list
-	// results, but neither "1.x.2", nor "x.2.x" will work. You do not have to specify
-	// the build - Image Builder automatically uses a wildcard for that, if applicable.
+	// node. Image Builder automatically assigns the build number to the fourth node.
+	// Patterns: You can use any numeric pattern that adheres to the assignment
+	// requirements for the nodes that you can assign. For example, you might choose a
+	// software version pattern, such as 1.0.0, or a date, such as 2021.01.01.
+	// Filtering: With semantic versioning, you have the flexibility to use wildcards
+	// (x) to specify the most recent versions or nodes when selecting the source image
+	// or components for your recipe. When you use a wildcard in any node, all nodes to
+	// the right of the first wildcard must also be wildcards.
 	Version *string
 
 	// The working directory for use during build and test workflows.
@@ -543,6 +560,9 @@ type EbsInstanceBlockDeviceSpecification struct {
 	// The snapshot that defines the device contents.
 	SnapshotId *string
 
+	// For GP3 volumes only – The throughput in MiB/s that the volume supports.
+	Throughput *int32
+
 	// Use to override the device's volume size.
 	VolumeSize *int32
 
@@ -641,16 +661,14 @@ type Image struct {
 	// can assign values for the first three, and can filter on all of them.
 	// Assignment: For the first three nodes you can assign any positive integer value,
 	// including zero, with an upper limit of 2^30-1, or 1073741823 for each node.
-	// Image Builder automatically assigns the build number, and that is not open for
-	// updates. Patterns: You can use any numeric pattern that adheres to the
-	// assignment requirements for the nodes that you can assign. For example, you
-	// might choose a software version pattern, such as 1.0.0, or a date, such as
-	// 2021.01.01. Filtering: When you retrieve or reference a resource with a semantic
-	// version, you can use wildcards (x) to filter your results. When you use a
-	// wildcard in any node, all nodes to the right of the first wildcard must also be
-	// wildcards. For example, specifying "1.2.x", or "1.x.x" works to filter list
-	// results, but neither "1.x.2", nor "x.2.x" will work. You do not have to specify
-	// the build - Image Builder automatically uses a wildcard for that, if applicable.
+	// Image Builder automatically assigns the build number to the fourth node.
+	// Patterns: You can use any numeric pattern that adheres to the assignment
+	// requirements for the nodes that you can assign. For example, you might choose a
+	// software version pattern, such as 1.0.0, or a date, such as 2021.01.01.
+	// Filtering: With semantic versioning, you have the flexibility to use wildcards
+	// (x) to specify the most recent versions or nodes when selecting the source image
+	// or components for your recipe. When you use a wildcard in any node, all nodes to
+	// the right of the first wildcard must also be wildcards.
 	Version *string
 
 	noSmithyDocumentSerde
@@ -916,16 +934,14 @@ type ImageVersion struct {
 	// assign values for the first three, and can filter on all of them. Assignment:
 	// For the first three nodes you can assign any positive integer value, including
 	// zero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder
-	// automatically assigns the build number, and that is not open for updates.
-	// Patterns: You can use any numeric pattern that adheres to the assignment
-	// requirements for the nodes that you can assign. For example, you might choose a
-	// software version pattern, such as 1.0.0, or a date, such as 2021.01.01.
-	// Filtering: When you retrieve or reference a resource with a semantic version,
-	// you can use wildcards (x) to filter your results. When you use a wildcard in any
-	// node, all nodes to the right of the first wildcard must also be wildcards. For
-	// example, specifying "1.2.x", or "1.x.x" works to filter list results, but
-	// neither "1.x.2", nor "x.2.x" will work. You do not have to specify the build -
-	// Image Builder automatically uses a wildcard for that, if applicable.
+	// automatically assigns the build number to the fourth node. Patterns: You can use
+	// any numeric pattern that adheres to the assignment requirements for the nodes
+	// that you can assign. For example, you might choose a software version pattern,
+	// such as 1.0.0, or a date, such as 2021.01.01. Filtering: With semantic
+	// versioning, you have the flexibility to use wildcards (x) to specify the most
+	// recent versions or nodes when selecting the source image or components for your
+	// recipe. When you use a wildcard in any node, all nodes to the right of the first
+	// wildcard must also be wildcards.
 	Version *string
 
 	noSmithyDocumentSerde
@@ -945,6 +961,9 @@ type InfrastructureConfiguration struct {
 
 	// The description of the infrastructure configuration.
 	Description *string
+
+	// The instance metadata option settings for the infrastructure configuration.
+	InstanceMetadataOptions *InstanceMetadataOptions
 
 	// The instance profile of the infrastructure configuration.
 	InstanceProfileName *string
@@ -1046,6 +1065,38 @@ type InstanceConfiguration struct {
 	// not specified, Image Builder will use the appropriate ECS-optimized AMI as a
 	// base image.
 	Image *string
+
+	noSmithyDocumentSerde
+}
+
+// The instance metadata options that apply to the HTTP requests that pipeline
+// builds use to launch EC2 build and test instances. For more information about
+// instance metadata options, see Configure the instance metadata options
+// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html)
+// in the Amazon EC2 User Guide for Linux instances, or Configure the instance
+// metadata options
+// (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/configuring-instance-metadata-options.html)
+// in the Amazon EC2 Windows Guide for Windows instances.
+type InstanceMetadataOptions struct {
+
+	// Limit the number of hops that an instance metadata request can traverse to reach
+	// its destination.
+	HttpPutResponseHopLimit *int32
+
+	// Indicates whether a signed token header is required for instance metadata
+	// retrieval requests. The values affect the response as follows:
+	//
+	// * required –
+	// When you retrieve the IAM role credentials, version 2.0 credentials are returned
+	// in all cases.
+	//
+	// * optional – You can include a signed token header in your
+	// request to retrieve instance metadata, or you can leave it out. If you include
+	// it, version 2.0 credentials are returned for the IAM role. Otherwise, version
+	// 1.0 credentials are returned.
+	//
+	// The default setting is optional.
+	HttpTokens *string
 
 	noSmithyDocumentSerde
 }
@@ -1153,13 +1204,13 @@ type Schedule struct {
 	noSmithyDocumentSerde
 }
 
-// Contains settings for the SSM agent on your build instance.
+// Contains settings for the Systems Manager agent on your build instance.
 type SystemsManagerAgent struct {
 
-	// Controls whether the SSM agent is removed from your final build image, prior to
-	// creating the new AMI. If this is set to true, then the agent is removed from the
-	// final image. If it's set to false, then the agent is left in, so that it is
-	// included in the new AMI. The default value is false.
+	// Controls whether the Systems Manager agent is removed from your final build
+	// image, prior to creating the new AMI. If this is set to true, then the agent is
+	// removed from the final image. If it's set to false, then the agent is left in,
+	// so that it is included in the new AMI. The default value is false.
 	UninstallAfterBuild *bool
 
 	noSmithyDocumentSerde

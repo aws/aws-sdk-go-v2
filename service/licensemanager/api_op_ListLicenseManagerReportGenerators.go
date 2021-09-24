@@ -49,7 +49,8 @@ type ListLicenseManagerReportGeneratorsOutput struct {
 	// Token for the next set of results.
 	NextToken *string
 
-	// A report generator that creates periodic reports on your license configurations.
+	// A report generator that creates periodic reports about your license
+	// configurations.
 	ReportGenerators []types.ReportGenerator
 
 	// Metadata pertaining to the operation's result.

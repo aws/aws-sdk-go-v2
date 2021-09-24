@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all related-item resources associated with an OpsItem.
+// Lists all related-item resources associated with a Systems Manager OpsCenter
+// OpsItem. OpsCenter is a capability of Amazon Web Services Systems Manager.
 func (c *Client) ListOpsItemRelatedItems(ctx context.Context, params *ListOpsItemRelatedItemsInput, optFns ...func(*Options)) (*ListOpsItemRelatedItemsOutput, error) {
 	if params == nil {
 		params = &ListOpsItemRelatedItemsInput{}

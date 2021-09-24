@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates a related resource to a Systems Manager OpsCenter OpsItem. For
-// example, you can associate an Incident Manager incident or analysis with an
-// OpsItem. Incident Manager is a capability of Amazon Web Services Systems
+// Associates a related item to a Systems Manager OpsCenter OpsItem. For example,
+// you can associate an Incident Manager incident or analysis with an OpsItem.
+// Incident Manager and OpsCenter are capabilities of Amazon Web Services Systems
 // Manager.
 func (c *Client) AssociateOpsItemRelatedItem(ctx context.Context, params *AssociateOpsItemRelatedItemInput, optFns ...func(*Options)) (*AssociateOpsItemRelatedItemOutput, error) {
 	if params == nil {
@@ -45,8 +45,7 @@ type AssociateOpsItemRelatedItemInput struct {
 
 	// The type of resource that you want to associate with an OpsItem. OpsCenter
 	// supports the following types: AWS::SSMIncidents::IncidentRecord: an Incident
-	// Manager incident. Incident Manager is a capability of Amazon Web Services
-	// Systems Manager. AWS::SSM::Document: a Systems Manager (SSM) document.
+	// Manager incident. AWS::SSM::Document: a Systems Manager (SSM) document.
 	//
 	// This member is required.
 	ResourceType *string

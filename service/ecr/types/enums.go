@@ -166,6 +166,42 @@ func (LifecyclePolicyPreviewStatus) Values() []LifecyclePolicyPreviewStatus {
 	}
 }
 
+type ReplicationStatus string
+
+// Enum values for ReplicationStatus
+const (
+	ReplicationStatusInProgress ReplicationStatus = "IN_PROGRESS"
+	ReplicationStatusComplete   ReplicationStatus = "COMPLETE"
+	ReplicationStatusFailed     ReplicationStatus = "FAILED"
+)
+
+// Values returns all known values for ReplicationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReplicationStatus) Values() []ReplicationStatus {
+	return []ReplicationStatus{
+		"IN_PROGRESS",
+		"COMPLETE",
+		"FAILED",
+	}
+}
+
+type RepositoryFilterType string
+
+// Enum values for RepositoryFilterType
+const (
+	RepositoryFilterTypePrefixMatch RepositoryFilterType = "PREFIX_MATCH"
+)
+
+// Values returns all known values for RepositoryFilterType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RepositoryFilterType) Values() []RepositoryFilterType {
+	return []RepositoryFilterType{
+		"PREFIX_MATCH",
+	}
+}
+
 type ScanStatus string
 
 // Enum values for ScanStatus

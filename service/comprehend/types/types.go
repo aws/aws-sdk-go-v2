@@ -49,6 +49,14 @@ type AugmentedManifestsListItem struct {
 	// manifest file.
 	SourceDocumentsS3Uri *string
 
+	// The purpose of the data you've provided in the augmented manifest. You can
+	// either train or test this data. If you don't specify, the default is train.
+	// TRAIN - all of the documents in the manifest will be used for training. If no
+	// test documents are provided, Amazon Comprehend will automatically reserve a
+	// portion of the training documents for testing. TEST - all of the documents in
+	// the manifest will be used for testing.
+	Split Split
+
 	noSmithyDocumentSerde
 }
 
@@ -322,6 +330,9 @@ type DocumentClassificationJobProperties struct {
 // operation.
 type DocumentClassifierFilter struct {
 
+	// The name that you assigned to the document classifier
+	DocumentClassifierName *string
+
 	// Filters the list of classifiers based on status.
 	Status ModelStatus
 
@@ -381,6 +392,11 @@ type DocumentClassifierInputDataConfig struct {
 	// prefix, Amazon Comprehend uses all of them as input. This parameter is required
 	// if you set DataFormat to COMPREHEND_CSV.
 	S3Uri *string
+
+	// The Amazon S3 URI for the input data. The Amazon S3 bucket must be in the same
+	// AWS Region as the API endpoint that you are calling. The URI can point to a
+	// single input file or it can provide the prefix for a collection of input files.
+	TestS3Uri *string
 
 	noSmithyDocumentSerde
 }
@@ -485,6 +501,9 @@ type DocumentClassifierProperties struct {
 	// TrainingEndTime.
 	TrainingStartTime *time.Time
 
+	// The version name that you assigned to the document classifier.
+	VersionName *string
+
 	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
 	// encrypt data on the storage volume attached to the ML compute instance(s) that
 	// process the analysis job. The VolumeKmsKeyId can be either of the following
@@ -502,6 +521,28 @@ type DocumentClassifierProperties struct {
 	// see Amazon VPC
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
 	VpcConfig *VpcConfig
+
+	noSmithyDocumentSerde
+}
+
+// Describes information about a document classifier and its versions.
+type DocumentClassifierSummary struct {
+
+	// The name that you assigned the document classifier.
+	DocumentClassifierName *string
+
+	// The time that the latest document classifier version was submitted for
+	// processing.
+	LatestVersionCreatedAt *time.Time
+
+	// The version name you assigned to the latest document classifier version.
+	LatestVersionName *string
+
+	// Provides the status of the latest document classifier version.
+	LatestVersionStatus ModelStatus
+
+	// The number of versions you created.
+	NumberOfVersions *int32
 
 	noSmithyDocumentSerde
 }
@@ -688,10 +729,18 @@ type EndpointProperties struct {
 	// encrypted with a customer managed key (ModelKmsKeyId).
 	DataAccessRoleArn *string
 
+	// Data access role ARN to use in case the new model is encrypted with a customer
+	// KMS key.
+	DesiredDataAccessRoleArn *string
+
 	// The desired number of inference units to be used by the model using this
 	// endpoint. Each inference unit represents of a throughput of 100 characters per
 	// second.
 	DesiredInferenceUnits *int32
+
+	// ARN of the new model to use for updating an existing endpoint. This ARN is going
+	// to be different from the model ARN when the update is in progress
+	DesiredModelArn *string
 
 	// The Amazon Resource Number (ARN) of the endpoint.
 	EndpointArn *string
@@ -858,6 +907,11 @@ type EntityRecognizerAnnotations struct {
 	// This member is required.
 	S3Uri *string
 
+	// This specifies the Amazon S3 location where the test annotations for an entity
+	// recognizer are located. The URI must be in the same AWS Region as the API
+	// endpoint that you are calling.
+	TestS3Uri *string
+
 	noSmithyDocumentSerde
 }
 
@@ -870,6 +924,19 @@ type EntityRecognizerDocuments struct {
 	//
 	// This member is required.
 	S3Uri *string
+
+	// Specifies how the text in an input file should be processed. This is optional,
+	// and the default is ONE_DOC_PER_LINE. ONE_DOC_PER_FILE - Each file is considered
+	// a separate document. Use this option when you are processing large documents,
+	// such as newspaper articles or scientific papers. ONE_DOC_PER_LINE - Each line in
+	// a file is considered a separate document. Use this option when you are
+	// processing many short documents, such as text messages.
+	InputFormat InputFormat
+
+	// Specifies the Amazon S3 location where the test documents for an entity
+	// recognizer are located. The URI must be in the same AWS Region as the API
+	// endpoint that you are calling.
+	TestS3Uri *string
 
 	noSmithyDocumentSerde
 }
@@ -910,6 +977,9 @@ type EntityRecognizerEvaluationMetrics struct {
 // specify one filtering parameter in a request. For more information, see the
 // operation./>
 type EntityRecognizerFilter struct {
+
+	// The name that you assigned the entity recognizer.
+	RecognizerName *string
 
 	// The status of an entity recognizer.
 	Status ModelStatus
@@ -1069,6 +1139,9 @@ type EntityRecognizerProperties struct {
 	// The time that training of the entity recognizer started.
 	TrainingStartTime *time.Time
 
+	// The version name you assigned to the entity recognizer.
+	VersionName *string
+
 	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
 	// encrypt data on the storage volume attached to the ML compute instance(s) that
 	// process the analysis job. The VolumeKmsKeyId can be either of the following
@@ -1086,6 +1159,27 @@ type EntityRecognizerProperties struct {
 	// information, see Amazon VPC
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
 	VpcConfig *VpcConfig
+
+	noSmithyDocumentSerde
+}
+
+// Describes the information about an entity recognizer and its versions.
+type EntityRecognizerSummary struct {
+
+	// The time that the latest entity recognizer version was submitted for processing.
+	LatestVersionCreatedAt *time.Time
+
+	// The version name you assigned to the latest entity recognizer version.
+	LatestVersionName *string
+
+	// Provides the status of the latest entity recognizer version.
+	LatestVersionStatus ModelStatus
+
+	// The number of versions you created.
+	NumberOfVersions *int32
+
+	// The name that you assigned the entity recognizer.
+	RecognizerName *string
 
 	noSmithyDocumentSerde
 }

@@ -53,6 +53,10 @@ type CreateRepositoryInput struct {
 	// will be immutable which will prevent them from being overwritten.
 	ImageTagMutability types.ImageTagMutability
 
+	// The AWS account ID associated with the registry to create the repository. If you
+	// do not specify a registry, the default registry is assumed.
+	RegistryId *string
+
 	// The metadata that you apply to the repository to help you categorize and
 	// organize them. Each tag consists of a key and an optional value, both of which
 	// you define. Tag keys can have a maximum character length of 128 characters, and

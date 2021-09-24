@@ -36,11 +36,11 @@ type GetServiceSettingsOutput struct {
 	// Indicates whether cross-account discovery is enabled.
 	EnableCrossAccountsDiscovery *bool
 
-	// Amazon Resource Name (ARN) of the AWS resource share. The License Manager
-	// management account provides member accounts with access to this share.
+	// Amazon Resource Name (ARN) of the resource share. The License Manager management
+	// account provides member accounts with access to this share.
 	LicenseManagerResourceShareArn *string
 
-	// Indicates whether AWS Organizations is integrated with License Manager for
+	// Indicates whether Organizations is integrated with License Manager for
 	// cross-account discovery.
 	OrganizationConfiguration *types.OrganizationConfiguration
 

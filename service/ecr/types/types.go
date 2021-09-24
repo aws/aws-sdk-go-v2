@@ -173,7 +173,7 @@ type ImageFailure struct {
 	noSmithyDocumentSerde
 }
 
-// An object with identifying information for an Amazon ECR image.
+// An object with identifying information for an image in an Amazon ECR repository.
 type ImageIdentifier struct {
 
 	// The sha256 digest of the image manifest.
@@ -181,6 +181,24 @@ type ImageIdentifier struct {
 
 	// The tag used for the image.
 	ImageTag *string
+
+	noSmithyDocumentSerde
+}
+
+// The status of the replication process for an image.
+type ImageReplicationStatus struct {
+
+	// The failure code for a replication that has failed.
+	FailureCode *string
+
+	// The destination Region for the image replication.
+	Region *string
+
+	// The AWS account ID associated with the registry to which the image belongs.
+	RegistryId *string
+
+	// The image replication status.
+	Status ReplicationStatus
 
 	noSmithyDocumentSerde
 }
@@ -362,9 +380,8 @@ type ListImagesFilter struct {
 // The replication configuration for a registry.
 type ReplicationConfiguration struct {
 
-	// An array of objects representing the replication rules for a replication
-	// configuration. A replication configuration may contain only one replication rule
-	// but the rule may contain one or more replication destinations.
+	// An array of objects representing the replication destinations and repository
+	// filters for a replication configuration.
 	//
 	// This member is required.
 	Rules []ReplicationRule
@@ -372,15 +389,17 @@ type ReplicationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// An array of objects representing the details of a replication destination.
+// An array of objects representing the destination for a replication rule.
 type ReplicationDestination struct {
 
-	// A Region to replicate to.
+	// The Region to replicate to.
 	//
 	// This member is required.
 	Region *string
 
-	// The account ID of the destination registry to replicate to.
+	// The Amazon Web Services account ID of the Amazon ECR private registry to
+	// replicate to. When configuring cross-Region replication within your own
+	// registry, specify your own account ID.
 	//
 	// This member is required.
 	RegistryId *string
@@ -388,15 +407,19 @@ type ReplicationDestination struct {
 	noSmithyDocumentSerde
 }
 
-// An array of objects representing the replication destinations for a replication
-// configuration. A replication configuration may contain only one replication rule
-// but the rule may contain one or more replication destinations.
+// An array of objects representing the replication destinations and repository
+// filters for a replication configuration.
 type ReplicationRule struct {
 
-	// An array of objects representing the details of a replication destination.
+	// An array of objects representing the destination for a replication rule.
 	//
 	// This member is required.
 	Destinations []ReplicationDestination
+
+	// An array of objects representing the filters for a replication rule. Specifying
+	// a repository filter for a replication rule provides a method for controlling
+	// which repositories in a private registry are replicated.
+	RepositoryFilters []RepositoryFilter
 
 	noSmithyDocumentSerde
 }
@@ -433,6 +456,28 @@ type Repository struct {
 	// The URI for the repository. You can use this URI for container image push and
 	// pull operations.
 	RepositoryUri *string
+
+	noSmithyDocumentSerde
+}
+
+// The filter settings used with image replication. Specifying a repository filter
+// to a replication rule provides a method for controlling which repositories in a
+// private registry are replicated. If no repository filter is specified, all
+// images in the repository are replicated.
+type RepositoryFilter struct {
+
+	// The repository filter details. When the PREFIX_MATCH filter type is specified,
+	// this value is required and should be the repository name prefix to configure
+	// replication for.
+	//
+	// This member is required.
+	Filter *string
+
+	// The repository filter type. The only supported value is PREFIX_MATCH, which is a
+	// repository name prefix specified with the filter parameter.
+	//
+	// This member is required.
+	FilterType RepositoryFilterType
 
 	noSmithyDocumentSerde
 }

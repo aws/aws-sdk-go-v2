@@ -172,12 +172,13 @@ type DataSourceType string
 
 // Enum values for DataSourceType
 const (
-	DataSourceTypeAwsLambda           DataSourceType = "AWS_LAMBDA"
-	DataSourceTypeAmazonDynamodb      DataSourceType = "AMAZON_DYNAMODB"
-	DataSourceTypeAmazonElasticsearch DataSourceType = "AMAZON_ELASTICSEARCH"
-	DataSourceTypeNone                DataSourceType = "NONE"
-	DataSourceTypeHttp                DataSourceType = "HTTP"
-	DataSourceTypeRelationalDatabase  DataSourceType = "RELATIONAL_DATABASE"
+	DataSourceTypeAwsLambda               DataSourceType = "AWS_LAMBDA"
+	DataSourceTypeAmazonDynamodb          DataSourceType = "AMAZON_DYNAMODB"
+	DataSourceTypeAmazonElasticsearch     DataSourceType = "AMAZON_ELASTICSEARCH"
+	DataSourceTypeNone                    DataSourceType = "NONE"
+	DataSourceTypeHttp                    DataSourceType = "HTTP"
+	DataSourceTypeRelationalDatabase      DataSourceType = "RELATIONAL_DATABASE"
+	DataSourceTypeAmazonOpensearchService DataSourceType = "AMAZON_OPENSEARCH_SERVICE"
 )
 
 // Values returns all known values for DataSourceType. Note that this can be
@@ -191,6 +192,7 @@ func (DataSourceType) Values() []DataSourceType {
 		"NONE",
 		"HTTP",
 		"RELATIONAL_DATABASE",
+		"AMAZON_OPENSEARCH_SERVICE",
 	}
 }
 

@@ -6828,6 +6828,15 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 				sv.Alignment = types.BurninSubtitleAlignment(jtv)
 			}
 
+		case "applyFontColor":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BurninSubtitleApplyFontColor to be of type string, got %T instead", value)
+				}
+				sv.ApplyFontColor = types.BurninSubtitleApplyFontColor(jtv)
+			}
+
 		case "backgroundColor":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6848,6 +6857,15 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 					return err
 				}
 				sv.BackgroundOpacity = int32(i64)
+			}
+
+		case "fallbackFont":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BurninSubtitleFallbackFont to be of type string, got %T instead", value)
+				}
+				sv.FallbackFont = types.BurninSubtitleFallbackFont(jtv)
 			}
 
 		case "fontColor":
@@ -6905,6 +6923,15 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 					return err
 				}
 				sv.FontSize = int32(i64)
+			}
+
+		case "hexFontColor":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMin6Max8Pattern09aFAF609aFAF2 to be of type string, got %T instead", value)
+				}
+				sv.HexFontColor = ptr.String(jtv)
 			}
 
 		case "outlineColor":
@@ -6975,6 +7002,15 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 					return err
 				}
 				sv.ShadowYOffset = int32(i64)
+			}
+
+		case "stylePassthrough":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BurnInSubtitleStylePassthrough to be of type string, got %T instead", value)
+				}
+				sv.StylePassthrough = types.BurnInSubtitleStylePassthrough(jtv)
 			}
 
 		case "teletextSpacing":
@@ -7680,6 +7716,11 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 				sv.ImageBasedTrickPlay = types.CmafImageBasedTrickPlay(jtv)
 			}
 
+		case "imageBasedTrickPlaySettings":
+			if err := awsRestjson1_deserializeDocumentCmafImageBasedTrickPlaySettings(&sv.ImageBasedTrickPlaySettings, value); err != nil {
+				return err
+			}
+
 		case "manifestCompression":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7837,6 +7878,132 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 					return fmt.Errorf("expected CmafWriteSegmentTimelineInRepresentation to be of type string, got %T instead", value)
 				}
 				sv.WriteSegmentTimelineInRepresentation = types.CmafWriteSegmentTimelineInRepresentation(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCmafImageBasedTrickPlaySettings(v **types.CmafImageBasedTrickPlaySettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CmafImageBasedTrickPlaySettings
+	if *v == nil {
+		sv = &types.CmafImageBasedTrickPlaySettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "intervalCadence":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CmafIntervalCadence to be of type string, got %T instead", value)
+				}
+				sv.IntervalCadence = types.CmafIntervalCadence(jtv)
+			}
+
+		case "thumbnailHeight":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin2Max4096 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ThumbnailHeight = int32(i64)
+			}
+
+		case "thumbnailInterval":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.ThumbnailInterval = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.ThumbnailInterval = f64
+
+				default:
+					return fmt.Errorf("expected __doubleMin0Max2147483647 to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "thumbnailWidth":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin8Max4096 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ThumbnailWidth = int32(i64)
+			}
+
+		case "tileHeight":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max2048 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TileHeight = int32(i64)
+			}
+
+		case "tileWidth":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max512 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TileWidth = int32(i64)
 			}
 
 		default:
@@ -8362,6 +8529,11 @@ func awsRestjson1_deserializeDocumentDashIsoGroupSettings(v **types.DashIsoGroup
 				sv.ImageBasedTrickPlay = types.DashIsoImageBasedTrickPlay(jtv)
 			}
 
+		case "imageBasedTrickPlaySettings":
+			if err := awsRestjson1_deserializeDocumentDashIsoImageBasedTrickPlaySettings(&sv.ImageBasedTrickPlaySettings, value); err != nil {
+				return err
+			}
+
 		case "minBufferTime":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8465,6 +8637,132 @@ func awsRestjson1_deserializeDocumentDashIsoGroupSettings(v **types.DashIsoGroup
 					return fmt.Errorf("expected DashIsoWriteSegmentTimelineInRepresentation to be of type string, got %T instead", value)
 				}
 				sv.WriteSegmentTimelineInRepresentation = types.DashIsoWriteSegmentTimelineInRepresentation(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDashIsoImageBasedTrickPlaySettings(v **types.DashIsoImageBasedTrickPlaySettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DashIsoImageBasedTrickPlaySettings
+	if *v == nil {
+		sv = &types.DashIsoImageBasedTrickPlaySettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "intervalCadence":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DashIsoIntervalCadence to be of type string, got %T instead", value)
+				}
+				sv.IntervalCadence = types.DashIsoIntervalCadence(jtv)
+			}
+
+		case "thumbnailHeight":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max4096 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ThumbnailHeight = int32(i64)
+			}
+
+		case "thumbnailInterval":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.ThumbnailInterval = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.ThumbnailInterval = f64
+
+				default:
+					return fmt.Errorf("expected __doubleMin0Max2147483647 to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "thumbnailWidth":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin8Max4096 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ThumbnailWidth = int32(i64)
+			}
+
+		case "tileHeight":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max2048 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TileHeight = int32(i64)
+			}
+
+		case "tileWidth":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max512 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TileWidth = int32(i64)
 			}
 
 		default:
@@ -8849,6 +9147,15 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				sv.Alignment = types.DvbSubtitleAlignment(jtv)
 			}
 
+		case "applyFontColor":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DvbSubtitleApplyFontColor to be of type string, got %T instead", value)
+				}
+				sv.ApplyFontColor = types.DvbSubtitleApplyFontColor(jtv)
+			}
+
 		case "backgroundColor":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8904,6 +9211,15 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 					return err
 				}
 				sv.DdsYCoordinate = int32(i64)
+			}
+
+		case "fallbackFont":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DvbSubSubtitleFallbackFont to be of type string, got %T instead", value)
+				}
+				sv.FallbackFont = types.DvbSubSubtitleFallbackFont(jtv)
 			}
 
 		case "fontColor":
@@ -8976,6 +9292,15 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				sv.Height = int32(i64)
 			}
 
+		case "hexFontColor":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMin6Max8Pattern09aFAF609aFAF2 to be of type string, got %T instead", value)
+				}
+				sv.HexFontColor = ptr.String(jtv)
+			}
+
 		case "outlineColor":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9044,6 +9369,15 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 					return err
 				}
 				sv.ShadowYOffset = int32(i64)
+			}
+
+		case "stylePassthrough":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DvbSubtitleStylePassthrough to be of type string, got %T instead", value)
+				}
+				sv.StylePassthrough = types.DvbSubtitleStylePassthrough(jtv)
 			}
 
 		case "subtitlingType":
@@ -12137,6 +12471,11 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				sv.ImageBasedTrickPlay = types.HlsImageBasedTrickPlay(jtv)
 			}
 
+		case "imageBasedTrickPlaySettings":
+			if err := awsRestjson1_deserializeDocumentHlsImageBasedTrickPlaySettings(&sv.ImageBasedTrickPlaySettings, value); err != nil {
+				return err
+			}
+
 		case "manifestCompression":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12328,6 +12667,132 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 					return err
 				}
 				sv.TimestampDeltaMilliseconds = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentHlsImageBasedTrickPlaySettings(v **types.HlsImageBasedTrickPlaySettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HlsImageBasedTrickPlaySettings
+	if *v == nil {
+		sv = &types.HlsImageBasedTrickPlaySettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "intervalCadence":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HlsIntervalCadence to be of type string, got %T instead", value)
+				}
+				sv.IntervalCadence = types.HlsIntervalCadence(jtv)
+			}
+
+		case "thumbnailHeight":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin2Max4096 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ThumbnailHeight = int32(i64)
+			}
+
+		case "thumbnailInterval":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.ThumbnailInterval = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.ThumbnailInterval = f64
+
+				default:
+					return fmt.Errorf("expected __doubleMin0Max2147483647 to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "thumbnailWidth":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin8Max4096 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ThumbnailWidth = int32(i64)
+			}
+
+		case "tileHeight":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max2048 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TileHeight = int32(i64)
+			}
+
+		case "tileWidth":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max512 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TileWidth = int32(i64)
 			}
 
 		default:

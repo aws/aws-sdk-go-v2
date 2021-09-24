@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete an existing report generator. This action deletes the report generator,
-// which stops it from generating future reports and cannot be reversed. However,
-// the previous reports from this generator will remain in your S3 bucket.
+// Deletes the specified report generator. This action deletes the report
+// generator, which stops it from generating future reports. The action cannot be
+// reversed. It has no effect on the previous reports from this generator.
 func (c *Client) DeleteLicenseManagerReportGenerator(ctx context.Context, params *DeleteLicenseManagerReportGeneratorInput, optFns ...func(*Options)) (*DeleteLicenseManagerReportGeneratorOutput, error) {
 	if params == nil {
 		params = &DeleteLicenseManagerReportGeneratorInput{}
@@ -30,7 +30,7 @@ func (c *Client) DeleteLicenseManagerReportGenerator(ctx context.Context, params
 
 type DeleteLicenseManagerReportGeneratorInput struct {
 
-	// Amazon Resource Number (ARN) of the report generator that will be deleted.
+	// Amazon Resource Name (ARN) of the report generator to be deleted.
 	//
 	// This member is required.
 	LicenseManagerReportGeneratorArn *string

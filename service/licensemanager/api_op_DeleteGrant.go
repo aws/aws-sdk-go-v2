@@ -39,6 +39,7 @@ type DeleteGrantInput struct {
 	// This member is required.
 	Version *string
 
+	// The Status reason for the delete request.
 	StatusReason *string
 
 	noSmithyDocumentSerde

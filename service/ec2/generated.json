@@ -364,6 +364,8 @@
         "api_op_GetTransitGatewayPrefixListReferences.go",
         "api_op_GetTransitGatewayRouteTableAssociations.go",
         "api_op_GetTransitGatewayRouteTablePropagations.go",
+        "api_op_GetVpnConnectionDeviceSampleConfiguration.go",
+        "api_op_GetVpnConnectionDeviceTypes.go",
         "api_op_ImportClientVpnClientCertificateRevocationList.go",
         "api_op_ImportImage.go",
         "api_op_ImportInstance.go",

@@ -12,7 +12,7 @@ import (
 )
 
 // Updates a report generator. After you make changes to a report generator, it
-// will start generating new reports within 60 minutes of being updated.
+// starts generating new reports within 60 minutes of being updated.
 func (c *Client) UpdateLicenseManagerReportGenerator(ctx context.Context, params *UpdateLicenseManagerReportGeneratorInput, optFns ...func(*Options)) (*UpdateLicenseManagerReportGeneratorOutput, error) {
 	if params == nil {
 		params = &UpdateLicenseManagerReportGeneratorInput{}
@@ -36,18 +36,17 @@ type UpdateLicenseManagerReportGeneratorInput struct {
 	// This member is required.
 	ClientToken *string
 
-	// Amazon Resource Number (ARN) of the report generator to update.
+	// Amazon Resource Name (ARN) of the report generator to update.
 	//
 	// This member is required.
 	LicenseManagerReportGeneratorArn *string
 
-	// ?
+	// The report context.
 	//
 	// This member is required.
 	ReportContext *types.ReportContext
 
-	// Frequency by which reports are generated. The following options are avaiable:
-	// ??? What are the APi value options?
+	// Frequency by which reports are generated.
 	//
 	// This member is required.
 	ReportFrequency *types.ReportFrequency
@@ -57,14 +56,14 @@ type UpdateLicenseManagerReportGeneratorInput struct {
 	// This member is required.
 	ReportGeneratorName *string
 
-	// Type of reports to generate. The following report types an be generated:
+	// Type of reports to generate. The following report types are supported:
 	//
 	// *
-	// License configuration report - Reports on the number and details of consumed
+	// License configuration report - Reports the number and details of consumed
 	// licenses for a license configuration.
 	//
-	// * Resource report - Reports on the
-	// tracked licenses and resource consumption for a license configuration.
+	// * Resource report - Reports the tracked
+	// licenses and resource consumption for a license configuration.
 	//
 	// This member is required.
 	Type []types.ReportType

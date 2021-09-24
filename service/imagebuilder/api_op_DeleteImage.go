@@ -10,7 +10,25 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an image.
+// Deletes an Image Builder image resource. This does not delete any EC2 AMIs or
+// ECR container images that are created during the image build process. You must
+// clean those up separately, using the appropriate Amazon EC2 or Amazon ECR
+// console actions, or API or CLI commands.
+//
+// * To deregister an EC2 Linux AMI, see
+// Deregister your Linux AMI
+// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/deregister-ami.html) in the
+// Amazon EC2 User Guide .
+//
+// * To deregister an EC2 Windows AMI, see Deregister your
+// Windows AMI
+// (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/deregister-ami.html) in
+// the Amazon EC2 Windows Guide .
+//
+// * To delete a container image from Amazon ECR,
+// see Deleting an image
+// (https://docs.aws.amazon.com/https:/docs.aws.amazon.comAmazonECR/latest/userguide/delete_image.html)
+// in the Amazon ECR User Guide.
 func (c *Client) DeleteImage(ctx context.Context, params *DeleteImageInput, optFns ...func(*Options)) (*DeleteImageOutput, error) {
 	if params == nil {
 		params = &DeleteImageInput{}
@@ -28,7 +46,7 @@ func (c *Client) DeleteImage(ctx context.Context, params *DeleteImageInput, optF
 
 type DeleteImageInput struct {
 
-	// The Amazon Resource Name (ARN) of the image to delete.
+	// The Amazon Resource Name (ARN) of the Image Builder image resource to delete.
 	//
 	// This member is required.
 	ImageBuildVersionArn *string
@@ -38,7 +56,8 @@ type DeleteImageInput struct {
 
 type DeleteImageOutput struct {
 
-	// The Amazon Resource Name (ARN) of the image that was deleted.
+	// The Amazon Resource Name (ARN) of the Image Builder image resource that was
+	// deleted.
 	ImageBuildVersionArn *string
 
 	// The request ID that uniquely identifies this request.

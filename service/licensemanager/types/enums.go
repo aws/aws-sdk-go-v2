@@ -272,6 +272,26 @@ func (LicenseConfigurationStatus) Values() []LicenseConfigurationStatus {
 	}
 }
 
+type LicenseConversionTaskStatus string
+
+// Enum values for LicenseConversionTaskStatus
+const (
+	LicenseConversionTaskStatusInProgress LicenseConversionTaskStatus = "IN_PROGRESS"
+	LicenseConversionTaskStatusSucceeded  LicenseConversionTaskStatus = "SUCCEEDED"
+	LicenseConversionTaskStatusFailed     LicenseConversionTaskStatus = "FAILED"
+)
+
+// Values returns all known values for LicenseConversionTaskStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LicenseConversionTaskStatus) Values() []LicenseConversionTaskStatus {
+	return []LicenseConversionTaskStatus{
+		"IN_PROGRESS",
+		"SUCCEEDED",
+		"FAILED",
+	}
+}
+
 type LicenseCountingType string
 
 // Enum values for LicenseCountingType

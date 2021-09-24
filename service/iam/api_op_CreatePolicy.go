@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new managed policy for your account. This operation creates a policy
-// version with a version identifier of v1 and sets v1 as the policy's default
-// version. For more information about policy versions, see Versioning for managed
-// policies
+// Creates a new managed policy for your Amazon Web Services account. This
+// operation creates a policy version with a version identifier of v1 and sets v1
+// as the policy's default version. For more information about policy versions, see
+// Versioning for managed policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html)
 // in the IAM User Guide. As a best practice, you can validate your IAM policies.
 // To learn more, see Validating IAM policies
@@ -89,7 +89,8 @@ type CreatePolicyInput struct {
 	// forward slash (/) by itself or a string that must begin and end with forward
 	// slashes. In addition, it can contain any ASCII character from the ! (\u0021)
 	// through the DEL character (\u007F), including most punctuation characters,
-	// digits, and upper and lowercased letters.
+	// digits, and upper and lowercased letters. You cannot use an asterisk (*) in the
+	// path name.
 	Path *string
 
 	// A list of tags that you want to attach to the new IAM customer managed policy.

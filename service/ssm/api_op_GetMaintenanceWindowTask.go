@@ -48,6 +48,14 @@ type GetMaintenanceWindowTaskInput struct {
 
 type GetMaintenanceWindowTaskOutput struct {
 
+	// The action to take on tasks when the maintenance window cutoff time is reached.
+	// CONTINUE_TASK means that tasks continue to run. For Automation, Lambda, Step
+	// Functions tasks, CANCEL_TASK means that currently running task invocations
+	// continue, but no new task invocations are started. For Run Command tasks,
+	// CANCEL_TASK means the system attempts to stop the task by sending a
+	// CancelCommand operation.
+	CutoffBehavior types.MaintenanceWindowTaskCutoffBehavior
+
 	// The retrieved task description.
 	Description *string
 

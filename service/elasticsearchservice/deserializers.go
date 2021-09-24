@@ -8012,6 +8012,15 @@ func awsRestjson1_deserializeDocumentDomainInfo(v **types.DomainInfo, value inte
 				sv.DomainName = ptr.String(jtv)
 			}
 
+		case "EngineType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EngineType to be of type string, got %T instead", value)
+				}
+				sv.EngineType = types.EngineType(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

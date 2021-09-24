@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information on the specified report generator.
+// Gets information about the specified report generator.
 func (c *Client) GetLicenseManagerReportGenerator(ctx context.Context, params *GetLicenseManagerReportGeneratorInput, optFns ...func(*Options)) (*GetLicenseManagerReportGeneratorOutput, error) {
 	if params == nil {
 		params = &GetLicenseManagerReportGeneratorInput{}
@@ -29,7 +29,7 @@ func (c *Client) GetLicenseManagerReportGenerator(ctx context.Context, params *G
 
 type GetLicenseManagerReportGeneratorInput struct {
 
-	// mazon Resource Number (ARN) of the report generator to retrieve information on.
+	// Amazon Resource Name (ARN) of the report generator.
 	//
 	// This member is required.
 	LicenseManagerReportGeneratorArn *string
@@ -39,7 +39,8 @@ type GetLicenseManagerReportGeneratorInput struct {
 
 type GetLicenseManagerReportGeneratorOutput struct {
 
-	// A report generator that creates periodic reports on your license configurations.
+	// A report generator that creates periodic reports about your license
+	// configurations.
 	ReportGenerator *types.ReportGenerator
 
 	// Metadata pertaining to the operation's result.

@@ -962,7 +962,7 @@ type CertificateAuthentication struct {
 type CertificateAuthenticationRequest struct {
 
 	// The ARN of the client certificate. The certificate must be signed by a
-	// certificate authority (CA) and it must be provisioned in AWS Certificate Manager
+	// certificate authority (CA) and it must be provisioned in Certificate Manager
 	// (ACM).
 	ClientRootCertificateChainArn *string
 
@@ -1067,7 +1067,7 @@ type ClientConnectOptions struct {
 	// enabled).
 	Enabled *bool
 
-	// The Amazon Resource Name (ARN) of the AWS Lambda function used for connection
+	// The Amazon Resource Name (ARN) of the Lambda function used for connection
 	// authorization.
 	LambdaFunctionArn *string
 
@@ -1080,7 +1080,7 @@ type ClientConnectResponseOptions struct {
 	// Indicates whether client connect options are enabled.
 	Enabled *bool
 
-	// The Amazon Resource Name (ARN) of the AWS Lambda function used for connection
+	// The Amazon Resource Name (ARN) of the Lambda function used for connection
 	// authorization.
 	LambdaFunctionArn *string
 
@@ -1111,7 +1111,7 @@ type ClientData struct {
 // Describes the authentication methods used by a Client VPN endpoint. For more
 // information, see Authentication
 // (https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/client-authentication.html)
-// in the AWS Client VPN Administrator Guide.
+// in the Client VPN Administrator Guide.
 type ClientVpnAuthentication struct {
 
 	// Information about the Active Directory, if applicable.
@@ -1132,7 +1132,7 @@ type ClientVpnAuthentication struct {
 // Describes the authentication method to be used by a Client VPN endpoint. For
 // more information, see Authentication
 // (https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/authentication-authrization.html#client-authentication)
-// in the AWS Client VPN Administrator Guide.
+// in the Client VPN Administrator Guide.
 type ClientVpnAuthenticationRequest struct {
 
 	// Information about the Active Directory to be used, if applicable. You must
@@ -1280,11 +1280,11 @@ type ClientVpnEndpoint struct {
 	// The ARN of the server certificate.
 	ServerCertificateArn *string
 
-	// Indicates whether split-tunnel is enabled in the AWS Client VPN endpoint. For
-	// information about split-tunnel VPN endpoints, see Split-Tunnel AWS Client VPN
-	// Endpoint
+	// Indicates whether split-tunnel is enabled in the Client VPN endpoint. For
+	// information about split-tunnel VPN endpoints, see Split-Tunnel Client VPN
+	// endpoint
 	// (https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html)
-	// in the AWS Client VPN Administrator Guide.
+	// in the Client VPN Administrator Guide.
 	SplitTunnel *bool
 
 	// The current state of the Client VPN endpoint.
@@ -4364,7 +4364,7 @@ type Instance struct {
 	// The time the instance was launched.
 	LaunchTime *time.Time
 
-	// The license configurations.
+	// The license configurations for the instance.
 	Licenses []LicenseConfiguration
 
 	// The metadata options for the instance.
@@ -4384,6 +4384,12 @@ type Instance struct {
 
 	// The value is Windows for Windows instances; otherwise blank.
 	Platform PlatformValues
+
+	// The platform details value for the instance. For more information, see AMI
+	// billing information fields
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info-fields.html)
+	// in the Amazon EC2 User Guide.
+	PlatformDetails *string
 
 	// (IPv4 only) The private DNS hostname name assigned to the instance. This DNS
 	// hostname can only be used inside the Amazon EC2 network. This name is not
@@ -4447,6 +4453,15 @@ type Instance struct {
 
 	// Any tags assigned to the instance.
 	Tags []Tag
+
+	// The usage operation value for the instance. For more information, see AMI
+	// billing information fields
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info-fields.html)
+	// in the Amazon EC2 User Guide.
+	UsageOperation *string
+
+	// The time that the usage operation was last updated.
+	UsageOperationUpdateTime *time.Time
 
 	// The virtualization type of the instance.
 	VirtualizationType VirtualizationType
@@ -6933,7 +6948,7 @@ type ModifyTransitGatewayVpcAttachmentRequestOptions struct {
 	noSmithyDocumentSerde
 }
 
-// The AWS Site-to-Site VPN tunnel options to modify.
+// The Amazon Web Services Site-to-Site VPN tunnel options to modify.
 type ModifyVpnTunnelOptionsSpecification struct {
 
 	// The action to take after DPD timeout occurs. Specify restart to restart the IKE
@@ -6998,9 +7013,10 @@ type ModifyVpnTunnelOptionsSpecification struct {
 	RekeyFuzzPercentage *int32
 
 	// The margin time, in seconds, before the phase 2 lifetime expires, during which
-	// the AWS side of the VPN connection performs an IKE rekey. The exact time of the
-	// rekey is randomly selected based on the value for RekeyFuzzPercentage.
-	// Constraints: A value between 60 and half of Phase2LifetimeSeconds. Default: 540
+	// the Amazon Web Services side of the VPN connection performs an IKE rekey. The
+	// exact time of the rekey is randomly selected based on the value for
+	// RekeyFuzzPercentage. Constraints: A value between 60 and half of
+	// Phase2LifetimeSeconds. Default: 540
 	RekeyMarginTimeSeconds *int32
 
 	// The number of packets in an IKE replay window. Constraints: A value between 64
@@ -7009,8 +7025,8 @@ type ModifyVpnTunnelOptionsSpecification struct {
 
 	// The action to take when the establishing the tunnel for the VPN connection. By
 	// default, your customer gateway device must initiate the IKE negotiation and
-	// bring up the tunnel. Specify start for AWS to initiate the IKE negotiation.
-	// Valid Values: add | start Default: add
+	// bring up the tunnel. Specify start for Amazon Web Services to initiate the IKE
+	// negotiation. Valid Values: add | start Default: add
 	StartupAction *string
 
 	// The range of inside IPv4 addresses for the tunnel. Any specified CIDR blocks
@@ -12415,7 +12431,7 @@ type TunnelOption struct {
 	RekeyFuzzPercentage *int32
 
 	// The margin time, in seconds, before the phase 2 lifetime expires, during which
-	// the AWS side of the VPN connection performs an IKE rekey.
+	// the Amazon Web Services side of the VPN connection performs an IKE rekey.
 	RekeyMarginTimeSeconds *int32
 
 	// The number of packets in an IKE replay window.
@@ -13176,8 +13192,9 @@ type VpcPeeringConnectionVpcInfo struct {
 // Describes a VPN connection.
 type VpnConnection struct {
 
-	// The category of the VPN connection. A value of VPN indicates an AWS VPN
-	// connection. A value of VPN-Classic indicates an AWS Classic VPN connection.
+	// The category of the VPN connection. A value of VPN indicates an Amazon Web
+	// Services VPN connection. A value of VPN-Classic indicates an Amazon Web Services
+	// Classic VPN connection.
 	Category *string
 
 	// The configuration information for the VPN connection's customer gateway (in the
@@ -13213,8 +13230,31 @@ type VpnConnection struct {
 	// The ID of the VPN connection.
 	VpnConnectionId *string
 
-	// The ID of the virtual private gateway at the AWS side of the VPN connection.
+	// The ID of the virtual private gateway at the Amazon Web Services side of the VPN
+	// connection.
 	VpnGatewayId *string
+
+	noSmithyDocumentSerde
+}
+
+// List of customer gateway devices that have a sample configuration file available
+// for use. You can also see the list of device types with sample configuration
+// files available under Your customer gateway device
+// (https://docs.aws.amazon.com/vpn/latest/s2svpn/your-cgw.html) in the Amazon Web
+// Services Site-to-Site VPN User Guide.
+type VpnConnectionDeviceType struct {
+
+	// Customer gateway device platform.
+	Platform *string
+
+	// Customer gateway device software version.
+	Software *string
+
+	// Customer gateway device vendor.
+	Vendor *string
+
+	// Customer gateway device identifier.
+	VpnConnectionDeviceTypeId *string
 
 	noSmithyDocumentSerde
 }
@@ -13231,10 +13271,10 @@ type VpnConnectionOptions struct {
 	// The IPv6 CIDR on the customer gateway (on-premises) side of the VPN connection.
 	LocalIpv6NetworkCidr *string
 
-	// The IPv4 CIDR on the AWS side of the VPN connection.
+	// The IPv4 CIDR on the Amazon Web Services side of the VPN connection.
 	RemoteIpv4NetworkCidr *string
 
-	// The IPv6 CIDR on the AWS side of the VPN connection.
+	// The IPv6 CIDR on the Amazon Web Services side of the VPN connection.
 	RemoteIpv6NetworkCidr *string
 
 	// Indicates whether the VPN connection uses static routes only. Static routes must
@@ -13264,10 +13304,12 @@ type VpnConnectionOptionsSpecification struct {
 	// Default: ::/0
 	LocalIpv6NetworkCidr *string
 
-	// The IPv4 CIDR on the AWS side of the VPN connection. Default: 0.0.0.0/0
+	// The IPv4 CIDR on the Amazon Web Services side of the VPN connection. Default:
+	// 0.0.0.0/0
 	RemoteIpv4NetworkCidr *string
 
-	// The IPv6 CIDR on the AWS side of the VPN connection. Default: ::/0
+	// The IPv6 CIDR on the Amazon Web Services side of the VPN connection. Default:
+	// ::/0
 	RemoteIpv6NetworkCidr *string
 
 	// Indicate whether the VPN connection uses static routes only. If you are creating
@@ -13392,9 +13434,10 @@ type VpnTunnelOptionsSpecification struct {
 	RekeyFuzzPercentage *int32
 
 	// The margin time, in seconds, before the phase 2 lifetime expires, during which
-	// the AWS side of the VPN connection performs an IKE rekey. The exact time of the
-	// rekey is randomly selected based on the value for RekeyFuzzPercentage.
-	// Constraints: A value between 60 and half of Phase2LifetimeSeconds. Default: 540
+	// the Amazon Web Services side of the VPN connection performs an IKE rekey. The
+	// exact time of the rekey is randomly selected based on the value for
+	// RekeyFuzzPercentage. Constraints: A value between 60 and half of
+	// Phase2LifetimeSeconds. Default: 540
 	RekeyMarginTimeSeconds *int32
 
 	// The number of packets in an IKE replay window. Constraints: A value between 64
@@ -13403,8 +13446,8 @@ type VpnTunnelOptionsSpecification struct {
 
 	// The action to take when the establishing the tunnel for the VPN connection. By
 	// default, your customer gateway device must initiate the IKE negotiation and
-	// bring up the tunnel. Specify start for AWS to initiate the IKE negotiation.
-	// Valid Values: add | start Default: add
+	// bring up the tunnel. Specify start for Amazon Web Services to initiate the IKE
+	// negotiation. Valid Values: add | start Default: add
 	StartupAction *string
 
 	// The range of inside IPv4 addresses for the tunnel. Any specified CIDR blocks

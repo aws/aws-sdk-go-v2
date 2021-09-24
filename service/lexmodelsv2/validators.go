@@ -450,6 +450,26 @@ func (m *validateOpDeleteSlotType) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteUtterances struct {
+}
+
+func (*validateOpDeleteUtterances) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteUtterances) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteUtterancesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteUtterancesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeBotAlias struct {
 }
 
@@ -645,6 +665,26 @@ func (m *validateOpDescribeSlotType) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeSlotTypeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAggregatedUtterances struct {
+}
+
+func (*validateOpListAggregatedUtterances) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAggregatedUtterances) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAggregatedUtterancesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAggregatedUtterancesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1198,6 +1238,10 @@ func addOpDeleteSlotTypeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteSlotType{}, middleware.After)
 }
 
+func addOpDeleteUtterancesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteUtterances{}, middleware.After)
+}
+
 func addOpDescribeBotAliasValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeBotAlias{}, middleware.After)
 }
@@ -1236,6 +1280,10 @@ func addOpDescribeSlotValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeSlotTypeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeSlotType{}, middleware.After)
+}
+
+func addOpListAggregatedUtterancesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAggregatedUtterances{}, middleware.After)
 }
 
 func addOpListBotAliasesValidationMiddleware(stack *middleware.Stack) error {
@@ -1328,6 +1376,62 @@ func addOpUpdateSlotValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateSlotTypeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateSlotType{}, middleware.After)
+}
+
+func validateAggregatedUtterancesFilter(v *types.AggregatedUtterancesFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AggregatedUtterancesFilter"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAggregatedUtterancesFilters(v []types.AggregatedUtterancesFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AggregatedUtterancesFilters"}
+	for i := range v {
+		if err := validateAggregatedUtterancesFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAggregatedUtterancesSortBy(v *types.AggregatedUtterancesSortBy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AggregatedUtterancesSortBy"}
+	if len(v.Attribute) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Attribute"))
+	}
+	if len(v.Order) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Order"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateAudioLogDestination(v *types.AudioLogDestination) error {
@@ -2376,6 +2480,21 @@ func validatePromptSpecification(v *types.PromptSpecification) error {
 	}
 }
 
+func validateRelativeAggregationDuration(v *types.RelativeAggregationDuration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RelativeAggregationDuration"}
+	if len(v.TimeDimension) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TimeDimension"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateResponseSpecification(v *types.ResponseSpecification) error {
 	if v == nil {
 		return nil
@@ -2882,6 +3001,25 @@ func validateTextLogSettingsList(v []types.TextLogSetting) error {
 	for i := range v {
 		if err := validateTextLogSetting(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUtteranceAggregationDuration(v *types.UtteranceAggregationDuration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UtteranceAggregationDuration"}
+	if v.RelativeAggregationDuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RelativeAggregationDuration"))
+	} else if v.RelativeAggregationDuration != nil {
+		if err := validateRelativeAggregationDuration(v.RelativeAggregationDuration); err != nil {
+			invalidParams.AddNested("RelativeAggregationDuration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3489,6 +3627,21 @@ func validateOpDeleteSlotTypeInput(v *DeleteSlotTypeInput) error {
 	}
 }
 
+func validateOpDeleteUtterancesInput(v *DeleteUtterancesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteUtterancesInput"}
+	if v.BotId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeBotAliasInput(v *DescribeBotAliasInput) error {
 	if v == nil {
 		return nil
@@ -3673,6 +3826,41 @@ func validateOpDescribeSlotTypeInput(v *DescribeSlotTypeInput) error {
 	}
 	if v.LocaleId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LocaleId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAggregatedUtterancesInput(v *ListAggregatedUtterancesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAggregatedUtterancesInput"}
+	if v.BotId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotId"))
+	}
+	if v.LocaleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocaleId"))
+	}
+	if v.AggregationDuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AggregationDuration"))
+	} else if v.AggregationDuration != nil {
+		if err := validateUtteranceAggregationDuration(v.AggregationDuration); err != nil {
+			invalidParams.AddNested("AggregationDuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SortBy != nil {
+		if err := validateAggregatedUtterancesSortBy(v.SortBy); err != nil {
+			invalidParams.AddNested("SortBy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Filters != nil {
+		if err := validateAggregatedUtterancesFilters(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

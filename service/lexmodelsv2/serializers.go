@@ -2063,6 +2063,72 @@ func awsRestjson1_serializeOpHttpBindingsDeleteSlotTypeInput(v *DeleteSlotTypeIn
 	return nil
 }
 
+type awsRestjson1_serializeOpDeleteUtterances struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteUtterances) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteUtterances) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteUtterancesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/bots/{botId}/utterances")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteUtterancesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteUtterancesInput(v *DeleteUtterancesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.BotId == nil || len(*v.BotId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member botId must not be empty")}
+	}
+	if v.BotId != nil {
+		if err := encoder.SetURI("botId").String(*v.BotId); err != nil {
+			return err
+		}
+	}
+
+	if v.LocaleId != nil {
+		encoder.SetQuery("localeId").String(*v.LocaleId)
+	}
+
+	if v.SessionId != nil {
+		encoder.SetQuery("sessionId").String(*v.SessionId)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDescribeBot struct {
 }
 
@@ -2762,6 +2828,128 @@ func awsRestjson1_serializeOpHttpBindingsDescribeSlotTypeInput(v *DescribeSlotTy
 	}
 	if v.SlotTypeId != nil {
 		if err := encoder.SetURI("slotTypeId").String(*v.SlotTypeId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListAggregatedUtterances struct {
+}
+
+func (*awsRestjson1_serializeOpListAggregatedUtterances) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListAggregatedUtterances) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListAggregatedUtterancesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/bots/{botId}/aggregatedutterances")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListAggregatedUtterancesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentListAggregatedUtterancesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListAggregatedUtterancesInput(v *ListAggregatedUtterancesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.BotId == nil || len(*v.BotId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member botId must not be empty")}
+	}
+	if v.BotId != nil {
+		if err := encoder.SetURI("botId").String(*v.BotId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentListAggregatedUtterancesInput(v *ListAggregatedUtterancesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AggregationDuration != nil {
+		ok := object.Key("aggregationDuration")
+		if err := awsRestjson1_serializeDocumentUtteranceAggregationDuration(v.AggregationDuration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.BotAliasId != nil {
+		ok := object.Key("botAliasId")
+		ok.String(*v.BotAliasId)
+	}
+
+	if v.BotVersion != nil {
+		ok := object.Key("botVersion")
+		ok.String(*v.BotVersion)
+	}
+
+	if v.Filters != nil {
+		ok := object.Key("filters")
+		if err := awsRestjson1_serializeDocumentAggregatedUtterancesFilters(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LocaleId != nil {
+		ok := object.Key("localeId")
+		ok.String(*v.LocaleId)
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.SortBy != nil {
+		ok := object.Key("sortBy")
+		if err := awsRestjson1_serializeDocumentAggregatedUtterancesSortBy(v.SortBy, ok); err != nil {
 			return err
 		}
 	}
@@ -5152,6 +5340,60 @@ func awsRestjson1_serializeOpDocumentUpdateSlotTypeInput(v *UpdateSlotTypeInput,
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAggregatedUtterancesFilter(v *types.AggregatedUtterancesFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Name) > 0 {
+		ok := object.Key("name")
+		ok.String(string(v.Name))
+	}
+
+	if len(v.Operator) > 0 {
+		ok := object.Key("operator")
+		ok.String(string(v.Operator))
+	}
+
+	if v.Values != nil {
+		ok := object.Key("values")
+		if err := awsRestjson1_serializeDocumentFilterValues(v.Values, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAggregatedUtterancesFilters(v []types.AggregatedUtterancesFilter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAggregatedUtterancesFilter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAggregatedUtterancesSortBy(v *types.AggregatedUtterancesSortBy, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Attribute) > 0 {
+		ok := object.Key("attribute")
+		ok.String(string(v.Attribute))
+	}
+
+	if len(v.Order) > 0 {
+		ok := object.Key("order")
+		ok.String(string(v.Order))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAudioLogDestination(v *types.AudioLogDestination, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6273,6 +6515,23 @@ func awsRestjson1_serializeDocumentPromptSpecification(v *types.PromptSpecificat
 	return nil
 }
 
+func awsRestjson1_serializeDocumentRelativeAggregationDuration(v *types.RelativeAggregationDuration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.TimeDimension) > 0 {
+		ok := object.Key("timeDimension")
+		ok.String(string(v.TimeDimension))
+	}
+
+	{
+		ok := object.Key("timeValue")
+		ok.Integer(v.TimeValue)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentResponseSpecification(v *types.ResponseSpecification, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6753,6 +7012,20 @@ func awsRestjson1_serializeDocumentTextLogSettingsList(v []types.TextLogSetting,
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUtteranceAggregationDuration(v *types.UtteranceAggregationDuration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RelativeAggregationDuration != nil {
+		ok := object.Key("relativeAggregationDuration")
+		if err := awsRestjson1_serializeDocumentRelativeAggregationDuration(v.RelativeAggregationDuration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

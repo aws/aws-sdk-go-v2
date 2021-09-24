@@ -50,12 +50,26 @@ type CreateInfrastructureConfigurationInput struct {
 	// The description of the infrastructure configuration.
 	Description *string
 
-	// The instance types of the infrastructure configuration. You can specify one or
-	// more instance types to use for this build. The service will pick one of these
-	// instance types based on availability.
+	// The instance metadata options that you can set for the HTTP requests that
+	// pipeline builds use to launch EC2 build and test instances.
+	InstanceMetadataOptions *types.InstanceMetadataOptions
+
+	// The instance metadata options that you can set for the HTTP requests that
+	// pipeline builds use to launch EC2 build and test instances. For more information
+	// about instance metadata options, see one of the following links:
+	//
+	// * Configure
+	// the instance metadata options
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html)
+	// in the Amazon EC2 User Guide for Linux instances.
+	//
+	// * Configure the instance
+	// metadata options
+	// (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/configuring-instance-metadata-options.html)
+	// in the Amazon EC2 Windows Guide for Windows instances.
 	InstanceTypes []string
 
-	// The key pair of the infrastructure configuration. This can be used to log on to
+	// The key pair of the infrastructure configuration. You can use this to log on to
 	// and debug the instance used to create your image.
 	KeyPair *string
 

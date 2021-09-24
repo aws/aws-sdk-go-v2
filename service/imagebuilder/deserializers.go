@@ -9846,6 +9846,11 @@ func awsRestjson1_deserializeDocumentComponent(v **types.Component, value interf
 				sv.Platform = types.Platform(jtv)
 			}
 
+		case "state":
+			if err := awsRestjson1_deserializeDocumentComponentState(&sv.State, value); err != nil {
+				return err
+			}
+
 		case "supportedOsVersions":
 			if err := awsRestjson1_deserializeDocumentOsVersionList(&sv.SupportedOsVersions, value); err != nil {
 				return err
@@ -10174,6 +10179,55 @@ func awsRestjson1_deserializeDocumentComponentParameterValueList(v *[]string, va
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentComponentState(v **types.ComponentState, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ComponentState
+	if *v == nil {
+		sv = &types.ComponentState{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "reason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Reason = ptr.String(jtv)
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ComponentStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.ComponentStatus(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentComponentSummary(v **types.ComponentSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10257,6 +10311,11 @@ func awsRestjson1_deserializeDocumentComponentSummary(v **types.ComponentSummary
 					return fmt.Errorf("expected Platform to be of type string, got %T instead", value)
 				}
 				sv.Platform = types.Platform(jtv)
+			}
+
+		case "state":
+			if err := awsRestjson1_deserializeDocumentComponentState(&sv.State, value); err != nil {
+				return err
 			}
 
 		case "supportedOsVersions":
@@ -11284,6 +11343,19 @@ func awsRestjson1_deserializeDocumentEbsInstanceBlockDeviceSpecification(v **typ
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
 				sv.SnapshotId = ptr.String(jtv)
+			}
+
+		case "throughput":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected EbsVolumeThroughput to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Throughput = ptr.Int32(int32(i64))
 			}
 
 		case "volumeSize":
@@ -12561,6 +12633,11 @@ func awsRestjson1_deserializeDocumentInfrastructureConfiguration(v **types.Infra
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "instanceMetadataOptions":
+			if err := awsRestjson1_deserializeDocumentInstanceMetadataOptions(&sv.InstanceMetadataOptions, value); err != nil {
+				return err
+			}
+
 		case "instanceProfileName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12914,6 +12991,59 @@ func awsRestjson1_deserializeDocumentInstanceConfiguration(v **types.InstanceCon
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
 				sv.Image = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentInstanceMetadataOptions(v **types.InstanceMetadataOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InstanceMetadataOptions
+	if *v == nil {
+		sv = &types.InstanceMetadataOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "httpPutResponseHopLimit":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected HttpPutResponseHopLimit to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.HttpPutResponseHopLimit = ptr.Int32(int32(i64))
+			}
+
+		case "httpTokens":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HttpTokens to be of type string, got %T instead", value)
+				}
+				sv.HttpTokens = ptr.String(jtv)
 			}
 
 		default:

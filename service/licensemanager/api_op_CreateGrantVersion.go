@@ -52,6 +52,7 @@ type CreateGrantVersionInput struct {
 	// Grant status.
 	Status types.GrantStatus
 
+	// Grant status reason.
 	StatusReason *string
 
 	noSmithyDocumentSerde

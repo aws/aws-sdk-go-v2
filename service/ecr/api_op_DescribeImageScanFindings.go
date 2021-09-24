@@ -34,7 +34,7 @@ func (c *Client) DescribeImageScanFindings(ctx context.Context, params *Describe
 
 type DescribeImageScanFindingsInput struct {
 
-	// An object with identifying information for an Amazon ECR image.
+	// An object with identifying information for an image in an Amazon ECR repository.
 	//
 	// This member is required.
 	ImageId *types.ImageIdentifier
@@ -71,7 +71,7 @@ type DescribeImageScanFindingsInput struct {
 
 type DescribeImageScanFindingsOutput struct {
 
-	// An object with identifying information for an Amazon ECR image.
+	// An object with identifying information for an image in an Amazon ECR repository.
 	ImageId *types.ImageIdentifier
 
 	// The information contained in the image scan findings.

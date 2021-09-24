@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new virtual MFA device for the account. After creating the virtual
-// MFA, use EnableMFADevice to attach the MFA device to an IAM user. For more
-// information about creating and working with virtual MFA devices, see Using a
-// virtual MFA device
+// Creates a new virtual MFA device for the Amazon Web Services account. After
+// creating the virtual MFA, use EnableMFADevice to attach the MFA device to an IAM
+// user. For more information about creating and working with virtual MFA devices,
+// see Using a virtual MFA device
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_VirtualMFA.html) in the
 // IAM User Guide. For information about the maximum number of MFA devices you can
 // create, see IAM and STS quotas

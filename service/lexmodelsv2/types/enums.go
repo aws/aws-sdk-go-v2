@@ -2,6 +2,61 @@
 
 package types
 
+type AggregatedUtterancesFilterName string
+
+// Enum values for AggregatedUtterancesFilterName
+const (
+	AggregatedUtterancesFilterNameUtterance AggregatedUtterancesFilterName = "Utterance"
+)
+
+// Values returns all known values for AggregatedUtterancesFilterName. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AggregatedUtterancesFilterName) Values() []AggregatedUtterancesFilterName {
+	return []AggregatedUtterancesFilterName{
+		"Utterance",
+	}
+}
+
+type AggregatedUtterancesFilterOperator string
+
+// Enum values for AggregatedUtterancesFilterOperator
+const (
+	AggregatedUtterancesFilterOperatorContains AggregatedUtterancesFilterOperator = "CO"
+	AggregatedUtterancesFilterOperatorEquals   AggregatedUtterancesFilterOperator = "EQ"
+)
+
+// Values returns all known values for AggregatedUtterancesFilterOperator. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AggregatedUtterancesFilterOperator) Values() []AggregatedUtterancesFilterOperator {
+	return []AggregatedUtterancesFilterOperator{
+		"CO",
+		"EQ",
+	}
+}
+
+type AggregatedUtterancesSortAttribute string
+
+// Enum values for AggregatedUtterancesSortAttribute
+const (
+	AggregatedUtterancesSortAttributeHitCount    AggregatedUtterancesSortAttribute = "HitCount"
+	AggregatedUtterancesSortAttributeMissedCount AggregatedUtterancesSortAttribute = "MissedCount"
+)
+
+// Values returns all known values for AggregatedUtterancesSortAttribute. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AggregatedUtterancesSortAttribute) Values() []AggregatedUtterancesSortAttribute {
+	return []AggregatedUtterancesSortAttribute{
+		"HitCount",
+		"MissedCount",
+	}
+}
+
 type BotAliasStatus string
 
 // Enum values for BotAliasStatus
@@ -651,5 +706,25 @@ func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"Ascending",
 		"Descending",
+	}
+}
+
+type TimeDimension string
+
+// Enum values for TimeDimension
+const (
+	TimeDimensionHours TimeDimension = "Hours"
+	TimeDimensionDays  TimeDimension = "Days"
+	TimeDimensionWeeks TimeDimension = "Weeks"
+)
+
+// Values returns all known values for TimeDimension. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TimeDimension) Values() []TimeDimension {
+	return []TimeDimension{
+		"Hours",
+		"Days",
+		"Weeks",
 	}
 }

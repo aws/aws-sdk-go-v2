@@ -15,6 +15,7 @@
         "api_op_DeleteRegistryPolicy.go",
         "api_op_DeleteRepository.go",
         "api_op_DeleteRepositoryPolicy.go",
+        "api_op_DescribeImageReplicationStatus.go",
         "api_op_DescribeImageScanFindings.go",
         "api_op_DescribeImages.go",
         "api_op_DescribeRegistry.go",

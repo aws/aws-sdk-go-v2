@@ -31,10 +31,13 @@ type SendCommandInput struct {
 
 	// The name of the Amazon Web Services Systems Manager document (SSM document) to
 	// run. This can be a public document or a custom document. To run a shared
-	// document belonging to another account, specify the document ARN. For more
-	// information about how to use shared documents, see Using shared SSM documents
+	// document belonging to another account, specify the document Amazon Resource Name
+	// (ARN). For more information about how to use shared documents, see Using shared
+	// SSM documents
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-using-shared.html)
-	// in the Amazon Web Services Systems Manager User Guide.
+	// in the Amazon Web Services Systems Manager User Guide. If you specify a document
+	// name or ARN that hasn't been shared with your account, you receive an
+	// InvalidDocument error.
 	//
 	// This member is required.
 	DocumentName *string

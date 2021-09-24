@@ -24,11 +24,10 @@ import (
 // * Change the Dedicated Host with which an
 // instance is associated.
 //
-// * Change the instance tenancy of an instance from host
-// to dedicated, or from dedicated to host.
+// * Change the instance tenancy of an instance.
 //
-// * Move an instance to or from a
-// placement group
+// * Move
+// an instance to or from a placement group
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html).
 //
 // At

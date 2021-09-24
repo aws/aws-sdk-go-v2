@@ -1765,6 +1765,35 @@ func validateRedactedFields(v []types.FieldToMatch) error {
 	}
 }
 
+func validateRegexMatchStatement(v *types.RegexMatchStatement) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegexMatchStatement"}
+	if v.RegexString == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegexString"))
+	}
+	if v.FieldToMatch == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FieldToMatch"))
+	} else if v.FieldToMatch != nil {
+		if err := validateFieldToMatch(v.FieldToMatch); err != nil {
+			invalidParams.AddNested("FieldToMatch", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TextTransformations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TextTransformations"))
+	} else if v.TextTransformations != nil {
+		if err := validateTextTransformations(v.TextTransformations); err != nil {
+			invalidParams.AddNested("TextTransformations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRegexPatternSetReferenceStatement(v *types.RegexPatternSetReferenceStatement) error {
 	if v == nil {
 		return nil
@@ -2060,6 +2089,11 @@ func validateStatement(v *types.Statement) error {
 	if v.LabelMatchStatement != nil {
 		if err := validateLabelMatchStatement(v.LabelMatchStatement); err != nil {
 			invalidParams.AddNested("LabelMatchStatement", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RegexMatchStatement != nil {
+		if err := validateRegexMatchStatement(v.RegexMatchStatement); err != nil {
+			invalidParams.AddNested("RegexMatchStatement", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -1018,6 +1018,25 @@ func (MaintenanceWindowResourceType) Values() []MaintenanceWindowResourceType {
 	}
 }
 
+type MaintenanceWindowTaskCutoffBehavior string
+
+// Enum values for MaintenanceWindowTaskCutoffBehavior
+const (
+	MaintenanceWindowTaskCutoffBehaviorContinueTask MaintenanceWindowTaskCutoffBehavior = "CONTINUE_TASK"
+	MaintenanceWindowTaskCutoffBehaviorCancelTask   MaintenanceWindowTaskCutoffBehavior = "CANCEL_TASK"
+)
+
+// Values returns all known values for MaintenanceWindowTaskCutoffBehavior. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (MaintenanceWindowTaskCutoffBehavior) Values() []MaintenanceWindowTaskCutoffBehavior {
+	return []MaintenanceWindowTaskCutoffBehavior{
+		"CONTINUE_TASK",
+		"CANCEL_TASK",
+	}
+}
+
 type MaintenanceWindowTaskType string
 
 // Enum values for MaintenanceWindowTaskType

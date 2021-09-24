@@ -45,7 +45,7 @@ type UpdateGraphqlApiInput struct {
 	// The new authentication type for the GraphqlApi object.
 	AuthenticationType types.AuthenticationType
 
-	// Configuration for AWS Lambda function authorization.
+	// Configuration for Amazon Web Services Lambda function authorization.
 	LambdaAuthorizerConfig *types.LambdaAuthorizerConfig
 
 	// The Amazon CloudWatch Logs configuration for the GraphqlApi object.
