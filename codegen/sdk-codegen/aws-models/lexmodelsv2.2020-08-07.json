@@ -29,6 +29,160 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.lexmodelsv2#AggregatedUtterancesFilter": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lexmodelsv2#AggregatedUtterancesFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the field to filter the utterance list.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.lexmodelsv2#FilterValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value to use for filtering the list of bots.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "operator": {
+                    "target": "com.amazonaws.lexmodelsv2#AggregatedUtterancesFilterOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operator to use for the filter. Specify <code>EQ</code> when the\n            <code>ListAggregatedUtterances</code> operation should return only\n         utterances that equal the specified value. Specify <code>CO</code> when\n         the <code>ListAggregatedUtterances</code> operation should return\n         utterances that contain the specified value.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filters responses returned by the\n            <code>ListAggregatedUtterances</code> operation.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AggregatedUtterancesFilterName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Utterance",
+                        "name": "Utterance"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AggregatedUtterancesFilterOperator": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CO",
+                        "name": "Contains"
+                    },
+                    {
+                        "value": "EQ",
+                        "name": "Equals"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AggregatedUtterancesFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#AggregatedUtterancesFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AggregatedUtterancesSortAttribute": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "HitCount",
+                        "name": "HitCount"
+                    },
+                    {
+                        "value": "MissedCount",
+                        "name": "MissedCount"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AggregatedUtterancesSortBy": {
+            "type": "structure",
+            "members": {
+                "attribute": {
+                    "target": "com.amazonaws.lexmodelsv2#AggregatedUtterancesSortAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The utterance attribute to sort by.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "order": {
+                    "target": "com.amazonaws.lexmodelsv2#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to sort the aggregated utterances in ascending or\n         descending order.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies attributes for sorting a list of utterances.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AggregatedUtterancesSummary": {
+            "type": "structure",
+            "members": {
+                "utterance": {
+                    "target": "com.amazonaws.lexmodelsv2#Utterance",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text of the utterance. If the utterance was used with the\n            <code>RecognizeUtterance</code> operation, the text is the\n         transcription of the audio utterance.</p>"
+                    }
+                },
+                "hitCount": {
+                    "target": "com.amazonaws.lexmodelsv2#HitCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of times that the utterance was detected by Amazon Lex during\n         the time period. When an utterance is detected, it activates an intent\n         or a slot.</p>"
+                    }
+                },
+                "missedCount": {
+                    "target": "com.amazonaws.lexmodelsv2#MissedCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of times that the utterance was missed by Amazon Lex An\n         utterance is missed when it doesn't activate an intent or slot.</p>"
+                    }
+                },
+                "utteranceFirstRecordedInAggregationDuration": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the utterance was first recorded in the time\n         window for aggregation. An utterance may have been sent to Amazon Lex before\n         that time, but only utterances within the time window are\n         counted.</p>"
+                    }
+                },
+                "utteranceLastRecordedInAggregationDuration": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last date and time that an utterance was recorded in the time\n         window for aggregation. An utterance may be sent to Amazon Lex after that\n         time, but only utterances within the time window are counted.</p>"
+                    }
+                },
+                "containsDataFromDeletedResources": {
+                    "target": "com.amazonaws.lexmodelsv2#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Aggregated utterance data may contain utterances from versions of\n         your bot that have since been deleted. When the aggregated contains\n         this kind of data, this field is set to true.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides summary information for aggregated utterances. The\n            <code>ListAggregatedUtterances</code> operations combines all\n         instances of the same utterance into a single aggregated\n         summary.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AggregatedUtterancesSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#AggregatedUtterancesSummary"
+            }
+        },
         "com.amazonaws.lexmodelsv2#AmazonResourceName": {
             "type": "string",
             "traits": {
@@ -1348,7 +1502,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The action that you tried to perform couldn't be completed because\n         the resource is in a conflicting state. For example, deleting a bot\n         that is in the CREATING state. Try your request again. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -3759,6 +3913,65 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#DeleteUtterances": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#DeleteUtterancesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#DeleteUtterancesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes stored utterances.</p>\n         <p>Amazon Lex stores the utterances that users send to your bot. Utterances\n         are stored for 15 days for use with the  operation, and then stored\n         indefinitely for use in improving the ability of your bot to respond to\n         user input..</p>\n         <p>Use the <code>DeleteUtterances</code> operation to manually delete\n         utterances for a specific session. When you use the\n            <code>DeleteUtterances</code> operation, utterances stored for\n         improving your bot's ability to respond to user input are deleted\n         immediately. Utterances stored for use with the\n            <code>ListAggregatedUtterances</code> operation are deleted after 15\n         days.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/bots/{botId}/utterances",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DeleteUtterancesRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot that contains the\n         utterances.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the language and locale where the utterances were\n         collected. The string must match one of the supported locales. For more\n         information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported\n         languages</a>.</p>",
+                        "smithy.api#httpQuery": "localeId"
+                    }
+                },
+                "sessionId": {
+                    "target": "com.amazonaws.lexmodelsv2#SessionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the session with the user. The ID is\n         returned in the response from the  and  operations.</p>",
+                        "smithy.api#httpQuery": "sessionId"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DeleteUtterancesResponse": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.lexmodelsv2#DescribeBot": {
             "type": "operation",
             "input": {
@@ -5681,6 +5894,12 @@
                 "smithy.api#documentation": "<p>Determines if a Lambda function should be invoked for a specific\n         intent.</p>"
             }
         },
+        "com.amazonaws.lexmodelsv2#HitCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
         "com.amazonaws.lexmodelsv2#Id": {
             "type": "string",
             "traits": {
@@ -6201,7 +6420,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The service encountered an unexpected condition. Try your request\n         again.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
             }
@@ -6359,6 +6578,9 @@
                     "target": "com.amazonaws.lexmodelsv2#DeleteSlotType"
                 },
                 {
+                    "target": "com.amazonaws.lexmodelsv2#DeleteUtterances"
+                },
+                {
                     "target": "com.amazonaws.lexmodelsv2#DescribeBot"
                 },
                 {
@@ -6387,6 +6609,9 @@
                 },
                 {
                     "target": "com.amazonaws.lexmodelsv2#DescribeSlotType"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ListAggregatedUtterances"
                 },
                 {
                     "target": "com.amazonaws.lexmodelsv2#ListBotAliases"
@@ -6472,6 +6697,170 @@
                 "aws.protocols#restJson1": {},
                 "smithy.api#documentation": "<p></p>",
                 "smithy.api#title": "Amazon Lex Model Building V2"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListAggregatedUtterances": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#ListAggregatedUtterancesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#ListAggregatedUtterancesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#PreconditionFailedException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a list of utterances that users have sent to the\n         bot.</p>\n         <p>Utterances are aggregated by the text of the utterance. For example,\n         all instances where customers used the phrase \"I want to order pizza\"\n         are aggregated into the same line in the response.</p>\n         <p>You can see both detected utterances and missed utterances. A\n         detected utterance is where the bot properly recognized the utterance\n         and activated the associated intent. A missed utterance was not\n         recognized by the bot and didn't activate an intent.</p>\n         <p>Utterances can be aggregated for a bot alias or for a bot version,\n         but not both at the same time.</p>\n         <p>Utterances statistics are not generated under the following\n         conditions:</p>\n         <ul>\n            <li>\n               <p>The <code>childDirected</code> field was set to true when the\n               bot was created.</p>\n            </li>\n            <li>\n               <p>You are using slot obfuscation with one or more slots.</p>\n            </li>\n            <li>\n               <p>You opted out of participating in improving Amazon Lex.</p>\n            </li>\n         </ul>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/bots/{botId}/aggregatedutterances",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListAggregatedUtterancesRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot associated with this\n         request.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "botAliasId": {
+                    "target": "com.amazonaws.lexmodelsv2#BotAliasId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the bot alias associated with this request. If you\n         specify the bot alias, you can't specify the bot version.</p>"
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#BotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the bot version associated with this request. If\n         you specify the bot version, you can't specify the bot alias.</p>"
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the language and locale where the utterances were\n         collected. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported\n         languages</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "aggregationDuration": {
+                    "target": "com.amazonaws.lexmodelsv2#UtteranceAggregationDuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time window for aggregating the utterance information. You can\n         specify a time between one hour and two weeks.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sortBy": {
+                    "target": "com.amazonaws.lexmodelsv2#AggregatedUtterancesSortBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies sorting parameters for the list of utterances. You can\n         sort by the hit count, the missed count, or the number of distinct\n         sessions the utterance appeared in.</p>"
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.lexmodelsv2#AggregatedUtterancesFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the specification of a filter used to limit the utterances\n         in the response to only those that match the filter specification. You\n         can only specify one filter and one string to filter on.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.lexmodelsv2#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of utterances to return in each page of results.\n         If there are fewer results than the maximum page size, only the actual\n         number of results are returned. If you don't specify the\n            <code>maxResults</code> parameter, 1,000 results are\n         returned.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.lexmodelsv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response from the <code>ListAggregatedUtterances</code>\n         operation contains more results that specified in the\n            <code>maxResults</code> parameter, a token is returned in the\n         response. Use that token in the <code>nextToken</code> parameter to\n         return the next page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListAggregatedUtterancesResponse": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the bot that contains the utterances.</p>"
+                    }
+                },
+                "botAliasId": {
+                    "target": "com.amazonaws.lexmodelsv2#BotAliasId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the bot alias that contains the utterances. If you\n         specified the bot version, the bot alias ID isn't returned.</p>"
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#BotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the bot version that contains the utterances. If\n         you specified the bot alias, the bot version isn't returned.</p>"
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the language and locale that the utterances are\n         in.</p>"
+                    }
+                },
+                "aggregationDuration": {
+                    "target": "com.amazonaws.lexmodelsv2#UtteranceAggregationDuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time period used to aggregate the utterance data.</p>"
+                    }
+                },
+                "aggregationWindowStartTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the aggregation window begins. Only data\n         collected after this time is returned in the results.</p>"
+                    }
+                },
+                "aggregationWindowEndTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the aggregation window ends. Only data\n         collected between the start time and the end time are returned in the\n         results. </p>"
+                    }
+                },
+                "aggregationLastRefreshedDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last date and time that the aggregated data was collected. The\n         time period depends on the length of the aggregation window.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Hours</b> - for 1 hour time\n               window, every half hour; otherwise every hour.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Days</b> - every 6 hours</p>\n            </li>\n            <li>\n               <p>\n                  <b>Weeks</b> - for a one week time\n               window, every 12 hours; otherwise, every day</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "aggregatedUtterancesSummaries": {
+                    "target": "com.amazonaws.lexmodelsv2#AggregatedUtterancesSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Summaries of the aggregated utterance data. Each response contains\n         information about the number of times that the utterance was seen\n         during the time period, whether it was detected or missed, and when it\n         was seen during the time period.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.lexmodelsv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that indicates whether there are more results to return in a\n         response to the <code>ListAggregatedUtterances</code> operation. If the\n            <code>nextToken</code> field is present, you send the contents as\n         the <code>nextToken</code> parameter of a\n            <code>ListAggregatedUtterances</code> operation request to get the\n         next page of results.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#ListBotAliases": {
@@ -7784,6 +8173,12 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#MissedCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
         "com.amazonaws.lexmodelsv2#MultipleValuesSetting": {
             "type": "structure",
             "members": {
@@ -7948,7 +8343,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>Your request couldn't be completed because one or more request\n         fields aren't valid. Check the fields in your request and try\n         again.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 412
             }
@@ -8060,8 +8455,30 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 100
+                    "max": 300
                 }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#RelativeAggregationDuration": {
+            "type": "structure",
+            "members": {
+                "timeDimension": {
+                    "target": "com.amazonaws.lexmodelsv2#TimeDimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of time period that the <code>timeValue</code> field\n         represents. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "timeValue": {
+                    "target": "com.amazonaws.lexmodelsv2#TimeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The period of the time window to gather statistics for. The valid\n         value depends on the setting of the <code>timeDimension</code>\n         field.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Hours</code> - 1/3/6/12/24</p>\n            </li>\n            <li>\n               <p>\n                  <code>Days</code> - 3</p>\n            </li>\n            <li>\n               <p>\n                  <code>Weeks</code> - 1/2</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the time window that utterance statistics are returned\n         for. The time window is always relative to the last time that the that\n         utterances were aggregated. For example, if the\n            <code>ListAggregatedUtterances</code> operation is called at 1600,\n         the time window is set to 1 hour, and the last refresh time was 1530,\n         only utterances made between 1430 and 1530 are returned.</p>\n         <p>You can choose the time window that statistics should be returned\n         for.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Hours</b> - You can request\n               utterance statistics for 1, 3, 6, 12, or 24 hour time windows.\n               Statistics are refreshed every half hour for 1 hour time windows,\n               and hourly for the other time windows.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Days</b> - You can request\n               utterance statistics for 3 days. Statistics are refreshed every 6\n               hours.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Weeks</b> - You can see\n               statistics for one or two weeks. Statistics are refreshed every\n               12 hours for one week time windows, and once per day for two week\n               time windows.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.lexmodelsv2#ResourceCount": {
@@ -8078,7 +8495,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>You asked to describe a resource that doesn't exist. Check the\n         resource that you are requesting and try again.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -8258,9 +8675,19 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>You have reached a quota for your bot. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.lexmodelsv2#SessionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z._:-]+$"
             }
         },
         "com.amazonaws.lexmodelsv2#SessionTTL": {
@@ -9148,9 +9575,37 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>Your request rate is too high. Reduce the frequency of\n         requests.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.lexmodelsv2#TimeDimension": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Hours",
+                        "name": "Hours"
+                    },
+                    {
+                        "value": "Days",
+                        "name": "Days"
+                    },
+                    {
+                        "value": "Weeks",
+                        "name": "Weeks"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lexmodelsv2#TimeValue": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 24
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#Timestamp": {
@@ -10493,6 +10948,21 @@
         "com.amazonaws.lexmodelsv2#Utterance": {
             "type": "string"
         },
+        "com.amazonaws.lexmodelsv2#UtteranceAggregationDuration": {
+            "type": "structure",
+            "members": {
+                "relativeAggregationDuration": {
+                    "target": "com.amazonaws.lexmodelsv2#RelativeAggregationDuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The desired time window for aggregating utterances. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides parameters for setting the time window and duration for\n         aggregating utterance data.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#ValidationException": {
             "type": "structure",
             "members": {
@@ -10501,7 +10971,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>One of the input parameters in your request isn't valid. Check the\n         parameters and try your request again.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }

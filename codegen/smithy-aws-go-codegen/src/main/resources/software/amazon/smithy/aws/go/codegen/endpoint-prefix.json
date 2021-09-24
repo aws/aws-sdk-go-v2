@@ -140,6 +140,7 @@
   "Ivs": "ivs",
   "KMS": "kms",
   "Kafka": "kafka",
+  "KafkaConnect": "kafkaconnect",
   "Kendra": "kendra",
   "Kinesis": "kinesis",
   "Kinesis Analytics": "kinesisanalytics",

@@ -2310,7 +2310,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.wafv2#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the web ACL from which you want to delete the <a>LoggingConfiguration</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the web ACL from which you want to delete the \n       <a>LoggingConfiguration</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3186,7 +3186,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.wafv2#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the web ACL for which you want to get the <a>LoggingConfiguration</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the web ACL for which you want to get the \n       <a>LoggingConfiguration</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5890,6 +5890,35 @@
                 "smithy.api#documentation": "<p>A single regular expression. This is used in a <a>RegexPatternSet</a>.</p>"
             }
         },
+        "com.amazonaws.wafv2#RegexMatchStatement": {
+            "type": "structure",
+            "members": {
+                "RegexString": {
+                    "target": "com.amazonaws.wafv2#RegexPatternString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The string representing the regular expression.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FieldToMatch": {
+                    "target": "com.amazonaws.wafv2#FieldToMatch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The part of a web request that you want WAF to inspect. For more information, see <a>FieldToMatch</a>. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TextTransformations": {
+                    "target": "com.amazonaws.wafv2#TextTransformations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. \n         If you specify one or more transformations in a rule statement, WAF performs all transformations on the \n         content of the request component identified by <code>FieldToMatch</code>, starting from the lowest priority setting, before inspecting the content for a match.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A rule statement used to search web request components for a match against a single regular expression. </p>"
+            }
+        },
         "com.amazonaws.wafv2#RegexPatternSet": {
             "type": "structure",
             "members": {
@@ -6627,6 +6656,12 @@
                     "target": "com.amazonaws.wafv2#LabelMatchStatement",
                     "traits": {
                         "smithy.api#documentation": "<p>A rule statement that defines a string match search against labels that have been added to the web request by rules that have already run in the web ACL. </p>\n         <p>The label match statement provides the label or namespace string to search for. The label string can represent a part or all of the fully qualified label name that had been added to the web request. Fully qualified labels have a prefix, optional namespaces, and label name. The prefix identifies the rule group or web ACL context of the rule that added the label.  If you do not provide the fully qualified name in your label match string, WAF performs the search for labels that were added in the same context as the label match statement. </p>"
+                    }
+                },
+                "RegexMatchStatement": {
+                    "target": "com.amazonaws.wafv2#RegexMatchStatement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A rule statement used to search web request components for a match against a single regular expression. </p>"
                     }
                 }
             },
@@ -7693,7 +7728,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The operation failed because WAF didn't recognize a parameter in the request. For\n         example: </p>\n         <ul>\n            <li>\n               <p>You specified\n               a\n               parameter name or value that isn't valid.</p>\n            </li>\n            <li>\n               <p>Your nested statement isn't valid. You might have tried to nest a statement that\n               can’t be nested. </p>\n            </li>\n            <li>\n               <p>You tried to update a <code>WebACL</code> with a <code>DefaultAction</code> that\n               isn't among the types available at <a>DefaultAction</a>.</p>\n            </li>\n            <li>\n               <p>Your request references an ARN that is malformed, or corresponds to a resource with which a web ACL can't be associated.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>The operation failed because WAF didn't recognize a parameter in the request. For\n         example: </p>\n         <ul>\n            <li>\n               <p>You specified a parameter name or value that isn't valid.</p>\n            </li>\n            <li>\n               <p>Your nested statement isn't valid. You might have tried to nest a statement that\n               can’t be nested. </p>\n            </li>\n            <li>\n               <p>You tried to update a <code>WebACL</code> with a <code>DefaultAction</code> that\n               isn't among the types available at <a>DefaultAction</a>.</p>\n            </li>\n            <li>\n               <p>Your request references an ARN that is malformed, or corresponds to a resource with which a web ACL can't be associated.</p>\n            </li>\n         </ul>",
                 "smithy.api#error": "client"
             }
         },

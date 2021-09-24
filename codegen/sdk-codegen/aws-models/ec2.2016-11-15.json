@@ -2219,6 +2219,12 @@
                     "target": "com.amazonaws.ec2#GetTransitGatewayRouteTablePropagations"
                 },
                 {
+                    "target": "com.amazonaws.ec2#GetVpnConnectionDeviceSampleConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.ec2#GetVpnConnectionDeviceTypes"
+                },
+                {
                     "target": "com.amazonaws.ec2#ImportClientVpnClientCertificateRevocationList"
                 },
                 {
@@ -3378,7 +3384,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>",
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to ensure idempotency</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -4444,7 +4450,7 @@
                 "target": "com.amazonaws.ec2#AttachVpnGatewayResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Attaches a virtual private gateway to a VPC. You can attach one virtual private\n            gateway to one VPC at a time.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Attaches a virtual private gateway to a VPC. You can attach one virtual private\n            gateway to one VPC at a time.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">Amazon Web Services Site-to-Site VPN</a> in the <i>Amazon Web Services Site-to-Site VPN\n                User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#AttachVpnGatewayRequest": {
@@ -4468,7 +4474,7 @@
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
                         "aws.protocols#ec2QueryName": "DryRun",
-                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n            and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n            Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually\n            making the request, and provides an error response. If you have the required\n            permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is\n                <code>UnauthorizedOperation</code>.</p>",
                         "smithy.api#xmlName": "dryRun"
                     }
                 }
@@ -4622,7 +4628,7 @@
                 "target": "com.amazonaws.ec2#AuthorizeClientVpnIngressResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Adds an ingress authorization rule to a Client VPN endpoint. Ingress authorization rules act as \n\t\t\tfirewall rules that grant access to networks. You must configure ingress authorization rules to \n\t\t\tenable clients to access resources in AWS or on-premises networks.</p>"
+                "smithy.api#documentation": "<p>Adds an ingress authorization rule to a Client VPN endpoint. Ingress authorization rules act as \n\t\t\tfirewall rules that grant access to networks. You must configure ingress authorization rules to \n\t\t\tenable clients to access resources in Amazon Web Services or on-premises networks.</p>"
             }
         },
         "com.amazonaws.ec2#AuthorizeClientVpnIngressRequest": {
@@ -4663,7 +4669,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>",
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to ensure idempotency</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -6816,7 +6822,7 @@
                 "ClientRootCertificateChainArn": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the client certificate. The certificate must be signed by a certificate \n\t\t\tauthority (CA) and it must be provisioned in AWS Certificate Manager (ACM).</p>"
+                        "smithy.api#documentation": "<p>The ARN of the client certificate. The certificate must be signed by a certificate \n\t\t\tauthority (CA) and it must be provisioned in Certificate Manager (ACM).</p>"
                     }
                 }
             },
@@ -7051,7 +7057,7 @@
                 "LambdaFunctionArn": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Lambda function used for connection authorization.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Lambda function used for connection authorization.</p>"
                     }
                 }
             },
@@ -7074,7 +7080,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "LambdaFunctionArn",
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Lambda function used for connection authorization.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Lambda function used for connection authorization.</p>",
                         "smithy.api#xmlName": "lambdaFunctionArn"
                     }
                 },
@@ -7163,7 +7169,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the authentication methods used by a Client VPN endpoint. For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/client-authentication.html\">Authentication</a> \n\t\t\tin the <i>AWS Client VPN Administrator Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Describes the authentication methods used by a Client VPN endpoint. For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/client-authentication.html\">Authentication</a> \n\t\t\tin the <i>Client VPN Administrator Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#ClientVpnAuthenticationList": {
@@ -7204,7 +7210,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the authentication method to be used by a Client VPN endpoint. For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/authentication-authrization.html#client-authentication\">Authentication</a> \n\t\t\tin the <i>AWS Client VPN Administrator Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Describes the authentication method to be used by a Client VPN endpoint. For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/authentication-authrization.html#client-authentication\">Authentication</a> \n\t\t\tin the <i>Client VPN Administrator Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#ClientVpnAuthenticationRequestList": {
@@ -7526,7 +7532,7 @@
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
                         "aws.protocols#ec2QueryName": "SplitTunnel",
-                        "smithy.api#documentation": "<p>Indicates whether split-tunnel is enabled in the AWS Client VPN endpoint.</p>\n\t\t       <p>For information about split-tunnel VPN endpoints, see <a href=\"https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html\">Split-Tunnel AWS Client VPN Endpoint</a> in the <i>AWS\n\t\t\t\tClient VPN Administrator Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>Indicates whether split-tunnel is enabled in the Client VPN endpoint.</p>\n\t\t       <p>For information about split-tunnel VPN endpoints, see <a href=\"https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html\">Split-Tunnel Client VPN endpoint</a> \n\t\t\tin the <i>Client VPN Administrator Guide</i>.</p>",
                         "smithy.api#xmlName": "splitTunnel"
                     }
                 },
@@ -8889,7 +8895,7 @@
                 "ServerCertificateArn": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the server certificate. For more information, see \n\t\t\tthe <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/\">AWS Certificate Manager User Guide</a>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the server certificate. For more information, see \n\t\t\tthe <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/\">Certificate Manager User Guide</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8935,7 +8941,7 @@
                 "SplitTunnel": {
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether split-tunnel is enabled on the AWS Client VPN endpoint.</p>\n\t\t       <p>By default, split-tunnel on a VPN endpoint is disabled.</p>\n\t\t       <p>For information about split-tunnel VPN endpoints, see <a href=\"https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html\">Split-Tunnel AWS Client VPN Endpoint</a> in the <i>AWS\n\t\t\t\tClient VPN Administrator Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether split-tunnel is enabled on the Client VPN endpoint.</p>\n\t\t       <p>By default, split-tunnel on a VPN endpoint is disabled.</p>\n\t\t       <p>For information about split-tunnel VPN endpoints, see <a href=\"https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html\">Split-tunnel Client VPN endpoint</a> in the \n\t\t\t<i>Client VPN Administrator Guide</i>.</p>"
                     }
                 },
                 "DryRun": {
@@ -8947,7 +8953,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>",
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to ensure idempotency</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -9039,7 +9045,7 @@
                 "DestinationCidrBlock": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IPv4 address range, in CIDR notation, of the route destination. For example:</p>\n\t\t       <ul>\n            <li>\n               <p>To add a route for Internet access, enter <code>0.0.0.0/0</code>\n               </p>\n            </li>\n            <li>\n               <p>To add a route for a peered VPC, enter the peered VPC's IPv4 CIDR range</p>\n            </li>\n            <li>\n               <p>To add a route for an on-premises network, enter the AWS Site-to-Site VPN connection's IPv4 CIDR range</p>\n            </li>\n            <li>\n               <p>To add a route for the local network, enter the client CIDR range</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The IPv4 address range, in CIDR notation, of the route destination. For example:</p>\n\t\t       <ul>\n            <li>\n               <p>To add a route for Internet access, enter <code>0.0.0.0/0</code>\n               </p>\n            </li>\n            <li>\n               <p>To add a route for a peered VPC, enter the peered VPC's IPv4 CIDR range</p>\n            </li>\n            <li>\n               <p>To add a route for an on-premises network, enter the Amazon Web Services Site-to-Site VPN connection's IPv4 CIDR range</p>\n            </li>\n            <li>\n               <p>To add a route for the local network, enter the client CIDR range</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9059,7 +9065,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>",
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to ensure idempotency</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -9093,7 +9099,7 @@
                 "target": "com.amazonaws.ec2#CreateCustomerGatewayResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides information to AWS about your VPN customer gateway device. The customer\n            gateway is the appliance at your end of the VPN connection. (The device on the AWS side\n            of the VPN connection is the virtual private gateway.) You must provide the\n            internet-routable IP address of the customer gateway's external interface. The IP\n            address must be static and can be behind a device performing network address translation\n            (NAT).</p>\n        <p>For devices that use Border Gateway Protocol (BGP), you can also provide the device's\n            BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your\n            network. If you don't have an ASN already, you can use a private ASN (in the 64512 -\n            65534 range).</p>\n        <note>\n            <p>Amazon EC2 supports all 4-byte ASN numbers in the range of 1 - 2147483647, with the\n                exception of the following:</p> \n                <ul>\n               <li>\n                  <p>7224 - reserved in the <code>us-east-1</code> Region</p>\n               </li>\n               <li>\n                  <p>9059 - reserved in the <code>eu-west-1</code> Region</p>\n               </li>\n               <li>\n                  <p>17943 - reserved in the <code>ap-southeast-1</code> Region</p>\n               </li>\n               <li>\n                  <p>10124 - reserved in the <code>ap-northeast-1</code> Region</p>\n               </li>\n            </ul>\n        </note>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN\n                User Guide</i>.</p>\n        <important>\n            <p>To create more than one customer gateway with the same VPN type, IP address, and\n                BGP ASN, specify a unique device name for each customer gateway. Identical requests\n                return information about the existing customer gateway and do not create new\n                customer gateways.</p>\n        </important>"
+                "smithy.api#documentation": "<p>Provides information to Amazon Web Services about your VPN customer gateway device. The\n            customer gateway is the appliance at your end of the VPN connection. (The device on the\n                Amazon Web Services side of the VPN connection is the virtual private gateway.) You\n            must provide the internet-routable IP address of the customer gateway's external\n            interface. The IP address must be static and can be behind a device performing network\n            address translation (NAT).</p>\n        <p>For devices that use Border Gateway Protocol (BGP), you can also provide the device's\n            BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your\n            network. If you don't have an ASN already, you can use a private ASN (in the 64512 -\n            65534 range).</p>\n        <note>\n            <p>Amazon EC2 supports all 4-byte ASN numbers in the range of 1 - 2147483647, with\n                the exception of the following:</p>\n            <ul>\n               <li>\n                    <p>7224 - reserved in the <code>us-east-1</code> Region</p>\n                </li>\n               <li>\n                    <p>9059 - reserved in the <code>eu-west-1</code> Region</p>\n                </li>\n               <li>\n                    <p>17943 - reserved in the <code>ap-southeast-1</code> Region</p>\n                </li>\n               <li>\n                    <p>10124 - reserved in the <code>ap-northeast-1</code> Region</p>\n                </li>\n            </ul>\n        </note>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">Amazon Web Services Site-to-Site VPN</a> in the <i>Amazon Web Services Site-to-Site VPN\n                User Guide</i>.</p>\n        <important>\n            <p>To create more than one customer gateway with the same VPN type, IP address, and\n                BGP ASN, specify a unique device name for each customer gateway. Identical requests\n                return information about the existing customer gateway and do not create new\n                customer gateways.</p>\n        </important>"
             }
         },
         "com.amazonaws.ec2#CreateCustomerGatewayRequest": {
@@ -9109,7 +9115,7 @@
                 "PublicIp": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Internet-routable IP address for the customer gateway's outside interface. The address must be static.</p>",
+                        "smithy.api#documentation": "<p>The Internet-routable IP address for the customer gateway's outside interface. The\n            address must be static.</p>",
                         "smithy.api#xmlName": "IpAddress"
                     }
                 },
@@ -9122,7 +9128,7 @@
                 "Type": {
                     "target": "com.amazonaws.ec2#GatewayType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of VPN connection that this customer gateway supports (<code>ipsec.1</code>).</p>",
+                        "smithy.api#documentation": "<p>The type of VPN connection that this customer gateway supports\n            (<code>ipsec.1</code>).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9143,7 +9149,7 @@
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
                         "aws.protocols#ec2QueryName": "DryRun",
-                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n            and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n            Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually\n            making the request, and provides an error response. If you have the required\n            permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is\n                <code>UnauthorizedOperation</code>.</p>",
                         "smithy.api#xmlName": "dryRun"
                     }
                 }
@@ -13565,7 +13571,7 @@
                 "target": "com.amazonaws.ec2#CreateVpnConnectionResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a VPN connection between an existing virtual private gateway or transit gateway and a\n            customer gateway. The supported connection type is <code>ipsec.1</code>.</p>\n        <p>The response includes information that you need to give to your network administrator\n            to configure your customer gateway.</p>\n        <important>\n            <p>We strongly recommend that you use HTTPS when calling this operation because the\n                response contains sensitive cryptographic information for configuring your customer\n                gateway device.</p>\n        </important>\n        <p>If you decide to shut down your VPN connection for any reason and later create a new\n            VPN connection, you must reconfigure your customer gateway with the new information\n            returned from this call.</p>\n        <p>This is an idempotent operation. If you perform the operation more than once, Amazon\n            EC2 doesn't return an error.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN\n                User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates a VPN connection between an existing virtual private gateway or transit\n            gateway and a customer gateway. The supported connection type is\n            <code>ipsec.1</code>.</p>\n        <p>The response includes information that you need to give to your network administrator\n            to configure your customer gateway.</p>\n        <important>\n            <p>We strongly recommend that you use HTTPS when calling this operation because the\n                response contains sensitive cryptographic information for configuring your customer\n                gateway device.</p>\n        </important>\n        <p>If you decide to shut down your VPN connection for any reason and later create a new\n            VPN connection, you must reconfigure your customer gateway with the new information\n            returned from this call.</p>\n        <p>This is an idempotent operation. If you perform the operation more than once, Amazon\n            EC2 doesn't return an error.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">Amazon Web Services Site-to-Site VPN</a> in the <i>Amazon Web Services Site-to-Site VPN\n                User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#CreateVpnConnectionRequest": {
@@ -13588,20 +13594,20 @@
                 "VpnGatewayId": {
                     "target": "com.amazonaws.ec2#VpnGatewayId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the virtual private gateway. If you specify a virtual private gateway, you cannot specify a transit gateway.</p>"
+                        "smithy.api#documentation": "<p>The ID of the virtual private gateway. If you specify a virtual private gateway, you\n            cannot specify a transit gateway.</p>"
                     }
                 },
                 "TransitGatewayId": {
                     "target": "com.amazonaws.ec2#TransitGatewayId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the transit gateway. If you specify a transit gateway, you cannot specify a virtual private gateway.</p>"
+                        "smithy.api#documentation": "<p>The ID of the transit gateway. If you specify a transit gateway, you cannot specify a virtual private\n            gateway.</p>"
                     }
                 },
                 "DryRun": {
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
                         "aws.protocols#ec2QueryName": "DryRun",
-                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n            and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n            Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually\n            making the request, and provides an error response. If you have the required\n            permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is\n                <code>UnauthorizedOperation</code>.</p>",
                         "smithy.api#xmlName": "dryRun"
                     }
                 },
@@ -13647,7 +13653,7 @@
                 "target": "com.amazonaws.ec2#CreateVpnConnectionRouteRequest"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a static route associated with a VPN connection between an existing virtual private gateway and a VPN customer gateway. The static route allows traffic to be routed from the virtual private gateway to the VPN customer gateway.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates a static route associated with a VPN connection between an existing virtual\n            private gateway and a VPN customer gateway. The static route allows traffic to be routed\n            from the virtual private gateway to the VPN customer gateway.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">Amazon Web Services Site-to-Site VPN</a> in the <i>Amazon Web Services Site-to-Site VPN\n                User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#CreateVpnConnectionRouteRequest": {
@@ -13681,7 +13687,7 @@
                 "target": "com.amazonaws.ec2#CreateVpnGatewayResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a virtual private gateway. A virtual private gateway is the endpoint on the VPC side of your VPN connection. You can create a virtual private gateway before creating the VPC itself.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates a virtual private gateway. A virtual private gateway is the endpoint on the\n            VPC side of your VPN connection. You can create a virtual private gateway before\n            creating the VPC itself.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">Amazon Web Services Site-to-Site VPN</a> in the <i>Amazon Web Services Site-to-Site VPN\n                User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#CreateVpnGatewayRequest": {
@@ -13710,14 +13716,14 @@
                 "AmazonSideAsn": {
                     "target": "com.amazonaws.ec2#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>A private Autonomous System Number (ASN) for the Amazon side of a BGP session. If you're using a 16-bit ASN, it must be in the 64512 to 65534 range. If you're using a 32-bit ASN, it must be in the 4200000000 to 4294967294 range.</p>\n\t\t       <p>Default: 64512</p>"
+                        "smithy.api#documentation": "<p>A private Autonomous System Number (ASN) for the Amazon side of a BGP session. If\n            you're using a 16-bit ASN, it must be in the 64512 to 65534 range. If you're using a\n            32-bit ASN, it must be in the 4200000000 to 4294967294 range.</p>\n        <p>Default: 64512</p>"
                     }
                 },
                 "DryRun": {
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
                         "aws.protocols#ec2QueryName": "DryRun",
-                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n            and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n            Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually\n            making the request, and provides an error response. If you have the required\n            permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is\n                <code>UnauthorizedOperation</code>.</p>",
                         "smithy.api#xmlName": "dryRun"
                     }
                 }
@@ -13797,7 +13803,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "BgpAsn",
-                        "smithy.api#documentation": "<p>The customer gateway's Border Gateway Protocol (BGP) Autonomous System Number (ASN).</p>",
+                        "smithy.api#documentation": "<p>The customer gateway's Border Gateway Protocol (BGP) Autonomous System Number\n            (ASN).</p>",
                         "smithy.api#xmlName": "bgpAsn"
                     }
                 },
@@ -13829,7 +13835,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "State",
-                        "smithy.api#documentation": "<p>The current state of the customer gateway (<code>pending | available | deleting |\n            deleted</code>).</p>",
+                        "smithy.api#documentation": "<p>The current state of the customer gateway (<code>pending | available | deleting |\n                deleted</code>).</p>",
                         "smithy.api#xmlName": "state"
                     }
                 },
@@ -13837,7 +13843,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "Type",
-                        "smithy.api#documentation": "<p>The type of VPN connection the customer gateway supports (<code>ipsec.1</code>).</p>",
+                        "smithy.api#documentation": "<p>The type of VPN connection the customer gateway supports\n            (<code>ipsec.1</code>).</p>",
                         "smithy.api#xmlName": "type"
                     }
                 },
@@ -14141,7 +14147,7 @@
                 "target": "com.amazonaws.ec2#DeleteCustomerGatewayRequest"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified customer gateway. You must delete the VPN connection before you can delete the customer gateway.</p>"
+                "smithy.api#documentation": "<p>Deletes the specified customer gateway. You must delete the VPN connection before you\n            can delete the customer gateway.</p>"
             }
         },
         "com.amazonaws.ec2#DeleteCustomerGatewayRequest": {
@@ -14158,7 +14164,7 @@
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
                         "aws.protocols#ec2QueryName": "DryRun",
-                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n            and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n            Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually\n            making the request, and provides an error response. If you have the required\n            permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is\n                <code>UnauthorizedOperation</code>.</p>",
                         "smithy.api#xmlName": "dryRun"
                     }
                 }
@@ -16504,7 +16510,7 @@
                 "target": "com.amazonaws.ec2#DeleteVpnConnectionRequest"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified VPN connection.</p>\n        <p>If you're deleting the VPC and its associated components, we recommend that you detach the virtual private gateway from the VPC and delete the VPC before deleting the VPN connection. If you believe that the tunnel credentials for your VPN connection have been compromised, you can delete the VPN connection and create a new one that has new keys, without needing to delete the VPC or virtual private gateway. If you create a new VPN connection, you must reconfigure the customer gateway device using the new configuration information returned with the new VPN connection ID.</p>\n        <p>For certificate-based authentication, delete all AWS Certificate Manager (ACM) private certificates used for the AWS-side tunnel endpoints for the VPN connection before deleting the VPN connection.</p>"
+                "smithy.api#documentation": "<p>Deletes the specified VPN connection.</p>\n        <p>If you're deleting the VPC and its associated components, we recommend that you detach\n            the virtual private gateway from the VPC and delete the VPC before deleting the VPN\n            connection. If you believe that the tunnel credentials for your VPN connection have been\n            compromised, you can delete the VPN connection and create a new one that has new keys,\n            without needing to delete the VPC or virtual private gateway. If you create a new VPN\n            connection, you must reconfigure the customer gateway device using the new configuration\n            information returned with the new VPN connection ID.</p>\n        <p>For certificate-based authentication, delete all Certificate Manager (ACM) private\n            certificates used for the Amazon Web Services-side tunnel endpoints for the VPN\n            connection before deleting the VPN connection.</p>"
             }
         },
         "com.amazonaws.ec2#DeleteVpnConnectionRequest": {
@@ -16521,7 +16527,7 @@
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
                         "aws.protocols#ec2QueryName": "DryRun",
-                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n            and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n            Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually\n            making the request, and provides an error response. If you have the required\n            permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is\n                <code>UnauthorizedOperation</code>.</p>",
                         "smithy.api#xmlName": "dryRun"
                     }
                 }
@@ -16536,7 +16542,7 @@
                 "target": "com.amazonaws.ec2#DeleteVpnConnectionRouteRequest"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified static route associated with a VPN connection between an existing virtual private gateway and a VPN customer gateway. The static route allows traffic to be routed from the virtual private gateway to the VPN customer gateway.</p>"
+                "smithy.api#documentation": "<p>Deletes the specified static route associated with a VPN connection between an\n            existing virtual private gateway and a VPN customer gateway. The static route allows\n            traffic to be routed from the virtual private gateway to the VPN customer\n            gateway.</p>"
             }
         },
         "com.amazonaws.ec2#DeleteVpnConnectionRouteRequest": {
@@ -16567,7 +16573,7 @@
                 "target": "com.amazonaws.ec2#DeleteVpnGatewayRequest"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified virtual private gateway. You must first detach the virtual private gateway from the VPC. Note that you don't need to delete the virtual private gateway if you plan to delete and recreate the VPN connection between your VPC and your network.</p>"
+                "smithy.api#documentation": "<p>Deletes the specified virtual private gateway. You must first detach the virtual\n            private gateway from the VPC. Note that you don't need to delete the virtual private\n            gateway if you plan to delete and recreate the VPN connection between your VPC and your\n            network.</p>"
             }
         },
         "com.amazonaws.ec2#DeleteVpnGatewayRequest": {
@@ -16584,7 +16590,7 @@
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
                         "aws.protocols#ec2QueryName": "DryRun",
-                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n            and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n            Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually\n            making the request, and provides an error response. If you have the required\n            permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is\n                <code>UnauthorizedOperation</code>.</p>",
                         "smithy.api#xmlName": "dryRun"
                     }
                 }
@@ -18169,7 +18175,7 @@
                 "target": "com.amazonaws.ec2#DescribeCustomerGatewaysResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes one or more of your VPN customer gateways.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Describes one or more of your VPN customer gateways.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">Amazon Web Services Site-to-Site VPN</a> in the <i>Amazon Web Services Site-to-Site VPN\n                User Guide</i>.</p>",
                 "smithy.waiters#waitable": {
                     "CustomerGatewayAvailable": {
                         "acceptors": [
@@ -18222,7 +18228,7 @@
                 "Filters": {
                     "target": "com.amazonaws.ec2#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more filters.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>bgp-asn</code> - The customer gateway's Border Gateway Protocol (BGP) Autonomous System Number (ASN).</p>\n            </li>\n            <li>\n                <p>\n                  <code>customer-gateway-id</code> - The ID of the customer gateway.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ip-address</code> - The IP address of the customer gateway's Internet-routable external interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>state</code> - The state of the customer gateway (<code>pending</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code>).</p>\n            </li>\n            <li>\n                <p>\n                  <code>type</code> - The type of customer gateway. Currently, the only supported type is <code>ipsec.1</code>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n            </li>\n            <li>\n                <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>One or more filters.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>bgp-asn</code> - The customer gateway's Border Gateway Protocol (BGP)\n                    Autonomous System Number (ASN).</p>\n            </li>\n            <li>\n                <p>\n                  <code>customer-gateway-id</code> - The ID of the customer gateway.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ip-address</code> - The IP address of the customer gateway's\n                    Internet-routable external interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>state</code> - The state of the customer gateway (<code>pending</code> |\n                        <code>available</code> | <code>deleting</code> |\n                    <code>deleted</code>).</p>\n            </li>\n            <li>\n                <p>\n                  <code>type</code> - The type of customer gateway. Currently, the only\n                    supported type is <code>ipsec.1</code>.</p>\n            </li>\n            <li> \n               <p>\n                  <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> \n            </li>\n            <li> \n               <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> \n            </li>\n         </ul>",
                         "smithy.api#xmlName": "Filter"
                     }
                 },
@@ -18230,7 +18236,7 @@
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
                         "aws.protocols#ec2QueryName": "DryRun",
-                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n            and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n            Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually\n            making the request, and provides an error response. If you have the required\n            permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is\n                <code>UnauthorizedOperation</code>.</p>",
                         "smithy.api#xmlName": "dryRun"
                     }
                 }
@@ -27354,7 +27360,7 @@
                 "target": "com.amazonaws.ec2#DescribeVpnConnectionsResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes one or more of your VPN connections.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Describes one or more of your VPN connections.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">Amazon Web Services Site-to-Site VPN</a> in the <i>Amazon Web Services Site-to-Site VPN\n                User Guide</i>.</p>",
                 "smithy.waiters#waitable": {
                     "VpnConnectionAvailable": {
                         "acceptors": [
@@ -27425,7 +27431,7 @@
                 "Filters": {
                     "target": "com.amazonaws.ec2#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more filters.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>customer-gateway-configuration</code> - The configuration information for the customer gateway.</p>\n            </li>\n            <li>\n                <p>\n                  <code>customer-gateway-id</code> - The ID of a customer gateway associated with the VPN connection.</p>\n            </li>\n            <li>\n                <p>\n                  <code>state</code> - The state of the VPN connection (<code>pending</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code>).</p>\n            </li>\n            <li>\n                <p>\n                  <code>option.static-routes-only</code> - Indicates whether the connection has static routes only. Used for devices that do not support Border Gateway Protocol (BGP).</p>\n            </li>\n            <li>\n                <p>\n                  <code>route.destination-cidr-block</code> - The destination CIDR block. This corresponds to the subnet used in a customer data center.</p>\n            </li>\n            <li>\n                <p>\n                  <code>bgp-asn</code> - The BGP Autonomous System Number (ASN) associated with a BGP device.</p>\n            </li>\n            <li>\n                <p>\n                  <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n            </li>\n            <li>\n                <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p>\n            </li>\n            <li>\n                <p>\n                  <code>type</code> - The type of VPN connection. Currently the only supported type is <code>ipsec.1</code>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>vpn-connection-id</code> - The ID of the VPN connection.</p>\n            </li>\n            <li>\n                <p>\n                  <code>vpn-gateway-id</code> - The ID of a virtual private gateway associated with the VPN connection.</p>\n            </li>\n            <li>\n                <p>\n                  <code>transit-gateway-id</code> - The ID of a transit gateway associated with the VPN connection.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>One or more filters.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>customer-gateway-configuration</code> - The configuration information\n                    for the customer gateway.</p>\n            </li>\n            <li>\n                <p>\n                  <code>customer-gateway-id</code> - The ID of a customer gateway associated\n                    with the VPN connection.</p>\n            </li>\n            <li>\n                <p>\n                  <code>state</code> - The state of the VPN connection (<code>pending</code> |\n                        <code>available</code> | <code>deleting</code> |\n                    <code>deleted</code>).</p>\n            </li>\n            <li>\n                <p>\n                  <code>option.static-routes-only</code> - Indicates whether the connection has\n                    static routes only. Used for devices that do not support Border Gateway Protocol\n                    (BGP).</p>\n            </li>\n            <li>\n                <p>\n                  <code>route.destination-cidr-block</code> - The destination CIDR block. This\n                    corresponds to the subnet used in a customer data center.</p>\n            </li>\n            <li>\n                <p>\n                  <code>bgp-asn</code> - The BGP Autonomous System Number (ASN) associated with\n                    a BGP device.</p>\n            </li>\n            <li> \n               <p>\n                  <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> \n            </li>\n            <li> \n               <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> \n            </li>\n            <li>\n                <p>\n                  <code>type</code> - The type of VPN connection. Currently the only supported\n                    type is <code>ipsec.1</code>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>vpn-connection-id</code> - The ID of the VPN connection.</p>\n            </li>\n            <li>\n                <p>\n                  <code>vpn-gateway-id</code> - The ID of a virtual private gateway associated\n                    with the VPN connection.</p>\n            </li>\n            <li>\n                <p>\n                  <code>transit-gateway-id</code> - The ID of a transit gateway associated with\n                    the VPN connection.</p>\n            </li>\n         </ul>",
                         "smithy.api#xmlName": "Filter"
                     }
                 },
@@ -27440,7 +27446,7 @@
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
                         "aws.protocols#ec2QueryName": "DryRun",
-                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n            and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n            Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually\n            making the request, and provides an error response. If you have the required\n            permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is\n                <code>UnauthorizedOperation</code>.</p>",
                         "smithy.api#xmlName": "dryRun"
                     }
                 }
@@ -27474,7 +27480,7 @@
                 "target": "com.amazonaws.ec2#DescribeVpnGatewaysResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes one or more of your virtual private gateways.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Describes one or more of your virtual private gateways.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">Amazon Web Services Site-to-Site VPN</a> in the <i>Amazon Web Services Site-to-Site VPN\n                User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#DescribeVpnGatewaysRequest": {
@@ -27483,7 +27489,7 @@
                 "Filters": {
                     "target": "com.amazonaws.ec2#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more filters.</p>\n        <ul>\n            <li>\n\t\t\t\t           <p>\n                  <code>amazon-side-asn</code> - The Autonomous System Number (ASN) for the Amazon side of the gateway.</p>\n\t\t\t         </li>\n            <li>\n                <p>\n                  <code>attachment.state</code> - The current state of the attachment between the gateway and the VPC (<code>attaching</code> | <code>attached</code> | <code>detaching</code> | <code>detached</code>).</p>\n            </li>\n            <li>\n                <p>\n                  <code>attachment.vpc-id</code> - The ID of an attached VPC.</p>\n            </li>\n            <li>\n                <p>\n                  <code>availability-zone</code> - The Availability Zone for the virtual private gateway (if applicable).</p>\n            </li>\n            <li>\n                <p>\n                  <code>state</code> - The state of the virtual private gateway (<code>pending</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code>).</p>\n            </li>\n            <li>\n                <p>\n                  <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n            </li>\n            <li>\n                <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p>\n            </li>\n            <li>\n                <p>\n                  <code>type</code> - The type of virtual private gateway. Currently the only supported type is <code>ipsec.1</code>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>vpn-gateway-id</code> - The ID of the virtual private gateway.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>One or more filters.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>amazon-side-asn</code> - The Autonomous System Number (ASN) for the\n                    Amazon side of the gateway.</p>\n            </li>\n            <li>\n                <p>\n                  <code>attachment.state</code> - The current state of the attachment between\n                    the gateway and the VPC (<code>attaching</code> | <code>attached</code> |\n                        <code>detaching</code> | <code>detached</code>).</p>\n            </li>\n            <li>\n                <p>\n                  <code>attachment.vpc-id</code> - The ID of an attached VPC.</p>\n            </li>\n            <li>\n                <p>\n                  <code>availability-zone</code> - The Availability Zone for the virtual private\n                    gateway (if applicable).</p>\n            </li>\n            <li>\n                <p>\n                  <code>state</code> - The state of the virtual private gateway\n                        (<code>pending</code> | <code>available</code> | <code>deleting</code> |\n                        <code>deleted</code>).</p>\n            </li>\n            <li> \n               <p>\n                  <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> \n            </li>\n            <li> \n               <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> \n            </li>\n            <li>\n                <p>\n                  <code>type</code> - The type of virtual private gateway. Currently the only\n                    supported type is <code>ipsec.1</code>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>vpn-gateway-id</code> - The ID of the virtual private gateway.</p>\n            </li>\n         </ul>",
                         "smithy.api#xmlName": "Filter"
                     }
                 },
@@ -27498,7 +27504,7 @@
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
                         "aws.protocols#ec2QueryName": "DryRun",
-                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n            and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n            Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually\n            making the request, and provides an error response. If you have the required\n            permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is\n                <code>UnauthorizedOperation</code>.</p>",
                         "smithy.api#xmlName": "dryRun"
                     }
                 }
@@ -27717,7 +27723,7 @@
                 "target": "com.amazonaws.ec2#DetachVpnGatewayRequest"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Detaches a virtual private gateway from a VPC. You do this if you're planning to turn off the VPC and not use it anymore. You can confirm a virtual private gateway has been completely detached from a VPC by describing the virtual private gateway (any attachments to the virtual private gateway are also described).</p>\n        <p>You must wait for the attachment's state to switch to <code>detached</code> before\n            you can delete the VPC or attach a different VPC to the virtual private gateway.</p>"
+                "smithy.api#documentation": "<p>Detaches a virtual private gateway from a VPC. You do this if you're planning to turn\n            off the VPC and not use it anymore. You can confirm a virtual private gateway has been\n            completely detached from a VPC by describing the virtual private gateway (any\n            attachments to the virtual private gateway are also described).</p>\n        <p>You must wait for the attachment's state to switch to <code>detached</code> before you\n            can delete the VPC or attach a different VPC to the virtual private gateway.</p>"
             }
         },
         "com.amazonaws.ec2#DetachVpnGatewayRequest": {
@@ -27741,7 +27747,7 @@
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
                         "aws.protocols#ec2QueryName": "DryRun",
-                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n            and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n            Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually\n            making the request, and provides an error response. If you have the required\n            permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is\n                <code>UnauthorizedOperation</code>.</p>",
                         "smithy.api#xmlName": "dryRun"
                     }
                 }
@@ -28324,7 +28330,7 @@
                 "target": "com.amazonaws.ec2#DisableVgwRoutePropagationRequest"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Disables a virtual private gateway (VGW) from propagating routes to a specified route table of a VPC.</p>"
+                "smithy.api#documentation": "<p>Disables a virtual private gateway (VGW) from propagating routes to a specified route\n            table of a VPC.</p>"
             }
         },
         "com.amazonaws.ec2#DisableVgwRoutePropagationRequest": {
@@ -28347,7 +28353,7 @@
                 "DryRun": {
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n\t\t\tand provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n\t\t\tOtherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually\n            making the request, and provides an error response. If you have the required\n            permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is\n                <code>UnauthorizedOperation</code>.</p>"
                     }
                 }
             },
@@ -30427,7 +30433,7 @@
                 "target": "com.amazonaws.ec2#EnableVgwRoutePropagationRequest"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Enables a virtual private gateway (VGW) to propagate routes to the specified route table of a VPC.</p>"
+                "smithy.api#documentation": "<p>Enables a virtual private gateway (VGW) to propagate routes to the specified route\n            table of a VPC.</p>"
             }
         },
         "com.amazonaws.ec2#EnableVgwRoutePropagationRequest": {
@@ -30436,21 +30442,21 @@
                 "GatewayId": {
                     "target": "com.amazonaws.ec2#VpnGatewayId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the virtual private gateway that is attached to a VPC. The virtual private gateway must be attached to the same VPC that the routing tables are associated with. </p>",
+                        "smithy.api#documentation": "<p>The ID of the virtual private gateway that is attached to a VPC. The virtual private\n            gateway must be attached to the same VPC that the routing tables are associated with.\n        </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "RouteTableId": {
                     "target": "com.amazonaws.ec2#RouteTableId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the route table. The routing table must be associated with the same VPC that the virtual private gateway is attached to. </p>",
+                        "smithy.api#documentation": "<p>The ID of the route table. The routing table must be associated with the same VPC that\n            the virtual private gateway is attached to. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DryRun": {
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n\t\t\tand provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n\t\t\tOtherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually\n            making the request, and provides an error response. If you have the required\n            permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is\n                <code>UnauthorizedOperation</code>.</p>"
                     }
                 }
             },
@@ -33144,6 +33150,16 @@
                 "smithy.api#box": {}
             }
         },
+        "com.amazonaws.ec2#GVCDMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 200,
+                    "max": 1000
+                }
+            }
+        },
         "com.amazonaws.ec2#GatewayType": {
             "type": "string",
             "traits": {
@@ -34796,6 +34812,124 @@
                 }
             }
         },
+        "com.amazonaws.ec2#GetVpnConnectionDeviceSampleConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#GetVpnConnectionDeviceSampleConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#GetVpnConnectionDeviceSampleConfigurationResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Download an AWS-provided sample configuration file to be used with the customer\n            gateway device specified for your Site-to-Site VPN connection.</p>"
+            }
+        },
+        "com.amazonaws.ec2#GetVpnConnectionDeviceSampleConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "VpnConnectionId": {
+                    "target": "com.amazonaws.ec2#VpnConnectionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>VpnConnectionId</code> specifies the Site-to-Site VPN connection used for the sample\n            configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VpnConnectionDeviceTypeId": {
+                    "target": "com.amazonaws.ec2#VpnConnectionDeviceTypeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Device identifier provided by the <code>GetVpnConnectionDeviceTypes</code> API.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InternetKeyExchangeVersion": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IKE version to be used in the sample configuration file for your customer gateway\n            device. You can specify one of the following versions: <code>ikev1</code> or\n                <code>ikev2</code>.</p>"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually\n            making the request, and provides an error response. If you have the required\n            permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is\n                <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#GetVpnConnectionDeviceSampleConfigurationResult": {
+            "type": "structure",
+            "members": {
+                "VpnConnectionDeviceSampleConfiguration": {
+                    "target": "com.amazonaws.ec2#VpnConnectionDeviceSampleConfiguration",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "VpnConnectionDeviceSampleConfiguration",
+                        "smithy.api#documentation": "<p>Sample configuration file for the specified customer gateway device.</p>",
+                        "smithy.api#xmlName": "vpnConnectionDeviceSampleConfiguration"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#GetVpnConnectionDeviceTypes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#GetVpnConnectionDeviceTypesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#GetVpnConnectionDeviceTypesResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Obtain a list of customer gateway devices for which sample configuration\n            files can be provided. The request has no additional parameters. You can also see the\n            list of device types with sample configuration files available under <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/your-cgw.html\">Your customer gateway\n                device</a> in the <i>Amazon Web Services Site-to-Site VPN User Guide</i>.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "VpnConnectionDeviceTypes",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.ec2#GetVpnConnectionDeviceTypesRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.ec2#GVCDMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results returned by <code>GetVpnConnectionDeviceTypes</code> in\n            paginated output. When this parameter is used, <code>GetVpnConnectionDeviceTypes</code>\n            only returns <code>MaxResults</code> results in a single page along with a\n                <code>NextToken</code> response element. The remaining results of the initial\n            request can be seen by sending another <code>GetVpnConnectionDeviceTypes</code> request\n            with the returned <code>NextToken</code> value. This value can be between 200 and 1000.\n            If this parameter is not used, then <code>GetVpnConnectionDeviceTypes</code> returns all\n            results.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>NextToken</code> value returned from a previous paginated\n                <code>GetVpnConnectionDeviceTypes</code> request where <code>MaxResults</code> was\n            used and the results exceeded the value of that parameter. Pagination continues from the\n            end of the previous results that returned the <code>NextToken</code> value. This value\n            is null when there are no more results to return. </p>"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually\n            making the request, and provides an error response. If you have the required\n            permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is\n                <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#GetVpnConnectionDeviceTypesResult": {
+            "type": "structure",
+            "members": {
+                "VpnConnectionDeviceTypes": {
+                    "target": "com.amazonaws.ec2#VpnConnectionDeviceTypeList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "VpnConnectionDeviceTypeSet",
+                        "smithy.api#documentation": "<p>List of customer gateway devices that have a sample configuration file available for\n            use.</p>",
+                        "smithy.api#xmlName": "vpnConnectionDeviceTypeSet"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#NextToken",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NextToken",
+                        "smithy.api#documentation": "<p>The <code>NextToken</code> value to include in a future\n                <code>GetVpnConnectionDeviceTypes</code> request. When the results of a\n                <code>GetVpnConnectionDeviceTypes</code> request exceed <code>MaxResults</code>,\n            this value can be used to retrieve the next page of results. This value is null when\n            there are no more results to return.</p>",
+                        "smithy.api#xmlName": "nextToken"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ec2#GpuDeviceCount": {
             "type": "integer",
             "traits": {
@@ -34906,7 +35040,7 @@
         "com.amazonaws.ec2#GroupIdStringList": {
             "type": "list",
             "member": {
-                "target": "com.amazonaws.ec2#String",
+                "target": "com.amazonaws.ec2#SecurityGroupId",
                 "traits": {
                     "smithy.api#xmlName": "groupId"
                 }
@@ -36386,7 +36520,7 @@
                 "CertificateRevocationList": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The client certificate revocation list file. For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/cvpn-working-certificates.html#cvpn-working-certificates-generate\">Generate a Client Certificate Revocation List</a> in the\n\t\t\t\t<i>AWS Client VPN Administrator Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The client certificate revocation list file. For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/cvpn-working-certificates.html#cvpn-working-certificates-generate\">Generate a Client Certificate Revocation List</a> in the\n\t\t\t\t<i>Client VPN Administrator Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -37973,7 +38107,7 @@
                     "target": "com.amazonaws.ec2#LicenseList",
                     "traits": {
                         "aws.protocols#ec2QueryName": "LicenseSet",
-                        "smithy.api#documentation": "<p>The license configurations.</p>",
+                        "smithy.api#documentation": "<p>The license configurations for the instance.</p>",
                         "smithy.api#xmlName": "licenseSet"
                     }
                 },
@@ -37997,8 +38131,32 @@
                     "target": "com.amazonaws.ec2#BootModeValues",
                     "traits": {
                         "aws.protocols#ec2QueryName": "BootMode",
-                        "smithy.api#documentation": "<p>The boot mode of the instance. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html\">Boot modes</a> in the\n                <i>Amazon EC2 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The boot mode of the instance. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html\">Boot modes</a> in the\n            <i>Amazon EC2 User Guide</i>.</p>",
                         "smithy.api#xmlName": "bootMode"
+                    }
+                },
+                "PlatformDetails": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "PlatformDetails",
+                        "smithy.api#documentation": "<p>The platform details value for the instance. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info-fields.html\">AMI\n                billing information fields</a> in the\n            <i>Amazon EC2 User Guide</i>.</p>",
+                        "smithy.api#xmlName": "platformDetails"
+                    }
+                },
+                "UsageOperation": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "UsageOperation",
+                        "smithy.api#documentation": "<p>The usage operation value for the instance. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info-fields.html\">AMI billing information fields</a>\n            in the <i>Amazon EC2 User Guide</i>.</p>",
+                        "smithy.api#xmlName": "usageOperation"
+                    }
+                },
+                "UsageOperationUpdateTime": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "UsageOperationUpdateTime",
+                        "smithy.api#documentation": "<p>The time that the usage operation was last updated.</p>",
+                        "smithy.api#xmlName": "usageOperationUpdateTime"
                     }
                 }
             },
@@ -45987,7 +46145,7 @@
                 "ServerCertificateArn": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the server certificate to be used. The server certificate must be provisioned in AWS Certificate Manager (ACM).</p>"
+                        "smithy.api#documentation": "<p>The ARN of the server certificate to be used. The server certificate must be provisioned in \n\t\t\tCertificate Manager (ACM).</p>"
                     }
                 },
                 "ConnectionLogOptions": {
@@ -46017,7 +46175,7 @@
                 "SplitTunnel": {
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the VPN is split-tunnel.</p>\n        <p>For information about split-tunnel VPN endpoints, see <a href=\"https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html\">Split-Tunnel AWS Client VPN Endpoint</a> in the <i>AWS\n                Client VPN Administrator Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether the VPN is split-tunnel.</p>\n        <p>For information about split-tunnel VPN endpoints, see <a href=\"https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html\">Split-tunnel Client VPN endpoint</a> in the \n        \t<i>Client VPN Administrator Guide</i>.</p>"
                     }
                 },
                 "DryRun": {
@@ -46996,7 +47154,7 @@
                 "target": "com.amazonaws.ec2#ModifyInstancePlacementResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Modifies the placement attributes for a specified instance. You can do the\n            following:</p>\n        <ul>\n            <li>\n                <p>Modify the affinity between an instance and a <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-overview.html\">Dedicated\n                        Host</a>. When affinity is set to <code>host</code> and the instance is\n                    not associated with a specific Dedicated Host, the next time the instance is\n                    launched, it is automatically associated with the host on which it lands. If the\n                    instance is restarted or rebooted, this relationship persists.</p>\n            </li>\n            <li>\n                <p>Change the Dedicated Host with which an instance is associated.</p>\n            </li>\n            <li>\n                <p>Change the instance tenancy of an instance from <code>host</code> to\n                        <code>dedicated</code>, or from <code>dedicated</code> to\n                    <code>host</code>.</p>\n            </li>\n            <li>\n                <p>Move an instance to or from a <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html\">placement\n                    group</a>.</p>\n            </li>\n         </ul>\n        <p>At least one attribute for affinity, host ID, tenancy, or placement group name must\n            be specified in the request. Affinity and tenancy can be modified in the same\n            request.</p>\n        <p>To modify the host ID, tenancy, placement group, or partition for an instance, the\n            instance must be in the <code>stopped</code> state.</p>"
+                "smithy.api#documentation": "<p>Modifies the placement attributes for a specified instance. You can do the\n            following:</p>\n        <ul>\n            <li>\n                <p>Modify the affinity between an instance and a <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-overview.html\">Dedicated\n                        Host</a>. When affinity is set to <code>host</code> and the instance is\n                    not associated with a specific Dedicated Host, the next time the instance is\n                    launched, it is automatically associated with the host on which it lands. If the\n                    instance is restarted or rebooted, this relationship persists.</p>\n            </li>\n            <li>\n                <p>Change the Dedicated Host with which an instance is associated.</p>\n            </li>\n            <li>\n                <p>Change the instance tenancy of an instance.</p>\n            </li>\n            <li>\n                <p>Move an instance to or from a <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html\">placement\n                    group</a>.</p>\n            </li>\n         </ul>\n        <p>At least one attribute for affinity, host ID, tenancy, or placement group name must\n            be specified in the request. Affinity and tenancy can be modified in the same\n            request.</p>\n        <p>To modify the host ID, tenancy, placement group, or partition for an instance, the\n            instance must be in the <code>stopped</code> state.</p>"
             }
         },
         "com.amazonaws.ec2#ModifyInstancePlacementRequest": {
@@ -47037,7 +47195,7 @@
                     "target": "com.amazonaws.ec2#HostTenancy",
                     "traits": {
                         "aws.protocols#ec2QueryName": "Tenancy",
-                        "smithy.api#documentation": "<p>The tenancy for the instance.</p>\n        \n        <p>For T3 instances, you can't change the tenancy from <code>dedicated</code> to \n            <code>host</code>, or from <code>host</code> to <code>dedicated</code>. Attempting \n            to make one of these unsupported tenancy changes results in the <code>InvalidTenancy</code> \n            error code.</p>",
+                        "smithy.api#documentation": "<p>The tenancy for the instance.</p>\n        \n        <note>\n            <p>For T3 instances, you can't change the tenancy from <code>dedicated</code> \n            to <code>host</code>, or from <code>host</code> to <code>dedicated</code>. \n            Attempting to make one of these unsupported tenancy changes results in the \n            <code>InvalidTenancy</code> error code.</p>\n         </note>",
                         "smithy.api#xmlName": "tenancy"
                     }
                 },
@@ -48650,7 +48808,7 @@
                 "target": "com.amazonaws.ec2#ModifyVpnConnectionResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Modifies the customer gateway or the target gateway of an AWS Site-to-Site VPN connection. To modify the target gateway, the following migration\n            options are available:</p>\n        <ul>\n            <li>\n                <p>An existing virtual private gateway to a new virtual private gateway</p>\n            </li>\n            <li>\n                <p>An existing virtual private gateway to a transit gateway</p>\n            </li>\n            <li>\n                <p>An existing transit gateway to a new transit gateway</p>\n            </li>\n            <li>\n                <p>An existing transit gateway to a virtual private gateway</p>\n            </li>\n         </ul>\n        <p>Before you perform the migration to the new gateway, you must configure the new gateway. Use <a>CreateVpnGateway</a> to create a virtual private gateway, or <a>CreateTransitGateway</a> to create a transit gateway.</p>\n        <p>This step is required when you migrate from a virtual private gateway with static routes to\n            a transit gateway. </p>\n        <p>You must delete the static routes before you migrate to the new gateway.</p>\n        \n        <p>Keep a copy of the static route before you delete it. You will need to add back these\n            routes to the transit gateway after the VPN connection migration is complete.</p>\n        \n        <p>After you migrate to the new gateway, you might need to modify your VPC route table. Use <a>CreateRoute</a> and <a>DeleteRoute</a> to make the changes described in <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/modify-vpn-target.html#step-update-routing\">VPN Gateway Target Modification Required VPC Route Table Updates</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p>\n        <p>\n            When the new gateway is a transit gateway, modify the transit gateway route table to allow traffic between the VPC and the  AWS Site-to-Site VPN connection. Use <a>CreateTransitGatewayRoute</a> to add the routes.</p>\n        \n        <p> If you deleted VPN static routes, you must add the static routes to the transit gateway\n            route table.</p>\n        <p>After you perform this operation, the AWS VPN endpoint's IP addresses on the AWS side and\n            the tunnel options remain intact. Your AWS Site-to-Site VPN connection will be temporarily unavailable\n            for a brief period while we provision the new endpoints.</p>"
+                "smithy.api#documentation": "<p>Modifies the customer gateway or the target gateway of an Amazon Web Services Site-to-Site VPN connection. To\n            modify the target gateway, the following migration options are available:</p>\n        <ul>\n            <li>\n                <p>An existing virtual private gateway to a new virtual private gateway</p>\n            </li>\n            <li>\n                <p>An existing virtual private gateway to a transit gateway</p>\n            </li>\n            <li>\n                <p>An existing transit gateway to a new transit gateway</p>\n            </li>\n            <li>\n                <p>An existing transit gateway to a virtual private gateway</p>\n            </li>\n         </ul>\n        <p>Before you perform the migration to the new gateway, you must configure the new\n            gateway. Use <a>CreateVpnGateway</a> to create a virtual private gateway, or\n                <a>CreateTransitGateway</a> to create a transit gateway.</p>\n        <p>This step is required when you migrate from a virtual private gateway with static\n            routes to a transit gateway. </p>\n        <p>You must delete the static routes before you migrate to the new gateway.</p>\n\n        <p>Keep a copy of the static route before you delete it. You will need to add back these\n            routes to the transit gateway after the VPN connection migration is complete.</p>\n\n        <p>After you migrate to the new gateway, you might need to modify your VPC route table.\n            Use <a>CreateRoute</a> and <a>DeleteRoute</a> to make the changes\n            described in <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/modify-vpn-target.html#step-update-routing\">Update VPC route\n                tables</a> in the <i>Amazon Web Services Site-to-Site VPN User Guide</i>.</p>\n        <p>When the new gateway is a transit gateway, modify the transit gateway route table to\n            allow traffic between the VPC and the Amazon Web Services Site-to-Site VPN connection.\n            Use <a>CreateTransitGatewayRoute</a> to add the routes.</p>\n        <p> If you deleted VPN static routes, you must add the static routes to the transit\n            gateway route table.</p>\n        <p>After you perform this operation, the VPN endpoint's IP addresses on the Amazon Web Services side and the tunnel options remain intact. Your Amazon Web Services Site-to-Site VPN connection will\n            be temporarily unavailable for a brief period while we provision the new\n            endpoints.</p>"
             }
         },
         "com.amazonaws.ec2#ModifyVpnConnectionOptions": {
@@ -48662,7 +48820,7 @@
                 "target": "com.amazonaws.ec2#ModifyVpnConnectionOptionsResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Modifies the connection options for your Site-to-Site VPN connection.</p>\n        <p>When you modify the VPN connection options, the VPN endpoint IP addresses on the AWS side do not change, and the tunnel options do not change. Your VPN connection will be temporarily unavailable for a brief period while the VPN connection is updated.</p>"
+                "smithy.api#documentation": "<p>Modifies the connection options for your Site-to-Site VPN connection.</p>\n        <p>When you modify the VPN connection options, the VPN endpoint IP addresses on the\n                Amazon Web Services side do not change, and the tunnel options do not change. Your\n            VPN connection will be temporarily unavailable for a brief period while the VPN\n            connection is updated.</p>"
             }
         },
         "com.amazonaws.ec2#ModifyVpnConnectionOptionsRequest": {
@@ -48671,7 +48829,7 @@
                 "VpnConnectionId": {
                     "target": "com.amazonaws.ec2#VpnConnectionId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the Site-to-Site VPN connection.\n        </p>",
+                        "smithy.api#documentation": "<p>The ID of the Site-to-Site VPN connection. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -48684,7 +48842,7 @@
                 "RemoteIpv4NetworkCidr": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IPv4 CIDR on the AWS side of the VPN connection.</p>\n        <p>Default: <code>0.0.0.0/0</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The IPv4 CIDR on the Amazon Web Services side of the VPN connection.</p>\n        <p>Default: <code>0.0.0.0/0</code>\n         </p>"
                     }
                 },
                 "LocalIpv6NetworkCidr": {
@@ -48696,7 +48854,7 @@
                 "RemoteIpv6NetworkCidr": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IPv6 CIDR on the AWS side of the VPN connection.</p>\n        <p>Default: <code>::/0</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The IPv6 CIDR on the Amazon Web Services side of the VPN connection.</p>\n        <p>Default: <code>::/0</code>\n         </p>"
                     }
                 },
                 "DryRun": {
@@ -48744,13 +48902,13 @@
                 "VpnGatewayId": {
                     "target": "com.amazonaws.ec2#VpnGatewayId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the virtual private gateway at the AWS side of the VPN connection.</p>"
+                        "smithy.api#documentation": "<p>The ID of the virtual private gateway at the Amazon Web Services side of the VPN\n            connection.</p>"
                     }
                 },
                 "DryRun": {
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n            and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n            Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually\n            making the request, and provides an error response. If you have the required\n            permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is\n                <code>UnauthorizedOperation</code>.</p>"
                     }
                 }
             }
@@ -48785,7 +48943,7 @@
                 "VpnConnectionId": {
                     "target": "com.amazonaws.ec2#VpnConnectionId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the AWS Site-to-Site VPN connection.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services Site-to-Site VPN connection.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -48799,7 +48957,7 @@
                 "DryRun": {
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n            and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n            Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually\n            making the request, and provides an error response. If you have the required\n            permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is\n                <code>UnauthorizedOperation</code>.</p>"
                     }
                 }
             }
@@ -48825,7 +48983,7 @@
                 "target": "com.amazonaws.ec2#ModifyVpnTunnelOptionsResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Modifies the options for a VPN tunnel in an AWS Site-to-Site VPN connection. You can modify\n            multiple options for a tunnel in a single request, but you can only modify one tunnel at\n            a time. For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPNTunnels.html\">Site-to-Site VPN Tunnel Options for Your Site-to-Site VPN\n                Connection</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Modifies the options for a VPN tunnel in an Amazon Web Services Site-to-Site VPN connection. You can modify\n            multiple options for a tunnel in a single request, but you can only modify one tunnel at\n            a time. For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPNTunnels.html\">Site-to-Site VPN tunnel options for your Site-to-Site VPN\n                connection</a> in the <i>Amazon Web Services Site-to-Site VPN User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#ModifyVpnTunnelOptionsRequest": {
@@ -48834,7 +48992,7 @@
                 "VpnConnectionId": {
                     "target": "com.amazonaws.ec2#VpnConnectionId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the AWS Site-to-Site VPN connection.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services Site-to-Site VPN connection.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -48855,7 +49013,7 @@
                 "DryRun": {
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n            and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n            Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually\n            making the request, and provides an error response. If you have the required\n            permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is\n                <code>UnauthorizedOperation</code>.</p>"
                     }
                 }
             }
@@ -48878,13 +49036,13 @@
                 "TunnelInsideCidr": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The range of inside IPv4 addresses for the tunnel. Any specified CIDR blocks must be unique\n            across all VPN connections that use the same virtual private gateway. </p>\n        <p>Constraints: A size /30 CIDR block from the <code>169.254.0.0/16</code> range. The\n            following CIDR blocks are reserved and cannot be used:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>169.254.0.0/30</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>169.254.1.0/30</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>169.254.2.0/30</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>169.254.3.0/30</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>169.254.4.0/30</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>169.254.5.0/30</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>169.254.169.252/30</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The range of inside IPv4 addresses for the tunnel. Any specified CIDR blocks must be\n            unique across all VPN connections that use the same virtual private gateway. </p>\n        <p>Constraints: A size /30 CIDR block from the <code>169.254.0.0/16</code> range. The\n            following CIDR blocks are reserved and cannot be used:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>169.254.0.0/30</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>169.254.1.0/30</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>169.254.2.0/30</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>169.254.3.0/30</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>169.254.4.0/30</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>169.254.5.0/30</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>169.254.169.252/30</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "TunnelInsideIpv6Cidr": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The range of inside IPv6 addresses for the tunnel. Any specified CIDR blocks must be unique across all VPN connections that use the same transit gateway.</p>\n        <p>Constraints: A size /126 CIDR block from the local <code>fd00::/8</code> range.</p>"
+                        "smithy.api#documentation": "<p>The range of inside IPv6 addresses for the tunnel. Any specified CIDR blocks must be\n            unique across all VPN connections that use the same transit gateway.</p>\n        <p>Constraints: A size /126 CIDR block from the local <code>fd00::/8</code> range.</p>"
                     }
                 },
                 "PreSharedKey": {
@@ -48902,19 +49060,19 @@
                 "Phase2LifetimeSeconds": {
                     "target": "com.amazonaws.ec2#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The lifetime for phase 2 of the IKE negotiation, in seconds.</p>\n        <p>Constraints: A value between 900 and 3,600. The value must be less than the value for <code>Phase1LifetimeSeconds</code>.</p>\n        <p>Default: <code>3600</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The lifetime for phase 2 of the IKE negotiation, in seconds.</p>\n        <p>Constraints: A value between 900 and 3,600. The value must be less than the value for\n                <code>Phase1LifetimeSeconds</code>.</p>\n        <p>Default: <code>3600</code>\n         </p>"
                     }
                 },
                 "RekeyMarginTimeSeconds": {
                     "target": "com.amazonaws.ec2#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the VPN connection performs an IKE rekey. The exact time of the rekey is randomly selected based on the value for <code>RekeyFuzzPercentage</code>.</p>\n        <p>Constraints: A value between 60 and half of <code>Phase2LifetimeSeconds</code>.</p>\n        <p>Default: <code>540</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The margin time, in seconds, before the phase 2 lifetime expires, during which the\n                Amazon Web Services side of the VPN connection performs an IKE rekey. The exact time\n            of the rekey is randomly selected based on the value for\n                <code>RekeyFuzzPercentage</code>.</p>\n        <p>Constraints: A value between 60 and half of <code>Phase2LifetimeSeconds</code>.</p>\n        <p>Default: <code>540</code>\n         </p>"
                     }
                 },
                 "RekeyFuzzPercentage": {
                     "target": "com.amazonaws.ec2#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The percentage of the rekey window (determined by <code>RekeyMarginTimeSeconds</code>) during which the rekey time is randomly selected.</p>\n        <p>Constraints: A value between 0 and 100.</p>\n        <p>Default: <code>100</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The percentage of the rekey window (determined by <code>RekeyMarginTimeSeconds</code>)\n            during which the rekey time is randomly selected.</p>\n        <p>Constraints: A value between 0 and 100.</p>\n        <p>Default: <code>100</code>\n         </p>"
                     }
                 },
                 "ReplayWindowSize": {
@@ -48932,48 +49090,48 @@
                 "DPDTimeoutAction": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The action to take after DPD timeout occurs. Specify <code>restart</code> to restart the IKE initiation. Specify <code>clear</code> to end the IKE session.</p>\n        <p>Valid Values: <code>clear</code> | <code>none</code> | <code>restart</code>\n         </p>\n        <p>Default: <code>clear</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The action to take after DPD timeout occurs. Specify <code>restart</code> to restart\n            the IKE initiation. Specify <code>clear</code> to end the IKE session.</p>\n        <p>Valid Values: <code>clear</code> | <code>none</code> | <code>restart</code>\n         </p>\n        <p>Default: <code>clear</code>\n         </p>"
                     }
                 },
                 "Phase1EncryptionAlgorithms": {
                     "target": "com.amazonaws.ec2#Phase1EncryptionAlgorithmsRequestList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more encryption algorithms that are permitted for the VPN tunnel for phase 1 IKE negotiations.</p>\n        <p>Valid values: <code>AES128</code> | <code>AES256</code> | <code>AES128-GCM-16</code> | <code>AES256-GCM-16</code>\n         </p>",
+                        "smithy.api#documentation": "<p>One or more encryption algorithms that are permitted for the VPN tunnel for phase 1\n            IKE negotiations.</p>\n        <p>Valid values: <code>AES128</code> | <code>AES256</code> | <code>AES128-GCM-16</code> |\n                <code>AES256-GCM-16</code>\n         </p>",
                         "smithy.api#xmlName": "Phase1EncryptionAlgorithm"
                     }
                 },
                 "Phase2EncryptionAlgorithms": {
                     "target": "com.amazonaws.ec2#Phase2EncryptionAlgorithmsRequestList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more encryption algorithms that are permitted for the VPN tunnel for phase 2 IKE negotiations.</p>\n        <p>Valid values: <code>AES128</code> | <code>AES256</code> | <code>AES128-GCM-16</code> | <code>AES256-GCM-16</code>\n         </p>",
+                        "smithy.api#documentation": "<p>One or more encryption algorithms that are permitted for the VPN tunnel for phase 2\n            IKE negotiations.</p>\n        <p>Valid values: <code>AES128</code> | <code>AES256</code> | <code>AES128-GCM-16</code> |\n                <code>AES256-GCM-16</code>\n         </p>",
                         "smithy.api#xmlName": "Phase2EncryptionAlgorithm"
                     }
                 },
                 "Phase1IntegrityAlgorithms": {
                     "target": "com.amazonaws.ec2#Phase1IntegrityAlgorithmsRequestList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more integrity algorithms that are permitted for the VPN tunnel for phase 1 IKE negotiations.</p>\n        <p>Valid values: <code>SHA1</code> | <code>SHA2-256</code> | <code>SHA2-384</code> | <code>SHA2-512</code>\n         </p>",
+                        "smithy.api#documentation": "<p>One or more integrity algorithms that are permitted for the VPN tunnel for phase 1 IKE\n            negotiations.</p>\n        <p>Valid values: <code>SHA1</code> | <code>SHA2-256</code> | <code>SHA2-384</code> |\n                <code>SHA2-512</code>\n         </p>",
                         "smithy.api#xmlName": "Phase1IntegrityAlgorithm"
                     }
                 },
                 "Phase2IntegrityAlgorithms": {
                     "target": "com.amazonaws.ec2#Phase2IntegrityAlgorithmsRequestList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more integrity algorithms that are permitted for the VPN tunnel for phase 2 IKE negotiations.</p>\n        <p>Valid values: <code>SHA1</code> | <code>SHA2-256</code> | <code>SHA2-384</code> | <code>SHA2-512</code>\n         </p>",
+                        "smithy.api#documentation": "<p>One or more integrity algorithms that are permitted for the VPN tunnel for phase 2 IKE\n            negotiations.</p>\n        <p>Valid values: <code>SHA1</code> | <code>SHA2-256</code> | <code>SHA2-384</code> |\n                <code>SHA2-512</code>\n         </p>",
                         "smithy.api#xmlName": "Phase2IntegrityAlgorithm"
                     }
                 },
                 "Phase1DHGroupNumbers": {
                     "target": "com.amazonaws.ec2#Phase1DHGroupNumbersRequestList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for phase 1 IKE negotiations.</p>\n        <p>Valid values: <code>2</code> | <code>14</code> | <code>15</code> | <code>16</code> | <code>17</code> | <code>18</code> | <code>19</code> | <code>20</code> | <code>21</code> | <code>22</code> | <code>23</code> | <code>24</code>\n         </p>",
+                        "smithy.api#documentation": "<p>One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for\n            phase 1 IKE negotiations.</p>\n        <p>Valid values: <code>2</code> | <code>14</code> | <code>15</code> | <code>16</code> |\n                <code>17</code> | <code>18</code> | <code>19</code> | <code>20</code> |\n                <code>21</code> | <code>22</code> | <code>23</code> | <code>24</code>\n         </p>",
                         "smithy.api#xmlName": "Phase1DHGroupNumber"
                     }
                 },
                 "Phase2DHGroupNumbers": {
                     "target": "com.amazonaws.ec2#Phase2DHGroupNumbersRequestList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for phase 2 IKE negotiations.</p>\n        <p>Valid values: <code>2</code> | <code>5</code> | <code>14</code> | <code>15</code> | <code>16</code> | <code>17</code> | <code>18</code> | <code>19</code> | <code>20</code> | <code>21</code> | <code>22</code> | <code>23</code> | <code>24</code>\n         </p>",
+                        "smithy.api#documentation": "<p>One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for\n            phase 2 IKE negotiations.</p>\n        <p>Valid values: <code>2</code> | <code>5</code> | <code>14</code> | <code>15</code> |\n                <code>16</code> | <code>17</code> | <code>18</code> | <code>19</code> |\n                <code>20</code> | <code>21</code> | <code>22</code> | <code>23</code> |\n                <code>24</code>\n         </p>",
                         "smithy.api#xmlName": "Phase2DHGroupNumber"
                     }
                 },
@@ -48987,12 +49145,12 @@
                 "StartupAction": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The action to take when the establishing the tunnel for the VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify <code>start</code> for AWS to initiate the IKE negotiation.</p>\n        <p>Valid Values: <code>add</code> | <code>start</code>\n         </p>\n        <p>Default: <code>add</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The action to take when the establishing the tunnel for the VPN connection. By\n            default, your customer gateway device must initiate the IKE negotiation and bring up the\n            tunnel. Specify <code>start</code> for Amazon Web Services to initiate the IKE\n            negotiation.</p>\n        <p>Valid Values: <code>add</code> | <code>start</code>\n         </p>\n        <p>Default: <code>add</code>\n         </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The AWS Site-to-Site VPN tunnel options to modify.</p>"
+                "smithy.api#documentation": "<p>The Amazon Web Services Site-to-Site VPN tunnel options to modify.</p>"
             }
         },
         "com.amazonaws.ec2#MonitorInstances": {
@@ -51273,7 +51431,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies a Diffie-Hellman group number for the VPN tunnel for phase 1 IKE negotiations.</p>"
+                "smithy.api#documentation": "<p>Specifies a Diffie-Hellman group number for the VPN tunnel for phase 1 IKE\n            negotiations.</p>"
             }
         },
         "com.amazonaws.ec2#Phase1EncryptionAlgorithmsList": {
@@ -51321,7 +51479,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the encryption algorithm for the VPN tunnel for phase 1 IKE negotiations.</p>"
+                "smithy.api#documentation": "<p>Specifies the encryption algorithm for the VPN tunnel for phase 1 IKE\n            negotiations.</p>"
             }
         },
         "com.amazonaws.ec2#Phase1IntegrityAlgorithmsList": {
@@ -51369,7 +51527,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the integrity algorithm for the VPN tunnel for phase 1 IKE negotiations.</p>"
+                "smithy.api#documentation": "<p>Specifies the integrity algorithm for the VPN tunnel for phase 1 IKE\n            negotiations.</p>"
             }
         },
         "com.amazonaws.ec2#Phase2DHGroupNumbersList": {
@@ -51417,7 +51575,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies a Diffie-Hellman group number for the VPN tunnel for phase 2 IKE negotiations.</p>"
+                "smithy.api#documentation": "<p>Specifies a Diffie-Hellman group number for the VPN tunnel for phase 2 IKE\n            negotiations.</p>"
             }
         },
         "com.amazonaws.ec2#Phase2EncryptionAlgorithmsList": {
@@ -51465,7 +51623,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the encryption algorithm for the VPN tunnel for phase 2 IKE negotiations.</p>"
+                "smithy.api#documentation": "<p>Specifies the encryption algorithm for the VPN tunnel for phase 2 IKE\n            negotiations.</p>"
             }
         },
         "com.amazonaws.ec2#Phase2IntegrityAlgorithmsList": {
@@ -51513,7 +51671,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the integrity algorithm for the VPN tunnel for phase 2 IKE negotiations.</p>"
+                "smithy.api#documentation": "<p>Specifies the integrity algorithm for the VPN tunnel for phase 2 IKE\n            negotiations.</p>"
             }
         },
         "com.amazonaws.ec2#Placement": {
@@ -51536,7 +51694,7 @@
                     }
                 },
                 "GroupName": {
-                    "target": "com.amazonaws.ec2#String",
+                    "target": "com.amazonaws.ec2#PlacementGroupName",
                     "traits": {
                         "aws.protocols#ec2QueryName": "GroupName",
                         "smithy.api#documentation": "<p>The name of the placement group the instance is in.</p>",
@@ -59034,14 +59192,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "Filters": {
-                    "target": "com.amazonaws.ec2#FilterList",
-                    "traits": {
-                        "smithy.api#documentation": "<p>One or more filters.</p>",
-                        "smithy.api#required": {},
-                        "smithy.api#xmlName": "Filter"
-                    }
-                },
                 "MaxResults": {
                     "target": "com.amazonaws.ec2#MaxResults",
                     "traits": {
@@ -59058,6 +59208,14 @@
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.ec2#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more filters.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "Filter"
                     }
                 }
             }
@@ -66328,7 +66486,7 @@
                     "target": "com.amazonaws.ec2#Integer",
                     "traits": {
                         "aws.protocols#ec2QueryName": "RekeyMarginTimeSeconds",
-                        "smithy.api#documentation": "<p>The margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the VPN connection performs an IKE rekey.</p>",
+                        "smithy.api#documentation": "<p>The margin time, in seconds, before the phase 2 lifetime expires, during which the\n                Amazon Web Services side of the VPN connection performs an IKE rekey.</p>",
                         "smithy.api#xmlName": "rekeyMarginTimeSeconds"
                     }
                 },
@@ -66336,7 +66494,7 @@
                     "target": "com.amazonaws.ec2#Integer",
                     "traits": {
                         "aws.protocols#ec2QueryName": "RekeyFuzzPercentage",
-                        "smithy.api#documentation": "<p>The percentage of the rekey window determined by <code>RekeyMarginTimeSeconds</code> during which the rekey time is randomly selected.</p>",
+                        "smithy.api#documentation": "<p>The percentage of the rekey window determined by <code>RekeyMarginTimeSeconds</code>\n            during which the rekey time is randomly selected.</p>",
                         "smithy.api#xmlName": "rekeyFuzzPercentage"
                     }
                 },
@@ -66368,7 +66526,7 @@
                     "target": "com.amazonaws.ec2#Phase1EncryptionAlgorithmsList",
                     "traits": {
                         "aws.protocols#ec2QueryName": "Phase1EncryptionAlgorithmSet",
-                        "smithy.api#documentation": "<p>The permitted encryption algorithms for the VPN tunnel for phase 1 IKE negotiations.</p>",
+                        "smithy.api#documentation": "<p>The permitted encryption algorithms for the VPN tunnel for phase 1 IKE\n            negotiations.</p>",
                         "smithy.api#xmlName": "phase1EncryptionAlgorithmSet"
                     }
                 },
@@ -66376,7 +66534,7 @@
                     "target": "com.amazonaws.ec2#Phase2EncryptionAlgorithmsList",
                     "traits": {
                         "aws.protocols#ec2QueryName": "Phase2EncryptionAlgorithmSet",
-                        "smithy.api#documentation": "<p>The permitted encryption algorithms for the VPN tunnel for phase 2 IKE negotiations.</p>",
+                        "smithy.api#documentation": "<p>The permitted encryption algorithms for the VPN tunnel for phase 2 IKE\n            negotiations.</p>",
                         "smithy.api#xmlName": "phase2EncryptionAlgorithmSet"
                     }
                 },
@@ -66384,7 +66542,7 @@
                     "target": "com.amazonaws.ec2#Phase1IntegrityAlgorithmsList",
                     "traits": {
                         "aws.protocols#ec2QueryName": "Phase1IntegrityAlgorithmSet",
-                        "smithy.api#documentation": "<p>The permitted integrity algorithms for the VPN tunnel for phase 1 IKE negotiations.</p>",
+                        "smithy.api#documentation": "<p>The permitted integrity algorithms for the VPN tunnel for phase 1 IKE\n            negotiations.</p>",
                         "smithy.api#xmlName": "phase1IntegrityAlgorithmSet"
                     }
                 },
@@ -66392,7 +66550,7 @@
                     "target": "com.amazonaws.ec2#Phase2IntegrityAlgorithmsList",
                     "traits": {
                         "aws.protocols#ec2QueryName": "Phase2IntegrityAlgorithmSet",
-                        "smithy.api#documentation": "<p>The permitted integrity algorithms for the VPN tunnel for phase 2 IKE negotiations.</p>",
+                        "smithy.api#documentation": "<p>The permitted integrity algorithms for the VPN tunnel for phase 2 IKE\n            negotiations.</p>",
                         "smithy.api#xmlName": "phase2IntegrityAlgorithmSet"
                     }
                 },
@@ -66400,7 +66558,7 @@
                     "target": "com.amazonaws.ec2#Phase1DHGroupNumbersList",
                     "traits": {
                         "aws.protocols#ec2QueryName": "Phase1DHGroupNumberSet",
-                        "smithy.api#documentation": "<p>The permitted Diffie-Hellman group numbers for the VPN tunnel for phase 1 IKE negotiations.</p>",
+                        "smithy.api#documentation": "<p>The permitted Diffie-Hellman group numbers for the VPN tunnel for phase 1 IKE\n            negotiations.</p>",
                         "smithy.api#xmlName": "phase1DHGroupNumberSet"
                     }
                 },
@@ -66408,7 +66566,7 @@
                     "target": "com.amazonaws.ec2#Phase2DHGroupNumbersList",
                     "traits": {
                         "aws.protocols#ec2QueryName": "Phase2DHGroupNumberSet",
-                        "smithy.api#documentation": "<p>The permitted Diffie-Hellman group numbers for the VPN tunnel for phase 2 IKE negotiations.</p>",
+                        "smithy.api#documentation": "<p>The permitted Diffie-Hellman group numbers for the VPN tunnel for phase 2 IKE\n            negotiations.</p>",
                         "smithy.api#xmlName": "phase2DHGroupNumberSet"
                     }
                 },
@@ -67219,7 +67377,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "OutsideIpAddress",
-                        "smithy.api#documentation": "<p>The Internet-routable IP address of the virtual private gateway's outside interface.</p>",
+                        "smithy.api#documentation": "<p>The Internet-routable IP address of the virtual private gateway's outside\n            interface.</p>",
                         "smithy.api#xmlName": "outsideIpAddress"
                     }
                 },
@@ -69054,7 +69212,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "CustomerGatewayConfiguration",
-                        "smithy.api#documentation": "<p>The configuration information for the VPN connection's customer gateway (in the native XML\n            format). This element is always present in the <a>CreateVpnConnection</a> response; however,\n            it's present in the <a>DescribeVpnConnections</a> response only if the VPN connection is in\n            the <code>pending</code> or <code>available</code> state.</p>",
+                        "smithy.api#documentation": "<p>The configuration information for the VPN connection's customer gateway (in the native\n            XML format). This element is always present in the <a>CreateVpnConnection</a>\n            response; however, it's present in the <a>DescribeVpnConnections</a> response\n            only if the VPN connection is in the <code>pending</code> or <code>available</code>\n            state.</p>",
                         "smithy.api#xmlName": "customerGatewayConfiguration"
                     }
                 },
@@ -69070,7 +69228,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "Category",
-                        "smithy.api#documentation": "<p>The category of the VPN connection. A value of <code>VPN</code> indicates an AWS VPN\n\t\t\tconnection. A value of <code>VPN-Classic</code> indicates an AWS Classic VPN connection.</p>",
+                        "smithy.api#documentation": "<p>The category of the VPN connection. A value of <code>VPN</code> indicates an Amazon Web Services VPN connection. A value of <code>VPN-Classic</code> indicates an Amazon Web Services Classic VPN connection.</p>",
                         "smithy.api#xmlName": "category"
                     }
                 },
@@ -69102,7 +69260,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "VpnGatewayId",
-                        "smithy.api#documentation": "<p>The ID of the virtual private gateway at the AWS side of the VPN connection.</p>",
+                        "smithy.api#documentation": "<p>The ID of the virtual private gateway at the Amazon Web Services side of the VPN\n            connection.</p>",
                         "smithy.api#xmlName": "vpnGatewayId"
                     }
                 },
@@ -69151,6 +69309,64 @@
                 "smithy.api#documentation": "<p>Describes a VPN connection.</p>"
             }
         },
+        "com.amazonaws.ec2#VpnConnectionDeviceSampleConfiguration": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.ec2#VpnConnectionDeviceType": {
+            "type": "structure",
+            "members": {
+                "VpnConnectionDeviceTypeId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "VpnConnectionDeviceTypeId",
+                        "smithy.api#documentation": "<p>Customer gateway device identifier.</p>",
+                        "smithy.api#xmlName": "vpnConnectionDeviceTypeId"
+                    }
+                },
+                "Vendor": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Vendor",
+                        "smithy.api#documentation": "<p>Customer gateway device vendor.</p>",
+                        "smithy.api#xmlName": "vendor"
+                    }
+                },
+                "Platform": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Platform",
+                        "smithy.api#documentation": "<p>Customer gateway device platform.</p>",
+                        "smithy.api#xmlName": "platform"
+                    }
+                },
+                "Software": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Software",
+                        "smithy.api#documentation": "<p>Customer gateway device software version.</p>",
+                        "smithy.api#xmlName": "software"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List of customer gateway devices that have a sample configuration file available for\n            use. You can also see the list of device types with sample configuration files available\n            under <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/your-cgw.html\">Your customer\n                gateway device</a> in the <i>Amazon Web Services Site-to-Site VPN User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#VpnConnectionDeviceTypeId": {
+            "type": "string"
+        },
+        "com.amazonaws.ec2#VpnConnectionDeviceTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#VpnConnectionDeviceType",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
         "com.amazonaws.ec2#VpnConnectionId": {
             "type": "string"
         },
@@ -69187,7 +69403,7 @@
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
                         "aws.protocols#ec2QueryName": "StaticRoutesOnly",
-                        "smithy.api#documentation": "<p>Indicates whether the VPN connection uses static routes only. Static routes must be used for devices that don't support BGP.</p>",
+                        "smithy.api#documentation": "<p>Indicates whether the VPN connection uses static routes only. Static routes must be\n            used for devices that don't support BGP.</p>",
                         "smithy.api#xmlName": "staticRoutesOnly"
                     }
                 },
@@ -69203,7 +69419,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "RemoteIpv4NetworkCidr",
-                        "smithy.api#documentation": "<p>The IPv4 CIDR on the AWS side of the VPN connection.</p>",
+                        "smithy.api#documentation": "<p>The IPv4 CIDR on the Amazon Web Services side of the VPN connection.</p>",
                         "smithy.api#xmlName": "remoteIpv4NetworkCidr"
                     }
                 },
@@ -69219,7 +69435,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "RemoteIpv6NetworkCidr",
-                        "smithy.api#documentation": "<p>The IPv6 CIDR on the AWS side of the VPN connection.</p>",
+                        "smithy.api#documentation": "<p>The IPv6 CIDR on the Amazon Web Services side of the VPN connection.</p>",
                         "smithy.api#xmlName": "remoteIpv6NetworkCidr"
                     }
                 },
@@ -69257,7 +69473,7 @@
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
                         "aws.protocols#ec2QueryName": "StaticRoutesOnly",
-                        "smithy.api#documentation": "<p>Indicate whether the VPN connection uses static routes only. If you are creating a\n            VPN connection for a device that does not support BGP, you must specify\n                <code>true</code>. Use <a>CreateVpnConnectionRoute</a> to create a static route.</p>\n\t\t       <p>Default: <code>false</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Indicate whether the VPN connection uses static routes only. If you are creating a VPN\n            connection for a device that does not support BGP, you must specify <code>true</code>.\n            Use <a>CreateVpnConnectionRoute</a> to create a static route.</p>\n        <p>Default: <code>false</code>\n         </p>",
                         "smithy.api#xmlName": "staticRoutesOnly"
                     }
                 },
@@ -69282,7 +69498,7 @@
                 "RemoteIpv4NetworkCidr": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IPv4 CIDR on the AWS side of the VPN connection.</p>\n        <p>Default: <code>0.0.0.0/0</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The IPv4 CIDR on the Amazon Web Services side of the VPN connection.</p>\n        <p>Default: <code>0.0.0.0/0</code>\n         </p>"
                     }
                 },
                 "LocalIpv6NetworkCidr": {
@@ -69294,7 +69510,7 @@
                 "RemoteIpv6NetworkCidr": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IPv6 CIDR on the AWS side of the VPN connection.</p>\n        <p>Default: <code>::/0</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The IPv6 CIDR on the Amazon Web Services side of the VPN connection.</p>\n        <p>Default: <code>::/0</code>\n         </p>"
                     }
                 }
             },
@@ -69324,7 +69540,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "AvailabilityZone",
-                        "smithy.api#documentation": "<p>The Availability Zone where the virtual private gateway was created, if applicable. This field may be empty or not returned.</p>",
+                        "smithy.api#documentation": "<p>The Availability Zone where the virtual private gateway was created, if applicable.\n            This field may be empty or not returned.</p>",
                         "smithy.api#xmlName": "availabilityZone"
                     }
                 },
@@ -69364,7 +69580,7 @@
                     "target": "com.amazonaws.ec2#Long",
                     "traits": {
                         "aws.protocols#ec2QueryName": "AmazonSideAsn",
-                        "smithy.api#documentation": "<p>The private Autonomous System Number (ASN) for the Amazon side of a BGP session.</p>",
+                        "smithy.api#documentation": "<p>The private Autonomous System Number (ASN) for the Amazon side of a BGP\n            session.</p>",
                         "smithy.api#xmlName": "amazonSideAsn"
                     }
                 },
@@ -69494,19 +69710,19 @@
                 "TunnelInsideCidr": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The range of inside IPv4 addresses for the tunnel. Any specified CIDR blocks must be unique\n\t\t\tacross all VPN connections that use the same virtual private gateway. </p>\n\t\t       <p>Constraints: A size /30 CIDR block from the <code>169.254.0.0/16</code> range. The\n\t\t\tfollowing CIDR blocks are reserved and cannot be used:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <code>169.254.0.0/30</code>\n               </p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>169.254.1.0/30</code>\n               </p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>169.254.2.0/30</code>\n               </p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>169.254.3.0/30</code>\n               </p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>169.254.4.0/30</code>\n               </p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>169.254.5.0/30</code>\n               </p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>169.254.169.252/30</code>\n               </p>\n\t\t\t         </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The range of inside IPv4 addresses for the tunnel. Any specified CIDR blocks must be\n            unique across all VPN connections that use the same virtual private gateway. </p>\n        <p>Constraints: A size /30 CIDR block from the <code>169.254.0.0/16</code> range. The\n            following CIDR blocks are reserved and cannot be used:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>169.254.0.0/30</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>169.254.1.0/30</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>169.254.2.0/30</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>169.254.3.0/30</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>169.254.4.0/30</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>169.254.5.0/30</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>169.254.169.252/30</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "TunnelInsideIpv6Cidr": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The range of inside IPv6 addresses for the tunnel. Any specified CIDR blocks must be unique across all VPN connections that use the same transit gateway.</p>\n        <p>Constraints: A size /126 CIDR block from the local <code>fd00::/8</code> range.</p>"
+                        "smithy.api#documentation": "<p>The range of inside IPv6 addresses for the tunnel. Any specified CIDR blocks must be\n            unique across all VPN connections that use the same transit gateway.</p>\n        <p>Constraints: A size /126 CIDR block from the local <code>fd00::/8</code> range.</p>"
                     }
                 },
                 "PreSharedKey": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pre-shared key (PSK) to establish initial authentication between the virtual private\n\t\t\tgateway and customer gateway.</p>\n\t\t       <p>Constraints: Allowed characters are alphanumeric characters, periods (.), and underscores\n            (_). Must be between 8 and 64 characters in length and cannot start with zero\n            (0).</p>"
+                        "smithy.api#documentation": "<p>The pre-shared key (PSK) to establish initial authentication between the virtual\n            private gateway and customer gateway.</p>\n        <p>Constraints: Allowed characters are alphanumeric characters, periods (.), and\n            underscores (_). Must be between 8 and 64 characters in length and cannot start with\n            zero (0).</p>"
                     }
                 },
                 "Phase1LifetimeSeconds": {
@@ -69518,19 +69734,19 @@
                 "Phase2LifetimeSeconds": {
                     "target": "com.amazonaws.ec2#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The lifetime for phase 2 of the IKE negotiation, in seconds.</p>\n        <p>Constraints: A value between 900 and 3,600. The value must be less than the value for <code>Phase1LifetimeSeconds</code>.</p>\n        <p>Default: <code>3600</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The lifetime for phase 2 of the IKE negotiation, in seconds.</p>\n        <p>Constraints: A value between 900 and 3,600. The value must be less than the value for\n                <code>Phase1LifetimeSeconds</code>.</p>\n        <p>Default: <code>3600</code>\n         </p>"
                     }
                 },
                 "RekeyMarginTimeSeconds": {
                     "target": "com.amazonaws.ec2#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the VPN connection performs an IKE rekey. The exact time of the rekey is randomly selected based on the value for <code>RekeyFuzzPercentage</code>.</p>\n        <p>Constraints: A value between 60 and half of <code>Phase2LifetimeSeconds</code>.</p>\n        <p>Default: <code>540</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The margin time, in seconds, before the phase 2 lifetime expires, during which the\n                Amazon Web Services side of the VPN connection performs an IKE rekey. The exact time\n            of the rekey is randomly selected based on the value for\n                <code>RekeyFuzzPercentage</code>.</p>\n        <p>Constraints: A value between 60 and half of <code>Phase2LifetimeSeconds</code>.</p>\n        <p>Default: <code>540</code>\n         </p>"
                     }
                 },
                 "RekeyFuzzPercentage": {
                     "target": "com.amazonaws.ec2#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The percentage of the rekey window (determined by <code>RekeyMarginTimeSeconds</code>) during which the rekey time is randomly selected.</p>\n        <p>Constraints: A value between 0 and 100.</p>\n        <p>Default: <code>100</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The percentage of the rekey window (determined by <code>RekeyMarginTimeSeconds</code>)\n            during which the rekey time is randomly selected.</p>\n        <p>Constraints: A value between 0 and 100.</p>\n        <p>Default: <code>100</code>\n         </p>"
                     }
                 },
                 "ReplayWindowSize": {
@@ -69548,48 +69764,48 @@
                 "DPDTimeoutAction": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The action to take after DPD timeout occurs. Specify <code>restart</code> to restart the IKE initiation. Specify <code>clear</code> to end the IKE session.</p>\n        <p>Valid Values: <code>clear</code> | <code>none</code> | <code>restart</code>\n         </p>\n        <p>Default: <code>clear</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The action to take after DPD timeout occurs. Specify <code>restart</code> to restart\n            the IKE initiation. Specify <code>clear</code> to end the IKE session.</p>\n        <p>Valid Values: <code>clear</code> | <code>none</code> | <code>restart</code>\n         </p>\n        <p>Default: <code>clear</code>\n         </p>"
                     }
                 },
                 "Phase1EncryptionAlgorithms": {
                     "target": "com.amazonaws.ec2#Phase1EncryptionAlgorithmsRequestList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more encryption algorithms that are permitted for the VPN tunnel for phase 1 IKE negotiations.</p>\n        <p>Valid values: <code>AES128</code> | <code>AES256</code> | <code>AES128-GCM-16</code> | <code>AES256-GCM-16</code>\n         </p>",
+                        "smithy.api#documentation": "<p>One or more encryption algorithms that are permitted for the VPN tunnel for phase 1\n            IKE negotiations.</p>\n        <p>Valid values: <code>AES128</code> | <code>AES256</code> | <code>AES128-GCM-16</code> |\n                <code>AES256-GCM-16</code>\n         </p>",
                         "smithy.api#xmlName": "Phase1EncryptionAlgorithm"
                     }
                 },
                 "Phase2EncryptionAlgorithms": {
                     "target": "com.amazonaws.ec2#Phase2EncryptionAlgorithmsRequestList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more encryption algorithms that are permitted for the VPN tunnel for phase 2 IKE negotiations.</p>\n        <p>Valid values: <code>AES128</code> | <code>AES256</code> | <code>AES128-GCM-16</code> | <code>AES256-GCM-16</code>\n         </p>",
+                        "smithy.api#documentation": "<p>One or more encryption algorithms that are permitted for the VPN tunnel for phase 2\n            IKE negotiations.</p>\n        <p>Valid values: <code>AES128</code> | <code>AES256</code> | <code>AES128-GCM-16</code> |\n                <code>AES256-GCM-16</code>\n         </p>",
                         "smithy.api#xmlName": "Phase2EncryptionAlgorithm"
                     }
                 },
                 "Phase1IntegrityAlgorithms": {
                     "target": "com.amazonaws.ec2#Phase1IntegrityAlgorithmsRequestList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more integrity algorithms that are permitted for the VPN tunnel for phase 1 IKE negotiations.</p>\n        <p>Valid values: <code>SHA1</code> | <code>SHA2-256</code> | <code>SHA2-384</code> | <code>SHA2-512</code>\n         </p>",
+                        "smithy.api#documentation": "<p>One or more integrity algorithms that are permitted for the VPN tunnel for phase 1 IKE\n            negotiations.</p>\n        <p>Valid values: <code>SHA1</code> | <code>SHA2-256</code> | <code>SHA2-384</code> |\n                <code>SHA2-512</code>\n         </p>",
                         "smithy.api#xmlName": "Phase1IntegrityAlgorithm"
                     }
                 },
                 "Phase2IntegrityAlgorithms": {
                     "target": "com.amazonaws.ec2#Phase2IntegrityAlgorithmsRequestList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more integrity algorithms that are permitted for the VPN tunnel for phase 2 IKE negotiations.</p>\n        <p>Valid values: <code>SHA1</code> | <code>SHA2-256</code> | <code>SHA2-384</code> | <code>SHA2-512</code>\n         </p>",
+                        "smithy.api#documentation": "<p>One or more integrity algorithms that are permitted for the VPN tunnel for phase 2 IKE\n            negotiations.</p>\n        <p>Valid values: <code>SHA1</code> | <code>SHA2-256</code> | <code>SHA2-384</code> |\n                <code>SHA2-512</code>\n         </p>",
                         "smithy.api#xmlName": "Phase2IntegrityAlgorithm"
                     }
                 },
                 "Phase1DHGroupNumbers": {
                     "target": "com.amazonaws.ec2#Phase1DHGroupNumbersRequestList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for phase 1 IKE negotiations.</p>\n        <p>Valid values: <code>2</code> | <code>14</code> | <code>15</code> | <code>16</code> | <code>17</code> | <code>18</code> | <code>19</code> | <code>20</code> | <code>21</code> | <code>22</code> | <code>23</code> | <code>24</code>\n         </p>",
+                        "smithy.api#documentation": "<p>One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for\n            phase 1 IKE negotiations.</p>\n        <p>Valid values: <code>2</code> | <code>14</code> | <code>15</code> | <code>16</code> |\n                <code>17</code> | <code>18</code> | <code>19</code> | <code>20</code> |\n                <code>21</code> | <code>22</code> | <code>23</code> | <code>24</code>\n         </p>",
                         "smithy.api#xmlName": "Phase1DHGroupNumber"
                     }
                 },
                 "Phase2DHGroupNumbers": {
                     "target": "com.amazonaws.ec2#Phase2DHGroupNumbersRequestList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for phase 2 IKE negotiations.</p>\n        <p>Valid values: <code>2</code> | <code>5</code> | <code>14</code> | <code>15</code> | <code>16</code> | <code>17</code> | <code>18</code> | <code>19</code> | <code>20</code> | <code>21</code> | <code>22</code> | <code>23</code> | <code>24</code>\n         </p>",
+                        "smithy.api#documentation": "<p>One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for\n            phase 2 IKE negotiations.</p>\n        <p>Valid values: <code>2</code> | <code>5</code> | <code>14</code> | <code>15</code> |\n                <code>16</code> | <code>17</code> | <code>18</code> | <code>19</code> |\n                <code>20</code> | <code>21</code> | <code>22</code> | <code>23</code> |\n                <code>24</code>\n         </p>",
                         "smithy.api#xmlName": "Phase2DHGroupNumber"
                     }
                 },
@@ -69603,7 +69819,7 @@
                 "StartupAction": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The action to take when the establishing the tunnel for the VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify <code>start</code> for AWS to initiate the IKE negotiation.</p>\n        <p>Valid Values: <code>add</code> | <code>start</code>\n         </p>\n        <p>Default: <code>add</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The action to take when the establishing the tunnel for the VPN connection. By\n            default, your customer gateway device must initiate the IKE negotiation and bring up the\n            tunnel. Specify <code>start</code> for Amazon Web Services to initiate the IKE\n            negotiation.</p>\n        <p>Valid Values: <code>add</code> | <code>start</code>\n         </p>\n        <p>Default: <code>add</code>\n         </p>"
                     }
                 }
             },

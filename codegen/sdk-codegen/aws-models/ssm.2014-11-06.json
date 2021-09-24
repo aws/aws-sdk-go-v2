@@ -758,7 +758,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates a related resource to a Systems Manager OpsCenter OpsItem. For example, you can associate\n   an Incident Manager incident or analysis with an OpsItem. Incident Manager is a capability of\n   Amazon Web Services Systems Manager.</p>"
+                "smithy.api#documentation": "<p>Associates a related item to a Systems Manager OpsCenter OpsItem. For example, you can associate an\n   Incident Manager incident or analysis with an OpsItem. Incident Manager and OpsCenter are capabilities of\n   Amazon Web Services Systems Manager.</p>"
             }
         },
         "com.amazonaws.ssm#AssociateOpsItemRelatedItemRequest": {
@@ -781,7 +781,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.ssm#OpsItemRelatedItemAssociationResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of resource that you want to associate with an OpsItem. OpsCenter supports the\n   following types:</p>\n         <p>\n            <code>AWS::SSMIncidents::IncidentRecord</code>: an Incident Manager incident. Incident Manager is a\n   capability of Amazon Web Services Systems Manager.</p>\n         <p>\n            <code>AWS::SSM::Document</code>: a Systems Manager (SSM) document.</p>",
+                        "smithy.api#documentation": "<p>The type of resource that you want to associate with an OpsItem. OpsCenter supports the\n   following types:</p>\n         <p>\n            <code>AWS::SSMIncidents::IncidentRecord</code>: an Incident Manager incident. </p>\n         <p>\n            <code>AWS::SSM::Document</code>: a Systems Manager (SSM) document.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3197,7 +3197,7 @@
                 "value": {
                     "target": "com.amazonaws.ssm#CommandFilterValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filter value. Valid values for each filter key are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>InvokedAfter</b>: Specify a timestamp to limit your results.\n     For example, specify <code>2021-07-07T00:00:00Z</code> to see a list of command executions\n     occurring July 7, 2021, and later.</p>\n            </li>\n            <li>\n               <p>\n                  <b>InvokedBefore</b>: Specify a timestamp to limit your results.\n     For example, specify <code>2021-07-07T00:00:00Z</code> to see a list of command executions from\n     before July 7, 2021.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Status</b>: Specify a valid command status to see a list of\n     all command executions with that status. Status values you can specify include:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Pending</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>InProgress</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Success</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Cancelled</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Failed</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TimedOut</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Cancelling</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>DocumentName</b>: Specify name of the Amazon Web Services Systems Manager document (SSM\n     document) for which you want to see command execution results. For example, specify\n      <code>AWS-RunPatchBaseline</code> to see command executions that used this SSM document to\n     perform security patching operations on instances. </p>\n            </li>\n            <li>\n               <p>\n                  <b>ExecutionStage</b>: Specify one of the following\n     values:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Executing</code>: Returns a list of command executions that are currently still\n       running.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Complete</code>: Returns a list of command executions that have already completed.\n      </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The filter value. Valid values for each filter key are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>InvokedAfter</b>: Specify a timestamp to limit your results.\n     For example, specify <code>2021-07-07T00:00:00Z</code> to see a list of command executions\n     occurring July 7, 2021, and later.</p>\n            </li>\n            <li>\n               <p>\n                  <b>InvokedBefore</b>: Specify a timestamp to limit your results.\n     For example, specify <code>2021-07-07T00:00:00Z</code> to see a list of command executions from\n     before July 7, 2021.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Status</b>: Specify a valid command status to see a list of\n     all command executions with that status. The status choices depend on the API you call.</p>\n               <p>The status values you can specify for <code>ListCommands</code> are:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Pending</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>InProgress</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Success</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Cancelled</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Failed</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TimedOut</code> (this includes both Delivery and Execution time outs) </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AccessDenied</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>DeliveryTimedOut</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ExecutionTimedOut</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Incomplete</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>NoInstancesInTag</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>LimitExceeded</code>\n                     </p>\n                  </li>\n               </ul>\n               <p>The status values you can specify for <code>ListCommandInvocations</code> are:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Pending</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>InProgress</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Delayed</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Success</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Cancelled</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Failed</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TimedOut</code> (this includes both Delivery and Execution time outs) </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AccessDenied</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>DeliveryTimedOut</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ExecutionTimedOut</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Undeliverable</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>InvalidPlatform</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Terminated</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>DocumentName</b>: Specify name of the Amazon Web Services Systems Manager document (SSM\n     document) for which you want to see command execution results. For example, specify\n      <code>AWS-RunPatchBaseline</code> to see command executions that used this SSM document to\n     perform security patching operations on instances. </p>\n            </li>\n            <li>\n               <p>\n                  <b>ExecutionStage</b>: Specify one of the following\n     values:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Executing</code>: Returns a list of command executions that are currently still\n       running.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Complete</code>: Returns a list of command executions that have already completed.\n      </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3281,7 +3281,7 @@
                 "InstanceName": {
                     "target": "com.amazonaws.ssm#InstanceTagName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the invocation target. For EC2 instances this is the value for the\n    <code>aws:Name</code> tag. For on-premises instances, this is the name of the instance.</p>"
+                        "smithy.api#documentation": "<p>The fully qualified host name of the managed instance.</p>"
                     }
                 },
                 "Comment": {
@@ -4577,7 +4577,7 @@
                 "Content": {
                     "target": "com.amazonaws.ssm#DocumentContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>The content for the new SSM document in JSON or YAML format. We recommend storing the\n   contents for your new document in an external JSON or YAML file and referencing the file in a\n   command.</p>\n         <p>For examples, see the following topics in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/create-ssm-document-api.html\">Create an SSM document\n      (Amazon Web Services API)</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/create-ssm-document-cli.html\">Create an SSM document\n      (Amazon Web Services CLI)</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/create-ssm-document-api.html\">Create an SSM document\n      (API)</a>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The content for the new SSM document in JSON or YAML format. We recommend storing the\n   contents for your new document in an external JSON or YAML file and referencing the file in a\n   command.</p>\n         <p>For examples, see the following topics in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/create-ssm-document-api.html\">Create an SSM document (Amazon Web Services API)</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/create-ssm-document-cli.html\">Create an SSM document (Amazon Web Services CLI)</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/create-ssm-document-api.html\">Create an SSM document (API)</a>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6428,7 +6428,7 @@
                 "Filters": {
                     "target": "com.amazonaws.ssm#PatchOrchestratorFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Each element in the array is a structure containing a key-value pair.</p>\n         <p>\n            <b>Windows Server</b>\n         </p>\n         <p>Supported keys for Windows Server instance patches include the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>PATCH_SET</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>OS</code> | <code>APPLICATION</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>PRODUCT</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>WindowsServer2012</code> | <code>Office 2010</code> |\n      <code>MicrosoftDefenderAntivirus</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>PRODUCT_FAMILY</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>Windows</code> | <code>Office</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>MSRC_SEVERITY</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>ServicePacks</code> | <code>Important</code> | <code>Moderate</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>CLASSIFICATION</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>ServicePacks</code> | <code>SecurityUpdates</code> |\n      <code>DefinitionUpdates</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>PATCH_ID</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>KB123456</code> | <code>KB4516046</code>\n               </p>\n            </li>\n         </ul>\n\n         <p>\n            <b>Linux</b>\n         </p>\n         <important>\n            <p>When specifying filters for Linux patches, you must specify a key-pair for\n     <code>PRODUCT</code>. For example, using the Command Line Interface (CLI), the\n    following command fails:</p>\n            <p>\n               <code>aws ssm describe-available-patches --filters\n    Key=CVE_ID,Values=CVE-2018-3615</code>\n            </p>\n            <p>However, the following command succeeds:</p>\n            <p>\n               <code>aws ssm describe-available-patches --filters Key=PRODUCT,Values=AmazonLinux2018.03\n     Key=CVE_ID,Values=CVE-2018-3615</code>\n            </p>\n         </important>\n         <p>Supported keys for Linux instance patches include the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>PRODUCT</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>AmazonLinux2018.03</code> | <code>AmazonLinux2.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>NAME</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>kernel-headers</code> | <code>samba-python</code> | <code>php</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>SEVERITY</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>Critical</code> | <code>Important</code> | <code>Medium</code> |\n      <code>Low</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>EPOCH</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>0</code> | <code>1</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>VERSION</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>78.6.1</code> | <code>4.10.16</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>RELEASE</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>9.56.amzn1</code> | <code>1.amzn2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>ARCH</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>i686</code> | <code>x86_64</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>REPOSITORY</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>Core</code> | <code>Updates</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>ADVISORY_ID</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>ALAS-2018-1058</code> | <code>ALAS2-2021-1594</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>CVE_ID</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>CVE-2018-3615</code> | <code>CVE-2020-1472</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>BUGZILLA_ID</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>1463241</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Each element in the array is a structure containing a key-value pair.</p>\n         <p>\n            <b>Windows Server</b>\n         </p>\n         <p>Supported keys for Windows Server instance patches include the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>PATCH_SET</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>OS</code> | <code>APPLICATION</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>PRODUCT</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>WindowsServer2012</code> | <code>Office 2010</code> |\n      <code>MicrosoftDefenderAntivirus</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>PRODUCT_FAMILY</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>Windows</code> | <code>Office</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>MSRC_SEVERITY</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>ServicePacks</code> | <code>Important</code> | <code>Moderate</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>CLASSIFICATION</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>ServicePacks</code> | <code>SecurityUpdates</code> |\n      <code>DefinitionUpdates</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>PATCH_ID</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>KB123456</code> | <code>KB4516046</code>\n               </p>\n            </li>\n         </ul>\n\n         <p>\n            <b>Linux</b>\n         </p>\n         <important>\n            <p>When specifying filters for Linux patches, you must specify a key-pair for\n     <code>PRODUCT</code>. For example, using the Command Line Interface (CLI), the\n    following command fails:</p>\n            <p>\n               <code>aws ssm describe-available-patches --filters Key=CVE_ID,Values=CVE-2018-3615</code>\n            </p>\n            <p>However, the following command succeeds:</p>\n            <p>\n               <code>aws ssm describe-available-patches --filters Key=PRODUCT,Values=AmazonLinux2018.03\n     Key=CVE_ID,Values=CVE-2018-3615</code>\n            </p>\n         </important>\n         <p>Supported keys for Linux instance patches include the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>PRODUCT</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>AmazonLinux2018.03</code> | <code>AmazonLinux2.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>NAME</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>kernel-headers</code> | <code>samba-python</code> | <code>php</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>SEVERITY</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>Critical</code> | <code>Important</code> | <code>Medium</code> |\n      <code>Low</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>EPOCH</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>0</code> | <code>1</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>VERSION</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>78.6.1</code> | <code>4.10.16</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>RELEASE</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>9.56.amzn1</code> | <code>1.amzn2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>ARCH</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>i686</code> | <code>x86_64</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>REPOSITORY</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>Core</code> | <code>Updates</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>ADVISORY_ID</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>ALAS-2018-1058</code> | <code>ALAS2-2021-1594</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>CVE_ID</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>CVE-2018-3615</code> | <code>CVE-2020-1472</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>BUGZILLA_ID</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>1463241</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "MaxResults": {
@@ -7882,7 +7882,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Get information about a parameter.</p>\n         <p>Request results are returned on a best-effort basis. If you specify <code>MaxResults</code>\n   in the request, the response includes information up to the limit specified. The number of items\n   returned, however, can be between zero and the value of <code>MaxResults</code>. If the service\n   reaches an internal limit while processing the results, it stops the operation and returns the\n   matching values up to that point and a <code>NextToken</code>. You can specify the\n    <code>NextToken</code> in a subsequent call to get the next set of results.</p>",
+                "smithy.api#documentation": "<p>Get information about a parameter.</p>\n         <p>Request results are returned on a best-effort basis. If you specify <code>MaxResults</code>\n   in the request, the response includes information up to the limit specified. The number of items\n   returned, however, can be between zero and the value of <code>MaxResults</code>. If the service\n   reaches an internal limit while processing the results, it stops the operation and returns the\n   matching values up to that point and a <code>NextToken</code>. You can specify the\n    <code>NextToken</code> in a subsequent call to get the next set of results.</p>\n         <important>\n            <p>If you change the KMS key alias for the KMS key used to encrypt a parameter, then you must\n    also update the key alias the parameter uses to reference KMS. Otherwise,\n     <code>DescribeParameters</code> retrieves whatever the original key alias was\n    referencing.</p>\n         </important>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -8361,7 +8361,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the association between an OpsItem and a related resource. For example, this API\n   operation can delete an Incident Manager incident from an OpsItem. Incident Manager is a capability of\n   Amazon Web Services Systems Manager.</p>"
+                "smithy.api#documentation": "<p>Deletes the association between an OpsItem and a related item. For example, this API\n   operation can delete an Incident Manager incident from an OpsItem. Incident Manager is a capability of\n   Amazon Web Services Systems Manager.</p>"
             }
         },
         "com.amazonaws.ssm#DisassociateOpsItemRelatedItemRequest": {
@@ -8370,14 +8370,14 @@
                 "OpsItemId": {
                     "target": "com.amazonaws.ssm#OpsItemId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the OpsItem for which you want to delete an association between the OpsItem and a\n   related resource.</p>",
+                        "smithy.api#documentation": "<p>The ID of the OpsItem for which you want to delete an association between the OpsItem and a\n   related item.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "AssociationId": {
                     "target": "com.amazonaws.ssm#OpsItemRelatedItemAssociationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the association for which you want to delete an association between the OpsItem\n   and a related resource.</p>",
+                        "smithy.api#documentation": "<p>The ID of the association for which you want to delete an association between the OpsItem\n   and a related item.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -9881,6 +9881,12 @@
                                         "comparator": "stringEquals"
                                     }
                                 }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "errorType": "InvocationDoesNotExist"
+                                }
                             }
                         ],
                         "minDelay": 5
@@ -11081,6 +11087,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The retrieved task description.</p>"
                     }
+                },
+                "CutoffBehavior": {
+                    "target": "com.amazonaws.ssm#MaintenanceWindowTaskCutoffBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action to take on tasks when the maintenance window cutoff time is reached.\n    <code>CONTINUE_TASK</code> means that tasks continue to run. For Automation, Lambda, Step Functions tasks, <code>CANCEL_TASK</code> means that currently\n   running task invocations continue, but no new task invocations are started. For Run Command\n   tasks, <code>CANCEL_TASK</code> means the system attempts to stop the task by sending a\n    <code>CancelCommand</code> operation.</p>"
+                    }
                 }
             }
         },
@@ -11353,7 +11365,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the history of all changes to a parameter.</p>",
+                "smithy.api#documentation": "<p>Retrieves the history of all changes to a parameter.</p>\n         <important>\n            <p>If you change the KMS key alias for the KMS key used to encrypt a parameter, then you must\n    also update the key alias the parameter uses to reference KMS. Otherwise,\n     <code>GetParameterHistory</code> retrieves whatever the original key alias was\n    referencing.</p>\n         </important>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -11526,7 +11538,7 @@
                 "ParameterFilters": {
                     "target": "com.amazonaws.ssm#ParameterStringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters to limit the request results.</p>\n         <note>\n            <p>For <code>GetParametersByPath</code>, the following filter <code>Key</code> names are\n    supported: <code>Type</code>, <code>KeyId</code>, <code>Label</code>, and\n    <code>DataType</code>.</p>\n            <p>The following <code>Key</code> values are not supported for\n     <code>GetParametersByPath</code>: <code>tag</code>, <code>Name</code>, <code>Path</code>, and\n     <code>Tier</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Filters to limit the request results.</p>\n         <note>\n            <p>The following <code>Key</code> values are supported for <code>GetParametersByPath</code>:\n     <code>Type</code>, <code>KeyId</code>, and <code>Label</code>.</p>\n            <p>The following <code>Key</code> values aren't supported for\n    <code>GetParametersByPath</code>: <code>tag</code>, <code>DataType</code>, <code>Name</code>,\n     <code>Path</code>, and <code>Tier</code>.</p>\n         </note>"
                     }
                 },
                 "WithDecryption": {
@@ -15232,7 +15244,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all related-item resources associated with an OpsItem.</p>",
+                "smithy.api#documentation": "<p>Lists all related-item resources associated with a Systems Manager OpsCenter OpsItem. OpsCenter is a\n   capability of Amazon Web Services Systems Manager.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -16479,6 +16491,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A description of the task.</p>"
                     }
+                },
+                "CutoffBehavior": {
+                    "target": "com.amazonaws.ssm#MaintenanceWindowTaskCutoffBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specification for whether tasks should continue to run after the cutoff time specified\n   in the maintenance windows is reached. </p>"
+                    }
                 }
             },
             "traits": {
@@ -16492,6 +16510,21 @@
                     "min": 1,
                     "max": 1600
                 }
+            }
+        },
+        "com.amazonaws.ssm#MaintenanceWindowTaskCutoffBehavior": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CONTINUE_TASK",
+                        "name": "ContinueTask"
+                    },
+                    {
+                        "value": "CANCEL_TASK",
+                        "name": "CancelTask"
+                    }
+                ]
             }
         },
         "com.amazonaws.ssm#MaintenanceWindowTaskId": {
@@ -19207,7 +19240,7 @@
                 "Key": {
                     "target": "com.amazonaws.ssm#ParameterStringFilterKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the filter.</p>\n         <p>The <code>ParameterStringFilter</code> object is used by the <a>DescribeParameters</a> and <a>GetParametersByPath</a> API operations.\n   However, not all of the pattern values listed for <code>Key</code> can be used with both\n   operations.</p>\n         <p>For <code>DescribeActions</code>, all of the listed patterns are valid, with the exception\n   of <code>Label</code>.</p>\n         <p>For <code>GetParametersByPath</code>, the following patterns listed for <code>Key</code>\n   aren't valid: <code>tag</code>, <code>Name</code>, <code>Path</code>, and\n   <code>Tier</code>.</p>\n         <p>For examples of Amazon Web Services CLI commands demonstrating valid parameter filter constructions, see\n    <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-search.html\">Searching for Systems Manager parameters</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The name of the filter.</p>\n         <p>The <code>ParameterStringFilter</code> object is used by the <a>DescribeParameters</a> and <a>GetParametersByPath</a> API operations.\n   However, not all of the pattern values listed for <code>Key</code> can be used with both\n   operations.</p>\n         <p>For <code>DescribeActions</code>, all of the listed patterns are valid except\n    <code>Label</code>.</p>\n         <p>For <code>GetParametersByPath</code>, the following patterns listed for <code>Key</code>\n   aren't valid: <code>tag</code>, <code>DataType</code>, <code>Name</code>, <code>Path</code>, and\n    <code>Tier</code>.</p>\n         <p>For examples of Amazon Web Services CLI commands demonstrating valid parameter filter constructions, see\n    <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-search.html\">Searching for Systems Manager parameters</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -21229,6 +21262,12 @@
                         "smithy.api#documentation": "<p>User-provided idempotency token.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
+                },
+                "CutoffBehavior": {
+                    "target": "com.amazonaws.ssm#MaintenanceWindowTaskCutoffBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether tasks should continue to run after the cutoff time specified in the\n   maintenance windows is reached. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>CONTINUE_TASK</code>: When the cutoff time is reached, any tasks that are running\n     continue. The default value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCEL_TASK</code>:</p>\n               <ul>\n                  <li>\n                     <p>For Automation, Lambda, Step Functions tasks: When the cutoff\n       time is reached, any task invocations that are already running continue, but no new task\n       invocations are started.</p>\n                  </li>\n                  <li>\n                     <p>For Run Command tasks: When the cutoff time is reached, the system sends a <a>CancelCommand</a> operation that attempts to cancel the command associated with the\n       task. However, there is no guarantee that the command will be terminated and the underlying\n       process stopped.</p>\n                  </li>\n               </ul>\n               <p>The status for tasks that are not completed is <code>TIMED_OUT</code>.</p>\n            </li>\n         </ul>"
+                    }
                 }
             }
         },
@@ -22522,7 +22561,7 @@
                 "DocumentName": {
                     "target": "com.amazonaws.ssm#DocumentARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Amazon Web Services Systems Manager document (SSM document) to run. This can be a public document or a\n   custom document. To run a shared document belonging to another account, specify the document ARN.\n   For more information about how to use shared documents, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-using-shared.html\">Using shared SSM documents</a>\n   in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The name of the Amazon Web Services Systems Manager document (SSM document) to run. This can be a public document or a\n   custom document. To run a shared document belonging to another account, specify the document\n   Amazon Resource Name (ARN). For more information about how to use shared documents, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-using-shared.html\">Using shared\n    SSM documents</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <note>\n            <p>If you specify a document name or ARN that hasn't been shared with your account, you\n    receive an <code>InvalidDocument</code> error. </p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -25273,6 +25312,12 @@
                         "smithy.api#box": {},
                         "smithy.api#documentation": "<p>If True, then all fields that are required by the <a>RegisterTaskWithMaintenanceWindow</a> operation are also required for this API request.\n   Optional fields that aren't specified are set to null.</p>"
                     }
+                },
+                "CutoffBehavior": {
+                    "target": "com.amazonaws.ssm#MaintenanceWindowTaskCutoffBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether tasks should continue to run after the cutoff time specified in the\n   maintenance windows is reached. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>CONTINUE_TASK</code>: When the cutoff time is reached, any tasks that are running\n     continue. The default value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCEL_TASK</code>:</p>\n               <ul>\n                  <li>\n                     <p>For Automation, Lambda, Step Functions tasks: When the cutoff\n       time is reached, any task invocations that are already running continue, but no new task\n       invocations are started.</p>\n                  </li>\n                  <li>\n                     <p>For Run Command tasks: When the cutoff time is reached, the system sends a <a>CancelCommand</a> operation that attempts to cancel the command associated with the\n       task. However, there is no guarantee that the command will be terminated and the underlying\n       process stopped.</p>\n                  </li>\n               </ul>\n               <p>The status for tasks that are not completed is <code>TIMED_OUT</code>.</p>\n            </li>\n         </ul>"
+                    }
                 }
             }
         },
@@ -25355,6 +25400,12 @@
                     "target": "com.amazonaws.ssm#MaintenanceWindowDescription",
                     "traits": {
                         "smithy.api#documentation": "<p>The updated task description.</p>"
+                    }
+                },
+                "CutoffBehavior": {
+                    "target": "com.amazonaws.ssm#MaintenanceWindowTaskCutoffBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specification for whether tasks should continue to run after the cutoff time specified\n   in the maintenance windows is reached. </p>"
                     }
                 }
             }
@@ -25877,7 +25928,7 @@
                 "SettingValue": {
                     "target": "com.amazonaws.ssm#ServiceSettingValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new value to specify for the service setting. For the\n    <code>/ssm/parameter-store/default-parameter-tier</code> setting ID, the setting value can be\n   one of the following.</p>\n         <ul>\n            <li>\n               <p>Standard</p>\n            </li>\n            <li>\n               <p>Advanced</p>\n            </li>\n            <li>\n               <p>Intelligent-Tiering</p>\n            </li>\n         </ul>\n         <p>For the <code>/ssm/parameter-store/high-throughput-enabled</code>, and\n    <code>/ssm/managed-instance/activation-tier</code> setting IDs, the setting value can be true or\n   false.</p>\n         <p>For the <code>/ssm/automation/customer-script-log-destination</code> setting ID, the setting\n   value can be <code>CloudWatch</code>.</p>\n         <p>For the <code>/ssm/automation/customer-script-log-group-name</code> setting ID, the setting\n   value can be the name of an Amazon CloudWatch Logs log group.</p>\n         <p>For the <code>/ssm/documents/console/public-sharing-permission</code> setting ID, the\n   setting value can be <code>Enable</code> or <code>Disable</code>.</p>",
+                        "smithy.api#documentation": "<p>The new value to specify for the service setting. The following list specifies the available\n   values for each setting.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>/ssm/parameter-store/default-parameter-tier</code>: <code>Standard</code>,\n      <code>Advanced</code>, <code>Intelligent-Tiering</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/parameter-store/high-throughput-enabled</code>: <code>true</code> or\n      <code>false</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/managed-instance/activation-tier</code>: <code>true</code> or\n      <code>false</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/automation/customer-script-log-destination</code>: <code>CloudWatch</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/automation/customer-script-log-group-name</code>: the name of an Amazon CloudWatch Logs log group</p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/documents/console/public-sharing-permission</code>: <code>Enable</code> or\n      <code>Disable</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/managed-instance/activation-tier</code>: <code>standard</code> or\n      <code>advanced</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }

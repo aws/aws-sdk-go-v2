@@ -586,6 +586,9 @@
                     "target": "com.amazonaws.iot#ListViolationEvents"
                 },
                 {
+                    "target": "com.amazonaws.iot#PutVerificationStateOnViolation"
+                },
+                {
                     "target": "com.amazonaws.iot#RegisterCACertificate"
                 },
                 {
@@ -979,7 +982,7 @@
                 "elasticsearch": {
                     "target": "com.amazonaws.iot#ElasticsearchAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>Write data to an Amazon Elasticsearch Service domain.</p>\n         <note>\n            <p>This action is deprecated. Use the <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_OpenSearchAction.html\">OpenSearch action</a> instead.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Write data to an Amazon OpenSearch Service domain.</p>   \n         <note>\n            <p>The <code>Elasticsearch</code> action can only be used by existing rule actions. \n            To create a new rule action or to update an existing rule action, use the\n            <code>OpenSearch</code> rule action instead. For more information, see \n            <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_OpenSearchAction.html\">OpenSearchAction</a>.</p>\n         </note>"
                     }
                 },
                 "salesforce": {
@@ -1113,6 +1116,18 @@
                     "target": "com.amazonaws.iot#ViolationEventAdditionalInfo",
                     "traits": {
                         "smithy.api#documentation": "<p>\n            The details of a violation event.\n        </p>"
+                    }
+                },
+                "verificationState": {
+                    "target": "com.amazonaws.iot#VerificationState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The verification state of the violation (detect alarm).</p>"
+                    }
+                },
+                "verificationStateDescription": {
+                    "target": "com.amazonaws.iot#VerificationStateDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the verification state of the violation.</p>"
                     }
                 },
                 "lastViolationTime": {
@@ -4850,7 +4865,7 @@
                 "clientRequestToken": {
                     "target": "com.amazonaws.iot#ClientRequestToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The epoch timestamp in seconds at which this suppression expires.\n    </p>",
+                        "smithy.api#documentation": "<p>\n      Each audit supression must have a unique client request token. If you try to create a new audit\n      suppression with the same token as one that already exists, an exception occurs. If you omit this\n      value, Amazon Web Services SDKs will automatically generate a unique client request.\n    </p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
@@ -13090,21 +13105,21 @@
                 "roleArn": {
                     "target": "com.amazonaws.iot#AwsArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IAM role ARN that has access to Elasticsearch.</p>",
+                        "smithy.api#documentation": "<p>The IAM role ARN that has access to OpenSearch.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "endpoint": {
                     "target": "com.amazonaws.iot#ElasticsearchEndpoint",
                     "traits": {
-                        "smithy.api#documentation": "<p>The endpoint of your Elasticsearch domain.</p>",
+                        "smithy.api#documentation": "<p>The endpoint of your OpenSearch domain.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "index": {
                     "target": "com.amazonaws.iot#ElasticsearchIndex",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Elasticsearch index where you want to store your data.</p>",
+                        "smithy.api#documentation": "<p>The index where you want to store your data.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -13124,7 +13139,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes an action that writes data to an Amazon Elasticsearch Service\n         domain.</p>\n         <note>\n            <p>This action is deprecated. Use the <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_OpenSearchAction.html\">OpenSearch action</a> instead.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Describes an action that writes data to an Amazon OpenSearch Service\n         domain.</p>  \n         <note>\n            <p>The <code>Elasticsearch</code> action can only be used by existing rule actions. To create a\n         new rule action or to update an existing rule action, use the\n         <code>OpenSearch</code> rule action instead. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_OpenSearchAction.html\">OpenSearchAction</a>.</p>\n         </note>"
             }
         },
         "com.amazonaws.iot#ElasticsearchEndpoint": {
@@ -16389,6 +16404,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n      A list of all suppressed alerts.\n    </p>",
                         "smithy.api#httpQuery": "listSuppressedAlerts"
+                    }
+                },
+                "verificationState": {
+                    "target": "com.amazonaws.iot#VerificationState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The verification state of the violation (detect alarm).</p>",
+                        "smithy.api#httpQuery": "verificationState"
                     }
                 },
                 "nextToken": {
@@ -21033,6 +21055,13 @@
                         "smithy.api#httpQuery": "listSuppressedAlerts"
                     }
                 },
+                "verificationState": {
+                    "target": "com.amazonaws.iot#VerificationState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The verification state of the violation (detect alarm).</p>",
+                        "smithy.api#httpQuery": "verificationState"
+                    }
+                },
                 "nextToken": {
                     "target": "com.amazonaws.iot#NextToken",
                     "traits": {
@@ -22649,6 +22678,64 @@
             "traits": {
                 "smithy.api#documentation": "<p>The input for the DynamoActionVS action that specifies the DynamoDB table to which\n         the message data will be written.</p>"
             }
+        },
+        "com.amazonaws.iot#PutVerificationStateOnViolation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot#PutVerificationStateOnViolationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#PutVerificationStateOnViolationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Set a verification state and provide a description of that verification state on a violation (detect alarm).</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/violations/verification-state/{violationId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iot#PutVerificationStateOnViolationRequest": {
+            "type": "structure",
+            "members": {
+                "violationId": {
+                    "target": "com.amazonaws.iot#ViolationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The violation ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "verificationState": {
+                    "target": "com.amazonaws.iot#VerificationState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The verification state of the violation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "verificationStateDescription": {
+                    "target": "com.amazonaws.iot#VerificationStateDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the verification state of the violation (detect alarm).</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot#PutVerificationStateOnViolationResponse": {
+            "type": "structure",
+            "members": {}
         },
         "com.amazonaws.iot#Qos": {
             "type": "integer",
@@ -29558,6 +29645,39 @@
         "com.amazonaws.iot#Variance": {
             "type": "double"
         },
+        "com.amazonaws.iot#VerificationState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "FALSE_POSITIVE",
+                        "name": "FALSE_POSITIVE"
+                    },
+                    {
+                        "value": "BENIGN_POSITIVE",
+                        "name": "BENIGN_POSITIVE"
+                    },
+                    {
+                        "value": "TRUE_POSITIVE",
+                        "name": "TRUE_POSITIVE"
+                    },
+                    {
+                        "value": "UNKNOWN",
+                        "name": "UNKNOWN"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.iot#VerificationStateDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                },
+                "smithy.api#pattern": "^[\\p{Graph}\\x20]*$"
+            }
+        },
         "com.amazonaws.iot#Version": {
             "type": "long"
         },
@@ -29639,6 +29759,18 @@
                     "target": "com.amazonaws.iot#ViolationEventType",
                     "traits": {
                         "smithy.api#documentation": "<p>The type of violation event.</p>"
+                    }
+                },
+                "verificationState": {
+                    "target": "com.amazonaws.iot#VerificationState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The verification state of the violation (detect alarm).</p>"
+                    }
+                },
+                "verificationStateDescription": {
+                    "target": "com.amazonaws.iot#VerificationStateDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the verification state of the violation.</p>"
                     }
                 },
                 "violationEventTime": {
