@@ -9182,6 +9182,10 @@ func awsRestjson1_serializeOpHttpBindingsListActiveViolationsInput(v *ListActive
 		encoder.SetQuery("thingName").String(*v.ThingName)
 	}
 
+	if len(v.VerificationState) > 0 {
+		encoder.SetQuery("verificationState").String(string(v.VerificationState))
+	}
+
 	return nil
 }
 
@@ -12674,6 +12678,96 @@ func awsRestjson1_serializeOpHttpBindingsListViolationEventsInput(v *ListViolati
 
 	if v.ThingName != nil {
 		encoder.SetQuery("thingName").String(*v.ThingName)
+	}
+
+	if len(v.VerificationState) > 0 {
+		encoder.SetQuery("verificationState").String(string(v.VerificationState))
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpPutVerificationStateOnViolation struct {
+}
+
+func (*awsRestjson1_serializeOpPutVerificationStateOnViolation) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpPutVerificationStateOnViolation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutVerificationStateOnViolationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/violations/verification-state/{violationId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsPutVerificationStateOnViolationInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentPutVerificationStateOnViolationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsPutVerificationStateOnViolationInput(v *PutVerificationStateOnViolationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ViolationId == nil || len(*v.ViolationId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member violationId must not be empty")}
+	}
+	if v.ViolationId != nil {
+		if err := encoder.SetURI("violationId").String(*v.ViolationId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentPutVerificationStateOnViolationInput(v *PutVerificationStateOnViolationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.VerificationState) > 0 {
+		ok := object.Key("verificationState")
+		ok.String(string(v.VerificationState))
+	}
+
+	if v.VerificationStateDescription != nil {
+		ok := object.Key("verificationStateDescription")
+		ok.String(*v.VerificationStateDescription)
 	}
 
 	return nil

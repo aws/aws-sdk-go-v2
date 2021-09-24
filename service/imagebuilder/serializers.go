@@ -879,6 +879,13 @@ func awsRestjson1_serializeOpDocumentCreateInfrastructureConfigurationInput(v *C
 		ok.String(*v.Description)
 	}
 
+	if v.InstanceMetadataOptions != nil {
+		ok := object.Key("instanceMetadataOptions")
+		if err := awsRestjson1_serializeDocumentInstanceMetadataOptions(v.InstanceMetadataOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.InstanceProfileName != nil {
 		ok := object.Key("instanceProfileName")
 		ok.String(*v.InstanceProfileName)
@@ -3799,6 +3806,13 @@ func awsRestjson1_serializeOpDocumentUpdateInfrastructureConfigurationInput(v *U
 		ok.String(*v.InfrastructureConfigurationArn)
 	}
 
+	if v.InstanceMetadataOptions != nil {
+		ok := object.Key("instanceMetadataOptions")
+		if err := awsRestjson1_serializeDocumentInstanceMetadataOptions(v.InstanceMetadataOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.InstanceProfileName != nil {
 		ok := object.Key("instanceProfileName")
 		ok.String(*v.InstanceProfileName)
@@ -4111,6 +4125,11 @@ func awsRestjson1_serializeDocumentEbsInstanceBlockDeviceSpecification(v *types.
 		ok.String(*v.SnapshotId)
 	}
 
+	if v.Throughput != nil {
+		ok := object.Key("throughput")
+		ok.Integer(*v.Throughput)
+	}
+
 	if v.VolumeSize != nil {
 		ok := object.Key("volumeSize")
 		ok.Integer(*v.VolumeSize)
@@ -4240,6 +4259,23 @@ func awsRestjson1_serializeDocumentInstanceConfiguration(v *types.InstanceConfig
 	if v.Image != nil {
 		ok := object.Key("image")
 		ok.String(*v.Image)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInstanceMetadataOptions(v *types.InstanceMetadataOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.HttpPutResponseHopLimit != nil {
+		ok := object.Key("httpPutResponseHopLimit")
+		ok.Integer(*v.HttpPutResponseHopLimit)
+	}
+
+	if v.HttpTokens != nil {
+		ok := object.Key("httpTokens")
+		ok.String(*v.HttpTokens)
 	}
 
 	return nil

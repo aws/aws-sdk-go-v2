@@ -67,10 +67,11 @@ type Action struct {
 	// DynamoDB column.
 	DynamoDBv2 *DynamoDBv2Action
 
-	// Write data to an Amazon Elasticsearch Service domain. This action is deprecated.
-	// Use the OpenSearch action
-	// (https://docs.aws.amazon.com/iot/latest/apireference/API_OpenSearchAction.html)
-	// instead.
+	// Write data to an Amazon OpenSearch Service domain. The Elasticsearch action can
+	// only be used by existing rule actions. To create a new rule action or to update
+	// an existing rule action, use the OpenSearch rule action instead. For more
+	// information, see OpenSearchAction
+	// (https://docs.aws.amazon.com/iot/latest/apireference/API_OpenSearchAction.html).
 	Elasticsearch *ElasticsearchAction
 
 	// Write to an Amazon Kinesis Firehose stream.
@@ -146,6 +147,12 @@ type ActiveViolation struct {
 
 	// The name of the thing responsible for the active violation.
 	ThingName *string
+
+	// The verification state of the violation (detect alarm).
+	VerificationState VerificationState
+
+	// The description of the verification state of the violation.
+	VerificationStateDescription *string
 
 	// The details of a violation event.
 	ViolationEventAdditionalInfo *ViolationEventAdditionalInfo
@@ -1415,13 +1422,14 @@ type EffectivePolicy struct {
 	noSmithyDocumentSerde
 }
 
-// Describes an action that writes data to an Amazon Elasticsearch Service domain.
-// This action is deprecated. Use the OpenSearch action
-// (https://docs.aws.amazon.com/iot/latest/apireference/API_OpenSearchAction.html)
-// instead.
+// Describes an action that writes data to an Amazon OpenSearch Service domain. The
+// Elasticsearch action can only be used by existing rule actions. To create a new
+// rule action or to update an existing rule action, use the OpenSearch rule action
+// instead. For more information, see OpenSearchAction
+// (https://docs.aws.amazon.com/iot/latest/apireference/API_OpenSearchAction.html).
 type ElasticsearchAction struct {
 
-	// The endpoint of your Elasticsearch domain.
+	// The endpoint of your OpenSearch domain.
 	//
 	// This member is required.
 	Endpoint *string
@@ -1431,12 +1439,12 @@ type ElasticsearchAction struct {
 	// This member is required.
 	Id *string
 
-	// The Elasticsearch index where you want to store your data.
+	// The index where you want to store your data.
 	//
 	// This member is required.
 	Index *string
 
-	// The IAM role ARN that has access to Elasticsearch.
+	// The IAM role ARN that has access to OpenSearch.
 	//
 	// This member is required.
 	RoleArn *string
@@ -3844,6 +3852,12 @@ type ViolationEvent struct {
 
 	// The name of the thing responsible for the violation event.
 	ThingName *string
+
+	// The verification state of the violation (detect alarm).
+	VerificationState VerificationState
+
+	// The description of the verification state of the violation.
+	VerificationStateDescription *string
 
 	// The details of a violation event.
 	ViolationEventAdditionalInfo *ViolationEventAdditionalInfo

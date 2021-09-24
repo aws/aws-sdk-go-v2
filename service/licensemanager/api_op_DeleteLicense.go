@@ -44,7 +44,7 @@ type DeleteLicenseInput struct {
 
 type DeleteLicenseOutput struct {
 
-	// Date on which the license is deleted.
+	// Date when the license is deleted.
 	DeletionDate *string
 
 	// License status.

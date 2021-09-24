@@ -801,6 +801,16 @@ type BurninDestinationSettings struct {
 	// All burn-in and DVB-Sub font settings must match.
 	Alignment BurninSubtitleAlignment
 
+	// Ignore this setting unless your input captions are STL, any type of 608,
+	// teletext, or TTML, and your output captions are burned in. Specify how the
+	// service applies the color specified in the setting Font color
+	// (BurninSubtitleFontColor). By default, this color is white. When you choose
+	// WHITE_TEXT_ONLY, the service uses the specified font color only for text that is
+	// white in the input. When you choose ALL_TEXT, the service uses the specified
+	// font color for all output captions text. If you leave both settings at their
+	// default value, your output font color is the same as your input font color.
+	ApplyFontColor BurninSubtitleApplyFontColor
+
 	// Specifies the color of the rectangle behind the captions. All burn-in and
 	// DVB-Sub font settings must match.
 	BackgroundColor BurninSubtitleBackgroundColor
@@ -809,6 +819,16 @@ type BurninDestinationSettings struct {
 	// transparent. Leaving this parameter blank is equivalent to setting it to 0
 	// (transparent). All burn-in and DVB-Sub font settings must match.
 	BackgroundOpacity int32
+
+	// Specify the font that you want the service to use for your burn in captions when
+	// your input captions specify a font that MediaConvert doesn't support. When you
+	// keep the default value, Best match (BEST_MATCH), MediaConvert uses a supported
+	// font that most closely matches the font that your input captions specify. When
+	// there are multiple unsupported fonts in your input captions, MediaConvert
+	// matches each font with the supported font that matches best. When you explicitly
+	// choose a replacement font, MediaConvert uses that font to replace all
+	// unsupported fonts from your input.
+	FallbackFont BurninSubtitleFallbackFont
 
 	// Specifies the color of the burned-in captions. This option is not valid for
 	// source captions that are STL, 608/embedded or teletext. These source settings
@@ -833,6 +853,13 @@ type BurninDestinationSettings struct {
 	// A positive integer indicates the exact font size in points. Set to 0 for
 	// automatic font size selection. All burn-in and DVB-Sub font settings must match.
 	FontSize int32
+
+	// Ignore this setting unless your BurninSubtitleFontColor setting is HEX. Format
+	// is six or eight hexidecimal digits, representing the red, green, and blue
+	// components, with the two extra digits used for an optional alpha value. For
+	// example a value of 1122AABB is a red value of 0x11, a green value of 0x22, a
+	// blue value of 0xAA, and an alpha value of 0xBB.
+	HexFontColor *string
 
 	// Specifies font outline color. This option is not valid for source captions that
 	// are either 608/embedded or teletext. These source settings are already
@@ -864,6 +891,15 @@ type BurninDestinationSettings struct {
 	// A value of -2 would result in a shadow offset 2 pixels above the text. All
 	// burn-in and DVB-Sub font settings must match.
 	ShadowYOffset int32
+
+	// Ignore this setting unless your output captions are burned in. Choose which set
+	// of style and position values the service applies to your output captions. When
+	// you choose ENABLED, the service uses the input style and position information
+	// from your input. When you choose DISABLED, the service uses any style values
+	// that you specify in your output settings. If you don't specify values, the
+	// service uses default style and position values. When you choose DISABLED, the
+	// service ignores all style and position values from your input.
+	StylePassthrough BurnInSubtitleStylePassthrough
 
 	// Only applies to jobs with input captions in Teletext or STL formats. Specify
 	// whether the spacing between letters in your captions is set by the captions grid
@@ -1298,6 +1334,9 @@ type CmafGroupSettings struct {
 	// https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md
 	ImageBasedTrickPlay CmafImageBasedTrickPlay
 
+	// Tile and thumbnail settings applicable when imageBasedTrickPlay is ADVANCED
+	ImageBasedTrickPlaySettings *CmafImageBasedTrickPlaySettings
+
 	// When set to GZIP, compresses HLS playlist.
 	ManifestCompression CmafManifestCompression
 
@@ -1391,6 +1430,42 @@ type CmafGroupSettings struct {
 	// segment duration information appears in the duration attribute of the
 	// SegmentTemplate element.
 	WriteSegmentTimelineInRepresentation CmafWriteSegmentTimelineInRepresentation
+
+	noSmithyDocumentSerde
+}
+
+// Tile and thumbnail settings applicable when imageBasedTrickPlay is ADVANCED
+type CmafImageBasedTrickPlaySettings struct {
+
+	// The cadence MediaConvert follows for generating thumbnails. If set to
+	// FOLLOW_IFRAME, MediaConvert generates thumbnails for each IDR frame in the
+	// output (matching the GOP cadence). If set to FOLLOW_CUSTOM, MediaConvert
+	// generates thumbnails according to the interval you specify in thumbnailInterval.
+	IntervalCadence CmafIntervalCadence
+
+	// Height of each thumbnail within each tile image, in pixels. Leave blank to
+	// maintain aspect ratio with thumbnail width. If following the aspect ratio would
+	// lead to a total tile height greater than 4096, then the job will be rejected.
+	// Must be divisible by 2.
+	ThumbnailHeight int32
+
+	// Enter the interval, in seconds, that MediaConvert uses to generate thumbnails.
+	// If the interval you enter doesn't align with the output frame rate, MediaConvert
+	// automatically rounds the interval to align with the output frame rate. For
+	// example, if the output frame rate is 29.97 frames per second and you enter 5,
+	// MediaConvert uses a 150 frame interval to generate thumbnails.
+	ThumbnailInterval float64
+
+	// Width of each thumbnail within each tile image, in pixels. Default is 312. Must
+	// be divisible by 8.
+	ThumbnailWidth int32
+
+	// Number of thumbnails in each column of a tile image. Set a value between 2 and
+	// 2048. Must be divisible by 2.
+	TileHeight int32
+
+	// Number of thumbnails in each row of a tile image. Set a value between 1 and 512.
+	TileWidth int32
 
 	noSmithyDocumentSerde
 }
@@ -1696,6 +1771,9 @@ type DashIsoGroupSettings struct {
 	// https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md
 	ImageBasedTrickPlay DashIsoImageBasedTrickPlay
 
+	// Tile and thumbnail settings applicable when imageBasedTrickPlay is ADVANCED
+	ImageBasedTrickPlaySettings *DashIsoImageBasedTrickPlaySettings
+
 	// Minimum time of initially buffered media that is needed to ensure smooth
 	// playout.
 	MinBufferTime int32
@@ -1760,6 +1838,42 @@ type DashIsoGroupSettings struct {
 	// SegmentTemplate at the Representation level. When you don't enable this setting,
 	// the service writes approximate segment durations in your DASH manifest.
 	WriteSegmentTimelineInRepresentation DashIsoWriteSegmentTimelineInRepresentation
+
+	noSmithyDocumentSerde
+}
+
+// Tile and thumbnail settings applicable when imageBasedTrickPlay is ADVANCED
+type DashIsoImageBasedTrickPlaySettings struct {
+
+	// The cadence MediaConvert follows for generating thumbnails. If set to
+	// FOLLOW_IFRAME, MediaConvert generates thumbnails for each IDR frame in the
+	// output (matching the GOP cadence). If set to FOLLOW_CUSTOM, MediaConvert
+	// generates thumbnails according to the interval you specify in thumbnailInterval.
+	IntervalCadence DashIsoIntervalCadence
+
+	// Height of each thumbnail within each tile image, in pixels. Leave blank to
+	// maintain aspect ratio with thumbnail width. If following the aspect ratio would
+	// lead to a total tile height greater than 4096, then the job will be rejected.
+	// Must be divisible by 2.
+	ThumbnailHeight int32
+
+	// Enter the interval, in seconds, that MediaConvert uses to generate thumbnails.
+	// If the interval you enter doesn't align with the output frame rate, MediaConvert
+	// automatically rounds the interval to align with the output frame rate. For
+	// example, if the output frame rate is 29.97 frames per second and you enter 5,
+	// MediaConvert uses a 150 frame interval to generate thumbnails.
+	ThumbnailInterval float64
+
+	// Width of each thumbnail within each tile image, in pixels. Default is 312. Must
+	// be divisible by 8.
+	ThumbnailWidth int32
+
+	// Number of thumbnails in each column of a tile image. Set a value between 2 and
+	// 2048. Must be divisible by 2.
+	TileHeight int32
+
+	// Number of thumbnails in each row of a tile image. Set a value between 1 and 512.
+	TileWidth int32
 
 	noSmithyDocumentSerde
 }
@@ -1905,6 +2019,16 @@ type DvbSubDestinationSettings struct {
 	// All burn-in and DVB-Sub font settings must match.
 	Alignment DvbSubtitleAlignment
 
+	// Ignore this setting unless your input captions are STL, any type of 608,
+	// teletext, or TTML, and your output captions are DVB-SUB. Specify how the service
+	// applies the color specified in the setting Font color (DvbSubtitleFontColor). By
+	// default, this color is white. When you choose WHITE_TEXT_ONLY, the service uses
+	// the specified font color only for text that is white in the input. When you
+	// choose ALL_TEXT, the service uses the specified font color for all output
+	// captions text. If you leave both settings at their default value, your output
+	// font color is the same as your input font color.
+	ApplyFontColor DvbSubtitleApplyFontColor
+
 	// Specifies the color of the rectangle behind the captions. All burn-in and
 	// DVB-Sub font settings must match.
 	BackgroundColor DvbSubtitleBackgroundColor
@@ -1951,6 +2075,16 @@ type DvbSubDestinationSettings struct {
 	// and DVB-Sub font settings must match.
 	DdsYCoordinate int32
 
+	// Specify the font that you want the service to use for your burn in captions when
+	// your input captions specify a font that MediaConvert doesn't support. When you
+	// keep the default value, Best match (BEST_MATCH), MediaConvert uses a supported
+	// font that most closely matches the font that your input captions specify. When
+	// there are multiple unsupported fonts in your input captions, MediaConvert
+	// matches each font with the supported font that matches best. When you explicitly
+	// choose a replacement font, MediaConvert uses that font to replace all
+	// unsupported fonts from your input.
+	FallbackFont DvbSubSubtitleFallbackFont
+
 	// Specifies the color of the DVB-SUB captions. This option is not valid for source
 	// captions that are STL, 608/embedded or teletext. These source settings are
 	// already pre-defined by the caption stream. All burn-in and DVB-Sub font settings
@@ -1980,6 +2114,13 @@ type DvbSubDestinationSettings struct {
 	// DDS handling (ddsHandling) to a value other than None (NONE). All burn-in and
 	// DVB-Sub font settings must match.
 	Height int32
+
+	// Ignore this setting unless your DvbSubtitleFontColor setting is HEX. Format is
+	// six or eight hexidecimal digits, representing the red, green, and blue
+	// components, with the two extra digits used for an optional alpha value. For
+	// example a value of 1122AABB is a red value of 0x11, a green value of 0x22, a
+	// blue value of 0xAA, and an alpha value of 0xBB.
+	HexFontColor *string
 
 	// Specifies font outline color. This option is not valid for source captions that
 	// are either 608/embedded or teletext. These source settings are already
@@ -2011,6 +2152,14 @@ type DvbSubDestinationSettings struct {
 	// A value of -2 would result in a shadow offset 2 pixels above the text. All
 	// burn-in and DVB-Sub font settings must match.
 	ShadowYOffset int32
+
+	// Choose which set of style and position values the service applies to your output
+	// captions. When you choose ENABLED, the service uses the input style and position
+	// information from your input. When you choose DISABLED, the service uses any
+	// style values that you specify in your output settings. If you don't specify
+	// values, the service uses default style and position values. When you choose
+	// DISABLED, the service ignores all style and position values from your input.
+	StylePassthrough DvbSubtitleStylePassthrough
 
 	// Specify whether your DVB subtitles are standard or for hearing impaired. Choose
 	// hearing impaired if your subtitles include audio descriptions and dialogue.
@@ -2458,7 +2607,10 @@ type EsamSignalProcessingNotification struct {
 	noSmithyDocumentSerde
 }
 
-// Hexadecimal value as per EIA-608 Line 21 Data Services, section 9.5.1.5 05h
+// If your source content has EIA-608 Line 21 Data Services, enable this feature to
+// specify what MediaConvert does with the Extended Data Services (XDS) packets.
+// You can choose to pass through XDS packets, or remove them from the output. For
+// more information about XDS, see EIA-608 Line Data Services, section 9.5.1.5 05h
 // Content Advisory.
 type ExtendedDataServices struct {
 
@@ -3494,6 +3646,9 @@ type HlsGroupSettings struct {
 	// https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md
 	ImageBasedTrickPlay HlsImageBasedTrickPlay
 
+	// Tile and thumbnail settings applicable when imageBasedTrickPlay is ADVANCED
+	ImageBasedTrickPlaySettings *HlsImageBasedTrickPlaySettings
+
 	// When set to GZIP, compresses HLS playlist.
 	ManifestCompression HlsManifestCompression
 
@@ -3577,6 +3732,42 @@ type HlsGroupSettings struct {
 
 	// Provides an extra millisecond delta offset to fine tune the timestamps.
 	TimestampDeltaMilliseconds int32
+
+	noSmithyDocumentSerde
+}
+
+// Tile and thumbnail settings applicable when imageBasedTrickPlay is ADVANCED
+type HlsImageBasedTrickPlaySettings struct {
+
+	// The cadence MediaConvert follows for generating thumbnails. If set to
+	// FOLLOW_IFRAME, MediaConvert generates thumbnails for each IDR frame in the
+	// output (matching the GOP cadence). If set to FOLLOW_CUSTOM, MediaConvert
+	// generates thumbnails according to the interval you specify in thumbnailInterval.
+	IntervalCadence HlsIntervalCadence
+
+	// Height of each thumbnail within each tile image, in pixels. Leave blank to
+	// maintain aspect ratio with thumbnail width. If following the aspect ratio would
+	// lead to a total tile height greater than 4096, then the job will be rejected.
+	// Must be divisible by 2.
+	ThumbnailHeight int32
+
+	// Enter the interval, in seconds, that MediaConvert uses to generate thumbnails.
+	// If the interval you enter doesn't align with the output frame rate, MediaConvert
+	// automatically rounds the interval to align with the output frame rate. For
+	// example, if the output frame rate is 29.97 frames per second and you enter 5,
+	// MediaConvert uses a 150 frame interval to generate thumbnails.
+	ThumbnailInterval float64
+
+	// Width of each thumbnail within each tile image, in pixels. Default is 312. Must
+	// be divisible by 8.
+	ThumbnailWidth int32
+
+	// Number of thumbnails in each column of a tile image. Set a value between 2 and
+	// 2048. Must be divisible by 2.
+	TileHeight int32
+
+	// Number of thumbnails in each row of a tile image. Set a value between 1 and 512.
+	TileWidth int32
 
 	noSmithyDocumentSerde
 }
@@ -4263,7 +4454,10 @@ type JobSettings struct {
 	// you can ignore these settings.
 	Esam *EsamSettings
 
-	// Hexadecimal value as per EIA-608 Line 21 Data Services, section 9.5.1.5 05h
+	// If your source content has EIA-608 Line 21 Data Services, enable this feature to
+	// specify what MediaConvert does with the Extended Data Services (XDS) packets.
+	// You can choose to pass through XDS packets, or remove them from the output. For
+	// more information about XDS, see EIA-608 Line Data Services, section 9.5.1.5 05h
 	// Content Advisory.
 	ExtendedDataServices *ExtendedDataServices
 
@@ -4403,7 +4597,10 @@ type JobTemplateSettings struct {
 	// you can ignore these settings.
 	Esam *EsamSettings
 
-	// Hexadecimal value as per EIA-608 Line 21 Data Services, section 9.5.1.5 05h
+	// If your source content has EIA-608 Line 21 Data Services, enable this feature to
+	// specify what MediaConvert does with the Extended Data Services (XDS) packets.
+	// You can choose to pass through XDS packets, or remove them from the output. For
+	// more information about XDS, see EIA-608 Line Data Services, section 9.5.1.5 05h
 	// Content Advisory.
 	ExtendedDataServices *ExtendedDataServices
 

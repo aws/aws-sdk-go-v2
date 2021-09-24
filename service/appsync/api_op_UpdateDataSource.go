@@ -50,7 +50,10 @@ type UpdateDataSourceInput struct {
 	// The new Amazon DynamoDB configuration.
 	DynamodbConfig *types.DynamodbDataSourceConfig
 
-	// The new Elasticsearch Service configuration.
+	// The new OpenSearch configuration. As of September 2021, Amazon Elasticsearch
+	// service is Amazon OpenSearch Service. This configuration is deprecated. Instead,
+	// use UpdateDataSourceRequest$openSearchServiceConfig to update an OpenSearch data
+	// source.
 	ElasticsearchConfig *types.ElasticsearchDataSourceConfig
 
 	// The new HTTP endpoint configuration.
@@ -58,6 +61,9 @@ type UpdateDataSourceInput struct {
 
 	// The new Amazon Web Services Lambda configuration.
 	LambdaConfig *types.LambdaDataSourceConfig
+
+	// The new OpenSearch configuration.
+	OpenSearchServiceConfig *types.OpenSearchServiceDataSourceConfig
 
 	// The new relational database configuration.
 	RelationalDatabaseConfig *types.RelationalDatabaseDataSourceConfig

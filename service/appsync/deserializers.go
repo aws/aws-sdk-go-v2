@@ -7130,6 +7130,11 @@ func awsRestjson1_deserializeDocumentDataSource(v **types.DataSource, value inte
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "openSearchServiceConfig":
+			if err := awsRestjson1_deserializeDocumentOpenSearchServiceDataSourceConfig(&sv.OpenSearchServiceConfig, value); err != nil {
+				return err
+			}
+
 		case "relationalDatabaseConfig":
 			if err := awsRestjson1_deserializeDocumentRelationalDatabaseDataSourceConfig(&sv.RelationalDatabaseConfig, value); err != nil {
 				return err
@@ -8220,6 +8225,55 @@ func awsRestjson1_deserializeDocumentOpenIDConnectConfig(v **types.OpenIDConnect
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Issuer = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentOpenSearchServiceDataSourceConfig(v **types.OpenSearchServiceDataSourceConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OpenSearchServiceDataSourceConfig
+	if *v == nil {
+		sv = &types.OpenSearchServiceDataSourceConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "awsRegion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AwsRegion = ptr.String(jtv)
+			}
+
+		case "endpoint":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Endpoint = ptr.String(jtv)
 			}
 
 		default:

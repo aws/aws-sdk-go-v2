@@ -993,12 +993,13 @@ type CommandFilter struct {
 	// before July 7, 2021.
 	//
 	// * Status: Specify a valid command status to see a list of
-	// all command executions with that status. Status values you can specify
-	// include:
+	// all command executions with that status. The status choices depend on the API
+	// you call. The status values you can specify for ListCommands are:
 	//
 	// * Pending
 	//
-	// * InProgress
+	// *
+	// InProgress
 	//
 	// * Success
 	//
@@ -1006,25 +1007,68 @@ type CommandFilter struct {
 	//
 	// * Failed
 	//
+	// * TimedOut (this includes both
+	// Delivery and Execution time outs)
+	//
+	// * AccessDenied
+	//
+	// * DeliveryTimedOut
+	//
 	// *
-	// TimedOut
+	// ExecutionTimedOut
 	//
-	// * Cancelling
+	// * Incomplete
 	//
-	// * DocumentName: Specify name of the Amazon Web Services
-	// Systems Manager document (SSM document) for which you want to see command
-	// execution results. For example, specify AWS-RunPatchBaseline to see command
-	// executions that used this SSM document to perform security patching operations
-	// on instances.
+	// * NoInstancesInTag
+	//
+	// * LimitExceeded
+	//
+	// The status
+	// values you can specify for ListCommandInvocations are:
+	//
+	// * Pending
+	//
+	// *
+	// InProgress
+	//
+	// * Delayed
+	//
+	// * Success
+	//
+	// * Cancelled
+	//
+	// * Failed
+	//
+	// * TimedOut (this
+	// includes both Delivery and Execution time outs)
+	//
+	// * AccessDenied
+	//
+	// *
+	// DeliveryTimedOut
+	//
+	// * ExecutionTimedOut
+	//
+	// * Undeliverable
+	//
+	// * InvalidPlatform
+	//
+	// *
+	// Terminated
+	//
+	// * DocumentName: Specify name of the Amazon Web Services Systems
+	// Manager document (SSM document) for which you want to see command execution
+	// results. For example, specify AWS-RunPatchBaseline to see command executions
+	// that used this SSM document to perform security patching operations on
+	// instances.
 	//
 	// * ExecutionStage: Specify one of the following values:
 	//
-	// *
-	// Executing: Returns a list of command executions that are currently still
-	// running.
+	// * Executing:
+	// Returns a list of command executions that are currently still running.
 	//
-	// * Complete: Returns a list of command executions that have already
-	// completed.
+	// *
+	// Complete: Returns a list of command executions that have already completed.
 	//
 	// This member is required.
 	Value *string
@@ -1062,8 +1106,7 @@ type CommandInvocation struct {
 	// The instance ID in which this invocation was requested.
 	InstanceId *string
 
-	// The name of the invocation target. For EC2 instances this is the value for the
-	// aws:Name tag. For on-premises instances, this is the name of the instance.
+	// The fully qualified host name of the managed instance.
 	InstanceName *string
 
 	// Configurations for sending notifications about command status changes on a per
@@ -3049,6 +3092,10 @@ type MaintenanceWindowTarget struct {
 // Information about a task defined for a maintenance window.
 type MaintenanceWindowTask struct {
 
+	// The specification for whether tasks should continue to run after the cutoff time
+	// specified in the maintenance windows is reached.
+	CutoffBehavior MaintenanceWindowTaskCutoffBehavior
+
 	// A description of the task.
 	Description *string
 
@@ -3830,11 +3877,11 @@ type ParameterStringFilter struct {
 	// The name of the filter. The ParameterStringFilter object is used by the
 	// DescribeParameters and GetParametersByPath API operations. However, not all of
 	// the pattern values listed for Key can be used with both operations. For
-	// DescribeActions, all of the listed patterns are valid, with the exception of
-	// Label. For GetParametersByPath, the following patterns listed for Key aren't
-	// valid: tag, Name, Path, and Tier. For examples of Amazon Web Services CLI
-	// commands demonstrating valid parameter filter constructions, see Searching for
-	// Systems Manager parameters
+	// DescribeActions, all of the listed patterns are valid except Label. For
+	// GetParametersByPath, the following patterns listed for Key aren't valid: tag,
+	// DataType, Name, Path, and Tier. For examples of Amazon Web Services CLI commands
+	// demonstrating valid parameter filter constructions, see Searching for Systems
+	// Manager parameters
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-search.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	//

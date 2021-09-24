@@ -61,6 +61,9 @@
                     "target": "com.amazonaws.ecr#DeleteRepositoryPolicy"
                 },
                 {
+                    "target": "com.amazonaws.ecr#DescribeImageReplicationStatus"
+                },
+                {
                     "target": "com.amazonaws.ecr#DescribeImages"
                 },
                 {
@@ -612,6 +615,12 @@
         "com.amazonaws.ecr#CreateRepositoryRequest": {
             "type": "structure",
             "members": {
+                "registryId": {
+                    "target": "com.amazonaws.ecr#RegistryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID associated with the registry to create the repository.\n            If you do not specify a registry, the default registry is assumed.</p>"
+                    }
+                },
                 "repositoryName": {
                     "target": "com.amazonaws.ecr#RepositoryName",
                     "traits": {
@@ -749,6 +758,9 @@
                 },
                 {
                     "target": "com.amazonaws.ecr#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ValidationException"
                 }
             ],
             "traits": {
@@ -903,6 +915,79 @@
                     "target": "com.amazonaws.ecr#Repository",
                     "traits": {
                         "smithy.api#documentation": "<p>The repository that was deleted.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ecr#DescribeImageReplicationStatus": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecr#DescribeImageReplicationStatusRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecr#DescribeImageReplicationStatusResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecr#ImageNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#RepositoryNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the replication status for a specified image.</p>"
+            }
+        },
+        "com.amazonaws.ecr#DescribeImageReplicationStatusRequest": {
+            "type": "structure",
+            "members": {
+                "repositoryName": {
+                    "target": "com.amazonaws.ecr#RepositoryName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the repository that the image is in.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "imageId": {
+                    "target": "com.amazonaws.ecr#ImageIdentifier",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "registryId": {
+                    "target": "com.amazonaws.ecr#RegistryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the registry. If you do not specify a registry, the default registry is assumed.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ecr#DescribeImageReplicationStatusResponse": {
+            "type": "structure",
+            "members": {
+                "repositoryName": {
+                    "target": "com.amazonaws.ecr#RepositoryName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The repository name associated with the request.</p>"
+                    }
+                },
+                "imageId": {
+                    "target": "com.amazonaws.ecr#ImageIdentifier"
+                },
+                "replicationStatuses": {
+                    "target": "com.amazonaws.ecr#ImageReplicationStatusList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The replication status details for the images in the specified repository.</p>"
                     }
                 }
             }
@@ -1744,6 +1829,9 @@
                 },
                 {
                     "target": "com.amazonaws.ecr#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ValidationException"
                 }
             ],
             "traits": {
@@ -2087,7 +2175,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object with identifying information for an Amazon ECR image.</p>"
+                "smithy.api#documentation": "<p>An object with identifying information for an image in an Amazon ECR repository.</p>"
             }
         },
         "com.amazonaws.ecr#ImageIdentifierList": {
@@ -2127,6 +2215,44 @@
             "traits": {
                 "smithy.api#documentation": "<p>The image requested does not exist in the specified repository.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.ecr#ImageReplicationStatus": {
+            "type": "structure",
+            "members": {
+                "region": {
+                    "target": "com.amazonaws.ecr#Region",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination Region for the image replication.</p>"
+                    }
+                },
+                "registryId": {
+                    "target": "com.amazonaws.ecr#RegistryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID associated with the registry to which the image belongs.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecr#ReplicationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image replication status.</p>"
+                    }
+                },
+                "failureCode": {
+                    "target": "com.amazonaws.ecr#ReplicationError",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The failure code for a replication that has failed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of the replication process for an image.</p>"
+            }
+        },
+        "com.amazonaws.ecr#ImageReplicationStatusList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecr#ImageReplicationStatus"
             }
         },
         "com.amazonaws.ecr#ImageScanFinding": {
@@ -3379,6 +3505,9 @@
                 },
                 {
                     "target": "com.amazonaws.ecr#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecr#ValidationException"
                 }
             ],
             "traits": {
@@ -3515,7 +3644,7 @@
                 "rules": {
                     "target": "com.amazonaws.ecr#ReplicationRuleList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of objects representing the replication rules for a replication\n            configuration. A replication configuration may contain only one replication rule but the\n            rule may contain one or more replication destinations.</p>",
+                        "smithy.api#documentation": "<p>An array of objects representing the replication destinations and repository filters\n            for a replication configuration.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3530,20 +3659,20 @@
                 "region": {
                     "target": "com.amazonaws.ecr#Region",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Region to replicate to.</p>",
+                        "smithy.api#documentation": "<p>The Region to replicate to.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "registryId": {
                     "target": "com.amazonaws.ecr#RegistryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account ID of the destination registry to replicate to.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the Amazon ECR private registry to replicate to. When configuring\n            cross-Region replication within your own registry, specify your own account ID.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An array of objects representing the details of a replication destination.</p>"
+                "smithy.api#documentation": "<p>An array of objects representing the destination for a replication rule.</p>"
             }
         },
         "com.amazonaws.ecr#ReplicationDestinationList": {
@@ -3558,19 +3687,28 @@
                 }
             }
         },
+        "com.amazonaws.ecr#ReplicationError": {
+            "type": "string"
+        },
         "com.amazonaws.ecr#ReplicationRule": {
             "type": "structure",
             "members": {
                 "destinations": {
                     "target": "com.amazonaws.ecr#ReplicationDestinationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of objects representing the details of a replication destination.</p>",
+                        "smithy.api#documentation": "<p>An array of objects representing the destination for a replication rule.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "repositoryFilters": {
+                    "target": "com.amazonaws.ecr#RepositoryFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects representing the filters for a replication rule. Specifying a\n            repository filter for a replication rule provides a method for controlling which\n            repositories in a private registry are replicated.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An array of objects representing the replication destinations for a replication\n            configuration. A replication configuration may contain only one replication rule but the\n            rule may contain one or more replication destinations.</p>"
+                "smithy.api#documentation": "<p>An array of objects representing the replication destinations and repository filters\n            for a replication configuration.</p>"
             }
         },
         "com.amazonaws.ecr#ReplicationRuleList": {
@@ -3581,8 +3719,27 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 1
+                    "max": 10
                 }
+            }
+        },
+        "com.amazonaws.ecr#ReplicationStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "IN_PROGRESS",
+                        "name": "IN_PROGRESS"
+                    },
+                    {
+                        "value": "COMPLETE",
+                        "name": "COMPLETE"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    }
+                ]
             }
         },
         "com.amazonaws.ecr#Repository": {
@@ -3651,6 +3808,61 @@
             "traits": {
                 "smithy.api#documentation": "<p>The specified repository already exists in the specified registry.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.ecr#RepositoryFilter": {
+            "type": "structure",
+            "members": {
+                "filter": {
+                    "target": "com.amazonaws.ecr#RepositoryFilterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The repository filter details. When the <code>PREFIX_MATCH</code> filter type is\n            specified, this value is required and should be the repository name prefix to configure\n            replication for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "filterType": {
+                    "target": "com.amazonaws.ecr#RepositoryFilterType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The repository filter type. The only supported value is <code>PREFIX_MATCH</code>,\n            which is a repository name prefix specified with the <code>filter</code>\n            parameter.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The filter settings used with image replication. Specifying a repository filter to a\n            replication rule provides a method for controlling which repositories in a private\n            registry are replicated. If no repository filter is specified, all images in the\n            repository are replicated.</p>"
+            }
+        },
+        "com.amazonaws.ecr#RepositoryFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecr#RepositoryFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.ecr#RepositoryFilterType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PREFIX_MATCH",
+                        "name": "PREFIX_MATCH"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ecr#RepositoryFilterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^(?:[a-z0-9]+(?:[._-][a-z0-9]*)*/)*[a-z0-9]*(?:[._-][a-z0-9]*)*$"
             }
         },
         "com.amazonaws.ecr#RepositoryList": {

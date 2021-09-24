@@ -2750,6 +2750,26 @@ func (m *validateOpListViolationEvents) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutVerificationStateOnViolation struct {
+}
+
+func (*validateOpPutVerificationStateOnViolation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutVerificationStateOnViolation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutVerificationStateOnViolationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutVerificationStateOnViolationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRegisterCACertificate struct {
 }
 
@@ -4156,6 +4176,10 @@ func addOpListThingsInThingGroupValidationMiddleware(stack *middleware.Stack) er
 
 func addOpListViolationEventsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListViolationEvents{}, middleware.After)
+}
+
+func addOpPutVerificationStateOnViolationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutVerificationStateOnViolation{}, middleware.After)
 }
 
 func addOpRegisterCACertificateValidationMiddleware(stack *middleware.Stack) error {
@@ -8274,6 +8298,24 @@ func validateOpListViolationEventsInput(v *ListViolationEventsInput) error {
 	}
 	if v.EndTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutVerificationStateOnViolationInput(v *PutVerificationStateOnViolationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutVerificationStateOnViolationInput"}
+	if v.ViolationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ViolationId"))
+	}
+	if len(v.VerificationState) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("VerificationState"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

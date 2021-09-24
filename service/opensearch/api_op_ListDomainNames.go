@@ -27,15 +27,21 @@ func (c *Client) ListDomainNames(ctx context.Context, params *ListDomainNamesInp
 	return out, nil
 }
 
+// Container for the parameters to the ListDomainNames operation.
 type ListDomainNamesInput struct {
+
+	// Optional parameter to filter the output by domain engine type. Acceptable values
+	// are 'Elasticsearch' and 'OpenSearch'.
+	EngineType types.EngineType
+
 	noSmithyDocumentSerde
 }
 
 // The result of a ListDomainNames operation. Contains the names of all domains
-// owned by this account.
+// owned by this account and their respective engine types.
 type ListDomainNamesOutput struct {
 
-	// List of domain names.
+	// List of domain names and respective engine types.
 	DomainNames []types.DomainInfo
 
 	// Metadata pertaining to the operation's result.

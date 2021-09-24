@@ -32,7 +32,7 @@ type UpdateServiceSettingsInput struct {
 	// Activates cross-account discovery.
 	EnableCrossAccountsDiscovery *bool
 
-	// Enables integration with AWS Organizations for cross-account discovery.
+	// Enables integration with Organizations for cross-account discovery.
 	OrganizationConfiguration *types.OrganizationConfiguration
 
 	// Amazon Resource Name (ARN) of the Amazon S3 bucket where the License Manager

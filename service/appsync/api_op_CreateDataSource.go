@@ -50,7 +50,10 @@ type CreateDataSourceInput struct {
 	// Amazon DynamoDB settings.
 	DynamodbConfig *types.DynamodbDataSourceConfig
 
-	// Amazon Elasticsearch Service settings.
+	// Amazon OpenSearch Service settings. As of September 2021, Amazon Elasticsearch
+	// service is Amazon OpenSearch Service. This configuration is deprecated. For new
+	// data sources, use CreateDataSourceRequest$openSearchServiceConfig to create an
+	// OpenSearch data source.
 	ElasticsearchConfig *types.ElasticsearchDataSourceConfig
 
 	// HTTP endpoint settings.
@@ -58,6 +61,9 @@ type CreateDataSourceInput struct {
 
 	// Amazon Web Services Lambda settings.
 	LambdaConfig *types.LambdaDataSourceConfig
+
+	// Amazon OpenSearch Service settings.
+	OpenSearchServiceConfig *types.OpenSearchServiceDataSourceConfig
 
 	// Relational database settings.
 	RelationalDatabaseConfig *types.RelationalDatabaseDataSourceConfig

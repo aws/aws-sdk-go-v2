@@ -117,21 +117,21 @@ type AccessKeyLastUsed struct {
 	// This member is required.
 	LastUsedDate *time.Time
 
-	// The Region where this access key was most recently used. The value for this
-	// field is "N/A" in the following situations:
+	// The Amazon Web Services Region where this access key was most recently used. The
+	// value for this field is "N/A" in the following situations:
 	//
-	// * The user does not have an access
-	// key.
+	// * The user does not
+	// have an access key.
 	//
-	// * An access key exists but has not been used since IAM began tracking this
-	// information.
+	// * An access key exists but has not been used since IAM
+	// began tracking this information.
 	//
-	// * There is no sign-in data associated with the user.
+	// * There is no sign-in data associated with the
+	// user.
 	//
-	// For more
-	// information about Regions, see Regions and endpoints
-	// (https://docs.aws.amazon.com/general/latest/gr/rande.html) in the Amazon Web
-	// Services General Reference.
+	// For more information about Amazon Web Services Regions, see Regions and
+	// endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html) in the
+	// Amazon Web Services General Reference.
 	//
 	// This member is required.
 	Region *string
@@ -583,8 +583,8 @@ type LoginProfile struct {
 	// This member is required.
 	CreateDate *time.Time
 
-	// The name of the user, which can be used for signing in to the Management
-	// Console.
+	// The name of the user, which can be used for signing in to the Amazon Web
+	// Services Management Console.
 	//
 	// This member is required.
 	UserName *string
@@ -1219,7 +1219,7 @@ type RoleLastUsed struct {
 	// in the IAM User Guide.
 	LastUsedDate *time.Time
 
-	// The name of the Region in which the role was last used.
+	// The name of the Amazon Web Services Region in which the role was last used.
 	Region *string
 
 	noSmithyDocumentSerde

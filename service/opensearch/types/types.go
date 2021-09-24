@@ -300,6 +300,8 @@ type AWSDomainInformation struct {
 // The configuration for the domain cluster, such as the type and number of
 // instances.
 type ClusterConfig struct {
+
+	// Specifies the ColdStorageOptions config for a Domain
 	ColdStorageOptions *ColdStorageOptions
 
 	// Total number of dedicated master nodes, active and on standby, for the cluster.
@@ -396,8 +398,11 @@ type CognitoOptionsStatus struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the configuration for cold storage options such as enabled
 type ColdStorageOptions struct {
 
+	// Enable cold storage option. Accepted values true or false
+	//
 	// This member is required.
 	Enabled *bool
 
@@ -535,6 +540,9 @@ type DomainInfo struct {
 
 	// The DomainName.
 	DomainName *string
+
+	// Specifies the EngineType of the domain.
+	EngineType EngineType
 
 	noSmithyDocumentSerde
 }

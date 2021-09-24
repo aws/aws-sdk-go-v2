@@ -1010,7 +1010,10 @@
                     }
                 },
                 "ColdStorageOptions": {
-                    "target": "com.amazonaws.opensearch#ColdStorageOptions"
+                    "target": "com.amazonaws.opensearch#ColdStorageOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the <code>ColdStorageOptions</code> config for a Domain</p>"
+                    }
                 }
             },
             "traits": {
@@ -1099,9 +1102,13 @@
                 "Enabled": {
                     "target": "com.amazonaws.opensearch#Boolean",
                     "traits": {
+                        "smithy.api#documentation": "<p>Enable cold storage option. Accepted values true or false</p>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the configuration for cold storage options such as enabled</p>"
             }
         },
         "com.amazonaws.opensearch#CommitMessage": {
@@ -2859,6 +2866,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The <code>DomainName</code>.\n    </p>"
                     }
+                },
+                "EngineType": {
+                    "target": "com.amazonaws.opensearch#EngineType",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Specifies the <code>EngineType</code> of the domain.</p>"
+                    }
                 }
             }
         },
@@ -3302,6 +3315,21 @@
             },
             "value": {
                 "target": "com.amazonaws.opensearch#ServiceUrl"
+            }
+        },
+        "com.amazonaws.opensearch#EngineType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "OpenSearch",
+                        "name": "OpenSearch"
+                    },
+                    {
+                        "value": "Elasticsearch",
+                        "name": "Elasticsearch"
+                    }
+                ]
             }
         },
         "com.amazonaws.opensearch#ErrorDetails": {
@@ -3995,6 +4023,9 @@
         },
         "com.amazonaws.opensearch#ListDomainNames": {
             "type": "operation",
+            "input": {
+                "target": "com.amazonaws.opensearch#ListDomainNamesRequest"
+            },
             "output": {
                 "target": "com.amazonaws.opensearch#ListDomainNamesResponse"
             },
@@ -4015,18 +4046,33 @@
                 }
             }
         },
+        "com.amazonaws.opensearch#ListDomainNamesRequest": {
+            "type": "structure",
+            "members": {
+                "EngineType": {
+                    "target": "com.amazonaws.opensearch#EngineType",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Optional parameter to filter the output by domain engine type. Acceptable values are 'Elasticsearch' and 'OpenSearch'. </p>",
+                        "smithy.api#httpQuery": "engineType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Container for the parameters to the <code><a>ListDomainNames</a></code> operation.</p>"
+            }
+        },
         "com.amazonaws.opensearch#ListDomainNamesResponse": {
             "type": "structure",
             "members": {
                 "DomainNames": {
                     "target": "com.amazonaws.opensearch#DomainInfoList",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of domain names.</p>"
+                        "smithy.api#documentation": "<p>List of domain names and respective engine types.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The result of a <code>ListDomainNames</code> operation. Contains the names of all domains owned by\n      this account.\n    </p>"
+                "smithy.api#documentation": "<p>The result of a <code>ListDomainNames</code> operation. Contains the names of all domains owned by this account and their respective engine types.</p>"
             }
         },
         "com.amazonaws.opensearch#ListDomainsForPackage": {

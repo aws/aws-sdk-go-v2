@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an alias for your account. For information about using an account alias,
-// see Using an alias for your account ID
+// Creates an alias for your Amazon Web Services account. For information about
+// using an Amazon Web Services account alias, see Using an alias for your Amazon
+// Web Services account ID
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html) in the IAM
 // User Guide.
 func (c *Client) CreateAccountAlias(ctx context.Context, params *CreateAccountAliasInput, optFns ...func(*Options)) (*CreateAccountAliasOutput, error) {

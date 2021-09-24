@@ -31,7 +31,8 @@ func (c *Client) ApplyPendingMaintenanceAction(ctx context.Context, params *Appl
 //
 type ApplyPendingMaintenanceActionInput struct {
 
-	// The pending maintenance action to apply to this resource.
+	// The pending maintenance action to apply to this resource. Valid values:
+	// os-upgrade, system-update, db-upgrade
 	//
 	// This member is required.
 	ApplyAction *string

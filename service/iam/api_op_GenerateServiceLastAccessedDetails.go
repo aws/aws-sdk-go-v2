@@ -20,13 +20,13 @@ import (
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#access-advisor_tracking-period).
 // The service last accessed data includes all attempts to access an Amazon Web
 // Services API, not just the successful ones. This includes all attempts that were
-// made using the Management Console, the Amazon Web Services API through any of
-// the SDKs, or any of the command line tools. An unexpected entry in the service
-// last accessed data does not mean that your account has been compromised, because
-// the request might have been denied. Refer to your CloudTrail logs as the
-// authoritative source for information about all API calls and whether they were
-// successful or denied access. For more information, see Logging IAM events with
-// CloudTrail
+// made using the Amazon Web Services Management Console, the Amazon Web Services
+// API through any of the SDKs, or any of the command line tools. An unexpected
+// entry in the service last accessed data does not mean that your account has been
+// compromised, because the request might have been denied. Refer to your
+// CloudTrail logs as the authoritative source for information about all API calls
+// and whether they were successful or denied access. For more information, see
+// Logging IAM events with CloudTrail
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/cloudtrail-integration.html)
 // in the IAM User Guide. The GenerateServiceLastAccessedDetails operation returns
 // a JobId. Use this parameter in the following operations to retrieve the

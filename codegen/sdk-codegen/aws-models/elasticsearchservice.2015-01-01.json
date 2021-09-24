@@ -982,13 +982,13 @@
                 "Enabled": {
                     "target": "com.amazonaws.elasticsearchservice#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>True to enable cold storage for an Elasticsearch domain.</p>",
+                        "smithy.api#documentation": "<p>Enable cold storage option. Accepted values true or false</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies settings for cold storage.</p>"
+                "smithy.api#documentation": "<p>Specifies the configuration for cold storage options such as enabled</p>"
             }
         },
         "com.amazonaws.elasticsearchservice#CommitMessage": {
@@ -2668,6 +2668,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p> Specifies the <code>DomainName</code>.</p>"
                     }
+                },
+                "EngineType": {
+                    "target": "com.amazonaws.elasticsearchservice#EngineType",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Specifies the <code>EngineType</code> of the domain.</p>"
+                    }
                 }
             }
         },
@@ -2705,7 +2711,7 @@
                     "min": 3,
                     "max": 28
                 },
-                "smithy.api#pattern": "[a-z][a-z0-9\\-]+"
+                "smithy.api#pattern": "^[a-z][a-z0-9\\-]+$"
             }
         },
         "com.amazonaws.elasticsearchservice#DomainNameFqdn": {
@@ -3229,7 +3235,7 @@
                 "ColdStorageOptions": {
                     "target": "com.amazonaws.elasticsearchservice#ColdStorageOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the <code>ColdStorageOptions</code> configuration for an Elasticsearch domain.</p>"
+                        "smithy.api#documentation": "<p>Specifies the <code>ColdStorageOptions</code> config for Elasticsearch Domain</p>"
                     }
                 }
             },
@@ -3554,7 +3560,10 @@
             }
         },
         "com.amazonaws.elasticsearchservice#ElasticsearchVersionString": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[0-9]{1}\\.[0-9]{1,2}$|^OpenSearch_[0-9]{1,2}\\.[0-9]{1,2}$"
+            }
         },
         "com.amazonaws.elasticsearchservice#EncryptionAtRestOptions": {
             "type": "structure",
@@ -3607,6 +3616,21 @@
                 "target": "com.amazonaws.elasticsearchservice#ServiceUrl"
             }
         },
+        "com.amazonaws.elasticsearchservice#EngineType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "OpenSearch",
+                        "name": "OpenSearch"
+                    },
+                    {
+                        "value": "Elasticsearch",
+                        "name": "Elasticsearch"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.elasticsearchservice#ErrorDetails": {
             "type": "structure",
             "members": {
@@ -3653,7 +3677,7 @@
         "com.amazonaws.elasticsearchservice#GUID": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "\\p{XDigit}{8}-\\p{XDigit}{4}-\\p{XDigit}{4}-\\p{XDigit}{4}-\\p{XDigit}{12}"
+                "smithy.api#pattern": "^\\p{XDigit}{8}-\\p{XDigit}{4}-\\p{XDigit}{4}-\\p{XDigit}{4}-\\p{XDigit}{12}$"
             }
         },
         "com.amazonaws.elasticsearchservice#GetCompatibleElasticsearchVersions": {
@@ -3975,7 +3999,7 @@
                     "min": 1,
                     "max": 55
                 },
-                "smithy.api#pattern": "[\\w-]+:[0-9a-f-]+"
+                "smithy.api#pattern": "^[\\w-]+:[0-9a-f-]+$"
             }
         },
         "com.amazonaws.elasticsearchservice#InboundCrossClusterSearchConnection": {
@@ -4247,6 +4271,9 @@
         },
         "com.amazonaws.elasticsearchservice#ListDomainNames": {
             "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elasticsearchservice#ListDomainNamesRequest"
+            },
             "output": {
                 "target": "com.amazonaws.elasticsearchservice#ListDomainNamesResponse"
             },
@@ -4267,18 +4294,33 @@
                 }
             }
         },
+        "com.amazonaws.elasticsearchservice#ListDomainNamesRequest": {
+            "type": "structure",
+            "members": {
+                "EngineType": {
+                    "target": "com.amazonaws.elasticsearchservice#EngineType",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Optional parameter to filter the output by domain engine type. Acceptable values are 'Elasticsearch' and 'OpenSearch'. </p>",
+                        "smithy.api#httpQuery": "engineType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Container for the parameters to the <code><a>ListDomainNames</a></code> operation.</p>"
+            }
+        },
         "com.amazonaws.elasticsearchservice#ListDomainNamesResponse": {
             "type": "structure",
             "members": {
                 "DomainNames": {
                     "target": "com.amazonaws.elasticsearchservice#DomainInfoList",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of Elasticsearch domain names.</p>"
+                        "smithy.api#documentation": "<p>List of domain names and respective engine types.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The result of a <code>ListDomainNames</code> operation. Contains the names of all Elasticsearch domains owned by this account.</p>"
+                "smithy.api#documentation": "<p>The result of a <code>ListDomainNames</code> operation. Contains the names of all domains owned by this account and their respective engine types.</p>"
             }
         },
         "com.amazonaws.elasticsearchservice#ListDomainsForPackage": {
@@ -5102,7 +5144,7 @@
                     "min": 3,
                     "max": 28
                 },
-                "smithy.api#pattern": "[a-z][a-z0-9\\-]+"
+                "smithy.api#pattern": "^[a-z][a-z0-9\\-]+$"
             }
         },
         "com.amazonaws.elasticsearchservice#PackageSource": {
@@ -6674,7 +6716,7 @@
                     "min": 1,
                     "max": 55
                 },
-                "smithy.api#pattern": "[\\w-]+_[0-9a-zA-Z]+"
+                "smithy.api#pattern": "^[\\w-]+_[0-9a-zA-Z]+$"
             }
         },
         "com.amazonaws.elasticsearchservice#Username": {

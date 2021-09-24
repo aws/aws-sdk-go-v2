@@ -322,10 +322,10 @@ type CognitoOptionsStatus struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies settings for cold storage.
+// Specifies the configuration for cold storage options such as enabled
 type ColdStorageOptions struct {
 
-	// True to enable cold storage for an Elasticsearch domain.
+	// Enable cold storage option. Accepted values true or false
 	//
 	// This member is required.
 	Enabled *bool
@@ -410,6 +410,9 @@ type DomainInfo struct {
 
 	// Specifies the DomainName.
 	DomainName *string
+
+	// Specifies the EngineType of the domain.
+	EngineType EngineType
 
 	noSmithyDocumentSerde
 }
@@ -526,7 +529,7 @@ type EBSOptionsStatus struct {
 // of instances.
 type ElasticsearchClusterConfig struct {
 
-	// Specifies the ColdStorageOptions configuration for an Elasticsearch domain.
+	// Specifies the ColdStorageOptions config for Elasticsearch Domain
 	ColdStorageOptions *ColdStorageOptions
 
 	// Total number of dedicated master nodes, active and on standby, for the cluster.

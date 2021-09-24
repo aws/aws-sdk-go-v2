@@ -9,11 +9,11 @@ import (
 // Describes an additional authentication provider.
 type AdditionalAuthenticationProvider struct {
 
-	// The authentication type: API key, Identity and Access Management, OIDC, or
-	// Amazon Cognito user pools.
+	// The authentication type: API key, Identity and Access Management, OIDC, Amazon
+	// Cognito user pools, or Amazon Web Services Lambda.
 	AuthenticationType AuthenticationType
 
-	// Configuration for AWS Lambda function authorization.
+	// Configuration for Amazon Web Services Lambda function authorization.
 	LambdaAuthorizerConfig *LambdaAuthorizerConfig
 
 	// The OpenID Connect configuration.
@@ -251,7 +251,7 @@ type DataSource struct {
 	// Amazon DynamoDB settings.
 	DynamodbConfig *DynamodbDataSourceConfig
 
-	// Amazon Elasticsearch Service settings.
+	// Amazon OpenSearch Service settings.
 	ElasticsearchConfig *ElasticsearchDataSourceConfig
 
 	// HTTP endpoint settings.
@@ -263,6 +263,9 @@ type DataSource struct {
 	// The name of the data source.
 	Name *string
 
+	// Amazon OpenSearch Service settings.
+	OpenSearchServiceConfig *OpenSearchServiceDataSourceConfig
+
 	// Relational database settings.
 	RelationalDatabaseConfig *RelationalDatabaseDataSourceConfig
 
@@ -272,14 +275,17 @@ type DataSource struct {
 
 	// The type of the data source.
 	//
+	// * AWS_LAMBDA: The data source is an Amazon Web
+	// Services Lambda function.
+	//
 	// * AMAZON_DYNAMODB: The data source is an Amazon
 	// DynamoDB table.
 	//
-	// * AMAZON_ELASTICSEARCH: The data source is an Amazon
-	// Elasticsearch Service domain.
+	// * AMAZON_ELASTICSEARCH: The data source is an Amazon OpenSearch
+	// Service domain.
 	//
-	// * AWS_LAMBDA: The data source is an Amazon Web
-	// Services Lambda function.
+	// * AMAZON_OPENSEARCH_SERVICE: The data source is an Amazon
+	// OpenSearch Service domain.
 	//
 	// * NONE: There is no data source. This type is used
 	// when you wish to invoke a GraphQL operation without connecting to a data source,
@@ -335,7 +341,10 @@ type DynamodbDataSourceConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Describes an Elasticsearch data source configuration.
+// Describes an OpenSearch data source configuration. As of September 2021, Amazon
+// Elasticsearch service is Amazon OpenSearch Service. This configuration is
+// deprecated. For new data sources, use OpenSearchServiceDataSourceConfig to
+// specify an OpenSearch data source.
 type ElasticsearchDataSourceConfig struct {
 
 	// The Amazon Web Services Region.
@@ -404,7 +413,7 @@ type GraphqlApi struct {
 	// The authentication type.
 	AuthenticationType AuthenticationType
 
-	// Configuration for AWS Lambda function authorization.
+	// Configuration for Amazon Web Services Lambda function authorization.
 	LambdaAuthorizerConfig *LambdaAuthorizerConfig
 
 	// The Amazon CloudWatch Logs configuration.
@@ -454,13 +463,14 @@ type HttpDataSourceConfig struct {
 // may have only one Lambda authorizer configured at a time.
 type LambdaAuthorizerConfig struct {
 
-	// The ARN of the lambda function to be called for authorization. This may be a
+	// The ARN of the Lambda function to be called for authorization. This may be a
 	// standard Lambda ARN, a version ARN (.../v3) or alias ARN. Note: This Lambda
 	// function must have the following resource-based policy assigned to it. When
 	// configuring Lambda authorizers in the Console, this is done for you. To do so
-	// with the AWS CLI, run the following: aws lambda add-permission --function-name
-	// "arn:aws:lambda:us-east-2:111122223333:function:my-function" --statement-id
-	// "appsync" --principal appsync.amazonaws.com --action lambda:InvokeFunction
+	// with the Amazon Web Services CLI, run the following: aws lambda add-permission
+	// --function-name "arn:aws:lambda:us-east-2:111122223333:function:my-function"
+	// --statement-id "appsync" --principal appsync.amazonaws.com --action
+	// lambda:InvokeFunction
 	//
 	// This member is required.
 	AuthorizerUri *string
@@ -470,7 +480,7 @@ type LambdaAuthorizerConfig struct {
 	// key in its response. A value of 0 disables caching of responses.
 	AuthorizerResultTtlInSeconds int32
 
-	// A regular expression for validation of tokens before the Lambda Function is
+	// A regular expression for validation of tokens before the Lambda function is
 	// called.
 	IdentityValidationExpression *string
 
@@ -561,6 +571,22 @@ type OpenIDConnectConfig struct {
 
 	// The number of milliseconds a token is valid after being issued to a user.
 	IatTTL int64
+
+	noSmithyDocumentSerde
+}
+
+// Describes an OpenSearch data source configuration.
+type OpenSearchServiceDataSourceConfig struct {
+
+	// The Amazon Web Services Region.
+	//
+	// This member is required.
+	AwsRegion *string
+
+	// The endpoint.
+	//
+	// This member is required.
+	Endpoint *string
 
 	noSmithyDocumentSerde
 }

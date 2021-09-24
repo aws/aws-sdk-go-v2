@@ -345,6 +345,62 @@
                 "smithy.api#documentation": "<p>The predefined aliases for dynamic variables.</p>"
             }
         },
+        "com.amazonaws.mediatailor#ConfigureLogsForPlaybackConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mediatailor#ConfigureLogsForPlaybackConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mediatailor#ConfigureLogsForPlaybackConfigurationResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configures Amazon CloudWatch log settings for a playback configuration.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/configureLogs/playbackConfiguration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.mediatailor#ConfigureLogsForPlaybackConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "PercentEnabled": {
+                    "target": "com.amazonaws.mediatailor#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The percentage of session logs that MediaTailor sends to your Cloudwatch Logs account. For example, if your playback configuration has 1000 sessions and percentEnabled is set to 60, MediaTailor sends logs for 600 of the sessions to CloudWatch Logs. MediaTailor decides at random which of the playback configuration sessions to send logs for. If you want to view logs for a specific session, you can use the <a href=\"https://docs.aws.amazon.com/mediatailor/latest/ug/debug-log-mode.html\">debug log mode</a>.</p> <p>Valid values: 0 - 100</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PlaybackConfigurationName": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the playback configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configures Amazon CloudWatch log settings for a playback configuration.</p>"
+            }
+        },
+        "com.amazonaws.mediatailor#ConfigureLogsForPlaybackConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "PercentEnabled": {
+                    "target": "com.amazonaws.mediatailor#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The percentage of session logs that MediaTailor sends to your Cloudwatch Logs account.</p>"
+                    }
+                },
+                "PlaybackConfigurationName": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the playback configuration.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.mediatailor#CreateChannel": {
             "type": "operation",
             "input": {
@@ -376,7 +432,7 @@
                 "FillerSlate": {
                     "target": "com.amazonaws.mediatailor#SlateSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>The slate used to fill gaps between programs in the schedule. You must configure filler slate if your channel uses an LINEAR PlaybackMode.</p>"
+                        "smithy.api#documentation": "<p>The slate used to fill gaps between programs in the schedule. You must configure filler slate if your channel uses a LINEAR PlaybackMode.</p>"
                     }
                 },
                 "Outputs": {
@@ -1649,6 +1705,12 @@
                         "smithy.api#documentation": "<p>The configuration for pre-roll ad insertion.</p>"
                     }
                 },
+                "LogConfiguration": {
+                    "target": "com.amazonaws.mediatailor#LogConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon CloudWatch log settings for a playback configuration.</p>"
+                    }
+                },
                 "ManifestProcessingRules": {
                     "target": "com.amazonaws.mediatailor#ManifestProcessingRules",
                     "traits": {
@@ -2171,6 +2233,21 @@
                 "smithy.api#documentation": "<p>The configuration for pre-roll ad insertion.</p>"
             }
         },
+        "com.amazonaws.mediatailor#LogConfiguration": {
+            "type": "structure",
+            "members": {
+                "PercentEnabled": {
+                    "target": "com.amazonaws.mediatailor#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The percentage of session logs that MediaTailor sends to your Cloudwatch Logs account. For example, if your playback configuration has 1000 sessions and percentEnabled is set to 60, MediaTailor sends logs for 600 of the sessions to CloudWatch Logs. MediaTailor decides at random which of the playback configuration sessions to send logs for. If you want to view logs for a specific session, you can use the <a href=\"https://docs.aws.amazon.com/mediatailor/latest/ug/debug-log-mode.html\">debug log mode</a>.</p> <p>Valid values: 0 - 100</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns Amazon CloudWatch log settings for a playback configuration.</p>"
+            }
+        },
         "com.amazonaws.mediatailor#ManifestProcessingRules": {
             "type": "structure",
             "members": {
@@ -2198,6 +2275,9 @@
             "type": "service",
             "version": "2018-04-23",
             "operations": [
+                {
+                    "target": "com.amazonaws.mediatailor#ConfigureLogsForPlaybackConfiguration"
+                },
                 {
                     "target": "com.amazonaws.mediatailor#CreateChannel"
                 },
@@ -2401,6 +2481,12 @@
                     "target": "com.amazonaws.mediatailor#LivePreRollConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration for pre-roll ad insertion.</p>"
+                    }
+                },
+                "LogConfiguration": {
+                    "target": "com.amazonaws.mediatailor#LogConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon CloudWatch log settings for a playback configuration.</p>"
                     }
                 },
                 "ManifestProcessingRules": {
@@ -2681,6 +2767,12 @@
                     "target": "com.amazonaws.mediatailor#LivePreRollConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration for pre-roll ad insertion.</p>"
+                    }
+                },
+                "LogConfiguration": {
+                    "target": "com.amazonaws.mediatailor#LogConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon CloudWatch log settings for a playback configuration.</p>"
                     }
                 },
                 "ManifestProcessingRules": {

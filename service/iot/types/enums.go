@@ -1342,6 +1342,28 @@ func (TopicRuleDestinationStatus) Values() []TopicRuleDestinationStatus {
 	}
 }
 
+type VerificationState string
+
+// Enum values for VerificationState
+const (
+	VerificationStateFalsePositive  VerificationState = "FALSE_POSITIVE"
+	VerificationStateBenignPositive VerificationState = "BENIGN_POSITIVE"
+	VerificationStateTruePositive   VerificationState = "TRUE_POSITIVE"
+	VerificationStateUnknown        VerificationState = "UNKNOWN"
+)
+
+// Values returns all known values for VerificationState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VerificationState) Values() []VerificationState {
+	return []VerificationState{
+		"FALSE_POSITIVE",
+		"BENIGN_POSITIVE",
+		"TRUE_POSITIVE",
+		"UNKNOWN",
+	}
+}
+
 type ViolationEventType string
 
 // Enum values for ViolationEventType

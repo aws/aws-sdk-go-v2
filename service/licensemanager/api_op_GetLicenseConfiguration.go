@@ -66,7 +66,7 @@ type GetLicenseConfigurationOutput struct {
 	// Sets the number of available licenses as a hard limit.
 	LicenseCountHardLimit *bool
 
-	// Dimension on which the licenses are counted.
+	// Dimension for which the licenses are counted.
 	LicenseCountingType types.LicenseCountingType
 
 	// License rules.

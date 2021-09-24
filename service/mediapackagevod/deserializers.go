@@ -3894,6 +3894,15 @@ func awsRestjson1_deserializeDocumentEgressEndpoint(v **types.EgressEndpoint, va
 				sv.PackagingConfigurationId = ptr.String(jtv)
 			}
 
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Status = ptr.String(jtv)
+			}
+
 		case "url":
 			if value != nil {
 				jtv, ok := value.(string)

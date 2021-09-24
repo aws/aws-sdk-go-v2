@@ -48,6 +48,28 @@ type RegisterTaskWithMaintenanceWindowInput struct {
 	// User-provided idempotency token.
 	ClientToken *string
 
+	// Indicates whether tasks should continue to run after the cutoff time specified
+	// in the maintenance windows is reached.
+	//
+	// * CONTINUE_TASK: When the cutoff time is
+	// reached, any tasks that are running continue. The default value.
+	//
+	// *
+	// CANCEL_TASK:
+	//
+	// * For Automation, Lambda, Step Functions tasks: When the cutoff
+	// time is reached, any task invocations that are already running continue, but no
+	// new task invocations are started.
+	//
+	// * For Run Command tasks: When the cutoff time
+	// is reached, the system sends a CancelCommand operation that attempts to cancel
+	// the command associated with the task. However, there is no guarantee that the
+	// command will be terminated and the underlying process stopped.
+	//
+	// The status for
+	// tasks that are not completed is TIMED_OUT.
+	CutoffBehavior types.MaintenanceWindowTaskCutoffBehavior
+
 	// An optional description for the task.
 	Description *string
 

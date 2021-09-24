@@ -5741,6 +5741,11 @@ func awsAwsjson11_serializeOpDocumentRebootReplicationInstanceInput(v *RebootRep
 		ok.Boolean(*v.ForceFailover)
 	}
 
+	if v.ForcePlannedFailover != nil {
+		ok := object.Key("ForcePlannedFailover")
+		ok.Boolean(*v.ForcePlannedFailover)
+	}
+
 	if v.ReplicationInstanceArn != nil {
 		ok := object.Key("ReplicationInstanceArn")
 		ok.String(*v.ReplicationInstanceArn)

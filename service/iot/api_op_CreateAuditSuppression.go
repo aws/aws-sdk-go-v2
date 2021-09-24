@@ -42,7 +42,10 @@ type CreateAuditSuppressionInput struct {
 	// This member is required.
 	CheckName *string
 
-	// The epoch timestamp in seconds at which this suppression expires.
+	// Each audit supression must have a unique client request token. If you try to
+	// create a new audit suppression with the same token as one that already exists,
+	// an exception occurs. If you omit this value, Amazon Web Services SDKs will
+	// automatically generate a unique client request.
 	//
 	// This member is required.
 	ClientRequestToken *string

@@ -1368,6 +1368,33 @@ type Regex struct {
 	noSmithyDocumentSerde
 }
 
+// A rule statement used to search web request components for a match against a
+// single regular expression.
+type RegexMatchStatement struct {
+
+	// The part of a web request that you want WAF to inspect. For more information,
+	// see FieldToMatch.
+	//
+	// This member is required.
+	FieldToMatch *FieldToMatch
+
+	// The string representing the regular expression.
+	//
+	// This member is required.
+	RegexString *string
+
+	// Text transformations eliminate some of the unusual formatting that attackers use
+	// in web requests in an effort to bypass detection. If you specify one or more
+	// transformations in a rule statement, WAF performs all transformations on the
+	// content of the request component identified by FieldToMatch, starting from the
+	// lowest priority setting, before inspecting the content for a match.
+	//
+	// This member is required.
+	TextTransformations []TextTransformation
+
+	noSmithyDocumentSerde
+}
+
 // Contains one or more regular expressions. WAF assigns an ARN to each
 // RegexPatternSet that you create. To use a set in a rule, you provide the ARN to
 // the Rule statement RegexPatternSetReferenceStatement.
@@ -1952,6 +1979,10 @@ type Statement struct {
 	// inside a NotStatement or OrStatement. You can define a RateBasedStatement inside
 	// a web ACL and inside a rule group.
 	RateBasedStatement *RateBasedStatement
+
+	// A rule statement used to search web request components for a match against a
+	// single regular expression.
+	RegexMatchStatement *RegexMatchStatement
 
 	// A rule statement used to search web request components for matches with regular
 	// expressions. To use this, create a RegexPatternSet that specifies the

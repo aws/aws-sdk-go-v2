@@ -12,7 +12,7 @@ import (
 )
 
 // Creates a grant for the specified license. A grant shares the use of license
-// entitlements with specific AWS accounts.
+// entitlements with specific Amazon Web Services accounts.
 func (c *Client) CreateGrant(ctx context.Context, params *CreateGrantInput, optFns ...func(*Options)) (*CreateGrantOutput, error) {
 	if params == nil {
 		params = &CreateGrantInput{}

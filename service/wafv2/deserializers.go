@@ -9440,6 +9440,56 @@ func awsAwsjson11_deserializeDocumentRegex(v **types.Regex, value interface{}) e
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentRegexMatchStatement(v **types.RegexMatchStatement, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RegexMatchStatement
+	if *v == nil {
+		sv = &types.RegexMatchStatement{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FieldToMatch":
+			if err := awsAwsjson11_deserializeDocumentFieldToMatch(&sv.FieldToMatch, value); err != nil {
+				return err
+			}
+
+		case "RegexString":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RegexPatternString to be of type string, got %T instead", value)
+				}
+				sv.RegexString = ptr.String(jtv)
+			}
+
+		case "TextTransformations":
+			if err := awsAwsjson11_deserializeDocumentTextTransformations(&sv.TextTransformations, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentRegexPatternSet(v **types.RegexPatternSet, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10636,6 +10686,11 @@ func awsAwsjson11_deserializeDocumentStatement(v **types.Statement, value interf
 
 		case "RateBasedStatement":
 			if err := awsAwsjson11_deserializeDocumentRateBasedStatement(&sv.RateBasedStatement, value); err != nil {
+				return err
+			}
+
+		case "RegexMatchStatement":
+			if err := awsAwsjson11_deserializeDocumentRegexMatchStatement(&sv.RegexMatchStatement, value); err != nil {
 				return err
 			}
 

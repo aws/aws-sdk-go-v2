@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the association between an OpsItem and a related resource. For example,
-// this API operation can delete an Incident Manager incident from an OpsItem.
-// Incident Manager is a capability of Amazon Web Services Systems Manager.
+// Deletes the association between an OpsItem and a related item. For example, this
+// API operation can delete an Incident Manager incident from an OpsItem. Incident
+// Manager is a capability of Amazon Web Services Systems Manager.
 func (c *Client) DisassociateOpsItemRelatedItem(ctx context.Context, params *DisassociateOpsItemRelatedItemInput, optFns ...func(*Options)) (*DisassociateOpsItemRelatedItemOutput, error) {
 	if params == nil {
 		params = &DisassociateOpsItemRelatedItemInput{}
@@ -31,13 +31,13 @@ func (c *Client) DisassociateOpsItemRelatedItem(ctx context.Context, params *Dis
 type DisassociateOpsItemRelatedItemInput struct {
 
 	// The ID of the association for which you want to delete an association between
-	// the OpsItem and a related resource.
+	// the OpsItem and a related item.
 	//
 	// This member is required.
 	AssociationId *string
 
 	// The ID of the OpsItem for which you want to delete an association between the
-	// OpsItem and a related resource.
+	// OpsItem and a related item.
 	//
 	// This member is required.
 	OpsItemId *string

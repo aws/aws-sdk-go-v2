@@ -2969,6 +2969,32 @@ func awsAwsjson11_serializeDocumentRegex(v *types.Regex, value smithyjson.Value)
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentRegexMatchStatement(v *types.RegexMatchStatement, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FieldToMatch != nil {
+		ok := object.Key("FieldToMatch")
+		if err := awsAwsjson11_serializeDocumentFieldToMatch(v.FieldToMatch, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RegexString != nil {
+		ok := object.Key("RegexString")
+		ok.String(*v.RegexString)
+	}
+
+	if v.TextTransformations != nil {
+		ok := object.Key("TextTransformations")
+		if err := awsAwsjson11_serializeDocumentTextTransformations(v.TextTransformations, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentRegexPatternSetReferenceStatement(v *types.RegexPatternSetReferenceStatement, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3259,6 +3285,13 @@ func awsAwsjson11_serializeDocumentStatement(v *types.Statement, value smithyjso
 	if v.RateBasedStatement != nil {
 		ok := object.Key("RateBasedStatement")
 		if err := awsAwsjson11_serializeDocumentRateBasedStatement(v.RateBasedStatement, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RegexMatchStatement != nil {
+		ok := object.Key("RegexMatchStatement")
+		if err := awsAwsjson11_serializeDocumentRegexMatchStatement(v.RegexMatchStatement, ok); err != nil {
 			return err
 		}
 	}

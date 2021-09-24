@@ -31453,6 +31453,15 @@ func awsAwsjson11_deserializeDocumentMaintenanceWindowTask(v **types.Maintenance
 
 	for key, value := range shape {
 		switch key {
+		case "CutoffBehavior":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MaintenanceWindowTaskCutoffBehavior to be of type string, got %T instead", value)
+				}
+				sv.CutoffBehavior = types.MaintenanceWindowTaskCutoffBehavior(jtv)
+			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -43769,6 +43778,15 @@ func awsAwsjson11_deserializeOpDocumentGetMaintenanceWindowTaskOutput(v **GetMai
 
 	for key, value := range shape {
 		switch key {
+		case "CutoffBehavior":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MaintenanceWindowTaskCutoffBehavior to be of type string, got %T instead", value)
+				}
+				sv.CutoffBehavior = types.MaintenanceWindowTaskCutoffBehavior(jtv)
+			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -46493,6 +46511,15 @@ func awsAwsjson11_deserializeOpDocumentUpdateMaintenanceWindowTaskOutput(v **Upd
 
 	for key, value := range shape {
 		switch key {
+		case "CutoffBehavior":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MaintenanceWindowTaskCutoffBehavior to be of type string, got %T instead", value)
+				}
+				sv.CutoffBehavior = types.MaintenanceWindowTaskCutoffBehavior(jtv)
+			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)

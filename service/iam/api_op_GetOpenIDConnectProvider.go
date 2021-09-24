@@ -53,7 +53,7 @@ type GetOpenIDConnectProviderOutput struct {
 	ClientIDList []string
 
 	// The date and time when the IAM OIDC provider resource object was created in the
-	// account.
+	// Amazon Web Services account.
 	CreateDate *time.Time
 
 	// A list of tags that are attached to the specified IAM OIDC provider. The

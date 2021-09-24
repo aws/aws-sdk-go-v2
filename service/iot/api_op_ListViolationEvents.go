@@ -65,6 +65,9 @@ type ListViolationEventsInput struct {
 	// A filter to limit results to those alerts caused by the specified thing.
 	ThingName *string
 
+	// The verification state of the violation (detect alarm).
+	VerificationState types.VerificationState
+
 	noSmithyDocumentSerde
 }
 

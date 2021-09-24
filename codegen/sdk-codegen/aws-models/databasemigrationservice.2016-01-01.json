@@ -344,7 +344,7 @@
                 "ApplyAction": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pending maintenance action to apply to this resource.</p>",
+                        "smithy.api#documentation": "<p>The pending maintenance action to apply to this resource.</p>\n         <p>Valid values: <code>os-upgrade</code>, <code>system-update</code>, <code>db-upgrade</code> \n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -847,7 +847,7 @@
                 "DmsTransferSettings": {
                     "target": "com.amazonaws.databasemigrationservice#DmsTransferSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The settings in JSON format for the DMS transfer type of source endpoint. </p>\n         <p>Possible settings include the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ServiceAccessRoleArn</code> - The IAM role that has permission to access the\n               Amazon S3 bucket. The role must allow the <code>iam:PassRole</code> action.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BucketName</code> - The name of the S3 bucket to use.</p>\n            </li>\n         </ul>\n         <p>Shorthand syntax for these settings is as follows:\n            <code>ServiceAccessRoleArn=string,BucketName=string</code>\n         </p>\n         <p>JSON syntax for these settings is as follows: <code>{ \"ServiceAccessRoleArn\":\n            \"string\", \"BucketName\": \"string\", } </code>\n         </p>"
+                        "smithy.api#documentation": "<p>The settings in JSON format for the DMS transfer type of source endpoint. </p>\n         <p>Possible settings include the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ServiceAccessRoleArn</code> - The Amazon Resource Name (ARN) used by the service access IAM role.\n                 The role must allow the <code>iam:PassRole</code> action.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BucketName</code> - The name of the S3 bucket to use.</p>\n            </li>\n         </ul>\n         <p>Shorthand syntax for these settings is as follows:\n            <code>ServiceAccessRoleArn=string,BucketName=string</code>\n         </p>\n         <p>JSON syntax for these settings is as follows: <code>{ \"ServiceAccessRoleArn\":\n            \"string\", \"BucketName\": \"string\", } </code>\n         </p>"
                     }
                 },
                 "MongoDbSettings": {
@@ -1250,7 +1250,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a replication subnet group given a list of the subnet IDs in a VPC.</p>"
+                "smithy.api#documentation": "<p>Creates a replication subnet group given a list of the subnet IDs in a VPC.</p>\n         <p>The VPC needs to have at least one subnet in at least two availability zones in the Amazon Web Services Region, otherwise the\n          service will throw a <code>ReplicationSubnetGroupDoesNotCoverEnoughAZs</code> exception.</p>"
             }
         },
         "com.amazonaws.databasemigrationservice#CreateReplicationSubnetGroupMessage": {
@@ -3913,7 +3913,7 @@
                 "ServiceAccessRoleArn": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The IAM role that has permission to access the Amazon S3 bucket. When specified as part of request syntax,\n         such as for the <code>CreateEndpoint</code> and <code>ModifyEndpoint</code> actions,\n         the role must allow the <code>iam:PassRole</code> action.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) used by the service access IAM role. The role must allow the <code>iam:PassRole</code> action.</p>"
                     }
                 },
                 "BucketName": {
@@ -4204,7 +4204,7 @@
                 "DmsTransferSettings": {
                     "target": "com.amazonaws.databasemigrationservice#DmsTransferSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The settings in JSON format for the DMS transfer type of source endpoint. </p>\n         <p>Possible settings include the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ServiceAccessRoleArn</code> - The IAM role that has permission to access the\n               Amazon S3 bucket. The role must allow the <code>iam:PassRole</code> action.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BucketName</code> - The name of the S3 bucket to use.</p>\n            </li>\n         </ul>\n         <p>Shorthand syntax for these settings is as follows:\n            <code>ServiceAccessRoleArn=string,BucketName=string,</code>\n         </p>\n         <p>JSON syntax for these settings is as follows: <code>{ \"ServiceAccessRoleArn\":\n            \"string\", \"BucketName\": \"string\"} </code>\n         </p>"
+                        "smithy.api#documentation": "<p>The settings in JSON format for the DMS transfer type of source endpoint. </p>\n         <p>Possible settings include the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ServiceAccessRoleArn</code> -  - The Amazon Resource Name (ARN) used by the service access IAM role. \n                 The role must allow the <code>iam:PassRole</code> action.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BucketName</code> - The name of the S3 bucket to use.</p>\n            </li>\n         </ul>\n         <p>Shorthand syntax for these settings is as follows:\n            <code>ServiceAccessRoleArn=string,BucketName=string,</code>\n         </p>\n         <p>JSON syntax for these settings is as follows: <code>{ \"ServiceAccessRoleArn\":\n            \"string\", \"BucketName\": \"string\"} </code>\n         </p>"
                     }
                 },
                 "MongoDbSettings": {
@@ -5432,7 +5432,7 @@
                 "DmsTransferSettings": {
                     "target": "com.amazonaws.databasemigrationservice#DmsTransferSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The settings in JSON format for the DMS transfer type of source endpoint. </p>\n         <p>Attributes include the following:</p>\n         <ul>\n            <li>\n               <p>serviceAccessRoleArn - The Identity and Access Management (IAM) role that has\n               permission to access the Amazon S3 bucket. The role must allow the <code>iam:PassRole</code> action.</p>\n            </li>\n            <li>\n               <p>BucketName - The name of the S3 bucket to use.</p>\n            </li>\n         </ul>\n         <p>Shorthand syntax for these settings is as follows: <code>ServiceAccessRoleArn=string\n            ,BucketName=string</code>\n         </p>\n         <p>JSON syntax for these settings is as follows: <code>{ \"ServiceAccessRoleArn\": \"string\",\n            \"BucketName\": \"string\"} </code>\n         </p>"
+                        "smithy.api#documentation": "<p>The settings in JSON format for the DMS transfer type of source endpoint. </p>\n         <p>Attributes include the following:</p>\n         <ul>\n            <li>\n               <p>serviceAccessRoleArn - The Amazon Resource Name (ARN) used by the service access IAM role. The role must allow the <code>iam:PassRole</code> action.</p>\n            </li>\n            <li>\n               <p>BucketName - The name of the S3 bucket to use.</p>\n            </li>\n         </ul>\n         <p>Shorthand syntax for these settings is as follows: <code>ServiceAccessRoleArn=string\n            ,BucketName=string</code>\n         </p>\n         <p>JSON syntax for these settings is as follows: <code>{ \"ServiceAccessRoleArn\": \"string\",\n            \"BucketName\": \"string\"} </code>\n         </p>"
                     }
                 },
                 "MongoDbSettings": {
@@ -6816,7 +6816,13 @@
                 "ForceFailover": {
                     "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>If this parameter is <code>true</code>, the reboot is conducted through a Multi-AZ\n         failover. (If the instance isn't configured for Multi-AZ, then you can't specify\n            <code>true</code>.)</p>"
+                        "smithy.api#documentation": "<p>If this parameter is <code>true</code>, the reboot is conducted through a Multi-AZ\n         failover. If the instance isn't configured for Multi-AZ, then you can't specify\n         <code>true</code>.  ( <code>--force-planned-failover</code> and <code>--force-failover</code> can't both be set to <code>true</code>.)</p>"
+                    }
+                },
+                "ForcePlannedFailover": {
+                    "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If this parameter is <code>true</code>, the reboot is conducted through a planned Multi-AZ failover \n         where resources are released and cleaned up prior to conducting the failover. \n         If the instance isn''t configured for Multi-AZ, then you can't specify <code>true</code>. \n         ( <code>--force-planned-failover</code> and <code>--force-failover</code> can't both be set to <code>true</code>.)</p>"
                     }
                 }
             }
@@ -7253,7 +7259,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Reloads the target database table with the source data. </p>"
+                "smithy.api#documentation": "<p>Reloads the target database table with the source data. </p>\n         <p>You can only use this operation with a task in the <code>RUNNING</code> state, otherwise the service\n           will throw an <code>InvalidResourceStateFault</code> exception.</p>"
             }
         },
         "com.amazonaws.databasemigrationservice#ReloadTablesMessage": {

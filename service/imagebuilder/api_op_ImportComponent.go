@@ -52,13 +52,11 @@ type ImportComponentInput struct {
 
 	// The semantic version of the component. This version follows the semantic version
 	// syntax. The semantic version has four nodes: ../. You can assign values for the
-	// first three, and can filter on all of them. Filtering: When you retrieve or
-	// reference a resource with a semantic version, you can use wildcards (x) to
-	// filter your results. When you use a wildcard in any node, all nodes to the right
-	// of the first wildcard must also be wildcards. For example, specifying "1.2.x",
-	// or "1.x.x" works to filter list results, but neither "1.x.2", nor "x.2.x" will
-	// work. You do not have to specify the build - Image Builder automatically uses a
-	// wildcard for that, if applicable.
+	// first three, and can filter on all of them. Filtering: With semantic versioning,
+	// you have the flexibility to use wildcards (x) to specify the most recent
+	// versions or nodes when selecting the source image or components for your recipe.
+	// When you use a wildcard in any node, all nodes to the right of the first
+	// wildcard must also be wildcards.
 	//
 	// This member is required.
 	SemanticVersion *string

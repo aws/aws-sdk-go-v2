@@ -957,6 +957,7 @@ type BurninSubtitleAlignment string
 const (
 	BurninSubtitleAlignmentCentered BurninSubtitleAlignment = "CENTERED"
 	BurninSubtitleAlignmentLeft     BurninSubtitleAlignment = "LEFT"
+	BurninSubtitleAlignmentAuto     BurninSubtitleAlignment = "AUTO"
 )
 
 // Values returns all known values for BurninSubtitleAlignment. Note that this can
@@ -966,6 +967,25 @@ func (BurninSubtitleAlignment) Values() []BurninSubtitleAlignment {
 	return []BurninSubtitleAlignment{
 		"CENTERED",
 		"LEFT",
+		"AUTO",
+	}
+}
+
+type BurninSubtitleApplyFontColor string
+
+// Enum values for BurninSubtitleApplyFontColor
+const (
+	BurninSubtitleApplyFontColorWhiteTextOnly BurninSubtitleApplyFontColor = "WHITE_TEXT_ONLY"
+	BurninSubtitleApplyFontColorAllText       BurninSubtitleApplyFontColor = "ALL_TEXT"
+)
+
+// Values returns all known values for BurninSubtitleApplyFontColor. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BurninSubtitleApplyFontColor) Values() []BurninSubtitleApplyFontColor {
+	return []BurninSubtitleApplyFontColor{
+		"WHITE_TEXT_ONLY",
+		"ALL_TEXT",
 	}
 }
 
@@ -976,6 +996,7 @@ const (
 	BurninSubtitleBackgroundColorNone  BurninSubtitleBackgroundColor = "NONE"
 	BurninSubtitleBackgroundColorBlack BurninSubtitleBackgroundColor = "BLACK"
 	BurninSubtitleBackgroundColorWhite BurninSubtitleBackgroundColor = "WHITE"
+	BurninSubtitleBackgroundColorAuto  BurninSubtitleBackgroundColor = "AUTO"
 )
 
 // Values returns all known values for BurninSubtitleBackgroundColor. Note that
@@ -987,6 +1008,31 @@ func (BurninSubtitleBackgroundColor) Values() []BurninSubtitleBackgroundColor {
 		"NONE",
 		"BLACK",
 		"WHITE",
+		"AUTO",
+	}
+}
+
+type BurninSubtitleFallbackFont string
+
+// Enum values for BurninSubtitleFallbackFont
+const (
+	BurninSubtitleFallbackFontBestMatch             BurninSubtitleFallbackFont = "BEST_MATCH"
+	BurninSubtitleFallbackFontMonospacedSansserif   BurninSubtitleFallbackFont = "MONOSPACED_SANSSERIF"
+	BurninSubtitleFallbackFontMonospacedSerif       BurninSubtitleFallbackFont = "MONOSPACED_SERIF"
+	BurninSubtitleFallbackFontProportionalSansserif BurninSubtitleFallbackFont = "PROPORTIONAL_SANSSERIF"
+	BurninSubtitleFallbackFontProportionalSerif     BurninSubtitleFallbackFont = "PROPORTIONAL_SERIF"
+)
+
+// Values returns all known values for BurninSubtitleFallbackFont. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BurninSubtitleFallbackFont) Values() []BurninSubtitleFallbackFont {
+	return []BurninSubtitleFallbackFont{
+		"BEST_MATCH",
+		"MONOSPACED_SANSSERIF",
+		"MONOSPACED_SERIF",
+		"PROPORTIONAL_SANSSERIF",
+		"PROPORTIONAL_SERIF",
 	}
 }
 
@@ -1000,6 +1046,8 @@ const (
 	BurninSubtitleFontColorRed    BurninSubtitleFontColor = "RED"
 	BurninSubtitleFontColorGreen  BurninSubtitleFontColor = "GREEN"
 	BurninSubtitleFontColorBlue   BurninSubtitleFontColor = "BLUE"
+	BurninSubtitleFontColorHex    BurninSubtitleFontColor = "HEX"
+	BurninSubtitleFontColorAuto   BurninSubtitleFontColor = "AUTO"
 )
 
 // Values returns all known values for BurninSubtitleFontColor. Note that this can
@@ -1013,6 +1061,8 @@ func (BurninSubtitleFontColor) Values() []BurninSubtitleFontColor {
 		"RED",
 		"GREEN",
 		"BLUE",
+		"HEX",
+		"AUTO",
 	}
 }
 
@@ -1026,6 +1076,7 @@ const (
 	BurninSubtitleOutlineColorRed    BurninSubtitleOutlineColor = "RED"
 	BurninSubtitleOutlineColorGreen  BurninSubtitleOutlineColor = "GREEN"
 	BurninSubtitleOutlineColorBlue   BurninSubtitleOutlineColor = "BLUE"
+	BurninSubtitleOutlineColorAuto   BurninSubtitleOutlineColor = "AUTO"
 )
 
 // Values returns all known values for BurninSubtitleOutlineColor. Note that this
@@ -1039,6 +1090,7 @@ func (BurninSubtitleOutlineColor) Values() []BurninSubtitleOutlineColor {
 		"RED",
 		"GREEN",
 		"BLUE",
+		"AUTO",
 	}
 }
 
@@ -1049,6 +1101,7 @@ const (
 	BurninSubtitleShadowColorNone  BurninSubtitleShadowColor = "NONE"
 	BurninSubtitleShadowColorBlack BurninSubtitleShadowColor = "BLACK"
 	BurninSubtitleShadowColorWhite BurninSubtitleShadowColor = "WHITE"
+	BurninSubtitleShadowColorAuto  BurninSubtitleShadowColor = "AUTO"
 )
 
 // Values returns all known values for BurninSubtitleShadowColor. Note that this
@@ -1059,6 +1112,26 @@ func (BurninSubtitleShadowColor) Values() []BurninSubtitleShadowColor {
 		"NONE",
 		"BLACK",
 		"WHITE",
+		"AUTO",
+	}
+}
+
+type BurnInSubtitleStylePassthrough string
+
+// Enum values for BurnInSubtitleStylePassthrough
+const (
+	BurnInSubtitleStylePassthroughEnabled  BurnInSubtitleStylePassthrough = "ENABLED"
+	BurnInSubtitleStylePassthroughDisabled BurnInSubtitleStylePassthrough = "DISABLED"
+)
+
+// Values returns all known values for BurnInSubtitleStylePassthrough. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (BurnInSubtitleStylePassthrough) Values() []BurnInSubtitleStylePassthrough {
+	return []BurnInSubtitleStylePassthrough{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 
@@ -1068,6 +1141,7 @@ type BurninSubtitleTeletextSpacing string
 const (
 	BurninSubtitleTeletextSpacingFixedGrid    BurninSubtitleTeletextSpacing = "FIXED_GRID"
 	BurninSubtitleTeletextSpacingProportional BurninSubtitleTeletextSpacing = "PROPORTIONAL"
+	BurninSubtitleTeletextSpacingAuto         BurninSubtitleTeletextSpacing = "AUTO"
 )
 
 // Values returns all known values for BurninSubtitleTeletextSpacing. Note that
@@ -1078,6 +1152,7 @@ func (BurninSubtitleTeletextSpacing) Values() []BurninSubtitleTeletextSpacing {
 	return []BurninSubtitleTeletextSpacing{
 		"FIXED_GRID",
 		"PROPORTIONAL",
+		"AUTO",
 	}
 }
 
@@ -1222,6 +1297,7 @@ const (
 	CmafImageBasedTrickPlayNone                  CmafImageBasedTrickPlay = "NONE"
 	CmafImageBasedTrickPlayThumbnail             CmafImageBasedTrickPlay = "THUMBNAIL"
 	CmafImageBasedTrickPlayThumbnailAndFullframe CmafImageBasedTrickPlay = "THUMBNAIL_AND_FULLFRAME"
+	CmafImageBasedTrickPlayAdvanced              CmafImageBasedTrickPlay = "ADVANCED"
 )
 
 // Values returns all known values for CmafImageBasedTrickPlay. Note that this can
@@ -1232,6 +1308,7 @@ func (CmafImageBasedTrickPlay) Values() []CmafImageBasedTrickPlay {
 		"NONE",
 		"THUMBNAIL",
 		"THUMBNAIL_AND_FULLFRAME",
+		"ADVANCED",
 	}
 }
 
@@ -1251,6 +1328,24 @@ func (CmafInitializationVectorInManifest) Values() []CmafInitializationVectorInM
 	return []CmafInitializationVectorInManifest{
 		"INCLUDE",
 		"EXCLUDE",
+	}
+}
+
+type CmafIntervalCadence string
+
+// Enum values for CmafIntervalCadence
+const (
+	CmafIntervalCadenceFollowIframe CmafIntervalCadence = "FOLLOW_IFRAME"
+	CmafIntervalCadenceFollowCustom CmafIntervalCadence = "FOLLOW_CUSTOM"
+)
+
+// Values returns all known values for CmafIntervalCadence. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CmafIntervalCadence) Values() []CmafIntervalCadence {
+	return []CmafIntervalCadence{
+		"FOLLOW_IFRAME",
+		"FOLLOW_CUSTOM",
 	}
 }
 
@@ -1782,6 +1877,7 @@ const (
 	DashIsoImageBasedTrickPlayNone                  DashIsoImageBasedTrickPlay = "NONE"
 	DashIsoImageBasedTrickPlayThumbnail             DashIsoImageBasedTrickPlay = "THUMBNAIL"
 	DashIsoImageBasedTrickPlayThumbnailAndFullframe DashIsoImageBasedTrickPlay = "THUMBNAIL_AND_FULLFRAME"
+	DashIsoImageBasedTrickPlayAdvanced              DashIsoImageBasedTrickPlay = "ADVANCED"
 )
 
 // Values returns all known values for DashIsoImageBasedTrickPlay. Note that this
@@ -1792,6 +1888,25 @@ func (DashIsoImageBasedTrickPlay) Values() []DashIsoImageBasedTrickPlay {
 		"NONE",
 		"THUMBNAIL",
 		"THUMBNAIL_AND_FULLFRAME",
+		"ADVANCED",
+	}
+}
+
+type DashIsoIntervalCadence string
+
+// Enum values for DashIsoIntervalCadence
+const (
+	DashIsoIntervalCadenceFollowIframe DashIsoIntervalCadence = "FOLLOW_IFRAME"
+	DashIsoIntervalCadenceFollowCustom DashIsoIntervalCadence = "FOLLOW_CUSTOM"
+)
+
+// Values returns all known values for DashIsoIntervalCadence. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DashIsoIntervalCadence) Values() []DashIsoIntervalCadence {
+	return []DashIsoIntervalCadence{
+		"FOLLOW_IFRAME",
+		"FOLLOW_CUSTOM",
 	}
 }
 
@@ -2078,12 +2193,37 @@ func (DvbddsHandling) Values() []DvbddsHandling {
 	}
 }
 
+type DvbSubSubtitleFallbackFont string
+
+// Enum values for DvbSubSubtitleFallbackFont
+const (
+	DvbSubSubtitleFallbackFontBestMatch             DvbSubSubtitleFallbackFont = "BEST_MATCH"
+	DvbSubSubtitleFallbackFontMonospacedSansserif   DvbSubSubtitleFallbackFont = "MONOSPACED_SANSSERIF"
+	DvbSubSubtitleFallbackFontMonospacedSerif       DvbSubSubtitleFallbackFont = "MONOSPACED_SERIF"
+	DvbSubSubtitleFallbackFontProportionalSansserif DvbSubSubtitleFallbackFont = "PROPORTIONAL_SANSSERIF"
+	DvbSubSubtitleFallbackFontProportionalSerif     DvbSubSubtitleFallbackFont = "PROPORTIONAL_SERIF"
+)
+
+// Values returns all known values for DvbSubSubtitleFallbackFont. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DvbSubSubtitleFallbackFont) Values() []DvbSubSubtitleFallbackFont {
+	return []DvbSubSubtitleFallbackFont{
+		"BEST_MATCH",
+		"MONOSPACED_SANSSERIF",
+		"MONOSPACED_SERIF",
+		"PROPORTIONAL_SANSSERIF",
+		"PROPORTIONAL_SERIF",
+	}
+}
+
 type DvbSubtitleAlignment string
 
 // Enum values for DvbSubtitleAlignment
 const (
 	DvbSubtitleAlignmentCentered DvbSubtitleAlignment = "CENTERED"
 	DvbSubtitleAlignmentLeft     DvbSubtitleAlignment = "LEFT"
+	DvbSubtitleAlignmentAuto     DvbSubtitleAlignment = "AUTO"
 )
 
 // Values returns all known values for DvbSubtitleAlignment. Note that this can be
@@ -2093,6 +2233,25 @@ func (DvbSubtitleAlignment) Values() []DvbSubtitleAlignment {
 	return []DvbSubtitleAlignment{
 		"CENTERED",
 		"LEFT",
+		"AUTO",
+	}
+}
+
+type DvbSubtitleApplyFontColor string
+
+// Enum values for DvbSubtitleApplyFontColor
+const (
+	DvbSubtitleApplyFontColorWhiteTextOnly DvbSubtitleApplyFontColor = "WHITE_TEXT_ONLY"
+	DvbSubtitleApplyFontColorAllText       DvbSubtitleApplyFontColor = "ALL_TEXT"
+)
+
+// Values returns all known values for DvbSubtitleApplyFontColor. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DvbSubtitleApplyFontColor) Values() []DvbSubtitleApplyFontColor {
+	return []DvbSubtitleApplyFontColor{
+		"WHITE_TEXT_ONLY",
+		"ALL_TEXT",
 	}
 }
 
@@ -2103,6 +2262,7 @@ const (
 	DvbSubtitleBackgroundColorNone  DvbSubtitleBackgroundColor = "NONE"
 	DvbSubtitleBackgroundColorBlack DvbSubtitleBackgroundColor = "BLACK"
 	DvbSubtitleBackgroundColorWhite DvbSubtitleBackgroundColor = "WHITE"
+	DvbSubtitleBackgroundColorAuto  DvbSubtitleBackgroundColor = "AUTO"
 )
 
 // Values returns all known values for DvbSubtitleBackgroundColor. Note that this
@@ -2113,6 +2273,7 @@ func (DvbSubtitleBackgroundColor) Values() []DvbSubtitleBackgroundColor {
 		"NONE",
 		"BLACK",
 		"WHITE",
+		"AUTO",
 	}
 }
 
@@ -2126,6 +2287,8 @@ const (
 	DvbSubtitleFontColorRed    DvbSubtitleFontColor = "RED"
 	DvbSubtitleFontColorGreen  DvbSubtitleFontColor = "GREEN"
 	DvbSubtitleFontColorBlue   DvbSubtitleFontColor = "BLUE"
+	DvbSubtitleFontColorHex    DvbSubtitleFontColor = "HEX"
+	DvbSubtitleFontColorAuto   DvbSubtitleFontColor = "AUTO"
 )
 
 // Values returns all known values for DvbSubtitleFontColor. Note that this can be
@@ -2139,6 +2302,8 @@ func (DvbSubtitleFontColor) Values() []DvbSubtitleFontColor {
 		"RED",
 		"GREEN",
 		"BLUE",
+		"HEX",
+		"AUTO",
 	}
 }
 
@@ -2152,6 +2317,7 @@ const (
 	DvbSubtitleOutlineColorRed    DvbSubtitleOutlineColor = "RED"
 	DvbSubtitleOutlineColorGreen  DvbSubtitleOutlineColor = "GREEN"
 	DvbSubtitleOutlineColorBlue   DvbSubtitleOutlineColor = "BLUE"
+	DvbSubtitleOutlineColorAuto   DvbSubtitleOutlineColor = "AUTO"
 )
 
 // Values returns all known values for DvbSubtitleOutlineColor. Note that this can
@@ -2165,6 +2331,7 @@ func (DvbSubtitleOutlineColor) Values() []DvbSubtitleOutlineColor {
 		"RED",
 		"GREEN",
 		"BLUE",
+		"AUTO",
 	}
 }
 
@@ -2175,6 +2342,7 @@ const (
 	DvbSubtitleShadowColorNone  DvbSubtitleShadowColor = "NONE"
 	DvbSubtitleShadowColorBlack DvbSubtitleShadowColor = "BLACK"
 	DvbSubtitleShadowColorWhite DvbSubtitleShadowColor = "WHITE"
+	DvbSubtitleShadowColorAuto  DvbSubtitleShadowColor = "AUTO"
 )
 
 // Values returns all known values for DvbSubtitleShadowColor. Note that this can
@@ -2185,6 +2353,25 @@ func (DvbSubtitleShadowColor) Values() []DvbSubtitleShadowColor {
 		"NONE",
 		"BLACK",
 		"WHITE",
+		"AUTO",
+	}
+}
+
+type DvbSubtitleStylePassthrough string
+
+// Enum values for DvbSubtitleStylePassthrough
+const (
+	DvbSubtitleStylePassthroughEnabled  DvbSubtitleStylePassthrough = "ENABLED"
+	DvbSubtitleStylePassthroughDisabled DvbSubtitleStylePassthrough = "DISABLED"
+)
+
+// Values returns all known values for DvbSubtitleStylePassthrough. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DvbSubtitleStylePassthrough) Values() []DvbSubtitleStylePassthrough {
+	return []DvbSubtitleStylePassthrough{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 
@@ -2194,6 +2381,7 @@ type DvbSubtitleTeletextSpacing string
 const (
 	DvbSubtitleTeletextSpacingFixedGrid    DvbSubtitleTeletextSpacing = "FIXED_GRID"
 	DvbSubtitleTeletextSpacingProportional DvbSubtitleTeletextSpacing = "PROPORTIONAL"
+	DvbSubtitleTeletextSpacingAuto         DvbSubtitleTeletextSpacing = "AUTO"
 )
 
 // Values returns all known values for DvbSubtitleTeletextSpacing. Note that this
@@ -2203,6 +2391,7 @@ func (DvbSubtitleTeletextSpacing) Values() []DvbSubtitleTeletextSpacing {
 	return []DvbSubtitleTeletextSpacing{
 		"FIXED_GRID",
 		"PROPORTIONAL",
+		"AUTO",
 	}
 }
 
@@ -4047,6 +4236,7 @@ const (
 	HlsImageBasedTrickPlayNone                  HlsImageBasedTrickPlay = "NONE"
 	HlsImageBasedTrickPlayThumbnail             HlsImageBasedTrickPlay = "THUMBNAIL"
 	HlsImageBasedTrickPlayThumbnailAndFullframe HlsImageBasedTrickPlay = "THUMBNAIL_AND_FULLFRAME"
+	HlsImageBasedTrickPlayAdvanced              HlsImageBasedTrickPlay = "ADVANCED"
 )
 
 // Values returns all known values for HlsImageBasedTrickPlay. Note that this can
@@ -4057,6 +4247,7 @@ func (HlsImageBasedTrickPlay) Values() []HlsImageBasedTrickPlay {
 		"NONE",
 		"THUMBNAIL",
 		"THUMBNAIL_AND_FULLFRAME",
+		"ADVANCED",
 	}
 }
 
@@ -4076,6 +4267,24 @@ func (HlsInitializationVectorInManifest) Values() []HlsInitializationVectorInMan
 	return []HlsInitializationVectorInManifest{
 		"INCLUDE",
 		"EXCLUDE",
+	}
+}
+
+type HlsIntervalCadence string
+
+// Enum values for HlsIntervalCadence
+const (
+	HlsIntervalCadenceFollowIframe HlsIntervalCadence = "FOLLOW_IFRAME"
+	HlsIntervalCadenceFollowCustom HlsIntervalCadence = "FOLLOW_CUSTOM"
+)
+
+// Values returns all known values for HlsIntervalCadence. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HlsIntervalCadence) Values() []HlsIntervalCadence {
+	return []HlsIntervalCadence{
+		"FOLLOW_IFRAME",
+		"FOLLOW_CUSTOM",
 	}
 }
 

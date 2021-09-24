@@ -78,6 +78,9 @@ type CheckoutLicenseOutput struct {
 	// Date and time at which the license checkout is issued.
 	IssuedAt *string
 
+	// Amazon Resource Name (ARN) of the checkout license.
+	LicenseArn *string
+
 	// License consumption token.
 	LicenseConsumptionToken *string
 

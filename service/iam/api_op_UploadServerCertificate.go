@@ -11,14 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Uploads a server certificate entity for the account. The server certificate
-// entity includes a public key certificate, a private key, and an optional
-// certificate chain, which should all be PEM-encoded. We recommend that you use
-// Certificate Manager (https://docs.aws.amazon.com/acm/) to provision, manage, and
-// deploy your server certificates. With ACM you can request a certificate, deploy
-// it to Amazon Web Services resources, and let ACM handle certificate renewals for
-// you. Certificates provided by ACM are free. For more information about using
-// ACM, see the Certificate Manager User Guide
+// Uploads a server certificate entity for the Amazon Web Services account. The
+// server certificate entity includes a public key certificate, a private key, and
+// an optional certificate chain, which should all be PEM-encoded. We recommend
+// that you use Certificate Manager (https://docs.aws.amazon.com/acm/) to
+// provision, manage, and deploy your server certificates. With ACM you can request
+// a certificate, deploy it to Amazon Web Services resources, and let ACM handle
+// certificate renewals for you. Certificates provided by ACM are free. For more
+// information about using ACM, see the Certificate Manager User Guide
 // (https://docs.aws.amazon.com/acm/latest/userguide/). For more information about
 // working with server certificates, see Working with server certificates
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html)

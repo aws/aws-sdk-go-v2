@@ -26,8 +26,8 @@ func (e *AccessDeniedException) ErrorMessage() string {
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The AWS user account does not have permission to perform the action. Check the
-// IAM policy associated with this account.
+// The Amazon Web Services user account does not have permission to perform the
+// action. Check the IAM policy associated with this account.
 type AuthorizationException struct {
 	Message *string
 

@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds or removes the specified license configurations for the specified AWS
-// resource. You can update the license specifications of AMIs, instances, and
-// hosts. You cannot update the license specifications for launch templates and AWS
-// CloudFormation templates, as they send license configurations to the operation
-// that creates the resource.
+// Adds or removes the specified license configurations for the specified Amazon
+// Web Services resource. You can update the license specifications of AMIs,
+// instances, and hosts. You cannot update the license specifications for launch
+// templates and CloudFormation templates, as they send license configurations to
+// the operation that creates the resource.
 func (c *Client) UpdateLicenseSpecificationsForResource(ctx context.Context, params *UpdateLicenseSpecificationsForResourceInput, optFns ...func(*Options)) (*UpdateLicenseSpecificationsForResourceOutput, error) {
 	if params == nil {
 		params = &UpdateLicenseSpecificationsForResourceInput{}
@@ -33,7 +33,7 @@ func (c *Client) UpdateLicenseSpecificationsForResource(ctx context.Context, par
 
 type UpdateLicenseSpecificationsForResourceInput struct {
 
-	// Amazon Resource Name (ARN) of the AWS resource.
+	// Amazon Resource Name (ARN) of the Amazon Web Services resource.
 	//
 	// This member is required.
 	ResourceArn *string

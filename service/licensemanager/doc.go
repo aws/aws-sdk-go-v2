@@ -3,6 +3,6 @@
 // Package licensemanager provides the API client, operations, and parameter types
 // for AWS License Manager.
 //
-// AWS License Manager AWS License Manager makes it easier to manage licenses from
-// software vendors across multiple AWS accounts and on-premises servers.
+// License Manager makes it easier to manage licenses from software vendors across
+// multiple Amazon Web Services accounts and on-premises servers.
 package licensemanager

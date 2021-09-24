@@ -18,9 +18,10 @@ import (
 // paginate the results using the MaxItems and Marker parameters. If the UserName
 // field is not specified, the user name is determined implicitly based on the
 // Amazon Web Services access key ID used to sign the request for this operation.
-// This operation works for access keys under the account. Consequently, you can
-// use this operation to manage account root user credentials even if the account
-// has no associated users.
+// This operation works for access keys under the Amazon Web Services account.
+// Consequently, you can use this operation to manage Amazon Web Services account
+// root user credentials even if the Amazon Web Services account has no associated
+// users.
 func (c *Client) ListSigningCertificates(ctx context.Context, params *ListSigningCertificatesInput, optFns ...func(*Options)) (*ListSigningCertificatesOutput, error) {
 	if params == nil {
 		params = &ListSigningCertificatesInput{}

@@ -20,12 +20,13 @@ import (
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html)
 // in the IAM User Guide. If the UserName is not specified, the IAM user name is
 // determined implicitly based on the Amazon Web Services access key ID used to
-// sign the request. This operation works for access keys under the account.
-// Consequently, you can use this operation to manage account root user credentials
-// even if the account has no associated users. Because the body of an X.509
-// certificate can be large, you should use POST rather than GET when calling
-// UploadSigningCertificate. For information about setting up signatures and
-// authorization through the API, see Signing Amazon Web Services API requests
+// sign the request. This operation works for access keys under the Amazon Web
+// Services account. Consequently, you can use this operation to manage Amazon Web
+// Services account root user credentials even if the Amazon Web Services account
+// has no associated users. Because the body of an X.509 certificate can be large,
+// you should use POST rather than GET when calling UploadSigningCertificate. For
+// information about setting up signatures and authorization through the API, see
+// Signing Amazon Web Services API requests
 // (https://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html) in
 // the Amazon Web Services General Reference. For general information about using
 // the Query API with IAM, see Making query requests

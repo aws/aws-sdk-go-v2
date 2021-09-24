@@ -291,8 +291,8 @@ type Issuer struct {
 	// This member is required.
 	Name *string
 
-	// Asymmetric CMK from AWS Key Management Service. The CMK must have a key usage of
-	// sign and verify, and support the RSASSA-PSS SHA-256 signing algorithm.
+	// Asymmetric KMS key from Key Management Service. The KMS key must have a key
+	// usage of sign and verify, and support the RSASSA-PSS SHA-256 signing algorithm.
 	SignKey *string
 
 	noSmithyDocumentSerde
@@ -307,14 +307,14 @@ type IssuerDetails struct {
 	// Issuer name.
 	Name *string
 
-	// Asymmetric CMK from AWS Key Management Service. The CMK must have a key usage of
-	// sign and verify, and support the RSASSA-PSS SHA-256 signing algorithm.
+	// Asymmetric KMS key from Key Management Service. The KMS key must have a key
+	// usage of sign and verify, and support the RSASSA-PSS SHA-256 signing algorithm.
 	SignKey *string
 
 	noSmithyDocumentSerde
 }
 
-// Software license that is managed in AWS License Manager.
+// Software license that is managed in License Manager.
 type License struct {
 
 	// License beneficiary.
@@ -433,7 +433,7 @@ type LicenseConfigurationAssociation struct {
 	// Amazon Resource Name (ARN) of the resource.
 	ResourceArn *string
 
-	// ID of the AWS account that owns the resource consuming licenses.
+	// ID of the Amazon Web Services account that owns the resource consuming licenses.
 	ResourceOwnerId *string
 
 	// Type of server resource.
@@ -466,6 +466,53 @@ type LicenseConfigurationUsage struct {
 	noSmithyDocumentSerde
 }
 
+// Information about a license type conversion task.
+type LicenseConversionContext struct {
+
+	// The Usage operation value that corresponds to the license type you are
+	// converting your resource from. For more information about which platforms
+	// correspond to which usage operation values see Sample data: usage operation by
+	// platform
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info-fields.html#billing-info)
+	UsageOperation *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about a license type conversion task.
+type LicenseConversionTask struct {
+
+	// Information about the license type this conversion task converted to.
+	DestinationLicenseContext *LicenseConversionContext
+
+	// The time the conversion task was completed.
+	EndTime *time.Time
+
+	// The ID of the license type conversion task.
+	LicenseConversionTaskId *string
+
+	// The time the usage operation value of the resource was changed.
+	LicenseConversionTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the resource associated with the license type
+	// conversion task.
+	ResourceArn *string
+
+	// Information about the license type this conversion task converted from.
+	SourceLicenseContext *LicenseConversionContext
+
+	// The time the conversion task was started at.
+	StartTime *time.Time
+
+	// The status of the conversion task.
+	Status LicenseConversionTaskStatus
+
+	// The status message for the conversion task.
+	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the failure of a license operation.
 type LicenseOperationFailure struct {
 
@@ -487,7 +534,7 @@ type LicenseOperationFailure struct {
 	// Amazon Resource Name (ARN) of the resource.
 	ResourceArn *string
 
-	// ID of the AWS account that owns the resource.
+	// ID of the Amazon Web Services account that owns the resource.
 	ResourceOwnerId *string
 
 	// Resource type.
@@ -543,10 +590,10 @@ type Metadata struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration information for AWS Organizations.
+// Configuration information for Organizations.
 type OrganizationConfiguration struct {
 
-	// Enables AWS Organization integration.
+	// Enables Organizations integration.
 	//
 	// This member is required.
 	EnableIntegration bool
@@ -581,29 +628,30 @@ type ProductInformation struct {
 	// platform type. Logical operator is EQUALS.
 	//
 	// * Tag:key - The key of a tag
-	// attached to an AWS resource you wish to exclude from automated discovery.
-	// Logical operator is NOT_EQUALS. The key for your tag must be appended to Tag:
-	// following the example: Tag:name-of-your-key. ProductInformationFilterValue is
-	// optional if you are not using values for the key.
+	// attached to an Amazon Web Services resource you wish to exclude from automated
+	// discovery. Logical operator is NOT_EQUALS. The key for your tag must be appended
+	// to Tag: following the example: Tag:name-of-your-key.
+	// ProductInformationFilterValue is optional if you are not using values for the
+	// key.
 	//
-	// * AccountId - The 12-digit ID
-	// of an AWS account you wish to exclude from automated discovery. Logical operator
-	// is NOT_EQUALS.
+	// * AccountId - The 12-digit ID of an Amazon Web Services account you wish
+	// to exclude from automated discovery. Logical operator is NOT_EQUALS.
 	//
-	// * License Included - The type of license included. Logical
-	// operators are EQUALS and NOT_EQUALS. Possible values are: sql-server-enterprise
-	// | sql-server-standard | sql-server-web | windows-server-datacenter.
+	// * License
+	// Included - The type of license included. Logical operators are EQUALS and
+	// NOT_EQUALS. Possible values are: sql-server-enterprise | sql-server-standard |
+	// sql-server-web | windows-server-datacenter.
 	//
-	// The
-	// following filters and logical operators are supported when the resource type is
-	// RDS:
+	// The following filters and logical
+	// operators are supported when the resource type is RDS:
 	//
-	// * Engine Edition - The edition of the database engine. Logical operator is
-	// EQUALS. Possible values are: oracle-ee | oracle-se | oracle-se1 | oracle-se2.
+	// * Engine Edition - The
+	// edition of the database engine. Logical operator is EQUALS. Possible values are:
+	// oracle-ee | oracle-se | oracle-se1 | oracle-se2.
 	//
-	// *
-	// License Pack - The license pack. Logical operator is EQUALS. Possible values
-	// are: data guard | diagnostic pack sqlt | tuning pack sqlt | ols | olap.
+	// * License Pack - The license
+	// pack. Logical operator is EQUALS. Possible values are: data guard | diagnostic
+	// pack sqlt | tuning pack sqlt | ols | olap.
 	//
 	// This member is required.
 	ProductInformationFilterList []ProductInformationFilter
@@ -655,6 +703,7 @@ type ReceivedMetadata struct {
 	// Received status.
 	ReceivedStatus ReceivedStatus
 
+	// Received status reason.
 	ReceivedStatusReason *string
 
 	noSmithyDocumentSerde
@@ -663,7 +712,7 @@ type ReceivedMetadata struct {
 // Details of the license configuration that this generator reports on.
 type ReportContext struct {
 
-	// Amazon Resource Number (ARN) of the license configuration that this generator
+	// Amazon Resource Name (ARN) of the license configuration that this generator
 	// reports on.
 	//
 	// This member is required.
@@ -672,14 +721,14 @@ type ReportContext struct {
 	noSmithyDocumentSerde
 }
 
-// Details on how frequently reports are generated.
+// Details about how frequently reports are generated.
 type ReportFrequency struct {
 
 	// Time period between each report. The period can be daily, weekly, or monthly.
 	Period ReportFrequencyType
 
-	// Number of times within the frequency period that a report will be generated.
-	// Currently only 1 is supported.
+	// Number of times within the frequency period that a report is generated. The only
+	// supported value is 1.
 	Value *int32
 
 	noSmithyDocumentSerde
@@ -703,16 +752,16 @@ type ReportGenerator struct {
 	// Status of the last report generation attempt.
 	LastRunStatus *string
 
-	// Amazon Resource Number (ARN) of the report generator.
+	// Amazon Resource Name (ARN) of the report generator.
 	LicenseManagerReportGeneratorArn *string
 
-	// License configuration type this generator reports on.
+	// License configuration type for this generator.
 	ReportContext *ReportContext
 
-	// The AWS account ID used to create the report generator.
+	// The Amazon Web Services account ID used to create the report generator.
 	ReportCreatorAccount *string
 
-	// Details on how frequently reports are generated.
+	// Details about how frequently reports are generated.
 	ReportFrequency *ReportFrequency
 
 	// Name of the report generator.

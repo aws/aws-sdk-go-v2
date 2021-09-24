@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new IAM user for your account. For information about quotas for the
-// number of IAM users you can create, see IAM and STS quotas
+// Creates a new IAM user for your Amazon Web Services account. For information
+// about quotas for the number of IAM users you can create, see IAM and STS quotas
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html) in
 // the IAM User Guide.
 func (c *Client) CreateUser(ctx context.Context, params *CreateUserInput, optFns ...func(*Options)) (*CreateUserOutput, error) {

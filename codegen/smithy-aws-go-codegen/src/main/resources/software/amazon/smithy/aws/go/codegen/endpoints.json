@@ -898,6 +898,22 @@
           "us-west-2" : { }
         }
       },
+      "auditmanager" : {
+        "endpoints" : {
+          "ap-northeast-1" : { },
+          "ap-south-1" : { },
+          "ap-southeast-1" : { },
+          "ap-southeast-2" : { },
+          "ca-central-1" : { },
+          "eu-central-1" : { },
+          "eu-west-1" : { },
+          "eu-west-2" : { },
+          "us-east-1" : { },
+          "us-east-2" : { },
+          "us-west-1" : { },
+          "us-west-2" : { }
+        }
+      },
       "autoscaling" : {
         "defaults" : {
           "protocols" : [ "http", "https" ]
@@ -1348,6 +1364,7 @@
       },
       "codecommit" : {
         "endpoints" : {
+          "af-south-1" : { },
           "ap-east-1" : { },
           "ap-northeast-1" : { },
           "ap-northeast-2" : { },
@@ -3991,6 +4008,26 @@
           "us-west-2" : { }
         }
       },
+      "kafkaconnect" : {
+        "endpoints" : {
+          "ap-northeast-1" : { },
+          "ap-northeast-2" : { },
+          "ap-south-1" : { },
+          "ap-southeast-1" : { },
+          "ap-southeast-2" : { },
+          "ca-central-1" : { },
+          "eu-central-1" : { },
+          "eu-north-1" : { },
+          "eu-west-1" : { },
+          "eu-west-2" : { },
+          "eu-west-3" : { },
+          "sa-east-1" : { },
+          "us-east-1" : { },
+          "us-east-2" : { },
+          "us-west-1" : { },
+          "us-west-2" : { }
+        }
+      },
       "kinesis" : {
         "endpoints" : {
           "af-south-1" : { },
@@ -4113,6 +4150,7 @@
           "ap-east-1" : { },
           "ap-northeast-1" : { },
           "ap-northeast-2" : { },
+          "ap-northeast-3" : { },
           "ap-south-1" : { },
           "ap-southeast-1" : { },
           "ap-southeast-2" : { },
@@ -4642,7 +4680,9 @@
       },
       "models-v2-lex" : {
         "endpoints" : {
+          "af-south-1" : { },
           "ap-northeast-1" : { },
+          "ap-northeast-2" : { },
           "ap-southeast-1" : { },
           "ap-southeast-2" : { },
           "ca-central-1" : { },
@@ -5368,6 +5408,24 @@
           "us-west-2" : { }
         }
       },
+      "quicksight" : {
+        "endpoints" : {
+          "ap-northeast-1" : { },
+          "ap-northeast-2" : { },
+          "ap-south-1" : { },
+          "ap-southeast-1" : { },
+          "ap-southeast-2" : { },
+          "api" : { },
+          "ca-central-1" : { },
+          "eu-central-1" : { },
+          "eu-west-1" : { },
+          "eu-west-2" : { },
+          "sa-east-1" : { },
+          "us-east-1" : { },
+          "us-east-2" : { },
+          "us-west-2" : { }
+        }
+      },
       "ram" : {
         "endpoints" : {
           "af-south-1" : { },
@@ -5705,7 +5763,9 @@
       },
       "runtime-v2-lex" : {
         "endpoints" : {
+          "af-south-1" : { },
           "ap-northeast-1" : { },
+          "ap-northeast-2" : { },
           "ap-southeast-1" : { },
           "ap-southeast-2" : { },
           "ca-central-1" : { },
@@ -7816,6 +7876,12 @@
           "cn-northwest-1" : { }
         }
       },
+      "appmesh" : {
+        "endpoints" : {
+          "cn-north-1" : { },
+          "cn-northwest-1" : { }
+        }
+      },
       "appsync" : {
         "endpoints" : {
           "cn-north-1" : { },
@@ -9559,6 +9625,17 @@
         "isRegionalized" : false,
         "partitionEndpoint" : "aws-us-gov-global"
       },
+      "identitystore" : {
+        "endpoints" : {
+          "fips-us-gov-west-1" : {
+            "credentialScope" : {
+              "region" : "us-gov-west-1"
+            },
+            "hostname" : "identitystore.us-gov-west-1.amazonaws.com"
+          },
+          "us-gov-west-1" : { }
+        }
+      },
       "inspector" : {
         "endpoints" : {
           "fips-us-gov-east-1" : {
@@ -9598,6 +9675,21 @@
           },
           "us-gov-east-1" : { },
           "us-gov-west-1" : { }
+        }
+      },
+      "iotevents" : {
+        "endpoints" : {
+          "us-gov-west-1" : { }
+        }
+      },
+      "ioteventsdata" : {
+        "endpoints" : {
+          "us-gov-west-1" : {
+            "credentialScope" : {
+              "region" : "us-gov-west-1"
+            },
+            "hostname" : "data.iotevents.us-gov-west-1.amazonaws.com"
+          }
         }
       },
       "iotsecuredtunneling" : {
@@ -9901,6 +9993,12 @@
             },
             "hostname" : "polly-fips.us-gov-west-1.amazonaws.com"
           },
+          "us-gov-west-1" : { }
+        }
+      },
+      "quicksight" : {
+        "endpoints" : {
+          "api" : { },
           "us-gov-west-1" : { }
         }
       },

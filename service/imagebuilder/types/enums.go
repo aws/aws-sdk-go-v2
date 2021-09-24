@@ -18,6 +18,22 @@ func (ComponentFormat) Values() []ComponentFormat {
 	}
 }
 
+type ComponentStatus string
+
+// Enum values for ComponentStatus
+const (
+	ComponentStatusDeprecated ComponentStatus = "DEPRECATED"
+)
+
+// Values returns all known values for ComponentStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ComponentStatus) Values() []ComponentStatus {
+	return []ComponentStatus{
+		"DEPRECATED",
+	}
+}
+
 type ComponentType string
 
 // Enum values for ComponentType

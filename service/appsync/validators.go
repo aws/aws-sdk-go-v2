@@ -1163,6 +1163,24 @@ func validateOpenIDConnectConfig(v *types.OpenIDConnectConfig) error {
 	}
 }
 
+func validateOpenSearchServiceDataSourceConfig(v *types.OpenSearchServiceDataSourceConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OpenSearchServiceDataSourceConfig"}
+	if v.Endpoint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Endpoint"))
+	}
+	if v.AwsRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsRegion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateUserPoolConfig(v *types.UserPoolConfig) error {
 	if v == nil {
 		return nil
@@ -1247,6 +1265,11 @@ func validateOpCreateDataSourceInput(v *CreateDataSourceInput) error {
 	if v.ElasticsearchConfig != nil {
 		if err := validateElasticsearchDataSourceConfig(v.ElasticsearchConfig); err != nil {
 			invalidParams.AddNested("ElasticsearchConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OpenSearchServiceConfig != nil {
+		if err := validateOpenSearchServiceDataSourceConfig(v.OpenSearchServiceConfig); err != nil {
+			invalidParams.AddNested("OpenSearchServiceConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.HttpConfig != nil {
@@ -1883,6 +1906,11 @@ func validateOpUpdateDataSourceInput(v *UpdateDataSourceInput) error {
 	if v.ElasticsearchConfig != nil {
 		if err := validateElasticsearchDataSourceConfig(v.ElasticsearchConfig); err != nil {
 			invalidParams.AddNested("ElasticsearchConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OpenSearchServiceConfig != nil {
+		if err := validateOpenSearchServiceDataSourceConfig(v.OpenSearchServiceConfig); err != nil {
+			invalidParams.AddNested("OpenSearchServiceConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.HttpConfig != nil {

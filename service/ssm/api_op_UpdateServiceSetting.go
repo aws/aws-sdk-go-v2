@@ -66,25 +66,29 @@ type UpdateServiceSettingInput struct {
 	// This member is required.
 	SettingId *string
 
-	// The new value to specify for the service setting. For the
-	// /ssm/parameter-store/default-parameter-tier setting ID, the setting value can be
-	// one of the following.
+	// The new value to specify for the service setting. The following list specifies
+	// the available values for each setting.
 	//
-	// * Standard
+	// *
+	// /ssm/parameter-store/default-parameter-tier: Standard, Advanced,
+	// Intelligent-Tiering
 	//
-	// * Advanced
+	// * /ssm/parameter-store/high-throughput-enabled: true or
+	// false
 	//
-	// * Intelligent-Tiering
+	// * /ssm/managed-instance/activation-tier: true or false
 	//
-	// For the
-	// /ssm/parameter-store/high-throughput-enabled, and
-	// /ssm/managed-instance/activation-tier setting IDs, the setting value can be true
-	// or false. For the /ssm/automation/customer-script-log-destination setting ID,
-	// the setting value can be CloudWatch. For the
-	// /ssm/automation/customer-script-log-group-name setting ID, the setting value can
-	// be the name of an Amazon CloudWatch Logs log group. For the
-	// /ssm/documents/console/public-sharing-permission setting ID, the setting value
-	// can be Enable or Disable.
+	// *
+	// /ssm/automation/customer-script-log-destination: CloudWatch
+	//
+	// *
+	// /ssm/automation/customer-script-log-group-name: the name of an Amazon CloudWatch
+	// Logs log group
+	//
+	// * /ssm/documents/console/public-sharing-permission: Enable or
+	// Disable
+	//
+	// * /ssm/managed-instance/activation-tier: standard or advanced
 	//
 	// This member is required.
 	SettingValue *string

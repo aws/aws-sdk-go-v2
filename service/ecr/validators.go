@@ -170,6 +170,26 @@ func (m *validateOpDeleteRepositoryPolicy) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeImageReplicationStatus struct {
+}
+
+func (*validateOpDescribeImageReplicationStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeImageReplicationStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeImageReplicationStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeImageReplicationStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeImageScanFindings struct {
 }
 
@@ -622,6 +642,10 @@ func addOpDeleteRepositoryPolicyValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpDeleteRepositoryPolicy{}, middleware.After)
 }
 
+func addOpDescribeImageReplicationStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeImageReplicationStatus{}, middleware.After)
+}
+
 func addOpDescribeImageScanFindingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeImageScanFindings{}, middleware.After)
 }
@@ -787,6 +811,11 @@ func validateReplicationRule(v *types.ReplicationRule) error {
 			invalidParams.AddNested("Destinations", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.RepositoryFilters != nil {
+		if err := validateRepositoryFilterList(v.RepositoryFilters); err != nil {
+			invalidParams.AddNested("RepositoryFilters", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -801,6 +830,41 @@ func validateReplicationRuleList(v []types.ReplicationRule) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ReplicationRuleList"}
 	for i := range v {
 		if err := validateReplicationRule(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRepositoryFilter(v *types.RepositoryFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RepositoryFilter"}
+	if v.Filter == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Filter"))
+	}
+	if len(v.FilterType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("FilterType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRepositoryFilterList(v []types.RepositoryFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RepositoryFilterList"}
+	for i := range v {
+		if err := validateRepositoryFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -943,6 +1007,24 @@ func validateOpDeleteRepositoryPolicyInput(v *DeleteRepositoryPolicyInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteRepositoryPolicyInput"}
 	if v.RepositoryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeImageReplicationStatusInput(v *DescribeImageReplicationStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeImageReplicationStatusInput"}
+	if v.RepositoryName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
+	}
+	if v.ImageId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

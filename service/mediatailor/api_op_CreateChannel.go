@@ -50,7 +50,7 @@ type CreateChannelInput struct {
 	PlaybackMode types.PlaybackMode
 
 	// The slate used to fill gaps between programs in the schedule. You must configure
-	// filler slate if your channel uses an LINEAR PlaybackMode.
+	// filler slate if your channel uses a LINEAR PlaybackMode.
 	FillerSlate *types.SlateSource
 
 	// The tags to assign to the channel.

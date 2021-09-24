@@ -10,18 +10,18 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the password policy settings for the account.
+// Updates the password policy settings for the Amazon Web Services account.
 //
-// * This operation does not
-// support partial updates. No parameters are required, but if you do not specify a
-// parameter, that parameter's value reverts to its default value. See the Request
-// Parameters section for each parameter's default value. Also note that some
-// parameters do not allow the default parameter to be explicitly set. Instead, to
-// invoke the default value, do not include that parameter when you invoke the
-// operation.
+// *
+// This operation does not support partial updates. No parameters are required, but
+// if you do not specify a parameter, that parameter's value reverts to its default
+// value. See the Request Parameters section for each parameter's default value.
+// Also note that some parameters do not allow the default parameter to be
+// explicitly set. Instead, to invoke the default value, do not include that
+// parameter when you invoke the operation.
 //
-// For more information about using a password policy, see Managing an
-// IAM password policy
+// For more information about using a
+// password policy, see Managing an IAM password policy
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingPasswordPolicies.html)
 // in the IAM User Guide.
 func (c *Client) UpdateAccountPasswordPolicy(ctx context.Context, params *UpdateAccountPasswordPolicyInput, optFns ...func(*Options)) (*UpdateAccountPasswordPolicyOutput, error) {
@@ -41,9 +41,9 @@ func (c *Client) UpdateAccountPasswordPolicy(ctx context.Context, params *Update
 
 type UpdateAccountPasswordPolicyInput struct {
 
-	// Allows all IAM users in your account to use the Management Console to change
-	// their own passwords. For more information, see Letting IAM users change their
-	// own passwords
+	// Allows all IAM users in your account to use the Amazon Web Services Management
+	// Console to change their own passwords. For more information, see Letting IAM
+	// users change their own passwords
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/HowToPwdIAMUser.html) in the
 	// IAM User Guide. If you do not specify a value for this parameter, then the
 	// operation uses the default value of false. The result is that IAM users in the

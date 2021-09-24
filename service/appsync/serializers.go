@@ -312,6 +312,13 @@ func awsRestjson1_serializeOpDocumentCreateDataSourceInput(v *CreateDataSourceIn
 		ok.String(*v.Name)
 	}
 
+	if v.OpenSearchServiceConfig != nil {
+		ok := object.Key("openSearchServiceConfig")
+		if err := awsRestjson1_serializeDocumentOpenSearchServiceDataSourceConfig(v.OpenSearchServiceConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RelationalDatabaseConfig != nil {
 		ok := object.Key("relationalDatabaseConfig")
 		if err := awsRestjson1_serializeDocumentRelationalDatabaseDataSourceConfig(v.RelationalDatabaseConfig, ok); err != nil {
@@ -2883,6 +2890,13 @@ func awsRestjson1_serializeOpDocumentUpdateDataSourceInput(v *UpdateDataSourceIn
 		}
 	}
 
+	if v.OpenSearchServiceConfig != nil {
+		ok := object.Key("openSearchServiceConfig")
+		if err := awsRestjson1_serializeDocumentOpenSearchServiceDataSourceConfig(v.OpenSearchServiceConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RelationalDatabaseConfig != nil {
 		ok := object.Key("relationalDatabaseConfig")
 		if err := awsRestjson1_serializeDocumentRelationalDatabaseDataSourceConfig(v.RelationalDatabaseConfig, ok); err != nil {
@@ -3708,6 +3722,23 @@ func awsRestjson1_serializeDocumentOpenIDConnectConfig(v *types.OpenIDConnectCon
 	if v.Issuer != nil {
 		ok := object.Key("issuer")
 		ok.String(*v.Issuer)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOpenSearchServiceDataSourceConfig(v *types.OpenSearchServiceDataSourceConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AwsRegion != nil {
+		ok := object.Key("awsRegion")
+		ok.String(*v.AwsRegion)
+	}
+
+	if v.Endpoint != nil {
+		ok := object.Key("endpoint")
+		ok.String(*v.Endpoint)
 	}
 
 	return nil

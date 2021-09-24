@@ -139,6 +139,9 @@ type PutPlaybackConfigurationOutput struct {
 	// The configuration for pre-roll ad insertion.
 	LivePreRollConfiguration *types.LivePreRollConfiguration
 
+	// The Amazon CloudWatch log settings for a playback configuration.
+	LogConfiguration *types.LogConfiguration
+
 	// The configuration for manifest processing rules. Manifest processing rules
 	// enable customization of the personalized manifests created by MediaTailor.
 	ManifestProcessingRules *types.ManifestProcessingRules
