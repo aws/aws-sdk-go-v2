@@ -18,28 +18,28 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.6.1
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.8.1
 	github.com/aws/aws-sdk-go-v2/service/codebuild v1.10.1
-	github.com/aws/aws-sdk-go-v2/service/codecommit v1.4.1
+	github.com/aws/aws-sdk-go-v2/service/codecommit v1.5.0
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.6.1
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.5.1
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.4.1
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.6.1
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.9.1
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.5.1
-	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.7.1
+	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.8.0
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.5.1
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.8.1
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.5.1
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.9.1
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.5.1
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.17.0
-	github.com/aws/aws-sdk-go-v2/service/ecr v1.6.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.18.0
+	github.com/aws/aws-sdk-go-v2/service/ecr v1.7.0
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.9.1
 	github.com/aws/aws-sdk-go-v2/service/efs v1.7.1
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.11.1
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.6.1
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing v1.6.1
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.7.1
-	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.6.1
+	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.7.0
 	github.com/aws/aws-sdk-go-v2/service/elastictranscoder v1.5.1
 	github.com/aws/aws-sdk-go-v2/service/emr v1.9.1
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.7.1
@@ -48,9 +48,9 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.5.1
 	github.com/aws/aws-sdk-go-v2/service/glue v1.11.1
 	github.com/aws/aws-sdk-go-v2/service/health v1.7.1
-	github.com/aws/aws-sdk-go-v2/service/iam v1.9.1
+	github.com/aws/aws-sdk-go-v2/service/iam v1.10.0
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.4.1
-	github.com/aws/aws-sdk-go-v2/service/iot v1.12.0
+	github.com/aws/aws-sdk-go-v2/service/iot v1.13.0
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.6.1
 	github.com/aws/aws-sdk-go-v2/service/kms v1.6.1
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.8.1
@@ -77,13 +77,13 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.6.1
 	github.com/aws/aws-sdk-go-v2/service/sns v1.8.1
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.9.1
-	github.com/aws/aws-sdk-go-v2/service/ssm v1.10.1
+	github.com/aws/aws-sdk-go-v2/service/ssm v1.11.0
 	github.com/aws/aws-sdk-go-v2/service/sts v1.7.1
 	github.com/aws/aws-sdk-go-v2/service/support v1.5.1
 	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.4.1
 	github.com/aws/aws-sdk-go-v2/service/waf v1.4.1
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.5.1
-	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.9.0
+	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.10.0
 	github.com/aws/aws-sdk-go-v2/service/workspaces v1.6.1
 	github.com/aws/smithy-go v1.8.0
 	github.com/google/go-cmp v0.5.6
