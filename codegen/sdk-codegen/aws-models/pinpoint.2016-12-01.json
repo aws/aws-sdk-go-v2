@@ -1046,6 +1046,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The settings for a wait activity. This type of activity waits for a certain amount of time or until a specific date and time before moving participants to the next activity in a journey.</p>"
                     }
+                },
+                "ContactCenter": {
+                    "target": "com.amazonaws.pinpoint#ContactCenterActivity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings for a connect activity. This type of activity initiates a contact center call to participants.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2454,6 +2460,17 @@
                 "smithy.api#documentation": "<p>Provides information about an API request or response.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.pinpoint#ContactCenterActivity": {
+            "type": "structure",
+            "members": {
+                "NextActivity": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the next activity to perform after the this activity.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.pinpoint#CreateApp": {
@@ -11172,6 +11189,26 @@
                 ]
             }
         },
+        "com.amazonaws.pinpoint#JourneyChannelSettings": {
+            "type": "structure",
+            "members": {
+                "ConnectCampaignArn": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of the Connect Campaign.</p>"
+                    }
+                },
+                "ConnectCampaignExecutionRoleArn": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>IAM role ARN to be assumed when invoking Connect campaign execution APIs for dialing.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The channel-specific configurations for the journey.</p>"
+            }
+        },
         "com.amazonaws.pinpoint#JourneyCustomMessage": {
             "type": "structure",
             "members": {
@@ -11495,6 +11532,12 @@
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether a journey should be refreshed on segment update.</p>"
+                    }
+                },
+                "JourneyChannelSettings": {
+                    "target": "com.amazonaws.pinpoint#JourneyChannelSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channel-specific configurations for the journey.</p>"
                     }
                 }
             },

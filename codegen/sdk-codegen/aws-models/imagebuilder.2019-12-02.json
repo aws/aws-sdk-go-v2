@@ -59,7 +59,7 @@
                 "userDataOverride": {
                     "target": "com.amazonaws.imagebuilder#UserDataOverride",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use this property to provide commands or a command script to run when you launch \n\t\t\tyour build instance.</p>\n\t\t       <note>\n\t\t\t         <p>The userDataOverride property replaces any commands that Image Builder might have added to ensure\n\t\t\t\tthat Systems Manager is installed on your Linux build instance. If you override the user data,\n\t\t\t\tmake sure that you add commands to install Systems Manager, if it is not pre-installed on your\n\t\t\t\tsource image.</p>\n\t\t       </note>"
+                        "smithy.api#documentation": "<p>Use this property to provide commands or a command script to run when you launch \n\t\t\tyour build instance.</p>\n\t\t       <note>\n\t\t\t         <p>The userDataOverride property replaces any commands that Image Builder might have added to ensure\n\t\t\t\tthat Systems Manager is installed on your Linux build instance. If you override the user data,\n\t\t\t\tmake sure that you add commands to install Systems Manager, if it is not pre-installed on your\n\t\t\t\tbase image.</p>\n\t\t       </note>"
                     }
                 }
             },
@@ -114,7 +114,7 @@
                 "name": {
                     "target": "com.amazonaws.imagebuilder#AmiNameString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the distribution configuration.</p>"
+                        "smithy.api#documentation": "<p>The name of the output AMI.</p>"
                     }
                 },
                 "description": {
@@ -343,7 +343,7 @@
                 "supportedOsVersions": {
                     "target": "com.amazonaws.imagebuilder#OsVersionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The operating system (OS) version supported by the component. If the OS information is\n\t\t\tavailable, a prefix match is performed against the parent image OS version during image recipe\n\t\t\tcreation.</p>"
+                        "smithy.api#documentation": "<p>The operating system (OS) version supported by the component. If the OS information is\n\t\t\tavailable, a prefix match is performed against the base image OS version during image recipe\n\t\t\tcreation.</p>"
                     }
                 },
                 "state": {
@@ -630,7 +630,7 @@
                 "supportedOsVersions": {
                     "target": "com.amazonaws.imagebuilder#OsVersionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The operating system (OS) version supported by the component. If the OS information is\n\t\t\tavailable, a prefix match is performed against the parent image OS version during image recipe\n\t\t\tcreation.</p>"
+                        "smithy.api#documentation": "<p>The operating system (OS) version supported by the component. If the OS information is\n\t\t\tavailable, a prefix match is performed against the base image OS version during image recipe\n\t\t\tcreation.</p>"
                     }
                 },
                 "state": {
@@ -719,7 +719,7 @@
                 "version": {
                     "target": "com.amazonaws.imagebuilder#VersionNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>The semantic version of the component.</p>\n\t\t       <note>\n\t\t\t         <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n\t\t\t         <p>\n               <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including \n\tzero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the \n\tbuild number to the fourth node.</p>\n\t\t\t         <p>\n               <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for \n\tthe nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or \n\ta date, such as 2021.01.01.</p>\n\t\t\t         <p>\n               <b>Filtering:</b> With semantic versioning, you have the flexibility to use wildcards (x) \n\tto specify the most recent versions or nodes when selecting the source image or components for your \n\trecipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be \n\twildcards.</p>\n\t\t       </note>"
+                        "smithy.api#documentation": "<p>The semantic version of the component.</p>\n\t\t       <note>\n\t\t\t         <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n\t\t\t         <p>\n               <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including \n\tzero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the \n\tbuild number to the fourth node.</p>\n\t\t\t         <p>\n               <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for \n\tthe nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or \n\ta date, such as 2021.01.01.</p>\n\t\t\t         <p>\n               <b>Filtering:</b> With semantic versioning, you have the flexibility to use wildcards (x) \n\tto specify the most recent versions or nodes when selecting the base image or components for your \n\trecipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be \n\twildcards.</p>\n\t\t       </note>"
                     }
                 },
                 "description": {
@@ -737,7 +737,7 @@
                 "supportedOsVersions": {
                     "target": "com.amazonaws.imagebuilder#OsVersionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>he operating system (OS) version supported by the component. If the OS information is\n\t\t\tavailable, a prefix match is performed against the parent image OS version during image recipe\n\t\t\tcreation.</p>"
+                        "smithy.api#documentation": "<p>he operating system (OS) version supported by the component. If the OS information is\n\t\t\tavailable, a prefix match is performed against the base image OS version during image recipe\n\t\t\tcreation.</p>"
                     }
                 },
                 "type": {
@@ -876,7 +876,7 @@
                 "version": {
                     "target": "com.amazonaws.imagebuilder#VersionNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>The semantic version of the container recipe.</p>\n\t\t       <note>\n\t\t\t         <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n\t\t\t         <p>\n               <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including \n\tzero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the \n\tbuild number to the fourth node.</p>\n\t\t\t         <p>\n               <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for \n\tthe nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or \n\ta date, such as 2021.01.01.</p>\n\t\t\t         <p>\n               <b>Filtering:</b> With semantic versioning, you have the flexibility to use wildcards (x) \n\tto specify the most recent versions or nodes when selecting the source image or components for your \n\trecipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be \n\twildcards.</p>\n\t\t       </note>"
+                        "smithy.api#documentation": "<p>The semantic version of the container recipe.</p>\n\t\t       <note>\n\t\t\t         <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n\t\t\t         <p>\n               <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including \n\tzero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the \n\tbuild number to the fourth node.</p>\n\t\t\t         <p>\n               <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for \n\tthe nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or \n\ta date, such as 2021.01.01.</p>\n\t\t\t         <p>\n               <b>Filtering:</b> With semantic versioning, you have the flexibility to use wildcards (x) \n\tto specify the most recent versions or nodes when selecting the base image or components for your \n\trecipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be \n\twildcards.</p>\n\t\t       </note>"
                     }
                 },
                 "components": {
@@ -912,7 +912,7 @@
                 "parentImage": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source image for the container recipe.</p>"
+                        "smithy.api#documentation": "<p>The base image for the container recipe.</p>"
                     }
                 },
                 "dateCreated": {
@@ -986,7 +986,7 @@
                 "parentImage": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source image for the container recipe.</p>"
+                        "smithy.api#documentation": "<p>The base image for the container recipe.</p>"
                     }
                 },
                 "dateCreated": {
@@ -1125,7 +1125,7 @@
                 "supportedOsVersions": {
                     "target": "com.amazonaws.imagebuilder#OsVersionList",
                     "traits": {
-                        "smithy.api#documentation": "<p> The operating system (OS) version supported by the component. If the OS information is\n\t\t\tavailable, a prefix match is performed against the parent image OS version during image recipe\n\t\t\tcreation.</p>"
+                        "smithy.api#documentation": "<p> The operating system (OS) version supported by the component. If the OS information is\n\t\t\tavailable, a prefix match is performed against the base image OS version during image recipe\n\t\t\tcreation.</p>"
                     }
                 },
                 "data": {
@@ -1295,19 +1295,19 @@
                 "platformOverride": {
                     "target": "com.amazonaws.imagebuilder#Platform",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the operating system platform when you use a custom source image.</p>"
+                        "smithy.api#documentation": "<p>Specifies the operating system platform when you use a custom base image.</p>"
                     }
                 },
                 "imageOsVersionOverride": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the operating system version for the source image.</p>"
+                        "smithy.api#documentation": "<p>Specifies the operating system version for the base image.</p>"
                     }
                 },
                 "parentImage": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source image for the container recipe.</p>",
+                        "smithy.api#documentation": "<p>The base image for the container recipe.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1767,7 +1767,7 @@
                 "parentImage": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parent image of the image recipe. The value of the string can be the ARN of the parent \n\t\t\timage or an AMI ID. The format for the ARN follows this example: \n\t\t\t<code>arn:aws:imagebuilder:us-west-2:aws:image/windows-server-2016-english-full-base-x86/x.x.x</code>. \n\t\t\tYou can provide the specific version that you want to use, or you can use a wildcard in \n\t\t\tall of the fields. If you enter an AMI ID for the string value, you must have access to the AMI, \n\t\t\tand the AMI must be in the same Region in which you are using Image Builder.</p>",
+                        "smithy.api#documentation": "<p>The base image of the image recipe. The value of the string can be the ARN of the base \n\t\t\timage or an AMI ID. The format for the ARN follows this example: \n\t\t\t<code>arn:aws:imagebuilder:us-west-2:aws:image/windows-server-2016-english-full-base-x86/x.x.x</code>. \n\t\t\tYou can provide the specific version that you want to use, or you can use a wildcard in \n\t\t\tall of the fields. If you enter an AMI ID for the string value, you must have access to the AMI, \n\t\t\tand the AMI must be in the same Region in which you are using Image Builder.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1975,7 +1975,7 @@
                 "instanceTypes": {
                     "target": "com.amazonaws.imagebuilder#InstanceTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The instance metadata options that you can set for the HTTP requests that pipeline builds\n\t\t\tuse to launch EC2 build and test instances. For more information about instance metadata\n\t\t\toptions, see one of the following links:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html\">Configure \n\t\t\t\t\tthe instance metadata options</a> in the <i>\n                     <i>Amazon EC2 User Guide</i>\n                  </i> \n\t\t\t\t\tfor Linux instances.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/configuring-instance-metadata-options.html\">Configure \n\t\t\t\t\tthe instance metadata options</a> in the <i>\n                     <i>Amazon EC2 Windows Guide</i>\n                  </i> \n\t\t\t\t\tfor Windows instances.</p>\n\t\t\t         </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The instance types of the infrastructure configuration. You can specify one or more\n\t\t\tinstance types to use for this build. The service will pick one of these instance types based\n\t\t\ton availability.</p>"
                     }
                 },
                 "instanceProfileName": {
@@ -3740,7 +3740,7 @@
                 "version": {
                     "target": "com.amazonaws.imagebuilder#VersionNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>The semantic version of the image.</p>\n\t\t       <note>\n\t\t\t         <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n\t\t\t         <p>\n               <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including \n\tzero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the \n\tbuild number to the fourth node.</p>\n\t\t\t         <p>\n               <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for \n\tthe nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or \n\ta date, such as 2021.01.01.</p>\n\t\t\t         <p>\n               <b>Filtering:</b> With semantic versioning, you have the flexibility to use wildcards (x) \n\tto specify the most recent versions or nodes when selecting the source image or components for your \n\trecipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be \n\twildcards.</p>\n\t\t       </note>"
+                        "smithy.api#documentation": "<p>The semantic version of the image.</p>\n\t\t       <note>\n\t\t\t         <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n\t\t\t         <p>\n               <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including \n\tzero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the \n\tbuild number to the fourth node.</p>\n\t\t\t         <p>\n               <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for \n\tthe nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or \n\ta date, such as 2021.01.01.</p>\n\t\t\t         <p>\n               <b>Filtering:</b> With semantic versioning, you have the flexibility to use wildcards (x) \n\tto specify the most recent versions or nodes when selecting the base image or components for your \n\trecipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be \n\twildcards.</p>\n\t\t       </note>"
                     }
                 },
                 "platform": {
@@ -4046,7 +4046,7 @@
                 "parentImage": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parent image of the image recipe.</p>"
+                        "smithy.api#documentation": "<p>The base image of the image recipe.</p>"
                     }
                 },
                 "blockDeviceMappings": {
@@ -4120,7 +4120,7 @@
                 "parentImage": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parent image of the image recipe.</p>"
+                        "smithy.api#documentation": "<p>The base image of the image recipe.</p>"
                     }
                 },
                 "dateCreated": {
@@ -4366,7 +4366,7 @@
                 "version": {
                     "target": "com.amazonaws.imagebuilder#VersionNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>Details for a specific version of an Image Builder image. This version follows the semantic version syntax.</p>\n\t\t       <note>\n\t\t\t         <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n\t\t\t         <p>\n               <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including \n\tzero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the \n\tbuild number to the fourth node.</p>\n\t\t\t         <p>\n               <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for \n\tthe nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or \n\ta date, such as 2021.01.01.</p>\n\t\t\t         <p>\n               <b>Filtering:</b> With semantic versioning, you have the flexibility to use wildcards (x) \n\tto specify the most recent versions or nodes when selecting the source image or components for your \n\trecipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be \n\twildcards.</p>\n\t\t       </note>"
+                        "smithy.api#documentation": "<p>Details for a specific version of an Image Builder image. This version follows the semantic version syntax.</p>\n\t\t       <note>\n\t\t\t         <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n\t\t\t         <p>\n               <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including \n\tzero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the \n\tbuild number to the fourth node.</p>\n\t\t\t         <p>\n               <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for \n\tthe nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or \n\ta date, such as 2021.01.01.</p>\n\t\t\t         <p>\n               <b>Filtering:</b> With semantic versioning, you have the flexibility to use wildcards (x) \n\tto specify the most recent versions or nodes when selecting the base image or components for your \n\trecipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be \n\twildcards.</p>\n\t\t       </note>"
                     }
                 },
                 "platform": {
@@ -4478,7 +4478,7 @@
                 "semanticVersion": {
                     "target": "com.amazonaws.imagebuilder#VersionNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>The semantic version of the component. This version follows the semantic version syntax.</p>\n\t\t       <note>\n\t\t\t         <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n\t\t\t         <p>\n               <b>Filtering:</b> With semantic versioning, you have the flexibility to use wildcards (x) \n\tto specify the most recent versions or nodes when selecting the source image or components for your \n\trecipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be \n\twildcards.</p>\n\t\t       </note>",
+                        "smithy.api#documentation": "<p>The semantic version of the component. This version follows the semantic version syntax.</p>\n\t\t       <note>\n\t\t\t         <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n\t\t\t         <p>\n               <b>Filtering:</b> With semantic versioning, you have the flexibility to use wildcards (x) \n\tto specify the most recent versions or nodes when selecting the base image or components for your \n\trecipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be \n\twildcards.</p>\n\t\t       </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4794,7 +4794,7 @@
                 "noDevice": {
                     "target": "com.amazonaws.imagebuilder#EmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use to remove a mapping from the parent image.</p>"
+                        "smithy.api#documentation": "<p>Use to remove a mapping from the base image.</p>"
                     }
                 }
             },
@@ -4825,7 +4825,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines a custom source AMI and block device mapping configurations of an instance \n\t\t\tused for building and testing container images.</p>"
+                "smithy.api#documentation": "<p>Defines a custom base AMI and block device mapping configurations of an instance \n\t\t\tused for building and testing container images.</p>"
             }
         },
         "com.amazonaws.imagebuilder#InstanceMetadataOptions": {
@@ -5060,7 +5060,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Returns the list of component build versions for the specified semantic version.</p>\n\t\t       <note>\n\t\t\t         <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n\t\t\t         <p>\n               <b>Filtering:</b> With semantic versioning, you have the flexibility to use wildcards (x) \n\tto specify the most recent versions or nodes when selecting the source image or components for your \n\trecipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be \n\twildcards.</p>\n\t\t       </note>",
+                "smithy.api#documentation": "<p> Returns the list of component build versions for the specified semantic version.</p>\n\t\t       <note>\n\t\t\t         <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n\t\t\t         <p>\n               <b>Filtering:</b> With semantic versioning, you have the flexibility to use wildcards (x) \n\tto specify the most recent versions or nodes when selecting the base image or components for your \n\trecipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be \n\twildcards.</p>\n\t\t       </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ListComponentBuildVersions",
@@ -5153,7 +5153,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the list of component build versions for the specified semantic version.</p>\n\t\t       <note>\n\t\t\t         <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n\t\t\t         <p>\n               <b>Filtering:</b> With semantic versioning, you have the flexibility to use wildcards (x) \n\tto specify the most recent versions or nodes when selecting the source image or components for your \n\trecipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be \n\twildcards.</p>\n\t\t       </note>",
+                "smithy.api#documentation": "<p>Returns the list of component build versions for the specified semantic version.</p>\n\t\t       <note>\n\t\t\t         <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n\t\t\t         <p>\n               <b>Filtering:</b> With semantic versioning, you have the flexibility to use wildcards (x) \n\tto specify the most recent versions or nodes when selecting the base image or components for your \n\trecipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be \n\twildcards.</p>\n\t\t       </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ListComponents",
@@ -6001,7 +6001,7 @@
                 "imageVersionList": {
                     "target": "com.amazonaws.imagebuilder#ImageVersionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of image semantic versions.</p>\n\t\t       <note>\n\t\t\t         <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n\t\t\t         <p>\n               <b>Filtering:</b> With semantic versioning, you have the flexibility to use wildcards (x) \n\tto specify the most recent versions or nodes when selecting the source image or components for your \n\trecipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be \n\twildcards.</p>\n\t\t       </note>"
+                        "smithy.api#documentation": "<p>The list of image semantic versions.</p>\n\t\t       <note>\n\t\t\t         <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n\t\t\t         <p>\n               <b>Filtering:</b> With semantic versioning, you have the flexibility to use wildcards (x) \n\tto specify the most recent versions or nodes when selecting the base image or components for your \n\trecipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be \n\twildcards.</p>\n\t\t       </note>"
                     }
                 },
                 "nextToken": {
@@ -6749,7 +6749,7 @@
                 "pipelineExecutionStartCondition": {
                     "target": "com.amazonaws.imagebuilder#PipelineExecutionStartCondition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The condition configures when the pipeline should trigger a new image build. When the\n\t\t\t<code>pipelineExecutionStartCondition</code> is set to\n\t\t\t<code>EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE</code>, and you use semantic version\n\t\t\tfilters on the source image or components in your image recipe, EC2 Image Builder will build a\n\t\t\tnew image only when there are new versions of the image or components in your recipe that\n\t\t\tmatch the semantic version filter. When it is set to <code>EXPRESSION_MATCH_ONLY</code>, it\n\t\t\twill build a new image every time the CRON expression matches the current time. For semantic\n\t\t\tversion syntax, see <a href=\"https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_CreateComponent.html\">CreateComponent</a> in the <i> EC2 Image Builder API\n\t\t\t\t\tReference</i>.</p>"
+                        "smithy.api#documentation": "<p>The condition configures when the pipeline should trigger a new image build. When the\n\t\t\t<code>pipelineExecutionStartCondition</code> is set to\n\t\t\t<code>EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE</code>, and you use semantic version\n\t\t\tfilters on the base image or components in your image recipe, EC2 Image Builder will build a\n\t\t\tnew image only when there are new versions of the image or components in your recipe that\n\t\t\tmatch the semantic version filter. When it is set to <code>EXPRESSION_MATCH_ONLY</code>, it\n\t\t\twill build a new image every time the CRON expression matches the current time. For semantic\n\t\t\tversion syntax, see <a href=\"https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_CreateComponent.html\">CreateComponent</a> in the <i> EC2 Image Builder API\n\t\t\t\t\tReference</i>.</p>"
                     }
                 }
             },
