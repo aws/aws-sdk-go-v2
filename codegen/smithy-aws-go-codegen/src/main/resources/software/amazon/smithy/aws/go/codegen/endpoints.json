@@ -1132,7 +1132,7 @@
           "us-west-2" : { }
         }
       },
-      "cloudcontrol" : {
+      "cloudcontrolapi" : {
         "endpoints" : {
           "af-south-1" : { },
           "ap-east-1" : { },
@@ -9038,7 +9038,7 @@
           "us-gov-west-1" : { }
         }
       },
-      "cloudcontrol" : {
+      "cloudcontrolapi" : {
         "endpoints" : {
           "fips-us-gov-east-1" : {
             "credentialScope" : {
