@@ -493,7 +493,7 @@
                 "OwnerAccountId": {
                     "target": "com.amazonaws.workspaces#AwsAccount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the AWS account that owns the connection alias.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Web Services account that owns the connection alias.</p>"
                     }
                 },
                 "Associations": {
@@ -519,7 +519,7 @@
                 "AssociatedAccountId": {
                     "target": "com.amazonaws.workspaces#AwsAccount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the AWS account that associated the connection alias with a directory.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Web Services account that associated the connection alias with a directory.</p>"
                     }
                 },
                 "ResourceId": {
@@ -591,14 +591,14 @@
                 "SharedAccountId": {
                     "target": "com.amazonaws.workspaces#AwsAccount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the AWS account that the connection alias is shared with.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Web Services account that the connection alias is shared with.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "AllowAssociation": {
                     "target": "com.amazonaws.workspaces#BooleanObject",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the specified AWS account is allowed to associate the connection alias with a directory.</p>",
+                        "smithy.api#documentation": "<p>Indicates whether the specified Amazon Web Services account is allowed to associate the connection alias with a directory.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -709,7 +709,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Copies the specified image from the specified Region to the current Region. \n         For more information about copying images, see \n         <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/copy-custom-image.html\">\n            Copy a Custom WorkSpaces Image</a>.</p>\n      \n         <note>\n            <p>In the China (Ningxia) Region, you can copy images only within the same Region.</p>\n         \n            <p>In the AWS GovCloud (US-West) Region, to copy images to and from other AWS Regions, \n            contact AWS Support.</p>\n         </note>\n      \n         <important>\n            <p>Before copying a shared image, be sure to verify that it has been shared from the\n            correct AWS account. To determine if an image has been shared and to see the AWS \n            account ID that owns an image, use the <a href=\"https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceImages.html\">DescribeWorkSpaceImages</a> and <a href=\"https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceImagePermissions.html\">DescribeWorkspaceImagePermissions</a> API operations. </p>\n         </important>"
+                "smithy.api#documentation": "<p>Copies the specified image from the specified Region to the current Region. \n         For more information about copying images, see \n         <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/copy-custom-image.html\">\n            Copy a Custom WorkSpaces Image</a>.</p>\n      \n         <p>In the China (Ningxia) Region, you can copy images only within the same Region.</p>\n         \n         <p>In Amazon Web Services GovCloud (US), to copy images to and from other Regions, contact Amazon Web Services Support.</p>\n      \n         <important>\n            <p>Before copying a shared image, be sure to verify that it has been shared from the\n            correct Amazon Web Services account. To determine if an image has been shared and to see the \n            ID of the Amazon Web Services account that owns an image, use the <a href=\"https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceImages.html\">DescribeWorkSpaceImages</a> and <a href=\"https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceImagePermissions.html\">DescribeWorkspaceImagePermissions</a> API operations. </p>\n         </important>"
             }
         },
         "com.amazonaws.workspaces#CopyWorkspaceImageRequest": {
@@ -799,7 +799,7 @@
                 "ConnectionString": {
                     "target": "com.amazonaws.workspaces#ConnectionString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A connection string in the form of a fully qualified domain name (FQDN), such as <code>www.example.com</code>.</p>\n      \n         <important>\n            <p>After you create a connection string, it is always associated to your AWS account. You cannot recreate the same \n            connection string with a different account, even if you delete all instances of it from the original account. The \n         connection string is globally reserved for your account.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>A connection string in the form of a fully qualified domain name (FQDN), such as <code>www.example.com</code>.</p>\n      \n         <important>\n            <p>After you create a connection string, it is always associated to your Amazon Web Services account. You cannot recreate the same \n            connection string with a different account, even if you delete all instances of it from the original account. The \n         connection string is globally reserved for your account.</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -937,6 +937,84 @@
         "com.amazonaws.workspaces#CreateTagsResult": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.workspaces#CreateUpdatedWorkspaceImage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspaces#CreateUpdatedWorkspaceImageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspaces#CreateUpdatedWorkspaceImageResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspaces#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#InvalidParameterValuesException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#InvalidResourceStateException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#OperationNotSupportedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ResourceAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ResourceLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new updated WorkSpace image based on the specified source image. The \n         new updated WorkSpace image has the latest drivers and other updates required by \n         the Amazon WorkSpaces components.</p>\n      \n         <p>To determine which WorkSpace images need to be updated with the latest Amazon \n         WorkSpaces requirements, use \n         <a href=\"https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceImages.html\">\n            DescribeWorkspaceImages</a>.</p>\n      \n         <note>\n            <ul>\n               <li>\n                  <p>Only Windows 10 WorkSpace images can be programmatically updated at this time.</p>\n               </li>\n               <li>\n                  <p>Microsoft Windows updates and other application updates are not included \n                  in the update process.</p>\n               </li>\n               <li>\n                  <p>The source WorkSpace image is not deleted. You can delete the source image after you've \n                  verified your new updated image and created a new bundle. </p>\n               </li>\n            </ul>\n         </note>"
+            }
+        },
+        "com.amazonaws.workspaces#CreateUpdatedWorkspaceImageRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.workspaces#WorkspaceImageName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the new updated WorkSpace image.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.workspaces#WorkspaceImageDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of whether updates for the WorkSpace image are available.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SourceImageId": {
+                    "target": "com.amazonaws.workspaces#WorkspaceImageId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the source WorkSpace image.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.workspaces#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags that you want to add to the new updated WorkSpace image.</p>\n      \n         <note>\n            <p>To add tags at the same time when you're creating the updated image, you must create \n            an IAM policy that grants your IAM user permissions to use <code>workspaces:CreateTags</code>. </p>\n         </note>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspaces#CreateUpdatedWorkspaceImageResult": {
+            "type": "structure",
+            "members": {
+                "ImageId": {
+                    "target": "com.amazonaws.workspaces#WorkspaceImageId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the new updated WorkSpace image.</p>"
+                    }
+                }
+            }
         },
         "com.amazonaws.workspaces#CreateWorkspaceBundle": {
             "type": "operation",
@@ -1083,7 +1161,7 @@
         "com.amazonaws.workspaces#DedicatedTenancyManagementCidrRange": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.0\\.0)(\\/(16$))$"
+                "smithy.api#pattern": "^(^([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.0\\.0)(\\/(16$))$"
             }
         },
         "com.amazonaws.workspaces#DedicatedTenancyModificationStateEnum": {
@@ -1417,7 +1495,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deregisters the specified directory. This operation is asynchronous \n         and returns before the WorkSpace directory is deregistered. If any WorkSpaces are\n      registered to this directory, you must remove them before you can deregister the directory.</p>\n      \n         <note>\n            <p>Simple AD and AD Connector are made available to you free of charge to use with WorkSpaces. \n            If there are no WorkSpaces being used with your Simple AD or AD Connector directory for 30 \n            consecutive days, this directory will be automatically deregistered for use with Amazon WorkSpaces, \n            and you will be charged for this directory as per the \n            <a href=\"http://aws.amazon.com/directoryservice/pricing/\">AWS Directory Services pricing terms</a>.</p>\n         \n            <p>To delete empty directories, see \n            <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/delete-workspaces-directory.html\">\n               Delete the Directory for Your WorkSpaces</a>. If you delete your \n            Simple AD or AD Connector directory, you can always create a new one when you want to start using \n            WorkSpaces again.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Deregisters the specified directory. This operation is asynchronous \n         and returns before the WorkSpace directory is deregistered. If any WorkSpaces are\n      registered to this directory, you must remove them before you can deregister the directory.</p>\n      \n         <note>\n            <p>Simple AD and AD Connector are made available to you free of charge to use with WorkSpaces. \n            If there are no WorkSpaces being used with your Simple AD or AD Connector directory for 30 \n            consecutive days, this directory will be automatically deregistered for use with Amazon WorkSpaces, \n            and you will be charged for this directory as per the \n            <a href=\"http://aws.amazon.com/directoryservice/pricing/\">Directory Service pricing terms</a>.</p>\n         \n            <p>To delete empty directories, see \n            <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/delete-workspaces-directory.html\">\n               Delete the Directory for Your WorkSpaces</a>. If you delete your \n            Simple AD or AD Connector directory, you can always create a new one when you want to start using \n            WorkSpaces again.</p>\n         </note>"
             }
         },
         "com.amazonaws.workspaces#DeregisterWorkspaceDirectoryRequest": {
@@ -1588,7 +1666,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the permissions that the owner of a connection alias has granted to another AWS account for \n         the specified connection alias. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html\">\n            Cross-Region Redirection for Amazon WorkSpaces</a>.</p>"
+                "smithy.api#documentation": "<p>Describes the permissions that the owner of a connection alias has granted to another Amazon Web Services account for \n         the specified connection alias. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html\">\n            Cross-Region Redirection for Amazon WorkSpaces</a>.</p>"
             }
         },
         "com.amazonaws.workspaces#DescribeConnectionAliasPermissionsRequest": {
@@ -1841,7 +1919,7 @@
                 "Owner": {
                     "target": "com.amazonaws.workspaces#BundleOwner",
                     "traits": {
-                        "smithy.api#documentation": "<p>The owner of the bundles. You cannot combine this parameter with any other filter.</p>\n         <p>To describe the bundles provided by AWS, specify <code>AMAZON</code>. To describe the\n         bundles that belong to your account, don't specify a value.</p>"
+                        "smithy.api#documentation": "<p>The owner of the bundles. You cannot combine this parameter with any other filter.</p>\n         <p>To describe the bundles provided by Amazon Web Services, specify <code>AMAZON</code>. \n         To describe the bundles that belong to your account, don't specify a value.</p>"
                     }
                 },
                 "NextToken": {
@@ -1951,7 +2029,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the permissions that the owner of an image has granted to other \n         AWS accounts for an image.</p>"
+                "smithy.api#documentation": "<p>Describes the permissions that the owner of an image has granted to other \n         Amazon Web Services accounts for an image.</p>"
             }
         },
         "com.amazonaws.workspaces#DescribeWorkspaceImagePermissionsRequest": {
@@ -1990,7 +2068,7 @@
                 "ImagePermissions": {
                     "target": "com.amazonaws.workspaces#ImagePermissions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifiers of the AWS accounts that the image has been shared with.</p>"
+                        "smithy.api#documentation": "<p>The identifiers of the Amazon Web Services accounts that the image has been shared with.</p>"
                     }
                 },
                 "NextToken": {
@@ -2311,7 +2389,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disassociates a connection alias from a directory. Disassociating a connection alias disables cross-Region \n         redirection between two directories in different AWS Regions. For more information, see \n         <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html\">\n            Cross-Region Redirection for Amazon WorkSpaces</a>.</p>\n      \n         <note>\n            <p>Before performing this operation, call <a href=\"https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeConnectionAliases.html\">\n            DescribeConnectionAliases</a> to make sure that the current state of the connection alias is <code>CREATED</code>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Disassociates a connection alias from a directory. Disassociating a connection alias disables cross-Region \n         redirection between two directories in different Regions. For more information, see \n         <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html\">\n            Cross-Region Redirection for Amazon WorkSpaces</a>.</p>\n      \n         <note>\n            <p>Before performing this operation, call <a href=\"https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeConnectionAliases.html\">\n            DescribeConnectionAliases</a> to make sure that the current state of the connection alias is <code>CREATED</code>.</p>\n         </note>"
             }
         },
         "com.amazonaws.workspaces#DisassociateConnectionAliasRequest": {
@@ -2491,12 +2569,12 @@
                 "SharedAccountId": {
                     "target": "com.amazonaws.workspaces#AwsAccount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the AWS account that an image has been shared with.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Web Services account that an image has been shared with.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the AWS accounts that have been granted permission to use a shared image. For more \n         information about sharing images, see \n         <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/share-custom-image.html\">\n            Share or Unshare a Custom WorkSpaces Image</a>.</p>"
+                "smithy.api#documentation": "<p>Describes the Amazon Web Services accounts that have been granted permission to use a shared image. \n         For more information about sharing images, see \n         <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/share-custom-image.html\">\n            Share or Unshare a Custom WorkSpaces Image</a>.</p>"
             }
         },
         "com.amazonaws.workspaces#ImagePermissions": {
@@ -2549,7 +2627,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Imports the specified Windows 10 Bring Your Own License (BYOL) image into Amazon\n         WorkSpaces. The image must be an already licensed Amazon EC2 image that is in your AWS\n         account, and you must own the image. For more information about creating BYOL images, see\n            <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html\">\n            Bring Your Own Windows Desktop Licenses</a>.</p>"
+                "smithy.api#documentation": "<p>Imports the specified Windows 10 Bring Your Own License (BYOL) image into Amazon\n         WorkSpaces. The image must be an already licensed Amazon EC2 image that is in your \n         Amazon Web Services account, and you must own the image. For more information about creating BYOL images, see\n            <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html\">\n            Bring Your Own Windows Desktop Licenses</a>.</p>"
             }
         },
         "com.amazonaws.workspaces#ImportWorkspaceImageRequest": {
@@ -2644,7 +2722,7 @@
         "com.amazonaws.workspaces#IpGroupId": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "wsipg-[0-9a-z]{8,63}$"
+                "smithy.api#pattern": "^wsipg-[0-9a-z]{8,63}$"
             }
         },
         "com.amazonaws.workspaces#IpGroupIdList": {
@@ -2721,7 +2799,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks, that you can use\n         for the network management interface when you enable Bring Your Own License (BYOL). </p>\n      \n         <p>This operation can be run only by AWS accounts that are enabled for BYOL. If your account \n         isn't enabled for BYOL, you'll receive an <code>AccessDeniedException</code> error.</p>\n      \n         <p>The management network interface is connected to a secure Amazon WorkSpaces management\n         network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces\n         clients, and to allow Amazon WorkSpaces to manage the WorkSpace.</p>"
+                "smithy.api#documentation": "<p>Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks, that you can use\n         for the network management interface when you enable Bring Your Own License (BYOL). </p>\n      \n         <p>This operation can be run only by Amazon Web Services accounts that are enabled for BYOL. If your account \n         isn't enabled for BYOL, you'll receive an <code>AccessDeniedException</code> error.</p>\n      \n         <p>The management network interface is connected to a secure Amazon WorkSpaces management\n         network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces\n         clients, and to allow Amazon WorkSpaces to manage the WorkSpace.</p>"
             }
         },
         "com.amazonaws.workspaces#ListAvailableManagementCidrRangesRequest": {
@@ -3536,7 +3614,7 @@
                 "Tenancy": {
                     "target": "com.amazonaws.workspaces#Tenancy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether your WorkSpace directory is dedicated or shared. To use Bring Your Own\n         License (BYOL) images, this value must be set to <code>DEDICATED</code> and your AWS account must be \n         enabled for BYOL. If your account has not been enabled for BYOL, you will receive an \n         InvalidParameterValuesException error. For more information about BYOL images, see\n            <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html\">Bring Your Own Windows Desktop Images</a>.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether your WorkSpace directory is dedicated or shared. To use Bring Your Own\n         License (BYOL) images, this value must be set to <code>DEDICATED</code> and your Amazon Web Services account must be \n         enabled for BYOL. If your account has not been enabled for BYOL, you will receive an \n         InvalidParameterValuesException error. For more information about BYOL images, see\n            <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html\">Bring Your Own Windows Desktop Images</a>.</p>"
                     }
                 },
                 "Tags": {
@@ -4123,7 +4201,7 @@
                 "target": "com.amazonaws.workspaces#TerminateWorkspacesResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Terminates the specified WorkSpaces.</p>\n      \n         <important>\n            <p>Terminating a WorkSpace is a permanent action and cannot be undone. The user's data is\n            destroyed. If you need to archive any user data, contact AWS Support before\n            terminating the WorkSpace.</p>\n         </important>\n\n         <p>You can terminate a WorkSpace that is in any state except <code>SUSPENDED</code>.</p>\n         <p>This operation is asynchronous and returns before the WorkSpaces have been completely\n         terminated. After a WorkSpace is terminated, the <code>TERMINATED</code> state is returned \n         only briefly before the WorkSpace directory metadata is cleaned up, so this state is rarely \n         returned. To confirm that a WorkSpace is terminated, check for the WorkSpace ID by using \n         <a href=\"https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaces.html\">\n            DescribeWorkSpaces</a>. If the WorkSpace ID isn't returned, then the WorkSpace has \n         been successfully terminated.</p>      \n      \n         <note>\n            <p>Simple AD and AD Connector are made available to you free of charge to use with WorkSpaces. \n            If there are no WorkSpaces being used with your Simple AD or AD Connector directory for 30 \n            consecutive days, this directory will be automatically deregistered for use with Amazon WorkSpaces, \n            and you will be charged for this directory as per the \n            <a href=\"http://aws.amazon.com/directoryservice/pricing/\">AWS Directory Services pricing terms</a>.</p>\n         \n            <p>To delete empty directories, see \n            <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/delete-workspaces-directory.html\">\n               Delete the Directory for Your WorkSpaces</a>. If you delete your \n            Simple AD or AD Connector directory, you can always create a new one when you want to start using \n            WorkSpaces again.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Terminates the specified WorkSpaces.</p>\n      \n         <important>\n            <p>Terminating a WorkSpace is a permanent action and cannot be undone. The user's data is\n            destroyed. If you need to archive any user data, contact Amazon Web Services Support before\n            terminating the WorkSpace.</p>\n         </important>\n\n         <p>You can terminate a WorkSpace that is in any state except <code>SUSPENDED</code>.</p>\n         <p>This operation is asynchronous and returns before the WorkSpaces have been completely\n         terminated. After a WorkSpace is terminated, the <code>TERMINATED</code> state is returned \n         only briefly before the WorkSpace directory metadata is cleaned up, so this state is rarely \n         returned. To confirm that a WorkSpace is terminated, check for the WorkSpace ID by using \n         <a href=\"https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaces.html\">\n            DescribeWorkSpaces</a>. If the WorkSpace ID isn't returned, then the WorkSpace has \n         been successfully terminated.</p>      \n      \n         <note>\n            <p>Simple AD and AD Connector are made available to you free of charge to use with WorkSpaces. \n            If there are no WorkSpaces being used with your Simple AD or AD Connector directory for 30 \n            consecutive days, this directory will be automatically deregistered for use with Amazon WorkSpaces, \n            and you will be charged for this directory as per the \n            <a href=\"http://aws.amazon.com/directoryservice/pricing/\">Directory Service pricing terms</a>.</p>\n         \n            <p>To delete empty directories, see \n            <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/delete-workspaces-directory.html\">\n               Delete the Directory for Your WorkSpaces</a>. If you delete your \n            Simple AD or AD Connector directory, you can always create a new one when you want to start using \n            WorkSpaces again.</p>\n         </note>"
             }
         },
         "com.amazonaws.workspaces#TerminateWorkspacesRequest": {
@@ -4224,7 +4302,7 @@
                 "ConnectionAliasPermission": {
                     "target": "com.amazonaws.workspaces#ConnectionAliasPermission",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether to share or unshare the connection alias with the specified AWS account.</p>",
+                        "smithy.api#documentation": "<p>Indicates whether to share or unshare the connection alias with the specified Amazon Web Services account.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4233,6 +4311,36 @@
         "com.amazonaws.workspaces#UpdateConnectionAliasPermissionResult": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.workspaces#UpdateDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_./() -]+$"
+            }
+        },
+        "com.amazonaws.workspaces#UpdateResult": {
+            "type": "structure",
+            "members": {
+                "UpdateAvailable": {
+                    "target": "com.amazonaws.workspaces#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether updated drivers or other components are available for the specified WorkSpace image.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.workspaces#UpdateDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of whether updates for the WorkSpace image are pending or available.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes whether a WorkSpace image needs to be updated with the latest \n         drivers and other components required by Amazon WorkSpaces.</p>\n      \n         <note>\n            <p>Only Windows 10 WorkSpace images can be programmatically updated at this time.</p>\n         </note>"
+            }
         },
         "com.amazonaws.workspaces#UpdateRulesOfIpGroup": {
             "type": "operation",
@@ -4359,7 +4467,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Shares or unshares an image with one account in the same AWS Region by specifying whether that account has \n         permission to copy the image. If the copy image permission is granted, the image is shared with that account. \n         If the copy image permission is revoked, the image is unshared with the account.</p>\n      \n         <p>After an image has been shared, the recipient account can copy the image to other AWS Regions as needed.</p>\n      \n         <note>\n            <p>In the China (Ningxia) Region, you can copy images only within the same Region.</p>\n         \n            <p>In the AWS GovCloud (US-West) Region, to copy images to and from other AWS Regions, \n            contact AWS Support.</p>\n         </note>\n      \n         <p>For more information about sharing images, see \n         <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/share-custom-image.html\">\n            Share or Unshare a Custom WorkSpaces Image</a>.</p>\n      \n         <note>\n            <ul>\n               <li>\n                  <p>To delete an image that has been shared, you must unshare the image before you delete it.</p>\n               </li>\n               <li>\n                  <p>Sharing Bring Your Own License (BYOL) images across AWS accounts isn't supported at \n                  this time in the AWS GovCloud (US-West) Region. To share BYOL images across accounts in \n                  the AWS GovCloud (US-West) Region, contact AWS Support.</p>\n               </li>\n            </ul>         \n         </note>"
+                "smithy.api#documentation": "<p>Shares or unshares an image with one account in the same Amazon Web Services Region by specifying whether that account has \n         permission to copy the image. If the copy image permission is granted, the image is shared with that account. \n         If the copy image permission is revoked, the image is unshared with the account.</p>\n      \n         <p>After an image has been shared, the recipient account can copy the image to other Regions as needed.</p>\n      \n         <p>In the China (Ningxia) Region, you can copy images only within the same Region.</p>\n         \n         <p>In Amazon Web Services GovCloud (US), to copy images to and from other Regions, contact Amazon Web Services Support.</p>\n      \n         <p>For more information about sharing images, see \n         <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/share-custom-image.html\">\n            Share or Unshare a Custom WorkSpaces Image</a>.</p>\n      \n         <note>\n            <ul>\n               <li>\n                  <p>To delete an image that has been shared, you must unshare the image before you delete it.</p>\n               </li>\n               <li>\n                  <p>Sharing Bring Your Own License (BYOL) images across Amazon Web Services accounts isn't supported at \n                  this time in Amazon Web Services GovCloud (US). To share BYOL images across accounts in \n                  Amazon Web Services GovCloud (US), contact Amazon Web Services Support.</p>\n               </li>\n            </ul>         \n         </note>"
             }
         },
         "com.amazonaws.workspaces#UpdateWorkspaceImagePermissionRequest": {
@@ -4382,7 +4490,7 @@
                 "SharedAccountId": {
                     "target": "com.amazonaws.workspaces#AwsAccount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the AWS account to share or unshare the image with.</p>\n      \n         <important>\n            <p>Before sharing the image, confirm that you are sharing to the correct AWS account ID.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Web Services account to share or unshare the image with.</p>\n      \n         <important>\n            <p>Before sharing the image, confirm that you are sharing to the correct Amazon Web Services account ID.</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4436,7 +4544,7 @@
                 "DirectoryId": {
                     "target": "com.amazonaws.workspaces#DirectoryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the AWS Directory Service directory for the WorkSpace.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the Directory Service directory for the WorkSpace.</p>"
                     }
                 },
                 "UserName": {
@@ -4490,7 +4598,7 @@
                 "VolumeEncryptionKey": {
                     "target": "com.amazonaws.workspaces#VolumeEncryptionKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The symmetric AWS KMS customer master key (CMK) used to encrypt data stored on your WorkSpace. \n         Amazon WorkSpaces does not support asymmetric CMKs.</p>"
+                        "smithy.api#documentation": "<p>The symmetric KMS key used to encrypt data stored on your WorkSpace. \n         Amazon WorkSpaces does not support asymmetric KMS keys.</p>"
                     }
                 },
                 "UserVolumeEncryptionEnabled": {
@@ -4528,13 +4636,13 @@
                 "DeviceTypeWindows": {
                     "target": "com.amazonaws.workspaces#AccessPropertyValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether users can use Windows clients to access their WorkSpaces. To restrict\n         WorkSpaces access to trusted devices (also known as managed devices) with valid\n         certificates, specify a value of <code>TRUST</code>. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/trusted-devices.html\">Restrict\n            WorkSpaces Access to Trusted Devices</a>. </p>"
+                        "smithy.api#documentation": "<p>Indicates whether users can use Windows clients to access their WorkSpaces.</p>"
                     }
                 },
                 "DeviceTypeOsx": {
                     "target": "com.amazonaws.workspaces#AccessPropertyValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether users can use macOS clients to access their WorkSpaces. To restrict\n         WorkSpaces access to trusted devices (also known as managed devices) with valid\n         certificates, specify a value of <code>TRUST</code>. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/trusted-devices.html\">Restrict\n            WorkSpaces Access to Trusted Devices</a>. </p>"
+                        "smithy.api#documentation": "<p>Indicates whether users can use macOS clients to access their WorkSpaces.</p>"
                     }
                 },
                 "DeviceTypeWeb": {
@@ -4552,7 +4660,7 @@
                 "DeviceTypeAndroid": {
                     "target": "com.amazonaws.workspaces#AccessPropertyValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether users can use Android devices to access their WorkSpaces.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether users can use Android and Android-compatible Chrome OS devices \n         to access their WorkSpaces.</p>"
                     }
                 },
                 "DeviceTypeChromeOs": {
@@ -4596,7 +4704,7 @@
                 "Owner": {
                     "target": "com.amazonaws.workspaces#BundleOwner",
                     "traits": {
-                        "smithy.api#documentation": "<p>The owner of the bundle. This is the account identifier of the owner, or\n         <code>AMAZON</code> if the bundle is provided by AWS.</p>"
+                        "smithy.api#documentation": "<p>The owner of the bundle. This is the account identifier of the owner, or\n         <code>AMAZON</code> if the bundle is provided by Amazon Web Services.</p>"
                     }
                 },
                 "Description": {
@@ -4969,13 +5077,19 @@
                 "Created": {
                     "target": "com.amazonaws.workspaces#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date when the image was created. If the image has been shared, the AWS account \n         that the image has been shared with sees the original creation date of the image.</p>"
+                        "smithy.api#documentation": "<p>The date when the image was created. If the image has been shared, the Amazon Web Services account \n         that the image has been shared with sees the original creation date of the image.</p>"
                     }
                 },
                 "OwnerAccountId": {
                     "target": "com.amazonaws.workspaces#AwsAccount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the AWS account that owns the image.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Web Services account that owns the image.</p>"
+                    }
+                },
+                "Updates": {
+                    "target": "com.amazonaws.workspaces#UpdateResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updates (if any) that are available for the specified image.</p>"
                     }
                 }
             },
@@ -4999,7 +5113,7 @@
         "com.amazonaws.workspaces#WorkspaceImageId": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "wsi-[0-9a-z]{9,63}$"
+                "smithy.api#pattern": "^wsi-[0-9a-z]{9,63}$"
             }
         },
         "com.amazonaws.workspaces#WorkspaceImageIdList": {
@@ -5137,14 +5251,14 @@
                 "DirectoryId": {
                     "target": "com.amazonaws.workspaces#DirectoryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the AWS Directory Service directory for the WorkSpace. You can use\n            <a>DescribeWorkspaceDirectories</a> to list the available directories.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Directory Service directory for the WorkSpace. You can use\n            <a>DescribeWorkspaceDirectories</a> to list the available directories.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "UserName": {
                     "target": "com.amazonaws.workspaces#UserName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user name of the user for the WorkSpace. This user name must exist in the AWS\n         Directory Service directory for the WorkSpace.</p>",
+                        "smithy.api#documentation": "<p>The user name of the user for the WorkSpace. This user name must exist in the Directory Service\n         directory for the WorkSpace.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5158,7 +5272,7 @@
                 "VolumeEncryptionKey": {
                     "target": "com.amazonaws.workspaces#VolumeEncryptionKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The symmetric AWS KMS customer master key (CMK) used to encrypt data stored on your WorkSpace. \n         Amazon WorkSpaces does not support asymmetric CMKs.</p>"
+                        "smithy.api#documentation": "<p>The symmetric KMS key used to encrypt data stored on your WorkSpace. \n         Amazon WorkSpaces does not support asymmetric KMS keys.</p>"
                     }
                 },
                 "UserVolumeEncryptionEnabled": {
@@ -5351,6 +5465,9 @@
                 },
                 {
                     "target": "com.amazonaws.workspaces#CreateTags"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#CreateUpdatedWorkspaceImage"
                 },
                 {
                     "target": "com.amazonaws.workspaces#CreateWorkspaceBundle"

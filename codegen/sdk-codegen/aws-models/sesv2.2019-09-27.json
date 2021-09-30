@@ -145,7 +145,7 @@
         "com.amazonaws.sesv2#BehaviorOnMxFailure": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The action that you want to take if the required MX record can't be found when you\n            send an email. When you set this value to <code>UseDefaultValue</code>, the mail is sent\n            using <i>amazonses.com</i> as the MAIL FROM domain. When you set this\n            value to <code>RejectMessage</code>, the Amazon SES API v2 returns a\n                <code>MailFromDomainNotVerified</code> error, and doesn't attempt to deliver the\n            email.</p>\n        <p>These behaviors are taken when the custom MAIL FROM domain configuration is in the\n                <code>Pending</code>, <code>Failed</code>, and <code>TemporaryFailure</code>\n            states.</p>",
+                "smithy.api#documentation": "<p>The action to take if the required MX record can't be found when you send an email.\n            When you set this value to <code>UseDefaultValue</code>, the mail is sent using\n                <i>amazonses.com</i> as the MAIL FROM domain. When you set this value\n            to <code>RejectMessage</code>, the Amazon SES API v2 returns a\n                <code>MailFromDomainNotVerified</code> error, and doesn't attempt to deliver the\n            email.</p>\n        <p>These behaviors are taken when the custom MAIL FROM domain configuration is in the\n                <code>Pending</code>, <code>Failed</code>, and <code>TemporaryFailure</code>\n            states.</p>",
                 "smithy.api#enum": [
                     {
                         "value": "USE_DEFAULT_VALUE",
@@ -419,7 +419,7 @@
                 "DimensionValueSource": {
                     "target": "com.amazonaws.sesv2#DimensionValueSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>The location where the Amazon SES API v2 finds the value of a dimension to publish to Amazon CloudWatch. If\n            you want to use the message tags that you specify using an\n                <code>X-SES-MESSAGE-TAGS</code> header or a parameter to the <code>SendEmail</code>\n            or <code>SendRawEmail</code> API, choose <code>messageTag</code>. If you want to use\n            your own email headers, choose <code>emailHeader</code>. If you want to use link tags,\n            choose <code>linkTags</code>.</p>",
+                        "smithy.api#documentation": "<p>The location where the Amazon SES API v2 finds the value of a dimension to publish to Amazon CloudWatch. To\n            use the message tags that you specify using an <code>X-SES-MESSAGE-TAGS</code> header or\n            a parameter to the <code>SendEmail</code> or <code>SendRawEmail</code> API, choose\n                <code>messageTag</code>. To use your own email headers, choose\n                <code>emailHeader</code>. To use link tags, choose <code>linkTags</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -565,7 +565,7 @@
                 "ContactListImportAction": {
                     "target": "com.amazonaws.sesv2#ContactListImportAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>>The type of action that you want to perform on the addresses. Acceptable\n            values:</p>\n        <ul>\n            <li>\n                <p>PUT: add the addresses to the contact list. If the record already exists, it\n                    will override it with the new value.</p>\n            </li>\n            <li>\n                <p>DELETE: remove the addresses from the contact list.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>>The type of action to perform on the addresses. The following are the \n            possible values:</p>\n        <ul>\n            <li>\n                <p>PUT: add the addresses to the contact list. If the record already exists, it\n                    will override it with the new value.</p>\n            </li>\n            <li>\n                <p>DELETE: remove the addresses from the contact list.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -690,7 +690,7 @@
                 "ConfigurationSetName": {
                     "target": "com.amazonaws.sesv2#ConfigurationSetName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the configuration set that you want to add an event destination to.</p>",
+                        "smithy.api#documentation": "<p>The name of the configuration set .</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -727,7 +727,7 @@
                 "ConfigurationSetName": {
                     "target": "com.amazonaws.sesv2#ConfigurationSetName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the configuration set.</p>",
+                        "smithy.api#documentation": "<p>The name of the configuration set. The name can contain up to 64 alphanumeric\n            characters, including letters, numbers, hyphens (-) and underscores (_) only.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -758,7 +758,7 @@
                 "Tags": {
                     "target": "com.amazonaws.sesv2#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of objects that define the tags (keys and values) that you want to associate\n            with the configuration set.</p>"
+                        "smithy.api#documentation": "<p>An array of objects that define the tags (keys and values) to associate with the\n            configuration set.</p>"
                     }
                 },
                 "SuppressionOptions": {
@@ -1031,7 +1031,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Create a new pool of dedicated IP addresses. A pool can include one or more dedicated\n            IP addresses that are associated with your AWS account. You can associate a pool with\n            a configuration set. When you send an email that uses that configuration set, the\n            message is sent from one of the addresses in the associated pool.</p>",
+                "smithy.api#documentation": "<p>Create a new pool of dedicated IP addresses. A pool can include one or more dedicated\n            IP addresses that are associated with your Amazon Web Services account. You can associate a pool with\n            a configuration set. When you send an email that uses that configuration set, the\n            message is sent from one of the addresses in the associated pool.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v2/email/dedicated-ip-pools",
@@ -1198,7 +1198,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts the process of verifying an email identity. An <i>identity</i> is\n            an email address or domain that you use when you send email. Before you can use an\n            identity to send email, you first have to verify it. By verifying an identity, you\n            demonstrate that you're the owner of the identity, and that you've given Amazon SES API v2\n            permission to send email from the identity.</p>\n        <p>When you verify an email address, Amazon SES sends an email to the address. Your email\n            address is verified as soon as you follow the link in the verification email.\n            \n        </p>\n        <p>When you verify a domain without specifying the <code>DkimSigningAttributes</code>\n            object, this operation provides a set of DKIM tokens. You can convert these tokens into\n            CNAME records, which you then add to the DNS configuration for your domain. Your domain\n            is verified when Amazon SES detects these records in the DNS configuration for your domain.\n            This verification method is known as <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html\">Easy DKIM</a>.</p>\n        <p>Alternatively, you can perform the verification process by providing your own\n            public-private key pair. This verification method is known as Bring Your Own DKIM\n            (BYODKIM). To use BYODKIM, your call to the <code>CreateEmailIdentity</code> operation\n            has to include the <code>DkimSigningAttributes</code> object. When you specify this\n            object, you provide a selector (a component of the DNS record name that identifies the\n            public key that you want to use for DKIM authentication) and a private key.</p>\n        <p>When you verify a domain, this operation provides a set of DKIM tokens, which you can\n            convert into CNAME tokens. You add these CNAME tokens to the DNS configuration for your\n            domain. Your domain is verified when Amazon SES detects these records in the DNS\n            configuration for your domain. For some DNS providers, it can take 72 hours or more to\n            complete the domain verification process.</p>\n        <p>Additionally, you can associate an existing configuration set with the email identity that you're verifying.</p>",
+                "smithy.api#documentation": "<p>Starts the process of verifying an email identity. An <i>identity</i> is\n            an email address or domain that you use when you send email. Before you can use an\n            identity to send email, you first have to verify it. By verifying an identity, you\n            demonstrate that you're the owner of the identity, and that you've given Amazon SES API v2\n            permission to send email from the identity.</p>\n        <p>When you verify an email address, Amazon SES sends an email to the address. Your email\n            address is verified as soon as you follow the link in the verification email.\n            \n        </p>\n        <p>When you verify a domain without specifying the <code>DkimSigningAttributes</code>\n            object, this operation provides a set of DKIM tokens. You can convert these tokens into\n            CNAME records, which you then add to the DNS configuration for your domain. Your domain\n            is verified when Amazon SES detects these records in the DNS configuration for your domain.\n            This verification method is known as <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html\">Easy DKIM</a>.</p>\n        <p>Alternatively, you can perform the verification process by providing your own\n            public-private key pair. This verification method is known as Bring Your Own DKIM\n            (BYODKIM). To use BYODKIM, your call to the <code>CreateEmailIdentity</code> operation\n            has to include the <code>DkimSigningAttributes</code> object. When you specify this\n            object, you provide a selector (a component of the DNS record name that identifies the\n            public key to use for DKIM authentication) and a private key.</p>\n        <p>When you verify a domain, this operation provides a set of DKIM tokens, which you can\n            convert into CNAME tokens. You add these CNAME tokens to the DNS configuration for your\n            domain. Your domain is verified when Amazon SES detects these records in the DNS\n            configuration for your domain. For some DNS providers, it can take 72 hours or more to\n            complete the domain verification process.</p>\n        <p>Additionally, you can associate an existing configuration set with the email identity that you're verifying.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v2/email/identities",
@@ -1246,7 +1246,7 @@
                 "EmailIdentity": {
                     "target": "com.amazonaws.sesv2#Identity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The email identity for which you want to create a policy.</p>",
+                        "smithy.api#documentation": "<p>The email identity.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1284,26 +1284,26 @@
                 "EmailIdentity": {
                     "target": "com.amazonaws.sesv2#Identity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The email address or domain that you want to verify.</p>",
+                        "smithy.api#documentation": "<p>The email address or domain to verify.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.sesv2#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of objects that define the tags (keys and values) that you want to associate\n            with the email identity.</p>"
+                        "smithy.api#documentation": "<p>An array of objects that define the tags (keys and values) to associate with the email\n            identity.</p>"
                     }
                 },
                 "DkimSigningAttributes": {
                     "target": "com.amazonaws.sesv2#DkimSigningAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>If your request includes this object, Amazon SES configures the identity to use Bring Your\n            Own DKIM (BYODKIM) for DKIM authentication purposes, as opposed to the default method,\n                <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html\">Easy\n                DKIM</a>.</p>\n        <p>You can only specify this object if the email identity is a domain, as opposed to an\n            address.</p>"
+                        "smithy.api#documentation": "<p>If your request includes this object, Amazon SES configures the identity to use Bring Your\n            Own DKIM (BYODKIM) for DKIM authentication purposes, or, configures the key length to be used for\n            <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html\">Easy DKIM</a>.</p>\n        <p>You can only specify this object if the email identity is a domain, as opposed to an\n            address.</p>"
                     }
                 },
                 "ConfigurationSetName": {
                     "target": "com.amazonaws.sesv2#ConfigurationSetName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration set to use by default when sending from this identity.\n            Note that any configuration set defined in the email sending request takes precedence.\n        </p>"
+                        "smithy.api#documentation": "<p>The configuration set to use by default when sending from this identity. Note that any\n            configuration set defined in the email sending request takes precedence. </p>"
                     }
                 }
             },
@@ -1317,7 +1317,7 @@
                 "IdentityType": {
                     "target": "com.amazonaws.sesv2#IdentityType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The email identity type.</p>"
+                        "smithy.api#documentation": "<p>The email identity type. Note: the <code>MANAGED_DOMAIN</code> identity type is not\n            supported.</p>"
                     }
                 },
                 "VerifiedForSendingStatus": {
@@ -1360,7 +1360,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an email template. Email templates enable you to send personalized email to\n            one or more destinations in a single API operation. For more information, see the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html\">Amazon SES\n                Developer Guide</a>.</p>\n        <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#documentation": "<p>Creates an email template. Email templates enable you to send personalized email to\n            one or more destinations in a single API operation. For more information, see the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html\">Amazon SES Developer\n                Guide</a>.</p>\n        <p>You can execute this operation no more than once per second.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v2/email/templates",
@@ -1374,7 +1374,7 @@
                 "TemplateName": {
                     "target": "com.amazonaws.sesv2#EmailTemplateName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the template you want to create.</p>",
+                        "smithy.api#documentation": "<p>The name of the template.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1464,7 +1464,7 @@
         "com.amazonaws.sesv2#CustomRedirectDomain": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The domain that you want to use for tracking open and click events.</p>"
+                "smithy.api#documentation": "<p>The domain to use for tracking open and click events.</p>"
             }
         },
         "com.amazonaws.sesv2#CustomVerificationEmailTemplateMetadata": {
@@ -1603,7 +1603,7 @@
                 "target": "com.amazonaws.sesv2#DedicatedIp"
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of dedicated IP addresses that are associated with your AWS account.</p>"
+                "smithy.api#documentation": "<p>A list of dedicated IP addresses that are associated with your Amazon Web Services account.</p>"
             }
         },
         "com.amazonaws.sesv2#DefaultDimensionValue": {
@@ -1677,7 +1677,7 @@
                 "ConfigurationSetName": {
                     "target": "com.amazonaws.sesv2#ConfigurationSetName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the configuration set that contains the event destination that you want to\n            delete.</p>",
+                        "smithy.api#documentation": "<p>The name of the configuration set that contains the event destination to\n            delete.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1685,7 +1685,7 @@
                 "EventDestinationName": {
                     "target": "com.amazonaws.sesv2#EventDestinationName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the event destination that you want to delete.</p>",
+                        "smithy.api#documentation": "<p>The name of the event destination to delete.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1708,7 +1708,7 @@
                 "ConfigurationSetName": {
                     "target": "com.amazonaws.sesv2#ConfigurationSetName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the configuration set that you want to delete.</p>",
+                        "smithy.api#documentation": "<p>The name of the configuration set.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1846,7 +1846,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an existing custom verification email template.</p>\n        <p>For more information about custom verification email templates, see <a href=\"https://docs.aws.amazon.com/es/latest/DeveloperGuide/send-email-verify-address-custom.html\">Using Custom Verification Email Templates</a> in the <i>Amazon SES Developer\n                Guide</i>.</p>\n        <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#documentation": "<p>Deletes an existing custom verification email template.</p>\n        <p>For more information about custom verification email templates, see <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-verify-address-custom.html\">Using Custom Verification Email Templates</a> in the <i>Amazon SES Developer\n                Guide</i>.</p>\n        <p>You can execute this operation no more than once per second.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/v2/email/custom-verification-email-templates/{TemplateName}",
@@ -1996,7 +1996,7 @@
                 "EmailIdentity": {
                     "target": "com.amazonaws.sesv2#Identity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The email identity for which you want to delete a policy.</p>",
+                        "smithy.api#documentation": "<p>The email identity.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2027,7 +2027,7 @@
                 "EmailIdentity": {
                     "target": "com.amazonaws.sesv2#Identity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identity (that is, the email address or domain) that you want to delete.</p>",
+                        "smithy.api#documentation": "<p>The identity (that is, the email address or domain) to delete.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2250,7 +2250,7 @@
                 "SendingPoolName": {
                     "target": "com.amazonaws.sesv2#PoolName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the dedicated IP pool that you want to associate with the configuration\n            set.</p>"
+                        "smithy.api#documentation": "<p>The name of the dedicated IP pool to associate with the configuration set.</p>"
                     }
                 }
             },
@@ -2284,7 +2284,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that describes the recipients for an email.</p>"
+                "smithy.api#documentation": "<p>An object that describes the recipients for an email.</p>\n        <note>\n            <p>Amazon SES does not support the SMTPUTF8 extension, as described in <a href=\"https://tools.ietf.org/html/rfc6531\">RFC6531</a>. For this reason, the\n                    <i>local part</i> of a destination email address (the part of the\n                email address that precedes the @ sign) may only contain <a href=\"https://en.wikipedia.org/wiki/Email_address#Local-part\">7-bit ASCII\n                    characters</a>. If the <i>domain part</i> of an address (the\n                part after the @ sign) contains non-ASCII characters, they must be encoded using\n                Punycode, as described in <a href=\"https://tools.ietf.org/html/rfc3492.html\">RFC3492</a>.</p>\n        </note>"
             }
         },
         "com.amazonaws.sesv2#DimensionName": {
@@ -2296,7 +2296,7 @@
         "com.amazonaws.sesv2#DimensionValueSource": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The location where the Amazon SES API v2 finds the value of a dimension to publish to Amazon CloudWatch. If\n            you want to use the message tags that you specify using an\n                <code>X-SES-MESSAGE-TAGS</code> header or a parameter to the <code>SendEmail</code>\n            or <code>SendRawEmail</code> API, choose <code>messageTag</code>. If you want to use\n            your own email headers, choose <code>emailHeader</code>. If you want to use link tags,\n            choose <code>linkTags</code>.</p>",
+                "smithy.api#documentation": "<p>The location where the Amazon SES API v2 finds the value of a dimension to publish to Amazon CloudWatch. To\n            use the message tags that you specify using an <code>X-SES-MESSAGE-TAGS</code> header or\n            a parameter to the <code>SendEmail</code> or <code>SendRawEmail</code> API, choose\n                <code>messageTag</code>. To use your own email headers, choose\n                <code>emailHeader</code>. To use link tags, choose <code>linkTags</code>.</p>",
                 "smithy.api#enum": [
                     {
                         "value": "MESSAGE_TAG",
@@ -2340,7 +2340,25 @@
                 "SigningAttributesOrigin": {
                     "target": "com.amazonaws.sesv2#DkimSigningAttributesOrigin",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string that indicates how DKIM was configured for the identity. There are two\n            possible values:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>AWS_SES</code> – Indicates that DKIM was configured for the\n                    identity by using <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html\">Easy DKIM</a>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>EXTERNAL</code> – Indicates that DKIM was configured for the\n                    identity by using Bring Your Own DKIM (BYODKIM).</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A string that indicates how DKIM was configured for the identity. These are the\n            possible values:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>AWS_SES</code> – Indicates that DKIM was configured for the\n                    identity by using <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html\">Easy DKIM</a>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>EXTERNAL</code> – Indicates that DKIM was configured for the\n                    identity by using Bring Your Own DKIM (BYODKIM).</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "NextSigningKeyLength": {
+                    "target": "com.amazonaws.sesv2#DkimSigningKeyLength",
+                    "traits": {
+                        "smithy.api#documentation": "<p>[Easy DKIM] The key length of the future DKIM key pair to be generated. This can be changed at most once per day.</p>"
+                    }
+                },
+                "CurrentSigningKeyLength": {
+                    "target": "com.amazonaws.sesv2#DkimSigningKeyLength",
+                    "traits": {
+                        "smithy.api#documentation": "<p>[Easy DKIM] The key length of the DKIM key pair in use.</p>"
+                    }
+                },
+                "LastKeyGenerationTimestamp": {
+                    "target": "com.amazonaws.sesv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>[Easy DKIM] The last time a key pair was generated for this identity.</p>"
                     }
                 }
             },
@@ -2354,20 +2372,24 @@
                 "DomainSigningSelector": {
                     "target": "com.amazonaws.sesv2#Selector",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string that's used to identify a public key in the DNS configuration for a\n            domain.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>[Bring Your Own DKIM] A string that's used to identify a public key in the DNS configuration for a\n            domain.</p>"
                     }
                 },
                 "DomainSigningPrivateKey": {
                     "target": "com.amazonaws.sesv2#PrivateKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>A private key that's used to generate a DKIM signature.</p>\n        <p>The private key must use 1024-bit RSA encryption, and must be encoded using base64\n            encoding.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>[Bring Your Own DKIM] A private key that's used to generate a DKIM signature.</p>\n        <p>The private key must use 1024 or 2048-bit RSA encryption, and must be encoded using\n            base64 encoding.</p>"
+                    }
+                },
+                "NextSigningKeyLength": {
+                    "target": "com.amazonaws.sesv2#DkimSigningKeyLength",
+                    "traits": {
+                        "smithy.api#documentation": "<p>[Easy DKIM] The key length of the future DKIM key pair to be generated. This can be changed at most once per day.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that contains information about the tokens used for setting up Bring Your\n            Own DKIM (BYODKIM).</p>"
+                "smithy.api#documentation": "<p>An object that contains configuration for Bring Your Own DKIM (BYODKIM), or, for Easy DKIM</p>"
             }
         },
         "com.amazonaws.sesv2#DkimSigningAttributesOrigin": {
@@ -2381,6 +2403,21 @@
                     {
                         "value": "EXTERNAL",
                         "name": "EXTERNAL"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.sesv2#DkimSigningKeyLength": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "RSA_1024_BIT",
+                        "name": "RSA_1024_BIT"
+                    },
+                    {
+                        "value": "RSA_2048_BIT",
+                        "name": "RSA_2048_BIT"
                     }
                 ]
             }
@@ -2532,7 +2569,7 @@
                 "Domain": {
                     "target": "com.amazonaws.sesv2#Domain",
                     "traits": {
-                        "smithy.api#documentation": "<p>A verified domain that’s associated with your AWS account and currently has an\n            active Deliverability dashboard subscription.</p>"
+                        "smithy.api#documentation": "<p>A verified domain that’s associated with your Amazon Web Services account and currently has an\n            active Deliverability dashboard subscription.</p>"
                     }
                 },
                 "SubscriptionStartDate": {
@@ -2802,7 +2839,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>In the Amazon SES API v2, <i>events</i> include message sends, deliveries, opens,\n            clicks, bounces, complaints and delivery delays. <i>Event destinations</i> are places that\n            you can send information about these events to. For example, you can send event data to\n            Amazon SNS to receive notifications when you receive bounces or complaints, or you can use\n            Amazon Kinesis Data Firehose to stream data to Amazon S3 for long-term storage.</p>"
+                "smithy.api#documentation": "<p>In the Amazon SES API v2, <i>events</i> include message sends, deliveries, opens,\n            clicks, bounces, complaints and delivery delays. <i>Event destinations</i>\n            are places that you can send information about these events to. For example, you can\n            send event data to Amazon SNS to receive notifications when you receive bounces or\n            complaints, or you can use Amazon Kinesis Data Firehose to stream data to Amazon S3 for long-term storage.</p>"
             }
         },
         "com.amazonaws.sesv2#EventDestinationDefinition": {
@@ -2973,7 +3010,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Obtain information about the email-sending status and capabilities of your Amazon SES\n            account in the current AWS Region.</p>",
+                "smithy.api#documentation": "<p>Obtain information about the email-sending status and capabilities of your Amazon SES\n            account in the current Amazon Web Services Region.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/v2/email/account",
@@ -3006,25 +3043,25 @@
                 "ProductionAccessEnabled": {
                     "target": "com.amazonaws.sesv2#Enabled",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether or not your account has production access in the current AWS\n            Region.</p>\n        <p>If the value is <code>false</code>, then your account is in the\n                <i>sandbox</i>. When your account is in the sandbox, you can only send\n            email to verified identities. Additionally, the maximum number of emails you can send in\n            a 24-hour period (your sending quota) is 200, and the maximum number of emails you can\n            send per second (your maximum sending rate) is 1.</p>\n        <p>If the value is <code>true</code>, then your account has production access. When your\n            account has production access, you can send email to any address. The sending quota and\n            maximum sending rate for your account vary based on your specific use case.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether or not your account has production access in the current Amazon Web Services\n            Region.</p>\n        <p>If the value is <code>false</code>, then your account is in the\n                <i>sandbox</i>. When your account is in the sandbox, you can only send\n            email to verified identities. Additionally, the maximum number of emails you can send in\n            a 24-hour period (your sending quota) is 200, and the maximum number of emails you can\n            send per second (your maximum sending rate) is 1.</p>\n        <p>If the value is <code>true</code>, then your account has production access. When your\n            account has production access, you can send email to any address. The sending quota and\n            maximum sending rate for your account vary based on your specific use case.</p>"
                     }
                 },
                 "SendQuota": {
                     "target": "com.amazonaws.sesv2#SendQuota",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that contains information about the per-day and per-second sending limits\n            for your Amazon SES account in the current AWS Region.</p>"
+                        "smithy.api#documentation": "<p>An object that contains information about the per-day and per-second sending limits\n            for your Amazon SES account in the current Amazon Web Services Region.</p>"
                     }
                 },
                 "SendingEnabled": {
                     "target": "com.amazonaws.sesv2#Enabled",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether or not email sending is enabled for your Amazon SES account in the\n            current AWS Region.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether or not email sending is enabled for your Amazon SES account in the\n            current Amazon Web Services Region.</p>"
                     }
                 },
                 "SuppressionAttributes": {
                     "target": "com.amazonaws.sesv2#SuppressionAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that contains information about the email address suppression preferences\n            for your account in the current AWS Region.</p>"
+                        "smithy.api#documentation": "<p>An object that contains information about the email address suppression preferences\n            for your account in the current Amazon Web Services Region.</p>"
                     }
                 },
                 "Details": {
@@ -3035,7 +3072,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of details about the email-sending capabilities of your Amazon SES account in the\n            current AWS Region.</p>"
+                "smithy.api#documentation": "<p>A list of details about the email-sending capabilities of your Amazon SES account in the\n            current Amazon Web Services Region.</p>"
             }
         },
         "com.amazonaws.sesv2#GetBlacklistReports": {
@@ -3189,7 +3226,7 @@
                 "ConfigurationSetName": {
                     "target": "com.amazonaws.sesv2#ConfigurationSetName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the configuration set that you want to obtain more information\n            about.</p>",
+                        "smithy.api#documentation": "<p>The name of the configuration set.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3555,7 +3592,7 @@
                 "Ip": {
                     "target": "com.amazonaws.sesv2#Ip",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP address that you want to obtain more information about. The value you specify\n            has to be a dedicated IP address that's assocaited with your AWS account.</p>",
+                        "smithy.api#documentation": "<p>The IP address that you want to obtain more information about. The value you specify\n            has to be a dedicated IP address that's assocaited with your Amazon Web Services account.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3599,7 +3636,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List the dedicated IP addresses that are associated with your AWS\n            account.</p>",
+                "smithy.api#documentation": "<p>List the dedicated IP addresses that are associated with your Amazon Web Services\n            account.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/v2/email/dedicated-ips",
@@ -3647,7 +3684,7 @@
                 "DedicatedIps": {
                     "target": "com.amazonaws.sesv2#DedicatedIpList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of dedicated IP addresses that are associated with your AWS account.</p>"
+                        "smithy.api#documentation": "<p>A list of dedicated IP addresses that are associated with your Amazon Web Services account.</p>"
                     }
                 },
                 "NextToken": {
@@ -3658,7 +3695,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about the dedicated IP addresses that are associated with your AWS\n            account.</p>"
+                "smithy.api#documentation": "<p>Information about the dedicated IP addresses that are associated with your Amazon Web Services\n            account.</p>"
             }
         },
         "com.amazonaws.sesv2#GetDeliverabilityDashboardOptions": {
@@ -3681,7 +3718,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieve information about the status of the Deliverability dashboard for your account. When\n            the Deliverability dashboard is enabled, you gain access to reputation, deliverability, and other\n            metrics for the domains that you use to send email. You also gain the ability to perform\n            predictive inbox placement tests.</p>\n        \n        <p>When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition\n            to any other fees that you accrue by using Amazon SES and other AWS services. For more\n            information about the features and cost of a Deliverability dashboard subscription, see <a href=\"http://aws.amazon.com/ses/pricing/\">Amazon SES Pricing</a>.</p>",
+                "smithy.api#documentation": "<p>Retrieve information about the status of the Deliverability dashboard for your account. When\n            the Deliverability dashboard is enabled, you gain access to reputation, deliverability, and other\n            metrics for the domains that you use to send email. You also gain the ability to perform\n            predictive inbox placement tests.</p>\n        \n        <p>When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition\n            to any other fees that you accrue by using Amazon SES and other Amazon Web Services services. For more\n            information about the features and cost of a Deliverability dashboard subscription, see <a href=\"http://aws.amazon.com/ses/pricing/\">Amazon SES Pricing</a>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/v2/email/deliverability-dashboard",
@@ -3693,7 +3730,7 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Retrieve information about the status of the Deliverability dashboard for your AWS account.\n            When the Deliverability dashboard is enabled, you gain access to reputation, deliverability, and\n            other metrics for your domains. You also gain the ability to perform predictive inbox placement tests.</p>\n        \n        <p>When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition\n            to any other fees that you accrue by using Amazon SES and other AWS services. For more\n            information about the features and cost of a Deliverability dashboard subscription, see <a href=\"http://aws.amazon.com/pinpoint/pricing/\">Amazon Pinpoint Pricing</a>.</p>"
+                "smithy.api#documentation": "<p>Retrieve information about the status of the Deliverability dashboard for your Amazon Web Services account.\n            When the Deliverability dashboard is enabled, you gain access to reputation, deliverability, and\n            other metrics for your domains. You also gain the ability to perform predictive inbox placement tests.</p>\n        \n        <p>When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition\n            to any other fees that you accrue by using Amazon SES and other Amazon Web Services services. For more\n            information about the features and cost of a Deliverability dashboard subscription, see <a href=\"http://aws.amazon.com/pinpoint/pricing/\">Amazon Pinpoint Pricing</a>.</p>"
             }
         },
         "com.amazonaws.sesv2#GetDeliverabilityDashboardOptionsResponse": {
@@ -4023,7 +4060,7 @@
                 "EmailIdentity": {
                     "target": "com.amazonaws.sesv2#Identity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The email identity that you want to retrieve policies for.</p>",
+                        "smithy.api#documentation": "<p>The email identity.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4053,7 +4090,7 @@
                 "EmailIdentity": {
                     "target": "com.amazonaws.sesv2#Identity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The email identity that you want to retrieve details for.</p>",
+                        "smithy.api#documentation": "<p>The email identity.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4069,7 +4106,7 @@
                 "IdentityType": {
                     "target": "com.amazonaws.sesv2#IdentityType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The email identity type.</p>"
+                        "smithy.api#documentation": "<p>The email identity type. Note: the <code>MANAGED_DOMAIN</code> identity type is not\n            supported.</p>"
                     }
                 },
                 "FeedbackForwardingStatus": {
@@ -4153,7 +4190,7 @@
                 "TemplateName": {
                     "target": "com.amazonaws.sesv2#EmailTemplateName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the template you want to retrieve.</p>",
+                        "smithy.api#documentation": "<p>The name of the template.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4169,7 +4206,7 @@
                 "TemplateName": {
                     "target": "com.amazonaws.sesv2#EmailTemplateName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the template you want to retrieve.</p>",
+                        "smithy.api#documentation": "<p>The name of the template.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4364,7 +4401,7 @@
                 "IdentityType": {
                     "target": "com.amazonaws.sesv2#IdentityType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The email identity type. The identity type can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>EMAIL_ADDRESS</code> – The identity is an email address.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DOMAIN</code> – The identity is a domain.</p>\n            </li>\n            <li>\n                <p>\n                  <code>MANAGED_DOMAIN</code> – The identity is a domain that is managed\n                    by AWS.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The email identity type. Note: the <code>MANAGED_DOMAIN</code> type is not supported\n            for email identity types.</p>"
                     }
                 },
                 "IdentityName": {
@@ -4393,7 +4430,6 @@
         "com.amazonaws.sesv2#IdentityType": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The email identity type. The identity type can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>EMAIL_ADDRESS</code> – The identity is an email address.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DOMAIN</code> – The identity is a domain.</p>\n            </li>\n         </ul>",
                 "smithy.api#enum": [
                     {
                         "value": "EMAIL_ADDRESS",
@@ -4520,7 +4556,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that contains information about the inbox placement data settings for a\n            verified domain that’s associated with your AWS account. This data is available only\n            if you enabled the Deliverability dashboard for the domain.</p>"
+                "smithy.api#documentation": "<p>An object that contains information about the inbox placement data settings for a\n            verified domain that’s associated with your Amazon Web Services account. This data is available only\n            if you enabled the Deliverability dashboard for the domain.</p>"
             }
         },
         "com.amazonaws.sesv2#InvalidNextTokenException": {
@@ -4709,7 +4745,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to obtain a list of configuration sets for your Amazon SES account in the current\n            AWS Region.</p>"
+                "smithy.api#documentation": "<p>A request to obtain a list of configuration sets for your Amazon SES account in the current\n            Amazon Web Services Region.</p>"
             }
         },
         "com.amazonaws.sesv2#ListConfigurationSetsResponse": {
@@ -4718,7 +4754,7 @@
                 "ConfigurationSets": {
                     "target": "com.amazonaws.sesv2#ConfigurationSetNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array that contains all of the configuration sets in your Amazon SES account in the\n            current AWS Region.</p>"
+                        "smithy.api#documentation": "<p>An array that contains all of the configuration sets in your Amazon SES account in the\n            current Amazon Web Services Region.</p>"
                     }
                 },
                 "NextToken": {
@@ -4729,7 +4765,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of configuration sets in your Amazon SES account in the current AWS Region.</p>"
+                "smithy.api#documentation": "<p>A list of configuration sets in your Amazon SES account in the current Amazon Web Services Region.</p>"
             }
         },
         "com.amazonaws.sesv2#ListContactLists": {
@@ -4918,7 +4954,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the existing custom verification email templates for your account in the current\n            AWS Region.</p>\n        <p>For more information about custom verification email templates, see <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-verify-address-custom.html\">Using Custom Verification Email Templates</a> in the <i>Amazon SES Developer\n                Guide</i>.</p>\n        <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#documentation": "<p>Lists the existing custom verification email templates for your account in the current\n            Amazon Web Services Region.</p>\n        <p>For more information about custom verification email templates, see <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-verify-address-custom.html\">Using Custom Verification Email Templates</a> in the <i>Amazon SES Developer\n                Guide</i>.</p>\n        <p>You can execute this operation no more than once per second.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/v2/email/custom-verification-email-templates",
@@ -4990,7 +5026,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List all of the dedicated IP pools that exist in your AWS account in the current\n            Region.</p>",
+                "smithy.api#documentation": "<p>List all of the dedicated IP pools that exist in your Amazon Web Services account in the current\n            Region.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/v2/email/dedicated-ip-pools",
@@ -5031,7 +5067,7 @@
                 "DedicatedIpPools": {
                     "target": "com.amazonaws.sesv2#ListOfDedicatedIpPools",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of all of the dedicated IP pools that are associated with your AWS account in\n            the current Region.</p>"
+                        "smithy.api#documentation": "<p>A list of all of the dedicated IP pools that are associated with your Amazon Web Services account in\n            the current Region.</p>"
                     }
                 },
                 "NextToken": {
@@ -5238,7 +5274,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of all of the email identities that are associated with your AWS\n            account. An identity can be either an email address or a domain. This operation returns\n            identities that are verified as well as those that aren't. This operation returns\n            identities that are associated with Amazon SES and Amazon Pinpoint.</p>",
+                "smithy.api#documentation": "<p>Returns a list of all of the email identities that are associated with your Amazon Web Services\n            account. An identity can be either an email address or a domain. This operation returns\n            identities that are verified as well as those that aren't. This operation returns\n            identities that are associated with Amazon SES and Amazon Pinpoint.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/v2/email/identities",
@@ -5270,7 +5306,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to list all of the email identities associated with your AWS account. This\n            list includes identities that you've already verified, identities that are unverified,\n            and identities that were verified in the past, but are no longer verified.</p>"
+                "smithy.api#documentation": "<p>A request to list all of the email identities associated with your Amazon Web Services account. This\n            list includes identities that you've already verified, identities that are unverified,\n            and identities that were verified in the past, but are no longer verified.</p>"
             }
         },
         "com.amazonaws.sesv2#ListEmailIdentitiesResponse": {
@@ -5279,7 +5315,7 @@
                 "EmailIdentities": {
                     "target": "com.amazonaws.sesv2#IdentityInfoList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array that includes all of the email identities associated with your AWS\n            account.</p>"
+                        "smithy.api#documentation": "<p>An array that includes all of the email identities associated with your Amazon Web Services\n            account.</p>"
                     }
                 },
                 "NextToken": {
@@ -5310,7 +5346,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the email templates present in your Amazon SES account in the current AWS\n            Region.</p>\n\n        <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#documentation": "<p>Lists the email templates present in your Amazon SES account in the current Amazon Web Services\n            Region.</p>\n\n        <p>You can execute this operation no more than once per second.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/v2/email/templates",
@@ -5342,7 +5378,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a request to list the email templates present in your Amazon SES account in the\n            current AWS Region. For more information, see the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html\">Amazon SES Developer\n                Guide</a>.</p>"
+                "smithy.api#documentation": "<p>Represents a request to list the email templates present in your Amazon SES account in the\n            current Amazon Web Services Region. For more information, see the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html\">Amazon SES Developer\n                Guide</a>.</p>"
             }
         },
         "com.amazonaws.sesv2#ListEmailTemplatesResponse": {
@@ -5482,7 +5518,7 @@
                 "target": "com.amazonaws.sesv2#PoolName"
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of dedicated IP pools that are associated with your AWS account.</p>"
+                "smithy.api#documentation": "<p>A list of dedicated IP pools that are associated with your Amazon Web Services account.</p>"
             }
         },
         "com.amazonaws.sesv2#ListSuppressedDestinations": {
@@ -5654,7 +5690,7 @@
                 "BehaviorOnMxFailure": {
                     "target": "com.amazonaws.sesv2#BehaviorOnMxFailure",
                     "traits": {
-                        "smithy.api#documentation": "<p>The action that you want to take if the required MX record can't be found when you\n            send an email. When you set this value to <code>UseDefaultValue</code>, the mail is sent\n            using <i>amazonses.com</i> as the MAIL FROM domain. When you set this\n            value to <code>RejectMessage</code>, the Amazon SES API v2 returns a\n                <code>MailFromDomainNotVerified</code> error, and doesn't attempt to deliver the\n            email.</p>\n        <p>These behaviors are taken when the custom MAIL FROM domain configuration is in the\n                <code>Pending</code>, <code>Failed</code>, and <code>TemporaryFailure</code>\n            states.</p>",
+                        "smithy.api#documentation": "<p>The action to take if the required MX record can't be found when you send an email.\n            When you set this value to <code>UseDefaultValue</code>, the mail is sent using\n                <i>amazonses.com</i> as the MAIL FROM domain. When you set this value\n            to <code>RejectMessage</code>, the Amazon SES API v2 returns a\n                <code>MailFromDomainNotVerified</code> error, and doesn't attempt to deliver the\n            email.</p>\n        <p>These behaviors are taken when the custom MAIL FROM domain configuration is in the\n                <code>Pending</code>, <code>Failed</code>, and <code>TemporaryFailure</code>\n            states.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5666,7 +5702,7 @@
         "com.amazonaws.sesv2#MailFromDomainName": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The domain that you want to use as a MAIL FROM domain.</p>"
+                "smithy.api#documentation": "<p>The domain to use as a MAIL FROM domain.</p>"
             }
         },
         "com.amazonaws.sesv2#MailFromDomainNotVerifiedException": {
@@ -5884,7 +5920,7 @@
                 "ApplicationArn": {
                     "target": "com.amazonaws.sesv2#AmazonResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Pinpoint project that you want to send email\n            events to.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Pinpoint project to send email events to.</p>"
                     }
                 }
             },
@@ -6015,7 +6051,7 @@
                 "AutoWarmupEnabled": {
                     "target": "com.amazonaws.sesv2#Enabled",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enables or disables the automatic warm-up feature for dedicated IP addresses that are\n            associated with your Amazon SES account in the current AWS Region. Set to <code>true</code>\n            to enable the automatic warm-up feature, or set to <code>false</code> to disable\n            it.</p>"
+                        "smithy.api#documentation": "<p>Enables or disables the automatic warm-up feature for dedicated IP addresses that are\n            associated with your Amazon SES account in the current Amazon Web Services Region. Set to <code>true</code>\n            to enable the automatic warm-up feature, or set to <code>false</code> to disable\n            it.</p>"
                     }
                 }
             },
@@ -6097,7 +6133,7 @@
                 "ProductionAccessEnabled": {
                     "target": "com.amazonaws.sesv2#EnabledWrapper",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether or not your account should have production access in the current\n            AWS Region.</p>\n        <p>If the value is <code>false</code>, then your account is in the\n                <i>sandbox</i>. When your account is in the sandbox, you can only send\n            email to verified identities. Additionally, the maximum number of emails you can send in\n            a 24-hour period (your sending quota) is 200, and the maximum number of emails you can\n            send per second (your maximum sending rate) is 1.</p>\n        <p>If the value is <code>true</code>, then your account has production access. When your\n            account has production access, you can send email to any address. The sending quota and\n            maximum sending rate for your account vary based on your specific use case.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether or not your account should have production access in the current\n            Amazon Web Services Region.</p>\n        <p>If the value is <code>false</code>, then your account is in the\n                <i>sandbox</i>. When your account is in the sandbox, you can only send\n            email to verified identities. Additionally, the maximum number of emails you can send in\n            a 24-hour period (your sending quota) is 200, and the maximum number of emails you can\n            send per second (your maximum sending rate) is 1.</p>\n        <p>If the value is <code>true</code>, then your account has production access. When your\n            account has production access, you can send email to any address. The sending quota and\n            maximum sending rate for your account vary based on your specific use case.</p>"
                     }
                 }
             },
@@ -6143,7 +6179,7 @@
                 "SendingEnabled": {
                     "target": "com.amazonaws.sesv2#Enabled",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enables or disables your account's ability to send email. Set to <code>true</code> to\n            enable email sending, or set to <code>false</code> to disable email sending.</p>\n        <note>\n            <p>If AWS paused your account's ability to send email, you can't use this operation\n                to resume your account's ability to send email.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>Enables or disables your account's ability to send email. Set to <code>true</code> to\n            enable email sending, or set to <code>false</code> to disable email sending.</p>\n        <note>\n            <p>If Amazon Web Services paused your account's ability to send email, you can't use this operation\n                to resume your account's ability to send email.</p>\n        </note>"
                     }
                 }
             },
@@ -6238,7 +6274,7 @@
                 "ConfigurationSetName": {
                     "target": "com.amazonaws.sesv2#ConfigurationSetName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the configuration set that you want to associate with a dedicated IP\n            pool.</p>",
+                        "smithy.api#documentation": "<p>The name of the configuration set to associate with a dedicated IP pool.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6252,7 +6288,7 @@
                 "SendingPoolName": {
                     "target": "com.amazonaws.sesv2#SendingPoolName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the dedicated IP pool that you want to associate with the configuration\n            set.</p>"
+                        "smithy.api#documentation": "<p>The name of the dedicated IP pool to associate with the configuration set.</p>"
                     }
                 }
             },
@@ -6287,7 +6323,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enable or disable collection of reputation metrics for emails that you send using a\n            particular configuration set in a specific AWS Region.</p>",
+                "smithy.api#documentation": "<p>Enable or disable collection of reputation metrics for emails that you send using a\n            particular configuration set in a specific Amazon Web Services Region.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/v2/email/configuration-sets/{ConfigurationSetName}/reputation-options",
@@ -6301,7 +6337,7 @@
                 "ConfigurationSetName": {
                     "target": "com.amazonaws.sesv2#ConfigurationSetName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the configuration set that you want to enable or disable reputation metric\n            tracking for.</p>",
+                        "smithy.api#documentation": "<p>The name of the configuration set.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6344,7 +6380,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enable or disable email sending for messages that use a particular configuration set\n            in a specific AWS Region.</p>",
+                "smithy.api#documentation": "<p>Enable or disable email sending for messages that use a particular configuration set\n            in a specific Amazon Web Services Region.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/v2/email/configuration-sets/{ConfigurationSetName}/sending",
@@ -6358,7 +6394,7 @@
                 "ConfigurationSetName": {
                     "target": "com.amazonaws.sesv2#ConfigurationSetName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the configuration set that you want to enable or disable email sending\n            for.</p>",
+                        "smithy.api#documentation": "<p>The name of the configuration set to enable or disable email sending for.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6415,7 +6451,7 @@
                 "ConfigurationSetName": {
                     "target": "com.amazonaws.sesv2#ConfigurationSetName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the configuration set that you want to change the suppression list\n            preferences for.</p>",
+                        "smithy.api#documentation": "<p>The name of the configuration set to change the suppression list preferences\n            for.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6423,7 +6459,7 @@
                 "SuppressedReasons": {
                     "target": "com.amazonaws.sesv2#SuppressionListReasons",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list that contains the reasons that email addresses are automatically added to the\n            suppression list for your account. This list can contain any or all of the\n            following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>COMPLAINT</code> – Amazon SES adds an email address to the suppression\n                    list for your account when a message sent to that address results in a\n                    complaint.</p>\n            </li>\n            <li>\n                <p>\n                  <code>BOUNCE</code> – Amazon SES adds an email address to the suppression\n                    list for your account when a message sent to that address results in a\n                    hard bounce.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A list that contains the reasons that email addresses are automatically added to the\n            suppression list for your account. This list can contain any or all of the\n            following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>COMPLAINT</code> – Amazon SES adds an email address to the suppression\n                    list for your account when a message sent to that address results in a\n                    complaint.</p>\n            </li>\n            <li>\n                <p>\n                  <code>BOUNCE</code> – Amazon SES adds an email address to the suppression\n                    list for your account when a message sent to that address results in a hard\n                    bounce.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -6472,7 +6508,7 @@
                 "ConfigurationSetName": {
                     "target": "com.amazonaws.sesv2#ConfigurationSetName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the configuration set that you want to add a custom tracking domain\n            to.</p>",
+                        "smithy.api#documentation": "<p>The name of the configuration set.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6480,7 +6516,7 @@
                 "CustomRedirectDomain": {
                     "target": "com.amazonaws.sesv2#CustomRedirectDomain",
                     "traits": {
-                        "smithy.api#documentation": "<p>The domain that you want to use to track open and click events.</p>"
+                        "smithy.api#documentation": "<p>The domain to use to track open and click events.</p>"
                     }
                 }
             },
@@ -6515,7 +6551,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Move a dedicated IP address to an existing dedicated IP pool.</p>\n        <note>\n            <p>The dedicated IP address that you specify must already exist, and must be\n                associated with your AWS account.\n                \n            </p>\n            <p>The dedicated IP pool you specify must already exist. You can create a new pool by\n                using the <code>CreateDedicatedIpPool</code> operation.</p>\n\n        </note>",
+                "smithy.api#documentation": "<p>Move a dedicated IP address to an existing dedicated IP pool.</p>\n        <note>\n            <p>The dedicated IP address that you specify must already exist, and must be\n                associated with your Amazon Web Services account.\n                \n            </p>\n            <p>The dedicated IP pool you specify must already exist. You can create a new pool by\n                using the <code>CreateDedicatedIpPool</code> operation.</p>\n\n        </note>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/v2/email/dedicated-ips/{Ip}/pool",
@@ -6529,7 +6565,7 @@
                 "Ip": {
                     "target": "com.amazonaws.sesv2#Ip",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP address that you want to move to the dedicated IP pool. The value you specify\n            has to be a dedicated IP address that's associated with your AWS account.</p>",
+                        "smithy.api#documentation": "<p>The IP address that you want to move to the dedicated IP pool. The value you specify\n            has to be a dedicated IP address that's associated with your Amazon Web Services account.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6637,7 +6673,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enable or disable the Deliverability dashboard. When you enable the Deliverability dashboard, you gain\n            access to reputation, deliverability, and other metrics for the domains that you use to\n            send email. You also gain the ability to perform predictive inbox placement tests.</p>\n        \n        <p>When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition\n            to any other fees that you accrue by using Amazon SES and other AWS services. For more\n            information about the features and cost of a Deliverability dashboard subscription, see <a href=\"http://aws.amazon.com/ses/pricing/\">Amazon SES Pricing</a>.</p>",
+                "smithy.api#documentation": "<p>Enable or disable the Deliverability dashboard. When you enable the Deliverability dashboard, you gain\n            access to reputation, deliverability, and other metrics for the domains that you use to\n            send email. You also gain the ability to perform predictive inbox placement tests.</p>\n        \n        <p>When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition\n            to any other fees that you accrue by using Amazon SES and other Amazon Web Services services. For more\n            information about the features and cost of a Deliverability dashboard subscription, see <a href=\"http://aws.amazon.com/ses/pricing/\">Amazon SES Pricing</a>.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/v2/email/deliverability-dashboard",
@@ -6663,7 +6699,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Enable or disable the Deliverability dashboard. When you enable the Deliverability dashboard, you gain\n            access to reputation, deliverability, and other metrics for the domains that you use to\n            send email using Amazon SES API v2. You also gain the ability to perform predictive inbox placement tests.</p>\n        <p>When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition\n            to any other fees that you accrue by using Amazon SES and other AWS services. For more\n            information about the features and cost of a Deliverability dashboard subscription, see <a href=\"http://aws.amazon.com/pinpoint/pricing/\">Amazon Pinpoint Pricing</a>.</p>"
+                "smithy.api#documentation": "<p>Enable or disable the Deliverability dashboard. When you enable the Deliverability dashboard, you gain\n            access to reputation, deliverability, and other metrics for the domains that you use to\n            send email using Amazon SES API v2. You also gain the ability to perform predictive inbox placement tests.</p>\n        <p>When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition\n            to any other fees that you accrue by using Amazon SES and other Amazon Web Services services. For more\n            information about the features and cost of a Deliverability dashboard subscription, see <a href=\"http://aws.amazon.com/pinpoint/pricing/\">Amazon Pinpoint Pricing</a>.</p>"
             }
         },
         "com.amazonaws.sesv2#PutDeliverabilityDashboardOptionResponse": {
@@ -6707,7 +6743,7 @@
                 "EmailIdentity": {
                     "target": "com.amazonaws.sesv2#Identity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The email address or domain that you want to associate with a configuration set.</p>",
+                        "smithy.api#documentation": "<p>The email address or domain to associate with a configuration set.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6715,7 +6751,7 @@
                 "ConfigurationSetName": {
                     "target": "com.amazonaws.sesv2#ConfigurationSetName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration set that you want to associate with an email identity.</p>"
+                        "smithy.api#documentation": "<p>The configuration set to associate with an email identity.</p>"
                     }
                 }
             },
@@ -6727,7 +6763,7 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>If the action is successful, the service sends back an HTTP 200 response with an empty HTTP body.</p>"
+                "smithy.api#documentation": "<p>If the action is successful, the service sends back an HTTP 200 response with an empty\n            HTTP body.</p>"
             }
         },
         "com.amazonaws.sesv2#PutEmailIdentityDkimAttributes": {
@@ -6764,7 +6800,7 @@
                 "EmailIdentity": {
                     "target": "com.amazonaws.sesv2#Identity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The email identity that you want to change the DKIM settings for.</p>",
+                        "smithy.api#documentation": "<p>The email identity.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6807,7 +6843,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Used to configure or change the DKIM authentication settings for an email domain\n            identity. You can use this operation to do any of the following:</p>\n        <ul>\n            <li>\n                <p>Update the signing attributes for an identity that uses Bring Your Own DKIM\n                    (BYODKIM).</p>\n            </li>\n            <li>\n                <p>Change from using no DKIM authentication to using Easy DKIM.</p>\n            </li>\n            <li>\n                <p>Change from using no DKIM authentication to using BYODKIM.</p>\n            </li>\n            <li>\n                <p>Change from using Easy DKIM to using BYODKIM.</p>\n            </li>\n            <li>\n                <p>Change from using BYODKIM to using Easy DKIM.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Used to configure or change the DKIM authentication settings for an email domain\n            identity. You can use this operation to do any of the following:</p>\n        <ul>\n            <li>\n                <p>Update the signing attributes for an identity that uses Bring Your Own DKIM\n                    (BYODKIM).</p>\n            </li>\n            <li>\n                <p>Update the key length that should be used for Easy DKIM.</p>\n            </li>\n            <li>\n                <p>Change from using no DKIM authentication to using Easy DKIM.</p>\n            </li>\n            <li>\n                <p>Change from using no DKIM authentication to using BYODKIM.</p>\n            </li>\n            <li>\n                <p>Change from using Easy DKIM to using BYODKIM.</p>\n            </li>\n            <li>\n                <p>Change from using BYODKIM to using Easy DKIM.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/v1/email/identities/{EmailIdentity}/dkim/signing",
@@ -6821,7 +6857,7 @@
                 "EmailIdentity": {
                     "target": "com.amazonaws.sesv2#Identity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The email identity that you want to configure DKIM for.</p>",
+                        "smithy.api#documentation": "<p>The email identity.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6829,14 +6865,14 @@
                 "SigningAttributesOrigin": {
                     "target": "com.amazonaws.sesv2#DkimSigningAttributesOrigin",
                     "traits": {
-                        "smithy.api#documentation": "<p>The method that you want to use to configure DKIM for the identity. There are two\n            possible values:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>AWS_SES</code> – Configure DKIM for the identity by using <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html\">Easy\n                        DKIM</a>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>EXTERNAL</code> – Configure DKIM for the identity by using Bring\n                    Your Own DKIM (BYODKIM).</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The method to use to configure DKIM for the identity. There are the following possible\n            values:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>AWS_SES</code> – Configure DKIM for the identity by using <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html\">Easy\n                        DKIM</a>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>EXTERNAL</code> – Configure DKIM for the identity by using Bring\n                    Your Own DKIM (BYODKIM).</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "SigningAttributes": {
                     "target": "com.amazonaws.sesv2#DkimSigningAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that contains information about the private key and selector that you want\n            to use to configure DKIM for the identity. This object is only required if you want to\n            configure Bring Your Own DKIM (BYODKIM) for the identity.</p>"
+                        "smithy.api#documentation": "<p>An object that contains information about the private key and selector that you want\n            to use to configure DKIM for the identity for Bring Your Own DKIM (BYODKIM) for the identity, or,\n            configures the key length to be used for\n            <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html\">Easy DKIM</a>.</p>"
                     }
                 }
             },
@@ -6898,7 +6934,7 @@
                 "EmailIdentity": {
                     "target": "com.amazonaws.sesv2#Identity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The email identity that you want to configure bounce and complaint feedback forwarding\n            for.</p>",
+                        "smithy.api#documentation": "<p>The email identity.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6955,7 +6991,7 @@
                 "EmailIdentity": {
                     "target": "com.amazonaws.sesv2#Identity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The verified email identity that you want to set up the custom MAIL FROM domain\n            for.</p>",
+                        "smithy.api#documentation": "<p>The verified email identity.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6969,7 +7005,7 @@
                 "BehaviorOnMxFailure": {
                     "target": "com.amazonaws.sesv2#BehaviorOnMxFailure",
                     "traits": {
-                        "smithy.api#documentation": "<p>The action that you want to take if the required MX record isn't found when you send\n            an email. When you set this value to <code>UseDefaultValue</code>, the mail is sent\n            using <i>amazonses.com</i> as the MAIL FROM domain. When you set this\n            value to <code>RejectMessage</code>, the Amazon SES API v2 returns a\n                <code>MailFromDomainNotVerified</code> error, and doesn't attempt to deliver the\n            email.</p>\n        <p>These behaviors are taken when the custom MAIL FROM domain configuration is in the\n                <code>Pending</code>, <code>Failed</code>, and <code>TemporaryFailure</code>\n            states.</p>"
+                        "smithy.api#documentation": "<p>The action to take if the required MX record isn't found when you send an email. When\n            you set this value to <code>UseDefaultValue</code>, the mail is sent using\n                <i>amazonses.com</i> as the MAIL FROM domain. When you set this value\n            to <code>RejectMessage</code>, the Amazon SES API v2 returns a\n                <code>MailFromDomainNotVerified</code> error, and doesn't attempt to deliver the\n            email.</p>\n        <p>These behaviors are taken when the custom MAIL FROM domain configuration is in the\n                <code>Pending</code>, <code>Failed</code>, and <code>TemporaryFailure</code>\n            states.</p>"
                     }
                 }
             },
@@ -7128,7 +7164,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Enable or disable collection of reputation metrics for emails that you send using this\n            configuration set in the current AWS Region. </p>"
+                "smithy.api#documentation": "<p>Enable or disable collection of reputation metrics for emails that you send using this\n            configuration set in the current Amazon Web Services Region. </p>"
             }
         },
         "com.amazonaws.sesv2#ReviewDetails": {
@@ -7240,7 +7276,7 @@
                 "FromEmailAddress": {
                     "target": "com.amazonaws.sesv2#EmailAddress",
                     "traits": {
-                        "smithy.api#documentation": "<p>The email address that you want to use as the \"From\" address for the email. The\n            address that you specify has to be verified.</p>"
+                        "smithy.api#documentation": "<p>The email address to use as the \"From\" address for the email. The\n            address that you specify has to be verified.</p>"
                     }
                 },
                 "FromEmailAddressIdentityArn": {
@@ -7290,7 +7326,7 @@
                 "ConfigurationSetName": {
                     "target": "com.amazonaws.sesv2#ConfigurationSetName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the configuration set that you want to use when sending the email.</p>"
+                        "smithy.api#documentation": "<p>The name of the configuration set to use when sending the email.</p>"
                     }
                 }
             },
@@ -7304,6 +7340,7 @@
                 "BulkEmailEntryResults": {
                     "target": "com.amazonaws.sesv2#BulkEmailEntryResultList",
                     "traits": {
+                        "smithy.api#documentation": "<p>One object per intended recipient. Check each response object and retry any messages\n            with a failure status.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7344,7 +7381,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds an email address to the list of identities for your Amazon SES account in the current\n            AWS Region and attempts to verify it. As a result of executing this operation, a\n            customized verification email is sent to the specified address.</p>\n        <p>To use this operation, you must first create a custom verification email template. For\n            more information about creating and using custom verification email templates, see\n                <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-verify-address-custom.html\">Using Custom Verification Email Templates</a> in the <i>Amazon SES Developer\n                Guide</i>.</p>\n        <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#documentation": "<p>Adds an email address to the list of identities for your Amazon SES account in the current\n            Amazon Web Services Region and attempts to verify it. As a result of executing this operation, a\n            customized verification email is sent to the specified address.</p>\n        <p>To use this operation, you must first create a custom verification email template. For\n            more information about creating and using custom verification email templates, see\n                <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-verify-address-custom.html\">Using Custom Verification Email Templates</a> in the <i>Amazon SES Developer\n                Guide</i>.</p>\n        <p>You can execute this operation no more than once per second.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v2/email/outbound-custom-verification-emails",
@@ -7429,7 +7466,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sends an email message. You can use the Amazon SES API v2 to send two types of\n            messages:</p>\n        <ul>\n            <li>\n                <p>\n                  <b>Simple</b> – A standard email message. When\n                    you create this type of message, you specify the sender, the recipient, and the\n                    message body, and Amazon SES assembles the message for you.</p>\n            </li>\n            <li>\n                <p>\n                  <b>Raw</b> – A raw, MIME-formatted email\n                    message. When you send this type of email, you have to specify all of the\n                    message headers, as well as the message body. You can use this message type to\n                    send messages that contain attachments. The message that you specify has to be a\n                    valid MIME message.</p>\n            </li>\n            <li>\n                <p>\n                  <b>Templated</b> – A message that contains\n                    personalization tags. When you send this type of email, Amazon SES API v2 automatically\n                    replaces the tags with values that you specify.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Sends an email message. You can use the Amazon SES API v2 to send the following types of\n            messages:</p>\n        <ul>\n            <li>\n                <p>\n                  <b>Simple</b> – A standard email message. When\n                    you create this type of message, you specify the sender, the recipient, and the\n                    message body, and Amazon SES assembles the message for you.</p>\n            </li>\n            <li>\n                <p>\n                  <b>Raw</b> – A raw, MIME-formatted email\n                    message. When you send this type of email, you have to specify all of the\n                    message headers, as well as the message body. You can use this message type to\n                    send messages that contain attachments. The message that you specify has to be a\n                    valid MIME message.</p>\n            </li>\n            <li>\n                <p>\n                  <b>Templated</b> – A message that contains\n                    personalization tags. When you send this type of email, Amazon SES API v2 automatically\n                    replaces the tags with values that you specify.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v2/email/outbound-emails",
@@ -7443,7 +7480,7 @@
                 "FromEmailAddress": {
                     "target": "com.amazonaws.sesv2#EmailAddress",
                     "traits": {
-                        "smithy.api#documentation": "<p>The email address that you want to use as the \"From\" address for the email. The\n            address that you specify has to be verified.\n            </p>"
+                        "smithy.api#documentation": "<p>The email address to use as the \"From\" address for the email. The\n            address that you specify has to be verified.\n            </p>"
                     }
                 },
                 "FromEmailAddressIdentityArn": {
@@ -7492,7 +7529,7 @@
                 "ConfigurationSetName": {
                     "target": "com.amazonaws.sesv2#ConfigurationSetName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the configuration set that you want to use when sending the email.</p>"
+                        "smithy.api#documentation": "<p>The name of the configuration set to use when sending the email.</p>"
                     }
                 },
                 "ListManagementOptions": {
@@ -7526,24 +7563,24 @@
                 "Max24HourSend": {
                     "target": "com.amazonaws.sesv2#Max24HourSend",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of emails that you can send in the current AWS Region over a\n            24-hour period. This value is also called your <i>sending\n            quota</i>.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of emails that you can send in the current Amazon Web Services Region over a\n            24-hour period. This value is also called your <i>sending\n            quota</i>.</p>"
                     }
                 },
                 "MaxSendRate": {
                     "target": "com.amazonaws.sesv2#MaxSendRate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of emails that you can send per second in the current AWS Region.\n            This value is also called your <i>maximum sending rate</i> or your\n                <i>maximum TPS (transactions per second) rate</i>.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of emails that you can send per second in the current Amazon Web Services Region.\n            This value is also called your <i>maximum sending rate</i> or your\n                <i>maximum TPS (transactions per second) rate</i>.</p>"
                     }
                 },
                 "SentLast24Hours": {
                     "target": "com.amazonaws.sesv2#SentLast24Hours",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of emails sent from your Amazon SES account in the current AWS Region over the\n            past 24 hours.</p>"
+                        "smithy.api#documentation": "<p>The number of emails sent from your Amazon SES account in the current Amazon Web Services Region over the\n            past 24 hours.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that contains information about the per-day and per-second sending limits\n            for your Amazon SES account in the current AWS Region.</p>"
+                "smithy.api#documentation": "<p>An object that contains information about the per-day and per-second sending limits\n            for your Amazon SES account in the current Amazon Web Services Region.</p>"
             }
         },
         "com.amazonaws.sesv2#SendingOptions": {
@@ -7557,7 +7594,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Used to enable or disable email sending for messages that use this configuration set\n            in the current AWS Region.</p>"
+                "smithy.api#documentation": "<p>Used to enable or disable email sending for messages that use this configuration set\n            in the current Amazon Web Services Region.</p>"
             }
         },
         "com.amazonaws.sesv2#SendingPausedException": {
@@ -7576,7 +7613,7 @@
         "com.amazonaws.sesv2#SendingPoolName": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The name of the dedicated IP pool that you want to associate with the configuration\n            set.</p>"
+                "smithy.api#documentation": "<p>The name of the dedicated IP pool to associate with the configuration set.</p>"
             }
         },
         "com.amazonaws.sesv2#SentLast24Hours": {
@@ -7842,7 +7879,7 @@
                     "name": "ses"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<fullname>Amazon SES API v2</fullname>\n        <p>Welcome to the Amazon SES API v2 Reference. This guide provides information about the Amazon SES API v2,\n            including supported operations, data types, parameters, and schemas.</p>\n        <p>\n            <a href=\"https://aws.amazon.com/pinpoint\">Amazon SES</a> is an AWS service that\n            you can use to send email messages to your customers.</p>\n        <p>If you're new to Amazon SES API v2, you might find it helpful to also review the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/\">Amazon Simple Email Service Developer\n                Guide</a>. The <i>Amazon SES Developer Guide</i> provides information\n            and code samples that demonstrate how to use Amazon SES API v2 features programmatically.</p>\n        <p>The Amazon SES API v2 is available in several AWS Regions and it provides an endpoint for each\n            of these Regions. For a list of all the Regions and endpoints where the API is currently\n            available, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#ses_region\">AWS Service Endpoints</a> in the <i>Amazon Web Services General Reference</i>. To\n            learn more about AWS Regions, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande-manage.html\">Managing AWS Regions</a> in the\n                <i>Amazon Web Services General Reference</i>.</p>\n        <p>In each Region, AWS maintains multiple Availability Zones. These Availability Zones\n            are physically isolated from each other, but are united by private, low-latency,\n            high-throughput, and highly redundant network connections. These Availability Zones\n            enable us to provide very high levels of availability and redundancy, while also\n            minimizing latency. To learn more about the number of Availability Zones that are\n            available in each Region, see <a href=\"http://aws.amazon.com/about-aws/global-infrastructure/\">AWS Global Infrastructure</a>.</p>",
+                "smithy.api#documentation": "<fullname>Amazon SES API v2</fullname>\n        \n        <p>\n            <a href=\"http://aws.amazon.com/ses\">Amazon SES</a> is an Amazon Web Services service that\n            you can use to send email messages to your customers.</p>\n        <p>If you're new to Amazon SES API v2, you might find it helpful to review the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/\">Amazon Simple Email Service Developer\n                Guide</a>. The <i>Amazon SES Developer Guide</i> provides information\n            and code samples that demonstrate how to use Amazon SES API v2 features programmatically.</p>",
                 "smithy.api#title": "Amazon Simple Email Service"
             }
         },
@@ -7852,7 +7889,7 @@
                 "TopicArn": {
                     "target": "com.amazonaws.sesv2#AmazonResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon SNS topic that you want to publish email\n            events to. For more information about Amazon SNS topics, see the <a href=\"https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html\">Amazon SNS Developer\n                Guide</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon SNS topic to publish email events to. For\n            more information about Amazon SNS topics, see the <a href=\"https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html\">Amazon SNS Developer Guide</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7986,7 +8023,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that contains information about the email address suppression preferences\n            for your account in the current AWS Region.</p>"
+                "smithy.api#documentation": "<p>An object that contains information about the email address suppression preferences\n            for your account in the current Amazon Web Services Region.</p>"
             }
         },
         "com.amazonaws.sesv2#SuppressionListDestination": {
@@ -7995,7 +8032,7 @@
                 "SuppressionListImportAction": {
                     "target": "com.amazonaws.sesv2#SuppressionListImportAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of action that you want to perform on the address. Acceptable values:</p>\n        <ul>\n            <li>\n                <p>PUT: add the addresses to the suppression list. If the record already exists,\n                    it will override it with the new value.</p>\n            </li>\n            <li>\n                <p>DELETE: remove the addresses from the suppression list.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The type of action to perform on the address. The following are possible values:</p>\n        <ul>\n            <li>\n                <p>PUT: add the addresses to the suppression list. If the record already exists,\n                    it will override it with the new value.</p>\n            </li>\n            <li>\n                <p>DELETE: remove the addresses from the suppression list.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -8007,7 +8044,7 @@
         "com.amazonaws.sesv2#SuppressionListImportAction": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The type of action that you want to perform on the address. Acceptable values:</p>\n        <ul>\n            <li>\n                <p>PUT: add the addresses to the suppression list.</p>\n            </li>\n            <li>\n                <p>DELETE: remove the address from the suppression list.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>The type of action to perform on the address. The following are possible values:</p>\n        <ul>\n            <li>\n                <p>PUT: add the addresses to the suppression list.</p>\n            </li>\n            <li>\n                <p>DELETE: remove the address from the suppression list.</p>\n            </li>\n         </ul>",
                 "smithy.api#enum": [
                     {
                         "value": "DELETE",
@@ -8075,7 +8112,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that defines the tags that are associated with a resource.\n                A <i>tag</i> is a label that you optionally define and associate with\n            a resource. Tags can help you categorize and manage resources in different ways, such as\n            by purpose, owner, environment, or other criteria. A resource can have as many as 50\n            tags.</p>\n        <p>Each tag consists of a required <i>tag key</i> and an\n                associated <i>tag value</i>, both of which you define. A tag key is a\n            general label that acts as a category for a more specific tag value. A tag value acts as\n            a descriptor within a tag key. A tag key can contain as many as 128 characters. A tag\n            value can contain as many as 256 characters. The characters can be Unicode letters,\n            digits, white space, or one of the following symbols: _ . : / = + -. The following\n            additional restrictions apply to tags:</p>\n        <ul>\n            <li>\n                <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n                <p>For each associated resource, each tag key must be unique and it can have only\n                    one value.</p>\n            </li>\n            <li>\n                <p>The <code>aws:</code> prefix is reserved for use by AWS; you can’t use it in\n                    any tag keys or values that you define. In addition, you can't edit or remove\n                    tag keys or values that use this prefix. Tags that use this prefix don’t count\n                    against the limit of 50 tags per resource.</p>\n            </li>\n            <li>\n                <p>You can associate tags with public or shared resources, but the tags are\n                    available only for your AWS account, not any other accounts that share the\n                    resource. In addition, the tags are available only for resources that are\n                    located in the specified AWS Region for your AWS account.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>An object that defines the tags that are associated with a resource.\n                A <i>tag</i> is a label that you optionally define and associate with\n            a resource. Tags can help you categorize and manage resources in different ways, such as\n            by purpose, owner, environment, or other criteria. A resource can have as many as 50\n            tags.</p>\n        <p>Each tag consists of a required <i>tag key</i> and an\n                associated <i>tag value</i>, both of which you define. A tag key is a\n            general label that acts as a category for a more specific tag value. A tag value acts as\n            a descriptor within a tag key. A tag key can contain as many as 128 characters. A tag\n            value can contain as many as 256 characters. The characters can be Unicode letters,\n            digits, white space, or one of the following symbols: _ . : / = + -. The following\n            additional restrictions apply to tags:</p>\n        <ul>\n            <li>\n                <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n                <p>For each associated resource, each tag key must be unique and it can have only\n                    one value.</p>\n            </li>\n            <li>\n                <p>The <code>aws:</code> prefix is reserved for use by Amazon Web Services; you can’t use it in\n                    any tag keys or values that you define. In addition, you can't edit or remove\n                    tag keys or values that use this prefix. Tags that use this prefix don’t count\n                    against the limit of 50 tags per resource.</p>\n            </li>\n            <li>\n                <p>You can associate tags with public or shared resources, but the tags are\n                    available only for your Amazon Web Services account, not any other accounts that share the\n                    resource. In addition, the tags are available only for resources that are\n                    located in the specified Amazon Web Services Region for your Amazon Web Services account.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.sesv2#TagKey": {
@@ -8216,7 +8253,7 @@
                 "TemplateName": {
                     "target": "com.amazonaws.sesv2#EmailTemplateName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the template that you want to render.</p>",
+                        "smithy.api#documentation": "<p>The name of the template.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -8378,13 +8415,13 @@
                 "CustomRedirectDomain": {
                     "target": "com.amazonaws.sesv2#CustomRedirectDomain",
                     "traits": {
-                        "smithy.api#documentation": "<p>The domain that you want to use for tracking open and click events.</p>",
+                        "smithy.api#documentation": "<p>The domain to use for tracking open and click events.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that defines the tracking options for a configuration set. When you use the\n            Amazon SES API v2 to send an email, it contains an invisible image that's used to track when\n            recipients open your email. If your email contains links, those links are changed\n            slightly in order to track when recipients click them.</p>\n        <p>These images and links include references to a domain operated by AWS. You can\n            optionally configure the Amazon SES to use a domain that you operate for these images and\n            links.</p>"
+                "smithy.api#documentation": "<p>An object that defines the tracking options for a configuration set. When you use the\n            Amazon SES API v2 to send an email, it contains an invisible image that's used to track when\n            recipients open your email. If your email contains links, those links are changed\n            slightly in order to track when recipients click them.</p>\n        <p>These images and links include references to a domain operated by Amazon Web Services. You can\n            optionally configure the Amazon SES to use a domain that you operate for these images and\n            links.</p>"
             }
         },
         "com.amazonaws.sesv2#UnsubscribeAll": {
@@ -8480,7 +8517,7 @@
                 "ConfigurationSetName": {
                     "target": "com.amazonaws.sesv2#ConfigurationSetName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the configuration set that contains the event destination that you want to\n            modify.</p>",
+                        "smithy.api#documentation": "<p>The name of the configuration set that contains the event destination to\n            modify.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -8488,7 +8525,7 @@
                 "EventDestinationName": {
                     "target": "com.amazonaws.sesv2#EventDestinationName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the event destination that you want to modify.</p>",
+                        "smithy.api#documentation": "<p>The name of the event destination.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -8766,7 +8803,7 @@
                 "EmailIdentity": {
                     "target": "com.amazonaws.sesv2#Identity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The email identity for which you want to update policy.</p>",
+                        "smithy.api#documentation": "<p>The email identity.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -8818,7 +8855,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an email template. Email templates enable you to send personalized email to\n            one or more destinations in a single API operation. For more information, see the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html\">Amazon SES\n                Developer Guide</a>.</p>\n        <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#documentation": "<p>Updates an email template. Email templates enable you to send personalized email to\n            one or more destinations in a single API operation. For more information, see the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html\">Amazon SES Developer\n                Guide</a>.</p>\n        <p>You can execute this operation no more than once per second.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/v2/email/templates/{TemplateName}",
@@ -8832,7 +8869,7 @@
                 "TemplateName": {
                     "target": "com.amazonaws.sesv2#EmailTemplateName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the template you want to update.</p>",
+                        "smithy.api#documentation": "<p>The name of the template.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -8931,7 +8968,7 @@
                     "min": 1,
                     "max": 1000
                 },
-                "smithy.api#pattern": "^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\\?([^#]*))?(#(.*))?",
+                "smithy.api#pattern": "^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\\?([^#]*))?(#(.*))?$",
                 "smithy.api#sensitive": {}
             }
         }

@@ -1,0 +1,438 @@
+{
+    "smithy": "1.0",
+    "shapes": {
+        "com.amazonaws.account#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The operation failed because the calling identity doesn't have the minimum required\n            permissions.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.account#Account": {
+            "type": "service",
+            "version": "2021-02-01",
+            "resources": [
+                {
+                    "target": "com.amazonaws.account#AlternateContactResource"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Account",
+                    "arnNamespace": "account",
+                    "cloudFormationName": "Account",
+                    "cloudTrailEventSource": "CLOUDTRAIL_EVENT_SOURCE",
+                    "endpointPrefix": "account"
+                },
+                "aws.auth#sigv4": {
+                    "name": "account"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {},
+                "smithy.api#documentation": "<p>Operations for Amazon Web Services Account Management</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                },
+                "smithy.api#title": "AWS Account"
+            }
+        },
+        "com.amazonaws.account#AccountId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^\\d{12}$"
+            }
+        },
+        "com.amazonaws.account#AlternateContact": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.account#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name associated with this alternate contact.</p>"
+                    }
+                },
+                "Title": {
+                    "target": "com.amazonaws.account#Title",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title associated with this alternate contact.</p>"
+                    }
+                },
+                "EmailAddress": {
+                    "target": "com.amazonaws.account#EmailAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The email address associated with this alternate contact.</p>"
+                    }
+                },
+                "PhoneNumber": {
+                    "target": "com.amazonaws.account#PhoneNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The phone number associated with this alternate contact.</p>"
+                    }
+                },
+                "AlternateContactType": {
+                    "target": "com.amazonaws.account#AlternateContactType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of alternate contact.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains the details of an alternate contact associated with an Amazon Web Services\n            account</p>"
+            }
+        },
+        "com.amazonaws.account#AlternateContactResource": {
+            "type": "resource",
+            "identifiers": {
+                "AlternateContactType": {
+                    "target": "com.amazonaws.account#AlternateContactType"
+                }
+            },
+            "put": {
+                "target": "com.amazonaws.account#PutAlternateContact"
+            },
+            "read": {
+                "target": "com.amazonaws.account#GetAlternateContact"
+            },
+            "delete": {
+                "target": "com.amazonaws.account#DeleteAlternateContact"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "AlternateContact/{AlternateContactType}",
+                    "absolute": false,
+                    "noAccount": false,
+                    "noRegion": false
+                }
+            }
+        },
+        "com.amazonaws.account#AlternateContactType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "BILLING",
+                        "name": "BILLING"
+                    },
+                    {
+                        "value": "OPERATIONS",
+                        "name": "OPERATIONS"
+                    },
+                    {
+                        "value": "SECURITY",
+                        "name": "SECURITY"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.account#DeleteAlternateContact": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.account#DeleteAlternateContactRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.account#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.account#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.account#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.account#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.account#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified alternate contact from an Amazon Web Services account.</p>\n        <p>For complete details about how to use the alternate contact operations, see <a href=\"https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact.html\">Access or\n                updating the alternate contacts</a>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/deleteAlternateContact",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.account#DeleteAlternateContactRequest": {
+            "type": "structure",
+            "members": {
+                "AlternateContactType": {
+                    "target": "com.amazonaws.account#AlternateContactType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies which of the alternate contacts to delete. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.account#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the 12 digit account ID number of the Amazon Web Services account that \n        you want to access or modify with this operation.</p>\n         <p>If you do not specify this parameter, it defaults to the Amazon Web Services account of the \n        identity used to call the operation.</p>\n         <p>To use this parameter, the caller must be an identity in the <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account\">organization's management account</a> or a delegated administrator account, and \n        the specified account ID must be a member account in the same organization. The\n        organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">all features \n        enabled</a>, and the organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html\">trusted access</a> enabled for the \n        Account Management service, and optionally a <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html\">delegated admin</a> account \n        assigned.</p>\n         <note>\n            <p>The management account can't specify its own <code>AccountId</code>; it must call\n            the operation in standalone context by not including the <code>AccountId</code> \n            parameter.</p>\n         </note>\n         <p>To call this operation on an account that is not a member of an organization, then \n        don't specify this parameter, and call the operation using an identity belonging to\n        the account whose contacts you wish to retrieve or modify.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.account#EmailAddress": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "[\\w+=,.-]+@[\\w.-]+\\.[\\w]+",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.account#GetAlternateContact": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.account#GetAlternateContactRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.account#GetAlternateContactResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.account#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.account#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.account#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.account#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.account#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the specified alternate contact attached to an Amazon Web Services account.</p>\n        <p>For complete details about how to use the alternate contact operations, see <a href=\"https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact.html\">Access or\n            updating the alternate contacts</a>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/getAlternateContact",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.account#GetAlternateContactRequest": {
+            "type": "structure",
+            "members": {
+                "AlternateContactType": {
+                    "target": "com.amazonaws.account#AlternateContactType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies which alternate contact you want to retrieve.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.account#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the 12 digit account ID number of the Amazon Web Services account that \n        you want to access or modify with this operation.</p>\n         <p>If you do not specify this parameter, it defaults to the Amazon Web Services account of the \n        identity used to call the operation.</p>\n         <p>To use this parameter, the caller must be an identity in the <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account\">organization's management account</a> or a delegated administrator account, and \n        the specified account ID must be a member account in the same organization. The\n        organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">all features \n        enabled</a>, and the organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html\">trusted access</a> enabled for the \n        Account Management service, and optionally a <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html\">delegated admin</a> account \n        assigned.</p>\n         <note>\n            <p>The management account can't specify its own <code>AccountId</code>; it must call\n            the operation in standalone context by not including the <code>AccountId</code> \n            parameter.</p>\n         </note>\n         <p>To call this operation on an account that is not a member of an organization, then \n        don't specify this parameter, and call the operation using an identity belonging to\n        the account whose contacts you wish to retrieve or modify.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.account#GetAlternateContactResponse": {
+            "type": "structure",
+            "members": {
+                "AlternateContact": {
+                    "target": "com.amazonaws.account#AlternateContact",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains the details for the specified alternate contact.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.account#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The operation failed because of an error internal to Amazon Web Services. Try your operation again\n            later.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.account#Name": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.account#PhoneNumber": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 25
+                },
+                "smithy.api#pattern": "^[\\s0-9()+-]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.account#PutAlternateContact": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.account#PutAlternateContactRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.account#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.account#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.account#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.account#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies the specified alternate contact attached to an Amazon Web Services account.</p>\n        <p>For complete details about how to use the alternate contact operations, see <a href=\"https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact.html\">Access or\n            updating the alternate contacts</a>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/putAlternateContact",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.account#PutAlternateContactRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.account#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a name for the alternate contact.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Title": {
+                    "target": "com.amazonaws.account#Title",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a title for the alternate contact.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EmailAddress": {
+                    "target": "com.amazonaws.account#EmailAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies an email address for the alternate contact. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PhoneNumber": {
+                    "target": "com.amazonaws.account#PhoneNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a phone number for the alternate contact.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AlternateContactType": {
+                    "target": "com.amazonaws.account#AlternateContactType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies which alternate contact you want to create or update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.account#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the 12 digit account ID number of the Amazon Web Services account that \n        you want to access or modify with this operation.</p>\n         <p>If you do not specify this parameter, it defaults to the Amazon Web Services account of the \n        identity used to call the operation.</p>\n         <p>To use this parameter, the caller must be an identity in the <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account\">organization's management account</a> or a delegated administrator account, and \n        the specified account ID must be a member account in the same organization. The\n        organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">all features \n        enabled</a>, and the organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html\">trusted access</a> enabled for the \n        Account Management service, and optionally a <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html\">delegated admin</a> account \n        assigned.</p>\n         <note>\n            <p>The management account can't specify its own <code>AccountId</code>; it must call\n            the operation in standalone context by not including the <code>AccountId</code> \n            parameter.</p>\n         </note>\n         <p>To call this operation on an account that is not a member of an organization, then \n        don't specify this parameter, and call the operation using an identity belonging to\n        the account whose contacts you wish to retrieve or modify.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.account#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The operation failed because it specified a resource that can't be found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.account#Title": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.account#TooManyRequestsException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The operation failed because it was called too frequently and exceeded a throttle\n            limit.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429,
+                "smithy.api#retryable": {
+                    "throttling": true
+                }
+            }
+        },
+        "com.amazonaws.account#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The operation failed because one of the input parameters was invalid.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        }
+    }
+}

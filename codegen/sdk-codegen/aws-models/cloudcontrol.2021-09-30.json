@@ -1,0 +1,1606 @@
+{
+    "smithy": "1.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.cloudcontrol#AlreadyExistsException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudcontrol#ErrorMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "AlreadyExistsException",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The resource with the name requested already exists.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.cloudcontrol#CancelResourceRequest": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudcontrol#CancelResourceRequestInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudcontrol#CancelResourceRequestOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudcontrol#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#RequestTokenNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Cancels the specified resource operation request. For more information, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-manage-requests.html#resource-operations-manage-requests-cancel\">Canceling resource operation requests</a> in the\n        <i>Amazon Web Services Cloud Control API User Guide</i>.</p>\n         <p>Only resource operations requests with a status of <code>PENDING</code> or\n        <code>IN_PROGRESS</code> can be cancelled.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.cloudcontrol#CancelResourceRequestInput": {
+            "type": "structure",
+            "members": {
+                "RequestToken": {
+                    "target": "com.amazonaws.cloudcontrol#RequestToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>RequestToken</code> of the <code>ProgressEvent</code> object returned by the\n      resource operation request.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudcontrol#CancelResourceRequestOutput": {
+            "type": "structure",
+            "members": {
+                "ProgressEvent": {
+                    "target": "com.amazonaws.cloudcontrol#ProgressEvent"
+                }
+            }
+        },
+        "com.amazonaws.cloudcontrol#ClientToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[-A-Za-z0-9+/=]+$"
+            }
+        },
+        "com.amazonaws.cloudcontrol#ClientTokenConflictException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudcontrol#ErrorMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ClientTokenConflictException",
+                    "httpResponseCode": 409
+                },
+                "smithy.api#documentation": "<p>The specified client token has already been used in another resource request.</p>\n         <p>It is best practice for client tokens to be unique for each resource operation request.\n      However, client token expire after 36 hours.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.cloudcontrol#CloudApiService": {
+            "type": "service",
+            "version": "2021-09-30",
+            "operations": [
+                {
+                    "target": "com.amazonaws.cloudcontrol#CancelResourceRequest"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#CreateResource"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#DeleteResource"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#GetResource"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#GetResourceRequestStatus"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#ListResourceRequests"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#ListResources"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#UpdateResource"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "CloudControl",
+                    "arnNamespace": "cloudcontrolapi",
+                    "cloudFormationName": "CloudControl",
+                    "cloudTrailEventSource": "cloudcontrol.amazonaws.com",
+                    "endpointPrefix": "cloudcontrolapi"
+                },
+                "aws.auth#sigv4": {
+                    "name": "cloudcontrolapi"
+                },
+                "aws.protocols#awsJson1_0": {},
+                "smithy.api#documentation": "<p>Use Amazon Web Services Cloud Control API to create, read, update, delete, and list (CRUD-L) your cloud resources that\n      belong to a wide range of services--both Amazon Web Services and third-party.  With the Cloud Control API\n      standardized set of application programming interfaces (APIs), you can perform CRUD-L operations\n      on any supported resources in your Amazon Web Services account. Using Cloud Control API, you won't have to generate code\n      or scripts specific to each individual service responsible for those resources.</p>\n         <p>For more information about Amazon Web Services Cloud Control API, see the <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/what-is-cloudcontrolapi.html\">Amazon Web Services Cloud Control API User\n        Guide</a>.</p>",
+                "smithy.api#title": "AWS Cloud Control API"
+            }
+        },
+        "com.amazonaws.cloudcontrol#ConcurrentModificationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudcontrol#ErrorMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ConcurrentModificationException",
+                    "httpResponseCode": 500
+                },
+                "smithy.api#documentation": "<p>The resource is currently being modified by another operation.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.cloudcontrol#ConcurrentOperationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudcontrol#ErrorMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ConcurrentOperationException",
+                    "httpResponseCode": 409
+                },
+                "smithy.api#documentation": "<p>Another resource operation is currently being performed on this resource.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.cloudcontrol#CreateResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudcontrol#CreateResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudcontrol#CreateResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudcontrol#AlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#ClientTokenConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#ConcurrentOperationException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#GeneralServiceException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#HandlerFailureException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#HandlerInternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#InvalidCredentialsException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#NetworkFailureException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#NotStabilizedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#NotUpdatableException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#PrivateTypeException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#ServiceInternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#ServiceLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#TypeNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#UnsupportedActionException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates the specified resource. For more information, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-create.html\">Creating a\n        resource</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>\n         <p>After you have initiated a resource creation request, you can monitor the progress of your\n      request by calling <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html\">GetResourceRequestStatus</a> using the <code>RequestToken</code> of the\n        <code>ProgressEvent</code> type returned by <code>CreateResource</code>.</p>"
+            }
+        },
+        "com.amazonaws.cloudcontrol#CreateResourceInput": {
+            "type": "structure",
+            "members": {
+                "TypeName": {
+                    "target": "com.amazonaws.cloudcontrol#TypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the resource type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TypeVersionId": {
+                    "target": "com.amazonaws.cloudcontrol#TypeVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For private resource types, the type version to use in this resource operation. If you do not specify a resource version, CloudFormation uses the default version.</p>"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.cloudcontrol#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) for Cloud Control API to use when performing this resource operation. The role specified must have the permissions required for this operation. The necessary permissions for each event handler are defined in the <code>\n               <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-handlers\">handlers</a>\n            </code> section of the <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html\">resource type definition schema</a>.</p>\n         <p>If you do not specify a role, Cloud Control API uses a temporary session created using your Amazon Web Services user credentials.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations.html#resource-operations-permissions\">Specifying credentials</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.cloudcontrol#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier to ensure the idempotency of the resource request. As a best practice, specify this token to ensure idempotency, so that Amazon Web Services Cloud Control API can accurately distinguish between request retries and new resource requests. You might retry a resource request to ensure that it was successfully received.</p>\n         <p>A client token is valid for 36 hours once used. After that, a resource request with the same client token is treated as a new request.</p>\n         <p>If you do not specify a client token, one is generated for inclusion in the request.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations.html#resource-operations-idempotency\">Ensuring resource operation requests are unique</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "DesiredState": {
+                    "target": "com.amazonaws.cloudcontrol#Properties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Structured data format representing the desired state of the resource, consisting of that\n      resource's properties and their desired values. </p>\n         <note>\n            <p>Cloud Control API currently supports JSON as a structured data format.</p>\n         </note>\n    \n         <p>Specify the desired state as one of the following:</p>\n         <ul>\n            <li>\n               <p>A JSON blob</p>\n            </li>\n            <li>\n               <p>A local path containing the desired state in JSON data format</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-create.html#resource-operations-create-desiredstate\">Composing the desired state of the resource</a> in the <i>Amazon Web Services Cloud Control API User\n        Guide</i>.</p>\n         <p>For more information about the properties of a specific resource, refer to the related\n      topic for the resource in the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">Resource and property types reference</a> in the <i>Amazon Web Services\n        CloudFormation Users Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudcontrol#CreateResourceOutput": {
+            "type": "structure",
+            "members": {
+                "ProgressEvent": {
+                    "target": "com.amazonaws.cloudcontrol#ProgressEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the current status of the resource creation request.</p>\n         <p>After you have initiated a resource creation request, you can monitor the progress of your\n      request by calling <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html\">GetResourceRequestStatus</a> using the <code>RequestToken</code> of the\n        <code>ProgressEvent</code> returned by <code>CreateResource</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudcontrol#DeleteResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudcontrol#DeleteResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudcontrol#DeleteResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudcontrol#AlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#ClientTokenConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#ConcurrentOperationException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#GeneralServiceException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#HandlerFailureException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#HandlerInternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#InvalidCredentialsException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#NetworkFailureException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#NotStabilizedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#NotUpdatableException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#PrivateTypeException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#ServiceInternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#ServiceLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#TypeNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#UnsupportedActionException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified resource. For details, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-delete.html\">Deleting a\n        resource</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>\n         <p>After you have initiated a resource deletion request, you can monitor the progress of your\n      request by calling <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html\">GetResourceRequestStatus</a> using the <code>RequestToken</code> of the\n        <code>ProgressEvent</code> returned by <code>DeleteResource</code>.</p>"
+            }
+        },
+        "com.amazonaws.cloudcontrol#DeleteResourceInput": {
+            "type": "structure",
+            "members": {
+                "TypeName": {
+                    "target": "com.amazonaws.cloudcontrol#TypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the resource type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TypeVersionId": {
+                    "target": "com.amazonaws.cloudcontrol#TypeVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For private resource types, the type version to use in this resource operation. If you do not specify a resource version, CloudFormation uses the default version.</p>"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.cloudcontrol#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) for Cloud Control API to use when performing this resource operation. The role specified must have the permissions required for this operation. The necessary permissions for each event handler are defined in the <code>\n               <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-handlers\">handlers</a>\n            </code> section of the <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html\">resource type definition schema</a>.</p>\n         <p>If you do not specify a role, Cloud Control API uses a temporary session created using your Amazon Web Services user credentials.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations.html#resource-operations-permissions\">Specifying credentials</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.cloudcontrol#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier to ensure the idempotency of the resource request. As a best practice, specify this token to ensure idempotency, so that Amazon Web Services Cloud Control API can accurately distinguish between request retries and new resource requests. You might retry a resource request to ensure that it was successfully received.</p>\n         <p>A client token is valid for 36 hours once used. After that, a resource request with the same client token is treated as a new request.</p>\n         <p>If you do not specify a client token, one is generated for inclusion in the request.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations.html#resource-operations-idempotency\">Ensuring resource operation requests are unique</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "Identifier": {
+                    "target": "com.amazonaws.cloudcontrol#Identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the resource.</p>\n         <p>You can specify the primary identifier, or any secondary identifier defined for the resource type in its resource schema. You can only specify one identifier. Primary identifiers can be specified as a string or JSON; secondary identifiers must be specified as JSON.</p>\n         <p>For compound primary identifiers (that is, one that consists of multiple resource properties strung together), to specify the primary identifier as a string, list the property values <i>in the order they are specified</i> in the primary identifier definition, separated by <code>|</code>. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-identifier.html\">Identifying resources</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudcontrol#DeleteResourceOutput": {
+            "type": "structure",
+            "members": {
+                "ProgressEvent": {
+                    "target": "com.amazonaws.cloudcontrol#ProgressEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the current status of the resource deletion request.</p>\n         <p>After you have initiated a resource deletion request, you can monitor the progress of your\n      request by calling <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html\">GetResourceRequestStatus</a> using the <code>RequestToken</code> of the\n        <code>ProgressEvent</code> returned by <code>DeleteResource</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudcontrol#ErrorMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.cloudcontrol#GeneralServiceException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudcontrol#ErrorMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "GeneralServiceException",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The resource handler has returned that the downstream service generated an error that does\n      not map to any other handler error code.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.cloudcontrol#GetResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudcontrol#GetResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudcontrol#GetResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudcontrol#AlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#GeneralServiceException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#HandlerFailureException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#HandlerInternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#InvalidCredentialsException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#NetworkFailureException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#NotStabilizedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#NotUpdatableException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#PrivateTypeException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#ServiceInternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#ServiceLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#TypeNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#UnsupportedActionException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about the current state of the specified resource. For details, see\n        <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-read.html\">Reading a resource's current state</a>.</p>\n         <p>You can use this action to return information about an existing resource in your account\n      and Amazon Web Services Region, whether or not those resources were provisioned using Cloud Control API.</p>"
+            }
+        },
+        "com.amazonaws.cloudcontrol#GetResourceInput": {
+            "type": "structure",
+            "members": {
+                "TypeName": {
+                    "target": "com.amazonaws.cloudcontrol#TypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the resource type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TypeVersionId": {
+                    "target": "com.amazonaws.cloudcontrol#TypeVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For private resource types, the type version to use in this resource operation. If you do not specify a resource version, CloudFormation uses the default version.</p>"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.cloudcontrol#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) for Cloud Control API to use when performing this resource operation. The role specified must have the permissions required for this operation. The necessary permissions for each event handler are defined in the <code>\n               <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-handlers\">handlers</a>\n            </code> section of the <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html\">resource type definition schema</a>.</p>\n         <p>If you do not specify a role, Cloud Control API uses a temporary session created using your Amazon Web Services user credentials.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations.html#resource-operations-permissions\">Specifying credentials</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>"
+                    }
+                },
+                "Identifier": {
+                    "target": "com.amazonaws.cloudcontrol#Identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the resource.</p>\n         <p>You can specify the primary identifier, or any secondary identifier defined for the resource type in its resource schema. You can only specify one identifier. Primary identifiers can be specified as a string or JSON; secondary identifiers must be specified as JSON.</p>\n         <p>For compound primary identifiers (that is, one that consists of multiple resource properties strung together), to specify the primary identifier as a string, list the property values <i>in the order they are specified</i> in the primary identifier definition, separated by <code>|</code>. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-identifier.html\">Identifying resources</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudcontrol#GetResourceOutput": {
+            "type": "structure",
+            "members": {
+                "TypeName": {
+                    "target": "com.amazonaws.cloudcontrol#TypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the resource type.</p>"
+                    }
+                },
+                "ResourceDescription": {
+                    "target": "com.amazonaws.cloudcontrol#ResourceDescription"
+                }
+            }
+        },
+        "com.amazonaws.cloudcontrol#GetResourceRequestStatus": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudcontrol#GetResourceRequestStatusInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudcontrol#GetResourceRequestStatusOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudcontrol#RequestTokenNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the current status of a resource operation request. For more information, see\n        <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-manage-requests.html#resource-operations-manage-requests-track\">Tracking the progress of resource operation requests</a> in the\n        <i>Amazon Web Services Cloud Control API User Guide</i>.</p>",
+                "smithy.waiters#waitable": {
+                    "ResourceRequestSuccess": {
+                        "documentation": "Wait until resource operation request is successful",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "ProgressEvent.OperationStatus",
+                                        "expected": "SUCCESS",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "ProgressEvent.OperationStatus",
+                                        "expected": "FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "ProgressEvent.OperationStatus",
+                                        "expected": "CANCEL_COMPLETE",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 5
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudcontrol#GetResourceRequestStatusInput": {
+            "type": "structure",
+            "members": {
+                "RequestToken": {
+                    "target": "com.amazonaws.cloudcontrol#RequestToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique token used to track the progress of the resource operation request.</p>\n         <p>Request tokens are included in the <code>ProgressEvent</code> type returned by a resource\n      operation request.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudcontrol#GetResourceRequestStatusOutput": {
+            "type": "structure",
+            "members": {
+                "ProgressEvent": {
+                    "target": "com.amazonaws.cloudcontrol#ProgressEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the current status of the resource operation request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudcontrol#HandlerErrorCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "NotUpdatable",
+                        "name": "NOT_UPDATABLE"
+                    },
+                    {
+                        "value": "InvalidRequest",
+                        "name": "INVALID_REQUEST"
+                    },
+                    {
+                        "value": "AccessDenied",
+                        "name": "ACCESS_DENIED"
+                    },
+                    {
+                        "value": "InvalidCredentials",
+                        "name": "INVALID_CREDENTIALS"
+                    },
+                    {
+                        "value": "AlreadyExists",
+                        "name": "ALREADY_EXISTS"
+                    },
+                    {
+                        "value": "NotFound",
+                        "name": "NOT_FOUND"
+                    },
+                    {
+                        "value": "ResourceConflict",
+                        "name": "RESOURCE_CONFLICT"
+                    },
+                    {
+                        "value": "Throttling",
+                        "name": "THROTTLING"
+                    },
+                    {
+                        "value": "ServiceLimitExceeded",
+                        "name": "SERVICE_LIMIT_EXCEEDED"
+                    },
+                    {
+                        "value": "NotStabilized",
+                        "name": "NOT_STABILIZED"
+                    },
+                    {
+                        "value": "GeneralServiceException",
+                        "name": "GENERAL_SERVICE_EXCEPTION"
+                    },
+                    {
+                        "value": "ServiceInternalError",
+                        "name": "SERVICE_INTERNAL_ERROR"
+                    },
+                    {
+                        "value": "ServiceTimeout",
+                        "name": "SERVICE_TIMEOUT"
+                    },
+                    {
+                        "value": "NetworkFailure",
+                        "name": "NETWORK_FAILURE"
+                    },
+                    {
+                        "value": "InternalFailure",
+                        "name": "INTERNAL_FAILURE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.cloudcontrol#HandlerFailureException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudcontrol#ErrorMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "HandlerFailureException",
+                    "httpResponseCode": 502
+                },
+                "smithy.api#documentation": "<p>The resource handler has failed without a returning a more specific error code. This can\n      include timeouts.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 502
+            }
+        },
+        "com.amazonaws.cloudcontrol#HandlerInternalFailureException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudcontrol#ErrorMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "HandlerInternalFailureException",
+                    "httpResponseCode": 502
+                },
+                "smithy.api#documentation": "<p>The resource handler has returned that an unexpected error occurred within the resource\n      handler.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 502
+            }
+        },
+        "com.amazonaws.cloudcontrol#HandlerNextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^.+$"
+            }
+        },
+        "com.amazonaws.cloudcontrol#Identifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^.+$"
+            }
+        },
+        "com.amazonaws.cloudcontrol#InvalidCredentialsException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudcontrol#ErrorMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidCredentialsException",
+                    "httpResponseCode": 401
+                },
+                "smithy.api#documentation": "<p>The resource handler has returned that the credentials provided by the user are\n      invalid.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 401
+            }
+        },
+        "com.amazonaws.cloudcontrol#InvalidRequestException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudcontrol#ErrorMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidRequestException",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The resource handler has returned that invalid input from the user has generated a generic\n      exception.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.cloudcontrol#ListResourceRequests": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudcontrol#ListResourceRequestsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudcontrol#ListResourceRequestsOutput"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns existing resource operation requests. This includes requests of all status types.\n      For more information, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-manage-requests.html#resource-operations-manage-requests-list\">Listing active resource operation requests</a> in the\n        <i>Amazon Web Services Cloud Control API User Guide</i>.</p>\n         <note>\n            <p>Resource operation requests expire after seven days.</p>\n         </note>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.cloudcontrol#ListResourceRequestsInput": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.cloudcontrol#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to be returned with a single call. If the number of\n      available results exceeds this maximum, the response includes a <code>NextToken</code> value\n      that you can assign to the <code>NextToken</code> request parameter to get the next set of\n      results.</p>\n         <p>The default is <code>20</code>.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cloudcontrol#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the previous paginated request didn't return all of the remaining results, the response object's <code>NextToken</code> parameter value is set to a token. To retrieve the next set of results, call this action again and assign that token to the request object's <code>NextToken</code> parameter. If there are no remaining results, the previous response object's <code>NextToken</code> parameter is set to <code>null</code>.</p>"
+                    }
+                },
+                "ResourceRequestStatusFilter": {
+                    "target": "com.amazonaws.cloudcontrol#ResourceRequestStatusFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter criteria to apply to the requests returned.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudcontrol#ListResourceRequestsOutput": {
+            "type": "structure",
+            "members": {
+                "ResourceRequestStatusSummaries": {
+                    "target": "com.amazonaws.cloudcontrol#ResourceRequestStatusSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The requests that match the specified filter criteria.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cloudcontrol#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the request doesn't return all of the remaining results, <code>NextToken</code> is set to a token. To retrieve the next set of results, call <code>ListResources</code> again and assign that token to the request object's <code>NextToken</code> parameter. If the request returns all results, <code>NextToken</code> is set to null.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudcontrol#ListResources": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudcontrol#ListResourcesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudcontrol#ListResourcesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudcontrol#AlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#GeneralServiceException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#HandlerFailureException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#HandlerInternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#InvalidCredentialsException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#NetworkFailureException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#NotStabilizedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#NotUpdatableException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#PrivateTypeException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#ServiceInternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#ServiceLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#TypeNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#UnsupportedActionException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about the specified resources. For more information, see <a href=\"cloudcontrolapi/latest/userguide/resource-operations-list.html\">Discovering\n        resources</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>\n         <p>You can use this action to return information about existing resources in your account and\n      Amazon Web Services Region, whether or not those resources were provisioned using Cloud Control API.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.cloudcontrol#ListResourcesInput": {
+            "type": "structure",
+            "members": {
+                "TypeName": {
+                    "target": "com.amazonaws.cloudcontrol#TypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the resource type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TypeVersionId": {
+                    "target": "com.amazonaws.cloudcontrol#TypeVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For private resource types, the type version to use in this resource operation. If you do not specify a resource version, CloudFormation uses the default version.</p>"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.cloudcontrol#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) for Cloud Control API to use when performing this resource operation. The role specified must have the permissions required for this operation. The necessary permissions for each event handler are defined in the <code>\n               <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-handlers\">handlers</a>\n            </code> section of the <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html\">resource type definition schema</a>.</p>\n         <p>If you do not specify a role, Cloud Control API uses a temporary session created using your Amazon Web Services user credentials.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations.html#resource-operations-permissions\">Specifying credentials</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cloudcontrol#HandlerNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the previous paginated request didn't return all of the remaining results, the response object's <code>NextToken</code> parameter value is set to a token. To retrieve the next set of results, call this action again and assign that token to the request object's <code>NextToken</code> parameter. If there are no remaining results, the previous response object's <code>NextToken</code> parameter is set to <code>null</code>.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.cloudcontrol#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to be returned with a single call. If the number of\n      available results exceeds this maximum, the response includes a <code>NextToken</code> value\n      that you can assign to the <code>NextToken</code> request parameter to get the next set of\n      results.</p>\n         <p>The default is <code>20</code>.</p>"
+                    }
+                },
+                "ResourceModel": {
+                    "target": "com.amazonaws.cloudcontrol#Properties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource model to use to select the resources to return.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudcontrol#ListResourcesOutput": {
+            "type": "structure",
+            "members": {
+                "TypeName": {
+                    "target": "com.amazonaws.cloudcontrol#TypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the resource type.</p>"
+                    }
+                },
+                "ResourceDescriptions": {
+                    "target": "com.amazonaws.cloudcontrol#ResourceDescriptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the specified resources, including primary identifier and resource\n      model.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cloudcontrol#HandlerNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the request doesn't return all of the remaining results, <code>NextToken</code> is set to a token. To retrieve the next set of results, call <code>ListResources</code> again and assign that token to the request object's <code>NextToken</code> parameter. If the request returns all results, <code>NextToken</code> is set to null.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudcontrol#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.cloudcontrol#NetworkFailureException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudcontrol#ErrorMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "NetworkFailureException",
+                    "httpResponseCode": 502
+                },
+                "smithy.api#documentation": "<p>The resource handler has returned that the request could not be completed due to\n      networking issues, such as a failure to receive a response from the server.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 502
+            }
+        },
+        "com.amazonaws.cloudcontrol#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[-A-Za-z0-9+/=]+$"
+            }
+        },
+        "com.amazonaws.cloudcontrol#NotStabilizedException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudcontrol#ErrorMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "NotStabilizedException",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The resource handler has returned that the downstream resource failed to complete all of\n      its ready-state checks.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.cloudcontrol#NotUpdatableException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudcontrol#ErrorMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "NotUpdatableException",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>One or more properties included in this resource operation are defined as create-only, and\n      therefore cannot be updated.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.cloudcontrol#Operation": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CREATE",
+                        "name": "CREATE"
+                    },
+                    {
+                        "value": "DELETE",
+                        "name": "DELETE"
+                    },
+                    {
+                        "value": "UPDATE",
+                        "name": "UPDATE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.cloudcontrol#OperationStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PENDING",
+                        "name": "PENDING"
+                    },
+                    {
+                        "value": "IN_PROGRESS",
+                        "name": "IN_PROGRESS"
+                    },
+                    {
+                        "value": "SUCCESS",
+                        "name": "SUCCESS"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    },
+                    {
+                        "value": "CANCEL_IN_PROGRESS",
+                        "name": "CANCEL_IN_PROGRESS"
+                    },
+                    {
+                        "value": "CANCEL_COMPLETE",
+                        "name": "CANCEL_COMPLETE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.cloudcontrol#OperationStatuses": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudcontrol#OperationStatus"
+            }
+        },
+        "com.amazonaws.cloudcontrol#Operations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudcontrol#Operation"
+            }
+        },
+        "com.amazonaws.cloudcontrol#PatchDocument": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 65536
+                },
+                "smithy.api#pattern": "^(.|\\s)*$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.cloudcontrol#PrivateTypeException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudcontrol#ErrorMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "PrivateTypeException",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>Cloud Control API has not received a valid response from the resource handler, due to a\n      configuration error. This includes issues such as the resource handler returning an invalid\n      response, or timing out.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.cloudcontrol#ProgressEvent": {
+            "type": "structure",
+            "members": {
+                "TypeName": {
+                    "target": "com.amazonaws.cloudcontrol#TypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the resource type used in the operation.</p>"
+                    }
+                },
+                "Identifier": {
+                    "target": "com.amazonaws.cloudcontrol#Identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The primary identifier for the resource.</p>\n         <note>\n            <p>In some cases, the resource identifier may be available before the resource operation\n        has reached a status of <code>SUCCESS</code>.</p>\n         </note>"
+                    }
+                },
+                "RequestToken": {
+                    "target": "com.amazonaws.cloudcontrol#RequestToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique token representing this resource operation request.</p>\n         <p>Use the <code>RequestToken</code> with <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html\">GetResourceRequestStatus</a> to return the current status of a resource operation\n      request.</p>"
+                    }
+                },
+                "Operation": {
+                    "target": "com.amazonaws.cloudcontrol#Operation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource operation type.</p>"
+                    }
+                },
+                "OperationStatus": {
+                    "target": "com.amazonaws.cloudcontrol#OperationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the resource operation request.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code>: The resource operation has not yet started.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code>: The resource operation is currently in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCESS</code>: The resource operation has successfully completed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code>: The resource operation has failed. Refer to the error code and\n          status message for more information.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCEL_IN_PROGRESS</code>: The resource operation is in the process of being\n          canceled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCEL_COMPLETE</code>: The resource operation has been canceled.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "EventTime": {
+                    "target": "com.amazonaws.cloudcontrol#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the resource operation request was initiated.</p>"
+                    }
+                },
+                "ResourceModel": {
+                    "target": "com.amazonaws.cloudcontrol#Properties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A JSON string containing the resource model, consisting of each resource property and its\n      current value.</p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.cloudcontrol#StatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Any message explaining the current status.</p>"
+                    }
+                },
+                "ErrorCode": {
+                    "target": "com.amazonaws.cloudcontrol#HandlerErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For requests with a status of <code>FAILED</code>, the associated error code.</p>\n         <p>For error code definitions, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-test-contract-errors.html\">Handler error codes</a> in the <i>CloudFormation Command\n        Line Interface User Guide for Extension Development</i>.</p>"
+                    }
+                },
+                "RetryAfter": {
+                    "target": "com.amazonaws.cloudcontrol#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When to next request the status of this resource operation request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the current status of a resource operation request. For more information, see\n        <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-manage-requests.html\">Managing resource operation requests</a> in the\n        <i>Amazon Web Services Cloud Control API User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.cloudcontrol#Properties": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 16384
+                },
+                "smithy.api#pattern": "^(.|\\s)*$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.cloudcontrol#RequestToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[-A-Za-z0-9+/=]+$"
+            }
+        },
+        "com.amazonaws.cloudcontrol#RequestTokenNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudcontrol#ErrorMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "RequestTokenNotFoundException",
+                    "httpResponseCode": 404
+                },
+                "smithy.api#documentation": "<p>A resource operation with the specified request token cannot be found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.cloudcontrol#ResourceConflictException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudcontrol#ErrorMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ResourceConflictException",
+                    "httpResponseCode": 409
+                },
+                "smithy.api#documentation": "<p>The resource is temporarily unavailable to be acted upon. For example, if the resource is\n      currently undergoing an operation and cannot be acted upon until that operation is\n      finished.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.cloudcontrol#ResourceDescription": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.cloudcontrol#Identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The primary identifier for the resource.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-identifier.html\">Identifying\n        resources</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>"
+                    }
+                },
+                "Properties": {
+                    "target": "com.amazonaws.cloudcontrol#Properties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the resource properties and their current values.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents information about a provisioned resource.</p>"
+            }
+        },
+        "com.amazonaws.cloudcontrol#ResourceDescriptions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudcontrol#ResourceDescription"
+            }
+        },
+        "com.amazonaws.cloudcontrol#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudcontrol#ErrorMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ResourceNotFoundException",
+                    "httpResponseCode": 404
+                },
+                "smithy.api#documentation": "<p>A resource with the specified identifier cannot be found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.cloudcontrol#ResourceRequestStatusFilter": {
+            "type": "structure",
+            "members": {
+                "Operations": {
+                    "target": "com.amazonaws.cloudcontrol#Operations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operation types to include in the filter.</p>"
+                    }
+                },
+                "OperationStatuses": {
+                    "target": "com.amazonaws.cloudcontrol#OperationStatuses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operation statuses to include in the filter.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code>: The operation has been requested, but not yet initiated.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code>: The operation is currently in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCESS</code>: The operation has successfully completed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code>: The operation has failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCEL_IN_PROGRESS</code>: The operation is currently in the process of being\n          canceled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCEL_COMPLETE</code>: The operation has been canceled.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The filter criteria to use in determining the requests returned.</p>"
+            }
+        },
+        "com.amazonaws.cloudcontrol#ResourceRequestStatusSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudcontrol#ProgressEvent"
+            }
+        },
+        "com.amazonaws.cloudcontrol#RoleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:.+:iam::[0-9]{12}:role/.+$"
+            }
+        },
+        "com.amazonaws.cloudcontrol#ServiceInternalErrorException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudcontrol#ErrorMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ServiceInternalErrorException",
+                    "httpResponseCode": 502
+                },
+                "smithy.api#documentation": "<p>The resource handler has returned that the downstream service returned an internal error,\n      typically with a <code>5XX HTTP</code> status code.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 502
+            }
+        },
+        "com.amazonaws.cloudcontrol#ServiceLimitExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudcontrol#ErrorMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ServiceLimitExceededException",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The resource handler has returned that a non-transient resource limit was reached on the\n      service side.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.cloudcontrol#StatusMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^(.|\\s)*$"
+            }
+        },
+        "com.amazonaws.cloudcontrol#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudcontrol#ErrorMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ThrottlingException",
+                    "httpResponseCode": 429
+                },
+                "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.cloudcontrol#Timestamp": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.cloudcontrol#TypeName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 196
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}$"
+            }
+        },
+        "com.amazonaws.cloudcontrol#TypeNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudcontrol#ErrorMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "TypeNotFoundException",
+                    "httpResponseCode": 404
+                },
+                "smithy.api#documentation": "<p>The specified extension does not exist in the CloudFormation registry.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.cloudcontrol#TypeVersionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9-]+$"
+            }
+        },
+        "com.amazonaws.cloudcontrol#UnsupportedActionException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudcontrol#ErrorMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "UnsupportedActionException",
+                    "httpResponseCode": 405
+                },
+                "smithy.api#documentation": "<p>The specified resource does not support this resource operation.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 405
+            }
+        },
+        "com.amazonaws.cloudcontrol#UpdateResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudcontrol#UpdateResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudcontrol#UpdateResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudcontrol#AlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#ClientTokenConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#ConcurrentOperationException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#GeneralServiceException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#HandlerFailureException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#HandlerInternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#InvalidCredentialsException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#NetworkFailureException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#NotStabilizedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#NotUpdatableException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#PrivateTypeException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#ServiceInternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#ServiceLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#TypeNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudcontrol#UnsupportedActionException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the specified property values in the resource.</p>\n         <p>You specify your resource property updates as a list of patch operations contained in a\n      JSON patch document that adheres to the <a href=\"https://datatracker.ietf.org/doc/html/rfc6902\">\n               <i>RFC 6902 - JavaScript Object\n          Notation (JSON) Patch</i>\n            </a> standard.</p>\n         <p>For details on how Cloud Control API performs resource update operations, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-update.html\">Updating a resource</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>\n         <p>After you have initiated a resource update request, you can monitor the progress of your\n      request by calling <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html\">GetResourceRequestStatus</a> using the <code>RequestToken</code> of the\n        <code>ProgressEvent</code> returned by <code>UpdateResource</code>.</p>\n         <p>For more information about the properties of a specific resource, refer to the related\n      topic for the resource in the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">Resource and property types reference</a> in the <i>Amazon Web Services\n        CloudFormation Users Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.cloudcontrol#UpdateResourceInput": {
+            "type": "structure",
+            "members": {
+                "TypeName": {
+                    "target": "com.amazonaws.cloudcontrol#TypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the resource type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TypeVersionId": {
+                    "target": "com.amazonaws.cloudcontrol#TypeVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For private resource types, the type version to use in this resource operation. If you do not specify a resource version, CloudFormation uses the default version.</p>"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.cloudcontrol#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) for Cloud Control API to use when performing this resource operation. The role specified must have the permissions required for this operation. The necessary permissions for each event handler are defined in the <code>\n               <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-handlers\">handlers</a>\n            </code> section of the <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html\">resource type definition schema</a>.</p>\n         <p>If you do not specify a role, Cloud Control API uses a temporary session created using your Amazon Web Services user credentials.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations.html#resource-operations-permissions\">Specifying credentials</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.cloudcontrol#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier to ensure the idempotency of the resource request. As a best practice, specify this token to ensure idempotency, so that Amazon Web Services Cloud Control API can accurately distinguish between request retries and new resource requests. You might retry a resource request to ensure that it was successfully received.</p>\n         <p>A client token is valid for 36 hours once used. After that, a resource request with the same client token is treated as a new request.</p>\n         <p>If you do not specify a client token, one is generated for inclusion in the request.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations.html#resource-operations-idempotency\">Ensuring resource operation requests are unique</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "Identifier": {
+                    "target": "com.amazonaws.cloudcontrol#Identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the resource.</p>\n         <p>You can specify the primary identifier, or any secondary identifier defined for the resource type in its resource schema. You can only specify one identifier. Primary identifiers can be specified as a string or JSON; secondary identifiers must be specified as JSON.</p>\n         <p>For compound primary identifiers (that is, one that consists of multiple resource properties strung together), to specify the primary identifier as a string, list the property values <i>in the order they are specified</i> in the primary identifier definition, separated by <code>|</code>. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-identifier.html\">Identifying resources</a> in the <i>Amazon Web Services Cloud Control API User Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PatchDocument": {
+                    "target": "com.amazonaws.cloudcontrol#PatchDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A JavaScript Object Notation (JSON) document listing the patch operations that represent\n      the updates to apply to the current resource properties. For details, see <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-update.html#resource-operations-update-patch\">Composing the patch document</a> in the <i>Amazon Web Services Cloud Control API User\n      Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudcontrol#UpdateResourceOutput": {
+            "type": "structure",
+            "members": {
+                "ProgressEvent": {
+                    "target": "com.amazonaws.cloudcontrol#ProgressEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the current status of the resource update request.</p>\n         <p>Use the <code>RequestToken</code> of the <code>ProgressEvent</code> with <a href=\"https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html\">GetResourceRequestStatus</a> to return the current status of a resource operation\n      request.</p>"
+                    }
+                }
+            }
+        }
+    }
+}

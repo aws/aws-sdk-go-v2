@@ -46,6 +46,14 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.dataexchange#Action": {
+            "type": "structure",
+            "members": {
+                "ExportRevisionToS3": {
+                    "target": "com.amazonaws.dataexchange#AutoExportRevisionToS3RequestDetails"
+                }
+            }
+        },
         "com.amazonaws.dataexchange#Arn": {
             "type": "string",
             "traits": {
@@ -203,6 +211,44 @@
                         "name": "S3_SNAPSHOT"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.dataexchange#AutoExportRevisionDestinationEntry": {
+            "type": "structure",
+            "members": {
+                "Bucket": {
+                    "target": "com.amazonaws.dataexchange#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 bucket that is the destination for the event action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyPattern": {
+                    "target": "com.amazonaws.dataexchange#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string representing the pattern for generated names of the individual assets in the revision. For more information about key patterns, see <a href=\"https://docs.aws.amazon.com/data-exchange/latest/userguide/jobs.html#revision-export-keypatterns\">Key patterns when exporting revisions</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A revision destination is the Amazon S3 bucket folder destination to where the export will be sent.</p>"
+            }
+        },
+        "com.amazonaws.dataexchange#AutoExportRevisionToS3RequestDetails": {
+            "type": "structure",
+            "members": {
+                "Encryption": {
+                    "target": "com.amazonaws.dataexchange#ExportServerSideEncryption"
+                },
+                "RevisionDestination": {
+                    "target": "com.amazonaws.dataexchange#AutoExportRevisionDestinationEntry",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details of the operation to be performed by the job.</p>"
             }
         },
         "com.amazonaws.dataexchange#CancelJob": {
@@ -453,6 +499,103 @@
                 }
             }
         },
+        "com.amazonaws.dataexchange#CreateEventAction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.dataexchange#CreateEventActionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.dataexchange#CreateEventActionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.dataexchange#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.dataexchange#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.dataexchange#ServiceLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.dataexchange#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.dataexchange#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This operation creates an event action.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/event-actions",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.dataexchange#CreateEventActionRequest": {
+            "type": "structure",
+            "members": {
+                "Action": {
+                    "target": "com.amazonaws.dataexchange#Action",
+                    "traits": {
+                        "smithy.api#documentation": "<p>What occurs after a certain event.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Event": {
+                    "target": "com.amazonaws.dataexchange#Event",
+                    "traits": {
+                        "smithy.api#documentation": "<p>What occurs to start an action.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request body for CreateEventAction.</p>"
+            }
+        },
+        "com.amazonaws.dataexchange#CreateEventActionResponse": {
+            "type": "structure",
+            "members": {
+                "Action": {
+                    "target": "com.amazonaws.dataexchange#Action",
+                    "traits": {
+                        "smithy.api#documentation": "<p>What occurs after a certain event.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.dataexchange#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the event action.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.dataexchange#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the event action was created, in ISO 8601 format.</p>"
+                    }
+                },
+                "Event": {
+                    "target": "com.amazonaws.dataexchange#Event",
+                    "traits": {
+                        "smithy.api#documentation": "<p>What occurs to start an action.</p>"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.dataexchange#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the event action.</p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.dataexchange#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the event action was last updated, in ISO 8601 format.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.dataexchange#CreateJob": {
             "type": "operation",
             "input": {
@@ -694,6 +837,9 @@
                     "target": "com.amazonaws.dataexchange#CreateDataSet"
                 },
                 {
+                    "target": "com.amazonaws.dataexchange#CreateEventAction"
+                },
+                {
                     "target": "com.amazonaws.dataexchange#CreateJob"
                 },
                 {
@@ -706,6 +852,9 @@
                     "target": "com.amazonaws.dataexchange#DeleteDataSet"
                 },
                 {
+                    "target": "com.amazonaws.dataexchange#DeleteEventAction"
+                },
+                {
                     "target": "com.amazonaws.dataexchange#DeleteRevision"
                 },
                 {
@@ -713,6 +862,9 @@
                 },
                 {
                     "target": "com.amazonaws.dataexchange#GetDataSet"
+                },
+                {
+                    "target": "com.amazonaws.dataexchange#GetEventAction"
                 },
                 {
                     "target": "com.amazonaws.dataexchange#GetJob"
@@ -725,6 +877,9 @@
                 },
                 {
                     "target": "com.amazonaws.dataexchange#ListDataSets"
+                },
+                {
+                    "target": "com.amazonaws.dataexchange#ListEventActions"
                 },
                 {
                     "target": "com.amazonaws.dataexchange#ListJobs"
@@ -749,6 +904,9 @@
                 },
                 {
                     "target": "com.amazonaws.dataexchange#UpdateDataSet"
+                },
+                {
+                    "target": "com.amazonaws.dataexchange#UpdateEventAction"
                 },
                 {
                     "target": "com.amazonaws.dataexchange#UpdateRevision"
@@ -956,6 +1114,47 @@
                 }
             }
         },
+        "com.amazonaws.dataexchange#DeleteEventAction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.dataexchange#DeleteEventActionRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.dataexchange#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.dataexchange#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.dataexchange#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.dataexchange#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This operation deletes the event action.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/v1/event-actions/{EventActionId}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.dataexchange#DeleteEventActionRequest": {
+            "type": "structure",
+            "members": {
+                "EventActionId": {
+                    "target": "com.amazonaws.dataexchange#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the event action.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.dataexchange#DeleteRevision": {
             "type": "operation",
             "input": {
@@ -1026,6 +1225,79 @@
                 "ImportAssetsFromS3JobErrorDetails": {
                     "target": "com.amazonaws.dataexchange#ListOfAssetSourceEntry"
                 }
+            }
+        },
+        "com.amazonaws.dataexchange#Event": {
+            "type": "structure",
+            "members": {
+                "RevisionPublished": {
+                    "target": "com.amazonaws.dataexchange#RevisionPublished"
+                }
+            }
+        },
+        "com.amazonaws.dataexchange#EventActionEntry": {
+            "type": "structure",
+            "members": {
+                "Action": {
+                    "target": "com.amazonaws.dataexchange#Action",
+                    "traits": {
+                        "smithy.api#documentation": "<p>What occurs after a certain event.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.dataexchange#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the event action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.dataexchange#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the event action was created, in ISO 8601 format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Event": {
+                    "target": "com.amazonaws.dataexchange#Event",
+                    "traits": {
+                        "smithy.api#documentation": "<p>What occurs to start an action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.dataexchange#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the event action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.dataexchange#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the event action was last updated, in ISO 8601 format.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An event action is an object that defines the relationship between a specific event and an automated action that will be taken on behalf of the customer.</p>"
+            }
+        },
+        "com.amazonaws.dataexchange#ExceptionCause": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "InsufficientS3BucketPolicy",
+                        "name": "InsufficientS3BucketPolicy"
+                    },
+                    {
+                        "value": "S3AccessDenied",
+                        "name": "S3AccessDenied"
+                    }
+                ]
             }
         },
         "com.amazonaws.dataexchange#ExportAssetToSignedUrlRequestDetails": {
@@ -1230,7 +1502,7 @@
                 "KmsKeyArn": {
                     "target": "com.amazonaws.dataexchange#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the the AWS KMS key you want to use to encrypt the Amazon S3 objects. This parameter is required if you choose aws:kms as an encryption type.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS KMS key you want to use to encrypt the Amazon S3 objects. This parameter is required if you choose aws:kms as an encryption type.</p>"
                     }
                 },
                 "Type": {
@@ -1242,7 +1514,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Encryption configuration of the export job. Includes the encryption type as well as the AWS KMS key. The KMS key is only necessary if you chose the KMS encryption type.</p>"
+                "smithy.api#documentation": "<p>Encryption configuration of the export job. Includes the encryption type in addition to the AWS KMS key. The KMS key is only necessary if you chose the KMS encryption. type.</p>"
             }
         },
         "com.amazonaws.dataexchange#GetAsset": {
@@ -1481,6 +1753,91 @@
                     "target": "com.amazonaws.dataexchange#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time that the data set was last updated, in ISO 8601 format.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.dataexchange#GetEventAction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.dataexchange#GetEventActionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.dataexchange#GetEventActionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.dataexchange#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.dataexchange#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.dataexchange#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.dataexchange#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This operation retrieves information about an event action.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/event-actions/{EventActionId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.dataexchange#GetEventActionRequest": {
+            "type": "structure",
+            "members": {
+                "EventActionId": {
+                    "target": "com.amazonaws.dataexchange#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the event action.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.dataexchange#GetEventActionResponse": {
+            "type": "structure",
+            "members": {
+                "Action": {
+                    "target": "com.amazonaws.dataexchange#Action",
+                    "traits": {
+                        "smithy.api#documentation": "<p>What occurs after a certain event.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.dataexchange#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the event action.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.dataexchange#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the event action was created, in ISO 8601 format.</p>"
+                    }
+                },
+                "Event": {
+                    "target": "com.amazonaws.dataexchange#Event",
+                    "traits": {
+                        "smithy.api#documentation": "<p>What occurs to start an action.</p>"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.dataexchange#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the event action.</p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.dataexchange#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the event action was last updated, in ISO 8601 format.</p>"
                     }
                 }
             }
@@ -2008,6 +2365,10 @@
                     {
                         "value": "ASSET",
                         "name": "ASSET"
+                    },
+                    {
+                        "value": "DATA_SET",
+                        "name": "DATA_SET"
                     }
                 ]
             }
@@ -2063,6 +2424,18 @@
                     {
                         "value": "Concurrent in progress jobs to export assets to a signed URL",
                         "name": "Concurrent_in_progress_jobs_to_export_assets_to_a_signed_URL"
+                    },
+                    {
+                        "value": "Concurrent in progress jobs to export revisions to Amazon S3",
+                        "name": "Concurrent_in_progress_jobs_to_export_revisions_to_Amazon_S3"
+                    },
+                    {
+                        "value": "Event actions per account",
+                        "name": "Event_actions_per_account"
+                    },
+                    {
+                        "value": "Auto export event actions per data set",
+                        "name": "Auto_export_event_actions_per_data_set"
                     }
                 ]
             }
@@ -2228,6 +2601,86 @@
                 }
             }
         },
+        "com.amazonaws.dataexchange#ListEventActions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.dataexchange#ListEventActionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.dataexchange#ListEventActionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.dataexchange#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.dataexchange#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.dataexchange#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.dataexchange#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This operation lists your event actions.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/event-actions",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "EventActions",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.dataexchange#ListEventActionsRequest": {
+            "type": "structure",
+            "members": {
+                "EventSourceId": {
+                    "target": "com.amazonaws.dataexchange#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the event source.</p>",
+                        "smithy.api#httpQuery": "eventSourceId"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.dataexchange#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results returned by a single call.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.dataexchange#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token value retrieved from a previous call to access the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.dataexchange#ListEventActionsResponse": {
+            "type": "structure",
+            "members": {
+                "EventActions": {
+                    "target": "com.amazonaws.dataexchange#ListOfEventActionEntry",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event action objects listed by the request.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.dataexchange#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token value retrieved from a previous call to access the next page of results.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.dataexchange#ListJobs": {
             "type": "operation",
             "input": {
@@ -2343,6 +2796,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.dataexchange#DataSetEntry"
+            }
+        },
+        "com.amazonaws.dataexchange#ListOfEventActionEntry": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.dataexchange#EventActionEntry"
             }
         },
         "com.amazonaws.dataexchange#ListOfJobEntry": {
@@ -2652,6 +3111,10 @@
                     {
                         "value": "JOB",
                         "name": "JOB"
+                    },
+                    {
+                        "value": "EVENT_ACTION",
+                        "name": "EVENT_ACTION"
                     }
                 ]
             }
@@ -2781,6 +3244,17 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A revision is a container for one or more assets.</p>"
+            }
+        },
+        "com.amazonaws.dataexchange#RevisionPublished": {
+            "type": "structure",
+            "members": {
+                "DataSetId": {
+                    "target": "com.amazonaws.dataexchange#Id",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
             }
         },
         "com.amazonaws.dataexchange#S3SnapshotAsset": {
@@ -3320,6 +3794,103 @@
                 }
             }
         },
+        "com.amazonaws.dataexchange#UpdateEventAction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.dataexchange#UpdateEventActionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.dataexchange#UpdateEventActionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.dataexchange#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.dataexchange#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.dataexchange#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.dataexchange#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.dataexchange#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This operation updates the event action.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/v1/event-actions/{EventActionId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.dataexchange#UpdateEventActionRequest": {
+            "type": "structure",
+            "members": {
+                "Action": {
+                    "target": "com.amazonaws.dataexchange#Action",
+                    "traits": {
+                        "smithy.api#documentation": "<p>What occurs after a certain event.</p>"
+                    }
+                },
+                "EventActionId": {
+                    "target": "com.amazonaws.dataexchange#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the event action.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request body for UpdateEventAction.</p>"
+            }
+        },
+        "com.amazonaws.dataexchange#UpdateEventActionResponse": {
+            "type": "structure",
+            "members": {
+                "Action": {
+                    "target": "com.amazonaws.dataexchange#Action",
+                    "traits": {
+                        "smithy.api#documentation": "<p>What occurs after a certain event.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.dataexchange#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the event action.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.dataexchange#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the event action was created, in ISO 8601 format.</p>"
+                    }
+                },
+                "Event": {
+                    "target": "com.amazonaws.dataexchange#Event",
+                    "traits": {
+                        "smithy.api#documentation": "<p>What occurs to start an action.</p>"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.dataexchange#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the event action.</p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.dataexchange#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the event action was last updated, in ISO 8601 format.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.dataexchange#UpdateRevision": {
             "type": "operation",
             "input": {
@@ -3454,6 +4025,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The message that informs you about what was invalid about the request.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "ExceptionCause": {
+                    "target": "com.amazonaws.dataexchange#ExceptionCause",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message that informs you about what the exception was.</p>"
                     }
                 }
             },
