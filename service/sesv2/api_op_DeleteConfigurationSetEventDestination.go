@@ -34,13 +34,12 @@ func (c *Client) DeleteConfigurationSetEventDestination(ctx context.Context, par
 // A request to delete an event destination from a configuration set.
 type DeleteConfigurationSetEventDestinationInput struct {
 
-	// The name of the configuration set that contains the event destination that you
-	// want to delete.
+	// The name of the configuration set that contains the event destination to delete.
 	//
 	// This member is required.
 	ConfigurationSetName *string
 
-	// The name of the event destination that you want to delete.
+	// The name of the event destination to delete.
 	//
 	// This member is required.
 	EventDestinationName *string

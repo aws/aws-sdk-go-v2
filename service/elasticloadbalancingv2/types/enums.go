@@ -263,6 +263,7 @@ const (
 	TargetTypeEnumInstance TargetTypeEnum = "instance"
 	TargetTypeEnumIp       TargetTypeEnum = "ip"
 	TargetTypeEnumLambda   TargetTypeEnum = "lambda"
+	TargetTypeEnumAlb      TargetTypeEnum = "alb"
 )
 
 // Values returns all known values for TargetTypeEnum. Note that this can be
@@ -273,5 +274,6 @@ func (TargetTypeEnum) Values() []TargetTypeEnum {
 		"instance",
 		"ip",
 		"lambda",
+		"alb",
 	}
 }

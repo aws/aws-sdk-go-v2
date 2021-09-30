@@ -75,8 +75,8 @@ type CreateComponentInput struct {
 	KmsKeyId *string
 
 	// The operating system (OS) version supported by the component. If the OS
-	// information is available, a prefix match is performed against the parent image
-	// OS version during image recipe creation.
+	// information is available, a prefix match is performed against the base image OS
+	// version during image recipe creation.
 	SupportedOsVersions []string
 
 	// The tags of the component.

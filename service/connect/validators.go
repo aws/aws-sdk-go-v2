@@ -3374,15 +3374,6 @@ func validateOpCreateIntegrationAssociationInput(v *CreateIntegrationAssociation
 	if v.IntegrationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IntegrationArn"))
 	}
-	if v.SourceApplicationUrl == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceApplicationUrl"))
-	}
-	if v.SourceApplicationName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceApplicationName"))
-	}
-	if len(v.SourceType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceType"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

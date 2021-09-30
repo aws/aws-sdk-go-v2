@@ -6,6 +6,37 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
+// Summary information about the DataIntegration association.
+type DataIntegrationAssociationSummary struct {
+
+	// The identifier for teh client that is associated with the DataIntegration
+	// association.
+	ClientId *string
+
+	// The Amazon Resource Name (ARN)of the DataIntegration.
+	DataIntegrationArn *string
+
+	// The Amazon Resource Name (ARN) of the DataIntegration association.
+	DataIntegrationAssociationArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about the DataIntegration.
+type DataIntegrationSummary struct {
+
+	// The Amazon Resource Name (ARN) of the DataIntegration.
+	Arn *string
+
+	// The name of the DataIntegration.
+	Name *string
+
+	// The URI of the data source.
+	SourceURI *string
+
+	noSmithyDocumentSerde
+}
+
 // The event filter.
 type EventFilter struct {
 
@@ -61,6 +92,21 @@ type EventIntegrationAssociation struct {
 
 	// The name of the event integration.
 	EventIntegrationName *string
+
+	noSmithyDocumentSerde
+}
+
+// The name of the data and how often it should be pulled from the source.
+type ScheduleConfiguration struct {
+
+	// The start date for objects to import in the first flow run.
+	FirstExecutionFrom *string
+
+	// The name of the object to pull from the data source.
+	Object *string
+
+	// How often the data should be pulled from data source.
+	ScheduleExpression *string
 
 	noSmithyDocumentSerde
 }

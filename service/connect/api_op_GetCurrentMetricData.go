@@ -60,11 +60,12 @@ type GetCurrentMetricDataInput struct {
 	// (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#in-queue-real-time)
 	// CONTACTS_SCHEDULED Unit: COUNT Name in real-time metrics report: Scheduled
 	// (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#scheduled-real-time)
-	// OLDEST_CONTACT_AGE Unit: SECONDS When you use groupings, Unit says SECONDS but
-	// the Value is returned in MILLISECONDS. For example, if you get a response like
-	// this: { "Metric": { "Name": "OLDEST_CONTACT_AGE", "Unit": "SECONDS" }, "Value":
-	// 24113.0 } The actual OLDEST_CONTACT_AGE is 24 seconds. Name in real-time metrics
-	// report: Oldest
+	// OLDEST_CONTACT_AGE Unit: SECONDS When you use groupings, Unit says SECONDS and
+	// the Value is returned in SECONDS. When you do not use groupings, Unit says
+	// SECONDS but the Value is returned in MILLISECONDS. For example, if you get a
+	// response like this: { "Metric": { "Name": "OLDEST_CONTACT_AGE", "Unit":
+	// "SECONDS" }, "Value": 24113.0 } The actual OLDEST_CONTACT_AGE is 24 seconds.
+	// Name in real-time metrics report: Oldest
 	// (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#oldest-real-time)
 	// SLOTS_ACTIVE Unit: COUNT Name in real-time metrics report: Active
 	// (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#active-real-time)

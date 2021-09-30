@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a use case from an AppIntegration association.
+// Deletes a use case from an integration association.
 func (c *Client) DeleteUseCase(ctx context.Context, params *DeleteUseCaseInput, optFns ...func(*Options)) (*DeleteUseCaseOutput, error) {
 	if params == nil {
 		params = &DeleteUseCaseInput{}
@@ -34,7 +34,7 @@ type DeleteUseCaseInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The identifier for the AppIntegration association.
+	// The identifier for the integration association.
 	//
 	// This member is required.
 	IntegrationAssociationId *string

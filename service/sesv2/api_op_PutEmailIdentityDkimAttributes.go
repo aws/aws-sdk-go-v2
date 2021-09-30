@@ -30,7 +30,7 @@ func (c *Client) PutEmailIdentityDkimAttributes(ctx context.Context, params *Put
 // identity.
 type PutEmailIdentityDkimAttributesInput struct {
 
-	// The email identity that you want to change the DKIM settings for.
+	// The email identity.
 	//
 	// This member is required.
 	EmailIdentity *string

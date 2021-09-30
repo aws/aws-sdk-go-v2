@@ -1245,6 +1245,11 @@ func awsRestjson1_deserializeOpDocumentCreateFunctionOutput(v **CreateFunctionOu
 
 	for key, value := range shape {
 		switch key {
+		case "Architectures":
+			if err := awsRestjson1_deserializeDocumentArchitecturesList(&sv.Architectures, value); err != nil {
+				return err
+			}
+
 		case "CodeSha256":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4191,6 +4196,11 @@ func awsRestjson1_deserializeOpDocumentGetFunctionConfigurationOutput(v **GetFun
 
 	for key, value := range shape {
 		switch key {
+		case "Architectures":
+			if err := awsRestjson1_deserializeDocumentArchitecturesList(&sv.Architectures, value); err != nil {
+				return err
+			}
+
 		case "CodeSha256":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4812,6 +4822,11 @@ func awsRestjson1_deserializeOpDocumentGetLayerVersionOutput(v **GetLayerVersion
 
 	for key, value := range shape {
 		switch key {
+		case "CompatibleArchitectures":
+			if err := awsRestjson1_deserializeDocumentCompatibleArchitectures(&sv.CompatibleArchitectures, value); err != nil {
+				return err
+			}
+
 		case "CompatibleRuntimes":
 			if err := awsRestjson1_deserializeDocumentCompatibleRuntimes(&sv.CompatibleRuntimes, value); err != nil {
 				return err
@@ -5031,6 +5046,11 @@ func awsRestjson1_deserializeOpDocumentGetLayerVersionByArnOutput(v **GetLayerVe
 
 	for key, value := range shape {
 		switch key {
+		case "CompatibleArchitectures":
+			if err := awsRestjson1_deserializeDocumentCompatibleArchitectures(&sv.CompatibleArchitectures, value); err != nil {
+				return err
+			}
+
 		case "CompatibleRuntimes":
 			if err := awsRestjson1_deserializeDocumentCompatibleRuntimes(&sv.CompatibleRuntimes, value); err != nil {
 				return err
@@ -7919,6 +7939,11 @@ func awsRestjson1_deserializeOpDocumentPublishLayerVersionOutput(v **PublishLaye
 
 	for key, value := range shape {
 		switch key {
+		case "CompatibleArchitectures":
+			if err := awsRestjson1_deserializeDocumentCompatibleArchitectures(&sv.CompatibleArchitectures, value); err != nil {
+				return err
+			}
+
 		case "CompatibleRuntimes":
 			if err := awsRestjson1_deserializeDocumentCompatibleRuntimes(&sv.CompatibleRuntimes, value); err != nil {
 				return err
@@ -8147,6 +8172,11 @@ func awsRestjson1_deserializeOpDocumentPublishVersionOutput(v **PublishVersionOu
 
 	for key, value := range shape {
 		switch key {
+		case "Architectures":
+			if err := awsRestjson1_deserializeDocumentArchitecturesList(&sv.Architectures, value); err != nil {
+				return err
+			}
+
 		case "CodeSha256":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10484,6 +10514,11 @@ func awsRestjson1_deserializeOpDocumentUpdateFunctionCodeOutput(v **UpdateFuncti
 
 	for key, value := range shape {
 		switch key {
+		case "Architectures":
+			if err := awsRestjson1_deserializeDocumentArchitecturesList(&sv.Architectures, value); err != nil {
+				return err
+			}
+
 		case "CodeSha256":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10913,6 +10948,11 @@ func awsRestjson1_deserializeOpDocumentUpdateFunctionConfigurationOutput(v **Upd
 
 	for key, value := range shape {
 		switch key {
+		case "Architectures":
+			if err := awsRestjson1_deserializeDocumentArchitecturesList(&sv.Architectures, value); err != nil {
+				return err
+			}
+
 		case "CodeSha256":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13036,6 +13076,42 @@ func awsRestjson1_deserializeDocumentAllowedPublishers(v **types.AllowedPublishe
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentArchitecturesList(v *[]types.Architecture, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Architecture
+	if *v == nil {
+		cv = []types.Architecture{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Architecture
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected Architecture to be of type string, got %T instead", value)
+			}
+			col = types.Architecture(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentCodeSigningConfig(v **types.CodeSigningConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13331,6 +13407,42 @@ func awsRestjson1_deserializeDocumentCodeVerificationFailedException(v **types.C
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCompatibleArchitectures(v *[]types.Architecture, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Architecture
+	if *v == nil {
+		cv = []types.Architecture{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Architecture
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected Architecture to be of type string, got %T instead", value)
+			}
+			col = types.Architecture(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -14577,6 +14689,11 @@ func awsRestjson1_deserializeDocumentFunctionConfiguration(v **types.FunctionCon
 
 	for key, value := range shape {
 		switch key {
+		case "Architectures":
+			if err := awsRestjson1_deserializeDocumentArchitecturesList(&sv.Architectures, value); err != nil {
+				return err
+			}
+
 		case "CodeSha256":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16048,6 +16165,11 @@ func awsRestjson1_deserializeDocumentLayerVersionsListItem(v **types.LayerVersio
 
 	for key, value := range shape {
 		switch key {
+		case "CompatibleArchitectures":
+			if err := awsRestjson1_deserializeDocumentCompatibleArchitectures(&sv.CompatibleArchitectures, value); err != nil {
+				return err
+			}
+
 		case "CompatibleRuntimes":
 			if err := awsRestjson1_deserializeDocumentCompatibleRuntimes(&sv.CompatibleRuntimes, value); err != nil {
 				return err

@@ -32,7 +32,7 @@ func (c *Client) DeleteEmailIdentity(ctx context.Context, params *DeleteEmailIde
 // to send email by completing the verification process for the identity again.
 type DeleteEmailIdentityInput struct {
 
-	// The identity (that is, the email address or domain) that you want to delete.
+	// The identity (that is, the email address or domain) to delete.
 	//
 	// This member is required.
 	EmailIdentity *string

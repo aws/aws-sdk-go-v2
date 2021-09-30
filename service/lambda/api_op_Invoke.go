@@ -101,7 +101,8 @@ type InvokeInput struct {
 	// values and verify that the user or role has permission to invoke the function.
 	InvocationType types.InvocationType
 
-	// Set to Tail to include the execution log in the response.
+	// Set to Tail to include the execution log in the response. Applies to
+	// synchronously invoked functions only.
 	LogType types.LogType
 
 	// The JSON that you want to provide to your Lambda function as input.

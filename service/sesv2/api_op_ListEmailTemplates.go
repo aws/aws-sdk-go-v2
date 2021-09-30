@@ -12,8 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the email templates present in your Amazon SES account in the current AWS
-// Region. You can execute this operation no more than once per second.
+// Lists the email templates present in your Amazon SES account in the current
+// Amazon Web Services Region. You can execute this operation no more than once per
+// second.
 func (c *Client) ListEmailTemplates(ctx context.Context, params *ListEmailTemplatesInput, optFns ...func(*Options)) (*ListEmailTemplatesOutput, error) {
 	if params == nil {
 		params = &ListEmailTemplatesInput{}
@@ -30,8 +31,8 @@ func (c *Client) ListEmailTemplates(ctx context.Context, params *ListEmailTempla
 }
 
 // Represents a request to list the email templates present in your Amazon SES
-// account in the current AWS Region. For more information, see the Amazon SES
-// Developer Guide
+// account in the current Amazon Web Services Region. For more information, see the
+// Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html).
 type ListEmailTemplatesInput struct {
 

@@ -54,6 +54,10 @@ type UpdateFunctionCodeInput struct {
 	// This member is required.
 	FunctionName *string
 
+	// The instruction set architecture that the function supports. Enter a string
+	// array with one of the valid values. The default value is x86_64.
+	Architectures []types.Architecture
+
 	// Set to true to validate the request parameters and access permissions without
 	// modifying the function code.
 	DryRun bool
@@ -89,6 +93,11 @@ type UpdateFunctionCodeInput struct {
 
 // Details about a function's configuration.
 type UpdateFunctionCodeOutput struct {
+
+	// The instruction set architecture that the function supports. Architecture is a
+	// string array with one of the valid values. The default architecture value is
+	// x86_64.
+	Architectures []types.Architecture
 
 	// The SHA256 hash of the function's deployment package.
 	CodeSha256 *string

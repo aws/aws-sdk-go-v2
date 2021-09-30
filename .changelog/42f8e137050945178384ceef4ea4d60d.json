@@ -1,0 +1,19 @@
+{
+    "id": "42f8e137-0509-4517-8384-ceef4ea4d60d",
+    "type": "feature",
+    "description": "API client updated",
+    "modules": [
+        "service/amp",
+        "service/appintegrations",
+        "service/cloudhsmv2",
+        "service/connect",
+        "service/elasticloadbalancingv2",
+        "service/imagebuilder",
+        "service/lambda",
+        "service/pinpoint",
+        "service/sesv2",
+        "service/transfer",
+        "service/voiceid",
+        "service/wisdom"
+    ]
+}

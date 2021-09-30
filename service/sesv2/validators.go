@@ -1743,24 +1743,6 @@ func validateContent(v *types.Content) error {
 	}
 }
 
-func validateDkimSigningAttributes(v *types.DkimSigningAttributes) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DkimSigningAttributes"}
-	if v.DomainSigningSelector == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DomainSigningSelector"))
-	}
-	if v.DomainSigningPrivateKey == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DomainSigningPrivateKey"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateEmailContent(v *types.EmailContent) error {
 	if v == nil {
 		return nil
@@ -2298,11 +2280,6 @@ func validateOpCreateEmailIdentityInput(v *CreateEmailIdentityInput) error {
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.DkimSigningAttributes != nil {
-		if err := validateDkimSigningAttributes(v.DkimSigningAttributes); err != nil {
-			invalidParams.AddNested("DkimSigningAttributes", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3005,11 +2982,6 @@ func validateOpPutEmailIdentityDkimSigningAttributesInput(v *PutEmailIdentityDki
 	}
 	if len(v.SigningAttributesOrigin) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("SigningAttributesOrigin"))
-	}
-	if v.SigningAttributes != nil {
-		if err := validateDkimSigningAttributes(v.SigningAttributes); err != nil {
-			invalidParams.AddNested("SigningAttributes", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

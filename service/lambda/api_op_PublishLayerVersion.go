@@ -43,6 +43,10 @@ type PublishLayerVersionInput struct {
 	// This member is required.
 	LayerName *string
 
+	// A list of compatible instruction set architectures
+	// (https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html).
+	CompatibleArchitectures []types.Architecture
+
 	// A list of compatible function runtimes
 	// (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html). Used for
 	// filtering with ListLayers and ListLayerVersions.
@@ -67,6 +71,10 @@ type PublishLayerVersionInput struct {
 }
 
 type PublishLayerVersionOutput struct {
+
+	// A list of compatible instruction set architectures
+	// (https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html).
+	CompatibleArchitectures []types.Architecture
 
 	// The layer's compatible runtimes.
 	CompatibleRuntimes []types.Runtime

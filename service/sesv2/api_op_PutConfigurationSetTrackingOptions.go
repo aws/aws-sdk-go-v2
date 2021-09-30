@@ -31,13 +31,12 @@ func (c *Client) PutConfigurationSetTrackingOptions(ctx context.Context, params 
 // configuration set.
 type PutConfigurationSetTrackingOptionsInput struct {
 
-	// The name of the configuration set that you want to add a custom tracking domain
-	// to.
+	// The name of the configuration set.
 	//
 	// This member is required.
 	ConfigurationSetName *string
 
-	// The domain that you want to use to track open and click events.
+	// The domain to use to track open and click events.
 	CustomRedirectDomain *string
 
 	noSmithyDocumentSerde

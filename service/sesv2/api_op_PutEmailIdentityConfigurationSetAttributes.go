@@ -29,12 +29,12 @@ func (c *Client) PutEmailIdentityConfigurationSetAttributes(ctx context.Context,
 // A request to associate a configuration set with an email identity.
 type PutEmailIdentityConfigurationSetAttributesInput struct {
 
-	// The email address or domain that you want to associate with a configuration set.
+	// The email address or domain to associate with a configuration set.
 	//
 	// This member is required.
 	EmailIdentity *string
 
-	// The configuration set that you want to associate with an email identity.
+	// The configuration set to associate with an email identity.
 	ConfigurationSetName *string
 
 	noSmithyDocumentSerde

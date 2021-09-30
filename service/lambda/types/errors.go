@@ -145,7 +145,7 @@ func (e *EC2UnexpectedException) ErrorMessage() string {
 func (e *EC2UnexpectedException) ErrorCode() string             { return "EC2UnexpectedException" }
 func (e *EC2UnexpectedException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// An error occured when reading from or writing to a connected file system.
+// An error occurred when reading from or writing to a connected file system.
 type EFSIOException struct {
 	Message *string
 

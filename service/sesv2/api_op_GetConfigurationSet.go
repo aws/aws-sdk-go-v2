@@ -36,8 +36,7 @@ func (c *Client) GetConfigurationSet(ctx context.Context, params *GetConfigurati
 // A request to obtain information about a configuration set.
 type GetConfigurationSetInput struct {
 
-	// The name of the configuration set that you want to obtain more information
-	// about.
+	// The name of the configuration set.
 	//
 	// This member is required.
 	ConfigurationSetName *string

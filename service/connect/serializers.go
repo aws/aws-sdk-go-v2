@@ -4661,6 +4661,10 @@ func awsRestjson1_serializeOpHttpBindingsListIntegrationAssociationsInput(v *Lis
 		}
 	}
 
+	if len(v.IntegrationType) > 0 {
+		encoder.SetQuery("integrationType").String(string(v.IntegrationType))
+	}
+
 	if v.MaxResults != 0 {
 		encoder.SetQuery("maxResults").Integer(v.MaxResults)
 	}
@@ -6027,11 +6031,23 @@ func awsRestjson1_serializeOpDocumentStartOutboundVoiceContactInput(v *StartOutb
 	object := value.Object()
 	defer object.Close()
 
+	if v.AnswerMachineDetectionConfig != nil {
+		ok := object.Key("AnswerMachineDetectionConfig")
+		if err := awsRestjson1_serializeDocumentAnswerMachineDetectionConfig(v.AnswerMachineDetectionConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Attributes != nil {
 		ok := object.Key("Attributes")
 		if err := awsRestjson1_serializeDocumentAttributes(v.Attributes, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.CampaignId != nil {
+		ok := object.Key("CampaignId")
+		ok.String(*v.CampaignId)
 	}
 
 	if v.ClientToken != nil {
@@ -6062,6 +6078,11 @@ func awsRestjson1_serializeOpDocumentStartOutboundVoiceContactInput(v *StartOutb
 	if v.SourcePhoneNumber != nil {
 		ok := object.Key("SourcePhoneNumber")
 		ok.String(*v.SourcePhoneNumber)
+	}
+
+	if len(v.TrafficType) > 0 {
+		ok := object.Key("TrafficType")
+		ok.String(string(v.TrafficType))
 	}
 
 	return nil
@@ -8855,6 +8876,23 @@ func awsRestjson1_serializeOpDocumentUpdateUserSecurityProfilesInput(v *UpdateUs
 		if err := awsRestjson1_serializeDocumentSecurityProfileIds(v.SecurityProfileIds, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAnswerMachineDetectionConfig(v *types.AnswerMachineDetectionConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AwaitAnswerMachinePrompt {
+		ok := object.Key("AwaitAnswerMachinePrompt")
+		ok.Boolean(v.AwaitAnswerMachinePrompt)
+	}
+
+	if v.EnableAnswerMachineDetection {
+		ok := object.Key("EnableAnswerMachineDetection")
+		ok.Boolean(v.EnableAnswerMachineDetection)
 	}
 
 	return nil

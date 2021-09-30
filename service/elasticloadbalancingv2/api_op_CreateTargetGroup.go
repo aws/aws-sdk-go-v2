@@ -55,7 +55,7 @@ type CreateTargetGroupInput struct {
 
 	// Indicates whether health checks are enabled. If the target type is lambda,
 	// health checks are disabled by default but can be enabled. If the target type is
-	// instance or ip, health checks are always enabled and cannot be disabled.
+	// instance, ip, or alb, health checks are always enabled and cannot be disabled.
 	HealthCheckEnabled *bool
 
 	// The approximate amount of time, in seconds, between health checks of an
@@ -139,6 +139,9 @@ type CreateTargetGroupInput struct {
 	//
 	// *
 	// lambda - Register a single Lambda function as a target.
+	//
+	// * alb - Register a
+	// single Application Load Balancer as a target.
 	TargetType types.TargetTypeEnum
 
 	// The number of consecutive health check failures required before considering a

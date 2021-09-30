@@ -83,7 +83,7 @@ type UpdateFunctionConfigurationInput struct {
 
 	// Container image configuration values
 	// (https://docs.aws.amazon.com/lambda/latest/dg/images-parms.html) that override
-	// the values in the container image Dockerfile.
+	// the values in the container image Docker file.
 	ImageConfig *types.ImageConfig
 
 	// The ARN of the Amazon Web Services Key Management Service (KMS) key that's used
@@ -137,6 +137,11 @@ type UpdateFunctionConfigurationInput struct {
 
 // Details about a function's configuration.
 type UpdateFunctionConfigurationOutput struct {
+
+	// The instruction set architecture that the function supports. Architecture is a
+	// string array with one of the valid values. The default architecture value is
+	// x86_64.
+	Architectures []types.Architecture
 
 	// The SHA256 hash of the function's deployment package.
 	CodeSha256 *string

@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the use cases.
+// Lists the use cases for the integration association.
 func (c *Client) ListUseCases(ctx context.Context, params *ListUseCasesInput, optFns ...func(*Options)) (*ListUseCasesOutput, error) {
 	if params == nil {
 		params = &ListUseCasesInput{}
@@ -28,8 +28,8 @@ func (c *Client) ListUseCases(ctx context.Context, params *ListUseCasesInput, op
 	return out, nil
 }
 
-// Provides summary information about the use cases for the specified Amazon
-// Connect AppIntegration association.
+// Provides summary information about the use cases for the specified integration
+// association.
 type ListUseCasesInput struct {
 
 	// The identifier of the Amazon Connect instance. You can find the instanceId in

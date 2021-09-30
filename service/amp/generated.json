@@ -1,15 +1,25 @@
 {
     "dependencies": {
         "github.com/aws/aws-sdk-go-v2": "v1.4.0",
-        "github.com/aws/smithy-go": "v1.4.0"
+        "github.com/aws/smithy-go": "v1.4.0",
+        "github.com/jmespath/go-jmespath": "v0.4.0"
     },
     "files": [
         "api_client.go",
+        "api_op_CreateAlertManagerDefinition.go",
+        "api_op_CreateRuleGroupsNamespace.go",
         "api_op_CreateWorkspace.go",
+        "api_op_DeleteAlertManagerDefinition.go",
+        "api_op_DeleteRuleGroupsNamespace.go",
         "api_op_DeleteWorkspace.go",
+        "api_op_DescribeAlertManagerDefinition.go",
+        "api_op_DescribeRuleGroupsNamespace.go",
         "api_op_DescribeWorkspace.go",
+        "api_op_ListRuleGroupsNamespaces.go",
         "api_op_ListTagsForResource.go",
         "api_op_ListWorkspaces.go",
+        "api_op_PutAlertManagerDefinition.go",
+        "api_op_PutRuleGroupsNamespace.go",
         "api_op_TagResource.go",
         "api_op_UntagResource.go",
         "api_op_UpdateWorkspaceAlias.go",

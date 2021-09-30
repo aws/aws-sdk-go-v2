@@ -12,11 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of all of the email identities that are associated with your AWS
-// account. An identity can be either an email address or a domain. This operation
-// returns identities that are verified as well as those that aren't. This
-// operation returns identities that are associated with Amazon SES and Amazon
-// Pinpoint.
+// Returns a list of all of the email identities that are associated with your
+// Amazon Web Services account. An identity can be either an email address or a
+// domain. This operation returns identities that are verified as well as those
+// that aren't. This operation returns identities that are associated with Amazon
+// SES and Amazon Pinpoint.
 func (c *Client) ListEmailIdentities(ctx context.Context, params *ListEmailIdentitiesInput, optFns ...func(*Options)) (*ListEmailIdentitiesOutput, error) {
 	if params == nil {
 		params = &ListEmailIdentitiesInput{}
@@ -32,10 +32,10 @@ func (c *Client) ListEmailIdentities(ctx context.Context, params *ListEmailIdent
 	return out, nil
 }
 
-// A request to list all of the email identities associated with your AWS account.
-// This list includes identities that you've already verified, identities that are
-// unverified, and identities that were verified in the past, but are no longer
-// verified.
+// A request to list all of the email identities associated with your Amazon Web
+// Services account. This list includes identities that you've already verified,
+// identities that are unverified, and identities that were verified in the past,
+// but are no longer verified.
 type ListEmailIdentitiesInput struct {
 
 	// A token returned from a previous call to ListEmailIdentities to indicate the
@@ -56,8 +56,8 @@ type ListEmailIdentitiesInput struct {
 // whether or not those identities were successfully verified.
 type ListEmailIdentitiesOutput struct {
 
-	// An array that includes all of the email identities associated with your AWS
-	// account.
+	// An array that includes all of the email identities associated with your Amazon
+	// Web Services account.
 	EmailIdentities []types.IdentityInfo
 
 	// A token that indicates that there are additional configuration sets to list. To
