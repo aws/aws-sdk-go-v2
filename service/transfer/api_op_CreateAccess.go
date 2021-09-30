@@ -76,20 +76,19 @@ type CreateAccessInput struct {
 	// specify a target, it is displayed as is. You also must ensure that your Amazon
 	// Web Services Identity and Access Management (IAM) role provides access to paths
 	// in Target. This value can only be set when HomeDirectoryType is set to LOGICAL.
-	// The following is an Entry and Target pair example. [ { "Entry":
-	// "your-personal-report.pdf", "Target":
-	// "/bucket3/customized-reports/${transfer:UserName}.pdf" } ] In most cases, you
-	// can use this value instead of the session policy to lock down your user to the
-	// designated home directory ("chroot"). To do this, you can set Entry to / and set
-	// Target to the HomeDirectory parameter value. The following is an Entry and
-	// Target pair example for chroot. [ { "Entry:": "/", "Target":
-	// "/bucket_name/home/mydirectory" } ] If the target of a logical directory entry
-	// does not exist in Amazon S3 or EFS, the entry is ignored. As a workaround, you
-	// can use the Amazon S3 API or EFS API to create 0 byte objects as place holders
-	// for your directory. If using the CLI, use the s3api or efsapi call instead of s3
-	// or efs so you can use the put-object operation. For example, you use the
-	// following: aws s3api put-object --bucket bucketname --key path/to/folder/. Make
-	// sure that the end of the key name ends in a / for it to be considered a folder.
+	// The following is an Entry and Target pair example. [ { "Entry": "/directory1",
+	// "Target": "/bucket_name/home/mydirectory" } ] In most cases, you can use this
+	// value instead of the session policy to lock down your user to the designated
+	// home directory ("chroot"). To do this, you can set Entry to / and set Target to
+	// the HomeDirectory parameter value. The following is an Entry and Target pair
+	// example for chroot. [ { "Entry:": "/", "Target": "/bucket_name/home/mydirectory"
+	// } ] If the target of a logical directory entry does not exist in Amazon S3 or
+	// EFS, the entry is ignored. As a workaround, you can use the Amazon S3 API or EFS
+	// API to create 0 byte objects as place holders for your directory. If using the
+	// CLI, use the s3api or efsapi call instead of s3 or efs so you can use the
+	// put-object operation. For example, you use the following: aws s3api put-object
+	// --bucket bucketname --key path/to/folder/. Make sure that the end of the key
+	// name ends in a / for it to be considered a folder.
 	HomeDirectoryMappings []types.HomeDirectoryMapEntry
 
 	// The type of landing directory (folder) you want your users' home directory to be

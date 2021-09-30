@@ -65,10 +65,11 @@ type RegisterWorkspaceDirectoryInput struct {
 	Tags []types.Tag
 
 	// Indicates whether your WorkSpace directory is dedicated or shared. To use Bring
-	// Your Own License (BYOL) images, this value must be set to DEDICATED and your AWS
-	// account must be enabled for BYOL. If your account has not been enabled for BYOL,
-	// you will receive an InvalidParameterValuesException error. For more information
-	// about BYOL images, see Bring Your Own Windows Desktop Images
+	// Your Own License (BYOL) images, this value must be set to DEDICATED and your
+	// Amazon Web Services account must be enabled for BYOL. If your account has not
+	// been enabled for BYOL, you will receive an InvalidParameterValuesException
+	// error. For more information about BYOL images, see Bring Your Own Windows
+	// Desktop Images
 	// (https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html).
 	Tenancy types.Tenancy
 

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create an AppIntegration association with an Amazon Connect instance.
+// Creates an AWS resource association with an Amazon Connect instance.
 func (c *Client) CreateIntegrationAssociation(ctx context.Context, params *CreateIntegrationAssociationInput, optFns ...func(*Options)) (*CreateIntegrationAssociationOutput, error) {
 	if params == nil {
 		params = &CreateIntegrationAssociationInput{}
@@ -45,19 +45,16 @@ type CreateIntegrationAssociationInput struct {
 	// This member is required.
 	IntegrationType types.IntegrationType
 
-	// The name of the external application.
-	//
-	// This member is required.
+	// The name of the external application. This field is only required for the EVENT
+	// integration type.
 	SourceApplicationName *string
 
-	// The URL for the external application.
-	//
-	// This member is required.
+	// The URL for the external application. This field is only required for the EVENT
+	// integration type.
 	SourceApplicationUrl *string
 
-	// The type of the data source.
-	//
-	// This member is required.
+	// The type of the data source. This field is only required for the EVENT
+	// integration type.
 	SourceType types.SourceType
 
 	// One or more tags.
@@ -71,7 +68,7 @@ type CreateIntegrationAssociationOutput struct {
 	// The Amazon Resource Name (ARN) for the association.
 	IntegrationAssociationArn *string
 
-	// The identifier for the association.
+	// The identifier for the integration association.
 	IntegrationAssociationId *string
 
 	// Metadata pertaining to the operation's result.

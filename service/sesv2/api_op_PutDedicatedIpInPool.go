@@ -12,8 +12,8 @@ import (
 
 // Move a dedicated IP address to an existing dedicated IP pool. The dedicated IP
 // address that you specify must already exist, and must be associated with your
-// AWS account. The dedicated IP pool you specify must already exist. You can
-// create a new pool by using the CreateDedicatedIpPool operation.
+// Amazon Web Services account. The dedicated IP pool you specify must already
+// exist. You can create a new pool by using the CreateDedicatedIpPool operation.
 func (c *Client) PutDedicatedIpInPool(ctx context.Context, params *PutDedicatedIpInPoolInput, optFns ...func(*Options)) (*PutDedicatedIpInPoolOutput, error) {
 	if params == nil {
 		params = &PutDedicatedIpInPoolInput{}
@@ -39,8 +39,8 @@ type PutDedicatedIpInPoolInput struct {
 	DestinationPoolName *string
 
 	// The IP address that you want to move to the dedicated IP pool. The value you
-	// specify has to be a dedicated IP address that's associated with your AWS
-	// account.
+	// specify has to be a dedicated IP address that's associated with your Amazon Web
+	// Services account.
 	//
 	// This member is required.
 	Ip *string

@@ -34,7 +34,8 @@ func (c *Client) CreateConfigurationSet(ctx context.Context, params *CreateConfi
 // A request to create a configuration set.
 type CreateConfigurationSetInput struct {
 
-	// The name of the configuration set.
+	// The name of the configuration set. The name can contain up to 64 alphanumeric
+	// characters, including letters, numbers, hyphens (-) and underscores (_) only.
 	//
 	// This member is required.
 	ConfigurationSetName *string
@@ -55,8 +56,8 @@ type CreateConfigurationSetInput struct {
 	// your account.
 	SuppressionOptions *types.SuppressionOptions
 
-	// An array of objects that define the tags (keys and values) that you want to
-	// associate with the configuration set.
+	// An array of objects that define the tags (keys and values) to associate with the
+	// configuration set.
 	Tags []types.Tag
 
 	// An object that defines the open and click tracking options for emails that you

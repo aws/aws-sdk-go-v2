@@ -43,7 +43,7 @@ type SendBulkEmailInput struct {
 	// This member is required.
 	DefaultContent *types.BulkEmailContent
 
-	// The name of the configuration set that you want to use when sending the email.
+	// The name of the configuration set to use when sending the email.
 	ConfigurationSetName *string
 
 	// A list of tags, in the form of name/value pairs, to apply to an email that you
@@ -67,8 +67,8 @@ type SendBulkEmailInput struct {
 	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
 	FeedbackForwardingEmailAddressIdentityArn *string
 
-	// The email address that you want to use as the "From" address for the email. The
-	// address that you specify has to be verified.
+	// The email address to use as the "From" address for the email. The address that
+	// you specify has to be verified.
 	FromEmailAddress *string
 
 	// This parameter is used only for sending authorization. It is the ARN of the
@@ -94,7 +94,8 @@ type SendBulkEmailInput struct {
 // The following data is returned in JSON format by the service.
 type SendBulkEmailOutput struct {
 
-	// A list of BulkMailEntry objects.
+	// One object per intended recipient. Check each response object and retry any
+	// messages with a failure status.
 	//
 	// This member is required.
 	BulkEmailEntryResults []types.BulkEmailEntryResult

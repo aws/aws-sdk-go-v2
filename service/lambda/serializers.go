@@ -642,6 +642,13 @@ func awsRestjson1_serializeOpDocumentCreateFunctionInput(v *CreateFunctionInput,
 	object := value.Object()
 	defer object.Close()
 
+	if v.Architectures != nil {
+		ok := object.Key("Architectures")
+		if err := awsRestjson1_serializeDocumentArchitecturesList(v.Architectures, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Code != nil {
 		ok := object.Key("Code")
 		if err := awsRestjson1_serializeDocumentFunctionCode(v.Code, ok); err != nil {
@@ -2739,6 +2746,10 @@ func awsRestjson1_serializeOpHttpBindingsListLayersInput(v *ListLayersInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if len(v.CompatibleArchitecture) > 0 {
+		encoder.SetQuery("CompatibleArchitecture").String(string(v.CompatibleArchitecture))
+	}
+
 	if len(v.CompatibleRuntime) > 0 {
 		encoder.SetQuery("CompatibleRuntime").String(string(v.CompatibleRuntime))
 	}
@@ -2798,6 +2809,10 @@ func (m *awsRestjson1_serializeOpListLayerVersions) HandleSerialize(ctx context.
 func awsRestjson1_serializeOpHttpBindingsListLayerVersionsInput(v *ListLayerVersionsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if len(v.CompatibleArchitecture) > 0 {
+		encoder.SetQuery("CompatibleArchitecture").String(string(v.CompatibleArchitecture))
 	}
 
 	if len(v.CompatibleRuntime) > 0 {
@@ -3086,6 +3101,13 @@ func awsRestjson1_serializeOpHttpBindingsPublishLayerVersionInput(v *PublishLaye
 func awsRestjson1_serializeOpDocumentPublishLayerVersionInput(v *PublishLayerVersionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CompatibleArchitectures != nil {
+		ok := object.Key("CompatibleArchitectures")
+		if err := awsRestjson1_serializeDocumentCompatibleArchitectures(v.CompatibleArchitectures, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.CompatibleRuntimes != nil {
 		ok := object.Key("CompatibleRuntimes")
@@ -4265,6 +4287,13 @@ func awsRestjson1_serializeOpDocumentUpdateFunctionCodeInput(v *UpdateFunctionCo
 	object := value.Object()
 	defer object.Close()
 
+	if v.Architectures != nil {
+		ok := object.Key("Architectures")
+		if err := awsRestjson1_serializeDocumentArchitecturesList(v.Architectures, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DryRun {
 		ok := object.Key("DryRun")
 		ok.Boolean(v.DryRun)
@@ -4622,6 +4651,17 @@ func awsRestjson1_serializeDocumentAllowedPublishers(v *types.AllowedPublishers,
 	return nil
 }
 
+func awsRestjson1_serializeDocumentArchitecturesList(v []types.Architecture, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCodeSigningPolicies(v *types.CodeSigningPolicies, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4631,6 +4671,17 @@ func awsRestjson1_serializeDocumentCodeSigningPolicies(v *types.CodeSigningPolic
 		ok.String(string(v.UntrustedArtifactOnDeployment))
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCompatibleArchitectures(v []types.Architecture, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
 	return nil
 }
 

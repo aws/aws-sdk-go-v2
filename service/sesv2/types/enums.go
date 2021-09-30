@@ -193,6 +193,24 @@ func (DkimSigningAttributesOrigin) Values() []DkimSigningAttributesOrigin {
 	}
 }
 
+type DkimSigningKeyLength string
+
+// Enum values for DkimSigningKeyLength
+const (
+	DkimSigningKeyLengthRsa1024Bit DkimSigningKeyLength = "RSA_1024_BIT"
+	DkimSigningKeyLengthRsa2048Bit DkimSigningKeyLength = "RSA_2048_BIT"
+)
+
+// Values returns all known values for DkimSigningKeyLength. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DkimSigningKeyLength) Values() []DkimSigningKeyLength {
+	return []DkimSigningKeyLength{
+		"RSA_1024_BIT",
+		"RSA_2048_BIT",
+	}
+}
+
 type DkimStatus string
 
 // Enum values for DkimStatus

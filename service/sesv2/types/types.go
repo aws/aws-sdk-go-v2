@@ -224,10 +224,10 @@ type CloudWatchDimensionConfiguration struct {
 	DimensionName *string
 
 	// The location where the Amazon SES API v2 finds the value of a dimension to
-	// publish to Amazon CloudWatch. If you want to use the message tags that you
-	// specify using an X-SES-MESSAGE-TAGS header or a parameter to the SendEmail or
-	// SendRawEmail API, choose messageTag. If you want to use your own email headers,
-	// choose emailHeader. If you want to use link tags, choose linkTags.
+	// publish to Amazon CloudWatch. To use the message tags that you specify using an
+	// X-SES-MESSAGE-TAGS header or a parameter to the SendEmail or SendRawEmail API,
+	// choose messageTag. To use your own email headers, choose emailHeader. To use
+	// link tags, choose linkTags.
 	//
 	// This member is required.
 	DimensionValueSource DimensionValueSource
@@ -273,7 +273,7 @@ type ContactList struct {
 // An object that contains details about the action of a contact list.
 type ContactListDestination struct {
 
-	// >The type of action that you want to perform on the addresses. Acceptable
+	// >The type of action to perform on the addresses. The following are the possible
 	// values:
 	//
 	// * PUT: add the addresses to the contact list. If the record already
@@ -421,8 +421,7 @@ type DeliverabilityTestReport struct {
 // Used to associate a configuration set with a dedicated IP pool.
 type DeliveryOptions struct {
 
-	// The name of the dedicated IP pool that you want to associate with the
-	// configuration set.
+	// The name of the dedicated IP pool to associate with the configuration set.
 	SendingPoolName *string
 
 	// Specifies whether messages that use the configuration set are required to use
@@ -435,7 +434,15 @@ type DeliveryOptions struct {
 	noSmithyDocumentSerde
 }
 
-// An object that describes the recipients for an email.
+// An object that describes the recipients for an email. Amazon SES does not
+// support the SMTPUTF8 extension, as described in RFC6531
+// (https://tools.ietf.org/html/rfc6531). For this reason, the local part of a
+// destination email address (the part of the email address that precedes the @
+// sign) may only contain 7-bit ASCII characters
+// (https://en.wikipedia.org/wiki/Email_address#Local-part). If the domain part of
+// an address (the part after the @ sign) contains non-ASCII characters, they must
+// be encoded using Punycode, as described in RFC3492
+// (https://tools.ietf.org/html/rfc3492.html).
 type Destination struct {
 
 	// An array that contains the email addresses of the "BCC" (blind carbon copy)
@@ -464,7 +471,17 @@ type Destination struct {
 // identity
 type DkimAttributes struct {
 
-	// A string that indicates how DKIM was configured for the identity. There are two
+	// [Easy DKIM] The key length of the DKIM key pair in use.
+	CurrentSigningKeyLength DkimSigningKeyLength
+
+	// [Easy DKIM] The last time a key pair was generated for this identity.
+	LastKeyGenerationTimestamp *time.Time
+
+	// [Easy DKIM] The key length of the future DKIM key pair to be generated. This can
+	// be changed at most once per day.
+	NextSigningKeyLength DkimSigningKeyLength
+
+	// A string that indicates how DKIM was configured for the identity. These are the
 	// possible values:
 	//
 	// * AWS_SES – Indicates that DKIM was configured for the
@@ -519,21 +536,22 @@ type DkimAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// An object that contains information about the tokens used for setting up Bring
-// Your Own DKIM (BYODKIM).
+// An object that contains configuration for Bring Your Own DKIM (BYODKIM), or, for
+// Easy DKIM
 type DkimSigningAttributes struct {
 
-	// A private key that's used to generate a DKIM signature. The private key must use
-	// 1024-bit RSA encryption, and must be encoded using base64 encoding.
-	//
-	// This member is required.
+	// [Bring Your Own DKIM] A private key that's used to generate a DKIM signature.
+	// The private key must use 1024 or 2048-bit RSA encryption, and must be encoded
+	// using base64 encoding.
 	DomainSigningPrivateKey *string
 
-	// A string that's used to identify a public key in the DNS configuration for a
-	// domain.
-	//
-	// This member is required.
+	// [Bring Your Own DKIM] A string that's used to identify a public key in the DNS
+	// configuration for a domain.
 	DomainSigningSelector *string
+
+	// [Easy DKIM] The key length of the future DKIM key pair to be generated. This can
+	// be changed at most once per day.
+	NextSigningKeyLength DkimSigningKeyLength
 
 	noSmithyDocumentSerde
 }
@@ -608,8 +626,8 @@ type DomainDeliverabilityCampaign struct {
 // placement, and other metrics for the domain.
 type DomainDeliverabilityTrackingOption struct {
 
-	// A verified domain that’s associated with your AWS account and currently has an
-	// active Deliverability dashboard subscription.
+	// A verified domain that’s associated with your Amazon Web Services account and
+	// currently has an active Deliverability dashboard subscription.
 	Domain *string
 
 	// An object that contains information about the inbox placement data settings for
@@ -832,15 +850,8 @@ type IdentityInfo struct {
 	// The address or domain of the identity.
 	IdentityName *string
 
-	// The email identity type. The identity type can be one of the following:
-	//
-	// *
-	// EMAIL_ADDRESS – The identity is an email address.
-	//
-	// * DOMAIN – The identity is a
-	// domain.
-	//
-	// * MANAGED_DOMAIN – The identity is a domain that is managed by AWS.
+	// The email identity type. Note: the MANAGED_DOMAIN type is not supported for
+	// email identity types.
 	IdentityType IdentityType
 
 	// Indicates whether or not you can send email from the identity. An identity is an
@@ -901,8 +912,9 @@ type ImportJobSummary struct {
 }
 
 // An object that contains information about the inbox placement data settings for
-// a verified domain that’s associated with your AWS account. This data is
-// available only if you enabled the Deliverability dashboard for the domain.
+// a verified domain that’s associated with your Amazon Web Services account. This
+// data is available only if you enabled the Deliverability dashboard for the
+// domain.
 type InboxPlacementTrackingOption struct {
 
 	// Specifies whether inbox placement data is being tracked for the domain.
@@ -978,13 +990,13 @@ type ListManagementOptions struct {
 // A list of attributes that are associated with a MAIL FROM domain.
 type MailFromAttributes struct {
 
-	// The action that you want to take if the required MX record can't be found when
-	// you send an email. When you set this value to UseDefaultValue, the mail is sent
-	// using amazonses.com as the MAIL FROM domain. When you set this value to
-	// RejectMessage, the Amazon SES API v2 returns a MailFromDomainNotVerified error,
-	// and doesn't attempt to deliver the email. These behaviors are taken when the
-	// custom MAIL FROM domain configuration is in the Pending, Failed, and
-	// TemporaryFailure states.
+	// The action to take if the required MX record can't be found when you send an
+	// email. When you set this value to UseDefaultValue, the mail is sent using
+	// amazonses.com as the MAIL FROM domain. When you set this value to RejectMessage,
+	// the Amazon SES API v2 returns a MailFromDomainNotVerified error, and doesn't
+	// attempt to deliver the email. These behaviors are taken when the custom MAIL
+	// FROM domain configuration is in the Pending, Failed, and TemporaryFailure
+	// states.
 	//
 	// This member is required.
 	BehaviorOnMxFailure BehaviorOnMxFailure
@@ -1092,8 +1104,8 @@ type OverallVolume struct {
 // in the Amazon Pinpoint User Guide.
 type PinpointDestination struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon Pinpoint project that you want to
-	// send email events to.
+	// The Amazon Resource Name (ARN) of the Amazon Pinpoint project to send email
+	// events to.
 	ApplicationArn *string
 
 	noSmithyDocumentSerde
@@ -1182,7 +1194,7 @@ type ReplacementTemplate struct {
 }
 
 // Enable or disable collection of reputation metrics for emails that you send
-// using this configuration set in the current AWS Region.
+// using this configuration set in the current Amazon Web Services Region.
 type ReputationOptions struct {
 
 	// The date and time (in Unix time) when the reputation metrics were last given a
@@ -1223,7 +1235,7 @@ type ReviewDetails struct {
 }
 
 // Used to enable or disable email sending for messages that use this configuration
-// set in the current AWS Region.
+// set in the current Amazon Web Services Region.
 type SendingOptions struct {
 
 	// If true, email sending is enabled for the configuration set. If false, email
@@ -1234,20 +1246,21 @@ type SendingOptions struct {
 }
 
 // An object that contains information about the per-day and per-second sending
-// limits for your Amazon SES account in the current AWS Region.
+// limits for your Amazon SES account in the current Amazon Web Services Region.
 type SendQuota struct {
 
-	// The maximum number of emails that you can send in the current AWS Region over a
-	// 24-hour period. This value is also called your sending quota.
+	// The maximum number of emails that you can send in the current Amazon Web
+	// Services Region over a 24-hour period. This value is also called your sending
+	// quota.
 	Max24HourSend float64
 
-	// The maximum number of emails that you can send per second in the current AWS
-	// Region. This value is also called your maximum sending rate or your maximum TPS
-	// (transactions per second) rate.
+	// The maximum number of emails that you can send per second in the current Amazon
+	// Web Services Region. This value is also called your maximum sending rate or your
+	// maximum TPS (transactions per second) rate.
 	MaxSendRate float64
 
-	// The number of emails sent from your Amazon SES account in the current AWS Region
-	// over the past 24 hours.
+	// The number of emails sent from your Amazon SES account in the current Amazon Web
+	// Services Region over the past 24 hours.
 	SentLast24Hours float64
 
 	noSmithyDocumentSerde
@@ -1257,10 +1270,9 @@ type SendQuota struct {
 // Amazon SNS to send notification when certain email events occur.
 type SnsDestination struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon SNS topic that you want to publish
-	// email events to. For more information about Amazon SNS topics, see the Amazon
-	// SNS Developer Guide
-	// (https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html).
+	// The Amazon Resource Name (ARN) of the Amazon SNS topic to publish email events
+	// to. For more information about Amazon SNS topics, see the Amazon SNS Developer
+	// Guide (https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html).
 	//
 	// This member is required.
 	TopicArn *string
@@ -1333,7 +1345,7 @@ type SuppressedDestinationSummary struct {
 }
 
 // An object that contains information about the email address suppression
-// preferences for your account in the current AWS Region.
+// preferences for your account in the current Amazon Web Services Region.
 type SuppressionAttributes struct {
 
 	// A list that contains the reasons that email addresses will be automatically
@@ -1355,7 +1367,7 @@ type SuppressionAttributes struct {
 // An object that contains details about the action of suppression list.
 type SuppressionListDestination struct {
 
-	// The type of action that you want to perform on the address. Acceptable
+	// The type of action to perform on the address. The following are possible
 	// values:
 	//
 	// * PUT: add the addresses to the suppression list. If the record already
@@ -1407,16 +1419,16 @@ type SuppressionOptions struct {
 // each associated resource, each tag key must be unique and it can have only one
 // value.
 //
-// * The aws: prefix is reserved for use by AWS; you can’t use it in any
-// tag keys or values that you define. In addition, you can't edit or remove tag
-// keys or values that use this prefix. Tags that use this prefix don’t count
-// against the limit of 50 tags per resource.
+// * The aws: prefix is reserved for use by Amazon Web Services; you can’t
+// use it in any tag keys or values that you define. In addition, you can't edit or
+// remove tag keys or values that use this prefix. Tags that use this prefix don’t
+// count against the limit of 50 tags per resource.
 //
-// * You can associate tags with public
-// or shared resources, but the tags are available only for your AWS account, not
-// any other accounts that share the resource. In addition, the tags are available
-// only for resources that are located in the specified AWS Region for your AWS
-// account.
+// * You can associate tags with
+// public or shared resources, but the tags are available only for your Amazon Web
+// Services account, not any other accounts that share the resource. In addition,
+// the tags are available only for resources that are located in the specified
+// Amazon Web Services Region for your Amazon Web Services account.
 type Tag struct {
 
 	// One part of a key-value pair that defines a tag. The maximum length of a tag key
@@ -1518,12 +1530,12 @@ type TopicPreference struct {
 // use the Amazon SES API v2 to send an email, it contains an invisible image
 // that's used to track when recipients open your email. If your email contains
 // links, those links are changed slightly in order to track when recipients click
-// them. These images and links include references to a domain operated by AWS. You
-// can optionally configure the Amazon SES to use a domain that you operate for
-// these images and links.
+// them. These images and links include references to a domain operated by Amazon
+// Web Services. You can optionally configure the Amazon SES to use a domain that
+// you operate for these images and links.
 type TrackingOptions struct {
 
-	// The domain that you want to use for tracking open and click events.
+	// The domain to use for tracking open and click events.
 	//
 	// This member is required.
 	CustomRedirectDomain *string

@@ -37,7 +37,7 @@ func (c *Client) GetEmailIdentityPolicies(ctx context.Context, params *GetEmailI
 // A request to return the policies of an email identity.
 type GetEmailIdentityPoliciesInput struct {
 
-	// The email identity that you want to retrieve policies for.
+	// The email identity.
 	//
 	// This member is required.
 	EmailIdentity *string

@@ -53,7 +53,7 @@ type UpdateConnectionAliasPermissionInput struct {
 	AliasId *string
 
 	// Indicates whether to share or unshare the connection alias with the specified
-	// AWS account.
+	// Amazon Web Services account.
 	//
 	// This member is required.
 	ConnectionAliasPermission *types.ConnectionAliasPermission

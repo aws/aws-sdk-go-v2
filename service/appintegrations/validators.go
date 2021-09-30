@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpCreateDataIntegration struct {
+}
+
+func (*validateOpCreateDataIntegration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateDataIntegration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateDataIntegrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateDataIntegrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateEventIntegration struct {
 }
 
@@ -25,6 +45,26 @@ func (m *validateOpCreateEventIntegration) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateEventIntegrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteDataIntegration struct {
+}
+
+func (*validateOpDeleteDataIntegration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDataIntegration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDataIntegrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDataIntegrationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -50,6 +90,26 @@ func (m *validateOpDeleteEventIntegration) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetDataIntegration struct {
+}
+
+func (*validateOpGetDataIntegration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDataIntegration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDataIntegrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDataIntegrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetEventIntegration struct {
 }
 
@@ -65,6 +125,26 @@ func (m *validateOpGetEventIntegration) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetEventIntegrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListDataIntegrationAssociations struct {
+}
+
+func (*validateOpListDataIntegrationAssociations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDataIntegrationAssociations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDataIntegrationAssociationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDataIntegrationAssociationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -150,6 +230,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateDataIntegration struct {
+}
+
+func (*validateOpUpdateDataIntegration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateDataIntegration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateDataIntegrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateDataIntegrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateEventIntegration struct {
 }
 
@@ -170,16 +270,32 @@ func (m *validateOpUpdateEventIntegration) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpCreateDataIntegrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDataIntegration{}, middleware.After)
+}
+
 func addOpCreateEventIntegrationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateEventIntegration{}, middleware.After)
+}
+
+func addOpDeleteDataIntegrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDataIntegration{}, middleware.After)
 }
 
 func addOpDeleteEventIntegrationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteEventIntegration{}, middleware.After)
 }
 
+func addOpGetDataIntegrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDataIntegration{}, middleware.After)
+}
+
 func addOpGetEventIntegrationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEventIntegration{}, middleware.After)
+}
+
+func addOpListDataIntegrationAssociationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDataIntegrationAssociations{}, middleware.After)
 }
 
 func addOpListEventIntegrationAssociationsValidationMiddleware(stack *middleware.Stack) error {
@@ -198,6 +314,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
+func addOpUpdateDataIntegrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateDataIntegration{}, middleware.After)
+}
+
 func addOpUpdateEventIntegrationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateEventIntegration{}, middleware.After)
 }
@@ -209,6 +329,21 @@ func validateEventFilter(v *types.EventFilter) error {
 	invalidParams := smithy.InvalidParamsError{Context: "EventFilter"}
 	if v.Source == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateDataIntegrationInput(v *CreateDataIntegrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDataIntegrationInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -242,6 +377,21 @@ func validateOpCreateEventIntegrationInput(v *CreateEventIntegrationInput) error
 	}
 }
 
+func validateOpDeleteDataIntegrationInput(v *DeleteDataIntegrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDataIntegrationInput"}
+	if v.DataIntegrationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataIntegrationIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteEventIntegrationInput(v *DeleteEventIntegrationInput) error {
 	if v == nil {
 		return nil
@@ -257,6 +407,21 @@ func validateOpDeleteEventIntegrationInput(v *DeleteEventIntegrationInput) error
 	}
 }
 
+func validateOpGetDataIntegrationInput(v *GetDataIntegrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDataIntegrationInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetEventIntegrationInput(v *GetEventIntegrationInput) error {
 	if v == nil {
 		return nil
@@ -264,6 +429,21 @@ func validateOpGetEventIntegrationInput(v *GetEventIntegrationInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetEventIntegrationInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListDataIntegrationAssociationsInput(v *ListDataIntegrationAssociationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDataIntegrationAssociationsInput"}
+	if v.DataIntegrationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataIntegrationIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -330,6 +510,21 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateDataIntegrationInput(v *UpdateDataIntegrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDataIntegrationInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

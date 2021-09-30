@@ -2,6 +2,80 @@
 
 package types
 
+type AlertManagerDefinitionStatusCode string
+
+// Enum values for AlertManagerDefinitionStatusCode
+const (
+	// Definition is being created. Update/Deletion is disallowed until definition is
+	// ACTIVE and workspace status is ACTIVE.
+	AlertManagerDefinitionStatusCodeCreating AlertManagerDefinitionStatusCode = "CREATING"
+	// Definition has been created/updated. Update/Deletion is disallowed until
+	// definition is ACTIVE and workspace status is ACTIVE.
+	AlertManagerDefinitionStatusCodeActive AlertManagerDefinitionStatusCode = "ACTIVE"
+	// Definition is being updated. Update/Deletion is disallowed until definition is
+	// ACTIVE and workspace status is ACTIVE.
+	AlertManagerDefinitionStatusCodeUpdating AlertManagerDefinitionStatusCode = "UPDATING"
+	// Definition is being deleting. Update/Deletion is disallowed until definition is
+	// ACTIVE and workspace status is ACTIVE.
+	AlertManagerDefinitionStatusCodeDeleting AlertManagerDefinitionStatusCode = "DELETING"
+	// Definition creation failed.
+	AlertManagerDefinitionStatusCodeCreationFailed AlertManagerDefinitionStatusCode = "CREATION_FAILED"
+	// Definition update failed.
+	AlertManagerDefinitionStatusCodeUpdateFailed AlertManagerDefinitionStatusCode = "UPDATE_FAILED"
+)
+
+// Values returns all known values for AlertManagerDefinitionStatusCode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AlertManagerDefinitionStatusCode) Values() []AlertManagerDefinitionStatusCode {
+	return []AlertManagerDefinitionStatusCode{
+		"CREATING",
+		"ACTIVE",
+		"UPDATING",
+		"DELETING",
+		"CREATION_FAILED",
+		"UPDATE_FAILED",
+	}
+}
+
+type RuleGroupsNamespaceStatusCode string
+
+// Enum values for RuleGroupsNamespaceStatusCode
+const (
+	// Namespace is being created. Update/Deletion is disallowed until namespace is
+	// ACTIVE and workspace status is ACTIVE.
+	RuleGroupsNamespaceStatusCodeCreating RuleGroupsNamespaceStatusCode = "CREATING"
+	// Namespace has been created/updated. Update/Deletion is disallowed until
+	// namespace is ACTIVE and workspace status is ACTIVE.
+	RuleGroupsNamespaceStatusCodeActive RuleGroupsNamespaceStatusCode = "ACTIVE"
+	// Namespace is being updated. Update/Deletion is disallowed until namespace is
+	// ACTIVE and workspace status is ACTIVE.
+	RuleGroupsNamespaceStatusCodeUpdating RuleGroupsNamespaceStatusCode = "UPDATING"
+	// Namespace is being deleting. Update/Deletion is disallowed until namespace is
+	// ACTIVE and workspace status is ACTIVE.
+	RuleGroupsNamespaceStatusCodeDeleting RuleGroupsNamespaceStatusCode = "DELETING"
+	// Namespace creation failed.
+	RuleGroupsNamespaceStatusCodeCreationFailed RuleGroupsNamespaceStatusCode = "CREATION_FAILED"
+	// Namespace update failed.
+	RuleGroupsNamespaceStatusCodeUpdateFailed RuleGroupsNamespaceStatusCode = "UPDATE_FAILED"
+)
+
+// Values returns all known values for RuleGroupsNamespaceStatusCode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (RuleGroupsNamespaceStatusCode) Values() []RuleGroupsNamespaceStatusCode {
+	return []RuleGroupsNamespaceStatusCode{
+		"CREATING",
+		"ACTIVE",
+		"UPDATING",
+		"DELETING",
+		"CREATION_FAILED",
+		"UPDATE_FAILED",
+	}
+}
+
 type ValidationExceptionReason string
 
 // Enum values for ValidationExceptionReason

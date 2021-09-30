@@ -7,6 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -21,6 +22,11 @@ import (
 // are not allowed by default. Before you can dial these UK mobile numbers, you
 // must submit a service quota increase request. For more information, see Amazon
 // Connect Service Quotas
+// (https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html)
+// in the Amazon Connect Administrator Guide. Campaign calls are not allowed by
+// default. Before you can make a call with TrafficType = CAMPAIGN, you must submit
+// a service quota increase request. For more information, see Amazon Connect
+// Service Quotas
 // (https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html)
 // in the Amazon Connect Administrator Guide.
 func (c *Client) StartOutboundVoiceContact(ctx context.Context, params *StartOutboundVoiceContactInput, optFns ...func(*Options)) (*StartOutboundVoiceContactOutput, error) {
@@ -61,12 +67,18 @@ type StartOutboundVoiceContactInput struct {
 	// This member is required.
 	InstanceId *string
 
+	// Configuration of the answering machine detection for this outbound call.
+	AnswerMachineDetectionConfig *types.AnswerMachineDetectionConfig
+
 	// A custom key-value pair using an attribute map. The attributes are standard
 	// Amazon Connect attributes, and can be accessed in contact flows just like any
 	// other contact attributes. There can be up to 32,768 UTF-8 bytes across all
 	// key-value pairs per contact. Attribute keys can include only alphanumeric, dash,
 	// and underscore characters.
 	Attributes map[string]string
+
+	// The campaign identifier of the outbound communication.
+	CampaignId *string
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. The token is valid for 7 days after creation. If a contact is
@@ -82,6 +94,11 @@ type StartOutboundVoiceContactInput struct {
 	// The phone number associated with the Amazon Connect instance, in E.164 format.
 	// If you do not specify a source phone number, you must specify a queue.
 	SourcePhoneNumber *string
+
+	// Denotes the class of traffic. Calls with different traffic types are handled
+	// differently by Amazon Connect. The default value is GENERAL. Use CAMPAIGN if
+	// EnableAnswerMachineDetection is set to true. For all other cases, use GENERAL.
+	TrafficType types.TrafficType
 
 	noSmithyDocumentSerde
 }

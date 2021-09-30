@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Return information about the event integration.
+// Returns information about the event integration.
 func (c *Client) GetEventIntegration(ctx context.Context, params *GetEventIntegrationInput, optFns ...func(*Options)) (*GetEventIntegrationOutput, error) {
 	if params == nil {
 		params = &GetEventIntegrationInput{}

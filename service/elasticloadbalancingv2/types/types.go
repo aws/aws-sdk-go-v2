@@ -895,7 +895,8 @@ type TargetDescription struct {
 
 	// The ID of the target. If the target type of the target group is instance,
 	// specify an instance ID. If the target type is ip, specify an IP address. If the
-	// target type is lambda, specify the ARN of the Lambda function.
+	// target type is lambda, specify the ARN of the Lambda function. If the target
+	// type is alb, specify the ARN of the Application Load Balancer target.
 	//
 	// This member is required.
 	Id *string
@@ -903,18 +904,20 @@ type TargetDescription struct {
 	// An Availability Zone or all. This determines whether the target receives traffic
 	// from the load balancer nodes in the specified Availability Zone or from all
 	// enabled Availability Zones for the load balancer. This parameter is not
-	// supported if the target type of the target group is instance. If the target type
-	// is ip and the IP address is in a subnet of the VPC for the target group, the
-	// Availability Zone is automatically detected and this parameter is optional. If
-	// the IP address is outside the VPC, this parameter is required. With an
-	// Application Load Balancer, if the target type is ip and the IP address is
+	// supported if the target type of the target group is instance or alb. If the
+	// target type is ip and the IP address is in a subnet of the VPC for the target
+	// group, the Availability Zone is automatically detected and this parameter is
+	// optional. If the IP address is outside the VPC, this parameter is required. With
+	// an Application Load Balancer, if the target type is ip and the IP address is
 	// outside the VPC for the target group, the only supported value is all. If the
 	// target type is lambda, this parameter is optional and the only supported value
 	// is all.
 	AvailabilityZone *string
 
 	// The port on which the target is listening. If the target group protocol is
-	// GENEVE, the supported port is 6081. Not used if the target is a Lambda function.
+	// GENEVE, the supported port is 6081. If the target type is alb, the targeted
+	// Application Load Balancer must have at least one listener whose port matches the
+	// target group port. Not used if the target is a Lambda function.
 	Port *int32
 
 	noSmithyDocumentSerde
@@ -975,8 +978,9 @@ type TargetGroup struct {
 
 	// The type of target that you must specify when registering targets with this
 	// target group. The possible values are instance (register targets by instance
-	// ID), ip (register targets by IP address), or lambda (register a single Lambda
-	// function as a target).
+	// ID), ip (register targets by IP address), lambda (register a single Lambda
+	// function as a target), or alb (register a single Application Load Balancer as a
+	// target).
 	TargetType TargetTypeEnum
 
 	// The number of consecutive health check failures required before considering the

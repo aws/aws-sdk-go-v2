@@ -41,6 +41,22 @@ func (AllowsUnencryptedObjectUploads) Values() []AllowsUnencryptedObjectUploads 
 	}
 }
 
+type BucketMetadataErrorCode string
+
+// Enum values for BucketMetadataErrorCode
+const (
+	BucketMetadataErrorCodeAccessDenied BucketMetadataErrorCode = "ACCESS_DENIED"
+)
+
+// Values returns all known values for BucketMetadataErrorCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BucketMetadataErrorCode) Values() []BucketMetadataErrorCode {
+	return []BucketMetadataErrorCode{
+		"ACCESS_DENIED",
+	}
+}
+
 type Currency string
 
 // Enum values for Currency

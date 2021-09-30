@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List all of the dedicated IP pools that exist in your AWS account in the current
-// Region.
+// List all of the dedicated IP pools that exist in your Amazon Web Services
+// account in the current Region.
 func (c *Client) ListDedicatedIpPools(ctx context.Context, params *ListDedicatedIpPoolsInput, optFns ...func(*Options)) (*ListDedicatedIpPoolsOutput, error) {
 	if params == nil {
 		params = &ListDedicatedIpPoolsInput{}
@@ -47,8 +47,8 @@ type ListDedicatedIpPoolsInput struct {
 // A list of dedicated IP pools.
 type ListDedicatedIpPoolsOutput struct {
 
-	// A list of all of the dedicated IP pools that are associated with your AWS
-	// account in the current Region.
+	// A list of all of the dedicated IP pools that are associated with your Amazon Web
+	// Services account in the current Region.
 	DedicatedIpPools []string
 
 	// A token that indicates that there are additional IP pools to list. To view

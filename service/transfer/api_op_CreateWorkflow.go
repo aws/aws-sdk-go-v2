@@ -45,8 +45,9 @@ type CreateWorkflowInput struct {
 	//
 	// * Tag: add a tag to the file
 	//
-	// For file location, you
-	// specify either the S3 bucket and key, or the EFS filesystem ID and path.
+	// Currently, copying and
+	// tagging are supported only on S3. For file location, you specify either the S3
+	// bucket and key, or the EFS filesystem ID and path.
 	//
 	// This member is required.
 	Steps []types.WorkflowStep
@@ -54,8 +55,10 @@ type CreateWorkflowInput struct {
 	// A textual description for the workflow.
 	Description *string
 
-	// Specifies the steps (actions) to take if any errors are encountered during
-	// execution of the workflow.
+	// Specifies the steps (actions) to take if errors are encountered during execution
+	// of the workflow. For custom steps, the lambda function needs to send FAILURE to
+	// the call back API to kick off the exception steps. Additionally, if the lambda
+	// does not send SUCCESS before it times out, the exception steps are executed.
 	OnExceptionSteps []types.WorkflowStep
 
 	// Key-value pairs that can be used to group and search for workflows. Tags are

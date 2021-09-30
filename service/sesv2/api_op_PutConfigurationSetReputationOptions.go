@@ -11,7 +11,7 @@ import (
 )
 
 // Enable or disable collection of reputation metrics for emails that you send
-// using a particular configuration set in a specific AWS Region.
+// using a particular configuration set in a specific Amazon Web Services Region.
 func (c *Client) PutConfigurationSetReputationOptions(ctx context.Context, params *PutConfigurationSetReputationOptionsInput, optFns ...func(*Options)) (*PutConfigurationSetReputationOptionsOutput, error) {
 	if params == nil {
 		params = &PutConfigurationSetReputationOptionsInput{}
@@ -31,8 +31,7 @@ func (c *Client) PutConfigurationSetReputationOptions(ctx context.Context, param
 // configuration set.
 type PutConfigurationSetReputationOptionsInput struct {
 
-	// The name of the configuration set that you want to enable or disable reputation
-	// metric tracking for.
+	// The name of the configuration set.
 	//
 	// This member is required.
 	ConfigurationSetName *string

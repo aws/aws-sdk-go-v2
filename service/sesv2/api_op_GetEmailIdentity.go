@@ -32,7 +32,7 @@ func (c *Client) GetEmailIdentity(ctx context.Context, params *GetEmailIdentityI
 // A request to return details about an email identity.
 type GetEmailIdentityInput struct {
 
-	// The email identity that you want to retrieve details for.
+	// The email identity.
 	//
 	// This member is required.
 	EmailIdentity *string
@@ -59,7 +59,8 @@ type GetEmailIdentityOutput struct {
 	// this setting is disabled).
 	FeedbackForwardingStatus bool
 
-	// The email identity type.
+	// The email identity type. Note: the MANAGED_DOMAIN identity type is not
+	// supported.
 	IdentityType types.IdentityType
 
 	// An object that contains information about the Mail-From attributes for the email

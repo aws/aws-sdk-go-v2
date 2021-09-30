@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List the dedicated IP addresses that are associated with your AWS account.
+// List the dedicated IP addresses that are associated with your Amazon Web
+// Services account.
 func (c *Client) GetDedicatedIps(ctx context.Context, params *GetDedicatedIpsInput, optFns ...func(*Options)) (*GetDedicatedIpsOutput, error) {
 	if params == nil {
 		params = &GetDedicatedIpsInput{}
@@ -47,11 +48,12 @@ type GetDedicatedIpsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the dedicated IP addresses that are associated with your AWS
-// account.
+// Information about the dedicated IP addresses that are associated with your
+// Amazon Web Services account.
 type GetDedicatedIpsOutput struct {
 
-	// A list of dedicated IP addresses that are associated with your AWS account.
+	// A list of dedicated IP addresses that are associated with your Amazon Web
+	// Services account.
 	DedicatedIps []types.DedicatedIp
 
 	// A token that indicates that there are additional dedicated IP addresses to list.

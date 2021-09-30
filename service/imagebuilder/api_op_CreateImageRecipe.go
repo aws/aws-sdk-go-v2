@@ -46,8 +46,8 @@ type CreateImageRecipeInput struct {
 	// This member is required.
 	Name *string
 
-	// The parent image of the image recipe. The value of the string can be the ARN of
-	// the parent image or an AMI ID. The format for the ARN follows this example:
+	// The base image of the image recipe. The value of the string can be the ARN of
+	// the base image or an AMI ID. The format for the ARN follows this example:
 	// arn:aws:imagebuilder:us-west-2:aws:image/windows-server-2016-english-full-base-x86/x.x.x.
 	// You can provide the specific version that you want to use, or you can use a
 	// wildcard in all of the fields. If you enter an AMI ID for the string value, you

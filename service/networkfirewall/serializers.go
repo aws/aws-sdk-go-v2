@@ -1487,6 +1487,20 @@ func awsAwsjson10_serializeDocumentFirewallPolicy(v *types.FirewallPolicy, value
 	object := value.Object()
 	defer object.Close()
 
+	if v.StatefulDefaultActions != nil {
+		ok := object.Key("StatefulDefaultActions")
+		if err := awsAwsjson10_serializeDocumentStatefulActions(v.StatefulDefaultActions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StatefulEngineOptions != nil {
+		ok := object.Key("StatefulEngineOptions")
+		if err := awsAwsjson10_serializeDocumentStatefulEngineOptions(v.StatefulEngineOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.StatefulRuleGroupReferences != nil {
 		ok := object.Key("StatefulRuleGroupReferences")
 		if err := awsAwsjson10_serializeDocumentStatefulRuleGroupReferences(v.StatefulRuleGroupReferences, ok); err != nil {
@@ -1834,6 +1848,13 @@ func awsAwsjson10_serializeDocumentRuleGroup(v *types.RuleGroup, value smithyjso
 		}
 	}
 
+	if v.StatefulRuleOptions != nil {
+		ok := object.Key("StatefulRuleOptions")
+		if err := awsAwsjson10_serializeDocumentStatefulRuleOptions(v.StatefulRuleOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -1971,6 +1992,29 @@ func awsAwsjson10_serializeDocumentSettings(v []string, value smithyjson.Value) 
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentStatefulActions(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentStatefulEngineOptions(v *types.StatefulEngineOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.RuleOrder) > 0 {
+		ok := object.Key("RuleOrder")
+		ok.String(string(v.RuleOrder))
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentStatefulRule(v *types.StatefulRule, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2001,6 +2045,11 @@ func awsAwsjson10_serializeDocumentStatefulRuleGroupReference(v *types.StatefulR
 	object := value.Object()
 	defer object.Close()
 
+	if v.Priority != 0 {
+		ok := object.Key("Priority")
+		ok.Integer(v.Priority)
+	}
+
 	if v.ResourceArn != nil {
 		ok := object.Key("ResourceArn")
 		ok.String(*v.ResourceArn)
@@ -2019,6 +2068,18 @@ func awsAwsjson10_serializeDocumentStatefulRuleGroupReferences(v []types.Statefu
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentStatefulRuleOptions(v *types.StatefulRuleOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.RuleOrder) > 0 {
+		ok := object.Key("RuleOrder")
+		ok.String(string(v.RuleOrder))
+	}
+
 	return nil
 }
 

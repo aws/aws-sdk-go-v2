@@ -36,8 +36,7 @@ func (c *Client) UpdateConfigurationSetEventDestination(ctx context.Context, par
 // set.
 type UpdateConfigurationSetEventDestinationInput struct {
 
-	// The name of the configuration set that contains the event destination that you
-	// want to modify.
+	// The name of the configuration set that contains the event destination to modify.
 	//
 	// This member is required.
 	ConfigurationSetName *string
@@ -47,7 +46,7 @@ type UpdateConfigurationSetEventDestinationInput struct {
 	// This member is required.
 	EventDestination *types.EventDestinationDefinition
 
-	// The name of the event destination that you want to modify.
+	// The name of the event destination.
 	//
 	// This member is required.
 	EventDestinationName *string

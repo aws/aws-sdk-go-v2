@@ -150,6 +150,26 @@ func (m *validateOpCreateTags) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateUpdatedWorkspaceImage struct {
+}
+
+func (*validateOpCreateUpdatedWorkspaceImage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateUpdatedWorkspaceImage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateUpdatedWorkspaceImageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateUpdatedWorkspaceImageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateWorkspaceBundle struct {
 }
 
@@ -858,6 +878,10 @@ func addOpCreateTagsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateTags{}, middleware.After)
 }
 
+func addOpCreateUpdatedWorkspaceImageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateUpdatedWorkspaceImage{}, middleware.After)
+}
+
 func addOpCreateWorkspaceBundleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateWorkspaceBundle{}, middleware.After)
 }
@@ -1314,6 +1338,32 @@ func validateOpCreateTagsInput(v *CreateTagsInput) error {
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	} else if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateUpdatedWorkspaceImageInput(v *CreateUpdatedWorkspaceImageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateUpdatedWorkspaceImageInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Description == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Description"))
+	}
+	if v.SourceImageId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceImageId"))
+	}
+	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}

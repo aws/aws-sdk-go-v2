@@ -372,7 +372,11 @@ type IntegrationType string
 
 // Enum values for IntegrationType
 const (
-	IntegrationTypeEvent IntegrationType = "EVENT"
+	IntegrationTypeEvent               IntegrationType = "EVENT"
+	IntegrationTypeVoiceId             IntegrationType = "VOICE_ID"
+	IntegrationTypePinpointApp         IntegrationType = "PINPOINT_APP"
+	IntegrationTypeWisdomAssistant     IntegrationType = "WISDOM_ASSISTANT"
+	IntegrationTypeWisdomKnowledgeBase IntegrationType = "WISDOM_KNOWLEDGE_BASE"
 )
 
 // Values returns all known values for IntegrationType. Note that this can be
@@ -381,6 +385,10 @@ const (
 func (IntegrationType) Values() []IntegrationType {
 	return []IntegrationType{
 		"EVENT",
+		"VOICE_ID",
+		"PINPOINT_APP",
+		"WISDOM_ASSISTANT",
+		"WISDOM_KNOWLEDGE_BASE",
 	}
 }
 
@@ -1086,6 +1094,24 @@ func (StorageType) Values() []StorageType {
 	}
 }
 
+type TrafficType string
+
+// Enum values for TrafficType
+const (
+	TrafficTypeGeneral  TrafficType = "GENERAL"
+	TrafficTypeCampaign TrafficType = "CAMPAIGN"
+)
+
+// Values returns all known values for TrafficType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (TrafficType) Values() []TrafficType {
+	return []TrafficType{
+		"GENERAL",
+		"CAMPAIGN",
+	}
+}
+
 type Unit string
 
 // Enum values for Unit
@@ -1110,7 +1136,8 @@ type UseCaseType string
 
 // Enum values for UseCaseType
 const (
-	UseCaseTypeRulesEvaluation UseCaseType = "RULES_EVALUATION"
+	UseCaseTypeRulesEvaluation  UseCaseType = "RULES_EVALUATION"
+	UseCaseTypeConnectCampaigns UseCaseType = "CONNECT_CAMPAIGNS"
 )
 
 // Values returns all known values for UseCaseType. Note that this can be expanded
@@ -1119,6 +1146,7 @@ const (
 func (UseCaseType) Values() []UseCaseType {
 	return []UseCaseType{
 		"RULES_EVALUATION",
+		"CONNECT_CAMPAIGNS",
 	}
 }
 

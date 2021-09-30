@@ -83,7 +83,8 @@ type ConnectionAlias struct {
 	// www.example.com.
 	ConnectionString *string
 
-	// The identifier of the AWS account that owns the connection alias.
+	// The identifier of the Amazon Web Services account that owns the connection
+	// alias.
 	OwnerAccountId *string
 
 	// The current state of the connection alias.
@@ -98,8 +99,8 @@ type ConnectionAlias struct {
 // (https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html).
 type ConnectionAliasAssociation struct {
 
-	// The identifier of the AWS account that associated the connection alias with a
-	// directory.
+	// The identifier of the Amazon Web Services account that associated the connection
+	// alias with a directory.
 	AssociatedAccountId *string
 
 	// The association status of the connection alias.
@@ -122,13 +123,14 @@ type ConnectionAliasAssociation struct {
 // (https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html).
 type ConnectionAliasPermission struct {
 
-	// Indicates whether the specified AWS account is allowed to associate the
-	// connection alias with a directory.
+	// Indicates whether the specified Amazon Web Services account is allowed to
+	// associate the connection alias with a directory.
 	//
 	// This member is required.
 	AllowAssociation *bool
 
-	// The identifier of the AWS account that the connection alias is shared with.
+	// The identifier of the Amazon Web Services account that the connection alias is
+	// shared with.
 	//
 	// This member is required.
 	SharedAccountId *string
@@ -210,13 +212,14 @@ type FailedWorkspaceChangeRequest struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the AWS accounts that have been granted permission to use a shared
-// image. For more information about sharing images, see  Share or Unshare a Custom
-// WorkSpaces Image
+// Describes the Amazon Web Services accounts that have been granted permission to
+// use a shared image. For more information about sharing images, see  Share or
+// Unshare a Custom WorkSpaces Image
 // (https://docs.aws.amazon.com/workspaces/latest/adminguide/share-custom-image.html).
 type ImagePermission struct {
 
-	// The identifier of the AWS account that an image has been shared with.
+	// The identifier of the Amazon Web Services account that an image has been shared
+	// with.
 	SharedAccountId *string
 
 	noSmithyDocumentSerde
@@ -364,6 +367,22 @@ type TerminateRequest struct {
 	noSmithyDocumentSerde
 }
 
+// Describes whether a WorkSpace image needs to be updated with the latest drivers
+// and other components required by Amazon WorkSpaces. Only Windows 10 WorkSpace
+// images can be programmatically updated at this time.
+type UpdateResult struct {
+
+	// A description of whether updates for the WorkSpace image are pending or
+	// available.
+	Description *string
+
+	// Indicates whether updated drivers or other components are available for the
+	// specified WorkSpace image.
+	UpdateAvailable *bool
+
+	noSmithyDocumentSerde
+}
+
 // Describes the user volume for a WorkSpace bundle.
 type UserStorage struct {
 
@@ -384,7 +403,7 @@ type Workspace struct {
 	// (https://docs.aws.amazon.com/workspaces/latest/adminguide/launch-workspaces-tutorials.html).
 	ComputerName *string
 
-	// The identifier of the AWS Directory Service directory for the WorkSpace.
+	// The identifier of the Directory Service directory for the WorkSpace.
 	DirectoryId *string
 
 	// The error code that is returned if the WorkSpace cannot be created.
@@ -421,8 +440,8 @@ type Workspace struct {
 	// Indicates whether the data stored on the user volume is encrypted.
 	UserVolumeEncryptionEnabled *bool
 
-	// The symmetric AWS KMS customer master key (CMK) used to encrypt data stored on
-	// your WorkSpace. Amazon WorkSpaces does not support asymmetric CMKs.
+	// The symmetric KMS key used to encrypt data stored on your WorkSpace. Amazon
+	// WorkSpaces does not support asymmetric KMS keys.
 	VolumeEncryptionKey *string
 
 	// The identifier of the WorkSpace.
@@ -439,7 +458,8 @@ type Workspace struct {
 // (https://docs.aws.amazon.com/workspaces/latest/adminguide/workspaces-network-requirements.html).
 type WorkspaceAccessProperties struct {
 
-	// Indicates whether users can use Android devices to access their WorkSpaces.
+	// Indicates whether users can use Android and Android-compatible Chrome OS devices
+	// to access their WorkSpaces.
 	DeviceTypeAndroid AccessPropertyValue
 
 	// Indicates whether users can use Chromebooks to access their WorkSpaces.
@@ -451,21 +471,13 @@ type WorkspaceAccessProperties struct {
 	// Indicates whether users can use Linux clients to access their WorkSpaces.
 	DeviceTypeLinux AccessPropertyValue
 
-	// Indicates whether users can use macOS clients to access their WorkSpaces. To
-	// restrict WorkSpaces access to trusted devices (also known as managed devices)
-	// with valid certificates, specify a value of TRUST. For more information, see
-	// Restrict WorkSpaces Access to Trusted Devices
-	// (https://docs.aws.amazon.com/workspaces/latest/adminguide/trusted-devices.html).
+	// Indicates whether users can use macOS clients to access their WorkSpaces.
 	DeviceTypeOsx AccessPropertyValue
 
 	// Indicates whether users can access their WorkSpaces through a web browser.
 	DeviceTypeWeb AccessPropertyValue
 
-	// Indicates whether users can use Windows clients to access their WorkSpaces. To
-	// restrict WorkSpaces access to trusted devices (also known as managed devices)
-	// with valid certificates, specify a value of TRUST. For more information, see
-	// Restrict WorkSpaces Access to Trusted Devices
-	// (https://docs.aws.amazon.com/workspaces/latest/adminguide/trusted-devices.html).
+	// Indicates whether users can use Windows clients to access their WorkSpaces.
 	DeviceTypeWindows AccessPropertyValue
 
 	// Indicates whether users can use zero client devices to access their WorkSpaces.
@@ -500,7 +512,7 @@ type WorkspaceBundle struct {
 	Name *string
 
 	// The owner of the bundle. This is the account identifier of the owner, or AMAZON
-	// if the bundle is provided by AWS.
+	// if the bundle is provided by Amazon Web Services.
 	Owner *string
 
 	// The size of the root volume.
@@ -656,9 +668,9 @@ type WorkspaceDirectory struct {
 // Describes a WorkSpace image.
 type WorkspaceImage struct {
 
-	// The date when the image was created. If the image has been shared, the AWS
-	// account that the image has been shared with sees the original creation date of
-	// the image.
+	// The date when the image was created. If the image has been shared, the Amazon
+	// Web Services account that the image has been shared with sees the original
+	// creation date of the image.
 	Created *time.Time
 
 	// The description of the image.
@@ -679,7 +691,7 @@ type WorkspaceImage struct {
 	// The operating system that the image is running.
 	OperatingSystem *OperatingSystem
 
-	// The identifier of the AWS account that owns the image.
+	// The identifier of the Amazon Web Services account that owns the image.
 	OwnerAccountId *string
 
 	// Specifies whether the image is running on dedicated hardware. When Bring Your
@@ -690,6 +702,9 @@ type WorkspaceImage struct {
 
 	// The status of the image.
 	State WorkspaceImageState
+
+	// The updates (if any) that are available for the specified image.
+	Updates *UpdateResult
 
 	noSmithyDocumentSerde
 }
@@ -731,14 +746,14 @@ type WorkspaceRequest struct {
 	// This member is required.
 	BundleId *string
 
-	// The identifier of the AWS Directory Service directory for the WorkSpace. You can
-	// use DescribeWorkspaceDirectories to list the available directories.
+	// The identifier of the Directory Service directory for the WorkSpace. You can use
+	// DescribeWorkspaceDirectories to list the available directories.
 	//
 	// This member is required.
 	DirectoryId *string
 
 	// The user name of the user for the WorkSpace. This user name must exist in the
-	// AWS Directory Service directory for the WorkSpace.
+	// Directory Service directory for the WorkSpace.
 	//
 	// This member is required.
 	UserName *string
@@ -752,8 +767,8 @@ type WorkspaceRequest struct {
 	// Indicates whether the data stored on the user volume is encrypted.
 	UserVolumeEncryptionEnabled *bool
 
-	// The symmetric AWS KMS customer master key (CMK) used to encrypt data stored on
-	// your WorkSpace. Amazon WorkSpaces does not support asymmetric CMKs.
+	// The symmetric KMS key used to encrypt data stored on your WorkSpace. Amazon
+	// WorkSpaces does not support asymmetric KMS keys.
 	VolumeEncryptionKey *string
 
 	// The WorkSpace properties.

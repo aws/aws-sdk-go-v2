@@ -96,7 +96,7 @@ func (e *InvalidRequestException) ErrorMessage() string {
 func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
+// The policy statement failed validation.
 type InvalidResourcePolicyException struct {
 	Message *string
 
@@ -193,7 +193,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
+// Unable to change the resource because your account doesn't own it.
 type ResourceOwnerCheckException struct {
 	Message *string
 

@@ -56,21 +56,24 @@ type UpdateEventSourceMappingInput struct {
 	// This member is required.
 	UUID *string
 
-	// The maximum number of items to retrieve in a single batch.
+	// The maximum number of records in each batch that Lambda pulls from your stream
+	// or queue and sends to your function. Lambda passes all of the records in the
+	// batch to the function in a single call, up to the payload limit for synchronous
+	// invocation (6 MB).
 	//
-	// * Amazon Kinesis -
-	// Default 100. Max 10,000.
+	// * Amazon Kinesis - Default 100. Max 10,000.
 	//
-	// * Amazon DynamoDB Streams - Default 100. Max 1,000.
+	// * Amazon
+	// DynamoDB Streams - Default 100. Max 1,000.
+	//
+	// * Amazon Simple Queue Service -
+	// Default 10. For standard queues the max is 10,000. For FIFO queues the max is
+	// 10.
+	//
+	// * Amazon Managed Streaming for Apache Kafka - Default 100. Max 10,000.
 	//
 	// *
-	// Amazon Simple Queue Service - Default 10. For standard queues the max is 10,000.
-	// For FIFO queues the max is 10.
-	//
-	// * Amazon Managed Streaming for Apache Kafka -
-	// Default 100. Max 10,000.
-	//
-	// * Self-Managed Apache Kafka - Default 100. Max 10,000.
+	// Self-Managed Apache Kafka - Default 100. Max 10,000.
 	BatchSize *int32
 
 	// (Streams only) If the function returns an error, split the batch in two and
@@ -81,8 +84,8 @@ type UpdateEventSourceMappingInput struct {
 	// records.
 	DestinationConfig *types.DestinationConfig
 
-	// If true, the event source mapping is active. Set to false to pause polling and
-	// invocation.
+	// When true, the event source mapping is active. When false, Lambda pauses polling
+	// and invocation. Default: True
 	Enabled *bool
 
 	// The name of the Lambda function. Name formats
@@ -108,8 +111,10 @@ type UpdateEventSourceMappingInput struct {
 	// mapping.
 	FunctionResponseTypes []types.FunctionResponseType
 
-	// (Streams and SQS standard queues) The maximum amount of time to gather records
-	// before invoking the function, in seconds.
+	// (Streams and Amazon SQS standard queues) The maximum amount of time, in seconds,
+	// that Lambda spends gathering records before invoking the function. Default: 0
+	// Related setting: When you set BatchSize to a value greater than 10, you must set
+	// MaximumBatchingWindowInSeconds to at least 1.
 	MaximumBatchingWindowInSeconds *int32
 
 	// (Streams only) Discard records older than the specified age. The default value
@@ -139,7 +144,13 @@ type UpdateEventSourceMappingInput struct {
 // details, see CreateEventSourceMapping.
 type UpdateEventSourceMappingOutput struct {
 
-	// The maximum number of items to retrieve in a single batch.
+	// The maximum number of records in each batch that Lambda pulls from your stream
+	// or queue and sends to your function. Lambda passes all of the records in the
+	// batch to the function in a single call, up to the payload limit for synchronous
+	// invocation (6 MB). Default value: Varies by service. For Amazon SQS, the default
+	// is 10. For all other services, the default is 100. Related setting: When you set
+	// BatchSize to a value greater than 10, you must set
+	// MaximumBatchingWindowInSeconds to at least 1.
 	BatchSize *int32
 
 	// (Streams only) If the function returns an error, split the batch in two and
@@ -167,8 +178,10 @@ type UpdateEventSourceMappingOutput struct {
 	// The result of the last Lambda invocation of your function.
 	LastProcessingResult *string
 
-	// (Streams and Amazon SQS standard queues) The maximum amount of time to gather
-	// records before invoking the function, in seconds. The default value is zero.
+	// (Streams and Amazon SQS standard queues) The maximum amount of time, in seconds,
+	// that Lambda spends gathering records before invoking the function. Default: 0
+	// Related setting: When you set BatchSize to a value greater than 10, you must set
+	// MaximumBatchingWindowInSeconds to at least 1.
 	MaximumBatchingWindowInSeconds *int32
 
 	// (Streams only) Discard records older than the specified age. The default value

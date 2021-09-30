@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides summary information about the AppIntegration associations for the
+// Provides summary information about the AWS resource associations for the
 // specified Amazon Connect instance.
 func (c *Client) ListIntegrationAssociations(ctx context.Context, params *ListIntegrationAssociationsInput, optFns ...func(*Options)) (*ListIntegrationAssociationsOutput, error) {
 	if params == nil {
@@ -37,6 +37,9 @@ type ListIntegrationAssociationsInput struct {
 	// This member is required.
 	InstanceId *string
 
+	//
+	IntegrationType types.IntegrationType
+
 	// The maximum number of results to return per page.
 	MaxResults int32
 
@@ -49,7 +52,7 @@ type ListIntegrationAssociationsInput struct {
 
 type ListIntegrationAssociationsOutput struct {
 
-	// The AppIntegration associations.
+	// The associations.
 	IntegrationAssociationSummaryList []types.IntegrationAssociationSummary
 
 	// If there are additional results, this is the token for the next set of results.

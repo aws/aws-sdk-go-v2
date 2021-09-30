@@ -8004,6 +8004,13 @@ func awsRestjson1_serializeDocumentActivity(v *types.Activity, value smithyjson.
 		}
 	}
 
+	if v.ContactCenter != nil {
+		ok := object.Key("ContactCenter")
+		if err := awsRestjson1_serializeDocumentContactCenterActivity(v.ContactCenter, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.CUSTOM != nil {
 		ok := object.Key("CUSTOM")
 		if err := awsRestjson1_serializeDocumentCustomMessageActivity(v.CUSTOM, ok); err != nil {
@@ -8952,6 +8959,18 @@ func awsRestjson1_serializeDocumentConditionalSplitActivity(v *types.Conditional
 	if v.TrueActivity != nil {
 		ok := object.Key("TrueActivity")
 		ok.String(*v.TrueActivity)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentContactCenterActivity(v *types.ContactCenterActivity, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.NextActivity != nil {
+		ok := object.Key("NextActivity")
+		ok.String(*v.NextActivity)
 	}
 
 	return nil

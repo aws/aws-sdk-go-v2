@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a use case for an AppIntegration association.
+// Creates a use case for an integration association.
 func (c *Client) CreateUseCase(ctx context.Context, params *CreateUseCaseInput, optFns ...func(*Options)) (*CreateUseCaseOutput, error) {
 	if params == nil {
 		params = &CreateUseCaseInput{}
@@ -35,13 +35,13 @@ type CreateUseCaseInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The identifier for the AppIntegration association.
+	// The identifier for the integration association.
 	//
 	// This member is required.
 	IntegrationAssociationId *string
 
-	// The type of use case to associate to the AppIntegration association. Each
-	// AppIntegration association can have only one of each use case type.
+	// The type of use case to associate to the integration association. Each
+	// integration association can have only one of each use case type.
 	//
 	// This member is required.
 	UseCaseType types.UseCaseType

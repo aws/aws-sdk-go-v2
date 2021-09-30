@@ -1001,6 +1001,9 @@ func awsAwsjson10_deserializeOpErrorDeleteResourcePolicy(response *smithyhttp.Re
 	case strings.EqualFold("InvalidRequestException", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidRequestException(response, errorBody)
 
+	case strings.EqualFold("InvalidResourcePolicyException", errorCode):
+		return awsAwsjson10_deserializeErrorInvalidResourcePolicyException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -4526,6 +4529,16 @@ func awsAwsjson10_deserializeDocumentFirewallPolicy(v **types.FirewallPolicy, va
 
 	for key, value := range shape {
 		switch key {
+		case "StatefulDefaultActions":
+			if err := awsAwsjson10_deserializeDocumentStatefulActions(&sv.StatefulDefaultActions, value); err != nil {
+				return err
+			}
+
+		case "StatefulEngineOptions":
+			if err := awsAwsjson10_deserializeDocumentStatefulEngineOptions(&sv.StatefulEngineOptions, value); err != nil {
+				return err
+			}
+
 		case "StatefulRuleGroupReferences":
 			if err := awsAwsjson10_deserializeDocumentStatefulRuleGroupReferences(&sv.StatefulRuleGroupReferences, value); err != nil {
 				return err
@@ -4631,6 +4644,32 @@ func awsAwsjson10_deserializeDocumentFirewallPolicyResponse(v **types.FirewallPo
 
 	for key, value := range shape {
 		switch key {
+		case "ConsumedStatefulRuleCapacity":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected RuleCapacity to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ConsumedStatefulRuleCapacity = ptr.Int32(int32(i64))
+			}
+
+		case "ConsumedStatelessRuleCapacity":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected RuleCapacity to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ConsumedStatelessRuleCapacity = ptr.Int32(int32(i64))
+			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4674,6 +4713,19 @@ func awsAwsjson10_deserializeDocumentFirewallPolicyResponse(v **types.FirewallPo
 					return fmt.Errorf("expected ResourceStatus to be of type string, got %T instead", value)
 				}
 				sv.FirewallPolicyStatus = types.ResourceStatus(jtv)
+			}
+
+		case "NumberOfAssociations":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected NumberOfAssociations to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.NumberOfAssociations = ptr.Int32(int32(i64))
 			}
 
 		case "Tags":
@@ -5951,6 +6003,11 @@ func awsAwsjson10_deserializeDocumentRuleGroup(v **types.RuleGroup, value interf
 				return err
 			}
 
+		case "StatefulRuleOptions":
+			if err := awsAwsjson10_deserializeDocumentStatefulRuleOptions(&sv.StatefulRuleOptions, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -6044,6 +6101,19 @@ func awsAwsjson10_deserializeDocumentRuleGroupResponse(v **types.RuleGroupRespon
 				sv.Capacity = ptr.Int32(int32(i64))
 			}
 
+		case "ConsumedCapacity":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected RuleCapacity to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ConsumedCapacity = ptr.Int32(int32(i64))
+			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6051,6 +6121,19 @@ func awsAwsjson10_deserializeDocumentRuleGroupResponse(v **types.RuleGroupRespon
 					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "NumberOfAssociations":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected NumberOfAssociations to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.NumberOfAssociations = ptr.Int32(int32(i64))
 			}
 
 		case "RuleGroupArn":
@@ -6443,6 +6526,82 @@ func awsAwsjson10_deserializeDocumentSettings(v *[]string, value interface{}) er
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentStatefulActions(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected CollectionMember_String to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentStatefulEngineOptions(v **types.StatefulEngineOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StatefulEngineOptions
+	if *v == nil {
+		sv = &types.StatefulEngineOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "RuleOrder":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RuleOrder to be of type string, got %T instead", value)
+				}
+				sv.RuleOrder = types.RuleOrder(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentStatefulRule(v **types.StatefulRule, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6515,6 +6674,19 @@ func awsAwsjson10_deserializeDocumentStatefulRuleGroupReference(v **types.Statef
 
 	for key, value := range shape {
 		switch key {
+		case "Priority":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Priority to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Priority = int32(i64)
+			}
+
 		case "ResourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6564,6 +6736,46 @@ func awsAwsjson10_deserializeDocumentStatefulRuleGroupReferences(v *[]types.Stat
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentStatefulRuleOptions(v **types.StatefulRuleOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StatefulRuleOptions
+	if *v == nil {
+		sv = &types.StatefulRuleOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "RuleOrder":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RuleOrder to be of type string, got %T instead", value)
+				}
+				sv.RuleOrder = types.RuleOrder(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

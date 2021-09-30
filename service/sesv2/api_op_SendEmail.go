@@ -11,17 +11,17 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sends an email message. You can use the Amazon SES API v2 to send two types of
-// messages:
+// Sends an email message. You can use the Amazon SES API v2 to send the following
+// types of messages:
 //
-// * Simple – A standard email message. When you create this type of
-// message, you specify the sender, the recipient, and the message body, and Amazon
-// SES assembles the message for you.
+// * Simple – A standard email message. When you create this
+// type of message, you specify the sender, the recipient, and the message body,
+// and Amazon SES assembles the message for you.
 //
-// * Raw – A raw, MIME-formatted email message.
-// When you send this type of email, you have to specify all of the message
-// headers, as well as the message body. You can use this message type to send
-// messages that contain attachments. The message that you specify has to be a
+// * Raw – A raw, MIME-formatted
+// email message. When you send this type of email, you have to specify all of the
+// message headers, as well as the message body. You can use this message type to
+// send messages that contain attachments. The message that you specify has to be a
 // valid MIME message.
 //
 // * Templated – A message that contains personalization tags.
@@ -53,7 +53,7 @@ type SendEmailInput struct {
 	// This member is required.
 	Content *types.EmailContent
 
-	// The name of the configuration set that you want to use when sending the email.
+	// The name of the configuration set to use when sending the email.
 	ConfigurationSetName *string
 
 	// An object that contains the recipients of the email message.
@@ -80,8 +80,8 @@ type SendEmailInput struct {
 	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
 	FeedbackForwardingEmailAddressIdentityArn *string
 
-	// The email address that you want to use as the "From" address for the email. The
-	// address that you specify has to be verified.
+	// The email address to use as the "From" address for the email. The address that
+	// you specify has to be verified.
 	FromEmailAddress *string
 
 	// This parameter is used only for sending authorization. It is the ARN of the

@@ -38,8 +38,7 @@ func (c *Client) PutEmailIdentityFeedbackAttributes(ctx context.Context, params 
 // processed.
 type PutEmailIdentityFeedbackAttributesInput struct {
 
-	// The email identity that you want to configure bounce and complaint feedback
-	// forwarding for.
+	// The email identity.
 	//
 	// This member is required.
 	EmailIdentity *string

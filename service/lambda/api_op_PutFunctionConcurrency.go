@@ -67,7 +67,7 @@ type PutFunctionConcurrencyOutput struct {
 
 	// The number of concurrent executions that are reserved for this function. For
 	// more information, see Managing Concurrency
-	// (https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html).
+	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-concurrency.html).
 	ReservedConcurrentExecutions *int32
 
 	// Metadata pertaining to the operation's result.
