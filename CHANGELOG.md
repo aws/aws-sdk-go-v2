@@ -1,3 +1,49 @@
+# Release (2021-09-30)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/account`: [v1.0.0](service/account/CHANGELOG.md#v100-2021-09-30)
+  * **Release**: New AWS service client module
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/amp`: [v1.6.0](service/amp/CHANGELOG.md#v160-2021-09-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/appintegrations`: [v1.7.0](service/appintegrations/CHANGELOG.md#v170-2021-09-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/cloudcontrol`: [v1.0.0](service/cloudcontrol/CHANGELOG.md#v100-2021-09-30)
+  * **Release**: New AWS service client module
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/cloudhsmv2`: [v1.5.0](service/cloudhsmv2/CHANGELOG.md#v150-2021-09-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.8.0](service/connect/CHANGELOG.md#v180-2021-09-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/dataexchange`: [v1.6.0](service/dataexchange/CHANGELOG.md#v160-2021-09-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.8.0](service/elasticloadbalancingv2/CHANGELOG.md#v180-2021-09-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.11.0](service/imagebuilder/CHANGELOG.md#v1110-2021-09-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.9.0](service/lambda/CHANGELOG.md#v190-2021-09-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/macie2`: [v1.11.0](service/macie2/CHANGELOG.md#v1110-2021-09-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.7.0](service/networkfirewall/CHANGELOG.md#v170-2021-09-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/pinpoint`: [v1.8.0](service/pinpoint/CHANGELOG.md#v180-2021-09-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.6.0](service/sesv2/CHANGELOG.md#v160-2021-09-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.8.0](service/transfer/CHANGELOG.md#v180-2021-09-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/voiceid`: [v1.0.0](service/voiceid/CHANGELOG.md#v100-2021-09-30)
+  * **Release**: New AWS service client module
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/wisdom`: [v1.0.0](service/wisdom/CHANGELOG.md#v100-2021-09-30)
+  * **Release**: New AWS service client module
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/workmail`: [v1.6.0](service/workmail/CHANGELOG.md#v160-2021-09-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.7.0](service/workspaces/CHANGELOG.md#v170-2021-09-30)
+  * **Feature**: API client updated
+
 # Release (2021-09-24)
 
 ## Module Highlights

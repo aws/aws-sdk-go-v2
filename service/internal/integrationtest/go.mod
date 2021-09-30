@@ -13,7 +13,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/batch v1.7.1
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.10.1
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.8.1
-	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.4.1
+	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.5.0
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.6.1
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.6.1
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.8.1
@@ -38,7 +38,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.11.1
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.6.1
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing v1.6.1
-	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.7.1
+	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.8.0
 	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.7.0
 	github.com/aws/aws-sdk-go-v2/service/elastictranscoder v1.5.1
 	github.com/aws/aws-sdk-go-v2/service/emr v1.9.1
@@ -53,7 +53,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/iot v1.13.0
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.6.1
 	github.com/aws/aws-sdk-go-v2/service/kms v1.6.1
-	github.com/aws/aws-sdk-go-v2/service/lambda v1.8.1
+	github.com/aws/aws-sdk-go-v2/service/lambda v1.9.0
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.10.1
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.4.1
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.8.1
@@ -84,7 +84,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/waf v1.4.1
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.5.1
 	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.10.0
-	github.com/aws/aws-sdk-go-v2/service/workspaces v1.6.1
+	github.com/aws/aws-sdk-go-v2/service/workspaces v1.7.0
 	github.com/aws/smithy-go v1.8.0
 	github.com/google/go-cmp v0.5.6
 )
