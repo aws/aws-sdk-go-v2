@@ -39,7 +39,7 @@ type CustomStepDetails struct {
 	noSmithyDocumentSerde
 }
 
-// The name of the step, used to identify the step that is being deleted.
+// The name of the step, used to identify the delete step.
 type DeleteStepDetails struct {
 
 	// The name of the step, used as an identifier.
@@ -370,8 +370,8 @@ type DescribedWorkflow struct {
 	// Specifies the text description for the workflow.
 	Description *string
 
-	// Specifies the steps (actions) to take if any errors are encountered during
-	// execution of the workflow.
+	// Specifies the steps (actions) to take if errors are encountered during execution
+	// of the workflow.
 	OnExceptionSteps []WorkflowStep
 
 	// Specifies the details for the steps that are in the specified workflow.
@@ -387,18 +387,7 @@ type DescribedWorkflow struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the details for the file location for the file being used in the
-// workflow. Only applicable if you are using Amazon EFS for storage. You need to
-// provide the file system ID and the pathname. The pathname can represent either a
-// path or a file. This is determined by whether or not you end the path value with
-// the forward slash (/) character. If the final character is "/", then your file
-// is copied to the folder, and its name does not change. If, rather, the final
-// character is alphanumeric, your uploaded file is renamed to the path value. In
-// this case, if a file with that name already exists, it is overwritten. For
-// example, if your path is shared-files/bob/, your uploaded files are copied to
-// the shared-files/bob/, folder. If your path is shared-files/today, each uploaded
-// file is copied to the shared-files folder and named today: each upload
-// overwrites the previous version of the bob file.
+// Reserved for future use.
 type EfsFileLocation struct {
 
 	// The ID of the file system, assigned by Amazon EFS.
@@ -478,8 +467,8 @@ type ExecutionError struct {
 // any errors during workflow execution.
 type ExecutionResults struct {
 
-	// Specifies the steps (actions) to take if any errors are encountered during
-	// execution of the workflow.
+	// Specifies the steps (actions) to take if errors are encountered during execution
+	// of the workflow.
 	OnExceptionSteps []ExecutionStepResult
 
 	// Specifies the details for the steps that are in the specified workflow.
@@ -576,7 +565,7 @@ type IdentityProviderDetails struct {
 // type of workflow steps.
 type InputFileLocation struct {
 
-	// Specifies the details for the Amazon EFS file being copied.
+	// Reserved for future use.
 	EfsFileLocation *EfsFileLocation
 
 	// Specifies the details for the S3 file being copied.
@@ -817,17 +806,7 @@ type ProtocolDetails struct {
 }
 
 // Specifies the details for the file location for the file being used in the
-// workflow. Only applicable if you are using S3 storage. You need to provide the
-// bucket and key. The key can represent either a path or a file. This is
-// determined by whether or not you end the key value with the forward slash (/)
-// character. If the final character is "/", then your file is copied to the
-// folder, and its name does not change. If, rather, the final character is
-// alphanumeric, your uploaded file is renamed to the path value. In this case, if
-// a file with that name already exists, it is overwritten. For example, if your
-// path is shared-files/bob/, your uploaded files are copied to the
-// shared-files/bob/, folder. If your path is shared-files/today, each uploaded
-// file is copied to the shared-files folder and named today: each upload
-// overwrites the previous version of the bob file.
+// workflow. Only applicable if you are using S3 storage.
 type S3FileLocation struct {
 
 	// Specifies the S3 bucket that contains the file being used.
@@ -847,10 +826,21 @@ type S3FileLocation struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the details for the S3 file being copied.
+// Specifies the customer input S3 file location. If it is used inside
+// copyStepDetails.DestinationFileLocation, it should be the S3 copy destination.
+// You need to provide the bucket and key. The key can represent either a path or a
+// file. This is determined by whether or not you end the key value with the
+// forward slash (/) character. If the final character is "/", then your file is
+// copied to the folder, and its name does not change. If, rather, the final
+// character is alphanumeric, your uploaded file is renamed to the path value. In
+// this case, if a file with that name already exists, it is overwritten. For
+// example, if your path is shared-files/bob/, your uploaded files are copied to
+// the shared-files/bob/, folder. If your path is shared-files/today, each uploaded
+// file is copied to the shared-files folder and named today: each upload
+// overwrites the previous version of the bob file.
 type S3InputFileLocation struct {
 
-	// Specifies the S3 bucket that contains the file being copied.
+	// Specifies the S3 bucket for the customer input file.
 	Bucket *string
 
 	// The name assigned to the file when it was created in S3. You use the object key
@@ -1008,18 +998,18 @@ type WorkflowStep struct {
 	//
 	// * A description
 	//
-	// * An S3 or EFS location for the destination of the
-	// file copy.
+	// * An S3 location for the destination of the file
+	// copy.
 	//
-	// * A flag that indicates whether or not to overwrite an existing file
-	// of the same name. The default is FALSE.
+	// * A flag that indicates whether or not to overwrite an existing file of
+	// the same name. The default is FALSE.
 	CopyStepDetails *CopyStepDetails
 
 	// Details for a step that invokes a lambda function. Consists of the lambda
 	// function name, target, and timeout (in seconds).
 	CustomStepDetails *CustomStepDetails
 
-	// You need to specify the name of the file to be deleted.
+	// Details for a step that deletes the file.
 	DeleteStepDetails *DeleteStepDetails
 
 	// Details for a step that creates one or more tags. You specify one or more tags:

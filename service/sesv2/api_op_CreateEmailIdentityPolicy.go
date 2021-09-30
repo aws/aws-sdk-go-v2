@@ -40,7 +40,7 @@ func (c *Client) CreateEmailIdentityPolicy(ctx context.Context, params *CreateEm
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-identity-owner-tasks-management.html).
 type CreateEmailIdentityPolicyInput struct {
 
-	// The email identity for which you want to create a policy.
+	// The email identity.
 	//
 	// This member is required.
 	EmailIdentity *string

@@ -27,13 +27,15 @@ import (
 // file archive
 // (https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html#gettingstarted-package-zip).
 // For a .zip file archive, the code property specifies the location of the .zip
-// file. You must also specify the handler and runtime properties. When you create
-// a function, Lambda provisions an instance of the function and its supporting
-// resources. If your function connects to a VPC, this process can take a minute or
-// so. During this time, you can't invoke or modify the function. The State,
-// StateReason, and StateReasonCode fields in the response from
-// GetFunctionConfiguration indicate when the function is ready to invoke. For more
-// information, see Function States
+// file. You must also specify the handler and runtime properties. The code in the
+// deployment package must be compatible with the target instruction set
+// architecture of the function (x86-64 or arm64). If you do not specify the
+// architecture, the default value is x86-64. When you create a function, Lambda
+// provisions an instance of the function and its supporting resources. If your
+// function connects to a VPC, this process can take a minute or so. During this
+// time, you can't invoke or modify the function. The State, StateReason, and
+// StateReasonCode fields in the response from GetFunctionConfiguration indicate
+// when the function is ready to invoke. For more information, see Function States
 // (https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html). A function
 // has an unpublished version, and can have published versions and aliases. The
 // unpublished version changes when you update your function's code and
@@ -103,6 +105,10 @@ type CreateFunctionInput struct {
 	//
 	// This member is required.
 	Role *string
+
+	// The instruction set architecture that the function supports. Enter a string
+	// array with one of the valid values. The default value is x86_64.
+	Architectures []types.Architecture
 
 	// To enable code signing for this function, specify the ARN of a code-signing
 	// configuration. A code-signing configuration includes a set of signing profiles,
@@ -190,6 +196,11 @@ type CreateFunctionInput struct {
 
 // Details about a function's configuration.
 type CreateFunctionOutput struct {
+
+	// The instruction set architecture that the function supports. Architecture is a
+	// string array with one of the valid values. The default architecture value is
+	// x86_64.
+	Architectures []types.Architecture
 
 	// The SHA256 hash of the function's deployment package.
 	CodeSha256 *string

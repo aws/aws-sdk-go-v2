@@ -221,10 +221,9 @@ type BucketCountByEffectivePermission struct {
 // in the Amazon Simple Storage Service User Guide.
 type BucketCountByEncryptionType struct {
 
-	// The total number of buckets that use an Key Management Service (KMS) customer
-	// master key (CMK) to encrypt new objects by default. These buckets use Amazon Web
-	// Services managed KMS encryption (AWS-KMS) or customer managed KMS encryption
-	// (SSE-KMS) by default.
+	// The total number of buckets that use an KMS key to encrypt new objects by
+	// default, either an Amazon Web Services managed key or a customer managed key.
+	// These buckets use KMS encryption (SSE-KMS) by default.
 	KmsManaged int64
 
 	// The total number of buckets that use an Amazon S3 managed key to encrypt new
@@ -299,7 +298,7 @@ type BucketCountPolicyAllowsUnencryptedObjectUploads struct {
 type BucketCriteriaAdditionalProperties struct {
 
 	// The value for the property matches (equals) the specified value. If you specify
-	// multiple values, Macie uses OR logic to join the values.
+	// multiple values, Amazon Macie uses OR logic to join the values.
 	Eq []string
 
 	// The value for the property is greater than the specified value.
@@ -342,7 +341,12 @@ type BucketLevelPermissions struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information about an S3 bucket that Amazon Macie monitors and analyzes.
+// Provides statistical data and other information about an S3 bucket that Amazon
+// Macie monitors and analyzes for your account. If an error occurs when Macie
+// attempts to retrieve and process information about the bucket or the bucket's
+// objects, the value for most of these properties is null. Exceptions are
+// accountId, bucketArn, bucketCreatedAt, bucketName, lastUpdated, and region. To
+// identify the cause of the error, refer to the errorCode and errorMessage values.
 type BucketMetadata struct {
 
 	// The unique identifier for the Amazon Web Services account that owns the bucket.
@@ -389,6 +393,19 @@ type BucketMetadata struct {
 	// of each applicable object in the bucket. This value doesn't reflect the storage
 	// size of all versions of each applicable object in the bucket.
 	ClassifiableSizeInBytes int64
+
+	// Specifies the error code for an error that prevented Amazon Macie from
+	// retrieving and processing information about the bucket and the bucket's objects.
+	// If this value is ACCESS_DENIED, Macie doesn't have permission to retrieve the
+	// information. For example, the bucket has a restrictive bucket policy and Amazon
+	// S3 denied the request. If this value is null, Macie was able to retrieve and
+	// process the information.
+	ErrorCode BucketMetadataErrorCode
+
+	// A brief description of the error (errorCode) that prevented Amazon Macie from
+	// retrieving and processing information about the bucket and the bucket's objects.
+	// This value is null if Macie was able to retrieve and process the information.
+	ErrorMessage *string
 
 	// Specifies whether any one-time or recurring classification jobs are configured
 	// to analyze data in the bucket, and, if so, the details of the job that ran most
@@ -448,10 +465,10 @@ type BucketMetadata struct {
 	SizeInBytes int64
 
 	// The total storage size, in bytes, of the objects that are compressed (.gz,
-	// .gzip, .zip) files in the bucket. If versioning is enabled for the bucket, Macie
-	// calculates this value based on the size of the latest version of each applicable
-	// object in the bucket. This value doesn't reflect the storage size of all
-	// versions of each applicable object in the bucket.
+	// .gzip, .zip) files in the bucket. If versioning is enabled for the bucket,
+	// Amazon Macie calculates this value based on the size of the latest version of
+	// each applicable object in the bucket. This value doesn't reflect the storage
+	// size of all versions of each applicable object in the bucket.
 	SizeInBytesCompressed int64
 
 	// An array that specifies the tags (keys and values) that are associated with the
@@ -532,26 +549,25 @@ type BucketPublicAccess struct {
 // in the Amazon Simple Storage Service User Guide.
 type BucketServerSideEncryption struct {
 
-	// The Amazon Resource Name (ARN) or unique identifier (key ID) for the Key
-	// Management Service (KMS) customer master key (CMK) that's used by default to
-	// encrypt objects that are added to the bucket. This value is null if the bucket
-	// uses an Amazon S3 managed key to encrypt new objects or the bucket doesn't
-	// encrypt new objects by default.
+	// The Amazon Resource Name (ARN) or unique identifier (key ID) for the KMS key
+	// that's used by default to encrypt objects that are added to the bucket. This
+	// value is null if the bucket uses an Amazon S3 managed key to encrypt new objects
+	// or the bucket doesn't encrypt new objects by default.
 	KmsMasterKeyId *string
 
 	// The type of server-side encryption that's used by default when storing new
 	// objects in the bucket. Possible values are:
 	//
 	// * AES256 - New objects are
-	// encrypted with an Amazon S3 managed key and use Amazon S3 managed encryption
-	// (SSE-S3).
+	// encrypted with an Amazon S3 managed key. They use SSE-S3 encryption.
 	//
-	// * aws:kms - New objects are encrypted with an KMS CMK, specified by
-	// the kmsMasterKeyId property, and use Amazon Web Services managed KMS encryption
-	// (AWS-KMS) or customer managed KMS encryption (SSE-KMS).
+	// * aws:kms
+	// - New objects are encrypted with an KMS key (kmsMasterKeyId), either an Amazon
+	// Web Services managed key or a customer managed key. They use SSE-KMS
+	// encryption.
 	//
-	// * NONE - New objects
-	// aren't encrypted by default. Default encryption is disabled for the bucket.
+	// * NONE - New objects aren't encrypted by default. Default
+	// encryption is disabled for the bucket.
 	Type Type
 
 	noSmithyDocumentSerde
@@ -1461,7 +1477,11 @@ type ManagedDataIdentifierSummary struct {
 }
 
 // Provides statistical data and other information about an S3 bucket that Amazon
-// Macie monitors and analyzes.
+// Macie monitors and analyzes for your account. If an error occurs when Macie
+// attempts to retrieve and process information about the bucket or the bucket's
+// objects, the value for most of these properties is null. Exceptions are
+// accountId and bucketName. To identify the cause of the error, refer to the
+// errorCode and errorMessage values.
 type MatchingBucket struct {
 
 	// The unique identifier for the Amazon Web Services account that owns the bucket.
@@ -1483,6 +1503,19 @@ type MatchingBucket struct {
 	// size of all versions of each applicable object in the bucket.
 	ClassifiableSizeInBytes int64
 
+	// Specifies the error code for an error that prevented Amazon Macie from
+	// retrieving and processing information about the bucket and the bucket's objects.
+	// If this value is ACCESS_DENIED, Macie doesn't have permission to retrieve the
+	// information. For example, the bucket has a restrictive bucket policy and Amazon
+	// S3 denied the request. If this value is null, Macie was able to retrieve and
+	// process the information.
+	ErrorCode BucketMetadataErrorCode
+
+	// A brief description of the error (errorCode) that prevented Amazon Macie from
+	// retrieving and processing information about the bucket and the bucket's objects.
+	// This value is null if Macie was able to retrieve and process the information.
+	ErrorMessage *string
+
 	// Specifies whether any one-time or recurring classification jobs are configured
 	// to analyze objects in the bucket, and, if so, the details of the job that ran
 	// most recently.
@@ -1503,10 +1536,10 @@ type MatchingBucket struct {
 	SizeInBytes int64
 
 	// The total storage size, in bytes, of the objects that are compressed (.gz,
-	// .gzip, .zip) files in the bucket. If versioning is enabled for the bucket, Macie
-	// calculates this value based on the size of the latest version of each applicable
-	// object in the bucket. This value doesn't reflect the storage size of all
-	// versions of each applicable object in the bucket.
+	// .gzip, .zip) files in the bucket. If versioning is enabled for the bucket,
+	// Amazon Macie calculates this value based on the size of the latest version of
+	// each applicable object in the bucket. This value doesn't reflect the storage
+	// size of all versions of each applicable object in the bucket.
 	SizeInBytesCompressed int64
 
 	// The total number of objects that Amazon Macie can't analyze in the bucket. These
@@ -1523,7 +1556,7 @@ type MatchingBucket struct {
 }
 
 // Provides statistical data and other information about an Amazon Web Services
-// resource that Amazon Macie monitors and analyzes.
+// resource that Amazon Macie monitors and analyzes for your account.
 type MatchingResource struct {
 
 	// The details of an S3 bucket that Amazon Macie monitors and analyzes.
@@ -1593,13 +1626,13 @@ type MonthlySchedule struct {
 // aren't encrypted.
 type ObjectCountByEncryptionType struct {
 
-	// The total number of objects that are encrypted with a customer-managed key. The
+	// The total number of objects that are encrypted with a customer-provided key. The
 	// objects use customer-provided server-side encryption (SSE-C).
 	CustomerManaged int64
 
-	// The total number of objects that are encrypted with an Key Management Service
-	// (KMS) customer master key (CMK). The objects use Amazon Web Services managed KMS
-	// encryption (AWS-KMS) or customer managed KMS encryption (SSE-KMS).
+	// The total number of objects that are encrypted with an KMS key, either an Amazon
+	// Web Services managed key or a customer managed key. The objects use KMS
+	// encryption (SSE-KMS).
 	KmsManaged int64
 
 	// The total number of objects that are encrypted with an Amazon S3 managed key.
@@ -1620,10 +1653,10 @@ type ObjectCountByEncryptionType struct {
 // Provides information about the total storage size (in bytes) or number of
 // objects that Amazon Macie can't analyze in one or more S3 buckets. In a
 // BucketMetadata or MatchingBucket object, this data is for a specific bucket. In
-// a GetBucketStatisticsResponse object, this data is aggregated for all the
-// buckets in the query results. If versioning is enabled for a bucket, total
-// storage size values are based on the size of the latest version of each
-// applicable object in the bucket.
+// a GetBucketStatisticsResponse object, this data is aggregated for the buckets in
+// the query results. If versioning is enabled for a bucket, total storage size
+// values are based on the size of the latest version of each applicable object in
+// the bucket.
 type ObjectLevelStatistics struct {
 
 	// The total storage size (in bytes) or number of objects that Amazon Macie can't
@@ -1898,9 +1931,9 @@ type S3Destination struct {
 	// This member is required.
 	BucketName *string
 
-	// The Amazon Resource Name (ARN) of the Key Management Service (KMS) customer
-	// master key (CMK) to use for encryption of the results. This must be the ARN of
-	// an existing CMK that's in the same Amazon Web Services Region as the bucket.
+	// The Amazon Resource Name (ARN) of the KMS key to use for encryption of the
+	// results. This must be the ARN of an existing, symmetric, customer managed KMS
+	// key that's in the same Amazon Web Services Region as the bucket.
 	//
 	// This member is required.
 	KmsKeyArn *string
@@ -2188,9 +2221,9 @@ type ServerSideEncryption struct {
 	// encrypted using server-side encryption, this value is NONE.
 	EncryptionType EncryptionType
 
-	// The Amazon Resource Name (ARN) or unique identifier (key ID) for the Key
-	// Management Service (KMS) customer master key (CMK) that's used to encrypt data
-	// in the bucket or the object. If an KMS CMK isn't used, this value is null.
+	// The Amazon Resource Name (ARN) or unique identifier (key ID) for the KMS key
+	// that's used to encrypt data in the bucket or the object. This value is null if
+	// an KMS key isn't used to encrypt the data.
 	KmsMasterKeyId *string
 
 	noSmithyDocumentSerde

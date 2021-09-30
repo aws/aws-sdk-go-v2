@@ -7,6 +7,14 @@ import (
 	"time"
 )
 
+type Action struct {
+
+	// Details of the operation to be performed by the job.
+	ExportRevisionToS3 *AutoExportRevisionToS3RequestDetails
+
+	noSmithyDocumentSerde
+}
+
 // The destination for the asset.
 type AssetDestinationEntry struct {
 
@@ -112,6 +120,41 @@ type AssetSourceEntry struct {
 	noSmithyDocumentSerde
 }
 
+// A revision destination is the Amazon S3 bucket folder destination to where the
+// export will be sent.
+type AutoExportRevisionDestinationEntry struct {
+
+	// The S3 bucket that is the destination for the event action.
+	//
+	// This member is required.
+	Bucket *string
+
+	// A string representing the pattern for generated names of the individual assets
+	// in the revision. For more information about key patterns, see Key patterns when
+	// exporting revisions
+	// (https://docs.aws.amazon.com/data-exchange/latest/userguide/jobs.html#revision-export-keypatterns).
+	KeyPattern *string
+
+	noSmithyDocumentSerde
+}
+
+// Details of the operation to be performed by the job.
+type AutoExportRevisionToS3RequestDetails struct {
+
+	// A revision destination is the Amazon S3 bucket folder destination to where the
+	// export will be sent.
+	//
+	// This member is required.
+	RevisionDestination *AutoExportRevisionDestinationEntry
+
+	// Encryption configuration of the export job. Includes the encryption type in
+	// addition to the AWS KMS key. The KMS key is only necessary if you chose the KMS
+	// encryption. type.
+	Encryption *ExportServerSideEncryption
+
+	noSmithyDocumentSerde
+}
+
 // A data set is an AWS resource with one or more revisions.
 type DataSetEntry struct {
 
@@ -174,6 +217,49 @@ type Details struct {
 
 	// The list of sources for the assets.
 	ImportAssetsFromS3JobErrorDetails []AssetSourceEntry
+
+	noSmithyDocumentSerde
+}
+
+type Event struct {
+	RevisionPublished *RevisionPublished
+
+	noSmithyDocumentSerde
+}
+
+// An event action is an object that defines the relationship between a specific
+// event and an automated action that will be taken on behalf of the customer.
+type EventActionEntry struct {
+
+	// What occurs after a certain event.
+	//
+	// This member is required.
+	Action *Action
+
+	// The ARN for the event action.
+	//
+	// This member is required.
+	Arn *string
+
+	// The date and time that the event action was created, in ISO 8601 format.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// What occurs to start an action.
+	//
+	// This member is required.
+	Event *Event
+
+	// The unique identifier for the event action.
+	//
+	// This member is required.
+	Id *string
+
+	// The date and time that the event action was last updated, in ISO 8601 format.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -312,9 +398,9 @@ type ExportRevisionsToS3ResponseDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Encryption configuration of the export job. Includes the encryption type as well
-// as the AWS KMS key. The KMS key is only necessary if you chose the KMS
-// encryption type.
+// Encryption configuration of the export job. Includes the encryption type in
+// addition to the AWS KMS key. The KMS key is only necessary if you chose the KMS
+// encryption. type.
 type ExportServerSideEncryption struct {
 
 	// The type of server side encryption used for encrypting the objects in Amazon S3.
@@ -322,8 +408,8 @@ type ExportServerSideEncryption struct {
 	// This member is required.
 	Type ServerSideEncryptionTypes
 
-	// The Amazon Resource Name (ARN) of the the AWS KMS key you want to use to encrypt
-	// the Amazon S3 objects. This parameter is required if you choose aws:kms as an
+	// The Amazon Resource Name (ARN) of the AWS KMS key you want to use to encrypt the
+	// Amazon S3 objects. This parameter is required if you choose aws:kms as an
 	// encryption type.
 	KmsKeyArn *string
 
@@ -638,6 +724,16 @@ type RevisionEntry struct {
 	// being viewed. This parameter is returned when a revision owner is viewing the
 	// entitled copy of its owned revision.
 	SourceId *string
+
+	noSmithyDocumentSerde
+}
+
+type RevisionPublished struct {
+
+	// A unique identifier.
+	//
+	// This member is required.
+	DataSetId *string
 
 	noSmithyDocumentSerde
 }

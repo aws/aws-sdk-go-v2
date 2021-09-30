@@ -214,6 +214,30 @@ type MobileDeviceAccessMatchedRule struct {
 	noSmithyDocumentSerde
 }
 
+// The override object.
+type MobileDeviceAccessOverride struct {
+
+	// The date the override was first created.
+	DateCreated *time.Time
+
+	// The date the override was last modified.
+	DateModified *time.Time
+
+	// A description of the override.
+	Description *string
+
+	// The device to which the override applies.
+	DeviceId *string
+
+	// The effect of the override, ALLOW or DENY.
+	Effect MobileDeviceAccessRuleEffect
+
+	// The WorkMail user to which the access override applies.
+	UserId *string
+
+	noSmithyDocumentSerde
+}
+
 // A rule that controls access to mobile devices for an Amazon WorkMail group.
 type MobileDeviceAccessRule struct {
 

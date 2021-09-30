@@ -31,19 +31,17 @@ func (c *Client) PutEmailIdentityMailFromAttributes(ctx context.Context, params 
 // A request to configure the custom MAIL FROM domain for a verified identity.
 type PutEmailIdentityMailFromAttributesInput struct {
 
-	// The verified email identity that you want to set up the custom MAIL FROM domain
-	// for.
+	// The verified email identity.
 	//
 	// This member is required.
 	EmailIdentity *string
 
-	// The action that you want to take if the required MX record isn't found when you
-	// send an email. When you set this value to UseDefaultValue, the mail is sent
-	// using amazonses.com as the MAIL FROM domain. When you set this value to
-	// RejectMessage, the Amazon SES API v2 returns a MailFromDomainNotVerified error,
-	// and doesn't attempt to deliver the email. These behaviors are taken when the
-	// custom MAIL FROM domain configuration is in the Pending, Failed, and
-	// TemporaryFailure states.
+	// The action to take if the required MX record isn't found when you send an email.
+	// When you set this value to UseDefaultValue, the mail is sent using amazonses.com
+	// as the MAIL FROM domain. When you set this value to RejectMessage, the Amazon
+	// SES API v2 returns a MailFromDomainNotVerified error, and doesn't attempt to
+	// deliver the email. These behaviors are taken when the custom MAIL FROM domain
+	// configuration is in the Pending, Failed, and TemporaryFailure states.
 	BehaviorOnMxFailure types.BehaviorOnMxFailure
 
 	// The custom MAIL FROM domain that you want the verified identity to use. The MAIL

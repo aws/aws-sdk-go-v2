@@ -34,6 +34,10 @@ type Activity struct {
 	// specify.
 	ConditionalSplit *ConditionalSplitActivity
 
+	// The settings for a connect activity. This type of activity initiates a contact
+	// center call to participants.
+	ContactCenter *ContactCenterActivity
+
 	// The custom description of the activity.
 	Description *string
 
@@ -1740,6 +1744,14 @@ type ConditionalSplitActivity struct {
 
 	// The unique identifier for the activity to perform if the conditions are met.
 	TrueActivity *string
+
+	noSmithyDocumentSerde
+}
+
+type ContactCenterActivity struct {
+
+	// The unique identifier for the next activity to perform after the this activity.
+	NextActivity *string
 
 	noSmithyDocumentSerde
 }
@@ -3837,6 +3849,19 @@ type ItemResponse struct {
 	noSmithyDocumentSerde
 }
 
+// The channel-specific configurations for the journey.
+type JourneyChannelSettings struct {
+
+	// Amazon Resource Name (ARN) of the Connect Campaign.
+	ConnectCampaignArn *string
+
+	// IAM role ARN to be assumed when invoking Connect campaign execution APIs for
+	// dialing.
+	ConnectCampaignExecutionRoleArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies the message content for a custom channel message that's sent to
 // participants in a journey.
 type JourneyCustomMessage struct {
@@ -4069,6 +4094,9 @@ type JourneyResponse struct {
 
 	// The date, in ISO 8601 format, when the journey was created.
 	CreationDate *string
+
+	// The channel-specific configurations for the journey.
+	JourneyChannelSettings *JourneyChannelSettings
 
 	// The date, in ISO 8601 format, when the journey was last modified.
 	LastModifiedDate *string

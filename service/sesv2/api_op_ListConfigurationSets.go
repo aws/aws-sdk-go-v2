@@ -33,7 +33,7 @@ func (c *Client) ListConfigurationSets(ctx context.Context, params *ListConfigur
 }
 
 // A request to obtain a list of configuration sets for your Amazon SES account in
-// the current AWS Region.
+// the current Amazon Web Services Region.
 type ListConfigurationSetsInput struct {
 
 	// A token returned from a previous call to ListConfigurationSets to indicate the
@@ -49,12 +49,12 @@ type ListConfigurationSetsInput struct {
 	noSmithyDocumentSerde
 }
 
-// A list of configuration sets in your Amazon SES account in the current AWS
-// Region.
+// A list of configuration sets in your Amazon SES account in the current Amazon
+// Web Services Region.
 type ListConfigurationSetsOutput struct {
 
 	// An array that contains all of the configuration sets in your Amazon SES account
-	// in the current AWS Region.
+	// in the current Amazon Web Services Region.
 	ConfigurationSets []string
 
 	// A token that indicates that there are additional configuration sets to list. To

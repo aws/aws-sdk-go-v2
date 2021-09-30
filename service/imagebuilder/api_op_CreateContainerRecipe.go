@@ -51,7 +51,7 @@ type CreateContainerRecipeInput struct {
 	// This member is required.
 	Name *string
 
-	// The source image for the container recipe.
+	// The base image for the container recipe.
 	//
 	// This member is required.
 	ParentImage *string
@@ -84,7 +84,7 @@ type CreateContainerRecipeInput struct {
 	// image.
 	DockerfileTemplateUri *string
 
-	// Specifies the operating system version for the source image.
+	// Specifies the operating system version for the base image.
 	ImageOsVersionOverride *string
 
 	// A group of options that can be used to configure an instance for building and
@@ -94,7 +94,7 @@ type CreateContainerRecipeInput struct {
 	// Identifies which KMS key is used to encrypt the container image.
 	KmsKeyId *string
 
-	// Specifies the operating system platform when you use a custom source image.
+	// Specifies the operating system platform when you use a custom base image.
 	PlatformOverride types.Platform
 
 	// Tags that are attached to the container recipe.

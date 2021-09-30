@@ -20,7 +20,7 @@ type AdditionalInstanceConfiguration struct {
 	// your build instance. The userDataOverride property replaces any commands that
 	// Image Builder might have added to ensure that Systems Manager is installed on
 	// your Linux build instance. If you override the user data, make sure that you add
-	// commands to install Systems Manager, if it is not pre-installed on your source
+	// commands to install Systems Manager, if it is not pre-installed on your base
 	// image.
 	UserDataOverride *string
 
@@ -69,7 +69,7 @@ type AmiDistributionConfiguration struct {
 	// can use the AMI to launch instances.
 	LaunchPermission *LaunchPermissionConfiguration
 
-	// The name of the distribution configuration.
+	// The name of the output AMI.
 	Name *string
 
 	// The ID of an account to which you want to distribute an image.
@@ -120,8 +120,8 @@ type Component struct {
 	State *ComponentState
 
 	// The operating system (OS) version supported by the component. If the OS
-	// information is available, a prefix match is performed against the parent image
-	// OS version during image recipe creation.
+	// information is available, a prefix match is performed against the base image OS
+	// version during image recipe creation.
 	SupportedOsVersions []string
 
 	// The tags associated with the component.
@@ -233,8 +233,8 @@ type ComponentSummary struct {
 	State *ComponentState
 
 	// The operating system (OS) version supported by the component. If the OS
-	// information is available, a prefix match is performed against the parent image
-	// OS version during image recipe creation.
+	// information is available, a prefix match is performed against the base image OS
+	// version during image recipe creation.
 	SupportedOsVersions []string
 
 	// The tags associated with the component.
@@ -285,8 +285,8 @@ type ComponentVersion struct {
 	Platform Platform
 
 	// he operating system (OS) version supported by the component. If the OS
-	// information is available, a prefix match is performed against the parent image
-	// OS version during image recipe creation.
+	// information is available, a prefix match is performed against the base image OS
+	// version during image recipe creation.
 	SupportedOsVersions []string
 
 	// The type of the component denotes whether the component is used to build the
@@ -302,7 +302,7 @@ type ComponentVersion struct {
 	// requirements for the nodes that you can assign. For example, you might choose a
 	// software version pattern, such as 1.0.0, or a date, such as 2021.01.01.
 	// Filtering: With semantic versioning, you have the flexibility to use wildcards
-	// (x) to specify the most recent versions or nodes when selecting the source image
+	// (x) to specify the most recent versions or nodes when selecting the base image
 	// or components for your recipe. When you use a wildcard in any node, all nodes to
 	// the right of the first wildcard must also be wildcards.
 	Version *string
@@ -394,7 +394,7 @@ type ContainerRecipe struct {
 	// The owner of the container recipe.
 	Owner *string
 
-	// The source image for the container recipe.
+	// The base image for the container recipe.
 	ParentImage *string
 
 	// The system platform for the container, such as Windows or Linux.
@@ -415,7 +415,7 @@ type ContainerRecipe struct {
 	// requirements for the nodes that you can assign. For example, you might choose a
 	// software version pattern, such as 1.0.0, or a date, such as 2021.01.01.
 	// Filtering: With semantic versioning, you have the flexibility to use wildcards
-	// (x) to specify the most recent versions or nodes when selecting the source image
+	// (x) to specify the most recent versions or nodes when selecting the base image
 	// or components for your recipe. When you use a wildcard in any node, all nodes to
 	// the right of the first wildcard must also be wildcards.
 	Version *string
@@ -444,7 +444,7 @@ type ContainerRecipeSummary struct {
 	// The owner of the container recipe.
 	Owner *string
 
-	// The source image for the container recipe.
+	// The base image for the container recipe.
 	ParentImage *string
 
 	// The system platform for the container, such as Windows or Linux.
@@ -666,7 +666,7 @@ type Image struct {
 	// requirements for the nodes that you can assign. For example, you might choose a
 	// software version pattern, such as 1.0.0, or a date, such as 2021.01.01.
 	// Filtering: With semantic versioning, you have the flexibility to use wildcards
-	// (x) to specify the most recent versions or nodes when selecting the source image
+	// (x) to specify the most recent versions or nodes when selecting the base image
 	// or components for your recipe. When you use a wildcard in any node, all nodes to
 	// the right of the first wildcard must also be wildcards.
 	Version *string
@@ -779,7 +779,7 @@ type ImageRecipe struct {
 	// The owner of the image recipe.
 	Owner *string
 
-	// The parent image of the image recipe.
+	// The base image of the image recipe.
 	ParentImage *string
 
 	// The platform of the image recipe.
@@ -816,7 +816,7 @@ type ImageRecipeSummary struct {
 	// The owner of the image recipe.
 	Owner *string
 
-	// The parent image of the image recipe.
+	// The base image of the image recipe.
 	ParentImage *string
 
 	// The platform of the image recipe.
@@ -939,7 +939,7 @@ type ImageVersion struct {
 	// that you can assign. For example, you might choose a software version pattern,
 	// such as 1.0.0, or a date, such as 2021.01.01. Filtering: With semantic
 	// versioning, you have the flexibility to use wildcards (x) to specify the most
-	// recent versions or nodes when selecting the source image or components for your
+	// recent versions or nodes when selecting the base image or components for your
 	// recipe. When you use a wildcard in any node, all nodes to the right of the first
 	// wildcard must also be wildcards.
 	Version *string
@@ -1044,7 +1044,7 @@ type InstanceBlockDeviceMapping struct {
 	// Use to manage Amazon EBS-specific configuration for this mapping.
 	Ebs *EbsInstanceBlockDeviceSpecification
 
-	// Use to remove a mapping from the parent image.
+	// Use to remove a mapping from the base image.
 	NoDevice *string
 
 	// Use to manage instance ephemeral devices.
@@ -1053,8 +1053,8 @@ type InstanceBlockDeviceMapping struct {
 	noSmithyDocumentSerde
 }
 
-// Defines a custom source AMI and block device mapping configurations of an
-// instance used for building and testing container images.
+// Defines a custom base AMI and block device mapping configurations of an instance
+// used for building and testing container images.
 type InstanceConfiguration struct {
 
 	// Defines the block devices to attach for building an instance from this Image
@@ -1179,8 +1179,8 @@ type Schedule struct {
 	// The condition configures when the pipeline should trigger a new image build.
 	// When the pipelineExecutionStartCondition is set to
 	// EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE, and you use semantic version
-	// filters on the source image or components in your image recipe, EC2 Image
-	// Builder will build a new image only when there are new versions of the image or
+	// filters on the base image or components in your image recipe, EC2 Image Builder
+	// will build a new image only when there are new versions of the image or
 	// components in your recipe that match the semantic version filter. When it is set
 	// to EXPRESSION_MATCH_ONLY, it will build a new image every time the CRON
 	// expression matches the current time. For semantic version syntax, see

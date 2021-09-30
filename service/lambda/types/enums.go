@@ -2,6 +2,24 @@
 
 package types
 
+type Architecture string
+
+// Enum values for Architecture
+const (
+	ArchitectureX8664 Architecture = "x86_64"
+	ArchitectureArm64 Architecture = "arm64"
+)
+
+// Values returns all known values for Architecture. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Architecture) Values() []Architecture {
+	return []Architecture{
+		"x86_64",
+		"arm64",
+	}
+}
+
 type CodeSigningPolicy string
 
 // Enum values for CodeSigningPolicy

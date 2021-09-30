@@ -50,6 +50,26 @@ func (m *validateOpCreateDataSet) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateEventAction struct {
+}
+
+func (*validateOpCreateEventAction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateEventAction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateEventActionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateEventActionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateJob struct {
 }
 
@@ -130,6 +150,26 @@ func (m *validateOpDeleteDataSet) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteEventAction struct {
+}
+
+func (*validateOpDeleteEventAction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteEventAction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteEventActionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteEventActionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteRevision struct {
 }
 
@@ -185,6 +225,26 @@ func (m *validateOpGetDataSet) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetDataSetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetEventAction struct {
+}
+
+func (*validateOpGetEventAction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetEventAction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetEventActionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetEventActionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -390,6 +450,26 @@ func (m *validateOpUpdateDataSet) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateEventAction struct {
+}
+
+func (*validateOpUpdateEventAction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateEventAction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateEventActionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateEventActionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateRevision struct {
 }
 
@@ -418,6 +498,10 @@ func addOpCreateDataSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDataSet{}, middleware.After)
 }
 
+func addOpCreateEventActionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateEventAction{}, middleware.After)
+}
+
 func addOpCreateJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateJob{}, middleware.After)
 }
@@ -434,6 +518,10 @@ func addOpDeleteDataSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDataSet{}, middleware.After)
 }
 
+func addOpDeleteEventActionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteEventAction{}, middleware.After)
+}
+
 func addOpDeleteRevisionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteRevision{}, middleware.After)
 }
@@ -444,6 +532,10 @@ func addOpGetAssetValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetDataSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDataSet{}, middleware.After)
+}
+
+func addOpGetEventActionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetEventAction{}, middleware.After)
 }
 
 func addOpGetJobValidationMiddleware(stack *middleware.Stack) error {
@@ -486,8 +578,29 @@ func addOpUpdateDataSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDataSet{}, middleware.After)
 }
 
+func addOpUpdateEventActionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateEventAction{}, middleware.After)
+}
+
 func addOpUpdateRevisionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateRevision{}, middleware.After)
+}
+
+func validateAction(v *types.Action) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Action"}
+	if v.ExportRevisionToS3 != nil {
+		if err := validateAutoExportRevisionToS3RequestDetails(v.ExportRevisionToS3); err != nil {
+			invalidParams.AddNested("ExportRevisionToS3", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateAssetDestinationEntry(v *types.AssetDestinationEntry) error {
@@ -518,6 +631,62 @@ func validateAssetSourceEntry(v *types.AssetSourceEntry) error {
 	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutoExportRevisionDestinationEntry(v *types.AutoExportRevisionDestinationEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutoExportRevisionDestinationEntry"}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutoExportRevisionToS3RequestDetails(v *types.AutoExportRevisionToS3RequestDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutoExportRevisionToS3RequestDetails"}
+	if v.Encryption != nil {
+		if err := validateExportServerSideEncryption(v.Encryption); err != nil {
+			invalidParams.AddNested("Encryption", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RevisionDestination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RevisionDestination"))
+	} else if v.RevisionDestination != nil {
+		if err := validateAutoExportRevisionDestinationEntry(v.RevisionDestination); err != nil {
+			invalidParams.AddNested("RevisionDestination", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEvent(v *types.Event) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Event"}
+	if v.RevisionPublished != nil {
+		if err := validateRevisionPublished(v.RevisionPublished); err != nil {
+			invalidParams.AddNested("RevisionPublished", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -774,6 +943,21 @@ func validateRevisionDestinationEntry(v *types.RevisionDestinationEntry) error {
 	}
 }
 
+func validateRevisionPublished(v *types.RevisionPublished) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RevisionPublished"}
+	if v.DataSetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCancelJobInput(v *CancelJobInput) error {
 	if v == nil {
 		return nil
@@ -802,6 +986,32 @@ func validateOpCreateDataSetInput(v *CreateDataSetInput) error {
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateEventActionInput(v *CreateEventActionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateEventActionInput"}
+	if v.Action == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
+	} else if v.Action != nil {
+		if err := validateAction(v.Action); err != nil {
+			invalidParams.AddNested("Action", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Event == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Event"))
+	} else if v.Event != nil {
+		if err := validateEvent(v.Event); err != nil {
+			invalidParams.AddNested("Event", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -883,6 +1093,21 @@ func validateOpDeleteDataSetInput(v *DeleteDataSetInput) error {
 	}
 }
 
+func validateOpDeleteEventActionInput(v *DeleteEventActionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteEventActionInput"}
+	if v.EventActionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventActionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteRevisionInput(v *DeleteRevisionInput) error {
 	if v == nil {
 		return nil
@@ -929,6 +1154,21 @@ func validateOpGetDataSetInput(v *GetDataSetInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetDataSetInput"}
 	if v.DataSetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataSetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetEventActionInput(v *GetEventActionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetEventActionInput"}
+	if v.EventActionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventActionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1100,6 +1340,26 @@ func validateOpUpdateDataSetInput(v *UpdateDataSetInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateDataSetInput"}
 	if v.DataSetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataSetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateEventActionInput(v *UpdateEventActionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateEventActionInput"}
+	if v.Action != nil {
+		if err := validateAction(v.Action); err != nil {
+			invalidParams.AddNested("Action", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EventActionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventActionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

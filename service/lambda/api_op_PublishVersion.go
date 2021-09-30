@@ -74,6 +74,11 @@ type PublishVersionInput struct {
 // Details about a function's configuration.
 type PublishVersionOutput struct {
 
+	// The instruction set architecture that the function supports. Architecture is a
+	// string array with one of the valid values. The default architecture value is
+	// x86_64.
+	Architectures []types.Architecture
+
 	// The SHA256 hash of the function's deployment package.
 	CodeSha256 *string
 

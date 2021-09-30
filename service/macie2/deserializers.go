@@ -10939,6 +10939,24 @@ func awsRestjson1_deserializeDocumentBucketMetadata(v **types.BucketMetadata, va
 				sv.ClassifiableSizeInBytes = i64
 			}
 
+		case "errorCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BucketMetadataErrorCode to be of type string, got %T instead", value)
+				}
+				sv.ErrorCode = types.BucketMetadataErrorCode(jtv)
+			}
+
+		case "errorMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.ErrorMessage = ptr.String(jtv)
+			}
+
 		case "jobDetails":
 			if err := awsRestjson1_deserializeDocumentJobDetails(&sv.JobDetails, value); err != nil {
 				return err
@@ -13764,6 +13782,24 @@ func awsRestjson1_deserializeDocumentMatchingBucket(v **types.MatchingBucket, va
 					return err
 				}
 				sv.ClassifiableSizeInBytes = i64
+			}
+
+		case "errorCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BucketMetadataErrorCode to be of type string, got %T instead", value)
+				}
+				sv.ErrorCode = types.BucketMetadataErrorCode(jtv)
+			}
+
+		case "errorMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.ErrorMessage = ptr.String(jtv)
 			}
 
 		case "jobDetails":

@@ -6149,6 +6149,11 @@ func awsRestjson1_serializeDocumentDkimSigningAttributes(v *types.DkimSigningAtt
 		ok.String(*v.DomainSigningSelector)
 	}
 
+	if len(v.NextSigningKeyLength) > 0 {
+		ok := object.Key("NextSigningKeyLength")
+		ok.String(string(v.NextSigningKeyLength))
+	}
+
 	return nil
 }
 

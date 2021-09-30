@@ -16,7 +16,9 @@ import (
 // (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
 // Versions that have been deleted aren't listed. Specify a runtime identifier
 // (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) to list only
-// versions that indicate that they're compatible with that runtime.
+// versions that indicate that they're compatible with that runtime. Specify a
+// compatible architecture to include only layer versions that are compatible with
+// that architecture.
 func (c *Client) ListLayerVersions(ctx context.Context, params *ListLayerVersionsInput, optFns ...func(*Options)) (*ListLayerVersionsOutput, error) {
 	if params == nil {
 		params = &ListLayerVersionsInput{}
@@ -38,6 +40,10 @@ type ListLayerVersionsInput struct {
 	//
 	// This member is required.
 	LayerName *string
+
+	// The compatible instruction set architecture
+	// (https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html).
+	CompatibleArchitecture types.Architecture
 
 	// A runtime identifier. For example, go1.x.
 	CompatibleRuntime types.Runtime

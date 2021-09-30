@@ -11,7 +11,7 @@ import (
 )
 
 // Enable or disable email sending for messages that use a particular configuration
-// set in a specific AWS Region.
+// set in a specific Amazon Web Services Region.
 func (c *Client) PutConfigurationSetSendingOptions(ctx context.Context, params *PutConfigurationSetSendingOptionsInput, optFns ...func(*Options)) (*PutConfigurationSetSendingOptionsOutput, error) {
 	if params == nil {
 		params = &PutConfigurationSetSendingOptionsInput{}
@@ -31,8 +31,7 @@ func (c *Client) PutConfigurationSetSendingOptions(ctx context.Context, params *
 // a specific configuration set.
 type PutConfigurationSetSendingOptionsInput struct {
 
-	// The name of the configuration set that you want to enable or disable email
-	// sending for.
+	// The name of the configuration set to enable or disable email sending for.
 	//
 	// This member is required.
 	ConfigurationSetName *string

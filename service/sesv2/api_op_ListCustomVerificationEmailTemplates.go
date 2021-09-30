@@ -13,8 +13,8 @@ import (
 )
 
 // Lists the existing custom verification email templates for your account in the
-// current AWS Region. For more information about custom verification email
-// templates, see Using Custom Verification Email Templates
+// current Amazon Web Services Region. For more information about custom
+// verification email templates, see Using Custom Verification Email Templates
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-verify-address-custom.html)
 // in the Amazon SES Developer Guide. You can execute this operation no more than
 // once per second.

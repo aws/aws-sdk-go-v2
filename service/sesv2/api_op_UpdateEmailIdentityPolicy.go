@@ -41,7 +41,7 @@ func (c *Client) UpdateEmailIdentityPolicy(ctx context.Context, params *UpdateEm
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-identity-owner-tasks-management.html).
 type UpdateEmailIdentityPolicyInput struct {
 
-	// The email identity for which you want to update policy.
+	// The email identity.
 	//
 	// This member is required.
 	EmailIdentity *string

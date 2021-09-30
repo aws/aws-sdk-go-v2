@@ -18,13 +18,16 @@ import (
 // signing attributes for an identity that uses Bring Your Own DKIM (BYODKIM).
 //
 // *
-// Change from using no DKIM authentication to using Easy DKIM.
+// Update the key length that should be used for Easy DKIM.
 //
-// * Change from
-// using no DKIM authentication to using BYODKIM.
+// * Change from using no
+// DKIM authentication to using Easy DKIM.
 //
-// * Change from using Easy DKIM to
-// using BYODKIM.
+// * Change from using no DKIM
+// authentication to using BYODKIM.
+//
+// * Change from using Easy DKIM to using
+// BYODKIM.
 //
 // * Change from using BYODKIM to using Easy DKIM.
 func (c *Client) PutEmailIdentityDkimSigningAttributes(ctx context.Context, params *PutEmailIdentityDkimSigningAttributesInput, optFns ...func(*Options)) (*PutEmailIdentityDkimSigningAttributesOutput, error) {
@@ -45,16 +48,16 @@ func (c *Client) PutEmailIdentityDkimSigningAttributes(ctx context.Context, para
 // A request to change the DKIM attributes for an email identity.
 type PutEmailIdentityDkimSigningAttributesInput struct {
 
-	// The email identity that you want to configure DKIM for.
+	// The email identity.
 	//
 	// This member is required.
 	EmailIdentity *string
 
-	// The method that you want to use to configure DKIM for the identity. There are
-	// two possible values:
+	// The method to use to configure DKIM for the identity. There are the following
+	// possible values:
 	//
-	// * AWS_SES – Configure DKIM for the identity by using Easy
-	// DKIM (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html).
+	// * AWS_SES – Configure DKIM for the identity by using Easy DKIM
+	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html).
 	//
 	// *
 	// EXTERNAL – Configure DKIM for the identity by using Bring Your Own DKIM
@@ -64,8 +67,9 @@ type PutEmailIdentityDkimSigningAttributesInput struct {
 	SigningAttributesOrigin types.DkimSigningAttributesOrigin
 
 	// An object that contains information about the private key and selector that you
-	// want to use to configure DKIM for the identity. This object is only required if
-	// you want to configure Bring Your Own DKIM (BYODKIM) for the identity.
+	// want to use to configure DKIM for the identity for Bring Your Own DKIM (BYODKIM)
+	// for the identity, or, configures the key length to be used for Easy DKIM
+	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html).
 	SigningAttributes *types.DkimSigningAttributes
 
 	noSmithyDocumentSerde

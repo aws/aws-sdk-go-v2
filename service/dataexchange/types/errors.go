@@ -135,6 +135,8 @@ func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 type ValidationException struct {
 	Message *string
 
+	ExceptionCause ExceptionCause
+
 	noSmithyDocumentSerde
 }
 

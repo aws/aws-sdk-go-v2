@@ -236,8 +236,16 @@ type FirewallPolicy struct {
 	// This member is required.
 	StatelessFragmentDefaultActions []string
 
-	// References to the stateless rule groups that are used in the policy. These
-	// define the inspection criteria in stateful rules.
+	// The default actions to take on a packet that doesn't match any stateful rules.
+	StatefulDefaultActions []string
+
+	// Additional options governing how Network Firewall handles stateful rules. The
+	// stateful rule groups that you use in your policy must have stateful rule options
+	// settings that are compatible with these settings.
+	StatefulEngineOptions *StatefulEngineOptions
+
+	// References to the stateful rule groups that are used in the policy. These define
+	// the inspection criteria in stateful rules.
 	StatefulRuleGroupReferences []StatefulRuleGroupReference
 
 	// The custom action definitions that are available for use in the firewall
@@ -291,6 +299,12 @@ type FirewallPolicyResponse struct {
 	// This member is required.
 	FirewallPolicyName *string
 
+	// The number of capacity units currently consumed by the policy's stateful rules.
+	ConsumedStatefulRuleCapacity *int32
+
+	// The number of capacity units currently consumed by the policy's stateless rules.
+	ConsumedStatelessRuleCapacity *int32
+
 	// A description of the firewall policy.
 	Description *string
 
@@ -298,6 +312,9 @@ type FirewallPolicyResponse struct {
 	// policy by calling DescribeFirewallPolicy and providing the firewall policy's
 	// name or ARN.
 	FirewallPolicyStatus ResourceStatus
+
+	// The number of firewalls that are associated with this firewall policy.
+	NumberOfAssociations *int32
 
 	// The key:value pairs to associate with the resource.
 	Tags []Tag
@@ -341,9 +358,9 @@ type FirewallStatus struct {
 	noSmithyDocumentSerde
 }
 
-// The 5-tuple criteria for AWS Network Firewall to use to inspect packet headers
-// in stateful traffic flow inspection. Traffic flows that match the criteria are a
-// match for the corresponding StatefulRule.
+// The basic rule criteria for AWS Network Firewall to use to inspect packet
+// headers in stateful traffic flow inspection. Traffic flows that match the
+// criteria are a match for the corresponding StatefulRule.
 type Header struct {
 
 	// The destination IP address or address range to inspect for, in CIDR notation. To
@@ -366,7 +383,7 @@ type Header struct {
 	Destination *string
 
 	// The destination port to inspect for. You can specify an individual port, for
-	// example 1994 and you can specify a port range, for example 1990-1994. To match
+	// example 1994 and you can specify a port range, for example 1990:1994. To match
 	// with any port, specify ANY.
 	//
 	// This member is required.
@@ -406,7 +423,7 @@ type Header struct {
 	Source *string
 
 	// The source port to inspect for. You can specify an individual port, for example
-	// 1994 and you can specify a port range, for example 1990-1994. To match with any
+	// 1994 and you can specify a port range, for example 1990:1994. To match with any
 	// port, specify ANY.
 	//
 	// This member is required.
@@ -495,7 +512,7 @@ type MatchAttributes struct {
 	// The destination ports to inspect for. If not specified, this matches with any
 	// destination port. This setting is only used for protocols 6 (TCP) and 17 (UDP).
 	// You can specify individual ports, for example 1994 and you can specify port
-	// ranges, for example 1990-1994.
+	// ranges, for example 1990:1994.
 	DestinationPorts []PortRange
 
 	// The destination IP addresses and address ranges to inspect for, in CIDR
@@ -509,7 +526,7 @@ type MatchAttributes struct {
 	// The source ports to inspect for. If not specified, this matches with any source
 	// port. This setting is only used for protocols 6 (TCP) and 17 (UDP). You can
 	// specify individual ports, for example 1994 and you can specify port ranges, for
-	// example 1990-1994.
+	// example 1990:1994.
 	SourcePorts []PortRange
 
 	// The source IP addresses and address ranges to inspect for, in CIDR notation. If
@@ -651,6 +668,11 @@ type RuleGroup struct {
 	// use these for stateful rule groups.
 	RuleVariables *RuleVariables
 
+	// Additional options governing how Network Firewall handles stateful rules. The
+	// policies where you use your stateful rule group must have stateful rule options
+	// settings that are compatible with these settings.
+	StatefulRuleOptions *StatefulRuleOptions
+
 	noSmithyDocumentSerde
 }
 
@@ -700,8 +722,14 @@ type RuleGroupResponse struct {
 	// group by calling CreateRuleGroup with DryRun set to TRUE.
 	Capacity *int32
 
+	// The number of capacity units currently consumed by the rule group rules.
+	ConsumedCapacity *int32
+
 	// A description of the rule group.
 	Description *string
+
+	// The number of firewall policies that use this rule group.
+	NumberOfAssociations *int32
 
 	// Detailed information about the current status of a rule group.
 	RuleGroupStatus ResourceStatus
@@ -748,8 +776,11 @@ type RulesSource struct {
 	// setting.
 	RulesString *string
 
-	// The 5-tuple stateful inspection criteria. This contains an array of individual
-	// 5-tuple stateful rules to be used together in a stateful rule group.
+	// An array of individual stateful rules inspection criteria to be used together in
+	// a stateful rule group. Use this option to specify simple Suricata rules with
+	// protocol, source and destination, ports, direction, and rule options. For
+	// information about the Suricata Rules format, see Rules Format
+	// (https://suricata.readthedocs.io/en/suricata-5.0.0/rules/intro.html#).
 	StatefulRules []StatefulRule
 
 	// Stateless inspection criteria to be used in a stateless rule group.
@@ -767,7 +798,7 @@ type RulesSource struct {
 // CIDR ranges. For more information, see RuleVariables in this guide and Stateful
 // domain list rule groups in AWS Network Firewall
 // (https://docs.aws.amazon.com/network-firewall/latest/developerguide/stateful-rule-groups-domain-names.html)
-// in the Network Firewall Developer Guide
+// in the Network Firewall Developer Guide.
 type RulesSourceList struct {
 
 	// Whether you want to allow or deny access to the domains in your target list.
@@ -775,7 +806,7 @@ type RulesSourceList struct {
 	// This member is required.
 	GeneratedRulesType GeneratedRulesType
 
-	// The protocols you want to inspect. Specify TLS_SNI for HTTPS. Specity HTTP_HOST
+	// The protocols you want to inspect. Specify TLS_SNI for HTTPS. Specify HTTP_HOST
 	// for HTTP. You can specify either or both.
 	//
 	// This member is required.
@@ -811,7 +842,27 @@ type RuleVariables struct {
 	noSmithyDocumentSerde
 }
 
-// A single 5-tuple stateful rule, for use in a stateful rule group.
+// Configuration settings for the handling of the stateful rule groups in a
+// firewall policy.
+type StatefulEngineOptions struct {
+
+	// Indicates how to manage the order of stateful rule evaluation for the policy. By
+	// default, Network Firewall leaves the rule evaluation order up to the Suricata
+	// rule processing engine. If you set this to STRICT_ORDER, your rules are
+	// evaluated in the exact order that you provide them in the policy. With strict
+	// ordering, the rule groups are evaluated by order of priority, starting from the
+	// lowest number, and the rules in each rule group are processed in the order that
+	// they're defined.
+	RuleOrder RuleOrder
+
+	noSmithyDocumentSerde
+}
+
+// A single Suricata rules specification, for use in a stateful rule group. Use
+// this option to specify a simple Suricata rule with protocol, source and
+// destination, ports, direction, and rule options. For information about the
+// Suricata Rules format, see Rules Format
+// (https://suricata.readthedocs.io/en/suricata-5.0.0/rules/intro.html#).
 type StatefulRule struct {
 
 	// Defines what Network Firewall should do with the packets in a traffic flow when
@@ -836,13 +887,12 @@ type StatefulRule struct {
 	// This member is required.
 	Action StatefulAction
 
-	// The stateful 5-tuple inspection criteria for this rule, used to inspect traffic
-	// flows.
+	// The stateful inspection criteria for this rule, used to inspect traffic flows.
 	//
 	// This member is required.
 	Header *Header
 
-	//
+	// Additional options for the rule. These are the Suricata RuleOptions settings.
 	//
 	// This member is required.
 	RuleOptions []RuleOption
@@ -859,23 +909,47 @@ type StatefulRuleGroupReference struct {
 	// This member is required.
 	ResourceArn *string
 
+	// An integer setting that indicates the order in which to run the stateful rule
+	// groups in a single FirewallPolicy. This setting only applies to firewall
+	// policies that specify the STRICT_ORDER rule order in the stateful engine options
+	// settings. Network Firewall evalutes each stateful rule group against a packet
+	// starting with the group that has the lowest priority setting. You must ensure
+	// that the priority settings are unique within each policy. You can change the
+	// priority settings of your rule groups at any time. To make it easier to insert
+	// rule groups later, number them so there's a wide range in between, for example
+	// use 100, 200, and so on.
+	Priority int32
+
+	noSmithyDocumentSerde
+}
+
+// Additional options governing how Network Firewall handles the rule group. You
+// can only use these for stateful rule groups.
+type StatefulRuleOptions struct {
+
+	// Indicates how to manage the order of the rule evaluation for the rule group. By
+	// default, Network Firewall leaves the rule evaluation order up to the Suricata
+	// rule processing engine. If you set this to STRICT_ORDER, your rules are
+	// evaluated in the exact order that they're listed in your Suricata rules string.
+	RuleOrder RuleOrder
+
 	noSmithyDocumentSerde
 }
 
 // A single stateless rule. This is used in StatelessRulesAndCustomActions.
 type StatelessRule struct {
 
-	// A setting that indicates the order in which to run this rule relative to all of
-	// the rules that are defined for a stateless rule group. Network Firewall
-	// evaluates the rules in a rule group starting with the lowest priority setting.
-	// You must ensure that the priority settings are unique for the rule group. Each
-	// stateless rule group uses exactly one StatelessRulesAndCustomActions object, and
-	// each StatelessRulesAndCustomActions contains exactly one StatelessRules object.
-	// To ensure unique priority settings for your rule groups, set unique priorities
-	// for the stateless rules that you define inside any single StatelessRules object.
-	// You can change the priority settings of your rules at any time. To make it
-	// easier to insert rules later, number them so there's a wide range in between,
-	// for example use 100, 200, and so on.
+	// Indicates the order in which to run this rule relative to all of the rules that
+	// are defined for a stateless rule group. Network Firewall evaluates the rules in
+	// a rule group starting with the lowest priority setting. You must ensure that the
+	// priority settings are unique for the rule group. Each stateless rule group uses
+	// exactly one StatelessRulesAndCustomActions object, and each
+	// StatelessRulesAndCustomActions contains exactly one StatelessRules object. To
+	// ensure unique priority settings for your rule groups, set unique priorities for
+	// the stateless rules that you define inside any single StatelessRules object. You
+	// can change the priority settings of your rules at any time. To make it easier to
+	// insert rules later, number them so there's a wide range in between, for example
+	// use 100, 200, and so on.
 	//
 	// This member is required.
 	Priority int32

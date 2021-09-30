@@ -10,25 +10,26 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Shares or unshares an image with one account in the same AWS Region by
-// specifying whether that account has permission to copy the image. If the copy
-// image permission is granted, the image is shared with that account. If the copy
-// image permission is revoked, the image is unshared with the account. After an
-// image has been shared, the recipient account can copy the image to other AWS
-// Regions as needed. In the China (Ningxia) Region, you can copy images only
-// within the same Region. In the AWS GovCloud (US-West) Region, to copy images to
-// and from other AWS Regions, contact AWS Support. For more information about
-// sharing images, see  Share or Unshare a Custom WorkSpaces Image
+// Shares or unshares an image with one account in the same Amazon Web Services
+// Region by specifying whether that account has permission to copy the image. If
+// the copy image permission is granted, the image is shared with that account. If
+// the copy image permission is revoked, the image is unshared with the account.
+// After an image has been shared, the recipient account can copy the image to
+// other Regions as needed. In the China (Ningxia) Region, you can copy images only
+// within the same Region. In Amazon Web Services GovCloud (US), to copy images to
+// and from other Regions, contact Amazon Web Services Support. For more
+// information about sharing images, see  Share or Unshare a Custom WorkSpaces
+// Image
 // (https://docs.aws.amazon.com/workspaces/latest/adminguide/share-custom-image.html).
 //
 // *
 // To delete an image that has been shared, you must unshare the image before you
 // delete it.
 //
-// * Sharing Bring Your Own License (BYOL) images across AWS accounts
-// isn't supported at this time in the AWS GovCloud (US-West) Region. To share BYOL
-// images across accounts in the AWS GovCloud (US-West) Region, contact AWS
-// Support.
+// * Sharing Bring Your Own License (BYOL) images across Amazon Web
+// Services accounts isn't supported at this time in Amazon Web Services GovCloud
+// (US). To share BYOL images across accounts in Amazon Web Services GovCloud (US),
+// contact Amazon Web Services Support.
 func (c *Client) UpdateWorkspaceImagePermission(ctx context.Context, params *UpdateWorkspaceImagePermissionInput, optFns ...func(*Options)) (*UpdateWorkspaceImagePermissionOutput, error) {
 	if params == nil {
 		params = &UpdateWorkspaceImagePermissionInput{}
@@ -57,8 +58,9 @@ type UpdateWorkspaceImagePermissionInput struct {
 	// This member is required.
 	ImageId *string
 
-	// The identifier of the AWS account to share or unshare the image with. Before
-	// sharing the image, confirm that you are sharing to the correct AWS account ID.
+	// The identifier of the Amazon Web Services account to share or unshare the image
+	// with. Before sharing the image, confirm that you are sharing to the correct
+	// Amazon Web Services account ID.
 	//
 	// This member is required.
 	SharedAccountId *string

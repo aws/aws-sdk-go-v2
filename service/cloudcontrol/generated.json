@@ -1,0 +1,33 @@
+{
+    "dependencies": {
+        "github.com/aws/aws-sdk-go-v2": "v1.4.0",
+        "github.com/aws/smithy-go": "v1.4.0",
+        "github.com/jmespath/go-jmespath": "v0.4.0"
+    },
+    "files": [
+        "api_client.go",
+        "api_op_CancelResourceRequest.go",
+        "api_op_CreateResource.go",
+        "api_op_DeleteResource.go",
+        "api_op_GetResource.go",
+        "api_op_GetResourceRequestStatus.go",
+        "api_op_ListResourceRequests.go",
+        "api_op_ListResources.go",
+        "api_op_UpdateResource.go",
+        "deserializers.go",
+        "doc.go",
+        "endpoints.go",
+        "generated.json",
+        "internal/endpoints/endpoints.go",
+        "internal/endpoints/endpoints_test.go",
+        "protocol_test.go",
+        "serializers.go",
+        "types/enums.go",
+        "types/errors.go",
+        "types/types.go",
+        "validators.go"
+    ],
+    "go": "1.15",
+    "module": "github.com/aws/aws-sdk-go-v2/service/cloudcontrol",
+    "unstable": false
+}

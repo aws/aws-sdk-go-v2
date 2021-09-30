@@ -55,6 +55,19 @@ type AgentStatusSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration of the answering machine detection.
+type AnswerMachineDetectionConfig struct {
+
+	// Wait for the answering machine prompt.
+	AwaitAnswerMachinePrompt bool
+
+	// The flag to indicate if answer machine detection analysis needs to be performed
+	// for a voice call. If set to true, TrafficType must be set as CAMPAIGN.
+	EnableAnswerMachineDetection bool
+
+	noSmithyDocumentSerde
+}
+
 // A toggle for an individual feature at the instance level.
 type Attribute struct {
 
@@ -211,7 +224,8 @@ type EncryptionConfig struct {
 	// This member is required.
 	EncryptionType EncryptionType
 
-	// The identifier of the encryption key.
+	// The full ARN of the encryption key. Be sure to provide the full ARN of the
+	// encryption key, not just the ID.
 	//
 	// This member is required.
 	KeyId *string
@@ -1167,8 +1181,8 @@ type UseCase struct {
 	// The identifier for the use case.
 	UseCaseId *string
 
-	// The type of use case to associate to the AppIntegration association. Each
-	// AppIntegration association can have only one of each use case type.
+	// The type of use case to associate to the integration association. Each
+	// integration association can have only one of each use case type.
 	UseCaseType UseCaseType
 
 	noSmithyDocumentSerde

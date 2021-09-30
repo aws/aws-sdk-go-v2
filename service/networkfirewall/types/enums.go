@@ -172,6 +172,24 @@ func (RuleGroupType) Values() []RuleGroupType {
 	}
 }
 
+type RuleOrder string
+
+// Enum values for RuleOrder
+const (
+	RuleOrderDefaultActionOrder RuleOrder = "DEFAULT_ACTION_ORDER"
+	RuleOrderStrictOrder        RuleOrder = "STRICT_ORDER"
+)
+
+// Values returns all known values for RuleOrder. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (RuleOrder) Values() []RuleOrder {
+	return []RuleOrder{
+		"DEFAULT_ACTION_ORDER",
+		"STRICT_ORDER",
+	}
+}
+
 type StatefulAction string
 
 // Enum values for StatefulAction

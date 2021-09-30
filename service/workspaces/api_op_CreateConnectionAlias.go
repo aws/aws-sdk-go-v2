@@ -33,9 +33,9 @@ type CreateConnectionAliasInput struct {
 
 	// A connection string in the form of a fully qualified domain name (FQDN), such as
 	// www.example.com. After you create a connection string, it is always associated
-	// to your AWS account. You cannot recreate the same connection string with a
-	// different account, even if you delete all instances of it from the original
-	// account. The connection string is globally reserved for your account.
+	// to your Amazon Web Services account. You cannot recreate the same connection
+	// string with a different account, even if you delete all instances of it from the
+	// original account. The connection string is globally reserved for your account.
 	//
 	// This member is required.
 	ConnectionString *string

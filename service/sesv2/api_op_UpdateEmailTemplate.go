@@ -42,7 +42,7 @@ type UpdateEmailTemplateInput struct {
 	// This member is required.
 	TemplateContent *types.EmailTemplateContent
 
-	// The name of the template you want to update.
+	// The name of the template.
 	//
 	// This member is required.
 	TemplateName *string

@@ -31,8 +31,8 @@ func (c *Client) PutConfigurationSetSuppressionOptions(ctx context.Context, para
 // configuration set.
 type PutConfigurationSetSuppressionOptionsInput struct {
 
-	// The name of the configuration set that you want to change the suppression list
-	// preferences for.
+	// The name of the configuration set to change the suppression list preferences
+	// for.
 	//
 	// This member is required.
 	ConfigurationSetName *string

@@ -46,6 +46,24 @@ func (Code) Values() []Code {
 	}
 }
 
+type ExceptionCause string
+
+// Enum values for ExceptionCause
+const (
+	ExceptionCauseInsufficientS3BucketPolicy ExceptionCause = "InsufficientS3BucketPolicy"
+	ExceptionCauseS3AccessDenied             ExceptionCause = "S3AccessDenied"
+)
+
+// Values returns all known values for ExceptionCause. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExceptionCause) Values() []ExceptionCause {
+	return []ExceptionCause{
+		"InsufficientS3BucketPolicy",
+		"S3AccessDenied",
+	}
+}
+
 type JobErrorLimitName string
 
 // Enum values for JobErrorLimitName
@@ -70,6 +88,7 @@ type JobErrorResourceTypes string
 const (
 	JobErrorResourceTypesRevision JobErrorResourceTypes = "REVISION"
 	JobErrorResourceTypesAsset    JobErrorResourceTypes = "ASSET"
+	JobErrorResourceTypesDataSet  JobErrorResourceTypes = "DATA_SET"
 )
 
 // Values returns all known values for JobErrorResourceTypes. Note that this can be
@@ -79,6 +98,7 @@ func (JobErrorResourceTypes) Values() []JobErrorResourceTypes {
 	return []JobErrorResourceTypes{
 		"REVISION",
 		"ASSET",
+		"DATA_SET",
 	}
 }
 
@@ -98,6 +118,9 @@ const (
 	LimitNameConcurrentInProgressJobsToImportAssetsFromASignedUrl LimitName = "Concurrent in progress jobs to import assets from a signed URL"
 	LimitNameConcurrentInProgressJobsToExportAssetsToAmazonS3     LimitName = "Concurrent in progress jobs to export assets to Amazon S3"
 	LimitNameConcurrentInProgressJobsToExportAssetsToASignedUrl   LimitName = "Concurrent in progress jobs to export assets to a signed URL"
+	LimitNameConcurrentInProgressJobsToExportRevisionsToAmazonS3  LimitName = "Concurrent in progress jobs to export revisions to Amazon S3"
+	LimitNameEventActionsPerAccount                               LimitName = "Event actions per account"
+	LimitNameAutoExportEventActionsPerDataSet                     LimitName = "Auto export event actions per data set"
 )
 
 // Values returns all known values for LimitName. Note that this can be expanded in
@@ -117,6 +140,9 @@ func (LimitName) Values() []LimitName {
 		"Concurrent in progress jobs to import assets from a signed URL",
 		"Concurrent in progress jobs to export assets to Amazon S3",
 		"Concurrent in progress jobs to export assets to a signed URL",
+		"Concurrent in progress jobs to export revisions to Amazon S3",
+		"Event actions per account",
+		"Auto export event actions per data set",
 	}
 }
 
@@ -142,10 +168,11 @@ type ResourceType string
 
 // Enum values for ResourceType
 const (
-	ResourceTypeDataSet  ResourceType = "DATA_SET"
-	ResourceTypeRevision ResourceType = "REVISION"
-	ResourceTypeAsset    ResourceType = "ASSET"
-	ResourceTypeJob      ResourceType = "JOB"
+	ResourceTypeDataSet     ResourceType = "DATA_SET"
+	ResourceTypeRevision    ResourceType = "REVISION"
+	ResourceTypeAsset       ResourceType = "ASSET"
+	ResourceTypeJob         ResourceType = "JOB"
+	ResourceTypeEventAction ResourceType = "EVENT_ACTION"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -157,6 +184,7 @@ func (ResourceType) Values() []ResourceType {
 		"REVISION",
 		"ASSET",
 		"JOB",
+		"EVENT_ACTION",
 	}
 }
 

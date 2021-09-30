@@ -234,8 +234,14 @@ func awsAwsquery_deserializeOpErrorAddTags(response *smithyhttp.Response, metada
 	case strings.EqualFold("DuplicateTagKeys", errorCode):
 		return awsAwsquery_deserializeErrorDuplicateTagKeysException(response, errorBody)
 
+	case strings.EqualFold("ListenerNotFound", errorCode):
+		return awsAwsquery_deserializeErrorListenerNotFoundException(response, errorBody)
+
 	case strings.EqualFold("LoadBalancerNotFound", errorCode):
 		return awsAwsquery_deserializeErrorLoadBalancerNotFoundException(response, errorBody)
+
+	case strings.EqualFold("RuleNotFound", errorCode):
+		return awsAwsquery_deserializeErrorRuleNotFoundException(response, errorBody)
 
 	case strings.EqualFold("TargetGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorTargetGroupNotFoundException(response, errorBody)
@@ -920,6 +926,9 @@ func awsAwsquery_deserializeOpErrorDeleteListener(response *smithyhttp.Response,
 	switch {
 	case strings.EqualFold("ListenerNotFound", errorCode):
 		return awsAwsquery_deserializeErrorListenerNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ResourceInUse", errorCode):
+		return awsAwsquery_deserializeErrorResourceInUseException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{

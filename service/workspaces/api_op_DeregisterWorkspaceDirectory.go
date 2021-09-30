@@ -17,7 +17,7 @@ import (
 // WorkSpaces. If there are no WorkSpaces being used with your Simple AD or AD
 // Connector directory for 30 consecutive days, this directory will be
 // automatically deregistered for use with Amazon WorkSpaces, and you will be
-// charged for this directory as per the AWS Directory Services pricing terms
+// charged for this directory as per the Directory Service pricing terms
 // (http://aws.amazon.com/directoryservice/pricing/). To delete empty directories,
 // see  Delete the Directory for Your WorkSpaces
 // (https://docs.aws.amazon.com/workspaces/latest/adminguide/delete-workspaces-directory.html).
