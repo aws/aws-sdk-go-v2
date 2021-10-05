@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/hex"
+	"fmt"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -126,7 +127,7 @@ func TestAddRequestMiddleware(t *testing.T) {
 
 func TestOperationTimeoutMiddleware(t *testing.T) {
 	m := &operationTimeout{
-		Timeout: time.Nanosecond,
+		DefaultTimeout: time.Nanosecond,
 	}
 
 	_, _, err := m.HandleInitialize(context.Background(), middleware.InitializeInput{},
@@ -147,6 +148,36 @@ func TestOperationTimeoutMiddleware(t *testing.T) {
 
 	if e, a := "deadline exceeded", err.Error(); !strings.Contains(a, e) {
 		t.Errorf("expect %q error in %q", e, a)
+	}
+}
+
+func TestOperationTimeoutMiddleware_withCustomDeadline(t *testing.T) {
+	m := &operationTimeout{
+		DefaultTimeout: time.Nanosecond,
+	}
+
+	expectDeadline := time.Now().Add(time.Hour)
+	ctx, cancelFn := context.WithDeadline(context.Background(), expectDeadline)
+	defer cancelFn()
+
+	_, _, err := m.HandleInitialize(ctx, middleware.InitializeInput{},
+		middleware.InitializeHandlerFunc(func(
+			ctx context.Context, input middleware.InitializeInput,
+		) (
+			out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+		) {
+			t, ok := ctx.Deadline()
+			if !ok {
+				return out, metadata, fmt.Errorf("expect context deadline to be set")
+			}
+			if e, a := expectDeadline, t; !e.Equal(a) {
+				return out, metadata, fmt.Errorf("expect %v deadline, got %v", e, a)
+			}
+
+			return out, metadata, nil
+		}))
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
 	}
 }
 
