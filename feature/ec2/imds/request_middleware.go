@@ -1,8 +1,10 @@
 package imds
 
 import (
+	"bytes"
 	"context"
 	"fmt"
+	"io/ioutil"
 	"net/url"
 	"path"
 	"time"
@@ -142,12 +144,20 @@ func (m *deserializeResponse) HandleDeserialize(
 	resp, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
 		return out, metadata, fmt.Errorf(
-			"unexpected transport response type, %T", out.RawResponse)
+			"unexpected transport response type, %T, want %T", out.RawResponse, resp)
 	}
+	defer resp.Body.Close()
 
-	// Anything thats not 200 |< 300 is error
+	// read the full body so that any operation timeouts cleanup will not race
+	// the body being read.
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return out, metadata, fmt.Errorf("read response body failed, %w", err)
+	}
+	resp.Body = ioutil.NopCloser(bytes.NewReader(body))
+
+	// Anything that's not 200 |< 300 is error
 	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
-		resp.Body.Close()
 		return out, metadata, &smithyhttp.ResponseError{
 			Response: resp,
 			Err:      fmt.Errorf("request to EC2 IMDS failed"),
@@ -213,6 +223,11 @@ const (
 	defaultOperationTimeout = 5 * time.Second
 )
 
+// operationTimeout adds a timeout on the middleware stack. The next middleware
+// must complete before the timeout. The next middleware must also ensure that
+// any response body payloads are completely read from the response message
+// before returning. Otherwise timeouts cleanup will race the response body
+// being read upstream.
 type operationTimeout struct {
 	Timeout time.Duration
 }

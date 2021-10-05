@@ -150,6 +150,94 @@ func TestOperationTimeoutMiddleware(t *testing.T) {
 	}
 }
 
+// Ensure that the response body is read in the deserialize middleware,
+// ensuring that the timeoutOperation middleware won't race canceling the
+// context with the upstream reading the response body.
+//   * https://github.com/aws/aws-sdk-go-v2/issues/1253
+func TestDeserailizeResponse_cacheBody(t *testing.T) {
+	type Output struct {
+		Content io.ReadCloser
+	}
+	m := &deserializeResponse{
+		GetOutput: func(resp *smithyhttp.Response) (interface{}, error) {
+			return &Output{
+				Content: resp.Body,
+			}, nil
+		},
+	}
+
+	expectBody := "hello world!"
+	originalBody := &bytesReader{
+		reader: strings.NewReader(expectBody),
+	}
+	if originalBody.closed {
+		t.Fatalf("expect original body not to be closed yet")
+	}
+
+	out, _, err := m.HandleDeserialize(context.Background(), middleware.DeserializeInput{},
+		middleware.DeserializeHandlerFunc(func(
+			ctx context.Context, input middleware.DeserializeInput,
+		) (
+			out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+		) {
+			out.RawResponse = &smithyhttp.Response{
+				Response: &http.Response{
+					StatusCode:    200,
+					Status:        "200 OK",
+					Header:        http.Header{},
+					ContentLength: int64(originalBody.Len()),
+					Body:          originalBody,
+				},
+			}
+			return out, metadata, nil
+		}))
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	if !originalBody.closed {
+		t.Errorf("expect original body to be closed, was not")
+	}
+
+	result, ok := out.Result.(*Output)
+	if !ok {
+		t.Fatalf("expect result to be Output, got %T, %v", result, result)
+	}
+
+	actualBody, err := ioutil.ReadAll(result.Content)
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+	if e, a := expectBody, string(actualBody); e != a {
+		t.Errorf("expect %v body, got %v", e, a)
+	}
+	if err := result.Content.Close(); err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+}
+
+type bytesReader struct {
+	reader interface {
+		io.Reader
+		Len() int
+	}
+	closed bool
+}
+
+func (r *bytesReader) Len() int {
+	return r.reader.Len()
+}
+func (r *bytesReader) Close() error {
+	r.closed = true
+	return nil
+}
+func (r *bytesReader) Read(p []byte) (int, error) {
+	if r.closed {
+		return 0, io.EOF
+	}
+	return r.reader.Read(p)
+}
+
 type successAPIResponseHandler struct {
 	t      *testing.T
 	path   string
