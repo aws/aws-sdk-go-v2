@@ -13,7 +13,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/aws/aws-sdk-go-v2/internal/repotools"
+	repotools "github.com/awslabs/aws-go-multi-module-repository-tools"
 )
 
 var (
