@@ -136,6 +136,10 @@ func TestOperationTimeoutMiddleware(t *testing.T) {
 		) (
 			out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 		) {
+			if _, ok := ctx.Deadline(); !ok {
+				return out, metadata, fmt.Errorf("expect context deadline to be set")
+			}
+
 			if err := sdk.SleepWithContext(ctx, time.Second); err != nil {
 				return out, metadata, err
 			}
@@ -148,6 +152,26 @@ func TestOperationTimeoutMiddleware(t *testing.T) {
 
 	if e, a := "deadline exceeded", err.Error(); !strings.Contains(a, e) {
 		t.Errorf("expect %q error in %q", e, a)
+	}
+}
+
+func TestOperationTimeoutMiddleware_noDefaultTimeout(t *testing.T) {
+	m := &operationTimeout{}
+
+	_, _, err := m.HandleInitialize(context.Background(), middleware.InitializeInput{},
+		middleware.InitializeHandlerFunc(func(
+			ctx context.Context, input middleware.InitializeInput,
+		) (
+			out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+		) {
+			if t, ok := ctx.Deadline(); ok {
+				return out, metadata, fmt.Errorf("expect no context deadline, got %v", t)
+			}
+
+			return out, metadata, nil
+		}))
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
 	}
 }
 

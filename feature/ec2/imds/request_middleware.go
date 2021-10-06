@@ -227,6 +227,9 @@ const (
 // stack was called with does not have a deadline. The next middleware must
 // complete before the timeout, or the context will be canceled.
 //
+// If DefaultTimeout is zero, no default timeout will be used if the Context
+// does not have a timeout.
+//
 // The next middleware must also ensure that any resources that are also
 // canceled by the stack's context are completely consumed before returning.
 // Otherwise the timeout cleanup will race the resource being consumed
@@ -242,7 +245,7 @@ func (m *operationTimeout) HandleInitialize(
 ) (
 	output middleware.InitializeOutput, metadata middleware.Metadata, err error,
 ) {
-	if _, ok := ctx.Deadline(); !ok {
+	if _, ok := ctx.Deadline(); !ok && m.DefaultTimeout != 0 {
 		var cancelFn func()
 		ctx, cancelFn = context.WithTimeout(ctx, m.DefaultTimeout)
 		defer cancelFn()
