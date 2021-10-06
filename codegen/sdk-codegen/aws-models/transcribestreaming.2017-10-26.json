@@ -1,0 +1,1321 @@
+{
+    "smithy": "1.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.transcribestreaming#Alternative": {
+            "type": "structure",
+            "members": {
+                "Transcript": {
+                    "target": "com.amazonaws.transcribestreaming#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text that was transcribed from the audio.</p>"
+                    }
+                },
+                "Items": {
+                    "target": "com.amazonaws.transcribestreaming#ItemList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more alternative interpretations of the input audio. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of possible transcriptions for the audio.</p>"
+            }
+        },
+        "com.amazonaws.transcribestreaming#AlternativeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transcribestreaming#Alternative"
+            }
+        },
+        "com.amazonaws.transcribestreaming#AudioChunk": {
+            "type": "blob"
+        },
+        "com.amazonaws.transcribestreaming#AudioEvent": {
+            "type": "structure",
+            "members": {
+                "AudioChunk": {
+                    "target": "com.amazonaws.transcribestreaming#AudioChunk",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An audio blob that contains the next part of the audio that you want to transcribe. The\n      maximum audio chunk size is 32 KB.</p>",
+                        "smithy.api#eventPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a wrapper for the audio chunks that you are sending.</p>\n         <p>For information on audio encoding in Amazon Transcribe, see <a>input</a>. For information\n      on audio encoding formats in Amazon Transcribe Medical, see <a>input-med</a>.</p>"
+            }
+        },
+        "com.amazonaws.transcribestreaming#AudioStream": {
+            "type": "union",
+            "members": {
+                "AudioEvent": {
+                    "target": "com.amazonaws.transcribestreaming#AudioEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A blob of audio from your application. You audio stream consists of one or more audio\n      events.</p>\n         <p>For information on audio encoding formats in Amazon Transcribe, see <a>input</a>. For\n      information on audio encoding formats in Amazon Transcribe Medical, see <a>input-med</a>.</p>\n         <p>For more information on stream encoding in Amazon Transcribe, see <a>event-stream</a>. For\n      information on stream encoding in Amazon Transcribe Medical, see <a>event-stream-med</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the audio stream from your application to Amazon Transcribe.</p>",
+                "smithy.api#streaming": {}
+            }
+        },
+        "com.amazonaws.transcribestreaming#BadRequestException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.transcribestreaming#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>One or more arguments to the <code>StartStreamTranscription</code> or\n        <code>StartMedicalStreamTranscription</code> operation was invalid. For example,\n        <code>MediaEncoding</code> was not set to a valid encoding, or <code>LanguageCode</code> was\n      not set to a valid code. Check the parameters and try your request again.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.transcribestreaming#Boolean": {
+            "type": "boolean"
+        },
+        "com.amazonaws.transcribestreaming#Confidence": {
+            "type": "double",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.transcribestreaming#ConflictException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.transcribestreaming#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A new stream started with the same session ID. The current stream has been\n      terminated.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.transcribestreaming#Double": {
+            "type": "double"
+        },
+        "com.amazonaws.transcribestreaming#InternalFailureException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.transcribestreaming#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A problem occurred while processing the audio. Amazon Transcribe or Amazon Transcribe Medical terminated processing. Try\n      your request again.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.transcribestreaming#Item": {
+            "type": "structure",
+            "members": {
+                "StartTime": {
+                    "target": "com.amazonaws.transcribestreaming#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The offset from the beginning of the audio stream to the beginning of the audio that\n      resulted in the item.</p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.transcribestreaming#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The offset from the beginning of the audio stream to the end of the audio that resulted in\n      the item.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.transcribestreaming#ItemType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the item. <code>PRONUNCIATION</code> indicates that the item is a word that\n      was recognized in the input audio. <code>PUNCTUATION</code> indicates that the item was\n      interpreted as a pause in the input audio.</p>"
+                    }
+                },
+                "Content": {
+                    "target": "com.amazonaws.transcribestreaming#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The word or punctuation that was recognized in the input audio.</p>"
+                    }
+                },
+                "VocabularyFilterMatch": {
+                    "target": "com.amazonaws.transcribestreaming#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether a word in the item matches a word in the vocabulary filter you've chosen\n      for your real-time stream. If <code>true</code> then a word in the item matches your\n      vocabulary filter.</p>"
+                    }
+                },
+                "Speaker": {
+                    "target": "com.amazonaws.transcribestreaming#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If speaker identification is enabled, shows the speakers identified in the real-time\n      stream.</p>"
+                    }
+                },
+                "Confidence": {
+                    "target": "com.amazonaws.transcribestreaming#Confidence",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value between 0 and 1 for an item that is a confidence score that Amazon Transcribe assigns to each\n      word or phrase that it transcribes.</p>"
+                    }
+                },
+                "Stable": {
+                    "target": "com.amazonaws.transcribestreaming#Stable",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If partial result stabilization has been enabled, indicates whether the word or phrase in\n      the item is stable. If <code>Stable</code> is <code>true</code>, the result is stable.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A word, phrase, or punctuation mark that is transcribed from the input audio.</p>"
+            }
+        },
+        "com.amazonaws.transcribestreaming#ItemList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transcribestreaming#Item"
+            }
+        },
+        "com.amazonaws.transcribestreaming#ItemType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "pronunciation",
+                        "name": "PRONUNCIATION"
+                    },
+                    {
+                        "value": "punctuation",
+                        "name": "PUNCTUATION"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.transcribestreaming#LanguageCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "en-US",
+                        "name": "EN_US"
+                    },
+                    {
+                        "value": "en-GB",
+                        "name": "EN_GB"
+                    },
+                    {
+                        "value": "es-US",
+                        "name": "ES_US"
+                    },
+                    {
+                        "value": "fr-CA",
+                        "name": "FR_CA"
+                    },
+                    {
+                        "value": "fr-FR",
+                        "name": "FR_FR"
+                    },
+                    {
+                        "value": "en-AU",
+                        "name": "EN_AU"
+                    },
+                    {
+                        "value": "it-IT",
+                        "name": "IT_IT"
+                    },
+                    {
+                        "value": "de-DE",
+                        "name": "DE_DE"
+                    },
+                    {
+                        "value": "pt-BR",
+                        "name": "PT_BR"
+                    },
+                    {
+                        "value": "ja-JP",
+                        "name": "JA_JP"
+                    },
+                    {
+                        "value": "ko-KR",
+                        "name": "KO_KR"
+                    },
+                    {
+                        "value": "zh-CN",
+                        "name": "ZH_CN"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.transcribestreaming#LimitExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.transcribestreaming#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You have exceeded the maximum number of concurrent transcription streams, are starting\n      transcription streams too quickly, or the maximum audio length of 4 hours. Wait until a stream\n      has finished processing, or break your audio stream into smaller chunks and try your request\n      again.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.transcribestreaming#MediaEncoding": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "pcm",
+                        "name": "PCM"
+                    },
+                    {
+                        "value": "ogg-opus",
+                        "name": "OGG_OPUS"
+                    },
+                    {
+                        "value": "flac",
+                        "name": "FLAC"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.transcribestreaming#MediaSampleRateHertz": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 8000,
+                    "max": 48000
+                }
+            }
+        },
+        "com.amazonaws.transcribestreaming#MedicalAlternative": {
+            "type": "structure",
+            "members": {
+                "Transcript": {
+                    "target": "com.amazonaws.transcribestreaming#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text that was transcribed from the audio.</p>"
+                    }
+                },
+                "Items": {
+                    "target": "com.amazonaws.transcribestreaming#MedicalItemList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects that contains words and punctuation marks that represents one or\n            more interpretations of the input audio.</p>"
+                    }
+                },
+                "Entities": {
+                    "target": "com.amazonaws.transcribestreaming#MedicalEntityList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the medical entities identified as personal health information in the transcription output.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of possible transcriptions for the audio.</p>"
+            }
+        },
+        "com.amazonaws.transcribestreaming#MedicalAlternativeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transcribestreaming#MedicalAlternative"
+            }
+        },
+        "com.amazonaws.transcribestreaming#MedicalContentIdentificationType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PHI",
+                        "name": "PHI"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.transcribestreaming#MedicalEntity": {
+            "type": "structure",
+            "members": {
+                "StartTime": {
+                    "target": "com.amazonaws.transcribestreaming#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start time of the speech that was identified as a medical entity.</p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.transcribestreaming#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end time of the speech that was identified as a medical entity.</p>"
+                    }
+                },
+                "Category": {
+                    "target": "com.amazonaws.transcribestreaming#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of personal health information of the medical entity.</p>"
+                    }
+                },
+                "Content": {
+                    "target": "com.amazonaws.transcribestreaming#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The word or words in the transcription output that have been identified as a\n            medical entity.</p>"
+                    }
+                },
+                "Confidence": {
+                    "target": "com.amazonaws.transcribestreaming#Confidence",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value between zero and one that Amazon Transcribe Medical assigned to the personal health information\n            that it identified in the source audio. Larger values indicate that Amazon Transcribe Medical has higher\n            confidence in the personal health information that it identified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The medical entity identified as personal health information.</p>"
+            }
+        },
+        "com.amazonaws.transcribestreaming#MedicalEntityList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transcribestreaming#MedicalEntity"
+            }
+        },
+        "com.amazonaws.transcribestreaming#MedicalItem": {
+            "type": "structure",
+            "members": {
+                "StartTime": {
+                    "target": "com.amazonaws.transcribestreaming#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of seconds into an audio stream that indicates the creation time of an\n            item.</p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.transcribestreaming#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of seconds into an audio stream that indicates the creation time of an\n            item.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.transcribestreaming#ItemType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the item. <code>PRONUNCIATION</code> indicates that the item is a word\n            that was recognized in the input audio. <code>PUNCTUATION</code> indicates that the item\n            was interpreted as a pause in the input audio, such as a period to indicate the end of a\n            sentence.</p>"
+                    }
+                },
+                "Content": {
+                    "target": "com.amazonaws.transcribestreaming#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The word or punctuation mark that was recognized in the input audio.</p>"
+                    }
+                },
+                "Confidence": {
+                    "target": "com.amazonaws.transcribestreaming#Confidence",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value between 0 and 1 for an item that is a confidence score that Amazon Transcribe Medical assigns to\n            each word that it transcribes.</p>"
+                    }
+                },
+                "Speaker": {
+                    "target": "com.amazonaws.transcribestreaming#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If speaker identification is enabled, shows the integer values that correspond to the\n            different speakers identified in the stream. For example, if the value of\n                <code>Speaker</code> in the stream is either a <code>0</code> or a <code>1</code>,\n            that indicates that Amazon Transcribe Medical has identified two speakers in the stream. The value of\n                <code>0</code> corresponds to one speaker and the value of <code>1</code>\n            corresponds to the other speaker.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A word, phrase, or punctuation mark that is transcribed from the input audio.</p>"
+            }
+        },
+        "com.amazonaws.transcribestreaming#MedicalItemList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transcribestreaming#MedicalItem"
+            }
+        },
+        "com.amazonaws.transcribestreaming#MedicalResult": {
+            "type": "structure",
+            "members": {
+                "ResultId": {
+                    "target": "com.amazonaws.transcribestreaming#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the result.</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.transcribestreaming#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time, in seconds, from the beginning of the audio stream to the beginning of the\n            result.</p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.transcribestreaming#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time, in seconds, from the beginning of the audio stream to the end of the\n            result.</p>"
+                    }
+                },
+                "IsPartial": {
+                    "target": "com.amazonaws.transcribestreaming#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon Transcribe Medical divides the incoming audio stream into segments at natural points in the audio.\n            Transcription results are returned based on these segments.</p>\n        <p>The <code>IsPartial</code> field is <code>true</code> to indicate that Amazon Transcribe Medical has\n            additional transcription data to send. The <code>IsPartial</code> field is\n                <code>false</code> to indicate that this is the last transcription result for the\n            segment.</p>"
+                    }
+                },
+                "Alternatives": {
+                    "target": "com.amazonaws.transcribestreaming#MedicalAlternativeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of possible transcriptions of the audio. Each alternative typically contains\n            one <code>Item</code> that contains the result of the transcription.</p>"
+                    }
+                },
+                "ChannelId": {
+                    "target": "com.amazonaws.transcribestreaming#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When channel identification is enabled, Amazon Transcribe Medical transcribes the speech from each audio\n            channel separately.</p>\n        <p>You can use <code>ChannelId</code> to retrieve the transcription results for a single\n            channel in your audio stream.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The results of transcribing a portion of the input audio stream.</p>"
+            }
+        },
+        "com.amazonaws.transcribestreaming#MedicalResultList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transcribestreaming#MedicalResult"
+            }
+        },
+        "com.amazonaws.transcribestreaming#MedicalTranscript": {
+            "type": "structure",
+            "members": {
+                "Results": {
+                    "target": "com.amazonaws.transcribestreaming#MedicalResultList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <a>MedicalResult</a> objects that contain the results of transcribing a\n            portion of the input audio stream. The array can be empty.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The medical transcript in a <a>MedicalTranscriptEvent</a>.</p>"
+            }
+        },
+        "com.amazonaws.transcribestreaming#MedicalTranscriptEvent": {
+            "type": "structure",
+            "members": {
+                "Transcript": {
+                    "target": "com.amazonaws.transcribestreaming#MedicalTranscript",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The transcription of the audio stream. The transcription is composed of all of the\n            items in the results list.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a set of transcription results from the server to the client. It contains\n            one or more segments of the transcription.</p>"
+            }
+        },
+        "com.amazonaws.transcribestreaming#MedicalTranscriptResultStream": {
+            "type": "union",
+            "members": {
+                "TranscriptEvent": {
+                    "target": "com.amazonaws.transcribestreaming#MedicalTranscriptEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A portion of the transcription of the audio stream. Events are sent periodically from\n            Amazon Transcribe Medical to your application. The event can be a partial transcription of a section of the\n            audio stream, or it can be the entire transcription of that portion of the audio\n            stream.</p>"
+                    }
+                },
+                "BadRequestException": {
+                    "target": "com.amazonaws.transcribestreaming#BadRequestException"
+                },
+                "LimitExceededException": {
+                    "target": "com.amazonaws.transcribestreaming#LimitExceededException"
+                },
+                "InternalFailureException": {
+                    "target": "com.amazonaws.transcribestreaming#InternalFailureException"
+                },
+                "ConflictException": {
+                    "target": "com.amazonaws.transcribestreaming#ConflictException"
+                },
+                "ServiceUnavailableException": {
+                    "target": "com.amazonaws.transcribestreaming#ServiceUnavailableException"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the transcription result stream from Amazon Transcribe Medical to your application.</p>",
+                "smithy.api#streaming": {}
+            }
+        },
+        "com.amazonaws.transcribestreaming#NumberOfChannels": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 2
+                }
+            }
+        },
+        "com.amazonaws.transcribestreaming#PartialResultsStability": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "high",
+                        "name": "HIGH"
+                    },
+                    {
+                        "value": "medium",
+                        "name": "MEDIUM"
+                    },
+                    {
+                        "value": "low",
+                        "name": "LOW"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.transcribestreaming#RequestId": {
+            "type": "string"
+        },
+        "com.amazonaws.transcribestreaming#Result": {
+            "type": "structure",
+            "members": {
+                "ResultId": {
+                    "target": "com.amazonaws.transcribestreaming#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the result. </p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.transcribestreaming#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The offset in seconds from the beginning of the audio stream to the beginning of the\n      result.</p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.transcribestreaming#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The offset in seconds from the beginning of the audio stream to the end of the\n      result.</p>"
+                    }
+                },
+                "IsPartial": {
+                    "target": "com.amazonaws.transcribestreaming#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon Transcribe divides the incoming audio stream into segments at natural points in the audio.\n      Transcription results are returned based on these segments. </p>\n         <p>The <code>IsPartial</code> field is <code>true</code> to indicate that Amazon Transcribe has\n      additional transcription data to send, <code>false</code> to indicate that this is the last\n      transcription result for the segment.</p>"
+                    }
+                },
+                "Alternatives": {
+                    "target": "com.amazonaws.transcribestreaming#AlternativeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of possible transcriptions for the audio. Each alternative typically contains one\n        <code>item</code> that contains the result of the transcription.</p>"
+                    }
+                },
+                "ChannelId": {
+                    "target": "com.amazonaws.transcribestreaming#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When channel identification is enabled, Amazon Transcribe transcribes the speech from each audio\n      channel separately.</p>\n         <p>You can use <code>ChannelId</code> to retrieve the transcription results for a single\n      channel in your audio stream.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The result of transcribing a portion of the input audio stream. </p>"
+            }
+        },
+        "com.amazonaws.transcribestreaming#ResultList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transcribestreaming#Result"
+            }
+        },
+        "com.amazonaws.transcribestreaming#ServiceUnavailableException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.transcribestreaming#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Service is currently unavailable. Try your request later.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 503
+            }
+        },
+        "com.amazonaws.transcribestreaming#SessionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                },
+                "smithy.api#pattern": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"
+            }
+        },
+        "com.amazonaws.transcribestreaming#Specialty": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PRIMARYCARE",
+                        "name": "PRIMARYCARE"
+                    },
+                    {
+                        "value": "CARDIOLOGY",
+                        "name": "CARDIOLOGY"
+                    },
+                    {
+                        "value": "NEUROLOGY",
+                        "name": "NEUROLOGY"
+                    },
+                    {
+                        "value": "ONCOLOGY",
+                        "name": "ONCOLOGY"
+                    },
+                    {
+                        "value": "RADIOLOGY",
+                        "name": "RADIOLOGY"
+                    },
+                    {
+                        "value": "UROLOGY",
+                        "name": "UROLOGY"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.transcribestreaming#Stable": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.transcribestreaming#StartMedicalStreamTranscription": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.transcribestreaming#StartMedicalStreamTranscriptionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.transcribestreaming#StartMedicalStreamTranscriptionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.transcribestreaming#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.transcribestreaming#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.transcribestreaming#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.transcribestreaming#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.transcribestreaming#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts a bidirectional HTTP/2 stream where audio is streamed to Amazon Transcribe Medical and the\n            transcription results are streamed to your application.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/medical-stream-transcription",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.transcribestreaming#StartMedicalStreamTranscriptionRequest": {
+            "type": "structure",
+            "members": {
+                "LanguageCode": {
+                    "target": "com.amazonaws.transcribestreaming#LanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Indicates the source language used in the input audio stream. For Amazon Transcribe Medical, this is US\n            English (en-US). </p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-language-code",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MediaSampleRateHertz": {
+                    "target": "com.amazonaws.transcribestreaming#MediaSampleRateHertz",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sample rate of the input audio in Hertz. Sample rates of 16000 Hz or higher are\n            accepted.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-sample-rate",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MediaEncoding": {
+                    "target": "com.amazonaws.transcribestreaming#MediaEncoding",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encoding used for the input audio.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-media-encoding",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VocabularyName": {
+                    "target": "com.amazonaws.transcribestreaming#VocabularyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the medical custom vocabulary to use when processing the real-time\n            stream.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-vocabulary-name"
+                    }
+                },
+                "Specialty": {
+                    "target": "com.amazonaws.transcribestreaming#Specialty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The medical specialty of the clinician or provider.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-specialty",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.transcribestreaming#Type",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of input audio. Choose <code>DICTATION</code> for a provider dictating\n            patient notes. Choose <code>CONVERSATION</code> for a dialogue between a patient and one\n            or more medical professionanls.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-type",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ShowSpeakerLabel": {
+                    "target": "com.amazonaws.transcribestreaming#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When <code>true</code>, enables speaker identification in your real-time\n            stream.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-show-speaker-label"
+                    }
+                },
+                "SessionId": {
+                    "target": "com.amazonaws.transcribestreaming#SessionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Optional. An identifier for the transcription session. If you don't provide a session\n            ID, Amazon Transcribe generates one for you and returns it in the response. </p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-session-id"
+                    }
+                },
+                "AudioStream": {
+                    "target": "com.amazonaws.transcribestreaming#AudioStream",
+                    "traits": {
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "EnableChannelIdentification": {
+                    "target": "com.amazonaws.transcribestreaming#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When <code>true</code>, instructs Amazon Transcribe Medical to process each audio channel separately and\n            then merge the transcription output of each channel into a single transcription.</p>\n        <p>Amazon Transcribe Medical also produces a transcription of each item. An item includes the start time,\n            end time, and any alternative transcriptions.</p>\n        <p>You can't set both <code>ShowSpeakerLabel</code> and\n                <code>EnableChannelIdentification</code> in the same request. If you set both, your\n            request returns a <code>BadRequestException</code>.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-enable-channel-identification"
+                    }
+                },
+                "NumberOfChannels": {
+                    "target": "com.amazonaws.transcribestreaming#NumberOfChannels",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of channels that are in your audio stream.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-number-of-channels"
+                    }
+                },
+                "ContentIdentificationType": {
+                    "target": "com.amazonaws.transcribestreaming#MedicalContentIdentificationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set this field to <code>PHI</code> to identify personal health information in the\n            transcription output.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-content-identification-type"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transcribestreaming#StartMedicalStreamTranscriptionResponse": {
+            "type": "structure",
+            "members": {
+                "RequestId": {
+                    "target": "com.amazonaws.transcribestreaming#RequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identifier for the streaming transcription.</p>",
+                        "smithy.api#httpHeader": "x-amzn-request-id"
+                    }
+                },
+                "LanguageCode": {
+                    "target": "com.amazonaws.transcribestreaming#LanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language code for the response transcript. For Amazon Transcribe Medical, this is US English\n            (en-US).</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-language-code"
+                    }
+                },
+                "MediaSampleRateHertz": {
+                    "target": "com.amazonaws.transcribestreaming#MediaSampleRateHertz",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sample rate of the input audio in Hertz. Valid value: 16000 Hz.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-sample-rate"
+                    }
+                },
+                "MediaEncoding": {
+                    "target": "com.amazonaws.transcribestreaming#MediaEncoding",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encoding used for the input audio stream.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-media-encoding"
+                    }
+                },
+                "VocabularyName": {
+                    "target": "com.amazonaws.transcribestreaming#VocabularyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vocabulary used when processing the stream.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-vocabulary-name"
+                    }
+                },
+                "Specialty": {
+                    "target": "com.amazonaws.transcribestreaming#Specialty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specialty in the medical domain.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-specialty"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.transcribestreaming#Type",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of audio that was transcribed. </p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-type"
+                    }
+                },
+                "ShowSpeakerLabel": {
+                    "target": "com.amazonaws.transcribestreaming#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows whether speaker identification was enabled in the stream.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-show-speaker-label"
+                    }
+                },
+                "SessionId": {
+                    "target": "com.amazonaws.transcribestreaming#SessionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional. An identifier for the transcription session. If you don't provide a session\n            ID, Amazon Transcribe generates one for you and returns it in the response.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-session-id"
+                    }
+                },
+                "TranscriptResultStream": {
+                    "target": "com.amazonaws.transcribestreaming#MedicalTranscriptResultStream",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the stream of transcription events from Amazon Transcribe Medical to your application. </p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                },
+                "EnableChannelIdentification": {
+                    "target": "com.amazonaws.transcribestreaming#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows whether channel identification has been enabled in the stream.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-enable-channel-identification"
+                    }
+                },
+                "NumberOfChannels": {
+                    "target": "com.amazonaws.transcribestreaming#NumberOfChannels",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of channels identified in the stream.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-number-of-channels"
+                    }
+                },
+                "ContentIdentificationType": {
+                    "target": "com.amazonaws.transcribestreaming#MedicalContentIdentificationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the value is <code>PHI</code>, indicates that you've configured your stream to\n            identify personal health information.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-content-identification-type"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transcribestreaming#StartStreamTranscription": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.transcribestreaming#StartStreamTranscriptionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.transcribestreaming#StartStreamTranscriptionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.transcribestreaming#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.transcribestreaming#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.transcribestreaming#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.transcribestreaming#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.transcribestreaming#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts a bidirectional HTTP2 stream where audio is streamed to Amazon Transcribe and the transcription\n      results are streamed to your application.</p>\n         <p>The following are encoded as HTTP2 headers:</p>\n         <ul>\n            <li>\n               <p>x-amzn-transcribe-language-code</p>\n            </li>\n            <li>\n               <p>x-amzn-transcribe-media-encoding</p>\n            </li>\n            <li>\n               <p>x-amzn-transcribe-sample-rate</p>\n            </li>\n            <li>\n               <p>x-amzn-transcribe-session-id</p>\n            </li>\n         </ul>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/stream-transcription",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.transcribestreaming#StartStreamTranscriptionRequest": {
+            "type": "structure",
+            "members": {
+                "LanguageCode": {
+                    "target": "com.amazonaws.transcribestreaming#LanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the source language used in the input audio stream.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-language-code",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MediaSampleRateHertz": {
+                    "target": "com.amazonaws.transcribestreaming#MediaSampleRateHertz",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sample rate, in Hertz, of the input audio. We suggest that you use 8000 Hz for low\n      quality audio and 16000 Hz for high quality audio.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-sample-rate",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MediaEncoding": {
+                    "target": "com.amazonaws.transcribestreaming#MediaEncoding",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encoding used for the input audio.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-media-encoding",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VocabularyName": {
+                    "target": "com.amazonaws.transcribestreaming#VocabularyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vocabulary to use when processing the transcription job.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-vocabulary-name"
+                    }
+                },
+                "SessionId": {
+                    "target": "com.amazonaws.transcribestreaming#SessionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A identifier for the transcription session. Use this parameter when you want to retry a\n      session. If you don't provide a session ID, Amazon Transcribe will generate one for you and return it in\n      the response.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-session-id"
+                    }
+                },
+                "AudioStream": {
+                    "target": "com.amazonaws.transcribestreaming#AudioStream",
+                    "traits": {
+                        "smithy.api#documentation": "<p>PCM-encoded stream of audio blobs. The audio stream is encoded as an HTTP2 data\n      frame.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "VocabularyFilterName": {
+                    "target": "com.amazonaws.transcribestreaming#VocabularyFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vocabulary filter you've created that is unique to your AWS account.\n      Provide the name in this field to successfully use it in a stream.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-vocabulary-filter-name"
+                    }
+                },
+                "VocabularyFilterMethod": {
+                    "target": "com.amazonaws.transcribestreaming#VocabularyFilterMethod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The manner in which you use your vocabulary filter to filter words in your transcript.\n        <code>Remove</code> removes filtered words from your transcription results.\n        <code>Mask</code> masks those words with a <code>***</code> in your transcription results.\n        <code>Tag</code> keeps the filtered words in your transcription results and tags them. The\n      tag appears as <code>VocabularyFilterMatch</code> equal to <code>True</code>\n         </p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-vocabulary-filter-method"
+                    }
+                },
+                "ShowSpeakerLabel": {
+                    "target": "com.amazonaws.transcribestreaming#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When <code>true</code>, enables speaker identification in your real-time stream.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-show-speaker-label"
+                    }
+                },
+                "EnableChannelIdentification": {
+                    "target": "com.amazonaws.transcribestreaming#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When <code>true</code>, instructs Amazon Transcribe to process each audio channel separately and then\n      merge the transcription output of each channel into a single transcription.</p>\n         <p>Amazon Transcribe also produces a transcription of each item. An item includes the start time, end\n      time, and any alternative transcriptions.</p>\n         <p>You can't set both <code>ShowSpeakerLabel</code> and\n        <code>EnableChannelIdentification</code> in the same request. If you set both, your request\n      returns a <code>BadRequestException</code>.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-enable-channel-identification"
+                    }
+                },
+                "NumberOfChannels": {
+                    "target": "com.amazonaws.transcribestreaming#NumberOfChannels",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of channels that are in your audio stream.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-number-of-channels"
+                    }
+                },
+                "EnablePartialResultsStabilization": {
+                    "target": "com.amazonaws.transcribestreaming#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When <code>true</code>, instructs Amazon Transcribe to present transcription results that have the\n      partial results stabilized. Normally, any word or phrase from one partial result can change in\n      a subsequent partial result. With partial results stabilization enabled, only the last few\n      words of one partial result can change in another partial result.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-enable-partial-results-stabilization"
+                    }
+                },
+                "PartialResultsStability": {
+                    "target": "com.amazonaws.transcribestreaming#PartialResultsStability",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can use this field to set the stability level of the transcription results. A higher\n      stability level means that the transcription results are less likely to change. Higher\n      stability levels can come with lower overall transcription accuracy.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-partial-results-stability"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transcribestreaming#StartStreamTranscriptionResponse": {
+            "type": "structure",
+            "members": {
+                "RequestId": {
+                    "target": "com.amazonaws.transcribestreaming#RequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identifier for the streaming transcription.</p>",
+                        "smithy.api#httpHeader": "x-amzn-request-id"
+                    }
+                },
+                "LanguageCode": {
+                    "target": "com.amazonaws.transcribestreaming#LanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language code for the input audio stream.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-language-code"
+                    }
+                },
+                "MediaSampleRateHertz": {
+                    "target": "com.amazonaws.transcribestreaming#MediaSampleRateHertz",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sample rate for the input audio stream. Use 8000 Hz for low quality audio and 16000 Hz\n      for high quality audio.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-sample-rate"
+                    }
+                },
+                "MediaEncoding": {
+                    "target": "com.amazonaws.transcribestreaming#MediaEncoding",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encoding used for the input audio stream.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-media-encoding"
+                    }
+                },
+                "VocabularyName": {
+                    "target": "com.amazonaws.transcribestreaming#VocabularyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vocabulary used when processing the stream.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-vocabulary-name"
+                    }
+                },
+                "SessionId": {
+                    "target": "com.amazonaws.transcribestreaming#SessionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identifier for a specific transcription session.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-session-id"
+                    }
+                },
+                "TranscriptResultStream": {
+                    "target": "com.amazonaws.transcribestreaming#TranscriptResultStream",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the stream of transcription events from Amazon Transcribe to your application.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                },
+                "VocabularyFilterName": {
+                    "target": "com.amazonaws.transcribestreaming#VocabularyFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vocabulary filter used in your real-time stream.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-vocabulary-filter-name"
+                    }
+                },
+                "VocabularyFilterMethod": {
+                    "target": "com.amazonaws.transcribestreaming#VocabularyFilterMethod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The vocabulary filtering method used in the real-time stream.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-vocabulary-filter-method"
+                    }
+                },
+                "ShowSpeakerLabel": {
+                    "target": "com.amazonaws.transcribestreaming#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows whether speaker identification was enabled in the stream.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-show-speaker-label"
+                    }
+                },
+                "EnableChannelIdentification": {
+                    "target": "com.amazonaws.transcribestreaming#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows whether channel identification has been enabled in the stream.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-enable-channel-identification"
+                    }
+                },
+                "NumberOfChannels": {
+                    "target": "com.amazonaws.transcribestreaming#NumberOfChannels",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of channels identified in the stream.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-number-of-channels"
+                    }
+                },
+                "EnablePartialResultsStabilization": {
+                    "target": "com.amazonaws.transcribestreaming#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows whether partial results stabilization has been enabled in the stream.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-enable-partial-results-stabilization"
+                    }
+                },
+                "PartialResultsStability": {
+                    "target": "com.amazonaws.transcribestreaming#PartialResultsStability",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If partial results stabilization has been enabled in the stream, shows the stability\n      level.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-partial-results-stability"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transcribestreaming#String": {
+            "type": "string"
+        },
+        "com.amazonaws.transcribestreaming#Transcribe": {
+            "type": "service",
+            "version": "2017-10-26",
+            "operations": [
+                {
+                    "target": "com.amazonaws.transcribestreaming#StartMedicalStreamTranscription"
+                },
+                {
+                    "target": "com.amazonaws.transcribestreaming#StartStreamTranscription"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Transcribe Streaming",
+                    "arnNamespace": "transcribe",
+                    "cloudFormationName": "TranscribeStreaming",
+                    "cloudTrailEventSource": "transcribestreaming.amazonaws.com",
+                    "endpointPrefix": "transcribestreaming"
+                },
+                "aws.auth#sigv4": {
+                    "name": "transcribe"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>Operations and objects for transcribing streaming speech to text.</p>",
+                "smithy.api#title": "Amazon Transcribe Streaming Service"
+            }
+        },
+        "com.amazonaws.transcribestreaming#Transcript": {
+            "type": "structure",
+            "members": {
+                "Results": {
+                    "target": "com.amazonaws.transcribestreaming#ResultList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <a>Result</a> objects that contain the results of transcribing a portion of the\n      input audio stream. The array can be empty.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The transcription in a <a>TranscriptEvent</a>.</p>"
+            }
+        },
+        "com.amazonaws.transcribestreaming#TranscriptEvent": {
+            "type": "structure",
+            "members": {
+                "Transcript": {
+                    "target": "com.amazonaws.transcribestreaming#Transcript",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The transcription of the audio stream. The transcription is composed of all of the items\n      in the results list.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a set of transcription results from the server to the client. It contains one\n      or more segments of the transcription.</p>"
+            }
+        },
+        "com.amazonaws.transcribestreaming#TranscriptResultStream": {
+            "type": "union",
+            "members": {
+                "TranscriptEvent": {
+                    "target": "com.amazonaws.transcribestreaming#TranscriptEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A portion of the transcription of the audio stream. Events are sent periodically from\n      Amazon Transcribe to your application. The event can be a partial transcription of a section of the audio\n      stream, or it can be the entire transcription of that portion of the audio stream.\n      </p>"
+                    }
+                },
+                "BadRequestException": {
+                    "target": "com.amazonaws.transcribestreaming#BadRequestException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A client error occurred when the stream was created. Check the parameters of the request\n      and try your request again.</p>"
+                    }
+                },
+                "LimitExceededException": {
+                    "target": "com.amazonaws.transcribestreaming#LimitExceededException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Your client has exceeded one of the Amazon Transcribe limits, typically the limit on audio length.\n      Break your audio stream into smaller chunks and try your request again.</p>"
+                    }
+                },
+                "InternalFailureException": {
+                    "target": "com.amazonaws.transcribestreaming#InternalFailureException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A problem occurred while processing the audio. Amazon Transcribe terminated processing.</p>"
+                    }
+                },
+                "ConflictException": {
+                    "target": "com.amazonaws.transcribestreaming#ConflictException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new stream started with the same session ID. The current stream has been\n      terminated.</p>"
+                    }
+                },
+                "ServiceUnavailableException": {
+                    "target": "com.amazonaws.transcribestreaming#ServiceUnavailableException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Service is currently unavailable. Try your request later.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the transcription result stream from Amazon Transcribe to your application.</p>",
+                "smithy.api#streaming": {}
+            }
+        },
+        "com.amazonaws.transcribestreaming#Type": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CONVERSATION",
+                        "name": "CONVERSATION"
+                    },
+                    {
+                        "value": "DICTATION",
+                        "name": "DICTATION"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.transcribestreaming#VocabularyFilterMethod": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "remove",
+                        "name": "REMOVE"
+                    },
+                    {
+                        "value": "mask",
+                        "name": "MASK"
+                    },
+                    {
+                        "value": "tag",
+                        "name": "TAG"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.transcribestreaming#VocabularyFilterName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z._-]+"
+            }
+        },
+        "com.amazonaws.transcribestreaming#VocabularyName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z._-]+"
+            }
+        }
+    }
+}

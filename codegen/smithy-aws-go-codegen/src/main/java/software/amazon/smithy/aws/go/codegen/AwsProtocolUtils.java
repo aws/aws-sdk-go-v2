@@ -325,4 +325,70 @@ final class AwsProtocolUtils {
     public static void handleDecodeError(GoWriter writer) {
         handleDecodeError(writer, "");
     }
+
+    public static void writeJsonEventMessageSerializerDelegator(
+            GenerationContext ctx,
+            String functionName,
+            String operand,
+            String contentType
+    ) {
+        var writer = ctx.getWriter().get();
+
+        var stringValue = SymbolUtils.createValueSymbolBuilder("StringValue",
+                AwsGoDependency.SERVICE_INTERNAL_EVENTSTREAM).build();
+        var contentTypeHeader = SymbolUtils.createValueSymbolBuilder("ContentTypeHeader",
+                AwsGoDependency.SERVICE_INTERNAL_EVENTSTREAMAPI).build();
+
+        writer.write("msg.Headers.Set($T, $T($S))",
+                contentTypeHeader, stringValue, contentType);
+        var newEncoder = SymbolUtils.createValueSymbolBuilder("NewEncoder",
+                SmithyGoDependency.SMITHY_JSON).build();
+        writer.write("jsonEncoder := $T()", newEncoder)
+                .openBlock("if err := $L($L, jsonEncoder.Value); err != nil {", "}", functionName, operand,
+                        () -> writer.write("return err"))
+                .write("msg.Payload = jsonEncoder.Bytes()")
+                .write("return nil");
+    }
+
+    public static void initializeJsonEventMessageDeserializer(GenerationContext ctx) {
+        initializeJsonEventMessageDeserializer(ctx, "");
+    }
+
+    public static void initializeJsonEventMessageDeserializer(GenerationContext ctx, String errorReturnExtras) {
+        var writer = ctx.getWriter().get();
+        writer.write("br := $T(msg.Payload)", SymbolUtils.createValueSymbolBuilder(
+                "NewReader", SmithyGoDependency.BYTES).build());
+        initializeJsonDecoder(writer, "br");
+        AwsProtocolUtils.decodeJsonIntoInterface(writer, errorReturnExtras);
+    }
+
+    public static void writeJsonEventStreamUnknownExceptionDeserializer(GenerationContext ctx) {
+        var writer = ctx.getWriter().get();
+        writer.write("br := $T(msg.Payload)", SymbolUtils.createValueSymbolBuilder("NewReader",
+                SmithyGoDependency.BYTES).build());
+        AwsProtocolUtils.initializeJsonDecoder(writer, "br");
+        writer.write("""
+                     code, message, err := $T(decoder)
+                     if err != nil {
+                         return err
+                     }
+                     errorCode := "UnknownError"
+                     errorMessage := errorCode
+                     if ev := exceptionType.String(); len(ev) > 0 {
+                         errorCode = ev
+                     } else if ev := code; len(ev) > 0 {
+                         errorCode = ev
+                     }
+                     if ev := message; len(ev) > 0 {
+                         errorMessage = ev
+                     }
+                     return &$T{
+                         Code: errorCode,
+                         Message: errorMessage,
+                     }
+                     """,
+                SymbolUtils.createValueSymbolBuilder("GetErrorInfo",
+                        AwsGoDependency.AWS_REST_JSON_PROTOCOL).build(),
+                SymbolUtils.createValueSymbolBuilder("GenericAPIError", SmithyGoDependency.SMITHY).build());
+    }
 }

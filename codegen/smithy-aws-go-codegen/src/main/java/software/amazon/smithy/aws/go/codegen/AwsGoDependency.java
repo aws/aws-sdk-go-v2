@@ -34,6 +34,10 @@ public class AwsGoDependency {
     public static final GoDependency AWS_XML = aws("aws/protocol/xml", "awsxml");
     public static final GoDependency AWS_HTTP_TRANSPORT = aws("aws/transport/http", "awshttp");
     public static final GoDependency AWSTESTING_UNIT = aws("internal/awstesting/unit");
+    public static final GoDependency SERVICE_INTERNAL_EVENTSTREAM = awsModuleDep("aws/protocol/eventstream",
+            null, Versions.AWS_PROTOCOL_EVENTSTREAM, "eventstream");
+    public static final GoDependency SERVICE_INTERNAL_EVENTSTREAMAPI = awsModuleDep("aws/protocol/eventstream",
+            "eventstreamapi", Versions.AWS_PROTOCOL_EVENTSTREAM, "eventstreamapi");
 
     public static final GoDependency INTERNAL_ENDPOINTS_V2 = awsModuleDep("internal/endpoints/v2", null,
             Versions.INTERNAL_ENDPOINTS_V2, "endpoints");
@@ -93,5 +97,6 @@ public class AwsGoDependency {
         private static final String SERVICE_INTERNAL_CONFIG = "v0.0.0-00010101000000-000000000000";
         private static final String SERVICE_INTERNAL_ENDPOINT_DISCOVERY = "v0.0.0-00010101000000-000000000000";
         private static final String INTERNAL_ENDPOINTS_V2 = "v2.0.0-00010101000000-000000000000";
+        private static final String AWS_PROTOCOL_EVENTSTREAM = "v0.0.0-00010101000000-000000000000";
     }
 }

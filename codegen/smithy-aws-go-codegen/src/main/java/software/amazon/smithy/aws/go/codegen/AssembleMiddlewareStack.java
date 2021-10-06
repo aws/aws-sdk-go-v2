@@ -5,9 +5,11 @@ import software.amazon.smithy.aws.go.codegen.customization.AdjustAwsRestJsonCont
 import software.amazon.smithy.aws.traits.auth.UnsignedPayloadTrait;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
+import software.amazon.smithy.go.codegen.integration.ConfigFieldResolver;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
+import software.amazon.smithy.model.knowledge.EventStreamIndex;
 import software.amazon.smithy.utils.ListUtils;
 
 public class AssembleMiddlewareStack implements GoIntegration {
@@ -30,7 +32,7 @@ public class AssembleMiddlewareStack implements GoIntegration {
                 RuntimeClientPlugin.builder()
                         .registerMiddleware(MiddlewareRegistrar.builder()
                                 .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
-                                        "AddClientRequestIDMiddleware", AwsGoDependency.AWS_MIDDLEWARE)
+                                                "AddClientRequestIDMiddleware", AwsGoDependency.AWS_MIDDLEWARE)
                                         .build())
                                 .build()
                         )
@@ -38,9 +40,12 @@ public class AssembleMiddlewareStack implements GoIntegration {
 
                 // Add ContentLengthMiddleware to operation stack
                 RuntimeClientPlugin.builder()
+                        .operationPredicate((model, service, operation) ->
+                                EventStreamIndex.of(model).getInputInfo(operation).isEmpty())
                         .registerMiddleware(MiddlewareRegistrar.builder()
                                 .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
-                                        "AddComputeContentLengthMiddleware", SmithyGoDependency.SMITHY_HTTP_TRANSPORT)
+                                                "AddComputeContentLengthMiddleware",
+                                                SmithyGoDependency.SMITHY_HTTP_TRANSPORT)
                                         .build())
                                 .build()
                         )
@@ -55,35 +60,69 @@ public class AssembleMiddlewareStack implements GoIntegration {
                                 .build())
                         .build(),
 
-                // Add unsigned payload middleware to operation stack
+                // Add streaming events payload middleware to operation stack
                 RuntimeClientPlugin.builder()
-                        .operationPredicate((model, service, operation) -> AwsSignatureVersion4.hasSigV4AuthScheme(
-                                model, service, operation) && operation.hasTrait(UnsignedPayloadTrait.class))
+                        .operationPredicate((model, service, operation) -> {
+                            if (!AwsSignatureVersion4.hasSigV4AuthScheme(
+                                    model, service, operation)) {
+                                return false;
+                            }
+                            return EventStreamIndex.of(model).getInputInfo(operation).isPresent();
+                        })
                         .registerMiddleware(MiddlewareRegistrar.builder()
                                 .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
-                                        "AddUnsignedPayloadMiddleware", AwsGoDependency.AWS_SIGNER_V4)
+                                                "AddStreamingEventsPayload", AwsGoDependency.AWS_SIGNER_V4)
+                                        .build())
+                                .build())
+                        .build(),
+
+                // Add unsigned payload middleware to operation stack
+                RuntimeClientPlugin.builder()
+                        .operationPredicate((model, service, operation) -> {
+                            if (!AwsSignatureVersion4.hasSigV4AuthScheme(
+                                    model, service, operation)) {
+                                return false;
+                            }
+                            var noEventStream = EventStreamIndex.of(model).getInputInfo(operation).isEmpty();
+                            return operation.hasTrait(UnsignedPayloadTrait.class) && noEventStream;
+                        })
+                        .registerMiddleware(MiddlewareRegistrar.builder()
+                                .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
+                                                "AddUnsignedPayloadMiddleware", AwsGoDependency.AWS_SIGNER_V4)
                                         .build())
                                 .build())
                         .build(),
 
                 // Add signed payload middleware to operation stack
                 RuntimeClientPlugin.builder()
-                        .operationPredicate((model, service, operation) -> AwsSignatureVersion4.hasSigV4AuthScheme(
-                                model, service, operation) && !operation.hasTrait(UnsignedPayloadTrait.class))
+                        .operationPredicate((model, service, operation) -> {
+                            if (!AwsSignatureVersion4.hasSigV4AuthScheme(
+                                    model, service, operation)) {
+                                return false;
+                            }
+                            var noEventStream = EventStreamIndex.of(model).getInputInfo(operation).isEmpty();
+                            return !operation.hasTrait(UnsignedPayloadTrait.class) && noEventStream;
+                        })
                         .registerMiddleware(MiddlewareRegistrar.builder()
                                 .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
-                                        "AddComputePayloadSHA256Middleware", AwsGoDependency.AWS_SIGNER_V4)
+                                                "AddComputePayloadSHA256Middleware", AwsGoDependency.AWS_SIGNER_V4)
                                         .build())
                                 .build())
                         .build(),
 
                 // Add content-sha256 payload header middleware to operation stack
                 RuntimeClientPlugin.builder()
-                        .operationPredicate((model, service, operation) -> AwsSignatureVersion4.hasSigV4AuthScheme(
-                                model, service, operation) && operation.hasTrait(UnsignedPayloadTrait.class))
+                        .operationPredicate((model, service, operation) -> {
+                            if (!AwsSignatureVersion4.hasSigV4AuthScheme(
+                                    model, service, operation)) {
+                                return false;
+                            }
+                            var hasEventStream = EventStreamIndex.of(model).getInputInfo(operation).isPresent();
+                            return operation.hasTrait(UnsignedPayloadTrait.class) || hasEventStream;
+                        })
                         .registerMiddleware(MiddlewareRegistrar.builder()
                                 .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
-                                        "AddContentSHA256HeaderMiddleware", AwsGoDependency.AWS_SIGNER_V4)
+                                                "AddContentSHA256HeaderMiddleware", AwsGoDependency.AWS_SIGNER_V4)
                                         .build())
                                 .build())
                         .build(),
@@ -92,7 +131,7 @@ public class AssembleMiddlewareStack implements GoIntegration {
                 RuntimeClientPlugin.builder()
                         .registerMiddleware(MiddlewareRegistrar.builder()
                                 .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
-                                        AwsRetryMiddlewareHelper.ADD_RETRY_MIDDLEWARES_HELPER)
+                                                AwsRetryMiddlewareHelper.ADD_RETRY_MIDDLEWARES_HELPER)
                                         .build())
                                 .useClientOptions()
                                 .build())
@@ -111,7 +150,7 @@ public class AssembleMiddlewareStack implements GoIntegration {
                 RuntimeClientPlugin.builder()
                         .registerMiddleware(MiddlewareRegistrar.builder()
                                 .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
-                                        "AddRawResponseToMetadata", AwsGoDependency.AWS_MIDDLEWARE)
+                                                "AddRawResponseToMetadata", AwsGoDependency.AWS_MIDDLEWARE)
                                         .build())
                                 .build())
                         .build(),
@@ -120,7 +159,7 @@ public class AssembleMiddlewareStack implements GoIntegration {
                 RuntimeClientPlugin.builder()
                         .registerMiddleware(MiddlewareRegistrar.builder()
                                 .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
-                                        "AddRecordResponseTiming", AwsGoDependency.AWS_MIDDLEWARE)
+                                                "AddRecordResponseTiming", AwsGoDependency.AWS_MIDDLEWARE)
                                         .build())
                                 .build())
                         .build(),
@@ -141,6 +180,18 @@ public class AssembleMiddlewareStack implements GoIntegration {
                                 .build())
                         .servicePredicate((model, serviceShape) ->
                                 AdjustAwsRestJsonContentType.isServiceOnShameList(serviceShape))
+                        .build(),
+
+                // Add Event Stream Input Writer (must be added AFTER retryer)
+                RuntimeClientPlugin.builder()
+                        .operationPredicate((model, service, operation) ->
+                                EventStreamIndex.of(model).getInputInfo(operation).isPresent())
+                        .registerMiddleware(MiddlewareRegistrar.builder()
+                                .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
+                                                "AddInitializeStreamWriter",
+                                                AwsGoDependency.SERVICE_INTERNAL_EVENTSTREAMAPI)
+                                        .build())
+                                .build())
                         .build()
         );
     }

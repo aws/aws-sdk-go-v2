@@ -1,6 +1,7 @@
 software.amazon.smithy.aws.go.codegen.AddProtocols
 software.amazon.smithy.aws.go.codegen.AddAwsConfigFields
 software.amazon.smithy.aws.go.codegen.RegisterServiceMetadataMiddleware
+software.amazon.smithy.aws.go.codegen.AwsEventStreamIntegration
 software.amazon.smithy.aws.go.codegen.AssembleMiddlewareStack
 software.amazon.smithy.aws.go.codegen.AwsEndpointGenerator
 software.amazon.smithy.aws.go.codegen.AwsSignatureVersion4
@@ -29,7 +30,6 @@ software.amazon.smithy.aws.go.codegen.customization.Route53Customizations
 software.amazon.smithy.aws.go.codegen.customization.S3HeadObjectCustomizations
 software.amazon.smithy.aws.go.codegen.customization.PresignURLAutoFill
 software.amazon.smithy.aws.go.codegen.customization.S3ExportInternalFeatures
-software.amazon.smithy.aws.go.codegen.FilterStreamingOperations
 software.amazon.smithy.aws.go.codegen.customization.S3ControlEndpointResolver
 software.amazon.smithy.aws.go.codegen.customization.S3PaginationExtensions
 software.amazon.smithy.aws.go.codegen.AwsHttpPresignURLClientGenerator

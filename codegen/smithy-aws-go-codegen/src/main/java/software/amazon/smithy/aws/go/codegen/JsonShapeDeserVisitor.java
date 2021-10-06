@@ -63,7 +63,7 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
      * @param context The generation context.
      */
     public JsonShapeDeserVisitor(GenerationContext context) {
-        this(context, FunctionalUtils.alwaysTrue());
+        this(context, FunctionalUtils.alwaysTrue(), null);
     }
 
     /**
@@ -72,7 +72,21 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
      *                     members that won't be in the body.
      */
     public JsonShapeDeserVisitor(GenerationContext context, Predicate<MemberShape> memberFilter) {
-        super(context);
+        this(context, memberFilter, null);
+    }
+
+    /**
+     * @param context                  The generation context.
+     * @param memberFilter             A filter that is applied to structure members. This is useful for
+     *                                 members that won't be in the body.
+     * @param deserializerNameProvider The deserializer name provider.
+     */
+    public JsonShapeDeserVisitor(
+            GenerationContext context,
+            Predicate<MemberShape> memberFilter,
+            DeserializerNameProvider deserializerNameProvider
+    ) {
+        super(context, deserializerNameProvider);
         this.memberFilter = memberFilter;
     }
 
@@ -124,7 +138,7 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
         GoWriter writer = context.getWriter().get();
 
         Symbol newUnmarshaler = ProtocolDocumentGenerator.Utilities.getInternalDocumentSymbolBuilder(
-                context.getSettings(), ProtocolDocumentGenerator.INTERNAL_NEW_DOCUMENT_UNMARSHALER_FUNC)
+                        context.getSettings(), ProtocolDocumentGenerator.INTERNAL_NEW_DOCUMENT_UNMARSHALER_FUNC)
                 .build();
 
         writer.write("*v = $T(value)", newUnmarshaler);

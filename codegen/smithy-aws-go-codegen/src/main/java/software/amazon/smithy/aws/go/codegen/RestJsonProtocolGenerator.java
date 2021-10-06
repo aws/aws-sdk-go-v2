@@ -20,6 +20,7 @@ import static software.amazon.smithy.aws.go.codegen.AwsProtocolUtils.handleDecod
 import static software.amazon.smithy.aws.go.codegen.AwsProtocolUtils.initializeJsonDecoder;
 import static software.amazon.smithy.aws.go.codegen.AwsProtocolUtils.writeJsonErrorMessageCodeDeserializer;
 
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
@@ -27,17 +28,15 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import software.amazon.smithy.codegen.core.CodegenException;
 import software.amazon.smithy.codegen.core.Symbol;
-import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoStackStepMiddlewareGenerator;
 import software.amazon.smithy.go.codegen.GoWriter;
-import software.amazon.smithy.go.codegen.ProtocolDocumentGenerator;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
-import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.SyntheticClone;
 import software.amazon.smithy.go.codegen.integration.HttpBindingProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
 import software.amazon.smithy.model.Model;
+import software.amazon.smithy.model.knowledge.EventStreamInfo;
 import software.amazon.smithy.model.knowledge.HttpBinding;
 import software.amazon.smithy.model.knowledge.HttpBinding.Location;
 import software.amazon.smithy.model.knowledge.HttpBindingIndex;
@@ -45,8 +44,13 @@ import software.amazon.smithy.model.shapes.MemberShape;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.model.shapes.Shape;
+import software.amazon.smithy.model.shapes.ShapeId;
 import software.amazon.smithy.model.shapes.StructureShape;
+import software.amazon.smithy.model.shapes.UnionShape;
 import software.amazon.smithy.model.traits.EnumTrait;
+import software.amazon.smithy.model.traits.ErrorTrait;
+import software.amazon.smithy.model.traits.EventHeaderTrait;
+import software.amazon.smithy.model.traits.EventPayloadTrait;
 import software.amazon.smithy.model.traits.MediaTypeTrait;
 import software.amazon.smithy.model.traits.StreamingTrait;
 import software.amazon.smithy.model.traits.TimestampFormatTrait;
@@ -59,6 +63,11 @@ import software.amazon.smithy.model.traits.TimestampFormatTrait;
  * @see <a href="https://awslabs.github.io/smithy/spec/http.html">Smithy HTTP protocol bindings.</a>
  */
 abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
+    private final Set<ShapeId> generatedDocumentBodyShapeSerializers = new HashSet<>();
+    private final Set<ShapeId> generatedEventMessageSerializers = new HashSet<>();
+    private final Set<ShapeId> generatedDocumentBodyShapeDeserializers = new HashSet<>();
+    private final Set<ShapeId> generatedEventMessageDeserializers = new HashSet<>();
+
     /**
      * Creates a AWS JSON RPC protocol generator.
      */
@@ -178,7 +187,13 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
     @Override
     protected void generateDocumentBodyShapeSerializers(GenerationContext context, Set<Shape> shapes) {
         JsonShapeSerVisitor visitor = new JsonShapeSerVisitor(context);
-        shapes.forEach(shape -> shape.accept(visitor));
+        shapes.forEach(shape -> {
+            if (generatedDocumentBodyShapeSerializers.contains(shape.toShapeId())) {
+                return;
+            }
+            shape.accept(visitor);
+            generatedDocumentBodyShapeSerializers.add(shape.toShapeId());
+        });
     }
 
     @Override
@@ -344,7 +359,13 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
     @Override
     protected void generateDocumentBodyShapeDeserializers(GenerationContext context, Set<Shape> shapes) {
         JsonShapeDeserVisitor visitor = new JsonShapeDeserVisitor(context);
-        shapes.forEach(shape -> shape.accept(visitor));
+        shapes.forEach(shape -> {
+            if (generatedDocumentBodyShapeDeserializers.contains(shape.toShapeId())) {
+                return;
+            }
+            shape.accept(visitor);
+            generatedDocumentBodyShapeDeserializers.add(shape.toShapeId());
+        });
     }
 
     // Generate deserializers for shapes with payload binding
@@ -353,18 +374,18 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             Shape shape,
             Predicate<MemberShape> filterMemberShapes
     ) {
-        GoWriter writer = context.getWriter().get();
-        SymbolProvider symbolProvider = context.getSymbolProvider();
-        Symbol shapeSymbol = symbolProvider.toSymbol(shape);
-        String funcName = ProtocolGenerator.getDocumentDeserializerFunctionName(shape, context.getService(), getProtocolName());
+        var writer = context.getWriter().get();
+        var symbolProvider = context.getSymbolProvider();
+        var shapeSymbol = symbolProvider.toSymbol(shape);
+        var funcName = ProtocolGenerator.getDocumentDeserializerFunctionName(shape, context.getService(), getProtocolName());
 
-        for (MemberShape memberShape : new TreeSet<>(shape.members())) {
+        for (var memberShape : new TreeSet<>(shape.members())) {
             if (!filterMemberShapes.test(memberShape)) {
                 continue;
             }
 
-            String memberName = symbolProvider.toMemberName(memberShape);
-            Shape targetShape = context.getModel().expectShape(memberShape.getTarget());
+            var memberName = symbolProvider.toMemberName(memberShape);
+            var targetShape = context.getModel().expectShape(memberShape.getTarget());
             if (targetShape.isStringShape() || targetShape.isBlobShape()) {
                 writer.openBlock("func $L(v $P, body io.ReadCloser) error {", "}",
                         funcName, shapeSymbol, () -> {
@@ -429,5 +450,131 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
     @Override
     public void generateProtocolDocumentUnmarshalerMarshalDocument(GenerationContext context) {
         JsonProtocolDocumentUtils.generateProtocolDocumentUnmarshalerMarshalDocument(context);
+    }
+
+    @Override
+    public void generateEventStreamComponents(GenerationContext context) {
+        AwsEventStreamUtils.generateEventStreamComponents(context);
+    }
+
+    @Override
+    protected void writeOperationSerializerMiddlewareEventStreamSetup(GenerationContext context, EventStreamInfo info) {
+        AwsEventStreamUtils.writeOperationSerializerMiddlewareEventStreamSetup(context, info);
+    }
+
+    @Override
+    protected void generateEventStreamSerializers(
+            GenerationContext context,
+            UnionShape eventUnion,
+            Set<EventStreamInfo> eventStreamInfos
+    ) {
+        Model model = context.getModel();
+
+        AwsEventStreamUtils.generateEventStreamSerializer(context, eventUnion);
+        var memberShapes = eventUnion.members().stream()
+                .filter(ms -> ms.getMemberTrait(model, ErrorTrait.class).isEmpty())
+                .collect(Collectors.toCollection(TreeSet::new));
+
+        final var eventDocumentShapes = new HashSet<Shape>();
+        for (MemberShape member : memberShapes) {
+            var targetShape = model.expectShape(member.getTarget());
+            if (generatedEventMessageSerializers.contains(targetShape.toShapeId())) {
+                continue;
+            }
+
+            AwsEventStreamUtils.generateEventMessageSerializer(context, targetShape, (ctx, payloadTarget, operand) -> {
+                var functionName = ProtocolGenerator.getDocumentSerializerFunctionName(payloadTarget,
+                        ctx.getService(), ctx.getProtocolName());
+                AwsProtocolUtils.writeJsonEventMessageSerializerDelegator(ctx, functionName, operand,
+                        getDocumentContentType());
+            });
+
+            generatedEventMessageSerializers.add(targetShape.toShapeId());
+
+            var hasBindings = targetShape.members().stream()
+                    .filter(ms -> ms.getTrait(EventHeaderTrait.class).isPresent()
+                                  || ms.getTrait(EventPayloadTrait.class).isPresent())
+                    .findAny();
+            if (hasBindings.isPresent()) {
+                var payload = targetShape.members().stream()
+                        .filter(ms -> ms.getTrait(EventPayloadTrait.class).isPresent())
+                        .map(ms -> model.expectShape(ms.getTarget()))
+                        .filter(ProtocolUtils::requiresDocumentSerdeFunction)
+                        .findAny();
+                payload.ifPresent(eventDocumentShapes::add);
+                continue;
+            }
+            eventDocumentShapes.add(targetShape);
+        }
+
+        eventDocumentShapes.addAll(ProtocolUtils.resolveRequiredDocumentShapeSerde(model, eventDocumentShapes));
+        generateDocumentBodyShapeSerializers(context, eventDocumentShapes);
+    }
+
+    @Override
+    protected void generateEventStreamDeserializers(
+            GenerationContext context,
+            UnionShape eventUnion,
+            Set<EventStreamInfo> eventStreamInfos
+    ) {
+        var model = context.getModel();
+
+        AwsEventStreamUtils.generateEventStreamDeserializer(context, eventUnion);
+        AwsEventStreamUtils.generateEventStreamExceptionDeserializer(context, eventUnion,
+                AwsProtocolUtils::writeJsonEventStreamUnknownExceptionDeserializer);
+
+        final var eventDocumentShapes = new HashSet<Shape>();
+
+        for (MemberShape shape : eventUnion.members()) {
+            var targetShape = model.expectShape(shape.getTarget());
+            if (generatedEventMessageDeserializers.contains(targetShape.toShapeId())) {
+                continue;
+            }
+            generatedEventMessageDeserializers.add(targetShape.toShapeId());
+            if (shape.getMemberTrait(model, ErrorTrait.class).isPresent()) {
+                AwsEventStreamUtils.generateEventMessageExceptionDeserializer(context, targetShape,
+                        (ctx, payloadTarget) -> {
+                            AwsProtocolUtils.initializeJsonEventMessageDeserializer(ctx);
+                            var functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(
+                                    payloadTarget, ctx.getService(), getProtocolName());
+                            var ctxWriter = ctx.getWriter().get();
+                            ctxWriter.write("v := &$T{}", ctx.getSymbolProvider().toSymbol(payloadTarget))
+                                    .openBlock("if err := $L(&v, shape); err != nil {", "}", functionName,
+                                            () -> handleDecodeError(ctxWriter))
+                                    .write("return v");
+                        });
+
+                eventDocumentShapes.add(targetShape);
+            } else {
+                AwsEventStreamUtils.generateEventMessageDeserializer(context, targetShape,
+                        (ctx, payloadTarget, operand) -> {
+                            AwsProtocolUtils.initializeJsonEventMessageDeserializer(ctx);
+                            var functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(
+                                    payloadTarget, ctx.getService(), ctx.getProtocolName());
+                            var ctxWriter = ctx.getWriter().get();
+                            ctxWriter.openBlock("if err := $L(&$L, shape); err != nil {", "}", functionName, operand,
+                                            () -> handleDecodeError(ctxWriter))
+                                    .write("return nil");
+                        });
+
+                var hasBindings = targetShape.members().stream()
+                        .filter(ms -> ms.getTrait(EventHeaderTrait.class).isPresent()
+                                      || ms.getTrait(EventPayloadTrait.class).isPresent())
+                        .findAny();
+                if (hasBindings.isPresent()) {
+                    var payload = targetShape.members().stream()
+                            .filter(ms -> ms.getTrait(EventPayloadTrait.class).isPresent())
+                            .map(ms -> model.expectShape(ms.getTarget()))
+                            .filter(ProtocolUtils::requiresDocumentSerdeFunction)
+                            .findAny();
+                    payload.ifPresent(eventDocumentShapes::add);
+                    continue;
+                }
+                eventDocumentShapes.add(targetShape);
+            }
+        }
+
+        eventDocumentShapes.addAll(ProtocolUtils.resolveRequiredDocumentShapeSerde(model, eventDocumentShapes));
+        generateDocumentBodyShapeDeserializers(context, eventDocumentShapes);
     }
 }

@@ -15,6 +15,8 @@
 
 package software.amazon.smithy.aws.go.codegen;
 
+import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.ShapeId;
 import software.amazon.smithy.aws.traits.protocols.RestJson1Trait;
 

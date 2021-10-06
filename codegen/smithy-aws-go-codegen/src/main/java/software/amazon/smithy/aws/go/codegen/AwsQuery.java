@@ -10,6 +10,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import software.amazon.smithy.aws.traits.protocols.AwsQueryErrorTrait;
 import software.amazon.smithy.aws.traits.protocols.AwsQueryTrait;
+import software.amazon.smithy.codegen.core.CodegenException;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
@@ -18,12 +19,14 @@ import software.amazon.smithy.go.codegen.SyntheticClone;
 import software.amazon.smithy.go.codegen.integration.HttpRpcProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
+import software.amazon.smithy.model.knowledge.EventStreamInfo;
 import software.amazon.smithy.model.knowledge.HttpBinding;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.model.shapes.Shape;
 import software.amazon.smithy.model.shapes.ShapeId;
 import software.amazon.smithy.model.shapes.StructureShape;
+import software.amazon.smithy.model.shapes.UnionShape;
 import software.amazon.smithy.model.traits.ErrorTrait;
 
 /**
@@ -184,5 +187,33 @@ class AwsQuery extends HttpRpcProtocolGenerator {
         }
 
         return super.getErrorCode(service, errorShape);
+    }
+
+    @Override
+    protected void generateEventStreamSerializers(
+            GenerationContext context,
+            UnionShape eventUnion,
+            Set<EventStreamInfo> eventStreamInfos
+    ) {
+        throw new CodegenException("event streams not supported with AWS QUERY protocol.");
+    }
+
+    @Override
+    protected void generateEventStreamDeserializers(
+            GenerationContext context,
+            UnionShape eventUnion,
+            Set<EventStreamInfo> eventStreamInfos
+    ) {
+        throw new CodegenException("event streams not supported with AWS QUERY protocol.");
+    }
+
+    @Override
+    public void generateEventStreamComponents(GenerationContext context) {
+        throw new CodegenException("event streams not supported with AWS QUERY protocol.");
+    }
+
+    @Override
+    protected void writeOperationSerializerMiddlewareEventStreamSetup(GenerationContext context, EventStreamInfo info) {
+        throw new CodegenException("event streams not supported with AWS QUERY protocol.");
     }
 }

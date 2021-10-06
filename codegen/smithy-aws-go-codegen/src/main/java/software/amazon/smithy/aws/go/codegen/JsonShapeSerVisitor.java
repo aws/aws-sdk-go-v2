@@ -31,7 +31,6 @@ import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.DocumentShapeSerVisitor;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator.GenerationContext;
-import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
 import software.amazon.smithy.go.codegen.knowledge.GoPointableIndex;
 import software.amazon.smithy.go.codegen.trait.NoSerializeTrait;
 import software.amazon.smithy.model.knowledge.NullableIndex;
@@ -42,7 +41,6 @@ import software.amazon.smithy.model.shapes.MemberShape;
 import software.amazon.smithy.model.shapes.Shape;
 import software.amazon.smithy.model.shapes.StructureShape;
 import software.amazon.smithy.model.shapes.UnionShape;
-import software.amazon.smithy.model.traits.EnumTrait;
 import software.amazon.smithy.model.traits.JsonNameTrait;
 import software.amazon.smithy.model.traits.TimestampFormatTrait;
 import software.amazon.smithy.model.traits.TimestampFormatTrait.Format;
@@ -69,7 +67,7 @@ final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
      * @param context The generation context.
      */
     public JsonShapeSerVisitor(GenerationContext context) {
-        this(context, NoSerializeTrait.excludeNoSerializeMembers().and(FunctionalUtils.alwaysTrue()));
+        this(context, NoSerializeTrait.excludeNoSerializeMembers().and(FunctionalUtils.alwaysTrue()), null);
     }
 
     /**
@@ -78,7 +76,21 @@ final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
      *                     members that won't be in the body.
      */
     public JsonShapeSerVisitor(GenerationContext context, Predicate<MemberShape> memberFilter) {
-        super(context);
+        this(context, memberFilter, null);
+    }
+
+    /**
+     * @param context                The generation context.
+     * @param memberFilter           A filter that is applied to structure members. This is useful for
+     *                               members that won't be in the body.
+     * @param serializerNameProvider The serializer name provider.
+     */
+    public JsonShapeSerVisitor(
+            GenerationContext context,
+            Predicate<MemberShape> memberFilter,
+            SerializerNameProvider serializerNameProvider
+    ) {
+        super(context, serializerNameProvider);
         this.memberFilter = NoSerializeTrait.excludeNoSerializeMembers().and(memberFilter);
         this.pointableIndex = GoPointableIndex.of(context.getModel());
         this.nullableIndex = NullableIndex.of(context.getModel());
