@@ -1,0 +1,8 @@
+{
+    "id": "17ac8941-9cd9-4e59-8fcc-93444709cc1a",
+    "type": "feature",
+    "description": "Respect passed in Context Deadline/Timeout. Updates the IMDS Client operations to not override the passed in Context's Deadline or Timeout options. If an Client operation is called with a Context with a Deadline or Timeout, the client will no longer override it with the client's default timeout.",
+    "modules": [
+        "feature/ec2/imds"
+    ]
+}

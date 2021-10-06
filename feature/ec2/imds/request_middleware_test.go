@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/hex"
+	"fmt"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -126,7 +127,7 @@ func TestAddRequestMiddleware(t *testing.T) {
 
 func TestOperationTimeoutMiddleware(t *testing.T) {
 	m := &operationTimeout{
-		Timeout: time.Nanosecond,
+		DefaultTimeout: time.Nanosecond,
 	}
 
 	_, _, err := m.HandleInitialize(context.Background(), middleware.InitializeInput{},
@@ -135,6 +136,10 @@ func TestOperationTimeoutMiddleware(t *testing.T) {
 		) (
 			out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 		) {
+			if _, ok := ctx.Deadline(); !ok {
+				return out, metadata, fmt.Errorf("expect context deadline to be set")
+			}
+
 			if err := sdk.SleepWithContext(ctx, time.Second); err != nil {
 				return out, metadata, err
 			}
@@ -148,6 +153,144 @@ func TestOperationTimeoutMiddleware(t *testing.T) {
 	if e, a := "deadline exceeded", err.Error(); !strings.Contains(a, e) {
 		t.Errorf("expect %q error in %q", e, a)
 	}
+}
+
+func TestOperationTimeoutMiddleware_noDefaultTimeout(t *testing.T) {
+	m := &operationTimeout{}
+
+	_, _, err := m.HandleInitialize(context.Background(), middleware.InitializeInput{},
+		middleware.InitializeHandlerFunc(func(
+			ctx context.Context, input middleware.InitializeInput,
+		) (
+			out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+		) {
+			if t, ok := ctx.Deadline(); ok {
+				return out, metadata, fmt.Errorf("expect no context deadline, got %v", t)
+			}
+
+			return out, metadata, nil
+		}))
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+}
+
+func TestOperationTimeoutMiddleware_withCustomDeadline(t *testing.T) {
+	m := &operationTimeout{
+		DefaultTimeout: time.Nanosecond,
+	}
+
+	expectDeadline := time.Now().Add(time.Hour)
+	ctx, cancelFn := context.WithDeadline(context.Background(), expectDeadline)
+	defer cancelFn()
+
+	_, _, err := m.HandleInitialize(ctx, middleware.InitializeInput{},
+		middleware.InitializeHandlerFunc(func(
+			ctx context.Context, input middleware.InitializeInput,
+		) (
+			out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+		) {
+			t, ok := ctx.Deadline()
+			if !ok {
+				return out, metadata, fmt.Errorf("expect context deadline to be set")
+			}
+			if e, a := expectDeadline, t; !e.Equal(a) {
+				return out, metadata, fmt.Errorf("expect %v deadline, got %v", e, a)
+			}
+
+			return out, metadata, nil
+		}))
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+}
+
+// Ensure that the response body is read in the deserialize middleware,
+// ensuring that the timeoutOperation middleware won't race canceling the
+// context with the upstream reading the response body.
+//   * https://github.com/aws/aws-sdk-go-v2/issues/1253
+func TestDeserailizeResponse_cacheBody(t *testing.T) {
+	type Output struct {
+		Content io.ReadCloser
+	}
+	m := &deserializeResponse{
+		GetOutput: func(resp *smithyhttp.Response) (interface{}, error) {
+			return &Output{
+				Content: resp.Body,
+			}, nil
+		},
+	}
+
+	expectBody := "hello world!"
+	originalBody := &bytesReader{
+		reader: strings.NewReader(expectBody),
+	}
+	if originalBody.closed {
+		t.Fatalf("expect original body not to be closed yet")
+	}
+
+	out, _, err := m.HandleDeserialize(context.Background(), middleware.DeserializeInput{},
+		middleware.DeserializeHandlerFunc(func(
+			ctx context.Context, input middleware.DeserializeInput,
+		) (
+			out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+		) {
+			out.RawResponse = &smithyhttp.Response{
+				Response: &http.Response{
+					StatusCode:    200,
+					Status:        "200 OK",
+					Header:        http.Header{},
+					ContentLength: int64(originalBody.Len()),
+					Body:          originalBody,
+				},
+			}
+			return out, metadata, nil
+		}))
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	if !originalBody.closed {
+		t.Errorf("expect original body to be closed, was not")
+	}
+
+	result, ok := out.Result.(*Output)
+	if !ok {
+		t.Fatalf("expect result to be Output, got %T, %v", result, result)
+	}
+
+	actualBody, err := ioutil.ReadAll(result.Content)
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+	if e, a := expectBody, string(actualBody); e != a {
+		t.Errorf("expect %v body, got %v", e, a)
+	}
+	if err := result.Content.Close(); err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+}
+
+type bytesReader struct {
+	reader interface {
+		io.Reader
+		Len() int
+	}
+	closed bool
+}
+
+func (r *bytesReader) Len() int {
+	return r.reader.Len()
+}
+func (r *bytesReader) Close() error {
+	r.closed = true
+	return nil
+}
+func (r *bytesReader) Read(p []byte) (int, error) {
+	if r.closed {
+		return 0, io.EOF
+	}
+	return r.reader.Read(p)
 }
 
 type successAPIResponseHandler struct {
