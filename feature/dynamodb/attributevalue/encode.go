@@ -241,6 +241,7 @@ type Encoder struct {
 // the `opts` functional options to override the default configuration.
 func NewEncoder(optFns ...func(*EncoderOptions)) *Encoder {
 	options := EncoderOptions{
+		TagKey:        "json",
 		NullEmptySets: true,
 	}
 	for _, fn := range optFns {
