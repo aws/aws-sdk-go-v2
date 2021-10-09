@@ -136,7 +136,9 @@ type Decoder struct {
 // NewDecoder creates a new Decoder with default configuration. Use
 // the `opts` functional options to override the default configuration.
 func NewDecoder(optFns ...func(*DecoderOptions)) *Decoder {
-	var options DecoderOptions
+	options := DecoderOptions{
+		TagKey: "json",
+	}
 	for _, fn := range optFns {
 		fn(&options)
 	}
