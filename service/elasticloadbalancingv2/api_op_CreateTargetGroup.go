@@ -99,6 +99,11 @@ type CreateTargetGroupInput struct {
 	// default is 3. If the target type is lambda, the default is 5.
 	HealthyThresholdCount *int32
 
+	// The type of IP address used for this target group. The possible values are ipv4
+	// and ipv6. This is an optional parameter. If not specified, the IP address type
+	// defaults to ipv4.
+	IpAddressType types.TargetGroupIpAddressTypeEnum
+
 	// [HTTP/HTTPS health checks] The HTTP or gRPC codes to use when checking for a
 	// successful response from a target.
 	Matcher *types.Matcher

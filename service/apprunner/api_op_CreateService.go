@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create an AWS App Runner service. After the service is created, the action also
+// Create an App Runner service. After the service is created, the action also
 // automatically starts a deployment. This is an asynchronous operation. On a
 // successful call, you can use the returned OperationId and the ListOperations
 // (https://docs.aws.amazon.com/apprunner/latest/api/API_ListOperations.html) call
@@ -34,7 +34,7 @@ func (c *Client) CreateService(ctx context.Context, params *CreateServiceInput, 
 type CreateServiceInput struct {
 
 	// A name for the new service. It must be unique across all the running App Runner
-	// services in your AWS account in the AWS Region.
+	// services in your Amazon Web Services account in the Amazon Web Services Region.
 	//
 	// This member is required.
 	ServiceName *string
@@ -52,11 +52,11 @@ type CreateServiceInput struct {
 
 	// An optional custom encryption key that App Runner uses to encrypt the copy of
 	// your source repository that it maintains and your service logs. By default, App
-	// Runner uses an AWS managed CMK.
+	// Runner uses an Amazon Web Services managed CMK.
 	EncryptionConfiguration *types.EncryptionConfiguration
 
-	// The settings for the health check that AWS App Runner performs to monitor the
-	// health of your service.
+	// The settings for the health check that App Runner performs to monitor the health
+	// of your service.
 	HealthCheckConfiguration *types.HealthCheckConfiguration
 
 	// The runtime configuration of instances (scaling units) of the App Runner

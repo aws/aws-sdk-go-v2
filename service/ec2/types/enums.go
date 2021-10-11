@@ -569,6 +569,39 @@ func (CancelSpotInstanceRequestState) Values() []CancelSpotInstanceRequestState 
 	}
 }
 
+type CapacityReservationFleetState string
+
+// Enum values for CapacityReservationFleetState
+const (
+	CapacityReservationFleetStateSubmitted          CapacityReservationFleetState = "submitted"
+	CapacityReservationFleetStateModifying          CapacityReservationFleetState = "modifying"
+	CapacityReservationFleetStateActive             CapacityReservationFleetState = "active"
+	CapacityReservationFleetStatePartiallyFulfilled CapacityReservationFleetState = "partially_fulfilled"
+	CapacityReservationFleetStateExpiring           CapacityReservationFleetState = "expiring"
+	CapacityReservationFleetStateExpired            CapacityReservationFleetState = "expired"
+	CapacityReservationFleetStateCancelling         CapacityReservationFleetState = "cancelling"
+	CapacityReservationFleetStateCancelled          CapacityReservationFleetState = "cancelled"
+	CapacityReservationFleetStateFailed             CapacityReservationFleetState = "failed"
+)
+
+// Values returns all known values for CapacityReservationFleetState. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CapacityReservationFleetState) Values() []CapacityReservationFleetState {
+	return []CapacityReservationFleetState{
+		"submitted",
+		"modifying",
+		"active",
+		"partially_fulfilled",
+		"expiring",
+		"expired",
+		"cancelling",
+		"cancelled",
+		"failed",
+	}
+}
+
 type CapacityReservationInstancePlatform string
 
 // Enum values for CapacityReservationInstancePlatform
@@ -1491,6 +1524,23 @@ func (FleetActivityStatus) Values() []FleetActivityStatus {
 	}
 }
 
+type FleetCapacityReservationTenancy string
+
+// Enum values for FleetCapacityReservationTenancy
+const (
+	FleetCapacityReservationTenancyDefault FleetCapacityReservationTenancy = "default"
+)
+
+// Values returns all known values for FleetCapacityReservationTenancy. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (FleetCapacityReservationTenancy) Values() []FleetCapacityReservationTenancy {
+	return []FleetCapacityReservationTenancy{
+		"default",
+	}
+}
+
 type FleetCapacityReservationUsageStrategy string
 
 // Enum values for FleetCapacityReservationUsageStrategy
@@ -1544,6 +1594,22 @@ func (FleetExcessCapacityTerminationPolicy) Values() []FleetExcessCapacityTermin
 	return []FleetExcessCapacityTerminationPolicy{
 		"no-termination",
 		"termination",
+	}
+}
+
+type FleetInstanceMatchCriteria string
+
+// Enum values for FleetInstanceMatchCriteria
+const (
+	FleetInstanceMatchCriteriaOpen FleetInstanceMatchCriteria = "open"
+)
+
+// Values returns all known values for FleetInstanceMatchCriteria. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FleetInstanceMatchCriteria) Values() []FleetInstanceMatchCriteria {
+	return []FleetInstanceMatchCriteria{
+		"open",
 	}
 }
 

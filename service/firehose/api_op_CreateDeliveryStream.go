@@ -94,6 +94,8 @@ type CreateDeliveryStreamInput struct {
 	// This member is required.
 	DeliveryStreamName *string
 
+	AmazonopensearchserviceDestinationConfiguration *types.AmazonopensearchserviceDestinationConfiguration
+
 	// Used to specify the type and Amazon Resource Name (ARN) of the KMS key needed
 	// for Server-Side Encryption (SSE).
 	DeliveryStreamEncryptionConfigurationInput *types.DeliveryStreamEncryptionConfigurationInput

@@ -2,6 +2,50 @@
 
 package types
 
+type AmazonopensearchserviceIndexRotationPeriod string
+
+// Enum values for AmazonopensearchserviceIndexRotationPeriod
+const (
+	AmazonopensearchserviceIndexRotationPeriodNoRotation AmazonopensearchserviceIndexRotationPeriod = "NoRotation"
+	AmazonopensearchserviceIndexRotationPeriodOneHour    AmazonopensearchserviceIndexRotationPeriod = "OneHour"
+	AmazonopensearchserviceIndexRotationPeriodOneDay     AmazonopensearchserviceIndexRotationPeriod = "OneDay"
+	AmazonopensearchserviceIndexRotationPeriodOneWeek    AmazonopensearchserviceIndexRotationPeriod = "OneWeek"
+	AmazonopensearchserviceIndexRotationPeriodOneMonth   AmazonopensearchserviceIndexRotationPeriod = "OneMonth"
+)
+
+// Values returns all known values for AmazonopensearchserviceIndexRotationPeriod.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AmazonopensearchserviceIndexRotationPeriod) Values() []AmazonopensearchserviceIndexRotationPeriod {
+	return []AmazonopensearchserviceIndexRotationPeriod{
+		"NoRotation",
+		"OneHour",
+		"OneDay",
+		"OneWeek",
+		"OneMonth",
+	}
+}
+
+type AmazonopensearchserviceS3BackupMode string
+
+// Enum values for AmazonopensearchserviceS3BackupMode
+const (
+	AmazonopensearchserviceS3BackupModeFailedDocumentsOnly AmazonopensearchserviceS3BackupMode = "FailedDocumentsOnly"
+	AmazonopensearchserviceS3BackupModeAllDocuments        AmazonopensearchserviceS3BackupMode = "AllDocuments"
+)
+
+// Values returns all known values for AmazonopensearchserviceS3BackupMode. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AmazonopensearchserviceS3BackupMode) Values() []AmazonopensearchserviceS3BackupMode {
+	return []AmazonopensearchserviceS3BackupMode{
+		"FailedDocumentsOnly",
+		"AllDocuments",
+	}
+}
+
 type CompressionFormat string
 
 // Enum values for CompressionFormat

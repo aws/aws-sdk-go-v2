@@ -7,6 +7,122 @@ import (
 	"time"
 )
 
+type AmazonopensearchserviceBufferingHints struct {
+	IntervalInSeconds *int32
+
+	SizeInMBs *int32
+
+	noSmithyDocumentSerde
+}
+
+type AmazonopensearchserviceDestinationConfiguration struct {
+
+	// This member is required.
+	IndexName *string
+
+	// This member is required.
+	RoleARN *string
+
+	// Describes the configuration of a destination in Amazon S3.
+	//
+	// This member is required.
+	S3Configuration *S3DestinationConfiguration
+
+	BufferingHints *AmazonopensearchserviceBufferingHints
+
+	// Describes the Amazon CloudWatch logging options for your delivery stream.
+	CloudWatchLoggingOptions *CloudWatchLoggingOptions
+
+	ClusterEndpoint *string
+
+	DomainARN *string
+
+	IndexRotationPeriod AmazonopensearchserviceIndexRotationPeriod
+
+	// Describes a data processing configuration.
+	ProcessingConfiguration *ProcessingConfiguration
+
+	RetryOptions *AmazonopensearchserviceRetryOptions
+
+	S3BackupMode AmazonopensearchserviceS3BackupMode
+
+	TypeName *string
+
+	// The details of the VPC of the Amazon ES destination.
+	VpcConfiguration *VpcConfiguration
+
+	noSmithyDocumentSerde
+}
+
+type AmazonopensearchserviceDestinationDescription struct {
+	BufferingHints *AmazonopensearchserviceBufferingHints
+
+	// Describes the Amazon CloudWatch logging options for your delivery stream.
+	CloudWatchLoggingOptions *CloudWatchLoggingOptions
+
+	ClusterEndpoint *string
+
+	DomainARN *string
+
+	IndexName *string
+
+	IndexRotationPeriod AmazonopensearchserviceIndexRotationPeriod
+
+	// Describes a data processing configuration.
+	ProcessingConfiguration *ProcessingConfiguration
+
+	RetryOptions *AmazonopensearchserviceRetryOptions
+
+	RoleARN *string
+
+	S3BackupMode AmazonopensearchserviceS3BackupMode
+
+	// Describes a destination in Amazon S3.
+	S3DestinationDescription *S3DestinationDescription
+
+	TypeName *string
+
+	// The details of the VPC of the Amazon ES destination.
+	VpcConfigurationDescription *VpcConfigurationDescription
+
+	noSmithyDocumentSerde
+}
+
+type AmazonopensearchserviceDestinationUpdate struct {
+	BufferingHints *AmazonopensearchserviceBufferingHints
+
+	// Describes the Amazon CloudWatch logging options for your delivery stream.
+	CloudWatchLoggingOptions *CloudWatchLoggingOptions
+
+	ClusterEndpoint *string
+
+	DomainARN *string
+
+	IndexName *string
+
+	IndexRotationPeriod AmazonopensearchserviceIndexRotationPeriod
+
+	// Describes a data processing configuration.
+	ProcessingConfiguration *ProcessingConfiguration
+
+	RetryOptions *AmazonopensearchserviceRetryOptions
+
+	RoleARN *string
+
+	// Describes an update for a destination in Amazon S3.
+	S3Update *S3DestinationUpdate
+
+	TypeName *string
+
+	noSmithyDocumentSerde
+}
+
+type AmazonopensearchserviceRetryOptions struct {
+	DurationInSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
 // Describes hints for the buffering to perform before delivering data to the
 // destination. These options are treated as hints, and therefore Kinesis Data
 // Firehose might choose to use different values when it is optimal. The SizeInMBs
@@ -283,6 +399,8 @@ type DestinationDescription struct {
 	//
 	// This member is required.
 	DestinationId *string
+
+	AmazonopensearchserviceDestinationDescription *AmazonopensearchserviceDestinationDescription
 
 	// The destination in Amazon ES.
 	ElasticsearchDestinationDescription *ElasticsearchDestinationDescription

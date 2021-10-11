@@ -578,6 +578,191 @@ func (m *awsAwsjson11_serializeOpUpdateDestination) HandleSerialize(ctx context.
 
 	return next.HandleSerialize(ctx, in)
 }
+func awsAwsjson11_serializeDocumentAmazonopensearchserviceBufferingHints(v *types.AmazonopensearchserviceBufferingHints, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IntervalInSeconds != nil {
+		ok := object.Key("IntervalInSeconds")
+		ok.Integer(*v.IntervalInSeconds)
+	}
+
+	if v.SizeInMBs != nil {
+		ok := object.Key("SizeInMBs")
+		ok.Integer(*v.SizeInMBs)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAmazonopensearchserviceDestinationConfiguration(v *types.AmazonopensearchserviceDestinationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BufferingHints != nil {
+		ok := object.Key("BufferingHints")
+		if err := awsAwsjson11_serializeDocumentAmazonopensearchserviceBufferingHints(v.BufferingHints, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CloudWatchLoggingOptions != nil {
+		ok := object.Key("CloudWatchLoggingOptions")
+		if err := awsAwsjson11_serializeDocumentCloudWatchLoggingOptions(v.CloudWatchLoggingOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ClusterEndpoint != nil {
+		ok := object.Key("ClusterEndpoint")
+		ok.String(*v.ClusterEndpoint)
+	}
+
+	if v.DomainARN != nil {
+		ok := object.Key("DomainARN")
+		ok.String(*v.DomainARN)
+	}
+
+	if v.IndexName != nil {
+		ok := object.Key("IndexName")
+		ok.String(*v.IndexName)
+	}
+
+	if len(v.IndexRotationPeriod) > 0 {
+		ok := object.Key("IndexRotationPeriod")
+		ok.String(string(v.IndexRotationPeriod))
+	}
+
+	if v.ProcessingConfiguration != nil {
+		ok := object.Key("ProcessingConfiguration")
+		if err := awsAwsjson11_serializeDocumentProcessingConfiguration(v.ProcessingConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RetryOptions != nil {
+		ok := object.Key("RetryOptions")
+		if err := awsAwsjson11_serializeDocumentAmazonopensearchserviceRetryOptions(v.RetryOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RoleARN != nil {
+		ok := object.Key("RoleARN")
+		ok.String(*v.RoleARN)
+	}
+
+	if len(v.S3BackupMode) > 0 {
+		ok := object.Key("S3BackupMode")
+		ok.String(string(v.S3BackupMode))
+	}
+
+	if v.S3Configuration != nil {
+		ok := object.Key("S3Configuration")
+		if err := awsAwsjson11_serializeDocumentS3DestinationConfiguration(v.S3Configuration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TypeName != nil {
+		ok := object.Key("TypeName")
+		ok.String(*v.TypeName)
+	}
+
+	if v.VpcConfiguration != nil {
+		ok := object.Key("VpcConfiguration")
+		if err := awsAwsjson11_serializeDocumentVpcConfiguration(v.VpcConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAmazonopensearchserviceDestinationUpdate(v *types.AmazonopensearchserviceDestinationUpdate, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BufferingHints != nil {
+		ok := object.Key("BufferingHints")
+		if err := awsAwsjson11_serializeDocumentAmazonopensearchserviceBufferingHints(v.BufferingHints, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CloudWatchLoggingOptions != nil {
+		ok := object.Key("CloudWatchLoggingOptions")
+		if err := awsAwsjson11_serializeDocumentCloudWatchLoggingOptions(v.CloudWatchLoggingOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ClusterEndpoint != nil {
+		ok := object.Key("ClusterEndpoint")
+		ok.String(*v.ClusterEndpoint)
+	}
+
+	if v.DomainARN != nil {
+		ok := object.Key("DomainARN")
+		ok.String(*v.DomainARN)
+	}
+
+	if v.IndexName != nil {
+		ok := object.Key("IndexName")
+		ok.String(*v.IndexName)
+	}
+
+	if len(v.IndexRotationPeriod) > 0 {
+		ok := object.Key("IndexRotationPeriod")
+		ok.String(string(v.IndexRotationPeriod))
+	}
+
+	if v.ProcessingConfiguration != nil {
+		ok := object.Key("ProcessingConfiguration")
+		if err := awsAwsjson11_serializeDocumentProcessingConfiguration(v.ProcessingConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RetryOptions != nil {
+		ok := object.Key("RetryOptions")
+		if err := awsAwsjson11_serializeDocumentAmazonopensearchserviceRetryOptions(v.RetryOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RoleARN != nil {
+		ok := object.Key("RoleARN")
+		ok.String(*v.RoleARN)
+	}
+
+	if v.S3Update != nil {
+		ok := object.Key("S3Update")
+		if err := awsAwsjson11_serializeDocumentS3DestinationUpdate(v.S3Update, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TypeName != nil {
+		ok := object.Key("TypeName")
+		ok.String(*v.TypeName)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAmazonopensearchserviceRetryOptions(v *types.AmazonopensearchserviceRetryOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DurationInSeconds != nil {
+		ok := object.Key("DurationInSeconds")
+		ok.Integer(*v.DurationInSeconds)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentBufferingHints(v *types.BufferingHints, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2267,6 +2452,13 @@ func awsAwsjson11_serializeOpDocumentCreateDeliveryStreamInput(v *CreateDelivery
 	object := value.Object()
 	defer object.Close()
 
+	if v.AmazonopensearchserviceDestinationConfiguration != nil {
+		ok := object.Key("AmazonopensearchserviceDestinationConfiguration")
+		if err := awsAwsjson11_serializeDocumentAmazonopensearchserviceDestinationConfiguration(v.AmazonopensearchserviceDestinationConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DeliveryStreamEncryptionConfigurationInput != nil {
 		ok := object.Key("DeliveryStreamEncryptionConfigurationInput")
 		if err := awsAwsjson11_serializeDocumentDeliveryStreamEncryptionConfigurationInput(v.DeliveryStreamEncryptionConfigurationInput, ok); err != nil {
@@ -2536,6 +2728,13 @@ func awsAwsjson11_serializeOpDocumentUntagDeliveryStreamInput(v *UntagDeliverySt
 func awsAwsjson11_serializeOpDocumentUpdateDestinationInput(v *UpdateDestinationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AmazonopensearchserviceDestinationUpdate != nil {
+		ok := object.Key("AmazonopensearchserviceDestinationUpdate")
+		if err := awsAwsjson11_serializeDocumentAmazonopensearchserviceDestinationUpdate(v.AmazonopensearchserviceDestinationUpdate, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.CurrentDeliveryStreamVersionId != nil {
 		ok := object.Key("CurrentDeliveryStreamVersionId")

@@ -1,0 +1,36 @@
+{
+    "dependencies": {
+        "github.com/aws/aws-sdk-go-v2": "v1.4.0",
+        "github.com/aws/smithy-go": "v1.4.0"
+    },
+    "files": [
+        "api_client.go",
+        "api_op_AssociateLicense.go",
+        "api_op_CreateWorkspace.go",
+        "api_op_DeleteWorkspace.go",
+        "api_op_DescribeWorkspace.go",
+        "api_op_DescribeWorkspaceAuthentication.go",
+        "api_op_DisassociateLicense.go",
+        "api_op_ListPermissions.go",
+        "api_op_ListWorkspaces.go",
+        "api_op_UpdatePermissions.go",
+        "api_op_UpdateWorkspace.go",
+        "api_op_UpdateWorkspaceAuthentication.go",
+        "deserializers.go",
+        "doc.go",
+        "endpoints.go",
+        "generated.json",
+        "internal/endpoints/endpoints.go",
+        "internal/endpoints/endpoints_test.go",
+        "protocol_test.go",
+        "serializers.go",
+        "types/enums.go",
+        "types/errors.go",
+        "types/types.go",
+        "types/types_exported_test.go",
+        "validators.go"
+    ],
+    "go": "1.15",
+    "module": "github.com/aws/aws-sdk-go-v2/service/grafana",
+    "unstable": false
+}

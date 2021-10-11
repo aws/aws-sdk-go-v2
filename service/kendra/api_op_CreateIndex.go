@@ -73,11 +73,18 @@ type CreateIndexInput struct {
 	Tags []types.Tag
 
 	// The user context policy. ATTRIBUTE_FILTER All indexed content is searchable and
-	// displayable for all users. If there is an access control list, it is ignored.
-	// You can filter on user and group attributes. USER_TOKEN Enables SSO and
-	// token-based user access control. All documents with no access control and all
-	// documents accessible to the user will be searchable and displayable.
+	// displayable for all users. If you want to filter search results on user context,
+	// you can use the attribute filters of _user_id and _group_ids or you can provide
+	// user and group information in UserContext. USER_TOKEN Enables token-based user
+	// access control to filter search results on user context. All documents with no
+	// access control and all documents accessible to the user will be searchable and
+	// displayable.
 	UserContextPolicy types.UserContextPolicy
+
+	// Enables fetching access levels of groups and users from an AWS Single Sign-On
+	// identity source. To configure this, see UserGroupResolutionConfiguration
+	// (https://docs.aws.amazon.com/kendra/latest/dg/API_UserGroupResolutionConfiguration.html).
+	UserGroupResolutionConfiguration *types.UserGroupResolutionConfiguration
 
 	// The user token configuration.
 	UserTokenConfigurations []types.UserTokenConfiguration

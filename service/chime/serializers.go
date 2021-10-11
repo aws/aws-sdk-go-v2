@@ -1956,6 +1956,13 @@ func awsRestjson1_serializeOpDocumentCreateMediaCapturePipelineInput(v *CreateMe
 	object := value.Object()
 	defer object.Close()
 
+	if v.ChimeSdkMeetingConfiguration != nil {
+		ok := object.Key("ChimeSdkMeetingConfiguration")
+		if err := awsRestjson1_serializeDocumentChimeSdkMeetingConfiguration(v.ChimeSdkMeetingConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ClientRequestToken != nil {
 		ok := object.Key("ClientRequestToken")
 		ok.String(*v.ClientRequestToken)
@@ -14020,6 +14027,45 @@ func awsRestjson1_serializeDocumentAppInstanceStreamingConfigurationList(v []typ
 	return nil
 }
 
+func awsRestjson1_serializeDocumentArtifactsConfiguration(v *types.ArtifactsConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Audio != nil {
+		ok := object.Key("Audio")
+		if err := awsRestjson1_serializeDocumentAudioArtifactsConfiguration(v.Audio, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Content != nil {
+		ok := object.Key("Content")
+		if err := awsRestjson1_serializeDocumentContentArtifactsConfiguration(v.Content, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Video != nil {
+		ok := object.Key("Video")
+		if err := awsRestjson1_serializeDocumentVideoArtifactsConfiguration(v.Video, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAttendeeIdList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAttendeeTagKeyList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -14041,6 +14087,18 @@ func awsRestjson1_serializeDocumentAttendeeTagList(v []types.Tag, value smithyjs
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAudioArtifactsConfiguration(v *types.AudioArtifactsConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.MuxType) > 0 {
+		ok := object.Key("MuxType")
+		ok.String(string(v.MuxType))
+	}
+
 	return nil
 }
 
@@ -14085,6 +14143,44 @@ func awsRestjson1_serializeDocumentChannelRetentionSettings(v *types.ChannelRete
 	if v.RetentionDays != nil {
 		ok := object.Key("RetentionDays")
 		ok.Integer(*v.RetentionDays)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentChimeSdkMeetingConfiguration(v *types.ChimeSdkMeetingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ArtifactsConfiguration != nil {
+		ok := object.Key("ArtifactsConfiguration")
+		if err := awsRestjson1_serializeDocumentArtifactsConfiguration(v.ArtifactsConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SourceConfiguration != nil {
+		ok := object.Key("SourceConfiguration")
+		if err := awsRestjson1_serializeDocumentSourceConfiguration(v.SourceConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentContentArtifactsConfiguration(v *types.ContentArtifactsConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.MuxType) > 0 {
+		ok := object.Key("MuxType")
+		ok.String(string(v.MuxType))
+	}
+
+	if len(v.State) > 0 {
+		ok := object.Key("State")
+		ok.String(string(v.State))
 	}
 
 	return nil
@@ -14309,6 +14405,17 @@ func awsRestjson1_serializeDocumentEngineTranscribeSettings(v *types.EngineTrans
 		ok.String(*v.VocabularyName)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentExternalUserIdList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -14542,6 +14649,27 @@ func awsRestjson1_serializeDocumentRoomRetentionSettings(v *types.RoomRetentionS
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSelectedVideoStreams(v *types.SelectedVideoStreams, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AttendeeIds != nil {
+		ok := object.Key("AttendeeIds")
+		if err := awsRestjson1_serializeDocumentAttendeeIdList(v.AttendeeIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ExternalUserIds != nil {
+		ok := object.Key("ExternalUserIds")
+		if err := awsRestjson1_serializeDocumentExternalUserIdList(v.ExternalUserIds, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSensitiveStringList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -14669,6 +14797,20 @@ func awsRestjson1_serializeDocumentSMAUpdateCallArgumentsMap(v map[string]string
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSourceConfiguration(v *types.SourceConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SelectedVideoStreams != nil {
+		ok := object.Key("SelectedVideoStreams")
+		if err := awsRestjson1_serializeDocumentSelectedVideoStreams(v.SelectedVideoStreams, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -14960,6 +15102,23 @@ func awsRestjson1_serializeDocumentUserSettings(v *types.UserSettings, value smi
 		if err := awsRestjson1_serializeDocumentTelephonySettings(v.Telephony, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVideoArtifactsConfiguration(v *types.VideoArtifactsConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.MuxType) > 0 {
+		ok := object.Key("MuxType")
+		ok.String(string(v.MuxType))
+	}
+
+	if len(v.State) > 0 {
+		ok := object.Key("State")
+		ok.String(string(v.State))
 	}
 
 	return nil

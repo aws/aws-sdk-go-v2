@@ -74,6 +74,13 @@ func awsRestjson1_serializeOpDocumentCreateCanaryInput(v *CreateCanaryInput, val
 	object := value.Object()
 	defer object.Close()
 
+	if v.ArtifactConfig != nil {
+		ok := object.Key("ArtifactConfig")
+		if err := awsRestjson1_serializeDocumentArtifactConfigInput(v.ArtifactConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ArtifactS3Location != nil {
 		ok := object.Key("ArtifactS3Location")
 		ok.String(*v.ArtifactS3Location)
@@ -957,6 +964,18 @@ func awsRestjson1_serializeOpDocumentUpdateCanaryInput(v *UpdateCanaryInput, val
 	object := value.Object()
 	defer object.Close()
 
+	if v.ArtifactConfig != nil {
+		ok := object.Key("ArtifactConfig")
+		if err := awsRestjson1_serializeDocumentArtifactConfigInput(v.ArtifactConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ArtifactS3Location != nil {
+		ok := object.Key("ArtifactS3Location")
+		ok.String(*v.ArtifactS3Location)
+	}
+
 	if v.Code != nil {
 		ok := object.Key("Code")
 		if err := awsRestjson1_serializeDocumentCanaryCodeInput(v.Code, ok); err != nil {
@@ -1008,6 +1027,20 @@ func awsRestjson1_serializeOpDocumentUpdateCanaryInput(v *UpdateCanaryInput, val
 	if v.VpcConfig != nil {
 		ok := object.Key("VpcConfig")
 		if err := awsRestjson1_serializeDocumentVpcConfigInput(v.VpcConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentArtifactConfigInput(v *types.ArtifactConfigInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.S3Encryption != nil {
+		ok := object.Key("S3Encryption")
+		if err := awsRestjson1_serializeDocumentS3EncryptionConfig(v.S3Encryption, ok); err != nil {
 			return err
 		}
 	}
@@ -1144,6 +1177,23 @@ func awsRestjson1_serializeDocumentEnvironmentVariablesMap(v map[string]string, 
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentS3EncryptionConfig(v *types.S3EncryptionConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.EncryptionMode) > 0 {
+		ok := object.Key("EncryptionMode")
+		ok.String(string(v.EncryptionMode))
+	}
+
+	if v.KmsKeyArn != nil {
+		ok := object.Key("KmsKeyArn")
+		ok.String(*v.KmsKeyArn)
+	}
+
 	return nil
 }
 

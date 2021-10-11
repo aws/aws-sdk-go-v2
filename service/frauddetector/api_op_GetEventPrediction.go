@@ -47,7 +47,8 @@ type GetEventPredictionInput struct {
 	// This member is required.
 	EventId *string
 
-	// Timestamp that defines when the event under evaluation occurred.
+	// Timestamp that defines when the event under evaluation occurred. The timestamp
+	// must be specified using ISO 8601 standard in UTC.
 	//
 	// This member is required.
 	EventTimestamp *string
@@ -59,25 +60,18 @@ type GetEventPredictionInput struct {
 
 	// Names of the event type's variables you defined in Amazon Fraud Detector to
 	// represent data elements and their corresponding values for the event you are
-	// sending for evaluation.
-	//
-	// * You must provide at least one eventVariable
-	//
-	// * If
-	// detectorVersion is associated with a modelVersion, you must provide at least one
-	// associated eventVariable
-	//
-	// To ensure highest possible fraud prediction and to
-	// simplify your data preparation, Amazon Fraud Detector will replace all missing
-	// variables or values as follows: For Amazon Fraud Detector trained models: If a
-	// null value is provided explicitly for a variable or if a variable is missing,
-	// model will replace the null value or the missing variable (no variable name in
-	// the eventVariables map) with calculated default mean/medians for numeric
-	// variables and with special values for categorical variables. For External models
-	// ( for example, imported SageMaker): If a null value is provided explicitly for a
-	// variable, the model and rules will use “null” as the value. If a variable is not
-	// provided (no variable name in the eventVariables map), model and rules will use
-	// the default value that is provided for the variable.
+	// sending for evaluation. You must provide at least one eventVariable To ensure
+	// most accurate fraud prediction and to simplify your data preparation, Amazon
+	// Fraud Detector will replace all missing variables or values as follows: For
+	// Amazon Fraud Detector trained models: If a null value is provided explicitly for
+	// a variable or if a variable is missing, model will replace the null value or the
+	// missing variable (no variable name in the eventVariables map) with calculated
+	// default mean/medians for numeric variables and with special values for
+	// categorical variables. For imported SageMaker models: If a null value is
+	// provided explicitly for a variable, the model and rules will use “null” as the
+	// value. If a variable is not provided (no variable name in the eventVariables
+	// map), model and rules will use the default value that is provided for the
+	// variable.
 	//
 	// This member is required.
 	EventVariables map[string]string

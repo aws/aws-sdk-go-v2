@@ -157,9 +157,9 @@ type ScalableTarget struct {
 	// resource type is service and the unique identifier is the cluster name and
 	// service name. Example: service/default/sample-webapp.
 	//
-	// * Spot Fleet request -
-	// The resource type is spot-fleet-request and the unique identifier is the Spot
-	// Fleet request ID. Example:
+	// * Spot Fleet - The
+	// resource type is spot-fleet-request and the unique identifier is the Spot Fleet
+	// request ID. Example:
 	// spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE.
 	//
 	// * EMR cluster -
@@ -182,8 +182,8 @@ type ScalableTarget struct {
 	// The resource type is cluster and the unique identifier is the cluster name.
 	// Example: cluster:my-db-cluster.
 	//
-	// * Amazon SageMaker endpoint variant - The
-	// resource type is variant and the unique identifier is the resource ID. Example:
+	// * SageMaker endpoint variant - The resource
+	// type is variant and the unique identifier is the resource ID. Example:
 	// endpoint/my-end-point/variant/KMeansClustering.
 	//
 	// * Custom resources are not
@@ -222,6 +222,9 @@ type ScalableTarget struct {
 	// and the unique identifier is the replication group name. Example:
 	// replication-group/mycluster.
 	//
+	// * Neptune cluster - The resource type is cluster
+	// and the unique identifier is the cluster name. Example: cluster:mycluster.
+	//
 	// This member is required.
 	ResourceId *string
 
@@ -242,32 +245,31 @@ type ScalableTarget struct {
 	// Instance Group.
 	//
 	// * ec2:spot-fleet-request:TargetCapacity - The target capacity
-	// of a Spot Fleet request.
+	// of a Spot Fleet.
 	//
-	// * appstream:fleet:DesiredCapacity - The desired
-	// capacity of an AppStream 2.0 fleet.
+	// * appstream:fleet:DesiredCapacity - The desired capacity of an
+	// AppStream 2.0 fleet.
 	//
-	// * dynamodb:table:ReadCapacityUnits - The
-	// provisioned read capacity for a DynamoDB table.
+	// * dynamodb:table:ReadCapacityUnits - The provisioned read
+	// capacity for a DynamoDB table.
 	//
-	// *
-	// dynamodb:table:WriteCapacityUnits - The provisioned write capacity for a
-	// DynamoDB table.
-	//
-	// * dynamodb:index:ReadCapacityUnits - The provisioned read
-	// capacity for a DynamoDB global secondary index.
+	// * dynamodb:table:WriteCapacityUnits - The
+	// provisioned write capacity for a DynamoDB table.
 	//
 	// *
-	// dynamodb:index:WriteCapacityUnits - The provisioned write capacity for a
-	// DynamoDB global secondary index.
+	// dynamodb:index:ReadCapacityUnits - The provisioned read capacity for a DynamoDB
+	// global secondary index.
 	//
-	// * rds:cluster:ReadReplicaCount - The count of
-	// Aurora Replicas in an Aurora DB cluster. Available for Aurora MySQL-compatible
-	// edition and Aurora PostgreSQL-compatible edition.
+	// * dynamodb:index:WriteCapacityUnits - The provisioned
+	// write capacity for a DynamoDB global secondary index.
 	//
 	// *
-	// sagemaker:variant:DesiredInstanceCount - The number of EC2 instances for an
-	// Amazon SageMaker model endpoint variant.
+	// rds:cluster:ReadReplicaCount - The count of Aurora Replicas in an Aurora DB
+	// cluster. Available for Aurora MySQL-compatible edition and Aurora
+	// PostgreSQL-compatible edition.
+	//
+	// * sagemaker:variant:DesiredInstanceCount - The
+	// number of EC2 instances for an SageMaker model endpoint variant.
 	//
 	// *
 	// custom-resource:ResourceType:Property - The scalable dimension for a custom
@@ -301,6 +303,9 @@ type ScalableTarget struct {
 	// *
 	// elasticache:replication-group:Replicas - The number of replicas per node group
 	// for an Amazon ElastiCache replication group.
+	//
+	// * neptune:cluster:ReadReplicaCount
+	// - The count of read replicas in an Amazon Neptune DB cluster.
 	//
 	// This member is required.
 	ScalableDimension ScalableDimension
@@ -365,9 +370,9 @@ type ScalingActivity struct {
 	// resource type is service and the unique identifier is the cluster name and
 	// service name. Example: service/default/sample-webapp.
 	//
-	// * Spot Fleet request -
-	// The resource type is spot-fleet-request and the unique identifier is the Spot
-	// Fleet request ID. Example:
+	// * Spot Fleet - The
+	// resource type is spot-fleet-request and the unique identifier is the Spot Fleet
+	// request ID. Example:
 	// spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE.
 	//
 	// * EMR cluster -
@@ -390,8 +395,8 @@ type ScalingActivity struct {
 	// The resource type is cluster and the unique identifier is the cluster name.
 	// Example: cluster:my-db-cluster.
 	//
-	// * Amazon SageMaker endpoint variant - The
-	// resource type is variant and the unique identifier is the resource ID. Example:
+	// * SageMaker endpoint variant - The resource
+	// type is variant and the unique identifier is the resource ID. Example:
 	// endpoint/my-end-point/variant/KMeansClustering.
 	//
 	// * Custom resources are not
@@ -430,6 +435,9 @@ type ScalingActivity struct {
 	// and the unique identifier is the replication group name. Example:
 	// replication-group/mycluster.
 	//
+	// * Neptune cluster - The resource type is cluster
+	// and the unique identifier is the cluster name. Example: cluster:mycluster.
+	//
 	// This member is required.
 	ResourceId *string
 
@@ -443,65 +451,68 @@ type ScalingActivity struct {
 	// instance count of an EMR Instance Group.
 	//
 	// *
-	// ec2:spot-fleet-request:TargetCapacity - The target capacity of a Spot Fleet
-	// request.
+	// ec2:spot-fleet-request:TargetCapacity - The target capacity of a Spot Fleet.
 	//
-	// * appstream:fleet:DesiredCapacity - The desired capacity of an
-	// AppStream 2.0 fleet.
+	// *
+	// appstream:fleet:DesiredCapacity - The desired capacity of an AppStream 2.0
+	// fleet.
 	//
-	// * dynamodb:table:ReadCapacityUnits - The provisioned read
+	// * dynamodb:table:ReadCapacityUnits - The provisioned read capacity for a
+	// DynamoDB table.
+	//
+	// * dynamodb:table:WriteCapacityUnits - The provisioned write
 	// capacity for a DynamoDB table.
 	//
-	// * dynamodb:table:WriteCapacityUnits - The
-	// provisioned write capacity for a DynamoDB table.
+	// * dynamodb:index:ReadCapacityUnits - The
+	// provisioned read capacity for a DynamoDB global secondary index.
 	//
 	// *
-	// dynamodb:index:ReadCapacityUnits - The provisioned read capacity for a DynamoDB
-	// global secondary index.
+	// dynamodb:index:WriteCapacityUnits - The provisioned write capacity for a
+	// DynamoDB global secondary index.
 	//
-	// * dynamodb:index:WriteCapacityUnits - The provisioned
-	// write capacity for a DynamoDB global secondary index.
-	//
-	// *
-	// rds:cluster:ReadReplicaCount - The count of Aurora Replicas in an Aurora DB
-	// cluster. Available for Aurora MySQL-compatible edition and Aurora
-	// PostgreSQL-compatible edition.
-	//
-	// * sagemaker:variant:DesiredInstanceCount - The
-	// number of EC2 instances for an Amazon SageMaker model endpoint variant.
+	// * rds:cluster:ReadReplicaCount - The count of
+	// Aurora Replicas in an Aurora DB cluster. Available for Aurora MySQL-compatible
+	// edition and Aurora PostgreSQL-compatible edition.
 	//
 	// *
-	// custom-resource:ResourceType:Property - The scalable dimension for a custom
-	// resource provided by your own application or service.
+	// sagemaker:variant:DesiredInstanceCount - The number of EC2 instances for an
+	// SageMaker model endpoint variant.
+	//
+	// * custom-resource:ResourceType:Property - The
+	// scalable dimension for a custom resource provided by your own application or
+	// service.
+	//
+	// * comprehend:document-classifier-endpoint:DesiredInferenceUnits - The
+	// number of inference units for an Amazon Comprehend document classification
+	// endpoint.
+	//
+	// * comprehend:entity-recognizer-endpoint:DesiredInferenceUnits - The
+	// number of inference units for an Amazon Comprehend entity recognizer
+	// endpoint.
+	//
+	// * lambda:function:ProvisionedConcurrency - The provisioned
+	// concurrency for a Lambda function.
+	//
+	// * cassandra:table:ReadCapacityUnits - The
+	// provisioned read capacity for an Amazon Keyspaces table.
 	//
 	// *
-	// comprehend:document-classifier-endpoint:DesiredInferenceUnits - The number of
-	// inference units for an Amazon Comprehend document classification endpoint.
+	// cassandra:table:WriteCapacityUnits - The provisioned write capacity for an
+	// Amazon Keyspaces table.
+	//
+	// * kafka:broker-storage:VolumeSize - The provisioned
+	// volume size (in GiB) for brokers in an Amazon MSK cluster.
 	//
 	// *
-	// comprehend:entity-recognizer-endpoint:DesiredInferenceUnits - The number of
-	// inference units for an Amazon Comprehend entity recognizer endpoint.
+	// elasticache:replication-group:NodeGroups - The number of node groups for an
+	// Amazon ElastiCache replication group.
 	//
-	// *
-	// lambda:function:ProvisionedConcurrency - The provisioned concurrency for a
-	// Lambda function.
+	// * elasticache:replication-group:Replicas
+	// - The number of replicas per node group for an Amazon ElastiCache replication
+	// group.
 	//
-	// * cassandra:table:ReadCapacityUnits - The provisioned read
-	// capacity for an Amazon Keyspaces table.
-	//
-	// * cassandra:table:WriteCapacityUnits -
-	// The provisioned write capacity for an Amazon Keyspaces table.
-	//
-	// *
-	// kafka:broker-storage:VolumeSize - The provisioned volume size (in GiB) for
-	// brokers in an Amazon MSK cluster.
-	//
-	// * elasticache:replication-group:NodeGroups -
-	// The number of node groups for an Amazon ElastiCache replication group.
-	//
-	// *
-	// elasticache:replication-group:Replicas - The number of replicas per node group
-	// for an Amazon ElastiCache replication group.
+	// * neptune:cluster:ReadReplicaCount - The count of read replicas in an
+	// Amazon Neptune DB cluster.
 	//
 	// This member is required.
 	ScalableDimension ScalableDimension
@@ -568,9 +579,9 @@ type ScalingPolicy struct {
 	// resource type is service and the unique identifier is the cluster name and
 	// service name. Example: service/default/sample-webapp.
 	//
-	// * Spot Fleet request -
-	// The resource type is spot-fleet-request and the unique identifier is the Spot
-	// Fleet request ID. Example:
+	// * Spot Fleet - The
+	// resource type is spot-fleet-request and the unique identifier is the Spot Fleet
+	// request ID. Example:
 	// spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE.
 	//
 	// * EMR cluster -
@@ -593,8 +604,8 @@ type ScalingPolicy struct {
 	// The resource type is cluster and the unique identifier is the cluster name.
 	// Example: cluster:my-db-cluster.
 	//
-	// * Amazon SageMaker endpoint variant - The
-	// resource type is variant and the unique identifier is the resource ID. Example:
+	// * SageMaker endpoint variant - The resource
+	// type is variant and the unique identifier is the resource ID. Example:
 	// endpoint/my-end-point/variant/KMeansClustering.
 	//
 	// * Custom resources are not
@@ -633,6 +644,9 @@ type ScalingPolicy struct {
 	// and the unique identifier is the replication group name. Example:
 	// replication-group/mycluster.
 	//
+	// * Neptune cluster - The resource type is cluster
+	// and the unique identifier is the cluster name. Example: cluster:mycluster.
+	//
 	// This member is required.
 	ResourceId *string
 
@@ -646,65 +660,68 @@ type ScalingPolicy struct {
 	// instance count of an EMR Instance Group.
 	//
 	// *
-	// ec2:spot-fleet-request:TargetCapacity - The target capacity of a Spot Fleet
-	// request.
+	// ec2:spot-fleet-request:TargetCapacity - The target capacity of a Spot Fleet.
 	//
-	// * appstream:fleet:DesiredCapacity - The desired capacity of an
-	// AppStream 2.0 fleet.
+	// *
+	// appstream:fleet:DesiredCapacity - The desired capacity of an AppStream 2.0
+	// fleet.
 	//
-	// * dynamodb:table:ReadCapacityUnits - The provisioned read
+	// * dynamodb:table:ReadCapacityUnits - The provisioned read capacity for a
+	// DynamoDB table.
+	//
+	// * dynamodb:table:WriteCapacityUnits - The provisioned write
 	// capacity for a DynamoDB table.
 	//
-	// * dynamodb:table:WriteCapacityUnits - The
-	// provisioned write capacity for a DynamoDB table.
+	// * dynamodb:index:ReadCapacityUnits - The
+	// provisioned read capacity for a DynamoDB global secondary index.
 	//
 	// *
-	// dynamodb:index:ReadCapacityUnits - The provisioned read capacity for a DynamoDB
-	// global secondary index.
+	// dynamodb:index:WriteCapacityUnits - The provisioned write capacity for a
+	// DynamoDB global secondary index.
 	//
-	// * dynamodb:index:WriteCapacityUnits - The provisioned
-	// write capacity for a DynamoDB global secondary index.
-	//
-	// *
-	// rds:cluster:ReadReplicaCount - The count of Aurora Replicas in an Aurora DB
-	// cluster. Available for Aurora MySQL-compatible edition and Aurora
-	// PostgreSQL-compatible edition.
-	//
-	// * sagemaker:variant:DesiredInstanceCount - The
-	// number of EC2 instances for an Amazon SageMaker model endpoint variant.
+	// * rds:cluster:ReadReplicaCount - The count of
+	// Aurora Replicas in an Aurora DB cluster. Available for Aurora MySQL-compatible
+	// edition and Aurora PostgreSQL-compatible edition.
 	//
 	// *
-	// custom-resource:ResourceType:Property - The scalable dimension for a custom
-	// resource provided by your own application or service.
+	// sagemaker:variant:DesiredInstanceCount - The number of EC2 instances for an
+	// SageMaker model endpoint variant.
+	//
+	// * custom-resource:ResourceType:Property - The
+	// scalable dimension for a custom resource provided by your own application or
+	// service.
+	//
+	// * comprehend:document-classifier-endpoint:DesiredInferenceUnits - The
+	// number of inference units for an Amazon Comprehend document classification
+	// endpoint.
+	//
+	// * comprehend:entity-recognizer-endpoint:DesiredInferenceUnits - The
+	// number of inference units for an Amazon Comprehend entity recognizer
+	// endpoint.
+	//
+	// * lambda:function:ProvisionedConcurrency - The provisioned
+	// concurrency for a Lambda function.
+	//
+	// * cassandra:table:ReadCapacityUnits - The
+	// provisioned read capacity for an Amazon Keyspaces table.
 	//
 	// *
-	// comprehend:document-classifier-endpoint:DesiredInferenceUnits - The number of
-	// inference units for an Amazon Comprehend document classification endpoint.
+	// cassandra:table:WriteCapacityUnits - The provisioned write capacity for an
+	// Amazon Keyspaces table.
+	//
+	// * kafka:broker-storage:VolumeSize - The provisioned
+	// volume size (in GiB) for brokers in an Amazon MSK cluster.
 	//
 	// *
-	// comprehend:entity-recognizer-endpoint:DesiredInferenceUnits - The number of
-	// inference units for an Amazon Comprehend entity recognizer endpoint.
+	// elasticache:replication-group:NodeGroups - The number of node groups for an
+	// Amazon ElastiCache replication group.
 	//
-	// *
-	// lambda:function:ProvisionedConcurrency - The provisioned concurrency for a
-	// Lambda function.
+	// * elasticache:replication-group:Replicas
+	// - The number of replicas per node group for an Amazon ElastiCache replication
+	// group.
 	//
-	// * cassandra:table:ReadCapacityUnits - The provisioned read
-	// capacity for an Amazon Keyspaces table.
-	//
-	// * cassandra:table:WriteCapacityUnits -
-	// The provisioned write capacity for an Amazon Keyspaces table.
-	//
-	// *
-	// kafka:broker-storage:VolumeSize - The provisioned volume size (in GiB) for
-	// brokers in an Amazon MSK cluster.
-	//
-	// * elasticache:replication-group:NodeGroups -
-	// The number of node groups for an Amazon ElastiCache replication group.
-	//
-	// *
-	// elasticache:replication-group:Replicas - The number of replicas per node group
-	// for an Amazon ElastiCache replication group.
+	// * neptune:cluster:ReadReplicaCount - The count of read replicas in an
+	// Amazon Neptune DB cluster.
 	//
 	// This member is required.
 	ScalableDimension ScalableDimension
@@ -742,9 +759,9 @@ type ScheduledAction struct {
 	// resource type is service and the unique identifier is the cluster name and
 	// service name. Example: service/default/sample-webapp.
 	//
-	// * Spot Fleet request -
-	// The resource type is spot-fleet-request and the unique identifier is the Spot
-	// Fleet request ID. Example:
+	// * Spot Fleet - The
+	// resource type is spot-fleet-request and the unique identifier is the Spot Fleet
+	// request ID. Example:
 	// spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE.
 	//
 	// * EMR cluster -
@@ -767,8 +784,8 @@ type ScheduledAction struct {
 	// The resource type is cluster and the unique identifier is the cluster name.
 	// Example: cluster:my-db-cluster.
 	//
-	// * Amazon SageMaker endpoint variant - The
-	// resource type is variant and the unique identifier is the resource ID. Example:
+	// * SageMaker endpoint variant - The resource
+	// type is variant and the unique identifier is the resource ID. Example:
 	// endpoint/my-end-point/variant/KMeansClustering.
 	//
 	// * Custom resources are not
@@ -806,6 +823,9 @@ type ScheduledAction struct {
 	// Amazon ElastiCache replication group - The resource type is replication-group
 	// and the unique identifier is the replication group name. Example:
 	// replication-group/mycluster.
+	//
+	// * Neptune cluster - The resource type is cluster
+	// and the unique identifier is the cluster name. Example: cluster:mycluster.
 	//
 	// This member is required.
 	ResourceId *string
@@ -864,65 +884,68 @@ type ScheduledAction struct {
 	// instance count of an EMR Instance Group.
 	//
 	// *
-	// ec2:spot-fleet-request:TargetCapacity - The target capacity of a Spot Fleet
-	// request.
+	// ec2:spot-fleet-request:TargetCapacity - The target capacity of a Spot Fleet.
 	//
-	// * appstream:fleet:DesiredCapacity - The desired capacity of an
-	// AppStream 2.0 fleet.
+	// *
+	// appstream:fleet:DesiredCapacity - The desired capacity of an AppStream 2.0
+	// fleet.
 	//
-	// * dynamodb:table:ReadCapacityUnits - The provisioned read
+	// * dynamodb:table:ReadCapacityUnits - The provisioned read capacity for a
+	// DynamoDB table.
+	//
+	// * dynamodb:table:WriteCapacityUnits - The provisioned write
 	// capacity for a DynamoDB table.
 	//
-	// * dynamodb:table:WriteCapacityUnits - The
-	// provisioned write capacity for a DynamoDB table.
+	// * dynamodb:index:ReadCapacityUnits - The
+	// provisioned read capacity for a DynamoDB global secondary index.
 	//
 	// *
-	// dynamodb:index:ReadCapacityUnits - The provisioned read capacity for a DynamoDB
-	// global secondary index.
+	// dynamodb:index:WriteCapacityUnits - The provisioned write capacity for a
+	// DynamoDB global secondary index.
 	//
-	// * dynamodb:index:WriteCapacityUnits - The provisioned
-	// write capacity for a DynamoDB global secondary index.
-	//
-	// *
-	// rds:cluster:ReadReplicaCount - The count of Aurora Replicas in an Aurora DB
-	// cluster. Available for Aurora MySQL-compatible edition and Aurora
-	// PostgreSQL-compatible edition.
-	//
-	// * sagemaker:variant:DesiredInstanceCount - The
-	// number of EC2 instances for an Amazon SageMaker model endpoint variant.
+	// * rds:cluster:ReadReplicaCount - The count of
+	// Aurora Replicas in an Aurora DB cluster. Available for Aurora MySQL-compatible
+	// edition and Aurora PostgreSQL-compatible edition.
 	//
 	// *
-	// custom-resource:ResourceType:Property - The scalable dimension for a custom
-	// resource provided by your own application or service.
+	// sagemaker:variant:DesiredInstanceCount - The number of EC2 instances for an
+	// SageMaker model endpoint variant.
+	//
+	// * custom-resource:ResourceType:Property - The
+	// scalable dimension for a custom resource provided by your own application or
+	// service.
+	//
+	// * comprehend:document-classifier-endpoint:DesiredInferenceUnits - The
+	// number of inference units for an Amazon Comprehend document classification
+	// endpoint.
+	//
+	// * comprehend:entity-recognizer-endpoint:DesiredInferenceUnits - The
+	// number of inference units for an Amazon Comprehend entity recognizer
+	// endpoint.
+	//
+	// * lambda:function:ProvisionedConcurrency - The provisioned
+	// concurrency for a Lambda function.
+	//
+	// * cassandra:table:ReadCapacityUnits - The
+	// provisioned read capacity for an Amazon Keyspaces table.
 	//
 	// *
-	// comprehend:document-classifier-endpoint:DesiredInferenceUnits - The number of
-	// inference units for an Amazon Comprehend document classification endpoint.
+	// cassandra:table:WriteCapacityUnits - The provisioned write capacity for an
+	// Amazon Keyspaces table.
+	//
+	// * kafka:broker-storage:VolumeSize - The provisioned
+	// volume size (in GiB) for brokers in an Amazon MSK cluster.
 	//
 	// *
-	// comprehend:entity-recognizer-endpoint:DesiredInferenceUnits - The number of
-	// inference units for an Amazon Comprehend entity recognizer endpoint.
+	// elasticache:replication-group:NodeGroups - The number of node groups for an
+	// Amazon ElastiCache replication group.
 	//
-	// *
-	// lambda:function:ProvisionedConcurrency - The provisioned concurrency for a
-	// Lambda function.
+	// * elasticache:replication-group:Replicas
+	// - The number of replicas per node group for an Amazon ElastiCache replication
+	// group.
 	//
-	// * cassandra:table:ReadCapacityUnits - The provisioned read
-	// capacity for an Amazon Keyspaces table.
-	//
-	// * cassandra:table:WriteCapacityUnits -
-	// The provisioned write capacity for an Amazon Keyspaces table.
-	//
-	// *
-	// kafka:broker-storage:VolumeSize - The provisioned volume size (in GiB) for
-	// brokers in an Amazon MSK cluster.
-	//
-	// * elasticache:replication-group:NodeGroups -
-	// The number of node groups for an Amazon ElastiCache replication group.
-	//
-	// *
-	// elasticache:replication-group:Replicas - The number of replicas per node group
-	// for an Amazon ElastiCache replication group.
+	// * neptune:cluster:ReadReplicaCount - The count of read replicas in an
+	// Amazon Neptune DB cluster.
 	ScalableDimension ScalableDimension
 
 	// The new minimum and maximum capacity. You can set both values or just one. At
@@ -1034,36 +1057,36 @@ type StepScalingPolicyConfiguration struct {
 	// value of 600 for Amazon ElastiCache replication groups and a default value of
 	// 300 for the following scalable targets:
 	//
-	// * ECS services
+	// * AppStream 2.0 fleets
 	//
-	// * Spot Fleet
-	// requests
+	// * Aurora DB
+	// clusters
+	//
+	// * ECS services
 	//
 	// * EMR clusters
 	//
-	// * AppStream 2.0 fleets
+	// * Neptune clusters
 	//
-	// * Aurora DB clusters
+	// * SageMaker
+	// endpoint variants
 	//
-	// * Amazon
-	// SageMaker endpoint variants
+	// * Spot Fleets
 	//
 	// * Custom resources
 	//
-	// For all other scalable targets,
-	// the default value is 0:
+	// For all other scalable
+	// targets, the default value is 0:
 	//
-	// * DynamoDB tables
+	// * Amazon Comprehend document classification
+	// and entity recognizer endpoints
 	//
-	// * DynamoDB global secondary
+	// * DynamoDB tables and global secondary
 	// indexes
 	//
-	// * Amazon Comprehend document classification and entity recognizer
-	// endpoints
+	// * Amazon Keyspaces tables
 	//
 	// * Lambda provisioned concurrency
-	//
-	// * Amazon Keyspaces tables
 	//
 	// * Amazon
 	// MSK broker storage
@@ -1153,36 +1176,36 @@ type TargetTrackingScalingPolicyConfiguration struct {
 	// ElastiCache replication groups and a default value of 300 for the following
 	// scalable targets:
 	//
-	// * ECS services
-	//
-	// * Spot Fleet requests
-	//
-	// * EMR clusters
-	//
-	// *
-	// AppStream 2.0 fleets
+	// * AppStream 2.0 fleets
 	//
 	// * Aurora DB clusters
 	//
-	// * Amazon SageMaker endpoint
-	// variants
+	// * ECS
+	// services
+	//
+	// * EMR clusters
+	//
+	// * Neptune clusters
+	//
+	// * SageMaker endpoint variants
+	//
+	// *
+	// Spot Fleets
 	//
 	// * Custom resources
 	//
-	// For all other scalable targets, the default value
-	// is 0:
+	// For all other scalable targets, the default
+	// value is 0:
 	//
-	// * DynamoDB tables
+	// * Amazon Comprehend document classification and entity recognizer
+	// endpoints
 	//
-	// * DynamoDB global secondary indexes
+	// * DynamoDB tables and global secondary indexes
 	//
-	// * Amazon
-	// Comprehend document classification and entity recognizer endpoints
+	// * Amazon Keyspaces
+	// tables
 	//
-	// * Lambda
-	// provisioned concurrency
-	//
-	// * Amazon Keyspaces tables
+	// * Lambda provisioned concurrency
 	//
 	// * Amazon MSK broker storage
 	ScaleInCooldown *int32
@@ -1199,39 +1222,38 @@ type TargetTrackingScalingPolicyConfiguration struct {
 	// of 600 for Amazon ElastiCache replication groups and a default value of 300 for
 	// the following scalable targets:
 	//
-	// * ECS services
-	//
-	// * Spot Fleet requests
-	//
-	// * EMR
-	// clusters
-	//
 	// * AppStream 2.0 fleets
 	//
 	// * Aurora DB clusters
 	//
-	// * Amazon SageMaker
-	// endpoint variants
+	// *
+	// ECS services
+	//
+	// * EMR clusters
+	//
+	// * Neptune clusters
+	//
+	// * SageMaker endpoint
+	// variants
+	//
+	// * Spot Fleets
 	//
 	// * Custom resources
 	//
 	// For all other scalable targets, the
 	// default value is 0:
 	//
-	// * DynamoDB tables
+	// * Amazon Comprehend document classification and entity
+	// recognizer endpoints
 	//
-	// * DynamoDB global secondary indexes
+	// * DynamoDB tables and global secondary indexes
 	//
-	// *
-	// Amazon Comprehend document classification and entity recognizer endpoints
+	// * Amazon
+	// Keyspaces tables
 	//
-	// *
-	// Lambda provisioned concurrency
+	// * Lambda provisioned concurrency
 	//
-	// * Amazon Keyspaces tables
-	//
-	// * Amazon MSK broker
-	// storage
+	// * Amazon MSK broker storage
 	ScaleOutCooldown *int32
 
 	noSmithyDocumentSerde

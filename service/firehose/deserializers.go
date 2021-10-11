@@ -1678,6 +1678,231 @@ func awsAwsjson11_deserializeErrorServiceUnavailableException(response *smithyht
 	return output
 }
 
+func awsAwsjson11_deserializeDocumentAmazonopensearchserviceBufferingHints(v **types.AmazonopensearchserviceBufferingHints, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AmazonopensearchserviceBufferingHints
+	if *v == nil {
+		sv = &types.AmazonopensearchserviceBufferingHints{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "IntervalInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected AmazonopensearchserviceBufferingIntervalInSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.IntervalInSeconds = ptr.Int32(int32(i64))
+			}
+
+		case "SizeInMBs":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected AmazonopensearchserviceBufferingSizeInMBs to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SizeInMBs = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAmazonopensearchserviceDestinationDescription(v **types.AmazonopensearchserviceDestinationDescription, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AmazonopensearchserviceDestinationDescription
+	if *v == nil {
+		sv = &types.AmazonopensearchserviceDestinationDescription{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BufferingHints":
+			if err := awsAwsjson11_deserializeDocumentAmazonopensearchserviceBufferingHints(&sv.BufferingHints, value); err != nil {
+				return err
+			}
+
+		case "CloudWatchLoggingOptions":
+			if err := awsAwsjson11_deserializeDocumentCloudWatchLoggingOptions(&sv.CloudWatchLoggingOptions, value); err != nil {
+				return err
+			}
+
+		case "ClusterEndpoint":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AmazonopensearchserviceClusterEndpoint to be of type string, got %T instead", value)
+				}
+				sv.ClusterEndpoint = ptr.String(jtv)
+			}
+
+		case "DomainARN":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AmazonopensearchserviceDomainARN to be of type string, got %T instead", value)
+				}
+				sv.DomainARN = ptr.String(jtv)
+			}
+
+		case "IndexName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AmazonopensearchserviceIndexName to be of type string, got %T instead", value)
+				}
+				sv.IndexName = ptr.String(jtv)
+			}
+
+		case "IndexRotationPeriod":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AmazonopensearchserviceIndexRotationPeriod to be of type string, got %T instead", value)
+				}
+				sv.IndexRotationPeriod = types.AmazonopensearchserviceIndexRotationPeriod(jtv)
+			}
+
+		case "ProcessingConfiguration":
+			if err := awsAwsjson11_deserializeDocumentProcessingConfiguration(&sv.ProcessingConfiguration, value); err != nil {
+				return err
+			}
+
+		case "RetryOptions":
+			if err := awsAwsjson11_deserializeDocumentAmazonopensearchserviceRetryOptions(&sv.RetryOptions, value); err != nil {
+				return err
+			}
+
+		case "RoleARN":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleARN to be of type string, got %T instead", value)
+				}
+				sv.RoleARN = ptr.String(jtv)
+			}
+
+		case "S3BackupMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AmazonopensearchserviceS3BackupMode to be of type string, got %T instead", value)
+				}
+				sv.S3BackupMode = types.AmazonopensearchserviceS3BackupMode(jtv)
+			}
+
+		case "S3DestinationDescription":
+			if err := awsAwsjson11_deserializeDocumentS3DestinationDescription(&sv.S3DestinationDescription, value); err != nil {
+				return err
+			}
+
+		case "TypeName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AmazonopensearchserviceTypeName to be of type string, got %T instead", value)
+				}
+				sv.TypeName = ptr.String(jtv)
+			}
+
+		case "VpcConfigurationDescription":
+			if err := awsAwsjson11_deserializeDocumentVpcConfigurationDescription(&sv.VpcConfigurationDescription, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAmazonopensearchserviceRetryOptions(v **types.AmazonopensearchserviceRetryOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AmazonopensearchserviceRetryOptions
+	if *v == nil {
+		sv = &types.AmazonopensearchserviceRetryOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DurationInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected AmazonopensearchserviceRetryDurationInSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DurationInSeconds = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentBufferingHints(v **types.BufferingHints, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2281,6 +2506,11 @@ func awsAwsjson11_deserializeDocumentDestinationDescription(v **types.Destinatio
 
 	for key, value := range shape {
 		switch key {
+		case "AmazonopensearchserviceDestinationDescription":
+			if err := awsAwsjson11_deserializeDocumentAmazonopensearchserviceDestinationDescription(&sv.AmazonopensearchserviceDestinationDescription, value); err != nil {
+				return err
+			}
+
 		case "DestinationId":
 			if value != nil {
 				jtv, ok := value.(string)

@@ -59,8 +59,8 @@ type CreateBotLocaleInput struct {
 	// are configured for the bot. For example, suppose a bot is configured with the
 	// confidence threshold of 0.80 and the AMAZON.FallbackIntent. Amazon Lex returns
 	// three alternative intents with the following confidence scores: IntentA (0.70),
-	// IntentB (0.60), IntentC (0.50). The response from the PostText operation would
-	// be:
+	// IntentB (0.60), IntentC (0.50). The response from the RecognizeText operation
+	// would be:
 	//
 	// * AMAZON.FallbackIntent
 	//

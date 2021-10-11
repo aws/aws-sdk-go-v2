@@ -606,8 +606,8 @@ type CreateFileSystemWindowsConfiguration struct {
 	// transfer costs and minimize latency.
 	PreferredSubnetId *string
 
-	// The configuration that Amazon FSx uses to join a Amazon FSx for Windows File
-	// Server file system or an ONTAP storage virtual machine (SVM) to a self-managed
+	// The configuration that Amazon FSx uses to join a FSx for Windows File Server
+	// file system or an ONTAP storage virtual machine (SVM) to a self-managed
 	// (including on-premises) Microsoft Active Directory (AD) directory. For more
 	// information, see  Using Amazon FSx with your self-managed Microsoft Active
 	// Directory
@@ -685,8 +685,8 @@ type CreateSvmActiveDirectoryConfiguration struct {
 	// This member is required.
 	NetBiosName *string
 
-	// The configuration that Amazon FSx uses to join a Amazon FSx for Windows File
-	// Server file system or an ONTAP storage virtual machine (SVM) to a self-managed
+	// The configuration that Amazon FSx uses to join a FSx for Windows File Server
+	// file system or an ONTAP storage virtual machine (SVM) to a self-managed
 	// (including on-premises) Microsoft Active Directory (AD) directory. For more
 	// information, see  Using Amazon FSx with your self-managed Microsoft Active
 	// Directory
@@ -1069,6 +1069,9 @@ type FileSystem struct {
 	// The type of Amazon FSx file system, which can be LUSTRE, WINDOWS, or ONTAP.
 	FileSystemType FileSystemType
 
+	// The version of your Amazon FSx for Lustre file system, either 2.10 or 2.12.
+	FileSystemTypeVersion *string
+
 	// The ID of the Key Management Service (KMS) key used to encrypt the file system's
 	// data for Amazon FSx for Windows File Server file systems, Amazon FSx for NetApp
 	// ONTAP file systems, and persistent Amazon FSx for Lustre file systems at rest.
@@ -1426,7 +1429,7 @@ type OntapVolumeConfiguration struct {
 // is joined.
 type SelfManagedActiveDirectoryAttributes struct {
 
-	// A list of up to two IP addresses of DNS servers or domain controllers in the
+	// A list of up to three IP addresses of DNS servers or domain controllers in the
 	// self-managed AD directory.
 	DnsIps []string
 
@@ -1449,8 +1452,8 @@ type SelfManagedActiveDirectoryAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration that Amazon FSx uses to join a Amazon FSx for Windows File
-// Server file system or an ONTAP storage virtual machine (SVM) to a self-managed
+// The configuration that Amazon FSx uses to join a FSx for Windows File Server
+// file system or an ONTAP storage virtual machine (SVM) to a self-managed
 // (including on-premises) Microsoft Active Directory (AD) directory. For more
 // information, see  Using Amazon FSx with your self-managed Microsoft Active
 // Directory
@@ -1459,7 +1462,7 @@ type SelfManagedActiveDirectoryAttributes struct {
 // (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-svms.html).
 type SelfManagedActiveDirectoryConfiguration struct {
 
-	// A list of up to two IP addresses of DNS servers or domain controllers in the
+	// A list of up to three IP addresses of DNS servers or domain controllers in the
 	// self-managed AD directory.
 	//
 	// This member is required.
@@ -1510,7 +1513,7 @@ type SelfManagedActiveDirectoryConfiguration struct {
 // to a self-managed Microsoft Active Directory (AD) directory.
 type SelfManagedActiveDirectoryConfigurationUpdates struct {
 
-	// A list of up to two IP addresses of DNS servers or domain controllers in the
+	// A list of up to three IP addresses of DNS servers or domain controllers in the
 	// self-managed AD directory.
 	DnsIps []string
 

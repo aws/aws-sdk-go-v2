@@ -24,12 +24,12 @@ type AuthenticationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Describes an AWS App Runner automatic scaling configuration resource. Multiple
+// Describes an App Runner automatic scaling configuration resource. Multiple
 // revisions of a configuration have the same AutoScalingConfigurationName and
 // different AutoScalingConfigurationRevision values. A higher MinSize increases
-// the spread of your App Runner service over more Availability Zones in the AWS
-// Region. The tradeoff is a higher minimal cost. A lower MaxSize controls your
-// cost. The tradeoff is lower responsiveness during peak demand.
+// the spread of your App Runner service over more Availability Zones in the Amazon
+// Web Services Region. The tradeoff is a higher minimal cost. A lower MaxSize
+// controls your cost. The tradeoff is lower responsiveness during peak demand.
 type AutoScalingConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of this auto scaling configuration.
@@ -84,9 +84,9 @@ type AutoScalingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Provides summary information about an AWS App Runner automatic scaling
-// configuration resource. This type contains limited information about an auto
-// scaling configuration. It includes only identification information, without
+// Provides summary information about an App Runner automatic scaling configuration
+// resource. This type contains limited information about an auto scaling
+// configuration. It includes only identification information, without
 // configuration details. It's returned by the ListAutoScalingConfigurations
 // action. Complete configuration information is returned by the
 // CreateAutoScalingConfiguration, DescribeAutoScalingConfiguration, and
@@ -129,8 +129,8 @@ type CertificateValidationRecord struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the configuration that AWS App Runner uses to build and run an App
-// Runner service from a source code repository.
+// Describes the configuration that App Runner uses to build and run an App Runner
+// service from a source code repository.
 type CodeConfiguration struct {
 
 	// The source of the App Runner configuration. Values are interpreted as
@@ -155,8 +155,8 @@ type CodeConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the basic configuration needed for building and running an AWS App
-// Runner service. This type doesn't support the full set of possible configuration
+// Describes the basic configuration needed for building and running an App Runner
+// service. This type doesn't support the full set of possible configuration
 // options. Fur full configuration capabilities, use a apprunner.yaml file in the
 // source code repository.
 type CodeConfigurationValues struct {
@@ -204,7 +204,7 @@ type CodeRepository struct {
 	noSmithyDocumentSerde
 }
 
-// Describes an AWS App Runner connection resource.
+// Describes an App Runner connection resource.
 type Connection struct {
 
 	// The Amazon Resource Name (ARN) of this connection.
@@ -226,7 +226,7 @@ type Connection struct {
 	noSmithyDocumentSerde
 }
 
-// Provides summary information about an AWS App Runner connection resource.
+// Provides summary information about an App Runner connection resource.
 type ConnectionSummary struct {
 
 	// The Amazon Resource Name (ARN) of this connection.
@@ -248,7 +248,7 @@ type ConnectionSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a custom domain that's associated with an AWS App Runner service.
+// Describes a custom domain that's associated with an App Runner service.
 type CustomDomain struct {
 
 	// An associated custom domain endpoint. It can be a root domain (for example,
@@ -275,8 +275,8 @@ type CustomDomain struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a custom encryption key that AWS App Runner uses to encrypt copies of
-// the source repository and service logs.
+// Describes a custom encryption key that App Runner uses to encrypt copies of the
+// source repository and service logs.
 type EncryptionConfiguration struct {
 
 	// The ARN of the KMS key that's used for encryption.
@@ -287,12 +287,12 @@ type EncryptionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the settings for the health check that AWS App Runner performs to
-// monitor the health of a service.
+// Describes the settings for the health check that App Runner performs to monitor
+// the health of a service.
 type HealthCheckConfiguration struct {
 
 	// The number of consecutive checks that must succeed before App Runner decides
-	// that the service is healthy. Default: 3
+	// that the service is healthy. Default: 1
 	HealthyThreshold *int32
 
 	// The time interval, in seconds, between health checks. Default: 5
@@ -312,14 +312,14 @@ type HealthCheckConfiguration struct {
 	Timeout *int32
 
 	// The number of consecutive checks that must fail before App Runner decides that
-	// the service is unhealthy. Default: 3
+	// the service is unhealthy. Default: 5
 	UnhealthyThreshold *int32
 
 	noSmithyDocumentSerde
 }
 
-// Describes the configuration that AWS App Runner uses to run an App Runner
-// service using an image pulled from a source image repository.
+// Describes the configuration that App Runner uses to run an App Runner service
+// using an image pulled from a source image repository.
 type ImageConfiguration struct {
 
 	// The port that your application listens to in the container. Default: 8080
@@ -362,8 +362,8 @@ type ImageRepository struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the runtime configuration of an AWS App Runner service instance
-// (scaling unit).
+// Describes the runtime configuration of an App Runner service instance (scaling
+// unit).
 type InstanceConfiguration struct {
 
 	// The number of CPU units reserved for each instance of your App Runner service.
@@ -372,7 +372,7 @@ type InstanceConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of an IAM role that provides permissions to your
 	// App Runner service. These are permissions that your code needs when it calls any
-	// AWS APIs.
+	// Amazon Web Services APIs.
 	InstanceRoleArn *string
 
 	// The amount of memory, in MB or GB, reserved for each instance of your App Runner
@@ -382,7 +382,7 @@ type InstanceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Provides summary information for an operation that occurred on an AWS App Runner
+// Provides summary information for an operation that occurred on an App Runner
 // service.
 type OperationSummary struct {
 
@@ -413,7 +413,7 @@ type OperationSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Describes an AWS App Runner service. It can describe a service in any state,
+// Describes an App Runner service. It can describe a service in any state,
 // including deleted services. This type contains the full information about a
 // service, including configuration details. It's returned by the CreateService
 // (https://docs.aws.amazon.com/apprunner/latest/api/API_CreateService.html),
@@ -449,8 +449,8 @@ type Service struct {
 	// This member is required.
 	ServiceArn *string
 
-	// An ID that App Runner generated for this service. It's unique within the AWS
-	// Region.
+	// An ID that App Runner generated for this service. It's unique within the Amazon
+	// Web Services Region.
 	//
 	// This member is required.
 	ServiceId *string
@@ -500,7 +500,7 @@ type Service struct {
 
 	// The encryption key that App Runner uses to encrypt the service logs and the copy
 	// of the source repository that App Runner maintains for the service. It can be
-	// either a customer-provided encryption key or an AWS managed CMK.
+	// either a customer-provided encryption key or an Amazon Web Services managed CMK.
 	EncryptionConfiguration *EncryptionConfiguration
 
 	// The settings for the health check that App Runner performs to monitor the health
@@ -510,7 +510,7 @@ type Service struct {
 	noSmithyDocumentSerde
 }
 
-// Provides summary information for an AWS App Runner service. This type contains
+// Provides summary information for an App Runner service. This type contains
 // limited information about a service. It doesn't include configuration details.
 // It's returned by the ListServices
 // (https://docs.aws.amazon.com/apprunner/latest/api/API_ListServices.html) action.
@@ -531,8 +531,8 @@ type ServiceSummary struct {
 	// The Amazon Resource Name (ARN) of this service.
 	ServiceArn *string
 
-	// An ID that App Runner generated for this service. It's unique within the AWS
-	// Region.
+	// An ID that App Runner generated for this service. It's unique within the Amazon
+	// Web Services Region.
 	ServiceId *string
 
 	// The customer-provided service name.
@@ -563,7 +563,7 @@ type ServiceSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Identifies a version of code that AWS App Runner refers to within a source code
+// Identifies a version of code that App Runner refers to within a source code
 // repository.
 type SourceCodeVersion struct {
 
@@ -582,8 +582,8 @@ type SourceCodeVersion struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the source deployed to an AWS App Runner service. It can be a code or
-// an image repository.
+// Describes the source deployed to an App Runner service. It can be a code or an
+// image repository.
 type SourceConfiguration struct {
 
 	// Describes the resources that are needed to authenticate access to some source
@@ -591,8 +591,12 @@ type SourceConfiguration struct {
 	AuthenticationConfiguration *AuthenticationConfiguration
 
 	// If true, continuous integration from the source repository is enabled for the
-	// App Runner service. Each repository change (source code commit or new image
-	// version) starts a deployment. Default: true
+	// App Runner service. Each repository change (including any source code commit or
+	// new image version) starts a deployment. Default: App Runner sets to false for a
+	// source image that uses an ECR Public repository or an ECR repository that's in
+	// an Amazon Web Services account other than the one that the service is in. App
+	// Runner sets to true in all other cases (which currently include a source code
+	// repository or a source image using a same-account ECR repository).
 	AutoDeploymentsEnabled *bool
 
 	// The description of a source code repository. You must provide either this member
@@ -606,8 +610,8 @@ type SourceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a tag that is applied to an AWS App Runner resource. A tag is a
-// metadata item consisting of a key-value pair.
+// Describes a tag that is applied to an App Runner resource. A tag is a metadata
+// item consisting of a key-value pair.
 type Tag struct {
 
 	// The key of the tag.

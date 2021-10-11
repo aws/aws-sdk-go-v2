@@ -144,8 +144,10 @@ type CreateAssociationInput struct {
 
 	// The targets for the association. You can target instances by using tags, Amazon
 	// Web Services resource groups, all instances in an Amazon Web Services account,
-	// or individual instance IDs. For more information about choosing targets for an
-	// association, see Using targets and rate controls with State Manager associations
+	// or individual instance IDs. You can target all instances in an Amazon Web
+	// Services account by specifying the InstanceIds key with a value of *. For more
+	// information about choosing targets for an association, see Using targets and
+	// rate controls with State Manager associations
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-state-manager-targets-and-rate-controls.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	Targets []types.Target

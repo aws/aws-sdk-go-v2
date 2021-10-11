@@ -1801,6 +1801,42 @@ func awsRestjson1_deserializeErrorValidationException(response *smithyhttp.Respo
 	return output
 }
 
+func awsRestjson1_deserializeDocumentArtifactConfigOutput(v **types.ArtifactConfigOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ArtifactConfigOutput
+	if *v == nil {
+		sv = &types.ArtifactConfigOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "S3Encryption":
+			if err := awsRestjson1_deserializeDocumentS3EncryptionConfig(&sv.S3Encryption, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentBaseScreenshot(v **types.BaseScreenshot, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2006,6 +2042,11 @@ func awsRestjson1_deserializeDocumentCanary(v **types.Canary, value interface{})
 
 	for key, value := range shape {
 		switch key {
+		case "ArtifactConfig":
+			if err := awsRestjson1_deserializeDocumentArtifactConfigOutput(&sv.ArtifactConfig, value); err != nil {
+				return err
+			}
+
 		case "ArtifactS3Location":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2956,6 +2997,55 @@ func awsRestjson1_deserializeDocumentRuntimeVersionList(v *[]types.RuntimeVersio
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentS3EncryptionConfig(v **types.S3EncryptionConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3EncryptionConfig
+	if *v == nil {
+		sv = &types.S3EncryptionConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EncryptionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EncryptionMode to be of type string, got %T instead", value)
+				}
+				sv.EncryptionMode = types.EncryptionMode(jtv)
+			}
+
+		case "KmsKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyArn to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

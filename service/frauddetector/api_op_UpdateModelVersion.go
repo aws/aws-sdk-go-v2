@@ -48,8 +48,13 @@ type UpdateModelVersionInput struct {
 	// This member is required.
 	ModelType types.ModelTypeEnum
 
-	// The event details.
+	// The details of the external events data used for training the model version.
+	// Required if trainingDataSource is EXTERNAL_EVENTS.
 	ExternalEventsDetail *types.ExternalEventsDetail
+
+	// The details of the ingested event used for training the model version. Required
+	// if your trainingDataSource is INGESTED_EVENTS.
+	IngestedEventsDetail *types.IngestedEventsDetail
 
 	// A collection of key and value pairs.
 	Tags []types.Tag

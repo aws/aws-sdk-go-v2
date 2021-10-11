@@ -114,6 +114,18 @@ type CreateFileSystemInput struct {
 	// Command Line Interface (CLI) or an Amazon Web Services SDK.
 	ClientRequestToken *string
 
+	// Sets the version of the Amazon FSx for Lustre file system you're creating. Valid
+	// values are 2.10 and 2.12.
+	//
+	// * Set the value to 2.10 to create a Lustre 2.10 file
+	// system.
+	//
+	// * Set the value to 2.12 to create a Lustre 2.12 file system.
+	//
+	// Default
+	// value is 2.10.
+	FileSystemTypeVersion *string
+
 	// The ID of the Key Management Service (KMS) key used to encrypt the file system's
 	// data for Amazon FSx for Windows File Server file systems, Amazon FSx for NetApp
 	// ONTAP file systems, and Amazon FSx for Lustre PERSISTENT_1 file systems at rest.

@@ -10,8 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Specifies the Key Management Service (KMS) customer master key (CMK) to be used
-// to encrypt content in Amazon Fraud Detector.
+// Specifies the KMS key to be used to encrypt content in Amazon Fraud Detector.
 func (c *Client) PutKMSEncryptionKey(ctx context.Context, params *PutKMSEncryptionKeyInput, optFns ...func(*Options)) (*PutKMSEncryptionKeyOutput, error) {
 	if params == nil {
 		params = &PutKMSEncryptionKeyInput{}

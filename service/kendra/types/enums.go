@@ -780,10 +780,11 @@ type ScoreConfidence string
 
 // Enum values for ScoreConfidence
 const (
-	ScoreConfidenceVeryHigh ScoreConfidence = "VERY_HIGH"
-	ScoreConfidenceHigh     ScoreConfidence = "HIGH"
-	ScoreConfidenceMedium   ScoreConfidence = "MEDIUM"
-	ScoreConfidenceLow      ScoreConfidence = "LOW"
+	ScoreConfidenceVeryHigh     ScoreConfidence = "VERY_HIGH"
+	ScoreConfidenceHigh         ScoreConfidence = "HIGH"
+	ScoreConfidenceMedium       ScoreConfidence = "MEDIUM"
+	ScoreConfidenceLow          ScoreConfidence = "LOW"
+	ScoreConfidenceNotAvailable ScoreConfidence = "NOT_AVAILABLE"
 )
 
 // Values returns all known values for ScoreConfidence. Note that this can be
@@ -795,6 +796,7 @@ func (ScoreConfidence) Values() []ScoreConfidence {
 		"HIGH",
 		"MEDIUM",
 		"LOW",
+		"NOT_AVAILABLE",
 	}
 }
 
@@ -913,6 +915,24 @@ func (UserContextPolicy) Values() []UserContextPolicy {
 	return []UserContextPolicy{
 		"ATTRIBUTE_FILTER",
 		"USER_TOKEN",
+	}
+}
+
+type UserGroupResolutionMode string
+
+// Enum values for UserGroupResolutionMode
+const (
+	UserGroupResolutionModeAwsSso UserGroupResolutionMode = "AWS_SSO"
+	UserGroupResolutionModeNone   UserGroupResolutionMode = "NONE"
+)
+
+// Values returns all known values for UserGroupResolutionMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UserGroupResolutionMode) Values() []UserGroupResolutionMode {
+	return []UserGroupResolutionMode{
+		"AWS_SSO",
+		"NONE",
 	}
 }
 

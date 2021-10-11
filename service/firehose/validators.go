@@ -274,6 +274,63 @@ func addOpUpdateDestinationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDestination{}, middleware.After)
 }
 
+func validateAmazonopensearchserviceDestinationConfiguration(v *types.AmazonopensearchserviceDestinationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AmazonopensearchserviceDestinationConfiguration"}
+	if v.RoleARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleARN"))
+	}
+	if v.IndexName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexName"))
+	}
+	if v.S3Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Configuration"))
+	} else if v.S3Configuration != nil {
+		if err := validateS3DestinationConfiguration(v.S3Configuration); err != nil {
+			invalidParams.AddNested("S3Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ProcessingConfiguration != nil {
+		if err := validateProcessingConfiguration(v.ProcessingConfiguration); err != nil {
+			invalidParams.AddNested("ProcessingConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.VpcConfiguration != nil {
+		if err := validateVpcConfiguration(v.VpcConfiguration); err != nil {
+			invalidParams.AddNested("VpcConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAmazonopensearchserviceDestinationUpdate(v *types.AmazonopensearchserviceDestinationUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AmazonopensearchserviceDestinationUpdate"}
+	if v.S3Update != nil {
+		if err := validateS3DestinationUpdate(v.S3Update); err != nil {
+			invalidParams.AddNested("S3Update", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ProcessingConfiguration != nil {
+		if err := validateProcessingConfiguration(v.ProcessingConfiguration); err != nil {
+			invalidParams.AddNested("ProcessingConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCopyCommand(v *types.CopyCommand) error {
 	if v == nil {
 		return nil
@@ -993,6 +1050,11 @@ func validateOpCreateDeliveryStreamInput(v *CreateDeliveryStreamInput) error {
 			invalidParams.AddNested("ElasticsearchDestinationConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.AmazonopensearchserviceDestinationConfiguration != nil {
+		if err := validateAmazonopensearchserviceDestinationConfiguration(v.AmazonopensearchserviceDestinationConfiguration); err != nil {
+			invalidParams.AddNested("AmazonopensearchserviceDestinationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.SplunkDestinationConfiguration != nil {
 		if err := validateSplunkDestinationConfiguration(v.SplunkDestinationConfiguration); err != nil {
 			invalidParams.AddNested("SplunkDestinationConfiguration", err.(smithy.InvalidParamsError))
@@ -1211,6 +1273,11 @@ func validateOpUpdateDestinationInput(v *UpdateDestinationInput) error {
 	if v.ElasticsearchDestinationUpdate != nil {
 		if err := validateElasticsearchDestinationUpdate(v.ElasticsearchDestinationUpdate); err != nil {
 			invalidParams.AddNested("ElasticsearchDestinationUpdate", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AmazonopensearchserviceDestinationUpdate != nil {
+		if err := validateAmazonopensearchserviceDestinationUpdate(v.AmazonopensearchserviceDestinationUpdate); err != nil {
+			invalidParams.AddNested("AmazonopensearchserviceDestinationUpdate", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.SplunkDestinationUpdate != nil {

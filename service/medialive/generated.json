@@ -12,6 +12,7 @@
         "api_op_BatchStop.go",
         "api_op_BatchUpdateSchedule.go",
         "api_op_CancelInputDeviceTransfer.go",
+        "api_op_ClaimDevice.go",
         "api_op_CreateChannel.go",
         "api_op_CreateInput.go",
         "api_op_CreateInputSecurityGroup.go",

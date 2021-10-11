@@ -14,9 +14,9 @@ import (
 // configured as a trigger are considered for follow up.
 type ActiveContext struct {
 
-	// A lis tof contexts active for the request. A context can be activated when a
+	// A list of contexts active for the request. A context can be activated when a
 	// previous intent is fulfilled, or by including the context in the request. If you
-	// don't specify a list of contexts, Amazon Lex will use the current list of
+	// don't specify a list of contexts, Amazon Lex V2 will use the current list of
 	// contexts for the session. If you specify an empty list, all contexts for the
 	// session are cleared.
 	//

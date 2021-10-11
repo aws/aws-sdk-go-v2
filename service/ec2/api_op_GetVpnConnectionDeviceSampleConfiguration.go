@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Download an AWS-provided sample configuration file to be used with the customer
-// gateway device specified for your Site-to-Site VPN connection.
+// Download an Amazon Web Services-provided sample configuration file to be used
+// with the customer gateway device specified for your Site-to-Site VPN connection.
 func (c *Client) GetVpnConnectionDeviceSampleConfiguration(ctx context.Context, params *GetVpnConnectionDeviceSampleConfigurationInput, optFns ...func(*Options)) (*GetVpnConnectionDeviceSampleConfigurationOutput, error) {
 	if params == nil {
 		params = &GetVpnConnectionDeviceSampleConfigurationInput{}

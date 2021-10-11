@@ -4466,6 +4466,18 @@ func awsAwsjson11_serializeDocumentUserContext(v *types.UserContext, value smith
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentUserGroupResolutionConfiguration(v *types.UserGroupResolutionConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.UserGroupResolutionMode) > 0 {
+		ok := object.Key("UserGroupResolutionMode")
+		ok.String(string(v.UserGroupResolutionMode))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentUserTokenConfiguration(v *types.UserTokenConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4736,6 +4748,11 @@ func awsAwsjson11_serializeOpDocumentCreateDataSourceInput(v *CreateDataSourceIn
 		ok.String(*v.IndexId)
 	}
 
+	if v.LanguageCode != nil {
+		ok := object.Key("LanguageCode")
+		ok.String(*v.LanguageCode)
+	}
+
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
@@ -4788,6 +4805,11 @@ func awsAwsjson11_serializeOpDocumentCreateFaqInput(v *CreateFaqInput, value smi
 	if v.IndexId != nil {
 		ok := object.Key("IndexId")
 		ok.String(*v.IndexId)
+	}
+
+	if v.LanguageCode != nil {
+		ok := object.Key("LanguageCode")
+		ok.String(*v.LanguageCode)
 	}
 
 	if v.Name != nil {
@@ -4863,6 +4885,13 @@ func awsAwsjson11_serializeOpDocumentCreateIndexInput(v *CreateIndexInput, value
 	if len(v.UserContextPolicy) > 0 {
 		ok := object.Key("UserContextPolicy")
 		ok.String(string(v.UserContextPolicy))
+	}
+
+	if v.UserGroupResolutionConfiguration != nil {
+		ok := object.Key("UserGroupResolutionConfiguration")
+		if err := awsAwsjson11_serializeDocumentUserGroupResolutionConfiguration(v.UserGroupResolutionConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.UserTokenConfigurations != nil {
@@ -5645,6 +5674,11 @@ func awsAwsjson11_serializeOpDocumentUpdateDataSourceInput(v *UpdateDataSourceIn
 		ok.String(*v.IndexId)
 	}
 
+	if v.LanguageCode != nil {
+		ok := object.Key("LanguageCode")
+		ok.String(*v.LanguageCode)
+	}
+
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
@@ -5704,6 +5738,13 @@ func awsAwsjson11_serializeOpDocumentUpdateIndexInput(v *UpdateIndexInput, value
 	if len(v.UserContextPolicy) > 0 {
 		ok := object.Key("UserContextPolicy")
 		ok.String(string(v.UserContextPolicy))
+	}
+
+	if v.UserGroupResolutionConfiguration != nil {
+		ok := object.Key("UserGroupResolutionConfiguration")
+		if err := awsAwsjson11_serializeDocumentUserGroupResolutionConfiguration(v.UserGroupResolutionConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.UserTokenConfigurations != nil {

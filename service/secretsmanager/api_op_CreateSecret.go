@@ -192,14 +192,10 @@ type CreateSecretInput struct {
 	// only the SecretString parameter. The Secrets Manager console stores the
 	// information as a JSON structure of key/value pairs that the Lambda rotation
 	// function knows how to parse. For storing multiple values, we recommend that you
-	// use a JSON text string argument and specify key/value pairs. For information on
-	// how to format a JSON parameter for the various command line tool environments,
-	// see Using JSON for Parameters
-	// (https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json)
-	// in the CLI User Guide. For example: {"username":"bob","password":"abc123xyz456"}
-	// If your command-line tool or SDK requires quotation marks around the parameter,
-	// you should use single quotes to avoid confusion with the double quotes required
-	// in the JSON text.
+	// use a JSON text string argument and specify key/value pairs. For more
+	// information, see Specifying parameter values for the Amazon Web Services CLI
+	// (https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters.html) in
+	// the Amazon Web Services CLI User Guide.
 	SecretString *string
 
 	// (Optional) Specifies a list of user-defined tags that are attached to the

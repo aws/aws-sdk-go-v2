@@ -11,8 +11,8 @@ import (
 )
 
 // Deletes an event type. You cannot delete an event type that is used in a
-// detector or a model. When you delete an entity type, Amazon Fraud Detector
-// permanently deletes that entity type and the data is no longer stored in Amazon
+// detector or a model. When you delete an event type, Amazon Fraud Detector
+// permanently deletes that event type and the data is no longer stored in Amazon
 // Fraud Detector.
 func (c *Client) DeleteEventType(ctx context.Context, params *DeleteEventTypeInput, optFns ...func(*Options)) (*DeleteEventTypeOutput, error) {
 	if params == nil {

@@ -38,6 +38,9 @@ type CreateConnectionInput struct {
 	// provided, the Amazon Web Services account ID is used by default.
 	CatalogId *string
 
+	// The tags you assign to the connection.
+	Tags map[string]string
+
 	noSmithyDocumentSerde
 }
 

@@ -28,20 +28,7 @@ func (e *AccessDeniedException) ErrorMessage() string {
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An exception indicating there was a conflict during a delete operation. The
-// following delete operations can cause a conflict exception:
-//
-// * DeleteDetector: A
-// conflict exception will occur if the detector has associated Rules or
-// DetectorVersions. You can only delete a detector if it has no Rules or
-// DetectorVersions.
-//
-// * DeleteDetectorVersion: A conflict exception will occur if
-// the DetectorVersion status is ACTIVE.
-//
-// * DeleteRule: A conflict exception will
-// occur if the RuleVersion is in use by an associated ACTIVE or INACTIVE
-// DetectorVersion.
+// An exception indicating there was a conflict during a delete operation.
 type ConflictException struct {
 	Message *string
 
@@ -79,9 +66,7 @@ func (e *InternalServerException) ErrorMessage() string {
 func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// An exception indicating the specified resource was not found. This can occur if
-// you submit a request, such as CreateBatchPredictionJob, but the detector name or
-// version does not exist.
+// An exception indicating the specified resource was not found.
 type ResourceNotFoundException struct {
 	Message *string
 

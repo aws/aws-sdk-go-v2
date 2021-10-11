@@ -72,6 +72,8 @@ type UpdateDestinationInput struct {
 	// This member is required.
 	DestinationId *string
 
+	AmazonopensearchserviceDestinationUpdate *types.AmazonopensearchserviceDestinationUpdate
+
 	// Describes an update for a destination in Amazon ES.
 	ElasticsearchDestinationUpdate *types.ElasticsearchDestinationUpdate
 

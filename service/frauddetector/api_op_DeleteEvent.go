@@ -40,6 +40,9 @@ type DeleteEventInput struct {
 	// This member is required.
 	EventTypeName *string
 
+	// Specifies whether or not to delete any predictions associated with the event.
+	DeleteAuditHistory *bool
+
 	noSmithyDocumentSerde
 }
 

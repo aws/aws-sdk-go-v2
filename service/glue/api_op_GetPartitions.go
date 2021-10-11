@@ -44,6 +44,10 @@ type GetPartitionsInput struct {
 	// provided, the Amazon Web Services account ID is used by default.
 	CatalogId *string
 
+	// When true, specifies not returning the partition column schema. Useful when you
+	// are interested only in other partition attributes such as partition values or
+	// location. This approach avoids the problem of a large response by not returning
+	// duplicate data.
 	ExcludeColumnSchema *bool
 
 	// An expression that filters the partitions to be returned. The expression uses

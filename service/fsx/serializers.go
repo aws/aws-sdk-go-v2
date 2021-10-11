@@ -2382,6 +2382,11 @@ func awsAwsjson11_serializeOpDocumentCreateFileSystemFromBackupInput(v *CreateFi
 		ok.String(*v.ClientRequestToken)
 	}
 
+	if v.FileSystemTypeVersion != nil {
+		ok := object.Key("FileSystemTypeVersion")
+		ok.String(*v.FileSystemTypeVersion)
+	}
+
 	if v.KmsKeyId != nil {
 		ok := object.Key("KmsKeyId")
 		ok.String(*v.KmsKeyId)
@@ -2442,6 +2447,11 @@ func awsAwsjson11_serializeOpDocumentCreateFileSystemInput(v *CreateFileSystemIn
 	if len(v.FileSystemType) > 0 {
 		ok := object.Key("FileSystemType")
 		ok.String(string(v.FileSystemType))
+	}
+
+	if v.FileSystemTypeVersion != nil {
+		ok := object.Key("FileSystemTypeVersion")
+		ok.String(*v.FileSystemTypeVersion)
 	}
 
 	if v.KmsKeyId != nil {

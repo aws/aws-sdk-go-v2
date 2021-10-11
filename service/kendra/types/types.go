@@ -69,9 +69,9 @@ type AdditionalResultAttributeValue struct {
 //
 // If you use more than 2 layers, you
 // receive a ValidationException exception with the message "AttributeFilter cannot
-// have a depth of more than 2." If you use more than 10 attribute filters, you
-// receive a ValidationException exception with the message "AttributeFilter cannot
-// have a length of more than 10".
+// have a depth of more than 2." If you use more than 10 attribute filters in a
+// given list for AndAllFilters or OrAllFilters, you receive a ValidationException
+// with the message "AttributeFilter cannot have a length of more than 10".
 type AttributeFilter struct {
 
 	// Performs a logical AND operation on all supplied filters.
@@ -89,19 +89,19 @@ type AttributeFilter struct {
 	EqualsTo *DocumentAttribute
 
 	// Performs a greater than operation on two document attributes. Use with a
-	// document attribute of type Integer or Long.
+	// document attribute of type Date or Long.
 	GreaterThan *DocumentAttribute
 
 	// Performs a greater or equals than operation on two document attributes. Use with
-	// a document attribute of type Integer or Long.
+	// a document attribute of type Date or Long.
 	GreaterThanOrEquals *DocumentAttribute
 
 	// Performs a less than operation on two document attributes. Use with a document
-	// attribute of type Integer or Long.
+	// attribute of type Date or Long.
 	LessThan *DocumentAttribute
 
 	// Performs a less than or equals operation on two document attributes. Use with a
-	// document attribute of type Integer or Long.
+	// document attribute of type Date or Long.
 	LessThanOrEquals *DocumentAttribute
 
 	// Performs a logical NOT operation on all supplied filters.
@@ -639,6 +639,13 @@ type DataSourceSummary struct {
 	// The unique identifier for the data source.
 	Id *string
 
+	// The code for a language. This shows a supported language for all documents in
+	// the data source. English is supported by default. For more information on
+	// supported languages, including their codes, see Adding documents in languages
+	// other than English
+	// (https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html).
+	LanguageCode *string
+
 	// The name of the data source.
 	Name *string
 
@@ -1040,6 +1047,13 @@ type FaqSummary struct {
 	// The unique identifier of the FAQ.
 	Id *string
 
+	// The code for a language. This shows a supported language for the FAQ document as
+	// part of the summary information for FAQs. English is supported by default. For
+	// more information on supported languages, including their codes, see Adding
+	// documents in languages other than English
+	// (https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html).
+	LanguageCode *string
+
 	// The name that you assigned the FAQ when you created or updated the FAQ.
 	Name *string
 
@@ -1120,7 +1134,12 @@ type GroupMembers struct {
 	// If you have more than 1000 users and/or sub groups for a single group, you need
 	// to provide the path to the S3 file that lists your users and sub groups for a
 	// group. Your sub groups can contain more than 1000 users, but the list of sub
-	// groups that belong to a group (and/or users) must be no more than 1000.
+	// groups that belong to a group (and/or users) must be no more than 1000. You can
+	// download this example S3 file
+	// (https://docs.aws.amazon.com/kendra/latest/dg/samples/group_members.zip) that
+	// uses the correct format for listing group members. Note, dataSourceId is
+	// optional. The value of type for a group is always GROUP and for a user it is
+	// always USER.
 	S3PathforGroupMembers *S3Path
 
 	noSmithyDocumentSerde
@@ -2332,7 +2351,7 @@ type TextWithHighlights struct {
 	noSmithyDocumentSerde
 }
 
-// An array of summary information for one or more thesauruses.
+// An array of summary information for a thesaurus or multiple thesauri.
 type ThesaurusSummary struct {
 
 	// The Unix datetime that the thesaurus was created.
@@ -2365,11 +2384,14 @@ type TimeRange struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the configuration information of the URLs to crawl. When selecting
-// websites to index, you must adhere to the Amazon Acceptable Use Policy
-// (https://aws.amazon.com/aup/) and all other Amazon terms. Remember that you must
-// only use the Amazon Kendra web crawler to index your own webpages, or webpages
-// that you have authorization to index.
+// Provides the configuration information of the URLs to crawl. You can only crawl
+// websites that use the secure communication protocol, Hypertext Transfer Protocol
+// Secure (HTTPS). If you receive an error when crawling a website, it could be
+// that the website is blocked from crawling. When selecting websites to index, you
+// must adhere to the Amazon Acceptable Use Policy (https://aws.amazon.com/aup/)
+// and all other Amazon terms. Remember that you must only use the Amazon Kendra
+// web crawler to index your own webpages, or webpages that you have authorization
+// to index.
 type Urls struct {
 
 	// Provides the configuration of the seed or starting point URLs of the websites
@@ -2386,14 +2408,14 @@ type Urls struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information about the user context for a Amazon Kendra index. This is
+// Provides information about the user context for an Amazon Kendra index. This is
 // used for filtering search results for different users based on their access to
 // documents. You provide one of the following:
 //
 // * User token
 //
 // * User ID, the
-// groups the user belongs to, and the data sources the groups can access
+// groups the user belongs to, and any data sources the groups can access.
 //
 // If you
 // provide both, an exception is thrown.
@@ -2418,6 +2440,31 @@ type UserContext struct {
 	noSmithyDocumentSerde
 }
 
+// Provides the configuration information to fetch access levels of groups and
+// users from an AWS Single Sign-On identity source. This is useful for setting up
+// user context filtering, where Amazon Kendra filters search results for different
+// users based on their group's access to documents. You can also map your users to
+// their groups for user context filtering using the PutPrincipalMapping operation
+// (https://docs.aws.amazon.com/latest/dg/API_PutPrincipalMapping.html). To set up
+// an AWS SSO identity source in the console to use with Amazon Kendra, see Getting
+// started with an AWS SSO identity source
+// (https://docs.aws.amazon.com/kendra/latest/dg/getting-started-aws-sso.html). You
+// must also grant the required permissions to use AWS SSO with Amazon Kendra. For
+// more information, see IAM roles for AWS Single Sign-On
+// (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html#iam-roles-aws-sso).
+type UserGroupResolutionConfiguration struct {
+
+	// The identity store provider (mode) you want to use to fetch access levels of
+	// groups and users. AWS Single Sign-On is currently the only available mode. Your
+	// users and groups must exist in an AWS SSO identity source in order to use this
+	// mode.
+	//
+	// This member is required.
+	UserGroupResolutionMode UserGroupResolutionMode
+
+	noSmithyDocumentSerde
+}
+
 // Provides configuration information for a token configuration.
 type UserTokenConfiguration struct {
 
@@ -2435,11 +2482,14 @@ type WebCrawlerConfiguration struct {
 
 	// Specifies the seed or starting point URLs of the websites or the sitemap URLs of
 	// the websites you want to crawl. You can include website subdomains. You can list
-	// up to 100 seed URLs and up to three sitemap URLs. When selecting websites to
-	// index, you must adhere to the Amazon Acceptable Use Policy
-	// (https://aws.amazon.com/aup/) and all other Amazon terms. Remember that you must
-	// only use the Amazon Kendra web crawler to index your own webpages, or webpages
-	// that you have authorization to index.
+	// up to 100 seed URLs and up to three sitemap URLs. You can only crawl websites
+	// that use the secure communication protocol, Hypertext Transfer Protocol Secure
+	// (HTTPS). If you receive an error when crawling a website, it could be that the
+	// website is blocked from crawling. When selecting websites to index, you must
+	// adhere to the Amazon Acceptable Use Policy (https://aws.amazon.com/aup/) and all
+	// other Amazon terms. Remember that you must only use the Amazon Kendra web
+	// crawler to index your own webpages, or webpages that you have authorization to
+	// index.
 	//
 	// This member is required.
 	Urls *Urls

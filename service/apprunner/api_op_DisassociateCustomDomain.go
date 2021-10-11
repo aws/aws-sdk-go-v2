@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociate a custom domain name from an AWS App Runner service. Certificates
+// Disassociate a custom domain name from an App Runner service. Certificates
 // tracking domain validity are associated with a custom domain and are stored in
 // AWS Certificate Manager (ACM)
 // (https://docs.aws.amazon.com/acm/latest/userguide). These certificates aren't

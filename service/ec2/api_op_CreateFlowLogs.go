@@ -104,8 +104,8 @@ type CreateFlowLogsInput struct {
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records).
 	// If you omit this parameter, the flow log is created using the default format. If
 	// you specify this parameter, you must specify at least one field. Specify the
-	// fields using the ${field-id} format, separated by spaces. For the CLI, use
-	// single quotation marks (' ') to surround the parameter value.
+	// fields using the ${field-id} format, separated by spaces. For the CLI, surround
+	// this parameter value with single quotes on Linux or double quotes on Windows.
 	LogFormat *string
 
 	// The name of a new or existing CloudWatch Logs log group where Amazon EC2

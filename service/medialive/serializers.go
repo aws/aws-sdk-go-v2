@@ -466,6 +466,74 @@ func awsRestjson1_serializeOpHttpBindingsCancelInputDeviceTransferInput(v *Cance
 	return nil
 }
 
+type awsRestjson1_serializeOpClaimDevice struct {
+}
+
+func (*awsRestjson1_serializeOpClaimDevice) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpClaimDevice) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ClaimDeviceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/prod/claimDevice")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentClaimDeviceInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsClaimDeviceInput(v *ClaimDeviceInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentClaimDeviceInput(v *ClaimDeviceInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Id != nil {
+		ok := object.Key("id")
+		ok.String(*v.Id)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateChannel struct {
 }
 
@@ -4885,6 +4953,13 @@ func awsRestjson1_serializeDocumentAudioDescription(v *types.AudioDescription, v
 		ok.String(string(v.AudioTypeControl))
 	}
 
+	if v.AudioWatermarkingSettings != nil {
+		ok := object.Key("audioWatermarkingSettings")
+		if err := awsRestjson1_serializeDocumentAudioWatermarkSettings(v.AudioWatermarkingSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.CodecSettings != nil {
 		ok := object.Key("codecSettings")
 		if err := awsRestjson1_serializeDocumentAudioCodecSettings(v.CodecSettings, ok); err != nil {
@@ -5122,6 +5197,20 @@ func awsRestjson1_serializeDocumentAudioTrackSelection(v *types.AudioTrackSelect
 	if v.Tracks != nil {
 		ok := object.Key("tracks")
 		if err := awsRestjson1_serializeDocument__listOfAudioTrack(v.Tracks, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAudioWatermarkSettings(v *types.AudioWatermarkSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.NielsenWatermarksSettings != nil {
+		ok := object.Key("nielsenWatermarksSettings")
+		if err := awsRestjson1_serializeDocumentNielsenWatermarksSettings(v.NielsenWatermarksSettings, ok); err != nil {
 			return err
 		}
 	}
@@ -8860,6 +8949,28 @@ func awsRestjson1_serializeDocumentNetworkInputSettings(v *types.NetworkInputSet
 	return nil
 }
 
+func awsRestjson1_serializeDocumentNielsenCBET(v *types.NielsenCBET, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CbetCheckDigitString != nil {
+		ok := object.Key("cbetCheckDigitString")
+		ok.String(*v.CbetCheckDigitString)
+	}
+
+	if len(v.CbetStepaside) > 0 {
+		ok := object.Key("cbetStepaside")
+		ok.String(string(v.CbetStepaside))
+	}
+
+	if v.Csid != nil {
+		ok := object.Key("csid")
+		ok.String(*v.Csid)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentNielsenConfiguration(v *types.NielsenConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8872,6 +8983,62 @@ func awsRestjson1_serializeDocumentNielsenConfiguration(v *types.NielsenConfigur
 	if len(v.NielsenPcmToId3Tagging) > 0 {
 		ok := object.Key("nielsenPcmToId3Tagging")
 		ok.String(string(v.NielsenPcmToId3Tagging))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentNielsenNaesIiNw(v *types.NielsenNaesIiNw, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CheckDigitString != nil {
+		ok := object.Key("checkDigitString")
+		ok.String(*v.CheckDigitString)
+	}
+
+	{
+		ok := object.Key("sid")
+		switch {
+		case math.IsNaN(v.Sid):
+			ok.String("NaN")
+
+		case math.IsInf(v.Sid, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.Sid, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.Sid)
+
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentNielsenWatermarksSettings(v *types.NielsenWatermarksSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.NielsenCbetSettings != nil {
+		ok := object.Key("nielsenCbetSettings")
+		if err := awsRestjson1_serializeDocumentNielsenCBET(v.NielsenCbetSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.NielsenDistributionType) > 0 {
+		ok := object.Key("nielsenDistributionType")
+		ok.String(string(v.NielsenDistributionType))
+	}
+
+	if v.NielsenNaesIiNwSettings != nil {
+		ok := object.Key("nielsenNaesIiNwSettings")
+		if err := awsRestjson1_serializeDocumentNielsenNaesIiNw(v.NielsenNaesIiNwSettings, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

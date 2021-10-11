@@ -90,6 +90,7 @@ const (
 	MetricTypeElastiCachePrimaryEngineCPUUtilization                  MetricType = "ElastiCachePrimaryEngineCPUUtilization"
 	MetricTypeElastiCacheReplicaEngineCPUUtilization                  MetricType = "ElastiCacheReplicaEngineCPUUtilization"
 	MetricTypeElastiCacheDatabaseMemoryUsageCountedForEvictPercentage MetricType = "ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage"
+	MetricTypeNeptuneReaderAverageCPUUtilization                      MetricType = "NeptuneReaderAverageCPUUtilization"
 )
 
 // Values returns all known values for MetricType. Note that this can be expanded
@@ -117,6 +118,7 @@ func (MetricType) Values() []MetricType {
 		"ElastiCachePrimaryEngineCPUUtilization",
 		"ElastiCacheReplicaEngineCPUUtilization",
 		"ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage",
+		"NeptuneReaderAverageCPUUtilization",
 	}
 }
 
@@ -161,6 +163,7 @@ const (
 	ScalableDimensionKafkaBrokerStorageVolumeSize                     ScalableDimension = "kafka:broker-storage:VolumeSize"
 	ScalableDimensionElastiCacheReplicationGroupNodeGroups            ScalableDimension = "elasticache:replication-group:NodeGroups"
 	ScalableDimensionElastiCacheReplicationGroupReplicas              ScalableDimension = "elasticache:replication-group:Replicas"
+	ScalableDimensionNeptuneClusterReadReplicaCount                   ScalableDimension = "neptune:cluster:ReadReplicaCount"
 )
 
 // Values returns all known values for ScalableDimension. Note that this can be
@@ -187,6 +190,7 @@ func (ScalableDimension) Values() []ScalableDimension {
 		"kafka:broker-storage:VolumeSize",
 		"elasticache:replication-group:NodeGroups",
 		"elasticache:replication-group:Replicas",
+		"neptune:cluster:ReadReplicaCount",
 	}
 }
 
@@ -233,6 +237,7 @@ const (
 	ServiceNamespaceCassandra      ServiceNamespace = "cassandra"
 	ServiceNamespaceKafka          ServiceNamespace = "kafka"
 	ServiceNamespaceElasticache    ServiceNamespace = "elasticache"
+	ServiceNamespaceNeptune        ServiceNamespace = "neptune"
 )
 
 // Values returns all known values for ServiceNamespace. Note that this can be
@@ -253,5 +258,6 @@ func (ServiceNamespace) Values() []ServiceNamespace {
 		"cassandra",
 		"kafka",
 		"elasticache",
+		"neptune",
 	}
 }

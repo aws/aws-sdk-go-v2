@@ -56,9 +56,9 @@ type DescribeScalableTargetsInput struct {
 	// resource type is service and the unique identifier is the cluster name and
 	// service name. Example: service/default/sample-webapp.
 	//
-	// * Spot Fleet request -
-	// The resource type is spot-fleet-request and the unique identifier is the Spot
-	// Fleet request ID. Example:
+	// * Spot Fleet - The
+	// resource type is spot-fleet-request and the unique identifier is the Spot Fleet
+	// request ID. Example:
 	// spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE.
 	//
 	// * EMR cluster -
@@ -81,8 +81,8 @@ type DescribeScalableTargetsInput struct {
 	// The resource type is cluster and the unique identifier is the cluster name.
 	// Example: cluster:my-db-cluster.
 	//
-	// * Amazon SageMaker endpoint variant - The
-	// resource type is variant and the unique identifier is the resource ID. Example:
+	// * SageMaker endpoint variant - The resource
+	// type is variant and the unique identifier is the resource ID. Example:
 	// endpoint/my-end-point/variant/KMeansClustering.
 	//
 	// * Custom resources are not
@@ -120,6 +120,9 @@ type DescribeScalableTargetsInput struct {
 	// Amazon ElastiCache replication group - The resource type is replication-group
 	// and the unique identifier is the replication group name. Example:
 	// replication-group/mycluster.
+	//
+	// * Neptune cluster - The resource type is cluster
+	// and the unique identifier is the cluster name. Example: cluster:mycluster.
 	ResourceIds []string
 
 	// The scalable dimension associated with the scalable target. This string consists
@@ -134,32 +137,31 @@ type DescribeScalableTargetsInput struct {
 	// Instance Group.
 	//
 	// * ec2:spot-fleet-request:TargetCapacity - The target capacity
-	// of a Spot Fleet request.
+	// of a Spot Fleet.
 	//
-	// * appstream:fleet:DesiredCapacity - The desired
-	// capacity of an AppStream 2.0 fleet.
+	// * appstream:fleet:DesiredCapacity - The desired capacity of an
+	// AppStream 2.0 fleet.
 	//
-	// * dynamodb:table:ReadCapacityUnits - The
-	// provisioned read capacity for a DynamoDB table.
+	// * dynamodb:table:ReadCapacityUnits - The provisioned read
+	// capacity for a DynamoDB table.
 	//
-	// *
-	// dynamodb:table:WriteCapacityUnits - The provisioned write capacity for a
-	// DynamoDB table.
-	//
-	// * dynamodb:index:ReadCapacityUnits - The provisioned read
-	// capacity for a DynamoDB global secondary index.
+	// * dynamodb:table:WriteCapacityUnits - The
+	// provisioned write capacity for a DynamoDB table.
 	//
 	// *
-	// dynamodb:index:WriteCapacityUnits - The provisioned write capacity for a
-	// DynamoDB global secondary index.
+	// dynamodb:index:ReadCapacityUnits - The provisioned read capacity for a DynamoDB
+	// global secondary index.
 	//
-	// * rds:cluster:ReadReplicaCount - The count of
-	// Aurora Replicas in an Aurora DB cluster. Available for Aurora MySQL-compatible
-	// edition and Aurora PostgreSQL-compatible edition.
+	// * dynamodb:index:WriteCapacityUnits - The provisioned
+	// write capacity for a DynamoDB global secondary index.
 	//
 	// *
-	// sagemaker:variant:DesiredInstanceCount - The number of EC2 instances for an
-	// Amazon SageMaker model endpoint variant.
+	// rds:cluster:ReadReplicaCount - The count of Aurora Replicas in an Aurora DB
+	// cluster. Available for Aurora MySQL-compatible edition and Aurora
+	// PostgreSQL-compatible edition.
+	//
+	// * sagemaker:variant:DesiredInstanceCount - The
+	// number of EC2 instances for an SageMaker model endpoint variant.
 	//
 	// *
 	// custom-resource:ResourceType:Property - The scalable dimension for a custom
@@ -193,6 +195,9 @@ type DescribeScalableTargetsInput struct {
 	// *
 	// elasticache:replication-group:Replicas - The number of replicas per node group
 	// for an Amazon ElastiCache replication group.
+	//
+	// * neptune:cluster:ReadReplicaCount
+	// - The count of read replicas in an Amazon Neptune DB cluster.
 	ScalableDimension types.ScalableDimension
 
 	noSmithyDocumentSerde

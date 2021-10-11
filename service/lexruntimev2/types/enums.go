@@ -31,6 +31,7 @@ const (
 	DialogActionTypeDelegate      DialogActionType = "Delegate"
 	DialogActionTypeElicitIntent  DialogActionType = "ElicitIntent"
 	DialogActionTypeElicitSlot    DialogActionType = "ElicitSlot"
+	DialogActionTypeNone          DialogActionType = "None"
 )
 
 // Values returns all known values for DialogActionType. Note that this can be
@@ -43,6 +44,7 @@ func (DialogActionType) Values() []DialogActionType {
 		"Delegate",
 		"ElicitIntent",
 		"ElicitSlot",
+		"None",
 	}
 }
 
@@ -50,11 +52,12 @@ type IntentState string
 
 // Enum values for IntentState
 const (
-	IntentStateFailed              IntentState = "Failed"
-	IntentStateFulfilled           IntentState = "Fulfilled"
-	IntentStateInProgress          IntentState = "InProgress"
-	IntentStateReadyForFulfillment IntentState = "ReadyForFulfillment"
-	IntentStateWaiting             IntentState = "Waiting"
+	IntentStateFailed                IntentState = "Failed"
+	IntentStateFulfilled             IntentState = "Fulfilled"
+	IntentStateInProgress            IntentState = "InProgress"
+	IntentStateReadyForFulfillment   IntentState = "ReadyForFulfillment"
+	IntentStateWaiting               IntentState = "Waiting"
+	IntentStateFulfillmentInProgress IntentState = "FulfillmentInProgress"
 )
 
 // Values returns all known values for IntentState. Note that this can be expanded
@@ -67,6 +70,7 @@ func (IntentState) Values() []IntentState {
 		"InProgress",
 		"ReadyForFulfillment",
 		"Waiting",
+		"FulfillmentInProgress",
 	}
 }
 

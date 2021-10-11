@@ -211,9 +211,9 @@ type CalculateRouteSummary struct {
 	DataSource *string
 
 	// The total distance covered by the route. The sum of the distance travelled
-	// between every stop on the route. The route distance can't be greater than 250
-	// km. If the route exceeds 250 km, the response returns a 400
-	// RoutesValidationException error.
+	// between every stop on the route. If Esri is the data source for the route
+	// calculator, the route distance can’t be greater than 400 km. If the route
+	// exceeds 400 km, the response is a 400 RoutesValidationException error.
 	//
 	// This member is required.
 	Distance *float64
@@ -246,7 +246,7 @@ type CalculateRouteSummary struct {
 	// third bbox position is the X coordinate, or longitude of the upper northeast
 	// corner.
 	//
-	// * The fourth bbox position is the Y coordinate, or longitude of the
+	// * The fourth bbox position is the Y coordinate, or latitude of the
 	// upper northeast corner.
 	//
 	// This member is required.
@@ -603,8 +603,8 @@ type ListMapsResponseEntry struct {
 	MapName *string
 
 	// The pricing plan for the specified map resource. For additional details and
-	// restrictions on each pricing plan option, see the Amazon Location Service
-	// pricing page (https://aws.amazon.com/location/pricing/).
+	// restrictions on each pricing plan option, see Amazon Location Service pricing
+	// (https://aws.amazon.com/location/pricing/).
 	//
 	// This member is required.
 	PricingPlan PricingPlan
@@ -636,8 +636,8 @@ type ListPlaceIndexesResponseEntry struct {
 	//
 	// * Here
 	//
-	// For additional details on data providers, see the
-	// Amazon Location Service data providers page
+	// For additional details on data providers, see Amazon
+	// Location Service data providers
 	// (https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html).
 	//
 	// This member is required.
@@ -654,8 +654,8 @@ type ListPlaceIndexesResponseEntry struct {
 	IndexName *string
 
 	// The pricing plan for the specified place index resource. For additional details
-	// and restrictions on each pricing plan option, see the Amazon Location Service
-	// pricing page (https://aws.amazon.com/location/pricing/).
+	// and restrictions on each pricing plan option, see Amazon Location Service
+	// pricing (https://aws.amazon.com/location/pricing/).
 	//
 	// This member is required.
 	PricingPlan PricingPlan
@@ -741,8 +741,8 @@ type ListTrackersResponseEntry struct {
 	Description *string
 
 	// The pricing plan for the specified tracker resource. For additional details and
-	// restrictions on each pricing plan option, see the Amazon Location Service
-	// pricing page (https://aws.amazon.com/location/pricing/).
+	// restrictions on each pricing plan option, see Amazon Location Service pricing
+	// (https://aws.amazon.com/location/pricing/).
 	//
 	// This member is required.
 	PricingPlan PricingPlan
@@ -768,49 +768,47 @@ type ListTrackersResponseEntry struct {
 // Specifies the map tile style selected from an available provider.
 type MapConfiguration struct {
 
-	// Specifies the map style selected from an available data provider. For additional
-	// information on each map style and to preview each map style, see Esri map styles
-	// and HERE map styles. Valid Esri
-	// (https://docs.aws.amazon.com/location/latest/developerguide/esri.html)
-	// styles:
-	//
-	// * VectorEsriDarkGrayCanvas – The Esri Dark Gray Canvas map style. A
-	// vector basemap with a dark gray, neutral background with minimal colors, labels,
-	// and features that's designed to draw attention to your thematic content.
+	// Specifies the map style selected from an available data provider. Valid Esri map
+	// styles
+	// (https://docs.aws.amazon.com/location/latest/developerguide/esri.html):
 	//
 	// *
-	// RasterEsriImagery – The Esri Imagery map style. A raster basemap that provides
-	// one meter or better satellite and aerial imagery in many parts of the world and
-	// lower resolution satellite imagery worldwide.
-	//
-	// * VectorEsriLightGrayCanvas – The
-	// Esri Light Gray Canvas map style, which provides a detailed vector basemap with
-	// a light gray, neutral background style with minimal colors, labels, and features
+	// VectorEsriDarkGrayCanvas – The Esri Dark Gray Canvas map style. A vector basemap
+	// with a dark gray, neutral background with minimal colors, labels, and features
 	// that's designed to draw attention to your thematic content.
 	//
+	// * RasterEsriImagery
+	// – The Esri Imagery map style. A raster basemap that provides one meter or better
+	// satellite and aerial imagery in many parts of the world and lower resolution
+	// satellite imagery worldwide.
+	//
+	// * VectorEsriLightGrayCanvas – The Esri Light Gray
+	// Canvas map style, which provides a detailed vector basemap with a light gray,
+	// neutral background style with minimal colors, labels, and features that's
+	// designed to draw attention to your thematic content.
+	//
+	// * VectorEsriTopographic –
+	// The Esri Light map style, which provides a detailed vector basemap with a
+	// classic Esri map style.
+	//
+	// * VectorEsriStreets – The Esri World Streets map style,
+	// which provides a detailed vector basemap for the world symbolized with a classic
+	// Esri street map style. The vector tile layer is similar in content and style to
+	// the World Street Map raster map.
+	//
+	// * VectorEsriNavigation – The Esri World
+	// Navigation map style, which provides a detailed basemap for the world symbolized
+	// with a custom navigation map style that's designed for use during the day in
+	// mobile devices.
+	//
+	// Valid HERE Technologies map styles
+	// (https://docs.aws.amazon.com/location/latest/developerguide/HERE.html):
+	//
 	// *
-	// VectorEsriTopographic – The Esri Light map style, which provides a detailed
-	// vector basemap with a classic Esri map style.
-	//
-	// * VectorEsriStreets – The Esri
-	// World Streets map style, which provides a detailed vector basemap for the world
-	// symbolized with a classic Esri street map style. The vector tile layer is
-	// similar in content and style to the World Street Map raster map.
-	//
-	// *
-	// VectorEsriNavigation – The Esri World Navigation map style, which provides a
-	// detailed basemap for the world symbolized with a custom navigation map style
-	// that's designed for use during the day in mobile devices.
-	//
-	// Valid HERE
-	// Technologies
-	// (https://docs.aws.amazon.com/location/latest/developerguide/HERE.html)
-	// styles:
-	//
-	// * VectorHereBerlin – The HERE Berlin map style is a high contrast
-	// detailed base map of the world that blends 3D and 2D rendering. When using HERE
-	// as your data provider, and selecting the Style VectorHereBerlin, you may not use
-	// HERE Technologies maps for Asset Management. See the AWS Service Terms
+	// VectorHereBerlin – The HERE Berlin map style is a high contrast detailed base
+	// map of the world that blends 3D and 2D rendering. When using HERE as your data
+	// provider, and selecting the Style VectorHereBerlin, you may not use HERE
+	// Technologies maps for Asset Management. See the AWS Service Terms
 	// (https://aws.amazon.com/service-terms/) for Amazon Location Service.
 	//
 	// This member is required.
@@ -915,8 +913,8 @@ type SearchPlaceIndexForPositionSummary struct {
 	//
 	// * HERE
 	//
-	// For additional details on data providers, see the
-	// Amazon Location Service data providers page
+	// For additional details on data providers, see Amazon
+	// Location Service data providers
 	// (https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html).
 	//
 	// This member is required.
@@ -944,8 +942,8 @@ type SearchPlaceIndexForTextSummary struct {
 	//
 	// * HERE
 	//
-	// For additional details on data providers, see the
-	// Amazon Location Service data providers page
+	// For additional details on data providers, see Amazon
+	// Location Service data providers
 	// (https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html).
 	//
 	// This member is required.

@@ -79,6 +79,14 @@ type CreateFileSystemFromBackupInput struct {
 	// Command Line Interface (CLI) or an Amazon Web Services SDK.
 	ClientRequestToken *string
 
+	// Sets the version for the Amazon FSx for Lustre file system you're creating from
+	// a backup. Valid values are 2.10 and 2.12. You don't need to specify
+	// FileSystemTypeVersion because it will be applied using the backup's
+	// FileSystemTypeVersion setting. If you choose to specify FileSystemTypeVersion
+	// when creating from backup, the value must match the backup's
+	// FileSystemTypeVersion setting.
+	FileSystemTypeVersion *string
+
 	// The ID of the Key Management Service (KMS) key used to encrypt the file system's
 	// data for Amazon FSx for Windows File Server file systems, Amazon FSx for NetApp
 	// ONTAP file systems, and Amazon FSx for Lustre PERSISTENT_1 file systems at rest.

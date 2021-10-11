@@ -90,6 +90,24 @@ func (DetectorVersionStatus) Values() []DetectorVersionStatus {
 	}
 }
 
+type EventIngestion string
+
+// Enum values for EventIngestion
+const (
+	EventIngestionEnabled  EventIngestion = "ENABLED"
+	EventIngestionDisabled EventIngestion = "DISABLED"
+)
+
+// Values returns all known values for EventIngestion. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EventIngestion) Values() []EventIngestion {
+	return []EventIngestion{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type Language string
 
 // Enum values for Language
@@ -180,7 +198,8 @@ type ModelTypeEnum string
 
 // Enum values for ModelTypeEnum
 const (
-	ModelTypeEnumOnlineFraudInsights ModelTypeEnum = "ONLINE_FRAUD_INSIGHTS"
+	ModelTypeEnumOnlineFraudInsights      ModelTypeEnum = "ONLINE_FRAUD_INSIGHTS"
+	ModelTypeEnumTransactionFraudInsights ModelTypeEnum = "TRANSACTION_FRAUD_INSIGHTS"
 )
 
 // Values returns all known values for ModelTypeEnum. Note that this can be
@@ -189,6 +208,7 @@ const (
 func (ModelTypeEnum) Values() []ModelTypeEnum {
 	return []ModelTypeEnum{
 		"ONLINE_FRAUD_INSIGHTS",
+		"TRANSACTION_FRAUD_INSIGHTS",
 	}
 }
 
@@ -235,6 +255,7 @@ type TrainingDataSourceEnum string
 // Enum values for TrainingDataSourceEnum
 const (
 	TrainingDataSourceEnumExternalEvents TrainingDataSourceEnum = "EXTERNAL_EVENTS"
+	TrainingDataSourceEnumIngestedEvents TrainingDataSourceEnum = "INGESTED_EVENTS"
 )
 
 // Values returns all known values for TrainingDataSourceEnum. Note that this can
@@ -243,5 +264,26 @@ const (
 func (TrainingDataSourceEnum) Values() []TrainingDataSourceEnum {
 	return []TrainingDataSourceEnum{
 		"EXTERNAL_EVENTS",
+		"INGESTED_EVENTS",
+	}
+}
+
+type UnlabeledEventsTreatment string
+
+// Enum values for UnlabeledEventsTreatment
+const (
+	UnlabeledEventsTreatmentIgnore UnlabeledEventsTreatment = "IGNORE"
+	UnlabeledEventsTreatmentFraud  UnlabeledEventsTreatment = "FRAUD"
+	UnlabeledEventsTreatmentLegit  UnlabeledEventsTreatment = "LEGIT"
+)
+
+// Values returns all known values for UnlabeledEventsTreatment. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UnlabeledEventsTreatment) Values() []UnlabeledEventsTreatment {
+	return []UnlabeledEventsTreatment{
+		"IGNORE",
+		"FRAUD",
+		"LEGIT",
 	}
 }

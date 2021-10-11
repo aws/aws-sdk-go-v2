@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Return a list of operations that occurred on an AWS App Runner service. The
+// Return a list of operations that occurred on an App Runner service. The
 // resulting list of OperationSummary objects is sorted in reverse chronological
 // order. The first object on the list represents the last started operation.
 func (c *Client) ListOperations(ctx context.Context, params *ListOperationsInput, optFns ...func(*Options)) (*ListOperationsOutput, error) {

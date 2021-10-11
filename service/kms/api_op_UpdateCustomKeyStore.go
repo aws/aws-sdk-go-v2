@@ -16,8 +16,9 @@ import (
 // key store that is disconnected. To disconnect the custom key store, use
 // DisconnectCustomKeyStore. To reconnect the custom key store after the update
 // completes, use ConnectCustomKeyStore. To find the connection state of a custom
-// key store, use the DescribeCustomKeyStores operation. Use the parameters of
-// UpdateCustomKeyStore to edit your keystore settings.
+// key store, use the DescribeCustomKeyStores operation. The CustomKeyStoreId
+// parameter is required in all commands. Use the other parameters of
+// UpdateCustomKeyStore to edit your key store settings.
 //
 // * Use the
 // NewCustomKeyStoreName parameter to change the friendly name of the custom key

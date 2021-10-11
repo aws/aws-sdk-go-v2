@@ -40,6 +40,15 @@ type UpdateCanaryInput struct {
 	// This member is required.
 	Name *string
 
+	// A structure that contains the configuration for canary artifacts, including the
+	// encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.
+	ArtifactConfig *types.ArtifactConfigInput
+
+	// The location in Amazon S3 where Synthetics stores artifacts from the test runs
+	// of this canary. Artifacts include the log file, screenshots, and HAR files. The
+	// name of the S3 bucket can't include a period (.).
+	ArtifactS3Location *string
+
 	// A structure that includes the entry point from which the canary should start
 	// running your script. If the script is stored in an S3 bucket, the bucket name,
 	// key, and version are also included.

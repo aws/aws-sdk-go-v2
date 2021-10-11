@@ -7285,6 +7285,15 @@ func awsAwsjson11_deserializeDocumentDataSourceSummary(v **types.DataSourceSumma
 				sv.Id = ptr.String(jtv)
 			}
 
+		case "LanguageCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LanguageCode to be of type string, got %T instead", value)
+				}
+				sv.LanguageCode = ptr.String(jtv)
+			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8471,6 +8480,15 @@ func awsAwsjson11_deserializeDocumentFaqSummary(v **types.FaqSummary, value inte
 					return fmt.Errorf("expected FaqId to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
+			}
+
+		case "LanguageCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LanguageCode to be of type string, got %T instead", value)
+				}
+				sv.LanguageCode = ptr.String(jtv)
 			}
 
 		case "Name":
@@ -12241,6 +12259,46 @@ func awsAwsjson11_deserializeDocumentUrls(v **types.Urls, value interface{}) err
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentUserGroupResolutionConfiguration(v **types.UserGroupResolutionConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UserGroupResolutionConfiguration
+	if *v == nil {
+		sv = &types.UserGroupResolutionConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "UserGroupResolutionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UserGroupResolutionMode to be of type string, got %T instead", value)
+				}
+				sv.UserGroupResolutionMode = types.UserGroupResolutionMode(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentUserTokenConfiguration(v **types.UserTokenConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -12990,6 +13048,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeDataSourceOutput(v **DescribeData
 				sv.IndexId = ptr.String(jtv)
 			}
 
+		case "LanguageCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LanguageCode to be of type string, got %T instead", value)
+				}
+				sv.LanguageCode = ptr.String(jtv)
+			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13141,6 +13208,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeFaqOutput(v **DescribeFaqOutput, 
 					return fmt.Errorf("expected IndexId to be of type string, got %T instead", value)
 				}
 				sv.IndexId = ptr.String(jtv)
+			}
+
+		case "LanguageCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LanguageCode to be of type string, got %T instead", value)
+				}
+				sv.LanguageCode = ptr.String(jtv)
 			}
 
 		case "Name":
@@ -13344,6 +13420,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeIndexOutput(v **DescribeIndexOutp
 					return fmt.Errorf("expected UserContextPolicy to be of type string, got %T instead", value)
 				}
 				sv.UserContextPolicy = types.UserContextPolicy(jtv)
+			}
+
+		case "UserGroupResolutionConfiguration":
+			if err := awsAwsjson11_deserializeDocumentUserGroupResolutionConfiguration(&sv.UserGroupResolutionConfiguration, value); err != nil {
+				return err
 			}
 
 		case "UserTokenConfigurations":

@@ -52,8 +52,13 @@ type GetModelVersionOutput struct {
 	// The model version ARN.
 	Arn *string
 
-	// The event details.
+	// The details of the external events data used for training the model version.
+	// This will be populated if the trainingDataSource is EXTERNAL_EVENTS
 	ExternalEventsDetail *types.ExternalEventsDetail
+
+	// The details of the ingested events data used for training the model version.
+	// This will be populated if the trainingDataSource is INGESTED_EVENTS.
+	IngestedEventsDetail *types.IngestedEventsDetail
 
 	// The model ID.
 	ModelId *string

@@ -31,13 +31,9 @@ func (c *Client) UpdateGlobalSettings(ctx context.Context, params *UpdateGlobalS
 type UpdateGlobalSettingsInput struct {
 
 	// The Amazon Chime Business Calling settings.
-	//
-	// This member is required.
 	BusinessCalling *types.BusinessCallingSettings
 
 	// The Amazon Chime Voice Connector settings.
-	//
-	// This member is required.
 	VoiceConnector *types.VoiceConnectorSettings
 
 	noSmithyDocumentSerde
@@ -93,9 +89,6 @@ func (c *Client) addOperationUpdateGlobalSettingsMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addOpUpdateGlobalSettingsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateGlobalSettings(options.Region), middleware.Before); err != nil {

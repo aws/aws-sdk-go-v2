@@ -1440,6 +1440,11 @@ func validateAudioDescription(v *types.AudioDescription) error {
 	if v.AudioSelectorName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AudioSelectorName"))
 	}
+	if v.AudioWatermarkingSettings != nil {
+		if err := validateAudioWatermarkSettings(v.AudioWatermarkingSettings); err != nil {
+			invalidParams.AddNested("AudioWatermarkingSettings", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
@@ -1606,6 +1611,23 @@ func validateAudioTrackSelection(v *types.AudioTrackSelection) error {
 	} else if v.Tracks != nil {
 		if err := validate__listOfAudioTrack(v.Tracks); err != nil {
 			invalidParams.AddNested("Tracks", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAudioWatermarkSettings(v *types.AudioWatermarkSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AudioWatermarkSettings"}
+	if v.NielsenWatermarksSettings != nil {
+		if err := validateNielsenWatermarksSettings(v.NielsenWatermarksSettings); err != nil {
+			invalidParams.AddNested("NielsenWatermarksSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2442,6 +2464,64 @@ func validateMultiplexSettings(v *types.MultiplexSettings) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MultiplexSettings"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNielsenCBET(v *types.NielsenCBET) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NielsenCBET"}
+	if v.CbetCheckDigitString == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CbetCheckDigitString"))
+	}
+	if len(v.CbetStepaside) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("CbetStepaside"))
+	}
+	if v.Csid == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Csid"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNielsenNaesIiNw(v *types.NielsenNaesIiNw) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NielsenNaesIiNw"}
+	if v.CheckDigitString == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CheckDigitString"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNielsenWatermarksSettings(v *types.NielsenWatermarksSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NielsenWatermarksSettings"}
+	if v.NielsenCbetSettings != nil {
+		if err := validateNielsenCBET(v.NielsenCbetSettings); err != nil {
+			invalidParams.AddNested("NielsenCbetSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.NielsenNaesIiNwSettings != nil {
+		if err := validateNielsenNaesIiNw(v.NielsenNaesIiNwSettings); err != nil {
+			invalidParams.AddNested("NielsenNaesIiNwSettings", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

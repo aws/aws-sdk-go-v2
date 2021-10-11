@@ -2335,6 +2335,15 @@ func awsRestjson1_deserializeOpDocumentGetBackendOutput(v **GetBackendOutput, va
 
 	for key, value := range shape {
 		switch key {
+		case "amplifyFeatureFlags":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.AmplifyFeatureFlags = ptr.String(jtv)
+			}
+
 		case "amplifyMetaConfig":
 			if value != nil {
 				jtv, ok := value.(string)

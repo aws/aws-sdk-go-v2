@@ -66,6 +66,13 @@ type DescribeDataSourceOutput struct {
 	// The identifier of the index that contains the data source.
 	IndexId *string
 
+	// The code for a language. This shows a supported language for all documents in
+	// the data source. English is supported by default. For more information on
+	// supported languages, including their codes, see Adding documents in languages
+	// other than English
+	// (https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html).
+	LanguageCode *string
+
 	// The name that you gave the data source when it was created.
 	Name *string
 

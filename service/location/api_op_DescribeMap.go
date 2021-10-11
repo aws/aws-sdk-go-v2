@@ -75,8 +75,8 @@ type DescribeMapOutput struct {
 	MapName *string
 
 	// The pricing plan selected for the specified map resource. For additional details
-	// and restrictions on each pricing plan option, see the Amazon Location Service
-	// pricing page (https://aws.amazon.com/location/pricing/).
+	// and restrictions on each pricing plan option, see Amazon Location Service
+	// pricing (https://aws.amazon.com/location/pricing/).
 	//
 	// This member is required.
 	PricingPlan types.PricingPlan

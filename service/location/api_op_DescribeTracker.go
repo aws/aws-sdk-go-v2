@@ -52,8 +52,8 @@ type DescribeTrackerOutput struct {
 	Description *string
 
 	// The pricing plan selected for the specified tracker resource. For additional
-	// details and restrictions on each pricing plan option, see the Amazon Location
-	// Service pricing page (https://aws.amazon.com/location/pricing/).
+	// details and restrictions on each pricing plan option, see Amazon Location
+	// Service pricing (https://aws.amazon.com/location/pricing/).
 	//
 	// This member is required.
 	PricingPlan types.PricingPlan
@@ -83,6 +83,9 @@ type DescribeTrackerOutput struct {
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html)
 	// assigned to the Amazon Location resource.
 	KmsKeyId *string
+
+	// The position filtering method of the tracker resource.
+	PositionFiltering types.PositionFiltering
 
 	// The specified data provider for the tracker resource.
 	PricingPlanDataSource *string

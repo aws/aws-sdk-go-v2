@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update an AWS App Runner service. You can update the source configuration and
+// Update an App Runner service. You can update the source configuration and
 // instance configuration of the service. You can also update the ARN of the auto
 // scaling configuration resource that's associated with the service. However, you
 // can't change the name or the encryption configuration of the service. These can
@@ -46,8 +46,8 @@ type UpdateServiceInput struct {
 	// resource that you want to associate with your service.
 	AutoScalingConfigurationArn *string
 
-	// The settings for the health check that AWS App Runner performs to monitor the
-	// health of your service.
+	// The settings for the health check that App Runner performs to monitor the health
+	// of your service.
 	HealthCheckConfiguration *types.HealthCheckConfiguration
 
 	// The runtime configuration to apply to instances (scaling units) of the App

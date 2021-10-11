@@ -17,9 +17,7 @@
 // of tasks such as signing requests (see below), managing errors, and retrying
 // requests automatically. For more information about the Amazon Web Services SDKs,
 // including how to download and install them, see Tools for Amazon Web Services
-// (http://aws.amazon.com/tools/).
-//
-// We recommend that you use the Amazon Web
+// (http://aws.amazon.com/tools/). We recommend that you use the Amazon Web
 // Services SDKs to make programmatic API calls to KMS. Clients must support TLS
 // (Transport Layer Security) 1.0. We recommend TLS 1.2. Clients must also support
 // cipher suites with Perfect Forward Secrecy (PFS) such as Ephemeral

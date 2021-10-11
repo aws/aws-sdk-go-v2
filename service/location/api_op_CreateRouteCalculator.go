@@ -49,10 +49,11 @@ type CreateRouteCalculatorInput struct {
 
 	// Specifies the data provider of traffic and road network data. This field is
 	// case-sensitive. Enter the valid values as shown. For example, entering HERE
-	// returns an error. Valid values include:
+	// returns an error. Route calculators that use Esri as a data source only
+	// calculate routes that are shorter than 400 km. Valid values include:
 	//
-	// * Esri – For additional information
-	// about Esri
+	// * Esri –
+	// For additional information about Esri
 	// (https://docs.aws.amazon.com/location/latest/developerguide/esri.html)'s
 	// coverage in your region of interest, see Esri details on street networks and
 	// traffic coverage
@@ -60,8 +61,8 @@ type CreateRouteCalculatorInput struct {
 	//
 	// *
 	// Here – For additional information about HERE Technologies
-	// (https://docs.aws.amazon.com/location/latest/developerguide/HERE.html)'s
-	// coverage in your region of interest, see HERE car routing coverage
+	// (https://docs.aws.amazon.com/location/latest/developerguide/HERE.html)' coverage
+	// in your region of interest, see HERE car routing coverage
 	// (https://developer.here.com/documentation/routing-api/dev_guide/topics/coverage/car-routing.html)
 	// and HERE truck routing coverage
 	// (https://developer.here.com/documentation/routing-api/dev_guide/topics/coverage/truck-routing.html).

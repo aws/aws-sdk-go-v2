@@ -57,9 +57,9 @@ type DescribeScalingActivitiesInput struct {
 	// resource type is service and the unique identifier is the cluster name and
 	// service name. Example: service/default/sample-webapp.
 	//
-	// * Spot Fleet request -
-	// The resource type is spot-fleet-request and the unique identifier is the Spot
-	// Fleet request ID. Example:
+	// * Spot Fleet - The
+	// resource type is spot-fleet-request and the unique identifier is the Spot Fleet
+	// request ID. Example:
 	// spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE.
 	//
 	// * EMR cluster -
@@ -82,8 +82,8 @@ type DescribeScalingActivitiesInput struct {
 	// The resource type is cluster and the unique identifier is the cluster name.
 	// Example: cluster:my-db-cluster.
 	//
-	// * Amazon SageMaker endpoint variant - The
-	// resource type is variant and the unique identifier is the resource ID. Example:
+	// * SageMaker endpoint variant - The resource
+	// type is variant and the unique identifier is the resource ID. Example:
 	// endpoint/my-end-point/variant/KMeansClustering.
 	//
 	// * Custom resources are not
@@ -121,6 +121,9 @@ type DescribeScalingActivitiesInput struct {
 	// Amazon ElastiCache replication group - The resource type is replication-group
 	// and the unique identifier is the replication group name. Example:
 	// replication-group/mycluster.
+	//
+	// * Neptune cluster - The resource type is cluster
+	// and the unique identifier is the cluster name. Example: cluster:mycluster.
 	ResourceId *string
 
 	// The scalable dimension. This string consists of the service namespace, resource
@@ -134,17 +137,17 @@ type DescribeScalingActivitiesInput struct {
 	// count of an EMR Instance Group.
 	//
 	// * ec2:spot-fleet-request:TargetCapacity - The
-	// target capacity of a Spot Fleet request.
+	// target capacity of a Spot Fleet.
 	//
-	// * appstream:fleet:DesiredCapacity -
-	// The desired capacity of an AppStream 2.0 fleet.
+	// * appstream:fleet:DesiredCapacity - The
+	// desired capacity of an AppStream 2.0 fleet.
+	//
+	// * dynamodb:table:ReadCapacityUnits
+	// - The provisioned read capacity for a DynamoDB table.
 	//
 	// *
-	// dynamodb:table:ReadCapacityUnits - The provisioned read capacity for a DynamoDB
-	// table.
-	//
-	// * dynamodb:table:WriteCapacityUnits - The provisioned write capacity for
-	// a DynamoDB table.
+	// dynamodb:table:WriteCapacityUnits - The provisioned write capacity for a
+	// DynamoDB table.
 	//
 	// * dynamodb:index:ReadCapacityUnits - The provisioned read
 	// capacity for a DynamoDB global secondary index.
@@ -159,40 +162,43 @@ type DescribeScalingActivitiesInput struct {
 	//
 	// *
 	// sagemaker:variant:DesiredInstanceCount - The number of EC2 instances for an
-	// Amazon SageMaker model endpoint variant.
+	// SageMaker model endpoint variant.
+	//
+	// * custom-resource:ResourceType:Property - The
+	// scalable dimension for a custom resource provided by your own application or
+	// service.
+	//
+	// * comprehend:document-classifier-endpoint:DesiredInferenceUnits - The
+	// number of inference units for an Amazon Comprehend document classification
+	// endpoint.
+	//
+	// * comprehend:entity-recognizer-endpoint:DesiredInferenceUnits - The
+	// number of inference units for an Amazon Comprehend entity recognizer
+	// endpoint.
+	//
+	// * lambda:function:ProvisionedConcurrency - The provisioned
+	// concurrency for a Lambda function.
+	//
+	// * cassandra:table:ReadCapacityUnits - The
+	// provisioned read capacity for an Amazon Keyspaces table.
 	//
 	// *
-	// custom-resource:ResourceType:Property - The scalable dimension for a custom
-	// resource provided by your own application or service.
+	// cassandra:table:WriteCapacityUnits - The provisioned write capacity for an
+	// Amazon Keyspaces table.
+	//
+	// * kafka:broker-storage:VolumeSize - The provisioned
+	// volume size (in GiB) for brokers in an Amazon MSK cluster.
 	//
 	// *
-	// comprehend:document-classifier-endpoint:DesiredInferenceUnits - The number of
-	// inference units for an Amazon Comprehend document classification endpoint.
+	// elasticache:replication-group:NodeGroups - The number of node groups for an
+	// Amazon ElastiCache replication group.
 	//
-	// *
-	// comprehend:entity-recognizer-endpoint:DesiredInferenceUnits - The number of
-	// inference units for an Amazon Comprehend entity recognizer endpoint.
+	// * elasticache:replication-group:Replicas
+	// - The number of replicas per node group for an Amazon ElastiCache replication
+	// group.
 	//
-	// *
-	// lambda:function:ProvisionedConcurrency - The provisioned concurrency for a
-	// Lambda function.
-	//
-	// * cassandra:table:ReadCapacityUnits - The provisioned read
-	// capacity for an Amazon Keyspaces table.
-	//
-	// * cassandra:table:WriteCapacityUnits -
-	// The provisioned write capacity for an Amazon Keyspaces table.
-	//
-	// *
-	// kafka:broker-storage:VolumeSize - The provisioned volume size (in GiB) for
-	// brokers in an Amazon MSK cluster.
-	//
-	// * elasticache:replication-group:NodeGroups -
-	// The number of node groups for an Amazon ElastiCache replication group.
-	//
-	// *
-	// elasticache:replication-group:Replicas - The number of replicas per node group
-	// for an Amazon ElastiCache replication group.
+	// * neptune:cluster:ReadReplicaCount - The count of read replicas in an
+	// Amazon Neptune DB cluster.
 	ScalableDimension types.ScalableDimension
 
 	noSmithyDocumentSerde

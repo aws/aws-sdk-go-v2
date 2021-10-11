@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Return a description of custom domain names that are associated with an AWS App
+// Return a description of custom domain names that are associated with an App
 // Runner service.
 func (c *Client) DescribeCustomDomains(ctx context.Context, params *DescribeCustomDomainsInput, optFns ...func(*Options)) (*DescribeCustomDomainsOutput, error) {
 	if params == nil {

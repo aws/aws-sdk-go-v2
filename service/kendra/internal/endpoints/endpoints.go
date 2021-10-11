@@ -62,6 +62,33 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    partitionRegexp.Aws,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			"ap-southeast-1": endpoints.Endpoint{},
+			"ap-southeast-2": endpoints.Endpoint{},
+			"ca-central-1":   endpoints.Endpoint{},
+			"eu-west-1":      endpoints.Endpoint{},
+			"fips-us-east-1": endpoints.Endpoint{
+				Hostname: "kendra-fips.us-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
+			"fips-us-east-2": endpoints.Endpoint{
+				Hostname: "kendra-fips.us-east-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-2",
+				},
+			},
+			"fips-us-west-2": endpoints.Endpoint{
+				Hostname: "kendra-fips.us-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
+			},
+			"us-east-1": endpoints.Endpoint{},
+			"us-east-2": endpoints.Endpoint{},
+			"us-west-2": endpoints.Endpoint{},
+		},
 	},
 	{
 		ID: "aws-cn",

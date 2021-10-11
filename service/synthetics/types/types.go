@@ -7,6 +7,32 @@ import (
 	"time"
 )
 
+// A structure that contains the configuration for canary artifacts, including the
+// encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.
+type ArtifactConfigInput struct {
+
+	// A structure that contains the configuration of the encryption-at-rest settings
+	// for artifacts that the canary uploads to Amazon S3. Artifact encryption
+	// functionality is available only for canaries that use Synthetics runtime version
+	// syn-nodejs-puppeteer-3.3 or later. For more information, see Encrypting canary
+	// artifacts
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_artifact_encryption.html)
+	S3Encryption *S3EncryptionConfig
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains the configuration for canary artifacts, including the
+// encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.
+type ArtifactConfigOutput struct {
+
+	// A structure that contains the configuration of encryption settings for canary
+	// artifacts that are stored in Amazon S3.
+	S3Encryption *S3EncryptionConfig
+
+	noSmithyDocumentSerde
+}
+
 // A structure representing a screenshot that is used as a baseline during visual
 // monitoring comparisons made by the canary.
 type BaseScreenshot struct {
@@ -28,6 +54,10 @@ type BaseScreenshot struct {
 
 // This structure contains all information about one canary in your account.
 type Canary struct {
+
+	// A structure that contains the configuration for canary artifacts, including the
+	// encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.
+	ArtifactConfig *ArtifactConfigOutput
 
 	// The location in Amazon S3 where Synthetics stores artifacts from the runs of
 	// this canary. Artifacts include the log file, screenshots, and HAR files.
@@ -361,6 +391,25 @@ type RuntimeVersion struct {
 	// Canary Runtime Versions
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html).
 	VersionName *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains the configuration of encryption-at-rest settings for
+// canary artifacts that the canary uploads to Amazon S3. For more information, see
+// Encrypting canary artifacts
+// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_artifact_encryption.html)
+type S3EncryptionConfig struct {
+
+	// The encryption method to use for artifacts created by this canary. Specify
+	// SSE_S3 to use server-side encryption (SSE) with an Amazon S3-managed key.
+	// Specify SSE-KMS to use server-side encryption with a customer-managed KMS key.
+	// If you omit this parameter, an Amazon Web Services-managed KMS key is used.
+	EncryptionMode EncryptionMode
+
+	// The ARN of the customer-managed KMS key to use, if you specify SSE-KMS for
+	// EncryptionMode
+	KmsKeyArn *string
 
 	noSmithyDocumentSerde
 }

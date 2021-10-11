@@ -3226,6 +3226,7 @@ const (
 	InputTypeMediaconnect InputType = "MEDIACONNECT"
 	InputTypeInputDevice  InputType = "INPUT_DEVICE"
 	InputTypeAwsCdi       InputType = "AWS_CDI"
+	InputTypeTsFile       InputType = "TS_FILE"
 )
 
 // Values returns all known values for InputType. Note that this can be expanded in
@@ -3242,6 +3243,7 @@ func (InputType) Values() []InputType {
 		"MEDIACONNECT",
 		"INPUT_DEVICE",
 		"AWS_CDI",
+		"TS_FILE",
 	}
 }
 
@@ -3979,6 +3981,44 @@ func (NielsenPcmToId3TaggingState) Values() []NielsenPcmToId3TaggingState {
 	return []NielsenPcmToId3TaggingState{
 		"DISABLED",
 		"ENABLED",
+	}
+}
+
+type NielsenWatermarksCbetStepaside string
+
+// Enum values for NielsenWatermarksCbetStepaside
+const (
+	NielsenWatermarksCbetStepasideDisabled NielsenWatermarksCbetStepaside = "DISABLED"
+	NielsenWatermarksCbetStepasideEnabled  NielsenWatermarksCbetStepaside = "ENABLED"
+)
+
+// Values returns all known values for NielsenWatermarksCbetStepaside. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (NielsenWatermarksCbetStepaside) Values() []NielsenWatermarksCbetStepaside {
+	return []NielsenWatermarksCbetStepaside{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
+type NielsenWatermarksDistributionTypes string
+
+// Enum values for NielsenWatermarksDistributionTypes
+const (
+	NielsenWatermarksDistributionTypesFinalDistributor NielsenWatermarksDistributionTypes = "FINAL_DISTRIBUTOR"
+	NielsenWatermarksDistributionTypesProgramContent   NielsenWatermarksDistributionTypes = "PROGRAM_CONTENT"
+)
+
+// Values returns all known values for NielsenWatermarksDistributionTypes. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (NielsenWatermarksDistributionTypes) Values() []NielsenWatermarksDistributionTypes {
+	return []NielsenWatermarksDistributionTypes{
+		"FINAL_DISTRIBUTOR",
+		"PROGRAM_CONTENT",
 	}
 }
 

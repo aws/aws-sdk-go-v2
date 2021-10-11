@@ -60,6 +60,42 @@ func (AppInstanceDataType) Values() []AppInstanceDataType {
 	}
 }
 
+type ArtifactsState string
+
+// Enum values for ArtifactsState
+const (
+	ArtifactsStateEnabled  ArtifactsState = "Enabled"
+	ArtifactsStateDisabled ArtifactsState = "Disabled"
+)
+
+// Values returns all known values for ArtifactsState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ArtifactsState) Values() []ArtifactsState {
+	return []ArtifactsState{
+		"Enabled",
+		"Disabled",
+	}
+}
+
+type AudioMuxType string
+
+// Enum values for AudioMuxType
+const (
+	AudioMuxTypeAudioOnly                   AudioMuxType = "AudioOnly"
+	AudioMuxTypeAudioWithActiveSpeakerVideo AudioMuxType = "AudioWithActiveSpeakerVideo"
+)
+
+// Values returns all known values for AudioMuxType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AudioMuxType) Values() []AudioMuxType {
+	return []AudioMuxType{
+		"AudioOnly",
+		"AudioWithActiveSpeakerVideo",
+	}
+}
+
 type BotType string
 
 // Enum values for BotType
@@ -204,6 +240,22 @@ func (ChannelPrivacy) Values() []ChannelPrivacy {
 	return []ChannelPrivacy{
 		"PUBLIC",
 		"PRIVATE",
+	}
+}
+
+type ContentMuxType string
+
+// Enum values for ContentMuxType
+const (
+	ContentMuxTypeContentOnly ContentMuxType = "ContentOnly"
+)
+
+// Values returns all known values for ContentMuxType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ContentMuxType) Values() []ContentMuxType {
+	return []ContentMuxType{
+		"ContentOnly",
 	}
 }
 
@@ -892,6 +944,22 @@ func (UserType) Values() []UserType {
 	return []UserType{
 		"PrivateUser",
 		"SharedDevice",
+	}
+}
+
+type VideoMuxType string
+
+// Enum values for VideoMuxType
+const (
+	VideoMuxTypeVideoOnly VideoMuxType = "VideoOnly"
+)
+
+// Values returns all known values for VideoMuxType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (VideoMuxType) Values() []VideoMuxType {
+	return []VideoMuxType{
+		"VideoOnly",
 	}
 }
 

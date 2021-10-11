@@ -12,10 +12,16 @@ import (
 )
 
 // Uploads position update data for one or more devices to a tracker resource.
-// Amazon Location uses the data when reporting the last known device position and
-// position history. Only one position update is stored per sample time. Location
-// data is sampled at a fixed rate of one position per 30-second interval and
-// retained for 30 days before it's deleted.
+// Amazon Location uses the data when it reports the last known device position and
+// position history. Amazon Location retains location data for 30 days. Position
+// updates are handled based on the PositionFiltering property of the tracker. When
+// PositionFiltering is set to TimeBased, updates are evaluated against linked
+// geofence collections, and location data is stored at a maximum of one position
+// per 30 second interval. If your update frequency is more often than every 30
+// seconds, only one update per 30 seconds is stored for each unique device ID.
+// When PositionFiltering is set to DistanceBased filtering, location data is
+// stored and evaluated against linked geofence collections only if the device has
+// moved more than 30 m (98.4 ft).
 func (c *Client) BatchUpdateDevicePosition(ctx context.Context, params *BatchUpdateDevicePositionInput, optFns ...func(*Options)) (*BatchUpdateDevicePositionOutput, error) {
 	if params == nil {
 		params = &BatchUpdateDevicePositionInput{}

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create an AWS App Runner automatic scaling configuration resource. App Runner
+// Create an App Runner automatic scaling configuration resource. App Runner
 // requires this resource when you create App Runner services that require
 // non-default auto scaling settings. You can share an auto scaling configuration
 // across multiple services. Create multiple revisions of a configuration by using
@@ -19,9 +19,9 @@ import (
 // AutoScalingConfigurationRevision values. When you create a service, you can set
 // it to use the latest active revision of an auto scaling configuration or a
 // specific revision. Configure a higher MinSize to increase the spread of your App
-// Runner service over more Availability Zones in the AWS Region. The tradeoff is a
-// higher minimal cost. Configure a lower MaxSize to control your cost. The
-// tradeoff is lower responsiveness during peak demand.
+// Runner service over more Availability Zones in the Amazon Web Services Region.
+// The tradeoff is a higher minimal cost. Configure a lower MaxSize to control your
+// cost. The tradeoff is lower responsiveness during peak demand.
 func (c *Client) CreateAutoScalingConfiguration(ctx context.Context, params *CreateAutoScalingConfigurationInput, optFns ...func(*Options)) (*CreateAutoScalingConfigurationOutput, error) {
 	if params == nil {
 		params = &CreateAutoScalingConfigurationInput{}
@@ -40,9 +40,9 @@ func (c *Client) CreateAutoScalingConfiguration(ctx context.Context, params *Cre
 type CreateAutoScalingConfigurationInput struct {
 
 	// A name for the auto scaling configuration. When you use it for the first time in
-	// an AWS Region, App Runner creates revision number 1 of this name. When you use
-	// the same name in subsequent calls, App Runner creates incremental revisions of
-	// the configuration.
+	// an Amazon Web Services Region, App Runner creates revision number 1 of this
+	// name. When you use the same name in subsequent calls, App Runner creates
+	// incremental revisions of the configuration.
 	//
 	// This member is required.
 	AutoScalingConfigurationName *string

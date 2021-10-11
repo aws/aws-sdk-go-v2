@@ -4563,6 +4563,24 @@ func (InputFilterEnable) Values() []InputFilterEnable {
 	}
 }
 
+type InputPolicy string
+
+// Enum values for InputPolicy
+const (
+	InputPolicyAllowed    InputPolicy = "ALLOWED"
+	InputPolicyDisallowed InputPolicy = "DISALLOWED"
+)
+
+// Values returns all known values for InputPolicy. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (InputPolicy) Values() []InputPolicy {
+	return []InputPolicy{
+		"ALLOWED",
+		"DISALLOWED",
+	}
+}
+
 type InputPsiControl string
 
 // Enum values for InputPsiControl

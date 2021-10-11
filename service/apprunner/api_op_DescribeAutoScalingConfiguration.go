@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Return a full description of an AWS App Runner automatic scaling configuration
+// Return a full description of an App Runner automatic scaling configuration
 // resource.
 func (c *Client) DescribeAutoScalingConfiguration(ctx context.Context, params *DescribeAutoScalingConfigurationInput, optFns ...func(*Options)) (*DescribeAutoScalingConfigurationOutput, error) {
 	if params == nil {

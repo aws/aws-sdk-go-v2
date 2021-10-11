@@ -2029,6 +2029,85 @@ func validateFulfillmentCodeHookSettings(v *types.FulfillmentCodeHookSettings) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "FulfillmentCodeHookSettings"}
+	if v.PostFulfillmentStatusSpecification != nil {
+		if err := validatePostFulfillmentStatusSpecification(v.PostFulfillmentStatusSpecification); err != nil {
+			invalidParams.AddNested("PostFulfillmentStatusSpecification", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FulfillmentUpdatesSpecification != nil {
+		if err := validateFulfillmentUpdatesSpecification(v.FulfillmentUpdatesSpecification); err != nil {
+			invalidParams.AddNested("FulfillmentUpdatesSpecification", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFulfillmentStartResponseSpecification(v *types.FulfillmentStartResponseSpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FulfillmentStartResponseSpecification"}
+	if v.DelayInSeconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DelayInSeconds"))
+	}
+	if v.MessageGroups == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MessageGroups"))
+	} else if v.MessageGroups != nil {
+		if err := validateMessageGroupsList(v.MessageGroups); err != nil {
+			invalidParams.AddNested("MessageGroups", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFulfillmentUpdateResponseSpecification(v *types.FulfillmentUpdateResponseSpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FulfillmentUpdateResponseSpecification"}
+	if v.FrequencyInSeconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FrequencyInSeconds"))
+	}
+	if v.MessageGroups == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MessageGroups"))
+	} else if v.MessageGroups != nil {
+		if err := validateMessageGroupsList(v.MessageGroups); err != nil {
+			invalidParams.AddNested("MessageGroups", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFulfillmentUpdatesSpecification(v *types.FulfillmentUpdatesSpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FulfillmentUpdatesSpecification"}
+	if v.Active == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Active"))
+	}
+	if v.StartResponse != nil {
+		if err := validateFulfillmentStartResponseSpecification(v.StartResponse); err != nil {
+			invalidParams.AddNested("StartResponse", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.UpdateResponse != nil {
+		if err := validateFulfillmentUpdateResponseSpecification(v.UpdateResponse); err != nil {
+			invalidParams.AddNested("UpdateResponse", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2450,6 +2529,33 @@ func validatePlainTextMessage(v *types.PlainTextMessage) error {
 	invalidParams := smithy.InvalidParamsError{Context: "PlainTextMessage"}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePostFulfillmentStatusSpecification(v *types.PostFulfillmentStatusSpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PostFulfillmentStatusSpecification"}
+	if v.SuccessResponse != nil {
+		if err := validateResponseSpecification(v.SuccessResponse); err != nil {
+			invalidParams.AddNested("SuccessResponse", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FailureResponse != nil {
+		if err := validateResponseSpecification(v.FailureResponse); err != nil {
+			invalidParams.AddNested("FailureResponse", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TimeoutResponse != nil {
+		if err := validateResponseSpecification(v.TimeoutResponse); err != nil {
+			invalidParams.AddNested("TimeoutResponse", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

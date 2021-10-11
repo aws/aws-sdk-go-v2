@@ -64,6 +64,12 @@ type DescribeFaqOutput struct {
 	// The identifier of the index that contains the FAQ.
 	IndexId *string
 
+	// The code for a language. This shows a supported language for the FAQ document.
+	// English is supported by default. For more information on supported languages,
+	// including their codes, see Adding documents in languages other than English
+	// (https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html).
+	LanguageCode *string
+
 	// The name that you gave the FAQ when it was created.
 	Name *string
 
