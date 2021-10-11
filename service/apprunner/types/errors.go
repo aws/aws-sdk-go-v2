@@ -66,7 +66,7 @@ func (e *InvalidStateException) ErrorCode() string             { return "Invalid
 func (e *InvalidStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A resource doesn't exist for the specified Amazon Resource Name (ARN) in your
-// AWS account.
+// Amazon Web Services account.
 type ResourceNotFoundException struct {
 	Message *string
 
@@ -86,10 +86,9 @@ func (e *ResourceNotFoundException) ErrorCode() string             { return "Res
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // App Runner can't create this resource. You've reached your account quota for
-// this resource type. For App Runner per-resource quotas, see AWS App Runner
-// endpoints and quotas
-// (https://docs.aws.amazon.com/general/latest/gr/apprunner.html) in the AWS
-// General Reference.
+// this resource type. For App Runner per-resource quotas, see App Runner endpoints
+// and quotas (https://docs.aws.amazon.com/general/latest/gr/apprunner.html) in the
+// Amazon Web Services General Reference.
 type ServiceQuotaExceededException struct {
 	Message *string
 

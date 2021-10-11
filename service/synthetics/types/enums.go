@@ -87,3 +87,21 @@ func (CanaryStateReasonCode) Values() []CanaryStateReasonCode {
 		"INVALID_PERMISSIONS",
 	}
 }
+
+type EncryptionMode string
+
+// Enum values for EncryptionMode
+const (
+	EncryptionModeSseS3  EncryptionMode = "SSE_S3"
+	EncryptionModeSseKms EncryptionMode = "SSE_KMS"
+)
+
+// Values returns all known values for EncryptionMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EncryptionMode) Values() []EncryptionMode {
+	return []EncryptionMode{
+		"SSE_S3",
+		"SSE_KMS",
+	}
+}

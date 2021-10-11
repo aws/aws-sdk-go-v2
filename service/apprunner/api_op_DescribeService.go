@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Return a full description of an AWS App Runner service.
+// Return a full description of an App Runner service.
 func (c *Client) DescribeService(ctx context.Context, params *DescribeServiceInput, optFns ...func(*Options)) (*DescribeServiceOutput, error) {
 	if params == nil {
 		params = &DescribeServiceInput{}

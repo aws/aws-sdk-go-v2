@@ -48,7 +48,7 @@ type DescribeImportOutput struct {
 	CreationDateTime *time.Time
 
 	// If the importStatus field is Failed, this provides one or more reasons for the
-	// failture.
+	// failure.
 	FailureReasons []string
 
 	// The unique identifier of the described import.

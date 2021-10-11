@@ -68,6 +68,12 @@ type CreateFaqInput struct {
 	// (https://docs.aws.amazon.com/kendra/latest/dg/in-creating-faq.html).
 	FileFormat types.FaqFileFormat
 
+	// The code for a language. This allows you to support a language for the FAQ
+	// document. English is supported by default. For more information on supported
+	// languages, including their codes, see Adding documents in languages other than
+	// English (https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html).
+	LanguageCode *string
+
 	// A list of key-value pairs that identify the FAQ. You can use the tags to
 	// identify and organize your resources and to control access to resources.
 	Tags []types.Tag

@@ -90,7 +90,7 @@ type Address struct {
 	InstanceId *string
 
 	// The name of the unique set of Availability Zones, Local Zones, or Wavelength
-	// Zones from which AWS advertises IP addresses.
+	// Zones from which Amazon Web Services advertises IP addresses.
 	NetworkBorderGroup *string
 
 	// The ID of the network interface.
@@ -610,6 +610,18 @@ type ByoipCidr struct {
 	noSmithyDocumentSerde
 }
 
+// Describes a Capacity Reservation Fleet cancellation error.
+type CancelCapacityReservationFleetError struct {
+
+	// The error code.
+	Code *string
+
+	// The error message.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes a request to cancel a Spot Instance.
 type CancelledSpotInstanceRequest struct {
 
@@ -676,6 +688,11 @@ type CapacityReservation struct {
 
 	// The Amazon Resource Name (ARN) of the Capacity Reservation.
 	CapacityReservationArn *string
+
+	// The ID of the Capacity Reservation Fleet to which the Capacity Reservation
+	// belongs. Only valid for Capacity Reservations that were created by a Capacity
+	// Reservation Fleet.
+	CapacityReservationFleetId *string
 
 	// The ID of the Capacity Reservation.
 	CapacityReservationId *string
@@ -782,6 +799,122 @@ type CapacityReservation struct {
 	// The total number of instances for which the Capacity Reservation reserves
 	// capacity.
 	TotalInstanceCount *int32
+
+	noSmithyDocumentSerde
+}
+
+// Information about a Capacity Reservation Fleet.
+type CapacityReservationFleet struct {
+
+	// The strategy used by the Capacity Reservation Fleet to determine which of the
+	// specified instance types to use. For more information, see For more information,
+	// see  Allocation strategy
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/crfleet-concepts.html#allocation-strategy)
+	// in the Amazon EC2 User Guide.
+	AllocationStrategy *string
+
+	// The ARN of the Capacity Reservation Fleet.
+	CapacityReservationFleetArn *string
+
+	// The ID of the Capacity Reservation Fleet.
+	CapacityReservationFleetId *string
+
+	// The date and time at which the Capacity Reservation Fleet was created.
+	CreateTime *time.Time
+
+	// The date and time at which the Capacity Reservation Fleet expires.
+	EndDate *time.Time
+
+	// Indicates the type of instance launches that the Capacity Reservation Fleet
+	// accepts. All Capacity Reservations in the Fleet inherit this instance matching
+	// criteria. Currently, Capacity Reservation Fleets support open instance matching
+	// criteria only. This means that instances that have matching attributes (instance
+	// type, platform, and Availability Zone) run in the Capacity Reservations
+	// automatically. Instances do not need to explicitly target a Capacity Reservation
+	// Fleet to use its reserved capacity.
+	InstanceMatchCriteria FleetInstanceMatchCriteria
+
+	// Information about the instance types for which to reserve the capacity.
+	InstanceTypeSpecifications []FleetCapacityReservation
+
+	// The state of the Capacity Reservation Fleet. Possible states include:
+	//
+	// *
+	// submitted - The Capacity Reservation Fleet request has been submitted and Amazon
+	// Elastic Compute Cloud is preparing to create the Capacity Reservations.
+	//
+	// *
+	// modifying - The Capacity Reservation Fleet is being modified. The Fleet remains
+	// in this state until the modification is complete.
+	//
+	// * active - The Capacity
+	// Reservation Fleet has fulfilled its total target capacity and it is attempting
+	// to maintain this capacity. The Fleet remains in this state until it is modified
+	// or deleted.
+	//
+	// * partially_fulfilled - The Capacity Reservation Fleet has
+	// partially fulfilled its total target capacity. There is insufficient Amazon EC2
+	// to fulfill the total target capacity. The Fleet is attempting to asynchronously
+	// fulfill its total target capacity.
+	//
+	// * expiring - The Capacity Reservation Fleet
+	// has reach its end date and it is in the process of expiring. One or more of its
+	// Capacity reservations might still be active.
+	//
+	// * expired - The Capacity
+	// Reservation Fleet has reach its end date. The Fleet and its Capacity
+	// Reservations are expired. The Fleet can't create new Capacity Reservations.
+	//
+	// *
+	// cancelling - The Capacity Reservation Fleet is in the process of being
+	// cancelled. One or more of its Capacity reservations might still be active.
+	//
+	// *
+	// cancelled - The Capacity Reservation Fleet has been manually cancelled. The
+	// Fleet and its Capacity Reservations are cancelled and the Fleet can't create new
+	// Capacity Reservations.
+	//
+	// * failed - The Capacity Reservation Fleet failed to
+	// reserve capacity for the specified instance types.
+	State CapacityReservationFleetState
+
+	// The tags assigned to the Capacity Reservation Fleet.
+	Tags []Tag
+
+	// The tenancy of the Capacity Reservation Fleet. Tenancies include:
+	//
+	// * default -
+	// The Capacity Reservation Fleet is created on hardware that is shared with other
+	// Amazon Web Services accounts.
+	//
+	// * dedicated - The Capacity Reservation Fleet is
+	// created on single-tenant hardware that is dedicated to a single Amazon Web
+	// Services account.
+	Tenancy FleetCapacityReservationTenancy
+
+	// The capacity units that have been fulfilled.
+	TotalFulfilledCapacity *float64
+
+	// The total number of capacity units for which the Capacity Reservation Fleet
+	// reserves capacity. For more information, see Total target capacity
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/crfleet-concepts.html#target-capacity)
+	// in the Amazon EC2 User Guide.
+	TotalTargetCapacity *int32
+
+	noSmithyDocumentSerde
+}
+
+// Describes a Capacity Reservation Fleet that was successfully cancelled.
+type CapacityReservationFleetCancellationState struct {
+
+	// The ID of the Capacity Reservation Fleet that was successfully cancelled.
+	CapacityReservationFleetId *string
+
+	// The current state of the Capacity Reservation Fleet.
+	CurrentFleetState CapacityReservationFleetState
+
+	// The previous state of the Capacity Reservation Fleet.
+	PreviousFleetState CapacityReservationFleetState
 
 	noSmithyDocumentSerde
 }
@@ -1395,10 +1528,10 @@ type CoipAddressUsage struct {
 	// The allocation ID of the address.
 	AllocationId *string
 
-	// The AWS account ID.
+	// The Amazon Web Services account ID.
 	AwsAccountId *string
 
-	// The AWS service.
+	// The Amazon Web Services service.
 	AwsService *string
 
 	// The customer-owned IP address.
@@ -2599,63 +2732,82 @@ type EventInformation struct {
 	// The description of the event.
 	EventDescription *string
 
-	// The event. The following are the error events:
+	// The event. error events:
 	//
-	// * iamFleetRoleInvalid - The EC2
-	// Fleet or Spot Fleet did not have the required permissions either to launch or
-	// terminate an instance.
+	// * iamFleetRoleInvalid - The EC2 Fleet or Spot Fleet
+	// does not have the required permissions either to launch or terminate an
+	// instance.
 	//
-	// * spotFleetRequestConfigurationInvalid - The
-	// configuration is not valid. For more information, see the description of the
+	// * allLaunchSpecsTemporarilyBlacklisted - None of the configurations
+	// are valid, and several attempts to launch instances have failed. For more
+	// information, see the description of the event.
+	//
+	// * spotInstanceCountLimitExceeded
+	// - You've reached the limit on the number of Spot Instances that you can
+	// launch.
+	//
+	// * spotFleetRequestConfigurationInvalid - The configuration is not
+	// valid. For more information, see the description of the
 	// event.
 	//
-	// * spotInstanceCountLimitExceeded - You've reached the limit on the
-	// number of Spot Instances that you can launch.
-	//
-	// The following are the
 	// fleetRequestChange events:
 	//
-	// * active - The EC2 Fleet or Spot Fleet request has
-	// been validated and Amazon EC2 is attempting to maintain the target number of
-	// running Spot Instances.
+	// * active - The EC2 Fleet or Spot Fleet
+	// request has been validated and Amazon EC2 is attempting to maintain the target
+	// number of running instances.
 	//
-	// * cancelled - The EC2 Fleet or Spot Fleet request is
-	// canceled and has no running Spot Instances. The EC2 Fleet or Spot Fleet will be
-	// deleted two days after its instances were terminated.
+	// * cancelled - The EC2 Fleet or Spot Fleet request
+	// is canceled and has no running instances. The EC2 Fleet or Spot Fleet will be
+	// deleted two days after its instances are terminated.
 	//
 	// * cancelled_running - The
-	// EC2 Fleet or Spot Fleet request is canceled and does not launch additional Spot
-	// Instances. Existing Spot Instances continue to run until they are interrupted or
-	// terminated.
+	// EC2 Fleet or Spot Fleet request is canceled and does not launch additional
+	// instances. Its existing instances continue to run until they are interrupted or
+	// terminated. The request remains in this state until all instances are
+	// interrupted or terminated.
 	//
-	// * cancelled_terminating - The EC2 Fleet or Spot Fleet request is
-	// canceled and its Spot Instances are terminating.
+	// * cancelled_terminating - The EC2 Fleet or Spot
+	// Fleet request is canceled and its instances are terminating. The request remains
+	// in this state until all instances are terminated.
 	//
 	// * expired - The EC2 Fleet or
-	// Spot Fleet request has expired. A subsequent event indicates that the instances
-	// were terminated, if the request was created with
-	// TerminateInstancesWithExpiration set.
+	// Spot Fleet request has expired. If the request was created with
+	// TerminateInstancesWithExpiration set, a subsequent terminated event indicates
+	// that the instances are terminated.
 	//
-	// * modify_in_progress - A request to
-	// modify the EC2 Fleet or Spot Fleet request was accepted and is in progress.
+	// * modify_in_progress - The EC2 Fleet or Spot
+	// Fleet request is being modified. The request remains in this state until the
+	// modification is fully processed.
+	//
+	// * modify_succeeded - The EC2 Fleet or Spot
+	// Fleet request was modified.
+	//
+	// * submitted - The EC2 Fleet or Spot Fleet request
+	// is being evaluated and Amazon EC2 is preparing to launch the target number of
+	// instances.
+	//
+	// * progress - The EC2 Fleet or Spot Fleet request is in the process
+	// of being fulfilled.
+	//
+	// instanceChange events:
+	//
+	// * launched - A new instance was
+	// launched.
+	//
+	// * terminated - An instance was terminated by the user.
 	//
 	// *
-	// modify_succeeded - The EC2 Fleet or Spot Fleet request was modified.
+	// termination_notified - An instance termination notification was sent when a Spot
+	// Instance was terminated by Amazon EC2 during scale-down, when the target
+	// capacity of the fleet was modified down, for example, from a target capacity of
+	// 4 to a target capacity of 3.
 	//
-	// *
-	// submitted - The EC2 Fleet or Spot Fleet request is being evaluated and Amazon
-	// EC2 is preparing to launch the target number of Spot Instances.
+	// Information events:
 	//
-	// The following
-	// are the instanceChange events:
-	//
-	// * launched - A request was fulfilled and a new
-	// instance was launched.
-	//
-	// * terminated - An instance was terminated by the
-	// user.
-	//
-	// The following are the Information events:
+	// * fleetProgressHalted - The
+	// price in every launch specification is not valid because it is below the Spot
+	// price (all the launch specifications have produced launchSpecUnusable events). A
+	// launch specification might become valid if the Spot price changes.
 	//
 	// *
 	// launchSpecTemporarilyBlacklisted - The configuration is not valid and several
@@ -2663,12 +2815,11 @@ type EventInformation struct {
 	// description of the event.
 	//
 	// * launchSpecUnusable - The price in a launch
-	// specification is not valid because it is below the Spot price or the Spot price
-	// is above the On-Demand price.
+	// specification is not valid because it is below the Spot price.
 	//
-	// * fleetProgressHalted - The price in every launch
-	// specification is not valid. A launch specification might become valid if the
-	// Spot price changes.
+	// *
+	// registerWithLoadBalancersFailed - An attempt to register instances with load
+	// balancers failed. For more information, see the description of the event.
 	EventSubType *string
 
 	// The ID of the instance. This information is available only for instanceChange
@@ -2952,6 +3103,18 @@ type ExportToS3TaskSpecification struct {
 	noSmithyDocumentSerde
 }
 
+// Describes a Capacity Reservation Fleet that could not be cancelled.
+type FailedCapacityReservationFleetCancellationResult struct {
+
+	// Information about the Capacity Reservation Fleet cancellation error.
+	CancelCapacityReservationFleetError *CancelCapacityReservationFleetError
+
+	// The ID of the Capacity Reservation Fleet that could not be cancelled.
+	CapacityReservationFleetId *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes a Reserved Instance whose queued purchase was not deleted.
 type FailedQueuedPurchaseDeletion struct {
 
@@ -3000,6 +3163,58 @@ type Filter struct {
 
 	// The filter values. Filter values are case-sensitive.
 	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Information about a Capacity Reservation in a Capacity Reservation Fleet.
+type FleetCapacityReservation struct {
+
+	// The Availability Zone in which the Capacity Reservation reserves capacity.
+	AvailabilityZone *string
+
+	// The ID of the Availability Zone in which the Capacity Reservation reserves
+	// capacity.
+	AvailabilityZoneId *string
+
+	// The ID of the Capacity Reservation.
+	CapacityReservationId *string
+
+	// The date and time at which the Capacity Reservation was created.
+	CreateDate *time.Time
+
+	// Indicates whether the Capacity Reservation reserves capacity for EBS-optimized
+	// instance types.
+	EbsOptimized *bool
+
+	// The number of capacity units fulfilled by the Capacity Reservation. For more
+	// information, see  Total target capacity
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/crfleet-concepts.html#target-capacity)
+	// in the Amazon EC2 User Guide.
+	FulfilledCapacity *float64
+
+	// The type of operating system for which the Capacity Reservation reserves
+	// capacity.
+	InstancePlatform CapacityReservationInstancePlatform
+
+	// The instance type for which the Capacity Reservation reserves capacity.
+	InstanceType InstanceType
+
+	// The priority of the instance type in the Capacity Reservation Fleet. For more
+	// information, see  Instance type priority
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/crfleet-concepts.html#instance-priority)
+	// in the Amazon EC2 User Guide.
+	Priority *int32
+
+	// The total number of instances for which the Capacity Reservation reserves
+	// capacity.
+	TotalInstanceCount *int32
+
+	// The weight of the instance type in the Capacity Reservation Fleet. For more
+	// information, see  Instance type weight
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/crfleet-concepts.html#instance-weight)
+	// in the Amazon EC2 User Guide.
+	Weight *float64
 
 	noSmithyDocumentSerde
 }
@@ -3429,7 +3644,7 @@ type FpgaImage struct {
 	// aws-marketplace.
 	OwnerAlias *string
 
-	// The AWS account ID of the AFI owner.
+	// The ID of the Amazon Web Services account that owns the AFI.
 	OwnerId *string
 
 	// Information about the PCI bus.
@@ -3441,7 +3656,8 @@ type FpgaImage struct {
 	// Indicates whether the AFI is public.
 	Public *bool
 
-	// The version of the AWS Shell that was used to create the bitstream.
+	// The version of the Amazon Web Services Shell that was used to create the
+	// bitstream.
 	ShellVersion *string
 
 	// Information about the state of the AFI.
@@ -4765,9 +4981,9 @@ type InstanceMarketOptionsRequest struct {
 // The metadata options for the instance.
 type InstanceMetadataOptionsRequest struct {
 
-	// This parameter enables or disables the HTTP metadata endpoint on your instances.
-	// If the parameter is not specified, the default state is enabled. If you specify
-	// a value of disabled, you will not be able to access your instance metadata.
+	// Enables or disables the HTTP metadata endpoint on your instances. If the
+	// parameter is not specified, the default state is enabled. If you specify a value
+	// of disabled, you will not be able to access your instance metadata.
 	HttpEndpoint InstanceMetadataEndpointState
 
 	// Enables or disables the IPv6 endpoint for the instance metadata service.
@@ -4796,13 +5012,12 @@ type InstanceMetadataOptionsRequest struct {
 // The metadata options for the instance.
 type InstanceMetadataOptionsResponse struct {
 
-	// This parameter enables or disables the HTTP metadata endpoint on your instances.
-	// If the parameter is not specified, the default state is enabled. If you specify
-	// a value of disabled, you will not be able to access your instance metadata.
+	// Indicates whether the HTTP metadata endpoint on your instances is enabled or
+	// disabled.
 	HttpEndpoint InstanceMetadataEndpointState
 
-	// Whether or not the IPv6 endpoint for the instance metadata service is enabled or
-	// disabled.
+	// Indicates whether the IPv6 endpoint for the instance metadata service is enabled
+	// or disabled.
 	HttpProtocolIpv6 InstanceMetadataProtocolState
 
 	// The desired HTTP PUT response hop limit for instance metadata requests. The
@@ -6626,7 +6841,7 @@ type LoadPermission struct {
 	// The name of the group.
 	Group PermissionGroup
 
-	// The AWS account ID.
+	// The Amazon Web Services account ID.
 	UserId *string
 
 	noSmithyDocumentSerde
@@ -6650,7 +6865,7 @@ type LoadPermissionRequest struct {
 	// The name of the group.
 	Group PermissionGroup
 
-	// The AWS account ID.
+	// The Amazon Web Services account ID.
 	UserId *string
 
 	noSmithyDocumentSerde
@@ -6665,7 +6880,7 @@ type LocalGateway struct {
 	// The Amazon Resource Name (ARN) of the Outpost.
 	OutpostArn *string
 
-	// The AWS account ID that owns the local gateway.
+	// The ID of the Amazon Web Services account that owns the local gateway.
 	OwnerId *string
 
 	// The state of the local gateway.
@@ -6692,7 +6907,7 @@ type LocalGatewayRoute struct {
 	// The ID of the virtual interface group.
 	LocalGatewayVirtualInterfaceGroupId *string
 
-	// The AWS account ID that owns the local gateway route.
+	// The ID of the Amazon Web Services account that owns the local gateway route.
 	OwnerId *string
 
 	// The state of the route.
@@ -6719,7 +6934,8 @@ type LocalGatewayRouteTable struct {
 	// The Amazon Resource Name (ARN) of the Outpost.
 	OutpostArn *string
 
-	// The AWS account ID that owns the local gateway route table.
+	// The ID of the Amazon Web Services account that owns the local gateway route
+	// table.
 	OwnerId *string
 
 	// The state of the local gateway route table.
@@ -6751,8 +6967,8 @@ type LocalGatewayRouteTableVirtualInterfaceGroupAssociation struct {
 	// The ID of the virtual interface group.
 	LocalGatewayVirtualInterfaceGroupId *string
 
-	// The AWS account ID that owns the local gateway virtual interface group
-	// association.
+	// The ID of the Amazon Web Services account that owns the local gateway virtual
+	// interface group association.
 	OwnerId *string
 
 	// The state of the association.
@@ -6780,7 +6996,8 @@ type LocalGatewayRouteTableVpcAssociation struct {
 	// The ID of the association.
 	LocalGatewayRouteTableVpcAssociationId *string
 
-	// The AWS account ID that owns the local gateway route table for the association.
+	// The ID of the Amazon Web Services account that owns the local gateway route
+	// table for the association.
 	OwnerId *string
 
 	// The state of the association.
@@ -6811,7 +7028,8 @@ type LocalGatewayVirtualInterface struct {
 	// The ID of the virtual interface.
 	LocalGatewayVirtualInterfaceId *string
 
-	// The AWS account ID that owns the local gateway virtual interface.
+	// The ID of the Amazon Web Services account that owns the local gateway virtual
+	// interface.
 	OwnerId *string
 
 	// The peer address.
@@ -6841,7 +7059,8 @@ type LocalGatewayVirtualInterfaceGroup struct {
 	// The IDs of the virtual interfaces.
 	LocalGatewayVirtualInterfaceIds []string
 
-	// The AWS account ID that owns the local gateway virtual interface group.
+	// The ID of the Amazon Web Services account that owns the local gateway virtual
+	// interface group.
 	OwnerId *string
 
 	// The tags assigned to the virtual interface group.
@@ -8762,6 +8981,55 @@ type Reservation struct {
 	noSmithyDocumentSerde
 }
 
+// Information about an instance type to use in a Capacity Reservation Fleet.
+type ReservationFleetInstanceSpecification struct {
+
+	// The Availability Zone in which the Capacity Reservation Fleet reserves the
+	// capacity. A Capacity Reservation Fleet can't span Availability Zones. All
+	// instance type specifications that you specify for the Fleet must use the same
+	// Availability Zone.
+	AvailabilityZone *string
+
+	// The ID of the Availability Zone in which the Capacity Reservation Fleet reserves
+	// the capacity. A Capacity Reservation Fleet can't span Availability Zones. All
+	// instance type specifications that you specify for the Fleet must use the same
+	// Availability Zone.
+	AvailabilityZoneId *string
+
+	// Indicates whether the Capacity Reservation Fleet supports EBS-optimized
+	// instances types. This optimization provides dedicated throughput to Amazon EBS
+	// and an optimized configuration stack to provide optimal I/O performance. This
+	// optimization isn't available with all instance types. Additional usage charges
+	// apply when using EBS-optimized instance types.
+	EbsOptimized *bool
+
+	// The type of operating system for which the Capacity Reservation Fleet reserves
+	// capacity.
+	InstancePlatform CapacityReservationInstancePlatform
+
+	// The instance type for which the Capacity Reservation Fleet reserves capacity.
+	InstanceType InstanceType
+
+	// The priority to assign to the instance type. This value is used to determine
+	// which of the instance types specified for the Fleet should be prioritized for
+	// use. A lower value indicates a high priority. For more information, see Instance
+	// type priority
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/crfleet-concepts.html#instance-priority)
+	// in the Amazon EC2 User Guide.
+	Priority *int32
+
+	// The number of capacity units provided by the specified instance type. This
+	// value, together with the total target capacity that you specify for the Fleet
+	// determine the number of instances for which the Fleet reserves capacity. Both
+	// values are based on units that make sense for your workload. For more
+	// information, see Total target capacity
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/crfleet-concepts.html#target-capacity)
+	// in the Amazon EC2 User Guide.
+	Weight *float64
+
+	noSmithyDocumentSerde
+}
+
 // The cost associated with the Reserved Instance.
 type ReservationValue struct {
 
@@ -9900,8 +10168,8 @@ type SecurityGroupRuleUpdate struct {
 // Describes a service configuration for a VPC endpoint service.
 type ServiceConfiguration struct {
 
-	// Indicates whether requests from other AWS accounts to create an endpoint to the
-	// service must first be accepted.
+	// Indicates whether requests from other Amazon Web Services accounts to create an
+	// endpoint to the service must first be accepted.
 	AcceptanceRequired *bool
 
 	// The Availability Zones in which the service is available.
@@ -9961,7 +10229,7 @@ type ServiceDetail struct {
 	// service VPC endpoints using the VPC endpoint API is restricted.
 	ManagesVpcEndpoints *bool
 
-	// The AWS account ID of the service owner.
+	// The Amazon Web Services account ID of the service owner.
 	Owner *string
 
 	// The private DNS name for the service.
@@ -11258,23 +11526,7 @@ type TagDescription struct {
 // The tags to apply to a resource when the resource is being created.
 type TagSpecification struct {
 
-	// The type of resource to tag on creation. The possible values are:
-	// capacity-reservation | carrier-gateway | client-vpn-endpoint | customer-gateway
-	// | dedicated-host | dhcp-options | egress-only-internet-gateway | elastic-gpu |
-	// elastic-ip | export-image-task | export-instance-task | fleet | fpga-image |
-	// host-reservation | image | import-image-task | import-snapshot-task | instance |
-	// instance-event-window | internet-gateway | ipv4pool-ec2 | ipv6pool-ec2 |
-	// key-pair | launch-template | local-gateway-route-table-vpc-association |
-	// natgateway | network-acl | network-insights-analysis | network-insights-path |
-	// network-interface | placement-group | prefix-list | reserved-instances |
-	// route-table | security-group | security-group-rule | snapshot |
-	// spot-fleet-request | spot-instances-request | subnet | traffic-mirror-filter |
-	// traffic-mirror-session | traffic-mirror-target | transit-gateway |
-	// transit-gateway-attachment | transit-gateway-multicast-domain |
-	// transit-gateway-route-table | volume | vpc | vpc-endpoint | vpc-endpoint-service
-	// | vpc-flow-log | vpc-peering-connection | vpn-connection | vpn-gateway. To tag a
-	// resource after it has been created, see CreateTags
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html).
+	// The type of resource to tag on creation.
 	ResourceType ResourceType
 
 	// The tags to apply to the resource.
@@ -13012,7 +13264,7 @@ type VpcEndpoint struct {
 	// (Interface endpoint) One or more network interfaces for the endpoint.
 	NetworkInterfaceIds []string
 
-	// The ID of the AWS account that owns the VPC endpoint.
+	// The ID of the Amazon Web Services account that owns the VPC endpoint.
 	OwnerId *string
 
 	// The policy document associated with the endpoint, if applicable.
@@ -13073,7 +13325,7 @@ type VpcEndpointConnection struct {
 	// The ID of the VPC endpoint.
 	VpcEndpointId *string
 
-	// The AWS account ID of the owner of the VPC endpoint.
+	// The ID of the Amazon Web Services account that owns the VPC endpoint.
 	VpcEndpointOwner *string
 
 	// The state of the VPC endpoint.
@@ -13098,7 +13350,7 @@ type VpcIpv6CidrBlockAssociation struct {
 	Ipv6Pool *string
 
 	// The name of the unique set of Availability Zones, Local Zones, or Wavelength
-	// Zones from which AWS advertises IP addresses, for example,
+	// Zones from which Amazon Web Services advertises IP addresses, for example,
 	// us-east-1-wl1-bos-wlz-1.
 	NetworkBorderGroup *string
 

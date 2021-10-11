@@ -3230,26 +3230,6 @@ func (m *validateOpUpdateChannelReadMarker) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpUpdateGlobalSettings struct {
-}
-
-func (*validateOpUpdateGlobalSettings) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpUpdateGlobalSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*UpdateGlobalSettingsInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpUpdateGlobalSettingsInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpUpdatePhoneNumber struct {
 }
 
@@ -4134,10 +4114,6 @@ func addOpUpdateChannelReadMarkerValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpUpdateChannelReadMarker{}, middleware.After)
 }
 
-func addOpUpdateGlobalSettingsValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpUpdateGlobalSettings{}, middleware.After)
-}
-
 func addOpUpdatePhoneNumberValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdatePhoneNumber{}, middleware.After)
 }
@@ -4221,6 +4197,39 @@ func validateAppInstanceStreamingConfigurationList(v []types.AppInstanceStreamin
 	}
 }
 
+func validateArtifactsConfiguration(v *types.ArtifactsConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ArtifactsConfiguration"}
+	if v.Audio == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Audio"))
+	} else if v.Audio != nil {
+		if err := validateAudioArtifactsConfiguration(v.Audio); err != nil {
+			invalidParams.AddNested("Audio", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Video == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Video"))
+	} else if v.Video != nil {
+		if err := validateVideoArtifactsConfiguration(v.Video); err != nil {
+			invalidParams.AddNested("Video", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	} else if v.Content != nil {
+		if err := validateContentArtifactsConfiguration(v.Content); err != nil {
+			invalidParams.AddNested("Content", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAttendeeTagList(v []types.Tag) error {
 	if v == nil {
 		return nil
@@ -4230,6 +4239,53 @@ func validateAttendeeTagList(v []types.Tag) error {
 		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAudioArtifactsConfiguration(v *types.AudioArtifactsConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AudioArtifactsConfiguration"}
+	if len(v.MuxType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MuxType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateChimeSdkMeetingConfiguration(v *types.ChimeSdkMeetingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ChimeSdkMeetingConfiguration"}
+	if v.ArtifactsConfiguration != nil {
+		if err := validateArtifactsConfiguration(v.ArtifactsConfiguration); err != nil {
+			invalidParams.AddNested("ArtifactsConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContentArtifactsConfiguration(v *types.ContentArtifactsConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContentArtifactsConfiguration"}
+	if len(v.State) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4620,6 +4676,21 @@ func validateUserSettings(v *types.UserSettings) error {
 		if err := validateTelephonySettings(v.Telephony); err != nil {
 			invalidParams.AddNested("Telephony", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVideoArtifactsConfiguration(v *types.VideoArtifactsConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VideoArtifactsConfiguration"}
+	if len(v.State) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5116,6 +5187,11 @@ func validateOpCreateMediaCapturePipelineInput(v *CreateMediaCapturePipelineInpu
 	}
 	if v.SinkArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SinkArn"))
+	}
+	if v.ChimeSdkMeetingConfiguration != nil {
+		if err := validateChimeSdkMeetingConfiguration(v.ChimeSdkMeetingConfiguration); err != nil {
+			invalidParams.AddNested("ChimeSdkMeetingConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7506,24 +7582,6 @@ func validateOpUpdateChannelReadMarkerInput(v *UpdateChannelReadMarkerInput) err
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateChannelReadMarkerInput"}
 	if v.ChannelArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpUpdateGlobalSettingsInput(v *UpdateGlobalSettingsInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "UpdateGlobalSettingsInput"}
-	if v.BusinessCalling == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BusinessCalling"))
-	}
-	if v.VoiceConnector == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VoiceConnector"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

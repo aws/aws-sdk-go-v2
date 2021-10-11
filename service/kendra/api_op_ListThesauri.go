@@ -52,7 +52,7 @@ type ListThesauriOutput struct {
 	// in the subsequent request to retrieve the next set of thesauri.
 	NextToken *string
 
-	// An array of summary information for one or more thesauruses.
+	// An array of summary information for a thesaurus or multiple thesauri.
 	ThesaurusSummaryItems []types.ThesaurusSummary
 
 	// Metadata pertaining to the operation's result.

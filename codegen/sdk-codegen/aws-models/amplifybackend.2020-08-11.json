@@ -2368,6 +2368,13 @@
         "com.amazonaws.amplifybackend#GetBackendResponse": {
             "type": "structure",
             "members": {
+                "AmplifyFeatureFlags": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A stringified version of the cli.json file for your Amplify project.</p>",
+                        "smithy.api#jsonName": "amplifyFeatureFlags"
+                    }
+                },
                 "AmplifyMetaConfig": {
                     "target": "com.amazonaws.amplifybackend#__string",
                     "traits": {

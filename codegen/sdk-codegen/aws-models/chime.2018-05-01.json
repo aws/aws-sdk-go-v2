@@ -496,6 +496,50 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.chime#ArtifactsConfiguration": {
+            "type": "structure",
+            "members": {
+                "Audio": {
+                    "target": "com.amazonaws.chime#AudioArtifactsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the audio artifacts.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Video": {
+                    "target": "com.amazonaws.chime#VideoArtifactsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the video artifacts.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Content": {
+                    "target": "com.amazonaws.chime#ContentArtifactsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the content artifacts.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for the artifacts.</p>"
+            }
+        },
+        "com.amazonaws.chime#ArtifactsState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Enabled",
+                        "name": "Enabled"
+                    },
+                    {
+                        "value": "Disabled",
+                        "name": "Disabled"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.chime#AssociatePhoneNumberWithUser": {
             "type": "operation",
             "input": {
@@ -821,6 +865,17 @@
                 "smithy.api#documentation": "<p>\nAn Amazon Chime SDK meeting attendee. Includes a unique \n<code>AttendeeId</code>\nand \n<code>JoinToken</code>\n. The \n<code>JoinToken</code>\nallows a client to authenticate and join as the specified attendee. The \n<code>JoinToken</code>\nexpires when the meeting ends or when \n<a>DeleteAttendee</a>\nis called. After that, the attendee is unable to join the meeting.\n</p>\n\n         <p>We recommend securely transferring each <code>JoinToken</code> from your server application\n            to the client so that no other client has access to the token except for the one\n            authorized to represent the attendee.</p>"
             }
         },
+        "com.amazonaws.chime#AttendeeIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chime#GuidString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
         "com.amazonaws.chime#AttendeeList": {
             "type": "list",
             "member": {
@@ -849,6 +904,36 @@
                     "min": 1,
                     "max": 10
                 }
+            }
+        },
+        "com.amazonaws.chime#AudioArtifactsConfiguration": {
+            "type": "structure",
+            "members": {
+                "MuxType": {
+                    "target": "com.amazonaws.chime#AudioMuxType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MUX type of the audio artifact configuration object.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The audio artifact configuration object.</p>"
+            }
+        },
+        "com.amazonaws.chime#AudioMuxType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AudioOnly",
+                        "name": "AudioOnly"
+                    },
+                    {
+                        "value": "AudioWithActiveSpeakerVideo",
+                        "name": "AudioWithActiveSpeakerVideo"
+                    }
+                ]
             }
         },
         "com.amazonaws.chime#BadRequestException": {
@@ -2245,6 +2330,26 @@
                 "smithy.api#pattern": "^arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}$"
             }
         },
+        "com.amazonaws.chime#ChimeSdkMeetingConfiguration": {
+            "type": "structure",
+            "members": {
+                "SourceConfiguration": {
+                    "target": "com.amazonaws.chime#SourceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source configuration for a specified media capture pipline.</p>"
+                    }
+                },
+                "ArtifactsConfiguration": {
+                    "target": "com.amazonaws.chime#ArtifactsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the artifacts in an Amazon Chime SDK meeting.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration object of the Amazon Chime SDK meeting for a specified media capture pipeline. <code>SourceType</code> must be <code>ChimeSdkMeeting</code>.</p>"
+            }
+        },
         "com.amazonaws.chime#ClientRequestToken": {
             "type": "string",
             "traits": {
@@ -2281,6 +2386,38 @@
                 },
                 "smithy.api#pattern": "^[\\s\\S]*$",
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.chime#ContentArtifactsConfiguration": {
+            "type": "structure",
+            "members": {
+                "State": {
+                    "target": "com.amazonaws.chime#ArtifactsState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the content artifact is enabled or disabled.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MuxType": {
+                    "target": "com.amazonaws.chime#ContentMuxType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MUX type of the artifact configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The content artifact object.</p>"
+            }
+        },
+        "com.amazonaws.chime#ContentMuxType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ContentOnly",
+                        "name": "ContentOnly"
+                    }
+                ]
             }
         },
         "com.amazonaws.chime#ConversationRetentionSettings": {
@@ -3343,6 +3480,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The token assigned to the client making the pipeline request.</p>",
                         "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "ChimeSdkMeetingConfiguration": {
+                    "target": "com.amazonaws.chime#ChimeSdkMeetingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for a specified media capture pipeline. <code>SourceType</code> must be <code>ChimeSdkMeeting</code>.</p>"
                     }
                 }
             }
@@ -7311,6 +7454,17 @@
                     "max": 64
                 },
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.chime#ExternalUserIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chime#ExternalUserIdType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
             }
         },
         "com.amazonaws.chime#ExternalUserIdType": {
@@ -12489,10 +12643,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time at which the capture pipeline was updated, in ISO 8601 format.</p>"
                     }
+                },
+                "ChimeSdkMeetingConfiguration": {
+                    "target": "com.amazonaws.chime#ChimeSdkMeetingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for a specified media capture pipeline. <code>SourceType</code> must be <code>ChimeSdkMeeting</code>.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A media capture pipeline object. A string consisting of an ID, source type, a source ARN, a sink type, and a sink ARN.</p>"
+                "smithy.api#documentation": "<p>A media capture pipeline object consisting of an ID, source type, source ARN, a sink type, a sink ARN, and a configuration object.</p>"
             }
         },
         "com.amazonaws.chime#MediaCapturePipelineList": {
@@ -12598,7 +12758,7 @@
                 "EventIngestionUrl": {
                     "target": "com.amazonaws.chime#UriType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL of the S3 bucket used to store the captured media.</p>"
+                        "smithy.api#documentation": "<p>The event ingestion URL.</p>"
                     }
                 }
             },
@@ -15437,6 +15597,26 @@
                 }
             }
         },
+        "com.amazonaws.chime#SelectedVideoStreams": {
+            "type": "structure",
+            "members": {
+                "AttendeeIds": {
+                    "target": "com.amazonaws.chime#AttendeeIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attendee IDs of the streams selected for a media capture pipeline. </p>"
+                    }
+                },
+                "ExternalUserIds": {
+                    "target": "com.amazonaws.chime#ExternalUserIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The external user IDs of the streams selected for a media capture pipeline.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The video streams to capture for a specified media capture pipeline. The total number of video streams can't exceed 25.</p>"
+            }
+        },
         "com.amazonaws.chime#SendChannelMessage": {
             "type": "operation",
             "input": {
@@ -15890,6 +16070,20 @@
                         "name": "DESCENDING"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.chime#SourceConfiguration": {
+            "type": "structure",
+            "members": {
+                "SelectedVideoStreams": {
+                    "target": "com.amazonaws.chime#SelectedVideoStreams",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The selected video streams to capture for a specified media capture pipeline. The number of video streams can't exceed 25.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Source configuration for a specified media capture pipeline.</p>"
             }
         },
         "com.amazonaws.chime#StartMeetingTranscription": {
@@ -18185,15 +18379,13 @@
                 "BusinessCalling": {
                     "target": "com.amazonaws.chime#BusinessCallingSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Chime Business Calling settings.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Amazon Chime Business Calling settings.</p>"
                     }
                 },
                 "VoiceConnector": {
                     "target": "com.amazonaws.chime#VoiceConnectorSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Chime Voice Connector settings.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Amazon Chime Voice Connector settings.</p>"
                     }
                 }
             }
@@ -18209,6 +18401,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.chime#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chime#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.chime#ForbiddenException"
@@ -19423,6 +19618,38 @@
                     {
                         "value": "SharedDevice",
                         "name": "SharedDevice"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.chime#VideoArtifactsConfiguration": {
+            "type": "structure",
+            "members": {
+                "State": {
+                    "target": "com.amazonaws.chime#ArtifactsState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the video artifact is enabled or disabled.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MuxType": {
+                    "target": "com.amazonaws.chime#VideoMuxType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MUX type of the video artifact configuration object.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The video artifact configuration object.</p>"
+            }
+        },
+        "com.amazonaws.chime#VideoMuxType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "VideoOnly",
+                        "name": "VideoOnly"
                     }
                 ]
             }

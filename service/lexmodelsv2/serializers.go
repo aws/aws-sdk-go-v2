@@ -6027,6 +6027,99 @@ func awsRestjson1_serializeDocumentFulfillmentCodeHookSettings(v *types.Fulfillm
 		ok.Boolean(v.Enabled)
 	}
 
+	if v.FulfillmentUpdatesSpecification != nil {
+		ok := object.Key("fulfillmentUpdatesSpecification")
+		if err := awsRestjson1_serializeDocumentFulfillmentUpdatesSpecification(v.FulfillmentUpdatesSpecification, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PostFulfillmentStatusSpecification != nil {
+		ok := object.Key("postFulfillmentStatusSpecification")
+		if err := awsRestjson1_serializeDocumentPostFulfillmentStatusSpecification(v.PostFulfillmentStatusSpecification, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFulfillmentStartResponseSpecification(v *types.FulfillmentStartResponseSpecification, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllowInterrupt != nil {
+		ok := object.Key("allowInterrupt")
+		ok.Boolean(*v.AllowInterrupt)
+	}
+
+	if v.DelayInSeconds != nil {
+		ok := object.Key("delayInSeconds")
+		ok.Integer(*v.DelayInSeconds)
+	}
+
+	if v.MessageGroups != nil {
+		ok := object.Key("messageGroups")
+		if err := awsRestjson1_serializeDocumentMessageGroupsList(v.MessageGroups, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFulfillmentUpdateResponseSpecification(v *types.FulfillmentUpdateResponseSpecification, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllowInterrupt != nil {
+		ok := object.Key("allowInterrupt")
+		ok.Boolean(*v.AllowInterrupt)
+	}
+
+	if v.FrequencyInSeconds != nil {
+		ok := object.Key("frequencyInSeconds")
+		ok.Integer(*v.FrequencyInSeconds)
+	}
+
+	if v.MessageGroups != nil {
+		ok := object.Key("messageGroups")
+		if err := awsRestjson1_serializeDocumentMessageGroupsList(v.MessageGroups, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFulfillmentUpdatesSpecification(v *types.FulfillmentUpdatesSpecification, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Active != nil {
+		ok := object.Key("active")
+		ok.Boolean(*v.Active)
+	}
+
+	if v.StartResponse != nil {
+		ok := object.Key("startResponse")
+		if err := awsRestjson1_serializeDocumentFulfillmentStartResponseSpecification(v.StartResponse, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TimeoutInSeconds != nil {
+		ok := object.Key("timeoutInSeconds")
+		ok.Integer(*v.TimeoutInSeconds)
+	}
+
+	if v.UpdateResponse != nil {
+		ok := object.Key("updateResponse")
+		if err := awsRestjson1_serializeDocumentFulfillmentUpdateResponseSpecification(v.UpdateResponse, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -6456,6 +6549,34 @@ func awsRestjson1_serializeDocumentPlainTextMessage(v *types.PlainTextMessage, v
 	if v.Value != nil {
 		ok := object.Key("value")
 		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPostFulfillmentStatusSpecification(v *types.PostFulfillmentStatusSpecification, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FailureResponse != nil {
+		ok := object.Key("failureResponse")
+		if err := awsRestjson1_serializeDocumentResponseSpecification(v.FailureResponse, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SuccessResponse != nil {
+		ok := object.Key("successResponse")
+		if err := awsRestjson1_serializeDocumentResponseSpecification(v.SuccessResponse, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TimeoutResponse != nil {
+		ok := object.Key("timeoutResponse")
+		if err := awsRestjson1_serializeDocumentResponseSpecification(v.TimeoutResponse, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

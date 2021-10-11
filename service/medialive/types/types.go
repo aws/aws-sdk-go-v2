@@ -244,6 +244,10 @@ type AudioDescription struct {
 	// broadcasterMixedAd.
 	AudioTypeControl AudioDescriptionAudioTypeControl
 
+	// Settings to configure one or more solutions that insert audio watermarks in the
+	// audio encode
+	AudioWatermarkingSettings *AudioWatermarkSettings
+
 	// Audio codec settings.
 	CodecSettings *AudioCodecSettings
 
@@ -437,6 +441,15 @@ type AudioTrackSelection struct {
 	//
 	// This member is required.
 	Tracks []AudioTrack
+
+	noSmithyDocumentSerde
+}
+
+// Audio Watermark Settings
+type AudioWatermarkSettings struct {
+
+	// Settings to configure Nielsen Watermarks in the audio encode
+	NielsenWatermarksSettings *NielsenWatermarksSettings
 
 	noSmithyDocumentSerde
 }
@@ -1032,7 +1045,7 @@ type ChannelSummary struct {
 	// A collection of key-value pairs.
 	Tags map[string]string
 
-	// Settings for VPC output
+	// Settings for any VPC outputs.
 	Vpc *VpcOutputSettingsDescription
 
 	noSmithyDocumentSerde
@@ -2610,7 +2623,7 @@ type Input struct {
 
 	// Certain pull input sources can be dynamic, meaning that they can have their
 	// URL's dynamically changes during input switch actions. Presently, this
-	// functionality only works with MP4_FILE inputs.
+	// functionality only works with MP4_FILE and TS_FILE inputs.
 	InputSourceType InputSourceType
 
 	// A list of MediaConnect Flows for this input.
@@ -2635,7 +2648,7 @@ type Input struct {
 	// A collection of key-value pairs.
 	Tags map[string]string
 
-	// Placeholder documentation for InputType
+	// The different types of inputs that AWS Elemental MediaLive supports.
 	Type InputType
 
 	noSmithyDocumentSerde
@@ -4157,6 +4170,28 @@ type NetworkInputSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Nielsen CBET
+type NielsenCBET struct {
+
+	// Enter the CBET check digits to use in the watermark.
+	//
+	// This member is required.
+	CbetCheckDigitString *string
+
+	// Determines the method of CBET insertion mode when prior encoding is detected on
+	// the same layer.
+	//
+	// This member is required.
+	CbetStepaside NielsenWatermarksCbetStepaside
+
+	// Enter the CBET Source ID (CSID) to use in the watermark
+	//
+	// This member is required.
+	Csid *string
+
+	noSmithyDocumentSerde
+}
+
 // Nielsen Configuration
 type NielsenConfiguration struct {
 
@@ -4165,6 +4200,43 @@ type NielsenConfiguration struct {
 
 	// Enables Nielsen PCM to ID3 tagging
 	NielsenPcmToId3Tagging NielsenPcmToId3TaggingState
+
+	noSmithyDocumentSerde
+}
+
+// Nielsen Naes Ii Nw
+type NielsenNaesIiNw struct {
+
+	// Enter the check digit string for the watermark
+	//
+	// This member is required.
+	CheckDigitString *string
+
+	// Enter the Nielsen Source ID (SID) to include in the watermark
+	//
+	// This member is required.
+	Sid float64
+
+	noSmithyDocumentSerde
+}
+
+// Nielsen Watermarks Settings
+type NielsenWatermarksSettings struct {
+
+	// Complete these fields only if you want to insert watermarks of type Nielsen CBET
+	NielsenCbetSettings *NielsenCBET
+
+	// Choose the distribution types that you want to assign to the watermarks:
+	//
+	// *
+	// PROGRAM_CONTENT
+	//
+	// * FINAL_DISTRIBUTOR
+	NielsenDistributionType NielsenWatermarksDistributionTypes
+
+	// Complete these fields only if you want to insert watermarks of type Nielsen NAES
+	// II (N2) and Nielsen NAES VI (NW).
+	NielsenNaesIiNwSettings *NielsenNaesIiNw
 
 	noSmithyDocumentSerde
 }

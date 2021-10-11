@@ -12,12 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a data source that you use to with an Amazon Kendra index. You specify a
-// name, data source connector type and description for your data source. You also
-// specify configuration information such as document metadata (author, source URI,
-// and so on) and user context information. CreateDataSource is a synchronous
-// operation. The operation returns 200 if the data source was successfully
-// created. Otherwise, an exception is raised.
+// Creates a data source that you want to use with an Amazon Kendra index. You
+// specify a name, data source connector type and description for your data source.
+// You also specify configuration information for the data source connector.
+// CreateDataSource is a synchronous operation. The operation returns 200 if the
+// data source was successfully created. Otherwise, an exception is raised.
 func (c *Client) CreateDataSource(ctx context.Context, params *CreateDataSourceInput, optFns ...func(*Options)) (*CreateDataSourceOutput, error) {
 	if params == nil {
 		params = &CreateDataSourceInput{}
@@ -64,6 +63,13 @@ type CreateDataSourceInput struct {
 
 	// A description for the data source.
 	Description *string
+
+	// The code for a language. This allows you to support a language for all documents
+	// when creating the data source. English is supported by default. For more
+	// information on supported languages, including their codes, see Adding documents
+	// in languages other than English
+	// (https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html).
+	LanguageCode *string
 
 	// The Amazon Resource Name (ARN) of a role with permission to access the data
 	// source. For more information, see IAM Roles for Amazon Kendra

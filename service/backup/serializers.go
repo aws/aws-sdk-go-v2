@@ -710,6 +710,64 @@ func awsRestjson1_serializeOpHttpBindingsDeleteBackupVaultAccessPolicyInput(v *D
 	return nil
 }
 
+type awsRestjson1_serializeOpDeleteBackupVaultLockConfiguration struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteBackupVaultLockConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteBackupVaultLockConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteBackupVaultLockConfigurationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/backup-vaults/{BackupVaultName}/vault-lock")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteBackupVaultLockConfigurationInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteBackupVaultLockConfigurationInput(v *DeleteBackupVaultLockConfigurationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.BackupVaultName == nil || len(*v.BackupVaultName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member BackupVaultName must not be empty")}
+	}
+	if v.BackupVaultName != nil {
+		if err := encoder.SetURI("BackupVaultName").String(*v.BackupVaultName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDeleteBackupVaultNotifications struct {
 }
 
@@ -3273,6 +3331,97 @@ func awsRestjson1_serializeOpDocumentPutBackupVaultAccessPolicyInput(v *PutBacku
 	return nil
 }
 
+type awsRestjson1_serializeOpPutBackupVaultLockConfiguration struct {
+}
+
+func (*awsRestjson1_serializeOpPutBackupVaultLockConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpPutBackupVaultLockConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutBackupVaultLockConfigurationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/backup-vaults/{BackupVaultName}/vault-lock")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsPutBackupVaultLockConfigurationInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentPutBackupVaultLockConfigurationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsPutBackupVaultLockConfigurationInput(v *PutBackupVaultLockConfigurationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.BackupVaultName == nil || len(*v.BackupVaultName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member BackupVaultName must not be empty")}
+	}
+	if v.BackupVaultName != nil {
+		if err := encoder.SetURI("BackupVaultName").String(*v.BackupVaultName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentPutBackupVaultLockConfigurationInput(v *PutBackupVaultLockConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ChangeableForDays != nil {
+		ok := object.Key("ChangeableForDays")
+		ok.Long(*v.ChangeableForDays)
+	}
+
+	if v.MaxRetentionDays != nil {
+		ok := object.Key("MaxRetentionDays")
+		ok.Long(*v.MaxRetentionDays)
+	}
+
+	if v.MinRetentionDays != nil {
+		ok := object.Key("MinRetentionDays")
+		ok.Long(*v.MinRetentionDays)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpPutBackupVaultNotifications struct {
 }
 
@@ -4908,6 +5057,18 @@ func awsRestjson1_serializeDocumentReportSetting(v *types.ReportSetting, value s
 	object := value.Object()
 	defer object.Close()
 
+	if v.FrameworkArns != nil {
+		ok := object.Key("FrameworkArns")
+		if err := awsRestjson1_serializeDocumentStringList(v.FrameworkArns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NumberOfFrameworks != 0 {
+		ok := object.Key("NumberOfFrameworks")
+		ok.Integer(v.NumberOfFrameworks)
+	}
+
 	if v.ReportTemplate != nil {
 		ok := object.Key("ReportTemplate")
 		ok.String(*v.ReportTemplate)
@@ -4945,6 +5106,17 @@ func awsRestjson1_serializeDocumentResourceTypeOptInPreference(v map[string]bool
 	for key := range v {
 		om := object.Key(key)
 		om.Boolean(v[key])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentStringList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }

@@ -6147,6 +6147,23 @@ type PartnerWatermarking struct {
 	noSmithyDocumentSerde
 }
 
+// A policy configures behavior that you allow or disallow for your account. For
+// information about MediaConvert policies, see the user guide at
+// http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+type Policy struct {
+
+	// Allow or disallow jobs that specify HTTP inputs.
+	HttpInputs InputPolicy
+
+	// Allow or disallow jobs that specify HTTPS inputs.
+	HttpsInputs InputPolicy
+
+	// Allow or disallow jobs that specify Amazon S3 inputs.
+	S3Inputs InputPolicy
+
+	noSmithyDocumentSerde
+}
+
 // A preset is a collection of preconfigured media conversion settings that you
 // want MediaConvert to apply to the output during the conversion process.
 type Preset struct {

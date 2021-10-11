@@ -54,6 +54,9 @@ type PutEventTypeInput struct {
 	// The description of the event type.
 	Description *string
 
+	// Specifies if ingenstion is enabled or disabled.
+	EventIngestion types.EventIngestion
+
 	// The event type labels.
 	Labels []string
 

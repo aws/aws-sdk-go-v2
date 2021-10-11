@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associate your own domain name with the AWS App Runner subdomain URL of your App
+// Associate your own domain name with the App Runner subdomain URL of your App
 // Runner service. After you call AssociateCustomDomain and receive a successful
 // response, use the information in the CustomDomain record that's returned to add
 // CNAME records to your Domain Name System (DNS). For each mapped domain name, add

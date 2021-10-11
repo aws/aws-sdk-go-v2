@@ -3772,8 +3772,9 @@ type TrainingInputMode string
 
 // Enum values for TrainingInputMode
 const (
-	TrainingInputModePipe TrainingInputMode = "Pipe"
-	TrainingInputModeFile TrainingInputMode = "File"
+	TrainingInputModePipe     TrainingInputMode = "Pipe"
+	TrainingInputModeFile     TrainingInputMode = "File"
+	TrainingInputModeFastfile TrainingInputMode = "FastFile"
 )
 
 // Values returns all known values for TrainingInputMode. Note that this can be
@@ -3783,6 +3784,7 @@ func (TrainingInputMode) Values() []TrainingInputMode {
 	return []TrainingInputMode{
 		"Pipe",
 		"File",
+		"FastFile",
 	}
 }
 

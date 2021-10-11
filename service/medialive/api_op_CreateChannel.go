@@ -72,7 +72,7 @@ type CreateChannelInput struct {
 	// A collection of key-value pairs.
 	Tags map[string]string
 
-	// Settings for VPC output
+	// Settings for the VPC outputs
 	Vpc *types.VpcOutputSettings
 
 	noSmithyDocumentSerde

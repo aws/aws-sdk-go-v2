@@ -64,7 +64,9 @@ type CalculateRouteInput struct {
 	// If you specify a departure that's
 	// not located on a road, Amazon Location moves the position to the nearest road
 	// (https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#snap-to-nearby-road).
-	// Valid Values: [-180 to 180,-90 to 90]
+	// If Esri is the provider for your route calculator, specifying a route that is
+	// longer than 400 km returns a 400 RoutesValidationException error. Valid Values:
+	// [-180 to 180,-90 to 90]
 	//
 	// This member is required.
 	DeparturePosition []float64
@@ -140,8 +142,10 @@ type CalculateRouteInput struct {
 	// you specify a waypoint position that's not located on a road, Amazon Location
 	// moves the position to the nearest road
 	// (https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#snap-to-nearby-road).
-	// Specifying more than 23 waypoints returns a 400 ValidationException error. Valid
-	// Values: [-180 to 180,-90 to 90]
+	// Specifying more than 23 waypoints returns a 400 ValidationException error. If
+	// Esri is the provider for your route calculator, specifying a route that is
+	// longer than 400 km returns a 400 RoutesValidationException error. Valid Values:
+	// [-180 to 180,-90 to 90]
 	WaypointPositions [][]float64
 
 	noSmithyDocumentSerde

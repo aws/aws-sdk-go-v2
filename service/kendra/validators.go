@@ -2477,6 +2477,21 @@ func validateUserContext(v *types.UserContext) error {
 	}
 }
 
+func validateUserGroupResolutionConfiguration(v *types.UserGroupResolutionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UserGroupResolutionConfiguration"}
+	if len(v.UserGroupResolutionMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("UserGroupResolutionMode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateUserTokenConfiguration(v *types.UserTokenConfiguration) error {
 	if v == nil {
 		return nil
@@ -2730,6 +2745,11 @@ func validateOpCreateIndexInput(v *CreateIndexInput) error {
 	if v.UserTokenConfigurations != nil {
 		if err := validateUserTokenConfigurationList(v.UserTokenConfigurations); err != nil {
 			invalidParams.AddNested("UserTokenConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.UserGroupResolutionConfiguration != nil {
+		if err := validateUserGroupResolutionConfiguration(v.UserGroupResolutionConfiguration); err != nil {
+			invalidParams.AddNested("UserGroupResolutionConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3370,6 +3390,11 @@ func validateOpUpdateIndexInput(v *UpdateIndexInput) error {
 	if v.UserTokenConfigurations != nil {
 		if err := validateUserTokenConfigurationList(v.UserTokenConfigurations); err != nil {
 			invalidParams.AddNested("UserTokenConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.UserGroupResolutionConfiguration != nil {
+		if err := validateUserGroupResolutionConfiguration(v.UserGroupResolutionConfiguration); err != nil {
+			invalidParams.AddNested("UserGroupResolutionConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -106,7 +106,7 @@ type QueryInput struct {
 	// that Amazon Kendra determines for the result.
 	SortingConfiguration *types.SortingConfiguration
 
-	// The user context token.
+	// The user context token or user and group information.
 	UserContext *types.UserContext
 
 	// Provides an identifier for a specific user. The VisitorId should be a unique

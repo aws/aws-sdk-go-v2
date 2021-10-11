@@ -1304,6 +1304,12 @@
                 },
                 "KmsKeyId": {
                     "target": "com.amazonaws.fsx#KmsKeyId"
+                },
+                "FileSystemTypeVersion": {
+                    "target": "com.amazonaws.fsx#FileSystemTypeVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the version for the Amazon FSx for Lustre file system you're creating from a backup.\n            Valid values are <code>2.10</code> and <code>2.12</code>.</p>\n        <p>You don't need to specify <code>FileSystemTypeVersion</code> because it will\n            be applied using the backup's <code>FileSystemTypeVersion</code> setting.\n            If you choose to specify <code>FileSystemTypeVersion</code> when creating from backup, the\n            value must match the backup's <code>FileSystemTypeVersion</code> setting.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1518,6 +1524,12 @@
                 },
                 "OntapConfiguration": {
                     "target": "com.amazonaws.fsx#CreateFileSystemOntapConfiguration"
+                },
+                "FileSystemTypeVersion": {
+                    "target": "com.amazonaws.fsx#FileSystemTypeVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the version of the Amazon FSx for Lustre file system you're creating.\n            Valid values are <code>2.10</code> and <code>2.12</code>.</p>\n        <ul>\n            <li>\n               <p>Set the value to <code>2.10</code> to create a Lustre 2.10\n                file system.</p>\n            </li>\n            <li>\n               <p>Set the value to <code>2.12</code> to create a Lustre 2.12\n                file system.</p>\n            </li>\n         </ul>\n        <p>Default value is <code>2.10</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3488,6 +3500,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration for this FSx for NetApp ONTAP file system.</p>"
                     }
+                },
+                "FileSystemTypeVersion": {
+                    "target": "com.amazonaws.fsx#FileSystemTypeVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of your Amazon FSx for Lustre file system, either\n            <code>2.10</code> or <code>2.12</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3670,6 +3688,16 @@
                         "name": "ONTAP"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.fsx#FileSystemTypeVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                },
+                "smithy.api#pattern": "^[0-9](\\.[0-9]*)*$"
             }
         },
         "com.amazonaws.fsx#FileSystems": {
@@ -4700,7 +4728,7 @@
                 "DnsIps": {
                     "target": "com.amazonaws.fsx#DnsIps",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of up to two IP addresses of DNS servers or domain controllers in the\n            self-managed AD directory.</p>"
+                        "smithy.api#documentation": "<p>A list of up to three IP addresses of DNS servers or domain controllers in the\n            self-managed AD directory.</p>"
                     }
                 }
             },
@@ -4747,13 +4775,13 @@
                 "DnsIps": {
                     "target": "com.amazonaws.fsx#DnsIps",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of up to two IP addresses of DNS servers or domain controllers in the\n            self-managed AD directory. </p>",
+                        "smithy.api#documentation": "<p>A list of up to three IP addresses of DNS servers or domain controllers in the\n            self-managed AD directory. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration that Amazon FSx uses to join a Amazon FSx for Windows File Server file system or an ONTAP storage virtual machine (SVM) to\n            a self-managed (including on-premises) Microsoft Active Directory (AD)\n            directory. For more information, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-managed-AD.html\">\n                Using Amazon FSx with your self-managed Microsoft Active Directory</a> or \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-svms.html\">Managing SVMs</a>.</p>"
+                "smithy.api#documentation": "<p>The configuration that Amazon FSx uses to join a FSx for Windows File Server file system or an ONTAP storage virtual machine (SVM) to\n            a self-managed (including on-premises) Microsoft Active Directory (AD)\n            directory. For more information, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-managed-AD.html\">\n                Using Amazon FSx with your self-managed Microsoft Active Directory</a> or \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-svms.html\">Managing SVMs</a>.</p>"
             }
         },
         "com.amazonaws.fsx#SelfManagedActiveDirectoryConfigurationUpdates": {
@@ -4774,7 +4802,7 @@
                 "DnsIps": {
                     "target": "com.amazonaws.fsx#DnsIps",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of up to two IP addresses of DNS servers or domain controllers in the\n            self-managed AD directory.</p>"
+                        "smithy.api#documentation": "<p>A list of up to three IP addresses of DNS servers or domain controllers in the\n            self-managed AD directory.</p>"
                     }
                 }
             },

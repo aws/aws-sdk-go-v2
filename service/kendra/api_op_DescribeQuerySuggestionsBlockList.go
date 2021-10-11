@@ -46,7 +46,7 @@ type DescribeQuerySuggestionsBlockListInput struct {
 
 type DescribeQuerySuggestionsBlockListOutput struct {
 
-	// Shows the date-time a block list for query suggestions was last created.
+	// Shows the date-time a block list for query suggestions was created.
 	CreatedAt *time.Time
 
 	// Shows the description for the block list.

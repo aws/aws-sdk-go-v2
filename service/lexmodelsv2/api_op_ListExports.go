@@ -47,7 +47,7 @@ type ListExportsInput struct {
 	// returned.
 	MaxResults *int32
 
-	// If the response from the ListExports operation contans more results that
+	// If the response from the ListExports operation contains more results that
 	// specified in the maxResults parameter, a token is returned in the response. Use
 	// that token in the nextToken parameter to return the next page of results.
 	NextToken *string

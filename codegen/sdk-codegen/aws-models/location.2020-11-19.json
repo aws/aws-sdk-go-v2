@@ -771,7 +771,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Uploads position update data for one or more devices to a tracker resource. Amazon Location\n            uses the data when reporting the last known device position and position history.</p>\n         <note>\n           <p>Only one position update is stored per sample time. Location data is sampled at a\n                fixed rate of one position per 30-second interval and retained for 30 days before\n                it's deleted.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Uploads position update data for one or more devices to a tracker resource. Amazon Location\n           uses the data when it reports the last known device position and position history. Amazon Location retains location data for 30 \n           days.</p>\n         <note>\n           <p>Position updates are handled based on the <code>PositionFiltering</code> property of the tracker. \n               When <code>PositionFiltering</code> is set to <code>TimeBased</code>, updates are evaluated against linked geofence collections, \n               and location data is stored at a maximum of one position per 30 second interval. If your update frequency is more often than \n               every 30 seconds, only one update per 30 seconds is stored for each unique device ID.\n               When <code>PositionFiltering</code> is set to <code>DistanceBased</code> filtering, location data is stored and evaluated against linked geofence \n               collections only if the device has moved more than 30 m (98.4 ft).</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "tracking."
                 },
@@ -941,7 +941,7 @@
                 "DeparturePosition": {
                     "target": "com.amazonaws.location#Position",
                     "traits": {
-                        "smithy.api#documentation": "<p>The start position for the route. Defined in <a href=\"https://earth-info.nga.mil/GandG/wgs84/index.html\">WGS 84</a> format:\n                <code>[longitude, latitude]</code>.</p>\n        <ul>\n            <li>\n                <p>For example, <code>[-123.115, 49.285]</code>\n               </p>\n            </li>\n         </ul>\n        <note>\n            <p>If you specify a departure that's not located on a road, Amazon Location <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#snap-to-nearby-road\">moves the\n                position to the nearest road</a>.</p>\n        </note>\n        <p>Valid Values: <code>[-180 to 180,-90 to 90]</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The start position for the route. Defined in <a href=\"https://earth-info.nga.mil/GandG/wgs84/index.html\">WGS 84</a> format:\n                <code>[longitude, latitude]</code>.</p>\n        <ul>\n            <li>\n                <p>For example, <code>[-123.115, 49.285]</code>\n               </p>\n            </li>\n         </ul>\n        <note>\n            <p>If you specify a departure that's not located on a road, Amazon Location <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#snap-to-nearby-road\">moves the\n                position to the nearest road</a>. If Esri is the provider for your route calculator, \n                specifying a route that is longer than 400 km returns a <code>400 RoutesValidationException</code> error.</p>\n        </note>\n        <p>Valid Values: <code>[-180 to 180,-90 to 90]</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -955,7 +955,7 @@
                 "WaypointPositions": {
                     "target": "com.amazonaws.location#WaypointPositionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies an ordered list of up to 23 intermediate positions to include along a route\n            between the departure position and destination position. </p>\n        <ul>\n            <li>\n                <p>For example, from the <code>DeparturePosition</code>\n                    <code>[-123.115, 49.285]</code>, the route follows the order that the waypoint\n                    positions are given <code>[[-122.757, 49.0021],[-122.349, 47.620]]</code>\n               </p>\n            </li>\n         </ul>\n        <note>\n            <p>If you specify a waypoint position that's not located on a road, Amazon Location <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#snap-to-nearby-road\">moves the position to the nearest road</a>. </p>\n            <p>Specifying more than 23 waypoints returns a <code>400 ValidationException</code>\n                error.</p>\n        </note>\n        <p>Valid Values: <code>[-180 to 180,-90 to 90]</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Specifies an ordered list of up to 23 intermediate positions to include along a route\n            between the departure position and destination position. </p>\n        <ul>\n            <li>\n                <p>For example, from the <code>DeparturePosition</code>\n                    <code>[-123.115, 49.285]</code>, the route follows the order that the waypoint\n                    positions are given <code>[[-122.757, 49.0021],[-122.349, 47.620]]</code>\n               </p>\n            </li>\n         </ul>\n        <note>\n            <p>If you specify a waypoint position that's not located on a road, Amazon Location <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#snap-to-nearby-road\">moves the position to the nearest road</a>. </p>\n            <p>Specifying more than 23 waypoints returns a <code>400 ValidationException</code>\n                error.</p>\n            <p>If Esri is the provider for your route calculator, specifying a \n                route that is longer than 400 km returns a <code>400 RoutesValidationException</code> error.</p>\n        </note>\n        <p>Valid Values: <code>[-180 to 180,-90 to 90]</code>\n         </p>",
                         "smithy.api#length": {
                             "max": 23
                         }
@@ -1033,7 +1033,7 @@
                 "RouteBBox": {
                     "target": "com.amazonaws.location#BoundingBox",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a geographical box surrounding a route. Used to zoom into a route when\n            displaying it in a map. For example, <code>[min x, min y, max x, max y]</code>.</p>\n        <p>The first 2 <code>bbox</code> parameters describe the lower southwest corner: </p>\n        <ul>\n            <li>\n                <p>The first <code>bbox</code> position is the X coordinate or longitude of the\n                    lower southwest corner. </p>\n            </li>\n            <li>\n                <p>The second <code>bbox</code> position is the Y coordinate or latitude of the\n                    lower southwest corner. </p>\n            </li>\n         </ul>\n        <p>The next 2 <code>bbox</code> parameters describe the upper northeast corner: </p>\n        <ul>\n            <li>\n                <p>The third <code>bbox</code> position is the X coordinate, or longitude of the\n                    upper northeast corner. </p>\n            </li>\n            <li>\n                <p>The fourth <code>bbox</code> position is the Y coordinate, or longitude of the\n                    upper northeast corner. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies a geographical box surrounding a route. Used to zoom into a route when\n            displaying it in a map. For example, <code>[min x, min y, max x, max y]</code>.</p>\n        <p>The first 2 <code>bbox</code> parameters describe the lower southwest corner: </p>\n        <ul>\n            <li>\n                <p>The first <code>bbox</code> position is the X coordinate or longitude of the\n                    lower southwest corner. </p>\n            </li>\n            <li>\n                <p>The second <code>bbox</code> position is the Y coordinate or latitude of the\n                    lower southwest corner. </p>\n            </li>\n         </ul>\n        <p>The next 2 <code>bbox</code> parameters describe the upper northeast corner: </p>\n        <ul>\n            <li>\n                <p>The third <code>bbox</code> position is the X coordinate, or longitude of the\n                    upper northeast corner. </p>\n            </li>\n            <li>\n                <p>The fourth <code>bbox</code> position is the Y coordinate, or latitude of the\n                    upper northeast corner. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1047,7 +1047,7 @@
                 "Distance": {
                     "target": "smithy.api#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total distance covered by the route. The sum of the distance travelled between\n            every stop on the route.</p>\n        <note>\n            <p>The route <code>distance</code> can't be greater than 250 km. If the route exceeds\n                250 km, the response returns a <code>400 RoutesValidationException</code>\n                error.</p>\n        </note>",
+                        "smithy.api#documentation": "<p>The total distance covered by the route. The sum of the distance travelled between\n            every stop on the route.</p>\n        <note>\n            <p>If Esri is the data source for the route calculator, the route distance can’t \n                be greater than 400 km. If the route exceeds 400 km, the response is a \n                <code>400 RoutesValidationException</code> error.</p>\n        </note>",
                         "smithy.api#range": {
                             "min": 0
                         },
@@ -1308,7 +1308,7 @@
                 "PricingPlan": {
                     "target": "com.amazonaws.location#PricingPlan",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the pricing plan for your map resource.</p>\n        <p>For additional details and restrictions on each pricing plan option, see the <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing\n                page</a>.</p>",
+                        "smithy.api#documentation": "<p>Specifies the pricing plan for your map resource.</p>\n        <p>For additional details and restrictions on each pricing plan option, see <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1403,14 +1403,14 @@
                 "DataSource": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the data provider of geospatial data.</p>\n         <note>\n            <p>This field is case-sensitive. Enter the valid values as shown. For example, entering\n               <code>HERE</code> returns an error.</p>\n         </note>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Esri</code> – For additional information about <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/esri.html\">Esri</a>'s coverage in your\n               region of interest, see <a href=\"https://developers.arcgis.com/rest/geocode/api-reference/geocode-coverage.htm\">Esri details on geocoding coverage</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Here</code> – For additional information about <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/HERE.html\">HERE Technologies</a>'s\n               coverage in your region of interest, see <a href=\"https://developer.here.com/documentation/geocoder/dev_guide/topics/coverage-geocoder.html\">HERE details on goecoding coverage</a>.</p>\n               <important>\n                  <p>Place index resources using HERE Technologies as a data provider can't <a href=\"https://docs.aws.amazon.com/location-places/latest/APIReference/API_DataSourceConfiguration.html\">store results</a> for locations in Japan. For more information, see the\n                     <a href=\"https://aws.amazon.com/service-terms/\">AWS Service Terms</a>\n                  for Amazon Location Service.</p>\n               </important>\n            </li>\n         </ul>\n         <p>For additional information , see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html\">Data providers</a>\n         on the <i>Amazon Location Service Developer Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>Specifies the data provider of geospatial data.</p>\n         <note>\n            <p>This field is case-sensitive. Enter the valid values as shown. For example, entering\n               <code>HERE</code> returns an error.</p>\n         </note>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Esri</code> – For additional information about <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/esri.html\">Esri</a>'s coverage in your\n               region of interest, see <a href=\"https://developers.arcgis.com/rest/geocode/api-reference/geocode-coverage.htm\">Esri details on geocoding coverage</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Here</code> – For additional information about <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/HERE.html\">HERE Technologies</a>'\n               coverage in your region of interest, see <a href=\"https://developer.here.com/documentation/geocoder/dev_guide/topics/coverage-geocoder.html\">HERE details on goecoding coverage</a>.</p>\n               <important>\n                  <p>Place index resources using HERE Technologies as a data provider can't <a href=\"https://docs.aws.amazon.com/location-places/latest/APIReference/API_DataSourceConfiguration.html\">store results</a> for locations in Japan. For more information, see the\n                     <a href=\"https://aws.amazon.com/service-terms/\">AWS Service Terms</a>\n                  for Amazon Location Service.</p>\n               </important>\n            </li>\n         </ul>\n         <p>For additional information , see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html\">Data providers</a>\n         on the <i>Amazon Location Service Developer Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "PricingPlan": {
                     "target": "com.amazonaws.location#PricingPlan",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the pricing plan for your place index resource.</p>\n         <p>For additional details and restrictions on each pricing plan option, see the <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing\n         page</a>.</p>",
+                        "smithy.api#documentation": "<p>Specifies the pricing plan for your place index resource.</p>\n         <p>For additional details and restrictions on each pricing plan option, see <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1511,7 +1511,7 @@
                 "DataSource": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the data provider of traffic and road network data.</p>\n        <note>\n            <p>This field is case-sensitive. Enter the valid values as shown. For example,\n                entering <code>HERE</code> returns an error.</p>\n        </note>\n        <p>Valid values include:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>Esri</code> – For additional information about <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/esri.html\">Esri</a>'s coverage in your region of interest, see <a href=\"https://doc.arcgis.com/en/arcgis-online/reference/network-coverage.htm\">Esri details on street networks and traffic coverage</a>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Here</code> – For additional information about <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/HERE.html\">HERE\n                        Technologies</a>'s coverage in your region of interest, see <a href=\"https://developer.here.com/documentation/routing-api/dev_guide/topics/coverage/car-routing.html\">HERE car routing coverage</a> and <a href=\"https://developer.here.com/documentation/routing-api/dev_guide/topics/coverage/truck-routing.html\">HERE truck routing coverage</a>.</p>\n            </li>\n         </ul>\n        <p>For additional information , see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html\">Data\n                providers</a> on the <i>Amazon Location Service Developer Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>Specifies the data provider of traffic and road network data.</p>\n        <note>\n            <p>This field is case-sensitive. Enter the valid values as shown. For example,\n                entering <code>HERE</code> returns an error. Route calculators that use Esri as a data source \n               only calculate routes that are shorter than 400 km.</p>\n        </note>\n        <p>Valid values include:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>Esri</code> – For additional information about <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/esri.html\">Esri</a>'s coverage in your region of interest, see <a href=\"https://doc.arcgis.com/en/arcgis-online/reference/network-coverage.htm\">Esri details on street networks and traffic coverage</a>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Here</code> – For additional information about <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/HERE.html\">HERE\n                        Technologies</a>' coverage in your region of interest, see <a href=\"https://developer.here.com/documentation/routing-api/dev_guide/topics/coverage/car-routing.html\">HERE car routing coverage</a> and <a href=\"https://developer.here.com/documentation/routing-api/dev_guide/topics/coverage/truck-routing.html\">HERE truck routing coverage</a>.</p>\n            </li>\n         </ul>\n        <p>For additional information , see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html\">Data\n                providers</a> on the <i>Amazon Location Service Developer Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1613,7 +1613,7 @@
                 "PricingPlan": {
                     "target": "com.amazonaws.location#PricingPlan",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the pricing plan for the tracker resource.</p>\n         <p>For additional details and restrictions on each pricing plan option, see the <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing\n           page</a>.</p>",
+                        "smithy.api#documentation": "<p>Specifies the pricing plan for the tracker resource.</p>\n         <p>For additional details and restrictions on each pricing plan option, see <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1626,7 +1626,7 @@
                 "PricingPlanDataSource": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the data provider for the tracker resource.</p>\n         <ul>\n            <li>\n               <p>Required value for the following pricing plans: <code>MobileAssetTracking\n               </code>| <code>MobileAssetManagement</code>\n               </p>\n           </li>\n         </ul>\n         <p>For more information about <a href=\"https://aws.amazon.com/location/data-providers/\">Data Providers</a>, and <a href=\"https://aws.amazon.com/location/pricing/\">Pricing plans</a>, see the Amazon Location\n           Service product page.</p>\n\t        <note>\n\t           <p>Amazon Location Service only uses <code>PricingPlanDataSource</code> to calculate billing for your tracker resource. Your data will not be shared with the data provider, and will remain in your AWS account or Region unless you move it.</p>\n\t        </note>\n        <p>Valid Values: <code>Esri</code> | <code>Here</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Specifies the data provider for the tracker resource.</p>\n         <ul>\n            <li>\n               <p>Required value for the following pricing plans: <code>MobileAssetTracking\n               </code>| <code>MobileAssetManagement</code>\n               </p>\n           </li>\n         </ul>\n         <p>For more information about <a href=\"https://aws.amazon.com/location/data-providers/\">Data Providers</a>, and <a href=\"https://aws.amazon.com/location/pricing/\">Pricing plans</a>, see the Amazon Location\n           Service product page.</p>\n\t        <note>\n\t           <p>Amazon Location Service only uses <code>PricingPlanDataSource</code> to calculate billing for your tracker resource. Your data will not be shared with the data provider, and will remain in your AWS account or Region unless you move it.</p>\n\t        </note>\n        <p>Valid values: <code>Esri</code> | <code>Here</code>\n         </p>"
                     }
                 },
                 "Description": {
@@ -1639,6 +1639,12 @@
                     "target": "com.amazonaws.location#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>Applies one or more tags to the tracker resource. A tag is a key-value pair helps\n            manage, identify, search, and filter your resources by labelling them.</p>\n        <p>Format: <code>\"key\" : \"value\"</code>\n         </p>\n        <p>Restrictions:</p>\n        <ul>\n            <li>\n                <p>Maximum 50 tags per resource</p>\n            </li>\n            <li>\n                <p>Each resource tag must be unique with a maximum of one value.</p>\n            </li>\n            <li>\n                <p>Maximum key length: 128 Unicode characters in UTF-8</p>\n            </li>\n            <li>\n                <p>Maximum value length: 256 Unicode characters in UTF-8</p>\n            </li>\n            <li>\n                <p>Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters:\n                    + - = . _ : / @. </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "PositionFiltering": {
+                    "target": "com.amazonaws.location#PositionFiltering",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the position filtering for the tracker resource.</p>\n        <p>Valid values:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>TimeBased</code> - Location updates are evaluated against linked geofence collections, \n                    but not every location update is stored. If your update frequency is more often than 30 seconds, \n                    only one update per 30 seconds is stored for each unique device ID.\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>DistanceBased</code> - If the device has moved less than 30 m (98.4 ft), location updates are \n                    ignored. Location updates within this distance are neither evaluated against linked geofence collections, nor stored. \n                    This helps control costs by reducing the number of geofence evaluations and device positions to retrieve. \n                    Distance-based filtering can also reduce the jitter effect when displaying device trajectory on a map.\n                </p>\n            </li>\n         </ul>\n        <p>This field is optional. If not specified, the default value is <code>TimeBased</code>.</p>"
                     }
                 }
             }
@@ -2147,7 +2153,7 @@
                 "PricingPlan": {
                     "target": "com.amazonaws.location#PricingPlan",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pricing plan selected for the specified map resource.</p>\n\n        <p>For additional details and restrictions on each pricing plan option, see the <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing\n                page</a>.</p>",
+                        "smithy.api#documentation": "<p>The pricing plan selected for the specified map resource.</p>\n\n        <p>For additional details and restrictions on each pricing plan option, see <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2266,7 +2272,7 @@
                 "PricingPlan": {
                     "target": "com.amazonaws.location#PricingPlan",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pricing plan selected for the specified place index resource.</p>\n         <p>For additional details and restrictions on each pricing plan option, see the <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing\n            page</a>.</p>",
+                        "smithy.api#documentation": "<p>The pricing plan selected for the specified place index resource.</p>\n         <p>For additional details and restrictions on each pricing plan option, see <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2294,7 +2300,7 @@
                 "DataSource": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data provider of geospatial data. Indicates one of the available providers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Esri</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Here</code>\n               </p>\n            </li>\n         </ul>\n         <p>For additional details on data providers, see the <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html\">Amazon Location Service data providers\n         page</a>.</p>",
+                        "smithy.api#documentation": "<p>The data provider of geospatial data. Indicates one of the available providers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Esri</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Here</code>\n               </p>\n            </li>\n         </ul>\n         <p>For additional details on data providers, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html\">Amazon Location Service data providers</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2504,7 +2510,7 @@
                 "PricingPlan": {
                     "target": "com.amazonaws.location#PricingPlan",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pricing plan selected for the specified tracker resource.</p>\n        <p>For additional details and restrictions on each pricing plan option, see the <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing\n                page</a>.</p>",
+                        "smithy.api#documentation": "<p>The pricing plan selected for the specified tracker resource.</p>\n        <p>For additional details and restrictions on each pricing plan option, see <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2538,6 +2544,12 @@
                     "target": "com.amazonaws.location#KmsKeyId",
                     "traits": {
                         "smithy.api#documentation": "<p>A key identifier for an <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html\">AWS KMS customer managed key</a> assigned to the Amazon Location resource.</p>"
+                    }
+                },
+                "PositionFiltering": {
+                    "target": "com.amazonaws.location#PositionFiltering",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The position filtering method of the tracker resource.</p>"
                     }
                 }
             }
@@ -3142,7 +3154,7 @@
                 "FontStack": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A comma-separated list of fonts to load glyphs from in order of preference. For\n            example, <code>Noto Sans Regular, Arial Unicode</code>.</p>\n        <p>Valid fonts for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/esri.html\">Esri</a> styles: </p>\n        <ul>\n            <li>\n                <p>VectorEsriDarkGrayCanvas – <code>Ubuntu Medium Italic</code> | <code>Ubuntu\n                        Medium</code> | <code>Ubuntu Italic</code> | <code>Ubuntu Regular</code> |\n                        <code>Ubuntu Bold</code>\n               </p>\n            </li>\n            <li>\n                <p>VectorEsriLightGrayCanvas – <code>Ubuntu Italic</code> | <code>Ubuntu\n                        Regular</code> | <code>Ubuntu Light</code> | <code>Ubuntu Bold</code>\n               </p>\n            </li>\n            <li>\n                <p>VectorEsriTopographic – <code>Noto Sans Italic</code> | <code>Noto Sans\n                        Regular</code> | <code>Noto Sans Bold</code> | <code>Noto Serif\n                        Regular</code> | <code>Roboto Condensed Light Italic</code>\n               </p>\n            </li>\n            <li>\n                <p>VectorEsriStreets – <code>Arial Regular</code> | <code>Arial Italic</code> |\n                        <code>Arial Bold</code>\n               </p>\n            </li>\n            <li>\n                <p>VectorEsriNavigation – <code>Arial Regular</code> | <code>Arial Italic</code>\n                    | <code>Arial Bold</code>\n               </p>\n            </li>\n         </ul>\n        <p>Valid fonts for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/HERE.html\">HERE Technologies</a> styles: </p>\n        <ul>\n            <li>\n                <p>\n                  <code>VectorHereBerlin</code> – <code>Fira GO Regular</code> | <code>Fira GO\n                        Bold</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>A comma-separated list of fonts to load glyphs from in order of preference. For\n            example, <code>Noto Sans Regular, Arial Unicode</code>.</p>\n        <p>Valid fonts stacks for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/esri.html\">Esri</a> styles: </p>\n        <ul>\n            <li>\n                <p>VectorEsriDarkGrayCanvas – <code>Ubuntu Medium Italic</code> | <code>Ubuntu\n                        Medium</code> | <code>Ubuntu Italic</code> | <code>Ubuntu Regular</code> |\n                        <code>Ubuntu Bold</code>\n               </p>\n            </li>\n            <li>\n                <p>VectorEsriLightGrayCanvas – <code>Ubuntu Italic</code> | <code>Ubuntu\n                        Regular</code> | <code>Ubuntu Light</code> | <code>Ubuntu Bold</code>\n               </p>\n            </li>\n            <li>\n                <p>VectorEsriTopographic – <code>Noto Sans Italic</code> | <code>Noto Sans\n                        Regular</code> | <code>Noto Sans Bold</code> | <code>Noto Serif\n                        Regular</code> | <code>Roboto Condensed Light Italic</code>\n               </p>\n            </li>\n            <li>\n                <p>VectorEsriStreets – <code>Arial Regular</code> | <code>Arial Italic</code> |\n                        <code>Arial Bold</code>\n               </p>\n            </li>\n            <li>\n                <p>VectorEsriNavigation – <code>Arial Regular</code> | <code>Arial Italic</code>\n                    | <code>Arial Bold</code>\n               </p>\n            </li>\n         </ul>\n        <p>Valid font stacks for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/HERE.html\">HERE Technologies</a> styles: </p>\n        <ul>\n            <li>\n                <p>VectorHereBerlin – <code>Fira GO Regular</code> | <code>Fira GO\n                        Bold</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4097,7 +4109,7 @@
                 "PricingPlan": {
                     "target": "com.amazonaws.location#PricingPlan",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pricing plan for the specified map resource.</p>\n        <p>For additional details and restrictions on each pricing plan option, see the <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing\n            page</a>.</p>",
+                        "smithy.api#documentation": "<p>The pricing plan for the specified map resource.</p>\n        <p>For additional details and restrictions on each pricing plan option, see <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4226,14 +4238,14 @@
                 "DataSource": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data provider of geospatial data. Indicates one of the available providers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Esri</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Here</code>\n               </p>\n            </li>\n         </ul>\n         <p>For additional details on data providers, see the <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html\">Amazon Location Service data providers page</a>.</p>",
+                        "smithy.api#documentation": "<p>The data provider of geospatial data. Indicates one of the available providers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Esri</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Here</code>\n               </p>\n            </li>\n         </ul>\n         <p>For additional details on data providers, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html\">Amazon Location Service data providers</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "PricingPlan": {
                     "target": "com.amazonaws.location#PricingPlan",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pricing plan for the specified place index resource.</p>\n         <p>For additional details and restrictions on each pricing plan option, see the <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing\n         page</a>.</p>",
+                        "smithy.api#documentation": "<p>The pricing plan for the specified place index resource.</p>\n         <p>For additional details and restrictions on each pricing plan option, see <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4651,7 +4663,7 @@
                 "PricingPlan": {
                     "target": "com.amazonaws.location#PricingPlan",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pricing plan for the specified tracker resource.</p>\n        <p>For additional details and restrictions on each pricing plan option, see the <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing\n            page</a>.</p>",
+                        "smithy.api#documentation": "<p>The pricing plan for the specified tracker resource.</p>\n        <p>For additional details and restrictions on each pricing plan option, see <a href=\"https://aws.amazon.com/location/pricing/\">Amazon Location Service pricing</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4731,7 +4743,7 @@
                 "Style": {
                     "target": "com.amazonaws.location#MapStyle",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the map style selected from an available data provider. For additional\n            information on each map style and to preview each map style, see <a href=\"location/latest/developerguide/esri.html#esri-map-styles\">Esri map\n                styles</a> and <a href=\"location/latest/developerguide/HERE.html#HERE-map-styles\">HERE map\n                styles</a>.</p>\n        <p>Valid <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/esri.html\">Esri</a> styles: </p>\n        <ul>\n            <li>\n                <p>\n                  <code>VectorEsriDarkGrayCanvas</code> – The Esri Dark Gray Canvas map style. A\n                    vector basemap with a dark gray, neutral background with minimal colors, labels,\n                    and features that's designed to draw attention to your thematic content. </p>\n            </li>\n            <li>\n                <p>\n                  <code>RasterEsriImagery</code> – The Esri Imagery map style. A raster basemap\n                    that provides one meter or better satellite and aerial imagery in many parts of\n                    the world and lower resolution satellite imagery worldwide. </p>\n            </li>\n            <li>\n                <p>\n                  <code>VectorEsriLightGrayCanvas</code> – The Esri Light Gray Canvas map style,\n                    which provides a detailed vector basemap with a light gray, neutral background\n                    style with minimal colors, labels, and features that's designed to draw\n                    attention to your thematic content. </p>\n            </li>\n            <li>\n                <p>\n                  <code>VectorEsriTopographic</code> – The Esri Light map style, which provides\n                    a detailed vector basemap with a classic Esri map style.</p>\n            </li>\n            <li>\n                <p>\n                  <code>VectorEsriStreets</code> – The Esri World Streets map style, which\n                    provides a detailed vector basemap for the world symbolized with a classic Esri\n                    street map style. The vector tile layer is similar in content and style to the\n                    World Street Map raster map.</p>\n            </li>\n            <li>\n                <p>\n                  <code>VectorEsriNavigation</code> – The Esri World Navigation map style, which\n                    provides a detailed basemap for the world symbolized with a custom navigation\n                    map style that's designed for use during the day in mobile devices.</p>\n            </li>\n         </ul>\n        <p>Valid <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/HERE.html\">HERE\n                Technologies</a> styles: </p>\n        <ul>\n            <li>\n                <p>\n                  <code>VectorHereBerlin</code> – The HERE Berlin map style is a high contrast\n                    detailed base map of the world that blends 3D and 2D rendering.</p>\n                <note>\n                    <p>When using HERE as your data provider, and selecting the Style\n                            <code>VectorHereBerlin</code>, you may not use HERE Technologies maps\n                        for Asset Management. See the <a href=\"https://aws.amazon.com/service-terms/\">AWS Service Terms</a>\n                        for Amazon Location Service.</p>\n                </note>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies the map style selected from an available data provider.</p>\n        <p>Valid <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/esri.html\">Esri map styles</a>:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>VectorEsriDarkGrayCanvas</code> – The Esri Dark Gray Canvas map style. A\n                    vector basemap with a dark gray, neutral background with minimal colors, labels,\n                    and features that's designed to draw attention to your thematic content. </p>\n            </li>\n            <li>\n                <p>\n                  <code>RasterEsriImagery</code> – The Esri Imagery map style. A raster basemap\n                    that provides one meter or better satellite and aerial imagery in many parts of\n                    the world and lower resolution satellite imagery worldwide. </p>\n            </li>\n            <li>\n                <p>\n                  <code>VectorEsriLightGrayCanvas</code> – The Esri Light Gray Canvas map style,\n                    which provides a detailed vector basemap with a light gray, neutral background\n                    style with minimal colors, labels, and features that's designed to draw\n                    attention to your thematic content. </p>\n            </li>\n            <li>\n                <p>\n                  <code>VectorEsriTopographic</code> – The Esri Light map style, which provides\n                    a detailed vector basemap with a classic Esri map style.</p>\n            </li>\n            <li>\n                <p>\n                  <code>VectorEsriStreets</code> – The Esri World Streets map style, which\n                    provides a detailed vector basemap for the world symbolized with a classic Esri\n                    street map style. The vector tile layer is similar in content and style to the\n                    World Street Map raster map.</p>\n            </li>\n            <li>\n                <p>\n                  <code>VectorEsriNavigation</code> – The Esri World Navigation map style, which\n                    provides a detailed basemap for the world symbolized with a custom navigation\n                    map style that's designed for use during the day in mobile devices.</p>\n            </li>\n         </ul>\n        <p>Valid <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/HERE.html\">HERE\n                Technologies map styles</a>:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>VectorHereBerlin</code> – The HERE Berlin map style is a high contrast\n                    detailed base map of the world that blends 3D and 2D rendering.</p>\n                <note>\n                    <p>When using HERE as your data provider, and selecting the Style\n                            <code>VectorHereBerlin</code>, you may not use HERE Technologies maps\n                        for Asset Management. See the <a href=\"https://aws.amazon.com/service-terms/\">AWS Service Terms</a>\n                        for Amazon Location Service.</p>\n                </note>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4941,6 +4953,21 @@
                     "max": 2
                 },
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.location#PositionFiltering": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "TimeBased",
+                        "documentation": "Filtering device position updates based on time"
+                    },
+                    {
+                        "value": "DistanceBased",
+                        "documentation": "Filtering device position updates based on distance"
+                    }
+                ]
             }
         },
         "com.amazonaws.location#PricingPlan": {
@@ -5273,7 +5300,7 @@
                 "DataSource": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data provider of geospatial data. Indicates one of the available providers:</p>\n         <ul>\n            <li>\n               <p>Esri</p>\n            </li>\n            <li>\n               <p>HERE</p>\n            </li>\n         </ul>\n         <p>For additional details on data providers, see the <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html\">Amazon Location Service data providers page</a>.</p>",
+                        "smithy.api#documentation": "<p>The data provider of geospatial data. Indicates one of the available providers:</p>\n         <ul>\n            <li>\n               <p>Esri</p>\n            </li>\n            <li>\n               <p>HERE</p>\n            </li>\n         </ul>\n         <p>For additional details on data providers, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html\">Amazon Location Service data providers</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5432,7 +5459,7 @@
                 "DataSource": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data provider of geospatial data. Indicates one of the available providers:</p>\n         <ul>\n            <li>\n               <p>Esri</p>\n            </li>\n            <li>\n               <p>HERE</p>\n            </li>\n         </ul>\n         <p>For additional details on data providers, see the <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html\">Amazon Location Service data providers page</a>.</p>",
+                        "smithy.api#documentation": "<p>The data provider of geospatial data. Indicates one of the available providers:</p>\n         <ul>\n            <li>\n               <p>Esri</p>\n            </li>\n            <li>\n               <p>HERE</p>\n            </li>\n         </ul>\n         <p>For additional details on data providers, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html\">Amazon Location Service data providers</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6296,6 +6323,12 @@
                     "target": "com.amazonaws.location#ResourceDescription",
                     "traits": {
                         "smithy.api#documentation": "<p>Updates the description for the tracker resource.</p>"
+                    }
+                },
+                "PositionFiltering": {
+                    "target": "com.amazonaws.location#PositionFiltering",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates the position filtering for the tracker resource.</p>\n        <p>Valid values:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>TimeBased</code> - Location updates are evaluated against linked geofence collections, \n                    but not every location update is stored. If your update frequency is more often than 30 seconds, \n                    only one update per 30 seconds is stored for each unique device ID.\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>DistanceBased</code> - If the device has moved less than 30 m (98.4 ft), location updates are \n                    ignored. Location updates within this distance are neither evaluated against linked geofence collections, nor stored. \n                    This helps control costs by reducing the number of geofence evaluations and device positions to retrieve. \n                    Distance-based filtering can also reduce the jitter effect when displaying device trajectory on a map.\n                </p>\n            </li>\n         </ul>"
                     }
                 }
             }

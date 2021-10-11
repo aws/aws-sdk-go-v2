@@ -46,11 +46,14 @@ type ListGroupsOlderThanOrderingIdInput struct {
 	// before a given ordering timestamp identifier.
 	DataSourceId *string
 
-	// The maximum results shown for a list of groups that are mapped to users before a
-	// given ordering or timestamp identifier.
+	// The maximum number of returned groups that are mapped to users before a given
+	// ordering or timestamp identifier.
 	MaxResults *int32
 
-	// The next items in the list of groups that go beyond the maximum.
+	// If the previous response was incomplete (because there is more data to
+	// retrieve), Amazon Kendra returns a pagination token in the response. You can use
+	// this pagination token to retrieve the next set of groups that are mapped to
+	// users before a given ordering or timestamp identifier.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -62,7 +65,9 @@ type ListGroupsOlderThanOrderingIdOutput struct {
 	// ordering or timestamp identifier.
 	GroupsSummaries []types.GroupSummary
 
-	// The next items in the list of groups that go beyond the maximum.
+	// If the response is truncated, Amazon Kendra returns this token that you can use
+	// in the subsequent request to retrieve the next set of groups that are mapped to
+	// users before a given ordering or timestamp identifier.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

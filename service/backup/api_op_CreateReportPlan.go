@@ -10,6 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"time"
 )
 
 // Creates a report plan. A report plan is a document that contains information
@@ -48,8 +49,11 @@ type CreateReportPlanInput struct {
 	ReportPlanName *string
 
 	// Identifies the report template for the report. Reports are built using a report
-	// template. The report templates are: BACKUP_JOB_REPORT | COPY_JOB_REPORT |
-	// RESTORE_JOB_REPORT
+	// template. The report templates are: RESOURCE_COMPLIANCE_REPORT |
+	// CONTROL_COMPLIANCE_REPORT | BACKUP_JOB_REPORT | COPY_JOB_REPORT |
+	// RESTORE_JOB_REPORT If the report template is RESOURCE_COMPLIANCE_REPORT or
+	// CONTROL_COMPLIANCE_REPORT, this API resource also describes the report coverage
+	// by Amazon Web Services Regions and frameworks.
 	//
 	// This member is required.
 	ReportSetting *types.ReportSetting
@@ -62,7 +66,7 @@ type CreateReportPlanInput struct {
 	// An optional description of the report plan with a maximum of 1,024 characters.
 	ReportPlanDescription *string
 
-	// Metadata that you can assign to help organize the frameworks that you create.
+	// Metadata that you can assign to help organize the report plans that you create.
 	// Each tag is a key-value pair.
 	ReportPlanTags map[string]string
 
@@ -70,6 +74,12 @@ type CreateReportPlanInput struct {
 }
 
 type CreateReportPlanOutput struct {
+
+	// The date and time a backup vault is created, in Unix format and Coordinated
+	// Universal Time (UTC). The value of CreationTime is accurate to milliseconds. For
+	// example, the value 1516925490.087 represents Friday, January 26, 2018
+	// 12:11:30.087 AM.
+	CreationTime *time.Time
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of
 	// the ARN depends on the resource type.

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create an AWS App Runner connection resource. App Runner requires a connection
+// Create an App Runner connection resource. App Runner requires a connection
 // resource when you create App Runner services that access private repositories
 // from certain third-party providers. You can share a connection across multiple
 // services. A connection resource is needed to access GitHub repositories. GitHub
@@ -35,7 +35,8 @@ func (c *Client) CreateConnection(ctx context.Context, params *CreateConnectionI
 type CreateConnectionInput struct {
 
 	// A name for the new connection. It must be unique across all App Runner
-	// connections for the AWS account in the AWS Region.
+	// connections for the Amazon Web Services account in the Amazon Web Services
+	// Region.
 	//
 	// This member is required.
 	ConnectionName *string

@@ -16,7 +16,7 @@ import (
 //
 // * Change the TRAINING_COMPLETE status to ACTIVE.
 //
-// * Change ACTIVEto
+// * Change ACTIVE to
 // INACTIVE.
 func (c *Client) UpdateModelVersionStatus(ctx context.Context, params *UpdateModelVersionStatusInput, optFns ...func(*Options)) (*UpdateModelVersionStatusOutput, error) {
 	if params == nil {

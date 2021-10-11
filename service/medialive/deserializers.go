@@ -928,6 +928,110 @@ func awsRestjson1_deserializeOpErrorCancelInputDeviceTransfer(response *smithyht
 	}
 }
 
+type awsRestjson1_deserializeOpClaimDevice struct {
+}
+
+func (*awsRestjson1_deserializeOpClaimDevice) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpClaimDevice) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorClaimDevice(response, &metadata)
+	}
+	output := &ClaimDeviceOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorClaimDevice(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("BadGatewayException", errorCode):
+		return awsRestjson1_deserializeErrorBadGatewayException(response, errorBody)
+
+	case strings.EqualFold("BadRequestException", errorCode):
+		return awsRestjson1_deserializeErrorBadRequestException(response, errorBody)
+
+	case strings.EqualFold("ForbiddenException", errorCode):
+		return awsRestjson1_deserializeErrorForbiddenException(response, errorBody)
+
+	case strings.EqualFold("GatewayTimeoutException", errorCode):
+		return awsRestjson1_deserializeErrorGatewayTimeoutException(response, errorBody)
+
+	case strings.EqualFold("InternalServerErrorException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerErrorException(response, errorBody)
+
+	case strings.EqualFold("NotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
+
+	case strings.EqualFold("TooManyRequestsException", errorCode):
+		return awsRestjson1_deserializeErrorTooManyRequestsException(response, errorBody)
+
+	case strings.EqualFold("UnprocessableEntityException", errorCode):
+		return awsRestjson1_deserializeErrorUnprocessableEntityException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsRestjson1_deserializeOpCreateChannel struct {
 }
 
@@ -13158,6 +13262,11 @@ func awsRestjson1_deserializeDocumentAudioDescription(v **types.AudioDescription
 				sv.AudioTypeControl = types.AudioDescriptionAudioTypeControl(jtv)
 			}
 
+		case "audioWatermarkingSettings":
+			if err := awsRestjson1_deserializeDocumentAudioWatermarkSettings(&sv.AudioWatermarkingSettings, value); err != nil {
+				return err
+			}
+
 		case "codecSettings":
 			if err := awsRestjson1_deserializeDocumentAudioCodecSettings(&sv.CodecSettings, value); err != nil {
 				return err
@@ -13718,6 +13827,42 @@ func awsRestjson1_deserializeDocumentAudioTrackSelection(v **types.AudioTrackSel
 		switch key {
 		case "tracks":
 			if err := awsRestjson1_deserializeDocument__listOfAudioTrack(&sv.Tracks, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAudioWatermarkSettings(v **types.AudioWatermarkSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AudioWatermarkSettings
+	if *v == nil {
+		sv = &types.AudioWatermarkSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "nielsenWatermarksSettings":
+			if err := awsRestjson1_deserializeDocumentNielsenWatermarksSettings(&sv.NielsenWatermarksSettings, value); err != nil {
 				return err
 			}
 
@@ -24062,6 +24207,64 @@ func awsRestjson1_deserializeDocumentNetworkInputSettings(v **types.NetworkInput
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentNielsenCBET(v **types.NielsenCBET, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NielsenCBET
+	if *v == nil {
+		sv = &types.NielsenCBET{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "cbetCheckDigitString":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMin2Max2 to be of type string, got %T instead", value)
+				}
+				sv.CbetCheckDigitString = ptr.String(jtv)
+			}
+
+		case "cbetStepaside":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NielsenWatermarksCbetStepaside to be of type string, got %T instead", value)
+				}
+				sv.CbetStepaside = types.NielsenWatermarksCbetStepaside(jtv)
+			}
+
+		case "csid":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMin1Max7 to be of type string, got %T instead", value)
+				}
+				sv.Csid = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentNielsenConfiguration(v **types.NielsenConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -24100,6 +24303,130 @@ func awsRestjson1_deserializeDocumentNielsenConfiguration(v **types.NielsenConfi
 					return fmt.Errorf("expected NielsenPcmToId3TaggingState to be of type string, got %T instead", value)
 				}
 				sv.NielsenPcmToId3Tagging = types.NielsenPcmToId3TaggingState(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNielsenNaesIiNw(v **types.NielsenNaesIiNw, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NielsenNaesIiNw
+	if *v == nil {
+		sv = &types.NielsenNaesIiNw{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "checkDigitString":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMin2Max2 to be of type string, got %T instead", value)
+				}
+				sv.CheckDigitString = ptr.String(jtv)
+			}
+
+		case "sid":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Sid = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Sid = f64
+
+				default:
+					return fmt.Errorf("expected __doubleMin1Max65535 to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNielsenWatermarksSettings(v **types.NielsenWatermarksSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NielsenWatermarksSettings
+	if *v == nil {
+		sv = &types.NielsenWatermarksSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "nielsenCbetSettings":
+			if err := awsRestjson1_deserializeDocumentNielsenCBET(&sv.NielsenCbetSettings, value); err != nil {
+				return err
+			}
+
+		case "nielsenDistributionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NielsenWatermarksDistributionTypes to be of type string, got %T instead", value)
+				}
+				sv.NielsenDistributionType = types.NielsenWatermarksDistributionTypes(jtv)
+			}
+
+		case "nielsenNaesIiNwSettings":
+			if err := awsRestjson1_deserializeDocumentNielsenNaesIiNw(&sv.NielsenNaesIiNwSettings, value); err != nil {
+				return err
 			}
 
 		default:

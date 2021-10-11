@@ -65,7 +65,7 @@ type CreateInputInput struct {
 	// A collection of key-value pairs.
 	Tags map[string]string
 
-	// Placeholder documentation for InputType
+	// The different types of inputs that AWS Elemental MediaLive supports.
 	Type types.InputType
 
 	// Settings for a private VPC Input. When this property is specified, the input

@@ -42,6 +42,9 @@ type GetBackendInput struct {
 
 type GetBackendOutput struct {
 
+	// A stringified version of the cli.json file for your Amplify project.
+	AmplifyFeatureFlags *string
+
 	// A stringified version of the current configs for your Amplify project.
 	AmplifyMetaConfig *string
 

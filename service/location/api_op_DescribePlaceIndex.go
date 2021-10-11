@@ -53,8 +53,8 @@ type DescribePlaceIndexOutput struct {
 	//
 	// * Here
 	//
-	// For additional details on data providers, see the
-	// Amazon Location Service data providers page
+	// For additional details on data providers, see Amazon
+	// Location Service data providers
 	// (https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html).
 	//
 	// This member is required.
@@ -85,8 +85,8 @@ type DescribePlaceIndexOutput struct {
 	IndexName *string
 
 	// The pricing plan selected for the specified place index resource. For additional
-	// details and restrictions on each pricing plan option, see the Amazon Location
-	// Service pricing page (https://aws.amazon.com/location/pricing/).
+	// details and restrictions on each pricing plan option, see Amazon Location
+	// Service pricing (https://aws.amazon.com/location/pricing/).
 	//
 	// This member is required.
 	PricingPlan types.PricingPlan

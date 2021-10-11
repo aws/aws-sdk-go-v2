@@ -54,7 +54,7 @@ type CreateThesaurusInput struct {
 
 	// A token that you provide to identify the request to create a thesaurus. Multiple
 	// calls to the CreateThesaurus operation with the same client token will create
-	// only one index.
+	// only one thesaurus.
 	ClientToken *string
 
 	// The description for the new thesaurus.

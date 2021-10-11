@@ -216,6 +216,27 @@ type AppInstanceUserSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for the artifacts.
+type ArtifactsConfiguration struct {
+
+	// The configuration for the audio artifacts.
+	//
+	// This member is required.
+	Audio *AudioArtifactsConfiguration
+
+	// The configuration for the content artifacts.
+	//
+	// This member is required.
+	Content *ContentArtifactsConfiguration
+
+	// The configuration for the video artifacts.
+	//
+	// This member is required.
+	Video *VideoArtifactsConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // An Amazon Chime SDK meeting attendee. Includes a unique AttendeeId and JoinToken
 // . The JoinToken allows a client to authenticate and join as the specified
 // attendee. The JoinToken expires when the meeting ends or when DeleteAttendee is
@@ -234,6 +255,17 @@ type Attendee struct {
 
 	// The join token used by the Amazon Chime SDK attendee.
 	JoinToken *string
+
+	noSmithyDocumentSerde
+}
+
+// The audio artifact configuration object.
+type AudioArtifactsConfiguration struct {
+
+	// The MUX type of the audio artifact configuration object.
+	//
+	// This member is required.
+	MuxType AudioMuxType
 
 	noSmithyDocumentSerde
 }
@@ -563,6 +595,33 @@ type ChannelSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration object of the Amazon Chime SDK meeting for a specified media
+// capture pipeline. SourceType must be ChimeSdkMeeting.
+type ChimeSdkMeetingConfiguration struct {
+
+	// The configuration for the artifacts in an Amazon Chime SDK meeting.
+	ArtifactsConfiguration *ArtifactsConfiguration
+
+	// The source configuration for a specified media capture pipline.
+	SourceConfiguration *SourceConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The content artifact object.
+type ContentArtifactsConfiguration struct {
+
+	// Indicates whether the content artifact is enabled or disabled.
+	//
+	// This member is required.
+	State ArtifactsState
+
+	// The MUX type of the artifact configuration.
+	MuxType ContentMuxType
+
+	noSmithyDocumentSerde
+}
+
 // The retention settings that determine how long to retain conversation messages
 // for an Amazon Chime Enterprise account.
 type ConversationRetentionSettings struct {
@@ -781,9 +840,13 @@ type LoggingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// A media capture pipeline object. A string consisting of an ID, source type, a
-// source ARN, a sink type, and a sink ARN.
+// A media capture pipeline object consisting of an ID, source type, source ARN, a
+// sink type, a sink ARN, and a configuration object.
 type MediaCapturePipeline struct {
+
+	// The configuration for a specified media capture pipeline. SourceType must be
+	// ChimeSdkMeeting.
+	ChimeSdkMeetingConfiguration *ChimeSdkMeetingConfiguration
 
 	// The time at which the capture pipeline was created, in ISO 8601 format.
 	CreatedTimestamp *time.Time
@@ -823,7 +886,7 @@ type MediaPlacement struct {
 	// The audio host URL.
 	AudioHostUrl *string
 
-	// The URL of the S3 bucket used to store the captured media.
+	// The event ingestion URL.
 	EventIngestionUrl *string
 
 	// The screen data URL.
@@ -1283,6 +1346,19 @@ type RoomRetentionSettings struct {
 	noSmithyDocumentSerde
 }
 
+// The video streams to capture for a specified media capture pipeline. The total
+// number of video streams can't exceed 25.
+type SelectedVideoStreams struct {
+
+	// The attendee IDs of the streams selected for a media capture pipeline.
+	AttendeeIds []string
+
+	// The external user IDs of the streams selected for a media capture pipeline.
+	ExternalUserIds []string
+
+	noSmithyDocumentSerde
+}
+
 // An Active Directory (AD) group whose members are granted permission to act as
 // delegates.
 type SigninDelegateGroup struct {
@@ -1399,6 +1475,16 @@ type SipRuleTargetApplication struct {
 
 	// The SIP media application ID.
 	SipMediaApplicationId *string
+
+	noSmithyDocumentSerde
+}
+
+// Source configuration for a specified media capture pipeline.
+type SourceConfiguration struct {
+
+	// The selected video streams to capture for a specified media capture pipeline.
+	// The number of video streams can't exceed 25.
+	SelectedVideoStreams *SelectedVideoStreams
 
 	noSmithyDocumentSerde
 }
@@ -1632,6 +1718,20 @@ type UserSettings struct {
 	//
 	// This member is required.
 	Telephony *TelephonySettings
+
+	noSmithyDocumentSerde
+}
+
+// The video artifact configuration object.
+type VideoArtifactsConfiguration struct {
+
+	// Indicates whether the video artifact is enabled or disabled.
+	//
+	// This member is required.
+	State ArtifactsState
+
+	// The MUX type of the video artifact configuration object.
+	MuxType VideoMuxType
 
 	noSmithyDocumentSerde
 }

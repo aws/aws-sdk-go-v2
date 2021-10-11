@@ -1208,6 +1208,15 @@ type ProjectBadge struct {
 // Contains configuration information about a batch build project.
 type ProjectBuildBatchConfig struct {
 
+	// Specifies how build status reports are sent to the source provider for the batch
+	// build. This property is only used when the source provider for your project is
+	// Bitbucket, GitHub, or GitHub Enterprise, and your project is configured to
+	// report build statuses to the source provider. REPORT_AGGREGATED_BATCH (Default)
+	// Aggregate all of the build statuses into a single status report.
+	// REPORT_INDIVIDUAL_BUILDS Send a separate status report for each individual
+	// build.
+	BatchReportMode BatchReportModeType
+
 	// Specifies if the build artifacts for the batch build should be combined into a
 	// single artifact location.
 	CombineArtifacts *bool

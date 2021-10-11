@@ -1061,6 +1061,10 @@ type AwsCloudFrontDistributionDetails struct {
 	// Indicates the current status of the distribution.
 	Status *string
 
+	// Provides information about the TLS/SSL configuration that the distribution uses
+	// to communicate with viewers.
+	ViewerCertificate *AwsCloudFrontDistributionViewerCertificate
+
 	// A unique identifier that specifies the WAF web ACL, if any, to associate with
 	// this distribution.
 	WebAclId *string
@@ -1171,6 +1175,43 @@ type AwsCloudFrontDistributionOriginS3OriginConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Provides information about the TLS/SSL configuration that the distribution uses
+// to communicate with viewers.
+type AwsCloudFrontDistributionViewerCertificate struct {
+
+	// The ARN of the ACM certificate. Used if the certificate is stored in ACM. If you
+	// provide an ACM certificate ARN, you must also provide MinimumCertificateVersion
+	// and SslSupportMethod.
+	AcmCertificateArn *string
+
+	// The identifier of the certificate. Note that in CloudFront, this attribute is
+	// deprecated.
+	Certificate *string
+
+	// The source of the certificate identified by Certificate. Note that in
+	// CloudFront, this attribute is deprecated.
+	CertificateSource *string
+
+	// Whether the distribution uses the CloudFront domain name. If set to false, then
+	// you provide either AcmCertificateArn or IamCertificateId.
+	CloudFrontDefaultCertificate bool
+
+	// The identifier of the IAM certificate. Used if the certificate is stored in IAM.
+	// If you provide IamCertificateId, then you also must provide
+	// MinimumProtocolVersion and SslSupportMethod.
+	IamCertificateId *string
+
+	// The security policy that CloudFront uses for HTTPS connections with viewers. If
+	// SslSupportMethod is sni-only, then MinimumProtocolVersion must be TLSv1 or
+	// higher.
+	MinimumProtocolVersion *string
+
+	// The viewers that the distribution accepts HTTPS connections from.
+	SslSupportMethod *string
+
+	noSmithyDocumentSerde
+}
+
 // Provides details about a CloudTrail trail.
 type AwsCloudTrailTrailDetails struct {
 
@@ -1227,8 +1268,49 @@ type AwsCloudTrailTrailDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the build artifacts for the CodeBuild project.
+type AwsCodeBuildProjectArtifactsDetails struct {
+
+	// An identifier for the artifact definition.
+	ArtifactIdentifier *string
+
+	// Indicates whether to disable encryption on the artifact. Only valid when Type is
+	// S3.
+	EncryptionDisabled bool
+
+	// Only used when Type is S3. The name of the S3 bucket where the artifact is
+	// located.
+	Location *string
+
+	// Only used when Type is S3. The name of the artifact. Used with NamepaceType and
+	// Path to determine the pattern for storing the artifact.
+	Name *string
+
+	// Only used when Type is S3. The value to use for the namespace. Used with Name
+	// and Path to determine the pattern for storing the artifact.
+	NamespaceType *string
+
+	// Whether the name specified in the buildspec file overrides the artifact name.
+	OverrideArtifactName bool
+
+	// Only used when Type is S3. The type of output artifact to create.
+	Packaging *string
+
+	// Only used when Type is S3. The path to the artifact. Used with Name and
+	// NamespaceType to determine the pattern for storing the artifact.
+	Path *string
+
+	// The type of build artifact.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about an CodeBuild project.
 type AwsCodeBuildProjectDetails struct {
+
+	// Information about the build artifacts for the CodeBuild project.
+	Artifacts []AwsCodeBuildProjectArtifactsDetails
 
 	// The KMS key used to encrypt the build output artifacts. You can specify either
 	// the ARN of the KMS key or, if available, the KMS key alias (using the format
@@ -1237,6 +1319,9 @@ type AwsCodeBuildProjectDetails struct {
 
 	// Information about the build environment for this build project.
 	Environment *AwsCodeBuildProjectEnvironment
+
+	// Information about logs for the build project.
+	LogsConfig *AwsCodeBuildProjectLogsConfigDetails
 
 	// The name of the build project.
 	Name *string
@@ -1260,6 +1345,10 @@ type AwsCodeBuildProjectEnvironment struct {
 	// The certificate to use with this build project.
 	Certificate *string
 
+	// A set of environment variables to make available to builds for the build
+	// project.
+	EnvironmentVariables []AwsCodeBuildProjectEnvironmentEnvironmentVariablesDetails
+
 	// The type of credentials CodeBuild uses to pull images in your build. Valid
 	// values:
 	//
@@ -1274,6 +1363,10 @@ type AwsCodeBuildProjectEnvironment struct {
 	// you must use SERVICE_ROLE credentials. When you use an CodeBuild curated image,
 	// you must use CODEBUILD credentials.
 	ImagePullCredentialsType *string
+
+	// Whether to allow the Docker daemon to run inside a Docker container. Set to true
+	// if the build project is used to build Docker images.
+	PrivilegedMode bool
 
 	// The credentials for access to a private registry.
 	RegistryCredential *AwsCodeBuildProjectEnvironmentRegistryCredential
@@ -1298,6 +1391,22 @@ type AwsCodeBuildProjectEnvironment struct {
 	noSmithyDocumentSerde
 }
 
+// Information about an environment variable that is available to builds for the
+// build project.
+type AwsCodeBuildProjectEnvironmentEnvironmentVariablesDetails struct {
+
+	// The name of the environment variable.
+	Name *string
+
+	// The type of environment variable.
+	Type *string
+
+	// The value of the environment variable.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // The credentials for access to a private registry.
 type AwsCodeBuildProjectEnvironmentRegistryCredential struct {
 
@@ -1309,6 +1418,48 @@ type AwsCodeBuildProjectEnvironmentRegistryCredential struct {
 	// The service that created the credentials to access a private Docker registry.
 	// The valid value, SECRETS_MANAGER, is for Secrets Manager.
 	CredentialProvider *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about CloudWatch Logs for the build project.
+type AwsCodeBuildProjectLogsConfigCloudWatchLogsDetails struct {
+
+	// The group name of the logs in CloudWatch Logs.
+	GroupName *string
+
+	// The current status of the logs in CloudWatch Logs for a build project.
+	Status *string
+
+	// The prefix of the stream name of the CloudWatch Logs.
+	StreamName *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about logs for the build project.
+type AwsCodeBuildProjectLogsConfigDetails struct {
+
+	// Information about CloudWatch Logs for the build project.
+	CloudWatchLogs *AwsCodeBuildProjectLogsConfigCloudWatchLogsDetails
+
+	// Information about logs built to an S3 bucket for a build project.
+	S3Logs *AwsCodeBuildProjectLogsConfigS3LogsDetails
+
+	noSmithyDocumentSerde
+}
+
+// Information about logs built to an S3 bucket for a build project.
+type AwsCodeBuildProjectLogsConfigS3LogsDetails struct {
+
+	// Whether to disable encryption of the S3 build log output.
+	EncryptionDisabled bool
+
+	// The ARN of the S3 bucket and the path prefix for S3 logs.
+	Location *string
+
+	// The current status of the S3 build logs.
+	Status *string
 
 	noSmithyDocumentSerde
 }
@@ -2223,6 +2374,55 @@ type AwsEc2VpcDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Contains details about the service configuration for a VPC endpoint service.
+type AwsEc2VpcEndpointServiceDetails struct {
+
+	// Whether requests from other Amazon Web Services accounts to create an endpoint
+	// to the service must first be accepted.
+	AcceptanceRequired bool
+
+	// The Availability Zones where the service is available.
+	AvailabilityZones []string
+
+	// The DNS names for the service.
+	BaseEndpointDnsNames []string
+
+	// The ARNs of the Gateway Load Balancers for the service.
+	GatewayLoadBalancerArns []string
+
+	// Whether the service manages its VPC endpoints.
+	ManagesVpcEndpoints bool
+
+	// The ARNs of the Network Load Balancers for the service.
+	NetworkLoadBalancerArns []string
+
+	// The private DNS name for the service.
+	PrivateDnsName *string
+
+	// The identifier of the service.
+	ServiceId *string
+
+	// The name of the service.
+	ServiceName *string
+
+	// The current state of the service.
+	ServiceState *string
+
+	// The types for the service.
+	ServiceType []AwsEc2VpcEndpointServiceServiceTypeDetails
+
+	noSmithyDocumentSerde
+}
+
+// The service type information for a VPC endpoint service.
+type AwsEc2VpcEndpointServiceServiceTypeDetails struct {
+
+	// The type of service.
+	ServiceType *string
+
+	noSmithyDocumentSerde
+}
+
 // Details about an Amazon EC2 VPN connection.
 type AwsEc2VpnConnectionDetails struct {
 
@@ -2406,6 +2606,52 @@ type AwsEcrContainerImageDetails struct {
 
 	// The name of the repository that the image belongs to.
 	RepositoryName *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about an Amazon Elastic Container Registry repository.
+type AwsEcrRepositoryDetails struct {
+
+	// The ARN of the repository.
+	Arn *string
+
+	// The image scanning configuration for a repository.
+	ImageScanningConfiguration *AwsEcrRepositoryImageScanningConfigurationDetails
+
+	// The tag mutability setting for the repository.
+	ImageTagMutability *string
+
+	// Information about the lifecycle policy for the repository.
+	LifecyclePolicy *AwsEcrRepositoryLifecyclePolicyDetails
+
+	// The name of the repository.
+	RepositoryName *string
+
+	// The text of the repository policy.
+	RepositoryPolicyText *string
+
+	noSmithyDocumentSerde
+}
+
+// The image scanning configuration for a repository.
+type AwsEcrRepositoryImageScanningConfigurationDetails struct {
+
+	// Whether to scan images after they are pushed to a repository.
+	ScanOnPush bool
+
+	noSmithyDocumentSerde
+}
+
+// Information about the lifecycle policy for the repository.
+type AwsEcrRepositoryLifecyclePolicyDetails struct {
+
+	// The text of the lifecycle policy.
+	LifecyclePolicyText *string
+
+	// The Amazon Web Services account identifier that is associated with the registry
+	// that contains the repository.
+	RegistryId *string
 
 	noSmithyDocumentSerde
 }
@@ -3461,6 +3707,75 @@ type AwsEcsTaskDefinitionVolumesHostDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Provides details about an Amazon EKS cluster.
+type AwsEksClusterDetails struct {
+
+	// The ARN of the cluster.
+	Arn *string
+
+	// The certificate authority data for the cluster.
+	CertificateAuthorityData *string
+
+	// The status of the cluster.
+	ClusterStatus *string
+
+	// The endpoint for the Amazon EKS API server.
+	Endpoint *string
+
+	// The logging configuration for the cluster.
+	Logging *AwsEksClusterLoggingDetails
+
+	// The name of the cluster.
+	Name *string
+
+	// The VPC configuration used by the cluster control plane.
+	ResourcesVpcConfig *AwsEksClusterResourcesVpcConfigDetails
+
+	// The ARN of the IAM role that provides permissions for the Amazon EKS control
+	// plane to make calls to Amazon Web Services API operations on your behalf.
+	RoleArn *string
+
+	// The Amazon EKS server version for the cluster.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
+// Details for a cluster logging configuration.
+type AwsEksClusterLoggingClusterLoggingDetails struct {
+
+	// Whether the logging types that are listed in Types are enabled.
+	Enabled bool
+
+	// A list of logging types.
+	Types []string
+
+	noSmithyDocumentSerde
+}
+
+// The logging configuration for an Amazon EKS cluster.
+type AwsEksClusterLoggingDetails struct {
+
+	// Cluster logging configurations.
+	ClusterLogging []AwsEksClusterLoggingClusterLoggingDetails
+
+	noSmithyDocumentSerde
+}
+
+// Information about the VPC configuration used by the cluster control plane.
+type AwsEksClusterResourcesVpcConfigDetails struct {
+
+	// The security groups that are associated with the cross-account elastic network
+	// interfaces that are used to allow communication between your nodes and the
+	// Amazon EKS control plane.
+	SecurityGroupIds []string
+
+	// The subnets that are associated with the cluster.
+	SubnetIds []string
+
+	noSmithyDocumentSerde
+}
+
 // Contains details about an Elastic Beanstalk environment.
 type AwsElasticBeanstalkEnvironmentDetails struct {
 
@@ -3562,7 +3877,7 @@ type AwsElasticBeanstalkEnvironmentTier struct {
 	noSmithyDocumentSerde
 }
 
-// Information about an Amazon Elasticsearch Service domain.
+// Information about an Elasticsearch domain.
 type AwsElasticsearchDomainDetails struct {
 
 	// IAM policy document specifying the access policies for the new Elasticsearch
@@ -3581,10 +3896,10 @@ type AwsElasticsearchDomainDetails struct {
 	// Valid characters are a-z (lowercase only), 0-9, and – (hyphen).
 	DomainName *string
 
-	// Information about an Elasticsearch cluster configuration.
+	// Information about an OpenSearch cluster configuration.
 	ElasticsearchClusterConfig *AwsElasticsearchDomainElasticsearchClusterConfigDetails
 
-	// Elasticsearch version.
+	// OpenSearch version.
 	ElasticsearchVersion *string
 
 	// Details about the configuration for encryption at rest.
@@ -3607,7 +3922,7 @@ type AwsElasticsearchDomainDetails struct {
 	// software.
 	ServiceSoftwareOptions *AwsElasticsearchDomainServiceSoftwareOptions
 
-	// Information that Elasticsearch derives based on VPCOptions for the domain.
+	// Information that OpenSearch derives based on VPCOptions for the domain.
 	VPCOptions *AwsElasticsearchDomainVPCOptions
 
 	noSmithyDocumentSerde
@@ -3620,8 +3935,8 @@ type AwsElasticsearchDomainDomainEndpointOptions struct {
 	// Whether to require that all traffic to the domain arrive over HTTPS.
 	EnforceHTTPS bool
 
-	// The TLS security policy to apply to the HTTPS endpoint of the Elasticsearch
-	// domain. Valid values:
+	// The TLS security policy to apply to the HTTPS endpoint of the OpenSearch domain.
+	// Valid values:
 	//
 	// * Policy-Min-TLS-1-0-2019-07, which supports TLSv1.0 and
 	// higher
@@ -3632,7 +3947,7 @@ type AwsElasticsearchDomainDomainEndpointOptions struct {
 	noSmithyDocumentSerde
 }
 
-// details about the configuration of an Elasticsearch cluster.
+// details about the configuration of an OpenSearch cluster.
 type AwsElasticsearchDomainElasticsearchClusterConfigDetails struct {
 
 	// The number of instances to use for the master node. If this attribute is
@@ -3660,9 +3975,9 @@ type AwsElasticsearchDomainElasticsearchClusterConfigDetails struct {
 	ZoneAwarenessConfig *AwsElasticsearchDomainElasticsearchClusterConfigZoneAwarenessConfigDetails
 
 	// Whether to enable zone awareness for the Elasticsearch domain. When zone
-	// awareness is enabled, Elasticsearch allocates the cluster's nodes and replica
-	// index shards across Availability Zones in the same Region. This prevents data
-	// loss and minimizes downtime if a node or data center fails.
+	// awareness is enabled, OpenSearch allocates the cluster's nodes and replica index
+	// shards across Availability Zones in the same Region. This prevents data loss and
+	// minimizes downtime if a node or data center fails.
 	ZoneAwarenessEnabled bool
 
 	noSmithyDocumentSerde
@@ -3696,10 +4011,10 @@ type AwsElasticsearchDomainLogPublishingOptions struct {
 	// The log configuration.
 	AuditLogs *AwsElasticsearchDomainLogPublishingOptionsLogConfig
 
-	// Configures the Elasticsearch index logs publishing.
+	// Configures the OpenSearch index logs publishing.
 	IndexSlowLogs *AwsElasticsearchDomainLogPublishingOptionsLogConfig
 
-	// Configures the Elasticsearch search slow log publishing.
+	// Configures the OpenSearch search slow log publishing.
 	SearchSlowLogs *AwsElasticsearchDomainLogPublishingOptionsLogConfig
 
 	noSmithyDocumentSerde
@@ -3731,7 +4046,7 @@ type AwsElasticsearchDomainNodeToNodeEncryptionOptions struct {
 type AwsElasticsearchDomainServiceSoftwareOptions struct {
 
 	// The epoch time when the deployment window closes for required updates. After
-	// this time, Amazon Elasticsearch Service schedules the software upgrade
+	// this time, Amazon OpenSearch Service schedules the software upgrade
 	// automatically.
 	AutomatedUpdateDate *string
 
@@ -3756,7 +4071,7 @@ type AwsElasticsearchDomainServiceSoftwareOptions struct {
 	noSmithyDocumentSerde
 }
 
-// Information that Elasticsearch derives based on VPCOptions for the domain.
+// Information that OpenSearch derives based on VPCOptions for the domain.
 type AwsElasticsearchDomainVPCOptions struct {
 
 	// The list of Availability Zones associated with the VPC subnets.
@@ -4066,6 +4381,18 @@ type AwsElbLoadBalancerSourceSecurityGroup struct {
 	noSmithyDocumentSerde
 }
 
+// A load balancer attribute.
+type AwsElbv2LoadBalancerAttribute struct {
+
+	// The name of the load balancer attribute.
+	Key *string
+
+	// The value of the load balancer attribute.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about a load balancer.
 type AwsElbv2LoadBalancerDetails struct {
 
@@ -4088,6 +4415,9 @@ type AwsElbv2LoadBalancerDetails struct {
 	// possible values are ipv4 (for IPv4 addresses) and dualstack (for IPv4 and IPv6
 	// addresses).
 	IpAddressType *string
+
+	// Attributes of the load balancer.
+	LoadBalancerAttributes []AwsElbv2LoadBalancerAttribute
 
 	// The nodes of an Internet-facing load balancer have public IP addresses.
 	Scheme *string
@@ -4677,6 +5007,227 @@ type AwsLambdaLayerVersionDetails struct {
 
 	// The version number.
 	Version int64
+
+	noSmithyDocumentSerde
+}
+
+// Details about the configuration of an OpenSearch cluster.
+type AwsOpenSearchServiceDomainClusterConfigDetails struct {
+
+	// The number of instances to use for the master node. If this attribute is
+	// specified, then DedicatedMasterEnabled must be true.
+	DedicatedMasterCount int32
+
+	// Whether to use a dedicated master node for the OpenSearch domain. A dedicated
+	// master node performs cluster management tasks, but does not hold data or respond
+	// to data upload requests.
+	DedicatedMasterEnabled bool
+
+	// The hardware configuration of the computer that hosts the dedicated master node.
+	// If this attribute is specified, then DedicatedMasterEnabled must be true.
+	DedicatedMasterType *string
+
+	// The number of data nodes to use in the OpenSearch domain.
+	InstanceCount int32
+
+	// The instance type for your data nodes.
+	InstanceType *string
+
+	// The number of UltraWarm instances.
+	WarmCount int32
+
+	// Whether UltraWarm is enabled.
+	WarmEnabled bool
+
+	// The type of UltraWarm instance.
+	WarmType *string
+
+	// Configuration options for zone awareness. Provided if ZoneAwarenessEnabled is
+	// true.
+	ZoneAwarenessConfig *AwsOpenSearchServiceDomainClusterConfigZoneAwarenessConfigDetails
+
+	// Whether to enable zone awareness for the OpenSearch domain. When zone awareness
+	// is enabled, OpenSearch Service allocates the cluster's nodes and replica index
+	// shards across Availability Zones (AZs) in the same Region. This prevents data
+	// loss and minimizes downtime if a node or data center fails.
+	ZoneAwarenessEnabled bool
+
+	noSmithyDocumentSerde
+}
+
+// Configuration options for zone awareness.
+type AwsOpenSearchServiceDomainClusterConfigZoneAwarenessConfigDetails struct {
+
+	// The number of Availability Zones that the domain uses. Valid values are 2 and 3.
+	// The default is 2.
+	AvailabilityZoneCount int32
+
+	noSmithyDocumentSerde
+}
+
+// Information about an Amazon OpenSearch Service domain.
+type AwsOpenSearchServiceDomainDetails struct {
+
+	// IAM policy document that specifies the access policies for the OpenSearch
+	// Service domain.
+	AccessPolicies *string
+
+	// The ARN of the OpenSearch Service domain.
+	Arn *string
+
+	// Details about the configuration of an OpenSearch cluster.
+	ClusterConfig *AwsOpenSearchServiceDomainClusterConfigDetails
+
+	// The domain endpoint.
+	DomainEndpoint *string
+
+	// Additional options for the domain endpoint.
+	DomainEndpointOptions *AwsOpenSearchServiceDomainDomainEndpointOptionsDetails
+
+	// The domain endpoints. Used if the OpenSearch domain resides in a VPC. This is a
+	// map of key-value pairs. The key is always vpc. The value is the endpoint.
+	DomainEndpoints map[string]string
+
+	// The name of the endpoint.
+	DomainName *string
+
+	// Details about the configuration for encryption at rest.
+	EncryptionAtRestOptions *AwsOpenSearchServiceDomainEncryptionAtRestOptionsDetails
+
+	// The version of the domain engine.
+	EngineVersion *string
+
+	// The identifier of the domain.
+	Id *string
+
+	// Configures the CloudWatch Logs to publish for the OpenSearch domain.
+	LogPublishingOptions *AwsOpenSearchServiceDomainLogPublishingOptionsDetails
+
+	// Details about the configuration for node-to-node encryption.
+	NodeToNodeEncryptionOptions *AwsOpenSearchServiceDomainNodeToNodeEncryptionOptionsDetails
+
+	// Information about the status of a domain relative to the latest service
+	// software.
+	ServiceSoftwareOptions *AwsOpenSearchServiceDomainServiceSoftwareOptionsDetails
+
+	// Information that OpenSearch Service derives based on VPCOptions for the domain.
+	VpcOptions *AwsOpenSearchServiceDomainVpcOptionsDetails
+
+	noSmithyDocumentSerde
+}
+
+// Information about additional options for the domain endpoint.
+type AwsOpenSearchServiceDomainDomainEndpointOptionsDetails struct {
+
+	// The fully qualified URL for the custom endpoint.
+	CustomEndpoint *string
+
+	// The ARN for the security certificate. The certificate is managed in ACM.
+	CustomEndpointCertificateArn *string
+
+	// Whether to enable a custom endpoint for the domain.
+	CustomEndpointEnabled bool
+
+	// Whether to require that all traffic to the domain arrive over HTTPS.
+	EnforceHTTPS bool
+
+	// The TLS security policy to apply to the HTTPS endpoint of the OpenSearch domain.
+	TLSSecurityPolicy *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about the configuration for encryption at rest for the OpenSearch
+// domain.
+type AwsOpenSearchServiceDomainEncryptionAtRestOptionsDetails struct {
+
+	// Whether encryption at rest is enabled.
+	Enabled bool
+
+	// The KMS key ID.
+	KmsKeyId *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration details for a log publishing option.
+type AwsOpenSearchServiceDomainLogPublishingOption struct {
+
+	// The ARN of the CloudWatch Logs group to publish the logs to.
+	CloudWatchLogsLogGroupArn *string
+
+	// Whether the log publishing is enabled.
+	Enabled bool
+
+	noSmithyDocumentSerde
+}
+
+// Configures the CloudWatch Logs to publish for the OpenSearch domain.
+type AwsOpenSearchServiceDomainLogPublishingOptionsDetails struct {
+
+	// Configures the OpenSearch audit logs publishing.
+	AuditLogs *AwsOpenSearchServiceDomainLogPublishingOption
+
+	// Configures the OpenSearch index logs publishing.
+	IndexSlowLogs *AwsOpenSearchServiceDomainLogPublishingOption
+
+	// Configures the OpenSearch search slow log publishing.
+	SearchSlowLogs *AwsOpenSearchServiceDomainLogPublishingOption
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about the configuration for node-to-node encryption.
+type AwsOpenSearchServiceDomainNodeToNodeEncryptionOptionsDetails struct {
+
+	// Whether node-to-node encryption is enabled.
+	Enabled bool
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about the state of the domain relative to the latest
+// service software.
+type AwsOpenSearchServiceDomainServiceSoftwareOptionsDetails struct {
+
+	// The epoch time when the deployment window closes for required updates. After
+	// this time, OpenSearch Service schedules the software upgrade automatically.
+	AutomatedUpdateDate *string
+
+	// Whether a request to update the domain can be canceled.
+	Cancellable bool
+
+	// The version of the service software that is currently installed on the domain.
+	CurrentVersion *string
+
+	// A more detailed description of the service software status.
+	Description *string
+
+	// The most recent version of the service software.
+	NewVersion *string
+
+	// Whether the service software update is optional.
+	OptionalDeployment bool
+
+	// Whether a service software update is available for the domain.
+	UpdateAvailable bool
+
+	// The status of the service software update.
+	UpdateStatus *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information that OpenSearch Service derives based on the VPCOptions for
+// the domain.
+type AwsOpenSearchServiceDomainVpcOptionsDetails struct {
+
+	// The list of security group IDs that are associated with the VPC endpoints for
+	// the domain.
+	SecurityGroupIds []string
+
+	// A list of subnet IDs that are associated with the VPC endpoints for the domain.
+	SubnetIds []string
 
 	noSmithyDocumentSerde
 }
@@ -6186,6 +6737,10 @@ type AwsS3BucketDetails struct {
 	// spaces. For example, 2020-03-22T13:22:13.933Z.
 	CreatedAt *string
 
+	// The Amazon Web Services account identifier of the account that owns the S3
+	// bucket.
+	OwnerAccountId *string
+
 	// The canonical user ID of the owner of the S3 bucket.
 	OwnerId *string
 
@@ -7197,6 +7752,103 @@ type AwsSsmPatchComplianceDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Details about a rate-based rule for global resources. A rate-based rule provides
+// settings to indicate when to allow, block, or count a request. Rate-based rules
+// include the number of requests that arrive over a specified period of time.
+type AwsWafRateBasedRuleDetails struct {
+
+	// The predicates to include in the rate-based rule.
+	MatchPredicates []AwsWafRateBasedRuleMatchPredicate
+
+	// The name of the metrics for the rate-based rule.
+	MetricName *string
+
+	// The name of the rate-based rule.
+	Name *string
+
+	// The field that WAF uses to determine whether requests are likely arriving from
+	// single source and are subject to rate monitoring.
+	RateKey *string
+
+	// The maximum number of requests that have an identical value for the field
+	// specified in RateKey that are allowed within a five-minute period. If the number
+	// of requests exceeds RateLimit and the other predicates specified in the rule are
+	// met, WAF triggers the action for the rule.
+	RateLimit int64
+
+	// The unique identifier for the rate-based rule.
+	RuleId *string
+
+	noSmithyDocumentSerde
+}
+
+// A match predicate. A predicate might look for characteristics such as specific
+// IP addresses, geographic locations, or sizes.
+type AwsWafRateBasedRuleMatchPredicate struct {
+
+	// The unique identifier for the predicate.
+	DataId *string
+
+	// If set to true, then the rule actions are performed on requests that match the
+	// predicate settings. If set to false, then the rule actions are performed on all
+	// requests except those that match the predicate settings.
+	Negated bool
+
+	// The type of predicate.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// contains details about a rate-based rule for Regional resources. A rate-based
+// rule provides settings to indicate when to allow, block, or count a request.
+// Rate-based rules include the number of requests that arrive over a specified
+// period of time.
+type AwsWafRegionalRateBasedRuleDetails struct {
+
+	// The predicates to include in the rate-based rule.
+	MatchPredicates []AwsWafRegionalRateBasedRuleMatchPredicate
+
+	// The name of the metrics for the rate-based rule.
+	MetricName *string
+
+	// The name of the rate-based rule.
+	Name *string
+
+	// The field that WAF uses to determine whether requests are likely arriving from
+	// single source and are subject to rate monitoring.
+	RateKey *string
+
+	// The maximum number of requests that have an identical value for the field
+	// specified in RateKey that are allowed within a five-minute period. If the number
+	// of requests exceeds RateLimit and the other predicates specified in the rule are
+	// met, WAF triggers the action for the rule.
+	RateLimit int64
+
+	// The unique identifier for the rate-based rule.
+	RuleId *string
+
+	noSmithyDocumentSerde
+}
+
+// Details for a match predicate. A predicate might look for characteristics such
+// as specific IP addresses, geographic locations, or sizes.
+type AwsWafRegionalRateBasedRuleMatchPredicate struct {
+
+	// The unique identifier for the predicate.
+	DataId *string
+
+	// If set to true, then the rule actions are performed on requests that match the
+	// predicate settings. If set to false, then the rule actions are performed on all
+	// requests except those that match the predicate settings.
+	Negated bool
+
+	// The type of predicate.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
 // Details about an WAF WebACL.
 type AwsWafWebAclDetails struct {
 
@@ -7250,6 +7902,24 @@ type AwsWafWebAclRule struct {
 
 	// The rule type. Valid values: REGULAR | RATE_BASED | GROUP The default is
 	// REGULAR.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the encryption configuration for X-Ray.
+type AwsXrayEncryptionConfigDetails struct {
+
+	// The identifier of the KMS key that is used for encryption. Provided if Type is
+	// KMS.
+	KeyId *string
+
+	// The current status of the encryption configuration. When Status is UPDATING,
+	// X-Ray might use both the old and new encryption.
+	Status *string
+
+	// The type of encryption. KMS indicates that the encryption uses KMS keys. NONE
+	// indicates to use the default encryption.
 	Type *string
 
 	noSmithyDocumentSerde
@@ -8479,11 +9149,17 @@ type ResourceDetails struct {
 	// Details for an EC2 VPC.
 	AwsEc2Vpc *AwsEc2VpcDetails
 
+	// Details about the service configuration for a VPC endpoint service.
+	AwsEc2VpcEndpointService *AwsEc2VpcEndpointServiceDetails
+
 	// Details about an EC2 VPN connection.
 	AwsEc2VpnConnection *AwsEc2VpnConnectionDetails
 
-	// information about an Amazon ECR image.
+	// Information about an Amazon ECR image.
 	AwsEcrContainerImage *AwsEcrContainerImageDetails
+
+	// Information about an Amazon Elastic Container Registry repository.
+	AwsEcrRepository *AwsEcrRepositoryDetails
 
 	// Details about an ECS cluster.
 	AwsEcsCluster *AwsEcsClusterDetails
@@ -8494,6 +9170,9 @@ type ResourceDetails struct {
 	// Details about a task definition. A task definition describes the container and
 	// volume definitions of an Amazon Elastic Container Service task.
 	AwsEcsTaskDefinition *AwsEcsTaskDefinitionDetails
+
+	// Details about an Amazon EKS cluster.
+	AwsEksCluster *AwsEksClusterDetails
 
 	// Details about an Elastic Beanstalk environment.
 	AwsElasticBeanstalkEnvironment *AwsElasticBeanstalkEnvironmentDetails
@@ -8530,6 +9209,9 @@ type ResourceDetails struct {
 
 	// Details for a Lambda layer version.
 	AwsLambdaLayerVersion *AwsLambdaLayerVersionDetails
+
+	// Details about an Amazon OpenSearch Service domain.
+	AwsOpenSearchServiceDomain *AwsOpenSearchServiceDomainDetails
 
 	// Details about an Amazon RDS database cluster.
 	AwsRdsDbCluster *AwsRdsDbClusterDetails
@@ -8571,8 +9253,17 @@ type ResourceDetails struct {
 	// patch baseline that was used to patch the instance.
 	AwsSsmPatchCompliance *AwsSsmPatchComplianceDetails
 
+	// Details about a rate-based rule for global resources.
+	AwsWafRateBasedRule *AwsWafRateBasedRuleDetails
+
+	// Details about a rate-based rule for Regional resources.
+	AwsWafRegionalRateBasedRule *AwsWafRegionalRateBasedRuleDetails
+
 	// Details for an WAF WebACL.
 	AwsWafWebAcl *AwsWafWebAclDetails
+
+	// Information about the encryption configuration for X-Ray.
+	AwsXrayEncryptionConfig *AwsXrayEncryptionConfigDetails
 
 	// Details about a container resource related to a finding.
 	Container *ContainerDetails

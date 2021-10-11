@@ -38,6 +38,22 @@ type UpdateTrackerInput struct {
 	// Updates the description for the tracker resource.
 	Description *string
 
+	// Updates the position filtering for the tracker resource. Valid values:
+	//
+	// *
+	// TimeBased - Location updates are evaluated against linked geofence collections,
+	// but not every location update is stored. If your update frequency is more often
+	// than 30 seconds, only one update per 30 seconds is stored for each unique device
+	// ID.
+	//
+	// * DistanceBased - If the device has moved less than 30 m (98.4 ft),
+	// location updates are ignored. Location updates within this distance are neither
+	// evaluated against linked geofence collections, nor stored. This helps control
+	// costs by reducing the number of geofence evaluations and device positions to
+	// retrieve. Distance-based filtering can also reduce the jitter effect when
+	// displaying device trajectory on a map.
+	PositionFiltering types.PositionFiltering
+
 	// Updates the pricing plan for the tracker resource. For more information about
 	// each pricing plan option restrictions, see Amazon Location Service pricing
 	// (https://aws.amazon.com/location/pricing/).

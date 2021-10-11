@@ -50,6 +50,26 @@ func (m *validateOpBatchGetVariable) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCancelBatchImportJob struct {
+}
+
+func (*validateOpCancelBatchImportJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelBatchImportJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelBatchImportJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelBatchImportJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCancelBatchPredictionJob struct {
 }
 
@@ -65,6 +85,26 @@ func (m *validateOpCancelBatchPredictionJob) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCancelBatchPredictionJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateBatchImportJob struct {
+}
+
+func (*validateOpCreateBatchImportJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateBatchImportJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateBatchImportJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateBatchImportJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -190,6 +230,26 @@ func (m *validateOpCreateVariable) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteBatchImportJob struct {
+}
+
+func (*validateOpDeleteBatchImportJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteBatchImportJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteBatchImportJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteBatchImportJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteBatchPredictionJob struct {
 }
 
@@ -285,6 +345,26 @@ func (m *validateOpDeleteEvent) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteEventInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteEventsByEventType struct {
+}
+
+func (*validateOpDeleteEventsByEventType) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteEventsByEventType) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteEventsByEventTypeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteEventsByEventTypeInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -470,6 +550,26 @@ func (m *validateOpDescribeDetector) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetDeleteEventsByEventTypeStatus struct {
+}
+
+func (*validateOpGetDeleteEventsByEventTypeStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDeleteEventsByEventTypeStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDeleteEventsByEventTypeStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDeleteEventsByEventTypeStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetDetectorVersion struct {
 }
 
@@ -485,6 +585,26 @@ func (m *validateOpGetDetectorVersion) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetDetectorVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetEvent struct {
+}
+
+func (*validateOpGetEvent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetEvent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetEventInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetEventInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -710,6 +830,26 @@ func (m *validateOpPutOutcome) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSendEvent struct {
+}
+
+func (*validateOpSendEvent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSendEvent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SendEventInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSendEventInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -805,6 +945,26 @@ func (m *validateOpUpdateDetectorVersionStatus) HandleInitialize(ctx context.Con
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateDetectorVersionStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateEventLabel struct {
+}
+
+func (*validateOpUpdateEventLabel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateEventLabel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateEventLabelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateEventLabelInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -938,8 +1098,16 @@ func addOpBatchGetVariableValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetVariable{}, middleware.After)
 }
 
+func addOpCancelBatchImportJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelBatchImportJob{}, middleware.After)
+}
+
 func addOpCancelBatchPredictionJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelBatchPredictionJob{}, middleware.After)
+}
+
+func addOpCreateBatchImportJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateBatchImportJob{}, middleware.After)
 }
 
 func addOpCreateBatchPredictionJobValidationMiddleware(stack *middleware.Stack) error {
@@ -966,6 +1134,10 @@ func addOpCreateVariableValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateVariable{}, middleware.After)
 }
 
+func addOpDeleteBatchImportJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteBatchImportJob{}, middleware.After)
+}
+
 func addOpDeleteBatchPredictionJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteBatchPredictionJob{}, middleware.After)
 }
@@ -984,6 +1156,10 @@ func addOpDeleteEntityTypeValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteEventValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteEvent{}, middleware.After)
+}
+
+func addOpDeleteEventsByEventTypeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteEventsByEventType{}, middleware.After)
 }
 
 func addOpDeleteEventTypeValidationMiddleware(stack *middleware.Stack) error {
@@ -1022,8 +1198,16 @@ func addOpDescribeDetectorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeDetector{}, middleware.After)
 }
 
+func addOpGetDeleteEventsByEventTypeStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDeleteEventsByEventTypeStatus{}, middleware.After)
+}
+
 func addOpGetDetectorVersionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDetectorVersion{}, middleware.After)
+}
+
+func addOpGetEventValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetEvent{}, middleware.After)
 }
 
 func addOpGetEventPredictionValidationMiddleware(stack *middleware.Stack) error {
@@ -1070,6 +1254,10 @@ func addOpPutOutcomeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutOutcome{}, middleware.After)
 }
 
+func addOpSendEventValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSendEvent{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
@@ -1088,6 +1276,10 @@ func addOpUpdateDetectorVersionMetadataValidationMiddleware(stack *middleware.St
 
 func addOpUpdateDetectorVersionStatusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDetectorVersionStatus{}, middleware.After)
+}
+
+func addOpUpdateEventLabelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateEventLabel{}, middleware.After)
 }
 
 func addOpUpdateModelValidationMiddleware(stack *middleware.Stack) error {
@@ -1142,6 +1334,43 @@ func validateExternalEventsDetail(v *types.ExternalEventsDetail) error {
 	}
 	if v.DataAccessRoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataAccessRoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIngestedEventsDetail(v *types.IngestedEventsDetail) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IngestedEventsDetail"}
+	if v.IngestedEventsTimeWindow == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IngestedEventsTimeWindow"))
+	} else if v.IngestedEventsTimeWindow != nil {
+		if err := validateIngestedEventsTimeWindow(v.IngestedEventsTimeWindow); err != nil {
+			invalidParams.AddNested("IngestedEventsTimeWindow", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIngestedEventsTimeWindow(v *types.IngestedEventsTimeWindow) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IngestedEventsTimeWindow"}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1380,6 +1609,21 @@ func validateOpBatchGetVariableInput(v *BatchGetVariableInput) error {
 	}
 }
 
+func validateOpCancelBatchImportJobInput(v *CancelBatchImportJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelBatchImportJobInput"}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCancelBatchPredictionJobInput(v *CancelBatchPredictionJobInput) error {
 	if v == nil {
 		return nil
@@ -1387,6 +1631,38 @@ func validateOpCancelBatchPredictionJobInput(v *CancelBatchPredictionJobInput) e
 	invalidParams := smithy.InvalidParamsError{Context: "CancelBatchPredictionJobInput"}
 	if v.JobId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateBatchImportJobInput(v *CreateBatchImportJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateBatchImportJobInput"}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if v.InputPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputPath"))
+	}
+	if v.OutputPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputPath"))
+	}
+	if v.EventTypeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventTypeName"))
+	}
+	if v.IamRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IamRoleArn"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1514,6 +1790,11 @@ func validateOpCreateModelVersionInput(v *CreateModelVersionInput) error {
 			invalidParams.AddNested("ExternalEventsDetail", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.IngestedEventsDetail != nil {
+		if err := validateIngestedEventsDetail(v.IngestedEventsDetail); err != nil {
+			invalidParams.AddNested("IngestedEventsDetail", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
@@ -1579,6 +1860,21 @@ func validateOpCreateVariableInput(v *CreateVariableInput) error {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteBatchImportJobInput(v *DeleteBatchImportJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteBatchImportJobInput"}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1658,6 +1954,21 @@ func validateOpDeleteEventInput(v *DeleteEventInput) error {
 	if v.EventId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EventId"))
 	}
+	if v.EventTypeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventTypeName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteEventsByEventTypeInput(v *DeleteEventsByEventTypeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteEventsByEventTypeInput"}
 	if v.EventTypeName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EventTypeName"))
 	}
@@ -1816,6 +2127,21 @@ func validateOpDescribeDetectorInput(v *DescribeDetectorInput) error {
 	}
 }
 
+func validateOpGetDeleteEventsByEventTypeStatusInput(v *GetDeleteEventsByEventTypeStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDeleteEventsByEventTypeStatusInput"}
+	if v.EventTypeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventTypeName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetDetectorVersionInput(v *GetDetectorVersionInput) error {
 	if v == nil {
 		return nil
@@ -1826,6 +2152,24 @@ func validateOpGetDetectorVersionInput(v *GetDetectorVersionInput) error {
 	}
 	if v.DetectorVersionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DetectorVersionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetEventInput(v *GetEventInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetEventInput"}
+	if v.EventId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventId"))
+	}
+	if v.EventTypeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventTypeName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2086,6 +2430,37 @@ func validateOpPutOutcomeInput(v *PutOutcomeInput) error {
 	}
 }
 
+func validateOpSendEventInput(v *SendEventInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SendEventInput"}
+	if v.EventId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventId"))
+	}
+	if v.EventTypeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventTypeName"))
+	}
+	if v.EventTimestamp == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventTimestamp"))
+	}
+	if v.EventVariables == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventVariables"))
+	}
+	if v.Entities == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Entities"))
+	} else if v.Entities != nil {
+		if err := validateListOfEntities(v.Entities); err != nil {
+			invalidParams.AddNested("Entities", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpTagResourceInput(v *TagResourceInput) error {
 	if v == nil {
 		return nil
@@ -2201,6 +2576,30 @@ func validateOpUpdateDetectorVersionStatusInput(v *UpdateDetectorVersionStatusIn
 	}
 }
 
+func validateOpUpdateEventLabelInput(v *UpdateEventLabelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateEventLabelInput"}
+	if v.EventId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventId"))
+	}
+	if v.EventTypeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventTypeName"))
+	}
+	if v.AssignedLabel == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssignedLabel"))
+	}
+	if v.LabelTimestamp == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LabelTimestamp"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateModelInput(v *UpdateModelInput) error {
 	if v == nil {
 		return nil
@@ -2236,6 +2635,11 @@ func validateOpUpdateModelVersionInput(v *UpdateModelVersionInput) error {
 	if v.ExternalEventsDetail != nil {
 		if err := validateExternalEventsDetail(v.ExternalEventsDetail); err != nil {
 			invalidParams.AddNested("ExternalEventsDetail", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.IngestedEventsDetail != nil {
+		if err := validateIngestedEventsDetail(v.IngestedEventsDetail); err != nil {
+			invalidParams.AddNested("IngestedEventsDetail", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Tags != nil {

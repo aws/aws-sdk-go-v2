@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of AWS App Runner connections that are associated with your AWS
-// account.
+// Returns a list of App Runner connections that are associated with your Amazon
+// Web Services account.
 func (c *Client) ListConnections(ctx context.Context, params *ListConnectionsInput, optFns ...func(*Options)) (*ListConnectionsOutput, error) {
 	if params == nil {
 		params = &ListConnectionsInput{}

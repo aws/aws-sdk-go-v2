@@ -385,6 +385,21 @@
                 }
             }
         },
+        "com.amazonaws.codebuild#BatchReportModeType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "REPORT_INDIVIDUAL_BUILDS",
+                        "name": "REPORT_INDIVIDUAL_BUILDS"
+                    },
+                    {
+                        "value": "REPORT_AGGREGATED_BATCH",
+                        "name": "REPORT_AGGREGATED_BATCH"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.codebuild#BatchRestrictions": {
             "type": "structure",
             "members": {
@@ -3127,7 +3142,7 @@
                 "sortOrder": {
                     "target": "com.amazonaws.codebuild#SortOrderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The order to list results in. The results are sorted by build number, not the build\n            identifier.</p>\n        <p>Valid values include:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>ASCENDING</code>: List the build IDs in ascending order by build\n                    ID.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DESCENDING</code>: List the build IDs in descending order by build\n                    ID.</p>\n            </li>\n         </ul>\n        <p>If the project has more than 100 builds, setting the sort order will result in an\n            error. </p>"
+                        "smithy.api#documentation": "<p>The order to sort the results in. The results are sorted by build number, not the build\n            identifier. If this is not specified, the results are sorted in descending order.</p>\n        <p>Valid values include:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>ASCENDING</code>: List the build identifiers in ascending order, by build number.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DESCENDING</code>: List the build identifiers in descending order, by build number.</p>\n            </li>\n         </ul>\n        <p>If the project has more than 100 builds, setting the sort order will result in an\n            error. </p>"
                     }
                 },
                 "nextToken": {
@@ -3144,7 +3159,7 @@
                 "ids": {
                     "target": "com.amazonaws.codebuild#BuildIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of build IDs for the specified build project, with each build ID representing a\n            single build.</p>"
+                        "smithy.api#documentation": "<p>A list of build identifiers for the specified build project, with each build ID representing a\n            single build.</p>"
                     }
                 },
                 "nextToken": {
@@ -4182,6 +4197,12 @@
                     "target": "com.amazonaws.codebuild#WrapperInt",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the maximum amount of time, in minutes, that the batch build must be completed in.</p>"
+                    }
+                },
+                "batchReportMode": {
+                    "target": "com.amazonaws.codebuild#BatchReportModeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how build status reports are sent to the source provider for the batch build. This property is only used\n              when the source provider for your project is Bitbucket, GitHub, or GitHub Enterprise,\n              and your project is configured to report build statuses to the source provider.</p>\n         <dl>\n            <dt>REPORT_AGGREGATED_BATCH</dt>\n            <dd>\n               <p>(Default) Aggregate all of the build statuses into a single status report.</p>\n            </dd>\n            <dt>REPORT_INDIVIDUAL_BUILDS</dt>\n            <dd>\n               <p>Send a separate status report for each individual build.</p>\n            </dd>\n         </dl>"
                     }
                 }
             },
@@ -6252,7 +6273,7 @@
                 "secondaryArtifacts": {
                     "target": "com.amazonaws.codebuild#ProjectArtifactsList",
                     "traits": {
-                        "smithy.api#documentation": "<p> An array of <code>ProjectSource</code> objects. </p>"
+                        "smithy.api#documentation": "<p> An array of <code>ProjectArtifact</code> objects. </p>"
                     }
                 },
                 "cache": {

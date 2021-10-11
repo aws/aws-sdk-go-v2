@@ -3129,6 +3129,11 @@ func awsAwsquery_serializeOpDocumentCreateTargetGroupInput(v *CreateTargetGroupI
 		objectKey.Integer(*v.HealthyThresholdCount)
 	}
 
+	if len(v.IpAddressType) > 0 {
+		objectKey := object.Key("IpAddressType")
+		objectKey.String(string(v.IpAddressType))
+	}
+
 	if v.Matcher != nil {
 		objectKey := object.Key("Matcher")
 		if err := awsAwsquery_serializeDocumentMatcher(v.Matcher, objectKey); err != nil {

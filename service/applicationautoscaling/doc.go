@@ -32,30 +32,32 @@
 // * Amazon Managed Streaming
 // for Apache Kafka broker storage
 //
-// * Amazon SageMaker endpoint variants
+// * Amazon Neptune clusters
 //
-// * Spot
-// Fleet (Amazon EC2) requests
+// * Amazon SageMaker
+// endpoint variants
 //
-// * Custom resources provided by your own
-// applications or services
+// * Spot Fleets (Amazon EC2)
 //
-// API Summary The Application Auto Scaling service API
-// includes three key sets of actions:
+// * Custom resources provided by
+// your own applications or services
 //
-// * Register and manage scalable targets -
-// Register Amazon Web Services or custom resources as scalable targets (a resource
-// that Application Auto Scaling can scale), set minimum and maximum capacity
-// limits, and retrieve information on existing scalable targets.
+// API Summary The Application Auto Scaling
+// service API includes three key sets of actions:
 //
-// * Configure and
-// manage automatic scaling - Define scaling policies to dynamically scale your
-// resources in response to CloudWatch alarms, schedule one-time or recurring
-// scaling actions, and retrieve your recent scaling activity history.
+// * Register and manage scalable
+// targets - Register Amazon Web Services or custom resources as scalable targets
+// (a resource that Application Auto Scaling can scale), set minimum and maximum
+// capacity limits, and retrieve information on existing scalable targets.
 //
-// * Suspend
-// and resume scaling - Temporarily suspend and later resume automatic scaling by
-// calling the RegisterScalableTarget
+// *
+// Configure and manage automatic scaling - Define scaling policies to dynamically
+// scale your resources in response to CloudWatch alarms, schedule one-time or
+// recurring scaling actions, and retrieve your recent scaling activity history.
+//
+// *
+// Suspend and resume scaling - Temporarily suspend and later resume automatic
+// scaling by calling the RegisterScalableTarget
 // (https://docs.aws.amazon.com/autoscaling/application/APIReference/API_RegisterScalableTarget.html)
 // API action for any Application Auto Scaling scalable target. You can suspend and
 // resume (individually or in combination) scale-out activities that are triggered

@@ -42,8 +42,8 @@ type CreatePlaceIndexInput struct {
 	//
 	// *
 	// Here – For additional information about HERE Technologies
-	// (https://docs.aws.amazon.com/location/latest/developerguide/HERE.html)'s
-	// coverage in your region of interest, see HERE details on goecoding coverage
+	// (https://docs.aws.amazon.com/location/latest/developerguide/HERE.html)' coverage
+	// in your region of interest, see HERE details on goecoding coverage
 	// (https://developer.here.com/documentation/geocoder/dev_guide/topics/coverage-geocoder.html).
 	// Place index resources using HERE Technologies as a data provider can't store
 	// results
@@ -74,8 +74,8 @@ type CreatePlaceIndexInput struct {
 	IndexName *string
 
 	// Specifies the pricing plan for your place index resource. For additional details
-	// and restrictions on each pricing plan option, see the Amazon Location Service
-	// pricing page (https://aws.amazon.com/location/pricing/).
+	// and restrictions on each pricing plan option, see Amazon Location Service
+	// pricing (https://aws.amazon.com/location/pricing/).
 	//
 	// This member is required.
 	PricingPlan types.PricingPlan

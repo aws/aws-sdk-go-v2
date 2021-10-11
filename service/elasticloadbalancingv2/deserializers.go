@@ -10886,6 +10886,19 @@ func awsAwsquery_deserializeDocumentTargetGroup(v **types.TargetGroup, decoder s
 				sv.HealthyThresholdCount = ptr.Int32(int32(i64))
 			}
 
+		case strings.EqualFold("IpAddressType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.IpAddressType = types.TargetGroupIpAddressTypeEnum(xtv)
+			}
+
 		case strings.EqualFold("LoadBalancerArns", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentLoadBalancerArns(&sv.LoadBalancerArns, nodeDecoder); err != nil {

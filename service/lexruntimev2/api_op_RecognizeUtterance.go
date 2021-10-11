@@ -39,7 +39,27 @@ import (
 //
 // The example contains a Java application that
 // compresses and encodes a Java object to send to Amazon Lex V2, and a second that
-// decodes and decompresses a response from Amazon Lex V2.
+// decodes and decompresses a response from Amazon Lex V2. If the optional
+// post-fulfillment response is specified, the messages are returned as follows.
+// For more information, see PostFulfillmentStatusSpecification
+// (https://docs.aws.amazon.com/lexv2/latest/dg/API_PostFulfillmentStatusSpecification.html).
+//
+// *
+// Success message - Returned if the Lambda function completes successfully and the
+// intent state is fulfilled or ready fulfillment if the message is present.
+//
+// *
+// Failed message - The failed message is returned if the Lambda function throws an
+// exception or if the Lambda function returns a failed intent state without a
+// message.
+//
+// * Timeout message - If you don't configure a timeout message and a
+// timeout, and the Lambda function doesn't return within 30 seconds, the timeout
+// message is returned. If you configure a timeout, the timeout message is returned
+// when the period times out.
+//
+// For more information, see Completion message
+// (https://docs.aws.amazon.com/lexv2/latest/dg/streaming-progress.html#progress-complete.html).
 func (c *Client) RecognizeUtterance(ctx context.Context, params *RecognizeUtteranceInput, optFns ...func(*Options)) (*RecognizeUtteranceOutput, error) {
 	if params == nil {
 		params = &RecognizeUtteranceInput{}

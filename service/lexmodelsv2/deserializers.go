@@ -14356,6 +14356,195 @@ func awsRestjson1_deserializeDocumentFulfillmentCodeHookSettings(v **types.Fulfi
 				sv.Enabled = jtv
 			}
 
+		case "fulfillmentUpdatesSpecification":
+			if err := awsRestjson1_deserializeDocumentFulfillmentUpdatesSpecification(&sv.FulfillmentUpdatesSpecification, value); err != nil {
+				return err
+			}
+
+		case "postFulfillmentStatusSpecification":
+			if err := awsRestjson1_deserializeDocumentPostFulfillmentStatusSpecification(&sv.PostFulfillmentStatusSpecification, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFulfillmentStartResponseSpecification(v **types.FulfillmentStartResponseSpecification, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FulfillmentStartResponseSpecification
+	if *v == nil {
+		sv = &types.FulfillmentStartResponseSpecification{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "allowInterrupt":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.AllowInterrupt = ptr.Bool(jtv)
+			}
+
+		case "delayInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected FulfillmentStartResponseDelay to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DelayInSeconds = ptr.Int32(int32(i64))
+			}
+
+		case "messageGroups":
+			if err := awsRestjson1_deserializeDocumentMessageGroupsList(&sv.MessageGroups, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFulfillmentUpdateResponseSpecification(v **types.FulfillmentUpdateResponseSpecification, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FulfillmentUpdateResponseSpecification
+	if *v == nil {
+		sv = &types.FulfillmentUpdateResponseSpecification{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "allowInterrupt":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.AllowInterrupt = ptr.Bool(jtv)
+			}
+
+		case "frequencyInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected FulfillmentUpdateResponseFrequency to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FrequencyInSeconds = ptr.Int32(int32(i64))
+			}
+
+		case "messageGroups":
+			if err := awsRestjson1_deserializeDocumentMessageGroupsList(&sv.MessageGroups, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFulfillmentUpdatesSpecification(v **types.FulfillmentUpdatesSpecification, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FulfillmentUpdatesSpecification
+	if *v == nil {
+		sv = &types.FulfillmentUpdatesSpecification{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "active":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.Active = ptr.Bool(jtv)
+			}
+
+		case "startResponse":
+			if err := awsRestjson1_deserializeDocumentFulfillmentStartResponseSpecification(&sv.StartResponse, value); err != nil {
+				return err
+			}
+
+		case "timeoutInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected FulfillmentTimeout to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TimeoutInSeconds = ptr.Int32(int32(i64))
+			}
+
+		case "updateResponse":
+			if err := awsRestjson1_deserializeDocumentFulfillmentUpdateResponseSpecification(&sv.UpdateResponse, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -15423,6 +15612,52 @@ func awsRestjson1_deserializeDocumentPlainTextMessage(v **types.PlainTextMessage
 					return fmt.Errorf("expected PlainTextMessageValue to be of type string, got %T instead", value)
 				}
 				sv.Value = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPostFulfillmentStatusSpecification(v **types.PostFulfillmentStatusSpecification, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PostFulfillmentStatusSpecification
+	if *v == nil {
+		sv = &types.PostFulfillmentStatusSpecification{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "failureResponse":
+			if err := awsRestjson1_deserializeDocumentResponseSpecification(&sv.FailureResponse, value); err != nil {
+				return err
+			}
+
+		case "successResponse":
+			if err := awsRestjson1_deserializeDocumentResponseSpecification(&sv.SuccessResponse, value); err != nil {
+				return err
+			}
+
+		case "timeoutResponse":
+			if err := awsRestjson1_deserializeDocumentResponseSpecification(&sv.TimeoutResponse, value); err != nil {
+				return err
 			}
 
 		default:

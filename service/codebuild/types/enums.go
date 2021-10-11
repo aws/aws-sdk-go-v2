@@ -78,6 +78,24 @@ func (AuthType) Values() []AuthType {
 	}
 }
 
+type BatchReportModeType string
+
+// Enum values for BatchReportModeType
+const (
+	BatchReportModeTypeReportIndividualBuilds BatchReportModeType = "REPORT_INDIVIDUAL_BUILDS"
+	BatchReportModeTypeReportAggregatedBatch  BatchReportModeType = "REPORT_AGGREGATED_BATCH"
+)
+
+// Values returns all known values for BatchReportModeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BatchReportModeType) Values() []BatchReportModeType {
+	return []BatchReportModeType{
+		"REPORT_INDIVIDUAL_BUILDS",
+		"REPORT_AGGREGATED_BATCH",
+	}
+}
+
 type BucketOwnerAccess string
 
 // Enum values for BucketOwnerAccess

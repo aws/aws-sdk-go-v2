@@ -27255,6 +27255,9 @@ func awsRestjson1_deserializeOpErrorUpdatePhoneNumber(response *smithyhttp.Respo
 	case strings.EqualFold("BadRequestException", errorCode):
 		return awsRestjson1_deserializeErrorBadRequestException(response, errorBody)
 
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("ForbiddenException", errorCode):
 		return awsRestjson1_deserializeErrorForbiddenException(response, errorBody)
 
@@ -30385,6 +30388,52 @@ func awsRestjson1_deserializeDocumentAppInstanceUserSummary(v **types.AppInstanc
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentArtifactsConfiguration(v **types.ArtifactsConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ArtifactsConfiguration
+	if *v == nil {
+		sv = &types.ArtifactsConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Audio":
+			if err := awsRestjson1_deserializeDocumentAudioArtifactsConfiguration(&sv.Audio, value); err != nil {
+				return err
+			}
+
+		case "Content":
+			if err := awsRestjson1_deserializeDocumentContentArtifactsConfiguration(&sv.Content, value); err != nil {
+				return err
+			}
+
+		case "Video":
+			if err := awsRestjson1_deserializeDocumentVideoArtifactsConfiguration(&sv.Video, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAttendee(v **types.Attendee, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -30443,6 +30492,42 @@ func awsRestjson1_deserializeDocumentAttendee(v **types.Attendee, value interfac
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAttendeeIdList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected GuidString to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAttendeeList(v *[]types.Attendee, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -30474,6 +30559,46 @@ func awsRestjson1_deserializeDocumentAttendeeList(v *[]types.Attendee, value int
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAudioArtifactsConfiguration(v **types.AudioArtifactsConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AudioArtifactsConfiguration
+	if *v == nil {
+		sv = &types.AudioArtifactsConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MuxType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AudioMuxType to be of type string, got %T instead", value)
+				}
+				sv.MuxType = types.AudioMuxType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -32164,6 +32289,47 @@ func awsRestjson1_deserializeDocumentChannelSummaryList(v *[]types.ChannelSummar
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentChimeSdkMeetingConfiguration(v **types.ChimeSdkMeetingConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ChimeSdkMeetingConfiguration
+	if *v == nil {
+		sv = &types.ChimeSdkMeetingConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ArtifactsConfiguration":
+			if err := awsRestjson1_deserializeDocumentArtifactsConfiguration(&sv.ArtifactsConfiguration, value); err != nil {
+				return err
+			}
+
+		case "SourceConfiguration":
+			if err := awsRestjson1_deserializeDocumentSourceConfiguration(&sv.SourceConfiguration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -32202,6 +32368,55 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentContentArtifactsConfiguration(v **types.ContentArtifactsConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ContentArtifactsConfiguration
+	if *v == nil {
+		sv = &types.ContentArtifactsConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MuxType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ContentMuxType to be of type string, got %T instead", value)
+				}
+				sv.MuxType = types.ContentMuxType(jtv)
+			}
+
+		case "State":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ArtifactsState to be of type string, got %T instead", value)
+				}
+				sv.State = types.ArtifactsState(jtv)
 			}
 
 		default:
@@ -32534,6 +32749,42 @@ func awsRestjson1_deserializeDocumentEventsConfiguration(v **types.EventsConfigu
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentExternalUserIdList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ExternalUserIdType to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -32883,6 +33134,11 @@ func awsRestjson1_deserializeDocumentMediaCapturePipeline(v **types.MediaCapture
 
 	for key, value := range shape {
 		switch key {
+		case "ChimeSdkMeetingConfiguration":
+			if err := awsRestjson1_deserializeDocumentChimeSdkMeetingConfiguration(&sv.ChimeSdkMeetingConfiguration, value); err != nil {
+				return err
+			}
+
 		case "CreatedTimestamp":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -35151,6 +35407,47 @@ func awsRestjson1_deserializeDocumentRoomRetentionSettings(v **types.RoomRetenti
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentSelectedVideoStreams(v **types.SelectedVideoStreams, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SelectedVideoStreams
+	if *v == nil {
+		sv = &types.SelectedVideoStreams{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AttendeeIds":
+			if err := awsRestjson1_deserializeDocumentAttendeeIdList(&sv.AttendeeIds, value); err != nil {
+				return err
+			}
+
+		case "ExternalUserIds":
+			if err := awsRestjson1_deserializeDocumentExternalUserIdList(&sv.ExternalUserIds, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentSensitiveStringList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -35870,6 +36167,42 @@ func awsRestjson1_deserializeDocumentSipRuleTargetApplicationList(v *[]types.Sip
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSourceConfiguration(v **types.SourceConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SourceConfiguration
+	if *v == nil {
+		sv = &types.SourceConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "SelectedVideoStreams":
+			if err := awsRestjson1_deserializeDocumentSelectedVideoStreams(&sv.SelectedVideoStreams, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -36757,6 +37090,55 @@ func awsRestjson1_deserializeDocumentUserSettings(v **types.UserSettings, value 
 		case "Telephony":
 			if err := awsRestjson1_deserializeDocumentTelephonySettings(&sv.Telephony, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVideoArtifactsConfiguration(v **types.VideoArtifactsConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VideoArtifactsConfiguration
+	if *v == nil {
+		sv = &types.VideoArtifactsConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MuxType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VideoMuxType to be of type string, got %T instead", value)
+				}
+				sv.MuxType = types.VideoMuxType(jtv)
+			}
+
+		case "State":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ArtifactsState to be of type string, got %T instead", value)
+				}
+				sv.State = types.ArtifactsState(jtv)
 			}
 
 		default:

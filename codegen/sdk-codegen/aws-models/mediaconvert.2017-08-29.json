@@ -4830,6 +4830,51 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.mediaconvert#DeletePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mediaconvert#DeletePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mediaconvert#DeletePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mediaconvert#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconvert#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconvert#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconvert#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconvert#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconvert#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Permanently delete a policy that you created.",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/2017-08-29/policy",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.mediaconvert#DeletePolicyRequest": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.mediaconvert#DeletePolicyResponse": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.mediaconvert#DeletePreset": {
             "type": "operation",
             "input": {
@@ -7038,6 +7083,59 @@
                     "traits": {
                         "smithy.api#documentation": "A job template is a pre-made set of encoding instructions that you can use to quickly create a job.",
                         "smithy.api#jsonName": "jobTemplate"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mediaconvert#GetPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mediaconvert#GetPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mediaconvert#GetPolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mediaconvert#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconvert#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconvert#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconvert#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconvert#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconvert#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Retrieve the JSON for your policy.",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2017-08-29/policy",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.mediaconvert#GetPolicyRequest": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.mediaconvert#GetPolicyResponse": {
+            "type": "structure",
+            "members": {
+                "Policy": {
+                    "target": "com.amazonaws.mediaconvert#Policy",
+                    "traits": {
+                        "smithy.api#documentation": "A policy configures behavior that you allow or disallow for your account. For information about MediaConvert policies, see the user guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html",
+                        "smithy.api#jsonName": "policy"
                     }
                 }
             }
@@ -10201,6 +10299,22 @@
                 ]
             }
         },
+        "com.amazonaws.mediaconvert#InputPolicy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "An input policy allows or disallows a job you submit to run based on the conditions that you specify.",
+                "smithy.api#enum": [
+                    {
+                        "value": "ALLOWED",
+                        "name": "ALLOWED"
+                    },
+                    {
+                        "value": "DISALLOWED",
+                        "name": "DISALLOWED"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.mediaconvert#InputPsiControl": {
             "type": "string",
             "traits": {
@@ -13199,6 +13313,9 @@
                     "target": "com.amazonaws.mediaconvert#DeleteJobTemplate"
                 },
                 {
+                    "target": "com.amazonaws.mediaconvert#DeletePolicy"
+                },
+                {
                     "target": "com.amazonaws.mediaconvert#DeletePreset"
                 },
                 {
@@ -13215,6 +13332,9 @@
                 },
                 {
                     "target": "com.amazonaws.mediaconvert#GetJobTemplate"
+                },
+                {
+                    "target": "com.amazonaws.mediaconvert#GetPolicy"
                 },
                 {
                     "target": "com.amazonaws.mediaconvert#GetPreset"
@@ -13236,6 +13356,9 @@
                 },
                 {
                     "target": "com.amazonaws.mediaconvert#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.mediaconvert#PutPolicy"
                 },
                 {
                     "target": "com.amazonaws.mediaconvert#TagResource"
@@ -15401,6 +15524,35 @@
                 "smithy.api#documentation": "If you work with a third party video watermarking partner, use the group of settings that correspond with your watermarking partner to include watermarks in your output."
             }
         },
+        "com.amazonaws.mediaconvert#Policy": {
+            "type": "structure",
+            "members": {
+                "HttpInputs": {
+                    "target": "com.amazonaws.mediaconvert#InputPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "Allow or disallow jobs that specify HTTP inputs.",
+                        "smithy.api#jsonName": "httpInputs"
+                    }
+                },
+                "HttpsInputs": {
+                    "target": "com.amazonaws.mediaconvert#InputPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "Allow or disallow jobs that specify HTTPS inputs.",
+                        "smithy.api#jsonName": "httpsInputs"
+                    }
+                },
+                "S3Inputs": {
+                    "target": "com.amazonaws.mediaconvert#InputPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "Allow or disallow jobs that specify Amazon S3 inputs.",
+                        "smithy.api#jsonName": "s3Inputs"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A policy configures behavior that you allow or disallow for your account. For information about MediaConvert policies, see the user guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html"
+            }
+        },
         "com.amazonaws.mediaconvert#Preset": {
             "type": "structure",
             "members": {
@@ -15812,6 +15964,68 @@
                         "name": "HARD"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.mediaconvert#PutPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mediaconvert#PutPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mediaconvert#PutPolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mediaconvert#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconvert#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconvert#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconvert#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconvert#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconvert#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Create or change your policy. For more information about policies, see the user guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/2017-08-29/policy",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.mediaconvert#PutPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "Policy": {
+                    "target": "com.amazonaws.mediaconvert#Policy",
+                    "traits": {
+                        "smithy.api#documentation": "A policy configures behavior that you allow or disallow for your account. For information about MediaConvert policies, see the user guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html",
+                        "smithy.api#jsonName": "policy",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mediaconvert#PutPolicyResponse": {
+            "type": "structure",
+            "members": {
+                "Policy": {
+                    "target": "com.amazonaws.mediaconvert#Policy",
+                    "traits": {
+                        "smithy.api#documentation": "A policy configures behavior that you allow or disallow for your account. For information about MediaConvert policies, see the user guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html",
+                        "smithy.api#jsonName": "policy"
+                    }
+                }
             }
         },
         "com.amazonaws.mediaconvert#Queue": {

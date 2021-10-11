@@ -6221,6 +6221,15 @@ func awsAwsjson11_deserializeDocumentFileSystem(v **types.FileSystem, value inte
 				sv.FileSystemType = types.FileSystemType(jtv)
 			}
 
+		case "FileSystemTypeVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FileSystemTypeVersion to be of type string, got %T instead", value)
+				}
+				sv.FileSystemTypeVersion = ptr.String(jtv)
+			}
+
 		case "KmsKeyId":
 			if value != nil {
 				jtv, ok := value.(string)

@@ -190,6 +190,26 @@ func (m *validateOpDeleteBackupVault) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteBackupVaultLockConfiguration struct {
+}
+
+func (*validateOpDeleteBackupVaultLockConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteBackupVaultLockConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteBackupVaultLockConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteBackupVaultLockConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteBackupVaultNotifications struct {
 }
 
@@ -750,6 +770,26 @@ func (m *validateOpPutBackupVaultAccessPolicy) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutBackupVaultLockConfiguration struct {
+}
+
+func (*validateOpPutBackupVaultLockConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutBackupVaultLockConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutBackupVaultLockConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutBackupVaultLockConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutBackupVaultNotifications struct {
 }
 
@@ -1026,6 +1066,10 @@ func addOpDeleteBackupVaultValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteBackupVault{}, middleware.After)
 }
 
+func addOpDeleteBackupVaultLockConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteBackupVaultLockConfiguration{}, middleware.After)
+}
+
 func addOpDeleteBackupVaultNotificationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteBackupVaultNotifications{}, middleware.After)
 }
@@ -1136,6 +1180,10 @@ func addOpListTagsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpPutBackupVaultAccessPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutBackupVaultAccessPolicy{}, middleware.After)
+}
+
+func addOpPutBackupVaultLockConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutBackupVaultLockConfiguration{}, middleware.After)
 }
 
 func addOpPutBackupVaultNotificationsValidationMiddleware(stack *middleware.Stack) error {
@@ -1573,6 +1621,21 @@ func validateOpDeleteBackupVaultInput(v *DeleteBackupVaultInput) error {
 	}
 }
 
+func validateOpDeleteBackupVaultLockConfigurationInput(v *DeleteBackupVaultLockConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteBackupVaultLockConfigurationInput"}
+	if v.BackupVaultName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BackupVaultName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteBackupVaultNotificationsInput(v *DeleteBackupVaultNotificationsInput) error {
 	if v == nil {
 		return nil
@@ -1998,6 +2061,21 @@ func validateOpPutBackupVaultAccessPolicyInput(v *PutBackupVaultAccessPolicyInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutBackupVaultAccessPolicyInput"}
+	if v.BackupVaultName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BackupVaultName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutBackupVaultLockConfigurationInput(v *PutBackupVaultLockConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutBackupVaultLockConfigurationInput"}
 	if v.BackupVaultName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BackupVaultName"))
 	}

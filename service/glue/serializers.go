@@ -11434,6 +11434,13 @@ func awsAwsjson11_serializeOpDocumentCreateConnectionInput(v *CreateConnectionIn
 		}
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTagsMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

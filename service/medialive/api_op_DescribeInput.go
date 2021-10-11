@@ -77,7 +77,7 @@ type DescribeInputOutput struct {
 
 	// Certain pull input sources can be dynamic, meaning that they can have their
 	// URL's dynamically changes during input switch actions. Presently, this
-	// functionality only works with MP4_FILE inputs.
+	// functionality only works with MP4_FILE and TS_FILE inputs.
 	InputSourceType types.InputSourceType
 
 	// A list of MediaConnect Flows for this input.
@@ -102,7 +102,7 @@ type DescribeInputOutput struct {
 	// A collection of key-value pairs.
 	Tags map[string]string
 
-	// Placeholder documentation for InputType
+	// The different types of inputs that AWS Elemental MediaLive supports.
 	Type types.InputType
 
 	// Metadata pertaining to the operation's result.

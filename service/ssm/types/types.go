@@ -94,7 +94,9 @@ type Association struct {
 	// schedule runs in Coordinated Universal Time (UTC).
 	ScheduleExpression *string
 
-	// The instances targeted by the request to create an association.
+	// The instances targeted by the request to create an association. You can target
+	// all instances in an Amazon Web Services account by specifying the InstanceIds
+	// key with a value of *.
 	Targets []Target
 
 	noSmithyDocumentSerde
@@ -4589,9 +4591,7 @@ type S3OutputLocation struct {
 	// The S3 bucket subfolder.
 	OutputS3KeyPrefix *string
 
-	// (Deprecated) You can no longer specify this parameter. The system ignores it.
-	// Instead, Amazon Web Services Systems Manager automatically determines the Region
-	// of the S3 bucket.
+	// The Amazon Web Services Region of the S3 bucket.
 	OutputS3Region *string
 
 	noSmithyDocumentSerde

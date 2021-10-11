@@ -158,8 +158,7 @@ type BackupPlan struct {
 
 // Contains an optional backup plan display name and an array of BackupRule
 // objects, each of which specifies a backup rule. Each rule in a backup plan is a
-// separate scheduled task and can back up a different selection of Amazon Web
-// Services resources.
+// separate scheduled task.
 type BackupPlanInput struct {
 
 	// The optional display name of a backup plan.
@@ -436,6 +435,43 @@ type BackupVaultListMember struct {
 	// arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab.
 	EncryptionKeyArn *string
 
+	// The date and time when Backup Vault Lock configuration becomes immutable,
+	// meaning it cannot be changed or deleted. If you applied Vault Lock to your vault
+	// without specifying a lock date, you can change your Vault Lock settings, or
+	// delete Vault Lock from the vault entirely, at any time. This value is in Unix
+	// format, Coordinated Universal Time (UTC), and accurate to milliseconds. For
+	// example, the value 1516925490.087 represents Friday, January 26, 2018
+	// 12:11:30.087 AM.
+	LockDate *time.Time
+
+	// A Boolean value that indicates whether Backup Vault Lock applies to the selected
+	// backup vault. If true, Vault Lock prevents delete and update operations on the
+	// recovery points in the selected vault.
+	Locked *bool
+
+	// The Backup Vault Lock setting that specifies the maximum retention period that
+	// the vault retains its recovery points. If this parameter is not specified, Vault
+	// Lock does not enforce a maximum retention period on the recovery points in the
+	// vault (allowing indefinite storage). If specified, any backup or copy job to the
+	// vault must have a lifecycle policy with a retention period equal to or shorter
+	// than the maximum retention period. If the job's retention period is longer than
+	// that maximum retention period, then the vault fails the backup or copy job, and
+	// you should either modify your lifecycle settings or use a different vault.
+	// Recovery points already stored in the vault prior to Vault Lock are not
+	// affected.
+	MaxRetentionDays *int64
+
+	// The Backup Vault Lock setting that specifies the minimum retention period that
+	// the vault retains its recovery points. If this parameter is not specified, Vault
+	// Lock does not enforce a minimum retention period. If specified, any backup or
+	// copy job to the vault must have a lifecycle policy with a retention period equal
+	// to or longer than the minimum retention period. If the job's retention period is
+	// shorter than that minimum retention period, then the vault fails the backup or
+	// copy job, and you should either modify your lifecycle settings or use a
+	// different vault. Recovery points already stored in the vault prior to Vault Lock
+	// are not affected.
+	MinRetentionDays *int64
+
 	// The number of recovery points that are stored in a backup vault.
 	NumberOfRecoveryPoints int64
 
@@ -512,8 +548,8 @@ type ControlInputParameter struct {
 // CreateFramework.
 type ControlScope struct {
 
-	// Describes whether the control scope includes a specific resource identified by
-	// its unique Amazon Resource Name (ARN).
+	// The ID of the only Amazon Web Services resource that you want your control scope
+	// to contain.
 	ComplianceResourceIds []string
 
 	// Describes whether the control scope includes one or more types of resources,
@@ -934,7 +970,8 @@ type ReportJob struct {
 	ReportPlanArn *string
 
 	// Identifies the report template for the report. Reports are built using a report
-	// template. The report templates are: BACKUP_JOB_REPORT | COPY_JOB_REPORT |
+	// template. The report templates are: RESOURCE_COMPLIANCE_REPORT |
+	// CONTROL_COMPLIANCE_REPORT | BACKUP_JOB_REPORT | COPY_JOB_REPORT |
 	// RESTORE_JOB_REPORT
 	ReportTemplate *string
 
@@ -992,8 +1029,11 @@ type ReportPlan struct {
 	ReportPlanName *string
 
 	// Identifies the report template for the report. Reports are built using a report
-	// template. The report templates are: BACKUP_JOB_REPORT | COPY_JOB_REPORT |
-	// RESTORE_JOB_REPORT
+	// template. The report templates are: RESOURCE_COMPLIANCE_REPORT |
+	// CONTROL_COMPLIANCE_REPORT | BACKUP_JOB_REPORT | COPY_JOB_REPORT |
+	// RESTORE_JOB_REPORT If the report template is RESOURCE_COMPLIANCE_REPORT or
+	// CONTROL_COMPLIANCE_REPORT, this API resource also describes the report coverage
+	// by Amazon Web Services Regions and frameworks.
 	ReportSetting *ReportSetting
 
 	noSmithyDocumentSerde
@@ -1003,11 +1043,18 @@ type ReportPlan struct {
 type ReportSetting struct {
 
 	// Identifies the report template for the report. Reports are built using a report
-	// template. The report templates are: BACKUP_JOB_REPORT | COPY_JOB_REPORT |
+	// template. The report templates are: RESOURCE_COMPLIANCE_REPORT |
+	// CONTROL_COMPLIANCE_REPORT | BACKUP_JOB_REPORT | COPY_JOB_REPORT |
 	// RESTORE_JOB_REPORT
 	//
 	// This member is required.
 	ReportTemplate *string
+
+	// The Amazon Resource Names (ARNs) of the frameworks a report covers.
+	FrameworkArns []string
+
+	// The number of frameworks a report covers.
+	NumberOfFrameworks int32
 
 	noSmithyDocumentSerde
 }

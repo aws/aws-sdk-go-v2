@@ -1175,6 +1175,11 @@ func awsRestjson1_serializeOpDocumentCreateTrackerInput(v *CreateTrackerInput, v
 		ok.String(*v.KmsKeyId)
 	}
 
+	if len(v.PositionFiltering) > 0 {
+		ok := object.Key("PositionFiltering")
+		ok.String(string(v.PositionFiltering))
+	}
+
 	if len(v.PricingPlan) > 0 {
 		ok := object.Key("PricingPlan")
 		ok.String(string(v.PricingPlan))
@@ -3909,6 +3914,11 @@ func awsRestjson1_serializeOpDocumentUpdateTrackerInput(v *UpdateTrackerInput, v
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)
+	}
+
+	if len(v.PositionFiltering) > 0 {
+		ok := object.Key("PositionFiltering")
+		ok.String(string(v.PositionFiltering))
 	}
 
 	if len(v.PricingPlan) > 0 {

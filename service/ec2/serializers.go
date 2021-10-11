@@ -1976,6 +1976,62 @@ func (m *awsEc2query_serializeOpCancelCapacityReservation) HandleSerialize(ctx c
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsEc2query_serializeOpCancelCapacityReservationFleets struct {
+}
+
+func (*awsEc2query_serializeOpCancelCapacityReservationFleets) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsEc2query_serializeOpCancelCapacityReservationFleets) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CancelCapacityReservationFleetsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("CancelCapacityReservationFleets")
+	body.Key("Version").String("2016-11-15")
+
+	if err := awsEc2query_serializeOpDocumentCancelCapacityReservationFleetsInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsEc2query_serializeOpCancelConversionTask struct {
 }
 
@@ -2572,6 +2628,62 @@ func (m *awsEc2query_serializeOpCreateCapacityReservation) HandleSerialize(ctx c
 	body.Key("Version").String("2016-11-15")
 
 	if err := awsEc2query_serializeOpDocumentCreateCapacityReservationInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsEc2query_serializeOpCreateCapacityReservationFleet struct {
+}
+
+func (*awsEc2query_serializeOpCreateCapacityReservationFleet) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsEc2query_serializeOpCreateCapacityReservationFleet) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateCapacityReservationFleetInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("CreateCapacityReservationFleet")
+	body.Key("Version").String("2016-11-15")
+
+	if err := awsEc2query_serializeOpDocumentCreateCapacityReservationFleetInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -9908,6 +10020,62 @@ func (m *awsEc2query_serializeOpDescribeByoipCidrs) HandleSerialize(ctx context.
 	body.Key("Version").String("2016-11-15")
 
 	if err := awsEc2query_serializeOpDocumentDescribeByoipCidrsInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsEc2query_serializeOpDescribeCapacityReservationFleets struct {
+}
+
+func (*awsEc2query_serializeOpDescribeCapacityReservationFleets) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsEc2query_serializeOpDescribeCapacityReservationFleets) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeCapacityReservationFleetsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DescribeCapacityReservationFleets")
+	body.Key("Version").String("2016-11-15")
+
+	if err := awsEc2query_serializeOpDocumentDescribeCapacityReservationFleetsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -20568,6 +20736,62 @@ func (m *awsEc2query_serializeOpModifyCapacityReservation) HandleSerialize(ctx c
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsEc2query_serializeOpModifyCapacityReservationFleet struct {
+}
+
+func (*awsEc2query_serializeOpModifyCapacityReservationFleet) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsEc2query_serializeOpModifyCapacityReservationFleet) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ModifyCapacityReservationFleetInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("ModifyCapacityReservationFleet")
+	body.Key("Version").String("2016-11-15")
+
+	if err := awsEc2query_serializeOpDocumentModifyCapacityReservationFleetInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsEc2query_serializeOpModifyClientVpnEndpoint struct {
 }
 
@@ -26440,6 +26664,19 @@ func awsEc2query_serializeDocumentBundleIdStringList(v []string, value query.Val
 	return nil
 }
 
+func awsEc2query_serializeDocumentCapacityReservationFleetIdSet(v []string, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("Item")
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsEc2query_serializeDocumentCapacityReservationIdSet(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
@@ -31027,6 +31264,76 @@ func awsEc2query_serializeDocumentRequestSpotLaunchSpecificationSecurityGroupLis
 	return nil
 }
 
+func awsEc2query_serializeDocumentReservationFleetInstanceSpecification(v *types.ReservationFleetInstanceSpecification, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.AvailabilityZone != nil {
+		objectKey := object.Key("AvailabilityZone")
+		objectKey.String(*v.AvailabilityZone)
+	}
+
+	if v.AvailabilityZoneId != nil {
+		objectKey := object.Key("AvailabilityZoneId")
+		objectKey.String(*v.AvailabilityZoneId)
+	}
+
+	if v.EbsOptimized != nil {
+		objectKey := object.Key("EbsOptimized")
+		objectKey.Boolean(*v.EbsOptimized)
+	}
+
+	if len(v.InstancePlatform) > 0 {
+		objectKey := object.Key("InstancePlatform")
+		objectKey.String(string(v.InstancePlatform))
+	}
+
+	if len(v.InstanceType) > 0 {
+		objectKey := object.Key("InstanceType")
+		objectKey.String(string(v.InstanceType))
+	}
+
+	if v.Priority != nil {
+		objectKey := object.Key("Priority")
+		objectKey.Integer(*v.Priority)
+	}
+
+	if v.Weight != nil {
+		objectKey := object.Key("Weight")
+		switch {
+		case math.IsNaN(*v.Weight):
+			objectKey.String("NaN")
+
+		case math.IsInf(*v.Weight, 1):
+			objectKey.String("Infinity")
+
+		case math.IsInf(*v.Weight, -1):
+			objectKey.String("-Infinity")
+
+		default:
+			objectKey.Double(*v.Weight)
+
+		}
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeDocumentReservationFleetInstanceSpecificationList(v []types.ReservationFleetInstanceSpecification, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("Member")
+
+	for i := range v {
+		av := array.Value()
+		if err := awsEc2query_serializeDocumentReservationFleetInstanceSpecification(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsEc2query_serializeDocumentReservedInstanceIdSet(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
@@ -34403,6 +34710,25 @@ func awsEc2query_serializeOpDocumentCancelBundleTaskInput(v *CancelBundleTaskInp
 	return nil
 }
 
+func awsEc2query_serializeOpDocumentCancelCapacityReservationFleetsInput(v *CancelCapacityReservationFleetsInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.CapacityReservationFleetIds != nil {
+		objectKey := object.FlatKey("CapacityReservationFleetId")
+		if err := awsEc2query_serializeDocumentCapacityReservationFleetIdSet(v.CapacityReservationFleetIds, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.DryRun != nil {
+		objectKey := object.Key("DryRun")
+		objectKey.Boolean(*v.DryRun)
+	}
+
+	return nil
+}
+
 func awsEc2query_serializeOpDocumentCancelCapacityReservationInput(v *CancelCapacityReservationInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -34696,6 +35022,62 @@ func awsEc2query_serializeOpDocumentCopySnapshotInput(v *CopySnapshotInput, valu
 		if err := awsEc2query_serializeDocumentTagSpecificationList(v.TagSpecifications, objectKey); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeOpDocumentCreateCapacityReservationFleetInput(v *CreateCapacityReservationFleetInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.AllocationStrategy != nil {
+		objectKey := object.Key("AllocationStrategy")
+		objectKey.String(*v.AllocationStrategy)
+	}
+
+	if v.ClientToken != nil {
+		objectKey := object.Key("ClientToken")
+		objectKey.String(*v.ClientToken)
+	}
+
+	if v.DryRun != nil {
+		objectKey := object.Key("DryRun")
+		objectKey.Boolean(*v.DryRun)
+	}
+
+	if v.EndDate != nil {
+		objectKey := object.Key("EndDate")
+		objectKey.String(smithytime.FormatDateTime(*v.EndDate))
+	}
+
+	if len(v.InstanceMatchCriteria) > 0 {
+		objectKey := object.Key("InstanceMatchCriteria")
+		objectKey.String(string(v.InstanceMatchCriteria))
+	}
+
+	if v.InstanceTypeSpecifications != nil {
+		objectKey := object.FlatKey("InstanceTypeSpecification")
+		if err := awsEc2query_serializeDocumentReservationFleetInstanceSpecificationList(v.InstanceTypeSpecifications, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.TagSpecifications != nil {
+		objectKey := object.FlatKey("TagSpecification")
+		if err := awsEc2query_serializeDocumentTagSpecificationList(v.TagSpecifications, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Tenancy) > 0 {
+		objectKey := object.Key("Tenancy")
+		objectKey.String(string(v.Tenancy))
+	}
+
+	if v.TotalTargetCapacity != nil {
+		objectKey := object.Key("TotalTargetCapacity")
+		objectKey.Integer(*v.TotalTargetCapacity)
 	}
 
 	return nil
@@ -38722,6 +39104,42 @@ func awsEc2query_serializeOpDocumentDescribeByoipCidrsInput(v *DescribeByoipCidr
 	if v.DryRun != nil {
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(*v.DryRun)
+	}
+
+	if v.MaxResults != nil {
+		objectKey := object.Key("MaxResults")
+		objectKey.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		objectKey := object.Key("NextToken")
+		objectKey.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeOpDocumentDescribeCapacityReservationFleetsInput(v *DescribeCapacityReservationFleetsInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.CapacityReservationFleetIds != nil {
+		objectKey := object.FlatKey("CapacityReservationFleetId")
+		if err := awsEc2query_serializeDocumentCapacityReservationFleetIdSet(v.CapacityReservationFleetIds, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.DryRun != nil {
+		objectKey := object.Key("DryRun")
+		objectKey.Boolean(*v.DryRun)
+	}
+
+	if v.Filters != nil {
+		objectKey := object.FlatKey("Filter")
+		if err := awsEc2query_serializeDocumentFilterList(v.Filters, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.MaxResults != nil {
@@ -44476,6 +44894,38 @@ func awsEc2query_serializeOpDocumentModifyAvailabilityZoneGroupInput(v *ModifyAv
 	if len(v.OptInStatus) > 0 {
 		objectKey := object.Key("OptInStatus")
 		objectKey.String(string(v.OptInStatus))
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeOpDocumentModifyCapacityReservationFleetInput(v *ModifyCapacityReservationFleetInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.CapacityReservationFleetId != nil {
+		objectKey := object.Key("CapacityReservationFleetId")
+		objectKey.String(*v.CapacityReservationFleetId)
+	}
+
+	if v.DryRun != nil {
+		objectKey := object.Key("DryRun")
+		objectKey.Boolean(*v.DryRun)
+	}
+
+	if v.EndDate != nil {
+		objectKey := object.Key("EndDate")
+		objectKey.String(smithytime.FormatDateTime(*v.EndDate))
+	}
+
+	if v.RemoveEndDate != nil {
+		objectKey := object.Key("RemoveEndDate")
+		objectKey.Boolean(*v.RemoveEndDate)
+	}
+
+	if v.TotalTargetCapacity != nil {
+		objectKey := object.Key("TotalTargetCapacity")
+		objectKey.Integer(*v.TotalTargetCapacity)
 	}
 
 	return nil

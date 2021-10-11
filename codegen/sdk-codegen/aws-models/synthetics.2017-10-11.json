@@ -29,6 +29,34 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.synthetics#ArtifactConfigInput": {
+            "type": "structure",
+            "members": {
+                "S3Encryption": {
+                    "target": "com.amazonaws.synthetics#S3EncryptionConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains the configuration of the encryption-at-rest settings for artifacts that the canary uploads\n         to Amazon S3. \n         Artifact encryption functionality is available only for canaries that use Synthetics runtime version \n         syn-nodejs-puppeteer-3.3 or later. For more information, see\n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_artifact_encryption.html\">Encrypting canary artifacts</a>\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains the configuration for canary artifacts, including the \n         encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.</p>"
+            }
+        },
+        "com.amazonaws.synthetics#ArtifactConfigOutput": {
+            "type": "structure",
+            "members": {
+                "S3Encryption": {
+                    "target": "com.amazonaws.synthetics#S3EncryptionConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains the configuration of encryption settings for canary artifacts that are stored in Amazon S3. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains the configuration for canary artifacts, including \n         the encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.</p>"
+            }
+        },
         "com.amazonaws.synthetics#BaseScreenshot": {
             "type": "structure",
             "members": {
@@ -183,6 +211,12 @@
                     "target": "com.amazonaws.synthetics#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of key-value pairs that are associated with the canary.</p>"
+                    }
+                },
+                "ArtifactConfig": {
+                    "target": "com.amazonaws.synthetics#ArtifactConfigOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains the configuration for canary artifacts, including \n         the encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.</p>"
                     }
                 }
             },
@@ -736,6 +770,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of key-value pairs to associate with the canary. \n         You can associate as many as 50 tags with a canary.</p>\n         <p>Tags can help you organize and categorize your\n         resources. You can also use them to scope user permissions, by \n         granting a user permission to access or change only the resources that have\n         certain tag values.</p>"
                     }
+                },
+                "ArtifactConfig": {
+                    "target": "com.amazonaws.synthetics#ArtifactConfigInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains the configuration for canary artifacts, including \n         the encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.</p>"
+                    }
                 }
             }
         },
@@ -990,6 +1030,21 @@
                 }
             }
         },
+        "com.amazonaws.synthetics#EncryptionMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SSE_S3",
+                        "name": "SSE_S3"
+                    },
+                    {
+                        "value": "SSE_KMS",
+                        "name": "SSE_KMS"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.synthetics#EnvironmentVariableName": {
             "type": "string",
             "traits": {
@@ -1156,6 +1211,16 @@
                 "smithy.api#documentation": "<p>An unknown internal error occurred.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.synthetics#KmsKeyArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:(aws[a-zA-Z-]*)?:kms:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:\\d{12}:key/[\\w\\-\\/]+$"
             }
         },
         "com.amazonaws.synthetics#ListTagsForResource": {
@@ -1335,6 +1400,26 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.synthetics#RuntimeVersion"
+            }
+        },
+        "com.amazonaws.synthetics#S3EncryptionConfig": {
+            "type": "structure",
+            "members": {
+                "EncryptionMode": {
+                    "target": "com.amazonaws.synthetics#EncryptionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The encryption method to use for artifacts created by this canary. Specify <code>SSE_S3</code> to use\n         server-side encryption (SSE) with an Amazon S3-managed\n         key. Specify <code>SSE-KMS</code> to use server-side encryption with a customer-managed KMS key.</p>\n         <p>If you omit this parameter, an \n            Amazon Web Services-managed KMS key is used.\n        </p>"
+                    }
+                },
+                "KmsKeyArn": {
+                    "target": "com.amazonaws.synthetics#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the customer-managed KMS key to use, if you specify <code>SSE-KMS</code>\n         for <code>EncryptionMode</code>\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains the configuration of encryption-at-rest settings for canary artifacts that the canary\n         uploads to Amazon S3. </p>\n         <p>For more information, see\n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_artifact_encryption.html\">Encrypting canary artifacts</a>\n            </p>"
             }
         },
         "com.amazonaws.synthetics#SecurityGroupId": {
@@ -1795,6 +1880,18 @@
                     "target": "com.amazonaws.synthetics#VisualReferenceInput",
                     "traits": {
                         "smithy.api#documentation": "<p>Defines the screenshots to use as the baseline for comparisons during visual monitoring comparisons during future runs of this canary. If you omit this \n      parameter, no changes are made to any baseline screenshots that the canary might be using already.</p>\n         <p>Visual monitoring is supported only on canaries running the <b>syn-puppeteer-node-3.2</b>\n         runtime or later. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Library_SyntheticsLogger_VisualTesting.html\">\n            Visual monitoring</a> and <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Blueprints_VisualTesting.html\">\n               Visual monitoring blueprint</a>\n         </p>"
+                    }
+                },
+                "ArtifactS3Location": {
+                    "target": "com.amazonaws.synthetics#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location in Amazon S3 where Synthetics stores artifacts from the test runs of this canary. \n         Artifacts include the log file, screenshots, and HAR files. The name of the\n         S3 bucket can't include a period (.).</p>"
+                    }
+                },
+                "ArtifactConfig": {
+                    "target": "com.amazonaws.synthetics#ArtifactConfigInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains the configuration for canary artifacts, \n         including the encryption-at-rest settings for artifacts that \n         the canary uploads to Amazon S3.</p>"
                     }
                 }
             }

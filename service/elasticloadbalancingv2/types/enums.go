@@ -192,6 +192,24 @@ func (RedirectActionStatusCodeEnum) Values() []RedirectActionStatusCodeEnum {
 	}
 }
 
+type TargetGroupIpAddressTypeEnum string
+
+// Enum values for TargetGroupIpAddressTypeEnum
+const (
+	TargetGroupIpAddressTypeEnumIpv4 TargetGroupIpAddressTypeEnum = "ipv4"
+	TargetGroupIpAddressTypeEnumIpv6 TargetGroupIpAddressTypeEnum = "ipv6"
+)
+
+// Values returns all known values for TargetGroupIpAddressTypeEnum. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TargetGroupIpAddressTypeEnum) Values() []TargetGroupIpAddressTypeEnum {
+	return []TargetGroupIpAddressTypeEnum{
+		"ipv4",
+		"ipv6",
+	}
+}
+
 type TargetHealthReasonEnum string
 
 // Enum values for TargetHealthReasonEnum

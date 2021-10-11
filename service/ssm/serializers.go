@@ -12496,6 +12496,11 @@ func awsAwsjson11_serializeOpDocumentStartChangeRequestExecutionInput(v *StartCh
 	object := value.Object()
 	defer object.Close()
 
+	if v.AutoApprove {
+		ok := object.Key("AutoApprove")
+		ok.Boolean(v.AutoApprove)
+	}
+
 	if v.ChangeDetails != nil {
 		ok := object.Key("ChangeDetails")
 		ok.String(*v.ChangeDetails)

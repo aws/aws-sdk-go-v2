@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List tags that are associated with for an AWS App Runner resource. The response
+// List tags that are associated with for an App Runner resource. The response
 // contains a list of tag key-value pairs.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {

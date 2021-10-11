@@ -2403,6 +2403,11 @@ func awsAwsjson11_serializeDocumentProjectBuildBatchConfig(v *types.ProjectBuild
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.BatchReportMode) > 0 {
+		ok := object.Key("batchReportMode")
+		ok.String(string(v.BatchReportMode))
+	}
+
 	if v.CombineArtifacts != nil {
 		ok := object.Key("combineArtifacts")
 		ok.Boolean(*v.CombineArtifacts)

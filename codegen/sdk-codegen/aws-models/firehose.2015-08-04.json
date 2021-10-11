@@ -39,6 +39,272 @@
                 "smithy.api#pattern": "^arn:"
             }
         },
+        "com.amazonaws.firehose#AmazonopensearchserviceBufferingHints": {
+            "type": "structure",
+            "members": {
+                "IntervalInSeconds": {
+                    "target": "com.amazonaws.firehose#AmazonopensearchserviceBufferingIntervalInSeconds"
+                },
+                "SizeInMBs": {
+                    "target": "com.amazonaws.firehose#AmazonopensearchserviceBufferingSizeInMBs"
+                }
+            }
+        },
+        "com.amazonaws.firehose#AmazonopensearchserviceBufferingIntervalInSeconds": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 60,
+                    "max": 900
+                }
+            }
+        },
+        "com.amazonaws.firehose#AmazonopensearchserviceBufferingSizeInMBs": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.firehose#AmazonopensearchserviceClusterEndpoint": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^https:"
+            }
+        },
+        "com.amazonaws.firehose#AmazonopensearchserviceDestinationConfiguration": {
+            "type": "structure",
+            "members": {
+                "RoleARN": {
+                    "target": "com.amazonaws.firehose#RoleARN",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "DomainARN": {
+                    "target": "com.amazonaws.firehose#AmazonopensearchserviceDomainARN"
+                },
+                "ClusterEndpoint": {
+                    "target": "com.amazonaws.firehose#AmazonopensearchserviceClusterEndpoint"
+                },
+                "IndexName": {
+                    "target": "com.amazonaws.firehose#AmazonopensearchserviceIndexName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "TypeName": {
+                    "target": "com.amazonaws.firehose#AmazonopensearchserviceTypeName"
+                },
+                "IndexRotationPeriod": {
+                    "target": "com.amazonaws.firehose#AmazonopensearchserviceIndexRotationPeriod"
+                },
+                "BufferingHints": {
+                    "target": "com.amazonaws.firehose#AmazonopensearchserviceBufferingHints"
+                },
+                "RetryOptions": {
+                    "target": "com.amazonaws.firehose#AmazonopensearchserviceRetryOptions"
+                },
+                "S3BackupMode": {
+                    "target": "com.amazonaws.firehose#AmazonopensearchserviceS3BackupMode"
+                },
+                "S3Configuration": {
+                    "target": "com.amazonaws.firehose#S3DestinationConfiguration",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProcessingConfiguration": {
+                    "target": "com.amazonaws.firehose#ProcessingConfiguration"
+                },
+                "CloudWatchLoggingOptions": {
+                    "target": "com.amazonaws.firehose#CloudWatchLoggingOptions"
+                },
+                "VpcConfiguration": {
+                    "target": "com.amazonaws.firehose#VpcConfiguration"
+                }
+            }
+        },
+        "com.amazonaws.firehose#AmazonopensearchserviceDestinationDescription": {
+            "type": "structure",
+            "members": {
+                "RoleARN": {
+                    "target": "com.amazonaws.firehose#RoleARN"
+                },
+                "DomainARN": {
+                    "target": "com.amazonaws.firehose#AmazonopensearchserviceDomainARN"
+                },
+                "ClusterEndpoint": {
+                    "target": "com.amazonaws.firehose#AmazonopensearchserviceClusterEndpoint"
+                },
+                "IndexName": {
+                    "target": "com.amazonaws.firehose#AmazonopensearchserviceIndexName"
+                },
+                "TypeName": {
+                    "target": "com.amazonaws.firehose#AmazonopensearchserviceTypeName"
+                },
+                "IndexRotationPeriod": {
+                    "target": "com.amazonaws.firehose#AmazonopensearchserviceIndexRotationPeriod"
+                },
+                "BufferingHints": {
+                    "target": "com.amazonaws.firehose#AmazonopensearchserviceBufferingHints"
+                },
+                "RetryOptions": {
+                    "target": "com.amazonaws.firehose#AmazonopensearchserviceRetryOptions"
+                },
+                "S3BackupMode": {
+                    "target": "com.amazonaws.firehose#AmazonopensearchserviceS3BackupMode"
+                },
+                "S3DestinationDescription": {
+                    "target": "com.amazonaws.firehose#S3DestinationDescription"
+                },
+                "ProcessingConfiguration": {
+                    "target": "com.amazonaws.firehose#ProcessingConfiguration"
+                },
+                "CloudWatchLoggingOptions": {
+                    "target": "com.amazonaws.firehose#CloudWatchLoggingOptions"
+                },
+                "VpcConfigurationDescription": {
+                    "target": "com.amazonaws.firehose#VpcConfigurationDescription"
+                }
+            }
+        },
+        "com.amazonaws.firehose#AmazonopensearchserviceDestinationUpdate": {
+            "type": "structure",
+            "members": {
+                "RoleARN": {
+                    "target": "com.amazonaws.firehose#RoleARN"
+                },
+                "DomainARN": {
+                    "target": "com.amazonaws.firehose#AmazonopensearchserviceDomainARN"
+                },
+                "ClusterEndpoint": {
+                    "target": "com.amazonaws.firehose#AmazonopensearchserviceClusterEndpoint"
+                },
+                "IndexName": {
+                    "target": "com.amazonaws.firehose#AmazonopensearchserviceIndexName"
+                },
+                "TypeName": {
+                    "target": "com.amazonaws.firehose#AmazonopensearchserviceTypeName"
+                },
+                "IndexRotationPeriod": {
+                    "target": "com.amazonaws.firehose#AmazonopensearchserviceIndexRotationPeriod"
+                },
+                "BufferingHints": {
+                    "target": "com.amazonaws.firehose#AmazonopensearchserviceBufferingHints"
+                },
+                "RetryOptions": {
+                    "target": "com.amazonaws.firehose#AmazonopensearchserviceRetryOptions"
+                },
+                "S3Update": {
+                    "target": "com.amazonaws.firehose#S3DestinationUpdate"
+                },
+                "ProcessingConfiguration": {
+                    "target": "com.amazonaws.firehose#ProcessingConfiguration"
+                },
+                "CloudWatchLoggingOptions": {
+                    "target": "com.amazonaws.firehose#CloudWatchLoggingOptions"
+                }
+            }
+        },
+        "com.amazonaws.firehose#AmazonopensearchserviceDomainARN": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^arn:"
+            }
+        },
+        "com.amazonaws.firehose#AmazonopensearchserviceIndexName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 80
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.firehose#AmazonopensearchserviceIndexRotationPeriod": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "NoRotation",
+                        "name": "NoRotation"
+                    },
+                    {
+                        "value": "OneHour",
+                        "name": "OneHour"
+                    },
+                    {
+                        "value": "OneDay",
+                        "name": "OneDay"
+                    },
+                    {
+                        "value": "OneWeek",
+                        "name": "OneWeek"
+                    },
+                    {
+                        "value": "OneMonth",
+                        "name": "OneMonth"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.firehose#AmazonopensearchserviceRetryDurationInSeconds": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 7200
+                }
+            }
+        },
+        "com.amazonaws.firehose#AmazonopensearchserviceRetryOptions": {
+            "type": "structure",
+            "members": {
+                "DurationInSeconds": {
+                    "target": "com.amazonaws.firehose#AmazonopensearchserviceRetryDurationInSeconds"
+                }
+            }
+        },
+        "com.amazonaws.firehose#AmazonopensearchserviceS3BackupMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "FailedDocumentsOnly",
+                        "name": "FailedDocumentsOnly"
+                    },
+                    {
+                        "value": "AllDocuments",
+                        "name": "AllDocuments"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.firehose#AmazonopensearchserviceTypeName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
         "com.amazonaws.firehose#BlockSizeBytes": {
             "type": "integer",
             "traits": {
@@ -301,6 +567,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The destination in Amazon ES. You can specify only one destination.</p>"
                     }
+                },
+                "AmazonopensearchserviceDestinationConfiguration": {
+                    "target": "com.amazonaws.firehose#AmazonopensearchserviceDestinationConfiguration"
                 },
                 "SplunkDestinationConfiguration": {
                     "target": "com.amazonaws.firehose#SplunkDestinationConfiguration",
@@ -871,6 +1140,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The destination in Amazon ES.</p>"
                     }
+                },
+                "AmazonopensearchserviceDestinationDescription": {
+                    "target": "com.amazonaws.firehose#AmazonopensearchserviceDestinationDescription"
                 },
                 "SplunkDestinationDescription": {
                     "target": "com.amazonaws.firehose#SplunkDestinationDescription",
@@ -4385,6 +4657,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Describes an update for a destination in Amazon ES.</p>"
                     }
+                },
+                "AmazonopensearchserviceDestinationUpdate": {
+                    "target": "com.amazonaws.firehose#AmazonopensearchserviceDestinationUpdate"
                 },
                 "SplunkDestinationUpdate": {
                     "target": "com.amazonaws.firehose#SplunkDestinationUpdate",

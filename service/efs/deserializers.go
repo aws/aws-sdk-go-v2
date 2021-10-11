@@ -3282,6 +3282,9 @@ func awsRestjson1_deserializeOpErrorPutAccountPreferences(response *smithyhttp.R
 	}
 
 	switch {
+	case strings.EqualFold("BadRequest", errorCode):
+		return awsRestjson1_deserializeErrorBadRequest(response, errorBody)
+
 	case strings.EqualFold("InternalServerError", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerError(response, errorBody)
 

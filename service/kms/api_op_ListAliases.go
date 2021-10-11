@@ -31,9 +31,7 @@ import (
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (IAM policy) For details, see Controlling access to aliases
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-alias.html#alias-access)
-// in the Key Management Service Developer Guide.
-//
-// Related operations:
+// in the Key Management Service Developer Guide. Related operations:
 //
 // *
 // CreateAlias

@@ -3765,6 +3765,15 @@ func awsRestjson1_deserializeOpDocumentDescribeTrackerOutput(v **DescribeTracker
 				sv.KmsKeyId = ptr.String(jtv)
 			}
 
+		case "PositionFiltering":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PositionFiltering to be of type string, got %T instead", value)
+				}
+				sv.PositionFiltering = types.PositionFiltering(jtv)
+			}
+
 		case "PricingPlan":
 			if value != nil {
 				jtv, ok := value.(string)

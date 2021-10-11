@@ -81,7 +81,7 @@ type UpdateProjectInput struct {
 	// The number of minutes a build is allowed to be queued before it times out.
 	QueuedTimeoutInMinutes *int32
 
-	// An array of ProjectSource objects.
+	// An array of ProjectArtifact objects.
 	SecondaryArtifacts []types.ProjectArtifacts
 
 	// An array of ProjectSourceVersion objects. If secondarySourceVersions is

@@ -182,8 +182,8 @@ type DescribeTrainingJobOutput struct {
 
 	// The billable time in seconds. Billable time refers to the absolute wall-clock
 	// time. Multiply BillableTimeInSeconds by the number of instances (InstanceCount)
-	// in your training cluster to get the total compute time Amazon SageMaker will
-	// bill you if you run distributed training. The formula is as follows:
+	// in your training cluster to get the total compute time SageMaker will bill you
+	// if you run distributed training. The formula is as follows:
 	// BillableTimeInSeconds * InstanceCount . You can calculate the savings from using
 	// managed spot training using the formula (1 - BillableTimeInSeconds /
 	// TrainingTimeInSeconds) * 100. For example, if BillableTimeInSeconds is 100 and

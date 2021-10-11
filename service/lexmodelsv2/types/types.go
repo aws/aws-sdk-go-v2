@@ -601,7 +601,7 @@ type CloudWatchLogGroupLogDestination struct {
 // conversation.
 type CodeHookSpecification struct {
 
-	// Specifies a Lambda function that verifies requests to a bot or fulfilles the
+	// Specifies a Lambda function that verifies requests to a bot or fulfills the
 	// user's request to a bot.
 	//
 	// This member is required.
@@ -680,7 +680,7 @@ type DialogCodeHookSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Filtes the response form the operation
+// Filters the response form the operation
 type ExportFilter struct {
 
 	// The name of the field to use for filtering.
@@ -696,7 +696,7 @@ type ExportFilter struct {
 	// This member is required.
 	Operator ExportFilterOperator
 
-	// The values to use to fileter the response.
+	// The values to use to filter the response.
 	//
 	// This member is required.
 	Values []string
@@ -768,6 +768,89 @@ type FulfillmentCodeHookSettings struct {
 	// This member is required.
 	Enabled bool
 
+	// Provides settings for update messages sent to the user for long-running Lambda
+	// fulfillment functions. Fulfillment updates can be used only with streaming
+	// conversations.
+	FulfillmentUpdatesSpecification *FulfillmentUpdatesSpecification
+
+	// Provides settings for messages sent to the user for after the Lambda fulfillment
+	// function completes. Post-fulfillment messages can be sent for both streaming and
+	// non-streaming conversations.
+	PostFulfillmentStatusSpecification *PostFulfillmentStatusSpecification
+
+	noSmithyDocumentSerde
+}
+
+// Provides settings for a message that is sent to the user when a fulfillment
+// Lambda function starts running.
+type FulfillmentStartResponseSpecification struct {
+
+	// The delay between when the Lambda fulfillment function starts running and the
+	// start message is played. If the Lambda function returns before the delay is
+	// over, the start message isn't played.
+	//
+	// This member is required.
+	DelayInSeconds *int32
+
+	// One to 5 message groups that contain start messages. Amazon Lex chooses one of
+	// the messages to play to the user.
+	//
+	// This member is required.
+	MessageGroups []MessageGroup
+
+	// Determines whether the user can interrupt the start message while it is playing.
+	AllowInterrupt *bool
+
+	noSmithyDocumentSerde
+}
+
+// Provides settings for a message that is sent periodically to the user while a
+// fulfillment Lambda function is running.
+type FulfillmentUpdateResponseSpecification struct {
+
+	// The frequency that a message is sent to the user. When the period ends, Amazon
+	// Lex chooses a message from the message groups and plays it to the user. If the
+	// fulfillment Lambda returns before the first period ends, an update message is
+	// not played to the user.
+	//
+	// This member is required.
+	FrequencyInSeconds *int32
+
+	// One to 5 message groups that contain update messages. Amazon Lex chooses one of
+	// the messages to play to the user.
+	//
+	// This member is required.
+	MessageGroups []MessageGroup
+
+	// Determines whether the user can interrupt an update message while it is playing.
+	AllowInterrupt *bool
+
+	noSmithyDocumentSerde
+}
+
+// Provides information for updating the user on the progress of fulfilling an
+// intent.
+type FulfillmentUpdatesSpecification struct {
+
+	// Determines whether fulfillment updates are sent to the user. When this field is
+	// true, updates are sent. If the active field is set to true, the startResponse,
+	// updateResponse, and timeoutInSeconds fields are required.
+	//
+	// This member is required.
+	Active *bool
+
+	// Provides configuration information for the message sent to users when the
+	// fulfillment Lambda functions starts running.
+	StartResponse *FulfillmentStartResponseSpecification
+
+	// The length of time that the fulfillment Lambda function should run before it
+	// times out.
+	TimeoutInSeconds *int32
+
+	// Provides configuration information for messages sent periodically to the user
+	// while the fulfillment Lambda function is running.
+	UpdateResponse *FulfillmentUpdateResponseSpecification
+
 	noSmithyDocumentSerde
 }
 
@@ -824,7 +907,7 @@ type ImportFilter struct {
 }
 
 // Provides information about the bot or bot locale that you want to import. You
-// can sepcifiy the botImportSpecification or the botLocaleImportSpecification, but
+// can specify the botImportSpecification or the botLocaleImportSpecification, but
 // not both.
 type ImportResourceSpecification struct {
 
@@ -904,8 +987,8 @@ type IntentClosingSetting struct {
 	ClosingResponse *ResponseSpecification
 
 	// Specifies whether an intent's closing response is used. When this field is
-	// false, the closing response isn't sent to the user and no closing input from the
-	// user is used. If the active field isn't specified, the default is true.
+	// false, the closing response isn't sent to the user. If the active field isn't
+	// specified, the default is true.
 	Active *bool
 
 	noSmithyDocumentSerde
@@ -933,9 +1016,8 @@ type IntentConfirmationSetting struct {
 	PromptSpecification *PromptSpecification
 
 	// Specifies whether the intent's confirmation is sent to the user. When this field
-	// is false, confirmation and declination responses aren't sent and processing
-	// continues as if the responses aren't present. If the active field isn't
-	// specified, the default is true.
+	// is false, confirmation and declination responses aren't sent. If the active
+	// field isn't specified, the default is true.
 	Active *bool
 
 	noSmithyDocumentSerde
@@ -1034,7 +1116,7 @@ type KendraConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies a Lambda function that verifies requests to a bot or fulfilles the
+// Specifies a Lambda function that verifies requests to a bot or fulfills the
 // user's request to a bot.
 type LambdaCodeHook struct {
 
@@ -1147,6 +1229,27 @@ type PlainTextMessage struct {
 	noSmithyDocumentSerde
 }
 
+// Provides a setting that determines whether the post-fulfillment response is sent
+// to the user. For more information, see
+// https://docs.aws.amazon.com/lexv2/latest/dg/streaming-progress.html#progress-complete
+// (https://docs.aws.amazon.com/lexv2/latest/dg/streaming-progress.html#progress-complete)
+type PostFulfillmentStatusSpecification struct {
+
+	// Specifies a list of message groups that Amazon Lex uses to respond the user
+	// input.
+	FailureResponse *ResponseSpecification
+
+	// Specifies a list of message groups that Amazon Lex uses to respond the user
+	// input.
+	SuccessResponse *ResponseSpecification
+
+	// Specifies a list of message groups that Amazon Lex uses to respond the user
+	// input.
+	TimeoutResponse *ResponseSpecification
+
+	noSmithyDocumentSerde
+}
+
 // The IAM principal that you allowing or denying access to an Amazon Lex action.
 // You must provide a service or an arn, but not both in the same statement. For
 // more information, see  AWS JSON policy elements: Principal
@@ -1167,7 +1270,7 @@ type Principal struct {
 // response.
 type PromptSpecification struct {
 
-	// The maximum number of times the bot tries to elicit a resonse from the user
+	// The maximum number of times the bot tries to elicit a response from the user
 	// using this prompt.
 	//
 	// This member is required.
@@ -1477,7 +1580,7 @@ type SlotTypeValue struct {
 	// The value of the slot type entry.
 	SampleValue *SampleValue
 
-	// Additional values releated to the slot type entry.
+	// Additional values related to the slot type entry.
 	Synonyms []SampleValue
 
 	noSmithyDocumentSerde
@@ -1493,7 +1596,7 @@ type SlotValueElicitationSetting struct {
 
 	// A list of default values for a slot. Default values are used when Amazon Lex
 	// hasn't determined a value for a slot. You can specify default values from
-	// context variables, sesion attributes, and defined values.
+	// context variables, session attributes, and defined values.
 	DefaultValueSpecification *SlotDefaultValueSpecification
 
 	// The prompt that Amazon Lex uses to elicit the slot value from the user.
@@ -1675,9 +1778,8 @@ type WaitAndContinueSpecification struct {
 	WaitingResponse *ResponseSpecification
 
 	// Specifies whether the bot will wait for a user to respond. When this field is
-	// false, wait and continue responses for a slot aren't used and the bot expects an
-	// appropriate response within the configured timeout. If the active field isn't
-	// specified, the default is true.
+	// false, wait and continue responses for a slot aren't used. If the active field
+	// isn't specified, the default is true.
 	Active *bool
 
 	// A response that Amazon Lex sends periodically to the user to indicate that the

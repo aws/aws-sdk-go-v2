@@ -54,6 +54,18 @@ func (IntendedUse) Values() []IntendedUse {
 	}
 }
 
+type PositionFiltering string
+
+// Values returns all known values for PositionFiltering. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PositionFiltering) Values() []PositionFiltering {
+	return []PositionFiltering{
+		"TimeBased",
+		"DistanceBased",
+	}
+}
+
 type PricingPlan string
 
 // Values returns all known values for PricingPlan. Note that this can be expanded

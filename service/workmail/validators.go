@@ -430,6 +430,26 @@ func (m *validateOpDescribeGroup) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeInboundDmarcSettings struct {
+}
+
+func (*validateOpDescribeInboundDmarcSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeInboundDmarcSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeInboundDmarcSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeInboundDmarcSettingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeMailboxExportJob struct {
 }
 
@@ -910,6 +930,26 @@ func (m *validateOpPutAccessControlRule) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutInboundDmarcSettings struct {
+}
+
+func (*validateOpPutInboundDmarcSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutInboundDmarcSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutInboundDmarcSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutInboundDmarcSettingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutMailboxPermissions struct {
 }
 
@@ -1234,6 +1274,10 @@ func addOpDescribeGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeGroup{}, middleware.After)
 }
 
+func addOpDescribeInboundDmarcSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeInboundDmarcSettings{}, middleware.After)
+}
+
 func addOpDescribeMailboxExportJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeMailboxExportJob{}, middleware.After)
 }
@@ -1328,6 +1372,10 @@ func addOpListUsersValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpPutAccessControlRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutAccessControlRule{}, middleware.After)
+}
+
+func addOpPutInboundDmarcSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutInboundDmarcSettings{}, middleware.After)
 }
 
 func addOpPutMailboxPermissionsValidationMiddleware(stack *middleware.Stack) error {
@@ -1853,6 +1901,21 @@ func validateOpDescribeGroupInput(v *DescribeGroupInput) error {
 	}
 }
 
+func validateOpDescribeInboundDmarcSettingsInput(v *DescribeInboundDmarcSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeInboundDmarcSettingsInput"}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeMailboxExportJobInput(v *DescribeMailboxExportJobInput) error {
 	if v == nil {
 		return nil
@@ -2265,6 +2328,24 @@ func validateOpPutAccessControlRuleInput(v *PutAccessControlRuleInput) error {
 	}
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutInboundDmarcSettingsInput(v *PutInboundDmarcSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutInboundDmarcSettingsInput"}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if v.Enforced == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enforced"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

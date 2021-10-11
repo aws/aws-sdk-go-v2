@@ -100,13 +100,17 @@ type CreateFeatureGroupInput struct {
 	// OfflineStore.
 	//
 	// * A configuration for an Amazon Web Services Glue or Amazon Web
-	// Services Hive data cataolgue.
+	// Services Hive data catalog.
 	//
 	// * An KMS encryption key to encrypt the Amazon S3
-	// location used for OfflineStore.
+	// location used for OfflineStore. If KMS encryption key is not specified, by
+	// default we encrypt all data at rest using Amazon Web Services KMS key. By
+	// defining your bucket-level key
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-key.html) for SSE,
+	// you can reduce Amazon Web Services KMS requests costs by up to 99 percent.
 	//
-	// To learn more about this parameter, see
-	// OfflineStoreConfig.
+	// To
+	// learn more about this parameter, see OfflineStoreConfig.
 	OfflineStoreConfig *types.OfflineStoreConfig
 
 	// You can turn the OnlineStore on or off by specifying True for the

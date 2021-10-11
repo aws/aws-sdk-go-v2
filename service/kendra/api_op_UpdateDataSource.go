@@ -45,6 +45,13 @@ type UpdateDataSourceInput struct {
 	// The new description for the data source.
 	Description *string
 
+	// The code for a language. This allows you to support a language for all documents
+	// when updating the data source. English is supported by default. For more
+	// information on supported languages, including their codes, see Adding documents
+	// in languages other than English
+	// (https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html).
+	LanguageCode *string
+
 	// The name of the data source to update. The name of the data source can't be
 	// updated. To rename a data source you must delete the data source and re-create
 	// it.

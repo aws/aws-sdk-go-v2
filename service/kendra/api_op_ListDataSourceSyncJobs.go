@@ -44,8 +44,9 @@ type ListDataSourceSyncJobsInput struct {
 	// are fewer results in the list, this response contains only the actual results.
 	MaxResults *int32
 
-	// If the result of the previous request to GetDataSourceSyncJobHistory was
-	// truncated, include the NextToken to fetch the next set of jobs.
+	// If the previous response was incomplete (because there is more data to
+	// retrieve), Amazon Kendra returns a pagination token in the response. You can use
+	// this pagination token to retrieve the next set of jobs.
 	NextToken *string
 
 	// When specified, the synchronization jobs returned in the list are limited to
@@ -64,11 +65,8 @@ type ListDataSourceSyncJobsOutput struct {
 	// A history of synchronization jobs for the data source.
 	History []types.DataSourceSyncJob
 
-	// The GetDataSourceSyncJobHistory operation returns a page of vocabularies at a
-	// time. The maximum size of the page is set by the MaxResults parameter. If there
-	// are more jobs in the list than the page size, Amazon Kendra returns the NextPage
-	// token. Include the token in the next request to the GetDataSourceSyncJobHistory
-	// operation to return in the next page of jobs.
+	// If the response is truncated, Amazon Kendra returns this token that you can use
+	// in the subsequent request to retrieve the next set of jobs.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

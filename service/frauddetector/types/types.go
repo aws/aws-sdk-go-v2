@@ -36,13 +36,58 @@ type BatchGetVariableError struct {
 	noSmithyDocumentSerde
 }
 
+// The batch import job details.
+type BatchImport struct {
+
+	// The ARN of the batch import job.
+	Arn *string
+
+	// Timestamp of when batch import job completed.
+	CompletionTime *string
+
+	// The name of the event type.
+	EventTypeName *string
+
+	// The number of records that failed to import.
+	FailedRecordsCount *int32
+
+	// The reason batch import job failed.
+	FailureReason *string
+
+	// The ARN of the IAM role to use for this job request.
+	IamRoleArn *string
+
+	// The Amazon S3 location of your data file for batch import.
+	InputPath *string
+
+	// The ID of the batch import job.
+	JobId *string
+
+	// The Amazon S3 location of your output file.
+	OutputPath *string
+
+	// The number of records processed by batch import job.
+	ProcessedRecordsCount *int32
+
+	// Timestamp of when the batch import job started.
+	StartTime *string
+
+	// The status of the batch import job.
+	Status AsyncJobStatus
+
+	// The total number of records in the batch import job.
+	TotalRecordsCount *int32
+
+	noSmithyDocumentSerde
+}
+
 // The batch prediction details.
 type BatchPrediction struct {
 
 	// The ARN of batch prediction job.
 	Arn *string
 
-	// Timestamp of when the batch prediction job comleted.
+	// Timestamp of when the batch prediction job completed.
 	CompletionTime *string
 
 	// The name of the detector.
@@ -180,6 +225,37 @@ type EntityType struct {
 	noSmithyDocumentSerde
 }
 
+// The event details.
+type Event struct {
+
+	// The label associated with the event.
+	CurrentLabel *string
+
+	// The event entities.
+	Entities []Entity
+
+	// The event ID.
+	EventId *string
+
+	// The timestamp that defines when the event under evaluation occurred. The
+	// timestamp must be specified using ISO 8601 standard in UTC.
+	EventTimestamp *string
+
+	// The event type.
+	EventTypeName *string
+
+	// Names of the event type's variables you defined in Amazon Fraud Detector to
+	// represent data elements and their corresponding values for the event you are
+	// sending for evaluation.
+	EventVariables map[string]string
+
+	// The timestamp associated with the label to update. The timestamp must be
+	// specified using ISO 8601 standard in UTC.
+	LabelTimestamp *string
+
+	noSmithyDocumentSerde
+}
+
 // The event type details.
 type EventType struct {
 
@@ -195,8 +271,17 @@ type EventType struct {
 	// The event type entity types.
 	EntityTypes []string
 
+	// If Enabled, Amazon Fraud Detector stores event data when you generate a
+	// prediction and uses that data to update calculated variables in near real-time.
+	// Amazon Fraud Detector uses this data, known as INGESTED_EVENTS, to train your
+	// model and improve fraud predictions.
+	EventIngestion EventIngestion
+
 	// The event type event variables.
 	EventVariables []string
+
+	// Data about the stored events.
+	IngestedEventStatistics *IngestedEventStatistics
 
 	// The event type labels.
 	Labels []string
@@ -320,6 +405,54 @@ type FileValidationMessage struct {
 	noSmithyDocumentSerde
 }
 
+// The details of the ingested event.
+type IngestedEventsDetail struct {
+
+	// The start and stop time of the ingested events.
+	//
+	// This member is required.
+	IngestedEventsTimeWindow *IngestedEventsTimeWindow
+
+	noSmithyDocumentSerde
+}
+
+// Data about the stored events.
+type IngestedEventStatistics struct {
+
+	// The total size of the stored events.
+	EventDataSizeInBytes *int64
+
+	// Timestamp of when the stored event was last updated.
+	LastUpdatedTime *string
+
+	// The oldest stored event.
+	LeastRecentEvent *string
+
+	// The newest stored event.
+	MostRecentEvent *string
+
+	// The number of stored events.
+	NumberOfEvents *int64
+
+	noSmithyDocumentSerde
+}
+
+// The start and stop time of the ingested events.
+type IngestedEventsTimeWindow struct {
+
+	// Timestamp of the final ingested event.
+	//
+	// This member is required.
+	EndTime *string
+
+	// Timestamp of the first ingensted event.
+	//
+	// This member is required.
+	StartTime *string
+
+	noSmithyDocumentSerde
+}
+
 // The KMS key details.
 type KMSKey struct {
 
@@ -363,6 +496,9 @@ type LabelSchema struct {
 	//
 	// This member is required.
 	LabelMapper map[string][]string
+
+	// The action to take for unlabeled events.
+	UnlabeledEventsTreatment UnlabeledEventsTreatment
 
 	noSmithyDocumentSerde
 }
@@ -546,8 +682,13 @@ type ModelVersionDetail struct {
 	// The timestamp when the model was created.
 	CreatedTime *string
 
-	// The event details.
+	// The external events data details. This will be populated if the
+	// trainingDataSource for the model version is specified as EXTERNAL_EVENTS.
 	ExternalEventsDetail *ExternalEventsDetail
+
+	// The ingested events data details. This will be populated if the
+	// trainingDataSource for the model version is specified as INGESTED_EVENTS.
+	IngestedEventsDetail *IngestedEventsDetail
 
 	// The timestamp when the model was last updated.
 	LastUpdatedTime *string

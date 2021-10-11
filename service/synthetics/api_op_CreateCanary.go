@@ -106,6 +106,10 @@ type CreateCanaryInput struct {
 	// This member is required.
 	Schedule *types.CanaryScheduleInput
 
+	// A structure that contains the configuration for canary artifacts, including the
+	// encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.
+	ArtifactConfig *types.ArtifactConfigInput
+
 	// The number of days to retain data about failed runs of this canary. If you omit
 	// this field, the default of 31 days is used. The valid range is 1 to 455 days.
 	FailureRetentionPeriodInDays *int32

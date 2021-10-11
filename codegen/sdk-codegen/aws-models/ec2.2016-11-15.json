@@ -596,7 +596,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "NetworkBorderGroup",
-                        "smithy.api#documentation": "<p>The name of the unique set of Availability Zones, Local Zones, or Wavelength Zones from\n      which AWS advertises IP addresses. </p>",
+                        "smithy.api#documentation": "<p>The name of the unique set of Availability Zones, Local Zones, or Wavelength Zones from\n      which Amazon Web Services advertises IP addresses.</p>",
                         "smithy.api#xmlName": "networkBorderGroup"
                     }
                 },
@@ -801,7 +801,7 @@
                 "NetworkBorderGroup": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> A unique set of Availability Zones, Local Zones, or Wavelength Zones from which AWS\n      advertises IP addresses. Use this parameter to limit the IP address to this location. IP\n      addresses cannot move between network border groups.</p>\n         <p>Use <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html\">DescribeAvailabilityZones</a> to view the network border groups.</p>\n    \n         <note>\n            <p>You cannot use a network border group with EC2 Classic. If you attempt this operation on EC2 classic, you will receive an <code>InvalidParameterCombination</code> error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html\">Error Codes</a>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p> A unique set of Availability Zones, Local Zones, or Wavelength Zones from which Amazon Web Services\n      advertises IP addresses. Use this parameter to limit the IP address to this location. IP\n      addresses cannot move between network border groups.</p>\n         <p>Use <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html\">DescribeAvailabilityZones</a> to view the network border groups.</p>\n    \n         <p>You cannot use a network border group with EC2 Classic. If you attempt this operation on EC2 Classic, \n      you receive an <code>InvalidParameterCombination</code> error.</p>"
                     }
                 },
                 "CustomerOwnedIpv4Pool": {
@@ -858,7 +858,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "NetworkBorderGroup",
-                        "smithy.api#documentation": "<p>The set of Availability Zones, Local Zones, or Wavelength Zones from which AWS advertises\n      IP addresses.</p>",
+                        "smithy.api#documentation": "<p>The set of Availability Zones, Local Zones, or Wavelength Zones from which Amazon Web Services advertises\n      IP addresses.</p>",
                         "smithy.api#xmlName": "networkBorderGroup"
                     }
                 },
@@ -1256,6 +1256,9 @@
                     "target": "com.amazonaws.ec2#CancelCapacityReservation"
                 },
                 {
+                    "target": "com.amazonaws.ec2#CancelCapacityReservationFleets"
+                },
+                {
                     "target": "com.amazonaws.ec2#CancelConversionTask"
                 },
                 {
@@ -1287,6 +1290,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#CreateCapacityReservation"
+                },
+                {
+                    "target": "com.amazonaws.ec2#CreateCapacityReservationFleet"
                 },
                 {
                     "target": "com.amazonaws.ec2#CreateCarrierGateway"
@@ -1680,6 +1686,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#DescribeByoipCidrs"
+                },
+                {
+                    "target": "com.amazonaws.ec2#DescribeCapacityReservationFleets"
                 },
                 {
                     "target": "com.amazonaws.ec2#DescribeCapacityReservations"
@@ -2250,6 +2259,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#ModifyCapacityReservation"
+                },
+                {
+                    "target": "com.amazonaws.ec2#ModifyCapacityReservationFleet"
                 },
                 {
                     "target": "com.amazonaws.ec2#ModifyClientVpnEndpoint"
@@ -5772,6 +5784,88 @@
                 "smithy.api#documentation": "<p>Cancels the specified Capacity Reservation, releases the reserved capacity, and changes the Capacity Reservation's state to\n\t\t\t<code>cancelled</code>.</p>\n\t\t       <p>Instances running in the reserved capacity continue running until you stop them. Stopped\n\t\t\tinstances that target the Capacity Reservation can no longer launch. Modify these instances to either\n\t\t\ttarget a different Capacity Reservation, launch On-Demand Instance capacity, or run in any open Capacity Reservation\n\t\t\tthat has matching attributes and sufficient capacity.</p>"
             }
         },
+        "com.amazonaws.ec2#CancelCapacityReservationFleetError": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.ec2#CancelCapacityReservationFleetErrorCode",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Code",
+                        "smithy.api#documentation": "<p>The error code.</p>",
+                        "smithy.api#xmlName": "code"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.ec2#CancelCapacityReservationFleetErrorMessage",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Message",
+                        "smithy.api#documentation": "<p>The error message.</p>",
+                        "smithy.api#xmlName": "message"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a Capacity Reservation Fleet cancellation error.</p>"
+            }
+        },
+        "com.amazonaws.ec2#CancelCapacityReservationFleetErrorCode": {
+            "type": "string"
+        },
+        "com.amazonaws.ec2#CancelCapacityReservationFleetErrorMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.ec2#CancelCapacityReservationFleets": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#CancelCapacityReservationFleetsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#CancelCapacityReservationFleetsResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Cancels one or more Capacity Reservation Fleets. When you cancel a Capacity Reservation \n\t\t\tFleet, the following happens:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>The Capacity Reservation Fleet's status changes to <code>cancelled</code>.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>The individual Capacity Reservations in the Fleet are cancelled. Instances running \n\t\t\t\t\tin the Capacity Reservations at the time of cancelling the Fleet continue to run in \n\t\t\t\t\tshared capacity.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>The Fleet stops creating new Capacity Reservations.</p>\n\t\t\t         </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.ec2#CancelCapacityReservationFleetsRequest": {
+            "type": "structure",
+            "members": {
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                },
+                "CapacityReservationFleetIds": {
+                    "target": "com.amazonaws.ec2#CapacityReservationFleetIdSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the Capacity Reservation Fleets to cancel.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "CapacityReservationFleetId"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#CancelCapacityReservationFleetsResult": {
+            "type": "structure",
+            "members": {
+                "SuccessfulFleetCancellations": {
+                    "target": "com.amazonaws.ec2#CapacityReservationFleetCancellationStateSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "SuccessfulFleetCancellationSet",
+                        "smithy.api#documentation": "<p>Information about the Capacity Reservation Fleets that were successfully cancelled.</p>",
+                        "smithy.api#xmlName": "successfulFleetCancellationSet"
+                    }
+                },
+                "FailedFleetCancellations": {
+                    "target": "com.amazonaws.ec2#FailedCapacityReservationFleetCancellationResultSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "FailedFleetCancellationSet",
+                        "smithy.api#documentation": "<p>Information about the Capacity Reservation Fleets that could not be cancelled.</p>",
+                        "smithy.api#xmlName": "failedFleetCancellationSet"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ec2#CancelCapacityReservationRequest": {
             "type": "structure",
             "members": {
@@ -6416,10 +6510,227 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Outpost on which the Capacity \n\t  \t\tReservation was created.</p>",
                         "smithy.api#xmlName": "outpostArn"
                     }
+                },
+                "CapacityReservationFleetId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CapacityReservationFleetId",
+                        "smithy.api#documentation": "<p>The ID of the Capacity Reservation Fleet to which the Capacity Reservation belongs. \n\t\t\tOnly valid for Capacity Reservations that were created by a Capacity Reservation Fleet.</p>",
+                        "smithy.api#xmlName": "capacityReservationFleetId"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes a Capacity Reservation.</p>"
+            }
+        },
+        "com.amazonaws.ec2#CapacityReservationFleet": {
+            "type": "structure",
+            "members": {
+                "CapacityReservationFleetId": {
+                    "target": "com.amazonaws.ec2#CapacityReservationFleetId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CapacityReservationFleetId",
+                        "smithy.api#documentation": "<p>The ID of the Capacity Reservation Fleet.</p>",
+                        "smithy.api#xmlName": "capacityReservationFleetId"
+                    }
+                },
+                "CapacityReservationFleetArn": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CapacityReservationFleetArn",
+                        "smithy.api#documentation": "<p>The ARN of the Capacity Reservation Fleet.</p>",
+                        "smithy.api#xmlName": "capacityReservationFleetArn"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.ec2#CapacityReservationFleetState",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "State",
+                        "smithy.api#documentation": "<p>The state of the Capacity Reservation Fleet. Possible states include:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <code>submitted</code> - The Capacity Reservation Fleet request has been submitted \n\t\t\t\t\tand Amazon Elastic Compute Cloud is preparing to create the Capacity Reservations.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>modifying</code> - The Capacity Reservation Fleet is being modified. The Fleet \n\t\t\t\t\tremains in this state until the modification is complete.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>active</code> - The Capacity Reservation Fleet has fulfilled its total target \n\t\t\t\t\tcapacity and it is attempting to maintain this capacity. The Fleet remains in this \n\t\t\t\t\tstate until it is modified or deleted.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>partially_fulfilled</code> - The Capacity Reservation Fleet has partially \n\t\t\t\t\tfulfilled its total target capacity. There is insufficient Amazon EC2 to \n\t\t\t\t\tfulfill the total target capacity. The Fleet is attempting to asynchronously fulfill \n\t\t\t\t\tits total target capacity.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>expiring</code> - The Capacity Reservation Fleet has reach its end date and it \n\t\t\t\t\tis in the process of expiring. One or more of its Capacity reservations might still \n\t\t\t\t\tbe active.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>expired</code> - The Capacity Reservation Fleet has reach its end date. The Fleet \n\t\t\t\t\tand its Capacity Reservations are expired. The Fleet can't create new Capacity \n\t\t\t\t\tReservations.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>cancelling</code> - The Capacity Reservation Fleet is in the process of being \n\t\t\t\t\tcancelled. One or more of its Capacity reservations might still be active.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>cancelled</code> - The Capacity Reservation Fleet has been manually cancelled. \n\t\t\t\t\tThe Fleet and its Capacity Reservations are cancelled and the Fleet can't create new \n\t\t\t\t\tCapacity Reservations.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>failed</code> - The Capacity Reservation Fleet failed to reserve capacity for \n\t\t\t\t\tthe specified instance types.</p>\n\t\t\t         </li>\n         </ul>",
+                        "smithy.api#xmlName": "state"
+                    }
+                },
+                "TotalTargetCapacity": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TotalTargetCapacity",
+                        "smithy.api#documentation": "<p>The total number of capacity units for which the Capacity Reservation Fleet reserves capacity. \n\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/crfleet-concepts.html#target-capacity\">Total target capacity</a> \n\t\t\tin the Amazon EC2 User Guide.</p>",
+                        "smithy.api#xmlName": "totalTargetCapacity"
+                    }
+                },
+                "TotalFulfilledCapacity": {
+                    "target": "com.amazonaws.ec2#Double",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TotalFulfilledCapacity",
+                        "smithy.api#documentation": "<p>The capacity units that have been fulfilled.</p>",
+                        "smithy.api#xmlName": "totalFulfilledCapacity"
+                    }
+                },
+                "Tenancy": {
+                    "target": "com.amazonaws.ec2#FleetCapacityReservationTenancy",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Tenancy",
+                        "smithy.api#documentation": "<p>The tenancy of the Capacity Reservation Fleet. Tenancies include:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <code>default</code> - The Capacity Reservation Fleet is created on hardware that is \n\t\t\t\t\tshared with other Amazon Web Services accounts.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>dedicated</code> - The Capacity Reservation Fleet is created on single-tenant \n\t\t\t\t\thardware that is dedicated to a single Amazon Web Services account.</p>\n\t\t\t         </li>\n         </ul>",
+                        "smithy.api#xmlName": "tenancy"
+                    }
+                },
+                "EndDate": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "EndDate",
+                        "smithy.api#documentation": "<p>The date and time at which the Capacity Reservation Fleet expires.</p>",
+                        "smithy.api#xmlName": "endDate"
+                    }
+                },
+                "CreateTime": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CreateTime",
+                        "smithy.api#documentation": "<p>The date and time at which the Capacity Reservation Fleet was created.</p>",
+                        "smithy.api#xmlName": "createTime"
+                    }
+                },
+                "InstanceMatchCriteria": {
+                    "target": "com.amazonaws.ec2#FleetInstanceMatchCriteria",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "InstanceMatchCriteria",
+                        "smithy.api#documentation": "<p>Indicates the type of instance launches that the Capacity Reservation Fleet accepts. All \n\t\t\tCapacity Reservations in the Fleet inherit this instance matching criteria.</p>\n\t\t       <p>Currently, Capacity Reservation Fleets support <code>open</code> instance matching criteria \n\t\t\tonly. This means that instances that have matching attributes (instance type, platform, and \n\t\t\tAvailability Zone) run in the Capacity Reservations automatically. Instances do not need to \n\t\t\texplicitly target a Capacity Reservation Fleet to use its reserved capacity.</p>",
+                        "smithy.api#xmlName": "instanceMatchCriteria"
+                    }
+                },
+                "AllocationStrategy": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AllocationStrategy",
+                        "smithy.api#documentation": "<p>The strategy used by the Capacity Reservation Fleet to determine which of the specified \n\t\t\tinstance types to use. For more information, see For more information, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/crfleet-concepts.html#allocation-strategy\">\n\t\t\t\tAllocation strategy</a> in the Amazon EC2 User Guide.</p>",
+                        "smithy.api#xmlName": "allocationStrategy"
+                    }
+                },
+                "InstanceTypeSpecifications": {
+                    "target": "com.amazonaws.ec2#FleetCapacityReservationSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "InstanceTypeSpecificationSet",
+                        "smithy.api#documentation": "<p>Information about the instance types for which to reserve the capacity.</p>",
+                        "smithy.api#xmlName": "instanceTypeSpecificationSet"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.ec2#TagList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TagSet",
+                        "smithy.api#documentation": "<p>The tags assigned to the Capacity Reservation Fleet.</p>",
+                        "smithy.api#xmlName": "tagSet"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a Capacity Reservation Fleet.</p>"
+            }
+        },
+        "com.amazonaws.ec2#CapacityReservationFleetCancellationState": {
+            "type": "structure",
+            "members": {
+                "CurrentFleetState": {
+                    "target": "com.amazonaws.ec2#CapacityReservationFleetState",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CurrentFleetState",
+                        "smithy.api#documentation": "<p>The current state of the Capacity Reservation Fleet.</p>",
+                        "smithy.api#xmlName": "currentFleetState"
+                    }
+                },
+                "PreviousFleetState": {
+                    "target": "com.amazonaws.ec2#CapacityReservationFleetState",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "PreviousFleetState",
+                        "smithy.api#documentation": "<p>The previous state of the Capacity Reservation Fleet.</p>",
+                        "smithy.api#xmlName": "previousFleetState"
+                    }
+                },
+                "CapacityReservationFleetId": {
+                    "target": "com.amazonaws.ec2#CapacityReservationFleetId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CapacityReservationFleetId",
+                        "smithy.api#documentation": "<p>The ID of the Capacity Reservation Fleet that was successfully cancelled.</p>",
+                        "smithy.api#xmlName": "capacityReservationFleetId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a Capacity Reservation Fleet that was successfully cancelled.</p>"
+            }
+        },
+        "com.amazonaws.ec2#CapacityReservationFleetCancellationStateSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#CapacityReservationFleetCancellationState",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#CapacityReservationFleetId": {
+            "type": "string"
+        },
+        "com.amazonaws.ec2#CapacityReservationFleetIdSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#CapacityReservationFleetId",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#CapacityReservationFleetSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#CapacityReservationFleet",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#CapacityReservationFleetState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "submitted",
+                        "name": "SUBMITTED"
+                    },
+                    {
+                        "value": "modifying",
+                        "name": "MODIFYING"
+                    },
+                    {
+                        "value": "active",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "partially_fulfilled",
+                        "name": "PARTIALLY_FULFILLED"
+                    },
+                    {
+                        "value": "expiring",
+                        "name": "EXPIRING"
+                    },
+                    {
+                        "value": "expired",
+                        "name": "EXPIRED"
+                    },
+                    {
+                        "value": "cancelling",
+                        "name": "CANCELLING"
+                    },
+                    {
+                        "value": "cancelled",
+                        "name": "CANCELLED"
+                    },
+                    {
+                        "value": "failed",
+                        "name": "FAILED"
+                    }
+                ]
             }
         },
         "com.amazonaws.ec2#CapacityReservationGroup": {
@@ -7882,7 +8193,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "AwsAccountId",
-                        "smithy.api#documentation": "<p>The AWS account ID.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID.</p>",
                         "smithy.api#xmlName": "awsAccountId"
                     }
                 },
@@ -7890,7 +8201,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "AwsService",
-                        "smithy.api#documentation": "<p>The AWS service.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services service.</p>",
                         "smithy.api#xmlName": "awsService"
                     }
                 },
@@ -8392,7 +8703,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. \n         For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html\">Ensuring Idempotency</a>.</p>"
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. \n         For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>"
                     }
                 }
             }
@@ -8700,6 +9011,175 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Creates a new Capacity Reservation with the specified attributes.</p> \n\t\t       <p>Capacity Reservations enable you to reserve capacity for your Amazon EC2 instances in a specific Availability Zone for any duration. This \n\t\t\tgives you the flexibility to selectively add capacity reservations and still get the Regional RI discounts for that usage. \n\t\t\tBy creating Capacity Reservations, you ensure that you always have access to Amazon EC2 capacity when you need it, for as long as you need it. \n\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html\">Capacity Reservations</a> in the <i>Amazon EC2 User Guide</i>.</p>\n\t\t\n\t\t       <p>Your request to create a Capacity Reservation could fail if Amazon EC2 does not have sufficient capacity to\n\t\t\tfulfill the request. If your request fails due to Amazon EC2 capacity constraints, either try\n\t\t\tagain at a later time, try in a different Availability Zone, or request a smaller\n\t\t\tcapacity reservation. If your application is flexible across instance types and sizes,\n\t\t\ttry to create a Capacity Reservation with different instance attributes.</p>\n\t\t\n\t\t       <p>Your request could also fail if the requested quantity exceeds your On-Demand Instance\n\t\t\tlimit for the selected instance type. If your request fails due to limit constraints,\n\t\t\tincrease your On-Demand Instance limit for the required instance type and try again. For\n\t\t\tmore information about increasing your instance limits, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html\">Amazon EC2 Service\n\t\t\t\tQuotas</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#CreateCapacityReservationFleet": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#CreateCapacityReservationFleetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#CreateCapacityReservationFleetResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a Capacity Reservation Fleet. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/work-with-cr-fleets.html#create-crfleet\">Create a Capacity \n\t\t\tReservation Fleet</a> in the Amazon EC2 User Guide.</p>"
+            }
+        },
+        "com.amazonaws.ec2#CreateCapacityReservationFleetRequest": {
+            "type": "structure",
+            "members": {
+                "AllocationStrategy": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The strategy used by the Capacity Reservation Fleet to determine which of the \n\t\t\tspecified instance types to use. Currently, only the <code>prioritized</code> \n\t\t\tallocation strategy is supported. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/crfleet-concepts.html#allocation-strategy\">\n\t\t\t\tAllocation strategy</a> in the Amazon EC2 User Guide.</p>\n\t\t       <p>Valid values: <code>prioritized</code>\n         </p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensure Idempotency</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "InstanceTypeSpecifications": {
+                    "target": "com.amazonaws.ec2#ReservationFleetInstanceSpecificationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the instance types for which to reserve the capacity.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "InstanceTypeSpecification"
+                    }
+                },
+                "Tenancy": {
+                    "target": "com.amazonaws.ec2#FleetCapacityReservationTenancy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the tenancy of the Capacity Reservation Fleet. All Capacity Reservations \n\t\t\tin the Fleet inherit this tenancy. The Capacity Reservation Fleet can have one of \n\t\t\tthe following tenancy settings:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n\t\t\t\t\t             <code>default</code> - The Capacity Reservation Fleet is created on hardware \n\t\t\t\t\tthat is shared with other Amazon Web Services accounts.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n\t\t\t\t\t             <code>dedicated</code> - The Capacity Reservations are created on single-tenant \n\t\t\t\t\thardware that is dedicated to a single Amazon Web Services account.</p>\n\t\t\t         </li>\n         </ul>"
+                    }
+                },
+                "TotalTargetCapacity": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of capacity units to be reserved by the Capacity Reservation Fleet. This \n\t\t\tvalue, together with the instance type weights that you assign to each instance type used by \n\t\t\tthe Fleet determine the number of instances for which the Fleet reserves capacity. Both values \n\t\t\tare based on units that make sense for your workload. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/crfleet-concepts.html#target-capacity\">\n\t\t\t\tTotal target capacity</a> in the Amazon EC2 User Guide.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndDate": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time at which the Capacity Reservation Fleet expires. When the Capacity \n\t\t\tReservation Fleet expires, its state changes to <code>expired</code> and all of the Capacity \n\t\t\tReservations in the Fleet expire.</p>\t\n\t\t       <p>The Capacity Reservation Fleet expires within an hour after the specified time. For example, \n\t\t\tif you specify <code>5/31/2019</code>, <code>13:30:55</code>, the Capacity Reservation Fleet \n\t\t\tis guaranteed to expire between <code>13:30:55</code> and <code>14:30:55</code> on \n\t\t\t<code>5/31/2019</code>.\n\t\t</p>"
+                    }
+                },
+                "InstanceMatchCriteria": {
+                    "target": "com.amazonaws.ec2#FleetInstanceMatchCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the type of instance launches that the Capacity Reservation Fleet accepts. All \n\t\t\tCapacity Reservations in the Fleet inherit this instance matching criteria.</p>\n\t\t       <p>Currently, Capacity Reservation Fleets support <code>open</code> instance matching criteria \n\t\t\tonly. This means that instances that have matching attributes (instance type, platform, and \n\t\t\tAvailability Zone) run in the Capacity Reservations automatically. Instances do not need to \n\t\t\texplicitly target a Capacity Reservation Fleet to use its reserved capacity.</p>"
+                    }
+                },
+                "TagSpecifications": {
+                    "target": "com.amazonaws.ec2#TagSpecificationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to assign to the Capacity Reservation Fleet. The tags are automatically assigned \n\t\t\tto the Capacity Reservations in the Fleet.</p>",
+                        "smithy.api#xmlName": "TagSpecification"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#CreateCapacityReservationFleetResult": {
+            "type": "structure",
+            "members": {
+                "CapacityReservationFleetId": {
+                    "target": "com.amazonaws.ec2#CapacityReservationFleetId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CapacityReservationFleetId",
+                        "smithy.api#documentation": "<p>The ID of the Capacity Reservation Fleet.</p>",
+                        "smithy.api#xmlName": "capacityReservationFleetId"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.ec2#CapacityReservationFleetState",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "State",
+                        "smithy.api#documentation": "<p>The status of the Capacity Reservation Fleet.</p>",
+                        "smithy.api#xmlName": "state"
+                    }
+                },
+                "TotalTargetCapacity": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TotalTargetCapacity",
+                        "smithy.api#documentation": "<p>The total number of capacity units for which the Capacity Reservation Fleet reserves capacity.</p>",
+                        "smithy.api#xmlName": "totalTargetCapacity"
+                    }
+                },
+                "TotalFulfilledCapacity": {
+                    "target": "com.amazonaws.ec2#Double",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TotalFulfilledCapacity",
+                        "smithy.api#documentation": "<p>The requested capacity units that have been successfully reserved.</p>",
+                        "smithy.api#xmlName": "totalFulfilledCapacity"
+                    }
+                },
+                "InstanceMatchCriteria": {
+                    "target": "com.amazonaws.ec2#FleetInstanceMatchCriteria",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "InstanceMatchCriteria",
+                        "smithy.api#documentation": "<p>The instance matching criteria for the Capacity Reservation Fleet.</p>",
+                        "smithy.api#xmlName": "instanceMatchCriteria"
+                    }
+                },
+                "AllocationStrategy": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AllocationStrategy",
+                        "smithy.api#documentation": "<p>The allocation strategy used by the Capacity Reservation Fleet.</p>",
+                        "smithy.api#xmlName": "allocationStrategy"
+                    }
+                },
+                "CreateTime": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CreateTime",
+                        "smithy.api#documentation": "<p>The date and time at which the Capacity Reservation Fleet was created.</p>",
+                        "smithy.api#xmlName": "createTime"
+                    }
+                },
+                "EndDate": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "EndDate",
+                        "smithy.api#documentation": "<p>The date and time at which the Capacity Reservation Fleet expires.</p>",
+                        "smithy.api#xmlName": "endDate"
+                    }
+                },
+                "Tenancy": {
+                    "target": "com.amazonaws.ec2#FleetCapacityReservationTenancy",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Tenancy",
+                        "smithy.api#documentation": "<p>Indicates the tenancy of Capacity Reservation Fleet.</p>",
+                        "smithy.api#xmlName": "tenancy"
+                    }
+                },
+                "FleetCapacityReservations": {
+                    "target": "com.amazonaws.ec2#FleetCapacityReservationSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "FleetCapacityReservationSet",
+                        "smithy.api#documentation": "<p>Information about the individual Capacity Reservations in the Capacity Reservation Fleet.</p>",
+                        "smithy.api#xmlName": "fleetCapacityReservationSet"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.ec2#TagList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TagSet",
+                        "smithy.api#documentation": "<p>The tags assigned to the Capacity Reservation Fleet.</p>",
+                        "smithy.api#xmlName": "tagSet"
+                    }
+                }
             }
         },
         "com.amazonaws.ec2#CreateCapacityReservationRequest": {
@@ -9686,7 +10166,7 @@
                 "LogFormat": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The fields to include in the flow log record, in the order in which they should\n            appear. For a list of available fields, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records\">Flow log records</a>. If you\n            omit this parameter, the flow log is created using the default format. If you specify this parameter, \n            you must specify at least one field.</p>\n        <p>Specify the fields using the <code>${field-id}</code> format, separated by spaces. For\n            the CLI, use single quotation marks (' ') to surround the parameter value.</p>"
+                        "smithy.api#documentation": "<p>The fields to include in the flow log record, in the order in which they should\n            appear. For a list of available fields, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records\">Flow log records</a>. If you\n            omit this parameter, the flow log is created using the default format. If you specify this parameter, \n            you must specify at least one field.</p>\n        <p>Specify the fields using the <code>${field-id}</code> format, separated by spaces. For\n            the CLI, surround this parameter value with single quotes on Linux or\n            double quotes on Windows.</p>"
                     }
                 },
                 "TagSpecifications": {
@@ -9742,7 +10222,7 @@
                 "target": "com.amazonaws.ec2#CreateFpgaImageResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon FPGA Image (AFI) from the specified design checkpoint (DCP).</p>\n         <p>The create operation is asynchronous. To verify that the AFI is ready for use, \n         check the output logs.</p>\n         <p>An AFI contains the FPGA bitstream that is ready to download to an FPGA. \n         You can securely deploy an AFI on multiple FPGA-accelerated instances.\n         For more information, see the <a href=\"https://github.com/aws/aws-fpga/\">AWS FPGA Hardware Development Kit</a>.</p>"
+                "smithy.api#documentation": "<p>Creates an Amazon FPGA Image (AFI) from the specified design checkpoint (DCP).</p>\n         <p>The create operation is asynchronous. To verify that the AFI is ready for use, \n         check the output logs.</p>\n         <p>An AFI contains the FPGA bitstream that is ready to download to an FPGA. \n         You can securely deploy an AFI on multiple FPGA-accelerated instances.\n         For more information, see the <a href=\"https://github.com/aws/aws-fpga/\">Amazon Web Services FPGA Hardware Development Kit</a>.</p>"
             }
         },
         "com.amazonaws.ec2#CreateFpgaImageRequest": {
@@ -10135,7 +10615,7 @@
                 "target": "com.amazonaws.ec2#CreateLaunchTemplateResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a launch template. A launch template contains the parameters to launch an\n            instance. When you launch an instance using <a>RunInstances</a>, you can\n            specify a launch template instead of providing the launch parameters in the request. For\n            more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html\">Launching an instance from a\n                launch template</a>in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates a launch template. A launch template contains the parameters to launch an\n            instance. When you launch an instance using <a>RunInstances</a>, you can\n            specify a launch template instead of providing the launch parameters in the request. For\n            more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html\">Launching an instance from a\n                launch template</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#CreateLaunchTemplateRequest": {
@@ -10313,17 +10793,17 @@
                         "smithy.api#required": {}
                     }
                 },
-                "DryRun": {
-                    "target": "com.amazonaws.ec2#Boolean",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
-                    }
-                },
                 "LocalGatewayVirtualInterfaceGroupId": {
                     "target": "com.amazonaws.ec2#LocalGatewayVirtualInterfaceGroupId",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the virtual interface group.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
                     }
                 }
             }
@@ -11899,6 +12379,13 @@
                         "smithy.api#documentation": "<p>The AZ ID or the Local Zone ID of the subnet.</p>"
                     }
                 },
+                "CidrBlock": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv4 network range for the subnet, in CIDR notation. For example, <code>10.0.0.0/24</code>. We modify the specified CIDR block to its canonical form; for example, if you specify <code>100.68.0.18/18</code>, we modify it to <code>100.68.0.0/18</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
                 "Ipv6CidrBlock": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
@@ -11924,13 +12411,6 @@
                         "aws.protocols#ec2QueryName": "DryRun",
                         "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
                         "smithy.api#xmlName": "dryRun"
-                    }
-                },
-                "CidrBlock": {
-                    "target": "com.amazonaws.ec2#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The IPv4 network range for the subnet, in CIDR notation. For example, <code>10.0.0.0/24</code>. We modify the specified CIDR block to its canonical form; for example, if you specify <code>100.68.0.18/18</code>, we modify it to <code>100.68.0.0/18</code>.</p>",
-                        "smithy.api#required": {}
                     }
                 }
             }
@@ -12023,7 +12503,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>",
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to ensure idempotency</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -12044,7 +12524,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "ClientToken",
-                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>",
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to ensure idempotency</a>.</p>",
                         "smithy.api#xmlName": "clientToken"
                     }
                 }
@@ -12059,7 +12539,7 @@
                 "target": "com.amazonaws.ec2#CreateTrafficMirrorFilterRuleResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a Traffic Mirror filter rule. </p>\n         <p>A Traffic Mirror rule defines the Traffic Mirror source traffic to mirror.</p>\n         <p>You need the Traffic Mirror filter ID when you create the rule.</p>"
+                "smithy.api#documentation": "<p>Creates a Traffic Mirror filter rule.</p>\n         <p>A Traffic Mirror rule defines the Traffic Mirror source traffic to mirror.</p>\n         <p>You need the Traffic Mirror filter ID when you create the rule.</p>"
             }
         },
         "com.amazonaws.ec2#CreateTrafficMirrorFilterRuleRequest": {
@@ -12075,7 +12555,7 @@
                 "TrafficDirection": {
                     "target": "com.amazonaws.ec2#TrafficDirection",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of traffic (<code>ingress</code> | <code>egress</code>).</p>",
+                        "smithy.api#documentation": "<p>The type of traffic.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -12089,7 +12569,7 @@
                 "RuleAction": {
                     "target": "com.amazonaws.ec2#TrafficMirrorRuleAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>The action to take (<code>accept</code> | <code>reject</code>) on the filtered traffic.</p>",
+                        "smithy.api#documentation": "<p>The action to take on the filtered traffic.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -12140,7 +12620,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>",
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to ensure idempotency</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -12161,7 +12641,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "ClientToken",
-                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>",
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to ensure idempotency</a>.</p>",
                         "smithy.api#xmlName": "clientToken"
                     }
                 }
@@ -12244,7 +12724,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>",
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to ensure idempotency</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -12265,7 +12745,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "ClientToken",
-                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>",
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to ensure idempotency</a>.</p>",
                         "smithy.api#xmlName": "clientToken"
                     }
                 }
@@ -12320,7 +12800,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>",
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to ensure idempotency</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -12341,7 +12821,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "ClientToken",
-                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>",
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to ensure idempotency</a>.</p>",
                         "smithy.api#xmlName": "clientToken"
                     }
                 }
@@ -13147,7 +13627,7 @@
                 "target": "com.amazonaws.ec2#CreateVpcEndpointResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a VPC endpoint for a specified service. An endpoint enables you to create a\n            private connection between your VPC and the service. The service may be provided by AWS,\n            an AWS Marketplace Partner, or another AWS account. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html\">VPC Endpoints</a> in\n            the <i>Amazon Virtual Private Cloud User Guide</i>.</p>\n        <p>A <code>gateway</code> endpoint serves as a target for a route in your route table for\n            traffic destined for the AWS service. You can specify an endpoint policy to attach to\n            the endpoint, which will control access to the service from your VPC. You can also\n            specify the VPC route tables that use the endpoint.</p>\n        <p>An <code>interface</code> endpoint is a network interface in your subnet that\n            serves as an endpoint for communicating with the specified service. You can specify the\n            subnets in which to create an endpoint, and the security groups to associate with the\n            endpoint network interface.</p>\n        <p>A <code>GatewayLoadBalancer</code> endpoint is a network interface in your subnet that serves an endpoint for communicating with a Gateway Load Balancer that you've configured as a VPC endpoint service.</p>\n        <p>Use <a>DescribeVpcEndpointServices</a> to get a list of supported\n            services.</p>"
+                "smithy.api#documentation": "<p>Creates a VPC endpoint for a specified service. An endpoint enables you to create a\n            private connection between your VPC and the service. The service may be provided by Amazon Web Services,\n            an Amazon Web Services Marketplace Partner, or another Amazon Web Services account. For more information, \n            see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html\">VPC Endpoints</a> in the\n            <i>Amazon Virtual Private Cloud User Guide</i>.</p>\n        <p>A <code>gateway</code> endpoint serves as a target for a route in your route table for\n            traffic destined for the Amazon Web Service. You can specify an endpoint policy to attach \n            to the endpoint, which will control access to the service from your VPC. You can also\n            specify the VPC route tables that use the endpoint.</p>\n        <p>An <code>interface</code> endpoint is a network interface in your subnet that\n            serves as an endpoint for communicating with the specified service. You can specify the\n            subnets in which to create an endpoint, and the security groups to associate with the\n            endpoint network interface.</p>\n        <p>A <code>GatewayLoadBalancer</code> endpoint is a network interface in your subnet that serves an endpoint for communicating with a Gateway Load Balancer that you've configured as a VPC endpoint service.</p>\n        <p>Use <a>DescribeVpcEndpointServices</a> to get a list of supported\n            services.</p>"
             }
         },
         "com.amazonaws.ec2#CreateVpcEndpointConnectionNotification": {
@@ -13200,7 +13680,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure\n                Idempotency</a>.</p>"
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to ensure\n                idempotency</a>.</p>"
                     }
                 }
             }
@@ -13285,7 +13765,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure\n                Idempotency</a>.</p>"
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to ensure\n                idempotency</a>.</p>"
                     }
                 },
                 "PrivateDnsEnabled": {
@@ -13339,7 +13819,7 @@
                 "target": "com.amazonaws.ec2#CreateVpcEndpointServiceConfigurationResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a VPC endpoint service configuration to which service consumers (AWS accounts,\n            IAM users, and IAM roles) can connect.</p>\n        <p>To create an endpoint service configuration, you must first create one of the\n            following for your service:</p>\n        <ul>\n            <li>\n                <p>A <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html\">Network Load Balancer</a>. Service consumers connect to your service using an\n                    interface endpoint.</p>\n            </li>\n            <li>\n                <p>A <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/introduction.html\">Gateway Load Balancer</a>. Service consumers connect to your service using a\n                    Gateway Load Balancer endpoint.</p>\n            </li>\n         </ul>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html\">VPC Endpoint Services</a> in the\n                <i>Amazon Virtual Private Cloud User Guide</i>. </p>\n        <p>If you set the private DNS name, you must prove that you own the private DNS domain\n            name. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-dns-validation.html\">VPC Endpoint Service\n                Private DNS Name Verification</a> in the\n            <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates a VPC endpoint service configuration to which service consumers (Amazon Web Services accounts,\n            IAM users, and IAM roles) can connect.</p>\n        <p>To create an endpoint service configuration, you must first create one of the\n            following for your service:</p>\n        <ul>\n            <li>\n                <p>A <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html\">Network Load Balancer</a>. Service consumers connect to your service using an\n                    interface endpoint.</p>\n            </li>\n            <li>\n                <p>A <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/introduction.html\">Gateway Load Balancer</a>. Service consumers connect to your service using a\n                    Gateway Load Balancer endpoint.</p>\n            </li>\n         </ul>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html\">VPC Endpoint Services</a> in the\n                <i>Amazon Virtual Private Cloud User Guide</i>. </p>\n        <p>If you set the private DNS name, you must prove that you own the private DNS domain\n            name. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-dns-validation.html\">VPC Endpoint Service\n                Private DNS Name Verification</a> in the\n            <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#CreateVpcEndpointServiceConfigurationRequest": {
@@ -13380,7 +13860,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.\n            For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html\">How to Ensure\n                Idempotency</a>.</p>"
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.\n            For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html\">How to ensure\n                idempotency</a>.</p>"
                     }
                 },
                 "TagSpecifications": {
@@ -17078,7 +17558,7 @@
                 "target": "com.amazonaws.ec2#DescribeAvailabilityZonesResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the Availability Zones, Local Zones, and Wavelength Zones that are available to\n      you. If there is an event impacting a zone, you can use this request to view the state and any\n      provided messages for that zone.</p>\n         <p>For more information about Availability Zones, Local Zones, and Wavelength Zones, see\n        <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html\">Regions, Zones and\n        Outposts</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Describes the Availability Zones, Local Zones, and Wavelength Zones that are available to\n      you. If there is an event impacting a zone, you can use this request to view the state and any\n      provided messages for that zone.</p>\n         <p>For more information about Availability Zones, Local Zones, and Wavelength Zones, see\n        <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html\">Regions and zones</a> \n      in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#DescribeAvailabilityZonesRequest": {
@@ -17273,6 +17753,91 @@
                         "aws.protocols#ec2QueryName": "ByoipCidrSet",
                         "smithy.api#documentation": "<p>Information about your address ranges.</p>",
                         "smithy.api#xmlName": "byoipCidrSet"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NextToken",
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+                        "smithy.api#xmlName": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#DescribeCapacityReservationFleets": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#DescribeCapacityReservationFleetsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#DescribeCapacityReservationFleetsResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes one or more Capacity Reservation Fleets.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "CapacityReservationFleets",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.ec2#DescribeCapacityReservationFleetsMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.ec2#DescribeCapacityReservationFleetsRequest": {
+            "type": "structure",
+            "members": {
+                "CapacityReservationFleetIds": {
+                    "target": "com.amazonaws.ec2#CapacityReservationFleetIdSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the Capacity Reservation Fleets to describe.</p>",
+                        "smithy.api#xmlName": "CapacityReservationFleetId"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ec2#DescribeCapacityReservationFleetsMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned <code>nextToken</code> value. This value can be between 5 and 500. If <code>maxResults</code> is given a larger value than 500, you receive an error.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.ec2#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more filters.</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <code>state</code> - The state of the Fleet (<code>submitted</code> | <code>modifying</code> | <code>active</code> | \n\t\t\t\t\t<code>partially_fulfilled</code> | <code>expiring</code> | <code>expired</code> | <code>cancelling</code> | \n\t\t\t\t\t<code>cancelled</code> | <code>failed</code>).</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>instance-match-criteria</code> - The instance matching criteria for the Fleet. Only <code>open</code> is supported.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>tenancy</code> - The tenancy of the Fleet (<code>default</code> | <code>dedicated</code>).</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>allocation-strategy</code> - The allocation strategy used by the Fleet. Only <code>prioritized</code> is supported.</p>\n\t\t\t         </li>\n         </ul>",
+                        "smithy.api#xmlName": "Filter"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#DescribeCapacityReservationFleetsResult": {
+            "type": "structure",
+            "members": {
+                "CapacityReservationFleets": {
+                    "target": "com.amazonaws.ec2#CapacityReservationFleetSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CapacityReservationFleetSet",
+                        "smithy.api#documentation": "<p>Information about the Capacity Reservation Fleets.</p>",
+                        "smithy.api#xmlName": "capacityReservationFleetSet"
                     }
                 },
                 "NextToken": {
@@ -18915,7 +19480,7 @@
                 "target": "com.amazonaws.ec2#DescribeFleetHistoryResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the events for the specified EC2 Fleet during the specified time.</p>\n         <p>EC2 Fleet events are delayed by up to 30 seconds before they can be described. This ensures\n         that you can query by the last evaluated time and not miss a recorded event. EC2 Fleet events\n         are available for 48 hours.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet.html#monitor-ec2-fleet\">Monitoring your EC2 Fleet</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Describes the events for the specified EC2 Fleet during the specified time.</p>\n         <p>EC2 Fleet events are delayed by up to 30 seconds before they can be described. This ensures\n         that you can query by the last evaluated time and not miss a recorded event. EC2 Fleet events\n         are available for 48 hours.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/fleet-monitor.html\">Monitor fleet events using Amazon EventBridge</a> in the\n            <i>Amazon EC2 User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#DescribeFleetHistoryRequest": {
@@ -19360,7 +19925,7 @@
                 "target": "com.amazonaws.ec2#DescribeFpgaImagesResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the Amazon FPGA Images (AFIs) available to you. These include public AFIs,\n\t\t\tprivate AFIs that you own, and AFIs owned by other AWS accounts for which you have load\n\t\t\tpermissions.</p>",
+                "smithy.api#documentation": "<p>Describes the Amazon FPGA Images (AFIs) available to you. These include public AFIs,\n\t\t\tprivate AFIs that you own, and AFIs owned by other Amazon Web Services accounts for which you have load\n\t\t\tpermissions.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -19397,14 +19962,14 @@
                 "Owners": {
                     "target": "com.amazonaws.ec2#OwnerStringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters the AFI by owner. Specify an AWS account ID, <code>self</code> (owner is the sender of the request), or an AWS owner alias (valid values are <code>amazon</code> | <code>aws-marketplace</code>).</p>",
+                        "smithy.api#documentation": "<p>Filters the AFI by owner. Specify an Amazon Web Services account ID, <code>self</code> \n\t\t\t(owner is the sender of the request), or an Amazon Web Services owner alias (valid values are \n\t\t\t<code>amazon</code> | <code>aws-marketplace</code>).</p>",
                         "smithy.api#xmlName": "Owner"
                     }
                 },
                 "Filters": {
                     "target": "com.amazonaws.ec2#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filters.</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>create-time</code> - The creation time of the AFI.</p>\n            </li>\n            <li>\n               <p>\n                  <code>fpga-image-id</code> - The FPGA image identifier (AFI ID).</p>\n            </li>\n            <li>\n               <p>\n                  <code>fpga-image-global-id</code> - The global FPGA image identifier (AGFI ID).</p>\n            </li>\n            <li>\n               <p>\n                  <code>name</code> - The name of the AFI.</p>\n            </li>\n            <li>\n               <p>\n                  <code>owner-id</code> - The AWS account ID of the AFI owner.</p>\n            </li>\n            <li>\n               <p>\n                  <code>product-code</code> - The product code.</p>\n            </li>\n            <li>\n               <p>\n                  <code>shell-version</code> - The version of the AWS Shell that was used to create the bitstream.</p>\n            </li>\n            <li>\n               <p>\n                  <code>state</code> - The state of the AFI (<code>pending</code> | <code>failed</code> | <code>available</code> | <code>unavailable</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>update-time</code> - The time of the most recent update.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The filters.</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>create-time</code> - The creation time of the AFI.</p>\n            </li>\n            <li>\n               <p>\n                  <code>fpga-image-id</code> - The FPGA image identifier (AFI ID).</p>\n            </li>\n            <li>\n               <p>\n                  <code>fpga-image-global-id</code> - The global FPGA image identifier (AGFI ID).</p>\n            </li>\n            <li>\n               <p>\n                  <code>name</code> - The name of the AFI.</p>\n            </li>\n            <li>\n               <p>\n                  <code>owner-id</code> - The Amazon Web Services account ID of the AFI owner.</p>\n            </li>\n            <li>\n               <p>\n                  <code>product-code</code> - The product code.</p>\n            </li>\n            <li>\n               <p>\n                  <code>shell-version</code> - The version of the Amazon Web Services Shell that was used to create the bitstream.</p>\n            </li>\n            <li>\n               <p>\n                  <code>state</code> - The state of the AFI (<code>pending</code> | <code>failed</code> | <code>available</code> | <code>unavailable</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>update-time</code> - The time of the most recent update.</p>\n            </li>\n         </ul>",
                         "smithy.api#xmlName": "Filter"
                     }
                 },
@@ -19764,7 +20329,7 @@
                 "target": "com.amazonaws.ec2#DescribeIdFormatResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the ID format settings for your resources on a per-Region basis, for example, to view which resource types are enabled for longer IDs. This request only returns information about resource types whose ID formats can be modified; it does not return information about other resource types.</p>\n         <p>The following resource types support longer IDs: <code>bundle</code> |\n           <code>conversion-task</code> | <code>customer-gateway</code> | <code>dhcp-options</code> |\n           <code>elastic-ip-allocation</code> | <code>elastic-ip-association</code> |\n           <code>export-task</code> | <code>flow-log</code> | <code>image</code> |\n           <code>import-task</code> | <code>instance</code> | <code>internet-gateway</code> |\n           <code>network-acl</code> | <code>network-acl-association</code> |\n           <code>network-interface</code> | <code>network-interface-attachment</code> |\n           <code>prefix-list</code> | <code>reservation</code> | <code>route-table</code> |\n           <code>route-table-association</code> | <code>security-group</code> |\n           <code>snapshot</code> | <code>subnet</code> |\n           <code>subnet-cidr-block-association</code> | <code>volume</code> | <code>vpc</code>\n           | <code>vpc-cidr-block-association</code> | <code>vpc-endpoint</code> |\n           <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>. </p>\n         <p>These settings apply to the IAM user who makes the request; they do not apply to the entire\n      AWS account. By default, an IAM user defaults to the same settings as the root user, unless\n      they explicitly override the settings by running the <a>ModifyIdFormat</a> command. Resources\n      created with longer IDs are visible to all IAM users, regardless of these settings and\n      provided that they have permission to use the relevant <code>Describe</code> command for the\n      resource type.</p>"
+                "smithy.api#documentation": "<p>Describes the ID format settings for your resources on a per-Region basis, for example, to view which resource types are enabled for longer IDs. This request only returns information about resource types whose ID formats can be modified; it does not return information about other resource types.</p>\n         <p>The following resource types support longer IDs: <code>bundle</code> |\n           <code>conversion-task</code> | <code>customer-gateway</code> | <code>dhcp-options</code> |\n           <code>elastic-ip-allocation</code> | <code>elastic-ip-association</code> |\n           <code>export-task</code> | <code>flow-log</code> | <code>image</code> |\n           <code>import-task</code> | <code>instance</code> | <code>internet-gateway</code> |\n           <code>network-acl</code> | <code>network-acl-association</code> |\n           <code>network-interface</code> | <code>network-interface-attachment</code> |\n           <code>prefix-list</code> | <code>reservation</code> | <code>route-table</code> |\n           <code>route-table-association</code> | <code>security-group</code> |\n           <code>snapshot</code> | <code>subnet</code> |\n           <code>subnet-cidr-block-association</code> | <code>volume</code> | <code>vpc</code>\n           | <code>vpc-cidr-block-association</code> | <code>vpc-endpoint</code> |\n           <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>. </p>\n         <p>These settings apply to the IAM user who makes the request; they do not apply to the entire\n      Amazon Web Services account. By default, an IAM user defaults to the same settings as the root user, unless\n      they explicitly override the settings by running the <a>ModifyIdFormat</a> command. Resources\n      created with longer IDs are visible to all IAM users, regardless of these settings and\n      provided that they have permission to use the relevant <code>Describe</code> command for the\n      resource type.</p>"
             }
         },
         "com.amazonaws.ec2#DescribeIdFormatRequest": {
@@ -22959,7 +23524,7 @@
                 "target": "com.amazonaws.ec2#DescribeRegionsResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the Regions that are enabled for your account, or all Regions.</p> \n         <p>For a list of the Regions supported by Amazon EC2, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#ec2_region\">\n       Regions and Endpoints</a>.</p>\n         <p>For information about enabling and disabling Regions for your account, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande-manage.html\">Managing AWS Regions</a> in the <i>AWS General Reference</i>.</p>"
+                "smithy.api#documentation": "<p>Describes the Regions that are enabled for your account, or all Regions.</p> \n         <p>For a list of the Regions supported by Amazon EC2, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/ec2-service.html\">\n       Amazon Elastic Compute Cloud endpoints and quotas</a>.</p>\n         <p>For information about enabling and disabling Regions for your account, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande-manage.html\">Managing Amazon Web Services Regions</a> in the <i>Amazon Web Services General Reference</i>.</p>"
             }
         },
         "com.amazonaws.ec2#DescribeRegionsRequest": {
@@ -24079,6 +24644,16 @@
                                         "comparator": "allStringEquals"
                                     }
                                 }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Snapshots[].State",
+                                        "expected": "error",
+                                        "comparator": "anyStringEquals"
+                                    }
+                                }
                             }
                         ],
                         "minDelay": 15
@@ -24307,7 +24882,7 @@
                 "target": "com.amazonaws.ec2#DescribeSpotFleetRequestHistoryResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the events for the specified Spot Fleet request during the specified\n            time.</p>\n        <p>Spot Fleet events are delayed by up to 30 seconds before they can be described. This\n            ensures that you can query by the last evaluated time and not miss a recorded event.\n            Spot Fleet events are available for 48 hours.</p>"
+                "smithy.api#documentation": "<p>Describes the events for the specified Spot Fleet request during the specified\n            time.</p>\n        <p>Spot Fleet events are delayed by up to 30 seconds before they can be described. This\n            ensures that you can query by the last evaluated time and not miss a recorded event.\n            Spot Fleet events are available for 48 hours.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/fleet-monitor.html\">Monitor fleet events using Amazon\n                EventBridge</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>"
             }
         },
         "com.amazonaws.ec2#DescribeSpotFleetRequestHistoryMaxResults": {
@@ -26740,7 +27315,7 @@
                 "Filters": {
                     "target": "com.amazonaws.ec2#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more filters.</p>\n\t\t       <ul>\n            <li>\n                <p>\n                  <code>service-id</code> - The ID of the service.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-endpoint-owner</code> - The AWS account number of the owner of the\n                    endpoint.</p>\n            </li>\n            <li>\n\t\t\t            <p>\n                  <code>vpc-endpoint-state</code> - The state of the endpoint\n\t\t\t        (<code>pendingAcceptance</code> | <code>pending</code> |\n\t\t\t        <code>available</code> | <code>deleting</code> | <code>deleted</code> |\n\t\t\t        <code>rejected</code> | <code>failed</code>).</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>vpc-endpoint-id</code> - The ID of the endpoint.</p>\n\t\t\t         </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>One or more filters.</p>\n\t\t       <ul>\n            <li>\n                <p>\n                  <code>service-id</code> - The ID of the service.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-endpoint-owner</code> - The ID of the Amazon Web Services account ID \n\t\t        that owns the endpoint.</p>\n            </li>\n            <li>\n\t\t\t            <p>\n                  <code>vpc-endpoint-state</code> - The state of the endpoint\n\t\t\t        (<code>pendingAcceptance</code> | <code>pending</code> |\n\t\t\t        <code>available</code> | <code>deleting</code> | <code>deleted</code> |\n\t\t\t        <code>rejected</code> | <code>failed</code>).</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>vpc-endpoint-id</code> - The ID of the endpoint.</p>\n\t\t\t         </li>\n         </ul>",
                         "smithy.api#xmlName": "Filter"
                     }
                 },
@@ -29290,6 +29865,16 @@
         "com.amazonaws.ec2#Double": {
             "type": "double"
         },
+        "com.amazonaws.ec2#DoubleWithConstraints": {
+            "type": "double",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0.001,
+                    "max": 99.999
+                }
+            }
+        },
         "com.amazonaws.ec2#EbsBlockDevice": {
             "type": "structure",
             "members": {
@@ -29749,7 +30334,7 @@
                 "Type": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of Elastic Graphics accelerator. For more information about the values to specify for\n            <code>Type</code>, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/elastic-graphics.html#elastic-graphics-basics\">Elastic Graphics Basics</a>, specifically the Elastic Graphics accelerator column, in the <i>Amazon Elastic Compute Cloud User Guide for Windows\n                Instances</i>.</p>",
+                        "smithy.api#documentation": "<p>The type of Elastic Graphics accelerator. For more information about the values to specify for\n            <code>Type</code>, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/elastic-graphics.html#elastic-graphics-basics\">Elastic Graphics Basics</a>, specifically the Elastic Graphics accelerator column, in the \n            <i>Amazon Elastic Compute Cloud User Guide for Windows Instances</i>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -30709,7 +31294,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "EventSubType",
-                        "smithy.api#documentation": "<p>The event.</p>\n\n        <p>The following are the <code>error</code> events:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>iamFleetRoleInvalid</code> - The EC2 Fleet or Spot Fleet did not have the required\n                    permissions either to launch or terminate an instance.</p>\n            </li>\n            <li>\n                <p>\n                    <code>spotFleetRequestConfigurationInvalid</code> - The configuration is not\n                    valid. For more information, see the description of the event.</p>\n            </li>\n            <li>\n                <p>\n                    <code>spotInstanceCountLimitExceeded</code> - You've reached the limit on the\n                    number of Spot Instances that you can launch.</p>\n            </li>\n         </ul>\n\n        <p>The following are the <code>fleetRequestChange</code> events:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>active</code> - The EC2 Fleet or Spot Fleet request has been validated and Amazon EC2 is\n                    attempting to maintain the target number of running Spot Instances.</p>\n            </li>\n            <li>\n                <p>\n                    <code>cancelled</code> - The EC2 Fleet or Spot Fleet request is canceled and has no running\n                    Spot Instances. The EC2 Fleet or Spot Fleet will be deleted two days after its instances\n                    were terminated.</p>\n            </li>\n            <li>\n                <p>\n                    <code>cancelled_running</code> - The EC2 Fleet or Spot Fleet request is canceled and does\n                    not launch additional Spot Instances. Existing Spot Instances continue to run\n                    until they are interrupted or terminated.</p>\n            </li>\n            <li>\n                <p>\n                    <code>cancelled_terminating</code> - The EC2 Fleet or Spot Fleet request is canceled and\n                    its Spot Instances are terminating.</p>\n            </li>\n            <li>\n                <p>\n                    <code>expired</code> - The EC2 Fleet or Spot Fleet request has expired. A subsequent event\n                    indicates that the instances were terminated, if the request was created with\n                        <code>TerminateInstancesWithExpiration</code> set.</p>\n            </li>\n            <li>\n                <p>\n                    <code>modify_in_progress</code> - A request to modify the EC2 Fleet or Spot Fleet request\n                    was accepted and is in progress.</p>\n            </li>\n            <li>\n                <p>\n                    <code>modify_succeeded</code> - The EC2 Fleet or Spot Fleet request was modified.</p>\n            </li>\n            <li>\n                <p>\n                    <code>submitted</code> - The EC2 Fleet or Spot Fleet request is being evaluated and Amazon EC2\n                    is preparing to launch the target number of Spot Instances.</p>\n            </li>\n         </ul>\n\n        <p>The following are the <code>instanceChange</code> events:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>launched</code> - A request was fulfilled and a new instance was\n                    launched.</p>\n            </li>\n            <li>\n                <p>\n                  <code>terminated</code> - An instance was terminated by the user.</p>\n            </li>\n         </ul>\n\n        <p>The following are the <code>Information</code> events:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>launchSpecTemporarilyBlacklisted</code> - The configuration is not valid\n                    and several attempts to launch instances have failed. For more information, see\n                    the description of the event.</p>\n            </li>\n            <li>\n                <p>\n                  <code>launchSpecUnusable</code> - The price in a launch specification is not\n                    valid because it is below the Spot price or the Spot price is above the\n                    On-Demand price.</p>\n            </li>\n            <li>\n                <p>\n                  <code>fleetProgressHalted</code> - The price in every launch specification is\n                    not valid. A launch specification might become valid if the Spot price\n                    changes.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The event.</p>\n        \n        <p>\n            <code>error</code> events:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>iamFleetRoleInvalid</code> - The EC2 Fleet or Spot Fleet does not have the required\n                    permissions either to launch or terminate an instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>allLaunchSpecsTemporarilyBlacklisted</code> - None of the configurations\n                    are valid, and several attempts to launch instances have failed. For more\n                    information, see the description of the event.</p>\n            </li>\n            <li>\n                <p>\n                    <code>spotInstanceCountLimitExceeded</code> - You've reached the limit on the\n                    number of Spot Instances that you can launch.</p>\n            </li>\n            <li>\n                <p>\n                    <code>spotFleetRequestConfigurationInvalid</code> - The configuration is not\n                    valid. For more information, see the description of the event.</p>\n            </li>\n         </ul>\n\n        <p>\n            <code>fleetRequestChange</code> events:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>active</code> - The EC2 Fleet or Spot Fleet request has been validated and Amazon EC2 is\n                    attempting to maintain the target number of running instances.</p>\n            </li>\n            <li>\n                <p>\n                    <code>cancelled</code> - The EC2 Fleet or Spot Fleet request is canceled and has no running\n                    instances. The EC2 Fleet or Spot Fleet will be deleted two days after its instances are\n                    terminated.</p>\n            </li>\n            <li>\n                <p>\n                    <code>cancelled_running</code> - The EC2 Fleet or Spot Fleet request is canceled and does\n                    not launch additional instances. Its existing instances continue to run until\n                    they are interrupted or terminated. The request remains in this state until all\n                    instances are interrupted or terminated.</p>\n            </li>\n            <li>\n                <p>\n                    <code>cancelled_terminating</code> - The EC2 Fleet or Spot Fleet request is canceled and\n                    its instances are terminating. The request remains in this state until all\n                    instances are terminated.</p>\n            </li>\n            <li>\n                <p>\n                    <code>expired</code> - The EC2 Fleet or Spot Fleet request has expired. If the request was\n                    created with <code>TerminateInstancesWithExpiration</code> set, a subsequent\n                        <code>terminated</code> event indicates that the instances are\n                    terminated.</p>\n            </li>\n            <li>\n                <p>\n                    <code>modify_in_progress</code> - The EC2 Fleet or Spot Fleet request is being modified.\n                    The request remains in this state until the modification is fully\n                    processed.</p>\n            </li>\n            <li>\n                <p>\n                    <code>modify_succeeded</code> - The EC2 Fleet or Spot Fleet request was modified.</p>\n            </li>\n            <li>\n                <p>\n                    <code>submitted</code> - The EC2 Fleet or Spot Fleet request is being evaluated and Amazon EC2\n                    is preparing to launch the target number of instances.</p>\n            </li>\n            <li>\n                <p>\n                  <code>progress</code> - The EC2 Fleet or Spot Fleet request is in the process of being fulfilled.</p>\n            </li>\n         </ul>\n\n        <p>\n            <code>instanceChange</code> events:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>launched</code> - A new instance was launched.</p>\n            </li>\n            <li>\n                <p>\n                  <code>terminated</code> - An instance was terminated by the user.</p>\n            </li>\n            <li>\n                <p>\n                  <code>termination_notified</code> - An instance termination notification was\n                    sent when a Spot Instance was terminated by Amazon EC2 during scale-down, when the target\n                    capacity of the fleet was modified down, for example, from a target capacity of\n                    4 to a target capacity of 3.</p>\n            </li>\n         </ul>\n\n        <p>\n            <code>Information</code> events:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>fleetProgressHalted</code> - The price in every launch specification is\n                    not valid because it is below the Spot price (all the launch specifications have\n                    produced <code>launchSpecUnusable</code> events). A launch specification might\n                    become valid if the Spot price changes.</p>\n            </li>\n            <li>\n                <p>\n                  <code>launchSpecTemporarilyBlacklisted</code> - The configuration is not valid\n                    and several attempts to launch instances have failed. For more information, see\n                    the description of the event.</p>\n            </li>\n            <li>\n                <p>\n                  <code>launchSpecUnusable</code> - The price in a launch specification is not\n                    valid because it is below the Spot price.</p>\n            </li>\n            <li>\n                <p>\n                  <code>registerWithLoadBalancersFailed</code> - An attempt to register\n                    instances with load balancers failed. For more information, see the description\n                    of the event.</p>\n            </li>\n         </ul>",
                         "smithy.api#xmlName": "eventSubType"
                     }
                 },
@@ -31804,6 +32389,39 @@
         "com.amazonaws.ec2#ExportVmTaskId": {
             "type": "string"
         },
+        "com.amazonaws.ec2#FailedCapacityReservationFleetCancellationResult": {
+            "type": "structure",
+            "members": {
+                "CapacityReservationFleetId": {
+                    "target": "com.amazonaws.ec2#CapacityReservationFleetId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CapacityReservationFleetId",
+                        "smithy.api#documentation": "<p>The ID of the Capacity Reservation Fleet that could not be cancelled.</p>",
+                        "smithy.api#xmlName": "capacityReservationFleetId"
+                    }
+                },
+                "CancelCapacityReservationFleetError": {
+                    "target": "com.amazonaws.ec2#CancelCapacityReservationFleetError",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CancelCapacityReservationFleetError",
+                        "smithy.api#documentation": "<p>Information about the Capacity Reservation Fleet cancellation error.</p>",
+                        "smithy.api#xmlName": "cancelCapacityReservationFleetError"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a Capacity Reservation Fleet that could not be cancelled.</p>"
+            }
+        },
+        "com.amazonaws.ec2#FailedCapacityReservationFleetCancellationResultSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#FailedCapacityReservationFleetCancellationResult",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
         "com.amazonaws.ec2#FailedQueuedPurchaseDeletion": {
             "type": "structure",
             "members": {
@@ -31957,6 +32575,122 @@
                     {
                         "value": "fulfilled",
                         "name": "FULFILLED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ec2#FleetCapacityReservation": {
+            "type": "structure",
+            "members": {
+                "CapacityReservationId": {
+                    "target": "com.amazonaws.ec2#CapacityReservationId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CapacityReservationId",
+                        "smithy.api#documentation": "<p>The ID of the Capacity Reservation.</p>",
+                        "smithy.api#xmlName": "capacityReservationId"
+                    }
+                },
+                "AvailabilityZoneId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AvailabilityZoneId",
+                        "smithy.api#documentation": "<p>The ID of the Availability Zone in which the Capacity Reservation reserves capacity.</p>",
+                        "smithy.api#xmlName": "availabilityZoneId"
+                    }
+                },
+                "InstanceType": {
+                    "target": "com.amazonaws.ec2#InstanceType",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "InstanceType",
+                        "smithy.api#documentation": "<p>The instance type for which the Capacity Reservation reserves capacity.</p>",
+                        "smithy.api#xmlName": "instanceType"
+                    }
+                },
+                "InstancePlatform": {
+                    "target": "com.amazonaws.ec2#CapacityReservationInstancePlatform",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "InstancePlatform",
+                        "smithy.api#documentation": "<p>The type of operating system for which the Capacity Reservation reserves capacity.</p>",
+                        "smithy.api#xmlName": "instancePlatform"
+                    }
+                },
+                "AvailabilityZone": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AvailabilityZone",
+                        "smithy.api#documentation": "<p>The Availability Zone in which the Capacity Reservation reserves capacity.</p>",
+                        "smithy.api#xmlName": "availabilityZone"
+                    }
+                },
+                "TotalInstanceCount": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TotalInstanceCount",
+                        "smithy.api#documentation": "<p>The total number of instances for which the Capacity Reservation reserves capacity.</p>",
+                        "smithy.api#xmlName": "totalInstanceCount"
+                    }
+                },
+                "FulfilledCapacity": {
+                    "target": "com.amazonaws.ec2#Double",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "FulfilledCapacity",
+                        "smithy.api#documentation": "<p>The number of capacity units fulfilled by the Capacity Reservation. For more information, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/crfleet-concepts.html#target-capacity\">\n\t\t\t\tTotal target capacity</a> in the Amazon EC2 User Guide.</p>",
+                        "smithy.api#xmlName": "fulfilledCapacity"
+                    }
+                },
+                "EbsOptimized": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "EbsOptimized",
+                        "smithy.api#documentation": "<p>Indicates whether the Capacity Reservation reserves capacity for EBS-optimized instance types.</p>",
+                        "smithy.api#xmlName": "ebsOptimized"
+                    }
+                },
+                "CreateDate": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CreateDate",
+                        "smithy.api#documentation": "<p>The date and time at which the Capacity Reservation was created.</p>",
+                        "smithy.api#xmlName": "createDate"
+                    }
+                },
+                "Weight": {
+                    "target": "com.amazonaws.ec2#DoubleWithConstraints",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Weight",
+                        "smithy.api#documentation": "<p>The weight of the instance type in the Capacity Reservation Fleet. For more information, \n\t\t\tsee <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/crfleet-concepts.html#instance-weight\">\n\t\t\t\tInstance type weight</a> in the Amazon EC2 User Guide.</p>",
+                        "smithy.api#xmlName": "weight"
+                    }
+                },
+                "Priority": {
+                    "target": "com.amazonaws.ec2#IntegerWithConstraints",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Priority",
+                        "smithy.api#documentation": "<p>The priority of the instance type in the Capacity Reservation Fleet. For more information, \n\t\t\tsee <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/crfleet-concepts.html#instance-priority\">\n\t\t\t\tInstance type priority</a> in the Amazon EC2 User Guide.</p>",
+                        "smithy.api#xmlName": "priority"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a Capacity Reservation in a Capacity Reservation Fleet.</p>"
+            }
+        },
+        "com.amazonaws.ec2#FleetCapacityReservationSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#FleetCapacityReservation",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#FleetCapacityReservationTenancy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "default",
+                        "name": "default"
                     }
                 ]
             }
@@ -32189,6 +32923,17 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.ec2#FleetId"
+            }
+        },
+        "com.amazonaws.ec2#FleetInstanceMatchCriteria": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "open",
+                        "name": "open"
+                    }
+                ]
             }
         },
         "com.amazonaws.ec2#FleetLaunchTemplateConfig": {
@@ -32892,7 +33637,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "ShellVersion",
-                        "smithy.api#documentation": "<p>The version of the AWS Shell that was used to create the bitstream.</p>",
+                        "smithy.api#documentation": "<p>The version of the Amazon Web Services Shell that was used to create the bitstream.</p>",
                         "smithy.api#xmlName": "shellVersion"
                     }
                 },
@@ -32932,7 +33677,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "OwnerId",
-                        "smithy.api#documentation": "<p>The AWS account ID of the AFI owner.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the AFI.</p>",
                         "smithy.api#xmlName": "ownerId"
                     }
                 },
@@ -34821,7 +35566,7 @@
                 "target": "com.amazonaws.ec2#GetVpnConnectionDeviceSampleConfigurationResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Download an AWS-provided sample configuration file to be used with the customer\n            gateway device specified for your Site-to-Site VPN connection.</p>"
+                "smithy.api#documentation": "<p>Download an Amazon Web Services-provided sample configuration file to be used with the customer\n            gateway device specified for your Site-to-Site VPN connection.</p>"
             }
         },
         "com.amazonaws.ec2#GetVpnConnectionDeviceSampleConfigurationRequest": {
@@ -36697,7 +37442,7 @@
                 "UsageOperation": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The usage operation value. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info-fields.html\">AMI billing information fields</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The usage operation value. For more information, see <a href=\"https://docs.aws.amazon.com/vm-import/latest/userguide/vmie_prereqs.html#prerequisites\">Licensing options</a> in the <i>VM Import/Export User Guide</i>.</p>"
                     }
                 },
                 "BootMode": {
@@ -39217,7 +39962,7 @@
                 "HttpEndpoint": {
                     "target": "com.amazonaws.ec2#InstanceMetadataEndpointState",
                     "traits": {
-                        "smithy.api#documentation": "<p>This parameter enables or disables the HTTP metadata endpoint on your instances. If\n            the parameter is not specified, the default state is <code>enabled</code>.</p>\n        <note>\n            <p>If you specify a value of <code>disabled</code>, you will not be able to access your\n                instance metadata.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>Enables or disables the HTTP metadata endpoint on your instances. If the parameter is not \n            specified, the default state is <code>enabled</code>.</p>\n        <p>If you specify a value of <code>disabled</code>, you will not be able to access your\n            instance metadata.</p>"
                     }
                 },
                 "HttpProtocolIpv6": {
@@ -39262,7 +40007,7 @@
                     "target": "com.amazonaws.ec2#InstanceMetadataEndpointState",
                     "traits": {
                         "aws.protocols#ec2QueryName": "HttpEndpoint",
-                        "smithy.api#documentation": "<p>This parameter enables or disables the HTTP metadata endpoint on your instances. If\n            the parameter is not specified, the default state is <code>enabled</code>.</p>\n        <note>\n            <p>If you specify a value of <code>disabled</code>, you will not be able to access your\n                instance metadata.</p>\n        </note>",
+                        "smithy.api#documentation": "<p>Indicates whether the HTTP metadata endpoint on your instances is enabled or disabled.</p>",
                         "smithy.api#xmlName": "httpEndpoint"
                     }
                 },
@@ -39270,7 +40015,7 @@
                     "target": "com.amazonaws.ec2#InstanceMetadataProtocolState",
                     "traits": {
                         "aws.protocols#ec2QueryName": "HttpProtocolIpv6",
-                        "smithy.api#documentation": "<p>Whether or not the IPv6 endpoint for the instance metadata service is enabled or disabled.</p>",
+                        "smithy.api#documentation": "<p>Indicates whether the IPv6 endpoint for the instance metadata service is enabled or disabled.</p>",
                         "smithy.api#xmlName": "httpProtocolIpv6"
                     }
                 }
@@ -39658,7 +40403,7 @@
                     }
                 },
                 "NetworkInterfaceId": {
-                    "target": "com.amazonaws.ec2#String",
+                    "target": "com.amazonaws.ec2#NetworkInterfaceId",
                     "traits": {
                         "aws.protocols#ec2QueryName": "NetworkInterfaceId",
                         "smithy.api#documentation": "<p>The ID of the network interface.</p>\n        <p>If you are creating a Spot Fleet, omit this parameter because you can’t specify a network interface ID in a launch specification.</p>",
@@ -42188,6 +42933,15 @@
         "com.amazonaws.ec2#Integer": {
             "type": "integer"
         },
+        "com.amazonaws.ec2#IntegerWithConstraints": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
         "com.amazonaws.ec2#IntegrateServices": {
             "type": "structure",
             "members": {
@@ -44395,7 +45149,7 @@
                     }
                 },
                 "SubnetId": {
-                    "target": "com.amazonaws.ec2#String",
+                    "target": "com.amazonaws.ec2#SubnetId",
                     "traits": {
                         "aws.protocols#ec2QueryName": "SubnetId",
                         "smithy.api#documentation": "<p>The ID of the subnet in which to launch the instances.</p>",
@@ -44988,7 +45742,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "UserId",
-                        "smithy.api#documentation": "<p>The AWS account ID.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID.</p>",
                         "smithy.api#xmlName": "userId"
                     }
                 },
@@ -45055,7 +45809,7 @@
                 "UserId": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID.</p>"
                     }
                 }
             },
@@ -45086,7 +45840,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "OwnerId",
-                        "smithy.api#documentation": "<p>The AWS account ID that owns the local gateway.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the local gateway.</p>",
                         "smithy.api#xmlName": "ownerId"
                     }
                 },
@@ -45187,7 +45941,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "OwnerId",
-                        "smithy.api#documentation": "<p>The AWS account ID that owns the local gateway route.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the local gateway route.</p>",
                         "smithy.api#xmlName": "ownerId"
                     }
                 }
@@ -45271,7 +46025,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "OwnerId",
-                        "smithy.api#documentation": "<p>The AWS account ID that owns the local gateway route table.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the local gateway route table.</p>",
                         "smithy.api#xmlName": "ownerId"
                     }
                 },
@@ -45361,7 +46115,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "OwnerId",
-                        "smithy.api#documentation": "<p>The AWS account ID that owns the local gateway virtual interface group association.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the local gateway virtual interface group association.</p>",
                         "smithy.api#xmlName": "ownerId"
                     }
                 },
@@ -45454,7 +46208,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "OwnerId",
-                        "smithy.api#documentation": "<p>The AWS account ID that owns the local gateway route table for the association.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the local gateway route table for the association.</p>",
                         "smithy.api#xmlName": "ownerId"
                     }
                 },
@@ -45590,7 +46344,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "OwnerId",
-                        "smithy.api#documentation": "<p>The AWS account ID that owns the local gateway virtual interface.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the local gateway virtual interface.</p>",
                         "smithy.api#xmlName": "ownerId"
                     }
                 },
@@ -45638,7 +46392,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "OwnerId",
-                        "smithy.api#documentation": "<p>The AWS account ID that owns the local gateway virtual interface group.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the local gateway virtual interface group.</p>",
                         "smithy.api#xmlName": "ownerId"
                     }
                 },
@@ -46013,7 +46767,7 @@
                 "OptInStatus": {
                     "target": "com.amazonaws.ec2#ModifyAvailabilityZoneOptInStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether you are opted in to the Local Zone group or Wavelength Zone group. The\n      only valid value is <code>opted-in</code>. You must contact <a href=\"https://console.aws.amazon.com/support/home#/case/create%3FissueType=customer-service%26serviceCode=general-info%26getting-started%26categoryCode=using-aws%26services\">AWS Support</a> to opt out of a Local Zone group, or Wavelength Zone group.</p>",
+                        "smithy.api#documentation": "<p>Indicates whether you are opted in to the Local Zone group or Wavelength Zone group. The\n      only valid value is <code>opted-in</code>. You must contact <a href=\"https://console.aws.amazon.com/support/home#/case/create%3FissueType=customer-service%26serviceCode=general-info%26getting-started%26categoryCode=using-aws%26services\">Amazon Web Services Support</a> to opt out of a Local Zone or Wavelength Zone group.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -46063,6 +46817,67 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Modifies a Capacity Reservation's capacity and the conditions under which it is to be released. You\n\t\t\tcannot change a Capacity Reservation's instance type, EBS optimization, instance store settings,\n\t\t\tplatform, Availability Zone, or instance eligibility. If you need to modify any of these\n\t\t\tattributes, we recommend that you cancel the Capacity Reservation, and then create a new one with\n\t\t\tthe required attributes.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ModifyCapacityReservationFleet": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#ModifyCapacityReservationFleetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#ModifyCapacityReservationFleetResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies a Capacity Reservation Fleet.</p> \n\t\t       <p>When you modify the total target capacity of a Capacity Reservation Fleet, the Fleet automatically \n\t\t\tcreates new Capacity Reservations, or modifies or cancels existing Capacity Reservations in the Fleet \n\t\t\tto meet the new total target capacity. When you modify the end date for the Fleet, the end dates for \n\t\t\tall of the individual Capacity Reservations in the Fleet are updated accordingly.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ModifyCapacityReservationFleetRequest": {
+            "type": "structure",
+            "members": {
+                "CapacityReservationFleetId": {
+                    "target": "com.amazonaws.ec2#CapacityReservationFleetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Capacity Reservation Fleet to modify.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TotalTargetCapacity": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of capacity units to be reserved by the Capacity Reservation Fleet. This value, \n\t\t\ttogether with the instance type weights that you assign to each instance type used by the Fleet \n\t\t\tdetermine the number of instances for which the Fleet reserves capacity. Both values are based on \n\t\t\tunits that make sense for your workload. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/crfleet-concepts.html#target-capacity\">Total target capacity</a> \n\t\t\tin the Amazon EC2 User Guide.</p>"
+                    }
+                },
+                "EndDate": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time at which the Capacity Reservation Fleet expires. When the Capacity Reservation \n\t\t\tFleet expires, its state changes to <code>expired</code> and all of the Capacity Reservations in the \n\t\t\tFleet expire.</p>\t\n\t\t       <p>The Capacity Reservation Fleet expires within an hour after the specified time. For example, if you \n\t\t\tspecify <code>5/31/2019</code>, <code>13:30:55</code>, the Capacity Reservation Fleet is guaranteed \n\t\t\tto expire between <code>13:30:55</code> and <code>14:30:55</code> on <code>5/31/2019</code>.</p>\n\t\t       <p>You can't specify <b>EndDate</b> and <b>\n\t\t\tRemoveEndDate</b> in the same request.</p>"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                },
+                "RemoveEndDate": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to remove the end date from the Capacity Reservation Fleet. If you remove the \n\t\t\tend date, the Capacity Reservation Fleet does not expire and it remains active until you explicitly \n\t\t\tcancel it using the <b>CancelCapacityReservationFleet</b> action.</p>\n\t\t       <p>You can't specify <b>RemoveEndDate</b> and <b>\n\t\t\tEndDate</b> in the same request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#ModifyCapacityReservationFleetResult": {
+            "type": "structure",
+            "members": {
+                "Return": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Return",
+                        "smithy.api#documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>",
+                        "smithy.api#xmlName": "return"
+                    }
+                }
             }
         },
         "com.amazonaws.ec2#ModifyCapacityReservationRequest": {
@@ -46428,7 +47243,7 @@
                 "UserIds": {
                     "target": "com.amazonaws.ec2#UserIdStringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account IDs. This parameter is valid only when modifying the <code>loadPermission</code> attribute.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account IDs. This parameter is valid only when modifying the <code>loadPermission</code> attribute.</p>",
                         "smithy.api#xmlName": "UserId"
                     }
                 },
@@ -46558,7 +47373,7 @@
                 "target": "com.amazonaws.ec2#ModifyIdFormatRequest"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Modifies the ID format for the specified resource on a per-Region basis. You can\n            specify that resources should receive longer IDs (17-character IDs) when they are\n            created.</p>\n         <p>This request can only be used to modify longer ID settings for resource types that\n            are within the opt-in period. Resources currently in their opt-in period include:\n            <code>bundle</code> | <code>conversion-task</code> | <code>customer-gateway</code> | <code>dhcp-options</code> |\n            <code>elastic-ip-allocation</code> | <code>elastic-ip-association</code> |\n            <code>export-task</code> | <code>flow-log</code> | <code>image</code> |\n            <code>import-task</code> | <code>internet-gateway</code> | <code>network-acl</code>\n            | <code>network-acl-association</code> | <code>network-interface</code> |\n            <code>network-interface-attachment</code> | <code>prefix-list</code> |\n            <code>route-table</code> | <code>route-table-association</code> |\n            <code>security-group</code> | <code>subnet</code> |\n            <code>subnet-cidr-block-association</code> | <code>vpc</code> |\n            <code>vpc-cidr-block-association</code> | <code>vpc-endpoint</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>.</p>\n         <p>This setting applies to the IAM user who makes the request; it does not apply to the\n        entire AWS account. By default, an IAM user defaults to the same settings as the root user. If\n        you're using this action as the root user, then these settings apply to the entire account,\n        unless an IAM user explicitly overrides these settings for themselves. For more information,\n        see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resource-ids.html\">Resource IDs</a> \n        in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n         <p>Resources created with longer IDs are visible to all IAM roles and users, regardless\n        of these settings and provided that they have permission to use the relevant\n        <code>Describe</code> command for the resource type.</p>"
+                "smithy.api#documentation": "<p>Modifies the ID format for the specified resource on a per-Region basis. You can\n            specify that resources should receive longer IDs (17-character IDs) when they are\n            created.</p>\n         <p>This request can only be used to modify longer ID settings for resource types that\n            are within the opt-in period. Resources currently in their opt-in period include:\n            <code>bundle</code> | <code>conversion-task</code> | <code>customer-gateway</code> | <code>dhcp-options</code> |\n            <code>elastic-ip-allocation</code> | <code>elastic-ip-association</code> |\n            <code>export-task</code> | <code>flow-log</code> | <code>image</code> |\n            <code>import-task</code> | <code>internet-gateway</code> | <code>network-acl</code>\n            | <code>network-acl-association</code> | <code>network-interface</code> |\n            <code>network-interface-attachment</code> | <code>prefix-list</code> |\n            <code>route-table</code> | <code>route-table-association</code> |\n            <code>security-group</code> | <code>subnet</code> |\n            <code>subnet-cidr-block-association</code> | <code>vpc</code> |\n            <code>vpc-cidr-block-association</code> | <code>vpc-endpoint</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>.</p>\n         <p>This setting applies to the IAM user who makes the request; it does not apply to the\n        entire Amazon Web Services account. By default, an IAM user defaults to the same settings as the root user. If\n        you're using this action as the root user, then these settings apply to the entire account,\n        unless an IAM user explicitly overrides these settings for themselves. For more information,\n        see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resource-ids.html\">Resource IDs</a> \n        in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n         <p>Resources created with longer IDs are visible to all IAM roles and users, regardless\n        of these settings and provided that they have permission to use the relevant\n        <code>Describe</code> command for the resource type.</p>"
             }
         },
         "com.amazonaws.ec2#ModifyIdFormatRequest": {
@@ -47735,7 +48550,7 @@
                 "target": "com.amazonaws.ec2#ModifyTrafficMirrorFilterNetworkServicesResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Allows or restricts mirroring network services.</p>\n         <p> By default, Amazon DNS network services are not eligible for Traffic Mirror. Use <code>AddNetworkServices</code> to add network services to a Traffic Mirror filter. When a network service is added to the Traffic Mirror filter, all traffic related to that network service will be mirrored.\n         When you no longer want to mirror network services, use <code>RemoveNetworkServices</code> to remove the network services from the Traffic Mirror filter.\n      </p>\n         <p>For information about filter rule properties, see \n         <a href=\"https://docs.aws.amazon.com/vpc/latest/mirroring/traffic-mirroring-considerations.html\">Network Services</a> in the <i>Traffic Mirroring User Guide </i>.</p>"
+                "smithy.api#documentation": "<p>Allows or restricts mirroring network services.</p>\n         <p> By default, Amazon DNS network services are not eligible for Traffic Mirror. Use <code>AddNetworkServices</code> to add network services to a Traffic Mirror filter. When a network service is added to the Traffic Mirror filter, all traffic related to that network service will be mirrored.\n         When you no longer want to mirror network services, use <code>RemoveNetworkServices</code> to remove the network services from the Traffic Mirror filter.\n      </p>"
             }
         },
         "com.amazonaws.ec2#ModifyTrafficMirrorFilterNetworkServicesRequest": {
@@ -47808,7 +48623,7 @@
                 "TrafficDirection": {
                     "target": "com.amazonaws.ec2#TrafficDirection",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of traffic (<code>ingress</code> | <code>egress</code>) to assign to the rule.</p>"
+                        "smithy.api#documentation": "<p>The type of traffic to assign to the rule.</p>"
                     }
                 },
                 "RuleNumber": {
@@ -48640,7 +49455,7 @@
                 "target": "com.amazonaws.ec2#ModifyVpcEndpointServicePermissionsResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Modifies the permissions for your <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html\">VPC endpoint service</a>. You can add or remove permissions for service consumers (IAM users, \n\t        IAM roles, and AWS accounts) to connect to your endpoint service.</p>\n\t        <p>If you grant permissions to all principals, the service is public. Any users who know the name of a\n\t        public service can send a request to attach an endpoint. If the service does not require manual approval,\n\t        attachments are automatically approved.</p>"
+                "smithy.api#documentation": "<p>Modifies the permissions for your <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html\">VPC endpoint service</a>. You can add or remove permissions for service consumers (IAM users, \n\t        IAM roles, and Amazon Web Services accounts) to connect to your endpoint service.</p>\n\t        <p>If you grant permissions to all principals, the service is public. Any users who know the name of a\n\t        public service can send a request to attach an endpoint. If the service does not require manual approval,\n\t        attachments are automatically approved.</p>"
             }
         },
         "com.amazonaws.ec2#ModifyVpcEndpointServicePermissionsRequest": {
@@ -54127,7 +54942,7 @@
                 "NetworkBorderGroup": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The set of Availability Zones, Local Zones, or Wavelength Zones from which AWS advertises\n      IP addresses.</p>\n         <p>If you provide an incorrect network border group, you will receive an <code>InvalidAddress.NotFound</code> error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html\">Error Codes</a>.</p>\n         <note>\n            <p>You cannot use a network border group with EC2 Classic. If you attempt this operation on EC2 classic, you will receive an <code>InvalidParameterCombination</code> error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html\">Error Codes</a>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The set of Availability Zones, Local Zones, or Wavelength Zones from which Amazon Web Services advertises\n      IP addresses.</p>\n         <p>If you provide an incorrect network border group, you receive an <code>InvalidAddress.NotFound</code> error.</p>\n         <p>You cannot use a network border group with EC2 Classic. If you attempt this operation on EC2 classic, you \n      receive an <code>InvalidParameterCombination</code> error.</p>"
                     }
                 },
                 "DryRun": {
@@ -55512,6 +56327,62 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes a launch request for one or more instances, and includes \n            owner, requester, and security group information that applies to all \n            instances in the launch request.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ReservationFleetInstanceSpecification": {
+            "type": "structure",
+            "members": {
+                "InstanceType": {
+                    "target": "com.amazonaws.ec2#InstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance type for which the Capacity Reservation Fleet reserves capacity.</p>"
+                    }
+                },
+                "InstancePlatform": {
+                    "target": "com.amazonaws.ec2#CapacityReservationInstancePlatform",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of operating system for which the Capacity Reservation Fleet reserves capacity.</p>"
+                    }
+                },
+                "Weight": {
+                    "target": "com.amazonaws.ec2#DoubleWithConstraints",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of capacity units provided by the specified instance type. This value, together with the \n\t\t\ttotal target capacity that you specify for the Fleet determine the number of instances for which the \n\t\t\tFleet reserves capacity. Both values are based on units that make sense for your workload. For more \n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/crfleet-concepts.html#target-capacity\">Total target capacity</a> \n\t\t\tin the Amazon EC2 User Guide.</p>"
+                    }
+                },
+                "AvailabilityZone": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Availability Zone in which the Capacity Reservation Fleet reserves the capacity. A Capacity \n\t\t\tReservation Fleet can't span Availability Zones. All instance type specifications that you specify \n\t\t\tfor the Fleet must use the same Availability Zone.</p>"
+                    }
+                },
+                "AvailabilityZoneId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Availability Zone in which the Capacity Reservation Fleet reserves the capacity. A \n\t\t\tCapacity Reservation Fleet can't span Availability Zones. All instance type specifications that you \n\t\t\tspecify for the Fleet must use the same Availability Zone.</p>"
+                    }
+                },
+                "EbsOptimized": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the Capacity Reservation Fleet supports EBS-optimized instances types. This \n\t\t\toptimization provides dedicated throughput to Amazon EBS and an optimized configuration stack \n\t\t\tto provide optimal I/O performance. This optimization isn't available with all instance types. Additional \n\t\t\tusage charges apply when using EBS-optimized instance types.</p>"
+                    }
+                },
+                "Priority": {
+                    "target": "com.amazonaws.ec2#IntegerWithConstraints",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The priority to assign to the instance type. This value is used to determine which of the instance types \n\t\t\tspecified for the Fleet should be prioritized for use. A lower value indicates a high priority. For more \n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/crfleet-concepts.html#instance-priority\">Instance type priority</a> \n\t\t\tin the Amazon EC2 User Guide.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an instance type to use in a Capacity Reservation Fleet.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ReservationFleetInstanceSpecificationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#ReservationFleetInstanceSpecification"
             }
         },
         "com.amazonaws.ec2#ReservationId": {
@@ -59192,6 +60063,13 @@
                         "smithy.api#required": {}
                     }
                 },
+                "Filters": {
+                    "target": "com.amazonaws.ec2#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more filters.</p>",
+                        "smithy.api#xmlName": "Filter"
+                    }
+                },
                 "MaxResults": {
                     "target": "com.amazonaws.ec2#MaxResults",
                     "traits": {
@@ -59208,14 +60086,6 @@
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
-                    }
-                },
-                "Filters": {
-                    "target": "com.amazonaws.ec2#FilterList",
-                    "traits": {
-                        "smithy.api#documentation": "<p>One or more filters.</p>",
-                        "smithy.api#required": {},
-                        "smithy.api#xmlName": "Filter"
                     }
                 }
             }
@@ -59893,7 +60763,7 @@
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
                         "aws.protocols#ec2QueryName": "AcceptanceRequired",
-                        "smithy.api#documentation": "<p>Indicates whether requests from other AWS accounts to create an endpoint to the service must first be accepted.</p>",
+                        "smithy.api#documentation": "<p>Indicates whether requests from other Amazon Web Services accounts to create an endpoint to the service must first be accepted.</p>",
                         "smithy.api#xmlName": "acceptanceRequired"
                     }
                 },
@@ -60006,7 +60876,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "Owner",
-                        "smithy.api#documentation": "<p>The AWS account ID of the service owner.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the service owner.</p>",
                         "smithy.api#xmlName": "owner"
                     }
                 },
@@ -63044,7 +63914,7 @@
                     "target": "com.amazonaws.ec2#ResourceType",
                     "traits": {
                         "aws.protocols#ec2QueryName": "ResourceType",
-                        "smithy.api#documentation": "<p>The type of resource to tag on creation. The possible values are: \n    \t   <code>capacity-reservation</code> | <code>carrier-gateway</code> |\n          <code>client-vpn-endpoint</code> | <code>customer-gateway</code> |\n    \t   <code>dedicated-host</code> | <code>dhcp-options</code> | \n    \t   <code>egress-only-internet-gateway</code> | <code>elastic-gpu</code> | \n    \t   <code>elastic-ip</code> | <code>export-image-task</code> |\n          <code>export-instance-task</code> | <code>fleet</code> | <code>fpga-image</code> |\n    \t   <code>host-reservation</code> | <code>image</code> | <code>import-image-task</code> |\n    \t   <code>import-snapshot-task</code> | <code>instance</code> | <code>instance-event-window</code> |\n          <code>internet-gateway</code> | <code>ipv4pool-ec2</code> | <code>ipv6pool-ec2</code> |\n    \t   <code>key-pair</code> | <code>launch-template</code> | <code>local-gateway-route-table-vpc-association</code> |\n    \t   <code>natgateway</code> | <code>network-acl</code> | <code>network-insights-analysis</code> | \n    \t   <code>network-insights-path</code> | <code>network-interface</code> | \n    \t   <code>placement-group</code> | <code>prefix-list</code> | <code>reserved-instances</code> | \n    \t   <code>route-table</code> | <code>security-group</code> | <code>security-group-rule</code> | \n    \t   <code>snapshot</code> | <code>spot-fleet-request</code> | <code>spot-instances-request</code> | <code>subnet</code> | \n          <code>traffic-mirror-filter</code> | <code>traffic-mirror-session</code> | <code>traffic-mirror-target</code> | \n    \t   <code>transit-gateway</code> | <code>transit-gateway-attachment</code> | \n    \t   <code>transit-gateway-multicast-domain</code> | <code>transit-gateway-route-table</code> |\n          <code>volume</code> | <code>vpc</code> | <code>vpc-endpoint</code> | <code>vpc-endpoint-service</code> | \n    \t   <code>vpc-flow-log</code> | <code>vpc-peering-connection</code> |\n    \t   <code>vpn-connection</code> | <code>vpn-gateway</code>.</p>\n         <p>To tag a resource after it has been created, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html\">CreateTags</a>.</p>",
+                        "smithy.api#documentation": "<p>The type of resource to tag on creation.</p>",
                         "smithy.api#xmlName": "resourceType"
                     }
                 },
@@ -68681,7 +69551,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "OwnerId",
-                        "smithy.api#documentation": "<p>The ID of the AWS account that owns the VPC endpoint.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the VPC endpoint.</p>",
                         "smithy.api#xmlName": "ownerId"
                     }
                 },
@@ -68721,7 +69591,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "VpcEndpointOwner",
-                        "smithy.api#documentation": "<p>The AWS account ID of the owner of the VPC endpoint.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the VPC endpoint.</p>",
                         "smithy.api#xmlName": "vpcEndpointOwner"
                     }
                 },
@@ -68904,7 +69774,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "NetworkBorderGroup",
-                        "smithy.api#documentation": "<p>The name of the unique set of Availability Zones, Local Zones, or Wavelength Zones from\n      which AWS advertises IP addresses, for example, <code>us-east-1-wl1-bos-wlz-1</code>.</p>",
+                        "smithy.api#documentation": "<p>The name of the unique set of Availability Zones, Local Zones, or Wavelength Zones from\n      which Amazon Web Services advertises IP addresses, for example, <code>us-east-1-wl1-bos-wlz-1</code>.</p>",
                         "smithy.api#xmlName": "networkBorderGroup"
                     }
                 },
