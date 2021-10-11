@@ -1,3 +1,7 @@
+# v1.2.5 (2021-10-11)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.2.4 (2021-09-24)
 
 * **Documentation**: Fixes typo in NameBuilder.NamesList example documentation to use the correct variable name.

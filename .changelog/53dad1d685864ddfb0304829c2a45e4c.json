@@ -1,8 +1,0 @@
-{
-    "id": "53dad1d6-8586-4ddf-b030-4829c2a45e4c",
-    "type": "bugfix",
-    "description": "Fix IMDS client's response handling and operation timeout race. Fixes #1253",
-    "modules": [
-        "feature/ec2/imds"
-    ]
-}
