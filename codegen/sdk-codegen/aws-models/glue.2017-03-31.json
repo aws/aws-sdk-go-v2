@@ -3983,6 +3983,12 @@
                         "smithy.api#documentation": "<p>A <code>ConnectionInput</code> object defining the connection\n      to create.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.glue#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags you assign to the connection.</p>"
+                    }
                 }
             }
         },
@@ -10240,7 +10246,10 @@
                     }
                 },
                 "ExcludeColumnSchema": {
-                    "target": "com.amazonaws.glue#BooleanNullable"
+                    "target": "com.amazonaws.glue#BooleanNullable",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When true, specifies not returning the partition column schema. Useful when you are interested only in other partition attributes such as partition values or location. This approach avoids the problem of a large response by not returning duplicate data.</p>"
+                    }
                 }
             }
         },

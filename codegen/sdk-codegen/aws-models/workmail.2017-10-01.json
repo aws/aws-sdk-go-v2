@@ -357,6 +357,12 @@
         "com.amazonaws.workmail#Boolean": {
             "type": "boolean"
         },
+        "com.amazonaws.workmail#BooleanObject": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
         "com.amazonaws.workmail#CancelMailboxExportJob": {
             "type": "operation",
             "input": {
@@ -1628,6 +1634,50 @@
                     "target": "com.amazonaws.workmail#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time when a user was deregistered from WorkMail, in UNIX epoch time\n         format.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workmail#DescribeInboundDmarcSettings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workmail#DescribeInboundDmarcSettingsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workmail#DescribeInboundDmarcSettingsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workmail#OrganizationNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationStateException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the settings in a DMARC policy for a specified organization.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.workmail#DescribeInboundDmarcSettingsRequest": {
+            "type": "structure",
+            "members": {
+                "OrganizationId": {
+                    "target": "com.amazonaws.workmail#OrganizationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists the ID of the given organization.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workmail#DescribeInboundDmarcSettingsResponse": {
+            "type": "structure",
+            "members": {
+                "Enforced": {
+                    "target": "com.amazonaws.workmail#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists the enforcement setting of the applied policy.</p>"
                     }
                 }
             }
@@ -4707,6 +4757,50 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.workmail#PutInboundDmarcSettings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workmail#PutInboundDmarcSettingsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workmail#PutInboundDmarcSettingsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workmail#OrganizationNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationStateException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Enables or disables a DMARC policy for a given organization.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.workmail#PutInboundDmarcSettingsRequest": {
+            "type": "structure",
+            "members": {
+                "OrganizationId": {
+                    "target": "com.amazonaws.workmail#OrganizationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the organization that you are applying the DMARC policy to. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Enforced": {
+                    "target": "com.amazonaws.workmail#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enforces or suspends a policy after it's applied.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workmail#PutInboundDmarcSettingsResponse": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.workmail#PutMailboxPermissions": {
             "type": "operation",
             "input": {
@@ -6059,6 +6153,9 @@
                     "target": "com.amazonaws.workmail#DescribeGroup"
                 },
                 {
+                    "target": "com.amazonaws.workmail#DescribeInboundDmarcSettings"
+                },
+                {
                     "target": "com.amazonaws.workmail#DescribeMailboxExportJob"
                 },
                 {
@@ -6132,6 +6229,9 @@
                 },
                 {
                     "target": "com.amazonaws.workmail#PutAccessControlRule"
+                },
+                {
+                    "target": "com.amazonaws.workmail#PutInboundDmarcSettings"
                 },
                 {
                     "target": "com.amazonaws.workmail#PutMailboxPermissions"

@@ -332,30 +332,30 @@
                 "GreaterThan": {
                     "target": "com.amazonaws.kendra#DocumentAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>Performs a greater than operation on two document attributes. Use\n         with a document attribute of type <code>Integer</code> or\n            <code>Long</code>.</p>"
+                        "smithy.api#documentation": "<p>Performs a greater than operation on two document attributes. Use\n         with a document attribute of type <code>Date</code> or\n            <code>Long</code>.</p>"
                     }
                 },
                 "GreaterThanOrEquals": {
                     "target": "com.amazonaws.kendra#DocumentAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>Performs a greater or equals than operation on two document\n         attributes. Use with a document attribute of type <code>Integer</code>\n         or <code>Long</code>.</p>"
+                        "smithy.api#documentation": "<p>Performs a greater or equals than operation on two document\n         attributes. Use with a document attribute of type <code>Date</code>\n         or <code>Long</code>.</p>"
                     }
                 },
                 "LessThan": {
                     "target": "com.amazonaws.kendra#DocumentAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>Performs a less than operation on two document attributes. Use with\n         a document attribute of type <code>Integer</code> or\n         <code>Long</code>.</p>"
+                        "smithy.api#documentation": "<p>Performs a less than operation on two document attributes. Use with\n         a document attribute of type <code>Date</code> or\n         <code>Long</code>.</p>"
                     }
                 },
                 "LessThanOrEquals": {
                     "target": "com.amazonaws.kendra#DocumentAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>Performs a less than or equals operation on two document attributes.\n         Use with a document attribute of type <code>Integer</code> or\n            <code>Long</code>.</p>"
+                        "smithy.api#documentation": "<p>Performs a less than or equals operation on two document attributes.\n         Use with a document attribute of type <code>Date</code> or\n            <code>Long</code>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides filtering the query results based on document\n         attributes.</p>\n         <p>When you use the <code>AndAllFilters</code> or\n            <code>OrAllFilters</code>, filters you can use 2 layers under the\n         first attribute filter. For example, you can use:</p>\n         <p>\n            <code><AndAllFilters></code>\n         </p>\n         <ol>\n            <li>\n               <p>\n                  <code> <OrAllFilters></code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code> <EqualTo></code>\n               </p>\n            </li>\n         </ol>\n         <p>If you use more than 2 layers, you receive a\n            <code>ValidationException</code> exception with the message\n            \"<code>AttributeFilter</code> cannot have a depth of more than\n         2.\"</p>\n         <p>If you use more than 10 attribute filters, you receive a \n         <code>ValidationException</code> exception with the message \n         \"<code>AttributeFilter</code> cannot have a length of more than 10\".</p>"
+                "smithy.api#documentation": "<p>Provides filtering the query results based on document\n         attributes.</p>\n         <p>When you use the <code>AndAllFilters</code> or\n            <code>OrAllFilters</code>, filters you can use 2 layers under the\n         first attribute filter. For example, you can use:</p>\n         <p>\n            <code><AndAllFilters></code>\n         </p>\n         <ol>\n            <li>\n               <p>\n                  <code> <OrAllFilters></code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code> <EqualTo></code>\n               </p>\n            </li>\n         </ol>\n         <p>If you use more than 2 layers, you receive a\n            <code>ValidationException</code> exception with the message\n            \"<code>AttributeFilter</code> cannot have a depth of more \n         than 2.\"</p>\n         <p>If you use more than 10 attribute filters in a given list for \n         <code>AndAllFilters</code> or <code>OrAllFilters</code>, you receive \n         a <code>ValidationException</code> with the message \n         \"<code>AttributeFilter</code> cannot have a length of more than 10\".</p>"
             }
         },
         "com.amazonaws.kendra#AttributeFilterList": {
@@ -1543,7 +1543,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a data source that you use to with an Amazon Kendra index. </p>\n         <p>You specify a name, data source connector type and description for\n      your data source. You also specify configuration information such as\n      document metadata (author, source URI, and so on) and user context\n      information.</p>\n         <p>\n            <code>CreateDataSource</code> is a synchronous operation. The\n      operation returns 200 if the data source was successfully created.\n      Otherwise, an exception is raised.</p>"
+                "smithy.api#documentation": "<p>Creates a data source that you want to use with an Amazon Kendra index. </p>\n         <p>You specify a name, data source connector type and description for\n      your data source. You also specify configuration information for the \n      data source connector.</p>\n         <p>\n            <code>CreateDataSource</code> is a synchronous operation. The\n      operation returns 200 if the data source was successfully created.\n      Otherwise, an exception is raised.</p>"
             }
         },
         "com.amazonaws.kendra#CreateDataSourceRequest": {
@@ -1605,6 +1605,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A token that you provide to identify the request to create a data\n      source. Multiple calls to the <code>CreateDataSource</code> operation with\n      the same client token will create only one data source.</p>",
                         "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "LanguageCode": {
+                    "target": "com.amazonaws.kendra#LanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code for a language. This allows you to support a language for all \n            documents when creating the data source. English is supported \n            by default. For more information on supported languages, including their codes, \n            see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html\">Adding \n                documents in languages other than English</a>.</p>"
                     }
                 }
             }
@@ -1710,6 +1716,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A token that you provide to identify the request to create a FAQ. Multiple calls to\n            the <code>CreateFaqRequest</code> operation with the same client token will create only\n            one FAQ. </p>",
                         "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "LanguageCode": {
+                    "target": "com.amazonaws.kendra#LanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code for a language. This allows you to support a language \n            for the FAQ document. English is supported by default. \n            For more information on supported languages, including their codes, \n            see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html\">Adding \n                documents in languages other than English</a>.</p>"
                     }
                 }
             }
@@ -1817,7 +1829,13 @@
                 "UserContextPolicy": {
                     "target": "com.amazonaws.kendra#UserContextPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user context policy.</p>\n         <dl>\n            <dt>ATTRIBUTE_FILTER</dt>\n            <dd>\n               <p>All indexed content is searchable and displayable\n                  for all users. If there is an access control list, it\n                  is ignored. You can filter on user and group attributes.\n               </p>\n            </dd>\n            <dt>USER_TOKEN</dt>\n            <dd>\n               <p>Enables SSO and token-based user access control.\n               All documents with no access control and all documents\n               accessible to the user will be searchable and\n               displayable.\n               </p>\n            </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p>The user context policy.</p>\n         <dl>\n            <dt>ATTRIBUTE_FILTER</dt>\n            <dd>\n               <p>All indexed content is searchable and displayable\n                  for all users. If you want to filter search results on \n                  user context, you can use the attribute filters of\n                  <code>_user_id</code> and <code>_group_ids</code> or\n                  you can provide user and group information in <code>UserContext</code>.\n               </p>\n            </dd>\n            <dt>USER_TOKEN</dt>\n            <dd>\n               <p>Enables token-based user access control to filter \n                  search results on user context. All documents with no \n                  access control and all documents accessible to the user \n                  will be searchable and displayable.\n               </p>\n            </dd>\n         </dl>"
+                    }
+                },
+                "UserGroupResolutionConfiguration": {
+                    "target": "com.amazonaws.kendra#UserGroupResolutionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables fetching access levels of groups and users from an AWS Single Sign-On \n         identity source. To configure this, see \n         <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_UserGroupResolutionConfiguration.html\">UserGroupResolutionConfiguration</a>.</p>"
                     }
                 }
             }
@@ -2012,7 +2030,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.kendra#ClientTokenName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that you provide to identify the request to create a \n         thesaurus. Multiple calls to the <code>CreateThesaurus</code> operation \n         with the same client token will create only one index.\n      </p>",
+                        "smithy.api#documentation": "<p>A token that you provide to identify the request to create a \n         thesaurus. Multiple calls to the <code>CreateThesaurus</code> operation \n         with the same client token will create only one thesaurus.\n      </p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -2253,6 +2271,12 @@
                     "target": "com.amazonaws.kendra#DataSourceStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>The status of the data source. When the status is\n                <code>ACTIVE</code> the data source is ready to use.</p>"
+                    }
+                },
+                "LanguageCode": {
+                    "target": "com.amazonaws.kendra#LanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code for a language. This shows a supported language for all documents \n            in the data source. English is supported by default.  \n            For more information on supported languages, including their codes, \n            see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html\">Adding \n                documents in languages other than English</a>.</p>"
                     }
                 }
             },
@@ -3056,6 +3080,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>When the <code>Status</code> field value is <code>FAILED</code>, the\n        <code>ErrorMessage</code> field contains a description of the error that\n      caused the data source to fail.</p>"
                     }
+                },
+                "LanguageCode": {
+                    "target": "com.amazonaws.kendra#LanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code for a language. This shows a supported language for all \n            documents in the data source. English is supported by \n            default. For more information on supported languages, including their codes, \n            see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html\">Adding \n                documents in languages other than English</a>.</p>"
+                    }
                 }
             }
         },
@@ -3171,6 +3201,12 @@
                     "target": "com.amazonaws.kendra#FaqFileFormat",
                     "traits": {
                         "smithy.api#documentation": "<p>The file format used by the input files for the FAQ.</p>"
+                    }
+                },
+                "LanguageCode": {
+                    "target": "com.amazonaws.kendra#LanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code for a language. This shows a supported language \n            for the FAQ document. English is supported by default.  \n            For more information on supported languages, including their codes, \n            see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html\">Adding \n                documents in languages other than English</a>.</p>"
                     }
                 }
             }
@@ -3307,6 +3343,12 @@
                     "target": "com.amazonaws.kendra#UserContextPolicy",
                     "traits": {
                         "smithy.api#documentation": "<p>The user context policy for the Amazon Kendra index.</p>"
+                    }
+                },
+                "UserGroupResolutionConfiguration": {
+                    "target": "com.amazonaws.kendra#UserGroupResolutionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows whether you have enabled the configuration for fetching access \n         levels of groups and users from an AWS Single Sign-On identity source.</p>"
                     }
                 }
             }
@@ -3484,7 +3526,7 @@
                 "CreatedAt": {
                     "target": "com.amazonaws.kendra#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Shows the date-time a block list for query suggestions was last created.</p>"
+                        "smithy.api#documentation": "<p>Shows the date-time a block list for query suggestions was created.</p>"
                     }
                 },
                 "UpdatedAt": {
@@ -4420,6 +4462,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The file type used to create the FAQ. </p>"
                     }
+                },
+                "LanguageCode": {
+                    "target": "com.amazonaws.kendra#LanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code for a language. This shows a supported language for the FAQ document \n            as part of the summary information for FAQs. English is supported by default.  \n            For more information on supported languages, including their codes, \n            see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html\">Adding \n                documents in languages other than English</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4608,7 +4656,7 @@
                 "S3PathforGroupMembers": {
                     "target": "com.amazonaws.kendra#S3Path",
                     "traits": {
-                        "smithy.api#documentation": "<p>If you have more than 1000 users and/or sub groups for a single group, \n            you need to provide the path to the S3 file that lists your users and sub \n            groups for a group. Your sub groups can contain more than 1000 users, but \n            the list of sub groups that belong to a group (and/or users) must be no \n            more than 1000.</p>"
+                        "smithy.api#documentation": "<p>If you have more than 1000 users and/or sub groups for a single group, \n            you need to provide the path to the S3 file that lists your users and sub \n            groups for a group. Your sub groups can contain more than 1000 users, but \n            the list of sub groups that belong to a group (and/or users) must be no \n            more than 1000.</p>\n        <p>You can download this \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/samples/group_members.zip\">example \n                S3 file</a> that uses the correct format for listing group members. Note, \n            <code>dataSourceId</code> is optional. The value of <code>type</code> \n            for a group is always <code>GROUP</code> and for a user it is \n            always <code>USER</code>.</p>"
                     }
                 }
             },
@@ -5103,6 +5151,17 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.kendra#LanguageCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The code for a language. The default language is English. \n            For more information on supported languages, including their codes, \n            see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html\">Adding \n                documents in languages other than English</a>.</p>",
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 10
+                },
+                "smithy.api#pattern": "^[a-zA-Z-]*$"
+            }
+        },
         "com.amazonaws.kendra#ListDataSourceSyncJobs": {
             "type": "operation",
             "input": {
@@ -5160,7 +5219,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.kendra#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the result of the previous request to\n        <code>GetDataSourceSyncJobHistory</code> was truncated, include the\n        <code>NextToken</code> to fetch the next set of jobs.</p>"
+                        "smithy.api#documentation": "<p>If the previous response was incomplete (because there is more data to retrieve), \n      Amazon Kendra returns a pagination token in the response. You can use this pagination token \n      to retrieve the next set of jobs.</p>"
                     }
                 },
                 "MaxResults": {
@@ -5195,7 +5254,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.kendra#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>GetDataSourceSyncJobHistory</code> operation returns a page\n      of vocabularies at a time. The maximum size of the page is set by the\n        <code>MaxResults</code> parameter. If there are more jobs in the list\n      than the page size, Amazon Kendra returns the NextPage token. Include the\n      token in the next request to the <code>GetDataSourceSyncJobHistory</code>\n      operation to return in the next page of jobs.</p>"
+                        "smithy.api#documentation": "<p>If the response is truncated, Amazon Kendra returns this token that you \n      can use in the subsequent request to retrieve the next set of jobs.</p>"
                     }
                 }
             }
@@ -5317,7 +5376,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.kendra#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the result of the previous request to <code>ListFaqs</code> was truncated, include\n            the <code>NextToken</code> to fetch the next set of FAQs.</p>"
+                        "smithy.api#documentation": "<p>If the previous response was incomplete (because there is more data to retrieve), \n            Amazon Kendra returns a pagination token in the response. You can use this pagination token \n            to retrieve the next set of FAQs.</p>"
                     }
                 },
                 "MaxResults": {
@@ -5334,7 +5393,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.kendra#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>ListFaqs</code> operation returns a page of FAQs at a time. The maximum size\n            of the page is set by the <code>MaxResults</code> parameter. If there are more jobs in\n            the list than the page size, Amazon Kendra returns the <code>NextPage</code> token.\n            Include the token in the next request to the <code>ListFaqs</code> operation to return\n            the next page of FAQs.</p>"
+                        "smithy.api#documentation": "<p>If the response is truncated, Amazon Kendra returns this token that you can use \n            in the subsequent request to retrieve the next set of FAQs.</p>"
                     }
                 },
                 "FaqSummaryItems": {
@@ -5403,13 +5462,13 @@
                 "NextToken": {
                     "target": "com.amazonaws.kendra#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The next items in the list of groups that go beyond the maximum.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            If the previous response was incomplete (because there is more data to retrieve), \n            Amazon Kendra returns a pagination token in the response. You can use this pagination \n            token to retrieve the next set of groups that are mapped to users before a \n            given ordering or timestamp identifier.\n        </p>"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.kendra#MaxResultsIntegerForListPrincipalsRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The maximum results shown for a list of groups that are mapped to users before a \n            given ordering or timestamp identifier. \n        </p>"
+                        "smithy.api#documentation": "<p>\n            The maximum number of returned groups that are mapped to users before a \n            given ordering or timestamp identifier. \n        </p>"
                     }
                 }
             }
@@ -5426,7 +5485,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.kendra#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The next items in the list of groups that go beyond the maximum.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            If the response is truncated, Amazon Kendra returns this token that you can use \n            in the subsequent request to retrieve the next set of groups that are \n            mapped to users before a given ordering or timestamp identifier.\n        </p>"
                     }
                 }
             }
@@ -5689,7 +5748,7 @@
                 "ThesaurusSummaryItems": {
                     "target": "com.amazonaws.kendra#ThesaurusSummaryItems",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of summary information for one or more thesauruses.</p>"
+                        "smithy.api#documentation": "<p>An array of summary information for a thesaurus or multiple thesauri.</p>"
                     }
                 }
             }
@@ -6216,7 +6275,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Maps users to their groups. You can also map sub groups to groups. \n            For example, the group \"Company Intellectual Property Teams\" includes \n            sub groups \"Research\" and \"Engineering\". These sub groups include their\n            own list of users or people who work in these teams. Only users who work \n            in research and engineering, and therefore belong in the intellectual \n            property group, can see top-secret company documents in their search \n            results. </p>\n        <p>You map users to their groups when you want to filter search results \n            for different users based on their group’s access to documents. For more \n            information on filtering search results for different users, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html\">Filtering \n                on user context</a>.</p>\n        <p>If more than five <code>PUT</code> actions for a group are currently \n            processing, a validation exception is thrown.</p>"
+                "smithy.api#documentation": "<p>Maps users to their groups so that you only need to provide \n            the user ID when you issue the query.</p>\n        <p>You can also map sub groups to groups. \n            For example, the group \"Company Intellectual Property Teams\" includes \n            sub groups \"Research\" and \"Engineering\". These sub groups include their\n            own list of users or people who work in these teams. Only users who work \n            in research and engineering, and therefore belong in the intellectual \n            property group, can see top-secret company documents in their search \n            results.</p>\n        <p>You map users to their groups when you want to filter search results \n            for different users based on their group’s access to documents. For more \n            information on filtering search results for different users, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html\">Filtering \n                on user context</a>.</p>\n        <p>If more than five <code>PUT</code> actions for a group are currently \n            processing, a validation exception is thrown.</p>"
             }
         },
         "com.amazonaws.kendra#PutPrincipalMappingRequest": {
@@ -6400,7 +6459,7 @@
                 "UserContext": {
                     "target": "com.amazonaws.kendra#UserContext",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user context token.</p>"
+                        "smithy.api#documentation": "<p>The user context token or user and group information.</p>"
                     }
                 },
                 "VisitorId": {
@@ -7361,6 +7420,10 @@
                     {
                         "value": "LOW",
                         "name": "LOW"
+                    },
+                    {
+                        "value": "NOT_AVAILABLE",
+                        "name": "NOT_AVAILABLE"
                     }
                 ]
             }
@@ -8486,7 +8549,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An array of summary information for one or more thesauruses.</p>"
+                "smithy.api#documentation": "<p>An array of summary information for a thesaurus or multiple thesauri.</p>"
             }
         },
         "com.amazonaws.kendra#ThesaurusSummaryItems": {
@@ -8668,6 +8731,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the new role to use when the data\n      source is accessing resources on your behalf.</p>"
                     }
+                },
+                "LanguageCode": {
+                    "target": "com.amazonaws.kendra#LanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code for a language. This allows you to support a language for all \n            documents when updating the data source. English is supported \n            by default. For more information on supported languages, including their codes, \n            see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html\">Adding \n                documents in languages other than English</a>.</p>"
+                    }
                 }
             }
         },
@@ -8752,7 +8821,13 @@
                 "UserContextPolicy": {
                     "target": "com.amazonaws.kendra#UserContextPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user user token context policy.</p>"
+                        "smithy.api#documentation": "<p>The user context policy.</p>"
+                    }
+                },
+                "UserGroupResolutionConfiguration": {
+                    "target": "com.amazonaws.kendra#UserGroupResolutionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables fetching access levels of groups and users from an AWS Single Sign-On \n         identity source. To configure this, see \n         <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_UserGroupResolutionConfiguration.html\">UserGroupResolutionConfiguration</a>.</p>"
                     }
                 }
             }
@@ -8996,7 +9071,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides the configuration information of the URLs to crawl.</p>\n        <p>\n            <i>When selecting websites to index, you must adhere to \n            the <a href=\"https://aws.amazon.com/aup/\">Amazon Acceptable Use Policy</a> \n            and all other Amazon terms. Remember that you must only use the Amazon Kendra web \n            crawler to index your own webpages, or webpages that you have authorization to \n            index.</i>\n         </p>"
+                "smithy.api#documentation": "<p>Provides the configuration information of the URLs to crawl.</p>\n        <p>You can only crawl websites that use the secure communication protocol, \n            Hypertext Transfer Protocol Secure (HTTPS). If you receive an error when \n            crawling a website, it could be that the website is blocked from crawling.</p>\n        <p>\n            <i>When selecting websites to index, you must adhere to \n            the <a href=\"https://aws.amazon.com/aup/\">Amazon Acceptable Use Policy</a> \n            and all other Amazon terms. Remember that you must only use the Amazon Kendra web \n            crawler to index your own webpages, or webpages that you have authorization to \n            index.</i>\n         </p>"
             }
         },
         "com.amazonaws.kendra#UserAccount": {
@@ -9038,7 +9113,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides information about the user context for a Amazon Kendra index.</p>\n         <p>This is used for filtering search results for different users based on their access \n         to documents.</p>\n         <p>You provide one of the following:</p> \n         <ul>\n            <li>\n               <p>User token</p>\n            </li>\n            <li>\n               <p>User ID, the groups the user belongs to, and the data sources \n               the groups can access</p>\n            </li>\n         </ul>\n         <p>If you provide both, an exception is thrown.</p>"
+                "smithy.api#documentation": "<p>Provides information about the user context for\n         an\n         Amazon Kendra index.</p>\n         <p>This is used for filtering search results for different users based on their access \n         to documents.</p>\n         <p>You provide one of the following:</p> \n         <ul>\n            <li>\n               <p>User token</p>\n            </li>\n            <li>\n               <p>User ID, the groups the user belongs to, and any data sources the groups can\n               access.</p>\n            </li>\n         </ul>\n         <p>If you provide both, an exception is thrown.</p>"
             }
         },
         "com.amazonaws.kendra#UserContextPolicy": {
@@ -9052,6 +9127,36 @@
                     {
                         "value": "USER_TOKEN",
                         "name": "USER_TOKEN"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.kendra#UserGroupResolutionConfiguration": {
+            "type": "structure",
+            "members": {
+                "UserGroupResolutionMode": {
+                    "target": "com.amazonaws.kendra#UserGroupResolutionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identity store provider (mode) you want to use to fetch access levels of groups and\n         users. AWS Single Sign-On is currently the only available mode. Your users and groups\n         must\n         exist in an AWS SSO identity source in order to use this mode.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the configuration information to fetch access levels \n         of groups and users from an AWS Single Sign-On identity \n         source. This is useful for setting up user context filtering, where \n         Amazon Kendra filters search results for different users based on their \n         group's access to documents. You can also map your users to their \n         groups for user context filtering using the \n         <a href=\"https://docs.aws.amazon.com/latest/dg/API_PutPrincipalMapping.html\">PutPrincipalMapping \n            operation</a>.</p>\n         <p>To set up an AWS SSO identity source in the console to use with \n         Amazon Kendra, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/getting-started-aws-sso.html\">Getting started \n            with an AWS SSO identity source</a>. You must also grant the required \n            permissions to use AWS SSO with Amazon Kendra. For more information, see \n         <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html#iam-roles-aws-sso\">IAM roles for \n            AWS Single Sign-On</a>.</p>"
+            }
+        },
+        "com.amazonaws.kendra#UserGroupResolutionMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AWS_SSO",
+                        "name": "AWS_SSO"
+                    },
+                    {
+                        "value": "NONE",
+                        "name": "NONE"
                     }
                 ]
             }
@@ -9165,7 +9270,7 @@
                 "Urls": {
                     "target": "com.amazonaws.kendra#Urls",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the seed or starting point URLs of the \n            websites or the sitemap URLs of the websites you want to crawl.</p>\n        <p>You can include website subdomains. You can list up to 100 seed \n            URLs and up to three sitemap URLs.</p>\n        <p>\n            <i>When selecting websites to index, you must adhere to \n            the <a href=\"https://aws.amazon.com/aup/\">Amazon Acceptable Use Policy</a> \n            and all other Amazon terms. Remember that you must only use the Amazon Kendra \n            web crawler to index your own webpages, or webpages that you have \n            authorization to index.</i>\n         </p>",
+                        "smithy.api#documentation": "<p>Specifies the seed or starting point URLs of the \n            websites or the sitemap URLs of the websites you want to crawl.</p>\n        <p>You can include website subdomains. You can list up to 100 seed \n            URLs and up to three sitemap URLs.</p>\n        <p>You can only crawl websites that use the secure communication protocol, \n            Hypertext Transfer Protocol Secure (HTTPS). If you receive an error when \n            crawling a website, it could be that the website is blocked from crawling.</p>\n        <p>\n            <i>When selecting websites to index, you must adhere to \n            the <a href=\"https://aws.amazon.com/aup/\">Amazon Acceptable Use Policy</a> \n            and all other Amazon terms. Remember that you must only use the Amazon Kendra \n            web crawler to index your own webpages, or webpages that you have \n            authorization to index.</i>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },

@@ -1814,7 +1814,7 @@
                 "nluIntentConfidenceThreshold": {
                     "target": "com.amazonaws.lexmodelsv2#ConfidenceThreshold",
                     "traits": {
-                        "smithy.api#documentation": "<p>Determines the threshold where Amazon Lex will insert the\n            <code>AMAZON.FallbackIntent</code>,\n            <code>AMAZON.KendraSearchIntent</code>, or both when returning\n         alternative intents. <code>AMAZON.FallbackIntent</code> and\n            <code>AMAZON.KendraSearchIntent</code> are only inserted if they are\n         configured for the bot.</p>\n         <p>For example, suppose a bot is configured with the confidence\n         threshold of 0.80 and the <code>AMAZON.FallbackIntent</code>. Amazon Lex\n         returns three alternative intents with the following confidence scores:\n         IntentA (0.70), IntentB (0.60), IntentC (0.50). The response from the\n         PostText operation would be:</p>\n         <ul>\n            <li>\n               <p>AMAZON.FallbackIntent</p>\n            </li>\n            <li>\n               <p>IntentA</p>\n            </li>\n            <li>\n               <p>IntentB</p>\n            </li>\n            <li>\n               <p>IntentC</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Determines the threshold where Amazon Lex will insert the\n            <code>AMAZON.FallbackIntent</code>,\n            <code>AMAZON.KendraSearchIntent</code>, or both when returning\n         alternative intents. <code>AMAZON.FallbackIntent</code> and\n            <code>AMAZON.KendraSearchIntent</code> are only inserted if they are\n         configured for the bot.</p>\n         <p>For example, suppose a bot is configured with the confidence\n         threshold of 0.80 and the <code>AMAZON.FallbackIntent</code>. Amazon Lex\n         returns three alternative intents with the following confidence scores:\n         IntentA (0.70), IntentB (0.60), IntentC (0.50). The response from the\n            <code>RecognizeText</code> operation would be:</p>\n         <ul>\n            <li>\n               <p>AMAZON.FallbackIntent</p>\n            </li>\n            <li>\n               <p>IntentA</p>\n            </li>\n            <li>\n               <p>IntentB</p>\n            </li>\n            <li>\n               <p>IntentC</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5034,7 +5034,7 @@
                 "failureReasons": {
                     "target": "com.amazonaws.lexmodelsv2#FailureReasons",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the <code>importStatus</code> field is <code>Failed</code>, this\n         provides one or more reasons for the failture.</p>"
+                        "smithy.api#documentation": "<p>If the <code>importStatus</code> field is <code>Failed</code>, this\n         provides one or more reasons for the failure.</p>"
                     }
                 },
                 "creationDateTime": {
@@ -5668,7 +5668,7 @@
                 "values": {
                     "target": "com.amazonaws.lexmodelsv2#FilterValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>The values to use to fileter the response.</p>",
+                        "smithy.api#documentation": "<p>The values to use to filter the response.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5681,7 +5681,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Filtes the response form the \n         operation</p>"
+                "smithy.api#documentation": "<p>Filters the response form the \n         operation</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#ExportFilterName": {
@@ -5888,10 +5888,141 @@
                         "smithy.api#documentation": "<p>Indicates whether a Lambda function should be invoked to fulfill a\n         specific intent.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "postFulfillmentStatusSpecification": {
+                    "target": "com.amazonaws.lexmodelsv2#PostFulfillmentStatusSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides settings for messages sent to the user for after the Lambda\n         fulfillment function completes. Post-fulfillment messages can be sent\n         for both streaming and non-streaming conversations.</p>"
+                    }
+                },
+                "fulfillmentUpdatesSpecification": {
+                    "target": "com.amazonaws.lexmodelsv2#FulfillmentUpdatesSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides settings for update messages sent to the user for\n         long-running Lambda fulfillment functions. Fulfillment updates can be\n         used only with streaming conversations.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Determines if a Lambda function should be invoked for a specific\n         intent.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#FulfillmentStartResponseDelay": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 900
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#FulfillmentStartResponseSpecification": {
+            "type": "structure",
+            "members": {
+                "delayInSeconds": {
+                    "target": "com.amazonaws.lexmodelsv2#FulfillmentStartResponseDelay",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The delay between when the Lambda fulfillment function starts running\n         and the start message is played. If the Lambda function returns before\n         the delay is over, the start message isn't played.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "messageGroups": {
+                    "target": "com.amazonaws.lexmodelsv2#MessageGroupsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One to 5 message groups that contain start messages. Amazon Lex chooses\n         one of the messages to play to the user.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "allowInterrupt": {
+                    "target": "com.amazonaws.lexmodelsv2#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines whether the user can interrupt the start message while it\n         is playing.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides settings for a message that is sent to the user when a\n         fulfillment Lambda function starts running.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#FulfillmentTimeout": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 900
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#FulfillmentUpdateResponseFrequency": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 900
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#FulfillmentUpdateResponseSpecification": {
+            "type": "structure",
+            "members": {
+                "frequencyInSeconds": {
+                    "target": "com.amazonaws.lexmodelsv2#FulfillmentUpdateResponseFrequency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The frequency that a message is sent to the user. When the period\n         ends, Amazon Lex chooses a message from the message groups and plays it to\n         the user. If the fulfillment Lambda returns before the first period\n         ends, an update message is not played to the user.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "messageGroups": {
+                    "target": "com.amazonaws.lexmodelsv2#MessageGroupsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One to 5 message groups that contain update messages. Amazon Lex chooses\n         one of the messages to play to the user.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "allowInterrupt": {
+                    "target": "com.amazonaws.lexmodelsv2#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines whether the user can interrupt an update message while it\n         is playing.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides settings for a message that is sent periodically to the\n         user while a fulfillment Lambda function is running.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#FulfillmentUpdatesSpecification": {
+            "type": "structure",
+            "members": {
+                "active": {
+                    "target": "com.amazonaws.lexmodelsv2#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines whether fulfillment updates are sent to the user. When\n         this field is true, updates are sent.</p>\n         <p>If the <code>active</code> field is set to true, the\n            <code>startResponse</code>, <code>updateResponse</code>, and\n            <code>timeoutInSeconds</code> fields are required.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "startResponse": {
+                    "target": "com.amazonaws.lexmodelsv2#FulfillmentStartResponseSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides configuration information for the message sent to users\n         when the fulfillment Lambda functions starts running.</p>"
+                    }
+                },
+                "updateResponse": {
+                    "target": "com.amazonaws.lexmodelsv2#FulfillmentUpdateResponseSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides configuration information for messages sent periodically to\n         the user while the fulfillment Lambda function is running.</p>"
+                    }
+                },
+                "timeoutInSeconds": {
+                    "target": "com.amazonaws.lexmodelsv2#FulfillmentTimeout",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The length of time that the fulfillment Lambda function should run\n         before it times out.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information for updating the user on the progress of\n         fulfilling an intent.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#HitCount": {
@@ -6048,7 +6179,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides information about the bot or bot locale that you want to\n         import. You can sepcifiy the <code>botImportSpecification</code> or the\n            <code>botLocaleImportSpecification</code>, but not both.</p>"
+                "smithy.api#documentation": "<p>Provides information about the bot or bot locale that you want to\n         import. You can specify the <code>botImportSpecification</code> or the\n            <code>botLocaleImportSpecification</code>, but not both.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#ImportSortAttribute": {
@@ -6213,7 +6344,7 @@
                 "active": {
                     "target": "com.amazonaws.lexmodelsv2#BoxedBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether an intent's closing response is used. When this\n         field is false, the closing response isn't sent to the user and no\n         closing input from the user is used. If the <code>active</code> field\n         isn't specified, the default is true.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether an intent's closing response is used. When this\n         field is false, the closing response isn't sent to the user. If the\n            <code>active</code> field isn't specified, the default is\n         true.</p>"
                     }
                 }
             },
@@ -6241,7 +6372,7 @@
                 "active": {
                     "target": "com.amazonaws.lexmodelsv2#BoxedBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the intent's confirmation is sent to the user.\n         When this field is false, confirmation and declination responses aren't\n         sent and processing continues as if the responses aren't present. If\n         the <code>active</code> field isn't specified, the default is\n         true.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the intent's confirmation is sent to the user.\n         When this field is false, confirmation and declination responses aren't\n         sent. If the <code>active</code> field isn't specified, the default is\n         true.</p>"
                     }
                 }
             },
@@ -6501,7 +6632,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies a Lambda function that verifies requests to a bot or\n         fulfilles the user's request to a bot.</p>"
+                "smithy.api#documentation": "<p>Specifies a Lambda function that verifies requests to a bot or\n         fulfills the user's request to a bot.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#LexModelBuildingServiceV2": {
@@ -7478,7 +7609,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.lexmodelsv2#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the response from the <code>ListExports</code> operation contans\n         more results that specified in the <code>maxResults</code> parameter, a\n         token is returned in the response. Use that token in the\n            <code>nextToken</code> parameter to return the next page of\n         results.</p>"
+                        "smithy.api#documentation": "<p>If the response from the <code>ListExports</code> operation contains\n         more results that specified in the <code>maxResults</code> parameter, a\n         token is returned in the response. Use that token in the\n            <code>nextToken</code> parameter to return the next page of\n         results.</p>"
                     }
                 }
             }
@@ -8335,6 +8466,23 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#PostFulfillmentStatusSpecification": {
+            "type": "structure",
+            "members": {
+                "successResponse": {
+                    "target": "com.amazonaws.lexmodelsv2#ResponseSpecification"
+                },
+                "failureResponse": {
+                    "target": "com.amazonaws.lexmodelsv2#ResponseSpecification"
+                },
+                "timeoutResponse": {
+                    "target": "com.amazonaws.lexmodelsv2#ResponseSpecification"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a setting that determines whether the post-fulfillment\n         response is sent to the user. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/streaming-progress.html#progress-complete\">https://docs.aws.amazon.com/lexv2/latest/dg/streaming-progress.html#progress-complete</a>\n         </p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#PreconditionFailedException": {
             "type": "structure",
             "members": {
@@ -8426,7 +8574,7 @@
                 "maxRetries": {
                     "target": "com.amazonaws.lexmodelsv2#PromptMaxRetries",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of times the bot tries to elicit a resonse from\n         the user using this prompt.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of times the bot tries to elicit a response from\n         the user using this prompt.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9120,7 +9268,7 @@
                 "synonyms": {
                     "target": "com.amazonaws.lexmodelsv2#SynonymList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Additional values releated to the slot type entry.</p>"
+                        "smithy.api#documentation": "<p>Additional values related to the slot type entry.</p>"
                     }
                 }
             },
@@ -9146,7 +9294,7 @@
                 "defaultValueSpecification": {
                     "target": "com.amazonaws.lexmodelsv2#SlotDefaultValueSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of default values for a slot. Default values are used when\n         Amazon Lex hasn't determined a value for a slot. You can specify default\n         values from context variables, sesion attributes, and defined\n         values.</p>"
+                        "smithy.api#documentation": "<p>A list of default values for a slot. Default values are used when\n         Amazon Lex hasn't determined a value for a slot. You can specify default\n         values from context variables, session attributes, and defined\n         values.</p>"
                     }
                 },
                 "slotConstraint": {
@@ -9182,7 +9330,7 @@
                 "pattern": {
                     "target": "com.amazonaws.lexmodelsv2#RegexPattern",
                     "traits": {
-                        "smithy.api#documentation": "<p>A regular expression used to validate the value of a slot.</p>\n         <p> Use a standard regular expression. Amazon Lex supports the\n         following characters in the regular expression: </p>\n         <ul>\n            <li>\n               <p>A-Z, a-z</p>\n            </li>\n            <li>\n               <p>0-9</p>\n            </li>\n            <li>\n               <p>Unicode characters (\"\\ u<Unicode>\")</p>\n            </li>\n         </ul>\n         <p> Represent Unicode characters with four digits, for example \"\\u0041\"\n         or \"\\u005A\". </p>\n         <p> The following regular expression operators are not supported: </p>\n         <ul>\n            <li>\n               <p>Infinite repeaters: *, +, or {x,} with no upper bound.</p>\n            </li>\n            <li>\n               <p>Wild card (.)</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>A regular expression used to validate the value of a slot.</p>\n         <p> Use a standard regular expression. Amazon Lex supports the following\n         characters in the regular expression: </p>\n         <ul>\n            <li>\n               <p>A-Z, a-z</p>\n            </li>\n            <li>\n               <p>0-9</p>\n            </li>\n            <li>\n               <p>Unicode characters (\"\\ u<Unicode>\")</p>\n            </li>\n         </ul>\n         <p> Represent Unicode characters with four digits, for example \"\\u0041\"\n         or \"\\u005A\". </p>\n         <p> The following regular expression operators are not supported: </p>\n         <ul>\n            <li>\n               <p>Infinite repeaters: *, +, or {x,} with no upper bound.</p>\n            </li>\n            <li>\n               <p>Wild card (.)</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -11029,7 +11177,7 @@
                 "active": {
                     "target": "com.amazonaws.lexmodelsv2#BoxedBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the bot will wait for a user to respond. When this\n         field is false, wait and continue responses for a slot aren't used and\n         the bot expects an appropriate response within the configured timeout.\n         If the <code>active</code> field isn't specified, the default is\n         true.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the bot will wait for a user to respond. When this\n         field is false, wait and continue responses for a slot aren't used. If\n         the <code>active</code> field isn't specified, the default is\n         true.</p>"
                     }
                 }
             },

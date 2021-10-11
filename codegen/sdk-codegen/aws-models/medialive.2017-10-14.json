@@ -744,6 +744,13 @@
                         "smithy.api#jsonName": "audioTypeControl"
                     }
                 },
+                "AudioWatermarkingSettings": {
+                    "target": "com.amazonaws.medialive#AudioWatermarkSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Settings to configure one or more solutions that insert audio watermarks in the audio encode",
+                        "smithy.api#jsonName": "audioWatermarkingSettings"
+                    }
+                },
                 "CodecSettings": {
                     "target": "com.amazonaws.medialive#AudioCodecSettings",
                     "traits": {
@@ -1168,6 +1175,21 @@
                         "name": "VISUAL_IMPAIRED_COMMENTARY"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.medialive#AudioWatermarkSettings": {
+            "type": "structure",
+            "members": {
+                "NielsenWatermarksSettings": {
+                    "target": "com.amazonaws.medialive#NielsenWatermarksSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Settings to configure Nielsen Watermarks in the audio encode",
+                        "smithy.api#jsonName": "nielsenWatermarksSettings"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Audio Watermark Settings"
             }
         },
         "com.amazonaws.medialive#AuthenticationScheme": {
@@ -2871,13 +2893,78 @@
                 "Vpc": {
                     "target": "com.amazonaws.medialive#VpcOutputSettingsDescription",
                     "traits": {
-                        "smithy.api#documentation": "Settings for VPC output",
+                        "smithy.api#documentation": "Settings for any VPC outputs.",
                         "smithy.api#jsonName": "vpc"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for ChannelSummary"
+            }
+        },
+        "com.amazonaws.medialive#ClaimDevice": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.medialive#ClaimDeviceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.medialive#ClaimDeviceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.medialive#BadGatewayException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#UnprocessableEntityException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Send a request to claim an AWS Elemental device that you have purchased from a third-party vendor. After the request succeeds, you will own the device.",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/prod/claimDevice",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.medialive#ClaimDeviceRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The id of the device you want to claim.",
+                        "smithy.api#jsonName": "id"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A request to claim an AWS Elemental device that you have purchased from a third-party vendor."
+            }
+        },
+        "com.amazonaws.medialive#ClaimDeviceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for ClaimDeviceResponse"
             }
         },
         "com.amazonaws.medialive#ColorSpacePassthroughSettings": {
@@ -3048,7 +3135,7 @@
                 "Vpc": {
                     "target": "com.amazonaws.medialive#VpcOutputSettings",
                     "traits": {
-                        "smithy.api#documentation": "Settings for VPC output",
+                        "smithy.api#documentation": "Settings for the VPC outputs",
                         "smithy.api#jsonName": "vpc"
                     }
                 }
@@ -5278,7 +5365,7 @@
                 "InputSourceType": {
                     "target": "com.amazonaws.medialive#InputSourceType",
                     "traits": {
-                        "smithy.api#documentation": "Certain pull input sources can be dynamic, meaning that they can have their URL's dynamically changes\nduring input switch actions. Presently, this functionality only works with MP4_FILE inputs.",
+                        "smithy.api#documentation": "Certain pull input sources can be dynamic, meaning that they can have their URL's dynamically changes\nduring input switch actions. Presently, this functionality only works with MP4_FILE and TS_FILE inputs.",
                         "smithy.api#jsonName": "inputSourceType"
                     }
                 },
@@ -10476,7 +10563,7 @@
                 "InputSourceType": {
                     "target": "com.amazonaws.medialive#InputSourceType",
                     "traits": {
-                        "smithy.api#documentation": "Certain pull input sources can be dynamic, meaning that they can have their URL's dynamically changes\nduring input switch actions. Presently, this functionality only works with MP4_FILE inputs.",
+                        "smithy.api#documentation": "Certain pull input sources can be dynamic, meaning that they can have their URL's dynamically changes\nduring input switch actions. Presently, this functionality only works with MP4_FILE and TS_FILE inputs.",
                         "smithy.api#jsonName": "inputSourceType"
                     }
                 },
@@ -11725,7 +11812,7 @@
         "com.amazonaws.medialive#InputSourceType": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "There are two types of input sources, static and dynamic. If an input source is dynamic you can\nchange the source url of the input dynamically using an input switch action. However, the only input type\nto support a dynamic url at this time is MP4_FILE. By default all input sources are static.",
+                "smithy.api#documentation": "There are two types of input sources, static and dynamic. If an input source is dynamic you can\nchange the source url of the input dynamically using an input switch action. Currently, two input types\nsupport a dynamic url at this time, MP4_FILE and TS_FILE. By default all input sources are static.",
                 "smithy.api#enum": [
                     {
                         "value": "STATIC",
@@ -11844,7 +11931,7 @@
         "com.amazonaws.medialive#InputType": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Placeholder documentation for InputType",
+                "smithy.api#documentation": "The different types of inputs that AWS Elemental MediaLive supports.",
                 "smithy.api#enum": [
                     {
                         "value": "UDP_PUSH",
@@ -11881,6 +11968,10 @@
                     {
                         "value": "AWS_CDI",
                         "name": "AWS_CDI"
+                    },
+                    {
+                        "value": "TS_FILE",
+                        "name": "TS_FILE"
                     }
                 ]
             }
@@ -13894,6 +13985,9 @@
                     "target": "com.amazonaws.medialive#CancelInputDeviceTransfer"
                 },
                 {
+                    "target": "com.amazonaws.medialive#ClaimDevice"
+                },
+                {
                     "target": "com.amazonaws.medialive#CreateChannel"
                 },
                 {
@@ -15338,6 +15432,38 @@
                 "smithy.api#documentation": "Network source to transcode. Must be accessible to the Elemental Live node that is running the live event through a network connection."
             }
         },
+        "com.amazonaws.medialive#NielsenCBET": {
+            "type": "structure",
+            "members": {
+                "CbetCheckDigitString": {
+                    "target": "com.amazonaws.medialive#__stringMin2Max2",
+                    "traits": {
+                        "smithy.api#documentation": "Enter the CBET check digits to use in the watermark.",
+                        "smithy.api#jsonName": "cbetCheckDigitString",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CbetStepaside": {
+                    "target": "com.amazonaws.medialive#NielsenWatermarksCbetStepaside",
+                    "traits": {
+                        "smithy.api#documentation": "Determines the method of CBET insertion mode when prior encoding is detected on the same layer.",
+                        "smithy.api#jsonName": "cbetStepaside",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Csid": {
+                    "target": "com.amazonaws.medialive#__stringMin1Max7",
+                    "traits": {
+                        "smithy.api#documentation": "Enter the CBET Source ID (CSID) to use in the watermark",
+                        "smithy.api#jsonName": "csid",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Nielsen CBET"
+            }
+        },
         "com.amazonaws.medialive#NielsenConfiguration": {
             "type": "structure",
             "members": {
@@ -15360,6 +15486,30 @@
                 "smithy.api#documentation": "Nielsen Configuration"
             }
         },
+        "com.amazonaws.medialive#NielsenNaesIiNw": {
+            "type": "structure",
+            "members": {
+                "CheckDigitString": {
+                    "target": "com.amazonaws.medialive#__stringMin2Max2",
+                    "traits": {
+                        "smithy.api#documentation": "Enter the check digit string for the watermark",
+                        "smithy.api#jsonName": "checkDigitString",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Sid": {
+                    "target": "com.amazonaws.medialive#__doubleMin1Max65535",
+                    "traits": {
+                        "smithy.api#documentation": "Enter the Nielsen Source ID (SID) to include in the watermark",
+                        "smithy.api#jsonName": "sid",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Nielsen Naes Ii Nw"
+            }
+        },
         "com.amazonaws.medialive#NielsenPcmToId3TaggingState": {
             "type": "string",
             "traits": {
@@ -15374,6 +15524,67 @@
                         "name": "ENABLED"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.medialive#NielsenWatermarksCbetStepaside": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Nielsen Watermarks Cbet Stepaside",
+                "smithy.api#enum": [
+                    {
+                        "value": "DISABLED",
+                        "name": "DISABLED"
+                    },
+                    {
+                        "value": "ENABLED",
+                        "name": "ENABLED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.medialive#NielsenWatermarksDistributionTypes": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Nielsen Watermarks Distribution Types",
+                "smithy.api#enum": [
+                    {
+                        "value": "FINAL_DISTRIBUTOR",
+                        "name": "FINAL_DISTRIBUTOR"
+                    },
+                    {
+                        "value": "PROGRAM_CONTENT",
+                        "name": "PROGRAM_CONTENT"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.medialive#NielsenWatermarksSettings": {
+            "type": "structure",
+            "members": {
+                "NielsenCbetSettings": {
+                    "target": "com.amazonaws.medialive#NielsenCBET",
+                    "traits": {
+                        "smithy.api#documentation": "Complete these fields only if you want to insert watermarks of type Nielsen CBET",
+                        "smithy.api#jsonName": "nielsenCbetSettings"
+                    }
+                },
+                "NielsenDistributionType": {
+                    "target": "com.amazonaws.medialive#NielsenWatermarksDistributionTypes",
+                    "traits": {
+                        "smithy.api#documentation": "Choose the distribution types that you want to assign to the watermarks:\n- PROGRAM_CONTENT\n- FINAL_DISTRIBUTOR",
+                        "smithy.api#jsonName": "nielsenDistributionType"
+                    }
+                },
+                "NielsenNaesIiNwSettings": {
+                    "target": "com.amazonaws.medialive#NielsenNaesIiNw",
+                    "traits": {
+                        "smithy.api#documentation": "Complete these fields only if you want to insert watermarks of type Nielsen NAES II (N2) and Nielsen NAES VI (NW).",
+                        "smithy.api#jsonName": "nielsenNaesIiNwSettings"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Nielsen Watermarks Settings"
             }
         },
         "com.amazonaws.medialive#NotFoundException": {
@@ -20194,6 +20405,12 @@
                 "smithy.api#documentation": "Placeholder documentation for __doubleMin1"
             }
         },
+        "com.amazonaws.medialive#__doubleMin1Max65535": {
+            "type": "double",
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __doubleMin1Max65535"
+            }
+        },
         "com.amazonaws.medialive#__doubleMinNegative59Max0": {
             "type": "double",
             "traits": {
@@ -21259,6 +21476,26 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 35
+                }
+            }
+        },
+        "com.amazonaws.medialive#__stringMin1Max7": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __stringMin1Max7",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 7
+                }
+            }
+        },
+        "com.amazonaws.medialive#__stringMin2Max2": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __stringMin2Max2",
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 2
                 }
             }
         },
