@@ -11,11 +11,11 @@ jobs:
         python-version: [3.9]
 
     steps:
-      - name: Checkout main
+      - name: Checkout target
         uses: actions/checkout@v2
         with:
           path: sdkmain
-          ref: main
+          ref: ${{ github.base_ref }}
       - name: Checkout this ref
         uses: actions/checkout@v2
         with:
@@ -39,7 +39,7 @@ jobs:
         run: ./scancode --help
       - name: Run Scan code on pr ref
         run: for filename in $(< fileList.txt); do ./scancode-toolkit/scancode -l -n 30 --json-pp - ./sdkmain/$filename | grep short_name | sort | uniq >> old-licenses.txt; done
-      - name: Run Scan code on main
+      - name: Run Scan code on target
         run: for filename in $(< fileList.txt); do ./scancode-toolkit/scancode -l -n 30 --json-pp - ./new-ref/$filename | grep short_name | sort | uniq >> new-licenses.txt; done
       # compare
       - name: License test
