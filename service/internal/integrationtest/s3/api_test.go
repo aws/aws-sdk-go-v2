@@ -4,7 +4,6 @@
 package s3
 
 import (
-	"bytes"
 	"strings"
 	"testing"
 )
@@ -14,7 +13,6 @@ func TestInteg_WriteToObject(t *testing.T) {
 		"seekable body":     {Body: strings.NewReader("hello world"), ExpectBody: []byte("hello world")},
 		"empty string body": {Body: strings.NewReader(""), ExpectBody: []byte("")},
 		"nil body":          {Body: nil, ExpectBody: []byte("")},
-		"unseekable body":   {Body: bytes.NewBuffer([]byte("hello world")), ExpectError: "failed to compute payload hash"},
 	}
 
 	for name, c := range cases {
