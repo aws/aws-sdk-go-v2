@@ -6,13 +6,14 @@ import (
 	"encoding/hex"
 	"fmt"
 	"io"
+	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	v4Internal "github.com/aws/aws-sdk-go-v2/aws/signer/internal/v4"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/aws/smithy-go/middleware"
-	smithyHTTP "github.com/aws/smithy-go/transport/http"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 const computePayloadHashMiddlewareID = "ComputePayloadHash"
@@ -44,6 +45,42 @@ func (e *SigningError) Error() string {
 // Unwrap returns the underlying error cause
 func (e *SigningError) Unwrap() error {
 	return e.Err
+}
+
+// SwapPayloadSHA256ResolverMiddleware swaps the compute payload sha256 middleware with a resolver middleware that
+//switches between unsigned and signed payload based on TLS state for request.
+func SwapPayloadSHA256ResolverMiddleware(stack *middleware.Stack) error {
+	_, err := stack.Build.Swap(computePayloadHashMiddlewareID, &computePayloadSHA256Resolver{})
+	return err
+}
+
+// computePayloadSHA256Resolver resolves the payload sha256 middleware.
+type computePayloadSHA256Resolver struct {
+}
+
+// ID returns the resolver identifier
+func (m *computePayloadSHA256Resolver) ID() string {
+	return computePayloadHashMiddlewareID
+}
+
+// HandleBuild sets a resolver that directs to the payload sha256 compute handler.
+func (m *computePayloadSHA256Resolver) HandleBuild(
+	ctx context.Context, in middleware.BuildInput, next middleware.BuildHandler,
+) (
+	out middleware.BuildOutput, metadata middleware.Metadata, err error,
+) {
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	// if TLS is enabled, use unsigned payload when supported
+	if strings.EqualFold(req.URL.Scheme, "https") {
+		return (&unsignedPayload{}).HandleBuild(ctx, in, next)
+	}
+
+	// else fall back to signed payload
+	return (&computePayloadSHA256{}).HandleBuild(ctx, in, next)
 }
 
 // unsignedPayload sets the SigV4 request payload hash to unsigned.
@@ -120,7 +157,7 @@ func (m *computePayloadSHA256) HandleBuild(
 ) (
 	out middleware.BuildOutput, metadata middleware.Metadata, err error,
 ) {
-	req, ok := in.Request.(*smithyHTTP.Request)
+	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &HashComputationError{
 			Err: fmt.Errorf("unexpected request middleware type %T", in.Request),
@@ -195,7 +232,7 @@ func (m *contentSHA256Header) HandleBuild(
 ) (
 	out middleware.BuildOutput, metadata middleware.Metadata, err error,
 ) {
-	req, ok := in.Request.(*smithyHTTP.Request)
+	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &HashComputationError{Err: fmt.Errorf("unexpected request middleware type %T", in.Request)}
 	}
@@ -241,7 +278,7 @@ func (s *SignHTTPRequestMiddleware) HandleFinalize(ctx context.Context, in middl
 		return next.HandleFinalize(ctx, in)
 	}
 
-	req, ok := in.Request.(*smithyHTTP.Request)
+	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &SigningError{Err: fmt.Errorf("unexpected request middleware type %T", in.Request)}
 	}

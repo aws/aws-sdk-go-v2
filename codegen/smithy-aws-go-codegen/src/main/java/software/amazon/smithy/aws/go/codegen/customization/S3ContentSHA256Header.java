@@ -1,12 +1,18 @@
 package software.amazon.smithy.aws.go.codegen.customization;
 
 import java.util.List;
+import java.util.Optional;
 import software.amazon.smithy.aws.go.codegen.AwsGoDependency;
 import software.amazon.smithy.aws.traits.auth.UnsignedPayloadTrait;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
+import software.amazon.smithy.model.shapes.MemberShape;
+import software.amazon.smithy.model.shapes.Shape;
+import software.amazon.smithy.model.shapes.ShapeId;
+import software.amazon.smithy.model.shapes.StructureShape;
+import software.amazon.smithy.model.traits.StreamingTrait;
 import software.amazon.smithy.utils.ListUtils;
 
 
@@ -40,6 +46,33 @@ public class S3ContentSHA256Header implements GoIntegration {
                                 .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
                                         "AddContentSHA256HeaderMiddleware",
                                         AwsGoDependency.AWS_SIGNER_V4
+                                ).build())
+                                .build())
+                        .build(),
+                RuntimeClientPlugin.builder()
+                        // If operation is streaming for S3, Swap payload sha256 middleware with a resolver middleware
+                        .operationPredicate(((model, service, operation) -> {
+                            if (!(S3ModelUtils.isServiceS3(model, service))) {
+                                return false;
+                            }
+
+                            Optional<ShapeId> input = operation.getInput();
+                            if (!input.isPresent()) {
+                                return false;
+                            }
+
+                            StructureShape inputShape = model.expectShape(input.get(), StructureShape.class);
+                            for (MemberShape memberShape : inputShape.getAllMembers().values()) {
+                                Shape targetShape = model.expectShape(memberShape.getTarget());
+                                if (targetShape.hasTrait(StreamingTrait.class)) {
+                                    return true;
+                                }
+                            }
+                            return false;
+                        }))
+                        .registerMiddleware(MiddlewareRegistrar.builder()
+                                .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
+                                        "SwapPayloadSHA256ResolverMiddleware", AwsGoDependency.AWS_SIGNER_V4
                                 ).build())
                                 .build())
                         .build()
