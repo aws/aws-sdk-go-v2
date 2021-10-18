@@ -115,8 +115,8 @@ func findSmithyModels(modelPath string) (map[string]SourceModel, error) {
 						name, path)
 				}
 				if shape.Traits.Service == nil {
-					return fmt.Errorf("smithy service doesn't have service trait %s, %s",
-						name, path)
+					// Ignore services that don't have an SDK id.
+					continue
 				}
 				if len(shape.Traits.Service.SDKID) == 0 {
 					return fmt.Errorf("smithy service doesn't have sdkId value %s, %s",
