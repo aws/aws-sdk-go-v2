@@ -47,24 +47,24 @@ func (e *SigningError) Unwrap() error {
 	return e.Err
 }
 
-// SwapPayloadSHA256ResolverMiddleware swaps the compute payload sha256 middleware with a resolver middleware that
-//switches between unsigned and signed payload based on TLS state for request.
-func SwapPayloadSHA256ResolverMiddleware(stack *middleware.Stack) error {
-	_, err := stack.Build.Swap(computePayloadHashMiddlewareID, &computePayloadSHA256Resolver{})
+// UseDynamicPayloadSigningMiddleware swaps the compute payload sha256 middleware with a resolver middleware that
+// switches between unsigned and signed payload based on TLS state for request.
+func UseDynamicPayloadSigningMiddleware(stack *middleware.Stack) error {
+	_, err := stack.Build.Swap(computePayloadHashMiddlewareID, &dynamicPayloadSigningMiddleware{})
 	return err
 }
 
-// computePayloadSHA256Resolver resolves the payload sha256 middleware.
-type computePayloadSHA256Resolver struct {
+// dynamicPayloadSigningMiddleware dynamically resolves the middleware that computes and set payload sha256 middleware.
+type dynamicPayloadSigningMiddleware struct {
 }
 
 // ID returns the resolver identifier
-func (m *computePayloadSHA256Resolver) ID() string {
+func (m *dynamicPayloadSigningMiddleware) ID() string {
 	return computePayloadHashMiddlewareID
 }
 
 // HandleBuild sets a resolver that directs to the payload sha256 compute handler.
-func (m *computePayloadSHA256Resolver) HandleBuild(
+func (m *dynamicPayloadSigningMiddleware) HandleBuild(
 	ctx context.Context, in middleware.BuildInput, next middleware.BuildHandler,
 ) (
 	out middleware.BuildOutput, metadata middleware.Metadata, err error,

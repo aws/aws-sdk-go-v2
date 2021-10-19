@@ -64,7 +64,8 @@ public class S3ContentSHA256Header implements GoIntegration {
                             StructureShape inputShape = model.expectShape(input.get(), StructureShape.class);
                             for (MemberShape memberShape : inputShape.getAllMembers().values()) {
                                 Shape targetShape = model.expectShape(memberShape.getTarget());
-                                if (targetShape.hasTrait(StreamingTrait.class)) {
+                                if (targetShape.hasTrait(StreamingTrait.class)
+                                        && !StreamingTrait.isEventStream(model, memberShape)) {
                                     return true;
                                 }
                             }
@@ -72,7 +73,7 @@ public class S3ContentSHA256Header implements GoIntegration {
                         }))
                         .registerMiddleware(MiddlewareRegistrar.builder()
                                 .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
-                                        "SwapPayloadSHA256ResolverMiddleware", AwsGoDependency.AWS_SIGNER_V4
+                                        "UseDynamicPayloadSigningMiddleware", AwsGoDependency.AWS_SIGNER_V4
                                 ).build())
                                 .build())
                         .build()
