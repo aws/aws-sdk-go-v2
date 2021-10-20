@@ -125,6 +125,26 @@ func TestPutObject_PresignURL(t *testing.T) {
 				"Host": []string{"mock-bucket.s3.us-west-2.amazonaws.com"},
 			},
 		},
+		"nil body with content-length": {
+			input: s3.PutObjectInput{
+				Bucket:        aws.String("mock-bucket"),
+				Key:           aws.String("mockkey"),
+				ContentLength: 100,
+			},
+			expectPresignedURLHost: "https://mock-bucket.s3.us-west-2.amazonaws.com/mockkey?",
+			expectRequestURIQuery: []string{
+				"X-Amz-Expires=900",
+				"X-Amz-Credential",
+				"X-Amz-Date",
+				"x-id=PutObject",
+				"X-Amz-Signature",
+			},
+			expectMethod: "PUT",
+			expectSignedHeader: http.Header{
+				"Host":           []string{"mock-bucket.s3.us-west-2.amazonaws.com"},
+				"Content-Length": []string{"100"},
+			},
+		},
 		"mrap presigned": {
 			input: s3.PutObjectInput{
 				Bucket: aws.String("arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap"),
