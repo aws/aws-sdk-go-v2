@@ -41,7 +41,6 @@
         "service/mediapackagevod",
         "service/mediatailor",
         "service/neptune",
-        "service/panorama",
         "service/quicksight",
         "service/rds",
         "service/redshift",
