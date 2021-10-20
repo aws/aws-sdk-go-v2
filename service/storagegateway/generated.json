@@ -91,6 +91,7 @@
         "api_op_UpdateNFSFileShare.go",
         "api_op_UpdateSMBFileShare.go",
         "api_op_UpdateSMBFileShareVisibility.go",
+        "api_op_UpdateSMBLocalGroups.go",
         "api_op_UpdateSMBSecurityStrategy.go",
         "api_op_UpdateSnapshotSchedule.go",
         "api_op_UpdateVTLDeviceType.go",

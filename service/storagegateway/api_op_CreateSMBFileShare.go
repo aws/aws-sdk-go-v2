@@ -15,10 +15,12 @@ import (
 // In Storage Gateway, a file share is a file system mount point backed by Amazon
 // S3 cloud storage. Storage Gateway exposes file shares using an SMB interface.
 // This operation is only supported for S3 File Gateways. S3 File Gateways require
-// Security Token Service (STS) to be activated to enable you to create a file
-// share. Make sure that STS is activated in the Region you are creating your S3
-// File Gateway in. If STS is not activated in this Region, activate it. For
-// information about how to activate STS, see Activating and deactivating STS in an
+// Security Token Service (Amazon Web Services STS) to be activated to enable you
+// to create a file share. Make sure that Amazon Web Services STS is activated in
+// the Amazon Web Services Region you are creating your S3 File Gateway in. If
+// Amazon Web Services STS is not activated in this Amazon Web Services Region,
+// activate it. For information about how to activate Amazon Web Services STS, see
+// Activating and deactivating Amazon Web Services STS in an Amazon Web Services
 // Region
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
 // in the Identity and Access Management User Guide. File gateways don't support
@@ -52,15 +54,18 @@ type CreateSMBFileShareInput struct {
 	// This member is required.
 	GatewayARN *string
 
-	// The ARN of the backend storage used for storing file data. A prefix name can be
-	// added to the S3 bucket name. It must end with a "/". You can specify a bucket
-	// attached to an access point using a complete ARN that includes the bucket region
-	// as shown: arn:aws:s3:region:account-id:accesspoint/access-point-name  If you
-	// specify a bucket attached to an access point, the bucket policy must be
-	// configured to delegate access control to the access point. For information, see
-	// Delegating access control to access points
+	// A custom ARN for the backend storage used for storing data for file shares. It
+	// includes a resource ARN with an optional prefix concatenation. The prefix must
+	// end with a forward slash (/). You can specify LocationARN as a bucket ARN,
+	// access point ARN or access point alias, as shown in the following examples.
+	// Bucket ARN: arn:aws:s3:::my-bucket/prefix/ Access point ARN:
+	// arn:aws:s3:region:account-id:accesspoint/access-point-name/prefix/ If you
+	// specify an access point, the bucket policy must be configured to delegate access
+	// control to the access point. For information, see Delegating access control to
+	// access points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-policies.html#access-points-delegating-control)
-	// in the Amazon S3 User Guide.
+	// in the Amazon S3 User Guide. Access point alias:
+	// test-ap-ab123cdef4gehijklmn5opqrstuvuse1a-s3alias
 	//
 	// This member is required.
 	LocationARN *string
@@ -110,7 +115,7 @@ type CreateSMBFileShareInput struct {
 	DefaultStorageClass *string
 
 	// The name of the file share. Optional. FileShareName must be set if an S3 prefix
-	// name is set in LocationARN.
+	// name is set in LocationARN, or if an access point or access point alias is used.
 	FileShareName *string
 
 	// A value that enables guessing of the MIME type for uploaded objects based on

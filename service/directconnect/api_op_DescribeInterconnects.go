@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the interconnects owned by the account or only the specified interconnect.
+// Lists the interconnects owned by the Amazon Web Services account or only the
+// specified interconnect.
 func (c *Client) DescribeInterconnects(ctx context.Context, params *DescribeInterconnectsInput, optFns ...func(*Options)) (*DescribeInterconnectsOutput, error) {
 	if params == nil {
 		params = &DescribeInterconnectsInput{}

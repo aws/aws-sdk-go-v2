@@ -1838,6 +1838,11 @@ func awsRestjson1_serializeDocumentHlsPackage(v *types.HlsPackage, value smithyj
 		}
 	}
 
+	if v.IncludeDvbSubtitles {
+		ok := object.Key("includeDvbSubtitles")
+		ok.Boolean(v.IncludeDvbSubtitles)
+	}
+
 	if v.IncludeIframeOnlyStream {
 		ok := object.Key("includeIframeOnlyStream")
 		ok.Boolean(v.IncludeIframeOnlyStream)

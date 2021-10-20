@@ -50,6 +50,9 @@ type CreateIngestionInput struct {
 	// This member is required.
 	IngestionId *string
 
+	// The type of ingestion that you want to create.
+	IngestionType types.IngestionType
+
 	noSmithyDocumentSerde
 }
 

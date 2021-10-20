@@ -1236,6 +1236,16 @@ type S3DestinationProperties struct {
 	noSmithyDocumentSerde
 }
 
+// When you use Amazon S3 as the source, the configuration format that you provide
+// the flow input data.
+type S3InputFormatConfig struct {
+
+	// The file type that Amazon AppFlow gets from your Amazon S3 bucket.
+	S3InputFileType S3InputFileType
+
+	noSmithyDocumentSerde
+}
+
 // The connector metadata specific to Amazon S3.
 type S3Metadata struct {
 	noSmithyDocumentSerde
@@ -1269,6 +1279,10 @@ type S3SourceProperties struct {
 
 	// The object key for the Amazon S3 bucket in which the source files are stored.
 	BucketPrefix *string
+
+	// When you use Amazon S3 as the source, the configuration format that you provide
+	// the flow input data.
+	S3InputFormatConfig *S3InputFormatConfig
 
 	noSmithyDocumentSerde
 }

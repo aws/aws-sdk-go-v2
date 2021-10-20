@@ -14,10 +14,12 @@ import (
 // Updates a Server Message Block (SMB) file share. This operation is only
 // supported for S3 File Gateways. To leave a file share field unchanged, set the
 // corresponding input field to null. File gateways require Security Token Service
-// (STS) to be activated to enable you to create a file share. Make sure that STS
-// is activated in the Region you are creating your file gateway in. If STS is not
-// activated in this Region, activate it. For information about how to activate
-// STS, see Activating and deactivating STS in an Region
+// (Amazon Web Services STS) to be activated to enable you to create a file share.
+// Make sure that Amazon Web Services STS is activated in the Amazon Web Services
+// Region you are creating your file gateway in. If Amazon Web Services STS is not
+// activated in this Amazon Web Services Region, activate it. For information about
+// how to activate Amazon Web Services STS, see Activating and deactivating Amazon
+// Web Services STS in an Amazon Web Services Region
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
 // in the Identity and Access Management User Guide. File gateways don't support
 // creating hard or symbolic links on a file share.
@@ -71,7 +73,7 @@ type UpdateSMBFileShareInput struct {
 	DefaultStorageClass *string
 
 	// The name of the file share. Optional. FileShareName must be set if an S3 prefix
-	// name is set in LocationARN.
+	// name is set in LocationARN, or if an access point or access point alias is used.
 	FileShareName *string
 
 	// A value that enables guessing of the MIME type for uploaded objects based on

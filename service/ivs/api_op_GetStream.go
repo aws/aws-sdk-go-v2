@@ -39,7 +39,7 @@ type GetStreamInput struct {
 
 type GetStreamOutput struct {
 
-	// Specifies a live video stream that has been ingested and distributed.
+	//
 	Stream *types.Stream
 
 	// Metadata pertaining to the operation's result.

@@ -1963,8 +1963,8 @@ type HostVolumeProperties struct {
 
 // Details on a Elastic Inference accelerator. For more information, see Working
 // with Amazon Elastic Inference on Amazon ECS
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-eia.html) in
-// the Amazon Elastic Container Service Developer Guide.
+// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-inference.html)
+// in the Amazon Elastic Container Service Developer Guide.
 type InferenceAccelerator struct {
 
 	// The Elastic Inference accelerator device name. The deviceName must also be
@@ -1985,8 +1985,8 @@ type InferenceAccelerator struct {
 // used to override the Elastic Inference accelerator specified in the task
 // definition. For more information, see Working with Amazon Elastic Inference on
 // Amazon ECS
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-eia.html) in
-// the Amazon Elastic Container Service Developer Guide.
+// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-inference.html)
+// in the Amazon Elastic Container Service Developer Guide.
 type InferenceAcceleratorOverride struct {
 
 	// The Elastic Inference accelerator device name to override for the task. This
@@ -2613,8 +2613,8 @@ type Resource struct {
 // information, see Working with GPUs on Amazon ECS
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-gpu.html) or
 // Working with Amazon Elastic Inference on Amazon ECS
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-eia.html) in
-// the Amazon Elastic Container Service Developer Guide
+// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-inference.html)
+// in the Amazon Elastic Container Service Developer Guide
 type ResourceRequirement struct {
 
 	// The type of resource to assign to a container. The supported values are GPU or
@@ -3507,7 +3507,9 @@ type TaskOverride struct {
 	EphemeralStorage *EphemeralStorage
 
 	// The Amazon Resource Name (ARN) of the task execution IAM role override for the
-	// task.
+	// task. For more information, see Amazon ECS task execution IAM role
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html)
+	// in the Amazon Elastic Container Service Developer Guide.
 	ExecutionRoleArn *string
 
 	// The Elastic Inference accelerator override for the task.
@@ -3518,7 +3520,9 @@ type TaskOverride struct {
 
 	// The Amazon Resource Name (ARN) of the IAM role that containers in this task can
 	// assume. All containers in this task are granted the permissions that are
-	// specified in this role.
+	// specified in this role. For more information, see IAM Role for Tasks
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html)
+	// in the Amazon Elastic Container Service Developer Guide.
 	TaskRoleArn *string
 
 	noSmithyDocumentSerde

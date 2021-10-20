@@ -184,9 +184,10 @@ type ArchitectureType string
 
 // Enum values for ArchitectureType
 const (
-	ArchitectureTypeI386  ArchitectureType = "i386"
-	ArchitectureTypeX8664 ArchitectureType = "x86_64"
-	ArchitectureTypeArm64 ArchitectureType = "arm64"
+	ArchitectureTypeI386     ArchitectureType = "i386"
+	ArchitectureTypeX8664    ArchitectureType = "x86_64"
+	ArchitectureTypeArm64    ArchitectureType = "arm64"
+	ArchitectureTypeX8664Mac ArchitectureType = "x86_64_mac"
 )
 
 // Values returns all known values for ArchitectureType. Note that this can be
@@ -197,6 +198,7 @@ func (ArchitectureType) Values() []ArchitectureType {
 		"i386",
 		"x86_64",
 		"arm64",
+		"x86_64_mac",
 	}
 }
 
@@ -1106,6 +1108,24 @@ func (DeleteQueuedReservedInstancesErrorCode) Values() []DeleteQueuedReservedIns
 		"reserved-instances-id-invalid",
 		"reserved-instances-not-in-queued-state",
 		"unexpected-error",
+	}
+}
+
+type DestinationFileFormat string
+
+// Enum values for DestinationFileFormat
+const (
+	DestinationFileFormatPlainText DestinationFileFormat = "plain-text"
+	DestinationFileFormatParquet   DestinationFileFormat = "parquet"
+)
+
+// Values returns all known values for DestinationFileFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DestinationFileFormat) Values() []DestinationFileFormat {
+	return []DestinationFileFormat{
+		"plain-text",
+		"parquet",
 	}
 }
 
@@ -2204,6 +2224,25 @@ func (InstanceStateName) Values() []InstanceStateName {
 		"terminated",
 		"stopping",
 		"stopped",
+	}
+}
+
+type InstanceStorageEncryptionSupport string
+
+// Enum values for InstanceStorageEncryptionSupport
+const (
+	InstanceStorageEncryptionSupportUnsupported InstanceStorageEncryptionSupport = "unsupported"
+	InstanceStorageEncryptionSupportRequired    InstanceStorageEncryptionSupport = "required"
+)
+
+// Values returns all known values for InstanceStorageEncryptionSupport. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (InstanceStorageEncryptionSupport) Values() []InstanceStorageEncryptionSupport {
+	return []InstanceStorageEncryptionSupport{
+		"unsupported",
+		"required",
 	}
 }
 

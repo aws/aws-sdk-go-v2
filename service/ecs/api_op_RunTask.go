@@ -55,7 +55,12 @@ func (c *Client) RunTask(ctx context.Context, params *RunTaskInput, optFns ...fu
 type RunTaskInput struct {
 
 	// The family and revision (family:revision) or full ARN of the task definition to
-	// run. If a revision is not specified, the latest ACTIVE revision is used.
+	// run. If a revision is not specified, the latest ACTIVE revision is used. The
+	// full ARN value must match the value that you specified ias the Resource of the
+	// IAM principal's permissions policy. For example, if the Resource is
+	// arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:*, the
+	// taskDefinition ARN value must be
+	// arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName.
 	//
 	// This member is required.
 	TaskDefinition *string

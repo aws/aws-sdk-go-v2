@@ -48,10 +48,10 @@ type CreateTapePoolInput struct {
 	RetentionLockTimeInDays *int32
 
 	// Tape retention lock can be configured in two modes. When configured in
-	// governance mode, accounts with specific IAM permissions are authorized to remove
-	// the tape retention lock from archived virtual tapes. When configured in
-	// compliance mode, the tape retention lock cannot be removed by any user,
-	// including the root account.
+	// governance mode, Amazon Web Services accounts with specific IAM permissions are
+	// authorized to remove the tape retention lock from archived virtual tapes. When
+	// configured in compliance mode, the tape retention lock cannot be removed by any
+	// user, including the root Amazon Web Services account.
 	RetentionLockType types.RetentionLockType
 
 	// A list of up to 50 tags that can be assigned to tape pool. Each tag is a
@@ -68,7 +68,7 @@ type CreateTapePoolOutput struct {
 
 	// The unique Amazon Resource Name (ARN) that represents the custom tape pool. Use
 	// the ListTapePools operation to return a list of tape pools for your account and
-	// Region.
+	// Amazon Web Services Region.
 	PoolARN *string
 
 	// Metadata pertaining to the operation's result.

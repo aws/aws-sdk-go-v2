@@ -4946,6 +4946,11 @@ func awsRestjson1_serializeDocumentFileSourceSettings(v *types.FileSourceSetting
 		ok.Integer(v.TimeDelta)
 	}
 
+	if len(v.TimeDeltaUnits) > 0 {
+		ok := object.Key("timeDeltaUnits")
+		ok.String(string(v.TimeDeltaUnits))
+	}
+
 	return nil
 }
 

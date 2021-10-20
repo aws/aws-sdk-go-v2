@@ -34,7 +34,7 @@ type CreateDataSourceInput struct {
 	// This member is required.
 	AwsAccountId *string
 
-	// An ID for the data source. This ID is unique per Amazon Web Services Region; for
+	// An ID for the data source. This ID is unique per Amazon Web Services Region for
 	// each Amazon Web Services account.
 	//
 	// This member is required.
@@ -46,7 +46,7 @@ type CreateDataSourceInput struct {
 	Name *string
 
 	// The type of the data source. To return a list of all data sources, use
-	// ListDataSources. Use AMAZON_ELASTICSEARCH for Amazon Elasticsearch Service.
+	// ListDataSources. Use AMAZON_ELASTICSEARCH for Amazon OpenSearch Service.
 	//
 	// This member is required.
 	Type types.DataSourceType
@@ -85,7 +85,7 @@ type CreateDataSourceOutput struct {
 	// The status of creating the data source.
 	CreationStatus types.ResourceStatus
 
-	// The ID of the data source. This ID is unique per Amazon Web Services Region; for
+	// The ID of the data source. This ID is unique per Amazon Web Services Region for
 	// each Amazon Web Services account.
 	DataSourceId *string
 

@@ -150,6 +150,26 @@ func (m *validateOpCreateActionTarget) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateFindingAggregator struct {
+}
+
+func (*validateOpCreateFindingAggregator) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateFindingAggregator) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateFindingAggregatorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateFindingAggregatorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateInsight struct {
 }
 
@@ -225,6 +245,26 @@ func (m *validateOpDeleteActionTarget) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteActionTargetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteFindingAggregator struct {
+}
+
+func (*validateOpDeleteFindingAggregator) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteFindingAggregator) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteFindingAggregatorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteFindingAggregatorInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -410,6 +450,26 @@ func (m *validateOpEnableOrganizationAdminAccount) HandleInitialize(ctx context.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetFindingAggregator struct {
+}
+
+func (*validateOpGetFindingAggregator) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetFindingAggregator) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetFindingAggregatorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetFindingAggregatorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetInsightResults struct {
 }
 
@@ -550,6 +610,26 @@ func (m *validateOpUpdateActionTarget) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateFindingAggregator struct {
+}
+
+func (*validateOpUpdateFindingAggregator) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateFindingAggregator) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateFindingAggregatorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateFindingAggregatorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateFindings struct {
 }
 
@@ -658,6 +738,10 @@ func addOpCreateActionTargetValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpCreateActionTarget{}, middleware.After)
 }
 
+func addOpCreateFindingAggregatorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateFindingAggregator{}, middleware.After)
+}
+
 func addOpCreateInsightValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateInsight{}, middleware.After)
 }
@@ -672,6 +756,10 @@ func addOpDeclineInvitationsValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpDeleteActionTargetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteActionTarget{}, middleware.After)
+}
+
+func addOpDeleteFindingAggregatorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteFindingAggregator{}, middleware.After)
 }
 
 func addOpDeleteInsightValidationMiddleware(stack *middleware.Stack) error {
@@ -710,6 +798,10 @@ func addOpEnableOrganizationAdminAccountValidationMiddleware(stack *middleware.S
 	return stack.Initialize.Add(&validateOpEnableOrganizationAdminAccount{}, middleware.After)
 }
 
+func addOpGetFindingAggregatorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetFindingAggregator{}, middleware.After)
+}
+
 func addOpGetInsightResultsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetInsightResults{}, middleware.After)
 }
@@ -736,6 +828,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateActionTargetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateActionTarget{}, middleware.After)
+}
+
+func addOpUpdateFindingAggregatorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateFindingAggregator{}, middleware.After)
 }
 
 func addOpUpdateFindingsValidationMiddleware(stack *middleware.Stack) error {
@@ -1364,6 +1460,21 @@ func validateOpCreateActionTargetInput(v *CreateActionTargetInput) error {
 	}
 }
 
+func validateOpCreateFindingAggregatorInput(v *CreateFindingAggregatorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateFindingAggregatorInput"}
+	if v.RegionLinkingMode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegionLinkingMode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateInsightInput(v *CreateInsightInput) error {
 	if v == nil {
 		return nil
@@ -1426,6 +1537,21 @@ func validateOpDeleteActionTargetInput(v *DeleteActionTargetInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteActionTargetInput"}
 	if v.ActionTargetArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ActionTargetArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteFindingAggregatorInput(v *DeleteFindingAggregatorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteFindingAggregatorInput"}
+	if v.FindingAggregatorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FindingAggregatorArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1569,6 +1695,21 @@ func validateOpEnableOrganizationAdminAccountInput(v *EnableOrganizationAdminAcc
 	}
 }
 
+func validateOpGetFindingAggregatorInput(v *GetFindingAggregatorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetFindingAggregatorInput"}
+	if v.FindingAggregatorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FindingAggregatorArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetInsightResultsInput(v *GetInsightResultsInput) error {
 	if v == nil {
 		return nil
@@ -1672,6 +1813,24 @@ func validateOpUpdateActionTargetInput(v *UpdateActionTargetInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateActionTargetInput"}
 	if v.ActionTargetArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ActionTargetArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateFindingAggregatorInput(v *UpdateFindingAggregatorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateFindingAggregatorInput"}
+	if v.FindingAggregatorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FindingAggregatorArn"))
+	}
+	if v.RegionLinkingMode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegionLinkingMode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists data sources in current Amazon Web Services Region; that belong to this
+// Lists data sources in current Amazon Web Services Region that belong to this
 // Amazon Web Services account.
 func (c *Client) ListDataSources(ctx context.Context, params *ListDataSourcesInput, optFns ...func(*Options)) (*ListDataSourcesOutput, error) {
 	if params == nil {

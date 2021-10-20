@@ -13,8 +13,8 @@ type AssociatedGateway struct {
 	// The ID of the associated gateway.
 	Id *string
 
-	// The ID of the account that owns the associated virtual private gateway or
-	// transit gateway.
+	// The ID of the Amazon Web Services account that owns the associated virtual
+	// private gateway or transit gateway.
 	OwnerAccount *string
 
 	// The Region where the associated gateway is located.
@@ -172,7 +172,7 @@ type Connection struct {
 	// The MAC Security (MACsec) security keys associated with the connection.
 	MacSecKeys []MacSecKey
 
-	// The ID of the account that owns the connection.
+	// The ID of the Amazon Web Services account that owns the connection.
 	OwnerAccount *string
 
 	// The name of the Direct Connect service provider associated with the connection.
@@ -186,7 +186,7 @@ type Connection struct {
 	// The name of the service provider associated with the connection.
 	ProviderName *string
 
-	// The Region where the connection is located.
+	// The Amazon Web Services Region where the connection is located.
 	Region *string
 
 	// The tags associated with the connection.
@@ -194,6 +194,18 @@ type Connection struct {
 
 	// The ID of the VLAN.
 	Vlan int32
+
+	noSmithyDocumentSerde
+}
+
+// The name and status of a customer agreement.
+type CustomerAgreement struct {
+
+	// The name of the agreement.
+	AgreementName *string
+
+	// The status of the customer agreement. This will be either signed or unsigned
+	Status *string
 
 	noSmithyDocumentSerde
 }
@@ -227,7 +239,7 @@ type DirectConnectGateway struct {
 	// and cannot pass traffic.
 	DirectConnectGatewayState DirectConnectGatewayState
 
-	// The ID of the account that owns the Direct Connect gateway.
+	// The ID of the Amazon Web Services account that owns the Direct Connect gateway.
 	OwnerAccount *string
 
 	// The error message if the state of an object failed to advance.
@@ -271,7 +283,7 @@ type DirectConnectGatewayAssociation struct {
 	// The ID of the Direct Connect gateway.
 	DirectConnectGatewayId *string
 
-	// The ID of the account that owns the associated gateway.
+	// The ID of the Amazon Web Services account that owns the associated gateway.
 	DirectConnectGatewayOwnerAccount *string
 
 	// The error message if the state of an object failed to advance.
@@ -281,10 +293,10 @@ type DirectConnectGatewayAssociation struct {
 	// interfaces.
 	VirtualGatewayId *string
 
-	// The ID of the account that owns the virtual private gateway.
+	// The ID of the Amazon Web Services account that owns the virtual private gateway.
 	VirtualGatewayOwnerAccount *string
 
-	// The Region where the virtual private gateway is located.
+	// The Amazon Web Services Region where the virtual private gateway is located.
 	//
 	// Deprecated: This member has been deprecated.
 	VirtualGatewayRegion *string
@@ -302,7 +314,7 @@ type DirectConnectGatewayAssociationProposal struct {
 	// The ID of the Direct Connect gateway.
 	DirectConnectGatewayId *string
 
-	// The ID of the account that owns the Direct Connect gateway.
+	// The ID of the Amazon Web Services account that owns the Direct Connect gateway.
 	DirectConnectGatewayOwnerAccount *string
 
 	// The existing Amazon VPC prefixes advertised to the Direct Connect gateway.
@@ -364,10 +376,10 @@ type DirectConnectGatewayAttachment struct {
 	// The ID of the virtual interface.
 	VirtualInterfaceId *string
 
-	// The ID of the account that owns the virtual interface.
+	// The ID of the Amazon Web Services account that owns the virtual interface.
 	VirtualInterfaceOwnerAccount *string
 
-	// The Region where the virtual interface is located.
+	// The Amazon Web Services Region where the virtual interface is located.
 	VirtualInterfaceRegion *string
 
 	noSmithyDocumentSerde
@@ -440,7 +452,7 @@ type Interconnect struct {
 	// The name of the service provider associated with the interconnect.
 	ProviderName *string
 
-	// The Region where the connection is located.
+	// The Amazon Web Services Region where the connection is located.
 	Region *string
 
 	// The tags associated with the interconnect.
@@ -531,13 +543,13 @@ type Lag struct {
 	// of 10.
 	NumberOfConnections int32
 
-	// The ID of the account that owns the LAG.
+	// The ID of the Amazon Web Services account that owns the LAG.
 	OwnerAccount *string
 
 	// The name of the service provider associated with the LAG.
 	ProviderName *string
 
-	// The Region where the connection is located.
+	// The Amazon Web Services Region where the connection is located.
 	Region *string
 
 	// The tags associated with the LAG.
@@ -579,7 +591,7 @@ type Location struct {
 	// the physical site of the building.
 	LocationName *string
 
-	// The Region for the location.
+	// The Amazon Web Services Region for the location.
 	Region *string
 
 	noSmithyDocumentSerde
@@ -925,6 +937,31 @@ type RouteFilterPrefix struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the virtual router.
+type RouterType struct {
+
+	// The virtual interface router platform.
+	Platform *string
+
+	// Identifies the router by a combination of vendor, platform, and software
+	// version. For example, CiscoSystemsInc-2900SeriesRouters-IOS124.
+	RouterTypeIdentifier *string
+
+	// The router software.
+	Software *string
+
+	// The vendor for the virtual interface's router.
+	Vendor *string
+
+	// The template for the virtual interface's router.
+	XsltTemplateName *string
+
+	// The MAC Security (MACsec) template for the virtual interface's router.
+	XsltTemplateNameForMacSec *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about a tag.
 type Tag struct {
 
@@ -1016,10 +1053,10 @@ type VirtualInterface struct {
 	// 9001. The default value is 1500.
 	Mtu *int32
 
-	// The ID of the account that owns the virtual interface.
+	// The ID of the Amazon Web Services account that owns the virtual interface.
 	OwnerAccount *string
 
-	// The Region where the virtual interface is located.
+	// The Amazon Web Services Region where the virtual interface is located.
 	Region *string
 
 	// The routes to be advertised to the Amazon Web Services network in this Region.

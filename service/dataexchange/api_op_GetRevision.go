@@ -44,7 +44,7 @@ type GetRevisionInput struct {
 
 type GetRevisionOutput struct {
 
-	// The ARN for the revision
+	// The ARN for the revision.
 	Arn *string
 
 	// An optional comment about the revision.

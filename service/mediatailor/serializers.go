@@ -11,6 +11,7 @@ import (
 	"github.com/aws/smithy-go/encoding/httpbinding"
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
+	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
@@ -184,6 +185,110 @@ func awsRestjson1_serializeOpDocumentCreateChannelInput(v *CreateChannelInput, v
 		if err := awsRestjson1_serializeDocument__mapOf__string(v.Tags, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpCreatePrefetchSchedule struct {
+}
+
+func (*awsRestjson1_serializeOpCreatePrefetchSchedule) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreatePrefetchSchedule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreatePrefetchScheduleInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/prefetchSchedule/{PlaybackConfigurationName}/{Name}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsCreatePrefetchScheduleInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreatePrefetchScheduleInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreatePrefetchScheduleInput(v *CreatePrefetchScheduleInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Name == nil || len(*v.Name) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
+	}
+	if v.Name != nil {
+		if err := encoder.SetURI("Name").String(*v.Name); err != nil {
+			return err
+		}
+	}
+
+	if v.PlaybackConfigurationName == nil || len(*v.PlaybackConfigurationName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member PlaybackConfigurationName must not be empty")}
+	}
+	if v.PlaybackConfigurationName != nil {
+		if err := encoder.SetURI("PlaybackConfigurationName").String(*v.PlaybackConfigurationName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreatePrefetchScheduleInput(v *CreatePrefetchScheduleInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Consumption != nil {
+		ok := object.Key("Consumption")
+		if err := awsRestjson1_serializeDocumentPrefetchConsumption(v.Consumption, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Retrieval != nil {
+		ok := object.Key("Retrieval")
+		if err := awsRestjson1_serializeDocumentPrefetchRetrieval(v.Retrieval, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StreamId != nil {
+		ok := object.Key("StreamId")
+		ok.String(*v.StreamId)
 	}
 
 	return nil
@@ -668,6 +773,73 @@ func awsRestjson1_serializeOpHttpBindingsDeletePlaybackConfigurationInput(v *Del
 	}
 	if v.Name != nil {
 		if err := encoder.SetURI("Name").String(*v.Name); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeletePrefetchSchedule struct {
+}
+
+func (*awsRestjson1_serializeOpDeletePrefetchSchedule) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeletePrefetchSchedule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeletePrefetchScheduleInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/prefetchSchedule/{PlaybackConfigurationName}/{Name}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeletePrefetchScheduleInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeletePrefetchScheduleInput(v *DeletePrefetchScheduleInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Name == nil || len(*v.Name) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
+	}
+	if v.Name != nil {
+		if err := encoder.SetURI("Name").String(*v.Name); err != nil {
+			return err
+		}
+	}
+
+	if v.PlaybackConfigurationName == nil || len(*v.PlaybackConfigurationName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member PlaybackConfigurationName must not be empty")}
+	}
+	if v.PlaybackConfigurationName != nil {
+		if err := encoder.SetURI("PlaybackConfigurationName").String(*v.PlaybackConfigurationName); err != nil {
 			return err
 		}
 	}
@@ -1303,6 +1475,73 @@ func awsRestjson1_serializeOpHttpBindingsGetPlaybackConfigurationInput(v *GetPla
 	return nil
 }
 
+type awsRestjson1_serializeOpGetPrefetchSchedule struct {
+}
+
+func (*awsRestjson1_serializeOpGetPrefetchSchedule) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetPrefetchSchedule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetPrefetchScheduleInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/prefetchSchedule/{PlaybackConfigurationName}/{Name}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetPrefetchScheduleInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetPrefetchScheduleInput(v *GetPrefetchScheduleInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Name == nil || len(*v.Name) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
+	}
+	if v.Name != nil {
+		if err := encoder.SetURI("Name").String(*v.Name); err != nil {
+			return err
+		}
+	}
+
+	if v.PlaybackConfigurationName == nil || len(*v.PlaybackConfigurationName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member PlaybackConfigurationName must not be empty")}
+	}
+	if v.PlaybackConfigurationName != nil {
+		if err := encoder.SetURI("PlaybackConfigurationName").String(*v.PlaybackConfigurationName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListAlerts struct {
 }
 
@@ -1473,6 +1712,97 @@ func awsRestjson1_serializeOpHttpBindingsListPlaybackConfigurationsInput(v *List
 
 	if v.NextToken != nil {
 		encoder.SetQuery("NextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListPrefetchSchedules struct {
+}
+
+func (*awsRestjson1_serializeOpListPrefetchSchedules) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListPrefetchSchedules) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListPrefetchSchedulesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/prefetchSchedule/{PlaybackConfigurationName}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListPrefetchSchedulesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentListPrefetchSchedulesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListPrefetchSchedulesInput(v *ListPrefetchSchedulesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.PlaybackConfigurationName == nil || len(*v.PlaybackConfigurationName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member PlaybackConfigurationName must not be empty")}
+	}
+	if v.PlaybackConfigurationName != nil {
+		if err := encoder.SetURI("PlaybackConfigurationName").String(*v.PlaybackConfigurationName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentListPrefetchSchedulesInput(v *ListPrefetchSchedulesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResults != 0 {
+		ok := object.Key("MaxResults")
+		ok.Integer(v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.StreamId != nil {
+		ok := object.Key("StreamId")
+		ok.String(*v.StreamId)
 	}
 
 	return nil
@@ -2437,6 +2767,19 @@ func awsRestjson1_serializeDocument__listOfAdBreak(v []types.AdBreak, value smit
 	return nil
 }
 
+func awsRestjson1_serializeDocument__listOfAvailMatchingCriteria(v []types.AvailMatchingCriteria, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAvailMatchingCriteria(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocument__mapOf__string(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2505,6 +2848,23 @@ func awsRestjson1_serializeDocumentAdMarkerPassthrough(v *types.AdMarkerPassthro
 	if v.Enabled {
 		ok := object.Key("Enabled")
 		ok.Boolean(v.Enabled)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAvailMatchingCriteria(v *types.AvailMatchingCriteria, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DynamicVariable != nil {
+		ok := object.Key("DynamicVariable")
+		ok.String(*v.DynamicVariable)
+	}
+
+	if len(v.Operator) > 0 {
+		ok := object.Key("Operator")
+		ok.String(string(v.Operator))
 	}
 
 	return nil
@@ -2718,6 +3078,54 @@ func awsRestjson1_serializeDocumentManifestProcessingRules(v *types.ManifestProc
 		if err := awsRestjson1_serializeDocumentAdMarkerPassthrough(v.AdMarkerPassthrough, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPrefetchConsumption(v *types.PrefetchConsumption, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AvailMatchingCriteria != nil {
+		ok := object.Key("AvailMatchingCriteria")
+		if err := awsRestjson1_serializeDocument__listOfAvailMatchingCriteria(v.AvailMatchingCriteria, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EndTime != nil {
+		ok := object.Key("EndTime")
+		ok.Double(smithytime.FormatEpochSeconds(*v.EndTime))
+	}
+
+	if v.StartTime != nil {
+		ok := object.Key("StartTime")
+		ok.Double(smithytime.FormatEpochSeconds(*v.StartTime))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPrefetchRetrieval(v *types.PrefetchRetrieval, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DynamicVariables != nil {
+		ok := object.Key("DynamicVariables")
+		if err := awsRestjson1_serializeDocument__mapOf__string(v.DynamicVariables, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EndTime != nil {
+		ok := object.Key("EndTime")
+		ok.Double(smithytime.FormatEpochSeconds(*v.EndTime))
+	}
+
+	if v.StartTime != nil {
+		ok := object.Key("StartTime")
+		ok.Double(smithytime.FormatEpochSeconds(*v.StartTime))
 	}
 
 	return nil

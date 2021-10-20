@@ -50,6 +50,26 @@ func (m *validateOpCreateChannel) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreatePrefetchSchedule struct {
+}
+
+func (*validateOpCreatePrefetchSchedule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreatePrefetchSchedule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreatePrefetchScheduleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreatePrefetchScheduleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateProgram struct {
 }
 
@@ -165,6 +185,26 @@ func (m *validateOpDeletePlaybackConfiguration) HandleInitialize(ctx context.Con
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeletePlaybackConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeletePrefetchSchedule struct {
+}
+
+func (*validateOpDeletePrefetchSchedule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePrefetchSchedule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePrefetchScheduleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePrefetchScheduleInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -370,6 +410,26 @@ func (m *validateOpGetPlaybackConfiguration) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetPrefetchSchedule struct {
+}
+
+func (*validateOpGetPrefetchSchedule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPrefetchSchedule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPrefetchScheduleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPrefetchScheduleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListAlerts struct {
 }
 
@@ -385,6 +445,26 @@ func (m *validateOpListAlerts) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListAlertsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListPrefetchSchedules struct {
+}
+
+func (*validateOpListPrefetchSchedules) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListPrefetchSchedules) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListPrefetchSchedulesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListPrefetchSchedulesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -598,6 +678,10 @@ func addOpCreateChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateChannel{}, middleware.After)
 }
 
+func addOpCreatePrefetchScheduleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreatePrefetchSchedule{}, middleware.After)
+}
+
 func addOpCreateProgramValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateProgram{}, middleware.After)
 }
@@ -620,6 +704,10 @@ func addOpDeleteChannelPolicyValidationMiddleware(stack *middleware.Stack) error
 
 func addOpDeletePlaybackConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeletePlaybackConfiguration{}, middleware.After)
+}
+
+func addOpDeletePrefetchScheduleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePrefetchSchedule{}, middleware.After)
 }
 
 func addOpDeleteProgramValidationMiddleware(stack *middleware.Stack) error {
@@ -662,8 +750,16 @@ func addOpGetPlaybackConfigurationValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpGetPlaybackConfiguration{}, middleware.After)
 }
 
+func addOpGetPrefetchScheduleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPrefetchSchedule{}, middleware.After)
+}
+
 func addOpListAlertsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAlerts{}, middleware.After)
+}
+
+func addOpListPrefetchSchedulesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListPrefetchSchedules{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -704,6 +800,41 @@ func addOpUpdateSourceLocationValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpUpdateVodSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateVodSource{}, middleware.After)
+}
+
+func validate__listOfAvailMatchingCriteria(v []types.AvailMatchingCriteria) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfAvailMatchingCriteria"}
+	for i := range v {
+		if err := validateAvailMatchingCriteria(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAvailMatchingCriteria(v *types.AvailMatchingCriteria) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AvailMatchingCriteria"}
+	if v.DynamicVariable == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DynamicVariable"))
+	}
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateHttpConfiguration(v *types.HttpConfiguration) error {
@@ -751,6 +882,41 @@ func validateHttpPackageConfigurations(v []types.HttpPackageConfiguration) error
 		if err := validateHttpPackageConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePrefetchConsumption(v *types.PrefetchConsumption) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PrefetchConsumption"}
+	if v.AvailMatchingCriteria != nil {
+		if err := validate__listOfAvailMatchingCriteria(v.AvailMatchingCriteria); err != nil {
+			invalidParams.AddNested("AvailMatchingCriteria", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePrefetchRetrieval(v *types.PrefetchRetrieval) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PrefetchRetrieval"}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -863,6 +1029,38 @@ func validateOpCreateChannelInput(v *CreateChannelInput) error {
 	}
 	if len(v.PlaybackMode) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("PlaybackMode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreatePrefetchScheduleInput(v *CreatePrefetchScheduleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreatePrefetchScheduleInput"}
+	if v.Consumption == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Consumption"))
+	} else if v.Consumption != nil {
+		if err := validatePrefetchConsumption(v.Consumption); err != nil {
+			invalidParams.AddNested("Consumption", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.PlaybackConfigurationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PlaybackConfigurationName"))
+	}
+	if v.Retrieval == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Retrieval"))
+	} else if v.Retrieval != nil {
+		if err := validatePrefetchRetrieval(v.Retrieval); err != nil {
+			invalidParams.AddNested("Retrieval", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -986,6 +1184,24 @@ func validateOpDeletePlaybackConfigurationInput(v *DeletePlaybackConfigurationIn
 	invalidParams := smithy.InvalidParamsError{Context: "DeletePlaybackConfigurationInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeletePrefetchScheduleInput(v *DeletePrefetchScheduleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePrefetchScheduleInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.PlaybackConfigurationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PlaybackConfigurationName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1156,6 +1372,24 @@ func validateOpGetPlaybackConfigurationInput(v *GetPlaybackConfigurationInput) e
 	}
 }
 
+func validateOpGetPrefetchScheduleInput(v *GetPrefetchScheduleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPrefetchScheduleInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.PlaybackConfigurationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PlaybackConfigurationName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListAlertsInput(v *ListAlertsInput) error {
 	if v == nil {
 		return nil
@@ -1163,6 +1397,21 @@ func validateOpListAlertsInput(v *ListAlertsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListAlertsInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListPrefetchSchedulesInput(v *ListPrefetchSchedulesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListPrefetchSchedulesInput"}
+	if v.PlaybackConfigurationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PlaybackConfigurationName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

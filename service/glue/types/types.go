@@ -2948,7 +2948,9 @@ type RecrawlPolicy struct {
 	// Specifies whether to crawl the entire dataset again or to crawl only folders
 	// that were added since the last crawler run. A value of CRAWL_EVERYTHING
 	// specifies crawling the entire dataset again. A value of CRAWL_NEW_FOLDERS_ONLY
-	// specifies crawling only folders that were added since the last crawler run.
+	// specifies crawling only folders that were added since the last crawler run. A
+	// value of CRAWL_EVENT_MODE specifies crawling only the changes identified by
+	// Amazon S3 events.
 	RecrawlBehavior RecrawlBehavior
 
 	noSmithyDocumentSerde
@@ -3024,6 +3026,13 @@ type S3Target struct {
 	// The name of a connection which allows a job or crawler to access data in Amazon
 	// S3 within an Amazon Virtual Private Cloud environment (Amazon VPC).
 	ConnectionName *string
+
+	// A valid Amazon dead-letter SQS ARN. For example,
+	// arn:aws:sqs:region:account:deadLetterQueue.
+	DlqEventQueueArn *string
+
+	// A valid Amazon SQS ARN. For example, arn:aws:sqs:region:account:sqs.
+	EventQueueArn *string
 
 	// A list of glob patterns used to exclude from the crawl. For more information,
 	// see Catalog Tables with a Crawler

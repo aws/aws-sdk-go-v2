@@ -279,6 +279,12 @@ var defaultPartitions = endpoints.Partitions{
 					Region: "us-iso-east-1",
 				},
 			},
+			"us-iso-west-1": endpoints.Endpoint{
+				Hostname: "api.ecr.us-iso-west-1.c2s.ic.gov",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-iso-west-1",
+				},
+			},
 		},
 	},
 	{

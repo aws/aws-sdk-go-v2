@@ -61,13 +61,14 @@ type Channel struct {
 	//
 	// * STANDARD: Multiple qualities
 	// are generated from the original input, to automatically give viewers the best
-	// experience for their devices and network conditions. Vertical resolution can be
-	// up to 1080 and bitrate can be up to 8.5 Mbps.
+	// experience for their devices and network conditions. Resolution can be up to
+	// 1080p and bitrate can be up to 8.5 Mbps. Audio is transcoded only for renditions
+	// 360p and below; above that, audio is passed through.
 	//
-	// * BASIC: Amazon IVS delivers the
-	// original input to viewers. The viewer’s video-quality choice is limited to the
-	// original input. Vertical resolution can be up to 480 and bitrate can be up to
-	// 1.5 Mbps.
+	// * BASIC: Amazon IVS
+	// delivers the original input to viewers. The viewer’s video-quality choice is
+	// limited to the original input. Resolution can be up to 480p and bitrate can be
+	// up to 1.5 Mbps.
 	Type ChannelType
 
 	noSmithyDocumentSerde
@@ -122,8 +123,7 @@ type PlaybackKeyPair struct {
 	// Key-pair identifier.
 	Fingerprint *string
 
-	// An arbitrary string (a nickname) assigned to a playback key pair that helps the
-	// customer identify that resource. The value does not need to be unique.
+	// Playback-key-pair name. The value does not need to be unique.
 	Name *string
 
 	// Array of 1-50 maps, each of the form string:string (key:value).
@@ -138,8 +138,7 @@ type PlaybackKeyPairSummary struct {
 	// Key-pair ARN.
 	Arn *string
 
-	// An arbitrary string (a nickname) assigned to a playback key pair that helps the
-	// customer identify that resource. The value does not need to be unique.
+	// Playback-key-pair name. The value does not need to be unique.
 	Name *string
 
 	// Array of 1-50 maps, each of the form string:string (key:value).
@@ -168,8 +167,7 @@ type RecordingConfiguration struct {
 	// This member is required.
 	State RecordingConfigurationState
 
-	// An arbitrary string (a nickname) assigned to a recording configuration that
-	// helps the customer identify that resource. The value does not need to be unique.
+	// Recording-configuration name. The value does not need to be unique.
 	Name *string
 
 	// Array of 1-50 maps, each of the form string:string (key:value).
@@ -198,8 +196,7 @@ type RecordingConfigurationSummary struct {
 	// This member is required.
 	State RecordingConfigurationState
 
-	// An arbitrary string (a nickname) assigned to a recording configuration that
-	// helps the customer identify that resource. The value does not need to be unique.
+	// Recording-configuration name. The value does not need to be unique.
 	Name *string
 
 	// Array of 1-50 maps, each of the form string:string (key:value).
@@ -232,14 +229,16 @@ type Stream struct {
 	// URL of the master playlist, required by the video player to play the HLS stream.
 	PlaybackUrl *string
 
-	// ISO-8601 formatted timestamp of the stream’s start.
+	// Time of the stream’s start. This is an ISO 8601 timestamp returned as a string.
 	StartTime *time.Time
 
 	// The stream’s state.
 	State StreamState
 
-	// Number of current viewers of the stream. A value of -1 indicates that the
-	// request timed out; in this case, retry.
+	// A count of concurrent views of the stream. Typically, a new view appears in
+	// viewerCount within 15 seconds of when video playback starts and a view is
+	// removed from viewerCount within 1 minute of when video playback ends. A value of
+	// -1 indicates that the request timed out; in this case, retry.
 	ViewerCount int64
 
 	noSmithyDocumentSerde
@@ -287,14 +286,16 @@ type StreamSummary struct {
 	// The stream’s health.
 	Health StreamHealth
 
-	// ISO-8601 formatted timestamp of the stream’s start.
+	// Time of the stream’s start. This is an ISO 8601 timestamp returned as a string.
 	StartTime *time.Time
 
 	// The stream’s state.
 	State StreamState
 
-	// Number of current viewers of the stream. A value of -1 indicates that the
-	// request timed out; in this case, retry.
+	// A count of concurrent views of the stream. Typically, a new view appears in
+	// viewerCount within 15 seconds of when video playback starts and a view is
+	// removed from viewerCount within 1 minute of when video playback ends. A value of
+	// -1 indicates that the request timed out; in this case, retry.
 	ViewerCount int64
 
 	noSmithyDocumentSerde

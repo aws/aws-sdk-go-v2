@@ -101,6 +101,41 @@ type Alert struct {
 	noSmithyDocumentSerde
 }
 
+// MediaTailor only places (consumes) prefetched ads if the ad break meets the
+// criteria defined by the dynamic variables. This gives you granular control over
+// which ad break to place the prefetched ads into. As an example, let's say that
+// you set DynamicVariable to scte.event_id and Operator to EQUALS, and your
+// playback configuration has an ADS URL of
+// https://my.ads.server.com/path?&podId=[scte.avail_num]&event=[scte.event_id]&duration=[session.avail_duration_secs].
+// And the prefetch request to the ADS contains these values
+// https://my.ads.server.com/path?&podId=3&event=my-awesome-event&duration=30.
+// MediaTailor will only insert the prefetched ads into the ad break if has a SCTE
+// marker with an event id of my-awesome-event, since it must match the event id
+// that MediaTailor uses to query the ADS. You can specify up to five
+// AvailMatchingCriteria. If you specify multiple AvailMatchingCriteria,
+// MediaTailor combines them to match using a logical AND. You can model logical OR
+// combinations by creating multiple prefetch schedules.
+type AvailMatchingCriteria struct {
+
+	// The dynamic variable(s) that MediaTailor should use as avail matching criteria.
+	// MediaTailor only places the prefetched ads into the avail if the avail matches
+	// the criteria defined by the dynamic variable. For information about dynamic
+	// variables, see Using dynamic ad variables
+	// (https://docs.aws.amazon.com/mediatailor/latest/ug/variables.html) in the
+	// MediaTailor User Guide. You can include up to 100 dynamic variables.
+	//
+	// This member is required.
+	DynamicVariable *string
+
+	// For the DynamicVariable specified in AvailMatchingCriteria, the Operator that is
+	// used for the comparison.
+	//
+	// This member is required.
+	Operator Operator
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for avail suppression, also known as ad suppression. For more
 // information about ad suppression, see Ad Suppression
 // (https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html).
@@ -492,6 +527,99 @@ type PlaybackConfiguration struct {
 	// The URL prefix for the parent manifest for the stream, minus the asset ID. The
 	// maximum length is 512 characters.
 	VideoContentSourceUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// A complex type that contains settings that determine how and when that
+// MediaTailor places prefetched ads into upcoming ad breaks.
+type PrefetchConsumption struct {
+
+	// The time when MediaTailor no longer considers the prefetched ads for use in an
+	// ad break. MediaTailor automatically deletes prefetch schedules no less than
+	// seven days after the end time. If you'd like to manually delete the prefetch
+	// schedule, you can call DeletePrefetchSchedule.
+	//
+	// This member is required.
+	EndTime *time.Time
+
+	// If you only want MediaTailor to insert prefetched ads into avails (ad breaks)
+	// that match specific dynamic variables, such as scte.event_id, set the avail
+	// matching criteria.
+	AvailMatchingCriteria []AvailMatchingCriteria
+
+	// The time when prefetched ads are considered for use in an ad break. If you don't
+	// specify StartTime, the prefetched ads are available after MediaTailor retrives
+	// them from the ad decision server.
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// A complex type that contains settings governing when MediaTailor prefetches ads,
+// and which dynamic variables that MediaTailor includes in the request to the ad
+// decision server.
+type PrefetchRetrieval struct {
+
+	// The time when prefetch retrieval ends for the ad break. Prefetching will be
+	// attempted for manifest requests that occur at or before this time.
+	//
+	// This member is required.
+	EndTime *time.Time
+
+	// The dynamic variables to use for substitution during prefetch requests to the ad
+	// decision server (ADS). You intially configure dynamic variables
+	// (https://docs.aws.amazon.com/mediatailor/latest/ug/variables.html) for the ADS
+	// URL when you set up your playback configuration. When you specify
+	// DynamicVariables for prefetch retrieval, MediaTailor includes the dynamic
+	// variables in the request to the ADS.
+	DynamicVariables map[string]string
+
+	// The time when prefetch retrievals can start for this break. Ad prefetching will
+	// be attempted for manifest requests that occur at or after this time. Defaults to
+	// the current time. If not specified, the prefetch retrieval starts as soon as
+	// possible.
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// A complex type that contains prefetch schedule information.
+type PrefetchSchedule struct {
+
+	// The Amazon Resource Name (ARN) of the prefetch schedule.
+	//
+	// This member is required.
+	Arn *string
+
+	// Consumption settings determine how, and when, MediaTailor places the prefetched
+	// ads into ad breaks. Ad consumption occurs within a span of time that you define,
+	// called a consumption window. You can designate which ad breaks that MediaTailor
+	// fills with prefetch ads by setting avail matching criteria.
+	//
+	// This member is required.
+	Consumption *PrefetchConsumption
+
+	// The name of the prefetch schedule. The name must be unique among all prefetch
+	// schedules that are associated with the specified playback configuration.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the playback configuration to create the prefetch schedule for.
+	//
+	// This member is required.
+	PlaybackConfigurationName *string
+
+	// A complex type that contains settings for prefetch retrieval from the ad
+	// decision server (ADS).
+	//
+	// This member is required.
+	Retrieval *PrefetchRetrieval
+
+	// An optional stream identifier that you can specify in order to prefetch for
+	// multiple streams that use the same playback configuration.
+	StreamId *string
 
 	noSmithyDocumentSerde
 }

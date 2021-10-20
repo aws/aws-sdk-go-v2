@@ -134,7 +134,7 @@ type DisassociateConnectionFromLagOutput struct {
 	// The MAC Security (MACsec) security keys associated with the connection.
 	MacSecKeys []types.MacSecKey
 
-	// The ID of the account that owns the connection.
+	// The ID of the Amazon Web Services account that owns the connection.
 	OwnerAccount *string
 
 	// The name of the Direct Connect service provider associated with the connection.
@@ -148,7 +148,7 @@ type DisassociateConnectionFromLagOutput struct {
 	// The name of the service provider associated with the connection.
 	ProviderName *string
 
-	// The Region where the connection is located.
+	// The Amazon Web Services Region where the connection is located.
 	Region *string
 
 	// The tags associated with the connection.

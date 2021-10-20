@@ -50,7 +50,10 @@ type UpdateNFSFileShareInput struct {
 	// This member is required.
 	FileShareARN *string
 
-	// specifies refresh cache information for the file share.
+	// The Amazon Resource Name (ARN) of the storage used for audit logs.
+	AuditDestinationARN *string
+
+	// Specifies refresh cache information for the file share.
 	CacheAttributes *types.CacheAttributes
 
 	// The list of clients that are allowed to access the S3 File Gateway. The list
@@ -63,7 +66,7 @@ type UpdateNFSFileShareInput struct {
 	DefaultStorageClass *string
 
 	// The name of the file share. Optional. FileShareName must be set if an S3 prefix
-	// name is set in LocationARN.
+	// name is set in LocationARN, or if an access point or access point alias is used.
 	FileShareName *string
 
 	// A value that enables guessing of the MIME type for uploaded objects based on

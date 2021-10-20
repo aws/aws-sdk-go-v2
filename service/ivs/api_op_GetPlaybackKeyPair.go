@@ -44,7 +44,7 @@ type GetPlaybackKeyPairInput struct {
 
 type GetPlaybackKeyPairOutput struct {
 
-	// A key pair used to sign and validate a playback authorization token.
+	//
 	KeyPair *types.PlaybackKeyPair
 
 	// Metadata pertaining to the operation's result.

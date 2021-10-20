@@ -34,6 +34,10 @@ func (c *Client) DescribeSSLPolicies(ctx context.Context, params *DescribeSSLPol
 
 type DescribeSSLPoliciesInput struct {
 
+	// The type of load balancer. The default lists the SSL policies for all load
+	// balancers.
+	LoadBalancerType types.LoadBalancerTypeEnum
+
 	// The marker for the next set of results. (You received this marker from a
 	// previous call.)
 	Marker *string

@@ -12,9 +12,9 @@ import (
 )
 
 // Creates a new recording configuration, used to enable recording to Amazon S3.
-// Known issue: In the us-east-1 region, if you use the AWS CLI to create a
-// recording configuration, it returns success even if the S3 bucket is in a
-// different region. In this case, the state of the recording configuration is
+// Known issue: In the us-east-1 region, if you use the Amazon Web Services CLI to
+// create a recording configuration, it returns success even if the S3 bucket is in
+// a different region. In this case, the state of the recording configuration is
 // CREATE_FAILED (instead of ACTIVE). (In other regions, the CLI correctly returns
 // failure if the bucket is in a different region.) Workaround: Ensure that your S3
 // bucket is in the same region as the recording configuration. If you create a
@@ -44,8 +44,7 @@ type CreateRecordingConfigurationInput struct {
 	// This member is required.
 	DestinationConfiguration *types.DestinationConfiguration
 
-	// An arbitrary string (a nickname) that helps the customer identify that resource.
-	// The value does not need to be unique.
+	// Recording-configuration name. The value does not need to be unique.
 	Name *string
 
 	// Array of 1-50 maps, each of the form string:string (key:value).
@@ -56,7 +55,7 @@ type CreateRecordingConfigurationInput struct {
 
 type CreateRecordingConfigurationOutput struct {
 
-	// An object representing a configuration to record a channel stream.
+	//
 	RecordingConfiguration *types.RecordingConfiguration
 
 	// Metadata pertaining to the operation's result.

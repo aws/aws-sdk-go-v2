@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provisions a private virtual interface to be owned by the specified account.
-// Virtual interfaces created using this action must be confirmed by the owner
-// using ConfirmPrivateVirtualInterface. Until then, the virtual interface is in
-// the Confirming state and is not available to handle traffic.
+// Provisions a private virtual interface to be owned by the specified Amazon Web
+// Services account. Virtual interfaces created using this action must be confirmed
+// by the owner using ConfirmPrivateVirtualInterface. Until then, the virtual
+// interface is in the Confirming state and is not available to handle traffic.
 func (c *Client) AllocatePrivateVirtualInterface(ctx context.Context, params *AllocatePrivateVirtualInterfaceInput, optFns ...func(*Options)) (*AllocatePrivateVirtualInterfaceOutput, error) {
 	if params == nil {
 		params = &AllocatePrivateVirtualInterfaceInput{}
@@ -42,7 +42,8 @@ type AllocatePrivateVirtualInterfaceInput struct {
 	// This member is required.
 	NewPrivateVirtualInterfaceAllocation *types.NewPrivateVirtualInterfaceAllocation
 
-	// The ID of the account that owns the virtual private interface.
+	// The ID of the Amazon Web Services account that owns the virtual private
+	// interface.
 	//
 	// This member is required.
 	OwnerAccount *string
@@ -102,10 +103,10 @@ type AllocatePrivateVirtualInterfaceOutput struct {
 	// 9001. The default value is 1500.
 	Mtu *int32
 
-	// The ID of the account that owns the virtual interface.
+	// The ID of the Amazon Web Services account that owns the virtual interface.
 	OwnerAccount *string
 
-	// The Region where the virtual interface is located.
+	// The Amazon Web Services Region where the virtual interface is located.
 	Region *string
 
 	// The routes to be advertised to the Amazon Web Services network in this Region.

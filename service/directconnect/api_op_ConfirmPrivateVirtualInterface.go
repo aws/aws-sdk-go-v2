@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Accepts ownership of a private virtual interface created by another account.
-// After the virtual interface owner makes this call, the virtual interface is
-// created and attached to the specified virtual private gateway or Direct Connect
-// gateway, and is made available to handle traffic.
+// Accepts ownership of a private virtual interface created by another Amazon Web
+// Services account. After the virtual interface owner makes this call, the virtual
+// interface is created and attached to the specified virtual private gateway or
+// Direct Connect gateway, and is made available to handle traffic.
 func (c *Client) ConfirmPrivateVirtualInterface(ctx context.Context, params *ConfirmPrivateVirtualInterfaceInput, optFns ...func(*Options)) (*ConfirmPrivateVirtualInterfaceOutput, error) {
 	if params == nil {
 		params = &ConfirmPrivateVirtualInterfaceInput{}

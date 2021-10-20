@@ -49,7 +49,7 @@ type CreateRevisionInput struct {
 
 type CreateRevisionOutput struct {
 
-	// The ARN for the revision
+	// The ARN for the revision.
 	Arn *string
 
 	// An optional comment about the revision.

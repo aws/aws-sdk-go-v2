@@ -27209,6 +27209,28 @@ func awsEc2query_serializeDocumentDeregisterInstanceTagAttributeRequest(v *types
 	return nil
 }
 
+func awsEc2query_serializeDocumentDestinationOptionsRequest(v *types.DestinationOptionsRequest, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if len(v.FileFormat) > 0 {
+		objectKey := object.Key("FileFormat")
+		objectKey.String(string(v.FileFormat))
+	}
+
+	if v.HiveCompatiblePartitions != nil {
+		objectKey := object.Key("HiveCompatiblePartitions")
+		objectKey.Boolean(*v.HiveCompatiblePartitions)
+	}
+
+	if v.PerHourPartition != nil {
+		objectKey := object.Key("PerHourPartition")
+		objectKey.Boolean(*v.PerHourPartition)
+	}
+
+	return nil
+}
+
 func awsEc2query_serializeDocumentDhcpOptionsIdStringList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
@@ -35559,6 +35581,13 @@ func awsEc2query_serializeOpDocumentCreateFlowLogsInput(v *CreateFlowLogsInput, 
 	if v.DeliverLogsPermissionArn != nil {
 		objectKey := object.Key("DeliverLogsPermissionArn")
 		objectKey.String(*v.DeliverLogsPermissionArn)
+	}
+
+	if v.DestinationOptions != nil {
+		objectKey := object.Key("DestinationOptions")
+		if err := awsEc2query_serializeDocumentDestinationOptionsRequest(v.DestinationOptions, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.DryRun != nil {

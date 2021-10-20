@@ -11,7 +11,9 @@ import (
 )
 
 // Deletes the mobile device access override for the given WorkMail organization,
-// user, and device.
+// user, and device. Deleting already deleted and non-existing overrides does not
+// produce an error. In those cases, the service sends back an HTTP 200 response
+// with an empty HTTP body.
 func (c *Client) DeleteMobileDeviceAccessOverride(ctx context.Context, params *DeleteMobileDeviceAccessOverrideInput, optFns ...func(*Options)) (*DeleteMobileDeviceAccessOverrideOutput, error) {
 	if params == nil {
 		params = &DeleteMobileDeviceAccessOverrideInput{}

@@ -14,7 +14,7 @@ import (
 // Adds an external destination to your SQL-based Kinesis Data Analytics
 // application. If you want Kinesis Data Analytics to deliver data from an
 // in-application stream within your application to an external destination (such
-// as an Kinesis data stream, a Kinesis Data Firehose delivery stream, or an AWS
+// as an Kinesis data stream, a Kinesis Data Firehose delivery stream, or an Amazon
 // Lambda function), you add the relevant configuration to your application using
 // this operation. You can configure one or more outputs for your application. Each
 // output configuration maps an in-application stream and an external destination.
@@ -56,7 +56,7 @@ type AddApplicationOutputInput struct {
 	// An array of objects, each describing one output configuration. In the output
 	// configuration, you specify the name of an in-application stream, a destination
 	// (that is, a Kinesis data stream, a Kinesis Data Firehose delivery stream, or an
-	// AWS Lambda function), and record the formation to use when writing to the
+	// Amazon Lambda function), and record the formation to use when writing to the
 	// destination.
 	//
 	// This member is required.

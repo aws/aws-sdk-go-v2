@@ -882,6 +882,9 @@ func awsAwsjson11_deserializeOpErrorCreateApplication(response *smithyhttp.Respo
 	case strings.EqualFold("TooManyTagsException", errorCode):
 		return awsAwsjson11_deserializeErrorTooManyTagsException(response, errorBody)
 
+	case strings.EqualFold("UnsupportedOperationException", errorCode):
+		return awsAwsjson11_deserializeErrorUnsupportedOperationException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -2468,6 +2471,9 @@ func awsAwsjson11_deserializeOpErrorDiscoverInputSchema(response *smithyhttp.Res
 
 	case strings.EqualFold("UnableToDetectSchemaException", errorCode):
 		return awsAwsjson11_deserializeErrorUnableToDetectSchemaException(response, errorBody)
+
+	case strings.EqualFold("UnsupportedOperationException", errorCode):
+		return awsAwsjson11_deserializeErrorUnsupportedOperationException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{

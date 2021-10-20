@@ -43,7 +43,7 @@ type ListApplicationVersionsInput struct {
 
 	// If a previous invocation of this operation returned a pagination token, pass it
 	// into this value to retrieve the next set of results. For more information about
-	// pagination, see Using the AWS Command Line Interface's Pagination Options
+	// pagination, see Using the Amazon Command Line Interface's Pagination Options
 	// (https://docs.aws.amazon.com/cli/latest/userguide/pagination.html).
 	NextToken *string
 
@@ -61,7 +61,7 @@ type ListApplicationVersionsOutput struct {
 	// The pagination token for the next set of results, or null if there are no
 	// additional results. To retrieve the next set of items, pass this token into a
 	// subsequent invocation of this operation. For more information about pagination,
-	// see Using the AWS Command Line Interface's Pagination Options
+	// see Using the Amazon Command Line Interface's Pagination Options
 	// (https://docs.aws.amazon.com/cli/latest/userguide/pagination.html).
 	NextToken *string
 

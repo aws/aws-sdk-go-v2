@@ -42,7 +42,7 @@ type CreateTapesInput struct {
 
 	// The unique Amazon Resource Name (ARN) that represents the gateway to associate
 	// the virtual tapes with. Use the ListGateways operation to return a list of
-	// gateways for your account and Region.
+	// gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string

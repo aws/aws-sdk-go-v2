@@ -11,13 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provisions a transit virtual interface to be owned by the specified account. Use
-// this type of interface to connect a transit gateway to your Direct Connect
-// gateway. The owner of a connection provisions a transit virtual interface to be
-// owned by the specified account. After you create a transit virtual interface, it
-// must be confirmed by the owner using ConfirmTransitVirtualInterface. Until this
-// step has been completed, the transit virtual interface is in the requested state
-// and is not available to handle traffic.
+// Provisions a transit virtual interface to be owned by the specified Amazon Web
+// Services account. Use this type of interface to connect a transit gateway to
+// your Direct Connect gateway. The owner of a connection provisions a transit
+// virtual interface to be owned by the specified Amazon Web Services account.
+// After you create a transit virtual interface, it must be confirmed by the owner
+// using ConfirmTransitVirtualInterface. Until this step has been completed, the
+// transit virtual interface is in the requested state and is not available to
+// handle traffic.
 func (c *Client) AllocateTransitVirtualInterface(ctx context.Context, params *AllocateTransitVirtualInterfaceInput, optFns ...func(*Options)) (*AllocateTransitVirtualInterfaceOutput, error) {
 	if params == nil {
 		params = &AllocateTransitVirtualInterfaceInput{}
@@ -45,7 +46,8 @@ type AllocateTransitVirtualInterfaceInput struct {
 	// This member is required.
 	NewTransitVirtualInterfaceAllocation *types.NewTransitVirtualInterfaceAllocation
 
-	// The ID of the account that owns the transit virtual interface.
+	// The ID of the Amazon Web Services account that owns the transit virtual
+	// interface.
 	//
 	// This member is required.
 	OwnerAccount *string

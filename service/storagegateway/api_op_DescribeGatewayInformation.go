@@ -34,7 +34,7 @@ func (c *Client) DescribeGatewayInformation(ctx context.Context, params *Describ
 type DescribeGatewayInformationInput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Region.
+	// return a list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -56,14 +56,14 @@ type DescribeGatewayInformationOutput struct {
 	// The ID of the Amazon EC2 instance that was used to launch the gateway.
 	Ec2InstanceId *string
 
-	// The Region where the Amazon EC2 instance is located.
+	// The Amazon Web Services Region where the Amazon EC2 instance is located.
 	Ec2InstanceRegion *string
 
 	// The type of endpoint for your gateway. Valid Values: STANDARD | FIPS
 	EndpointType *string
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Region.
+	// return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// Specifies the size of the gateway's metadata cache.

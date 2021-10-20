@@ -670,6 +670,7 @@ const (
 	ResourceTypeEFSAccessPoint                   ResourceType = "AWS::EFS::AccessPoint"
 	ResourceTypeEFSFileSystem                    ResourceType = "AWS::EFS::FileSystem"
 	ResourceTypeEKSCluster                       ResourceType = "AWS::EKS::Cluster"
+	ResourceTypeOpenSearchDomain                 ResourceType = "AWS::OpenSearch::Domain"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -785,6 +786,7 @@ func (ResourceType) Values() []ResourceType {
 		"AWS::EFS::AccessPoint",
 		"AWS::EFS::FileSystem",
 		"AWS::EKS::Cluster",
+		"AWS::OpenSearch::Domain",
 	}
 }
 

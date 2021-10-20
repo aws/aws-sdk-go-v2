@@ -690,6 +690,26 @@ func (m *validateOpDescribeLoa) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeRouterConfiguration struct {
+}
+
+func (*validateOpDescribeRouterConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeRouterConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeRouterConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeRouterConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeTags struct {
 }
 
@@ -845,6 +865,26 @@ func (m *validateOpUpdateConnection) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateConnectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateDirectConnectGateway struct {
+}
+
+func (*validateOpUpdateDirectConnectGateway) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateDirectConnectGateway) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateDirectConnectGatewayInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateDirectConnectGatewayInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1026,6 +1066,10 @@ func addOpDescribeLoaValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeLoa{}, middleware.After)
 }
 
+func addOpDescribeRouterConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeRouterConfiguration{}, middleware.After)
+}
+
 func addOpDescribeTagsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeTags{}, middleware.After)
 }
@@ -1056,6 +1100,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateConnectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateConnection{}, middleware.After)
+}
+
+func addOpUpdateDirectConnectGatewayValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateDirectConnectGateway{}, middleware.After)
 }
 
 func addOpUpdateLagValidationMiddleware(stack *middleware.Stack) error {
@@ -1858,6 +1906,21 @@ func validateOpDescribeLoaInput(v *DescribeLoaInput) error {
 	}
 }
 
+func validateOpDescribeRouterConfigurationInput(v *DescribeRouterConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeRouterConfigurationInput"}
+	if v.VirtualInterfaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VirtualInterfaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeTagsInput(v *DescribeTagsInput) error {
 	if v == nil {
 		return nil
@@ -1986,6 +2049,24 @@ func validateOpUpdateConnectionInput(v *UpdateConnectionInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateConnectionInput"}
 	if v.ConnectionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConnectionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateDirectConnectGatewayInput(v *UpdateDirectConnectGatewayInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDirectConnectGatewayInput"}
+	if v.DirectConnectGatewayId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectConnectGatewayId"))
+	}
+	if v.NewDirectConnectGatewayName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NewDirectConnectGatewayName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

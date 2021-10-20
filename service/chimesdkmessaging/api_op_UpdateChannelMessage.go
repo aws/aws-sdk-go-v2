@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -61,6 +62,9 @@ type UpdateChannelMessageOutput struct {
 
 	// The ID string of the message being updated.
 	MessageId *string
+
+	// The status of the message update.
+	Status *types.ChannelMessageStatusStructure
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

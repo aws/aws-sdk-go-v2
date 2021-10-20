@@ -126,6 +126,9 @@ func awsAwsquery_deserializeOpErrorBuildSuggesters(response *smithyhttp.Response
 	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResourceNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsquery_deserializeErrorValidationException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -366,6 +369,9 @@ func awsAwsquery_deserializeOpErrorDefineAnalysisScheme(response *smithyhttp.Res
 	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResourceNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsquery_deserializeErrorValidationException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -485,6 +491,9 @@ func awsAwsquery_deserializeOpErrorDefineExpression(response *smithyhttp.Respons
 
 	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsquery_deserializeErrorValidationException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -606,6 +615,9 @@ func awsAwsquery_deserializeOpErrorDefineIndexField(response *smithyhttp.Respons
 	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResourceNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsquery_deserializeErrorValidationException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -726,6 +738,9 @@ func awsAwsquery_deserializeOpErrorDefineSuggester(response *smithyhttp.Response
 	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResourceNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsquery_deserializeErrorValidationException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -842,6 +857,9 @@ func awsAwsquery_deserializeOpErrorDeleteAnalysisScheme(response *smithyhttp.Res
 
 	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsquery_deserializeErrorValidationException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -1071,6 +1089,9 @@ func awsAwsquery_deserializeOpErrorDeleteExpression(response *smithyhttp.Respons
 	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResourceNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsquery_deserializeErrorValidationException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -1188,6 +1209,9 @@ func awsAwsquery_deserializeOpErrorDeleteIndexField(response *smithyhttp.Respons
 	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResourceNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsquery_deserializeErrorValidationException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -1304,6 +1328,9 @@ func awsAwsquery_deserializeOpErrorDeleteSuggester(response *smithyhttp.Response
 
 	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsquery_deserializeErrorValidationException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -2457,6 +2484,9 @@ func awsAwsquery_deserializeOpErrorIndexDocuments(response *smithyhttp.Response,
 	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResourceNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsquery_deserializeErrorValidationException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -2937,6 +2967,9 @@ func awsAwsquery_deserializeOpErrorUpdateScalingParameters(response *smithyhttp.
 	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResourceNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsquery_deserializeErrorValidationException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -3056,6 +3089,9 @@ func awsAwsquery_deserializeOpErrorUpdateServiceAccessPolicies(response *smithyh
 
 	case strings.EqualFold("ResourceNotFound", errorCode):
 		return awsAwsquery_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsquery_deserializeErrorValidationException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{

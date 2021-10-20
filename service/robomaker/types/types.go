@@ -30,10 +30,17 @@ type BatchPolicy struct {
 // Compute information for the simulation job.
 type Compute struct {
 
+	// Compute type information for the simulation job.
+	ComputeType ComputeType
+
+	// Compute GPU unit limit for the simulation job. It is the same as the number of
+	// GPUs allocated to the SimulationJob.
+	GpuUnitLimit *int32
+
 	// The simulation unit limit. Your simulation is allocated CPU and memory
 	// proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu
 	// and 2GB of memory. You are only billed for the SU utilization you consume up to
-	// the maximim value provided. The default is 15.
+	// the maximum value provided. The default is 15.
 	SimulationUnitLimit *int32
 
 	noSmithyDocumentSerde
@@ -42,10 +49,17 @@ type Compute struct {
 // Compute information for the simulation job
 type ComputeResponse struct {
 
+	// Compute type response information for the simulation job.
+	ComputeType ComputeType
+
+	// Compute GPU unit limit for the simulation job. It is the same as the number of
+	// GPUs allocated to the SimulationJob.
+	GpuUnitLimit *int32
+
 	// The simulation unit limit. Your simulation is allocated CPU and memory
 	// proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu
 	// and 2GB of memory. You are only billed for the SU utilization you consume up to
-	// the maximim value provided. The default is 15.
+	// the maximum value provided. The default is 15.
 	SimulationUnitLimit *int32
 
 	noSmithyDocumentSerde
@@ -53,6 +67,15 @@ type ComputeResponse struct {
 
 // Information about a data source.
 type DataSource struct {
+
+	// The location where your files are mounted in the container image. If you've
+	// specified the type of the data source as an Archive, you must provide an Amazon
+	// S3 object key to your archive. The object key must point to either a .zip or
+	// .tar.gz file. If you've specified the type of the data source as a Prefix, you
+	// provide the Amazon S3 prefix that points to the files that you are using for
+	// your data source. If you've specified the type of the data source as a File, you
+	// provide the Amazon S3 path to the file that you're using as your data source.
+	Destination *string
 
 	// The name of the data source.
 	Name *string
@@ -62,6 +85,12 @@ type DataSource struct {
 
 	// The list of S3 keys identifying the data source files.
 	S3Keys []S3KeyOutput
+
+	// The data type for the data source that you're using for your container image or
+	// simulation job. You can use this field to specify whether your data source is an
+	// Archive, an Amazon S3 prefix, or a file. If you don't specify a field, the
+	// default value is File.
+	Type DataSourceType
 
 	noSmithyDocumentSerde
 }
@@ -83,6 +112,21 @@ type DataSourceConfig struct {
 	//
 	// This member is required.
 	S3Keys []string
+
+	// The location where your files are mounted in the container image. If you've
+	// specified the type of the data source as an Archive, you must provide an Amazon
+	// S3 object key to your archive. The object key must point to either a .zip or
+	// .tar.gz file. If you've specified the type of the data source as a Prefix, you
+	// provide the Amazon S3 prefix that points to the files that you are using for
+	// your data source. If you've specified the type of the data source as a File, you
+	// provide the Amazon S3 path to the file that you're using as your data source.
+	Destination *string
+
+	// The data type for the data source that you're using for your container image or
+	// simulation job. You can use this field to specify whether your data source is an
+	// Archive, an Amazon S3 prefix, or a file. If you don't specify a field, the
+	// default value is File.
+	Type DataSourceType
 
 	noSmithyDocumentSerde
 }
@@ -279,18 +323,20 @@ type Fleet struct {
 // Information about a launch configuration.
 type LaunchConfig struct {
 
-	// The launch file name.
-	//
-	// This member is required.
-	LaunchFile *string
-
-	// The package name.
-	//
-	// This member is required.
-	PackageName *string
+	// If you've specified General as the value for your RobotSoftwareSuite, you can
+	// use this field to specify a list of commands for your container image. If you've
+	// specified SimulationRuntime as the value for your SimulationSoftwareSuite, you
+	// can use this field to specify a list of commands for your container image.
+	Command []string
 
 	// The environment variables for the application launch.
 	EnvironmentVariables map[string]string
+
+	// The launch file name.
+	LaunchFile *string
+
+	// The package name.
+	PackageName *string
 
 	// The port forwarding configuration.
 	PortForwardingConfig *PortForwardingConfig
@@ -813,6 +859,9 @@ type SimulationJobSummary struct {
 
 	// The Amazon Resource Name (ARN) of the simulation job.
 	Arn *string
+
+	// The compute type for the simulation job summary.
+	ComputeType ComputeType
 
 	// The names of the data sources.
 	DataSourceNames []string

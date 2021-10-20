@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets summary information about live streams in your account, in the AWS region
-// where the API request is processed.
+// Gets summary information about live streams in your account, in the Amazon Web
+// Services region where the API request is processed.
 func (c *Client) ListStreams(ctx context.Context, params *ListStreamsInput, optFns ...func(*Options)) (*ListStreamsOutput, error) {
 	if params == nil {
 		params = &ListStreamsInput{}

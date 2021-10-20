@@ -70,15 +70,18 @@ type CreateFlowLogsInput struct {
 	// s3, do not specify DeliverLogsPermissionArn or LogGroupName.
 	DeliverLogsPermissionArn *string
 
+	// The destination options.
+	DestinationOptions *types.DestinationOptionsRequest
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
 
-	// Specifies the destination to which the flow log data is to be published. Flow
-	// log data can be published to a CloudWatch Logs log group or an Amazon S3 bucket.
-	// The value specified for this parameter depends on the value specified for
+	// The destination to which the flow log data is to be published. Flow log data can
+	// be published to a CloudWatch Logs log group or an Amazon S3 bucket. The value
+	// specified for this parameter depends on the value specified for
 	// LogDestinationType. If LogDestinationType is not specified or cloud-watch-logs,
 	// specify the Amazon Resource Name (ARN) of the CloudWatch Logs log group. For
 	// example, to publish to a log group called my-logs, specify
@@ -92,11 +95,11 @@ type CreateFlowLogsInput struct {
 	// This is a reserved term.
 	LogDestination *string
 
-	// Specifies the type of destination to which the flow log data is to be published.
-	// Flow log data can be published to CloudWatch Logs or Amazon S3. To publish flow
-	// log data to CloudWatch Logs, specify cloud-watch-logs. To publish flow log data
-	// to Amazon S3, specify s3. If you specify LogDestinationType as s3, do not
-	// specify DeliverLogsPermissionArn or LogGroupName. Default: cloud-watch-logs
+	// The type of destination to which the flow log data is to be published. Flow log
+	// data can be published to CloudWatch Logs or Amazon S3. To publish flow log data
+	// to CloudWatch Logs, specify cloud-watch-logs. To publish flow log data to Amazon
+	// S3, specify s3. If you specify LogDestinationType as s3, do not specify
+	// DeliverLogsPermissionArn or LogGroupName. Default: cloud-watch-logs
 	LogDestinationType types.LogDestinationType
 
 	// The fields to include in the flow log record, in the order in which they should

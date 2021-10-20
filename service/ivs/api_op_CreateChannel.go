@@ -54,13 +54,14 @@ type CreateChannelInput struct {
 	//
 	// * STANDARD: Multiple qualities
 	// are generated from the original input, to automatically give viewers the best
-	// experience for their devices and network conditions. Vertical resolution can be
-	// up to 1080 and bitrate can be up to 8.5 Mbps.
+	// experience for their devices and network conditions. Resolution can be up to
+	// 1080p and bitrate can be up to 8.5 Mbps. Audio is transcoded only for renditions
+	// 360p and below; above that, audio is passed through.
 	//
-	// * BASIC: Amazon IVS delivers the
-	// original input to viewers. The viewer’s video-quality choice is limited to the
-	// original input. Vertical resolution can be up to 480 and bitrate can be up to
-	// 1.5 Mbps.
+	// * BASIC: Amazon IVS
+	// delivers the original input to viewers. The viewer’s video-quality choice is
+	// limited to the original input. Resolution can be up to 480p and bitrate can be
+	// up to 1.5 Mbps.
 	Type types.ChannelType
 
 	noSmithyDocumentSerde
@@ -68,10 +69,10 @@ type CreateChannelInput struct {
 
 type CreateChannelOutput struct {
 
-	// Object specifying a channel.
+	//
 	Channel *types.Channel
 
-	// Object specifying a stream key.
+	//
 	StreamKey *types.StreamKey
 
 	// Metadata pertaining to the operation's result.

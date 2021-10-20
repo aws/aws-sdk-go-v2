@@ -6,7 +6,8 @@ type AssetType string
 
 // Enum values for AssetType
 const (
-	AssetTypeS3Snapshot AssetType = "S3_SNAPSHOT"
+	AssetTypeS3Snapshot        AssetType = "S3_SNAPSHOT"
+	AssetTypeRedshiftDataShare AssetType = "REDSHIFT_DATA_SHARE"
 )
 
 // Values returns all known values for AssetType. Note that this can be expanded in
@@ -15,6 +16,7 @@ const (
 func (AssetType) Values() []AssetType {
 	return []AssetType{
 		"S3_SNAPSHOT",
+		"REDSHIFT_DATA_SHARE",
 	}
 }
 
@@ -68,8 +70,9 @@ type JobErrorLimitName string
 
 // Enum values for JobErrorLimitName
 const (
-	JobErrorLimitNameAssetsPerRevision JobErrorLimitName = "Assets per revision"
-	JobErrorLimitNameAssetSizeInGb     JobErrorLimitName = "Asset size in GB"
+	JobErrorLimitNameAssetsPerRevision                        JobErrorLimitName = "Assets per revision"
+	JobErrorLimitNameAssetSizeInGb                            JobErrorLimitName = "Asset size in GB"
+	JobErrorLimitNameAmazonRedshiftDatashareAssetsPerRevision JobErrorLimitName = "Amazon Redshift datashare assets per revision"
 )
 
 // Values returns all known values for JobErrorLimitName. Note that this can be
@@ -79,6 +82,7 @@ func (JobErrorLimitName) Values() []JobErrorLimitName {
 	return []JobErrorLimitName{
 		"Assets per revision",
 		"Asset size in GB",
+		"Amazon Redshift datashare assets per revision",
 	}
 }
 
@@ -106,21 +110,25 @@ type LimitName string
 
 // Enum values for LimitName
 const (
-	LimitNameProductsPerAccount                                   LimitName = "Products per account"
-	LimitNameDataSetsPerAccount                                   LimitName = "Data sets per account"
-	LimitNameDataSetsPerProduct                                   LimitName = "Data sets per product"
-	LimitNameRevisionsPerDataSet                                  LimitName = "Revisions per data set"
-	LimitNameAssetsPerRevision                                    LimitName = "Assets per revision"
-	LimitNameAssetsPerImportJobFromAmazonS3                       LimitName = "Assets per import job from Amazon S3"
-	LimitNameAssetPerExportJobFromAmazonS3                        LimitName = "Asset per export job from Amazon S3"
-	LimitNameAssetSizeInGb                                        LimitName = "Asset size in GB"
-	LimitNameConcurrentInProgressJobsToImportAssetsFromAmazonS3   LimitName = "Concurrent in progress jobs to import assets from Amazon S3"
-	LimitNameConcurrentInProgressJobsToImportAssetsFromASignedUrl LimitName = "Concurrent in progress jobs to import assets from a signed URL"
-	LimitNameConcurrentInProgressJobsToExportAssetsToAmazonS3     LimitName = "Concurrent in progress jobs to export assets to Amazon S3"
-	LimitNameConcurrentInProgressJobsToExportAssetsToASignedUrl   LimitName = "Concurrent in progress jobs to export assets to a signed URL"
-	LimitNameConcurrentInProgressJobsToExportRevisionsToAmazonS3  LimitName = "Concurrent in progress jobs to export revisions to Amazon S3"
-	LimitNameEventActionsPerAccount                               LimitName = "Event actions per account"
-	LimitNameAutoExportEventActionsPerDataSet                     LimitName = "Auto export event actions per data set"
+	LimitNameProductsPerAccount                                                 LimitName = "Products per account"
+	LimitNameDataSetsPerAccount                                                 LimitName = "Data sets per account"
+	LimitNameDataSetsPerProduct                                                 LimitName = "Data sets per product"
+	LimitNameRevisionsPerDataSet                                                LimitName = "Revisions per data set"
+	LimitNameAssetsPerRevision                                                  LimitName = "Assets per revision"
+	LimitNameAssetsPerImportJobFromAmazonS3                                     LimitName = "Assets per import job from Amazon S3"
+	LimitNameAssetPerExportJobFromAmazonS3                                      LimitName = "Asset per export job from Amazon S3"
+	LimitNameAssetSizeInGb                                                      LimitName = "Asset size in GB"
+	LimitNameConcurrentInProgressJobsToExportAssetsToAmazonS3                   LimitName = "Concurrent in progress jobs to export assets to Amazon S3"
+	LimitNameConcurrentInProgressJobsToExportAssetsToASignedUrl                 LimitName = "Concurrent in progress jobs to export assets to a signed URL"
+	LimitNameConcurrentInProgressJobsToImportAssetsFromAmazonS3                 LimitName = "Concurrent in progress jobs to import assets from Amazon S3"
+	LimitNameConcurrentInProgressJobsToImportAssetsFromASignedUrl               LimitName = "Concurrent in progress jobs to import assets from a signed URL"
+	LimitNameConcurrentInProgressJobsToExportRevisionsToAmazonS3                LimitName = "Concurrent in progress jobs to export revisions to Amazon S3"
+	LimitNameEventActionsPerAccount                                             LimitName = "Event actions per account"
+	LimitNameAutoExportEventActionsPerDataSet                                   LimitName = "Auto export event actions per data set"
+	LimitNameAmazonRedshiftDatashareAssetsPerImportJobFromRedshift              LimitName = "Amazon Redshift datashare assets per import job from Redshift"
+	LimitNameConcurrentInProgressJobsToImportAssetsFromAmazonRedshiftDatashares LimitName = "Concurrent in progress jobs to import assets from Amazon Redshift datashares"
+	LimitNameRevisionsPerAmazonRedshiftDatashareDataSet                         LimitName = "Revisions per Amazon Redshift datashare data set"
+	LimitNameAmazonRedshiftDatashareAssetsPerRevision                           LimitName = "Amazon Redshift datashare assets per revision"
 )
 
 // Values returns all known values for LimitName. Note that this can be expanded in
@@ -136,13 +144,17 @@ func (LimitName) Values() []LimitName {
 		"Assets per import job from Amazon S3",
 		"Asset per export job from Amazon S3",
 		"Asset size in GB",
-		"Concurrent in progress jobs to import assets from Amazon S3",
-		"Concurrent in progress jobs to import assets from a signed URL",
 		"Concurrent in progress jobs to export assets to Amazon S3",
 		"Concurrent in progress jobs to export assets to a signed URL",
+		"Concurrent in progress jobs to import assets from Amazon S3",
+		"Concurrent in progress jobs to import assets from a signed URL",
 		"Concurrent in progress jobs to export revisions to Amazon S3",
 		"Event actions per account",
 		"Auto export event actions per data set",
+		"Amazon Redshift datashare assets per import job from Redshift",
+		"Concurrent in progress jobs to import assets from Amazon Redshift datashares",
+		"Revisions per Amazon Redshift datashare data set",
+		"Amazon Redshift datashare assets per revision",
 	}
 }
 
@@ -236,11 +248,12 @@ type Type string
 
 // Enum values for Type
 const (
-	TypeImportAssetsFromS3       Type = "IMPORT_ASSETS_FROM_S3"
-	TypeImportAssetFromSignedUrl Type = "IMPORT_ASSET_FROM_SIGNED_URL"
-	TypeExportAssetsToS3         Type = "EXPORT_ASSETS_TO_S3"
-	TypeExportAssetToSignedUrl   Type = "EXPORT_ASSET_TO_SIGNED_URL"
-	TypeExportRevisionsToS3      Type = "EXPORT_REVISIONS_TO_S3"
+	TypeImportAssetsFromS3                 Type = "IMPORT_ASSETS_FROM_S3"
+	TypeImportAssetFromSignedUrl           Type = "IMPORT_ASSET_FROM_SIGNED_URL"
+	TypeExportAssetsToS3                   Type = "EXPORT_ASSETS_TO_S3"
+	TypeExportAssetToSignedUrl             Type = "EXPORT_ASSET_TO_SIGNED_URL"
+	TypeExportRevisionsToS3                Type = "EXPORT_REVISIONS_TO_S3"
+	TypeImportAssetsFromRedshiftDataShares Type = "IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES"
 )
 
 // Values returns all known values for Type. Note that this can be expanded in the
@@ -253,5 +266,6 @@ func (Type) Values() []Type {
 		"EXPORT_ASSETS_TO_S3",
 		"EXPORT_ASSET_TO_SIGNED_URL",
 		"EXPORT_REVISIONS_TO_S3",
+		"IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES",
 	}
 }

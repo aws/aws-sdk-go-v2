@@ -49,7 +49,7 @@ type DescribeAccountSettingsOutput struct {
 	// though it's technically not an account by itself. Instead, it's a subscription
 	// to the Amazon QuickSight service for your Amazon Web Services account. The
 	// edition that you subscribe to applies to Amazon QuickSight in every Amazon Web
-	// Services Region; where you use it.
+	// Services Region where you use it.
 	AccountSettings *types.AccountSettings
 
 	// The Amazon Web Services request ID for this operation.

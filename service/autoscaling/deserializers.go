@@ -2766,6 +2766,9 @@ func awsAwsquery_deserializeOpErrorDescribeLoadBalancers(response *smithyhttp.Re
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
+	case strings.EqualFold("InvalidNextToken", errorCode):
+		return awsAwsquery_deserializeErrorInvalidNextToken(response, errorBody)
+
 	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 
@@ -2874,6 +2877,9 @@ func awsAwsquery_deserializeOpErrorDescribeLoadBalancerTargetGroups(response *sm
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
+	case strings.EqualFold("InvalidNextToken", errorCode):
+		return awsAwsquery_deserializeErrorInvalidNextToken(response, errorBody)
+
 	case strings.EqualFold("ResourceContention", errorCode):
 		return awsAwsquery_deserializeErrorResourceContentionFault(response, errorBody)
 

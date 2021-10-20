@@ -2984,6 +2984,24 @@ func (FileSourceConvert608To708) Values() []FileSourceConvert608To708 {
 	}
 }
 
+type FileSourceTimeDeltaUnits string
+
+// Enum values for FileSourceTimeDeltaUnits
+const (
+	FileSourceTimeDeltaUnitsSeconds      FileSourceTimeDeltaUnits = "SECONDS"
+	FileSourceTimeDeltaUnitsMilliseconds FileSourceTimeDeltaUnits = "MILLISECONDS"
+)
+
+// Values returns all known values for FileSourceTimeDeltaUnits. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FileSourceTimeDeltaUnits) Values() []FileSourceTimeDeltaUnits {
+	return []FileSourceTimeDeltaUnits{
+		"SECONDS",
+		"MILLISECONDS",
+	}
+}
+
 type FontScript string
 
 // Enum values for FontScript

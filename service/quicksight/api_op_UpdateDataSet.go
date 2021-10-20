@@ -35,7 +35,7 @@ type UpdateDataSetInput struct {
 	AwsAccountId *string
 
 	// The ID for the dataset that you want to update. This ID is unique per Amazon Web
-	// Services Region; for each Amazon Web Services account.
+	// Services Region for each Amazon Web Services account.
 	//
 	// This member is required.
 	DataSetId *string
@@ -89,7 +89,7 @@ type UpdateDataSetOutput struct {
 	Arn *string
 
 	// The ID for the dataset that you want to create. This ID is unique per Amazon Web
-	// Services Region; for each Amazon Web Services account.
+	// Services Region for each Amazon Web Services account.
 	DataSetId *string
 
 	// The ARN for the ingestion, which is triggered as a result of dataset creation if

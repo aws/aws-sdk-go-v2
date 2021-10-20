@@ -120,13 +120,13 @@ type DeleteLagOutput struct {
 	// of 10.
 	NumberOfConnections int32
 
-	// The ID of the account that owns the LAG.
+	// The ID of the Amazon Web Services account that owns the LAG.
 	OwnerAccount *string
 
 	// The name of the service provider associated with the LAG.
 	ProviderName *string
 
-	// The Region where the connection is located.
+	// The Amazon Web Services Region where the connection is located.
 	Region *string
 
 	// The tags associated with the LAG.

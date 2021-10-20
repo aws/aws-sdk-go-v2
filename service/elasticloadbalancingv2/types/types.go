@@ -843,6 +843,9 @@ type SslPolicy struct {
 	// The protocols.
 	SslProtocols []string
 
+	// The supported load balancers.
+	SupportedLoadBalancerTypes []string
+
 	noSmithyDocumentSerde
 }
 

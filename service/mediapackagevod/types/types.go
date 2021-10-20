@@ -266,6 +266,10 @@ type HlsPackage struct {
 	// An HTTP Live Streaming (HLS) encryption configuration.
 	Encryption *HlsEncryption
 
+	// When enabled, MediaPackage passes through digital video broadcasting (DVB)
+	// subtitles into the output.
+	IncludeDvbSubtitles bool
+
 	// Duration (in seconds) of each fragment. Actual fragments will be rounded to the
 	// nearest multiple of the source fragment duration.
 	SegmentDurationSeconds int32

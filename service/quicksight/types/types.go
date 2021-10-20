@@ -9,7 +9,7 @@ import (
 
 // The Amazon QuickSight customizations associated with your Amazon Web Services
 // account or a Amazon QuickSight namespace in a specific Amazon Web Services
-// Region;.
+// Region.
 type AccountCustomization struct {
 
 	// The default theme for this Amazon QuickSight subscription.
@@ -61,10 +61,10 @@ type AdHocFilteringOption struct {
 	noSmithyDocumentSerde
 }
 
-// The parameters for Elasticsearch.
+// The parameters for OpenSearch.
 type AmazonElasticsearchParameters struct {
 
-	// The Elasticsearch domain.
+	// The OpenSearch domain.
 	//
 	// This member is required.
 	Domain *string
@@ -860,7 +860,7 @@ type DataSource struct {
 	// The time that this data source was created.
 	CreatedTime *time.Time
 
-	// The ID of the data source. This ID is unique per Amazon Web Services Region; for
+	// The ID of the data source. This ID is unique per Amazon Web Services Region for
 	// each Amazon Web Services account.
 	DataSourceId *string
 
@@ -955,7 +955,7 @@ type DataSourceParameters interface {
 	isDataSourceParameters()
 }
 
-// The parameters for Elasticsearch.
+// The parameters for OpenSearch.
 type DataSourceParametersMemberAmazonElasticsearchParameters struct {
 	Value AmazonElasticsearchParameters
 
@@ -1668,7 +1668,7 @@ type NamespaceInfoV2 struct {
 	// The namespace ARN.
 	Arn *string
 
-	// The namespace Amazon Web Services Region;.
+	// The namespace Amazon Web Services Region.
 	CapacityRegion *string
 
 	// The creation status of a namespace that is not yet completely created.
@@ -2052,6 +2052,9 @@ type RowInfo struct {
 	// The number of rows that were ingested.
 	RowsIngested int64
 
+	// The total number of rows in the dataset.
+	TotalRowsInDataset int64
+
 	noSmithyDocumentSerde
 }
 
@@ -2369,7 +2372,7 @@ type Template struct {
 	// The display name of the template.
 	Name *string
 
-	// The ID for the template. This is unique per Amazon Web Services Region; for each
+	// The ID for the template. This is unique per Amazon Web Services Region for each
 	// Amazon Web Services account.
 	TemplateId *string
 
@@ -2464,7 +2467,7 @@ type TemplateSummary struct {
 	// A display name for the template.
 	Name *string
 
-	// The ID of the template. This ID is unique per Amazon Web Services Region; for
+	// The ID of the template. This ID is unique per Amazon Web Services Region for
 	// each Amazon Web Services account.
 	TemplateId *string
 
@@ -2640,7 +2643,7 @@ type ThemeSummary struct {
 	// the display name for the theme.
 	Name *string
 
-	// The ID of the theme. This ID is unique per Amazon Web Services Region; for each
+	// The ID of the theme. This ID is unique per Amazon Web Services Region for each
 	// Amazon Web Services account.
 	ThemeId *string
 

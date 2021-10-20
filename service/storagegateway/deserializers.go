@@ -9830,6 +9830,120 @@ func awsAwsjson11_deserializeOpErrorUpdateSMBFileShareVisibility(response *smith
 	}
 }
 
+type awsAwsjson11_deserializeOpUpdateSMBLocalGroups struct {
+}
+
+func (*awsAwsjson11_deserializeOpUpdateSMBLocalGroups) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpUpdateSMBLocalGroups) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorUpdateSMBLocalGroups(response, &metadata)
+	}
+	output := &UpdateSMBLocalGroupsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentUpdateSMBLocalGroupsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorUpdateSMBLocalGroups(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("InternalServerError", errorCode):
+		return awsAwsjson11_deserializeErrorInternalServerError(response, errorBody)
+
+	case strings.EqualFold("InvalidGatewayRequestException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidGatewayRequestException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpUpdateSMBSecurityStrategy struct {
 }
 
@@ -11582,6 +11696,11 @@ func awsAwsjson11_deserializeDocumentFileSystemAssociationInfo(v **types.FileSys
 				sv.FileSystemAssociationStatus = ptr.String(jtv)
 			}
 
+		case "FileSystemAssociationStatusDetails":
+			if err := awsAwsjson11_deserializeDocumentFileSystemAssociationStatusDetails(&sv.FileSystemAssociationStatusDetails, value); err != nil {
+				return err
+			}
+
 		case "GatewayARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11638,6 +11757,80 @@ func awsAwsjson11_deserializeDocumentFileSystemAssociationInfoList(v *[]types.Fi
 		var col types.FileSystemAssociationInfo
 		destAddr := &col
 		if err := awsAwsjson11_deserializeDocumentFileSystemAssociationInfo(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentFileSystemAssociationStatusDetail(v **types.FileSystemAssociationStatusDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FileSystemAssociationStatusDetail
+	if *v == nil {
+		sv = &types.FileSystemAssociationStatusDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ErrorCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FileSystemAssociationSyncErrorCode to be of type string, got %T instead", value)
+				}
+				sv.ErrorCode = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentFileSystemAssociationStatusDetails(v *[]types.FileSystemAssociationStatusDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.FileSystemAssociationStatusDetail
+	if *v == nil {
+		cv = []types.FileSystemAssociationStatusDetail{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.FileSystemAssociationStatusDetail
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentFileSystemAssociationStatusDetail(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr
@@ -12228,6 +12421,15 @@ func awsAwsjson11_deserializeDocumentNFSFileShareInfo(v **types.NFSFileShareInfo
 
 	for key, value := range shape {
 		switch key {
+		case "AuditDestinationARN":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AuditDestinationARN to be of type string, got %T instead", value)
+				}
+				sv.AuditDestinationARN = ptr.String(jtv)
+			}
+
 		case "BucketRegion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12933,6 +13135,42 @@ func awsAwsjson11_deserializeDocumentSMBFileShareInfoList(v *[]types.SMBFileShar
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSMBLocalGroups(v **types.SMBLocalGroups, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SMBLocalGroups
+	if *v == nil {
+		sv = &types.SMBLocalGroups{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "GatewayAdmins":
+			if err := awsAwsjson11_deserializeDocumentUserList(&sv.GatewayAdmins, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -16709,6 +16947,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeSMBSettingsOutput(v **DescribeSMB
 				sv.SMBGuestPasswordSet = ptr.Bool(jtv)
 			}
 
+		case "SMBLocalGroups":
+			if err := awsAwsjson11_deserializeDocumentSMBLocalGroups(&sv.SMBLocalGroups, value); err != nil {
+				return err
+			}
+
 		case "SMBSecurityStrategy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18766,6 +19009,46 @@ func awsAwsjson11_deserializeOpDocumentUpdateSMBFileShareVisibilityOutput(v **Up
 	var sv *UpdateSMBFileShareVisibilityOutput
 	if *v == nil {
 		sv = &UpdateSMBFileShareVisibilityOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "GatewayARN":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GatewayARN to be of type string, got %T instead", value)
+				}
+				sv.GatewayARN = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentUpdateSMBLocalGroupsOutput(v **UpdateSMBLocalGroupsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *UpdateSMBLocalGroupsOutput
+	if *v == nil {
+		sv = &UpdateSMBLocalGroupsOutput{}
 	} else {
 		sv = *v
 	}

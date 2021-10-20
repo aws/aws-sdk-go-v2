@@ -920,6 +920,10 @@ func validateCatalogConfigurationUpdate(v *types.CatalogConfigurationUpdate) err
 	invalidParams := smithy.InvalidParamsError{Context: "CatalogConfigurationUpdate"}
 	if v.GlueDataCatalogConfigurationUpdate == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GlueDataCatalogConfigurationUpdate"))
+	} else if v.GlueDataCatalogConfigurationUpdate != nil {
+		if err := validateGlueDataCatalogConfigurationUpdate(v.GlueDataCatalogConfigurationUpdate); err != nil {
+			invalidParams.AddNested("GlueDataCatalogConfigurationUpdate", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1103,25 +1107,6 @@ func validateDeployAsApplicationConfiguration(v *types.DeployAsApplicationConfig
 	}
 }
 
-func validateDeployAsApplicationConfigurationUpdate(v *types.DeployAsApplicationConfigurationUpdate) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DeployAsApplicationConfigurationUpdate"}
-	if v.S3ContentLocationUpdate == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("S3ContentLocationUpdate"))
-	} else if v.S3ContentLocationUpdate != nil {
-		if err := validateS3ContentBaseLocationUpdate(v.S3ContentLocationUpdate); err != nil {
-			invalidParams.AddNested("S3ContentLocationUpdate", err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateDestinationSchema(v *types.DestinationSchema) error {
 	if v == nil {
 		return nil
@@ -1209,6 +1194,21 @@ func validateGlueDataCatalogConfiguration(v *types.GlueDataCatalogConfiguration)
 	invalidParams := smithy.InvalidParamsError{Context: "GlueDataCatalogConfiguration"}
 	if v.DatabaseARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatabaseARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGlueDataCatalogConfigurationUpdate(v *types.GlueDataCatalogConfigurationUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GlueDataCatalogConfigurationUpdate"}
+	if v.DatabaseARNUpdate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseARNUpdate"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2015,21 +2015,6 @@ func validateS3ContentBaseLocation(v *types.S3ContentBaseLocation) error {
 	}
 }
 
-func validateS3ContentBaseLocationUpdate(v *types.S3ContentBaseLocationUpdate) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "S3ContentBaseLocationUpdate"}
-	if v.BucketARNUpdate == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BucketARNUpdate"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateS3ContentLocation(v *types.S3ContentLocation) error {
 	if v == nil {
 		return nil
@@ -2307,11 +2292,6 @@ func validateZeppelinApplicationConfigurationUpdate(v *types.ZeppelinApplication
 	if v.CatalogConfigurationUpdate != nil {
 		if err := validateCatalogConfigurationUpdate(v.CatalogConfigurationUpdate); err != nil {
 			invalidParams.AddNested("CatalogConfigurationUpdate", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.DeployAsApplicationConfigurationUpdate != nil {
-		if err := validateDeployAsApplicationConfigurationUpdate(v.DeployAsApplicationConfigurationUpdate); err != nil {
-			invalidParams.AddNested("DeployAsApplicationConfigurationUpdate", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.CustomArtifactsConfigurationUpdate != nil {

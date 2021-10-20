@@ -150,6 +150,7 @@ var defaultPartitions = endpoints.Partitions{
 			"us-iso-east-1": endpoints.Endpoint{
 				Protocols: []string{"http", "https"},
 			},
+			"us-iso-west-1": endpoints.Endpoint{},
 		},
 	},
 	{

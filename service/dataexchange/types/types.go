@@ -7,9 +7,10 @@ import (
 	"time"
 )
 
+// What occurs after a certain event.
 type Action struct {
 
-	// Details of the operation to be performed by the job.
+	// Details for the export revision to Amazon S3 action.
 	ExportRevisionToS3 *AutoExportRevisionToS3RequestDetails
 
 	noSmithyDocumentSerde
@@ -34,7 +35,11 @@ type AssetDestinationEntry struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the asset.
 type AssetDetails struct {
+
+	// The Amazon Redshift datashare that is the asset.
+	RedshiftDataShareAsset *RedshiftDataShareAsset
 
 	// The S3 object that is the asset.
 	S3SnapshotAsset *S3SnapshotAsset
@@ -42,10 +47,11 @@ type AssetDetails struct {
 	noSmithyDocumentSerde
 }
 
-// An asset in AWS Data Exchange is a piece of data that can be stored as an S3
-// object. The asset can be a structured data file, an image file, or some other
-// data file. When you create an import job for your files, you create an asset in
-// AWS Data Exchange for each of those files.
+// An asset in AWS Data Exchange is a piece of data. The asset can be a structured
+// data file, an image file, or some other data file that can be stored as an S3
+// object, or an Amazon Redshift datashare (Preview). When you create an import job
+// for your files, you create an asset in AWS Data Exchange for each of those
+// files.
 type AssetEntry struct {
 
 	// The ARN for the asset.
@@ -53,13 +59,12 @@ type AssetEntry struct {
 	// This member is required.
 	Arn *string
 
-	// Information about the asset, including its size.
+	// Information about the asset.
 	//
 	// This member is required.
 	AssetDetails *AssetDetails
 
-	// The type of file your data is stored in. Currently, the supported asset type is
-	// S3_SNAPSHOT.
+	// The type of asset that is added to a data set.
 	//
 	// This member is required.
 	AssetType AssetType
@@ -147,9 +152,7 @@ type AutoExportRevisionToS3RequestDetails struct {
 	// This member is required.
 	RevisionDestination *AutoExportRevisionDestinationEntry
 
-	// Encryption configuration of the export job. Includes the encryption type in
-	// addition to the AWS KMS key. The KMS key is only necessary if you chose the KMS
-	// encryption. type.
+	// Encryption configuration for the auto export job.
 	Encryption *ExportServerSideEncryption
 
 	noSmithyDocumentSerde
@@ -163,8 +166,7 @@ type DataSetEntry struct {
 	// This member is required.
 	Arn *string
 
-	// The type of file your data is stored in. Currently, the supported asset type is
-	// S3_SNAPSHOT.
+	// The type of asset that is added to a data set.
 	//
 	// This member is required.
 	AssetType AssetType
@@ -212,16 +214,22 @@ type DataSetEntry struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the job error.
 type Details struct {
+
+	// Information about the job error.
 	ImportAssetFromSignedUrlJobErrorDetails *ImportAssetFromSignedUrlJobErrorDetails
 
-	// The list of sources for the assets.
+	// Information about the job error.
 	ImportAssetsFromS3JobErrorDetails []AssetSourceEntry
 
 	noSmithyDocumentSerde
 }
 
+// What occurs to start an action.
 type Event struct {
+
+	// What occurs to start the revision publish action.
 	RevisionPublished *RevisionPublished
 
 	noSmithyDocumentSerde
@@ -236,7 +244,7 @@ type EventActionEntry struct {
 	// This member is required.
 	Action *Action
 
-	// The ARN for the event action.
+	// The Amazon Resource Name (ARN) for the event action.
 	//
 	// This member is required.
 	Arn *string
@@ -395,6 +403,9 @@ type ExportRevisionsToS3ResponseDetails struct {
 	// Encryption configuration of the export job.
 	Encryption *ExportServerSideEncryption
 
+	// The Amazon Resource Name (ARN) of the event action.
+	EventActionArn *string
+
 	noSmithyDocumentSerde
 }
 
@@ -416,11 +427,10 @@ type ExportServerSideEncryption struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the job error.
 type ImportAssetFromSignedUrlJobErrorDetails struct {
 
-	// The name of the asset. When importing from Amazon S3, the S3 object key is used
-	// as the asset name. When exporting to Amazon S3, the asset name is used as
-	// default target S3 object key.
+	// Information about the job error.
 	//
 	// This member is required.
 	AssetName *string
@@ -460,7 +470,7 @@ type ImportAssetFromSignedUrlRequestDetails struct {
 // other information.
 type ImportAssetFromSignedUrlResponseDetails struct {
 
-	// The name for the asset associated with this import response.
+	// The name for the asset associated with this import job.
 	//
 	// This member is required.
 	AssetName *string
@@ -484,6 +494,48 @@ type ImportAssetFromSignedUrlResponseDetails struct {
 
 	// The time and date at which the signed URL expires, in ISO 8601 format.
 	SignedUrlExpiresAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Details from an import from Amazon Redshift datashare request.
+type ImportAssetsFromRedshiftDataSharesRequestDetails struct {
+
+	// A list of Amazon Redshift datashare assets.
+	//
+	// This member is required.
+	AssetSources []RedshiftDataShareAssetSourceEntry
+
+	// The unique identifier for the data set associated with this import job.
+	//
+	// This member is required.
+	DataSetId *string
+
+	// The unique identifier for the revision associated with this import job.
+	//
+	// This member is required.
+	RevisionId *string
+
+	noSmithyDocumentSerde
+}
+
+// Details from an import from Amazon Redshift datashare response.
+type ImportAssetsFromRedshiftDataSharesResponseDetails struct {
+
+	// A list of Amazon Redshift datashare asset sources.
+	//
+	// This member is required.
+	AssetSources []RedshiftDataShareAssetSourceEntry
+
+	// The unique identifier for the data set associated with this import job.
+	//
+	// This member is required.
+	DataSetId *string
+
+	// The unique identifier for the revision associated with this import job.
+	//
+	// This member is required.
+	RevisionId *string
 
 	noSmithyDocumentSerde
 }
@@ -591,6 +643,7 @@ type JobError struct {
 	// This member is required.
 	Message *string
 
+	// The details about the job error.
 	Details *Details
 
 	// The name of the limit that was reached.
@@ -608,10 +661,35 @@ type JobError struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the origin of the data set.
 type OriginDetails struct {
 
+	// The product ID of the origin of the data set.
+	//
 	// This member is required.
 	ProductId *string
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon Redshift datashare asset.
+type RedshiftDataShareAsset struct {
+
+	// The Amazon Resource Name (ARN) of the datashare asset.
+	//
+	// This member is required.
+	Arn *string
+
+	noSmithyDocumentSerde
+}
+
+// The source of the Amazon Redshift datashare asset.
+type RedshiftDataShareAssetSourceEntry struct {
+
+	// The Amazon Resource Name (ARN) of the datashare asset.
+	//
+	// This member is required.
+	DataShareArn *string
 
 	noSmithyDocumentSerde
 }
@@ -630,6 +708,9 @@ type RequestDetails struct {
 
 	// Details about the import from signed URL request.
 	ImportAssetFromSignedUrl *ImportAssetFromSignedUrlRequestDetails
+
+	// Details from an import from Amazon Redshift datashare request.
+	ImportAssetsFromRedshiftDataShares *ImportAssetsFromRedshiftDataSharesRequestDetails
 
 	// Details about the import from Amazon S3 request.
 	ImportAssetsFromS3 *ImportAssetsFromS3RequestDetails
@@ -651,6 +732,9 @@ type ResponseDetails struct {
 
 	// Details for the import from signed URL response.
 	ImportAssetFromSignedUrl *ImportAssetFromSignedUrlResponseDetails
+
+	// Details from an import from Amazon Redshift datashare response.
+	ImportAssetsFromRedshiftDataShares *ImportAssetsFromRedshiftDataSharesResponseDetails
 
 	// Details for the import from Amazon S3 response.
 	ImportAssetsFromS3 *ImportAssetsFromS3ResponseDetails
@@ -728,9 +812,10 @@ type RevisionEntry struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the published revision.
 type RevisionPublished struct {
 
-	// A unique identifier.
+	// The data set ID of the published revision.
 	//
 	// This member is required.
 	DataSetId *string

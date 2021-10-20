@@ -39,7 +39,7 @@ type GetRecordingConfigurationInput struct {
 
 type GetRecordingConfigurationOutput struct {
 
-	// An object representing a configuration to record a channel stream.
+	//
 	RecordingConfiguration *types.RecordingConfiguration
 
 	// Metadata pertaining to the operation's result.

@@ -10,14 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Inserts metadata into the active stream of the specified channel. A maximum of 5
-// requests per second per channel is allowed, each with a maximum 1 KB payload.
+// Inserts metadata into the active stream of the specified channel. At most 5
+// requests per second per channel are allowed, each with a maximum 1 KB payload.
 // (If 5 TPS is not sufficient for your needs, we recommend batching your data into
-// a single PutMetadata call.) Also see Embedding Metadata
-// (https://docs.aws.amazon.com/ivs/latest/userguide/metadata.html)
-// (https://docs.aws.amazon.com/ivs/latest/userguide/metadata.html)within a Video
-// Stream (https://docs.aws.amazon.com/ivs/latest/userguide/metadata.html) in the
-// Amazon IVS User Guide.
+// a single PutMetadata call.) At most 155 requests per second per account are
+// allowed. Also see Embedding Metadata within a Video Stream
+// (https://docs.aws.amazon.com/ivs/latest/userguide/metadata.html) in the Amazon
+// IVS User Guide.
 func (c *Client) PutMetadata(ctx context.Context, params *PutMetadataInput, optFns ...func(*Options)) (*PutMetadataOutput, error) {
 	if params == nil {
 		params = &PutMetadataInput{}
