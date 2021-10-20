@@ -50,7 +50,10 @@ public class S3ContentSHA256Header implements GoIntegration {
                                 .build())
                         .build(),
                 RuntimeClientPlugin.builder()
-                        // If operation is streaming for S3, Swap payload sha256 middleware with a resolver middleware
+                        // If a S3 operation has a streaming payload but is not event stream payload,
+                        // client swaps signing middleware to use dynamic payload signing middleware.
+                        // This enables client to use unsigned payload when TLS is enabled, and switch
+                        // to signed payload for security when TLS is disabled.
                         .operationPredicate(((model, service, operation) -> {
                             if (!(S3ModelUtils.isServiceS3(model, service))) {
                                 return false;

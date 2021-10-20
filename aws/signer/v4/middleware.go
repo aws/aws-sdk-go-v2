@@ -49,6 +49,12 @@ func (e *SigningError) Unwrap() error {
 
 // UseDynamicPayloadSigningMiddleware swaps the compute payload sha256 middleware with a resolver middleware that
 // switches between unsigned and signed payload based on TLS state for request.
+// This middleware should not be used for AWS APIs that do not support unsigned payload signing auth.
+// By default, SDK uses this middleware for known AWS APIs that support such TLS based auth selection .
+//
+// Usage example -
+// S3 PutObject API allows unsigned payload signing auth usage when TLS is enabled, and uses this middleware to
+// dynamically switch between unsigned and signed payload based on TLS state for request.
 func UseDynamicPayloadSigningMiddleware(stack *middleware.Stack) error {
 	_, err := stack.Build.Swap(computePayloadHashMiddlewareID, &dynamicPayloadSigningMiddleware{})
 	return err
