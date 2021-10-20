@@ -1764,19 +1764,19 @@ func awsRestjson1_serializeDocumentComputeResourceUpdate(v *types.ComputeResourc
 	object := value.Object()
 	defer object.Close()
 
-	if v.DesiredvCpus != 0 {
+	if v.DesiredvCpus != nil {
 		ok := object.Key("desiredvCpus")
-		ok.Integer(v.DesiredvCpus)
+		ok.Integer(*v.DesiredvCpus)
 	}
 
-	if v.MaxvCpus != 0 {
+	if v.MaxvCpus != nil {
 		ok := object.Key("maxvCpus")
-		ok.Integer(v.MaxvCpus)
+		ok.Integer(*v.MaxvCpus)
 	}
 
-	if v.MinvCpus != 0 {
+	if v.MinvCpus != nil {
 		ok := object.Key("minvCpus")
-		ok.Integer(v.MinvCpus)
+		ok.Integer(*v.MinvCpus)
 	}
 
 	if v.SecurityGroupIds != nil {

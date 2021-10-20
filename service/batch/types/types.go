@@ -399,19 +399,19 @@ type ComputeResourceUpdate struct {
 	// The desired number of Amazon EC2 vCPUS in the compute environment. This
 	// parameter isn't applicable to jobs that are running on Fargate resources, and
 	// shouldn't be specified.
-	DesiredvCpus int32
+	DesiredvCpus *int32
 
 	// The maximum number of Amazon EC2 vCPUs that an environment can reach. With both
 	// BEST_FIT_PROGRESSIVE and SPOT_CAPACITY_OPTIMIZED allocation strategies, Batch
 	// might need to exceed maxvCpus to meet your capacity requirements. In this event,
 	// Batch never exceeds maxvCpus by more than a single instance. That is, no more
 	// than a single instance from among those specified in your compute environment.
-	MaxvCpus int32
+	MaxvCpus *int32
 
 	// The minimum number of Amazon EC2 vCPUs that an environment should maintain. This
 	// parameter isn't applicable to jobs that are running on Fargate resources, and
 	// shouldn't be specified.
-	MinvCpus int32
+	MinvCpus *int32
 
 	// The Amazon EC2 security groups associated with instances launched in the compute
 	// environment. This parameter is required for Fargate compute resources, where it
