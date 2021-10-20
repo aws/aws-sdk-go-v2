@@ -15,6 +15,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	v4Internal "github.com/aws/aws-sdk-go-v2/aws/signer/internal/v4"
+	"github.com/google/go-cmp/cmp"
 )
 
 var testCredentials = aws.Credentials{AccessKeyID: "AKID", SecretAccessKey: "SECRET", SessionToken: "SESSION"}
@@ -243,6 +244,60 @@ func TestRequestHost(t *testing.T) {
 
 	if !strings.Contains(build.CanonicalString, "host:"+req.Host) {
 		t.Errorf("canonical host header invalid")
+	}
+}
+func TestSign_buildCanonicalHeaders(t *testing.T) {
+	serviceName := "mockAPI"
+	region := "mock-region"
+	endpoint := "https://" + serviceName + "." + region + ".amazonaws.com"
+
+	req, err := http.NewRequest("POST", endpoint, nil)
+	if err != nil {
+		t.Fatalf("failed to create request, %v", err)
+	}
+
+	req.Header.Set("FooInnerSpace", "   inner      space    ")
+	req.Header.Set("FooLeadingSpace", "    leading-space")
+	req.Header.Add("FooMultipleSpace", "no-space")
+	req.Header.Add("FooMultipleSpace", "\ttab-space")
+	req.Header.Add("FooMultipleSpace", "trailing-space    ")
+	req.Header.Set("FooNoSpace", "no-space")
+	req.Header.Set("FooTabSpace", "\ttab-space\t")
+	req.Header.Set("FooTrailingSpace", "trailing-space    ")
+	req.Header.Set("FooWrappedSpace", "   wrapped-space    ")
+
+	ctx := &httpSigner{
+		ServiceName:  serviceName,
+		Region:       region,
+		Request:      req,
+		Time:         v4Internal.NewSigningTime(time.Date(2021, 10, 20, 12, 42, 0, 0, time.UTC)),
+		KeyDerivator: v4Internal.NewSigningKeyDeriver(),
+	}
+
+	build, err := ctx.Build()
+	if err != nil {
+		t.Fatalf("expected no error, got %v", err)
+	}
+
+	expectCanonicalString := strings.Join([]string{
+		`POST`,
+		`/`,
+		``,
+		`fooinnerspace:inner space`,
+		`fooleadingspace:leading-space`,
+		`foomultiplespace:no-space,tab-space,trailing-space`,
+		`foonospace:no-space`,
+		`footabspace:tab-space`,
+		`footrailingspace:trailing-space`,
+		`foowrappedspace:wrapped-space`,
+		`host:mockAPI.mock-region.amazonaws.com`,
+		`x-amz-date:20211020T124200Z`,
+		``,
+		`fooinnerspace;fooleadingspace;foomultiplespace;foonospace;footabspace;footrailingspace;foowrappedspace;host;x-amz-date`,
+		``,
+	}, "\n")
+	if diff := cmp.Diff(expectCanonicalString, build.CanonicalString); diff != "" {
+		t.Errorf("expect match, got\n%s", diff)
 	}
 }
 

@@ -443,7 +443,12 @@ func (s *httpSigner) buildCanonicalHeaders(host string, rule v4Internal.Rule, he
 		} else {
 			canonicalHeaders.WriteString(headers[i])
 			canonicalHeaders.WriteRune(colon)
-			canonicalHeaders.WriteString(strings.Join(signed[headers[i]], ","))
+			// Trim out leading, trailing, and dedup inner spaces.
+			headerValues := make([]string, len(signed[headers[i]]))
+			for i, v := range signed[headers[i]] {
+				headerValues[i] = strings.TrimSpace(v4Internal.StripExcessSpaces(v))
+			}
+			canonicalHeaders.WriteString(strings.Join(headerValues, ","))
 		}
 		canonicalHeaders.WriteRune('\n')
 	}
