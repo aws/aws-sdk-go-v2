@@ -483,6 +483,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudsearch#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudsearch#ValidationException"
                 }
             ],
             "traits": {
@@ -671,6 +674,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudsearch#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudsearch#ValidationException"
                 }
             ],
             "traits": {
@@ -734,6 +740,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudsearch#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudsearch#ValidationException"
                 }
             ],
             "traits": {
@@ -797,6 +806,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudsearch#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudsearch#ValidationException"
                 }
             ],
             "traits": {
@@ -861,6 +873,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudsearch#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudsearch#ValidationException"
                 }
             ],
             "traits": {
@@ -921,6 +936,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudsearch#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudsearch#ValidationException"
                 }
             ],
             "traits": {
@@ -1029,6 +1047,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudsearch#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudsearch#ValidationException"
                 }
             ],
             "traits": {
@@ -1091,6 +1112,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudsearch#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudsearch#ValidationException"
                 }
             ],
             "traits": {
@@ -1153,6 +1177,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudsearch#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudsearch#ValidationException"
                 }
             ],
             "traits": {
@@ -2194,6 +2221,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudsearch#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudsearch#ValidationException"
                 }
             ],
             "traits": {
@@ -3323,6 +3353,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudsearch#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudsearch#ValidationException"
                 }
             ],
             "traits": {
@@ -3386,6 +3419,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudsearch#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudsearch#ValidationException"
                 }
             ],
             "traits": {

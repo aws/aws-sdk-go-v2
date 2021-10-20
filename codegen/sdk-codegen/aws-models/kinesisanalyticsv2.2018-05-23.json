@@ -173,7 +173,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds an <a>InputProcessingConfiguration</a> to a SQL-based Kinesis Data Analytics application. An input processor pre-processes records \n      on the input stream before the\n      application's SQL code executes. Currently, the only input processor available is <a href=\"https://docs.aws.amazon.com/lambda/\">AWS Lambda</a>.</p>"
+                "smithy.api#documentation": "<p>Adds an <a>InputProcessingConfiguration</a> to a SQL-based Kinesis Data Analytics application. An input processor pre-processes records \n      on the input stream before the\n      application's SQL code executes. Currently, the only input processor available is <a href=\"https://docs.aws.amazon.com/lambda/\">Amazon Lambda</a>.</p>"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#AddApplicationInputProcessingConfigurationRequest": {
@@ -313,7 +313,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds an external destination to your SQL-based Kinesis Data Analytics application.</p>\n         <p>If you want Kinesis Data Analytics to deliver data from an in-application stream within\n      your application to an external destination (such as an Kinesis data stream, a Kinesis Data\n      Firehose delivery stream, or an AWS Lambda function), you add the relevant configuration to\n      your application using this operation. You can configure one or more outputs for your\n      application. Each output configuration maps an in-application stream and an external\n      destination.</p>\n         <p> You can use one of the output configurations to deliver data from your\n      in-application error stream to an external destination so that you can analyze the\n      errors.  </p>\n         <p> Any configuration update, including adding a streaming source using this\n      operation, results in a new version of the application. You can use the <a>DescribeApplication</a> operation to find the current application\n      version.</p>"
+                "smithy.api#documentation": "<p>Adds an external destination to your SQL-based Kinesis Data Analytics application.</p>\n         <p>If you want Kinesis Data Analytics to deliver data from an in-application stream within\n      your application to an external destination (such as an Kinesis data stream, a Kinesis Data\n      Firehose delivery stream, or an Amazon Lambda function), you add the relevant configuration to\n      your application using this operation. You can configure one or more outputs for your\n      application. Each output configuration maps an in-application stream and an external\n      destination.</p>\n         <p> You can use one of the output configurations to deliver data from your\n      in-application error stream to an external destination so that you can analyze the\n      errors.  </p>\n         <p> Any configuration update, including adding a streaming source using this\n      operation, results in a new version of the application. You can use the <a>DescribeApplication</a> operation to find the current application\n      version.</p>"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#AddApplicationOutputRequest": {
@@ -336,7 +336,7 @@
                 "Output": {
                     "target": "com.amazonaws.kinesisanalyticsv2#Output",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of objects, each describing one output configuration. In the output\n      configuration, you specify the name of an in-application stream, a destination (that is, a\n      Kinesis data stream, a Kinesis Data Firehose delivery stream, or an AWS Lambda function), and\n      record the formation to use when writing to the destination.</p>",
+                        "smithy.api#documentation": "<p>An array of objects, each describing one output configuration. In the output\n      configuration, you specify the name of an in-application stream, a destination (that is, a\n      Kinesis data stream, a Kinesis Data Firehose delivery stream, or an Amazon Lambda function), and\n      record the formation to use when writing to the destination.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -912,7 +912,7 @@
                     "min": 5,
                     "max": 5
                 },
-                "smithy.api#pattern": "([01][0-9]|2[0-3]):[0-5][0-9]"
+                "smithy.api#pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#ApplicationMaintenanceWindowStartTime": {
@@ -922,7 +922,7 @@
                     "min": 5,
                     "max": 5
                 },
-                "smithy.api#pattern": "([01][0-9]|2[0-3]):[0-5][0-9]"
+                "smithy.api#pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#ApplicationMode": {
@@ -947,7 +947,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9_.-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9_.-]+$"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#ApplicationRestoreConfiguration": {
@@ -1072,12 +1072,12 @@
                         "name": "FORCE_STOPPING"
                     },
                     {
-                        "value": "MAINTENANCE",
-                        "name": "MAINTENANCE"
-                    },
-                    {
                         "value": "ROLLING_BACK",
                         "name": "ROLLING_BACK"
+                    },
+                    {
+                        "value": "MAINTENANCE",
+                        "name": "MAINTENANCE"
                     },
                     {
                         "value": "ROLLED_BACK",
@@ -1210,7 +1210,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9/!-_.*'()]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9/!-_.*'()]+$"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#BooleanObject": {
@@ -1226,7 +1226,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:.*"
+                "smithy.api#pattern": "^arn:"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#CSVMappingParameters": {
@@ -1257,13 +1257,13 @@
                 "GlueDataCatalogConfiguration": {
                     "target": "com.amazonaws.kinesisanalyticsv2#GlueDataCatalogConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration parameters for the default AWS Glue database. You use this database for Apache Flink SQL queries and table API transforms that you write in a Kinesis Data Analytics Studio notebook.</p>",
+                        "smithy.api#documentation": "<p>The configuration parameters for the default Amazon Glue database. You use this database for Apache Flink SQL queries and table API transforms that you write in a Kinesis Data Analytics Studio notebook.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration parameters for the default AWS Glue database. You use this database for SQL queries that you write in a Kinesis Data Analytics Studio notebook.</p>"
+                "smithy.api#documentation": "<p>The configuration parameters for the default Amazon Glue database. You use this database for SQL queries that you write in a Kinesis Data Analytics Studio notebook.</p>"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#CatalogConfigurationDescription": {
@@ -1272,13 +1272,13 @@
                 "GlueDataCatalogConfigurationDescription": {
                     "target": "com.amazonaws.kinesisanalyticsv2#GlueDataCatalogConfigurationDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration parameters for the default AWS Glue database. You use this database for SQL queries that you write in a Kinesis Data Analytics Studio notebook.</p>",
+                        "smithy.api#documentation": "<p>The configuration parameters for the default Amazon Glue database. You use this database for SQL queries that you write in a Kinesis Data Analytics Studio notebook.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration parameters for the default AWS Glue database. You use this database for Apache Flink SQL queries and table API transforms that you write in a Kinesis Data Analytics Studio notebook.</p>"
+                "smithy.api#documentation": "<p>The configuration parameters for the default Amazon Glue database. You use this database for Apache Flink SQL queries and table API transforms that you write in a Kinesis Data Analytics Studio notebook.</p>"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#CatalogConfigurationUpdate": {
@@ -1287,13 +1287,13 @@
                 "GlueDataCatalogConfigurationUpdate": {
                     "target": "com.amazonaws.kinesisanalyticsv2#GlueDataCatalogConfigurationUpdate",
                     "traits": {
-                        "smithy.api#documentation": "<p>Updates to the configuration parameters for the default AWS Glue database. You use this database for SQL queries that you write in a Kinesis Data Analytics Studio notebook.</p>",
+                        "smithy.api#documentation": "<p>Updates to the configuration parameters for the default Amazon Glue database. You use this database for SQL queries that you write in a Kinesis Data Analytics Studio notebook.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Updates to </p>"
+                "smithy.api#documentation": "<p>Updates to the configuration parameters for the default Amazon Glue database. You use this database for SQL queries that you write in a Kinesis Data Analytics Studio notebook.</p>"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#CheckpointConfiguration": {
@@ -1633,7 +1633,7 @@
                     "min": 1,
                     "max": 512
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9-_+/=]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9-_+/=]+$"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#ConfigurationType": {
@@ -1680,6 +1680,9 @@
                 },
                 {
                     "target": "com.amazonaws.kinesisanalyticsv2#TooManyTagsException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisanalyticsv2#UnsupportedOperationException"
                 }
             ],
             "traits": {
@@ -1949,7 +1952,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:.*"
+                "smithy.api#pattern": "^arn:"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#DeleteApplication": {
@@ -2457,7 +2460,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The information required to deploy a Kinesis Data Analytics Studio notebook as an application with durable state..</p>"
+                "smithy.api#documentation": "<p>The information required to deploy a Kinesis Data Analytics Studio notebook as an application with durable state.</p>"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#DeployAsApplicationConfigurationDescription": {
@@ -2481,13 +2484,12 @@
                 "S3ContentLocationUpdate": {
                     "target": "com.amazonaws.kinesisanalyticsv2#S3ContentBaseLocationUpdate",
                     "traits": {
-                        "smithy.api#documentation": "<p>Updates to the location that holds the data required to specify an Amazon Data Analytics application.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Updates to the location that holds the data required to specify an Amazon Data Analytics application.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Updates to the configuration information required to deploy an Amazon Data Analytics Studio notebook as an application with durable state..</p>"
+                "smithy.api#documentation": "<p>Updates to the configuration information required to deploy an Amazon Data Analytics Studio notebook as an application with durable state.</p>"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#DescribeApplication": {
@@ -2685,6 +2687,9 @@
                 },
                 {
                     "target": "com.amazonaws.kinesisanalyticsv2#UnableToDetectSchemaException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisanalyticsv2#UnsupportedOperationException"
                 }
             ],
             "traits": {
@@ -2946,7 +2951,8 @@
                 "DatabaseARNUpdate": {
                     "target": "com.amazonaws.kinesisanalyticsv2#DatabaseARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The updated Amazon Resource Name (ARN) of the database.</p>"
+                        "smithy.api#documentation": "<p>The updated Amazon Resource Name (ARN) of the database.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -2961,7 +2967,7 @@
                     "min": 1,
                     "max": 50
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9_.-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9_.-]+$"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#InAppStreamName": {
@@ -2971,7 +2977,7 @@
                     "min": 1,
                     "max": 32
                 },
-                "smithy.api#pattern": "[^-\\s<>&]*"
+                "smithy.api#pattern": "^[^-\\s<>&]*$"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#InAppStreamNames": {
@@ -3109,13 +3115,13 @@
                 "ResourceARN": {
                     "target": "com.amazonaws.kinesisanalyticsv2#ResourceARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the AWS Lambda function that operates on records in the stream.</p>\n         <note>\n            <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda\">Example ARNs: AWS Lambda</a>\n            </p>\n         </note>",
+                        "smithy.api#documentation": "<p>The ARN of the Amazon Lambda function that operates on records in the stream.</p>\n         <note>\n            <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda\">Example ARNs: Amazon Lambda</a>\n            </p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that contains the Amazon Resource Name (ARN) of the AWS Lambda function that is\n      used to preprocess records in the stream in a SQL-based Kinesis Data Analytics application. </p>"
+                "smithy.api#documentation": "<p>An object that contains the Amazon Resource Name (ARN) of the Amazon Lambda function that is\n      used to preprocess records in the stream in a SQL-based Kinesis Data Analytics application. </p>"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#InputLambdaProcessorDescription": {
@@ -3124,19 +3130,19 @@
                 "ResourceARN": {
                     "target": "com.amazonaws.kinesisanalyticsv2#ResourceARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the AWS Lambda function that is used to preprocess the records in the\n      stream.</p>\n         <note>\n            <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda\">Example ARNs: AWS Lambda</a>\n            </p>\n         </note>",
+                        "smithy.api#documentation": "<p>The ARN of the Amazon Lambda function that is used to preprocess the records in the\n      stream.</p>\n         <note>\n            <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda\">Example ARNs: Amazon Lambda</a>\n            </p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
                 "RoleARN": {
                     "target": "com.amazonaws.kinesisanalyticsv2#RoleARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM role that is used to access the AWS Lambda function.</p>\n         <note>\n            <p>Provided for backward compatibility. Applications that are created with the current API\n        version have an application-level service execution role rather than a resource-level\n        role.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that is used to access the Amazon Lambda function.</p>\n         <note>\n            <p>Provided for backward compatibility. Applications that are created with the current API\n        version have an application-level service execution role rather than a resource-level\n        role.</p>\n         </note>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>For a SQL-based Kinesis Data Analytics application, an object that contains the\n      Amazon Resource Name (ARN) of the AWS Lambda function that is used to preprocess records in\n      the stream.</p>"
+                "smithy.api#documentation": "<p>For a SQL-based Kinesis Data Analytics application, an object that contains the\n      Amazon Resource Name (ARN) of the Amazon Lambda function that is used to preprocess records in\n      the stream.</p>"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#InputLambdaProcessorUpdate": {
@@ -3145,7 +3151,7 @@
                 "ResourceARNUpdate": {
                     "target": "com.amazonaws.kinesisanalyticsv2#ResourceARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the new AWS Lambda function that is used to preprocess\n      the records in the stream.</p>\n         <note>\n            <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda\">Example ARNs: AWS Lambda</a>\n            </p>\n         </note>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the new Amazon Lambda function that is used to preprocess\n      the records in the stream.</p>\n         <note>\n            <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda\">Example ARNs: Amazon Lambda</a>\n            </p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3205,7 +3211,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>For a SQL-based Kinesis Data Analytics application, describes a processor that is\n      used to preprocess the records in the stream before being processed by your application code.\n      Currently, the only input processor available is <a href=\"https://docs.aws.amazon.com/lambda/\">AWS Lambda</a>.</p>"
+                "smithy.api#documentation": "<p>For a SQL-based Kinesis Data Analytics application, describes a processor that is\n      used to preprocess the records in the stream before being processed by your application code.\n      Currently, the only input processor available is <a href=\"https://docs.aws.amazon.com/lambda/\">Amazon Lambda</a>.</p>"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#InputProcessingConfigurationDescription": {
@@ -3219,7 +3225,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>For a SQL-based Kinesis Data Analytics application, provides the configuration\n        information about an input processor. Currently, the only input processor available is <a href=\"https://docs.aws.amazon.com/lambda/\">AWS Lambda</a>.</p>"
+                "smithy.api#documentation": "<p>For a SQL-based Kinesis Data Analytics application, provides the configuration\n        information about an input processor. Currently, the only input processor available is <a href=\"https://docs.aws.amazon.com/lambda/\">Amazon Lambda</a>.</p>"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#InputProcessingConfigurationUpdate": {
@@ -3420,7 +3426,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:.*"
+                "smithy.api#pattern": "^arn:"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#KinesisAnalytics_20180523": {
@@ -3750,13 +3756,13 @@
                 "ResourceARN": {
                     "target": "com.amazonaws.kinesisanalyticsv2#ResourceARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the destination Lambda function to write to.</p>\n         <note>\n            <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda\">Example ARNs: AWS Lambda</a>\n            </p>\n         </note>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the destination Lambda function to write to.</p>\n         <note>\n            <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda\">Example ARNs: Amazon Lambda</a>\n            </p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>When you configure a SQL-based Kinesis Data Analytics application's output,\n      identifies an AWS Lambda function as the destination. You provide the function Amazon Resource\n      Name (ARN) of the Lambda function. </p>"
+                "smithy.api#documentation": "<p>When you configure a SQL-based Kinesis Data Analytics application's output,\n      identifies an Amazon Lambda function as the destination. You provide the function Amazon Resource\n      Name (ARN) of the Lambda function. </p>"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#LambdaOutputDescription": {
@@ -3777,7 +3783,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>For a SQL-based Kinesis Data Analytics application's output, describes the AWS\n      Lambda function that is configured as its destination. </p>"
+                "smithy.api#documentation": "<p>For a SQL-based Kinesis Data Analytics application's output, describes the Amazon\n      Lambda function that is configured as its destination. </p>"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#LambdaOutputUpdate": {
@@ -3786,13 +3792,13 @@
                 "ResourceARNUpdate": {
                     "target": "com.amazonaws.kinesisanalyticsv2#ResourceARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the destination AWS Lambda function.</p>\n         <note>\n            <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda\">Example ARNs: AWS Lambda</a>\n            </p>\n         </note>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the destination Amazon Lambda function.</p>\n         <note>\n            <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda\">Example ARNs: Amazon Lambda</a>\n            </p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>When you update an SQL-based Kinesis Data Analytics application's output\n      configuration using the <a>UpdateApplication</a> operation, provides information\n      about an AWS Lambda function that is configured as the destination.</p>"
+                "smithy.api#documentation": "<p>When you update an SQL-based Kinesis Data Analytics application's output\n      configuration using the <a>UpdateApplication</a> operation, provides information\n      about an Amazon Lambda function that is configured as the destination.</p>"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#LimitExceededException": {
@@ -3920,7 +3926,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.kinesisanalyticsv2#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If a previous invocation of this operation returned a pagination token, pass it into this value to retrieve the next set of results. For more information about pagination, see \n      <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/pagination.html\">Using the AWS Command Line Interface's Pagination Options</a>.</p>"
+                        "smithy.api#documentation": "<p>If a previous invocation of this operation returned a pagination token, pass it into this value to retrieve the next set of results. For more information about pagination, see \n      <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/pagination.html\">Using the Amazon Command Line Interface's Pagination Options</a>.</p>"
                     }
                 }
             }
@@ -3937,7 +3943,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.kinesisanalyticsv2#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pagination token for the next set of results, or <code>null</code> if there are no additional results. \n      To retrieve the next set of items, pass this token into a subsequent invocation of this operation. For more information about pagination, see \n      <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/pagination.html\">Using the AWS Command Line Interface's Pagination Options</a>.</p>"
+                        "smithy.api#documentation": "<p>The pagination token for the next set of results, or <code>null</code> if there are no additional results. \n      To retrieve the next set of items, pass this token into a subsequent invocation of this operation. For more information about pagination, see \n      <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/pagination.html\">Using the Amazon Command Line Interface's Pagination Options</a>.</p>"
                     }
                 }
             }
@@ -3981,7 +3987,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.kinesisanalyticsv2#ApplicationName",
                     "traits": {
-                        "smithy.api#documentation": "<p>If a previous command returned a pagination token, \n      pass it into this value to retrieve the next set of results.\n      For more information about pagination, see \n      <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/pagination.html\">Using the AWS Command Line Interface's Pagination Options</a>.</p>"
+                        "smithy.api#documentation": "<p>If a previous command returned a pagination token, \n      pass it into this value to retrieve the next set of results.\n      For more information about pagination, see \n      <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/pagination.html\">Using the Amazon Command Line Interface's Pagination Options</a>.</p>"
                     }
                 }
             }
@@ -3999,7 +4005,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.kinesisanalyticsv2#ApplicationName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pagination token for the next set of results, or <code>null</code> if there are no additional results.\n      Pass this token into a subsequent command to retrieve the next set of items\n      For more information about pagination, see \n      <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/pagination.html\">Using the AWS Command Line Interface's Pagination Options</a>.</p>"
+                        "smithy.api#documentation": "<p>The pagination token for the next set of results, or <code>null</code> if there are no additional results.\n      Pass this token into a subsequent command to retrieve the next set of items\n      For more information about pagination, see \n      <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/pagination.html\">Using the Amazon Command Line Interface's Pagination Options</a>.</p>"
                     }
                 }
             }
@@ -4090,7 +4096,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:.*"
+                "smithy.api#pattern": "^arn:"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#MappingParameters": {
@@ -4120,7 +4126,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9_.-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9_.-]+$"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#MavenGroupId": {
@@ -4130,7 +4136,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9_.-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9_.-]+$"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#MavenReference": {
@@ -4169,7 +4175,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9_.-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9_.-]+$"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#MetricsLevel": {
@@ -4326,7 +4332,7 @@
                 "LambdaOutput": {
                     "target": "com.amazonaws.kinesisanalyticsv2#LambdaOutput",
                     "traits": {
-                        "smithy.api#documentation": "<p>Identifies an AWS Lambda function as the destination.</p>"
+                        "smithy.api#documentation": "<p>Identifies an Amazon Lambda function as the destination.</p>"
                     }
                 },
                 "DestinationSchema": {
@@ -4422,7 +4428,7 @@
                 "LambdaOutputUpdate": {
                     "target": "com.amazonaws.kinesisanalyticsv2#LambdaOutputUpdate",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes an AWS Lambda function as the destination for the output.</p>"
+                        "smithy.api#documentation": "<p>Describes an Amazon Lambda function as the destination for the output.</p>"
                     }
                 },
                 "DestinationSchemaUpdate": {
@@ -4722,7 +4728,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "[^-\\s<>&]*"
+                "smithy.api#pattern": "^[^-\\s<>&]*$"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#RecordColumnSqlType": {
@@ -4753,7 +4759,7 @@
                     "min": 5,
                     "max": 5
                 },
-                "smithy.api#pattern": "UTF-8"
+                "smithy.api#pattern": "^UTF-8$"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#RecordFormat": {
@@ -4932,7 +4938,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:.*"
+                "smithy.api#pattern": "^arn:"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#ResourceInUseException": {
@@ -4978,7 +4984,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:.*"
+                "smithy.api#pattern": "^arn:"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#RollbackApplication": {
@@ -5123,12 +5129,20 @@
                         "name": "FLINK_1_8"
                     },
                     {
+                        "value": "ZEPPELIN-FLINK-1_0",
+                        "name": "ZEPPELIN_FLINK_1_0"
+                    },
+                    {
                         "value": "FLINK-1_11",
                         "name": "FLINK_1_11"
                     },
                     {
-                        "value": "ZEPPELIN-FLINK-1_0",
-                        "name": "ZEPPELIN_FLINK_1_0"
+                        "value": "FLINK-1_13",
+                        "name": "FLINK_1_13"
+                    },
+                    {
+                        "value": "ZEPPELIN-FLINK-2_0",
+                        "name": "ZEPPELIN_FLINK_2_0"
                     }
                 ]
             }
@@ -5231,8 +5245,7 @@
                 "BucketARNUpdate": {
                     "target": "com.amazonaws.kinesisanalyticsv2#BucketARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The updated Amazon Resource Name (ARN) of the S3 bucket.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The updated Amazon Resource Name (ARN) of the S3 bucket.</p>"
                     }
                 },
                 "BasePathUpdate": {
@@ -5448,7 +5461,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9_.-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9_.-]+$"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#SnapshotStatus": {
@@ -5752,7 +5765,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A key-value pair (the value is optional) that you can define and assign to AWS resources. \n        If you specify a tag that already exists, the tag value is replaced with the value that you \n        specify in the request. Note that \n        the maximum number of application tags includes system tags. The maximum number of user-defined \n        application tags is 50.\n      For more information, see \n        <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html\">Using Tagging</a>.</p>"
+                "smithy.api#documentation": "<p>A key-value pair (the value is optional) that you can define and assign to Amazon resources. \n        If you specify a tag that already exists, the tag value is replaced with the value that you \n        specify in the request. Note that \n        the maximum number of application tags includes system tags. The maximum number of user-defined \n        application tags is 50.\n      For more information, see \n        <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html\">Using Tagging</a>.</p>"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#TagKey": {
@@ -6257,13 +6270,13 @@
                 "CatalogConfiguration": {
                     "target": "com.amazonaws.kinesisanalyticsv2#CatalogConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Glue Data Catalog that you use in queries in a Kinesis Data Analytics Studio notebook.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Glue Data Catalog that you use in queries in a Kinesis Data Analytics Studio notebook.</p>"
                     }
                 },
                 "DeployAsApplicationConfiguration": {
                     "target": "com.amazonaws.kinesisanalyticsv2#DeployAsApplicationConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The information required to deploy a Kinesis Data Analytics Studio notebook as an application with durable state..</p>"
+                        "smithy.api#documentation": "<p>The information required to deploy a Kinesis Data Analytics Studio notebook as an application with durable state.</p>"
                     }
                 },
                 "CustomArtifactsConfiguration": {
@@ -6290,13 +6303,13 @@
                 "CatalogConfigurationDescription": {
                     "target": "com.amazonaws.kinesisanalyticsv2#CatalogConfigurationDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Glue Data Catalog that is associated with the Kinesis Data Analytics Studio notebook.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Glue Data Catalog that is associated with the Kinesis Data Analytics Studio notebook.</p>"
                     }
                 },
                 "DeployAsApplicationConfigurationDescription": {
                     "target": "com.amazonaws.kinesisanalyticsv2#DeployAsApplicationConfigurationDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parameters required to deploy a Kinesis Data Analytics Studio notebook as an application with durable state..</p>"
+                        "smithy.api#documentation": "<p>The parameters required to deploy a Kinesis Data Analytics Studio notebook as an application with durable state.</p>"
                     }
                 },
                 "CustomArtifactsConfigurationDescription": {
@@ -6322,7 +6335,7 @@
                 "CatalogConfigurationUpdate": {
                     "target": "com.amazonaws.kinesisanalyticsv2#CatalogConfigurationUpdate",
                     "traits": {
-                        "smithy.api#documentation": "<p>Updates to the configuration of the AWS Glue Data Catalog that is associated with the Kinesis Data Analytics Studio notebook.</p>"
+                        "smithy.api#documentation": "<p>Updates to the configuration of the Amazon Glue Data Catalog that is associated with the Kinesis Data Analytics Studio notebook.</p>"
                     }
                 },
                 "DeployAsApplicationConfigurationUpdate": {

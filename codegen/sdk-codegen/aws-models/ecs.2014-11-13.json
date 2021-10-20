@@ -1947,7 +1947,7 @@
                 "propagateTags": {
                     "target": "com.amazonaws.ecs#PropagateTags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to propagate the tags from the task definition or the service to the\n\t\t\ttasks in the service. If no value is specified, the tags are not propagated. Tags can\n\t\t\tonly be propagated to the tasks within the service during service creation. To add tags\n\t\t\tto a task after service creation, use the <a>TagResource</a> API\n\t\t\taction.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether to propagate the tags from the task definition or the service to the\n\t\t\ttasks in the service. If no value is specified, the tags are not propagated. Tags can\n\t\t\tonly be propagated to the tasks within the service during service creation. To add tags\n\t\t\tto a task after service creation or task creation, use the <a>TagResource</a> API\n\t\t\taction.</p>"
                     }
                 },
                 "enableExecuteCommand": {
@@ -4114,7 +4114,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details on a Elastic Inference accelerator. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-eia.html\">Working with\n\t\t\t\tAmazon Elastic Inference on Amazon ECS</a> in the\n\t\t\t\t<i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Details on a Elastic Inference accelerator. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-inference.html\">Working with\n\t\t\t\tAmazon Elastic Inference on Amazon ECS</a> in the\n\t\t\t\t<i>Amazon Elastic Container Service Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.ecs#InferenceAcceleratorOverride": {
@@ -4134,7 +4134,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details on an Elastic Inference accelerator task override. This parameter is used to\n\t\t\toverride the Elastic Inference accelerator specified in the task definition. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-eia.html\">Working with Amazon Elastic Inference on Amazon ECS</a> in the\n\t\t\t\t<i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Details on an Elastic Inference accelerator task override. This parameter is used to\n\t\t\toverride the Elastic Inference accelerator specified in the task definition. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-inference.html\">Working with Amazon Elastic Inference on Amazon ECS</a> in the\n\t\t\t\t<i>Amazon Elastic Container Service Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.ecs#InferenceAcceleratorOverrides": {
@@ -6325,7 +6325,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The type and amount of a resource to assign to a container. The supported resource\n\t\t\ttypes are GPUs and Elastic Inference accelerators. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-gpu.html\">Working with\n\t\t\t\tGPUs on Amazon ECS</a> or <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-eia.html\">Working with Amazon Elastic Inference on Amazon ECS</a> in the\n\t\t\t\t<i>Amazon Elastic Container Service Developer Guide</i>\n         </p>"
+                "smithy.api#documentation": "<p>The type and amount of a resource to assign to a container. The supported resource\n\t\t\ttypes are GPUs and Elastic Inference accelerators. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-gpu.html\">Working with\n\t\t\t\tGPUs on Amazon ECS</a> or <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-inference.html\">Working with Amazon Elastic Inference on Amazon ECS</a> in the\n\t\t\t\t<i>Amazon Elastic Container Service Developer Guide</i>\n         </p>"
             }
         },
         "com.amazonaws.ecs#ResourceRequirements": {
@@ -6498,7 +6498,7 @@
                 "taskDefinition": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>family</code> and <code>revision</code> (<code>family:revision</code>) or\n\t\t\tfull ARN of the task definition to run. If a <code>revision</code> is not specified,\n\t\t\tthe latest <code>ACTIVE</code> revision is used.</p>",
+                        "smithy.api#documentation": "<p>The <code>family</code> and <code>revision</code> (<code>family:revision</code>) or\n\t\t\tfull ARN of the task definition to run. If a <code>revision</code> is not specified,\n\t\t\tthe latest <code>ACTIVE</code> revision is used.</p>\n\t\t       <p>The full ARN value must match the value that you specified ias the <code>Resource</code>\n\t\t\tof the IAM principal's permissions policy. For example, if the <code>Resource</code> is\n\t\t\tarn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:*, the\n\t\t\t\t<code>taskDefinition</code> ARN value must be\n\t\t\t\t<code>arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -8163,7 +8163,7 @@
                 "executionRoleArn": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the task execution IAM role override for the task.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the task execution IAM role override for the task. For more information,\n\t\t\tsee <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html\">Amazon ECS task\n\t\t\t\texecution IAM role</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
                     }
                 },
                 "memory": {
@@ -8175,7 +8175,7 @@
                 "taskRoleArn": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that containers in this task can assume. All containers\n\t\t\tin this task are granted the permissions that are specified in this role.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that containers in this task can assume. All containers in\n\t\t\tthis task are granted the permissions that are specified in this role. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html\">IAM Role for Tasks</a>\n\t\t\tin the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
                     }
                 },
                 "ephemeralStorage": {

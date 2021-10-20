@@ -7834,6 +7834,9 @@
                 "smithy.api#documentation": "<p>Batch condition that must be met (specified number of events received or batch time window expired)\n      before EventBridge event trigger fires.</p>"
             }
         },
+        "com.amazonaws.glue#EventQueueArn": {
+            "type": "string"
+        },
         "com.amazonaws.glue#ExecutionProperty": {
             "type": "structure",
             "members": {
@@ -15579,6 +15582,10 @@
                     {
                         "value": "CRAWL_NEW_FOLDERS_ONLY",
                         "name": "CRAWL_NEW_FOLDERS_ONLY"
+                    },
+                    {
+                        "value": "CRAWL_EVENT_MODE",
+                        "name": "CRAWL_EVENT_MODE"
                     }
                 ]
             }
@@ -15589,7 +15596,7 @@
                 "RecrawlBehavior": {
                     "target": "com.amazonaws.glue#RecrawlBehavior",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to crawl the entire dataset again or to crawl only folders that were added since the last crawler run.</p>\n\t\n\t        <p>A value of <code>CRAWL_EVERYTHING</code> specifies crawling the entire dataset again.</p>\n  \n         <p>A value of <code>CRAWL_NEW_FOLDERS_ONLY</code> specifies crawling only folders that were added since the last crawler run.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether to crawl the entire dataset again or to crawl only folders that were added since the last crawler run.</p>\n\t\n\t        <p>A value of <code>CRAWL_EVERYTHING</code> specifies crawling the entire dataset again.</p>\n  \n         <p>A value of <code>CRAWL_NEW_FOLDERS_ONLY</code> specifies crawling only folders that were added since the last crawler run.</p>\n\t\n\t        <p>A value of <code>CRAWL_EVENT_MODE</code> specifies crawling only the changes identified by Amazon S3 events.</p>"
                     }
                 }
             },
@@ -16164,6 +16171,18 @@
                     "target": "com.amazonaws.glue#NullableInteger",
                     "traits": {
                         "smithy.api#documentation": "<p>Sets the number of files in each leaf folder to be crawled when crawling sample files in a dataset. If not set, all the files are crawled. A valid value is an integer between 1 and 249.</p>"
+                    }
+                },
+                "EventQueueArn": {
+                    "target": "com.amazonaws.glue#EventQueueArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A valid Amazon SQS ARN. For example, <code>arn:aws:sqs:region:account:sqs</code>.</p>"
+                    }
+                },
+                "DlqEventQueueArn": {
+                    "target": "com.amazonaws.glue#EventQueueArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A valid Amazon dead-letter SQS ARN. For example, <code>arn:aws:sqs:region:account:deadLetterQueue</code>.</p>"
                     }
                 }
             },

@@ -1471,6 +1471,13 @@
                         "smithy.api#required": {}
                     }
                 },
+                "IncludeDvbSubtitles": {
+                    "target": "com.amazonaws.mediapackagevod#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "When enabled, MediaPackage passes through digital video broadcasting (DVB) subtitles into the output.",
+                        "smithy.api#jsonName": "includeDvbSubtitles"
+                    }
+                },
                 "SegmentDurationSeconds": {
                     "target": "com.amazonaws.mediapackagevod#__integer",
                     "traits": {

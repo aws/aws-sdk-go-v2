@@ -10315,6 +10315,10 @@
                     {
                         "value": "AWS::EKS::Cluster",
                         "name": "EKSCluster"
+                    },
+                    {
+                        "value": "AWS::OpenSearch::Domain",
+                        "name": "OpenSearchDomain"
                     }
                 ]
             }

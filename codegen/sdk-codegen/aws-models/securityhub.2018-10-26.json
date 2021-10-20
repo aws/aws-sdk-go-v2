@@ -13735,6 +13735,87 @@
                 }
             }
         },
+        "com.amazonaws.securityhub#CreateFindingAggregator": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityhub#CreateFindingAggregatorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.securityhub#CreateFindingAggregatorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.securityhub#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidAccessException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#LimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Used to enable finding aggregation. Must be called from the aggregation Region.</p>\n         <p>For more details about cross-Region replication, see <a href=\"securityhub/latest/userguide/finding-aggregation.html\">Configuring finding aggregation</a> in the <i>Security Hub User Guide</i>.\n      </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/findingAggregator/create",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.securityhub#CreateFindingAggregatorRequest": {
+            "type": "structure",
+            "members": {
+                "RegionLinkingMode": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to aggregate findings from all of the available Regions in the current partition. Also determines whether to automatically aggregate findings from new Regions as Security Hub supports them and you opt into them.</p>\n         <p>The selected option also determines how to use the Regions provided in the Regions list.</p>\n         <p>The options are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALL_REGIONS</code> - Indicates to aggregate findings from all of the Regions where Security Hub is enabled. When you choose this option, Security Hub also automatically aggregates findings from new Regions as Security Hub supports them and you opt into them.\n         </p>\n            </li>\n            <li>\n               <p>\n                  <code>ALL_REGIONS_EXCEPT_SPECIFIED</code> - Indicates to aggregate findings from all of the Regions where Security Hub is enabled, except for the Regions listed in the <code>Regions</code> parameter. When you choose this option, Security Hub also automatically aggregates findings from new Regions as Security Hub supports them and you opt into them.\n         </p>\n            </li>\n            <li>\n               <p>\n                  <code>SPECIFIED_REGIONS</code> - Indicates to aggregate findings only from the Regions listed in the <code>Regions</code> parameter. Security Hub does not automatically aggregate findings from new Regions.\n         </p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Regions": {
+                    "target": "com.amazonaws.securityhub#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>RegionLinkingMode</code> is <code>ALL_REGIONS_EXCEPT_SPECIFIED</code>, then this is a comma-separated list of Regions that do not aggregate findings to the aggregation Region.</p>\n         <p>If <code>RegionLinkingMode</code> is <code>SPECIFIED_REGIONS</code>, then this is a comma-separated list of Regions that do aggregate findings to the aggregation Region.\n      </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.securityhub#CreateFindingAggregatorResponse": {
+            "type": "structure",
+            "members": {
+                "FindingAggregatorArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the finding aggregator. You use the finding aggregator ARN to retrieve details for, update, and stop finding aggregation.</p>"
+                    }
+                },
+                "FindingAggregationRegion": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The aggregation Region.</p>"
+                    }
+                },
+                "RegionLinkingMode": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to link all Regions, all Regions except for a list of excluded Regions, or a list of included Regions.</p>"
+                    }
+                },
+                "Regions": {
+                    "target": "com.amazonaws.securityhub#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of excluded Regions or included Regions.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.securityhub#CreateInsight": {
             "type": "operation",
             "input": {
@@ -14167,6 +14248,60 @@
                     }
                 }
             }
+        },
+        "com.amazonaws.securityhub#DeleteFindingAggregator": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityhub#DeleteFindingAggregatorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.securityhub#DeleteFindingAggregatorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.securityhub#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidAccessException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a finding aggregator. When you delete the finding aggregator, you stop finding aggregation.</p>\n         <p>When you stop finding aggregation, findings that were already aggregated to the aggregation Region are still visible from the aggregation Region. New findings and finding updates are not aggregated.\n      </p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/findingAggregator/delete/{FindingAggregatorArn+}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.securityhub#DeleteFindingAggregatorRequest": {
+            "type": "structure",
+            "members": {
+                "FindingAggregatorArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the finding aggregator to delete. To obtain the ARN, use <code>ListFindingAggregators</code>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.securityhub#DeleteFindingAggregatorResponse": {
+            "type": "structure",
+            "members": {}
         },
         "com.amazonaws.securityhub#DeleteInsight": {
             "type": "operation",
@@ -15239,6 +15374,26 @@
                 "target": "com.amazonaws.securityhub#NonEmptyString"
             }
         },
+        "com.amazonaws.securityhub#FindingAggregator": {
+            "type": "structure",
+            "members": {
+                "FindingAggregatorArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the finding aggregator. You use the finding aggregator ARN to retrieve details for, update, and delete the finding aggregator.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A finding aggregator. A finding aggregator contains the configuration for finding aggregation.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#FindingAggregatorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#FindingAggregator"
+            }
+        },
         "com.amazonaws.securityhub#FindingProviderFields": {
             "type": "structure",
             "members": {
@@ -15439,6 +15594,85 @@
                 }
             }
         },
+        "com.amazonaws.securityhub#GetFindingAggregator": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityhub#GetFindingAggregatorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.securityhub#GetFindingAggregatorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.securityhub#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidAccessException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the current finding aggregation configuration.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/findingAggregator/get/{FindingAggregatorArn+}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.securityhub#GetFindingAggregatorRequest": {
+            "type": "structure",
+            "members": {
+                "FindingAggregatorArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the finding aggregator to return details for. To obtain the ARN, use <code>ListFindingAggregators</code>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.securityhub#GetFindingAggregatorResponse": {
+            "type": "structure",
+            "members": {
+                "FindingAggregatorArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the finding aggregator.</p>"
+                    }
+                },
+                "FindingAggregationRegion": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The aggregation Region.</p>"
+                    }
+                },
+                "RegionLinkingMode": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to link all Regions, all Regions except for a list of excluded Regions, or a list of included Regions.</p>"
+                    }
+                },
+                "Regions": {
+                    "target": "com.amazonaws.securityhub#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of excluded Regions or included Regions.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.securityhub#GetFindings": {
             "type": "operation",
             "input": {
@@ -15462,7 +15696,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of findings that match the specified criteria.</p>",
+                "smithy.api#documentation": "<p>Returns a list of findings that match the specified criteria.</p>\n         <p>If finding aggregation is enabled, then when you call <code>GetFindings</code> from the aggregation Region, the results include all of the matching findings from both the aggregation Region and the linked Regions.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/findings",
@@ -16338,6 +16572,81 @@
                     "target": "com.amazonaws.securityhub#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The pagination token to use to request the next page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.securityhub#ListFindingAggregators": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityhub#ListFindingAggregatorsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.securityhub#ListFindingAggregatorsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.securityhub#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidAccessException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#LimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>If finding aggregation is enabled, then <code>ListFindingAggregators</code> returns the ARN of the finding aggregator. You can run this operation from any Region.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/findingAggregator/list",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.securityhub#ListFindingAggregatorsRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.securityhub#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token returned with the previous set of results. Identifies the next set of results to return.</p>",
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.securityhub#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return. This operation currently only returns a single result.</p>",
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.securityhub#ListFindingAggregatorsResponse": {
+            "type": "structure",
+            "members": {
+                "FindingAggregators": {
+                    "target": "com.amazonaws.securityhub#FindingAggregatorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of finding aggregators. This operation currently only returns a single result.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.securityhub#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are more results, this is the token to provide in the next call to <code>ListFindingAggregators</code>.</p>\n         <p>This operation currently only returns a single result.\n      </p>"
                     }
                 }
             }
@@ -18254,6 +18563,9 @@
                     "target": "com.amazonaws.securityhub#CreateActionTarget"
                 },
                 {
+                    "target": "com.amazonaws.securityhub#CreateFindingAggregator"
+                },
+                {
                     "target": "com.amazonaws.securityhub#CreateInsight"
                 },
                 {
@@ -18264,6 +18576,9 @@
                 },
                 {
                     "target": "com.amazonaws.securityhub#DeleteActionTarget"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#DeleteFindingAggregator"
                 },
                 {
                     "target": "com.amazonaws.securityhub#DeleteInsight"
@@ -18326,6 +18641,9 @@
                     "target": "com.amazonaws.securityhub#GetEnabledStandards"
                 },
                 {
+                    "target": "com.amazonaws.securityhub#GetFindingAggregator"
+                },
+                {
                     "target": "com.amazonaws.securityhub#GetFindings"
                 },
                 {
@@ -18350,6 +18668,9 @@
                     "target": "com.amazonaws.securityhub#ListEnabledProductsForImport"
                 },
                 {
+                    "target": "com.amazonaws.securityhub#ListFindingAggregators"
+                },
+                {
                     "target": "com.amazonaws.securityhub#ListInvitations"
                 },
                 {
@@ -18369,6 +18690,9 @@
                 },
                 {
                     "target": "com.amazonaws.securityhub#UpdateActionTarget"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#UpdateFindingAggregator"
                 },
                 {
                     "target": "com.amazonaws.securityhub#UpdateFindings"
@@ -19345,6 +19669,97 @@
         "com.amazonaws.securityhub#UpdateActionTargetResponse": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.securityhub#UpdateFindingAggregator": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityhub#UpdateFindingAggregatorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.securityhub#UpdateFindingAggregatorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.securityhub#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidAccessException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the finding aggregation configuration. Used to update the Region linking mode and the list of included or excluded Regions. You cannot use <code>UpdateFindingAggregator</code> to change the aggregation Region.</p>\n         <p>You must run <code>UpdateFindingAggregator</code> from the current aggregation Region.\n      </p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/findingAggregator/update",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.securityhub#UpdateFindingAggregatorRequest": {
+            "type": "structure",
+            "members": {
+                "FindingAggregatorArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the finding aggregator. To obtain the ARN, use <code>ListFindingAggregators</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RegionLinkingMode": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to aggregate findings from all of the available Regions in the current partition. Also determines whether to automatically aggregate findings from new Regions as Security Hub supports them and you opt into them.</p>\n         <p>The selected option also determines how to use the Regions provided in the Regions list.</p>\n         <p>The options are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALL_REGIONS</code> - Indicates to aggregate findings from all of the Regions where Security Hub is enabled. When you choose this option, Security Hub also automatically aggregates findings from new Regions as Security Hub supports them and you opt into them.\n         </p>\n            </li>\n            <li>\n               <p>\n                  <code>ALL_REGIONS_EXCEPT_SPECIFIED</code> - Indicates to aggregate findings from all of the Regions where Security Hub is enabled, except for the Regions listed in the <code>Regions</code> parameter. When you choose this option, Security Hub also automatically aggregates findings from new Regions as Security Hub supports them and you opt into them.\n         </p>\n            </li>\n            <li>\n               <p>\n                  <code>SPECIFIED_REGIONS</code> - Indicates to aggregate findings only from the Regions listed in the <code>Regions</code> parameter. Security Hub does not automatically aggregate findings from new Regions.\n         </p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Regions": {
+                    "target": "com.amazonaws.securityhub#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>RegionLinkingMode</code> is <code>ALL_REGIONS_EXCEPT_SPECIFIED</code>, then this is a comma-separated list of Regions that do not aggregate findings to the aggregation Region.</p>\n         <p>If <code>RegionLinkingMode</code> is <code>SPECIFIED_REGIONS</code>, then this is a comma-separated list of Regions that do aggregate findings to the aggregation Region.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.securityhub#UpdateFindingAggregatorResponse": {
+            "type": "structure",
+            "members": {
+                "FindingAggregatorArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the finding aggregator.</p>"
+                    }
+                },
+                "FindingAggregationRegion": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The aggregation Region.</p>"
+                    }
+                },
+                "RegionLinkingMode": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to link all Regions, all Regions except for a list of excluded Regions, or a list of included Regions.</p>"
+                    }
+                },
+                "Regions": {
+                    "target": "com.amazonaws.securityhub#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of excluded Regions or included Regions.</p>"
+                    }
+                }
+            }
         },
         "com.amazonaws.securityhub#UpdateFindings": {
             "type": "operation",

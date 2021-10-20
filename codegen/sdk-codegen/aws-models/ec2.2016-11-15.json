@@ -3035,6 +3035,10 @@
                     {
                         "value": "arm64",
                         "name": "arm64"
+                    },
+                    {
+                        "value": "x86_64_mac",
+                        "name": "x86_64_mac"
                     }
                 ]
             }
@@ -10154,13 +10158,13 @@
                 "LogDestinationType": {
                     "target": "com.amazonaws.ec2#LogDestinationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the type of destination to which the flow log data is to be published. Flow log data can be \n            published to CloudWatch Logs or Amazon S3. To publish flow log data to CloudWatch Logs, specify <code>cloud-watch-logs</code>. To \n            publish flow log data to Amazon S3, specify <code>s3</code>.</p>\n        <p>If you specify <code>LogDestinationType</code> as <code>s3</code>, do not specify \n            <code>DeliverLogsPermissionArn</code> or <code>LogGroupName</code>.</p>\n        <p>Default: <code>cloud-watch-logs</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The type of destination to which the flow log data is to be published. Flow log data can be \n            published to CloudWatch Logs or Amazon S3. To publish flow log data to CloudWatch Logs, specify <code>cloud-watch-logs</code>. To \n            publish flow log data to Amazon S3, specify <code>s3</code>.</p>\n        <p>If you specify <code>LogDestinationType</code> as <code>s3</code>, do not specify \n            <code>DeliverLogsPermissionArn</code> or <code>LogGroupName</code>.</p>\n        <p>Default: <code>cloud-watch-logs</code>\n         </p>"
                     }
                 },
                 "LogDestination": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the destination to which the flow log data is to be published. Flow log data can be published \n            to a CloudWatch Logs log group or an Amazon S3 bucket. The value specified for this parameter depends on the value specified\n            for <code>LogDestinationType</code>.</p>\n        <p>If <code>LogDestinationType</code> is not specified or <code>cloud-watch-logs</code>,\n            specify the Amazon Resource Name (ARN) of the CloudWatch Logs log group. For example, to publish\n            to a log group called <code>my-logs</code>, specify\n            <code>arn:aws:logs:us-east-1:123456789012:log-group:my-logs</code>. Alternatively,\n            use <code>LogGroupName</code> instead.</p> \n        <p>If LogDestinationType is <code>s3</code>, specify the ARN of the Amazon S3 bucket. You can also specify a \n            subfolder in the bucket. To specify a subfolder in the bucket, use the following  ARN format: \n            <code>bucket_ARN/subfolder_name/</code>. For example, to specify a subfolder named <code>my-logs</code> in a \n            bucket named <code>my-bucket</code>, use the following ARN: <code>arn:aws:s3:::my-bucket/my-logs/</code>. You \n            cannot use <code>AWSLogs</code> as a subfolder name. This is a reserved term.</p>"
+                        "smithy.api#documentation": "<p>The destination to which the flow log data is to be published. Flow log data can be published \n            to a CloudWatch Logs log group or an Amazon S3 bucket. The value specified for this parameter depends on the value specified\n            for <code>LogDestinationType</code>.</p>\n        <p>If <code>LogDestinationType</code> is not specified or <code>cloud-watch-logs</code>,\n            specify the Amazon Resource Name (ARN) of the CloudWatch Logs log group. For example, to publish\n            to a log group called <code>my-logs</code>, specify\n            <code>arn:aws:logs:us-east-1:123456789012:log-group:my-logs</code>. Alternatively,\n            use <code>LogGroupName</code> instead.</p> \n        <p>If LogDestinationType is <code>s3</code>, specify the ARN of the Amazon S3 bucket. You can also specify a \n            subfolder in the bucket. To specify a subfolder in the bucket, use the following  ARN format: \n            <code>bucket_ARN/subfolder_name/</code>. For example, to specify a subfolder named <code>my-logs</code> in a \n            bucket named <code>my-bucket</code>, use the following ARN: <code>arn:aws:s3:::my-bucket/my-logs/</code>. You \n            cannot use <code>AWSLogs</code> as a subfolder name. This is a reserved term.</p>"
                     }
                 },
                 "LogFormat": {
@@ -10180,6 +10184,12 @@
                     "target": "com.amazonaws.ec2#Integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum interval of time during which a flow of packets is captured and aggregated into a flow log record. You can specify 60 seconds (1 minute) or 600 seconds (10 minutes).</p>\n        <p>When a network interface is attached to a <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances\">Nitro-based\n                instance</a>, the aggregation interval is always 60 seconds or less, regardless\n            of the value that you specify.</p>\n        <p>Default: 600</p>"
+                    }
+                },
+                "DestinationOptions": {
+                    "target": "com.amazonaws.ec2#DestinationOptionsRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination options.</p>"
                     }
                 }
             }
@@ -21202,7 +21212,7 @@
                 "Filters": {
                     "target": "com.amazonaws.ec2#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more filters. Filter names and values are case-sensitive.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>auto-recovery-supported</code> - Indicates whether auto recovery is supported  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>bare-metal</code> - Indicates whether it is a bare metal instance type  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>burstable-performance-supported</code> - Indicates whether it is a burstable\n     performance instance type  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>current-generation</code> - Indicates whether this instance type is the latest\n     generation instance type of an instance family  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.baseline-bandwidth-in-mbps</code> - The baseline\n                    bandwidth performance for an EBS-optimized instance type, in Mbps.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.baseline-iops</code> - The baseline input/output storage\n     operations per second for an EBS-optimized instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.baseline-throughput-in-mbps</code> - The baseline\n     throughput performance for an EBS-optimized instance type, in MB/s.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.maximum-bandwidth-in-mbps</code> - The maximum bandwidth\n                    performance for an EBS-optimized instance type, in Mbps.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.maximum-iops</code> - The maximum input/output storage\n                    operations per second for an EBS-optimized instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.maximum-throughput-in-mbps</code> - The maximum\n     throughput performance for an EBS-optimized instance type, in MB/s.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-support</code> - Indicates whether the instance type is\n     EBS-optimized (<code>supported</code> | <code>unsupported</code> |\n     <code>default</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.encryption-support</code> - Indicates whether EBS encryption is supported\n      (<code>supported</code> | <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.nvme-support</code> - Indicates whether non-volatile memory express (NVMe)\n     is supported for EBS volumes (<code>required</code> | <code>supported</code> | <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>free-tier-eligible</code> - Indicates whether the instance type is eligible to use\n     in the free tier  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>hibernation-supported</code> - Indicates whether On-Demand hibernation is supported  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>hypervisor</code> - The hypervisor (<code>nitro</code> | <code>xen</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.disk.count</code> - The number of local disks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.disk.size-in-gb</code> - The storage size of each instance storage disk, in\n     GB.</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.disk.type</code> - The storage technology for the local\n     instance storage disks (<code>hdd</code> | <code>ssd</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.nvme-support</code> - Indicates whether non-volatile memory\n     express (NVMe) is supported for instance store (<code>required</code> | <code>supported</code>)\n     | <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.total-size-in-gb</code> - The total amount of storage available from all local\n     instance storage, in GB.</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-supported</code> - Indicates whether the instance type has local\n     instance storage  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-type</code> - The instance type (for example <code>c5.2xlarge</code> or\n     c5*).</p>\n            </li>\n            <li>\n               <p>\n                  <code>memory-info.size-in-mib</code> - The memory size.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.efa-info.maximum-efa-interfaces</code> - The maximum number of Elastic \n     Fabric Adapters (EFAs) per instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.efa-supported</code> - Indicates whether the instance type supports\n     Elastic Fabric Adapter (EFA)  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.ena-support</code> - Indicates whether Elastic Network Adapter (ENA) is\n     supported or required (<code>required</code> | <code>supported</code> |\n      <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.encryption-in-transit-supported</code> - Indicates whether the instance type \n     automatically encrypts in-transit traffic between instances  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.ipv4-addresses-per-interface</code> - The maximum number of private IPv4 addresses per\n     network interface.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.ipv6-addresses-per-interface</code> - The maximum number of private IPv6 addresses per\n     network interface.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.ipv6-supported</code> - Indicates whether the instance type supports IPv6  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.maximum-network-interfaces</code> - The maximum number of network interfaces per instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.network-performance</code> - The network performance (for example, \"25\n     Gigabit\").</p>\n            </li>\n            <li>\n               <p>\n                  <code>processor-info.supported-architecture</code> - The CPU architecture\n      (<code>arm64</code> | <code>i386</code> | <code>x86_64</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>processor-info.sustained-clock-speed-in-ghz</code> - The CPU clock speed, in GHz.</p>\n            </li>\n            <li>\n               <p>\n                  <code>supported-boot-mode</code> - The boot mode (<code>legacy-bios</code> |\n      <code>uefi</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>supported-root-device-type</code> - The root device type (<code>ebs</code> |\n      <code>instance-store</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>supported-usage-class</code> - The usage class (<code>on-demand</code> |\n      <code>spot</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>supported-virtualization-type</code> - The virtualization type (<code>hvm</code> |\n      <code>paravirtual</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.default-cores</code> - The default number of cores for the instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.default-threads-per-core</code> - The default number of threads per core for the instance\n     type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.default-vcpus</code> - The default number of vCPUs for the instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.valid-cores</code> - The number of cores that can be configured for the instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.valid-threads-per-core</code> - The number of threads per core that can be configured for the instance type.\n        For example, \"1\" or \"1,2\".</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>One or more filters. Filter names and values are case-sensitive.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>auto-recovery-supported</code> - Indicates whether auto recovery is supported  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>bare-metal</code> - Indicates whether it is a bare metal instance type  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>burstable-performance-supported</code> - Indicates whether it is a burstable\n     performance instance type  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>current-generation</code> - Indicates whether this instance type is the latest\n     generation instance type of an instance family  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.baseline-bandwidth-in-mbps</code> - The baseline\n                    bandwidth performance for an EBS-optimized instance type, in Mbps.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.baseline-iops</code> - The baseline input/output storage\n     operations per second for an EBS-optimized instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.baseline-throughput-in-mbps</code> - The baseline\n     throughput performance for an EBS-optimized instance type, in MB/s.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.maximum-bandwidth-in-mbps</code> - The maximum bandwidth\n                    performance for an EBS-optimized instance type, in Mbps.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.maximum-iops</code> - The maximum input/output storage\n                    operations per second for an EBS-optimized instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.maximum-throughput-in-mbps</code> - The maximum\n     throughput performance for an EBS-optimized instance type, in MB/s.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-support</code> - Indicates whether the instance type is\n     EBS-optimized (<code>supported</code> | <code>unsupported</code> |\n     <code>default</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.encryption-support</code> - Indicates whether EBS encryption is supported\n      (<code>supported</code> | <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.nvme-support</code> - Indicates whether non-volatile memory express (NVMe)\n     is supported for EBS volumes (<code>required</code> | <code>supported</code> | <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>free-tier-eligible</code> - Indicates whether the instance type is eligible to use\n     in the free tier  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>hibernation-supported</code> - Indicates whether On-Demand hibernation is supported  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>hypervisor</code> - The hypervisor (<code>nitro</code> | <code>xen</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.disk.count</code> - The number of local disks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.disk.size-in-gb</code> - The storage size of each instance storage disk, in\n     GB.</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.disk.type</code> - The storage technology for the local\n     instance storage disks (<code>hdd</code> | <code>ssd</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.encryption-supported</code> - Indicates whether data is encrypted at rest \n     (<code>required</code> | <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.nvme-support</code> - Indicates whether non-volatile memory\n     express (NVMe) is supported for instance store (<code>required</code> | <code>supported</code> |\n     <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.total-size-in-gb</code> - The total amount of storage available from all local\n     instance storage, in GB.</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-supported</code> - Indicates whether the instance type has local\n     instance storage  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-type</code> - The instance type (for example <code>c5.2xlarge</code> or\n     c5*).</p>\n            </li>\n            <li>\n               <p>\n                  <code>memory-info.size-in-mib</code> - The memory size.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.efa-info.maximum-efa-interfaces</code> - The maximum number of Elastic \n     Fabric Adapters (EFAs) per instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.efa-supported</code> - Indicates whether the instance type supports\n     Elastic Fabric Adapter (EFA)  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.ena-support</code> - Indicates whether Elastic Network Adapter (ENA) is\n     supported or required (<code>required</code> | <code>supported</code> |\n      <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.encryption-in-transit-supported</code> - Indicates whether the instance type \n     automatically encrypts in-transit traffic between instances  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.ipv4-addresses-per-interface</code> - The maximum number of private IPv4 addresses per\n     network interface.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.ipv6-addresses-per-interface</code> - The maximum number of private IPv6 addresses per\n     network interface.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.ipv6-supported</code> - Indicates whether the instance type supports IPv6  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.maximum-network-interfaces</code> - The maximum number of network interfaces per instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.network-performance</code> - The network performance (for example, \"25\n     Gigabit\").</p>\n            </li>\n            <li>\n               <p>\n                  <code>processor-info.supported-architecture</code> - The CPU architecture\n      (<code>arm64</code> | <code>i386</code> | <code>x86_64</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>processor-info.sustained-clock-speed-in-ghz</code> - The CPU clock speed, in GHz.</p>\n            </li>\n            <li>\n               <p>\n                  <code>supported-boot-mode</code> - The boot mode (<code>legacy-bios</code> |\n      <code>uefi</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>supported-root-device-type</code> - The root device type (<code>ebs</code> |\n      <code>instance-store</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>supported-usage-class</code> - The usage class (<code>on-demand</code> |\n      <code>spot</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>supported-virtualization-type</code> - The virtualization type (<code>hvm</code> |\n      <code>paravirtual</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.default-cores</code> - The default number of cores for the instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.default-threads-per-core</code> - The default number of threads per core for the instance\n     type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.default-vcpus</code> - The default number of vCPUs for the instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.valid-cores</code> - The number of cores that can be configured for the instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.valid-threads-per-core</code> - The number of threads per core that can be configured for the instance type.\n        For example, \"1\" or \"1,2\".</p>\n            </li>\n         </ul>",
                         "smithy.api#xmlName": "Filter"
                     }
                 },
@@ -28104,6 +28114,79 @@
                 "smithy.api#documentation": "<p>Contains the output of DescribeVpnGateways.</p>"
             }
         },
+        "com.amazonaws.ec2#DestinationFileFormat": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "plain-text",
+                        "name": "plain_text"
+                    },
+                    {
+                        "value": "parquet",
+                        "name": "parquet"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ec2#DestinationOptionsRequest": {
+            "type": "structure",
+            "members": {
+                "FileFormat": {
+                    "target": "com.amazonaws.ec2#DestinationFileFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format for the flow log. The default is <code>plain-text</code>.</p>"
+                    }
+                },
+                "HiveCompatiblePartitions": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to use Hive-compatible prefixes for flow logs stored in Amazon S3.\n            The default is <code>false</code>.</p>"
+                    }
+                },
+                "PerHourPartition": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to partition the flow log per hour. This reduces the cost and response \n            time for queries. The default is <code>false</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the destination options for a flow log.</p>"
+            }
+        },
+        "com.amazonaws.ec2#DestinationOptionsResponse": {
+            "type": "structure",
+            "members": {
+                "FileFormat": {
+                    "target": "com.amazonaws.ec2#DestinationFileFormat",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "FileFormat",
+                        "smithy.api#documentation": "<p>The format for the flow log.</p>",
+                        "smithy.api#xmlName": "fileFormat"
+                    }
+                },
+                "HiveCompatiblePartitions": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "HiveCompatiblePartitions",
+                        "smithy.api#documentation": "<p>Indicates whether to use Hive-compatible prefixes for flow logs stored in Amazon S3.</p>",
+                        "smithy.api#xmlName": "hiveCompatiblePartitions"
+                    }
+                },
+                "PerHourPartition": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "PerHourPartition",
+                        "smithy.api#documentation": "<p>Indicates whether to partition the flow log per hour.</p>",
+                        "smithy.api#xmlName": "perHourPartition"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the destination options for a flow log.</p>"
+            }
+        },
         "com.amazonaws.ec2#DetachClassicLinkVpc": {
             "type": "operation",
             "input": {
@@ -29727,7 +29810,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the disk.</p>"
+                "smithy.api#documentation": "<p>Describes a disk.</p>"
             }
         },
         "com.amazonaws.ec2#DiskInfoList": {
@@ -33425,7 +33508,7 @@
                     "target": "com.amazonaws.ec2#LogDestinationType",
                     "traits": {
                         "aws.protocols#ec2QueryName": "LogDestinationType",
-                        "smithy.api#documentation": "<p>Specifies the type of destination to which the flow log data is published. Flow log data can be \n            published to CloudWatch Logs or Amazon S3.</p>",
+                        "smithy.api#documentation": "<p>The type of destination to which the flow log data is published. Flow log data can be \n            published to CloudWatch Logs or Amazon S3.</p>",
                         "smithy.api#xmlName": "logDestinationType"
                     }
                 },
@@ -33433,7 +33516,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "LogDestination",
-                        "smithy.api#documentation": "<p>Specifies the destination to which the flow log data is published. Flow log data can be\n            published to an CloudWatch Logs log group or an Amazon S3 bucket. If the flow log publishes to CloudWatch Logs,\n            this element indicates the Amazon Resource Name (ARN) of the CloudWatch Logs log group to which\n            the data is published. If the flow log publishes to Amazon S3, this element indicates the ARN\n            of the Amazon S3 bucket to which the data is published.</p>",
+                        "smithy.api#documentation": "<p>The destination to which the flow log data is published. Flow log data can be\n            published to an CloudWatch Logs log group or an Amazon S3 bucket. If the flow log publishes to CloudWatch Logs,\n            this element indicates the Amazon Resource Name (ARN) of the CloudWatch Logs log group to which\n            the data is published. If the flow log publishes to Amazon S3, this element indicates the ARN\n            of the Amazon S3 bucket to which the data is published.</p>",
                         "smithy.api#xmlName": "logDestination"
                     }
                 },
@@ -33459,6 +33542,14 @@
                         "aws.protocols#ec2QueryName": "MaxAggregationInterval",
                         "smithy.api#documentation": "<p>The maximum interval of time, in seconds, during which a flow of packets is captured and aggregated into a flow log record.</p>\n        <p>When a network interface is attached to a <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances\">Nitro-based\n                instance</a>, the aggregation interval is always 60 seconds (1 minute) or less,\n            regardless of the specified value.</p>\n        <p>Valid Values: <code>60</code> | <code>600</code>\n         </p>",
                         "smithy.api#xmlName": "maxAggregationInterval"
+                    }
+                },
+                "DestinationOptions": {
+                    "target": "com.amazonaws.ec2#DestinationOptionsResponse",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "DestinationOptions",
+                        "smithy.api#documentation": "<p>The destination options.</p>",
+                        "smithy.api#xmlName": "destinationOptions"
                     }
                 }
             },
@@ -40868,6 +40959,21 @@
                 "smithy.api#documentation": "<p>Describes the status of an instance.</p>"
             }
         },
+        "com.amazonaws.ec2#InstanceStorageEncryptionSupport": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "unsupported",
+                        "name": "unsupported"
+                    },
+                    {
+                        "value": "required",
+                        "name": "required"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.ec2#InstanceStorageFlag": {
             "type": "boolean",
             "traits": {
@@ -40897,13 +41003,21 @@
                     "target": "com.amazonaws.ec2#EphemeralNvmeSupport",
                     "traits": {
                         "aws.protocols#ec2QueryName": "NvmeSupport",
-                        "smithy.api#documentation": "<p>Indicates whether non-volatile memory express (NVMe) is supported for instance store.</p>",
+                        "smithy.api#documentation": "<p>Indicates whether non-volatile memory express (NVMe) is supported.</p>",
                         "smithy.api#xmlName": "nvmeSupport"
+                    }
+                },
+                "EncryptionSupport": {
+                    "target": "com.amazonaws.ec2#InstanceStorageEncryptionSupport",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "EncryptionSupport",
+                        "smithy.api#documentation": "<p>Indicates whether data is encrypted at rest.</p>",
+                        "smithy.api#xmlName": "encryptionSupport"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the disks that are available for the instance type.</p>"
+                "smithy.api#documentation": "<p>Describes the instance store features that are supported by the instance type.</p>"
             }
         },
         "com.amazonaws.ec2#InstanceTagKeySet": {

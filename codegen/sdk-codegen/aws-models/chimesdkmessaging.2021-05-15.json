@@ -49,6 +49,74 @@
                 "smithy.api#documentation": "<p>Summary of the membership details of an <code>AppInstanceUser</code>.</p>"
             }
         },
+        "com.amazonaws.chimesdkmessaging#AssociateChannelFlow": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkmessaging#AssociateChannelFlowRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates a channel flow with a channel. Once associated, all messages to that channel go through channel flow processors. To stop processing, use the \n         <code>DisassociateChannelFlow</code> API.</p>\n      \n         <note>\n            <p>Only administrators or channel moderators can associate a channel flow. The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> \n         of the user that makes the API call as the value in the header.</p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/channels/{ChannelArn}/channel-flow",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#AssociateChannelFlowRequest": {
+            "type": "structure",
+            "members": {
+                "ChannelArn": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the channel.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChannelFlowArn": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the channel flow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChimeBearer": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>AppInstanceUserArn</code> of the user making the API call.</p>",
+                        "smithy.api#httpHeader": "x-amz-chime-bearer",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.chimesdkmessaging#BadRequestException": {
             "type": "structure",
             "members": {
@@ -217,6 +285,15 @@
                 }
             }
         },
+        "com.amazonaws.chimesdkmessaging#CallbackIdType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 32,
+                    "max": 64
+                }
+            }
+        },
         "com.amazonaws.chimesdkmessaging#Channel": {
             "type": "structure",
             "members": {
@@ -273,10 +350,60 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time at which a channel was last updated.</p>"
                     }
+                },
+                "ChannelFlowArn": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the channel flow.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The details of a channel.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#ChannelAssociatedWithFlowSummary": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.chimesdkmessaging#NonEmptyResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the channel flow.</p>"
+                    }
+                },
+                "ChannelArn": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the channel.</p>"
+                    }
+                },
+                "Mode": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChannelMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mode of the channel.</p>"
+                    }
+                },
+                "Privacy": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChannelPrivacy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channel's privacy setting.</p>"
+                    }
+                },
+                "Metadata": {
+                    "target": "com.amazonaws.chimesdkmessaging#Metadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channel's metadata.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary of details of a channel associated with channel flow.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#ChannelAssociatedWithFlowSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chimesdkmessaging#ChannelAssociatedWithFlowSummary"
             }
         },
         "com.amazonaws.chimesdkmessaging#ChannelBan": {
@@ -329,6 +456,177 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.chimesdkmessaging#ChannelBanSummary"
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#ChannelFlow": {
+            "type": "structure",
+            "members": {
+                "ChannelFlowArn": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the channel flow.</p>"
+                    }
+                },
+                "Processors": {
+                    "target": "com.amazonaws.chimesdkmessaging#ProcessorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the processor Lambda functions.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.chimesdkmessaging#NonEmptyResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the channel flow.</p>"
+                    }
+                },
+                "CreatedTimestamp": {
+                    "target": "com.amazonaws.chimesdkmessaging#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the channel flow was created.</p>"
+                    }
+                },
+                "LastUpdatedTimestamp": {
+                    "target": "com.amazonaws.chimesdkmessaging#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which a channel flow was updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of a channel flow.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#ChannelFlowCallback": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkmessaging#ChannelFlowCallbackRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chimesdkmessaging#ChannelFlowCallbackResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Calls back Chime SDK Messaging with a processing response message. This should be invoked from the processor Lambda. This is a developer API.</p>\n         <p>You can return one of the following processing responses:</p>                  \n         <ul>\n            <li>\n               <p>Update message content or metadata</p>\n            </li>\n            <li>\n               <p>Deny a message</p>\n            </li>\n            <li>\n               <p>Make no changes to the message</p>\n            </li>\n         </ul>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/channels/{ChannelArn}?operation=channel-flow-callback",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#ChannelFlowCallbackRequest": {
+            "type": "structure",
+            "members": {
+                "CallbackId": {
+                    "target": "com.amazonaws.chimesdkmessaging#CallbackIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier passed to the processor by the service when invoked. Use the identifier to call back the service.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChannelArn": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the channel.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeleteResource": {
+                    "target": "com.amazonaws.chimesdkmessaging#NonNullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When a processor determines that a message needs to be <code>DENIED</code>, pass this parameter with a value of true.</p>"
+                    }
+                },
+                "ChannelMessage": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChannelMessageCallback",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Stores information about the processed message.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#ChannelFlowCallbackResponse": {
+            "type": "structure",
+            "members": {
+                "ChannelArn": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the channel.</p>"
+                    }
+                },
+                "CallbackId": {
+                    "target": "com.amazonaws.chimesdkmessaging#CallbackIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The call back ID passed in the request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#ChannelFlowExecutionOrder": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 3
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#ChannelFlowSummary": {
+            "type": "structure",
+            "members": {
+                "ChannelFlowArn": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the channel flow.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.chimesdkmessaging#NonEmptyResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the channel flow.</p>"
+                    }
+                },
+                "Processors": {
+                    "target": "com.amazonaws.chimesdkmessaging#ProcessorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the processor Lambda functions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary of details of a channel flow.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#ChannelFlowSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chimesdkmessaging#ChannelFlowSummary"
             }
         },
         "com.amazonaws.chimesdkmessaging#ChannelMembership": {
@@ -504,10 +802,43 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The persistence setting for a channel message.</p>"
                     }
+                },
+                "Status": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChannelMessageStatusStructure",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the channel message.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The details of a message in a channel.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#ChannelMessageCallback": {
+            "type": "structure",
+            "members": {
+                "MessageId": {
+                    "target": "com.amazonaws.chimesdkmessaging#MessageId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Content": {
+                    "target": "com.amazonaws.chimesdkmessaging#NonEmptyContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message content.</p>"
+                    }
+                },
+                "Metadata": {
+                    "target": "com.amazonaws.chimesdkmessaging#Metadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message metadata.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Stores information about a callback.</p>"
             }
         },
         "com.amazonaws.chimesdkmessaging#ChannelMessagePersistenceType": {
@@ -523,6 +854,49 @@
                         "name": "NON_PERSISTENT"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#ChannelMessageStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SENT",
+                        "name": "SENT"
+                    },
+                    {
+                        "value": "PENDING",
+                        "name": "PENDING"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    },
+                    {
+                        "value": "DENIED",
+                        "name": "DENIED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#ChannelMessageStatusStructure": {
+            "type": "structure",
+            "members": {
+                "Value": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChannelMessageStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message status value.</p>"
+                    }
+                },
+                "Detail": {
+                    "target": "com.amazonaws.chimesdkmessaging#StatusDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains more details about the messasge status.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Stores information about a message status.</p>"
             }
         },
         "com.amazonaws.chimesdkmessaging#ChannelMessageSummary": {
@@ -580,6 +954,12 @@
                     "target": "com.amazonaws.chimesdkmessaging#NonNullableBoolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether a message was redacted.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChannelMessageStatusStructure",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message status. The status value is <code>SENT</code> for messages sent to a channel without a channel flow. For channels associated with channel flow, the value determines the \n         processing stage.</p>"
                     }
                 }
             },
@@ -775,13 +1155,22 @@
             "version": "2021-05-15",
             "operations": [
                 {
+                    "target": "com.amazonaws.chimesdkmessaging#AssociateChannelFlow"
+                },
+                {
                     "target": "com.amazonaws.chimesdkmessaging#BatchCreateChannelMembership"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ChannelFlowCallback"
                 },
                 {
                     "target": "com.amazonaws.chimesdkmessaging#CreateChannel"
                 },
                 {
                     "target": "com.amazonaws.chimesdkmessaging#CreateChannelBan"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#CreateChannelFlow"
                 },
                 {
                     "target": "com.amazonaws.chimesdkmessaging#CreateChannelMembership"
@@ -794,6 +1183,9 @@
                 },
                 {
                     "target": "com.amazonaws.chimesdkmessaging#DeleteChannelBan"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#DeleteChannelFlow"
                 },
                 {
                     "target": "com.amazonaws.chimesdkmessaging#DeleteChannelMembership"
@@ -811,6 +1203,9 @@
                     "target": "com.amazonaws.chimesdkmessaging#DescribeChannelBan"
                 },
                 {
+                    "target": "com.amazonaws.chimesdkmessaging#DescribeChannelFlow"
+                },
+                {
                     "target": "com.amazonaws.chimesdkmessaging#DescribeChannelMembership"
                 },
                 {
@@ -823,13 +1218,22 @@
                     "target": "com.amazonaws.chimesdkmessaging#DescribeChannelModerator"
                 },
                 {
+                    "target": "com.amazonaws.chimesdkmessaging#DisassociateChannelFlow"
+                },
+                {
                     "target": "com.amazonaws.chimesdkmessaging#GetChannelMessage"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#GetChannelMessageStatus"
                 },
                 {
                     "target": "com.amazonaws.chimesdkmessaging#GetMessagingSessionEndpoint"
                 },
                 {
                     "target": "com.amazonaws.chimesdkmessaging#ListChannelBans"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ListChannelFlows"
                 },
                 {
                     "target": "com.amazonaws.chimesdkmessaging#ListChannelMemberships"
@@ -847,7 +1251,13 @@
                     "target": "com.amazonaws.chimesdkmessaging#ListChannels"
                 },
                 {
+                    "target": "com.amazonaws.chimesdkmessaging#ListChannelsAssociatedWithChannelFlow"
+                },
+                {
                     "target": "com.amazonaws.chimesdkmessaging#ListChannelsModeratedByAppInstanceUser"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ListTagsForResource"
                 },
                 {
                     "target": "com.amazonaws.chimesdkmessaging#RedactChannelMessage"
@@ -856,7 +1266,16 @@
                     "target": "com.amazonaws.chimesdkmessaging#SendChannelMessage"
                 },
                 {
+                    "target": "com.amazonaws.chimesdkmessaging#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#UntagResource"
+                },
+                {
                     "target": "com.amazonaws.chimesdkmessaging#UpdateChannel"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#UpdateChannelFlow"
                 },
                 {
                     "target": "com.amazonaws.chimesdkmessaging#UpdateChannelMessage"
@@ -1046,6 +1465,99 @@
                     "target": "com.amazonaws.chimesdkmessaging#Identity",
                     "traits": {
                         "smithy.api#documentation": "<p>The <code>ChannelArn</code> and <code>BannedIdentity</code> of the member in the ban\n         response.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#CreateChannelFlow": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkmessaging#CreateChannelFlowRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chimesdkmessaging#CreateChannelFlowResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ResourceLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a channel flow, a container for processors. Processors are AWS Lambda functions\n         that perform actions on chat messages, such as stripping out profanity. You can associate\n         channel flows with channels, and the processors in the channel flow then take action on all\n         messages sent to that channel. This is a developer API.</p>\n           \n           <p>Channel flows process the following items:</p>\n         <ol>\n            <li>\n               <p>New and updated messages</p>\n            </li>\n            <li>\n               <p>Persistent and non-persistent messages</p>\n            </li>\n            <li>\n               <p>The Standard message type</p>\n            </li>\n         </ol>\n       \n         <note>\n            <p>Channel flows don't process Control or System messages. For more information about the message types provided by Chime SDK Messaging, refer to \n           <a href=\"https://docs.aws.amazon.com/chime/latest/dg/using-the-messaging-sdk.html#msg-types\">Message types</a> in the <i>Amazon Chime developer guide</i>.</p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/channel-flows",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#CreateChannelFlowRequest": {
+            "type": "structure",
+            "members": {
+                "AppInstanceArn": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the channel flow request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Processors": {
+                    "target": "com.amazonaws.chimesdkmessaging#ProcessorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the processor Lambda functions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.chimesdkmessaging#NonEmptyResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the channel flow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.chimesdkmessaging#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags for the creation request.</p>"
+                    }
+                },
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.chimesdkmessaging#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client token for the request. An Idempotency token.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#CreateChannelFlowResponse": {
+            "type": "structure",
+            "members": {
+                "ChannelFlowArn": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the channel flow.</p>"
                     }
                 }
             }
@@ -1400,6 +1912,56 @@
                 }
             }
         },
+        "com.amazonaws.chimesdkmessaging#DeleteChannelFlow": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkmessaging#DeleteChannelFlowRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a channel flow, an irreversible process. This is a developer API.</p>\n         <note>\n            <p> This API works only when the channel flow is not associated with any channel. To get a list of all channels that a channel flow is associated with, use the \n           <code>ListChannelsAssociatedWithChannelFlow</code> API. Use the <code>DisassociateChannelFlow</code> API to disassociate a channel flow from all channels. </p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/channel-flows/{ChannelFlowArn}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#DeleteChannelFlowRequest": {
+            "type": "structure",
+            "members": {
+                "ChannelFlowArn": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the channel flow.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.chimesdkmessaging#DeleteChannelMembership": {
             "type": "operation",
             "input": {
@@ -1726,6 +2288,67 @@
                     "target": "com.amazonaws.chimesdkmessaging#ChannelBan",
                     "traits": {
                         "smithy.api#documentation": "<p>The details of the ban.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#DescribeChannelFlow": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkmessaging#DescribeChannelFlowRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chimesdkmessaging#DescribeChannelFlowResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the full details of a channel flow in an Amazon Chime <code>AppInstance</code>. This is a developer API.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/channel-flows/{ChannelFlowArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#DescribeChannelFlowRequest": {
+            "type": "structure",
+            "members": {
+                "ChannelFlowArn": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the channel flow.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#DescribeChannelFlowResponse": {
+            "type": "structure",
+            "members": {
+                "ChannelFlow": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChannelFlow",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channel flow details.</p>"
                     }
                 }
             }
@@ -2076,6 +2699,75 @@
                 }
             }
         },
+        "com.amazonaws.chimesdkmessaging#DisassociateChannelFlow": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkmessaging#DisassociateChannelFlowRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disassociates a channel flow from all its channels. Once disassociated, all messages to\n         that channel stop going through the channel flow processor.</p>\n         <note>\n            <p>Only administrators or channel moderators can disassociate a channel flow. The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> \n           of the user that makes the API call as the value in the header.</p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/channels/{ChannelArn}/channel-flow/{ChannelFlowArn}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#DisassociateChannelFlowRequest": {
+            "type": "structure",
+            "members": {
+                "ChannelArn": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the channel.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChannelFlowArn": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the channel flow.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChimeBearer": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>AppInstanceUserArn</code> of the user making the API call.</p>",
+                        "smithy.api#httpHeader": "x-amz-chime-bearer",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.chimesdkmessaging#ErrorCode": {
             "type": "string",
             "traits": {
@@ -2139,6 +2831,21 @@
                     {
                         "value": "PhoneNumberAssociationsExist",
                         "name": "PhoneNumberAssociationsExist"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#FallbackAction": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CONTINUE",
+                        "name": "CONTINUE"
+                    },
+                    {
+                        "value": "ABORT",
+                        "name": "ABORT"
                     }
                 ]
             }
@@ -2239,6 +2946,83 @@
                 }
             }
         },
+        "com.amazonaws.chimesdkmessaging#GetChannelMessageStatus": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkmessaging#GetChannelMessageStatusRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chimesdkmessaging#GetChannelMessageStatusResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets message status for a specified <code>messageId</code>. Use this API to determine the intermediate status of messages going through channel flow processing. The API provides an alternative to \n         retrieving message status if the event was not received because a client wasn't connected to a websocket. </p>\n      \n         <p>Messages can have any one of these statuses.</p>\n      \n         <dl>\n            <dt>SENT</dt>\n            <dd>\n               <p>Message processed successfully</p>\n            </dd>\n            <dt>PENDING</dt>\n            <dd>\n               <p>Ongoing processing</p>\n            </dd>\n            <dt>FAILED</dt>\n            <dd>\n               <p>Processing failed</p>\n            </dd>\n            <dt>DENIED</dt>\n            <dd>\n               <p>Messasge denied by the processor</p>\n            </dd>\n         </dl>\n      \n         <note>\n            <ul>\n               <li>\n                  <p>This API does not return statuses for denied messages, because we don't store them once the processor denies them. </p>\n               </li>\n               <li>\n                  <p>Only the message sender can invoke this API.</p>\n               </li>\n               <li>\n                  <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header</p>\n               </li>\n            </ul>\n         </note>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/channels/{ChannelArn}/messages/{MessageId}?scope=message-status",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#GetChannelMessageStatusRequest": {
+            "type": "structure",
+            "members": {
+                "ChannelArn": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the channel</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MessageId": {
+                    "target": "com.amazonaws.chimesdkmessaging#MessageId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the message.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChimeBearer": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>AppInstanceUserArn</code> of the user making the API call.</p>",
+                        "smithy.api#httpHeader": "x-amz-chime-bearer",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#GetChannelMessageStatusResponse": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChannelMessageStatusStructure",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message status and details.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.chimesdkmessaging#GetMessagingSessionEndpoint": {
             "type": "operation",
             "input": {
@@ -2306,6 +3090,49 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The details of a user.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#InvocationType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ASYNC",
+                        "name": "ASYNC"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#LambdaConfiguration": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.chimesdkmessaging#LambdaFunctionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Lambda message processing function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InvocationType": {
+                    "target": "com.amazonaws.chimesdkmessaging#InvocationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Controls how the Lambda function is invoked.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Stores metadata about a Lambda processor.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#LambdaFunctionArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 15,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws:lambda:[a-z]{2}-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9\\-_\\.]+(:(\\$LATEST|[a-zA-Z0-9\\-_]+))?$"
             }
         },
         "com.amazonaws.chimesdkmessaging#ListChannelBans": {
@@ -2404,6 +3231,92 @@
                     "target": "com.amazonaws.chimesdkmessaging#ChannelBanSummaryList",
                     "traits": {
                         "smithy.api#documentation": "<p>The information for each requested ban.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#ListChannelFlows": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkmessaging#ListChannelFlowsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chimesdkmessaging#ListChannelFlowsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a paginated lists of all the channel flows created under a single Chime. This is a developer API.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/channel-flows",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#ListChannelFlowsRequest": {
+            "type": "structure",
+            "members": {
+                "AppInstanceArn": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the app instance.</p>",
+                        "smithy.api#httpQuery": "app-instance-arn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.chimesdkmessaging#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of channel flows that you want to return.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.chimesdkmessaging#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token passed by previous API calls until all requested channel flows are returned.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#ListChannelFlowsResponse": {
+            "type": "structure",
+            "members": {
+                "ChannelFlows": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChannelFlowSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The information about each channel flow.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.chimesdkmessaging#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token passed by previous API calls until all requested channels are returned.</p>"
                     }
                 }
             }
@@ -2871,6 +3784,92 @@
                 }
             }
         },
+        "com.amazonaws.chimesdkmessaging#ListChannelsAssociatedWithChannelFlow": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkmessaging#ListChannelsAssociatedWithChannelFlowRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chimesdkmessaging#ListChannelsAssociatedWithChannelFlowResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all channels associated with a specified channel flow. You can associate a channel flow with multiple channels, but you can only associate a channel with one channel flow. This is a developer API.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/channels?scope=channel-flow-associations",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#ListChannelsAssociatedWithChannelFlowRequest": {
+            "type": "structure",
+            "members": {
+                "ChannelFlowArn": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the channel flow.</p>",
+                        "smithy.api#httpQuery": "channel-flow-arn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.chimesdkmessaging#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of channels that you want to return.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.chimesdkmessaging#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token passed by previous API calls until all requested channels are returned.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#ListChannelsAssociatedWithChannelFlowResponse": {
+            "type": "structure",
+            "members": {
+                "Channels": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChannelAssociatedWithFlowSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The information about each channel.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.chimesdkmessaging#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token passed by previous API calls until all requested channels are returned.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.chimesdkmessaging#ListChannelsModeratedByAppInstanceUser": {
             "type": "operation",
             "input": {
@@ -3023,6 +4022,67 @@
                 }
             }
         },
+        "com.amazonaws.chimesdkmessaging#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkmessaging#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chimesdkmessaging#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the tags applied to an Amazon Chime SDK messaging resource.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/tags",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceARN": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource.</p>",
+                        "smithy.api#httpQuery": "arn",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "Tags": {
+                    "target": "com.amazonaws.chimesdkmessaging#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag key-value pairs.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.chimesdkmessaging#MaxResults": {
             "type": "integer",
             "traits": {
@@ -3135,6 +4195,69 @@
                 "smithy.api#documentation": "<p>One or more of the resources in the request does not exist in the system.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#Processor": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.chimesdkmessaging#NonEmptyResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the channel flow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Configuration": {
+                    "target": "com.amazonaws.chimesdkmessaging#ProcessorConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The information about the type of processor and its identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExecutionOrder": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChannelFlowExecutionOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sequence in which processors run. If you have multiple processors in a channel flow, message processing goes through each processor in the sequence. The value determines the sequence. \n         At this point, we support only 1 processor within a flow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FallbackAction": {
+                    "target": "com.amazonaws.chimesdkmessaging#FallbackAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines whether to continue or stop processing if communication with processor fails. If the last processor in a channel flow sequence has a fallback action of CONTINUE, and communication \n         with the processor fails, the message is considered processed and sent to the recipients in the channel.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The information about a processor in a channel flow.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#ProcessorConfiguration": {
+            "type": "structure",
+            "members": {
+                "Lambda": {
+                    "target": "com.amazonaws.chimesdkmessaging#LambdaConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates that the processor is of type Lambda.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A processor's metadata.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#ProcessorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chimesdkmessaging#Processor"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 3
+                }
             }
         },
         "com.amazonaws.chimesdkmessaging#RedactChannelMessage": {
@@ -3357,6 +4480,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ID string assigned to each message.</p>"
                     }
+                },
+                "Status": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChannelMessageStatusStructure",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the channel message.</p>"
+                    }
                 }
             }
         },
@@ -3407,6 +4536,16 @@
                 ]
             }
         },
+        "com.amazonaws.chimesdkmessaging#StatusDetail": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
+            }
+        },
         "com.amazonaws.chimesdkmessaging#String": {
             "type": "string"
         },
@@ -3416,20 +4555,20 @@
                 "Key": {
                     "target": "com.amazonaws.chimesdkmessaging#TagKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key of the tag.</p>",
+                        "smithy.api#documentation": "<p>The key in a tag.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Value": {
                     "target": "com.amazonaws.chimesdkmessaging#TagValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value of the tag.</p>",
+                        "smithy.api#documentation": "<p>The value in a tag.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a tag applied to a resource.</p>"
+                "smithy.api#documentation": "<p>A tag object containing a key-value pair.</p>"
             }
         },
         "com.amazonaws.chimesdkmessaging#TagKey": {
@@ -3442,6 +4581,18 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.chimesdkmessaging#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chimesdkmessaging#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.chimesdkmessaging#TagList": {
             "type": "list",
             "member": {
@@ -3451,6 +4602,62 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 50
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkmessaging#TagResourceRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ResourceLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Applies the specified tags to the specified Amazon Chime SDK messaging resource.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/tags?operation=tag-resource",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceARN": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.chimesdkmessaging#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag key-value pairs.</p>",
+                        "smithy.api#required": {}
+                    }
                 }
             }
         },
@@ -3499,6 +4706,59 @@
                 "smithy.api#httpError": 401
             }
         },
+        "com.amazonaws.chimesdkmessaging#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkmessaging#UntagResourceRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes the specified tags from the specified Amazon Chime SDK messaging resource.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/tags?operation=untag-resource",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceARN": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagKeys": {
+                    "target": "com.amazonaws.chimesdkmessaging#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag keys.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.chimesdkmessaging#UpdateChannel": {
             "type": "operation",
             "input": {
@@ -3536,6 +4796,84 @@
                     "method": "PUT",
                     "uri": "/channels/{ChannelArn}",
                     "code": 200
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#UpdateChannelFlow": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkmessaging#UpdateChannelFlowRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chimesdkmessaging#UpdateChannelFlowResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates channel flow attributes. This is a developer API.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/channel-flows/{ChannelFlowArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#UpdateChannelFlowRequest": {
+            "type": "structure",
+            "members": {
+                "ChannelFlowArn": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the channel flow.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Processors": {
+                    "target": "com.amazonaws.chimesdkmessaging#ProcessorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the processor Lambda functions </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.chimesdkmessaging#NonEmptyResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the channel flow.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#UpdateChannelFlowResponse": {
+            "type": "structure",
+            "members": {
+                "ChannelFlowArn": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the channel flow.</p>"
+                    }
                 }
             }
         },
@@ -3633,6 +4971,12 @@
                     "target": "com.amazonaws.chimesdkmessaging#MessageId",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID string of the message being updated.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChannelMessageStatusStructure",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the message update.</p>"
                     }
                 }
             }

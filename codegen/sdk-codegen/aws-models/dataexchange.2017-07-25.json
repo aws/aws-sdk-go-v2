@@ -50,8 +50,14 @@
             "type": "structure",
             "members": {
                 "ExportRevisionToS3": {
-                    "target": "com.amazonaws.dataexchange#AutoExportRevisionToS3RequestDetails"
+                    "target": "com.amazonaws.dataexchange#AutoExportRevisionToS3RequestDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details for the export revision to Amazon S3 action.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>What occurs after a certain event.</p>"
             }
         },
         "com.amazonaws.dataexchange#Arn": {
@@ -92,8 +98,20 @@
             "type": "structure",
             "members": {
                 "S3SnapshotAsset": {
-                    "target": "com.amazonaws.dataexchange#S3SnapshotAsset"
+                    "target": "com.amazonaws.dataexchange#S3SnapshotAsset",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 object that is the asset.</p>"
+                    }
+                },
+                "RedshiftDataShareAsset": {
+                    "target": "com.amazonaws.dataexchange#RedshiftDataShareAsset",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Redshift datashare that is the asset.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the asset.</p>"
             }
         },
         "com.amazonaws.dataexchange#AssetEntry": {
@@ -109,14 +127,14 @@
                 "AssetDetails": {
                     "target": "com.amazonaws.dataexchange#AssetDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the asset, including its size.</p>",
+                        "smithy.api#documentation": "<p>Information about the asset.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "AssetType": {
                     "target": "com.amazonaws.dataexchange#AssetType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.</p>",
+                        "smithy.api#documentation": "<p>The type of asset that is added to a data set.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -170,7 +188,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An asset in AWS Data Exchange is a piece of data that can be stored as an S3 object. The asset can be a structured data file, an image file, or some other data file. When you create an import job for your files, you create an asset in AWS Data Exchange for each of those files.</p>"
+                "smithy.api#documentation": "<p>An asset in AWS Data Exchange is a piece of data. The asset can be a structured data file, an image file, or some other data file that can be stored as an S3 object, or an Amazon Redshift datashare (Preview). When you create an import job for your files, you create an asset in AWS Data Exchange for each of those files.</p>"
             }
         },
         "com.amazonaws.dataexchange#AssetName": {
@@ -204,11 +222,15 @@
         "com.amazonaws.dataexchange#AssetType": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.</p>",
+                "smithy.api#documentation": "<p>The type of asset that is added to a data set.</p>",
                 "smithy.api#enum": [
                     {
                         "value": "S3_SNAPSHOT",
                         "name": "S3_SNAPSHOT"
+                    },
+                    {
+                        "value": "REDSHIFT_DATA_SHARE",
+                        "name": "REDSHIFT_DATA_SHARE"
                     }
                 ]
             }
@@ -238,11 +260,15 @@
             "type": "structure",
             "members": {
                 "Encryption": {
-                    "target": "com.amazonaws.dataexchange#ExportServerSideEncryption"
+                    "target": "com.amazonaws.dataexchange#ExportServerSideEncryption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Encryption configuration for the auto export job.</p>"
+                    }
                 },
                 "RevisionDestination": {
                     "target": "com.amazonaws.dataexchange#AutoExportRevisionDestinationEntry",
                     "traits": {
+                        "smithy.api#documentation": "<p>A revision destination is the Amazon S3 bucket folder destination to where the export will be sent.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -399,7 +425,7 @@
                 "AssetType": {
                     "target": "com.amazonaws.dataexchange#AssetType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.</p>",
+                        "smithy.api#documentation": "<p>The type of asset that is added to a data set.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -440,7 +466,7 @@
                 "AssetType": {
                     "target": "com.amazonaws.dataexchange#AssetType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.</p>"
+                        "smithy.api#documentation": "<p>The type of asset that is added to a data set.</p>"
                     }
                 },
                 "CreatedAt": {
@@ -773,7 +799,7 @@
                 "Arn": {
                     "target": "com.amazonaws.dataexchange#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN for the revision</p>"
+                        "smithy.api#documentation": "<p>The ARN for the revision.</p>"
                     }
                 },
                 "Comment": {
@@ -941,7 +967,7 @@
                 "AssetType": {
                     "target": "com.amazonaws.dataexchange#AssetType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.</p>",
+                        "smithy.api#documentation": "<p>The type of asset that is added to a data set.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1220,19 +1246,34 @@
             "type": "structure",
             "members": {
                 "ImportAssetFromSignedUrlJobErrorDetails": {
-                    "target": "com.amazonaws.dataexchange#ImportAssetFromSignedUrlJobErrorDetails"
+                    "target": "com.amazonaws.dataexchange#ImportAssetFromSignedUrlJobErrorDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the job error.</p>"
+                    }
                 },
                 "ImportAssetsFromS3JobErrorDetails": {
-                    "target": "com.amazonaws.dataexchange#ListOfAssetSourceEntry"
+                    "target": "com.amazonaws.dataexchange#ListOfAssetSourceEntry",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the job error.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the job error.</p>"
             }
         },
         "com.amazonaws.dataexchange#Event": {
             "type": "structure",
             "members": {
                 "RevisionPublished": {
-                    "target": "com.amazonaws.dataexchange#RevisionPublished"
+                    "target": "com.amazonaws.dataexchange#RevisionPublished",
+                    "traits": {
+                        "smithy.api#documentation": "<p>What occurs to start the revision publish action.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>What occurs to start an action.</p>"
             }
         },
         "com.amazonaws.dataexchange#EventActionEntry": {
@@ -1248,7 +1289,7 @@
                 "Arn": {
                     "target": "com.amazonaws.dataexchange#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN for the event action.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the event action.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1490,6 +1531,12 @@
                         "smithy.api#documentation": "<p>The destination in Amazon S3 where the revision is exported.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "EventActionArn": {
+                    "target": "com.amazonaws.dataexchange#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the event action.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1589,13 +1636,13 @@
                 "AssetDetails": {
                     "target": "com.amazonaws.dataexchange#AssetDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the asset, including its size.</p>"
+                        "smithy.api#documentation": "<p>Information about the asset.</p>"
                     }
                 },
                 "AssetType": {
                     "target": "com.amazonaws.dataexchange#AssetType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.</p>"
+                        "smithy.api#documentation": "<p>The type of asset that is added to a data set.</p>"
                     }
                 },
                 "CreatedAt": {
@@ -1619,7 +1666,7 @@
                 "Name": {
                     "target": "com.amazonaws.dataexchange#AssetName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the asset When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key.</p>"
+                        "smithy.api#documentation": "<p>The name of the asset. When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key.</p>"
                     }
                 },
                 "RevisionId": {
@@ -1698,7 +1745,7 @@
                 "AssetType": {
                     "target": "com.amazonaws.dataexchange#AssetType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.</p>"
+                        "smithy.api#documentation": "<p>The type of asset that is added to a data set.</p>"
                     }
                 },
                 "CreatedAt": {
@@ -1997,7 +2044,7 @@
                 "Arn": {
                     "target": "com.amazonaws.dataexchange#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN for the revision</p>"
+                        "smithy.api#documentation": "<p>The ARN for the revision.</p>"
                     }
                 },
                 "Comment": {
@@ -2062,9 +2109,13 @@
                 "AssetName": {
                     "target": "com.amazonaws.dataexchange#AssetName",
                     "traits": {
+                        "smithy.api#documentation": "<p>Information about the job error.</p>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the job error.</p>"
             }
         },
         "com.amazonaws.dataexchange#ImportAssetFromSignedUrlRequestDetails": {
@@ -2109,7 +2160,7 @@
                 "AssetName": {
                     "target": "com.amazonaws.dataexchange#AssetName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name for the asset associated with this import response.</p>",
+                        "smithy.api#documentation": "<p>The name for the asset associated with this import job.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2148,6 +2199,64 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The details in the response for an import request, including the signed URL and other information.</p>"
+            }
+        },
+        "com.amazonaws.dataexchange#ImportAssetsFromRedshiftDataSharesRequestDetails": {
+            "type": "structure",
+            "members": {
+                "AssetSources": {
+                    "target": "com.amazonaws.dataexchange#ListOfRedshiftDataShareAssetSourceEntry",
+                    "traits": {
+                        "smithy.api#documentation": "A list of Amazon Redshift datashare assets.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataSetId": {
+                    "target": "com.amazonaws.dataexchange#Id",
+                    "traits": {
+                        "smithy.api#documentation": "The unique identifier for the data set associated with this import job.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RevisionId": {
+                    "target": "com.amazonaws.dataexchange#Id",
+                    "traits": {
+                        "smithy.api#documentation": "The unique identifier for the revision associated with this import job.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Details from an import from Amazon Redshift datashare request."
+            }
+        },
+        "com.amazonaws.dataexchange#ImportAssetsFromRedshiftDataSharesResponseDetails": {
+            "type": "structure",
+            "members": {
+                "AssetSources": {
+                    "target": "com.amazonaws.dataexchange#ListOfRedshiftDataShareAssetSourceEntry",
+                    "traits": {
+                        "smithy.api#documentation": "A list of Amazon Redshift datashare asset sources.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataSetId": {
+                    "target": "com.amazonaws.dataexchange#Id",
+                    "traits": {
+                        "smithy.api#documentation": "The unique identifier for the data set associated with this import job.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RevisionId": {
+                    "target": "com.amazonaws.dataexchange#Id",
+                    "traits": {
+                        "smithy.api#documentation": "The unique identifier for the revision associated with this import job.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Details from an import from Amazon Redshift datashare response."
             }
         },
         "com.amazonaws.dataexchange#ImportAssetsFromS3RequestDetails": {
@@ -2299,7 +2408,10 @@
                     }
                 },
                 "Details": {
-                    "target": "com.amazonaws.dataexchange#Details"
+                    "target": "com.amazonaws.dataexchange#Details",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details about the job error.</p>"
+                    }
                 },
                 "LimitName": {
                     "target": "com.amazonaws.dataexchange#JobErrorLimitName",
@@ -2349,6 +2461,10 @@
                     {
                         "value": "Asset size in GB",
                         "name": "Asset_size_in_GB"
+                    },
+                    {
+                        "value": "Amazon Redshift datashare assets per revision",
+                        "name": "Amazon_Redshift_datashare_assets_per_revision"
                     }
                 ]
             }
@@ -2410,20 +2526,20 @@
                         "name": "Asset_size_in_GB"
                     },
                     {
-                        "value": "Concurrent in progress jobs to import assets from Amazon S3",
-                        "name": "Concurrent_in_progress_jobs_to_import_assets_from_Amazon_S3"
-                    },
-                    {
-                        "value": "Concurrent in progress jobs to import assets from a signed URL",
-                        "name": "Concurrent_in_progress_jobs_to_import_assets_from_a_signed_URL"
-                    },
-                    {
                         "value": "Concurrent in progress jobs to export assets to Amazon S3",
                         "name": "Concurrent_in_progress_jobs_to_export_assets_to_Amazon_S3"
                     },
                     {
                         "value": "Concurrent in progress jobs to export assets to a signed URL",
                         "name": "Concurrent_in_progress_jobs_to_export_assets_to_a_signed_URL"
+                    },
+                    {
+                        "value": "Concurrent in progress jobs to import assets from Amazon S3",
+                        "name": "Concurrent_in_progress_jobs_to_import_assets_from_Amazon_S3"
+                    },
+                    {
+                        "value": "Concurrent in progress jobs to import assets from a signed URL",
+                        "name": "Concurrent_in_progress_jobs_to_import_assets_from_a_signed_URL"
                     },
                     {
                         "value": "Concurrent in progress jobs to export revisions to Amazon S3",
@@ -2436,6 +2552,22 @@
                     {
                         "value": "Auto export event actions per data set",
                         "name": "Auto_export_event_actions_per_data_set"
+                    },
+                    {
+                        "value": "Amazon Redshift datashare assets per import job from Redshift",
+                        "name": "Amazon_Redshift_datashare_assets_per_import_job_from_Redshift"
+                    },
+                    {
+                        "value": "Concurrent in progress jobs to import assets from Amazon Redshift datashares",
+                        "name": "Concurrent_in_progress_jobs_to_import_assets_from_Amazon_Redshift_datashares"
+                    },
+                    {
+                        "value": "Revisions per Amazon Redshift datashare data set",
+                        "name": "Revisions_per_Amazon_Redshift_datashare_data_set"
+                    },
+                    {
+                        "value": "Amazon Redshift datashare assets per revision",
+                        "name": "Amazon_Redshift_datashare_assets_per_revision"
                     }
                 ]
             }
@@ -2816,6 +2948,15 @@
                 "target": "com.amazonaws.dataexchange#JobError"
             }
         },
+        "com.amazonaws.dataexchange#ListOfRedshiftDataShareAssetSourceEntry": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.dataexchange#RedshiftDataShareAssetSourceEntry"
+            },
+            "traits": {
+                "smithy.api#documentation": "A list of Amazon Redshift datashare asset sources."
+            }
+        },
         "com.amazonaws.dataexchange#ListOfRevisionDestinationEntry": {
             "type": "list",
             "member": {
@@ -3020,9 +3161,43 @@
                 "ProductId": {
                     "target": "com.amazonaws.dataexchange#__string",
                     "traits": {
+                        "smithy.api#documentation": "<p>The product ID of the origin of the data set.</p>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the origin of the data set.</p>"
+            }
+        },
+        "com.amazonaws.dataexchange#RedshiftDataShareAsset": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.dataexchange#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The Amazon Resource Name (ARN) of the datashare asset.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The Amazon Redshift datashare asset."
+            }
+        },
+        "com.amazonaws.dataexchange#RedshiftDataShareAssetSourceEntry": {
+            "type": "structure",
+            "members": {
+                "DataShareArn": {
+                    "target": "com.amazonaws.dataexchange#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The Amazon Resource Name (ARN) of the datashare asset.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The source of the Amazon Redshift datashare asset.</p>"
             }
         },
         "com.amazonaws.dataexchange#RequestDetails": {
@@ -3056,6 +3231,12 @@
                     "target": "com.amazonaws.dataexchange#ImportAssetsFromS3RequestDetails",
                     "traits": {
                         "smithy.api#documentation": "<p>Details about the import from Amazon S3 request.</p>"
+                    }
+                },
+                "ImportAssetsFromRedshiftDataShares": {
+                    "target": "com.amazonaws.dataexchange#ImportAssetsFromRedshiftDataSharesRequestDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details from an import from Amazon Redshift datashare request.</p>"
                     }
                 }
             },
@@ -3150,6 +3331,12 @@
                     "target": "com.amazonaws.dataexchange#ImportAssetsFromS3ResponseDetails",
                     "traits": {
                         "smithy.api#documentation": "<p>Details for the import from Amazon S3 response.</p>"
+                    }
+                },
+                "ImportAssetsFromRedshiftDataShares": {
+                    "target": "com.amazonaws.dataexchange#ImportAssetsFromRedshiftDataSharesResponseDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details from an import from Amazon Redshift datashare response.</p>"
                     }
                 }
             },
@@ -3252,9 +3439,13 @@
                 "DataSetId": {
                     "target": "com.amazonaws.dataexchange#Id",
                     "traits": {
+                        "smithy.api#documentation": "<p>The data set ID of the published revision.</p>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the published revision.</p>"
             }
         },
         "com.amazonaws.dataexchange#S3SnapshotAsset": {
@@ -3487,6 +3678,10 @@
                     {
                         "value": "EXPORT_REVISIONS_TO_S3",
                         "name": "EXPORT_REVISIONS_TO_S3"
+                    },
+                    {
+                        "value": "IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES",
+                        "name": "IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES"
                     }
                 ]
             }
@@ -3614,13 +3809,13 @@
                 "AssetDetails": {
                     "target": "com.amazonaws.dataexchange#AssetDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the asset, including its size.</p>"
+                        "smithy.api#documentation": "<p>Information about the asset.</p>"
                     }
                 },
                 "AssetType": {
                     "target": "com.amazonaws.dataexchange#AssetType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.</p>"
+                        "smithy.api#documentation": "<p>The type of asset that is added to a data set.</p>"
                     }
                 },
                 "CreatedAt": {
@@ -3644,7 +3839,7 @@
                 "Name": {
                     "target": "com.amazonaws.dataexchange#AssetName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the asset When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key.</p>"
+                        "smithy.api#documentation": "<p>The name of the asset. When importing from Amazon S3, the S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target S3 object key.</p>"
                     }
                 },
                 "RevisionId": {
@@ -3741,7 +3936,7 @@
                 "AssetType": {
                     "target": "com.amazonaws.dataexchange#AssetType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of file your data is stored in. Currently, the supported asset type is S3_SNAPSHOT.</p>"
+                        "smithy.api#documentation": "<p>The type of asset that is added to a data set.</p>"
                     }
                 },
                 "CreatedAt": {

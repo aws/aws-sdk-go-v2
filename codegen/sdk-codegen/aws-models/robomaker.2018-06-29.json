@@ -471,13 +471,31 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9_.\\-]*$"
             }
         },
+        "com.amazonaws.robomaker#CommandList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.robomaker#NonEmptyString"
+            }
+        },
         "com.amazonaws.robomaker#Compute": {
             "type": "structure",
             "members": {
                 "simulationUnitLimit": {
                     "target": "com.amazonaws.robomaker#SimulationUnit",
                     "traits": {
-                        "smithy.api#documentation": "<p>The simulation unit limit. Your simulation is allocated CPU and memory proportional to\n         the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are\n         only billed for the SU utilization you consume up to the maximim value provided. The\n         default is 15. </p>"
+                        "smithy.api#documentation": "<p>The simulation unit limit. Your simulation is allocated CPU and memory proportional to\n         the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are\n        only billed for the SU utilization you consume up to the maximum value provided. The\n         default is 15. </p>"
+                    }
+                },
+                "computeType": {
+                    "target": "com.amazonaws.robomaker#ComputeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Compute type information for the simulation job.</p>"
+                    }
+                },
+                "gpuUnitLimit": {
+                    "target": "com.amazonaws.robomaker#GPUUnit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Compute GPU unit limit for the simulation job. It is the same as the number of GPUs\n        allocated to the SimulationJob.</p>"
                     }
                 }
             },
@@ -491,12 +509,39 @@
                 "simulationUnitLimit": {
                     "target": "com.amazonaws.robomaker#SimulationUnit",
                     "traits": {
-                        "smithy.api#documentation": "<p>The simulation unit limit. Your simulation is allocated CPU and memory proportional to\n         the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are\n         only billed for the SU utilization you consume up to the maximim value provided. The\n         default is 15. </p>"
+                        "smithy.api#documentation": "<p>The simulation unit limit. Your simulation is allocated CPU and memory proportional to\n         the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are\n         only billed for the SU utilization you consume up to the maximum value provided. The\n         default is 15. </p>"
+                    }
+                },
+                "computeType": {
+                    "target": "com.amazonaws.robomaker#ComputeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Compute type response information for the simulation job.</p>"
+                    }
+                },
+                "gpuUnitLimit": {
+                    "target": "com.amazonaws.robomaker#GPUUnit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Compute GPU unit limit for the simulation job. It is the same as the number of GPUs\n         allocated to the SimulationJob.</p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Compute information for the simulation job</p>"
+            }
+        },
+        "com.amazonaws.robomaker#ComputeType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CPU",
+                        "name": "CPU"
+                    },
+                    {
+                        "value": "GPU_AND_CPU",
+                        "name": "GPU_AND_CPU"
+                    }
+                ]
             }
         },
         "com.amazonaws.robomaker#ConcurrentDeploymentException": {
@@ -831,7 +876,7 @@
                 "environment": {
                     "target": "com.amazonaws.robomaker#Environment",
                     "traits": {
-                        "smithy.api#documentation": "<p>The object that contains that URI of the Docker image that you use for your robot application.</p>"
+                        "smithy.api#documentation": "<p>The object that contains that URI of the Docker image that you use for your robot\n         application.</p>"
                     }
                 }
             }
@@ -890,7 +935,7 @@
                 "environment": {
                     "target": "com.amazonaws.robomaker#Environment",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that contains the Docker image URI used to a create your robot application.</p>"
+                        "smithy.api#documentation": "<p>An object that contains the Docker image URI used to a create your robot\n         application.</p>"
                     }
                 }
             }
@@ -948,7 +993,7 @@
                 "s3Etags": {
                     "target": "com.amazonaws.robomaker#S3Etags",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 identifier for the zip file bundle that you use for your robot application.</p>"
+                        "smithy.api#documentation": "<p>The Amazon S3 identifier for the zip file bundle that you use for your robot\n         application.</p>"
                     }
                 },
                 "imageDigest": {
@@ -1007,7 +1052,7 @@
                 "environment": {
                     "target": "com.amazonaws.robomaker#Environment",
                     "traits": {
-                        "smithy.api#documentation": "<p>The object that contains the Docker image URI used to create your robot application.</p>"
+                        "smithy.api#documentation": "<p>The object that contains the Docker image URI used to create your robot\n         application.</p>"
                     }
                 }
             }
@@ -1167,7 +1212,7 @@
                 "environment": {
                     "target": "com.amazonaws.robomaker#Environment",
                     "traits": {
-                        "smithy.api#documentation": "<p>The object that contains the Docker image URI used to create your simulation application.</p>"
+                        "smithy.api#documentation": "<p>The object that contains the Docker image URI used to create your simulation\n         application.</p>"
                     }
                 }
             }
@@ -1238,7 +1283,7 @@
                 "environment": {
                     "target": "com.amazonaws.robomaker#Environment",
                     "traits": {
-                        "smithy.api#documentation": "<p>The object that contains the Docker image URI that you used to create your simulation application.</p>"
+                        "smithy.api#documentation": "<p>The object that contains the Docker image URI that you used to create your simulation\n         application.</p>"
                     }
                 }
             }
@@ -1296,13 +1341,13 @@
                 "s3Etags": {
                     "target": "com.amazonaws.robomaker#S3Etags",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 eTag identifier for the zip file bundle that you use to create the simulation application.</p>"
+                        "smithy.api#documentation": "<p>The Amazon S3 eTag identifier for the zip file bundle that you use to create the\n         simulation application.</p>"
                     }
                 },
                 "imageDigest": {
                     "target": "com.amazonaws.robomaker#ImageDigest",
                     "traits": {
-                        "smithy.api#documentation": "<p>The SHA256 digest used to identify the Docker image URI used to created the simulation application.</p>"
+                        "smithy.api#documentation": "<p>The SHA256 digest used to identify the Docker image URI used to created the simulation\n         application.</p>"
                     }
                 }
             }
@@ -1367,7 +1412,7 @@
                 "environment": {
                     "target": "com.amazonaws.robomaker#Environment",
                     "traits": {
-                        "smithy.api#documentation": "<p>The object that contains the Docker image URI used to create the simulation application.</p>"
+                        "smithy.api#documentation": "<p>The object that contains the Docker image URI used to create the simulation\n         application.</p>"
                     }
                 }
             }
@@ -1451,7 +1496,7 @@
                 "failureBehavior": {
                     "target": "com.amazonaws.robomaker#FailureBehavior",
                     "traits": {
-                        "smithy.api#documentation": "<p>The failure behavior the simulation job.</p>\n         <dl>\n            <dt>Continue</dt>\n            <dd>\n               <p>Leaves the instance running for its maximum timeout duration after a <code>4XX</code> error code.</p>\n            </dd>\n            <dt>Fail</dt>\n            <dd>\n               <p>Stop the simulation job and terminate the instance.</p>\n            </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p>The failure behavior the simulation job.</p>\n         <dl>\n            <dt>Continue</dt>\n            <dd>\n               <p>Leaves the instance running for its maximum timeout duration after a\n                     <code>4XX</code> error code.</p>\n            </dd>\n            <dt>Fail</dt>\n            <dd>\n               <p>Stop the simulation job and terminate the instance.</p>\n            </dd>\n         </dl>"
                     }
                 },
                 "robotApplications": {
@@ -2009,6 +2054,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The list of S3 keys identifying the data source files.</p>"
                     }
+                },
+                "type": {
+                    "target": "com.amazonaws.robomaker#DataSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type for the data source that you're using for your container image or\n         simulation job. You can use this field to specify whether your data source is an Archive,\n         an Amazon S3 prefix, or a file.</p>\n         <p>If you don't specify a field, the default value is <code>File</code>.</p>"
+                    }
+                },
+                "destination": {
+                    "target": "com.amazonaws.robomaker#Path",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location where your files are mounted in the container image.</p>\n         <p>If you've specified the <code>type</code> of the data source as an <code>Archive</code>,\n         you must provide an Amazon S3 object key to your archive. The object key must point to\n         either a <code>.zip</code> or <code>.tar.gz</code> file.</p>\n         <p>If you've specified the <code>type</code> of the data source as a <code>Prefix</code>,\n         you provide the Amazon S3 prefix that points to the files that you are using for your data\n         source.</p>\n         <p>If you've specified the <code>type</code> of the data source as a <code>File</code>, you\n         provide the Amazon S3 path to the file that you're using as your data source.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2033,10 +2090,22 @@
                     }
                 },
                 "s3Keys": {
-                    "target": "com.amazonaws.robomaker#S3Keys",
+                    "target": "com.amazonaws.robomaker#S3KeysOrPrefixes",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of S3 keys identifying the data source files.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.robomaker#DataSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type for the data source that you're using for your container image or\n         simulation job. You can use this field to specify whether your data source is an Archive,\n         an Amazon S3 prefix, or a file.</p>\n         <p>If you don't specify a field, the default value is <code>File</code>.</p>"
+                    }
+                },
+                "destination": {
+                    "target": "com.amazonaws.robomaker#Path",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location where your files are mounted in the container image.</p>\n         <p>If you've specified the <code>type</code> of the data source as an <code>Archive</code>,\n         you must provide an Amazon S3 object key to your archive. The object key must point to\n         either a <code>.zip</code> or <code>.tar.gz</code> file.</p>\n         <p>If you've specified the <code>type</code> of the data source as a <code>Prefix</code>,\n         you provide the Amazon S3 prefix that points to the files that you are using for your data\n         source.</p>\n         <p>If you've specified the <code>type</code> of the data source as a <code>File</code>, you\n         provide the Amazon S3 path to the file that you're using as your data source.</p>"
                     }
                 }
             },
@@ -2060,6 +2129,25 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.robomaker#Name"
+            }
+        },
+        "com.amazonaws.robomaker#DataSourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Prefix",
+                        "name": "Prefix"
+                    },
+                    {
+                        "value": "Archive",
+                        "name": "Archive"
+                    },
+                    {
+                        "value": "File",
+                        "name": "File"
+                    }
+                ]
             }
         },
         "com.amazonaws.robomaker#DataSources": {
@@ -3039,7 +3127,7 @@
                 "environment": {
                     "target": "com.amazonaws.robomaker#Environment",
                     "traits": {
-                        "smithy.api#documentation": "<p>The object that contains the Docker image URI used to create the robot application.</p>"
+                        "smithy.api#documentation": "<p>The object that contains the Docker image URI used to create the robot\n         application.</p>"
                     }
                 },
                 "imageDigest": {
@@ -3242,13 +3330,13 @@
                 "environment": {
                     "target": "com.amazonaws.robomaker#Environment",
                     "traits": {
-                        "smithy.api#documentation": "<p>The object that contains the Docker image URI used to create the simulation application.</p>"
+                        "smithy.api#documentation": "<p>The object that contains the Docker image URI used to create the simulation\n         application.</p>"
                     }
                 },
                 "imageDigest": {
                     "target": "com.amazonaws.robomaker#ImageDigest",
                     "traits": {
-                        "smithy.api#documentation": "<p>A SHA256 identifier for the Docker image that you use for your simulation application.</p>"
+                        "smithy.api#documentation": "<p>A SHA256 identifier for the Docker image that you use for your simulation\n         application.</p>"
                     }
                 }
             }
@@ -3948,7 +4036,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The object that contains the Docker image URI for either your robot or simulation applications.</p>"
+                "smithy.api#documentation": "<p>The object that contains the Docker image URI for either your robot or simulation\n         applications.</p>"
             }
         },
         "com.amazonaws.robomaker#EnvironmentVariableKey": {
@@ -4209,6 +4297,16 @@
                 "smithy.api#box": {}
             }
         },
+        "com.amazonaws.robomaker#GPUUnit": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.robomaker#GenericInteger": {
             "type": "integer",
             "traits": {
@@ -4387,15 +4485,13 @@
                 "packageName": {
                     "target": "com.amazonaws.robomaker#Command",
                     "traits": {
-                        "smithy.api#documentation": "<p>The package name.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The package name.</p>"
                     }
                 },
                 "launchFile": {
                     "target": "com.amazonaws.robomaker#Command",
                     "traits": {
-                        "smithy.api#documentation": "<p>The launch file name.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The launch file name.</p>"
                     }
                 },
                 "environmentVariables": {
@@ -4414,6 +4510,12 @@
                     "target": "com.amazonaws.robomaker#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Boolean indicating whether a streaming session will be configured for the application.\n         If <code>True</code>, AWS RoboMaker will configure a connection so you can interact with\n         your application as it is running in the simulation. You must configure and launch the\n         component. It must have a graphical user interface. </p>"
+                    }
+                },
+                "command": {
+                    "target": "com.amazonaws.robomaker#CommandList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If you've specified <code>General</code> as the value for your <code>RobotSoftwareSuite</code>, you can use this field to specify a list of commands for your container image.</p>\n         <p>If you've specified <code>SimulationRuntime</code> as the value for your <code>SimulationSoftwareSuite</code>, you can use this field to specify a list of commands for your container image.</p>"
                     }
                 }
             },
@@ -5857,7 +5959,7 @@
                 "useDefaultTools": {
                     "target": "com.amazonaws.robomaker#BoxedBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean indicating whether to use default robot application tools. \n        The default tools are rviz, rqt, terminal and rosbag record. \n        The default is <code>False</code>.\n      </p>"
+                        "smithy.api#documentation": "<p>A Boolean indicating whether to use default robot application tools. The default tools\n         are rviz, rqt, terminal and rosbag record. The default is <code>False</code>. </p>"
                     }
                 }
             },
@@ -6055,6 +6157,10 @@
                     {
                         "value": "ROS2",
                         "name": "ROS2"
+                    },
+                    {
+                        "value": "General",
+                        "name": "General"
                     }
                 ]
             }
@@ -6158,11 +6264,21 @@
                 "smithy.api#pattern": ".*"
             }
         },
+        "com.amazonaws.robomaker#S3KeyOrPrefix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
         "com.amazonaws.robomaker#S3KeyOutput": {
             "type": "structure",
             "members": {
                 "s3Key": {
-                    "target": "com.amazonaws.robomaker#S3Key",
+                    "target": "com.amazonaws.robomaker#S3KeyOrPrefix",
                     "traits": {
                         "smithy.api#documentation": "<p>The S3 key.</p>"
                     }
@@ -6184,10 +6300,10 @@
                 "target": "com.amazonaws.robomaker#S3KeyOutput"
             }
         },
-        "com.amazonaws.robomaker#S3Keys": {
+        "com.amazonaws.robomaker#S3KeysOrPrefixes": {
             "type": "list",
             "member": {
-                "target": "com.amazonaws.robomaker#S3Key"
+                "target": "com.amazonaws.robomaker#S3KeyOrPrefix"
             },
             "traits": {
                 "smithy.api#length": {
@@ -6299,7 +6415,7 @@
                 "useDefaultTools": {
                     "target": "com.amazonaws.robomaker#BoxedBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean indicating whether to use default simulation application tools. \n        The default tools are rviz, rqt, terminal and rosbag record.\n        The default is <code>False</code>.\n      </p>"
+                        "smithy.api#documentation": "<p>A Boolean indicating whether to use default simulation application tools. The default\n         tools are rviz, rqt, terminal and rosbag record. The default is <code>False</code>. </p>"
                     }
                 }
             },
@@ -6417,7 +6533,7 @@
                 "failureBehavior": {
                     "target": "com.amazonaws.robomaker#FailureBehavior",
                     "traits": {
-                        "smithy.api#documentation": "<p>The failure behavior the simulation job.</p>\n         <dl>\n            <dt>Continue</dt>\n            <dd>\n               <p>Leaves the host running for its maximum timeout duration after a <code>4XX</code> error code.</p>\n            </dd>\n            <dt>Fail</dt>\n            <dd>\n               <p>Stop the simulation job and terminate the instance.</p>\n            </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p>The failure behavior the simulation job.</p>\n         <dl>\n            <dt>Continue</dt>\n            <dd>\n               <p>Leaves the host running for its maximum timeout duration after a\n                     <code>4XX</code> error code.</p>\n            </dd>\n            <dt>Fail</dt>\n            <dd>\n               <p>Stop the simulation job and terminate the instance.</p>\n            </dd>\n         </dl>"
                     }
                 },
                 "failureCode": {
@@ -6781,7 +6897,7 @@
                 "failureBehavior": {
                     "target": "com.amazonaws.robomaker#FailureBehavior",
                     "traits": {
-                        "smithy.api#documentation": "<p>The failure behavior the simulation job.</p>\n         <dl>\n            <dt>Continue</dt>\n            <dd>\n               <p>Leaves the host running for its maximum timeout duration after a <code>4XX</code> error code.</p>\n            </dd>\n            <dt>Fail</dt>\n            <dd>\n               <p>Stop the simulation job and terminate the instance.</p>\n            </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p>The failure behavior the simulation job.</p>\n         <dl>\n            <dt>Continue</dt>\n            <dd>\n               <p>Leaves the host running for its maximum timeout duration after a\n                     <code>4XX</code> error code.</p>\n            </dd>\n            <dt>Fail</dt>\n            <dd>\n               <p>Stop the simulation job and terminate the instance.</p>\n            </dd>\n         </dl>"
                     }
                 },
                 "useDefaultApplications": {
@@ -6931,6 +7047,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The names of the data sources.</p>"
                     }
+                },
+                "computeType": {
+                    "target": "com.amazonaws.robomaker#ComputeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compute type for the simulation job summary.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6974,6 +7096,10 @@
                     {
                         "value": "RosbagPlay",
                         "name": "RosbagPlay"
+                    },
+                    {
+                        "value": "SimulationRuntime",
+                        "name": "SimulationRuntime"
                     }
                 ]
             }
@@ -7523,7 +7649,7 @@
                 "streamUI": {
                     "target": "com.amazonaws.robomaker#BoxedBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Boolean indicating whether a streaming session will be configured for the tool.\n         If <code>True</code>, AWS RoboMaker will configure a connection so you can interact with\n         the tool as it is running in the simulation. It must have a graphical user interface. \n         The default is <code>False</code>.\n      </p>"
+                        "smithy.api#documentation": "<p>Boolean indicating whether a streaming session will be configured for the tool. If\n            <code>True</code>, AWS RoboMaker will configure a connection so you can interact with\n         the tool as it is running in the simulation. It must have a graphical user interface. The\n         default is <code>False</code>. </p>"
                     }
                 },
                 "name": {
@@ -7543,13 +7669,13 @@
                 "streamOutputToCloudWatch": {
                     "target": "com.amazonaws.robomaker#BoxedBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Boolean indicating whether logs will be recorded in CloudWatch for the tool.\n      The default is <code>False</code>.\n      </p>"
+                        "smithy.api#documentation": "<p>Boolean indicating whether logs will be recorded in CloudWatch for the tool. The default\n         is <code>False</code>. </p>"
                     }
                 },
                 "exitBehavior": {
                     "target": "com.amazonaws.robomaker#ExitBehavior",
                     "traits": {
-                        "smithy.api#documentation": "<p>Exit behavior determines what happens when your tool quits running. \n        <code>RESTART</code> will cause your tool to be restarted. <code>FAIL</code>\n        will cause your job to exit. The default is <code>RESTART</code>.\n      </p>"
+                        "smithy.api#documentation": "<p>Exit behavior determines what happens when your tool quits running. <code>RESTART</code>\n         will cause your tool to be restarted. <code>FAIL</code> will cause your job to exit. The\n         default is <code>RESTART</code>. </p>"
                     }
                 }
             },
@@ -7903,7 +8029,7 @@
                 "environment": {
                     "target": "com.amazonaws.robomaker#Environment",
                     "traits": {
-                        "smithy.api#documentation": "<p>The object that contains the Docker image URI used for your simulation application.</p>"
+                        "smithy.api#documentation": "<p>The object that contains the Docker image URI used for your simulation\n         application.</p>"
                     }
                 }
             }
@@ -8019,7 +8145,7 @@
                 "name": {
                     "target": "com.amazonaws.robomaker#Name",
                     "traits": {
-                        "smithy.api#documentation": "<p>A prefix that specifies where files will be uploaded in Amazon S3. \n        It is appended to the simulation output location to determine the final path.\n       </p>\n         <p>\n        For example, if your simulation output location is <code>s3://my-bucket</code> and your upload \n        configuration name is <code>robot-test</code>, your files will be uploaded to \n        <code>s3://my-bucket/<simid>/<runid>/robot-test</code>.\n      </p>",
+                        "smithy.api#documentation": "<p>A prefix that specifies where files will be uploaded in Amazon S3. It is appended to the\n         simulation output location to determine the final path. </p>\n         <p> For example, if your simulation output location is <code>s3://my-bucket</code> and your\n         upload configuration name is <code>robot-test</code>, your files will be uploaded to\n            <code>s3://my-bucket/<simid>/<runid>/robot-test</code>. </p>",
                         "smithy.api#required": {}
                     }
                 },
