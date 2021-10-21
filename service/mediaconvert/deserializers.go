@@ -11082,6 +11082,15 @@ func awsRestjson1_deserializeDocumentFileSourceSettings(v **types.FileSourceSett
 				sv.TimeDelta = int32(i64)
 			}
 
+		case "timeDeltaUnits":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FileSourceTimeDeltaUnits to be of type string, got %T instead", value)
+				}
+				sv.TimeDeltaUnits = types.FileSourceTimeDeltaUnits(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

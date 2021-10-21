@@ -2155,6 +2155,30 @@ func awsRestjson1_serializeDocumentImportAssetFromSignedUrlRequestDetails(v *typ
 	return nil
 }
 
+func awsRestjson1_serializeDocumentImportAssetsFromRedshiftDataSharesRequestDetails(v *types.ImportAssetsFromRedshiftDataSharesRequestDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AssetSources != nil {
+		ok := object.Key("AssetSources")
+		if err := awsRestjson1_serializeDocumentListOfRedshiftDataShareAssetSourceEntry(v.AssetSources, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DataSetId != nil {
+		ok := object.Key("DataSetId")
+		ok.String(*v.DataSetId)
+	}
+
+	if v.RevisionId != nil {
+		ok := object.Key("RevisionId")
+		ok.String(*v.RevisionId)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentImportAssetsFromS3RequestDetails(v *types.ImportAssetsFromS3RequestDetails, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2205,6 +2229,19 @@ func awsRestjson1_serializeDocumentListOfAssetSourceEntry(v []types.AssetSourceE
 	return nil
 }
 
+func awsRestjson1_serializeDocumentListOfRedshiftDataShareAssetSourceEntry(v []types.RedshiftDataShareAssetSourceEntry, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentRedshiftDataShareAssetSourceEntry(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentListOfRevisionDestinationEntry(v []types.RevisionDestinationEntry, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -2226,6 +2263,18 @@ func awsRestjson1_serializeDocumentMapOf__string(v map[string]string, value smit
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRedshiftDataShareAssetSourceEntry(v *types.RedshiftDataShareAssetSourceEntry, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DataShareArn != nil {
+		ok := object.Key("DataShareArn")
+		ok.String(*v.DataShareArn)
+	}
+
 	return nil
 }
 
@@ -2257,6 +2306,13 @@ func awsRestjson1_serializeDocumentRequestDetails(v *types.RequestDetails, value
 	if v.ImportAssetFromSignedUrl != nil {
 		ok := object.Key("ImportAssetFromSignedUrl")
 		if err := awsRestjson1_serializeDocumentImportAssetFromSignedUrlRequestDetails(v.ImportAssetFromSignedUrl, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ImportAssetsFromRedshiftDataShares != nil {
+		ok := object.Key("ImportAssetsFromRedshiftDataShares")
+		if err := awsRestjson1_serializeDocumentImportAssetsFromRedshiftDataSharesRequestDetails(v.ImportAssetsFromRedshiftDataShares, ok); err != nil {
 			return err
 		}
 	}

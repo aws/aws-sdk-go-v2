@@ -10234,6 +10234,12 @@ func awsAwsquery_deserializeDocumentSslPolicy(v **types.SslPolicy, decoder smith
 				return err
 			}
 
+		case strings.EqualFold("SupportedLoadBalancerTypes", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentListOfString(&sv.SupportedLoadBalancerTypes, nodeDecoder); err != nil {
+				return err
+			}
+
 		default:
 			// Do nothing and ignore the unexpected tag element
 			err = decoder.Decoder.Skip()

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the Direct Connect locations in the current Region. These are the
-// locations that can be selected when calling CreateConnection or
+// Lists the Direct Connect locations in the current Amazon Web Services Region.
+// These are the locations that can be selected when calling CreateConnection or
 // CreateInterconnect.
 func (c *Client) DescribeLocations(ctx context.Context, params *DescribeLocationsInput, optFns ...func(*Options)) (*DescribeLocationsOutput, error) {
 	if params == nil {

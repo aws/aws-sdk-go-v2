@@ -685,6 +685,7 @@ type RecrawlBehavior string
 const (
 	RecrawlBehaviorCrawlEverything     RecrawlBehavior = "CRAWL_EVERYTHING"
 	RecrawlBehaviorCrawlNewFoldersOnly RecrawlBehavior = "CRAWL_NEW_FOLDERS_ONLY"
+	RecrawlBehaviorCrawlEventMode      RecrawlBehavior = "CRAWL_EVENT_MODE"
 )
 
 // Values returns all known values for RecrawlBehavior. Note that this can be
@@ -694,6 +695,7 @@ func (RecrawlBehavior) Values() []RecrawlBehavior {
 	return []RecrawlBehavior{
 		"CRAWL_EVERYTHING",
 		"CRAWL_NEW_FOLDERS_ONLY",
+		"CRAWL_EVENT_MODE",
 	}
 }
 

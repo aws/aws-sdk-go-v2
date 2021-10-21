@@ -410,6 +410,26 @@ func (m *validateOpDeregisterFromWorkMail) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeregisterMailDomain struct {
+}
+
+func (*validateOpDeregisterMailDomain) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeregisterMailDomain) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeregisterMailDomainInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeregisterMailDomainInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeGroup struct {
 }
 
@@ -630,6 +650,26 @@ func (m *validateOpGetMailboxDetails) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetMailDomain struct {
+}
+
+func (*validateOpGetMailDomain) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMailDomain) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMailDomainInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMailDomainInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetMobileDeviceAccessEffect struct {
 }
 
@@ -785,6 +825,26 @@ func (m *validateOpListMailboxPermissions) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListMailboxPermissionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListMailDomains struct {
+}
+
+func (*validateOpListMailDomains) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListMailDomains) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListMailDomainsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListMailDomainsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1010,6 +1070,26 @@ func (m *validateOpPutRetentionPolicy) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRegisterMailDomain struct {
+}
+
+func (*validateOpRegisterMailDomain) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRegisterMailDomain) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RegisterMailDomainInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRegisterMailDomainInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRegisterToWorkMail struct {
 }
 
@@ -1105,6 +1185,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUntagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateDefaultMailDomain struct {
+}
+
+func (*validateOpUpdateDefaultMailDomain) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateDefaultMailDomain) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateDefaultMailDomainInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateDefaultMailDomainInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1270,6 +1370,10 @@ func addOpDeregisterFromWorkMailValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpDeregisterFromWorkMail{}, middleware.After)
 }
 
+func addOpDeregisterMailDomainValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeregisterMailDomain{}, middleware.After)
+}
+
 func addOpDescribeGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeGroup{}, middleware.After)
 }
@@ -1314,6 +1418,10 @@ func addOpGetMailboxDetailsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMailboxDetails{}, middleware.After)
 }
 
+func addOpGetMailDomainValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMailDomain{}, middleware.After)
+}
+
 func addOpGetMobileDeviceAccessEffectValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMobileDeviceAccessEffect{}, middleware.After)
 }
@@ -1344,6 +1452,10 @@ func addOpListMailboxExportJobsValidationMiddleware(stack *middleware.Stack) err
 
 func addOpListMailboxPermissionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListMailboxPermissions{}, middleware.After)
+}
+
+func addOpListMailDomainsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListMailDomains{}, middleware.After)
 }
 
 func addOpListMobileDeviceAccessOverridesValidationMiddleware(stack *middleware.Stack) error {
@@ -1390,6 +1502,10 @@ func addOpPutRetentionPolicyValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpPutRetentionPolicy{}, middleware.After)
 }
 
+func addOpRegisterMailDomainValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRegisterMailDomain{}, middleware.After)
+}
+
 func addOpRegisterToWorkMailValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRegisterToWorkMail{}, middleware.After)
 }
@@ -1408,6 +1524,10 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateDefaultMailDomainValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateDefaultMailDomain{}, middleware.After)
 }
 
 func addOpUpdateMailboxQuotaValidationMiddleware(stack *middleware.Stack) error {
@@ -1883,6 +2003,24 @@ func validateOpDeregisterFromWorkMailInput(v *DeregisterFromWorkMailInput) error
 	}
 }
 
+func validateOpDeregisterMailDomainInput(v *DeregisterMailDomainInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeregisterMailDomainInput"}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeGroupInput(v *DescribeGroupInput) error {
 	if v == nil {
 		return nil
@@ -2084,6 +2222,24 @@ func validateOpGetMailboxDetailsInput(v *GetMailboxDetailsInput) error {
 	}
 }
 
+func validateOpGetMailDomainInput(v *GetMailDomainInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMailDomainInput"}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetMobileDeviceAccessEffectInput(v *GetMobileDeviceAccessEffectInput) error {
 	if v == nil {
 		return nil
@@ -2211,6 +2367,21 @@ func validateOpListMailboxPermissionsInput(v *ListMailboxPermissionsInput) error
 	}
 	if v.EntityId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EntityId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListMailDomainsInput(v *ListMailDomainsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListMailDomainsInput"}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2427,6 +2598,24 @@ func validateOpPutRetentionPolicyInput(v *PutRetentionPolicyInput) error {
 	}
 }
 
+func validateOpRegisterMailDomainInput(v *RegisterMailDomainInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegisterMailDomainInput"}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpRegisterToWorkMailInput(v *RegisterToWorkMailInput) error {
 	if v == nil {
 		return nil
@@ -2534,6 +2723,24 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateDefaultMailDomainInput(v *UpdateDefaultMailDomainInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDefaultMailDomainInput"}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

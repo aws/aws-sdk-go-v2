@@ -12,12 +12,12 @@ import (
 )
 
 // Activates the gateway you previously deployed on your host. In the activation
-// process, you specify information such as the Region that you want to use for
-// storing snapshots or tapes, the time zone for scheduled snapshots the gateway
-// snapshot schedule window, an activation key, and a name for your gateway. The
-// activation process also associates your gateway with your account. For more
-// information, see UpdateGatewayInformation. You must turn on the gateway VM
-// before you can activate your gateway.
+// process, you specify information such as the Amazon Web Services Region that you
+// want to use for storing snapshots or tapes, the time zone for scheduled
+// snapshots the gateway snapshot schedule window, an activation key, and a name
+// for your gateway. The activation process also associates your gateway with your
+// account. For more information, see UpdateGatewayInformation. You must turn on
+// the gateway VM before you can activate your gateway.
 func (c *Client) ActivateGateway(ctx context.Context, params *ActivateGatewayInput, optFns ...func(*Options)) (*ActivateGatewayOutput, error) {
 	if params == nil {
 		params = &ActivateGatewayInput{}
@@ -72,10 +72,11 @@ type ActivateGatewayInput struct {
 	// This member is required.
 	GatewayName *string
 
-	// A value that indicates the Region where you want to store your data. The gateway
-	// Region specified must be the same Region as the Region in your Host header in
-	// the request. For more information about available Regions and endpoints for
-	// Storage Gateway, see  Storage Gateway endpoints and quotas
+	// A value that indicates the Amazon Web Services Region where you want to store
+	// your data. The gateway Amazon Web Services Region specified must be the same
+	// Amazon Web Services Region as the Amazon Web Services Region in your Host header
+	// in the request. For more information about available Amazon Web Services Regions
+	// and endpoints for Storage Gateway, see  Storage Gateway endpoints and quotas
 	// (https://docs.aws.amazon.com/general/latest/gr/sg.html) in the Amazon Web
 	// Services General Reference. Valid Values: See  Storage Gateway endpoints and
 	// quotas (https://docs.aws.amazon.com/general/latest/gr/sg.html) in the Amazon Web
@@ -120,14 +121,15 @@ type ActivateGatewayInput struct {
 
 // Storage Gateway returns the Amazon Resource Name (ARN) of the activated gateway.
 // It is a string made of information such as your account, gateway name, and
-// Region. This ARN is used to reference the gateway in other API operations as
-// well as resource-based authorization. For gateways activated prior to September
-// 02, 2015, the gateway ARN contains the gateway name rather than the gateway ID.
-// Changing the name of the gateway has no effect on the gateway ARN.
+// Amazon Web Services Region. This ARN is used to reference the gateway in other
+// API operations as well as resource-based authorization. For gateways activated
+// prior to September 02, 2015, the gateway ARN contains the gateway name rather
+// than the gateway ID. Changing the name of the gateway has no effect on the
+// gateway ARN.
 type ActivateGatewayOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Region.
+	// return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// Metadata pertaining to the operation's result.

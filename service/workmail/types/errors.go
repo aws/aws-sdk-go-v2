@@ -172,6 +172,32 @@ func (e *InvalidConfigurationException) ErrorMessage() string {
 func (e *InvalidConfigurationException) ErrorCode() string             { return "InvalidConfigurationException" }
 func (e *InvalidConfigurationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// You SES configuration has customizations that Amazon WorkMail cannot save. The
+// error message lists the invalid setting. For examples of invalid settings, refer
+// to CreateReceiptRule
+// (https://docs.aws.amazon.com/ses/latest/APIReference/API_CreateReceiptRule.html).
+type InvalidCustomSesConfigurationException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidCustomSesConfigurationException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidCustomSesConfigurationException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidCustomSesConfigurationException) ErrorCode() string {
+	return "InvalidCustomSesConfigurationException"
+}
+func (e *InvalidCustomSesConfigurationException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // One or more of the input parameters don't match the service's restrictions.
 type InvalidParameterException struct {
 	Message *string
@@ -230,8 +256,27 @@ func (e *LimitExceededException) ErrorMessage() string {
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// For an email or alias to be created in Amazon WorkMail, the included domain must
-// be defined in the organization.
+// The domain you're trying to change is in use by another user or organization in
+// your account. See the error message for details.
+type MailDomainInUseException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *MailDomainInUseException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *MailDomainInUseException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *MailDomainInUseException) ErrorCode() string             { return "MailDomainInUseException" }
+func (e *MailDomainInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The domain specified is not found in your organization.
 type MailDomainNotFoundException struct {
 	Message *string
 

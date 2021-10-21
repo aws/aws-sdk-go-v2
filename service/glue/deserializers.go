@@ -31577,6 +31577,24 @@ func awsAwsjson11_deserializeDocumentS3Target(v **types.S3Target, value interfac
 				sv.ConnectionName = ptr.String(jtv)
 			}
 
+		case "DlqEventQueueArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EventQueueArn to be of type string, got %T instead", value)
+				}
+				sv.DlqEventQueueArn = ptr.String(jtv)
+			}
+
+		case "EventQueueArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EventQueueArn to be of type string, got %T instead", value)
+				}
+				sv.EventQueueArn = ptr.String(jtv)
+			}
+
 		case "Exclusions":
 			if err := awsAwsjson11_deserializeDocumentPathList(&sv.Exclusions, value); err != nil {
 				return err

@@ -52,8 +52,8 @@ const (
 	ApplicationStatusUpdating      ApplicationStatus = "UPDATING"
 	ApplicationStatusAutoscaling   ApplicationStatus = "AUTOSCALING"
 	ApplicationStatusForceStopping ApplicationStatus = "FORCE_STOPPING"
-	ApplicationStatusMaintenance   ApplicationStatus = "MAINTENANCE"
 	ApplicationStatusRollingBack   ApplicationStatus = "ROLLING_BACK"
+	ApplicationStatusMaintenance   ApplicationStatus = "MAINTENANCE"
 	ApplicationStatusRolledBack    ApplicationStatus = "ROLLED_BACK"
 )
 
@@ -70,8 +70,8 @@ func (ApplicationStatus) Values() []ApplicationStatus {
 		"UPDATING",
 		"AUTOSCALING",
 		"FORCE_STOPPING",
-		"MAINTENANCE",
 		"ROLLING_BACK",
+		"MAINTENANCE",
 		"ROLLED_BACK",
 	}
 }
@@ -219,8 +219,10 @@ const (
 	RuntimeEnvironmentSql10           RuntimeEnvironment = "SQL-1_0"
 	RuntimeEnvironmentFlink16         RuntimeEnvironment = "FLINK-1_6"
 	RuntimeEnvironmentFlink18         RuntimeEnvironment = "FLINK-1_8"
-	RuntimeEnvironmentFlink111        RuntimeEnvironment = "FLINK-1_11"
 	RuntimeEnvironmentZeppelinFlink10 RuntimeEnvironment = "ZEPPELIN-FLINK-1_0"
+	RuntimeEnvironmentFlink111        RuntimeEnvironment = "FLINK-1_11"
+	RuntimeEnvironmentFlink113        RuntimeEnvironment = "FLINK-1_13"
+	RuntimeEnvironmentZeppelinFlink20 RuntimeEnvironment = "ZEPPELIN-FLINK-2_0"
 )
 
 // Values returns all known values for RuntimeEnvironment. Note that this can be
@@ -231,8 +233,10 @@ func (RuntimeEnvironment) Values() []RuntimeEnvironment {
 		"SQL-1_0",
 		"FLINK-1_6",
 		"FLINK-1_8",
-		"FLINK-1_11",
 		"ZEPPELIN-FLINK-1_0",
+		"FLINK-1_11",
+		"FLINK-1_13",
+		"ZEPPELIN-FLINK-2_0",
 	}
 }
 

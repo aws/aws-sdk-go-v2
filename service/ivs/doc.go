@@ -4,35 +4,15 @@
 // Interactive Video Service.
 //
 // Introduction The Amazon Interactive Video Service (IVS) API is REST compatible,
-// using a standard HTTP API and an AWS EventBridge event stream for responses.
-// JSON is used for both requests and responses, including errors. The API is an
-// AWS regional service, currently in these regions: us-west-2, us-east-1, and
-// eu-west-1. All API request parameters and URLs are case sensitive. For a summary
-// of notable documentation changes in each release, see  Document History
-// (https://docs.aws.amazon.com/ivs/latest/userguide/doc-history.html). Service
-// Endpoints The following are the Amazon IVS service endpoints (all HTTPS): Region
-// name: US West (Oregon)
-//
-// * Region: us-west-2
-//
-// * Endpoint:
-// ivs.us-west-2.amazonaws.com
-//
-// Region name: US East (Virginia)
-//
-// * Region:
-// us-east-1
-//
-// * Endpoint: ivs.us-east-1.amazonaws.com
-//
-// Region name: EU West
-// (Dublin)
-//
-// * Region: eu-west-1
-//
-// * Endpoint: ivs.eu-west-1.amazonaws.com
-//
-// Allowed
+// using a standard HTTP API and an Amazon Web Services EventBridge event stream
+// for responses. JSON is used for both requests and responses, including errors.
+// The API is an Amazon Web Services regional service. For a list of supported
+// regions and Amazon IVS HTTPS service endpoints, see the Amazon IVS page
+// (https://docs.aws.amazon.com/general/latest/gr/ivs.html) in the Amazon Web
+// Services General Reference. All API request parameters and URLs are case
+// sensitive. For a summary of notable documentation changes in each release, see
+// Document History
+// (https://docs.aws.amazon.com/ivs/latest/userguide/doc-history.html). Allowed
 // Header Values
 //
 // * Accept:  application/json
@@ -69,46 +49,48 @@
 // Configuration endpoints for more information.
 //
 // Tagging A tag is a metadata label
-// that you assign to an AWS resource. A tag comprises a key and a value, both set
-// by you. For example, you might set a tag as topic:nature to label a particular
-// video category. See Tagging AWS Resources
+// that you assign to an Amazon Web Services resource. A tag comprises a key and a
+// value, both set by you. For example, you might set a tag as topic:nature to
+// label a particular video category. See Tagging Amazon Web Services Resources
 // (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) for more
 // information, including restrictions that apply to tags. Tags can help you
-// identify and organize your AWS resources. For example, you can use the same tag
-// for different resources to indicate that they are related. You can also use tags
-// to manage access (see  Access Tags
+// identify and organize your Amazon Web Services resources. For example, you can
+// use the same tag for different resources to indicate that they are related. You
+// can also use tags to manage access (see  Access Tags
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html)). The Amazon
 // IVS API has these tag-related endpoints: TagResource, UntagResource, and
 // ListTagsForResource. The following resources support tagging: Channels, Stream
-// Keys, Playback Key Pairs, and Recording Configurations. Authentication versus
-// Authorization Note the differences between these concepts:
+// Keys, Playback Key Pairs, and Recording Configurations. At most 50 tags can be
+// applied to a resource. Authentication versus Authorization Note the differences
+// between these concepts:
 //
-// * Authentication is
-// about verifying identity. You need to be authenticated to sign Amazon IVS API
-// requests.
+// * Authentication is about verifying identity. You need
+// to be authenticated to sign Amazon IVS API requests.
 //
-// * Authorization is about granting permissions. You need to be
-// authorized to view Amazon IVS private channels
+// * Authorization is about
+// granting permissions. You need to be authorized to view Amazon IVS private
+// channels
 // (https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html).
 // (Private channels are channels that are enabled for "playback
 // authorization.")
 //
 // Authentication All Amazon IVS API requests must be
-// authenticated with a signature. The AWS Command-Line Interface (CLI) and Amazon
-// IVS Player SDKs take care of signing the underlying API calls for you. However,
-// if your application calls the Amazon IVS API directly, it’s your responsibility
-// to sign the requests. You generate a signature using valid AWS credentials that
-// have permission to perform the requested action. For example, you must sign
-// PutMetadata requests with a signature generated from an IAM user account that
-// has the ivs:PutMetadata permission. For more information:
+// authenticated with a signature. The Amazon Web Services Command-Line Interface
+// (CLI) and Amazon IVS Player SDKs take care of signing the underlying API calls
+// for you. However, if your application calls the Amazon IVS API directly, it’s
+// your responsibility to sign the requests. You generate a signature using valid
+// Amazon Web Services credentials that have permission to perform the requested
+// action. For example, you must sign PutMetadata requests with a signature
+// generated from an IAM user account that has the ivs:PutMetadata permission. For
+// more information:
 //
-// * Authentication and
-// generating signatures — See Authenticating Requests (AWS Signature Version 4)
+// * Authentication and generating signatures — See
+// Authenticating Requests (Amazon Web Services Signature Version 4)
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html)
-// in the AWS General Reference.
+// in the Amazon Web Services General Reference.
 //
-// * Managing Amazon IVS permissions — See Identity
-// and Access Management
+// * Managing Amazon IVS permissions
+// — See Identity and Access Management
 // (https://docs.aws.amazon.com/ivs/latest/userguide/security-iam.html) on the
 // Security page of the Amazon IVS User Guide.
 //
@@ -125,15 +107,15 @@
 // ARNs simultaneously.
 //
 // * ListChannels — Gets summary information about all
-// channels in your account, in the AWS region where the API request is processed.
-// This list can be filtered to match a specified name or recording-configuration
-// ARN. Filters are mutually exclusive and cannot be used together. If you try to
-// use both filters, you will get an error (409 Conflict Exception).
+// channels in your account, in the Amazon Web Services region where the API
+// request is processed. This list can be filtered to match a specified name or
+// recording-configuration ARN. Filters are mutually exclusive and cannot be used
+// together. If you try to use both filters, you will get an error (409 Conflict
+// Exception).
 //
-// *
-// UpdateChannel — Updates a channel's configuration. This does not affect an
-// ongoing stream of this channel. You must stop and restart the stream for the
-// changes to take effect.
+// * UpdateChannel — Updates a channel's configuration. This does not
+// affect an ongoing stream of this channel. You must stop and restart the stream
+// for the changes to take effect.
 //
 // * DeleteChannel — Deletes the specified
 // channel.
@@ -162,21 +144,22 @@
 // (live) stream on a specified channel.
 //
 // * ListStreams — Gets summary information
-// about live streams in your account, in the AWS region where the API request is
-// processed.
+// about live streams in your account, in the Amazon Web Services region where the
+// API request is processed.
 //
-// * StopStream — Disconnects the incoming RTMPS stream for the
-// specified channel. Can be used in conjunction with DeleteStreamKey to prevent
-// further streaming to a channel.
+// * StopStream — Disconnects the incoming RTMPS stream
+// for the specified channel. Can be used in conjunction with DeleteStreamKey to
+// prevent further streaming to a channel.
 //
-// * PutMetadata — Inserts metadata into the
-// active stream of the specified channel. A maximum of 5 requests per second per
-// channel is allowed, each with a maximum 1 KB payload. (If 5 TPS is not
+// * PutMetadata — Inserts metadata into
+// the active stream of the specified channel. At most 5 requests per second per
+// channel are allowed, each with a maximum 1 KB payload. (If 5 TPS is not
 // sufficient for your needs, we recommend batching your data into a single
-// PutMetadata call.)
+// PutMetadata call.) At most 155 requests per second per account are
+// allowed.
 //
-// PlaybackKeyPair Endpoints For more information, see Setting
-// Up Private Channels
+// PlaybackKeyPair Endpoints For more information, see Setting Up Private
+// Channels
 // (https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html) in the
 // Amazon IVS User Guide.
 //
@@ -208,20 +191,21 @@
 // specified ARN.
 //
 // * ListRecordingConfigurations — Gets summary information about
-// all recording configurations in your account, in the AWS region where the API
-// request is processed.
+// all recording configurations in your account, in the Amazon Web Services region
+// where the API request is processed.
 //
-// * DeleteRecordingConfiguration — Deletes the recording
-// configuration for the specified ARN.
+// * DeleteRecordingConfiguration — Deletes
+// the recording configuration for the specified ARN.
 //
-// AWS Tags Endpoints
+// Amazon Web Services Tags
+// Endpoints
 //
-// * TagResource — Adds
-// or updates tags for the AWS resource with the specified ARN.
+// * TagResource — Adds or updates tags for the Amazon Web Services
+// resource with the specified ARN.
 //
-// * UntagResource —
-// Removes tags from the resource with the specified ARN.
+// * UntagResource — Removes tags from the
+// resource with the specified ARN.
 //
-// * ListTagsForResource —
-// Gets information about AWS tags for the specified ARN.
+// * ListTagsForResource — Gets information about
+// Amazon Web Services tags for the specified ARN.
 package ivs

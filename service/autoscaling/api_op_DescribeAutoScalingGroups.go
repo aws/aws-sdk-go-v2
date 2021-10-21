@@ -17,10 +17,14 @@ import (
 	"time"
 )
 
-// Gets information about the Auto Scaling groups in the account and Region. This
-// operation returns information about instances in Auto Scaling groups. To
-// retrieve information about the instances in a warm pool, you must call the
-// DescribeWarmPool API.
+// Gets information about the Auto Scaling groups in the account and Region. If you
+// specify Auto Scaling group names, the output includes information for only the
+// specified Auto Scaling groups. If you specify filters, the output includes
+// information for only those Auto Scaling groups that meet the filter criteria. If
+// you do not specify group names or filters, the output includes information for
+// all Auto Scaling groups. This operation also returns information about instances
+// in Auto Scaling groups. To retrieve information about the instances in a warm
+// pool, you must call the DescribeWarmPool API.
 func (c *Client) DescribeAutoScalingGroups(ctx context.Context, params *DescribeAutoScalingGroupsInput, optFns ...func(*Options)) (*DescribeAutoScalingGroupsOutput, error) {
 	if params == nil {
 		params = &DescribeAutoScalingGroupsInput{}
@@ -42,6 +46,9 @@ type DescribeAutoScalingGroupsInput struct {
 	// names. You can optionally increase this limit using the MaxRecords parameter. If
 	// you omit this parameter, all Auto Scaling groups are described.
 	AutoScalingGroupNames []string
+
+	// One or more filters to limit the results based on specific tags.
+	Filters []types.Filter
 
 	// The maximum number of items to return with this call. The default value is 50
 	// and the maximum value is 100.

@@ -8212,6 +8212,17 @@ type DnsRequestAction struct {
 	noSmithyDocumentSerde
 }
 
+// A finding aggregator. A finding aggregator contains the configuration for
+// finding aggregation.
+type FindingAggregator struct {
+
+	// The ARN of the finding aggregator. You use the finding aggregator ARN to
+	// retrieve details for, update, and delete the finding aggregator.
+	FindingAggregatorArn *string
+
+	noSmithyDocumentSerde
+}
+
 // In a BatchImportFindings request, finding providers use FindingProviderFields to
 // provide and update values for confidence, criticality, related findings,
 // severity, and types.

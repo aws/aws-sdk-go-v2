@@ -5208,6 +5208,11 @@ func awsRestjson1_deserializeDocumentAssetDetails(v **types.AssetDetails, value 
 
 	for key, value := range shape {
 		switch key {
+		case "RedshiftDataShareAsset":
+			if err := awsRestjson1_deserializeDocumentRedshiftDataShareAsset(&sv.RedshiftDataShareAsset, value); err != nil {
+				return err
+			}
+
 		case "S3SnapshotAsset":
 			if err := awsRestjson1_deserializeDocumentS3SnapshotAsset(&sv.S3SnapshotAsset, value); err != nil {
 				return err
@@ -6006,6 +6011,15 @@ func awsRestjson1_deserializeDocumentExportRevisionsToS3ResponseDetails(v **type
 				return err
 			}
 
+		case "EventActionArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.EventActionArn = ptr.String(jtv)
+			}
+
 		case "RevisionDestinations":
 			if err := awsRestjson1_deserializeDocumentListOfRevisionDestinationEntry(&sv.RevisionDestinations, value); err != nil {
 				return err
@@ -6187,6 +6201,60 @@ func awsRestjson1_deserializeDocumentImportAssetFromSignedUrlResponseDetails(v *
 					return err
 				}
 				sv.SignedUrlExpiresAt = ptr.Time(t)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentImportAssetsFromRedshiftDataSharesResponseDetails(v **types.ImportAssetsFromRedshiftDataSharesResponseDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ImportAssetsFromRedshiftDataSharesResponseDetails
+	if *v == nil {
+		sv = &types.ImportAssetsFromRedshiftDataSharesResponseDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AssetSources":
+			if err := awsRestjson1_deserializeDocumentListOfRedshiftDataShareAssetSourceEntry(&sv.AssetSources, value); err != nil {
+				return err
+			}
+
+		case "DataSetId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Id to be of type string, got %T instead", value)
+				}
+				sv.DataSetId = ptr.String(jtv)
+			}
+
+		case "RevisionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Id to be of type string, got %T instead", value)
+				}
+				sv.RevisionId = ptr.String(jtv)
 			}
 
 		default:
@@ -6748,6 +6816,40 @@ func awsRestjson1_deserializeDocumentListOfJobError(v *[]types.JobError, value i
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentListOfRedshiftDataShareAssetSourceEntry(v *[]types.RedshiftDataShareAssetSourceEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RedshiftDataShareAssetSourceEntry
+	if *v == nil {
+		cv = []types.RedshiftDataShareAssetSourceEntry{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RedshiftDataShareAssetSourceEntry
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentRedshiftDataShareAssetSourceEntry(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentListOfRevisionDestinationEntry(v *[]types.RevisionDestinationEntry, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6892,6 +6994,86 @@ func awsRestjson1_deserializeDocumentOriginDetails(v **types.OriginDetails, valu
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentRedshiftDataShareAsset(v **types.RedshiftDataShareAsset, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RedshiftDataShareAsset
+	if *v == nil {
+		sv = &types.RedshiftDataShareAsset{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Arn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRedshiftDataShareAssetSourceEntry(v **types.RedshiftDataShareAssetSourceEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RedshiftDataShareAssetSourceEntry
+	if *v == nil {
+		sv = &types.RedshiftDataShareAssetSourceEntry{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DataShareArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.DataShareArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.ResourceNotFoundException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6989,6 +7171,11 @@ func awsRestjson1_deserializeDocumentResponseDetails(v **types.ResponseDetails, 
 
 		case "ImportAssetFromSignedUrl":
 			if err := awsRestjson1_deserializeDocumentImportAssetFromSignedUrlResponseDetails(&sv.ImportAssetFromSignedUrl, value); err != nil {
+				return err
+			}
+
+		case "ImportAssetsFromRedshiftDataShares":
+			if err := awsRestjson1_deserializeDocumentImportAssetsFromRedshiftDataSharesResponseDetails(&sv.ImportAssetsFromRedshiftDataShares, value); err != nil {
 				return err
 			}
 

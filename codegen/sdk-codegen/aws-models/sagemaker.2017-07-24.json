@@ -6709,7 +6709,7 @@
                 "ServiceCatalogProvisioningDetails": {
                     "target": "com.amazonaws.sagemaker#ServiceCatalogProvisioningDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>The product ID and provisioning artifact ID to provision a service catalog. For\n            information, see <a href=\"https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html\">What is Amazon Web Services Service\n                Catalog</a>.</p>",
+                        "smithy.api#documentation": "<p>The product ID and provisioning artifact ID to provision a service catalog. The provisioning \n            artifact ID will default to the latest provisioning artifact ID of the product, if you don't \n            provide the provisioning artifact ID. For more information, see <a href=\"https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html\">What is Amazon Web Services Service\n                Catalog</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -25183,7 +25183,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides information about the location that is configured for storing model\n            artifacts. </p>\n        <p>Model artifacts are the output that results from training a model, and typically\n            consist of trained parameters, a model defintion that describes how to compute\n            inferences, and other metadata.</p>"
+                "smithy.api#documentation": "<p>Provides information about the location that is configured for storing model\n            artifacts. </p>\n        <p>Model artifacts are the output that results from training a model, and typically\n            consist of trained parameters, a model definition that describes how to compute\n            inferences, and other metadata.</p>"
             }
         },
         "com.amazonaws.sagemaker#ModelBiasAppSpecification": {
@@ -33000,8 +33000,7 @@
                 "ProvisioningArtifactId": {
                     "target": "com.amazonaws.sagemaker#ServiceCatalogEntityId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the provisioning artifact.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The ID of the provisioning artifact.</p>"
                     }
                 },
                 "PathId": {

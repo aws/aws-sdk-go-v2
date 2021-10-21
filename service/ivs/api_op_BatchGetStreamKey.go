@@ -38,8 +38,11 @@ type BatchGetStreamKeyInput struct {
 }
 
 type BatchGetStreamKeyOutput struct {
+
+	//
 	Errors []types.BatchError
 
+	//
 	StreamKeys []types.StreamKey
 
 	// Metadata pertaining to the operation's result.

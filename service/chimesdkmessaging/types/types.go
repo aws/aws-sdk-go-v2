@@ -59,6 +59,9 @@ type Channel struct {
 	// The ARN of a channel.
 	ChannelArn *string
 
+	// The ARN of the channel flow.
+	ChannelFlowArn *string
+
 	// The AppInstanceUser who created the channel.
 	CreatedBy *Identity
 
@@ -78,6 +81,27 @@ type Channel struct {
 	Mode ChannelMode
 
 	// The name of a channel.
+	Name *string
+
+	// The channel's privacy setting.
+	Privacy ChannelPrivacy
+
+	noSmithyDocumentSerde
+}
+
+// Summary of details of a channel associated with channel flow.
+type ChannelAssociatedWithFlowSummary struct {
+
+	// The ARN of the channel.
+	ChannelArn *string
+
+	// The channel's metadata.
+	Metadata *string
+
+	// The mode of the channel.
+	Mode ChannelMode
+
+	// The name of the channel flow.
 	Name *string
 
 	// The channel's privacy setting.
@@ -109,6 +133,42 @@ type ChannelBanSummary struct {
 
 	// The member being banned from a channel.
 	Member *Identity
+
+	noSmithyDocumentSerde
+}
+
+// The details of a channel flow.
+type ChannelFlow struct {
+
+	// The ARN of the channel flow.
+	ChannelFlowArn *string
+
+	// The time at which the channel flow was created.
+	CreatedTimestamp *time.Time
+
+	// The time at which a channel flow was updated.
+	LastUpdatedTimestamp *time.Time
+
+	// The name of the channel flow.
+	Name *string
+
+	// Information about the processor Lambda functions.
+	Processors []Processor
+
+	noSmithyDocumentSerde
+}
+
+// Summary of details of a channel flow.
+type ChannelFlowSummary struct {
+
+	// The ARN of the channel flow.
+	ChannelFlowArn *string
+
+	// The name of the channel flow.
+	Name *string
+
+	// Information about the processor Lambda functions.
+	Processors []Processor
 
 	noSmithyDocumentSerde
 }
@@ -191,8 +251,40 @@ type ChannelMessage struct {
 	// The message sender.
 	Sender *Identity
 
+	// The status of the channel message.
+	Status *ChannelMessageStatusStructure
+
 	// The message type.
 	Type ChannelMessageType
+
+	noSmithyDocumentSerde
+}
+
+// Stores information about a callback.
+type ChannelMessageCallback struct {
+
+	// The message ID.
+	//
+	// This member is required.
+	MessageId *string
+
+	// The message content.
+	Content *string
+
+	// The message metadata.
+	Metadata *string
+
+	noSmithyDocumentSerde
+}
+
+// Stores information about a message status.
+type ChannelMessageStatusStructure struct {
+
+	// Contains more details about the messasge status.
+	Detail *string
+
+	// The message status value.
+	Value ChannelMessageStatus
 
 	noSmithyDocumentSerde
 }
@@ -223,6 +315,11 @@ type ChannelMessageSummary struct {
 
 	// The message sender.
 	Sender *Identity
+
+	// The message status. The status value is SENT for messages sent to a channel
+	// without a channel flow. For channels associated with channel flow, the value
+	// determines the processing stage.
+	Status *ChannelMessageStatusStructure
 
 	// The type of message.
 	Type ChannelMessageType
@@ -302,6 +399,22 @@ type Identity struct {
 	noSmithyDocumentSerde
 }
 
+// Stores metadata about a Lambda processor.
+type LambdaConfiguration struct {
+
+	// Controls how the Lambda function is invoked.
+	//
+	// This member is required.
+	InvocationType InvocationType
+
+	// The ARN of the Lambda message processing function.
+	//
+	// This member is required.
+	ResourceArn *string
+
+	noSmithyDocumentSerde
+}
+
 // The websocket endpoint used to connect to Amazon Chime SDK messaging.
 type MessagingSessionEndpoint struct {
 
@@ -311,15 +424,58 @@ type MessagingSessionEndpoint struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a tag applied to a resource.
+// The information about a processor in a channel flow.
+type Processor struct {
+
+	// The information about the type of processor and its identifier.
+	//
+	// This member is required.
+	Configuration *ProcessorConfiguration
+
+	// The sequence in which processors run. If you have multiple processors in a
+	// channel flow, message processing goes through each processor in the sequence.
+	// The value determines the sequence. At this point, we support only 1 processor
+	// within a flow.
+	//
+	// This member is required.
+	ExecutionOrder *int32
+
+	// Determines whether to continue or stop processing if communication with
+	// processor fails. If the last processor in a channel flow sequence has a fallback
+	// action of CONTINUE, and communication with the processor fails, the message is
+	// considered processed and sent to the recipients in the channel.
+	//
+	// This member is required.
+	FallbackAction FallbackAction
+
+	// The name of the channel flow.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// A processor's metadata.
+type ProcessorConfiguration struct {
+
+	// Indicates that the processor is of type Lambda.
+	//
+	// This member is required.
+	Lambda *LambdaConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// A tag object containing a key-value pair.
 type Tag struct {
 
-	// The key of the tag.
+	// The key in a tag.
 	//
 	// This member is required.
 	Key *string
 
-	// The value of the tag.
+	// The value in a tag.
 	//
 	// This member is required.
 	Value *string

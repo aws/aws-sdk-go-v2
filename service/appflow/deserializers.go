@@ -6667,6 +6667,46 @@ func awsRestjson1_deserializeDocumentS3DestinationProperties(v **types.S3Destina
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentS3InputFormatConfig(v **types.S3InputFormatConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3InputFormatConfig
+	if *v == nil {
+		sv = &types.S3InputFormatConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "s3InputFileType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3InputFileType to be of type string, got %T instead", value)
+				}
+				sv.S3InputFileType = types.S3InputFileType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentS3Metadata(v **types.S3Metadata, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6786,6 +6826,11 @@ func awsRestjson1_deserializeDocumentS3SourceProperties(v **types.S3SourceProper
 					return fmt.Errorf("expected BucketPrefix to be of type string, got %T instead", value)
 				}
 				sv.BucketPrefix = ptr.String(jtv)
+			}
+
+		case "s3InputFormatConfig":
+			if err := awsRestjson1_deserializeDocumentS3InputFormatConfig(&sv.S3InputFormatConfig, value); err != nil {
+				return err
 			}
 
 		default:

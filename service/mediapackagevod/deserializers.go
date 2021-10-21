@@ -4132,6 +4132,15 @@ func awsRestjson1_deserializeDocumentHlsPackage(v **types.HlsPackage, value inte
 				return err
 			}
 
+		case "includeDvbSubtitles":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IncludeDvbSubtitles = jtv
+			}
+
 		case "segmentDurationSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)

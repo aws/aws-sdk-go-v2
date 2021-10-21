@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates Amazon QuickSight customizations the current Amazon Web Services
-// Region;. Currently, you can add a custom default theme by using the
+// Creates Amazon QuickSight customizations the current Amazon Web Services Region.
+// Currently, you can add a custom default theme by using the
 // CreateAccountCustomization or UpdateAccountCustomization API operation. To
 // further customize Amazon QuickSight by removing Amazon QuickSight sample assets
 // and videos for all new users, see Customizing Amazon QuickSight
@@ -47,7 +47,7 @@ func (c *Client) CreateAccountCustomization(ctx context.Context, params *CreateA
 type CreateAccountCustomizationInput struct {
 
 	// The Amazon QuickSight customizations you're adding in the current Amazon Web
-	// Services Region;. You can add these to an Amazon Web Services account and a
+	// Services Region. You can add these to an Amazon Web Services account and a
 	// Amazon QuickSight namespace. For example, you can add a default theme by setting
 	// AccountCustomization to the midnight theme: "AccountCustomization": {
 	// "DefaultTheme": "arn:aws:quicksight::aws:theme/MIDNIGHT" }. Or, you can add a
@@ -76,7 +76,7 @@ type CreateAccountCustomizationInput struct {
 type CreateAccountCustomizationOutput struct {
 
 	// The Amazon QuickSight customizations you're adding in the current Amazon Web
-	// Services Region;.
+	// Services Region.
 	AccountCustomization *types.AccountCustomization
 
 	// The Amazon Resource Name (ARN) for the customization that you created for this

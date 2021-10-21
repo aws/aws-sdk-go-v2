@@ -574,6 +574,10 @@ const (
 	IngestionErrorTypeDataSourceConnectionFailed      IngestionErrorType = "DATA_SOURCE_CONNECTION_FAILED"
 	IngestionErrorTypeFailureToProcessJsonFile        IngestionErrorType = "FAILURE_TO_PROCESS_JSON_FILE"
 	IngestionErrorTypeInternalServiceError            IngestionErrorType = "INTERNAL_SERVICE_ERROR"
+	IngestionErrorTypeRefreshSuppressedByEdit         IngestionErrorType = "REFRESH_SUPPRESSED_BY_EDIT"
+	IngestionErrorTypePermissionNotFound              IngestionErrorType = "PERMISSION_NOT_FOUND"
+	IngestionErrorTypeElasticsearchCursorNotEnabled   IngestionErrorType = "ELASTICSEARCH_CURSOR_NOT_ENABLED"
+	IngestionErrorTypeCursorNotEnabled                IngestionErrorType = "CURSOR_NOT_ENABLED"
 )
 
 // Values returns all known values for IngestionErrorType. Note that this can be
@@ -621,6 +625,10 @@ func (IngestionErrorType) Values() []IngestionErrorType {
 		"DATA_SOURCE_CONNECTION_FAILED",
 		"FAILURE_TO_PROCESS_JSON_FILE",
 		"INTERNAL_SERVICE_ERROR",
+		"REFRESH_SUPPRESSED_BY_EDIT",
+		"PERMISSION_NOT_FOUND",
+		"ELASTICSEARCH_CURSOR_NOT_ENABLED",
+		"CURSOR_NOT_ENABLED",
 	}
 }
 
@@ -687,6 +695,24 @@ func (IngestionStatus) Values() []IngestionStatus {
 		"FAILED",
 		"COMPLETED",
 		"CANCELLED",
+	}
+}
+
+type IngestionType string
+
+// Enum values for IngestionType
+const (
+	IngestionTypeIncrementalRefresh IngestionType = "INCREMENTAL_REFRESH"
+	IngestionTypeFullRefresh        IngestionType = "FULL_REFRESH"
+)
+
+// Values returns all known values for IngestionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IngestionType) Values() []IngestionType {
+	return []IngestionType{
+		"INCREMENTAL_REFRESH",
+		"FULL_REFRESH",
 	}
 }
 

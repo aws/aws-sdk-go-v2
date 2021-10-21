@@ -14,7 +14,7 @@ import (
 // Creates a proposal to associate the specified virtual private gateway or transit
 // gateway with the specified Direct Connect gateway. You can associate a Direct
 // Connect gateway and virtual private gateway or transit gateway that is owned by
-// any account.
+// any Amazon Web Services account.
 func (c *Client) CreateDirectConnectGatewayAssociationProposal(ctx context.Context, params *CreateDirectConnectGatewayAssociationProposalInput, optFns ...func(*Options)) (*CreateDirectConnectGatewayAssociationProposalOutput, error) {
 	if params == nil {
 		params = &CreateDirectConnectGatewayAssociationProposalInput{}
@@ -37,7 +37,7 @@ type CreateDirectConnectGatewayAssociationProposalInput struct {
 	// This member is required.
 	DirectConnectGatewayId *string
 
-	// The ID of the account that owns the Direct Connect gateway.
+	// The ID of the Amazon Web Services account that owns the Direct Connect gateway.
 	//
 	// This member is required.
 	DirectConnectGatewayOwnerAccount *string

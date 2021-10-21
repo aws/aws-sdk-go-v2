@@ -4503,9 +4503,30 @@ func awsRestjson1_serializeDocumentBatchPolicy(v *types.BatchPolicy, value smith
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCommandList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCompute(v *types.Compute, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.ComputeType) > 0 {
+		ok := object.Key("computeType")
+		ok.String(string(v.ComputeType))
+	}
+
+	if v.GpuUnitLimit != nil {
+		ok := object.Key("gpuUnitLimit")
+		ok.Integer(*v.GpuUnitLimit)
+	}
 
 	if v.SimulationUnitLimit != nil {
 		ok := object.Key("simulationUnitLimit")
@@ -4532,6 +4553,11 @@ func awsRestjson1_serializeDocumentDataSourceConfig(v *types.DataSourceConfig, v
 	object := value.Object()
 	defer object.Close()
 
+	if v.Destination != nil {
+		ok := object.Key("destination")
+		ok.String(*v.Destination)
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -4544,9 +4570,14 @@ func awsRestjson1_serializeDocumentDataSourceConfig(v *types.DataSourceConfig, v
 
 	if v.S3Keys != nil {
 		ok := object.Key("s3Keys")
-		if err := awsRestjson1_serializeDocumentS3Keys(v.S3Keys, ok); err != nil {
+		if err := awsRestjson1_serializeDocumentS3KeysOrPrefixes(v.S3Keys, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
 	}
 
 	return nil
@@ -4734,6 +4765,13 @@ func awsRestjson1_serializeDocumentFilterValues(v []string, value smithyjson.Val
 func awsRestjson1_serializeDocumentLaunchConfig(v *types.LaunchConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Command != nil {
+		ok := object.Key("command")
+		if err := awsRestjson1_serializeDocumentCommandList(v.Command, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.EnvironmentVariables != nil {
 		ok := object.Key("environmentVariables")
@@ -4951,7 +4989,7 @@ func awsRestjson1_serializeDocumentS3Etags(v []string, value smithyjson.Value) e
 	return nil
 }
 
-func awsRestjson1_serializeDocumentS3Keys(v []string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentS3KeysOrPrefixes(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 

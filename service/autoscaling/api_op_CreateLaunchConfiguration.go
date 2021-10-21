@@ -89,8 +89,8 @@ type CreateLaunchConfigurationInput struct {
 	// optimized configuration stack to provide optimal I/O performance. This
 	// optimization is not available with all instance types. Additional fees are
 	// incurred when you enable EBS optimization for an instance type that is not
-	// EBS-optimized by default. For more information, see Amazon EBS-Optimized
-	// Instances
+	// EBS-optimized by default. For more information, see Amazon EBS-optimized
+	// instances
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html) in the
 	// Amazon EC2 User Guide for Linux Instances. The default value is false.
 	EbsOptimized *bool

@@ -61,11 +61,10 @@ type UpdateAssetOutput struct {
 	// The ARN for the asset.
 	Arn *string
 
-	// Information about the asset, including its size.
+	// Information about the asset.
 	AssetDetails *types.AssetDetails
 
-	// The type of file your data is stored in. Currently, the supported asset type is
-	// S3_SNAPSHOT.
+	// The type of asset that is added to a data set.
 	AssetType types.AssetType
 
 	// The date and time that the asset was created, in ISO 8601 format.
@@ -77,7 +76,7 @@ type UpdateAssetOutput struct {
 	// The unique identifier for the asset.
 	Id *string
 
-	// The name of the asset When importing from Amazon S3, the S3 object key is used
+	// The name of the asset. When importing from Amazon S3, the S3 object key is used
 	// as the asset name. When exporting to Amazon S3, the asset name is used as
 	// default target S3 object key.
 	Name *string

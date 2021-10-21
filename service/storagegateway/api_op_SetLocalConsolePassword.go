@@ -33,7 +33,7 @@ func (c *Client) SetLocalConsolePassword(ctx context.Context, params *SetLocalCo
 type SetLocalConsolePasswordInput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Region.
+	// return a list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -49,7 +49,7 @@ type SetLocalConsolePasswordInput struct {
 type SetLocalConsolePasswordOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Region.
+	// return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// Metadata pertaining to the operation's result.

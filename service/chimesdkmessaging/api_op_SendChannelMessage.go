@@ -79,6 +79,9 @@ type SendChannelMessageOutput struct {
 	// The ID string assigned to each message.
 	MessageId *string
 
+	// The status of the channel message.
+	Status *types.ChannelMessageStatusStructure
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

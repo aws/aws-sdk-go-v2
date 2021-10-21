@@ -72,6 +72,22 @@ func (Mode) Values() []Mode {
 	}
 }
 
+type Operator string
+
+// Enum values for Operator
+const (
+	OperatorEquals Operator = "EQUALS"
+)
+
+// Values returns all known values for Operator. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Operator) Values() []Operator {
+	return []Operator{
+		"EQUALS",
+	}
+}
+
 type OriginManifestType string
 
 // Enum values for OriginManifestType

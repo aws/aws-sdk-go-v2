@@ -3397,6 +3397,11 @@ func awsAwsquery_serializeOpDocumentDescribeSSLPoliciesInput(v *DescribeSSLPolic
 	object := value.Object()
 	_ = object
 
+	if len(v.LoadBalancerType) > 0 {
+		objectKey := object.Key("LoadBalancerType")
+		objectKey.String(string(v.LoadBalancerType))
+	}
+
 	if v.Marker != nil {
 		objectKey := object.Key("Marker")
 		objectKey.String(*v.Marker)

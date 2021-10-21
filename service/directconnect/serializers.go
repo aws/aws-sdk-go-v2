@@ -532,6 +532,53 @@ func (m *awsAwsjson11_serializeOpConfirmConnection) HandleSerialize(ctx context.
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpConfirmCustomerAgreement struct {
+}
+
+func (*awsAwsjson11_serializeOpConfirmCustomerAgreement) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpConfirmCustomerAgreement) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ConfirmCustomerAgreementInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.ConfirmCustomerAgreement")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentConfirmCustomerAgreementInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpConfirmPrivateVirtualInterface struct {
 }
 
@@ -1660,6 +1707,48 @@ func (m *awsAwsjson11_serializeOpDescribeConnectionsOnInterconnect) HandleSerial
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpDescribeCustomerMetadata struct {
+}
+
+func (*awsAwsjson11_serializeOpDescribeCustomerMetadata) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDescribeCustomerMetadata) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeCustomerMetadataInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.DescribeCustomerMetadata")
+
+	if request, err = request.SetStream(strings.NewReader(`{}`)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpDescribeDirectConnectGatewayAssociationProposals struct {
 }
 
@@ -2114,6 +2203,53 @@ func (m *awsAwsjson11_serializeOpDescribeLocations) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.DescribeLocations")
 
 	if request, err = request.SetStream(strings.NewReader(`{}`)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDescribeRouterConfiguration struct {
+}
+
+func (*awsAwsjson11_serializeOpDescribeRouterConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDescribeRouterConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeRouterConfigurationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.DescribeRouterConfiguration")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDescribeRouterConfigurationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2622,6 +2758,53 @@ func (m *awsAwsjson11_serializeOpUpdateConnection) HandleSerialize(ctx context.C
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentUpdateConnectionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpUpdateDirectConnectGateway struct {
+}
+
+func (*awsAwsjson11_serializeOpUpdateDirectConnectGateway) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUpdateDirectConnectGateway) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateDirectConnectGatewayInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.UpdateDirectConnectGateway")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUpdateDirectConnectGatewayInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3502,6 +3685,18 @@ func awsAwsjson11_serializeOpDocumentConfirmConnectionInput(v *ConfirmConnection
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentConfirmCustomerAgreementInput(v *ConfirmCustomerAgreementInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AgreementName != nil {
+		ok := object.Key("agreementName")
+		ok.String(*v.AgreementName)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentConfirmPrivateVirtualInterfaceInput(v *ConfirmPrivateVirtualInterfaceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4215,6 +4410,23 @@ func awsAwsjson11_serializeOpDocumentDescribeLoaInput(v *DescribeLoaInput, value
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentDescribeRouterConfigurationInput(v *DescribeRouterConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RouterTypeIdentifier != nil {
+		ok := object.Key("routerTypeIdentifier")
+		ok.String(*v.RouterTypeIdentifier)
+	}
+
+	if v.VirtualInterfaceId != nil {
+		ok := object.Key("virtualInterfaceId")
+		ok.String(*v.VirtualInterfaceId)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentDescribeTagsInput(v *DescribeTagsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4436,6 +4648,23 @@ func awsAwsjson11_serializeOpDocumentUpdateDirectConnectGatewayAssociationInput(
 		if err := awsAwsjson11_serializeDocumentRouteFilterPrefixList(v.RemoveAllowedPrefixesToDirectConnectGateway, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentUpdateDirectConnectGatewayInput(v *UpdateDirectConnectGatewayInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DirectConnectGatewayId != nil {
+		ok := object.Key("directConnectGatewayId")
+		ok.String(*v.DirectConnectGatewayId)
+	}
+
+	if v.NewDirectConnectGatewayName != nil {
+		ok := object.Key("newDirectConnectGatewayName")
+		ok.String(*v.NewDirectConnectGatewayName)
 	}
 
 	return nil

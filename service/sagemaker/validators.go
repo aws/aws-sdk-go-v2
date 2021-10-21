@@ -7908,9 +7908,6 @@ func validateServiceCatalogProvisioningDetails(v *types.ServiceCatalogProvisioni
 	if v.ProductId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProductId"))
 	}
-	if v.ProvisioningArtifactId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProvisioningArtifactId"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

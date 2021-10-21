@@ -2053,6 +2053,39 @@ type DescribeFleetsInstances struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the destination options for a flow log.
+type DestinationOptionsRequest struct {
+
+	// The format for the flow log. The default is plain-text.
+	FileFormat DestinationFileFormat
+
+	// Indicates whether to use Hive-compatible prefixes for flow logs stored in Amazon
+	// S3. The default is false.
+	HiveCompatiblePartitions *bool
+
+	// Indicates whether to partition the flow log per hour. This reduces the cost and
+	// response time for queries. The default is false.
+	PerHourPartition *bool
+
+	noSmithyDocumentSerde
+}
+
+// Describes the destination options for a flow log.
+type DestinationOptionsResponse struct {
+
+	// The format for the flow log.
+	FileFormat DestinationFileFormat
+
+	// Indicates whether to use Hive-compatible prefixes for flow logs stored in Amazon
+	// S3.
+	HiveCompatiblePartitions *bool
+
+	// Indicates whether to partition the flow log per hour.
+	PerHourPartition *bool
+
+	noSmithyDocumentSerde
+}
+
 // Describes a DHCP configuration option.
 type DhcpConfiguration struct {
 
@@ -2266,7 +2299,7 @@ type DiskImageVolumeDescription struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the disk.
+// Describes a disk.
 type DiskInfo struct {
 
 	// The number of disks with this configuration.
@@ -3548,22 +3581,25 @@ type FlowLog struct {
 	// The status of the logs delivery (SUCCESS | FAILED).
 	DeliverLogsStatus *string
 
+	// The destination options.
+	DestinationOptions *DestinationOptionsResponse
+
 	// The flow log ID.
 	FlowLogId *string
 
 	// The status of the flow log (ACTIVE).
 	FlowLogStatus *string
 
-	// Specifies the destination to which the flow log data is published. Flow log data
-	// can be published to an CloudWatch Logs log group or an Amazon S3 bucket. If the
-	// flow log publishes to CloudWatch Logs, this element indicates the Amazon
-	// Resource Name (ARN) of the CloudWatch Logs log group to which the data is
-	// published. If the flow log publishes to Amazon S3, this element indicates the
-	// ARN of the Amazon S3 bucket to which the data is published.
+	// The destination to which the flow log data is published. Flow log data can be
+	// published to an CloudWatch Logs log group or an Amazon S3 bucket. If the flow
+	// log publishes to CloudWatch Logs, this element indicates the Amazon Resource
+	// Name (ARN) of the CloudWatch Logs log group to which the data is published. If
+	// the flow log publishes to Amazon S3, this element indicates the ARN of the
+	// Amazon S3 bucket to which the data is published.
 	LogDestination *string
 
-	// Specifies the type of destination to which the flow log data is published. Flow
-	// log data can be published to CloudWatch Logs or Amazon S3.
+	// The type of destination to which the flow log data is published. Flow log data
+	// can be published to CloudWatch Logs or Amazon S3.
 	LogDestinationType LogDestinationType
 
 	// The format of the flow log record.
@@ -5440,14 +5476,16 @@ type InstanceStatusSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the disks that are available for the instance type.
+// Describes the instance store features that are supported by the instance type.
 type InstanceStorageInfo struct {
 
 	// Describes the disks that are available for the instance type.
 	Disks []DiskInfo
 
-	// Indicates whether non-volatile memory express (NVMe) is supported for instance
-	// store.
+	// Indicates whether data is encrypted at rest.
+	EncryptionSupport InstanceStorageEncryptionSupport
+
+	// Indicates whether non-volatile memory express (NVMe) is supported.
 	NvmeSupport EphemeralNvmeSupport
 
 	// The total size of the disks, in GB.

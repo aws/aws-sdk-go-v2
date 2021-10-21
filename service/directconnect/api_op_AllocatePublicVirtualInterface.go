@@ -11,15 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provisions a public virtual interface to be owned by the specified account. The
-// owner of a connection calls this function to provision a public virtual
-// interface to be owned by the specified account. Virtual interfaces created using
-// this function must be confirmed by the owner using
-// ConfirmPublicVirtualInterface. Until this step has been completed, the virtual
-// interface is in the confirming state and is not available to handle traffic.
-// When creating an IPv6 public virtual interface, omit the Amazon address and
-// customer address. IPv6 addresses are automatically assigned from the Amazon pool
-// of IPv6 addresses; you cannot specify custom IPv6 addresses.
+// Provisions a public virtual interface to be owned by the specified Amazon Web
+// Services account. The owner of a connection calls this function to provision a
+// public virtual interface to be owned by the specified Amazon Web Services
+// account. Virtual interfaces created using this function must be confirmed by the
+// owner using ConfirmPublicVirtualInterface. Until this step has been completed,
+// the virtual interface is in the confirming state and is not available to handle
+// traffic. When creating an IPv6 public virtual interface, omit the Amazon address
+// and customer address. IPv6 addresses are automatically assigned from the Amazon
+// pool of IPv6 addresses; you cannot specify custom IPv6 addresses.
 func (c *Client) AllocatePublicVirtualInterface(ctx context.Context, params *AllocatePublicVirtualInterfaceInput, optFns ...func(*Options)) (*AllocatePublicVirtualInterfaceOutput, error) {
 	if params == nil {
 		params = &AllocatePublicVirtualInterfaceInput{}
@@ -47,7 +47,8 @@ type AllocatePublicVirtualInterfaceInput struct {
 	// This member is required.
 	NewPublicVirtualInterfaceAllocation *types.NewPublicVirtualInterfaceAllocation
 
-	// The ID of the account that owns the public virtual interface.
+	// The ID of the Amazon Web Services account that owns the public virtual
+	// interface.
 	//
 	// This member is required.
 	OwnerAccount *string
@@ -107,10 +108,10 @@ type AllocatePublicVirtualInterfaceOutput struct {
 	// 9001. The default value is 1500.
 	Mtu *int32
 
-	// The ID of the account that owns the virtual interface.
+	// The ID of the Amazon Web Services account that owns the virtual interface.
 	OwnerAccount *string
 
-	// The Region where the virtual interface is located.
+	// The Amazon Web Services Region where the virtual interface is located.
 	Region *string
 
 	// The routes to be advertised to the Amazon Web Services network in this Region.

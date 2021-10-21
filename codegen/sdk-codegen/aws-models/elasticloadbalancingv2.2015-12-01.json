@@ -1884,6 +1884,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of results to return with this call.</p>"
                     }
+                },
+                "LoadBalancerType": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#LoadBalancerTypeEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The type of load balancer. The default lists the SSL policies for all load\n      balancers.</p>"
+                    }
                 }
             }
         },
@@ -4432,6 +4438,12 @@
                     "target": "com.amazonaws.elasticloadbalancingv2#SslPolicyName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the policy.</p>"
+                    }
+                },
+                "SupportedLoadBalancerTypes": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ListOfString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The supported load balancers.\n    </p>"
                     }
                 }
             },

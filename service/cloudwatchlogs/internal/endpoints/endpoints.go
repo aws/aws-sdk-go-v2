@@ -135,6 +135,7 @@ var defaultPartitions = endpoints.Partitions{
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
 			"us-iso-east-1": endpoints.Endpoint{},
+			"us-iso-west-1": endpoints.Endpoint{},
 		},
 	},
 	{

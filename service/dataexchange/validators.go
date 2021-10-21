@@ -812,6 +812,31 @@ func validateImportAssetFromSignedUrlRequestDetails(v *types.ImportAssetFromSign
 	}
 }
 
+func validateImportAssetsFromRedshiftDataSharesRequestDetails(v *types.ImportAssetsFromRedshiftDataSharesRequestDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImportAssetsFromRedshiftDataSharesRequestDetails"}
+	if v.AssetSources == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetSources"))
+	} else if v.AssetSources != nil {
+		if err := validateListOfRedshiftDataShareAssetSourceEntry(v.AssetSources); err != nil {
+			invalidParams.AddNested("AssetSources", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DataSetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSetId"))
+	}
+	if v.RevisionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RevisionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateImportAssetsFromS3RequestDetails(v *types.ImportAssetsFromS3RequestDetails) error {
 	if v == nil {
 		return nil
@@ -871,6 +896,23 @@ func validateListOfAssetSourceEntry(v []types.AssetSourceEntry) error {
 	}
 }
 
+func validateListOfRedshiftDataShareAssetSourceEntry(v []types.RedshiftDataShareAssetSourceEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfRedshiftDataShareAssetSourceEntry"}
+	for i := range v {
+		if err := validateRedshiftDataShareAssetSourceEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateListOfRevisionDestinationEntry(v []types.RevisionDestinationEntry) error {
 	if v == nil {
 		return nil
@@ -880,6 +922,21 @@ func validateListOfRevisionDestinationEntry(v []types.RevisionDestinationEntry) 
 		if err := validateRevisionDestinationEntry(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRedshiftDataShareAssetSourceEntry(v *types.RedshiftDataShareAssetSourceEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RedshiftDataShareAssetSourceEntry"}
+	if v.DataShareArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataShareArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -916,6 +973,11 @@ func validateRequestDetails(v *types.RequestDetails) error {
 	if v.ImportAssetsFromS3 != nil {
 		if err := validateImportAssetsFromS3RequestDetails(v.ImportAssetsFromS3); err != nil {
 			invalidParams.AddNested("ImportAssetsFromS3", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ImportAssetsFromRedshiftDataShares != nil {
+		if err := validateImportAssetsFromRedshiftDataSharesRequestDetails(v.ImportAssetsFromRedshiftDataShares); err != nil {
+			invalidParams.AddNested("ImportAssetsFromRedshiftDataShares", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

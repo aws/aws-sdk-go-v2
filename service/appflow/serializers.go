@@ -2549,6 +2549,18 @@ func awsRestjson1_serializeDocumentS3DestinationProperties(v *types.S3Destinatio
 	return nil
 }
 
+func awsRestjson1_serializeDocumentS3InputFormatConfig(v *types.S3InputFormatConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.S3InputFileType) > 0 {
+		ok := object.Key("s3InputFileType")
+		ok.String(string(v.S3InputFileType))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentS3OutputFormatConfig(v *types.S3OutputFormatConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2587,6 +2599,13 @@ func awsRestjson1_serializeDocumentS3SourceProperties(v *types.S3SourcePropertie
 	if v.BucketPrefix != nil {
 		ok := object.Key("bucketPrefix")
 		ok.String(*v.BucketPrefix)
+	}
+
+	if v.S3InputFormatConfig != nil {
+		ok := object.Key("s3InputFormatConfig")
+		if err := awsRestjson1_serializeDocumentS3InputFormatConfig(v.S3InputFormatConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

@@ -1570,6 +1570,26 @@ func (m *validateOpUpdateSMBFileShareVisibility) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateSMBLocalGroups struct {
+}
+
+func (*validateOpUpdateSMBLocalGroups) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSMBLocalGroups) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSMBLocalGroupsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSMBLocalGroupsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateSMBSecurityStrategy struct {
 }
 
@@ -1940,6 +1960,10 @@ func addOpUpdateSMBFileShareValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpUpdateSMBFileShareVisibilityValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateSMBFileShareVisibility{}, middleware.After)
+}
+
+func addOpUpdateSMBLocalGroupsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSMBLocalGroups{}, middleware.After)
 }
 
 func addOpUpdateSMBSecurityStrategyValidationMiddleware(stack *middleware.Stack) error {
@@ -3468,6 +3492,24 @@ func validateOpUpdateSMBFileShareVisibilityInput(v *UpdateSMBFileShareVisibility
 	}
 	if v.FileSharesVisible == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FileSharesVisible"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSMBLocalGroupsInput(v *UpdateSMBLocalGroupsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSMBLocalGroupsInput"}
+	if v.GatewayARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayARN"))
+	}
+	if v.SMBLocalGroups == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SMBLocalGroups"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

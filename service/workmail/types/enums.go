@@ -20,6 +20,26 @@ func (AccessControlRuleEffect) Values() []AccessControlRuleEffect {
 	}
 }
 
+type DnsRecordVerificationStatus string
+
+// Enum values for DnsRecordVerificationStatus
+const (
+	DnsRecordVerificationStatusPending  DnsRecordVerificationStatus = "PENDING"
+	DnsRecordVerificationStatusVerified DnsRecordVerificationStatus = "VERIFIED"
+	DnsRecordVerificationStatusFailed   DnsRecordVerificationStatus = "FAILED"
+)
+
+// Values returns all known values for DnsRecordVerificationStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DnsRecordVerificationStatus) Values() []DnsRecordVerificationStatus {
+	return []DnsRecordVerificationStatus{
+		"PENDING",
+		"VERIFIED",
+		"FAILED",
+	}
+}
+
 type EntityState string
 
 // Enum values for EntityState

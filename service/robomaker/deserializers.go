@@ -10716,6 +10716,42 @@ func awsRestjson1_deserializeDocumentBatchPolicy(v **types.BatchPolicy, value in
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentCommandList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentCompute(v **types.Compute, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10738,6 +10774,28 @@ func awsRestjson1_deserializeDocumentCompute(v **types.Compute, value interface{
 
 	for key, value := range shape {
 		switch key {
+		case "computeType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ComputeType to be of type string, got %T instead", value)
+				}
+				sv.ComputeType = types.ComputeType(jtv)
+			}
+
+		case "gpuUnitLimit":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected GPUUnit to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.GpuUnitLimit = ptr.Int32(int32(i64))
+			}
+
 		case "simulationUnitLimit":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10782,6 +10840,28 @@ func awsRestjson1_deserializeDocumentComputeResponse(v **types.ComputeResponse, 
 
 	for key, value := range shape {
 		switch key {
+		case "computeType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ComputeType to be of type string, got %T instead", value)
+				}
+				sv.ComputeType = types.ComputeType(jtv)
+			}
+
+		case "gpuUnitLimit":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected GPUUnit to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.GpuUnitLimit = ptr.Int32(int32(i64))
+			}
+
 		case "simulationUnitLimit":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10900,6 +10980,15 @@ func awsRestjson1_deserializeDocumentDataSource(v **types.DataSource, value inte
 
 	for key, value := range shape {
 		switch key {
+		case "destination":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Path to be of type string, got %T instead", value)
+				}
+				sv.Destination = ptr.String(jtv)
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10921,6 +11010,15 @@ func awsRestjson1_deserializeDocumentDataSource(v **types.DataSource, value inte
 		case "s3Keys":
 			if err := awsRestjson1_deserializeDocumentS3KeyOutputs(&sv.S3Keys, value); err != nil {
 				return err
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataSourceType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.DataSourceType(jtv)
 			}
 
 		default:
@@ -10954,6 +11052,15 @@ func awsRestjson1_deserializeDocumentDataSourceConfig(v **types.DataSourceConfig
 
 	for key, value := range shape {
 		switch key {
+		case "destination":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Path to be of type string, got %T instead", value)
+				}
+				sv.Destination = ptr.String(jtv)
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10973,8 +11080,17 @@ func awsRestjson1_deserializeDocumentDataSourceConfig(v **types.DataSourceConfig
 			}
 
 		case "s3Keys":
-			if err := awsRestjson1_deserializeDocumentS3Keys(&sv.S3Keys, value); err != nil {
+			if err := awsRestjson1_deserializeDocumentS3KeysOrPrefixes(&sv.S3Keys, value); err != nil {
 				return err
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataSourceType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.DataSourceType(jtv)
 			}
 
 		default:
@@ -12019,6 +12135,11 @@ func awsRestjson1_deserializeDocumentLaunchConfig(v **types.LaunchConfig, value 
 
 	for key, value := range shape {
 		switch key {
+		case "command":
+			if err := awsRestjson1_deserializeDocumentCommandList(&sv.Command, value); err != nil {
+				return err
+			}
+
 		case "environmentVariables":
 			if err := awsRestjson1_deserializeDocumentEnvironmentVariableMap(&sv.EnvironmentVariables, value); err != nil {
 				return err
@@ -13260,7 +13381,7 @@ func awsRestjson1_deserializeDocumentS3KeyOutput(v **types.S3KeyOutput, value in
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected S3Key to be of type string, got %T instead", value)
+					return fmt.Errorf("expected S3KeyOrPrefix to be of type string, got %T instead", value)
 				}
 				sv.S3Key = ptr.String(jtv)
 			}
@@ -13308,7 +13429,7 @@ func awsRestjson1_deserializeDocumentS3KeyOutputs(v *[]types.S3KeyOutput, value 
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentS3Keys(v *[]string, value interface{}) error {
+func awsRestjson1_deserializeDocumentS3KeysOrPrefixes(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13333,7 +13454,7 @@ func awsRestjson1_deserializeDocumentS3Keys(v *[]string, value interface{}) erro
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
-				return fmt.Errorf("expected S3Key to be of type string, got %T instead", value)
+				return fmt.Errorf("expected S3KeyOrPrefix to be of type string, got %T instead", value)
 			}
 			col = jtv
 		}
@@ -14321,6 +14442,15 @@ func awsRestjson1_deserializeDocumentSimulationJobSummary(v **types.SimulationJo
 					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
+			}
+
+		case "computeType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ComputeType to be of type string, got %T instead", value)
+				}
+				sv.ComputeType = types.ComputeType(jtv)
 			}
 
 		case "dataSourceNames":

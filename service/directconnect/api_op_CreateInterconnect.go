@@ -140,7 +140,7 @@ type CreateInterconnectOutput struct {
 	// The name of the service provider associated with the interconnect.
 	ProviderName *string
 
-	// The Region where the connection is located.
+	// The Amazon Web Services Region where the connection is located.
 	Region *string
 
 	// The tags associated with the interconnect.

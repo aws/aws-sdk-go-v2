@@ -30,7 +30,8 @@ func (c *Client) AcceptDirectConnectGatewayAssociationProposal(ctx context.Conte
 
 type AcceptDirectConnectGatewayAssociationProposalInput struct {
 
-	// The ID of the account that owns the virtual private gateway or transit gateway.
+	// The ID of the Amazon Web Services account that owns the virtual private gateway
+	// or transit gateway.
 	//
 	// This member is required.
 	AssociatedGatewayOwnerAccount *string

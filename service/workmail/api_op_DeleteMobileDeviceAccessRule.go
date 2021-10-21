@@ -11,7 +11,9 @@ import (
 )
 
 // Deletes a mobile device access rule for the specified Amazon WorkMail
-// organization.
+// organization. Deleting already deleted and non-existing rules does not produce
+// an error. In those cases, the service sends back an HTTP 200 response with an
+// empty HTTP body.
 func (c *Client) DeleteMobileDeviceAccessRule(ctx context.Context, params *DeleteMobileDeviceAccessRuleInput, optFns ...func(*Options)) (*DeleteMobileDeviceAccessRuleOutput, error) {
 	if params == nil {
 		params = &DeleteMobileDeviceAccessRuleInput{}

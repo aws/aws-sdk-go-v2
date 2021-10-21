@@ -316,6 +316,26 @@ func (LoaContentType) Values() []LoaContentType {
 	}
 }
 
+type NniPartnerType string
+
+// Enum values for NniPartnerType
+const (
+	NniPartnerTypeV1         NniPartnerType = "v1"
+	NniPartnerTypeV2         NniPartnerType = "v2"
+	NniPartnerTypeNonPartner NniPartnerType = "nonPartner"
+)
+
+// Values returns all known values for NniPartnerType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NniPartnerType) Values() []NniPartnerType {
+	return []NniPartnerType{
+		"v1",
+		"v2",
+		"nonPartner",
+	}
+}
+
 type VirtualInterfaceState string
 
 // Enum values for VirtualInterfaceState

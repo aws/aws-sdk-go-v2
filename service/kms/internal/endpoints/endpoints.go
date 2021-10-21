@@ -117,6 +117,7 @@ var defaultPartitions = endpoints.Partitions{
 				},
 			},
 			"us-iso-east-1": endpoints.Endpoint{},
+			"us-iso-west-1": endpoints.Endpoint{},
 		},
 	},
 	{

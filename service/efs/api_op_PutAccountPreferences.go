@@ -12,11 +12,16 @@ import (
 )
 
 // Use this operation to set the account preference in the current Amazon Web
-// Services Region to use either long 17 character (63 bit) or short 8 character
-// (32 bit) IDs for new EFS file systems and mount targets created. All existing
+// Services Region to use long 17 character (63 bit) or short 8 character (32 bit)
+// resource IDs for new EFS file system and mount target resources. All existing
 // resource IDs are not affected by any changes you make. You can set the ID
 // preference during the opt-in period as EFS transitions to long resource IDs. For
-// more information, see Managing Amazon EFS resource IDs.
+// more information, see Managing Amazon EFS resource IDs
+// (https://docs.aws.amazon.com/efs/latest/ug/manage-efs-resource-ids.html).
+// Starting in October, 2021, you will receive an error if you try to set the
+// account preference to use the short 8 character format resource ID. Contact
+// Amazon Web Services support if you receive an error and need to use short IDs
+// for file system and mount target resources.
 func (c *Client) PutAccountPreferences(ctx context.Context, params *PutAccountPreferencesInput, optFns ...func(*Options)) (*PutAccountPreferencesOutput, error) {
 	if params == nil {
 		params = &PutAccountPreferencesInput{}
@@ -36,7 +41,10 @@ type PutAccountPreferencesInput struct {
 
 	// Specifies the EFS resource ID preference to set for the user's Amazon Web
 	// Services account, in the current Amazon Web Services Region, either LONG_ID (17
-	// characters), or SHORT_ID (8 characters).
+	// characters), or SHORT_ID (8 characters). Starting in October, 2021, you will
+	// receive an error when setting the account preference to SHORT_ID. Contact Amazon
+	// Web Services support if you receive an error and need to use short IDs for file
+	// system and mount target resources.
 	//
 	// This member is required.
 	ResourceIdType types.ResourceIdType

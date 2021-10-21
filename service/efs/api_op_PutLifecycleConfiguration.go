@@ -17,27 +17,30 @@ import (
 // storage class. To enable EFS Intelligent Tiering, set the value of
 // TransitionToPrimaryStorageClass to AFTER_1_ACCESS. For more information, see EFS
 // Lifecycle Management
-// (https://docs.aws.amazon.com/efs/latest/ug/lifecycle-management-efs.html). A
-// LifecycleConfiguration applies to all files in a file system. Each Amazon EFS
-// file system supports one lifecycle configuration, which applies to all files in
-// the file system. If a LifecycleConfiguration object already exists for the
-// specified file system, a PutLifecycleConfiguration call modifies the existing
-// configuration. A PutLifecycleConfiguration call with an empty LifecyclePolicies
-// array in the request body deletes any existing LifecycleConfiguration and
-// disables lifecycle management. In the request, specify the following:
+// (https://docs.aws.amazon.com/efs/latest/ug/lifecycle-management-efs.html). Each
+// Amazon EFS file system supports one lifecycle configuration, which applies to
+// all files in the file system. If a LifecycleConfiguration object already exists
+// for the specified file system, a PutLifecycleConfiguration call modifies the
+// existing configuration. A PutLifecycleConfiguration call with an empty
+// LifecyclePolicies array in the request body deletes any existing
+// LifecycleConfiguration and turns off lifecycle management for the file system.
+// In the request, specify the following:
 //
-// * The ID
-// for the file system for which you are enabling, disabling, or modifying
-// lifecycle management.
+// * The ID for the file system for which
+// you are enabling, disabling, or modifying lifecycle management.
 //
-// * A LifecyclePolicies array of LifecyclePolicy objects
-// that define when files are moved to the IA storage class. The array can contain
-// only one LifecyclePolicy item.
+// * A
+// LifecyclePolicies array of LifecyclePolicy objects that define when files are
+// moved to the IA storage class. Amazon EFS requires that each LifecyclePolicy
+// object have only have a single transition, so the LifecyclePolicies array needs
+// to be structured with separate LifecyclePolicy objects. See the example requests
+// in the following section for more information.
 //
-// This operation requires permissions for the
-// elasticfilesystem:PutLifecycleConfiguration operation. To apply a
-// LifecycleConfiguration object to an encrypted file system, you need the same Key
-// Management Service permissions as when you created the encrypted file system.
+// This operation requires
+// permissions for the elasticfilesystem:PutLifecycleConfiguration operation. To
+// apply a LifecycleConfiguration object to an encrypted file system, you need the
+// same Key Management Service permissions as when you created the encrypted file
+// system.
 func (c *Client) PutLifecycleConfiguration(ctx context.Context, params *PutLifecycleConfigurationInput, optFns ...func(*Options)) (*PutLifecycleConfigurationOutput, error) {
 	if params == nil {
 		params = &PutLifecycleConfigurationInput{}
@@ -62,9 +65,22 @@ type PutLifecycleConfigurationInput struct {
 	FileSystemId *string
 
 	// An array of LifecyclePolicy objects that define the file system's
-	// LifecycleConfiguration object. A LifecycleConfiguration object tells lifecycle
-	// management when to transition files from the Standard storage class to the
-	// Infrequent Access storage class.
+	// LifecycleConfiguration object. A LifecycleConfiguration object informs EFS
+	// lifecycle management and intelligent tiering of the following:
+	//
+	// * When to move
+	// files in the file system from primary storage to the IA storage class.
+	//
+	// * When
+	// to move files that are in IA storage to primary storage.
+	//
+	// When using the
+	// put-lifecycle-configuration CLI command or the PutLifecycleConfiguration API
+	// action, Amazon EFS requires that each LifecyclePolicy object have only a single
+	// transition. This means that in a request body, LifecyclePolicies needs to be
+	// structured as an array of LifecyclePolicy objects, one object for each
+	// transition, TransitionToIA, TransitionToPrimaryStorageClass. See the example
+	// requests in the following section for more information.
 	//
 	// This member is required.
 	LifecyclePolicies []types.LifecyclePolicy

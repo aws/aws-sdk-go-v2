@@ -39,8 +39,7 @@ type ImportPlaybackKeyPairInput struct {
 	// This member is required.
 	PublicKeyMaterial *string
 
-	// An arbitrary string (a nickname) assigned to a playback key pair that helps the
-	// customer identify that resource. The value does not need to be unique.
+	// Playback-key-pair name. The value does not need to be unique.
 	Name *string
 
 	// Any tags provided with the request are added to the playback key pair tags.
@@ -51,7 +50,7 @@ type ImportPlaybackKeyPairInput struct {
 
 type ImportPlaybackKeyPairOutput struct {
 
-	// A key pair used to sign and validate a playback authorization token.
+	//
 	KeyPair *types.PlaybackKeyPair
 
 	// Metadata pertaining to the operation's result.

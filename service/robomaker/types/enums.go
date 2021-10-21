@@ -22,6 +22,44 @@ func (Architecture) Values() []Architecture {
 	}
 }
 
+type ComputeType string
+
+// Enum values for ComputeType
+const (
+	ComputeTypeCpu       ComputeType = "CPU"
+	ComputeTypeGpuAndCpu ComputeType = "GPU_AND_CPU"
+)
+
+// Values returns all known values for ComputeType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ComputeType) Values() []ComputeType {
+	return []ComputeType{
+		"CPU",
+		"GPU_AND_CPU",
+	}
+}
+
+type DataSourceType string
+
+// Enum values for DataSourceType
+const (
+	DataSourceTypePrefix  DataSourceType = "Prefix"
+	DataSourceTypeArchive DataSourceType = "Archive"
+	DataSourceTypeFile    DataSourceType = "File"
+)
+
+// Values returns all known values for DataSourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DataSourceType) Values() []DataSourceType {
+	return []DataSourceType{
+		"Prefix",
+		"Archive",
+		"File",
+	}
+}
+
 type DeploymentJobErrorCode string
 
 // Enum values for DeploymentJobErrorCode
@@ -194,8 +232,9 @@ type RobotSoftwareSuiteType string
 
 // Enum values for RobotSoftwareSuiteType
 const (
-	RobotSoftwareSuiteTypeRos  RobotSoftwareSuiteType = "ROS"
-	RobotSoftwareSuiteTypeRos2 RobotSoftwareSuiteType = "ROS2"
+	RobotSoftwareSuiteTypeRos     RobotSoftwareSuiteType = "ROS"
+	RobotSoftwareSuiteTypeRos2    RobotSoftwareSuiteType = "ROS2"
+	RobotSoftwareSuiteTypeGeneral RobotSoftwareSuiteType = "General"
 )
 
 // Values returns all known values for RobotSoftwareSuiteType. Note that this can
@@ -205,6 +244,7 @@ func (RobotSoftwareSuiteType) Values() []RobotSoftwareSuiteType {
 	return []RobotSoftwareSuiteType{
 		"ROS",
 		"ROS2",
+		"General",
 	}
 }
 
@@ -421,8 +461,9 @@ type SimulationSoftwareSuiteType string
 
 // Enum values for SimulationSoftwareSuiteType
 const (
-	SimulationSoftwareSuiteTypeGazebo     SimulationSoftwareSuiteType = "Gazebo"
-	SimulationSoftwareSuiteTypeRosbagPlay SimulationSoftwareSuiteType = "RosbagPlay"
+	SimulationSoftwareSuiteTypeGazebo            SimulationSoftwareSuiteType = "Gazebo"
+	SimulationSoftwareSuiteTypeRosbagPlay        SimulationSoftwareSuiteType = "RosbagPlay"
+	SimulationSoftwareSuiteTypeSimulationRuntime SimulationSoftwareSuiteType = "SimulationRuntime"
 )
 
 // Values returns all known values for SimulationSoftwareSuiteType. Note that this
@@ -432,6 +473,7 @@ func (SimulationSoftwareSuiteType) Values() []SimulationSoftwareSuiteType {
 	return []SimulationSoftwareSuiteType{
 		"Gazebo",
 		"RosbagPlay",
+		"SimulationRuntime",
 	}
 }
 

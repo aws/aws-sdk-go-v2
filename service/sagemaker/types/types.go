@@ -6477,7 +6477,7 @@ type MetricsSource struct {
 
 // Provides information about the location that is configured for storing model
 // artifacts. Model artifacts are the output that results from training a model,
-// and typically consist of trained parameters, a model defintion that describes
+// and typically consist of trained parameters, a model definition that describes
 // how to compute inferences, and other metadata.
 type ModelArtifacts struct {
 
@@ -10057,14 +10057,12 @@ type ServiceCatalogProvisioningDetails struct {
 	// This member is required.
 	ProductId *string
 
-	// The ID of the provisioning artifact.
-	//
-	// This member is required.
-	ProvisioningArtifactId *string
-
 	// The path identifier of the product. This value is optional if the product has a
 	// default path, and required if the product has more than one path.
 	PathId *string
+
+	// The ID of the provisioning artifact.
+	ProvisioningArtifactId *string
 
 	// A list of key value pairs that you specify when you provision a product.
 	ProvisioningParameters []ProvisioningParameter

@@ -239,17 +239,28 @@ type FileSystemSize struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a policy used by EFS lifecycle management to transition files to the
-// Infrequent Access (IA) storage class.
+// Describes a policy used by EFS lifecycle management and EFS intelligent tiering
+// that specifies when to transition files into and out of the file system's
+// Infrequent Access (IA) storage class. For more information, see EFS
+// Intelligent‐Tiering and EFS Lifecycle Management
+// (https://docs.aws.amazon.com/efs/latest/ug/lifecycle-management-efs.html). When
+// using the put-lifecycle-configuration CLI command or the
+// PutLifecycleConfiguration API action, Amazon EFS requires that each
+// LifecyclePolicy object have only a single transition. This means that in a
+// request body, LifecyclePolicies needs to be structured as an array of
+// LifecyclePolicy objects, one object for each transition, TransitionToIA,
+// TransitionToPrimaryStorageClass. For more information, see the request examples
+// in PutLifecycleConfiguration.
 type LifecyclePolicy struct {
 
 	// Describes the period of time that a file is not accessed, after which it
-	// transitions to the IA storage class. Metadata operations such as listing the
-	// contents of a directory don't count as file access events.
+	// transitions to IA storage. Metadata operations such as listing the contents of a
+	// directory don't count as file access events.
 	TransitionToIA TransitionToIARules
 
-	// Describes the policy used to transition a file from infequent access storage to
-	// primary storage.
+	// Describes when to transition a file from IA storage to primary storage. Metadata
+	// operations such as listing the contents of a directory don't count as file
+	// access events.
 	TransitionToPrimaryStorageClass TransitionToPrimaryStorageClassRules
 
 	noSmithyDocumentSerde

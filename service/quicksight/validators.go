@@ -1010,6 +1010,26 @@ func (m *validateOpDescribeIngestion) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeIpRestriction struct {
+}
+
+func (*validateOpDescribeIpRestriction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeIpRestriction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeIpRestrictionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeIpRestrictionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeNamespace struct {
 }
 
@@ -2130,6 +2150,26 @@ func (m *validateOpUpdateIAMPolicyAssignment) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateIpRestriction struct {
+}
+
+func (*validateOpUpdateIpRestriction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateIpRestriction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateIpRestrictionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateIpRestrictionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateTemplateAlias struct {
 }
 
@@ -2470,6 +2510,10 @@ func addOpDescribeIngestionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeIngestion{}, middleware.After)
 }
 
+func addOpDescribeIpRestrictionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeIpRestriction{}, middleware.After)
+}
+
 func addOpDescribeNamespaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeNamespace{}, middleware.After)
 }
@@ -2692,6 +2736,10 @@ func addOpUpdateGroupValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateIAMPolicyAssignmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateIAMPolicyAssignment{}, middleware.After)
+}
+
+func addOpUpdateIpRestrictionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateIpRestriction{}, middleware.After)
 }
 
 func addOpUpdateTemplateAliasValidationMiddleware(stack *middleware.Stack) error {
@@ -5572,6 +5620,21 @@ func validateOpDescribeIngestionInput(v *DescribeIngestionInput) error {
 	}
 }
 
+func validateOpDescribeIpRestrictionInput(v *DescribeIpRestrictionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeIpRestrictionInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeNamespaceInput(v *DescribeNamespaceInput) error {
 	if v == nil {
 		return nil
@@ -6745,6 +6808,21 @@ func validateOpUpdateIAMPolicyAssignmentInput(v *UpdateIAMPolicyAssignmentInput)
 	}
 	if v.Namespace == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateIpRestrictionInput(v *UpdateIpRestrictionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateIpRestrictionInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

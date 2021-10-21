@@ -34,7 +34,7 @@ func (c *Client) DescribeVTLDevices(ctx context.Context, params *DescribeVTLDevi
 type DescribeVTLDevicesInput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Region.
+	// return a list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -60,7 +60,7 @@ type DescribeVTLDevicesInput struct {
 type DescribeVTLDevicesOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Region.
+	// return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// An opaque string that indicates the position at which the VTL devices that were

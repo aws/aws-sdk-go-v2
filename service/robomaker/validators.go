@@ -1227,12 +1227,6 @@ func validateLaunchConfig(v *types.LaunchConfig) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "LaunchConfig"}
-	if v.PackageName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PackageName"))
-	}
-	if v.LaunchFile == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LaunchFile"))
-	}
 	if v.PortForwardingConfig != nil {
 		if err := validatePortForwardingConfig(v.PortForwardingConfig); err != nil {
 			invalidParams.AddNested("PortForwardingConfig", err.(smithy.InvalidParamsError))

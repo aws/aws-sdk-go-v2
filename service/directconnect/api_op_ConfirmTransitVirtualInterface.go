@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Accepts ownership of a transit virtual interface created by another account.
-// After the owner of the transit virtual interface makes this call, the specified
-// transit virtual interface is created and made available to handle traffic.
+// Accepts ownership of a transit virtual interface created by another Amazon Web
+// Services account. After the owner of the transit virtual interface makes this
+// call, the specified transit virtual interface is created and made available to
+// handle traffic.
 func (c *Client) ConfirmTransitVirtualInterface(ctx context.Context, params *ConfirmTransitVirtualInterfaceInput, optFns ...func(*Options)) (*ConfirmTransitVirtualInterfaceOutput, error) {
 	if params == nil {
 		params = &ConfirmTransitVirtualInterfaceInput{}

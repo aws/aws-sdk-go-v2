@@ -38,6 +38,8 @@ type BatchGetChannelInput struct {
 }
 
 type BatchGetChannelOutput struct {
+
+	//
 	Channels []types.Channel
 
 	// Each error object is related to a specific ARN in the request.

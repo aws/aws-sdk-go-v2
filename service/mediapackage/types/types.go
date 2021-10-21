@@ -465,6 +465,10 @@ type HlsPackage struct {
 	// An HTTP Live Streaming (HLS) encryption configuration.
 	Encryption *HlsEncryption
 
+	// When enabled, MediaPackage passes through digital video broadcasting (DVB)
+	// subtitles into the output.
+	IncludeDvbSubtitles bool
+
 	// When enabled, an I-Frame only stream will be included in the output.
 	IncludeIframeOnlyStream bool
 

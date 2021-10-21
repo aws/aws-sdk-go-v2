@@ -82,6 +82,21 @@ type Delegate struct {
 	noSmithyDocumentSerde
 }
 
+// A DNS record uploaded to your DNS provider.
+type DnsRecord struct {
+
+	// The DNS hostname.- For example, domain.example.com.
+	Hostname *string
+
+	// The RFC 1035 record type. Possible values: CNAME, A, MX.
+	Type *string
+
+	// The value returned by the DNS for a query to that hostname and record type.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // The domain to associate with an Amazon WorkMail organization. When you configure
 // a domain hosted in Amazon Route 53 (Route 53), all recommended DNS records are
 // added to the organization when you create it. For more information, see Adding a
@@ -113,7 +128,7 @@ type FolderConfiguration struct {
 	// This member is required.
 	Name FolderName
 
-	// The period of time at which the folder configuration action is applied.
+	// The number of days for which the folder-configuration action applies.
 	Period *int32
 
 	noSmithyDocumentSerde
@@ -174,6 +189,18 @@ type MailboxExportJob struct {
 
 	// The state of the mailbox export job.
 	State MailboxExportJobState
+
+	noSmithyDocumentSerde
+}
+
+// The data for a given domain.
+type MailDomainSummary struct {
+
+	// Whether the domain is default or not.
+	DefaultDomain bool
+
+	// The domain name.
+	DomainName *string
 
 	noSmithyDocumentSerde
 }

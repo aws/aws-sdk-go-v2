@@ -10090,6 +10090,16 @@ func awsAwsjson11_serializeDocumentS3Target(v *types.S3Target, value smithyjson.
 		ok.String(*v.ConnectionName)
 	}
 
+	if v.DlqEventQueueArn != nil {
+		ok := object.Key("DlqEventQueueArn")
+		ok.String(*v.DlqEventQueueArn)
+	}
+
+	if v.EventQueueArn != nil {
+		ok := object.Key("EventQueueArn")
+		ok.String(*v.EventQueueArn)
+	}
+
 	if v.Exclusions != nil {
 		ok := object.Key("Exclusions")
 		if err := awsAwsjson11_serializeDocumentPathList(v.Exclusions, ok); err != nil {

@@ -31,7 +31,7 @@ func (c *Client) DescribeSMBSettings(ctx context.Context, params *DescribeSMBSet
 type DescribeSMBSettingsInput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Region.
+	// return a list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -75,12 +75,16 @@ type DescribeSMBSettingsOutput struct {
 	FileSharesVisible *bool
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Region.
+	// return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// This value is true if a password for the guest user smbguest is set, otherwise
 	// false. Only supported for S3 File Gateways. Valid Values: true | false
 	SMBGuestPasswordSet *bool
+
+	// A list of Active Directory users and groups that have special permissions for
+	// SMB file shares on the gateway.
+	SMBLocalGroups *types.SMBLocalGroups
 
 	// The type of security strategy that was specified for file gateway.
 	//

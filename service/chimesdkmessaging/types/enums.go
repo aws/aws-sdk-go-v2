@@ -39,6 +39,28 @@ func (ChannelMessagePersistenceType) Values() []ChannelMessagePersistenceType {
 	}
 }
 
+type ChannelMessageStatus string
+
+// Enum values for ChannelMessageStatus
+const (
+	ChannelMessageStatusSent    ChannelMessageStatus = "SENT"
+	ChannelMessageStatusPending ChannelMessageStatus = "PENDING"
+	ChannelMessageStatusFailed  ChannelMessageStatus = "FAILED"
+	ChannelMessageStatusDenied  ChannelMessageStatus = "DENIED"
+)
+
+// Values returns all known values for ChannelMessageStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ChannelMessageStatus) Values() []ChannelMessageStatus {
+	return []ChannelMessageStatus{
+		"SENT",
+		"PENDING",
+		"FAILED",
+		"DENIED",
+	}
+}
+
 type ChannelMessageType string
 
 // Enum values for ChannelMessageType
@@ -134,6 +156,40 @@ func (ErrorCode) Values() []ErrorCode {
 		"Unprocessable",
 		"VoiceConnectorGroupAssociationsExist",
 		"PhoneNumberAssociationsExist",
+	}
+}
+
+type FallbackAction string
+
+// Enum values for FallbackAction
+const (
+	FallbackActionContinue FallbackAction = "CONTINUE"
+	FallbackActionAbort    FallbackAction = "ABORT"
+)
+
+// Values returns all known values for FallbackAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FallbackAction) Values() []FallbackAction {
+	return []FallbackAction{
+		"CONTINUE",
+		"ABORT",
+	}
+}
+
+type InvocationType string
+
+// Enum values for InvocationType
+const (
+	InvocationTypeAsync InvocationType = "ASYNC"
+)
+
+// Values returns all known values for InvocationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InvocationType) Values() []InvocationType {
+	return []InvocationType{
+		"ASYNC",
 	}
 }
 

@@ -13,7 +13,7 @@ import (
 )
 
 // Gets summary information about all recording configurations in your account, in
-// the AWS region where the API request is processed.
+// the Amazon Web Services region where the API request is processed.
 func (c *Client) ListRecordingConfigurations(ctx context.Context, params *ListRecordingConfigurationsInput, optFns ...func(*Options)) (*ListRecordingConfigurationsOutput, error) {
 	if params == nil {
 		params = &ListRecordingConfigurationsInput{}

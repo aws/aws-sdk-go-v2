@@ -4056,6 +4056,53 @@ func (m *awsAwsjson11_serializeOpUpdateSMBFileShareVisibility) HandleSerialize(c
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpUpdateSMBLocalGroups struct {
+}
+
+func (*awsAwsjson11_serializeOpUpdateSMBLocalGroups) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUpdateSMBLocalGroups) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateSMBLocalGroupsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("StorageGateway_20130630.UpdateSMBLocalGroups")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUpdateSMBLocalGroupsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpUpdateSMBSecurityStrategy struct {
 }
 
@@ -4447,6 +4494,20 @@ func awsAwsjson11_serializeDocumentPoolARNs(v []string, value smithyjson.Value) 
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSMBLocalGroups(v *types.SMBLocalGroups, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GatewayAdmins != nil {
+		ok := object.Key("GatewayAdmins")
+		if err := awsAwsjson11_serializeDocumentUserList(v.GatewayAdmins, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -4868,6 +4929,11 @@ func awsAwsjson11_serializeOpDocumentCreateCachediSCSIVolumeInput(v *CreateCache
 func awsAwsjson11_serializeOpDocumentCreateNFSFileShareInput(v *CreateNFSFileShareInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AuditDestinationARN != nil {
+		ok := object.Key("AuditDestinationARN")
+		ok.String(*v.AuditDestinationARN)
+	}
 
 	if v.BucketRegion != nil {
 		ok := object.Key("BucketRegion")
@@ -6490,6 +6556,11 @@ func awsAwsjson11_serializeOpDocumentUpdateNFSFileShareInput(v *UpdateNFSFileSha
 	object := value.Object()
 	defer object.Close()
 
+	if v.AuditDestinationARN != nil {
+		ok := object.Key("AuditDestinationARN")
+		ok.String(*v.AuditDestinationARN)
+	}
+
 	if v.CacheAttributes != nil {
 		ok := object.Key("CacheAttributes")
 		if err := awsAwsjson11_serializeDocumentCacheAttributes(v.CacheAttributes, ok); err != nil {
@@ -6691,6 +6762,25 @@ func awsAwsjson11_serializeOpDocumentUpdateSMBFileShareVisibilityInput(v *Update
 	if v.GatewayARN != nil {
 		ok := object.Key("GatewayARN")
 		ok.String(*v.GatewayARN)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentUpdateSMBLocalGroupsInput(v *UpdateSMBLocalGroupsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GatewayARN != nil {
+		ok := object.Key("GatewayARN")
+		ok.String(*v.GatewayARN)
+	}
+
+	if v.SMBLocalGroups != nil {
+		ok := object.Key("SMBLocalGroups")
+		if err := awsAwsjson11_serializeDocumentSMBLocalGroups(v.SMBLocalGroups, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

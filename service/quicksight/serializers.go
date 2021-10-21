@@ -1259,6 +1259,17 @@ func (m *awsRestjson1_serializeOpCreateIngestion) HandleSerialize(ctx context.Co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateIngestionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -1296,6 +1307,18 @@ func awsRestjson1_serializeOpHttpBindingsCreateIngestionInput(v *CreateIngestion
 		if err := encoder.SetURI("IngestionId").String(*v.IngestionId); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateIngestionInput(v *CreateIngestionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.IngestionType) > 0 {
+		ok := object.Key("IngestionType")
+		ok.String(string(v.IngestionType))
 	}
 
 	return nil
@@ -4163,6 +4186,64 @@ func awsRestjson1_serializeOpHttpBindingsDescribeIngestionInput(v *DescribeInges
 	}
 	if v.IngestionId != nil {
 		if err := encoder.SetURI("IngestionId").String(*v.IngestionId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDescribeIpRestriction struct {
+}
+
+func (*awsRestjson1_serializeOpDescribeIpRestriction) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribeIpRestriction) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeIpRestrictionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/accounts/{AwsAccountId}/ip-restriction")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeIpRestrictionInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribeIpRestrictionInput(v *DescribeIpRestrictionInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AwsAccountId == nil || len(*v.AwsAccountId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AwsAccountId must not be empty")}
+	}
+	if v.AwsAccountId != nil {
+		if err := encoder.SetURI("AwsAccountId").String(*v.AwsAccountId); err != nil {
 			return err
 		}
 	}
@@ -8906,6 +8987,94 @@ func awsRestjson1_serializeOpDocumentUpdateIAMPolicyAssignmentInput(v *UpdateIAM
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateIpRestriction struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateIpRestriction) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateIpRestriction) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateIpRestrictionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/accounts/{AwsAccountId}/ip-restriction")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateIpRestrictionInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateIpRestrictionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateIpRestrictionInput(v *UpdateIpRestrictionInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AwsAccountId == nil || len(*v.AwsAccountId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AwsAccountId must not be empty")}
+	}
+	if v.AwsAccountId != nil {
+		if err := encoder.SetURI("AwsAccountId").String(*v.AwsAccountId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateIpRestrictionInput(v *UpdateIpRestrictionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled != nil {
+		ok := object.Key("Enabled")
+		ok.Boolean(*v.Enabled)
+	}
+
+	if v.IpRestrictionRuleMap != nil {
+		ok := object.Key("IpRestrictionRuleMap")
+		if err := awsRestjson1_serializeDocumentIpRestrictionRuleMap(v.IpRestrictionRuleMap, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpdateTemplate struct {
 }
 
@@ -10811,6 +10980,17 @@ func awsRestjson1_serializeDocumentIntegerParameterList(v []types.IntegerParamet
 		if err := awsRestjson1_serializeDocumentIntegerParameter(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentIpRestrictionRuleMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
 	}
 	return nil
 }

@@ -3065,15 +3065,6 @@ func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 
 	for key, value := range shape {
 		switch key {
-		case "nextToken":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
-				}
-				sv.NextToken = ptr.String(jtv)
-			}
-
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err

@@ -954,6 +954,53 @@ func (m *awsAwsjson11_serializeOpDeregisterFromWorkMail) HandleSerialize(ctx con
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpDeregisterMailDomain struct {
+}
+
+func (*awsAwsjson11_serializeOpDeregisterMailDomain) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDeregisterMailDomain) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeregisterMailDomainInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.DeregisterMailDomain")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDeregisterMailDomainInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpDescribeGroup struct {
 }
 
@@ -1471,6 +1518,53 @@ func (m *awsAwsjson11_serializeOpGetMailboxDetails) HandleSerialize(ctx context.
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpGetMailDomain struct {
+}
+
+func (*awsAwsjson11_serializeOpGetMailDomain) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetMailDomain) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetMailDomainInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.GetMailDomain")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetMailDomainInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpGetMobileDeviceAccessEffect struct {
 }
 
@@ -1832,6 +1926,53 @@ func (m *awsAwsjson11_serializeOpListMailboxPermissions) HandleSerialize(ctx con
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentListMailboxPermissionsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpListMailDomains struct {
+}
+
+func (*awsAwsjson11_serializeOpListMailDomains) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListMailDomains) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListMailDomainsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.ListMailDomains")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListMailDomainsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2411,6 +2552,53 @@ func (m *awsAwsjson11_serializeOpPutRetentionPolicy) HandleSerialize(ctx context
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpRegisterMailDomain struct {
+}
+
+func (*awsAwsjson11_serializeOpRegisterMailDomain) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpRegisterMailDomain) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*RegisterMailDomainInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.RegisterMailDomain")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentRegisterMailDomainInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpRegisterToWorkMail struct {
 }
 
@@ -2631,6 +2819,53 @@ func (m *awsAwsjson11_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpUpdateDefaultMailDomain struct {
+}
+
+func (*awsAwsjson11_serializeOpUpdateDefaultMailDomain) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUpdateDefaultMailDomain) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateDefaultMailDomainInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.UpdateDefaultMailDomain")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUpdateDefaultMailDomainInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3537,6 +3772,23 @@ func awsAwsjson11_serializeOpDocumentDeregisterFromWorkMailInput(v *DeregisterFr
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentDeregisterMailDomainInput(v *DeregisterMailDomainInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DomainName != nil {
+		ok := object.Key("DomainName")
+		ok.String(*v.DomainName)
+	}
+
+	if v.OrganizationId != nil {
+		ok := object.Key("OrganizationId")
+		ok.String(*v.OrganizationId)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentDescribeGroupInput(v *DescribeGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3729,6 +3981,23 @@ func awsAwsjson11_serializeOpDocumentGetMailboxDetailsInput(v *GetMailboxDetails
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentGetMailDomainInput(v *GetMailDomainInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DomainName != nil {
+		ok := object.Key("DomainName")
+		ok.String(*v.DomainName)
+	}
+
+	if v.OrganizationId != nil {
+		ok := object.Key("OrganizationId")
+		ok.String(*v.OrganizationId)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentGetMobileDeviceAccessEffectInput(v *GetMobileDeviceAccessEffectInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3901,6 +4170,28 @@ func awsAwsjson11_serializeOpDocumentListMailboxPermissionsInput(v *ListMailboxP
 		ok := object.Key("EntityId")
 		ok.String(*v.EntityId)
 	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.OrganizationId != nil {
+		ok := object.Key("OrganizationId")
+		ok.String(*v.OrganizationId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListMailDomainsInput(v *ListMailDomainsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
 
 	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
@@ -4245,6 +4536,28 @@ func awsAwsjson11_serializeOpDocumentPutRetentionPolicyInput(v *PutRetentionPoli
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentRegisterMailDomainInput(v *RegisterMailDomainInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.DomainName != nil {
+		ok := object.Key("DomainName")
+		ok.String(*v.DomainName)
+	}
+
+	if v.OrganizationId != nil {
+		ok := object.Key("OrganizationId")
+		ok.String(*v.OrganizationId)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentRegisterToWorkMailInput(v *RegisterToWorkMailInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4369,6 +4682,23 @@ func awsAwsjson11_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, v
 		if err := awsAwsjson11_serializeDocumentTagKeyList(v.TagKeys, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentUpdateDefaultMailDomainInput(v *UpdateDefaultMailDomainInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DomainName != nil {
+		ok := object.Key("DomainName")
+		ok.String(*v.DomainName)
+	}
+
+	if v.OrganizationId != nil {
+		ok := object.Key("OrganizationId")
+		ok.String(*v.OrganizationId)
 	}
 
 	return nil

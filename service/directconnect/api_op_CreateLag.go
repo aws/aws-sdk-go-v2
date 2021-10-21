@@ -26,10 +26,10 @@ import (
 // a member of the LAG. The LAG will be created on the same Direct Connect endpoint
 // to which the dedicated connection terminates. Any virtual interfaces associated
 // with the dedicated connection are automatically disassociated and re-associated
-// with the LAG. The connection ID does not change. If the account used to create a
-// LAG is a registered Direct Connect Partner, the LAG is automatically enabled to
-// host sub-connections. For a LAG owned by a partner, any associated virtual
-// interfaces cannot be directly configured.
+// with the LAG. The connection ID does not change. If the Amazon Web Services
+// account used to create a LAG is a registered Direct Connect Partner, the LAG is
+// automatically enabled to host sub-connections. For a LAG owned by a partner, any
+// associated virtual interfaces cannot be directly configured.
 func (c *Client) CreateLag(ctx context.Context, params *CreateLagInput, optFns ...func(*Options)) (*CreateLagOutput, error) {
 	if params == nil {
 		params = &CreateLagInput{}
@@ -173,13 +173,13 @@ type CreateLagOutput struct {
 	// of 10.
 	NumberOfConnections int32
 
-	// The ID of the account that owns the LAG.
+	// The ID of the Amazon Web Services account that owns the LAG.
 	OwnerAccount *string
 
 	// The name of the service provider associated with the LAG.
 	ProviderName *string
 
-	// The Region where the connection is located.
+	// The Amazon Web Services Region where the connection is located.
 	Region *string
 
 	// The tags associated with the LAG.

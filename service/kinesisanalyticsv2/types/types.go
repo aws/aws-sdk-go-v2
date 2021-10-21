@@ -359,12 +359,12 @@ type ApplicationVersionSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration parameters for the default AWS Glue database. You use this
+// The configuration parameters for the default Amazon Glue database. You use this
 // database for SQL queries that you write in a Kinesis Data Analytics Studio
 // notebook.
 type CatalogConfiguration struct {
 
-	// The configuration parameters for the default AWS Glue database. You use this
+	// The configuration parameters for the default Amazon Glue database. You use this
 	// database for Apache Flink SQL queries and table API transforms that you write in
 	// a Kinesis Data Analytics Studio notebook.
 	//
@@ -374,12 +374,12 @@ type CatalogConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration parameters for the default AWS Glue database. You use this
+// The configuration parameters for the default Amazon Glue database. You use this
 // database for Apache Flink SQL queries and table API transforms that you write in
 // a Kinesis Data Analytics Studio notebook.
 type CatalogConfigurationDescription struct {
 
-	// The configuration parameters for the default AWS Glue database. You use this
+	// The configuration parameters for the default Amazon Glue database. You use this
 	// database for SQL queries that you write in a Kinesis Data Analytics Studio
 	// notebook.
 	//
@@ -389,11 +389,13 @@ type CatalogConfigurationDescription struct {
 	noSmithyDocumentSerde
 }
 
-// Updates to
+// Updates to the configuration parameters for the default Amazon Glue database.
+// You use this database for SQL queries that you write in a Kinesis Data Analytics
+// Studio notebook.
 type CatalogConfigurationUpdate struct {
 
-	// Updates to the configuration parameters for the default AWS Glue database. You
-	// use this database for SQL queries that you write in a Kinesis Data Analytics
+	// Updates to the configuration parameters for the default Amazon Glue database.
+	// You use this database for SQL queries that you write in a Kinesis Data Analytics
 	// Studio notebook.
 	//
 	// This member is required.
@@ -698,7 +700,7 @@ type CustomArtifactConfigurationDescription struct {
 }
 
 // The information required to deploy a Kinesis Data Analytics Studio notebook as
-// an application with durable state..
+// an application with durable state.
 type DeployAsApplicationConfiguration struct {
 
 	// The description of an Amazon S3 object that contains the Amazon Data Analytics
@@ -726,13 +728,11 @@ type DeployAsApplicationConfigurationDescription struct {
 }
 
 // Updates to the configuration information required to deploy an Amazon Data
-// Analytics Studio notebook as an application with durable state..
+// Analytics Studio notebook as an application with durable state.
 type DeployAsApplicationConfigurationUpdate struct {
 
 	// Updates to the location that holds the data required to specify an Amazon Data
 	// Analytics application.
-	//
-	// This member is required.
 	S3ContentLocationUpdate *S3ContentBaseLocationUpdate
 
 	noSmithyDocumentSerde
@@ -903,6 +903,8 @@ type GlueDataCatalogConfigurationDescription struct {
 type GlueDataCatalogConfigurationUpdate struct {
 
 	// The updated Amazon Resource Name (ARN) of the database.
+	//
+	// This member is required.
 	DatabaseARNUpdate *string
 
 	noSmithyDocumentSerde
@@ -991,15 +993,15 @@ type InputDescription struct {
 	noSmithyDocumentSerde
 }
 
-// An object that contains the Amazon Resource Name (ARN) of the AWS Lambda
+// An object that contains the Amazon Resource Name (ARN) of the Amazon Lambda
 // function that is used to preprocess records in the stream in a SQL-based Kinesis
 // Data Analytics application.
 type InputLambdaProcessor struct {
 
-	// The ARN of the AWS Lambda function that operates on records in the stream. To
+	// The ARN of the Amazon Lambda function that operates on records in the stream. To
 	// specify an earlier version of the Lambda function than the latest, include the
 	// Lambda function version in the Lambda function ARN. For more information about
-	// Lambda ARNs, see Example ARNs: AWS Lambda
+	// Lambda ARNs, see Example ARNs: Amazon Lambda
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
 	//
 	// This member is required.
@@ -1009,23 +1011,23 @@ type InputLambdaProcessor struct {
 }
 
 // For a SQL-based Kinesis Data Analytics application, an object that contains the
-// Amazon Resource Name (ARN) of the AWS Lambda function that is used to preprocess
-// records in the stream.
+// Amazon Resource Name (ARN) of the Amazon Lambda function that is used to
+// preprocess records in the stream.
 type InputLambdaProcessorDescription struct {
 
-	// The ARN of the AWS Lambda function that is used to preprocess the records in the
-	// stream. To specify an earlier version of the Lambda function than the latest,
-	// include the Lambda function version in the Lambda function ARN. For more
-	// information about Lambda ARNs, see Example ARNs: AWS Lambda
+	// The ARN of the Amazon Lambda function that is used to preprocess the records in
+	// the stream. To specify an earlier version of the Lambda function than the
+	// latest, include the Lambda function version in the Lambda function ARN. For more
+	// information about Lambda ARNs, see Example ARNs: Amazon Lambda
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
 	//
 	// This member is required.
 	ResourceARN *string
 
-	// The ARN of the IAM role that is used to access the AWS Lambda function. Provided
-	// for backward compatibility. Applications that are created with the current API
-	// version have an application-level service execution role rather than a
-	// resource-level role.
+	// The ARN of the IAM role that is used to access the Amazon Lambda function.
+	// Provided for backward compatibility. Applications that are created with the
+	// current API version have an application-level service execution role rather than
+	// a resource-level role.
 	RoleARN *string
 
 	noSmithyDocumentSerde
@@ -1035,11 +1037,11 @@ type InputLambdaProcessorDescription struct {
 // InputLambdaProcessor that is used to preprocess the records in the stream.
 type InputLambdaProcessorUpdate struct {
 
-	// The Amazon Resource Name (ARN) of the new AWS Lambda function that is used to
+	// The Amazon Resource Name (ARN) of the new Amazon Lambda function that is used to
 	// preprocess the records in the stream. To specify an earlier version of the
 	// Lambda function than the latest, include the Lambda function version in the
 	// Lambda function ARN. For more information about Lambda ARNs, see Example ARNs:
-	// AWS Lambda
+	// Amazon Lambda
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
 	//
 	// This member is required.
@@ -1073,7 +1075,7 @@ type InputParallelismUpdate struct {
 
 // For a SQL-based Kinesis Data Analytics application, describes a processor that
 // is used to preprocess the records in the stream before being processed by your
-// application code. Currently, the only input processor available is AWS Lambda
+// application code. Currently, the only input processor available is Amazon Lambda
 // (https://docs.aws.amazon.com/lambda/).
 type InputProcessingConfiguration struct {
 
@@ -1088,7 +1090,7 @@ type InputProcessingConfiguration struct {
 
 // For a SQL-based Kinesis Data Analytics application, provides the configuration
 // information about an input processor. Currently, the only input processor
-// available is AWS Lambda (https://docs.aws.amazon.com/lambda/).
+// available is Amazon Lambda (https://docs.aws.amazon.com/lambda/).
 type InputProcessingConfigurationDescription struct {
 
 	// Provides configuration information about the associated
@@ -1376,14 +1378,14 @@ type KinesisStreamsOutputUpdate struct {
 }
 
 // When you configure a SQL-based Kinesis Data Analytics application's output,
-// identifies an AWS Lambda function as the destination. You provide the function
-// Amazon Resource Name (ARN) of the Lambda function.
+// identifies an Amazon Lambda function as the destination. You provide the
+// function Amazon Resource Name (ARN) of the Lambda function.
 type LambdaOutput struct {
 
 	// The Amazon Resource Name (ARN) of the destination Lambda function to write to.
 	// To specify an earlier version of the Lambda function than the latest, include
 	// the Lambda function version in the Lambda function ARN. For more information
-	// about Lambda ARNs, see Example ARNs: AWS Lambda
+	// about Lambda ARNs, see Example ARNs: Amazon Lambda
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
 	//
 	// This member is required.
@@ -1392,8 +1394,8 @@ type LambdaOutput struct {
 	noSmithyDocumentSerde
 }
 
-// For a SQL-based Kinesis Data Analytics application's output, describes the AWS
-// Lambda function that is configured as its destination.
+// For a SQL-based Kinesis Data Analytics application's output, describes the
+// Amazon Lambda function that is configured as its destination.
 type LambdaOutputDescription struct {
 
 	// The Amazon Resource Name (ARN) of the destination Lambda function.
@@ -1412,13 +1414,13 @@ type LambdaOutputDescription struct {
 
 // When you update an SQL-based Kinesis Data Analytics application's output
 // configuration using the UpdateApplication operation, provides information about
-// an AWS Lambda function that is configured as the destination.
+// an Amazon Lambda function that is configured as the destination.
 type LambdaOutputUpdate struct {
 
-	// The Amazon Resource Name (ARN) of the destination AWS Lambda function. To
+	// The Amazon Resource Name (ARN) of the destination Amazon Lambda function. To
 	// specify an earlier version of the Lambda function than the latest, include the
 	// Lambda function version in the Lambda function ARN. For more information about
-	// Lambda ARNs, see Example ARNs: AWS Lambda
+	// Lambda ARNs, see Example ARNs: Amazon Lambda
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
 	//
 	// This member is required.
@@ -1547,7 +1549,7 @@ type Output struct {
 	// Identifies a Kinesis data stream as the destination.
 	KinesisStreamsOutput *KinesisStreamsOutput
 
-	// Identifies an AWS Lambda function as the destination.
+	// Identifies an Amazon Lambda function as the destination.
 	LambdaOutput *LambdaOutput
 
 	noSmithyDocumentSerde
@@ -1602,7 +1604,7 @@ type OutputUpdate struct {
 	// Describes a Kinesis data stream as the destination for the output.
 	KinesisStreamsOutputUpdate *KinesisStreamsOutputUpdate
 
-	// Describes an AWS Lambda function as the destination for the output.
+	// Describes an Amazon Lambda function as the destination for the output.
 	LambdaOutputUpdate *LambdaOutputUpdate
 
 	// If you want to specify a different in-application stream for this output
@@ -1982,13 +1984,11 @@ type S3ContentBaseLocationDescription struct {
 // application.
 type S3ContentBaseLocationUpdate struct {
 
-	// The updated Amazon Resource Name (ARN) of the S3 bucket.
-	//
-	// This member is required.
-	BucketARNUpdate *string
-
 	// The updated S3 bucket path.
 	BasePathUpdate *string
+
+	// The updated Amazon Resource Name (ARN) of the S3 bucket.
+	BucketARNUpdate *string
 
 	noSmithyDocumentSerde
 }
@@ -2205,11 +2205,11 @@ type SqlRunConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// A key-value pair (the value is optional) that you can define and assign to AWS
-// resources. If you specify a tag that already exists, the tag value is replaced
-// with the value that you specify in the request. Note that the maximum number of
-// application tags includes system tags. The maximum number of user-defined
-// application tags is 50. For more information, see Using Tagging
+// A key-value pair (the value is optional) that you can define and assign to
+// Amazon resources. If you specify a tag that already exists, the tag value is
+// replaced with the value that you specify in the request. Note that the maximum
+// number of application tags includes system tags. The maximum number of
+// user-defined application tags is 50. For more information, see Using Tagging
 // (https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html).
 type Tag struct {
 
@@ -2298,7 +2298,7 @@ type VpcConfigurationUpdate struct {
 // The configuration of a Kinesis Data Analytics Studio notebook.
 type ZeppelinApplicationConfiguration struct {
 
-	// The AWS Glue Data Catalog that you use in queries in a Kinesis Data Analytics
+	// The Amazon Glue Data Catalog that you use in queries in a Kinesis Data Analytics
 	// Studio notebook.
 	CatalogConfiguration *CatalogConfiguration
 
@@ -2306,7 +2306,7 @@ type ZeppelinApplicationConfiguration struct {
 	CustomArtifactsConfiguration []CustomArtifactConfiguration
 
 	// The information required to deploy a Kinesis Data Analytics Studio notebook as
-	// an application with durable state..
+	// an application with durable state.
 	DeployAsApplicationConfiguration *DeployAsApplicationConfiguration
 
 	// The monitoring configuration of a Kinesis Data Analytics Studio notebook.
@@ -2323,7 +2323,7 @@ type ZeppelinApplicationConfigurationDescription struct {
 	// This member is required.
 	MonitoringConfigurationDescription *ZeppelinMonitoringConfigurationDescription
 
-	// The AWS Glue Data Catalog that is associated with the Kinesis Data Analytics
+	// The Amazon Glue Data Catalog that is associated with the Kinesis Data Analytics
 	// Studio notebook.
 	CatalogConfigurationDescription *CatalogConfigurationDescription
 
@@ -2331,7 +2331,7 @@ type ZeppelinApplicationConfigurationDescription struct {
 	CustomArtifactsConfigurationDescription []CustomArtifactConfigurationDescription
 
 	// The parameters required to deploy a Kinesis Data Analytics Studio notebook as an
-	// application with durable state..
+	// application with durable state.
 	DeployAsApplicationConfigurationDescription *DeployAsApplicationConfigurationDescription
 
 	noSmithyDocumentSerde
@@ -2340,7 +2340,7 @@ type ZeppelinApplicationConfigurationDescription struct {
 // Updates to the configuration of Kinesis Data Analytics Studio notebook.
 type ZeppelinApplicationConfigurationUpdate struct {
 
-	// Updates to the configuration of the AWS Glue Data Catalog that is associated
+	// Updates to the configuration of the Amazon Glue Data Catalog that is associated
 	// with the Kinesis Data Analytics Studio notebook.
 	CatalogConfigurationUpdate *CatalogConfigurationUpdate
 
@@ -2349,7 +2349,7 @@ type ZeppelinApplicationConfigurationUpdate struct {
 	CustomArtifactsConfigurationUpdate []CustomArtifactConfiguration
 
 	// Updates to the configuration information required to deploy an Amazon Data
-	// Analytics Studio notebook as an application with durable state..
+	// Analytics Studio notebook as an application with durable state.
 	DeployAsApplicationConfigurationUpdate *DeployAsApplicationConfigurationUpdate
 
 	// Updates to the monitoring configuration of a Kinesis Data Analytics Studio

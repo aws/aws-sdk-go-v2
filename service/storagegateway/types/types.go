@@ -17,7 +17,7 @@ type AutomaticTapeCreationPolicyInfo struct {
 	AutomaticTapeCreationRules []AutomaticTapeCreationRule
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Region.
+	// return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	noSmithyDocumentSerde
@@ -300,7 +300,7 @@ type FileShareInfo struct {
 	FileShareType FileShareType
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Region.
+	// return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	noSmithyDocumentSerde
@@ -328,8 +328,12 @@ type FileSystemAssociationInfo struct {
 	// DELETING | FORCE_DELETING | UPDATING | ERROR
 	FileSystemAssociationStatus *string
 
+	// An array containing the FileSystemAssociationStatusDetail data type, which
+	// provides detailed information on file system association status.
+	FileSystemAssociationStatusDetails []FileSystemAssociationStatusDetail
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Region.
+	// return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// The ARN of the backend Amazon FSx file system used for storing file data. For
@@ -341,6 +345,15 @@ type FileSystemAssociationInfo struct {
 	// A list of up to 50 tags assigned to the SMB file share, sorted alphabetically by
 	// key name. Each tag is a key-value pair.
 	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+// Detailed information on file system association status.
+type FileSystemAssociationStatusDetail struct {
+
+	// The error code for a given file system association status.
+	ErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -360,7 +373,7 @@ type FileSystemAssociationSummary struct {
 	FileSystemAssociationStatus *string
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Region.
+	// return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	noSmithyDocumentSerde
@@ -372,11 +385,11 @@ type GatewayInfo struct {
 	// The ID of the Amazon EC2 instance that was used to launch the gateway.
 	Ec2InstanceId *string
 
-	// The Region where the Amazon EC2 instance is located.
+	// The Amazon Web Services Region where the Amazon EC2 instance is located.
 	Ec2InstanceRegion *string
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Region.
+	// return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// The unique identifier assigned to your gateway during activation. This ID
@@ -445,6 +458,9 @@ type NFSFileShareDefaults struct {
 // operation is only supported in S3 File Gateways.
 type NFSFileShareInfo struct {
 
+	// The Amazon Resource Name (ARN) of the storage used for audit logs.
+	AuditDestinationARN *string
+
 	// Specifies the Region of the S3 bucket where the NFS file share stores files.
 	// This parameter is required for NFS file shares that connect to Amazon S3 through
 	// a VPC endpoint, a VPC access point, or an access point alias that points to a
@@ -470,7 +486,7 @@ type NFSFileShareInfo struct {
 	FileShareId *string
 
 	// The name of the file share. Optional. FileShareName must be set if an S3 prefix
-	// name is set in LocationARN.
+	// name is set in LocationARN, or if an access point or access point alias is used.
 	FileShareName *string
 
 	// The status of the file share. Valid Values: CREATING | UPDATING | AVAILABLE |
@@ -478,7 +494,7 @@ type NFSFileShareInfo struct {
 	FileShareStatus *string
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Region.
+	// return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// A value that enables guessing of the MIME type for uploaded objects based on
@@ -495,8 +511,18 @@ type NFSFileShareInfo struct {
 	// CMKs. This value can only be set when KMSEncrypted is true. Optional.
 	KMSKey *string
 
-	// The ARN of the backend storage used for storing file data. A prefix name can be
-	// added to the S3 bucket name. It must end with a "/".
+	// A custom ARN for the backend storage used for storing data for file shares. It
+	// includes a resource ARN with an optional prefix concatenation. The prefix must
+	// end with a forward slash (/). You can specify LocationARN as a bucket ARN,
+	// access point ARN or access point alias, as shown in the following examples.
+	// Bucket ARN: arn:aws:s3:::my-bucket/prefix/ Access point ARN:
+	// arn:aws:s3:region:account-id:accesspoint/access-point-name/prefix/ If you
+	// specify an access point, the bucket policy must be configured to delegate access
+	// control to the access point. For information, see Delegating access control to
+	// access points
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-policies.html#access-points-delegating-control)
+	// in the Amazon S3 User Guide. Access point alias:
+	// test-ap-ab123cdef4gehijklmn5opqrstuvuse1a-s3alias
 	LocationARN *string
 
 	// Describes Network File System (NFS) file share default values. Files and folders
@@ -572,7 +598,8 @@ type NFSFileShareInfo struct {
 type PoolInfo struct {
 
 	// The Amazon Resource Name (ARN) of the custom tape pool. Use the ListTapePools
-	// operation to return a list of custom tape pools for your account and Region.
+	// operation to return a list of custom tape pools for your account and Amazon Web
+	// Services Region.
 	PoolARN *string
 
 	// The name of the custom tape pool. PoolName can use all ASCII characters, except
@@ -587,10 +614,10 @@ type PoolInfo struct {
 	RetentionLockTimeInDays *int32
 
 	// Tape retention lock type, which can be configured in two modes. When configured
-	// in governance mode, accounts with specific IAM permissions are authorized to
-	// remove the tape retention lock from archived virtual tapes. When configured in
-	// compliance mode, the tape retention lock cannot be removed by any user,
-	// including the root account.
+	// in governance mode, Amazon Web Services accounts with specific IAM permissions
+	// are authorized to remove the tape retention lock from archived virtual tapes.
+	// When configured in compliance mode, the tape retention lock cannot be removed by
+	// any user, including the root Amazon Web Services account.
 	RetentionLockType RetentionLockType
 
 	// The storage class that is associated with the custom pool. When you use your
@@ -649,7 +676,7 @@ type SMBFileShareInfo struct {
 	FileShareId *string
 
 	// The name of the file share. Optional. FileShareName must be set if an S3 prefix
-	// name is set in LocationARN.
+	// name is set in LocationARN, or if an access point or access point alias is used.
 	FileShareName *string
 
 	// The status of the file share. Valid Values: CREATING | UPDATING | AVAILABLE |
@@ -657,7 +684,7 @@ type SMBFileShareInfo struct {
 	FileShareStatus *string
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Region.
+	// return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// A value that enables guessing of the MIME type for uploaded objects based on
@@ -680,8 +707,18 @@ type SMBFileShareInfo struct {
 	// CMKs. This value can only be set when KMSEncrypted is true. Optional.
 	KMSKey *string
 
-	// The ARN of the backend storage used for storing file data. A prefix name can be
-	// added to the S3 bucket name. It must end with a "/".
+	// A custom ARN for the backend storage used for storing data for file shares. It
+	// includes a resource ARN with an optional prefix concatenation. The prefix must
+	// end with a forward slash (/). You can specify LocationARN as a bucket ARN,
+	// access point ARN or access point alias, as shown in the following examples.
+	// Bucket ARN: arn:aws:s3:::my-bucket/prefix/ Access point ARN:
+	// arn:aws:s3:region:account-id:accesspoint/access-point-name/prefix/ If you
+	// specify an access point, the bucket policy must be configured to delegate access
+	// control to the access point. For information, see Delegating access control to
+	// access points
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-policies.html#access-points-delegating-control)
+	// in the Amazon S3 User Guide. Access point alias:
+	// test-ap-ab123cdef4gehijklmn5opqrstuvuse1a-s3alias
 	LocationARN *string
 
 	// The notification policy of the file share. SettlingTimeInSeconds controls the
@@ -751,6 +788,19 @@ type SMBFileShareInfo struct {
 	// include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1. Can only be set if
 	// Authentication is set to ActiveDirectory.
 	ValidUserList []string
+
+	noSmithyDocumentSerde
+}
+
+// A list of Active Directory users and groups that have special permissions for
+// SMB file shares on the gateway.
+type SMBLocalGroups struct {
+
+	// A list of Active Directory users and groups that have local Gateway Admin
+	// permissions. Acceptable formats include: DOMAIN\User1, user1, DOMAIN\group1, and
+	// group1. Gateway Admins can use the Shared Folders Microsoft Management Console
+	// snap-in to force-close files that are open and locked.
+	GatewayAdmins []string
 
 	noSmithyDocumentSerde
 }
@@ -973,7 +1023,7 @@ type TapeArchive struct {
 type TapeInfo struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Region.
+	// return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// The date that the tape entered the custom tape pool with tape retention lock
@@ -1029,7 +1079,7 @@ type TapeRecoveryPointInfo struct {
 type VolumeInfo struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Region.
+	// return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// The unique identifier assigned to your gateway during activation. This ID

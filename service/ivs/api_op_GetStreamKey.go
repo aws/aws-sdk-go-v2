@@ -39,7 +39,7 @@ type GetStreamKeyInput struct {
 
 type GetStreamKeyOutput struct {
 
-	// Object specifying a stream key.
+	//
 	StreamKey *types.StreamKey
 
 	// Metadata pertaining to the operation's result.

@@ -50,8 +50,7 @@ type UpdateDataSetOutput struct {
 	// The ARN for the data set.
 	Arn *string
 
-	// The type of file your data is stored in. Currently, the supported asset type is
-	// S3_SNAPSHOT.
+	// The type of asset that is added to a data set.
 	AssetType types.AssetType
 
 	// The date and time that the data set was created, in ISO 8601 format.

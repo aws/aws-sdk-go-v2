@@ -34,7 +34,7 @@ type UpdateDataSourcePermissionsInput struct {
 	// This member is required.
 	AwsAccountId *string
 
-	// The ID of the data source. This ID is unique per Amazon Web Services Region; for
+	// The ID of the data source. This ID is unique per Amazon Web Services Region for
 	// each Amazon Web Services account.
 	//
 	// This member is required.
@@ -54,7 +54,7 @@ type UpdateDataSourcePermissionsOutput struct {
 	// The Amazon Resource Name (ARN) of the data source.
 	DataSourceArn *string
 
-	// The ID of the data source. This ID is unique per Amazon Web Services Region; for
+	// The ID of the data source. This ID is unique per Amazon Web Services Region for
 	// each Amazon Web Services account.
 	DataSourceId *string
 

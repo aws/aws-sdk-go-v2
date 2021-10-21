@@ -40,7 +40,7 @@ type GetChannelInput struct {
 
 type GetChannelOutput struct {
 
-	// Object specifying a channel.
+	//
 	Channel *types.Channel
 
 	// Metadata pertaining to the operation's result.

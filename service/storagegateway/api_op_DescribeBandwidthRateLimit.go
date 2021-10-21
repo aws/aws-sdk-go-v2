@@ -36,7 +36,7 @@ func (c *Client) DescribeBandwidthRateLimit(ctx context.Context, params *Describ
 type DescribeBandwidthRateLimitInput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Region.
+	// return a list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -56,7 +56,7 @@ type DescribeBandwidthRateLimitOutput struct {
 	AverageUploadRateLimitInBitsPerSec *int64
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
-	// return a list of gateways for your account and Region.
+	// return a list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// Metadata pertaining to the operation's result.

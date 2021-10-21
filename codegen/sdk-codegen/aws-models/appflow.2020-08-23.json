@@ -4420,6 +4420,35 @@
                 "smithy.api#documentation": "<p> The properties that are applied when Amazon S3 is used as a destination. </p>"
             }
         },
+        "com.amazonaws.appflow#S3InputFileType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CSV",
+                        "name": "CSV"
+                    },
+                    {
+                        "value": "JSON",
+                        "name": "JSON"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.appflow#S3InputFormatConfig": {
+            "type": "structure",
+            "members": {
+                "s3InputFileType": {
+                    "target": "com.amazonaws.appflow#S3InputFileType",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The file type that Amazon AppFlow gets from your Amazon S3 bucket. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> When you use Amazon S3 as the source, the configuration format that you provide the flow input data. </p>"
+            }
+        },
         "com.amazonaws.appflow#S3Metadata": {
             "type": "structure",
             "members": {},
@@ -4465,6 +4494,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p> The object key for the Amazon S3 bucket in which the source files are stored. </p>"
                     }
+                },
+                "s3InputFormatConfig": {
+                    "target": "com.amazonaws.appflow#S3InputFormatConfig"
                 }
             },
             "traits": {
