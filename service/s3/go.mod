@@ -7,7 +7,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.3.0
 	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.3.2
 	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.7.2
-	github.com/aws/smithy-go v1.8.1-0.20211020161917-191f636375d1
+	github.com/aws/smithy-go v1.8.1
 	github.com/google/go-cmp v0.5.6
 )
 
