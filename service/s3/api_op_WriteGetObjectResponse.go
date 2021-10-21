@@ -326,6 +326,9 @@ func (c *Client) addOperationWriteGetObjectResponseMiddlewares(stack *middleware
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}
+	if err = v4.UseDynamicPayloadSigningMiddleware(stack); err != nil {
+		return err
+	}
 	if err = disableAcceptEncodingGzip(stack); err != nil {
 		return err
 	}

@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
 	"strconv"
 	"strings"
 	"testing"
@@ -301,6 +302,69 @@ func TestSwapComputePayloadSHA256ForUnsignedPayloadMiddleware(t *testing.T) {
 
 			if diff := cmp.Diff(c.ExpectIDs, stack.Build.List()); len(diff) != 0 {
 				t.Errorf("expect match\n%v", diff)
+			}
+		})
+	}
+}
+
+func TestUseDynamicPayloadSigningMiddleware(t *testing.T) {
+	cases := map[string]struct {
+		content      io.Reader
+		url          string
+		expectedHash string
+		expectedErr  error
+	}{
+		"TLS disabled": {
+			content: func() io.Reader {
+				br := bytes.NewReader([]byte("some content"))
+				return br
+			}(),
+			url:          "http://localhost.com/",
+			expectedHash: "290f493c44f5d63d06b374d0a5abd292fae38b92cab2fae5efefe1b0e9347f56",
+		},
+		"TLS enabled": {
+			content: func() io.Reader {
+				br := bytes.NewReader([]byte("some content"))
+				return br
+			}(),
+			url:          "https://localhost.com/",
+			expectedHash: "UNSIGNED-PAYLOAD",
+		},
+	}
+
+	for name, tt := range cases {
+		t.Run(name, func(t *testing.T) {
+			c := &dynamicPayloadSigningMiddleware{}
+
+			next := middleware.BuildHandlerFunc(func(ctx context.Context, in middleware.BuildInput) (out middleware.BuildOutput, metadata middleware.Metadata, err error) {
+				value := GetPayloadHash(ctx)
+				if len(value) == 0 {
+					t.Fatalf("expected payload hash value to be on context")
+				}
+				if e, a := tt.expectedHash, value; e != a {
+					t.Errorf("expected %v, got %v", e, a)
+				}
+
+				return out, metadata, err
+			})
+
+			req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+			req.URL, _ = url.Parse(tt.url)
+			stream, err := req.SetStream(tt.content)
+			if err != nil {
+				t.Fatalf("expected no error, got %v", err)
+			}
+
+			_, _, err = c.HandleBuild(context.Background(), middleware.BuildInput{Request: stream}, next)
+			if err != nil && tt.expectedErr == nil {
+				t.Errorf("expected no error, got %v", err)
+			} else if err != nil && tt.expectedErr != nil {
+				e, a := tt.expectedErr, err
+				if !errors.As(a, &e) {
+					t.Errorf("expected error type %T, got %T", e, a)
+				}
+			} else if err == nil && tt.expectedErr != nil {
+				t.Errorf("expected error, got nil")
 			}
 		})
 	}

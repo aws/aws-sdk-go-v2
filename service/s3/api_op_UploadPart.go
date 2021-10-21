@@ -311,6 +311,9 @@ func (c *Client) addOperationUploadPartMiddlewares(stack *middleware.Stack, opti
 	if err = v4.AddContentSHA256HeaderMiddleware(stack); err != nil {
 		return err
 	}
+	if err = v4.UseDynamicPayloadSigningMiddleware(stack); err != nil {
+		return err
+	}
 	if err = disableAcceptEncodingGzip(stack); err != nil {
 		return err
 	}

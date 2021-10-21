@@ -3,6 +3,7 @@ package customizations_test
 import (
 	"bytes"
 	"context"
+	"crypto/tls"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
@@ -191,11 +192,15 @@ func TestWriteGetObjectResponse(t *testing.T) {
 
 	for name, tt := range cases {
 		t.Run(name, func(t *testing.T) {
-			server := httptest.NewServer(tt.Handler(t))
+			server := httptest.NewTLSServer(tt.Handler(t))
 			defer server.Close()
-
 			client := s3.New(s3.Options{
 				Region: "us-west-2",
+				HTTPClient: &http.Client{
+					Transport: &http.Transport{
+						TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+					},
+				},
 				EndpointResolver: s3.EndpointResolverFunc(func(region string, options s3.EndpointResolverOptions) (aws.Endpoint, error) {
 					return aws.Endpoint{
 						URL:               server.URL,

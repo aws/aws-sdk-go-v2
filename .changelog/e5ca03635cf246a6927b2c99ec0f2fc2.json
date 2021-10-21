@@ -1,0 +1,8 @@
+{
+    "id": "e5ca0363-5cf2-46a6-927b-2c99ec0f2fc2",
+    "type": "feature",
+    "description": "Adds dynamic signing middleware that switches to unsigned payload when TLS is enabled.",
+    "modules": [
+        "."
+    ]
+}
