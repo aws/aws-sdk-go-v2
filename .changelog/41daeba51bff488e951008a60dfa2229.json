@@ -1,8 +1,0 @@
-{
-    "id": "41daeba5-1bff-488e-9510-08a60dfa2229",
-    "type": "feature",
-    "description": "Updates S3 streaming operations - PutObject, UploadPart, WriteGetObjectResponse to use unsigned payload signing auth when TLS is enabled.",
-    "modules": [
-        "service/s3"
-    ]
-}

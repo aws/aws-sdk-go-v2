@@ -1,3 +1,9 @@
+# v1.17.0 (2021-10-21)
+
+* **Feature**: Updated  to latest version
+* **Feature**: Updates S3 streaming operations - PutObject, UploadPart, WriteGetObjectResponse to use unsigned payload signing auth when TLS is enabled.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.1 (2021-10-11)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -3,10 +3,10 @@ module github.com/aws/aws-sdk-go-v2/service/s3
 go 1.15
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.9.2
-	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.3.0
-	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.3.2
-	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.7.2
+	github.com/aws/aws-sdk-go-v2 v1.10.0
+	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.4.0
+	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.4.0
+	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.8.0
 	github.com/aws/smithy-go v1.8.1
 	github.com/google/go-cmp v0.5.6
 )
