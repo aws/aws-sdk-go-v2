@@ -135,6 +135,9 @@ func (c *Client) addOperationPutObjectLockConfigurationMiddlewares(stack *middle
 	if err = swapWithCustomHTTPSignerMiddleware(stack, options); err != nil {
 		return err
 	}
+	if err = smithyhttp.AddContentChecksumMiddleware(stack); err != nil {
+		return err
+	}
 	if err = addOpPutObjectLockConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -157,9 +160,6 @@ func (c *Client) addOperationPutObjectLockConfigurationMiddlewares(stack *middle
 		return err
 	}
 	if err = addRequestResponseLogging(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddContentChecksumMiddleware(stack); err != nil {
 		return err
 	}
 	return nil
