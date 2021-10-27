@@ -14,9 +14,6 @@ type s3ObjectLambdaEndpoint struct {
 	// whether the operation should use the s3-object-lambda endpoint
 	UseEndpoint bool
 
-	// use dualstack
-	UseDualstack bool
-
 	// use transfer acceleration
 	UseAccelerate bool
 
@@ -42,7 +39,7 @@ func (t *s3ObjectLambdaEndpoint) HandleSerialize(
 		return out, metadata, fmt.Errorf("unknown transport type: %T", in.Request)
 	}
 
-	if t.UseDualstack {
+	if t.EndpointResolverOptions.UseDualStackEndpoint == aws.DualStackEndpointStateEnabled {
 		return out, metadata, fmt.Errorf("client configured for dualstack but not supported for operation")
 	}
 
@@ -52,7 +49,9 @@ func (t *s3ObjectLambdaEndpoint) HandleSerialize(
 
 	region := awsmiddleware.GetRegion(ctx)
 
-	endpoint, err := t.EndpointResolver.ResolveEndpoint(region, t.EndpointResolverOptions)
+	ero := t.EndpointResolverOptions
+
+	endpoint, err := t.EndpointResolver.ResolveEndpoint(region, ero)
 	if err != nil {
 		return out, metadata, err
 	}

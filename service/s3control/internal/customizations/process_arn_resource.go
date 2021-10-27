@@ -38,9 +38,6 @@ type processARNResource struct {
 	// UseARNRegion indicates if region parsed from an ARN should be used.
 	UseARNRegion bool
 
-	// UseDualstack instructs if s3 dualstack endpoint config is enabled
-	UseDualstack bool
-
 	// EndpointResolver used to resolve endpoints. This may be a custom endpoint resolver
 	EndpointResolver EndpointResolver
 
@@ -106,7 +103,7 @@ func (m *processARNResource) HandleSerialize(
 	case arn.OutpostAccessPointARN:
 		// validations
 		// check if dual stack
-		if m.UseDualstack {
+		if m.EndpointResolverOptions.UseDualStackEndpoint == aws.DualStackEndpointStateEnabled {
 			return out, metadata, s3shared.NewClientConfiguredForDualStackError(tv,
 				resourceRequest.PartitionID, resourceRequest.RequestRegion, nil)
 		}
@@ -142,7 +139,7 @@ func (m *processARNResource) HandleSerialize(
 	// process outpost accesspoint ARN
 	case arn.OutpostBucketARN:
 		// check if dual stack
-		if m.UseDualstack {
+		if m.EndpointResolverOptions.UseDualStackEndpoint == aws.DualStackEndpointStateEnabled {
 			return out, metadata, s3shared.NewClientConfiguredForDualStackError(tv,
 				resourceRequest.PartitionID, resourceRequest.RequestRegion, nil)
 		}
@@ -253,13 +250,17 @@ func buildOutpostAccessPointRequest(ctx context.Context, options outpostAccessPo
 	// resolve regional endpoint for resolved region.
 	var endpoint aws.Endpoint
 	var err error
+
 	endpointSource := awsmiddleware.GetEndpointSource(ctx)
+
 	eo := options.EndpointResolverOptions
+	eo.Logger = middleware.GetLogger(ctx)
 	eo.ResolvedRegion = ""
 
 	if endpointsID == "s3" && endpointSource == aws.EndpointSourceServiceMetadata {
 		// use s3 endpoint resolver
 		endpoint, err = s3endpoints.New().ResolveEndpoint(resolveRegion, s3endpoints.Options{
+			LogDeprecated:        eo.LogDeprecated,
 			DisableHTTPS:         eo.DisableHTTPS,
 			UseFIPSEndpoint:      eo.UseFIPSEndpoint,
 			UseDualStackEndpoint: eo.UseDualStackEndpoint,
@@ -343,6 +344,7 @@ func buildOutpostBucketRequest(ctx context.Context, options outpostBucketOptions
 
 	// resolve regional endpoint for resolved region.
 	eo := options.EndpointResolverOptions
+	eo.Logger = middleware.GetLogger(ctx)
 	eo.ResolvedRegion = ""
 
 	endpoint, err := options.EndpointResolver.ResolveEndpoint(resolveRegion, eo)

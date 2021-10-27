@@ -20,14 +20,18 @@ const (
 
 // GetUseDualStackEndpoint takes a service's EndpointResolverOptions and returns the UseDualStackEndpoint value.
 // Returns boolean false if the provided options does not have a method to retrieve the DualStackEndpointState.
-func GetUseDualStackEndpoint(options interface{}) (DualStackEndpointState, bool) {
-	i, ok := options.(interface {
+func GetUseDualStackEndpoint(options ...interface{}) (value DualStackEndpointState, found bool) {
+	type iface interface {
 		GetUseDualStackEndpoint() DualStackEndpointState
-	})
-	if !ok {
-		return DualStackEndpointStateUnset, false
 	}
-	return i.GetUseDualStackEndpoint(), true
+	for _, option := range options {
+		if i, ok := option.(iface); ok {
+			value = i.GetUseDualStackEndpoint()
+			found = true
+			break
+		}
+	}
+	return value, found
 }
 
 // FIPSEndpointState is a constant to describe the FIPS endpoint resolution behavior.
@@ -46,14 +50,18 @@ const (
 
 // GetUseFIPSEndpoint takes a service's EndpointResolverOptions and returns the UseDualStackEndpoint value.
 // Returns boolean false if the provided options does not have a method to retrieve the DualStackEndpointState.
-func GetUseFIPSEndpoint(options interface{}) (FIPSEndpointState, bool) {
-	i, ok := options.(interface {
+func GetUseFIPSEndpoint(options ...interface{}) (value FIPSEndpointState, found bool) {
+	type iface interface {
 		GetUseFIPSEndpoint() FIPSEndpointState
-	})
-	if !ok {
-		return FIPSEndpointStateUnset, false
 	}
-	return i.GetUseFIPSEndpoint(), true
+	for _, option := range options {
+		if i, ok := option.(iface); ok {
+			value = i.GetUseFIPSEndpoint()
+			found = true
+			break
+		}
+	}
+	return value, found
 }
 
 // Endpoint represents the endpoint a service client should make API operation
@@ -171,7 +179,7 @@ func (e EndpointResolverFunc) ResolveEndpoint(service, region string) (Endpoint,
 // API clients will fallback to attempting to resolve the endpoint using its
 // internal default endpoint resolver.
 type EndpointResolverWithOptions interface {
-	ResolveEndpoint(service, region string, options interface{}) (Endpoint, error)
+	ResolveEndpoint(service, region string, options ...interface{}) (Endpoint, error)
 }
 
 // EndpointResolverWithOptionsFunc wraps a function to satisfy the EndpointResolverWithOptions interface.
@@ -184,24 +192,32 @@ func (e EndpointResolverWithOptionsFunc) ResolveEndpoint(service, region string,
 
 // GetDisableHTTPS takes a service's EndpointResolverOptions and returns the DisableHTTPS value.
 // Returns boolean false if the provided options does not have a method to retrieve the DisableHTTPS.
-func GetDisableHTTPS(options interface{}) (bool, bool) {
-	i, ok := options.(interface {
+func GetDisableHTTPS(options ...interface{}) (value bool, found bool) {
+	type iface interface {
 		GetDisableHTTPS() bool
-	})
-	if !ok {
-		return false, false
 	}
-	return i.GetDisableHTTPS(), true
+	for _, option := range options {
+		if i, ok := option.(iface); ok {
+			value = i.GetDisableHTTPS()
+			found = true
+			break
+		}
+	}
+	return value, found
 }
 
 // GetResolvedRegion takes a service's EndpointResolverOptions and returns the ResolvedRegion value.
 // Returns boolean false if the provided options does not have a method to retrieve the ResolvedRegion.
-func GetResolvedRegion(options interface{}) (string, bool) {
-	i, ok := options.(interface {
+func GetResolvedRegion(options ...interface{}) (value string, found bool) {
+	type iface interface {
 		GetResolvedRegion() string
-	})
-	if !ok {
-		return "", false
 	}
-	return i.GetResolvedRegion(), true
+	for _, option := range options {
+		if i, ok := option.(iface); ok {
+			value = i.GetResolvedRegion()
+			found = true
+			break
+		}
+	}
+	return value, found
 }

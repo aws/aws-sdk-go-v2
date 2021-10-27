@@ -32,9 +32,6 @@ type processARNResource struct {
 	// UseAccelerate indicates if s3 transfer acceleration is enabled
 	UseAccelerate bool
 
-	// UseDualstack instructs if dualstack endpoint config is enabled
-	UseDualstack bool
-
 	// EndpointResolver used to resolve endpoints. This may be a custom endpoint resolver
 	EndpointResolver EndpointResolver
 
@@ -99,7 +96,7 @@ func (m *processARNResource) HandleSerialize(
 			}
 
 			// Do not allow dual-stack configuration with multi-region arns.
-			if m.UseDualstack {
+			if m.EndpointResolverOptions.UseDualStackEndpoint == aws.DualStackEndpointStateEnabled {
 				return out, metadata, s3shared.NewClientConfiguredForDualStackError(tv,
 					resourceRequest.PartitionID, resourceRequest.RequestRegion, nil)
 			}
@@ -153,7 +150,7 @@ func (m *processARNResource) HandleSerialize(
 		}
 
 		// check if dualstack
-		if m.UseDualstack {
+		if m.EndpointResolverOptions.UseDualStackEndpoint == aws.DualStackEndpointStateEnabled {
 			return out, metadata, s3shared.NewClientConfiguredForDualStackError(tv,
 				resourceRequest.PartitionID, resourceRequest.RequestRegion, nil)
 		}
@@ -188,7 +185,7 @@ func (m *processARNResource) HandleSerialize(
 		}
 
 		// check if dual stack
-		if m.UseDualstack {
+		if m.EndpointResolverOptions.UseDualStackEndpoint == aws.DualStackEndpointStateEnabled {
 			return out, metadata, s3shared.NewClientConfiguredForDualStackError(tv,
 				resourceRequest.PartitionID, resourceRequest.RequestRegion, nil)
 		}
@@ -259,16 +256,12 @@ func buildAccessPointRequest(ctx context.Context, options accesspointOptions) (c
 
 	resolveService := tv.Service
 
-	eo := options.EndpointResolverOptions
-	eo.ResolvedRegion = "" // clear endpoint option's resolved region so that we resolve using the passed in region
-	if options.UseDualstack && options.EndpointResolverOptions.UseDualStackEndpoint == aws.DualStackEndpointStateUnset {
-		eo.UseDualStackEndpoint = aws.DualStackEndpointStateEnabled
-	} else {
-		eo.UseDualStackEndpoint = aws.DualStackEndpointStateDisabled
-	}
+	ero := options.EndpointResolverOptions
+	ero.Logger = middleware.GetLogger(ctx)
+	ero.ResolvedRegion = "" // clear endpoint option's resolved region so that we resolve using the passed in region
 
 	// resolve endpoint
-	endpoint, err := options.EndpointResolver.ResolveEndpoint(resolveRegion, eo)
+	endpoint, err := options.EndpointResolver.ResolveEndpoint(resolveRegion, ero)
 	if err != nil {
 		return ctx, s3shared.NewFailedToResolveEndpointError(
 			tv,
@@ -329,6 +322,7 @@ func buildS3ObjectLambdaAccessPointRequest(ctx context.Context, options accesspo
 	resolveService := tv.Service
 
 	ero := options.EndpointResolverOptions
+	ero.Logger = middleware.GetLogger(ctx)
 	ero.ResolvedRegion = "" // clear endpoint options resolved region so we resolve the passed in region
 
 	// resolve endpoint
@@ -399,6 +393,7 @@ func buildMultiRegionAccessPointsRequest(ctx context.Context, options accesspoin
 
 	// resolve endpoint
 	ero := options.EndpointResolverOptions
+	ero.Logger = middleware.GetLogger(ctx)
 
 	endpoint, err := options.EndpointResolver.ResolveEndpoint(resolveRegion, ero)
 	if err != nil {
@@ -502,8 +497,12 @@ func buildOutpostAccessPointRequest(ctx context.Context, options outpostAccessPo
 		endpointsID = "s3"
 	}
 
+	ero := options.EndpointResolverOptions
+	ero.Logger = middleware.GetLogger(ctx)
+	ero.ResolvedRegion = ""
+
 	// resolve regional endpoint for resolved region.
-	endpoint, err := options.EndpointResolver.ResolveEndpoint(resolveRegion, options.EndpointResolverOptions)
+	endpoint, err := options.EndpointResolver.ResolveEndpoint(resolveRegion, ero)
 	if err != nil {
 		return ctx, s3shared.NewFailedToResolveEndpointError(
 			tv,

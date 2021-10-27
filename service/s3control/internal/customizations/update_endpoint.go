@@ -48,22 +48,11 @@ type UpdateEndpointOptions struct {
 	// UseARNRegion indicates if region parsed from an ARN should be used.
 	UseARNRegion bool
 
-	// UseDualstack instructs if s3 dualstack endpoint config is enabled
-	UseDualstack bool
-
 	// EndpointResolver used to resolve endpoints. This may be a custom endpoint resolver
 	EndpointResolver EndpointResolver
 
 	// EndpointResolverOptions used by endpoint resolver
 	EndpointResolverOptions EndpointResolverOptions
-}
-
-// IsUseDualStack returns whether dual-stack endpoint resolution is enabled
-func (o UpdateEndpointOptions) IsUseDualStack() bool {
-	if o.EndpointResolverOptions.UseDualStackEndpoint != aws.DualStackEndpointStateUnset {
-		return o.EndpointResolverOptions.UseDualStackEndpoint == aws.DualStackEndpointStateEnabled
-	}
-	return o.UseDualstack
 }
 
 // UpdateEndpoint adds the middleware to the middleware stack based on the UpdateEndpointOptions.
@@ -90,7 +79,6 @@ func UpdateEndpoint(stack *middleware.Stack, options UpdateEndpointOptions) (err
 		CopyInput:               options.Accessor.CopyInput,
 		UpdateARNField:          options.Accessor.UpdateARNField,
 		UseARNRegion:            options.UseARNRegion,
-		UseDualstack:            options.IsUseDualStack(),
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointResolverOptions,
 	}, "OperationSerializer", middleware.Before)
@@ -101,7 +89,6 @@ func UpdateEndpoint(stack *middleware.Stack, options UpdateEndpointOptions) (err
 	// outpostID middleware
 	err = stack.Serialize.Insert(&processOutpostIDMiddleware{
 		GetOutpostID:            options.Accessor.GetOutpostIDInput,
-		UseDualstack:            options.IsUseDualStack(),
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointResolverOptions,
 	}, (*processARNResource)(nil).ID(), middleware.Before)

@@ -3,6 +3,7 @@ package customizations
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"net/url"
 	"strings"
 
@@ -18,9 +19,6 @@ type processOutpostIDMiddleware struct {
 	// GetOutpostID points to a function that processes an input and returns an outpostID as string ptr,
 	// and bool indicating if outpostID is supported or set.
 	GetOutpostID func(interface{}) (*string, bool)
-
-	// UseDualStack indicates a dual stack endpoint should be used
-	UseDualstack bool
 
 	// EndpointResolver used to resolve endpoints. This may be a custom endpoint resolver
 	EndpointResolver EndpointResolver
@@ -62,12 +60,14 @@ func (m *processOutpostIDMiddleware) HandleSerialize(
 
 	requestRegion := awsmiddleware.GetRegion(ctx)
 
+	ero := m.EndpointResolverOptions
+
 	// validate if dualstack
-	if m.UseDualstack {
+	if ero.UseDualStackEndpoint == aws.DualStackEndpointStateEnabled {
 		return out, metadata, fmt.Errorf("dualstack is not supported for outposts request")
 	}
 
-	endpoint, err := m.EndpointResolver.ResolveEndpoint(requestRegion, m.EndpointResolverOptions)
+	endpoint, err := m.EndpointResolver.ResolveEndpoint(requestRegion, ero)
 	if err != nil {
 		return out, metadata, err
 	}

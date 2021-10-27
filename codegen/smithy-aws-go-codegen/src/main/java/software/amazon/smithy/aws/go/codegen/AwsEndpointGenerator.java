@@ -15,9 +15,9 @@
 
 package software.amazon.smithy.aws.go.codegen;
 
-import java.io.ObjectInputFilter;
 import java.util.List;
 import java.util.function.Consumer;
+import software.amazon.smithy.aws.go.codegen.customization.S3ModelUtils;
 import software.amazon.smithy.aws.traits.ServiceTrait;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoSettings;
@@ -59,35 +59,36 @@ public final class AwsEndpointGenerator implements GoIntegration {
 
     @Override
     public List<RuntimeClientPlugin> getClientPlugins() {
-        return ListUtils.of(RuntimeClientPlugin.builder()
-                .configFields(SetUtils.of(
-                        ConfigField.builder()
-                                .name(ENDPOINT_RESOLVER_CONFIG_NAME)
-                                .type(SymbolUtils.createValueSymbolBuilder(EndpointGenerator.RESOLVER_INTERFACE_NAME)
+        return ListUtils.of(
+                RuntimeClientPlugin.builder()
+                        .configFields(SetUtils.of(
+                                ConfigField.builder()
+                                        .name(ENDPOINT_RESOLVER_CONFIG_NAME)
+                                        .type(SymbolUtils.createValueSymbolBuilder(EndpointGenerator.RESOLVER_INTERFACE_NAME)
+                                                .build())
+                                        .documentation("The service endpoint resolver.")
+                                        .withHelper(true)
+                                        .build(),
+                                ConfigField.builder()
+                                        .name("EndpointOptions")
+                                        .type(SymbolUtils.createValueSymbolBuilder(EndpointGenerator.RESOLVER_OPTIONS)
+                                                .build())
+                                        .documentation("The endpoint options to be used when attempting "
+                                                       + "to resolve an endpoint.")
+                                        .build()
+                        ))
+                        .addConfigFieldResolver(ConfigFieldResolver.builder()
+                                .location(ConfigFieldResolver.Location.CLIENT)
+                                .target(ConfigFieldResolver.Target.INITIALIZATION)
+                                .resolver(SymbolUtils.createValueSymbolBuilder(EndpointGenerator.CLIENT_CONFIG_RESOLVER)
                                         .build())
-                                .documentation("The service endpoint resolver.")
-                                .withHelper(true)
-                                .build(),
-                        ConfigField.builder()
-                                .name("EndpointOptions")
-                                .type(SymbolUtils.createValueSymbolBuilder(EndpointGenerator.RESOLVER_OPTIONS)
-                                        .build())
-                                .documentation("The endpoint options to be used when attempting "
-                                               + "to resolve an endpoint.")
-                                .build()
-                ))
-                .addConfigFieldResolver(ConfigFieldResolver.builder()
-                        .location(ConfigFieldResolver.Location.CLIENT)
-                        .target(ConfigFieldResolver.Target.INITIALIZATION)
-                        .resolver(SymbolUtils.createValueSymbolBuilder(EndpointGenerator.CLIENT_CONFIG_RESOLVER)
                                 .build())
-                        .build())
-                .addConfigFieldResolver(ConfigFieldResolver.builder()
-                        .location(ConfigFieldResolver.Location.OPERATION)
-                        .target(ConfigFieldResolver.Target.FINALIZATION)
-                        .resolver(SymbolUtils.createValueSymbolBuilder(
-                                EndpointGenerator.SET_RESOLVED_REGION_ENDPOINT_OPTION).build())
-                        .build())
-                .build());
+                        .addConfigFieldResolver(ConfigFieldResolver.builder()
+                                .location(ConfigFieldResolver.Location.OPERATION)
+                                .target(ConfigFieldResolver.Target.FINALIZATION)
+                                .resolver(SymbolUtils.createValueSymbolBuilder(
+                                        EndpointGenerator.FINALIZE_CLIENT_ENDPOINT_RESOLVER_OPTIONS).build())
+                                .build())
+                        .build());
     }
 }

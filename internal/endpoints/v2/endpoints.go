@@ -2,16 +2,24 @@ package endpoints
 
 import (
 	"fmt"
+	"github.com/aws/smithy-go/logging"
 	"regexp"
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 )
 
+// DefaultKey is a compound map key of a variant and other values.
+type DefaultKey struct {
+	Variant        EndpointVariant
+	ServiceVariant ServiceVariant
+}
+
 // EndpointKey is a compound map key of a region and associated variant value.
 type EndpointKey struct {
-	Region  string
-	Variant EndpointVariant
+	Region         string
+	Variant        EndpointVariant
+	ServiceVariant ServiceVariant
 }
 
 // EndpointVariant is a bit field to describe the endpoints attributes.
@@ -25,6 +33,9 @@ const (
 	DualStackVariant
 )
 
+// ServiceVariant is a bit field to describe the service endpoint attributes.
+type ServiceVariant uint64
+
 const (
 	defaultProtocol = "https"
 	defaultSigner   = "v4"
@@ -32,11 +43,17 @@ const (
 
 var (
 	protocolPriority = []string{"https", "http"}
-	signerPriority   = []string{"v4"}
+	signerPriority   = []string{"v4", "s3v4"}
 )
 
 // Options provide configuration needed to direct how endpoints are resolved.
 type Options struct {
+	// Logger is a logging implementation that log events should be sent to.
+	Logger logging.Logger
+
+	// LogDeprecated indicates that deprecated endpoints should be logged to the provided logger.
+	LogDeprecated bool
+
 	// ResolvedRegion is the resolved region string. If provided (non-zero length) it takes priority
 	// over the region name passed to the ResolveEndpoint call.
 	ResolvedRegion string
@@ -46,19 +63,22 @@ type Options struct {
 
 	// Instruct the resolver to use a service endpoint that supports dual-stack.
 	// If a service does not have a dual-stack endpoint an error will be returned by the resolver.
-	UseDualStack bool
+	UseDualStackEndpoint aws.DualStackEndpointState
 
 	// Instruct the resolver to use a service endpoint that supports FIPS.
 	// If a service does not have a FIPS endpoint an error will be returned by the resolver.
-	UseFIPS bool
+	UseFIPSEndpoint aws.FIPSEndpointState
+
+	// ServiceVariant is a bitfield of service specified endpoint variant data.
+	ServiceVariant ServiceVariant
 }
 
 // GetEndpointVariant returns the EndpointVariant for the variant associated options.
 func (o Options) GetEndpointVariant() (v EndpointVariant) {
-	if o.UseDualStack {
+	if o.UseDualStackEndpoint == aws.DualStackEndpointStateEnabled {
 		v |= DualStackVariant
 	}
-	if o.UseFIPS {
+	if o.UseFIPSEndpoint == aws.FIPSEndpointStateEnabled {
 		v |= FIPSVariant
 	}
 	return v
@@ -71,6 +91,10 @@ type Partitions []Partition
 func (ps Partitions) ResolveEndpoint(region string, opts Options) (aws.Endpoint, error) {
 	if len(ps) == 0 {
 		return aws.Endpoint{}, fmt.Errorf("no partitions found")
+	}
+
+	if opts.Logger == nil {
+		opts.Logger = logging.Nop{}
 	}
 
 	if len(opts.ResolvedRegion) > 0 {
@@ -95,7 +119,7 @@ type Partition struct {
 	RegionRegex       *regexp.Regexp
 	PartitionEndpoint string
 	IsRegionalized    bool
-	Defaults          map[EndpointVariant]Endpoint
+	Defaults          map[DefaultKey]Endpoint
 	Endpoints         Endpoints
 }
 
@@ -113,14 +137,20 @@ func (p Partition) ResolveEndpoint(region string, options Options) (resolved aws
 		region = p.PartitionEndpoint
 	}
 
-	variant := options.GetEndpointVariant()
 	endpoints := p.Endpoints
-	defaults := p.Defaults[variant]
 
-	return p.endpointForRegion(region, variant, endpoints).resolve(p.ID, region, defaults, options)
+	variant := options.GetEndpointVariant()
+	serviceVariant := options.ServiceVariant
+
+	defaults := p.Defaults[DefaultKey{
+		Variant:        variant,
+		ServiceVariant: serviceVariant,
+	}]
+
+	return p.endpointForRegion(region, variant, serviceVariant, endpoints).resolve(p.ID, region, defaults, options)
 }
 
-func (p Partition) endpointForRegion(region string, variant EndpointVariant, endpoints Endpoints) Endpoint {
+func (p Partition) endpointForRegion(region string, variant EndpointVariant, serviceVariant ServiceVariant, endpoints Endpoints) Endpoint {
 	key := EndpointKey{
 		Region:  region,
 		Variant: variant,
@@ -132,8 +162,9 @@ func (p Partition) endpointForRegion(region string, variant EndpointVariant, end
 
 	if !p.IsRegionalized {
 		return endpoints[EndpointKey{
-			Region:  p.PartitionEndpoint,
-			Variant: variant,
+			Region:         p.PartitionEndpoint,
+			Variant:        variant,
+			ServiceVariant: serviceVariant,
 		}]
 	}
 
@@ -164,7 +195,7 @@ type Endpoint struct {
 	SignatureVersions []string
 
 	// Indicates that this endpoint is deprecated.
-	Deprecated bool
+	Deprecated aws.Ternary
 }
 
 // IsZero returns whether the endpoint structure is an empty (zero) value.
@@ -209,6 +240,10 @@ func (e Endpoint) resolve(partition, region string, def Endpoint, options Option
 	}
 	signingName := e.CredentialScope.Service
 
+	if e.Deprecated == aws.TrueTernary && options.LogDeprecated {
+		options.Logger.Logf(logging.Warn, "endpoint identifier %q, url %q marked as deprecated", region, u)
+	}
+
 	return aws.Endpoint{
 		URL:           u,
 		PartitionID:   partition,
@@ -236,6 +271,9 @@ func (e *Endpoint) mergeIn(other Endpoint) {
 	}
 	if len(other.SignatureVersions) > 0 {
 		e.SignatureVersions = other.SignatureVersions
+	}
+	if other.Deprecated != aws.UnknownTernary {
+		e.Deprecated = other.Deprecated
 	}
 }
 

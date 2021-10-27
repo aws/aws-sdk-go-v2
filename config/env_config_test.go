@@ -342,19 +342,31 @@ func TestNewEnvConfig(t *testing.T) {
 		},
 		27: {
 			Env: map[string]string{
+				"AWS_USE_DUALSTACK_ENDPOINT": "invalid",
+			},
+			WantErr: true,
+		},
+		28: {
+			Env: map[string]string{
 				"AWS_USE_FIPS_ENDPOINT": "true",
 			},
 			Config: EnvConfig{
 				UseFIPSEndpoint: aws.FIPSEndpointStateEnabled,
 			},
 		},
-		28: {
+		29: {
 			Env: map[string]string{
 				"AWS_USE_FIPS_ENDPOINT": "false",
 			},
 			Config: EnvConfig{
 				UseFIPSEndpoint: aws.FIPSEndpointStateDisabled,
 			},
+		},
+		30: {
+			Env: map[string]string{
+				"AWS_USE_FIPS_ENDPOINT": "invalid",
+			},
+			WantErr: true,
 		},
 	}
 

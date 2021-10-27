@@ -62,7 +62,6 @@ public class ResolveClientConfigFromSources implements GoIntegration {
                     .awsResolveFunction(SymbolUtils.createValueSymbolBuilder(ENABLE_ENDPOINT_DISCOVERY_CONFIG_RESOLVER)
                             .build())
                     .build(),
-            // All Clients Except S3 and S3 Control
             AddAwsConfigFields.AwsConfigField.builder()
                     .name("EndpointOptions.UseDualStackEndpoint")
                     .type(SymbolUtils.createPointableSymbolBuilder("bool").build())
@@ -163,9 +162,9 @@ public class ResolveClientConfigFromSources implements GoIntegration {
                             CONFIG_SOURCE_CONFIG_NAME);
                     writer.write("if err != nil { return err }");
 
-                    writer.openBlock("if found {", "}", () -> {
-                        writer.write("o.EndpointOptions.$L = value", EndpointGenerator.DUAL_STACK_ENDPOINT_OPTION);
-                    });
+                    writer.openBlock("if found {", "}", () -> writer
+                            .write("o.EndpointOptions.$L = value",
+                                    EndpointGenerator.DUAL_STACK_ENDPOINT_OPTION));
                 });
     }
 

@@ -12,6 +12,8 @@ import (
 )
 
 // EnableDualstack represents middleware struct for enabling dualstack support
+//
+// Deprecated:  See EndpointResolverOptions' UseDualStackEndpoint support
 type EnableDualstack struct {
 	// UseDualstack indicates if dualstack endpoint resolving is to be enabled
 	UseDualstack bool

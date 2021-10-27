@@ -32,17 +32,17 @@ func TestUpdateEndpointBuild(t *testing.T) {
 		"default endpoint": {
 			"default": {
 				tests: []s3controlEndpointTest{
-					{"abc", "123456789012", "https://123456789012.s3-control.us-west-2.amazonaws.com/v20180820/bucket/abc", ""},
-					{"a.b.c", "123456789012", "https://123456789012.s3-control.us-west-2.amazonaws.com/v20180820/bucket/a.b.c", ""},
-					{"a$b$c", "123456789012", "https://123456789012.s3-control.us-west-2.amazonaws.com/v20180820/bucket/a%24b%24c", ""},
+					{"abc", "123456789012", "https://123456789012.s3-control.mock-region.amazonaws.com/v20180820/bucket/abc", ""},
+					{"a.b.c", "123456789012", "https://123456789012.s3-control.mock-region.amazonaws.com/v20180820/bucket/a.b.c", ""},
+					{"a$b$c", "123456789012", "https://123456789012.s3-control.mock-region.amazonaws.com/v20180820/bucket/a%24b%24c", ""},
 				},
 			},
 			"DualStack": {
 				useDualstack: true,
 				tests: []s3controlEndpointTest{
-					{"abc", "123456789012", "https://123456789012.s3-control.dualstack.us-west-2.amazonaws.com/v20180820/bucket/abc", ""},
-					{"a.b.c", "123456789012", "https://123456789012.s3-control.dualstack.us-west-2.amazonaws.com/v20180820/bucket/a.b.c", ""},
-					{"a$b$c", "123456789012", "https://123456789012.s3-control.dualstack.us-west-2.amazonaws.com/v20180820/bucket/a%24b%24c", ""},
+					{"abc", "123456789012", "https://123456789012.s3-control.mock-region.api.aws/v20180820/bucket/abc", ""},
+					{"a.b.c", "123456789012", "https://123456789012.s3-control.mock-region.api.aws/v20180820/bucket/a.b.c", ""},
+					{"a$b$c", "123456789012", "https://123456789012.s3-control.mock-region.api.aws/v20180820/bucket/a%24b%24c", ""},
 				},
 			},
 		},
@@ -70,7 +70,7 @@ func TestUpdateEndpointBuild(t *testing.T) {
 					options := s3control.Options{
 						Credentials: unit.StubCredentialsProvider{},
 						Retryer:     aws.NopRetryer{},
-						Region:      "us-west-2",
+						Region:      "mock-region",
 
 						HTTPClient: smithyhttp.NopClient{},
 

@@ -48,9 +48,6 @@ type UpdateEndpointOptions struct {
 	// indicates if an operation supports s3 transfer acceleration.
 	SupportsAccelerate bool
 
-	// use dualstack
-	UseDualstack bool
-
 	// use ARN region
 	UseARNRegion bool
 
@@ -66,14 +63,6 @@ type UpdateEndpointOptions struct {
 
 	// DisableMultiRegionAccessPoints indicates multi-region access point support is disabled
 	DisableMultiRegionAccessPoints bool
-}
-
-// IsUseDualStack returns whether dual-stack endpoint resolution is enabled
-func (o UpdateEndpointOptions) IsUseDualStack() bool {
-	if o.EndpointResolverOptions.UseDualStackEndpoint != aws.DualStackEndpointStateUnset {
-		return o.EndpointResolverOptions.UseDualStackEndpoint == aws.DualStackEndpointStateEnabled
-	}
-	return o.UseDualstack
 }
 
 // UpdateEndpoint adds the middleware to the middleware stack based on the UpdateEndpointOptions.
@@ -92,7 +81,6 @@ func UpdateEndpoint(stack *middleware.Stack, options UpdateEndpointOptions) (err
 	err = stack.Serialize.Insert(&processARNResource{
 		UseARNRegion:                   options.UseARNRegion,
 		UseAccelerate:                  options.UseAccelerate,
-		UseDualstack:                   options.IsUseDualStack(),
 		EndpointResolver:               options.EndpointResolver,
 		EndpointResolverOptions:        options.EndpointResolverOptions,
 		DisableMultiRegionAccessPoints: options.DisableMultiRegionAccessPoints,
@@ -107,7 +95,6 @@ func UpdateEndpoint(stack *middleware.Stack, options UpdateEndpointOptions) (err
 	err = stack.Serialize.Insert(&s3ObjectLambdaEndpoint{
 		UseEndpoint:             options.TargetS3ObjectLambda,
 		UseAccelerate:           options.UseAccelerate,
-		UseDualstack:            options.IsUseDualStack(),
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointResolverOptions,
 	}, serializerID, middleware.Before)
