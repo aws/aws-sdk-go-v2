@@ -328,7 +328,6 @@ func addListMultiRegionAccessPointsUpdateEndpoint(stack *middleware.Stack, optio
 		},
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
-		UseDualstack:            options.UseDualstack,
 		UseARNRegion:            options.UseARNRegion,
 	})
 }

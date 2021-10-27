@@ -236,7 +236,6 @@ func addGetAccessPointPolicyUpdateEndpoint(stack *middleware.Stack, options Opti
 		},
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
-		UseDualstack:            options.UseDualstack,
 		UseARNRegion:            options.UseARNRegion,
 	})
 }

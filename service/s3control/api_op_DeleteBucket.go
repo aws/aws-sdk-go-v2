@@ -249,7 +249,6 @@ func addDeleteBucketUpdateEndpoint(stack *middleware.Stack, options Options) err
 		},
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
-		UseDualstack:            options.UseDualstack,
 		UseARNRegion:            options.UseARNRegion,
 	})
 }

@@ -312,7 +312,6 @@ func addCreateJobUpdateEndpoint(stack *middleware.Stack, options Options) error 
 		},
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
-		UseDualstack:            options.UseDualstack,
 		UseARNRegion:            options.UseARNRegion,
 	})
 }

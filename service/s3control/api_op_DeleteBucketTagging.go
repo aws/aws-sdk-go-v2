@@ -246,7 +246,6 @@ func addDeleteBucketTaggingUpdateEndpoint(stack *middleware.Stack, options Optio
 		},
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
-		UseDualstack:            options.UseDualstack,
 		UseARNRegion:            options.UseARNRegion,
 	})
 }
