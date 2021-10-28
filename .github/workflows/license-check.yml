@@ -3,8 +3,8 @@ name: License Scan
 on: [pull_request]
 
 jobs:
-  build:
-
+  licensescan:
+    name: License Scan
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -14,7 +14,7 @@ jobs:
       - name: Checkout target
         uses: actions/checkout@v2
         with:
-          path: sdkmain
+          path: sdkbase
           ref: ${{ github.base_ref }}
       - name: Checkout this ref
         uses: actions/checkout@v2
@@ -22,7 +22,9 @@ jobs:
           path: new-ref
           fetch-depth: 0
       - name: Get Diff
-        run: git --git-dir ./new-ref/.git diff --name-only --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }}| xargs > fileList.txt
+        run: git --git-dir ./new-ref/.git diff --name-only --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} > refDiffFiles.txt
+      - name: Get Target Files
+        run: git --git-dir ./sdkbase/.git ls-files | grep -xf refDiffFiles.txt - > targetFiles.txt
       - name: Checkout scancode
         uses: actions/checkout@v2
         with:
@@ -37,10 +39,10 @@ jobs:
       - name: Self-configure scancode
         working-directory: ./scancode-toolkit
         run: ./scancode --help
-      - name: Run Scan code on pr ref
-        run: for filename in $(< fileList.txt); do ./scancode-toolkit/scancode -l -n 30 --json-pp - ./sdkmain/$filename | grep short_name | sort | uniq >> old-licenses.txt; done
       - name: Run Scan code on target
-        run: for filename in $(< fileList.txt); do ./scancode-toolkit/scancode -l -n 30 --json-pp - ./new-ref/$filename | grep short_name | sort | uniq >> new-licenses.txt; done
+        run: cat targetFiles.txt | while read filename; do echo ./sdkbase/$filename; done | xargs ./scancode-toolkit/scancode -l -n 30 --json-pp - | grep short_name | sort | uniq >> old-licenses.txt
+      - name: Run Scan code on pr ref
+        run: cat refDiffFiles.txt | while read filename; do echo ./new-ref/$filename; done | xargs ./scancode-toolkit/scancode -l -n 30 --json-pp - | grep short_name | sort | uniq >> new-licenses.txt
       # compare
       - name: License test
         run: if ! cmp old-licenses.txt new-licenses.txt; then echo "Licenses differ! Failing."; exit -1; else echo "Licenses are the same. Success."; exit 0; fi
