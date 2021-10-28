@@ -33,7 +33,7 @@ retryable by the standard retryer implementation.
 
 ## NopRetryer
 
-The [aws.NopRetryer]({{< apiref "aws#NopRetryer" >}}) is a `aws.Retyer` implementation that is provided if you wish
+The [aws.NopRetryer]({{< apiref "aws#NopRetryer" >}}) is a `aws.Retryer` implementation that is provided if you wish
 to disable all retry attempts. When invoking a service client operation, this retryer will only allow the request to
 be attempted once, and any resulting error will be returned to the calling application.
 
@@ -46,7 +46,7 @@ operation depending on your applications requirements. To see additional example
 
 {{% alert color="warning" %}}
 If specifying a global `aws.Retryer` implementation using `config.WithRetryer`, you must ensure that you return a new
-instance of the `aws.Retyer` each invocation. This will ensure that you won't create a global retry token bucket across
+instance of the `aws.Retryer` each invocation. This will ensure that you won't create a global retry token bucket across
 all service clients.
 {{% /alert %}}
 
