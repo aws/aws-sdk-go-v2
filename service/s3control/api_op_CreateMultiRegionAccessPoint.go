@@ -141,6 +141,9 @@ func (c *Client) addOperationCreateMultiRegionAccessPointMiddlewares(stack *midd
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = smithyhttp.AddContentChecksumMiddleware(stack); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opCreateMultiRegionAccessPointMiddleware(stack); err != nil {
 		return err
 	}
@@ -166,9 +169,6 @@ func (c *Client) addOperationCreateMultiRegionAccessPointMiddlewares(stack *midd
 		return err
 	}
 	if err = addRequestResponseLogging(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddContentChecksumMiddleware(stack); err != nil {
 		return err
 	}
 	return nil
