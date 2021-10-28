@@ -988,8 +988,12 @@ func (c *SharedConfig) setFromIniSection(profile string, section ini.Section) er
 	}
 	updateString(&c.EC2IMDSEndpoint, section, ec2MetadataServiceEndpointKey)
 
-	updateUseDualStackEndpoint(&c.UseDualStackEndpoint, section, useDualStackEndpoint)
-	updateUseFIPSEndpoint(&c.UseFIPSEndpoint, section, useFIPSEndpointKey)
+	if err := updateUseDualStackEndpoint(&c.UseDualStackEndpoint, section, useDualStackEndpoint); err != nil {
+		return fmt.Errorf("failed to load %s from shared config, %v", useDualStackEndpoint, err)
+	}
+	if err := updateUseFIPSEndpoint(&c.UseFIPSEndpoint, section, useFIPSEndpointKey); err != nil {
+		return fmt.Errorf("failed to load %s from shared config, %v", useFIPSEndpointKey, err)
+	}
 
 	// Shared Credentials
 	creds := aws.Credentials{
@@ -1279,26 +1283,42 @@ func updateEndpointDiscoveryType(dst *aws.EndpointDiscoveryEnableState, section 
 
 // updateEndpointDiscoveryType will only update the dst with the value in the section, if
 // a valid key and corresponding EndpointDiscoveryType is found.
-func updateUseDualStackEndpoint(dst *aws.DualStackEndpointState, section ini.Section, key string) {
+func updateUseDualStackEndpoint(dst *aws.DualStackEndpointState, section ini.Section, key string) error {
 	if !section.Has(key) {
-		return
+		return nil
 	}
+
+	valueType, _ := section.ValueType(key)
+	if valueType != ini.BoolType {
+		return fmt.Errorf("expected true or false, got %v", section.String(key))
+	}
+
 	if section.Bool(key) {
 		*dst = aws.DualStackEndpointStateEnabled
 	} else {
 		*dst = aws.DualStackEndpointStateDisabled
 	}
+
+	return nil
 }
 
 // updateEndpointDiscoveryType will only update the dst with the value in the section, if
 // a valid key and corresponding EndpointDiscoveryType is found.
-func updateUseFIPSEndpoint(dst *aws.FIPSEndpointState, section ini.Section, key string) {
+func updateUseFIPSEndpoint(dst *aws.FIPSEndpointState, section ini.Section, key string) error {
 	if !section.Has(key) {
-		return
+		return nil
 	}
+
+	valueType, _ := section.ValueType(key)
+	if valueType != ini.BoolType {
+		return fmt.Errorf("expected true or false, got %v", section.String(key))
+	}
+
 	if section.Bool(key) {
 		*dst = aws.FIPSEndpointStateEnabled
 	} else {
 		*dst = aws.FIPSEndpointStateDisabled
 	}
+
+	return nil
 }

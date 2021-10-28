@@ -204,16 +204,24 @@ ec2_metadata_service_endpoint_mode = IPv6
 
 [profile UseDualStackEndpointEnabled]
 region = "us-west-2"
-use_dualstack_endpoint=true
+use_dualstack_endpoint=True
 
 [profile UseDualStackEndpointDisabled]
 region = "us-west-2"
-use_dualstack_endpoint=false
+use_dualstack_endpoint=False
+
+[profile UseDualStackEndpointInvalid]
+region = "us-west-2"
+use_dualstack_endpoint=invalid
 
 [profile UseFIPSEndpointEnabled]
 region = "us-west-2"
-use_fips_endpoint=true
+use_fips_endpoint=True
 
 [profile UseFIPSEndpointDisabled]
 region = "us-west-2"
-use_fips_endpoint=false
+use_fips_endpoint=False
+
+[profile UseFIPSEndpointInvalid]
+region = "us-west-2"
+use_fips_endpoint=invalid
