@@ -384,6 +384,21 @@
                 }
             }
         },
+        "com.amazonaws.route53resolver#AutodefinedReverseFlag": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ENABLE",
+                        "name": "ENABLE"
+                    },
+                    {
+                        "value": "DISABLE",
+                        "name": "DISABLE"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.route53resolver#BlockOverrideDnsType": {
             "type": "string",
             "traits": {
@@ -2174,7 +2189,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 5000
+                    "max": 30000
                 }
             }
         },
@@ -2450,6 +2465,58 @@
                     "target": "com.amazonaws.route53resolver#FirewallRuleGroup",
                     "traits": {
                         "smithy.api#documentation": "<p>A collection of rules used to filter DNS network traffic. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53resolver#GetResolverConfig": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53resolver#GetResolverConfigRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53resolver#GetResolverConfigResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53resolver#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the behavior configuration of Route 53 Resolver behavior for a single VPC from\n\t\t\t\tAmazon Virtual Private Cloud.</p>"
+            }
+        },
+        "com.amazonaws.route53resolver#GetResolverConfigRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceId": {
+                    "target": "com.amazonaws.route53resolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Resource ID of the Amazon VPC that you want to get information about.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53resolver#GetResolverConfigResponse": {
+            "type": "structure",
+            "members": {
+                "ResolverConfig": {
+                    "target": "com.amazonaws.route53resolver#ResolverConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the behavior configuration of Route 53 Resolver behavior for the VPC you\n\t\t\tspecified in the <code>GetResolverConfig</code> request.</p>"
                     }
                 }
             }
@@ -3704,6 +3771,88 @@
                 }
             }
         },
+        "com.amazonaws.route53resolver#ListResolverConfigs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53resolver#ListResolverConfigsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53resolver#ListResolverConfigsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53resolver#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the Resolver configurations that you have defined. \n\t\t\tRoute 53 Resolver uses the configurations to manage DNS resolution behavior for your VPCs.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.route53resolver#ListResolverConfigsMaxResult": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 5,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.route53resolver#ListResolverConfigsRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.route53resolver#ListResolverConfigsMaxResult",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>The maximum number of Resolver configurations that you want to return in the response to \n\t\t\ta <code>ListResolverConfigs</code> request. If you don't specify a value for <code>MaxResults</code>, \n\t\t\tup to 100 Resolver configurations are returned.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.route53resolver#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>(Optional) If the current Amazon Web Services account has more than <code>MaxResults</code> Resolver configurations, use \n\t\t\t<code>NextToken</code> to get the second and subsequent pages of results.</p>\n\t\t       <p>For the first <code>ListResolverConfigs</code> request, omit this value.</p>\n\t\t       <p>For the second and subsequent requests, get the value of <code>NextToken</code> from the previous response and \n\t\t\tspecify that value for <code>NextToken</code> in the request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53resolver#ListResolverConfigsResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.route53resolver#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If a response includes the last of the Resolver configurations that are associated with the current Amazon Web Services account, \n\t\t\t<code>NextToken</code> doesn't appear in the response.</p>\n\t\t       <p>If a response doesn't include the last of the configurations, you can get more configurations by submitting another \n\t\t\t<code>ListResolverConfigs</code> request. \n\t\t\tGet the value of <code>NextToken</code> that Amazon Route 53\n             returned in the previous response and include it in \n\t\t\t<code>NextToken</code> in the next request.</p>"
+                    }
+                },
+                "ResolverConfigs": {
+                    "target": "com.amazonaws.route53resolver#ResolverConfigList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array that contains one <code>ResolverConfigs</code> element for each Resolver configuration that is associated \n\t\t\twith the current Amazon Web Services account.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.route53resolver#ListResolverDnssecConfigs": {
             "type": "operation",
             "input": {
@@ -4626,6 +4775,67 @@
                 "smithy.api#documentation": "<p>The response to a <code>PutResolverRulePolicy</code> request.</p>"
             }
         },
+        "com.amazonaws.route53resolver#ResolverAutodefinedReverseStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ENABLING",
+                        "name": "Enabling"
+                    },
+                    {
+                        "value": "ENABLED",
+                        "name": "Enabled"
+                    },
+                    {
+                        "value": "DISABLING",
+                        "name": "Disabling"
+                    },
+                    {
+                        "value": "DISABLED",
+                        "name": "Disabled"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.route53resolver#ResolverConfig": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.route53resolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ID for the Resolver configuration.</p>"
+                    }
+                },
+                "ResourceId": {
+                    "target": "com.amazonaws.route53resolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Virtual Private Cloud VPC that you're configuring Resolver for.</p>"
+                    }
+                },
+                "OwnerId": {
+                    "target": "com.amazonaws.route53resolver#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner account ID of the Amazon Virtual Private Cloud VPC.</p>"
+                    }
+                },
+                "AutodefinedReverse": {
+                    "target": "com.amazonaws.route53resolver#ResolverAutodefinedReverseStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The status of whether or not the Resolver will create autodefined rules for reverse DNS\n\t\t\tlookups. This is enabled by default. The status can be one of following:</p>\n\t\t       <p> Status of the rules generated by VPCs based on CIDR/Region for reverse DNS resolution. The\n\t\t\tstatus can be one of following:</p>\n\n\t\t       <ul>\n            <li>\n               <p>\n                  <b>ENABLING:</b> Autodefined rules for reverse DNS lookups are being\n\t\t\t\t\tenabled but are not complete.</p>\n            </li>\n            <li>\n               <p>\n                  <b>ENABLED:</b> Autodefined rules for reverse DNS lookups are\n\t\t\t\t\tenabled.</p>\n            </li>\n            <li>\n               <p>\n                  <b>DISABLING:</b> Autodefined rules for reverse DNS lookups are\n\t\t\t\t\tbeing disabled but are not complete.</p>\n            </li>\n            <li>\n               <p>\n                  <b>DISABLED:</b> Autodefined rules for reverse DNS lookups are\n\t\t\t\t\tdisabled.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A complex type that contains information about a Resolver configuration for a VPC.</p>"
+            }
+        },
+        "com.amazonaws.route53resolver#ResolverConfigList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.route53resolver#ResolverConfig"
+            }
+        },
         "com.amazonaws.route53resolver#ResolverDNSSECValidationStatus": {
             "type": "string",
             "traits": {
@@ -5017,7 +5227,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 5000
+                    "max": 30000
                 }
             }
         },
@@ -5447,6 +5657,9 @@
                     "target": "com.amazonaws.route53resolver#GetFirewallRuleGroupPolicy"
                 },
                 {
+                    "target": "com.amazonaws.route53resolver#GetResolverConfig"
+                },
+                {
                     "target": "com.amazonaws.route53resolver#GetResolverDnssecConfig"
                 },
                 {
@@ -5490,6 +5703,9 @@
                 },
                 {
                     "target": "com.amazonaws.route53resolver#ListFirewallRules"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ListResolverConfigs"
                 },
                 {
                     "target": "com.amazonaws.route53resolver#ListResolverDnssecConfigs"
@@ -5541,6 +5757,9 @@
                 },
                 {
                     "target": "com.amazonaws.route53resolver#UpdateFirewallRuleGroupAssociation"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#UpdateResolverConfig"
                 },
                 {
                     "target": "com.amazonaws.route53resolver#UpdateResolverDnssecConfig"
@@ -6228,6 +6447,74 @@
                     "target": "com.amazonaws.route53resolver#FirewallRule",
                     "traits": {
                         "smithy.api#documentation": "<p>The firewall rule that you just updated. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53resolver#UpdateResolverConfig": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53resolver#UpdateResolverConfigRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53resolver#UpdateResolverConfigResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53resolver#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ResourceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the behavior configuration of Route 53 Resolver behavior for a single VPC from\n\t\t\t\tAmazon Virtual Private Cloud.</p>"
+            }
+        },
+        "com.amazonaws.route53resolver#UpdateResolverConfigRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceId": {
+                    "target": "com.amazonaws.route53resolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Resource ID of the Amazon VPC that you want to update the Resolver configuration for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AutodefinedReverseFlag": {
+                    "target": "com.amazonaws.route53resolver#AutodefinedReverseFlag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether or not the Resolver will create autodefined rules for reverse DNS\n\t\t\tlookups. This is enabled by default. Disabling this option will also affect EC2-Classic\n\t\t\tinstances using ClassicLink. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html\">ClassicLink</a> in the\n\t\t\t\t\t<i>Amazon EC2 guide</i>.</p>\n\t\t       <note>\n            <p>It can take some time for the status change to be completed.</p>\n         </note>\n\t\t       <p></p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53resolver#UpdateResolverConfigResponse": {
+            "type": "structure",
+            "members": {
+                "ResolverConfig": {
+                    "target": "com.amazonaws.route53resolver#ResolverConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array that contains settings for the specified Resolver configuration.</p>"
                     }
                 }
             }

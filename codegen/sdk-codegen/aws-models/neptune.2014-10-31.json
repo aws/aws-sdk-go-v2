@@ -49,7 +49,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates an Identity and Access Management (IAM) role from an\n      Neptune DB cluster.</p>"
+                "smithy.api#documentation": "<p>Associates an Identity and Access Management (IAM) role with an\n      Neptune DB cluster.</p>"
             }
         },
         "com.amazonaws.neptune#AddRoleToDBClusterMessage": {
@@ -72,7 +72,7 @@
                 "FeatureName": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the feature for the Neptune DB cluster that the IAM role is to be associated with.\n      For the list of supported feature names, see <a>DBEngineVersion</a>.</p>"
+                        "smithy.api#documentation": "<p>The name of the feature for the Neptune DB cluster that the IAM role is to be associated with.\n      For the list of supported feature names, see <a href=\"neptune/latest/userguide/api-other-apis.html#DBEngineVersion\">DBEngineVersion</a>.</p>"
                     }
                 }
             }
@@ -165,6 +165,24 @@
         },
         "com.amazonaws.neptune#AmazonRDSv19": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Neptune",
+                    "arnNamespace": "rds",
+                    "cloudFormationName": "Neptune",
+                    "cloudTrailEventSource": "neptune.amazonaws.com",
+                    "endpointPrefix": "rds"
+                },
+                "aws.auth#sigv4": {
+                    "name": "rds"
+                },
+                "aws.protocols#awsQuery": {},
+                "smithy.api#documentation": "<fullname>Amazon Neptune</fullname>\n         <p>Amazon Neptune is a fast, reliable, fully-managed graph database service that makes it\n      easy to build and run applications that work with highly connected datasets. The core of\n      Amazon Neptune is a purpose-built, high-performance graph database engine optimized for\n      storing billions of relationships and querying the graph with milliseconds latency. Amazon\n      Neptune supports popular graph models Property Graph and W3C's RDF, and their respective query\n      languages Apache TinkerPop Gremlin and SPARQL, allowing you to easily build queries that\n      efficiently navigate highly connected datasets. Neptune powers graph use cases such as\n      recommendation engines, fraud detection, knowledge graphs, drug discovery, and network\n      security.</p>\n\n         <p>This interface reference for Amazon Neptune contains documentation for a programming or\n      command line interface you can use to manage Amazon Neptune. Note that Amazon Neptune is\n      asynchronous, which means that some interfaces might require techniques such as polling or\n      callback functions to determine when a command has been applied. In this reference, the\n      parameter descriptions indicate whether a command is applied immediately, on the next instance\n      reboot, or during the maintenance window. The reference structure is as follows, and we list\n      following some related topics from the user guide.</p>",
+                "smithy.api#title": "Amazon Neptune",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://rds.amazonaws.com/doc/2014-10-31/"
+                }
+            },
             "version": "2014-10-31",
             "operations": [
                 {
@@ -356,25 +374,7 @@
                 {
                     "target": "com.amazonaws.neptune#StopDBCluster"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Neptune",
-                    "arnNamespace": "rds",
-                    "cloudFormationName": "Neptune",
-                    "cloudTrailEventSource": "neptune.amazonaws.com",
-                    "endpointPrefix": "rds"
-                },
-                "aws.auth#sigv4": {
-                    "name": "rds"
-                },
-                "aws.protocols#awsQuery": {},
-                "smithy.api#documentation": "<fullname>Amazon Neptune</fullname>\n         <p>Amazon Neptune is a fast, reliable, fully-managed graph database service that makes it\n      easy to build and run applications that work with highly connected datasets. The core of\n      Amazon Neptune is a purpose-built, high-performance graph database engine optimized for\n      storing billions of relationships and querying the graph with milliseconds latency. Amazon\n      Neptune supports popular graph models Property Graph and W3C's RDF, and their respective query\n      languages Apache TinkerPop Gremlin and SPARQL, allowing you to easily build queries that\n      efficiently navigate highly connected datasets. Neptune powers graph use cases such as\n      recommendation engines, fraud detection, knowledge graphs, drug discovery, and network\n      security.</p>\n\n         <p>This interface reference for Amazon Neptune contains documentation for a programming or\n      command line interface you can use to manage Amazon Neptune. Note that Amazon Neptune is\n      asynchronous, which means that some interfaces might require techniques such as polling or\n      callback functions to determine when a command has been applied. In this reference, the\n      parameter descriptions indicate whether a command is applied immediately, on the next instance\n      reboot, or during the maintenance window. The reference structure is as follows, and we list\n      following some related topics from the user guide.</p>",
-                "smithy.api#title": "Amazon Neptune",
-                "smithy.api#xmlNamespace": {
-                    "uri": "http://rds.amazonaws.com/doc/2014-10-31/"
-                }
-            }
+            ]
         },
         "com.amazonaws.neptune#ApplyMethod": {
             "type": "string",
@@ -2517,7 +2517,7 @@
                 "FeatureName": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the feature associated with the Amazon Identity and Access Management (IAM) role.\n      For the list of supported feature names, see <a>DBEngineVersion</a>.\n    </p>"
+                        "smithy.api#documentation": "<p>The name of the feature associated with the Amazon Identity and Access Management (IAM) role.\n      For the list of supported feature names, see <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/api-other-apis.html#DescribeDBEngineVersions\">DescribeDBEngineVersions</a>.\n    </p>"
                     }
                 }
             },
@@ -4482,7 +4482,7 @@
                 "SnapshotType": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of DB cluster snapshots to be returned. You can specify one of the following\n      values:</p>\n         <ul>\n            <li>\n               <p> \n                  <code>automated</code> - Return all DB cluster snapshots that have been automatically\n          taken by Amazon Neptune for my Amazon account.</p>\n            </li>\n            <li>\n               <p> \n                  <code>manual</code> - Return all DB cluster snapshots that have been taken by my AWS\n          account.</p>\n            </li>\n            <li>\n               <p> \n                  <code>shared</code> - Return all manual DB cluster snapshots that have been shared to\n          my Amazon account.</p>\n            </li>\n            <li>\n               <p> \n                  <code>public</code> - Return all DB cluster snapshots that have been marked as\n          public.</p>\n            </li>\n         </ul>\n         <p>If you don't specify a <code>SnapshotType</code> value, then both automated and manual DB\n      cluster snapshots are returned. You can include shared DB cluster snapshots with these results\n      by setting the <code>IncludeShared</code> parameter to <code>true</code>. You can include\n      public DB cluster snapshots with these results by setting the <code>IncludePublic</code>\n      parameter to <code>true</code>.</p>\n         <p>The <code>IncludeShared</code> and <code>IncludePublic</code> parameters don't apply for\n      <code>SnapshotType</code> values of <code>manual</code> or <code>automated</code>. The\n      <code>IncludePublic</code> parameter doesn't apply when <code>SnapshotType</code> is set to\n      <code>shared</code>. The <code>IncludeShared</code> parameter doesn't apply when\n      <code>SnapshotType</code> is set to <code>public</code>.</p>"
+                        "smithy.api#documentation": "<p>The type of DB cluster snapshots to be returned. You can specify one of the following\n      values:</p>\n         <ul>\n            <li>\n               <p> \n                  <code>automated</code> - Return all DB cluster snapshots that have been automatically\n          taken by Amazon Neptune for my Amazon account.</p>\n            </li>\n            <li>\n               <p> \n                  <code>manual</code> - Return all DB cluster snapshots that have been taken by my Amazon\n          account.</p>\n            </li>\n            <li>\n               <p> \n                  <code>shared</code> - Return all manual DB cluster snapshots that have been shared to\n          my Amazon account.</p>\n            </li>\n            <li>\n               <p> \n                  <code>public</code> - Return all DB cluster snapshots that have been marked as\n          public.</p>\n            </li>\n         </ul>\n         <p>If you don't specify a <code>SnapshotType</code> value, then both automated and manual DB\n      cluster snapshots are returned. You can include shared DB cluster snapshots with these results\n      by setting the <code>IncludeShared</code> parameter to <code>true</code>. You can include\n      public DB cluster snapshots with these results by setting the <code>IncludePublic</code>\n      parameter to <code>true</code>.</p>\n         <p>The <code>IncludeShared</code> and <code>IncludePublic</code> parameters don't apply for\n      <code>SnapshotType</code> values of <code>manual</code> or <code>automated</code>. The\n      <code>IncludePublic</code> parameter doesn't apply when <code>SnapshotType</code> is set to\n      <code>shared</code>. The <code>IncludeShared</code> parameter doesn't apply when\n      <code>SnapshotType</code> is set to <code>public</code>.</p>"
                     }
                 },
                 "Filters": {
@@ -4506,7 +4506,7 @@
                 "IncludeShared": {
                     "target": "com.amazonaws.neptune#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>True to include shared manual DB cluster snapshots from other Amazon accounts that this AWS\n      account has been given permission to copy or restore, and otherwise false. The default is\n      <code>false</code>.</p>\n         <p>You can give an Amazon account permission to restore a manual DB cluster snapshot from\n      another Amazon account by the <a>ModifyDBClusterSnapshotAttribute</a> API\n      action.</p>"
+                        "smithy.api#documentation": "<p>True to include shared manual DB cluster snapshots from other Amazon accounts that this Amazon\n      account has been given permission to copy or restore, and otherwise false. The default is\n      <code>false</code>.</p>\n         <p>You can give an Amazon account permission to restore a manual DB cluster snapshot from\n      another Amazon account by the <a>ModifyDBClusterSnapshotAttribute</a> API\n      action.</p>"
                     }
                 },
                 "IncludePublic": {
@@ -4667,6 +4667,9 @@
                     "items": "DBInstances",
                     "pageSize": "MaxRecords"
                 },
+                "smithy.api#suppress": [
+                    "WaitableTraitInvalidErrorType"
+                ],
                 "smithy.waiters#waitable": {
                     "DBInstanceAvailable": {
                         "acceptors": [
@@ -4726,6 +4729,67 @@
                                     "output": {
                                         "path": "DBInstances[].DBInstanceStatus",
                                         "expected": "incompatible-parameters",
+                                        "comparator": "anyStringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 30
+                    },
+                    "DBInstanceDeleted": {
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "DBInstances[].DBInstanceStatus",
+                                        "expected": "deleted",
+                                        "comparator": "allStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "errorType": "DBInstanceNotFound"
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "DBInstances[].DBInstanceStatus",
+                                        "expected": "creating",
+                                        "comparator": "anyStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "DBInstances[].DBInstanceStatus",
+                                        "expected": "modifying",
+                                        "comparator": "anyStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "DBInstances[].DBInstanceStatus",
+                                        "expected": "rebooting",
+                                        "comparator": "anyStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "DBInstances[].DBInstanceStatus",
+                                        "expected": "resetting-master-credentials",
                                         "comparator": "anyStringEquals"
                                     }
                                 }
@@ -6515,6 +6579,18 @@
                         "smithy.api#documentation": "<p>The version number of the database engine to which you want to upgrade. Changing this\n      parameter results in an outage. The change is applied during the next maintenance window\n      unless the <code>ApplyImmediately</code> parameter is set to true.</p>\n         <p>For a list of valid engine versions, see <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/engine-releases.html\">Engine Releases for Amazon\n      Neptune</a>, or call <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/api-other-apis.html#DescribeDBEngineVersions\">DescribeDBEngineVersions</a>.</p>"
                     }
                 },
+                "AllowMajorVersionUpgrade": {
+                    "target": "com.amazonaws.neptune#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates whether upgrades between different major versions are allowed.</p>\n         <p>Constraints: You must set the allow-major-version-upgrade flag when providing an\n      <code>EngineVersion</code> parameter that uses a different major version than the DB cluster's current\n      version.</p>"
+                    }
+                },
+                "DBInstanceParameterGroupName": {
+                    "target": "com.amazonaws.neptune#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the DB parameter group to apply to all instances of the DB cluster. </p>\n         <note>\n            <p>When you apply a parameter group using <code>DBInstanceParameterGroupName</code>,\n      parameter changes aren't applied during the next maintenance window but instead are\n      applied immediately.</p>\n         </note>\n         <p>Default: The existing name setting</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>The DB parameter group must be in the same DB parameter group family as\n        the target DB cluster version.</p>\n            </li>\n            <li>\n               <p>The <code>DBInstanceParameterGroupName</code> parameter is only valid in combination with\n        the <code>AllowMajorVersionUpgrade</code> parameter.</p>\n            </li>\n         </ul>"
+                    }
+                },
                 "DeletionProtection": {
                     "target": "com.amazonaws.neptune#BooleanOptional",
                     "traits": {
@@ -6619,7 +6695,7 @@
                 "ValuesToAdd": {
                     "target": "com.amazonaws.neptune#AttributeValueList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of DB cluster snapshot attributes to add to the attribute specified by\n      <code>AttributeName</code>.</p>\n         <p>To authorize other Amazon accounts to copy or restore a manual DB cluster snapshot, set this\n      list to include one or more Amazon account IDs, or <code>all</code> to make the manual DB cluster\n      snapshot restorable by any Amazon account. Do not add the <code>all</code> value for any manual\n      DB cluster snapshots that contain private information that you don't want available to all AWS\n      accounts.</p>"
+                        "smithy.api#documentation": "<p>A list of DB cluster snapshot attributes to add to the attribute specified by\n      <code>AttributeName</code>.</p>\n         <p>To authorize other Amazon accounts to copy or restore a manual DB cluster snapshot, set this\n      list to include one or more Amazon account IDs, or <code>all</code> to make the manual DB cluster\n      snapshot restorable by any Amazon account. Do not add the <code>all</code> value for any manual\n      DB cluster snapshots that contain private information that you don't want available to all Amazon\n      accounts.</p>"
                     }
                 },
                 "ValuesToRemove": {
@@ -6719,7 +6795,7 @@
                 "DBInstanceClass": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new compute and memory capacity of the DB instance, for example,\n      <code>db.m4.large</code>. Not all DB instance classes are available in all AWS\n      Regions.</p>\n         <p>If you modify the DB instance class, an outage occurs during the change. The change is\n      applied during the next maintenance window, unless <code>ApplyImmediately</code> is specified\n      as <code>true</code> for this request.</p>\n         <p>Default: Uses existing setting</p>"
+                        "smithy.api#documentation": "<p>The new compute and memory capacity of the DB instance, for example,\n      <code>db.m4.large</code>. Not all DB instance classes are available in all Amazon\n      Regions.</p>\n         <p>If you modify the DB instance class, an outage occurs during the change. The change is\n      applied during the next maintenance window, unless <code>ApplyImmediately</code> is specified\n      as <code>true</code> for this request.</p>\n         <p>Default: Uses existing setting</p>"
                     }
                 },
                 "DBSubnetGroupName": {
@@ -7793,7 +7869,7 @@
                 "FeatureName": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the feature for the DB cluster that the IAM role is to be disassociated from.\n      For the list of supported feature names, see <a>DBEngineVersion</a>.</p>"
+                        "smithy.api#documentation": "<p>The name of the feature for the DB cluster that the IAM role is to be disassociated from.\n      For the list of supported feature names, see <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/api-other-apis.html#DescribeDBEngineVersions\">DescribeDBEngineVersions</a>.</p>"
                     }
                 }
             }
@@ -8542,7 +8618,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts an Amazon Neptune  DB cluster that was stopped using the AWS\n      console, the Amazon CLI stop-db-cluster command, or the StopDBCluster API.</p>"
+                "smithy.api#documentation": "<p>Starts an Amazon Neptune  DB cluster that was stopped using the Amazon\n      console, the Amazon CLI stop-db-cluster command, or the StopDBCluster API.</p>"
             }
         },
         "com.amazonaws.neptune#StartDBClusterMessage": {
@@ -8808,13 +8884,13 @@
                 "Key": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A key is the required name of the tag. The string value can be from 1 to 128 Unicode\n      characters in length and can't be prefixed with \"aws:\" or \"rds:\". The string can only contain\n      only the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-' (Java\n      regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-]*)$\").</p>"
+                        "smithy.api#documentation": "<p>A key is the required name of the tag. The string value can be from 1 to 128 Unicode\n      characters in length and can't be prefixed with <code>aws:</code> or <code>rds:</code>.\n      The string can only contain the set of Unicode letters, digits, white-space,\n      '_', '.', '/', '=', '+', '-' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-]*)$\").</p>"
                     }
                 },
                 "Value": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value is the optional value of the tag. The string value can be from 1 to 256 Unicode\n      characters in length and can't be prefixed with \"aws:\" or \"rds:\". The string can only contain\n      only the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-' (Java\n      regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-]*)$\").</p>"
+                        "smithy.api#documentation": "<p>A value is the optional value of the tag. The string value can be from 1 to 256 Unicode\n      characters in length and can't be prefixed with <code>aws:</code> or <code>rds:</code>.\n      The string can only contain the set of Unicode letters, digits, white-space,\n      '_', '.', '/', '=', '+', '-' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-]*)$\").</p>"
                     }
                 }
             },

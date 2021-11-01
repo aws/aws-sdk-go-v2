@@ -29,6 +29,141 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.autoscaling#AcceleratorCountRequest": {
+            "type": "structure",
+            "members": {
+                "Min": {
+                    "target": "com.amazonaws.autoscaling#NullablePositiveInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum value.</p>"
+                    }
+                },
+                "Max": {
+                    "target": "com.amazonaws.autoscaling#NullablePositiveInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the minimum and maximum for the <code>AcceleratorCount</code> object when\n            you specify <a>InstanceRequirements</a> for an Auto Scaling group.</p>"
+            }
+        },
+        "com.amazonaws.autoscaling#AcceleratorManufacturer": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "nvidia",
+                        "name": "NVIDIA"
+                    },
+                    {
+                        "value": "amd",
+                        "name": "AMD"
+                    },
+                    {
+                        "value": "amazon-web-services",
+                        "name": "AMAZON_WEB_SERVICES"
+                    },
+                    {
+                        "value": "xilinx",
+                        "name": "XILINX"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.autoscaling#AcceleratorManufacturers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.autoscaling#AcceleratorManufacturer"
+            }
+        },
+        "com.amazonaws.autoscaling#AcceleratorName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "a100",
+                        "name": "A100"
+                    },
+                    {
+                        "value": "v100",
+                        "name": "V100"
+                    },
+                    {
+                        "value": "k80",
+                        "name": "K80"
+                    },
+                    {
+                        "value": "t4",
+                        "name": "T4"
+                    },
+                    {
+                        "value": "m60",
+                        "name": "M60"
+                    },
+                    {
+                        "value": "radeon-pro-v520",
+                        "name": "RADEON_PRO_V520"
+                    },
+                    {
+                        "value": "vu9p",
+                        "name": "VU9P"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.autoscaling#AcceleratorNames": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.autoscaling#AcceleratorName"
+            }
+        },
+        "com.amazonaws.autoscaling#AcceleratorTotalMemoryMiBRequest": {
+            "type": "structure",
+            "members": {
+                "Min": {
+                    "target": "com.amazonaws.autoscaling#NullablePositiveInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The memory minimum in MiB.</p>"
+                    }
+                },
+                "Max": {
+                    "target": "com.amazonaws.autoscaling#NullablePositiveInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The memory maximum in MiB.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the minimum and maximum for the <code>AcceleratorTotalMemoryMiB</code>\n            object when you specify <a>InstanceRequirements</a> for an Auto Scaling group.</p>"
+            }
+        },
+        "com.amazonaws.autoscaling#AcceleratorType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "gpu",
+                        "name": "GPU"
+                    },
+                    {
+                        "value": "fpga",
+                        "name": "FPGA"
+                    },
+                    {
+                        "value": "inference",
+                        "name": "INFERENCE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.autoscaling#AcceleratorTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.autoscaling#AcceleratorType"
+            }
+        },
         "com.amazonaws.autoscaling#ActiveInstanceRefreshNotFoundFault": {
             "type": "structure",
             "members": {
@@ -571,6 +706,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Reserved.</p>"
                     }
+                },
+                "DesiredCapacityType": {
+                    "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unit of measurement for the value specified for desired capacity. Amazon EC2 Auto Scaling\n            supports <code>DesiredCapacityType</code> for attribute-based instance type selection\n            only. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html\">Creating\n                an Auto Scaling group using attribute-based instance type selection</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n        <p>By default, Amazon EC2 Auto Scaling specifies <code>units</code>, which translates into number of\n            instances.</p>\n        <p>Valid values: <code>units</code> | <code>vcpu</code> | <code>memory-mib</code>\n         </p>"
+                    }
                 }
             },
             "traits": {
@@ -774,6 +915,24 @@
         },
         "com.amazonaws.autoscaling#AutoScaling_2011_01_01": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Auto Scaling",
+                    "arnNamespace": "autoscaling",
+                    "cloudFormationName": "AutoScaling",
+                    "cloudTrailEventSource": "autoscaling.amazonaws.com",
+                    "endpointPrefix": "autoscaling"
+                },
+                "aws.auth#sigv4": {
+                    "name": "autoscaling"
+                },
+                "aws.protocols#awsQuery": {},
+                "smithy.api#documentation": "<fullname>Amazon EC2 Auto Scaling</fullname>\n        \n        \n        \n        \n        \n        \n        \n\n        \n        <p>Amazon EC2 Auto Scaling is designed to automatically launch or terminate EC2 instances\n            based on user-defined scaling policies, scheduled actions, and health checks.</p>\n        <p>For more information about Amazon EC2 Auto Scaling, see the <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html\">Amazon EC2 Auto Scaling User Guide</a>. For information about granting IAM users required\n            permissions for calls to Amazon EC2 Auto Scaling, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/ec2-auto-scaling-api-permissions.html\">Granting\n                IAM users required permissions for Amazon EC2 Auto Scaling resources</a> in the\n                <i>Amazon EC2 Auto Scaling API Reference</i>.</p>",
+                "smithy.api#title": "Auto Scaling",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://autoscaling.amazonaws.com/doc/2011-01-01/"
+                }
+            },
             "version": "2011-01-01",
             "operations": [
                 {
@@ -959,30 +1118,51 @@
                 {
                     "target": "com.amazonaws.autoscaling#UpdateAutoScalingGroup"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Auto Scaling",
-                    "arnNamespace": "autoscaling",
-                    "cloudFormationName": "AutoScaling",
-                    "cloudTrailEventSource": "autoscaling.amazonaws.com",
-                    "endpointPrefix": "autoscaling"
-                },
-                "aws.auth#sigv4": {
-                    "name": "autoscaling"
-                },
-                "aws.protocols#awsQuery": {},
-                "smithy.api#documentation": "<fullname>Amazon EC2 Auto Scaling</fullname>\n        \n        \n        \n        \n        \n        \n        \n\n        \n        <p>Amazon EC2 Auto Scaling is designed to automatically launch or terminate EC2 instances\n            based on user-defined scaling policies, scheduled actions, and health checks.</p>\n        <p>For more information about Amazon EC2 Auto Scaling, see the <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html\">Amazon EC2 Auto Scaling User Guide</a>. For information about granting IAM users required\n            permissions for calls to Amazon EC2 Auto Scaling, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/ec2-auto-scaling-api-permissions.html\">Granting\n                IAM users required permissions for Amazon EC2 Auto Scaling resources</a> in the\n                <i>Amazon EC2 Auto Scaling API Reference</i>.</p>",
-                "smithy.api#title": "Auto Scaling",
-                "smithy.api#xmlNamespace": {
-                    "uri": "http://autoscaling.amazonaws.com/doc/2011-01-01/"
-                }
-            }
+            ]
         },
         "com.amazonaws.autoscaling#AvailabilityZones": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.autoscaling#XmlStringMaxLen255"
+            }
+        },
+        "com.amazonaws.autoscaling#BareMetal": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "included",
+                        "name": "INCLUDED"
+                    },
+                    {
+                        "value": "excluded",
+                        "name": "EXCLUDED"
+                    },
+                    {
+                        "value": "required",
+                        "name": "REQUIRED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.autoscaling#BaselineEbsBandwidthMbpsRequest": {
+            "type": "structure",
+            "members": {
+                "Min": {
+                    "target": "com.amazonaws.autoscaling#NullablePositiveInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum value in Mbps.</p>"
+                    }
+                },
+                "Max": {
+                    "target": "com.amazonaws.autoscaling#NullablePositiveInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum value in Mbps.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the minimum and maximum for the <code>BaselineEbsBandwidthMbps</code> object\n            when you specify <a>InstanceRequirements</a> for an Auto Scaling group.</p>"
             }
         },
         "com.amazonaws.autoscaling#BatchDeleteScheduledAction": {
@@ -1175,6 +1355,25 @@
                 "target": "com.amazonaws.autoscaling#BlockDeviceMapping"
             }
         },
+        "com.amazonaws.autoscaling#BurstablePerformance": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "included",
+                        "name": "INCLUDED"
+                    },
+                    {
+                        "value": "excluded",
+                        "name": "EXCLUDED"
+                    },
+                    {
+                        "value": "required",
+                        "name": "REQUIRED"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.autoscaling#CancelInstanceRefresh": {
             "type": "operation",
             "input": {
@@ -1339,6 +1538,31 @@
                 "smithy.api#box": {}
             }
         },
+        "com.amazonaws.autoscaling#CpuManufacturer": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "intel",
+                        "name": "INTEL"
+                    },
+                    {
+                        "value": "amd",
+                        "name": "AMD"
+                    },
+                    {
+                        "value": "amazon-web-services",
+                        "name": "AMAZON_WEB_SERVICES"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.autoscaling#CpuManufacturers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.autoscaling#CpuManufacturer"
+            }
+        },
         "com.amazonaws.autoscaling#CreateAutoScalingGroup": {
             "type": "operation",
             "input": {
@@ -1387,7 +1611,7 @@
                 "MixedInstancesPolicy": {
                     "target": "com.amazonaws.autoscaling#MixedInstancesPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>An embedded object that specifies a mixed instances policy. The required properties\n            must be specified. If optional properties are unspecified, their default values are\n            used.</p>\n        <p>The policy includes properties that not only define the distribution of On-Demand\n            Instances and Spot Instances, the maximum price to pay for Spot Instances, and how the\n            Auto Scaling group allocates instance types to fulfill On-Demand and Spot capacities, but also\n            the properties that specify the instance configuration information—the launch template\n            and instance types. The policy can also include a weight for each instance type and\n            different launch templates for individual instance types. For more information, see\n                <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html\">Auto Scaling groups with multiple\n                instance types and purchase options</a> in the <i>Amazon EC2 Auto Scaling User\n                Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>An embedded object that specifies a mixed instances policy.</p>\n        \n        \n        \n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html\">Auto Scaling groups with multiple\n                instance types and purchase options</a> in the <i>Amazon EC2 Auto Scaling User\n                Guide</i>.</p>"
                     }
                 },
                 "InstanceId": {
@@ -1510,6 +1734,12 @@
                     "target": "com.amazonaws.autoscaling#Context",
                     "traits": {
                         "smithy.api#documentation": "<p>Reserved.</p>"
+                    }
+                },
+                "DesiredCapacityType": {
+                    "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unit of measurement for the value specified for desired capacity. Amazon EC2 Auto Scaling\n            supports <code>DesiredCapacityType</code> for attribute-based instance type selection\n            only. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html\">Creating\n                an Auto Scaling group using attribute-based instance type selection</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n        <p>By default, Amazon EC2 Auto Scaling specifies <code>units</code>, which translates into number of\n            instances.</p>\n        \n        <p>Valid values: <code>units</code> | <code>vcpu</code> | <code>memory-mib</code>\n         </p>"
                     }
                 }
             }
@@ -3347,6 +3577,28 @@
                 "smithy.api#box": {}
             }
         },
+        "com.amazonaws.autoscaling#ExcludedInstance": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 30
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\.\\*]+$"
+            }
+        },
+        "com.amazonaws.autoscaling#ExcludedInstanceTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.autoscaling#ExcludedInstance"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 400
+                }
+            }
+        },
         "com.amazonaws.autoscaling#ExecutePolicy": {
             "type": "operation",
             "input": {
@@ -3485,18 +3737,18 @@
                 "Name": {
                     "target": "com.amazonaws.autoscaling#XmlString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the filter.</p>\n        <p>The valid values for <code>Name</code> depend on the API operation that you are\n            including the filter in, <a>DescribeAutoScalingGroups</a> or <a>DescribeTags</a>.</p>\n        <p>\n            <b>DescribeAutoScalingGroups</b>\n         </p>\n        <p>Valid values for <code>Name</code> include the following: </p>\n        <ul>\n            <li>\n                <p>\n                  <code>tag-key</code> - Accepts tag keys. The results will only include\n                    information about the Auto Scaling groups associated with these tag keys. </p>\n            </li>\n            <li>\n                <p>\n                  <code>tag-value</code> - Accepts tag values. The results will only include\n                    information about the Auto Scaling groups associated with these tag values. </p>\n            </li>\n            <li>\n                <p>\n                  <code>tag:<key></code> - Accepts the key/value combination of the tag.\n                    Use the tag key in the filter name and the tag value as the filter value. The\n                    results will only include information about the Auto Scaling groups associated with the\n                    specified key/value combination. </p>\n            </li>\n         </ul>\n        <p>\n            <b>DescribeTags</b>\n        </p>\n        <p>Valid values for <code>Name</code> include the following: </p>\n        <ul>\n            <li>\n                <p>\n                  <code>auto-scaling-group</code> - Accepts the names of Auto Scaling groups. The\n                    results will only include information about the tags associated with these Auto Scaling\n                    groups. </p>\n            </li>\n            <li>\n                <p>\n                  <code>key</code> - Accepts tag keys. The results will only include information\n                    about the tags associated with these tag keys. </p>\n            </li>\n            <li>\n                <p>\n                    <code>value</code> - Accepts tag values. The results will only include\n                    information about the tags associated with these tag values. </p>\n            </li>\n            <li>\n                <p>\n                  <code>propagate-at-launch</code> - Accepts a boolean value, which specifies\n                    whether tags propagate to instances at launch. The results will only include\n                    information about the tags associated with the specified boolean value. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The name of the filter.</p>\n        <p>The valid values for <code>Name</code> depend on which API operation you're using with\n            the filter (<a>DescribeAutoScalingGroups</a> or <a>DescribeTags</a>).</p>\n        <p>\n            <b>DescribeAutoScalingGroups</b>\n         </p>\n        <p>Valid values for <code>Name</code> include the following: </p>\n        <ul>\n            <li>\n                <p>\n                  <code>tag-key</code> - Accepts tag keys. The results only include information\n                    about the Auto Scaling groups associated with these tag keys. </p>\n            </li>\n            <li>\n                <p>\n                  <code>tag-value</code> - Accepts tag values. The results only include\n                    information about the Auto Scaling groups associated with these tag values. </p>\n            </li>\n            <li>\n                <p>\n                  <code>tag:<key></code> - Accepts the key/value combination of the tag.\n                    Use the tag key in the filter name and the tag value as the filter value. The\n                    results only include information about the Auto Scaling groups associated with the\n                    specified key/value combination. </p>\n            </li>\n         </ul>\n        <p>\n            <b>DescribeTags</b>\n        </p>\n        <p>Valid values for <code>Name</code> include the following: </p>\n        <ul>\n            <li>\n                <p>\n                  <code>auto-scaling-group</code> - Accepts the names of Auto Scaling groups. The\n                    results only include information about the tags associated with these Auto Scaling\n                    groups. </p>\n            </li>\n            <li>\n                <p>\n                  <code>key</code> - Accepts tag keys. The results only include information\n                    about the tags associated with these tag keys. </p>\n            </li>\n            <li>\n                <p>\n                    <code>value</code> - Accepts tag values. The results only include information\n                    about the tags associated with these tag values. </p>\n            </li>\n            <li>\n                <p>\n                  <code>propagate-at-launch</code> - Accepts a Boolean value, which specifies\n                    whether tags propagate to instances at launch. The results only include\n                    information about the tags associated with the specified Boolean value. </p>\n            </li>\n         </ul>"
                     }
                 },
                 "Values": {
                     "target": "com.amazonaws.autoscaling#Values",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more filter values. Filter values are case-sensitive. </p>\n        <p>If you specify multiple values for a filter, the values are joined with an\n                <code>OR</code>, and the request returns all results that match any of the specified\n            values. For example, specify \"tag:environment\" for the filter name and\n            \"production,development\" for the filter values to find Auto Scaling groups with the tag\n            \"environment=production\" or \"environment=development\".</p>"
+                        "smithy.api#documentation": "<p>One or more filter values. Filter values are case-sensitive. </p>\n        <p>If you specify multiple values for a filter, the values are automatically logically\n            joined with an <code>OR</code>, and the request returns all results that match any of\n            the specified values. For example, specify \"tag:environment\" for the filter name and\n            \"production,development\" for the filter values to find Auto Scaling groups with the tag\n            \"environment=production\" or \"environment=development\".</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a filter that is used to return a more specific list of results from a\n            describe operation.</p>\n        <p>If you specify multiple filters, the filters are joined with an <code>AND</code>, and\n            the request returns only results that match all of the specified filters. </p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-tagging.html\">Tagging Auto Scaling groups and\n                instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Describes a filter that is used to return a more specific list of results from a\n            describe operation.</p>\n        <p>If you specify multiple filters, the filters are automatically logically joined with\n            an <code>AND</code>, and the request returns only the results that match all of the\n            specified filters. </p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-tagging.html\">Tagging Auto Scaling groups and\n                instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
             }
         },
         "com.amazonaws.autoscaling#Filters": {
@@ -3682,6 +3934,27 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes an EC2 instance.</p>"
+            }
+        },
+        "com.amazonaws.autoscaling#InstanceGeneration": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "current",
+                        "name": "CURRENT"
+                    },
+                    {
+                        "value": "previous",
+                        "name": "PREVIOUS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.autoscaling#InstanceGenerations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.autoscaling#InstanceGeneration"
             }
         },
         "com.amazonaws.autoscaling#InstanceIds": {
@@ -3967,6 +4240,142 @@
                 "target": "com.amazonaws.autoscaling#InstanceRefresh"
             }
         },
+        "com.amazonaws.autoscaling#InstanceRequirements": {
+            "type": "structure",
+            "members": {
+                "VCpuCount": {
+                    "target": "com.amazonaws.autoscaling#VCpuCountRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum and maximum number of vCPUs for an instance type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MemoryMiB": {
+                    "target": "com.amazonaws.autoscaling#MemoryMiBRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum and maximum instance memory size for an instance type, in MiB.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CpuManufacturers": {
+                    "target": "com.amazonaws.autoscaling#CpuManufacturers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists which specific CPU manufacturers to include.</p>\n        <ul>\n            <li>\n                <p>For instance types with Intel CPUs, specify <code>intel</code>.</p>\n            </li>\n            <li>\n                <p>For instance types with AMD CPUs, specify <code>amd</code>.</p>\n            </li>\n            <li>\n                <p>For instance types with Amazon Web Services CPUs, specify\n                    <code>amazon-web-services</code>.</p>\n            </li>\n         </ul>\n        <note>\n            <p>Don't confuse the CPU hardware manufacturer with the CPU hardware architecture.\n                Instances will be launched with a compatible CPU architecture based on the Amazon\n                Machine Image (AMI) that you specify in your launch template. </p>\n        </note>\n        <p>Default: Any manufacturer</p>"
+                    }
+                },
+                "MemoryGiBPerVCpu": {
+                    "target": "com.amazonaws.autoscaling#MemoryGiBPerVCpuRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum and maximum amount of memory per vCPU for an instance type, in GiB.</p>\n        <p>Default: No minimum or maximum</p>"
+                    }
+                },
+                "ExcludedInstanceTypes": {
+                    "target": "com.amazonaws.autoscaling#ExcludedInstanceTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists which instance types to exclude. You can use strings with one or more wild\n            cards, represented by an asterisk (<code>*</code>). The following are examples:\n                <code>c5*</code>, <code>m5a.*</code>, <code>r*</code>, <code>*3*</code>. </p>\n        <p>For example, if you specify <code>c5*</code>, you are excluding the entire C5 instance\n            family, which includes all C5a and C5n instance types. If you specify\n            <code>m5a.*</code>, you are excluding all the M5a instance types, but not the M5n\n            instance types.</p>\n        <p>Default: No excluded instance types</p>"
+                    }
+                },
+                "InstanceGenerations": {
+                    "target": "com.amazonaws.autoscaling#InstanceGenerations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether current or previous generation instance types are included.</p>\n        <ul>\n            <li>\n                <p>For current generation instance types, specify <code>current</code>. The\n                    current generation includes EC2 instance types currently recommended for use.\n                    This typically includes the latest two to three generations in each instance\n                    family. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance types</a> in\n                    the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>\n            </li>\n            <li>\n                <p>For previous generation instance types, specify <code>previous</code>.</p>\n            </li>\n         </ul>\n        <p>Default: Any current or previous generation</p>"
+                    }
+                },
+                "SpotMaxPricePercentageOverLowestPrice": {
+                    "target": "com.amazonaws.autoscaling#NullablePositiveInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The price protection threshold for Spot Instances. This is the maximum you’ll pay for\n            a Spot Instance, expressed as a percentage higher than the cheapest M, C, or R instance\n            type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your\n            attributes, we will exclude instance types whose price is higher than your threshold.\n            The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off\n            price protection, specify a high value, such as <code>999999</code>. </p>\n        <p>Default: <code>100</code>\n         </p>"
+                    }
+                },
+                "OnDemandMaxPricePercentageOverLowestPrice": {
+                    "target": "com.amazonaws.autoscaling#NullablePositiveInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The price protection threshold for On-Demand Instances. This is the maximum you’ll pay\n            for an On-Demand Instance, expressed as a percentage higher than the cheapest M, C, or R\n            instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with\n            your attributes, we will exclude instance types whose price is higher than your\n            threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage.\n            To turn off price protection, specify a high value, such as <code>999999</code>. </p>\n        <p>Default: <code>20</code>\n         </p>"
+                    }
+                },
+                "BareMetal": {
+                    "target": "com.amazonaws.autoscaling#BareMetal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether bare metal instance types are included, excluded, or\n            required.</p>\n        <p>Default: <code>excluded</code>\n         </p>"
+                    }
+                },
+                "BurstablePerformance": {
+                    "target": "com.amazonaws.autoscaling#BurstablePerformance",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether burstable performance instance types are included, excluded, or\n            required. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html\">Burstable\n                performance instances</a> in the <i>Amazon EC2 User Guide for Linux\n                Instances</i>.</p>\n        <p>Default: <code>excluded</code>\n         </p>"
+                    }
+                },
+                "RequireHibernateSupport": {
+                    "target": "com.amazonaws.autoscaling#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether instance types must provide On-Demand Instance hibernation\n            support.</p>\n        <p>Default: <code>false</code>\n         </p>"
+                    }
+                },
+                "NetworkInterfaceCount": {
+                    "target": "com.amazonaws.autoscaling#NetworkInterfaceCountRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum and maximum number of network interfaces for an instance type.</p>\n        <p>Default: No minimum or maximum</p>"
+                    }
+                },
+                "LocalStorage": {
+                    "target": "com.amazonaws.autoscaling#LocalStorage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether instance types with instance store volumes are included, excluded,\n            or required. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html\">Amazon EC2 instance store</a> in\n            the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>\n        <p>Default: <code>included</code>\n         </p>"
+                    }
+                },
+                "LocalStorageTypes": {
+                    "target": "com.amazonaws.autoscaling#LocalStorageTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the type of local storage that is required.</p>\n        <ul>\n            <li>\n                <p>For instance types with hard disk drive (HDD) storage, specify\n                        <code>hdd</code>.</p>\n            </li>\n            <li>\n                <p>For instance types with solid state drive (SSD) storage, specify\n                        <code>sdd</code>.</p>\n            </li>\n         </ul>\n        <p>Default: Any local storage type</p>"
+                    }
+                },
+                "TotalLocalStorageGB": {
+                    "target": "com.amazonaws.autoscaling#TotalLocalStorageGBRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum and maximum total local storage size for an instance type, in GB.</p>\n        <p>Default: No minimum or maximum</p>"
+                    }
+                },
+                "BaselineEbsBandwidthMbps": {
+                    "target": "com.amazonaws.autoscaling#BaselineEbsBandwidthMbpsRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum and maximum baseline bandwidth performance for an instance type, in Mbps.\n            For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html\">Amazon EBS–optimized instances</a>\n            in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>\n        <p>Default: No minimum or maximum</p>"
+                    }
+                },
+                "AcceleratorTypes": {
+                    "target": "com.amazonaws.autoscaling#AcceleratorTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists the accelerator types that must be on an instance type.</p>\n        <ul>\n            <li>\n                <p>For instance types with GPU accelerators, specify <code>gpu</code>.</p>\n            </li>\n            <li>\n                <p>For instance types with FPGA accelerators, specify <code>fpga</code>.</p>\n            </li>\n            <li>\n                <p>For instance types with inference accelerators, specify\n                    <code>inference</code>.</p>\n            </li>\n         </ul>\n        <p>Default: Any accelerator type</p>"
+                    }
+                },
+                "AcceleratorCount": {
+                    "target": "com.amazonaws.autoscaling#AcceleratorCountRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum and maximum number of accelerators (GPUs, FPGAs, or Amazon Web Services Inferentia\n            chips) for an instance type.</p>\n        <p>To exclude accelerator-enabled instance types, set <code>Max</code> to\n            <code>0</code>.</p>\n        <p>Default: No minimum or maximum</p>"
+                    }
+                },
+                "AcceleratorManufacturers": {
+                    "target": "com.amazonaws.autoscaling#AcceleratorManufacturers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether instance types must have accelerators by specific\n            manufacturers.</p>\n        <ul>\n            <li>\n                <p>For instance types with NVIDIA devices, specify <code>nvidia</code>.</p>\n            </li>\n            <li>\n                <p>For instance types with AMD devices, specify <code>amd</code>.</p>\n            </li>\n            <li>\n                <p>For instance types with Amazon Web Services devices, specify\n                        <code>amazon-web-services</code>.</p>\n            </li>\n            <li>\n                <p>For instance types with Xilinx devices, specify <code>xilinx</code>.</p>\n            </li>\n         </ul>\n        <p>Default: Any manufacturer</p>"
+                    }
+                },
+                "AcceleratorNames": {
+                    "target": "com.amazonaws.autoscaling#AcceleratorNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists the accelerators that must be on an instance type.</p>\n        <ul>\n            <li>\n                <p>For instance types with NVIDIA A100 GPUs, specify <code>a100</code>.</p>\n            </li>\n            <li>\n                <p>For instance types with NVIDIA V100 GPUs, specify <code>v100</code>.</p>\n            </li>\n            <li>\n                <p>For instance types with NVIDIA K80 GPUs, specify <code>k80</code>.</p>\n            </li>\n            <li>\n                <p>For instance types with NVIDIA T4 GPUs, specify <code>t4</code>.</p>\n            </li>\n            <li>\n                <p>For instance types with NVIDIA M60 GPUs, specify <code>m60</code>.</p>\n            </li>\n            <li>\n                <p>For instance types with AMD Radeon Pro V520 GPUs, specify\n                        <code>radeon-pro-v520</code>.</p>\n            </li>\n            <li>\n                <p>For instance types with Xilinx VU9P FPGAs, specify <code>vu9p</code>.</p>\n            </li>\n         </ul>\n        <p>Default: Any accelerator</p>"
+                    }
+                },
+                "AcceleratorTotalMemoryMiB": {
+                    "target": "com.amazonaws.autoscaling#AcceleratorTotalMemoryMiBRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum and maximum total memory size for the accelerators on an instance type, in\n            MiB.</p>\n        <p>Default: No minimum or maximum</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>When you specify multiple parameters, you get instance types that satisfy all of the\n            specified parameters. If you specify multiple values for a parameter, you get instance\n            types that satisfy any of the specified values.</p>\n        \n        \n        <p>Represents requirements for the types of instances that can be launched. You\n            must specify <code>VCpuCount</code> and <code>MemoryMiB</code>, but all other parameters\n            are optional. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html\">Creating\n                an Auto Scaling group using attribute-based instance type selection</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+            }
+        },
         "com.amazonaws.autoscaling#Instances": {
             "type": "list",
             "member": {
@@ -3979,42 +4388,42 @@
                 "OnDemandAllocationStrategy": {
                     "target": "com.amazonaws.autoscaling#XmlString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates how to allocate instance types to fulfill On-Demand capacity. The only valid\n            value is <code>prioritized</code>, which is also the default value. This strategy uses\n            the order of instance types in the <code>LaunchTemplateOverrides</code> to define the\n            launch priority of each instance type. The first instance type in the array is\n            prioritized higher than the last. If all your On-Demand capacity cannot be fulfilled\n            using your highest priority instance, then the Auto Scaling groups launches the remaining\n            capacity using the second priority instance type, and so on.</p>"
+                        "smithy.api#documentation": "<p>The order of the launch template overrides to use in fulfilling On-Demand capacity. </p>\n        <p>If you specify <code>lowest-price</code>, Amazon EC2 Auto Scaling uses price to determine the order,\n            launching the lowest price first. </p>\n        <p>If you specify <code>prioritized</code>, Amazon EC2 Auto Scaling uses the priority that you assigned\n            to each launch template override, launching the highest priority first. If all your\n            On-Demand capacity cannot be fulfilled using your highest priority instance, then\n            Amazon EC2 Auto Scaling launches the remaining capacity using the second priority instance type, and so\n            on.</p>\n        <p>Default: <code>lowest-price</code> for Auto Scaling groups that specify <a>InstanceRequirements</a> in the overrides and <code>prioritized</code> for\n            Auto Scaling groups that don't.</p>"
                     }
                 },
                 "OnDemandBaseCapacity": {
                     "target": "com.amazonaws.autoscaling#OnDemandBaseCapacity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The minimum amount of the Auto Scaling group's capacity that must be fulfilled by On-Demand\n            Instances. This base portion is provisioned first as your group scales. Defaults to 0 if\n            not specified. If you specify weights for the instance types in the overrides, set the\n            value of <code>OnDemandBaseCapacity</code> in terms of the number of capacity units, and\n            not the number of instances.</p>"
+                        "smithy.api#documentation": "<p>The minimum amount of the Auto Scaling group's capacity that must be fulfilled by On-Demand\n            Instances. This base portion is launched first as your group scales.</p>\n        <p>If you specify weights for the instance types in the overrides, the base capacity is\n            measured in the same unit of measurement as the instance types. If you specify <a>InstanceRequirements</a> in the overrides, the base capacity is measured in\n            the same unit of measurement as your group's desired capacity.</p>\n        <p>Default: <code>0</code>\n         </p>"
                     }
                 },
                 "OnDemandPercentageAboveBaseCapacity": {
                     "target": "com.amazonaws.autoscaling#OnDemandPercentageAboveBaseCapacity",
                     "traits": {
-                        "smithy.api#documentation": "<p>Controls the percentages of On-Demand Instances and Spot Instances for your additional\n            capacity beyond <code>OnDemandBaseCapacity</code>. Expressed as a number (for example,\n            20 specifies 20% On-Demand Instances, 80% Spot Instances). Defaults to 100 if not\n            specified. If set to 100, only On-Demand Instances are provisioned.</p>"
+                        "smithy.api#documentation": "<p>Controls the percentages of On-Demand Instances and Spot Instances for your additional\n            capacity beyond <code>OnDemandBaseCapacity</code>. Expressed as a number (for example,\n            20 specifies 20% On-Demand Instances, 80% Spot Instances). If set to 100, only On-Demand\n            Instances are used.</p>\n        <p>Default: <code>100</code>\n         </p>"
                     }
                 },
                 "SpotAllocationStrategy": {
                     "target": "com.amazonaws.autoscaling#XmlString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates how to allocate instances across Spot Instance pools. </p>\n        <p>If the allocation strategy is <code>lowest-price</code>, the Auto Scaling group launches\n            instances using the Spot pools with the lowest price, and evenly allocates your\n            instances across the number of Spot pools that you specify. Defaults to\n                <code>lowest-price</code> if not specified.</p>\n        <p>If the allocation strategy is <code>capacity-optimized</code> (recommended), the Auto Scaling\n            group launches instances using Spot pools that are optimally chosen based on the\n            available Spot capacity. Alternatively, you can use\n                <code>capacity-optimized-prioritized</code> and set the order of instance types in\n            the list of launch template overrides from highest to lowest priority (from first to\n            last in the list). Amazon EC2 Auto Scaling honors the instance type priorities on a best-effort basis\n            but optimizes for capacity first. </p>"
+                        "smithy.api#documentation": "<p>Indicates how to allocate instances across Spot Instance pools. </p>\n        <p>If the allocation strategy is <code>lowest-price</code>, the Auto Scaling group launches\n            instances using the Spot pools with the lowest price, and evenly allocates your\n            instances across the number of Spot pools that you specify. </p>\n        <p>If the allocation strategy is <code>capacity-optimized</code> (recommended), the Auto Scaling\n            group launches instances using Spot pools that are optimally chosen based on the\n            available Spot capacity. Alternatively, you can use\n                <code>capacity-optimized-prioritized</code> and set the order of instance types in\n            the list of launch template overrides from highest to lowest priority (from first to\n            last in the list). Amazon EC2 Auto Scaling honors the instance type priorities on a best-effort basis\n            but optimizes for capacity first. </p>\n        <p>Default: <code>lowest-price</code>\n         </p>"
                     }
                 },
                 "SpotInstancePools": {
                     "target": "com.amazonaws.autoscaling#SpotInstancePools",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of Spot Instance pools across which to allocate your Spot Instances. The\n            Spot pools are determined from the different instance types in the overrides. Valid only\n            when the Spot allocation strategy is <code>lowest-price</code>. Value must be in the\n            range of 1 to 20. Defaults to 2 if not specified.</p>"
+                        "smithy.api#documentation": "<p>The number of Spot Instance pools across which to allocate your Spot Instances. The\n            Spot pools are determined from the different instance types in the overrides. Valid only\n            when the Spot allocation strategy is <code>lowest-price</code>. Value must be in the\n            range of 1–20.</p>\n        <p>Default: <code>2</code>\n         </p>"
                     }
                 },
                 "SpotMaxPrice": {
                     "target": "com.amazonaws.autoscaling#MixedInstanceSpotPrice",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum price per unit hour that you are willing to pay for a Spot Instance. If\n            you leave the value at its default (empty), Amazon EC2 Auto Scaling uses the On-Demand price as the\n            maximum Spot price. To remove a value that you previously set, include the property but\n            specify an empty string (\"\") for the value.</p>"
+                        "smithy.api#documentation": "<p>The maximum price per unit hour that you are willing to pay for a Spot Instance. If\n            you keep the value at its default (unspecified), Amazon EC2 Auto Scaling uses the On-Demand price as\n            the maximum Spot price. To remove a value that you previously set, include the property\n            but specify an empty string (\"\") for the value.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes an instances distribution for an Auto Scaling group with a <a>MixedInstancesPolicy</a>.</p>\n        <p>The instances distribution specifies the distribution of On-Demand Instances and Spot\n            Instances, the maximum price to pay for Spot Instances, and how the Auto Scaling group allocates\n            instance types to fulfill On-Demand and Spot capacities.</p>\n        <p>When you modify <code>SpotAllocationStrategy</code>, <code>SpotInstancePools</code>,\n            or <code>SpotMaxPrice</code> in the <a>UpdateAutoScalingGroup</a> API call,\n            this update action does not deploy any changes across the running Amazon EC2 instances\n            in the group. Your existing Spot Instances continue to run as long as the maximum price\n            for those instances is higher than the current Spot price. When scale out occurs,\n            Amazon EC2 Auto Scaling launches instances based on the new settings. When scale in occurs, Amazon EC2 Auto Scaling\n            terminates instances according to the group's termination policies.</p>"
+                "smithy.api#documentation": "<p>Describes an instances distribution for an Auto Scaling group.</p>"
             }
         },
         "com.amazonaws.autoscaling#InstancesToUpdate": {
@@ -4265,12 +4674,12 @@
                 "Overrides": {
                     "target": "com.amazonaws.autoscaling#Overrides",
                     "traits": {
-                        "smithy.api#documentation": "<p>Any properties that you specify override the same properties in the launch template.\n            If not provided, Amazon EC2 Auto Scaling uses the instance type specified in the launch template when\n            it launches an instance. </p>"
+                        "smithy.api#documentation": "<p>Any properties that you specify override the same properties in the launch template.\n            If not provided, Amazon EC2 Auto Scaling uses the instance type or instance type requirements specified\n            in the launch template when it launches an instance.</p>\n        <p>The overrides can include either one or more instance types or a set of instance\n            requirements, but not both.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a launch template and overrides. </p>\n        <p>You specify these properties as part of a mixed instances policy. </p>\n        <p>When you update the launch template or overrides in the <a>UpdateAutoScalingGroup</a> API call, existing Amazon EC2 instances continue to\n            run. When scale out occurs, Amazon EC2 Auto Scaling launches instances to match the new settings. When\n            scale in occurs, Amazon EC2 Auto Scaling terminates instances according to the group's termination\n            policies.</p>"
+                "smithy.api#documentation": "<p>Describes a launch template and overrides. You specify these properties as part of a\n            mixed instances policy. </p>"
             }
         },
         "com.amazonaws.autoscaling#LaunchTemplateName": {
@@ -4295,18 +4704,24 @@
                 "WeightedCapacity": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen32",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of capacity units provided by the specified instance type in terms of\n            virtual CPUs, memory, storage, throughput, or other relative performance characteristic.\n            When a Spot or On-Demand Instance is provisioned, the capacity units count toward the\n            desired capacity. Amazon EC2 Auto Scaling provisions instances until the desired capacity is totally\n            fulfilled, even if this results in an overage. For example, if there are 2 units\n            remaining to fulfill capacity, and Amazon EC2 Auto Scaling can only provision an instance with a\n                <code>WeightedCapacity</code> of 5 units, the instance is provisioned, and the\n            desired capacity is exceeded by 3 units. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-weighting.html\">Instance weighting for Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.\n            Value must be in the range of 1 to 999.</p>"
+                        "smithy.api#documentation": "<p>The number of capacity units provided by the instance type specified in\n                <code>InstanceType</code> in terms of virtual CPUs, memory, storage, throughput, or\n            other relative performance characteristic. When a Spot or On-Demand Instance is\n            launched, the capacity units count toward the desired capacity. Amazon EC2 Auto Scaling launches\n            instances until the desired capacity is totally fulfilled, even if this results in an\n            overage. For example, if there are two units remaining to fulfill capacity, and Amazon EC2 Auto Scaling\n            can only launch an instance with a <code>WeightedCapacity</code> of five units, the\n            instance is launched, and the desired capacity is exceeded by three units. For more\n            information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-weighting.html\">Instance weighting for\n                Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. Value must be in the\n            range of 1–999.</p>"
                     }
                 },
                 "LaunchTemplateSpecification": {
                     "target": "com.amazonaws.autoscaling#LaunchTemplateSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides the launch template to be used when launching the instance type. For example,\n            some instance types might require a launch template with a different AMI. If not\n            provided, Amazon EC2 Auto Scaling uses the launch template that's defined for your mixed instances\n            policy. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-launch-template-overrides.html\">Specifying a\n                different launch template for an instance type</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>. </p>"
+                        "smithy.api#documentation": "<p>Provides the launch template to be used when launching the instance type specified in\n                <code>InstanceType</code>. For example, some instance types might require a launch\n            template with a different AMI. If not provided, Amazon EC2 Auto Scaling uses the launch template that's\n            defined for your mixed instances policy. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-launch-template-overrides.html\">Specifying a\n                different launch template for an instance type</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>. </p>"
+                    }
+                },
+                "InstanceRequirements": {
+                    "target": "com.amazonaws.autoscaling#InstanceRequirements",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance requirements. When you specify instance requirements, Amazon EC2 Auto Scaling finds\n            instance types that satisfy your requirements, and then uses your On-Demand and Spot\n            allocation strategies to launch instances from these instance types, in the same way as\n            when you specify a list of specific instance types. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes an override for a launch template. The maximum number of instance types that\n            can be associated with an Auto Scaling group is 40. The maximum number of distinct launch\n            templates you can define for an Auto Scaling group is 20. For more information about configuring\n            overrides, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-override-options.html\">Configuring\n                overrides</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. </p>"
+                "smithy.api#documentation": "<p>Describes an override for a launch template. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-override-options.html\">Configuring overrides</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. </p>"
             }
         },
         "com.amazonaws.autoscaling#LaunchTemplateSpecification": {
@@ -4696,6 +5111,46 @@
                 "target": "com.amazonaws.autoscaling#LoadForecast"
             }
         },
+        "com.amazonaws.autoscaling#LocalStorage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "included",
+                        "name": "INCLUDED"
+                    },
+                    {
+                        "value": "excluded",
+                        "name": "EXCLUDED"
+                    },
+                    {
+                        "value": "required",
+                        "name": "REQUIRED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.autoscaling#LocalStorageType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "hdd",
+                        "name": "HDD"
+                    },
+                    {
+                        "value": "ssd",
+                        "name": "SSD"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.autoscaling#LocalStorageTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.autoscaling#LocalStorageType"
+            }
+        },
         "com.amazonaws.autoscaling#MaxGroupPreparedCapacity": {
             "type": "integer",
             "traits": {
@@ -4727,6 +5182,47 @@
             "type": "integer",
             "traits": {
                 "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.autoscaling#MemoryGiBPerVCpuRequest": {
+            "type": "structure",
+            "members": {
+                "Min": {
+                    "target": "com.amazonaws.autoscaling#NullablePositiveDouble",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The memory minimum in GiB.</p>"
+                    }
+                },
+                "Max": {
+                    "target": "com.amazonaws.autoscaling#NullablePositiveDouble",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The memory maximum in GiB.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the minimum and maximum for the <code>MemoryGiBPerVCpu</code> object when\n            you specify <a>InstanceRequirements</a> for an Auto Scaling group.</p>"
+            }
+        },
+        "com.amazonaws.autoscaling#MemoryMiBRequest": {
+            "type": "structure",
+            "members": {
+                "Min": {
+                    "target": "com.amazonaws.autoscaling#NullablePositiveInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The memory minimum in MiB.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Max": {
+                    "target": "com.amazonaws.autoscaling#NullablePositiveInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The memory maximum in MiB.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the minimum and maximum for the <code>MemoryMiB</code> object when you\n            specify <a>InstanceRequirements</a> for an Auto Scaling group.</p>"
             }
         },
         "com.amazonaws.autoscaling#MetricCollectionType": {
@@ -4902,24 +5398,44 @@
                 "LaunchTemplate": {
                     "target": "com.amazonaws.autoscaling#LaunchTemplate",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the launch template to use and the instance types (overrides) that are used\n            to provision EC2 instances to fulfill On-Demand and Spot capacities. Required when\n            creating a mixed instances policy.</p>"
+                        "smithy.api#documentation": "<p>Specifies the launch template to use and the instance types (overrides) that are used\n            to launch EC2 instances to fulfill On-Demand and Spot capacities. Required when creating\n            a mixed instances policy.</p>"
                     }
                 },
                 "InstancesDistribution": {
                     "target": "com.amazonaws.autoscaling#InstancesDistribution",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the instances distribution. If not provided, the value for each property in\n                <code>InstancesDistribution</code> uses a default value.</p>"
+                        "smithy.api#documentation": "<p>Specifies the instances distribution.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a mixed instances policy. A mixed instances policy contains the instance\n            types Amazon EC2 Auto Scaling can launch, and other information Amazon EC2 Auto Scaling can use to launch instances to\n            help you optimize your costs. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html\">Auto Scaling groups with multiple\n                instance types and purchase options</a> in the <i>Amazon EC2 Auto Scaling User\n                Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Describes a mixed instances policy. A mixed instances policy contains the instance\n            types that Amazon EC2 Auto Scaling can launch and other information that Amazon EC2 Auto Scaling can use to launch\n            instances and help optimize your costs. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html\">Auto Scaling\n                groups with multiple instance types and purchase options</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
             }
         },
         "com.amazonaws.autoscaling#MonitoringEnabled": {
             "type": "boolean",
             "traits": {
                 "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.autoscaling#NetworkInterfaceCountRequest": {
+            "type": "structure",
+            "members": {
+                "Min": {
+                    "target": "com.amazonaws.autoscaling#NullablePositiveInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum number of network interfaces.</p>"
+                    }
+                },
+                "Max": {
+                    "target": "com.amazonaws.autoscaling#NullablePositiveInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of network interfaces.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the minimum and maximum for the <code>NetworkInterfaceCount</code> object\n            when you specify <a>InstanceRequirements</a> for an Auto Scaling group.</p>"
             }
         },
         "com.amazonaws.autoscaling#NoDevice": {
@@ -4978,6 +5494,30 @@
                     "max": 255
                 },
                 "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
+            }
+        },
+        "com.amazonaws.autoscaling#NullableBoolean": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.autoscaling#NullablePositiveDouble": {
+            "type": "double",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.autoscaling#NullablePositiveInteger": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0
+                }
             }
         },
         "com.amazonaws.autoscaling#NumberOfAutoScalingGroups": {
@@ -6882,6 +7422,26 @@
         "com.amazonaws.autoscaling#TimestampType": {
             "type": "timestamp"
         },
+        "com.amazonaws.autoscaling#TotalLocalStorageGBRequest": {
+            "type": "structure",
+            "members": {
+                "Min": {
+                    "target": "com.amazonaws.autoscaling#NullablePositiveDouble",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage minimum in GB.</p>"
+                    }
+                },
+                "Max": {
+                    "target": "com.amazonaws.autoscaling#NullablePositiveDouble",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage maximum in GB.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the minimum and maximum for the <code>TotalLocalStorageGB</code> object when\n            you specify <a>InstanceRequirements</a> for an Auto Scaling group.</p>"
+            }
+        },
         "com.amazonaws.autoscaling#UpdateAutoScalingGroup": {
             "type": "operation",
             "input": {
@@ -6927,7 +7487,7 @@
                 "MixedInstancesPolicy": {
                     "target": "com.amazonaws.autoscaling#MixedInstancesPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>An embedded object that specifies a mixed instances policy. When you make changes to\n            an existing policy, all optional properties are left unchanged if not specified. For\n            more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html\">Auto Scaling groups with multiple\n                instance types and purchase options</a> in the <i>Amazon EC2 Auto Scaling User\n                Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>An embedded object that specifies a mixed instances policy. For more information, see\n                <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html\">Auto Scaling groups with multiple\n                instance types and purchase options</a> in the <i>Amazon EC2 Auto Scaling User\n                Guide</i>.</p>"
                     }
                 },
                 "MinSize": {
@@ -7019,7 +7579,34 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Reserved.</p>"
                     }
+                },
+                "DesiredCapacityType": {
+                    "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unit of measurement for the value specified for desired capacity. Amazon EC2 Auto Scaling\n            supports <code>DesiredCapacityType</code> for attribute-based instance type selection\n            only. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html\">Creating\n                an Auto Scaling group using attribute-based instance type selection</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n        <p>By default, Amazon EC2 Auto Scaling specifies <code>units</code>, which translates into number of\n            instances.</p>\n        <p>Valid values: <code>units</code> | <code>vcpu</code> | <code>memory-mib</code>\n         </p>"
+                    }
                 }
+            }
+        },
+        "com.amazonaws.autoscaling#VCpuCountRequest": {
+            "type": "structure",
+            "members": {
+                "Min": {
+                    "target": "com.amazonaws.autoscaling#NullablePositiveInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum number of vCPUs.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Max": {
+                    "target": "com.amazonaws.autoscaling#NullablePositiveInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of vCPUs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the minimum and maximum for the <code>VCpuCount</code> object when you\n            specify <a>InstanceRequirements</a> for an Auto Scaling group.</p>"
             }
         },
         "com.amazonaws.autoscaling#Values": {

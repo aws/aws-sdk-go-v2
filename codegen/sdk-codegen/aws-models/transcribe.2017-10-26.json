@@ -188,7 +188,7 @@
                 "DataAccessRoleArn": {
                     "target": "com.amazonaws.transcribe#DataAccessRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) that you use to get access to the analytics job.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) that you use to access the analytics job. ARNs have the format\n            <code>arn:partition:service:region:account-id:resource-type/resource-id</code>.</p>"
                     }
                 },
                 "IdentifiedLanguageScore": {
@@ -258,6 +258,12 @@
                     "target": "com.amazonaws.transcribe#LanguageOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>When you run a call analytics job, you can specify the language spoken in the audio, or you can have Amazon Transcribe identify\n            the language for you.</p>\n        <p>To specify a language, specify an array with one language code. If you don't know the language, you can leave this \n            field blank and Amazon Transcribe will use machine learning to identify the language for you. To improve the ability of Amazon Transcribe to \n            correctly identify the language, you can provide an array of the languages that can be present in the audio. Refer to \n            <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html\">Supported languages and language-specific\n                features</a> for additional information.</p>"
+                    }
+                },
+                "LanguageIdSettings": {
+                    "target": "com.amazonaws.transcribe#LanguageIdSettingsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language identification settings associated with your call analytics job. These settings include\n            <code>VocabularyName</code>, <code>VocabularyFilterName</code>, and \n            <code>LanguageModelName</code>.</p>"
                     }
                 }
             },
@@ -1820,7 +1826,7 @@
                 "DataAccessRoleArn": {
                     "target": "com.amazonaws.transcribe#DataAccessRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the permissions you've given Amazon Transcribe to access your \n            Amazon S3 buckets containing your media files or text data.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the permissions you've given Amazon Transcribe to access your \n            Amazon S3 buckets containing your media files or text data. ARNs have the format\n            <code>arn:partition:service:region:account-id:resource-type/resource-id</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1892,7 +1898,7 @@
                 "DataAccessRoleArn": {
                     "target": "com.amazonaws.transcribe#DataAccessRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a role that has access to the S3 bucket that contains the input files. Amazon Transcribe\n            assumes this role to read queued media files. If you have specified an output S3 bucket for the transcription results,\n            this role should have access to the output bucket as well.</p>\n        <p>If you specify the <code>AllowDeferredExecution</code> field, you must specify the\n            <code>DataAccessRoleArn</code> field.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN), in the form\n            <code>arn:partition:service:region:account-id:resource-type/resource-id</code>, of a role \n            that has access to the S3 bucket that contains the input files. Amazon Transcribe assumes this role to read queued\n            media files. If you have specified an output S3 bucket for the transcription results, this role should \n            have access to the output bucket as well.</p>      \n        <p>If you specify the <code>AllowDeferredExecution</code> field, you must specify the\n            <code>DataAccessRoleArn</code> field.</p>"
                     }
                 }
             },
@@ -2090,6 +2096,47 @@
                         "name": "EN_NZ"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.transcribe#LanguageIdSettings": {
+            "type": "structure",
+            "members": {
+                "VocabularyName": {
+                    "target": "com.amazonaws.transcribe#VocabularyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vocabulary you want to use when processing your transcription job. The \n            vocabulary you specify must have the same language code as the transcription job; if the languages don't \n            match, the vocabulary won't be applied.</p>"
+                    }
+                },
+                "VocabularyFilterName": {
+                    "target": "com.amazonaws.transcribe#VocabularyFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vocabulary filter you want to use when transcribing your audio. The filter you specify \n            must have the same language code as the transcription job; if the languages don't match, the vocabulary \n            filter won't be applied.</p>"
+                    }
+                },
+                "LanguageModelName": {
+                    "target": "com.amazonaws.transcribe#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the language model you want to use when transcribing your audio. The model you specify\n            must have the same language code as the transcription job; if the languages don't match, the language model \n            won't be applied.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Language-specific settings that can be specified when language identification is enabled.</p>"
+            }
+        },
+        "com.amazonaws.transcribe#LanguageIdSettingsMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.transcribe#LanguageCode"
+            },
+            "value": {
+                "target": "com.amazonaws.transcribe#LanguageIdSettings"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
             }
         },
         "com.amazonaws.transcribe#LanguageModel": {
@@ -2634,7 +2681,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.transcribe#TranscribeArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Lists all tags associated with a given Amazon Resource Name (ARN).</p>",
+                        "smithy.api#documentation": "<p>Lists all tags associated with a given Amazon Resource Name (ARN). ARNs have the format\n            <code>arn:partition:service:region:account-id:resource-type/resource-id</code> (for example,\n            <code>arn:aws:transcribe:us-east-1:account-id:transcription-job/your-job-name</code>). Valid \n            values for <code>resource-type</code> are: <code>transcription-job</code>,\n            <code>medical-transcription-job</code>, <code>vocabulary</code>, \n            <code>medical-vocabulary</code>, <code>vocabulary-filter</code>, and \n            <code>language-model</code>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2647,7 +2694,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.transcribe#TranscribeArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Lists all tags associated with the given Amazon Resource Name (ARN).</p>"
+                        "smithy.api#documentation": "<p>Lists all tags associated with the given Amazon Resource Name (ARN). </p>"
                     }
                 },
                 "Tags": {
@@ -3864,7 +3911,7 @@
                 "OutputEncryptionKMSKeyId": {
                     "target": "com.amazonaws.transcribe#KMSKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Key Management Service (KMS) key used to \n            encrypt the output of the transcription job. The user calling the <a>StartMedicalTranscriptionJob</a> \n            operation must have permission to use the specified KMS key.</p>\n        <p>You use either of the following to identify a KMS key in the current account:</p>\n        <ul>\n            <li>\n                <p>KMS Key ID: \"1234abcd-12ab-34cd-56ef-1234567890ab\"</p>\n            </li>\n            <li>\n                <p>KMS Key Alias: \"alias/ExampleAlias\"</p>\n            </li>\n         </ul>\n        <p>You can use either of the following to identify a KMS key in the current account or another account:</p>\n        <ul>\n            <li>\n                <p>Amazon Resource Name (ARN) of a KMS key in the current account or another\n                    account: \"arn:aws:kms:region:account ID:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</p>\n            </li>\n            <li>\n                <p>ARN of a KMS Key Alias: \"arn:aws:kms:region:account ID:alias/ExampleAlias\"</p>\n            </li>\n         </ul>\n        <p>If you don't specify an encryption key, the output of the medical transcription job is encrypted with the default Amazon S3 \n            key (SSE-S3).</p>\n        <p>If you specify a KMS key to encrypt your output, you must also specify an output location in the \n            <code>OutputBucketName</code> parameter.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Key Management Service (KMS) key used to \n            encrypt the output of the transcription job. The user calling the <a>StartMedicalTranscriptionJob</a> \n            operation must have permission to use the specified KMS key.</p>\n        <p>You use either of the following to identify a KMS key in the current account:</p>\n        <ul>\n            <li>\n                <p>KMS Key ID: \"1234abcd-12ab-34cd-56ef-1234567890ab\"</p>\n            </li>\n            <li>\n                <p>KMS Key Alias: \"alias/ExampleAlias\"</p>\n            </li>\n         </ul>\n        <p>You can use either of the following to identify a KMS key in the current account or another account:</p>\n        <ul>\n            <li>\n                <p>Amazon Resource Name (ARN) of a KMS key in the current account or another\n                    account: \"arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</p>\n            </li>\n            <li>\n                <p>ARN of a KMS Key Alias: \"arn:aws:kms:region:account ID:alias/ExampleAlias\"</p>\n            </li>\n         </ul>\n        <p>If you don't specify an encryption key, the output of the medical transcription job is encrypted with the default Amazon S3 \n            key (SSE-S3).</p>\n        <p>If you specify a KMS key to encrypt your output, you must also specify an output location in the \n            <code>OutputBucketName</code> parameter.</p>"
                     }
                 },
                 "KMSEncryptionContext": {
@@ -4000,7 +4047,7 @@
                 "OutputEncryptionKMSKeyId": {
                     "target": "com.amazonaws.transcribe#KMSKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Key Management Service (KMS) key used to \n            encrypt the output of the transcription job. The user calling the <code>StartTranscriptionJob</code> \n            operation must have permission to use the specified KMS key.</p>\n        <p>You can use either of the following to identify a KMS key in the current account:</p>\n        <ul>\n            <li>\n                <p>KMS Key ID: \"1234abcd-12ab-34cd-56ef-1234567890ab\"</p>\n            </li>\n            <li>\n                <p>KMS Key Alias: \"alias/ExampleAlias\"</p>\n            </li>\n         </ul>\n        <p>You can use either of the following to identify a KMS key in the current account or another account:</p>\n        <ul>\n            <li>\n                <p>Amazon Resource Name (ARN) of a KMS Key: \"arn:aws:kms:region:account\n                    ID:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</p>\n            </li>\n            <li>\n                <p>ARN of a KMS Key Alias: \"arn:aws:kms:region:account ID:alias/ExampleAlias\"</p>\n            </li>\n         </ul>\n        <p>If you don't specify an encryption key, the output of the transcription job is encrypted with the default \n            Amazon S3 key (SSE-S3).</p>\n        <p>If you specify a KMS key to encrypt your output, you must also specify an output location in the \n            <code>OutputBucketName</code> parameter.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Key Management Service (KMS) key used to \n            encrypt the output of the transcription job. The user calling the <code>StartTranscriptionJob</code> \n            operation must have permission to use the specified KMS key.</p>\n        <p>You can use either of the following to identify a KMS key in the current account:</p>\n        <ul>\n            <li>\n                <p>KMS Key ID: \"1234abcd-12ab-34cd-56ef-1234567890ab\"</p>\n            </li>\n            <li>\n                <p>KMS Key Alias: \"alias/ExampleAlias\"</p>\n            </li>\n         </ul>\n        <p>You can use either of the following to identify a KMS key in the current account or another account:</p>\n        <ul>\n            <li>\n                <p>Amazon Resource Name (ARN) of a KMS Key: \"arn:aws:kms:region:account\n                    ID:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</p>\n            </li>\n            <li>\n                <p>ARN of a KMS Key Alias: \"arn:aws:kms:region:account-ID:alias/ExampleAlias\"</p>\n            </li>\n         </ul>\n        <p>If you don't specify an encryption key, the output of the transcription job is encrypted with the default \n            Amazon S3 key (SSE-S3).</p>\n        <p>If you specify a KMS key to encrypt your output, you must also specify an output location in the \n            <code>OutputBucketName</code> parameter.</p>"
                     }
                 },
                 "KMSEncryptionContext": {
@@ -4055,6 +4102,12 @@
                     "target": "com.amazonaws.transcribe#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>Add tags to an Amazon Transcribe transcription job.</p>"
+                    }
+                },
+                "LanguageIdSettings": {
+                    "target": "com.amazonaws.transcribe#LanguageIdSettingsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language identification settings associated with your transcription job. These settings include\n            <code>VocabularyName</code>, <code>VocabularyFilterName</code>, and \n            <code>LanguageModelName</code>.</p>"
                     }
                 }
             }
@@ -4226,7 +4279,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Tags a Amazon Transcribe resource with the given list of tags.</p>",
+                "smithy.api#documentation": "<p>Tags an Amazon Transcribe resource with the given list of tags.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/tags/{ResourceArn}",
@@ -4240,7 +4293,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.transcribe#TranscribeArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Transcribe resource you want to tag.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Transcribe resource you want to tag. ARNs have the format\n            <code>arn:partition:service:region:account-id:resource-type/resource-id</code> (for example,\n            <code>arn:aws:transcribe:us-east-1:account-id:transcription-job/your-job-name</code>). Valid \n            values for <code>resource-type</code> are: <code>transcription-job</code>,\n            <code>medical-transcription-job</code>, <code>vocabulary</code>, \n            <code>medical-vocabulary</code>, <code>vocabulary-filter</code>, and \n            <code>language-model</code>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4279,6 +4332,21 @@
         },
         "com.amazonaws.transcribe#Transcribe": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Transcribe",
+                    "arnNamespace": "transcribe",
+                    "cloudFormationName": "Transcribe",
+                    "cloudTrailEventSource": "transcribe.amazonaws.com",
+                    "endpointPrefix": "transcribe"
+                },
+                "aws.auth#sigv4": {
+                    "name": "transcribe"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<p>Operations and objects for transcribing speech to text.</p>",
+                "smithy.api#title": "Amazon Transcribe Service"
+            },
             "version": "2017-10-26",
             "operations": [
                 {
@@ -4398,22 +4466,7 @@
                 {
                     "target": "com.amazonaws.transcribe#UpdateVocabularyFilter"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Transcribe",
-                    "arnNamespace": "transcribe",
-                    "cloudFormationName": "Transcribe",
-                    "cloudTrailEventSource": "transcribe.amazonaws.com",
-                    "endpointPrefix": "transcribe"
-                },
-                "aws.auth#sigv4": {
-                    "name": "transcribe"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>Operations and objects for transcribing speech to text.</p>",
-                "smithy.api#title": "Amazon Transcribe Service"
-            }
+            ]
         },
         "com.amazonaws.transcribe#TranscribeArn": {
             "type": "string",
@@ -4624,6 +4677,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Generate subtitles for your batch transcription job.</p>"
                     }
+                },
+                "LanguageIdSettings": {
+                    "target": "com.amazonaws.transcribe#LanguageIdSettingsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Language-specific settings that can be specified when language identification is enabled for your transcription \n            job. These settings include <code>VocabularyName</code>, <code>VocabularyFilterName</code>, and \n            <code>LanguageModelName</code>LanguageModelName.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4801,7 +4860,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.transcribe#TranscribeArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Transcribe resource you want to remove tags from.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Transcribe resource you want to remove tags from. \n            ARNs have the format\n            <code>arn:partition:service:region:account-id:resource-type/resource-id</code> (for example,\n            <code>arn:aws:transcribe:us-east-1:account-id:transcription-job/your-job-name</code>). Valid \n            values for <code>resource-type</code> are: <code>transcription-job</code>,\n            <code>medical-transcription-job</code>, <code>vocabulary</code>, \n            <code>medical-vocabulary</code>, <code>vocabulary-filter</code>, and \n            <code>language-model</code>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }

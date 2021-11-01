@@ -156,19 +156,19 @@
         "com.amazonaws.gamelift#AliasArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:.*:alias\\/alias-\\S+"
+                "smithy.api#pattern": "^arn:.*:alias\\/alias-\\S+$"
             }
         },
         "com.amazonaws.gamelift#AliasId": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^alias-\\S+"
+                "smithy.api#pattern": "^alias-\\S+$"
             }
         },
         "com.amazonaws.gamelift#AliasIdOrArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^alias-\\S+|^arn:.*:alias\\/alias-\\S+"
+                "smithy.api#pattern": "^alias-\\S+|^arn:.*:alias\\/alias-\\S+$"
             }
         },
         "com.amazonaws.gamelift#AliasList": {
@@ -193,7 +193,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9:/-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9:/-]+$"
             }
         },
         "com.amazonaws.gamelift#AttributeValue": {
@@ -235,7 +235,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
             }
         },
         "com.amazonaws.gamelift#AwsCredentials": {
@@ -364,19 +364,19 @@
         "com.amazonaws.gamelift#BuildArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:.*:build\\/build-\\S+"
+                "smithy.api#pattern": "^arn:.*:build\\/build-\\S+$"
             }
         },
         "com.amazonaws.gamelift#BuildId": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^build-\\S+"
+                "smithy.api#pattern": "^build-\\S+$"
             }
         },
         "com.amazonaws.gamelift#BuildIdOrArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^build-\\S+|^arn:.*:build\\/build-\\S+"
+                "smithy.api#pattern": "^build-\\S+|^arn:.*:build\\/build-\\S+$"
             }
         },
         "com.amazonaws.gamelift#BuildList": {
@@ -738,6 +738,9 @@
                 },
                 {
                     "target": "com.amazonaws.gamelift#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.gamelift#UnsupportedRegionException"
                 }
             ],
             "traits": {
@@ -773,13 +776,13 @@
                     }
                 },
                 "ServerLaunchPath": {
-                    "target": "com.amazonaws.gamelift#NonZeroAndMaxString",
+                    "target": "com.amazonaws.gamelift#LaunchPathStringModel",
                     "traits": {
                         "smithy.api#documentation": "<p>\n            <b>This parameter is no longer used.</b> Specify a server\n            launch path using the <code>RuntimeConfiguration</code> parameter. Requests that use\n            this parameter instead continue to be valid.</p>"
                     }
                 },
                 "ServerLaunchParameters": {
-                    "target": "com.amazonaws.gamelift#NonZeroAndMaxString",
+                    "target": "com.amazonaws.gamelift#LaunchParametersStringModel",
                     "traits": {
                         "smithy.api#documentation": "<p>\n            <b>This parameter is no longer used.</b> Specify server\n            launch parameters using the <code>RuntimeConfiguration</code> parameter. Requests that\n            use this parameter instead continue to be valid.</p>"
                     }
@@ -897,6 +900,9 @@
                 },
                 {
                     "target": "com.amazonaws.gamelift#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.gamelift#UnsupportedRegionException"
                 }
             ],
             "traits": {
@@ -1126,6 +1132,9 @@
                 },
                 {
                     "target": "com.amazonaws.gamelift#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.gamelift#UnsupportedRegionException"
                 }
             ],
             "traits": {
@@ -2046,6 +2055,9 @@
                 },
                 {
                     "target": "com.amazonaws.gamelift#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.gamelift#UnsupportedRegionException"
                 }
             ],
             "traits": {
@@ -2658,6 +2670,9 @@
                 },
                 {
                     "target": "com.amazonaws.gamelift#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.gamelift#UnsupportedRegionException"
                 }
             ],
             "traits": {
@@ -2962,6 +2977,9 @@
                 },
                 {
                     "target": "com.amazonaws.gamelift#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.gamelift#UnsupportedRegionException"
                 }
             ],
             "traits": {
@@ -3058,6 +3076,9 @@
                 },
                 {
                     "target": "com.amazonaws.gamelift#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.gamelift#UnsupportedRegionException"
                 }
             ],
             "traits": {
@@ -3120,6 +3141,9 @@
                 },
                 {
                     "target": "com.amazonaws.gamelift#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.gamelift#UnsupportedRegionException"
                 }
             ],
             "traits": {
@@ -3530,6 +3554,9 @@
                 },
                 {
                     "target": "com.amazonaws.gamelift#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.gamelift#UnsupportedRegionException"
                 }
             ],
             "traits": {
@@ -3766,6 +3793,9 @@
                 },
                 {
                     "target": "com.amazonaws.gamelift#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.gamelift#UnsupportedRegionException"
                 }
             ],
             "traits": {
@@ -3867,6 +3897,9 @@
                 },
                 {
                     "target": "com.amazonaws.gamelift#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.gamelift#UnsupportedRegionException"
                 }
             ],
             "traits": {
@@ -4317,6 +4350,9 @@
                 },
                 {
                     "target": "com.amazonaws.gamelift#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.gamelift#UnsupportedRegionException"
                 }
             ],
             "traits": {
@@ -5218,7 +5254,7 @@
         "com.amazonaws.gamelift#FleetArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:.*:fleet\\/fleet-\\S+"
+                "smithy.api#pattern": "^arn:.*:fleet\\/fleet-\\S+$"
             }
         },
         "com.amazonaws.gamelift#FleetAttributes": {
@@ -5303,13 +5339,13 @@
                     }
                 },
                 "ServerLaunchPath": {
-                    "target": "com.amazonaws.gamelift#NonZeroAndMaxString",
+                    "target": "com.amazonaws.gamelift#LaunchPathStringModel",
                     "traits": {
                         "smithy.api#documentation": "<p>\n            <b>This parameter is no longer used.</b> Server launch paths\n            are now defined  using the fleet's <a>RuntimeConfiguration</a> parameter.\n            Requests that use this parameter instead continue to be valid.</p>"
                     }
                 },
                 "ServerLaunchParameters": {
-                    "target": "com.amazonaws.gamelift#NonZeroAndMaxString",
+                    "target": "com.amazonaws.gamelift#LaunchParametersStringModel",
                     "traits": {
                         "smithy.api#documentation": "<p>\n            <b>This parameter is no longer used.</b> Server launch\n            parameters are now defined  using the fleet's <a>RuntimeConfiguration</a>\n            parameter. Requests that use this parameter instead continue to be valid.</p>"
                     }
@@ -5432,7 +5468,7 @@
         "com.amazonaws.gamelift#FleetId": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^fleet-\\S+"
+                "smithy.api#pattern": "^fleet-\\S+$"
             }
         },
         "com.amazonaws.gamelift#FleetIdList": {
@@ -5449,7 +5485,7 @@
         "com.amazonaws.gamelift#FleetIdOrArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^fleet-\\S+|^arn:.*:fleet\\/fleet-\\S+"
+                "smithy.api#pattern": "^fleet-\\S+|^arn:.*:fleet\\/fleet-\\S+$"
             }
         },
         "com.amazonaws.gamelift#FleetIdOrArnList": {
@@ -6051,7 +6087,7 @@
                     "min": 1,
                     "max": 512
                 },
-                "smithy.api#pattern": ".*\\S.*"
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.gamelift#GameServerData": {
@@ -6061,7 +6097,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": ".*\\S.*"
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.gamelift#GameServerGroup": {
@@ -6174,7 +6210,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "^arn:.*:gameservergroup\\/[a-zA-Z0-9-\\.]*"
+                "smithy.api#pattern": "^arn:.*:gameservergroup\\/[a-zA-Z0-9-\\.]*$"
             }
         },
         "com.amazonaws.gamelift#GameServerGroupAutoScalingPolicy": {
@@ -6306,6 +6342,38 @@
                         "name": "c5a_24xlarge"
                     },
                     {
+                        "value": "c6g.medium",
+                        "name": "c6g_medium"
+                    },
+                    {
+                        "value": "c6g.large",
+                        "name": "c6g_large"
+                    },
+                    {
+                        "value": "c6g.xlarge",
+                        "name": "c6g_xlarge"
+                    },
+                    {
+                        "value": "c6g.2xlarge",
+                        "name": "c6g_2xlarge"
+                    },
+                    {
+                        "value": "c6g.4xlarge",
+                        "name": "c6g_4xlarge"
+                    },
+                    {
+                        "value": "c6g.8xlarge",
+                        "name": "c6g_8xlarge"
+                    },
+                    {
+                        "value": "c6g.12xlarge",
+                        "name": "c6g_12xlarge"
+                    },
+                    {
+                        "value": "c6g.16xlarge",
+                        "name": "c6g_16xlarge"
+                    },
+                    {
                         "value": "r4.large",
                         "name": "r4_large"
                     },
@@ -6394,6 +6462,38 @@
                         "name": "r5a_24xlarge"
                     },
                     {
+                        "value": "r6g.medium",
+                        "name": "r6g_medium"
+                    },
+                    {
+                        "value": "r6g.large",
+                        "name": "r6g_large"
+                    },
+                    {
+                        "value": "r6g.xlarge",
+                        "name": "r6g_xlarge"
+                    },
+                    {
+                        "value": "r6g.2xlarge",
+                        "name": "r6g_2xlarge"
+                    },
+                    {
+                        "value": "r6g.4xlarge",
+                        "name": "r6g_4xlarge"
+                    },
+                    {
+                        "value": "r6g.8xlarge",
+                        "name": "r6g_8xlarge"
+                    },
+                    {
+                        "value": "r6g.12xlarge",
+                        "name": "r6g_12xlarge"
+                    },
+                    {
+                        "value": "r6g.16xlarge",
+                        "name": "r6g_16xlarge"
+                    },
+                    {
                         "value": "m4.large",
                         "name": "m4_large"
                     },
@@ -6476,6 +6576,38 @@
                     {
                         "value": "m5a.24xlarge",
                         "name": "m5a_24xlarge"
+                    },
+                    {
+                        "value": "m6g.medium",
+                        "name": "m6g_medium"
+                    },
+                    {
+                        "value": "m6g.large",
+                        "name": "m6g_large"
+                    },
+                    {
+                        "value": "m6g.xlarge",
+                        "name": "m6g_xlarge"
+                    },
+                    {
+                        "value": "m6g.2xlarge",
+                        "name": "m6g_2xlarge"
+                    },
+                    {
+                        "value": "m6g.4xlarge",
+                        "name": "m6g_4xlarge"
+                    },
+                    {
+                        "value": "m6g.8xlarge",
+                        "name": "m6g_8xlarge"
+                    },
+                    {
+                        "value": "m6g.12xlarge",
+                        "name": "m6g_12xlarge"
+                    },
+                    {
+                        "value": "m6g.16xlarge",
+                        "name": "m6g_16xlarge"
                     }
                 ]
             }
@@ -6487,7 +6619,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9-\\.]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9-\\.]+$"
             }
         },
         "com.amazonaws.gamelift#GameServerGroupNameOrArn": {
@@ -6497,7 +6629,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9-\\.]+|^arn:.*:gameservergroup\\/[a-zA-Z0-9-\\.]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9-\\.]+|^arn:.*:gameservergroup\\/[a-zA-Z0-9-\\.]+$"
             }
         },
         "com.amazonaws.gamelift#GameServerGroupStatus": {
@@ -6559,7 +6691,7 @@
                     "min": 3,
                     "max": 128
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9-\\.]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9-\\.]+$"
             }
         },
         "com.amazonaws.gamelift#GameServerInstance": {
@@ -7112,7 +7244,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "^arn:.*:gamesessionqueue\\/[a-zA-Z0-9-]+"
+                "smithy.api#pattern": "^arn:.*:gamesessionqueue\\/[a-zA-Z0-9-]+$"
             }
         },
         "com.amazonaws.gamelift#GameSessionQueueDestination": {
@@ -7148,7 +7280,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
             }
         },
         "com.amazonaws.gamelift#GameSessionQueueNameOrArn": {
@@ -7158,7 +7290,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9-]+|^arn:.*:gamesessionqueue\\/[a-zA-Z0-9-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9-]+|^arn:.*:gamesessionqueue\\/[a-zA-Z0-9-]+$"
             }
         },
         "com.amazonaws.gamelift#GameSessionQueueNameOrArnList": {
@@ -7329,7 +7461,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "^arn:.*:role\\/[\\w+=,.@-]+"
+                "smithy.api#pattern": "^arn:.*:role\\/[\\w+=,.@-]+$"
             }
         },
         "com.amazonaws.gamelift#IdStringModel": {
@@ -7339,7 +7471,7 @@
                     "min": 1,
                     "max": 48
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
             }
         },
         "com.amazonaws.gamelift#IdempotentParameterMismatchException": {
@@ -7517,7 +7649,7 @@
         "com.amazonaws.gamelift#InstanceId": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[a-zA-Z0-9\\.-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9\\.-]+$"
             }
         },
         "com.amazonaws.gamelift#InstanceList": {
@@ -7597,7 +7729,14 @@
             }
         },
         "com.amazonaws.gamelift#IpAddress": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$"
+            }
         },
         "com.amazonaws.gamelift#IpPermission": {
             "type": "structure",
@@ -7680,6 +7819,26 @@
                 "target": "com.amazonaws.gamelift#PositiveInteger"
             }
         },
+        "com.amazonaws.gamelift#LaunchParametersStringModel": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9_:.+\\/\\\\\\- =@;{},?'\\[\\]\"]+$"
+            }
+        },
+        "com.amazonaws.gamelift#LaunchPathStringModel": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9_:.+\\/\\\\\\- ]+$"
+            }
+        },
         "com.amazonaws.gamelift#LaunchTemplateId": {
             "type": "string",
             "traits": {
@@ -7687,7 +7846,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]+"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]+$"
             }
         },
         "com.amazonaws.gamelift#LaunchTemplateName": {
@@ -7697,7 +7856,7 @@
                     "min": 3,
                     "max": 128
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9\\(\\)\\.\\-/_]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9\\(\\)\\.\\-/_]+$"
             }
         },
         "com.amazonaws.gamelift#LaunchTemplateSpecification": {
@@ -7733,7 +7892,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]+"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]+$"
             }
         },
         "com.amazonaws.gamelift#LimitExceededException": {
@@ -8336,7 +8495,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "^[a-z]+(-([a-z]+|\\d))*"
+                "smithy.api#pattern": "^[a-z]+(-([a-z]+|\\d))*$"
             }
         },
         "com.amazonaws.gamelift#LocationUpdateStatus": {
@@ -8509,7 +8668,7 @@
             "type": "string",
             "traits": {
                 "smithy.api#documentation": "Data type used for Matchmaking Configuration ARN.",
-                "smithy.api#pattern": "^arn:.*:matchmakingconfiguration\\/[a-zA-Z0-9-\\.]*"
+                "smithy.api#pattern": "^arn:.*:matchmakingconfiguration\\/[a-zA-Z0-9-\\.]*$"
             }
         },
         "com.amazonaws.gamelift#MatchmakingConfigurationList": {
@@ -8525,7 +8684,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9-\\.]*|^arn:.*:matchmakingconfiguration\\/[a-zA-Z0-9-\\.]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9-\\.]*|^arn:.*:matchmakingconfiguration\\/[a-zA-Z0-9-\\.]*$"
             }
         },
         "com.amazonaws.gamelift#MatchmakingConfigurationNameList": {
@@ -8586,7 +8745,7 @@
                     "min": 0,
                     "max": 128
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9-\\.]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9-\\.]*$"
             }
         },
         "com.amazonaws.gamelift#MatchmakingRequestTimeoutInteger": {
@@ -8636,7 +8795,7 @@
             "type": "string",
             "traits": {
                 "smithy.api#documentation": "Data type used for Matchmaking RuleSet ARN.",
-                "smithy.api#pattern": "^arn:.*:matchmakingruleset\\/[a-zA-Z0-9-\\.]*"
+                "smithy.api#pattern": "^arn:.*:matchmakingruleset\\/[a-zA-Z0-9-\\.]*$"
             }
         },
         "com.amazonaws.gamelift#MatchmakingRuleSetList": {
@@ -8652,7 +8811,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9-\\.]*|^arn:.*:matchmakingruleset\\/[a-zA-Z0-9-\\.]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9-\\.]*|^arn:.*:matchmakingruleset\\/[a-zA-Z0-9-\\.]*$"
             }
         },
         "com.amazonaws.gamelift#MatchmakingRuleSetNameList": {
@@ -8836,13 +8995,13 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": ".*\\S.*"
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.gamelift#NonBlankString": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[^\\s]+"
+                "smithy.api#pattern": "^[^\\s]+$"
             }
         },
         "com.amazonaws.gamelift#NonEmptyString": {
@@ -9173,7 +9332,7 @@
         "com.amazonaws.gamelift#PlayerSessionId": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^psess-\\S+"
+                "smithy.api#pattern": "^psess-\\S+$"
             }
         },
         "com.amazonaws.gamelift#PlayerSessionList": {
@@ -9442,7 +9601,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "[\\s\\S]*"
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.gamelift#QueueSnsArnStringModel": {
@@ -9452,7 +9611,7 @@
                     "min": 0,
                     "max": 300
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9:_-]*(\\.fifo)?"
+                "smithy.api#pattern": "^[a-zA-Z0-9:_-]*(\\.fifo)?$"
             }
         },
         "com.amazonaws.gamelift#RegisterGameServer": {
@@ -10054,19 +10213,19 @@
         "com.amazonaws.gamelift#ScriptArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:.*:script\\/script-\\S+"
+                "smithy.api#pattern": "^arn:.*:script\\/script-\\S+$"
             }
         },
         "com.amazonaws.gamelift#ScriptId": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^script-\\S+"
+                "smithy.api#pattern": "^script-\\S+$"
             }
         },
         "com.amazonaws.gamelift#ScriptIdOrArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^script-\\S+|^arn:.*:script\\/script-\\S+"
+                "smithy.api#pattern": "^script-\\S+|^arn:.*:script\\/script-\\S+$"
             }
         },
         "com.amazonaws.gamelift#ScriptList": {
@@ -10098,6 +10257,9 @@
                 },
                 {
                     "target": "com.amazonaws.gamelift#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.gamelift#UnsupportedRegionException"
                 }
             ],
             "traits": {
@@ -10183,14 +10345,14 @@
             "type": "structure",
             "members": {
                 "LaunchPath": {
-                    "target": "com.amazonaws.gamelift#NonZeroAndMaxString",
+                    "target": "com.amazonaws.gamelift#LaunchPathStringModel",
                     "traits": {
                         "smithy.api#documentation": "<p>The location of a game build executable or the Realtime script file that contains the\n                <code>Init()</code> function. Game builds and Realtime scripts are installed on\n            instances at the root: </p>\n        <ul>\n            <li>\n               <p>Windows (custom game builds only): <code>C:\\game</code>. Example:\n                        \"<code>C:\\game\\MyGame\\server.exe</code>\" </p>\n            </li>\n            <li>\n               <p>Linux: <code>/local/game</code>. Examples: \"<code>/local/game/MyGame/server.exe</code>\" or\n                        \"<code>/local/game/MyRealtimeScript.js</code>\"</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "Parameters": {
-                    "target": "com.amazonaws.gamelift#NonZeroAndMaxString",
+                    "target": "com.amazonaws.gamelift#LaunchParametersStringModel",
                     "traits": {
                         "smithy.api#documentation": "<p>An optional list of parameters to pass to the server executable or Realtime script on\n            launch.</p>"
                     }
@@ -10226,7 +10388,7 @@
                     "min": 0,
                     "max": 300
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9:_/-]*(.fifo)?"
+                "smithy.api#pattern": "^[a-zA-Z0-9:_/-]*(.fifo)?$"
             }
         },
         "com.amazonaws.gamelift#SortOrder": {
@@ -10264,6 +10426,9 @@
                 },
                 {
                     "target": "com.amazonaws.gamelift#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.gamelift#UnsupportedRegionException"
                 }
             ],
             "traits": {
@@ -10579,6 +10744,9 @@
                 },
                 {
                     "target": "com.amazonaws.gamelift#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.gamelift#UnsupportedRegionException"
                 }
             ],
             "traits": {
@@ -11313,6 +11481,9 @@
                 },
                 {
                     "target": "com.amazonaws.gamelift#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.gamelift#UnsupportedRegionException"
                 }
             ],
             "traits": {
