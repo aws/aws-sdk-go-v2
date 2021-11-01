@@ -98,8 +98,9 @@ type UploadMetadata struct {
 	// The headers to be provided while uploading the file to the URL.
 	HeadersToInclude map[string]string
 
-	// The pre-signed URL using which file would be downloaded from Amazon S3 by the
-	// API caller.
+	// This is the pre-signed URL that can be used for uploading the file to Amazon S3
+	// when used in response to StartAttachmentUpload
+	// (https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_StartAttachmentUpload.html).
 	Url *string
 
 	// The expiration time of the URL in ISO timestamp. It's specified in ISO 8601

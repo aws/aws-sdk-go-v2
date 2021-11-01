@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the details of the specified incident record.
+// Returns the details for the specified incident record.
 func (c *Client) GetIncidentRecord(ctx context.Context, params *GetIncidentRecordInput, optFns ...func(*Options)) (*GetIncidentRecordOutput, error) {
 	if params == nil {
 		params = &GetIncidentRecordInput{}
@@ -39,7 +39,7 @@ type GetIncidentRecordInput struct {
 
 type GetIncidentRecordOutput struct {
 
-	// Details structure of the incident record.
+	// Details the structure of the incident record.
 	//
 	// This member is required.
 	IncidentRecord *types.IncidentRecord

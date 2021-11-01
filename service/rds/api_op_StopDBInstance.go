@@ -19,8 +19,8 @@ import (
 // Stopping an
 // Amazon RDS DB Instance Temporarily
 // (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_StopInstance.html)
-// in the Amazon RDS User Guide. This command doesn't apply to Aurora MySQL and
-// Aurora PostgreSQL. For Aurora clusters, use StopDBCluster instead.
+// in the Amazon RDS User Guide. This command doesn't apply to RDS Custom, Aurora
+// MySQL, and Aurora PostgreSQL. For Aurora clusters, use StopDBCluster instead.
 func (c *Client) StopDBInstance(ctx context.Context, params *StopDBInstanceInput, optFns ...func(*Options)) (*StopDBInstanceOutput, error) {
 	if params == nil {
 		params = &StopDBInstanceInput{}

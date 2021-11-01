@@ -7283,6 +7283,28 @@ func awsAwsjson11_serializeDocumentAutoSnapshotAddOnRequest(v *types.AutoSnapsho
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentBucketAccessLogConfig(v *types.BucketAccessLogConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Destination != nil {
+		ok := object.Key("destination")
+		ok.String(*v.Destination)
+	}
+
+	if v.Enabled != nil {
+		ok := object.Key("enabled")
+		ok.Boolean(*v.Enabled)
+	}
+
+	if v.Prefix != nil {
+		ok := object.Key("prefix")
+		ok.String(*v.Prefix)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentCacheBehavior(v *types.CacheBehavior, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -10890,6 +10912,13 @@ func awsAwsjson11_serializeOpDocumentUpdateBucketBundleInput(v *UpdateBucketBund
 func awsAwsjson11_serializeOpDocumentUpdateBucketInput(v *UpdateBucketInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AccessLogConfig != nil {
+		ok := object.Key("accessLogConfig")
+		if err := awsAwsjson11_serializeDocumentBucketAccessLogConfig(v.AccessLogConfig, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.AccessRules != nil {
 		ok := object.Key("accessRules")

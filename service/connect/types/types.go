@@ -96,6 +96,19 @@ type ChatMessage struct {
 	noSmithyDocumentSerde
 }
 
+// The streaming configuration, such as the Amazon SNS streaming endpoint.
+type ChatStreamingConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the standard Amazon SNS topic. The Amazon
+	// Resource Name (ARN) of the streaming endpoint that is used to publish real-time
+	// message streaming for chat conversations.
+	//
+	// This member is required.
+	StreamingEndpointArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about a contact flow.
 type ContactFlow struct {
 
@@ -451,12 +464,12 @@ type HoursOfOperationConfig struct {
 	// This member is required.
 	Day HoursOfOperationDays
 
-	// The end time that your contact center is closes.
+	// The end time that your contact center closes.
 	//
 	// This member is required.
 	EndTime *HoursOfOperationTimeSlice
 
-	// The start time that your contact center is open.
+	// The start time that your contact center opens.
 	//
 	// This member is required.
 	StartTime *HoursOfOperationTimeSlice

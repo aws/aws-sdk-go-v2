@@ -64,10 +64,12 @@ type AMITypes string
 
 // Enum values for AMITypes
 const (
-	AMITypesAl2X8664    AMITypes = "AL2_x86_64"
-	AMITypesAl2X8664Gpu AMITypes = "AL2_x86_64_GPU"
-	AMITypesAl2Arm64    AMITypes = "AL2_ARM_64"
-	AMITypesCustom      AMITypes = "CUSTOM"
+	AMITypesAl2X8664          AMITypes = "AL2_x86_64"
+	AMITypesAl2X8664Gpu       AMITypes = "AL2_x86_64_GPU"
+	AMITypesAl2Arm64          AMITypes = "AL2_ARM_64"
+	AMITypesCustom            AMITypes = "CUSTOM"
+	AMITypesBottlerocketArm64 AMITypes = "BOTTLEROCKET_ARM_64"
+	AMITypesBottlerocketX8664 AMITypes = "BOTTLEROCKET_x86_64"
 )
 
 // Values returns all known values for AMITypes. Note that this can be expanded in
@@ -79,6 +81,8 @@ func (AMITypes) Values() []AMITypes {
 		"AL2_x86_64_GPU",
 		"AL2_ARM_64",
 		"CUSTOM",
+		"BOTTLEROCKET_ARM_64",
+		"BOTTLEROCKET_x86_64",
 	}
 }
 

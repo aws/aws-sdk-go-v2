@@ -2802,6 +2802,21 @@ func validateAddOnRequestList(v []types.AddOnRequest) error {
 	}
 }
 
+func validateBucketAccessLogConfig(v *types.BucketAccessLogConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BucketAccessLogConfig"}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateContainerServiceDeploymentRequest(v *types.ContainerServiceDeploymentRequest) error {
 	if v == nil {
 		return nil
@@ -4816,6 +4831,11 @@ func validateOpUpdateBucketInput(v *UpdateBucketInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateBucketInput"}
 	if v.BucketName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
+	}
+	if v.AccessLogConfig != nil {
+		if err := validateBucketAccessLogConfig(v.AccessLogConfig); err != nil {
+			invalidParams.AddNested("AccessLogConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

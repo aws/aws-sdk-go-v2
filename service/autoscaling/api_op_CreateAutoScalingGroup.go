@@ -104,6 +104,16 @@ type CreateAutoScalingGroupInput struct {
 	// is the minimum size of the group.
 	DesiredCapacity *int32
 
+	// The unit of measurement for the value specified for desired capacity. Amazon EC2
+	// Auto Scaling supports DesiredCapacityType for attribute-based instance type
+	// selection only. For more information, see Creating an Auto Scaling group using
+	// attribute-based instance type selection
+	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html)
+	// in the Amazon EC2 Auto Scaling User Guide. By default, Amazon EC2 Auto Scaling
+	// specifies units, which translates into number of instances. Valid values: units
+	// | vcpu | memory-mib
+	DesiredCapacityType *string
+
 	// The amount of time, in seconds, that Amazon EC2 Auto Scaling waits before
 	// checking the health status of an EC2 instance that has come into service. During
 	// this time, any health check failures for the instance are ignored. The default
@@ -166,16 +176,9 @@ type CreateAutoScalingGroupInput struct {
 	// in the Amazon EC2 Auto Scaling User Guide.
 	MaxInstanceLifetime *int32
 
-	// An embedded object that specifies a mixed instances policy. The required
-	// properties must be specified. If optional properties are unspecified, their
-	// default values are used. The policy includes properties that not only define the
-	// distribution of On-Demand Instances and Spot Instances, the maximum price to pay
-	// for Spot Instances, and how the Auto Scaling group allocates instance types to
-	// fulfill On-Demand and Spot capacities, but also the properties that specify the
-	// instance configuration information—the launch template and instance types. The
-	// policy can also include a weight for each instance type and different launch
-	// templates for individual instance types. For more information, see Auto Scaling
-	// groups with multiple instance types and purchase options
+	// An embedded object that specifies a mixed instances policy. For more
+	// information, see Auto Scaling groups with multiple instance types and purchase
+	// options
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	MixedInstancesPolicy *types.MixedInstancesPolicy

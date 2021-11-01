@@ -40,7 +40,7 @@ type DeleteChannelMembershipInput struct {
 	// This member is required.
 	ChimeBearer *string
 
-	// The ARN of the member that you're removing from the channel.
+	// The AppInstanceUserArn of the member that you're removing from the channel.
 	//
 	// This member is required.
 	MemberArn *string

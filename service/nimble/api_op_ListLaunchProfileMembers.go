@@ -4,6 +4,7 @@ package nimble
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/nimble/types"
@@ -29,7 +30,7 @@ func (c *Client) ListLaunchProfileMembers(ctx context.Context, params *ListLaunc
 
 type ListLaunchProfileMembersInput struct {
 
-	// The launch profile ID.
+	// The Launch Profile ID.
 	//
 	// This member is required.
 	LaunchProfileId *string
@@ -39,15 +40,16 @@ type ListLaunchProfileMembersInput struct {
 	// This member is required.
 	StudioId *string
 
-	// The maximum number of results to be returned per request.
+	// The max number of results to return in the response.
 	MaxResults int32
 
-	// The token for the next set of results, or null if there are no more results.
+	// The token to request the next page of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
 }
 
+//
 type ListLaunchProfileMembersOutput struct {
 
 	// A list of members.
@@ -123,6 +125,90 @@ func (c *Client) addOperationListLaunchProfileMembersMiddlewares(stack *middlewa
 		return err
 	}
 	return nil
+}
+
+// ListLaunchProfileMembersAPIClient is a client that implements the
+// ListLaunchProfileMembers operation.
+type ListLaunchProfileMembersAPIClient interface {
+	ListLaunchProfileMembers(context.Context, *ListLaunchProfileMembersInput, ...func(*Options)) (*ListLaunchProfileMembersOutput, error)
+}
+
+var _ ListLaunchProfileMembersAPIClient = (*Client)(nil)
+
+// ListLaunchProfileMembersPaginatorOptions is the paginator options for
+// ListLaunchProfileMembers
+type ListLaunchProfileMembersPaginatorOptions struct {
+	// The max number of results to return in the response.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListLaunchProfileMembersPaginator is a paginator for ListLaunchProfileMembers
+type ListLaunchProfileMembersPaginator struct {
+	options   ListLaunchProfileMembersPaginatorOptions
+	client    ListLaunchProfileMembersAPIClient
+	params    *ListLaunchProfileMembersInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListLaunchProfileMembersPaginator returns a new
+// ListLaunchProfileMembersPaginator
+func NewListLaunchProfileMembersPaginator(client ListLaunchProfileMembersAPIClient, params *ListLaunchProfileMembersInput, optFns ...func(*ListLaunchProfileMembersPaginatorOptions)) *ListLaunchProfileMembersPaginator {
+	if params == nil {
+		params = &ListLaunchProfileMembersInput{}
+	}
+
+	options := ListLaunchProfileMembersPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListLaunchProfileMembersPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListLaunchProfileMembersPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListLaunchProfileMembers page.
+func (p *ListLaunchProfileMembersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListLaunchProfileMembersOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListLaunchProfileMembers(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListLaunchProfileMembers(region string) *awsmiddleware.RegisterServiceMetadata {

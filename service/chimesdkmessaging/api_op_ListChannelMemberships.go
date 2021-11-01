@@ -14,7 +14,11 @@ import (
 
 // Lists all channel memberships in a channel. The x-amz-chime-bearer request
 // header is mandatory. Use the AppInstanceUserArn of the user that makes the API
-// call as the value in the header.
+// call as the value in the header. If you want to list the channels to which a
+// specific app instance user belongs, see the
+// ListChannelMembershipsForAppInstanceUser
+// (https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_ListChannelMembershipsForAppInstanceUser.html)
+// API.
 func (c *Client) ListChannelMemberships(ctx context.Context, params *ListChannelMembershipsInput, optFns ...func(*Options)) (*ListChannelMembershipsOutput, error) {
 	if params == nil {
 		params = &ListChannelMembershipsInput{}

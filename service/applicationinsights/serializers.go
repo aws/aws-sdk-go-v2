@@ -1339,6 +1339,16 @@ func awsAwsjson11_serializeOpDocumentCreateApplicationInput(v *CreateApplication
 	object := value.Object()
 	defer object.Close()
 
+	if v.AutoConfigEnabled != nil {
+		ok := object.Key("AutoConfigEnabled")
+		ok.Boolean(*v.AutoConfigEnabled)
+	}
+
+	if v.AutoCreate != nil {
+		ok := object.Key("AutoCreate")
+		ok.Boolean(*v.AutoCreate)
+	}
+
 	if v.CWEMonitorEnabled != nil {
 		ok := object.Key("CWEMonitorEnabled")
 		ok.Boolean(*v.CWEMonitorEnabled)
@@ -1731,6 +1741,11 @@ func awsAwsjson11_serializeOpDocumentListProblemsInput(v *ListProblemsInput, val
 	object := value.Object()
 	defer object.Close()
 
+	if v.ComponentName != nil {
+		ok := object.Key("ComponentName")
+		ok.String(*v.ComponentName)
+	}
+
 	if v.EndTime != nil {
 		ok := object.Key("EndTime")
 		ok.Double(smithytime.FormatEpochSeconds(*v.EndTime))
@@ -1813,6 +1828,11 @@ func awsAwsjson11_serializeOpDocumentUpdateApplicationInput(v *UpdateApplication
 	object := value.Object()
 	defer object.Close()
 
+	if v.AutoConfigEnabled != nil {
+		ok := object.Key("AutoConfigEnabled")
+		ok.Boolean(*v.AutoConfigEnabled)
+	}
+
 	if v.CWEMonitorEnabled != nil {
 		ok := object.Key("CWEMonitorEnabled")
 		ok.Boolean(*v.CWEMonitorEnabled)
@@ -1844,6 +1864,11 @@ func awsAwsjson11_serializeOpDocumentUpdateApplicationInput(v *UpdateApplication
 func awsAwsjson11_serializeOpDocumentUpdateComponentConfigurationInput(v *UpdateComponentConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AutoConfigEnabled != nil {
+		ok := object.Key("AutoConfigEnabled")
+		ok.Boolean(*v.AutoConfigEnabled)
+	}
 
 	if v.ComponentConfiguration != nil {
 		ok := object.Key("ComponentConfiguration")

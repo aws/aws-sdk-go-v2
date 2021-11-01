@@ -50,6 +50,13 @@ type DescribeDomainOutput struct {
 	// All Studio traffic is through the specified VPC and subnets
 	AppNetworkAccessType types.AppNetworkAccessType
 
+	// The entity that creates and manages the required security groups for inter-app
+	// communication in VPCOnly mode. Required when CreateDomain.AppNetworkAccessType
+	// is VPCOnly and
+	// DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn is
+	// provided.
+	AppSecurityGroupManagement types.AppSecurityGroupManagement
+
 	// The domain's authentication mode.
 	AuthMode types.AuthMode
 
@@ -69,6 +76,9 @@ type DescribeDomainOutput struct {
 	// The domain name.
 	DomainName *string
 
+	// A collection of Domain settings.
+	DomainSettings *types.DomainSettings
+
 	// The failure reason.
 	FailureReason *string
 
@@ -86,6 +96,10 @@ type DescribeDomainOutput struct {
 
 	// The last modified time.
 	LastModifiedTime *time.Time
+
+	// The ID of the security group that authorizes traffic between the RSessionGateway
+	// apps and the RStudioServerPro app.
+	SecurityGroupIdForDomainBoundary *string
 
 	// The SSO managed application instance ID.
 	SingleSignOnManagedApplicationInstanceId *string

@@ -290,6 +290,26 @@ func (m *validateOpCreateRealtimeLogConfig) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateResponseHeadersPolicy struct {
+}
+
+func (*validateOpCreateResponseHeadersPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateResponseHeadersPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateResponseHeadersPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateResponseHeadersPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateStreamingDistribution struct {
 }
 
@@ -525,6 +545,26 @@ func (m *validateOpDeletePublicKey) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeletePublicKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteResponseHeadersPolicy struct {
+}
+
+func (*validateOpDeleteResponseHeadersPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteResponseHeadersPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteResponseHeadersPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteResponseHeadersPolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -950,6 +990,46 @@ func (m *validateOpGetPublicKey) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetResponseHeadersPolicyConfig struct {
+}
+
+func (*validateOpGetResponseHeadersPolicyConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetResponseHeadersPolicyConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetResponseHeadersPolicyConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetResponseHeadersPolicyConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetResponseHeadersPolicy struct {
+}
+
+func (*validateOpGetResponseHeadersPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetResponseHeadersPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetResponseHeadersPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetResponseHeadersPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetStreamingDistributionConfig struct {
 }
 
@@ -1065,6 +1145,26 @@ func (m *validateOpListDistributionsByOriginRequestPolicyId) HandleInitialize(ct
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListDistributionsByOriginRequestPolicyIdInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListDistributionsByResponseHeadersPolicyId struct {
+}
+
+func (*validateOpListDistributionsByResponseHeadersPolicyId) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDistributionsByResponseHeadersPolicyId) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDistributionsByResponseHeadersPolicyIdInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDistributionsByResponseHeadersPolicyIdInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1410,6 +1510,26 @@ func (m *validateOpUpdateRealtimeLogConfig) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateResponseHeadersPolicy struct {
+}
+
+func (*validateOpUpdateResponseHeadersPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateResponseHeadersPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateResponseHeadersPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateResponseHeadersPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateStreamingDistribution struct {
 }
 
@@ -1486,6 +1606,10 @@ func addOpCreateRealtimeLogConfigValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpCreateRealtimeLogConfig{}, middleware.After)
 }
 
+func addOpCreateResponseHeadersPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateResponseHeadersPolicy{}, middleware.After)
+}
+
 func addOpCreateStreamingDistributionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateStreamingDistribution{}, middleware.After)
 }
@@ -1532,6 +1656,10 @@ func addOpDeleteOriginRequestPolicyValidationMiddleware(stack *middleware.Stack)
 
 func addOpDeletePublicKeyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeletePublicKey{}, middleware.After)
+}
+
+func addOpDeleteResponseHeadersPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteResponseHeadersPolicy{}, middleware.After)
 }
 
 func addOpDeleteStreamingDistributionValidationMiddleware(stack *middleware.Stack) error {
@@ -1618,6 +1746,14 @@ func addOpGetPublicKeyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetPublicKey{}, middleware.After)
 }
 
+func addOpGetResponseHeadersPolicyConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetResponseHeadersPolicyConfig{}, middleware.After)
+}
+
+func addOpGetResponseHeadersPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetResponseHeadersPolicy{}, middleware.After)
+}
+
 func addOpGetStreamingDistributionConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetStreamingDistributionConfig{}, middleware.After)
 }
@@ -1640,6 +1776,10 @@ func addOpListDistributionsByKeyGroupValidationMiddleware(stack *middleware.Stac
 
 func addOpListDistributionsByOriginRequestPolicyIdValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListDistributionsByOriginRequestPolicyId{}, middleware.After)
+}
+
+func addOpListDistributionsByResponseHeadersPolicyIdValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDistributionsByResponseHeadersPolicyId{}, middleware.After)
 }
 
 func addOpListDistributionsByWebACLIdValidationMiddleware(stack *middleware.Stack) error {
@@ -1708,6 +1848,10 @@ func addOpUpdatePublicKeyValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateRealtimeLogConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateRealtimeLogConfig{}, middleware.After)
+}
+
+func addOpUpdateResponseHeadersPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateResponseHeadersPolicy{}, middleware.After)
 }
 
 func addOpUpdateStreamingDistributionValidationMiddleware(stack *middleware.Stack) error {
@@ -3334,6 +3478,354 @@ func validateRealtimeMetricsSubscriptionConfig(v *types.RealtimeMetricsSubscript
 	}
 }
 
+func validateResponseHeadersPolicyAccessControlAllowHeaders(v *types.ResponseHeadersPolicyAccessControlAllowHeaders) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResponseHeadersPolicyAccessControlAllowHeaders"}
+	if v.Quantity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Quantity"))
+	}
+	if v.Items == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Items"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResponseHeadersPolicyAccessControlAllowMethods(v *types.ResponseHeadersPolicyAccessControlAllowMethods) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResponseHeadersPolicyAccessControlAllowMethods"}
+	if v.Quantity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Quantity"))
+	}
+	if v.Items == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Items"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResponseHeadersPolicyAccessControlAllowOrigins(v *types.ResponseHeadersPolicyAccessControlAllowOrigins) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResponseHeadersPolicyAccessControlAllowOrigins"}
+	if v.Quantity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Quantity"))
+	}
+	if v.Items == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Items"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResponseHeadersPolicyAccessControlExposeHeaders(v *types.ResponseHeadersPolicyAccessControlExposeHeaders) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResponseHeadersPolicyAccessControlExposeHeaders"}
+	if v.Quantity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Quantity"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResponseHeadersPolicyConfig(v *types.ResponseHeadersPolicyConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResponseHeadersPolicyConfig"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.CorsConfig != nil {
+		if err := validateResponseHeadersPolicyCorsConfig(v.CorsConfig); err != nil {
+			invalidParams.AddNested("CorsConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SecurityHeadersConfig != nil {
+		if err := validateResponseHeadersPolicySecurityHeadersConfig(v.SecurityHeadersConfig); err != nil {
+			invalidParams.AddNested("SecurityHeadersConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomHeadersConfig != nil {
+		if err := validateResponseHeadersPolicyCustomHeadersConfig(v.CustomHeadersConfig); err != nil {
+			invalidParams.AddNested("CustomHeadersConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResponseHeadersPolicyContentSecurityPolicy(v *types.ResponseHeadersPolicyContentSecurityPolicy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResponseHeadersPolicyContentSecurityPolicy"}
+	if v.Override == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Override"))
+	}
+	if v.ContentSecurityPolicy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContentSecurityPolicy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResponseHeadersPolicyContentTypeOptions(v *types.ResponseHeadersPolicyContentTypeOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResponseHeadersPolicyContentTypeOptions"}
+	if v.Override == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Override"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResponseHeadersPolicyCorsConfig(v *types.ResponseHeadersPolicyCorsConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResponseHeadersPolicyCorsConfig"}
+	if v.AccessControlAllowOrigins == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessControlAllowOrigins"))
+	} else if v.AccessControlAllowOrigins != nil {
+		if err := validateResponseHeadersPolicyAccessControlAllowOrigins(v.AccessControlAllowOrigins); err != nil {
+			invalidParams.AddNested("AccessControlAllowOrigins", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AccessControlAllowHeaders == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessControlAllowHeaders"))
+	} else if v.AccessControlAllowHeaders != nil {
+		if err := validateResponseHeadersPolicyAccessControlAllowHeaders(v.AccessControlAllowHeaders); err != nil {
+			invalidParams.AddNested("AccessControlAllowHeaders", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AccessControlAllowMethods == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessControlAllowMethods"))
+	} else if v.AccessControlAllowMethods != nil {
+		if err := validateResponseHeadersPolicyAccessControlAllowMethods(v.AccessControlAllowMethods); err != nil {
+			invalidParams.AddNested("AccessControlAllowMethods", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AccessControlAllowCredentials == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessControlAllowCredentials"))
+	}
+	if v.AccessControlExposeHeaders != nil {
+		if err := validateResponseHeadersPolicyAccessControlExposeHeaders(v.AccessControlExposeHeaders); err != nil {
+			invalidParams.AddNested("AccessControlExposeHeaders", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OriginOverride == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OriginOverride"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResponseHeadersPolicyCustomHeader(v *types.ResponseHeadersPolicyCustomHeader) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResponseHeadersPolicyCustomHeader"}
+	if v.Header == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Header"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if v.Override == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Override"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResponseHeadersPolicyCustomHeaderList(v []types.ResponseHeadersPolicyCustomHeader) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResponseHeadersPolicyCustomHeaderList"}
+	for i := range v {
+		if err := validateResponseHeadersPolicyCustomHeader(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResponseHeadersPolicyCustomHeadersConfig(v *types.ResponseHeadersPolicyCustomHeadersConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResponseHeadersPolicyCustomHeadersConfig"}
+	if v.Quantity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Quantity"))
+	}
+	if v.Items != nil {
+		if err := validateResponseHeadersPolicyCustomHeaderList(v.Items); err != nil {
+			invalidParams.AddNested("Items", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResponseHeadersPolicyFrameOptions(v *types.ResponseHeadersPolicyFrameOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResponseHeadersPolicyFrameOptions"}
+	if v.Override == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Override"))
+	}
+	if len(v.FrameOption) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("FrameOption"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResponseHeadersPolicyReferrerPolicy(v *types.ResponseHeadersPolicyReferrerPolicy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResponseHeadersPolicyReferrerPolicy"}
+	if v.Override == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Override"))
+	}
+	if len(v.ReferrerPolicy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ReferrerPolicy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResponseHeadersPolicySecurityHeadersConfig(v *types.ResponseHeadersPolicySecurityHeadersConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResponseHeadersPolicySecurityHeadersConfig"}
+	if v.XSSProtection != nil {
+		if err := validateResponseHeadersPolicyXSSProtection(v.XSSProtection); err != nil {
+			invalidParams.AddNested("XSSProtection", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FrameOptions != nil {
+		if err := validateResponseHeadersPolicyFrameOptions(v.FrameOptions); err != nil {
+			invalidParams.AddNested("FrameOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ReferrerPolicy != nil {
+		if err := validateResponseHeadersPolicyReferrerPolicy(v.ReferrerPolicy); err != nil {
+			invalidParams.AddNested("ReferrerPolicy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ContentSecurityPolicy != nil {
+		if err := validateResponseHeadersPolicyContentSecurityPolicy(v.ContentSecurityPolicy); err != nil {
+			invalidParams.AddNested("ContentSecurityPolicy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ContentTypeOptions != nil {
+		if err := validateResponseHeadersPolicyContentTypeOptions(v.ContentTypeOptions); err != nil {
+			invalidParams.AddNested("ContentTypeOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.StrictTransportSecurity != nil {
+		if err := validateResponseHeadersPolicyStrictTransportSecurity(v.StrictTransportSecurity); err != nil {
+			invalidParams.AddNested("StrictTransportSecurity", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResponseHeadersPolicyStrictTransportSecurity(v *types.ResponseHeadersPolicyStrictTransportSecurity) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResponseHeadersPolicyStrictTransportSecurity"}
+	if v.Override == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Override"))
+	}
+	if v.AccessControlMaxAgeSec == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessControlMaxAgeSec"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResponseHeadersPolicyXSSProtection(v *types.ResponseHeadersPolicyXSSProtection) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResponseHeadersPolicyXSSProtection"}
+	if v.Override == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Override"))
+	}
+	if v.Protection == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Protection"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRestrictions(v *types.Restrictions) error {
 	if v == nil {
 		return nil
@@ -3867,6 +4359,25 @@ func validateOpCreateRealtimeLogConfigInput(v *CreateRealtimeLogConfigInput) err
 	}
 }
 
+func validateOpCreateResponseHeadersPolicyInput(v *CreateResponseHeadersPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateResponseHeadersPolicyInput"}
+	if v.ResponseHeadersPolicyConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResponseHeadersPolicyConfig"))
+	} else if v.ResponseHeadersPolicyConfig != nil {
+		if err := validateResponseHeadersPolicyConfig(v.ResponseHeadersPolicyConfig); err != nil {
+			invalidParams.AddNested("ResponseHeadersPolicyConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateStreamingDistributionInput(v *CreateStreamingDistributionInput) error {
 	if v == nil {
 		return nil
@@ -4048,6 +4559,21 @@ func validateOpDeletePublicKeyInput(v *DeletePublicKeyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeletePublicKeyInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteResponseHeadersPolicyInput(v *DeleteResponseHeadersPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteResponseHeadersPolicyInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
@@ -4376,6 +4902,36 @@ func validateOpGetPublicKeyInput(v *GetPublicKeyInput) error {
 	}
 }
 
+func validateOpGetResponseHeadersPolicyConfigInput(v *GetResponseHeadersPolicyConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetResponseHeadersPolicyConfigInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetResponseHeadersPolicyInput(v *GetResponseHeadersPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetResponseHeadersPolicyInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetStreamingDistributionConfigInput(v *GetStreamingDistributionConfigInput) error {
 	if v == nil {
 		return nil
@@ -4461,6 +5017,21 @@ func validateOpListDistributionsByOriginRequestPolicyIdInput(v *ListDistribution
 	invalidParams := smithy.InvalidParamsError{Context: "ListDistributionsByOriginRequestPolicyIdInput"}
 	if v.OriginRequestPolicyId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OriginRequestPolicyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListDistributionsByResponseHeadersPolicyIdInput(v *ListDistributionsByResponseHeadersPolicyIdInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDistributionsByResponseHeadersPolicyIdInput"}
+	if v.ResponseHeadersPolicyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResponseHeadersPolicyId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4598,15 +5169,15 @@ func validateOpUpdateCachePolicyInput(v *UpdateCachePolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateCachePolicyInput"}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
-	}
 	if v.CachePolicyConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CachePolicyConfig"))
 	} else if v.CachePolicyConfig != nil {
 		if err := validateCachePolicyConfig(v.CachePolicyConfig); err != nil {
 			invalidParams.AddNested("CachePolicyConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4620,15 +5191,15 @@ func validateOpUpdateCloudFrontOriginAccessIdentityInput(v *UpdateCloudFrontOrig
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateCloudFrontOriginAccessIdentityInput"}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
-	}
 	if v.CloudFrontOriginAccessIdentityConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CloudFrontOriginAccessIdentityConfig"))
 	} else if v.CloudFrontOriginAccessIdentityConfig != nil {
 		if err := validateCloudFrontOriginAccessIdentityConfig(v.CloudFrontOriginAccessIdentityConfig); err != nil {
 			invalidParams.AddNested("CloudFrontOriginAccessIdentityConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4642,15 +5213,15 @@ func validateOpUpdateDistributionInput(v *UpdateDistributionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateDistributionInput"}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
-	}
 	if v.DistributionConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DistributionConfig"))
 	} else if v.DistributionConfig != nil {
 		if err := validateDistributionConfig(v.DistributionConfig); err != nil {
 			invalidParams.AddNested("DistributionConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4664,15 +5235,15 @@ func validateOpUpdateFieldLevelEncryptionConfigInput(v *UpdateFieldLevelEncrypti
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateFieldLevelEncryptionConfigInput"}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
-	}
 	if v.FieldLevelEncryptionConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FieldLevelEncryptionConfig"))
 	} else if v.FieldLevelEncryptionConfig != nil {
 		if err := validateFieldLevelEncryptionConfig(v.FieldLevelEncryptionConfig); err != nil {
 			invalidParams.AddNested("FieldLevelEncryptionConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4686,15 +5257,15 @@ func validateOpUpdateFieldLevelEncryptionProfileInput(v *UpdateFieldLevelEncrypt
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateFieldLevelEncryptionProfileInput"}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
-	}
 	if v.FieldLevelEncryptionProfileConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FieldLevelEncryptionProfileConfig"))
 	} else if v.FieldLevelEncryptionProfileConfig != nil {
 		if err := validateFieldLevelEncryptionProfileConfig(v.FieldLevelEncryptionProfileConfig); err != nil {
 			invalidParams.AddNested("FieldLevelEncryptionProfileConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4736,15 +5307,15 @@ func validateOpUpdateKeyGroupInput(v *UpdateKeyGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateKeyGroupInput"}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
-	}
 	if v.KeyGroupConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("KeyGroupConfig"))
 	} else if v.KeyGroupConfig != nil {
 		if err := validateKeyGroupConfig(v.KeyGroupConfig); err != nil {
 			invalidParams.AddNested("KeyGroupConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4758,15 +5329,15 @@ func validateOpUpdateOriginRequestPolicyInput(v *UpdateOriginRequestPolicyInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateOriginRequestPolicyInput"}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
-	}
 	if v.OriginRequestPolicyConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OriginRequestPolicyConfig"))
 	} else if v.OriginRequestPolicyConfig != nil {
 		if err := validateOriginRequestPolicyConfig(v.OriginRequestPolicyConfig); err != nil {
 			invalidParams.AddNested("OriginRequestPolicyConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4780,15 +5351,15 @@ func validateOpUpdatePublicKeyInput(v *UpdatePublicKeyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdatePublicKeyInput"}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
-	}
 	if v.PublicKeyConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PublicKeyConfig"))
 	} else if v.PublicKeyConfig != nil {
 		if err := validatePublicKeyConfig(v.PublicKeyConfig); err != nil {
 			invalidParams.AddNested("PublicKeyConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4814,20 +5385,42 @@ func validateOpUpdateRealtimeLogConfigInput(v *UpdateRealtimeLogConfigInput) err
 	}
 }
 
+func validateOpUpdateResponseHeadersPolicyInput(v *UpdateResponseHeadersPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateResponseHeadersPolicyInput"}
+	if v.ResponseHeadersPolicyConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResponseHeadersPolicyConfig"))
+	} else if v.ResponseHeadersPolicyConfig != nil {
+		if err := validateResponseHeadersPolicyConfig(v.ResponseHeadersPolicyConfig); err != nil {
+			invalidParams.AddNested("ResponseHeadersPolicyConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateStreamingDistributionInput(v *UpdateStreamingDistributionInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateStreamingDistributionInput"}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
-	}
 	if v.StreamingDistributionConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StreamingDistributionConfig"))
 	} else if v.StreamingDistributionConfig != nil {
 		if err := validateStreamingDistributionConfig(v.StreamingDistributionConfig); err != nil {
 			invalidParams.AddNested("StreamingDistributionConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

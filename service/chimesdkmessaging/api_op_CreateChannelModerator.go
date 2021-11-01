@@ -51,7 +51,7 @@ type CreateChannelModeratorInput struct {
 	// This member is required.
 	ChannelArn *string
 
-	// The ARN of the moderator.
+	// The AppInstanceUserArn of the moderator.
 	//
 	// This member is required.
 	ChannelModeratorArn *string

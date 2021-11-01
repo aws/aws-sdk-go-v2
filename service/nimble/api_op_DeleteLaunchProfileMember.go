@@ -4,7 +4,6 @@ package nimble
 
 import (
 	"context"
-	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
@@ -29,12 +28,12 @@ func (c *Client) DeleteLaunchProfileMember(ctx context.Context, params *DeleteLa
 
 type DeleteLaunchProfileMemberInput struct {
 
-	// The launch profile ID.
+	// The Launch Profile ID.
 	//
 	// This member is required.
 	LaunchProfileId *string
 
-	// The principal ID.
+	// The principal ID. This currently supports a Amazon Web Services SSO UserId.
 	//
 	// This member is required.
 	PrincipalId *string
@@ -44,18 +43,15 @@ type DeleteLaunchProfileMemberInput struct {
 	// This member is required.
 	StudioId *string
 
-	// To make an idempotent API request using one of these actions, specify a client
-	// token in the request. You should not reuse the same client token for other API
-	// requests. If you retry a request that completed successfully using the same
-	// client token and the same parameters, the retry succeeds without performing any
-	// further actions. If you retry a successful request using the same client token,
-	// but one or more of the parameters are different, the retry fails with a
-	// ValidationException error.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request. If you don’t specify a client token, the AWS SDK automatically
+	// generates a client token and uses it for the request to ensure idempotency.
 	ClientToken *string
 
 	noSmithyDocumentSerde
 }
 
+//
 type DeleteLaunchProfileMemberOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -108,9 +104,6 @@ func (c *Client) addOperationDeleteLaunchProfileMemberMiddlewares(stack *middlew
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addIdempotencyToken_opDeleteLaunchProfileMemberMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteLaunchProfileMemberValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -127,39 +120,6 @@ func (c *Client) addOperationDeleteLaunchProfileMemberMiddlewares(stack *middlew
 		return err
 	}
 	return nil
-}
-
-type idempotencyToken_initializeOpDeleteLaunchProfileMember struct {
-	tokenProvider IdempotencyTokenProvider
-}
-
-func (*idempotencyToken_initializeOpDeleteLaunchProfileMember) ID() string {
-	return "OperationIdempotencyTokenAutoFill"
-}
-
-func (m *idempotencyToken_initializeOpDeleteLaunchProfileMember) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	if m.tokenProvider == nil {
-		return next.HandleInitialize(ctx, in)
-	}
-
-	input, ok := in.Parameters.(*DeleteLaunchProfileMemberInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("expected middleware input to be of type *DeleteLaunchProfileMemberInput ")
-	}
-
-	if input.ClientToken == nil {
-		t, err := m.tokenProvider.GetIdempotencyToken()
-		if err != nil {
-			return out, metadata, err
-		}
-		input.ClientToken = &t
-	}
-	return next.HandleInitialize(ctx, in)
-}
-func addIdempotencyToken_opDeleteLaunchProfileMemberMiddleware(stack *middleware.Stack, cfg Options) error {
-	return stack.Initialize.Add(&idempotencyToken_initializeOpDeleteLaunchProfileMember{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opDeleteLaunchProfileMember(region string) *awsmiddleware.RegisterServiceMetadata {

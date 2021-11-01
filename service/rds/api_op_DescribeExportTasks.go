@@ -48,7 +48,18 @@ type DescribeExportTasksInput struct {
 	// The Amazon Resource Name (ARN) of the snapshot exported to Amazon S3
 	//
 	// * status -
-	// The status of the export task. Must be lowercase, for example, complete.
+	// The status of the export task. Must be lowercase. Valid statuses are the
+	// following:
+	//
+	// * canceled
+	//
+	// * canceling
+	//
+	// * complete
+	//
+	// * failed
+	//
+	// * starting
 	Filters []types.Filter
 
 	// An optional pagination token provided by a previous DescribeExportTasks request.

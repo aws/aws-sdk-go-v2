@@ -1040,6 +1040,68 @@ func awsRestjson1_serializeOpHttpBindingsDeleteAssessmentFrameworkInput(v *Delet
 	return nil
 }
 
+type awsRestjson1_serializeOpDeleteAssessmentFrameworkShare struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteAssessmentFrameworkShare) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteAssessmentFrameworkShare) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteAssessmentFrameworkShareInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/assessmentFrameworkShareRequests/{requestId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteAssessmentFrameworkShareInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteAssessmentFrameworkShareInput(v *DeleteAssessmentFrameworkShareInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.RequestId == nil || len(*v.RequestId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member requestId must not be empty")}
+	}
+	if v.RequestId != nil {
+		if err := encoder.SetURI("requestId").String(*v.RequestId); err != nil {
+			return err
+		}
+	}
+
+	if len(v.RequestType) > 0 {
+		encoder.SetQuery("requestType").String(string(v.RequestType))
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDeleteAssessmentReport struct {
 }
 
@@ -2380,6 +2442,67 @@ func awsRestjson1_serializeOpHttpBindingsListAssessmentFrameworksInput(v *ListAs
 	return nil
 }
 
+type awsRestjson1_serializeOpListAssessmentFrameworkShareRequests struct {
+}
+
+func (*awsRestjson1_serializeOpListAssessmentFrameworkShareRequests) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListAssessmentFrameworkShareRequests) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListAssessmentFrameworkShareRequestsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/assessmentFrameworkShareRequests")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListAssessmentFrameworkShareRequestsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListAssessmentFrameworkShareRequestsInput(v *ListAssessmentFrameworkShareRequestsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	if len(v.RequestType) > 0 {
+		encoder.SetQuery("requestType").String(string(v.RequestType))
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListAssessmentReports struct {
 }
 
@@ -2867,6 +2990,97 @@ func awsRestjson1_serializeOpDocumentRegisterOrganizationAdminAccountInput(v *Re
 	if v.AdminAccountId != nil {
 		ok := object.Key("adminAccountId")
 		ok.String(*v.AdminAccountId)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpStartAssessmentFrameworkShare struct {
+}
+
+func (*awsRestjson1_serializeOpStartAssessmentFrameworkShare) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpStartAssessmentFrameworkShare) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartAssessmentFrameworkShareInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/assessmentFrameworks/{frameworkId}/shareRequests")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsStartAssessmentFrameworkShareInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentStartAssessmentFrameworkShareInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsStartAssessmentFrameworkShareInput(v *StartAssessmentFrameworkShareInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.FrameworkId == nil || len(*v.FrameworkId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member frameworkId must not be empty")}
+	}
+	if v.FrameworkId != nil {
+		if err := encoder.SetURI("frameworkId").String(*v.FrameworkId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentStartAssessmentFrameworkShareInput(v *StartAssessmentFrameworkShareInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Comment != nil {
+		ok := object.Key("comment")
+		ok.String(*v.Comment)
+	}
+
+	if v.DestinationAccount != nil {
+		ok := object.Key("destinationAccount")
+		ok.String(*v.DestinationAccount)
+	}
+
+	if v.DestinationRegion != nil {
+		ok := object.Key("destinationRegion")
+		ok.String(*v.DestinationRegion)
 	}
 
 	return nil
@@ -3418,6 +3632,92 @@ func awsRestjson1_serializeOpDocumentUpdateAssessmentFrameworkInput(v *UpdateAss
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpUpdateAssessmentFrameworkShare struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateAssessmentFrameworkShare) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateAssessmentFrameworkShare) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateAssessmentFrameworkShareInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/assessmentFrameworkShareRequests/{requestId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateAssessmentFrameworkShareInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateAssessmentFrameworkShareInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateAssessmentFrameworkShareInput(v *UpdateAssessmentFrameworkShareInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.RequestId == nil || len(*v.RequestId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member requestId must not be empty")}
+	}
+	if v.RequestId != nil {
+		if err := encoder.SetURI("requestId").String(*v.RequestId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateAssessmentFrameworkShareInput(v *UpdateAssessmentFrameworkShareInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Action) > 0 {
+		ok := object.Key("action")
+		ok.String(string(v.Action))
+	}
+
+	if len(v.RequestType) > 0 {
+		ok := object.Key("requestType")
+		ok.String(string(v.RequestType))
 	}
 
 	return nil

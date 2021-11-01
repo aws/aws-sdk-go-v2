@@ -64,6 +64,11 @@ type StartTranscriptionJobInput struct {
 	// encoded at a sample rate of 16,000 Hz or higher.
 	LanguageCode types.LanguageCode
 
+	// The language identification settings associated with your transcription job.
+	// These settings include VocabularyName, VocabularyFilterName, and
+	// LanguageModelName.
+	LanguageIdSettings map[string]types.LanguageIdSettings
+
 	// An object containing a list of languages that might be present in your
 	// collection of audio files. Automatic language identification chooses a language
 	// that best matches the source audio from that list. To transcribe speech in
@@ -124,7 +129,7 @@ type StartTranscriptionJobInput struct {
 	// ID:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
 	// * ARN of a KMS Key Alias:
-	// "arn:aws:kms:region:account ID:alias/ExampleAlias"
+	// "arn:aws:kms:region:account-ID:alias/ExampleAlias"
 	//
 	// If you don't specify an
 	// encryption key, the output of the transcription job is encrypted with the

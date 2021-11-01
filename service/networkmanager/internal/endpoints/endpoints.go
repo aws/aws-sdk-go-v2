@@ -60,8 +60,17 @@ var defaultPartitions = endpoints.Partitions{
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
-		RegionRegex:    partitionRegexp.Aws,
-		IsRegionalized: true,
+		RegionRegex:       partitionRegexp.Aws,
+		IsRegionalized:    false,
+		PartitionEndpoint: "aws-global",
+		Endpoints: endpoints.Endpoints{
+			"aws-global": endpoints.Endpoint{
+				Hostname: "networkmanager.us-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
+			},
+		},
 	},
 	{
 		ID: "aws-cn",
@@ -100,7 +109,16 @@ var defaultPartitions = endpoints.Partitions{
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
-		RegionRegex:    partitionRegexp.AwsUsGov,
-		IsRegionalized: true,
+		RegionRegex:       partitionRegexp.AwsUsGov,
+		IsRegionalized:    false,
+		PartitionEndpoint: "aws-us-gov-global",
+		Endpoints: endpoints.Endpoints{
+			"aws-us-gov-global": endpoints.Endpoint{
+				Hostname: "networkmanager.us-gov-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-west-1",
+				},
+			},
+		},
 	},
 }

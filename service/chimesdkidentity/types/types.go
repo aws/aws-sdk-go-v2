@@ -98,6 +98,88 @@ type AppInstanceUser struct {
 	noSmithyDocumentSerde
 }
 
+// An endpoint under an Amazon Chime AppInstanceUser that receives messages for a
+// user. For push notifications, the endpoint is a mobile device used to receive
+// mobile push notifications for a user.
+type AppInstanceUserEndpoint struct {
+
+	// Boolean that controls whether the AppInstanceUserEndpoint is opted in to receive
+	// messages. ALL indicates the endpoint will receive all messages. NONE indicates
+	// the endpoint will receive no messages.
+	AllowMessages AllowMessages
+
+	// The ARN of the AppInstanceUser.
+	AppInstanceUserArn *string
+
+	// The time at which an AppInstanceUserEndpoint was created.
+	CreatedTimestamp *time.Time
+
+	// The attributes of an Endpoint.
+	EndpointAttributes *EndpointAttributes
+
+	// The unique identifier of the AppInstanceUserEndpoint.
+	EndpointId *string
+
+	// A read-only field that represents the state of an AppInstanceUserEndpoint.
+	// Supported values:
+	//
+	// * ACTIVE: The AppInstanceUserEndpoint is active and able to
+	// receive messages. When ACTIVE, the EndpointStatusReason remains empty.
+	//
+	// *
+	// INACTIVE: The AppInstanceUserEndpoint is inactive and can't receive message.
+	// When INACTIVE, the corresponding reason will be conveyed through
+	// EndpointStatusReason.
+	//
+	// * INVALID_DEVICE_TOKEN indicates that an
+	// AppInstanceUserEndpoint is INACTIVE due to invalid device token
+	//
+	// *
+	// INVALID_PINPOINT_ARN indicates that an AppInstanceUserEndpoint is INACTIVE due
+	// to an invalid pinpoint ARN that was input through the ResourceArn field.
+	EndpointState *EndpointState
+
+	// The time at which an AppInstanceUserEndpoint was last updated.
+	LastUpdatedTimestamp *time.Time
+
+	// The name of the AppInstanceUserEndpoint.
+	Name *string
+
+	// The ARN of the resource to which the endpoint belongs.
+	ResourceArn *string
+
+	// The type of the AppInstanceUserEndpoint.
+	Type AppInstanceUserEndpointType
+
+	noSmithyDocumentSerde
+}
+
+// Summary of the details of an AppInstanceUserEndpoint.
+type AppInstanceUserEndpointSummary struct {
+
+	// BBoolean that controls whether the AppInstanceUserEndpoint is opted in to
+	// receive messages. ALL indicates the endpoint will receive all messages. NONE
+	// indicates the endpoint will receive no messages.
+	AllowMessages AllowMessages
+
+	// The ARN of the AppInstanceUser.
+	AppInstanceUserArn *string
+
+	// The unique identifier of the AppInstanceUserEndpoint.
+	EndpointId *string
+
+	// A read-only field that represent the state of an AppInstanceUserEndpoint.
+	EndpointState *EndpointState
+
+	// The name of the AppInstanceUserEndpoint.
+	Name *string
+
+	// The type of the AppInstanceUserEndpoint.
+	Type AppInstanceUserEndpointType
+
+	noSmithyDocumentSerde
+}
+
 // Summary of the details of an AppInstanceUser.
 type AppInstanceUserSummary struct {
 
@@ -122,6 +204,50 @@ type ChannelRetentionSettings struct {
 	noSmithyDocumentSerde
 }
 
+// The attributes of an Endpoint.
+type EndpointAttributes struct {
+
+	// The device token for the GCM, APNS, and APNS_SANDBOX endpoint types.
+	//
+	// This member is required.
+	DeviceToken *string
+
+	// The VOIP device token for the APNS and APNS_SANDBOX endpoint types.
+	VoipDeviceToken *string
+
+	noSmithyDocumentSerde
+}
+
+// A read-only field that represents the state of an AppInstanceUserEndpoint.
+// Supported values:
+//
+// * ACTIVE: The AppInstanceUserEndpoint is active and able to
+// receive messages. When ACTIVE, the EndpointStatusReason remains empty.
+//
+// *
+// INACTIVE: The AppInstanceUserEndpoint is inactive and can't receive message.
+// When INACTIVE, the corresponding reason will be conveyed through
+// EndpointStatusReason.
+//
+// * INVALID_DEVICE_TOKEN indicates that an
+// AppInstanceUserEndpoint is INACTIVE due to invalid device token
+//
+// *
+// INVALID_PINPOINT_ARN indicates that an AppInstanceUserEndpoint is INACTIVE due
+// to an invalid pinpoint ARN that was input through the ResourceArn field.
+type EndpointState struct {
+
+	// Enum that indicates the Status of an AppInstanceUserEndpoint.
+	//
+	// This member is required.
+	Status EndpointStatus
+
+	// The reason for the EndpointStatus.
+	StatusReason EndpointStatusReason
+
+	noSmithyDocumentSerde
+}
+
 // The details of a user.
 type Identity struct {
 
@@ -134,15 +260,15 @@ type Identity struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a tag applied to a resource.
+// A tag object containing a key-value pair.
 type Tag struct {
 
-	// The key of the tag.
+	// The key in a tag.
 	//
 	// This member is required.
 	Key *string
 
-	// The value of the tag.
+	// The value in a tag.
 	//
 	// This member is required.
 	Value *string

@@ -318,7 +318,8 @@ type DBClusterRole struct {
 
 	// The name of the feature associated with the Amazon Identity and Access
 	// Management (IAM) role. For the list of supported feature names, see
-	// DBEngineVersion.
+	// DescribeDBEngineVersions
+	// (https://docs.aws.amazon.com/neptune/latest/userguide/api-other-apis.html#DescribeDBEngineVersions).
 	FeatureName *string
 
 	// The Amazon Resource Name (ARN) of the IAM role that is associated with the DB
@@ -1242,15 +1243,15 @@ type Subnet struct {
 type Tag struct {
 
 	// A key is the required name of the tag. The string value can be from 1 to 128
-	// Unicode characters in length and can't be prefixed with "aws:" or "rds:". The
-	// string can only contain only the set of Unicode letters, digits, white-space,
-	// '_', '.', '/', '=', '+', '-' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
+	// Unicode characters in length and can't be prefixed with aws: or rds:. The string
+	// can only contain the set of Unicode letters, digits, white-space, '_', '.', '/',
+	// '=', '+', '-' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
 	Key *string
 
 	// A value is the optional value of the tag. The string value can be from 1 to 256
-	// Unicode characters in length and can't be prefixed with "aws:" or "rds:". The
-	// string can only contain only the set of Unicode letters, digits, white-space,
-	// '_', '.', '/', '=', '+', '-' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
+	// Unicode characters in length and can't be prefixed with aws: or rds:. The string
+	// can only contain the set of Unicode letters, digits, white-space, '_', '.', '/',
+	// '=', '+', '-' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
 	Value *string
 
 	noSmithyDocumentSerde

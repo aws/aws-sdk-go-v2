@@ -30,12 +30,12 @@ func (c *Client) BatchAssociateAssessmentReportEvidence(ctx context.Context, par
 
 type BatchAssociateAssessmentReportEvidenceInput struct {
 
-	// The unique identifier for the specified assessment.
+	// The identifier for the assessment.
 	//
 	// This member is required.
 	AssessmentId *string
 
-	// The identifier for the folder in which the evidence is stored.
+	// The identifier for the folder that the evidence is stored in.
 	//
 	// This member is required.
 	EvidenceFolderId *string
@@ -50,10 +50,10 @@ type BatchAssociateAssessmentReportEvidenceInput struct {
 
 type BatchAssociateAssessmentReportEvidenceOutput struct {
 
-	// A list of errors returned by the BatchAssociateAssessmentReportEvidence API.
+	// A list of errors that the BatchAssociateAssessmentReportEvidence API returned.
 	Errors []types.AssessmentReportEvidenceError
 
-	// The identifier for the evidence.
+	// The list of evidence identifiers.
 	EvidenceIds []string
 
 	// Metadata pertaining to the operation's result.

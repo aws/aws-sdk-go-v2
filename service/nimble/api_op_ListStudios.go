@@ -4,6 +4,7 @@ package nimble
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/nimble/types"
@@ -30,19 +31,22 @@ func (c *Client) ListStudios(ctx context.Context, params *ListStudiosInput, optF
 
 type ListStudiosInput struct {
 
-	// The token for the next set of results, or null if there are no more results.
+	// The token to request the next page of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
 }
 
+//
 type ListStudiosOutput struct {
+
+	// A collection of studios.
+	//
+	// This member is required.
+	Studios []types.Studio
 
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
-
-	// A collection of studios.
-	Studios []types.Studio
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -108,6 +112,79 @@ func (c *Client) addOperationListStudiosMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	return nil
+}
+
+// ListStudiosAPIClient is a client that implements the ListStudios operation.
+type ListStudiosAPIClient interface {
+	ListStudios(context.Context, *ListStudiosInput, ...func(*Options)) (*ListStudiosOutput, error)
+}
+
+var _ ListStudiosAPIClient = (*Client)(nil)
+
+// ListStudiosPaginatorOptions is the paginator options for ListStudios
+type ListStudiosPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListStudiosPaginator is a paginator for ListStudios
+type ListStudiosPaginator struct {
+	options   ListStudiosPaginatorOptions
+	client    ListStudiosAPIClient
+	params    *ListStudiosInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListStudiosPaginator returns a new ListStudiosPaginator
+func NewListStudiosPaginator(client ListStudiosAPIClient, params *ListStudiosInput, optFns ...func(*ListStudiosPaginatorOptions)) *ListStudiosPaginator {
+	if params == nil {
+		params = &ListStudiosInput{}
+	}
+
+	options := ListStudiosPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListStudiosPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListStudiosPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListStudios page.
+func (p *ListStudiosPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListStudiosOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.ListStudios(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListStudios(region string) *awsmiddleware.RegisterServiceMetadata {

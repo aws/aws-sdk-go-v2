@@ -147,6 +147,11 @@ var defaultPartitions = endpoints.Partitions{
 					Region: "us-gov-west-1",
 				},
 			},
+			"us-gov-west-1": endpoints.Endpoint{
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-west-1",
+				},
+			},
 		},
 	},
 }

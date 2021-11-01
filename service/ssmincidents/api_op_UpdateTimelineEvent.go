@@ -36,13 +36,13 @@ type UpdateTimelineEventInput struct {
 	// This member is required.
 	EventId *string
 
-	// The Amazon Resource Name (ARN) of the incident that the timeline event is part
-	// of.
+	// The Amazon Resource Name (ARN) of the incident that includes the timeline event.
 	//
 	// This member is required.
 	IncidentRecordArn *string
 
-	// A token ensuring that the action is called only once with the specified details.
+	// A token ensuring that the operation is called only once with the specified
+	// details.
 	ClientToken *string
 
 	// A short description of the event.

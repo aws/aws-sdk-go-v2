@@ -290,6 +290,26 @@ func (m *validateOpCreateCustomAvailabilityZone) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateCustomDBEngineVersion struct {
+}
+
+func (*validateOpCreateCustomDBEngineVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCustomDBEngineVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCustomDBEngineVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCustomDBEngineVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDBClusterEndpoint struct {
 }
 
@@ -585,6 +605,26 @@ func (m *validateOpDeleteCustomAvailabilityZone) HandleInitialize(ctx context.Co
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteCustomAvailabilityZoneInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteCustomDBEngineVersion struct {
+}
+
+func (*validateOpDeleteCustomDBEngineVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCustomDBEngineVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCustomDBEngineVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCustomDBEngineVersionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1810,6 +1850,26 @@ func (m *validateOpModifyCurrentDBClusterCapacity) HandleInitialize(ctx context.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpModifyCustomDBEngineVersion struct {
+}
+
+func (*validateOpModifyCustomDBEngineVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpModifyCustomDBEngineVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ModifyCustomDBEngineVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpModifyCustomDBEngineVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpModifyDBClusterEndpoint struct {
 }
 
@@ -2686,6 +2746,10 @@ func addOpCreateCustomAvailabilityZoneValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpCreateCustomAvailabilityZone{}, middleware.After)
 }
 
+func addOpCreateCustomDBEngineVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCustomDBEngineVersion{}, middleware.After)
+}
+
 func addOpCreateDBClusterEndpointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDBClusterEndpoint{}, middleware.After)
 }
@@ -2744,6 +2808,10 @@ func addOpCreateOptionGroupValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteCustomAvailabilityZoneValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteCustomAvailabilityZone{}, middleware.After)
+}
+
+func addOpDeleteCustomDBEngineVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCustomDBEngineVersion{}, middleware.After)
 }
 
 func addOpDeleteDBClusterEndpointValidationMiddleware(stack *middleware.Stack) error {
@@ -2988,6 +3056,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpModifyCurrentDBClusterCapacityValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpModifyCurrentDBClusterCapacity{}, middleware.After)
+}
+
+func addOpModifyCustomDBEngineVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpModifyCustomDBEngineVersion{}, middleware.After)
 }
 
 func addOpModifyDBClusterEndpointValidationMiddleware(stack *middleware.Stack) error {
@@ -3479,6 +3551,33 @@ func validateOpCreateCustomAvailabilityZoneInput(v *CreateCustomAvailabilityZone
 	}
 }
 
+func validateOpCreateCustomDBEngineVersionInput(v *CreateCustomDBEngineVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCustomDBEngineVersionInput"}
+	if v.Engine == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Engine"))
+	}
+	if v.EngineVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EngineVersion"))
+	}
+	if v.DatabaseInstallationFilesS3BucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseInstallationFilesS3BucketName"))
+	}
+	if v.KMSKeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KMSKeyId"))
+	}
+	if v.Manifest == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Manifest"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateDBClusterEndpointInput(v *CreateDBClusterEndpointInput) error {
 	if v == nil {
 		return nil
@@ -3771,6 +3870,24 @@ func validateOpDeleteCustomAvailabilityZoneInput(v *DeleteCustomAvailabilityZone
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteCustomAvailabilityZoneInput"}
 	if v.CustomAvailabilityZoneId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CustomAvailabilityZoneId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteCustomDBEngineVersionInput(v *DeleteCustomDBEngineVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCustomDBEngineVersionInput"}
+	if v.Engine == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Engine"))
+	}
+	if v.EngineVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EngineVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4811,6 +4928,24 @@ func validateOpModifyCurrentDBClusterCapacityInput(v *ModifyCurrentDBClusterCapa
 	invalidParams := smithy.InvalidParamsError{Context: "ModifyCurrentDBClusterCapacityInput"}
 	if v.DBClusterIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DBClusterIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpModifyCustomDBEngineVersionInput(v *ModifyCustomDBEngineVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyCustomDBEngineVersionInput"}
+	if v.Engine == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Engine"))
+	}
+	if v.EngineVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EngineVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

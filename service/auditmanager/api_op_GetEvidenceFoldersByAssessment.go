@@ -30,15 +30,15 @@ func (c *Client) GetEvidenceFoldersByAssessment(ctx context.Context, params *Get
 
 type GetEvidenceFoldersByAssessmentInput struct {
 
-	// The identifier for the specified assessment.
+	// The identifier for the assessment.
 	//
 	// This member is required.
 	AssessmentId *string
 
-	// Represents the maximum number of results per page, or per API request call.
+	// Represents the maximum number of results on a page or for an API request call.
 	MaxResults *int32
 
-	// The pagination token used to fetch the next set of results.
+	// The pagination token that's used to fetch the next set of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -46,10 +46,11 @@ type GetEvidenceFoldersByAssessmentInput struct {
 
 type GetEvidenceFoldersByAssessmentOutput struct {
 
-	// The list of evidence folders returned by the GetEvidenceFoldersByAssessment API.
+	// The list of evidence folders that the GetEvidenceFoldersByAssessment API
+	// returned.
 	EvidenceFolders []types.AssessmentEvidenceFolder
 
-	// The pagination token used to fetch the next set of results.
+	// The pagination token that's used to fetch the next set of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -132,7 +133,7 @@ var _ GetEvidenceFoldersByAssessmentAPIClient = (*Client)(nil)
 // GetEvidenceFoldersByAssessmentPaginatorOptions is the paginator options for
 // GetEvidenceFoldersByAssessment
 type GetEvidenceFoldersByAssessmentPaginatorOptions struct {
-	// Represents the maximum number of results per page, or per API request call.
+	// Represents the maximum number of results on a page or for an API request call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

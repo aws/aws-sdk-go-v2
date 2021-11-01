@@ -64,6 +64,11 @@ var defaultPartitions = endpoints.Partitions{
 		IsRegionalized:    false,
 		PartitionEndpoint: "aws-global",
 		Endpoints: endpoints.Endpoints{
+			"aws": endpoints.Endpoint{
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
 			"aws-fips": endpoints.Endpoint{
 				Hostname: "waf-fips.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
@@ -72,6 +77,12 @@ var defaultPartitions = endpoints.Partitions{
 			},
 			"aws-global": endpoints.Endpoint{
 				Hostname: "waf.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
+			"aws-global-fips": endpoints.Endpoint{
+				Hostname: "waf-fips.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-east-1",
 				},

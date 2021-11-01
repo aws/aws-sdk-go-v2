@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new option group. You can create up to 20 option groups.
+// Creates a new option group. You can create up to 20 option groups. This command
+// doesn't apply to RDS Custom.
 func (c *Client) CreateOptionGroup(ctx context.Context, params *CreateOptionGroupInput, optFns ...func(*Options)) (*CreateOptionGroupOutput, error) {
 	if params == nil {
 		params = &CreateOptionGroupInput{}

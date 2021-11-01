@@ -30,15 +30,15 @@ func (c *Client) ListControls(ctx context.Context, params *ListControlsInput, op
 
 type ListControlsInput struct {
 
-	// The type of control, such as standard or custom.
+	// The type of control, such as a standard control or a custom control.
 	//
 	// This member is required.
 	ControlType types.ControlType
 
-	// Represents the maximum number of results per page, or per API request call.
+	// Represents the maximum number of results on a page or for an API request call.
 	MaxResults *int32
 
-	// The pagination token used to fetch the next set of results.
+	// The pagination token that's used to fetch the next set of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -46,10 +46,10 @@ type ListControlsInput struct {
 
 type ListControlsOutput struct {
 
-	// The list of control metadata objects returned by the ListControls API.
+	// The list of control metadata objects that the ListControls API returned.
 	ControlMetadataList []types.ControlMetadata
 
-	// The pagination token used to fetch the next set of results.
+	// The pagination token that's used to fetch the next set of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -130,7 +130,7 @@ var _ ListControlsAPIClient = (*Client)(nil)
 
 // ListControlsPaginatorOptions is the paginator options for ListControls
 type ListControlsPaginatorOptions struct {
-	// Represents the maximum number of results per page, or per API request call.
+	// Represents the maximum number of results on a page or for an API request call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

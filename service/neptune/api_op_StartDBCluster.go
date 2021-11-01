@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts an Amazon Neptune DB cluster that was stopped using the AWS console, the
-// Amazon CLI stop-db-cluster command, or the StopDBCluster API.
+// Starts an Amazon Neptune DB cluster that was stopped using the Amazon console,
+// the Amazon CLI stop-db-cluster command, or the StopDBCluster API.
 func (c *Client) StartDBCluster(ctx context.Context, params *StartDBClusterInput, optFns ...func(*Options)) (*StartDBClusterOutput, error) {
 	if params == nil {
 		params = &StartDBClusterInput{}

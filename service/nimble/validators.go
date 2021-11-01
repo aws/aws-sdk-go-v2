@@ -710,6 +710,26 @@ func (m *validateOpPutStudioMembers) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartStreamingSession struct {
+}
+
+func (*validateOpStartStreamingSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartStreamingSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartStreamingSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartStreamingSessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartStudioSSOConfigurationRepair struct {
 }
 
@@ -725,6 +745,26 @@ func (m *validateOpStartStudioSSOConfigurationRepair) HandleInitialize(ctx conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartStudioSSOConfigurationRepairInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopStreamingSession struct {
+}
+
+func (*validateOpStopStreamingSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopStreamingSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopStreamingSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopStreamingSessionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1010,8 +1050,16 @@ func addOpPutStudioMembersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutStudioMembers{}, middleware.After)
 }
 
+func addOpStartStreamingSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartStreamingSession{}, middleware.After)
+}
+
 func addOpStartStudioSSOConfigurationRepairValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartStudioSSOConfigurationRepair{}, middleware.After)
+}
+
+func addOpStopStreamingSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopStreamingSession{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1810,11 +1858,47 @@ func validateOpPutStudioMembersInput(v *PutStudioMembersInput) error {
 	}
 }
 
+func validateOpStartStreamingSessionInput(v *StartStreamingSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartStreamingSessionInput"}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if v.StudioId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StudioId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartStudioSSOConfigurationRepairInput(v *StartStudioSSOConfigurationRepairInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartStudioSSOConfigurationRepairInput"}
+	if v.StudioId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StudioId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopStreamingSessionInput(v *StopStreamingSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopStreamingSessionInput"}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
 	if v.StudioId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StudioId"))
 	}

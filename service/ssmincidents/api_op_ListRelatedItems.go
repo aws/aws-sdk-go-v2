@@ -30,8 +30,8 @@ func (c *Client) ListRelatedItems(ctx context.Context, params *ListRelatedItemsI
 
 type ListRelatedItemsInput struct {
 
-	// The Amazon Resource Name (ARN) of the incident record that you are listing
-	// related items for.
+	// The Amazon Resource Name (ARN) of the incident record containing the listed
+	// related items.
 	//
 	// This member is required.
 	IncidentRecordArn *string

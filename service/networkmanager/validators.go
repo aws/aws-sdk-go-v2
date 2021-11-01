@@ -429,6 +429,126 @@ func (m *validateOpGetLinks) HandleInitialize(ctx context.Context, in middleware
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetNetworkResourceCounts struct {
+}
+
+func (*validateOpGetNetworkResourceCounts) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetNetworkResourceCounts) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetNetworkResourceCountsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetNetworkResourceCountsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetNetworkResourceRelationships struct {
+}
+
+func (*validateOpGetNetworkResourceRelationships) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetNetworkResourceRelationships) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetNetworkResourceRelationshipsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetNetworkResourceRelationshipsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetNetworkResources struct {
+}
+
+func (*validateOpGetNetworkResources) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetNetworkResources) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetNetworkResourcesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetNetworkResourcesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetNetworkRoutes struct {
+}
+
+func (*validateOpGetNetworkRoutes) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetNetworkRoutes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetNetworkRoutesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetNetworkRoutesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetNetworkTelemetry struct {
+}
+
+func (*validateOpGetNetworkTelemetry) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetNetworkTelemetry) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetNetworkTelemetryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetNetworkTelemetryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetRouteAnalysis struct {
+}
+
+func (*validateOpGetRouteAnalysis) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRouteAnalysis) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRouteAnalysisInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRouteAnalysisInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetSites struct {
 }
 
@@ -524,6 +644,26 @@ func (m *validateOpRegisterTransitGateway) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpRegisterTransitGatewayInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartRouteAnalysis struct {
+}
+
+func (*validateOpStartRouteAnalysis) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartRouteAnalysis) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartRouteAnalysisInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartRouteAnalysisInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -649,6 +789,26 @@ func (m *validateOpUpdateLink) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateNetworkResourceMetadata struct {
+}
+
+func (*validateOpUpdateNetworkResourceMetadata) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateNetworkResourceMetadata) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateNetworkResourceMetadataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateNetworkResourceMetadataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateSite struct {
 }
 
@@ -753,6 +913,30 @@ func addOpGetLinksValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetLinks{}, middleware.After)
 }
 
+func addOpGetNetworkResourceCountsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetNetworkResourceCounts{}, middleware.After)
+}
+
+func addOpGetNetworkResourceRelationshipsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetNetworkResourceRelationships{}, middleware.After)
+}
+
+func addOpGetNetworkResourcesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetNetworkResources{}, middleware.After)
+}
+
+func addOpGetNetworkRoutesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetNetworkRoutes{}, middleware.After)
+}
+
+func addOpGetNetworkTelemetryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetNetworkTelemetry{}, middleware.After)
+}
+
+func addOpGetRouteAnalysisValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRouteAnalysis{}, middleware.After)
+}
+
 func addOpGetSitesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSites{}, middleware.After)
 }
@@ -771,6 +955,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpRegisterTransitGatewayValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRegisterTransitGateway{}, middleware.After)
+}
+
+func addOpStartRouteAnalysisValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartRouteAnalysis{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -795,6 +983,10 @@ func addOpUpdateGlobalNetworkValidationMiddleware(stack *middleware.Stack) error
 
 func addOpUpdateLinkValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateLink{}, middleware.After)
+}
+
+func addOpUpdateNetworkResourceMetadataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateNetworkResourceMetadata{}, middleware.After)
 }
 
 func addOpUpdateSiteValidationMiddleware(stack *middleware.Stack) error {
@@ -1173,6 +1365,102 @@ func validateOpGetLinksInput(v *GetLinksInput) error {
 	}
 }
 
+func validateOpGetNetworkResourceCountsInput(v *GetNetworkResourceCountsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetNetworkResourceCountsInput"}
+	if v.GlobalNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalNetworkId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetNetworkResourceRelationshipsInput(v *GetNetworkResourceRelationshipsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetNetworkResourceRelationshipsInput"}
+	if v.GlobalNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalNetworkId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetNetworkResourcesInput(v *GetNetworkResourcesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetNetworkResourcesInput"}
+	if v.GlobalNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalNetworkId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetNetworkRoutesInput(v *GetNetworkRoutesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetNetworkRoutesInput"}
+	if v.GlobalNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalNetworkId"))
+	}
+	if v.RouteTableIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RouteTableIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetNetworkTelemetryInput(v *GetNetworkTelemetryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetNetworkTelemetryInput"}
+	if v.GlobalNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalNetworkId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetRouteAnalysisInput(v *GetRouteAnalysisInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRouteAnalysisInput"}
+	if v.GlobalNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalNetworkId"))
+	}
+	if v.RouteAnalysisId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RouteAnalysisId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetSitesInput(v *GetSitesInput) error {
 	if v == nil {
 		return nil
@@ -1243,6 +1531,27 @@ func validateOpRegisterTransitGatewayInput(v *RegisterTransitGatewayInput) error
 	}
 	if v.TransitGatewayArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TransitGatewayArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartRouteAnalysisInput(v *StartRouteAnalysisInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartRouteAnalysisInput"}
+	if v.GlobalNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalNetworkId"))
+	}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	}
+	if v.Destination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1348,6 +1657,27 @@ func validateOpUpdateLinkInput(v *UpdateLinkInput) error {
 	}
 	if v.LinkId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LinkId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateNetworkResourceMetadataInput(v *UpdateNetworkResourceMetadataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateNetworkResourceMetadataInput"}
+	if v.GlobalNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalNetworkId"))
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Metadata == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Metadata"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

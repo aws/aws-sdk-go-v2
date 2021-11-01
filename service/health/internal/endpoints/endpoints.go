@@ -69,6 +69,11 @@ var defaultPartitions = endpoints.Partitions{
 					Region: "us-east-2",
 				},
 			},
+			"us-east-2": endpoints.Endpoint{
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-2",
+				},
+			},
 		},
 	},
 	{
@@ -123,6 +128,11 @@ var defaultPartitions = endpoints.Partitions{
 		Endpoints: endpoints.Endpoints{
 			"fips-us-gov-west-1": endpoints.Endpoint{
 				Hostname: "health-fips.us-gov-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-west-1",
+				},
+			},
+			"us-gov-west-1": endpoints.Endpoint{
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-gov-west-1",
 				},

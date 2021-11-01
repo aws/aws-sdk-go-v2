@@ -20,8 +20,19 @@ import (
 // connection: {"topic":"aws/subscribe","content":{"topics":["aws/chat"]}} Upon
 // websocket URL expiry, as specified in the response ConnectionExpiry parameter,
 // clients need to call this API again to obtain a new websocket URL and perform
-// the same steps as before. The Amazon Connect Participant Service APIs do not use
-// Signature Version 4 authentication
+// the same steps as before. Message streaming support: This API can also be used
+// together with the StartContactStreaming
+// (https://docs.aws.amazon.com/connect/latest/APIReference/API_StartContactStreaming.html)
+// API to create a participant connection for chat contacts that are not using a
+// websocket. For more information about message streaming, Enable real-time chat
+// message streaming
+// (https://docs.aws.amazon.com/connect/latest/adminguide/chat-message-streaming.html)
+// in the Amazon Connect Administrator Guide. Feature specifications: For
+// information about feature specifications, such as the allowed number of open
+// websocket connections per participant, see Feature specifications
+// (https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits)
+// in the Amazon Connect Administrator Guide. The Amazon Connect Participant
+// Service APIs do not use Signature Version 4 authentication
 // (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
 func (c *Client) CreateParticipantConnection(ctx context.Context, params *CreateParticipantConnectionInput, optFns ...func(*Options)) (*CreateParticipantConnectionOutput, error) {
 	if params == nil {
@@ -40,7 +51,7 @@ func (c *Client) CreateParticipantConnection(ctx context.Context, params *Create
 
 type CreateParticipantConnectionInput struct {
 
-	// This is a header parameter. The Participant Token as obtained from
+	// This is a header parameter. The ParticipantToken as obtained from
 	// StartChatContact
 	// (https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContact.html)
 	// API response.
@@ -52,6 +63,10 @@ type CreateParticipantConnectionInput struct {
 	//
 	// This member is required.
 	Type []types.ConnectionType
+
+	// Amazon Connect Participant is used to mark the participant as connected for
+	// message streaming.
+	ConnectParticipant *bool
 
 	noSmithyDocumentSerde
 }

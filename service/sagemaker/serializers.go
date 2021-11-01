@@ -157,6 +157,53 @@ func (m *awsAwsjson11_serializeOpAssociateTrialComponent) HandleSerialize(ctx co
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpBatchDescribeModelPackage struct {
+}
+
+func (*awsAwsjson11_serializeOpBatchDescribeModelPackage) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpBatchDescribeModelPackage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*BatchDescribeModelPackageInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("SageMaker.BatchDescribeModelPackage")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentBatchDescribeModelPackageInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpCreateAction struct {
 }
 
@@ -11014,6 +11061,53 @@ func (m *awsAwsjson11_serializeOpUpdatePipelineExecution) HandleSerialize(ctx co
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpUpdateProject struct {
+}
+
+func (*awsAwsjson11_serializeOpUpdateProject) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUpdateProject) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateProjectInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("SageMaker.UpdateProject")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUpdateProjectInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpUpdateTrainingJob struct {
 }
 
@@ -12412,6 +12506,28 @@ func awsAwsjson11_serializeDocumentCsvContentTypes(v []string, value smithyjson.
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentCustomerMetadataKeyList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCustomerMetadataMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentCustomImage(v *types.CustomImage, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -12872,6 +12988,52 @@ func awsAwsjson11_serializeDocumentDevices(v []types.Device, value smithyjson.Va
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDomainSecurityGroupIds(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDomainSettings(v *types.DomainSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RStudioServerProDomainSettings != nil {
+		ok := object.Key("RStudioServerProDomainSettings")
+		if err := awsAwsjson11_serializeDocumentRStudioServerProDomainSettings(v.RStudioServerProDomainSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SecurityGroupIds != nil {
+		ok := object.Key("SecurityGroupIds")
+		if err := awsAwsjson11_serializeDocumentDomainSecurityGroupIds(v.SecurityGroupIds, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDomainSettingsForUpdate(v *types.DomainSettingsForUpdate, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RStudioServerProDomainSettingsForUpdate != nil {
+		ok := object.Key("RStudioServerProDomainSettingsForUpdate")
+		if err := awsAwsjson11_serializeDocumentRStudioServerProDomainSettingsForUpdate(v.RStudioServerProDomainSettingsForUpdate, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -14522,6 +14684,17 @@ func awsAwsjson11_serializeDocumentModelMetrics(v *types.ModelMetrics, value smi
 		}
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentModelPackageArnList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -16307,6 +16480,78 @@ func awsAwsjson11_serializeDocumentRetryStrategy(v *types.RetryStrategy, value s
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentRSessionAppSettings(v *types.RSessionAppSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRStudioServerProAppSettings(v *types.RStudioServerProAppSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AccessStatus) > 0 {
+		ok := object.Key("AccessStatus")
+		ok.String(string(v.AccessStatus))
+	}
+
+	if len(v.UserGroup) > 0 {
+		ok := object.Key("UserGroup")
+		ok.String(string(v.UserGroup))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRStudioServerProDomainSettings(v *types.RStudioServerProDomainSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DefaultResourceSpec != nil {
+		ok := object.Key("DefaultResourceSpec")
+		if err := awsAwsjson11_serializeDocumentResourceSpec(v.DefaultResourceSpec, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DomainExecutionRoleArn != nil {
+		ok := object.Key("DomainExecutionRoleArn")
+		ok.String(*v.DomainExecutionRoleArn)
+	}
+
+	if v.RStudioConnectUrl != nil {
+		ok := object.Key("RStudioConnectUrl")
+		ok.String(*v.RStudioConnectUrl)
+	}
+
+	if v.RStudioPackageManagerUrl != nil {
+		ok := object.Key("RStudioPackageManagerUrl")
+		ok.String(*v.RStudioPackageManagerUrl)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRStudioServerProDomainSettingsForUpdate(v *types.RStudioServerProDomainSettingsForUpdate, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DefaultResourceSpec != nil {
+		ok := object.Key("DefaultResourceSpec")
+		if err := awsAwsjson11_serializeDocumentResourceSpec(v.DefaultResourceSpec, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DomainExecutionRoleArn != nil {
+		ok := object.Key("DomainExecutionRoleArn")
+		ok.String(*v.DomainExecutionRoleArn)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentRuleParameters(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -16451,6 +16696,25 @@ func awsAwsjson11_serializeDocumentServiceCatalogProvisioningDetails(v *types.Se
 		ok := object.Key("ProductId")
 		ok.String(*v.ProductId)
 	}
+
+	if v.ProvisioningArtifactId != nil {
+		ok := object.Key("ProvisioningArtifactId")
+		ok.String(*v.ProvisioningArtifactId)
+	}
+
+	if v.ProvisioningParameters != nil {
+		ok := object.Key("ProvisioningParameters")
+		if err := awsAwsjson11_serializeDocumentProvisioningParameters(v.ProvisioningParameters, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentServiceCatalogProvisioningUpdateDetails(v *types.ServiceCatalogProvisioningUpdateDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
 
 	if v.ProvisioningArtifactId != nil {
 		ok := object.Key("ProvisioningArtifactId")
@@ -17233,6 +17497,20 @@ func awsAwsjson11_serializeDocumentUserSettings(v *types.UserSettings, value smi
 		}
 	}
 
+	if v.RSessionAppSettings != nil {
+		ok := object.Key("RSessionAppSettings")
+		if err := awsAwsjson11_serializeDocumentRSessionAppSettings(v.RSessionAppSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RStudioServerProAppSettings != nil {
+		ok := object.Key("RStudioServerProAppSettings")
+		if err := awsAwsjson11_serializeDocumentRStudioServerProAppSettings(v.RStudioServerProAppSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SecurityGroups != nil {
 		ok := object.Key("SecurityGroups")
 		if err := awsAwsjson11_serializeDocumentSecurityGroupIds(v.SecurityGroups, ok); err != nil {
@@ -17367,6 +17645,20 @@ func awsAwsjson11_serializeOpDocumentAssociateTrialComponentInput(v *AssociateTr
 	if v.TrialName != nil {
 		ok := object.Key("TrialName")
 		ok.String(*v.TrialName)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentBatchDescribeModelPackageInput(v *BatchDescribeModelPackageInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ModelPackageArnList != nil {
+		ok := object.Key("ModelPackageArnList")
+		if err := awsAwsjson11_serializeDocumentModelPackageArnList(v.ModelPackageArnList, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -17902,6 +18194,11 @@ func awsAwsjson11_serializeOpDocumentCreateDomainInput(v *CreateDomainInput, val
 		ok.String(string(v.AppNetworkAccessType))
 	}
 
+	if len(v.AppSecurityGroupManagement) > 0 {
+		ok := object.Key("AppSecurityGroupManagement")
+		ok.String(string(v.AppSecurityGroupManagement))
+	}
+
 	if len(v.AuthMode) > 0 {
 		ok := object.Key("AuthMode")
 		ok.String(string(v.AuthMode))
@@ -17917,6 +18214,13 @@ func awsAwsjson11_serializeOpDocumentCreateDomainInput(v *CreateDomainInput, val
 	if v.DomainName != nil {
 		ok := object.Key("DomainName")
 		ok.String(*v.DomainName)
+	}
+
+	if v.DomainSettings != nil {
+		ok := object.Key("DomainSettings")
+		if err := awsAwsjson11_serializeDocumentDomainSettings(v.DomainSettings, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.HomeEfsFileSystemKmsKeyId != nil {
@@ -18649,6 +18953,13 @@ func awsAwsjson11_serializeOpDocumentCreateModelPackageInput(v *CreateModelPacka
 	if v.ClientToken != nil {
 		ok := object.Key("ClientToken")
 		ok.String(*v.ClientToken)
+	}
+
+	if v.CustomerMetadataProperties != nil {
+		ok := object.Key("CustomerMetadataProperties")
+		if err := awsAwsjson11_serializeDocumentCustomerMetadataMap(v.CustomerMetadataProperties, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.InferenceSpecification != nil {
@@ -23932,6 +24243,13 @@ func awsAwsjson11_serializeOpDocumentUpdateDomainInput(v *UpdateDomainInput, val
 		ok.String(*v.DomainId)
 	}
 
+	if v.DomainSettingsForUpdate != nil {
+		ok := object.Key("DomainSettingsForUpdate")
+		if err := awsAwsjson11_serializeDocumentDomainSettingsForUpdate(v.DomainSettingsForUpdate, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -24053,6 +24371,20 @@ func awsAwsjson11_serializeOpDocumentUpdateModelPackageInput(v *UpdateModelPacka
 	if v.ApprovalDescription != nil {
 		ok := object.Key("ApprovalDescription")
 		ok.String(*v.ApprovalDescription)
+	}
+
+	if v.CustomerMetadataProperties != nil {
+		ok := object.Key("CustomerMetadataProperties")
+		if err := awsAwsjson11_serializeDocumentCustomerMetadataMap(v.CustomerMetadataProperties, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CustomerMetadataPropertiesToRemove != nil {
+		ok := object.Key("CustomerMetadataPropertiesToRemove")
+		if err := awsAwsjson11_serializeDocumentCustomerMetadataKeyList(v.CustomerMetadataPropertiesToRemove, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.ModelApprovalStatus) > 0 {
@@ -24238,6 +24570,37 @@ func awsAwsjson11_serializeOpDocumentUpdatePipelineInput(v *UpdatePipelineInput,
 	if v.RoleArn != nil {
 		ok := object.Key("RoleArn")
 		ok.String(*v.RoleArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentUpdateProjectInput(v *UpdateProjectInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ProjectDescription != nil {
+		ok := object.Key("ProjectDescription")
+		ok.String(*v.ProjectDescription)
+	}
+
+	if v.ProjectName != nil {
+		ok := object.Key("ProjectName")
+		ok.String(*v.ProjectName)
+	}
+
+	if v.ServiceCatalogProvisioningUpdateDetails != nil {
+		ok := object.Key("ServiceCatalogProvisioningUpdateDetails")
+		if err := awsAwsjson11_serializeDocumentServiceCatalogProvisioningUpdateDetails(v.ServiceCatalogProvisioningUpdateDetails, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

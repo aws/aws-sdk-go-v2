@@ -28,8 +28,8 @@ func (c *Client) ValidateAssessmentReportIntegrity(ctx context.Context, params *
 
 type ValidateAssessmentReportIntegrityInput struct {
 
-	// The relative path of the specified Amazon S3 bucket in which the assessment
-	// report is stored.
+	// The relative path of the Amazon S3 bucket that the assessment report is stored
+	// in.
 	//
 	// This member is required.
 	S3RelativePath *string
@@ -39,7 +39,7 @@ type ValidateAssessmentReportIntegrityInput struct {
 
 type ValidateAssessmentReportIntegrityOutput struct {
 
-	// The signature algorithm used to code sign the assessment report file.
+	// The signature algorithm that's used to code sign the assessment report file.
 	SignatureAlgorithm *string
 
 	// The date and time signature that specifies when the assessment report was

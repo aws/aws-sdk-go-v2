@@ -65,90 +65,6 @@ var defaultPartitions = endpoints.Partitions{
 		RegionRegex:    partitionRegexp.Aws,
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
-			"accesspoint-af-south-1": endpoints.Endpoint{
-				Hostname:          "s3-accesspoint.af-south-1.amazonaws.com",
-				SignatureVersions: []string{"s3v4"},
-			},
-			"accesspoint-ap-east-1": endpoints.Endpoint{
-				Hostname:          "s3-accesspoint.ap-east-1.amazonaws.com",
-				SignatureVersions: []string{"s3v4"},
-			},
-			"accesspoint-ap-northeast-1": endpoints.Endpoint{
-				Hostname:          "s3-accesspoint.ap-northeast-1.amazonaws.com",
-				SignatureVersions: []string{"s3v4"},
-			},
-			"accesspoint-ap-northeast-2": endpoints.Endpoint{
-				Hostname:          "s3-accesspoint.ap-northeast-2.amazonaws.com",
-				SignatureVersions: []string{"s3v4"},
-			},
-			"accesspoint-ap-northeast-3": endpoints.Endpoint{
-				Hostname:          "s3-accesspoint.ap-northeast-3.amazonaws.com",
-				SignatureVersions: []string{"s3v4"},
-			},
-			"accesspoint-ap-south-1": endpoints.Endpoint{
-				Hostname:          "s3-accesspoint.ap-south-1.amazonaws.com",
-				SignatureVersions: []string{"s3v4"},
-			},
-			"accesspoint-ap-southeast-1": endpoints.Endpoint{
-				Hostname:          "s3-accesspoint.ap-southeast-1.amazonaws.com",
-				SignatureVersions: []string{"s3v4"},
-			},
-			"accesspoint-ap-southeast-2": endpoints.Endpoint{
-				Hostname:          "s3-accesspoint.ap-southeast-2.amazonaws.com",
-				SignatureVersions: []string{"s3v4"},
-			},
-			"accesspoint-ca-central-1": endpoints.Endpoint{
-				Hostname:          "s3-accesspoint.ca-central-1.amazonaws.com",
-				SignatureVersions: []string{"s3v4"},
-			},
-			"accesspoint-eu-central-1": endpoints.Endpoint{
-				Hostname:          "s3-accesspoint.eu-central-1.amazonaws.com",
-				SignatureVersions: []string{"s3v4"},
-			},
-			"accesspoint-eu-north-1": endpoints.Endpoint{
-				Hostname:          "s3-accesspoint.eu-north-1.amazonaws.com",
-				SignatureVersions: []string{"s3v4"},
-			},
-			"accesspoint-eu-south-1": endpoints.Endpoint{
-				Hostname:          "s3-accesspoint.eu-south-1.amazonaws.com",
-				SignatureVersions: []string{"s3v4"},
-			},
-			"accesspoint-eu-west-1": endpoints.Endpoint{
-				Hostname:          "s3-accesspoint.eu-west-1.amazonaws.com",
-				SignatureVersions: []string{"s3v4"},
-			},
-			"accesspoint-eu-west-2": endpoints.Endpoint{
-				Hostname:          "s3-accesspoint.eu-west-2.amazonaws.com",
-				SignatureVersions: []string{"s3v4"},
-			},
-			"accesspoint-eu-west-3": endpoints.Endpoint{
-				Hostname:          "s3-accesspoint.eu-west-3.amazonaws.com",
-				SignatureVersions: []string{"s3v4"},
-			},
-			"accesspoint-me-south-1": endpoints.Endpoint{
-				Hostname:          "s3-accesspoint.me-south-1.amazonaws.com",
-				SignatureVersions: []string{"s3v4"},
-			},
-			"accesspoint-sa-east-1": endpoints.Endpoint{
-				Hostname:          "s3-accesspoint.sa-east-1.amazonaws.com",
-				SignatureVersions: []string{"s3v4"},
-			},
-			"accesspoint-us-east-1": endpoints.Endpoint{
-				Hostname:          "s3-accesspoint.us-east-1.amazonaws.com",
-				SignatureVersions: []string{"s3v4"},
-			},
-			"accesspoint-us-east-2": endpoints.Endpoint{
-				Hostname:          "s3-accesspoint.us-east-2.amazonaws.com",
-				SignatureVersions: []string{"s3v4"},
-			},
-			"accesspoint-us-west-1": endpoints.Endpoint{
-				Hostname:          "s3-accesspoint.us-west-1.amazonaws.com",
-				SignatureVersions: []string{"s3v4"},
-			},
-			"accesspoint-us-west-2": endpoints.Endpoint{
-				Hostname:          "s3-accesspoint.us-west-2.amazonaws.com",
-				SignatureVersions: []string{"s3v4"},
-			},
 			"af-south-1": endpoints.Endpoint{},
 			"ap-east-1":  endpoints.Endpoint{},
 			"ap-northeast-1": endpoints.Endpoint{
@@ -183,25 +99,35 @@ var defaultPartitions = endpoints.Partitions{
 			},
 			"eu-west-2": endpoints.Endpoint{},
 			"eu-west-3": endpoints.Endpoint{},
-			"fips-accesspoint-ca-central-1": endpoints.Endpoint{
-				Hostname:          "s3-accesspoint-fips.ca-central-1.amazonaws.com",
-				SignatureVersions: []string{"s3v4"},
+			"fips-ca-central-1": endpoints.Endpoint{
+				Hostname: "s3-fips.ca-central-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-central-1",
+				},
 			},
-			"fips-accesspoint-us-east-1": endpoints.Endpoint{
-				Hostname:          "s3-accesspoint-fips.us-east-1.amazonaws.com",
-				SignatureVersions: []string{"s3v4"},
+			"fips-us-east-1": endpoints.Endpoint{
+				Hostname: "s3-fips.us-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
 			},
-			"fips-accesspoint-us-east-2": endpoints.Endpoint{
-				Hostname:          "s3-accesspoint-fips.us-east-2.amazonaws.com",
-				SignatureVersions: []string{"s3v4"},
+			"fips-us-east-2": endpoints.Endpoint{
+				Hostname: "s3-fips.us-east-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-2",
+				},
 			},
-			"fips-accesspoint-us-west-1": endpoints.Endpoint{
-				Hostname:          "s3-accesspoint-fips.us-west-1.amazonaws.com",
-				SignatureVersions: []string{"s3v4"},
+			"fips-us-west-1": endpoints.Endpoint{
+				Hostname: "s3-fips.us-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-1",
+				},
 			},
-			"fips-accesspoint-us-west-2": endpoints.Endpoint{
-				Hostname:          "s3-accesspoint-fips.us-west-2.amazonaws.com",
-				SignatureVersions: []string{"s3v4"},
+			"fips-us-west-2": endpoints.Endpoint{
+				Hostname: "s3-fips.us-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
 			},
 			"me-south-1": endpoints.Endpoint{},
 			"s3-external-1": endpoints.Endpoint{
@@ -240,14 +166,6 @@ var defaultPartitions = endpoints.Partitions{
 		RegionRegex:    partitionRegexp.AwsCn,
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
-			"accesspoint-cn-north-1": endpoints.Endpoint{
-				Hostname:          "s3-accesspoint.cn-north-1.amazonaws.com.cn",
-				SignatureVersions: []string{"s3v4"},
-			},
-			"accesspoint-cn-northwest-1": endpoints.Endpoint{
-				Hostname:          "s3-accesspoint.cn-northwest-1.amazonaws.com.cn",
-				SignatureVersions: []string{"s3v4"},
-			},
 			"cn-north-1":     endpoints.Endpoint{},
 			"cn-northwest-1": endpoints.Endpoint{},
 		},
@@ -266,6 +184,7 @@ var defaultPartitions = endpoints.Partitions{
 				Protocols:         []string{"http", "https"},
 				SignatureVersions: []string{"s3v4"},
 			},
+			"us-iso-west-1": endpoints.Endpoint{},
 		},
 	},
 	{
@@ -291,21 +210,11 @@ var defaultPartitions = endpoints.Partitions{
 		RegionRegex:    partitionRegexp.AwsUsGov,
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
-			"accesspoint-us-gov-east-1": endpoints.Endpoint{
-				Hostname:          "s3-accesspoint.us-gov-east-1.amazonaws.com",
-				SignatureVersions: []string{"s3v4"},
-			},
-			"accesspoint-us-gov-west-1": endpoints.Endpoint{
-				Hostname:          "s3-accesspoint.us-gov-west-1.amazonaws.com",
-				SignatureVersions: []string{"s3v4"},
-			},
-			"fips-accesspoint-us-gov-east-1": endpoints.Endpoint{
-				Hostname:          "s3-accesspoint-fips.us-gov-east-1.amazonaws.com",
-				SignatureVersions: []string{"s3v4"},
-			},
-			"fips-accesspoint-us-gov-west-1": endpoints.Endpoint{
-				Hostname:          "s3-accesspoint-fips.us-gov-west-1.amazonaws.com",
-				SignatureVersions: []string{"s3v4"},
+			"fips-us-gov-east-1": endpoints.Endpoint{
+				Hostname: "s3-fips.us-gov-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-east-1",
+				},
 			},
 			"fips-us-gov-west-1": endpoints.Endpoint{
 				Hostname: "s3-fips.us-gov-west-1.amazonaws.com",

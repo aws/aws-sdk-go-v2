@@ -23,7 +23,7 @@ import (
 // do not interfere with read replica promotion.
 //
 // * This command doesn't apply to
-// Aurora MySQL and Aurora PostgreSQL.
+// Aurora MySQL, Aurora PostgreSQL, or RDS Custom.
 func (c *Client) PromoteReadReplica(ctx context.Context, params *PromoteReadReplicaInput, optFns ...func(*Options)) (*PromoteReadReplicaOutput, error) {
 	if params == nil {
 		params = &PromoteReadReplicaInput{}

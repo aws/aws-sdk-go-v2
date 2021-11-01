@@ -510,6 +510,26 @@ func (m *validateOpGetFirewallRuleGroupPolicy) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetResolverConfig struct {
+}
+
+func (*validateOpGetResolverConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetResolverConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetResolverConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetResolverConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetResolverDnssecConfig struct {
 }
 
@@ -950,6 +970,26 @@ func (m *validateOpUpdateFirewallRule) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateResolverConfig struct {
+}
+
+func (*validateOpUpdateResolverConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateResolverConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateResolverConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateResolverConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateResolverDnssecConfig struct {
 }
 
@@ -1110,6 +1150,10 @@ func addOpGetFirewallRuleGroupPolicyValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpGetFirewallRuleGroupPolicy{}, middleware.After)
 }
 
+func addOpGetResolverConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetResolverConfig{}, middleware.After)
+}
+
 func addOpGetResolverDnssecConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetResolverDnssecConfig{}, middleware.After)
 }
@@ -1196,6 +1240,10 @@ func addOpUpdateFirewallRuleGroupAssociationValidationMiddleware(stack *middlewa
 
 func addOpUpdateFirewallRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateFirewallRule{}, middleware.After)
+}
+
+func addOpUpdateResolverConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateResolverConfig{}, middleware.After)
 }
 
 func addOpUpdateResolverDnssecConfigValidationMiddleware(stack *middleware.Stack) error {
@@ -1815,6 +1863,21 @@ func validateOpGetFirewallRuleGroupPolicyInput(v *GetFirewallRuleGroupPolicyInpu
 	}
 }
 
+func validateOpGetResolverConfigInput(v *GetResolverConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetResolverConfigInput"}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetResolverDnssecConfigInput(v *GetResolverDnssecConfigInput) error {
 	if v == nil {
 		return nil
@@ -2174,6 +2237,24 @@ func validateOpUpdateFirewallRuleInput(v *UpdateFirewallRuleInput) error {
 	}
 	if v.FirewallDomainListId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FirewallDomainListId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateResolverConfigInput(v *UpdateResolverConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateResolverConfigInput"}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
+	if len(v.AutodefinedReverseFlag) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AutodefinedReverseFlag"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

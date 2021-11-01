@@ -29,12 +29,12 @@ func (c *Client) GetLaunchProfileMember(ctx context.Context, params *GetLaunchPr
 
 type GetLaunchProfileMemberInput struct {
 
-	// The launch profile ID.
+	// The Launch Profile ID.
 	//
 	// This member is required.
 	LaunchProfileId *string
 
-	// The principal ID.
+	// The principal ID. This currently supports a Amazon Web Services SSO UserId.
 	//
 	// This member is required.
 	PrincipalId *string
@@ -47,6 +47,7 @@ type GetLaunchProfileMemberInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type GetLaunchProfileMemberOutput struct {
 
 	// The member.

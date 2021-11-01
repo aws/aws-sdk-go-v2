@@ -29,14 +29,13 @@ func (c *Client) GetTimelineEvent(ctx context.Context, params *GetTimelineEventI
 
 type GetTimelineEventInput struct {
 
-	// The ID of the event. You can get an event's ID when you create it or by using
+	// The ID of the event. You can get an event's ID when you create it, or by using
 	// ListTimelineEvents.
 	//
 	// This member is required.
 	EventId *string
 
-	// The Amazon Resource Name (ARN) of the incident that the timeline event is part
-	// of.
+	// The Amazon Resource Name (ARN) of the incident that includes the timeline event.
 	//
 	// This member is required.
 	IncidentRecordArn *string

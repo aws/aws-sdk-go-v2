@@ -29,7 +29,7 @@ func (c *Client) CreateAssessmentReport(ctx context.Context, params *CreateAsses
 
 type CreateAssessmentReportInput struct {
 
-	// The identifier for the specified assessment.
+	// The identifier for the assessment.
 	//
 	// This member is required.
 	AssessmentId *string
@@ -47,7 +47,7 @@ type CreateAssessmentReportInput struct {
 
 type CreateAssessmentReportOutput struct {
 
-	// The new assessment report returned by the CreateAssessmentReport API.
+	// The new assessment report that the CreateAssessmentReport API returned.
 	AssessmentReport *types.AssessmentReport
 
 	// Metadata pertaining to the operation's result.

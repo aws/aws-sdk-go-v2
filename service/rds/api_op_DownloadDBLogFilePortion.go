@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Downloads all or a portion of the specified log file, up to 1 MB in size.
+// Downloads all or a portion of the specified log file, up to 1 MB in size. This
+// command doesn't apply to RDS Custom.
 func (c *Client) DownloadDBLogFilePortion(ctx context.Context, params *DownloadDBLogFilePortionInput, optFns ...func(*Options)) (*DownloadDBLogFilePortionOutput, error) {
 	if params == nil {
 		params = &DownloadDBLogFilePortionInput{}

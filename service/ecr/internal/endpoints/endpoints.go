@@ -117,6 +117,26 @@ var defaultPartitions = endpoints.Partitions{
 					Region: "ca-central-1",
 				},
 			},
+			"dkr-us-east-1": endpoints.Endpoint{
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
+			"dkr-us-east-2": endpoints.Endpoint{
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-2",
+				},
+			},
+			"dkr-us-west-1": endpoints.Endpoint{
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-1",
+				},
+			},
+			"dkr-us-west-2": endpoints.Endpoint{
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
+			},
 			"eu-central-1": endpoints.Endpoint{
 				Hostname: "api.ecr.eu-central-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
@@ -315,6 +335,16 @@ var defaultPartitions = endpoints.Partitions{
 		RegionRegex:    partitionRegexp.AwsUsGov,
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
+			"dkr-us-gov-east-1": endpoints.Endpoint{
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-east-1",
+				},
+			},
+			"dkr-us-gov-west-1": endpoints.Endpoint{
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-west-1",
+				},
+			},
 			"fips-dkr-us-gov-east-1": endpoints.Endpoint{
 				Hostname: "ecr-fips.us-gov-east-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{

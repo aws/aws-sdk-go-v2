@@ -168,19 +168,18 @@ type RestoreDBClusterFromSnapshotInput struct {
 
 	// The Amazon Web Services KMS key identifier to use when restoring an encrypted DB
 	// cluster from a DB snapshot or DB cluster snapshot. The Amazon Web Services KMS
-	// key identifier is the key ARN, key ID, alias ARN, or alias name for the Amazon
-	// Web Services KMS customer master key (CMK). To use a CMK in a different Amazon
-	// Web Services account, specify the key ARN or alias ARN. When you don't specify a
-	// value for the KmsKeyId parameter, then the following occurs:
+	// key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.
+	// To use a KMS key in a different Amazon Web Services account, specify the key ARN
+	// or alias ARN. When you don't specify a value for the KmsKeyId parameter, then
+	// the following occurs:
 	//
-	// * If the DB
-	// snapshot or DB cluster snapshot in SnapshotIdentifier is encrypted, then the
-	// restored DB cluster is encrypted using the Amazon Web Services KMS CMK that was
-	// used to encrypt the DB snapshot or DB cluster snapshot.
+	// * If the DB snapshot or DB cluster snapshot in
+	// SnapshotIdentifier is encrypted, then the restored DB cluster is encrypted using
+	// the KMS key that was used to encrypt the DB snapshot or DB cluster snapshot.
 	//
-	// * If the DB snapshot or
-	// DB cluster snapshot in SnapshotIdentifier isn't encrypted, then the restored DB
-	// cluster isn't encrypted.
+	// *
+	// If the DB snapshot or DB cluster snapshot in SnapshotIdentifier isn't encrypted,
+	// then the restored DB cluster isn't encrypted.
 	KmsKeyId *string
 
 	// The name of the option group to use for the restored DB cluster.

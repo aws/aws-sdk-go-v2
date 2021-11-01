@@ -21004,6 +21004,11 @@ func awsAwsjson11_deserializeDocumentBucket(v **types.Bucket, value interface{})
 				sv.AbleToUpdateBundle = ptr.Bool(jtv)
 			}
 
+		case "accessLogConfig":
+			if err := awsAwsjson11_deserializeDocumentBucketAccessLogConfig(&sv.AccessLogConfig, value); err != nil {
+				return err
+			}
+
 		case "accessRules":
 			if err := awsAwsjson11_deserializeDocumentAccessRules(&sv.AccessRules, value); err != nil {
 				return err
@@ -21111,6 +21116,64 @@ func awsAwsjson11_deserializeDocumentBucket(v **types.Bucket, value interface{})
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
 				sv.Url = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentBucketAccessLogConfig(v **types.BucketAccessLogConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BucketAccessLogConfig
+	if *v == nil {
+		sv = &types.BucketAccessLogConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "destination":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BucketName to be of type string, got %T instead", value)
+				}
+				sv.Destination = ptr.String(jtv)
+			}
+
+		case "enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = ptr.Bool(jtv)
+			}
+
+		case "prefix":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BucketAccessLogPrefix to be of type string, got %T instead", value)
+				}
+				sv.Prefix = ptr.String(jtv)
 			}
 
 		default:

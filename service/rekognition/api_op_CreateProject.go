@@ -10,10 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new Amazon Rekognition Custom Labels project. A project is a logical
-// grouping of resources (images, Labels, models) and operations (training,
-// evaluation and detection). This operation requires permissions to perform the
-// rekognition:CreateProject action.
+// Creates a new Amazon Rekognition Custom Labels project. A project is a group of
+// resources (datasets, model versions) that you use to create and manage Amazon
+// Rekognition Custom Labels models. This operation requires permissions to perform
+// the rekognition:CreateProject action.
 func (c *Client) CreateProject(ctx context.Context, params *CreateProjectInput, optFns ...func(*Options)) (*CreateProjectOutput, error) {
 	if params == nil {
 		params = &CreateProjectInput{}

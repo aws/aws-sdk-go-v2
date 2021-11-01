@@ -26,10 +26,11 @@ type ActionMemberSsmAutomation struct {
 
 func (*ActionMemberSsmAutomation) isAction() {}
 
-// Defines the Region and KMS key to add to the replication set.
+// Defines the Amazon Web Services Region and KMS key to add to the replication
+// set.
 type AddRegionAction struct {
 
-	// The Region name to add to the replication set.
+	// The Amazon Web Services Region name to add to the replication set.
 	//
 	// This member is required.
 	RegionName *string
@@ -85,7 +86,7 @@ type AutomationExecutionMemberSsmExecutionArn struct {
 
 func (*AutomationExecutionMemberSsmExecutionArn) isAutomationExecution() {}
 
-// The AWS Chatbot chat channel used for collaboration during an incident.
+// The Chatbot chat channel used for collaboration during an incident.
 //
 // The following types satisfy this interface:
 //  ChatChannelMemberEmpty
@@ -103,9 +104,9 @@ type ChatChannelMemberEmpty struct {
 
 func (*ChatChannelMemberEmpty) isChatChannel() {}
 
-// The SNS targets that AWS Chatbot uses to notify the chat channel of updates to
-// an incident. You can also make updates to the incident through the chat channel
-// by using the SNS topics.
+// The Amazon SNS targets that Chatbot uses to notify the chat channel of updates
+// to an incident. You can also make updates to the incident through the chat
+// channel by using the Amazon SNS topics.
 type ChatChannelMemberChatbotSns struct {
 	Value []string
 
@@ -154,11 +155,12 @@ type ConditionMemberEquals struct {
 
 func (*ConditionMemberEquals) isCondition() {}
 
-// Defines the information about the Region you're deleting from your replication
-// set.
+// Defines the information about the Amazon Web Services Region you're deleting
+// from your replication set.
 type DeleteRegionAction struct {
 
-	// The name of the Region you're deleting from the replication set.
+	// The name of the Amazon Web Services Region you're deleting from the replication
+	// set.
 	//
 	// This member is required.
 	RegionName *string
@@ -233,7 +235,7 @@ type IncidentRecord struct {
 	CreationTime *time.Time
 
 	// The string Incident Manager uses to prevent duplicate incidents from being
-	// created by the same incident.
+	// created by the same incident in the same account.
 	//
 	// This member is required.
 	DedupeString *string
@@ -275,20 +277,20 @@ type IncidentRecord struct {
 	// The chat channel used for collaboration during an incident.
 	ChatChannel ChatChannel
 
-	// The SNS targets that are notified when updates are made to an incident.
+	// The Amazon SNS targets that are notified when updates are made to an incident.
 	NotificationTargets []NotificationTargetItem
 
 	// The time at which the incident was resolved. This appears as a timeline event.
 	ResolvedTime *time.Time
 
 	// The summary of the incident. The summary is a brief synopsis of what occurred,
-	// what is currently happening, and context.
+	// what's currently happening, and context of the incident.
 	Summary *string
 
 	noSmithyDocumentSerde
 }
 
-// Details about how the incident record was created and when.
+// Details about what created the incident record and when it was created.
 type IncidentRecordSource struct {
 
 	// The principal that started the incident.
@@ -297,8 +299,8 @@ type IncidentRecordSource struct {
 	CreatedBy *string
 
 	// The service that started the incident. This can be manually created from
-	// Incident Manager, automatically created using an AWS CloudWatch alarm, or Amazon
-	// EventBridge event.
+	// Incident Manager, automatically created using an Amazon CloudWatch alarm, or
+	// Amazon EventBridge event.
 	//
 	// This member is required.
 	Source *string
@@ -370,7 +372,7 @@ type IncidentTemplate struct {
 	// same incident.
 	DedupeString *string
 
-	// The SNS targets that are notified when updates are made to an incident.
+	// The Amazon SNS targets that are notified when updates are made to an incident.
 	NotificationTargets []NotificationTargetItem
 
 	// The summary of the incident. The summary is a brief synopsis of what occurred,
@@ -429,7 +431,7 @@ type ItemValueMemberArn struct {
 
 func (*ItemValueMemberArn) isItemValue() {}
 
-// The URL, if the related item is a non-AWS resource.
+// The URL, if the related item is a non-Amazon Web Services resource.
 type ItemValueMemberUrl struct {
 	Value string
 
@@ -438,7 +440,7 @@ type ItemValueMemberUrl struct {
 
 func (*ItemValueMemberUrl) isItemValue() {}
 
-// The metric definition, if the related item is a metric in CloudWatch.
+// The metric definition, if the related item is a metric in Amazon CloudWatch.
 type ItemValueMemberMetricDefinition struct {
 	Value string
 
@@ -464,29 +466,32 @@ type NotificationTargetItemMemberSnsTopicArn struct {
 
 func (*NotificationTargetItemMemberSnsTopicArn) isNotificationTargetItem() {}
 
-// Information about a Region in your replication set.
+// Information about a Amazon Web Services Region in your replication set.
 type RegionInfo struct {
 
-	// The status of the Region in the replication set.
+	// The status of the Amazon Web Services Region in the replication set.
 	//
 	// This member is required.
 	Status RegionStatus
 
-	// The most recent date and time that the Region's status was updated.
+	// The most recent date and time that Incident Manager updated the Amazon Web
+	// Services Region's status.
 	//
 	// This member is required.
 	StatusUpdateDateTime *time.Time
 
-	// The ID of the KMS key used to encrypt the data in this Region.
+	// The ID of the KMS key used to encrypt the data in this Amazon Web Services
+	// Region.
 	SseKmsKeyId *string
 
-	// Information displayed about the status of the Region.
+	// Information displayed about the status of the Amazon Web Services Region.
 	StatusMessage *string
 
 	noSmithyDocumentSerde
 }
 
-// The mapping between a Region and the key that's used to encrypt the data.
+// The mapping between a Amazon Web Services Region and the key that's used to
+// encrypt the data.
 type RegionMapInputValue struct {
 
 	// The KMS key used to encrypt the data in your replication set.
@@ -536,8 +541,8 @@ type RelatedItemsUpdateMemberItemToRemove struct {
 
 func (*RelatedItemsUpdateMemberItemToRemove) isRelatedItemsUpdate() {}
 
-// The set of Regions that your Incident Manager data will be replicated to and the
-// KMS key used to encrypt the data.
+// The set of Amazon Web Services Region that your Incident Manager data will be
+// replicated to and the KMS key used to encrypt the data.
 type ReplicationSet struct {
 
 	// Details about who created the replication set.
@@ -551,8 +556,8 @@ type ReplicationSet struct {
 	CreatedTime *time.Time
 
 	// Determines if the replication set deletion protection is enabled or not. If
-	// deletion protection is enabled, you can't delete the last Region in the
-	// replication set.
+	// deletion protection is enabled, you can't delete the last Amazon Web Services
+	// Region in the replication set.
 	//
 	// This member is required.
 	DeletionProtected *bool
@@ -567,8 +572,8 @@ type ReplicationSet struct {
 	// This member is required.
 	LastModifiedTime *time.Time
 
-	// The map between each Region in your replication set and the KMS key that is used
-	// to encrypt the data in that Region.
+	// The map between each Amazon Web Services Region in your replication set and the
+	// KMS key that's used to encrypt the data in that Region.
 	//
 	// This member is required.
 	RegionMap map[string]RegionInfo
@@ -599,7 +604,7 @@ type ResourcePolicy struct {
 	// This member is required.
 	PolicyId *string
 
-	// The Region that policy allows resources to be used in.
+	// The Amazon Web Services Region that policy allows resources to be used in.
 	//
 	// This member is required.
 	RamResourceShareRegion *string
@@ -695,9 +700,9 @@ type TimelineEvent struct {
 type TriggerDetails struct {
 
 	// Identifies the service that sourced the event. All events sourced from within
-	// AWS begin with "aws." Customer-generated events can have any value here, as long
-	// as it doesn't begin with "aws." We recommend the use of Java package-name style
-	// reverse domain-name strings.
+	// Amazon Web Services begin with "aws." Customer-generated events can have any
+	// value here, as long as it doesn't begin with "aws." We recommend the use of Java
+	// package-name style reverse domain-name strings.
 	//
 	// This member is required.
 	Source *string
@@ -707,11 +712,11 @@ type TriggerDetails struct {
 	// This member is required.
 	Timestamp *time.Time
 
-	// Raw data passed from either EventBridge, CloudWatch, or Incident Manager when an
-	// incident is created.
+	// Raw data passed from either Amazon EventBridge, Amazon CloudWatch, or Incident
+	// Manager when an incident is created.
 	RawData *string
 
-	// The ARN of the source that detected the incident.
+	// The Amazon Resource Name (ARN) of the source that detected the incident.
 	TriggerArn *string
 
 	noSmithyDocumentSerde
@@ -726,7 +731,8 @@ type UpdateReplicationSetAction interface {
 	isUpdateReplicationSetAction()
 }
 
-// Details about the Region that you're adding to the replication set.
+// Details about the Amazon Web Services Region that you're adding to the
+// replication set.
 type UpdateReplicationSetActionMemberAddRegionAction struct {
 	Value AddRegionAction
 
@@ -735,7 +741,8 @@ type UpdateReplicationSetActionMemberAddRegionAction struct {
 
 func (*UpdateReplicationSetActionMemberAddRegionAction) isUpdateReplicationSetAction() {}
 
-// Details about the Region that you're deleting to the replication set.
+// Details about the Amazon Web Services Region that you're deleting to the
+// replication set.
 type UpdateReplicationSetActionMemberDeleteRegionAction struct {
 	Value DeleteRegionAction
 

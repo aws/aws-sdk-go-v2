@@ -5073,6 +5073,11 @@ func awsAwsjson11_deserializeDocumentCallAnalyticsJobSettings(v **types.CallAnal
 				return err
 			}
 
+		case "LanguageIdSettings":
+			if err := awsAwsjson11_deserializeDocumentLanguageIdSettingsMap(&sv.LanguageIdSettings, value); err != nil {
+				return err
+			}
+
 		case "LanguageModelName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5775,6 +5780,99 @@ func awsAwsjson11_deserializeDocumentJobExecutionSettings(v **types.JobExecution
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentLanguageIdSettings(v **types.LanguageIdSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LanguageIdSettings
+	if *v == nil {
+		sv = &types.LanguageIdSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "LanguageModelName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ModelName to be of type string, got %T instead", value)
+				}
+				sv.LanguageModelName = ptr.String(jtv)
+			}
+
+		case "VocabularyFilterName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VocabularyFilterName to be of type string, got %T instead", value)
+				}
+				sv.VocabularyFilterName = ptr.String(jtv)
+			}
+
+		case "VocabularyName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VocabularyName to be of type string, got %T instead", value)
+				}
+				sv.VocabularyName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentLanguageIdSettingsMap(v *map[string]types.LanguageIdSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]types.LanguageIdSettings
+	if *v == nil {
+		mv = map[string]types.LanguageIdSettings{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal types.LanguageIdSettings
+		mapVar := parsedVal
+		destAddr := &mapVar
+		if err := awsAwsjson11_deserializeDocumentLanguageIdSettings(&destAddr, value); err != nil {
+			return err
+		}
+		parsedVal = *destAddr
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 
@@ -7577,6 +7675,11 @@ func awsAwsjson11_deserializeDocumentTranscriptionJob(v **types.TranscriptionJob
 					return fmt.Errorf("expected LanguageCode to be of type string, got %T instead", value)
 				}
 				sv.LanguageCode = types.LanguageCode(jtv)
+			}
+
+		case "LanguageIdSettings":
+			if err := awsAwsjson11_deserializeDocumentLanguageIdSettingsMap(&sv.LanguageIdSettings, value); err != nil {
+				return err
 			}
 
 		case "LanguageOptions":

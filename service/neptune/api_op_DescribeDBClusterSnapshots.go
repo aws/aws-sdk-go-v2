@@ -60,7 +60,7 @@ type DescribeDBClusterSnapshotsInput struct {
 	IncludePublic bool
 
 	// True to include shared manual DB cluster snapshots from other Amazon accounts
-	// that this AWS account has been given permission to copy or restore, and
+	// that this Amazon account has been given permission to copy or restore, and
 	// otherwise false. The default is false. You can give an Amazon account permission
 	// to restore a manual DB cluster snapshot from another Amazon account by the
 	// ModifyDBClusterSnapshotAttribute API action.
@@ -84,7 +84,7 @@ type DescribeDBClusterSnapshotsInput struct {
 	// automatically taken by Amazon Neptune for my Amazon account.
 	//
 	// * manual - Return
-	// all DB cluster snapshots that have been taken by my AWS account.
+	// all DB cluster snapshots that have been taken by my Amazon account.
 	//
 	// * shared -
 	// Return all manual DB cluster snapshots that have been shared to my Amazon

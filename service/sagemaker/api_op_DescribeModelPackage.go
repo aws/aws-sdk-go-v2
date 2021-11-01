@@ -13,9 +13,9 @@ import (
 )
 
 // Returns a description of the specified model package, which is used to create
-// Amazon SageMaker models or list them on Amazon Web Services Marketplace. To
-// create models in Amazon SageMaker, buyers can subscribe to model packages listed
-// on Amazon Web Services Marketplace.
+// SageMaker models or list them on Amazon Web Services Marketplace. To create
+// models in SageMaker, buyers can subscribe to model packages listed on Amazon Web
+// Services Marketplace.
 func (c *Client) DescribeModelPackage(ctx context.Context, params *DescribeModelPackageInput, optFns ...func(*Options)) (*DescribeModelPackageOutput, error) {
 	if params == nil {
 		params = &DescribeModelPackageInput{}
@@ -81,6 +81,9 @@ type DescribeModelPackageOutput struct {
 	// component, or project.
 	CreatedBy *types.UserContext
 
+	// The metadata properties associated with the model package versions.
+	CustomerMetadataProperties map[string]string
+
 	// Details about inference jobs that can be run with models based on this model
 	// package.
 	InferenceSpecification *types.InferenceSpecification
@@ -114,8 +117,8 @@ type DescribeModelPackageOutput struct {
 	// Details about the algorithm that was used to create the model package.
 	SourceAlgorithmSpecification *types.SourceAlgorithmSpecification
 
-	// Configurations for one or more transform jobs that Amazon SageMaker runs to test
-	// the model package.
+	// Configurations for one or more transform jobs that SageMaker runs to test the
+	// model package.
 	ValidationSpecification *types.ModelPackageValidationSpecification
 
 	// Metadata pertaining to the operation's result.

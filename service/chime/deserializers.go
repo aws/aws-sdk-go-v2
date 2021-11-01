@@ -37234,6 +37234,15 @@ func awsRestjson1_deserializeDocumentVoiceConnector(v **types.VoiceConnector, va
 				sv.UpdatedTimestamp = ptr.Time(t)
 			}
 
+		case "VoiceConnectorArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.VoiceConnectorArn = ptr.String(jtv)
+			}
+
 		case "VoiceConnectorId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -37307,6 +37316,15 @@ func awsRestjson1_deserializeDocumentVoiceConnectorGroup(v **types.VoiceConnecto
 					return err
 				}
 				sv.UpdatedTimestamp = ptr.Time(t)
+			}
+
+		case "VoiceConnectorGroupArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.VoiceConnectorGroupArn = ptr.String(jtv)
 			}
 
 		case "VoiceConnectorGroupId":

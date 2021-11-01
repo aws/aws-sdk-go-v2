@@ -12,8 +12,8 @@ import (
 )
 
 // Enables replication of automated backups to a different Amazon Web Services
-// Region. For more information, see  Replicating Automated Backups to Another
-// Amazon Web Services Region
+// Region. This command doesn't apply to RDS Custom. For more information, see
+// Replicating Automated Backups to Another Amazon Web Services Region
 // (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReplicateBackups.html)
 // in the Amazon RDS User Guide.
 func (c *Client) StartDBInstanceAutomatedBackupsReplication(ctx context.Context, params *StartDBInstanceAutomatedBackupsReplicationInput, optFns ...func(*Options)) (*StartDBInstanceAutomatedBackupsReplicationOutput, error) {

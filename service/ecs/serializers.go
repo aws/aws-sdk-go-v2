@@ -4247,6 +4247,23 @@ func awsAwsjson11_serializeDocumentResources(v []types.Resource, value smithyjso
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentRuntimePlatform(v *types.RuntimePlatform, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.CpuArchitecture) > 0 {
+		ok := object.Key("cpuArchitecture")
+		ok.String(string(v.CpuArchitecture))
+	}
+
+	if len(v.OperatingSystemFamily) > 0 {
+		ok := object.Key("operatingSystemFamily")
+		ok.String(string(v.OperatingSystemFamily))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentScale(v *types.Scale, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5904,6 +5921,13 @@ func awsAwsjson11_serializeOpDocumentRegisterTaskDefinitionInput(v *RegisterTask
 	if v.RequiresCompatibilities != nil {
 		ok := object.Key("requiresCompatibilities")
 		if err := awsAwsjson11_serializeDocumentCompatibilityList(v.RequiresCompatibilities, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RuntimePlatform != nil {
+		ok := object.Key("runtimePlatform")
+		if err := awsAwsjson11_serializeDocumentRuntimePlatform(v.RuntimePlatform, ok); err != nil {
 			return err
 		}
 	}

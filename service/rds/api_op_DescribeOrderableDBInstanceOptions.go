@@ -71,7 +71,7 @@ type DescribeOrderableDBInstanceOptionsInput struct {
 	// The Availability Zone group associated with a Local Zone. Specify this parameter
 	// to retrieve available offerings for the Local Zones in the group. Omit this
 	// parameter to show the available offerings in the specified Amazon Web Services
-	// Region.
+	// Region. This setting doesn't apply to RDS Custom.
 	AvailabilityZoneGroup *string
 
 	// The DB instance class filter value. Specify this parameter to show only the
@@ -86,7 +86,8 @@ type DescribeOrderableDBInstanceOptionsInput struct {
 	Filters []types.Filter
 
 	// The license model filter value. Specify this parameter to show only the
-	// available offerings matching the specified license model.
+	// available offerings matching the specified license model. RDS Custom supports
+	// only the BYOL licensing model.
 	LicenseModel *string
 
 	// An optional pagination token provided by a previous
@@ -101,7 +102,9 @@ type DescribeOrderableDBInstanceOptionsInput struct {
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
-	// A value that indicates whether to show only VPC or non-VPC offerings.
+	// A value that indicates whether to show only VPC or non-VPC offerings. RDS Custom
+	// supports only VPC offerings. RDS Custom supports only VPC offerings. If you
+	// describe non-VPC offerings for RDS Custom, the output shows VPC offerings.
 	Vpc *bool
 
 	noSmithyDocumentSerde

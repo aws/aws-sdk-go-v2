@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Tags a Amazon Transcribe resource with the given list of tags.
+// Tags an Amazon Transcribe resource with the given list of tags.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -30,7 +30,11 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 type TagResourceInput struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon Transcribe resource you want to
-	// tag.
+	// tag. ARNs have the format
+	// arn:partition:service:region:account-id:resource-type/resource-id (for example,
+	// arn:aws:transcribe:us-east-1:account-id:transcription-job/your-job-name). Valid
+	// values for resource-type are: transcription-job, medical-transcription-job,
+	// vocabulary, medical-vocabulary, vocabulary-filter, and language-model.
 	//
 	// This member is required.
 	ResourceArn *string

@@ -1530,6 +1530,26 @@ func (m *validateOpStartContactRecording) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartContactStreaming struct {
+}
+
+func (*validateOpStartContactStreaming) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartContactStreaming) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartContactStreamingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartContactStreamingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartOutboundVoiceContact struct {
 }
 
@@ -1605,6 +1625,26 @@ func (m *validateOpStopContactRecording) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStopContactRecordingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopContactStreaming struct {
+}
+
+func (*validateOpStopContactStreaming) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopContactStreaming) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopContactStreamingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopContactStreamingInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2474,6 +2514,10 @@ func addOpStartContactRecordingValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpStartContactRecording{}, middleware.After)
 }
 
+func addOpStartContactStreamingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartContactStreaming{}, middleware.After)
+}
+
 func addOpStartOutboundVoiceContactValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartOutboundVoiceContact{}, middleware.After)
 }
@@ -2488,6 +2532,10 @@ func addOpStopContactValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpStopContactRecordingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopContactRecording{}, middleware.After)
+}
+
+func addOpStopContactStreamingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopContactStreaming{}, middleware.After)
 }
 
 func addOpSuspendContactRecordingValidationMiddleware(stack *middleware.Stack) error {
@@ -2612,6 +2660,21 @@ func validateChatMessage(v *types.ChatMessage) error {
 	}
 	if v.Content == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateChatStreamingConfiguration(v *types.ChatStreamingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ChatStreamingConfiguration"}
+	if v.StreamingEndpointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamingEndpointArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4545,6 +4608,34 @@ func validateOpStartContactRecordingInput(v *StartContactRecordingInput) error {
 	}
 }
 
+func validateOpStartContactStreamingInput(v *StartContactStreamingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartContactStreamingInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ContactId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactId"))
+	}
+	if v.ChatStreamingConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChatStreamingConfiguration"))
+	} else if v.ChatStreamingConfiguration != nil {
+		if err := validateChatStreamingConfiguration(v.ChatStreamingConfiguration); err != nil {
+			invalidParams.AddNested("ChatStreamingConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartOutboundVoiceContactInput(v *StartOutboundVoiceContactInput) error {
 	if v == nil {
 		return nil
@@ -4623,6 +4714,27 @@ func validateOpStopContactRecordingInput(v *StopContactRecordingInput) error {
 	}
 	if v.InitialContactId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InitialContactId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopContactStreamingInput(v *StopContactStreamingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopContactStreamingInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ContactId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactId"))
+	}
+	if v.StreamingId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamingId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -626,9 +626,6 @@ func validateOpCreateApplicationInput(v *CreateApplicationInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateApplicationInput"}
-	if v.ResourceGroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceGroupName"))
-	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))

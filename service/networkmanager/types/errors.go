@@ -76,6 +76,7 @@ type ResourceNotFoundException struct {
 
 	ResourceId   *string
 	ResourceType *string
+	Context      map[string]string
 
 	noSmithyDocumentSerde
 }

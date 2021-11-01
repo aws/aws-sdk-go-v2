@@ -167,6 +167,11 @@ func awsRestjson1_serializeOpDocumentCreateParticipantConnectionInput(v *CreateP
 	object := value.Object()
 	defer object.Close()
 
+	if v.ConnectParticipant != nil {
+		ok := object.Key("ConnectParticipant")
+		ok.Boolean(*v.ConnectParticipant)
+	}
+
 	if v.Type != nil {
 		ok := object.Key("Type")
 		if err := awsRestjson1_serializeDocumentConnectionTypeList(v.Type, ok); err != nil {

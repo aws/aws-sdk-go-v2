@@ -34,8 +34,7 @@ type StartActivityStreamInput struct {
 
 	// The Amazon Web Services KMS key identifier for encrypting messages in the
 	// database activity stream. The Amazon Web Services KMS key identifier is the key
-	// ARN, key ID, alias ARN, or alias name for the Amazon Web Services KMS customer
-	// master key (CMK).
+	// ARN, key ID, alias ARN, or alias name for the KMS key.
 	//
 	// This member is required.
 	KmsKeyId *string

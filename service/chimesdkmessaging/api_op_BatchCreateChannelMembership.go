@@ -39,7 +39,7 @@ type BatchCreateChannelMembershipInput struct {
 	// This member is required.
 	ChimeBearer *string
 
-	// The ARNs of the members you want to add to the channel.
+	// The AppInstanceUserArns of the members you want to add to the channel.
 	//
 	// This member is required.
 	MemberArns []string

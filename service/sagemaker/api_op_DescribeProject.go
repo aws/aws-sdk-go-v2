@@ -76,6 +76,13 @@ type DescribeProjectOutput struct {
 	// component, or project.
 	CreatedBy *types.UserContext
 
+	// Information about the user who created or modified an experiment, trial, trial
+	// component, or project.
+	LastModifiedBy *types.UserContext
+
+	// The timestamp when project was last modified.
+	LastModifiedTime *time.Time
+
 	// The description of the project.
 	ProjectDescription *string
 

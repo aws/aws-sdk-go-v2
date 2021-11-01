@@ -408,6 +408,9 @@ type Bucket struct {
 	// bucket's bundle.
 	AbleToUpdateBundle *bool
 
+	// An object that describes the access log configuration for the bucket.
+	AccessLogConfig *BucketAccessLogConfig
+
 	// An object that describes the access rules of the bucket.
 	AccessRules *AccessRules
 
@@ -469,6 +472,37 @@ type Bucket struct {
 
 	// The URL of the bucket.
 	Url *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the access log configuration for a bucket in the Amazon Lightsail
+// object storage service. For more information about bucket access logs, see
+// Logging bucket requests using access logging in Amazon Lightsail
+// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-bucket-access-logs)
+// in the Amazon Lightsail Developer Guide.
+type BucketAccessLogConfig struct {
+
+	// A Boolean value that indicates whether bucket access logging is enabled for the
+	// bucket.
+	//
+	// This member is required.
+	Enabled *bool
+
+	// The name of the bucket where the access is saved. The destination can be a
+	// Lightsail bucket in the same account, and in the same AWS Region as the source
+	// bucket. This parameter is required when enabling the access log for a bucket,
+	// and should be omitted when disabling the access log.
+	Destination *string
+
+	// The optional object prefix for the bucket access log. The prefix is an optional
+	// addition to the object key that organizes your access log files in the
+	// destination bucket. For example, if you specify a logs/ prefix, then each log
+	// object will begin with the logs/ prefix in its key (for example,
+	// logs/2021-11-01-21-32-16-E568B2907131C0C0). This parameter can be optionally
+	// specified when enabling the access log for a bucket, and should be omitted when
+	// disabling the access log.
+	Prefix *string
 
 	noSmithyDocumentSerde
 }
@@ -964,9 +998,15 @@ type Container struct {
 
 	// The name of the image used for the container. Container images sourced from your
 	// Lightsail container service, that are registered and stored on your service,
-	// start with a colon (:). For example, :container-service-1.mystaticwebsite.1.
-	// Container images sourced from a public registry like Docker Hub don't start with
-	// a colon. For example, nginx:latest or nginx.
+	// start with a colon (:). For example, if your container service name is
+	// container-service-1, the container image label is mystaticsite, and you want to
+	// use the third (3) version of the registered container image, then you should
+	// specify :container-service-1.mystaticsite.3. To use the latest version of a
+	// container image, specify latest instead of a version number (for example,
+	// :container-service-1.mystaticsite.latest). Lightsail will automatically use the
+	// highest numbered version of the registered container image. Container images
+	// sourced from a public registry like Docker Hub don't start with a colon. For
+	// example, nginx:latest or nginx.
 	Image *string
 
 	// The open firewall ports of the container.

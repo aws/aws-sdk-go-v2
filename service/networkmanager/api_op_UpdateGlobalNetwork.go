@@ -35,7 +35,7 @@ type UpdateGlobalNetworkInput struct {
 	// This member is required.
 	GlobalNetworkId *string
 
-	// A description of the global network. Length Constraints: Maximum length of 256
+	// A description of the global network. Constraints: Maximum length of 256
 	// characters.
 	Description *string
 

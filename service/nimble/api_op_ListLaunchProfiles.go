@@ -4,6 +4,7 @@ package nimble
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/nimble/types"
@@ -34,21 +35,22 @@ type ListLaunchProfilesInput struct {
 	// This member is required.
 	StudioId *string
 
-	// The maximum number of results to be returned per request.
+	// The max number of results to return in the response.
 	MaxResults int32
 
-	// The token for the next set of results, or null if there are no more results.
+	// The token to request the next page of results.
 	NextToken *string
 
-	// The principal ID.
+	// The principal ID. This currently supports a Amazon Web Services SSO UserId.
 	PrincipalId *string
 
-	// A list of states.
+	// Filter this request to launch profiles in any of the given states.
 	States []string
 
 	noSmithyDocumentSerde
 }
 
+//
 type ListLaunchProfilesOutput struct {
 
 	// A collection of launch profiles.
@@ -124,6 +126,89 @@ func (c *Client) addOperationListLaunchProfilesMiddlewares(stack *middleware.Sta
 		return err
 	}
 	return nil
+}
+
+// ListLaunchProfilesAPIClient is a client that implements the ListLaunchProfiles
+// operation.
+type ListLaunchProfilesAPIClient interface {
+	ListLaunchProfiles(context.Context, *ListLaunchProfilesInput, ...func(*Options)) (*ListLaunchProfilesOutput, error)
+}
+
+var _ ListLaunchProfilesAPIClient = (*Client)(nil)
+
+// ListLaunchProfilesPaginatorOptions is the paginator options for
+// ListLaunchProfiles
+type ListLaunchProfilesPaginatorOptions struct {
+	// The max number of results to return in the response.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListLaunchProfilesPaginator is a paginator for ListLaunchProfiles
+type ListLaunchProfilesPaginator struct {
+	options   ListLaunchProfilesPaginatorOptions
+	client    ListLaunchProfilesAPIClient
+	params    *ListLaunchProfilesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListLaunchProfilesPaginator returns a new ListLaunchProfilesPaginator
+func NewListLaunchProfilesPaginator(client ListLaunchProfilesAPIClient, params *ListLaunchProfilesInput, optFns ...func(*ListLaunchProfilesPaginatorOptions)) *ListLaunchProfilesPaginator {
+	if params == nil {
+		params = &ListLaunchProfilesInput{}
+	}
+
+	options := ListLaunchProfilesPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListLaunchProfilesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListLaunchProfilesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListLaunchProfiles page.
+func (p *ListLaunchProfilesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListLaunchProfilesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListLaunchProfiles(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListLaunchProfiles(region string) *awsmiddleware.RegisterServiceMetadata {

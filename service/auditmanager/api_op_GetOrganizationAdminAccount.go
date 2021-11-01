@@ -33,10 +33,10 @@ type GetOrganizationAdminAccountInput struct {
 
 type GetOrganizationAdminAccountOutput struct {
 
-	// The identifier for the specified administrator account.
+	// The identifier for the administrator account.
 	AdminAccountId *string
 
-	// The identifier for the specified organization.
+	// The identifier for the organization.
 	OrganizationId *string
 
 	// Metadata pertaining to the operation's result.

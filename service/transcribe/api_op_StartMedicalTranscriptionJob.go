@@ -116,7 +116,7 @@ type StartMedicalTranscriptionJobInput struct {
 	//
 	// * Amazon Resource Name
 	// (ARN) of a KMS key in the current account or another account:
-	// "arn:aws:kms:region:account ID:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+	// "arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
 	// * ARN
 	// of a KMS Key Alias: "arn:aws:kms:region:account ID:alias/ExampleAlias"

@@ -7,13 +7,13 @@ import (
 	"time"
 )
 
-// Specifies a location in AWS.
+// Specifies a location in Amazon Web Services.
 type AWSLocation struct {
 
-	// The Amazon Resource Name (ARN) of the subnet the device is located in.
+	// The Amazon Resource Name (ARN) of the subnet that the device is located in.
 	SubnetArn *string
 
-	// The Zone the device is located in. This can be the ID of an Availability Zone,
+	// The Zone that the device is located in. Specify the ID of an Availability Zone,
 	// Local Zone, Wavelength Zone, or an Outpost.
 	Zone *string
 
@@ -71,6 +71,21 @@ type Connection struct {
 	noSmithyDocumentSerde
 }
 
+// Describes connection health.
+type ConnectionHealth struct {
+
+	// The connection status.
+	Status ConnectionStatus
+
+	// The time the status was last updated.
+	Timestamp *time.Time
+
+	// The connection type.
+	Type ConnectionType
+
+	noSmithyDocumentSerde
+}
+
 // Describes the association between a customer gateway, a device, and a link.
 type CustomerGatewayAssociation struct {
 
@@ -95,7 +110,7 @@ type CustomerGatewayAssociation struct {
 // Describes a device.
 type Device struct {
 
-	// The AWS location of the device.
+	// The Amazon Web Services location of the device.
 	AWSLocation *AWSLocation
 
 	// The date and time that the site was created.
@@ -236,6 +251,343 @@ type Location struct {
 	noSmithyDocumentSerde
 }
 
+// Describes a network resource.
+type NetworkResource struct {
+
+	// The Amazon Web Services account ID.
+	AccountId *string
+
+	// The Amazon Web Services Region.
+	AwsRegion *string
+
+	// Information about the resource, in JSON format. Network Manager gets this
+	// information by describing the resource using its Describe API call.
+	Definition *string
+
+	// The time that the resource definition was retrieved.
+	DefinitionTimestamp *time.Time
+
+	// The resource metadata.
+	Metadata map[string]string
+
+	// The ARN of the gateway.
+	RegisteredGatewayArn *string
+
+	// The ARN of the resource.
+	ResourceArn *string
+
+	// The ID of the resource.
+	ResourceId *string
+
+	// The resource type. The following are the supported resource types for Direct
+	// Connect:
+	//
+	// * dxcon
+	//
+	// * dx-gateway
+	//
+	// * dx-vif
+	//
+	// The following are the supported
+	// resource types for Network Manager:
+	//
+	// * connection
+	//
+	// * device
+	//
+	// * link
+	//
+	// * site
+	//
+	// The
+	// following are the supported resource types for Amazon VPC:
+	//
+	// *
+	// customer-gateway
+	//
+	// * transit-gateway
+	//
+	// * transit-gateway-attachment
+	//
+	// *
+	// transit-gateway-connect-peer
+	//
+	// * transit-gateway-route-table
+	//
+	// * vpn-connection
+	ResourceType *string
+
+	// The tags.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
+// Describes a resource count.
+type NetworkResourceCount struct {
+
+	// The resource count.
+	Count *int32
+
+	// The resource type.
+	ResourceType *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a network resource.
+type NetworkResourceSummary struct {
+
+	// Information about the resource, in JSON format. Network Manager gets this
+	// information by describing the resource using its Describe API call.
+	Definition *string
+
+	// Indicates whether this is a middlebox appliance.
+	IsMiddlebox bool
+
+	// The value for the Name tag.
+	NameTag *string
+
+	// The ARN of the gateway.
+	RegisteredGatewayArn *string
+
+	// The ARN of the resource.
+	ResourceArn *string
+
+	// The resource type.
+	ResourceType *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a network route.
+type NetworkRoute struct {
+
+	// A unique identifier for the route, such as a CIDR block.
+	DestinationCidrBlock *string
+
+	// The destinations.
+	Destinations []NetworkRouteDestination
+
+	// The ID of the prefix list.
+	PrefixListId *string
+
+	// The route state. The possible values are active and blackhole.
+	State RouteState
+
+	// The route type. The possible values are propagated and static.
+	Type RouteType
+
+	noSmithyDocumentSerde
+}
+
+// Describes the destination of a network route.
+type NetworkRouteDestination struct {
+
+	// The ID of the resource.
+	ResourceId *string
+
+	// The resource type.
+	ResourceType *string
+
+	// The ID of the transit gateway attachment.
+	TransitGatewayAttachmentId *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the telemetry information for a resource.
+type NetworkTelemetry struct {
+
+	// The Amazon Web Services account ID.
+	AccountId *string
+
+	// The address.
+	Address *string
+
+	// The Amazon Web Services Region.
+	AwsRegion *string
+
+	// The connection health.
+	Health *ConnectionHealth
+
+	// The ARN of the gateway.
+	RegisteredGatewayArn *string
+
+	// The ARN of the resource.
+	ResourceArn *string
+
+	// The ID of the resource.
+	ResourceId *string
+
+	// The resource type.
+	ResourceType *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a path component.
+type PathComponent struct {
+
+	// The destination CIDR block in the route table.
+	DestinationCidrBlock *string
+
+	// The resource.
+	Resource *NetworkResourceSummary
+
+	// The sequence number in the path. The destination is 0.
+	Sequence *int32
+
+	noSmithyDocumentSerde
+}
+
+// Describes a resource relationship.
+type Relationship struct {
+
+	// The ARN of the resource.
+	From *string
+
+	// The ARN of the resource.
+	To *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a route analysis.
+type RouteAnalysis struct {
+
+	// The destination.
+	Destination *RouteAnalysisEndpointOptions
+
+	// The forward path.
+	ForwardPath *RouteAnalysisPath
+
+	// The ID of the global network.
+	GlobalNetworkId *string
+
+	// Indicates whether to analyze the return path. The return path is not analyzed if
+	// the forward path analysis does not succeed.
+	IncludeReturnPath bool
+
+	// The ID of the AWS account that created the route analysis.
+	OwnerAccountId *string
+
+	// The return path.
+	ReturnPath *RouteAnalysisPath
+
+	// The ID of the route analysis.
+	RouteAnalysisId *string
+
+	// The source.
+	Source *RouteAnalysisEndpointOptions
+
+	// The time that the analysis started.
+	StartTimestamp *time.Time
+
+	// The status of the route analysis.
+	Status RouteAnalysisStatus
+
+	// Indicates whether to include the location of middlebox appliances in the route
+	// analysis.
+	UseMiddleboxes bool
+
+	noSmithyDocumentSerde
+}
+
+// Describes the status of an analysis at completion.
+type RouteAnalysisCompletion struct {
+
+	// The reason code. Available only if a connection is not found.
+	//
+	// *
+	// BLACKHOLE_ROUTE_FOR_DESTINATION_FOUND - Found a black hole route with the
+	// destination CIDR block.
+	//
+	// * CYCLIC_PATH_DETECTED - Found the same resource
+	// multiple times while traversing the path.
+	//
+	// *
+	// INACTIVE_ROUTE_FOR_DESTINATION_FOUND - Found an inactive route with the
+	// destination CIDR block.
+	//
+	// * MAX_HOPS_EXCEEDED - Analysis exceeded 64 hops without
+	// finding the destination.
+	//
+	// * ROUTE_NOT_FOUND - Cannot find a route table with the
+	// destination CIDR block.
+	//
+	// * TGW_ATTACH_ARN_NO_MATCH - Found an attachment, but
+	// not with the correct destination ARN.
+	//
+	// * TGW_ATTACH_NOT_FOUND - Cannot find an
+	// attachment.
+	//
+	// * TGW_ATTACH_NOT_IN_TGW - Found an attachment, but not to the
+	// correct transit gateway.
+	//
+	// * TGW_ATTACH_STABLE_ROUTE_TABLE_NOT_FOUND - The state
+	// of the route table association is not associated.
+	ReasonCode RouteAnalysisCompletionReasonCode
+
+	// Additional information about the path. Available only if a connection is not
+	// found.
+	ReasonContext map[string]string
+
+	// The result of the analysis. If the status is NOT_CONNECTED, check the reason
+	// code.
+	ResultCode RouteAnalysisCompletionResultCode
+
+	noSmithyDocumentSerde
+}
+
+// Describes a source or a destination.
+type RouteAnalysisEndpointOptions struct {
+
+	// The IP address.
+	IpAddress *string
+
+	// The ARN of the transit gateway.
+	TransitGatewayArn *string
+
+	// The ARN of the transit gateway attachment.
+	TransitGatewayAttachmentArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a source or a destination.
+type RouteAnalysisEndpointOptionsSpecification struct {
+
+	// The IP address.
+	IpAddress *string
+
+	// The ARN of the transit gateway attachment.
+	TransitGatewayAttachmentArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a route analysis path.
+type RouteAnalysisPath struct {
+
+	// The status of the analysis at completion.
+	CompletionStatus *RouteAnalysisCompletion
+
+	// The route analysis path.
+	Path []PathComponent
+
+	noSmithyDocumentSerde
+}
+
+// Describes a route table.
+type RouteTableIdentifier struct {
+
+	// The ARN of the transit gateway route table.
+	TransitGatewayRouteTableArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes a site.
 type Site struct {
 
@@ -269,10 +621,10 @@ type Site struct {
 // Describes a tag.
 type Tag struct {
 
-	// The tag key. Length Constraints: Maximum length of 128 characters.
+	// The tag key. Constraints: Maximum length of 128 characters.
 	Key *string
 
-	// The tag value. Length Constraints: Maximum length of 256 characters.
+	// The tag value. Constraints: Maximum length of 256 characters.
 	Value *string
 
 	noSmithyDocumentSerde

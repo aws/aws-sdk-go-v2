@@ -18,8 +18,9 @@ import (
 // Starting an Amazon RDS DB instance That Was Previously
 // Stopped
 // (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_StartInstance.html)
-// in the Amazon RDS User Guide. This command doesn't apply to Aurora MySQL and
-// Aurora PostgreSQL. For Aurora DB clusters, use StartDBCluster instead.
+// in the Amazon RDS User Guide. This command doesn't apply to RDS Custom, Aurora
+// MySQL, and Aurora PostgreSQL. For Aurora DB clusters, use StartDBCluster
+// instead.
 func (c *Client) StartDBInstance(ctx context.Context, params *StartDBInstanceInput, optFns ...func(*Options)) (*StartDBInstanceOutput, error) {
 	if params == nil {
 		params = &StartDBInstanceInput{}

@@ -52,6 +52,9 @@ type CreateModelPackageInput struct {
 	// A unique token that guarantees that the call to this API is idempotent.
 	ClientToken *string
 
+	// The metadata properties associated with the model package versions.
+	CustomerMetadataProperties map[string]string
+
 	// Specifies details about inference jobs that can be run with models based on this
 	// model package, including the following:
 	//
@@ -80,8 +83,9 @@ type CreateModelPackageInput struct {
 	// A description of the model package.
 	ModelPackageDescription *string
 
-	// The name of the model group that this model version belongs to. This parameter
-	// is required for versioned models, and does not apply to unversioned models.
+	// The name or Amazon Resource Name (ARN) of the model package group that this
+	// model version belongs to. This parameter is required for versioned models, and
+	// does not apply to unversioned models.
 	ModelPackageGroupName *string
 
 	// The name of the model package. The name must have 1 to 63 characters. Valid

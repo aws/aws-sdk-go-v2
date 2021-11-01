@@ -175,6 +175,75 @@ func (e *CustomAvailabilityZoneQuotaExceededFault) ErrorFault() smithy.ErrorFaul
 	return smithy.FaultClient
 }
 
+// A CEV with the specified name already exists.
+type CustomDBEngineVersionAlreadyExistsFault struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *CustomDBEngineVersionAlreadyExistsFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *CustomDBEngineVersionAlreadyExistsFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *CustomDBEngineVersionAlreadyExistsFault) ErrorCode() string {
+	return "CustomDBEngineVersionAlreadyExistsFault"
+}
+func (e *CustomDBEngineVersionAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// The specified CEV was not found.
+type CustomDBEngineVersionNotFoundFault struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *CustomDBEngineVersionNotFoundFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *CustomDBEngineVersionNotFoundFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *CustomDBEngineVersionNotFoundFault) ErrorCode() string {
+	return "CustomDBEngineVersionNotFoundFault"
+}
+func (e *CustomDBEngineVersionNotFoundFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// You have exceeded your CEV quota.
+type CustomDBEngineVersionQuotaExceededFault struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *CustomDBEngineVersionQuotaExceededFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *CustomDBEngineVersionQuotaExceededFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *CustomDBEngineVersionQuotaExceededFault) ErrorCode() string {
+	return "CustomDBEngineVersionQuotaExceededFault"
+}
+func (e *CustomDBEngineVersionQuotaExceededFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // The user already has a DB cluster with the given identifier.
 type DBClusterAlreadyExistsFault struct {
 	Message *string
@@ -1463,6 +1532,29 @@ func (e *InsufficientStorageClusterCapacityFault) ErrorCode() string {
 	return "InsufficientStorageClusterCapacity"
 }
 func (e *InsufficientStorageClusterCapacityFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// You can't delete the CEV.
+type InvalidCustomDBEngineVersionStateFault struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidCustomDBEngineVersionStateFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidCustomDBEngineVersionStateFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidCustomDBEngineVersionStateFault) ErrorCode() string {
+	return "InvalidCustomDBEngineVersionStateFault"
+}
+func (e *InvalidCustomDBEngineVersionStateFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 

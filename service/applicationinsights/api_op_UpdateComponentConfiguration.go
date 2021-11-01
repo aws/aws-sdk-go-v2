@@ -41,6 +41,8 @@ type UpdateComponentConfigurationInput struct {
 	// This member is required.
 	ResourceGroupName *string
 
+	AutoConfigEnabled *bool
+
 	// The configuration settings of the component. The value is the escaped JSON of
 	// the configuration. For more information about the JSON format, see Working with
 	// JSON

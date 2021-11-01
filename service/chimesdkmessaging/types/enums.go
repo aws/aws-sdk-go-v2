@@ -2,6 +2,26 @@
 
 package types
 
+type AllowNotifications string
+
+// Enum values for AllowNotifications
+const (
+	AllowNotificationsAll      AllowNotifications = "ALL"
+	AllowNotificationsNone     AllowNotifications = "NONE"
+	AllowNotificationsFiltered AllowNotifications = "FILTERED"
+)
+
+// Values returns all known values for AllowNotifications. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AllowNotifications) Values() []AllowNotifications {
+	return []AllowNotifications{
+		"ALL",
+		"NONE",
+		"FILTERED",
+	}
+}
+
 type ChannelMembershipType string
 
 // Enum values for ChannelMembershipType
@@ -190,6 +210,24 @@ const (
 func (InvocationType) Values() []InvocationType {
 	return []InvocationType{
 		"ASYNC",
+	}
+}
+
+type PushNotificationType string
+
+// Enum values for PushNotificationType
+const (
+	PushNotificationTypeDefault PushNotificationType = "DEFAULT"
+	PushNotificationTypeVoip    PushNotificationType = "VOIP"
+)
+
+// Values returns all known values for PushNotificationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PushNotificationType) Values() []PushNotificationType {
+	return []PushNotificationType{
+		"DEFAULT",
+		"VOIP",
 	}
 }
 

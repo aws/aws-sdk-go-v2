@@ -69,9 +69,15 @@ var defaultPartitions = endpoints.Partitions{
 			"ap-southeast-1": endpoints.Endpoint{},
 			"ap-southeast-2": endpoints.Endpoint{},
 			"ca-central-1":   endpoints.Endpoint{},
-			"eu-central-1":   endpoints.Endpoint{},
-			"eu-west-1":      endpoints.Endpoint{},
-			"eu-west-2":      endpoints.Endpoint{},
+			"ca-central-1-fips": endpoints.Endpoint{
+				Hostname: "rekognition-fips.ca-central-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-central-1",
+				},
+			},
+			"eu-central-1": endpoints.Endpoint{},
+			"eu-west-1":    endpoints.Endpoint{},
+			"eu-west-2":    endpoints.Endpoint{},
 			"rekognition-fips.ca-central-1": endpoints.Endpoint{
 				Hostname: "rekognition-fips.ca-central-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
@@ -102,10 +108,59 @@ var defaultPartitions = endpoints.Partitions{
 					Region: "us-west-2",
 				},
 			},
+			"rekognition.ca-central-1": endpoints.Endpoint{
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-central-1",
+				},
+			},
+			"rekognition.us-east-1": endpoints.Endpoint{
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
+			"rekognition.us-east-2": endpoints.Endpoint{
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-2",
+				},
+			},
+			"rekognition.us-west-1": endpoints.Endpoint{
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-1",
+				},
+			},
+			"rekognition.us-west-2": endpoints.Endpoint{
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
+			},
 			"us-east-1": endpoints.Endpoint{},
+			"us-east-1-fips": endpoints.Endpoint{
+				Hostname: "rekognition-fips.us-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
 			"us-east-2": endpoints.Endpoint{},
+			"us-east-2-fips": endpoints.Endpoint{
+				Hostname: "rekognition-fips.us-east-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-2",
+				},
+			},
 			"us-west-1": endpoints.Endpoint{},
+			"us-west-1-fips": endpoints.Endpoint{
+				Hostname: "rekognition-fips.us-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-1",
+				},
+			},
 			"us-west-2": endpoints.Endpoint{},
+			"us-west-2-fips": endpoints.Endpoint{
+				Hostname: "rekognition-fips.us-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
+			},
 		},
 	},
 	{
@@ -154,7 +209,18 @@ var defaultPartitions = endpoints.Partitions{
 					Region: "us-gov-west-1",
 				},
 			},
+			"rekognition.us-gov-west-1": endpoints.Endpoint{
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-west-1",
+				},
+			},
 			"us-gov-west-1": endpoints.Endpoint{},
+			"us-gov-west-1-fips": endpoints.Endpoint{
+				Hostname: "rekognition-fips.us-gov-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-west-1",
+				},
+			},
 		},
 	},
 }

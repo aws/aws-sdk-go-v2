@@ -67,29 +67,31 @@ type DeleteDBInstanceInput struct {
 	DeleteAutomatedBackups *bool
 
 	// The DBSnapshotIdentifier of the new DBSnapshot created when the
-	// SkipFinalSnapshot parameter is disabled. Specifying this parameter and also
-	// specifying to skip final DB snapshot creation in SkipFinalShapshot results in an
-	// error. Constraints:
+	// SkipFinalSnapshot parameter is disabled. If you enable this parameter and also
+	// enable SkipFinalShapshot, the command results in an error. This setting doesn't
+	// apply to RDS Custom. Constraints:
 	//
 	// * Must be 1 to 255 letters or numbers.
 	//
-	// * First character
-	// must be a letter.
+	// *
+	// First character must be a letter.
 	//
-	// * Can't end with a hyphen or contain two consecutive
-	// hyphens.
+	// * Can't end with a hyphen or contain two
+	// consecutive hyphens.
 	//
 	// * Can't be specified when deleting a read replica.
 	FinalDBSnapshotIdentifier *string
 
 	// A value that indicates whether to skip the creation of a final DB snapshot
-	// before the DB instance is deleted. If skip is specified, no DB snapshot is
-	// created. If skip isn't specified, a DB snapshot is created before the DB
-	// instance is deleted. By default, skip isn't specified, and the DB snapshot is
-	// created. When a DB instance is in a failure state and has a status of 'failed',
-	// 'incompatible-restore', or 'incompatible-network', it can only be deleted when
-	// skip is specified. Specify skip when deleting a read replica. The
-	// FinalDBSnapshotIdentifier parameter must be specified if skip isn't specified.
+	// before deleting the instance. If you enable this parameter, RDS doesn't create a
+	// DB snapshot. If you don't enable this parameter, RDS creates a DB snapshot
+	// before the DB instance is deleted. By default, skip isn't enabled, and the DB
+	// snapshot is created. If you don't enable this parameter, you must specify the
+	// FinalDBSnapshotIdentifier parameter. When a DB instance is in a failure state
+	// and has a status of failed, incompatible-restore, or incompatible-network, RDS
+	// can delete the instance only if you enable this parameter. If you delete a read
+	// replica or an RDS Custom instance, you must enable this setting. This setting is
+	// required for RDS Custom.
 	SkipFinalSnapshot bool
 
 	noSmithyDocumentSerde

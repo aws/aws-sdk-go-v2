@@ -59,7 +59,7 @@ type ModifyDBClusterSnapshotAttributeInput struct {
 	// cluster snapshot, set this list to include one or more Amazon account IDs, or
 	// all to make the manual DB cluster snapshot restorable by any Amazon account. Do
 	// not add the all value for any manual DB cluster snapshots that contain private
-	// information that you don't want available to all AWS accounts.
+	// information that you don't want available to all Amazon accounts.
 	ValuesToAdd []string
 
 	// A list of DB cluster snapshot attributes to remove from the attribute specified

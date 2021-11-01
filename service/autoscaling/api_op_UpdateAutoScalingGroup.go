@@ -98,6 +98,16 @@ type UpdateAutoScalingGroupInput struct {
 	// equal to the maximum size of the group.
 	DesiredCapacity *int32
 
+	// The unit of measurement for the value specified for desired capacity. Amazon EC2
+	// Auto Scaling supports DesiredCapacityType for attribute-based instance type
+	// selection only. For more information, see Creating an Auto Scaling group using
+	// attribute-based instance type selection
+	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html)
+	// in the Amazon EC2 Auto Scaling User Guide. By default, Amazon EC2 Auto Scaling
+	// specifies units, which translates into number of instances. Valid values: units
+	// | vcpu | memory-mib
+	DesiredCapacityType *string
+
 	// The amount of time, in seconds, that Amazon EC2 Auto Scaling waits before
 	// checking the health status of an EC2 instance that has come into service. The
 	// default value is 0. For more information, see Health check grace period
@@ -141,10 +151,9 @@ type UpdateAutoScalingGroupInput struct {
 	// The minimum size of the Auto Scaling group.
 	MinSize *int32
 
-	// An embedded object that specifies a mixed instances policy. When you make
-	// changes to an existing policy, all optional properties are left unchanged if not
-	// specified. For more information, see Auto Scaling groups with multiple instance
-	// types and purchase options
+	// An embedded object that specifies a mixed instances policy. For more
+	// information, see Auto Scaling groups with multiple instance types and purchase
+	// options
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	MixedInstancesPolicy *types.MixedInstancesPolicy

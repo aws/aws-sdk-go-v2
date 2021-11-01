@@ -799,6 +799,62 @@ func (m *awsAwsquery_serializeOpCreateCustomAvailabilityZone) HandleSerialize(ct
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpCreateCustomDBEngineVersion struct {
+}
+
+func (*awsAwsquery_serializeOpCreateCustomDBEngineVersion) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpCreateCustomDBEngineVersion) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateCustomDBEngineVersionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("CreateCustomDBEngineVersion")
+	body.Key("Version").String("2014-10-31")
+
+	if err := awsAwsquery_serializeOpDocumentCreateCustomDBEngineVersionInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpCreateDBCluster struct {
 }
 
@@ -1675,6 +1731,62 @@ func (m *awsAwsquery_serializeOpDeleteCustomAvailabilityZone) HandleSerialize(ct
 	body.Key("Version").String("2014-10-31")
 
 	if err := awsAwsquery_serializeOpDocumentDeleteCustomAvailabilityZoneInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpDeleteCustomDBEngineVersion struct {
+}
+
+func (*awsAwsquery_serializeOpDeleteCustomDBEngineVersion) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpDeleteCustomDBEngineVersion) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteCustomDBEngineVersionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DeleteCustomDBEngineVersion")
+	body.Key("Version").String("2014-10-31")
+
+	if err := awsAwsquery_serializeOpDocumentDeleteCustomDBEngineVersionInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -5275,6 +5387,62 @@ func (m *awsAwsquery_serializeOpModifyCurrentDBClusterCapacity) HandleSerialize(
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpModifyCustomDBEngineVersion struct {
+}
+
+func (*awsAwsquery_serializeOpModifyCustomDBEngineVersion) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpModifyCustomDBEngineVersion) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ModifyCustomDBEngineVersionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("ModifyCustomDBEngineVersion")
+	body.Key("Version").String("2014-10-31")
+
+	if err := awsAwsquery_serializeOpDocumentModifyCustomDBEngineVersionInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpModifyDBCluster struct {
 }
 
@@ -8677,6 +8845,55 @@ func awsAwsquery_serializeOpDocumentCreateCustomAvailabilityZoneInput(v *CreateC
 	return nil
 }
 
+func awsAwsquery_serializeOpDocumentCreateCustomDBEngineVersionInput(v *CreateCustomDBEngineVersionInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.DatabaseInstallationFilesS3BucketName != nil {
+		objectKey := object.Key("DatabaseInstallationFilesS3BucketName")
+		objectKey.String(*v.DatabaseInstallationFilesS3BucketName)
+	}
+
+	if v.DatabaseInstallationFilesS3Prefix != nil {
+		objectKey := object.Key("DatabaseInstallationFilesS3Prefix")
+		objectKey.String(*v.DatabaseInstallationFilesS3Prefix)
+	}
+
+	if v.Description != nil {
+		objectKey := object.Key("Description")
+		objectKey.String(*v.Description)
+	}
+
+	if v.Engine != nil {
+		objectKey := object.Key("Engine")
+		objectKey.String(*v.Engine)
+	}
+
+	if v.EngineVersion != nil {
+		objectKey := object.Key("EngineVersion")
+		objectKey.String(*v.EngineVersion)
+	}
+
+	if v.KMSKeyId != nil {
+		objectKey := object.Key("KMSKeyId")
+		objectKey.String(*v.KMSKeyId)
+	}
+
+	if v.Manifest != nil {
+		objectKey := object.Key("Manifest")
+		objectKey.String(*v.Manifest)
+	}
+
+	if v.Tags != nil {
+		objectKey := object.Key("Tags")
+		if err := awsAwsquery_serializeDocumentTagList(v.Tags, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeOpDocumentCreateDBClusterEndpointInput(v *CreateDBClusterEndpointInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -8994,6 +9211,11 @@ func awsAwsquery_serializeOpDocumentCreateDBInstanceInput(v *CreateDBInstanceInp
 		objectKey.Boolean(*v.CopyTagsToSnapshot)
 	}
 
+	if v.CustomIamInstanceProfile != nil {
+		objectKey := object.Key("CustomIamInstanceProfile")
+		objectKey.String(*v.CustomIamInstanceProfile)
+	}
+
 	if v.DBClusterIdentifier != nil {
 		objectKey := object.Key("DBClusterIdentifier")
 		objectKey.String(*v.DBClusterIdentifier)
@@ -9234,6 +9456,11 @@ func awsAwsquery_serializeOpDocumentCreateDBInstanceReadReplicaInput(v *CreateDB
 	if v.CopyTagsToSnapshot != nil {
 		objectKey := object.Key("CopyTagsToSnapshot")
 		objectKey.Boolean(*v.CopyTagsToSnapshot)
+	}
+
+	if v.CustomIamInstanceProfile != nil {
+		objectKey := object.Key("CustomIamInstanceProfile")
+		objectKey.String(*v.CustomIamInstanceProfile)
 	}
 
 	if v.DBInstanceClass != nil {
@@ -9744,6 +9971,23 @@ func awsAwsquery_serializeOpDocumentDeleteCustomAvailabilityZoneInput(v *DeleteC
 	if v.CustomAvailabilityZoneId != nil {
 		objectKey := object.Key("CustomAvailabilityZoneId")
 		objectKey.String(*v.CustomAvailabilityZoneId)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentDeleteCustomDBEngineVersionInput(v *DeleteCustomDBEngineVersionInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Engine != nil {
+		objectKey := object.Key("Engine")
+		objectKey.String(*v.Engine)
+	}
+
+	if v.EngineVersion != nil {
+		objectKey := object.Key("EngineVersion")
+		objectKey.String(*v.EngineVersion)
 	}
 
 	return nil
@@ -11507,6 +11751,33 @@ func awsAwsquery_serializeOpDocumentModifyCurrentDBClusterCapacityInput(v *Modif
 	return nil
 }
 
+func awsAwsquery_serializeOpDocumentModifyCustomDBEngineVersionInput(v *ModifyCustomDBEngineVersionInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Description != nil {
+		objectKey := object.Key("Description")
+		objectKey.String(*v.Description)
+	}
+
+	if v.Engine != nil {
+		objectKey := object.Key("Engine")
+		objectKey.String(*v.Engine)
+	}
+
+	if v.EngineVersion != nil {
+		objectKey := object.Key("EngineVersion")
+		objectKey.String(*v.EngineVersion)
+	}
+
+	if len(v.Status) > 0 {
+		objectKey := object.Key("Status")
+		objectKey.String(string(v.Status))
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeOpDocumentModifyDBClusterEndpointInput(v *ModifyDBClusterEndpointInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -11740,6 +12011,11 @@ func awsAwsquery_serializeOpDocumentModifyDBInstanceInput(v *ModifyDBInstanceInp
 		objectKey.Boolean(v.ApplyImmediately)
 	}
 
+	if len(v.AutomationMode) > 0 {
+		objectKey := object.Key("AutomationMode")
+		objectKey.String(string(v.AutomationMode))
+	}
+
 	if v.AutoMinorVersionUpgrade != nil {
 		objectKey := object.Key("AutoMinorVersionUpgrade")
 		objectKey.Boolean(*v.AutoMinorVersionUpgrade)
@@ -11929,6 +12205,11 @@ func awsAwsquery_serializeOpDocumentModifyDBInstanceInput(v *ModifyDBInstanceInp
 	if len(v.ReplicaMode) > 0 {
 		objectKey := object.Key("ReplicaMode")
 		objectKey.String(string(v.ReplicaMode))
+	}
+
+	if v.ResumeFullAutomationModeMinutes != nil {
+		objectKey := object.Key("ResumeFullAutomationModeMinutes")
+		objectKey.Integer(*v.ResumeFullAutomationModeMinutes)
 	}
 
 	if v.StorageType != nil {
@@ -12950,6 +13231,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceFromDBSnapshotInput(v *Rest
 		objectKey.Boolean(*v.CopyTagsToSnapshot)
 	}
 
+	if v.CustomIamInstanceProfile != nil {
+		objectKey := object.Key("CustomIamInstanceProfile")
+		objectKey.String(*v.CustomIamInstanceProfile)
+	}
+
 	if v.DBInstanceClass != nil {
 		objectKey := object.Key("DBInstanceClass")
 		objectKey.String(*v.DBInstanceClass)
@@ -13345,6 +13631,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceToPointInTimeInput(v *Resto
 	if v.CopyTagsToSnapshot != nil {
 		objectKey := object.Key("CopyTagsToSnapshot")
 		objectKey.Boolean(*v.CopyTagsToSnapshot)
+	}
+
+	if v.CustomIamInstanceProfile != nil {
+		objectKey := object.Key("CustomIamInstanceProfile")
+		objectKey.String(*v.CustomIamInstanceProfile)
 	}
 
 	if v.DBInstanceClass != nil {

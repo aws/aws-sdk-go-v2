@@ -4,7 +4,6 @@ package nimble
 
 import (
 	"context"
-	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/nimble/types"
@@ -28,7 +27,7 @@ func (c *Client) CreateStudioComponent(ctx context.Context, params *CreateStudio
 	return out, nil
 }
 
-// The studio components.
+//
 type CreateStudioComponentInput struct {
 
 	// The name for the studio component.
@@ -46,13 +45,9 @@ type CreateStudioComponentInput struct {
 	// This member is required.
 	Type types.StudioComponentType
 
-	// To make an idempotent API request using one of these actions, specify a client
-	// token in the request. You should not reuse the same client token for other API
-	// requests. If you retry a request that completed successfully using the same
-	// client token and the same parameters, the retry succeeds without performing any
-	// further actions. If you retry a successful request using the same client token,
-	// but one or more of the parameters are different, the retry fails with a
-	// ValidationException error.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request. If you don’t specify a client token, the AWS SDK automatically
+	// generates a client token and uses it for the request to ensure idempotency.
 	ClientToken *string
 
 	// The configuration of the studio component, based on component type.
@@ -80,6 +75,7 @@ type CreateStudioComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type CreateStudioComponentOutput struct {
 
 	// Information about the studio component.
@@ -136,9 +132,6 @@ func (c *Client) addOperationCreateStudioComponentMiddlewares(stack *middleware.
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addIdempotencyToken_opCreateStudioComponentMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateStudioComponentValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -155,39 +148,6 @@ func (c *Client) addOperationCreateStudioComponentMiddlewares(stack *middleware.
 		return err
 	}
 	return nil
-}
-
-type idempotencyToken_initializeOpCreateStudioComponent struct {
-	tokenProvider IdempotencyTokenProvider
-}
-
-func (*idempotencyToken_initializeOpCreateStudioComponent) ID() string {
-	return "OperationIdempotencyTokenAutoFill"
-}
-
-func (m *idempotencyToken_initializeOpCreateStudioComponent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	if m.tokenProvider == nil {
-		return next.HandleInitialize(ctx, in)
-	}
-
-	input, ok := in.Parameters.(*CreateStudioComponentInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("expected middleware input to be of type *CreateStudioComponentInput ")
-	}
-
-	if input.ClientToken == nil {
-		t, err := m.tokenProvider.GetIdempotencyToken()
-		if err != nil {
-			return out, metadata, err
-		}
-		input.ClientToken = &t
-	}
-	return next.HandleInitialize(ctx, in)
-}
-func addIdempotencyToken_opCreateStudioComponentMiddleware(stack *middleware.Stack, cfg Options) error {
-	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateStudioComponent{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opCreateStudioComponent(region string) *awsmiddleware.RegisterServiceMetadata {

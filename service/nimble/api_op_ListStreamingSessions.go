@@ -4,6 +4,7 @@ package nimble
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/nimble/types"
@@ -34,21 +35,22 @@ type ListStreamingSessionsInput struct {
 	// This member is required.
 	StudioId *string
 
-	// The user ID of the user that created the streaming session.
+	// Filters the request to streaming sessions created by the given user.
 	CreatedBy *string
 
-	// The token for the next set of results, or null if there are no more results.
+	// The token to request the next page of results.
 	NextToken *string
 
-	// The user ID of the user that owns the streaming session.
+	// Filters the request to streaming session owned by the given user
 	OwnedBy *string
 
-	// A collection of session IDs.
+	// Filters the request to only the provided session IDs.
 	SessionIds *string
 
 	noSmithyDocumentSerde
 }
 
+//
 type ListStreamingSessionsOutput struct {
 
 	// The token for the next set of results, or null if there are no more results.
@@ -124,6 +126,81 @@ func (c *Client) addOperationListStreamingSessionsMiddlewares(stack *middleware.
 		return err
 	}
 	return nil
+}
+
+// ListStreamingSessionsAPIClient is a client that implements the
+// ListStreamingSessions operation.
+type ListStreamingSessionsAPIClient interface {
+	ListStreamingSessions(context.Context, *ListStreamingSessionsInput, ...func(*Options)) (*ListStreamingSessionsOutput, error)
+}
+
+var _ ListStreamingSessionsAPIClient = (*Client)(nil)
+
+// ListStreamingSessionsPaginatorOptions is the paginator options for
+// ListStreamingSessions
+type ListStreamingSessionsPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListStreamingSessionsPaginator is a paginator for ListStreamingSessions
+type ListStreamingSessionsPaginator struct {
+	options   ListStreamingSessionsPaginatorOptions
+	client    ListStreamingSessionsAPIClient
+	params    *ListStreamingSessionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListStreamingSessionsPaginator returns a new ListStreamingSessionsPaginator
+func NewListStreamingSessionsPaginator(client ListStreamingSessionsAPIClient, params *ListStreamingSessionsInput, optFns ...func(*ListStreamingSessionsPaginatorOptions)) *ListStreamingSessionsPaginator {
+	if params == nil {
+		params = &ListStreamingSessionsInput{}
+	}
+
+	options := ListStreamingSessionsPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListStreamingSessionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListStreamingSessionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListStreamingSessions page.
+func (p *ListStreamingSessionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListStreamingSessionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.ListStreamingSessions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListStreamingSessions(region string) *awsmiddleware.RegisterServiceMetadata {

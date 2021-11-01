@@ -29,22 +29,22 @@ func (c *Client) UpdateAssessmentControlSetStatus(ctx context.Context, params *U
 
 type UpdateAssessmentControlSetStatusInput struct {
 
-	// The identifier for the specified assessment.
+	// The identifier for the assessment.
 	//
 	// This member is required.
 	AssessmentId *string
 
-	// The comment related to the status update.
+	// The comment that's related to the status update.
 	//
 	// This member is required.
 	Comment *string
 
-	// The identifier for the specified control set.
+	// The identifier for the control set.
 	//
 	// This member is required.
 	ControlSetId *string
 
-	// The status of the control set that is being updated.
+	// The status of the control set that's being updated.
 	//
 	// This member is required.
 	Status types.ControlSetStatus
@@ -54,8 +54,8 @@ type UpdateAssessmentControlSetStatusInput struct {
 
 type UpdateAssessmentControlSetStatusOutput struct {
 
-	// The name of the updated control set returned by the
-	// UpdateAssessmentControlSetStatus API.
+	// The name of the updated control set that the UpdateAssessmentControlSetStatus
+	// API returned.
 	ControlSet *types.AssessmentControlSet
 
 	// Metadata pertaining to the operation's result.

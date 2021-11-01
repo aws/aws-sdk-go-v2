@@ -70,6 +70,17 @@ var defaultPartitions = endpoints.Partitions{
 					Region: "us-east-1",
 				},
 			},
+			"aws-global-fips": endpoints.Endpoint{
+				Hostname: "iam-fips.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
+			"iam": endpoints.Endpoint{
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
 			"iam-fips": endpoints.Endpoint{
 				Hostname: "iam-fips.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
@@ -148,6 +159,17 @@ var defaultPartitions = endpoints.Partitions{
 		Endpoints: endpoints.Endpoints{
 			"aws-us-gov-global": endpoints.Endpoint{
 				Hostname: "iam.us-gov.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-west-1",
+				},
+			},
+			"aws-us-gov-global-fips": endpoints.Endpoint{
+				Hostname: "iam.us-gov.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-west-1",
+				},
+			},
+			"iam-govcloud": endpoints.Endpoint{
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-gov-west-1",
 				},

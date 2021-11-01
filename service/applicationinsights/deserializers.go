@@ -3663,6 +3663,15 @@ func awsAwsjson11_deserializeDocumentApplicationInfo(v **types.ApplicationInfo, 
 
 	for key, value := range shape {
 		switch key {
+		case "AutoConfigEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected AutoConfigEnabled to be of type *bool, got %T instead", value)
+				}
+				sv.AutoConfigEnabled = ptr.Bool(jtv)
+			}
+
 		case "CWEMonitorEnabled":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -3670,6 +3679,15 @@ func awsAwsjson11_deserializeDocumentApplicationInfo(v **types.ApplicationInfo, 
 					return fmt.Errorf("expected CWEMonitorEnabled to be of type *bool, got %T instead", value)
 				}
 				sv.CWEMonitorEnabled = ptr.Bool(jtv)
+			}
+
+		case "DiscoveryType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DiscoveryType to be of type string, got %T instead", value)
+				}
+				sv.DiscoveryType = types.DiscoveryType(jtv)
 			}
 
 		case "LifeCycle":
@@ -4781,6 +4799,35 @@ func awsAwsjson11_deserializeDocumentProblem(v **types.Problem, value interface{
 					return fmt.Errorf("expected Insights to be of type string, got %T instead", value)
 				}
 				sv.Insights = ptr.String(jtv)
+			}
+
+		case "LastRecurrenceTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastRecurrenceTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected LastRecurrenceTime to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "RecurringCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected RecurringCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RecurringCount = ptr.Int64(i64)
 			}
 
 		case "ResourceGroupName":
@@ -6088,6 +6135,15 @@ func awsAwsjson11_deserializeOpDocumentListProblemsOutput(v **ListProblemsOutput
 		case "ProblemList":
 			if err := awsAwsjson11_deserializeDocumentProblemList(&sv.ProblemList, value); err != nil {
 				return err
+			}
+
+		case "ResourceGroupName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceGroupName to be of type string, got %T instead", value)
+				}
+				sv.ResourceGroupName = ptr.String(jtv)
 			}
 
 		default:

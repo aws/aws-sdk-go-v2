@@ -5406,6 +5406,11 @@ func awsAwsquery_serializeOpDocumentModifyDBClusterInput(v *ModifyDBClusterInput
 	object := value.Object()
 	_ = object
 
+	if v.AllowMajorVersionUpgrade {
+		objectKey := object.Key("AllowMajorVersionUpgrade")
+		objectKey.Boolean(v.AllowMajorVersionUpgrade)
+	}
+
 	if v.ApplyImmediately {
 		objectKey := object.Key("ApplyImmediately")
 		objectKey.Boolean(v.ApplyImmediately)
@@ -5436,6 +5441,11 @@ func awsAwsquery_serializeOpDocumentModifyDBClusterInput(v *ModifyDBClusterInput
 	if v.DBClusterParameterGroupName != nil {
 		objectKey := object.Key("DBClusterParameterGroupName")
 		objectKey.String(*v.DBClusterParameterGroupName)
+	}
+
+	if v.DBInstanceParameterGroupName != nil {
+		objectKey := object.Key("DBInstanceParameterGroupName")
+		objectKey.String(*v.DBInstanceParameterGroupName)
 	}
 
 	if v.DeletionProtection != nil {

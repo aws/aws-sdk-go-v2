@@ -450,6 +450,26 @@ func (m *validateOpDisassociateChannelFlow) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetChannelMembershipPreferences struct {
+}
+
+func (*validateOpGetChannelMembershipPreferences) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetChannelMembershipPreferences) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetChannelMembershipPreferencesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetChannelMembershipPreferencesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetChannelMessage struct {
 }
 
@@ -685,6 +705,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutChannelMembershipPreferences struct {
+}
+
+func (*validateOpPutChannelMembershipPreferences) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutChannelMembershipPreferences) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutChannelMembershipPreferencesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutChannelMembershipPreferencesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -938,6 +978,10 @@ func addOpDisassociateChannelFlowValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpDisassociateChannelFlow{}, middleware.After)
 }
 
+func addOpGetChannelMembershipPreferencesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetChannelMembershipPreferences{}, middleware.After)
+}
+
 func addOpGetChannelMessageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetChannelMessage{}, middleware.After)
 }
@@ -986,6 +1030,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpPutChannelMembershipPreferencesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutChannelMembershipPreferences{}, middleware.After)
+}
+
 func addOpRedactChannelMessageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRedactChannelMessage{}, middleware.After)
 }
@@ -1016,6 +1064,23 @@ func addOpUpdateChannelMessageValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpUpdateChannelReadMarkerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateChannelReadMarker{}, middleware.After)
+}
+
+func validateChannelMembershipPreferences(v *types.ChannelMembershipPreferences) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ChannelMembershipPreferences"}
+	if v.PushNotifications != nil {
+		if err := validatePushNotificationPreferences(v.PushNotifications); err != nil {
+			invalidParams.AddNested("PushNotifications", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateChannelMessageCallback(v *types.ChannelMessageCallback) error {
@@ -1107,6 +1172,42 @@ func validateProcessorList(v []types.Processor) error {
 		if err := validateProcessor(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePushNotificationConfiguration(v *types.PushNotificationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PushNotificationConfiguration"}
+	if v.Title == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Title"))
+	}
+	if v.Body == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Body"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePushNotificationPreferences(v *types.PushNotificationPreferences) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PushNotificationPreferences"}
+	if len(v.AllowNotifications) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AllowNotifications"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1621,6 +1722,27 @@ func validateOpDisassociateChannelFlowInput(v *DisassociateChannelFlowInput) err
 	}
 }
 
+func validateOpGetChannelMembershipPreferencesInput(v *GetChannelMembershipPreferencesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetChannelMembershipPreferencesInput"}
+	if v.ChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
+	}
+	if v.MemberArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemberArn"))
+	}
+	if v.ChimeBearer == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChimeBearer"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetChannelMessageInput(v *GetChannelMessageInput) error {
 	if v == nil {
 		return nil
@@ -1828,6 +1950,34 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	}
 }
 
+func validateOpPutChannelMembershipPreferencesInput(v *PutChannelMembershipPreferencesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutChannelMembershipPreferencesInput"}
+	if v.ChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
+	}
+	if v.MemberArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemberArn"))
+	}
+	if v.ChimeBearer == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChimeBearer"))
+	}
+	if v.Preferences == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Preferences"))
+	} else if v.Preferences != nil {
+		if err := validateChannelMembershipPreferences(v.Preferences); err != nil {
+			invalidParams.AddNested("Preferences", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpRedactChannelMessageInput(v *RedactChannelMessageInput) error {
 	if v == nil {
 		return nil
@@ -1871,6 +2021,11 @@ func validateOpSendChannelMessageInput(v *SendChannelMessageInput) error {
 	}
 	if v.ChimeBearer == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChimeBearer"))
+	}
+	if v.PushNotification != nil {
+		if err := validatePushNotificationConfiguration(v.PushNotification); err != nil {
+			invalidParams.AddNested("PushNotification", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -307,6 +307,74 @@ func (SettingAttribute) Values() []SettingAttribute {
 	}
 }
 
+type ShareRequestAction string
+
+// Enum values for ShareRequestAction
+const (
+	ShareRequestActionAccept  ShareRequestAction = "ACCEPT"
+	ShareRequestActionDecline ShareRequestAction = "DECLINE"
+	ShareRequestActionRevoke  ShareRequestAction = "REVOKE"
+)
+
+// Values returns all known values for ShareRequestAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ShareRequestAction) Values() []ShareRequestAction {
+	return []ShareRequestAction{
+		"ACCEPT",
+		"DECLINE",
+		"REVOKE",
+	}
+}
+
+type ShareRequestStatus string
+
+// Enum values for ShareRequestStatus
+const (
+	ShareRequestStatusActive      ShareRequestStatus = "ACTIVE"
+	ShareRequestStatusReplicating ShareRequestStatus = "REPLICATING"
+	ShareRequestStatusShared      ShareRequestStatus = "SHARED"
+	ShareRequestStatusExpiring    ShareRequestStatus = "EXPIRING"
+	ShareRequestStatusFailed      ShareRequestStatus = "FAILED"
+	ShareRequestStatusExpired     ShareRequestStatus = "EXPIRED"
+	ShareRequestStatusDeclined    ShareRequestStatus = "DECLINED"
+	ShareRequestStatusRevoked     ShareRequestStatus = "REVOKED"
+)
+
+// Values returns all known values for ShareRequestStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ShareRequestStatus) Values() []ShareRequestStatus {
+	return []ShareRequestStatus{
+		"ACTIVE",
+		"REPLICATING",
+		"SHARED",
+		"EXPIRING",
+		"FAILED",
+		"EXPIRED",
+		"DECLINED",
+		"REVOKED",
+	}
+}
+
+type ShareRequestType string
+
+// Enum values for ShareRequestType
+const (
+	ShareRequestTypeSent     ShareRequestType = "SENT"
+	ShareRequestTypeReceived ShareRequestType = "RECEIVED"
+)
+
+// Values returns all known values for ShareRequestType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ShareRequestType) Values() []ShareRequestType {
+	return []ShareRequestType{
+		"SENT",
+		"RECEIVED",
+	}
+}
+
 type SourceFrequency string
 
 // Enum values for SourceFrequency

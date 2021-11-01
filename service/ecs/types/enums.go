@@ -246,6 +246,24 @@ func (ContainerInstanceStatus) Values() []ContainerInstanceStatus {
 	}
 }
 
+type CPUArchitecture string
+
+// Enum values for CPUArchitecture
+const (
+	CPUArchitectureX8664 CPUArchitecture = "X86_64"
+	CPUArchitectureArm64 CPUArchitecture = "ARM64"
+)
+
+// Values returns all known values for CPUArchitecture. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CPUArchitecture) Values() []CPUArchitecture {
+	return []CPUArchitecture{
+		"X86_64",
+		"ARM64",
+	}
+}
+
 type DeploymentControllerType string
 
 // Enum values for DeploymentControllerType
@@ -577,6 +595,36 @@ func (NetworkMode) Values() []NetworkMode {
 		"host",
 		"awsvpc",
 		"none",
+	}
+}
+
+type OSFamily string
+
+// Enum values for OSFamily
+const (
+	OSFamilyWindowsServer2019Full OSFamily = "WINDOWS_SERVER_2019_FULL"
+	OSFamilyWindowsServer2019Core OSFamily = "WINDOWS_SERVER_2019_CORE"
+	OSFamilyWindowsServer2016Full OSFamily = "WINDOWS_SERVER_2016_FULL"
+	OSFamilyWindowsServer2004Core OSFamily = "WINDOWS_SERVER_2004_CORE"
+	OSFamilyWindowsServer2022Core OSFamily = "WINDOWS_SERVER_2022_CORE"
+	OSFamilyWindowsServer2022Full OSFamily = "WINDOWS_SERVER_2022_FULL"
+	OSFamilyWindowsServer20h2Core OSFamily = "WINDOWS_SERVER_20H2_CORE"
+	OSFamilyLinux                 OSFamily = "LINUX"
+)
+
+// Values returns all known values for OSFamily. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (OSFamily) Values() []OSFamily {
+	return []OSFamily{
+		"WINDOWS_SERVER_2019_FULL",
+		"WINDOWS_SERVER_2019_CORE",
+		"WINDOWS_SERVER_2016_FULL",
+		"WINDOWS_SERVER_2004_CORE",
+		"WINDOWS_SERVER_2022_CORE",
+		"WINDOWS_SERVER_2022_FULL",
+		"WINDOWS_SERVER_20H2_CORE",
+		"LINUX",
 	}
 }
 

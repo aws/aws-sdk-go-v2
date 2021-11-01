@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of DB log files for the DB instance.
+// Returns a list of DB log files for the DB instance. This command doesn't apply
+// to RDS Custom.
 func (c *Client) DescribeDBLogFiles(ctx context.Context, params *DescribeDBLogFilesInput, optFns ...func(*Options)) (*DescribeDBLogFilesOutput, error) {
 	if params == nil {
 		params = &DescribeDBLogFilesInput{}

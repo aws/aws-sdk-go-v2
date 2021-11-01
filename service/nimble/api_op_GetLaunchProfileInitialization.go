@@ -29,12 +29,12 @@ func (c *Client) GetLaunchProfileInitialization(ctx context.Context, params *Get
 
 type GetLaunchProfileInitializationInput struct {
 
-	// The launch profile ID.
+	// The Launch Profile ID.
 	//
 	// This member is required.
 	LaunchProfileId *string
 
-	// A collection of launch profile protocol versions.
+	// The launch profile protocol versions supported by the client.
 	//
 	// This member is required.
 	LaunchProfileProtocolVersions []string
@@ -44,7 +44,7 @@ type GetLaunchProfileInitializationInput struct {
 	// This member is required.
 	LaunchPurpose *string
 
-	// The platform.
+	// The platform where this Launch Profile will be used, either WINDOWS or LINUX.
 	//
 	// This member is required.
 	Platform *string
@@ -57,6 +57,7 @@ type GetLaunchProfileInitializationInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type GetLaunchProfileInitializationOutput struct {
 
 	// The launch profile initialization.
