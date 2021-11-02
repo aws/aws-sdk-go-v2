@@ -915,10 +915,21 @@ public final class AwsEventStreamUtils {
         writer.openBlock("func (w $P) writeEvent(event $P) error {", "}", writerSymbol, eventSymbol, () -> {
             Runnable returnErr = () -> writer.openBlock("if err != nil {", "}", () -> writer.write("return err"))
                     .write("");
+            writer.writeDocs("""
+                             serializedEvent returned bytes refers to an underlying byte buffer and must not escape
+                             this writeEvent scope without first copying. Any previous bytes stored in the buffer
+                             are cleared by this call.
+                             """);
             writer.write("serializedEvent, err := w.serializeEvent(event)");
             returnErr.run();
+            writer.writeDocs("""
+                             signedEvent returned bytes refers to an underlying byte buffer and must not escape
+                             this writeEvent scope without first copying. Any previous bytes stored in the buffer
+                             are cleared by this call.
+                             """);
             writer.write("signedEvent, err := w.signEvent(serializedEvent)");
             returnErr.run();
+            writer.writeDocs("bytes are now copied to the underlying stream writer");
             writer.write("_, err = io.Copy(w.eventStream, bytes.NewReader(signedEvent))")
                     .write("return err");
         }).write("");
@@ -995,7 +1006,10 @@ public final class AwsEventStreamUtils {
                 .openBlock("defer func() {", "}()", () -> writer
                         .openBlock("if cErr := w.eventStream.Close(); cErr != nil && err == nil {", "}",
                                 () -> writer.write("err = cErr"))).write("")
-                .write("signedEvent, err := w.signEvent([]byte{})")
+                .write("""
+                       // Per the protocol, a signed empty message is used to indicate the end of the stream,
+                       // and that no subsequent events will be sent.
+                       signedEvent, err := w.signEvent([]byte{})""")
                 .openBlock("if err != nil {", "}", () -> writer.write("return err")).write("")
                 .write("_, err = io.Copy(w.eventStream, bytes.NewReader(signedEvent))")
                 .write("return err")).write("");

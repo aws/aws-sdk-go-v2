@@ -196,7 +196,7 @@ func (s ServeEventStream) readEvents(ctx context.Context, r *http.Request) error
 		}
 
 		// get service event message from payload
-		msg, err := eventstream.Decode(bytes.NewReader(signedMessage.Payload), messageBuffer)
+		msg, err := decoder.Decode(bytes.NewReader(signedMessage.Payload), messageBuffer)
 		if err != nil {
 			if err == io.EOF {
 				return nil

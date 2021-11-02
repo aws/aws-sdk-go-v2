@@ -37,17 +37,13 @@ func NewDecoder(optFns ...func(*DecoderOptions)) *Decoder {
 	}
 }
 
-// DecoderWithLogger adds a Logger to be used by the decoder when decoding
-// stream events.
-func DecoderWithLogger(logger logging.Logger) func(*DecoderOptions) {
-	return func(o *DecoderOptions) {
-		o.Logger = logger
-	}
-}
-
 // Decode attempts to decode a single message from the event stream reader.
-// Will return the event stream message, or error if Decode fails to read
+// Will return the event stream message, or error if decodeMessage fails to read
 // the message from the stream.
+//
+// payloadBuf is a byte slice that will be used in the returned Message.Payload. Callers
+// must ensure that the Message.Payload from a previous decode has been consumed before passing in the same underlying
+// payloadBuf byte slice.
 func (d *Decoder) Decode(reader io.Reader, payloadBuf []byte) (m Message, err error) {
 	if d.options.Logger != nil && d.options.LogMessages {
 		debugMsgBuf := bytes.NewBuffer(nil)
@@ -57,15 +53,15 @@ func (d *Decoder) Decode(reader io.Reader, payloadBuf []byte) (m Message, err er
 		}()
 	}
 
-	m, err = Decode(reader, payloadBuf)
+	m, err = decodeMessage(reader, payloadBuf)
 
 	return m, err
 }
 
-// Decode attempts to decode a single message from the event stream reader.
-// Will return the event stream message, or error if Decode fails to read
+// decodeMessage attempts to decode a single message from the event stream reader.
+// Will return the event stream message, or error if decodeMessage fails to read
 // the message from the reader.
-func Decode(reader io.Reader, payloadBuf []byte) (m Message, err error) {
+func decodeMessage(reader io.Reader, payloadBuf []byte) (m Message, err error) {
 	crc := crc32.New(crc32IEEETable)
 	hashReader := io.TeeReader(reader, crc)
 
@@ -106,7 +102,7 @@ func logMessageDecode(logger logging.Logger, msgBuf *bytes.Buffer, msg Message, 
 		hex.Dump(msgBuf.Bytes()))
 
 	if decodeErr != nil {
-		fmt.Fprintf(w, "Decode error: %v\n", decodeErr)
+		fmt.Fprintf(w, "decodeMessage error: %v\n", decodeErr)
 		return
 	}
 
