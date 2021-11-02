@@ -12,14 +12,28 @@ import (
 )
 
 // Creates a new version of a model and begins training. Models are managed as part
-// of an Amazon Rekognition Custom Labels project. You can specify one training
-// dataset and one testing dataset. The response from CreateProjectVersion is an
-// Amazon Resource Name (ARN) for the version of the model. Training takes a while
-// to complete. You can get the current status by calling DescribeProjectVersions.
-// Once training has successfully completed, call DescribeProjectVersions to get
-// the training results and evaluate the model. After evaluating the model, you
-// start the model by calling StartProjectVersion. This operation requires
-// permissions to perform the rekognition:CreateProjectVersion action.
+// of an Amazon Rekognition Custom Labels project. The response from
+// CreateProjectVersion is an Amazon Resource Name (ARN) for the version of the
+// model. Training uses the training and test datasets associated with the project.
+// For more information, see Creating training and test dataset in the Amazon
+// Rekognition Custom Labels Developer Guide. You can train a modelin a project
+// that doesn't have associated datasets by specifying manifest files in the
+// TrainingData and TestingData fields. If you open the console after training a
+// model with manifest files, Amazon Rekognition Custom Labels creates the datasets
+// for you using the most recent manifest files. You can no longer train a model
+// version for the project by specifying manifest files. Instead of training with a
+// project without associated datasets, we recommend that you use the manifest
+// files to create training and test datasets for the project. Training takes a
+// while to complete. You can get the current status by calling
+// DescribeProjectVersions. Training completed successfully if the value of the
+// Status field is TRAINING_COMPLETED. If training fails, see Debugging a failed
+// model training in the Amazon Rekognition Custom Labels developer guide. Once
+// training has successfully completed, call DescribeProjectVersions to get the
+// training results and evaluate the model. For more information, see Improving a
+// trained Amazon Rekognition Custom Labels model in the Amazon Rekognition Custom
+// Labels developers guide. After evaluating the model, you start the model by
+// calling StartProjectVersion. This operation requires permissions to perform the
+// rekognition:CreateProjectVersion action.
 func (c *Client) CreateProjectVersion(ctx context.Context, params *CreateProjectVersionInput, optFns ...func(*Options)) (*CreateProjectVersionOutput, error) {
 	if params == nil {
 		params = &CreateProjectVersionInput{}
@@ -50,28 +64,18 @@ type CreateProjectVersionInput struct {
 	// This member is required.
 	ProjectArn *string
 
-	// The dataset to use for testing.
-	//
-	// This member is required.
-	TestingData *types.TestingData
-
-	// The dataset to use for training.
-	//
-	// This member is required.
-	TrainingData *types.TrainingData
-
 	// A name for the version of the model. This value must be unique.
 	//
 	// This member is required.
 	VersionName *string
 
-	// The identifier for your AWS Key Management Service (AWS KMS) customer master key
-	// (CMK). You can supply the Amazon Resource Name (ARN) of your CMK, the ID of your
-	// CMK, an alias for your CMK, or an alias ARN. The key is used to encrypt training
+	// The identifier for your AWS Key Management Service key (AWS KMS key). You can
+	// supply the Amazon Resource Name (ARN) of your KMS key, the ID of your KMS key,
+	// an alias for your KMS key, or an alias ARN. The key is used to encrypt training
 	// and test images copied into the service for model training. Your source images
 	// are unaffected. The key is also used to encrypt training results and manifest
 	// files written to the output Amazon S3 bucket (OutputConfig). If you choose to
-	// use your own CMK, you need the following permissions on the CMK.
+	// use your own KMS key, you need the following permissions on the KMS key.
 	//
 	// *
 	// kms:CreateGrant
@@ -89,6 +93,16 @@ type CreateProjectVersionInput struct {
 
 	// A set of tags (key-value pairs) that you want to attach to the model.
 	Tags map[string]string
+
+	// Specifies an external manifest that the service uses to test the model. If you
+	// specify TestingData you must also specify TrainingData. The project must not
+	// have any associated datasets.
+	TestingData *types.TestingData
+
+	// Specifies an external manifest that the services uses to train the model. If you
+	// specify TrainingData you must also specify TestingData. The project must not
+	// have any associated datasets.
+	TrainingData *types.TrainingData
 
 	noSmithyDocumentSerde
 }

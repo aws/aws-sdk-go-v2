@@ -38,21 +38,24 @@ type UpdateResponsePlanInput struct {
 	// The actions that this response plan takes at the beginning of an incident.
 	Actions []types.Action
 
-	// The AWS Chatbot chat channel used for collaboration during an incident. Use the
+	// The Chatbot chat channel used for collaboration during an incident. Use the
 	// empty structure to remove the chat channel from the response plan.
 	ChatChannel types.ChatChannel
 
-	// A token ensuring that the action is called only once with the specified details.
+	// A token ensuring that the operation is called only once with the specified
+	// details.
 	ClientToken *string
 
-	// The long format name of the response plan. Can't contain spaces.
+	// The long format name of the response plan. The display name can't contain
+	// spaces.
 	DisplayName *string
 
 	// The contacts and escalation plans that Incident Manager engages at the start of
 	// the incident.
 	Engagements []string
 
-	// Used to create only one incident record for an incident.
+	// The string Incident Manager uses to prevent duplicate incidents from being
+	// created by the same incident in the same account.
 	IncidentTemplateDedupeString *string
 
 	// Defines the impact to the customers. Providing an impact overwrites the impact
@@ -70,14 +73,14 @@ type UpdateResponsePlanInput struct {
 	// * 1 - No impact
 	IncidentTemplateImpact *int32
 
-	// The SNS targets that are notified when updates are made to an incident.
+	// The Amazon SNS targets that are notified when updates are made to an incident.
 	IncidentTemplateNotificationTargets []types.NotificationTargetItem
 
 	// A brief summary of the incident. This typically contains what has happened,
 	// what's currently happening, and next steps.
 	IncidentTemplateSummary *string
 
-	// The short format name of the incident. Can't contain spaces.
+	// The short format name of the incident. The title can't contain spaces.
 	IncidentTemplateTitle *string
 
 	noSmithyDocumentSerde

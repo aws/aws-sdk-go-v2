@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the delegations in the specified Audit Manager assessment.
+// Deletes a batch of delegations for an assessment in Audit Manager.
 func (c *Client) BatchDeleteDelegationByAssessment(ctx context.Context, params *BatchDeleteDelegationByAssessmentInput, optFns ...func(*Options)) (*BatchDeleteDelegationByAssessmentOutput, error) {
 	if params == nil {
 		params = &BatchDeleteDelegationByAssessmentInput{}
@@ -29,12 +29,12 @@ func (c *Client) BatchDeleteDelegationByAssessment(ctx context.Context, params *
 
 type BatchDeleteDelegationByAssessmentInput struct {
 
-	// The identifier for the specified assessment.
+	// The identifier for the assessment.
 	//
 	// This member is required.
 	AssessmentId *string
 
-	// The identifiers for the specified delegations.
+	// The identifiers for the delegations.
 	//
 	// This member is required.
 	DelegationIds []string
@@ -44,7 +44,7 @@ type BatchDeleteDelegationByAssessmentInput struct {
 
 type BatchDeleteDelegationByAssessmentOutput struct {
 
-	// A list of errors returned by the BatchDeleteDelegationByAssessment API.
+	// A list of errors that the BatchDeleteDelegationByAssessment API returned.
 	Errors []types.BatchDeleteDelegationByAssessmentError
 
 	// Metadata pertaining to the operation's result.

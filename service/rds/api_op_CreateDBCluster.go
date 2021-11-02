@@ -212,25 +212,25 @@ type CreateDBClusterInput struct {
 
 	// The Amazon Web Services KMS key identifier for an encrypted DB cluster. The
 	// Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or
-	// alias name for the Amazon Web Services KMS customer master key (CMK). To use a
-	// CMK in a different Amazon Web Services account, specify the key ARN or alias
-	// ARN. When a CMK isn't specified in KmsKeyId:
+	// alias name for the KMS key. To use a KMS key in a different Amazon Web Services
+	// account, specify the key ARN or alias ARN. When a KMS key isn't specified in
+	// KmsKeyId:
 	//
-	// * If ReplicationSourceIdentifier
-	// identifies an encrypted source, then Amazon RDS will use the CMK used to encrypt
-	// the source. Otherwise, Amazon RDS will use your default CMK.
+	// * If ReplicationSourceIdentifier identifies an encrypted source, then
+	// Amazon RDS will use the KMS key used to encrypt the source. Otherwise, Amazon
+	// RDS will use your default KMS key.
 	//
-	// * If the
-	// StorageEncrypted parameter is enabled and ReplicationSourceIdentifier isn't
-	// specified, then Amazon RDS will use your default CMK.
+	// * If the StorageEncrypted parameter is
+	// enabled and ReplicationSourceIdentifier isn't specified, then Amazon RDS will
+	// use your default KMS key.
 	//
-	// There is a default CMK
-	// for your Amazon Web Services account. Your Amazon Web Services account has a
-	// different default CMK for each Amazon Web Services Region. If you create a read
-	// replica of an encrypted DB cluster in another Amazon Web Services Region, you
-	// must set KmsKeyId to a Amazon Web Services KMS key identifier that is valid in
-	// the destination Amazon Web Services Region. This CMK is used to encrypt the read
-	// replica in that Amazon Web Services Region.
+	// There is a default KMS key for your Amazon Web
+	// Services account. Your Amazon Web Services account has a different default KMS
+	// key for each Amazon Web Services Region. If you create a read replica of an
+	// encrypted DB cluster in another Amazon Web Services Region, you must set
+	// KmsKeyId to a KMS key identifier that is valid in the destination Amazon Web
+	// Services Region. This KMS key is used to encrypt the read replica in that Amazon
+	// Web Services Region.
 	KmsKeyId *string
 
 	// The password for the master database user. This password can contain any
@@ -269,24 +269,24 @@ type CreateDBClusterInput struct {
 	// parameter values:
 	//
 	// * KmsKeyId - The Amazon Web Services KMS key identifier for
-	// the key to use to encrypt the copy of the DB cluster in the destination Amazon
-	// Web Services Region. This should refer to the same Amazon Web Services KMS CMK
-	// for both the CreateDBCluster action that is called in the destination Amazon Web
-	// Services Region, and the action contained in the pre-signed URL.
+	// the KMS key to use to encrypt the copy of the DB cluster in the destination
+	// Amazon Web Services Region. This should refer to the same KMS key for both the
+	// CreateDBCluster action that is called in the destination Amazon Web Services
+	// Region, and the action contained in the pre-signed URL.
 	//
-	// *
-	// DestinationRegion - The name of the Amazon Web Services Region that Aurora read
-	// replica will be created in.
+	// * DestinationRegion -
+	// The name of the Amazon Web Services Region that Aurora read replica will be
+	// created in.
 	//
-	// * ReplicationSourceIdentifier - The DB cluster
-	// identifier for the encrypted DB cluster to be copied. This identifier must be in
-	// the Amazon Resource Name (ARN) format for the source Amazon Web Services Region.
-	// For example, if you are copying an encrypted DB cluster from the us-west-2
-	// Amazon Web Services Region, then your ReplicationSourceIdentifier would look
-	// like Example: arn:aws:rds:us-west-2:123456789012:cluster:aurora-cluster1.
+	// * ReplicationSourceIdentifier - The DB cluster identifier for the
+	// encrypted DB cluster to be copied. This identifier must be in the Amazon
+	// Resource Name (ARN) format for the source Amazon Web Services Region. For
+	// example, if you are copying an encrypted DB cluster from the us-west-2 Amazon
+	// Web Services Region, then your ReplicationSourceIdentifier would look like
+	// Example: arn:aws:rds:us-west-2:123456789012:cluster:aurora-cluster1.
 	//
-	// To
-	// learn how to generate a Signature Version 4 signed request, see  Authenticating
+	// To learn
+	// how to generate a Signature Version 4 signed request, see  Authenticating
 	// Requests: Using Query Parameters (Amazon Web Services Signature Version 4)
 	// (https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html)
 	// and  Signature Version 4 Signing Process

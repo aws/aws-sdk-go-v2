@@ -1703,6 +1703,78 @@ func awsRestjson1_serializeOpHttpBindingsDisassociateChannelFlowInput(v *Disasso
 	return nil
 }
 
+type awsRestjson1_serializeOpGetChannelMembershipPreferences struct {
+}
+
+func (*awsRestjson1_serializeOpGetChannelMembershipPreferences) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetChannelMembershipPreferences) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetChannelMembershipPreferencesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/channels/{ChannelArn}/memberships/{MemberArn}/preferences")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetChannelMembershipPreferencesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetChannelMembershipPreferencesInput(v *GetChannelMembershipPreferencesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ChannelArn == nil || len(*v.ChannelArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ChannelArn must not be empty")}
+	}
+	if v.ChannelArn != nil {
+		if err := encoder.SetURI("ChannelArn").String(*v.ChannelArn); err != nil {
+			return err
+		}
+	}
+
+	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+		locationName := "X-Amz-Chime-Bearer"
+		encoder.SetHeader(locationName).String(*v.ChimeBearer)
+	}
+
+	if v.MemberArn == nil || len(*v.MemberArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member MemberArn must not be empty")}
+	}
+	if v.MemberArn != nil {
+		if err := encoder.SetURI("MemberArn").String(*v.MemberArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetChannelMessage struct {
 }
 
@@ -2569,6 +2641,103 @@ func awsRestjson1_serializeOpHttpBindingsListTagsForResourceInput(v *ListTagsFor
 	return nil
 }
 
+type awsRestjson1_serializeOpPutChannelMembershipPreferences struct {
+}
+
+func (*awsRestjson1_serializeOpPutChannelMembershipPreferences) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpPutChannelMembershipPreferences) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutChannelMembershipPreferencesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/channels/{ChannelArn}/memberships/{MemberArn}/preferences")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsPutChannelMembershipPreferencesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentPutChannelMembershipPreferencesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsPutChannelMembershipPreferencesInput(v *PutChannelMembershipPreferencesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ChannelArn == nil || len(*v.ChannelArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ChannelArn must not be empty")}
+	}
+	if v.ChannelArn != nil {
+		if err := encoder.SetURI("ChannelArn").String(*v.ChannelArn); err != nil {
+			return err
+		}
+	}
+
+	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+		locationName := "X-Amz-Chime-Bearer"
+		encoder.SetHeader(locationName).String(*v.ChimeBearer)
+	}
+
+	if v.MemberArn == nil || len(*v.MemberArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member MemberArn must not be empty")}
+	}
+	if v.MemberArn != nil {
+		if err := encoder.SetURI("MemberArn").String(*v.MemberArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentPutChannelMembershipPreferencesInput(v *PutChannelMembershipPreferencesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Preferences != nil {
+		ok := object.Key("Preferences")
+		if err := awsRestjson1_serializeDocumentChannelMembershipPreferences(v.Preferences, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpRedactChannelMessage struct {
 }
 
@@ -2729,6 +2898,13 @@ func awsRestjson1_serializeOpDocumentSendChannelMessageInput(v *SendChannelMessa
 		ok.String(*v.Content)
 	}
 
+	if v.MessageAttributes != nil {
+		ok := object.Key("MessageAttributes")
+		if err := awsRestjson1_serializeDocumentMessageAttributeMap(v.MessageAttributes, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Metadata != nil {
 		ok := object.Key("Metadata")
 		ok.String(*v.Metadata)
@@ -2737,6 +2913,13 @@ func awsRestjson1_serializeOpDocumentSendChannelMessageInput(v *SendChannelMessa
 	if len(v.Persistence) > 0 {
 		ok := object.Key("Persistence")
 		ok.String(string(v.Persistence))
+	}
+
+	if v.PushNotification != nil {
+		ok := object.Key("PushNotification")
+		if err := awsRestjson1_serializeDocumentPushNotificationConfiguration(v.PushNotification, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.Type) > 0 {
@@ -3244,6 +3427,20 @@ func awsRestjson1_serializeOpHttpBindingsUpdateChannelReadMarkerInput(v *UpdateC
 	return nil
 }
 
+func awsRestjson1_serializeDocumentChannelMembershipPreferences(v *types.ChannelMembershipPreferences, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PushNotifications != nil {
+		ok := object.Key("PushNotifications")
+		if err := awsRestjson1_serializeDocumentPushNotificationPreferences(v.PushNotifications, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentChannelMessageCallback(v *types.ChannelMessageCallback, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3291,6 +3488,45 @@ func awsRestjson1_serializeDocumentMemberArns(v []string, value smithyjson.Value
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMessageAttributeMap(v map[string]types.MessageAttributeValue, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		mapVar := v[key]
+		if err := awsRestjson1_serializeDocumentMessageAttributeValue(&mapVar, om); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMessageAttributeStringValues(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMessageAttributeValue(v *types.MessageAttributeValue, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.StringValues != nil {
+		ok := object.Key("StringValues")
+		if err := awsRestjson1_serializeDocumentMessageAttributeStringValues(v.StringValues, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -3347,6 +3583,45 @@ func awsRestjson1_serializeDocumentProcessorList(v []types.Processor, value smit
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPushNotificationConfiguration(v *types.PushNotificationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Body != nil {
+		ok := object.Key("Body")
+		ok.String(*v.Body)
+	}
+
+	if v.Title != nil {
+		ok := object.Key("Title")
+		ok.String(*v.Title)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPushNotificationPreferences(v *types.PushNotificationPreferences, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AllowNotifications) > 0 {
+		ok := object.Key("AllowNotifications")
+		ok.String(string(v.AllowNotifications))
+	}
+
+	if v.FilterRule != nil {
+		ok := object.Key("FilterRule")
+		ok.String(*v.FilterRule)
+	}
+
 	return nil
 }
 

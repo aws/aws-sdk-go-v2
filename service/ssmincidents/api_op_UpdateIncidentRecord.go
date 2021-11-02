@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update the details of an incident record. You can use this action to update an
-// incident record from the defined chat channel. For more information about using
-// actions in chat channels, see Interacting through chat
+// Update the details of an incident record. You can use this operation to update
+// an incident record from the defined chat channel. For more information about
+// using actions in chat channels, see Interacting through chat
 // (https://docs.aws.amazon.com/incident-manager/latest/userguide/chat.html#chat-interact).
 func (c *Client) UpdateIncidentRecord(ctx context.Context, params *UpdateIncidentRecordInput, optFns ...func(*Options)) (*UpdateIncidentRecordOutput, error) {
 	if params == nil {
@@ -38,44 +38,45 @@ type UpdateIncidentRecordInput struct {
 	// This member is required.
 	Arn *string
 
-	// The AWS Chatbot chat channel for responders to collaborate in.
+	// The Chatbot chat channel where responders can collaborate.
 	ChatChannel types.ChatChannel
 
-	// A token ensuring that the action is called only once with the specified details.
+	// A token that ensures that the operation is called only once with the specified
+	// details.
 	ClientToken *string
 
-	// Defines the impact to customers and applications. Providing an impact overwrites
-	// the impact provided by the response plan. Possible impacts:
+	// Defines the impact of the incident to customers and applications. Providing an
+	// impact overwrites the impact provided by the response plan. Possible impacts:
 	//
-	// * 1 - Critical
-	// impact, this typically relates to full application failure that impacts many to
-	// all customers.
+	// *
+	// 1 - Critical impact, full application failure that impacts many to all
+	// customers.
 	//
-	// * 2 - High impact, partial application failure with impact to
-	// many customers.
+	// * 2 - High impact, partial application failure with impact to many
+	// customers.
 	//
-	// * 3 - Medium impact, the application is providing reduced
-	// service to customers.
+	// * 3 - Medium impact, the application is providing reduced service to
+	// customers.
 	//
-	// * 4 - Low impact, customer might aren't impacted by the
-	// problem yet.
+	// * 4 - Low impact, customer aren't impacted by the problem yet.
 	//
-	// * 5 - No impact, customers aren't currently impacted but urgent
-	// action is needed to avoid impact.
+	// * 5
+	// - No impact, customers aren't currently impacted but urgent action is needed to
+	// avoid impact.
 	Impact *int32
 
-	// The SNS targets that are notified when updates are made to an incident. Using
-	// multiple SNS topics creates redundancy in the case that a Region is down during
-	// the incident.
+	// The Amazon SNS targets that are notified when updates are made to an incident.
+	// Using multiple SNS topics creates redundancy in the event that a Region is down
+	// during the incident.
 	NotificationTargets []types.NotificationTargetItem
 
 	// The status of the incident. An incident can be Open or Resolved.
 	Status types.IncidentRecordStatus
 
-	// The summary describes what has happened during the incident.
+	// A longer description of what occurred during the incident.
 	Summary *string
 
-	// The title of the incident is a brief and easily recognizable.
+	// A brief description of the incident.
 	Title *string
 
 	noSmithyDocumentSerde

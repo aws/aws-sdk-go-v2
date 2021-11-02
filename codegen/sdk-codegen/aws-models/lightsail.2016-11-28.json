@@ -1195,10 +1195,53 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An object that describes the state of the bucket.</p>"
                     }
+                },
+                "accessLogConfig": {
+                    "target": "com.amazonaws.lightsail#BucketAccessLogConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that describes the access log configuration for the bucket.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes an Amazon Lightsail bucket.</p>"
+            }
+        },
+        "com.amazonaws.lightsail#BucketAccessLogConfig": {
+            "type": "structure",
+            "members": {
+                "enabled": {
+                    "target": "com.amazonaws.lightsail#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Boolean value that indicates whether bucket access logging is enabled for the\n      bucket.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "destination": {
+                    "target": "com.amazonaws.lightsail#BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the bucket where the access is saved. The destination can be a Lightsail\n      bucket in the same account, and in the same AWS Region as the source bucket.</p>\n         <note>\n            <p>This parameter is required when enabling the access log for a bucket, and should be\n        omitted when disabling the access log.</p>\n         </note>"
+                    }
+                },
+                "prefix": {
+                    "target": "com.amazonaws.lightsail#BucketAccessLogPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The optional object prefix for the bucket access log.</p>\n         <p>The prefix is an optional addition to the object key that organizes your access log files\n      in the destination bucket. For example, if you specify a <code>logs/</code> prefix, then each\n      log object will begin with the <code>logs/</code> prefix in its key (for example,\n        <code>logs/2021-11-01-21-32-16-E568B2907131C0C0</code>).</p>\n         <note>\n            <p>This parameter can be optionally specified when enabling the access log for a bucket,\n        and should be omitted when disabling the access log.</p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the access log configuration for a bucket in the Amazon Lightsail object storage\n      service.</p>\n         <p>For more information about bucket access logs, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-bucket-access-logs\">Logging bucket requests using access logging in Amazon Lightsail</a> in the\n        <i>Amazon Lightsail Developer Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.lightsail#BucketAccessLogPrefix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[\\w/!.*')(-]+$"
             }
         },
         "com.amazonaws.lightsail#BucketBundle": {
@@ -2020,7 +2063,7 @@
                 "image": {
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the image used for the container.</p>\n\n         <p>Container images sourced from your Lightsail container service, that are registered and\n      stored on your service, start with a colon (<code>:</code>). For example,\n        <code>:container-service-1.mystaticwebsite.1</code>. Container images sourced from a public\n      registry like Docker Hub don't start with a colon. For example, <code>nginx:latest</code> or\n        <code>nginx</code>.</p>"
+                        "smithy.api#documentation": "<p>The name of the image used for the container.</p>\n    \n         <p>Container images sourced from your Lightsail container service, that are registered and\n      stored on your service, start with a colon (<code>:</code>). For example, if your container\n      service name is <code>container-service-1</code>, the container image label is\n      <code>mystaticsite</code>, and you want to use the third (<code>3</code>) version of the\n      registered container image, then you should specify\n      <code>:container-service-1.mystaticsite.3</code>. To use the latest version of a container\n      image, specify <code>latest</code> instead of a version number (for example,\n      <code>:container-service-1.mystaticsite.latest</code>). Lightsail will automatically use\n      the highest numbered version of the registered container image.</p>\n    \n         <p>Container images sourced from a public registry like Docker Hub don't start with a colon.\n      For example, <code>nginx:latest</code> or <code>nginx</code>.</p>"
                     }
                 },
                 "command": {
@@ -3370,7 +3413,7 @@
                 "tags": {
                     "target": "com.amazonaws.lightsail#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tag keys and optional values to add to the certificate during create.</p>\n         <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>\n         <p>For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags\">Amazon Lightsail Developer Guide</a>.</p>"
+                        "smithy.api#documentation": "<p>The tag keys and optional values to add to the container service during create.</p>\n         <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>\n         <p>For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags\">Amazon Lightsail Developer Guide</a>.</p>"
                     }
                 },
                 "publicDomainNames": {
@@ -5830,7 +5873,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a specific SSH key pair.</p>\n         <p>The <code>delete key pair</code> operation supports tag-based access control via resource\n      tags applied to the resource identified by <code>key pair name</code>. For more information,\n      see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>",
+                "smithy.api#documentation": "<p>Deletes a specific SSH key pair.</p>\n    \n\n         <p>The <code>delete key pair</code> operation supports tag-based access control via resource\n      tags applied to the resource identified by <code>key pair name</code>. For more information,\n      see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ls/api/2016-11-28/DeleteKeyPair",
@@ -13279,6 +13322,21 @@
         },
         "com.amazonaws.lightsail#Lightsail_20161128": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Lightsail",
+                    "arnNamespace": "lightsail",
+                    "cloudFormationName": "Lightsail",
+                    "cloudTrailEventSource": "lightsail.amazonaws.com",
+                    "endpointPrefix": "lightsail"
+                },
+                "aws.auth#sigv4": {
+                    "name": "lightsail"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<p>Amazon Lightsail is the easiest way to get started with Amazon Web Services (AWS) for developers\n      who need to build websites or web applications. It includes everything you need to launch your\n      project quickly - instances (virtual private servers), container services, storage buckets,\n      managed databases, SSD-based block storage, static IP addresses, load balancers, content\n      delivery network (CDN) distributions, DNS management of registered domains, and resource\n      snapshots (backups) - for a low, predictable monthly price.</p>\n\n         <p>You can manage your Lightsail resources using the Lightsail console, Lightsail API,\n      AWS Command Line Interface (AWS CLI), or SDKs. For more information about Lightsail concepts\n      and tasks, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/lightsail-how-to-set-up-access-keys-to-use-sdk-api-cli\">Amazon Lightsail Developer Guide</a>.</p>\n\n         <p>This API Reference provides detailed information about the actions, data types,\n      parameters, and errors of the Lightsail service. For more information about the supported\n      AWS Regions, endpoints, and service quotas of the Lightsail service, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/lightsail.html\">Amazon Lightsail Endpoints and\n        Quotas</a> in the <i>AWS General Reference</i>.</p>",
+                "smithy.api#title": "Amazon Lightsail"
+            },
             "version": "2016-11-28",
             "operations": [
                 {
@@ -13740,22 +13798,7 @@
                 {
                     "target": "com.amazonaws.lightsail#UpdateRelationalDatabaseParameters"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Lightsail",
-                    "arnNamespace": "lightsail",
-                    "cloudFormationName": "Lightsail",
-                    "cloudTrailEventSource": "lightsail.amazonaws.com",
-                    "endpointPrefix": "lightsail"
-                },
-                "aws.auth#sigv4": {
-                    "name": "lightsail"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>Amazon Lightsail is the easiest way to get started with Amazon Web Services (AWS) for developers\n      who need to build websites or web applications. It includes everything you need to launch your\n      project quickly - instances (virtual private servers), container services, storage buckets,\n      managed databases, SSD-based block storage, static IP addresses, load balancers, content\n      delivery network (CDN) distributions, DNS management of registered domains, and resource\n      snapshots (backups) - for a low, predictable monthly price.</p>\n\n         <p>You can manage your Lightsail resources using the Lightsail console, Lightsail API,\n      AWS Command Line Interface (AWS CLI), or SDKs. For more information about Lightsail concepts\n      and tasks, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/lightsail-how-to-set-up-access-keys-to-use-sdk-api-cli\">Amazon Lightsail Developer Guide</a>.</p>\n\n         <p>This API Reference provides detailed information about the actions, data types,\n      parameters, and errors of the Lightsail service. For more information about the supported\n      AWS Regions, endpoints, and service quotas of the Lightsail service, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/lightsail.html\">Amazon Lightsail Endpoints and\n        Quotas</a> in the <i>AWS General Reference</i>.</p>",
-                "smithy.api#title": "Amazon Lightsail"
-            }
+            ]
         },
         "com.amazonaws.lightsail#LoadBalancer": {
             "type": "structure",
@@ -18346,6 +18389,12 @@
                     "target": "com.amazonaws.lightsail#PartnerIdList",
                     "traits": {
                         "smithy.api#documentation": "<p>An array of strings to specify the AWS account IDs that can access the bucket.</p>\n\n         <p>You can give a maximum of 10 AWS accounts access to a bucket.</p>"
+                    }
+                },
+                "accessLogConfig": {
+                    "target": "com.amazonaws.lightsail#BucketAccessLogConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that describes the access log configuration for the bucket.</p>"
                     }
                 }
             }

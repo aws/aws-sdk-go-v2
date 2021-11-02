@@ -230,6 +230,26 @@ func (m *validateOpDeleteAssessmentFramework) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteAssessmentFrameworkShare struct {
+}
+
+func (*validateOpDeleteAssessmentFrameworkShare) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAssessmentFrameworkShare) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAssessmentFrameworkShareInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAssessmentFrameworkShareInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteAssessment struct {
 }
 
@@ -530,6 +550,26 @@ func (m *validateOpGetSettings) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListAssessmentFrameworkShareRequests struct {
+}
+
+func (*validateOpListAssessmentFrameworkShareRequests) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAssessmentFrameworkShareRequests) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAssessmentFrameworkShareRequestsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAssessmentFrameworkShareRequestsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListAssessmentFrameworks struct {
 }
 
@@ -630,6 +670,26 @@ func (m *validateOpRegisterOrganizationAdminAccount) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartAssessmentFrameworkShare struct {
+}
+
+func (*validateOpStartAssessmentFrameworkShare) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartAssessmentFrameworkShare) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartAssessmentFrameworkShareInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartAssessmentFrameworkShareInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -725,6 +785,26 @@ func (m *validateOpUpdateAssessmentFramework) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateAssessmentFrameworkInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateAssessmentFrameworkShare struct {
+}
+
+func (*validateOpUpdateAssessmentFrameworkShare) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAssessmentFrameworkShare) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAssessmentFrameworkShareInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAssessmentFrameworkShareInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -854,6 +934,10 @@ func addOpDeleteAssessmentFrameworkValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpDeleteAssessmentFramework{}, middleware.After)
 }
 
+func addOpDeleteAssessmentFrameworkShareValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAssessmentFrameworkShare{}, middleware.After)
+}
+
 func addOpDeleteAssessmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAssessment{}, middleware.After)
 }
@@ -914,6 +998,10 @@ func addOpGetSettingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSettings{}, middleware.After)
 }
 
+func addOpListAssessmentFrameworkShareRequestsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAssessmentFrameworkShareRequests{}, middleware.After)
+}
+
 func addOpListAssessmentFrameworksValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAssessmentFrameworks{}, middleware.After)
 }
@@ -934,6 +1022,10 @@ func addOpRegisterOrganizationAdminAccountValidationMiddleware(stack *middleware
 	return stack.Initialize.Add(&validateOpRegisterOrganizationAdminAccount{}, middleware.After)
 }
 
+func addOpStartAssessmentFrameworkShareValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartAssessmentFrameworkShare{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
@@ -952,6 +1044,10 @@ func addOpUpdateAssessmentControlSetStatusValidationMiddleware(stack *middleware
 
 func addOpUpdateAssessmentFrameworkValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAssessmentFramework{}, middleware.After)
+}
+
+func addOpUpdateAssessmentFrameworkShareValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAssessmentFrameworkShare{}, middleware.After)
 }
 
 func addOpUpdateAssessmentValidationMiddleware(stack *middleware.Stack) error {
@@ -1254,6 +1350,24 @@ func validateOpDeleteAssessmentFrameworkInput(v *DeleteAssessmentFrameworkInput)
 	}
 }
 
+func validateOpDeleteAssessmentFrameworkShareInput(v *DeleteAssessmentFrameworkShareInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAssessmentFrameworkShareInput"}
+	if v.RequestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RequestId"))
+	}
+	if len(v.RequestType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RequestType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteAssessmentInput(v *DeleteAssessmentInput) error {
 	if v == nil {
 		return nil
@@ -1515,6 +1629,21 @@ func validateOpGetSettingsInput(v *GetSettingsInput) error {
 	}
 }
 
+func validateOpListAssessmentFrameworkShareRequestsInput(v *ListAssessmentFrameworkShareRequestsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAssessmentFrameworkShareRequestsInput"}
+	if len(v.RequestType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RequestType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListAssessmentFrameworksInput(v *ListAssessmentFrameworksInput) error {
 	if v == nil {
 		return nil
@@ -1582,6 +1711,27 @@ func validateOpRegisterOrganizationAdminAccountInput(v *RegisterOrganizationAdmi
 	invalidParams := smithy.InvalidParamsError{Context: "RegisterOrganizationAdminAccountInput"}
 	if v.AdminAccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AdminAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartAssessmentFrameworkShareInput(v *StartAssessmentFrameworkShareInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartAssessmentFrameworkShareInput"}
+	if v.FrameworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FrameworkId"))
+	}
+	if v.DestinationAccount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationAccount"))
+	}
+	if v.DestinationRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationRegion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1688,6 +1838,27 @@ func validateOpUpdateAssessmentFrameworkInput(v *UpdateAssessmentFrameworkInput)
 		if err := validateUpdateAssessmentFrameworkControlSets(v.ControlSets); err != nil {
 			invalidParams.AddNested("ControlSets", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAssessmentFrameworkShareInput(v *UpdateAssessmentFrameworkShareInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAssessmentFrameworkShareInput"}
+	if v.RequestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RequestId"))
+	}
+	if len(v.RequestType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RequestType"))
+	}
+	if len(v.Action) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

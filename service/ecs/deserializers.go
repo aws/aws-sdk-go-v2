@@ -9502,6 +9502,15 @@ func awsAwsjson11_deserializeDocumentDeployment(v **types.Deployment, value inte
 				sv.PendingCount = int32(i64)
 			}
 
+		case "platformFamily":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.PlatformFamily = ptr.String(jtv)
+			}
+
 		case "platformVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12986,6 +12995,55 @@ func awsAwsjson11_deserializeDocumentResources(v *[]types.Resource, value interf
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentRuntimePlatform(v **types.RuntimePlatform, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RuntimePlatform
+	if *v == nil {
+		sv = &types.RuntimePlatform{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "cpuArchitecture":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CPUArchitecture to be of type string, got %T instead", value)
+				}
+				sv.CpuArchitecture = types.CPUArchitecture(jtv)
+			}
+
+		case "operatingSystemFamily":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OSFamily to be of type string, got %T instead", value)
+				}
+				sv.OperatingSystemFamily = types.OSFamily(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentScale(v **types.Scale, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13348,6 +13406,15 @@ func awsAwsjson11_deserializeDocumentService(v **types.Service, value interface{
 		case "placementStrategy":
 			if err := awsAwsjson11_deserializeDocumentPlacementStrategies(&sv.PlacementStrategy, value); err != nil {
 				return err
+			}
+
+		case "platformFamily":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.PlatformFamily = ptr.String(jtv)
 			}
 
 		case "platformVersion":
@@ -14500,6 +14567,15 @@ func awsAwsjson11_deserializeDocumentTask(v **types.Task, value interface{}) err
 				return err
 			}
 
+		case "platformFamily":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.PlatformFamily = ptr.String(jtv)
+			}
+
 		case "platformVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14838,6 +14914,11 @@ func awsAwsjson11_deserializeDocumentTaskDefinition(v **types.TaskDefinition, va
 					return err
 				}
 				sv.Revision = int32(i64)
+			}
+
+		case "runtimePlatform":
+			if err := awsAwsjson11_deserializeDocumentRuntimePlatform(&sv.RuntimePlatform, value); err != nil {
+				return err
 			}
 
 		case "status":
@@ -15193,6 +15274,15 @@ func awsAwsjson11_deserializeDocumentTaskSet(v **types.TaskSet, value interface{
 					return err
 				}
 				sv.PendingCount = int32(i64)
+			}
+
+		case "platformFamily":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.PlatformFamily = ptr.String(jtv)
 			}
 
 		case "platformVersion":

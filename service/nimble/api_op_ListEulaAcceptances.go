@@ -4,6 +4,7 @@ package nimble
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/nimble/types"
@@ -34,15 +35,16 @@ type ListEulaAcceptancesInput struct {
 	// This member is required.
 	StudioId *string
 
-	// A collection of EULA IDs.
+	// The list of EULA IDs that have been previously accepted.
 	EulaIds []string
 
-	// The token for the next set of results, or null if there are no more results.
+	// The token to request the next page of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
 }
 
+//
 type ListEulaAcceptancesOutput struct {
 
 	// A collection of EULA acceptances.
@@ -118,6 +120,81 @@ func (c *Client) addOperationListEulaAcceptancesMiddlewares(stack *middleware.St
 		return err
 	}
 	return nil
+}
+
+// ListEulaAcceptancesAPIClient is a client that implements the ListEulaAcceptances
+// operation.
+type ListEulaAcceptancesAPIClient interface {
+	ListEulaAcceptances(context.Context, *ListEulaAcceptancesInput, ...func(*Options)) (*ListEulaAcceptancesOutput, error)
+}
+
+var _ ListEulaAcceptancesAPIClient = (*Client)(nil)
+
+// ListEulaAcceptancesPaginatorOptions is the paginator options for
+// ListEulaAcceptances
+type ListEulaAcceptancesPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListEulaAcceptancesPaginator is a paginator for ListEulaAcceptances
+type ListEulaAcceptancesPaginator struct {
+	options   ListEulaAcceptancesPaginatorOptions
+	client    ListEulaAcceptancesAPIClient
+	params    *ListEulaAcceptancesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListEulaAcceptancesPaginator returns a new ListEulaAcceptancesPaginator
+func NewListEulaAcceptancesPaginator(client ListEulaAcceptancesAPIClient, params *ListEulaAcceptancesInput, optFns ...func(*ListEulaAcceptancesPaginatorOptions)) *ListEulaAcceptancesPaginator {
+	if params == nil {
+		params = &ListEulaAcceptancesInput{}
+	}
+
+	options := ListEulaAcceptancesPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListEulaAcceptancesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListEulaAcceptancesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListEulaAcceptances page.
+func (p *ListEulaAcceptancesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListEulaAcceptancesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.ListEulaAcceptances(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListEulaAcceptances(region string) *awsmiddleware.RegisterServiceMetadata {

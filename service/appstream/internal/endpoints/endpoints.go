@@ -81,7 +81,19 @@ var defaultPartitions = endpoints.Partitions{
 				},
 			},
 			"us-east-1": endpoints.Endpoint{},
+			"us-east-1-fips": endpoints.Endpoint{
+				Hostname: "appstream2-fips.us-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
 			"us-west-2": endpoints.Endpoint{},
+			"us-west-2-fips": endpoints.Endpoint{
+				Hostname: "appstream2-fips.us-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
+			},
 		},
 	},
 	{
@@ -134,6 +146,12 @@ var defaultPartitions = endpoints.Partitions{
 				},
 			},
 			"us-gov-west-1": endpoints.Endpoint{},
+			"us-gov-west-1-fips": endpoints.Endpoint{
+				Hostname: "appstream2-fips.us-gov-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-west-1",
+				},
+			},
 		},
 	},
 }

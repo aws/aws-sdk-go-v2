@@ -29,12 +29,12 @@ func (c *Client) UpdateAssessmentStatus(ctx context.Context, params *UpdateAsses
 
 type UpdateAssessmentStatusInput struct {
 
-	// The identifier for the specified assessment.
+	// The identifier for the assessment.
 	//
 	// This member is required.
 	AssessmentId *string
 
-	// The current status of the specified assessment.
+	// The current status of the assessment.
 	//
 	// This member is required.
 	Status types.AssessmentStatus
@@ -44,7 +44,7 @@ type UpdateAssessmentStatusInput struct {
 
 type UpdateAssessmentStatusOutput struct {
 
-	// The name of the updated assessment returned by the UpdateAssessmentStatus API.
+	// The name of the updated assessment that the UpdateAssessmentStatus API returned.
 	Assessment *types.Assessment
 
 	// Metadata pertaining to the operation's result.

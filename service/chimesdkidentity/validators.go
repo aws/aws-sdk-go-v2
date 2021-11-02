@@ -130,6 +130,26 @@ func (m *validateOpDeleteAppInstanceUser) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeregisterAppInstanceUserEndpoint struct {
+}
+
+func (*validateOpDeregisterAppInstanceUserEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeregisterAppInstanceUserEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeregisterAppInstanceUserEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeregisterAppInstanceUserEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeAppInstanceAdmin struct {
 }
 
@@ -165,6 +185,26 @@ func (m *validateOpDescribeAppInstance) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeAppInstanceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeAppInstanceUserEndpoint struct {
+}
+
+func (*validateOpDescribeAppInstanceUserEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAppInstanceUserEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAppInstanceUserEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAppInstanceUserEndpointInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -230,6 +270,26 @@ func (m *validateOpListAppInstanceAdmins) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListAppInstanceUserEndpoints struct {
+}
+
+func (*validateOpListAppInstanceUserEndpoints) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAppInstanceUserEndpoints) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAppInstanceUserEndpointsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAppInstanceUserEndpointsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListAppInstanceUsers struct {
 }
 
@@ -245,6 +305,26 @@ func (m *validateOpListAppInstanceUsers) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListAppInstanceUsersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListTagsForResource struct {
+}
+
+func (*validateOpListTagsForResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTagsForResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTagsForResourceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -270,6 +350,66 @@ func (m *validateOpPutAppInstanceRetentionSettings) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRegisterAppInstanceUserEndpoint struct {
+}
+
+func (*validateOpRegisterAppInstanceUserEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRegisterAppInstanceUserEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RegisterAppInstanceUserEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRegisterAppInstanceUserEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpTagResource struct {
+}
+
+func (*validateOpTagResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTagResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TagResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUntagResource struct {
+}
+
+func (*validateOpUntagResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UntagResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUntagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateAppInstance struct {
 }
 
@@ -285,6 +425,26 @@ func (m *validateOpUpdateAppInstance) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateAppInstanceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateAppInstanceUserEndpoint struct {
+}
+
+func (*validateOpUpdateAppInstanceUserEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAppInstanceUserEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAppInstanceUserEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAppInstanceUserEndpointInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -334,12 +494,20 @@ func addOpDeleteAppInstanceUserValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpDeleteAppInstanceUser{}, middleware.After)
 }
 
+func addOpDeregisterAppInstanceUserEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeregisterAppInstanceUserEndpoint{}, middleware.After)
+}
+
 func addOpDescribeAppInstanceAdminValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeAppInstanceAdmin{}, middleware.After)
 }
 
 func addOpDescribeAppInstanceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeAppInstance{}, middleware.After)
+}
+
+func addOpDescribeAppInstanceUserEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAppInstanceUserEndpoint{}, middleware.After)
 }
 
 func addOpDescribeAppInstanceUserValidationMiddleware(stack *middleware.Stack) error {
@@ -354,20 +522,59 @@ func addOpListAppInstanceAdminsValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpListAppInstanceAdmins{}, middleware.After)
 }
 
+func addOpListAppInstanceUserEndpointsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAppInstanceUserEndpoints{}, middleware.After)
+}
+
 func addOpListAppInstanceUsersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAppInstanceUsers{}, middleware.After)
+}
+
+func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
 func addOpPutAppInstanceRetentionSettingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutAppInstanceRetentionSettings{}, middleware.After)
 }
 
+func addOpRegisterAppInstanceUserEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRegisterAppInstanceUserEndpoint{}, middleware.After)
+}
+
+func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
+}
+
+func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
 func addOpUpdateAppInstanceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAppInstance{}, middleware.After)
 }
 
+func addOpUpdateAppInstanceUserEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAppInstanceUserEndpoint{}, middleware.After)
+}
+
 func addOpUpdateAppInstanceUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAppInstanceUser{}, middleware.After)
+}
+
+func validateEndpointAttributes(v *types.EndpointAttributes) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EndpointAttributes"}
+	if v.DeviceToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateTag(v *types.Tag) error {
@@ -523,6 +730,24 @@ func validateOpDeleteAppInstanceUserInput(v *DeleteAppInstanceUserInput) error {
 	}
 }
 
+func validateOpDeregisterAppInstanceUserEndpointInput(v *DeregisterAppInstanceUserEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeregisterAppInstanceUserEndpointInput"}
+	if v.AppInstanceUserArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceUserArn"))
+	}
+	if v.EndpointId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeAppInstanceAdminInput(v *DescribeAppInstanceAdminInput) error {
 	if v == nil {
 		return nil
@@ -548,6 +773,24 @@ func validateOpDescribeAppInstanceInput(v *DescribeAppInstanceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeAppInstanceInput"}
 	if v.AppInstanceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeAppInstanceUserEndpointInput(v *DescribeAppInstanceUserEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAppInstanceUserEndpointInput"}
+	if v.AppInstanceUserArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceUserArn"))
+	}
+	if v.EndpointId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -601,6 +844,21 @@ func validateOpListAppInstanceAdminsInput(v *ListAppInstanceAdminsInput) error {
 	}
 }
 
+func validateOpListAppInstanceUserEndpointsInput(v *ListAppInstanceUserEndpointsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAppInstanceUserEndpointsInput"}
+	if v.AppInstanceUserArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceUserArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListAppInstanceUsersInput(v *ListAppInstanceUsersInput) error {
 	if v == nil {
 		return nil
@@ -608,6 +866,21 @@ func validateOpListAppInstanceUsersInput(v *ListAppInstanceUsersInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListAppInstanceUsersInput"}
 	if v.AppInstanceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -634,6 +907,77 @@ func validateOpPutAppInstanceRetentionSettingsInput(v *PutAppInstanceRetentionSe
 	}
 }
 
+func validateOpRegisterAppInstanceUserEndpointInput(v *RegisterAppInstanceUserEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegisterAppInstanceUserEndpointInput"}
+	if v.AppInstanceUserArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceUserArn"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.EndpointAttributes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointAttributes"))
+	} else if v.EndpointAttributes != nil {
+		if err := validateEndpointAttributes(v.EndpointAttributes); err != nil {
+			invalidParams.AddNested("EndpointAttributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ClientRequestToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpTagResourceInput(v *TagResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	} else if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUntagResourceInput(v *UntagResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateAppInstanceInput(v *UpdateAppInstanceInput) error {
 	if v == nil {
 		return nil
@@ -647,6 +991,24 @@ func validateOpUpdateAppInstanceInput(v *UpdateAppInstanceInput) error {
 	}
 	if v.Metadata == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Metadata"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAppInstanceUserEndpointInput(v *UpdateAppInstanceUserEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAppInstanceUserEndpointInput"}
+	if v.AppInstanceUserArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppInstanceUserArn"))
+	}
+	if v.EndpointId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

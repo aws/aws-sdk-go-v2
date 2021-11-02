@@ -100,7 +100,12 @@ type RegisterTaskDefinitionInput struct {
 	// storage
 	// (https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html)
 	// in the Amazon ECS User Guide for Fargate. This parameter is only supported for
-	// tasks hosted on Fargate using platform version 1.4.0 or later.
+	// tasks hosted on Fargate using the following platform versions:
+	//
+	// * Linux platform
+	// version 1.4.0 or later.
+	//
+	// * Windows platform version 1.0.0 or later.
 	EphemeralStorage *types.EphemeralStorage
 
 	// The Amazon Resource Name (ARN) of the task execution role that grants the Amazon
@@ -234,6 +239,12 @@ type RegisterTaskDefinitionInput struct {
 	// against the compatibilities specified. If no value is specified, the parameter
 	// is omitted from the response.
 	RequiresCompatibilities []types.Compatibility
+
+	// The operating system that your tasks definitions run on. A platform family is
+	// specified only for tasks using the Fargate launch type. When you specify a task
+	// definition in a service, this value must match the runtimePlatform value of the
+	// service.
+	RuntimePlatform *types.RuntimePlatform
 
 	// The metadata that you apply to the task definition to help you categorize and
 	// organize them. Each tag consists of a key and an optional value, both of which

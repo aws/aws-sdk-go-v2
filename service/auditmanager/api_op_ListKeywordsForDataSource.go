@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of keywords that pre-mapped to the specified control data source.
+// Returns a list of keywords that are pre-mapped to the specified control data
+// source.
 func (c *Client) ListKeywordsForDataSource(ctx context.Context, params *ListKeywordsForDataSourceInput, optFns ...func(*Options)) (*ListKeywordsForDataSourceOutput, error) {
 	if params == nil {
 		params = &ListKeywordsForDataSourceInput{}
@@ -30,15 +31,15 @@ func (c *Client) ListKeywordsForDataSource(ctx context.Context, params *ListKeyw
 
 type ListKeywordsForDataSourceInput struct {
 
-	// The control mapping data source to which the keywords apply.
+	// The control mapping data source that the keywords apply to.
 	//
 	// This member is required.
 	Source types.SourceType
 
-	// Represents the maximum number of results per page, or per API request call.
+	// Represents the maximum number of results on a page or for an API request call.
 	MaxResults *int32
 
-	// The pagination token used to fetch the next set of results.
+	// The pagination token that's used to fetch the next set of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -46,10 +47,10 @@ type ListKeywordsForDataSourceInput struct {
 
 type ListKeywordsForDataSourceOutput struct {
 
-	// The list of keywords for the specified event mapping source.
+	// The list of keywords for the event mapping source.
 	Keywords []string
 
-	// The pagination token used to fetch the next set of results.
+	// The pagination token that's used to fetch the next set of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -132,7 +133,7 @@ var _ ListKeywordsForDataSourceAPIClient = (*Client)(nil)
 // ListKeywordsForDataSourcePaginatorOptions is the paginator options for
 // ListKeywordsForDataSource
 type ListKeywordsForDataSourcePaginatorOptions struct {
-	// Represents the maximum number of results per page, or per API request call.
+	// Represents the maximum number of results on a page or for an API request call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

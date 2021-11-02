@@ -4,7 +4,6 @@ package nimble
 
 import (
 	"context"
-	cryptorand "crypto/rand"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
@@ -14,7 +13,6 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/middleware"
-	smithyrand "github.com/aws/smithy-go/rand"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"net/http"
 	"time"
@@ -43,8 +41,6 @@ func New(options Options, optFns ...func(*Options)) *Client {
 	resolveHTTPSignerV4(&options)
 
 	resolveDefaultEndpointConfiguration(&options)
-
-	resolveIdempotencyTokenProvider(&options)
 
 	for _, fn := range optFns {
 		fn(&options)
@@ -77,10 +73,6 @@ type Options struct {
 
 	// Signature Version 4 (SigV4) Signer
 	HTTPSignerV4 HTTPSignerV4
-
-	// Provides idempotency tokens values that will be automatically populated into
-	// idempotent API operations.
-	IdempotencyTokenProvider IdempotencyTokenProvider
 
 	// The logger writer interface to write logging messages to.
 	Logger logging.Logger
@@ -243,24 +235,12 @@ func newDefaultV4Signer(o Options) *v4.Signer {
 	})
 }
 
-func resolveIdempotencyTokenProvider(o *Options) {
-	if o.IdempotencyTokenProvider != nil {
-		return
-	}
-	o.IdempotencyTokenProvider = smithyrand.NewUUIDIdempotencyToken(cryptorand.Reader)
-}
-
 func addRetryMiddlewares(stack *middleware.Stack, o Options) error {
 	mo := retry.AddRetryMiddlewaresOptions{
 		Retryer:          o.Retryer,
 		LogRetryAttempts: o.ClientLogMode.IsRetries(),
 	}
 	return retry.AddRetryMiddlewares(stack, mo)
-}
-
-// IdempotencyTokenProvider interface for providing idempotency token
-type IdempotencyTokenProvider interface {
-	GetIdempotencyToken() (string, error)
 }
 
 func addRequestIDRetrieverMiddleware(stack *middleware.Stack) error {

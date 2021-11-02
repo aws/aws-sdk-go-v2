@@ -29,7 +29,7 @@ func (c *Client) GetStudioMember(ctx context.Context, params *GetStudioMemberInp
 
 type GetStudioMemberInput struct {
 
-	// The principal ID.
+	// The principal ID. This currently supports a Amazon Web Services SSO UserId.
 	//
 	// This member is required.
 	PrincipalId *string
@@ -42,6 +42,7 @@ type GetStudioMemberInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type GetStudioMemberOutput struct {
 
 	// The member.

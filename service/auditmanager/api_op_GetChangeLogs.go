@@ -30,21 +30,21 @@ func (c *Client) GetChangeLogs(ctx context.Context, params *GetChangeLogsInput, 
 
 type GetChangeLogsInput struct {
 
-	// The identifier for the specified assessment.
+	// The identifier for the assessment.
 	//
 	// This member is required.
 	AssessmentId *string
 
-	// The identifier for the specified control.
+	// The identifier for the control.
 	ControlId *string
 
-	// The identifier for the specified control set.
+	// The identifier for the control set.
 	ControlSetId *string
 
-	// Represents the maximum number of results per page, or per API request call.
+	// Represents the maximum number of results on a page or for an API request call.
 	MaxResults *int32
 
-	// The pagination token used to fetch the next set of results.
+	// The pagination token that's used to fetch the next set of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -55,7 +55,7 @@ type GetChangeLogsOutput struct {
 	// The list of user activity for the control.
 	ChangeLogs []types.ChangeLog
 
-	// The pagination token used to fetch the next set of results.
+	// The pagination token that's used to fetch the next set of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -136,7 +136,7 @@ var _ GetChangeLogsAPIClient = (*Client)(nil)
 
 // GetChangeLogsPaginatorOptions is the paginator options for GetChangeLogs
 type GetChangeLogsPaginatorOptions struct {
-	// Represents the maximum number of results per page, or per API request call.
+	// Represents the maximum number of results on a page or for an API request call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

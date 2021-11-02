@@ -550,7 +550,12 @@ type ContainerDefinition struct {
 	// agent and ecs-init. For more information, see Amazon ECS-optimized Linux AMI
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)
 	// in the Amazon Elastic Container Service Developer Guide. For tasks using the
-	// Fargate launch type, the task or service requires platform version 1.3.0 or
+	// Fargate launch type, the task or service requires the followiwng platforms:
+	//
+	// *
+	// Linux platform version 1.3.0 or later.
+	//
+	// * Windows platform version 1.0.0 or
 	// later.
 	DependsOn []ContainerDependency
 
@@ -937,12 +942,19 @@ type ContainerDefinition struct {
 	// and not start. This results in the task transitioning to a STOPPED state. When
 	// the ECS_CONTAINER_START_TIMEOUT container agent configuration variable is used,
 	// it is enforced indendently from this start timeout value. For tasks using the
-	// Fargate launch type, this parameter requires that the task or service uses
-	// platform version 1.3.0 or later. For tasks using the EC2 launch type, your
-	// container instances require at least version 1.26.0 of the container agent to
-	// enable a container start timeout value. However, we recommend using the latest
-	// container agent version. For information about checking your agent version and
-	// updating to the latest version, see Updating the Amazon ECS Container Agent
+	// Fargate launch type, the task or service requires the followiwng platforms:
+	//
+	// *
+	// Linux platform version 1.3.0 or later.
+	//
+	// * Windows platform version 1.0.0 or
+	// later.
+	//
+	// For tasks using the EC2 launch type, your container instances require at
+	// least version 1.26.0 of the container agent to enable a container start timeout
+	// value. However, we recommend using the latest container agent version. For
+	// information about checking your agent version and updating to the latest
+	// version, see Updating the Amazon ECS Container Agent
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html)
 	// in the Amazon Elastic Container Service Developer Guide. If you are using an
 	// Amazon ECS-optimized Linux AMI, your instance needs at least version 1.26.0-1 of
@@ -955,7 +967,14 @@ type ContainerDefinition struct {
 
 	// Time duration (in seconds) to wait before the container is forcefully killed if
 	// it doesn't exit normally on its own. For tasks using the Fargate launch type,
-	// the task or service requires platform version 1.3.0 or later. The max stop
+	// the task or service requires the followiwng platforms:
+	//
+	// * Linux platform version
+	// 1.3.0 or later.
+	//
+	// * Windows platform version 1.0.0 or later.
+	//
+	// The max stop
 	// timeout value is 120 seconds and if the parameter is not specified, the default
 	// value of 30 seconds is used. For tasks using the EC2 launch type, if the
 	// stopTimeout parameter is not specified, the value set for the Amazon ECS
@@ -1072,8 +1091,13 @@ type ContainerDefinition struct {
 // agent and ecs-init. For more information, see Amazon ECS-optimized Linux AMI
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)
 // in the Amazon Elastic Container Service Developer Guide. For tasks using the
-// Fargate launch type, this parameter requires that the task or service uses
-// platform version 1.3.0 or later.
+// Fargate launch type, the task or service requires the followiwng platforms:
+//
+// *
+// Linux platform version 1.3.0 or later.
+//
+// * Windows platform version 1.0.0 or
+// later.
 type ContainerDependency struct {
 
 	// The dependency condition of the container. The following are the available
@@ -1349,6 +1373,12 @@ type Deployment struct {
 
 	// The number of tasks in the deployment that are in the PENDING status.
 	PendingCount int32
+
+	// The operating system that your tasks in the service, or tasks are running on. A
+	// platform family is specified only for tasks using the Fargate launch type. All
+	// tasks that run as part of this service must use the same platformFamily value as
+	// the service, for example,  LINUX..
+	PlatformFamily *string
 
 	// The platform version on which your tasks in the service are running. A platform
 	// version is only specified for tasks using the Fargate launch type. If one is not
@@ -1643,8 +1673,14 @@ type EFSVolumeConfiguration struct {
 // processed from the top down. It is recommended to use unique variable names. For
 // more information, see Specifying environment variables
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/taskdef-envfiles.html)
-// in the Amazon Elastic Container Service Developer Guide. This field is only
-// valid for containers in Fargate tasks that use platform version 1.4.0 or later.
+// in the Amazon Elastic Container Service Developer Guide. This parameter is only
+// supported for tasks hosted on Fargate using the following platform versions:
+//
+// *
+// Linux platform version 1.4.0 or later.
+//
+// * Windows platform version 1.0.0 or
+// later.
 type EnvironmentFile struct {
 
 	// The file type to use. The only supported value is s3.
@@ -1667,7 +1703,12 @@ type EnvironmentFile struct {
 // storage
 // (https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html)
 // in the Amazon ECS User Guide for Fargate. This parameter is only supported for
-// tasks hosted on Fargate using platform version 1.4.0 or later.
+// tasks hosted on Fargate using the following platform versions:
+//
+// * Linux platform
+// version 1.4.0 or later.
+//
+// * Windows platform version 1.0.0 or later.
 type EphemeralStorage struct {
 
 	// The total amount, in GiB, of ephemeral storage to set for the task. The minimum
@@ -1725,8 +1766,8 @@ type ExecuteCommandLogConfiguration struct {
 	// created.
 	S3BucketName *string
 
-	// Whether or not to enable encryption on the CloudWatch logs. If not specified,
-	// encryption will be disabled.
+	// Whether or not to use encryption on the S3 logs. If not specified, encryption is
+	// not used.
 	S3EncryptionEnabled bool
 
 	// An optional folder in the S3 bucket to place logs in.
@@ -2636,6 +2677,18 @@ type ResourceRequirement struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the platform for the Amazon ECS service or task.
+type RuntimePlatform struct {
+
+	// The CPU architecture.
+	CpuArchitecture CPUArchitecture
+
+	// The operating system.
+	OperatingSystemFamily OSFamily
+
+	noSmithyDocumentSerde
+}
+
 // A floating-point percentage of the desired number of tasks to place and keep
 // running in the task set.
 type Scale struct {
@@ -2759,6 +2812,12 @@ type Service struct {
 
 	// The placement strategy that determines how tasks for the service are placed.
 	PlacementStrategy []PlacementStrategy
+
+	// The operating system that your tasks in the service are running on. A platform
+	// family is specified only for tasks using the Fargate launch type. All tasks that
+	// run as part of this service must use the same platformFamily value as the
+	// service, for example, LINUX.
+	PlatformFamily *string
 
 	// The platform version on which to run your service. A platform version is only
 	// specified for tasks hosted on Fargate. If one is not specified, the LATEST
@@ -3149,6 +3208,12 @@ type Task struct {
 	// One or more container overrides.
 	Overrides *TaskOverride
 
+	// The operating system that your tasks are running on. A platform family is
+	// specified only for tasks using the Fargate launch type. All tasks that run as
+	// part of this service must use the same platformFamily value as the service, for
+	// example, LINUX..
+	PlatformFamily *string
+
 	// The platform version on which your task is running. A platform version is only
 	// specified for tasks using the Fargate launch type. If one is not specified, the
 	// LATEST platform version is used by default. For more information, see Fargate
@@ -3444,6 +3509,12 @@ type TaskDefinition struct {
 	// one, even if you have deregistered previous revisions in this family.
 	Revision int32
 
+	// The operating system that your task definitions are running on. A platform
+	// family is specified only for tasks using the Fargate launch type. When you
+	// specify a task in a service, this value must match the runtimePlatform value of
+	// the service.
+	RuntimePlatform *RuntimePlatform
+
 	// The status of the task definition.
 	Status TaskDefinitionStatus
 
@@ -3503,7 +3574,13 @@ type TaskOverride struct {
 	Cpu *string
 
 	// The ephemeral storage setting override for the task. This parameter is only
-	// supported for tasks hosted on Fargate using platform version 1.4.0 or later.
+	// supported for tasks hosted on Fargate using the following platform versions:
+	//
+	// *
+	// Linux platform version 1.4.0 or later.
+	//
+	// * Windows platform version 1.0.0 or
+	// later.
 	EphemeralStorage *EphemeralStorage
 
 	// The Amazon Resource Name (ARN) of the task execution IAM role override for the
@@ -3577,6 +3654,11 @@ type TaskSet struct {
 	// A task set enters the PENDING status when it launches for the first time or when
 	// it is restarted after being in the STOPPED state.
 	PendingCount int32
+
+	// The operating system that your tasks in the set are running on. A platform
+	// family is specified only for tasks using the Fargate launch type. All tasks in
+	// the set must have the same value.
+	PlatformFamily *string
 
 	// The Fargate platform version on which the tasks in the task set are running. A
 	// platform version is only specified for tasks run on Fargate. For more

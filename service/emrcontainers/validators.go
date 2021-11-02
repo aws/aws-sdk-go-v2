@@ -545,9 +545,6 @@ func validateOpCreateManagedEndpointInput(v *CreateManagedEndpointInput) error {
 	if v.ExecutionRoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ExecutionRoleArn"))
 	}
-	if v.CertificateArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CertificateArn"))
-	}
 	if v.ConfigurationOverrides != nil {
 		if err := validateConfigurationOverrides(v.ConfigurationOverrides); err != nil {
 			invalidParams.AddNested("ConfigurationOverrides", err.(smithy.InvalidParamsError))

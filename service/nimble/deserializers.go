@@ -4186,7 +4186,7 @@ func awsRestjson1_deserializeOpDocumentListEulaAcceptancesOutput(v **ListEulaAcc
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
@@ -4360,7 +4360,7 @@ func awsRestjson1_deserializeOpDocumentListEulasOutput(v **ListEulasOutput, valu
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
@@ -4534,7 +4534,7 @@ func awsRestjson1_deserializeOpDocumentListLaunchProfileMembersOutput(v **ListLa
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
@@ -4708,7 +4708,7 @@ func awsRestjson1_deserializeOpDocumentListLaunchProfilesOutput(v **ListLaunchPr
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
@@ -4877,7 +4877,7 @@ func awsRestjson1_deserializeOpDocumentListStreamingImagesOutput(v **ListStreami
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
@@ -5051,7 +5051,7 @@ func awsRestjson1_deserializeOpDocumentListStreamingSessionsOutput(v **ListStrea
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
@@ -5225,7 +5225,7 @@ func awsRestjson1_deserializeOpDocumentListStudioComponentsOutput(v **ListStudio
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
@@ -5404,7 +5404,7 @@ func awsRestjson1_deserializeOpDocumentListStudioMembersOutput(v **ListStudioMem
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
@@ -5573,7 +5573,7 @@ func awsRestjson1_deserializeOpDocumentListStudiosOutput(v **ListStudiosOutput, 
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
@@ -5959,6 +5959,171 @@ func awsRestjson1_deserializeOpErrorPutStudioMembers(response *smithyhttp.Respon
 	}
 }
 
+type awsRestjson1_deserializeOpStartStreamingSession struct {
+}
+
+func (*awsRestjson1_deserializeOpStartStreamingSession) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpStartStreamingSession) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorStartStreamingSession(response, &metadata)
+	}
+	output := &StartStreamingSessionOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentStartStreamingSessionOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorStartStreamingSession(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
+	case strings.EqualFold("InternalServerErrorException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerErrorException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentStartStreamingSessionOutput(v **StartStreamingSessionOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *StartStreamingSessionOutput
+	if *v == nil {
+		sv = &StartStreamingSessionOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "session":
+			if err := awsRestjson1_deserializeDocumentStreamingSession(&sv.Session, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpStartStudioSSOConfigurationRepair struct {
 }
 
@@ -6112,6 +6277,171 @@ func awsRestjson1_deserializeOpDocumentStartStudioSSOConfigurationRepairOutput(v
 		switch key {
 		case "studio":
 			if err := awsRestjson1_deserializeDocumentStudio(&sv.Studio, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpStopStreamingSession struct {
+}
+
+func (*awsRestjson1_deserializeOpStopStreamingSession) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpStopStreamingSession) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorStopStreamingSession(response, &metadata)
+	}
+	output := &StopStreamingSessionOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentStopStreamingSessionOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorStopStreamingSession(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
+	case strings.EqualFold("InternalServerErrorException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerErrorException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentStopStreamingSessionOutput(v **StopStreamingSessionOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *StopStreamingSessionOutput
+	if *v == nil {
+		sv = &StopStreamingSessionOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "session":
+			if err := awsRestjson1_deserializeDocumentStreamingSession(&sv.Session, value); err != nil {
 				return err
 			}
 
@@ -7429,7 +7759,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Code = ptr.String(jtv)
 			}
@@ -7443,7 +7773,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
 			}
@@ -7656,7 +7986,7 @@ func awsRestjson1_deserializeDocumentComputeFarmConfiguration(v **types.ComputeF
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.ActiveDirectoryUser = ptr.String(jtv)
 			}
@@ -7665,7 +7995,7 @@ func awsRestjson1_deserializeDocumentComputeFarmConfiguration(v **types.ComputeF
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Endpoint = ptr.String(jtv)
 			}
@@ -7705,7 +8035,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Code = ptr.String(jtv)
 			}
@@ -7719,7 +8049,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
 			}
@@ -7795,7 +8125,7 @@ func awsRestjson1_deserializeDocumentEula(v **types.Eula, value interface{}) err
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Content = ptr.String(jtv)
 			}
@@ -7892,7 +8222,7 @@ func awsRestjson1_deserializeDocumentEulaAcceptance(v **types.EulaAcceptance, va
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.AcceptedBy = ptr.String(jtv)
 			}
@@ -7901,7 +8231,7 @@ func awsRestjson1_deserializeDocumentEulaAcceptance(v **types.EulaAcceptance, va
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.AccepteeId = ptr.String(jtv)
 			}
@@ -7992,7 +8322,7 @@ func awsRestjson1_deserializeDocumentEulaIdList(v *[]string, value interface{}) 
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
-				return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
 			}
 			col = jtv
 		}
@@ -8062,7 +8392,7 @@ func awsRestjson1_deserializeDocumentExceptionContext(v *map[string]string, valu
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
-				return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
 			}
 			parsedVal = jtv
 		}
@@ -8099,7 +8429,7 @@ func awsRestjson1_deserializeDocumentInternalServerErrorException(v **types.Inte
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Code = ptr.String(jtv)
 			}
@@ -8113,7 +8443,7 @@ func awsRestjson1_deserializeDocumentInternalServerErrorException(v **types.Inte
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
 			}
@@ -8153,7 +8483,7 @@ func awsRestjson1_deserializeDocumentLaunchProfile(v **types.LaunchProfile, valu
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
 			}
@@ -8175,7 +8505,7 @@ func awsRestjson1_deserializeDocumentLaunchProfile(v **types.LaunchProfile, valu
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.CreatedBy = ptr.String(jtv)
 			}
@@ -8239,7 +8569,7 @@ func awsRestjson1_deserializeDocumentLaunchProfile(v **types.LaunchProfile, valu
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.StatusMessage = ptr.String(jtv)
 			}
@@ -8276,7 +8606,7 @@ func awsRestjson1_deserializeDocumentLaunchProfile(v **types.LaunchProfile, valu
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.UpdatedBy = ptr.String(jtv)
 			}
@@ -8426,7 +8756,7 @@ func awsRestjson1_deserializeDocumentLaunchProfileInitializationActiveDirectory(
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.DirectoryName = ptr.String(jtv)
 			}
@@ -8624,7 +8954,7 @@ func awsRestjson1_deserializeDocumentLaunchProfileMembership(v **types.LaunchPro
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.IdentityStoreId = ptr.String(jtv)
 			}
@@ -8642,9 +8972,18 @@ func awsRestjson1_deserializeDocumentLaunchProfileMembership(v **types.LaunchPro
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.PrincipalId = ptr.String(jtv)
+			}
+
+		case "sid":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Sid = ptr.String(jtv)
 			}
 
 		default:
@@ -8787,7 +9126,7 @@ func awsRestjson1_deserializeDocumentLaunchProfileStudioComponentIdList(v *[]str
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
-				return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
 			}
 			col = jtv
 		}
@@ -8824,7 +9163,7 @@ func awsRestjson1_deserializeDocumentLicenseServiceConfiguration(v **types.Licen
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Endpoint = ptr.String(jtv)
 			}
@@ -8864,7 +9203,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Code = ptr.String(jtv)
 			}
@@ -8878,7 +9217,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
 			}
@@ -8967,7 +9306,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Code = ptr.String(jtv)
 			}
@@ -8981,7 +9320,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
 			}
@@ -9021,7 +9360,7 @@ func awsRestjson1_deserializeDocumentSharedFileSystemConfiguration(v **types.Sha
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Endpoint = ptr.String(jtv)
 			}
@@ -9030,7 +9369,7 @@ func awsRestjson1_deserializeDocumentSharedFileSystemConfiguration(v **types.Sha
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.FileSystemId = ptr.String(jtv)
 			}
@@ -9048,7 +9387,7 @@ func awsRestjson1_deserializeDocumentSharedFileSystemConfiguration(v **types.Sha
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.ShareName = ptr.String(jtv)
 			}
@@ -9120,6 +9459,19 @@ func awsRestjson1_deserializeDocumentStreamConfiguration(v **types.StreamConfigu
 				sv.MaxSessionLengthInMinutes = int32(i64)
 			}
 
+		case "maxStoppedSessionLengthInMinutes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected StreamConfigurationMaxStoppedSessionLengthInMinutes to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxStoppedSessionLengthInMinutes = int32(i64)
+			}
+
 		case "streamingImageIds":
 			if err := awsRestjson1_deserializeDocumentStreamingImageIdList(&sv.StreamingImageIds, value); err != nil {
 				return err
@@ -9160,7 +9512,7 @@ func awsRestjson1_deserializeDocumentStreamingImage(v **types.StreamingImage, va
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
 			}
@@ -9242,7 +9594,7 @@ func awsRestjson1_deserializeDocumentStreamingImage(v **types.StreamingImage, va
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.StatusMessage = ptr.String(jtv)
 			}
@@ -9451,7 +9803,7 @@ func awsRestjson1_deserializeDocumentStreamingSession(v **types.StreamingSession
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
 			}
@@ -9473,7 +9825,7 @@ func awsRestjson1_deserializeDocumentStreamingSession(v **types.StreamingSession
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.CreatedBy = ptr.String(jtv)
 			}
@@ -9482,7 +9834,7 @@ func awsRestjson1_deserializeDocumentStreamingSession(v **types.StreamingSession
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Ec2InstanceType = ptr.String(jtv)
 			}
@@ -9491,7 +9843,7 @@ func awsRestjson1_deserializeDocumentStreamingSession(v **types.StreamingSession
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.LaunchProfileId = ptr.String(jtv)
 			}
@@ -9500,7 +9852,7 @@ func awsRestjson1_deserializeDocumentStreamingSession(v **types.StreamingSession
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.OwnedBy = ptr.String(jtv)
 			}
@@ -9512,6 +9864,28 @@ func awsRestjson1_deserializeDocumentStreamingSession(v **types.StreamingSession
 					return fmt.Errorf("expected StreamingSessionId to be of type string, got %T instead", value)
 				}
 				sv.SessionId = ptr.String(jtv)
+			}
+
+		case "startedAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.StartedAt = ptr.Time(t)
+			}
+
+		case "startedBy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.StartedBy = ptr.String(jtv)
 			}
 
 		case "state":
@@ -9536,9 +9910,44 @@ func awsRestjson1_deserializeDocumentStreamingSession(v **types.StreamingSession
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.StatusMessage = ptr.String(jtv)
+			}
+
+		case "stopAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.StopAt = ptr.Time(t)
+			}
+
+		case "stoppedAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.StoppedAt = ptr.Time(t)
+			}
+
+		case "stoppedBy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.StoppedBy = ptr.String(jtv)
 			}
 
 		case "streamingImageId":
@@ -9585,7 +9994,7 @@ func awsRestjson1_deserializeDocumentStreamingSession(v **types.StreamingSession
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.UpdatedBy = ptr.String(jtv)
 			}
@@ -9672,7 +10081,7 @@ func awsRestjson1_deserializeDocumentStreamingSessionStream(v **types.StreamingS
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.CreatedBy = ptr.String(jtv)
 			}
@@ -9694,7 +10103,7 @@ func awsRestjson1_deserializeDocumentStreamingSessionStream(v **types.StreamingS
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.OwnedBy = ptr.String(jtv)
 			}
@@ -9721,7 +10130,7 @@ func awsRestjson1_deserializeDocumentStreamingSessionStream(v **types.StreamingS
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.StreamId = ptr.String(jtv)
 			}
@@ -9730,7 +10139,7 @@ func awsRestjson1_deserializeDocumentStreamingSessionStream(v **types.StreamingS
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Url = ptr.String(jtv)
 			}
@@ -9770,7 +10179,7 @@ func awsRestjson1_deserializeDocumentStudio(v **types.Studio, value interface{})
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.AdminRoleArn = ptr.String(jtv)
 			}
@@ -9779,7 +10188,7 @@ func awsRestjson1_deserializeDocumentStudio(v **types.Studio, value interface{})
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
 			}
@@ -9819,7 +10228,7 @@ func awsRestjson1_deserializeDocumentStudio(v **types.Studio, value interface{})
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.SsoClientId = ptr.String(jtv)
 			}
@@ -9846,7 +10255,7 @@ func awsRestjson1_deserializeDocumentStudio(v **types.Studio, value interface{})
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.StatusMessage = ptr.String(jtv)
 			}
@@ -9860,7 +10269,7 @@ func awsRestjson1_deserializeDocumentStudio(v **types.Studio, value interface{})
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.StudioId = ptr.String(jtv)
 			}
@@ -9878,7 +10287,7 @@ func awsRestjson1_deserializeDocumentStudio(v **types.Studio, value interface{})
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.StudioUrl = ptr.String(jtv)
 			}
@@ -9905,7 +10314,7 @@ func awsRestjson1_deserializeDocumentStudio(v **types.Studio, value interface{})
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.UserRoleArn = ptr.String(jtv)
 			}
@@ -9945,7 +10354,7 @@ func awsRestjson1_deserializeDocumentStudioComponent(v **types.StudioComponent, 
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
 			}
@@ -9972,7 +10381,7 @@ func awsRestjson1_deserializeDocumentStudioComponent(v **types.StudioComponent, 
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.CreatedBy = ptr.String(jtv)
 			}
@@ -10032,7 +10441,7 @@ func awsRestjson1_deserializeDocumentStudioComponent(v **types.StudioComponent, 
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.StatusMessage = ptr.String(jtv)
 			}
@@ -10086,7 +10495,7 @@ func awsRestjson1_deserializeDocumentStudioComponent(v **types.StudioComponent, 
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.UpdatedBy = ptr.String(jtv)
 			}
@@ -10395,7 +10804,7 @@ func awsRestjson1_deserializeDocumentStudioComponentSummary(v **types.StudioComp
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.CreatedBy = ptr.String(jtv)
 			}
@@ -10462,7 +10871,7 @@ func awsRestjson1_deserializeDocumentStudioComponentSummary(v **types.StudioComp
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.UpdatedBy = ptr.String(jtv)
 			}
@@ -10619,7 +11028,7 @@ func awsRestjson1_deserializeDocumentStudioMembership(v **types.StudioMembership
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.IdentityStoreId = ptr.String(jtv)
 			}
@@ -10637,9 +11046,18 @@ func awsRestjson1_deserializeDocumentStudioMembership(v **types.StudioMembership
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.PrincipalId = ptr.String(jtv)
+			}
+
+		case "sid":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Sid = ptr.String(jtv)
 			}
 
 		default:
@@ -10710,7 +11128,7 @@ func awsRestjson1_deserializeDocumentTags(v *map[string]string, value interface{
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
-				return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
 			}
 			parsedVal = jtv
 		}
@@ -10747,7 +11165,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Code = ptr.String(jtv)
 			}
@@ -10761,7 +11179,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
 			}
@@ -10801,7 +11219,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Code = ptr.String(jtv)
 			}
@@ -10815,7 +11233,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
 			}

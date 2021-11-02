@@ -33,7 +33,7 @@ func (c *Client) GetLaunchProfileDetails(ctx context.Context, params *GetLaunchP
 
 type GetLaunchProfileDetailsInput struct {
 
-	// The launch profile ID.
+	// The Launch Profile ID.
 	//
 	// This member is required.
 	LaunchProfileId *string
@@ -46,6 +46,7 @@ type GetLaunchProfileDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type GetLaunchProfileDetailsOutput struct {
 
 	// The launch profile.

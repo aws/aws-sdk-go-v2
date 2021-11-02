@@ -29,18 +29,22 @@ func (c *Client) UpdateModelPackage(ctx context.Context, params *UpdateModelPack
 
 type UpdateModelPackageInput struct {
 
-	// The approval status of the model.
-	//
-	// This member is required.
-	ModelApprovalStatus types.ModelApprovalStatus
-
-	// The Amazon Resource Name (ARN) of the model.
+	// The Amazon Resource Name (ARN) of the model package.
 	//
 	// This member is required.
 	ModelPackageArn *string
 
 	// A description for the approval status of the model.
 	ApprovalDescription *string
+
+	// The metadata properties associated with the model package versions.
+	CustomerMetadataProperties map[string]string
+
+	// The metadata properties associated with the model package versions to remove.
+	CustomerMetadataPropertiesToRemove []string
+
+	// The approval status of the model.
+	ModelApprovalStatus types.ModelApprovalStatus
 
 	noSmithyDocumentSerde
 }

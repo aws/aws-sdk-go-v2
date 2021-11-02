@@ -99,10 +99,10 @@ type Block struct {
 
 	// The page on which a block was detected. Page is returned by asynchronous
 	// operations. Page values greater than 1 are only returned for multipage documents
-	// that are in PDF format. A scanned image (JPEG/PNG), even if it contains multiple
-	// document pages, is considered to be a single-page document. The value of Page is
-	// always 1. Synchronous operations don't return Page because every input document
-	// is considered to be a single-page document.
+	// that are in PDF or TIFF format. A scanned image (JPEG/PNG), even if it contains
+	// multiple document pages, is considered to be a single-page document. The value
+	// of Page is always 1. Synchronous operations don't return Page because every
+	// input document is considered to be a single-page document.
 	Page *int32
 
 	// A list of child blocks of the current block. For example, a LINE object has
@@ -477,8 +477,8 @@ type S3Object struct {
 	Bucket *string
 
 	// The file name of the input document. Synchronous operations can use image files
-	// that are in JPEG or PNG format. Asynchronous operations also support PDF format
-	// files.
+	// that are in JPEG or PNG format. Asynchronous operations also support PDF and
+	// TIFF format files.
 	Name *string
 
 	// If the bucket has versioning enabled, you can specify the object version.

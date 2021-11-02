@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the URL of a specified assessment report in Audit Manager.
+// Returns the URL of an assessment report in Audit Manager.
 func (c *Client) GetAssessmentReportUrl(ctx context.Context, params *GetAssessmentReportUrlInput, optFns ...func(*Options)) (*GetAssessmentReportUrlOutput, error) {
 	if params == nil {
 		params = &GetAssessmentReportUrlInput{}
@@ -29,7 +29,7 @@ func (c *Client) GetAssessmentReportUrl(ctx context.Context, params *GetAssessme
 
 type GetAssessmentReportUrlInput struct {
 
-	// The identifier for the specified assessment.
+	// The identifier for the assessment.
 	//
 	// This member is required.
 	AssessmentId *string
@@ -44,8 +44,8 @@ type GetAssessmentReportUrlInput struct {
 
 type GetAssessmentReportUrlOutput struct {
 
-	// A uniform resource locator, used as a unique identifier to locate a resource on
-	// the internet.
+	// Short for uniform resource locator. A URL is used as a unique identifier to
+	// locate a resource on the internet.
 	PreSignedUrl *types.URL
 
 	// Metadata pertaining to the operation's result.

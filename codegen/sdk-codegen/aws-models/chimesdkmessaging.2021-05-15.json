@@ -29,6 +29,25 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.chimesdkmessaging#AllowNotifications": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ALL",
+                        "name": "ALL"
+                    },
+                    {
+                        "value": "NONE",
+                        "name": "NONE"
+                    },
+                    {
+                        "value": "FILTERED",
+                        "name": "FILTERED"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.chimesdkmessaging#AppInstanceUserMembershipSummary": {
             "type": "structure",
             "members": {
@@ -208,7 +227,7 @@
                 "MemberArn": {
                     "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the member that the service couldn't add.</p>"
+                        "smithy.api#documentation": "<p>The <code>AppInstanceUserArn</code> of the member that the service couldn't add.</p>"
                     }
                 },
                 "ErrorCode": {
@@ -254,7 +273,7 @@
                 "MemberArns": {
                     "target": "com.amazonaws.chimesdkmessaging#MemberArns",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARNs of the members you want to add to the channel.</p>",
+                        "smithy.api#documentation": "<p>The <code>AppInstanceUserArn</code>s of the members you want to add to the channel.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -699,6 +718,20 @@
                 "target": "com.amazonaws.chimesdkmessaging#ChannelMembershipForAppInstanceUserSummary"
             }
         },
+        "com.amazonaws.chimesdkmessaging#ChannelMembershipPreferences": {
+            "type": "structure",
+            "members": {
+                "PushNotifications": {
+                    "target": "com.amazonaws.chimesdkmessaging#PushNotificationPreferences",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The push notification configuration of a message.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The channel membership preferences for an <code>AppInstanceUser</code>.</p>"
+            }
+        },
         "com.amazonaws.chimesdkmessaging#ChannelMembershipSummary": {
             "type": "structure",
             "members": {
@@ -807,6 +840,12 @@
                     "target": "com.amazonaws.chimesdkmessaging#ChannelMessageStatusStructure",
                     "traits": {
                         "smithy.api#documentation": "<p>The status of the channel message.</p>"
+                    }
+                },
+                "MessageAttributes": {
+                    "target": "com.amazonaws.chimesdkmessaging#MessageAttributeMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attributes for the message, used for message filtering along with a <code>FilterRule</code> defined in the <code>PushNotificationPreferences</code>.</p>"
                     }
                 }
             },
@@ -960,6 +999,12 @@
                     "target": "com.amazonaws.chimesdkmessaging#ChannelMessageStatusStructure",
                     "traits": {
                         "smithy.api#documentation": "<p>The message status. The status value is <code>SENT</code> for messages sent to a channel without a channel flow. For channels associated with channel flow, the value determines the \n         processing stage.</p>"
+                    }
+                },
+                "MessageAttributes": {
+                    "target": "com.amazonaws.chimesdkmessaging#MessageAttributeMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message attribues listed in a the summary of a channel message.</p>"
                     }
                 }
             },
@@ -1221,6 +1266,9 @@
                     "target": "com.amazonaws.chimesdkmessaging#DisassociateChannelFlow"
                 },
                 {
+                    "target": "com.amazonaws.chimesdkmessaging#GetChannelMembershipPreferences"
+                },
+                {
                     "target": "com.amazonaws.chimesdkmessaging#GetChannelMessage"
                 },
                 {
@@ -1258,6 +1306,9 @@
                 },
                 {
                     "target": "com.amazonaws.chimesdkmessaging#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#PutChannelMembershipPreferences"
                 },
                 {
                     "target": "com.amazonaws.chimesdkmessaging#RedactChannelMessage"
@@ -1438,7 +1489,7 @@
                 "MemberArn": {
                     "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the member being banned.</p>",
+                        "smithy.api#documentation": "<p>The <code>AppInstanceUserArn</code> of the member being banned.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1597,7 +1648,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds a user to a channel. The <code>InvitedBy</code> response field is derived from the\n         request header. A channel member can:</p>\n\n         <ul>\n            <li>\n               <p>List messages</p>\n            </li>\n            <li>\n               <p>Send messages</p>\n            </li>\n            <li>\n               <p>Receive messages</p>\n            </li>\n            <li>\n               <p>Edit their own messages</p>\n            </li>\n            <li>\n               <p>Leave the channel</p>\n            </li>\n         </ul>\n\n         <p>Privacy settings impact this action as follows:</p>\n\n         <ul>\n            <li>\n               <p>Public Channels: You do not need to be a member to list messages, but you must be\n               a member to send messages.</p>\n            </li>\n            <li>\n               <p>Private Channels: You must be a member to list or send messages.</p>\n            </li>\n         </ul>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the\n               <code>AppInstanceUserArn</code> of the user that makes the API call as the value in\n            the header.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Adds a user to a channel. The <code>InvitedBy</code> field in <code>ChannelMembership</code> is derived from the\n         request header. A channel member can:</p>\n\n         <ul>\n            <li>\n               <p>List messages</p>\n            </li>\n            <li>\n               <p>Send messages</p>\n            </li>\n            <li>\n               <p>Receive messages</p>\n            </li>\n            <li>\n               <p>Edit their own messages</p>\n            </li>\n            <li>\n               <p>Leave the channel</p>\n            </li>\n         </ul>\n\n         <p>Privacy settings impact this action as follows:</p>\n\n         <ul>\n            <li>\n               <p>Public Channels: You do not need to be a member to list messages, but you must be\n               a member to send messages.</p>\n            </li>\n            <li>\n               <p>Private Channels: You must be a member to list or send messages.</p>\n            </li>\n         </ul>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the\n               <code>AppInstanceUserArn</code> of the user that makes the API call as the value in\n            the header.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/channels/{ChannelArn}/memberships",
@@ -1619,7 +1670,7 @@
                 "MemberArn": {
                     "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the member you want to add to the channel.</p>",
+                        "smithy.api#documentation": "<p>The <code>AppInstanceUserArn</code> of the member you want to add to the channel.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1714,7 +1765,7 @@
                 "ChannelModeratorArn": {
                     "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the moderator.</p>",
+                        "smithy.api#documentation": "<p>The <code>AppInstanceUserArn</code> of the moderator.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2013,7 +2064,7 @@
                 "MemberArn": {
                     "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the member that you're removing from the channel.</p>",
+                        "smithy.api#documentation": "<p>The <code>AppInstanceUserArn</code> of the member that you're removing from the channel.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2139,7 +2190,7 @@
                 "ChannelModeratorArn": {
                     "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the moderator being deleted.</p>",
+                        "smithy.api#documentation": "<p>The <code>AppInstanceUserArn</code> of the moderator being deleted.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2266,7 +2317,7 @@
                 "MemberArn": {
                     "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the member being banned.</p>",
+                        "smithy.api#documentation": "<p>The <code>AppInstanceUserArn</code> of the member being banned.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2484,7 +2535,7 @@
                 "MemberArn": {
                     "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the member.</p>",
+                        "smithy.api#documentation": "<p>The <code>AppInstanceUserArn</code> of the member.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2641,7 +2692,7 @@
                 "ChannelModeratorArn": {
                     "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the channel moderator.</p>",
+                        "smithy.api#documentation": "<p>The <code>AppInstanceUserArn</code> of the channel moderator.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2850,6 +2901,16 @@
                 ]
             }
         },
+        "com.amazonaws.chimesdkmessaging#FilterRule": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.chimesdkmessaging#ForbiddenException": {
             "type": "structure",
             "members": {
@@ -2864,6 +2925,92 @@
                 "smithy.api#documentation": "<p>The client is permanently forbidden from making the request.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#GetChannelMembershipPreferences": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkmessaging#GetChannelMembershipPreferencesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chimesdkmessaging#GetChannelMembershipPreferencesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the membership preferences of an <code>AppInstanceUser</code> for the specified channel. The <code>AppInstanceUser</code> must be a member of the channel. \n         Only the <code>AppInstanceUser</code> who owns the membership can retrieve preferences. Users in the <code>AppInstanceAdmin</code> and channel moderator roles can't retrieve preferences for other users. \n         Banned users can't retrieve membership preferences for the channel from which they are banned.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/channels/{ChannelArn}/memberships/{MemberArn}/preferences",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#GetChannelMembershipPreferencesRequest": {
+            "type": "structure",
+            "members": {
+                "ChannelArn": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the channel.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MemberArn": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>AppInstanceUserArn</code> of the member retrieving the preferences.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChimeBearer": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>AppInstanceUserARN</code> of the user making the API call.</p>",
+                        "smithy.api#httpHeader": "x-amz-chime-bearer",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#GetChannelMembershipPreferencesResponse": {
+            "type": "structure",
+            "members": {
+                "ChannelArn": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the channel.</p>"
+                    }
+                },
+                "Member": {
+                    "target": "com.amazonaws.chimesdkmessaging#Identity"
+                },
+                "Preferences": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChannelMembershipPreferences",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channel membership preferences for an <code>AppInstanceUser</code> .</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.chimesdkmessaging#GetChannelMessage": {
@@ -3350,7 +3497,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all channel memberships in a channel.</p>\n\n         <note>\n\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the\n               <code>AppInstanceUserArn</code> of the user that makes the API call as the value in\n            the header.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Lists all channel memberships in a channel.</p>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the\n               <code>AppInstanceUserArn</code> of the user that makes the API call as the value in\n            the header.</p>\n         </note>\n      \n         <p>If you want to list the channels to which a specific app instance user belongs, see the \n         <a href=\"https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_ListChannelMembershipsForAppInstanceUser.html\">ListChannelMembershipsForAppInstanceUser</a> API.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/channels/{ChannelArn}/memberships",
@@ -4111,6 +4258,57 @@
                 "target": "com.amazonaws.chimesdkmessaging#Identity"
             }
         },
+        "com.amazonaws.chimesdkmessaging#MessageAttributeMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.chimesdkmessaging#MessageAttributeName"
+            },
+            "value": {
+                "target": "com.amazonaws.chimesdkmessaging#MessageAttributeValue"
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#MessageAttributeName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#MessageAttributeStringValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#MessageAttributeStringValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chimesdkmessaging#MessageAttributeStringValue"
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#MessageAttributeValue": {
+            "type": "structure",
+            "members": {
+                "StringValues": {
+                    "target": "com.amazonaws.chimesdkmessaging#MessageAttributeStringValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The strings in a message attribute value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of message attribute values.</p>"
+            }
+        },
         "com.amazonaws.chimesdkmessaging#MessageId": {
             "type": "string",
             "traits": {
@@ -4224,7 +4422,7 @@
                 "FallbackAction": {
                     "target": "com.amazonaws.chimesdkmessaging#FallbackAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>Determines whether to continue or stop processing if communication with processor fails. If the last processor in a channel flow sequence has a fallback action of CONTINUE, and communication \n         with the processor fails, the message is considered processed and sent to the recipients in the channel.</p>",
+                        "smithy.api#documentation": "<p>Determines whether to continue with message processing or stop it in cases where communication with a processor fails. If a processor has a fallback action of <code>ABORT</code> and \n         communication with it fails, the processor sets the message status to <code>FAILED</code> and does not send the message to any recipients. Note that if the last processor in the channel flow sequence \n         has a fallback action of <code>CONTINUE</code> and communication with the processor fails, then the message is considered processed and sent to recipients of the channel.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4257,6 +4455,189 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 3
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#PushNotificationBody": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 150
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#PushNotificationConfiguration": {
+            "type": "structure",
+            "members": {
+                "Title": {
+                    "target": "com.amazonaws.chimesdkmessaging#PushNotificationTitle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title of the push notification.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Body": {
+                    "target": "com.amazonaws.chimesdkmessaging#PushNotificationBody",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The body of the push notification.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.chimesdkmessaging#PushNotificationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enum value that indicates the type of the push notification for a message.\n         <code>DEFAULT</code>: Normal mobile push notification.\n         <code>VOIP</code>: VOIP mobile push notification.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The push notification configuration of the message.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#PushNotificationPreferences": {
+            "type": "structure",
+            "members": {
+                "AllowNotifications": {
+                    "target": "com.amazonaws.chimesdkmessaging#AllowNotifications",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enum value that indicates which push notifications to send to the requested member of a channel.\n         <code>ALL</code> sends all push notifications, <code>NONE</code> sends no push notifications, <code>FILTERED</code> sends only filtered push notifications. \n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FilterRule": {
+                    "target": "com.amazonaws.chimesdkmessaging#FilterRule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The simple JSON object used to send a subset of a push notification to the requsted member.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The channel membership preferences for push notification.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#PushNotificationTitle": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                },
+                "smithy.api#pattern": ".*",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#PushNotificationType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "DEFAULT",
+                        "name": "DEFAULT"
+                    },
+                    {
+                        "value": "VOIP",
+                        "name": "VOIP"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#PutChannelMembershipPreferences": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkmessaging#PutChannelMembershipPreferencesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chimesdkmessaging#PutChannelMembershipPreferencesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkmessaging#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Sets the membership preferences of an <code>AppInstanceUser</code> for the specified channel. The <code>AppInstanceUser</code> must be a member of the channel. \n         Only the <code>AppInstanceUser</code> who owns the membership can set preferences. Users in the <code>AppInstanceAdmin</code> and channel moderator roles can't set preferences for other users. \n         Banned users can't set membership preferences for the channel from which they are banned.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/channels/{ChannelArn}/memberships/{MemberArn}/preferences",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#PutChannelMembershipPreferencesRequest": {
+            "type": "structure",
+            "members": {
+                "ChannelArn": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the channel.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MemberArn": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>AppInstanceUserArn</code> of the member setting the preferences.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChimeBearer": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>AppInstanceUserARN</code>  of the user making the API call.</p>",
+                        "smithy.api#httpHeader": "x-amz-chime-bearer",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Preferences": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChannelMembershipPreferences",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channel membership preferences of an <code>AppInstanceUser</code> .</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkmessaging#PutChannelMembershipPreferencesResponse": {
+            "type": "structure",
+            "members": {
+                "ChannelArn": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the channel.</p>"
+                    }
+                },
+                "Member": {
+                    "target": "com.amazonaws.chimesdkmessaging#Identity"
+                },
+                "Preferences": {
+                    "target": "com.amazonaws.chimesdkmessaging#ChannelMembershipPreferences",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN and metadata of the member being added.</p>"
+                    }
                 }
             }
         },
@@ -4462,6 +4843,18 @@
                         "smithy.api#documentation": "<p>The <code>AppInstanceUserArn</code> of the user that makes the API call.</p>",
                         "smithy.api#httpHeader": "x-amz-chime-bearer",
                         "smithy.api#required": {}
+                    }
+                },
+                "PushNotification": {
+                    "target": "com.amazonaws.chimesdkmessaging#PushNotificationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The push notification configuration of the message.</p>"
+                    }
+                },
+                "MessageAttributes": {
+                    "target": "com.amazonaws.chimesdkmessaging#MessageAttributeMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attributes for the message, used for message filtering along with a <code>FilterRule</code> defined in the <code>PushNotificationPreferences</code>.</p>"
                     }
                 }
             }

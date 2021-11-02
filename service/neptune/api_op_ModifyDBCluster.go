@@ -40,6 +40,12 @@ type ModifyDBClusterInput struct {
 	// This member is required.
 	DBClusterIdentifier *string
 
+	// A value that indicates whether upgrades between different major versions are
+	// allowed. Constraints: You must set the allow-major-version-upgrade flag when
+	// providing an EngineVersion parameter that uses a different major version than
+	// the DB cluster's current version.
+	AllowMajorVersionUpgrade bool
+
 	// A value that specifies whether the modifications in this request and any pending
 	// modifications are asynchronously applied as soon as possible, regardless of the
 	// PreferredMaintenanceWindow setting for the DB cluster. If this parameter is set
@@ -67,6 +73,19 @@ type ModifyDBClusterInput struct {
 
 	// The name of the DB cluster parameter group to use for the DB cluster.
 	DBClusterParameterGroupName *string
+
+	// The name of the DB parameter group to apply to all instances of the DB cluster.
+	// When you apply a parameter group using DBInstanceParameterGroupName, parameter
+	// changes aren't applied during the next maintenance window but instead are
+	// applied immediately. Default: The existing name setting Constraints:
+	//
+	// * The DB
+	// parameter group must be in the same DB parameter group family as the target DB
+	// cluster version.
+	//
+	// * The DBInstanceParameterGroupName parameter is only valid in
+	// combination with the AllowMajorVersionUpgrade parameter.
+	DBInstanceParameterGroupName *string
 
 	// A value that indicates whether the DB cluster has deletion protection enabled.
 	// The database can't be deleted when deletion protection is enabled. By default,

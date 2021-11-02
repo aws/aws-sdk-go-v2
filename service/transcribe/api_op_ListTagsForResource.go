@@ -30,7 +30,12 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// Lists all tags associated with a given Amazon Resource Name (ARN).
+	// Lists all tags associated with a given Amazon Resource Name (ARN). ARNs have the
+	// format arn:partition:service:region:account-id:resource-type/resource-id (for
+	// example,
+	// arn:aws:transcribe:us-east-1:account-id:transcription-job/your-job-name). Valid
+	// values for resource-type are: transcription-job, medical-transcription-job,
+	// vocabulary, medical-vocabulary, vocabulary-filter, and language-model.
 	//
 	// This member is required.
 	ResourceArn *string

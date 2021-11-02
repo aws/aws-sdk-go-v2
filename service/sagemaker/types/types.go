@@ -1806,6 +1806,62 @@ type AutoRollbackConfig struct {
 	noSmithyDocumentSerde
 }
 
+// The error code and error description associated with the resource.
+type BatchDescribeModelPackageError struct {
+
+	//
+	//
+	// This member is required.
+	ErrorCode *string
+
+	//
+	//
+	// This member is required.
+	ErrorResponse *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides summary information about the model package.
+type BatchDescribeModelPackageSummary struct {
+
+	// The creation time of the mortgage package summary.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// Defines how to perform inference generation after a training job is run.
+	//
+	// This member is required.
+	InferenceSpecification *InferenceSpecification
+
+	// The Amazon Resource Name (ARN) of the model package.
+	//
+	// This member is required.
+	ModelPackageArn *string
+
+	// The group name for the model package
+	//
+	// This member is required.
+	ModelPackageGroupName *string
+
+	// The status of the mortgage package.
+	//
+	// This member is required.
+	ModelPackageStatus ModelPackageStatus
+
+	// The approval status of the model.
+	ModelApprovalStatus ModelApprovalStatus
+
+	// The description of the model package.
+	ModelPackageDescription *string
+
+	// The version number of a versioned model.
+	ModelPackageVersion *int32
+
+	noSmithyDocumentSerde
+}
+
 // Contains bias metrics for a model.
 type Bias struct {
 
@@ -2885,6 +2941,29 @@ type DomainDetails struct {
 
 	// The domain's URL.
 	Url *string
+
+	noSmithyDocumentSerde
+}
+
+// A collection of settings that apply to the SageMaker Domain. These settings are
+// specified through the CreateDomain API call.
+type DomainSettings struct {
+
+	// A collection of settings that configure the RStudioServerPro Domain-level app.
+	RStudioServerProDomainSettings *RStudioServerProDomainSettings
+
+	// The security groups for the Amazon Virtual Private Cloud that the Domain uses
+	// for communication between Domain-level apps and user apps.
+	SecurityGroupIds []string
+
+	noSmithyDocumentSerde
+}
+
+// A collection of Domain configuration settings to update.
+type DomainSettingsForUpdate struct {
+
+	// A collection of RStudioServerPro Domain-level app settings to update.
+	RStudioServerProDomainSettingsForUpdate *RStudioServerProDomainSettingsForUpdate
 
 	noSmithyDocumentSerde
 }
@@ -6685,6 +6764,9 @@ type ModelPackage struct {
 	// The time that the model package was created.
 	CreationTime *time.Time
 
+	// The metadata properties for the model package.
+	CustomerMetadataProperties map[string]string
+
 	// Defines how to perform inference generation after a training job is run.
 	InferenceSpecification *InferenceSpecification
 
@@ -9106,6 +9188,13 @@ type Project struct {
 	// A timestamp specifying when the project was created.
 	CreationTime *time.Time
 
+	// Information about the user who created or modified an experiment, trial, trial
+	// component, or project.
+	LastModifiedBy *UserContext
+
+	// A timestamp container for when the project was last modified.
+	LastModifiedTime *time.Time
+
 	// The Amazon Resource Name (ARN) of the project.
 	ProjectArn *string
 
@@ -9681,6 +9770,64 @@ type RetryStrategy struct {
 	noSmithyDocumentSerde
 }
 
+// A collection of settings that apply to an RSessionGateway app.
+type RSessionAppSettings struct {
+	noSmithyDocumentSerde
+}
+
+// A collection of settings that configure user interaction with the
+// RStudioServerPro app. RStudioServerProAppSettings cannot be updated. The
+// RStudioServerPro app must be deleted and a new one created to make any changes.
+type RStudioServerProAppSettings struct {
+
+	// Indicates whether the current user has access to the RStudioServerPro app.
+	AccessStatus RStudioServerProAccessStatus
+
+	// The level of permissions that the user has within the RStudioServerPro app. This
+	// value defaults to `User`. The `Admin` value allows the user access to the
+	// RStudio Administrative Dashboard.
+	UserGroup RStudioServerProUserGroup
+
+	noSmithyDocumentSerde
+}
+
+// A collection of settings that configure the RStudioServerPro Domain-level app.
+type RStudioServerProDomainSettings struct {
+
+	// The ARN of the execution role for the RStudioServerPro Domain-level app.
+	//
+	// This member is required.
+	DomainExecutionRoleArn *string
+
+	// Specifies the ARN's of a SageMaker image and SageMaker image version, and the
+	// instance type that the version runs on.
+	DefaultResourceSpec *ResourceSpec
+
+	// A URL pointing to an RStudio Connect server.
+	RStudioConnectUrl *string
+
+	// A URL pointing to an RStudio Package Manager server.
+	RStudioPackageManagerUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// A collection of settings that update the current configuration for the
+// RStudioServerPro Domain-level app.
+type RStudioServerProDomainSettingsForUpdate struct {
+
+	// The execution role for the RStudioServerPro Domain-level app.
+	//
+	// This member is required.
+	DomainExecutionRoleArn *string
+
+	// Specifies the ARN's of a SageMaker image and SageMaker image version, and the
+	// instance type that the version runs on.
+	DefaultResourceSpec *ResourceSpec
+
+	noSmithyDocumentSerde
+}
+
 // Describes the S3 data source.
 type S3DataSource struct {
 
@@ -10060,6 +10207,20 @@ type ServiceCatalogProvisioningDetails struct {
 	// The path identifier of the product. This value is optional if the product has a
 	// default path, and required if the product has more than one path.
 	PathId *string
+
+	// The ID of the provisioning artifact.
+	ProvisioningArtifactId *string
+
+	// A list of key value pairs that you specify when you provision a product.
+	ProvisioningParameters []ProvisioningParameter
+
+	noSmithyDocumentSerde
+}
+
+// Details that you specify to provision a service catalog product. For information
+// about service catalog, see What is Amazon Web Services Service Catalog
+// (https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html).
+type ServiceCatalogProvisioningUpdateDetails struct {
 
 	// The ID of the provisioning artifact.
 	ProvisioningArtifactId *string
@@ -11737,6 +11898,13 @@ type UserSettings struct {
 
 	// The kernel gateway app settings.
 	KernelGatewayAppSettings *KernelGatewayAppSettings
+
+	// A collection of settings that configure the RSessionGateway app.
+	RSessionAppSettings *RSessionAppSettings
+
+	// A collection of settings that configure user interaction with the
+	// RStudioServerPro app.
+	RStudioServerProAppSettings *RStudioServerProAppSettings
 
 	// The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses
 	// for communication. Optional when the CreateDomain.AppNetworkAccessType parameter

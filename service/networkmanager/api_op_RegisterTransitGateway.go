@@ -12,9 +12,9 @@ import (
 )
 
 // Registers a transit gateway in your global network. The transit gateway can be
-// in any AWS Region, but it must be owned by the same AWS account that owns the
-// global network. You cannot register a transit gateway in more than one global
-// network.
+// in any Amazon Web Services Region, but it must be owned by the same Amazon Web
+// Services account that owns the global network. You cannot register a transit
+// gateway in more than one global network.
 func (c *Client) RegisterTransitGateway(ctx context.Context, params *RegisterTransitGatewayInput, optFns ...func(*Options)) (*RegisterTransitGatewayOutput, error) {
 	if params == nil {
 		params = &RegisterTransitGatewayInput{}
@@ -37,9 +37,7 @@ type RegisterTransitGatewayInput struct {
 	// This member is required.
 	GlobalNetworkId *string
 
-	// The Amazon Resource Name (ARN) of the transit gateway. For more information, see
-	// Resources Defined by Amazon EC2
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonec2.html#amazonec2-resources-for-iam-policies).
+	// The Amazon Resource Name (ARN) of the transit gateway.
 	//
 	// This member is required.
 	TransitGatewayArn *string

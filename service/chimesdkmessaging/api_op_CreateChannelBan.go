@@ -45,7 +45,7 @@ type CreateChannelBanInput struct {
 	// This member is required.
 	ChimeBearer *string
 
-	// The ARN of the member being banned.
+	// The AppInstanceUserArn of the member being banned.
 	//
 	// This member is required.
 	MemberArn *string

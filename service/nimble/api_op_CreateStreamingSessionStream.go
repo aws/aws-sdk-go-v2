@@ -4,7 +4,6 @@ package nimble
 
 import (
 	"context"
-	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/nimble/types"
@@ -30,10 +29,10 @@ func (c *Client) CreateStreamingSessionStream(ctx context.Context, params *Creat
 	return out, nil
 }
 
-// A list collection streams.
+//
 type CreateStreamingSessionStreamInput struct {
 
-	// The session ID.
+	// The streaming session ID.
 	//
 	// This member is required.
 	SessionId *string
@@ -43,13 +42,9 @@ type CreateStreamingSessionStreamInput struct {
 	// This member is required.
 	StudioId *string
 
-	// To make an idempotent API request using one of these actions, specify a client
-	// token in the request. You should not reuse the same client token for other API
-	// requests. If you retry a request that completed successfully using the same
-	// client token and the same parameters, the retry succeeds without performing any
-	// further actions. If you retry a successful request using the same client token,
-	// but one or more of the parameters are different, the retry fails with a
-	// ValidationException error.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request. If you don’t specify a client token, the AWS SDK automatically
+	// generates a client token and uses it for the request to ensure idempotency.
 	ClientToken *string
 
 	// The expiration time in seconds.
@@ -58,6 +53,7 @@ type CreateStreamingSessionStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type CreateStreamingSessionStreamOutput struct {
 
 	// The stream.
@@ -114,9 +110,6 @@ func (c *Client) addOperationCreateStreamingSessionStreamMiddlewares(stack *midd
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addIdempotencyToken_opCreateStreamingSessionStreamMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateStreamingSessionStreamValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -133,39 +126,6 @@ func (c *Client) addOperationCreateStreamingSessionStreamMiddlewares(stack *midd
 		return err
 	}
 	return nil
-}
-
-type idempotencyToken_initializeOpCreateStreamingSessionStream struct {
-	tokenProvider IdempotencyTokenProvider
-}
-
-func (*idempotencyToken_initializeOpCreateStreamingSessionStream) ID() string {
-	return "OperationIdempotencyTokenAutoFill"
-}
-
-func (m *idempotencyToken_initializeOpCreateStreamingSessionStream) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	if m.tokenProvider == nil {
-		return next.HandleInitialize(ctx, in)
-	}
-
-	input, ok := in.Parameters.(*CreateStreamingSessionStreamInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("expected middleware input to be of type *CreateStreamingSessionStreamInput ")
-	}
-
-	if input.ClientToken == nil {
-		t, err := m.tokenProvider.GetIdempotencyToken()
-		if err != nil {
-			return out, metadata, err
-		}
-		input.ClientToken = &t
-	}
-	return next.HandleInitialize(ctx, in)
-}
-func addIdempotencyToken_opCreateStreamingSessionStreamMiddleware(stack *middleware.Stack, cfg Options) error {
-	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateStreamingSessionStream{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opCreateStreamingSessionStream(region string) *awsmiddleware.RegisterServiceMetadata {

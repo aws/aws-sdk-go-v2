@@ -5,9 +5,10 @@ package types
 import (
 	"fmt"
 	smithy "github.com/aws/smithy-go"
+	"time"
 )
 
-// You don't have sufficient access to perform this action.
+// You don't have sufficient access to perform this operation.
 type AccessDeniedException struct {
 	Message *string
 
@@ -32,6 +33,7 @@ type ConflictException struct {
 
 	ResourceIdentifier *string
 	ResourceType       ResourceType
+	RetryAfter         *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -68,7 +70,7 @@ func (e *InternalServerException) ErrorMessage() string {
 func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// Request references a resource which does not exist.
+// Request references a resource which doesn't exist.
 type ResourceNotFoundException struct {
 	Message *string
 
@@ -136,7 +138,8 @@ func (e *ThrottlingException) ErrorMessage() string {
 func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The input fails to satisfy the constraints specified by an AWS service.
+// The input fails to satisfy the constraints specified by an Amazon Web Services
+// service.
 type ValidationException struct {
 	Message *string
 

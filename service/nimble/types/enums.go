@@ -233,6 +233,11 @@ const (
 	StreamingSessionStateDeleted          StreamingSessionState = "DELETED"
 	StreamingSessionStateCreateFailed     StreamingSessionState = "CREATE_FAILED"
 	StreamingSessionStateDeleteFailed     StreamingSessionState = "DELETE_FAILED"
+	StreamingSessionStateStopInProgress   StreamingSessionState = "STOP_IN_PROGRESS"
+	StreamingSessionStateStartInProgress  StreamingSessionState = "START_IN_PROGRESS"
+	StreamingSessionStateStopped          StreamingSessionState = "STOPPED"
+	StreamingSessionStateStopFailed       StreamingSessionState = "STOP_FAILED"
+	StreamingSessionStateStartFailed      StreamingSessionState = "START_FAILED"
 )
 
 // Values returns all known values for StreamingSessionState. Note that this can be
@@ -246,6 +251,11 @@ func (StreamingSessionState) Values() []StreamingSessionState {
 		"DELETED",
 		"CREATE_FAILED",
 		"DELETE_FAILED",
+		"STOP_IN_PROGRESS",
+		"START_IN_PROGRESS",
+		"STOPPED",
+		"STOP_FAILED",
+		"START_FAILED",
 	}
 }
 
@@ -264,6 +274,10 @@ const (
 	StreamingSessionStatusCodeInitializationScriptError        StreamingSessionStatusCode = "INITIALIZATION_SCRIPT_ERROR"
 	StreamingSessionStatusCodeDecryptStreamingImageError       StreamingSessionStatusCode = "DECRYPT_STREAMING_IMAGE_ERROR"
 	StreamingSessionStatusCodeNetworkInterfaceError            StreamingSessionStatusCode = "NETWORK_INTERFACE_ERROR"
+	StreamingSessionStatusCodeStreamingSessionStopped          StreamingSessionStatusCode = "STREAMING_SESSION_STOPPED"
+	StreamingSessionStatusCodeStreamingSessionStarted          StreamingSessionStatusCode = "STREAMING_SESSION_STARTED"
+	StreamingSessionStatusCodeStreamingSessionStopInProgress   StreamingSessionStatusCode = "STREAMING_SESSION_STOP_IN_PROGRESS"
+	StreamingSessionStatusCodeStreamingSessionStartInProgress  StreamingSessionStatusCode = "STREAMING_SESSION_START_IN_PROGRESS"
 )
 
 // Values returns all known values for StreamingSessionStatusCode. Note that this
@@ -282,6 +296,10 @@ func (StreamingSessionStatusCode) Values() []StreamingSessionStatusCode {
 		"INITIALIZATION_SCRIPT_ERROR",
 		"DECRYPT_STREAMING_IMAGE_ERROR",
 		"NETWORK_INTERFACE_ERROR",
+		"STREAMING_SESSION_STOPPED",
+		"STREAMING_SESSION_STARTED",
+		"STREAMING_SESSION_STOP_IN_PROGRESS",
+		"STREAMING_SESSION_START_IN_PROGRESS",
 	}
 }
 

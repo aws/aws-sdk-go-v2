@@ -22,6 +22,24 @@ func (Action) Values() []Action {
 	}
 }
 
+type AutodefinedReverseFlag string
+
+// Enum values for AutodefinedReverseFlag
+const (
+	AutodefinedReverseFlagEnable  AutodefinedReverseFlag = "ENABLE"
+	AutodefinedReverseFlagDisable AutodefinedReverseFlag = "DISABLE"
+)
+
+// Values returns all known values for AutodefinedReverseFlag. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AutodefinedReverseFlag) Values() []AutodefinedReverseFlag {
+	return []AutodefinedReverseFlag{
+		"ENABLE",
+		"DISABLE",
+	}
+}
+
 type BlockOverrideDnsType string
 
 // Enum values for BlockOverrideDnsType
@@ -227,6 +245,29 @@ const (
 func (MutationProtectionStatus) Values() []MutationProtectionStatus {
 	return []MutationProtectionStatus{
 		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type ResolverAutodefinedReverseStatus string
+
+// Enum values for ResolverAutodefinedReverseStatus
+const (
+	ResolverAutodefinedReverseStatusEnabling  ResolverAutodefinedReverseStatus = "ENABLING"
+	ResolverAutodefinedReverseStatusEnabled   ResolverAutodefinedReverseStatus = "ENABLED"
+	ResolverAutodefinedReverseStatusDisabling ResolverAutodefinedReverseStatus = "DISABLING"
+	ResolverAutodefinedReverseStatusDisabled  ResolverAutodefinedReverseStatus = "DISABLED"
+)
+
+// Values returns all known values for ResolverAutodefinedReverseStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ResolverAutodefinedReverseStatus) Values() []ResolverAutodefinedReverseStatus {
+	return []ResolverAutodefinedReverseStatus{
+		"ENABLING",
+		"ENABLED",
+		"DISABLING",
 		"DISABLED",
 	}
 }

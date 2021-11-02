@@ -110,6 +110,26 @@ func (m *validateOpGetDocumentTextDetection) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetExpenseAnalysis struct {
+}
+
+func (*validateOpGetExpenseAnalysis) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetExpenseAnalysis) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetExpenseAnalysisInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetExpenseAnalysisInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartDocumentAnalysis struct {
 }
 
@@ -150,6 +170,26 @@ func (m *validateOpStartDocumentTextDetection) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartExpenseAnalysis struct {
+}
+
+func (*validateOpStartExpenseAnalysis) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartExpenseAnalysis) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartExpenseAnalysisInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartExpenseAnalysisInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpAnalyzeDocumentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAnalyzeDocument{}, middleware.After)
 }
@@ -170,12 +210,20 @@ func addOpGetDocumentTextDetectionValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpGetDocumentTextDetection{}, middleware.After)
 }
 
+func addOpGetExpenseAnalysisValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetExpenseAnalysis{}, middleware.After)
+}
+
 func addOpStartDocumentAnalysisValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartDocumentAnalysis{}, middleware.After)
 }
 
 func addOpStartDocumentTextDetectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartDocumentTextDetection{}, middleware.After)
+}
+
+func addOpStartExpenseAnalysisValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartExpenseAnalysis{}, middleware.After)
 }
 
 func validateHumanLoopConfig(v *types.HumanLoopConfig) error {
@@ -312,6 +360,21 @@ func validateOpGetDocumentTextDetectionInput(v *GetDocumentTextDetectionInput) e
 	}
 }
 
+func validateOpGetExpenseAnalysisInput(v *GetExpenseAnalysisInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetExpenseAnalysisInput"}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartDocumentAnalysisInput(v *StartDocumentAnalysisInput) error {
 	if v == nil {
 		return nil
@@ -345,6 +408,31 @@ func validateOpStartDocumentTextDetectionInput(v *StartDocumentTextDetectionInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartDocumentTextDetectionInput"}
+	if v.DocumentLocation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DocumentLocation"))
+	}
+	if v.NotificationChannel != nil {
+		if err := validateNotificationChannel(v.NotificationChannel); err != nil {
+			invalidParams.AddNested("NotificationChannel", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OutputConfig != nil {
+		if err := validateOutputConfig(v.OutputConfig); err != nil {
+			invalidParams.AddNested("OutputConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartExpenseAnalysisInput(v *StartExpenseAnalysisInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartExpenseAnalysisInput"}
 	if v.DocumentLocation == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DocumentLocation"))
 	}

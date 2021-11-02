@@ -7,7 +7,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// Your account is not registered with Audit Manager. Check the delegated
+// Your account isn't registered with Audit Manager. Check the delegated
 // administrator setup on the Audit Manager settings page, and try again.
 type AccessDeniedException struct {
 	Message *string
@@ -47,7 +47,7 @@ func (e *InternalServerException) ErrorMessage() string {
 func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The resource specified in the request cannot be found.
+// The resource that's specified in the request can't be found.
 type ResourceNotFoundException struct {
 	Message *string
 

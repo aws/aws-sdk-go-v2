@@ -29,22 +29,22 @@ func (c *Client) UpdateControl(ctx context.Context, params *UpdateControlInput, 
 
 type UpdateControlInput struct {
 
-	// The identifier for the specified control.
+	// The identifier for the control.
 	//
 	// This member is required.
 	ControlId *string
 
-	// The data mapping sources for the specified control.
+	// The data mapping sources for the control.
 	//
 	// This member is required.
 	ControlMappingSources []types.ControlMappingSource
 
-	// The name of the control to be updated.
+	// The name of the updated control.
 	//
 	// This member is required.
 	Name *string
 
-	// The recommended actions to carry out if the control is not fulfilled.
+	// The recommended actions to carry out if the control isn't fulfilled.
 	ActionPlanInstructions *string
 
 	// The title of the action plan for remediating the control.
@@ -53,7 +53,7 @@ type UpdateControlInput struct {
 	// The optional description of the control.
 	Description *string
 
-	// The steps that to follow to determine if the control has been satisfied.
+	// The steps that you should follow to determine if the control is met.
 	TestingInformation *string
 
 	noSmithyDocumentSerde
@@ -61,7 +61,7 @@ type UpdateControlInput struct {
 
 type UpdateControlOutput struct {
 
-	// The name of the updated control set returned by the UpdateControl API.
+	// The name of the updated control set that the UpdateControl API returned.
 	Control *types.Control
 
 	// Metadata pertaining to the operation's result.

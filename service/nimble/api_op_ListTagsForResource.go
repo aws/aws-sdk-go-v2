@@ -32,7 +32,7 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The ARN of the target resource for tagging operations.
+	// The Amazon Resource Name (ARN) of the resource for which you want to list tags.
 	//
 	// This member is required.
 	ResourceArn *string
@@ -40,6 +40,7 @@ type ListTagsForResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type ListTagsForResourceOutput struct {
 
 	// A collection of labels, in the form of key:value pairs, that apply to this

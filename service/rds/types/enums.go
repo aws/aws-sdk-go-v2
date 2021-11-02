@@ -76,6 +76,44 @@ func (AuthScheme) Values() []AuthScheme {
 	}
 }
 
+type AutomationMode string
+
+// Enum values for AutomationMode
+const (
+	AutomationModeFull      AutomationMode = "full"
+	AutomationModeAllPaused AutomationMode = "all-paused"
+)
+
+// Values returns all known values for AutomationMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AutomationMode) Values() []AutomationMode {
+	return []AutomationMode{
+		"full",
+		"all-paused",
+	}
+}
+
+type CustomEngineVersionStatus string
+
+// Enum values for CustomEngineVersionStatus
+const (
+	CustomEngineVersionStatusAvailable             CustomEngineVersionStatus = "available"
+	CustomEngineVersionStatusInactive              CustomEngineVersionStatus = "inactive"
+	CustomEngineVersionStatusInactiveExceptRestore CustomEngineVersionStatus = "inactive-except-restore"
+)
+
+// Values returns all known values for CustomEngineVersionStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CustomEngineVersionStatus) Values() []CustomEngineVersionStatus {
+	return []CustomEngineVersionStatus{
+		"available",
+		"inactive",
+		"inactive-except-restore",
+	}
+}
+
 type DBProxyEndpointStatus string
 
 // Enum values for DBProxyEndpointStatus
@@ -230,12 +268,13 @@ type SourceType string
 
 // Enum values for SourceType
 const (
-	SourceTypeDbInstance        SourceType = "db-instance"
-	SourceTypeDbParameterGroup  SourceType = "db-parameter-group"
-	SourceTypeDbSecurityGroup   SourceType = "db-security-group"
-	SourceTypeDbSnapshot        SourceType = "db-snapshot"
-	SourceTypeDbCluster         SourceType = "db-cluster"
-	SourceTypeDbClusterSnapshot SourceType = "db-cluster-snapshot"
+	SourceTypeDbInstance          SourceType = "db-instance"
+	SourceTypeDbParameterGroup    SourceType = "db-parameter-group"
+	SourceTypeDbSecurityGroup     SourceType = "db-security-group"
+	SourceTypeDbSnapshot          SourceType = "db-snapshot"
+	SourceTypeDbCluster           SourceType = "db-cluster"
+	SourceTypeDbClusterSnapshot   SourceType = "db-cluster-snapshot"
+	SourceTypeCustomEngineVersion SourceType = "custom-engine-version"
 )
 
 // Values returns all known values for SourceType. Note that this can be expanded
@@ -249,6 +288,7 @@ func (SourceType) Values() []SourceType {
 		"db-snapshot",
 		"db-cluster",
 		"db-cluster-snapshot",
+		"custom-engine-version",
 	}
 }
 

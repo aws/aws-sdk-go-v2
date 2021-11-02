@@ -29,7 +29,7 @@ func (c *Client) GetAssessment(ctx context.Context, params *GetAssessmentInput, 
 
 type GetAssessmentInput struct {
 
-	// The identifier for the specified assessment.
+	// The identifier for the assessment.
 	//
 	// This member is required.
 	AssessmentId *string
@@ -44,7 +44,7 @@ type GetAssessmentOutput struct {
 	Assessment *types.Assessment
 
 	// The wrapper that contains the Audit Manager role information of the current
-	// user, such as the role type and IAM Amazon Resource Name (ARN).
+	// user. This includes the role type and IAM Amazon Resource Name (ARN).
 	UserRole *types.Role
 
 	// Metadata pertaining to the operation's result.

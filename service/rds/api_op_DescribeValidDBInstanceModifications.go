@@ -13,7 +13,7 @@ import (
 
 // You can call DescribeValidDBInstanceModifications to learn what modifications
 // you can make to your DB instance. You can use this information when you call
-// ModifyDBInstance.
+// ModifyDBInstance. This command doesn't apply to RDS Custom.
 func (c *Client) DescribeValidDBInstanceModifications(ctx context.Context, params *DescribeValidDBInstanceModificationsInput, optFns ...func(*Options)) (*DescribeValidDBInstanceModificationsOutput, error) {
 	if params == nil {
 		params = &DescribeValidDBInstanceModificationsInput{}

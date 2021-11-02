@@ -31,25 +31,26 @@ type ActiveTrustedKeyGroups struct {
 	noSmithyDocumentSerde
 }
 
-// A list of accounts and the active CloudFront key pairs in each account that
-// CloudFront can use to verify the signatures of signed URLs and signed cookies.
+// A list of Amazon Web Services accounts and the active CloudFront key pairs in
+// each account that CloudFront can use to verify the signatures of signed URLs and
+// signed cookies.
 type ActiveTrustedSigners struct {
 
-	// This field is true if any of the accounts in the list have active CloudFront key
-	// pairs that CloudFront can use to verify the signatures of signed URLs and signed
-	// cookies. If not, this field is false.
+	// This field is true if any of the Amazon Web Services accounts in the list have
+	// active CloudFront key pairs that CloudFront can use to verify the signatures of
+	// signed URLs and signed cookies. If not, this field is false.
 	//
 	// This member is required.
 	Enabled *bool
 
-	// The number of accounts in the list.
+	// The number of Amazon Web Services accounts in the list.
 	//
 	// This member is required.
 	Quantity *int32
 
-	// A list of accounts and the identifiers of active CloudFront key pairs in each
-	// account that CloudFront can use to verify the signatures of signed URLs and
-	// signed cookies.
+	// A list of Amazon Web Services accounts and the identifiers of active CloudFront
+	// key pairs in each account that CloudFront can use to verify the signatures of
+	// signed URLs and signed cookies.
 	Items []Signer
 
 	noSmithyDocumentSerde
@@ -373,6 +374,9 @@ type CacheBehavior struct {
 	// in the Amazon CloudFront Developer Guide.
 	RealtimeLogConfigArn *string
 
+	// The identifier for a response headers policy.
+	ResponseHeadersPolicyId *string
+
 	// Indicates whether you want to distribute media files in the Microsoft Smooth
 	// Streaming format using the origin that is associated with this cache behavior.
 	// If so, specify true; if not, specify false. If you specify true for
@@ -391,14 +395,15 @@ type CacheBehavior struct {
 	// in the Amazon CloudFront Developer Guide.
 	TrustedKeyGroups *TrustedKeyGroups
 
-	// We recommend using TrustedKeyGroups instead of TrustedSigners. A list of account
-	// IDs whose public keys CloudFront can use to validate signed URLs or signed
-	// cookies. When a cache behavior contains trusted signers, CloudFront requires
-	// signed URLs or signed cookies for all requests that match the cache behavior.
-	// The URLs or cookies must be signed with the private key of a CloudFront key pair
-	// in the trusted signer’s account. The signed URL or cookie contains information
-	// about which public key CloudFront should use to verify the signature. For more
-	// information, see Serving private content
+	// We recommend using TrustedKeyGroups instead of TrustedSigners. A list of Amazon
+	// Web Services account IDs whose public keys CloudFront can use to validate signed
+	// URLs or signed cookies. When a cache behavior contains trusted signers,
+	// CloudFront requires signed URLs or signed cookies for all requests that match
+	// the cache behavior. The URLs or cookies must be signed with the private key of a
+	// CloudFront key pair in the trusted signer’s Amazon Web Services account. The
+	// signed URL or cookie contains information about which public key CloudFront
+	// should use to verify the signature. For more information, see Serving private
+	// content
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
 	// in the Amazon CloudFront Developer Guide.
 	TrustedSigners *TrustedSigners
@@ -696,7 +701,7 @@ type CachePolicySummary struct {
 	CachePolicy *CachePolicy
 
 	// The type of cache policy, either managed (created by Amazon Web Services) or
-	// custom (created in this account).
+	// custom (created in this Amazon Web Services account).
 	//
 	// This member is required.
 	Type CachePolicyType
@@ -782,13 +787,14 @@ type CloudFrontOriginAccessIdentityList struct {
 	MaxItems *int32
 
 	// The number of CloudFront origin access identities that were created by the
-	// current account.
+	// current Amazon Web Services account.
 	//
 	// This member is required.
 	Quantity *int32
 
 	// A complex type that contains one CloudFrontOriginAccessIdentitySummary element
-	// for each origin access identity that was created by the current account.
+	// for each origin access identity that was created by the current Amazon Web
+	// Services account.
 	Items []CloudFrontOriginAccessIdentitySummary
 
 	// If IsTruncated is true, this element is present and contains the value you can
@@ -1354,6 +1360,9 @@ type DefaultCacheBehavior struct {
 	// in the Amazon CloudFront Developer Guide.
 	RealtimeLogConfigArn *string
 
+	// The identifier for a response headers policy.
+	ResponseHeadersPolicyId *string
+
 	// Indicates whether you want to distribute media files in the Microsoft Smooth
 	// Streaming format using the origin that is associated with this cache behavior.
 	// If so, specify true; if not, specify false. If you specify true for
@@ -1372,14 +1381,15 @@ type DefaultCacheBehavior struct {
 	// in the Amazon CloudFront Developer Guide.
 	TrustedKeyGroups *TrustedKeyGroups
 
-	// We recommend using TrustedKeyGroups instead of TrustedSigners. A list of account
-	// IDs whose public keys CloudFront can use to validate signed URLs or signed
-	// cookies. When a cache behavior contains trusted signers, CloudFront requires
-	// signed URLs or signed cookies for all requests that match the cache behavior.
-	// The URLs or cookies must be signed with the private key of a CloudFront key pair
-	// in a trusted signer’s account. The signed URL or cookie contains information
-	// about which public key CloudFront should use to verify the signature. For more
-	// information, see Serving private content
+	// We recommend using TrustedKeyGroups instead of TrustedSigners. A list of Amazon
+	// Web Services account IDs whose public keys CloudFront can use to validate signed
+	// URLs or signed cookies. When a cache behavior contains trusted signers,
+	// CloudFront requires signed URLs or signed cookies for all requests that match
+	// the cache behavior. The URLs or cookies must be signed with the private key of a
+	// CloudFront key pair in a trusted signer’s Amazon Web Services account. The
+	// signed URL or cookie contains information about which public key CloudFront
+	// should use to verify the signature. For more information, see Serving private
+	// content
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
 	// in the Amazon CloudFront Developer Guide.
 	TrustedSigners *TrustedSigners
@@ -1393,7 +1403,7 @@ type Distribution struct {
 
 	// The ARN (Amazon Resource Name) for the distribution. For example:
 	// arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5, where
-	// 123456789012 is your account ID.
+	// 123456789012 is your Amazon Web Services account ID.
 	//
 	// This member is required.
 	ARN *string
@@ -1442,9 +1452,9 @@ type Distribution struct {
 	// We recommend using TrustedKeyGroups instead of TrustedSigners. CloudFront
 	// automatically adds this field to the response if you’ve configured a cache
 	// behavior in this distribution to serve private content using trusted signers.
-	// This field contains a list of account IDs and the active CloudFront key pairs in
-	// each account that CloudFront can use to verify the signatures of signed URLs or
-	// signed cookies.
+	// This field contains a list of Amazon Web Services account IDs and the active
+	// CloudFront key pairs in each account that CloudFront can use to verify the
+	// signatures of signed URLs or signed cookies.
 	ActiveTrustedSigners *ActiveTrustedSigners
 
 	// Amazon Web Services services in China customers must file for an Internet
@@ -1702,13 +1712,14 @@ type DistributionList struct {
 	// This member is required.
 	MaxItems *int32
 
-	// The number of distributions that were created by the current account.
+	// The number of distributions that were created by the current Amazon Web Services
+	// account.
 	//
 	// This member is required.
 	Quantity *int32
 
 	// A complex type that contains one DistributionSummary element for each
-	// distribution that was created by the current account.
+	// distribution that was created by the current Amazon Web Services account.
 	Items []DistributionSummary
 
 	// If IsTruncated is true, this element is present and contains the value you can
@@ -1724,7 +1735,7 @@ type DistributionSummary struct {
 
 	// The ARN (Amazon Resource Name) for the distribution. For example:
 	// arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5, where
-	// 123456789012 is your account ID.
+	// 123456789012 is your Amazon Web Services account ID.
 	//
 	// This member is required.
 	ARN *string
@@ -2490,13 +2501,14 @@ type InvalidationList struct {
 	// This member is required.
 	MaxItems *int32
 
-	// The number of invalidation batches that were created by the current account.
+	// The number of invalidation batches that were created by the current Amazon Web
+	// Services account.
 	//
 	// This member is required.
 	Quantity *int32
 
 	// A complex type that contains one InvalidationSummary element for each
-	// invalidation batch created by the current account.
+	// invalidation batch created by the current Amazon Web Services account.
 	Items []InvalidationSummary
 
 	// If IsTruncated is true, this element is present and contains the value that you
@@ -3192,7 +3204,7 @@ type OriginRequestPolicySummary struct {
 	OriginRequestPolicy *OriginRequestPolicy
 
 	// The type of origin request policy, either managed (created by Amazon Web
-	// Services) or custom (created in this account).
+	// Services) or custom (created in this Amazon Web Services account).
 	//
 	// This member is required.
 	Type OriginRequestPolicyType
@@ -3230,12 +3242,13 @@ type OriginShield struct {
 	// This member is required.
 	Enabled *bool
 
-	// The Region for Origin Shield. Specify the Region that has the lowest latency to
-	// your origin. To specify a region, use the region code, not the region name. For
-	// example, specify the US East (Ohio) region as us-east-2. When you enable
-	// CloudFront Origin Shield, you must specify the Region for Origin Shield. For the
-	// list of Regions that you can specify, and for help choosing the best Region for
-	// your origin, see Choosing the Region for Origin Shield
+	// The Amazon Web Services Region for Origin Shield. Specify the Amazon Web
+	// Services Region that has the lowest latency to your origin. To specify a region,
+	// use the region code, not the region name. For example, specify the US East
+	// (Ohio) region as us-east-2. When you enable CloudFront Origin Shield, you must
+	// specify the Amazon Web Services Region for Origin Shield. For the list of Amazon
+	// Web Services Regions that you can specify, and for help choosing the best Region
+	// for your origin, see Choosing the Amazon Web Services Region for Origin Shield
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/origin-shield.html#choose-origin-shield-region)
 	// in the Amazon CloudFront Developer Guide.
 	OriginShieldRegion *string
@@ -3659,6 +3672,558 @@ type RealtimeMetricsSubscriptionConfig struct {
 	noSmithyDocumentSerde
 }
 
+// A response headers policy. A response headers policy contains information about
+// a set of HTTP response headers and their values. After you create a response
+// headers policy, you can use its ID to attach it to one or more cache behaviors
+// in a CloudFront distribution. When it’s attached to a cache behavior, CloudFront
+// adds the headers in the policy to HTTP responses that it sends for requests that
+// match the cache behavior. For more information, see Adding HTTP headers to
+// CloudFront responses
+// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/adding-response-headers.html)
+// in the Amazon CloudFront Developer Guide.
+type ResponseHeadersPolicy struct {
+
+	// The identifier for the response headers policy.
+	//
+	// This member is required.
+	Id *string
+
+	// The date and time when the response headers policy was last modified.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// A response headers policy configuration. A response headers policy contains
+	// information about a set of HTTP response headers and their values. CloudFront
+	// adds the headers in the policy to HTTP responses that it sends for requests that
+	// match a cache behavior that’s associated with the policy.
+	//
+	// This member is required.
+	ResponseHeadersPolicyConfig *ResponseHeadersPolicyConfig
+
+	noSmithyDocumentSerde
+}
+
+// A list of HTTP header names that CloudFront includes as values for the
+// Access-Control-Allow-Headers HTTP response header. For more information about
+// the Access-Control-Allow-Headers HTTP response header, see
+// Access-Control-Allow-Headers
+// (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers)
+// in the MDN Web Docs.
+type ResponseHeadersPolicyAccessControlAllowHeaders struct {
+
+	// The list of HTTP header names. You can specify * to allow all headers.
+	//
+	// This member is required.
+	Items []string
+
+	// The number of HTTP header names in the list.
+	//
+	// This member is required.
+	Quantity *int32
+
+	noSmithyDocumentSerde
+}
+
+// A list of HTTP methods that CloudFront includes as values for the
+// Access-Control-Allow-Methods HTTP response header. For more information about
+// the Access-Control-Allow-Methods HTTP response header, see
+// Access-Control-Allow-Methods
+// (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Methods)
+// in the MDN Web Docs.
+type ResponseHeadersPolicyAccessControlAllowMethods struct {
+
+	// The list of HTTP methods. Valid values are:
+	//
+	// * GET
+	//
+	// * DELETE
+	//
+	// * HEAD
+	//
+	// *
+	// OPTIONS
+	//
+	// * PATCH
+	//
+	// * POST
+	//
+	// * PUT
+	//
+	// * ALL
+	//
+	// ALL is a special value that includes all
+	// of the listed HTTP methods.
+	//
+	// This member is required.
+	Items []ResponseHeadersPolicyAccessControlAllowMethodsValues
+
+	// The number of HTTP methods in the list.
+	//
+	// This member is required.
+	Quantity *int32
+
+	noSmithyDocumentSerde
+}
+
+// A list of origins (domain names) that CloudFront can use as the value for the
+// Access-Control-Allow-Origin HTTP response header. For more information about the
+// Access-Control-Allow-Origin HTTP response header, see
+// Access-Control-Allow-Origin
+// (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
+// in the MDN Web Docs.
+type ResponseHeadersPolicyAccessControlAllowOrigins struct {
+
+	// The list of origins (domain names). You can specify * to allow all origins.
+	//
+	// This member is required.
+	Items []string
+
+	// The number of origins in the list.
+	//
+	// This member is required.
+	Quantity *int32
+
+	noSmithyDocumentSerde
+}
+
+// A list of HTTP headers that CloudFront includes as values for the
+// Access-Control-Expose-Headers HTTP response header. For more information about
+// the Access-Control-Expose-Headers HTTP response header, see
+// Access-Control-Expose-Headers
+// (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Expose-Headers)
+// in the MDN Web Docs.
+type ResponseHeadersPolicyAccessControlExposeHeaders struct {
+
+	// The number of HTTP headers in the list.
+	//
+	// This member is required.
+	Quantity *int32
+
+	// The list of HTTP headers. You can specify * to expose all headers.
+	Items []string
+
+	noSmithyDocumentSerde
+}
+
+// A response headers policy configuration. A response headers policy configuration
+// contains metadata about the response headers policy, and configurations for sets
+// of HTTP response headers and their values. CloudFront adds the headers in the
+// policy to HTTP responses that it sends for requests that match a cache behavior
+// associated with the policy.
+type ResponseHeadersPolicyConfig struct {
+
+	// A name to identify the response headers policy. The name must be unique for
+	// response headers policies in this Amazon Web Services account.
+	//
+	// This member is required.
+	Name *string
+
+	// A comment to describe the response headers policy. The comment cannot be longer
+	// than 128 characters.
+	Comment *string
+
+	// A configuration for a set of HTTP response headers that are used for
+	// cross-origin resource sharing (CORS).
+	CorsConfig *ResponseHeadersPolicyCorsConfig
+
+	// A configuration for a set of custom HTTP response headers.
+	CustomHeadersConfig *ResponseHeadersPolicyCustomHeadersConfig
+
+	// A configuration for a set of security-related HTTP response headers.
+	SecurityHeadersConfig *ResponseHeadersPolicySecurityHeadersConfig
+
+	noSmithyDocumentSerde
+}
+
+// The policy directives and their values that CloudFront includes as values for
+// the Content-Security-Policy HTTP response header. For more information about the
+// Content-Security-Policy HTTP response header, see Content-Security-Policy
+// (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy)
+// in the MDN Web Docs.
+type ResponseHeadersPolicyContentSecurityPolicy struct {
+
+	// The policy directives and their values that CloudFront includes as values for
+	// the Content-Security-Policy HTTP response header.
+	//
+	// This member is required.
+	ContentSecurityPolicy *string
+
+	// A Boolean that determines whether CloudFront overrides the
+	// Content-Security-Policy HTTP response header received from the origin with the
+	// one specified in this response headers policy.
+	//
+	// This member is required.
+	Override *bool
+
+	noSmithyDocumentSerde
+}
+
+// Determines whether CloudFront includes the X-Content-Type-Options HTTP response
+// header with its value set to nosniff. For more information about the
+// X-Content-Type-Options HTTP response header, see X-Content-Type-Options
+// (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options)
+// in the MDN Web Docs.
+type ResponseHeadersPolicyContentTypeOptions struct {
+
+	// A Boolean that determines whether CloudFront overrides the
+	// X-Content-Type-Options HTTP response header received from the origin with the
+	// one specified in this response headers policy.
+	//
+	// This member is required.
+	Override *bool
+
+	noSmithyDocumentSerde
+}
+
+// A configuration for a set of HTTP response headers that are used for
+// cross-origin resource sharing (CORS). CloudFront adds these headers to HTTP
+// responses that it sends for CORS requests that match a cache behavior associated
+// with this response headers policy. For more information about CORS, see
+// Cross-Origin Resource Sharing (CORS)
+// (https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) in the MDN Web Docs.
+type ResponseHeadersPolicyCorsConfig struct {
+
+	// A Boolean that CloudFront uses as the value for the
+	// Access-Control-Allow-Credentials HTTP response header. For more information
+	// about the Access-Control-Allow-Credentials HTTP response header, see
+	// Access-Control-Allow-Credentials
+	// (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)
+	// in the MDN Web Docs.
+	//
+	// This member is required.
+	AccessControlAllowCredentials *bool
+
+	// A list of HTTP header names that CloudFront includes as values for the
+	// Access-Control-Allow-Headers HTTP response header. For more information about
+	// the Access-Control-Allow-Headers HTTP response header, see
+	// Access-Control-Allow-Headers
+	// (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers)
+	// in the MDN Web Docs.
+	//
+	// This member is required.
+	AccessControlAllowHeaders *ResponseHeadersPolicyAccessControlAllowHeaders
+
+	// A list of HTTP methods that CloudFront includes as values for the
+	// Access-Control-Allow-Methods HTTP response header. For more information about
+	// the Access-Control-Allow-Methods HTTP response header, see
+	// Access-Control-Allow-Methods
+	// (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Methods)
+	// in the MDN Web Docs.
+	//
+	// This member is required.
+	AccessControlAllowMethods *ResponseHeadersPolicyAccessControlAllowMethods
+
+	// A list of origins (domain names) that CloudFront can use as the value for the
+	// Access-Control-Allow-Origin HTTP response header. For more information about the
+	// Access-Control-Allow-Origin HTTP response header, see
+	// Access-Control-Allow-Origin
+	// (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
+	// in the MDN Web Docs.
+	//
+	// This member is required.
+	AccessControlAllowOrigins *ResponseHeadersPolicyAccessControlAllowOrigins
+
+	// A Boolean that determines whether CloudFront overrides HTTP response headers
+	// received from the origin with the ones specified in this response headers
+	// policy.
+	//
+	// This member is required.
+	OriginOverride *bool
+
+	// A list of HTTP headers that CloudFront includes as values for the
+	// Access-Control-Expose-Headers HTTP response header. For more information about
+	// the Access-Control-Expose-Headers HTTP response header, see
+	// Access-Control-Expose-Headers
+	// (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Expose-Headers)
+	// in the MDN Web Docs.
+	AccessControlExposeHeaders *ResponseHeadersPolicyAccessControlExposeHeaders
+
+	// A number that CloudFront uses as the value for the Access-Control-Max-Age HTTP
+	// response header. For more information about the Access-Control-Max-Age HTTP
+	// response header, see Access-Control-Max-Age
+	// (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Max-Age)
+	// in the MDN Web Docs.
+	AccessControlMaxAgeSec *int32
+
+	noSmithyDocumentSerde
+}
+
+// An HTTP response header name and its value. CloudFront includes this header in
+// HTTP responses that it sends for requests that match a cache behavior that’s
+// associated with this response headers policy.
+type ResponseHeadersPolicyCustomHeader struct {
+
+	// The HTTP response header name.
+	//
+	// This member is required.
+	Header *string
+
+	// A Boolean that determines whether CloudFront overrides a response header with
+	// the same name received from the origin with the header specified here.
+	//
+	// This member is required.
+	Override *bool
+
+	// The value for the HTTP response header.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// A list of HTTP response header names and their values. CloudFront includes these
+// headers in HTTP responses that it sends for requests that match a cache behavior
+// that’s associated with this response headers policy.
+type ResponseHeadersPolicyCustomHeadersConfig struct {
+
+	// The number of HTTP response headers in the list.
+	//
+	// This member is required.
+	Quantity *int32
+
+	// The list of HTTP response headers and their values.
+	Items []ResponseHeadersPolicyCustomHeader
+
+	noSmithyDocumentSerde
+}
+
+// Determines whether CloudFront includes the X-Frame-Options HTTP response header
+// and the header’s value. For more information about the X-Frame-Options HTTP
+// response header, see X-Frame-Options
+// (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options) in
+// the MDN Web Docs.
+type ResponseHeadersPolicyFrameOptions struct {
+
+	// The value of the X-Frame-Options HTTP response header. Valid values are DENY and
+	// SAMEORIGIN. For more information about these values, see X-Frame-Options
+	// (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options) in
+	// the MDN Web Docs.
+	//
+	// This member is required.
+	FrameOption FrameOptionsList
+
+	// A Boolean that determines whether CloudFront overrides the X-Frame-Options HTTP
+	// response header received from the origin with the one specified in this response
+	// headers policy.
+	//
+	// This member is required.
+	Override *bool
+
+	noSmithyDocumentSerde
+}
+
+// A list of response headers policies.
+type ResponseHeadersPolicyList struct {
+
+	// The maximum number of response headers policies requested.
+	//
+	// This member is required.
+	MaxItems *int32
+
+	// The number of response headers policies returned.
+	//
+	// This member is required.
+	Quantity *int32
+
+	// The response headers policies in the list.
+	Items []ResponseHeadersPolicySummary
+
+	// If there are more items in the list than are in this response, this element is
+	// present. It contains the value that you should use in the Marker field of a
+	// subsequent request to continue listing response headers policies where you left
+	// off.
+	NextMarker *string
+
+	noSmithyDocumentSerde
+}
+
+// Determines whether CloudFront includes the Referrer-Policy HTTP response header
+// and the header’s value. For more information about the Referrer-Policy HTTP
+// response header, see Referrer-Policy
+// (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy) in
+// the MDN Web Docs.
+type ResponseHeadersPolicyReferrerPolicy struct {
+
+	// A Boolean that determines whether CloudFront overrides the Referrer-Policy HTTP
+	// response header received from the origin with the one specified in this response
+	// headers policy.
+	//
+	// This member is required.
+	Override *bool
+
+	// The value of the Referrer-Policy HTTP response header. Valid values are:
+	//
+	// *
+	// no-referrer
+	//
+	// * no-referrer-when-downgrade
+	//
+	// * origin
+	//
+	// *
+	// origin-when-cross-origin
+	//
+	// * same-origin
+	//
+	// * strict-origin
+	//
+	// *
+	// strict-origin-when-cross-origin
+	//
+	// * unsafe-url
+	//
+	// For more information about these
+	// values, see Referrer-Policy
+	// (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy) in
+	// the MDN Web Docs.
+	//
+	// This member is required.
+	ReferrerPolicy ReferrerPolicyList
+
+	noSmithyDocumentSerde
+}
+
+// A configuration for a set of security-related HTTP response headers. CloudFront
+// adds these headers to HTTP responses that it sends for requests that match a
+// cache behavior associated with this response headers policy.
+type ResponseHeadersPolicySecurityHeadersConfig struct {
+
+	// The policy directives and their values that CloudFront includes as values for
+	// the Content-Security-Policy HTTP response header. For more information about the
+	// Content-Security-Policy HTTP response header, see Content-Security-Policy
+	// (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy)
+	// in the MDN Web Docs.
+	ContentSecurityPolicy *ResponseHeadersPolicyContentSecurityPolicy
+
+	// Determines whether CloudFront includes the X-Content-Type-Options HTTP response
+	// header with its value set to nosniff. For more information about the
+	// X-Content-Type-Options HTTP response header, see X-Content-Type-Options
+	// (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options)
+	// in the MDN Web Docs.
+	ContentTypeOptions *ResponseHeadersPolicyContentTypeOptions
+
+	// Determines whether CloudFront includes the X-Frame-Options HTTP response header
+	// and the header’s value. For more information about the X-Frame-Options HTTP
+	// response header, see X-Frame-Options
+	// (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options) in
+	// the MDN Web Docs.
+	FrameOptions *ResponseHeadersPolicyFrameOptions
+
+	// Determines whether CloudFront includes the Referrer-Policy HTTP response header
+	// and the header’s value. For more information about the Referrer-Policy HTTP
+	// response header, see Referrer-Policy
+	// (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy) in
+	// the MDN Web Docs.
+	ReferrerPolicy *ResponseHeadersPolicyReferrerPolicy
+
+	// Determines whether CloudFront includes the Strict-Transport-Security HTTP
+	// response header and the header’s value. For more information about the
+	// Strict-Transport-Security HTTP response header, see Strict-Transport-Security
+	// (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)
+	// in the MDN Web Docs.
+	StrictTransportSecurity *ResponseHeadersPolicyStrictTransportSecurity
+
+	// Determines whether CloudFront includes the X-XSS-Protection HTTP response header
+	// and the header’s value. For more information about the X-XSS-Protection HTTP
+	// response header, see X-XSS-Protection
+	// (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection) in
+	// the MDN Web Docs.
+	XSSProtection *ResponseHeadersPolicyXSSProtection
+
+	noSmithyDocumentSerde
+}
+
+// Determines whether CloudFront includes the Strict-Transport-Security HTTP
+// response header and the header’s value. For more information about the
+// Strict-Transport-Security HTTP response header, see Strict-Transport-Security
+// (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)
+// in the MDN Web Docs.
+type ResponseHeadersPolicyStrictTransportSecurity struct {
+
+	// A number that CloudFront uses as the value for the max-age directive in the
+	// Strict-Transport-Security HTTP response header.
+	//
+	// This member is required.
+	AccessControlMaxAgeSec *int32
+
+	// A Boolean that determines whether CloudFront overrides the
+	// Strict-Transport-Security HTTP response header received from the origin with the
+	// one specified in this response headers policy.
+	//
+	// This member is required.
+	Override *bool
+
+	// A Boolean that determines whether CloudFront includes the includeSubDomains
+	// directive in the Strict-Transport-Security HTTP response header.
+	IncludeSubdomains *bool
+
+	// A Boolean that determines whether CloudFront includes the preload directive in
+	// the Strict-Transport-Security HTTP response header.
+	Preload *bool
+
+	noSmithyDocumentSerde
+}
+
+// Contains a response headers policy.
+type ResponseHeadersPolicySummary struct {
+
+	// The response headers policy.
+	//
+	// This member is required.
+	ResponseHeadersPolicy *ResponseHeadersPolicy
+
+	// The type of response headers policy, either managed (created by Amazon Web
+	// Services) or custom (created in this Amazon Web Services account).
+	//
+	// This member is required.
+	Type ResponseHeadersPolicyType
+
+	noSmithyDocumentSerde
+}
+
+// Determines whether CloudFront includes the X-XSS-Protection HTTP response header
+// and the header’s value. For more information about the X-XSS-Protection HTTP
+// response header, see X-XSS-Protection
+// (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection) in
+// the MDN Web Docs.
+type ResponseHeadersPolicyXSSProtection struct {
+
+	// A Boolean that determines whether CloudFront overrides the X-XSS-Protection HTTP
+	// response header received from the origin with the one specified in this response
+	// headers policy.
+	//
+	// This member is required.
+	Override *bool
+
+	// A Boolean that determines the value of the X-XSS-Protection HTTP response
+	// header. When this setting is true, the value of the X-XSS-Protection header is
+	// 1. When this setting is false, the value of the X-XSS-Protection header is 0.
+	// For more information about these settings, see X-XSS-Protection
+	// (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection) in
+	// the MDN Web Docs.
+	//
+	// This member is required.
+	Protection *bool
+
+	// A Boolean that determines whether CloudFront includes the mode=block directive
+	// in the X-XSS-Protection header. For more information about this directive, see
+	// X-XSS-Protection
+	// (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection) in
+	// the MDN Web Docs.
+	ModeBlock *bool
+
+	// A reporting URI, which CloudFront uses as the value of the report directive in
+	// the X-XSS-Protection header. You cannot specify a ReportUri when ModeBlock is
+	// true. For more information about using a reporting URL, see X-XSS-Protection
+	// (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection) in
+	// the MDN Web Docs.
+	ReportUri *string
+
+	noSmithyDocumentSerde
+}
+
 // A complex type that identifies ways in which you want to restrict distribution
 // of your content.
 type Restrictions struct {
@@ -3727,14 +4292,15 @@ type S3OriginConfig struct {
 	noSmithyDocumentSerde
 }
 
-// A list of accounts and the active CloudFront key pairs in each account that
-// CloudFront can use to verify the signatures of signed URLs and signed cookies.
+// A list of Amazon Web Services accounts and the active CloudFront key pairs in
+// each account that CloudFront can use to verify the signatures of signed URLs and
+// signed cookies.
 type Signer struct {
 
-	// An account number that contains active CloudFront key pairs that CloudFront can
-	// use to verify the signatures of signed URLs and signed cookies. If the account
-	// that owns the key pairs is the same account that owns the CloudFront
-	// distribution, the value of this field is self.
+	// An Amazon Web Services account number that contains active CloudFront key pairs
+	// that CloudFront can use to verify the signatures of signed URLs and signed
+	// cookies. If the Amazon Web Services account that owns the key pairs is the same
+	// account that owns the CloudFront distribution, the value of this field is self.
 	AwsAccountNumber *string
 
 	// A list of CloudFront key pair identifiers.
@@ -3766,17 +4332,18 @@ type StreamingDistribution struct {
 
 	// The ARN (Amazon Resource Name) for the distribution. For example:
 	// arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5, where
-	// 123456789012 is your account ID.
+	// 123456789012 is your Amazon Web Services account ID.
 	//
 	// This member is required.
 	ARN *string
 
-	// A complex type that lists the accounts, if any, that you included in the
-	// TrustedSigners complex type for this distribution. These are the accounts that
-	// you want to allow to create signed URLs for private content. The Signer complex
-	// type lists the account number of the trusted signer or self if the signer is the
-	// account that created the distribution. The Signer element also includes the IDs
-	// of any active CloudFront key pairs that are associated with the trusted signer's
+	// A complex type that lists the Amazon Web Services accounts, if any, that you
+	// included in the TrustedSigners complex type for this distribution. These are the
+	// accounts that you want to allow to create signed URLs for private content. The
+	// Signer complex type lists the Amazon Web Services account number of the trusted
+	// signer or self if the signer is the Amazon Web Services account that created the
+	// distribution. The Signer element also includes the IDs of any active CloudFront
+	// key pairs that are associated with the trusted signer's Amazon Web Services
 	// account. If no KeyPairId element appears for a Signer, that signer can't create
 	// signed URLs. For more information, see Serving Private Content through
 	// CloudFront
@@ -3844,11 +4411,11 @@ type StreamingDistributionConfig struct {
 	// This member is required.
 	S3Origin *S3Origin
 
-	// A complex type that specifies any accounts that you want to permit to create
-	// signed URLs for private content. If you want the distribution to use signed
-	// URLs, include this element; if you want the distribution to use public URLs,
-	// remove this element. For more information, see Serving Private Content through
-	// CloudFront
+	// A complex type that specifies any Amazon Web Services accounts that you want to
+	// permit to create signed URLs for private content. If you want the distribution
+	// to use signed URLs, include this element; if you want the distribution to use
+	// public URLs, remove this element. For more information, see Serving Private
+	// Content through CloudFront
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
 	// in the Amazon CloudFront Developer Guide.
 	//
@@ -3907,13 +4474,14 @@ type StreamingDistributionList struct {
 	// This member is required.
 	MaxItems *int32
 
-	// The number of streaming distributions that were created by the current account.
+	// The number of streaming distributions that were created by the current Amazon
+	// Web Services account.
 	//
 	// This member is required.
 	Quantity *int32
 
 	// A complex type that contains one StreamingDistributionSummary element for each
-	// distribution that was created by the current account.
+	// distribution that was created by the current Amazon Web Services account.
 	Items []StreamingDistributionSummary
 
 	// If IsTruncated is true, this element is present and contains the value you can
@@ -3929,7 +4497,7 @@ type StreamingDistributionSummary struct {
 
 	// The ARN (Amazon Resource Name) for the streaming distribution. For example:
 	// arn:aws:cloudfront::123456789012:streaming-distribution/EDFDVBD632BHDS5, where
-	// 123456789012 is your account ID.
+	// 123456789012 is your Amazon Web Services account ID.
 	//
 	// This member is required.
 	ARN *string
@@ -3985,17 +4553,17 @@ type StreamingDistributionSummary struct {
 	// This member is required.
 	Status *string
 
-	// A complex type that specifies the accounts, if any, that you want to allow to
-	// create signed URLs for private content. If you want to require signed URLs in
-	// requests for objects in the target origin that match the PathPattern for this
-	// cache behavior, specify true for Enabled, and specify the applicable values for
-	// Quantity and Items.If you don't want to require signed URLs in requests for
-	// objects that match PathPattern, specify false for Enabled and 0 for Quantity.
-	// Omit Items. To add, change, or remove one or more trusted signers, change
-	// Enabled to true (if it's currently false), change Quantity as applicable, and
-	// specify all of the trusted signers that you want to include in the updated
-	// distribution. For more information, see Serving Private Content through
-	// CloudFront
+	// A complex type that specifies the Amazon Web Services accounts, if any, that you
+	// want to allow to create signed URLs for private content. If you want to require
+	// signed URLs in requests for objects in the target origin that match the
+	// PathPattern for this cache behavior, specify true for Enabled, and specify the
+	// applicable values for Quantity and Items.If you don't want to require signed
+	// URLs in requests for objects that match PathPattern, specify false for Enabled
+	// and 0 for Quantity. Omit Items. To add, change, or remove one or more trusted
+	// signers, change Enabled to true (if it's currently false), change Quantity as
+	// applicable, and specify all of the trusted signers that you want to include in
+	// the updated distribution. For more information, see Serving Private Content
+	// through CloudFront
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
 	// in the Amazon CloudFront Developer Guide.
 	//
@@ -4122,23 +4690,23 @@ type TrustedKeyGroups struct {
 	noSmithyDocumentSerde
 }
 
-// A list of accounts whose public keys CloudFront can use to verify the signatures
-// of signed URLs and signed cookies.
+// A list of Amazon Web Services accounts whose public keys CloudFront can use to
+// verify the signatures of signed URLs and signed cookies.
 type TrustedSigners struct {
 
-	// This field is true if any of the accounts have public keys that CloudFront can
-	// use to verify the signatures of signed URLs and signed cookies. If not, this
-	// field is false.
+	// This field is true if any of the Amazon Web Services accounts have public keys
+	// that CloudFront can use to verify the signatures of signed URLs and signed
+	// cookies. If not, this field is false.
 	//
 	// This member is required.
 	Enabled *bool
 
-	// The number of accounts in the list.
+	// The number of Amazon Web Services accounts in the list.
 	//
 	// This member is required.
 	Quantity *int32
 
-	// A list of account identifiers.
+	// A list of Amazon Web Services account identifiers.
 	Items []string
 
 	noSmithyDocumentSerde

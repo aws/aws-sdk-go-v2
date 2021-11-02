@@ -1172,6 +1172,83 @@ func validateCustomizedMetricSpecification(v *types.CustomizedMetricSpecificatio
 	}
 }
 
+func validateDesiredConfiguration(v *types.DesiredConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DesiredConfiguration"}
+	if v.MixedInstancesPolicy != nil {
+		if err := validateMixedInstancesPolicy(v.MixedInstancesPolicy); err != nil {
+			invalidParams.AddNested("MixedInstancesPolicy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInstanceRequirements(v *types.InstanceRequirements) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InstanceRequirements"}
+	if v.VCpuCount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VCpuCount"))
+	} else if v.VCpuCount != nil {
+		if err := validateVCpuCountRequest(v.VCpuCount); err != nil {
+			invalidParams.AddNested("VCpuCount", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MemoryMiB == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemoryMiB"))
+	} else if v.MemoryMiB != nil {
+		if err := validateMemoryMiBRequest(v.MemoryMiB); err != nil {
+			invalidParams.AddNested("MemoryMiB", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLaunchTemplate(v *types.LaunchTemplate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LaunchTemplate"}
+	if v.Overrides != nil {
+		if err := validateOverrides(v.Overrides); err != nil {
+			invalidParams.AddNested("Overrides", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLaunchTemplateOverrides(v *types.LaunchTemplateOverrides) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LaunchTemplateOverrides"}
+	if v.InstanceRequirements != nil {
+		if err := validateInstanceRequirements(v.InstanceRequirements); err != nil {
+			invalidParams.AddNested("InstanceRequirements", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateLifecycleHookSpecification(v *types.LifecycleHookSpecification) error {
 	if v == nil {
 		return nil
@@ -1207,6 +1284,21 @@ func validateLifecycleHookSpecifications(v []types.LifecycleHookSpecification) e
 	}
 }
 
+func validateMemoryMiBRequest(v *types.MemoryMiBRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MemoryMiBRequest"}
+	if v.Min == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Min"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMetricDimension(v *types.MetricDimension) error {
 	if v == nil {
 		return nil
@@ -1232,6 +1324,40 @@ func validateMetricDimensions(v []types.MetricDimension) error {
 	invalidParams := smithy.InvalidParamsError{Context: "MetricDimensions"}
 	for i := range v {
 		if err := validateMetricDimension(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMixedInstancesPolicy(v *types.MixedInstancesPolicy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MixedInstancesPolicy"}
+	if v.LaunchTemplate != nil {
+		if err := validateLaunchTemplate(v.LaunchTemplate); err != nil {
+			invalidParams.AddNested("LaunchTemplate", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOverrides(v []types.LaunchTemplateOverrides) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Overrides"}
+	for i := range v {
+		if err := validateLaunchTemplateOverrides(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1489,6 +1615,21 @@ func validateTargetTrackingConfiguration(v *types.TargetTrackingConfiguration) e
 	}
 }
 
+func validateVCpuCountRequest(v *types.VCpuCountRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VCpuCountRequest"}
+	if v.Min == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Min"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAttachInstancesInput(v *AttachInstancesInput) error {
 	if v == nil {
 		return nil
@@ -1623,6 +1764,11 @@ func validateOpCreateAutoScalingGroupInput(v *CreateAutoScalingGroupInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "CreateAutoScalingGroupInput"}
 	if v.AutoScalingGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AutoScalingGroupName"))
+	}
+	if v.MixedInstancesPolicy != nil {
+		if err := validateMixedInstancesPolicy(v.MixedInstancesPolicy); err != nil {
+			invalidParams.AddNested("MixedInstancesPolicy", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.MinSize == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MinSize"))
@@ -2256,6 +2402,11 @@ func validateOpStartInstanceRefreshInput(v *StartInstanceRefreshInput) error {
 	if v.AutoScalingGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AutoScalingGroupName"))
 	}
+	if v.DesiredConfiguration != nil {
+		if err := validateDesiredConfiguration(v.DesiredConfiguration); err != nil {
+			invalidParams.AddNested("DesiredConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2303,6 +2454,11 @@ func validateOpUpdateAutoScalingGroupInput(v *UpdateAutoScalingGroupInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateAutoScalingGroupInput"}
 	if v.AutoScalingGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AutoScalingGroupName"))
+	}
+	if v.MixedInstancesPolicy != nil {
+		if err := validateMixedInstancesPolicy(v.MixedInstancesPolicy); err != nil {
+			invalidParams.AddNested("MixedInstancesPolicy", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

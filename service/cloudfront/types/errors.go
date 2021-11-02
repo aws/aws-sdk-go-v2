@@ -327,9 +327,9 @@ func (e *FieldLevelEncryptionProfileSizeExceeded) ErrorFault() smithy.ErrorFault
 	return smithy.FaultClient
 }
 
-// A function with the same name already exists in this account. To create a
-// function, you must provide a unique name. To update an existing function, use
-// UpdateFunction.
+// A function with the same name already exists in this Amazon Web Services
+// account. To create a function, you must provide a unique name. To update an
+// existing function, use UpdateFunction.
 type FunctionAlreadyExists struct {
 	Message *string
 
@@ -1215,6 +1215,25 @@ func (e *NoSuchResource) ErrorMessage() string {
 func (e *NoSuchResource) ErrorCode() string             { return "NoSuchResource" }
 func (e *NoSuchResource) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The response headers policy does not exist.
+type NoSuchResponseHeadersPolicy struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *NoSuchResponseHeadersPolicy) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *NoSuchResponseHeadersPolicy) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *NoSuchResponseHeadersPolicy) ErrorCode() string             { return "NoSuchResponseHeadersPolicy" }
+func (e *NoSuchResponseHeadersPolicy) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The specified streaming distribution does not exist.
 type NoSuchStreamingDistribution struct {
 	Message *string
@@ -1394,7 +1413,8 @@ func (e *RealtimeLogConfigInUse) ErrorMessage() string {
 func (e *RealtimeLogConfigInUse) ErrorCode() string             { return "RealtimeLogConfigInUse" }
 func (e *RealtimeLogConfigInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified real-time log configuration belongs to a different account.
+// The specified real-time log configuration belongs to a different Amazon Web
+// Services account.
 type RealtimeLogConfigOwnerMismatch struct {
 	Message *string
 
@@ -1431,6 +1451,51 @@ func (e *ResourceInUse) ErrorMessage() string {
 }
 func (e *ResourceInUse) ErrorCode() string             { return "ResourceInUse" }
 func (e *ResourceInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// A response headers policy with this name already exists. You must provide a
+// unique name. To modify an existing response headers policy, use
+// UpdateResponseHeadersPolicy.
+type ResponseHeadersPolicyAlreadyExists struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ResponseHeadersPolicyAlreadyExists) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResponseHeadersPolicyAlreadyExists) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResponseHeadersPolicyAlreadyExists) ErrorCode() string {
+	return "ResponseHeadersPolicyAlreadyExists"
+}
+func (e *ResponseHeadersPolicyAlreadyExists) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// Cannot delete the response headers policy because it is attached to one or more
+// cache behaviors in a CloudFront distribution.
+type ResponseHeadersPolicyInUse struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ResponseHeadersPolicyInUse) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResponseHeadersPolicyInUse) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResponseHeadersPolicyInUse) ErrorCode() string             { return "ResponseHeadersPolicyInUse" }
+func (e *ResponseHeadersPolicyInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The caller reference you attempted to create the streaming distribution with is
 // associated with another distribution
@@ -1516,8 +1581,8 @@ func (e *TooManyCacheBehaviors) ErrorMessage() string {
 func (e *TooManyCacheBehaviors) ErrorCode() string             { return "TooManyCacheBehaviors" }
 func (e *TooManyCacheBehaviors) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You have reached the maximum number of cache policies for this account. For more
-// information, see Quotas
+// You have reached the maximum number of cache policies for this Amazon Web
+// Services account. For more information, see Quotas
 // (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html)
 // (formerly known as limits) in the Amazon CloudFront Developer Guide.
 type TooManyCachePolicies struct {
@@ -1646,6 +1711,32 @@ func (e *TooManyCookiesInOriginRequestPolicy) ErrorCode() string {
 	return "TooManyCookiesInOriginRequestPolicy"
 }
 func (e *TooManyCookiesInOriginRequestPolicy) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// The number of custom headers in the response headers policy exceeds the maximum.
+// For more information, see Quotas
+// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html)
+// (formerly known as limits) in the Amazon CloudFront Developer Guide.
+type TooManyCustomHeadersInResponseHeadersPolicy struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *TooManyCustomHeadersInResponseHeadersPolicy) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TooManyCustomHeadersInResponseHeadersPolicy) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TooManyCustomHeadersInResponseHeadersPolicy) ErrorCode() string {
+	return "TooManyCustomHeadersInResponseHeadersPolicy"
+}
+func (e *TooManyCustomHeadersInResponseHeadersPolicy) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
@@ -1787,6 +1878,32 @@ func (e *TooManyDistributionsAssociatedToOriginRequestPolicy) ErrorCode() string
 	return "TooManyDistributionsAssociatedToOriginRequestPolicy"
 }
 func (e *TooManyDistributionsAssociatedToOriginRequestPolicy) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// The maximum number of distributions have been associated with the specified
+// response headers policy. For more information, see Quotas
+// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html)
+// (formerly known as limits) in the Amazon CloudFront Developer Guide.
+type TooManyDistributionsAssociatedToResponseHeadersPolicy struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *TooManyDistributionsAssociatedToResponseHeadersPolicy) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TooManyDistributionsAssociatedToResponseHeadersPolicy) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TooManyDistributionsAssociatedToResponseHeadersPolicy) ErrorCode() string {
+	return "TooManyDistributionsAssociatedToResponseHeadersPolicy"
+}
+func (e *TooManyDistributionsAssociatedToResponseHeadersPolicy) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
@@ -2029,8 +2146,8 @@ func (e *TooManyFunctionAssociations) ErrorMessage() string {
 func (e *TooManyFunctionAssociations) ErrorCode() string             { return "TooManyFunctionAssociations" }
 func (e *TooManyFunctionAssociations) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You have reached the maximum number of CloudFront functions for this account.
-// For more information, see Quotas
+// You have reached the maximum number of CloudFront functions for this Amazon Web
+// Services account. For more information, see Quotas
 // (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html)
 // (formerly known as limits) in the Amazon CloudFront Developer Guide.
 type TooManyFunctions struct {
@@ -2140,8 +2257,8 @@ func (e *TooManyInvalidationsInProgress) ErrorMessage() string {
 func (e *TooManyInvalidationsInProgress) ErrorCode() string             { return "TooManyInvalidationsInProgress" }
 func (e *TooManyInvalidationsInProgress) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You have reached the maximum number of key groups for this account. For more
-// information, see Quotas
+// You have reached the maximum number of key groups for this Amazon Web Services
+// account. For more information, see Quotas
 // (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html)
 // (formerly known as limits) in the Amazon CloudFront Developer Guide.
 type TooManyKeyGroups struct {
@@ -2253,8 +2370,8 @@ func (e *TooManyOriginGroupsPerDistribution) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// You have reached the maximum number of origin request policies for this account.
-// For more information, see Quotas
+// You have reached the maximum number of origin request policies for this Amazon
+// Web Services account. For more information, see Quotas
 // (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html)
 // (formerly known as limits) in the Amazon CloudFront Developer Guide.
 type TooManyOriginRequestPolicies struct {
@@ -2406,7 +2523,7 @@ func (e *TooManyQueryStringsInOriginRequestPolicy) ErrorFault() smithy.ErrorFaul
 }
 
 // You have reached the maximum number of real-time log configurations for this
-// account. For more information, see Quotas
+// Amazon Web Services account. For more information, see Quotas
 // (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html)
 // (formerly known as limits) in the Amazon CloudFront Developer Guide.
 type TooManyRealtimeLogConfigs struct {
@@ -2426,6 +2543,28 @@ func (e *TooManyRealtimeLogConfigs) ErrorMessage() string {
 }
 func (e *TooManyRealtimeLogConfigs) ErrorCode() string             { return "TooManyRealtimeLogConfigs" }
 func (e *TooManyRealtimeLogConfigs) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// You have reached the maximum number of response headers policies for this Amazon
+// Web Services account. For more information, see Quotas
+// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html)
+// (formerly known as limits) in the Amazon CloudFront Developer Guide.
+type TooManyResponseHeadersPolicies struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *TooManyResponseHeadersPolicies) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TooManyResponseHeadersPolicies) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TooManyResponseHeadersPolicies) ErrorCode() string             { return "TooManyResponseHeadersPolicies" }
+func (e *TooManyResponseHeadersPolicies) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Your request contains more CNAMEs than are allowed per distribution.
 type TooManyStreamingDistributionCNAMEs struct {

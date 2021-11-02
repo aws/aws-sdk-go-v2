@@ -67,6 +67,24 @@ func (ConfigurationEventStatus) Values() []ConfigurationEventStatus {
 	}
 }
 
+type DiscoveryType string
+
+// Enum values for DiscoveryType
+const (
+	DiscoveryTypeResourceGroupBased DiscoveryType = "RESOURCE_GROUP_BASED"
+	DiscoveryTypeAccountBased       DiscoveryType = "ACCOUNT_BASED"
+)
+
+// Values returns all known values for DiscoveryType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DiscoveryType) Values() []DiscoveryType {
+	return []DiscoveryType{
+		"RESOURCE_GROUP_BASED",
+		"ACCOUNT_BASED",
+	}
+}
+
 type FeedbackKey string
 
 // Enum values for FeedbackKey
@@ -165,9 +183,10 @@ type Status string
 
 // Enum values for Status
 const (
-	StatusIgnore   Status = "IGNORE"
-	StatusResolved Status = "RESOLVED"
-	StatusPending  Status = "PENDING"
+	StatusIgnore    Status = "IGNORE"
+	StatusResolved  Status = "RESOLVED"
+	StatusPending   Status = "PENDING"
+	StatusRecurring Status = "RECURRING"
 )
 
 // Values returns all known values for Status. Note that this can be expanded in
@@ -178,6 +197,7 @@ func (Status) Values() []Status {
 		"IGNORE",
 		"RESOLVED",
 		"PENDING",
+		"RECURRING",
 	}
 }
 
@@ -197,6 +217,11 @@ const (
 	TierPostgresql                         Tier = "POSTGRESQL"
 	TierJavaJmx                            Tier = "JAVA_JMX"
 	TierOracle                             Tier = "ORACLE"
+	TierSapHana                            Tier = "SAP_HANA"
+	TierSapHanaMultiNode                   Tier = "SAP_HANA_MULTI_NODE"
+	TierSapHanaSingleNode                  Tier = "SAP_HANA_SINGLE_NODE"
+	TierSapHanaHighAvailability            Tier = "SAP_HANA_HIGH_AVAILABILITY"
+	TierSqlServerFailoverClusterInstance   Tier = "SQL_SERVER_FAILOVER_CLUSTER_INSTANCE"
 )
 
 // Values returns all known values for Tier. Note that this can be expanded in the
@@ -216,5 +241,10 @@ func (Tier) Values() []Tier {
 		"POSTGRESQL",
 		"JAVA_JMX",
 		"ORACLE",
+		"SAP_HANA",
+		"SAP_HANA_MULTI_NODE",
+		"SAP_HANA_SINGLE_NODE",
+		"SAP_HANA_HIGH_AVAILABILITY",
+		"SQL_SERVER_FAILOVER_CLUSTER_INSTANCE",
 	}
 }

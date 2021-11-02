@@ -13,8 +13,8 @@ import (
 
 // Starts the asynchronous analysis of an input document for relationships between
 // detected items such as key-value pairs, tables, and selection elements.
-// StartDocumentAnalysis can analyze text in documents that are in JPEG, PNG, and
-// PDF format. The documents are stored in an Amazon S3 bucket. Use
+// StartDocumentAnalysis can analyze text in documents that are in JPEG, PNG, TIFF,
+// and PDF format. The documents are stored in an Amazon S3 bucket. Use
 // DocumentLocation to specify the bucket name and file name of the document.
 // StartDocumentAnalysis returns a job identifier (JobId) that you use to get the
 // results of the operation. When text analysis is finished, Amazon Textract

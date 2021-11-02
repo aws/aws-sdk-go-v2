@@ -74,6 +74,24 @@
         },
         "com.amazonaws.ecs#AmazonEC2ContainerServiceV20141113": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "ECS",
+                    "arnNamespace": "ecs",
+                    "cloudFormationName": "ECS",
+                    "cloudTrailEventSource": "ecs.amazonaws.com",
+                    "endpointPrefix": "ecs"
+                },
+                "aws.auth#sigv4": {
+                    "name": "ecs"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<fullname>Amazon Elastic Container Service</fullname>\n\t\t       <p>Amazon Elastic Container Service (Amazon ECS) is a highly scalable, fast, container management service that makes\n\t\t\tit easy to run, stop, and manage Docker containers on a cluster. You can host your\n\t\t\tcluster on a serverless infrastructure that is managed by Amazon ECS by launching your\n\t\t\tservices or tasks on Fargate. For more control, you can host your tasks on a cluster\n\t\t\tof Amazon Elastic Compute Cloud (Amazon EC2) instances that you manage.</p>\n\t\t       <p>Amazon ECS makes it easy to launch and stop container-based applications with simple API\n\t\t\tcalls, allows you to get the state of your cluster from a centralized service, and gives\n\t\t\tyou access to many familiar Amazon EC2 features.</p>\n\t\t       <p>You can use Amazon ECS to schedule the placement of containers across your cluster based on\n\t\t\tyour resource needs, isolation policies, and availability requirements. Amazon ECS eliminates\n\t\t\tthe need for you to operate your own cluster management and configuration management\n\t\t\tsystems or worry about scaling your management infrastructure.</p>",
+                "smithy.api#title": "Amazon EC2 Container Service",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://ecs.amazonaws.com/doc/2014-11-13/"
+                }
+            },
             "version": "2014-11-13",
             "operations": [
                 {
@@ -232,25 +250,7 @@
                 {
                     "target": "com.amazonaws.ecs#UpdateTaskSet"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "ECS",
-                    "arnNamespace": "ecs",
-                    "cloudFormationName": "ECS",
-                    "cloudTrailEventSource": "ecs.amazonaws.com",
-                    "endpointPrefix": "ecs"
-                },
-                "aws.auth#sigv4": {
-                    "name": "ecs"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>Amazon Elastic Container Service</fullname>\n\t\t       <p>Amazon Elastic Container Service (Amazon ECS) is a highly scalable, fast, container management service that makes\n\t\t\tit easy to run, stop, and manage Docker containers on a cluster. You can host your\n\t\t\tcluster on a serverless infrastructure that is managed by Amazon ECS by launching your\n\t\t\tservices or tasks on Fargate. For more control, you can host your tasks on a cluster\n\t\t\tof Amazon Elastic Compute Cloud (Amazon EC2) instances that you manage.</p>\n\t\t       <p>Amazon ECS makes it easy to launch and stop container-based applications with simple API\n\t\t\tcalls, allows you to get the state of your cluster from a centralized service, and gives\n\t\t\tyou access to many familiar Amazon EC2 features.</p>\n\t\t       <p>You can use Amazon ECS to schedule the placement of containers across your cluster based on\n\t\t\tyour resource needs, isolation policies, and availability requirements. Amazon ECS eliminates\n\t\t\tthe need for you to operate your own cluster management and configuration management\n\t\t\tsystems or worry about scaling your management infrastructure.</p>",
-                "smithy.api#title": "Amazon EC2 Container Service",
-                "smithy.api#xmlNamespace": {
-                    "uri": "http://ecs.amazonaws.com/doc/2014-11-13/"
-                }
-            }
+            ]
         },
         "com.amazonaws.ecs#AssignPublicIp": {
             "type": "string",
@@ -489,6 +489,21 @@
             "type": "integer",
             "traits": {
                 "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.ecs#CPUArchitecture": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "X86_64",
+                        "name": "X86_64"
+                    },
+                    {
+                        "value": "ARM64",
+                        "name": "ARM64"
+                    }
+                ]
             }
         },
         "com.amazonaws.ecs#CapacityProvider": {
@@ -1190,19 +1205,19 @@
                 "dependsOn": {
                     "target": "com.amazonaws.ecs#ContainerDependencies",
                     "traits": {
-                        "smithy.api#documentation": "<p>The dependencies defined for container startup and shutdown. A container can contain\n\t\t\tmultiple dependencies. When a dependency is defined for container startup, for container\n\t\t\tshutdown it is reversed.</p>\n\t\t       <p>For tasks using the EC2 launch type, the container instances require at\n\t\t\tleast version 1.26.0 of the container agent to enable container dependencies. However,\n\t\t\twe recommend using the latest container agent version. For information about checking\n\t\t\tyour agent version and updating to the latest version, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html\">Updating the Amazon ECS\n\t\t\t\tContainer Agent</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. If you are\n\t\t\tusing an Amazon ECS-optimized Linux AMI, your instance needs at least version 1.26.0-1 of the\n\t\t\t\t<code>ecs-init</code> package. If your container instances are launched from version\n\t\t\t\t<code>20190301</code> or later, then they contain the required versions of the\n\t\t\tcontainer agent and <code>ecs-init</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html\">Amazon ECS-optimized Linux AMI</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n\t\t       <p>For tasks using the Fargate launch type, the task or service requires\n\t\t\tplatform version <code>1.3.0</code> or later.</p>"
+                        "smithy.api#documentation": "<p>The dependencies defined for container startup and shutdown. A container can contain\n\t\t\tmultiple dependencies. When a dependency is defined for container startup, for container\n\t\t\tshutdown it is reversed.</p>\n\t\t       <p>For tasks using the EC2 launch type, the container instances require at\n\t\t\tleast version 1.26.0 of the container agent to enable container dependencies. However,\n\t\t\twe recommend using the latest container agent version. For information about checking\n\t\t\tyour agent version and updating to the latest version, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html\">Updating the Amazon ECS\n\t\t\t\tContainer Agent</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. If you are\n\t\t\tusing an Amazon ECS-optimized Linux AMI, your instance needs at least version 1.26.0-1 of the\n\t\t\t\t<code>ecs-init</code> package. If your container instances are launched from version\n\t\t\t\t<code>20190301</code> or later, then they contain the required versions of the\n\t\t\tcontainer agent and <code>ecs-init</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html\">Amazon ECS-optimized Linux AMI</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n\t\t       <p>For tasks using the Fargate launch type, the task or service requires the followiwng platforms:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>Linux platform\n\t\t\t\t\tversion <code>1.3.0</code> or later.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>Windows platform\n\t\t\t\t\tversion <code>1.0.0</code> or later.</p>\n\t\t\t         </li>\n         </ul>"
                     }
                 },
                 "startTimeout": {
                     "target": "com.amazonaws.ecs#BoxedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>Time duration (in seconds) to wait before giving up on resolving dependencies for a\n\t\t\tcontainer. For example, you specify two containers in a task definition with containerA\n\t\t\thaving a dependency on containerB reaching a <code>COMPLETE</code>,\n\t\t\t<code>SUCCESS</code>, or <code>HEALTHY</code> status. If a <code>startTimeout</code>\n\t\t\tvalue is specified for containerB and it does not reach the desired status within that\n\t\t\ttime then containerA will give up and not start. This results in the task transitioning\n\t\t\tto a <code>STOPPED</code> state.</p>\n\t\t       <note>\n\t\t\t         <p>When the <code>ECS_CONTAINER_START_TIMEOUT</code> container agent configuration\n\t\t\t\tvariable is used, it is enforced indendently from this start timeout value.</p>\n\t\t       </note>\n\t\t       <p>For tasks using the Fargate launch type, this parameter requires that\n\t\t\tthe task or service uses platform version 1.3.0 or later.</p>\n\t\t       <p>For tasks using the EC2 launch type, your container instances require at\n\t\t\tleast version <code>1.26.0</code> of the container agent to enable a container start\n\t\t\ttimeout value. However, we recommend using the latest container agent version. For\n\t\t\tinformation about checking your agent version and updating to the latest version, see\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html\">Updating the Amazon ECS\n\t\t\t\tContainer Agent</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. If you are\n\t\t\tusing an Amazon ECS-optimized Linux AMI, your instance needs at least version <code>1.26.0-1</code> of\n\t\t\tthe <code>ecs-init</code> package. If your container instances are launched from version\n\t\t\t\t<code>20190301</code> or later, then they contain the required versions of the\n\t\t\tcontainer agent and <code>ecs-init</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html\">Amazon ECS-optimized Linux AMI</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Time duration (in seconds) to wait before giving up on resolving dependencies for a\n\t\t\tcontainer. For example, you specify two containers in a task definition with containerA\n\t\t\thaving a dependency on containerB reaching a <code>COMPLETE</code>,\n\t\t\t<code>SUCCESS</code>, or <code>HEALTHY</code> status. If a <code>startTimeout</code>\n\t\t\tvalue is specified for containerB and it does not reach the desired status within that\n\t\t\ttime then containerA will give up and not start. This results in the task transitioning\n\t\t\tto a <code>STOPPED</code> state.</p>\n\t\t       <note>\n\t\t\t         <p>When the <code>ECS_CONTAINER_START_TIMEOUT</code> container agent configuration\n\t\t\t\tvariable is used, it is enforced indendently from this start timeout value.</p>\n\t\t       </note>\n\t\t       <p>For tasks using the Fargate launch type, the task or service requires the followiwng platforms:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>Linux platform\n\t\t\t\t\tversion <code>1.3.0</code> or later.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>Windows platform\n\t\t\t\t\tversion <code>1.0.0</code> or later.</p>\n\t\t\t         </li>\n         </ul>\n\t\t       <p>For tasks using the EC2 launch type, your container instances require at\n\t\t\tleast version <code>1.26.0</code> of the container agent to enable a container start\n\t\t\ttimeout value. However, we recommend using the latest container agent version. For\n\t\t\tinformation about checking your agent version and updating to the latest version, see\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html\">Updating the Amazon ECS\n\t\t\t\tContainer Agent</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. If you are\n\t\t\tusing an Amazon ECS-optimized Linux AMI, your instance needs at least version <code>1.26.0-1</code> of\n\t\t\tthe <code>ecs-init</code> package. If your container instances are launched from version\n\t\t\t\t<code>20190301</code> or later, then they contain the required versions of the\n\t\t\tcontainer agent and <code>ecs-init</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html\">Amazon ECS-optimized Linux AMI</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
                     }
                 },
                 "stopTimeout": {
                     "target": "com.amazonaws.ecs#BoxedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>Time duration (in seconds) to wait before the container is forcefully killed if it\n\t\t\tdoesn't exit normally on its own.</p>\n\t\t       <p>For tasks using the Fargate launch type, the task or service requires\n\t\t\tplatform version 1.3.0 or later. The max stop timeout value is 120 seconds and if the\n\t\t\tparameter is not specified, the default value of 30 seconds is used.</p>\n\t\t       <p>For tasks using the EC2 launch type, if the <code>stopTimeout</code>\n\t\t\tparameter is not specified, the value set for the Amazon ECS container agent configuration\n\t\t\tvariable <code>ECS_CONTAINER_STOP_TIMEOUT</code> is used by default. If neither the\n\t\t\t\t<code>stopTimeout</code> parameter or the <code>ECS_CONTAINER_STOP_TIMEOUT</code>\n\t\t\tagent configuration variable are set, then the default values of 30 seconds for Linux\n\t\t\tcontainers and 30 seconds on Windows containers are used. Your container instances\n\t\t\trequire at least version 1.26.0 of the container agent to enable a container stop\n\t\t\ttimeout value. However, we recommend using the latest container agent version. For\n\t\t\tinformation about checking your agent version and updating to the latest version, see\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html\">Updating the Amazon ECS\n\t\t\t\tContainer Agent</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. If you are\n\t\t\tusing an Amazon ECS-optimized Linux AMI, your instance needs at least version 1.26.0-1 of the\n\t\t\t\t<code>ecs-init</code> package. If your container instances are launched from version\n\t\t\t\t<code>20190301</code> or later, then they contain the required versions of the\n\t\t\tcontainer agent and <code>ecs-init</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html\">Amazon ECS-optimized Linux AMI</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Time duration (in seconds) to wait before the container is forcefully killed if it\n\t\t\tdoesn't exit normally on its own.</p>\n\t\t       <p>For tasks using the Fargate launch type, the task or service requires the followiwng platforms:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>Linux platform\n\t\t\t\t\tversion <code>1.3.0</code> or later.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>Windows platform\n\t\t\t\t\tversion <code>1.0.0</code> or later.</p>\n\t\t\t         </li>\n         </ul>\n\t\t       <p>The max stop timeout value is 120 seconds and if the\n\t\t\tparameter is not specified, the default value of 30 seconds is used.</p>\n\t\t       <p>For tasks using the EC2 launch type, if the <code>stopTimeout</code>\n\t\t\tparameter is not specified, the value set for the Amazon ECS container agent configuration\n\t\t\tvariable <code>ECS_CONTAINER_STOP_TIMEOUT</code> is used by default. If neither the\n\t\t\t\t<code>stopTimeout</code> parameter or the <code>ECS_CONTAINER_STOP_TIMEOUT</code>\n\t\t\tagent configuration variable are set, then the default values of 30 seconds for Linux\n\t\t\tcontainers and 30 seconds on Windows containers are used. Your container instances\n\t\t\trequire at least version 1.26.0 of the container agent to enable a container stop\n\t\t\ttimeout value. However, we recommend using the latest container agent version. For\n\t\t\tinformation about checking your agent version and updating to the latest version, see\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html\">Updating the Amazon ECS\n\t\t\t\tContainer Agent</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. If you are\n\t\t\tusing an Amazon ECS-optimized Linux AMI, your instance needs at least version 1.26.0-1 of the\n\t\t\t\t<code>ecs-init</code> package. If your container instances are launched from version\n\t\t\t\t<code>20190301</code> or later, then they contain the required versions of the\n\t\t\tcontainer agent and <code>ecs-init</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html\">Amazon ECS-optimized Linux AMI</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
                     }
                 },
                 "hostname": {
@@ -1355,7 +1370,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The dependencies defined for container startup and shutdown. A container can contain\n\t\t\tmultiple dependencies. When a dependency is defined for container startup, for container\n\t\t\tshutdown it is reversed.</p>\n\t\t       <p>Your Amazon ECS container instances require at least version 1.26.0 of the container agent\n\t\t\tto enable container dependencies. However, we recommend using the latest container agent\n\t\t\tversion. For information about checking your agent version and updating to the latest\n\t\t\tversion, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html\">Updating the Amazon ECS\n\t\t\t\tContainer Agent</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. If you are\n\t\t\tusing an Amazon ECS-optimized Linux AMI, your instance needs at least version 1.26.0-1 of the\n\t\t\t\t<code>ecs-init</code> package. If your container instances are launched from version\n\t\t\t\t<code>20190301</code> or later, then they contain the required versions of the\n\t\t\tcontainer agent and <code>ecs-init</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html\">Amazon ECS-optimized Linux AMI</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n\t\t       <note>\n\t\t\t         <p>For tasks using the Fargate launch type, this parameter requires\n\t\t\t\tthat the task or service uses platform version 1.3.0 or later.</p>\n\t\t       </note>"
+                "smithy.api#documentation": "<p>The dependencies defined for container startup and shutdown. A container can contain\n\t\t\tmultiple dependencies. When a dependency is defined for container startup, for container\n\t\t\tshutdown it is reversed.</p>\n\t\t       <p>Your Amazon ECS container instances require at least version 1.26.0 of the container agent\n\t\t\tto enable container dependencies. However, we recommend using the latest container agent\n\t\t\tversion. For information about checking your agent version and updating to the latest\n\t\t\tversion, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html\">Updating the Amazon ECS\n\t\t\t\tContainer Agent</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. If you are\n\t\t\tusing an Amazon ECS-optimized Linux AMI, your instance needs at least version 1.26.0-1 of the\n\t\t\t\t<code>ecs-init</code> package. If your container instances are launched from version\n\t\t\t\t<code>20190301</code> or later, then they contain the required versions of the\n\t\t\tcontainer agent and <code>ecs-init</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html\">Amazon ECS-optimized Linux AMI</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n\t\t       <note>\n\t\t\t         <p>For tasks using the Fargate launch type, the task or service requires the followiwng platforms:</p>\n\t\t\t         <ul>\n               <li>\n\t\t\t\t\t             <p>Linux platform\n\t\t\t\t\t\tversion <code>1.3.0</code> or later.</p>\n\t\t\t\t           </li>\n               <li>\n\t\t\t\t\t             <p>Windows platform\n\t\t\t\t\t\tversion <code>1.0.0</code> or later.</p>\n\t\t\t\t           </li>\n            </ul>\n\t\t       </note>"
             }
         },
         "com.amazonaws.ecs#ContainerInstance": {
@@ -2544,6 +2559,12 @@
                         "smithy.api#documentation": "<p>The platform version on which your tasks in the service are running. A platform\n\t\t\tversion is only specified for tasks using the Fargate launch type. If one\n\t\t\tis not specified, the <code>LATEST</code> platform version is used by default. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html\">Fargate Platform\n\t\t\t\tVersions</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
                     }
                 },
+                "platformFamily": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operating system  that your tasks in the service, or tasks are running on. A platform family is specified only for tasks using the Fargate launch type. </p>\n\t\t       <p> All tasks that run as part of this service must use the same <code>platformFamily</code> value as the service, for example, <code> LINUX.</code>.</p>"
+                    }
+                },
                 "networkConfiguration": {
                     "target": "com.amazonaws.ecs#NetworkConfiguration",
                     "traits": {
@@ -3626,7 +3647,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of files containing the environment variables to pass to a container. You can\n\t\t\tspecify up to ten environment files. The file must have a <code>.env</code> file\n\t\t\textension. Each line in an environment file should contain an environment variable in\n\t\t\t\t<code>VARIABLE=VALUE</code> format. Lines beginning with <code>#</code> are treated\n\t\t\tas comments and are ignored. For more information on the environment variable file\n\t\t\tsyntax, see <a href=\"https://docs.docker.com/compose/env-file/\">Declare default\n\t\t\t\tenvironment variables in file</a>.</p>\n\t\t       <p>If there are environment variables specified using the <code>environment</code>\n\t\t\tparameter in a container definition, they take precedence over the variables contained\n\t\t\twithin an environment file. If multiple environment files are specified that contain the\n\t\t\tsame variable, they are processed from the top down. It is recommended to use unique\n\t\t\tvariable names. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/taskdef-envfiles.html\">Specifying environment\n\t\t\t\tvariables</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n\t\t       <p>This field is only valid for containers in Fargate tasks that use\n\t\t\tplatform version <code>1.4.0</code> or later.</p>"
+                "smithy.api#documentation": "<p>A list of files containing the environment variables to pass to a container. You can\n\t\t\tspecify up to ten environment files. The file must have a <code>.env</code> file\n\t\t\textension. Each line in an environment file should contain an environment variable in\n\t\t\t\t<code>VARIABLE=VALUE</code> format. Lines beginning with <code>#</code> are treated\n\t\t\tas comments and are ignored. For more information on the environment variable file\n\t\t\tsyntax, see <a href=\"https://docs.docker.com/compose/env-file/\">Declare default\n\t\t\t\tenvironment variables in file</a>.</p>\n\t\t       <p>If there are environment variables specified using the <code>environment</code>\n\t\t\tparameter in a container definition, they take precedence over the variables contained\n\t\t\twithin an environment file. If multiple environment files are specified that contain the\n\t\t\tsame variable, they are processed from the top down. It is recommended to use unique\n\t\t\tvariable names. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/taskdef-envfiles.html\">Specifying environment\n\t\t\t\tvariables</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n\t\t       <p>This parameter is only supported for tasks hosted on Fargate using the following platform versions:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>Linux platform\n\t\t\t\t\tversion <code>1.4.0</code> or later.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>Windows platform\n\t\t\t\t\tversion <code>1.0.0</code> or later.</p>\n\t\t\t         </li>\n         </ul>"
             }
         },
         "com.amazonaws.ecs#EnvironmentFileType": {
@@ -3664,7 +3685,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The amount of ephemeral storage to allocate for the task. This parameter is used to\n\t\t\texpand the total amount of ephemeral storage available, beyond the default amount, for\n\t\t\ttasks hosted on Fargate. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html\">Fargate task\n\t\t\t\tstorage</a> in the <i>Amazon ECS User Guide for Fargate</i>.</p>\n\t\t       <note>\n\t\t\t         <p>This parameter is only supported for tasks hosted on Fargate using platform\n\t\t\t\tversion <code>1.4.0</code> or later.</p>\n\t\t       </note>"
+                "smithy.api#documentation": "<p>The amount of ephemeral storage to allocate for the task. This parameter is used to\n\t\t\texpand the total amount of ephemeral storage available, beyond the default amount, for\n\t\t\ttasks hosted on Fargate. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html\">Fargate task\n\t\t\t\tstorage</a> in the <i>Amazon ECS User Guide for Fargate</i>.</p>\n\t\t       <note>\n\t\t\t         <p>This parameter is only supported for tasks hosted on Fargate using the following platform versions:</p>\n\t\t\t         <ul>\n               <li>\n\t\t\t\t\t             <p>Linux platform\n\t\t\t\t\t\tversion <code>1.4.0</code> or later.</p>\n\t\t\t\t           </li>\n               <li>\n\t\t\t\t\t             <p>Windows platform\n\t\t\t\t\t\tversion <code>1.0.0</code> or later.</p>\n\t\t\t\t           </li>\n            </ul>\n\t\t       </note>"
             }
         },
         "com.amazonaws.ecs#ExecuteCommand": {
@@ -3749,7 +3770,7 @@
                 "s3EncryptionEnabled": {
                     "target": "com.amazonaws.ecs#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether or not to enable encryption on the CloudWatch logs. If not specified,\n\t\t\tencryption will be disabled.</p>"
+                        "smithy.api#documentation": "<p>Whether or not to use encryption on the S3 logs. If not specified,\n\t\t\tencryption is not used.</p>"
                     }
                 },
                 "s3KeyPrefix": {
@@ -5490,6 +5511,45 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.ecs#OSFamily": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "WINDOWS_SERVER_2019_FULL",
+                        "name": "WINDOWS_SERVER_2019_FULL"
+                    },
+                    {
+                        "value": "WINDOWS_SERVER_2019_CORE",
+                        "name": "WINDOWS_SERVER_2019_CORE"
+                    },
+                    {
+                        "value": "WINDOWS_SERVER_2016_FULL",
+                        "name": "WINDOWS_SERVER_2016_FULL"
+                    },
+                    {
+                        "value": "WINDOWS_SERVER_2004_CORE",
+                        "name": "WINDOWS_SERVER_2004_CORE"
+                    },
+                    {
+                        "value": "WINDOWS_SERVER_2022_CORE",
+                        "name": "WINDOWS_SERVER_2022_CORE"
+                    },
+                    {
+                        "value": "WINDOWS_SERVER_2022_FULL",
+                        "name": "WINDOWS_SERVER_2022_FULL"
+                    },
+                    {
+                        "value": "WINDOWS_SERVER_20H2_CORE",
+                        "name": "WINDOWS_SERVER_20H2_CORE"
+                    },
+                    {
+                        "value": "LINUX",
+                        "name": "LINUX"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.ecs#PidMode": {
             "type": "string",
             "traits": {
@@ -6195,7 +6255,13 @@
                 "ephemeralStorage": {
                     "target": "com.amazonaws.ecs#EphemeralStorage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of ephemeral storage to allocate for the task. This parameter is used to\n\t\t\texpand the total amount of ephemeral storage available, beyond the default amount, for\n\t\t\ttasks hosted on Fargate. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html\">Fargate task\n\t\t\t\tstorage</a> in the <i>Amazon ECS User Guide for Fargate</i>.</p>\n\t\t       <note>\n\t\t\t         <p>This parameter is only supported for tasks hosted on Fargate using platform\n\t\t\t\tversion <code>1.4.0</code> or later.</p>\n\t\t       </note>"
+                        "smithy.api#documentation": "<p>The amount of ephemeral storage to allocate for the task. This parameter is used to\n\t\t\texpand the total amount of ephemeral storage available, beyond the default amount, for\n\t\t\ttasks hosted on Fargate. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html\">Fargate task\n\t\t\t\tstorage</a> in the <i>Amazon ECS User Guide for Fargate</i>.</p>\n\t\t       <note>\n\t\t\t         <p>This parameter is only supported for tasks hosted on Fargate using the following platform versions:</p>\n\t\t\t         <ul>\n               <li>\n\t\t\t\t\t             <p>Linux platform\n\t\t\t\t\t\tversion <code>1.4.0</code> or later.</p>\n\t\t\t\t           </li>\n               <li>\n\t\t\t\t\t             <p>Windows platform\n\t\t\t\t\t\tversion <code>1.0.0</code> or later.</p>\n\t\t\t\t           </li>\n            </ul>\n\t\t       </note>"
+                    }
+                },
+                "runtimePlatform": {
+                    "target": "com.amazonaws.ecs#RuntimePlatform",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operating system  that your tasks definitions run on. A platform family is specified only for tasks using the Fargate launch type. </p>\n\t\t       <p>When you specify a task definition in a service, this value must match the <code>runtimePlatform</code> value of the service.</p>"
                     }
                 }
             }
@@ -6521,6 +6587,26 @@
                 }
             }
         },
+        "com.amazonaws.ecs#RuntimePlatform": {
+            "type": "structure",
+            "members": {
+                "cpuArchitecture": {
+                    "target": "com.amazonaws.ecs#CPUArchitecture",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CPU architecture.</p>"
+                    }
+                },
+                "operatingSystemFamily": {
+                    "target": "com.amazonaws.ecs#OSFamily",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operating system.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the platform for the Amazon ECS service or task.</p>"
+            }
+        },
         "com.amazonaws.ecs#Scale": {
             "type": "structure",
             "members": {
@@ -6701,6 +6787,12 @@
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The platform version on which to run your service. A platform version is only\n\t\t\tspecified for tasks hosted on Fargate. If one is not specified, the\n\t\t\t\t<code>LATEST</code> platform version is used by default. For more information, see\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html\">Fargate Platform\n\t\t\t\tVersions</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                    }
+                },
+                "platformFamily": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operating system  that your tasks in the service are running on. A platform family is specified only for tasks using the Fargate launch type. </p>\n\t\t       <p> All tasks that run as part of this service must use the same <code>platformFamily</code> value as the service, for example, <code>LINUX</code>.</p>"
                     }
                 },
                 "taskDefinition": {
@@ -7805,6 +7897,12 @@
                         "smithy.api#documentation": "<p>The platform version on which your task is running. A platform version is only\n\t\t\tspecified for tasks using the Fargate launch type. If one is not\n\t\t\tspecified, the <code>LATEST</code> platform version is used by default. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html\">Fargate Platform\n\t\t\t\tVersions</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
                     }
                 },
+                "platformFamily": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operating system  that your tasks are running on. A platform family is specified only for tasks using the Fargate launch type. </p>\n\t\t       <p> All tasks that run as part of this service must use the same <code>platformFamily</code> value as the service, for example, <code>LINUX.</code>.</p>"
+                    }
+                },
                 "pullStartedAt": {
                     "target": "com.amazonaws.ecs#Timestamp",
                     "traits": {
@@ -7961,6 +8059,12 @@
                     "target": "com.amazonaws.ecs#CompatibilityList",
                     "traits": {
                         "smithy.api#documentation": "<p>The task launch types the task definition validated against during task definition\n\t\t\tregistration. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html\">Amazon ECS launch types</a>\n\t\t\tin the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                    }
+                },
+                "runtimePlatform": {
+                    "target": "com.amazonaws.ecs#RuntimePlatform",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operating system  that your task definitions are running on. A platform family is specified only for tasks using the Fargate launch type. </p>\n\t\t       <p>When you specify a task in a service, this value must match the <code>runtimePlatform</code> value of the service.</p>"
                     }
                 },
                 "requiresCompatibilities": {
@@ -8181,7 +8285,7 @@
                 "ephemeralStorage": {
                     "target": "com.amazonaws.ecs#EphemeralStorage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ephemeral storage setting override for the task.</p>\n\t\t       <note>\n\t\t\t         <p>This parameter is only supported for tasks hosted on Fargate using platform\n\t\t\t\tversion <code>1.4.0</code> or later.</p>\n\t\t       </note>"
+                        "smithy.api#documentation": "<p>The ephemeral storage setting override for the task.</p>\n\t\t       <note>\n\t\t\t         <p>This parameter is only supported for tasks hosted on Fargate using the following platform versions:</p>\n\t\t\t         <ul>\n               <li>\n\t\t\t\t\t             <p>Linux platform\n\t\t\t\t\t\tversion <code>1.4.0</code> or later.</p>\n\t\t\t\t           </li>\n               <li>\n\t\t\t\t\t             <p>Windows platform\n\t\t\t\t\t\tversion <code>1.0.0</code> or later.</p>\n\t\t\t\t           </li>\n            </ul>\n\t\t       </note>"
                     }
                 }
             },
@@ -8286,6 +8390,12 @@
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The Fargate platform version on which the tasks in the task set are running. A\n\t\t\tplatform version is only specified for tasks run on Fargate. For more information, see\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html\">Fargate platform\n\t\t\t\tversions</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                    }
+                },
+                "platformFamily": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operating system  that your tasks in the set are running on. A platform family is specified only for tasks using the Fargate launch type. </p>\n\t\t       <p> All tasks in the set must have the same value.</p>"
                     }
                 },
                 "networkConfiguration": {

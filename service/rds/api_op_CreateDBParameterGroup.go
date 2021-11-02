@@ -18,16 +18,17 @@ import (
 // group, you need to associate it with your DB instance using ModifyDBInstance.
 // When you associate a new DB parameter group with a running DB instance, you need
 // to reboot the DB instance without failover for the new DB parameter group and
-// associated settings to take effect. After you create a DB parameter group, you
-// should wait at least 5 minutes before creating your first DB instance that uses
-// that DB parameter group as the default parameter group. This allows Amazon RDS
-// to fully complete the create action before the parameter group is used as the
-// default for a new DB instance. This is especially important for parameters that
-// are critical when creating the default database for a DB instance, such as the
-// character set for the default database defined by the character_set_database
-// parameter. You can use the Parameter Groups option of the Amazon RDS console
-// (https://console.aws.amazon.com/rds/) or the DescribeDBParameters command to
-// verify that your DB parameter group has been created or modified.
+// associated settings to take effect. This command doesn't apply to RDS Custom.
+// After you create a DB parameter group, you should wait at least 5 minutes before
+// creating your first DB instance that uses that DB parameter group as the default
+// parameter group. This allows Amazon RDS to fully complete the create action
+// before the parameter group is used as the default for a new DB instance. This is
+// especially important for parameters that are critical when creating the default
+// database for a DB instance, such as the character set for the default database
+// defined by the character_set_database parameter. You can use the Parameter
+// Groups option of the Amazon RDS console (https://console.aws.amazon.com/rds/) or
+// the DescribeDBParameters command to verify that your DB parameter group has been
+// created or modified.
 func (c *Client) CreateDBParameterGroup(ctx context.Context, params *CreateDBParameterGroupInput, optFns ...func(*Options)) (*CreateDBParameterGroupOutput, error) {
 	if params == nil {
 		params = &CreateDBParameterGroupInput{}

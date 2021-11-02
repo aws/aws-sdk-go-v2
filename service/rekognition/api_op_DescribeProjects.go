@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists and gets information about your Amazon Rekognition Custom Labels projects.
-// This operation requires permissions to perform the rekognition:DescribeProjects
+// Gets information about your Amazon Rekognition Custom Labels projects. This
+// operation requires permissions to perform the rekognition:DescribeProjects
 // action.
 func (c *Client) DescribeProjects(ctx context.Context, params *DescribeProjectsInput, optFns ...func(*Options)) (*DescribeProjectsOutput, error) {
 	if params == nil {
@@ -41,6 +41,11 @@ type DescribeProjectsInput struct {
 	// retrieve), Amazon Rekognition Custom Labels returns a pagination token in the
 	// response. You can use this pagination token to retrieve the next set of results.
 	NextToken *string
+
+	// A list of the projects that you want Amazon Rekognition Custom Labels to
+	// describe. If you don't specify a value, the response includes descriptions for
+	// all the projects in your AWS account.
+	ProjectNames []string
 
 	noSmithyDocumentSerde
 }

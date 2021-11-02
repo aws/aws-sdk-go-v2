@@ -45,10 +45,11 @@ type CreateResponsePlanInput struct {
 	// The actions that the response plan starts at the beginning of an incident.
 	Actions []types.Action
 
-	// The AWS Chatbot chat channel used for collaboration during an incident.
+	// The Chatbot chat channel used for collaboration during an incident.
 	ChatChannel types.ChatChannel
 
-	// A token ensuring that the action is called only once with the specified details.
+	// A token ensuring that the operation is called only once with the specified
+	// details.
 	ClientToken *string
 
 	// The long format of the response plan name. This field can contain spaces.

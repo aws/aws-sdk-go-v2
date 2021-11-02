@@ -88,13 +88,17 @@ type DescribeDBEngineVersionsInput struct {
 	// A value that indicates whether to list the supported character sets for each
 	// engine version. If this parameter is enabled and the requested engine supports
 	// the CharacterSetName parameter for CreateDBInstance, the response includes a
-	// list of supported character sets for each engine version.
+	// list of supported character sets for each engine version. For RDS Custom, the
+	// default is not to list supported character sets. If you set
+	// ListSupportedCharacterSets to true, RDS Custom returns no results.
 	ListSupportedCharacterSets *bool
 
 	// A value that indicates whether to list the supported time zones for each engine
 	// version. If this parameter is enabled and the requested engine supports the
 	// TimeZone parameter for CreateDBInstance, the response includes a list of
-	// supported time zones for each engine version.
+	// supported time zones for each engine version. For RDS Custom, the default is not
+	// to list supported time zones. If you set ListSupportedTimezones to true, RDS
+	// Custom returns no results.
 	ListSupportedTimezones *bool
 
 	// An optional pagination token provided by a previous request. If this parameter

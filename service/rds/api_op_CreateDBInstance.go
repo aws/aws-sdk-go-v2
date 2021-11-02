@@ -67,29 +67,32 @@ type CreateDBInstanceInput struct {
 	//
 	// * aurora-postgresql
 	//
+	// * custom-oracle-ee (for RDS Custom
+	// instances)
+	//
 	// * mariadb
 	//
 	// * mysql
 	//
 	// * oracle-ee
 	//
-	// *
-	// oracle-ee-cdb
+	// * oracle-ee-cdb
 	//
 	// * oracle-se2
 	//
-	// * oracle-se2-cdb
+	// *
+	// oracle-se2-cdb
 	//
 	// * postgres
 	//
 	// * sqlserver-ee
 	//
-	// *
-	// sqlserver-se
+	// * sqlserver-se
 	//
 	// * sqlserver-ex
 	//
-	// * sqlserver-web
+	// *
+	// sqlserver-web
 	//
 	// This member is required.
 	Engine *string
@@ -97,86 +100,96 @@ type CreateDBInstanceInput struct {
 	// The amount of storage in gibibytes (GiB) to allocate for the DB instance. Type:
 	// Integer Amazon Aurora Not applicable. Aurora cluster volumes automatically grow
 	// as the amount of data in your database increases, though you are only charged
-	// for the space that you use in an Aurora cluster volume. MySQL Constraints to the
-	// amount of storage for each storage type are the following:
-	//
-	// * General Purpose
-	// (SSD) storage (gp2): Must be an integer from 20 to 65536.
-	//
-	// * Provisioned IOPS
-	// storage (io1): Must be an integer from 100 to 65536.
-	//
-	// * Magnetic storage
-	// (standard): Must be an integer from 5 to 3072.
-	//
-	// MariaDB Constraints to the
-	// amount of storage for each storage type are the following:
-	//
-	// * General Purpose
-	// (SSD) storage (gp2): Must be an integer from 20 to 65536.
-	//
-	// * Provisioned IOPS
-	// storage (io1): Must be an integer from 100 to 65536.
-	//
-	// * Magnetic storage
-	// (standard): Must be an integer from 5 to 3072.
-	//
-	// PostgreSQL Constraints to the
-	// amount of storage for each storage type are the following:
-	//
-	// * General Purpose
-	// (SSD) storage (gp2): Must be an integer from 20 to 65536.
-	//
-	// * Provisioned IOPS
-	// storage (io1): Must be an integer from 100 to 65536.
-	//
-	// * Magnetic storage
-	// (standard): Must be an integer from 5 to 3072.
-	//
-	// Oracle Constraints to the amount
-	// of storage for each storage type are the following:
-	//
-	// * General Purpose (SSD)
-	// storage (gp2): Must be an integer from 20 to 65536.
-	//
-	// * Provisioned IOPS storage
-	// (io1): Must be an integer from 100 to 65536.
-	//
-	// * Magnetic storage (standard):
-	// Must be an integer from 10 to 3072.
-	//
-	// SQL Server Constraints to the amount of
-	// storage for each storage type are the following:
-	//
-	// * General Purpose (SSD)
-	// storage (gp2):
-	//
-	// * Enterprise and Standard editions: Must be an integer from 200
-	// to 16384.
-	//
-	// * Web and Express editions: Must be an integer from 20 to 16384.
+	// for the space that you use in an Aurora cluster volume. Amazon RDS Custom
+	// Constraints to the amount of storage for each storage type are the following:
 	//
 	// *
-	// Provisioned IOPS storage (io1):
+	// General Purpose (SSD) storage (gp2): Must be an integer from 40 to 65536.
 	//
-	// * Enterprise and Standard editions: Must be an
-	// integer from 200 to 16384.
+	// *
+	// Provisioned IOPS storage (io1): Must be an integer from 40 to 65536.
 	//
-	// * Web and Express editions: Must be an integer from
-	// 100 to 16384.
+	// MySQL
+	// Constraints to the amount of storage for each storage type are the following:
+	//
+	// *
+	// General Purpose (SSD) storage (gp2): Must be an integer from 20 to 65536.
+	//
+	// *
+	// Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.
+	//
+	// *
+	// Magnetic storage (standard): Must be an integer from 5 to 3072.
+	//
+	// MariaDB
+	// Constraints to the amount of storage for each storage type are the following:
+	//
+	// *
+	// General Purpose (SSD) storage (gp2): Must be an integer from 20 to 65536.
+	//
+	// *
+	// Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.
+	//
+	// *
+	// Magnetic storage (standard): Must be an integer from 5 to 3072.
+	//
+	// PostgreSQL
+	// Constraints to the amount of storage for each storage type are the following:
+	//
+	// *
+	// General Purpose (SSD) storage (gp2): Must be an integer from 20 to 65536.
+	//
+	// *
+	// Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.
+	//
+	// *
+	// Magnetic storage (standard): Must be an integer from 5 to 3072.
+	//
+	// Oracle
+	// Constraints to the amount of storage for each storage type are the following:
+	//
+	// *
+	// General Purpose (SSD) storage (gp2): Must be an integer from 20 to 65536.
+	//
+	// *
+	// Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.
+	//
+	// *
+	// Magnetic storage (standard): Must be an integer from 10 to 3072.
+	//
+	// SQL Server
+	// Constraints to the amount of storage for each storage type are the following:
+	//
+	// *
+	// General Purpose (SSD) storage (gp2):
+	//
+	// * Enterprise and Standard editions: Must
+	// be an integer from 200 to 16384.
+	//
+	// * Web and Express editions: Must be an integer
+	// from 20 to 16384.
+	//
+	// * Provisioned IOPS storage (io1):
+	//
+	// * Enterprise and Standard
+	// editions: Must be an integer from 200 to 16384.
+	//
+	// * Web and Express editions:
+	// Must be an integer from 100 to 16384.
 	//
 	// * Magnetic storage (standard):
 	//
-	// * Enterprise and Standard
-	// editions: Must be an integer from 200 to 1024.
+	// *
+	// Enterprise and Standard editions: Must be an integer from 200 to 1024.
 	//
-	// * Web and Express editions: Must
-	// be an integer from 20 to 1024.
+	// * Web
+	// and Express editions: Must be an integer from 20 to 1024.
 	AllocatedStorage *int32
 
 	// A value that indicates whether minor engine upgrades are applied automatically
 	// to the DB instance during the maintenance window. By default, minor engine
-	// upgrades are applied automatically.
+	// upgrades are applied automatically. If you create an RDS Custom DB instance, you
+	// must set AutoMinorVersionUpgrade to false.
 	AutoMinorVersionUpgrade *bool
 
 	// The Availability Zone (AZ) where the database will be created. For information
@@ -203,11 +216,15 @@ type CreateDBInstanceInput struct {
 	//
 	// * Can't be set to 0 if the DB instance is a source
 	// to read replicas
+	//
+	// * Can't be set to 0 or 35 for an RDS Custom DB instance
 	BackupRetentionPeriod *int32
 
-	// For supported engines, indicates that the DB instance should be associated with
-	// the specified CharacterSet. Amazon Aurora Not applicable. The character set is
-	// managed by the DB cluster. For more information, see CreateDBCluster.
+	// For supported engines, this value indicates that the DB instance should be
+	// associated with the specified CharacterSet. This setting doesn't apply to RDS
+	// Custom. However, if you need to change the character set, you can change it on
+	// the database itself. Amazon Aurora Not applicable. The character set is managed
+	// by the DB cluster. For more information, see CreateDBCluster.
 	CharacterSetName *string
 
 	// A value that indicates whether to copy tags from the DB instance to snapshots of
@@ -216,7 +233,28 @@ type CreateDBInstanceInput struct {
 	// an Aurora DB instance has no effect on the DB cluster setting.
 	CopyTagsToSnapshot *bool
 
-	// The identifier of the DB cluster that the instance will belong to.
+	// The instance profile associated with the underlying Amazon EC2 instance of an
+	// RDS Custom DB instance. The instance profile must meet the following
+	// requirements:
+	//
+	// * The profile must exist in your account.
+	//
+	// * The profile must
+	// have an IAM role that Amazon EC2 has permissions to assume.
+	//
+	// * The instance
+	// profile name and the associated IAM role name must start with the prefix
+	// AWSRDSCustom.
+	//
+	// For the list of permissions required for the IAM role, see
+	// Configure IAM and your VPC
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc)
+	// in the Amazon Relational Database Service User Guide. This setting is required
+	// for RDS Custom.
+	CustomIamInstanceProfile *string
+
+	// The identifier of the DB cluster that the instance will belong to. This setting
+	// doesn't apply to RDS Custom.
 	DBClusterIdentifier *string
 
 	// The meaning of this parameter differs according to the database engine you use.
@@ -265,44 +303,57 @@ type CreateDBInstanceInput struct {
 	//
 	// * Can't be longer than 8 characters
 	//
-	// SQL Server Not
-	// applicable. Must be null. Amazon Aurora MySQL The name of the database to create
-	// when the primary DB instance of the Aurora MySQL DB cluster is created. If this
-	// parameter isn't specified for an Aurora MySQL DB cluster, no database is created
-	// in the DB cluster. Constraints:
+	// Amazon RDS
+	// Custom The Oracle System ID (SID) of the created RDS Custom DB instance. If you
+	// don't specify a value, the default value is ORCL. Default: ORCL Constraints:
 	//
-	// * It must contain 1 to 64 alphanumeric
-	// characters.
+	// *
+	// It must contain 1 to 8 alphanumeric characters.
 	//
-	// * It can't be a word reserved by the database engine.
+	// * It must contain a letter.
 	//
-	// Amazon
-	// Aurora PostgreSQL The name of the database to create when the primary DB
-	// instance of the Aurora PostgreSQL DB cluster is created. If this parameter isn't
-	// specified for an Aurora PostgreSQL DB cluster, a database named postgres is
-	// created in the DB cluster. Constraints:
+	// *
+	// It can't be a word reserved by the database engine.
 	//
-	// * It must contain 1 to 63 alphanumeric
-	// characters.
+	// SQL Server Not applicable.
+	// Must be null. Amazon Aurora MySQL The name of the database to create when the
+	// primary DB instance of the Aurora MySQL DB cluster is created. If this parameter
+	// isn't specified for an Aurora MySQL DB cluster, no database is created in the DB
+	// cluster. Constraints:
 	//
-	// * It must begin with a letter or an underscore. Subsequent
-	// characters can be letters, underscores, or digits (0 to 9).
+	// * It must contain 1 to 64 alphanumeric characters.
 	//
-	// * It can't be a
-	// word reserved by the database engine.
+	// * It
+	// can't be a word reserved by the database engine.
+	//
+	// Amazon Aurora PostgreSQL The
+	// name of the database to create when the primary DB instance of the Aurora
+	// PostgreSQL DB cluster is created. If this parameter isn't specified for an
+	// Aurora PostgreSQL DB cluster, a database named postgres is created in the DB
+	// cluster. Constraints:
+	//
+	// * It must contain 1 to 63 alphanumeric characters.
+	//
+	// * It
+	// must begin with a letter or an underscore. Subsequent characters can be letters,
+	// underscores, or digits (0 to 9).
+	//
+	// * It can't be a word reserved by the database
+	// engine.
 	DBName *string
 
 	// The name of the DB parameter group to associate with this DB instance. If you do
 	// not specify a value, then the default DB parameter group for the specified DB
-	// engine and version is used. Constraints:
+	// engine and version is used. This setting doesn't apply to RDS Custom.
+	// Constraints:
 	//
-	// * Must be 1 to 255 letters, numbers,
-	// or hyphens.
+	// * Must be 1 to 255 letters, numbers, or hyphens.
 	//
-	// * First character must be a letter
+	// * First
+	// character must be a letter
 	//
-	// * Can't end with a hyphen or
-	// contain two consecutive hyphens
+	// * Can't end with a hyphen or contain two consecutive
+	// hyphens
 	DBParameterGroupName *string
 
 	// A list of DB security groups to associate with this DB instance. Default: The
@@ -329,23 +380,24 @@ type CreateDBInstanceInput struct {
 	// in an Active Directory Domain. For more information, see  Kerberos
 	// Authentication
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html)
-	// in the Amazon RDS User Guide.
+	// in the Amazon RDS User Guide. This setting doesn't apply to RDS Custom.
 	Domain *string
 
 	// Specify the name of the IAM role to be used when making API calls to the
-	// Directory Service.
+	// Directory Service. This setting doesn't apply to RDS Custom.
 	DomainIAMRoleName *string
 
 	// The list of log types that need to be enabled for exporting to CloudWatch Logs.
-	// The values in the list depend on the DB engine being used. For more information,
-	// see Publishing Database Logs to Amazon CloudWatch Logs
+	// The values in the list depend on the DB engine. For more information, see
+	// Publishing Database Logs to Amazon CloudWatch Logs
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
 	// in the Amazon Relational Database Service User Guide. Amazon Aurora Not
-	// applicable. CloudWatch Logs exports are managed by the DB cluster. MariaDB
-	// Possible values are audit, error, general, and slowquery. Microsoft SQL Server
-	// Possible values are agent and error. MySQL Possible values are audit, error,
-	// general, and slowquery. Oracle Possible values are alert, audit, listener,
-	// trace, and oemagent. PostgreSQL Possible values are postgresql and upgrade.
+	// applicable. CloudWatch Logs exports are managed by the DB cluster. RDS Custom
+	// Not applicable. MariaDB Possible values are audit, error, general, and
+	// slowquery. Microsoft SQL Server Possible values are agent and error. MySQL
+	// Possible values are audit, error, general, and slowquery. Oracle Possible values
+	// are alert, audit, listener, trace, and oemagent. PostgreSQL Possible values are
+	// postgresql and upgrade.
 	EnableCloudwatchLogsExports []string
 
 	// A value that indicates whether to enable a customer-owned IP address (CoIP) for
@@ -364,9 +416,10 @@ type CreateDBInstanceInput struct {
 
 	// A value that indicates whether to enable mapping of Amazon Web Services Identity
 	// and Access Management (IAM) accounts to database accounts. By default, mapping
-	// is disabled. This setting doesn't apply to Amazon Aurora. Mapping Amazon Web
-	// Services IAM accounts to database accounts is managed by the DB cluster. For
-	// more information, see  IAM Database Authentication for MySQL and PostgreSQL
+	// is disabled. This setting doesn't apply to RDS Custom or Amazon Aurora. In
+	// Aurora, mapping Amazon Web Services IAM accounts to database accounts is managed
+	// by the DB cluster. For more information, see  IAM Database Authentication for
+	// MySQL and PostgreSQL
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html)
 	// in the Amazon RDS User Guide.
 	EnableIAMDatabaseAuthentication *bool
@@ -374,7 +427,8 @@ type CreateDBInstanceInput struct {
 	// A value that indicates whether to enable Performance Insights for the DB
 	// instance. For more information, see Using Amazon Performance Insights
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html)
-	// in the Amazon Relational Database Service User Guide.
+	// in the Amazon Relational Database Service User Guide. This setting doesn't apply
+	// to RDS Custom.
 	EnablePerformanceInsights *bool
 
 	// The version number of the database engine to use. For a list of valid engine
@@ -383,7 +437,12 @@ type CreateDBInstanceInput struct {
 	// that are available with Amazon RDS. Not every database engine is available for
 	// every Amazon Web Services Region. Amazon Aurora Not applicable. The version
 	// number of the database engine to be used by the DB instance is managed by the DB
-	// cluster. MariaDB See MariaDB on Amazon RDS Versions
+	// cluster. Amazon RDS Custom A custom engine version (CEV) that you have
+	// previously created. This setting is required for RDS Custom. The CEV name has
+	// the following format: 19.customized_string . An example identifier is
+	// 19.my_cev1. For more information, see  Creating an RDS Custom DB instance
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-creating.html#custom-creating.create)
+	// in the Amazon RDS User Guide.. MariaDB See MariaDB on Amazon RDS Versions
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt)
 	// in the Amazon RDS User Guide. Microsoft SQL Server See Microsoft SQL Server
 	// Versions on Amazon RDS
@@ -410,18 +469,23 @@ type CreateDBInstanceInput struct {
 
 	// The Amazon Web Services KMS key identifier for an encrypted DB instance. The
 	// Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or
-	// alias name for the Amazon Web Services KMS customer master key (CMK). To use a
-	// CMK in a different Amazon Web Services account, specify the key ARN or alias
-	// ARN. Amazon Aurora Not applicable. The Amazon Web Services KMS key identifier is
-	// managed by the DB cluster. For more information, see CreateDBCluster. If
-	// StorageEncrypted is enabled, and you do not specify a value for the KmsKeyId
-	// parameter, then Amazon RDS uses your default CMK. There is a default CMK for
-	// your Amazon Web Services account. Your Amazon Web Services account has a
-	// different default CMK for each Amazon Web Services Region.
+	// alias name for the KMS key. To use a KMS key in a different Amazon Web Services
+	// account, specify the key ARN or alias ARN. Amazon Aurora Not applicable. The
+	// Amazon Web Services KMS key identifier is managed by the DB cluster. For more
+	// information, see CreateDBCluster. If StorageEncrypted is enabled, and you do not
+	// specify a value for the KmsKeyId parameter, then Amazon RDS uses your default
+	// KMS key. There is a default KMS key for your Amazon Web Services account. Your
+	// Amazon Web Services account has a different default KMS key for each Amazon Web
+	// Services Region. Amazon RDS Custom A KMS key is required for RDS Custom Oracle
+	// instances. For most RDS engines, if you leave this parameter empty while
+	// enabling StorageEncrypted, the engine uses the default KMS key. However, RDS
+	// Custom for Oracle doesn't use the default key when this parameter is empty. You
+	// must explicitly specify a key.
 	KmsKeyId *string
 
 	// License model information for this DB instance. Valid values: license-included |
-	// bring-your-own-license | general-public-license
+	// bring-your-own-license | general-public-license This setting doesn't apply to
+	// RDS Custom.
 	LicenseModel *string
 
 	// The password for the master user. The password can include any printable ASCII
@@ -499,51 +563,53 @@ type CreateDBInstanceInput struct {
 	// including limitations that apply to it, see  Managing capacity automatically
 	// with Amazon RDS storage autoscaling
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.Autoscaling)
-	// in the Amazon RDS User Guide.
+	// in the Amazon RDS User Guide. This setting doesn't apply to RDS Custom.
 	MaxAllocatedStorage *int32
 
 	// The interval, in seconds, between points when Enhanced Monitoring metrics are
-	// collected for the DB instance. To disable collecting Enhanced Monitoring
+	// collected for the DB instance. To disable collection of Enhanced Monitoring
 	// metrics, specify 0. The default is 0. If MonitoringRoleArn is specified, then
-	// you must also set MonitoringInterval to a value other than 0. Valid Values: 0,
-	// 1, 5, 10, 15, 30, 60
+	// you must set MonitoringInterval to a value other than 0. This setting doesn't
+	// apply to RDS Custom. Valid Values: 0, 1, 5, 10, 15, 30, 60
 	MonitoringInterval *int32
 
 	// The ARN for the IAM role that permits RDS to send enhanced monitoring metrics to
 	// Amazon CloudWatch Logs. For example, arn:aws:iam:123456789012:role/emaccess. For
-	// information on creating a monitoring role, go to Setting Up and Enabling
-	// Enhanced Monitoring
+	// information on creating a monitoring role, see Setting Up and Enabling Enhanced
+	// Monitoring
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html#USER_Monitoring.OS.Enabling)
 	// in the Amazon RDS User Guide. If MonitoringInterval is set to a value other than
-	// 0, then you must supply a MonitoringRoleArn value.
+	// 0, then you must supply a MonitoringRoleArn value. This setting doesn't apply to
+	// RDS Custom.
 	MonitoringRoleArn *string
 
 	// A value that indicates whether the DB instance is a Multi-AZ deployment. You
 	// can't set the AvailabilityZone parameter if the DB instance is a Multi-AZ
-	// deployment.
+	// deployment. This setting doesn't apply to RDS Custom.
 	MultiAZ *bool
 
-	// The name of the NCHAR character set for the Oracle DB instance.
+	// The name of the NCHAR character set for the Oracle DB instance. This parameter
+	// doesn't apply to RDS Custom.
 	NcharCharacterSetName *string
 
 	// A value that indicates that the DB instance should be associated with the
 	// specified option group. Permanent options, such as the TDE option for Oracle
 	// Advanced Security TDE, can't be removed from an option group. Also, that option
-	// group can't be removed from a DB instance once it is associated with a DB
-	// instance
+	// group can't be removed from a DB instance after it is associated with a DB
+	// instance. This setting doesn't apply to RDS Custom.
 	OptionGroupName *string
 
 	// The Amazon Web Services KMS key identifier for encryption of Performance
 	// Insights data. The Amazon Web Services KMS key identifier is the key ARN, key
-	// ID, alias ARN, or alias name for the Amazon Web Services KMS customer master key
-	// (CMK). If you do not specify a value for PerformanceInsightsKMSKeyId, then
-	// Amazon RDS uses your default CMK. There is a default CMK for your Amazon Web
-	// Services account. Your Amazon Web Services account has a different default CMK
-	// for each Amazon Web Services Region.
+	// ID, alias ARN, or alias name for the KMS key. If you do not specify a value for
+	// PerformanceInsightsKMSKeyId, then Amazon RDS uses your default KMS key. There is
+	// a default KMS key for your Amazon Web Services account. Your Amazon Web Services
+	// account has a different default KMS key for each Amazon Web Services Region.
+	// This setting doesn't apply to RDS Custom.
 	PerformanceInsightsKMSKeyId *string
 
 	// The amount of time, in days, to retain Performance Insights data. Valid values
-	// are 7 or 731 (2 years).
+	// are 7 or 731 (2 years). This setting doesn't apply to RDS Custom.
 	PerformanceInsightsRetentionPeriod *int32
 
 	// The port number on which the database accepts connections. MySQL Default: 3306
@@ -584,14 +650,15 @@ type CreateDBInstanceInput struct {
 	PreferredMaintenanceWindow *string
 
 	// The number of CPU cores and the number of threads per core for the DB instance
-	// class of the DB instance.
+	// class of the DB instance. This setting doesn't apply to RDS Custom.
 	ProcessorFeatures []types.ProcessorFeature
 
 	// A value that specifies the order in which an Aurora Replica is promoted to the
 	// primary instance after a failure of the existing primary instance. For more
 	// information, see  Fault Tolerance for an Aurora DB Cluster
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.FaultTolerance)
-	// in the Amazon Aurora User Guide. Default: 1 Valid Values: 0 - 15
+	// in the Amazon Aurora User Guide. This setting doesn't apply to RDS Custom.
+	// Default: 1 Valid Values: 0 - 15
 	PromotionTier *int32
 
 	// A value that indicates whether the DB instance is publicly accessible. When the
@@ -625,8 +692,10 @@ type CreateDBInstanceInput struct {
 	PubliclyAccessible *bool
 
 	// A value that indicates whether the DB instance is encrypted. By default, it
-	// isn't encrypted. Amazon Aurora Not applicable. The encryption for DB instances
-	// is managed by the DB cluster.
+	// isn't encrypted. For RDS Custom Oracle instances, either set this parameter to
+	// true or leave it unset. If you set this parameter to false, RDS reports an
+	// error. Amazon Aurora Not applicable. The encryption for DB instances is managed
+	// by the DB cluster.
 	StorageEncrypted *bool
 
 	// Specifies the storage type to be associated with the DB instance. Valid values:
@@ -638,10 +707,11 @@ type CreateDBInstanceInput struct {
 	Tags []types.Tag
 
 	// The ARN from the key store with which to associate the instance for TDE
-	// encryption.
+	// encryption. This setting doesn't apply to RDS Custom.
 	TdeCredentialArn *string
 
 	// The password for the given ARN from the key store in order to access the device.
+	// This setting doesn't apply to RDS Custom.
 	TdeCredentialPassword *string
 
 	// The time zone of the DB instance. The time zone parameter is currently supported

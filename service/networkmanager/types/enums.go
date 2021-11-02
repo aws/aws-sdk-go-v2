@@ -24,6 +24,42 @@ func (ConnectionState) Values() []ConnectionState {
 	}
 }
 
+type ConnectionStatus string
+
+// Enum values for ConnectionStatus
+const (
+	ConnectionStatusUp   ConnectionStatus = "UP"
+	ConnectionStatusDown ConnectionStatus = "DOWN"
+)
+
+// Values returns all known values for ConnectionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectionStatus) Values() []ConnectionStatus {
+	return []ConnectionStatus{
+		"UP",
+		"DOWN",
+	}
+}
+
+type ConnectionType string
+
+// Enum values for ConnectionType
+const (
+	ConnectionTypeBgp   ConnectionType = "BGP"
+	ConnectionTypeIpsec ConnectionType = "IPSEC"
+)
+
+// Values returns all known values for ConnectionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectionType) Values() []ConnectionType {
+	return []ConnectionType{
+		"BGP",
+		"IPSEC",
+	}
+}
+
 type CustomerGatewayAssociationState string
 
 // Enum values for CustomerGatewayAssociationState
@@ -132,6 +168,134 @@ func (LinkState) Values() []LinkState {
 		"AVAILABLE",
 		"DELETING",
 		"UPDATING",
+	}
+}
+
+type RouteAnalysisCompletionReasonCode string
+
+// Enum values for RouteAnalysisCompletionReasonCode
+const (
+	RouteAnalysisCompletionReasonCodeTransitGatewayAttachmentNotFound                 RouteAnalysisCompletionReasonCode = "TRANSIT_GATEWAY_ATTACHMENT_NOT_FOUND"
+	RouteAnalysisCompletionReasonCodeTransitGatewayAttachmentNotInTransitGateway      RouteAnalysisCompletionReasonCode = "TRANSIT_GATEWAY_ATTACHMENT_NOT_IN_TRANSIT_GATEWAY"
+	RouteAnalysisCompletionReasonCodeCyclicPathDetected                               RouteAnalysisCompletionReasonCode = "CYCLIC_PATH_DETECTED"
+	RouteAnalysisCompletionReasonCodeTransitGatewayAttachmentStableRouteTableNotFound RouteAnalysisCompletionReasonCode = "TRANSIT_GATEWAY_ATTACHMENT_STABLE_ROUTE_TABLE_NOT_FOUND"
+	RouteAnalysisCompletionReasonCodeRouteNotFound                                    RouteAnalysisCompletionReasonCode = "ROUTE_NOT_FOUND"
+	RouteAnalysisCompletionReasonCodeBlackholeRouteForDestinationFound                RouteAnalysisCompletionReasonCode = "BLACKHOLE_ROUTE_FOR_DESTINATION_FOUND"
+	RouteAnalysisCompletionReasonCodeInactiveRouteForDestinationFound                 RouteAnalysisCompletionReasonCode = "INACTIVE_ROUTE_FOR_DESTINATION_FOUND"
+	RouteAnalysisCompletionReasonCodeTransitGatewayAttachment                         RouteAnalysisCompletionReasonCode = "TRANSIT_GATEWAY_ATTACHMENT_ATTACH_ARN_NO_MATCH"
+	RouteAnalysisCompletionReasonCodeMaxHopsExceeded                                  RouteAnalysisCompletionReasonCode = "MAX_HOPS_EXCEEDED"
+	RouteAnalysisCompletionReasonCodePossibleMiddlebox                                RouteAnalysisCompletionReasonCode = "POSSIBLE_MIDDLEBOX"
+	RouteAnalysisCompletionReasonCodeNoDestinationArnProvided                         RouteAnalysisCompletionReasonCode = "NO_DESTINATION_ARN_PROVIDED"
+)
+
+// Values returns all known values for RouteAnalysisCompletionReasonCode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (RouteAnalysisCompletionReasonCode) Values() []RouteAnalysisCompletionReasonCode {
+	return []RouteAnalysisCompletionReasonCode{
+		"TRANSIT_GATEWAY_ATTACHMENT_NOT_FOUND",
+		"TRANSIT_GATEWAY_ATTACHMENT_NOT_IN_TRANSIT_GATEWAY",
+		"CYCLIC_PATH_DETECTED",
+		"TRANSIT_GATEWAY_ATTACHMENT_STABLE_ROUTE_TABLE_NOT_FOUND",
+		"ROUTE_NOT_FOUND",
+		"BLACKHOLE_ROUTE_FOR_DESTINATION_FOUND",
+		"INACTIVE_ROUTE_FOR_DESTINATION_FOUND",
+		"TRANSIT_GATEWAY_ATTACHMENT_ATTACH_ARN_NO_MATCH",
+		"MAX_HOPS_EXCEEDED",
+		"POSSIBLE_MIDDLEBOX",
+		"NO_DESTINATION_ARN_PROVIDED",
+	}
+}
+
+type RouteAnalysisCompletionResultCode string
+
+// Enum values for RouteAnalysisCompletionResultCode
+const (
+	RouteAnalysisCompletionResultCodeConnected    RouteAnalysisCompletionResultCode = "CONNECTED"
+	RouteAnalysisCompletionResultCodeNotConnected RouteAnalysisCompletionResultCode = "NOT_CONNECTED"
+)
+
+// Values returns all known values for RouteAnalysisCompletionResultCode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (RouteAnalysisCompletionResultCode) Values() []RouteAnalysisCompletionResultCode {
+	return []RouteAnalysisCompletionResultCode{
+		"CONNECTED",
+		"NOT_CONNECTED",
+	}
+}
+
+type RouteAnalysisStatus string
+
+// Enum values for RouteAnalysisStatus
+const (
+	RouteAnalysisStatusRunning   RouteAnalysisStatus = "RUNNING"
+	RouteAnalysisStatusCompleted RouteAnalysisStatus = "COMPLETED"
+	RouteAnalysisStatusFailed    RouteAnalysisStatus = "FAILED"
+)
+
+// Values returns all known values for RouteAnalysisStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RouteAnalysisStatus) Values() []RouteAnalysisStatus {
+	return []RouteAnalysisStatus{
+		"RUNNING",
+		"COMPLETED",
+		"FAILED",
+	}
+}
+
+type RouteState string
+
+// Enum values for RouteState
+const (
+	RouteStateActive    RouteState = "ACTIVE"
+	RouteStateBlackhole RouteState = "BLACKHOLE"
+)
+
+// Values returns all known values for RouteState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (RouteState) Values() []RouteState {
+	return []RouteState{
+		"ACTIVE",
+		"BLACKHOLE",
+	}
+}
+
+type RouteTableType string
+
+// Enum values for RouteTableType
+const (
+	RouteTableTypeTransitGatewayRouteTable RouteTableType = "TRANSIT_GATEWAY_ROUTE_TABLE"
+)
+
+// Values returns all known values for RouteTableType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RouteTableType) Values() []RouteTableType {
+	return []RouteTableType{
+		"TRANSIT_GATEWAY_ROUTE_TABLE",
+	}
+}
+
+type RouteType string
+
+// Enum values for RouteType
+const (
+	RouteTypePropagated RouteType = "PROPAGATED"
+	RouteTypeStatic     RouteType = "STATIC"
+)
+
+// Values returns all known values for RouteType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (RouteType) Values() []RouteType {
+	return []RouteType{
+		"PROPAGATED",
+		"STATIC",
 	}
 }
 

@@ -7,6 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+// You are not authorized to perform this operation. Check your IAM policies, and
+// ensure that you are using the correct access keys.
 type AccessDeniedException struct {
 	Message *string
 
@@ -28,6 +30,7 @@ func (e *AccessDeniedException) ErrorMessage() string {
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Another operation is in progress.
 type ConflictException struct {
 	Message *string
 
@@ -49,6 +52,7 @@ func (e *ConflictException) ErrorMessage() string {
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// An internal error has occurred. Please retry your request.
 type InternalServerErrorException struct {
 	Message *string
 
@@ -70,6 +74,7 @@ func (e *InternalServerErrorException) ErrorMessage() string {
 func (e *InternalServerErrorException) ErrorCode() string             { return "InternalServerErrorException" }
 func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
+// The specified resource could not be found.
 type ResourceNotFoundException struct {
 	Message *string
 
@@ -91,6 +96,9 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Your current quota does not allow you to perform the request action. You can
+// request increases for some quotas, and other quotas cannot be increased. Please
+// use AWS Service Quotas to request an increase.
 type ServiceQuotaExceededException struct {
 	Message *string
 
@@ -112,6 +120,7 @@ func (e *ServiceQuotaExceededException) ErrorMessage() string {
 func (e *ServiceQuotaExceededException) ErrorCode() string             { return "ServiceQuotaExceededException" }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The request throughput limit was exceeded.
 type ThrottlingException struct {
 	Message *string
 
@@ -133,6 +142,7 @@ func (e *ThrottlingException) ErrorMessage() string {
 func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// One of the parameters in the request is invalid.
 type ValidationException struct {
 	Message *string
 

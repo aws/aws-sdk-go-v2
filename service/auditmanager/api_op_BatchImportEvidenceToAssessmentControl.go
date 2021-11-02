@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Uploads one or more pieces of evidence to the specified control in the
-// assessment in Audit Manager.
+// Uploads one or more pieces of evidence to a control in an Audit Manager
+// assessment.
 func (c *Client) BatchImportEvidenceToAssessmentControl(ctx context.Context, params *BatchImportEvidenceToAssessmentControlInput, optFns ...func(*Options)) (*BatchImportEvidenceToAssessmentControlOutput, error) {
 	if params == nil {
 		params = &BatchImportEvidenceToAssessmentControlInput{}
@@ -30,17 +30,17 @@ func (c *Client) BatchImportEvidenceToAssessmentControl(ctx context.Context, par
 
 type BatchImportEvidenceToAssessmentControlInput struct {
 
-	// The identifier for the specified assessment.
+	// The identifier for the assessment.
 	//
 	// This member is required.
 	AssessmentId *string
 
-	// The identifier for the specified control.
+	// The identifier for the control.
 	//
 	// This member is required.
 	ControlId *string
 
-	// The identifier for the specified control set.
+	// The identifier for the control set.
 	//
 	// This member is required.
 	ControlSetId *string
@@ -55,7 +55,7 @@ type BatchImportEvidenceToAssessmentControlInput struct {
 
 type BatchImportEvidenceToAssessmentControlOutput struct {
 
-	// A list of errors returned by the BatchImportEvidenceToAssessmentControl API.
+	// A list of errors that the BatchImportEvidenceToAssessmentControl API returned.
 	Errors []types.BatchImportEvidenceToAssessmentControlError
 
 	// Metadata pertaining to the operation's result.

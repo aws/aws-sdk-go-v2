@@ -36,7 +36,7 @@ type DescribeChannelModeratorInput struct {
 	// This member is required.
 	ChannelArn *string
 
-	// The ARN of the channel moderator.
+	// The AppInstanceUserArn of the channel moderator.
 	//
 	// This member is required.
 	ChannelModeratorArn *string

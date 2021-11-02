@@ -41,7 +41,7 @@ type DescribeChannelMembershipInput struct {
 	// This member is required.
 	ChimeBearer *string
 
-	// The ARN of the member.
+	// The AppInstanceUserArn of the member.
 	//
 	// This member is required.
 	MemberArn *string

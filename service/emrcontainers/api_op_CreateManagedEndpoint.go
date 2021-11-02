@@ -32,11 +32,6 @@ func (c *Client) CreateManagedEndpoint(ctx context.Context, params *CreateManage
 
 type CreateManagedEndpointInput struct {
 
-	// The certificate ARN of the managed endpoint.
-	//
-	// This member is required.
-	CertificateArn *string
-
 	// The client idempotency token for this create call.
 	//
 	// This member is required.
@@ -66,6 +61,13 @@ type CreateManagedEndpointInput struct {
 	//
 	// This member is required.
 	VirtualClusterId *string
+
+	// The certificate ARN provided by users for the managed endpoint. This fiedd is
+	// under deprecation and will be removed in future releases.
+	//
+	// Deprecated: Customer provided certificate-arn is deprecated and would be removed
+	// in future.
+	CertificateArn *string
 
 	// The configuration settings that will be used to override existing
 	// configurations.

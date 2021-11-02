@@ -35,7 +35,7 @@ type DeleteChannelModeratorInput struct {
 	// This member is required.
 	ChannelArn *string
 
-	// The ARN of the moderator being deleted.
+	// The AppInstanceUserArn of the moderator being deleted.
 	//
 	// This member is required.
 	ChannelModeratorArn *string

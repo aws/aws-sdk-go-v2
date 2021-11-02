@@ -62,7 +62,8 @@ type GenerateEmbedUrlForRegisteredUserInput struct {
 	AwsAccountId *string
 
 	// The experience you are embedding. For registered users, you can embed Amazon
-	// QuickSight dashboards or the entire Amazon QuickSight console.
+	// QuickSight dashboards, the entire Amazon QuickSight console, or the Amazon
+	// QuickSight Q search bar.
 	//
 	// This member is required.
 	ExperienceConfiguration *types.RegisteredUserEmbeddingExperienceConfiguration
@@ -81,7 +82,7 @@ type GenerateEmbedUrlForRegisteredUserInput struct {
 
 type GenerateEmbedUrlForRegisteredUserOutput struct {
 
-	// The embed URL for the Amazon QuickSight dashboard or console.
+	// The embed URL for the Amazon QuickSight dashboard, console, or Q search bar.
 	//
 	// This member is required.
 	EmbedUrl *string

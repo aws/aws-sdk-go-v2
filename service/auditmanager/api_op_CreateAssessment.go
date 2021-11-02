@@ -29,13 +29,13 @@ func (c *Client) CreateAssessment(ctx context.Context, params *CreateAssessmentI
 
 type CreateAssessmentInput struct {
 
-	// The assessment report storage destination for the specified assessment that is
-	// being created.
+	// The assessment report storage destination for the assessment that's being
+	// created.
 	//
 	// This member is required.
 	AssessmentReportsDestination *types.AssessmentReportsDestination
 
-	// The identifier for the specified framework.
+	// The identifier for the framework that the assessment will be created from.
 	//
 	// This member is required.
 	FrameworkId *string
@@ -45,12 +45,13 @@ type CreateAssessmentInput struct {
 	// This member is required.
 	Name *string
 
-	// The list of roles for the specified assessment.
+	// The list of roles for the assessment.
 	//
 	// This member is required.
 	Roles []types.Role
 
-	// The wrapper that contains the accounts and services in scope for the assessment.
+	// The wrapper that contains the Amazon Web Services accounts and services that are
+	// in scope for the assessment.
 	//
 	// This member is required.
 	Scope *types.Scope
@@ -58,7 +59,7 @@ type CreateAssessmentInput struct {
 	// The optional description of the assessment to be created.
 	Description *string
 
-	// The tags associated with the assessment.
+	// The tags that are associated with the assessment.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

@@ -47,7 +47,7 @@ type BatchCreateChannelMembershipError struct {
 	// The error message.
 	ErrorMessage *string
 
-	// The ARN of the member that the service couldn't add.
+	// The AppInstanceUserArn of the member that the service couldn't add.
 	MemberArn *string
 
 	noSmithyDocumentSerde
@@ -209,6 +209,15 @@ type ChannelMembershipForAppInstanceUserSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The channel membership preferences for an AppInstanceUser.
+type ChannelMembershipPreferences struct {
+
+	// The push notification configuration of a message.
+	PushNotifications *PushNotificationPreferences
+
+	noSmithyDocumentSerde
+}
+
 // Summary of the details of a ChannelMembership.
 type ChannelMembershipSummary struct {
 
@@ -235,6 +244,10 @@ type ChannelMessage struct {
 
 	// The time at which a message was updated.
 	LastUpdatedTimestamp *time.Time
+
+	// The attributes for the message, used for message filtering along with a
+	// FilterRule defined in the PushNotificationPreferences.
+	MessageAttributes map[string]MessageAttributeValue
 
 	// The ID of a message.
 	MessageId *string
@@ -303,6 +316,9 @@ type ChannelMessageSummary struct {
 
 	// The time at which a message was last updated.
 	LastUpdatedTimestamp *time.Time
+
+	// The message attribues listed in a the summary of a channel message.
+	MessageAttributes map[string]MessageAttributeValue
 
 	// The ID of the message.
 	MessageId *string
@@ -415,6 +431,15 @@ type LambdaConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// A list of message attribute values.
+type MessageAttributeValue struct {
+
+	// The strings in a message attribute value.
+	StringValues []string
+
+	noSmithyDocumentSerde
+}
+
 // The websocket endpoint used to connect to Amazon Chime SDK messaging.
 type MessagingSessionEndpoint struct {
 
@@ -440,10 +465,13 @@ type Processor struct {
 	// This member is required.
 	ExecutionOrder *int32
 
-	// Determines whether to continue or stop processing if communication with
-	// processor fails. If the last processor in a channel flow sequence has a fallback
-	// action of CONTINUE, and communication with the processor fails, the message is
-	// considered processed and sent to the recipients in the channel.
+	// Determines whether to continue with message processing or stop it in cases where
+	// communication with a processor fails. If a processor has a fallback action of
+	// ABORT and communication with it fails, the processor sets the message status to
+	// FAILED and does not send the message to any recipients. Note that if the last
+	// processor in the channel flow sequence has a fallback action of CONTINUE and
+	// communication with the processor fails, then the message is considered processed
+	// and sent to recipients of the channel.
 	//
 	// This member is required.
 	FallbackAction FallbackAction
@@ -463,6 +491,45 @@ type ProcessorConfiguration struct {
 	//
 	// This member is required.
 	Lambda *LambdaConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The push notification configuration of the message.
+type PushNotificationConfiguration struct {
+
+	// The body of the push notification.
+	//
+	// This member is required.
+	Body *string
+
+	// The title of the push notification.
+	//
+	// This member is required.
+	Title *string
+
+	// Enum value that indicates the type of the push notification for a message.
+	// DEFAULT: Normal mobile push notification. VOIP: VOIP mobile push notification.
+	//
+	// This member is required.
+	Type PushNotificationType
+
+	noSmithyDocumentSerde
+}
+
+// The channel membership preferences for push notification.
+type PushNotificationPreferences struct {
+
+	// Enum value that indicates which push notifications to send to the requested
+	// member of a channel. ALL sends all push notifications, NONE sends no push
+	// notifications, FILTERED sends only filtered push notifications.
+	//
+	// This member is required.
+	AllowNotifications AllowNotifications
+
+	// The simple JSON object used to send a subset of a push notification to the
+	// requsted member.
+	FilterRule *string
 
 	noSmithyDocumentSerde
 }

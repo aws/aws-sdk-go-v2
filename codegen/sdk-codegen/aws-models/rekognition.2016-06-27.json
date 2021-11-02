@@ -349,6 +349,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Face details for the recognized celebrity.</p>"
                     }
+                },
+                "KnownGender": {
+                    "target": "com.amazonaws.rekognition#KnownGender",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Retrieves the known gender for the celebrity.</p>"
+                    }
                 }
             },
             "traits": {
@@ -804,6 +810,83 @@
                 }
             }
         },
+        "com.amazonaws.rekognition#CreateDataset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rekognition#CreateDatasetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rekognition#CreateDatasetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rekognition#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InvalidS3ObjectException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ResourceAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new Amazon Rekognition Custom Labels dataset. You can create a dataset by using\n   an Amazon Sagemaker format manifest file or by copying an existing Amazon Rekognition Custom Labels dataset.</p>\n\n         <p>To create a training dataset for a project, specify <code>train</code> for the value of \n      <code>DatasetType</code>. To create the test dataset for a project,\n      specify <code>test</code> for the value of <code>DatasetType</code>.\n    </p>\n   \n   \n         <p>The response from <code>CreateDataset</code> is the Amazon Resource Name (ARN) for the dataset.\n   Creating a dataset takes a while to complete. Use <a>DescribeDataset</a> to check the \n   current status. The dataset created successfully if the value of <code>Status</code> is\n   <code>CREATE_COMPLETE</code>. </p>\n         <p>To check if any non-terminal errors occurred, call <a>ListDatasetEntries</a>\nand check for the presence of <code>errors</code> lists in the JSON Lines.</p>\n         <p>Dataset creation fails if a terminal error occurs (<code>Status</code> = <code>CREATE_FAILED</code>). \n      Currently, you can't access the terminal error information.\n      \n   </p>\n   \n   \n         <p>For more information, see Creating dataset in the <i>Amazon Rekognition Custom Labels Developer Guide</i>.</p>\n   \n         <p>This operation requires permissions to perform the <code>rekognition:CreateDataset</code> action.\n   If you want to copy an existing dataset, you also require permission to perform the <code>rekognition:ListDatasetEntries</code> action.</p>"
+            }
+        },
+        "com.amazonaws.rekognition#CreateDatasetRequest": {
+            "type": "structure",
+            "members": {
+                "DatasetSource": {
+                    "target": "com.amazonaws.rekognition#DatasetSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe source files for the dataset. You can specify the ARN of an existing dataset or specify the Amazon S3 bucket location\nof an Amazon Sagemaker format manifest file. If you don't specify <code>datasetSource</code>, an empty dataset is created.\n  To add labeled images to the dataset,  You can use the console or call <a>UpdateDatasetEntries</a>.\n  \n</p>"
+                    }
+                },
+                "DatasetType": {
+                    "target": "com.amazonaws.rekognition#DatasetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe type of the dataset. Specify <code>train</code> to create a training dataset. Specify <code>test</code> \n   to create a test dataset.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProjectArn": {
+                    "target": "com.amazonaws.rekognition#ProjectArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe ARN of the Amazon Rekognition Custom Labels project to which you want to asssign the dataset.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rekognition#CreateDatasetResponse": {
+            "type": "structure",
+            "members": {
+                "DatasetArn": {
+                    "target": "com.amazonaws.rekognition#DatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe ARN of the created  Amazon Rekognition Custom Labels dataset.\n</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.rekognition#CreateProject": {
             "type": "operation",
             "input": {
@@ -836,7 +919,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new Amazon Rekognition Custom Labels project. A project is a logical grouping of resources (images, Labels, models) \n         and operations (training, evaluation and detection).  </p>\n         <p>This operation requires permissions to perform the <code>rekognition:CreateProject</code> action.</p>"
+                "smithy.api#documentation": "<p>Creates a new Amazon Rekognition Custom Labels project. A project is a group of resources (datasets, model versions) \n         that you use to create and manage Amazon Rekognition Custom Labels models.  </p>\n         <p>This operation requires permissions to perform the <code>rekognition:CreateProject</code> action.</p>"
             }
         },
         "com.amazonaws.rekognition#CreateProjectRequest": {
@@ -900,7 +983,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new version of a model and begins training. \n         Models are managed as part of an Amazon Rekognition Custom Labels project.  You can specify\n         one training dataset and one testing dataset. The response from <code>CreateProjectVersion</code>\n         is an Amazon Resource Name (ARN) for the version of the model. </p>\n         <p>Training takes a while to complete. You can get the current status by calling\n         <a>DescribeProjectVersions</a>.</p>\n         <p>Once training has successfully completed, call <a>DescribeProjectVersions</a> to\n         get the training results and evaluate the model.                 \n      </p>\n         <p>After evaluating the model, you start the model\n       by calling <a>StartProjectVersion</a>.</p>\n         <p>This operation requires permissions to perform the <code>rekognition:CreateProjectVersion</code> action.</p>"
+                "smithy.api#documentation": "<p>Creates a new version of a model and begins training. \n         Models are managed as part of an Amazon Rekognition Custom Labels project. \n         The response from <code>CreateProjectVersion</code>\n         is an Amazon Resource Name (ARN) for the version of the model. </p>\n      \n      \n         <p>Training uses the training and test datasets associated with the project. \n         For more information, see Creating training and test dataset in the <i>Amazon Rekognition Custom Labels Developer Guide</i>.\n      </p>\n      \n     \n         <note>\n            <p>You can train a modelin a project that doesn't have associated datasets by specifying manifest files in the\n         <code>TrainingData</code> and <code>TestingData</code> fields.\n         </p>\n            <p>If you open the console after training a model with manifest files, Amazon Rekognition Custom Labels creates\n            the datasets for you using the most recent manifest files. You can no longer train\n            a model version for the project by specifying manifest files. </p>\n            <p>Instead of training with a project without associated datasets,\n            we recommend that you use the manifest\n            files to create training and test datasets for the project.</p>\n         </note>\n         \n      \n         <p>Training takes a while to complete. You can get the current status by calling\n         <a>DescribeProjectVersions</a>. Training completed successfully if\n         the value of the <code>Status</code> field is <code>TRAINING_COMPLETED</code>.</p>\n      \n         <p>If training \n         fails, see Debugging a failed model training in the <i>Amazon Rekognition Custom Labels</i> developer guide. </p>\n      \n      \n         <p>Once training has successfully completed, call <a>DescribeProjectVersions</a> to\n         get the training results and evaluate the model.  For more information, see Improving a trained Amazon Rekognition Custom Labels model\n         in the <i>Amazon Rekognition Custom Labels</i> developers guide.\n      </p>\n      \n         <p>After evaluating the model, you start the model\n       by calling <a>StartProjectVersion</a>.</p>\n         <p>This operation requires permissions to perform the <code>rekognition:CreateProjectVersion</code> action.</p>"
             }
         },
         "com.amazonaws.rekognition#CreateProjectVersionRequest": {
@@ -930,15 +1013,13 @@
                 "TrainingData": {
                     "target": "com.amazonaws.rekognition#TrainingData",
                     "traits": {
-                        "smithy.api#documentation": "<p>The dataset to use for training. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Specifies an external manifest that the services uses to train the model.\n         If you specify <code>TrainingData</code> you must also specify <code>TestingData</code>.\n         The project must not have any associated datasets.\n      </p>"
                     }
                 },
                 "TestingData": {
                     "target": "com.amazonaws.rekognition#TestingData",
                     "traits": {
-                        "smithy.api#documentation": "<p>The dataset to use for testing.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Specifies an external manifest that the service uses to test the model.\n         If you specify <code>TestingData</code> you must also specify <code>TrainingData</code>.\n         The project must not have any associated datasets.</p>"
                     }
                 },
                 "Tags": {
@@ -950,7 +1031,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.rekognition#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for your AWS Key Management Service (AWS KMS) customer master key (CMK).\n         You can supply the Amazon Resource Name (ARN) of your CMK, the ID of your CMK,\n         an alias for your CMK, or an alias ARN.\n         The key is used to encrypt training and test images copied into the service for model training.\n         Your source images are unaffected. The key is also used to encrypt training results\n         and manifest files written to the output Amazon S3 bucket (<code>OutputConfig</code>).</p>\n         <p>If you choose to use your own CMK, you need the following permissions on the CMK.</p>\n         <ul>\n            <li>\n               <p>kms:CreateGrant</p>\n            </li>\n            <li>\n               <p>kms:DescribeKey</p>\n            </li>\n            <li>\n               <p>kms:GenerateDataKey</p>\n            </li>\n            <li>\n               <p>kms:Decrypt</p>\n            </li>\n         </ul>\n         <p>If you don't specify a value for <code>KmsKeyId</code>, images copied into the service are encrypted\n         using a key that AWS owns and manages.</p>"
+                        "smithy.api#documentation": "<p>The identifier for your AWS Key Management Service key (AWS KMS key).\n         You can supply the Amazon Resource Name (ARN) of your KMS key, the ID of your KMS key,\n         an alias for your KMS key, or an alias ARN.\n         The key is used to encrypt training and test images copied into the service for model training.\n         Your source images are unaffected. The key is also used to encrypt training results\n         and manifest files written to the output Amazon S3 bucket (<code>OutputConfig</code>).</p>\n         <p>If you choose to use your own KMS key, you need the following permissions on the KMS key.</p> \n         <ul>\n            <li>\n               <p>kms:CreateGrant</p>\n            </li>\n            <li>\n               <p>kms:DescribeKey</p>\n            </li>\n            <li>\n               <p>kms:GenerateDataKey</p>\n            </li>\n            <li>\n               <p>kms:Decrypt</p>\n            </li>\n         </ul>\n         <p>If you don't specify a value for <code>KmsKeyId</code>, images copied into the service are encrypted\n         using a key that AWS owns and manages.</p>"
                     }
                 }
             }
@@ -1093,6 +1174,327 @@
                 "target": "com.amazonaws.rekognition#CustomLabel"
             }
         },
+        "com.amazonaws.rekognition#DatasetArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^(^arn:[a-z\\d-]+:rekognition:[a-z\\d-]+:\\d{12}:project\\/[a-zA-Z0-9_.\\-]{1,255}\\/dataset\\/(train|test)\\/[0-9]+$)$"
+            }
+        },
+        "com.amazonaws.rekognition#DatasetChanges": {
+            "type": "structure",
+            "members": {
+                "GroundTruth": {
+                    "target": "com.amazonaws.rekognition#GroundTruthBlob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Base64-encoded binary data object\n   containing one or JSON lines that either update the dataset or are additions to the dataset.  You change a dataset by calling <a>UpdateDatasetEntries</a>.\n   If you are using an AWS SDK to call <code>UpdateDatasetEntries</code>, you don't need to encode <code>Changes</code> as the SDK encodes the data for you.\n\n</p>\n   \n   \n         <p>For example JSON lines,\n      see Image-Level labels in manifest files and \n      and Object localization in manifest files in the <i>Amazon Rekognition Custom Labels Developer Guide</i>.\n   </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nDescribes updates or additions to a dataset. A Single update or addition\nis an entry (JSON Line) that provides information about a single image. To update an existing entry,\nyou match the <code>source-ref</code> field of the update entry with the <code>source-ref</code> filed of the entry that you want to update.\n If the <code>source-ref</code> field doesn't match an existing entry, the entry is added to dataset as a new entry. </p>"
+            }
+        },
+        "com.amazonaws.rekognition#DatasetDescription": {
+            "type": "structure",
+            "members": {
+                "CreationTimestamp": {
+                    "target": "com.amazonaws.rekognition#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe Unix timestamp for the time and date that the dataset was created.\n</p>"
+                    }
+                },
+                "LastUpdatedTimestamp": {
+                    "target": "com.amazonaws.rekognition#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The Unix timestamp for the date and time that the dataset was last updated.\n</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.rekognition#DatasetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The status of the dataset.\n</p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.rekognition#StatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The status message for the dataset. \n</p>"
+                    }
+                },
+                "StatusMessageCode": {
+                    "target": "com.amazonaws.rekognition#DatasetStatusMessageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The status message code for the dataset operation. If a service error occurs, try the \n   API call again later. If a client error occurs, check the input parameters to the dataset\n   API call that failed.\n</p>"
+                    }
+                },
+                "DatasetStats": {
+                    "target": "com.amazonaws.rekognition#DatasetStats",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe status message code for the dataset.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nA description for a dataset. For more information, see <a>DescribeDataset</a>.</p>\n         <p>The status fields <code>Status</code>, <code>StatusMessage</code>, and <code>StatusMessageCode</code>\nreflect the last operation on the dataset.\n</p>"
+            }
+        },
+        "com.amazonaws.rekognition#DatasetEntries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rekognition#DatasetEntry"
+            }
+        },
+        "com.amazonaws.rekognition#DatasetEntry": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100000
+                },
+                "smithy.api#pattern": "^\\{.*\\}$"
+            }
+        },
+        "com.amazonaws.rekognition#DatasetLabel": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^.{1,}$"
+            }
+        },
+        "com.amazonaws.rekognition#DatasetLabelDescription": {
+            "type": "structure",
+            "members": {
+                "LabelName": {
+                    "target": "com.amazonaws.rekognition#DatasetLabel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of the label.\n</p>"
+                    }
+                },
+                "LabelStats": {
+                    "target": "com.amazonaws.rekognition#DatasetLabelStats",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nStatistics about the label.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nDescribes a dataset label. For more information, see <a>ListDatasetLabels</a>.\n</p>"
+            }
+        },
+        "com.amazonaws.rekognition#DatasetLabelDescriptions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rekognition#DatasetLabelDescription"
+            }
+        },
+        "com.amazonaws.rekognition#DatasetLabelStats": {
+            "type": "structure",
+            "members": {
+                "EntryCount": {
+                    "target": "com.amazonaws.rekognition#UInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe total number of images that use the label.\n</p>"
+                    }
+                },
+                "BoundingBoxCount": {
+                    "target": "com.amazonaws.rekognition#UInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe total number of images that have the label assigned to a bounding box.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n   Statistics about a label used in a dataset. For more information, see <a>DatasetLabelDescription</a>.\n</p>"
+            }
+        },
+        "com.amazonaws.rekognition#DatasetLabels": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rekognition#DatasetLabel"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.rekognition#DatasetMetadata": {
+            "type": "structure",
+            "members": {
+                "CreationTimestamp": {
+                    "target": "com.amazonaws.rekognition#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The Unix timestamp for the date and time that the dataset was created. \n</p>"
+                    }
+                },
+                "DatasetType": {
+                    "target": "com.amazonaws.rekognition#DatasetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The type of the dataset.\n</p>"
+                    }
+                },
+                "DatasetArn": {
+                    "target": "com.amazonaws.rekognition#DatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe Amazon Resource Name (ARN) for the dataset.\n</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.rekognition#DatasetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The status for the dataset.\n</p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.rekognition#StatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The status message for the dataset.\n</p>"
+                    }
+                },
+                "StatusMessageCode": {
+                    "target": "com.amazonaws.rekognition#DatasetStatusMessageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The status message code for the dataset operation. If a service error occurs, try the \n   API call again later. If a client error occurs, check the input parameters to the dataset\n   API call that failed.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n   Summary information for an Amazon Rekognition Custom Labels dataset. For more information, see \n   <a>ProjectDescription</a>.\n</p>"
+            }
+        },
+        "com.amazonaws.rekognition#DatasetMetadataList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rekognition#DatasetMetadata"
+            }
+        },
+        "com.amazonaws.rekognition#DatasetSource": {
+            "type": "structure",
+            "members": {
+                "GroundTruthManifest": {
+                    "target": "com.amazonaws.rekognition#GroundTruthManifest"
+                },
+                "DatasetArn": {
+                    "target": "com.amazonaws.rekognition#DatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe ARN of an Amazon Rekognition Custom Labels dataset that you want to copy.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nThe source that Amazon Rekognition Custom Labels uses to create a dataset. To\nuse an Amazon Sagemaker format manifest file, specify the  S3 bucket location in the <code>GroundTruthManifest</code> field.\nThe S3 bucket must be in your AWS account.\nTo create a copy of an existing dataset,  specify the Amazon Resource Name (ARN) of\nan existing dataset in <code>DatasetArn</code>.</p>\n         <p>You need to specify a value for <code>DatasetArn</code> or <code>GroundTruthManifest</code>, but not both.\n    if you supply both values, or if you don't specify any values, an InvalidParameterException exception occurs. \n </p>\n         <p>For more information, see <a>CreateDataset</a>.</p>"
+            }
+        },
+        "com.amazonaws.rekognition#DatasetStats": {
+            "type": "structure",
+            "members": {
+                "LabeledEntries": {
+                    "target": "com.amazonaws.rekognition#UInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe total number of images in the dataset that have labels.\n</p>"
+                    }
+                },
+                "TotalEntries": {
+                    "target": "com.amazonaws.rekognition#UInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe total number of images in the dataset.\n</p>"
+                    }
+                },
+                "TotalLabels": {
+                    "target": "com.amazonaws.rekognition#UInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe total number of labels declared in the dataset.\n</p>"
+                    }
+                },
+                "ErrorEntries": {
+                    "target": "com.amazonaws.rekognition#UInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The total number of entries that contain at least one error.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nProvides statistics about a dataset. For more information, see <a>DescribeDataset</a>.\n\n</p>"
+            }
+        },
+        "com.amazonaws.rekognition#DatasetStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CREATE_IN_PROGRESS",
+                        "name": "CREATE_IN_PROGRESS"
+                    },
+                    {
+                        "value": "CREATE_COMPLETE",
+                        "name": "CREATE_COMPLETE"
+                    },
+                    {
+                        "value": "CREATE_FAILED",
+                        "name": "CREATE_FAILED"
+                    },
+                    {
+                        "value": "UPDATE_IN_PROGRESS",
+                        "name": "UPDATE_IN_PROGRESS"
+                    },
+                    {
+                        "value": "UPDATE_COMPLETE",
+                        "name": "UPDATE_COMPLETE"
+                    },
+                    {
+                        "value": "UPDATE_FAILED",
+                        "name": "UPDATE_FAILED"
+                    },
+                    {
+                        "value": "DELETE_IN_PROGRESS",
+                        "name": "DELETE_IN_PROGRESS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.rekognition#DatasetStatusMessageCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SUCCESS",
+                        "name": "SUCCESS"
+                    },
+                    {
+                        "value": "SERVICE_ERROR",
+                        "name": "SERVICE_ERROR"
+                    },
+                    {
+                        "value": "CLIENT_ERROR",
+                        "name": "CLIENT_ERROR"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.rekognition#DatasetType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "TRAIN",
+                        "name": "TRAIN"
+                    },
+                    {
+                        "value": "TEST",
+                        "name": "TEST"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.rekognition#DateTime": {
             "type": "timestamp"
         },
@@ -1160,6 +1562,60 @@
                     }
                 }
             }
+        },
+        "com.amazonaws.rekognition#DeleteDataset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rekognition#DeleteDatasetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rekognition#DeleteDatasetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rekognition#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an existing Amazon Rekognition Custom Labels dataset.\n   Deleting a dataset might take while. Use <a>DescribeDataset</a> to check the \n   current status. The dataset is still deleting if the value of <code>Status</code> is\n   <code>DELETE_IN_PROGRESS</code>. If you try to access the dataset after it is deleted, you get\n   a <code>ResourceNotFoundException</code> exception.\n\n</p>\n         <p>You can't delete a dataset while it is creating (<code>Status</code> =  <code>CREATE_IN_PROGRESS</code>)\n      or if the dataset is updating (<code>Status</code> =  <code>UPDATE_IN_PROGRESS</code>).</p>\n         <p>This operation requires permissions to perform the <code>rekognition:DeleteDataset</code> action.</p>"
+            }
+        },
+        "com.amazonaws.rekognition#DeleteDatasetRequest": {
+            "type": "structure",
+            "members": {
+                "DatasetArn": {
+                    "target": "com.amazonaws.rekognition#DatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe ARN of the Amazon Rekognition Custom Labels dataset that you want to delete. \n</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rekognition#DeleteDatasetResponse": {
+            "type": "structure",
+            "members": {}
         },
         "com.amazonaws.rekognition#DeleteFaces": {
             "type": "operation",
@@ -1255,7 +1711,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an Amazon Rekognition Custom Labels project.  To delete a project you must first delete all models associated \n         with the project. To delete a model, see <a>DeleteProjectVersion</a>.</p>\n         <p>This operation requires permissions to perform the\n         <code>rekognition:DeleteProject</code> action. </p>"
+                "smithy.api#documentation": "<p>Deletes an Amazon Rekognition Custom Labels project.  To delete a project you must first delete all models associated \n         with the project. To delete a model, see <a>DeleteProjectVersion</a>.</p>\n         <p>\n            <code>DeleteProject</code> is an asynchronous operation. To check if the project is deleted,\n      call <a>DescribeProjects</a>. The project is deleted when the project no longer appears in the\n      response.</p>\n         <p>This operation requires permissions to perform the\n         <code>rekognition:DeleteProject</code> action. </p>"
             }
         },
         "com.amazonaws.rekognition#DeleteProjectRequest": {
@@ -1463,6 +1919,61 @@
                 }
             }
         },
+        "com.amazonaws.rekognition#DescribeDataset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rekognition#DescribeDatasetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rekognition#DescribeDatasetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rekognition#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\nDescribes an Amazon Rekognition Custom Labels dataset. You can get information such as the current status of a dataset and\nstatistics about the images and labels in a dataset.  \n</p>\n         <p>This operation requires permissions to perform the <code>rekognition:DescribeDataset</code> action.</p>"
+            }
+        },
+        "com.amazonaws.rekognition#DescribeDatasetRequest": {
+            "type": "structure",
+            "members": {
+                "DatasetArn": {
+                    "target": "com.amazonaws.rekognition#DatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe Amazon Resource Name (ARN) of the dataset that you want to describe.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rekognition#DescribeDatasetResponse": {
+            "type": "structure",
+            "members": {
+                "DatasetDescription": {
+                    "target": "com.amazonaws.rekognition#DatasetDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe description for the dataset.\n</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.rekognition#DescribeProjectVersions": {
             "type": "operation",
             "input": {
@@ -1495,7 +2006,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists and describes the models in an Amazon Rekognition Custom Labels project. You \n         can specify up to 10 model versions in <code>ProjectVersionArns</code>. If\n         you don't specify a value, descriptions for all models are returned.</p>\n         <p>This operation requires permissions to perform the <code>rekognition:DescribeProjectVersions</code>\n            action.</p>",
+                "smithy.api#documentation": "<p>Lists and describes the versions of a model in an Amazon Rekognition Custom Labels project. You \n         can specify up to 10 model versions in <code>ProjectVersionArns</code>. If\n         you don't specify a value, descriptions for all model versions in the project are returned.</p>\n         <p>This operation requires permissions to perform the <code>rekognition:DescribeProjectVersions</code>\n            action.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1634,7 +2145,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists and gets information about your Amazon Rekognition Custom Labels projects.</p>\n         <p>This operation requires permissions to perform the <code>rekognition:DescribeProjects</code> action.</p>",
+                "smithy.api#documentation": "<p>Gets information about your Amazon Rekognition Custom Labels projects. </p>\n         <p>This operation requires permissions to perform the <code>rekognition:DescribeProjects</code> action.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1656,6 +2167,12 @@
                     "target": "com.amazonaws.rekognition#ProjectsPageSize",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of results to return per paginated call. The largest value you can specify is 100. \n         If you specify a value greater than 100, a ValidationException\n         error occurs. The default value is 100. </p>"
+                    }
+                },
+                "ProjectNames": {
+                    "target": "com.amazonaws.rekognition#ProjectNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the projects that you want Amazon Rekognition Custom Labels to describe. If you don't specify a value, \n      the response includes descriptions for all the projects in your AWS account.</p>"
                     }
                 }
             }
@@ -2315,6 +2832,84 @@
                 "smithy.api#documentation": "<p>A set of parameters that allow you to filter out certain results from your returned results.</p>"
             }
         },
+        "com.amazonaws.rekognition#DistributeDataset": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.rekognition#DatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset that you want to use.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         A training dataset or a test dataset used in a dataset distribution operation.\n         For more information, see <a>DistributeDatasetEntries</a>.\n      </p>"
+            }
+        },
+        "com.amazonaws.rekognition#DistributeDatasetEntries": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rekognition#DistributeDatasetEntriesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rekognition#DistributeDatasetEntriesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rekognition#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ResourceNotReadyException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Distributes the entries (images) in a training dataset across the training dataset and the test dataset for a project.\n         <code>DistributeDatasetEntries</code> moves 20% of the training dataset images to the test dataset.\n         An entry is a JSON Line that describes an image.\n      </p>\n         <p>You supply the Amazon Resource Names (ARN) of a project's training dataset and test dataset. \n         The training dataset must contain the images that you want to split. The test dataset \n      must be empty. The datasets must belong to the same project. To create training and test datasets for a project, call <a>CreateDataset</a>.</p>\n         <p>Distributing a dataset takes a while to complete. To check the status call <code>DescribeDataset</code>. The operation\n         is complete when the <code>Status</code> field for the training dataset and the test dataset is <code>UPDATE_COMPLETE</code>. \n         If the dataset split fails, the value of <code>Status</code> is <code>UPDATE_FAILED</code>.</p>\n\n         <p>This operation requires permissions to perform the <code>rekognition:DistributeDatasetEntries</code> action.</p>"
+            }
+        },
+        "com.amazonaws.rekognition#DistributeDatasetEntriesRequest": {
+            "type": "structure",
+            "members": {
+                "Datasets": {
+                    "target": "com.amazonaws.rekognition#DistributeDatasetMetadataList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARNS for the training dataset and test dataset that you want to use. The datasets must belong to\n         the same project. The test dataset must be empty.\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rekognition#DistributeDatasetEntriesResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.rekognition#DistributeDatasetMetadataList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rekognition#DistributeDataset"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 2
+                }
+            }
+        },
         "com.amazonaws.rekognition#Emotion": {
             "type": "structure",
             "members": {
@@ -2778,7 +3373,7 @@
                 "FaceMatchThreshold": {
                     "target": "com.amazonaws.rekognition#Percent",
                     "traits": {
-                        "smithy.api#documentation": "<p>Minimum face match confidence score that must be met to return a result for a recognized face. Default is 80.\n        0 is the lowest confidence. 100 is the highest confidence.</p>"
+                        "smithy.api#documentation": "<p>Minimum face match confidence score that must be met to return a result for a recognized face. The default is 80.\n        0 is the lowest confidence. 100 is the highest confidence. Values between 0 and 100 are accepted, and values lower than 80 are set to 80.</p>"
                     }
                 }
             },
@@ -2970,7 +3565,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the celebrity recognition results for a Amazon Rekognition Video analysis started by\n     <a>StartCelebrityRecognition</a>.</p>\n         <p>Celebrity recognition in a video is an asynchronous operation. Analysis is started by a call\n      to <a>StartCelebrityRecognition</a>  which returns a job identifier (<code>JobId</code>).\n      When the celebrity recognition operation finishes, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service\n      topic registered in the initial call to <code>StartCelebrityRecognition</code>.\n      To get the results of the celebrity recognition analysis, first check that the status value published to the Amazon SNS\n      topic is <code>SUCCEEDED</code>. If so, call  <code>GetCelebrityDetection</code> and pass the job identifier\n      (<code>JobId</code>) from the initial call to <code>StartCelebrityDetection</code>. </p>\n      \n         <p>For more information, see Working With Stored Videos in the Amazon Rekognition Developer Guide.</p>\n         <p>\n            <code>GetCelebrityRecognition</code> returns detected celebrities and the time(s) they are detected in an array\n      (<code>Celebrities</code>) of <a>CelebrityRecognition</a> \n      objects. Each <code>CelebrityRecognition</code> contains information about the celebrity in a <a>CelebrityDetail</a>\n      object and the time, <code>Timestamp</code>, the celebrity was detected.\n      </p>\n         <note>\n            <p>\n               <code>GetCelebrityRecognition</code> only returns the default  \n        facial attributes (<code>BoundingBox</code>, <code>Confidence</code>, \n        <code>Landmarks</code>, <code>Pose</code>, and <code>Quality</code>). The other facial attributes listed\n        in the <code>Face</code> object of the following response syntax are not returned. For more information,\n        see FaceDetail in the Amazon Rekognition Developer Guide. </p>\n         </note>\n         <p>By default, the <code>Celebrities</code> array is sorted by time (milliseconds from the start of the video).\n      You can also sort the array by celebrity by specifying the value <code>ID</code> in the <code>SortBy</code> input parameter.</p>\n         <p>The <code>CelebrityDetail</code> object includes the celebrity identifer and additional information urls. If you don't store\n      the additional information urls, you can get them later by calling <a>GetCelebrityInfo</a> with the celebrity identifer.</p>\n         <p>No information is returned for faces not recognized as celebrities.</p>\n         <p>Use MaxResults parameter to limit the number of labels returned. If there are more results than\n      specified in <code>MaxResults</code>, the value of <code>NextToken</code> in the operation response contains a\n      pagination token for getting the next set of results. To get the next page of results, call <code>GetCelebrityDetection</code>\n      and populate the <code>NextToken</code> request parameter with the token\n      value returned from the previous call to <code>GetCelebrityRecognition</code>.</p>",
+                "smithy.api#documentation": "<p>Gets the celebrity recognition results for a Amazon Rekognition Video analysis started by\n     <a>StartCelebrityRecognition</a>.</p>\n         <p>Celebrity recognition in a video is an asynchronous operation. Analysis is started by a\n      call to <a>StartCelebrityRecognition</a> which returns a job identifier\n        (<code>JobId</code>). </p>\n         <p>When the celebrity recognition operation finishes, Amazon Rekognition Video publishes a completion\n      status to the Amazon Simple Notification Service topic registered in the initial call to\n        <code>StartCelebrityRecognition</code>. To get the results of the celebrity recognition\n      analysis, first check that the status value published to the Amazon SNS topic is\n        <code>SUCCEEDED</code>. If so, call <code>GetCelebrityDetection</code> and pass the job\n      identifier (<code>JobId</code>) from the initial call to <code>StartCelebrityDetection</code>. </p>\n      \n         <p>For more information, see Working With Stored Videos in the Amazon Rekognition Developer Guide.</p>\n         <p>\n            <code>GetCelebrityRecognition</code> returns detected celebrities and the time(s) they\n      are detected in an array (<code>Celebrities</code>) of <a>CelebrityRecognition</a>\n       objects. Each <code>CelebrityRecognition</code>\n      contains information about the celebrity in a <a>CelebrityDetail</a> object and the\n      time, <code>Timestamp</code>, the celebrity was detected.  This <a>CelebrityDetail</a> object stores information about the detected celebrity's face\n      attributes, a face bounding box, known gender, the celebrity's name, and a confidence\n      estimate.</p>\n         <note>\n            <p>\n               <code>GetCelebrityRecognition</code> only returns the default facial\n        attributes (<code>BoundingBox</code>, <code>Confidence</code>, <code>Landmarks</code>,\n          <code>Pose</code>, and <code>Quality</code>). The <code>BoundingBox</code> field only\n        applies to the detected face instance. The other facial attributes listed in the\n          <code>Face</code> object of the following response syntax are not returned. For more\n        information, see FaceDetail in the Amazon Rekognition Developer Guide. </p>\n         </note>\n         <p>By default, the <code>Celebrities</code> array is sorted by time (milliseconds from the start of the video).\n      You can also sort the array by celebrity by specifying the value <code>ID</code> in the <code>SortBy</code> input parameter.</p>\n         <p>The <code>CelebrityDetail</code> object includes the celebrity identifer and additional information urls. If you don't store\n      the additional information urls, you can get them later by calling <a>GetCelebrityInfo</a> with the celebrity identifer.</p>\n         <p>No information is returned for faces not recognized as celebrities.</p>\n         <p>Use MaxResults parameter to limit the number of labels returned. If there are more results than\n      specified in <code>MaxResults</code>, the value of <code>NextToken</code> in the operation response contains a\n      pagination token for getting the next set of results. To get the next page of results, call <code>GetCelebrityDetection</code>\n      and populate the <code>NextToken</code> request parameter with the token\n      value returned from the previous call to <code>GetCelebrityRecognition</code>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -3787,6 +4382,15 @@
                 }
             }
         },
+        "com.amazonaws.rekognition#GroundTruthBlob": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5242880
+                }
+            }
+        },
         "com.amazonaws.rekognition#GroundTruthManifest": {
             "type": "structure",
             "members": {
@@ -3796,6 +4400,12 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The S3 bucket that contains an Amazon Sagemaker Ground Truth format manifest file. \n</p>"
+            }
+        },
+        "com.amazonaws.rekognition#HasErrors": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
             }
         },
         "com.amazonaws.rekognition#HumanLoopActivationOutput": {
@@ -4292,6 +4902,12 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.rekognition#IsLabeled": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
         "com.amazonaws.rekognition#JobId": {
             "type": "string",
             "traits": {
@@ -4728,6 +5344,226 @@
                     "target": "com.amazonaws.rekognition#FaceModelVersionList",
                     "traits": {
                         "smithy.api#documentation": "<p>Version numbers of the face detection models associated with the collections in the array <code>CollectionIds</code>.\n    For example, the value of <code>FaceModelVersions[2]</code> is the version number for the face detection model used\n      by the collection in <code>CollectionId[2]</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rekognition#ListDatasetEntries": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rekognition#ListDatasetEntriesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rekognition#ListDatasetEntriesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rekognition#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InvalidPaginationTokenException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ResourceNotReadyException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\nLists the entries (images) within a dataset. An entry is a\nJSON Line that contains the information for a single image, including\nthe image location, assigned labels, and object location bounding boxes. For \nmore information, see <a href=\"https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/md-manifest-files.html\">Creating a manifest file</a>.</p>\n         <p>JSON Lines in the response include information about non-terminal\n   errors found in the dataset. \n   Non terminal errors are reported in <code>errors</code> lists within each JSON Line. The\n   same information is reported in the training and testing validation result manifests that\n   Amazon Rekognition Custom Labels creates during model training.\n </p>\n   \n         <p>You can filter the response in variety of ways, such as choosing which labels to return and returning JSON Lines created after a specific date.\n</p>\n         <p>This operation requires permissions to perform the <code>rekognition:ListDatasetEntries</code> action.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "DatasetEntries",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.rekognition#ListDatasetEntriesPageSize": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.rekognition#ListDatasetEntriesRequest": {
+            "type": "structure",
+            "members": {
+                "DatasetArn": {
+                    "target": "com.amazonaws.rekognition#DatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe Amazon Resource Name (ARN) for the dataset that you want to use. \n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContainsLabels": {
+                    "target": "com.amazonaws.rekognition#DatasetLabels",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a label filter for the response. The response includes an entry only if one or more of the labels in <code>ContainsLabels</code> exist in the entry.       \n      </p>"
+                    }
+                },
+                "Labeled": {
+                    "target": "com.amazonaws.rekognition#IsLabeled",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   Specify <code>true</code> to get only the JSON Lines where the image is labeled. \n   Specify <code>false</code> to get only the JSON Lines where the image isn't labeled. If you\n   don't specify <code>Labeled</code>, <code>ListDatasetEntries</code> returns JSON Lines for labeled and unlabeled \n   images.\n</p>"
+                    }
+                },
+                "SourceRefContains": {
+                    "target": "com.amazonaws.rekognition#QueryString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If specified, <code>ListDatasetEntries</code> only returns JSON Lines where the value of <code>SourceRefContains</code> is\n   part of the <code>source-ref</code> field. The <code>source-ref</code> field contains the Amazon S3 location of the image.\n   You can use <code>SouceRefContains</code> for tasks such as getting the JSON Line for a single image, or gettting JSON Lines for all images within a specific folder.</p>"
+                    }
+                },
+                "HasErrors": {
+                    "target": "com.amazonaws.rekognition#HasErrors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies an error filter for the response. Specify <code>True</code> to only include entries that have errors.\n      </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.rekognition#ExtendedPaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the previous response was incomplete (because there is more\n      results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response. You can use this pagination \n      token to retrieve the next set of results. </p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.rekognition#ListDatasetEntriesPageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per paginated call. The largest value you can specify is 100. \n      If you specify a value greater than 100, a ValidationException\n      error occurs. The default value is 100. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rekognition#ListDatasetEntriesResponse": {
+            "type": "structure",
+            "members": {
+                "DatasetEntries": {
+                    "target": "com.amazonaws.rekognition#DatasetEntries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nA list of entries (images) in the dataset.\n</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.rekognition#ExtendedPaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the previous response was incomplete (because there is more\n      results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response. You can use this pagination \n      token to retrieve the next set of results. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rekognition#ListDatasetLabels": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rekognition#ListDatasetLabelsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rekognition#ListDatasetLabelsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rekognition#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InvalidPaginationTokenException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ResourceNotReadyException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the labels in a dataset. Amazon Rekognition Custom Labels uses labels to describe images. For more information, see \n   <a href=\"https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/md-labeling-images.html\">Labeling images</a>.\n</p>   \n         <p>\n      Lists the labels in a dataset. Amazon Rekognition Custom Labels uses labels to describe images. For more information, see Labeling images\n      in the <i>Amazon Rekognition Custom Labels Developer Guide</i>. </p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "DatasetLabelDescriptions",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.rekognition#ListDatasetLabelsPageSize": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.rekognition#ListDatasetLabelsRequest": {
+            "type": "structure",
+            "members": {
+                "DatasetArn": {
+                    "target": "com.amazonaws.rekognition#DatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe Amazon Resource Name (ARN) of the dataset that you want to use.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.rekognition#ExtendedPaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the previous response was incomplete (because there is more\n      results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response. You can use this pagination \n      token to retrieve the next set of results. </p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.rekognition#ListDatasetLabelsPageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per paginated call. The largest value you can specify is 100. \n      If you specify a value greater than 100, a ValidationException\n      error occurs. The default value is 100. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rekognition#ListDatasetLabelsResponse": {
+            "type": "structure",
+            "members": {
+                "DatasetLabelDescriptions": {
+                    "target": "com.amazonaws.rekognition#DatasetLabelDescriptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nA list of the labels in the dataset.\n</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.rekognition#ExtendedPaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the previous response was incomplete (because there is more\n      results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response. You can use this pagination \n      token to retrieve the next set of results. </p>"
                     }
                 }
             }
@@ -5364,10 +6200,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The current status of the project.</p>"
                     }
+                },
+                "Datasets": {
+                    "target": "com.amazonaws.rekognition#DatasetMetadataList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Information about the training and test datasets in the project.\n      </p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A description of a Amazon Rekognition Custom Labels project.</p>"
+                "smithy.api#documentation": "<p>A description of an Amazon Rekognition Custom Labels project. For more information, see <a>DescribeProjects</a>.</p>"
             }
         },
         "com.amazonaws.rekognition#ProjectDescriptions": {
@@ -5384,6 +6226,18 @@
                     "max": 255
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9_.\\-]+$"
+            }
+        },
+        "com.amazonaws.rekognition#ProjectNames": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rekognition#ProjectName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.rekognition#ProjectStatus": {
@@ -5451,7 +6305,7 @@
                 "BillableTrainingTimeInSeconds": {
                     "target": "com.amazonaws.rekognition#ULong",
                     "traits": {
-                        "smithy.api#documentation": "<p>The duration, in seconds, that the model version has been billed for training. \n      This value is only returned if the model version has been successfully trained.</p>"
+                        "smithy.api#documentation": "<p>The duration, in seconds, that you were billed for a successful training of the model version. \n      This value is only returned if the model version has been successfully trained.</p>"
                     }
                 },
                 "TrainingEndTimestamp": {
@@ -5493,12 +6347,12 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.rekognition#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifer for the AWS Key Management Service (AWS KMS) customer master key that was used to encrypt the model during training. </p>"
+                        "smithy.api#documentation": "<p>The identifer for the AWS Key Management Service key (AWS KMS key) that was used to encrypt the model during training. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The description of a version of a model.</p>"
+                "smithy.api#documentation": "<p>A description of a version of an Amazon Rekognition Custom Labels model.</p>"
             }
         },
         "com.amazonaws.rekognition#ProjectVersionDescriptions": {
@@ -5761,6 +6615,16 @@
                 ]
             }
         },
+        "com.amazonaws.rekognition#QueryString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "\\S"
+            }
+        },
         "com.amazonaws.rekognition#Reason": {
             "type": "string",
             "traits": {
@@ -5837,7 +6701,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns an array of celebrities recognized in the input image.  For more information, see Recognizing Celebrities\n    in the Amazon Rekognition Developer Guide. </p>\n         <p>\n            <code>RecognizeCelebrities</code> returns the 64 largest faces in the image. It lists\n      recognized celebrities in the <code>CelebrityFaces</code> array and unrecognized faces in the\n        <code>UnrecognizedFaces</code> array. <code>RecognizeCelebrities</code> doesn't return\n      celebrities whose faces aren't among the largest 64 faces in the image.</p>\n\n         <p>For each celebrity recognized, <code>RecognizeCelebrities</code> returns a\n        <code>Celebrity</code> object. The <code>Celebrity</code> object contains the celebrity\n      name, ID, URL links to additional information, match confidence, and a\n        <code>ComparedFace</code> object that you can use to locate the celebrity's face on the\n      image.</p>\n         <p>Amazon Rekognition doesn't retain information about which images a celebrity has been recognized\n      in. Your application must store this information and use the <code>Celebrity</code> ID\n      property as a unique identifier for the celebrity. If you don't store the celebrity name or\n      additional information URLs returned by <code>RecognizeCelebrities</code>, you will need the\n      ID to identify the celebrity in a call to the <a>GetCelebrityInfo</a>\n      operation.</p>\n         <p>You pass the input image either as base64-encoded image bytes or as a reference to an\n      image in an Amazon S3 bucket. If you use the\n      AWS\n      CLI to call Amazon Rekognition operations, passing image bytes is not\n      supported. The image must be either a PNG or JPEG formatted file. </p>\n\n\n\n    \n         <p>For an example, see Recognizing Celebrities in an Image in the Amazon Rekognition Developer Guide.</p>\n         <p>This operation requires permissions to perform the\n        <code>rekognition:RecognizeCelebrities</code> operation.</p>"
+                "smithy.api#documentation": "<p>Returns an array of celebrities recognized in the input image.  For more information, see Recognizing Celebrities\n    in the Amazon Rekognition Developer Guide. </p>\n         <p>\n            <code>RecognizeCelebrities</code> returns the 64 largest faces in the image. It lists the\n      recognized celebrities in the <code>CelebrityFaces</code> array and any unrecognized faces in\n      the <code>UnrecognizedFaces</code> array. <code>RecognizeCelebrities</code> doesn't return\n      celebrities whose faces aren't among the largest 64 faces in the image.</p>\n\n         <p>For each celebrity recognized, <code>RecognizeCelebrities</code> returns a\n        <code>Celebrity</code> object. The <code>Celebrity</code> object contains the celebrity\n      name, ID, URL links to additional information, match confidence, and a\n        <code>ComparedFace</code> object that you can use to locate the celebrity's face on the\n      image.</p>\n         <p>Amazon Rekognition doesn't retain information about which images a celebrity has been recognized\n      in. Your application must store this information and use the <code>Celebrity</code> ID\n      property as a unique identifier for the celebrity. If you don't store the celebrity name or\n      additional information URLs returned by <code>RecognizeCelebrities</code>, you will need the\n      ID to identify the celebrity in a call to the <a>GetCelebrityInfo</a>\n      operation.</p>\n         <p>You pass the input image either as base64-encoded image bytes or as a reference to an\n      image in an Amazon S3 bucket. If you use the\n      AWS\n      CLI to call Amazon Rekognition operations, passing image bytes is not\n      supported. The image must be either a PNG or JPEG formatted file. </p>\n\n\n\n    \n         <p>For an example, see Recognizing Celebrities in an Image in the Amazon Rekognition Developer Guide.</p>\n         <p>This operation requires permissions to perform the\n        <code>rekognition:RecognizeCelebrities</code> operation.</p>"
             }
         },
         "com.amazonaws.rekognition#RecognizeCelebritiesRequest": {
@@ -5903,6 +6767,21 @@
         },
         "com.amazonaws.rekognition#RekognitionService": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Rekognition",
+                    "arnNamespace": "rekognition",
+                    "cloudFormationName": "Rekognition",
+                    "cloudTrailEventSource": "rekognition.amazonaws.com",
+                    "endpointPrefix": "rekognition"
+                },
+                "aws.auth#sigv4": {
+                    "name": "rekognition"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<p>This is the Amazon Rekognition API reference.</p>",
+                "smithy.api#title": "Amazon Rekognition"
+            },
             "version": "2016-06-27",
             "operations": [
                 {
@@ -5910,6 +6789,9 @@
                 },
                 {
                     "target": "com.amazonaws.rekognition#CreateCollection"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#CreateDataset"
                 },
                 {
                     "target": "com.amazonaws.rekognition#CreateProject"
@@ -5922,6 +6804,9 @@
                 },
                 {
                     "target": "com.amazonaws.rekognition#DeleteCollection"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#DeleteDataset"
                 },
                 {
                     "target": "com.amazonaws.rekognition#DeleteFaces"
@@ -5937,6 +6822,9 @@
                 },
                 {
                     "target": "com.amazonaws.rekognition#DescribeCollection"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#DescribeDataset"
                 },
                 {
                     "target": "com.amazonaws.rekognition#DescribeProjects"
@@ -5964,6 +6852,9 @@
                 },
                 {
                     "target": "com.amazonaws.rekognition#DetectText"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#DistributeDatasetEntries"
                 },
                 {
                     "target": "com.amazonaws.rekognition#GetCelebrityInfo"
@@ -5997,6 +6888,12 @@
                 },
                 {
                     "target": "com.amazonaws.rekognition#ListCollections"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ListDatasetEntries"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ListDatasetLabels"
                 },
                 {
                     "target": "com.amazonaws.rekognition#ListFaces"
@@ -6057,23 +6954,11 @@
                 },
                 {
                     "target": "com.amazonaws.rekognition#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#UpdateDatasetEntries"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Rekognition",
-                    "arnNamespace": "rekognition",
-                    "cloudFormationName": "Rekognition",
-                    "cloudTrailEventSource": "rekognition.amazonaws.com",
-                    "endpointPrefix": "rekognition"
-                },
-                "aws.auth#sigv4": {
-                    "name": "rekognition"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>This is the Amazon Rekognition API reference.</p>",
-                "smithy.api#title": "Amazon Rekognition"
-            }
+            ]
         },
         "com.amazonaws.rekognition#RekognitionUniqueId": {
             "type": "string",
@@ -7995,12 +8880,12 @@
                 "AutoCreate": {
                     "target": "com.amazonaws.rekognition#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>If specified, Amazon Rekognition Custom Labels creates a testing dataset with an 80/20 split of the training dataset.</p>"
+                        "smithy.api#documentation": "<p>If specified, Amazon Rekognition Custom Labels temporarily splits the training dataset (80%) to create a test dataset (20%) for the training job.\n      After training completes, the test dataset is not stored and the training dataset reverts to its previous size.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The dataset used for testing. Optionally, if <code>AutoCreate</code> is set,  Amazon Rekognition Custom Labels creates a \n         testing dataset using an 80/20 split of the training dataset.</p>"
+                "smithy.api#documentation": "<p>The dataset used for testing. Optionally, if <code>AutoCreate</code> is set,  Amazon Rekognition Custom Labels uses the\n         training dataset to create a test dataset with a temporary split of the training dataset. </p>"
             }
         },
         "com.amazonaws.rekognition#TestingDataResult": {
@@ -8286,6 +9171,67 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.rekognition#UpdateDatasetEntries": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rekognition#UpdateDatasetEntriesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rekognition#UpdateDatasetEntriesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rekognition#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds or updates one or more entries (images) in a dataset. An entry is a JSON Line which contains the\n      information for a single image,  including\n      the image location, assigned labels, and object location bounding boxes.  For more information, \n      see Image-Level labels in manifest files and Object localization in manifest files in the <i>Amazon Rekognition Custom Labels Developer Guide</i>.\n     </p>\n   \n   \n   \n         <p>If the <code>source-ref</code> field in the JSON line references an existing image, the existing image in the dataset\n      is updated. \n      If <code>source-ref</code> field doesn't reference an existing image, the image is added as a new image to the dataset. </p>\n \n         <p>You specify the changes that you want to make in the <code>Changes</code> input parameter. \n    There isn't a limit to the number JSON Lines that you can change, but the size of <code>Changes</code> must be less\nthan 5MB.</p>\n\n   \n         <p>\n            <code>UpdateDatasetEntries</code> returns immediatly, but the dataset update might take a while to complete.\n      Use <a>DescribeDataset</a> to check the \n      current status. The dataset updated successfully if the value of <code>Status</code> is\n      <code>UPDATE_COMPLETE</code>. </p>\n         <p>To check if any non-terminal errors occured, call <a>ListDatasetEntries</a>\n      and check for the presence of <code>errors</code> lists in the JSON Lines.</p>\n         <p>Dataset update fails if a terminal error occurs (<code>Status</code> = <code>UPDATE_FAILED</code>). \n      Currently, you can't access the terminal error information from the Amazon Rekognition Custom Labels SDK.\n   </p>\n         <p>This operation requires permissions to perform the <code>rekognition:UpdateDatasetEntries</code> action.</p>"
+            }
+        },
+        "com.amazonaws.rekognition#UpdateDatasetEntriesRequest": {
+            "type": "structure",
+            "members": {
+                "DatasetArn": {
+                    "target": "com.amazonaws.rekognition#DatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe Amazon Resource Name (ARN) of the dataset that you want to update.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Changes": {
+                    "target": "com.amazonaws.rekognition#DatasetChanges",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   The changes that you want to make to the dataset. \n</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rekognition#UpdateDatasetEntriesResponse": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.rekognition#Url": {
             "type": "string"
         },
@@ -8312,7 +9258,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the Amazon S3 bucket location of the validation data for a model training job. </p>\n      \n         <p>The validation data includes error information for individual \n         JSON lines in the dataset.             \n            For more information, see Debugging a Failed Model Training in the\n            Amazon Rekognition Custom Labels Developer Guide. </p>\n         <p>You get the <code>ValidationData</code> object for the training dataset (<a>TrainingDataResult</a>)\n         and the test dataset (<a>TestingDataResult</a>) by calling <a>DescribeProjectVersions</a>. </p>\n         <p>The assets array contains a single <a>Asset</a> object. \n         The <a>GroundTruthManifest</a> field of the Asset object contains the S3 bucket location of\n         the validation data. \n</p>"
+                "smithy.api#documentation": "<p>Contains the Amazon S3 bucket location of the validation data for a model training job. </p>\n         <p>The validation data includes error information for individual JSON Lines in the dataset.\n         For more information, see <i>Debugging a Failed Model Training</i> in the\n         Amazon Rekognition Custom Labels Developer Guide. </p>\n      \n         <p>You get the <code>ValidationData</code> object for the training dataset (<a>TrainingDataResult</a>)\n         and the test dataset (<a>TestingDataResult</a>) by calling <a>DescribeProjectVersions</a>. </p>\n         <p>The assets array contains a single <a>Asset</a> object. \n         The <a>GroundTruthManifest</a> field of the Asset object contains the S3 bucket location of\n         the validation data. \n</p>"
             }
         },
         "com.amazonaws.rekognition#VersionName": {

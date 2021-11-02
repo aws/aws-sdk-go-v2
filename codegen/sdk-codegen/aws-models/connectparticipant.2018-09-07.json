@@ -47,6 +47,21 @@
         },
         "com.amazonaws.connectparticipant#AmazonConnectParticipantServiceLambda": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "ConnectParticipant",
+                    "arnNamespace": "connect",
+                    "cloudFormationName": "ConnectParticipant",
+                    "cloudTrailEventSource": "connectparticipant.amazonaws.com",
+                    "endpointPrefix": "participant.connect"
+                },
+                "aws.auth#sigv4": {
+                    "name": "execute-api"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>Amazon Connect is a cloud-based contact center solution that makes it easy to set up and manage\n            a customer contact center and provide reliable customer engagement at any scale.</p>\n        <p>Amazon Connect enables customer contacts through voice or chat.</p>\n\n        <p>The APIs described here are used by chat participants, such as agents and\n            customers.</p>",
+                "smithy.api#title": "Amazon Connect Participant Service"
+            },
             "version": "2018-09-07",
             "operations": [
                 {
@@ -73,22 +88,7 @@
                 {
                     "target": "com.amazonaws.connectparticipant#StartAttachmentUpload"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "ConnectParticipant",
-                    "arnNamespace": "connect",
-                    "cloudFormationName": "ConnectParticipant",
-                    "cloudTrailEventSource": "connectparticipant.amazonaws.com",
-                    "endpointPrefix": "participant.connect"
-                },
-                "aws.auth#sigv4": {
-                    "name": "execute-api"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Amazon Connect is a cloud-based contact center solution that makes it easy to set up and manage\n            a customer contact center and provide reliable customer engagement at any scale.</p>\n        <p>Amazon Connect enables customer contacts through voice or chat.</p>\n\n        <p>The APIs described here are used by chat participants, such as agents and\n            customers.</p>",
-                "smithy.api#title": "Amazon Connect Participant Service"
-            }
+            ]
         },
         "com.amazonaws.connectparticipant#ArtifactId": {
             "type": "string",
@@ -185,6 +185,12 @@
                 "target": "com.amazonaws.connectparticipant#AttachmentItem"
             }
         },
+        "com.amazonaws.connectparticipant#Bool": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
         "com.amazonaws.connectparticipant#ChatContent": {
             "type": "string",
             "traits": {
@@ -255,6 +261,22 @@
                     {
                         "value": "CONNECTION_ACK",
                         "name": "CONNECTION_ACK"
+                    },
+                    {
+                        "value": "PARTICIPANT_ACTIVE",
+                        "name": "PARTICIPANT_ACTIVE"
+                    },
+                    {
+                        "value": "PARTICIPANT_INACTIVE",
+                        "name": "PARTICIPANT_INACTIVE"
+                    },
+                    {
+                        "value": "PARTICIPANT_ENGAGED",
+                        "name": "PARTICIPANT_ENGAGED"
+                    },
+                    {
+                        "value": "PARTICIPANT_DISENGAGED",
+                        "name": "PARTICIPANT_DISENGAGED"
                     }
                 ]
             }
@@ -297,7 +319,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Allows you to confirm that the attachment has been uploaded using the pre-signed URL\n            provided in StartAttachmentUpload API. </p>",
+                "smithy.api#documentation": "<p>Allows you to confirm that the attachment has been uploaded using the pre-signed URL\n            provided in StartAttachmentUpload API. </p> \n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/participant/complete-attachment-upload",
@@ -440,7 +462,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates the participant's connection. Note that ParticipantToken is used for invoking\n            this API instead of ConnectionToken.</p>\n        <p>The participant token is valid for the lifetime of the participant – until they are\n            part of a contact.</p>\n        <p>The response URL for <code>WEBSOCKET</code> Type has a connect expiry timeout of 100s.\n            Clients must manually connect to the returned websocket URL and subscribe to the desired\n            topic. </p>\n        <p>For chat, you need to publish the following on the established websocket\n            connection:</p>\n\n\n        <p>\n            <code>{\"topic\":\"aws/subscribe\",\"content\":{\"topics\":[\"aws/chat\"]}}</code>\n         </p>\n\n        <p>Upon websocket URL expiry, as specified in the response ConnectionExpiry parameter,\n            clients need to call this API again to obtain a new websocket URL and perform the same\n            steps as before.</p>\n\n        <note>\n            <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>\n        </note>",
+                "smithy.api#documentation": "<p>Creates the participant's connection.  Note that ParticipantToken is used for invoking this API instead of\n            ConnectionToken.</p>\n        <p>The participant token is valid for the lifetime of the participant –\n            until they are part of a contact.</p>        \n        <p>The response URL for <code>WEBSOCKET</code> Type has a connect expiry timeout of 100s.\n            Clients must manually connect to the returned websocket URL and subscribe to the desired\n            topic. </p>\n        <p>For chat, you need to publish the following on the established websocket\n            connection:</p>\n        <p>\n            <code>{\"topic\":\"aws/subscribe\",\"content\":{\"topics\":[\"aws/chat\"]}}</code>\n         </p>\n        <p>Upon websocket URL expiry, as specified in the response ConnectionExpiry parameter,\n            clients need to call this API again to obtain a new websocket URL and perform the same\n            steps as before.</p>\n        <p>\n            <b>Message streaming support</b>: This API can also be used together with the\n            <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_StartContactStreaming.html\">StartContactStreaming</a>\n            API to create a participant connection for chat contacts that are\n            not using a websocket. For more information about message streaming, <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat-message-streaming.html\">Enable real-time chat message streaming</a> in the <i>Amazon Connect\n                    Administrator Guide</i>.</p>\n        <p>\n            <b>Feature specifications</b>: For information about feature specifications, such as the allowed number of open\n            websocket connections per participant, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits\">Feature specifications</a> in the <i>Amazon Connect Administrator\n                Guide</i>. </p>\n        <note> \n            <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p> \n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/participant/connection",
@@ -461,9 +483,15 @@
                 "ParticipantToken": {
                     "target": "com.amazonaws.connectparticipant#ParticipantToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>This is a header parameter.</p>\n        <p>The Participant Token as obtained from <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContact.html\">StartChatContact</a>\n            API response.</p>",
+                        "smithy.api#documentation": "<p>This is a header parameter.</p>\n        <p>The ParticipantToken as obtained from <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContact.html\">StartChatContact</a>\n            API response.</p>",
                         "smithy.api#httpHeader": "X-Amz-Bearer",
                         "smithy.api#required": {}
+                    }
+                },
+                "ConnectParticipant": {
+                    "target": "com.amazonaws.connectparticipant#Bool",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon Connect Participant is used to mark the participant as connected for message\n            streaming.</p>"
                     }
                 }
             }
@@ -508,7 +536,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disconnects a participant. Note that ConnectionToken is used for invoking this API\n            instead of ParticipantToken.</p>\n        <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                authentication</a>.</p>",
+                "smithy.api#documentation": "<p>Disconnects a participant. Note that ConnectionToken is used for invoking this API\n            instead of ParticipantToken.</p> \n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/participant/disconnect",
@@ -572,7 +600,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides a pre-signed URL for download of a completed attachment. This is an\n            asynchronous API for use with active contacts.</p>",
+                "smithy.api#documentation": "<p>Provides a pre-signed URL for download of a completed attachment. This is an\n            asynchronous API for use with active contacts.</p> \n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/participant/attachment",
@@ -606,7 +634,7 @@
                 "Url": {
                     "target": "com.amazonaws.connectparticipant#PreSignedAttachmentUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pre-signed URL using which file would be downloaded from Amazon S3 by the API caller.</p>"
+                        "smithy.api#documentation": "<p>This is the pre-signed URL that can be used for uploading the file to Amazon S3 when used in response \nto <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_StartAttachmentUpload.html\">StartAttachmentUpload</a>.</p>"
                     }
                 },
                 "UrlExpiry": {
@@ -640,7 +668,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a transcript of the session, including details about any attachments. Note\n            that ConnectionToken is used for invoking this API instead of ParticipantToken.</p>\n        <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                authentication</a>.</p>",
+                "smithy.api#documentation": "<p>Retrieves a transcript of the session, including details about any attachments. Note\n            that ConnectionToken is used for invoking this API instead of ParticipantToken.</p>\n        <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/participant/transcript",
@@ -957,7 +985,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sends an event. Note that ConnectionToken is used for invoking this API instead of\n            ParticipantToken.</p>\n        <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                authentication</a>.</p>",
+                "smithy.api#documentation": "<p>Sends an event. Note that ConnectionToken is used for invoking this API instead of\n            ParticipantToken.</p> \n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/participant/event",
@@ -1038,7 +1066,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sends a message. Note that ConnectionToken is used for invoking this API instead of\n            ParticipantToken.</p>\n        <note>\n            <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>\n        </note>",
+                "smithy.api#documentation": "<p>Sends a message. Note that ConnectionToken is used for invoking this API instead of\n            ParticipantToken.</p> \n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/participant/message",
@@ -1154,7 +1182,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides a pre-signed Amazon S3 URL in response for uploading the file directly to\n            S3.</p>",
+                "smithy.api#documentation": "<p>Provides a pre-signed Amazon S3 URL in response for uploading the file directly to\n            S3.</p> \n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/participant/start-attachment-upload",
@@ -1275,7 +1303,7 @@
                 "Url": {
                     "target": "com.amazonaws.connectparticipant#UploadMetadataUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pre-signed URL using which file would be downloaded from Amazon S3 by the API caller.</p>"
+                        "smithy.api#documentation": "<p>This is the pre-signed URL that can be used for uploading the file to Amazon S3 when used in response \nto <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_StartAttachmentUpload.html\">StartAttachmentUpload</a>.</p>"
                     }
                 },
                 "UrlExpiry": {

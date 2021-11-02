@@ -1759,6 +1759,9 @@ type VoiceConnector struct {
 	// The updated Amazon Chime Voice Connector timestamp, in ISO 8601 format.
 	UpdatedTimestamp *time.Time
 
+	// The ARN of the specified Amazon Chime Voice Connector.
+	VoiceConnectorArn *string
+
 	// The Amazon Chime Voice Connector ID.
 	VoiceConnectorId *string
 
@@ -1779,6 +1782,9 @@ type VoiceConnectorGroup struct {
 
 	// The updated Amazon Chime Voice Connector group time stamp, in ISO 8601 format.
 	UpdatedTimestamp *time.Time
+
+	// The ARN of the specified Amazon Chime Voice Connector group.
+	VoiceConnectorGroupArn *string
 
 	// The Amazon Chime Voice Connector group ID.
 	VoiceConnectorGroupId *string

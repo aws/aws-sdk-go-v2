@@ -38,8 +38,8 @@ type UpdateSettingsInput struct {
 	// The KMS key details.
 	KmsKey *string
 
-	// The Amazon Simple Notification Service (Amazon SNS) topic to which Audit Manager
-	// sends notifications.
+	// The Amazon Simple Notification Service (Amazon SNS) topic that Audit Manager
+	// sends notifications to.
 	SnsTopic *string
 
 	noSmithyDocumentSerde

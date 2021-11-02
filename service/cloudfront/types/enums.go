@@ -141,6 +141,24 @@ func (Format) Values() []Format {
 	}
 }
 
+type FrameOptionsList string
+
+// Enum values for FrameOptionsList
+const (
+	FrameOptionsListDeny       FrameOptionsList = "DENY"
+	FrameOptionsListSameorigin FrameOptionsList = "SAMEORIGIN"
+)
+
+// Values returns all known values for FrameOptionsList. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FrameOptionsList) Values() []FrameOptionsList {
+	return []FrameOptionsList{
+		"DENY",
+		"SAMEORIGIN",
+	}
+}
+
 type FunctionRuntime string
 
 // Enum values for FunctionRuntime
@@ -448,6 +466,85 @@ func (RealtimeMetricsSubscriptionStatus) Values() []RealtimeMetricsSubscriptionS
 	return []RealtimeMetricsSubscriptionStatus{
 		"Enabled",
 		"Disabled",
+	}
+}
+
+type ReferrerPolicyList string
+
+// Enum values for ReferrerPolicyList
+const (
+	ReferrerPolicyListNoReferrer                  ReferrerPolicyList = "no-referrer"
+	ReferrerPolicyListNoReferrerWhenDowngrade     ReferrerPolicyList = "no-referrer-when-downgrade"
+	ReferrerPolicyListOrigin                      ReferrerPolicyList = "origin"
+	ReferrerPolicyListOriginWhenCrossOrigin       ReferrerPolicyList = "origin-when-cross-origin"
+	ReferrerPolicyListSameOrigin                  ReferrerPolicyList = "same-origin"
+	ReferrerPolicyListStrictOrigin                ReferrerPolicyList = "strict-origin"
+	ReferrerPolicyListStrictOriginWhenCrossOrigin ReferrerPolicyList = "strict-origin-when-cross-origin"
+	ReferrerPolicyListUnsafeUrl                   ReferrerPolicyList = "unsafe-url"
+)
+
+// Values returns all known values for ReferrerPolicyList. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReferrerPolicyList) Values() []ReferrerPolicyList {
+	return []ReferrerPolicyList{
+		"no-referrer",
+		"no-referrer-when-downgrade",
+		"origin",
+		"origin-when-cross-origin",
+		"same-origin",
+		"strict-origin",
+		"strict-origin-when-cross-origin",
+		"unsafe-url",
+	}
+}
+
+type ResponseHeadersPolicyAccessControlAllowMethodsValues string
+
+// Enum values for ResponseHeadersPolicyAccessControlAllowMethodsValues
+const (
+	ResponseHeadersPolicyAccessControlAllowMethodsValuesGet     ResponseHeadersPolicyAccessControlAllowMethodsValues = "GET"
+	ResponseHeadersPolicyAccessControlAllowMethodsValuesPost    ResponseHeadersPolicyAccessControlAllowMethodsValues = "POST"
+	ResponseHeadersPolicyAccessControlAllowMethodsValuesOptions ResponseHeadersPolicyAccessControlAllowMethodsValues = "OPTIONS"
+	ResponseHeadersPolicyAccessControlAllowMethodsValuesPut     ResponseHeadersPolicyAccessControlAllowMethodsValues = "PUT"
+	ResponseHeadersPolicyAccessControlAllowMethodsValuesDelete  ResponseHeadersPolicyAccessControlAllowMethodsValues = "DELETE"
+	ResponseHeadersPolicyAccessControlAllowMethodsValuesPatch   ResponseHeadersPolicyAccessControlAllowMethodsValues = "PATCH"
+	ResponseHeadersPolicyAccessControlAllowMethodsValuesHead    ResponseHeadersPolicyAccessControlAllowMethodsValues = "HEAD"
+	ResponseHeadersPolicyAccessControlAllowMethodsValuesAll     ResponseHeadersPolicyAccessControlAllowMethodsValues = "ALL"
+)
+
+// Values returns all known values for
+// ResponseHeadersPolicyAccessControlAllowMethodsValues. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResponseHeadersPolicyAccessControlAllowMethodsValues) Values() []ResponseHeadersPolicyAccessControlAllowMethodsValues {
+	return []ResponseHeadersPolicyAccessControlAllowMethodsValues{
+		"GET",
+		"POST",
+		"OPTIONS",
+		"PUT",
+		"DELETE",
+		"PATCH",
+		"HEAD",
+		"ALL",
+	}
+}
+
+type ResponseHeadersPolicyType string
+
+// Enum values for ResponseHeadersPolicyType
+const (
+	ResponseHeadersPolicyTypeManaged ResponseHeadersPolicyType = "managed"
+	ResponseHeadersPolicyTypeCustom  ResponseHeadersPolicyType = "custom"
+)
+
+// Values returns all known values for ResponseHeadersPolicyType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResponseHeadersPolicyType) Values() []ResponseHeadersPolicyType {
+	return []ResponseHeadersPolicyType{
+		"managed",
+		"custom",
 	}
 }
 

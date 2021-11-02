@@ -29,17 +29,17 @@ func (c *Client) GetEvidence(ctx context.Context, params *GetEvidenceInput, optF
 
 type GetEvidenceInput struct {
 
-	// The identifier for the specified assessment.
+	// The identifier for the assessment.
 	//
 	// This member is required.
 	AssessmentId *string
 
-	// The identifier for the specified control set.
+	// The identifier for the control set.
 	//
 	// This member is required.
 	ControlSetId *string
 
-	// The identifier for the folder in which the evidence is stored.
+	// The identifier for the folder that the evidence is stored in.
 	//
 	// This member is required.
 	EvidenceFolderId *string
@@ -54,7 +54,7 @@ type GetEvidenceInput struct {
 
 type GetEvidenceOutput struct {
 
-	// The evidence returned by the GetEvidenceResponse API.
+	// The evidence that the GetEvidenceResponse API returned.
 	Evidence *types.Evidence
 
 	// Metadata pertaining to the operation's result.

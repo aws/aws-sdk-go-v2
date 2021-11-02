@@ -29,6 +29,198 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.ec2#AcceleratorCount": {
+            "type": "structure",
+            "members": {
+                "Min": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Min",
+                        "smithy.api#documentation": "<p>The minimum number of accelerators. If this parameter is not specified, there is no minimum\n         limit.</p>",
+                        "smithy.api#xmlName": "min"
+                    }
+                },
+                "Max": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Max",
+                        "smithy.api#documentation": "<p>The maximum number of accelerators. If this parameter is not specified, there is no\n         maximum limit.</p>",
+                        "smithy.api#xmlName": "max"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The minimum and maximum number of accelerators (GPUs, FPGAs, or Amazon Web Services Inferentia chips)\n         on an instance.</p>"
+            }
+        },
+        "com.amazonaws.ec2#AcceleratorCountRequest": {
+            "type": "structure",
+            "members": {
+                "Min": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum number of accelerators. To specify no minimum limit, omit this\n         parameter.</p>"
+                    }
+                },
+                "Max": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of accelerators. To specify no maximum limit, omit this\n         parameter. To exclude accelerator-enabled instance types, set <code>Max</code> to\n         <code>0</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The minimum and maximum number of accelerators (GPUs, FPGAs, or Amazon Web Services Inferentia chips)\n         on an instance. To exclude accelerator-enabled instance types, set <code>Max</code> to\n            <code>0</code>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#AcceleratorManufacturer": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "nvidia",
+                        "name": "NVIDIA"
+                    },
+                    {
+                        "value": "amd",
+                        "name": "AMD"
+                    },
+                    {
+                        "value": "amazon-web-services",
+                        "name": "AMAZON_WEB_SERVICES"
+                    },
+                    {
+                        "value": "xilinx",
+                        "name": "XILINX"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ec2#AcceleratorManufacturerSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#AcceleratorManufacturer",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#AcceleratorName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "a100",
+                        "name": "A100"
+                    },
+                    {
+                        "value": "v100",
+                        "name": "V100"
+                    },
+                    {
+                        "value": "k80",
+                        "name": "K80"
+                    },
+                    {
+                        "value": "t4",
+                        "name": "T4"
+                    },
+                    {
+                        "value": "m60",
+                        "name": "M60"
+                    },
+                    {
+                        "value": "radeon-pro-v520",
+                        "name": "RADEON_PRO_V520"
+                    },
+                    {
+                        "value": "vu9p",
+                        "name": "VU9P"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ec2#AcceleratorNameSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#AcceleratorName",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#AcceleratorTotalMemoryMiB": {
+            "type": "structure",
+            "members": {
+                "Min": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Min",
+                        "smithy.api#documentation": "<p>The minimum amount of accelerator memory, in MiB. If this parameter is not specified,\n         there is no minimum limit.</p>",
+                        "smithy.api#xmlName": "min"
+                    }
+                },
+                "Max": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Max",
+                        "smithy.api#documentation": "<p>The maximum amount of accelerator memory, in MiB. If this parameter is not specified,\n         there is no maximum limit.</p>",
+                        "smithy.api#xmlName": "max"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The minimum and maximum amount of total accelerator memory, in MiB.</p>"
+            }
+        },
+        "com.amazonaws.ec2#AcceleratorTotalMemoryMiBRequest": {
+            "type": "structure",
+            "members": {
+                "Min": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum amount of accelerator memory, in MiB. To specify no minimum limit, omit this\n         parameter.</p>"
+                    }
+                },
+                "Max": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum amount of accelerator memory, in MiB. To specify no maximum limit, omit this\n         parameter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The minimum and maximum amount of total accelerator memory, in MiB.</p>"
+            }
+        },
+        "com.amazonaws.ec2#AcceleratorType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "gpu",
+                        "name": "GPU"
+                    },
+                    {
+                        "value": "fpga",
+                        "name": "FPGA"
+                    },
+                    {
+                        "value": "inference",
+                        "name": "INFERENCE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ec2#AcceleratorTypeSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#AcceleratorType",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
         "com.amazonaws.ec2#AcceptReservedInstancesExchangeQuote": {
             "type": "operation",
             "input": {
@@ -1148,6 +1340,24 @@
         },
         "com.amazonaws.ec2#AmazonEC2": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "EC2",
+                    "arnNamespace": "ec2",
+                    "cloudFormationName": "EC2",
+                    "cloudTrailEventSource": "ec2.amazonaws.com",
+                    "endpointPrefix": "ec2"
+                },
+                "aws.auth#sigv4": {
+                    "name": "ec2"
+                },
+                "aws.protocols#ec2Query": {},
+                "smithy.api#documentation": "<fullname>Amazon Elastic Compute Cloud</fullname>\n         <p>Amazon Elastic Compute Cloud (Amazon EC2) provides secure and resizable computing capacity in the AWS Cloud. \n          Using Amazon EC2 eliminates the need to invest in hardware up front, so you can develop and deploy applications \n          faster. Amazon Virtual Private Cloud (Amazon VPC) enables you to provision a logically isolated section of the \n          AWS Cloud where you can launch AWS resources in a virtual network that you've defined. Amazon Elastic Block Store \n          (Amazon EBS) provides block level storage volumes for use with EC2 instances. EBS volumes are highly available  \n          and reliable storage volumes that can be attached to any running instance and used like a hard drive.</p>\n         <p>To learn more, see the following resources:</p>\n         <ul>\n            <li>\n               <p>Amazon EC2: <a href=\"http://aws.amazon.com/ec2\">AmazonEC2 product page</a>, <a href=\"http://aws.amazon.com/documentation/ec2\">Amazon EC2 documentation</a>\n               </p>\n            </li>\n            <li>\n               <p>Amazon EBS: <a href=\"http://aws.amazon.com/ebs\">Amazon EBS product page</a>, <a href=\"http://aws.amazon.com/documentation/ebs\">Amazon EBS documentation</a>\n               </p>\n            </li>\n            <li>\n               <p>Amazon VPC: <a href=\"http://aws.amazon.com/vpc\">Amazon VPC product page</a>, <a href=\"http://aws.amazon.com/documentation/vpc\">Amazon VPC documentation</a>\n               </p>\n            </li>\n            <li>\n               <p>AWS VPN: <a href=\"http://aws.amazon.com/vpn\">AWS VPN product page</a>, <a href=\"http://aws.amazon.com/documentation/vpn\">AWS VPN documentation</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#title": "Amazon Elastic Compute Cloud",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://ec2.amazonaws.com/doc/2016-11-15"
+                }
+            },
             "version": "2016-11-15",
             "operations": [
                 {
@@ -2192,6 +2402,9 @@
                     "target": "com.amazonaws.ec2#GetHostReservationPurchasePreview"
                 },
                 {
+                    "target": "com.amazonaws.ec2#GetInstanceTypesFromInstanceRequirements"
+                },
+                {
                     "target": "com.amazonaws.ec2#GetLaunchTemplateData"
                 },
                 {
@@ -2208,6 +2421,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#GetSerialConsoleAccessStatus"
+                },
+                {
+                    "target": "com.amazonaws.ec2#GetSpotPlacementScores"
                 },
                 {
                     "target": "com.amazonaws.ec2#GetSubnetCidrReservations"
@@ -2563,25 +2779,7 @@
                 {
                     "target": "com.amazonaws.ec2#WithdrawByoipCidr"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "EC2",
-                    "arnNamespace": "ec2",
-                    "cloudFormationName": "EC2",
-                    "cloudTrailEventSource": "ec2.amazonaws.com",
-                    "endpointPrefix": "ec2"
-                },
-                "aws.auth#sigv4": {
-                    "name": "ec2"
-                },
-                "aws.protocols#ec2Query": {},
-                "smithy.api#documentation": "<fullname>Amazon Elastic Compute Cloud</fullname>\n         <p>Amazon Elastic Compute Cloud (Amazon EC2) provides secure and resizable computing capacity in the AWS Cloud. \n          Using Amazon EC2 eliminates the need to invest in hardware up front, so you can develop and deploy applications \n          faster. Amazon Virtual Private Cloud (Amazon VPC) enables you to provision a logically isolated section of the \n          AWS Cloud where you can launch AWS resources in a virtual network that you've defined. Amazon Elastic Block Store \n          (Amazon EBS) provides block level storage volumes for use with EC2 instances. EBS volumes are highly available  \n          and reliable storage volumes that can be attached to any running instance and used like a hard drive.</p>\n         <p>To learn more, see the following resources:</p>\n         <ul>\n            <li>\n               <p>Amazon EC2: <a href=\"http://aws.amazon.com/ec2\">AmazonEC2 product page</a>, <a href=\"http://aws.amazon.com/documentation/ec2\">Amazon EC2 documentation</a>\n               </p>\n            </li>\n            <li>\n               <p>Amazon EBS: <a href=\"http://aws.amazon.com/ebs\">Amazon EBS product page</a>, <a href=\"http://aws.amazon.com/documentation/ebs\">Amazon EBS documentation</a>\n               </p>\n            </li>\n            <li>\n               <p>Amazon VPC: <a href=\"http://aws.amazon.com/vpc\">Amazon VPC product page</a>, <a href=\"http://aws.amazon.com/documentation/vpc\">Amazon VPC documentation</a>\n               </p>\n            </li>\n            <li>\n               <p>AWS VPN: <a href=\"http://aws.amazon.com/vpn\">AWS VPN product page</a>, <a href=\"http://aws.amazon.com/documentation/vpn\">AWS VPN documentation</a>\n               </p>\n            </li>\n         </ul>",
-                "smithy.api#title": "Amazon Elastic Compute Cloud",
-                "smithy.api#xmlNamespace": {
-                    "uri": "http://ec2.amazonaws.com/doc/2016-11-15"
-                }
-            }
+            ]
         },
         "com.amazonaws.ec2#AnalysisAclRule": {
             "type": "structure",
@@ -3049,6 +3247,21 @@
                 "target": "com.amazonaws.ec2#ArchitectureType",
                 "traits": {
                     "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#ArchitectureTypeSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#ArchitectureType",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 3
                 }
             }
         },
@@ -5200,6 +5413,25 @@
                 }
             }
         },
+        "com.amazonaws.ec2#BareMetal": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "included",
+                        "name": "INCLUDED"
+                    },
+                    {
+                        "value": "required",
+                        "name": "REQUIRED"
+                    },
+                    {
+                        "value": "excluded",
+                        "name": "EXCLUDED"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.ec2#BareMetalFlag": {
             "type": "boolean",
             "traits": {
@@ -5210,6 +5442,50 @@
             "type": "integer",
             "traits": {
                 "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.ec2#BaselineEbsBandwidthMbps": {
+            "type": "structure",
+            "members": {
+                "Min": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Min",
+                        "smithy.api#documentation": "<p>The minimum baseline bandwidth, in Mbps. If this parameter is not specified, there is no\n         minimum limit.</p>",
+                        "smithy.api#xmlName": "min"
+                    }
+                },
+                "Max": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Max",
+                        "smithy.api#documentation": "<p>The maximum baseline bandwidth, in Mbps. If this parameter is not specified, there is no\n         maximum limit.</p>",
+                        "smithy.api#xmlName": "max"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The minimum and maximum baseline bandwidth to Amazon EBS, in Mbps. For more information, see\n            <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html\">Amazon\n            EBS–optimized instances</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#BaselineEbsBandwidthMbpsRequest": {
+            "type": "structure",
+            "members": {
+                "Min": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum baseline bandwidth, in Mbps. To specify no minimum limit, omit\n         this parameter.</p>"
+                    }
+                },
+                "Max": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum baseline bandwidth, in Mbps. To specify no maximum limit, omit\n         this parameter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The minimum and maximum baseline bandwidth to Amazon EBS, in Mbps. For more information, see\n            <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html\">Amazon\n            EBS–optimized instances</a> in the <i>Amazon EC2 User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#BaselineIops": {
@@ -5604,6 +5880,25 @@
                     {
                         "value": "failed",
                         "name": "failed"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ec2#BurstablePerformance": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "included",
+                        "name": "INCLUDED"
+                    },
+                    {
+                        "value": "required",
+                        "name": "REQUIRED"
+                    },
+                    {
+                        "value": "excluded",
+                        "name": "EXCLUDED"
                     }
                 ]
             }
@@ -8956,6 +9251,34 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.ec2#CoreCount",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#CpuManufacturer": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "intel",
+                        "name": "INTEL"
+                    },
+                    {
+                        "value": "amd",
+                        "name": "AMD"
+                    },
+                    {
+                        "value": "amazon-web-services",
+                        "name": "AMAZON_WEB_SERVICES"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ec2#CpuManufacturerSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#CpuManufacturer",
                 "traits": {
                     "smithy.api#xmlName": "item"
                 }
@@ -20524,7 +20847,7 @@
                 "ExecutableUsers": {
                     "target": "com.amazonaws.ec2#ExecutableByStringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Scopes the images by users with explicit launch permissions. \n       Specify an Amazon Web Services account ID, <code>self</code> (the sender of the request),\n\t\t\t\tor <code>all</code> (public AMIs).</p>",
+                        "smithy.api#documentation": "<p>Scopes the images by users with explicit launch permissions. \n       Specify an Amazon Web Services account ID, <code>self</code> (the sender of the request),\n\t\t\t\tor <code>all</code> (public AMIs).</p>\n         <ul>\n            <li>\n               <p>If you specify an Amazon Web Services account ID that is not your own, only AMIs\n          shared with that specific Amazon Web Services account ID are returned. However, AMIs that\n          are shared with the account’s organization or organizational unit (OU) are not\n          returned.</p>\n            </li>\n            <li>\n               <p>If you specify <code>self</code> or your own Amazon Web Services account ID, AMIs\n          shared with your account are returned. In addition, AMIs that are shared with the\n          organization or OU of which you are member are also returned. </p>\n            </li>\n            <li>\n               <p>If you specify <code>all</code>, all public AMIs are returned.</p>\n            </li>\n         </ul>",
                         "smithy.api#xmlName": "ExecutableBy"
                     }
                 },
@@ -21422,7 +21745,7 @@
                 "Filters": {
                     "target": "com.amazonaws.ec2#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filters.</p>\n        <ul>\n            <li>\n                <p>\n                    <code>affinity</code> - The affinity setting for an instance running on a\n                    Dedicated Host (<code>default</code> | <code>host</code>).</p>\n            </li>\n            <li>\n                <p>\n                    <code>architecture</code> - The instance architecture (<code>i386</code> |\n                        <code>x86_64</code> | <code>arm64</code>).</p>\n            </li>\n            <li>\n                <p>\n                    <code>availability-zone</code> - The Availability Zone of the instance.</p>\n            </li>\n            <li>\n                <p>\n                    <code>block-device-mapping.attach-time</code> - The attach time for an EBS\n                    volume mapped to the instance, for example,\n                        <code>2010-09-15T17:15:20.000Z</code>.</p>\n            </li>\n            <li>\n                <p>\n                    <code>block-device-mapping.delete-on-termination</code> - A Boolean that\n                    indicates whether the EBS volume is deleted on instance termination.</p>\n            </li>\n            <li>\n                <p>\n                    <code>block-device-mapping.device-name</code> - The device name specified in the\n                    block device mapping (for example, <code>/dev/sdh</code> or\n                    <code>xvdh</code>).</p>\n            </li>\n            <li>\n                <p>\n                    <code>block-device-mapping.status</code> - The status for the EBS volume\n                        (<code>attaching</code> | <code>attached</code> | <code>detaching</code> |\n                        <code>detached</code>).</p>\n            </li>\n            <li>\n                <p>\n                    <code>block-device-mapping.volume-id</code> - The volume ID of the EBS\n                    volume.</p>\n            </li>\n            <li>\n                <p>\n                    <code>client-token</code> - The idempotency token you provided when you launched\n                    the instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>dns-name</code> - The public DNS name of the instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>group-id</code> - The ID of the security group for the instance.\n                    EC2-Classic only.</p>\n            </li>\n            <li>\n                <p>\n                  <code>group-name</code> - The name of the security group for the instance.\n                    EC2-Classic only.</p>\n            </li>\n            <li>\n                <p>\n                  <code>hibernation-options.configured</code> - A Boolean that indicates whether\n                    the instance is enabled for hibernation. A value of <code>true</code> means that\n                    the instance is enabled for hibernation. </p>\n            </li>\n            <li>\n                <p>\n                  <code>host-id</code> - The ID of the Dedicated Host on which the instance is\n                    running, if applicable.</p>\n            </li>\n            <li>\n                <p>\n                  <code>hypervisor</code> - The hypervisor type of the instance\n                    (<code>ovm</code> | <code>xen</code>). The value <code>xen</code>\n                    is used for both Xen and Nitro hypervisors.</p>\n            </li>\n            <li>\n                <p>\n                  <code>iam-instance-profile.arn</code> - The instance profile associated with\n                    the instance. Specified as an ARN.</p>\n            </li>\n            <li>\n                <p>\n                  <code>image-id</code> - The ID of the image used to launch the\n                    instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>instance-id</code> - The ID of the instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>instance-lifecycle</code> - Indicates whether this is a Spot Instance or\n                    a Scheduled Instance (<code>spot</code> | <code>scheduled</code>).</p>\n            </li>\n            <li>\n                <p>\n                  <code>instance-state-code</code> - The state of the instance, as a 16-bit\n                    unsigned integer. The high byte is used for internal purposes and should be\n                    ignored. The low byte is set based on the state represented. The valid values\n                    are: 0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64\n                    (stopping), and 80 (stopped).</p>\n            </li>\n            <li>\n                <p>\n                  <code>instance-state-name</code> - The state of the instance\n                        (<code>pending</code> | <code>running</code> | <code>shutting-down</code> |\n                        <code>terminated</code> | <code>stopping</code> |\n                    <code>stopped</code>).</p>\n            </li>\n            <li>\n                <p>\n                  <code>instance-type</code> - The type of instance (for example,\n                        <code>t2.micro</code>).</p>\n            </li>\n            <li>\n                <p>\n                  <code>instance.group-id</code> - The ID of the security group for the\n                    instance. </p>\n            </li>\n            <li>\n                <p>\n                  <code>instance.group-name</code> - The name of the security group for the\n                    instance. </p>\n            </li>\n            <li>\n                <p>\n                  <code>ip-address</code> - The public IPv4 address of the instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>kernel-id</code> - The kernel ID.</p>\n            </li>\n            <li>\n                <p>\n                  <code>key-name</code> - The name of the key pair used when the instance was\n                    launched.</p>\n            </li>\n            <li>\n                <p>\n                  <code>launch-index</code> - When launching multiple instances, this is the\n                    index for the instance in the launch group (for example, 0, 1, 2, and so on). </p>\n            </li>\n            <li>\n                <p>\n                  <code>launch-time</code> - The time when the instance was launched.</p>\n            </li>\n            <li>\n                <p>\n                  <code>metadata-options.http-tokens</code> - The metadata request authorization\n                    state (<code>optional</code> | <code>required</code>)</p>\n            </li>\n            <li>\n                <p>\n                  <code>metadata-options.http-put-response-hop-limit</code> - The http metadata\n                    request put response hop limit (integer, possible values <code>1</code> to\n                        <code>64</code>)</p>\n            </li>\n            <li>\n                <p>\n                  <code>metadata-options.http-endpoint</code> - Enable or disable metadata\n                    access on http endpoint (<code>enabled</code> | <code>disabled</code>)</p>\n            </li>\n            <li>\n                <p>\n                  <code>monitoring-state</code> - Indicates whether detailed monitoring is\n                    enabled (<code>disabled</code> | <code>enabled</code>).</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.addresses.private-ip-address</code> - The private IPv4\n                    address associated with the network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.addresses.primary</code> - Specifies whether the IPv4\n                    address of the network interface is the primary private IPv4 address.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.addresses.association.public-ip</code> - The ID of the\n                    association of an Elastic IP address (IPv4) with a network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.addresses.association.ip-owner-id</code> - The owner\n                    ID of the private IPv4 address associated with the network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.association.public-ip</code> - The address of the\n                    Elastic IP address (IPv4) bound to the network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.association.ip-owner-id</code> - The owner of the\n                    Elastic IP address (IPv4) associated with the network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.association.allocation-id</code> - The allocation ID\n                    returned when you allocated the Elastic IP address (IPv4) for your network\n                    interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.association.association-id</code> - The association ID\n                    returned when the network interface was associated with an IPv4 address.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.attachment.attachment-id</code> - The ID of the\n                    interface attachment.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.attachment.instance-id</code> - The ID of the instance\n                    to which the network interface is attached.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.attachment.instance-owner-id</code> - The owner ID of\n                    the instance to which the network interface is attached.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.attachment.device-index</code> - The device index to\n                    which the network interface is attached.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.attachment.status</code> - The status of the\n                    attachment (<code>attaching</code> | <code>attached</code> |\n                        <code>detaching</code> | <code>detached</code>).</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.attachment.attach-time</code> - The time that the\n                    network interface was attached to an instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.attachment.delete-on-termination</code> - Specifies\n                    whether the attachment is deleted when an instance is terminated.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.availability-zone</code> - The Availability Zone for\n                    the network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.description</code> - The description of the network\n                    interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.group-id</code> - The ID of a security group\n                    associated with the network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.group-name</code> - The name of a security group\n                    associated with the network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.ipv6-addresses.ipv6-address</code> - The IPv6 address\n                    associated with the network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.mac-address</code> - The MAC address of the network\n                    interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.network-interface-id</code> - The ID of the network\n                    interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.owner-id</code> - The ID of the owner of the network\n                    interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.private-dns-name</code> - The private DNS name of the\n                    network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.requester-id</code> - The requester ID for the network\n                    interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.requester-managed</code> - Indicates whether the\n                    network interface is being managed by Amazon Web Services.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.status</code> - The status of the network interface\n                        (<code>available</code>) | <code>in-use</code>).</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.source-dest-check</code> - Whether the network\n                    interface performs source/destination checking. A value of <code>true</code>\n                    means that checking is enabled, and <code>false</code> means that checking is\n                    disabled. The value must be <code>false</code> for the network interface to\n                    perform network address translation (NAT) in your VPC.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.subnet-id</code> - The ID of the subnet for the\n                    network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.vpc-id</code> - The ID of the VPC for the network\n                    interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>outpost-arn</code> - The Amazon Resource Name (ARN) of the Outpost.</p>\n            </li>\n            <li>\n                <p>\n                    <code>owner-id</code> - The Amazon Web Services account ID of the instance owner.</p>\n            </li>\n            <li>\n                <p>\n                    <code>placement-group-name</code> - The name of the placement group for the\n                    instance.</p>\n            </li>\n            <li>\n                <p>\n                    <code>placement-partition-number</code> - The partition in which the instance is\n                    located.</p>\n            </li>\n            <li>\n                <p>\n                    <code>platform</code> - The platform. To list only Windows instances, use\n                        <code>windows</code>.</p>\n            </li>\n            <li>\n                <p>\n                    <code>private-dns-name</code> - The private IPv4 DNS name of the\n                    instance.</p>\n            </li>\n            <li>\n                <p>\n                    <code>private-ip-address</code> - The private IPv4 address of the\n                    instance.</p>\n            </li>\n            <li>\n                <p>\n                    <code>product-code</code> - The product code associated with the AMI used to\n                    launch the instance.</p>\n            </li>\n            <li>\n                <p>\n                    <code>product-code.type</code> - The type of product code (<code>devpay</code> |\n                        <code>marketplace</code>).</p>\n            </li>\n            <li>\n                <p>\n                    <code>ramdisk-id</code> - The RAM disk ID.</p>\n            </li>\n            <li>\n                <p>\n                    <code>reason</code> - The reason for the current state of the instance (for\n                    example, shows \"User Initiated [date]\" when you stop or terminate the instance).\n                    Similar to the state-reason-code filter.</p>\n            </li>\n            <li>\n                <p>\n                    <code>requester-id</code> - The ID of the entity that launched the instance on\n                    your behalf (for example, Amazon Web Services Management Console, Auto Scaling, and so\n                    on).</p>\n            </li>\n            <li>\n                <p>\n                    <code>reservation-id</code> - The ID of the instance's reservation. A\n                    reservation ID is created any time you launch an instance. A reservation ID has\n                    a one-to-one relationship with an instance launch request, but can be associated\n                    with more than one instance if you launch multiple instances using the same\n                    launch request. For example, if you launch one instance, you get one reservation\n                    ID. If you launch ten instances using the same launch request, you also get one\n                    reservation ID.</p>\n            </li>\n            <li>\n                <p>\n                    <code>root-device-name</code> - The device name of the root device volume (for\n                    example, <code>/dev/sda1</code>).</p>\n            </li>\n            <li>\n                <p>\n                    <code>root-device-type</code> - The type of the root device volume\n                        (<code>ebs</code> | <code>instance-store</code>).</p>\n            </li>\n            <li>\n                <p>\n                    <code>source-dest-check</code> - Indicates whether the instance performs\n                    source/destination checking. A value of <code>true</code> means that checking is\n                    enabled, and <code>false</code> means that checking is disabled. The value must\n                    be <code>false</code> for the instance to perform network address translation\n                    (NAT) in your VPC. </p>\n            </li>\n            <li>\n                <p>\n                    <code>spot-instance-request-id</code> - The ID of the Spot Instance\n                    request.</p>\n            </li>\n            <li>\n                <p>\n                    <code>state-reason-code</code> - The reason code for the state change.</p>\n            </li>\n            <li>\n                <p>\n                    <code>state-reason-message</code> - A message that describes the state\n                    change.</p>\n            </li>\n            <li>\n                <p>\n                    <code>subnet-id</code> - The ID of the subnet for the instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag:<key></code> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources that have a tag with a specific key, regardless of the tag value.</p>\n            </li>\n            <li>\n                <p>\n                    <code>tenancy</code> - The tenancy of an instance (<code>dedicated</code> |\n                        <code>default</code> | <code>host</code>).</p>\n            </li>\n            <li>\n                <p>\n                    <code>virtualization-type</code> - The virtualization type of the instance\n                        (<code>paravirtual</code> | <code>hvm</code>).</p>\n            </li>\n            <li>\n                <p>\n                    <code>vpc-id</code> - The ID of the VPC that the instance is running in.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The filters.</p>\n        <ul>\n            <li>\n                <p>\n                    <code>affinity</code> - The affinity setting for an instance running on a\n                    Dedicated Host (<code>default</code> | <code>host</code>).</p>\n            </li>\n            <li>\n                <p>\n                    <code>architecture</code> - The instance architecture (<code>i386</code> |\n                        <code>x86_64</code> | <code>arm64</code>).</p>\n            </li>\n            <li>\n                <p>\n                    <code>availability-zone</code> - The Availability Zone of the instance.</p>\n            </li>\n            <li>\n                <p>\n                    <code>block-device-mapping.attach-time</code> - The attach time for an EBS\n                    volume mapped to the instance, for example,\n                        <code>2010-09-15T17:15:20.000Z</code>.</p>\n            </li>\n            <li>\n                <p>\n                    <code>block-device-mapping.delete-on-termination</code> - A Boolean that\n                    indicates whether the EBS volume is deleted on instance termination.</p>\n            </li>\n            <li>\n                <p>\n                    <code>block-device-mapping.device-name</code> - The device name specified in the\n                    block device mapping (for example, <code>/dev/sdh</code> or\n                    <code>xvdh</code>).</p>\n            </li>\n            <li>\n                <p>\n                    <code>block-device-mapping.status</code> - The status for the EBS volume\n                        (<code>attaching</code> | <code>attached</code> | <code>detaching</code> |\n                        <code>detached</code>).</p>\n            </li>\n            <li>\n                <p>\n                    <code>block-device-mapping.volume-id</code> - The volume ID of the EBS\n                    volume.</p>\n            </li>\n            <li>\n                <p>\n                    <code>client-token</code> - The idempotency token you provided when you launched\n                    the instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>dns-name</code> - The public DNS name of the instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>group-id</code> - The ID of the security group for the instance.\n                    EC2-Classic only.</p>\n            </li>\n            <li>\n                <p>\n                  <code>group-name</code> - The name of the security group for the instance.\n                    EC2-Classic only.</p>\n            </li>\n            <li>\n                <p>\n                  <code>hibernation-options.configured</code> - A Boolean that indicates whether\n                    the instance is enabled for hibernation. A value of <code>true</code> means that\n                    the instance is enabled for hibernation. </p>\n            </li>\n            <li>\n                <p>\n                  <code>host-id</code> - The ID of the Dedicated Host on which the instance is\n                    running, if applicable.</p>\n            </li>\n            <li>\n                <p>\n                  <code>hypervisor</code> - The hypervisor type of the instance\n                    (<code>ovm</code> | <code>xen</code>). The value <code>xen</code>\n                    is used for both Xen and Nitro hypervisors.</p>\n            </li>\n            <li>\n                <p>\n                  <code>iam-instance-profile.arn</code> - The instance profile associated with\n                    the instance. Specified as an ARN.</p>\n            </li>\n            <li>\n                <p>\n                  <code>image-id</code> - The ID of the image used to launch the\n                    instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>instance-id</code> - The ID of the instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>instance-lifecycle</code> - Indicates whether this is a Spot Instance or\n                    a Scheduled Instance (<code>spot</code> | <code>scheduled</code>).</p>\n            </li>\n            <li>\n                <p>\n                  <code>instance-state-code</code> - The state of the instance, as a 16-bit\n                    unsigned integer. The high byte is used for internal purposes and should be\n                    ignored. The low byte is set based on the state represented. The valid values\n                    are: 0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64\n                    (stopping), and 80 (stopped).</p>\n            </li>\n            <li>\n                <p>\n                  <code>instance-state-name</code> - The state of the instance\n                        (<code>pending</code> | <code>running</code> | <code>shutting-down</code> |\n                        <code>terminated</code> | <code>stopping</code> |\n                    <code>stopped</code>).</p>\n            </li>\n            <li>\n                <p>\n                  <code>instance-type</code> - The type of instance (for example,\n                        <code>t2.micro</code>).</p>\n            </li>\n            <li>\n                <p>\n                  <code>instance.group-id</code> - The ID of the security group for the\n                    instance. </p>\n            </li>\n            <li>\n                <p>\n                  <code>instance.group-name</code> - The name of the security group for the\n                    instance. </p>\n            </li>\n            <li>\n                <p>\n                  <code>ip-address</code> - The public IPv4 address of the instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>kernel-id</code> - The kernel ID.</p>\n            </li>\n            <li>\n                <p>\n                  <code>key-name</code> - The name of the key pair used when the instance was\n                    launched.</p>\n            </li>\n            <li>\n                <p>\n                  <code>launch-index</code> - When launching multiple instances, this is the\n                    index for the instance in the launch group (for example, 0, 1, 2, and so on). </p>\n            </li>\n            <li>\n                <p>\n                  <code>launch-time</code> - The time when the instance was launched, in the ISO\n                    8601 format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), for example,\n                        <code>2021-09-29T11:04:43.305Z</code>. You can use a wildcard\n                        (<code>*</code>), for example, <code>2021-09-29T*</code>, which matches an\n                    entire day.</p>\n            </li>\n            <li>\n                <p>\n                  <code>metadata-options.http-tokens</code> - The metadata request authorization\n                    state (<code>optional</code> | <code>required</code>)</p>\n            </li>\n            <li>\n                <p>\n                  <code>metadata-options.http-put-response-hop-limit</code> - The http metadata\n                    request put response hop limit (integer, possible values <code>1</code> to\n                        <code>64</code>)</p>\n            </li>\n            <li>\n                <p>\n                  <code>metadata-options.http-endpoint</code> - Enable or disable metadata\n                    access on http endpoint (<code>enabled</code> | <code>disabled</code>)</p>\n            </li>\n            <li>\n                <p>\n                  <code>monitoring-state</code> - Indicates whether detailed monitoring is\n                    enabled (<code>disabled</code> | <code>enabled</code>).</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.addresses.private-ip-address</code> - The private IPv4\n                    address associated with the network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.addresses.primary</code> - Specifies whether the IPv4\n                    address of the network interface is the primary private IPv4 address.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.addresses.association.public-ip</code> - The ID of the\n                    association of an Elastic IP address (IPv4) with a network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.addresses.association.ip-owner-id</code> - The owner\n                    ID of the private IPv4 address associated with the network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.association.public-ip</code> - The address of the\n                    Elastic IP address (IPv4) bound to the network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.association.ip-owner-id</code> - The owner of the\n                    Elastic IP address (IPv4) associated with the network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.association.allocation-id</code> - The allocation ID\n                    returned when you allocated the Elastic IP address (IPv4) for your network\n                    interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.association.association-id</code> - The association ID\n                    returned when the network interface was associated with an IPv4 address.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.attachment.attachment-id</code> - The ID of the\n                    interface attachment.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.attachment.instance-id</code> - The ID of the instance\n                    to which the network interface is attached.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.attachment.instance-owner-id</code> - The owner ID of\n                    the instance to which the network interface is attached.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.attachment.device-index</code> - The device index to\n                    which the network interface is attached.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.attachment.status</code> - The status of the\n                    attachment (<code>attaching</code> | <code>attached</code> |\n                        <code>detaching</code> | <code>detached</code>).</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.attachment.attach-time</code> - The time that the\n                    network interface was attached to an instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.attachment.delete-on-termination</code> - Specifies\n                    whether the attachment is deleted when an instance is terminated.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.availability-zone</code> - The Availability Zone for\n                    the network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.description</code> - The description of the network\n                    interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.group-id</code> - The ID of a security group\n                    associated with the network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.group-name</code> - The name of a security group\n                    associated with the network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.ipv6-addresses.ipv6-address</code> - The IPv6 address\n                    associated with the network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.mac-address</code> - The MAC address of the network\n                    interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.network-interface-id</code> - The ID of the network\n                    interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.owner-id</code> - The ID of the owner of the network\n                    interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.private-dns-name</code> - The private DNS name of the\n                    network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.requester-id</code> - The requester ID for the network\n                    interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.requester-managed</code> - Indicates whether the\n                    network interface is being managed by Amazon Web Services.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.status</code> - The status of the network interface\n                        (<code>available</code>) | <code>in-use</code>).</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.source-dest-check</code> - Whether the network\n                    interface performs source/destination checking. A value of <code>true</code>\n                    means that checking is enabled, and <code>false</code> means that checking is\n                    disabled. The value must be <code>false</code> for the network interface to\n                    perform network address translation (NAT) in your VPC.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.subnet-id</code> - The ID of the subnet for the\n                    network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.vpc-id</code> - The ID of the VPC for the network\n                    interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>outpost-arn</code> - The Amazon Resource Name (ARN) of the Outpost.</p>\n            </li>\n            <li>\n                <p>\n                    <code>owner-id</code> - The Amazon Web Services account ID of the instance owner.</p>\n            </li>\n            <li>\n                <p>\n                    <code>placement-group-name</code> - The name of the placement group for the\n                    instance.</p>\n            </li>\n            <li>\n                <p>\n                    <code>placement-partition-number</code> - The partition in which the instance is\n                    located.</p>\n            </li>\n            <li>\n                <p>\n                    <code>platform</code> - The platform. To list only Windows instances, use\n                        <code>windows</code>.</p>\n            </li>\n            <li>\n                <p>\n                    <code>private-dns-name</code> - The private IPv4 DNS name of the\n                    instance.</p>\n            </li>\n            <li>\n                <p>\n                    <code>private-ip-address</code> - The private IPv4 address of the\n                    instance.</p>\n            </li>\n            <li>\n                <p>\n                    <code>product-code</code> - The product code associated with the AMI used to\n                    launch the instance.</p>\n            </li>\n            <li>\n                <p>\n                    <code>product-code.type</code> - The type of product code (<code>devpay</code> |\n                        <code>marketplace</code>).</p>\n            </li>\n            <li>\n                <p>\n                    <code>ramdisk-id</code> - The RAM disk ID.</p>\n            </li>\n            <li>\n                <p>\n                    <code>reason</code> - The reason for the current state of the instance (for\n                    example, shows \"User Initiated [date]\" when you stop or terminate the instance).\n                    Similar to the state-reason-code filter.</p>\n            </li>\n            <li>\n                <p>\n                    <code>requester-id</code> - The ID of the entity that launched the instance on\n                    your behalf (for example, Amazon Web Services Management Console, Auto Scaling, and so\n                    on).</p>\n            </li>\n            <li>\n                <p>\n                    <code>reservation-id</code> - The ID of the instance's reservation. A\n                    reservation ID is created any time you launch an instance. A reservation ID has\n                    a one-to-one relationship with an instance launch request, but can be associated\n                    with more than one instance if you launch multiple instances using the same\n                    launch request. For example, if you launch one instance, you get one reservation\n                    ID. If you launch ten instances using the same launch request, you also get one\n                    reservation ID.</p>\n            </li>\n            <li>\n                <p>\n                    <code>root-device-name</code> - The device name of the root device volume (for\n                    example, <code>/dev/sda1</code>).</p>\n            </li>\n            <li>\n                <p>\n                    <code>root-device-type</code> - The type of the root device volume\n                        (<code>ebs</code> | <code>instance-store</code>).</p>\n            </li>\n            <li>\n                <p>\n                    <code>source-dest-check</code> - Indicates whether the instance performs\n                    source/destination checking. A value of <code>true</code> means that checking is\n                    enabled, and <code>false</code> means that checking is disabled. The value must\n                    be <code>false</code> for the instance to perform network address translation\n                    (NAT) in your VPC. </p>\n            </li>\n            <li>\n                <p>\n                    <code>spot-instance-request-id</code> - The ID of the Spot Instance\n                    request.</p>\n            </li>\n            <li>\n                <p>\n                    <code>state-reason-code</code> - The reason code for the state change.</p>\n            </li>\n            <li>\n                <p>\n                    <code>state-reason-message</code> - A message that describes the state\n                    change.</p>\n            </li>\n            <li>\n                <p>\n                    <code>subnet-id</code> - The ID of the subnet for the instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag:<key></code> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources that have a tag with a specific key, regardless of the tag value.</p>\n            </li>\n            <li>\n                <p>\n                    <code>tenancy</code> - The tenancy of an instance (<code>dedicated</code> |\n                        <code>default</code> | <code>host</code>).</p>\n            </li>\n            <li>\n                <p>\n                    <code>virtualization-type</code> - The virtualization type of the instance\n                        (<code>paravirtual</code> | <code>hvm</code>).</p>\n            </li>\n            <li>\n                <p>\n                    <code>vpc-id</code> - The ID of the VPC that the instance is running in.</p>\n            </li>\n         </ul>",
                         "smithy.api#xmlName": "Filter"
                     }
                 },
@@ -31432,6 +31755,31 @@
                 ]
             }
         },
+        "com.amazonaws.ec2#ExcludedInstanceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 30
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\.\\*]+$"
+            }
+        },
+        "com.amazonaws.ec2#ExcludedInstanceTypeSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#ExcludedInstanceType",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 400
+                }
+            }
+        },
         "com.amazonaws.ec2#ExecutableByStringList": {
             "type": "list",
             "member": {
@@ -33094,7 +33442,7 @@
                     "target": "com.amazonaws.ec2#InstanceType",
                     "traits": {
                         "aws.protocols#ec2QueryName": "InstanceType",
-                        "smithy.api#documentation": "<p>The instance type.</p>",
+                        "smithy.api#documentation": "<p>The instance type.</p>\n         <note>\n            <p>If you specify <code>InstanceTypes</code>, you can't specify\n               <code>InstanceRequirements</code>.</p>\n         </note>",
                         "smithy.api#xmlName": "instanceType"
                     }
                 },
@@ -33145,6 +33493,14 @@
                         "smithy.api#documentation": "<p>The location where the instance launched, if applicable.</p>",
                         "smithy.api#xmlName": "placement"
                     }
+                },
+                "InstanceRequirements": {
+                    "target": "com.amazonaws.ec2#InstanceRequirements",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "InstanceRequirements",
+                        "smithy.api#documentation": "<p>The attributes for the instance types. When you specify instance attributes, Amazon EC2 will\n         identify instance types with those attributes.</p>\n         <note>\n            <p>If you specify <code>InstanceRequirements</code>, you can't specify\n            <code>InstanceTypes</code>.</p>\n         </note>",
+                        "smithy.api#xmlName": "instanceRequirements"
+                    }
                 }
             },
             "traits": {
@@ -33175,7 +33531,7 @@
                 "InstanceType": {
                     "target": "com.amazonaws.ec2#InstanceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The instance type.</p>"
+                        "smithy.api#documentation": "<p>The instance type.</p>\n         <note>\n            <p>If you specify <code>InstanceTypes</code>, you can't specify\n               <code>InstanceRequirements</code>.</p>\n         </note>"
                     }
                 },
                 "MaxPrice": {
@@ -33212,6 +33568,12 @@
                     "target": "com.amazonaws.ec2#Placement",
                     "traits": {
                         "smithy.api#documentation": "<p>The location where the instance launched, if applicable.</p>"
+                    }
+                },
+                "InstanceRequirements": {
+                    "target": "com.amazonaws.ec2#InstanceRequirementsRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attributes for the instance types. When you specify instance attributes, Amazon EC2 will\n         identify instance types with those attributes.</p>\n         <note>\n            <p>If you specify <code>InstanceRequirements</code>, you can't specify\n               <code>InstanceTypes</code>.</p>\n         </note>"
                     }
                 }
             },
@@ -34751,6 +35113,91 @@
                 }
             }
         },
+        "com.amazonaws.ec2#GetInstanceTypesFromInstanceRequirements": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#GetInstanceTypesFromInstanceRequirementsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#GetInstanceTypesFromInstanceRequirementsResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of instance types with the specified instance attributes. You can\n         use the response to preview the instance types without launching instances. Note\n         that the response does not consider capacity.</p>\n         <p>When you specify multiple parameters, you get instance types that satisfy all of the\n         specified parameters. If you specify multiple values for a parameter, you get instance\n         types that satisfy any of the specified values.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-attribute-based-instance-type-selection.html#spotfleet-get-instance-types-from-instance-requirements\">Preview instance types with specified attributes</a>, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html\">Attribute-based instance type selection for EC2 Fleet</a>, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-attribute-based-instance-type-selection.html\">Attribute-based instance type selection for Spot Fleet</a>, and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html\">Spot\n            placement score</a> in the <i>Amazon EC2 User Guide</i>, and <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html\">Creating an\n            Auto Scaling group using attribute-based instance type selection</a> in the\n            <i>Amazon EC2 Auto Scaling User Guide</i>.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "InstanceTypes",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.ec2#GetInstanceTypesFromInstanceRequirementsRequest": {
+            "type": "structure",
+            "members": {
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                },
+                "ArchitectureTypes": {
+                    "target": "com.amazonaws.ec2#ArchitectureTypeSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The processor architecture type.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "ArchitectureType"
+                    }
+                },
+                "VirtualizationTypes": {
+                    "target": "com.amazonaws.ec2#VirtualizationTypeSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The virtualization type.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "VirtualizationType"
+                    }
+                },
+                "InstanceRequirements": {
+                    "target": "com.amazonaws.ec2#InstanceRequirementsRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attributes required for the instance types.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. Specify a value between 1 and\u2028 \n         1000. The default value is 1000. To retrieve the remaining results, make another call with\u2028 \n         the returned <code>NextToken</code> value.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#GetInstanceTypesFromInstanceRequirementsResult": {
+            "type": "structure",
+            "members": {
+                "InstanceTypes": {
+                    "target": "com.amazonaws.ec2#InstanceTypeInfoFromInstanceRequirementsSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "InstanceTypeSet",
+                        "smithy.api#documentation": "<p>The instance types with the specified instance attributes.</p>",
+                        "smithy.api#xmlName": "instanceTypeSet"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NextToken",
+                        "smithy.api#documentation": "<p>The token for the next set of results.</p>",
+                        "smithy.api#xmlName": "nextToken"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ec2#GetLaunchTemplateData": {
             "type": "operation",
             "input": {
@@ -35178,6 +35625,107 @@
                         "aws.protocols#ec2QueryName": "SerialConsoleAccessEnabled",
                         "smithy.api#documentation": "<p>If <code>true</code>, access to the EC2 serial console of all instances is enabled for\n\t\t\tyour account. If <code>false</code>, access to the EC2 serial console of all instances\n\t\t\tis disabled for your account.</p>",
                         "smithy.api#xmlName": "serialConsoleAccessEnabled"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#GetSpotPlacementScores": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#GetSpotPlacementScoresRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#GetSpotPlacementScoresResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Calculates the Spot placement score for a Region or Availability Zone based on the\n         specified target capacity and compute requirements.</p>\n         <p>You can specify your compute requirements either by using\n            <code>InstanceRequirementsWithMetadata</code> and letting Amazon EC2 choose the optimal\n         instance types to fulfill your Spot request, or you can specify the instance types by using\n            <code>InstanceTypes</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html\">Spot placement score</a> in\n         the Amazon EC2 User Guide.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "SpotPlacementScores",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.ec2#GetSpotPlacementScoresRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceTypes": {
+                    "target": "com.amazonaws.ec2#InstanceTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance types. We recommend that you specify at least three instance types. If you\n         specify one or two instance types, or specify variations of a single instance type (for\n         example, an <code>m3.xlarge</code> with and without instance storage), the returned\n         placement score will always be low. </p>\n         <p>If you specify <code>InstanceTypes</code>, you can't specify\n            <code>InstanceRequirementsWithMetadata</code>.</p>",
+                        "smithy.api#xmlName": "InstanceType"
+                    }
+                },
+                "TargetCapacity": {
+                    "target": "com.amazonaws.ec2#SpotPlacementScoresTargetCapacity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target capacity.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetCapacityUnitType": {
+                    "target": "com.amazonaws.ec2#TargetCapacityUnitType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unit for the target capacity.</p>\n         <p>Default: <code>units</code> (translates to number of instances)</p>"
+                    }
+                },
+                "SingleAvailabilityZone": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify <code>true</code> so that the response returns a list of scored Availability Zones.\n         Otherwise, the response returns a list of scored Regions.</p>\n         <p>A list of scored Availability Zones is useful if you want to launch all of your Spot\n         capacity into a single Availability Zone.</p>"
+                    }
+                },
+                "RegionNames": {
+                    "target": "com.amazonaws.ec2#RegionNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Regions used to narrow down the list of Regions to be scored. Enter the Region code,\n         for example, <code>us-east-1</code>.</p>",
+                        "smithy.api#xmlName": "RegionName"
+                    }
+                },
+                "InstanceRequirementsWithMetadata": {
+                    "target": "com.amazonaws.ec2#InstanceRequirementsWithMetadataRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attributes for the instance types. When you specify instance attributes, Amazon EC2 will\n         identify instance types with those attributes.</p>\n         <p>If you specify <code>InstanceRequirementsWithMetadata</code>, you can't specify\n            <code>InstanceTypes</code>.</p>"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ec2#SpotPlacementScoresMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. Specify a value between 1 and\u2028      \n      1000. The default value is 1000. To retrieve the remaining results, make another call with\u2028      \n      the returned <code>NextToken</code> value.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#GetSpotPlacementScoresResult": {
+            "type": "structure",
+            "members": {
+                "SpotPlacementScores": {
+                    "target": "com.amazonaws.ec2#SpotPlacementScores",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "SpotPlacementScoreSet",
+                        "smithy.api#documentation": "<p>The Spot placement score for the top 10 Regions or Availability Zones, scored on a scale\n         from 1 to 10. Each score\u2028 reflects how likely it is that each Region or Availability Zone\n         will succeed at fulfilling the specified target capacity\u2028 <i>at the time of the Spot\n            placement score request</i>. A score of <code>10</code> means that your Spot\n         capacity request is highly likely to succeed in that Region or Availability Zone. </p>\n         <p>If you request a Spot placement score for Regions, a high score assumes that your fleet\n         request will be configured to use all Availability Zones and the\n            <code>capacity-optimized</code> allocation strategy. If you request a Spot placement\n         score for Availability Zones, a high score assumes that your fleet request will be\n         configured to use a single Availability Zone and the <code>capacity-optimized</code>\n         allocation strategy.</p>\n         <p>Different\u2028 Regions or Availability Zones might return the same score.</p>\n         <note>\n            <p>The Spot placement score serves as a recommendation only. No score guarantees that your\n            Spot request will be fully or partially fulfilled.</p>\n         </note>",
+                        "smithy.api#xmlName": "spotPlacementScoreSet"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NextToken",
+                        "smithy.api#documentation": "<p>The token for the next set of results.</p>",
+                        "smithy.api#xmlName": "nextToken"
                     }
                 }
             }
@@ -39775,6 +40323,30 @@
                 "smithy.api#documentation": "<p>Describes the default credit option for CPU usage of a burstable performance instance family.</p>"
             }
         },
+        "com.amazonaws.ec2#InstanceGeneration": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "current",
+                        "name": "CURRENT"
+                    },
+                    {
+                        "value": "previous",
+                        "name": "PREVIOUS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ec2#InstanceGenerationSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#InstanceGeneration",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
         "com.amazonaws.ec2#InstanceHealthStatus": {
             "type": "string",
             "traits": {
@@ -40638,6 +41210,353 @@
                 "traits": {
                     "smithy.api#xmlName": "item"
                 }
+            }
+        },
+        "com.amazonaws.ec2#InstanceRequirements": {
+            "type": "structure",
+            "members": {
+                "VCpuCount": {
+                    "target": "com.amazonaws.ec2#VCpuCountRange",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "VCpuCount",
+                        "smithy.api#documentation": "<p>The minimum and maximum number of vCPUs.</p>",
+                        "smithy.api#xmlName": "vCpuCount"
+                    }
+                },
+                "MemoryMiB": {
+                    "target": "com.amazonaws.ec2#MemoryMiB",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "MemoryMiB",
+                        "smithy.api#documentation": "<p>The minimum and maximum amount of memory, in MiB.</p>",
+                        "smithy.api#xmlName": "memoryMiB"
+                    }
+                },
+                "CpuManufacturers": {
+                    "target": "com.amazonaws.ec2#CpuManufacturerSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CpuManufacturerSet",
+                        "smithy.api#documentation": "<p>The CPU manufacturers to include.</p>\n         <ul>\n            <li>\n               <p>For instance types with Intel CPUs, specify <code>intel</code>.</p>\n            </li>\n            <li>\n               <p>For instance types with AMD CPUs, specify <code>amd</code>.</p>\n            </li>\n            <li>\n               <p>For instance types with Amazon Web Services CPUs, specify <code>amazon-web-services</code>.</p>\n            </li>\n         </ul>\n         <note>\n            <p>Don't confuse the CPU manufacturer with the CPU architecture. Instances will \n         be launched with a compatible CPU architecture based on the Amazon Machine Image (AMI) that you \n         specify in your launch template.</p>\n         </note>\n         <p>Default: Any manufacturer</p>",
+                        "smithy.api#xmlName": "cpuManufacturerSet"
+                    }
+                },
+                "MemoryGiBPerVCpu": {
+                    "target": "com.amazonaws.ec2#MemoryGiBPerVCpu",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "MemoryGiBPerVCpu",
+                        "smithy.api#documentation": "<p>The minimum and maximum amount of memory per vCPU, in GiB.</p>\n         <p>Default: No minimum or maximum limits</p>",
+                        "smithy.api#xmlName": "memoryGiBPerVCpu"
+                    }
+                },
+                "ExcludedInstanceTypes": {
+                    "target": "com.amazonaws.ec2#ExcludedInstanceTypeSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ExcludedInstanceTypeSet",
+                        "smithy.api#documentation": "<p>The instance types to exclude. You can use strings with one or more wild cards, represented by\n      an asterisk (<code>*</code>), to exclude an instance type, size, or generation. The\n      following are examples: <code>m5.8xlarge</code>, <code>c5*.*</code>, <code>m5a.*</code>,\n      <code>r*</code>, <code>*3*</code>.</p>\n         <p>For example, if you specify <code>c5*</code>,Amazon EC2 will exclude the entire C5 instance\n      family, which includes all C5a and C5n instance types. If you specify\n      <code>m5a.*</code>, Amazon EC2 will exclude all the M5a instance types, but not the M5n\n      instance types.</p>\n         <p>Default: No excluded instance types</p>",
+                        "smithy.api#xmlName": "excludedInstanceTypeSet"
+                    }
+                },
+                "InstanceGenerations": {
+                    "target": "com.amazonaws.ec2#InstanceGenerationSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "InstanceGenerationSet",
+                        "smithy.api#documentation": "<p>Indicates whether current or previous generation instance types are included. The\n      current generation instance types are recommended for use. Current generation instance types are\n      typically the latest two to three generations in each instance family. For more\n      information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance types</a> in the\n      <i>Amazon EC2 User Guide</i>.</p>\n         <p>For current generation instance types, specify <code>current</code>.</p>\n         <p>For previous generation instance types, specify <code>previous</code>.</p>\n         <p>Default: Current and previous generation instance types</p>",
+                        "smithy.api#xmlName": "instanceGenerationSet"
+                    }
+                },
+                "SpotMaxPricePercentageOverLowestPrice": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "SpotMaxPricePercentageOverLowestPrice",
+                        "smithy.api#documentation": "<p>The price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance,\n         expressed as a percentage above the cheapest M, C, or R instance type with your specified\n         attributes. When Amazon EC2 selects instance types with your attributes, it excludes instance\n         types priced above your threshold.</p>\n         <p>The parameter accepts an integer, which Amazon EC2 interprets as a percentage.</p>\n         <p>To turn off price protection, specify a high value, such as <code>999999</code>.</p>\n         <p>This parameter is not supported for <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetSpotPlacementScores.html\">GetSpotPlacementScores</a> and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceTypesFromInstanceRequirements.html\">GetInstanceTypesFromInstanceRequirements</a>.</p>\n         <p>Default: <code>100</code>\n         </p>",
+                        "smithy.api#xmlName": "spotMaxPricePercentageOverLowestPrice"
+                    }
+                },
+                "OnDemandMaxPricePercentageOverLowestPrice": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "OnDemandMaxPricePercentageOverLowestPrice",
+                        "smithy.api#documentation": "<p>The price protection threshold for On-Demand Instances. This is the maximum you’ll pay for an On-Demand Instance,\n         expressed as a percentage above the cheapest M, C, or R instance type with your specified\n         attributes. When Amazon EC2 selects instance types with your attributes, it excludes instance\n         types priced above your threshold.</p>\n         <p>The parameter accepts an integer, which Amazon EC2 interprets as a percentage.</p>\n         <p>To turn off price protection, specify a high value, such as <code>999999</code>.</p>\n         <p>This parameter is not supported for <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetSpotPlacementScores.html\">GetSpotPlacementScores</a> and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceTypesFromInstanceRequirements.html\">GetInstanceTypesFromInstanceRequirements</a>.</p>\n         <p>Default: <code>20</code>\n         </p>",
+                        "smithy.api#xmlName": "onDemandMaxPricePercentageOverLowestPrice"
+                    }
+                },
+                "BareMetal": {
+                    "target": "com.amazonaws.ec2#BareMetal",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "BareMetal",
+                        "smithy.api#documentation": "<p>Indicates whether bare metal instance types must be included, excluded, or required.</p>\n         <ul>\n            <li>\n               <p>To include bare metal instance types, specify <code>included</code>.</p>\n            </li>\n            <li>\n               <p>To require only bare metal instance types, specify <code>required</code>.</p>\n            </li>\n            <li>\n               <p>To exclude bare metal instance types, specify <code>excluded</code>.</p>\n            </li>\n         </ul>\n         <p>Default: <code>excluded</code>\n         </p>",
+                        "smithy.api#xmlName": "bareMetal"
+                    }
+                },
+                "BurstablePerformance": {
+                    "target": "com.amazonaws.ec2#BurstablePerformance",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "BurstablePerformance",
+                        "smithy.api#documentation": "<p>Indicates whether burstable performance T instance types are included, excluded, or required. For more information, see \n      <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html\">Burstable performance instances</a>.</p>\n         <ul>\n            <li>\n               <p>To include burstable performance instance types, specify <code>included</code>.</p>\n            </li>\n            <li>\n               <p>To require only burstable performance instance types, specify <code>required</code>.</p>\n            </li>\n            <li>\n               <p>To exclude burstable performance instance types, specify <code>excluded</code>.</p>\n            </li>\n         </ul>\n         <p>Default: <code>excluded</code>\n         </p>",
+                        "smithy.api#xmlName": "burstablePerformance"
+                    }
+                },
+                "RequireHibernateSupport": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "RequireHibernateSupport",
+                        "smithy.api#documentation": "<p>Indicates whether instance types must support hibernation for On-Demand\n         Instances.</p>\n         <p>This parameter is not supported for <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetSpotPlacementScores.html\">GetSpotPlacementScores</a>.</p>\n         <p>Default: <code>false</code>\n         </p>",
+                        "smithy.api#xmlName": "requireHibernateSupport"
+                    }
+                },
+                "NetworkInterfaceCount": {
+                    "target": "com.amazonaws.ec2#NetworkInterfaceCount",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NetworkInterfaceCount",
+                        "smithy.api#documentation": "<p>The minimum and maximum number of network interfaces.</p>\n         <p>Default: No minimum or maximum limits</p>",
+                        "smithy.api#xmlName": "networkInterfaceCount"
+                    }
+                },
+                "LocalStorage": {
+                    "target": "com.amazonaws.ec2#LocalStorage",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "LocalStorage",
+                        "smithy.api#documentation": "<p>Indicates whether instance types with instance store volumes are included, excluded, or required. For more information,\n            <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html\">Amazon\n            EC2 instance store</a> in the <i>Amazon EC2 User Guide</i>.</p>\n         <ul>\n            <li>\n               <p>To include instance types with instance store volumes, specify\n               <code>included</code>.</p>\n            </li>\n            <li>\n               <p>To require only instance types with instance store volumes, specify\n                  <code>required</code>.</p>\n            </li>\n            <li>\n               <p>To exclude instance types with instance store volumes, specify\n               <code>excluded</code>.</p>\n            </li>\n         </ul>\n         <p>Default: <code>included</code>\n         </p>",
+                        "smithy.api#xmlName": "localStorage"
+                    }
+                },
+                "LocalStorageTypes": {
+                    "target": "com.amazonaws.ec2#LocalStorageTypeSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "LocalStorageTypeSet",
+                        "smithy.api#documentation": "<p>The type of local storage that is required.</p>\n         <ul>\n            <li>\n               <p>For instance types with hard disk drive (HDD) storage, specify <code>hdd</code>.</p>\n            </li>\n            <li>\n               <p>For instance types with solid state drive (SDD) storage, specify <code>sdd</code>.</p>\n            </li>\n         </ul>\n         <p>Default: <code>hdd</code> and <code>sdd</code>\n         </p>",
+                        "smithy.api#xmlName": "localStorageTypeSet"
+                    }
+                },
+                "TotalLocalStorageGB": {
+                    "target": "com.amazonaws.ec2#TotalLocalStorageGB",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TotalLocalStorageGB",
+                        "smithy.api#documentation": "<p>The minimum and maximum amount of total local storage, in GB.</p>\n         <p>Default: No minimum or maximum limits</p>",
+                        "smithy.api#xmlName": "totalLocalStorageGB"
+                    }
+                },
+                "BaselineEbsBandwidthMbps": {
+                    "target": "com.amazonaws.ec2#BaselineEbsBandwidthMbps",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "BaselineEbsBandwidthMbps",
+                        "smithy.api#documentation": "<p>The minimum and maximum baseline bandwidth to Amazon EBS, in Mbps. For more information, see\n            <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html\">Amazon\n            EBS–optimized instances</a> in the <i>Amazon EC2 User Guide</i>.</p>\n         <p>Default: No minimum or maximum limits</p>",
+                        "smithy.api#xmlName": "baselineEbsBandwidthMbps"
+                    }
+                },
+                "AcceleratorTypes": {
+                    "target": "com.amazonaws.ec2#AcceleratorTypeSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AcceleratorTypeSet",
+                        "smithy.api#documentation": "<p>The accelerator types that must be on the instance type.</p>\n         <ul>\n            <li>\n               <p>For instance types with GPU accelerators, specify <code>gpu</code>.</p>\n            </li>\n            <li>\n               <p>For instance types with FPGA accelerators, specify <code>fpga</code>.</p>\n            </li>\n            <li>\n               <p>For instance types with inference accelerators, specify <code>inference</code>.</p>\n            </li>\n         </ul>\n         <p>Default: Any accelerator type</p>",
+                        "smithy.api#xmlName": "acceleratorTypeSet"
+                    }
+                },
+                "AcceleratorCount": {
+                    "target": "com.amazonaws.ec2#AcceleratorCount",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AcceleratorCount",
+                        "smithy.api#documentation": "<p>The minimum and maximum number of accelerators (GPUs, FPGAs, or Amazon Web Services Inferentia chips) on\n         an instance.</p>\n         <p>To exclude accelerator-enabled instance types, set <code>Max</code> to <code>0</code>.</p>\n         <p>Default: No minimum or maximum limits</p>",
+                        "smithy.api#xmlName": "acceleratorCount"
+                    }
+                },
+                "AcceleratorManufacturers": {
+                    "target": "com.amazonaws.ec2#AcceleratorManufacturerSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AcceleratorManufacturerSet",
+                        "smithy.api#documentation": "<p>Indicates whether instance types must have accelerators by specific manufacturers.</p>\n         <ul>\n            <li>\n               <p>For instance types with NVIDIA devices, specify <code>nvidia</code>.</p>\n            </li>\n            <li>\n               <p>For instance types with AMD devices, specify <code>amd</code>.</p>\n            </li>\n            <li>\n               <p>For instance types with Amazon Web Services devices, specify <code>amazon-web-services</code>.</p>\n            </li>\n            <li>\n               <p>For instance types with Xilinx devices, specify <code>xilinx</code>.</p>\n            </li>\n         </ul>\n         <p>Default: Any manufacturer</p>",
+                        "smithy.api#xmlName": "acceleratorManufacturerSet"
+                    }
+                },
+                "AcceleratorNames": {
+                    "target": "com.amazonaws.ec2#AcceleratorNameSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AcceleratorNameSet",
+                        "smithy.api#documentation": "<p>The accelerators that must be on the instance type.</p>\n         <ul>\n            <li>\n               <p>For instance types with NVIDIA A100 GPUs, specify <code>a100</code>.</p>\n            </li>\n            <li>\n               <p>For instance types with NVIDIA V100 GPUs, specify <code>v100</code>.</p>\n            </li>\n            <li>\n               <p>For instance types with NVIDIA K80 GPUs, specify <code>k80</code>.</p>\n            </li>\n            <li>\n               <p>For instance types with NVIDIA T4 GPUs, specify <code>t4</code>.</p>\n            </li>\n            <li>\n               <p>For instance types with NVIDIA M60 GPUs, specify <code>m60</code>.</p>\n            </li>\n            <li>\n               <p>For instance types with AMD Radeon Pro V520 GPUs, specify <code>radeon-pro-v520</code>.</p>\n            </li>\n            <li>\n               <p>For instance types with Xilinx VU9P FPGAs, specify <code>vu9p</code>.</p>\n            </li>\n         </ul>\n         <p>Default: Any accelerator</p>",
+                        "smithy.api#xmlName": "acceleratorNameSet"
+                    }
+                },
+                "AcceleratorTotalMemoryMiB": {
+                    "target": "com.amazonaws.ec2#AcceleratorTotalMemoryMiB",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AcceleratorTotalMemoryMiB",
+                        "smithy.api#documentation": "<p>The minimum and maximum amount of total accelerator memory, in MiB.</p>\n         <p>Default: No minimum or maximum limits</p>",
+                        "smithy.api#xmlName": "acceleratorTotalMemoryMiB"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The attributes for the instance types. When you specify instance attributes, Amazon EC2 will\n         identify instance types with these attributes.</p>\n         <p>When you specify multiple parameters, you get instance types that satisfy all of the\n         specified parameters. If you specify multiple values for a parameter, you get instance\n         types that satisfy any of the specified values.</p>\n         <note>\n            <p>You must specify <code>VCpuCount</code> and <code>MemoryMiB</code>. All other parameters\n            are optional. Any unspecified optional parameter is set to its default.</p>\n         </note>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html\">Attribute-based instance type selection for EC2 Fleet</a>, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-attribute-based-instance-type-selection.html\">Attribute-based instance type selection for Spot Fleet</a>, and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html\">Spot\n            placement score</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#InstanceRequirementsRequest": {
+            "type": "structure",
+            "members": {
+                "VCpuCount": {
+                    "target": "com.amazonaws.ec2#VCpuCountRangeRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum and maximum number of vCPUs.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MemoryMiB": {
+                    "target": "com.amazonaws.ec2#MemoryMiBRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum and maximum amount of memory, in MiB.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CpuManufacturers": {
+                    "target": "com.amazonaws.ec2#CpuManufacturerSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CPU manufacturers to include.</p>\n         <ul>\n            <li>\n               <p>For instance types with Intel CPUs, specify <code>intel</code>.</p>\n            </li>\n            <li>\n               <p>For instance types with AMD CPUs, specify <code>amd</code>.</p>\n            </li>\n            <li>\n               <p>For instance types with Amazon Web Services CPUs, specify <code>amazon-web-services</code>.</p>\n            </li>\n         </ul>\n         <note>\n            <p>Don't confuse the CPU manufacturer with the CPU architecture. Instances will \n         be launched with a compatible CPU architecture based on the Amazon Machine Image (AMI) that you \n         specify in your launch template.</p>\n         </note>\n         <p>Default: Any manufacturer</p>",
+                        "smithy.api#xmlName": "CpuManufacturer"
+                    }
+                },
+                "MemoryGiBPerVCpu": {
+                    "target": "com.amazonaws.ec2#MemoryGiBPerVCpuRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum and maximum amount of memory per vCPU, in GiB.</p>\n         <p>Default: No minimum or maximum limits</p>"
+                    }
+                },
+                "ExcludedInstanceTypes": {
+                    "target": "com.amazonaws.ec2#ExcludedInstanceTypeSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance types to exclude. You can use strings with one or more wild cards, represented by\n         an asterisk (<code>*</code>), to exclude an instance family, type, size, or generation. The\n         following are examples: <code>m5.8xlarge</code>, <code>c5*.*</code>, <code>m5a.*</code>,\n            <code>r*</code>, <code>*3*</code>.</p>\n         <p>For example, if you specify <code>c5*</code>,Amazon EC2 will exclude the entire C5 instance\n      family, which includes all C5a and C5n instance types. If you specify\n      <code>m5a.*</code>, Amazon EC2 will exclude all the M5a instance types, but not the M5n\n      instance types.</p>\n         <p>Default: No excluded instance types</p>",
+                        "smithy.api#xmlName": "ExcludedInstanceType"
+                    }
+                },
+                "InstanceGenerations": {
+                    "target": "com.amazonaws.ec2#InstanceGenerationSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether current or previous generation instance types are included. The\n      current generation instance types are recommended for use. Current generation instance types are\n      typically the latest two to three generations in each instance family. For more\n      information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance types</a> in the\n      <i>Amazon EC2 User Guide</i>.</p>\n         <p>For current generation instance types, specify <code>current</code>.</p>\n         <p>For previous generation instance types, specify <code>previous</code>.</p>\n         <p>Default: Current and previous generation instance types</p>",
+                        "smithy.api#xmlName": "InstanceGeneration"
+                    }
+                },
+                "SpotMaxPricePercentageOverLowestPrice": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The price protection threshold for Spot Instance. This is the maximum you’ll pay for an Spot Instance,\n         expressed as a percentage above the cheapest M, C, or R instance type with your specified\n         attributes. When Amazon EC2 selects instance types with your attributes, it excludes instance\n         types priced above your threshold.</p>\n         <p>The parameter accepts an integer, which Amazon EC2 interprets as a percentage.</p>\n         <p>To turn off price protection, specify a high value, such as <code>999999</code>.</p>\n         <p>This parameter is not supported for <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetSpotPlacementScores.html\">GetSpotPlacementScores</a> and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceTypesFromInstanceRequirements.html\">GetInstanceTypesFromInstanceRequirements</a>.</p>\n         <p>Default: <code>100</code>\n         </p>"
+                    }
+                },
+                "OnDemandMaxPricePercentageOverLowestPrice": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The price protection threshold for On-Demand Instances. This is the maximum you’ll pay for an On-Demand Instance,\n         expressed as a percentage above the cheapest M, C, or R instance type with your specified\n         attributes. When Amazon EC2 selects instance types with your attributes, it excludes instance\n         types priced above your threshold.</p>\n         <p>The parameter accepts an integer, which Amazon EC2 interprets as a percentage.</p>\n         <p>To turn off price protection, specify a high value, such as <code>999999</code>.</p>\n         <p>This parameter is not supported for <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetSpotPlacementScores.html\">GetSpotPlacementScores</a> and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceTypesFromInstanceRequirements.html\">GetInstanceTypesFromInstanceRequirements</a>.</p>\n         <p>Default: <code>20</code>\n         </p>"
+                    }
+                },
+                "BareMetal": {
+                    "target": "com.amazonaws.ec2#BareMetal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether bare metal instance types must be included, excluded, or required.</p>\n         <ul>\n            <li>\n               <p>To include bare metal instance types, specify <code>included</code>.</p>\n            </li>\n            <li>\n               <p>To require only bare metal instance types, specify <code>required</code>.</p>\n            </li>\n            <li>\n               <p>To exclude bare metal instance types, specify <code>excluded</code>.</p>\n            </li>\n         </ul>\n         <p>Default: <code>excluded</code>\n         </p>"
+                    }
+                },
+                "BurstablePerformance": {
+                    "target": "com.amazonaws.ec2#BurstablePerformance",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether burstable performance T instance types are included, excluded, or required. For more information, see \n      <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html\">Burstable performance instances</a>.</p>\n         <ul>\n            <li>\n               <p>To include burstable performance instance types, specify <code>included</code>.</p>\n            </li>\n            <li>\n               <p>To require only burstable performance instance types, specify <code>required</code>.</p>\n            </li>\n            <li>\n               <p>To exclude burstable performance instance types, specify <code>excluded</code>.</p>\n            </li>\n         </ul>\n         <p>Default: <code>excluded</code>\n         </p>"
+                    }
+                },
+                "RequireHibernateSupport": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether instance types must support hibernation for On-Demand Instances.</p>\n         <p>This parameter is not supported for <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetSpotPlacementScores.html\">GetSpotPlacementScores</a>.</p>\n         <p>Default: <code>false</code>\n         </p>"
+                    }
+                },
+                "NetworkInterfaceCount": {
+                    "target": "com.amazonaws.ec2#NetworkInterfaceCountRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum and maximum number of network interfaces.</p>\n         <p>Default: No minimum or maximum limits</p>"
+                    }
+                },
+                "LocalStorage": {
+                    "target": "com.amazonaws.ec2#LocalStorage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether instance types with instance store volumes are included, excluded, or required. For more information,\n      <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html\">Amazon\n         EC2 instance store</a> in the <i>Amazon EC2 User Guide</i>.</p>\n         <ul>\n            <li>\n               <p>To include instance types with instance store volumes, specify\n                  <code>included</code>.</p>\n            </li>\n            <li>\n               <p>To require only instance types with instance store volumes, specify\n                  <code>required</code>.</p>\n            </li>\n            <li>\n               <p>To exclude instance types with instance store volumes, specify\n                  <code>excluded</code>.</p>\n            </li>\n         </ul>\n         <p>Default: <code>included</code>\n         </p>"
+                    }
+                },
+                "LocalStorageTypes": {
+                    "target": "com.amazonaws.ec2#LocalStorageTypeSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of local storage that is required.</p>\n         <ul>\n            <li>\n               <p>For instance types with hard disk drive (HDD) storage, specify <code>hdd</code>.</p>\n            </li>\n            <li>\n               <p>For instance types with solid state drive (SDD) storage, specify <code>sdd</code>.</p>\n            </li>\n         </ul>\n         <p>Default: <code>hdd</code> and <code>sdd</code>\n         </p>",
+                        "smithy.api#xmlName": "LocalStorageType"
+                    }
+                },
+                "TotalLocalStorageGB": {
+                    "target": "com.amazonaws.ec2#TotalLocalStorageGBRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum and maximum amount of total local storage, in GB.</p>\n         <p>Default: No minimum or maximum limits</p>"
+                    }
+                },
+                "BaselineEbsBandwidthMbps": {
+                    "target": "com.amazonaws.ec2#BaselineEbsBandwidthMbpsRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum and maximum baseline bandwidth to Amazon EBS, in Mbps. For more information, see\n            <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html\">Amazon\n            EBS–optimized instances</a> in the <i>Amazon EC2 User Guide</i>.</p>\n         <p>Default: No minimum or maximum limits</p>"
+                    }
+                },
+                "AcceleratorTypes": {
+                    "target": "com.amazonaws.ec2#AcceleratorTypeSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The accelerator types that must be on the instance type.</p>\n         <ul>\n            <li>\n               <p>To include instance types with GPU hardware, specify <code>gpu</code>.</p>\n            </li>\n            <li>\n               <p>To include instance types with FPGA hardware, specify <code>fpga</code>.</p>\n            </li>\n            <li>\n               <p>To include instance types with inference hardware, specify <code>inference</code>.</p>\n            </li>\n         </ul>\n         <p>Default: Any accelerator type</p>",
+                        "smithy.api#xmlName": "AcceleratorType"
+                    }
+                },
+                "AcceleratorCount": {
+                    "target": "com.amazonaws.ec2#AcceleratorCountRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum and maximum number of accelerators (GPUs, FPGAs, or Amazon Web Services Inferentia chips) on\n         an instance.</p>\n         <p>To exclude accelerator-enabled instance types, set <code>Max</code> to <code>0</code>.</p>\n         <p>Default: No minimum or maximum limits</p>"
+                    }
+                },
+                "AcceleratorManufacturers": {
+                    "target": "com.amazonaws.ec2#AcceleratorManufacturerSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether instance types must have accelerators by specific manufacturers.</p>\n         <ul>\n            <li>\n               <p>For instance types with NVIDIA devices, specify <code>nvidia</code>.</p>\n            </li>\n            <li>\n               <p>For instance types with AMD devices, specify <code>amd</code>.</p>\n            </li>\n            <li>\n               <p>For instance types with Amazon Web Services devices, specify <code>amazon-web-services</code>.</p>\n            </li>\n            <li>\n               <p>For instance types with Xilinx devices, specify <code>xilinx</code>.</p>\n            </li>\n         </ul>\n         <p>Default: Any manufacturer</p>",
+                        "smithy.api#xmlName": "AcceleratorManufacturer"
+                    }
+                },
+                "AcceleratorNames": {
+                    "target": "com.amazonaws.ec2#AcceleratorNameSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The accelerators that must be on the instance type.</p>\n         <ul>\n            <li>\n               <p>For instance types with NVIDIA A100 GPUs, specify <code>a100</code>.</p>\n            </li>\n            <li>\n               <p>For instance types with NVIDIA V100 GPUs, specify <code>v100</code>.</p>\n            </li>\n            <li>\n               <p>For instance types with NVIDIA K80 GPUs, specify <code>k80</code>.</p>\n            </li>\n            <li>\n               <p>For instance types with NVIDIA T4 GPUs, specify <code>t4</code>.</p>\n            </li>\n            <li>\n               <p>For instance types with NVIDIA M60 GPUs, specify <code>m60</code>.</p>\n            </li>\n            <li>\n               <p>For instance types with AMD Radeon Pro V520 GPUs, specify <code>radeon-pro-v520</code>.</p>\n            </li>\n            <li>\n               <p>For instance types with Xilinx VU9P FPGAs, specify <code> vu9p</code>.</p>\n            </li>\n         </ul>\n         <p>Default: Any accelerator</p>",
+                        "smithy.api#xmlName": "AcceleratorName"
+                    }
+                },
+                "AcceleratorTotalMemoryMiB": {
+                    "target": "com.amazonaws.ec2#AcceleratorTotalMemoryMiBRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum and maximum amount of total accelerator memory, in MiB.</p>\n         <p>Default: No minimum or maximum limits</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The attributes for the instance types. When you specify instance attributes, Amazon EC2 will\n      identify instance types with these attributes.</p>\n         <p>When you specify multiple parameters, you get instance types that satisfy all of the\n         specified parameters. If you specify multiple values for a parameter, you get instance\n         types that satisfy any of the specified values.</p>\n         <note>\n            <p>You must specify <code>VCpuCount</code> and <code>MemoryMiB</code>. All other parameters\n            are optional. Any unspecified optional parameter is set to its default.</p>\n         </note>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html\">Attribute-based instance type selection for EC2 Fleet</a>, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-attribute-based-instance-type-selection.html\">Attribute-based instance type selection for Spot Fleet</a>, and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html\">Spot\n            placement score</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#InstanceRequirementsWithMetadataRequest": {
+            "type": "structure",
+            "members": {
+                "ArchitectureTypes": {
+                    "target": "com.amazonaws.ec2#ArchitectureTypeSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The architecture type.</p>",
+                        "smithy.api#xmlName": "ArchitectureType"
+                    }
+                },
+                "VirtualizationTypes": {
+                    "target": "com.amazonaws.ec2#VirtualizationTypeSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The virtualization type.</p>",
+                        "smithy.api#xmlName": "VirtualizationType"
+                    }
+                },
+                "InstanceRequirements": {
+                    "target": "com.amazonaws.ec2#InstanceRequirementsRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attributes for the instance types. When you specify instance attributes, Amazon EC2 will\n         identify instance types with those attributes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The architecture type, virtualization type, and other attributes for the instance types.\n         When you specify instance attributes, Amazon EC2 will identify instance types with those\n         attributes.</p>\n         <p>If you specify <code>InstanceRequirementsWithMetadataRequest</code>, you can't specify\n         <code>InstanceTypes</code>.</p>"
             }
         },
         "com.amazonaws.ec2#InstanceSpecification": {
@@ -42138,6 +43057,10 @@
                         "name": "d3en_12xlarge"
                     },
                     {
+                        "value": "dl1.24xlarge",
+                        "name": "dl1_24xlarge"
+                    },
+                    {
                         "value": "f1.2xlarge",
                         "name": "f1_2xlarge"
                     },
@@ -42955,6 +43878,31 @@
                 "smithy.api#documentation": "<p>Describes the instance type.</p>"
             }
         },
+        "com.amazonaws.ec2#InstanceTypeInfoFromInstanceRequirements": {
+            "type": "structure",
+            "members": {
+                "InstanceType": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "InstanceType",
+                        "smithy.api#documentation": "<p>The matching instance type.</p>",
+                        "smithy.api#xmlName": "instanceType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The list of instance types with the specified instance attributes.</p>"
+            }
+        },
+        "com.amazonaws.ec2#InstanceTypeInfoFromInstanceRequirementsSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#InstanceTypeInfoFromInstanceRequirements",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
         "com.amazonaws.ec2#InstanceTypeInfoList": {
             "type": "list",
             "member": {
@@ -43008,6 +43956,18 @@
                 "target": "com.amazonaws.ec2#InstanceTypeOffering",
                 "traits": {
                     "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#InstanceTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#String"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
                 }
             }
         },
@@ -43872,6 +44832,22 @@
                         "aws.protocols#ec2QueryName": "UserId",
                         "smithy.api#documentation": "<p>The Amazon Web Services account ID.</p>\n         <p>Constraints: Up to 10 000 account IDs can be specified in a single request.</p>",
                         "smithy.api#xmlName": "userId"
+                    }
+                },
+                "OrganizationArn": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "OrganizationArn",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an organization.</p>",
+                        "smithy.api#xmlName": "organizationArn"
+                    }
+                },
+                "OrganizationalUnitArn": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "OrganizationalUnitArn",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an organizational unit (OU).</p>",
+                        "smithy.api#xmlName": "organizationalUnitArn"
                     }
                 }
             },
@@ -45293,6 +46269,14 @@
                         "smithy.api#documentation": "<p>The priority for the launch template override. The highest priority is launched\n            first.</p>\n        <p>If <code>OnDemandAllocationStrategy</code> is set to <code>prioritized</code>, Spot Fleet\n            uses priority to determine which launch template override to use first in fulfilling\n            On-Demand capacity.</p>\n        <p>If the Spot <code>AllocationStrategy</code> is set to\n                <code>capacityOptimizedPrioritized</code>, Spot Fleet uses priority on a best-effort basis\n            to determine which launch template override to use in fulfilling Spot capacity, but\n            optimizes for capacity first.</p>\n        <p>Valid values are whole numbers starting at <code>0</code>. The lower the number, the\n            higher the priority. If no number is set, the launch template override has the lowest\n            priority. You can set the same priority for different launch template overrides.</p>",
                         "smithy.api#xmlName": "priority"
                     }
+                },
+                "InstanceRequirements": {
+                    "target": "com.amazonaws.ec2#InstanceRequirements",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "InstanceRequirements",
+                        "smithy.api#documentation": "<p>The instance requirements. When you specify instance requirements, Amazon EC2 will identify\n         instance types with the provided requirements, and then use your On-Demand and Spot\n         allocation strategies to launch instances from these instance types, in the same way as\n         when you specify a list of instance types.</p>\n         <note>\n            <p>If you specify <code>InstanceRequirements</code>, you can't specify\n               <code>InstanceTypes</code>.</p>\n         </note>",
+                        "smithy.api#xmlName": "instanceRequirements"
+                    }
                 }
             },
             "traits": {
@@ -46565,6 +47549,49 @@
                 }
             }
         },
+        "com.amazonaws.ec2#LocalStorage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "included",
+                        "name": "INCLUDED"
+                    },
+                    {
+                        "value": "required",
+                        "name": "REQUIRED"
+                    },
+                    {
+                        "value": "excluded",
+                        "name": "EXCLUDED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ec2#LocalStorageType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "hdd",
+                        "name": "HDD"
+                    },
+                    {
+                        "value": "ssd",
+                        "name": "SSD"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ec2#LocalStorageTypeSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#LocalStorageType",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
         "com.amazonaws.ec2#Location": {
             "type": "string"
         },
@@ -46782,6 +47809,50 @@
                 ]
             }
         },
+        "com.amazonaws.ec2#MemoryGiBPerVCpu": {
+            "type": "structure",
+            "members": {
+                "Min": {
+                    "target": "com.amazonaws.ec2#Double",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Min",
+                        "smithy.api#documentation": "<p>The minimum amount of memory per vCPU, in GiB. If this parameter is not specified, there is\n         no minimum limit.</p>",
+                        "smithy.api#xmlName": "min"
+                    }
+                },
+                "Max": {
+                    "target": "com.amazonaws.ec2#Double",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Max",
+                        "smithy.api#documentation": "<p>The maximum amount of memory per vCPU, in GiB. If this parameter is not specified, there is\n         no maximum limit.</p>",
+                        "smithy.api#xmlName": "max"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The minimum and maximum amount of memory per vCPU, in GiB.</p>\n         <p></p>"
+            }
+        },
+        "com.amazonaws.ec2#MemoryGiBPerVCpuRequest": {
+            "type": "structure",
+            "members": {
+                "Min": {
+                    "target": "com.amazonaws.ec2#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum amount of memory per vCPU, in GiB. To specify no minimum limit, omit this\n         parameter.</p>"
+                    }
+                },
+                "Max": {
+                    "target": "com.amazonaws.ec2#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum amount of memory per vCPU, in GiB. To specify no maximum limit, omit this\n         parameter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The minimum and maximum amount of memory per vCPU, in GiB.</p>"
+            }
+        },
         "com.amazonaws.ec2#MemoryInfo": {
             "type": "structure",
             "members": {
@@ -46796,6 +47867,51 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes the memory for the instance type.</p>"
+            }
+        },
+        "com.amazonaws.ec2#MemoryMiB": {
+            "type": "structure",
+            "members": {
+                "Min": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Min",
+                        "smithy.api#documentation": "<p>The minimum amount of memory, in MiB. If this parameter is not specified, there is no minimum\n         limit.</p>",
+                        "smithy.api#xmlName": "min"
+                    }
+                },
+                "Max": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Max",
+                        "smithy.api#documentation": "<p>The maximum amount of memory, in MiB. If this parameter is not specified, there is no\n         maximum limit.</p>",
+                        "smithy.api#xmlName": "max"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The minimum and maximum amount of memory, in MiB.</p>"
+            }
+        },
+        "com.amazonaws.ec2#MemoryMiBRequest": {
+            "type": "structure",
+            "members": {
+                "Min": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum amount of memory, in MiB. To specify no minimum limit, specify\n         <code>0</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Max": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum amount of memory, in MiB. To specify no maximum limit, omit this\n         parameter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The minimum and maximum amount of memory, in MiB.</p>"
             }
         },
         "com.amazonaws.ec2#MemorySize": {
@@ -47032,6 +48148,12 @@
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                },
+                "AdditionalInfo": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reserved for future use.</p>"
                     }
                 }
             }
@@ -47565,7 +48687,7 @@
                 "Attribute": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the attribute to modify. \n       The valid values are <code>description</code> and <code>launchPermission</code>.</p>"
+                        "smithy.api#documentation": "<p>The name of the attribute to modify.</p>\n         <p>Valid values: <code>description</code> | <code>launchPermission</code>\n         </p>"
                     }
                 },
                 "Description": {
@@ -47626,6 +48748,20 @@
                         "aws.protocols#ec2QueryName": "DryRun",
                         "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n       and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n       Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
                         "smithy.api#xmlName": "dryRun"
+                    }
+                },
+                "OrganizationArns": {
+                    "target": "com.amazonaws.ec2#OrganizationArnStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an organization. This parameter can be used only when the <code>Attribute</code> parameter is <code>launchPermission</code>.</p>",
+                        "smithy.api#xmlName": "OrganizationArn"
+                    }
+                },
+                "OrganizationalUnitArns": {
+                    "target": "com.amazonaws.ec2#OrganizationalUnitArnStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an organizational unit (OU). This parameter can be used only when the <code>Attribute</code> parameter is <code>launchPermission</code>.</p>",
+                        "smithy.api#xmlName": "OrganizationalUnitArn"
                     }
                 }
             },
@@ -51284,6 +52420,14 @@
                         "smithy.api#documentation": "<p>The ID of the VPC.</p>",
                         "smithy.api#xmlName": "vpcId"
                     }
+                },
+                "DenyAllIgwTraffic": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "DenyAllIgwTraffic",
+                        "smithy.api#documentation": "<p>Indicates whether a network interface with an IPv6 address is unreachable from the \n            public internet. If the value is <code>true</code>, inbound traffic from the internet \n            is dropped and you cannot assign an elastic IP address to the network interface. The \n            network interface is reachable from peered VPCs and resources connected through a \n            transit gateway, including on-premises networks.</p>",
+                        "smithy.api#xmlName": "denyAllIgwTraffic"
+                    }
                 }
             },
             "traits": {
@@ -51474,6 +52618,50 @@
                         "name": "attachment"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.ec2#NetworkInterfaceCount": {
+            "type": "structure",
+            "members": {
+                "Min": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Min",
+                        "smithy.api#documentation": "<p>The minimum number of network interfaces. If this parameter is not specified, there is no\n         minimum limit.</p>",
+                        "smithy.api#xmlName": "min"
+                    }
+                },
+                "Max": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Max",
+                        "smithy.api#documentation": "<p>The maximum number of network interfaces. If this parameter is not specified, there is no\n         maximum limit.</p>",
+                        "smithy.api#xmlName": "max"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The minimum and maximum number of network interfaces.</p>"
+            }
+        },
+        "com.amazonaws.ec2#NetworkInterfaceCountRequest": {
+            "type": "structure",
+            "members": {
+                "Min": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum number of network interfaces. To specify no minimum limit, omit this\n         parameter.</p>"
+                    }
+                },
+                "Max": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of network interfaces. To specify no maximum limit, omit this\n         parameter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The minimum and maximum number of network interfaces.</p>"
             }
         },
         "com.amazonaws.ec2#NetworkInterfaceCreationType": {
@@ -51994,6 +53182,24 @@
                         "name": "remove"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.ec2#OrganizationArnStringList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#String",
+                "traits": {
+                    "smithy.api#xmlName": "OrganizationArn"
+                }
+            }
+        },
+        "com.amazonaws.ec2#OrganizationalUnitArnStringList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#String",
+                "traits": {
+                    "smithy.api#xmlName": "OrganizationalUnitArn"
+                }
             }
         },
         "com.amazonaws.ec2#OutpostArn": {
@@ -54478,6 +55684,18 @@
                 }
             }
         },
+        "com.amazonaws.ec2#RegionNames": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#String"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.ec2#RegisterImage": {
             "type": "operation",
             "input": {
@@ -55922,7 +57140,7 @@
                 "InstanceType": {
                     "target": "com.amazonaws.ec2#InstanceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The instance type. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance Types</a> in the\n                <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The instance type. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance Types</a> in the\n                <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n        <p>If you specify <code>InstanceTypes</code>, you can't specify\n                <code>InstanceRequirements</code>.</p>"
                     }
                 },
                 "KeyName": {
@@ -56049,6 +57267,12 @@
                     "target": "com.amazonaws.ec2#LaunchTemplateEnclaveOptionsRequest",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the instance is enabled for Amazon Web Services Nitro Enclaves. For more information, \n\t\t\tsee <a href=\"https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html\">\n\t\t\t\tWhat is Amazon Web Services Nitro Enclaves?</a> in the <i>Amazon Web Services Nitro Enclaves User Guide</i>.</p>\t\t\n\t\t       <p>You can't enable Amazon Web Services Nitro Enclaves and hibernation on the same instance.</p>"
+                    }
+                },
+                "InstanceRequirements": {
+                    "target": "com.amazonaws.ec2#InstanceRequirementsRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attributes for the instance types. When you specify instance attributes, Amazon EC2 will\n         identify instance types with these attributes.</p>\n         <p>If you specify <code>InstanceRequirements</code>, you can't specify\n            <code>InstanceTypes</code>.</p>"
                     }
                 }
             },
@@ -58147,6 +59371,14 @@
                         "aws.protocols#ec2QueryName": "EnclaveOptions",
                         "smithy.api#documentation": "<p>Indicates whether the instance is enabled for Amazon Web Services Nitro Enclaves.</p>",
                         "smithy.api#xmlName": "enclaveOptions"
+                    }
+                },
+                "InstanceRequirements": {
+                    "target": "com.amazonaws.ec2#InstanceRequirements",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "InstanceRequirements",
+                        "smithy.api#documentation": "<p>The attributes for the instance types. When you specify instance attributes, Amazon EC2 will\n         identify instance types with these attributes.</p>\n         <p>If you specify <code>InstanceRequirements</code>, you can't specify\n         <code>InstanceTypes</code>.</p>",
+                        "smithy.api#xmlName": "instanceRequirements"
                     }
                 }
             },
@@ -61946,6 +63178,14 @@
                         "smithy.api#documentation": "<p>The tags to apply during creation.</p>",
                         "smithy.api#xmlName": "tagSpecificationSet"
                     }
+                },
+                "InstanceRequirements": {
+                    "target": "com.amazonaws.ec2#InstanceRequirements",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "InstanceRequirements",
+                        "smithy.api#documentation": "<p>The attributes for the instance types. When you specify instance attributes, Amazon EC2 will\n         identify instance types with those attributes.</p>\n         <note>\n            <p>If you specify <code>InstanceRequirements</code>, you can't specify\n               <code>InstanceTypes</code>.</p>\n         </note>",
+                        "smithy.api#xmlName": "instanceRequirements"
+                    }
                 }
             },
             "traits": {
@@ -62219,6 +63459,14 @@
                         "aws.protocols#ec2QueryName": "Context",
                         "smithy.api#documentation": "<p>Reserved.</p>",
                         "smithy.api#xmlName": "context"
+                    }
+                },
+                "TargetCapacityUnitType": {
+                    "target": "com.amazonaws.ec2#TargetCapacityUnitType",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TargetCapacityUnitType",
+                        "smithy.api#documentation": "<p>The unit for the target capacity.</p>\n         <p>Default: <code>units</code> (translates to number of instances)</p>",
+                        "smithy.api#xmlName": "targetCapacityUnitType"
                     }
                 },
                 "TagSpecifications": {
@@ -62797,6 +64045,65 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes Spot Instance placement.</p>"
+            }
+        },
+        "com.amazonaws.ec2#SpotPlacementScore": {
+            "type": "structure",
+            "members": {
+                "Region": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Region",
+                        "smithy.api#documentation": "<p>The Region.</p>",
+                        "smithy.api#xmlName": "region"
+                    }
+                },
+                "AvailabilityZoneId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AvailabilityZoneId",
+                        "smithy.api#documentation": "<p>The Availability Zone.</p>",
+                        "smithy.api#xmlName": "availabilityZoneId"
+                    }
+                },
+                "Score": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Score",
+                        "smithy.api#documentation": "<p>The placement score, on a scale from <code>1</code> to <code>10</code>. A score of\n            <code>10</code> indicates that your Spot request is highly likely to succeed in this\n         Region or Availability Zone. A score of <code>1</code> indicates that your Spot request is\n         not likely to succeed. </p>",
+                        "smithy.api#xmlName": "score"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Spot placement score for this Region or Availability Zone. The score is calculated\n         based on the assumption that the <code>capacity-optimized</code> allocation strategy is\n         used and that all of the Availability Zones in the Region can be used.</p>"
+            }
+        },
+        "com.amazonaws.ec2#SpotPlacementScores": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#SpotPlacementScore",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#SpotPlacementScoresMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 10,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.ec2#SpotPlacementScoresTargetCapacity": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 2000000000
+                }
             }
         },
         "com.amazonaws.ec2#SpotPrice": {
@@ -64090,6 +65397,14 @@
                         "smithy.api#documentation": "<p>The default <code>TotalTargetCapacity</code>, which is either <code>Spot</code> or\n            <code>On-Demand</code>.</p>",
                         "smithy.api#xmlName": "defaultTargetCapacityType"
                     }
+                },
+                "TargetCapacityUnitType": {
+                    "target": "com.amazonaws.ec2#TargetCapacityUnitType",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TargetCapacityUnitType",
+                        "smithy.api#documentation": "<p>The unit for the target capacity.</p>\n         <p>Default: <code>units</code> (translates to number of instances)</p>",
+                        "smithy.api#xmlName": "targetCapacityUnitType"
+                    }
                 }
             },
             "traits": {
@@ -64123,10 +65438,35 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The default <code>TotalTargetCapacity</code>, which is either <code>Spot</code> or\n            <code>On-Demand</code>.</p>"
                     }
+                },
+                "TargetCapacityUnitType": {
+                    "target": "com.amazonaws.ec2#TargetCapacityUnitType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unit for the target capacity.</p>\n         <p>Default: <code>units</code> (translates to number of instances)</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The number of units to request. You can choose to set the target capacity as the number of \n         instances. Or you can set the target capacity to a performance characteristic that is important to your application workload,\n         such as vCPUs, memory, or I/O. If the request type is <code>maintain</code>, you can\n         specify a target capacity of 0 and add capacity later.</p>\n         <p>You can use the On-Demand Instance <code>MaxTotalPrice</code> parameter, the Spot Instance\n            <code>MaxTotalPrice</code> parameter, or both parameters to ensure that your fleet cost\n         does not exceed your budget. If you set a maximum price per hour for the On-Demand Instances and Spot Instances\n         in your request, EC2 Fleet will launch instances until it reaches the maximum amount that you're\n         willing to pay. When the maximum amount you're willing to pay is reached, the fleet stops\n         launching instances even if it hasn’t met the target capacity. The\n         <code>MaxTotalPrice</code> parameters are located in <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_OnDemandOptionsRequest\">OnDemandOptionsRequest</a> \n         and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SpotOptionsRequest\">SpotOptionsRequest</a>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#TargetCapacityUnitType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "vcpu",
+                        "name": "VCPU"
+                    },
+                    {
+                        "value": "memory-mib",
+                        "name": "MEMORY_MIB"
+                    },
+                    {
+                        "value": "units",
+                        "name": "UNITS"
+                    }
+                ]
             }
         },
         "com.amazonaws.ec2#TargetConfiguration": {
@@ -64533,6 +65873,50 @@
                 "traits": {
                     "smithy.api#xmlName": "item"
                 }
+            }
+        },
+        "com.amazonaws.ec2#TotalLocalStorageGB": {
+            "type": "structure",
+            "members": {
+                "Min": {
+                    "target": "com.amazonaws.ec2#Double",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Min",
+                        "smithy.api#documentation": "<p>The minimum amount of total local storage, in GB. If this parameter is not specified, there is\n         no minimum limit.</p>",
+                        "smithy.api#xmlName": "min"
+                    }
+                },
+                "Max": {
+                    "target": "com.amazonaws.ec2#Double",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Max",
+                        "smithy.api#documentation": "<p>The maximum amount of total local storage, in GB. If this parameter is not specified, there is\n         no maximum limit.</p>",
+                        "smithy.api#xmlName": "max"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The minimum and maximum amount of total local storage, in GB.</p>"
+            }
+        },
+        "com.amazonaws.ec2#TotalLocalStorageGBRequest": {
+            "type": "structure",
+            "members": {
+                "Min": {
+                    "target": "com.amazonaws.ec2#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum amount of total local storage, in GB. To specify no minimum limit, omit this\n         parameter.</p>"
+                    }
+                },
+                "Max": {
+                    "target": "com.amazonaws.ec2#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum amount of total local storage, in GB. To specify no maximum limit, omit this\n         parameter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The minimum and maximum amount of total local storage, in GB.</p>"
             }
         },
         "com.amazonaws.ec2#TrafficDirection": {
@@ -68223,6 +69607,51 @@
                 "smithy.api#box": {}
             }
         },
+        "com.amazonaws.ec2#VCpuCountRange": {
+            "type": "structure",
+            "members": {
+                "Min": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Min",
+                        "smithy.api#documentation": "<p>The minimum number of vCPUs. If the value is <code>0</code>, there is no minimum\n         limit.</p>",
+                        "smithy.api#xmlName": "min"
+                    }
+                },
+                "Max": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Max",
+                        "smithy.api#documentation": "<p>The maximum number of vCPUs. If this parameter is not specified, there is no maximum\n         limit.</p>",
+                        "smithy.api#xmlName": "max"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The minimum and maximum number of vCPUs.</p>"
+            }
+        },
+        "com.amazonaws.ec2#VCpuCountRangeRequest": {
+            "type": "structure",
+            "members": {
+                "Min": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum number of vCPUs. To specify no minimum limit, specify <code>0</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Max": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of vCPUs. To specify no maximum limit, omit this parameter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The minimum and maximum number of vCPUs.</p>"
+            }
+        },
         "com.amazonaws.ec2#VCpuInfo": {
             "type": "structure",
             "members": {
@@ -68424,6 +69853,21 @@
                 "target": "com.amazonaws.ec2#VirtualizationType",
                 "traits": {
                     "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#VirtualizationTypeSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#VirtualizationType",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2
                 }
             }
         },
@@ -70254,6 +71698,30 @@
                         "aws.protocols#ec2QueryName": "TransitGatewayId",
                         "smithy.api#documentation": "<p>The ID of the transit gateway associated with the VPN connection.</p>",
                         "smithy.api#xmlName": "transitGatewayId"
+                    }
+                },
+                "CoreNetworkArn": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CoreNetworkArn",
+                        "smithy.api#documentation": "<p>The ARN of the core network.</p>",
+                        "smithy.api#xmlName": "coreNetworkArn"
+                    }
+                },
+                "CoreNetworkAttachmentArn": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CoreNetworkAttachmentArn",
+                        "smithy.api#documentation": "<p>The ARN of the core network attachment.</p>",
+                        "smithy.api#xmlName": "coreNetworkAttachmentArn"
+                    }
+                },
+                "GatewayAssociationState": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "GatewayAssociationState",
+                        "smithy.api#documentation": "<p>The current state of the gateway association.</p>",
+                        "smithy.api#xmlName": "gatewayAssociationState"
                     }
                 },
                 "Options": {

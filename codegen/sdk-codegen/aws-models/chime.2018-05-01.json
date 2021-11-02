@@ -19698,6 +19698,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The updated Amazon Chime Voice Connector timestamp, in ISO 8601 format.</p>"
                     }
+                },
+                "VoiceConnectorArn": {
+                    "target": "com.amazonaws.chime#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the specified Amazon Chime Voice Connector.</p>"
+                    }
                 }
             },
             "traits": {
@@ -19750,6 +19756,12 @@
                     "target": "com.amazonaws.chime#Iso8601Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The updated Amazon Chime Voice Connector group time stamp, in ISO 8601 format.</p>"
+                    }
+                },
+                "VoiceConnectorGroupArn": {
+                    "target": "com.amazonaws.chime#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the specified Amazon Chime Voice Connector group.</p>"
                     }
                 }
             },

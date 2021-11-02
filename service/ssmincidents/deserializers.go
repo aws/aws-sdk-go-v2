@@ -4503,6 +4503,22 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				sv.ResourceType = types.ResourceType(jtv)
 			}
 
+		case "retryAfter":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.RetryAfter = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		default:
 			_, _ = key, value
 

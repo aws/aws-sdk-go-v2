@@ -201,13 +201,12 @@ type RestoreDBClusterFromS3Input struct {
 
 	// The Amazon Web Services KMS key identifier for an encrypted DB cluster. The
 	// Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or
-	// alias name for the Amazon Web Services KMS customer master key (CMK). To use a
-	// CMK in a different Amazon Web Services account, specify the key ARN or alias
-	// ARN. If the StorageEncrypted parameter is enabled, and you do not specify a
-	// value for the KmsKeyId parameter, then Amazon RDS will use your default CMK.
-	// There is a default CMK for your Amazon Web Services account. Your Amazon Web
-	// Services account has a different default CMK for each Amazon Web Services
-	// Region.
+	// alias name for the KMS key. To use a KMS key in a different Amazon Web Services
+	// account, specify the key ARN or alias ARN. If the StorageEncrypted parameter is
+	// enabled, and you do not specify a value for the KmsKeyId parameter, then Amazon
+	// RDS will use your default KMS key. There is a default KMS key for your Amazon
+	// Web Services account. Your Amazon Web Services account has a different default
+	// KMS key for each Amazon Web Services Region.
 	KmsKeyId *string
 
 	// A value that indicates that the restored DB cluster should be associated with

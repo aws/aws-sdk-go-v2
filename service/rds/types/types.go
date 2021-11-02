@@ -347,8 +347,7 @@ type DBCluster struct {
 
 	// The Amazon Web Services KMS key identifier used for encrypting messages in the
 	// database activity stream. The Amazon Web Services KMS key identifier is the key
-	// ARN, key ID, alias ARN, or alias name for the Amazon Web Services KMS customer
-	// master key (CMK).
+	// ARN, key ID, alias ARN, or alias name for the KMS key.
 	ActivityStreamKmsKeyId *string
 
 	// The mode of the database activity stream. Database events such as a change or
@@ -444,7 +443,7 @@ type DBCluster struct {
 
 	// The Amazon Web Services Region-unique, immutable identifier for the DB cluster.
 	// This identifier is found in Amazon Web Services CloudTrail log entries whenever
-	// the Amazon Web Services KMS CMK for the DB cluster is accessed.
+	// the KMS key for the DB cluster is accessed.
 	DbClusterResourceId *string
 
 	// Indicates if the DB cluster has deletion protection enabled. The database can't
@@ -512,8 +511,7 @@ type DBCluster struct {
 
 	// If StorageEncrypted is enabled, the Amazon Web Services KMS key identifier for
 	// the encrypted DB cluster. The Amazon Web Services KMS key identifier is the key
-	// ARN, key ID, alias ARN, or alias name for the Amazon Web Services KMS customer
-	// master key (CMK).
+	// ARN, key ID, alias ARN, or alias name for the KMS key.
 	KmsKeyId *string
 
 	// Specifies the latest time to which a database can be restored with point-in-time
@@ -745,7 +743,7 @@ type DBClusterParameterGroup struct {
 type DBClusterRole struct {
 
 	// The name of the feature associated with the Amazon Web Services Identity and
-	// Access Management (IAM) role. For the list of supported feature names, see
+	// Access Management (IAM) role. For information about supported feature names, see
 	// DBEngineVersion.
 	FeatureName *string
 
@@ -811,8 +809,7 @@ type DBClusterSnapshot struct {
 
 	// If StorageEncrypted is true, the Amazon Web Services KMS key identifier for the
 	// encrypted DB cluster snapshot. The Amazon Web Services KMS key identifier is the
-	// key ARN, key ID, alias ARN, or alias name for the Amazon Web Services KMS
-	// customer master key (CMK).
+	// key ARN, key ID, alias ARN, or alias name for the KMS key.
 	KmsKeyId *string
 
 	// Provides the license model information for this DB cluster snapshot.
@@ -900,14 +897,27 @@ type DBClusterSnapshotAttributesResult struct {
 // DescribeDBEngineVersions.
 type DBEngineVersion struct {
 
+	// The creation time of the DB engine version.
+	CreateTime *time.Time
+
 	// The description of the database engine.
 	DBEngineDescription *string
+
+	// The ARN of the custom engine version.
+	DBEngineVersionArn *string
 
 	// The description of the database engine version.
 	DBEngineVersionDescription *string
 
 	// The name of the DB parameter group family for the database engine.
 	DBParameterGroupFamily *string
+
+	// The name of the Amazon S3 bucket that contains your database installation files.
+	DatabaseInstallationFilesS3BucketName *string
+
+	// The Amazon S3 directory that contains the database installation files. If not
+	// specified, then no prefix is assumed.
+	DatabaseInstallationFilesS3Prefix *string
 
 	// The default character set for new instances of this engine version, if the
 	// CharacterSetName parameter of the CreateDBInstance API isn't specified.
@@ -923,6 +933,13 @@ type DBEngineVersion struct {
 	// CloudWatch Logs.
 	ExportableLogTypes []string
 
+	// The Amazon Web Services KMS key identifier for an encrypted CEV. This parameter
+	// is required for RDS Custom, but optional for Amazon RDS.
+	KMSKeyId *string
+
+	// The major engine version of the CEV.
+	MajorEngineVersion *string
+
 	// The status of the DB engine version, either available or deprecated.
 	Status *string
 
@@ -933,10 +950,14 @@ type DBEngineVersion struct {
 	// A list of the supported DB engine modes.
 	SupportedEngineModes []string
 
-	// A list of features supported by the DB engine. Supported feature names include
-	// the following.
-	//
-	// * s3Import
+	// A list of features supported by the DB engine. The supported features vary by DB
+	// engine and DB engine version. To determine the supported features for a specific
+	// DB engine and DB engine version using the CLI, use the following command: aws
+	// rds describe-db-engine-versions --engine --engine-version  For example, to
+	// determine the supported features for RDS for PostgreSQL version 13.3 using the
+	// CLI, use the following command: aws rds describe-db-engine-versions --engine
+	// postgres --engine-version 13.3 The supported features are listed under
+	// SupportedFeatureNames in the output.
 	SupportedFeatureNames []string
 
 	// A list of the character sets supported by the Oracle DB engine for the
@@ -962,6 +983,11 @@ type DBEngineVersion struct {
 	// Indicates whether the database engine version supports read replicas.
 	SupportsReadReplica bool
 
+	// A list of tags. For more information, see Tagging Amazon RDS Resources
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
+	// the Amazon RDS User Guide.
+	TagList []Tag
+
 	// A list of engine versions that this database engine version can be upgraded to.
 	ValidUpgradeTarget []UpgradeTarget
 
@@ -982,8 +1008,7 @@ type DBInstance struct {
 
 	// The Amazon Web Services KMS key identifier used for encrypting messages in the
 	// database activity stream. The Amazon Web Services KMS key identifier is the key
-	// ARN, key ID, alias ARN, or alias name for the Amazon Web Services KMS customer
-	// master key (CMK).
+	// ARN, key ID, alias ARN, or alias name for the KMS key.
 	ActivityStreamKmsKeyId *string
 
 	// The mode of the database activity stream. Database events such as a change or
@@ -1007,6 +1032,12 @@ type DBInstance struct {
 	// The time when a stopped DB instance is restarted automatically.
 	AutomaticRestartTime *time.Time
 
+	// The automation mode of the RDS Custom DB instance: full or all paused. If full,
+	// the DB instance automates monitoring and instance recovery. If all paused, the
+	// instance pauses automation for the duration set by
+	// --resume-full-automation-mode-minutes.
+	AutomationMode AutomationMode
+
 	// Specifies the name of the Availability Zone the DB instance is located in.
 	AvailabilityZone *string
 
@@ -1029,6 +1060,25 @@ type DBInstance struct {
 	// the DB cluster. Setting this value for an Aurora DB instance has no effect on
 	// the DB cluster setting. For more information, see DBCluster.
 	CopyTagsToSnapshot bool
+
+	// The instance profile associated with the underlying Amazon EC2 instance of an
+	// RDS Custom DB instance. The instance profile must meet the following
+	// requirements:
+	//
+	// * The profile must exist in your account.
+	//
+	// * The profile must
+	// have an IAM role that Amazon EC2 has permissions to assume.
+	//
+	// * The instance
+	// profile name and the associated IAM role name must start with the prefix
+	// AWSRDSCustom.
+	//
+	// For the list of permissions required for the IAM role, see
+	// Configure IAM and your VPC
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc)
+	// in the Amazon Relational Database Service User Guide.
+	CustomIamInstanceProfile *string
 
 	// Specifies whether a customer-owned IP address (CoIP) is enabled for an RDS on
 	// Outposts DB instance. A CoIP provides local or external connectivity to
@@ -1093,8 +1143,7 @@ type DBInstance struct {
 
 	// The Amazon Web Services Region-unique, immutable identifier for the DB instance.
 	// This identifier is found in Amazon Web Services CloudTrail log entries whenever
-	// the Amazon Web Services KMS customer master key (CMK) for the DB instance is
-	// accessed.
+	// the Amazon Web Services KMS key for the DB instance is accessed.
 	DbiResourceId *string
 
 	// Indicates if the DB instance has deletion protection enabled. The database can't
@@ -1149,15 +1198,15 @@ type DBInstance struct {
 
 	// If StorageEncrypted is true, the Amazon Web Services KMS key identifier for the
 	// encrypted DB instance. The Amazon Web Services KMS key identifier is the key
-	// ARN, key ID, alias ARN, or alias name for the Amazon Web Services KMS customer
-	// master key (CMK).
+	// ARN, key ID, alias ARN, or alias name for the KMS key.
 	KmsKeyId *string
 
 	// Specifies the latest time to which a database can be restored with point-in-time
 	// restore.
 	LatestRestorableTime *time.Time
 
-	// License model information for this DB instance.
+	// License model information for this DB instance. This setting doesn't apply to
+	// RDS Custom.
 	LicenseModel *string
 
 	// Specifies the listener connection endpoint for SQL Server Always On.
@@ -1178,7 +1227,8 @@ type DBInstance struct {
 	// Amazon CloudWatch Logs.
 	MonitoringRoleArn *string
 
-	// Specifies if the DB instance is a Multi-AZ deployment.
+	// Specifies if the DB instance is a Multi-AZ deployment. This setting doesn't
+	// apply to RDS Custom.
 	MultiAZ bool
 
 	// The name of the NCHAR character set for the Oracle DB instance. This character
@@ -1200,8 +1250,7 @@ type DBInstance struct {
 
 	// The Amazon Web Services KMS key identifier for encryption of Performance
 	// Insights data. The Amazon Web Services KMS key identifier is the key ARN, key
-	// ID, alias ARN, or alias name for the Amazon Web Services KMS customer master key
-	// (CMK).
+	// ID, alias ARN, or alias name for the KMS key.
 	PerformanceInsightsKMSKeyId *string
 
 	// The amount of time, in days, to retain Performance Insights data. Valid values
@@ -1259,6 +1308,11 @@ type DBInstance struct {
 	// in the Amazon RDS User Guide. This attribute is only supported in RDS for
 	// Oracle.
 	ReplicaMode ReplicaMode
+
+	// The number of minutes to pause the automation. When the time period ends, RDS
+	// Custom resumes full automation. The minimum value is 60 (default). The maximum
+	// value is 1,440.
+	ResumeFullAutomationModeTime *time.Time
 
 	// If present, specifies the name of the secondary Availability Zone for a DB
 	// instance with multi-AZ support.
@@ -1350,7 +1404,7 @@ type DBInstanceAutomatedBackup struct {
 
 	// The Amazon Web Services KMS key ID for an automated backup. The Amazon Web
 	// Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for
-	// the Amazon Web Services KMS customer master key (CMK).
+	// the KMS key.
 	KmsKeyId *string
 
 	// License model information for the automated backup.
@@ -1419,7 +1473,7 @@ type DBInstanceAutomatedBackupsReplication struct {
 type DBInstanceRole struct {
 
 	// The name of the feature associated with the Amazon Web Services Identity and
-	// Access Management (IAM) role. For the list of supported feature names, see
+	// Access Management (IAM) role. For information about supported feature names, see
 	// DBEngineVersion.
 	FeatureName *string
 
@@ -1813,8 +1867,7 @@ type DBSnapshot struct {
 
 	// If Encrypted is true, the Amazon Web Services KMS key identifier for the
 	// encrypted DB snapshot. The Amazon Web Services KMS key identifier is the key
-	// ARN, key ID, alias ARN, or alias name for the Amazon Web Services KMS customer
-	// master key (CMK).
+	// ARN, key ID, alias ARN, or alias name for the KMS key.
 	KmsKeyId *string
 
 	// License model information for the restored DB instance.
@@ -2179,11 +2232,10 @@ type ExportTask struct {
 	// snapshot.
 	IamRoleArn *string
 
-	// The key identifier of the Amazon Web Services KMS customer master key (CMK) that
-	// is used to encrypt the snapshot when it's exported to Amazon S3. The Amazon Web
-	// Services KMS CMK identifier is its key ARN, key ID, alias ARN, or alias name.
-	// The IAM role used for the snapshot export must have encryption and decryption
-	// permissions to use this Amazon Web Services KMS CMK.
+	// The key identifier of the Amazon Web Services KMS key that is used to encrypt
+	// the snapshot when it's exported to Amazon S3. The KMS key identifier is its key
+	// ARN, key ID, alias ARN, or alias name. The IAM role used for the snapshot export
+	// must have encryption and decryption permissions to use this KMS key.
 	KmsKeyId *string
 
 	// The progress of the snapshot export task as a percentage.
@@ -2321,8 +2373,7 @@ type GlobalCluster struct {
 
 	// The Amazon Web Services Region-unique, immutable identifier for the global
 	// database cluster. This identifier is found in Amazon Web Services CloudTrail log
-	// entries whenever the Amazon Web Services KMS customer master key (CMK) for the
-	// DB cluster is accessed.
+	// entries whenever the Amazon Web Services KMS key for the DB cluster is accessed.
 	GlobalClusterResourceId *string
 
 	// Specifies the current state of this global database cluster.
@@ -2898,6 +2949,12 @@ type PendingModifiedValues struct {
 	// The allocated storage size for the DB instance specified in gibibytes (GiB).
 	AllocatedStorage *int32
 
+	// The automation mode of the RDS Custom DB instance: full or all-paused. If full,
+	// the DB instance automates monitoring and instance recovery. If all-paused, the
+	// instance pauses automation for the duration set by
+	// --resume-full-automation-mode-minutes.
+	AutomationMode AutomationMode
+
 	// The number of days for which automated backups are retained.
 	BackupRetentionPeriod *int32
 
@@ -2944,6 +3001,11 @@ type PendingModifiedValues struct {
 	// The number of CPU cores and the number of threads per core for the DB instance
 	// class of the DB instance.
 	ProcessorFeatures []ProcessorFeature
+
+	// The number of minutes to pause the automation. When the time period ends, RDS
+	// Custom resumes full automation. The minimum value is 60 (default). The maximum
+	// value is 1,440.
+	ResumeFullAutomationModeTime *time.Time
 
 	// The storage type of the DB instance.
 	StorageType *string

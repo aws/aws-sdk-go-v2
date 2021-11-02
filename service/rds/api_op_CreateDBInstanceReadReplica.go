@@ -83,15 +83,15 @@ type CreateDBInstanceReadReplicaInput struct {
 	// in a different Amazon Web Services Region from the read replica, specify a valid
 	// DB instance ARN. For more information, see Constructing an ARN for Amazon RDS
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing)
-	// in the Amazon RDS User Guide. This doesn't apply to SQL Server, which doesn't
-	// support cross-region replicas.
+	// in the Amazon RDS User Guide. This doesn't apply to SQL Server or RDS Custom,
+	// which don't support cross-Region replicas.
 	//
 	// This member is required.
 	SourceDBInstanceIdentifier *string
 
 	// A value that indicates whether minor engine upgrades are applied automatically
-	// to the read replica during the maintenance window. Default: Inherits from the
-	// source DB instance
+	// to the read replica during the maintenance window. This setting doesn't apply to
+	// RDS Custom. Default: Inherits from the source DB instance
 	AutoMinorVersionUpgrade *bool
 
 	// The Availability Zone (AZ) where the read replica will be created. Default: A
@@ -102,6 +102,26 @@ type CreateDBInstanceReadReplicaInput struct {
 	// A value that indicates whether to copy all tags from the read replica to
 	// snapshots of the read replica. By default, tags are not copied.
 	CopyTagsToSnapshot *bool
+
+	// The instance profile associated with the underlying Amazon EC2 instance of an
+	// RDS Custom DB instance. The instance profile must meet the following
+	// requirements:
+	//
+	// * The profile must exist in your account.
+	//
+	// * The profile must
+	// have an IAM role that Amazon EC2 has permissions to assume.
+	//
+	// * The instance
+	// profile name and the associated IAM role name must start with the prefix
+	// AWSRDSCustom.
+	//
+	// For the list of permissions required for the IAM role, see
+	// Configure IAM and your VPC
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc)
+	// in the Amazon Relational Database Service User Guide. This setting is required
+	// for RDS Custom.
+	CustomIamInstanceProfile *string
 
 	// The compute and memory capacity of the read replica, for example, db.m4.large.
 	// Not all DB instance classes are available in all Amazon Web Services Regions, or
@@ -115,16 +135,16 @@ type CreateDBInstanceReadReplicaInput struct {
 	// not specify a value for DBParameterGroupName, then Amazon RDS uses the
 	// DBParameterGroup of source DB instance for a same region read replica, or the
 	// default DBParameterGroup for the specified DB engine for a cross region read
-	// replica. Currently, specifying a parameter group for this operation is only
-	// supported for Oracle DB instances. Constraints:
+	// replica. Specifying a parameter group for this operation is only supported for
+	// Oracle DB instances. It isn't supported for RDS Custom. Constraints:
 	//
-	// * Must be 1 to 255 letters,
-	// numbers, or hyphens.
+	// * Must be
+	// 1 to 255 letters, numbers, or hyphens.
 	//
 	// * First character must be a letter
 	//
-	// * Can't end with a
-	// hyphen or contain two consecutive hyphens
+	// *
+	// Can't end with a hyphen or contain two consecutive hyphens
 	DBParameterGroupName *string
 
 	// Specifies a DB subnet group for the DB instance. The new DB instance is created
@@ -167,18 +187,18 @@ type CreateDBInstanceReadReplicaInput struct {
 	// in an Active Directory Domain. For more information, see  Kerberos
 	// Authentication
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html)
-	// in the Amazon RDS User Guide.
+	// in the Amazon RDS User Guide. This setting doesn't apply to RDS Custom.
 	Domain *string
 
 	// Specify the name of the IAM role to be used when making API calls to the
-	// Directory Service.
+	// Directory Service. This setting doesn't apply to RDS Custom.
 	DomainIAMRoleName *string
 
 	// The list of logs that the new DB instance is to export to CloudWatch Logs. The
 	// values in the list depend on the DB engine being used. For more information, see
 	// Publishing Database Logs to Amazon CloudWatch Logs
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
-	// in the Amazon RDS User Guide.
+	// in the Amazon RDS User Guide. This setting doesn't apply to RDS Custom.
 	EnableCloudwatchLogsExports []string
 
 	// A value that indicates whether to enable mapping of Amazon Web Services Identity
@@ -186,13 +206,13 @@ type CreateDBInstanceReadReplicaInput struct {
 	// is disabled. For more information about IAM database authentication, see  IAM
 	// Database Authentication for MySQL and PostgreSQL
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html)
-	// in the Amazon RDS User Guide.
+	// in the Amazon RDS User Guide. This setting doesn't apply to RDS Custom.
 	EnableIAMDatabaseAuthentication *bool
 
 	// A value that indicates whether to enable Performance Insights for the read
 	// replica. For more information, see Using Amazon Performance Insights
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html)
-	// in the Amazon RDS User Guide.
+	// in the Amazon RDS User Guide. This setting doesn't apply to RDS Custom.
 	EnablePerformanceInsights *bool
 
 	// The amount of Provisioned IOPS (input/output operations per second) to be
@@ -201,17 +221,17 @@ type CreateDBInstanceReadReplicaInput struct {
 
 	// The Amazon Web Services KMS key identifier for an encrypted read replica. The
 	// Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or
-	// alias name for the Amazon Web Services KMS CMK. If you create an encrypted read
-	// replica in the same Amazon Web Services Region as the source DB instance, then
-	// do not specify a value for this parameter. A read replica in the same Region is
-	// always encrypted with the same Amazon Web Services KMS CMK as the source DB
-	// instance. If you create an encrypted read replica in a different Amazon Web
-	// Services Region, then you must specify a Amazon Web Services KMS key identifier
-	// for the destination Amazon Web Services Region. Amazon Web Services KMS CMKs are
-	// specific to the Amazon Web Services Region that they are created in, and you
-	// can't use CMKs from one Amazon Web Services Region in another Amazon Web
-	// Services Region. You can't create an encrypted read replica from an unencrypted
-	// DB instance.
+	// alias name for the KMS key. If you create an encrypted read replica in the same
+	// Amazon Web Services Region as the source DB instance, then do not specify a
+	// value for this parameter. A read replica in the same Amazon Web Services Region
+	// is always encrypted with the same KMS key as the source DB instance. If you
+	// create an encrypted read replica in a different Amazon Web Services Region, then
+	// you must specify a KMS key identifier for the destination Amazon Web Services
+	// Region. KMS keys are specific to the Amazon Web Services Region that they are
+	// created in, and you can't use KMS keys from one Amazon Web Services Region in
+	// another Amazon Web Services Region. You can't create an encrypted read replica
+	// from an unencrypted DB instance. This setting doesn't apply to RDS Custom, which
+	// uses the same KMS key as the primary replica.
 	KmsKeyId *string
 
 	// The upper limit in gibibytes (GiB) to which Amazon RDS can automatically scale
@@ -225,8 +245,8 @@ type CreateDBInstanceReadReplicaInput struct {
 	// The interval, in seconds, between points when Enhanced Monitoring metrics are
 	// collected for the read replica. To disable collecting Enhanced Monitoring
 	// metrics, specify 0. The default is 0. If MonitoringRoleArn is specified, then
-	// you must also set MonitoringInterval to a value other than 0. Valid Values: 0,
-	// 1, 5, 10, 15, 30, 60
+	// you must also set MonitoringInterval to a value other than 0. This setting
+	// doesn't apply to RDS Custom. Valid Values: 0, 1, 5, 10, 15, 30, 60
 	MonitoringInterval *int32
 
 	// The ARN for the IAM role that permits RDS to send enhanced monitoring metrics to
@@ -235,32 +255,35 @@ type CreateDBInstanceReadReplicaInput struct {
 	// Amazon RDS Enhanced Monitoring
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.html#USER_Monitoring.OS.IAMRole)
 	// in the Amazon RDS User Guide. If MonitoringInterval is set to a value other than
-	// 0, then you must supply a MonitoringRoleArn value.
+	// 0, then you must supply a MonitoringRoleArn value. This setting doesn't apply to
+	// RDS Custom.
 	MonitoringRoleArn *string
 
 	// A value that indicates whether the read replica is in a Multi-AZ deployment. You
 	// can create a read replica as a Multi-AZ DB instance. RDS creates a standby of
 	// your replica in another Availability Zone for failover support for the replica.
 	// Creating your read replica as a Multi-AZ DB instance is independent of whether
-	// the source database is a Multi-AZ DB instance.
+	// the source database is a Multi-AZ DB instance. This setting doesn't apply to RDS
+	// Custom.
 	MultiAZ *bool
 
 	// The option group the DB instance is associated with. If omitted, the option
 	// group associated with the source instance is used. For SQL Server, you must use
-	// the option group associated with the source instance.
+	// the option group associated with the source instance. This setting doesn't apply
+	// to RDS Custom.
 	OptionGroupName *string
 
 	// The Amazon Web Services KMS key identifier for encryption of Performance
 	// Insights data. The Amazon Web Services KMS key identifier is the key ARN, key
-	// ID, alias ARN, or alias name for the Amazon Web Services KMS customer master key
-	// (CMK). If you do not specify a value for PerformanceInsightsKMSKeyId, then
-	// Amazon RDS uses your default CMK. There is a default CMK for your Amazon Web
-	// Services account. Your Amazon Web Services account has a different default CMK
-	// for each Amazon Web Services Region.
+	// ID, alias ARN, or alias name for the KMS key. If you do not specify a value for
+	// PerformanceInsightsKMSKeyId, then Amazon RDS uses your default KMS key. There is
+	// a default KMS key for your Amazon Web Services account. Your Amazon Web Services
+	// account has a different default KMS key for each Amazon Web Services Region.
+	// This setting doesn't apply to RDS Custom.
 	PerformanceInsightsKMSKeyId *string
 
 	// The amount of time, in days, to retain Performance Insights data. Valid values
-	// are 7 or 731 (2 years).
+	// are 7 or 731 (2 years). This setting doesn't apply to RDS Custom.
 	PerformanceInsightsRetentionPeriod *int32
 
 	// The port number that the DB instance uses for connections. Default: Inherits
@@ -315,11 +338,12 @@ type CreateDBInstanceReadReplicaInput struct {
 	// manually. Specifying SourceRegion autogenerates a presigned URL that is a valid
 	// request for the operation that can be executed in the source Amazon Web Services
 	// Region. SourceRegion isn't supported for SQL Server, because SQL Server on
-	// Amazon RDS doesn't support cross-region read replicas.
+	// Amazon RDS doesn't support cross-region read replicas. This setting doesn't
+	// apply to RDS Custom.
 	PreSignedUrl *string
 
 	// The number of CPU cores and the number of threads per core for the DB instance
-	// class of the DB instance.
+	// class of the DB instance. This setting doesn't apply to RDS Custom.
 	ProcessorFeatures []types.ProcessorFeature
 
 	// A value that indicates whether the DB instance is publicly accessible. When the
@@ -335,7 +359,7 @@ type CreateDBInstanceReadReplicaInput struct {
 
 	// The open mode of the replica database: mounted or read-only. This parameter is
 	// only supported for Oracle DB instances. Mounted DB replicas are included in
-	// Oracle Enterprise Edition. The main use case for mounted replicas is
+	// Oracle Database Enterprise Edition. The main use case for mounted replicas is
 	// cross-Region disaster recovery. The primary database doesn't use Active Data
 	// Guard to transmit information to the mounted replica. Because it doesn't accept
 	// user connections, a mounted replica can't serve a read-only workload. You can
@@ -343,7 +367,9 @@ type CreateDBInstanceReadReplicaInput struct {
 	// DB instance. For more information, see Working with Oracle Read Replicas for
 	// Amazon RDS
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html)
-	// in the Amazon RDS User Guide.
+	// in the Amazon RDS User Guide. For RDS Custom, you must specify this parameter
+	// and set it to mounted. The value won't be set by default. After replica
+	// creation, you can manage the open mode manually.
 	ReplicaMode types.ReplicaMode
 
 	// The AWS region the resource is in. The presigned URL will be created with this
@@ -361,11 +387,12 @@ type CreateDBInstanceReadReplicaInput struct {
 	Tags []types.Tag
 
 	// A value that indicates whether the DB instance class of the DB instance uses its
-	// default processor features.
+	// default processor features. This setting doesn't apply to RDS Custom.
 	UseDefaultProcessorFeatures *bool
 
-	// A list of EC2 VPC security groups to associate with the read replica. Default:
-	// The default EC2 VPC security group for the DB subnet group's VPC.
+	// A list of Amazon EC2 VPC security groups to associate with the read replica.
+	// This setting doesn't apply to RDS Custom. Default: The default EC2 VPC security
+	// group for the DB subnet group's VPC.
 	VpcSecurityGroupIds []string
 
 	// Used by the SDK's PresignURL autofill customization to specify the region the of

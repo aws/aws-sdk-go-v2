@@ -1884,6 +1884,13 @@ func awsAwsjson11_serializeDocumentCallAnalyticsJobSettings(v *types.CallAnalyti
 		}
 	}
 
+	if v.LanguageIdSettings != nil {
+		ok := object.Key("LanguageIdSettings")
+		if err := awsAwsjson11_serializeDocumentLanguageIdSettingsMap(v.LanguageIdSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.LanguageModelName != nil {
 		ok := object.Key("LanguageModelName")
 		ok.String(*v.LanguageModelName)
@@ -2043,6 +2050,42 @@ func awsAwsjson11_serializeDocumentKMSEncryptionContextMap(v map[string]string, 
 	for key := range v {
 		om := object.Key(key)
 		om.String(v[key])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentLanguageIdSettings(v *types.LanguageIdSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LanguageModelName != nil {
+		ok := object.Key("LanguageModelName")
+		ok.String(*v.LanguageModelName)
+	}
+
+	if v.VocabularyFilterName != nil {
+		ok := object.Key("VocabularyFilterName")
+		ok.String(*v.VocabularyFilterName)
+	}
+
+	if v.VocabularyName != nil {
+		ok := object.Key("VocabularyName")
+		ok.String(*v.VocabularyName)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentLanguageIdSettingsMap(v map[string]types.LanguageIdSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		mapVar := v[key]
+		if err := awsAwsjson11_serializeDocumentLanguageIdSettings(&mapVar, om); err != nil {
+			return err
+		}
 	}
 	return nil
 }
@@ -3199,6 +3242,13 @@ func awsAwsjson11_serializeOpDocumentStartTranscriptionJobInput(v *StartTranscri
 	if len(v.LanguageCode) > 0 {
 		ok := object.Key("LanguageCode")
 		ok.String(string(v.LanguageCode))
+	}
+
+	if v.LanguageIdSettings != nil {
+		ok := object.Key("LanguageIdSettings")
+		if err := awsAwsjson11_serializeDocumentLanguageIdSettingsMap(v.LanguageIdSettings, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.LanguageOptions != nil {

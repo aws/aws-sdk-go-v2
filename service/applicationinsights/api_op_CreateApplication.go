@@ -28,11 +28,9 @@ func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicatio
 }
 
 type CreateApplicationInput struct {
+	AutoConfigEnabled *bool
 
-	// The name of the resource group.
-	//
-	// This member is required.
-	ResourceGroupName *string
+	AutoCreate *bool
 
 	// Indicates whether Application Insights can listen to CloudWatch events for the
 	// application resources, such as instance terminated, failed deployment, and
@@ -45,6 +43,9 @@ type CreateApplicationInput struct {
 	// The SNS topic provided to Application Insights that is associated to the created
 	// opsItem. Allows you to receive notifications for updates to the opsItem.
 	OpsItemSNSTopicArn *string
+
+	// The name of the resource group.
+	ResourceGroupName *string
 
 	// List of tags to add to the application. tag key (Key) and an associated tag
 	// value (Value). The maximum length of a tag key is 128 characters. The maximum

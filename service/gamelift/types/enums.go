@@ -537,6 +537,14 @@ const (
 	GameServerGroupInstanceTypeC5a12xlarge GameServerGroupInstanceType = "c5a.12xlarge"
 	GameServerGroupInstanceTypeC5a16xlarge GameServerGroupInstanceType = "c5a.16xlarge"
 	GameServerGroupInstanceTypeC5a24xlarge GameServerGroupInstanceType = "c5a.24xlarge"
+	GameServerGroupInstanceTypeC6gMedium   GameServerGroupInstanceType = "c6g.medium"
+	GameServerGroupInstanceTypeC6gLarge    GameServerGroupInstanceType = "c6g.large"
+	GameServerGroupInstanceTypeC6gXlarge   GameServerGroupInstanceType = "c6g.xlarge"
+	GameServerGroupInstanceTypeC6g2xlarge  GameServerGroupInstanceType = "c6g.2xlarge"
+	GameServerGroupInstanceTypeC6g4xlarge  GameServerGroupInstanceType = "c6g.4xlarge"
+	GameServerGroupInstanceTypeC6g8xlarge  GameServerGroupInstanceType = "c6g.8xlarge"
+	GameServerGroupInstanceTypeC6g12xlarge GameServerGroupInstanceType = "c6g.12xlarge"
+	GameServerGroupInstanceTypeC6g16xlarge GameServerGroupInstanceType = "c6g.16xlarge"
 	GameServerGroupInstanceTypeR4Large     GameServerGroupInstanceType = "r4.large"
 	GameServerGroupInstanceTypeR4Xlarge    GameServerGroupInstanceType = "r4.xlarge"
 	GameServerGroupInstanceTypeR42xlarge   GameServerGroupInstanceType = "r4.2xlarge"
@@ -559,6 +567,14 @@ const (
 	GameServerGroupInstanceTypeR5a12xlarge GameServerGroupInstanceType = "r5a.12xlarge"
 	GameServerGroupInstanceTypeR5a16xlarge GameServerGroupInstanceType = "r5a.16xlarge"
 	GameServerGroupInstanceTypeR5a24xlarge GameServerGroupInstanceType = "r5a.24xlarge"
+	GameServerGroupInstanceTypeR6gMedium   GameServerGroupInstanceType = "r6g.medium"
+	GameServerGroupInstanceTypeR6gLarge    GameServerGroupInstanceType = "r6g.large"
+	GameServerGroupInstanceTypeR6gXlarge   GameServerGroupInstanceType = "r6g.xlarge"
+	GameServerGroupInstanceTypeR6g2xlarge  GameServerGroupInstanceType = "r6g.2xlarge"
+	GameServerGroupInstanceTypeR6g4xlarge  GameServerGroupInstanceType = "r6g.4xlarge"
+	GameServerGroupInstanceTypeR6g8xlarge  GameServerGroupInstanceType = "r6g.8xlarge"
+	GameServerGroupInstanceTypeR6g12xlarge GameServerGroupInstanceType = "r6g.12xlarge"
+	GameServerGroupInstanceTypeR6g16xlarge GameServerGroupInstanceType = "r6g.16xlarge"
 	GameServerGroupInstanceTypeM4Large     GameServerGroupInstanceType = "m4.large"
 	GameServerGroupInstanceTypeM4Xlarge    GameServerGroupInstanceType = "m4.xlarge"
 	GameServerGroupInstanceTypeM42xlarge   GameServerGroupInstanceType = "m4.2xlarge"
@@ -580,6 +596,14 @@ const (
 	GameServerGroupInstanceTypeM5a12xlarge GameServerGroupInstanceType = "m5a.12xlarge"
 	GameServerGroupInstanceTypeM5a16xlarge GameServerGroupInstanceType = "m5a.16xlarge"
 	GameServerGroupInstanceTypeM5a24xlarge GameServerGroupInstanceType = "m5a.24xlarge"
+	GameServerGroupInstanceTypeM6gMedium   GameServerGroupInstanceType = "m6g.medium"
+	GameServerGroupInstanceTypeM6gLarge    GameServerGroupInstanceType = "m6g.large"
+	GameServerGroupInstanceTypeM6gXlarge   GameServerGroupInstanceType = "m6g.xlarge"
+	GameServerGroupInstanceTypeM6g2xlarge  GameServerGroupInstanceType = "m6g.2xlarge"
+	GameServerGroupInstanceTypeM6g4xlarge  GameServerGroupInstanceType = "m6g.4xlarge"
+	GameServerGroupInstanceTypeM6g8xlarge  GameServerGroupInstanceType = "m6g.8xlarge"
+	GameServerGroupInstanceTypeM6g12xlarge GameServerGroupInstanceType = "m6g.12xlarge"
+	GameServerGroupInstanceTypeM6g16xlarge GameServerGroupInstanceType = "m6g.16xlarge"
 )
 
 // Values returns all known values for GameServerGroupInstanceType. Note that this
@@ -608,6 +632,14 @@ func (GameServerGroupInstanceType) Values() []GameServerGroupInstanceType {
 		"c5a.12xlarge",
 		"c5a.16xlarge",
 		"c5a.24xlarge",
+		"c6g.medium",
+		"c6g.large",
+		"c6g.xlarge",
+		"c6g.2xlarge",
+		"c6g.4xlarge",
+		"c6g.8xlarge",
+		"c6g.12xlarge",
+		"c6g.16xlarge",
 		"r4.large",
 		"r4.xlarge",
 		"r4.2xlarge",
@@ -630,6 +662,14 @@ func (GameServerGroupInstanceType) Values() []GameServerGroupInstanceType {
 		"r5a.12xlarge",
 		"r5a.16xlarge",
 		"r5a.24xlarge",
+		"r6g.medium",
+		"r6g.large",
+		"r6g.xlarge",
+		"r6g.2xlarge",
+		"r6g.4xlarge",
+		"r6g.8xlarge",
+		"r6g.12xlarge",
+		"r6g.16xlarge",
 		"m4.large",
 		"m4.xlarge",
 		"m4.2xlarge",
@@ -651,6 +691,14 @@ func (GameServerGroupInstanceType) Values() []GameServerGroupInstanceType {
 		"m5a.12xlarge",
 		"m5a.16xlarge",
 		"m5a.24xlarge",
+		"m6g.medium",
+		"m6g.large",
+		"m6g.xlarge",
+		"m6g.2xlarge",
+		"m6g.4xlarge",
+		"m6g.8xlarge",
+		"m6g.12xlarge",
+		"m6g.16xlarge",
 	}
 }
 

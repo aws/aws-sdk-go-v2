@@ -173,6 +173,9 @@ type CelebrityDetail struct {
 	// The unique identifier for the celebrity.
 	Id *string
 
+	// Retrieves the known gender for the celebrity.
+	KnownGender *KnownGender
+
 	// The name of the celebrity.
 	Name *string
 
@@ -304,6 +307,145 @@ type CustomLabel struct {
 	noSmithyDocumentSerde
 }
 
+// Describes updates or additions to a dataset. A Single update or addition is an
+// entry (JSON Line) that provides information about a single image. To update an
+// existing entry, you match the source-ref field of the update entry with the
+// source-ref filed of the entry that you want to update. If the source-ref field
+// doesn't match an existing entry, the entry is added to dataset as a new entry.
+type DatasetChanges struct {
+
+	// A Base64-encoded binary data object containing one or JSON lines that either
+	// update the dataset or are additions to the dataset. You change a dataset by
+	// calling UpdateDatasetEntries. If you are using an AWS SDK to call
+	// UpdateDatasetEntries, you don't need to encode Changes as the SDK encodes the
+	// data for you. For example JSON lines, see Image-Level labels in manifest files
+	// and and Object localization in manifest files in the Amazon Rekognition Custom
+	// Labels Developer Guide.
+	//
+	// This member is required.
+	GroundTruth []byte
+
+	noSmithyDocumentSerde
+}
+
+// A description for a dataset. For more information, see DescribeDataset. The
+// status fields Status, StatusMessage, and StatusMessageCode reflect the last
+// operation on the dataset.
+type DatasetDescription struct {
+
+	// The Unix timestamp for the time and date that the dataset was created.
+	CreationTimestamp *time.Time
+
+	// The status message code for the dataset.
+	DatasetStats *DatasetStats
+
+	// The Unix timestamp for the date and time that the dataset was last updated.
+	LastUpdatedTimestamp *time.Time
+
+	// The status of the dataset.
+	Status DatasetStatus
+
+	// The status message for the dataset.
+	StatusMessage *string
+
+	// The status message code for the dataset operation. If a service error occurs,
+	// try the API call again later. If a client error occurs, check the input
+	// parameters to the dataset API call that failed.
+	StatusMessageCode DatasetStatusMessageCode
+
+	noSmithyDocumentSerde
+}
+
+// Describes a dataset label. For more information, see ListDatasetLabels.
+type DatasetLabelDescription struct {
+
+	// The name of the label.
+	LabelName *string
+
+	// Statistics about the label.
+	LabelStats *DatasetLabelStats
+
+	noSmithyDocumentSerde
+}
+
+// Statistics about a label used in a dataset. For more information, see
+// DatasetLabelDescription.
+type DatasetLabelStats struct {
+
+	// The total number of images that have the label assigned to a bounding box.
+	BoundingBoxCount *int32
+
+	// The total number of images that use the label.
+	EntryCount *int32
+
+	noSmithyDocumentSerde
+}
+
+// Summary information for an Amazon Rekognition Custom Labels dataset. For more
+// information, see ProjectDescription.
+type DatasetMetadata struct {
+
+	// The Unix timestamp for the date and time that the dataset was created.
+	CreationTimestamp *time.Time
+
+	// The Amazon Resource Name (ARN) for the dataset.
+	DatasetArn *string
+
+	// The type of the dataset.
+	DatasetType DatasetType
+
+	// The status for the dataset.
+	Status DatasetStatus
+
+	// The status message for the dataset.
+	StatusMessage *string
+
+	// The status message code for the dataset operation. If a service error occurs,
+	// try the API call again later. If a client error occurs, check the input
+	// parameters to the dataset API call that failed.
+	StatusMessageCode DatasetStatusMessageCode
+
+	noSmithyDocumentSerde
+}
+
+// The source that Amazon Rekognition Custom Labels uses to create a dataset. To
+// use an Amazon Sagemaker format manifest file, specify the S3 bucket location in
+// the GroundTruthManifest field. The S3 bucket must be in your AWS account. To
+// create a copy of an existing dataset, specify the Amazon Resource Name (ARN) of
+// an existing dataset in DatasetArn. You need to specify a value for DatasetArn or
+// GroundTruthManifest, but not both. if you supply both values, or if you don't
+// specify any values, an InvalidParameterException exception occurs. For more
+// information, see CreateDataset.
+type DatasetSource struct {
+
+	// The ARN of an Amazon Rekognition Custom Labels dataset that you want to copy.
+	DatasetArn *string
+
+	// The S3 bucket that contains an Amazon Sagemaker Ground Truth format manifest
+	// file.
+	GroundTruthManifest *GroundTruthManifest
+
+	noSmithyDocumentSerde
+}
+
+// Provides statistics about a dataset. For more information, see DescribeDataset.
+type DatasetStats struct {
+
+	// The total number of entries that contain at least one error.
+	ErrorEntries *int32
+
+	// The total number of images in the dataset that have labels.
+	LabeledEntries *int32
+
+	// The total number of images in the dataset.
+	TotalEntries *int32
+
+	// The total number of labels declared in the dataset.
+	TotalLabels *int32
+
+	noSmithyDocumentSerde
+}
+
 // A set of parameters that allow you to filter out certain results from your
 // returned results.
 type DetectionFilter struct {
@@ -339,6 +481,18 @@ type DetectTextFilters struct {
 	// A set of parameters that allow you to filter out certain results from your
 	// returned results.
 	WordFilter *DetectionFilter
+
+	noSmithyDocumentSerde
+}
+
+// A training dataset or a test dataset used in a dataset distribution operation.
+// For more information, see DistributeDatasetEntries.
+type DistributeDataset struct {
+
+	// The Amazon Resource Name (ARN) of the dataset that you want to use.
+	//
+	// This member is required.
+	Arn *string
 
 	noSmithyDocumentSerde
 }
@@ -577,8 +731,9 @@ type FaceSearchSettings struct {
 	CollectionId *string
 
 	// Minimum face match confidence score that must be met to return a result for a
-	// recognized face. Default is 80. 0 is the lowest confidence. 100 is the highest
-	// confidence.
+	// recognized face. The default is 80. 0 is the lowest confidence. 100 is the
+	// highest confidence. Values between 0 and 100 are accepted, and values lower than
+	// 80 are set to 80.
 	FaceMatchThreshold *float32
 
 	noSmithyDocumentSerde
@@ -1009,11 +1164,15 @@ type Pose struct {
 	noSmithyDocumentSerde
 }
 
-// A description of a Amazon Rekognition Custom Labels project.
+// A description of an Amazon Rekognition Custom Labels project. For more
+// information, see DescribeProjects.
 type ProjectDescription struct {
 
 	// The Unix timestamp for the date and time that the project was created.
 	CreationTimestamp *time.Time
+
+	// Information about the training and test datasets in the project.
+	Datasets []DatasetMetadata
 
 	// The Amazon Resource Name (ARN) of the project.
 	ProjectArn *string
@@ -1024,11 +1183,12 @@ type ProjectDescription struct {
 	noSmithyDocumentSerde
 }
 
-// The description of a version of a model.
+// A description of a version of an Amazon Rekognition Custom Labels model.
 type ProjectVersionDescription struct {
 
-	// The duration, in seconds, that the model version has been billed for training.
-	// This value is only returned if the model version has been successfully trained.
+	// The duration, in seconds, that you were billed for a successful training of the
+	// model version. This value is only returned if the model version has been
+	// successfully trained.
 	BillableTrainingTimeInSeconds *int64
 
 	// The Unix datetime for the date and time that training started.
@@ -1038,8 +1198,8 @@ type ProjectVersionDescription struct {
 	// successful.
 	EvaluationResult *EvaluationResult
 
-	// The identifer for the AWS Key Management Service (AWS KMS) customer master key
-	// that was used to encrypt the model during training.
+	// The identifer for the AWS Key Management Service key (AWS KMS key) that was used
+	// to encrypt the model during training.
 	KmsKeyId *string
 
 	// The location of the summary manifest. The summary manifest provides aggregate
@@ -1468,15 +1628,17 @@ type TechnicalCueSegment struct {
 }
 
 // The dataset used for testing. Optionally, if AutoCreate is set, Amazon
-// Rekognition Custom Labels creates a testing dataset using an 80/20 split of the
-// training dataset.
+// Rekognition Custom Labels uses the training dataset to create a test dataset
+// with a temporary split of the training dataset.
 type TestingData struct {
 
 	// The assets used for testing.
 	Assets []Asset
 
-	// If specified, Amazon Rekognition Custom Labels creates a testing dataset with an
-	// 80/20 split of the training dataset.
+	// If specified, Amazon Rekognition Custom Labels temporarily splits the training
+	// dataset (80%) to create a test dataset (20%) for the training job. After
+	// training completes, the test dataset is not stored and the training dataset
+	// reverts to its previous size.
 	AutoCreate bool
 
 	noSmithyDocumentSerde
@@ -1613,9 +1775,7 @@ type UnindexedFace struct {
 
 // Contains the Amazon S3 bucket location of the validation data for a model
 // training job. The validation data includes error information for individual JSON
-// lines in the dataset.
-//
-// For more information, see Debugging a Failed Model
+// Lines in the dataset. For more information, see Debugging a Failed Model
 // Training in the Amazon Rekognition Custom Labels Developer Guide. You get the
 // ValidationData object for the training dataset (TrainingDataResult) and the test
 // dataset (TestingDataResult) by calling DescribeProjectVersions. The assets array

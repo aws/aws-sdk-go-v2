@@ -29,27 +29,27 @@ func (c *Client) UpdateAssessment(ctx context.Context, params *UpdateAssessmentI
 
 type UpdateAssessmentInput struct {
 
-	// The identifier for the specified assessment.
+	// The identifier for the assessment.
 	//
 	// This member is required.
 	AssessmentId *string
 
-	// The scope of the specified assessment.
+	// The scope of the assessment.
 	//
 	// This member is required.
 	Scope *types.Scope
 
-	// The description of the specified assessment.
+	// The description of the assessment.
 	AssessmentDescription *string
 
-	// The name of the specified assessment to be updated.
+	// The name of the assessment to be updated.
 	AssessmentName *string
 
-	// The assessment report storage destination for the specified assessment that is
-	// being updated.
+	// The assessment report storage destination for the assessment that's being
+	// updated.
 	AssessmentReportsDestination *types.AssessmentReportsDestination
 
-	// The list of roles for the specified assessment.
+	// The list of roles for the assessment.
 	Roles []types.Role
 
 	noSmithyDocumentSerde
@@ -57,8 +57,8 @@ type UpdateAssessmentInput struct {
 
 type UpdateAssessmentOutput struct {
 
-	// The response object (name of the updated assessment) for the
-	// UpdateAssessmentRequest API.
+	// The response object for the UpdateAssessmentRequest API. This is the name of the
+	// updated assessment.
 	Assessment *types.Assessment
 
 	// Metadata pertaining to the operation's result.

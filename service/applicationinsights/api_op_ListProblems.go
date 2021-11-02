@@ -30,6 +30,7 @@ func (c *Client) ListProblems(ctx context.Context, params *ListProblemsInput, op
 }
 
 type ListProblemsInput struct {
+	ComponentName *string
 
 	// The time when the problem ended, in epoch seconds. If not specified, problems
 	// within the past seven days are returned.
@@ -60,6 +61,8 @@ type ListProblemsOutput struct {
 
 	// The list of problems.
 	ProblemList []types.Problem
+
+	ResourceGroupName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

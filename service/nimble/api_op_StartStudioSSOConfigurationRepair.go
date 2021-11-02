@@ -4,7 +4,6 @@ package nimble
 
 import (
 	"context"
-	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/nimble/types"
@@ -12,14 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Repairs the SSO configuration for a given studio. If the studio has a valid
-// Amazon Web Services SSO configuration currently associated with it, this
-// operation will fail with a validation error. If the studio does not have a valid
-// Amazon Web Services SSO configuration currently associated with it, then a new
-// Amazon Web Services SSO application is created for the studio and the studio is
-// changed to the READY state. After the Amazon Web Services SSO application is
-// repaired, you must use the Amazon Nimble Studio console to add administrators
-// and users to your studio.
+// Repairs the Amazon Web Services SSO configuration for a given studio. If the
+// studio has a valid Amazon Web Services SSO configuration currently associated
+// with it, this operation will fail with a validation error. If the studio does
+// not have a valid Amazon Web Services SSO configuration currently associated with
+// it, then a new Amazon Web Services SSO application is created for the studio and
+// the studio is changed to the READY state. After the Amazon Web Services SSO
+// application is repaired, you must use the Amazon Nimble Studio console to add
+// administrators and users to your studio.
 func (c *Client) StartStudioSSOConfigurationRepair(ctx context.Context, params *StartStudioSSOConfigurationRepairInput, optFns ...func(*Options)) (*StartStudioSSOConfigurationRepairOutput, error) {
 	if params == nil {
 		params = &StartStudioSSOConfigurationRepairInput{}
@@ -42,21 +41,20 @@ type StartStudioSSOConfigurationRepairInput struct {
 	// This member is required.
 	StudioId *string
 
-	// To make an idempotent API request using one of these actions, specify a client
-	// token in the request. You should not reuse the same client token for other API
-	// requests. If you retry a request that completed successfully using the same
-	// client token and the same parameters, the retry succeeds without performing any
-	// further actions. If you retry a successful request using the same client token,
-	// but one or more of the parameters are different, the retry fails with a
-	// ValidationException error.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request. If you don’t specify a client token, the AWS SDK automatically
+	// generates a client token and uses it for the request to ensure idempotency.
 	ClientToken *string
 
 	noSmithyDocumentSerde
 }
 
+//
 type StartStudioSSOConfigurationRepairOutput struct {
 
 	// Information about a studio.
+	//
+	// This member is required.
 	Studio *types.Studio
 
 	// Metadata pertaining to the operation's result.
@@ -110,9 +108,6 @@ func (c *Client) addOperationStartStudioSSOConfigurationRepairMiddlewares(stack 
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addIdempotencyToken_opStartStudioSSOConfigurationRepairMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addOpStartStudioSSOConfigurationRepairValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -129,39 +124,6 @@ func (c *Client) addOperationStartStudioSSOConfigurationRepairMiddlewares(stack 
 		return err
 	}
 	return nil
-}
-
-type idempotencyToken_initializeOpStartStudioSSOConfigurationRepair struct {
-	tokenProvider IdempotencyTokenProvider
-}
-
-func (*idempotencyToken_initializeOpStartStudioSSOConfigurationRepair) ID() string {
-	return "OperationIdempotencyTokenAutoFill"
-}
-
-func (m *idempotencyToken_initializeOpStartStudioSSOConfigurationRepair) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	if m.tokenProvider == nil {
-		return next.HandleInitialize(ctx, in)
-	}
-
-	input, ok := in.Parameters.(*StartStudioSSOConfigurationRepairInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("expected middleware input to be of type *StartStudioSSOConfigurationRepairInput ")
-	}
-
-	if input.ClientToken == nil {
-		t, err := m.tokenProvider.GetIdempotencyToken()
-		if err != nil {
-			return out, metadata, err
-		}
-		input.ClientToken = &t
-	}
-	return next.HandleInitialize(ctx, in)
-}
-func addIdempotencyToken_opStartStudioSSOConfigurationRepairMiddleware(stack *middleware.Stack, cfg Options) error {
-	return stack.Initialize.Add(&idempotencyToken_initializeOpStartStudioSSOConfigurationRepair{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opStartStudioSSOConfigurationRepair(region string) *awsmiddleware.RegisterServiceMetadata {

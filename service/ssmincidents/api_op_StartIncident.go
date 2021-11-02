@@ -32,12 +32,13 @@ func (c *Client) StartIncident(ctx context.Context, params *StartIncidentInput, 
 type StartIncidentInput struct {
 
 	// The Amazon Resource Name (ARN) of the response plan that pre-defines summary,
-	// chat channels, SNS topics, runbooks, title, and impact of the incident.
+	// chat channels, Amazon SNS topics, runbooks, title, and impact of the incident.
 	//
 	// This member is required.
 	ResponsePlanArn *string
 
-	// A token ensuring that the action is called only once with the specified details.
+	// A token ensuring that the operation is called only once with the specified
+	// details.
 	ClientToken *string
 
 	// Defines the impact to the customers. Providing an impact overwrites the impact
@@ -61,7 +62,7 @@ type StartIncidentInput struct {
 	Impact *int32
 
 	// Add related items to the incident for other responders to use. Related items are
-	// AWS resources, external links, or files uploaded to an S3 bucket.
+	// AWS resources, external links, or files uploaded to an Amazon S3 bucket.
 	RelatedItems []types.RelatedItem
 
 	// Provide a title for the incident. Providing a title overwrites the title

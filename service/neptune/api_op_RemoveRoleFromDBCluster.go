@@ -41,7 +41,8 @@ type RemoveRoleFromDBClusterInput struct {
 
 	// The name of the feature for the DB cluster that the IAM role is to be
 	// disassociated from. For the list of supported feature names, see
-	// DBEngineVersion.
+	// DescribeDBEngineVersions
+	// (https://docs.aws.amazon.com/neptune/latest/userguide/api-other-apis.html#DescribeDBEngineVersions).
 	FeatureName *string
 
 	noSmithyDocumentSerde

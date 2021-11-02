@@ -36,6 +36,9 @@ type UpdateBucketInput struct {
 	// This member is required.
 	BucketName *string
 
+	// An object that describes the access log configuration for the bucket.
+	AccessLogConfig *types.BucketAccessLogConfig
+
 	// An object that sets the public accessibility of objects in the specified bucket.
 	AccessRules *types.AccessRules
 

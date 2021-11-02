@@ -34,7 +34,7 @@ type GetServicesInScopeInput struct {
 
 type GetServicesInScopeOutput struct {
 
-	// The metadata associated with the Amazon Web Service.
+	// The metadata that's associated with the Amazon Web Service.
 	ServiceMetadata []types.ServiceMetadata
 
 	// Metadata pertaining to the operation's result.

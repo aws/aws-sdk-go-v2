@@ -33,8 +33,8 @@ func (c *Client) CreateTimelineEvent(ctx context.Context, params *CreateTimeline
 
 type CreateTimelineEventInput struct {
 
-	// A valid JSON string. There is no other schema imposed. A short description of
-	// the event.
+	// A short description of the event as a valid JSON string. There is no other
+	// schema imposed.
 	//
 	// This member is required.
 	EventData *string
@@ -49,8 +49,8 @@ type CreateTimelineEventInput struct {
 	// This member is required.
 	EventType *string
 
-	// The Amazon Resource Name (ARN) of the incident record you are adding the event
-	// to.
+	// The Amazon Resource Name (ARN) of the incident record to which the event will be
+	// added.
 	//
 	// This member is required.
 	IncidentRecordArn *string

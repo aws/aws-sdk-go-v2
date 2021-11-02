@@ -1002,6 +1002,21 @@
                 ]
             }
         },
+        "com.amazonaws.sagemaker#AppSecurityGroupManagement": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Service",
+                        "name": "Service"
+                    },
+                    {
+                        "value": "Customer",
+                        "name": "Customer"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.sagemaker#AppSortKey": {
             "type": "string",
             "traits": {
@@ -1082,6 +1097,14 @@
                     {
                         "value": "TensorBoard",
                         "name": "TensorBoard"
+                    },
+                    {
+                        "value": "RStudioServerPro",
+                        "name": "RStudioServerPro"
+                    },
+                    {
+                        "value": "RSessionGateway",
+                        "name": "RSessionGateway"
                     }
                 ]
             }
@@ -2395,6 +2418,138 @@
                         "name": "TEXTRACT_ANALYZE_DOCUMENT_FORMS_V1"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.sagemaker#BatchDescribeModelPackage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#BatchDescribeModelPackageInput"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#BatchDescribeModelPackageOutput"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This action batch describes a list of versioned model packages</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#BatchDescribeModelPackageError": {
+            "type": "structure",
+            "members": {
+                "ErrorCode": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ErrorResponse": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The error code and error description associated with the resource.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#BatchDescribeModelPackageErrorMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.sagemaker#ModelPackageArn"
+            },
+            "value": {
+                "target": "com.amazonaws.sagemaker#BatchDescribeModelPackageError"
+            }
+        },
+        "com.amazonaws.sagemaker#BatchDescribeModelPackageInput": {
+            "type": "structure",
+            "members": {
+                "ModelPackageArnList": {
+                    "target": "com.amazonaws.sagemaker#ModelPackageArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Amazon Resource Name (ARN) of the model package groups.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#BatchDescribeModelPackageOutput": {
+            "type": "structure",
+            "members": {
+                "ModelPackageSummaries": {
+                    "target": "com.amazonaws.sagemaker#ModelPackageSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summaries for the model package versions</p>"
+                    }
+                },
+                "BatchDescribeModelPackageErrorMap": {
+                    "target": "com.amazonaws.sagemaker#BatchDescribeModelPackageErrorMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of the resource and BatchDescribeModelPackageError objects \n            reporting the error associated with describing the model package.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#BatchDescribeModelPackageSummary": {
+            "type": "structure",
+            "members": {
+                "ModelPackageGroupName": {
+                    "target": "com.amazonaws.sagemaker#EntityName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The group name for the model package</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ModelPackageVersion": {
+                    "target": "com.amazonaws.sagemaker#ModelPackageVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of a versioned model.</p>"
+                    }
+                },
+                "ModelPackageArn": {
+                    "target": "com.amazonaws.sagemaker#ModelPackageArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the model package.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ModelPackageDescription": {
+                    "target": "com.amazonaws.sagemaker#EntityDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the model package.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.sagemaker#CreationTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation time of the mortgage package summary.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InferenceSpecification": {
+                    "target": "com.amazonaws.sagemaker#InferenceSpecification",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ModelPackageStatus": {
+                    "target": "com.amazonaws.sagemaker#ModelPackageStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the mortgage package.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ModelApprovalStatus": {
+                    "target": "com.amazonaws.sagemaker#ModelApprovalStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The approval status of the model.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides summary information about the model package.</p>"
             }
         },
         "com.amazonaws.sagemaker#BatchStrategy": {
@@ -4795,6 +4950,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>SageMaker uses Amazon Web Services KMS to encrypt the EFS volume attached to the domain with an Amazon Web Services managed\n         key by default. For more control, specify a customer managed key.</p>"
                     }
+                },
+                "AppSecurityGroupManagement": {
+                    "target": "com.amazonaws.sagemaker#AppSecurityGroupManagement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entity that creates and manages the required security groups for inter-app\n            communication in <code>VPCOnly</code> mode. Required when\n            <code>CreateDomain.AppNetworkAccessType</code> is <code>VPCOnly</code> and\n            <code>DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn</code> is\n            provided.</p>"
+                    }
+                },
+                "DomainSettings": {
+                    "target": "com.amazonaws.sagemaker#DomainSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A collection of <code>Domain</code> settings.</p>"
+                    }
                 }
             }
         },
@@ -5973,9 +6140,9 @@
                     }
                 },
                 "ModelPackageGroupName": {
-                    "target": "com.amazonaws.sagemaker#EntityName",
+                    "target": "com.amazonaws.sagemaker#ArnOrName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the model group that this model version belongs to.</p>\n        <p>This parameter is required for versioned models, and does not apply to unversioned\n            models.</p>"
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the model package group that this model version belongs to.</p>\n        <p>This parameter is required for versioned models, and does not apply to unversioned\n            models.</p>"
                     }
                 },
                 "ModelPackageDescription": {
@@ -6034,6 +6201,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A unique token that guarantees that the call to this API is idempotent.</p>",
                         "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "CustomerMetadataProperties": {
+                    "target": "com.amazonaws.sagemaker#CustomerMetadataMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata properties associated with the model package versions.</p>"
                     }
                 }
             }
@@ -7512,6 +7685,47 @@
                     "min": 0,
                     "max": 30
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#CustomerMetadataKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]*)${1,128}$"
+            }
+        },
+        "com.amazonaws.sagemaker#CustomerMetadataKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#CustomerMetadataKey"
+            }
+        },
+        "com.amazonaws.sagemaker#CustomerMetadataMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.sagemaker#CustomerMetadataKey"
+            },
+            "value": {
+                "target": "com.amazonaws.sagemaker#CustomerMetadataValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#CustomerMetadataValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]*)${1,256}$"
             }
         },
         "com.amazonaws.sagemaker#DataCaptureConfig": {
@@ -10646,6 +10860,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services KMS customer managed key used to encrypt\n         the EFS volume attached to the domain.</p>"
                     }
+                },
+                "DomainSettings": {
+                    "target": "com.amazonaws.sagemaker#DomainSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A collection of <code>Domain</code> settings.</p>"
+                    }
+                },
+                "AppSecurityGroupManagement": {
+                    "target": "com.amazonaws.sagemaker#AppSecurityGroupManagement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entity that creates and manages the required security groups for inter-app communication in <code>VPCOnly</code> mode. \n            Required when <code>CreateDomain.AppNetworkAccessType</code> is <code>VPCOnly</code> and <code>DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn</code> is provided.</p>"
+                    }
+                },
+                "SecurityGroupIdForDomainBoundary": {
+                    "target": "com.amazonaws.sagemaker#SecurityGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the security group that authorizes traffic between the <code>RSessionGateway</code> apps and the <code>RStudioServerPro</code> app.</p>"
+                    }
                 }
             }
         },
@@ -12315,7 +12547,7 @@
                 "target": "com.amazonaws.sagemaker#DescribeModelPackageOutput"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns a description of the specified model package, which is used to create Amazon SageMaker\n            models or list them on Amazon Web Services Marketplace.</p>\n        <p>To create models in Amazon SageMaker, buyers can subscribe to model packages listed on Amazon Web Services\n            Marketplace.</p>"
+                "smithy.api#documentation": "<p>Returns a description of the specified model package, which is used to create SageMaker\n            models or list them on Amazon Web Services Marketplace.</p>\n        <p>To create models in SageMaker, buyers can subscribe to model packages listed on Amazon Web Services\n            Marketplace.</p>"
             }
         },
         "com.amazonaws.sagemaker#DescribeModelPackageGroup": {
@@ -12393,7 +12625,7 @@
                 "ModelPackageName": {
                     "target": "com.amazonaws.sagemaker#VersionedArnOrName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the model package to describe.</p>\n        <p>When you specify a name, the name must have 1 to 63 characters. Valid\n          characters are a-z, A-Z, 0-9, and - (hyphen).</p>",
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the model package to describe.</p>\n        <p>When you specify a name, the name must have 1 to 63 characters. Valid\n            characters are a-z, A-Z, 0-9, and - (hyphen).</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -12456,7 +12688,7 @@
                 "ValidationSpecification": {
                     "target": "com.amazonaws.sagemaker#ModelPackageValidationSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configurations for one or more transform jobs that Amazon SageMaker runs to test the model\n            package.</p>"
+                        "smithy.api#documentation": "<p>Configurations for one or more transform jobs that SageMaker runs to test the model\n            package.</p>"
                     }
                 },
                 "ModelPackageStatus": {
@@ -12510,6 +12742,12 @@
                     "target": "com.amazonaws.sagemaker#ApprovalDescription",
                     "traits": {
                         "smithy.api#documentation": "<p>A description provided for the model approval.</p>"
+                    }
+                },
+                "CustomerMetadataProperties": {
+                    "target": "com.amazonaws.sagemaker#CustomerMetadataMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata properties associated with the model package versions.</p>"
                     }
                 }
             }
@@ -13545,6 +13783,15 @@
                         "smithy.api#documentation": "<p>The time when the project was created.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when project was last modified.</p>"
+                    }
+                },
+                "LastModifiedBy": {
+                    "target": "com.amazonaws.sagemaker#UserContext"
                 }
             }
         },
@@ -15085,6 +15332,52 @@
                     "max": 63
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"
+            }
+        },
+        "com.amazonaws.sagemaker#DomainSecurityGroupIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#SecurityGroupId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 3
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#DomainSettings": {
+            "type": "structure",
+            "members": {
+                "SecurityGroupIds": {
+                    "target": "com.amazonaws.sagemaker#DomainSecurityGroupIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The security groups for the Amazon Virtual Private Cloud that the <code>Domain</code> uses for communication between Domain-level apps and user apps.</p>"
+                    }
+                },
+                "RStudioServerProDomainSettings": {
+                    "target": "com.amazonaws.sagemaker#RStudioServerProDomainSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A collection of settings that configure the <code>RStudioServerPro</code> Domain-level app.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A collection of settings that apply to the <code>SageMaker Domain</code>. These settings are specified through the <code>CreateDomain</code> API call.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#DomainSettingsForUpdate": {
+            "type": "structure",
+            "members": {
+                "RStudioServerProDomainSettingsForUpdate": {
+                    "target": "com.amazonaws.sagemaker#RStudioServerProDomainSettingsForUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A collection of <code>RStudioServerPro</code> Domain-level app settings to update.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A collection of <code>Domain</code> configuration settings to update.</p>"
             }
         },
         "com.amazonaws.sagemaker#DomainStatus": {
@@ -25567,6 +25860,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of the tags associated with the model package. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services\n            resources</a> in the <i>Amazon Web Services General Reference Guide</i>.</p>"
                     }
+                },
+                "CustomerMetadataProperties": {
+                    "target": "com.amazonaws.sagemaker#CustomerMetadataMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata properties for the model package. </p>"
+                    }
                 }
             },
             "traits": {
@@ -25581,6 +25880,18 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:model-package/"
+            }
+        },
+        "com.amazonaws.sagemaker#ModelPackageArnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#ModelPackageArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.sagemaker#ModelPackageContainerDefinition": {
@@ -25886,6 +26197,15 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.sagemaker#ModelPackageStatusItem"
+            }
+        },
+        "com.amazonaws.sagemaker#ModelPackageSummaries": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.sagemaker#ModelPackageArn"
+            },
+            "value": {
+                "target": "com.amazonaws.sagemaker#BatchDescribeModelPackageSummary"
             }
         },
         "com.amazonaws.sagemaker#ModelPackageSummary": {
@@ -30477,6 +30797,15 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in\n            different ways, for example, by purpose, owner, or environment. For more information,\n            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services\n                Resources</a>.</p>"
                     }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp container for when the project was last modified.</p>"
+                    }
+                },
+                "LastModifiedBy": {
+                    "target": "com.amazonaws.sagemaker#UserContext"
                 }
             },
             "traits": {
@@ -30574,6 +30903,18 @@
                     {
                         "value": "DeleteCompleted",
                         "name": "DELETE_COMPLETED"
+                    },
+                    {
+                        "value": "UpdateInProgress",
+                        "name": "UPDATE_IN_PROGRESS"
+                    },
+                    {
+                        "value": "UpdateCompleted",
+                        "name": "UPDATE_COMPLETED"
+                    },
+                    {
+                        "value": "UpdateFailed",
+                        "name": "UPDATE_FAILED"
                     }
                 ]
             }
@@ -30785,6 +31126,111 @@
                         "smithy.api#required": {}
                     }
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#RSessionAppSettings": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>A collection of settings that apply to an <code>RSessionGateway</code> app.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#RStudioServerProAccessStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ENABLED",
+                        "name": "Enabled"
+                    },
+                    {
+                        "value": "DISABLED",
+                        "name": "Disabled"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.sagemaker#RStudioServerProAppSettings": {
+            "type": "structure",
+            "members": {
+                "AccessStatus": {
+                    "target": "com.amazonaws.sagemaker#RStudioServerProAccessStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the current user has access to the <code>RStudioServerPro</code> app.</p>"
+                    }
+                },
+                "UserGroup": {
+                    "target": "com.amazonaws.sagemaker#RStudioServerProUserGroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The level of permissions that the user has within the <code>RStudioServerPro</code> app. This value defaults to `User`. The `Admin` value allows the user access to the RStudio Administrative Dashboard.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A collection of settings that configure user interaction with the <code>RStudioServerPro</code> app. <code>RStudioServerProAppSettings</code> cannot be updated. The <code>RStudioServerPro</code> app must be deleted and a new one created to make any changes.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#RStudioServerProDomainSettings": {
+            "type": "structure",
+            "members": {
+                "DomainExecutionRoleArn": {
+                    "target": "com.amazonaws.sagemaker#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the execution role for the <code>RStudioServerPro</code> Domain-level app.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RStudioConnectUrl": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A URL pointing to an RStudio Connect server.</p>"
+                    }
+                },
+                "RStudioPackageManagerUrl": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A URL pointing to an RStudio Package Manager server.</p>"
+                    }
+                },
+                "DefaultResourceSpec": {
+                    "target": "com.amazonaws.sagemaker#ResourceSpec"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A collection of settings that configure the <code>RStudioServerPro</code> Domain-level app.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#RStudioServerProDomainSettingsForUpdate": {
+            "type": "structure",
+            "members": {
+                "DomainExecutionRoleArn": {
+                    "target": "com.amazonaws.sagemaker#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The execution role for the <code>RStudioServerPro</code> Domain-level app.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DefaultResourceSpec": {
+                    "target": "com.amazonaws.sagemaker#ResourceSpec"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A collection of settings that update the current configuration for the <code>RStudioServerPro</code> Domain-level app.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#RStudioServerProUserGroup": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "R_STUDIO_ADMIN",
+                        "name": "Admin"
+                    },
+                    {
+                        "value": "R_STUDIO_USER",
+                        "name": "User"
+                    }
+                ]
             }
         },
         "com.amazonaws.sagemaker#RealtimeInferenceInstanceTypes": {
@@ -31687,6 +32133,24 @@
         },
         "com.amazonaws.sagemaker#SageMaker": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "SageMaker",
+                    "arnNamespace": "sagemaker",
+                    "cloudFormationName": "SageMaker",
+                    "cloudTrailEventSource": "sagemaker.amazonaws.com",
+                    "endpointPrefix": "api.sagemaker"
+                },
+                "aws.auth#sigv4": {
+                    "name": "sagemaker"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<p>Provides APIs for creating and managing Amazon SageMaker resources. </p>\n        <p>Other Resources:</p>\n        <ul>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/whatis.html#first-time-user\">Amazon SageMaker Developer\n                        Guide</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/augmented-ai/2019-11-07/APIReference/Welcome.html\">Amazon Augmented AI\n                        Runtime API Reference</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#title": "Amazon SageMaker Service",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://sagemaker.amazonaws.com/doc/2017-05-13/"
+                }
+            },
             "version": "2017-07-24",
             "operations": [
                 {
@@ -31697,6 +32161,9 @@
                 },
                 {
                     "target": "com.amazonaws.sagemaker#AssociateTrialComponent"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#BatchDescribeModelPackage"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#CreateAction"
@@ -32392,6 +32859,9 @@
                     "target": "com.amazonaws.sagemaker#UpdatePipelineExecution"
                 },
                 {
+                    "target": "com.amazonaws.sagemaker#UpdateProject"
+                },
+                {
                     "target": "com.amazonaws.sagemaker#UpdateTrainingJob"
                 },
                 {
@@ -32409,25 +32879,7 @@
                 {
                     "target": "com.amazonaws.sagemaker#UpdateWorkteam"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "SageMaker",
-                    "arnNamespace": "sagemaker",
-                    "cloudFormationName": "SageMaker",
-                    "cloudTrailEventSource": "sagemaker.amazonaws.com",
-                    "endpointPrefix": "api.sagemaker"
-                },
-                "aws.auth#sigv4": {
-                    "name": "sagemaker"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>Provides APIs for creating and managing Amazon SageMaker resources. </p>\n        <p>Other Resources:</p>\n        <ul>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/whatis.html#first-time-user\">Amazon SageMaker Developer\n                        Guide</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/augmented-ai/2019-11-07/APIReference/Welcome.html\">Amazon Augmented AI\n                        Runtime API Reference</a>\n               </p>\n            </li>\n         </ul>",
-                "smithy.api#title": "Amazon SageMaker Service",
-                "smithy.api#xmlNamespace": {
-                    "uri": "http://sagemaker.amazonaws.com/doc/2017-05-13/"
-                }
-            }
+            ]
         },
         "com.amazonaws.sagemaker#SagemakerServicecatalogStatus": {
             "type": "string",
@@ -33018,6 +33470,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Details that you specify to provision a service catalog product. For information about\n            service catalog, see <a href=\"https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html\">What is Amazon Web Services Service\n                Catalog</a>.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ServiceCatalogProvisioningUpdateDetails": {
+            "type": "structure",
+            "members": {
+                "ProvisioningArtifactId": {
+                    "target": "com.amazonaws.sagemaker#ServiceCatalogEntityId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the provisioning artifact.</p>"
+                    }
+                },
+                "ProvisioningParameters": {
+                    "target": "com.amazonaws.sagemaker#ProvisioningParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of key value pairs that you specify when you provision a product.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details that you specify to provision a service catalog product. \n            For information about service catalog, see <a href=\"https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html\">What is Amazon Web Services Service Catalog</a>.\n        </p>"
             }
         },
         "com.amazonaws.sagemaker#SessionExpirationDurationInSeconds": {
@@ -37216,6 +37688,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A collection of settings.</p>"
                     }
+                },
+                "DomainSettingsForUpdate": {
+                    "target": "com.amazonaws.sagemaker#DomainSettingsForUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A collection of <code>DomainSettings</code> configuration values to update.</p>"
+                    }
                 }
             }
         },
@@ -37484,21 +37962,32 @@
                 "ModelPackageArn": {
                     "target": "com.amazonaws.sagemaker#ModelPackageArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the model.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the model package.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ModelApprovalStatus": {
                     "target": "com.amazonaws.sagemaker#ModelApprovalStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The approval status of the model.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The approval status of the model.</p>"
                     }
                 },
                 "ApprovalDescription": {
                     "target": "com.amazonaws.sagemaker#ApprovalDescription",
                     "traits": {
                         "smithy.api#documentation": "<p>A description for the approval status of the model.</p>"
+                    }
+                },
+                "CustomerMetadataProperties": {
+                    "target": "com.amazonaws.sagemaker#CustomerMetadataMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata properties associated with the model package versions.</p>"
+                    }
+                },
+                "CustomerMetadataPropertiesToRemove": {
+                    "target": "com.amazonaws.sagemaker#CustomerMetadataKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata properties associated with the model package versions to remove.</p>"
                     }
                 }
             }
@@ -37828,6 +38317,60 @@
                     "target": "com.amazonaws.sagemaker#PipelineArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the updated pipeline.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#UpdateProject": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#UpdateProjectInput"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#UpdateProjectOutput"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a machine learning (ML) project that is created from a template that \n            sets up an ML pipeline from training to deploying an approved model.</p>   \n        <note>\n            <p>You must not update a project that is in use. If you update the\n                    <code>ServiceCatalogProvisioningUpdateDetails</code> of a project that is active\n                or being created, or updated, you may lose resources already created by the\n                project.</p>\n            </note>"
+            }
+        },
+        "com.amazonaws.sagemaker#UpdateProjectInput": {
+            "type": "structure",
+            "members": {
+                "ProjectName": {
+                    "target": "com.amazonaws.sagemaker#ProjectEntityName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProjectDescription": {
+                    "target": "com.amazonaws.sagemaker#EntityDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description for the project.</p>"
+                    }
+                },
+                "ServiceCatalogProvisioningUpdateDetails": {
+                    "target": "com.amazonaws.sagemaker#ServiceCatalogProvisioningUpdateDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The product ID and provisioning artifact ID to provision a service catalog. \n            The provisioning artifact ID will default to the latest provisioning artifact \n            ID of the product, if you don't provide the provisioning artifact ID. For more \n            information, see <a href=\"https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html\">What is Amazon Web Services Service Catalog</a>.\n        </p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.sagemaker#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of key-value pairs. You can use tags to categorize your \n            Amazon Web Services resources in different ways, for example, by purpose, owner, or \n            environment. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#UpdateProjectOutput": {
+            "type": "structure",
+            "members": {
+                "ProjectArn": {
+                    "target": "com.amazonaws.sagemaker#ProjectArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the project.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             }
@@ -38390,6 +38933,18 @@
                     "target": "com.amazonaws.sagemaker#TensorBoardAppSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>The TensorBoard app settings.</p>"
+                    }
+                },
+                "RStudioServerProAppSettings": {
+                    "target": "com.amazonaws.sagemaker#RStudioServerProAppSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A collection of settings that configure user interaction with the <code>RStudioServerPro</code> app.</p>"
+                    }
+                },
+                "RSessionAppSettings": {
+                    "target": "com.amazonaws.sagemaker#RSessionAppSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A collection of settings that configure the <code>RSessionGateway</code> app.</p>"
                     }
                 }
             },

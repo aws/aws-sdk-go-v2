@@ -2417,6 +2417,55 @@ func awsRestjson1_deserializeErrorValidationException(response *smithyhttp.Respo
 	return output
 }
 
+func awsRestjson1_deserializeDocumentCertificate(v **types.Certificate, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Certificate
+	if *v == nil {
+		sv = &types.Certificate{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "certificateArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ACMCertArn to be of type string, got %T instead", value)
+				}
+				sv.CertificateArn = ptr.String(jtv)
+			}
+
+		case "certificateData":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Base64Encoded to be of type string, got %T instead", value)
+				}
+				sv.CertificateData = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentCloudWatchMonitoringConfiguration(v **types.CloudWatchMonitoringConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2763,6 +2812,11 @@ func awsRestjson1_deserializeDocumentEndpoint(v **types.Endpoint, value interfac
 					return fmt.Errorf("expected ACMCertArn to be of type string, got %T instead", value)
 				}
 				sv.CertificateArn = ptr.String(jtv)
+			}
+
+		case "certificateAuthority":
+			if err := awsRestjson1_deserializeDocumentCertificate(&sv.CertificateAuthority, value); err != nil {
+				return err
 			}
 
 		case "configurationOverrides":

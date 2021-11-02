@@ -11458,11 +11458,30 @@ func awsRestjson1_serializeDocumentRegisteredUserEmbeddingExperienceConfiguratio
 		}
 	}
 
+	if v.QSearchBar != nil {
+		ok := object.Key("QSearchBar")
+		if err := awsRestjson1_serializeDocumentRegisteredUserQSearchBarEmbeddingConfiguration(v.QSearchBar, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.QuickSightConsole != nil {
 		ok := object.Key("QuickSightConsole")
 		if err := awsRestjson1_serializeDocumentRegisteredUserQuickSightConsoleEmbeddingConfiguration(v.QuickSightConsole, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRegisteredUserQSearchBarEmbeddingConfiguration(v *types.RegisteredUserQSearchBarEmbeddingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InitialTopicId != nil {
+		ok := object.Key("InitialTopicId")
+		ok.String(*v.InitialTopicId)
 	}
 
 	return nil

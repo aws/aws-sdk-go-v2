@@ -138,25 +138,23 @@ type RestoreDBClusterToPointInTimeInput struct {
 
 	// The Amazon Web Services KMS key identifier to use when restoring an encrypted DB
 	// cluster from an encrypted DB cluster. The Amazon Web Services KMS key identifier
-	// is the key ARN, key ID, alias ARN, or alias name for the Amazon Web Services KMS
-	// customer master key (CMK). To use a CMK in a different Amazon Web Services
-	// account, specify the key ARN or alias ARN. You can restore to a new DB cluster
-	// and encrypt the new DB cluster with a Amazon Web Services KMS CMK that is
-	// different than the Amazon Web Services KMS key used to encrypt the source DB
-	// cluster. The new DB cluster is encrypted with the Amazon Web Services KMS CMK
-	// identified by the KmsKeyId parameter. If you don't specify a value for the
-	// KmsKeyId parameter, then the following occurs:
+	// is the key ARN, key ID, alias ARN, or alias name for the KMS key. To use a KMS
+	// key in a different Amazon Web Services account, specify the key ARN or alias
+	// ARN. You can restore to a new DB cluster and encrypt the new DB cluster with a
+	// KMS key that is different from the KMS key used to encrypt the source DB
+	// cluster. The new DB cluster is encrypted with the KMS key identified by the
+	// KmsKeyId parameter. If you don't specify a value for the KmsKeyId parameter,
+	// then the following occurs:
 	//
-	// * If the DB cluster is
-	// encrypted, then the restored DB cluster is encrypted using the Amazon Web
-	// Services KMS CMK that was used to encrypt the source DB cluster.
+	// * If the DB cluster is encrypted, then the restored
+	// DB cluster is encrypted using the KMS key that was used to encrypt the source DB
+	// cluster.
 	//
-	// * If the DB
-	// cluster isn't encrypted, then the restored DB cluster isn't encrypted.
+	// * If the DB cluster isn't encrypted, then the restored DB cluster
+	// isn't encrypted.
 	//
-	// If
-	// DBClusterIdentifier refers to a DB cluster that isn't encrypted, then the
-	// restore request is rejected.
+	// If DBClusterIdentifier refers to a DB cluster that isn't
+	// encrypted, then the restore request is rejected.
 	KmsKeyId *string
 
 	// The name of the option group for the new DB cluster.

@@ -63,27 +63,153 @@ var defaultPartitions = endpoints.Partitions{
 		RegionRegex:    partitionRegexp.Aws,
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
-			"af-south-1":     endpoints.Endpoint{},
-			"ap-east-1":      endpoints.Endpoint{},
+			"af-south-1": endpoints.Endpoint{},
+			"af-south-1-fips": endpoints.Endpoint{
+				Hostname: "kms-fips.af-south-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "af-south-1",
+				},
+			},
+			"ap-east-1": endpoints.Endpoint{},
+			"ap-east-1-fips": endpoints.Endpoint{
+				Hostname: "kms-fips.ap-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-east-1",
+				},
+			},
 			"ap-northeast-1": endpoints.Endpoint{},
+			"ap-northeast-1-fips": endpoints.Endpoint{
+				Hostname: "kms-fips.ap-northeast-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-northeast-1",
+				},
+			},
 			"ap-northeast-2": endpoints.Endpoint{},
+			"ap-northeast-2-fips": endpoints.Endpoint{
+				Hostname: "kms-fips.ap-northeast-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-northeast-2",
+				},
+			},
 			"ap-northeast-3": endpoints.Endpoint{},
-			"ap-south-1":     endpoints.Endpoint{},
+			"ap-northeast-3-fips": endpoints.Endpoint{
+				Hostname: "kms-fips.ap-northeast-3.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-northeast-3",
+				},
+			},
+			"ap-south-1": endpoints.Endpoint{},
+			"ap-south-1-fips": endpoints.Endpoint{
+				Hostname: "kms-fips.ap-south-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-south-1",
+				},
+			},
 			"ap-southeast-1": endpoints.Endpoint{},
+			"ap-southeast-1-fips": endpoints.Endpoint{
+				Hostname: "kms-fips.ap-southeast-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-southeast-1",
+				},
+			},
 			"ap-southeast-2": endpoints.Endpoint{},
-			"ca-central-1":   endpoints.Endpoint{},
-			"eu-central-1":   endpoints.Endpoint{},
-			"eu-north-1":     endpoints.Endpoint{},
-			"eu-south-1":     endpoints.Endpoint{},
-			"eu-west-1":      endpoints.Endpoint{},
-			"eu-west-2":      endpoints.Endpoint{},
-			"eu-west-3":      endpoints.Endpoint{},
-			"me-south-1":     endpoints.Endpoint{},
-			"sa-east-1":      endpoints.Endpoint{},
-			"us-east-1":      endpoints.Endpoint{},
-			"us-east-2":      endpoints.Endpoint{},
-			"us-west-1":      endpoints.Endpoint{},
-			"us-west-2":      endpoints.Endpoint{},
+			"ap-southeast-2-fips": endpoints.Endpoint{
+				Hostname: "kms-fips.ap-southeast-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-southeast-2",
+				},
+			},
+			"ca-central-1": endpoints.Endpoint{},
+			"ca-central-1-fips": endpoints.Endpoint{
+				Hostname: "kms-fips.ca-central-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-central-1",
+				},
+			},
+			"eu-central-1": endpoints.Endpoint{},
+			"eu-central-1-fips": endpoints.Endpoint{
+				Hostname: "kms-fips.eu-central-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-central-1",
+				},
+			},
+			"eu-north-1": endpoints.Endpoint{},
+			"eu-north-1-fips": endpoints.Endpoint{
+				Hostname: "kms-fips.eu-north-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-north-1",
+				},
+			},
+			"eu-south-1": endpoints.Endpoint{},
+			"eu-south-1-fips": endpoints.Endpoint{
+				Hostname: "kms-fips.eu-south-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-south-1",
+				},
+			},
+			"eu-west-1": endpoints.Endpoint{},
+			"eu-west-1-fips": endpoints.Endpoint{
+				Hostname: "kms-fips.eu-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-west-1",
+				},
+			},
+			"eu-west-2": endpoints.Endpoint{},
+			"eu-west-2-fips": endpoints.Endpoint{
+				Hostname: "kms-fips.eu-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-west-2",
+				},
+			},
+			"eu-west-3": endpoints.Endpoint{},
+			"eu-west-3-fips": endpoints.Endpoint{
+				Hostname: "kms-fips.eu-west-3.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-west-3",
+				},
+			},
+			"me-south-1": endpoints.Endpoint{},
+			"me-south-1-fips": endpoints.Endpoint{
+				Hostname: "kms-fips.me-south-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "me-south-1",
+				},
+			},
+			"sa-east-1": endpoints.Endpoint{},
+			"sa-east-1-fips": endpoints.Endpoint{
+				Hostname: "kms-fips.sa-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "sa-east-1",
+				},
+			},
+			"us-east-1": endpoints.Endpoint{},
+			"us-east-1-fips": endpoints.Endpoint{
+				Hostname: "kms-fips.us-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
+			"us-east-2": endpoints.Endpoint{},
+			"us-east-2-fips": endpoints.Endpoint{
+				Hostname: "kms-fips.us-east-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-2",
+				},
+			},
+			"us-west-1": endpoints.Endpoint{},
+			"us-west-1-fips": endpoints.Endpoint{
+				Hostname: "kms-fips.us-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-1",
+				},
+			},
+			"us-west-2": endpoints.Endpoint{},
+			"us-west-2-fips": endpoints.Endpoint{
+				Hostname: "kms-fips.us-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
+			},
 		},
 	},
 	{
@@ -117,7 +243,19 @@ var defaultPartitions = endpoints.Partitions{
 				},
 			},
 			"us-iso-east-1": endpoints.Endpoint{},
+			"us-iso-east-1-fips": endpoints.Endpoint{
+				Hostname: "kms-fips.us-iso-east-1.c2s.ic.gov",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-iso-east-1",
+				},
+			},
 			"us-iso-west-1": endpoints.Endpoint{},
+			"us-iso-west-1-fips": endpoints.Endpoint{
+				Hostname: "kms-fips.us-iso-west-1.c2s.ic.gov",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-iso-west-1",
+				},
+			},
 		},
 	},
 	{
@@ -137,6 +275,12 @@ var defaultPartitions = endpoints.Partitions{
 				},
 			},
 			"us-isob-east-1": endpoints.Endpoint{},
+			"us-isob-east-1-fips": endpoints.Endpoint{
+				Hostname: "kms-fips.us-isob-east-1.sc2s.sgov.gov",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-isob-east-1",
+				},
+			},
 		},
 	},
 	{
@@ -156,7 +300,19 @@ var defaultPartitions = endpoints.Partitions{
 				},
 			},
 			"us-gov-east-1": endpoints.Endpoint{},
+			"us-gov-east-1-fips": endpoints.Endpoint{
+				Hostname: "kms-fips.us-gov-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-east-1",
+				},
+			},
 			"us-gov-west-1": endpoints.Endpoint{},
+			"us-gov-west-1-fips": endpoints.Endpoint{
+				Hostname: "kms-fips.us-gov-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-west-1",
+				},
+			},
 		},
 	},
 }

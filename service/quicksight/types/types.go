@@ -1912,6 +1912,11 @@ type RegisteredUserEmbeddingExperienceConfiguration struct {
 	// The configuration details for providing a dashboard embedding experience.
 	Dashboard *RegisteredUserDashboardEmbeddingConfiguration
 
+	// The configuration details for embedding the Q search bar. For more information
+	// about embedding the Q search bar, see Embedding Overview
+	// (https://docs.aws.amazon.com/quicksight/latest/user/embedding-overview.html).
+	QSearchBar *RegisteredUserQSearchBarEmbeddingConfiguration
+
 	// The configuration details for providing an Amazon QuickSight console embedding
 	// experience. This can be used along with custom permissions to restrict access to
 	// certain features. For more information, see Customizing Access to the Amazon
@@ -1941,6 +1946,21 @@ type RegisteredUserEmbeddingExperienceConfiguration struct {
 	// Developer Portal
 	// (https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html).
 	QuickSightConsole *RegisteredUserQuickSightConsoleEmbeddingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Information about the Q search bar embedding experience.
+type RegisteredUserQSearchBarEmbeddingConfiguration struct {
+
+	// The ID of the Q topic that you want to make the starting topic in the Q search
+	// bar. You can find a topic ID by navigating to the Topics pane in the Amazon
+	// QuickSight application and opening a topic. The ID is in the URL for the topic
+	// that you open. If you don't specify an initial topic, a list of all shared
+	// topics is shown in the Q bar for your readers. When you select an initial topic,
+	// you can specify whether or not readers are allowed to select other topics from
+	// the available ones in the list.
+	InitialTopicId *string
 
 	noSmithyDocumentSerde
 }

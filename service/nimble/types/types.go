@@ -73,6 +73,7 @@ type Eula struct {
 	noSmithyDocumentSerde
 }
 
+// The acceptance of a EULA, required to use Amazon-provided streaming images.
 type EulaAcceptance struct {
 
 	// The Unix epoch timestamp in seconds for when the EULA was accepted.
@@ -93,6 +94,13 @@ type EulaAcceptance struct {
 	noSmithyDocumentSerde
 }
 
+// A launch profile controls your artist workforce’s access to studio components,
+// like compute farms, shared file systems, managed file systems, and license
+// server configurations, as well as instance types and Amazon Machine Images
+// (AMIs). Studio administrators create launch profiles in the Nimble Studio
+// console. Artists can use their launch profiles to launch an instance from the
+// Nimble Studio portal. Each user’s launch profile defines how they can launch a
+// streaming session. By default, studio admins can use all launch profiles.
 type LaunchProfile struct {
 
 	// The ARN of the resource.
@@ -149,6 +157,9 @@ type LaunchProfile struct {
 	noSmithyDocumentSerde
 }
 
+// A Launch Profile Initialization contains information required for a workstation
+// or server to connect to a launch profile This includes scripts, endpoints,
+// security groups, subnets, and other configuration.
 type LaunchProfileInitialization struct {
 
 	// A LaunchProfileInitializationActiveDirectory resource.
@@ -182,6 +193,7 @@ type LaunchProfileInitialization struct {
 	noSmithyDocumentSerde
 }
 
+//
 type LaunchProfileInitializationActiveDirectory struct {
 
 	// A collection of custom attributes for an Active Directory computer.
@@ -209,6 +221,7 @@ type LaunchProfileInitializationActiveDirectory struct {
 	noSmithyDocumentSerde
 }
 
+//
 type LaunchProfileInitializationScript struct {
 
 	// The initialization script.
@@ -223,6 +236,7 @@ type LaunchProfileInitializationScript struct {
 	noSmithyDocumentSerde
 }
 
+//
 type LaunchProfileMembership struct {
 
 	// The ID of the identity store.
@@ -233,6 +247,9 @@ type LaunchProfileMembership struct {
 
 	// The principal ID.
 	PrincipalId *string
+
+	// The Active Directory Security Identifier for this user, if available.
+	Sid *string
 
 	noSmithyDocumentSerde
 }
@@ -248,6 +265,7 @@ type LicenseServiceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+//
 type NewLaunchProfileMember struct {
 
 	// The persona.
@@ -263,6 +281,7 @@ type NewLaunchProfileMember struct {
 	noSmithyDocumentSerde
 }
 
+//
 type NewStudioMember struct {
 
 	// The persona.
@@ -318,23 +337,44 @@ type StreamConfiguration struct {
 
 	// Enable or disable the use of the system clipboard to copy and paste between the
 	// streaming session and streaming client.
+	//
+	// This member is required.
 	ClipboardMode StreamingClipboardMode
 
 	// The EC2 instance types that users can select from when launching a streaming
 	// session with this launch profile.
+	//
+	// This member is required.
 	Ec2InstanceTypes []StreamingInstanceType
-
-	// The length of time, in minutes, that a streaming session can run. After this
-	// point, Nimble Studio automatically terminates the session.
-	MaxSessionLengthInMinutes int32
 
 	// The streaming images that users can select from when launching a streaming
 	// session with this launch profile.
+	//
+	// This member is required.
 	StreamingImageIds []string
+
+	// The length of time, in minutes, that a streaming session can be active before it
+	// is stopped or terminated. After this point, Nimble Studio automatically
+	// terminates or stops the session. The default length of time is 690 minutes, and
+	// the maximum length of time is 30 days.
+	MaxSessionLengthInMinutes int32
+
+	// Integer that determines if you can start and stop your sessions and how long a
+	// session can stay in the STOPPED state. The default value is 0. The maximum value
+	// is 5760. If the value is missing or set to 0, your sessions can’t be stopped. If
+	// you then call StopStreamingSession, the session fails. If the time that a
+	// session stays in the READY state exceeds the maxSessionLengthInMinutes value,
+	// the session will automatically be terminated by AWS (instead of stopped). If the
+	// value is set to a positive number, the session can be stopped. You can call
+	// StopStreamingSession to stop sessions in the READY state. If the time that a
+	// session stays in the READY state exceeds the maxSessionLengthInMinutes value,
+	// the session will automatically be stopped by AWS (instead of terminated).
+	MaxStoppedSessionLengthInMinutes int32
 
 	noSmithyDocumentSerde
 }
 
+// Configuration for streaming workstations created using this launch profile.
 type StreamConfigurationCreate struct {
 
 	// Enable or disable the use of the system clipboard to copy and paste between the
@@ -355,13 +395,27 @@ type StreamConfigurationCreate struct {
 	// This member is required.
 	StreamingImageIds []string
 
-	// The length of time, in minutes, that a streaming session can run. After this
-	// point, Nimble Studio automatically terminates the session.
+	// The length of time, in minutes, that a streaming session can be active before it
+	// is stopped or terminated. After this point, Nimble Studio automatically
+	// terminates or stops the session. The default length of time is 690 minutes, and
+	// the maximum length of time is 30 days.
 	MaxSessionLengthInMinutes int32
+
+	// The length of time, in minutes, that a streaming session can be active before it
+	// is stopped or terminated. After this point, Nimble Studio automatically
+	// terminates or stops the session. The default length of time is 690 minutes, and
+	// the maximum length of time is 30 days.
+	MaxStoppedSessionLengthInMinutes int32
 
 	noSmithyDocumentSerde
 }
 
+// Represents a streaming image resource. Streaming images are used by studio users
+// to select which operating system and software they want to use in a Nimble
+// Studio streaming session. Amazon provides a number of streaming images that
+// include popular 3rd-party software. You can create your own streaming images
+// using an Amazon Elastic Compute Cloud (Amazon EC2) machine image that you create
+// for this purpose. You can also include software that your users require.
 type StreamingImage struct {
 
 	// The ARN of the resource.
@@ -410,6 +464,7 @@ type StreamingImage struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies how a streaming image is encrypted.
 type StreamingImageEncryptionConfiguration struct {
 
 	// The type of KMS key that is used to encrypt studio data.
@@ -423,6 +478,8 @@ type StreamingImageEncryptionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// A streaming session is a virtual workstation created using a particular launch
+// profile.
 type StreamingSession struct {
 
 	// The ARN of the resource.
@@ -446,6 +503,12 @@ type StreamingSession struct {
 	// The session ID.
 	SessionId *string
 
+	// The time the session entered START_IN_PROGRESS state.
+	StartedAt *time.Time
+
+	// The user ID of the user that started the streaming session.
+	StartedBy *string
+
 	// The current state.
 	State StreamingSessionState
 
@@ -454,6 +517,16 @@ type StreamingSession struct {
 
 	// The status message for the streaming session.
 	StatusMessage *string
+
+	// The time the streaming session will automatically be stopped if the user doesn’t
+	// stop the session themselves.
+	StopAt *time.Time
+
+	// The time the session entered STOP_IN_PROGRESS state.
+	StoppedAt *time.Time
+
+	// The user ID of the user that stopped the streaming session.
+	StoppedBy *string
 
 	// The ID of the streaming image.
 	StreamingImageId *string
@@ -475,6 +548,10 @@ type StreamingSession struct {
 	noSmithyDocumentSerde
 }
 
+// A stream is an active connection to a streaming session, enabling a studio user
+// to control the streaming session using a compatible client. Streaming session
+// streams are compatible with the NICE DCV web client, included in the Nimble
+// Studio portal, or the NICE DCV desktop client.
 type StreamingSessionStream struct {
 
 	// The Unix epoch timestamp in seconds for when the resource was created.
@@ -504,6 +581,17 @@ type StreamingSessionStream struct {
 	noSmithyDocumentSerde
 }
 
+// Represents a studio resource. A studio is the core resource used with Nimble
+// Studio. You must create a studio first, before any other resource type can be
+// created. All other resources you create and manage in Nimble Studio are
+// contained within a studio. When creating a studio, you must provides two IAM
+// roles for use with the Nimble Studio portal. These roles are assumed by your
+// users when they log in to the Nimble Studio portal via Amazon Web Services SSO
+// and your identity source. The user role must have the
+// AmazonNimbleStudio-StudioUser managed policy attached for the portal to function
+// properly. The admin role must have the AmazonNimbleStudio-StudioAdmin managed
+// policy attached for the portal to function properly. Your studio roles must
+// trust the identity.nimble.amazonaws.com service principal to function properly.
 type Studio struct {
 
 	// The IAM role that studio admins assume when logging in to the Nimble Studio
@@ -525,7 +613,7 @@ type Studio struct {
 
 	// The Amazon Web Services SSO application client ID used to integrate with Amazon
 	// Web Services SSO to enable Amazon Web Services SSO users to log in to Nimble
-	// portal.
+	// Studio portal.
 	SsoClientId *string
 
 	// The current state of the studio resource.
@@ -565,8 +653,15 @@ type Studio struct {
 	noSmithyDocumentSerde
 }
 
-// A network that is used by a studio’s users and workflows, including render farm,
-// Active Directory, licensing, and file system.
+// A studio component represents a network resource to be used by a studio's users
+// and workflows. A typical studio contains studio components for each of the
+// following: render farm, Active Directory, licensing, and file system. Access to
+// a studio component is managed by specifying security groups for the resource, as
+// well as its endpoint. A studio component also has a set of initialization
+// scripts that are returned by GetLaunchProfileInitialization. These
+// initialization scripts run on streaming sessions when they start. They provide
+// users with flexibility in controlling how the studio resources are configured on
+// a streaming session.
 type StudioComponent struct {
 
 	// The ARN of the resource.
@@ -714,6 +809,15 @@ type StudioEncryptionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// A studio member is an association of a user from your studio identity source to
+// elevated permissions that they are granted in the studio. When you add a user to
+// your studio using the Nimble Studio console, they are given access to the
+// studio's AWS SSO application and are given access to log in to the Nimble Studio
+// portal. These users have the permissions provided by the studio's user IAM role
+// and do not appear in the studio membership collection. Only studio admins appear
+// in studio membership. When you add a user to studio membership with the persona
+// ADMIN, upon logging in to the Nimble Studio portal, they are granted permissions
+// specified by the Studio's Admin IAM role.
 type StudioMembership struct {
 
 	// The ID of the identity store.
@@ -724,6 +828,9 @@ type StudioMembership struct {
 
 	// The principal ID.
 	PrincipalId *string
+
+	// The Active Directory Security Identifier for this user, if available.
+	Sid *string
 
 	noSmithyDocumentSerde
 }

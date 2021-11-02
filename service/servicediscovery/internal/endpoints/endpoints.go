@@ -71,14 +71,25 @@ var defaultPartitions = endpoints.Partitions{
 			"ap-southeast-1": endpoints.Endpoint{},
 			"ap-southeast-2": endpoints.Endpoint{},
 			"ca-central-1":   endpoints.Endpoint{},
-			"eu-central-1":   endpoints.Endpoint{},
-			"eu-north-1":     endpoints.Endpoint{},
-			"eu-south-1":     endpoints.Endpoint{},
-			"eu-west-1":      endpoints.Endpoint{},
-			"eu-west-2":      endpoints.Endpoint{},
-			"eu-west-3":      endpoints.Endpoint{},
-			"me-south-1":     endpoints.Endpoint{},
-			"sa-east-1":      endpoints.Endpoint{},
+			"ca-central-1-fips": endpoints.Endpoint{
+				Hostname: "servicediscovery-fips.ca-central-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-central-1",
+				},
+			},
+			"eu-central-1": endpoints.Endpoint{},
+			"eu-north-1":   endpoints.Endpoint{},
+			"eu-south-1":   endpoints.Endpoint{},
+			"eu-west-1":    endpoints.Endpoint{},
+			"eu-west-2":    endpoints.Endpoint{},
+			"eu-west-3":    endpoints.Endpoint{},
+			"me-south-1":   endpoints.Endpoint{},
+			"sa-east-1":    endpoints.Endpoint{},
+			"servicediscovery": endpoints.Endpoint{
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-central-1",
+				},
+			},
 			"servicediscovery-fips": endpoints.Endpoint{
 				Hostname: "servicediscovery-fips.ca-central-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
@@ -86,9 +97,33 @@ var defaultPartitions = endpoints.Partitions{
 				},
 			},
 			"us-east-1": endpoints.Endpoint{},
+			"us-east-1-fips": endpoints.Endpoint{
+				Hostname: "servicediscovery-fips.us-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
 			"us-east-2": endpoints.Endpoint{},
+			"us-east-2-fips": endpoints.Endpoint{
+				Hostname: "servicediscovery-fips.us-east-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-2",
+				},
+			},
 			"us-west-1": endpoints.Endpoint{},
+			"us-west-1-fips": endpoints.Endpoint{
+				Hostname: "servicediscovery-fips.us-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-1",
+				},
+			},
 			"us-west-2": endpoints.Endpoint{},
+			"us-west-2-fips": endpoints.Endpoint{
+				Hostname: "servicediscovery-fips.us-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
+			},
 		},
 	},
 	{
@@ -135,6 +170,11 @@ var defaultPartitions = endpoints.Partitions{
 		RegionRegex:    partitionRegexp.AwsUsGov,
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
+			"servicediscovery": endpoints.Endpoint{
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-west-1",
+				},
+			},
 			"servicediscovery-fips": endpoints.Endpoint{
 				Hostname: "servicediscovery-fips.us-gov-west-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
@@ -142,7 +182,19 @@ var defaultPartitions = endpoints.Partitions{
 				},
 			},
 			"us-gov-east-1": endpoints.Endpoint{},
+			"us-gov-east-1-fips": endpoints.Endpoint{
+				Hostname: "servicediscovery-fips.us-gov-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-east-1",
+				},
+			},
 			"us-gov-west-1": endpoints.Endpoint{},
+			"us-gov-west-1-fips": endpoints.Endpoint{
+				Hostname: "servicediscovery-fips.us-gov-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-west-1",
+				},
+			},
 		},
 	},
 }

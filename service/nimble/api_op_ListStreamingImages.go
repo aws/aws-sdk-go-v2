@@ -4,6 +4,7 @@ package nimble
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/nimble/types"
@@ -36,15 +37,16 @@ type ListStreamingImagesInput struct {
 	// This member is required.
 	StudioId *string
 
-	// The token for the next set of results, or null if there are no more results.
+	// The token to request the next page of results.
 	NextToken *string
 
-	// The owner.
+	// Filter this request to streaming images with the given owner
 	Owner *string
 
 	noSmithyDocumentSerde
 }
 
+//
 type ListStreamingImagesOutput struct {
 
 	// The token for the next set of results, or null if there are no more results.
@@ -120,6 +122,81 @@ func (c *Client) addOperationListStreamingImagesMiddlewares(stack *middleware.St
 		return err
 	}
 	return nil
+}
+
+// ListStreamingImagesAPIClient is a client that implements the ListStreamingImages
+// operation.
+type ListStreamingImagesAPIClient interface {
+	ListStreamingImages(context.Context, *ListStreamingImagesInput, ...func(*Options)) (*ListStreamingImagesOutput, error)
+}
+
+var _ ListStreamingImagesAPIClient = (*Client)(nil)
+
+// ListStreamingImagesPaginatorOptions is the paginator options for
+// ListStreamingImages
+type ListStreamingImagesPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListStreamingImagesPaginator is a paginator for ListStreamingImages
+type ListStreamingImagesPaginator struct {
+	options   ListStreamingImagesPaginatorOptions
+	client    ListStreamingImagesAPIClient
+	params    *ListStreamingImagesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListStreamingImagesPaginator returns a new ListStreamingImagesPaginator
+func NewListStreamingImagesPaginator(client ListStreamingImagesAPIClient, params *ListStreamingImagesInput, optFns ...func(*ListStreamingImagesPaginatorOptions)) *ListStreamingImagesPaginator {
+	if params == nil {
+		params = &ListStreamingImagesInput{}
+	}
+
+	options := ListStreamingImagesPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListStreamingImagesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListStreamingImagesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListStreamingImages page.
+func (p *ListStreamingImagesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListStreamingImagesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.ListStreamingImages(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListStreamingImages(region string) *awsmiddleware.RegisterServiceMetadata {

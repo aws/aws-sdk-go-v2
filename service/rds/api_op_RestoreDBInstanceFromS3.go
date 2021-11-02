@@ -17,7 +17,7 @@ import (
 // restore the backup file onto a new Amazon RDS DB instance running MySQL. For
 // more information, see Importing Data into an Amazon RDS MySQL DB Instance
 // (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.html)
-// in the Amazon RDS User Guide.
+// in the Amazon RDS User Guide. This command doesn't apply to RDS Custom.
 func (c *Client) RestoreDBInstanceFromS3(ctx context.Context, params *RestoreDBInstanceFromS3Input, optFns ...func(*Options)) (*RestoreDBInstanceFromS3Output, error) {
 	if params == nil {
 		params = &RestoreDBInstanceFromS3Input{}
@@ -179,13 +179,12 @@ type RestoreDBInstanceFromS3Input struct {
 
 	// The Amazon Web Services KMS key identifier for an encrypted DB instance. The
 	// Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or
-	// alias name for the Amazon Web Services KMS customer master key (CMK). To use a
-	// CMK in a different Amazon Web Services account, specify the key ARN or alias
-	// ARN. If the StorageEncrypted parameter is enabled, and you do not specify a
-	// value for the KmsKeyId parameter, then Amazon RDS will use your default CMK.
-	// There is a default CMK for your Amazon Web Services account. Your Amazon Web
-	// Services account has a different default CMK for each Amazon Web Services
-	// Region.
+	// alias name for the KMS key. To use a KMS key in a different Amazon Web Services
+	// account, specify the key ARN or alias ARN. If the StorageEncrypted parameter is
+	// enabled, and you do not specify a value for the KmsKeyId parameter, then Amazon
+	// RDS will use your default KMS key. There is a default KMS key for your Amazon
+	// Web Services account. Your Amazon Web Services account has a different default
+	// KMS key for each Amazon Web Services Region.
 	KmsKeyId *string
 
 	// The license model for this DB instance. Use general-public-license.
@@ -242,11 +241,10 @@ type RestoreDBInstanceFromS3Input struct {
 
 	// The Amazon Web Services KMS key identifier for encryption of Performance
 	// Insights data. The Amazon Web Services KMS key identifier is the key ARN, key
-	// ID, alias ARN, or alias name for the Amazon Web Services KMS customer master key
-	// (CMK). If you do not specify a value for PerformanceInsightsKMSKeyId, then
-	// Amazon RDS uses your default CMK. There is a default CMK for your Amazon Web
-	// Services account. Your Amazon Web Services account has a different default CMK
-	// for each Amazon Web Services Region.
+	// ID, alias ARN, or alias name for the KMS key. If you do not specify a value for
+	// PerformanceInsightsKMSKeyId, then Amazon RDS uses your default KMS key. There is
+	// a default KMS key for your Amazon Web Services account. Your Amazon Web Services
+	// account has a different default KMS key for each Amazon Web Services Region.
 	PerformanceInsightsKMSKeyId *string
 
 	// The amount of time, in days, to retain Performance Insights data. Valid values

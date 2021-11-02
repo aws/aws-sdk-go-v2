@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates an evidence folder to the specified assessment report in Audit
-// Manager.
+// Associates an evidence folder to an assessment report in a Audit Manager
+// assessment.
 func (c *Client) AssociateAssessmentReportEvidenceFolder(ctx context.Context, params *AssociateAssessmentReportEvidenceFolderInput, optFns ...func(*Options)) (*AssociateAssessmentReportEvidenceFolderOutput, error) {
 	if params == nil {
 		params = &AssociateAssessmentReportEvidenceFolderInput{}
@@ -29,12 +29,12 @@ func (c *Client) AssociateAssessmentReportEvidenceFolder(ctx context.Context, pa
 
 type AssociateAssessmentReportEvidenceFolderInput struct {
 
-	// The identifier for the specified assessment.
+	// The identifier for the assessment.
 	//
 	// This member is required.
 	AssessmentId *string
 
-	// The identifier for the folder in which evidence is stored.
+	// The identifier for the folder that the evidence is stored in.
 	//
 	// This member is required.
 	EvidenceFolderId *string

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables Audit Manager for the specified account.
+// Enables Audit Manager for the specified Amazon Web Services account.
 func (c *Client) RegisterAccount(ctx context.Context, params *RegisterAccountInput, optFns ...func(*Options)) (*RegisterAccountOutput, error) {
 	if params == nil {
 		params = &RegisterAccountInput{}

@@ -26,10 +26,10 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 	return out, nil
 }
 
-// The ARN for the role that manages access.
+//
 type TagResourceInput struct {
 
-	// The ARN of the target resource for tagging operations.
+	// The Amazon Resource Name (ARN) of the resource you want to add tags to.
 	//
 	// This member is required.
 	ResourceArn *string

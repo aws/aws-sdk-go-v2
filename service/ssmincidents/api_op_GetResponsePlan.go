@@ -49,7 +49,7 @@ type GetResponsePlanOutput struct {
 	// This member is required.
 	IncidentTemplate *types.IncidentTemplate
 
-	// The short format name of the response plan. Can't contain spaces.
+	// The short format name of the response plan. The name can't contain spaces.
 	//
 	// This member is required.
 	Name *string
@@ -57,7 +57,7 @@ type GetResponsePlanOutput struct {
 	// The actions that this response plan takes at the beginning of the incident.
 	Actions []types.Action
 
-	// The AWS Chatbot chat channel used for collaboration during an incident.
+	// The Chatbot chat channel used for collaboration during an incident.
 	ChatChannel types.ChatChannel
 
 	// The long format name of the response plan. Can contain spaces.

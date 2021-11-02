@@ -29,12 +29,12 @@ func (c *Client) UpdateAssessmentFramework(ctx context.Context, params *UpdateAs
 
 type UpdateAssessmentFrameworkInput struct {
 
-	// The control sets associated with the framework.
+	// The control sets that are associated with the framework.
 	//
 	// This member is required.
 	ControlSets []types.UpdateAssessmentFrameworkControlSet
 
-	// The identifier for the specified framework.
+	// The identifier for the framework.
 	//
 	// This member is required.
 	FrameworkId *string
@@ -48,7 +48,7 @@ type UpdateAssessmentFrameworkInput struct {
 	// HIPAA.
 	ComplianceType *string
 
-	// The description of the framework that is to be updated.
+	// The description of the updated framework.
 	Description *string
 
 	noSmithyDocumentSerde
@@ -56,7 +56,7 @@ type UpdateAssessmentFrameworkInput struct {
 
 type UpdateAssessmentFrameworkOutput struct {
 
-	// The name of the specified framework.
+	// The name of the framework.
 	Framework *types.Framework
 
 	// Metadata pertaining to the operation's result.

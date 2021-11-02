@@ -2899,6 +2899,78 @@ func awsRestjson1_serializeOpDocumentPutStudioMembersInput(v *PutStudioMembersIn
 	return nil
 }
 
+type awsRestjson1_serializeOpStartStreamingSession struct {
+}
+
+func (*awsRestjson1_serializeOpStartStreamingSession) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpStartStreamingSession) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartStreamingSessionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2020-08-01/studios/{studioId}/streaming-sessions/{sessionId}/start")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsStartStreamingSessionInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsStartStreamingSessionInput(v *StartStreamingSessionInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ClientToken != nil && len(*v.ClientToken) > 0 {
+		locationName := "X-Amz-Client-Token"
+		encoder.SetHeader(locationName).String(*v.ClientToken)
+	}
+
+	if v.SessionId == nil || len(*v.SessionId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member sessionId must not be empty")}
+	}
+	if v.SessionId != nil {
+		if err := encoder.SetURI("sessionId").String(*v.SessionId); err != nil {
+			return err
+		}
+	}
+
+	if v.StudioId == nil || len(*v.StudioId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member studioId must not be empty")}
+	}
+	if v.StudioId != nil {
+		if err := encoder.SetURI("studioId").String(*v.StudioId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpStartStudioSSOConfigurationRepair struct {
 }
 
@@ -2948,6 +3020,78 @@ func awsRestjson1_serializeOpHttpBindingsStartStudioSSOConfigurationRepairInput(
 	if v.ClientToken != nil && len(*v.ClientToken) > 0 {
 		locationName := "X-Amz-Client-Token"
 		encoder.SetHeader(locationName).String(*v.ClientToken)
+	}
+
+	if v.StudioId == nil || len(*v.StudioId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member studioId must not be empty")}
+	}
+	if v.StudioId != nil {
+		if err := encoder.SetURI("studioId").String(*v.StudioId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpStopStreamingSession struct {
+}
+
+func (*awsRestjson1_serializeOpStopStreamingSession) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpStopStreamingSession) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StopStreamingSessionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2020-08-01/studios/{studioId}/streaming-sessions/{sessionId}/stop")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsStopStreamingSessionInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsStopStreamingSessionInput(v *StopStreamingSessionInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ClientToken != nil && len(*v.ClientToken) > 0 {
+		locationName := "X-Amz-Client-Token"
+		encoder.SetHeader(locationName).String(*v.ClientToken)
+	}
+
+	if v.SessionId == nil || len(*v.SessionId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member sessionId must not be empty")}
+	}
+	if v.SessionId != nil {
+		if err := encoder.SetURI("sessionId").String(*v.SessionId); err != nil {
+			return err
+		}
 	}
 
 	if v.StudioId == nil || len(*v.StudioId) == 0 {
@@ -3923,6 +4067,11 @@ func awsRestjson1_serializeDocumentStreamConfigurationCreate(v *types.StreamConf
 	if v.MaxSessionLengthInMinutes != 0 {
 		ok := object.Key("maxSessionLengthInMinutes")
 		ok.Integer(v.MaxSessionLengthInMinutes)
+	}
+
+	if v.MaxStoppedSessionLengthInMinutes != 0 {
+		ok := object.Key("maxStoppedSessionLengthInMinutes")
+		ok.Integer(v.MaxStoppedSessionLengthInMinutes)
 	}
 
 	if v.StreamingImageIds != nil {

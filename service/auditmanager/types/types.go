@@ -14,50 +14,50 @@ type Assessment struct {
 	// The Amazon Resource Name (ARN) of the assessment.
 	Arn *string
 
-	// The account associated with the assessment.
+	// The Amazon Web Services account that's associated with the assessment.
 	AwsAccount *AWSAccount
 
-	// The framework from which the assessment was created.
+	// The framework that the assessment was created from.
 	Framework *AssessmentFramework
 
-	// The metadata for the specified assessment.
+	// The metadata for the assessment.
 	Metadata *AssessmentMetadata
 
-	// The tags associated with the assessment.
+	// The tags that are associated with the assessment.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
 
-// The control entity that represents a standard or custom control used in an Audit
-// Manager assessment.
+// The control entity that represents a standard control or a custom control in an
+// Audit Manager assessment.
 type AssessmentControl struct {
 
 	// The amount of evidence in the assessment report.
 	AssessmentReportEvidenceCount int32
 
-	// The list of comments attached to the specified control.
+	// The list of comments that's attached to the control.
 	Comments []ControlComment
 
-	// The description of the specified control.
+	// The description of the control.
 	Description *string
 
-	// The amount of evidence generated for the control.
+	// The amount of evidence that's generated for the control.
 	EvidenceCount int32
 
-	// The list of data sources for the specified evidence.
+	// The list of data sources for the evidence.
 	EvidenceSources []string
 
-	// The identifier for the specified control.
+	// The identifier for the control.
 	Id *string
 
-	// The name of the specified control.
+	// The name of the control.
 	Name *string
 
-	// The response of the specified control.
+	// The response of the control.
 	Response ControlResponse
 
-	// The status of the specified control.
+	// The status of the control.
 	Status ControlStatus
 
 	noSmithyDocumentSerde
@@ -66,10 +66,10 @@ type AssessmentControl struct {
 // Represents a set of controls in an Audit Manager assessment.
 type AssessmentControlSet struct {
 
-	// The list of controls contained with the control set.
+	// The list of controls that's contained with the control set.
 	Controls []AssessmentControl
 
-	// The delegations associated with the control set.
+	// The delegations that are associated with the control set.
 	Delegations []Delegation
 
 	// The description for the control set.
@@ -79,35 +79,36 @@ type AssessmentControlSet struct {
 	// name in a plain string format.
 	Id *string
 
-	// The total number of evidence objects uploaded manually to the control set.
+	// The total number of evidence objects that are uploaded manually to the control
+	// set.
 	ManualEvidenceCount int32
 
-	// The roles associated with the control set.
+	// The roles that are associated with the control set.
 	Roles []Role
 
 	// Specifies the current status of the control set.
 	Status ControlSetStatus
 
-	// The total number of evidence objects retrieved automatically for the control
-	// set.
+	// The total number of evidence objects that are retrieved automatically for the
+	// control set.
 	SystemEvidenceCount int32
 
 	noSmithyDocumentSerde
 }
 
-// The folder in which Audit Manager stores evidence for an assessment.
+// The folder where Audit Manager stores evidence for an assessment.
 type AssessmentEvidenceFolder struct {
 
-	// The identifier for the specified assessment.
+	// The identifier for the assessment.
 	AssessmentId *string
 
-	// The total count of evidence included in the assessment report.
+	// The total count of evidence that's included in the assessment report.
 	AssessmentReportSelectionCount int32
 
 	// The name of the user who created the evidence folder.
 	Author *string
 
-	// The unique identifier for the specified control.
+	// The unique identifier for the control.
 	ControlId *string
 
 	// The name of the control.
@@ -116,14 +117,14 @@ type AssessmentEvidenceFolder struct {
 	// The identifier for the control set.
 	ControlSetId *string
 
-	// The Amazon Web Service from which the evidence was collected.
+	// The Amazon Web Service that the evidence was collected from.
 	DataSource *string
 
 	// The date when the first evidence was added to the evidence folder.
 	Date *time.Time
 
-	// The total number of Amazon Web Services resources assessed to generate the
-	// evidence.
+	// The total number of Amazon Web Services resources that were assessed to generate
+	// the evidence.
 	EvidenceAwsServiceSourceCount int32
 
 	// The number of evidence that falls under the compliance check category. This
@@ -147,13 +148,13 @@ type AssessmentEvidenceFolder struct {
 	// evidence is collected from CloudTrail logs.
 	EvidenceByTypeUserActivityCount int32
 
-	// The amount of evidence included in the evidence folder.
+	// The amount of evidence that's included in the evidence folder.
 	EvidenceResourcesIncludedCount int32
 
-	// The identifier for the folder in which evidence is stored.
+	// The identifier for the folder that the evidence is stored in.
 	Id *string
 
-	// The name of the specified evidence folder.
+	// The name of the evidence folder.
 	Name *string
 
 	// The total amount of evidence in the evidence folder.
@@ -166,22 +167,22 @@ type AssessmentEvidenceFolder struct {
 // compliance standard.
 type AssessmentFramework struct {
 
-	// The Amazon Resource Name (ARN) of the specified framework.
+	// The Amazon Resource Name (ARN) of the framework.
 	Arn *string
 
-	// The control sets associated with the framework.
+	// The control sets that are associated with the framework.
 	ControlSets []AssessmentControlSet
 
 	// The unique identifier for the framework.
 	Id *string
 
-	// The metadata of a framework, such as the name, ID, description, and so on.
+	// The metadata of a framework, such as the name, ID, or description.
 	Metadata *FrameworkMetadata
 
 	noSmithyDocumentSerde
 }
 
-// The metadata associated with a standard or custom framework.
+// The metadata that's associated with a standard framework or a custom framework.
 type AssessmentFrameworkMetadata struct {
 
 	// The Amazon Resource Name (ARN) of the framework.
@@ -191,50 +192,102 @@ type AssessmentFrameworkMetadata struct {
 	// HIPAA.
 	ComplianceType *string
 
-	// The number of control sets associated with the specified framework.
+	// The number of control sets that are associated with the framework.
 	ControlSetsCount int32
 
-	// The number of controls associated with the specified framework.
+	// The number of controls that are associated with the framework.
 	ControlsCount int32
 
 	// Specifies when the framework was created.
 	CreatedAt *time.Time
 
-	// The description of the specified framework.
+	// The description of the framework.
 	Description *string
 
-	// The unique identified for the specified framework.
+	// The unique identifier for the framework.
 	Id *string
 
 	// Specifies when the framework was most recently updated.
 	LastUpdatedAt *time.Time
 
-	// The logo associated with the framework.
+	// The logo that's associated with the framework.
 	Logo *string
 
-	// The name of the specified framework.
+	// The name of the framework.
 	Name *string
 
-	// The framework type, such as standard or custom.
+	// The framework type, such as a standard framework or a custom framework.
 	Type FrameworkType
 
 	noSmithyDocumentSerde
 }
 
-// The metadata associated with the specified assessment.
+// Represents a share request for a custom framework in Audit Manager.
+type AssessmentFrameworkShareRequest struct {
+
+	// An optional comment from the sender about the share request.
+	Comment *string
+
+	// The compliance type that the shared custom framework supports, such as CIS or
+	// HIPAA.
+	ComplianceType *string
+
+	// The time when the share request was created.
+	CreationTime *time.Time
+
+	// The number of custom controls that are part of the shared custom framework.
+	CustomControlsCount *int32
+
+	// The Amazon Web Services account of the recipient.
+	DestinationAccount *string
+
+	// The Amazon Web Services Region of the recipient.
+	DestinationRegion *string
+
+	// The time when the share request expires.
+	ExpirationTime *time.Time
+
+	// The description of the shared custom framework.
+	FrameworkDescription *string
+
+	// The unique identifier for the shared custom framework.
+	FrameworkId *string
+
+	// The name of the custom framework that the share request is for.
+	FrameworkName *string
+
+	// The unique identifier for the share request.
+	Id *string
+
+	// Specifies when the share request was last updated.
+	LastUpdated *time.Time
+
+	// The Amazon Web Services account of the sender.
+	SourceAccount *string
+
+	// The number of standard controls that are part of the shared custom framework.
+	StandardControlsCount *int32
+
+	// The status of the share request.
+	Status ShareRequestStatus
+
+	noSmithyDocumentSerde
+}
+
+// The metadata that's associated with the specified assessment.
 type AssessmentMetadata struct {
 
-	// The destination in which evidence reports are stored for the specified
-	// assessment.
+	// The destination that evidence reports are stored in for the assessment.
 	AssessmentReportsDestination *AssessmentReportsDestination
 
-	// The name of a compliance standard related to the assessment, such as PCI-DSS.
+	// The name of the compliance standard that's related to the assessment, such as
+	// PCI-DSS.
 	ComplianceType *string
 
 	// Specifies when the assessment was created.
 	CreationTime *time.Time
 
-	// The delegations associated with the assessment.
+	// The delegations that are associated with the assessment.
 	Delegations []Delegation
 
 	// The description of the assessment.
@@ -249,10 +302,11 @@ type AssessmentMetadata struct {
 	// The name of the assessment.
 	Name *string
 
-	// The roles associated with the assessment.
+	// The roles that are associated with the assessment.
 	Roles []Role
 
-	// The wrapper of accounts and services in scope for the assessment.
+	// The wrapper of Amazon Web Services accounts and services that are in scope for
+	// the assessment.
 	Scope *Scope
 
 	// The overall status of the assessment.
@@ -261,16 +315,17 @@ type AssessmentMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// A metadata object associated with an assessment in Audit Manager.
+// A metadata object that's associated with an assessment in Audit Manager.
 type AssessmentMetadataItem struct {
 
-	// The name of the compliance standard related to the assessment, such as PCI-DSS.
+	// The name of the compliance standard that's related to the assessment, such as
+	// PCI-DSS.
 	ComplianceType *string
 
 	// Specifies when the assessment was created.
 	CreationTime *time.Time
 
-	// The delegations associated with the assessment.
+	// The delegations that are associated with the assessment.
 	Delegations []Delegation
 
 	// The unique identifier for the assessment.
@@ -282,7 +337,7 @@ type AssessmentMetadataItem struct {
 	// The name of the assessment.
 	Name *string
 
-	// The roles associated with the assessment.
+	// The roles that are associated with the assessment.
 	Roles []Role
 
 	// The current status of the assessment.
@@ -291,10 +346,10 @@ type AssessmentMetadataItem struct {
 	noSmithyDocumentSerde
 }
 
-// A finalized document generated from an Audit Manager assessment. These reports
-// summarize the relevant evidence collected for your audit, and link to the
-// relevant evidence folders which are named and organized according to the
-// controls specified in your assessment.
+// A finalized document that's generated from an Audit Manager assessment. These
+// reports summarize the relevant evidence that was collected for your audit, and
+// link to the relevant evidence folders. These evidence folders are named and
+// organized according to the controls that are specified in your assessment.
 type AssessmentReport struct {
 
 	// The identifier for the specified assessment.
@@ -306,7 +361,7 @@ type AssessmentReport struct {
 	// The name of the user who created the assessment report.
 	Author *string
 
-	// The identifier for the specified account.
+	// The identifier for the specified Amazon Web Services account.
 	AwsAccountId *string
 
 	// Specifies when the assessment report was created.
@@ -315,10 +370,10 @@ type AssessmentReport struct {
 	// The description of the specified assessment report.
 	Description *string
 
-	// The unique identifier for the specified assessment report.
+	// The unique identifier for the assessment report.
 	Id *string
 
-	// The name given to the assessment report.
+	// The name that's given to the assessment report.
 	Name *string
 
 	// The current status of the specified assessment report.
@@ -331,10 +386,10 @@ type AssessmentReport struct {
 // more meaningful errors than a simple string message.
 type AssessmentReportEvidenceError struct {
 
-	// The error code returned by the AssessmentReportEvidence API.
+	// The error code that the AssessmentReportEvidence API returned.
 	ErrorCode *string
 
-	// The error message returned by the AssessmentReportEvidence API.
+	// The error message that the AssessmentReportEvidence API returned.
 	ErrorMessage *string
 
 	// The identifier for the evidence.
@@ -343,7 +398,7 @@ type AssessmentReportEvidenceError struct {
 	noSmithyDocumentSerde
 }
 
-// The metadata objects associated with the specified assessment report.
+// The metadata objects that are associated with the specified assessment report.
 type AssessmentReportMetadata struct {
 
 	// The unique identifier for the associated assessment.
@@ -358,7 +413,7 @@ type AssessmentReportMetadata struct {
 	// Specifies when the assessment report was created.
 	CreationTime *time.Time
 
-	// The description of the specified assessment report.
+	// The description of the assessment report.
 	Description *string
 
 	// The unique identifier for the assessment report.
@@ -373,7 +428,7 @@ type AssessmentReportMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// The location in which Audit Manager saves assessment reports for the given
+// The location where Audit Manager saves assessment reports for the given
 // assessment.
 type AssessmentReportsDestination struct {
 
@@ -386,22 +441,23 @@ type AssessmentReportsDestination struct {
 	noSmithyDocumentSerde
 }
 
-// The wrapper of account details, such as account ID, email address, and so on.
+// The wrapper of Amazon Web Services account details, such as account ID or email
+// address.
 type AWSAccount struct {
 
-	// The email address associated with the specified account.
+	// The email address that's associated with the Amazon Web Services account.
 	EmailAddress *string
 
-	// The identifier for the specified account.
+	// The identifier for the Amazon Web Services account.
 	Id *string
 
-	// The name of the specified account.
+	// The name of the Amazon Web Services account.
 	Name *string
 
 	noSmithyDocumentSerde
 }
 
-// An Amazon Web Service such as Amazon S3, CloudTrail, and so on.
+// An Amazon Web Service such as Amazon S3 or CloudTrail.
 type AWSService struct {
 
 	// The name of the Amazon Web Service.
@@ -417,10 +473,10 @@ type BatchCreateDelegationByAssessmentError struct {
 	// The API request to batch create delegations in Audit Manager.
 	CreateDelegationRequest *CreateDelegationRequest
 
-	// The error code returned by the BatchCreateDelegationByAssessment API.
+	// The error code that the BatchCreateDelegationByAssessment API returned.
 	ErrorCode *string
 
-	// The error message returned by the BatchCreateDelegationByAssessment API.
+	// The error message that the BatchCreateDelegationByAssessment API returned.
 	ErrorMessage *string
 
 	noSmithyDocumentSerde
@@ -430,13 +486,13 @@ type BatchCreateDelegationByAssessmentError struct {
 // provide more meaningful errors than a simple string message.
 type BatchDeleteDelegationByAssessmentError struct {
 
-	// The identifier for the specified delegation.
+	// The identifier for the delegation.
 	DelegationId *string
 
-	// The error code returned by the BatchDeleteDelegationByAssessment API.
+	// The error code that the BatchDeleteDelegationByAssessment API returned.
 	ErrorCode *string
 
-	// The error message returned by the BatchDeleteDelegationByAssessment API.
+	// The error message that the BatchDeleteDelegationByAssessment API returned.
 	ErrorMessage *string
 
 	noSmithyDocumentSerde
@@ -446,35 +502,36 @@ type BatchDeleteDelegationByAssessmentError struct {
 // to provide more meaningful errors than a simple string message.
 type BatchImportEvidenceToAssessmentControlError struct {
 
-	// The error code returned by the BatchImportEvidenceToAssessmentControl API.
+	// The error code that the BatchImportEvidenceToAssessmentControl API returned.
 	ErrorCode *string
 
-	// The error message returned by the BatchImportEvidenceToAssessmentControl API.
+	// The error message that the BatchImportEvidenceToAssessmentControl API returned.
 	ErrorMessage *string
 
-	// Manual evidence that cannot be collected automatically by Audit Manager.
+	// Manual evidence that can't be collected automatically by Audit Manager.
 	ManualEvidence *ManualEvidence
 
 	noSmithyDocumentSerde
 }
 
-// The record of a change within Audit Manager, such as a modified assessment, a
-// delegated control set, and so on.
+// The record of a change within Audit Manager. For example, this could be the
+// status change of an assessment or the delegation of a control set.
 type ChangeLog struct {
 
-	// The action performed.
+	// The action that was performed.
 	Action ActionEnum
 
-	// The time of creation for the changelog object.
+	// The time when the action was performed and the changelog record was created.
 	CreatedAt *time.Time
 
 	// The IAM user or role that performed the action.
 	CreatedBy *string
 
-	// The name of the changelog object.
+	// The name of the object that changed. This could be the name of an assessment,
+	// control, or control set.
 	ObjectName *string
 
-	// The changelog object type, such as an assessment, control, or control set.
+	// The object that was changed, such as an assessment, control, or control set.
 	ObjectType ObjectTypeEnum
 
 	noSmithyDocumentSerde
@@ -483,19 +540,19 @@ type ChangeLog struct {
 // A control in Audit Manager.
 type Control struct {
 
-	// The recommended actions to carry out if the control is not fulfilled.
+	// The recommended actions to carry out if the control isn't fulfilled.
 	ActionPlanInstructions *string
 
 	// The title of the action plan for remediating the control.
 	ActionPlanTitle *string
 
-	// The Amazon Resource Name (ARN) of the specified control.
+	// The Amazon Resource Name (ARN) of the control.
 	Arn *string
 
-	// The data mapping sources for the specified control.
+	// The data mapping sources for the control.
 	ControlMappingSources []ControlMappingSource
 
-	// The data source that determines from where Audit Manager collects evidence for
+	// The data source that determines where Audit Manager collects evidence from for
 	// the control.
 	ControlSources *string
 
@@ -505,7 +562,7 @@ type Control struct {
 	// The IAM user or role that created the control.
 	CreatedBy *string
 
-	// The description of the specified control.
+	// The description of the control.
 	Description *string
 
 	// The unique identifier for the control.
@@ -517,23 +574,23 @@ type Control struct {
 	// The IAM user or role that most recently updated the control.
 	LastUpdatedBy *string
 
-	// The name of the specified control.
+	// The name of the control.
 	Name *string
 
 	// The tags associated with the control.
 	Tags map[string]string
 
-	// The steps to follow to determine if the control has been satisfied.
+	// The steps that you should follow to determine if the control has been satisfied.
 	TestingInformation *string
 
-	// The type of control, such as custom or standard.
+	// The type of control, such as a custom control or a standard control.
 	Type ControlType
 
 	noSmithyDocumentSerde
 }
 
-// A comment posted by a user on a control. This includes the author's name, the
-// comment text, and a timestamp.
+// A comment that's posted by a user on a control. This includes the author's name,
+// the comment text, and a timestamp.
 type ControlComment struct {
 
 	// The name of the user who authored the comment.
@@ -548,59 +605,59 @@ type ControlComment struct {
 	noSmithyDocumentSerde
 }
 
-// The data source that determines from where Audit Manager collects evidence for
+// The data source that determines where Audit Manager collects evidence from for
 // the control.
 type ControlMappingSource struct {
 
-	// The description of the specified source.
+	// The description of the source.
 	SourceDescription *string
 
-	// The frequency of evidence collection for the specified control mapping source.
+	// The frequency of evidence collection for the control mapping source.
 	SourceFrequency SourceFrequency
 
-	// The unique identifier for the specified source.
+	// The unique identifier for the source.
 	SourceId *string
 
 	// The keyword to search for in CloudTrail logs, Config rules, Security Hub checks,
 	// and Amazon Web Services API names.
 	SourceKeyword *SourceKeyword
 
-	// The name of the specified source.
+	// The name of the source.
 	SourceName *string
 
-	// The setup option for the data source, which reflects if the evidence collection
-	// is automated or manual.
+	// The setup option for the data source. This option reflects if the evidence
+	// collection is automated or manual.
 	SourceSetUpOption SourceSetUpOption
 
 	// Specifies one of the five types of data sources for evidence collection.
 	SourceType SourceType
 
-	// The instructions for troubleshooting the specified control.
+	// The instructions for troubleshooting the control.
 	TroubleshootingText *string
 
 	noSmithyDocumentSerde
 }
 
-// The metadata associated with the specified standard or custom control.
+// The metadata that's associated with the standard control or custom control.
 type ControlMetadata struct {
 
-	// The Amazon Resource Name (ARN) of the specified control.
+	// The Amazon Resource Name (ARN) of the control.
 	Arn *string
 
-	// The data source that determines from where Audit Manager collects evidence for
+	// The data source that determines where Audit Manager collects evidence from for
 	// the control.
 	ControlSources *string
 
 	// Specifies when the control was created.
 	CreatedAt *time.Time
 
-	// The unique identifier for the specified control.
+	// The unique identifier for the control.
 	Id *string
 
 	// Specifies when the control was most recently updated.
 	LastUpdatedAt *time.Time
 
-	// The name of the specified control.
+	// The name of the control.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -622,8 +679,8 @@ type ControlSet struct {
 	noSmithyDocumentSerde
 }
 
-// Control entity attributes that uniquely identify an existing control to be added
-// to a framework in Audit Manager.
+// The control entity attributes that uniquely identify an existing control to be
+// added to a framework in Audit Manager.
 type CreateAssessmentFrameworkControl struct {
 
 	// The unique identifier of the control.
@@ -633,30 +690,30 @@ type CreateAssessmentFrameworkControl struct {
 }
 
 // A controlSet entity that represents a collection of controls in Audit Manager.
-// This does not contain the control set ID.
+// This doesn't contain the control set ID.
 type CreateAssessmentFrameworkControlSet struct {
 
-	// The name of the specified control set.
+	// The name of the control set.
 	//
 	// This member is required.
 	Name *string
 
-	// The list of controls within the control set. This does not contain the control
+	// The list of controls within the control set. This doesn't contain the control
 	// set ID.
 	Controls []CreateAssessmentFrameworkControl
 
 	noSmithyDocumentSerde
 }
 
-// Control mapping fields that represent the source for evidence collection, along
-// with related parameters and metadata. This does not contain mappingID.
+// The control mapping fields that represent the source for evidence collection,
+// along with related parameters and metadata. This doesn't contain mappingID.
 type CreateControlMappingSource struct {
 
-	// The description of the data source that determines from where Audit Manager
-	// collects evidence for the control.
+	// The description of the data source that determines where Audit Manager collects
+	// evidence from for the control.
 	SourceDescription *string
 
-	// The frequency of evidence collection for the specified control mapping source.
+	// The frequency of evidence collection for the control mapping source.
 	SourceFrequency SourceFrequency
 
 	// The keyword to search for in CloudTrail logs, Config rules, Security Hub checks,
@@ -673,17 +730,17 @@ type CreateControlMappingSource struct {
 	// Specifies one of the five types of data sources for evidence collection.
 	SourceType SourceType
 
-	// The instructions for troubleshooting the specified control.
+	// The instructions for troubleshooting the control.
 	TroubleshootingText *string
 
 	noSmithyDocumentSerde
 }
 
-// A collection of attributes used to create a delegation for an assessment in
-// Audit Manager.
+// A collection of attributes that's used to create a delegation for an assessment
+// in Audit Manager.
 type CreateDelegationRequest struct {
 
-	// A comment related to the delegation request.
+	// A comment that's related to the delegation request.
 	Comment *string
 
 	// The unique identifier for the control set.
@@ -703,16 +760,16 @@ type CreateDelegationRequest struct {
 // The assignment of a control set to a delegate for review.
 type Delegation struct {
 
-	// The identifier for the associated assessment.
+	// The identifier for the assessment that's associated with the delegation.
 	AssessmentId *string
 
-	// The name of the associated assessment.
+	// The name of the assessment that's associated with the delegation.
 	AssessmentName *string
 
-	// The comment related to the delegation.
+	// The comment that's related to the delegation.
 	Comment *string
 
-	// The identifier for the associated control set.
+	// The identifier for the control set that's associated with the delegation.
 	ControlSetId *string
 
 	// The IAM user or role that created the delegation.
@@ -741,16 +798,16 @@ type Delegation struct {
 	noSmithyDocumentSerde
 }
 
-// The metadata associated with the specified delegation.
+// The metadata that's associated with the delegation.
 type DelegationMetadata struct {
 
-	// The unique identifier for the specified assessment.
+	// The unique identifier for the assessment.
 	AssessmentId *string
 
 	// The name of the associated assessment.
 	AssessmentName *string
 
-	// Specifies the name of the control set delegated for review.
+	// Specifies the name of the control set that was delegated for review.
 	ControlSetName *string
 
 	// Specifies when the delegation was created.
@@ -762,7 +819,7 @@ type DelegationMetadata struct {
 	// The Amazon Resource Name (ARN) of the IAM role.
 	RoleArn *string
 
-	// The current status of the delgation.
+	// The current status of the delegation.
 	Status DelegationStatus
 
 	noSmithyDocumentSerde
@@ -776,14 +833,16 @@ type Evidence struct {
 	// Specifies whether the evidence is included in the assessment report.
 	AssessmentReportSelection *string
 
-	// The names and values used by the evidence event, including an attribute name
-	// (such as allowUsersToChangePassword) and value (such as true or false).
+	// The names and values that are used by the evidence event. This includes an
+	// attribute name (such as allowUsersToChangePassword) and value (such as true or
+	// false).
 	Attributes map[string]string
 
-	// The identifier for the specified account.
+	// The identifier for the Amazon Web Services account.
 	AwsAccountId *string
 
-	// The account from which the evidence is collected, and its organization path.
+	// The Amazon Web Services account that the evidence is collected from, and its
+	// organization path.
 	AwsOrganization *string
 
 	// The evaluation status for evidence that falls under the compliance check
@@ -792,31 +851,32 @@ type Evidence struct {
 	// shown.
 	ComplianceCheck *string
 
-	// The data source from which the specified evidence was collected.
+	// The data source where the evidence was collected from.
 	DataSource *string
 
-	// The name of the specified evidence event.
+	// The name of the evidence event.
 	EventName *string
 
-	// The Amazon Web Service from which the evidence is collected.
+	// The Amazon Web Service that the evidence is collected from.
 	EventSource *string
 
-	// The identifier for the specified account.
+	// The identifier for the Amazon Web Services account.
 	EvidenceAwsAccountId *string
 
 	// The type of automated evidence.
 	EvidenceByType *string
 
-	// The identifier for the folder in which the evidence is stored.
+	// The identifier for the folder that the evidence is stored in.
 	EvidenceFolderId *string
 
-	// The unique identifier for the IAM user or role associated with the evidence.
+	// The unique identifier for the IAM user or role that's associated with the
+	// evidence.
 	IamId *string
 
 	// The identifier for the evidence.
 	Id *string
 
-	// The list of resources assessed to generate the evidence.
+	// The list of resources that are assessed to generate the evidence.
 	ResourcesIncluded []Resource
 
 	// The timestamp that represents when the evidence was collected.
@@ -825,21 +885,21 @@ type Evidence struct {
 	noSmithyDocumentSerde
 }
 
-// The file used to structure and automate Audit Manager assessments for a given
-// compliance standard.
+// The file that's used to structure and automate Audit Manager assessments for a
+// given compliance standard.
 type Framework struct {
 
-	// The Amazon Resource Name (ARN) of the specified framework.
+	// The Amazon Resource Name (ARN) of the framework.
 	Arn *string
 
 	// The compliance type that the new custom framework supports, such as CIS or
 	// HIPAA.
 	ComplianceType *string
 
-	// The control sets associated with the framework.
+	// The control sets that are associated with the framework.
 	ControlSets []ControlSet
 
-	// The sources from which Audit Manager collects evidence for the control.
+	// The sources that Audit Manager collects evidence from for the control.
 	ControlSources *string
 
 	// Specifies when the framework was created.
@@ -848,10 +908,10 @@ type Framework struct {
 	// The IAM user or role that created the framework.
 	CreatedBy *string
 
-	// The description of the specified framework.
+	// The description of the framework.
 	Description *string
 
-	// The unique identifier for the specified framework.
+	// The unique identifier for the framework.
 	Id *string
 
 	// Specifies when the framework was most recently updated.
@@ -860,31 +920,32 @@ type Framework struct {
 	// The IAM user or role that most recently updated the framework.
 	LastUpdatedBy *string
 
-	// The logo associated with the framework.
+	// The logo that's associated with the framework.
 	Logo *string
 
-	// The name of the specified framework.
+	// The name of the framework.
 	Name *string
 
-	// The tags associated with the framework.
+	// The tags that are associated with the framework.
 	Tags map[string]string
 
-	// The framework type, such as custom or standard.
+	// The framework type, such as a custom framework or a standard framework.
 	Type FrameworkType
 
 	noSmithyDocumentSerde
 }
 
-// The metadata of a framework, such as the name, ID, description, and so on.
+// The metadata of a framework, such as the name, ID, or description.
 type FrameworkMetadata struct {
 
-	// The compliance standard associated with the framework, such as PCI-DSS or HIPAA.
+	// The compliance standard that's associated with the framework. For example, this
+	// could be PCI DSS or HIPAA.
 	ComplianceType *string
 
 	// The description of the framework.
 	Description *string
 
-	// The logo associated with the framework.
+	// The logo that's associated with the framework.
 	Logo *string
 
 	// The name of the framework.
@@ -893,7 +954,7 @@ type FrameworkMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// Evidence that is uploaded to Audit Manager manually.
+// Evidence that's uploaded to Audit Manager manually.
 type ManualEvidence struct {
 
 	// The Amazon S3 URL that points to a manual evidence object.
@@ -902,18 +963,18 @@ type ManualEvidence struct {
 	noSmithyDocumentSerde
 }
 
-// The notification used to inform a user of an update in Audit Manager. For
-// example, this includes the notification that is sent when a control set is
-// delegated for review.
+// The notification that informs a user of an update in Audit Manager. For example,
+// this includes the notification that's sent when a control set is delegated for
+// review.
 type Notification struct {
 
-	// The identifier for the specified assessment.
+	// The identifier for the assessment.
 	AssessmentId *string
 
 	// The name of the related assessment.
 	AssessmentName *string
 
-	// The identifier for the specified control set.
+	// The identifier for the control set.
 	ControlSetId *string
 
 	// Specifies the name of the control set that the notification is about.
@@ -934,20 +995,20 @@ type Notification struct {
 	noSmithyDocumentSerde
 }
 
-// A system asset that is evaluated in an Audit Manager assessment.
+// A system asset that's evaluated in an Audit Manager assessment.
 type Resource struct {
 
-	// The Amazon Resource Name (ARN) for the specified resource.
+	// The Amazon Resource Name (ARN) for the resource.
 	Arn *string
 
-	// The value of the specified resource.
+	// The value of the resource.
 	Value *string
 
 	noSmithyDocumentSerde
 }
 
 // The wrapper that contains the Audit Manager role information of the current
-// user, such as the role type and IAM Amazon Resource Name (ARN).
+// user. This includes the role type and IAM Amazon Resource Name (ARN).
 type Role struct {
 
 	// The Amazon Resource Name (ARN) of the IAM role.
@@ -961,26 +1022,29 @@ type Role struct {
 	noSmithyDocumentSerde
 }
 
-// The wrapper that contains the accounts and services in scope for the assessment.
+// The wrapper that contains the Amazon Web Services accounts and services that are
+// in scope for the assessment.
 type Scope struct {
 
-	// The accounts included in the scope of the assessment.
+	// The Amazon Web Services accounts that are included in the scope of the
+	// assessment.
 	AwsAccounts []AWSAccount
 
-	// The Amazon Web Services services included in the scope of the assessment.
+	// The Amazon Web Services services that are included in the scope of the
+	// assessment.
 	AwsServices []AWSService
 
 	noSmithyDocumentSerde
 }
 
-// The metadata associated with the specified Amazon Web Service.
+// The metadata that's associated with the Amazon Web Service.
 type ServiceMetadata struct {
 
-	// The category in which the Amazon Web Service belongs, such as compute, storage,
-	// database, and so on.
+	// The category that the Amazon Web Service belongs to, such as compute, storage,
+	// or database.
 	Category *string
 
-	// The description of the specified Amazon Web Service.
+	// The description of the Amazon Web Service.
 	Description *string
 
 	// The display name of the Amazon Web Service.
@@ -1017,19 +1081,19 @@ type Settings struct {
 // and Amazon Web Services API names.
 type SourceKeyword struct {
 
-	// The method of input for the specified keyword.
+	// The method of input for the keyword.
 	KeywordInputType KeywordInputType
 
-	// The value of the keyword used to search CloudTrail logs, Config rules, Security
-	// Hub checks, and Amazon Web Services API names when mapping a control data
-	// source.
+	// The value of the keyword that's used to search CloudTrail logs, Config rules,
+	// Security Hub checks, and Amazon Web Services API names when mapping a control
+	// data source.
 	KeywordValue *string
 
 	noSmithyDocumentSerde
 }
 
 // A controlSet entity that represents a collection of controls in Audit Manager.
-// This does not contain the control set ID.
+// This doesn't contain the control set ID.
 type UpdateAssessmentFrameworkControlSet struct {
 
 	// The name of the control set.
@@ -1037,7 +1101,7 @@ type UpdateAssessmentFrameworkControlSet struct {
 	// This member is required.
 	Name *string
 
-	// The list of controls contained within the control set.
+	// The list of controls that are contained within the control set.
 	Controls []CreateAssessmentFrameworkControl
 
 	// The unique identifier for the control set.
@@ -1046,11 +1110,11 @@ type UpdateAssessmentFrameworkControlSet struct {
 	noSmithyDocumentSerde
 }
 
-// A uniform resource locator, used as a unique identifier to locate a resource on
-// the internet.
+// Short for uniform resource locator. A URL is used as a unique identifier to
+// locate a resource on the internet.
 type URL struct {
 
-	// The name or word used as a hyperlink to the URL.
+	// The name or word that's used as a hyperlink to the URL.
 	HyperlinkName *string
 
 	// The unique identifier for the internet resource.
@@ -1059,8 +1123,7 @@ type URL struct {
 	noSmithyDocumentSerde
 }
 
-// Indicates that the request has invalid or missing parameters for the specified
-// field.
+// Indicates that the request has invalid or missing parameters for the field.
 type ValidationExceptionField struct {
 
 	// The body of the error message.

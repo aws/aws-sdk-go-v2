@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates a list of evidence from the specified assessment report in Audit
-// Manager.
+// Disassociates a list of evidence from an assessment report in Audit Manager.
 func (c *Client) BatchDisassociateAssessmentReportEvidence(ctx context.Context, params *BatchDisassociateAssessmentReportEvidenceInput, optFns ...func(*Options)) (*BatchDisassociateAssessmentReportEvidenceOutput, error) {
 	if params == nil {
 		params = &BatchDisassociateAssessmentReportEvidenceInput{}
@@ -30,12 +29,12 @@ func (c *Client) BatchDisassociateAssessmentReportEvidence(ctx context.Context, 
 
 type BatchDisassociateAssessmentReportEvidenceInput struct {
 
-	// The identifier for the specified assessment.
+	// The identifier for the assessment.
 	//
 	// This member is required.
 	AssessmentId *string
 
-	// The identifier for the folder in which evidence is stored.
+	// The identifier for the folder that the evidence is stored in.
 	//
 	// This member is required.
 	EvidenceFolderId *string
@@ -50,7 +49,8 @@ type BatchDisassociateAssessmentReportEvidenceInput struct {
 
 type BatchDisassociateAssessmentReportEvidenceOutput struct {
 
-	// A list of errors returned by the BatchDisassociateAssessmentReportEvidence API.
+	// A list of errors that the BatchDisassociateAssessmentReportEvidence API
+	// returned.
 	Errors []types.AssessmentReportEvidenceError
 
 	// The identifier for the evidence.

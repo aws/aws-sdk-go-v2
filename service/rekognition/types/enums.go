@@ -96,6 +96,72 @@ func (ContentModerationSortBy) Values() []ContentModerationSortBy {
 	}
 }
 
+type DatasetStatus string
+
+// Enum values for DatasetStatus
+const (
+	DatasetStatusCreateInProgress DatasetStatus = "CREATE_IN_PROGRESS"
+	DatasetStatusCreateComplete   DatasetStatus = "CREATE_COMPLETE"
+	DatasetStatusCreateFailed     DatasetStatus = "CREATE_FAILED"
+	DatasetStatusUpdateInProgress DatasetStatus = "UPDATE_IN_PROGRESS"
+	DatasetStatusUpdateComplete   DatasetStatus = "UPDATE_COMPLETE"
+	DatasetStatusUpdateFailed     DatasetStatus = "UPDATE_FAILED"
+	DatasetStatusDeleteInProgress DatasetStatus = "DELETE_IN_PROGRESS"
+)
+
+// Values returns all known values for DatasetStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DatasetStatus) Values() []DatasetStatus {
+	return []DatasetStatus{
+		"CREATE_IN_PROGRESS",
+		"CREATE_COMPLETE",
+		"CREATE_FAILED",
+		"UPDATE_IN_PROGRESS",
+		"UPDATE_COMPLETE",
+		"UPDATE_FAILED",
+		"DELETE_IN_PROGRESS",
+	}
+}
+
+type DatasetStatusMessageCode string
+
+// Enum values for DatasetStatusMessageCode
+const (
+	DatasetStatusMessageCodeSuccess      DatasetStatusMessageCode = "SUCCESS"
+	DatasetStatusMessageCodeServiceError DatasetStatusMessageCode = "SERVICE_ERROR"
+	DatasetStatusMessageCodeClientError  DatasetStatusMessageCode = "CLIENT_ERROR"
+)
+
+// Values returns all known values for DatasetStatusMessageCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DatasetStatusMessageCode) Values() []DatasetStatusMessageCode {
+	return []DatasetStatusMessageCode{
+		"SUCCESS",
+		"SERVICE_ERROR",
+		"CLIENT_ERROR",
+	}
+}
+
+type DatasetType string
+
+// Enum values for DatasetType
+const (
+	DatasetTypeTrain DatasetType = "TRAIN"
+	DatasetTypeTest  DatasetType = "TEST"
+)
+
+// Values returns all known values for DatasetType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (DatasetType) Values() []DatasetType {
+	return []DatasetType{
+		"TRAIN",
+		"TEST",
+	}
+}
+
 type EmotionName string
 
 // Enum values for EmotionName

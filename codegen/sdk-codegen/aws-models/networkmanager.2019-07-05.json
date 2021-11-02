@@ -35,18 +35,18 @@
                 "Zone": {
                     "target": "com.amazonaws.networkmanager#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Zone the device is located in. This can be the ID of an Availability Zone, Local Zone, Wavelength Zone, or an Outpost.</p>"
+                        "smithy.api#documentation": "<p>The Zone that the device is located in. Specify the ID of an Availability Zone, Local\n            Zone, Wavelength Zone, or an Outpost.</p>"
                     }
                 },
                 "SubnetArn": {
                     "target": "com.amazonaws.networkmanager#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the subnet the device is located in.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the subnet that the device is located in.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies a location in AWS.</p>"
+                "smithy.api#documentation": "<p>Specifies a location in Amazon Web Services.</p>"
             }
         },
         "com.amazonaws.networkmanager#AccessDeniedException": {
@@ -111,7 +111,7 @@
                 "CustomerGatewayArn": {
                     "target": "com.amazonaws.networkmanager#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the customer gateway. For more information, see\n                <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonec2.html#amazonec2-resources-for-iam-policies\">Resources Defined by Amazon EC2</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the customer gateway.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -331,6 +331,9 @@
                 "smithy.api#documentation": "<p>Describes bandwidth information.</p>"
             }
         },
+        "com.amazonaws.networkmanager#Boolean": {
+            "type": "boolean"
+        },
         "com.amazonaws.networkmanager#ConflictException": {
             "type": "structure",
             "members": {
@@ -435,6 +438,32 @@
                 "smithy.api#documentation": "<p>Describes a connection.</p>"
             }
         },
+        "com.amazonaws.networkmanager#ConnectionHealth": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.networkmanager#ConnectionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection type.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.networkmanager#ConnectionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection status.</p>"
+                    }
+                },
+                "Timestamp": {
+                    "target": "com.amazonaws.networkmanager#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the status was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes connection health.</p>"
+            }
+        },
         "com.amazonaws.networkmanager#ConnectionList": {
             "type": "list",
             "member": {
@@ -460,6 +489,36 @@
                     {
                         "value": "UPDATING",
                         "name": "updating"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.networkmanager#ConnectionStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "UP",
+                        "name": "UP"
+                    },
+                    {
+                        "value": "DOWN",
+                        "name": "DOWN"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.networkmanager#ConnectionType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "BGP",
+                        "name": "BGP"
+                    },
+                    {
+                        "value": "IPSEC",
+                        "name": "IPSEC"
                     }
                 ]
             }
@@ -617,13 +676,13 @@
                 "AWSLocation": {
                     "target": "com.amazonaws.networkmanager#AWSLocation",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS location of the device.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services location of the device, if applicable. For an on-premises device, you can omit this parameter.</p>"
                     }
                 },
                 "Description": {
                     "target": "com.amazonaws.networkmanager#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A description of the device.</p>\n        <p>Length Constraints: Maximum length of 256 characters.</p>"
+                        "smithy.api#documentation": "<p>A description of the device.</p>\n        <p>Constraints: Maximum length of 256 characters.</p>"
                     }
                 },
                 "Type": {
@@ -635,19 +694,19 @@
                 "Vendor": {
                     "target": "com.amazonaws.networkmanager#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The vendor of the device.</p>\n        <p>Length Constraints: Maximum length of 128 characters.</p>"
+                        "smithy.api#documentation": "<p>The vendor of the device.</p>\n        <p>Constraints: Maximum length of 128 characters.</p>"
                     }
                 },
                 "Model": {
                     "target": "com.amazonaws.networkmanager#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The model of the device.</p>\n        <p>Length Constraints: Maximum length of 128 characters.</p>"
+                        "smithy.api#documentation": "<p>The model of the device.</p>\n        <p>Constraints: Maximum length of 128 characters.</p>"
                     }
                 },
                 "SerialNumber": {
                     "target": "com.amazonaws.networkmanager#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The serial number of the device.</p>\n        <p>Length Constraints: Maximum length of 128 characters.</p>"
+                        "smithy.api#documentation": "<p>The serial number of the device.</p>\n        <p>Constraints: Maximum length of 128 characters.</p>"
                     }
                 },
                 "Location": {
@@ -724,7 +783,7 @@
                 "Description": {
                     "target": "com.amazonaws.networkmanager#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A description of the global network.</p>\n        <p>Length Constraints: Maximum length of 256 characters.</p>"
+                        "smithy.api#documentation": "<p>A description of the global network.</p>\n        <p>Constraints: Maximum length of 256 characters.</p>"
                     }
                 },
                 "Tags": {
@@ -800,13 +859,13 @@
                 "Description": {
                     "target": "com.amazonaws.networkmanager#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A description of the link.</p>\n        <p>Length Constraints: Maximum length of 256 characters.</p>"
+                        "smithy.api#documentation": "<p>A description of the link.</p>\n        <p>Constraints: Maximum length of 256 characters.</p>"
                     }
                 },
                 "Type": {
                     "target": "com.amazonaws.networkmanager#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the link.</p>\n        <p>Constraints: Cannot include the following characters: | \\ ^</p>\n        <p>Length Constraints: Maximum length of 128 characters.</p>"
+                        "smithy.api#documentation": "<p>The type of the link.</p>\n        <p>Constraints: Maximum length of 128 characters. Cannot include the following characters: | \\ ^</p>"
                     }
                 },
                 "Bandwidth": {
@@ -819,7 +878,7 @@
                 "Provider": {
                     "target": "com.amazonaws.networkmanager#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The provider of the link.</p>\n        <p>Constraints: Cannot include the following characters: | \\ ^</p>\n        <p>Length Constraints: Maximum length of 128 characters.</p>"
+                        "smithy.api#documentation": "<p>The provider of the link.</p>\n        <p>Constraints: Maximum length of 128 characters. Cannot include the following characters: | \\ ^</p>"
                     }
                 },
                 "SiteId": {
@@ -902,7 +961,7 @@
                 "Description": {
                     "target": "com.amazonaws.networkmanager#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A description of your site.</p>\n        <p>Length Constraints: Maximum length of 256 characters.</p>"
+                        "smithy.api#documentation": "<p>A description of your site.</p>\n        <p>Constraints: Maximum length of 256 characters.</p>"
                     }
                 },
                 "Location": {
@@ -1512,7 +1571,7 @@
                 "AWSLocation": {
                     "target": "com.amazonaws.networkmanager#AWSLocation",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS location of the device.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services location of the device.</p>"
                     }
                 },
                 "Description": {
@@ -1660,7 +1719,7 @@
                 "CustomerGatewayArn": {
                     "target": "com.amazonaws.networkmanager#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the customer gateway. For more information, see\n                <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonec2.html#amazonec2-resources-for-iam-policies\">Resources Defined by Amazon EC2</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the customer gateway.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1824,6 +1883,56 @@
                 }
             }
         },
+        "com.amazonaws.networkmanager#ExceptionContextKey": {
+            "type": "string"
+        },
+        "com.amazonaws.networkmanager#ExceptionContextMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.networkmanager#ExceptionContextKey"
+            },
+            "value": {
+                "target": "com.amazonaws.networkmanager#ExceptionContextValue"
+            }
+        },
+        "com.amazonaws.networkmanager#ExceptionContextValue": {
+            "type": "string"
+        },
+        "com.amazonaws.networkmanager#FilterMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.networkmanager#FilterName"
+            },
+            "value": {
+                "target": "com.amazonaws.networkmanager#FilterValues"
+            }
+        },
+        "com.amazonaws.networkmanager#FilterName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z\\.-]*$"
+            }
+        },
+        "com.amazonaws.networkmanager#FilterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z\\*\\.\\\\/\\?-]*$"
+            }
+        },
+        "com.amazonaws.networkmanager#FilterValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkmanager#FilterValue"
+            }
+        },
         "com.amazonaws.networkmanager#GetConnections": {
             "type": "operation",
             "input": {
@@ -1977,7 +2086,7 @@
                 "CustomerGatewayArns": {
                     "target": "com.amazonaws.networkmanager#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more customer gateway Amazon Resource Names (ARNs). For more information, see\n                <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonec2.html#amazonec2-resources-for-iam-policies\">Resources Defined by Amazon EC2</a>. The maximum is 10.</p>",
+                        "smithy.api#documentation": "<p>One or more customer gateway Amazon Resource Names (ARNs). The maximum is 10.</p>",
                         "smithy.api#httpQuery": "customerGatewayArns"
                     }
                 },
@@ -2315,6 +2424,644 @@
                     "target": "com.amazonaws.networkmanager#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#GetNetworkResourceCounts": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmanager#GetNetworkResourceCountsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmanager#GetNetworkResourceCountsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the count of network resources, by resource type, for the specified global network.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/global-networks/{GlobalNetworkId}/network-resource-count",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#GetNetworkResourceCountsRequest": {
+            "type": "structure",
+            "members": {
+                "GlobalNetworkId": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the global network.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource type.</p>\n         <p>The following are the supported resource types for Direct Connect:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>dxcon</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>dx-gateway</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>dx-vif</code>\n               </p>\n            </li>\n         </ul>\n        \n        <p>The following are the supported resource types for Network Manager:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>connection</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>device</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>link</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>site</code>\n               </p>\n            </li>\n         </ul>\n\n        <p>The following are the supported resource types for Amazon VPC:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>customer-gateway</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>transit-gateway</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>transit-gateway-attachment</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>transit-gateway-connect-peer</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>transit-gateway-route-table</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>vpn-connection</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#httpQuery": "resourceType"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.networkmanager#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#GetNetworkResourceCountsResponse": {
+            "type": "structure",
+            "members": {
+                "NetworkResourceCounts": {
+                    "target": "com.amazonaws.networkmanager#NetworkResourceCountList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The count of resources.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#GetNetworkResourceRelationships": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmanager#GetNetworkResourceRelationshipsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmanager#GetNetworkResourceRelationshipsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the network resource relationships for the specified global network.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/global-networks/{GlobalNetworkId}/network-resource-relationships",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#GetNetworkResourceRelationshipsRequest": {
+            "type": "structure",
+            "members": {
+                "GlobalNetworkId": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the global network.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RegisteredGatewayArn": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the registered gateway.</p>",
+                        "smithy.api#httpQuery": "registeredGatewayArn"
+                    }
+                },
+                "AwsRegion": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region.</p>",
+                        "smithy.api#httpQuery": "awsRegion"
+                    }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID.</p>",
+                        "smithy.api#httpQuery": "accountId"
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource type.</p>\n        <p>The following are the supported resource types for Direct Connect:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>dxcon</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>dx-gateway</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>dx-vif</code>\n               </p>\n            </li>\n         </ul>\n        \n        <p>The following are the supported resource types for Network Manager:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>connection</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>device</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>link</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>site</code>\n               </p>\n            </li>\n         </ul>\n\n        <p>The following are the supported resource types for Amazon VPC:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>customer-gateway</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>transit-gateway</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>transit-gateway-attachment</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>transit-gateway-connect-peer</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>transit-gateway-route-table</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>vpn-connection</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#httpQuery": "resourceType"
+                    }
+                },
+                "ResourceArn": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the gateway.</p>",
+                        "smithy.api#httpQuery": "resourceArn"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.networkmanager#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#GetNetworkResourceRelationshipsResponse": {
+            "type": "structure",
+            "members": {
+                "Relationships": {
+                    "target": "com.amazonaws.networkmanager#RelationshipList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource relationships.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#GetNetworkResources": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmanager#GetNetworkResourcesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmanager#GetNetworkResourcesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the network resources for the specified global network.</p>\n         <p>The results include information from the corresponding Describe call for the resource, minus any sensitive information such as pre-shared keys.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/global-networks/{GlobalNetworkId}/network-resources",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#GetNetworkResourcesRequest": {
+            "type": "structure",
+            "members": {
+                "GlobalNetworkId": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the global network.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RegisteredGatewayArn": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the gateway.</p>",
+                        "smithy.api#httpQuery": "registeredGatewayArn"
+                    }
+                },
+                "AwsRegion": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region.</p>",
+                        "smithy.api#httpQuery": "awsRegion"
+                    }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID.</p>",
+                        "smithy.api#httpQuery": "accountId"
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource type.</p>\n         <p>The following are the supported resource types for Direct Connect:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>dxcon</code> - The definition model is\n                    <a href=\"https://docs.aws.amazon.com/directconnect/latest/APIReference/API_Connection.html\">Connection</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>dx-gateway</code> - The definition model is\n                    <a href=\"https://docs.aws.amazon.com/directconnect/latest/APIReference/API_DirectConnectGateway.html\">DirectConnectGateway</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>dx-vif</code> - The definition model is\n                    <a href=\"https://docs.aws.amazon.com/directconnect/latest/APIReference/API_VirtualInterface.html\">VirtualInterface</a>.</p>\n            </li>\n         </ul>\n        \n         <p>The following are the supported resource types for Network Manager:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>connection</code> - The definition model is\n                    <a href=\"https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_Connection.html\">Connection</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>device</code> - The definition model is\n                    <a href=\"https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_Device.html\">Device</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>link</code> - The definition model is\n                    <a href=\"https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_Link.html\">Link</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>site</code> - The definition model is\n                    <a href=\"https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_Site.html\">Site</a>.</p>\n            </li>\n         </ul>\n        \n         <p>The following are the supported resource types for Amazon VPC:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>customer-gateway</code> - The definition model is\n                    <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CustomerGateway.html\">CustomerGateway</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>transit-gateway</code> - The definition model is\n                    <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TransitGateway.html\">TransitGateway</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>transit-gateway-attachment</code> - The definition model is\n                    <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TransitGatewayAttachment.html\">TransitGatewayAttachment</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>transit-gateway-connect-peer</code> - The definition model is\n                    <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TransitGatewayConnectPeer.html\">TransitGatewayConnectPeer</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>transit-gateway-route-table</code> - The definition model is\n                    <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TransitGatewayRouteTable.html\">TransitGatewayRouteTable</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpn-connection</code> - The definition model is\n                    <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_VpnConnection.html\">VpnConnection</a>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#httpQuery": "resourceType"
+                    }
+                },
+                "ResourceArn": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource.</p>",
+                        "smithy.api#httpQuery": "resourceArn"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.networkmanager#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#GetNetworkResourcesResponse": {
+            "type": "structure",
+            "members": {
+                "NetworkResources": {
+                    "target": "com.amazonaws.networkmanager#NetworkResourceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network resources.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#GetNetworkRoutes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmanager#GetNetworkRoutesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmanager#GetNetworkRoutesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the network routes of the specified global network.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/global-networks/{GlobalNetworkId}/network-routes",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#GetNetworkRoutesRequest": {
+            "type": "structure",
+            "members": {
+                "GlobalNetworkId": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the global network.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RouteTableIdentifier": {
+                    "target": "com.amazonaws.networkmanager#RouteTableIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the route table.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExactCidrMatches": {
+                    "target": "com.amazonaws.networkmanager#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An exact CIDR block.</p>"
+                    }
+                },
+                "LongestPrefixMatches": {
+                    "target": "com.amazonaws.networkmanager#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The most specific route that matches the traffic (longest prefix match).</p>"
+                    }
+                },
+                "SubnetOfMatches": {
+                    "target": "com.amazonaws.networkmanager#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The routes with a subnet that match the specified CIDR filter.</p>"
+                    }
+                },
+                "SupernetOfMatches": {
+                    "target": "com.amazonaws.networkmanager#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The routes with a CIDR that encompasses the CIDR filter. Example: If you specify 10.0.1.0/30, then the result returns 10.0.1.0/29.</p>"
+                    }
+                },
+                "PrefixListIds": {
+                    "target": "com.amazonaws.networkmanager#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the prefix lists.</p>"
+                    }
+                },
+                "States": {
+                    "target": "com.amazonaws.networkmanager#RouteStateList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The route states.</p>"
+                    }
+                },
+                "Types": {
+                    "target": "com.amazonaws.networkmanager#RouteTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The route types.</p>"
+                    }
+                },
+                "DestinationFilters": {
+                    "target": "com.amazonaws.networkmanager#FilterMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter by route table destination. Possible Values: TRANSIT_GATEWAY_ATTACHMENT_ID, RESOURCE_ID, or RESOURCE_TYPE.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#GetNetworkRoutesResponse": {
+            "type": "structure",
+            "members": {
+                "RouteTableArn": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the route table.</p>"
+                    }
+                },
+                "RouteTableType": {
+                    "target": "com.amazonaws.networkmanager#RouteTableType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The route table type.</p>"
+                    }
+                },
+                "RouteTableTimestamp": {
+                    "target": "com.amazonaws.networkmanager#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The route table creation time.</p>"
+                    }
+                },
+                "NetworkRoutes": {
+                    "target": "com.amazonaws.networkmanager#NetworkRouteList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network routes.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#GetNetworkTelemetry": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmanager#GetNetworkTelemetryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmanager#GetNetworkTelemetryResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the network telemetry of the specified global network.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/global-networks/{GlobalNetworkId}/network-telemetry",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#GetNetworkTelemetryRequest": {
+            "type": "structure",
+            "members": {
+                "GlobalNetworkId": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the global network.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RegisteredGatewayArn": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the gateway.</p>",
+                        "smithy.api#httpQuery": "registeredGatewayArn"
+                    }
+                },
+                "AwsRegion": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region.</p>",
+                        "smithy.api#httpQuery": "awsRegion"
+                    }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID.</p>",
+                        "smithy.api#httpQuery": "accountId"
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource type.</p>\n        <p>The following are the supported resource types for Direct Connect:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>dxcon</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>dx-gateway</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>dx-vif</code>\n               </p>\n            </li>\n         </ul>\n        \n        <p>The following are the supported resource types for Network Manager:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>connection</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>device</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>link</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>site</code>\n               </p>\n            </li>\n         </ul>\n\n        <p>The following are the supported resource types for Amazon VPC:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>customer-gateway</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>transit-gateway</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>transit-gateway-attachment</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>transit-gateway-connect-peer</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>transit-gateway-route-table</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>vpn-connection</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#httpQuery": "resourceType"
+                    }
+                },
+                "ResourceArn": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource.</p>",
+                        "smithy.api#httpQuery": "resourceArn"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.networkmanager#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#GetNetworkTelemetryResponse": {
+            "type": "structure",
+            "members": {
+                "NetworkTelemetry": {
+                    "target": "com.amazonaws.networkmanager#NetworkTelemetryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network telemetry.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#GetRouteAnalysis": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmanager#GetRouteAnalysisRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmanager#GetRouteAnalysisResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information about the specified route analysis.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/global-networks/{GlobalNetworkId}/route-analyses/{RouteAnalysisId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#GetRouteAnalysisRequest": {
+            "type": "structure",
+            "members": {
+                "GlobalNetworkId": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the global network.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RouteAnalysisId": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the route analysis.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#GetRouteAnalysisResponse": {
+            "type": "structure",
+            "members": {
+                "RouteAnalysis": {
+                    "target": "com.amazonaws.networkmanager#RouteAnalysis",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The route analysis.</p>"
                     }
                 }
             }
@@ -3027,6 +3774,24 @@
                     "target": "com.amazonaws.networkmanager#GetLinks"
                 },
                 {
+                    "target": "com.amazonaws.networkmanager#GetNetworkResourceCounts"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#GetNetworkResourceRelationships"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#GetNetworkResources"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#GetNetworkRoutes"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#GetNetworkTelemetry"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#GetRouteAnalysis"
+                },
+                {
                     "target": "com.amazonaws.networkmanager#GetSites"
                 },
                 {
@@ -3040,6 +3805,9 @@
                 },
                 {
                     "target": "com.amazonaws.networkmanager#RegisterTransitGateway"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#StartRouteAnalysis"
                 },
                 {
                     "target": "com.amazonaws.networkmanager#TagResource"
@@ -3060,6 +3828,9 @@
                     "target": "com.amazonaws.networkmanager#UpdateLink"
                 },
                 {
+                    "target": "com.amazonaws.networkmanager#UpdateNetworkResourceMetadata"
+                },
+                {
                     "target": "com.amazonaws.networkmanager#UpdateSite"
                 }
             ],
@@ -3075,9 +3846,353 @@
                     "name": "networkmanager"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Transit Gateway Network Manager (Network Manager) enables you to create a global network, in which you can monitor your\n            AWS and on-premises networks that are built around transit gateways.</p>\n        <p>The Network Manager APIs are supported in the US West (Oregon) Region only. You must specify the <code>us-west-2</code> Region in all requests made to Network Manager.</p>",
+                "smithy.api#documentation": "<p>Transit Gateway Network Manager (Network Manager) enables you to create a global network, in which you can monitor your\n            Amazon Web Services and on-premises networks that are built around transit gateways.</p>",
                 "smithy.api#title": "AWS Network Manager"
             }
+        },
+        "com.amazonaws.networkmanager#NetworkResource": {
+            "type": "structure",
+            "members": {
+                "RegisteredGatewayArn": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the gateway.</p>"
+                    }
+                },
+                "AwsRegion": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region.</p>"
+                    }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID.</p>"
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource type.</p>\n         <p>The following are the supported resource types for Direct Connect:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>dxcon</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>dx-gateway</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>dx-vif</code>\n               </p>\n            </li>\n         </ul>\n        \n        <p>The following are the supported resource types for Network Manager:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>connection</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>device</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>link</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>site</code>\n               </p>\n            </li>\n         </ul>\n\n        <p>The following are the supported resource types for Amazon VPC:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>customer-gateway</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>transit-gateway</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>transit-gateway-attachment</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>transit-gateway-connect-peer</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>transit-gateway-route-table</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>vpn-connection</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "ResourceId": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the resource.</p>"
+                    }
+                },
+                "ResourceArn": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource.</p>"
+                    }
+                },
+                "Definition": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the resource, in JSON format. Network Manager gets this information by describing the resource using its Describe API call.</p>"
+                    }
+                },
+                "DefinitionTimestamp": {
+                    "target": "com.amazonaws.networkmanager#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the resource definition was retrieved.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.networkmanager#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags.</p>"
+                    }
+                },
+                "Metadata": {
+                    "target": "com.amazonaws.networkmanager#NetworkResourceMetadataMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource metadata.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a network resource.</p>"
+            }
+        },
+        "com.amazonaws.networkmanager#NetworkResourceCount": {
+            "type": "structure",
+            "members": {
+                "ResourceType": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource type.</p>"
+                    }
+                },
+                "Count": {
+                    "target": "com.amazonaws.networkmanager#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource count.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a resource count.</p>"
+            }
+        },
+        "com.amazonaws.networkmanager#NetworkResourceCountList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkmanager#NetworkResourceCount"
+            }
+        },
+        "com.amazonaws.networkmanager#NetworkResourceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkmanager#NetworkResource"
+            }
+        },
+        "com.amazonaws.networkmanager#NetworkResourceMetadataKey": {
+            "type": "string"
+        },
+        "com.amazonaws.networkmanager#NetworkResourceMetadataMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.networkmanager#NetworkResourceMetadataKey"
+            },
+            "value": {
+                "target": "com.amazonaws.networkmanager#NetworkResourceMetadataValue"
+            }
+        },
+        "com.amazonaws.networkmanager#NetworkResourceMetadataValue": {
+            "type": "string"
+        },
+        "com.amazonaws.networkmanager#NetworkResourceSummary": {
+            "type": "structure",
+            "members": {
+                "RegisteredGatewayArn": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the gateway.</p>"
+                    }
+                },
+                "ResourceArn": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource.</p>"
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource type.</p>"
+                    }
+                },
+                "Definition": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the resource, in JSON format. Network Manager gets this information by describing the resource using its Describe API call.</p>"
+                    }
+                },
+                "NameTag": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value for the Name tag.</p>"
+                    }
+                },
+                "IsMiddlebox": {
+                    "target": "com.amazonaws.networkmanager#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether this is a middlebox appliance.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a network resource.</p>"
+            }
+        },
+        "com.amazonaws.networkmanager#NetworkRoute": {
+            "type": "structure",
+            "members": {
+                "DestinationCidrBlock": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the route, such as a CIDR block.</p>"
+                    }
+                },
+                "Destinations": {
+                    "target": "com.amazonaws.networkmanager#NetworkRouteDestinationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destinations.</p>"
+                    }
+                },
+                "PrefixListId": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the prefix list.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.networkmanager#RouteState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The route state. The possible values are <code>active</code> and <code>blackhole</code>.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.networkmanager#RouteType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The route type. The possible values are <code>propagated</code> and <code>static</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a network route.</p>"
+            }
+        },
+        "com.amazonaws.networkmanager#NetworkRouteDestination": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayAttachmentId": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the transit gateway attachment.</p>"
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource type.</p>"
+                    }
+                },
+                "ResourceId": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the destination of a network route.</p>"
+            }
+        },
+        "com.amazonaws.networkmanager#NetworkRouteDestinationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkmanager#NetworkRouteDestination"
+            }
+        },
+        "com.amazonaws.networkmanager#NetworkRouteList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkmanager#NetworkRoute"
+            }
+        },
+        "com.amazonaws.networkmanager#NetworkTelemetry": {
+            "type": "structure",
+            "members": {
+                "RegisteredGatewayArn": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the gateway.</p>"
+                    }
+                },
+                "AwsRegion": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region.</p>"
+                    }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID.</p>"
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource type.</p>"
+                    }
+                },
+                "ResourceId": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the resource.</p>"
+                    }
+                },
+                "ResourceArn": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource.</p>"
+                    }
+                },
+                "Address": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The address.</p>"
+                    }
+                },
+                "Health": {
+                    "target": "com.amazonaws.networkmanager#ConnectionHealth",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection health.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the telemetry information for a resource.</p>"
+            }
+        },
+        "com.amazonaws.networkmanager#NetworkTelemetryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkmanager#NetworkTelemetry"
+            }
+        },
+        "com.amazonaws.networkmanager#PathComponent": {
+            "type": "structure",
+            "members": {
+                "Sequence": {
+                    "target": "com.amazonaws.networkmanager#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sequence number in the path. The destination is 0.</p>"
+                    }
+                },
+                "Resource": {
+                    "target": "com.amazonaws.networkmanager#NetworkResourceSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource.</p>"
+                    }
+                },
+                "DestinationCidrBlock": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination CIDR block in the route table.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a path component.</p>"
+            }
+        },
+        "com.amazonaws.networkmanager#PathComponentList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkmanager#PathComponent"
+            }
+        },
+        "com.amazonaws.networkmanager#ReasonContextKey": {
+            "type": "string"
+        },
+        "com.amazonaws.networkmanager#ReasonContextMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.networkmanager#ReasonContextKey"
+            },
+            "value": {
+                "target": "com.amazonaws.networkmanager#ReasonContextValue"
+            }
+        },
+        "com.amazonaws.networkmanager#ReasonContextValue": {
+            "type": "string"
         },
         "com.amazonaws.networkmanager#RegisterTransitGateway": {
             "type": "operation",
@@ -3108,7 +4223,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Registers a transit gateway in your global network. The transit gateway can be in any\n            AWS Region, but it must be owned by the same AWS account that owns the global network.\n            You cannot register a transit gateway in more than one global network.</p>",
+                "smithy.api#documentation": "<p>Registers a transit gateway in your global network. The transit gateway can be in any\n            Amazon Web Services Region, but it must be owned by the same Amazon Web Services account that owns \n            the global network. You cannot register a transit gateway in more than one global network.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/global-networks/{GlobalNetworkId}/transit-gateway-registrations",
@@ -3130,7 +4245,7 @@
                 "TransitGatewayArn": {
                     "target": "com.amazonaws.networkmanager#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the transit gateway. For more information, see\n                <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonec2.html#amazonec2-resources-for-iam-policies\">Resources Defined by Amazon EC2</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the transit gateway.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3145,6 +4260,32 @@
                         "smithy.api#documentation": "<p>Information about the transit gateway registration.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.networkmanager#Relationship": {
+            "type": "structure",
+            "members": {
+                "From": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource.</p>"
+                    }
+                },
+                "To": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a resource relationship.</p>"
+            }
+        },
+        "com.amazonaws.networkmanager#RelationshipList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkmanager#Relationship"
             }
         },
         "com.amazonaws.networkmanager#ResourceARN": {
@@ -3172,6 +4313,9 @@
                         "smithy.api#documentation": "<p>The resource type.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "Context": {
+                    "target": "com.amazonaws.networkmanager#ExceptionContextMap"
                 }
             },
             "traits": {
@@ -3184,6 +4328,324 @@
             "type": "integer",
             "traits": {
                 "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.networkmanager#RouteAnalysis": {
+            "type": "structure",
+            "members": {
+                "GlobalNetworkId": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the global network.</p>"
+                    }
+                },
+                "OwnerAccountId": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the AWS account that created the route analysis.</p>"
+                    }
+                },
+                "RouteAnalysisId": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the route analysis.</p>"
+                    }
+                },
+                "StartTimestamp": {
+                    "target": "com.amazonaws.networkmanager#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the analysis started.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.networkmanager#RouteAnalysisStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the route analysis.</p>"
+                    }
+                },
+                "Source": {
+                    "target": "com.amazonaws.networkmanager#RouteAnalysisEndpointOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source.</p>"
+                    }
+                },
+                "Destination": {
+                    "target": "com.amazonaws.networkmanager#RouteAnalysisEndpointOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination.</p>"
+                    }
+                },
+                "IncludeReturnPath": {
+                    "target": "com.amazonaws.networkmanager#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to analyze the return path. The return path is not analyzed if the forward path\n            analysis does not succeed.</p>"
+                    }
+                },
+                "UseMiddleboxes": {
+                    "target": "com.amazonaws.networkmanager#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to include the location of middlebox appliances in the route analysis.</p>"
+                    }
+                },
+                "ForwardPath": {
+                    "target": "com.amazonaws.networkmanager#RouteAnalysisPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The forward path.</p>"
+                    }
+                },
+                "ReturnPath": {
+                    "target": "com.amazonaws.networkmanager#RouteAnalysisPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The return path.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a route analysis.</p>"
+            }
+        },
+        "com.amazonaws.networkmanager#RouteAnalysisCompletion": {
+            "type": "structure",
+            "members": {
+                "ResultCode": {
+                    "target": "com.amazonaws.networkmanager#RouteAnalysisCompletionResultCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The result of the analysis. If the status is <code>NOT_CONNECTED</code>, check the \n            reason code.</p>"
+                    }
+                },
+                "ReasonCode": {
+                    "target": "com.amazonaws.networkmanager#RouteAnalysisCompletionReasonCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason code. Available only if a connection is not found.</p>\n        <ul>\n            <li>\n               <p>\n                  <code>BLACKHOLE_ROUTE_FOR_DESTINATION_FOUND</code> - Found a black hole route with the destination CIDR block.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CYCLIC_PATH_DETECTED</code> - Found the same resource multiple times while traversing the path.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INACTIVE_ROUTE_FOR_DESTINATION_FOUND</code> - Found an inactive route with the destination CIDR block.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MAX_HOPS_EXCEEDED</code> - Analysis exceeded 64 hops without finding the destination.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ROUTE_NOT_FOUND</code> - Cannot find a route table with the destination CIDR block.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TGW_ATTACH_ARN_NO_MATCH</code> - Found an attachment, but not with the correct destination ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TGW_ATTACH_NOT_FOUND</code> - Cannot find an attachment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TGW_ATTACH_NOT_IN_TGW</code> - Found an attachment, but not to the correct transit gateway.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TGW_ATTACH_STABLE_ROUTE_TABLE_NOT_FOUND</code> - The state of the route table association is not associated.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "ReasonContext": {
+                    "target": "com.amazonaws.networkmanager#ReasonContextMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional information about the path. Available only if a connection is not found.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the status of an analysis at completion.</p>"
+            }
+        },
+        "com.amazonaws.networkmanager#RouteAnalysisCompletionReasonCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "TRANSIT_GATEWAY_ATTACHMENT_NOT_FOUND",
+                        "name": "TRANSIT_GATEWAY_ATTACHMENT_NOT_FOUND"
+                    },
+                    {
+                        "value": "TRANSIT_GATEWAY_ATTACHMENT_NOT_IN_TRANSIT_GATEWAY",
+                        "name": "TRANSIT_GATEWAY_ATTACHMENT_NOT_IN_TRANSIT_GATEWAY"
+                    },
+                    {
+                        "value": "CYCLIC_PATH_DETECTED",
+                        "name": "CYCLIC_PATH_DETECTED"
+                    },
+                    {
+                        "value": "TRANSIT_GATEWAY_ATTACHMENT_STABLE_ROUTE_TABLE_NOT_FOUND",
+                        "name": "TRANSIT_GATEWAY_ATTACHMENT_STABLE_ROUTE_TABLE_NOT_FOUND"
+                    },
+                    {
+                        "value": "ROUTE_NOT_FOUND",
+                        "name": "ROUTE_NOT_FOUND"
+                    },
+                    {
+                        "value": "BLACKHOLE_ROUTE_FOR_DESTINATION_FOUND",
+                        "name": "BLACKHOLE_ROUTE_FOR_DESTINATION_FOUND"
+                    },
+                    {
+                        "value": "INACTIVE_ROUTE_FOR_DESTINATION_FOUND",
+                        "name": "INACTIVE_ROUTE_FOR_DESTINATION_FOUND"
+                    },
+                    {
+                        "value": "TRANSIT_GATEWAY_ATTACHMENT_ATTACH_ARN_NO_MATCH",
+                        "name": "TRANSIT_GATEWAY_ATTACHMENT"
+                    },
+                    {
+                        "value": "MAX_HOPS_EXCEEDED",
+                        "name": "MAX_HOPS_EXCEEDED"
+                    },
+                    {
+                        "value": "POSSIBLE_MIDDLEBOX",
+                        "name": "POSSIBLE_MIDDLEBOX"
+                    },
+                    {
+                        "value": "NO_DESTINATION_ARN_PROVIDED",
+                        "name": "NO_DESTINATION_ARN_PROVIDED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.networkmanager#RouteAnalysisCompletionResultCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CONNECTED",
+                        "name": "CONNECTED"
+                    },
+                    {
+                        "value": "NOT_CONNECTED",
+                        "name": "NOT_CONNECTED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.networkmanager#RouteAnalysisEndpointOptions": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayAttachmentArn": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the transit gateway attachment.</p>"
+                    }
+                },
+                "TransitGatewayArn": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the transit gateway.</p>"
+                    }
+                },
+                "IpAddress": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a source or a destination.</p>"
+            }
+        },
+        "com.amazonaws.networkmanager#RouteAnalysisEndpointOptionsSpecification": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayAttachmentArn": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the transit gateway attachment.</p>"
+                    }
+                },
+                "IpAddress": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a source or a destination.</p>"
+            }
+        },
+        "com.amazonaws.networkmanager#RouteAnalysisPath": {
+            "type": "structure",
+            "members": {
+                "CompletionStatus": {
+                    "target": "com.amazonaws.networkmanager#RouteAnalysisCompletion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the analysis at completion.</p>"
+                    }
+                },
+                "Path": {
+                    "target": "com.amazonaws.networkmanager#PathComponentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The route analysis path.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a route analysis path.</p>"
+            }
+        },
+        "com.amazonaws.networkmanager#RouteAnalysisStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "RUNNING",
+                        "name": "running"
+                    },
+                    {
+                        "value": "COMPLETED",
+                        "name": "completed"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "failed"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.networkmanager#RouteState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "BLACKHOLE",
+                        "name": "BLACKHOLE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.networkmanager#RouteStateList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkmanager#RouteState"
+            }
+        },
+        "com.amazonaws.networkmanager#RouteTableIdentifier": {
+            "type": "structure",
+            "members": {
+                "TransitGatewayRouteTableArn": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the transit gateway route table.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a route table.</p>"
+            }
+        },
+        "com.amazonaws.networkmanager#RouteTableType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "TRANSIT_GATEWAY_ROUTE_TABLE",
+                        "name": "TRANSIT_GATEWAY_ROUTE_TABLE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.networkmanager#RouteType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PROPAGATED",
+                        "name": "PROPAGATED"
+                    },
+                    {
+                        "value": "STATIC",
+                        "name": "STATIC"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.networkmanager#RouteTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.networkmanager#RouteType"
             }
         },
         "com.amazonaws.networkmanager#ServiceQuotaExceededException": {
@@ -3314,6 +4776,93 @@
                 ]
             }
         },
+        "com.amazonaws.networkmanager#StartRouteAnalysis": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmanager#StartRouteAnalysisRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmanager#StartRouteAnalysisResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts analyzing the routing path between the specified source and destination. For more information, \n            see <a href=\"https://docs.aws.amazon.com/vpc/latest/tgw/route-analyzer.html\">Route Analyzer</a>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/global-networks/{GlobalNetworkId}/route-analyses",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#StartRouteAnalysisRequest": {
+            "type": "structure",
+            "members": {
+                "GlobalNetworkId": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the global network.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Source": {
+                    "target": "com.amazonaws.networkmanager#RouteAnalysisEndpointOptionsSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source from which traffic originates.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Destination": {
+                    "target": "com.amazonaws.networkmanager#RouteAnalysisEndpointOptionsSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IncludeReturnPath": {
+                    "target": "com.amazonaws.networkmanager#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to analyze the return path. The default is <code>false</code>.</p>"
+                    }
+                },
+                "UseMiddleboxes": {
+                    "target": "com.amazonaws.networkmanager#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to include the location of middlebox appliances in the route analysis.\n            The default is <code>false</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#StartRouteAnalysisResponse": {
+            "type": "structure",
+            "members": {
+                "RouteAnalysis": {
+                    "target": "com.amazonaws.networkmanager#RouteAnalysis",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The route analysis.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.networkmanager#String": {
             "type": "string"
         },
@@ -3329,13 +4878,13 @@
                 "Key": {
                     "target": "com.amazonaws.networkmanager#TagKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tag key.</p>\n        <p>Length Constraints: Maximum length of 128 characters.</p>"
+                        "smithy.api#documentation": "<p>The tag key.</p>\n        <p>Constraints: Maximum length of 128 characters.</p>"
                     }
                 },
                 "Value": {
                     "target": "com.amazonaws.networkmanager#TagValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tag value.</p>\n        <p>Length Constraints: Maximum length of 256 characters.</p>"
+                        "smithy.api#documentation": "<p>The tag value.</p>\n        <p>Constraints: Maximum length of 256 characters.</p>"
                     }
                 }
             },
@@ -3802,13 +5351,13 @@
                 "AWSLocation": {
                     "target": "com.amazonaws.networkmanager#AWSLocation",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS location of the device.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services location of the device, if applicable. For an on-premises device, you can omit this parameter.</p>"
                     }
                 },
                 "Description": {
                     "target": "com.amazonaws.networkmanager#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A description of the device.</p>\n        <p>Length Constraints: Maximum length of 256 characters.</p>"
+                        "smithy.api#documentation": "<p>A description of the device.</p>\n        <p>Constraints: Maximum length of 256 characters.</p>"
                     }
                 },
                 "Type": {
@@ -3820,19 +5369,19 @@
                 "Vendor": {
                     "target": "com.amazonaws.networkmanager#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The vendor of the device.</p>\n        <p>Length Constraints: Maximum length of 128 characters.</p>"
+                        "smithy.api#documentation": "<p>The vendor of the device.</p>\n        <p>Constraints: Maximum length of 128 characters.</p>"
                     }
                 },
                 "Model": {
                     "target": "com.amazonaws.networkmanager#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The model of the device.</p>\n        <p>Length Constraints: Maximum length of 128 characters.</p>"
+                        "smithy.api#documentation": "<p>The model of the device.</p>\n        <p>Constraints: Maximum length of 128 characters.</p>"
                     }
                 },
                 "SerialNumber": {
                     "target": "com.amazonaws.networkmanager#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The serial number of the device.</p>\n        <p>Length Constraints: Maximum length of 128 characters.</p>"
+                        "smithy.api#documentation": "<p>The serial number of the device.</p>\n        <p>Constraints: Maximum length of 128 characters.</p>"
                     }
                 },
                 "Location": {
@@ -3908,7 +5457,7 @@
                 "Description": {
                     "target": "com.amazonaws.networkmanager#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A description of the global network.</p>\n        <p>Length Constraints: Maximum length of 256 characters.</p>"
+                        "smithy.api#documentation": "<p>A description of the global network.</p>\n        <p>Constraints: Maximum length of 256 characters.</p>"
                     }
                 }
             }
@@ -3986,13 +5535,13 @@
                 "Description": {
                     "target": "com.amazonaws.networkmanager#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A description of the link.</p>\n        <p>Length Constraints: Maximum length of 256 characters.</p>"
+                        "smithy.api#documentation": "<p>A description of the link.</p>\n        <p>Constraints: Maximum length of 256 characters.</p>"
                     }
                 },
                 "Type": {
                     "target": "com.amazonaws.networkmanager#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the link.</p>\n        <p>Length Constraints: Maximum length of 128 characters.</p>"
+                        "smithy.api#documentation": "<p>The type of the link.</p>\n        <p>Constraints: Maximum length of 128 characters.</p>"
                     }
                 },
                 "Bandwidth": {
@@ -4004,7 +5553,7 @@
                 "Provider": {
                     "target": "com.amazonaws.networkmanager#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The provider of the link.</p>\n        <p>Length Constraints: Maximum length of 128 characters.</p>"
+                        "smithy.api#documentation": "<p>The provider of the link.</p>\n        <p>Constraints: Maximum length of 128 characters.</p>"
                     }
                 }
             }
@@ -4016,6 +5565,88 @@
                     "target": "com.amazonaws.networkmanager#Link",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the link.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#UpdateNetworkResourceMetadata": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.networkmanager#UpdateNetworkResourceMetadataRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.networkmanager#UpdateNetworkResourceMetadataResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.networkmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.networkmanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the resource metadata for the specified global network.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/global-networks/{GlobalNetworkId}/network-resources/{ResourceArn}/metadata",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#UpdateNetworkResourceMetadataRequest": {
+            "type": "structure",
+            "members": {
+                "GlobalNetworkId": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the global network.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceArn": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Metadata": {
+                    "target": "com.amazonaws.networkmanager#NetworkResourceMetadataMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource metadata.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.networkmanager#UpdateNetworkResourceMetadataResponse": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.networkmanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource.</p>"
+                    }
+                },
+                "Metadata": {
+                    "target": "com.amazonaws.networkmanager#NetworkResourceMetadataMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated resource metadata.</p>"
                     }
                 }
             }
@@ -4079,7 +5710,7 @@
                 "Description": {
                     "target": "com.amazonaws.networkmanager#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A description of your site.</p>\n        <p>Length Constraints: Maximum length of 256 characters.</p>"
+                        "smithy.api#documentation": "<p>A description of your site.</p>\n        <p>Constraints: Maximum length of 256 characters.</p>"
                     }
                 },
                 "Location": {

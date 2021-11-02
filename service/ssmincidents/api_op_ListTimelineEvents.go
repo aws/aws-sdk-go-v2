@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists timeline events of the specified incident record.
+// Lists timeline events for the specified incident record.
 func (c *Client) ListTimelineEvents(ctx context.Context, params *ListTimelineEventsInput, optFns ...func(*Options)) (*ListTimelineEventsOutput, error) {
 	if params == nil {
 		params = &ListTimelineEventsInput{}
@@ -30,7 +30,7 @@ func (c *Client) ListTimelineEvents(ctx context.Context, params *ListTimelineEve
 
 type ListTimelineEventsInput struct {
 
-	// The Amazon Resource Name (ARN) of the incident that the event is part of.
+	// The Amazon Resource Name (ARN) of the incident that includes the timeline event.
 	//
 	// This member is required.
 	IncidentRecordArn *string
@@ -41,6 +41,19 @@ type ListTimelineEventsInput struct {
 	// * eventTime
 	//
 	// * eventType
+	//
+	// Note
+	// the following when deciding how to use Filters:
+	//
+	// * If you don't specify a
+	// Filter, the response includes all timeline events.
+	//
+	// * If you specify more than
+	// one filter in a single request, the response returns timeline events that match
+	// all filters.
+	//
+	// * If you specify a filter with more than one value, the response
+	// returns timeline events that match any of the values provided.
 	Filters []types.Filter
 
 	// The maximum number of results per page.

@@ -104,6 +104,16 @@ type CreateDomainInput struct {
 	// All Studio traffic is through the specified VPC and subnets
 	AppNetworkAccessType types.AppNetworkAccessType
 
+	// The entity that creates and manages the required security groups for inter-app
+	// communication in VPCOnly mode. Required when CreateDomain.AppNetworkAccessType
+	// is VPCOnly and
+	// DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn is
+	// provided.
+	AppSecurityGroupManagement types.AppSecurityGroupManagement
+
+	// A collection of Domain settings.
+	DomainSettings *types.DomainSettings
+
 	// This member is deprecated and replaced with KmsKeyId.
 	//
 	// Deprecated: This property is deprecated, use KmsKeyId instead.

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates an Identity and Access Management (IAM) role from an Neptune DB
+// Associates an Identity and Access Management (IAM) role with an Neptune DB
 // cluster.
 func (c *Client) AddRoleToDBCluster(ctx context.Context, params *AddRoleToDBClusterInput, optFns ...func(*Options)) (*AddRoleToDBClusterOutput, error) {
 	if params == nil {

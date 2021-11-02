@@ -34,6 +34,8 @@ type UpdateApplicationInput struct {
 	// This member is required.
 	ResourceGroupName *string
 
+	AutoConfigEnabled *bool
+
 	// Indicates whether Application Insights can listen to CloudWatch events for the
 	// application resources, such as instance terminated, failed deployment, and
 	// others.

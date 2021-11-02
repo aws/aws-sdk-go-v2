@@ -65,8 +65,15 @@ type SendChannelMessageInput struct {
 	// This member is required.
 	Type types.ChannelMessageType
 
+	// The attributes for the message, used for message filtering along with a
+	// FilterRule defined in the PushNotificationPreferences.
+	MessageAttributes map[string]types.MessageAttributeValue
+
 	// The optional metadata for each message.
 	Metadata *string
+
+	// The push notification configuration of the message.
+	PushNotification *types.PushNotificationConfiguration
 
 	noSmithyDocumentSerde
 }

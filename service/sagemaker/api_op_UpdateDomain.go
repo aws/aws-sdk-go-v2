@@ -37,6 +37,9 @@ type UpdateDomainInput struct {
 	// A collection of settings.
 	DefaultUserSettings *types.UserSettings
 
+	// A collection of DomainSettings configuration values to update.
+	DomainSettingsForUpdate *types.DomainSettingsForUpdate
+
 	noSmithyDocumentSerde
 }
 
