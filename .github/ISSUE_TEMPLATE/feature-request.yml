@@ -1,0 +1,62 @@
+name: "\U0001F680 Feature Request"
+description: Suggest an idea for this project
+title: "(short issue description)"
+labels: [feature-request, needs-triage]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the feature
+      description: A clear and concise description of the feature you are proposing.
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Is your Feature Request related to a problem?
+      description: |
+        A description of the issue, e.g. "I'm always frustrated when..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: |
+        Suggest how to implement the addition or change.
+    validations:
+      required: false
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Describe alternatives you've considered
+      description: |
+        Any alternative solutions or features you've considered.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: acknowledgment
+    attributes:
+      label: Acknowledge
+      options:
+        - label: I may be able to implement this feature request
+          required: false
+
+  - type: input
+    id: go-sdk-version
+    attributes:
+      label: AWS Go SDK version used
+    validations:
+      required: true
+
+  - type: input
+    id: go-version
+    attributes:
+      label: Go version used
+      description: Output of `go version`
+    validations:
+      required: true

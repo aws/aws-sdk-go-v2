@@ -1,0 +1,28 @@
+name: "\U0001F4DD Documentation Report"
+description: Suggest incorrect/improvement in documentation
+title: "(short issue description)"
+labels: [documentation, needs-triage]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the issue with documentation
+      description: A clear and concise description of what the issue is.
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Suggestion
+      description: |
+        Suggest a fix,improvement or addition you'd like to see in the documentation.
+    validations:
+      required: false
+
+  - type: input
+    id: Go-sdk-version
+    attributes:
+      label: AWS Go SDK version used
+    validations:
+      required: false
