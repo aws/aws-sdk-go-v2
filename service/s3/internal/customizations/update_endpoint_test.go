@@ -75,27 +75,27 @@ func TestUpdateEndpointBuild(t *testing.T) {
 			"DualStack": {
 				useDualstack: true,
 				tests: []s3BucketTest{
-					{"abc", "key", "https://abc.s3.mock-region.api.aws/key?x-id=GetObject", ""},
-					{"a.b.c", "key", "https://s3.mock-region.api.aws/a.b.c/key?x-id=GetObject", ""},
-					{"a$b$c", "key", "https://s3.mock-region.api.aws/a%24b%24c/key?x-id=GetObject", ""},
+					{"abc", "key", "https://abc.s3.dualstack.mock-region.amazonaws.com/key?x-id=GetObject", ""},
+					{"a.b.c", "key", "https://s3.dualstack.mock-region.amazonaws.com/a.b.c/key?x-id=GetObject", ""},
+					{"a$b$c", "key", "https://s3.dualstack.mock-region.amazonaws.com/a%24b%24c/key?x-id=GetObject", ""},
 				},
 			},
 			"DualStackWithPathStyle": {
 				useDualstack: true,
 				usePathStyle: true,
 				tests: []s3BucketTest{
-					{"abc", "key", "https://s3.mock-region.api.aws/abc/key?x-id=GetObject", ""},
-					{"a.b.c", "key", "https://s3.mock-region.api.aws/a.b.c/key?x-id=GetObject", ""},
-					{"a$b$c", "key", "https://s3.mock-region.api.aws/a%24b%24c/key?x-id=GetObject", ""},
+					{"abc", "key", "https://s3.dualstack.mock-region.amazonaws.com/abc/key?x-id=GetObject", ""},
+					{"a.b.c", "key", "https://s3.dualstack.mock-region.amazonaws.com/a.b.c/key?x-id=GetObject", ""},
+					{"a$b$c", "key", "https://s3.dualstack.mock-region.amazonaws.com/a%24b%24c/key?x-id=GetObject", ""},
 				},
 			},
 			"AccelerateWithDualStack": {
 				useAccelerate: true,
 				useDualstack:  true,
 				tests: []s3BucketTest{
-					{"abc", "key", "https://abc.s3-accelerate.api.aws/key?x-id=GetObject", ""},
-					{"a.b.c", "key", "https://s3.mock-region.api.aws/a.b.c/key?x-id=GetObject", "not compatible"},
-					{"a$b$c", "key", "https://s3.mock-region.api.aws/a%24b%24c/key?x-id=GetObject", "not compatible"},
+					{"abc", "key", "https://abc.s3-accelerate.dualstack.amazonaws.com/key?x-id=GetObject", ""},
+					{"a.b.c", "key", "https://s3.mock-region.dualstack.amazonaws.com/a.b.c/key?x-id=GetObject", "not compatible"},
+					{"a$b$c", "key", "https://s3.mock-region.dualstack.amazonaws.com/a%24b%24c/key?x-id=GetObject", "not compatible"},
 				},
 			},
 		},
