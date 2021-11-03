@@ -18,6 +18,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream"
 	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream/eventstreamapi"
+	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	"github.com/aws/aws-sdk-go-v2/credentials"
 	"golang.org/x/net/http2"
 )
@@ -27,33 +28,28 @@ const (
 	errStreamClosed       = "http2: stream closed"
 )
 
-func setupServer(server *httptest.Server) *http.Client {
+func setupServer(server *httptest.Server) aws.HTTPClient {
 	server.Config.TLSConfig = &tls.Config{
 		InsecureSkipVerify: true,
-	}
-
-	clientTrans := &http.Transport{
-		TLSClientConfig: &tls.Config{
-			InsecureSkipVerify: true,
-		},
 	}
 
 	if err := http2.ConfigureServer(server.Config, nil); err != nil {
 		panic(err)
 	}
-	if err := http2.ConfigureTransport(clientTrans); err != nil {
-		panic(err)
-	}
 
 	server.Config.TLSConfig.NextProtos = []string{http2.NextProtoTLS}
-	clientTrans.TLSClientConfig.NextProtos = []string{http2.NextProtoTLS}
 	server.TLS = server.Config.TLSConfig
 
 	server.StartTLS()
 
-	return &http.Client{
-		Transport: clientTrans,
-	}
+	buildableClient := awshttp.NewBuildableClient().WithTransportOptions(func(transport *http.Transport) {
+		transport.ForceAttemptHTTP2 = true
+		transport.TLSClientConfig = &tls.Config{
+			InsecureSkipVerify: true,
+		}
+	})
+
+	return buildableClient
 }
 
 // SetupEventStream configures an HTTPS event stream testing server.
@@ -79,11 +75,20 @@ func SetupEventStream(
 	return cfg, cleanupFn, nil
 }
 
+// StaticResponse provides a way to define an HTTP event stream server that provides a fixed
+// static response.
+type StaticResponse struct {
+	StatusCode int
+	Body       []byte
+}
+
 // ServeEventStream provides serving EventStream messages from a HTTP server to
 // the client. The events are sent sequentially to the client without delay.
 type ServeEventStream struct {
 	T             *testing.T
 	BiDirectional bool
+
+	StaticResponse *StaticResponse
 
 	Events       []eventstream.Message
 	ClientEvents []eventstream.Message
@@ -95,6 +100,15 @@ type ServeEventStream struct {
 
 // ServeHTTP serves an HTTP client request
 func (s ServeEventStream) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	if s.StaticResponse != nil {
+		w.WriteHeader(s.StaticResponse.StatusCode)
+		w.(http.Flusher).Flush()
+		if _, err := w.Write(s.StaticResponse.Body); err != nil {
+			s.T.Errorf("failed to write response body error: %v", err)
+		}
+		return
+	}
+
 	if s.BiDirectional {
 		s.serveBiDirectionalStream(w, r)
 	} else {

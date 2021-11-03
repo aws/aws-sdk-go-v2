@@ -616,3 +616,45 @@ func TestStartStreamTranscription_WriteError(t *testing.T) {
 		}
 	}
 }
+
+func TestStartStreamTranscription_ResponseError(t *testing.T) {
+	cfg, cleanupFn, err := eventstreamtesting.SetupEventStream(t,
+		eventstreamtesting.ServeEventStream{
+			T: t,
+			StaticResponse: &eventstreamtesting.StaticResponse{
+				StatusCode: 500,
+				Body: []byte(`{
+  "Message": "this is an exception message"
+}`),
+			},
+		},
+	)
+	if err != nil {
+		t.Fatalf("expect no error, %v", err)
+	}
+	defer cleanupFn()
+
+	svc := transcribestreaming.NewFromConfig(cfg)
+	_, err = svc.StartStreamTranscription(context.Background(), &transcribestreaming.StartStreamTranscriptionInput{}, func(options *transcribestreaming.Options) {
+		options.APIOptions = append(options.APIOptions, removeValidationMiddleware)
+	})
+	if err == nil {
+		t.Fatal("expect error got, nil")
+	}
+
+	var expectedErr *smithy.GenericAPIError
+	if !errors.As(err, &expectedErr) {
+		t.Errorf("expect err type %T, got %v", expectedErr, err)
+	}
+
+	if diff := cmp.Diff(
+		expectedErr,
+		&smithy.GenericAPIError{
+			Code:    "UnknownError",
+			Message: "this is an exception message",
+		},
+		cmpopts.IgnoreTypes(document.NoSerde{}),
+	); len(diff) > 0 {
+		t.Errorf(diff)
+	}
+}
