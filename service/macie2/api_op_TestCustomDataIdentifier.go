@@ -41,10 +41,10 @@ type TestCustomDataIdentifierInput struct {
 	SampleText *string
 
 	// An array that lists specific character sequences (ignore words) to exclude from
-	// the results. If the text matched by the regular expression is the same as any
-	// string in this array, Amazon Macie ignores it. The array can contain as many as
-	// 10 ignore words. Each ignore word can contain 4-90 UTF-8 characters. Ignore
-	// words are case sensitive.
+	// the results. If the text matched by the regular expression contains any string
+	// in this array, Amazon Macie ignores it. The array can contain as many as 10
+	// ignore words. Each ignore word can contain 4-90 UTF-8 characters. Ignore words
+	// are case sensitive.
 	IgnoreWords []string
 
 	// An array that lists specific character sequences (keywords), one of which must
@@ -54,10 +54,10 @@ type TestCustomDataIdentifierInput struct {
 	Keywords []string
 
 	// The maximum number of characters that can exist between text that matches the
-	// regex pattern and the character sequences specified by the keywords array.
+	// regular expression and the character sequences specified by the keywords array.
 	// Amazon Macie includes or excludes a result based on the proximity of a keyword
-	// to text that matches the regex pattern. The distance can be 1-300 characters.
-	// The default value is 50.
+	// to text that matches the regular expression. The distance can be 1-300
+	// characters. The default value is 50.
 	MaximumMatchDistance int32
 
 	noSmithyDocumentSerde
@@ -65,8 +65,8 @@ type TestCustomDataIdentifierInput struct {
 
 type TestCustomDataIdentifierOutput struct {
 
-	// The number of instances of sample text that matched the detection criteria
-	// specified in the custom data identifier.
+	// The number of occurrences of sample text that matched the criteria specified by
+	// the custom data identifier.
 	MatchCount int32
 
 	// Metadata pertaining to the operation's result.

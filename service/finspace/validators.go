@@ -5,6 +5,7 @@ package finspace
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/finspace/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
@@ -177,6 +178,27 @@ func addOpUpdateEnvironmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateEnvironment{}, middleware.After)
 }
 
+func validateSuperuserParameters(v *types.SuperuserParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SuperuserParameters"}
+	if v.EmailAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EmailAddress"))
+	}
+	if v.FirstName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FirstName"))
+	}
+	if v.LastName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LastName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateEnvironmentInput(v *CreateEnvironmentInput) error {
 	if v == nil {
 		return nil
@@ -184,6 +206,11 @@ func validateOpCreateEnvironmentInput(v *CreateEnvironmentInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateEnvironmentInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.SuperuserParameters != nil {
+		if err := validateSuperuserParameters(v.SuperuserParameters); err != nil {
+			invalidParams.AddNested("SuperuserParameters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

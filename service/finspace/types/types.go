@@ -79,4 +79,25 @@ type FederationParameters struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration information for the superuser.
+type SuperuserParameters struct {
+
+	// The email address of the superuser.
+	//
+	// This member is required.
+	EmailAddress *string
+
+	// The first name of the superuser.
+	//
+	// This member is required.
+	FirstName *string
+
+	// The last name of the superuser.
+	//
+	// This member is required.
+	LastName *string
+
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -59,8 +60,8 @@ type GetCustomDataIdentifierOutput struct {
 	Id *string
 
 	// An array that lists specific character sequences (ignore words) to exclude from
-	// the results. If the text matched by the regular expression is the same as any
-	// string in this array, Amazon Macie ignores it. Ignore words are case sensitive.
+	// the results. If the text matched by the regular expression contains any string
+	// in this array, Amazon Macie ignores it. Ignore words are case sensitive.
 	IgnoreWords []string
 
 	// An array that lists specific character sequences (keywords), one of which must
@@ -69,9 +70,9 @@ type GetCustomDataIdentifierOutput struct {
 	Keywords []string
 
 	// The maximum number of characters that can exist between text that matches the
-	// regex pattern and the character sequences specified by the keywords array.
+	// regular expression and the character sequences specified by the keywords array.
 	// Amazon Macie includes or excludes a result based on the proximity of a keyword
-	// to text that matches the regex pattern.
+	// to text that matches the regular expression.
 	MaximumMatchDistance int32
 
 	// The custom name of the custom data identifier.
@@ -79,6 +80,14 @@ type GetCustomDataIdentifierOutput struct {
 
 	// The regular expression (regex) that defines the pattern to match.
 	Regex *string
+
+	// Specifies the severity that's assigned to findings that the custom data
+	// identifier produces, based on the number of occurrences of text that matches the
+	// custom data identifier's detection criteria. By default, Amazon Macie creates
+	// findings for S3 objects that contain at least one occurrence of text that
+	// matches the detection criteria, and Macie assigns the MEDIUM severity to those
+	// findings.
+	SeverityLevels []types.SeverityLevel
 
 	// A map of key-value pairs that identifies the tags (keys and values) that are
 	// associated with the custom data identifier.

@@ -4115,6 +4115,11 @@ func awsRestjson1_deserializeOpDocumentGetCustomDataIdentifierOutput(v **GetCust
 				sv.Regex = ptr.String(jtv)
 			}
 
+		case "severityLevels":
+			if err := awsRestjson1_deserializeDocumentSeverityLevelList(&sv.SeverityLevels, value); err != nil {
+				return err
+			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
@@ -15765,6 +15770,93 @@ func awsRestjson1_deserializeDocumentSeverity(v **types.Severity, value interfac
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSeverityLevel(v **types.SeverityLevel, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SeverityLevel
+	if *v == nil {
+		sv = &types.SeverityLevel{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "occurrencesThreshold":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.OccurrencesThreshold = i64
+			}
+
+		case "severity":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataIdentifierSeverity to be of type string, got %T instead", value)
+				}
+				sv.Severity = types.DataIdentifierSeverity(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSeverityLevelList(v *[]types.SeverityLevel, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SeverityLevel
+	if *v == nil {
+		cv = []types.SeverityLevel{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SeverityLevel
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentSeverityLevel(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

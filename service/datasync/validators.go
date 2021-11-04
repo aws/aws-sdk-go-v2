@@ -90,6 +90,26 @@ func (m *validateOpCreateLocationFsxWindows) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateLocationHdfs struct {
+}
+
+func (*validateOpCreateLocationHdfs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateLocationHdfs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateLocationHdfsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateLocationHdfsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateLocationNfs struct {
 }
 
@@ -305,6 +325,26 @@ func (m *validateOpDescribeLocationFsxWindows) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeLocationFsxWindowsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeLocationHdfs struct {
+}
+
+func (*validateOpDescribeLocationHdfs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeLocationHdfs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeLocationHdfsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeLocationHdfsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -570,6 +610,26 @@ func (m *validateOpUpdateAgent) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateLocationHdfs struct {
+}
+
+func (*validateOpUpdateLocationHdfs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateLocationHdfs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateLocationHdfsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateLocationHdfsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateLocationNfs struct {
 }
 
@@ -686,6 +746,10 @@ func addOpCreateLocationFsxWindowsValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpCreateLocationFsxWindows{}, middleware.After)
 }
 
+func addOpCreateLocationHdfsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateLocationHdfs{}, middleware.After)
+}
+
 func addOpCreateLocationNfsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateLocationNfs{}, middleware.After)
 }
@@ -728,6 +792,10 @@ func addOpDescribeLocationEfsValidationMiddleware(stack *middleware.Stack) error
 
 func addOpDescribeLocationFsxWindowsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeLocationFsxWindows{}, middleware.After)
+}
+
+func addOpDescribeLocationHdfsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeLocationHdfs{}, middleware.After)
 }
 
 func addOpDescribeLocationNfsValidationMiddleware(stack *middleware.Stack) error {
@@ -782,6 +850,10 @@ func addOpUpdateAgentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAgent{}, middleware.After)
 }
 
+func addOpUpdateLocationHdfsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateLocationHdfs{}, middleware.After)
+}
+
 func addOpUpdateLocationNfsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateLocationNfs{}, middleware.After)
 }
@@ -812,6 +884,41 @@ func validateEc2Config(v *types.Ec2Config) error {
 	}
 	if v.SecurityGroupArns == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroupArns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHdfsNameNode(v *types.HdfsNameNode) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HdfsNameNode"}
+	if v.Hostname == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Hostname"))
+	}
+	if v.Port == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Port"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHdfsNameNodeList(v []types.HdfsNameNode) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HdfsNameNodeList"}
+	for i := range v {
+		if err := validateHdfsNameNode(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1064,6 +1171,36 @@ func validateOpCreateLocationFsxWindowsInput(v *CreateLocationFsxWindowsInput) e
 	}
 }
 
+func validateOpCreateLocationHdfsInput(v *CreateLocationHdfsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateLocationHdfsInput"}
+	if v.NameNodes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NameNodes"))
+	} else if v.NameNodes != nil {
+		if err := validateHdfsNameNodeList(v.NameNodes); err != nil {
+			invalidParams.AddNested("NameNodes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.AuthenticationType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationType"))
+	}
+	if v.AgentArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentArns"))
+	}
+	if v.Tags != nil {
+		if err := validateInputTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateLocationNfsInput(v *CreateLocationNfsInput) error {
 	if v == nil {
 		return nil
@@ -1297,6 +1434,21 @@ func validateOpDescribeLocationFsxWindowsInput(v *DescribeLocationFsxWindowsInpu
 	}
 }
 
+func validateOpDescribeLocationHdfsInput(v *DescribeLocationHdfsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeLocationHdfsInput"}
+	if v.LocationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeLocationNfsInput(v *DescribeLocationNfsInput) error {
 	if v == nil {
 		return nil
@@ -1498,6 +1650,26 @@ func validateOpUpdateAgentInput(v *UpdateAgentInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateAgentInput"}
 	if v.AgentArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateLocationHdfsInput(v *UpdateLocationHdfsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateLocationHdfsInput"}
+	if v.LocationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocationArn"))
+	}
+	if v.NameNodes != nil {
+		if err := validateHdfsNameNodeList(v.NameNodes); err != nil {
+			invalidParams.AddNested("NameNodes", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

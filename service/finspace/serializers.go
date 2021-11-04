@@ -74,6 +74,13 @@ func awsRestjson1_serializeOpDocumentCreateEnvironmentInput(v *CreateEnvironment
 	object := value.Object()
 	defer object.Close()
 
+	if v.DataBundles != nil {
+		ok := object.Key("dataBundles")
+		if err := awsRestjson1_serializeDocumentDataBundleArns(v.DataBundles, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
@@ -99,6 +106,13 @@ func awsRestjson1_serializeOpDocumentCreateEnvironmentInput(v *CreateEnvironment
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if v.SuperuserParameters != nil {
+		ok := object.Key("superuserParameters")
+		if err := awsRestjson1_serializeDocumentSuperuserParameters(v.SuperuserParameters, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Tags != nil {
@@ -598,6 +612,17 @@ func awsRestjson1_serializeDocumentAttributeMap(v map[string]string, value smith
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDataBundleArns(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentFederationParameters(v *types.FederationParameters, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -632,6 +657,28 @@ func awsRestjson1_serializeDocumentFederationParameters(v *types.FederationParam
 	if v.SamlMetadataURL != nil {
 		ok := object.Key("samlMetadataURL")
 		ok.String(*v.SamlMetadataURL)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSuperuserParameters(v *types.SuperuserParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EmailAddress != nil {
+		ok := object.Key("emailAddress")
+		ok.String(*v.EmailAddress)
+	}
+
+	if v.FirstName != nil {
+		ok := object.Key("firstName")
+		ok.String(*v.FirstName)
+	}
+
+	if v.LastName != nil {
+		ok := object.Key("lastName")
+		ok.String(*v.LastName)
 	}
 
 	return nil

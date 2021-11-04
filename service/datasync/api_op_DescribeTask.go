@@ -57,8 +57,8 @@ type DescribeTaskOutput struct {
 	// location.
 	DestinationLocationArn *string
 
-	// The Amazon Resource Name (ARN) of the destination ENIs (Elastic Network
-	// Interface) that was created for your subnet.
+	// The Amazon Resource Names (ARNs) of the destination elastic network interfaces
+	// (ENIs) that were created for your subnet.
 	DestinationNetworkInterfaceArns []string
 
 	// Errors that DataSync encountered during execution of the task. You can use this
@@ -71,14 +71,14 @@ type DescribeTaskOutput struct {
 
 	// A list of filter rules that determines which files to exclude from a task. The
 	// list should contain a single filter string that consists of the patterns to
-	// exclude. The patterns are delimited by "|" (that is, a pipe), for example:
-	// "/folder1|/folder2"
+	// exclude. The patterns are delimited by "|" (that is, a pipe), for example,
+	// "/folder1|/folder2".
 	Excludes []types.FilterRule
 
 	// A list of filter rules that determines which files to include when running a
-	// task. The pattern should contain a single filter string that consists of the
-	// patterns to include. The patterns are delimited by "|" (that is, a pipe). For
-	// example: "/folder1|/folder2"
+	// task. The pattern contains a single filter string that consists of the patterns
+	// to include. The patterns are delimited by "|" (that is, a pipe), for example,
+	// "/folder1|/folder2".
 	Includes []types.FilterRule
 
 	// The name of the task that was described.
@@ -101,8 +101,8 @@ type DescribeTaskOutput struct {
 	// The Amazon Resource Name (ARN) of the source file system's location.
 	SourceLocationArn *string
 
-	// The Amazon Resource Name (ARN) of the source ENIs (Elastic Network Interface)
-	// that was created for your subnet.
+	// The Amazon Resource Names (ARNs) of the source elastic network interfaces (ENIs)
+	// that were created for your subnet.
 	SourceNetworkInterfaceArns []string
 
 	// The status of the task that was described. For detailed information about task

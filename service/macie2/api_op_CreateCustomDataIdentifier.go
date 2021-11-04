@@ -7,6 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,10 +43,10 @@ type CreateCustomDataIdentifierInput struct {
 	Description *string
 
 	// An array that lists specific character sequences (ignore words) to exclude from
-	// the results. If the text matched by the regular expression is the same as any
-	// string in this array, Amazon Macie ignores it. The array can contain as many as
-	// 10 ignore words. Each ignore word can contain 4-90 UTF-8 characters. Ignore
-	// words are case sensitive.
+	// the results. If the text matched by the regular expression contains any string
+	// in this array, Amazon Macie ignores it. The array can contain as many as 10
+	// ignore words. Each ignore word can contain 4-90 UTF-8 characters. Ignore words
+	// are case sensitive.
 	IgnoreWords []string
 
 	// An array that lists specific character sequences (keywords), one of which must
@@ -55,10 +56,10 @@ type CreateCustomDataIdentifierInput struct {
 	Keywords []string
 
 	// The maximum number of characters that can exist between text that matches the
-	// regex pattern and the character sequences specified by the keywords array.
+	// regular expression and the character sequences specified by the keywords array.
 	// Amazon Macie includes or excludes a result based on the proximity of a keyword
-	// to text that matches the regex pattern. The distance can be 1-300 characters.
-	// The default value is 50.
+	// to text that matches the regular expression. The distance can be 1-300
+	// characters. The default value is 50.
 	MaximumMatchDistance int32
 
 	// A custom name for the custom data identifier. The name can contain as many as
@@ -71,6 +72,19 @@ type CreateCustomDataIdentifierInput struct {
 	// The regular expression (regex) that defines the pattern to match. The expression
 	// can contain as many as 512 characters.
 	Regex *string
+
+	// The severity to assign to findings that the custom data identifier produces,
+	// based on the number of occurrences of text that matches the custom data
+	// identifier's detection criteria. You can specify as many as three SeverityLevel
+	// objects in this array, one for each severity: LOW, MEDIUM, or HIGH. If you
+	// specify more than one, the occurrences thresholds must be in ascending order by
+	// severity, moving from LOW to HIGH. For example, 1 for LOW, 50 for MEDIUM, and
+	// 100 for HIGH. If an S3 object contains fewer occurrences than the lowest
+	// specified threshold, Amazon Macie doesn't create a finding. If you don't specify
+	// any values for this array, Macie creates findings for S3 objects that contain at
+	// least one occurrence of text that matches the detection criteria, and Macie
+	// assigns the MEDIUM severity to those findings.
+	SeverityLevels []types.SeverityLevel
 
 	// A map of key-value pairs that specifies the tags to associate with the custom
 	// data identifier. A custom data identifier can have a maximum of 50 tags. Each
@@ -138,6 +152,9 @@ func (c *Client) addOperationCreateCustomDataIdentifierMiddlewares(stack *middle
 		return err
 	}
 	if err = addIdempotencyToken_opCreateCustomDataIdentifierMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addOpCreateCustomDataIdentifierValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCustomDataIdentifier(options.Region), middleware.Before); err != nil {

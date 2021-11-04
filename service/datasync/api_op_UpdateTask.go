@@ -35,19 +35,20 @@ type UpdateTaskInput struct {
 	// This member is required.
 	TaskArn *string
 
-	// The Amazon Resource Name (ARN) of the resource name of the CloudWatch LogGroup.
+	// The Amazon Resource Name (ARN) of the resource name of the Amazon CloudWatch log
+	// group.
 	CloudWatchLogGroupArn *string
 
 	// A list of filter rules that determines which files to exclude from a task. The
 	// list should contain a single filter string that consists of the patterns to
-	// exclude. The patterns are delimited by "|" (that is, a pipe), for example:
-	// "/folder1|/folder2"
+	// exclude. The patterns are delimited by "|" (that is, a pipe), for example,
+	// "/folder1|/folder2".
 	Excludes []types.FilterRule
 
 	// A list of filter rules that determines which files to include when running a
-	// task. The pattern should contain a single filter string that consists of the
-	// patterns to include. The patterns are delimited by "|" (that is, a pipe). For
-	// example: "/folder1|/folder2"
+	// task. The pattern contains a single filter string that consists of the patterns
+	// to include. The patterns are delimited by "|" (that is, a pipe), for example,
+	// "/folder1|/folder2".
 	Includes []types.FilterRule
 
 	// The name of the task to update.

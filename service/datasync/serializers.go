@@ -202,6 +202,53 @@ func (m *awsAwsjson11_serializeOpCreateLocationFsxWindows) HandleSerialize(ctx c
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpCreateLocationHdfs struct {
+}
+
+func (*awsAwsjson11_serializeOpCreateLocationHdfs) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpCreateLocationHdfs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateLocationHdfsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("FmrsService.CreateLocationHdfs")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentCreateLocationHdfsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpCreateLocationNfs struct {
 }
 
@@ -704,6 +751,53 @@ func (m *awsAwsjson11_serializeOpDescribeLocationFsxWindows) HandleSerialize(ctx
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentDescribeLocationFsxWindowsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDescribeLocationHdfs struct {
+}
+
+func (*awsAwsjson11_serializeOpDescribeLocationHdfs) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDescribeLocationHdfs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeLocationHdfsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("FmrsService.DescribeLocationHdfs")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDescribeLocationHdfsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1424,6 +1518,53 @@ func (m *awsAwsjson11_serializeOpUpdateAgent) HandleSerialize(ctx context.Contex
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpUpdateLocationHdfs struct {
+}
+
+func (*awsAwsjson11_serializeOpUpdateLocationHdfs) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUpdateLocationHdfs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateLocationHdfsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("FmrsService.UpdateLocationHdfs")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUpdateLocationHdfsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpUpdateLocationNfs struct {
 }
 
@@ -1740,6 +1881,36 @@ func awsAwsjson11_serializeDocumentFilterValues(v []string, value smithyjson.Val
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentHdfsNameNode(v *types.HdfsNameNode, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Hostname != nil {
+		ok := object.Key("Hostname")
+		ok.String(*v.Hostname)
+	}
+
+	if v.Port != nil {
+		ok := object.Key("Port")
+		ok.Integer(*v.Port)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentHdfsNameNodeList(v []types.HdfsNameNode, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentHdfsNameNode(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentInputTagList(v []types.TagListEntry, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -1912,6 +2083,23 @@ func awsAwsjson11_serializeDocumentPLSubnetArnList(v []string, value smithyjson.
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentQopConfiguration(v *types.QopConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DataTransferProtection) > 0 {
+		ok := object.Key("DataTransferProtection")
+		ok.String(string(v.DataTransferProtection))
+	}
+
+	if len(v.RpcProtection) > 0 {
+		ok := object.Key("RpcProtection")
+		ok.String(string(v.RpcProtection))
+	}
+
 	return nil
 }
 
@@ -2143,6 +2331,86 @@ func awsAwsjson11_serializeOpDocumentCreateLocationFsxWindowsInput(v *CreateLoca
 	if v.User != nil {
 		ok := object.Key("User")
 		ok.String(*v.User)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentCreateLocationHdfsInput(v *CreateLocationHdfsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AgentArns != nil {
+		ok := object.Key("AgentArns")
+		if err := awsAwsjson11_serializeDocumentAgentArnList(v.AgentArns, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.AuthenticationType) > 0 {
+		ok := object.Key("AuthenticationType")
+		ok.String(string(v.AuthenticationType))
+	}
+
+	if v.BlockSize != nil {
+		ok := object.Key("BlockSize")
+		ok.Integer(*v.BlockSize)
+	}
+
+	if v.KerberosKeytab != nil {
+		ok := object.Key("KerberosKeytab")
+		ok.Base64EncodeBytes(v.KerberosKeytab)
+	}
+
+	if v.KerberosKrb5Conf != nil {
+		ok := object.Key("KerberosKrb5Conf")
+		ok.Base64EncodeBytes(v.KerberosKrb5Conf)
+	}
+
+	if v.KerberosPrincipal != nil {
+		ok := object.Key("KerberosPrincipal")
+		ok.String(*v.KerberosPrincipal)
+	}
+
+	if v.KmsKeyProviderUri != nil {
+		ok := object.Key("KmsKeyProviderUri")
+		ok.String(*v.KmsKeyProviderUri)
+	}
+
+	if v.NameNodes != nil {
+		ok := object.Key("NameNodes")
+		if err := awsAwsjson11_serializeDocumentHdfsNameNodeList(v.NameNodes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.QopConfiguration != nil {
+		ok := object.Key("QopConfiguration")
+		if err := awsAwsjson11_serializeDocumentQopConfiguration(v.QopConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ReplicationFactor != nil {
+		ok := object.Key("ReplicationFactor")
+		ok.Integer(*v.ReplicationFactor)
+	}
+
+	if v.SimpleUser != nil {
+		ok := object.Key("SimpleUser")
+		ok.String(*v.SimpleUser)
+	}
+
+	if v.Subdirectory != nil {
+		ok := object.Key("Subdirectory")
+		ok.String(*v.Subdirectory)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentInputTagList(v.Tags, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -2472,6 +2740,18 @@ func awsAwsjson11_serializeOpDocumentDescribeLocationFsxWindowsInput(v *Describe
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentDescribeLocationHdfsInput(v *DescribeLocationHdfsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LocationArn != nil {
+		ok := object.Key("LocationArn")
+		ok.String(*v.LocationArn)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentDescribeLocationNfsInput(v *DescribeLocationNfsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2736,6 +3016,84 @@ func awsAwsjson11_serializeOpDocumentUpdateAgentInput(v *UpdateAgentInput, value
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentUpdateLocationHdfsInput(v *UpdateLocationHdfsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AgentArns != nil {
+		ok := object.Key("AgentArns")
+		if err := awsAwsjson11_serializeDocumentAgentArnList(v.AgentArns, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.AuthenticationType) > 0 {
+		ok := object.Key("AuthenticationType")
+		ok.String(string(v.AuthenticationType))
+	}
+
+	if v.BlockSize != nil {
+		ok := object.Key("BlockSize")
+		ok.Integer(*v.BlockSize)
+	}
+
+	if v.KerberosKeytab != nil {
+		ok := object.Key("KerberosKeytab")
+		ok.Base64EncodeBytes(v.KerberosKeytab)
+	}
+
+	if v.KerberosKrb5Conf != nil {
+		ok := object.Key("KerberosKrb5Conf")
+		ok.Base64EncodeBytes(v.KerberosKrb5Conf)
+	}
+
+	if v.KerberosPrincipal != nil {
+		ok := object.Key("KerberosPrincipal")
+		ok.String(*v.KerberosPrincipal)
+	}
+
+	if v.KmsKeyProviderUri != nil {
+		ok := object.Key("KmsKeyProviderUri")
+		ok.String(*v.KmsKeyProviderUri)
+	}
+
+	if v.LocationArn != nil {
+		ok := object.Key("LocationArn")
+		ok.String(*v.LocationArn)
+	}
+
+	if v.NameNodes != nil {
+		ok := object.Key("NameNodes")
+		if err := awsAwsjson11_serializeDocumentHdfsNameNodeList(v.NameNodes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.QopConfiguration != nil {
+		ok := object.Key("QopConfiguration")
+		if err := awsAwsjson11_serializeDocumentQopConfiguration(v.QopConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ReplicationFactor != nil {
+		ok := object.Key("ReplicationFactor")
+		ok.Integer(*v.ReplicationFactor)
+	}
+
+	if v.SimpleUser != nil {
+		ok := object.Key("SimpleUser")
+		ok.String(*v.SimpleUser)
+	}
+
+	if v.Subdirectory != nil {
+		ok := object.Key("Subdirectory")
+		ok.String(*v.Subdirectory)
 	}
 
 	return nil

@@ -73,6 +73,26 @@ func (Currency) Values() []Currency {
 	}
 }
 
+type DataIdentifierSeverity string
+
+// Enum values for DataIdentifierSeverity
+const (
+	DataIdentifierSeverityLow    DataIdentifierSeverity = "LOW"
+	DataIdentifierSeverityMedium DataIdentifierSeverity = "MEDIUM"
+	DataIdentifierSeverityHigh   DataIdentifierSeverity = "HIGH"
+)
+
+// Values returns all known values for DataIdentifierSeverity. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DataIdentifierSeverity) Values() []DataIdentifierSeverity {
+	return []DataIdentifierSeverity{
+		"LOW",
+		"MEDIUM",
+		"HIGH",
+	}
+}
+
 type DayOfWeek string
 
 // Enum values for DayOfWeek
