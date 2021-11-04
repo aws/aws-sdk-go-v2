@@ -214,7 +214,6 @@ func addGetAccessPointPolicyStatusForObjectLambdaUpdateEndpoint(stack *middlewar
 		},
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
-		UseDualstack:            options.UseDualstack,
 		UseARNRegion:            options.UseARNRegion,
 	})
 }

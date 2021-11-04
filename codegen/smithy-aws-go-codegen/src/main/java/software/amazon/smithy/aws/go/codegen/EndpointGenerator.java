@@ -14,12 +14,20 @@
  */
 package software.amazon.smithy.aws.go.codegen;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import software.amazon.smithy.aws.go.codegen.customization.S3ModelUtils;
 import software.amazon.smithy.aws.traits.ServiceTrait;
 import software.amazon.smithy.codegen.core.CodegenException;
 import software.amazon.smithy.codegen.core.Symbol;
@@ -33,6 +41,7 @@ import software.amazon.smithy.go.codegen.TriConsumer;
 import software.amazon.smithy.go.codegen.integration.ConfigField;
 import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
 import software.amazon.smithy.model.Model;
+import software.amazon.smithy.model.node.ArrayNode;
 import software.amazon.smithy.model.node.Node;
 import software.amazon.smithy.model.node.ObjectNode;
 import software.amazon.smithy.model.node.StringNode;
@@ -54,6 +63,12 @@ public final class EndpointGenerator implements Runnable {
     public static final String CLIENT_CONFIG_RESOLVER = "resolveDefaultEndpointConfiguration";
     public static final String RESOLVER_CONSTRUCTOR_NAME = "NewDefaultEndpointResolver";
     public static final String AWS_ENDPOINT_RESOLVER_HELPER = "withEndpointResolver";
+    public static final String DUAL_STACK_ENDPOINT_OPTION = "UseDualStackEndpoint";
+    public static final String USE_FIPS_ENDPOINT_OPTION = "UseFIPSEndpoint";
+    public static final String LOGGER_OPTION = "Logger";
+    public static final String LOG_DEPRECATED_OPTION = "LogDeprecated";
+    public static final String RESOLVED_REGION = "ResolvedRegion";
+    public static final String FINALIZE_CLIENT_ENDPOINT_RESOLVER_OPTIONS = "finalizeClientEndpointResolverOptions";
 
     private static final String EndpointResolverFromURL = "EndpointResolverFromURL";
     private static final String ENDPOINT_SOURCE_CUSTOM = "EndpointSourceCustom";
@@ -65,11 +80,86 @@ public final class EndpointGenerator implements Runnable {
     private static final String INTERNAL_RESOLVER_NAME = "Resolver";
     private static final String INTERNAL_RESOLVER_OPTIONS_NAME = "Options";
     private static final String INTERNAL_ENDPOINTS_DATA_NAME = "defaultPartitions";
-    private static final List<ResolveConfigField> resolveConfigFields = ListUtils.of(
-            ResolveConfigField.builder()
-                    .name("DisableHTTPS")
-                    .type(SymbolUtils.createValueSymbolBuilder("bool").build())
+    private static final String DISABLE_HTTPS = "DisableHTTPS";
+
+    // dual-stack related constants
+    private static final String DUAL_STACK_ENDPOINT_TYPE_NAME = "DualStackEndpointState";
+
+    // fips related constants
+    private static final String FIPS_ENDPOINT_TYPE_NAME = "FIPSEndpointState";
+
+    private static final String TRANSFORM_TO_SHARED_OPTIONS = "transformToSharedOptions";
+    private static final String AWS_ENDPOINT_RESOLVER_ADAPTOR = "awsEndpointResolverAdaptor";
+
+    private static final String DNS_SUFFIX_KEY = "dnsSuffix";
+    private static final String HOSTNAME_KEY = "hostname";
+    private static final String VARIANTS_KEY = "variants";
+    private static final String VARIANT_TAGS_KEY = "tags";
+
+    private static final List<EndpointOption> ENDPOINT_OPTIONS = ListUtils.of(
+            EndpointOption.builder()
+                    .name(LOGGER_OPTION)
+                    .documentation(String.format("%s is a logging implementation that log events should be sent to.",
+                            LOGGER_OPTION))
+                    .type(SymbolUtils.createValueSymbolBuilder("Logger", SmithyGoDependency.SMITHY_LOGGING)
+                            .build())
                     .shared(true)
+                    .build(),
+            EndpointOption.builder()
+                    .name(LOG_DEPRECATED_OPTION)
+                    .documentation(String.format("""
+                                                 %s indicates that deprecated endpoints should be logged to the 
+                                                 provided logger.""", LOG_DEPRECATED_OPTION))
+                    .type(SymbolUtils.createValueSymbolBuilder("bool")
+                            .putProperty(SymbolUtils.GO_UNIVERSE_TYPE, true)
+                            .build())
+                    .shared(true)
+                    .build(),
+            EndpointOption.builder()
+                    .name(RESOLVED_REGION)
+                    .documentation(String.format("""
+                                                 %s is used to override the region to be resolved, rather then the
+                                                 using the value passed to the ResolveEndpoint method. This value is
+                                                 used by the SDK to translate regions like fips-us-east-1 or
+                                                 us-east-1-fips to an alternative name. You must not set this value
+                                                 directly in your application.""", RESOLVED_REGION))
+                    .type(SymbolUtils.createValueSymbolBuilder("string")
+                            .putProperty(SymbolUtils.GO_UNIVERSE_TYPE, true)
+                            .build())
+                    .shared(true)
+                    .withGetter(true)
+                    .build(),
+            EndpointOption.builder()
+                    .name(DISABLE_HTTPS)
+                    .documentation(String.format("""
+                                                 %s informs the resolver to return an endpoint that does not use the
+                                                 HTTPS scheme.
+                                                 """, DISABLE_HTTPS))
+                    .type(SymbolUtils.createValueSymbolBuilder("bool")
+                            .putProperty(SymbolUtils.GO_UNIVERSE_TYPE, true)
+                            .build())
+                    .shared(true)
+                    .withGetter(true)
+                    .build(),
+            EndpointOption.builder()
+                    .name(DUAL_STACK_ENDPOINT_OPTION)
+                    .documentation(String.format("""
+                                                 %s specifies the resolver must resolve a dual-stack endpoint.
+                                                 """, DUAL_STACK_ENDPOINT_OPTION))
+                    .type(SymbolUtils.createValueSymbolBuilder(DUAL_STACK_ENDPOINT_TYPE_NAME,
+                            AwsGoDependency.AWS_CORE).build())
+                    .shared(true)
+                    .withGetter(true)
+                    .build(),
+            EndpointOption.builder()
+                    .name(USE_FIPS_ENDPOINT_OPTION)
+                    .documentation(String.format("""
+                                                 %s specifies the resolver must resolve a FIPS endpoint.
+                                                 """, USE_FIPS_ENDPOINT_OPTION))
+                    .type(SymbolUtils.createValueSymbolBuilder(FIPS_ENDPOINT_TYPE_NAME,
+                            AwsGoDependency.AWS_CORE).build())
+                    .shared(true)
+                    .withGetter(true)
                     .build()
     );
 
@@ -154,6 +244,7 @@ public final class EndpointGenerator implements Runnable {
                 generatePublicResolverTypes(writer);
                 generateMiddleware(writer);
                 generateAwsEndpointResolverWrapper(writer);
+                generateFinalizeClientEndpointResolverOptions(writer);
             });
         }
 
@@ -176,24 +267,91 @@ public final class EndpointGenerator implements Runnable {
                         });
                     });
         }
+    }
 
+    private void generateFinalizeClientEndpointResolverOptions(GoWriter writer) {
+        writer.pushState();
+
+        writer.putContext("logDepOption", LOG_DEPRECATED_OPTION);
+        writer.putContext("dualStackOption", DUAL_STACK_ENDPOINT_OPTION);
+        writer.putContext("fipsOption", USE_FIPS_ENDPOINT_OPTION);
+        writer.putContext("unsetDualStack", DualStackEndpointConstant.UNSET.getSymbol());
+        writer.putContext("enableDualStack", DualStackEndpointConstant.ENABLE.getSymbol());
+        writer.putContext("disableDualStack", DualStackEndpointConstant.DISABLE.getSymbol());
+        writer.putContext("enableFIPS", FIPSEndpointConstant.ENABLE.getSymbol());
+        writer.putContext("contains", SymbolUtils.createValueSymbolBuilder("Contains",
+                SmithyGoDependency.STRINGS).build());
+        writer.putContext("replaceALL", SymbolUtils.createValueSymbolBuilder("ReplaceAll",
+                SmithyGoDependency.STRINGS).build());
+
+        writer.openBlock("func $L(options *Options) {", "}",
+                FINALIZE_CLIENT_ENDPOINT_RESOLVER_OPTIONS, () -> {
+                    writer.write("""
+                                 options.EndpointOptions.$logDepOption:L = options.ClientLogMode.IsDeprecatedUsage()
+                                                                  
+                                 if len(options.EndpointOptions.ResolvedRegion) == 0 {
+                                     const fipsInfix = "-fips-"
+                                     const fipsPrefix = "fips-"
+                                     const fipsSuffix = "-fips"
+                                     
+                                     if ($contains:T(options.Region, fipsInfix) ||
+                                         $contains:T(options.Region, fipsPrefix) ||
+                                         $contains:T(options.Region, fipsSuffix)) {
+                                         options.EndpointOptions.ResolvedRegion = $replaceALL:T($replaceALL:T($replaceALL:T(
+                                             options.Region, fipsInfix, "-"), fipsPrefix, ""), fipsSuffix, "")
+                                         options.EndpointOptions.$fipsOption:L = $enableFIPS:T
+                                     }
+                                 }
+                                 """);
+
+                    if (S3ModelUtils.isServiceS3(model, serviceShape)
+                        || S3ModelUtils.isServiceS3Control(model, serviceShape)) {
+                        writer.write("""
+                                     if options.EndpointOptions.$dualStackOption:L == $unsetDualStack:T {
+                                         if options.UseDualstack {
+                                             options.EndpointOptions.$dualStackOption:L = $enableDualStack:T
+                                         } else {
+                                             options.EndpointOptions.$dualStackOption:L = $disableDualStack:T
+                                         }
+                                     }
+                                     """);
+                    }
+                }).write("");
+
+        writer.popState();
     }
 
     private void generateInternalModelHelpers(GoWriter writer) {
         generateDNSSuffixFunction(writer);
-        generateDNSSuffixFromRegionFunction(writer);
     }
 
     private void generateDNSSuffixFunction(GoWriter writer) {
+        Symbol optionsSymbol = getInternalEndpointsSymbol(INTERNAL_RESOLVER_OPTIONS_NAME, false).build();
+
         writer.addUseImports(SmithyGoDependency.FMT);
         writer.writeDocs("GetDNSSuffix returns the dnsSuffix URL component for the given partition id");
-        writer.openBlock("func GetDNSSuffix(id string) (string, error) {", "}", () -> {
+        writer.openBlock("func GetDNSSuffix(id string, options $T) (string, error) {", "}", optionsSymbol, () -> {
             Symbol equalFold = SymbolUtils.createValueSymbolBuilder("EqualFold", SmithyGoDependency.STRINGS)
                     .build();
+
+            writer.write("variant := $L(options).GetEndpointVariant()", TRANSFORM_TO_SHARED_OPTIONS);
+
             writer.openBlock("switch {", "}", () -> {
                 partitions.forEach((s, partition) -> {
                     writer.openBlock("case $T(id, $S):", "", equalFold, partition.id, () -> {
-                        writer.write("return $S, nil", partition.dnsSuffix);
+                        writer.openBlock("switch variant {", "}", () -> {
+                            partition.getDefaults().forEach((variant, objectNode) -> {
+                                writer.writeInline("case ");
+                                variant.writeVariantInline(writer);
+                                writer.openBlock(":", "", () -> writer
+                                        .write("return $S, nil", objectNode.expectStringMember(DNS_SUFFIX_KEY)));
+                            });
+                            writer.write("""
+                                         default:
+                                             return "", $T("unsupported endpoint variant %v, in partition %s", variant, id)
+                                         """, SymbolUtils.createValueSymbolBuilder("Errorf",
+                                    SmithyGoDependency.FMT).build());
+                        });
                     });
                 });
                 writer.openBlock("default:", "", () -> writer.write("return \"\", fmt.Errorf(\"unknown partition\")"));
@@ -202,68 +360,87 @@ public final class EndpointGenerator implements Runnable {
         writer.write("");
     }
 
-    private void generateDNSSuffixFromRegionFunction(GoWriter writer) {
-        writer.addUseImports(SmithyGoDependency.FMT);
-        writer.writeDocs("GetDNSSuffixFromRegion returns the dnsSuffix URL component for the given partition id");
-        writer.openBlock("func GetDNSSuffixFromRegion(region string) (string, error) {", "}", () -> {
-            writer.openBlock("switch {", "}", () -> {
-                getSortedPartitions().forEach(partition -> {
-                    writer.openBlock("case partitionRegexp.$L.MatchString(region):", "",
-                            getPartitionIDFieldName(partition.getId()), () -> {
-                                writer.write("return $S, nil", partition.dnsSuffix);
-                            });
-                });
-                writer.openBlock("default:", "", () -> writer.write("return \"\", fmt.Errorf(\"unknown region partition\")"));
-            });
-        });
-        writer.write("");
-    }
-
     private void generateAwsEndpointResolverWrapper(GoWriter writer) {
-        Symbol awsEndpointResolver = SymbolUtils.createValueSymbolBuilder("EndpointResolver", AwsGoDependency.AWS_CORE)
+        var endpointResolver = SymbolUtils.createValueSymbolBuilder("EndpointResolver", AwsGoDependency.AWS_CORE)
                 .build();
-        Symbol resolverInterface = SymbolUtils.createValueSymbolBuilder(RESOLVER_INTERFACE_NAME).build();
+        var endpointResolverWithOptions = SymbolUtils.createValueSymbolBuilder("EndpointResolverWithOptions", AwsGoDependency.AWS_CORE)
+                .build();
+        var resolverInterface = SymbolUtils.createValueSymbolBuilder(RESOLVER_INTERFACE_NAME).build();
 
-        Symbol wrappedResolverSymbol = SymbolUtils.createPointableSymbolBuilder("wrappedEndpointResolver").build();
-        writer.openBlock("type $T struct {", "}", wrappedResolverSymbol, () -> {
-            writer.write("awsResolver $T", awsEndpointResolver);
-            writer.write("resolver $T", resolverInterface);
-        });
+        var wrappedResolverSymbol = SymbolUtils.createPointableSymbolBuilder("wrappedEndpointResolver").build();
+
+        writer.write("""
+                     type $T struct {
+                         awsResolver $T
+                         resolver $T
+                     }
+                     """, wrappedResolverSymbol, endpointResolverWithOptions, resolverInterface);
+
         writeExternalResolveEndpointImplementation(writer, wrappedResolverSymbol, "w", () -> {
-            writer.openBlock("if w.awsResolver == nil {", "}", () -> writer.write("goto fallback"));
-
-            writer.write("endpoint, err = w.awsResolver.ResolveEndpoint(ServiceID, region)");
-            writer.openBlock("if err == nil {", "}", () -> writer.write("return endpoint, nil"));
-            writer.write("");
+            var endpointNotFoundError = SymbolUtils.createValueSymbolBuilder("EndpointNotFoundError",
+                    AwsGoDependency.AWS_CORE).build();
+            var errorf = SymbolUtils.createValueSymbolBuilder("Errorf",
+                    SmithyGoDependency.FMT).build();
+            writer.write("""
+                         if w.awsResolver == nil {
+                             goto fallback
+                         }
+                         endpoint, err = w.awsResolver.ResolveEndpoint(ServiceID, region, options)
+                         if err == nil {
+                             return endpoint, nil
+                         }
+                                                  
+                         if nf := (&$T{}); !errors.As(err, &nf) {
+                             return endpoint, err
+                         }
+                                                  
+                         fallback:
+                         if w.resolver == nil {
+                             return endpoint, $T("default endpoint resolver provided was nil")
+                         }
+                         return w.resolver.ResolveEndpoint(region, options)""", endpointNotFoundError, errorf);
 
             writer.addUseImports(SmithyGoDependency.ERRORS);
-            writer.openBlock("if nf := (&$T{}); !errors.As(err, &nf) {", "}",
-                    SymbolUtils.createValueSymbolBuilder("EndpointNotFoundError", AwsGoDependency.AWS_CORE).build(),
-                    () -> writer.write("return endpoint, err"));
-            writer.write("");
-
-            writer.write("fallback:");
-            writer.openBlock("if w.resolver == nil {", "}", () -> {
-                writer.addUseImports(SmithyGoDependency.FMT);
-                writer.write("return endpoint, fmt.Errorf(\"default endpoint resolver provided was nil\")");
-            });
-            writer.write("return w.resolver.ResolveEndpoint(region, options)");
         });
+
+        var endpoint = SymbolUtils.createValueSymbolBuilder("Endpoint",
+                AwsGoDependency.AWS_CORE).build();
+        writer.write("""
+                     type $L func(service, region string) ($T, error)
+                                          
+                     func (a $L) ResolveEndpoint(service, region string, options ...interface{}) ($T, error) {
+                         return a(service, region)
+                     }
+                                          
+                     var _ $T = $L(nil)
+                     """, AWS_ENDPOINT_RESOLVER_ADAPTOR, endpoint, AWS_ENDPOINT_RESOLVER_ADAPTOR,
+                endpoint, endpointResolverWithOptions, AWS_ENDPOINT_RESOLVER_ADAPTOR);
 
         // Generate exported helper for constructing a wrapper around the AWS EndpointResolver type that is compatible
         // with the clients EndpointResolver interface.
-        writer.writeDocs(String.format("%s returns an EndpointResolver that first delegates endpoint resolution "
-                        + "to the awsResolver. If awsResolver returns `aws.EndpointNotFoundError` error, the resolver "
-                        + "will use the the provided fallbackResolver for resolution. awsResolver and fallbackResolver "
-                        + "must not be nil",
-                AWS_ENDPOINT_RESOLVER_HELPER));
-        writer.openBlock("func $L(awsResolver $T, fallbackResolver $T) $T {", "}", AWS_ENDPOINT_RESOLVER_HELPER,
-                awsEndpointResolver, resolverInterface, resolverInterface, () -> {
-                    writer.openBlock("return &$T{", "}", wrappedResolverSymbol, () -> {
-                        writer.write("awsResolver: awsResolver,");
-                        writer.write("resolver: fallbackResolver,");
-                    });
-                });
+        writer.write("""
+                     // $L returns an EndpointResolver that first delegates endpoint resolution to the awsResolver.
+                     // If awsResolver returns aws.EndpointNotFoundError error, the resolver will use the the provided 
+                     // fallbackResolver for resolution.
+                     //
+                     // fallbackResolver must not be nil
+                     func $L(awsResolver $T, awsResolverWithOptions $T, fallbackResolver $T) $T {
+                         var resolver $T
+                         
+                         if awsResolverWithOptions != nil {
+                             resolver = awsResolverWithOptions
+                         } else if awsResolver != nil {
+                             resolver = $L(awsResolver.ResolveEndpoint)
+                         }
+                                          
+                         return &$T{
+                             awsResolver: resolver,
+                             resolver: fallbackResolver,
+                         }
+                     }
+                     """, AWS_ENDPOINT_RESOLVER_HELPER, AWS_ENDPOINT_RESOLVER_HELPER,
+                endpointResolver, endpointResolverWithOptions, resolverInterface,
+                resolverInterface, endpointResolverWithOptions, AWS_ENDPOINT_RESOLVER_ADAPTOR, wrappedResolverSymbol);
     }
 
     private void generateMiddleware(GoWriter writer) {
@@ -315,9 +492,15 @@ public final class EndpointGenerator implements Runnable {
         });
         w.write("");
 
+        w.write("""
+                eo := m.Options
+                eo.$L = $T(ctx)
+                """, LOGGER_OPTION, SymbolUtils.createValueSymbolBuilder("GetLogger",
+                SmithyGoDependency.SMITHY_MIDDLEWARE).build());
+
         w.write("var endpoint $T", SymbolUtils.createValueSymbolBuilder("Endpoint", AwsGoDependency.AWS_CORE)
                 .build());
-        w.write("endpoint, err = m.Resolver.ResolveEndpoint(awsmiddleware.GetRegion(ctx), m.Options)");
+        w.write("endpoint, err = m.Resolver.ResolveEndpoint(awsmiddleware.GetRegion(ctx), eo)");
         w.openBlock("if err != nil {", "}", () -> {
             w.write("return out, metadata, fmt.Errorf(\"failed to resolve service endpoint, %w\", err)");
         });
@@ -401,8 +584,8 @@ public final class EndpointGenerator implements Runnable {
 
         // Generate resolver function creator
         writer.writeDocs(String.format("%s is a helper utility that wraps a function so it satisfies the %s "
-                + "interface. This is useful when you want to add additional endpoint resolving logic, or stub out "
-                + "specific endpoints with custom values.", RESOLVER_FUNC_NAME, RESOLVER_INTERFACE_NAME));
+                                       + "interface. This is useful when you want to add additional endpoint resolving logic, or stub out "
+                                       + "specific endpoints with custom values.", RESOLVER_FUNC_NAME, RESOLVER_INTERFACE_NAME));
         writer.write("type $T func(region string, options $T) ($T, error)",
                 resolverFuncSymbol, resolverOptionsSymbol, awsEndpointSymbol);
 
@@ -419,9 +602,9 @@ public final class EndpointGenerator implements Runnable {
 
         // Generate EndpointResolverFromURL helper
         writer.writeDocs(String.format("%s returns an EndpointResolver configured using the provided endpoint url. "
-                        + "By default, the resolved endpoint resolver uses the client region as signing region, and  "
-                        + "the endpoint source is set to EndpointSourceCustom."
-                        + "You can provide functional options to configure endpoint values for the resolved endpoint.",
+                                       + "By default, the resolved endpoint resolver uses the client region as signing region, and  "
+                                       + "the endpoint source is set to EndpointSourceCustom."
+                                       + "You can provide functional options to configure endpoint values for the resolved endpoint.",
                 EndpointResolverFromURL));
         writer.openBlock("func $L(url string, optFns ...func($P)) EndpointResolver {", "}",
                 EndpointResolverFromURL, AWS_ENDPOINT, () -> {
@@ -480,7 +663,7 @@ public final class EndpointGenerator implements Runnable {
     ) {
         Symbol awsEndpointSymbol = SymbolUtils.createValueSymbolBuilder("Endpoint", AwsGoDependency.AWS_CORE).build();
         writer.openBlock("func ($L $P) ResolveEndpoint(region string, options $T) (endpoint $T, err error) {", "}",
-                receiverIdentifier, receiverType, resolverOptionsSymbol, awsEndpointSymbol, body::run)
+                        receiverIdentifier, receiverType, resolverOptionsSymbol, awsEndpointSymbol, body::run)
                 .write("");
     }
 
@@ -490,39 +673,65 @@ public final class EndpointGenerator implements Runnable {
         writer.writeDocs(String.format("%s is the endpoint resolver configuration options",
                 resolverOptionsSymbol.getName()));
         writer.openBlock("type $T struct {", "}", resolverOptionsSymbol, () -> {
-            resolveConfigFields.forEach(field -> {
-                writer.write("$L $T", field.getName(), field.getType());
+            ENDPOINT_OPTIONS.forEach(field -> {
+                field.getDocumentation().ifPresent(s -> {
+                    if (s.length() == 0) {
+                        return;
+                    }
+                    writer.writeDocs(s);
+                });
+                writer.write("$L $P", field.getName(), field.getType()).write("");
             });
         });
         writer.write("");
+        ENDPOINT_OPTIONS.forEach(endpointOption -> {
+            if (!endpointOption.withGetter) {
+                return;
+            }
+            writer.write("""
+                         func (o $T) Get$L() $P {
+                             return o.$L
+                         }
+                         """, resolverOptionsSymbol, endpointOption.getName(), endpointOption.getType(),
+                    endpointOption.getName());
+        });
+
+        Symbol sharedOptions = SymbolUtils.createPointableSymbolBuilder("Options",
+                AwsGoDependency.INTERNAL_ENDPOINTS_V2).build();
+        writer.openBlock("func $L(options $T) $T {", "}", TRANSFORM_TO_SHARED_OPTIONS,
+                SymbolUtils.createValueSymbolBuilder(INTERNAL_RESOLVER_OPTIONS_NAME).build(), sharedOptions,
+                () -> writer
+                        .openBlock("return $T{", "}", sharedOptions, () -> {
+                            ENDPOINT_OPTIONS.stream().filter(EndpointOption::isShared).forEach(field -> {
+                                String internalName = field.getSharedOptionName().orElse(field.getName());
+                                Optional<Symbol> resolver = field.getSharedResolver();
+                                if (resolver.isPresent()) {
+                                    writer.write("$L: $T(options.$L),", internalName, resolver.get(),
+                                            field.getName());
+                                } else {
+                                    writer.write("$L: options.$L,", internalName, field.getName());
+                                }
+                            });
+                        }));
 
         // Resolver
         Symbol resolverImplSymbol = SymbolUtils.createPointableSymbolBuilder(INTERNAL_RESOLVER_NAME).build();
-
 
         writer.writeDocs(String.format("%s %s endpoint resolver", resolverImplSymbol.getName(),
                 this.resolvedSdkID));
         writer.openBlock("type $T struct {", "}", resolverImplSymbol, () -> {
             writer.write("partitions $T", SymbolUtils.createValueSymbolBuilder("Partitions",
-                    AwsGoDependency.AWS_ENDPOINTS).build());
+                    AwsGoDependency.INTERNAL_ENDPOINTS_V2).build());
         });
         writer.write("");
         writer.writeDocs("ResolveEndpoint resolves the service endpoint for the given region and options");
         writeInternalResolveEndpointImplementation(writer, resolverImplSymbol, "r", () -> {
-            // Currently all APIs require a region to derive the endpoint for that API. If there are ever a truly
+            // Currently, all APIs require a region to derive the endpoint for that API. If there are ever a truly
             // region-less API then this should be gated at codegen.
             writer.addUseImports(AwsGoDependency.AWS_CORE);
-            writer.write("if len(region) == 0 { return endpoint, &aws.MissingRegionError{} }");
-            writer.write("");
-
-            Symbol sharedOptions = SymbolUtils.createPointableSymbolBuilder("Options",
-                    AwsGoDependency.AWS_ENDPOINTS).build();
-            writer.openBlock("opt := $T{", "}", sharedOptions, () -> {
-                resolveConfigFields.stream().filter(ResolveConfigField::isShared).forEach(field -> {
-                    writer.write("$L: options.$L,", field.getName(), field.getName());
-                });
-            });
-            writer.write("return r.partitions.ResolveEndpoint(region, opt)");
+            writer.write("if len(region) == 0 { return endpoint, &aws.MissingRegionError{} }").write("")
+                    .write("opt := $L(options)", TRANSFORM_TO_SHARED_OPTIONS)
+                    .write("return r.partitions.ResolveEndpoint(region, opt)");
         });
         writer.write("");
         writer.writeDocs(String.format("New returns a new %s", resolverImplSymbol.getName()));
@@ -555,7 +764,7 @@ public final class EndpointGenerator implements Runnable {
     }
 
     private void generateInternalEndpointsModel(GoWriter writer) {
-        writer.addUseImports(AwsGoDependency.AWS_ENDPOINTS);
+        writer.addUseImports(AwsGoDependency.INTERNAL_ENDPOINTS_V2);
 
         List<Partition> sortedPartitions = getSortedPartitions();
 
@@ -572,8 +781,8 @@ public final class EndpointGenerator implements Runnable {
         });
         writer.write("");
 
-        Symbol partitionsSymbol = SymbolUtils.createPointableSymbolBuilder("Partitions", AwsGoDependency.AWS_ENDPOINTS)
-                .build();
+        Symbol partitionsSymbol = SymbolUtils.createPointableSymbolBuilder("Partitions",
+                AwsGoDependency.INTERNAL_ENDPOINTS_V2).build();
         writer.openBlock("var $L = $T{", "}", INTERNAL_ENDPOINTS_DATA_NAME, partitionsSymbol, () -> {
             sortedPartitions.forEach(entry -> {
                 writer.openBlock("{", "},", () -> writePartition(writer, entry));
@@ -594,36 +803,71 @@ public final class EndpointGenerator implements Runnable {
 
     private void writePartition(GoWriter writer, Partition partition) {
         writer.write("ID: $S,", partition.getId());
-        Symbol endpointSymbol = SymbolUtils.createValueSymbolBuilder("Endpoint",
-                AwsGoDependency.AWS_ENDPOINTS).build();
-        writer.openBlock("Defaults: $T{", "},", endpointSymbol,
-                () -> writeEndpoint(writer, partition.getDefaults()));
+        var defaultKey = SymbolUtils.createValueSymbolBuilder("DefaultKey",
+                AwsGoDependency.INTERNAL_ENDPOINTS_V2).build();
+        var endpointSymbol = SymbolUtils.createValueSymbolBuilder("Endpoint",
+                AwsGoDependency.INTERNAL_ENDPOINTS_V2).build();
+        writer.openBlock("Defaults: map[$T]$P{", "},", defaultKey, endpointSymbol,
+                () -> partition.getDefaults().forEach((variant, objectNode) -> {
+                    writer.writeInline("""
+                                       $T{
+                                           Variant:""", defaultKey);
+                    variant.writeVariantInline(writer);
+                    writer.writeInline(",\n}:");
+                    writer.openBlock("{", "},",
+                            () -> writeEndpoint(writer, objectNode));
+                }));
 
         writer.addUseImports(AwsGoDependency.REGEXP);
         writer.write("RegionRegex: partitionRegexp.$L,", getPartitionIDFieldName(partition.getId()));
 
-        Optional<String> optionalPartitionEndpoint = partition.getPartitionEndpoint();
-        Symbol isRegionalizedValue = SymbolUtils.createValueSymbolBuilder(optionalPartitionEndpoint.isPresent()
+        var optionalPartitionEndpoint = partition.getPartitionEndpoint();
+        var isRegionalizedValue = SymbolUtils.createValueSymbolBuilder(optionalPartitionEndpoint.isPresent()
                 ? "false" : "true").build();
         writer.write("IsRegionalized: $T,", isRegionalizedValue);
         optionalPartitionEndpoint.ifPresent(s -> writer.write("PartitionEndpoint: $S,", s));
 
-        Map<StringNode, Node> endpoints = partition.getEndpoints().getMembers();
+        var endpoints = partition.getEndpoints().getMembers();
         if (endpoints.size() > 0) {
-            Symbol endpointsSymbol = SymbolUtils.createPointableSymbolBuilder("Endpoints",
-                    AwsGoDependency.AWS_ENDPOINTS)
+            var endpointKey = SymbolUtils.createPointableSymbolBuilder("EndpointKey",
+                            AwsGoDependency.INTERNAL_ENDPOINTS_V2)
+                    .build();
+            var endpointsSymbol = SymbolUtils.createPointableSymbolBuilder("Endpoints",
+                            AwsGoDependency.INTERNAL_ENDPOINTS_V2)
                     .build();
             writer.openBlock("Endpoints: $T{", "},", endpointsSymbol, () -> {
-                endpoints.forEach((s, n) -> {
-                    writer.openBlock("$S: $T{", "},", s, endpointSymbol,
-                            () -> writeEndpoint(writer, n.expectObjectNode()));
+                endpoints.forEach((region, en) -> {
+                    var endpointNode = en.expectObjectNode();
+                    writer.openBlock("""
+                                     $T{
+                                         Region: $S,
+                                     }: $T{""", "},", endpointKey, region,
+                            endpointSymbol, () -> writeEndpoint(writer, endpointNode));
+                    endpointNode.getArrayMember(VARIANTS_KEY).orElse(ArrayNode.fromNodes()).forEach(vn -> {
+                        writer.writeInline("""
+                                           $T{
+                                               Region: $S,
+                                               Variant:""", endpointKey, region);
+                        var variantNode = vn.expectObjectNode();
+                        Variant.fromArrayNode(variantNode.expectArrayMember(VARIANT_TAGS_KEY))
+                                .writeVariantInline(writer);
+                        writer.openBlock(",\n}: {", "},",
+                                () -> writeEndpoint(writer, mergeVariantDefinition(endpointNode, variantNode)));
+                    });
                 });
             });
         }
     }
 
+    private ObjectNode mergeVariantDefinition(ObjectNode endpointNode, ObjectNode variantNode) {
+        return endpointNode
+                .withoutMember(HOSTNAME_KEY)
+                .withoutMember(DNS_SUFFIX_KEY)
+                .merge(variantNode);
+    }
+
     private void writeEndpoint(GoWriter writer, ObjectNode node) {
-        node.getStringMember("hostname").ifPresent(n -> {
+        node.getStringMember(HOSTNAME_KEY).ifPresent(n -> {
             writer.write("Hostname: $S,", n.getValue());
         });
         node.getArrayMember("protocols").ifPresent(nodes -> {
@@ -641,7 +885,7 @@ public final class EndpointGenerator implements Runnable {
         node.getMember("credentialScope").ifPresent(n -> {
             ObjectNode credentialScope = n.expectObjectNode();
             Symbol credentialScopeSymbol = SymbolUtils.createValueSymbolBuilder("CredentialScope",
-                    AwsGoDependency.AWS_ENDPOINTS)
+                            AwsGoDependency.INTERNAL_ENDPOINTS_V2)
                     .build();
             writer.openBlock("CredentialScope: $T{", "},", credentialScopeSymbol, () -> {
                 credentialScope.getStringMember("region").ifPresent(nn -> {
@@ -652,14 +896,26 @@ public final class EndpointGenerator implements Runnable {
                 });
             });
         });
+        node.getBooleanMember("deprecated").ifPresent(booleanNode -> {
+            if (booleanNode.getValue()) {
+                writer.write("Deprecated: $T,", SymbolUtils.createValueSymbolBuilder("TrueTernary",
+                        AwsGoDependency.AWS_CORE).build());
+            }
+        });
     }
 
-    private static class ResolveConfigField extends ConfigField {
+    private static class EndpointOption extends ConfigField {
         private final boolean shared;
+        private final String sharedOptionName;
+        private final Symbol sharedResolver;
+        private final boolean withGetter;
 
-        public ResolveConfigField(Builder builder) {
+        public EndpointOption(Builder builder) {
             super(builder);
             this.shared = builder.shared;
+            this.sharedOptionName = builder.sharedOptionName;
+            this.sharedResolver = builder.sharedResolver;
+            this.withGetter = builder.withGetter;
         }
 
         public static Builder builder() {
@@ -670,8 +926,23 @@ public final class EndpointGenerator implements Runnable {
             return shared;
         }
 
+        public Optional<String> getSharedOptionName() {
+            return Optional.ofNullable(sharedOptionName);
+        }
+
+        public Optional<Symbol> getSharedResolver() {
+            return Optional.ofNullable(this.sharedResolver);
+        }
+
+        public boolean isWithGetter() {
+            return withGetter;
+        }
+
         private static class Builder extends ConfigField.Builder {
             private boolean shared;
+            private String sharedOptionName;
+            private Symbol sharedResolver;
+            private boolean withGetter;
 
             public Builder() {
                 super();
@@ -688,9 +959,24 @@ public final class EndpointGenerator implements Runnable {
                 return this;
             }
 
+            public Builder sharedOptionName(String sharedOptionName) {
+                this.sharedOptionName = sharedOptionName;
+                return this;
+            }
+
+            public Builder sharedResolver(Symbol sharedResolver) {
+                this.sharedResolver = sharedResolver;
+                return this;
+            }
+
+            public Builder withGetter(boolean withGetter) {
+                this.withGetter = withGetter;
+                return this;
+            }
+
             @Override
-            public ResolveConfigField build() {
-                return new ResolveConfigField(this);
+            public EndpointOption build() {
+                return new EndpointOption(this);
             }
 
             @Override
@@ -713,37 +999,192 @@ public final class EndpointGenerator implements Runnable {
         }
     }
 
+    private static final class Variant {
+        private final boolean fips;
+        private final boolean dualstack;
+        private final Set<String> unknown;
+
+        private Variant(Builder builder) {
+            this.fips = builder.fips;
+            this.dualstack = builder.dualstack;
+            this.unknown = builder.unknown;
+        }
+
+        public boolean isFips() {
+            return fips;
+        }
+
+        public boolean isDualstack() {
+            return dualstack;
+        }
+
+        public Set<String> getUnknown() {
+            return unknown;
+        }
+
+        public void writeVariantInline(GoWriter writer) {
+            if (getUnknown().size() > 0) {
+                throw new CodegenException("unable to represent variant with unknown tags");
+            }
+
+            var symbols = new ArrayList<>();
+
+            if (fips) {
+                symbols.add(SymbolUtils.createValueSymbolBuilder("FIPSVariant",
+                                AwsGoDependency.INTERNAL_ENDPOINTS_V2)
+                        .build());
+            }
+            if (dualstack) {
+                symbols.add(SymbolUtils.createValueSymbolBuilder("DualStackVariant",
+                                AwsGoDependency.INTERNAL_ENDPOINTS_V2)
+                        .build());
+            }
+
+            if (symbols.size() > 0) {
+                for (int i = 0; i < symbols.size(); i++) {
+                    if (i != 0) {
+                        writer.writeInline("|");
+                    }
+                    writer.writeInline("$T", symbols.get(i));
+                }
+            } else {
+                writer.writeInline("0");
+            }
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Variant that = (Variant) o;
+            return isFips() == that.isFips() && isDualstack() == that.isDualstack()
+                   && getUnknown().equals(that.getUnknown());
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(isFips(), isDualstack(), getUnknown());
+        }
+
+        public static Builder builder() {
+            return new Builder();
+        }
+
+        public static Variant fromArrayNode(ArrayNode arrayNode) {
+            if (arrayNode.size() == 0) {
+                throw new CodegenException("expect one or more variant tags");
+            }
+
+            var builder = builder();
+            arrayNode.getElements().forEach(node -> {
+                var value = node.expectStringNode().getValue();
+                if (value.equalsIgnoreCase("fips")) {
+                    builder.fips(true);
+                } else if (value.equalsIgnoreCase("dualstack")) {
+                    builder.dualstack(true);
+                } else {
+                    builder.addUnknownTag(value);
+                }
+            });
+            return builder.build();
+        }
+
+        static class Builder implements SmithyBuilder<Variant> {
+            private boolean fips;
+            private boolean dualstack;
+            private Set<String> unknown = new HashSet<>();
+
+            public Builder fips(boolean fips) {
+                this.fips = fips;
+                return this;
+            }
+
+            public Builder dualstack(boolean dualstack) {
+                this.dualstack = dualstack;
+                return this;
+            }
+
+            public Builder addUnknownTag(String tag) {
+                this.unknown.add(tag);
+                return this;
+            }
+
+            @Override
+            public Variant build() {
+                return new Variant(this);
+            }
+        }
+    }
+
     private final class Partition {
+        private static final String DEFAULTS_KEY = "defaults";
+
         private final String id;
-        private final ObjectNode defaults;
         private final ObjectNode config;
-        private final String dnsSuffix;
+        private final Map<Variant, ObjectNode> defaults = new HashMap<>();
 
         private Partition(ObjectNode config, String partition) {
             id = partition;
             this.config = config;
 
             // Resolve the partition defaults + the service defaults.
-            ObjectNode serviceDefaults = config.expectObjectMember("defaults").merge(getService()
-                    .getObjectMember("defaults")
-                    .orElse(Node.objectNode()));
+            ObjectNode service = getService();
 
-            // Resolve the hostnameTemplate to use for this service in this partition.
-            String hostnameTemplate = serviceDefaults.expectStringMember("hostname").getValue();
-            hostnameTemplate = hostnameTemplate.replace("{service}", endpointPrefix);
-            hostnameTemplate = hostnameTemplate.replace("{dnsSuffix}",
-                    config.expectStringMember("dnsSuffix").getValue());
+            // Merge service defaults onto partition defaults ignoring variants key
+            ObjectNode serviceDefaults = config.expectObjectMember(DEFAULTS_KEY)
+                    .withoutMember(VARIANTS_KEY)
+                    .merge(service
+                            .getObjectMember(DEFAULTS_KEY)
+                            .orElse(Node.objectNode())
+                            .withMember(DNS_SUFFIX_KEY, config.expectStringMember(DNS_SUFFIX_KEY))
+                            .withoutMember(VARIANTS_KEY));
 
-            this.defaults = serviceDefaults.withMember("hostname", hostnameTemplate);
+            Stream.concat(
+                            getVariants(config.expectObjectMember(DEFAULTS_KEY), serviceDefaults).stream(),
+                            getVariants(service.getObjectMember(DEFAULTS_KEY).orElse(Node.objectNode()),
+                                    serviceDefaults).stream()
+                    )
+                    .collect(Collectors.toMap(
+                            objectNode -> Variant.fromArrayNode(objectNode.expectArrayMember("tags")),
+                            Function.identity(), ObjectNode::merge))
+                    .entrySet()
+                    .stream()
+                    .filter(entry -> entry.getKey().getUnknown().size() == 0)
+                    .forEach(entry -> defaults.put(entry.getKey(), entry.getValue()));
 
-            dnsSuffix = config.expectStringMember("dnsSuffix").getValue();
+            for (Map.Entry<Variant, ObjectNode> variantObjectNodeEntry : defaults.entrySet()) {
+                var objectNode = variantObjectNodeEntry.getValue();
+                objectNode = objectNode.withMember(HOSTNAME_KEY, templateHostname(
+                        objectNode.expectStringMember(HOSTNAME_KEY)
+                                .getValue(),
+                        endpointPrefix,
+                        objectNode.expectStringMember(DNS_SUFFIX_KEY)
+                                .getValue()));
+                variantObjectNodeEntry.setValue(objectNode);
+            }
+
+            serviceDefaults = serviceDefaults.withMember(HOSTNAME_KEY, templateHostname(
+                    serviceDefaults.expectStringMember(HOSTNAME_KEY).getValue(),
+                    endpointPrefix,
+                    serviceDefaults.expectStringMember(DNS_SUFFIX_KEY).getValue()));
+
+            // the default configuration aka no tag variant
+            defaults.put(Variant.builder().build(), serviceDefaults);
         }
 
-        /**
-         * @return the partition defaults merged with the service defaults
-         */
-        ObjectNode getDefaults() {
-            return defaults;
+        private Set<ObjectNode> getVariants(ObjectNode objectNode, ObjectNode defaults) {
+            return objectNode.getArrayMember(VARIANTS_KEY)
+                    .orElse(ArrayNode.fromNodes())
+                    .getElements()
+                    .stream()
+                    .map(node -> mergeVariantDefinition(defaults, node.expectObjectNode()))
+                    .collect(Collectors.toSet());
+        }
+
+        private String templateHostname(String hostname, String service, String dnsSuffix) {
+            return hostname
+                    .replace("{service}", service)
+                    .replace("{dnsSuffix}", dnsSuffix);
         }
 
         ObjectNode getService() {
@@ -761,6 +1202,10 @@ public final class EndpointGenerator implements Runnable {
             return service.getBooleanMemberOrDefault("isRegionalized", true)
                     ? Optional.empty()
                     : service.getStringMember("partitionEndpoint").map(StringNode::getValue);
+        }
+
+        public Map<Variant, ObjectNode> getDefaults() {
+            return defaults;
         }
 
         public String getId() {
@@ -823,6 +1268,48 @@ public final class EndpointGenerator implements Runnable {
         @Override
         public EndpointGenerator build() {
             return new EndpointGenerator(this);
+        }
+    }
+
+    enum DualStackEndpointConstant {
+        UNSET(DUAL_STACK_ENDPOINT_TYPE_NAME + "Unset"),
+        ENABLE(DUAL_STACK_ENDPOINT_TYPE_NAME + "Enabled"),
+        DISABLE(DUAL_STACK_ENDPOINT_TYPE_NAME + "Disabled");
+
+        private final String constantName;
+
+        DualStackEndpointConstant(String name) {
+            this.constantName = name;
+        }
+
+        public String getConstantName() {
+            return constantName;
+        }
+
+        public Symbol getSymbol() {
+            return SymbolUtils.createValueSymbolBuilder(getConstantName(), AwsGoDependency.AWS_CORE)
+                    .build();
+        }
+    }
+
+    enum FIPSEndpointConstant {
+        UNSET(FIPS_ENDPOINT_TYPE_NAME + "Unset"),
+        ENABLE(FIPS_ENDPOINT_TYPE_NAME + "Enabled"),
+        DISABLE(FIPS_ENDPOINT_TYPE_NAME + "Disabled");
+
+        private final String constantName;
+
+        FIPSEndpointConstant(String name) {
+            this.constantName = name;
+        }
+
+        public String getConstantName() {
+            return constantName;
+        }
+
+        public Symbol getSymbol() {
+            return SymbolUtils.createValueSymbolBuilder(getConstantName(), AwsGoDependency.AWS_CORE)
+                    .build();
         }
     }
 }

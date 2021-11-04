@@ -211,7 +211,6 @@ func addDeleteStorageLensConfigurationTaggingUpdateEndpoint(stack *middleware.St
 		},
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
-		UseDualstack:            options.UseDualstack,
 		UseARNRegion:            options.UseARNRegion,
 	})
 }

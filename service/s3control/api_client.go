@@ -10,6 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
+	internalConfig "github.com/aws/aws-sdk-go-v2/internal/configsources"
 	"github.com/aws/aws-sdk-go-v2/service/internal/s3shared"
 	s3sharedconfig "github.com/aws/aws-sdk-go-v2/service/internal/s3shared/config"
 	smithy "github.com/aws/smithy-go"
@@ -97,7 +98,11 @@ type Options struct {
 	// Allows you to enable arn region support for the service.
 	UseARNRegion bool
 
-	// Allows you to enable Dualstack endpoint support for the service.
+	// Allows you to enable dual-stack endpoint support for the service.
+	//
+	// Deprecated: Set dual-stack by setting UseDualStackEndpoint on
+	// EndpointResolverOptions. When EndpointResolverOptions' UseDualStackEndpoint
+	// field is set it overrides this field value.
 	UseDualstack bool
 
 	// The HTTP client to invoke API calls with. Defaults to client's default HTTP
@@ -139,6 +144,8 @@ func (c *Client) invokeOperation(ctx context.Context, opID string, params interf
 	for _, fn := range optFns {
 		fn(&options)
 	}
+
+	finalizeClientEndpointResolverOptions(&options)
 
 	for _, fn := range stackFns {
 		if err := fn(stack, options); err != nil {
@@ -190,6 +197,8 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 	resolveAWSRetryerProvider(cfg, &opts)
 	resolveAWSEndpointResolver(cfg, &opts)
 	resolveUseARNRegion(cfg, &opts)
+	resolveUseDualStackEndpoint(cfg, &opts)
+	resolveUseFIPSEndpoint(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -218,7 +227,7 @@ func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
 	if cfg.EndpointResolver == nil {
 		return
 	}
-	o.EndpointResolver = withEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
+	o.EndpointResolver = withEndpointResolver(cfg.EndpointResolver, cfg.EndpointResolverWithOptions, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) error {
@@ -278,6 +287,36 @@ func resolveUseARNRegion(cfg aws.Config, o *Options) error {
 	}
 	if found {
 		o.UseARNRegion = value
+	}
+	return nil
+}
+
+// resolves dual-stack endpoint configuration
+func resolveUseDualStackEndpoint(cfg aws.Config, o *Options) error {
+	if len(cfg.ConfigSources) == 0 {
+		return nil
+	}
+	value, found, err := internalConfig.ResolveUseDualStackEndpoint(context.Background(), cfg.ConfigSources)
+	if err != nil {
+		return err
+	}
+	if found {
+		o.EndpointOptions.UseDualStackEndpoint = value
+	}
+	return nil
+}
+
+// resolves FIPS endpoint configuration
+func resolveUseFIPSEndpoint(cfg aws.Config, o *Options) error {
+	if len(cfg.ConfigSources) == 0 {
+		return nil
+	}
+	value, found, err := internalConfig.ResolveUseFIPSEndpoint(context.Background(), cfg.ConfigSources)
+	if err != nil {
+		return err
+	}
+	if found {
+		o.EndpointOptions.UseFIPSEndpoint = value
 	}
 	return nil
 }

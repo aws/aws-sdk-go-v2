@@ -213,7 +213,6 @@ func addDeleteAccessPointPolicyForObjectLambdaUpdateEndpoint(stack *middleware.S
 		},
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
-		UseDualstack:            options.UseDualstack,
 		UseARNRegion:            options.UseARNRegion,
 	})
 }

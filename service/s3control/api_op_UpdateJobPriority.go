@@ -237,7 +237,6 @@ func addUpdateJobPriorityUpdateEndpoint(stack *middleware.Stack, options Options
 		},
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
-		UseDualstack:            options.UseDualstack,
 		UseARNRegion:            options.UseARNRegion,
 	})
 }

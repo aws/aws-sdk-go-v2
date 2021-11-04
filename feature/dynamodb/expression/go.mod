@@ -14,6 +14,8 @@ replace github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue => ../../..
 
 replace github.com/aws/aws-sdk-go-v2/internal/configsources => ../../../internal/configsources/
 
+replace github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 => ../../../internal/endpoints/v2/
+
 replace github.com/aws/aws-sdk-go-v2/service/dynamodb => ../../../service/dynamodb/
 
 replace github.com/aws/aws-sdk-go-v2/service/dynamodbstreams => ../../../service/dynamodbstreams/

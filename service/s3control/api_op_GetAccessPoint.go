@@ -285,7 +285,6 @@ func addGetAccessPointUpdateEndpoint(stack *middleware.Stack, options Options) e
 		},
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
-		UseDualstack:            options.UseDualstack,
 		UseARNRegion:            options.UseARNRegion,
 	})
 }

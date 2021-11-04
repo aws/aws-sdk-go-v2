@@ -450,6 +450,66 @@ func TestNewSharedConfig(t *testing.T) {
 				EC2IMDSEndpointMode: imds.EndpointModeStateIPv6,
 			},
 		},
+		"dual-stack endpoint enabled": {
+			ConfigFilenames:      []string{testConfigFilename},
+			CredentialsFilenames: []string{testCredentialsFilename},
+			Profile:              "UseDualStackEndpointEnabled",
+			Expected: SharedConfig{
+				Profile:              "UseDualStackEndpointEnabled",
+				Region:               "us-west-2",
+				UseDualStackEndpoint: aws.DualStackEndpointStateEnabled,
+			},
+		},
+		"dual-stack endpoint disabled": {
+			ConfigFilenames:      []string{testConfigFilename},
+			CredentialsFilenames: []string{testCredentialsFilename},
+			Profile:              "UseDualStackEndpointDisabled",
+			Expected: SharedConfig{
+				Profile:              "UseDualStackEndpointDisabled",
+				Region:               "us-west-2",
+				UseDualStackEndpoint: aws.DualStackEndpointStateDisabled,
+			},
+		},
+		"dual-stack endpoint invalid": {
+			ConfigFilenames:      []string{testConfigFilename},
+			CredentialsFilenames: []string{testCredentialsFilename},
+			Profile:              "UseDualStackEndpointInvalid",
+			Expected: SharedConfig{
+				Profile:              "UseDualStackEndpointInvalid",
+				Region:               "us-west-2",
+				UseDualStackEndpoint: aws.DualStackEndpointStateDisabled,
+			},
+		},
+		"fips endpoint enabled": {
+			ConfigFilenames:      []string{testConfigFilename},
+			CredentialsFilenames: []string{testCredentialsFilename},
+			Profile:              "UseFIPSEndpointEnabled",
+			Expected: SharedConfig{
+				Profile:         "UseFIPSEndpointEnabled",
+				Region:          "us-west-2",
+				UseFIPSEndpoint: aws.FIPSEndpointStateEnabled,
+			},
+		},
+		"fips endpoint disabled": {
+			ConfigFilenames:      []string{testConfigFilename},
+			CredentialsFilenames: []string{testCredentialsFilename},
+			Profile:              "UseFIPSEndpointDisabled",
+			Expected: SharedConfig{
+				Profile:         "UseFIPSEndpointDisabled",
+				Region:          "us-west-2",
+				UseFIPSEndpoint: aws.FIPSEndpointStateDisabled,
+			},
+		},
+		"fips endpoint unknown": {
+			ConfigFilenames:      []string{testConfigFilename},
+			CredentialsFilenames: []string{testCredentialsFilename},
+			Profile:              "UseFIPSEndpointInvalid",
+			Expected: SharedConfig{
+				Profile:         "UseFIPSEndpointInvalid",
+				Region:          "us-west-2",
+				UseFIPSEndpoint: aws.FIPSEndpointStateDisabled,
+			},
+		},
 	}
 
 	for name, c := range cases {

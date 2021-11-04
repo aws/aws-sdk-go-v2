@@ -239,7 +239,6 @@ func addDeleteAccessPointPolicyUpdateEndpoint(stack *middleware.Stack, options O
 		},
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
-		UseDualstack:            options.UseDualstack,
 		UseARNRegion:            options.UseARNRegion,
 	})
 }

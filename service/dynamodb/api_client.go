@@ -157,6 +157,8 @@ func (c *Client) invokeOperation(ctx context.Context, opID string, params interf
 		fn(&options)
 	}
 
+	finalizeClientEndpointResolverOptions(&options)
+
 	for _, fn := range stackFns {
 		if err := fn(stack, options); err != nil {
 			return nil, metadata, err
@@ -207,6 +209,8 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 	resolveAWSRetryerProvider(cfg, &opts)
 	resolveAWSEndpointResolver(cfg, &opts)
 	resolveEnableEndpointDiscoveryFromConfigSources(cfg, &opts)
+	resolveUseDualStackEndpoint(cfg, &opts)
+	resolveUseFIPSEndpoint(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -235,7 +239,7 @@ func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
 	if cfg.EndpointResolver == nil {
 		return
 	}
-	o.EndpointResolver = withEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
+	o.EndpointResolver = withEndpointResolver(cfg.EndpointResolver, cfg.EndpointResolverWithOptions, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) error {
@@ -295,6 +299,36 @@ func resolveEnableEndpointDiscoveryFromConfigSources(cfg aws.Config, o *Options)
 	}
 	if found {
 		o.EndpointDiscovery.EnableEndpointDiscovery = value
+	}
+	return nil
+}
+
+// resolves dual-stack endpoint configuration
+func resolveUseDualStackEndpoint(cfg aws.Config, o *Options) error {
+	if len(cfg.ConfigSources) == 0 {
+		return nil
+	}
+	value, found, err := internalConfig.ResolveUseDualStackEndpoint(context.Background(), cfg.ConfigSources)
+	if err != nil {
+		return err
+	}
+	if found {
+		o.EndpointOptions.UseDualStackEndpoint = value
+	}
+	return nil
+}
+
+// resolves FIPS endpoint configuration
+func resolveUseFIPSEndpoint(cfg aws.Config, o *Options) error {
+	if len(cfg.ConfigSources) == 0 {
+		return nil
+	}
+	value, found, err := internalConfig.ResolveUseFIPSEndpoint(context.Background(), cfg.ConfigSources)
+	if err != nil {
+		return err
+	}
+	if found {
+		o.EndpointOptions.UseFIPSEndpoint = value
 	}
 	return nil
 }

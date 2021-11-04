@@ -266,7 +266,6 @@ func addPutJobTaggingUpdateEndpoint(stack *middleware.Stack, options Options) er
 		},
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
-		UseDualstack:            options.UseDualstack,
 		UseARNRegion:            options.UseARNRegion,
 	})
 }

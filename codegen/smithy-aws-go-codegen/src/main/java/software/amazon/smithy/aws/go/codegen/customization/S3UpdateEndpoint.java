@@ -164,8 +164,12 @@ public class S3UpdateEndpoint implements GoIntegration {
                                         .type(SymbolUtils.createValueSymbolBuilder("bool")
                                                 .putProperty(SymbolUtils.GO_UNIVERSE_TYPE, true)
                                                 .build())
-                                        .documentation(
-                                                "Allows you to enable Dualstack endpoint support for the service.")
+                                        .documentation("Allows you to enable dual-stack endpoint support for the "
+                                                       + "service.")
+                                        .deprecated("""
+                                                    Set dual-stack by setting UseDualStackEndpoint on
+                                                    EndpointResolverOptions. When EndpointResolverOptions' 
+                                                    UseDualStackEndpoint field is set it overrides this field value.""")
                                         .build(),
                                 ConfigField.builder()
                                         .name(USE_ARNREGION_OPTION)
@@ -190,7 +194,7 @@ public class S3UpdateEndpoint implements GoIntegration {
         private static final String USE_PATH_STYLE_OPTION = "UsePathStyle";
         private static final String USE_ACCELERATE_OPTION = "UseAccelerate";
         private static final String DISABLE_MRAP_OPTION = "DisableMultiRegionAccessPoints";
-        private static final String  V4A_SIGNER_INTERFACE_NAME = "httpSignerV4a";
+        private static final String V4A_SIGNER_INTERFACE_NAME = "httpSignerV4a";
 
         // private function getter constant
         private static final String NOP_BUCKET_ACCESSOR = "nopGetBucketAccessor";
@@ -223,9 +227,9 @@ public class S3UpdateEndpoint implements GoIntegration {
                                                     .build())
                                             .documentation(
                                                     "Allows you to enable the client to use path-style addressing, "
-                                                            + "i.e., `https://s3.amazonaws.com/BUCKET/KEY`. By default, the S3 client "
-                                                            + "will use virtual hosted bucket addressing when possible"
-                                                            + "(`https://BUCKET.s3.amazonaws.com/KEY`).")
+                                                    + "i.e., `https://s3.amazonaws.com/BUCKET/KEY`. By default, the S3 client "
+                                                    + "will use virtual hosted bucket addressing when possible"
+                                                    + "(`https://BUCKET.s3.amazonaws.com/KEY`).")
                                             .build(),
                                     ConfigField.builder()
                                             .name(USE_ACCELERATE_OPTION)
@@ -233,12 +237,12 @@ public class S3UpdateEndpoint implements GoIntegration {
                                                     .putProperty(SymbolUtils.GO_UNIVERSE_TYPE, true)
                                                     .build())
                                             .documentation("Allows you to enable S3 Accelerate feature. All operations "
-                                                    + "compatible with S3 Accelerate will use the accelerate endpoint for "
-                                                    + "requests. Requests not compatible will fall back to normal S3 requests. "
-                                                    + "The bucket must be enabled for accelerate to be used with S3 client with "
-                                                    + "accelerate enabled. If the bucket is not enabled for accelerate an error "
-                                                    + "will be returned. The bucket name must be DNS compatible to work "
-                                                    + "with accelerate.")
+                                                           + "compatible with S3 Accelerate will use the accelerate endpoint for "
+                                                           + "requests. Requests not compatible will fall back to normal S3 requests. "
+                                                           + "The bucket must be enabled for accelerate to be used with S3 client with "
+                                                           + "accelerate enabled. If the bucket is not enabled for accelerate an error "
+                                                           + "will be returned. The bucket name must be DNS compatible to work "
+                                                           + "with accelerate.")
                                             .build(),
                                     ConfigField.builder()
                                             .name(DISABLE_MRAP_OPTION)
@@ -303,18 +307,17 @@ public class S3UpdateEndpoint implements GoIntegration {
                     addMiddlewareFuncName(symbolProvider.toSymbol(operationShape).getName(),
                             UPDATE_ENDPOINT_INTERNAL_ADDER), () -> {
                         writer.write("return $T(stack, $T{ \n"
-                                        + "Accessor : $T{\n"
-                                        + "GetBucketFromInput: $L,\n},\n"
-                                        + "UsePathStyle: options.$L,\n"
-                                        + "UseAccelerate: options.$L,\n"
-                                        + "SupportsAccelerate: $L,\n"
-                                        + "TargetS3ObjectLambda: $L,\n"
-                                        + "EndpointResolver: options.EndpointResolver,\n"
-                                        + "EndpointResolverOptions: options.EndpointOptions,\n"
-                                        + "UseDualstack: options.$L,\n"
-                                        + "UseARNRegion: options.$L,\n"
-                                        + "DisableMultiRegionAccessPoints: options.$L,\n"
-                                        + "})",
+                                     + "Accessor : $T{\n"
+                                     + "GetBucketFromInput: $L,\n},\n"
+                                     + "UsePathStyle: options.$L,\n"
+                                     + "UseAccelerate: options.$L,\n"
+                                     + "SupportsAccelerate: $L,\n"
+                                     + "TargetS3ObjectLambda: $L,\n"
+                                     + "EndpointResolver: options.EndpointResolver,\n"
+                                     + "EndpointResolverOptions: options.EndpointOptions,\n"
+                                     + "UseARNRegion: options.$L,\n"
+                                     + "DisableMultiRegionAccessPoints: options.$L,\n"
+                                     + "})",
                                 SymbolUtils.createValueSymbolBuilder(UPDATE_ENDPOINT_INTERNAL_ADDER,
                                         AwsCustomGoDependency.S3_CUSTOMIZATION).build(),
                                 SymbolUtils.createValueSymbolBuilder(UPDATE_ENDPOINT_INTERNAL_OPTIONS,
@@ -327,7 +330,6 @@ public class S3UpdateEndpoint implements GoIntegration {
                                 USE_ACCELERATE_OPTION,
                                 !NOT_SUPPORT_ACCELERATE.contains(operationName),
                                 TARGET_OBJECT_LAMBDAS.contains(operationName),
-                                USE_DUALSTACK_OPTION,
                                 USE_ARNREGION_OPTION,
                                 DISABLE_MRAP_OPTION
                         );
@@ -368,7 +370,7 @@ public class S3UpdateEndpoint implements GoIntegration {
             if (targetBucketShape.size() > 1) {
                 throw new CodegenException(
                         "BucketName shape should be targeted by only one input member, found " +
-                                targetBucketShape.size() + " for Input shape: " + input.getId());
+                        targetBucketShape.size() + " for Input shape: " + input.getId());
             }
 
             if (targetBucketShape.isEmpty()) {
@@ -381,7 +383,7 @@ public class S3UpdateEndpoint implements GoIntegration {
 
             writer.writeDocs(
                     String.format("%s returns a pointer to string denoting a provided bucket member value"
-                            + "and a boolean indicating if the input has a modeled bucket name,", funcName)
+                                  + "and a boolean indicating if the input has a modeled bucket name,", funcName)
             );
             writer.openBlock("func $L(input interface{}) (*string, bool) {", "}", funcName,
                     () -> {
@@ -484,7 +486,7 @@ public class S3UpdateEndpoint implements GoIntegration {
         ) {
             // generate get arn member accessor getter function
             writer.writeDocs("nopGetARNAccessor provides a nop get accessor function to be used "
-                    + "when a certain operation does not support ARNs");
+                             + "when a certain operation does not support ARNs");
             writer.openBlock("func $L (input interface{}) (*string, bool) { ", "}",
                     NOP_GET_ARN_ACCESSOR, () -> {
                         writer.write("return nil, false");
@@ -493,7 +495,7 @@ public class S3UpdateEndpoint implements GoIntegration {
 
             // generate set arn member accessor setter function
             writer.writeDocs("nopSetARNAccessor provides a nop set accessor function to be used "
-                    + "when a certain operation does not support ARNs");
+                             + "when a certain operation does not support ARNs");
             writer.openBlock("func $L (input interface{}, v string) error {", "}",
                     NOP_SET_ARN_ACCESSOR, () -> {
                         writer.write("return nil");
@@ -506,7 +508,7 @@ public class S3UpdateEndpoint implements GoIntegration {
         ) {
             // generate arn member accessor getter function
             writer.writeDocs("nopBackfillAccountIDAccessor provides a nop accessor function to be used "
-                    + "when a certain operation does not need to validate and backfill account id");
+                             + "when a certain operation does not need to validate and backfill account id");
             writer.openBlock("func $L (input interface{}, v string) error {", "}",
                     NOP_BACKFILL_ACCOUNT_ID_HELPER, () -> {
                         writer.write("return nil");
@@ -518,7 +520,7 @@ public class S3UpdateEndpoint implements GoIntegration {
                 GoWriter writer
         ) {
             writer.writeDocs("nopGetOutpostIDFromInput provides a nop accessor function to be used "
-                    + "when endpoint customization behavior is not based on presence of outpost id member if any");
+                             + "when endpoint customization behavior is not based on presence of outpost id member if any");
             writer.openBlock("func $L (input interface{}) (*string, bool) {", "}",
                     NOP_GET_OUTPOST_ID_FROM_INPUT, () -> {
                         writer.write("return nil, false");
@@ -544,7 +546,7 @@ public class S3UpdateEndpoint implements GoIntegration {
                                         + "GetOutpostIDInput: $L, \n UpdateARNField: $L,\n CopyInput: $L,\n }, \n"
                                         + "EndpointResolver: options.EndpointResolver,\n "
                                         + "EndpointResolverOptions: options.EndpointOptions,\n"
-                                        + "UseDualstack: options.$L, \n UseARNRegion: options.$L, \n })",
+                                        + "UseARNRegion: options.$L, \n })",
                                 SymbolUtils.createValueSymbolBuilder(UPDATE_ENDPOINT_INTERNAL_ADDER,
                                         AwsCustomGoDependency.S3CONTROL_CUSTOMIZATION).build(),
                                 SymbolUtils.createValueSymbolBuilder(UPDATE_ENDPOINT_INTERNAL_OPTIONS,
@@ -560,7 +562,6 @@ public class S3UpdateEndpoint implements GoIntegration {
                                 supportsARN.contains(operationName) ? setARNMemberFuncName(
                                         operationName) : NOP_SET_ARN_ACCESSOR,
                                 copyInputFuncName(symbolProvider.toSymbol(inputShape).getName()),
-                                USE_DUALSTACK_OPTION,
                                 USE_ARNREGION_OPTION
                         );
                     });
@@ -622,7 +623,7 @@ public class S3UpdateEndpoint implements GoIntegration {
             // if model has multiple top level shapes targeting `AccountId`, we throw a codegen exception
             if (targetAccountIDShape.size() > 1) {
                 throw new CodegenException("AccountId shape should be targeted by only one input member, found " +
-                        targetAccountIDShape.size() + " for Input shape: " + input.getId());
+                                           targetAccountIDShape.size() + " for Input shape: " + input.getId());
             }
 
             if (targetAccountIDShape.isEmpty()) {
@@ -671,7 +672,7 @@ public class S3UpdateEndpoint implements GoIntegration {
             // if model has multiple top level shapes targeting arnable field, we throw a codegen exception
             if (listOfARNMembers.size() > 1) {
                 throw new CodegenException(arnType + " shape should be targeted by only one input member, found " +
-                        listOfARNMembers.size() + " for Input shape: " + input.getId());
+                                           listOfARNMembers.size() + " for Input shape: " + input.getId());
             }
 
             if (listOfARNMembers.isEmpty()) {
@@ -731,7 +732,7 @@ public class S3UpdateEndpoint implements GoIntegration {
 
             writer.writeDocs(
                     String.format("%s returns a pointer to string denoting a provided outpost-id member value"
-                            + " and a boolean indicating if the input has a modeled outpost-id,", funcName));
+                                  + " and a boolean indicating if the input has a modeled outpost-id,", funcName));
             writer.openBlock("func $L (input interface{}) (*string, bool) {", "}",
                     funcName, () -> {
                         StructureShape input = model.expectShape(operation.getInput().get(),
@@ -743,7 +744,7 @@ public class S3UpdateEndpoint implements GoIntegration {
                         if (outpostIDMemberShapes.size() > 1) {
                             throw new CodegenException(
                                     "OutpostID shape should be targeted by only one input member, found " +
-                                            outpostIDMemberShapes.size() + " for Input shape: " + input.getId());
+                                    outpostIDMemberShapes.size() + " for Input shape: " + input.getId());
                         }
 
                         if (outpostIDMemberShapes.isEmpty()) {

@@ -48,9 +48,6 @@ type UpdateEndpointOptions struct {
 	// UseARNRegion indicates if region parsed from an ARN should be used.
 	UseARNRegion bool
 
-	// UseDualstack instructs if s3 dualstack endpoint config is enabled
-	UseDualstack bool
-
 	// EndpointResolver used to resolve endpoints. This may be a custom endpoint resolver
 	EndpointResolver EndpointResolver
 
@@ -82,7 +79,6 @@ func UpdateEndpoint(stack *middleware.Stack, options UpdateEndpointOptions) (err
 		CopyInput:               options.Accessor.CopyInput,
 		UpdateARNField:          options.Accessor.UpdateARNField,
 		UseARNRegion:            options.UseARNRegion,
-		UseDualstack:            options.UseDualstack,
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointResolverOptions,
 	}, "OperationSerializer", middleware.Before)
@@ -92,18 +88,10 @@ func UpdateEndpoint(stack *middleware.Stack, options UpdateEndpointOptions) (err
 
 	// outpostID middleware
 	err = stack.Serialize.Insert(&processOutpostIDMiddleware{
-		GetOutpostID: options.Accessor.GetOutpostIDInput,
-		UseDualstack: options.UseDualstack,
+		GetOutpostID:            options.Accessor.GetOutpostIDInput,
+		EndpointResolver:        options.EndpointResolver,
+		EndpointResolverOptions: options.EndpointResolverOptions,
 	}, (*processARNResource)(nil).ID(), middleware.Before)
-	if err != nil {
-		return err
-	}
-
-	// enable dual stack support
-	err = stack.Serialize.Insert(&s3shared.EnableDualstack{
-		UseDualstack:     options.UseDualstack,
-		DefaultServiceID: "s3-control",
-	}, "OperationSerializer", middleware.After)
 	if err != nil {
 		return err
 	}

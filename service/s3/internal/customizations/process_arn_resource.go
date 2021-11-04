@@ -32,9 +32,6 @@ type processARNResource struct {
 	// UseAccelerate indicates if s3 transfer acceleration is enabled
 	UseAccelerate bool
 
-	// UseDualstack instructs if s3 dualstack endpoint config is enabled
-	UseDualstack bool
-
 	// EndpointResolver used to resolve endpoints. This may be a custom endpoint resolver
 	EndpointResolver EndpointResolver
 
@@ -74,6 +71,7 @@ func (m *processARNResource) HandleSerialize(
 	resourceRequest := s3shared.ResourceRequest{
 		Resource:      resource,
 		UseARNRegion:  m.UseARNRegion,
+		UseFIPS:       m.EndpointResolverOptions.UseFIPSEndpoint == aws.FIPSEndpointStateEnabled,
 		RequestRegion: awsmiddleware.GetRegion(ctx),
 		SigningRegion: awsmiddleware.GetSigningRegion(ctx),
 		PartitionID:   awsmiddleware.GetPartitionID(ctx),
@@ -98,7 +96,7 @@ func (m *processARNResource) HandleSerialize(
 			}
 
 			// Do not allow dual-stack configuration with multi-region arns.
-			if m.UseDualstack {
+			if m.EndpointResolverOptions.UseDualStackEndpoint == aws.DualStackEndpointStateEnabled {
 				return out, metadata, s3shared.NewClientConfiguredForDualStackError(tv,
 					resourceRequest.PartitionID, resourceRequest.RequestRegion, nil)
 			}
@@ -113,28 +111,10 @@ func (m *processARNResource) HandleSerialize(
 		// fetch arn region to resolve request
 		resolveRegion := tv.Region
 		// check if request region is FIPS
-		if resourceRequest.UseFips() {
+		if resourceRequest.UseFIPS && len(resolveRegion) == 0 {
 			// Do not allow Fips support within multi-region arns.
-			if len(resolveRegion) == 0 {
-				return out, metadata, s3shared.NewClientConfiguredForFIPSError(
-					tv, resourceRequest.PartitionID, resourceRequest.RequestRegion, nil)
-			}
-
-			// if use arn region is enabled and request signing region is not same as arn region
-			if m.UseARNRegion && resourceRequest.IsCrossRegion() {
-				// FIPS with cross region is not supported, the SDK must fail
-				// because there is no well defined method for SDK to construct a
-				// correct FIPS endpoint.
-				return out, metadata,
-					s3shared.NewClientConfiguredForCrossRegionFIPSError(
-						tv,
-						resourceRequest.PartitionID,
-						resourceRequest.RequestRegion,
-						nil,
-					)
-			}
-			// if use arn region is NOT set, we should use the request region
-			resolveRegion = resourceRequest.RequestRegion
+			return out, metadata, s3shared.NewClientConfiguredForFIPSError(
+				tv, resourceRequest.PartitionID, resourceRequest.RequestRegion, nil)
 		}
 
 		var requestBuilder func(context.Context, accesspointOptions) (context.Context, error)
@@ -170,32 +150,13 @@ func (m *processARNResource) HandleSerialize(
 		}
 
 		// check if dualstack
-		if m.UseDualstack {
+		if m.EndpointResolverOptions.UseDualStackEndpoint == aws.DualStackEndpointStateEnabled {
 			return out, metadata, s3shared.NewClientConfiguredForDualStackError(tv,
 				resourceRequest.PartitionID, resourceRequest.RequestRegion, nil)
 		}
 
 		// fetch arn region to resolve request
 		resolveRegion := tv.Region
-
-		if resourceRequest.UseFips() {
-			// if use arn region is enabled and request signing region is not same as arn region
-			if m.UseARNRegion && resourceRequest.IsCrossRegion() {
-				// FIPS with cross region is not supported, the SDK must fail
-				// because there is no well defined method for SDK to construct a
-				// correct FIPS endpoint.
-				return out, metadata,
-					s3shared.NewClientConfiguredForCrossRegionFIPSError(
-						tv,
-						resourceRequest.PartitionID,
-						resourceRequest.RequestRegion,
-						nil,
-					)
-			}
-
-			// if use arn region is NOT set, we should use the request region
-			resolveRegion = resourceRequest.RequestRegion
-		}
 
 		// build access point request
 		ctx, err = buildS3ObjectLambdaAccessPointRequest(ctx, accesspointOptions{
@@ -224,13 +185,13 @@ func (m *processARNResource) HandleSerialize(
 		}
 
 		// check if dual stack
-		if m.UseDualstack {
+		if m.EndpointResolverOptions.UseDualStackEndpoint == aws.DualStackEndpointStateEnabled {
 			return out, metadata, s3shared.NewClientConfiguredForDualStackError(tv,
 				resourceRequest.PartitionID, resourceRequest.RequestRegion, nil)
 		}
 
 		// check if request region is FIPS
-		if resourceRequest.UseFips() {
+		if resourceRequest.UseFIPS {
 			return out, metadata, s3shared.NewFIPSConfigurationError(tv, resourceRequest.PartitionID,
 				resourceRequest.RequestRegion, nil)
 		}
@@ -295,8 +256,12 @@ func buildAccessPointRequest(ctx context.Context, options accesspointOptions) (c
 
 	resolveService := tv.Service
 
+	ero := options.EndpointResolverOptions
+	ero.Logger = middleware.GetLogger(ctx)
+	ero.ResolvedRegion = "" // clear endpoint option's resolved region so that we resolve using the passed in region
+
 	// resolve endpoint
-	endpoint, err := options.EndpointResolver.ResolveEndpoint(resolveRegion, options.EndpointResolverOptions)
+	endpoint, err := options.EndpointResolver.ResolveEndpoint(resolveRegion, ero)
 	if err != nil {
 		return ctx, s3shared.NewFailedToResolveEndpointError(
 			tv,
@@ -356,8 +321,12 @@ func buildS3ObjectLambdaAccessPointRequest(ctx context.Context, options accesspo
 
 	resolveService := tv.Service
 
+	ero := options.EndpointResolverOptions
+	ero.Logger = middleware.GetLogger(ctx)
+	ero.ResolvedRegion = "" // clear endpoint options resolved region so we resolve the passed in region
+
 	// resolve endpoint
-	endpoint, err := options.EndpointResolver.ResolveEndpoint(resolveRegion, options.EndpointResolverOptions)
+	endpoint, err := options.EndpointResolver.ResolveEndpoint(resolveRegion, ero)
 	if err != nil {
 		return ctx, s3shared.NewFailedToResolveEndpointError(
 			tv,
@@ -423,7 +392,10 @@ func buildMultiRegionAccessPointsRequest(ctx context.Context, options accesspoin
 	arnPartition := tv.Partition
 
 	// resolve endpoint
-	endpoint, err := options.EndpointResolver.ResolveEndpoint(resolveRegion, options.EndpointResolverOptions)
+	ero := options.EndpointResolverOptions
+	ero.Logger = middleware.GetLogger(ctx)
+
+	endpoint, err := options.EndpointResolver.ResolveEndpoint(resolveRegion, ero)
 	if err != nil {
 		return ctx, s3shared.NewFailedToResolveEndpointError(
 			tv,
@@ -451,7 +423,7 @@ func buildMultiRegionAccessPointsRequest(ctx context.Context, options accesspoin
 
 	// modify endpoint host to use s3-global host prefix
 	scheme := strings.SplitN(endpoint.URL, "://", 2)
-	dnsSuffix, err := endpoints.GetDNSSuffix(arnPartition)
+	dnsSuffix, err := endpoints.GetDNSSuffix(arnPartition, ero)
 	if err != nil {
 		return ctx, fmt.Errorf("Error determining dns suffix from arn partition, %w", err)
 	}
@@ -525,8 +497,12 @@ func buildOutpostAccessPointRequest(ctx context.Context, options outpostAccessPo
 		endpointsID = "s3"
 	}
 
+	ero := options.EndpointResolverOptions
+	ero.Logger = middleware.GetLogger(ctx)
+	ero.ResolvedRegion = ""
+
 	// resolve regional endpoint for resolved region.
-	endpoint, err := options.EndpointResolver.ResolveEndpoint(resolveRegion, options.EndpointResolverOptions)
+	endpoint, err := options.EndpointResolver.ResolveEndpoint(resolveRegion, ero)
 	if err != nil {
 		return ctx, s3shared.NewFailedToResolveEndpointError(
 			tv,

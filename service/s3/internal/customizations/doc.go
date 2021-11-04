@@ -20,7 +20,7 @@ false. This flag will be ignored if `UseAccelerate` option is set to true.
 
 If UseAccelerate is not enabled, and the bucket name is not a valid hostname
 label, they SDK will fallback to forcing the request to be made as if
-UsePathStyle was enabled. This behavior is also used if UseDualStack is enabled.
+UsePathStyle was enabled. This behavior is also used if UseDualStackEndpoint is enabled.
 
 https://docs.aws.amazon.com/AmazonS3/latest/dev/dual-stack-endpoints.html#dual-stack-endpoints-description
 
