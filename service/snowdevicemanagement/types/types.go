@@ -31,20 +31,11 @@ type Capacity struct {
 // The command given to the device to execute.
 //
 // The following types satisfy this interface:
-//  CommandMemberUnlock
 //  CommandMemberReboot
+//  CommandMemberUnlock
 type Command interface {
 	isCommand()
 }
-
-// Unlocks the device.
-type CommandMemberUnlock struct {
-	Value Unlock
-
-	noSmithyDocumentSerde
-}
-
-func (*CommandMemberUnlock) isCommand() {}
 
 // Reboots the device.
 type CommandMemberReboot struct {
@@ -54,6 +45,15 @@ type CommandMemberReboot struct {
 }
 
 func (*CommandMemberReboot) isCommand() {}
+
+// Unlocks the device.
+type CommandMemberUnlock struct {
+	Value Unlock
+
+	noSmithyDocumentSerde
+}
+
+func (*CommandMemberUnlock) isCommand() {}
 
 // The options for how a device's CPU is configured.
 type CpuOptions struct {

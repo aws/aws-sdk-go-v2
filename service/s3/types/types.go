@@ -114,12 +114,22 @@ type AnalyticsExportDestination struct {
 // filter is provided, all objects will be considered in any analysis.
 //
 // The following types satisfy this interface:
+//  AnalyticsFilterMemberAnd
 //  AnalyticsFilterMemberPrefix
 //  AnalyticsFilterMemberTag
-//  AnalyticsFilterMemberAnd
 type AnalyticsFilter interface {
 	isAnalyticsFilter()
 }
+
+// A conjunction (logical AND) of predicates, which is used in evaluating an
+// analytics filter. The operator must have at least two predicates.
+type AnalyticsFilterMemberAnd struct {
+	Value AnalyticsAndOperator
+
+	noSmithyDocumentSerde
+}
+
+func (*AnalyticsFilterMemberAnd) isAnalyticsFilter() {}
 
 // The prefix to use when evaluating an analytics filter.
 type AnalyticsFilterMemberPrefix struct {
@@ -138,16 +148,6 @@ type AnalyticsFilterMemberTag struct {
 }
 
 func (*AnalyticsFilterMemberTag) isAnalyticsFilter() {}
-
-// A conjunction (logical AND) of predicates, which is used in evaluating an
-// analytics filter. The operator must have at least two predicates.
-type AnalyticsFilterMemberAnd struct {
-	Value AnalyticsAndOperator
-
-	noSmithyDocumentSerde
-}
-
-func (*AnalyticsFilterMemberAnd) isAnalyticsFilter() {}
 
 // Contains information about where to publish the analytics results.
 type AnalyticsS3BucketDestination struct {
@@ -275,6 +275,11 @@ type Condition struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints).
 	KeyPrefixEquals *string
 
+	noSmithyDocumentSerde
+}
+
+//
+type ContinuationEvent struct {
 	noSmithyDocumentSerde
 }
 
@@ -638,6 +643,13 @@ type EncryptionConfiguration struct {
 	// in the Amazon Web Services Key Management Service Developer Guide.
 	ReplicaKmsKeyID *string
 
+	noSmithyDocumentSerde
+}
+
+// A message that indicates the request is complete and no more messages will be
+// sent. You should not assume that the request is complete until the client
+// receives an EndEvent.
+type EndEvent struct {
 	noSmithyDocumentSerde
 }
 
@@ -2096,12 +2108,23 @@ type LifecycleRuleAndOperator struct {
 // Filter must have exactly one of Prefix, Tag, or And specified.
 //
 // The following types satisfy this interface:
+//  LifecycleRuleFilterMemberAnd
 //  LifecycleRuleFilterMemberPrefix
 //  LifecycleRuleFilterMemberTag
-//  LifecycleRuleFilterMemberAnd
 type LifecycleRuleFilter interface {
 	isLifecycleRuleFilter()
 }
+
+// This is used in a Lifecycle Rule Filter to apply a logical AND to two or more
+// predicates. The Lifecycle Rule will apply to any object matching all of the
+// predicates configured inside the And operator.
+type LifecycleRuleFilterMemberAnd struct {
+	Value LifecycleRuleAndOperator
+
+	noSmithyDocumentSerde
+}
+
+func (*LifecycleRuleFilterMemberAnd) isLifecycleRuleFilter() {}
 
 // Prefix identifying one or more objects to which the rule applies. Replacement
 // must be made for object keys containing special characters (such as carriage
@@ -2124,17 +2147,6 @@ type LifecycleRuleFilterMemberTag struct {
 }
 
 func (*LifecycleRuleFilterMemberTag) isLifecycleRuleFilter() {}
-
-// This is used in a Lifecycle Rule Filter to apply a logical AND to two or more
-// predicates. The Lifecycle Rule will apply to any object matching all of the
-// predicates configured inside the And operator.
-type LifecycleRuleFilterMemberAnd struct {
-	Value LifecycleRuleAndOperator
-
-	noSmithyDocumentSerde
-}
-
-func (*LifecycleRuleFilterMemberAnd) isLifecycleRuleFilter() {}
 
 // Describes where logs are stored and the prefix that Amazon S3 assigns to all log
 // object keys for a bucket. For more information, see PUT Bucket logging
@@ -2238,31 +2250,13 @@ type MetricsConfiguration struct {
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketMetricsConfiguration.html).
 //
 // The following types satisfy this interface:
-//  MetricsFilterMemberPrefix
-//  MetricsFilterMemberTag
 //  MetricsFilterMemberAccessPointArn
 //  MetricsFilterMemberAnd
+//  MetricsFilterMemberPrefix
+//  MetricsFilterMemberTag
 type MetricsFilter interface {
 	isMetricsFilter()
 }
-
-// The prefix used when evaluating a metrics filter.
-type MetricsFilterMemberPrefix struct {
-	Value string
-
-	noSmithyDocumentSerde
-}
-
-func (*MetricsFilterMemberPrefix) isMetricsFilter() {}
-
-// The tag used when evaluating a metrics filter.
-type MetricsFilterMemberTag struct {
-	Value Tag
-
-	noSmithyDocumentSerde
-}
-
-func (*MetricsFilterMemberTag) isMetricsFilter() {}
 
 // The access point ARN used when evaluating a metrics filter.
 type MetricsFilterMemberAccessPointArn struct {
@@ -2283,6 +2277,24 @@ type MetricsFilterMemberAnd struct {
 }
 
 func (*MetricsFilterMemberAnd) isMetricsFilter() {}
+
+// The prefix used when evaluating a metrics filter.
+type MetricsFilterMemberPrefix struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*MetricsFilterMemberPrefix) isMetricsFilter() {}
+
+// The tag used when evaluating a metrics filter.
+type MetricsFilterMemberTag struct {
+	Value Tag
+
+	noSmithyDocumentSerde
+}
+
+func (*MetricsFilterMemberTag) isMetricsFilter() {}
 
 // Container for the MultipartUpload for the Amazon S3 object.
 type MultipartUpload struct {
@@ -2611,6 +2623,30 @@ type PolicyStatus struct {
 	noSmithyDocumentSerde
 }
 
+// This data type contains information about progress of an operation.
+type Progress struct {
+
+	// The current number of uncompressed object bytes processed.
+	BytesProcessed int64
+
+	// The current number of bytes of records payload data returned.
+	BytesReturned int64
+
+	// The current number of object bytes scanned.
+	BytesScanned int64
+
+	noSmithyDocumentSerde
+}
+
+// This data type contains information about the progress event of an operation.
+type ProgressEvent struct {
+
+	// The Progress event details.
+	Details *Progress
+
+	noSmithyDocumentSerde
+}
+
 // The PublicAccessBlock configuration that you want to apply to this Amazon S3
 // bucket. You can enable the configuration options in any combination. For more
 // information about when Amazon S3 considers a bucket or object public, see The
@@ -2684,6 +2720,15 @@ type QueueConfiguration struct {
 	// An optional unique identifier for configurations in a notification
 	// configuration. If you don't provide one, Amazon S3 will assign an ID.
 	Id *string
+
+	noSmithyDocumentSerde
+}
+
+// The container for the records event.
+type RecordsEvent struct {
+
+	// The byte array of partial, one or more result records.
+	Payload []byte
 
 	noSmithyDocumentSerde
 }
@@ -2876,12 +2921,29 @@ type ReplicationRuleAndOperator struct {
 // applies. A Filter must specify exactly one Prefix, Tag, or an And child element.
 //
 // The following types satisfy this interface:
+//  ReplicationRuleFilterMemberAnd
 //  ReplicationRuleFilterMemberPrefix
 //  ReplicationRuleFilterMemberTag
-//  ReplicationRuleFilterMemberAnd
 type ReplicationRuleFilter interface {
 	isReplicationRuleFilter()
 }
+
+// A container for specifying rule filters. The filters determine the subset of
+// objects to which the rule applies. This element is required only if you specify
+// more than one filter. For example:
+//
+// * If you specify both a Prefix and a Tag
+// filter, wrap these filters in an And tag.
+//
+// * If you specify a filter based on
+// multiple tags, wrap the Tag elements in an And tag.
+type ReplicationRuleFilterMemberAnd struct {
+	Value ReplicationRuleAndOperator
+
+	noSmithyDocumentSerde
+}
+
+func (*ReplicationRuleFilterMemberAnd) isReplicationRuleFilter() {}
 
 // An object key name prefix that identifies the subset of objects to which the
 // rule applies. Replacement must be made for object keys containing special
@@ -2905,23 +2967,6 @@ type ReplicationRuleFilterMemberTag struct {
 }
 
 func (*ReplicationRuleFilterMemberTag) isReplicationRuleFilter() {}
-
-// A container for specifying rule filters. The filters determine the subset of
-// objects to which the rule applies. This element is required only if you specify
-// more than one filter. For example:
-//
-// * If you specify both a Prefix and a Tag
-// filter, wrap these filters in an And tag.
-//
-// * If you specify a filter based on
-// multiple tags, wrap the Tag elements in an And tag.
-type ReplicationRuleFilterMemberAnd struct {
-	Value ReplicationRuleAndOperator
-
-	noSmithyDocumentSerde
-}
-
-func (*ReplicationRuleFilterMemberAnd) isReplicationRuleFilter() {}
 
 // A container specifying S3 Replication Time Control (S3 RTC) related information,
 // including whether S3 RTC is enabled and the time when all objects and operations
@@ -2959,6 +3004,16 @@ type RequestPaymentConfiguration struct {
 	//
 	// This member is required.
 	Payer Payer
+
+	noSmithyDocumentSerde
+}
+
+// Container for specifying if periodic QueryProgress messages should be sent.
+type RequestProgress struct {
+
+	// Specifies whether periodic QueryProgress frames should be sent. Valid values:
+	// TRUE, FALSE. Default value: FALSE.
+	Enabled bool
 
 	noSmithyDocumentSerde
 }
@@ -3059,6 +3114,84 @@ type S3Location struct {
 
 	noSmithyDocumentSerde
 }
+
+// Specifies the byte range of the object to get the records from. A record is
+// processed when its first byte is contained by the range. This parameter is
+// optional, but when specified, it must not be empty. See RFC 2616, Section
+// 14.35.1 about how to specify the start and end of the range.
+type ScanRange struct {
+
+	// Specifies the end of the byte range. This parameter is optional. Valid values:
+	// non-negative integers. The default value is one less than the size of the object
+	// being queried. If only the End parameter is supplied, it is interpreted to mean
+	// scan the last N bytes of the file. For example, 50 means scan the last 50 bytes.
+	End int64
+
+	// Specifies the start of the byte range. This parameter is optional. Valid values:
+	// non-negative integers. The default value is 0. If only start is supplied, it
+	// means scan from that point to the end of the file.For example; 50 means scan
+	// from byte 50 until the end of the file.
+	Start int64
+
+	noSmithyDocumentSerde
+}
+
+// The container for selecting objects from a content event stream.
+//
+// The following types satisfy this interface:
+//  SelectObjectContentEventStreamMemberCont
+//  SelectObjectContentEventStreamMemberEnd
+//  SelectObjectContentEventStreamMemberProgress
+//  SelectObjectContentEventStreamMemberRecords
+//  SelectObjectContentEventStreamMemberStats
+type SelectObjectContentEventStream interface {
+	isSelectObjectContentEventStream()
+}
+
+// The Continuation Event.
+type SelectObjectContentEventStreamMemberCont struct {
+	Value ContinuationEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*SelectObjectContentEventStreamMemberCont) isSelectObjectContentEventStream() {}
+
+// The End Event.
+type SelectObjectContentEventStreamMemberEnd struct {
+	Value EndEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*SelectObjectContentEventStreamMemberEnd) isSelectObjectContentEventStream() {}
+
+// The Progress Event.
+type SelectObjectContentEventStreamMemberProgress struct {
+	Value ProgressEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*SelectObjectContentEventStreamMemberProgress) isSelectObjectContentEventStream() {}
+
+// The Records Event.
+type SelectObjectContentEventStreamMemberRecords struct {
+	Value RecordsEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*SelectObjectContentEventStreamMemberRecords) isSelectObjectContentEventStream() {}
+
+// The Stats Event.
+type SelectObjectContentEventStreamMemberStats struct {
+	Value StatsEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*SelectObjectContentEventStreamMemberStats) isSelectObjectContentEventStream() {}
 
 // Describes the parameters for Select job types.
 type SelectParameters struct {
@@ -3208,6 +3341,30 @@ type SseKmsEncryptedObjects struct {
 
 // Specifies the use of SSE-S3 to encrypt delivered inventory reports.
 type SSES3 struct {
+	noSmithyDocumentSerde
+}
+
+// Container for the stats details.
+type Stats struct {
+
+	// The total number of uncompressed object bytes processed.
+	BytesProcessed int64
+
+	// The total number of bytes of records payload data returned.
+	BytesReturned int64
+
+	// The total number of object bytes scanned.
+	BytesScanned int64
+
+	noSmithyDocumentSerde
+}
+
+// Container for the Stats Event.
+type StatsEvent struct {
+
+	// The Stats event details.
+	Details *Stats
+
 	noSmithyDocumentSerde
 }
 
@@ -3403,7 +3560,8 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isAnalyticsFilter()       {}
-func (*UnknownUnionMember) isLifecycleRuleFilter()   {}
-func (*UnknownUnionMember) isMetricsFilter()         {}
-func (*UnknownUnionMember) isReplicationRuleFilter() {}
+func (*UnknownUnionMember) isAnalyticsFilter()                {}
+func (*UnknownUnionMember) isLifecycleRuleFilter()            {}
+func (*UnknownUnionMember) isMetricsFilter()                  {}
+func (*UnknownUnionMember) isReplicationRuleFilter()          {}
+func (*UnknownUnionMember) isSelectObjectContentEventStream() {}

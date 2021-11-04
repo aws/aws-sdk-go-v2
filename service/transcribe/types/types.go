@@ -727,23 +727,13 @@ type RelativeTimeRange struct {
 // filter for.
 //
 // The following types satisfy this interface:
-//  RuleMemberNonTalkTimeFilter
 //  RuleMemberInterruptionFilter
-//  RuleMemberTranscriptFilter
+//  RuleMemberNonTalkTimeFilter
 //  RuleMemberSentimentFilter
+//  RuleMemberTranscriptFilter
 type Rule interface {
 	isRule()
 }
-
-// A condition for a time period when neither the customer nor the agent was
-// talking.
-type RuleMemberNonTalkTimeFilter struct {
-	Value NonTalkTimeFilter
-
-	noSmithyDocumentSerde
-}
-
-func (*RuleMemberNonTalkTimeFilter) isRule() {}
 
 // A condition for a time period when either the customer or agent was interrupting
 // the other person.
@@ -755,6 +745,25 @@ type RuleMemberInterruptionFilter struct {
 
 func (*RuleMemberInterruptionFilter) isRule() {}
 
+// A condition for a time period when neither the customer nor the agent was
+// talking.
+type RuleMemberNonTalkTimeFilter struct {
+	Value NonTalkTimeFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*RuleMemberNonTalkTimeFilter) isRule() {}
+
+// A condition that is applied to a particular customer sentiment.
+type RuleMemberSentimentFilter struct {
+	Value SentimentFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*RuleMemberSentimentFilter) isRule() {}
+
 // A condition that catches particular words or phrases based on a exact match. For
 // example, if you set the phrase "I want to speak to the manager", only that exact
 // phrase will be returned.
@@ -765,15 +774,6 @@ type RuleMemberTranscriptFilter struct {
 }
 
 func (*RuleMemberTranscriptFilter) isRule() {}
-
-// A condition that is applied to a particular customer sentiment.
-type RuleMemberSentimentFilter struct {
-	Value SentimentFilter
-
-	noSmithyDocumentSerde
-}
-
-func (*RuleMemberSentimentFilter) isRule() {}
 
 // An object that enables you to specify a particular customer or agent sentiment.
 // If at least 50 percent of the conversation turns (the back-and-forth between two

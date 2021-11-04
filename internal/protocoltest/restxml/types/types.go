@@ -99,27 +99,19 @@ type XmlNestedUnionStruct struct {
 }
 
 // The following types satisfy this interface:
-//  XmlUnionShapeMemberStringValue
 //  XmlUnionShapeMemberBooleanValue
 //  XmlUnionShapeMemberByteValue
-//  XmlUnionShapeMemberShortValue
+//  XmlUnionShapeMemberDoubleValue
+//  XmlUnionShapeMemberFloatValue
 //  XmlUnionShapeMemberIntegerValue
 //  XmlUnionShapeMemberLongValue
-//  XmlUnionShapeMemberFloatValue
-//  XmlUnionShapeMemberDoubleValue
-//  XmlUnionShapeMemberUnionValue
+//  XmlUnionShapeMemberShortValue
+//  XmlUnionShapeMemberStringValue
 //  XmlUnionShapeMemberStructValue
+//  XmlUnionShapeMemberUnionValue
 type XmlUnionShape interface {
 	isXmlUnionShape()
 }
-
-type XmlUnionShapeMemberStringValue struct {
-	Value string
-
-	noSmithyDocumentSerde
-}
-
-func (*XmlUnionShapeMemberStringValue) isXmlUnionShape() {}
 
 type XmlUnionShapeMemberBooleanValue struct {
 	Value bool
@@ -137,13 +129,21 @@ type XmlUnionShapeMemberByteValue struct {
 
 func (*XmlUnionShapeMemberByteValue) isXmlUnionShape() {}
 
-type XmlUnionShapeMemberShortValue struct {
-	Value int16
+type XmlUnionShapeMemberDoubleValue struct {
+	Value float64
 
 	noSmithyDocumentSerde
 }
 
-func (*XmlUnionShapeMemberShortValue) isXmlUnionShape() {}
+func (*XmlUnionShapeMemberDoubleValue) isXmlUnionShape() {}
+
+type XmlUnionShapeMemberFloatValue struct {
+	Value float32
+
+	noSmithyDocumentSerde
+}
+
+func (*XmlUnionShapeMemberFloatValue) isXmlUnionShape() {}
 
 type XmlUnionShapeMemberIntegerValue struct {
 	Value int32
@@ -161,29 +161,21 @@ type XmlUnionShapeMemberLongValue struct {
 
 func (*XmlUnionShapeMemberLongValue) isXmlUnionShape() {}
 
-type XmlUnionShapeMemberFloatValue struct {
-	Value float32
+type XmlUnionShapeMemberShortValue struct {
+	Value int16
 
 	noSmithyDocumentSerde
 }
 
-func (*XmlUnionShapeMemberFloatValue) isXmlUnionShape() {}
+func (*XmlUnionShapeMemberShortValue) isXmlUnionShape() {}
 
-type XmlUnionShapeMemberDoubleValue struct {
-	Value float64
-
-	noSmithyDocumentSerde
-}
-
-func (*XmlUnionShapeMemberDoubleValue) isXmlUnionShape() {}
-
-type XmlUnionShapeMemberUnionValue struct {
-	Value XmlUnionShape
+type XmlUnionShapeMemberStringValue struct {
+	Value string
 
 	noSmithyDocumentSerde
 }
 
-func (*XmlUnionShapeMemberUnionValue) isXmlUnionShape() {}
+func (*XmlUnionShapeMemberStringValue) isXmlUnionShape() {}
 
 type XmlUnionShapeMemberStructValue struct {
 	Value XmlNestedUnionStruct
@@ -192,6 +184,14 @@ type XmlUnionShapeMemberStructValue struct {
 }
 
 func (*XmlUnionShapeMemberStructValue) isXmlUnionShape() {}
+
+type XmlUnionShapeMemberUnionValue struct {
+	Value XmlUnionShape
+
+	noSmithyDocumentSerde
+}
+
+func (*XmlUnionShapeMemberUnionValue) isXmlUnionShape() {}
 
 type GreetingStruct struct {
 	Hi *string

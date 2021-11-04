@@ -931,6 +931,7 @@ type DataSourceErrorInfo struct {
 //
 // The following types satisfy this interface:
 //  DataSourceParametersMemberAmazonElasticsearchParameters
+//  DataSourceParametersMemberAmazonOpenSearchParameters
 //  DataSourceParametersMemberAthenaParameters
 //  DataSourceParametersMemberAuroraParameters
 //  DataSourceParametersMemberAuroraPostgreSqlParameters
@@ -950,7 +951,6 @@ type DataSourceErrorInfo struct {
 //  DataSourceParametersMemberSqlServerParameters
 //  DataSourceParametersMemberTeradataParameters
 //  DataSourceParametersMemberTwitterParameters
-//  DataSourceParametersMemberAmazonOpenSearchParameters
 type DataSourceParameters interface {
 	isDataSourceParameters()
 }
@@ -963,6 +963,14 @@ type DataSourceParametersMemberAmazonElasticsearchParameters struct {
 }
 
 func (*DataSourceParametersMemberAmazonElasticsearchParameters) isDataSourceParameters() {}
+
+type DataSourceParametersMemberAmazonOpenSearchParameters struct {
+	Value AmazonOpenSearchParameters
+
+	noSmithyDocumentSerde
+}
+
+func (*DataSourceParametersMemberAmazonOpenSearchParameters) isDataSourceParameters() {}
 
 // The parameters for Amazon Athena.
 type DataSourceParametersMemberAthenaParameters struct {
@@ -1134,14 +1142,6 @@ type DataSourceParametersMemberTwitterParameters struct {
 }
 
 func (*DataSourceParametersMemberTwitterParameters) isDataSourceParameters() {}
-
-type DataSourceParametersMemberAmazonOpenSearchParameters struct {
-	Value AmazonOpenSearchParameters
-
-	noSmithyDocumentSerde
-}
-
-func (*DataSourceParametersMemberAmazonOpenSearchParameters) isDataSourceParameters() {}
 
 // A date-time parameter.
 type DateTimeParameter struct {
@@ -1745,21 +1745,12 @@ type Parameters struct {
 // be valid, only one of the attributes can be non-null.
 //
 // The following types satisfy this interface:
-//  PhysicalTableMemberRelationalTable
 //  PhysicalTableMemberCustomSql
+//  PhysicalTableMemberRelationalTable
 //  PhysicalTableMemberS3Source
 type PhysicalTable interface {
 	isPhysicalTable()
 }
-
-// A physical table type for relational data sources.
-type PhysicalTableMemberRelationalTable struct {
-	Value RelationalTable
-
-	noSmithyDocumentSerde
-}
-
-func (*PhysicalTableMemberRelationalTable) isPhysicalTable() {}
 
 // A physical table type built from the results of the custom SQL query.
 type PhysicalTableMemberCustomSql struct {
@@ -1769,6 +1760,15 @@ type PhysicalTableMemberCustomSql struct {
 }
 
 func (*PhysicalTableMemberCustomSql) isPhysicalTable() {}
+
+// A physical table type for relational data sources.
+type PhysicalTableMemberRelationalTable struct {
+	Value RelationalTable
+
+	noSmithyDocumentSerde
+}
+
+func (*PhysicalTableMemberRelationalTable) isPhysicalTable() {}
 
 // A physical table type for as S3 data source.
 type PhysicalTableMemberS3Source struct {
@@ -2747,35 +2747,25 @@ type TileStyle struct {
 // this structure to be valid, only one of the attributes can be non-null.
 //
 // The following types satisfy this interface:
-//  TransformOperationMemberProjectOperation
-//  TransformOperationMemberFilterOperation
-//  TransformOperationMemberCreateColumnsOperation
-//  TransformOperationMemberRenameColumnOperation
 //  TransformOperationMemberCastColumnTypeOperation
+//  TransformOperationMemberCreateColumnsOperation
+//  TransformOperationMemberFilterOperation
+//  TransformOperationMemberProjectOperation
+//  TransformOperationMemberRenameColumnOperation
 //  TransformOperationMemberTagColumnOperation
 //  TransformOperationMemberUntagColumnOperation
 type TransformOperation interface {
 	isTransformOperation()
 }
 
-// An operation that projects columns. Operations that come after a projection can
-// only refer to projected columns.
-type TransformOperationMemberProjectOperation struct {
-	Value ProjectOperation
+// A transform operation that casts a column to a different type.
+type TransformOperationMemberCastColumnTypeOperation struct {
+	Value CastColumnTypeOperation
 
 	noSmithyDocumentSerde
 }
 
-func (*TransformOperationMemberProjectOperation) isTransformOperation() {}
-
-// An operation that filters rows based on some condition.
-type TransformOperationMemberFilterOperation struct {
-	Value FilterOperation
-
-	noSmithyDocumentSerde
-}
-
-func (*TransformOperationMemberFilterOperation) isTransformOperation() {}
+func (*TransformOperationMemberCastColumnTypeOperation) isTransformOperation() {}
 
 // An operation that creates calculated columns. Columns created in one such
 // operation form a lexical closure.
@@ -2787,6 +2777,25 @@ type TransformOperationMemberCreateColumnsOperation struct {
 
 func (*TransformOperationMemberCreateColumnsOperation) isTransformOperation() {}
 
+// An operation that filters rows based on some condition.
+type TransformOperationMemberFilterOperation struct {
+	Value FilterOperation
+
+	noSmithyDocumentSerde
+}
+
+func (*TransformOperationMemberFilterOperation) isTransformOperation() {}
+
+// An operation that projects columns. Operations that come after a projection can
+// only refer to projected columns.
+type TransformOperationMemberProjectOperation struct {
+	Value ProjectOperation
+
+	noSmithyDocumentSerde
+}
+
+func (*TransformOperationMemberProjectOperation) isTransformOperation() {}
+
 // An operation that renames a column.
 type TransformOperationMemberRenameColumnOperation struct {
 	Value RenameColumnOperation
@@ -2795,15 +2804,6 @@ type TransformOperationMemberRenameColumnOperation struct {
 }
 
 func (*TransformOperationMemberRenameColumnOperation) isTransformOperation() {}
-
-// A transform operation that casts a column to a different type.
-type TransformOperationMemberCastColumnTypeOperation struct {
-	Value CastColumnTypeOperation
-
-	noSmithyDocumentSerde
-}
-
-func (*TransformOperationMemberCastColumnTypeOperation) isTransformOperation() {}
 
 // An operation that tags a column with additional information.
 type TransformOperationMemberTagColumnOperation struct {

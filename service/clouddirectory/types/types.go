@@ -1511,23 +1511,14 @@ type Tag struct {
 // single value.
 //
 // The following types satisfy this interface:
-//  TypedAttributeValueMemberStringValue
 //  TypedAttributeValueMemberBinaryValue
 //  TypedAttributeValueMemberBooleanValue
-//  TypedAttributeValueMemberNumberValue
 //  TypedAttributeValueMemberDatetimeValue
+//  TypedAttributeValueMemberNumberValue
+//  TypedAttributeValueMemberStringValue
 type TypedAttributeValue interface {
 	isTypedAttributeValue()
 }
-
-// A string data value.
-type TypedAttributeValueMemberStringValue struct {
-	Value string
-
-	noSmithyDocumentSerde
-}
-
-func (*TypedAttributeValueMemberStringValue) isTypedAttributeValue() {}
 
 // A binary data value.
 type TypedAttributeValueMemberBinaryValue struct {
@@ -1547,6 +1538,15 @@ type TypedAttributeValueMemberBooleanValue struct {
 
 func (*TypedAttributeValueMemberBooleanValue) isTypedAttributeValue() {}
 
+// A date and time value.
+type TypedAttributeValueMemberDatetimeValue struct {
+	Value time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (*TypedAttributeValueMemberDatetimeValue) isTypedAttributeValue() {}
+
 // A number data value.
 type TypedAttributeValueMemberNumberValue struct {
 	Value string
@@ -1556,14 +1556,14 @@ type TypedAttributeValueMemberNumberValue struct {
 
 func (*TypedAttributeValueMemberNumberValue) isTypedAttributeValue() {}
 
-// A date and time value.
-type TypedAttributeValueMemberDatetimeValue struct {
-	Value time.Time
+// A string data value.
+type TypedAttributeValueMemberStringValue struct {
+	Value string
 
 	noSmithyDocumentSerde
 }
 
-func (*TypedAttributeValueMemberDatetimeValue) isTypedAttributeValue() {}
+func (*TypedAttributeValueMemberStringValue) isTypedAttributeValue() {}
 
 // A range of attribute values. For more information, see Range Filters
 // (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_range_filters.html).

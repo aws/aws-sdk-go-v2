@@ -1237,6 +1237,53 @@ func (m *awsAwsjson11_serializeOpStopStreamEncryption) HandleSerialize(ctx conte
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpSubscribeToShard struct {
+}
+
+func (*awsAwsjson11_serializeOpSubscribeToShard) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpSubscribeToShard) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*SubscribeToShardInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Kinesis_20131202.SubscribeToShard")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentSubscribeToShardInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpUpdateShardCount struct {
 }
 
@@ -1336,6 +1383,28 @@ func awsAwsjson11_serializeDocumentShardFilter(v *types.ShardFilter, value smith
 	if v.ShardId != nil {
 		ok := object.Key("ShardId")
 		ok.String(*v.ShardId)
+	}
+
+	if v.Timestamp != nil {
+		ok := object.Key("Timestamp")
+		ok.Double(smithytime.FormatEpochSeconds(*v.Timestamp))
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentStartingPosition(v *types.StartingPosition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SequenceNumber != nil {
+		ok := object.Key("SequenceNumber")
+		ok.String(*v.SequenceNumber)
 	}
 
 	if v.Timestamp != nil {
@@ -1907,6 +1976,30 @@ func awsAwsjson11_serializeOpDocumentStopStreamEncryptionInput(v *StopStreamEncr
 	if v.StreamName != nil {
 		ok := object.Key("StreamName")
 		ok.String(*v.StreamName)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentSubscribeToShardInput(v *SubscribeToShardInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConsumerARN != nil {
+		ok := object.Key("ConsumerARN")
+		ok.String(*v.ConsumerARN)
+	}
+
+	if v.ShardId != nil {
+		ok := object.Key("ShardId")
+		ok.String(*v.ShardId)
+	}
+
+	if v.StartingPosition != nil {
+		ok := object.Key("StartingPosition")
+		if err := awsAwsjson11_serializeDocumentStartingPosition(v.StartingPosition, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

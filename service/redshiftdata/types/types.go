@@ -55,24 +55,24 @@ type ColumnMetadata struct {
 // A data value in a column.
 //
 // The following types satisfy this interface:
-//  FieldMemberIsNull
-//  FieldMemberBooleanValue
-//  FieldMemberLongValue
-//  FieldMemberDoubleValue
-//  FieldMemberStringValue
 //  FieldMemberBlobValue
+//  FieldMemberBooleanValue
+//  FieldMemberDoubleValue
+//  FieldMemberIsNull
+//  FieldMemberLongValue
+//  FieldMemberStringValue
 type Field interface {
 	isField()
 }
 
-// A value that indicates whether the data is NULL.
-type FieldMemberIsNull struct {
-	Value bool
+// A value of the BLOB data type.
+type FieldMemberBlobValue struct {
+	Value []byte
 
 	noSmithyDocumentSerde
 }
 
-func (*FieldMemberIsNull) isField() {}
+func (*FieldMemberBlobValue) isField() {}
 
 // A value of the Boolean data type.
 type FieldMemberBooleanValue struct {
@@ -83,15 +83,6 @@ type FieldMemberBooleanValue struct {
 
 func (*FieldMemberBooleanValue) isField() {}
 
-// A value of the long data type.
-type FieldMemberLongValue struct {
-	Value int64
-
-	noSmithyDocumentSerde
-}
-
-func (*FieldMemberLongValue) isField() {}
-
 // A value of the double data type.
 type FieldMemberDoubleValue struct {
 	Value float64
@@ -101,6 +92,24 @@ type FieldMemberDoubleValue struct {
 
 func (*FieldMemberDoubleValue) isField() {}
 
+// A value that indicates whether the data is NULL.
+type FieldMemberIsNull struct {
+	Value bool
+
+	noSmithyDocumentSerde
+}
+
+func (*FieldMemberIsNull) isField() {}
+
+// A value of the long data type.
+type FieldMemberLongValue struct {
+	Value int64
+
+	noSmithyDocumentSerde
+}
+
+func (*FieldMemberLongValue) isField() {}
+
 // A value of the string data type.
 type FieldMemberStringValue struct {
 	Value string
@@ -109,15 +118,6 @@ type FieldMemberStringValue struct {
 }
 
 func (*FieldMemberStringValue) isField() {}
-
-// A value of the BLOB data type.
-type FieldMemberBlobValue struct {
-	Value []byte
-
-	noSmithyDocumentSerde
-}
-
-func (*FieldMemberBlobValue) isField() {}
 
 // A parameter used in a SQL statement.
 type SqlParameter struct {

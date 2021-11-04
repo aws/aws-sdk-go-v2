@@ -291,6 +291,39 @@ type ShardFilter struct {
 	noSmithyDocumentSerde
 }
 
+//
+type StartingPosition struct {
+
+	// You can set the starting position to one of the following values:
+	// AT_SEQUENCE_NUMBER: Start streaming from the position denoted by the sequence
+	// number specified in the SequenceNumber field. AFTER_SEQUENCE_NUMBER: Start
+	// streaming right after the position denoted by the sequence number specified in
+	// the SequenceNumber field. AT_TIMESTAMP: Start streaming from the position
+	// denoted by the time stamp specified in the Timestamp field. TRIM_HORIZON: Start
+	// streaming at the last untrimmed record in the shard, which is the oldest data
+	// record in the shard. LATEST: Start streaming just after the most recent record
+	// in the shard, so that you always read the most recent data in the shard.
+	//
+	// This member is required.
+	Type ShardIteratorType
+
+	// The sequence number of the data record in the shard from which to start
+	// streaming. To specify a sequence number, set StartingPosition to
+	// AT_SEQUENCE_NUMBER or AFTER_SEQUENCE_NUMBER.
+	SequenceNumber *string
+
+	// The time stamp of the data record from which to start reading. To specify a time
+	// stamp, set StartingPosition to Type AT_TIMESTAMP. A time stamp is the Unix epoch
+	// date with precision in milliseconds. For example, 2016-04-04T19:58:46.480-00:00
+	// or 1459799926.480. If a record with this exact time stamp does not exist,
+	// records will be streamed from the next (later) record. If the time stamp is
+	// older than the current trim horizon, records will be streamed from the oldest
+	// untrimmed data record (TRIM_HORIZON).
+	Timestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Represents the output for DescribeStream.
 type StreamDescription struct {
 
@@ -473,6 +506,56 @@ type StreamDescriptionSummary struct {
 	noSmithyDocumentSerde
 }
 
+// After you call SubscribeToShard, Kinesis Data Streams sends events of this type
+// over an HTTP/2 connection to your consumer.
+type SubscribeToShardEvent struct {
+
+	// Use this as SequenceNumber in the next call to SubscribeToShard, with
+	// StartingPosition set to AT_SEQUENCE_NUMBER or AFTER_SEQUENCE_NUMBER. Use
+	// ContinuationSequenceNumber for checkpointing because it captures your shard
+	// progress even when no data is written to the shard.
+	//
+	// This member is required.
+	ContinuationSequenceNumber *string
+
+	// The number of milliseconds the read records are from the tip of the stream,
+	// indicating how far behind current time the consumer is. A value of zero
+	// indicates that record processing is caught up, and there are no new records to
+	// process at this moment.
+	//
+	// This member is required.
+	MillisBehindLatest *int64
+
+	//
+	//
+	// This member is required.
+	Records []Record
+
+	ChildShards []ChildShard
+
+	noSmithyDocumentSerde
+}
+
+// This is a tagged union for all of the types of events an enhanced fan-out
+// consumer can receive over HTTP/2 after a call to SubscribeToShard.
+//
+// The following types satisfy this interface:
+//  SubscribeToShardEventStreamMemberSubscribeToShardEvent
+type SubscribeToShardEventStream interface {
+	isSubscribeToShardEventStream()
+}
+
+// After you call SubscribeToShard, Kinesis Data Streams sends events of this type
+// to your consumer. For an example of how to handle these events, see Enhanced
+// Fan-Out Using the Kinesis Data Streams API.
+type SubscribeToShardEventStreamMemberSubscribeToShardEvent struct {
+	Value SubscribeToShardEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*SubscribeToShardEventStreamMemberSubscribeToShardEvent) isSubscribeToShardEventStream() {}
+
 // Metadata assigned to the stream, consisting of a key-value pair.
 type Tag struct {
 
@@ -491,3 +574,14 @@ type Tag struct {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isSubscribeToShardEventStream() {}

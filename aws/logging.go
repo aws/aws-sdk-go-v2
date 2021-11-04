@@ -22,6 +22,8 @@ const (
 	LogResponse
 	LogResponseWithBody
 	LogDeprecatedUsage
+	LogRequestEventMessage
+	LogResponseEventMessage
 )
 
 // IsSigning returns whether the Signing logging mode bit is set
@@ -59,6 +61,16 @@ func (m ClientLogMode) IsDeprecatedUsage() bool {
 	return m&LogDeprecatedUsage != 0
 }
 
+// IsRequestEventMessage returns whether the RequestEventMessage logging mode bit is set
+func (m ClientLogMode) IsRequestEventMessage() bool {
+	return m&LogRequestEventMessage != 0
+}
+
+// IsResponseEventMessage returns whether the ResponseEventMessage logging mode bit is set
+func (m ClientLogMode) IsResponseEventMessage() bool {
+	return m&LogResponseEventMessage != 0
+}
+
 // ClearSigning clears the Signing logging mode bit
 func (m *ClientLogMode) ClearSigning() {
 	*m &^= LogSigning
@@ -92,4 +104,14 @@ func (m *ClientLogMode) ClearResponseWithBody() {
 // ClearDeprecatedUsage clears the DeprecatedUsage logging mode bit
 func (m *ClientLogMode) ClearDeprecatedUsage() {
 	*m &^= LogDeprecatedUsage
+}
+
+// ClearRequestEventMessage clears the RequestEventMessage logging mode bit
+func (m *ClientLogMode) ClearRequestEventMessage() {
+	*m &^= LogRequestEventMessage
+}
+
+// ClearResponseEventMessage clears the ResponseEventMessage logging mode bit
+func (m *ClientLogMode) ClearResponseEventMessage() {
+	*m &^= LogResponseEventMessage
 }

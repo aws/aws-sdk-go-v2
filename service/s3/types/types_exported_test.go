@@ -114,3 +114,37 @@ func ExampleReplicationRuleFilter_outputUsage() {
 var _ *string
 var _ *types.Tag
 var _ *types.ReplicationRuleAndOperator
+
+func ExampleSelectObjectContentEventStream_outputUsage() {
+	var union types.SelectObjectContentEventStream
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.SelectObjectContentEventStreamMemberCont:
+		_ = v.Value // Value is types.ContinuationEvent
+
+	case *types.SelectObjectContentEventStreamMemberEnd:
+		_ = v.Value // Value is types.EndEvent
+
+	case *types.SelectObjectContentEventStreamMemberProgress:
+		_ = v.Value // Value is types.ProgressEvent
+
+	case *types.SelectObjectContentEventStreamMemberRecords:
+		_ = v.Value // Value is types.RecordsEvent
+
+	case *types.SelectObjectContentEventStreamMemberStats:
+		_ = v.Value // Value is types.StatsEvent
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.RecordsEvent
+var _ *types.StatsEvent
+var _ *types.ContinuationEvent
+var _ *types.EndEvent
+var _ *types.ProgressEvent

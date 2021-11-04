@@ -11543,21 +11543,11 @@ type TrialComponentMetricSummary struct {
 // specified. This object is specified in the CreateTrialComponent request.
 //
 // The following types satisfy this interface:
-//  TrialComponentParameterValueMemberStringValue
 //  TrialComponentParameterValueMemberNumberValue
+//  TrialComponentParameterValueMemberStringValue
 type TrialComponentParameterValue interface {
 	isTrialComponentParameterValue()
 }
-
-// The string value of a categorical hyperparameter. If you specify a value for
-// this parameter, you can't specify the NumberValue parameter.
-type TrialComponentParameterValueMemberStringValue struct {
-	Value string
-
-	noSmithyDocumentSerde
-}
-
-func (*TrialComponentParameterValueMemberStringValue) isTrialComponentParameterValue() {}
 
 // The numeric value of a numeric hyperparameter. If you specify a value for this
 // parameter, you can't specify the StringValue parameter.
@@ -11568,6 +11558,16 @@ type TrialComponentParameterValueMemberNumberValue struct {
 }
 
 func (*TrialComponentParameterValueMemberNumberValue) isTrialComponentParameterValue() {}
+
+// The string value of a categorical hyperparameter. If you specify a value for
+// this parameter, you can't specify the NumberValue parameter.
+type TrialComponentParameterValueMemberStringValue struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*TrialComponentParameterValueMemberStringValue) isTrialComponentParameterValue() {}
 
 // A short summary of a trial component.
 type TrialComponentSimpleSummary struct {
