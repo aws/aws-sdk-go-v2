@@ -31,6 +31,21 @@
     "shapes": {
         "com.amazonaws.finspace#AWSHabaneroManagementService": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "finspace",
+                    "arnNamespace": "finspace",
+                    "cloudFormationName": "Finspace",
+                    "cloudTrailEventSource": "finspace.amazonaws.com",
+                    "endpointPrefix": "finspace"
+                },
+                "aws.auth#sigv4": {
+                    "name": "finspace"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>The FinSpace management service provides the APIs for managing FinSpace environments.</p>",
+                "smithy.api#title": "FinSpace User Environment Management service"
+            },
             "version": "2021-03-12",
             "operations": [
                 {
@@ -57,22 +72,7 @@
                 {
                     "target": "com.amazonaws.finspace#UpdateEnvironment"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "finspace",
-                    "arnNamespace": "finspace",
-                    "cloudFormationName": "Finspace",
-                    "cloudTrailEventSource": "finspace.amazonaws.com",
-                    "endpointPrefix": "finspace"
-                },
-                "aws.auth#sigv4": {
-                    "name": "finspace"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>The FinSpace management service provides the APIs for managing the FinSpace\n           environments. </p>",
-                "smithy.api#title": "FinSpace User Environment Management service"
-            }
+            ]
         },
         "com.amazonaws.finspace#AccessDeniedException": {
             "type": "structure",
@@ -168,6 +168,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration information when authentication mode is FEDERATED.</p>"
                     }
+                },
+                "superuserParameters": {
+                    "target": "com.amazonaws.finspace#SuperuserParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information for the superuser.</p>"
+                    }
+                },
+                "dataBundles": {
+                    "target": "com.amazonaws.finspace#DataBundleArns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Amazon Resource Names (ARN) of the data bundles to install. Currently supported data bundle ARNs:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>arn:aws:finspace:${Region}::data-bundle/capital-markets-sample</code> - Contains sample Capital Markets datasets, categories and controlled vocabularies.</p>\n            </li>\n            <li>\n               <p>\n                  <code>arn:aws:finspace:${Region}::data-bundle/taq</code> (default) - Contains trades and quotes data in addition to sample Capital Markets data.</p>\n            </li>\n         </ul>"
+                    }
                 }
             }
         },
@@ -192,6 +204,23 @@
                         "smithy.api#documentation": "<p>The sign-in url for the web application of the FinSpace environment you created.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.finspace#DataBundleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the data bundle.</p>",
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws:finspace:[A-Za-z0-9_/.-]{0,63}:\\d*:data-bundle/[0-9A-Za-z_-]{1,128}$"
+            }
+        },
+        "com.amazonaws.finspace#DataBundleArns": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.finspace#DataBundleArn"
             }
         },
         "com.amazonaws.finspace#DeleteEnvironment": {
@@ -253,6 +282,17 @@
                     "max": 1000
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9. ]{1,1000}$"
+            }
+        },
+        "com.amazonaws.finspace#EmailId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+[.]+[A-Za-z]+$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.finspace#Environment": {
@@ -484,7 +524,7 @@
                     "min": 1,
                     "max": 32
                 },
-                "smithy.api#pattern": "[^_\\p{Z}][\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}][^_\\p{Z}]+"
+                "smithy.api#pattern": "^[^_\\p{Z}][\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}][^_\\p{Z}]+$"
             }
         },
         "com.amazonaws.finspace#GetEnvironment": {
@@ -714,6 +754,16 @@
                 }
             }
         },
+        "com.amazonaws.finspace#NameString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]{1,50}$"
+            }
+        },
         "com.amazonaws.finspace#PaginationToken": {
             "type": "string",
             "traits": {
@@ -777,6 +827,35 @@
                     "max": 1000
                 },
                 "smithy.api#pattern": "^[a-zA-Z-0-9-:\\/.]*$"
+            }
+        },
+        "com.amazonaws.finspace#SuperuserParameters": {
+            "type": "structure",
+            "members": {
+                "emailAddress": {
+                    "target": "com.amazonaws.finspace#EmailId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The email address of the superuser.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "firstName": {
+                    "target": "com.amazonaws.finspace#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The first name of the superuser.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastName": {
+                    "target": "com.amazonaws.finspace#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last name of the superuser.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration information for the superuser.</p>"
             }
         },
         "com.amazonaws.finspace#TagKey": {
@@ -1042,7 +1121,7 @@
                     "min": 1,
                     "max": 1000
                 },
-                "smithy.api#pattern": "^https?://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]"
+                "smithy.api#pattern": "^https?://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]$"
             }
         },
         "com.amazonaws.finspace#urn": {

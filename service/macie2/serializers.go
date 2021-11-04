@@ -394,6 +394,13 @@ func awsRestjson1_serializeOpDocumentCreateCustomDataIdentifierInput(v *CreateCu
 		ok.String(*v.Regex)
 	}
 
+	if v.SeverityLevels != nil {
+		ok := object.Key("severityLevels")
+		if err := awsRestjson1_serializeDocumentSeverityLevelList(v.SeverityLevels, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
@@ -4719,6 +4726,36 @@ func awsRestjson1_serializeDocumentSecurityHubConfiguration(v *types.SecurityHub
 		ok.Boolean(v.PublishPolicyFindings)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSeverityLevel(v *types.SeverityLevel, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("occurrencesThreshold")
+		ok.Long(v.OccurrencesThreshold)
+	}
+
+	if len(v.Severity) > 0 {
+		ok := object.Key("severity")
+		ok.String(string(v.Severity))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSeverityLevelList(v []types.SeverityLevel, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSeverityLevel(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

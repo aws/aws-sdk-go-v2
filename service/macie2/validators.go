@@ -50,6 +50,26 @@ func (m *validateOpCreateClassificationJob) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateCustomDataIdentifier struct {
+}
+
+func (*validateOpCreateCustomDataIdentifier) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCustomDataIdentifier) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCustomDataIdentifierInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCustomDataIdentifierInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateFindingsFilter struct {
 }
 
@@ -598,6 +618,10 @@ func addOpCreateClassificationJobValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpCreateClassificationJob{}, middleware.After)
 }
 
+func addOpCreateCustomDataIdentifierValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCustomDataIdentifier{}, middleware.After)
+}
+
 func addOpCreateFindingsFilterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateFindingsFilter{}, middleware.After)
 }
@@ -823,6 +847,38 @@ func validateSecurityHubConfiguration(v *types.SecurityHubConfiguration) error {
 	}
 }
 
+func validateSeverityLevel(v *types.SeverityLevel) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SeverityLevel"}
+	if len(v.Severity) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Severity"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSeverityLevelList(v []types.SeverityLevel) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SeverityLevelList"}
+	for i := range v {
+		if err := validateSeverityLevel(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAcceptInvitationInput(v *AcceptInvitationInput) error {
 	if v == nil {
 		return nil
@@ -857,6 +913,23 @@ func validateOpCreateClassificationJobInput(v *CreateClassificationJobInput) err
 	} else if v.S3JobDefinition != nil {
 		if err := validateS3JobDefinition(v.S3JobDefinition); err != nil {
 			invalidParams.AddNested("S3JobDefinition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateCustomDataIdentifierInput(v *CreateCustomDataIdentifierInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCustomDataIdentifierInput"}
+	if v.SeverityLevels != nil {
+		if err := validateSeverityLevelList(v.SeverityLevels); err != nil {
+			invalidParams.AddNested("SeverityLevels", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

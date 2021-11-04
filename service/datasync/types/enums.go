@@ -96,6 +96,68 @@ func (Gid) Values() []Gid {
 	}
 }
 
+type HdfsAuthenticationType string
+
+// Enum values for HdfsAuthenticationType
+const (
+	HdfsAuthenticationTypeSimple   HdfsAuthenticationType = "SIMPLE"
+	HdfsAuthenticationTypeKerberos HdfsAuthenticationType = "KERBEROS"
+)
+
+// Values returns all known values for HdfsAuthenticationType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HdfsAuthenticationType) Values() []HdfsAuthenticationType {
+	return []HdfsAuthenticationType{
+		"SIMPLE",
+		"KERBEROS",
+	}
+}
+
+type HdfsDataTransferProtection string
+
+// Enum values for HdfsDataTransferProtection
+const (
+	HdfsDataTransferProtectionDisabled       HdfsDataTransferProtection = "DISABLED"
+	HdfsDataTransferProtectionAuthentication HdfsDataTransferProtection = "AUTHENTICATION"
+	HdfsDataTransferProtectionIntegrity      HdfsDataTransferProtection = "INTEGRITY"
+	HdfsDataTransferProtectionPrivacy        HdfsDataTransferProtection = "PRIVACY"
+)
+
+// Values returns all known values for HdfsDataTransferProtection. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HdfsDataTransferProtection) Values() []HdfsDataTransferProtection {
+	return []HdfsDataTransferProtection{
+		"DISABLED",
+		"AUTHENTICATION",
+		"INTEGRITY",
+		"PRIVACY",
+	}
+}
+
+type HdfsRpcProtection string
+
+// Enum values for HdfsRpcProtection
+const (
+	HdfsRpcProtectionDisabled       HdfsRpcProtection = "DISABLED"
+	HdfsRpcProtectionAuthentication HdfsRpcProtection = "AUTHENTICATION"
+	HdfsRpcProtectionIntegrity      HdfsRpcProtection = "INTEGRITY"
+	HdfsRpcProtectionPrivacy        HdfsRpcProtection = "PRIVACY"
+)
+
+// Values returns all known values for HdfsRpcProtection. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HdfsRpcProtection) Values() []HdfsRpcProtection {
+	return []HdfsRpcProtection{
+		"DISABLED",
+		"AUTHENTICATION",
+		"INTEGRITY",
+		"PRIVACY",
+	}
+}
+
 type LocationFilterName string
 
 // Enum values for LocationFilterName

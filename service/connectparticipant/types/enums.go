@@ -26,20 +26,16 @@ type ChatItemType string
 
 // Enum values for ChatItemType
 const (
-	ChatItemTypeTyping                ChatItemType = "TYPING"
-	ChatItemTypeParticipantJoined     ChatItemType = "PARTICIPANT_JOINED"
-	ChatItemTypeParticipantLeft       ChatItemType = "PARTICIPANT_LEFT"
-	ChatItemTypeChatEnded             ChatItemType = "CHAT_ENDED"
-	ChatItemTypeTransferSucceeded     ChatItemType = "TRANSFER_SUCCEEDED"
-	ChatItemTypeTransferFailed        ChatItemType = "TRANSFER_FAILED"
-	ChatItemTypeMessage               ChatItemType = "MESSAGE"
-	ChatItemTypeEvent                 ChatItemType = "EVENT"
-	ChatItemTypeAttachment            ChatItemType = "ATTACHMENT"
-	ChatItemTypeConnectionAck         ChatItemType = "CONNECTION_ACK"
-	ChatItemTypeParticipantActive     ChatItemType = "PARTICIPANT_ACTIVE"
-	ChatItemTypeParticipantInactive   ChatItemType = "PARTICIPANT_INACTIVE"
-	ChatItemTypeParticipantEngaged    ChatItemType = "PARTICIPANT_ENGAGED"
-	ChatItemTypeParticipantDisengaged ChatItemType = "PARTICIPANT_DISENGAGED"
+	ChatItemTypeTyping            ChatItemType = "TYPING"
+	ChatItemTypeParticipantJoined ChatItemType = "PARTICIPANT_JOINED"
+	ChatItemTypeParticipantLeft   ChatItemType = "PARTICIPANT_LEFT"
+	ChatItemTypeChatEnded         ChatItemType = "CHAT_ENDED"
+	ChatItemTypeTransferSucceeded ChatItemType = "TRANSFER_SUCCEEDED"
+	ChatItemTypeTransferFailed    ChatItemType = "TRANSFER_FAILED"
+	ChatItemTypeMessage           ChatItemType = "MESSAGE"
+	ChatItemTypeEvent             ChatItemType = "EVENT"
+	ChatItemTypeAttachment        ChatItemType = "ATTACHMENT"
+	ChatItemTypeConnectionAck     ChatItemType = "CONNECTION_ACK"
 )
 
 // Values returns all known values for ChatItemType. Note that this can be expanded
@@ -57,10 +53,6 @@ func (ChatItemType) Values() []ChatItemType {
 		"EVENT",
 		"ATTACHMENT",
 		"CONNECTION_ACK",
-		"PARTICIPANT_ACTIVE",
-		"PARTICIPANT_INACTIVE",
-		"PARTICIPANT_ENGAGED",
-		"PARTICIPANT_DISENGAGED",
 	}
 }
 

@@ -34,6 +34,18 @@ type CreateEnvironmentInput struct {
 	// This member is required.
 	Name *string
 
+	// The list of Amazon Resource Names (ARN) of the data bundles to install.
+	// Currently supported data bundle ARNs:
+	//
+	// *
+	// arn:aws:finspace:${Region}::data-bundle/capital-markets-sample - Contains sample
+	// Capital Markets datasets, categories and controlled vocabularies.
+	//
+	// *
+	// arn:aws:finspace:${Region}::data-bundle/taq (default) - Contains trades and
+	// quotes data in addition to sample Capital Markets data.
+	DataBundles []string
+
 	// The description of the FinSpace environment to be created.
 	Description *string
 
@@ -51,6 +63,9 @@ type CreateEnvironmentInput struct {
 
 	// The KMS key id to encrypt your data in the FinSpace environment.
 	KmsKeyId *string
+
+	// Configuration information for the superuser.
+	SuperuserParameters *types.SuperuserParameters
 
 	// Add tags to your FinSpace environment.
 	Tags map[string]string

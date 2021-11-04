@@ -261,22 +261,6 @@
                     {
                         "value": "CONNECTION_ACK",
                         "name": "CONNECTION_ACK"
-                    },
-                    {
-                        "value": "PARTICIPANT_ACTIVE",
-                        "name": "PARTICIPANT_ACTIVE"
-                    },
-                    {
-                        "value": "PARTICIPANT_INACTIVE",
-                        "name": "PARTICIPANT_INACTIVE"
-                    },
-                    {
-                        "value": "PARTICIPANT_ENGAGED",
-                        "name": "PARTICIPANT_ENGAGED"
-                    },
-                    {
-                        "value": "PARTICIPANT_DISENGAGED",
-                        "name": "PARTICIPANT_DISENGAGED"
                     }
                 ]
             }

@@ -41,15 +41,15 @@ type StartTaskExecutionInput struct {
 	TaskArn *string
 
 	// A list of filter rules that determines which files to exclude from a task. The
-	// list should contain a single filter string that consists of the patterns to
-	// exclude. The patterns are delimited by "|" (that is, a pipe), for example,
+	// list contains a single filter string that consists of the patterns to exclude.
+	// The patterns are delimited by "|" (that is, a pipe), for example,
 	// "/folder1|/folder2".
 	Excludes []types.FilterRule
 
 	// A list of filter rules that determines which files to include when running a
 	// task. The pattern should contain a single filter string that consists of the
-	// patterns to include. The patterns are delimited by "|" (that is, a pipe). For
-	// example: "/folder1|/folder2"
+	// patterns to include. The patterns are delimited by "|" (that is, a pipe), for
+	// example, "/folder1|/folder2".
 	Includes []types.FilterRule
 
 	// Represents the options that are available to control the behavior of a

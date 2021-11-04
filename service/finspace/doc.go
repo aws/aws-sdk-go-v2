@@ -3,6 +3,6 @@
 // Package finspace provides the API client, operations, and parameter types for
 // FinSpace User Environment Management service.
 //
-// The FinSpace management service provides the APIs for managing the FinSpace
+// The FinSpace management service provides the APIs for managing FinSpace
 // environments.
 package finspace

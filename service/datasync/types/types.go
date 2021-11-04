@@ -60,6 +60,27 @@ type FilterRule struct {
 	noSmithyDocumentSerde
 }
 
+// The NameNode of the Hadoop Distributed File System (HDFS). The NameNode manages
+// the file system's namespace. The NameNode performs operations such as opening,
+// closing, and renaming files and directories. The NameNode contains the
+// information to map blocks of data to the DataNodes.
+type HdfsNameNode struct {
+
+	// The hostname of the NameNode in the HDFS cluster. This value is the IP address
+	// or Domain Name Service (DNS) name of the NameNode. An agent that's installed
+	// on-premises uses this hostname to communicate with the NameNode in the network.
+	//
+	// This member is required.
+	Hostname *string
+
+	// The port that the NameNode uses to listen to client requests.
+	//
+	// This member is required.
+	Port *int32
+
+	noSmithyDocumentSerde
+}
+
 // You can use API filters to narrow down the list of resources returned by
 // ListLocations. For example, to retrieve all your Amazon S3 locations, you can
 // use ListLocations with filter name LocationType S3 and Operator Equals.
@@ -132,7 +153,7 @@ type NfsMountOptions struct {
 	//
 	// * NFSv4.0
 	// (https://tools.ietf.org/html/rfc3530) - stateful, firewall-friendly protocol
-	// version that supports delegations and pseudo filesystems.
+	// version that supports delegations and pseudo file systems.
 	//
 	// * NFSv4.1
 	// (https://tools.ietf.org/html/rfc5661) - stateful protocol version that supports
@@ -358,6 +379,24 @@ type PrivateLinkConfig struct {
 	noSmithyDocumentSerde
 }
 
+// The Quality of Protection (QOP) configuration specifies the Remote Procedure
+// Call (RPC) and data transfer privacy settings configured on the Hadoop
+// Distributed File System (HDFS) cluster.
+type QopConfiguration struct {
+
+	// The data transfer protection setting configured on the HDFS cluster. This
+	// setting corresponds to your dfs.data.transfer.protection setting in the
+	// hdfs-site.xml file on your Hadoop cluster.
+	DataTransferProtection HdfsDataTransferProtection
+
+	// The RPC protection setting configured on the HDFS cluster. This setting
+	// corresponds to your hadoop.rpc.protection setting in your core-site.xml file on
+	// your Hadoop cluster.
+	RpcProtection HdfsRpcProtection
+
+	noSmithyDocumentSerde
+}
+
 // The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
 // that is used to access an Amazon S3 bucket. For detailed information about using
 // such a role, see Creating a Location for Amazon S3 in the DataSync User Guide.
@@ -387,8 +426,9 @@ type SmbMountOptions struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a single entry in a list of AWS resource tags. TagListEntry returns
-// an array that contains a list of tasks when the ListTagsForResource
+// Represents a single entry in a list of Amazon Web Services resource tags.
+// TagListEntry returns an array that contains a list of tasks when the
+// ListTagsForResource
 // (https://docs.aws.amazon.com/datasync/latest/userguide/API_ListTagsForResource.html)
 // operation is called.
 type TagListEntry struct {

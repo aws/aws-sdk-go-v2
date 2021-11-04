@@ -400,6 +400,123 @@
                 }
             }
         },
+        "com.amazonaws.datasync#CreateLocationHdfs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datasync#CreateLocationHdfsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.datasync#CreateLocationHdfsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datasync#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.datasync#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an endpoint for a Hadoop Distributed File System (HDFS). </p>"
+            }
+        },
+        "com.amazonaws.datasync#CreateLocationHdfsRequest": {
+            "type": "structure",
+            "members": {
+                "Subdirectory": {
+                    "target": "com.amazonaws.datasync#HdfsSubdirectory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A subdirectory in the HDFS cluster. This subdirectory is used to read data from or write\n      data to the HDFS cluster. If the subdirectory isn't specified, it will default to\n        <code>/</code>.</p>"
+                    }
+                },
+                "NameNodes": {
+                    "target": "com.amazonaws.datasync#HdfsNameNodeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The NameNode that manages the HDFS namespace. The NameNode performs operations such as\n      opening, closing, and renaming files and directories. The NameNode contains the information to\n      map blocks of data to the DataNodes. You can use only one NameNode.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BlockSize": {
+                    "target": "com.amazonaws.datasync#HdfsBlockSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size of data blocks to write into the HDFS cluster. The block size must be a multiple\n      of 512 bytes. The default block size is 128 mebibytes (MiB).</p>"
+                    }
+                },
+                "ReplicationFactor": {
+                    "target": "com.amazonaws.datasync#HdfsReplicationFactor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of DataNodes to replicate the data to when writing to the HDFS cluster. By\n      default, data is replicated to three DataNodes.</p>"
+                    }
+                },
+                "KmsKeyProviderUri": {
+                    "target": "com.amazonaws.datasync#KmsKeyProviderUri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URI of the HDFS cluster's Key Management Server (KMS). </p>"
+                    }
+                },
+                "QopConfiguration": {
+                    "target": "com.amazonaws.datasync#QopConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Quality of Protection (QOP) configuration specifies the Remote Procedure Call (RPC)\n      and data transfer protection settings configured on the Hadoop Distributed File System (HDFS)\n      cluster. If <code>QopConfiguration</code> isn't specified, <code>RpcProtection</code> and\n        <code>DataTransferProtection</code> default to <code>PRIVACY</code>. If you set\n        <code>RpcProtection</code> or <code>DataTransferProtection</code>, the other parameter\n      assumes the same value. </p>"
+                    }
+                },
+                "AuthenticationType": {
+                    "target": "com.amazonaws.datasync#HdfsAuthenticationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of authentication used to determine the identity of the user. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SimpleUser": {
+                    "target": "com.amazonaws.datasync#HdfsUser",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user name used to identify the client on the host operating system. </p>\n         <note>\n            <p>If <code>SIMPLE</code> is specified for <code>AuthenticationType</code>, this parameter\n        is required. </p>\n         </note>"
+                    }
+                },
+                "KerberosPrincipal": {
+                    "target": "com.amazonaws.datasync#KerberosPrincipal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Kerberos principal with access to the files and folders on the HDFS cluster. </p>\n         <note>\n            <p>If <code>KERBEROS</code> is specified for <code>AuthenticationType</code>, this\n        parameter is required.</p>\n         </note>"
+                    }
+                },
+                "KerberosKeytab": {
+                    "target": "com.amazonaws.datasync#KerberosKeytabFile",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Kerberos key table (keytab) that contains mappings between the defined Kerberos\n      principal and the encrypted keys. You can load the keytab from a file by providing the file's\n      address. If you're using the CLI, it performs base64 encoding for you.\n      Otherwise, provide the base64-encoded text. </p>\n         <note>\n            <p>If <code>KERBEROS</code> is specified for <code>AuthenticationType</code>, this\n        parameter is required. </p>\n         </note>"
+                    }
+                },
+                "KerberosKrb5Conf": {
+                    "target": "com.amazonaws.datasync#KerberosKrb5ConfFile",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>krb5.conf</code> file that contains the Kerberos configuration information. You\n      can load the <code>krb5.conf</code> file by providing the file's address. If you're using the\n        CLI, it performs the base64 encoding for you. Otherwise, provide the\n      base64-encoded text. </p>\n         <note>\n            <p>If <code>KERBEROS</code> is specified for <code>AuthenticationType</code>, this\n        parameter is required.</p>\n         </note>"
+                    }
+                },
+                "AgentArns": {
+                    "target": "com.amazonaws.datasync#AgentArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the agents that are used to connect to the HDFS\n      cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.datasync#InputTagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key-value pair that represents the tag that you want to add to the location. The value\n      can be an empty string. We recommend using tags to name your resources. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.datasync#CreateLocationHdfsResponse": {
+            "type": "structure",
+            "members": {
+                "LocationArn": {
+                    "target": "com.amazonaws.datasync#LocationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the source HDFS cluster location that's created. </p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.datasync#CreateLocationNfs": {
             "type": "operation",
             "input": {
@@ -824,7 +941,7 @@
                 "Includes": {
                     "target": "com.amazonaws.datasync#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of filter rules that determines which files to include when running a task. The\n      pattern should contain a single filter string that consists of the patterns to include. The\n      patterns are delimited by \"|\" (that is, a pipe). For example:\n      <code>\"/folder1|/folder2</code>\"</p>"
+                        "smithy.api#documentation": "<p>A list of filter rules that determines which files to include when running a task. The\n      pattern contains a single filter string that consists of the patterns to include. The patterns\n      are delimited by \"|\" (that is, a pipe), for example, <code>\"/folder1|/folder2\"</code>.</p>"
                     }
                 }
             },
@@ -1181,6 +1298,115 @@
                     "target": "com.amazonaws.datasync#SmbDomain",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the Windows domain that the FSx for Windows File Server belongs to.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.datasync#DescribeLocationHdfs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datasync#DescribeLocationHdfsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.datasync#DescribeLocationHdfsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datasync#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.datasync#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns metadata, such as the authentication information about the Hadoop Distributed File\n      System (HDFS) location. </p>"
+            }
+        },
+        "com.amazonaws.datasync#DescribeLocationHdfsRequest": {
+            "type": "structure",
+            "members": {
+                "LocationArn": {
+                    "target": "com.amazonaws.datasync#LocationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the HDFS cluster location to describe.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.datasync#DescribeLocationHdfsResponse": {
+            "type": "structure",
+            "members": {
+                "LocationArn": {
+                    "target": "com.amazonaws.datasync#LocationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the HDFS cluster location.</p>"
+                    }
+                },
+                "LocationUri": {
+                    "target": "com.amazonaws.datasync#LocationUri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URI of the HDFS cluster location.</p>"
+                    }
+                },
+                "NameNodes": {
+                    "target": "com.amazonaws.datasync#HdfsNameNodeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The NameNode that manage the HDFS namespace. </p>"
+                    }
+                },
+                "BlockSize": {
+                    "target": "com.amazonaws.datasync#HdfsBlockSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size of the data blocks to write into the HDFS cluster. </p>"
+                    }
+                },
+                "ReplicationFactor": {
+                    "target": "com.amazonaws.datasync#HdfsReplicationFactor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of DataNodes to replicate the data to when writing to the HDFS cluster. </p>"
+                    }
+                },
+                "KmsKeyProviderUri": {
+                    "target": "com.amazonaws.datasync#KmsKeyProviderUri",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The URI of the HDFS cluster's Key Management Server (KMS). </p>"
+                    }
+                },
+                "QopConfiguration": {
+                    "target": "com.amazonaws.datasync#QopConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Quality of Protection (QOP) configuration specifies the Remote Procedure Call (RPC)\n      and data transfer protection settings configured on the Hadoop Distributed File System (HDFS)\n      cluster. </p>"
+                    }
+                },
+                "AuthenticationType": {
+                    "target": "com.amazonaws.datasync#HdfsAuthenticationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of authentication used to determine the identity of the user. </p>"
+                    }
+                },
+                "SimpleUser": {
+                    "target": "com.amazonaws.datasync#HdfsUser",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user name used to identify the client on the host operating system. This parameter is\n      used if the <code>AuthenticationType</code> is defined as <code>SIMPLE</code>.</p>"
+                    }
+                },
+                "KerberosPrincipal": {
+                    "target": "com.amazonaws.datasync#KerberosPrincipal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Kerberos principal with access to the files and folders on the HDFS cluster. This\n      parameter is used if the <code>AuthenticationType</code> is defined as\n      <code>KERBEROS</code>.</p>"
+                    }
+                },
+                "AgentArns": {
+                    "target": "com.amazonaws.datasync#AgentArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARNs of the agents that are used to connect to the HDFS cluster. </p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.datasync#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the HDFS location was created.</p>"
                     }
                 }
             }
@@ -1696,13 +1922,13 @@
                 "SourceNetworkInterfaceArns": {
                     "target": "com.amazonaws.datasync#SourceNetworkInterfaceArns",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the source ENIs (Elastic Network Interface) that was\n      created for your subnet.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the source elastic network interfaces (ENIs) that were\n      created for your subnet.</p>"
                     }
                 },
                 "DestinationNetworkInterfaceArns": {
                     "target": "com.amazonaws.datasync#DestinationNetworkInterfaceArns",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the destination ENIs (Elastic Network Interface) that\n      was created for your subnet.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the destination elastic network interfaces (ENIs) that\n      were created for your subnet.</p>"
                     }
                 },
                 "Options": {
@@ -1714,7 +1940,7 @@
                 "Excludes": {
                     "target": "com.amazonaws.datasync#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of filter rules that determines which files to exclude from a task. The list should\n      contain a single filter string that consists of the patterns to exclude. The patterns are\n      delimited by \"|\" (that is, a pipe), for example: <code>\"/folder1|/folder2\"</code>\n         </p>\n         <p>\n    </p>"
+                        "smithy.api#documentation": "<p>A list of filter rules that determines which files to exclude from a task. The list should\n      contain a single filter string that consists of the patterns to exclude. The patterns are\n      delimited by \"|\" (that is, a pipe), for example, <code>\"/folder1|/folder2\"</code>. </p>\n         <p>\n    </p>"
                     }
                 },
                 "Schedule": {
@@ -1744,7 +1970,7 @@
                 "Includes": {
                     "target": "com.amazonaws.datasync#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of filter rules that determines which files to include when running a task. The\n      pattern should contain a single filter string that consists of the patterns to include. The\n      patterns are delimited by \"|\" (that is, a pipe). For example:\n      <code>\"/folder1|/folder2</code>\"</p>"
+                        "smithy.api#documentation": "<p>A list of filter rules that determines which files to include when running a task. The\n      pattern contains a single filter string that consists of the patterns to include. The patterns\n      are delimited by \"|\" (that is, a pipe), for example, <code>\"/folder1|/folder2</code>\".</p>"
                     }
                 }
             },
@@ -1946,6 +2172,21 @@
         },
         "com.amazonaws.datasync#FmrsService": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "DataSync",
+                    "arnNamespace": "datasync",
+                    "cloudFormationName": "DataSync",
+                    "cloudTrailEventSource": "datasync.amazonaws.com",
+                    "endpointPrefix": "datasync"
+                },
+                "aws.auth#sigv4": {
+                    "name": "datasync"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<fullname>DataSync</fullname>\n\n         <p>DataSync is a managed data transfer service that makes it simpler for you to\n      automate moving data between on-premises storage and Amazon Simple Storage Service (Amazon S3)\n      or Amazon Elastic File System (Amazon EFS). </p>\n         <p>This API interface reference for DataSync contains documentation for a\n      programming interface that you can use to manage DataSync.</p>",
+                "smithy.api#title": "AWS DataSync"
+            },
             "version": "2018-11-09",
             "operations": [
                 {
@@ -1959,6 +2200,9 @@
                 },
                 {
                     "target": "com.amazonaws.datasync#CreateLocationFsxWindows"
+                },
+                {
+                    "target": "com.amazonaws.datasync#CreateLocationHdfs"
                 },
                 {
                     "target": "com.amazonaws.datasync#CreateLocationNfs"
@@ -1992,6 +2236,9 @@
                 },
                 {
                     "target": "com.amazonaws.datasync#DescribeLocationFsxWindows"
+                },
+                {
+                    "target": "com.amazonaws.datasync#DescribeLocationHdfs"
                 },
                 {
                     "target": "com.amazonaws.datasync#DescribeLocationNfs"
@@ -2039,6 +2286,9 @@
                     "target": "com.amazonaws.datasync#UpdateAgent"
                 },
                 {
+                    "target": "com.amazonaws.datasync#UpdateLocationHdfs"
+                },
+                {
                     "target": "com.amazonaws.datasync#UpdateLocationNfs"
                 },
                 {
@@ -2053,22 +2303,7 @@
                 {
                     "target": "com.amazonaws.datasync#UpdateTaskExecution"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "DataSync",
-                    "arnNamespace": "datasync",
-                    "cloudFormationName": "DataSync",
-                    "cloudTrailEventSource": "datasync.amazonaws.com",
-                    "endpointPrefix": "datasync"
-                },
-                "aws.auth#sigv4": {
-                    "name": "datasync"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>DataSync</fullname>\n\n         <p>DataSync is a managed data transfer service that makes it simpler for you to\n      automate moving data between on-premises storage and Amazon Simple Storage Service (Amazon S3)\n      or Amazon Elastic File System (Amazon EFS). </p>\n         <p>This API interface reference for DataSync contains documentation for a\n      programming interface that you can use to manage DataSync.</p>",
-                "smithy.api#title": "AWS DataSync"
-            }
+            ]
         },
         "com.amazonaws.datasync#FsxFilesystemArn": {
             "type": "string",
@@ -2111,6 +2346,160 @@
                         "name": "BOTH"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.datasync#HdfsAuthenticationType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SIMPLE",
+                        "name": "SIMPLE"
+                    },
+                    {
+                        "value": "KERBEROS",
+                        "name": "KERBEROS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.datasync#HdfsBlockSize": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1048576,
+                    "max": 1073741824
+                }
+            }
+        },
+        "com.amazonaws.datasync#HdfsDataTransferProtection": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "DISABLED",
+                        "name": "DISABLED"
+                    },
+                    {
+                        "value": "AUTHENTICATION",
+                        "name": "AUTHENTICATION"
+                    },
+                    {
+                        "value": "INTEGRITY",
+                        "name": "INTEGRITY"
+                    },
+                    {
+                        "value": "PRIVACY",
+                        "name": "PRIVACY"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.datasync#HdfsNameNode": {
+            "type": "structure",
+            "members": {
+                "Hostname": {
+                    "target": "com.amazonaws.datasync#HdfsServerHostname",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The hostname of the NameNode in the HDFS cluster. This value is the IP address or Domain\n      Name Service (DNS) name of the NameNode. An agent that's installed on-premises uses this\n      hostname to communicate with the NameNode in the network.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Port": {
+                    "target": "com.amazonaws.datasync#HdfsServerPort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port that the NameNode uses to listen to client requests.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The NameNode of the Hadoop Distributed File System (HDFS). The NameNode manages the file\n      system's namespace. The NameNode performs operations such as opening, closing, and renaming\n      files and directories. The NameNode contains the information to map blocks of data to the\n      DataNodes.</p>"
+            }
+        },
+        "com.amazonaws.datasync#HdfsNameNodeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datasync#HdfsNameNode"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.datasync#HdfsReplicationFactor": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 512
+                }
+            }
+        },
+        "com.amazonaws.datasync#HdfsRpcProtection": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "DISABLED",
+                        "name": "DISABLED"
+                    },
+                    {
+                        "value": "AUTHENTICATION",
+                        "name": "AUTHENTICATION"
+                    },
+                    {
+                        "value": "INTEGRITY",
+                        "name": "INTEGRITY"
+                    },
+                    {
+                        "value": "PRIVACY",
+                        "name": "PRIVACY"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.datasync#HdfsServerHostname": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9])$"
+            }
+        },
+        "com.amazonaws.datasync#HdfsServerPort": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 65536
+                }
+            }
+        },
+        "com.amazonaws.datasync#HdfsSubdirectory": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 4096
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$"
+            }
+        },
+        "com.amazonaws.datasync#HdfsUser": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[_.A-Za-z0-9][-_.A-Za-z0-9]*$"
             }
         },
         "com.amazonaws.datasync#IamRoleArn": {
@@ -2163,6 +2552,44 @@
             "traits": {
                 "smithy.api#documentation": "<p>This exception is thrown when the client submits a malformed request.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.datasync#KerberosKeytabFile": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 65536
+                }
+            }
+        },
+        "com.amazonaws.datasync#KerberosKrb5ConfFile": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 131072
+                }
+            }
+        },
+        "com.amazonaws.datasync#KerberosPrincipal": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^.+$"
+            }
+        },
+        "com.amazonaws.datasync#KmsKeyProviderUri": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^kms:\\/\\/http[s]?@(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9])(;(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9]))*:[0-9]{1,5}\\/kms$"
             }
         },
         "com.amazonaws.datasync#ListAgents": {
@@ -2695,7 +3122,7 @@
                 "Version": {
                     "target": "com.amazonaws.datasync#NfsVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The specific NFS version that you want DataSync to use to mount your NFS share. If the\n      server refuses to use the version specified, the sync will fail. If you don't specify a\n      version, DataSync defaults to <code>AUTOMATIC</code>. That is, DataSync automatically\n      selects a version based on negotiation with the NFS server.</p>\n\n         <p>You can specify the following NFS versions:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <a href=\"https://tools.ietf.org/html/rfc1813\">NFSv3</a>\n                  </b> - stateless protocol version that allows for asynchronous\n          writes on the server.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <a href=\"https://tools.ietf.org/html/rfc3530\">NFSv4.0</a>\n                  </b> - stateful, firewall-friendly protocol version that supports\n          delegations and pseudo filesystems.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <a href=\"https://tools.ietf.org/html/rfc5661\">NFSv4.1</a>\n                  </b> - stateful protocol version that supports sessions,\n          directory delegations, and parallel data processing. Version 4.1 also includes all\n          features available in version 4.0.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The specific NFS version that you want DataSync to use to mount your NFS share. If the\n      server refuses to use the version specified, the sync will fail. If you don't specify a\n      version, DataSync defaults to <code>AUTOMATIC</code>. That is, DataSync automatically\n      selects a version based on negotiation with the NFS server.</p>\n\n         <p>You can specify the following NFS versions:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <a href=\"https://tools.ietf.org/html/rfc1813\">NFSv3</a>\n                  </b> - stateless protocol version that allows for asynchronous\n          writes on the server.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <a href=\"https://tools.ietf.org/html/rfc3530\">NFSv4.0</a>\n                  </b> - stateful, firewall-friendly protocol version that supports\n          delegations and pseudo file systems.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <a href=\"https://tools.ietf.org/html/rfc5661\">NFSv4.1</a>\n                  </b> - stateful protocol version that supports sessions,\n          directory delegations, and parallel data processing. Version 4.1 also includes all\n          features available in version 4.0.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -3093,6 +3520,26 @@
                 "smithy.api#documentation": "<p>The VPC endpoint, subnet, and security group that an agent uses to access IP addresses in\n      a VPC (Virtual Private Cloud).</p>"
             }
         },
+        "com.amazonaws.datasync#QopConfiguration": {
+            "type": "structure",
+            "members": {
+                "RpcProtection": {
+                    "target": "com.amazonaws.datasync#HdfsRpcProtection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The RPC protection setting configured on the HDFS cluster. This setting corresponds to\n      your <code>hadoop.rpc.protection</code> setting in your <code>core-site.xml</code> file on\n      your Hadoop cluster.</p>"
+                    }
+                },
+                "DataTransferProtection": {
+                    "target": "com.amazonaws.datasync#HdfsDataTransferProtection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data transfer protection setting configured on the HDFS cluster. This setting\n      corresponds to your <code>dfs.data.transfer.protection</code> setting in the\n        <code>hdfs-site.xml</code> file on your Hadoop cluster.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Quality of Protection (QOP) configuration specifies the Remote Procedure Call (RPC)\n      and data transfer privacy settings configured on the Hadoop Distributed File System (HDFS)\n      cluster.</p>"
+            }
+        },
         "com.amazonaws.datasync#S3BucketArn": {
             "type": "string",
             "traits": {
@@ -3318,13 +3765,13 @@
                 "Includes": {
                     "target": "com.amazonaws.datasync#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of filter rules that determines which files to include when running a task. The\n      pattern should contain a single filter string that consists of the patterns to include. The\n      patterns are delimited by \"|\" (that is, a pipe). For example: <code>\"/folder1|/folder2\"</code>\n         </p>\n    \n         <p>\n    </p>"
+                        "smithy.api#documentation": "<p>A list of filter rules that determines which files to include when running a task. The\n      pattern should contain a single filter string that consists of the patterns to include. The\n      patterns are delimited by \"|\" (that is, a pipe), for example,\n      <code>\"/folder1|/folder2\"</code>. </p>\n    \n         <p>\n    </p>"
                     }
                 },
                 "Excludes": {
                     "target": "com.amazonaws.datasync#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of filter rules that determines which files to exclude from a task. The list\n      should contain a single filter string that consists of the patterns to exclude. The\n      patterns are delimited by \"|\" (that is, a pipe), for example,\n      <code>\"/folder1|/folder2\"</code>. </p>"
+                        "smithy.api#documentation": "<p>A list of filter rules that determines which files to exclude from a task. The list\n      contains a single filter string that consists of the patterns to exclude. The patterns are\n      delimited by \"|\" (that is, a pipe), for example, <code>\"/folder1|/folder2\"</code>. </p>"
                     }
                 }
             },
@@ -3386,7 +3833,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a single entry in a list of AWS resource tags. <code>TagListEntry</code>\n      returns an array that contains a list of tasks when the \n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_ListTagsForResource.html\">ListTagsForResource</a>\n      operation is called.</p>"
+                "smithy.api#documentation": "<p>Represents a single entry in a list of Amazon Web Services resource tags. <code>TagListEntry</code>\n      returns an array that contains a list of tasks when the \n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_ListTagsForResource.html\">ListTagsForResource</a>\n      operation is called.</p>"
             }
         },
         "com.amazonaws.datasync#TagResource": {
@@ -3869,6 +4316,114 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.datasync#UpdateLocationHdfs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datasync#UpdateLocationHdfsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.datasync#UpdateLocationHdfsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datasync#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.datasync#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates some parameters of a previously created location for a Hadoop Distributed File\n      System cluster.</p>"
+            }
+        },
+        "com.amazonaws.datasync#UpdateLocationHdfsRequest": {
+            "type": "structure",
+            "members": {
+                "LocationArn": {
+                    "target": "com.amazonaws.datasync#LocationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the source HDFS cluster location.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Subdirectory": {
+                    "target": "com.amazonaws.datasync#HdfsSubdirectory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A subdirectory in the HDFS cluster. This subdirectory is used to read data from or write\n      data to the HDFS cluster.</p>"
+                    }
+                },
+                "NameNodes": {
+                    "target": "com.amazonaws.datasync#HdfsNameNodeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The NameNode that manages the HDFS namespace. The NameNode performs operations such as\n      opening, closing, and renaming files and directories. The NameNode contains the information to\n      map blocks of data to the DataNodes. You can use only one NameNode.</p>"
+                    }
+                },
+                "BlockSize": {
+                    "target": "com.amazonaws.datasync#HdfsBlockSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size of the data blocks to write into the HDFS cluster. </p>"
+                    }
+                },
+                "ReplicationFactor": {
+                    "target": "com.amazonaws.datasync#HdfsReplicationFactor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of DataNodes to replicate the data to when writing to the HDFS cluster. </p>"
+                    }
+                },
+                "KmsKeyProviderUri": {
+                    "target": "com.amazonaws.datasync#KmsKeyProviderUri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URI of the HDFS cluster's Key Management Server (KMS). </p>"
+                    }
+                },
+                "QopConfiguration": {
+                    "target": "com.amazonaws.datasync#QopConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Quality of Protection (QOP) configuration specifies the Remote Procedure Call (RPC)\n      and data transfer privacy settings configured on the Hadoop Distributed File System (HDFS)\n      cluster. </p>"
+                    }
+                },
+                "AuthenticationType": {
+                    "target": "com.amazonaws.datasync#HdfsAuthenticationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of authentication used to determine the identity of the user. </p>"
+                    }
+                },
+                "SimpleUser": {
+                    "target": "com.amazonaws.datasync#HdfsUser",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user name used to identify the client on the host operating system.</p>"
+                    }
+                },
+                "KerberosPrincipal": {
+                    "target": "com.amazonaws.datasync#KerberosPrincipal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Kerberos principal with access to the files and folders on the HDFS cluster. </p>"
+                    }
+                },
+                "KerberosKeytab": {
+                    "target": "com.amazonaws.datasync#KerberosKeytabFile",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Kerberos key table (keytab) that contains mappings between the defined Kerberos\n      principal and the encrypted keys. You can load the keytab from a file by providing the file's\n      address. If you use the AWS CLI, it performs base64 encoding for you. Otherwise, provide the\n      base64-encoded text.</p>"
+                    }
+                },
+                "KerberosKrb5Conf": {
+                    "target": "com.amazonaws.datasync#KerberosKrb5ConfFile",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>krb5.conf</code> file that contains the Kerberos configuration information. You\n      can load the <code>krb5.conf</code> file by providing the file's address. If you're using the\n      AWS CLI, it performs the base64 encoding for you. Otherwise, provide the base64-encoded\n      text.</p>"
+                    }
+                },
+                "AgentArns": {
+                    "target": "com.amazonaws.datasync#AgentArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARNs of the agents that are used to connect to the HDFS cluster. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.datasync#UpdateLocationHdfsResponse": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.datasync#UpdateLocationNfs": {
             "type": "operation",
             "input": {
@@ -4136,7 +4691,7 @@
                 "Excludes": {
                     "target": "com.amazonaws.datasync#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of filter rules that determines which files to exclude from a task. The list should\n      contain a single filter string that consists of the patterns to exclude. The patterns are\n      delimited by \"|\" (that is, a pipe), for example: <code>\"/folder1|/folder2\"</code>\n         </p>\n         <p>\n    </p>"
+                        "smithy.api#documentation": "<p>A list of filter rules that determines which files to exclude from a task. The list should\n      contain a single filter string that consists of the patterns to exclude. The patterns are\n      delimited by \"|\" (that is, a pipe), for example, <code>\"/folder1|/folder2\"</code>.</p>\n         <p>\n    </p>"
                     }
                 },
                 "Schedule": {
@@ -4154,13 +4709,13 @@
                 "CloudWatchLogGroupArn": {
                     "target": "com.amazonaws.datasync#LogGroupArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource name of the CloudWatch\n      LogGroup.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource name of the Amazon CloudWatch log\n      group.</p>"
                     }
                 },
                 "Includes": {
                     "target": "com.amazonaws.datasync#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of filter rules that determines which files to include when running a task. The\n      pattern should contain a single filter string that consists of the patterns to include. The\n      patterns are delimited by \"|\" (that is, a pipe). For example:\n      <code>\"/folder1|/folder2</code>\"</p>"
+                        "smithy.api#documentation": "<p>A list of filter rules that determines which files to include when running a task. The\n      pattern contains a single filter string that consists of the patterns to include. The patterns\n      are delimited by \"|\" (that is, a pipe), for example, <code>\"/folder1|/folder2\"</code>.</p>"
                     }
                 }
             },
