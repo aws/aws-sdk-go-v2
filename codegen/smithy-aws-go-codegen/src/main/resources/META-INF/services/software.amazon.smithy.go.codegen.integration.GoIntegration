@@ -11,6 +11,7 @@ software.amazon.smithy.aws.go.codegen.AwsSdkServiceId
 software.amazon.smithy.aws.go.codegen.AwsRetryMiddlewareHelper
 software.amazon.smithy.aws.go.codegen.AWSRequestIDRetriever
 software.amazon.smithy.aws.go.codegen.AWSResponseErrorWrapper
+software.amazon.smithy.aws.go.codegen.FilterShapes
 software.amazon.smithy.aws.go.codegen.customization.ShapeBackwardsCompatabilityTransforms
 software.amazon.smithy.aws.go.codegen.customization.BackfillBoxTrait
 software.amazon.smithy.aws.go.codegen.customization.DynamoDBValidateResponseChecksum
