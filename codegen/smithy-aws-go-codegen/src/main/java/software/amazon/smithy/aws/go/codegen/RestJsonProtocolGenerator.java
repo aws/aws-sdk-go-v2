@@ -475,7 +475,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                 .filter(ms -> ms.getMemberTrait(model, ErrorTrait.class).isEmpty())
                 .collect(Collectors.toCollection(TreeSet::new));
 
-        final var eventDocumentShapes = new HashSet<Shape>();
+        final var eventDocumentShapes = new TreeSet<Shape>();
         for (MemberShape member : memberShapes) {
             var targetShape = model.expectShape(member.getTarget());
             if (generatedEventMessageSerializers.contains(targetShape.toShapeId())) {
@@ -523,7 +523,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         AwsEventStreamUtils.generateEventStreamExceptionDeserializer(context, eventUnion,
                 AwsProtocolUtils::writeJsonEventStreamUnknownExceptionDeserializer);
 
-        final var eventDocumentShapes = new HashSet<Shape>();
+        final var eventDocumentShapes = new TreeSet<Shape>();
 
         for (MemberShape shape : eventUnion.members()) {
             var targetShape = model.expectShape(shape.getTarget());

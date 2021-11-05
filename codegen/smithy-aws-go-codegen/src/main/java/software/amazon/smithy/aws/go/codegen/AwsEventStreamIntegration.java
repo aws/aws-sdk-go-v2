@@ -3,9 +3,9 @@ package software.amazon.smithy.aws.go.codegen;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 import software.amazon.smithy.go.codegen.GoEventStreamIndex;
 import software.amazon.smithy.go.codegen.GoSettings;
@@ -33,7 +33,7 @@ public class AwsEventStreamIntegration implements GoIntegration {
         var goEventStreamIndex = GoEventStreamIndex.of(model);
         var service = settings.getService();
 
-        Collection<OperationShape> operationShapes = new HashSet<>();
+        Collection<OperationShape> operationShapes = new TreeSet<>();
 
         goEventStreamIndex.getInputEventStreams(service).ifPresent(shapeIdSetMap ->
                 shapeIdSetMap.values().forEach(eventStreamInfos ->
