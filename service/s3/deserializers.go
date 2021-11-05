@@ -11802,6 +11802,42 @@ func awsRestxml_deserializeEventMessageEndEvent(v *types.EndEvent, msg *eventstr
 	return nil
 }
 
+func awsRestxml_deserializeDocumentContinuationEvent(v **types.ContinuationEvent, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.ContinuationEvent
+	if *v == nil {
+		sv = &types.ContinuationEvent{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestxml_deserializeDocumentEndEvent(v **types.EndEvent, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11911,42 +11947,6 @@ func awsRestxml_deserializeDocumentProgress(v **types.Progress, decoder smithyxm
 				sv.BytesScanned = i64
 			}
 
-		default:
-			// Do nothing and ignore the unexpected tag element
-			err = decoder.Decoder.Skip()
-			if err != nil {
-				return err
-			}
-
-		}
-		decoder = originalDecoder
-	}
-	*v = sv
-	return nil
-}
-
-func awsRestxml_deserializeDocumentContinuationEvent(v **types.ContinuationEvent, decoder smithyxml.NodeDecoder) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	var sv *types.ContinuationEvent
-	if *v == nil {
-		sv = &types.ContinuationEvent{}
-	} else {
-		sv = *v
-	}
-
-	for {
-		t, done, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		if done {
-			break
-		}
-		originalDecoder := decoder
-		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
-		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
 			err = decoder.Decoder.Skip()
