@@ -10,6 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/transcribestreaming/types"
 	"github.com/aws/smithy-go/middleware"
 	smithysync "github.com/aws/smithy-go/sync"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"sync"
 	"time"
 )
@@ -213,6 +214,9 @@ func (c *Client) addOperationStartStreamTranscriptionMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addEventStreamStartStreamTranscriptionMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = smithyhttp.AddRequireMinimumProtocol(stack, 2, 0); err != nil {
 		return err
 	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
