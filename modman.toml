@@ -54,5 +54,11 @@
   [modules."service/internal/integrationtest"]
     no_tag = true
 
+  [modules."service/kinesis/internal/testing"]
+    no_tag = true
+
   [modules."service/s3/internal/configtesting"]
+    no_tag = true
+
+  [modules."service/transcribestreaming/internal/testing"]
     no_tag = true
