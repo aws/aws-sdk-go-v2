@@ -1,5 +1,3 @@
-github.com/aws/aws-sdk-go-v2/internal/configsources v1.0.7 h1:/0GQVY8J25hww4J9a+rYKDr9ryGh2KdIdR8YHBP54h0=
-github.com/aws/aws-sdk-go-v2/internal/configsources v1.0.7/go.mod h1:QXoZAXmBEHeMIFiBr3XumpTyoNTXTQbqPV+qaGX7gfY=
 github.com/aws/smithy-go v1.8.2-0.20211102001011-cc8d2d3f851f h1:4nFZeIgutEmubdHF4UAAahgN+K5as4ZL5vr1MdfPv8Q=
 github.com/aws/smithy-go v1.8.2-0.20211102001011-cc8d2d3f851f/go.mod h1:SObp3lf9smib00L/v3U2eAKG8FyQ7iLrJnQiAmR5n+E=
 github.com/davecgh/go-spew v1.1.0 h1:ZDRjVQ15GmhC3fiQ8ni8+OwkZQO4DARzQgrnXU1Liz8=

@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/service/transcribestreaming/internal/testing
+module github.com/aws/aws-sdk-go-v2/service/kinesis/internal/testing
 
 go 1.15
 

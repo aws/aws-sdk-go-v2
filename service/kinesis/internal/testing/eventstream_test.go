@@ -23,7 +23,7 @@ func removeValidationMiddleware(stack *middleware.Stack) error {
 	return err
 }
 
-func TestStartStreamTranscription_Read(t *testing.T) {
+func TestSubscribeToShard_Read(t *testing.T) {
 	cfg, cleanupFn, err := eventstreamtesting.SetupEventStream(t,
 		eventstreamtesting.ServeEventStream{
 			T: t,
@@ -89,7 +89,7 @@ func TestStartStreamTranscription_Read(t *testing.T) {
 	}
 }
 
-func TestStartStreamTranscription_ReadClose(t *testing.T) {
+func TestSubscribeToShard_ReadClose(t *testing.T) {
 	sess, cleanupFn, err := eventstreamtesting.SetupEventStream(t,
 		eventstreamtesting.ServeEventStream{
 			T: t,
@@ -150,7 +150,7 @@ func TestStartStreamTranscription_ReadClose(t *testing.T) {
 	}
 }
 
-func TestStartStreamTranscription_ReadUnknownEvent(t *testing.T) {
+func TestSubscribeToShard_ReadUnknownEvent(t *testing.T) {
 	cfg, cleanupFn, err := eventstreamtesting.SetupEventStream(t,
 		eventstreamtesting.ServeEventStream{
 			T: t,
@@ -239,7 +239,7 @@ func TestStartStreamTranscription_ReadUnknownEvent(t *testing.T) {
 	}
 }
 
-func TestStartStreamTranscription_ReadException(t *testing.T) {
+func TestSubscribeToShard_ReadException(t *testing.T) {
 	cfg, cleanupFn, err := eventstreamtesting.SetupEventStream(t,
 		eventstreamtesting.ServeEventStream{
 			T: t,
@@ -304,7 +304,7 @@ func TestStartStreamTranscription_ReadException(t *testing.T) {
 	}
 }
 
-func TestStartStreamTranscription_ReadUnmodeledException(t *testing.T) {
+func TestSubscribeToShard_ReadUnmodeledException(t *testing.T) {
 	cfg, cleanupFn, err := eventstreamtesting.SetupEventStream(t,
 		eventstreamtesting.ServeEventStream{
 			T: t,
@@ -372,7 +372,7 @@ func TestStartStreamTranscription_ReadUnmodeledException(t *testing.T) {
 	}
 }
 
-func TestStartStreamTranscription_ReadErrorEvent(t *testing.T) {
+func TestSubscribeToShard_ReadErrorEvent(t *testing.T) {
 	cfg, cleanupFn, err := eventstreamtesting.SetupEventStream(t,
 		eventstreamtesting.ServeEventStream{
 			T: t,
