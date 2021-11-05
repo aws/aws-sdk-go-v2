@@ -242,8 +242,17 @@ func NewBotLocaleBuiltWaiter(client DescribeBotLocaleAPIClient, optFns ...func(*
 // maximum wait duration the waiter will wait. The maxWaitDur is required and must
 // be greater than zero.
 func (w *BotLocaleBuiltWaiter) Wait(ctx context.Context, params *DescribeBotLocaleInput, maxWaitDur time.Duration, optFns ...func(*BotLocaleBuiltWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for BotLocaleBuilt waiter and returns
+// the output of the successful operation. The maxWaitDur is the maximum wait
+// duration the waiter will wait. The maxWaitDur is required and must be greater
+// than zero.
+func (w *BotLocaleBuiltWaiter) WaitForOutput(ctx context.Context, params *DescribeBotLocaleInput, maxWaitDur time.Duration, optFns ...func(*BotLocaleBuiltWaiterOptions)) (*DescribeBotLocaleOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -256,7 +265,7 @@ func (w *BotLocaleBuiltWaiter) Wait(ctx context.Context, params *DescribeBotLoca
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -284,10 +293,10 @@ func (w *BotLocaleBuiltWaiter) Wait(ctx context.Context, params *DescribeBotLoca
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -300,16 +309,16 @@ func (w *BotLocaleBuiltWaiter) Wait(ctx context.Context, params *DescribeBotLoca
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for BotLocaleBuilt waiter")
+	return nil, fmt.Errorf("exceeded max wait time for BotLocaleBuilt waiter")
 }
 
 func botLocaleBuiltStateRetryable(ctx context.Context, input *DescribeBotLocaleInput, output *DescribeBotLocaleOutput, err error) (bool, error) {
@@ -444,8 +453,17 @@ func NewBotLocaleCreatedWaiter(client DescribeBotLocaleAPIClient, optFns ...func
 // the maximum wait duration the waiter will wait. The maxWaitDur is required and
 // must be greater than zero.
 func (w *BotLocaleCreatedWaiter) Wait(ctx context.Context, params *DescribeBotLocaleInput, maxWaitDur time.Duration, optFns ...func(*BotLocaleCreatedWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for BotLocaleCreated waiter and returns
+// the output of the successful operation. The maxWaitDur is the maximum wait
+// duration the waiter will wait. The maxWaitDur is required and must be greater
+// than zero.
+func (w *BotLocaleCreatedWaiter) WaitForOutput(ctx context.Context, params *DescribeBotLocaleInput, maxWaitDur time.Duration, optFns ...func(*BotLocaleCreatedWaiterOptions)) (*DescribeBotLocaleOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -458,7 +476,7 @@ func (w *BotLocaleCreatedWaiter) Wait(ctx context.Context, params *DescribeBotLo
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -486,10 +504,10 @@ func (w *BotLocaleCreatedWaiter) Wait(ctx context.Context, params *DescribeBotLo
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -502,16 +520,16 @@ func (w *BotLocaleCreatedWaiter) Wait(ctx context.Context, params *DescribeBotLo
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for BotLocaleCreated waiter")
+	return nil, fmt.Errorf("exceeded max wait time for BotLocaleCreated waiter")
 }
 
 func botLocaleCreatedStateRetryable(ctx context.Context, input *DescribeBotLocaleInput, output *DescribeBotLocaleOutput, err error) (bool, error) {
@@ -668,8 +686,17 @@ func NewBotLocaleExpressTestingAvailableWaiter(client DescribeBotLocaleAPIClient
 // maxWaitDur is the maximum wait duration the waiter will wait. The maxWaitDur is
 // required and must be greater than zero.
 func (w *BotLocaleExpressTestingAvailableWaiter) Wait(ctx context.Context, params *DescribeBotLocaleInput, maxWaitDur time.Duration, optFns ...func(*BotLocaleExpressTestingAvailableWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for BotLocaleExpressTestingAvailable
+// waiter and returns the output of the successful operation. The maxWaitDur is the
+// maximum wait duration the waiter will wait. The maxWaitDur is required and must
+// be greater than zero.
+func (w *BotLocaleExpressTestingAvailableWaiter) WaitForOutput(ctx context.Context, params *DescribeBotLocaleInput, maxWaitDur time.Duration, optFns ...func(*BotLocaleExpressTestingAvailableWaiterOptions)) (*DescribeBotLocaleOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -682,7 +709,7 @@ func (w *BotLocaleExpressTestingAvailableWaiter) Wait(ctx context.Context, param
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -710,10 +737,10 @@ func (w *BotLocaleExpressTestingAvailableWaiter) Wait(ctx context.Context, param
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -726,16 +753,16 @@ func (w *BotLocaleExpressTestingAvailableWaiter) Wait(ctx context.Context, param
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for BotLocaleExpressTestingAvailable waiter")
+	return nil, fmt.Errorf("exceeded max wait time for BotLocaleExpressTestingAvailable waiter")
 }
 
 func botLocaleExpressTestingAvailableStateRetryable(ctx context.Context, input *DescribeBotLocaleInput, output *DescribeBotLocaleOutput, err error) (bool, error) {

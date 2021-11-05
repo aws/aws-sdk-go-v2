@@ -267,8 +267,17 @@ func NewStackCreateCompleteWaiter(client DescribeStacksAPIClient, optFns ...func
 // the maximum wait duration the waiter will wait. The maxWaitDur is required and
 // must be greater than zero.
 func (w *StackCreateCompleteWaiter) Wait(ctx context.Context, params *DescribeStacksInput, maxWaitDur time.Duration, optFns ...func(*StackCreateCompleteWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for StackCreateComplete waiter and
+// returns the output of the successful operation. The maxWaitDur is the maximum
+// wait duration the waiter will wait. The maxWaitDur is required and must be
+// greater than zero.
+func (w *StackCreateCompleteWaiter) WaitForOutput(ctx context.Context, params *DescribeStacksInput, maxWaitDur time.Duration, optFns ...func(*StackCreateCompleteWaiterOptions)) (*DescribeStacksOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -281,7 +290,7 @@ func (w *StackCreateCompleteWaiter) Wait(ctx context.Context, params *DescribeSt
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -309,10 +318,10 @@ func (w *StackCreateCompleteWaiter) Wait(ctx context.Context, params *DescribeSt
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -325,16 +334,16 @@ func (w *StackCreateCompleteWaiter) Wait(ctx context.Context, params *DescribeSt
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for StackCreateComplete waiter")
+	return nil, fmt.Errorf("exceeded max wait time for StackCreateComplete waiter")
 }
 
 func stackCreateCompleteStateRetryable(ctx context.Context, input *DescribeStacksInput, output *DescribeStacksOutput, err error) (bool, error) {
@@ -566,8 +575,17 @@ func NewStackDeleteCompleteWaiter(client DescribeStacksAPIClient, optFns ...func
 // the maximum wait duration the waiter will wait. The maxWaitDur is required and
 // must be greater than zero.
 func (w *StackDeleteCompleteWaiter) Wait(ctx context.Context, params *DescribeStacksInput, maxWaitDur time.Duration, optFns ...func(*StackDeleteCompleteWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for StackDeleteComplete waiter and
+// returns the output of the successful operation. The maxWaitDur is the maximum
+// wait duration the waiter will wait. The maxWaitDur is required and must be
+// greater than zero.
+func (w *StackDeleteCompleteWaiter) WaitForOutput(ctx context.Context, params *DescribeStacksInput, maxWaitDur time.Duration, optFns ...func(*StackDeleteCompleteWaiterOptions)) (*DescribeStacksOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -580,7 +598,7 @@ func (w *StackDeleteCompleteWaiter) Wait(ctx context.Context, params *DescribeSt
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -608,10 +626,10 @@ func (w *StackDeleteCompleteWaiter) Wait(ctx context.Context, params *DescribeSt
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -624,16 +642,16 @@ func (w *StackDeleteCompleteWaiter) Wait(ctx context.Context, params *DescribeSt
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for StackDeleteComplete waiter")
+	return nil, fmt.Errorf("exceeded max wait time for StackDeleteComplete waiter")
 }
 
 func stackDeleteCompleteStateRetryable(ctx context.Context, input *DescribeStacksInput, output *DescribeStacksOutput, err error) (bool, error) {
@@ -888,8 +906,16 @@ func NewStackExistsWaiter(client DescribeStacksAPIClient, optFns ...func(*StackE
 // maximum wait duration the waiter will wait. The maxWaitDur is required and must
 // be greater than zero.
 func (w *StackExistsWaiter) Wait(ctx context.Context, params *DescribeStacksInput, maxWaitDur time.Duration, optFns ...func(*StackExistsWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for StackExists waiter and returns the
+// output of the successful operation. The maxWaitDur is the maximum wait duration
+// the waiter will wait. The maxWaitDur is required and must be greater than zero.
+func (w *StackExistsWaiter) WaitForOutput(ctx context.Context, params *DescribeStacksInput, maxWaitDur time.Duration, optFns ...func(*StackExistsWaiterOptions)) (*DescribeStacksOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -902,7 +928,7 @@ func (w *StackExistsWaiter) Wait(ctx context.Context, params *DescribeStacksInpu
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -930,10 +956,10 @@ func (w *StackExistsWaiter) Wait(ctx context.Context, params *DescribeStacksInpu
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -946,16 +972,16 @@ func (w *StackExistsWaiter) Wait(ctx context.Context, params *DescribeStacksInpu
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for StackExists waiter")
+	return nil, fmt.Errorf("exceeded max wait time for StackExists waiter")
 }
 
 func stackExistsStateRetryable(ctx context.Context, input *DescribeStacksInput, output *DescribeStacksOutput, err error) (bool, error) {
@@ -1039,8 +1065,17 @@ func NewStackImportCompleteWaiter(client DescribeStacksAPIClient, optFns ...func
 // the maximum wait duration the waiter will wait. The maxWaitDur is required and
 // must be greater than zero.
 func (w *StackImportCompleteWaiter) Wait(ctx context.Context, params *DescribeStacksInput, maxWaitDur time.Duration, optFns ...func(*StackImportCompleteWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for StackImportComplete waiter and
+// returns the output of the successful operation. The maxWaitDur is the maximum
+// wait duration the waiter will wait. The maxWaitDur is required and must be
+// greater than zero.
+func (w *StackImportCompleteWaiter) WaitForOutput(ctx context.Context, params *DescribeStacksInput, maxWaitDur time.Duration, optFns ...func(*StackImportCompleteWaiterOptions)) (*DescribeStacksOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -1053,7 +1088,7 @@ func (w *StackImportCompleteWaiter) Wait(ctx context.Context, params *DescribeSt
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -1081,10 +1116,10 @@ func (w *StackImportCompleteWaiter) Wait(ctx context.Context, params *DescribeSt
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -1097,16 +1132,16 @@ func (w *StackImportCompleteWaiter) Wait(ctx context.Context, params *DescribeSt
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for StackImportComplete waiter")
+	return nil, fmt.Errorf("exceeded max wait time for StackImportComplete waiter")
 }
 
 func stackImportCompleteStateRetryable(ctx context.Context, input *DescribeStacksInput, output *DescribeStacksOutput, err error) (bool, error) {
@@ -1338,8 +1373,17 @@ func NewStackRollbackCompleteWaiter(client DescribeStacksAPIClient, optFns ...fu
 // is the maximum wait duration the waiter will wait. The maxWaitDur is required
 // and must be greater than zero.
 func (w *StackRollbackCompleteWaiter) Wait(ctx context.Context, params *DescribeStacksInput, maxWaitDur time.Duration, optFns ...func(*StackRollbackCompleteWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for StackRollbackComplete waiter and
+// returns the output of the successful operation. The maxWaitDur is the maximum
+// wait duration the waiter will wait. The maxWaitDur is required and must be
+// greater than zero.
+func (w *StackRollbackCompleteWaiter) WaitForOutput(ctx context.Context, params *DescribeStacksInput, maxWaitDur time.Duration, optFns ...func(*StackRollbackCompleteWaiterOptions)) (*DescribeStacksOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -1352,7 +1396,7 @@ func (w *StackRollbackCompleteWaiter) Wait(ctx context.Context, params *Describe
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -1380,10 +1424,10 @@ func (w *StackRollbackCompleteWaiter) Wait(ctx context.Context, params *Describe
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -1396,16 +1440,16 @@ func (w *StackRollbackCompleteWaiter) Wait(ctx context.Context, params *Describe
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for StackRollbackComplete waiter")
+	return nil, fmt.Errorf("exceeded max wait time for StackRollbackComplete waiter")
 }
 
 func stackRollbackCompleteStateRetryable(ctx context.Context, input *DescribeStacksInput, output *DescribeStacksOutput, err error) (bool, error) {
@@ -1589,8 +1633,17 @@ func NewStackUpdateCompleteWaiter(client DescribeStacksAPIClient, optFns ...func
 // the maximum wait duration the waiter will wait. The maxWaitDur is required and
 // must be greater than zero.
 func (w *StackUpdateCompleteWaiter) Wait(ctx context.Context, params *DescribeStacksInput, maxWaitDur time.Duration, optFns ...func(*StackUpdateCompleteWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for StackUpdateComplete waiter and
+// returns the output of the successful operation. The maxWaitDur is the maximum
+// wait duration the waiter will wait. The maxWaitDur is required and must be
+// greater than zero.
+func (w *StackUpdateCompleteWaiter) WaitForOutput(ctx context.Context, params *DescribeStacksInput, maxWaitDur time.Duration, optFns ...func(*StackUpdateCompleteWaiterOptions)) (*DescribeStacksOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -1603,7 +1656,7 @@ func (w *StackUpdateCompleteWaiter) Wait(ctx context.Context, params *DescribeSt
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -1631,10 +1684,10 @@ func (w *StackUpdateCompleteWaiter) Wait(ctx context.Context, params *DescribeSt
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -1647,16 +1700,16 @@ func (w *StackUpdateCompleteWaiter) Wait(ctx context.Context, params *DescribeSt
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for StackUpdateComplete waiter")
+	return nil, fmt.Errorf("exceeded max wait time for StackUpdateComplete waiter")
 }
 
 func stackUpdateCompleteStateRetryable(ctx context.Context, input *DescribeStacksInput, output *DescribeStacksOutput, err error) (bool, error) {

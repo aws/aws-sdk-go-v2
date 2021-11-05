@@ -191,8 +191,17 @@ func NewStreamingSessionReadyWaiter(client GetStreamingSessionAPIClient, optFns 
 // is the maximum wait duration the waiter will wait. The maxWaitDur is required
 // and must be greater than zero.
 func (w *StreamingSessionReadyWaiter) Wait(ctx context.Context, params *GetStreamingSessionInput, maxWaitDur time.Duration, optFns ...func(*StreamingSessionReadyWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for StreamingSessionReady waiter and
+// returns the output of the successful operation. The maxWaitDur is the maximum
+// wait duration the waiter will wait. The maxWaitDur is required and must be
+// greater than zero.
+func (w *StreamingSessionReadyWaiter) WaitForOutput(ctx context.Context, params *GetStreamingSessionInput, maxWaitDur time.Duration, optFns ...func(*StreamingSessionReadyWaiterOptions)) (*GetStreamingSessionOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -205,7 +214,7 @@ func (w *StreamingSessionReadyWaiter) Wait(ctx context.Context, params *GetStrea
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -233,10 +242,10 @@ func (w *StreamingSessionReadyWaiter) Wait(ctx context.Context, params *GetStrea
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -249,16 +258,16 @@ func (w *StreamingSessionReadyWaiter) Wait(ctx context.Context, params *GetStrea
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for StreamingSessionReady waiter")
+	return nil, fmt.Errorf("exceeded max wait time for StreamingSessionReady waiter")
 }
 
 func streamingSessionReadyStateRetryable(ctx context.Context, input *GetStreamingSessionInput, output *GetStreamingSessionOutput, err error) (bool, error) {
@@ -378,8 +387,17 @@ func NewStreamingSessionStoppedWaiter(client GetStreamingSessionAPIClient, optFn
 // maxWaitDur is the maximum wait duration the waiter will wait. The maxWaitDur is
 // required and must be greater than zero.
 func (w *StreamingSessionStoppedWaiter) Wait(ctx context.Context, params *GetStreamingSessionInput, maxWaitDur time.Duration, optFns ...func(*StreamingSessionStoppedWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for StreamingSessionStopped waiter and
+// returns the output of the successful operation. The maxWaitDur is the maximum
+// wait duration the waiter will wait. The maxWaitDur is required and must be
+// greater than zero.
+func (w *StreamingSessionStoppedWaiter) WaitForOutput(ctx context.Context, params *GetStreamingSessionInput, maxWaitDur time.Duration, optFns ...func(*StreamingSessionStoppedWaiterOptions)) (*GetStreamingSessionOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -392,7 +410,7 @@ func (w *StreamingSessionStoppedWaiter) Wait(ctx context.Context, params *GetStr
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -420,10 +438,10 @@ func (w *StreamingSessionStoppedWaiter) Wait(ctx context.Context, params *GetStr
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -436,16 +454,16 @@ func (w *StreamingSessionStoppedWaiter) Wait(ctx context.Context, params *GetStr
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for StreamingSessionStopped waiter")
+	return nil, fmt.Errorf("exceeded max wait time for StreamingSessionStopped waiter")
 }
 
 func streamingSessionStoppedStateRetryable(ctx context.Context, input *GetStreamingSessionInput, output *GetStreamingSessionOutput, err error) (bool, error) {
@@ -548,8 +566,17 @@ func NewStreamingSessionDeletedWaiter(client GetStreamingSessionAPIClient, optFn
 // maxWaitDur is the maximum wait duration the waiter will wait. The maxWaitDur is
 // required and must be greater than zero.
 func (w *StreamingSessionDeletedWaiter) Wait(ctx context.Context, params *GetStreamingSessionInput, maxWaitDur time.Duration, optFns ...func(*StreamingSessionDeletedWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for StreamingSessionDeleted waiter and
+// returns the output of the successful operation. The maxWaitDur is the maximum
+// wait duration the waiter will wait. The maxWaitDur is required and must be
+// greater than zero.
+func (w *StreamingSessionDeletedWaiter) WaitForOutput(ctx context.Context, params *GetStreamingSessionInput, maxWaitDur time.Duration, optFns ...func(*StreamingSessionDeletedWaiterOptions)) (*GetStreamingSessionOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -562,7 +589,7 @@ func (w *StreamingSessionDeletedWaiter) Wait(ctx context.Context, params *GetStr
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -590,10 +617,10 @@ func (w *StreamingSessionDeletedWaiter) Wait(ctx context.Context, params *GetStr
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -606,16 +633,16 @@ func (w *StreamingSessionDeletedWaiter) Wait(ctx context.Context, params *GetStr
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for StreamingSessionDeleted waiter")
+	return nil, fmt.Errorf("exceeded max wait time for StreamingSessionDeleted waiter")
 }
 
 func streamingSessionDeletedStateRetryable(ctx context.Context, input *GetStreamingSessionInput, output *GetStreamingSessionOutput, err error) (bool, error) {

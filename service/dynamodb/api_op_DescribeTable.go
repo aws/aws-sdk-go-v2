@@ -241,8 +241,16 @@ func NewTableExistsWaiter(client DescribeTableAPIClient, optFns ...func(*TableEx
 // maximum wait duration the waiter will wait. The maxWaitDur is required and must
 // be greater than zero.
 func (w *TableExistsWaiter) Wait(ctx context.Context, params *DescribeTableInput, maxWaitDur time.Duration, optFns ...func(*TableExistsWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for TableExists waiter and returns the
+// output of the successful operation. The maxWaitDur is the maximum wait duration
+// the waiter will wait. The maxWaitDur is required and must be greater than zero.
+func (w *TableExistsWaiter) WaitForOutput(ctx context.Context, params *DescribeTableInput, maxWaitDur time.Duration, optFns ...func(*TableExistsWaiterOptions)) (*DescribeTableOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -255,7 +263,7 @@ func (w *TableExistsWaiter) Wait(ctx context.Context, params *DescribeTableInput
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -283,10 +291,10 @@ func (w *TableExistsWaiter) Wait(ctx context.Context, params *DescribeTableInput
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -299,16 +307,16 @@ func (w *TableExistsWaiter) Wait(ctx context.Context, params *DescribeTableInput
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for TableExists waiter")
+	return nil, fmt.Errorf("exceeded max wait time for TableExists waiter")
 }
 
 func tableExistsStateRetryable(ctx context.Context, input *DescribeTableInput, output *DescribeTableOutput, err error) (bool, error) {
@@ -399,8 +407,17 @@ func NewTableNotExistsWaiter(client DescribeTableAPIClient, optFns ...func(*Tabl
 // maximum wait duration the waiter will wait. The maxWaitDur is required and must
 // be greater than zero.
 func (w *TableNotExistsWaiter) Wait(ctx context.Context, params *DescribeTableInput, maxWaitDur time.Duration, optFns ...func(*TableNotExistsWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for TableNotExists waiter and returns
+// the output of the successful operation. The maxWaitDur is the maximum wait
+// duration the waiter will wait. The maxWaitDur is required and must be greater
+// than zero.
+func (w *TableNotExistsWaiter) WaitForOutput(ctx context.Context, params *DescribeTableInput, maxWaitDur time.Duration, optFns ...func(*TableNotExistsWaiterOptions)) (*DescribeTableOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -413,7 +430,7 @@ func (w *TableNotExistsWaiter) Wait(ctx context.Context, params *DescribeTableIn
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -441,10 +458,10 @@ func (w *TableNotExistsWaiter) Wait(ctx context.Context, params *DescribeTableIn
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -457,16 +474,16 @@ func (w *TableNotExistsWaiter) Wait(ctx context.Context, params *DescribeTableIn
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for TableNotExists waiter")
+	return nil, fmt.Errorf("exceeded max wait time for TableNotExists waiter")
 }
 
 func tableNotExistsStateRetryable(ctx context.Context, input *DescribeTableInput, output *DescribeTableOutput, err error) (bool, error) {

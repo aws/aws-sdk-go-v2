@@ -187,8 +187,16 @@ func NewFleetStartedWaiter(client DescribeFleetsAPIClient, optFns ...func(*Fleet
 // maximum wait duration the waiter will wait. The maxWaitDur is required and must
 // be greater than zero.
 func (w *FleetStartedWaiter) Wait(ctx context.Context, params *DescribeFleetsInput, maxWaitDur time.Duration, optFns ...func(*FleetStartedWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for FleetStarted waiter and returns the
+// output of the successful operation. The maxWaitDur is the maximum wait duration
+// the waiter will wait. The maxWaitDur is required and must be greater than zero.
+func (w *FleetStartedWaiter) WaitForOutput(ctx context.Context, params *DescribeFleetsInput, maxWaitDur time.Duration, optFns ...func(*FleetStartedWaiterOptions)) (*DescribeFleetsOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -201,7 +209,7 @@ func (w *FleetStartedWaiter) Wait(ctx context.Context, params *DescribeFleetsInp
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -229,10 +237,10 @@ func (w *FleetStartedWaiter) Wait(ctx context.Context, params *DescribeFleetsInp
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -245,16 +253,16 @@ func (w *FleetStartedWaiter) Wait(ctx context.Context, params *DescribeFleetsInp
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for FleetStarted waiter")
+	return nil, fmt.Errorf("exceeded max wait time for FleetStarted waiter")
 }
 
 func fleetStartedStateRetryable(ctx context.Context, input *DescribeFleetsInput, output *DescribeFleetsOutput, err error) (bool, error) {
@@ -401,8 +409,16 @@ func NewFleetStoppedWaiter(client DescribeFleetsAPIClient, optFns ...func(*Fleet
 // maximum wait duration the waiter will wait. The maxWaitDur is required and must
 // be greater than zero.
 func (w *FleetStoppedWaiter) Wait(ctx context.Context, params *DescribeFleetsInput, maxWaitDur time.Duration, optFns ...func(*FleetStoppedWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for FleetStopped waiter and returns the
+// output of the successful operation. The maxWaitDur is the maximum wait duration
+// the waiter will wait. The maxWaitDur is required and must be greater than zero.
+func (w *FleetStoppedWaiter) WaitForOutput(ctx context.Context, params *DescribeFleetsInput, maxWaitDur time.Duration, optFns ...func(*FleetStoppedWaiterOptions)) (*DescribeFleetsOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -415,7 +431,7 @@ func (w *FleetStoppedWaiter) Wait(ctx context.Context, params *DescribeFleetsInp
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -443,10 +459,10 @@ func (w *FleetStoppedWaiter) Wait(ctx context.Context, params *DescribeFleetsInp
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -459,16 +475,16 @@ func (w *FleetStoppedWaiter) Wait(ctx context.Context, params *DescribeFleetsInp
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for FleetStopped waiter")
+	return nil, fmt.Errorf("exceeded max wait time for FleetStopped waiter")
 }
 
 func fleetStoppedStateRetryable(ctx context.Context, input *DescribeFleetsInput, output *DescribeFleetsOutput, err error) (bool, error) {
