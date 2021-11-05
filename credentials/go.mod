@@ -7,7 +7,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.7.0
 	github.com/aws/aws-sdk-go-v2/service/sso v1.5.0
 	github.com/aws/aws-sdk-go-v2/service/sts v1.8.0
-	github.com/aws/smithy-go v1.8.2-0.20211102001011-cc8d2d3f851f
+	github.com/aws/smithy-go v1.8.2-0.20211105194408-3a969a9d7872
 	github.com/google/go-cmp v0.5.6
 )
 

@@ -82,11 +82,7 @@ func (r *subscribeToShardEventStream) readEventStream() {
 	defer r.Close()
 	defer close(r.stream)
 
-	defer func() {
-		close(r.initialResponse)
-		for range r.initialResponse {
-		}
-	}()
+	defer close(r.initialResponse)
 
 	for {
 		r.payloadBuf = r.payloadBuf[0:0]

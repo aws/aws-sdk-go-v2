@@ -1,0 +1,9 @@
+{
+    "id": "abe9fb60-659a-420d-8e17-d4852903366d",
+    "type": "release",
+    "description": "Protocol support has been added for AWS event stream.",
+    "modules": [
+        "aws/protocol/eventstream",
+        "service/internal/eventstreamtesting"
+    ]
+}

@@ -108,11 +108,8 @@ func TestInteg_StartStreamTranscription_contextClose(t *testing.T) {
 
 	cfg, _ := integrationtest.LoadConfigWithDefaultRegion("us-west-2")
 
-	ctx, cancelFn := context.WithTimeout(context.Background(), 10*time.Second)
-	defer cancelFn()
-
 	client := transcribestreaming.NewFromConfig(cfg)
-	resp, err := client.StartStreamTranscription(ctx, &transcribestreaming.StartStreamTranscriptionInput{
+	resp, err := client.StartStreamTranscription(context.Background(), &transcribestreaming.StartStreamTranscriptionInput{
 		LanguageCode:         types.LanguageCodeEnUs,
 		MediaEncoding:        types.MediaEncodingPcm,
 		MediaSampleRateHertz: aws.Int32(16000),
@@ -123,6 +120,9 @@ func TestInteg_StartStreamTranscription_contextClose(t *testing.T) {
 
 	stream := resp.GetStream()
 	defer stream.Close()
+
+	ctx, cancelFn := context.WithCancel(context.Background())
+	defer cancelFn()
 
 	var wg sync.WaitGroup
 	wg.Add(1)
