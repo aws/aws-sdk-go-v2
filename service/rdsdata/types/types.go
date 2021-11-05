@@ -9,14 +9,23 @@ import (
 // Contains an array.
 //
 // The following types satisfy this interface:
-//  ArrayValueMemberBooleanValues
-//  ArrayValueMemberLongValues
-//  ArrayValueMemberDoubleValues
-//  ArrayValueMemberStringValues
 //  ArrayValueMemberArrayValues
+//  ArrayValueMemberBooleanValues
+//  ArrayValueMemberDoubleValues
+//  ArrayValueMemberLongValues
+//  ArrayValueMemberStringValues
 type ArrayValue interface {
 	isArrayValue()
 }
+
+// An array of arrays.
+type ArrayValueMemberArrayValues struct {
+	Value []ArrayValue
+
+	noSmithyDocumentSerde
+}
+
+func (*ArrayValueMemberArrayValues) isArrayValue() {}
 
 // An array of Boolean values.
 type ArrayValueMemberBooleanValues struct {
@@ -27,15 +36,6 @@ type ArrayValueMemberBooleanValues struct {
 
 func (*ArrayValueMemberBooleanValues) isArrayValue() {}
 
-// An array of floating point numbers.
-type ArrayValueMemberLongValues struct {
-	Value []int64
-
-	noSmithyDocumentSerde
-}
-
-func (*ArrayValueMemberLongValues) isArrayValue() {}
-
 // An array of integers.
 type ArrayValueMemberDoubleValues struct {
 	Value []float64
@@ -45,6 +45,15 @@ type ArrayValueMemberDoubleValues struct {
 
 func (*ArrayValueMemberDoubleValues) isArrayValue() {}
 
+// An array of floating point numbers.
+type ArrayValueMemberLongValues struct {
+	Value []int64
+
+	noSmithyDocumentSerde
+}
+
+func (*ArrayValueMemberLongValues) isArrayValue() {}
+
 // An array of strings.
 type ArrayValueMemberStringValues struct {
 	Value []string
@@ -53,15 +62,6 @@ type ArrayValueMemberStringValues struct {
 }
 
 func (*ArrayValueMemberStringValues) isArrayValue() {}
-
-// An array of arrays.
-type ArrayValueMemberArrayValues struct {
-	Value []ArrayValue
-
-	noSmithyDocumentSerde
-}
-
-func (*ArrayValueMemberArrayValues) isArrayValue() {}
 
 // Contains the metadata for a column.
 type ColumnMetadata struct {
@@ -114,61 +114,25 @@ type ColumnMetadata struct {
 // Contains a value.
 //
 // The following types satisfy this interface:
-//  FieldMemberIsNull
-//  FieldMemberBooleanValue
-//  FieldMemberLongValue
-//  FieldMemberDoubleValue
-//  FieldMemberStringValue
-//  FieldMemberBlobValue
 //  FieldMemberArrayValue
+//  FieldMemberBlobValue
+//  FieldMemberBooleanValue
+//  FieldMemberDoubleValue
+//  FieldMemberIsNull
+//  FieldMemberLongValue
+//  FieldMemberStringValue
 type Field interface {
 	isField()
 }
 
-// A NULL value.
-type FieldMemberIsNull struct {
-	Value bool
+// An array of values.
+type FieldMemberArrayValue struct {
+	Value ArrayValue
 
 	noSmithyDocumentSerde
 }
 
-func (*FieldMemberIsNull) isField() {}
-
-// A value of Boolean data type.
-type FieldMemberBooleanValue struct {
-	Value bool
-
-	noSmithyDocumentSerde
-}
-
-func (*FieldMemberBooleanValue) isField() {}
-
-// A value of long data type.
-type FieldMemberLongValue struct {
-	Value int64
-
-	noSmithyDocumentSerde
-}
-
-func (*FieldMemberLongValue) isField() {}
-
-// A value of double data type.
-type FieldMemberDoubleValue struct {
-	Value float64
-
-	noSmithyDocumentSerde
-}
-
-func (*FieldMemberDoubleValue) isField() {}
-
-// A value of string data type.
-type FieldMemberStringValue struct {
-	Value string
-
-	noSmithyDocumentSerde
-}
-
-func (*FieldMemberStringValue) isField() {}
+func (*FieldMemberArrayValue) isField() {}
 
 // A value of BLOB data type.
 type FieldMemberBlobValue struct {
@@ -179,14 +143,50 @@ type FieldMemberBlobValue struct {
 
 func (*FieldMemberBlobValue) isField() {}
 
-// An array of values.
-type FieldMemberArrayValue struct {
-	Value ArrayValue
+// A value of Boolean data type.
+type FieldMemberBooleanValue struct {
+	Value bool
 
 	noSmithyDocumentSerde
 }
 
-func (*FieldMemberArrayValue) isField() {}
+func (*FieldMemberBooleanValue) isField() {}
+
+// A value of double data type.
+type FieldMemberDoubleValue struct {
+	Value float64
+
+	noSmithyDocumentSerde
+}
+
+func (*FieldMemberDoubleValue) isField() {}
+
+// A NULL value.
+type FieldMemberIsNull struct {
+	Value bool
+
+	noSmithyDocumentSerde
+}
+
+func (*FieldMemberIsNull) isField() {}
+
+// A value of long data type.
+type FieldMemberLongValue struct {
+	Value int64
+
+	noSmithyDocumentSerde
+}
+
+func (*FieldMemberLongValue) isField() {}
+
+// A value of string data type.
+type FieldMemberStringValue struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*FieldMemberStringValue) isField() {}
 
 // A record returned by a call.
 type Record struct {
@@ -306,37 +306,28 @@ type UpdateResult struct {
 // Contains the value of a column. This data type is deprecated.
 //
 // The following types satisfy this interface:
-//  ValueMemberIsNull
-//  ValueMemberBitValue
+//  ValueMemberArrayValues
 //  ValueMemberBigIntValue
-//  ValueMemberIntValue
+//  ValueMemberBitValue
+//  ValueMemberBlobValue
 //  ValueMemberDoubleValue
+//  ValueMemberIntValue
+//  ValueMemberIsNull
 //  ValueMemberRealValue
 //  ValueMemberStringValue
-//  ValueMemberBlobValue
-//  ValueMemberArrayValues
 //  ValueMemberStructValue
 type Value interface {
 	isValue()
 }
 
-// A NULL value.
-type ValueMemberIsNull struct {
-	Value bool
+// An array of column values.
+type ValueMemberArrayValues struct {
+	Value []Value
 
 	noSmithyDocumentSerde
 }
 
-func (*ValueMemberIsNull) isValue() {}
-
-// A value for a column of BIT data type.
-type ValueMemberBitValue struct {
-	Value bool
-
-	noSmithyDocumentSerde
-}
-
-func (*ValueMemberBitValue) isValue() {}
+func (*ValueMemberArrayValues) isValue() {}
 
 // A value for a column of big integer data type.
 type ValueMemberBigIntValue struct {
@@ -347,14 +338,23 @@ type ValueMemberBigIntValue struct {
 
 func (*ValueMemberBigIntValue) isValue() {}
 
-// A value for a column of integer data type.
-type ValueMemberIntValue struct {
-	Value int32
+// A value for a column of BIT data type.
+type ValueMemberBitValue struct {
+	Value bool
 
 	noSmithyDocumentSerde
 }
 
-func (*ValueMemberIntValue) isValue() {}
+func (*ValueMemberBitValue) isValue() {}
+
+// A value for a column of BLOB data type.
+type ValueMemberBlobValue struct {
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*ValueMemberBlobValue) isValue() {}
 
 // A value for a column of double data type.
 type ValueMemberDoubleValue struct {
@@ -364,6 +364,24 @@ type ValueMemberDoubleValue struct {
 }
 
 func (*ValueMemberDoubleValue) isValue() {}
+
+// A value for a column of integer data type.
+type ValueMemberIntValue struct {
+	Value int32
+
+	noSmithyDocumentSerde
+}
+
+func (*ValueMemberIntValue) isValue() {}
+
+// A NULL value.
+type ValueMemberIsNull struct {
+	Value bool
+
+	noSmithyDocumentSerde
+}
+
+func (*ValueMemberIsNull) isValue() {}
 
 // A value for a column of real data type.
 type ValueMemberRealValue struct {
@@ -382,24 +400,6 @@ type ValueMemberStringValue struct {
 }
 
 func (*ValueMemberStringValue) isValue() {}
-
-// A value for a column of BLOB data type.
-type ValueMemberBlobValue struct {
-	Value []byte
-
-	noSmithyDocumentSerde
-}
-
-func (*ValueMemberBlobValue) isValue() {}
-
-// An array of column values.
-type ValueMemberArrayValues struct {
-	Value []Value
-
-	noSmithyDocumentSerde
-}
-
-func (*ValueMemberArrayValues) isValue() {}
 
 // A value for a column of STRUCT data type.
 type ValueMemberStructValue struct {

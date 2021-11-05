@@ -45,6 +45,26 @@ func (e *ExpiredNextTokenException) ErrorMessage() string {
 func (e *ExpiredNextTokenException) ErrorCode() string             { return "ExpiredNextTokenException" }
 func (e *ExpiredNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The processing of the request failed because of an unknown error, exception, or
+// failure.
+type InternalFailureException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InternalFailureException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InternalFailureException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InternalFailureException) ErrorCode() string             { return "InternalFailureException" }
+func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
 // A specified parameter exceeds its restrictions, is not supported, or can't be
 // used. For more information, see the returned message.
 type InvalidArgumentException struct {

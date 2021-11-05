@@ -23,6 +23,8 @@ var config = struct {
 		"Response",
 		"ResponseWithBody",
 		"DeprecatedUsage",
+		"RequestEventMessage",
+		"ResponseEventMessage",
 	},
 }
 

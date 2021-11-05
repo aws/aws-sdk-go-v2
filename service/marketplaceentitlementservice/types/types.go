@@ -44,23 +44,23 @@ type Entitlement struct {
 // entitled to for the product.
 //
 // The following types satisfy this interface:
-//  EntitlementValueMemberIntegerValue
-//  EntitlementValueMemberDoubleValue
 //  EntitlementValueMemberBooleanValue
+//  EntitlementValueMemberDoubleValue
+//  EntitlementValueMemberIntegerValue
 //  EntitlementValueMemberStringValue
 type EntitlementValue interface {
 	isEntitlementValue()
 }
 
-// The IntegerValue field will be populated with an integer value when the
-// entitlement is an integer type. Otherwise, the field will not be set.
-type EntitlementValueMemberIntegerValue struct {
-	Value int32
+// The BooleanValue field will be populated with a boolean value when the
+// entitlement is a boolean type. Otherwise, the field will not be set.
+type EntitlementValueMemberBooleanValue struct {
+	Value bool
 
 	noSmithyDocumentSerde
 }
 
-func (*EntitlementValueMemberIntegerValue) isEntitlementValue() {}
+func (*EntitlementValueMemberBooleanValue) isEntitlementValue() {}
 
 // The DoubleValue field will be populated with a double value when the entitlement
 // is a double type. Otherwise, the field will not be set.
@@ -72,15 +72,15 @@ type EntitlementValueMemberDoubleValue struct {
 
 func (*EntitlementValueMemberDoubleValue) isEntitlementValue() {}
 
-// The BooleanValue field will be populated with a boolean value when the
-// entitlement is a boolean type. Otherwise, the field will not be set.
-type EntitlementValueMemberBooleanValue struct {
-	Value bool
+// The IntegerValue field will be populated with an integer value when the
+// entitlement is an integer type. Otherwise, the field will not be set.
+type EntitlementValueMemberIntegerValue struct {
+	Value int32
 
 	noSmithyDocumentSerde
 }
 
-func (*EntitlementValueMemberBooleanValue) isEntitlementValue() {}
+func (*EntitlementValueMemberIntegerValue) isEntitlementValue() {}
 
 // The StringValue field will be populated with a string value when the entitlement
 // is a string type. Otherwise, the field will not be set.

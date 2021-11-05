@@ -445,8 +445,8 @@ type CloudTrailProperties struct {
 // The following types satisfy this interface:
 //  ConfigurationMemberIamRole
 //  ConfigurationMemberKmsKey
-//  ConfigurationMemberSecretsManagerSecret
 //  ConfigurationMemberS3Bucket
+//  ConfigurationMemberSecretsManagerSecret
 //  ConfigurationMemberSqsQueue
 type Configuration interface {
 	isConfiguration()
@@ -470,15 +470,6 @@ type ConfigurationMemberKmsKey struct {
 
 func (*ConfigurationMemberKmsKey) isConfiguration() {}
 
-// The access control configuration is for a Secrets Manager secret.
-type ConfigurationMemberSecretsManagerSecret struct {
-	Value SecretsManagerSecretConfiguration
-
-	noSmithyDocumentSerde
-}
-
-func (*ConfigurationMemberSecretsManagerSecret) isConfiguration() {}
-
 // The access control configuration is for an Amazon S3 Bucket.
 type ConfigurationMemberS3Bucket struct {
 	Value S3BucketConfiguration
@@ -487,6 +478,15 @@ type ConfigurationMemberS3Bucket struct {
 }
 
 func (*ConfigurationMemberS3Bucket) isConfiguration() {}
+
+// The access control configuration is for a Secrets Manager secret.
+type ConfigurationMemberSecretsManagerSecret struct {
+	Value SecretsManagerSecretConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfigurationMemberSecretsManagerSecret) isConfiguration() {}
 
 // The access control configuration is for an Amazon SQS queue.
 type ConfigurationMemberSqsQueue struct {
@@ -932,11 +932,21 @@ type Location struct {
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/creating-access-points.html).
 //
 // The following types satisfy this interface:
-//  NetworkOriginConfigurationMemberVpcConfiguration
 //  NetworkOriginConfigurationMemberInternetConfiguration
+//  NetworkOriginConfigurationMemberVpcConfiguration
 type NetworkOriginConfiguration interface {
 	isNetworkOriginConfiguration()
 }
+
+// The configuration for the Amazon S3 access point or multi-region access point
+// with an Internet origin.
+type NetworkOriginConfigurationMemberInternetConfiguration struct {
+	Value InternetConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*NetworkOriginConfigurationMemberInternetConfiguration) isNetworkOriginConfiguration() {}
 
 // The proposed virtual private cloud (VPC) configuration for the Amazon S3 access
 // point. VPC configuration does not apply to multi-region access points. For more
@@ -949,16 +959,6 @@ type NetworkOriginConfigurationMemberVpcConfiguration struct {
 }
 
 func (*NetworkOriginConfigurationMemberVpcConfiguration) isNetworkOriginConfiguration() {}
-
-// The configuration for the Amazon S3 access point or multi-region access point
-// with an Internet origin.
-type NetworkOriginConfigurationMemberInternetConfiguration struct {
-	Value InternetConfiguration
-
-	noSmithyDocumentSerde
-}
-
-func (*NetworkOriginConfigurationMemberInternetConfiguration) isNetworkOriginConfiguration() {}
 
 // A single element in a path through the JSON representation of a policy.
 //

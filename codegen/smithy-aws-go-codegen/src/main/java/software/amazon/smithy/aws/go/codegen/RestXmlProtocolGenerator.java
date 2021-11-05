@@ -8,6 +8,7 @@ import static software.amazon.smithy.aws.go.codegen.XmlProtocolUtils.writeXmlErr
 import static software.amazon.smithy.aws.go.codegen.XmlProtocolUtils.generateXMLStartElement;
 import static software.amazon.smithy.aws.go.codegen.XmlProtocolUtils.generatePayloadAsDocumentXMLStartElement;
 
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -25,13 +26,19 @@ import software.amazon.smithy.go.codegen.integration.HttpBindingProtocolGenerato
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
 import software.amazon.smithy.model.Model;
+import software.amazon.smithy.model.knowledge.EventStreamInfo;
 import software.amazon.smithy.model.knowledge.HttpBinding;
 import software.amazon.smithy.model.knowledge.HttpBindingIndex;
 import software.amazon.smithy.model.shapes.MemberShape;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.model.shapes.Shape;
+import software.amazon.smithy.model.shapes.ShapeId;
 import software.amazon.smithy.model.shapes.StructureShape;
+import software.amazon.smithy.model.shapes.UnionShape;
+import software.amazon.smithy.model.traits.ErrorTrait;
+import software.amazon.smithy.model.traits.EventHeaderTrait;
+import software.amazon.smithy.model.traits.EventPayloadTrait;
 import software.amazon.smithy.model.traits.MediaTypeTrait;
 import software.amazon.smithy.model.traits.EnumTrait;
 import software.amazon.smithy.model.traits.StreamingTrait;
@@ -40,6 +47,11 @@ import software.amazon.smithy.model.traits.XmlAttributeTrait;
 import software.amazon.smithy.model.traits.XmlNamespaceTrait;
 
 abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
+    private final Set<ShapeId> generatedDocumentBodyShapeSerializers = new HashSet<>();
+    private final Set<ShapeId> generatedEventMessageSerializers = new HashSet<>();
+    private final Set<ShapeId> generatedDocumentBodyShapeDeserializers = new HashSet<>();
+    private final Set<ShapeId> generatedEventMessageDeserializers = new HashSet<>();
+
     /**
      * Creates a AWS REST XML protocol generator.
      */
@@ -93,20 +105,7 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
         Shape inputShape = ProtocolUtils.expectInput(context.getModel(), operation);
         String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(inputShape, context.getService(), getProtocolName());
 
-        writer.addUseImports(SmithyGoDependency.SMITHY_XML);
-        writer.addUseImports(SmithyGoDependency.BYTES);
-        writer.write("xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))");
-
-        generateXMLStartElement(context, inputShape, "root", "input");
-
-        // check if service shape is bound by xmlNameSpace Trait
-        Optional<XmlNamespaceTrait> xmlNamespaceTrait = context.getService().getTrait(XmlNamespaceTrait.class);
-        if (xmlNamespaceTrait.isPresent()) {
-            XmlNamespaceTrait namespace = xmlNamespaceTrait.get();
-            writer.write("root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute($S, $S))",
-                    namespace.getPrefix().isPresent() ? namespace.getPrefix().get() : "", namespace.getUri()
-            );
-        }
+        initalizeXmlEncoder(context, writer, inputShape, "root", "input");
 
         writer.openBlock("if err := $L(input, xmlEncoder.RootElement(root)); err != nil {", "}",
                 functionName, () -> {
@@ -120,6 +119,29 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
         });
     }
 
+    private void initalizeXmlEncoder(
+            GenerationContext context,
+            GoWriter writer,
+            Shape inputShape,
+            String nodeDst,
+            String inputSrc
+    ) {
+        writer.addUseImports(SmithyGoDependency.SMITHY_XML);
+        writer.addUseImports(SmithyGoDependency.BYTES);
+        writer.write("xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))");
+
+        generateXMLStartElement(context, inputShape, nodeDst, inputSrc);
+
+        // check if service shape is bound by xmlNameSpace Trait
+        Optional<XmlNamespaceTrait> xmlNamespaceTrait = context.getService().getTrait(XmlNamespaceTrait.class);
+        if (xmlNamespaceTrait.isPresent()) {
+            XmlNamespaceTrait namespace = xmlNamespaceTrait.get();
+            writer.write("$L.Attr = append($L.Attr, smithyxml.NewNamespaceAttribute($S, $S))", nodeDst, nodeDst,
+                    namespace.getPrefix().isPresent() ? namespace.getPrefix().get() : "", namespace.getUri()
+            );
+        }
+    }
+
     @Override
     protected void writeMiddlewarePayloadAsDocumentSerializerDelegator(
             GenerationContext context,
@@ -130,8 +152,6 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
         Model model = context.getModel();
         Shape payloadShape = model.expectShape(memberShape.getTarget());
 
-        String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(
-                payloadShape, context.getService(), getProtocolName());
         writer.addUseImports(SmithyGoDependency.SMITHY_XML);
         writer.addUseImports(SmithyGoDependency.BYTES);
         writer.write("xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))");
@@ -147,6 +167,8 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
             );
         }
 
+        String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(
+                payloadShape, context.getService(), getProtocolName());
         writer.openBlock("if err := $L($L, xmlEncoder.RootElement(payloadRoot)); err != nil {", "}", functionName,
                 operand, () -> {
                     writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
@@ -158,7 +180,13 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
     protected void generateDocumentBodyShapeSerializers(GenerationContext context, Set<Shape> shapes) {
         // filter shapes marked as attributes
         XmlShapeSerVisitor visitor = new XmlShapeSerVisitor(context, memberShape -> !memberShape.hasTrait(XmlAttributeTrait.class));
-        shapes.forEach(shape -> shape.accept(visitor));
+        shapes.forEach(shape -> {
+            if (generatedDocumentBodyShapeSerializers.contains(shape.toShapeId())) {
+                return;
+            }
+            shape.accept(visitor);
+            generatedDocumentBodyShapeSerializers.add(shape.toShapeId());
+        });
     }
 
     /**
@@ -209,11 +237,9 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
         if (isShapeWithResponseBindings(context.getModel(), shape, HttpBinding.Location.DOCUMENT)) {
             String documentDeserFunctionName = ProtocolGenerator.getDocumentDeserializerFunctionName(
                     shape, context.getService(), getProtocolName());
-            writer.addUseImports(SmithyGoDependency.IO);
-            initializeXmlDecoder(writer, "errorBody", "output");
-            boolean isNoErrorWrapping = context.getService().getTrait(RestXmlTrait.class).map(
-                    RestXmlTrait::isNoErrorWrapping).orElse(false);
 
+            initializeXmlDecoder(writer, "errorBody", "output");
+            boolean isNoErrorWrapping = isNoErrorWrapping(context);
             Runnable writeErrorDelegator = () -> {
                 writer.write("err = $L(&output, decoder)", documentDeserFunctionName);
                 handleDecodeError(writer, "");
@@ -233,6 +259,11 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
         }
 
         writer.write("return output");
+    }
+
+    private Boolean isNoErrorWrapping(GenerationContext context) {
+        return context.getService().getTrait(RestXmlTrait.class).map(
+                RestXmlTrait::isNoErrorWrapping).orElse(false);
     }
 
     @Override
@@ -308,9 +339,13 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
     @Override
     protected void generateDocumentBodyShapeDeserializers(GenerationContext context, Set<Shape> shapes) {
         XmlShapeDeserVisitor visitor = new XmlShapeDeserVisitor(context);
-        for (Shape shape : shapes) {
+        shapes.forEach(shape -> {
+            if (generatedDocumentBodyShapeDeserializers.contains(shape.toShapeId())) {
+                return;
+            }
             shape.accept(visitor);
-        }
+            generatedDocumentBodyShapeDeserializers.add(shape.toShapeId());
+        });
     }
 
     // Generate deserializers for shapes with payload binding
@@ -368,7 +403,9 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
     }
 
     // Writes middleware that delegates to deserializers for shapes that have explicit payload.
-    private void writeMiddlewarePayloadBindingDeserializerDelegator(GoWriter writer, ServiceShape service, Shape shape) {
+    private void writeMiddlewarePayloadBindingDeserializerDelegator(
+            GoWriter writer, ServiceShape service, Shape shape
+    ) {
         String deserFuncName = ProtocolGenerator.getDocumentDeserializerFunctionName(shape, service, getProtocolName());
         writer.write("err = $L(output, response.Body)", deserFuncName);
         writer.openBlock("if err != nil {", "}", () -> {
@@ -386,12 +423,208 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
             String operand
     ) {
         XmlProtocolUtils.initializeXmlDecoder(writer, "response.Body", "out, metadata,", "nil");
-        writer.addUseImports(SmithyGoDependency.IO);
 
         String functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(
-                    shape, context.getService(), context.getProtocolName());
+                shape, context.getService(), context.getProtocolName());
 
         writer.write("err = $L(&$L, decoder)", functionName, operand);
         XmlProtocolUtils.handleDecodeError(writer, "out, metadata,");
+    }
+
+    @Override
+    public void generateEventStreamComponents(GenerationContext context) {
+        AwsEventStreamUtils.generateEventStreamComponents(context);
+    }
+
+    @Override
+    protected void writeOperationSerializerMiddlewareEventStreamSetup(GenerationContext context, EventStreamInfo info) {
+        AwsEventStreamUtils.writeOperationSerializerMiddlewareEventStreamSetup(context, info);
+    }
+
+    @Override
+    protected void generateEventStreamSerializers(
+            GenerationContext context,
+            UnionShape eventUnion,
+            Set<EventStreamInfo> eventStreamInfos
+    ) {
+        Model model = context.getModel();
+
+        AwsEventStreamUtils.generateEventStreamSerializer(context, eventUnion);
+        var memberShapes = eventUnion.members().stream()
+                .filter(ms -> ms.getMemberTrait(model, ErrorTrait.class).isEmpty())
+                .collect(Collectors.toCollection(TreeSet::new));
+
+        final var eventDocumentShapes = new HashSet<Shape>();
+        for (MemberShape member : memberShapes) {
+            var targetShape = model.expectShape(member.getTarget());
+            if (generatedEventMessageSerializers.contains(targetShape.toShapeId())) {
+                continue;
+            }
+
+            AwsEventStreamUtils.generateEventMessageSerializer(context, targetShape, (ctx, payloadTarget, operand) -> {
+                var ctxWriter = ctx.getWriter().get();
+                var stringValue = SymbolUtils.createValueSymbolBuilder("StringValue",
+                        AwsGoDependency.SERVICE_INTERNAL_EVENTSTREAM).build();
+                var contentTypeHeader = SymbolUtils.createValueSymbolBuilder("ContentTypeHeader",
+                        AwsGoDependency.SERVICE_INTERNAL_EVENTSTREAMAPI).build();
+
+                ctxWriter.write("msg.Headers.Set($T, $T($S))",
+                        contentTypeHeader, stringValue, getDocumentContentType());
+
+                String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(payloadTarget,
+                        context.getService(), getProtocolName());
+
+                initalizeXmlEncoder(context, ctxWriter, payloadTarget, "root", operand);
+
+                ctxWriter.openBlock("if err := $L(input, xmlEncoder.RootElement(root)); err != nil {", "}",
+                                functionName, () -> {
+                                    ctxWriter.write("return &$T{Err: err}",
+                                            SymbolUtils.createValueSymbolBuilder("SerializationError",
+                                                    SmithyGoDependency.SMITHY).build());
+                                })
+                        .write("msg.Payload = xmlEncoder.Bytes()")
+                        .write("return nil");
+            });
+
+            generatedEventMessageSerializers.add(targetShape.toShapeId());
+
+            var hasBindings = targetShape.members().stream()
+                    .filter(ms -> ms.getTrait(EventHeaderTrait.class).isPresent()
+                            || ms.getTrait(EventPayloadTrait.class).isPresent())
+                    .findAny();
+            if (hasBindings.isPresent()) {
+                var payload = targetShape.members().stream()
+                        .filter(ms -> ms.getTrait(EventPayloadTrait.class).isPresent())
+                        .map(ms -> model.expectShape(ms.getTarget()))
+                        .filter(ProtocolUtils::requiresDocumentSerdeFunction)
+                        .findAny();
+                payload.ifPresent(eventDocumentShapes::add);
+                continue;
+            }
+            eventDocumentShapes.add(targetShape);
+        }
+
+        eventDocumentShapes.addAll(ProtocolUtils.resolveRequiredDocumentShapeSerde(model, eventDocumentShapes));
+        generateDocumentBodyShapeSerializers(context, eventDocumentShapes);
+    }
+
+    @Override
+    protected void generateEventStreamDeserializers(
+            GenerationContext context,
+            UnionShape eventUnion,
+            Set<EventStreamInfo> eventStreamInfos
+    ) {
+        var model = context.getModel();
+
+        AwsEventStreamUtils.generateEventStreamDeserializer(context, eventUnion);
+        AwsEventStreamUtils.generateEventStreamExceptionDeserializer(context, eventUnion, ctx -> {
+            var ctxWriter = ctx.getWriter().get();
+            ctxWriter.write("br := $T(msg.Payload)", SymbolUtils.createValueSymbolBuilder("NewReader",
+                    SmithyGoDependency.BYTES).build());
+            AwsProtocolUtils.initializeJsonDecoder(ctxWriter, "br");
+            ctxWriter.addUseImports(AwsGoDependency.AWS_XML);
+            ctxWriter.write("""
+                            errorComponents, err := $T(br, $L)
+                            if err != nil {
+                                return err
+                            }
+                            errorCode := "UnknownError"
+                            errorMessage := errorCode
+                            if ev := exceptionType.String(); len(ev) > 0 {
+                                errorCode = ev
+                            } else if ev := errorComponents.Code; len(ev) > 0 {
+                                errorCode = ev
+                            }
+                            if ev := errorComponents.Message; len(ev) > 0 {
+                                errorMessage = ev
+                            }
+                            return &$T{
+                                Code: errorCode,
+                                Message: errorMessage,
+                            }
+                            """,
+                    SymbolUtils.createValueSymbolBuilder("GetErrorResponseComponents", AwsGoDependency.AWS_XML).build(),
+                    isNoErrorWrapping(context),
+                    SymbolUtils.createValueSymbolBuilder("GenericAPIError", SmithyGoDependency.SMITHY).build()
+            );
+        });
+
+        final var eventDocumentShapes = new HashSet<Shape>();
+
+        for (MemberShape shape : eventUnion.members()) {
+            var targetShape = model.expectShape(shape.getTarget());
+            if (generatedEventMessageDeserializers.contains(targetShape.toShapeId())) {
+                continue;
+            }
+            generatedEventMessageDeserializers.add(targetShape.toShapeId());
+            if (shape.getMemberTrait(model, ErrorTrait.class).isPresent()) {
+                AwsEventStreamUtils.generateEventMessageExceptionDeserializer(context, targetShape,
+                        (ctx, payloadTarget) -> {
+                            var ctxWriter = ctx.getWriter().get();
+                            ctxWriter.write("br := $T(msg.Payload)", SymbolUtils.createValueSymbolBuilder("NewReader",
+                                            SmithyGoDependency.BYTES).build())
+                                    .write("output := &$T{}", context.getSymbolProvider().toSymbol(payloadTarget));
+
+                            String functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(
+                                    payloadTarget, context.getService(), getProtocolName());
+
+                            initializeXmlDecoder(ctxWriter, "br", "output");
+                            boolean isNoErrorWrapping = isNoErrorWrapping(context);
+                            Runnable writeErrorDelegator = () -> {
+                                ctxWriter.write("err = $L(&output, decoder)", functionName);
+                                handleDecodeError(ctxWriter, "");
+                            };
+
+                            if (isNoErrorWrapping) {
+                                writeErrorDelegator.run();
+                            } else {
+                                ctxWriter.write("t, err = decoder.GetElement(\"Error\")");
+                                XmlProtocolUtils.handleDecodeError(ctxWriter, "");
+                                Symbol wrapNodeDecoder = SymbolUtils.createValueSymbolBuilder("WrapNodeDecoder",
+                                        SmithyGoDependency.SMITHY_XML).build();
+                                ctxWriter.write("decoder = $T(decoder.Decoder, t)", wrapNodeDecoder);
+                                writeErrorDelegator.run();
+                            }
+                        });
+
+                eventDocumentShapes.add(targetShape);
+            } else {
+                AwsEventStreamUtils.generateEventMessageDeserializer(context, targetShape,
+                        (ctx, payloadTarget, operand) -> {
+                            var ctxWriter = ctx.getWriter().get();
+
+                            ctxWriter.write("br := $T(msg.Payload)", SymbolUtils.createValueSymbolBuilder(
+                                    "NewReader", SmithyGoDependency.BYTES).build());
+
+                            XmlProtocolUtils.initializeXmlDecoder(ctxWriter, "br", "", "nil");
+
+                            String functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(
+                                    payloadTarget, context.getService(), context.getProtocolName());
+
+                            ctxWriter.write("err = $L(&$L, decoder)", functionName, operand);
+                            XmlProtocolUtils.handleDecodeError(ctxWriter, "");
+
+                            ctxWriter.write("return nil");
+                        });
+
+                var hasBindings = targetShape.members().stream()
+                        .filter(ms -> ms.getTrait(EventHeaderTrait.class).isPresent()
+                                || ms.getTrait(EventPayloadTrait.class).isPresent())
+                        .findAny();
+                if (hasBindings.isPresent()) {
+                    var payload = targetShape.members().stream()
+                            .filter(ms -> ms.getTrait(EventPayloadTrait.class).isPresent())
+                            .map(ms -> model.expectShape(ms.getTarget()))
+                            .filter(ProtocolUtils::requiresDocumentSerdeFunction)
+                            .findAny();
+                    payload.ifPresent(eventDocumentShapes::add);
+                    continue;
+                }
+                eventDocumentShapes.add(targetShape);
+            }
+        }
+
+        eventDocumentShapes.addAll(ProtocolUtils.resolveRequiredDocumentShapeSerde(model, eventDocumentShapes));
+        generateDocumentBodyShapeDeserializers(context, eventDocumentShapes);
     }
 }

@@ -846,40 +846,13 @@ type DocumentAttribute struct {
 // custom attribute.
 //
 // The following types satisfy this interface:
-//  DocumentAttributeValueMemberStringValue
-//  DocumentAttributeValueMemberStringListValue
-//  DocumentAttributeValueMemberLongValue
 //  DocumentAttributeValueMemberDateValue
+//  DocumentAttributeValueMemberLongValue
+//  DocumentAttributeValueMemberStringListValue
+//  DocumentAttributeValueMemberStringValue
 type DocumentAttributeValue interface {
 	isDocumentAttributeValue()
 }
-
-// A string, such as "department".
-type DocumentAttributeValueMemberStringValue struct {
-	Value string
-
-	noSmithyDocumentSerde
-}
-
-func (*DocumentAttributeValueMemberStringValue) isDocumentAttributeValue() {}
-
-// A list of strings.
-type DocumentAttributeValueMemberStringListValue struct {
-	Value []string
-
-	noSmithyDocumentSerde
-}
-
-func (*DocumentAttributeValueMemberStringListValue) isDocumentAttributeValue() {}
-
-// A long integer value.
-type DocumentAttributeValueMemberLongValue struct {
-	Value int64
-
-	noSmithyDocumentSerde
-}
-
-func (*DocumentAttributeValueMemberLongValue) isDocumentAttributeValue() {}
 
 // A date expressed as an ISO 8601 string. It is important for the time zone to be
 // included in the ISO 8601 date-time format. For example, 20120325T123010+01:00 is
@@ -892,6 +865,33 @@ type DocumentAttributeValueMemberDateValue struct {
 }
 
 func (*DocumentAttributeValueMemberDateValue) isDocumentAttributeValue() {}
+
+// A long integer value.
+type DocumentAttributeValueMemberLongValue struct {
+	Value int64
+
+	noSmithyDocumentSerde
+}
+
+func (*DocumentAttributeValueMemberLongValue) isDocumentAttributeValue() {}
+
+// A list of strings.
+type DocumentAttributeValueMemberStringListValue struct {
+	Value []string
+
+	noSmithyDocumentSerde
+}
+
+func (*DocumentAttributeValueMemberStringListValue) isDocumentAttributeValue() {}
+
+// A string, such as "department".
+type DocumentAttributeValueMemberStringValue struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*DocumentAttributeValueMemberStringValue) isDocumentAttributeValue() {}
 
 // Provides the count of documents that match a particular attribute when doing a
 // faceted search.

@@ -458,9 +458,9 @@ type GrpcGatewayRouteRewrite struct {
 //
 // The following types satisfy this interface:
 //  GrpcMetadataMatchMethodMemberExact
-//  GrpcMetadataMatchMethodMemberRegex
-//  GrpcMetadataMatchMethodMemberRange
 //  GrpcMetadataMatchMethodMemberPrefix
+//  GrpcMetadataMatchMethodMemberRange
+//  GrpcMetadataMatchMethodMemberRegex
 //  GrpcMetadataMatchMethodMemberSuffix
 type GrpcMetadataMatchMethod interface {
 	isGrpcMetadataMatchMethod()
@@ -475,14 +475,14 @@ type GrpcMetadataMatchMethodMemberExact struct {
 
 func (*GrpcMetadataMatchMethodMemberExact) isGrpcMetadataMatchMethod() {}
 
-// The regex used to match the method header.
-type GrpcMetadataMatchMethodMemberRegex struct {
+// The specified beginning characters of the method header to be matched on.
+type GrpcMetadataMatchMethodMemberPrefix struct {
 	Value string
 
 	noSmithyDocumentSerde
 }
 
-func (*GrpcMetadataMatchMethodMemberRegex) isGrpcMetadataMatchMethod() {}
+func (*GrpcMetadataMatchMethodMemberPrefix) isGrpcMetadataMatchMethod() {}
 
 // An object that represents the range of values to match on. The first character
 // of the range is included in the range, though the last character is not. For
@@ -495,14 +495,14 @@ type GrpcMetadataMatchMethodMemberRange struct {
 
 func (*GrpcMetadataMatchMethodMemberRange) isGrpcMetadataMatchMethod() {}
 
-// The specified beginning characters of the method header to be matched on.
-type GrpcMetadataMatchMethodMemberPrefix struct {
+// The regex used to match the method header.
+type GrpcMetadataMatchMethodMemberRegex struct {
 	Value string
 
 	noSmithyDocumentSerde
 }
 
-func (*GrpcMetadataMatchMethodMemberPrefix) isGrpcMetadataMatchMethod() {}
+func (*GrpcMetadataMatchMethodMemberRegex) isGrpcMetadataMatchMethod() {}
 
 // The specified ending characters of the method header to match on.
 type GrpcMetadataMatchMethodMemberSuffix struct {
@@ -628,9 +628,9 @@ type GrpcRouteMetadata struct {
 //
 // The following types satisfy this interface:
 //  GrpcRouteMetadataMatchMethodMemberExact
-//  GrpcRouteMetadataMatchMethodMemberRegex
-//  GrpcRouteMetadataMatchMethodMemberRange
 //  GrpcRouteMetadataMatchMethodMemberPrefix
+//  GrpcRouteMetadataMatchMethodMemberRange
+//  GrpcRouteMetadataMatchMethodMemberRegex
 //  GrpcRouteMetadataMatchMethodMemberSuffix
 type GrpcRouteMetadataMatchMethod interface {
 	isGrpcRouteMetadataMatchMethod()
@@ -645,14 +645,14 @@ type GrpcRouteMetadataMatchMethodMemberExact struct {
 
 func (*GrpcRouteMetadataMatchMethodMemberExact) isGrpcRouteMetadataMatchMethod() {}
 
-// The value sent by the client must include the specified characters.
-type GrpcRouteMetadataMatchMethodMemberRegex struct {
+// The value sent by the client must begin with the specified characters.
+type GrpcRouteMetadataMatchMethodMemberPrefix struct {
 	Value string
 
 	noSmithyDocumentSerde
 }
 
-func (*GrpcRouteMetadataMatchMethodMemberRegex) isGrpcRouteMetadataMatchMethod() {}
+func (*GrpcRouteMetadataMatchMethodMemberPrefix) isGrpcRouteMetadataMatchMethod() {}
 
 // An object that represents the range of values to match on.
 type GrpcRouteMetadataMatchMethodMemberRange struct {
@@ -663,14 +663,14 @@ type GrpcRouteMetadataMatchMethodMemberRange struct {
 
 func (*GrpcRouteMetadataMatchMethodMemberRange) isGrpcRouteMetadataMatchMethod() {}
 
-// The value sent by the client must begin with the specified characters.
-type GrpcRouteMetadataMatchMethodMemberPrefix struct {
+// The value sent by the client must include the specified characters.
+type GrpcRouteMetadataMatchMethodMemberRegex struct {
 	Value string
 
 	noSmithyDocumentSerde
 }
 
-func (*GrpcRouteMetadataMatchMethodMemberPrefix) isGrpcRouteMetadataMatchMethod() {}
+func (*GrpcRouteMetadataMatchMethodMemberRegex) isGrpcRouteMetadataMatchMethod() {}
 
 // The value sent by the client must end with the specified characters.
 type GrpcRouteMetadataMatchMethodMemberSuffix struct {
@@ -704,9 +704,9 @@ type GrpcTimeout struct {
 //
 // The following types satisfy this interface:
 //  HeaderMatchMethodMemberExact
-//  HeaderMatchMethodMemberRegex
-//  HeaderMatchMethodMemberRange
 //  HeaderMatchMethodMemberPrefix
+//  HeaderMatchMethodMemberRange
+//  HeaderMatchMethodMemberRegex
 //  HeaderMatchMethodMemberSuffix
 type HeaderMatchMethod interface {
 	isHeaderMatchMethod()
@@ -721,14 +721,14 @@ type HeaderMatchMethodMemberExact struct {
 
 func (*HeaderMatchMethodMemberExact) isHeaderMatchMethod() {}
 
-// The value sent by the client must include the specified characters.
-type HeaderMatchMethodMemberRegex struct {
+// The value sent by the client must begin with the specified characters.
+type HeaderMatchMethodMemberPrefix struct {
 	Value string
 
 	noSmithyDocumentSerde
 }
 
-func (*HeaderMatchMethodMemberRegex) isHeaderMatchMethod() {}
+func (*HeaderMatchMethodMemberPrefix) isHeaderMatchMethod() {}
 
 // An object that represents the range of values to match on.
 type HeaderMatchMethodMemberRange struct {
@@ -739,14 +739,14 @@ type HeaderMatchMethodMemberRange struct {
 
 func (*HeaderMatchMethodMemberRange) isHeaderMatchMethod() {}
 
-// The value sent by the client must begin with the specified characters.
-type HeaderMatchMethodMemberPrefix struct {
+// The value sent by the client must include the specified characters.
+type HeaderMatchMethodMemberRegex struct {
 	Value string
 
 	noSmithyDocumentSerde
 }
 
-func (*HeaderMatchMethodMemberPrefix) isHeaderMatchMethod() {}
+func (*HeaderMatchMethodMemberRegex) isHeaderMatchMethod() {}
 
 // The value sent by the client must end with the specified characters.
 type HeaderMatchMethodMemberSuffix struct {
@@ -1112,22 +1112,22 @@ type Listener struct {
 // An object that represents timeouts for different protocols.
 //
 // The following types satisfy this interface:
-//  ListenerTimeoutMemberTcp
+//  ListenerTimeoutMemberGrpc
 //  ListenerTimeoutMemberHttp
 //  ListenerTimeoutMemberHttp2
-//  ListenerTimeoutMemberGrpc
+//  ListenerTimeoutMemberTcp
 type ListenerTimeout interface {
 	isListenerTimeout()
 }
 
 // An object that represents types of timeouts.
-type ListenerTimeoutMemberTcp struct {
-	Value TcpTimeout
+type ListenerTimeoutMemberGrpc struct {
+	Value GrpcTimeout
 
 	noSmithyDocumentSerde
 }
 
-func (*ListenerTimeoutMemberTcp) isListenerTimeout() {}
+func (*ListenerTimeoutMemberGrpc) isListenerTimeout() {}
 
 // An object that represents types of timeouts.
 type ListenerTimeoutMemberHttp struct {
@@ -1148,13 +1148,13 @@ type ListenerTimeoutMemberHttp2 struct {
 func (*ListenerTimeoutMemberHttp2) isListenerTimeout() {}
 
 // An object that represents types of timeouts.
-type ListenerTimeoutMemberGrpc struct {
-	Value GrpcTimeout
+type ListenerTimeoutMemberTcp struct {
+	Value TcpTimeout
 
 	noSmithyDocumentSerde
 }
 
-func (*ListenerTimeoutMemberGrpc) isListenerTimeout() {}
+func (*ListenerTimeoutMemberTcp) isListenerTimeout() {}
 
 // An object that represents the Transport Layer Security (TLS) properties for a
 // listener.
@@ -1673,20 +1673,11 @@ type RouteStatus struct {
 // An object that represents the service discovery information for a virtual node.
 //
 // The following types satisfy this interface:
-//  ServiceDiscoveryMemberDns
 //  ServiceDiscoveryMemberAwsCloudMap
+//  ServiceDiscoveryMemberDns
 type ServiceDiscovery interface {
 	isServiceDiscovery()
 }
-
-// Specifies the DNS information for the virtual node.
-type ServiceDiscoveryMemberDns struct {
-	Value DnsServiceDiscovery
-
-	noSmithyDocumentSerde
-}
-
-func (*ServiceDiscoveryMemberDns) isServiceDiscovery() {}
 
 // Specifies any Cloud Map information for the virtual node.
 type ServiceDiscoveryMemberAwsCloudMap struct {
@@ -1696,6 +1687,15 @@ type ServiceDiscoveryMemberAwsCloudMap struct {
 }
 
 func (*ServiceDiscoveryMemberAwsCloudMap) isServiceDiscovery() {}
+
+// Specifies the DNS information for the virtual node.
+type ServiceDiscoveryMemberDns struct {
+	Value DnsServiceDiscovery
+
+	noSmithyDocumentSerde
+}
+
+func (*ServiceDiscoveryMemberDns) isServiceDiscovery() {}
 
 // An object that represents the methods by which a subject alternative name on a
 // peer Transport Layer Security (TLS) certificate can be matched.
@@ -1972,12 +1972,21 @@ func (*VirtualGatewayClientTlsCertificateMemberSds) isVirtualGatewayClientTlsCer
 // 2147483647.
 //
 // The following types satisfy this interface:
+//  VirtualGatewayConnectionPoolMemberGrpc
 //  VirtualGatewayConnectionPoolMemberHttp
 //  VirtualGatewayConnectionPoolMemberHttp2
-//  VirtualGatewayConnectionPoolMemberGrpc
 type VirtualGatewayConnectionPool interface {
 	isVirtualGatewayConnectionPool()
 }
+
+// An object that represents a type of connection pool.
+type VirtualGatewayConnectionPoolMemberGrpc struct {
+	Value VirtualGatewayGrpcConnectionPool
+
+	noSmithyDocumentSerde
+}
+
+func (*VirtualGatewayConnectionPoolMemberGrpc) isVirtualGatewayConnectionPool() {}
 
 // An object that represents a type of connection pool.
 type VirtualGatewayConnectionPoolMemberHttp struct {
@@ -1996,15 +2005,6 @@ type VirtualGatewayConnectionPoolMemberHttp2 struct {
 }
 
 func (*VirtualGatewayConnectionPoolMemberHttp2) isVirtualGatewayConnectionPool() {}
-
-// An object that represents a type of connection pool.
-type VirtualGatewayConnectionPoolMemberGrpc struct {
-	Value VirtualGatewayGrpcConnectionPool
-
-	noSmithyDocumentSerde
-}
-
-func (*VirtualGatewayConnectionPoolMemberGrpc) isVirtualGatewayConnectionPool() {}
 
 // An object that represents a virtual gateway returned by a describe operation.
 type VirtualGatewayData struct {
@@ -2543,22 +2543,22 @@ func (*VirtualGatewayTlsValidationContextTrustMemberSds) isVirtualGatewayTlsVali
 // 2147483647.
 //
 // The following types satisfy this interface:
-//  VirtualNodeConnectionPoolMemberTcp
+//  VirtualNodeConnectionPoolMemberGrpc
 //  VirtualNodeConnectionPoolMemberHttp
 //  VirtualNodeConnectionPoolMemberHttp2
-//  VirtualNodeConnectionPoolMemberGrpc
+//  VirtualNodeConnectionPoolMemberTcp
 type VirtualNodeConnectionPool interface {
 	isVirtualNodeConnectionPool()
 }
 
 // An object that represents a type of connection pool.
-type VirtualNodeConnectionPoolMemberTcp struct {
-	Value VirtualNodeTcpConnectionPool
+type VirtualNodeConnectionPoolMemberGrpc struct {
+	Value VirtualNodeGrpcConnectionPool
 
 	noSmithyDocumentSerde
 }
 
-func (*VirtualNodeConnectionPoolMemberTcp) isVirtualNodeConnectionPool() {}
+func (*VirtualNodeConnectionPoolMemberGrpc) isVirtualNodeConnectionPool() {}
 
 // An object that represents a type of connection pool.
 type VirtualNodeConnectionPoolMemberHttp struct {
@@ -2579,13 +2579,13 @@ type VirtualNodeConnectionPoolMemberHttp2 struct {
 func (*VirtualNodeConnectionPoolMemberHttp2) isVirtualNodeConnectionPool() {}
 
 // An object that represents a type of connection pool.
-type VirtualNodeConnectionPoolMemberGrpc struct {
-	Value VirtualNodeGrpcConnectionPool
+type VirtualNodeConnectionPoolMemberTcp struct {
+	Value VirtualNodeTcpConnectionPool
 
 	noSmithyDocumentSerde
 }
 
-func (*VirtualNodeConnectionPoolMemberGrpc) isVirtualNodeConnectionPool() {}
+func (*VirtualNodeConnectionPoolMemberTcp) isVirtualNodeConnectionPool() {}
 
 // An object that represents a virtual node returned by a describe operation.
 type VirtualNodeData struct {

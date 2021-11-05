@@ -264,32 +264,23 @@ type AssetPropertyValue struct {
 // Contains an asset property value (of a single type).
 //
 // The following types satisfy this interface:
-//  AssetPropertyVariantMemberStringValue
-//  AssetPropertyVariantMemberIntegerValue
-//  AssetPropertyVariantMemberDoubleValue
 //  AssetPropertyVariantMemberBooleanValue
+//  AssetPropertyVariantMemberDoubleValue
+//  AssetPropertyVariantMemberIntegerValue
+//  AssetPropertyVariantMemberStringValue
 type AssetPropertyVariant interface {
 	isAssetPropertyVariant()
 }
 
-// Optional. The string value of the value entry. Accepts substitution templates.
-type AssetPropertyVariantMemberStringValue struct {
+// Optional. A string that contains the boolean value (true or false) of the value
+// entry. Accepts substitution templates.
+type AssetPropertyVariantMemberBooleanValue struct {
 	Value string
 
 	noSmithyDocumentSerde
 }
 
-func (*AssetPropertyVariantMemberStringValue) isAssetPropertyVariant() {}
-
-// Optional. A string that contains the integer value of the value entry. Accepts
-// substitution templates.
-type AssetPropertyVariantMemberIntegerValue struct {
-	Value string
-
-	noSmithyDocumentSerde
-}
-
-func (*AssetPropertyVariantMemberIntegerValue) isAssetPropertyVariant() {}
+func (*AssetPropertyVariantMemberBooleanValue) isAssetPropertyVariant() {}
 
 // Optional. A string that contains the double value of the value entry. Accepts
 // substitution templates.
@@ -301,15 +292,24 @@ type AssetPropertyVariantMemberDoubleValue struct {
 
 func (*AssetPropertyVariantMemberDoubleValue) isAssetPropertyVariant() {}
 
-// Optional. A string that contains the boolean value (true or false) of the value
-// entry. Accepts substitution templates.
-type AssetPropertyVariantMemberBooleanValue struct {
+// Optional. A string that contains the integer value of the value entry. Accepts
+// substitution templates.
+type AssetPropertyVariantMemberIntegerValue struct {
 	Value string
 
 	noSmithyDocumentSerde
 }
 
-func (*AssetPropertyVariantMemberBooleanValue) isAssetPropertyVariant() {}
+func (*AssetPropertyVariantMemberIntegerValue) isAssetPropertyVariant() {}
+
+// Optional. The string value of the value entry. Accepts substitution templates.
+type AssetPropertyVariantMemberStringValue struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*AssetPropertyVariantMemberStringValue) isAssetPropertyVariant() {}
 
 // The attribute payload.
 type AttributePayload struct {

@@ -72,21 +72,12 @@ type AntennaUplinkConfig struct {
 // Details for certain Config object types in a contact.
 //
 // The following types satisfy this interface:
-//  ConfigDetailsMemberEndpointDetails
 //  ConfigDetailsMemberAntennaDemodDecodeDetails
+//  ConfigDetailsMemberEndpointDetails
 //  ConfigDetailsMemberS3RecordingDetails
 type ConfigDetails interface {
 	isConfigDetails()
 }
-
-// Information about the endpoint details.
-type ConfigDetailsMemberEndpointDetails struct {
-	Value EndpointDetails
-
-	noSmithyDocumentSerde
-}
-
-func (*ConfigDetailsMemberEndpointDetails) isConfigDetails() {}
 
 // Details for antenna demod decode Config in a contact.
 type ConfigDetailsMemberAntennaDemodDecodeDetails struct {
@@ -96,6 +87,15 @@ type ConfigDetailsMemberAntennaDemodDecodeDetails struct {
 }
 
 func (*ConfigDetailsMemberAntennaDemodDecodeDetails) isConfigDetails() {}
+
+// Information about the endpoint details.
+type ConfigDetailsMemberEndpointDetails struct {
+	Value EndpointDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfigDetailsMemberEndpointDetails) isConfigDetails() {}
 
 // Details for an S3 recording Config in a contact.
 type ConfigDetailsMemberS3RecordingDetails struct {
@@ -129,12 +129,12 @@ type ConfigListItem struct {
 //
 // The following types satisfy this interface:
 //  ConfigTypeDataMemberAntennaDownlinkConfig
-//  ConfigTypeDataMemberTrackingConfig
-//  ConfigTypeDataMemberDataflowEndpointConfig
 //  ConfigTypeDataMemberAntennaDownlinkDemodDecodeConfig
 //  ConfigTypeDataMemberAntennaUplinkConfig
-//  ConfigTypeDataMemberUplinkEchoConfig
+//  ConfigTypeDataMemberDataflowEndpointConfig
 //  ConfigTypeDataMemberS3RecordingConfig
+//  ConfigTypeDataMemberTrackingConfig
+//  ConfigTypeDataMemberUplinkEchoConfig
 type ConfigTypeData interface {
 	isConfigTypeData()
 }
@@ -148,25 +148,6 @@ type ConfigTypeDataMemberAntennaDownlinkConfig struct {
 }
 
 func (*ConfigTypeDataMemberAntennaDownlinkConfig) isConfigTypeData() {}
-
-// Object that determines whether tracking should be used during a contact executed
-// with this Config in the mission profile.
-type ConfigTypeDataMemberTrackingConfig struct {
-	Value TrackingConfig
-
-	noSmithyDocumentSerde
-}
-
-func (*ConfigTypeDataMemberTrackingConfig) isConfigTypeData() {}
-
-// Information about the dataflow endpoint Config.
-type ConfigTypeDataMemberDataflowEndpointConfig struct {
-	Value DataflowEndpointConfig
-
-	noSmithyDocumentSerde
-}
-
-func (*ConfigTypeDataMemberDataflowEndpointConfig) isConfigTypeData() {}
 
 // Information about how AWS Ground Station should conﬁgure an antenna for downlink
 // demod decode during a contact.
@@ -188,6 +169,34 @@ type ConfigTypeDataMemberAntennaUplinkConfig struct {
 
 func (*ConfigTypeDataMemberAntennaUplinkConfig) isConfigTypeData() {}
 
+// Information about the dataflow endpoint Config.
+type ConfigTypeDataMemberDataflowEndpointConfig struct {
+	Value DataflowEndpointConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfigTypeDataMemberDataflowEndpointConfig) isConfigTypeData() {}
+
+// Information about an S3 recording Config.
+type ConfigTypeDataMemberS3RecordingConfig struct {
+	Value S3RecordingConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfigTypeDataMemberS3RecordingConfig) isConfigTypeData() {}
+
+// Object that determines whether tracking should be used during a contact executed
+// with this Config in the mission profile.
+type ConfigTypeDataMemberTrackingConfig struct {
+	Value TrackingConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfigTypeDataMemberTrackingConfig) isConfigTypeData() {}
+
 // Information about an uplink echo Config. Parameters from the
 // AntennaUplinkConfig, corresponding to the specified AntennaUplinkConfigArn, are
 // used when this UplinkEchoConfig is used in a contact.
@@ -198,15 +207,6 @@ type ConfigTypeDataMemberUplinkEchoConfig struct {
 }
 
 func (*ConfigTypeDataMemberUplinkEchoConfig) isConfigTypeData() {}
-
-// Information about an S3 recording Config.
-type ConfigTypeDataMemberS3RecordingConfig struct {
-	Value S3RecordingConfig
-
-	noSmithyDocumentSerde
-}
-
-func (*ConfigTypeDataMemberS3RecordingConfig) isConfigTypeData() {}
 
 // Data describing a contact.
 type ContactData struct {

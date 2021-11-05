@@ -16,43 +16,19 @@ type ComplexNestedErrorData struct {
 // A union with a representative set of types for members.
 //
 // The following types satisfy this interface:
-//  MyUnionMemberStringValue
-//  MyUnionMemberBooleanValue
-//  MyUnionMemberNumberValue
 //  MyUnionMemberBlobValue
-//  MyUnionMemberTimestampValue
+//  MyUnionMemberBooleanValue
 //  MyUnionMemberEnumValue
 //  MyUnionMemberListValue
 //  MyUnionMemberMapValue
-//  MyUnionMemberStructureValue
+//  MyUnionMemberNumberValue
 //  MyUnionMemberRenamedStructureValue
+//  MyUnionMemberStringValue
+//  MyUnionMemberStructureValue
+//  MyUnionMemberTimestampValue
 type MyUnion interface {
 	isMyUnion()
 }
-
-type MyUnionMemberStringValue struct {
-	Value string
-
-	noSmithyDocumentSerde
-}
-
-func (*MyUnionMemberStringValue) isMyUnion() {}
-
-type MyUnionMemberBooleanValue struct {
-	Value bool
-
-	noSmithyDocumentSerde
-}
-
-func (*MyUnionMemberBooleanValue) isMyUnion() {}
-
-type MyUnionMemberNumberValue struct {
-	Value int32
-
-	noSmithyDocumentSerde
-}
-
-func (*MyUnionMemberNumberValue) isMyUnion() {}
 
 type MyUnionMemberBlobValue struct {
 	Value []byte
@@ -62,13 +38,13 @@ type MyUnionMemberBlobValue struct {
 
 func (*MyUnionMemberBlobValue) isMyUnion() {}
 
-type MyUnionMemberTimestampValue struct {
-	Value time.Time
+type MyUnionMemberBooleanValue struct {
+	Value bool
 
 	noSmithyDocumentSerde
 }
 
-func (*MyUnionMemberTimestampValue) isMyUnion() {}
+func (*MyUnionMemberBooleanValue) isMyUnion() {}
 
 type MyUnionMemberEnumValue struct {
 	Value FooEnum
@@ -94,13 +70,13 @@ type MyUnionMemberMapValue struct {
 
 func (*MyUnionMemberMapValue) isMyUnion() {}
 
-type MyUnionMemberStructureValue struct {
-	Value GreetingStruct
+type MyUnionMemberNumberValue struct {
+	Value int32
 
 	noSmithyDocumentSerde
 }
 
-func (*MyUnionMemberStructureValue) isMyUnion() {}
+func (*MyUnionMemberNumberValue) isMyUnion() {}
 
 type MyUnionMemberRenamedStructureValue struct {
 	Value RenamedGreeting
@@ -109,6 +85,30 @@ type MyUnionMemberRenamedStructureValue struct {
 }
 
 func (*MyUnionMemberRenamedStructureValue) isMyUnion() {}
+
+type MyUnionMemberStringValue struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*MyUnionMemberStringValue) isMyUnion() {}
+
+type MyUnionMemberStructureValue struct {
+	Value GreetingStruct
+
+	noSmithyDocumentSerde
+}
+
+func (*MyUnionMemberStructureValue) isMyUnion() {}
+
+type MyUnionMemberTimestampValue struct {
+	Value time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (*MyUnionMemberTimestampValue) isMyUnion() {}
 
 type NestedPayload struct {
 	Greeting *string

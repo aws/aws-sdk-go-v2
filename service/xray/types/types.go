@@ -26,21 +26,12 @@ type Alias struct {
 // String.
 //
 // The following types satisfy this interface:
-//  AnnotationValueMemberNumberValue
 //  AnnotationValueMemberBooleanValue
+//  AnnotationValueMemberNumberValue
 //  AnnotationValueMemberStringValue
 type AnnotationValue interface {
 	isAnnotationValue()
 }
-
-// Value for a Number annotation.
-type AnnotationValueMemberNumberValue struct {
-	Value float64
-
-	noSmithyDocumentSerde
-}
-
-func (*AnnotationValueMemberNumberValue) isAnnotationValue() {}
 
 // Value for a Boolean annotation.
 type AnnotationValueMemberBooleanValue struct {
@@ -50,6 +41,15 @@ type AnnotationValueMemberBooleanValue struct {
 }
 
 func (*AnnotationValueMemberBooleanValue) isAnnotationValue() {}
+
+// Value for a Number annotation.
+type AnnotationValueMemberNumberValue struct {
+	Value float64
+
+	noSmithyDocumentSerde
+}
+
+func (*AnnotationValueMemberNumberValue) isAnnotationValue() {}
 
 // Value for a String annotation.
 type AnnotationValueMemberStringValue struct {

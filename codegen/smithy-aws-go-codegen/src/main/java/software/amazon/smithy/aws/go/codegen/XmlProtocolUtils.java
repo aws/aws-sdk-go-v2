@@ -55,10 +55,10 @@ public final class XmlProtocolUtils {
     /**
      * Generates XML Start element for a document shape marked as a payload.
      *
-     * @param context  is the generation context.
+     * @param context     is the generation context.
      * @param memberShape is the payload as document member shape
-     * @param dst is the operand name which holds the generated start element.
-     * @param inputSrc is the input variable for the shape with values to be serialized.
+     * @param dst         is the operand name which holds the generated start element.
+     * @param inputSrc    is the input variable for the shape with values to be serialized.
      */
     public static void generatePayloadAsDocumentXMLStartElement(
             ProtocolGenerator.GenerationContext context, MemberShape memberShape, String dst, String inputSrc
@@ -91,9 +91,9 @@ public final class XmlProtocolUtils {
     /**
      * Generates XML Attributes as per xmlNamespace and xmlAttribute traits.
      *
-     * @param context is the generation context.
-     * @param shape is the shape that is decorated with XmlNamespace, XmlAttribute trait.
-     * @param dst is the operand name which holds the generated xml Attribute value.
+     * @param context  is the generation context.
+     * @param shape    is the shape that is decorated with XmlNamespace, XmlAttribute trait.
+     * @param dst      is the operand name which holds the generated xml Attribute value.
      * @param inputSrc is the input variable for the shape with values to be put as xml attributes.
      */
     private static void generateXmlNamespaceAndAttributes(

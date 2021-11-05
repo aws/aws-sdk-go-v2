@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * Copyright 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License").
  * You may not use this file except in compliance with the License.
@@ -15,35 +15,44 @@
 
 package software.amazon.smithy.aws.go.codegen;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.model.Model;
-import software.amazon.smithy.model.knowledge.EventStreamIndex;
-import software.amazon.smithy.model.shapes.OperationShape;
-import software.amazon.smithy.model.shapes.Shape;
+import software.amazon.smithy.model.shapes.ShapeId;
 import software.amazon.smithy.model.transform.ModelTransformer;
+import software.amazon.smithy.utils.SetUtils;
 
 /**
- * Filters out event stream operations.
- * TODO: implement event streams
+ * Filters out certain shapes such as an operation.
  */
-public final class FilterStreamingOperations implements GoIntegration {
-    private static final Logger LOGGER = Logger.getLogger(FilterStreamingOperations.class.getName());
+public final class FilterShapes implements GoIntegration {
+    private static final Logger LOGGER = Logger.getLogger(FilterShapes.class.getName());
 
-    public FilterStreamingOperations() {}
+    private static final Set<ShapeId> SHAPE_IDS = SetUtils.of(
+            ShapeId.from("com.amazonaws.lexruntimev2#StartConversation")
+    );
+
+    public FilterShapes() {
+    }
 
     @Override
     public Model preprocessModel(Model model, GoSettings settings) {
-        EventStreamIndex index = EventStreamIndex.of(model);
-        Set<Shape> streamingOperations = model.shapes(OperationShape.class)
-                .filter(op -> index.getOutputInfo(op).isPresent() || index.getInputInfo(op).isPresent())
-                .peek(op -> LOGGER.warning(String.format(
-                        "Filtering out unsupported event stream operation: %s", op.getId().toString())))
+        var toRemove = SHAPE_IDS.stream()
+                .map(model::getShape)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
                 .collect(Collectors.toSet());
+
+        if (toRemove.size() == 0) {
+            return model;
+        }
+
         ModelTransformer transformer = ModelTransformer.create();
-        return transformer.removeUnreferencedShapes(transformer.removeShapes(model, streamingOperations));
+
+        return transformer.removeUnreferencedShapes(transformer.removeShapes(model, toRemove));
     }
 }

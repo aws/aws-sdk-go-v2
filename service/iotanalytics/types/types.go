@@ -648,22 +648,12 @@ type DatastoreStatistics struct {
 // data store is created.
 //
 // The following types satisfy this interface:
-//  DatastoreStorageMemberServiceManagedS3
 //  DatastoreStorageMemberCustomerManagedS3
 //  DatastoreStorageMemberIotSiteWiseMultiLayerStorage
+//  DatastoreStorageMemberServiceManagedS3
 type DatastoreStorage interface {
 	isDatastoreStorage()
 }
-
-// Used to store data in an Amazon S3 bucket managed by IoT Analytics. You can't
-// change the choice of Amazon S3 storage after your data store is created.
-type DatastoreStorageMemberServiceManagedS3 struct {
-	Value ServiceManagedDatastoreS3Storage
-
-	noSmithyDocumentSerde
-}
-
-func (*DatastoreStorageMemberServiceManagedS3) isDatastoreStorage() {}
 
 // S3-customer-managed; When you choose customer-managed storage, the
 // retentionPeriod parameter is ignored. You can't change the choice of Amazon S3
@@ -686,6 +676,16 @@ type DatastoreStorageMemberIotSiteWiseMultiLayerStorage struct {
 }
 
 func (*DatastoreStorageMemberIotSiteWiseMultiLayerStorage) isDatastoreStorage() {}
+
+// Used to store data in an Amazon S3 bucket managed by IoT Analytics. You can't
+// change the choice of Amazon S3 storage after your data store is created.
+type DatastoreStorageMemberServiceManagedS3 struct {
+	Value ServiceManagedDatastoreS3Storage
+
+	noSmithyDocumentSerde
+}
+
+func (*DatastoreStorageMemberServiceManagedS3) isDatastoreStorage() {}
 
 // Contains information about your data store.
 type DatastoreStorageSummary struct {
