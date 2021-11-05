@@ -539,16 +539,13 @@ public final class AwsEventStreamUtils {
 
         writer.openBlock("func (r $P) readEventStream() {", "}", readerSymbol, () -> {
                     writer.write("""
-                                  defer r.Close()
-                                  defer close(r.stream)
+                                 defer r.Close()
+                                 defer close(r.stream)
                                  """);
 
                     if (withInitialMessages) {
                         writer.write("""
-                                     defer func() {
-                                         close(r.initialResponse)
-                                         for range r.initialResponse {}
-                                     }()
+                                     defer close(r.initialResponse)
                                      """);
                     }
 
