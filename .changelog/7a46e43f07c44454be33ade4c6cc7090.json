@@ -1,8 +1,0 @@
-{
-    "id": "7a46e43f-07c4-4454-be33-ade4c6cc7090",
-    "type": "release",
-    "description": "Endpoint Variant Model Support",
-    "modules": [
-        "internal/endpoints/v2"
-    ]
-}

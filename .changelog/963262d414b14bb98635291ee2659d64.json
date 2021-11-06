@@ -1,8 +1,0 @@
-{
-    "id": "963262d4-14b1-4bb9-8635-291ee2659d64",
-    "type": "feature",
-    "description": "Support has been added for the StartStreamTranscription and StartMedicalStreamTranscription APIs.",
-    "modules": [
-        "service/transcribestreaming"
-    ]
-}

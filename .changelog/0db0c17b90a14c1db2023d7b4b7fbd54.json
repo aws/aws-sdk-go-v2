@@ -1,8 +1,0 @@
-{
-    "id": "0db0c17b-90a1-4c1d-b202-3d7b4b7fbd54",
-    "type": "announcement",
-    "description": "Support has been added for AWS EventStream APIs for Kinesis, S3, and Transcribe Streaming. Support for the Lex Runtime V2 EventStream API will be added in a future release.",
-    "modules": [
-        "aws/protocol/eventstream"
-    ]
-}

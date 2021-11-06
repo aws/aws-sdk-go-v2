@@ -3,12 +3,12 @@ module github.com/aws/aws-sdk-go-v2/config
 go 1.15
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.10.0
-	github.com/aws/aws-sdk-go-v2/credentials v1.5.0
-	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.7.0
-	github.com/aws/aws-sdk-go-v2/internal/ini v1.2.5
-	github.com/aws/aws-sdk-go-v2/service/sso v1.5.0
-	github.com/aws/aws-sdk-go-v2/service/sts v1.8.0
+	github.com/aws/aws-sdk-go-v2 v1.11.0
+	github.com/aws/aws-sdk-go-v2/credentials v1.6.0
+	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.8.0
+	github.com/aws/aws-sdk-go-v2/internal/ini v1.3.0
+	github.com/aws/aws-sdk-go-v2/service/sso v1.6.0
+	github.com/aws/aws-sdk-go-v2/service/sts v1.9.0
 	github.com/aws/smithy-go v1.9.0
 	github.com/google/go-cmp v0.5.6
 )

@@ -3,9 +3,9 @@ module github.com/aws/aws-sdk-go-v2/feature/dynamodbstreams/attributevalue
 go 1.15
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.10.0
-	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.6.0
-	github.com/aws/aws-sdk-go-v2/service/dynamodbstreams v1.5.0
+	github.com/aws/aws-sdk-go-v2 v1.11.0
+	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.7.0
+	github.com/aws/aws-sdk-go-v2/service/dynamodbstreams v1.6.0
 	github.com/aws/smithy-go v1.9.0
 	github.com/google/go-cmp v0.5.6
 )

@@ -1,8 +1,0 @@
-{
-    "id": "8c16dd22-c28d-40b5-b7b9-229f28d37ef2",
-    "type": "feature",
-    "description": "Support has been added for the SelectObjectContent API.",
-    "modules": [
-        "service/s3"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.5.0 (2021-11-06)
+
+* **Feature**: Updated `github.com/aws/smithy-go` to latest version
+
 # v1.4.0 (2021-10-21)
 
 * **Feature**: Updated  to latest version
