@@ -1,0 +1,88 @@
+name: "\U0001F41B Bug Report"
+description: File a bug report
+title: "(short issue description)"
+labels: [bug, needs-triage]
+body:
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Documentation
+      description: Please confirm.
+      options:
+        - label: I've gone though the [API reference](https://docs.aws.amazon.com/sdk-for-go/v2/api/)
+          required: true
+        - label: I've checked [AWS Forums](https://forums.aws.amazon.com) and [StackOverflow](https://stackoverflow.com/questions/tagged/aws-sdk-go) for answers
+          required: true
+        - label: I've searched for [previous similar issues](https://github.com/aws/aws-sdk-go-v2/issues) and didn't find any solution
+          required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: |
+        Tell us what should happen.
+    validations:
+      required: true
+
+  - type: textarea
+    id: current
+    attributes:
+      label: Current behavior
+      description: |
+        Tell us what happens instead of the expected behavior.
+        Include full errors, uncaught exceptions, stack traces, and relevant logs.
+        To turn on SDK logging, follow instructions here: http://docs.aws.amazon.com/sdk-for-java/v2/developer-guide/java-dg-logging.html
+        If service responses are relevant, please include wirelogs.
+    validations:
+        required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      description: |
+        Provide a self-contained, concise snippet of code that can be used to reproduce the issue.
+        For more complex issues provide a repo with the smallest sample that reproduces the bug.
+        Avoid including business logic or unrelated code, it makes diagnosis more difficult.
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Possible Solution
+      description: |
+        Suggest a fix/reason for the bug
+    validations:
+      required: false
+
+  - type: input
+    id: Go-sdk-version
+    attributes:
+      label: AWS Go SDK version used
+    validations:
+      required: true
+
+  - type: input
+    id: go-version
+    attributes:
+      label: Compiler and Version used
+      description: output of the `go version` command
+    validations:
+      required: true
+
+  - type: input
+    id: operating-system
+    attributes:
+      label: Operating System and version
+    validations:
+      required: true 
