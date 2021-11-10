@@ -56,7 +56,7 @@ final class AwsProtocolUtils {
                             writer.addUseImports(AwsGoDependency.AWS_CORE);
                             writer.openBlock("$L(func(region string, options $L) (e aws.Endpoint, err error) {", "}),",
                                     EndpointGenerator.RESOLVER_FUNC_NAME, EndpointGenerator.RESOLVER_OPTIONS, () -> {
-                                        writer.write("e.URL = url");
+                                        writer.write("e.URL = serverURL");
                                         writer.write("e.SigningRegion = \"us-west-2\"");
                                         writer.write("return e, err");
                                     });
