@@ -217,8 +217,17 @@ func NewEnvironmentExistsWaiter(client DescribeEnvironmentsAPIClient, optFns ...
 // the maximum wait duration the waiter will wait. The maxWaitDur is required and
 // must be greater than zero.
 func (w *EnvironmentExistsWaiter) Wait(ctx context.Context, params *DescribeEnvironmentsInput, maxWaitDur time.Duration, optFns ...func(*EnvironmentExistsWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for EnvironmentExists waiter and returns
+// the output of the successful operation. The maxWaitDur is the maximum wait
+// duration the waiter will wait. The maxWaitDur is required and must be greater
+// than zero.
+func (w *EnvironmentExistsWaiter) WaitForOutput(ctx context.Context, params *DescribeEnvironmentsInput, maxWaitDur time.Duration, optFns ...func(*EnvironmentExistsWaiterOptions)) (*DescribeEnvironmentsOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -231,7 +240,7 @@ func (w *EnvironmentExistsWaiter) Wait(ctx context.Context, params *DescribeEnvi
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -259,10 +268,10 @@ func (w *EnvironmentExistsWaiter) Wait(ctx context.Context, params *DescribeEnvi
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -275,16 +284,16 @@ func (w *EnvironmentExistsWaiter) Wait(ctx context.Context, params *DescribeEnvi
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for EnvironmentExists waiter")
+	return nil, fmt.Errorf("exceeded max wait time for EnvironmentExists waiter")
 }
 
 func environmentExistsStateRetryable(ctx context.Context, input *DescribeEnvironmentsInput, output *DescribeEnvironmentsOutput, err error) (bool, error) {
@@ -416,8 +425,17 @@ func NewEnvironmentTerminatedWaiter(client DescribeEnvironmentsAPIClient, optFns
 // is the maximum wait duration the waiter will wait. The maxWaitDur is required
 // and must be greater than zero.
 func (w *EnvironmentTerminatedWaiter) Wait(ctx context.Context, params *DescribeEnvironmentsInput, maxWaitDur time.Duration, optFns ...func(*EnvironmentTerminatedWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for EnvironmentTerminated waiter and
+// returns the output of the successful operation. The maxWaitDur is the maximum
+// wait duration the waiter will wait. The maxWaitDur is required and must be
+// greater than zero.
+func (w *EnvironmentTerminatedWaiter) WaitForOutput(ctx context.Context, params *DescribeEnvironmentsInput, maxWaitDur time.Duration, optFns ...func(*EnvironmentTerminatedWaiterOptions)) (*DescribeEnvironmentsOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -430,7 +448,7 @@ func (w *EnvironmentTerminatedWaiter) Wait(ctx context.Context, params *Describe
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -458,10 +476,10 @@ func (w *EnvironmentTerminatedWaiter) Wait(ctx context.Context, params *Describe
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -474,16 +492,16 @@ func (w *EnvironmentTerminatedWaiter) Wait(ctx context.Context, params *Describe
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for EnvironmentTerminated waiter")
+	return nil, fmt.Errorf("exceeded max wait time for EnvironmentTerminated waiter")
 }
 
 func environmentTerminatedStateRetryable(ctx context.Context, input *DescribeEnvironmentsInput, output *DescribeEnvironmentsOutput, err error) (bool, error) {
@@ -614,8 +632,17 @@ func NewEnvironmentUpdatedWaiter(client DescribeEnvironmentsAPIClient, optFns ..
 // the maximum wait duration the waiter will wait. The maxWaitDur is required and
 // must be greater than zero.
 func (w *EnvironmentUpdatedWaiter) Wait(ctx context.Context, params *DescribeEnvironmentsInput, maxWaitDur time.Duration, optFns ...func(*EnvironmentUpdatedWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for EnvironmentUpdated waiter and
+// returns the output of the successful operation. The maxWaitDur is the maximum
+// wait duration the waiter will wait. The maxWaitDur is required and must be
+// greater than zero.
+func (w *EnvironmentUpdatedWaiter) WaitForOutput(ctx context.Context, params *DescribeEnvironmentsInput, maxWaitDur time.Duration, optFns ...func(*EnvironmentUpdatedWaiterOptions)) (*DescribeEnvironmentsOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -628,7 +655,7 @@ func (w *EnvironmentUpdatedWaiter) Wait(ctx context.Context, params *DescribeEnv
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -656,10 +683,10 @@ func (w *EnvironmentUpdatedWaiter) Wait(ctx context.Context, params *DescribeEnv
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -672,16 +699,16 @@ func (w *EnvironmentUpdatedWaiter) Wait(ctx context.Context, params *DescribeEnv
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for EnvironmentUpdated waiter")
+	return nil, fmt.Errorf("exceeded max wait time for EnvironmentUpdated waiter")
 }
 
 func environmentUpdatedStateRetryable(ctx context.Context, input *DescribeEnvironmentsInput, output *DescribeEnvironmentsOutput, err error) (bool, error) {

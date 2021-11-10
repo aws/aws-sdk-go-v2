@@ -281,8 +281,17 @@ func NewNotebookInstanceDeletedWaiter(client DescribeNotebookInstanceAPIClient, 
 // maxWaitDur is the maximum wait duration the waiter will wait. The maxWaitDur is
 // required and must be greater than zero.
 func (w *NotebookInstanceDeletedWaiter) Wait(ctx context.Context, params *DescribeNotebookInstanceInput, maxWaitDur time.Duration, optFns ...func(*NotebookInstanceDeletedWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for NotebookInstanceDeleted waiter and
+// returns the output of the successful operation. The maxWaitDur is the maximum
+// wait duration the waiter will wait. The maxWaitDur is required and must be
+// greater than zero.
+func (w *NotebookInstanceDeletedWaiter) WaitForOutput(ctx context.Context, params *DescribeNotebookInstanceInput, maxWaitDur time.Duration, optFns ...func(*NotebookInstanceDeletedWaiterOptions)) (*DescribeNotebookInstanceOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -295,7 +304,7 @@ func (w *NotebookInstanceDeletedWaiter) Wait(ctx context.Context, params *Descri
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -323,10 +332,10 @@ func (w *NotebookInstanceDeletedWaiter) Wait(ctx context.Context, params *Descri
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -339,16 +348,16 @@ func (w *NotebookInstanceDeletedWaiter) Wait(ctx context.Context, params *Descri
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for NotebookInstanceDeleted waiter")
+	return nil, fmt.Errorf("exceeded max wait time for NotebookInstanceDeleted waiter")
 }
 
 func notebookInstanceDeletedStateRetryable(ctx context.Context, input *DescribeNotebookInstanceInput, output *DescribeNotebookInstanceOutput, err error) (bool, error) {
@@ -447,8 +456,17 @@ func NewNotebookInstanceInServiceWaiter(client DescribeNotebookInstanceAPIClient
 // maxWaitDur is the maximum wait duration the waiter will wait. The maxWaitDur is
 // required and must be greater than zero.
 func (w *NotebookInstanceInServiceWaiter) Wait(ctx context.Context, params *DescribeNotebookInstanceInput, maxWaitDur time.Duration, optFns ...func(*NotebookInstanceInServiceWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for NotebookInstanceInService waiter and
+// returns the output of the successful operation. The maxWaitDur is the maximum
+// wait duration the waiter will wait. The maxWaitDur is required and must be
+// greater than zero.
+func (w *NotebookInstanceInServiceWaiter) WaitForOutput(ctx context.Context, params *DescribeNotebookInstanceInput, maxWaitDur time.Duration, optFns ...func(*NotebookInstanceInServiceWaiterOptions)) (*DescribeNotebookInstanceOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -461,7 +479,7 @@ func (w *NotebookInstanceInServiceWaiter) Wait(ctx context.Context, params *Desc
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -489,10 +507,10 @@ func (w *NotebookInstanceInServiceWaiter) Wait(ctx context.Context, params *Desc
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -505,16 +523,16 @@ func (w *NotebookInstanceInServiceWaiter) Wait(ctx context.Context, params *Desc
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for NotebookInstanceInService waiter")
+	return nil, fmt.Errorf("exceeded max wait time for NotebookInstanceInService waiter")
 }
 
 func notebookInstanceInServiceStateRetryable(ctx context.Context, input *DescribeNotebookInstanceInput, output *DescribeNotebookInstanceOutput, err error) (bool, error) {
@@ -617,8 +635,17 @@ func NewNotebookInstanceStoppedWaiter(client DescribeNotebookInstanceAPIClient, 
 // maxWaitDur is the maximum wait duration the waiter will wait. The maxWaitDur is
 // required and must be greater than zero.
 func (w *NotebookInstanceStoppedWaiter) Wait(ctx context.Context, params *DescribeNotebookInstanceInput, maxWaitDur time.Duration, optFns ...func(*NotebookInstanceStoppedWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for NotebookInstanceStopped waiter and
+// returns the output of the successful operation. The maxWaitDur is the maximum
+// wait duration the waiter will wait. The maxWaitDur is required and must be
+// greater than zero.
+func (w *NotebookInstanceStoppedWaiter) WaitForOutput(ctx context.Context, params *DescribeNotebookInstanceInput, maxWaitDur time.Duration, optFns ...func(*NotebookInstanceStoppedWaiterOptions)) (*DescribeNotebookInstanceOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -631,7 +658,7 @@ func (w *NotebookInstanceStoppedWaiter) Wait(ctx context.Context, params *Descri
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -659,10 +686,10 @@ func (w *NotebookInstanceStoppedWaiter) Wait(ctx context.Context, params *Descri
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -675,16 +702,16 @@ func (w *NotebookInstanceStoppedWaiter) Wait(ctx context.Context, params *Descri
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for NotebookInstanceStopped waiter")
+	return nil, fmt.Errorf("exceeded max wait time for NotebookInstanceStopped waiter")
 }
 
 func notebookInstanceStoppedStateRetryable(ctx context.Context, input *DescribeNotebookInstanceInput, output *DescribeNotebookInstanceOutput, err error) (bool, error) {

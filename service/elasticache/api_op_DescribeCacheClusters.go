@@ -305,8 +305,17 @@ func NewCacheClusterAvailableWaiter(client DescribeCacheClustersAPIClient, optFn
 // is the maximum wait duration the waiter will wait. The maxWaitDur is required
 // and must be greater than zero.
 func (w *CacheClusterAvailableWaiter) Wait(ctx context.Context, params *DescribeCacheClustersInput, maxWaitDur time.Duration, optFns ...func(*CacheClusterAvailableWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for CacheClusterAvailable waiter and
+// returns the output of the successful operation. The maxWaitDur is the maximum
+// wait duration the waiter will wait. The maxWaitDur is required and must be
+// greater than zero.
+func (w *CacheClusterAvailableWaiter) WaitForOutput(ctx context.Context, params *DescribeCacheClustersInput, maxWaitDur time.Duration, optFns ...func(*CacheClusterAvailableWaiterOptions)) (*DescribeCacheClustersOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -319,7 +328,7 @@ func (w *CacheClusterAvailableWaiter) Wait(ctx context.Context, params *Describe
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -347,10 +356,10 @@ func (w *CacheClusterAvailableWaiter) Wait(ctx context.Context, params *Describe
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -363,16 +372,16 @@ func (w *CacheClusterAvailableWaiter) Wait(ctx context.Context, params *Describe
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for CacheClusterAvailable waiter")
+	return nil, fmt.Errorf("exceeded max wait time for CacheClusterAvailable waiter")
 }
 
 func cacheClusterAvailableStateRetryable(ctx context.Context, input *DescribeCacheClustersInput, output *DescribeCacheClustersOutput, err error) (bool, error) {
@@ -568,8 +577,17 @@ func NewCacheClusterDeletedWaiter(client DescribeCacheClustersAPIClient, optFns 
 // the maximum wait duration the waiter will wait. The maxWaitDur is required and
 // must be greater than zero.
 func (w *CacheClusterDeletedWaiter) Wait(ctx context.Context, params *DescribeCacheClustersInput, maxWaitDur time.Duration, optFns ...func(*CacheClusterDeletedWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for CacheClusterDeleted waiter and
+// returns the output of the successful operation. The maxWaitDur is the maximum
+// wait duration the waiter will wait. The maxWaitDur is required and must be
+// greater than zero.
+func (w *CacheClusterDeletedWaiter) WaitForOutput(ctx context.Context, params *DescribeCacheClustersInput, maxWaitDur time.Duration, optFns ...func(*CacheClusterDeletedWaiterOptions)) (*DescribeCacheClustersOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -582,7 +600,7 @@ func (w *CacheClusterDeletedWaiter) Wait(ctx context.Context, params *DescribeCa
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -610,10 +628,10 @@ func (w *CacheClusterDeletedWaiter) Wait(ctx context.Context, params *DescribeCa
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -626,16 +644,16 @@ func (w *CacheClusterDeletedWaiter) Wait(ctx context.Context, params *DescribeCa
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for CacheClusterDeleted waiter")
+	return nil, fmt.Errorf("exceeded max wait time for CacheClusterDeleted waiter")
 }
 
 func cacheClusterDeletedStateRetryable(ctx context.Context, input *DescribeCacheClustersInput, output *DescribeCacheClustersOutput, err error) (bool, error) {

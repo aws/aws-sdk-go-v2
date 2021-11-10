@@ -188,8 +188,16 @@ func NewFlowActiveWaiter(client DescribeFlowAPIClient, optFns ...func(*FlowActiv
 // maximum wait duration the waiter will wait. The maxWaitDur is required and must
 // be greater than zero.
 func (w *FlowActiveWaiter) Wait(ctx context.Context, params *DescribeFlowInput, maxWaitDur time.Duration, optFns ...func(*FlowActiveWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for FlowActive waiter and returns the
+// output of the successful operation. The maxWaitDur is the maximum wait duration
+// the waiter will wait. The maxWaitDur is required and must be greater than zero.
+func (w *FlowActiveWaiter) WaitForOutput(ctx context.Context, params *DescribeFlowInput, maxWaitDur time.Duration, optFns ...func(*FlowActiveWaiterOptions)) (*DescribeFlowOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -202,7 +210,7 @@ func (w *FlowActiveWaiter) Wait(ctx context.Context, params *DescribeFlowInput, 
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -230,10 +238,10 @@ func (w *FlowActiveWaiter) Wait(ctx context.Context, params *DescribeFlowInput, 
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -246,16 +254,16 @@ func (w *FlowActiveWaiter) Wait(ctx context.Context, params *DescribeFlowInput, 
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for FlowActive waiter")
+	return nil, fmt.Errorf("exceeded max wait time for FlowActive waiter")
 }
 
 func flowActiveStateRetryable(ctx context.Context, input *DescribeFlowInput, output *DescribeFlowOutput, err error) (bool, error) {
@@ -404,8 +412,16 @@ func NewFlowDeletedWaiter(client DescribeFlowAPIClient, optFns ...func(*FlowDele
 // maximum wait duration the waiter will wait. The maxWaitDur is required and must
 // be greater than zero.
 func (w *FlowDeletedWaiter) Wait(ctx context.Context, params *DescribeFlowInput, maxWaitDur time.Duration, optFns ...func(*FlowDeletedWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for FlowDeleted waiter and returns the
+// output of the successful operation. The maxWaitDur is the maximum wait duration
+// the waiter will wait. The maxWaitDur is required and must be greater than zero.
+func (w *FlowDeletedWaiter) WaitForOutput(ctx context.Context, params *DescribeFlowInput, maxWaitDur time.Duration, optFns ...func(*FlowDeletedWaiterOptions)) (*DescribeFlowOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -418,7 +434,7 @@ func (w *FlowDeletedWaiter) Wait(ctx context.Context, params *DescribeFlowInput,
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -446,10 +462,10 @@ func (w *FlowDeletedWaiter) Wait(ctx context.Context, params *DescribeFlowInput,
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -462,16 +478,16 @@ func (w *FlowDeletedWaiter) Wait(ctx context.Context, params *DescribeFlowInput,
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for FlowDeleted waiter")
+	return nil, fmt.Errorf("exceeded max wait time for FlowDeleted waiter")
 }
 
 func flowDeletedStateRetryable(ctx context.Context, input *DescribeFlowInput, output *DescribeFlowOutput, err error) (bool, error) {
@@ -593,8 +609,16 @@ func NewFlowStandbyWaiter(client DescribeFlowAPIClient, optFns ...func(*FlowStan
 // maximum wait duration the waiter will wait. The maxWaitDur is required and must
 // be greater than zero.
 func (w *FlowStandbyWaiter) Wait(ctx context.Context, params *DescribeFlowInput, maxWaitDur time.Duration, optFns ...func(*FlowStandbyWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for FlowStandby waiter and returns the
+// output of the successful operation. The maxWaitDur is the maximum wait duration
+// the waiter will wait. The maxWaitDur is required and must be greater than zero.
+func (w *FlowStandbyWaiter) WaitForOutput(ctx context.Context, params *DescribeFlowInput, maxWaitDur time.Duration, optFns ...func(*FlowStandbyWaiterOptions)) (*DescribeFlowOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -607,7 +631,7 @@ func (w *FlowStandbyWaiter) Wait(ctx context.Context, params *DescribeFlowInput,
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -635,10 +659,10 @@ func (w *FlowStandbyWaiter) Wait(ctx context.Context, params *DescribeFlowInput,
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -651,16 +675,16 @@ func (w *FlowStandbyWaiter) Wait(ctx context.Context, params *DescribeFlowInput,
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for FlowStandby waiter")
+	return nil, fmt.Errorf("exceeded max wait time for FlowStandby waiter")
 }
 
 func flowStandbyStateRetryable(ctx context.Context, input *DescribeFlowInput, output *DescribeFlowOutput, err error) (bool, error) {

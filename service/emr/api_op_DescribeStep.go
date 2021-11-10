@@ -189,8 +189,16 @@ func NewStepCompleteWaiter(client DescribeStepAPIClient, optFns ...func(*StepCom
 // maximum wait duration the waiter will wait. The maxWaitDur is required and must
 // be greater than zero.
 func (w *StepCompleteWaiter) Wait(ctx context.Context, params *DescribeStepInput, maxWaitDur time.Duration, optFns ...func(*StepCompleteWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for StepComplete waiter and returns the
+// output of the successful operation. The maxWaitDur is the maximum wait duration
+// the waiter will wait. The maxWaitDur is required and must be greater than zero.
+func (w *StepCompleteWaiter) WaitForOutput(ctx context.Context, params *DescribeStepInput, maxWaitDur time.Duration, optFns ...func(*StepCompleteWaiterOptions)) (*DescribeStepOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -203,7 +211,7 @@ func (w *StepCompleteWaiter) Wait(ctx context.Context, params *DescribeStepInput
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -231,10 +239,10 @@ func (w *StepCompleteWaiter) Wait(ctx context.Context, params *DescribeStepInput
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -247,16 +255,16 @@ func (w *StepCompleteWaiter) Wait(ctx context.Context, params *DescribeStepInput
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for StepComplete waiter")
+	return nil, fmt.Errorf("exceeded max wait time for StepComplete waiter")
 }
 
 func stepCompleteStateRetryable(ctx context.Context, input *DescribeStepInput, output *DescribeStepOutput, err error) (bool, error) {

@@ -211,8 +211,16 @@ func NewStreamExistsWaiter(client DescribeStreamAPIClient, optFns ...func(*Strea
 // maximum wait duration the waiter will wait. The maxWaitDur is required and must
 // be greater than zero.
 func (w *StreamExistsWaiter) Wait(ctx context.Context, params *DescribeStreamInput, maxWaitDur time.Duration, optFns ...func(*StreamExistsWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for StreamExists waiter and returns the
+// output of the successful operation. The maxWaitDur is the maximum wait duration
+// the waiter will wait. The maxWaitDur is required and must be greater than zero.
+func (w *StreamExistsWaiter) WaitForOutput(ctx context.Context, params *DescribeStreamInput, maxWaitDur time.Duration, optFns ...func(*StreamExistsWaiterOptions)) (*DescribeStreamOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -225,7 +233,7 @@ func (w *StreamExistsWaiter) Wait(ctx context.Context, params *DescribeStreamInp
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -253,10 +261,10 @@ func (w *StreamExistsWaiter) Wait(ctx context.Context, params *DescribeStreamInp
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -269,16 +277,16 @@ func (w *StreamExistsWaiter) Wait(ctx context.Context, params *DescribeStreamInp
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for StreamExists waiter")
+	return nil, fmt.Errorf("exceeded max wait time for StreamExists waiter")
 }
 
 func streamExistsStateRetryable(ctx context.Context, input *DescribeStreamInput, output *DescribeStreamOutput, err error) (bool, error) {
@@ -362,8 +370,17 @@ func NewStreamNotExistsWaiter(client DescribeStreamAPIClient, optFns ...func(*St
 // maximum wait duration the waiter will wait. The maxWaitDur is required and must
 // be greater than zero.
 func (w *StreamNotExistsWaiter) Wait(ctx context.Context, params *DescribeStreamInput, maxWaitDur time.Duration, optFns ...func(*StreamNotExistsWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for StreamNotExists waiter and returns
+// the output of the successful operation. The maxWaitDur is the maximum wait
+// duration the waiter will wait. The maxWaitDur is required and must be greater
+// than zero.
+func (w *StreamNotExistsWaiter) WaitForOutput(ctx context.Context, params *DescribeStreamInput, maxWaitDur time.Duration, optFns ...func(*StreamNotExistsWaiterOptions)) (*DescribeStreamOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -376,7 +393,7 @@ func (w *StreamNotExistsWaiter) Wait(ctx context.Context, params *DescribeStream
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -404,10 +421,10 @@ func (w *StreamNotExistsWaiter) Wait(ctx context.Context, params *DescribeStream
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -420,16 +437,16 @@ func (w *StreamNotExistsWaiter) Wait(ctx context.Context, params *DescribeStream
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for StreamNotExists waiter")
+	return nil, fmt.Errorf("exceeded max wait time for StreamNotExists waiter")
 }
 
 func streamNotExistsStateRetryable(ctx context.Context, input *DescribeStreamInput, output *DescribeStreamOutput, err error) (bool, error) {

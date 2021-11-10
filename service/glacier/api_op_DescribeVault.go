@@ -247,8 +247,16 @@ func NewVaultExistsWaiter(client DescribeVaultAPIClient, optFns ...func(*VaultEx
 // maximum wait duration the waiter will wait. The maxWaitDur is required and must
 // be greater than zero.
 func (w *VaultExistsWaiter) Wait(ctx context.Context, params *DescribeVaultInput, maxWaitDur time.Duration, optFns ...func(*VaultExistsWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for VaultExists waiter and returns the
+// output of the successful operation. The maxWaitDur is the maximum wait duration
+// the waiter will wait. The maxWaitDur is required and must be greater than zero.
+func (w *VaultExistsWaiter) WaitForOutput(ctx context.Context, params *DescribeVaultInput, maxWaitDur time.Duration, optFns ...func(*VaultExistsWaiterOptions)) (*DescribeVaultOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -261,7 +269,7 @@ func (w *VaultExistsWaiter) Wait(ctx context.Context, params *DescribeVaultInput
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -289,10 +297,10 @@ func (w *VaultExistsWaiter) Wait(ctx context.Context, params *DescribeVaultInput
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -305,16 +313,16 @@ func (w *VaultExistsWaiter) Wait(ctx context.Context, params *DescribeVaultInput
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for VaultExists waiter")
+	return nil, fmt.Errorf("exceeded max wait time for VaultExists waiter")
 }
 
 func vaultExistsStateRetryable(ctx context.Context, input *DescribeVaultInput, output *DescribeVaultOutput, err error) (bool, error) {
@@ -392,8 +400,17 @@ func NewVaultNotExistsWaiter(client DescribeVaultAPIClient, optFns ...func(*Vaul
 // maximum wait duration the waiter will wait. The maxWaitDur is required and must
 // be greater than zero.
 func (w *VaultNotExistsWaiter) Wait(ctx context.Context, params *DescribeVaultInput, maxWaitDur time.Duration, optFns ...func(*VaultNotExistsWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for VaultNotExists waiter and returns
+// the output of the successful operation. The maxWaitDur is the maximum wait
+// duration the waiter will wait. The maxWaitDur is required and must be greater
+// than zero.
+func (w *VaultNotExistsWaiter) WaitForOutput(ctx context.Context, params *DescribeVaultInput, maxWaitDur time.Duration, optFns ...func(*VaultNotExistsWaiterOptions)) (*DescribeVaultOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -406,7 +423,7 @@ func (w *VaultNotExistsWaiter) Wait(ctx context.Context, params *DescribeVaultIn
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -434,10 +451,10 @@ func (w *VaultNotExistsWaiter) Wait(ctx context.Context, params *DescribeVaultIn
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -450,16 +467,16 @@ func (w *VaultNotExistsWaiter) Wait(ctx context.Context, params *DescribeVaultIn
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for VaultNotExists waiter")
+	return nil, fmt.Errorf("exceeded max wait time for VaultNotExists waiter")
 }
 
 func vaultNotExistsStateRetryable(ctx context.Context, input *DescribeVaultInput, output *DescribeVaultOutput, err error) (bool, error) {

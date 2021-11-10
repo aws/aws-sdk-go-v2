@@ -337,8 +337,17 @@ func NewDataSourceAvailableWaiter(client DescribeDataSourcesAPIClient, optFns ..
 // the maximum wait duration the waiter will wait. The maxWaitDur is required and
 // must be greater than zero.
 func (w *DataSourceAvailableWaiter) Wait(ctx context.Context, params *DescribeDataSourcesInput, maxWaitDur time.Duration, optFns ...func(*DataSourceAvailableWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for DataSourceAvailable waiter and
+// returns the output of the successful operation. The maxWaitDur is the maximum
+// wait duration the waiter will wait. The maxWaitDur is required and must be
+// greater than zero.
+func (w *DataSourceAvailableWaiter) WaitForOutput(ctx context.Context, params *DescribeDataSourcesInput, maxWaitDur time.Duration, optFns ...func(*DataSourceAvailableWaiterOptions)) (*DescribeDataSourcesOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -351,7 +360,7 @@ func (w *DataSourceAvailableWaiter) Wait(ctx context.Context, params *DescribeDa
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -379,10 +388,10 @@ func (w *DataSourceAvailableWaiter) Wait(ctx context.Context, params *DescribeDa
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -395,16 +404,16 @@ func (w *DataSourceAvailableWaiter) Wait(ctx context.Context, params *DescribeDa
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for DataSourceAvailable waiter")
+	return nil, fmt.Errorf("exceeded max wait time for DataSourceAvailable waiter")
 }
 
 func dataSourceAvailableStateRetryable(ctx context.Context, input *DescribeDataSourcesInput, output *DescribeDataSourcesOutput, err error) (bool, error) {

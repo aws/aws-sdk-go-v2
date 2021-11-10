@@ -230,8 +230,16 @@ func NewBucketExistsWaiter(client HeadBucketAPIClient, optFns ...func(*BucketExi
 // maximum wait duration the waiter will wait. The maxWaitDur is required and must
 // be greater than zero.
 func (w *BucketExistsWaiter) Wait(ctx context.Context, params *HeadBucketInput, maxWaitDur time.Duration, optFns ...func(*BucketExistsWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for BucketExists waiter and returns the
+// output of the successful operation. The maxWaitDur is the maximum wait duration
+// the waiter will wait. The maxWaitDur is required and must be greater than zero.
+func (w *BucketExistsWaiter) WaitForOutput(ctx context.Context, params *HeadBucketInput, maxWaitDur time.Duration, optFns ...func(*BucketExistsWaiterOptions)) (*HeadBucketOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -244,7 +252,7 @@ func (w *BucketExistsWaiter) Wait(ctx context.Context, params *HeadBucketInput, 
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -272,10 +280,10 @@ func (w *BucketExistsWaiter) Wait(ctx context.Context, params *HeadBucketInput, 
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -288,16 +296,16 @@ func (w *BucketExistsWaiter) Wait(ctx context.Context, params *HeadBucketInput, 
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for BucketExists waiter")
+	return nil, fmt.Errorf("exceeded max wait time for BucketExists waiter")
 }
 
 func bucketExistsStateRetryable(ctx context.Context, input *HeadBucketInput, output *HeadBucketOutput, err error) (bool, error) {
@@ -375,8 +383,17 @@ func NewBucketNotExistsWaiter(client HeadBucketAPIClient, optFns ...func(*Bucket
 // maximum wait duration the waiter will wait. The maxWaitDur is required and must
 // be greater than zero.
 func (w *BucketNotExistsWaiter) Wait(ctx context.Context, params *HeadBucketInput, maxWaitDur time.Duration, optFns ...func(*BucketNotExistsWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for BucketNotExists waiter and returns
+// the output of the successful operation. The maxWaitDur is the maximum wait
+// duration the waiter will wait. The maxWaitDur is required and must be greater
+// than zero.
+func (w *BucketNotExistsWaiter) WaitForOutput(ctx context.Context, params *HeadBucketInput, maxWaitDur time.Duration, optFns ...func(*BucketNotExistsWaiterOptions)) (*HeadBucketOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -389,7 +406,7 @@ func (w *BucketNotExistsWaiter) Wait(ctx context.Context, params *HeadBucketInpu
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -417,10 +434,10 @@ func (w *BucketNotExistsWaiter) Wait(ctx context.Context, params *HeadBucketInpu
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -433,16 +450,16 @@ func (w *BucketNotExistsWaiter) Wait(ctx context.Context, params *HeadBucketInpu
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for BucketNotExists waiter")
+	return nil, fmt.Errorf("exceeded max wait time for BucketNotExists waiter")
 }
 
 func bucketNotExistsStateRetryable(ctx context.Context, input *HeadBucketInput, output *HeadBucketOutput, err error) (bool, error) {

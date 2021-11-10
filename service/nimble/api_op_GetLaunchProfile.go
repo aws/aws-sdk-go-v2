@@ -189,8 +189,17 @@ func NewLaunchProfileReadyWaiter(client GetLaunchProfileAPIClient, optFns ...fun
 // the maximum wait duration the waiter will wait. The maxWaitDur is required and
 // must be greater than zero.
 func (w *LaunchProfileReadyWaiter) Wait(ctx context.Context, params *GetLaunchProfileInput, maxWaitDur time.Duration, optFns ...func(*LaunchProfileReadyWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for LaunchProfileReady waiter and
+// returns the output of the successful operation. The maxWaitDur is the maximum
+// wait duration the waiter will wait. The maxWaitDur is required and must be
+// greater than zero.
+func (w *LaunchProfileReadyWaiter) WaitForOutput(ctx context.Context, params *GetLaunchProfileInput, maxWaitDur time.Duration, optFns ...func(*LaunchProfileReadyWaiterOptions)) (*GetLaunchProfileOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -203,7 +212,7 @@ func (w *LaunchProfileReadyWaiter) Wait(ctx context.Context, params *GetLaunchPr
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -231,10 +240,10 @@ func (w *LaunchProfileReadyWaiter) Wait(ctx context.Context, params *GetLaunchPr
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -247,16 +256,16 @@ func (w *LaunchProfileReadyWaiter) Wait(ctx context.Context, params *GetLaunchPr
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for LaunchProfileReady waiter")
+	return nil, fmt.Errorf("exceeded max wait time for LaunchProfileReady waiter")
 }
 
 func launchProfileReadyStateRetryable(ctx context.Context, input *GetLaunchProfileInput, output *GetLaunchProfileOutput, err error) (bool, error) {
@@ -375,8 +384,17 @@ func NewLaunchProfileDeletedWaiter(client GetLaunchProfileAPIClient, optFns ...f
 // is the maximum wait duration the waiter will wait. The maxWaitDur is required
 // and must be greater than zero.
 func (w *LaunchProfileDeletedWaiter) Wait(ctx context.Context, params *GetLaunchProfileInput, maxWaitDur time.Duration, optFns ...func(*LaunchProfileDeletedWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for LaunchProfileDeleted waiter and
+// returns the output of the successful operation. The maxWaitDur is the maximum
+// wait duration the waiter will wait. The maxWaitDur is required and must be
+// greater than zero.
+func (w *LaunchProfileDeletedWaiter) WaitForOutput(ctx context.Context, params *GetLaunchProfileInput, maxWaitDur time.Duration, optFns ...func(*LaunchProfileDeletedWaiterOptions)) (*GetLaunchProfileOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -389,7 +407,7 @@ func (w *LaunchProfileDeletedWaiter) Wait(ctx context.Context, params *GetLaunch
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -417,10 +435,10 @@ func (w *LaunchProfileDeletedWaiter) Wait(ctx context.Context, params *GetLaunch
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -433,16 +451,16 @@ func (w *LaunchProfileDeletedWaiter) Wait(ctx context.Context, params *GetLaunch
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for LaunchProfileDeleted waiter")
+	return nil, fmt.Errorf("exceeded max wait time for LaunchProfileDeleted waiter")
 }
 
 func launchProfileDeletedStateRetryable(ctx context.Context, input *GetLaunchProfileInput, output *GetLaunchProfileOutput, err error) (bool, error) {

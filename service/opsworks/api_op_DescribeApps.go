@@ -188,8 +188,16 @@ func NewAppExistsWaiter(client DescribeAppsAPIClient, optFns ...func(*AppExistsW
 // maximum wait duration the waiter will wait. The maxWaitDur is required and must
 // be greater than zero.
 func (w *AppExistsWaiter) Wait(ctx context.Context, params *DescribeAppsInput, maxWaitDur time.Duration, optFns ...func(*AppExistsWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for AppExists waiter and returns the
+// output of the successful operation. The maxWaitDur is the maximum wait duration
+// the waiter will wait. The maxWaitDur is required and must be greater than zero.
+func (w *AppExistsWaiter) WaitForOutput(ctx context.Context, params *DescribeAppsInput, maxWaitDur time.Duration, optFns ...func(*AppExistsWaiterOptions)) (*DescribeAppsOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -202,7 +210,7 @@ func (w *AppExistsWaiter) Wait(ctx context.Context, params *DescribeAppsInput, m
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -230,10 +238,10 @@ func (w *AppExistsWaiter) Wait(ctx context.Context, params *DescribeAppsInput, m
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -246,16 +254,16 @@ func (w *AppExistsWaiter) Wait(ctx context.Context, params *DescribeAppsInput, m
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for AppExists waiter")
+	return nil, fmt.Errorf("exceeded max wait time for AppExists waiter")
 }
 
 func appExistsStateRetryable(ctx context.Context, input *DescribeAppsInput, output *DescribeAppsOutput, err error) (bool, error) {

@@ -371,8 +371,17 @@ func NewDBSnapshotAvailableWaiter(client DescribeDBSnapshotsAPIClient, optFns ..
 // the maximum wait duration the waiter will wait. The maxWaitDur is required and
 // must be greater than zero.
 func (w *DBSnapshotAvailableWaiter) Wait(ctx context.Context, params *DescribeDBSnapshotsInput, maxWaitDur time.Duration, optFns ...func(*DBSnapshotAvailableWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for DBSnapshotAvailable waiter and
+// returns the output of the successful operation. The maxWaitDur is the maximum
+// wait duration the waiter will wait. The maxWaitDur is required and must be
+// greater than zero.
+func (w *DBSnapshotAvailableWaiter) WaitForOutput(ctx context.Context, params *DescribeDBSnapshotsInput, maxWaitDur time.Duration, optFns ...func(*DBSnapshotAvailableWaiterOptions)) (*DescribeDBSnapshotsOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -385,7 +394,7 @@ func (w *DBSnapshotAvailableWaiter) Wait(ctx context.Context, params *DescribeDB
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -413,10 +422,10 @@ func (w *DBSnapshotAvailableWaiter) Wait(ctx context.Context, params *DescribeDB
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -429,16 +438,16 @@ func (w *DBSnapshotAvailableWaiter) Wait(ctx context.Context, params *DescribeDB
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for DBSnapshotAvailable waiter")
+	return nil, fmt.Errorf("exceeded max wait time for DBSnapshotAvailable waiter")
 }
 
 func dBSnapshotAvailableStateRetryable(ctx context.Context, input *DescribeDBSnapshotsInput, output *DescribeDBSnapshotsOutput, err error) (bool, error) {
@@ -657,8 +666,17 @@ func NewDBSnapshotDeletedWaiter(client DescribeDBSnapshotsAPIClient, optFns ...f
 // the maximum wait duration the waiter will wait. The maxWaitDur is required and
 // must be greater than zero.
 func (w *DBSnapshotDeletedWaiter) Wait(ctx context.Context, params *DescribeDBSnapshotsInput, maxWaitDur time.Duration, optFns ...func(*DBSnapshotDeletedWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for DBSnapshotDeleted waiter and returns
+// the output of the successful operation. The maxWaitDur is the maximum wait
+// duration the waiter will wait. The maxWaitDur is required and must be greater
+// than zero.
+func (w *DBSnapshotDeletedWaiter) WaitForOutput(ctx context.Context, params *DescribeDBSnapshotsInput, maxWaitDur time.Duration, optFns ...func(*DBSnapshotDeletedWaiterOptions)) (*DescribeDBSnapshotsOutput, error) {
 	if maxWaitDur <= 0 {
-		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
 	}
 
 	options := w.options
@@ -671,7 +689,7 @@ func (w *DBSnapshotDeletedWaiter) Wait(ctx context.Context, params *DescribeDBSn
 	}
 
 	if options.MinDelay > options.MaxDelay {
-		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
 	}
 
 	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
@@ -699,10 +717,10 @@ func (w *DBSnapshotDeletedWaiter) Wait(ctx context.Context, params *DescribeDBSn
 
 		retryable, err := options.Retryable(ctx, params, out, err)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		if !retryable {
-			return nil
+			return out, nil
 		}
 
 		remainingTime -= time.Since(start)
@@ -715,16 +733,16 @@ func (w *DBSnapshotDeletedWaiter) Wait(ctx context.Context, params *DescribeDBSn
 			attempt, options.MinDelay, options.MaxDelay, remainingTime,
 		)
 		if err != nil {
-			return fmt.Errorf("error computing waiter delay, %w", err)
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
 		}
 
 		remainingTime -= delay
 		// sleep for the delay amount before invoking a request
 		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
-			return fmt.Errorf("request cancelled while waiting, %w", err)
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
 		}
 	}
-	return fmt.Errorf("exceeded max wait time for DBSnapshotDeleted waiter")
+	return nil, fmt.Errorf("exceeded max wait time for DBSnapshotDeleted waiter")
 }
 
 func dBSnapshotDeletedStateRetryable(ctx context.Context, input *DescribeDBSnapshotsInput, output *DescribeDBSnapshotsOutput, err error) (bool, error) {
