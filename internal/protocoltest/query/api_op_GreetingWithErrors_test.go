@@ -51,7 +51,7 @@ func TestClient_GreetingWithErrors_awsAwsqueryDeserialize(t *testing.T) {
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			url := "http://localhost:8888/"
+			serverURL := "http://localhost:8888/"
 			client := New(Options{
 				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
 					headers := http.Header{}
@@ -84,7 +84,7 @@ func TestClient_GreetingWithErrors_awsAwsqueryDeserialize(t *testing.T) {
 					},
 				},
 				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = url
+					e.URL = serverURL
 					e.SigningRegion = "us-west-2"
 					return e, err
 				}),
@@ -149,7 +149,7 @@ func TestClient_GreetingWithErrors_InvalidGreeting_awsAwsqueryDeserialize(t *tes
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			url := "http://localhost:8888/"
+			serverURL := "http://localhost:8888/"
 			client := New(Options{
 				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
 					headers := http.Header{}
@@ -182,7 +182,7 @@ func TestClient_GreetingWithErrors_InvalidGreeting_awsAwsqueryDeserialize(t *tes
 					},
 				},
 				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = url
+					e.URL = serverURL
 					e.SigningRegion = "us-west-2"
 					return e, err
 				}),
@@ -264,7 +264,7 @@ func TestClient_GreetingWithErrors_CustomCodeError_awsAwsqueryDeserialize(t *tes
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			url := "http://localhost:8888/"
+			serverURL := "http://localhost:8888/"
 			client := New(Options{
 				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
 					headers := http.Header{}
@@ -297,7 +297,7 @@ func TestClient_GreetingWithErrors_CustomCodeError_awsAwsqueryDeserialize(t *tes
 					},
 				},
 				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = url
+					e.URL = serverURL
 					e.SigningRegion = "us-west-2"
 					return e, err
 				}),
@@ -366,7 +366,6 @@ func TestClient_GreetingWithErrors_ComplexError_awsAwsqueryDeserialize(t *testin
 			   <Error>
 			      <Type>Sender</Type>
 			      <Code>ComplexError</Code>
-			      <Message>Hi</Message>
 			      <TopLevel>Top level</TopLevel>
 			      <Nested>
 			          <Foo>bar</Foo>
@@ -385,7 +384,7 @@ func TestClient_GreetingWithErrors_ComplexError_awsAwsqueryDeserialize(t *testin
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			url := "http://localhost:8888/"
+			serverURL := "http://localhost:8888/"
 			client := New(Options{
 				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
 					headers := http.Header{}
@@ -418,7 +417,7 @@ func TestClient_GreetingWithErrors_ComplexError_awsAwsqueryDeserialize(t *testin
 					},
 				},
 				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = url
+					e.URL = serverURL
 					e.SigningRegion = "us-west-2"
 					return e, err
 				}),

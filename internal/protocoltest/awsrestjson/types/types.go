@@ -118,6 +118,12 @@ type NestedPayload struct {
 	noSmithyDocumentSerde
 }
 
+type PayloadConfig struct {
+	Data *int32
+
+	noSmithyDocumentSerde
+}
+
 type RecursiveShapesInputOutputNested1 struct {
 	Foo *string
 
@@ -134,10 +140,39 @@ type RecursiveShapesInputOutputNested2 struct {
 	noSmithyDocumentSerde
 }
 
+// The following types satisfy this interface:
+//  SimpleUnionMemberInt
+//  SimpleUnionMemberString
+type SimpleUnion interface {
+	isSimpleUnion()
+}
+
+type SimpleUnionMemberInt struct {
+	Value int32
+
+	noSmithyDocumentSerde
+}
+
+func (*SimpleUnionMemberInt) isSimpleUnion() {}
+
+type SimpleUnionMemberString struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*SimpleUnionMemberString) isSimpleUnion() {}
+
 type StructureListMember struct {
 	A *string
 
 	B *string
+
+	noSmithyDocumentSerde
+}
+
+type TestConfig struct {
+	Timeout *int32
 
 	noSmithyDocumentSerde
 }
@@ -165,4 +200,5 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isMyUnion() {}
+func (*UnknownUnionMember) isMyUnion()     {}
+func (*UnknownUnionMember) isSimpleUnion() {}

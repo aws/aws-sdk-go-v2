@@ -46,11 +46,11 @@ func (m *awsRestjson1_serializeOpCreateApp) HandleSerialize(ctx context.Context,
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.CreateApplicationRequest != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.CreateApplicationRequest != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentCreateApplicationRequest(input.CreateApplicationRequest, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -59,6 +59,14 @@ func (m *awsRestjson1_serializeOpCreateApp) HandleSerialize(ctx context.Context,
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -110,11 +118,11 @@ func (m *awsRestjson1_serializeOpCreateCampaign) HandleSerialize(ctx context.Con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.WriteCampaignRequest != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.WriteCampaignRequest != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentWriteCampaignRequest(input.WriteCampaignRequest, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -123,6 +131,14 @@ func (m *awsRestjson1_serializeOpCreateCampaign) HandleSerialize(ctx context.Con
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -183,11 +199,11 @@ func (m *awsRestjson1_serializeOpCreateEmailTemplate) HandleSerialize(ctx contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.EmailTemplateRequest != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.EmailTemplateRequest != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentEmailTemplateRequest(input.EmailTemplateRequest, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -196,6 +212,14 @@ func (m *awsRestjson1_serializeOpCreateEmailTemplate) HandleSerialize(ctx contex
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -256,11 +280,11 @@ func (m *awsRestjson1_serializeOpCreateExportJob) HandleSerialize(ctx context.Co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.ExportJobRequest != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.ExportJobRequest != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentExportJobRequest(input.ExportJobRequest, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -269,6 +293,14 @@ func (m *awsRestjson1_serializeOpCreateExportJob) HandleSerialize(ctx context.Co
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -329,11 +361,11 @@ func (m *awsRestjson1_serializeOpCreateImportJob) HandleSerialize(ctx context.Co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.ImportJobRequest != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.ImportJobRequest != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentImportJobRequest(input.ImportJobRequest, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -342,6 +374,14 @@ func (m *awsRestjson1_serializeOpCreateImportJob) HandleSerialize(ctx context.Co
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -402,11 +442,11 @@ func (m *awsRestjson1_serializeOpCreateInAppTemplate) HandleSerialize(ctx contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.InAppTemplateRequest != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.InAppTemplateRequest != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentInAppTemplateRequest(input.InAppTemplateRequest, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -415,6 +455,14 @@ func (m *awsRestjson1_serializeOpCreateInAppTemplate) HandleSerialize(ctx contex
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -475,11 +523,11 @@ func (m *awsRestjson1_serializeOpCreateJourney) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.WriteJourneyRequest != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.WriteJourneyRequest != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentWriteJourneyRequest(input.WriteJourneyRequest, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -488,6 +536,14 @@ func (m *awsRestjson1_serializeOpCreateJourney) HandleSerialize(ctx context.Cont
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -548,11 +604,11 @@ func (m *awsRestjson1_serializeOpCreatePushTemplate) HandleSerialize(ctx context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.PushNotificationTemplateRequest != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.PushNotificationTemplateRequest != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentPushNotificationTemplateRequest(input.PushNotificationTemplateRequest, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -561,6 +617,14 @@ func (m *awsRestjson1_serializeOpCreatePushTemplate) HandleSerialize(ctx context
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -617,11 +681,11 @@ func (m *awsRestjson1_serializeOpCreateRecommenderConfiguration) HandleSerialize
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.CreateRecommenderConfiguration != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.CreateRecommenderConfiguration != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentCreateRecommenderConfigurationShape(input.CreateRecommenderConfiguration, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -630,6 +694,14 @@ func (m *awsRestjson1_serializeOpCreateRecommenderConfiguration) HandleSerialize
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -681,11 +753,11 @@ func (m *awsRestjson1_serializeOpCreateSegment) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.WriteSegmentRequest != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.WriteSegmentRequest != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentWriteSegmentRequest(input.WriteSegmentRequest, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -694,6 +766,14 @@ func (m *awsRestjson1_serializeOpCreateSegment) HandleSerialize(ctx context.Cont
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -754,11 +834,11 @@ func (m *awsRestjson1_serializeOpCreateSmsTemplate) HandleSerialize(ctx context.
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.SMSTemplateRequest != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.SMSTemplateRequest != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentSMSTemplateRequest(input.SMSTemplateRequest, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -767,6 +847,14 @@ func (m *awsRestjson1_serializeOpCreateSmsTemplate) HandleSerialize(ctx context.
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -827,11 +915,11 @@ func (m *awsRestjson1_serializeOpCreateVoiceTemplate) HandleSerialize(ctx contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.VoiceTemplateRequest != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.VoiceTemplateRequest != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentVoiceTemplateRequest(input.VoiceTemplateRequest, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -840,6 +928,14 @@ func (m *awsRestjson1_serializeOpCreateVoiceTemplate) HandleSerialize(ctx contex
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -5606,11 +5702,11 @@ func (m *awsRestjson1_serializeOpPhoneNumberValidate) HandleSerialize(ctx contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.NumberValidateRequest != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.NumberValidateRequest != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentNumberValidateRequest(input.NumberValidateRequest, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -5619,6 +5715,14 @@ func (m *awsRestjson1_serializeOpPhoneNumberValidate) HandleSerialize(ctx contex
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -5670,11 +5774,11 @@ func (m *awsRestjson1_serializeOpPutEvents) HandleSerialize(ctx context.Context,
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.EventsRequest != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.EventsRequest != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentEventsRequest(input.EventsRequest, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -5683,6 +5787,14 @@ func (m *awsRestjson1_serializeOpPutEvents) HandleSerialize(ctx context.Context,
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -5743,11 +5855,11 @@ func (m *awsRestjson1_serializeOpPutEventStream) HandleSerialize(ctx context.Con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.WriteEventStream != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.WriteEventStream != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentWriteEventStream(input.WriteEventStream, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -5756,6 +5868,14 @@ func (m *awsRestjson1_serializeOpPutEventStream) HandleSerialize(ctx context.Con
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -5816,11 +5936,11 @@ func (m *awsRestjson1_serializeOpRemoveAttributes) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.UpdateAttributesRequest != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.UpdateAttributesRequest != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentUpdateAttributesRequest(input.UpdateAttributesRequest, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -5829,6 +5949,14 @@ func (m *awsRestjson1_serializeOpRemoveAttributes) HandleSerialize(ctx context.C
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -5898,11 +6026,11 @@ func (m *awsRestjson1_serializeOpSendMessages) HandleSerialize(ctx context.Conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.MessageRequest != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.MessageRequest != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentMessageRequest(input.MessageRequest, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -5911,6 +6039,14 @@ func (m *awsRestjson1_serializeOpSendMessages) HandleSerialize(ctx context.Conte
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -5971,11 +6107,11 @@ func (m *awsRestjson1_serializeOpSendUsersMessages) HandleSerialize(ctx context.
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.SendUsersMessageRequest != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.SendUsersMessageRequest != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentSendUsersMessageRequest(input.SendUsersMessageRequest, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -5984,6 +6120,14 @@ func (m *awsRestjson1_serializeOpSendUsersMessages) HandleSerialize(ctx context.
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -6044,11 +6188,11 @@ func (m *awsRestjson1_serializeOpTagResource) HandleSerialize(ctx context.Contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.TagsModel != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.TagsModel != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentTagsModel(input.TagsModel, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -6057,6 +6201,14 @@ func (m *awsRestjson1_serializeOpTagResource) HandleSerialize(ctx context.Contex
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -6181,11 +6333,11 @@ func (m *awsRestjson1_serializeOpUpdateAdmChannel) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.ADMChannelRequest != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.ADMChannelRequest != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentADMChannelRequest(input.ADMChannelRequest, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -6194,6 +6346,14 @@ func (m *awsRestjson1_serializeOpUpdateAdmChannel) HandleSerialize(ctx context.C
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -6254,11 +6414,11 @@ func (m *awsRestjson1_serializeOpUpdateApnsChannel) HandleSerialize(ctx context.
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.APNSChannelRequest != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.APNSChannelRequest != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentAPNSChannelRequest(input.APNSChannelRequest, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -6267,6 +6427,14 @@ func (m *awsRestjson1_serializeOpUpdateApnsChannel) HandleSerialize(ctx context.
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -6327,11 +6495,11 @@ func (m *awsRestjson1_serializeOpUpdateApnsSandboxChannel) HandleSerialize(ctx c
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.APNSSandboxChannelRequest != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.APNSSandboxChannelRequest != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentAPNSSandboxChannelRequest(input.APNSSandboxChannelRequest, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -6340,6 +6508,14 @@ func (m *awsRestjson1_serializeOpUpdateApnsSandboxChannel) HandleSerialize(ctx c
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -6400,11 +6576,11 @@ func (m *awsRestjson1_serializeOpUpdateApnsVoipChannel) HandleSerialize(ctx cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.APNSVoipChannelRequest != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.APNSVoipChannelRequest != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentAPNSVoipChannelRequest(input.APNSVoipChannelRequest, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -6413,6 +6589,14 @@ func (m *awsRestjson1_serializeOpUpdateApnsVoipChannel) HandleSerialize(ctx cont
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -6473,11 +6657,11 @@ func (m *awsRestjson1_serializeOpUpdateApnsVoipSandboxChannel) HandleSerialize(c
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.APNSVoipSandboxChannelRequest != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.APNSVoipSandboxChannelRequest != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentAPNSVoipSandboxChannelRequest(input.APNSVoipSandboxChannelRequest, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -6486,6 +6670,14 @@ func (m *awsRestjson1_serializeOpUpdateApnsVoipSandboxChannel) HandleSerialize(c
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -6546,11 +6738,11 @@ func (m *awsRestjson1_serializeOpUpdateApplicationSettings) HandleSerialize(ctx 
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.WriteApplicationSettingsRequest != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.WriteApplicationSettingsRequest != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentWriteApplicationSettingsRequest(input.WriteApplicationSettingsRequest, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -6559,6 +6751,14 @@ func (m *awsRestjson1_serializeOpUpdateApplicationSettings) HandleSerialize(ctx 
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -6619,11 +6819,11 @@ func (m *awsRestjson1_serializeOpUpdateBaiduChannel) HandleSerialize(ctx context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.BaiduChannelRequest != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.BaiduChannelRequest != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentBaiduChannelRequest(input.BaiduChannelRequest, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -6632,6 +6832,14 @@ func (m *awsRestjson1_serializeOpUpdateBaiduChannel) HandleSerialize(ctx context
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -6692,11 +6900,11 @@ func (m *awsRestjson1_serializeOpUpdateCampaign) HandleSerialize(ctx context.Con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.WriteCampaignRequest != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.WriteCampaignRequest != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentWriteCampaignRequest(input.WriteCampaignRequest, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -6705,6 +6913,14 @@ func (m *awsRestjson1_serializeOpUpdateCampaign) HandleSerialize(ctx context.Con
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -6774,11 +6990,11 @@ func (m *awsRestjson1_serializeOpUpdateEmailChannel) HandleSerialize(ctx context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.EmailChannelRequest != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.EmailChannelRequest != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentEmailChannelRequest(input.EmailChannelRequest, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -6787,6 +7003,14 @@ func (m *awsRestjson1_serializeOpUpdateEmailChannel) HandleSerialize(ctx context
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -6847,11 +7071,11 @@ func (m *awsRestjson1_serializeOpUpdateEmailTemplate) HandleSerialize(ctx contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.EmailTemplateRequest != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.EmailTemplateRequest != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentEmailTemplateRequest(input.EmailTemplateRequest, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -6860,6 +7084,14 @@ func (m *awsRestjson1_serializeOpUpdateEmailTemplate) HandleSerialize(ctx contex
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -6928,11 +7160,11 @@ func (m *awsRestjson1_serializeOpUpdateEndpoint) HandleSerialize(ctx context.Con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.EndpointRequest != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.EndpointRequest != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentEndpointRequest(input.EndpointRequest, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -6941,6 +7173,14 @@ func (m *awsRestjson1_serializeOpUpdateEndpoint) HandleSerialize(ctx context.Con
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -7010,11 +7250,11 @@ func (m *awsRestjson1_serializeOpUpdateEndpointsBatch) HandleSerialize(ctx conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.EndpointBatchRequest != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.EndpointBatchRequest != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentEndpointBatchRequest(input.EndpointBatchRequest, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -7023,6 +7263,14 @@ func (m *awsRestjson1_serializeOpUpdateEndpointsBatch) HandleSerialize(ctx conte
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -7083,11 +7331,11 @@ func (m *awsRestjson1_serializeOpUpdateGcmChannel) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.GCMChannelRequest != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.GCMChannelRequest != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentGCMChannelRequest(input.GCMChannelRequest, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -7096,6 +7344,14 @@ func (m *awsRestjson1_serializeOpUpdateGcmChannel) HandleSerialize(ctx context.C
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -7156,11 +7412,11 @@ func (m *awsRestjson1_serializeOpUpdateInAppTemplate) HandleSerialize(ctx contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.InAppTemplateRequest != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.InAppTemplateRequest != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentInAppTemplateRequest(input.InAppTemplateRequest, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -7169,6 +7425,14 @@ func (m *awsRestjson1_serializeOpUpdateInAppTemplate) HandleSerialize(ctx contex
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -7237,11 +7501,11 @@ func (m *awsRestjson1_serializeOpUpdateJourney) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.WriteJourneyRequest != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.WriteJourneyRequest != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentWriteJourneyRequest(input.WriteJourneyRequest, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -7250,6 +7514,14 @@ func (m *awsRestjson1_serializeOpUpdateJourney) HandleSerialize(ctx context.Cont
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -7319,11 +7591,11 @@ func (m *awsRestjson1_serializeOpUpdateJourneyState) HandleSerialize(ctx context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.JourneyStateRequest != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.JourneyStateRequest != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentJourneyStateRequest(input.JourneyStateRequest, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -7332,6 +7604,14 @@ func (m *awsRestjson1_serializeOpUpdateJourneyState) HandleSerialize(ctx context
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -7401,11 +7681,11 @@ func (m *awsRestjson1_serializeOpUpdatePushTemplate) HandleSerialize(ctx context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.PushNotificationTemplateRequest != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.PushNotificationTemplateRequest != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentPushNotificationTemplateRequest(input.PushNotificationTemplateRequest, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -7414,6 +7694,14 @@ func (m *awsRestjson1_serializeOpUpdatePushTemplate) HandleSerialize(ctx context
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -7482,11 +7770,11 @@ func (m *awsRestjson1_serializeOpUpdateRecommenderConfiguration) HandleSerialize
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.UpdateRecommenderConfiguration != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.UpdateRecommenderConfiguration != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentUpdateRecommenderConfigurationShape(input.UpdateRecommenderConfiguration, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -7495,6 +7783,14 @@ func (m *awsRestjson1_serializeOpUpdateRecommenderConfiguration) HandleSerialize
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -7555,11 +7851,11 @@ func (m *awsRestjson1_serializeOpUpdateSegment) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.WriteSegmentRequest != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.WriteSegmentRequest != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentWriteSegmentRequest(input.WriteSegmentRequest, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -7568,6 +7864,14 @@ func (m *awsRestjson1_serializeOpUpdateSegment) HandleSerialize(ctx context.Cont
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -7637,11 +7941,11 @@ func (m *awsRestjson1_serializeOpUpdateSmsChannel) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.SMSChannelRequest != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.SMSChannelRequest != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentSMSChannelRequest(input.SMSChannelRequest, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -7650,6 +7954,14 @@ func (m *awsRestjson1_serializeOpUpdateSmsChannel) HandleSerialize(ctx context.C
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -7710,11 +8022,11 @@ func (m *awsRestjson1_serializeOpUpdateSmsTemplate) HandleSerialize(ctx context.
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.SMSTemplateRequest != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.SMSTemplateRequest != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentSMSTemplateRequest(input.SMSTemplateRequest, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -7723,6 +8035,14 @@ func (m *awsRestjson1_serializeOpUpdateSmsTemplate) HandleSerialize(ctx context.
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -7791,11 +8111,11 @@ func (m *awsRestjson1_serializeOpUpdateTemplateActiveVersion) HandleSerialize(ct
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.TemplateActiveVersionRequest != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.TemplateActiveVersionRequest != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentTemplateActiveVersionRequest(input.TemplateActiveVersionRequest, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -7804,6 +8124,14 @@ func (m *awsRestjson1_serializeOpUpdateTemplateActiveVersion) HandleSerialize(ct
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -7873,11 +8201,11 @@ func (m *awsRestjson1_serializeOpUpdateVoiceChannel) HandleSerialize(ctx context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.VoiceChannelRequest != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.VoiceChannelRequest != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentVoiceChannelRequest(input.VoiceChannelRequest, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -7886,6 +8214,14 @@ func (m *awsRestjson1_serializeOpUpdateVoiceChannel) HandleSerialize(ctx context
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -7946,11 +8282,11 @@ func (m *awsRestjson1_serializeOpUpdateVoiceTemplate) HandleSerialize(ctx contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.VoiceTemplateRequest != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.VoiceTemplateRequest != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentVoiceTemplateRequest(input.VoiceTemplateRequest, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -7959,6 +8295,14 @@ func (m *awsRestjson1_serializeOpUpdateVoiceTemplate) HandleSerialize(ctx contex
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {

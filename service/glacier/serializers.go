@@ -1272,11 +1272,11 @@ func (m *awsRestjson1_serializeOpInitiateJob) HandleSerialize(ctx context.Contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.JobParameters != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.JobParameters != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentJobParameters(input.JobParameters, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -1285,6 +1285,14 @@ func (m *awsRestjson1_serializeOpInitiateJob) HandleSerialize(ctx context.Contex
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -1431,11 +1439,11 @@ func (m *awsRestjson1_serializeOpInitiateVaultLock) HandleSerialize(ctx context.
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.Policy != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.Policy != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentVaultLockPolicy(input.Policy, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -1444,6 +1452,14 @@ func (m *awsRestjson1_serializeOpInitiateVaultLock) HandleSerialize(ctx context.
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -2179,11 +2195,11 @@ func (m *awsRestjson1_serializeOpSetVaultAccessPolicy) HandleSerialize(ctx conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.Policy != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.Policy != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentVaultAccessPolicy(input.Policy, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -2192,6 +2208,14 @@ func (m *awsRestjson1_serializeOpSetVaultAccessPolicy) HandleSerialize(ctx conte
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -2261,11 +2285,11 @@ func (m *awsRestjson1_serializeOpSetVaultNotifications) HandleSerialize(ctx cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.VaultNotificationConfig != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.VaultNotificationConfig != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentVaultNotificationConfig(input.VaultNotificationConfig, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -2274,6 +2298,14 @@ func (m *awsRestjson1_serializeOpSetVaultNotifications) HandleSerialize(ctx cont
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {

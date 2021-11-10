@@ -52,7 +52,7 @@ type AllQueryStringTypesInput struct {
 
 	QueryLong *int64
 
-	QueryParamsMapOfStrings map[string]string
+	QueryParamsMapOfStringList map[string][]string
 
 	QueryShort *int16
 
