@@ -1,7 +1,8 @@
 {
-    "id": "9a51012d-895e-4d99-86a4-294d67b469a1",
+    "id": "546c0660-c04c-4d20-a88b-09fcfc95c790",
     "type": "feature",
-    "description": "Add WaitForOutput waiter helper method to include output of API operation used to check resource state",
+    "collapse": true,
+    "description": "Waiters now have a `WaitForOutput` method, which can be used to retrieve the output of the successful wait operation. Thank you to [Andrew Haines](https://github.com/haines) for contributing this feature.",
     "modules": [
         "service/acm",
         "service/acmpca",
