@@ -319,12 +319,12 @@
                 "AlarmName": {
                     "target": "com.amazonaws.sagemaker#AlarmName",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The name of a CloudWatch alarm in your account.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This API is not supported.</p>"
+                "smithy.api#documentation": "<p>An Amazon CloudWatch alarm configured to monitor metrics on an endpoint.</p>"
             }
         },
         "com.amazonaws.sagemaker#AlarmList": {
@@ -2397,12 +2397,12 @@
                 "Alarms": {
                     "target": "com.amazonaws.sagemaker#AlarmList",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>List of CloudWatch alarms in your account that are configured to monitor metrics on an endpoint.\n            If any alarms are tripped during a deployment, SageMaker rolls back the deployment.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Currently, the <code>AutoRollbackConfig</code> API is not supported.</p>"
+                "smithy.api#documentation": "<p>Automatic rollback configuration for handling endpoint deployment failures and recovery.</p>"
             }
         },
         "com.amazonaws.sagemaker#AwsManagedHumanLoopRequestSource": {
@@ -2605,25 +2605,25 @@
                 "TrafficRoutingConfiguration": {
                     "target": "com.amazonaws.sagemaker#TrafficRoutingConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>Defines the traffic routing strategy to shift traffic from the old fleet to the new fleet\n            during an endpoint deployment.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "TerminationWaitInSeconds": {
                     "target": "com.amazonaws.sagemaker#TerminationWaitInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Additional waiting time in seconds after the completion of an endpoint deployment\n            before terminating the old endpoint fleet. Default is 0.</p>"
                     }
                 },
                 "MaximumExecutionTimeoutInSeconds": {
                     "target": "com.amazonaws.sagemaker#MaximumExecutionTimeoutInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Maximum execution timeout for the deployment. Note that the timeout value should be larger\n        than the total waiting time specified in <code>TerminationWaitInSeconds</code> and <code>WaitIntervalInSeconds</code>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Currently, the <code>BlueGreenUpdatePolicy</code> API is not supported.</p>"
+                "smithy.api#documentation": "<p>Update policy for a blue/green deployment. If this update policy is specified, SageMaker\n            creates a new fleet during the deployment while maintaining the old fleet. SageMaker flips\n            traffic to the new fleet according to the specified traffic routing configuration. Only\n            one update policy should be used in the deployment configuration. If no update policy is\n            specified, SageMaker uses a blue/green deployment strategy with all at once traffic shifting\n            by default.</p>"
             }
         },
         "com.amazonaws.sagemaker#Boolean": {
@@ -2852,20 +2852,20 @@
                 "Type": {
                     "target": "com.amazonaws.sagemaker#CapacitySizeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>This API is not supported.</p>",
+                        "smithy.api#documentation": "<p>Specifies the endpoint capacity type.</p>\n        <ul>\n            <li>\n               <p>\n                  <code>INSTANCE_COUNT</code>: The endpoint activates based on\n                the number of instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CAPACITY_PERCENT</code>: The endpoint activates based on\n            the specified percentage of capacity.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "Value": {
                     "target": "com.amazonaws.sagemaker#CapacitySizeValue",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>Defines the capacity size, either as a number of instances or a capacity percentage.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Currently, the <code>CapacitySize</code> API is not supported.</p>"
+                "smithy.api#documentation": "<p>Specifies the endpoint capacity to activate for production.</p>"
             }
         },
         "com.amazonaws.sagemaker#CapacitySizeType": {
@@ -5157,6 +5157,9 @@
                         "smithy.api#documentation": "<p>The name of an endpoint configuration. For more information, see <a>CreateEndpointConfig</a>. </p>",
                         "smithy.api#required": {}
                     }
+                },
+                "DeploymentConfig": {
+                    "target": "com.amazonaws.sagemaker#DeploymentConfig"
                 },
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
@@ -9452,19 +9455,19 @@
                 "BlueGreenUpdatePolicy": {
                     "target": "com.amazonaws.sagemaker#BlueGreenUpdatePolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>Update policy for a blue/green deployment. If this update policy is specified, SageMaker\n            creates a new fleet during the deployment while maintaining the old fleet. SageMaker flips\n            traffic to the new fleet according to the specified traffic routing configuration. Only\n            one update policy should be used in the deployment configuration. If no update policy is\n            specified, SageMaker uses a blue/green deployment strategy with all at once traffic shifting\n            by default.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "AutoRollbackConfiguration": {
                     "target": "com.amazonaws.sagemaker#AutoRollbackConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Automatic rollback configuration for handling endpoint deployment failures and recovery.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Currently, the <code>DeploymentConfig</code> API is not supported.</p>"
+                "smithy.api#documentation": "<p>The deployment configuration for an endpoint, which contains the desired deployment\n            strategy and rollback configurations.</p>"
             }
         },
         "com.amazonaws.sagemaker#DeregisterDevices": {
@@ -10721,6 +10724,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The response from the last list when returning a list large enough to need tokening.</p>"
                     }
+                },
+                "AgentVersion": {
+                    "target": "com.amazonaws.sagemaker#EdgeVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Edge Manager agent version.</p>"
+                    }
                 }
             }
         },
@@ -11231,6 +11240,12 @@
                     "target": "com.amazonaws.sagemaker#AsyncInferenceConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>Returns the description of an endpoint configuration created \n            using the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpointConfig.html\">\n               <code>CreateEndpointConfig</code>\n            </a> API.</p>"
+                    }
+                },
+                "PendingDeploymentSummary": {
+                    "target": "com.amazonaws.sagemaker#PendingDeploymentSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the summary of an in-progress deployment. This field is only returned when the\n            endpoint is creating or updating with a new endpoint configuration.</p>"
                     }
                 }
             }
@@ -15115,6 +15130,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Models on the device.</p>"
                     }
+                },
+                "AgentVersion": {
+                    "target": "com.amazonaws.sagemaker#EdgeVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Edge Manager agent version.</p>"
+                    }
                 }
             },
             "traits": {
@@ -17690,14 +17711,14 @@
                 "TaskTimeLimitInSeconds": {
                     "target": "com.amazonaws.sagemaker#TaskTimeLimitInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of time that a worker has to complete a task. </p>\n        <p>If you create a custom labeling job, the maximum value for this parameter is 8 hours\n            (28,800 seconds).</p>\n        <p>If you create a labeling job using a <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html\">built-in task type</a> the maximum\n            for this parameter depends on the task type you use:</p>\n        <ul>\n            <li>\n                <p>For <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-label-images.html\">image</a> and \n                    <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-label-text.html\">text</a> labeling jobs,\n                    the maximum is 8 hours (28,800 seconds).</p>\n            </li>\n            <li>\n                <p>For <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud.html\">3D point cloud</a> and <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-video.html\">video frame</a> labeling jobs,\n                    the maximum is 7 days (604,800 seconds). If you want to change these limits,\n                    contact Amazon Web Services Support.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The amount of time that a worker has to complete a task. </p>\n        <p>If you create a custom labeling job, the maximum value for this parameter is 8 hours\n            (28,800 seconds).</p>\n        <p>If you create a labeling job using a <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html\">built-in task type</a> the maximum\n            for this parameter depends on the task type you use:</p>\n        <ul>\n            <li>\n                <p>For <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-label-images.html\">image</a> and \n                    <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-label-text.html\">text</a> labeling jobs,\n                    the maximum is 8 hours (28,800 seconds).</p>\n            </li>\n            <li>\n                <p>For <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud.html\">3D point cloud</a> and <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-video.html\">video frame</a> labeling jobs, the maximum is 30 days (2952,000 seconds) for non-AL mode. For most users, the maximum is also 30 days. If you want to change these limits,\n                    contact Amazon Web Services Support.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "TaskAvailabilityLifetimeInSeconds": {
                     "target": "com.amazonaws.sagemaker#TaskAvailabilityLifetimeInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The length of time that a task remains available for labeling by human workers. The\n            default and maximum values for this parameter depend on the type of workforce you\n            use.</p>\n        <ul>\n            <li>\n                <p>If you choose the Amazon Mechanical Turk workforce, the maximum is 12 hours (43,200 seconds).\n                    The default is 6 hours (21,600 seconds).</p>\n            </li>\n            <li>\n                <p>If you choose a private or vendor workforce, the default value is 10 days\n                    (864,000 seconds). For most users, the maximum is also 10 days. If you want to\n                    change this limit, contact Amazon Web Services Support.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The length of time that a task remains available for labeling by human workers. The\n            default and maximum values for this parameter depend on the type of workforce you\n            use.</p>\n        <ul>\n            <li>\n                <p>If you choose the Amazon Mechanical Turk workforce, the maximum is 12 hours (43,200 seconds).\n                    The default is 6 hours (21,600 seconds).</p>\n            </li>\n            <li>\n                <p>If you choose a private or vendor workforce, the default value is 30 days (2592,000 seconds) for non-AL mode. For most users, the maximum is also 30 days. If you want to\n                    change this limit, contact Amazon Web Services Support.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "MaxConcurrentTaskCount": {
@@ -28641,6 +28662,107 @@
                 "target": "com.amazonaws.sagemaker#Parent"
             }
         },
+        "com.amazonaws.sagemaker#PendingDeploymentSummary": {
+            "type": "structure",
+            "members": {
+                "EndpointConfigName": {
+                    "target": "com.amazonaws.sagemaker#EndpointConfigName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the endpoint configuration used in the deployment. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProductionVariants": {
+                    "target": "com.amazonaws.sagemaker#PendingProductionVariantSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of <code>PendingProductionVariantSummary</code> objects.</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start time of the deployment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary of an in-progress deployment when an endpoint is creating or\n            updating with a new endpoint configuration.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#PendingProductionVariantSummary": {
+            "type": "structure",
+            "members": {
+                "VariantName": {
+                    "target": "com.amazonaws.sagemaker#VariantName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the variant.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeployedImages": {
+                    "target": "com.amazonaws.sagemaker#DeployedImages",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of <code>DeployedImage</code> objects that specify the Amazon EC2\n            Container Registry paths of the inference images deployed on instances of this\n            <code>ProductionVariant</code>.</p>"
+                    }
+                },
+                "CurrentWeight": {
+                    "target": "com.amazonaws.sagemaker#VariantWeight",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The weight associated with the variant.</p>"
+                    }
+                },
+                "DesiredWeight": {
+                    "target": "com.amazonaws.sagemaker#VariantWeight",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The requested weight for the variant in this deployment, as specified in the endpoint configuration\n            for the endpoint. The value is taken from the request to the <code>\n               <a>CreateEndpointConfig</a>\n            </code> operation.</p>"
+                    }
+                },
+                "CurrentInstanceCount": {
+                    "target": "com.amazonaws.sagemaker#TaskCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of instances associated with the variant.</p>"
+                    }
+                },
+                "DesiredInstanceCount": {
+                    "target": "com.amazonaws.sagemaker#TaskCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of instances requested in this deployment, as specified in the endpoint configuration\n            for the endpoint. The value is taken from the request to the <code>\n               <a>CreateEndpointConfig</a>\n            </code> operation.</p>"
+                    }
+                },
+                "InstanceType": {
+                    "target": "com.amazonaws.sagemaker#ProductionVariantInstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of instances associated with the variant.</p>"
+                    }
+                },
+                "AcceleratorType": {
+                    "target": "com.amazonaws.sagemaker#ProductionVariantAcceleratorType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size of the Elastic Inference (EI) instance to use for the production variant. EI\n            instances provide on-demand GPU computing for inference. For more information, see\n            <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html\">Using Elastic\n                Inference in Amazon SageMaker</a>.</p>"
+                    }
+                },
+                "VariantStatus": {
+                    "target": "com.amazonaws.sagemaker#ProductionVariantStatusList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint variant status which describes the current deployment stage status or operational status.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The production variant summary for a deployment when an endpoint is\n            creating or updating with the <code>\n               <a>CreateEndpoint</a>\n            </code>\n            or <code>\n               <a>UpdateEndpoint</a>\n            </code> operations.\n            Describes the <code>VariantStatus </code>, weight and capacity for a production\n            variant associated with an endpoint.\n           </p>"
+            }
+        },
+        "com.amazonaws.sagemaker#PendingProductionVariantSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#PendingProductionVariantSummary"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
         "com.amazonaws.sagemaker#Pipeline": {
             "type": "structure",
             "members": {
@@ -30476,6 +30598,45 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#ProductionVariantStatus": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.sagemaker#VariantStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint variant status which describes the current deployment stage status or operational status.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>Creating</code>: Creating inference resources for the production variant.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Deleting</code>: Terminating inference resources for the production variant.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Updating</code>: Updating capacity for the production variant.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ActivatingTraffic</code>: Turning on traffic for the production variant.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Baking</code>: Waiting period to monitor the CloudWatch alarms in the\n                automatic rollback configuration.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.sagemaker#VariantStatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that describes the status of the production variant.</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start time of the current status change.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the status of the production variant.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ProductionVariantStatusList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#ProductionVariantStatus"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.sagemaker#ProductionVariantSummary": {
             "type": "structure",
             "members": {
@@ -30514,6 +30675,12 @@
                     "target": "com.amazonaws.sagemaker#TaskCount",
                     "traits": {
                         "smithy.api#documentation": "<p>The number of instances requested in the\n                <code>UpdateEndpointWeightsAndCapacities</code> request. </p>"
+                    }
+                },
+                "VariantStatus": {
+                    "target": "com.amazonaws.sagemaker#ProductionVariantStatusList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint variant status which describes the current deployment stage status or operational status.</p>"
                     }
                 }
             },
@@ -35085,26 +35252,32 @@
                 "Type": {
                     "target": "com.amazonaws.sagemaker#TrafficRoutingConfigType",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>Traffic routing strategy type.</p>\n        <ul>\n            <li>\n               <p>\n                  <code>ALL_AT_ONCE</code>: Endpoint traffic shifts to the new fleet\n                in a single step.\n            </p>\n            </li>\n            <li>\n               <p>\n                  <code>CANARY</code>: Endpoint traffic shifts to the new fleet\n                in two steps. The first step is the canary, which is a small portion of the traffic. The\n                second step is the remainder of the traffic.\n            </p>\n            </li>\n            <li>\n               <p>\n                  <code>LINEAR</code>: Endpoint traffic shifts to the new fleet in\n                n steps of a configurable size.\n            </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "WaitIntervalInSeconds": {
                     "target": "com.amazonaws.sagemaker#WaitIntervalInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The waiting time (in seconds) between incremental steps to turn on traffic on the\n            new endpoint fleet.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "CanarySize": {
                     "target": "com.amazonaws.sagemaker#CapacitySize",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Batch size for the first step to turn on traffic on the new endpoint fleet. <code>Value</code> must be less than\n        or equal to 50% of the variant's total instance count.</p>"
+                    }
+                },
+                "LinearStepSize": {
+                    "target": "com.amazonaws.sagemaker#CapacitySize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Batch size for each step to turn on traffic on the new endpoint fleet. <code>Value</code> must be\n            10-50% of the variant's total instance count.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Currently, the <code>TrafficRoutingConfig</code> API is not supported.</p>"
+                "smithy.api#documentation": "<p>Defines the traffic routing strategy during an endpoint deployment to shift traffic from the\n            old fleet to the new fleet.</p>"
             }
         },
         "com.amazonaws.sagemaker#TrafficRoutingConfigType": {
@@ -35118,6 +35291,10 @@
                     {
                         "value": "CANARY",
                         "name": "CANARY"
+                    },
+                    {
+                        "value": "LINEAR",
+                        "name": "LINEAR"
                     }
                 ]
             }
@@ -37757,7 +37934,13 @@
                 "DeploymentConfig": {
                     "target": "com.amazonaws.sagemaker#DeploymentConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The deployment configuration for the endpoint to be updated.</p>"
+                        "smithy.api#documentation": "<p>The deployment configuration for an endpoint, which contains the desired deployment strategy and rollback configurations.</p>"
+                    }
+                },
+                "RetainDeploymentConfig": {
+                    "target": "com.amazonaws.sagemaker#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to reuse the last deployment configuration. The default value is\n            false (the configuration is not reused).</p>"
                     }
                 }
             }
@@ -39006,6 +39189,42 @@
                         "name": "DataCaptureConfig"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.sagemaker#VariantStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Creating",
+                        "name": "CREATING"
+                    },
+                    {
+                        "value": "Updating",
+                        "name": "UPDATING"
+                    },
+                    {
+                        "value": "Deleting",
+                        "name": "DELETING"
+                    },
+                    {
+                        "value": "ActivatingTraffic",
+                        "name": "ACTIVATING_TRAFFIC"
+                    },
+                    {
+                        "value": "Baking",
+                        "name": "BAKING"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.sagemaker#VariantStatusMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                }
             }
         },
         "com.amazonaws.sagemaker#VariantWeight": {

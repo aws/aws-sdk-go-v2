@@ -9256,6 +9256,9 @@
                 }
             }
         },
+        "com.amazonaws.ec2#CoreNetworkArn": {
+            "type": "string"
+        },
         "com.amazonaws.ec2#CpuManufacturer": {
             "type": "string",
             "traits": {
@@ -12227,6 +12230,9 @@
                         "smithy.api#documentation": "<p>The ID of a VPC peering connection.</p>",
                         "smithy.api#xmlName": "vpcPeeringConnectionId"
                     }
+                },
+                "CoreNetworkArn": {
+                    "target": "com.amazonaws.ec2#CoreNetworkArn"
                 }
             }
         },
@@ -33661,6 +33667,10 @@
                     {
                         "value": "launch",
                         "name": "LAUNCH"
+                    },
+                    {
+                        "value": "launch-before-terminate",
+                        "name": "LAUNCH_BEFORE_TERMINATE"
                     }
                 ]
             }
@@ -33681,8 +33691,16 @@
                     "target": "com.amazonaws.ec2#FleetReplacementStrategy",
                     "traits": {
                         "aws.protocols#ec2QueryName": "ReplacementStrategy",
-                        "smithy.api#documentation": "<p>To allow EC2 Fleet to launch a replacement Spot Instance when an instance rebalance\n         notification is emitted for an existing Spot Instance in the fleet, specify\n            <code>launch</code>. Only available for fleets of type <code>maintain</code>.</p>\n         <note>\n            <p>When a replacement instance is launched, the instance marked for rebalance is not\n            automatically terminated. You can terminate it, or you can leave it running. You are charged for both instances while they are running.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The replacement strategy to use. Only available for fleets of type\n         <code>maintain</code>.</p>\n         <p>\n            <code>launch</code> - EC2 Fleet launches a new replacement Spot Instance when a\n         rebalance notification is emitted for an existing Spot Instance in the fleet. EC2 Fleet\n         does not terminate the instances that receive a rebalance notification. You can terminate\n         the old instances, or you can leave them running. You are charged for all instances while\n         they are running. </p>\n         <p>\n            <code>launch-before-terminate</code> - EC2 Fleet launches a new replacement Spot\n         Instance when a rebalance notification is emitted for an existing Spot Instance in the\n         fleet, and then, after a delay that you specify (in <code>TerminationDelay</code>),\n         terminates the instances that received a rebalance notification.</p>",
                         "smithy.api#xmlName": "replacementStrategy"
+                    }
+                },
+                "TerminationDelay": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TerminationDelay",
+                        "smithy.api#documentation": "<p>The amount of time (in seconds) that Amazon EC2 waits before terminating the old Spot\n         Instance after launching a new replacement Spot Instance.</p>",
+                        "smithy.api#xmlName": "terminationDelay"
                     }
                 }
             },
@@ -33696,12 +33714,18 @@
                 "ReplacementStrategy": {
                     "target": "com.amazonaws.ec2#FleetReplacementStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The replacement strategy to use. Only available for fleets of type\n         <code>maintain</code>.</p>\n         <p>To allow EC2 Fleet to launch a replacement Spot Instance when an instance rebalance\n         notification is emitted for an existing Spot Instance in the fleet, specify\n         <code>launch</code>. You must specify a value, otherwise you get an error.</p>\n         <note>\n            <p>When a replacement instance is launched, the instance marked for rebalance is not\n            automatically terminated. You can terminate it, or you can leave it running. You are charged for all instances while they are running.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The replacement strategy to use. Only available for fleets of type\n         <code>maintain</code>.</p>\n         <p>\n            <code>launch</code> - EC2 Fleet launches a replacement Spot Instance when a rebalance\n         notification is emitted for an existing Spot Instance in the fleet. EC2 Fleet does not\n         terminate the instances that receive a rebalance notification. You can terminate the old\n         instances, or you can leave them running. You are charged for all instances while they are\n         running. </p>\n         <p>\n            <code>launch-before-terminate</code> - EC2 Fleet launches a replacement Spot Instance\n         when a rebalance notification is emitted for an existing Spot Instance in the fleet, and\n         then, after a delay that you specify (in <code>TerminationDelay</code>), terminates the\n         instances that received a rebalance notification.</p>"
+                    }
+                },
+                "TerminationDelay": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of time (in seconds) that Amazon EC2 waits before terminating the old Spot\n         Instance after launching a new replacement Spot Instance.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Spot Instance replacement strategy to use when Amazon EC2 emits a signal that your\n         Spot Instance is at an elevated risk of being interrupted. For more information, see\n         <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-configuration-strategies.html#ec2-fleet-capacity-rebalance\">Capacity rebalancing</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>The Spot Instance replacement strategy to use when Amazon EC2 emits a rebalance\n         notification signal that your Spot Instance is at an elevated risk of being interrupted.\n         For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-configuration-strategies.html#ec2-fleet-capacity-rebalance\">Capacity rebalancing</a> in the <i>Amazon EC2 User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#FleetSpotMaintenanceStrategies": {
@@ -34356,6 +34380,29 @@
                     "min": 200,
                     "max": 1000
                 }
+            }
+        },
+        "com.amazonaws.ec2#GatewayAssociationState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "associated",
+                        "name": "associated"
+                    },
+                    {
+                        "value": "not-associated",
+                        "name": "not_associated"
+                    },
+                    {
+                        "value": "associating",
+                        "name": "associating"
+                    },
+                    {
+                        "value": "disassociating",
+                        "name": "disassociating"
+                    }
+                ]
             }
         },
         "com.amazonaws.ec2#GatewayType": {
@@ -40911,6 +40958,14 @@
                         "aws.protocols#ec2QueryName": "CarrierIp",
                         "smithy.api#documentation": "<p>The carrier IP address associated with the network interface.</p>",
                         "smithy.api#xmlName": "carrierIp"
+                    }
+                },
+                "CustomerOwnedIp": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CustomerOwnedIp",
+                        "smithy.api#documentation": "<p>The customer-owned IP address associated with the network interface.</p>",
+                        "smithy.api#xmlName": "customerOwnedIp"
                     }
                 },
                 "IpOwnerId": {
@@ -54884,7 +54939,7 @@
                 "MultiRegion": {
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<para>Reserved.</para>"
+                        "smithy.api#documentation": "<p>Reserved.</p>"
                     }
                 }
             }
@@ -56795,6 +56850,9 @@
                         "smithy.api#documentation": "<p>The ID of a VPC peering connection.</p>",
                         "smithy.api#xmlName": "vpcPeeringConnectionId"
                     }
+                },
+                "CoreNetworkArn": {
+                    "target": "com.amazonaws.ec2#CoreNetworkArn"
                 }
             }
         },
@@ -56931,6 +56989,10 @@
                     {
                         "value": "launch",
                         "name": "LAUNCH"
+                    },
+                    {
+                        "value": "launch-before-terminate",
+                        "name": "LAUNCH_BEFORE_TERMINATE"
                     }
                 ]
             }
@@ -59945,6 +60007,13 @@
                         "aws.protocols#ec2QueryName": "VpcPeeringConnectionId",
                         "smithy.api#documentation": "<p>The ID of a VPC peering connection.</p>",
                         "smithy.api#xmlName": "vpcPeeringConnectionId"
+                    }
+                },
+                "CoreNetworkArn": {
+                    "target": "com.amazonaws.ec2#CoreNetworkArn",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CoreNetworkArn",
+                        "smithy.api#xmlName": "coreNetworkArn"
                     }
                 }
             },
@@ -62975,8 +63044,16 @@
                     "target": "com.amazonaws.ec2#ReplacementStrategy",
                     "traits": {
                         "aws.protocols#ec2QueryName": "ReplacementStrategy",
-                        "smithy.api#documentation": "<p>The replacement strategy to use. Only available for fleets of type\n                <code>maintain</code>. You must specify a value, otherwise you get an error.</p>\n        <p>To allow Spot Fleet to launch a replacement Spot Instance when an instance rebalance\n            notification is emitted for a Spot Instance in the fleet, specify\n            <code>launch</code>.</p>\n        <note>\n            <p>When a replacement instance is launched, the instance marked for rebalance is not\n                automatically terminated. You can terminate it, or you can leave it running. You are\n                charged for all instances while they are running.</p>\n        </note>",
+                        "smithy.api#documentation": "<p>The replacement strategy to use. Only available for fleets of type\n            <code>maintain</code>.</p>\n        <p>\n            <code>launch</code> - Spot Fleet launches a new replacement Spot Instance when a\n            rebalance notification is emitted for an existing Spot Instance in the fleet. Spot Fleet\n            does not terminate the instances that receive a rebalance notification. You can\n            terminate the old instances, or you can leave them running. You are charged for all\n            instances while they are running. </p>\n        <p>\n            <code>launch-before-terminate</code> - Spot Fleet launches a new replacement Spot\n            Instance when a rebalance notification is emitted for an existing Spot Instance in the\n            fleet, and then, after a delay that you specify (in <code>TerminationDelay</code>),\n            terminates the instances that received a rebalance notification.</p>",
                         "smithy.api#xmlName": "replacementStrategy"
+                    }
+                },
+                "TerminationDelay": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TerminationDelay",
+                        "smithy.api#documentation": "<p>The amount of time (in seconds) that Amazon EC2 waits before terminating the old Spot\n            Instance after launching a new replacement Spot Instance.</p>",
+                        "smithy.api#xmlName": "terminationDelay"
                     }
                 }
             },
@@ -71717,7 +71794,7 @@
                     }
                 },
                 "GatewayAssociationState": {
-                    "target": "com.amazonaws.ec2#String",
+                    "target": "com.amazonaws.ec2#GatewayAssociationState",
                     "traits": {
                         "aws.protocols#ec2QueryName": "GatewayAssociationState",
                         "smithy.api#documentation": "<p>The current state of the gateway association.</p>",
