@@ -14,13 +14,13 @@ import (
 	"time"
 )
 
-// List backups associated with an AWS account. To list backups for a given table,
-// specify TableName. ListBackups returns a paginated list of results with at most
-// 1 MB worth of items in a page. You can also specify a maximum number of entries
-// to be returned in a page. In the request, start time is inclusive, but end time
-// is exclusive. Note that these boundaries are for the time at which the original
-// backup was requested. You can call ListBackups a maximum of five times per
-// second.
+// List backups associated with an Amazon Web Services account. To list backups for
+// a given table, specify TableName. ListBackups returns a paginated list of
+// results with at most 1 MB worth of items in a page. You can also specify a
+// maximum number of entries to be returned in a page. In the request, start time
+// is inclusive, but end time is exclusive. Note that these boundaries are for the
+// time at which the original backup was requested. You can call ListBackups a
+// maximum of five times per second.
 func (c *Client) ListBackups(ctx context.Context, params *ListBackupsInput, optFns ...func(*Options)) (*ListBackupsOutput, error) {
 	if params == nil {
 		params = &ListBackupsInput{}

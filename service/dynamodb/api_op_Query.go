@@ -13,27 +13,28 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The Query operation finds items based on primary key values. You can query any
-// table or secondary index that has a composite primary key (a partition key and a
-// sort key). Use the KeyConditionExpression parameter to provide a specific value
-// for the partition key. The Query operation will return all of the items from the
-// table or index with that partition key value. You can optionally narrow the
-// scope of the Query operation by specifying a sort key value and a comparison
-// operator in KeyConditionExpression. To further refine the Query results, you can
-// optionally provide a FilterExpression. A FilterExpression determines which items
-// within the results should be returned to you. All of the other results are
-// discarded. A Query operation always returns a result set. If no matching items
-// are found, the result set will be empty. Queries that do not return results
-// consume the minimum number of read capacity units for that type of read
-// operation. DynamoDB calculates the number of read capacity units consumed based
-// on item size, not on the amount of data that is returned to an application. The
-// number of capacity units consumed will be the same whether you request all of
-// the attributes (the default behavior) or just some of them (using a projection
-// expression). The number will also be the same whether or not you use a
-// FilterExpression. Query results are always sorted by the sort key value. If the
-// data type of the sort key is Number, the results are returned in numeric order;
-// otherwise, the results are returned in order of UTF-8 bytes. By default, the
-// sort order is ascending. To reverse the order, set the ScanIndexForward
+// You must provide the name of the partition key attribute and a single value for
+// that attribute. Query returns all items with that partition key value.
+// Optionally, you can provide a sort key attribute and use a comparison operator
+// to refine the search results. Use the KeyConditionExpression parameter to
+// provide a specific value for the partition key. The Query operation will return
+// all of the items from the table or index with that partition key value. You can
+// optionally narrow the scope of the Query operation by specifying a sort key
+// value and a comparison operator in KeyConditionExpression. To further refine the
+// Query results, you can optionally provide a FilterExpression. A FilterExpression
+// determines which items within the results should be returned to you. All of the
+// other results are discarded. A Query operation always returns a result set. If
+// no matching items are found, the result set will be empty. Queries that do not
+// return results consume the minimum number of read capacity units for that type
+// of read operation. DynamoDB calculates the number of read capacity units
+// consumed based on item size, not on the amount of data that is returned to an
+// application. The number of capacity units consumed will be the same whether you
+// request all of the attributes (the default behavior) or just some of them (using
+// a projection expression). The number will also be the same whether or not you
+// use a FilterExpression. Query results are always sorted by the sort key value.
+// If the data type of the sort key is Number, the results are returned in numeric
+// order; otherwise, the results are returned in order of UTF-8 bytes. By default,
+// the sort order is ascending. To reverse the order, set the ScanIndexForward
 // parameter to false. A single Query operation will read up to the maximum number
 // of items set (if using the Limit parameter) or a maximum of 1 MB of data and
 // then apply any filtering to the results using FilterExpression. If

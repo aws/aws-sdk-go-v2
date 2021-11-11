@@ -11,13 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns all tag keys currently in use in the specified Region for the calling
-// AWS account. This operation supports pagination, where the response can be sent
-// in multiple pages. You should check the PaginationToken response parameter to
-// determine if there are additional results available to return. Repeat the query,
-// passing the PaginationToken response parameter value as an input to the next
-// request until you recieve a null value. A null value for PaginationToken
-// indicates that there are no more results waiting to be returned.
+// Returns all tag keys currently in use in the specified Amazon Web Services
+// Region for the calling account. This operation supports pagination, where the
+// response can be sent in multiple pages. You should check the PaginationToken
+// response parameter to determine if there are additional results available to
+// return. Repeat the query, passing the PaginationToken response parameter value
+// as an input to the next request until you recieve a null value. A null value for
+// PaginationToken indicates that there are no more results waiting to be returned.
 func (c *Client) GetTagKeys(ctx context.Context, params *GetTagKeysInput, optFns ...func(*Options)) (*GetTagKeysOutput, error) {
 	if params == nil {
 		params = &GetTagKeysInput{}
@@ -50,7 +50,7 @@ type GetTagKeysOutput struct {
 	// as the PaginationToken value in the request for the next page.
 	PaginationToken *string
 
-	// A list of all tag keys in the AWS account.
+	// A list of all tag keys in the Amazon Web Services account.
 	TagKeys []string
 
 	// Metadata pertaining to the operation's result.

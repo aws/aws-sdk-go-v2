@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation allows you to perform batch reads and writes on data stored in
-// DynamoDB, using PartiQL.
+// This operation allows you to perform batch reads or writes on data stored in
+// DynamoDB, using PartiQL. The entire batch must consist of either read statements
+// or write statements, you cannot mix both in one batch.
 func (c *Client) BatchExecuteStatement(ctx context.Context, params *BatchExecuteStatementInput, optFns ...func(*Options)) (*BatchExecuteStatementOutput, error) {
 	if params == nil {
 		params = &BatchExecuteStatementInput{}

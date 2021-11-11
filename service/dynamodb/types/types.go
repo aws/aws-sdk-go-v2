@@ -23,8 +23,8 @@ type ArchivalSummary struct {
 	// is:
 	//
 	// * INACCESSIBLE_ENCRYPTION_CREDENTIALS - The table was archived due to the
-	// table's AWS KMS key being inaccessible for more than seven days. An On-Demand
-	// backup was created at the archival time.
+	// table's KMS key being inaccessible for more than seven days. An On-Demand backup
+	// was created at the archival time.
 	ArchivalReason *string
 
 	noSmithyDocumentSerde
@@ -451,7 +451,7 @@ type BackupDetails struct {
 	// state it was in just before the point of deletion.
 	//
 	// * AWS_BACKUP - On-demand
-	// backup created by you from AWS Backup service.
+	// backup created by you from Backup service.
 	//
 	// This member is required.
 	BackupType BackupType
@@ -499,7 +499,7 @@ type BackupSummary struct {
 	// state it was in just before the point of deletion.
 	//
 	// * AWS_BACKUP - On-demand
-	// backup created by you from AWS Backup service.
+	// backup created by you from Backup service.
 	BackupType BackupType
 
 	// ARN associated with the table.
@@ -907,11 +907,10 @@ type CreateReplicationGroupMemberAction struct {
 	// Replica-specific global secondary index settings.
 	GlobalSecondaryIndexes []ReplicaGlobalSecondaryIndex
 
-	// The AWS KMS customer master key (CMK) that should be used for AWS KMS encryption
-	// in the new replica. To specify a CMK, use its key ID, Amazon Resource Name
-	// (ARN), alias name, or alias ARN. Note that you should only provide this
-	// parameter if the key is different from the default DynamoDB KMS master key
-	// alias/aws/dynamodb.
+	// The KMS key that should be used for KMS encryption in the new replica. To
+	// specify a key, use its key ID, Amazon Resource Name (ARN), alias name, or alias
+	// ARN. Note that you should only provide this parameter if the key is different
+	// from the default DynamoDB KMS key alias/aws/dynamodb.
 	KMSMasterKeyId *string
 
 	// Replica-specific provisioned throughput. If not specified, uses the source
@@ -1238,7 +1237,8 @@ type ExportDescription struct {
 	// The name of the Amazon S3 bucket containing the export.
 	S3Bucket *string
 
-	// The ID of the AWS account that owns the bucket containing the export.
+	// The ID of the Amazon Web Services account that owns the bucket containing the
+	// export.
 	S3BucketOwner *string
 
 	// The Amazon S3 bucket prefix used as the file name and path of the exported
@@ -1251,11 +1251,11 @@ type ExportDescription struct {
 	// * AES256 - server-side encryption with Amazon S3
 	// managed keys
 	//
-	// * KMS - server-side encryption with AWS KMS managed keys
+	// * KMS - server-side encryption with KMS managed keys
 	S3SseAlgorithm S3SseAlgorithm
 
-	// The ID of the AWS KMS managed key used to encrypt the S3 bucket where export
-	// data is stored (if applicable).
+	// The ID of the KMS managed key used to encrypt the S3 bucket where export data is
+	// stored (if applicable).
 	S3SseKmsKeyId *string
 
 	// The time at which the export task began.
@@ -2129,8 +2129,7 @@ type ReplicaDescription struct {
 	// Replica-specific global secondary index settings.
 	GlobalSecondaryIndexes []ReplicaGlobalSecondaryIndexDescription
 
-	// The AWS KMS customer master key (CMK) of the replica that will be used for AWS
-	// KMS encryption.
+	// The KMS key of the replica that will be used for KMS encryption.
 	KMSMasterKeyId *string
 
 	// Replica-specific provisioned throughput. If not described, uses the source
@@ -2157,16 +2156,16 @@ type ReplicaDescription struct {
 	// * ACTIVE - The replica is ready for use.
 	//
 	// * REGION_DISABLED - The
-	// replica is inaccessible because the AWS Region has been disabled. If the AWS
-	// Region remains inaccessible for more than 20 hours, DynamoDB will remove this
-	// replica from the replication group. The replica will not be deleted and
-	// replication will stop from and to this region.
+	// replica is inaccessible because the Amazon Web Services Region has been
+	// disabled. If the Amazon Web Services Region remains inaccessible for more than
+	// 20 hours, DynamoDB will remove this replica from the replication group. The
+	// replica will not be deleted and replication will stop from and to this
+	// region.
 	//
-	// *
-	// INACCESSIBLE_ENCRYPTION_CREDENTIALS  - The AWS KMS key used to encrypt the table
-	// is inaccessible. If the AWS KMS key remains inaccessible for more than 20 hours,
-	// DynamoDB will remove this replica from the replication group. The replica will
-	// not be deleted and replication will stop from and to this region.
+	// * INACCESSIBLE_ENCRYPTION_CREDENTIALS  - The KMS key used to encrypt
+	// the table is inaccessible. If the KMS key remains inaccessible for more than 20
+	// hours, DynamoDB will remove this replica from the replication group. The replica
+	// will not be deleted and replication will stop from and to this region.
 	ReplicaStatus ReplicaStatus
 
 	// Detailed information about the replica status.
@@ -2539,20 +2538,20 @@ type SourceTableFeatureDetails struct {
 type SSEDescription struct {
 
 	// Indicates the time, in UNIX epoch date format, when DynamoDB detected that the
-	// table's AWS KMS key was inaccessible. This attribute will automatically be
-	// cleared when DynamoDB detects that the table's AWS KMS key is accessible again.
-	// DynamoDB will initiate the table archival process when table's AWS KMS key
-	// remains inaccessible for more than seven days from this date.
+	// table's KMS key was inaccessible. This attribute will automatically be cleared
+	// when DynamoDB detects that the table's KMS key is accessible again. DynamoDB
+	// will initiate the table archival process when table's KMS key remains
+	// inaccessible for more than seven days from this date.
 	InaccessibleEncryptionDateTime *time.Time
 
-	// The AWS KMS customer master key (CMK) ARN used for the AWS KMS encryption.
+	// The KMS key ARN used for the KMS encryption.
 	KMSMasterKeyArn *string
 
 	// Server-side encryption type. The only supported value is:
 	//
 	// * KMS - Server-side
-	// encryption that uses AWS Key Management Service. The key is stored in your
-	// account and is managed by AWS KMS (AWS KMS charges apply).
+	// encryption that uses Key Management Service. The key is stored in your account
+	// and is managed by KMS (KMS charges apply).
 	SSEType SSEType
 
 	// Represents the current state of server-side encryption. The only supported
@@ -2570,23 +2569,24 @@ type SSEDescription struct {
 // Represents the settings used to enable server-side encryption.
 type SSESpecification struct {
 
-	// Indicates whether server-side encryption is done using an AWS managed CMK or an
-	// AWS owned CMK. If enabled (true), server-side encryption type is set to KMS and
-	// an AWS managed CMK is used (AWS KMS charges apply). If disabled (false) or not
-	// specified, server-side encryption is set to AWS owned CMK.
+	// Indicates whether server-side encryption is done using an Amazon Web Services
+	// managed key or an Amazon Web Services owned key. If enabled (true), server-side
+	// encryption type is set to KMS and an Amazon Web Services managed key is used
+	// (KMS charges apply). If disabled (false) or not specified, server-side
+	// encryption is set to Amazon Web Services owned key.
 	Enabled *bool
 
-	// The AWS KMS customer master key (CMK) that should be used for the AWS KMS
-	// encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
-	// name, or alias ARN. Note that you should only provide this parameter if the key
-	// is different from the default DynamoDB customer master key alias/aws/dynamodb.
+	// The KMS key that should be used for the KMS encryption. To specify a key, use
+	// its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. Note that you
+	// should only provide this parameter if the key is different from the default
+	// DynamoDB key alias/aws/dynamodb.
 	KMSMasterKeyId *string
 
 	// Server-side encryption type. The only supported value is:
 	//
 	// * KMS - Server-side
-	// encryption that uses AWS Key Management Service. The key is stored in your
-	// account and is managed by AWS KMS (AWS KMS charges apply).
+	// encryption that uses Key Management Service. The key is stored in your account
+	// and is managed by KMS (KMS charges apply).
 	SSEType SSEType
 
 	noSmithyDocumentSerde
@@ -2747,7 +2747,7 @@ type TableDescription struct {
 
 	// Represents the version of global tables
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GlobalTables.html)
-	// in use, if the table is replicated across AWS Regions.
+	// in use, if the table is replicated across Amazon Web Services Regions.
 	GlobalTableVersion *string
 
 	// The number of items in the specified table. DynamoDB updates this value
@@ -2790,10 +2790,10 @@ type TableDescription struct {
 	// from another table might have the same timestamp. However, the combination of
 	// the following three elements is guaranteed to be unique:
 	//
-	// * AWS customer ID
+	// * Amazon Web Services
+	// customer ID
 	//
-	// *
-	// Table name
+	// * Table name
 	//
 	// * StreamLabel
 	LatestStreamLabel *string
@@ -2891,29 +2891,28 @@ type TableDescription struct {
 	// * ACTIVE - The table is ready for use.
 	//
 	// *
-	// INACCESSIBLE_ENCRYPTION_CREDENTIALS - The AWS KMS key used to encrypt the table
-	// in inaccessible. Table operations may fail due to failure to use the AWS KMS
-	// key. DynamoDB will initiate the table archival process when a table's AWS KMS
-	// key remains inaccessible for more than seven days.
+	// INACCESSIBLE_ENCRYPTION_CREDENTIALS - The KMS key used to encrypt the table in
+	// inaccessible. Table operations may fail due to failure to use the KMS key.
+	// DynamoDB will initiate the table archival process when a table's KMS key remains
+	// inaccessible for more than seven days.
 	//
-	// * ARCHIVING - The table is
-	// being archived. Operations are not allowed until archival is complete.
+	// * ARCHIVING - The table is being
+	// archived. Operations are not allowed until archival is complete.
 	//
-	// *
-	// ARCHIVED - The table has been archived. See the ArchivalReason for more
-	// information.
+	// * ARCHIVED -
+	// The table has been archived. See the ArchivalReason for more information.
 	TableStatus TableStatus
 
 	noSmithyDocumentSerde
 }
 
 // Describes a tag. A tag is a key-value pair. You can add up to 50 tags to a
-// single DynamoDB table. AWS-assigned tag names and values are automatically
-// assigned the aws: prefix, which the user cannot assign. AWS-assigned tag names
-// do not count towards the tag limit of 50. User-assigned tag names have the
-// prefix user: in the Cost Allocation Report. You cannot backdate the application
-// of a tag. For an overview on tagging DynamoDB resources, see Tagging for
-// DynamoDB
+// single DynamoDB table. Amazon Web Services-assigned tag names and values are
+// automatically assigned the aws: prefix, which the user cannot assign. Amazon Web
+// Services-assigned tag names do not count towards the tag limit of 50.
+// User-assigned tag names have the prefix user: in the Cost Allocation Report. You
+// cannot backdate the application of a tag. For an overview on tagging DynamoDB
+// resources, see Tagging for DynamoDB
 // (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html)
 // in the Amazon DynamoDB Developer Guide.
 type Tag struct {
@@ -3064,11 +3063,10 @@ type UpdateReplicationGroupMemberAction struct {
 	// Replica-specific global secondary index settings.
 	GlobalSecondaryIndexes []ReplicaGlobalSecondaryIndex
 
-	// The AWS KMS customer master key (CMK) of the replica that should be used for AWS
-	// KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN),
-	// alias name, or alias ARN. Note that you should only provide this parameter if
-	// the key is different from the default DynamoDB KMS master key
-	// alias/aws/dynamodb.
+	// The KMS key of the replica that should be used for KMS encryption. To specify a
+	// key, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. Note
+	// that you should only provide this parameter if the key is different from the
+	// default DynamoDB KMS key alias/aws/dynamodb.
 	KMSMasterKeyId *string
 
 	// Replica-specific provisioned throughput. If not specified, uses the source

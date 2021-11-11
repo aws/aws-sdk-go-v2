@@ -15,7 +15,7 @@ import (
 // Returns a table that shows counts of resources that are noncompliant with their
 // tag policies. For more information on tag policies, see Tag Policies
 // (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html)
-// in the AWS Organizations User Guide. You can call this operation only from the
+// in the Organizations User Guide. You can call this operation only from the
 // organization's management account and from the us-east-1 Region. This operation
 // supports pagination, where the response can be sent in multiple pages. You
 // should check the PaginationToken response parameter to determine if there are
@@ -55,9 +55,9 @@ type GetComplianceSummaryInput struct {
 	// initial request.
 	PaginationToken *string
 
-	// Specifies a list of AWS Regions to limit the output by. If you use this
-	// parameter, the count of returned noncompliant resources includes only resources
-	// in the specified Regions.
+	// Specifies a list of Amazon Web Services Regions to limit the output to. If you
+	// use this parameter, the count of returned noncompliant resources includes only
+	// resources in the specified Regions.
 	RegionFilters []string
 
 	// Specifies that you want the response to include information for only resources
@@ -66,10 +66,11 @@ type GetComplianceSummaryInput struct {
 	// all Amazon EC2 resources (which includes EC2 instances). Specifying a resource
 	// type of ec2:instance returns only EC2 instances. The string for each service
 	// name and resource type is the same as that embedded in a resource's Amazon
-	// Resource Name (ARN). Consult the AWS General Reference for the following:
+	// Resource Name (ARN). Consult the Amazon Web Services General Reference
+	// (https://docs.aws.amazon.com/general/latest/gr/) for the following:
 	//
-	// * For
-	// a list of service name strings, see AWS Service Namespaces
+	// * For a
+	// list of service name strings, see Amazon Web Services Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces).
 	//
 	// *
@@ -77,8 +78,8 @@ type GetComplianceSummaryInput struct {
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arns-syntax).
 	//
 	// *
-	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
-	// Service Namespaces
+	// For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web
+	// Services Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// You

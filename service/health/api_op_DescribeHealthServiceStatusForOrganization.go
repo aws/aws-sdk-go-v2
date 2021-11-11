@@ -10,10 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation provides status information on enabling or disabling AWS Health
-// to work with your organization. To call this operation, you must sign in as an
-// IAM user, assume an IAM role, or sign in as the root user (not recommended) in
-// the organization's management account.
+// This operation provides status information on enabling or disabling Health to
+// work with your organization. To call this operation, you must sign in as an IAM
+// user, assume an IAM role, or sign in as the root user (not recommended) in the
+// organization's management account.
 func (c *Client) DescribeHealthServiceStatusForOrganization(ctx context.Context, params *DescribeHealthServiceStatusForOrganizationInput, optFns ...func(*Options)) (*DescribeHealthServiceStatusForOrganizationOutput, error) {
 	if params == nil {
 		params = &DescribeHealthServiceStatusForOrganizationInput{}
@@ -35,8 +35,9 @@ type DescribeHealthServiceStatusForOrganizationInput struct {
 
 type DescribeHealthServiceStatusForOrganizationOutput struct {
 
-	// Information about the status of enabling or disabling AWS Health Organizational
-	// View in your organization. Valid values are ENABLED | DISABLED | PENDING.
+	// Information about the status of enabling or disabling the Health organizational
+	// view feature in your organization. Valid values are ENABLED | DISABLED |
+	// PENDING.
 	HealthServiceAccessStatusForOrganization *string
 
 	// Metadata pertaining to the operation's result.

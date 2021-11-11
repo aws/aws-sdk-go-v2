@@ -10,7 +10,8 @@ import (
 // Information about an entity that is affected by a Health event.
 type AffectedEntity struct {
 
-	// The 12-digit AWS account number that contains the affected entity.
+	// The 12-digit Amazon Web Services account number that contains the affected
+	// entity.
 	AwsAccountId *string
 
 	// The unique identifier for the entity. Format:
@@ -82,8 +83,8 @@ type EntityAggregate struct {
 	noSmithyDocumentSerde
 }
 
-// The values to use to filter results from the EntityFilter
-// (https://docs.aws.amazon.com/health/latest/APIReference/API_EntityFilter.html)
+// The values to use to filter results from the DescribeAffectedEntities
+// (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntities.html)
 // operation.
 type EntityFilter struct {
 
@@ -113,22 +114,23 @@ type EntityFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Summary information about an AWS Health event. AWS Health events can be public
-// or account-specific:
+// Summary information about an Health event. Health events can be public or
+// account-specific:
 //
-// * Public events might be service events that are not
-// specific to an AWS account. For example, if there is an issue with an AWS
-// Region, AWS Health provides information about the event, even if you don't use
-// services or resources in that Region.
+// * Public events might be service events that are not specific
+// to an Amazon Web Services account. For example, if there is an issue with an
+// Amazon Web Services Region, Health provides information about the event, even if
+// you don't use services or resources in that Region.
 //
-// * Account-specific events are specific to
-// either your AWS account or an account in your organization. For example, if
-// there's an issue with Amazon Elastic Compute Cloud in a Region that you use, AWS
-// Health provides information about the event and the affected resources in the
-// account.
+// * Account-specific events
+// are specific to either your Amazon Web Services account or an account in your
+// organization. For example, if there's an issue with Amazon Elastic Compute Cloud
+// in a Region that you use, Health provides information about the event and the
+// affected resources in the account.
 //
-// You can determine if an event is public or account-specific by using
-// the eventScopeCode parameter. For more information, see eventScopeCode
+// You can determine if an event is public or
+// account-specific by using the eventScopeCode parameter. For more information,
+// see eventScopeCode
 // (https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html#AWSHealth-Type-Event-eventScopeCode).
 type Event struct {
 
@@ -138,31 +140,32 @@ type Event struct {
 	// arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456
 	Arn *string
 
-	// The AWS Availability Zone of the event. For example, us-east-1a.
+	// The Amazon Web Services Availability Zone of the event. For example, us-east-1a.
 	AvailabilityZone *string
 
 	// The date and time that the event ended.
 	EndTime *time.Time
 
-	// This parameter specifies if the AWS Health event is a public AWS service event
-	// or an account-specific event.
-	//
-	// * If the eventScopeCode value is PUBLIC, then the
-	// affectedAccounts value is always empty.
+	// This parameter specifies if the Health event is a public Amazon Web Services
+	// service event or an account-specific event.
 	//
 	// * If the eventScopeCode value is
-	// ACCOUNT_SPECIFIC, then the affectedAccounts value lists the affected AWS
-	// accounts in your organization. For example, if an event affects a service such
-	// as Amazon Elastic Compute Cloud and you have AWS accounts that use that service,
-	// those account IDs appear in the response.
+	// PUBLIC, then the affectedAccounts value is always empty.
 	//
-	// * If the eventScopeCode value is
-	// NONE, then the eventArn that you specified in the request is invalid or doesn't
-	// exist.
+	// * If the
+	// eventScopeCode value is ACCOUNT_SPECIFIC, then the affectedAccounts value lists
+	// the affected Amazon Web Services accounts in your organization. For example, if
+	// an event affects a service such as Amazon Elastic Compute Cloud and you have
+	// Amazon Web Services accounts that use that service, those account IDs appear in
+	// the response.
+	//
+	// * If the eventScopeCode value is NONE, then the eventArn that you
+	// specified in the request is invalid or doesn't exist.
 	EventScopeCode EventScopeCode
 
-	// The category of the event. Possible values are issue, scheduledChange, and
-	// accountNotification.
+	// A list of event type category codes. Possible values are issue,
+	// accountNotification, or scheduledChange. Currently, the investigation value
+	// isn't supported at this time.
 	EventTypeCategory EventTypeCategory
 
 	// The unique identifier for the event type. The format is AWS_SERVICE_DESCRIPTION
@@ -172,10 +175,11 @@ type Event struct {
 	// The most recent date and time that the event was updated.
 	LastUpdatedTime *time.Time
 
-	// The AWS Region name of the event.
+	// The Amazon Web Services Region name of the event.
 	Region *string
 
-	// The AWS service that is affected by the event. For example, EC2, RDS.
+	// The Amazon Web Services service that is affected by the event. For example, EC2,
+	// RDS.
 	Service *string
 
 	// The date and time that the event began.
@@ -203,7 +207,8 @@ type EventAccountFilter struct {
 	// This member is required.
 	EventArn *string
 
-	// The 12-digit AWS account numbers that contains the affected entities.
+	// The 12-digit Amazon Web Services account numbers that contains the affected
+	// entities.
 	AwsAccountId *string
 
 	noSmithyDocumentSerde
@@ -284,7 +289,7 @@ type EventDetailsErrorItem struct {
 // operations.
 type EventFilter struct {
 
-	// A list of AWS Availability Zones.
+	// A list of Amazon Web Services Availability Zones.
 	AvailabilityZones []string
 
 	// A list of dates and times that the event ended.
@@ -305,8 +310,9 @@ type EventFilter struct {
 	// A list of event status codes.
 	EventStatusCodes []EventStatusCode
 
-	// A list of event type category codes (issue, scheduledChange, or
-	// accountNotification).
+	// A list of event type category codes. Possible values are issue,
+	// accountNotification, or scheduledChange. Currently, the investigation value
+	// isn't supported at this time.
 	EventTypeCategories []EventTypeCategory
 
 	// A list of unique identifiers for event types. For example,
@@ -316,10 +322,11 @@ type EventFilter struct {
 	// A list of dates and times that the event was last updated.
 	LastUpdatedTimes []DateTimeRange
 
-	// A list of AWS Regions.
+	// A list of Amazon Web Services Regions.
 	Regions []string
 
-	// The AWS services associated with the event. For example, EC2, RDS.
+	// The Amazon Web Services services associated with the event. For example, EC2,
+	// RDS.
 	Services []string
 
 	// A list of dates and times that the event began.
@@ -332,7 +339,7 @@ type EventFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the metadata about a type of event that is reported by AWS Health. The
+// Contains the metadata about a type of event that is reported by Health. The
 // EventType shows the category, service, and the event type code of the event. For
 // example, an issue might be the category, EC2 the service, and
 // AWS_EC2_SYSTEM_MAINTENANCE_EVENT the event type code. You can use the
@@ -340,22 +347,24 @@ type EventFilter struct {
 // (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventTypes.html)
 // API operation to return this information about an event. You can also use the
 // Amazon CloudWatch Events console to create a rule so that you can get notified
-// or take action when AWS Health delivers a specific event to your AWS account.
-// For more information, see Monitor for AWS Health events with Amazon CloudWatch
-// Events
+// or take action when Health delivers a specific event to your Amazon Web Services
+// account. For more information, see Monitor for Health events with Amazon
+// CloudWatch Events
 // (https://docs.aws.amazon.com/health/latest/ug/cloudwatch-events-health.html) in
-// the AWS Health User Guide.
+// the Health User Guide.
 type EventType struct {
 
-	// A list of event type category codes (issue, scheduledChange, or
-	// accountNotification).
+	// A list of event type category codes. Possible values are issue,
+	// accountNotification, or scheduledChange. Currently, the investigation value
+	// isn't supported at this time.
 	Category EventTypeCategory
 
 	// The unique identifier for the event type. The format is AWS_SERVICE_DESCRIPTION
 	// ; for example, AWS_EC2_SYSTEM_MAINTENANCE_EVENT.
 	Code *string
 
-	// The AWS service that is affected by the event. For example, EC2, RDS.
+	// The Amazon Web Services service that is affected by the event. For example, EC2,
+	// RDS.
 	Service *string
 
 	noSmithyDocumentSerde
@@ -366,14 +375,16 @@ type EventType struct {
 // operation.
 type EventTypeFilter struct {
 
-	// A list of event type category codes (issue, scheduledChange, or
-	// accountNotification).
+	// A list of event type category codes. Possible values are issue,
+	// accountNotification, or scheduledChange. Currently, the investigation value
+	// isn't supported at this time.
 	EventTypeCategories []EventTypeCategory
 
 	// A list of event type codes.
 	EventTypeCodes []string
 
-	// The AWS services associated with the event. For example, EC2, RDS.
+	// The Amazon Web Services services associated with the event. For example, EC2,
+	// RDS.
 	Services []string
 
 	noSmithyDocumentSerde
@@ -384,7 +395,8 @@ type EventTypeFilter struct {
 // operation can't find or process a specific entity.
 type OrganizationAffectedEntitiesErrorItem struct {
 
-	// The 12-digit AWS account numbers that contains the affected entities.
+	// The 12-digit Amazon Web Services account numbers that contains the affected
+	// entities.
 	AwsAccountId *string
 
 	// The unique identifier for the event type. The format is AWS_SERVICE_DESCRIPTION.
@@ -418,24 +430,26 @@ type OrganizationEvent struct {
 	// The date and time that the event ended.
 	EndTime *time.Time
 
-	// This parameter specifies if the AWS Health event is a public AWS service event
-	// or an account-specific event.
-	//
-	// * If the eventScopeCode value is PUBLIC, then the
-	// affectedAccounts value is always empty.
+	// This parameter specifies if the Health event is a public Amazon Web Services
+	// service event or an account-specific event.
 	//
 	// * If the eventScopeCode value is
-	// ACCOUNT_SPECIFIC, then the affectedAccounts value lists the affected AWS
-	// accounts in your organization. For example, if an event affects a service such
-	// as Amazon Elastic Compute Cloud and you have AWS accounts that use that service,
-	// those account IDs appear in the response.
+	// PUBLIC, then the affectedAccounts value is always empty.
 	//
-	// * If the eventScopeCode value is
-	// NONE, then the eventArn that you specified in the request is invalid or doesn't
-	// exist.
+	// * If the
+	// eventScopeCode value is ACCOUNT_SPECIFIC, then the affectedAccounts value lists
+	// the affected Amazon Web Services accounts in your organization. For example, if
+	// an event affects a service such as Amazon Elastic Compute Cloud and you have
+	// Amazon Web Services accounts that use that service, those account IDs appear in
+	// the response.
+	//
+	// * If the eventScopeCode value is NONE, then the eventArn that you
+	// specified in the request is invalid or doesn't exist.
 	EventScopeCode EventScopeCode
 
-	// The category of the event type.
+	// A list of event type category codes. Possible values are issue,
+	// accountNotification, or scheduledChange. Currently, the investigation value
+	// isn't supported at this time.
 	EventTypeCategory EventTypeCategory
 
 	// The unique identifier for the event type. The format is AWS_SERVICE_DESCRIPTION.
@@ -445,10 +459,11 @@ type OrganizationEvent struct {
 	// The most recent date and time that the event was updated.
 	LastUpdatedTime *time.Time
 
-	// The AWS Region name of the event.
+	// The Amazon Web Services Region name of the event.
 	Region *string
 
-	// The AWS service that is affected by the event, such as EC2 and RDS.
+	// The Amazon Web Services service that is affected by the event, such as EC2 and
+	// RDS.
 	Service *string
 
 	// The date and time that the event began.
@@ -471,25 +486,27 @@ type OrganizationEvent struct {
 // operation.
 type OrganizationEventDetails struct {
 
-	// The 12-digit AWS account numbers that contains the affected entities.
+	// The 12-digit Amazon Web Services account numbers that contains the affected
+	// entities.
 	AwsAccountId *string
 
-	// Summary information about an AWS Health event. AWS Health events can be public
-	// or account-specific:
+	// Summary information about an Health event. Health events can be public or
+	// account-specific:
 	//
-	// * Public events might be service events that are not
-	// specific to an AWS account. For example, if there is an issue with an AWS
-	// Region, AWS Health provides information about the event, even if you don't use
-	// services or resources in that Region.
+	// * Public events might be service events that are not specific
+	// to an Amazon Web Services account. For example, if there is an issue with an
+	// Amazon Web Services Region, Health provides information about the event, even if
+	// you don't use services or resources in that Region.
 	//
-	// * Account-specific events are specific to
-	// either your AWS account or an account in your organization. For example, if
-	// there's an issue with Amazon Elastic Compute Cloud in a Region that you use, AWS
-	// Health provides information about the event and the affected resources in the
-	// account.
+	// * Account-specific events
+	// are specific to either your Amazon Web Services account or an account in your
+	// organization. For example, if there's an issue with Amazon Elastic Compute Cloud
+	// in a Region that you use, Health provides information about the event and the
+	// affected resources in the account.
 	//
-	// You can determine if an event is public or account-specific by using
-	// the eventScopeCode parameter. For more information, see eventScopeCode
+	// You can determine if an event is public or
+	// account-specific by using the eventScopeCode parameter. For more information,
+	// see eventScopeCode
 	// (https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html#AWSHealth-Type-Event-eventScopeCode).
 	Event *Event
 
@@ -521,15 +538,16 @@ type OrganizationEventDetailsErrorItem struct {
 	//
 	// * We couldn't find a public
 	// event that matches your request. To find an event that is account specific, you
-	// must enter an AWS account ID in the request.
+	// must enter an Amazon Web Services account ID in the request.
 	//
-	// * We couldn't find an account
-	// specific event for the specified AWS account. To find an event that is public,
-	// you must enter a null value for the AWS account ID in the request.
+	// * We couldn't find
+	// an account specific event for the specified Amazon Web Services account. To find
+	// an event that is public, you must enter a null value for the Amazon Web Services
+	// account ID in the request.
 	//
-	// * Your AWS
-	// account doesn't include the AWS Support plan required to use the AWS Health API.
-	// You must have either a Business or Enterprise Support plan.
+	// * Your Amazon Web Services account doesn't include
+	// the Amazon Web Services Support plan required to use the Health API. You must
+	// have either a Business or Enterprise Support plan.
 	ErrorMessage *string
 
 	// The name of the error.
@@ -549,7 +567,8 @@ type OrganizationEventDetailsErrorItem struct {
 // operation.
 type OrganizationEventFilter struct {
 
-	// A list of 12-digit AWS account numbers that contains the affected entities.
+	// A list of 12-digit Amazon Web Services account numbers that contains the
+	// affected entities.
 	AwsAccountIds []string
 
 	// A range of dates and times that is used by the EventFilter
@@ -573,8 +592,9 @@ type OrganizationEventFilter struct {
 	// A list of event status codes.
 	EventStatusCodes []EventStatusCode
 
-	// A list of event type category codes (issue, scheduledChange, or
-	// accountNotification).
+	// A list of event type category codes. Possible values are issue,
+	// accountNotification, or scheduledChange. Currently, the investigation value
+	// isn't supported at this time.
 	EventTypeCategories []EventTypeCategory
 
 	// A list of unique identifiers for event types. For example,
@@ -592,10 +612,11 @@ type OrganizationEventFilter struct {
 	// value is equal to or before to.
 	LastUpdatedTime *DateTimeRange
 
-	// A list of AWS Regions.
+	// A list of Amazon Web Services Regions.
 	Regions []string
 
-	// The AWS services associated with the event. For example, EC2, RDS.
+	// The Amazon Web Services services associated with the event. For example, EC2,
+	// RDS.
 	Services []string
 
 	// A range of dates and times that is used by the EventFilter

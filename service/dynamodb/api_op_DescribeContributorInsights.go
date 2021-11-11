@@ -44,13 +44,13 @@ type DescribeContributorInsightsInput struct {
 
 type DescribeContributorInsightsOutput struct {
 
-	// List of names of the associated Alpine rules.
+	// List of names of the associated contributor insights rules.
 	ContributorInsightsRuleList []string
 
-	// Current Status contributor insights.
+	// Current status of contributor insights.
 	ContributorInsightsStatus types.ContributorInsightsStatus
 
-	// Returns information about the last failure that encountered. The most common
+	// Returns information about the last failure that was encountered. The most common
 	// exceptions for a FAILED status are:
 	//
 	// * LimitExceededException - Per-account
