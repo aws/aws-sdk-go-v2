@@ -3772,11 +3772,11 @@ func (m *awsRestjson1_serializeOpCreateTopicRule) HandleSerialize(ctx context.Co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.TopicRulePayload != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.TopicRulePayload != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentTopicRulePayload(input.TopicRulePayload, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -3785,6 +3785,14 @@ func (m *awsRestjson1_serializeOpCreateTopicRule) HandleSerialize(ctx context.Co
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -13387,11 +13395,11 @@ func (m *awsRestjson1_serializeOpReplaceTopicRule) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.TopicRulePayload != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.TopicRulePayload != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentTopicRulePayload(input.TopicRulePayload, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -13400,6 +13408,14 @@ func (m *awsRestjson1_serializeOpReplaceTopicRule) HandleSerialize(ctx context.C
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -13679,11 +13695,11 @@ func (m *awsRestjson1_serializeOpSetLoggingOptions) HandleSerialize(ctx context.
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if input.LoggingOptionsPayload != nil {
-		if !restEncoder.HasHeader("Content-Type") {
-			restEncoder.SetHeader("Content-Type").String("application/json")
-		}
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
 
+	if input.LoggingOptionsPayload != nil {
 		jsonEncoder := smithyjson.NewEncoder()
 		if err := awsRestjson1_serializeDocumentLoggingOptionsPayload(input.LoggingOptionsPayload, jsonEncoder.Value); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
@@ -13692,6 +13708,14 @@ func (m *awsRestjson1_serializeOpSetLoggingOptions) HandleSerialize(ctx context.
 		if request, err = request.SetStream(payload); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {

@@ -50,7 +50,7 @@ func TestClient_IgnoreQueryParamsInResponse_awsRestjson1Deserialize(t *testing.T
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			url := "http://localhost:8888/"
+			serverURL := "http://localhost:8888/"
 			client := New(Options{
 				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
 					headers := http.Header{}
@@ -83,7 +83,7 @@ func TestClient_IgnoreQueryParamsInResponse_awsRestjson1Deserialize(t *testing.T
 					},
 				},
 				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = url
+					e.URL = serverURL
 					e.SigningRegion = "us-west-2"
 					return e, err
 				}),

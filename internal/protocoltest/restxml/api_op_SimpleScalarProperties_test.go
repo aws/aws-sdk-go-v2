@@ -20,6 +20,7 @@ import (
 	"math"
 	"net/http"
 	"net/http/httptest"
+	"net/url"
 	"strconv"
 	"testing"
 )
@@ -35,6 +36,7 @@ func TestClient_SimpleScalarProperties_awsRestxmlSerialize(t *testing.T) {
 		ExpectHeader  http.Header
 		RequireHeader []string
 		ForbidHeader  []string
+		Host          *url.URL
 		BodyMediaType string
 		BodyAssert    func(io.Reader) error
 	}{
@@ -100,7 +102,7 @@ func TestClient_SimpleScalarProperties_awsRestxmlSerialize(t *testing.T) {
 		"SimpleScalarPropertiesWithWhiteSpace": {
 			Params: &SimpleScalarPropertiesInput{
 				Foo:         ptr.String("Foo"),
-				StringValue: ptr.String("string with white    space"),
+				StringValue: ptr.String("  string with white    space  "),
 			},
 			ExpectMethod:  "PUT",
 			ExpectURIPath: "/SimpleScalarProperties",
@@ -112,7 +114,28 @@ func TestClient_SimpleScalarProperties_awsRestxmlSerialize(t *testing.T) {
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<SimpleScalarPropertiesInputOutput>
-			    <stringValue>string with white    space</stringValue>
+			    <stringValue>  string with white    space  </stringValue>
+			</SimpleScalarPropertiesInputOutput>
+			`))
+			},
+		},
+		// Serializes string containing exclusively whitespace
+		"SimpleScalarPropertiesPureWhiteSpace": {
+			Params: &SimpleScalarPropertiesInput{
+				Foo:         ptr.String("Foo"),
+				StringValue: ptr.String("   "),
+			},
+			ExpectMethod:  "PUT",
+			ExpectURIPath: "/SimpleScalarProperties",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/xml"},
+				"X-Foo":        []string{"Foo"},
+			},
+			BodyMediaType: "application/xml",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<SimpleScalarPropertiesInputOutput>
+			    <stringValue>   </stringValue>
 			</SimpleScalarPropertiesInputOutput>
 			`))
 			},
@@ -201,7 +224,17 @@ func TestClient_SimpleScalarProperties_awsRestxmlSerialize(t *testing.T) {
 				w.WriteHeader(200)
 			}))
 			defer server.Close()
-			url := server.URL
+			serverURL := server.URL
+			if c.Host != nil {
+				u, err := url.Parse(serverURL)
+				if err != nil {
+					t.Fatalf("expect no error, got %v", err)
+				}
+				u.Path = c.Host.Path
+				u.RawPath = c.Host.RawPath
+				u.RawQuery = c.Host.RawQuery
+				serverURL = u.String()
+			}
 			client := New(Options{
 				APIOptions: []func(*middleware.Stack) error{
 					func(s *middleware.Stack) error {
@@ -210,7 +243,7 @@ func TestClient_SimpleScalarProperties_awsRestxmlSerialize(t *testing.T) {
 					},
 				},
 				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = url
+					e.URL = serverURL
 					e.SigningRegion = "us-west-2"
 					return e, err
 				}),
@@ -356,12 +389,30 @@ func TestClient_SimpleScalarProperties_awsRestxmlDeserialize(t *testing.T) {
 			BodyMediaType: "application/xml",
 			Body: []byte(`<?xml version = "1.0" encoding = "UTF-8"?>
 			<SimpleScalarPropertiesInputOutput>
-			    <stringValue>string with white    space</stringValue>
+			    <stringValue> string with white    space </stringValue>
 			</SimpleScalarPropertiesInputOutput>
 			`),
 			ExpectResult: &SimpleScalarPropertiesOutput{
 				Foo:         ptr.String("Foo"),
-				StringValue: ptr.String("string with white    space"),
+				StringValue: ptr.String(" string with white    space "),
+			},
+		},
+		// Serializes string containing white space
+		"SimpleScalarPropertiesPureWhiteSpace": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/xml"},
+				"X-Foo":        []string{"Foo"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<?xml version = "1.0" encoding = "UTF-8"?>
+			<SimpleScalarPropertiesInputOutput>
+			    <stringValue>  </stringValue>
+			</SimpleScalarPropertiesInputOutput>
+			`),
+			ExpectResult: &SimpleScalarPropertiesOutput{
+				Foo:         ptr.String("Foo"),
+				StringValue: ptr.String("  "),
 			},
 		},
 		// Supports handling NaN float values.
@@ -418,7 +469,7 @@ func TestClient_SimpleScalarProperties_awsRestxmlDeserialize(t *testing.T) {
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			url := "http://localhost:8888/"
+			serverURL := "http://localhost:8888/"
 			client := New(Options{
 				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
 					headers := http.Header{}
@@ -451,7 +502,7 @@ func TestClient_SimpleScalarProperties_awsRestxmlDeserialize(t *testing.T) {
 					},
 				},
 				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = url
+					e.URL = serverURL
 					e.SigningRegion = "us-west-2"
 					return e, err
 				}),

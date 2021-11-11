@@ -11,6 +11,7 @@ import static software.amazon.smithy.aws.go.codegen.XmlProtocolUtils.generatePay
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.TreeSet;
 import java.util.function.Predicate;
@@ -19,6 +20,7 @@ import software.amazon.smithy.codegen.core.CodegenException;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoStackStepMiddlewareGenerator;
+import software.amazon.smithy.go.codegen.GoValueAccessUtils;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
@@ -114,7 +116,7 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
         writer.insertTrailingNewline();
 
         writer.openBlock("if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); "
-                + "err != nil {", "}", () -> {
+                         + "err != nil {", "}", () -> {
             writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
         });
     }
@@ -152,28 +154,35 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
         Model model = context.getModel();
         Shape payloadShape = model.expectShape(memberShape.getTarget());
 
-        writer.addUseImports(SmithyGoDependency.SMITHY_XML);
-        writer.addUseImports(SmithyGoDependency.BYTES);
-        writer.write("xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))");
+        GoValueAccessUtils.writeIfNonZeroValueMember(context.getModel(), context.getSymbolProvider(), writer,
+                memberShape, operand, (s) -> {
+                    writeSetPayloadShapeHeader(writer, payloadShape);
 
-        generatePayloadAsDocumentXMLStartElement(context, memberShape, "payloadRoot", operand);
+                    writer.addUseImports(SmithyGoDependency.SMITHY_XML);
+                    writer.addUseImports(SmithyGoDependency.BYTES);
+                    writer.write("xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))");
 
-        // check if service shape is bound by xmlNameSpace Trait
-        Optional<XmlNamespaceTrait> xmlNamespaceTrait = context.getService().getTrait(XmlNamespaceTrait.class);
-        if (xmlNamespaceTrait.isPresent()) {
-            XmlNamespaceTrait namespace = xmlNamespaceTrait.get();
-            writer.write("payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute($S, $S))",
-                    namespace.getPrefix().isPresent() ? namespace.getPrefix().get() : "", namespace.getUri()
-            );
-        }
+                    generatePayloadAsDocumentXMLStartElement(context, memberShape, "payloadRoot", s);
 
-        String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(
-                payloadShape, context.getService(), getProtocolName());
-        writer.openBlock("if err := $L($L, xmlEncoder.RootElement(payloadRoot)); err != nil {", "}", functionName,
-                operand, () -> {
-                    writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
+                    // check if service shape is bound by xmlNameSpace Trait
+                    Optional<XmlNamespaceTrait> xmlNamespaceTrait = context.getService()
+                            .getTrait(XmlNamespaceTrait.class);
+                    if (xmlNamespaceTrait.isPresent()) {
+                        XmlNamespaceTrait namespace = xmlNamespaceTrait.get();
+                        writer.write("payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute($S, $S))",
+                                namespace.getPrefix().isPresent() ? namespace.getPrefix().get() : "", namespace.getUri()
+                        );
+                    }
+
+                    String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(
+                            payloadShape, context.getService(), getProtocolName());
+                    writer.openBlock("if err := $L($L, xmlEncoder.RootElement(payloadRoot)); err != nil {", "}", functionName,
+                            s, () -> {
+                                writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
+                            });
+                    writer.write("payload := bytes.NewReader(xmlEncoder.Bytes())");
+                    writeSetStream(writer, "payload");
                 });
-        writer.write("payload := bytes.NewReader(xmlEncoder.Bytes())");
     }
 
     @Override
@@ -490,7 +499,7 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
 
             var hasBindings = targetShape.members().stream()
                     .filter(ms -> ms.getTrait(EventHeaderTrait.class).isPresent()
-                            || ms.getTrait(EventPayloadTrait.class).isPresent())
+                                  || ms.getTrait(EventPayloadTrait.class).isPresent())
                     .findAny();
             if (hasBindings.isPresent()) {
                 var payload = targetShape.members().stream()
@@ -609,7 +618,7 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
 
                 var hasBindings = targetShape.members().stream()
                         .filter(ms -> ms.getTrait(EventHeaderTrait.class).isPresent()
-                                || ms.getTrait(EventPayloadTrait.class).isPresent())
+                                      || ms.getTrait(EventPayloadTrait.class).isPresent())
                         .findAny();
                 if (hasBindings.isPresent()) {
                     var payload = targetShape.members().stream()

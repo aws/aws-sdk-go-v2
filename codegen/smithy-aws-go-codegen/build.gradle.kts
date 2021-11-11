@@ -32,9 +32,9 @@ tasks.withType<Test> {
 }
 
 dependencies {
-    api("software.amazon.smithy:smithy-aws-traits:[1.5.1,2.0.0[")
-    api("software.amazon.smithy:smithy-aws-iam-traits:[1.6.1,2.0.0[")
-    api("software.amazon.smithy:smithy-aws-cloudformation-traits:[1.8.0,2.0.0[")
+    api("software.amazon.smithy:smithy-aws-traits:[1.14.0,2.0.0[")
+    api("software.amazon.smithy:smithy-aws-iam-traits:[1.14.0,2.0.0[")
+    api("software.amazon.smithy:smithy-aws-cloudformation-traits:[1.14.0,2.0.0[")
     api("software.amazon.smithy.go:smithy-go-codegen:0.1.0")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.4.0")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.4.0")

@@ -29,6 +29,7 @@ import software.amazon.smithy.go.codegen.integration.HttpProtocolUnitTestRespons
 import software.amazon.smithy.go.codegen.integration.HttpProtocolUnitTestResponseGenerator;
 import software.amazon.smithy.go.codegen.integration.IdempotencyTokenMiddlewareGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator.GenerationContext;
+import software.amazon.smithy.model.shapes.Shape;
 import software.amazon.smithy.model.shapes.ShapeId;
 import software.amazon.smithy.utils.SetUtils;
 
@@ -56,7 +57,7 @@ final class AwsProtocolUtils {
                             writer.addUseImports(AwsGoDependency.AWS_CORE);
                             writer.openBlock("$L(func(region string, options $L) (e aws.Endpoint, err error) {", "}),",
                                     EndpointGenerator.RESOLVER_FUNC_NAME, EndpointGenerator.RESOLVER_OPTIONS, () -> {
-                                        writer.write("e.URL = url");
+                                        writer.write("e.URL = serverURL");
                                         writer.write("e.SigningRegion = \"us-west-2\"");
                                         writer.write("return e, err");
                                     });
@@ -207,6 +208,13 @@ final class AwsProtocolUtils {
                         .service(ShapeId.from("aws.protocoltests.json10#JsonRpc10"))
                         .operation(ShapeId.from("aws.protocoltests.json10#EmptyInputAndEmptyOutput"))
                         .addTestName("AwsJson10EmptyInputAndEmptyOutput")
+                        .build(),
+
+                // HTTP Payload Values that are unset vs set by the customer and how content-type should be handled.
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.restjson#RestJson"))
+                        .operation(ShapeId.from("aws.protocoltests.restjson#TestPayloadBlob"))
+                        .addTestName("RestJsonHttpWithEmptyBlobPayload")
                         .build()
         ));
 

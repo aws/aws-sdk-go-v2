@@ -24,11 +24,13 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import software.amazon.smithy.codegen.core.CodegenException;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.go.codegen.GoStackStepMiddlewareGenerator;
+import software.amazon.smithy.go.codegen.GoValueAccessUtils;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SyntheticClone;
@@ -45,6 +47,7 @@ import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.model.shapes.Shape;
 import software.amazon.smithy.model.shapes.ShapeId;
+import software.amazon.smithy.model.shapes.ShapeType;
 import software.amazon.smithy.model.shapes.StructureShape;
 import software.amazon.smithy.model.shapes.UnionShape;
 import software.amazon.smithy.model.traits.EnumTrait;
@@ -54,6 +57,7 @@ import software.amazon.smithy.model.traits.EventPayloadTrait;
 import software.amazon.smithy.model.traits.MediaTypeTrait;
 import software.amazon.smithy.model.traits.StreamingTrait;
 import software.amazon.smithy.model.traits.TimestampFormatTrait;
+import software.amazon.smithy.model.traits.XmlNamespaceTrait;
 
 /**
  * Handles general components across the AWS JSON protocols that have HTTP bindings.
@@ -119,15 +123,29 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                     payloadShape, context.getService(), context.getProtocolName());
         }
 
-        writer.addUseImports(SmithyGoDependency.SMITHY_JSON);
-        writer.write("jsonEncoder := smithyjson.NewEncoder()");
-        writer.openBlock("if err := $L($L, jsonEncoder.Value); err != nil {", "}", functionName,
-                operand, () -> {
-                    writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
-                });
+        writeSetPayloadShapeHeader(writer, payloadShape);
 
-        writer.addUseImports(SmithyGoDependency.BYTES);
-        writer.write("payload := bytes.NewReader(jsonEncoder.Bytes())");
+        GoValueAccessUtils.writeIfNonZeroValueMember(context.getModel(), context.getSymbolProvider(), writer,
+                memberShape, operand, (s) -> {
+                    writer.addUseImports(SmithyGoDependency.SMITHY_JSON);
+                    writer.addUseImports(SmithyGoDependency.BYTES);
+                    writer.write("""
+                                 jsonEncoder := smithyjson.NewEncoder()
+                                 if err := $L($L, jsonEncoder.Value); err != nil {
+                                     return out, metadata, &smithy.SerializationError{Err: err}
+                                 }
+                                 payload := bytes.NewReader(jsonEncoder.Bytes())""", functionName, s);
+                    writeSetStream(writer, "payload");
+                    if (payloadShape.getType() == ShapeType.STRUCTURE) {
+                        writer.openBlock("} else {", "", () -> {
+                            writer.write("""
+                                         jsonEncoder := smithyjson.NewEncoder()
+                                         jsonEncoder.Value.Object().Close()
+                                         payload := bytes.NewReader(jsonEncoder.Bytes())""");
+                            writeSetStream(writer, "payload");
+                        });
+                    }
+                });
     }
 
     /**

@@ -15,6 +15,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
+	"net/url"
 	"strconv"
 	"testing"
 )
@@ -30,6 +31,7 @@ func TestClient_QueryPrecedence_awsRestjson1Serialize(t *testing.T) {
 		ExpectHeader  http.Header
 		RequireHeader []string
 		ForbidHeader  []string
+		Host          *url.URL
 		BodyMediaType string
 		BodyAssert    func(io.Reader) error
 	}{
@@ -73,7 +75,17 @@ func TestClient_QueryPrecedence_awsRestjson1Serialize(t *testing.T) {
 				w.WriteHeader(200)
 			}))
 			defer server.Close()
-			url := server.URL
+			serverURL := server.URL
+			if c.Host != nil {
+				u, err := url.Parse(serverURL)
+				if err != nil {
+					t.Fatalf("expect no error, got %v", err)
+				}
+				u.Path = c.Host.Path
+				u.RawPath = c.Host.RawPath
+				u.RawQuery = c.Host.RawQuery
+				serverURL = u.String()
+			}
 			client := New(Options{
 				APIOptions: []func(*middleware.Stack) error{
 					func(s *middleware.Stack) error {
@@ -82,7 +94,7 @@ func TestClient_QueryPrecedence_awsRestjson1Serialize(t *testing.T) {
 					},
 				},
 				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = url
+					e.URL = serverURL
 					e.SigningRegion = "us-west-2"
 					return e, err
 				}),

@@ -61,3 +61,25 @@ var _ types.FooEnum
 var _ *types.GreetingStruct
 var _ *time.Time
 var _ []byte
+
+func ExampleSimpleUnion_outputUsage() {
+	var union types.SimpleUnion
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.SimpleUnionMemberInt:
+		_ = v.Value // Value is int32
+
+	case *types.SimpleUnionMemberString:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ *int32

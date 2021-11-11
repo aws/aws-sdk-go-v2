@@ -16,6 +16,8 @@
         "api_op_EndpointWithHostLabelOperation_test.go",
         "api_op_GreetingWithErrors.go",
         "api_op_GreetingWithErrors_test.go",
+        "api_op_HostWithPathOperation.go",
+        "api_op_HostWithPathOperation_test.go",
         "api_op_JsonUnions.go",
         "api_op_JsonUnions_test.go",
         "api_op_NoInputAndNoOutput.go",

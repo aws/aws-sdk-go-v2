@@ -22,7 +22,7 @@ import kotlin.streams.toList
 
 buildscript {
     dependencies {
-        "classpath"("software.amazon.smithy:smithy-aws-traits:[1.5.1,2.0.0[")
+        "classpath"("software.amazon.smithy:smithy-aws-traits:[1.13.1,2.0.0[")
     }
 }
 
