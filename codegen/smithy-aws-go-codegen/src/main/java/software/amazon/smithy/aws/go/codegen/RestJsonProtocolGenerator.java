@@ -47,6 +47,7 @@ import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.model.shapes.Shape;
 import software.amazon.smithy.model.shapes.ShapeId;
+import software.amazon.smithy.model.shapes.ShapeType;
 import software.amazon.smithy.model.shapes.StructureShape;
 import software.amazon.smithy.model.shapes.UnionShape;
 import software.amazon.smithy.model.traits.EnumTrait;
@@ -107,8 +108,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
     protected void writeMiddlewarePayloadAsDocumentSerializerDelegator(
             GenerationContext context,
             MemberShape memberShape,
-            String operand,
-            Consumer<GoWriter> setStream
+            String operand
     ) {
         GoWriter writer = context.getWriter().get();
         Model model = context.getModel();
@@ -123,6 +123,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                     payloadShape, context.getService(), context.getProtocolName());
         }
 
+        writeSetPayloadShapeHeader(writer, payloadShape);
+
         GoValueAccessUtils.writeIfNonZeroValueMember(context.getModel(), context.getSymbolProvider(), writer,
                 memberShape, operand, (s) -> {
                     writer.addUseImports(SmithyGoDependency.SMITHY_JSON);
@@ -133,14 +135,14 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                                      return out, metadata, &smithy.SerializationError{Err: err}
                                  }
                                  payload := bytes.NewReader(jsonEncoder.Bytes())""", functionName, s);
-                    setStream.accept(writer);
-                    if (payloadShape.isStructureShape()) {
+                    writeSetStream(writer, "payload");
+                    if (payloadShape.getType() == ShapeType.STRUCTURE) {
                         writer.openBlock("} else {", "", () -> {
                             writer.write("""
                                          jsonEncoder := smithyjson.NewEncoder()
                                          jsonEncoder.Value.Object().Close()
                                          payload := bytes.NewReader(jsonEncoder.Bytes())""");
-                            setStream.accept(writer);
+                            writeSetStream(writer, "payload");
                         });
                     }
                 });

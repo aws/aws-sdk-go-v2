@@ -148,8 +148,7 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
     protected void writeMiddlewarePayloadAsDocumentSerializerDelegator(
             GenerationContext context,
             MemberShape memberShape,
-            String operand,
-            Consumer<GoWriter> setStream
+            String operand
     ) {
         GoWriter writer = context.getWriter().get();
         Model model = context.getModel();
@@ -157,6 +156,8 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
 
         GoValueAccessUtils.writeIfNonZeroValueMember(context.getModel(), context.getSymbolProvider(), writer,
                 memberShape, operand, (s) -> {
+                    writeSetPayloadShapeHeader(writer, payloadShape);
+
                     writer.addUseImports(SmithyGoDependency.SMITHY_XML);
                     writer.addUseImports(SmithyGoDependency.BYTES);
                     writer.write("xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))");
@@ -180,7 +181,7 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
                                 writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
                             });
                     writer.write("payload := bytes.NewReader(xmlEncoder.Bytes())");
-                    setStream.accept(writer);
+                    writeSetStream(writer, "payload");
                 });
     }
 
