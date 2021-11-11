@@ -13,13 +13,14 @@ import (
 
 // Submits an Batch job from a job definition. Parameters that are specified during
 // SubmitJob override parameters defined in the job definition. vCPU and memory
-// requirements that are specified in the ResourceRequirements objects in the job
+// requirements that are specified in the resourceRequirements objects in the job
 // definition are the exception. They can't be overridden this way using the memory
 // and vcpus parameters. Rather, you must specify updates to job definition
 // parameters in a ResourceRequirements object that's included in the
-// containerOverrides parameter. Jobs that run on Fargate resources can't be
-// guaranteed to run for more than 14 days. This is because, after 14 days, Fargate
-// resources might become unavailable and job might be terminated.
+// containerOverrides parameter. Job queues with a scheduling policy are limited to
+// 500 active fair share identifiers at a time. Jobs that run on Fargate resources
+// can't be guaranteed to run for more than 14 days. This is because, after 14
+// days, Fargate resources might become unavailable and job might be terminated.
 func (c *Client) SubmitJob(ctx context.Context, params *SubmitJobInput, optFns ...func(*Options)) (*SubmitJobOutput, error) {
 	if params == nil {
 		params = &SubmitJobInput{}
@@ -105,6 +106,16 @@ type SubmitJobInput struct {
 	// retry strategy is specified here, it overrides the retry strategy defined in the
 	// job definition.
 	RetryStrategy *types.RetryStrategy
+
+	// The scheduling priority for the job. This will only affect jobs in job queues
+	// with a fair share policy. Jobs with a higher scheduling priority will be
+	// scheduled before jobs with a lower scheduling priority. This will override any
+	// scheduling priority in the job definition. The minimum supported value is 0 and
+	// the maximum supported value is 9999.
+	SchedulingPriorityOverride int32
+
+	// The share identifier for the job.
+	ShareIdentifier *string
 
 	// The tags that you apply to the job request to help you categorize and organize
 	// your resources. Each tag consists of a key and an optional value. For more

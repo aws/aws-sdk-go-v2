@@ -4884,6 +4884,15 @@ func awsRestjson1_deserializeDocumentComponentRunWith(v **types.ComponentRunWith
 				return err
 			}
 
+		case "windowsUser":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.WindowsUser = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

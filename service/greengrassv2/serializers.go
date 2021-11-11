@@ -1799,6 +1799,11 @@ func awsRestjson1_serializeDocumentComponentRunWith(v *types.ComponentRunWith, v
 		}
 	}
 
+	if v.WindowsUser != nil {
+		ok := object.Key("windowsUser")
+		ok.String(*v.WindowsUser)
+	}
+
 	return nil
 }
 

@@ -66,6 +66,15 @@ type CreateJobQueueInput struct {
 	// This member is required.
 	Priority int32
 
+	// Amazon Resource Name (ARN) of the fair share scheduling policy. If this
+	// parameter is specified, the job queue will use a fair share scheduling policy.
+	// If this parameter is not specified, the job queue will use a first in, first out
+	// (FIFO) scheduling policy. Once a job queue is created, the fair share scheduling
+	// policy can be replaced but not removed. The format is
+	// aws:Partition:batch:Region:Account:scheduling-policy/Name . For example,
+	// aws:aws:batch:us-west-2:012345678910:scheduling-policy/MySchedulingPolicy.
+	SchedulingPolicyArn *string
+
 	// The state of the job queue. If the job queue state is ENABLED, it is able to
 	// accept jobs. If the job queue state is DISABLED, new jobs can't be added to the
 	// queue, but jobs already in the queue can finish.

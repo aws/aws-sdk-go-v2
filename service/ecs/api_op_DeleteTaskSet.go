@@ -34,7 +34,7 @@ func (c *Client) DeleteTaskSet(ctx context.Context, params *DeleteTaskSetInput, 
 type DeleteTaskSetInput struct {
 
 	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts the
-	// service that the task set exists in to delete.
+	// service that the task set found in to delete.
 	//
 	// This member is required.
 	Cluster *string
@@ -50,8 +50,7 @@ type DeleteTaskSetInput struct {
 	// This member is required.
 	TaskSet *string
 
-	// If true, this allows you to delete a task set even if it hasn't been scaled down
-	// to zero.
+	// If true, you can delete a task set even if it hasn't been scaled down to zero.
 	Force *bool
 
 	noSmithyDocumentSerde

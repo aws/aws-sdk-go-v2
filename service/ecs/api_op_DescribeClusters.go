@@ -33,14 +33,14 @@ type DescribeClustersInput struct {
 	// entries. If you do not specify a cluster, the default cluster is assumed.
 	Clusters []string
 
-	// Whether to include additional information about the clusters in the response. If
-	// this field is omitted, this information isn't included. If ATTACHMENTS is
-	// specified, the attachments for the container instances or tasks within the
-	// cluster are included. If SETTINGS is specified, the settings for the cluster are
-	// included. If CONFIGURATIONS is specified, the configuration for the cluster is
-	// included. If STATISTICS is specified, the task and service count is included,
-	// separated by launch type. If TAGS is specified, the metadata tags associated
-	// with the cluster are included.
+	// Determines whether to include additional information about the clusters in the
+	// response. If this field is omitted, this information isn't included. If
+	// ATTACHMENTS is specified, the attachments for the container instances or tasks
+	// within the cluster are included. If SETTINGS is specified, the settings for the
+	// cluster are included. If CONFIGURATIONS is specified, the configuration for the
+	// cluster is included. If STATISTICS is specified, the task and service count is
+	// included, separated by launch type. If TAGS is specified, the metadata tags
+	// associated with the cluster are included.
 	Include []types.ClusterField
 
 	noSmithyDocumentSerde

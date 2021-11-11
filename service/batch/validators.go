@@ -70,6 +70,26 @@ func (m *validateOpCreateJobQueue) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateSchedulingPolicy struct {
+}
+
+func (*validateOpCreateSchedulingPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateSchedulingPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateSchedulingPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateSchedulingPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteComputeEnvironment struct {
 }
 
@@ -110,6 +130,26 @@ func (m *validateOpDeleteJobQueue) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteSchedulingPolicy struct {
+}
+
+func (*validateOpDeleteSchedulingPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteSchedulingPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteSchedulingPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteSchedulingPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeregisterJobDefinition struct {
 }
 
@@ -145,6 +185,26 @@ func (m *validateOpDescribeJobs) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeJobsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeSchedulingPolicies struct {
+}
+
+func (*validateOpDescribeSchedulingPolicies) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeSchedulingPolicies) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeSchedulingPoliciesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeSchedulingPoliciesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -310,6 +370,26 @@ func (m *validateOpUpdateJobQueue) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateSchedulingPolicy struct {
+}
+
+func (*validateOpUpdateSchedulingPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSchedulingPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSchedulingPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSchedulingPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpCancelJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelJob{}, middleware.After)
 }
@@ -322,6 +402,10 @@ func addOpCreateJobQueueValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateJobQueue{}, middleware.After)
 }
 
+func addOpCreateSchedulingPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateSchedulingPolicy{}, middleware.After)
+}
+
 func addOpDeleteComputeEnvironmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteComputeEnvironment{}, middleware.After)
 }
@@ -330,12 +414,20 @@ func addOpDeleteJobQueueValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteJobQueue{}, middleware.After)
 }
 
+func addOpDeleteSchedulingPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteSchedulingPolicy{}, middleware.After)
+}
+
 func addOpDeregisterJobDefinitionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeregisterJobDefinition{}, middleware.After)
 }
 
 func addOpDescribeJobsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeJobs{}, middleware.After)
+}
+
+func addOpDescribeSchedulingPoliciesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeSchedulingPolicies{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -368,6 +460,10 @@ func addOpUpdateComputeEnvironmentValidationMiddleware(stack *middleware.Stack) 
 
 func addOpUpdateJobQueueValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateJobQueue{}, middleware.After)
+}
+
+func addOpUpdateSchedulingPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSchedulingPolicy{}, middleware.After)
 }
 
 func validateComputeEnvironmentOrder(v *types.ComputeEnvironmentOrder) error {
@@ -586,6 +682,23 @@ func validateEvaluateOnExitList(v []types.EvaluateOnExit) error {
 	for i := range v {
 		if err := validateEvaluateOnExit(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFairsharePolicy(v *types.FairsharePolicy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FairsharePolicy"}
+	if v.ShareDistribution != nil {
+		if err := validateShareAttributesList(v.ShareDistribution); err != nil {
+			invalidParams.AddNested("ShareDistribution", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -834,6 +947,38 @@ func validateSecretList(v []types.Secret) error {
 	}
 }
 
+func validateShareAttributes(v *types.ShareAttributes) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ShareAttributes"}
+	if v.ShareIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ShareIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateShareAttributesList(v []types.ShareAttributes) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ShareAttributesList"}
+	for i := range v {
+		if err := validateShareAttributes(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTmpfs(v *types.Tmpfs) error {
 	if v == nil {
 		return nil
@@ -995,6 +1140,26 @@ func validateOpCreateJobQueueInput(v *CreateJobQueueInput) error {
 	}
 }
 
+func validateOpCreateSchedulingPolicyInput(v *CreateSchedulingPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSchedulingPolicyInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.FairsharePolicy != nil {
+		if err := validateFairsharePolicy(v.FairsharePolicy); err != nil {
+			invalidParams.AddNested("FairsharePolicy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteComputeEnvironmentInput(v *DeleteComputeEnvironmentInput) error {
 	if v == nil {
 		return nil
@@ -1025,6 +1190,21 @@ func validateOpDeleteJobQueueInput(v *DeleteJobQueueInput) error {
 	}
 }
 
+func validateOpDeleteSchedulingPolicyInput(v *DeleteSchedulingPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteSchedulingPolicyInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeregisterJobDefinitionInput(v *DeregisterJobDefinitionInput) error {
 	if v == nil {
 		return nil
@@ -1047,6 +1227,21 @@ func validateOpDescribeJobsInput(v *DescribeJobsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeJobsInput"}
 	if v.Jobs == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Jobs"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeSchedulingPoliciesInput(v *DescribeSchedulingPoliciesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeSchedulingPoliciesInput"}
+	if v.Arns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arns"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1219,6 +1414,26 @@ func validateOpUpdateJobQueueInput(v *UpdateJobQueueInput) error {
 	if v.ComputeEnvironmentOrder != nil {
 		if err := validateComputeEnvironmentOrders(v.ComputeEnvironmentOrder); err != nil {
 			invalidParams.AddNested("ComputeEnvironmentOrder", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSchedulingPolicyInput(v *UpdateSchedulingPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSchedulingPolicyInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if v.FairsharePolicy != nil {
+		if err := validateFairsharePolicy(v.FairsharePolicy); err != nil {
+			invalidParams.AddNested("FairsharePolicy", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -34,8 +34,8 @@ type RegisterContainerInstanceInput struct {
 	// The container instance attributes that this container instance supports.
 	Attributes []types.Attribute
 
-	// The short name or full Amazon Resource Name (ARN) of the cluster with which to
-	// register your container instance. If you do not specify a cluster, the default
+	// The short name or full Amazon Resource Name (ARN) of the cluster to register
+	// your container instance with. If you do not specify a cluster, the default
 	// cluster is assumed.
 	Cluster *string
 
@@ -57,25 +57,25 @@ type RegisterContainerInstanceInput struct {
 	PlatformDevices []types.PlatformDevice
 
 	// The metadata that you apply to the container instance to help you categorize and
-	// organize them. Each tag consists of a key and an optional value, both of which
-	// you define. The following basic restrictions apply to tags:
+	// organize them. Each tag consists of a key and an optional value. You define
+	// both. The following basic restrictions apply to tags:
 	//
-	// * Maximum number of
-	// tags per resource - 50
+	// * Maximum number of tags
+	// per resource - 50
 	//
-	// * For each resource, each tag key must be unique, and
-	// each tag key can have only one value.
+	// * For each resource, each tag key must be unique, and each
+	// tag key can have only one value.
 	//
-	// * Maximum key length - 128 Unicode
-	// characters in UTF-8
+	// * Maximum key length - 128 Unicode characters
+	// in UTF-8
 	//
 	// * Maximum value length - 256 Unicode characters in UTF-8
 	//
-	// *
-	// If your tagging schema is used across multiple services and resources, remember
-	// that other services may have restrictions on allowed characters. Generally
-	// allowed characters are: letters, numbers, and spaces representable in UTF-8, and
-	// the following characters: + - = . _ : / @.
+	// * If your
+	// tagging schema is used across multiple services and resources, remember that
+	// other services may have restrictions on allowed characters. Generally allowed
+	// characters are: letters, numbers, and spaces representable in UTF-8, and the
+	// following characters: + - = . _ : / @.
 	//
 	// * Tag keys and values are
 	// case-sensitive.
@@ -90,7 +90,7 @@ type RegisterContainerInstanceInput struct {
 	TotalResources []types.Resource
 
 	// The version information for the Amazon ECS container agent and Docker daemon
-	// running on the container instance.
+	// that runs on the container instance.
 	VersionInfo *types.VersionInfo
 
 	noSmithyDocumentSerde

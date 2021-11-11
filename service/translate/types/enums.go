@@ -2,6 +2,24 @@
 
 package types
 
+type Directionality string
+
+// Enum values for Directionality
+const (
+	DirectionalityUni   Directionality = "UNI"
+	DirectionalityMulti Directionality = "MULTI"
+)
+
+// Values returns all known values for Directionality. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Directionality) Values() []Directionality {
+	return []Directionality{
+		"UNI",
+		"MULTI",
+	}
+}
+
 type EncryptionKeyType string
 
 // Enum values for EncryptionKeyType
@@ -112,6 +130,7 @@ type TerminologyDataFormat string
 const (
 	TerminologyDataFormatCsv TerminologyDataFormat = "CSV"
 	TerminologyDataFormatTmx TerminologyDataFormat = "TMX"
+	TerminologyDataFormatTsv TerminologyDataFormat = "TSV"
 )
 
 // Values returns all known values for TerminologyDataFormat. Note that this can be
@@ -121,5 +140,6 @@ func (TerminologyDataFormat) Values() []TerminologyDataFormat {
 	return []TerminologyDataFormat{
 		"CSV",
 		"TMX",
+		"TSV",
 	}
 }

@@ -62,6 +62,24 @@ func (DeviceState) Values() []DeviceState {
 	}
 }
 
+type DlClass string
+
+// Enum values for DlClass
+const (
+	DlClassClassB DlClass = "ClassB"
+	DlClassClassC DlClass = "ClassC"
+)
+
+// Values returns all known values for DlClass. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (DlClass) Values() []DlClass {
+	return []DlClass{
+		"ClassB",
+		"ClassC",
+	}
+}
+
 type Event string
 
 // Enum values for Event
@@ -86,6 +104,40 @@ func (Event) Values() []Event {
 	}
 }
 
+type EventNotificationPartnerType string
+
+// Enum values for EventNotificationPartnerType
+const (
+	EventNotificationPartnerTypeSidewalk EventNotificationPartnerType = "Sidewalk"
+)
+
+// Values returns all known values for EventNotificationPartnerType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EventNotificationPartnerType) Values() []EventNotificationPartnerType {
+	return []EventNotificationPartnerType{
+		"Sidewalk",
+	}
+}
+
+type EventNotificationTopicStatus string
+
+// Enum values for EventNotificationTopicStatus
+const (
+	EventNotificationTopicStatusEnabled  EventNotificationTopicStatus = "Enabled"
+	EventNotificationTopicStatusDisabled EventNotificationTopicStatus = "Disabled"
+)
+
+// Values returns all known values for EventNotificationTopicStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EventNotificationTopicStatus) Values() []EventNotificationTopicStatus {
+	return []EventNotificationTopicStatus{
+		"Enabled",
+		"Disabled",
+	}
+}
+
 type ExpressionType string
 
 // Enum values for ExpressionType
@@ -101,6 +153,82 @@ func (ExpressionType) Values() []ExpressionType {
 	return []ExpressionType{
 		"RuleName",
 		"MqttTopic",
+	}
+}
+
+type FuotaDeviceStatus string
+
+// Enum values for FuotaDeviceStatus
+const (
+	FuotaDeviceStatusInitial              FuotaDeviceStatus = "Initial"
+	FuotaDeviceStatusPackageNotSupported  FuotaDeviceStatus = "Package_Not_Supported"
+	FuotaDeviceStatusFragAlgoUnsupported  FuotaDeviceStatus = "FragAlgo_unsupported"
+	FuotaDeviceStatusNotEnoughMemory      FuotaDeviceStatus = "Not_enough_memory"
+	FuotaDeviceStatusFragIndexUnsupported FuotaDeviceStatus = "FragIndex_unsupported"
+	FuotaDeviceStatusWrongDescriptor      FuotaDeviceStatus = "Wrong_descriptor"
+	FuotaDeviceStatusSessionCntReplay     FuotaDeviceStatus = "SessionCnt_replay"
+	FuotaDeviceStatusMissingFrag          FuotaDeviceStatus = "MissingFrag"
+	FuotaDeviceStatusMemoryError          FuotaDeviceStatus = "MemoryError"
+	FuotaDeviceStatusMICError             FuotaDeviceStatus = "MICError"
+	FuotaDeviceStatusSuccessful           FuotaDeviceStatus = "Successful"
+)
+
+// Values returns all known values for FuotaDeviceStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FuotaDeviceStatus) Values() []FuotaDeviceStatus {
+	return []FuotaDeviceStatus{
+		"Initial",
+		"Package_Not_Supported",
+		"FragAlgo_unsupported",
+		"Not_enough_memory",
+		"FragIndex_unsupported",
+		"Wrong_descriptor",
+		"SessionCnt_replay",
+		"MissingFrag",
+		"MemoryError",
+		"MICError",
+		"Successful",
+	}
+}
+
+type FuotaTaskStatus string
+
+// Enum values for FuotaTaskStatus
+const (
+	FuotaTaskStatusPending             FuotaTaskStatus = "Pending"
+	FuotaTaskStatusFuotaSessionWaiting FuotaTaskStatus = "FuotaSession_Waiting"
+	FuotaTaskStatusInFuotaSession      FuotaTaskStatus = "In_FuotaSession"
+	FuotaTaskStatusFuotaDone           FuotaTaskStatus = "FuotaDone"
+	FuotaTaskStatusDeleteWaiting       FuotaTaskStatus = "Delete_Waiting"
+)
+
+// Values returns all known values for FuotaTaskStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FuotaTaskStatus) Values() []FuotaTaskStatus {
+	return []FuotaTaskStatus{
+		"Pending",
+		"FuotaSession_Waiting",
+		"In_FuotaSession",
+		"FuotaDone",
+		"Delete_Waiting",
+	}
+}
+
+type IdentifierType string
+
+// Enum values for IdentifierType
+const (
+	IdentifierTypePartnerAccountId IdentifierType = "PartnerAccountId"
+)
+
+// Values returns all known values for IdentifierType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IdentifierType) Values() []IdentifierType {
+	return []IdentifierType{
+		"PartnerAccountId",
 	}
 }
 
@@ -177,6 +305,28 @@ func (SigningAlg) Values() []SigningAlg {
 	return []SigningAlg{
 		"Ed25519",
 		"P256r1",
+	}
+}
+
+type SupportedRfRegion string
+
+// Enum values for SupportedRfRegion
+const (
+	SupportedRfRegionEu868  SupportedRfRegion = "EU868"
+	SupportedRfRegionUs915  SupportedRfRegion = "US915"
+	SupportedRfRegionAu915  SupportedRfRegion = "AU915"
+	SupportedRfRegionAs9231 SupportedRfRegion = "AS923-1"
+)
+
+// Values returns all known values for SupportedRfRegion. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SupportedRfRegion) Values() []SupportedRfRegion {
+	return []SupportedRfRegion{
+		"EU868",
+		"US915",
+		"AU915",
+		"AS923-1",
 	}
 }
 

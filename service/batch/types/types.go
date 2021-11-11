@@ -157,6 +157,10 @@ type ComputeEnvironmentDetail struct {
 	// in the Batch User Guide.
 	Type CEType
 
+	// The maximum number of VCPUs expected to be used for an unmanaged compute
+	// environment.
+	UnmanagedvCpus int32
+
 	noSmithyDocumentSerde
 }
 
@@ -273,8 +277,9 @@ type ComputeResource struct {
 
 	// Provides information used to select Amazon Machine Images (AMIs) for EC2
 	// instances in the compute environment. If Ec2Configuration isn't specified, the
-	// default is ECS_AL1. This parameter isn't applicable to jobs that are running on
-	// Fargate resources, and shouldn't be specified.
+	// default is ECS_AL2. One or two values can be provided. This parameter isn't
+	// applicable to jobs that are running on Fargate resources, and shouldn't be
+	// specified.
 	Ec2Configuration []Ec2Configuration
 
 	// The Amazon EC2 key pair that's used for instances launched in the compute
@@ -380,7 +385,7 @@ type ComputeResource struct {
 	// where String1 is the tag key and String2 is the tag value−for example, { "Name":
 	// "Batch Instance - C4OnDemand" }. This is helpful for recognizing your Batch
 	// instances in the Amazon EC2 console. These tags can't be updated or removed
-	// after the compute environment is created.Aany changes to these tags require that
+	// after the compute environment is created. Any changes to these tags require that
 	// you create a new compute environment and remove the old compute environment.
 	// These tags aren't seen when using the Batch ListTagsForResource API operation.
 	// This parameter isn't applicable to jobs that are running on Fargate resources,
@@ -510,8 +515,8 @@ type ContainerDetail struct {
 	LogStreamName *string
 
 	// For jobs run on EC2 resources that didn't specify memory requirements using
-	// ResourceRequirement, the number of MiB of memory reserved for the job. For other
-	// jobs, including all run on Fargate resources, see resourceRequirements.
+	// resourceRequirements, the number of MiB of memory reserved for the job. For
+	// other jobs, including all run on Fargate resources, see resourceRequirements.
 	Memory int32
 
 	// The mount points for data volumes in your container.
@@ -575,7 +580,7 @@ type ContainerDetail struct {
 	// The number of vCPUs reserved for the container. For jobs that run on EC2
 	// resources, you can specify the vCPU requirement for the job using
 	// resourceRequirements, but you can't specify the vCPU requirements in both the
-	// vcpus and resourceRequirement object. This parameter maps to CpuShares in the
+	// vcpus and resourceRequirements object. This parameter maps to CpuShares in the
 	// Create a container
 	// (https://docs.docker.com/engine/api/v1.23/#create-a-container) section of the
 	// Docker Remote API (https://docs.docker.com/engine/api/v1.23/) and the
@@ -613,15 +618,17 @@ type ContainerOverrides struct {
 	// and shouldn't be provided.
 	InstanceType *string
 
-	// This parameter indicates the amount of memory (in MiB) that's reserved for the
-	// job. It overrides the memory parameter set in the job definition, but doesn't
-	// override any memory requirement specified in the ResourceRequirement structure
-	// in the job definition. To override memory requirements that are specified in the
-	// ResourceRequirement structure in the job definition, ResourceRequirement must be
-	// specified in the SubmitJob request, with type set to MEMORY and value set to the
-	// new value. This parameter is supported for jobs that run on EC2 resources, but
-	// isn't supported for jobs that run on Fargate resources. For these resources, use
-	// resourceRequirement instead.
+	// This parameter is deprecated, use resourceRequirements to override the memory
+	// requirements specified in the job definition. It's not supported for jobs that
+	// run on Fargate resources. For jobs run on EC2 resources, it overrides the memory
+	// parameter set in the job definition, but doesn't override any memory requirement
+	// specified in the resourceRequirements structure in the job definition. To
+	// override memory requirements that are specified in the resourceRequirements
+	// structure in the job definition, resourceRequirements must be specified in the
+	// SubmitJob request, with type set to MEMORY and value set to the new value. For
+	// more information, see Can't override job definition resource requirements
+	// (https://docs.aws.amazon.com/batch/latest/userguide/troubleshooting.html#override-resource-requirements)
+	// in the Batch User Guide.
 	//
 	// Deprecated: This field is deprecated, use resourceRequirements instead.
 	Memory int32
@@ -631,22 +638,17 @@ type ContainerOverrides struct {
 	// VCPU.
 	ResourceRequirements []ResourceRequirement
 
-	// This parameter indicates the number of vCPUs reserved for the container.It
-	// overrides the vcpus parameter that's set in the job definition, but doesn't
-	// override any vCPU requirement specified in the resourceRequirement structure in
-	// the job definition. To override vCPU requirements that are specified in the
-	// ResourceRequirement structure in the job definition, ResourceRequirement must be
-	// specified in the SubmitJob request, with type set to VCPU and value set to the
-	// new value. This parameter maps to CpuShares in the Create a container
-	// (https://docs.docker.com/engine/api/v1.23/#create-a-container) section of the
-	// Docker Remote API (https://docs.docker.com/engine/api/v1.23/) and the
-	// --cpu-shares option to docker run
-	// (https://docs.docker.com/engine/reference/run/). Each vCPU is equivalent to
-	// 1,024 CPU shares. You must specify at least one vCPU. This parameter is
-	// supported for jobs that run on EC2 resources, but isn't supported for jobs that
-	// run on Fargate resources. For Fargate resources, you can only use
-	// resourceRequirement. For EC2 resources, you can use either this parameter or
-	// resourceRequirement but not both.
+	// This parameter is deprecated, use resourceRequirements to override the vcpus
+	// parameter that's set in the job definition. It's not supported for jobs that run
+	// on Fargate resources. For jobs run on EC2 resources, it overrides the vcpus
+	// parameter set in the job definition, but doesn't override any vCPU requirement
+	// specified in the resourceRequirements structure in the job definition. To
+	// override vCPU requirements that are specified in the resourceRequirements
+	// structure in the job definition, resourceRequirements must be specified in the
+	// SubmitJob request, with type set to VCPU and value set to the new value. For
+	// more information, see Can't override job definition resource requirements
+	// (https://docs.aws.amazon.com/batch/latest/userguide/troubleshooting.html#override-resource-requirements)
+	// in the Batch User Guide.
 	//
 	// Deprecated: This field is deprecated, use resourceRequirements instead.
 	Vcpus int32
@@ -760,21 +762,13 @@ type ContainerProperties struct {
 	// in the Amazon Elastic Container Service Developer Guide.
 	LogConfiguration *LogConfiguration
 
-	// This parameter indicates the memory hard limit (in MiB) for a container. If your
-	// container attempts to exceed the specified number, it's terminated. You must
-	// specify at least 4 MiB of memory for a job using this parameter. The memory hard
-	// limit can be specified in several places. It must be specified for each node at
-	// least once. This parameter maps to Memory in the Create a container
-	// (https://docs.docker.com/engine/api/v1.23/#create-a-container) section of the
-	// Docker Remote API (https://docs.docker.com/engine/api/v1.23/) and the --memory
-	// option to docker run (https://docs.docker.com/engine/reference/run/). This
-	// parameter is supported on EC2 resources but isn't supported on Fargate
-	// resources. For Fargate resources, you should specify the memory requirement
-	// using resourceRequirement. You can also do this for EC2 resources. If you're
-	// trying to maximize your resource utilization by providing your jobs as much
-	// memory as possible for a particular instance type, see Memory Management
-	// (https://docs.aws.amazon.com/batch/latest/userguide/memory-management.html) in
-	// the Batch User Guide.
+	// This parameter is deprecated, use resourceRequirements to specify the memory
+	// requirements for the job definition. It's not supported for jobs that run on
+	// Fargate resources. For jobs run on EC2 resources, it specifies the memory hard
+	// limit (in MiB) for a container. If your container attempts to exceed the
+	// specified number, it's terminated. You must specify at least 4 MiB of memory for
+	// a job using this parameter. The memory hard limit can be specified in several
+	// places. It must be specified for each node at least once.
 	//
 	// Deprecated: This field is deprecated, use resourceRequirements instead.
 	Memory int32
@@ -834,20 +828,17 @@ type ContainerProperties struct {
 	// option to docker run (https://docs.docker.com/engine/reference/run/).
 	User *string
 
-	// The number of vCPUs reserved for the job. Each vCPU is equivalent to 1,024 CPU
-	// shares. This parameter maps to CpuShares in the Create a container
+	// This parameter is deprecated, use resourceRequirements to specify the vCPU
+	// requirements for the job definition. It's not supported for jobs that run on
+	// Fargate resources. For jobs run on EC2 resources, it specifies the number of
+	// vCPUs reserved for the job. Each vCPU is equivalent to 1,024 CPU shares. This
+	// parameter maps to CpuShares in the Create a container
 	// (https://docs.docker.com/engine/api/v1.23/#create-a-container) section of the
 	// Docker Remote API (https://docs.docker.com/engine/api/v1.23/) and the
 	// --cpu-shares option to docker run
 	// (https://docs.docker.com/engine/reference/run/). The number of vCPUs must be
 	// specified but can be specified in several places. You must specify it at least
-	// once for each node. This parameter is supported on EC2 resources but isn't
-	// supported for jobs that run on Fargate resources. For these resources, use
-	// resourceRequirement instead. You can use this parameter or resourceRequirements
-	// structure but not both. This parameter isn't applicable to jobs that are running
-	// on Fargate resources and shouldn't be provided. For jobs that run on Fargate
-	// resources, you must specify the vCPU requirement for the job using
-	// resourceRequirements.
+	// once for each node.
 	//
 	// Deprecated: This field is deprecated, use resourceRequirements instead.
 	Vcpus int32
@@ -894,33 +885,24 @@ type Device struct {
 
 // Provides information used to select Amazon Machine Images (AMIs) for instances
 // in the compute environment. If Ec2Configuration isn't specified, the default is
-// currently ECS_AL1 (Amazon Linux
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#alami))
-// for non-GPU, non AWSGraviton instances. Starting on March 31, 2021, this default
-// will be changing to ECS_AL2 (Amazon Linux 2
+// ECS_AL2 (Amazon Linux 2
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#al2ami)).
 // This object isn't applicable to jobs that are running on Fargate resources.
 type Ec2Configuration struct {
 
 	// The image type to match with the instance type to select an AMI. If the
 	// imageIdOverride parameter isn't specified, then a recent Amazon ECS-optimized
-	// AMI
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)
-	// (ECS_AL1) is used. Starting on March 31, 2021, this default will be changing to
-	// ECS_AL2 (Amazon Linux 2
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#al2ami)).
-	// ECS_AL2 Amazon Linux 2
+	// Amazon Linux 2 AMI
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#al2ami)
+	// (ECS_AL2) is used. ECS_AL2 Amazon Linux 2
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#al2ami)−
-	// Default for all Amazon Web Services Graviton-based instance families (for
-	// example, C6g, M6g, R6g, and T4g) and can be used for all non-GPU instance types.
-	// ECS_AL2_NVIDIA Amazon Linux 2 (GPU)
+	// Default for all non-GPU instance families. ECS_AL2_NVIDIA Amazon Linux 2 (GPU)
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#gpuami)−Default
 	// for all GPU instance families (for example P4 and G4) and can be used for all
 	// non Amazon Web Services Graviton-based instance types. ECS_AL1 Amazon Linux
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#alami)−Default
-	// for all non-GPU, non Amazon Web Services Graviton instance families. Amazon
-	// Linux is reaching the end-of-life of standard support. For more information, see
-	// Amazon Linux AMI (http://aws.amazon.com/amazon-linux-ami/).
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#alami).
+	// Amazon Linux is reaching the end-of-life of standard support. For more
+	// information, see Amazon Linux AMI (http://aws.amazon.com/amazon-linux-ami/).
 	//
 	// This member is required.
 	ImageType *string
@@ -1013,22 +995,57 @@ type EvaluateOnExit struct {
 	// Contains a glob pattern to match against the decimal representation of the
 	// ExitCode returned for a job. The pattern can be up to 512 characters in length.
 	// It can contain only numbers, and can optionally end with an asterisk (*) so that
-	// only the start of the string needs to be an exact match.
+	// only the start of the string needs to be an exact match. The string can be
+	// between 1 and 512 characters in length.
 	OnExitCode *string
 
 	// Contains a glob pattern to match against the Reason returned for a job. The
 	// pattern can be up to 512 characters in length. It can contain letters, numbers,
 	// periods (.), colons (:), and white space (including spaces and tabs). It can
 	// optionally end with an asterisk (*) so that only the start of the string needs
-	// to be an exact match.
+	// to be an exact match. The string can be between 1 and 512 characters in length.
 	OnReason *string
 
 	// Contains a glob pattern to match against the StatusReason returned for a job.
 	// The pattern can be up to 512 characters in length. It can contain letters,
 	// numbers, periods (.), colons (:), and white space (including spaces or tabs). It
 	// can optionally end with an asterisk (*) so that only the start of the string
-	// needs to be an exact match.
+	// needs to be an exact match. The string can be between 1 and 512 characters in
+	// length.
 	OnStatusReason *string
+
+	noSmithyDocumentSerde
+}
+
+// The fair share policy for a scheduling policy.
+type FairsharePolicy struct {
+
+	// A value used to reserve some of the available maximum vCPU for fair share
+	// identifiers that have not yet been used. The reserved ratio is
+	// (computeReservation/100)^ActiveFairShares  where  ActiveFairShares  is the
+	// number of active fair share identifiers. For example, a computeReservation value
+	// of 50 indicates that Batch should reserve 50% of the maximum available vCPU if
+	// there is only one fair share identifier, 25% if there are two fair share
+	// identifiers, and 12.5% if there are three fair share identifiers. A
+	// computeReservation value of 25 indicates that Batch should reserve 25% of the
+	// maximum available vCPU if there is only one fair share identifier, 6.25% if
+	// there are two fair share identifiers, and 1.56% if there are three fair share
+	// identifiers. The minimum value is 0 and the maximum value is 99.
+	ComputeReservation int32
+
+	// The time period to use to calculate a fair share percentage for each fair share
+	// identifier in use, in seconds. A value of zero (0) indicates that only current
+	// usage should be measured; if there are four evenly weighted fair share
+	// identifiers then each can only use up to 25% of the available CPU resources,
+	// even if some of the fair share identifiers have no currently running jobs. The
+	// decay allows for more recently run jobs to have more weight than jobs that ran
+	// earlier. The maximum supported value is 604800 (1 week).
+	ShareDecaySeconds int32
+
+	// Array of SharedIdentifier objects that contain the weights for the fair share
+	// identifiers for the fair share policy. Fair share identifiers that are not
+	// included have a default weight of 1.0.
+	ShareDistribution []ShareAttributes
 
 	noSmithyDocumentSerde
 }
@@ -1086,9 +1103,9 @@ type JobDefinition struct {
 	// This member is required.
 	Revision int32
 
-	// The type of job definition. If the job is run on Fargate resources, then
-	// multinode isn't supported. For more information about multi-node parallel jobs,
-	// see Creating a multi-node parallel job definition
+	// The type of job definition, either container or multinode. If the job is run on
+	// Fargate resources, then multinode isn't supported. For more information about
+	// multi-node parallel jobs, see Creating a multi-node parallel job definition
 	// (https://docs.aws.amazon.com/batch/latest/userguide/multi-node-job-def.html) in
 	// the Batch User Guide.
 	//
@@ -1127,6 +1144,11 @@ type JobDefinition struct {
 	// The retry strategy to use for failed jobs that are submitted with this job
 	// definition.
 	RetryStrategy *RetryStrategy
+
+	// The scheduling priority of the job definition. This will only affect jobs in job
+	// queues with a fair share policy. Jobs with a higher scheduling priority will be
+	// scheduled before jobs with a lower scheduling priority.
+	SchedulingPriority int32
 
 	// The status of the job definition.
 	Status *string
@@ -1242,6 +1264,14 @@ type JobDetail struct {
 	// The retry strategy to use for this job if an attempt fails.
 	RetryStrategy *RetryStrategy
 
+	// The scheduling policy of the job definition. This will only affect jobs in job
+	// queues with a fair share policy. Jobs with a higher scheduling priority will be
+	// scheduled before jobs with a lower scheduling priority.
+	SchedulingPriority int32
+
+	// The share identifier for the job.
+	ShareIdentifier *string
+
 	// A short, human-readable string to provide additional details about the current
 	// status of the job.
 	StatusReason *string
@@ -1297,6 +1327,11 @@ type JobQueueDetail struct {
 	//
 	// This member is required.
 	State JQState
+
+	// Amazon Resource Name (ARN) of the scheduling policy. The format is
+	// aws:Partition:batch:Region:Account:scheduling-policy/Name . For example,
+	// aws:aws:batch:us-west-2:012345678910:scheduling-policy/MySchedulingPolicy.
+	SchedulingPolicyArn *string
 
 	// The status of the job queue (for example, CREATING or VALID).
 	Status JQStatus
@@ -1836,6 +1871,45 @@ type RetryStrategy struct {
 	noSmithyDocumentSerde
 }
 
+// An object representing a scheduling policy.
+type SchedulingPolicyDetail struct {
+
+	// Amazon Resource Name (ARN) of the scheduling policy. An example would be
+	// arn:aws:batch:us-east-1:123456789012:scheduling-policy/HighPriority
+	//
+	// This member is required.
+	Arn *string
+
+	// The name of the scheduling policy.
+	//
+	// This member is required.
+	Name *string
+
+	// The fair share policy for the scheduling policy.
+	FairsharePolicy *FairsharePolicy
+
+	// The tags that you apply to the scheduling policy to help you categorize and
+	// organize your resources. Each tag consists of a key and an optional value. For
+	// more information, see Tagging Amazon Web Services Resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in Amazon Web
+	// Services General Reference.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// An object containing the details of a scheduling policy returned in a
+// ListSchedulingPolicy action.
+type SchedulingPolicyListingDetail struct {
+
+	// Amazon Resource Name (ARN) of the scheduling policy.
+	//
+	// This member is required.
+	Arn *string
+
+	noSmithyDocumentSerde
+}
+
 // An object representing the secret to expose to your container. Secrets can be
 // exposed to a container in the following ways:
 //
@@ -1866,6 +1940,33 @@ type Secret struct {
 	//
 	// This member is required.
 	ValueFrom *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the weights for the fair share identifiers for the fair share policy.
+// Fair share identifiers that are not included have a default weight of 1.0.
+type ShareAttributes struct {
+
+	// A fair share identifier or fair share identifier prefix. If the string ends with
+	// '*' then this entry specifies the weight factor to use for fair share
+	// identifiers that begin with that prefix. The list of fair share identifiers in a
+	// fair share policy cannot overlap. For example you cannot have one that specifies
+	// a shareIdentifier of UserA* and another that specifies a shareIdentifier of
+	// UserA-1. There can be no more than 500 fair share identifiers active in a job
+	// queue. The string is limited to 255 alphanumeric characters, optionally followed
+	// by '*'.
+	//
+	// This member is required.
+	ShareIdentifier *string
+
+	// The weight factor for the fair share identifier. The default value is 1.0. A
+	// lower value has a higher priority for compute resources. For example, jobs using
+	// a share identifier with a weight factor of 0.125 (1/8) will get 8 times the
+	// compute resources of jobs using a share identifier with a weight factor of 1.
+	// The smallest supported value is 0.0001 and the largest supported value is
+	// 999.9999.
+	WeightFactor float32
 
 	noSmithyDocumentSerde
 }

@@ -123,6 +123,10 @@ type DescribeEndpointOutput struct {
 	// The most recent deployment configuration for the endpoint.
 	LastDeploymentConfig *types.DeploymentConfig
 
+	// Returns the summary of an in-progress deployment. This field is only returned
+	// when the endpoint is creating or updating with a new endpoint configuration.
+	PendingDeploymentSummary *types.PendingDeploymentSummary
+
 	// An array of ProductionVariantSummary objects, one for each model hosted behind
 	// this endpoint.
 	ProductionVariants []types.ProductionVariantSummary

@@ -6488,6 +6488,144 @@ func awsAwsjson11_deserializeDocumentByteMatchStatement(v **types.ByteMatchState
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentCaptchaAction(v **types.CaptchaAction, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CaptchaAction
+	if *v == nil {
+		sv = &types.CaptchaAction{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CustomRequestHandling":
+			if err := awsAwsjson11_deserializeDocumentCustomRequestHandling(&sv.CustomRequestHandling, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCaptchaConfig(v **types.CaptchaConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CaptchaConfig
+	if *v == nil {
+		sv = &types.CaptchaConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ImmunityTimeProperty":
+			if err := awsAwsjson11_deserializeDocumentImmunityTimeProperty(&sv.ImmunityTimeProperty, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCaptchaResponse(v **types.CaptchaResponse, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CaptchaResponse
+	if *v == nil {
+		sv = &types.CaptchaResponse{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FailureReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FailureReason to be of type string, got %T instead", value)
+				}
+				sv.FailureReason = types.FailureReason(jtv)
+			}
+
+		case "ResponseCode":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ResponseCode to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ResponseCode = ptr.Int32(int32(i64))
+			}
+
+		case "SolveTimestamp":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected SolveTimestamp to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SolveTimestamp = ptr.Int64(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentCondition(v **types.Condition, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7556,6 +7694,50 @@ func awsAwsjson11_deserializeDocumentHTTPRequest(v **types.HTTPRequest, value in
 					return fmt.Errorf("expected URIString to be of type string, got %T instead", value)
 				}
 				sv.URI = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentImmunityTimeProperty(v **types.ImmunityTimeProperty, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ImmunityTimeProperty
+	if *v == nil {
+		sv = &types.ImmunityTimeProperty{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ImmunityTime":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TimeWindowSecond to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ImmunityTime = ptr.Int64(i64)
 			}
 
 		default:
@@ -9819,6 +10001,11 @@ func awsAwsjson11_deserializeDocumentRule(v **types.Rule, value interface{}) err
 				return err
 			}
 
+		case "CaptchaConfig":
+			if err := awsAwsjson11_deserializeDocumentCaptchaConfig(&sv.CaptchaConfig, value); err != nil {
+				return err
+			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9899,6 +10086,11 @@ func awsAwsjson11_deserializeDocumentRuleAction(v **types.RuleAction, value inte
 
 		case "Block":
 			if err := awsAwsjson11_deserializeDocumentBlockAction(&sv.Block, value); err != nil {
+				return err
+			}
+
+		case "Captcha":
+			if err := awsAwsjson11_deserializeDocumentCaptchaAction(&sv.Captcha, value); err != nil {
 				return err
 			}
 
@@ -10327,6 +10519,11 @@ func awsAwsjson11_deserializeDocumentSampledHTTPRequest(v **types.SampledHTTPReq
 					return fmt.Errorf("expected Action to be of type string, got %T instead", value)
 				}
 				sv.Action = ptr.String(jtv)
+			}
+
+		case "CaptchaResponse":
+			if err := awsAwsjson11_deserializeDocumentCaptchaResponse(&sv.CaptchaResponse, value); err != nil {
+				return err
 			}
 
 		case "Labels":
@@ -11838,6 +12035,11 @@ func awsAwsjson11_deserializeDocumentWebACL(v **types.WebACL, value interface{})
 					return err
 				}
 				sv.Capacity = i64
+			}
+
+		case "CaptchaConfig":
+			if err := awsAwsjson11_deserializeDocumentCaptchaConfig(&sv.CaptchaConfig, value); err != nil {
+				return err
 			}
 
 		case "CustomResponseBodies":

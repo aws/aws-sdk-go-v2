@@ -4766,6 +4766,13 @@ func awsRestjson1_serializeDocumentBackupSelection(v *types.BackupSelection, val
 	object := value.Object()
 	defer object.Close()
 
+	if v.Conditions != nil {
+		ok := object.Key("Conditions")
+		if err := awsRestjson1_serializeDocumentConditions(v.Conditions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.IamRoleArn != nil {
 		ok := object.Key("IamRoleArn")
 		ok.String(*v.IamRoleArn)
@@ -4774,6 +4781,13 @@ func awsRestjson1_serializeDocumentBackupSelection(v *types.BackupSelection, val
 	if v.ListOfTags != nil {
 		ok := object.Key("ListOfTags")
 		if err := awsRestjson1_serializeDocumentListOfTags(v.ListOfTags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NotResources != nil {
+		ok := object.Key("NotResources")
+		if err := awsRestjson1_serializeDocumentResourceArns(v.NotResources, ok); err != nil {
 			return err
 		}
 	}
@@ -4832,6 +4846,71 @@ func awsRestjson1_serializeDocumentCondition(v *types.Condition, value smithyjso
 	if v.ConditionValue != nil {
 		ok := object.Key("ConditionValue")
 		ok.String(*v.ConditionValue)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentConditionParameter(v *types.ConditionParameter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConditionKey != nil {
+		ok := object.Key("ConditionKey")
+		ok.String(*v.ConditionKey)
+	}
+
+	if v.ConditionValue != nil {
+		ok := object.Key("ConditionValue")
+		ok.String(*v.ConditionValue)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentConditionParameters(v []types.ConditionParameter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentConditionParameter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentConditions(v *types.Conditions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.StringEquals != nil {
+		ok := object.Key("StringEquals")
+		if err := awsRestjson1_serializeDocumentConditionParameters(v.StringEquals, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StringLike != nil {
+		ok := object.Key("StringLike")
+		if err := awsRestjson1_serializeDocumentConditionParameters(v.StringLike, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StringNotEquals != nil {
+		ok := object.Key("StringNotEquals")
+		if err := awsRestjson1_serializeDocumentConditionParameters(v.StringNotEquals, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StringNotLike != nil {
+		ok := object.Key("StringNotLike")
+		if err := awsRestjson1_serializeDocumentConditionParameters(v.StringNotLike, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

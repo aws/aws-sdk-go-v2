@@ -31924,6 +31924,11 @@ func awsEc2query_serializeDocumentFleetSpotCapacityRebalanceRequest(v *types.Fle
 		objectKey.String(string(v.ReplacementStrategy))
 	}
 
+	if v.TerminationDelay != nil {
+		objectKey := object.Key("TerminationDelay")
+		objectKey.Integer(*v.TerminationDelay)
+	}
+
 	return nil
 }
 
@@ -36910,6 +36915,11 @@ func awsEc2query_serializeDocumentSpotCapacityRebalance(v *types.SpotCapacityReb
 		objectKey.String(string(v.ReplacementStrategy))
 	}
 
+	if v.TerminationDelay != nil {
+		objectKey := object.Key("TerminationDelay")
+		objectKey.Integer(*v.TerminationDelay)
+	}
+
 	return nil
 }
 
@@ -41297,6 +41307,11 @@ func awsEc2query_serializeOpDocumentCreateRouteInput(v *CreateRouteInput, value 
 	if v.CarrierGatewayId != nil {
 		objectKey := object.Key("CarrierGatewayId")
 		objectKey.String(*v.CarrierGatewayId)
+	}
+
+	if v.CoreNetworkArn != nil {
+		objectKey := object.Key("CoreNetworkArn")
+		objectKey.String(*v.CoreNetworkArn)
 	}
 
 	if v.DestinationCidrBlock != nil {
@@ -52204,6 +52219,11 @@ func awsEc2query_serializeOpDocumentReplaceRouteInput(v *ReplaceRouteInput, valu
 	if v.CarrierGatewayId != nil {
 		objectKey := object.Key("CarrierGatewayId")
 		objectKey.String(*v.CarrierGatewayId)
+	}
+
+	if v.CoreNetworkArn != nil {
+		objectKey := object.Key("CoreNetworkArn")
+		objectKey.String(*v.CoreNetworkArn)
 	}
 
 	if v.DestinationCidrBlock != nil {

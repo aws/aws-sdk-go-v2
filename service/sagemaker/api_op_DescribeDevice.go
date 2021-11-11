@@ -63,6 +63,9 @@ type DescribeDeviceOutput struct {
 	// This member is required.
 	RegistrationTime *time.Time
 
+	// Edge Manager agent version.
+	AgentVersion *string
+
 	// A description of the device.
 	Description *string
 

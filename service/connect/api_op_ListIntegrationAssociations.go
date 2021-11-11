@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides summary information about the AWS resource associations for the
-// specified Amazon Connect instance.
+// Provides summary information about the Amazon Web Services resource associations
+// for the specified Amazon Connect instance.
 func (c *Client) ListIntegrationAssociations(ctx context.Context, params *ListIntegrationAssociationsInput, optFns ...func(*Options)) (*ListIntegrationAssociationsOutput, error) {
 	if params == nil {
 		params = &ListIntegrationAssociationsInput{}
@@ -37,7 +37,7 @@ type ListIntegrationAssociationsInput struct {
 	// This member is required.
 	InstanceId *string
 
-	//
+	// The type of integration.
 	IntegrationType types.IntegrationType
 
 	// The maximum number of results to return per page.

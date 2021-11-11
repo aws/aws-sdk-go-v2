@@ -29,7 +29,7 @@ func (c *Client) UpdateCapacityProvider(ctx context.Context, params *UpdateCapac
 
 type UpdateCapacityProviderInput struct {
 
-	// An object representing the parameters to update for the Auto Scaling group
+	// An object that represent the parameters to update for the Auto Scaling group
 	// capacity provider.
 	//
 	// This member is required.

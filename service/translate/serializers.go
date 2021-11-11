@@ -823,6 +823,13 @@ func awsAwsjson11_serializeDocumentOutputDataConfig(v *types.OutputDataConfig, v
 	object := value.Object()
 	defer object.Close()
 
+	if v.EncryptionKey != nil {
+		ok := object.Key("EncryptionKey")
+		if err := awsAwsjson11_serializeDocumentEncryptionKey(v.EncryptionKey, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.S3Uri != nil {
 		ok := object.Key("S3Uri")
 		ok.String(*v.S3Uri)
@@ -873,6 +880,11 @@ func awsAwsjson11_serializeDocumentTargetLanguageCodeStringList(v []string, valu
 func awsAwsjson11_serializeDocumentTerminologyData(v *types.TerminologyData, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.Directionality) > 0 {
+		ok := object.Key("Directionality")
+		ok.String(string(v.Directionality))
+	}
 
 	if v.File != nil {
 		ok := object.Key("File")

@@ -23,14 +23,14 @@ import (
 // deployment controller, only the desired count, deployment configuration, task
 // placement constraints and strategies, and health check grace period can be
 // updated using this API. If the network configuration, platform version, or task
-// definition need to be updated, a new CodeDeploy deployment should be created.
-// For more information, see CreateDeployment
+// definition need to be updated, a new CodeDeploy deployment is created. For more
+// information, see CreateDeployment
 // (https://docs.aws.amazon.com/codedeploy/latest/APIReference/API_CreateDeployment.html)
 // in the CodeDeploy API Reference. For services using an external deployment
 // controller, you can update only the desired count, task placement constraints
 // and strategies, and health check grace period using this API. If the launch
 // type, load balancer, network configuration, platform version, or task definition
-// need to be updated, you should create a new task set. For more information, see
+// need to be updated, create a new task set. For more information, see
 // CreateTaskSet. You can add to or subtract from the number of instantiations of a
 // task definition in a service by specifying the cluster that the service is
 // running in and a new desiredCount parameter. If you have updated the Docker
@@ -39,7 +39,7 @@ import (
 // percent and maximum percent parameters (in the service's deployment
 // configuration) to determine the deployment strategy. If your updated Docker
 // image uses the same tag as what is in the existing task definition for your
-// service (for example, my_image:latest), you do not need to create a new revision
+// service (for example, my_image:latest), you don't need to create a new revision
 // of your task definition. You can update the service using the forceNewDeployment
 // option. The new tasks launched by the deployment pull the current image/tag
 // combination from your repository when they start. You can also update the
@@ -52,38 +52,38 @@ import (
 // the scheduler can ignore desiredCount temporarily during a deployment. For
 // example, if desiredCount is four tasks, a minimum of 50% allows the scheduler to
 // stop two existing tasks before starting two new tasks. Tasks for services that
-// do not use a load balancer are considered healthy if they are in the RUNNING
+// don't use a load balancer are considered healthy if they're in the RUNNING
 // state. Tasks for services that use a load balancer are considered healthy if
-// they are in the RUNNING state and the container instance they are hosted on is
+// they're in the RUNNING state and the container instance they're hosted on is
 // reported as healthy by the load balancer.
 //
 // * The maximumPercent parameter
-// represents an upper limit on the number of running tasks during a deployment,
-// which enables you to define the deployment batch size. For example, if
-// desiredCount is four tasks, a maximum of 200% starts four new tasks before
-// stopping the four older tasks (provided that the cluster resources required to
-// do this are available).
+// represents an upper limit on the number of running tasks during a deployment.
+// You can use it to define the deployment batch size. For example, if desiredCount
+// is four tasks, a maximum of 200% starts four new tasks before stopping the four
+// older tasks (provided that the cluster resources required to do this are
+// available).
 //
-// When UpdateService stops a task during a deployment,
-// the equivalent of docker stop is issued to the containers running in the task.
-// This results in a SIGTERM and a 30-second timeout, after which SIGKILL is sent
-// and the containers are forcibly stopped. If the container handles the SIGTERM
-// gracefully and exits within 30 seconds from receiving it, no SIGKILL is sent.
-// When the service scheduler launches new tasks, it determines task placement in
-// your cluster with the following logic:
+// When UpdateService stops a task during a deployment, the equivalent
+// of docker stop is issued to the containers running in the task. This results in
+// a SIGTERM and a 30-second timeout. After this, SIGKILL is sent and the
+// containers are forcibly stopped. If the container handles the SIGTERM gracefully
+// and exits within 30 seconds from receiving it, no SIGKILL is sent. When the
+// service scheduler launches new tasks, it determines task placement in your
+// cluster with the following logic.
 //
-// * Determine which of the container
-// instances in your cluster can support your service's task definition (for
-// example, they have the required CPU, memory, ports, and container instance
-// attributes).
+// * Determine which of the container instances
+// in your cluster can support your service's task definition. For example, they
+// have the required CPU, memory, ports, and container instance attributes.
 //
-// * By default, the service scheduler attempts to balance tasks
-// across Availability Zones in this manner (although you can choose a different
-// placement strategy):
+// * By
+// default, the service scheduler attempts to balance tasks across Availability
+// Zones in this manner even though you can choose a different placement
+// strategy.
 //
-// * Sort the valid container instances by the fewest number
-// of running tasks for this service in the same Availability Zone as the instance.
-// For example, if zone A has one running service task and zones B and C each have
+// * Sort the valid container instances by the fewest number of running
+// tasks for this service in the same Availability Zone as the instance. For
+// example, if zone A has one running service task and zones B and C each have
 // zero, valid container instances in either zone B or C are considered optimal for
 // placement.
 //
@@ -127,14 +127,14 @@ type UpdateServiceInput struct {
 	// This member is required.
 	Service *string
 
-	// The capacity provider strategy to update the service to use. If the service is
-	// using the default capacity provider strategy for the cluster, the service can be
+	// The capacity provider strategy to update the service to use. if the service uses
+	// the default capacity provider strategy for the cluster, the service can be
 	// updated to use one or more capacity providers as opposed to the default capacity
 	// provider strategy. However, when a service is using a capacity provider strategy
-	// that is not the default capacity provider strategy, the service cannot be
-	// updated to use the cluster's default capacity provider strategy. A capacity
-	// provider strategy consists of one or more capacity providers along with the base
-	// and weight to assign to them. A capacity provider must be associated with the
+	// that's not the default capacity provider strategy, the service can't be updated
+	// to use the cluster's default capacity provider strategy. A capacity provider
+	// strategy consists of one or more capacity providers along with the base and
+	// weight to assign to them. A capacity provider must be associated with the
 	// cluster to be used in a capacity provider strategy. The
 	// PutClusterCapacityProviders API is used to associate a capacity provider with a
 	// cluster. Only capacity providers with an ACTIVE or UPDATING status can be used.
@@ -149,7 +149,7 @@ type UpdateServiceInput struct {
 	CapacityProviderStrategy []types.CapacityProviderStrategyItem
 
 	// The short name or full Amazon Resource Name (ARN) of the cluster that your
-	// service is running on. If you do not specify a cluster, the default cluster is
+	// service runs on. If you do not specify a cluster, the default cluster is
 	// assumed.
 	Cluster *string
 
@@ -166,16 +166,16 @@ type UpdateServiceInput struct {
 	// you can set this to null when performing this action.
 	EnableExecuteCommand *bool
 
-	// Whether to force a new deployment of the service. Deployments are not forced by
-	// default. You can use this option to trigger a new deployment with no service
-	// definition changes. For example, you can update a service's tasks to use a newer
-	// Docker image with the same image/tag combination (my_image:latest) or to roll
-	// Fargate tasks onto a newer platform version.
+	// Determines whether to force a new deployment of the service. By default,
+	// deployments aren't forced. You can use this option to start a new deployment
+	// with no service definition changes. For example, you can update a service's
+	// tasks to use a newer Docker image with the same image/tag combination
+	// (my_image:latest) or to roll Fargate tasks onto a newer platform version.
 	ForceNewDeployment bool
 
-	// The period of time, in seconds, that the Amazon ECS service scheduler should
-	// ignore unhealthy Elastic Load Balancing target health checks after a task has
-	// first started. This is only valid if your service is configured to use a load
+	// The period of time, in seconds, that the Amazon ECS service scheduler ignores
+	// unhealthy Elastic Load Balancing target health checks after a task has first
+	// started. This is only valid if your service is configured to use a load
 	// balancer. If your service's tasks take a while to start and respond to Elastic
 	// Load Balancing health checks, you can specify a health check grace period of up
 	// to 2,147,483,647 seconds. During that time, the Amazon ECS service scheduler
@@ -192,22 +192,22 @@ type UpdateServiceInput struct {
 	// remain unchanged. If this value is specified, it will override any existing
 	// placement constraints defined for the service. To remove all existing placement
 	// constraints, specify an empty array. You can specify a maximum of 10 constraints
-	// per task (this limit includes constraints in the task definition and those
-	// specified at runtime).
+	// for each task. This limit includes constraints in the task definition and those
+	// specified at runtime.
 	PlacementConstraints []types.PlacementConstraint
 
 	// The task placement strategy objects to update the service to use. If no value is
 	// specified, the existing placement strategy for the service will remain
 	// unchanged. If this value is specified, it will override the existing placement
 	// strategy defined for the service. To remove an existing placement strategy,
-	// specify an empty object. You can specify a maximum of five strategy rules per
-	// service.
+	// specify an empty object. You can specify a maximum of five strategy rules for
+	// each service.
 	PlacementStrategy []types.PlacementStrategy
 
-	// The platform version on which your tasks in the service are running. A platform
-	// version is only specified for tasks using the Fargate launch type. If a platform
-	// version is not specified, the LATEST platform version is used by default. For
-	// more information, see Fargate Platform Versions
+	// The platform version that your tasks in the service run on. A platform version
+	// is only specified for tasks using the Fargate launch type. If a platform version
+	// is not specified, the LATEST platform version is used. For more information, see
+	// Fargate Platform Versions
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	PlatformVersion *string

@@ -17,8 +17,8 @@ import (
 // list of attribute objects, one for each attribute on each resource. You can
 // filter the list of results to a single attribute name to only return results
 // that have that name. You can also filter the results by attribute name and
-// value, for example, to see which container instances in a cluster are running a
-// Linux AMI (ecs.os-type=linux).
+// value. You can do this, for example, to see which container instances in a
+// cluster are running a Linux AMI (ecs.os-type=linux).
 func (c *Client) ListAttributes(ctx context.Context, params *ListAttributesInput, optFns ...func(*Options)) (*ListAttributesOutput, error) {
 	if params == nil {
 		params = &ListAttributesInput{}
@@ -36,36 +36,36 @@ func (c *Client) ListAttributes(ctx context.Context, params *ListAttributesInput
 
 type ListAttributesInput struct {
 
-	// The type of the target with which to list attributes.
+	// The type of the target to list attributes with.
 	//
 	// This member is required.
 	TargetType types.TargetType
 
-	// The name of the attribute with which to filter the results.
+	// The name of the attribute to filter the results with.
 	AttributeName *string
 
-	// The value of the attribute with which to filter results. You must also specify
-	// an attribute name to use this parameter.
+	// The value of the attribute to filter results with. You must also specify an
+	// attribute name to use this parameter.
 	AttributeValue *string
 
 	// The short name or full Amazon Resource Name (ARN) of the cluster to list
 	// attributes. If you do not specify a cluster, the default cluster is assumed.
 	Cluster *string
 
-	// The maximum number of cluster results returned by ListAttributes in paginated
+	// The maximum number of cluster results that ListAttributes returned in paginated
 	// output. When this parameter is used, ListAttributes only returns maxResults
 	// results in a single page along with a nextToken response element. The remaining
 	// results of the initial request can be seen by sending another ListAttributes
 	// request with the returned nextToken value. This value can be between 1 and 100.
-	// If this parameter is not used, then ListAttributes returns up to 100 results and
+	// If this parameter isn't used, then ListAttributes returns up to 100 results and
 	// a nextToken value if applicable.
 	MaxResults *int32
 
 	// The nextToken value returned from a ListAttributes request indicating that more
-	// results are available to fulfill the request and further calls will be needed.
-	// If maxResults was provided, it is possible the number of results to be fewer
-	// than maxResults. This token should be treated as an opaque identifier that is
-	// only used to retrieve the next items in a list and not for other programmatic
+	// results are available to fulfill the request and further calls are needed. If
+	// maxResults was provided, it's possible the number of results to be fewer than
+	// maxResults. This token should be treated as an opaque identifier that is only
+	// used to retrieve the next items in a list and not for other programmatic
 	// purposes.
 	NextToken *string
 
@@ -162,12 +162,12 @@ var _ ListAttributesAPIClient = (*Client)(nil)
 
 // ListAttributesPaginatorOptions is the paginator options for ListAttributes
 type ListAttributesPaginatorOptions struct {
-	// The maximum number of cluster results returned by ListAttributes in paginated
+	// The maximum number of cluster results that ListAttributes returned in paginated
 	// output. When this parameter is used, ListAttributes only returns maxResults
 	// results in a single page along with a nextToken response element. The remaining
 	// results of the initial request can be seen by sending another ListAttributes
 	// request with the returned nextToken value. This value can be between 1 and 100.
-	// If this parameter is not used, then ListAttributes returns up to 100 results and
+	// If this parameter isn't used, then ListAttributes returns up to 100 results and
 	// a nextToken value if applicable.
 	Limit int32
 

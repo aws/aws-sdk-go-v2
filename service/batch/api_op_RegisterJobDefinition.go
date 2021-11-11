@@ -86,6 +86,13 @@ type RegisterJobDefinitionInput struct {
 	// timeout, it isn't retried.
 	RetryStrategy *types.RetryStrategy
 
+	// The scheduling priority for jobs that are submitted with this job definition.
+	// This will only affect jobs in job queues with a fair share policy. Jobs with a
+	// higher scheduling priority will be scheduled before jobs with a lower scheduling
+	// priority. The minimum supported value is 0 and the maximum supported value is
+	// 9999.
+	SchedulingPriority int32
+
 	// The tags that you apply to the job definition to help you categorize and
 	// organize your resources. Each tag consists of a key and an optional value. For
 	// more information, see Tagging Amazon Web Services Resources

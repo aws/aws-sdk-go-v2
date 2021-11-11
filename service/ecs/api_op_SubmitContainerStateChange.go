@@ -36,7 +36,7 @@ type SubmitContainerStateChangeInput struct {
 	// The name of the container.
 	ContainerName *string
 
-	// The exit code returned for the state change request.
+	// The exit code that's returned for the state change request.
 	ExitCode *int32
 
 	// The network bindings of the container.

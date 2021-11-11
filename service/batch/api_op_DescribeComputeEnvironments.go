@@ -66,9 +66,9 @@ type DescribeComputeEnvironmentsOutput struct {
 	ComputeEnvironments []types.ComputeEnvironmentDetail
 
 	// The nextToken value to include in a future DescribeComputeEnvironments request.
-	// When the results of a DescribeJobDefinitions request exceed maxResults, this
-	// value can be used to retrieve the next page of results. This value is null when
-	// there are no more results to return.
+	// When the results of a DescribeComputeEnvironments request exceed maxResults,
+	// this value can be used to retrieve the next page of results. This value is null
+	// when there are no more results to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

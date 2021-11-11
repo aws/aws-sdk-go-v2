@@ -9094,6 +9094,11 @@ func awsAwsjson11_deserializeDocumentContainerInstance(v **types.ContainerInstan
 				sv.Ec2InstanceId = ptr.String(jtv)
 			}
 
+		case "healthStatus":
+			if err := awsAwsjson11_deserializeDocumentContainerInstanceHealthStatus(&sv.HealthStatus, value); err != nil {
+				return err
+			}
+
 		case "pendingTasksCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9185,6 +9190,51 @@ func awsAwsjson11_deserializeDocumentContainerInstance(v **types.ContainerInstan
 		case "versionInfo":
 			if err := awsAwsjson11_deserializeDocumentVersionInfo(&sv.VersionInfo, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentContainerInstanceHealthStatus(v **types.ContainerInstanceHealthStatus, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ContainerInstanceHealthStatus
+	if *v == nil {
+		sv = &types.ContainerInstanceHealthStatus{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "details":
+			if err := awsAwsjson11_deserializeDocumentInstanceHealthCheckResultList(&sv.Details, value); err != nil {
+				return err
+			}
+
+		case "overallStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InstanceHealthCheckState to be of type string, got %T instead", value)
+				}
+				sv.OverallStatus = types.InstanceHealthCheckState(jtv)
 			}
 
 		default:
@@ -11102,6 +11152,121 @@ func awsAwsjson11_deserializeDocumentInferenceAccelerators(v *[]types.InferenceA
 		var col types.InferenceAccelerator
 		destAddr := &col
 		if err := awsAwsjson11_deserializeDocumentInferenceAccelerator(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentInstanceHealthCheckResult(v **types.InstanceHealthCheckResult, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InstanceHealthCheckResult
+	if *v == nil {
+		sv = &types.InstanceHealthCheckResult{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "lastStatusChange":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastStatusChange = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "lastUpdated":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastUpdated = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InstanceHealthCheckState to be of type string, got %T instead", value)
+				}
+				sv.Status = types.InstanceHealthCheckState(jtv)
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InstanceHealthCheckType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.InstanceHealthCheckType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentInstanceHealthCheckResultList(v *[]types.InstanceHealthCheckResult, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.InstanceHealthCheckResult
+	if *v == nil {
+		cv = []types.InstanceHealthCheckResult{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.InstanceHealthCheckResult
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentInstanceHealthCheckResult(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr

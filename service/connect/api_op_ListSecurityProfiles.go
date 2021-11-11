@@ -12,6 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// This API is in preview release for Amazon Connect and is subject to change.
 // Provides summary information about the security profiles for the specified
 // Amazon Connect instance. For more information about security profiles, see
 // Security Profiles

@@ -30,8 +30,8 @@ func (c *Client) DiscoverPollEndpoint(ctx context.Context, params *DiscoverPollE
 
 type DiscoverPollEndpointInput struct {
 
-	// The short name or full Amazon Resource Name (ARN) of the cluster to which the
-	// container instance belongs.
+	// The short name or full Amazon Resource Name (ARN) of the cluster that the
+	// container instance belongs to.
 	Cluster *string
 
 	// The container instance ID or full ARN of the container instance. The ARN

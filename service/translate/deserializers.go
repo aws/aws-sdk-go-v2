@@ -1296,6 +1296,9 @@ func awsAwsjson11_deserializeOpErrorStartTextTranslationJob(response *smithyhttp
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServerException(response, errorBody)
 
+	case strings.EqualFold("InvalidParameterValueException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameterValueException(response, errorBody)
+
 	case strings.EqualFold("InvalidRequestException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidRequestException(response, errorBody)
 
@@ -2788,6 +2791,11 @@ func awsAwsjson11_deserializeDocumentOutputDataConfig(v **types.OutputDataConfig
 
 	for key, value := range shape {
 		switch key {
+		case "EncryptionKey":
+			if err := awsAwsjson11_deserializeDocumentEncryptionKey(&sv.EncryptionKey, value); err != nil {
+				return err
+			}
+
 		case "S3Uri":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3453,9 +3461,27 @@ func awsAwsjson11_deserializeDocumentTerminologyProperties(v **types.Terminology
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "Directionality":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Directionality to be of type string, got %T instead", value)
+				}
+				sv.Directionality = types.Directionality(jtv)
+			}
+
 		case "EncryptionKey":
 			if err := awsAwsjson11_deserializeDocumentEncryptionKey(&sv.EncryptionKey, value); err != nil {
 				return err
+			}
+
+		case "Format":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TerminologyDataFormat to be of type string, got %T instead", value)
+				}
+				sv.Format = types.TerminologyDataFormat(jtv)
 			}
 
 		case "LastUpdatedAt":
@@ -3472,6 +3498,15 @@ func awsAwsjson11_deserializeDocumentTerminologyProperties(v **types.Terminology
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UnboundedLengthString to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
 			}
 
 		case "Name":
@@ -3494,6 +3529,19 @@ func awsAwsjson11_deserializeDocumentTerminologyProperties(v **types.Terminology
 					return err
 				}
 				sv.SizeBytes = ptr.Int32(int32(i64))
+			}
+
+		case "SkippedTermCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SkippedTermCount = ptr.Int32(int32(i64))
 			}
 
 		case "SourceLanguageCode":
@@ -4126,6 +4174,11 @@ func awsAwsjson11_deserializeOpDocumentGetTerminologyOutput(v **GetTerminologyOu
 
 	for key, value := range shape {
 		switch key {
+		case "AuxiliaryDataLocation":
+			if err := awsAwsjson11_deserializeDocumentTerminologyDataLocation(&sv.AuxiliaryDataLocation, value); err != nil {
+				return err
+			}
+
 		case "TerminologyDataLocation":
 			if err := awsAwsjson11_deserializeDocumentTerminologyDataLocation(&sv.TerminologyDataLocation, value); err != nil {
 				return err
@@ -4167,6 +4220,11 @@ func awsAwsjson11_deserializeOpDocumentImportTerminologyOutput(v **ImportTermino
 
 	for key, value := range shape {
 		switch key {
+		case "AuxiliaryDataLocation":
+			if err := awsAwsjson11_deserializeDocumentTerminologyDataLocation(&sv.AuxiliaryDataLocation, value); err != nil {
+				return err
+			}
+
 		case "TerminologyProperties":
 			if err := awsAwsjson11_deserializeDocumentTerminologyProperties(&sv.TerminologyProperties, value); err != nil {
 				return err

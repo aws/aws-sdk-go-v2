@@ -15,11 +15,11 @@ import (
 // cluster when you launch your first container instance. However, you can create
 // your own cluster with a unique name with the CreateCluster action. When you call
 // the CreateCluster API operation, Amazon ECS attempts to create the Amazon ECS
-// service-linked role for your account so that required resources in other Amazon
-// Web Services services can be managed on your behalf. However, if the IAM user
-// that makes the call does not have permissions to create the service-linked role,
-// it is not created. For more information, see Using Service-Linked Roles for
-// Amazon ECS
+// service-linked role for your account. This is so that it can manage required
+// resources in other Amazon Web Services services on your behalf. However, if the
+// IAM user that makes the call doesn't have permissions to create the
+// service-linked role, it isn't created. For more information, see Using
+// Service-Linked Roles for Amazon ECS
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html)
 // in the Amazon Elastic Container Service Developer Guide.
 func (c *Client) CreateCluster(ctx context.Context, params *CreateClusterInput, optFns ...func(*Options)) (*CreateClusterOutput, error) {
@@ -44,58 +44,58 @@ type CreateClusterInput struct {
 	// as part of the default capacity provider strategy of the cluster or used in a
 	// capacity provider strategy when calling the CreateService or RunTask actions. If
 	// specifying a capacity provider that uses an Auto Scaling group, the capacity
-	// provider must already be created and not already associated with another
-	// cluster. New Auto Scaling group capacity providers can be created with the
-	// CreateCapacityProvider API operation. To use a Fargate capacity provider,
-	// specify either the FARGATE or FARGATE_SPOT capacity providers. The Fargate
-	// capacity providers are available to all accounts and only need to be associated
-	// with a cluster to be used. The PutClusterCapacityProviders API operation is used
-	// to update the list of available capacity providers for a cluster after the
-	// cluster is created.
+	// provider must be created but not associated with another cluster. New Auto
+	// Scaling group capacity providers can be created with the CreateCapacityProvider
+	// API operation. To use a Fargate capacity provider, specify either the FARGATE or
+	// FARGATE_SPOT capacity providers. The Fargate capacity providers are available to
+	// all accounts and only need to be associated with a cluster to be used. The
+	// PutClusterCapacityProviders API operation is used to update the list of
+	// available capacity providers for a cluster after the cluster is created.
 	CapacityProviders []string
 
-	// The name of your cluster. If you do not specify a name for your cluster, you
-	// create a cluster named default. Up to 255 letters (uppercase and lowercase),
-	// numbers, underscores, and hyphens are allowed.
+	// The name of your cluster. If you don't specify a name for your cluster, you
+	// create a cluster that's named default. Up to 255 letters (uppercase and
+	// lowercase), numbers, underscores, and hyphens are allowed.
 	ClusterName *string
 
 	// The execute command configuration for the cluster.
 	Configuration *types.ClusterConfiguration
 
-	// The capacity provider strategy to set as the default for the cluster. When a
-	// default capacity provider strategy is set for a cluster, when calling the
+	// The capacity provider strategy to set as the default for the cluster. After a
+	// default capacity provider strategy is set for a cluster, when you call the
 	// RunTask or CreateService APIs with no capacity provider strategy or launch type
 	// specified, the default capacity provider strategy for the cluster is used. If a
-	// default capacity provider strategy is not defined for a cluster during creation,
-	// it can be defined later with the PutClusterCapacityProviders API operation.
+	// default capacity provider strategy isn't defined for a cluster when it was
+	// created, it can be defined later with the PutClusterCapacityProviders API
+	// operation.
 	DefaultCapacityProviderStrategy []types.CapacityProviderStrategyItem
 
 	// The setting to use when creating a cluster. This parameter is used to enable
-	// CloudWatch Container Insights for a cluster. If this value is specified, it will
-	// override the containerInsights value set with PutAccountSetting or
+	// CloudWatch Container Insights for a cluster. If this value is specified, it
+	// overrides the containerInsights value set with PutAccountSetting or
 	// PutAccountSettingDefault.
 	Settings []types.ClusterSetting
 
 	// The metadata that you apply to the cluster to help you categorize and organize
-	// them. Each tag consists of a key and an optional value, both of which you
-	// define. The following basic restrictions apply to tags:
+	// them. Each tag consists of a key and an optional value. You define both. The
+	// following basic restrictions apply to tags:
 	//
-	// * Maximum number of
-	// tags per resource - 50
+	// * Maximum number of tags per
+	// resource - 50
 	//
-	// * For each resource, each tag key must be unique, and
-	// each tag key can have only one value.
+	// * For each resource, each tag key must be unique, and each tag
+	// key can have only one value.
 	//
-	// * Maximum key length - 128 Unicode
-	// characters in UTF-8
+	// * Maximum key length - 128 Unicode characters in
+	// UTF-8
 	//
 	// * Maximum value length - 256 Unicode characters in UTF-8
 	//
-	// *
-	// If your tagging schema is used across multiple services and resources, remember
-	// that other services may have restrictions on allowed characters. Generally
-	// allowed characters are: letters, numbers, and spaces representable in UTF-8, and
-	// the following characters: + - = . _ : / @.
+	// * If your
+	// tagging schema is used across multiple services and resources, remember that
+	// other services may have restrictions on allowed characters. Generally allowed
+	// characters are: letters, numbers, and spaces representable in UTF-8, and the
+	// following characters: + - = . _ : / @.
 	//
 	// * Tag keys and values are
 	// case-sensitive.
