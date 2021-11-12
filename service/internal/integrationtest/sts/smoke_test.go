@@ -16,7 +16,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/internal/integrationtest"
 )
 
-func TestInteg_00_GetSessionToken(t *testing.T) {
+func TestInteg_00_GetCallerIdentity(t *testing.T) {
 	ctx, cancelFn := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancelFn()
 
@@ -26,10 +26,14 @@ func TestInteg_00_GetSessionToken(t *testing.T) {
 	}
 
 	client := sts.NewFromConfig(cfg)
-	params := &sts.GetSessionTokenInput{}
-	_, err = client.GetSessionToken(ctx, params)
+	params := &sts.GetCallerIdentityInput{}
+	resp, err := client.GetCallerIdentity(ctx, params)
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
+	}
+
+	if len(aws.ToString(resp.Account)) == 0 {
+		t.Errorf("expect account to not be empty")
 	}
 }
 
