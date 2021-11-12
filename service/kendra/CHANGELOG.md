@@ -1,3 +1,7 @@
+# v1.15.0 (2021-11-12)
+
+* **Feature**: Service clients now support custom endpoints that have an initial URI path defined.
+
 # v1.14.0 (2021-11-06)
 
 * **Feature**: The SDK now supports configuration of FIPS and DualStack endpoints using environment variables, shared configuration, or programmatically.

@@ -1,3 +1,7 @@
+# v1.12.0 (2021-11-12)
+
+* **Feature**: Updated service to latest API model.
+
 # v1.11.0 (2021-11-06)
 
 * **Feature**: The SDK now supports configuration of FIPS and DualStack endpoints using environment variables, shared configuration, or programmatically.

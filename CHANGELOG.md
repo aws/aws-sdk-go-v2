@@ -1,3 +1,62 @@
+# Release (2021-11-12)
+
+## General Highlights
+* **Feature**: Service clients now support custom endpoints that have an initial URI path defined.
+* **Feature**: Waiters now have a `WaitForOutput` method, which can be used to retrieve the output of the successful wait operation. Thank you to [Andrew Haines](https://github.com/haines) for contributing this feature.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/backup`: [v1.9.0](service/backup/CHANGELOG.md#v190-2021-11-12)
+  * **Feature**: Updated service to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.10.0](service/batch/CHANGELOG.md#v1100-2021-11-12)
+  * **Feature**: Updated service to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings`: [v1.0.0](service/chimesdkmeetings/CHANGELOG.md#v100-2021-11-12)
+  * **Release**: New AWS service client module
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizer`: [v1.12.0](service/computeoptimizer/CHANGELOG.md#v1120-2021-11-12)
+  * **Feature**: Updated service to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.11.0](service/connect/CHANGELOG.md#v1110-2021-11-12)
+  * **Feature**: Updated service to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/docdb`: [v1.12.0](service/docdb/CHANGELOG.md#v1120-2021-11-12)
+  * **Feature**: Updated service to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.8.0](service/dynamodb/CHANGELOG.md#v180-2021-11-12)
+  * **Documentation**: Updated service to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.22.0](service/ec2/CHANGELOG.md#v1220-2021-11-12)
+  * **Feature**: Updated service to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.12.0](service/ecs/CHANGELOG.md#v1120-2021-11-12)
+  * **Feature**: Updated service to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.9.0](service/gamelift/CHANGELOG.md#v190-2021-11-12)
+  * **Feature**: Updated service to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/greengrassv2`: [v1.9.0](service/greengrassv2/CHANGELOG.md#v190-2021-11-12)
+  * **Feature**: Updated service to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/health`: [v1.10.0](service/health/CHANGELOG.md#v1100-2021-11-12)
+  * **Documentation**: Updated service to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/identitystore`: [v1.9.0](service/identitystore/CHANGELOG.md#v190-2021-11-12)
+  * **Feature**: Updated service to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/iotwireless`: [v1.12.0](service/iotwireless/CHANGELOG.md#v1120-2021-11-12)
+  * **Feature**: Updated service to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/neptune`: [v1.11.0](service/neptune/CHANGELOG.md#v1110-2021-11-12)
+  * **Feature**: Updated service to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.12.0](service/rds/CHANGELOG.md#v1120-2021-11-12)
+  * **Feature**: Updated service to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/resiliencehub`: [v1.0.0](service/resiliencehub/CHANGELOG.md#v100-2021-11-12)
+  * **Release**: New AWS service client module
+* `github.com/aws/aws-sdk-go-v2/service/resourcegroupstaggingapi`: [v1.8.0](service/resourcegroupstaggingapi/CHANGELOG.md#v180-2021-11-12)
+  * **Documentation**: Updated service to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.14.0](service/s3control/CHANGELOG.md#v1140-2021-11-12)
+  * **Feature**: Updated service to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.19.0](service/sagemaker/CHANGELOG.md#v1190-2021-11-12)
+  * **Feature**: Updated service to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerruntime`: [v1.10.0](service/sagemakerruntime/CHANGELOG.md#v1100-2021-11-12)
+  * **Feature**: Updated service to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/ssmincidents`: [v1.7.0](service/ssmincidents/CHANGELOG.md#v170-2021-11-12)
+  * **Feature**: Updated service to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.11.0](service/transcribe/CHANGELOG.md#v1110-2021-11-12)
+  * **Feature**: Updated service to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/translate`: [v1.7.0](service/translate/CHANGELOG.md#v170-2021-11-12)
+  * **Feature**: Updated service to latest API model.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.13.0](service/wafv2/CHANGELOG.md#v1130-2021-11-12)
+  * **Feature**: Updated service to latest API model.
+
 # Release (2021-11-06)
 
 ## General Highlights
