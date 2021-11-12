@@ -41,7 +41,7 @@ func (m *awsAwsjson11_serializeOpAssociateApprovalRuleTemplateWithRepository) Ha
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -96,7 +96,7 @@ func (m *awsAwsjson11_serializeOpBatchAssociateApprovalRuleTemplateWithRepositor
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -151,7 +151,7 @@ func (m *awsAwsjson11_serializeOpBatchDescribeMergeConflicts) HandleSerialize(ct
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -206,7 +206,7 @@ func (m *awsAwsjson11_serializeOpBatchDisassociateApprovalRuleTemplateFromReposi
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -261,7 +261,7 @@ func (m *awsAwsjson11_serializeOpBatchGetCommits) HandleSerialize(ctx context.Co
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -316,7 +316,7 @@ func (m *awsAwsjson11_serializeOpBatchGetRepositories) HandleSerialize(ctx conte
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -371,7 +371,7 @@ func (m *awsAwsjson11_serializeOpCreateApprovalRuleTemplate) HandleSerialize(ctx
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -426,7 +426,7 @@ func (m *awsAwsjson11_serializeOpCreateBranch) HandleSerialize(ctx context.Conte
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -481,7 +481,7 @@ func (m *awsAwsjson11_serializeOpCreateCommit) HandleSerialize(ctx context.Conte
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -536,7 +536,7 @@ func (m *awsAwsjson11_serializeOpCreatePullRequest) HandleSerialize(ctx context.
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -591,7 +591,7 @@ func (m *awsAwsjson11_serializeOpCreatePullRequestApprovalRule) HandleSerialize(
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -646,7 +646,7 @@ func (m *awsAwsjson11_serializeOpCreateRepository) HandleSerialize(ctx context.C
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -701,7 +701,7 @@ func (m *awsAwsjson11_serializeOpCreateUnreferencedMergeCommit) HandleSerialize(
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -756,7 +756,7 @@ func (m *awsAwsjson11_serializeOpDeleteApprovalRuleTemplate) HandleSerialize(ctx
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -811,7 +811,7 @@ func (m *awsAwsjson11_serializeOpDeleteBranch) HandleSerialize(ctx context.Conte
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -866,7 +866,7 @@ func (m *awsAwsjson11_serializeOpDeleteCommentContent) HandleSerialize(ctx conte
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -921,7 +921,7 @@ func (m *awsAwsjson11_serializeOpDeleteFile) HandleSerialize(ctx context.Context
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -976,7 +976,7 @@ func (m *awsAwsjson11_serializeOpDeletePullRequestApprovalRule) HandleSerialize(
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -1031,7 +1031,7 @@ func (m *awsAwsjson11_serializeOpDeleteRepository) HandleSerialize(ctx context.C
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -1086,7 +1086,7 @@ func (m *awsAwsjson11_serializeOpDescribeMergeConflicts) HandleSerialize(ctx con
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -1141,7 +1141,7 @@ func (m *awsAwsjson11_serializeOpDescribePullRequestEvents) HandleSerialize(ctx 
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -1196,7 +1196,7 @@ func (m *awsAwsjson11_serializeOpDisassociateApprovalRuleTemplateFromRepository)
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -1251,7 +1251,7 @@ func (m *awsAwsjson11_serializeOpEvaluatePullRequestApprovalRules) HandleSeriali
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -1306,7 +1306,7 @@ func (m *awsAwsjson11_serializeOpGetApprovalRuleTemplate) HandleSerialize(ctx co
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -1361,7 +1361,7 @@ func (m *awsAwsjson11_serializeOpGetBlob) HandleSerialize(ctx context.Context, i
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -1416,7 +1416,7 @@ func (m *awsAwsjson11_serializeOpGetBranch) HandleSerialize(ctx context.Context,
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -1471,7 +1471,7 @@ func (m *awsAwsjson11_serializeOpGetComment) HandleSerialize(ctx context.Context
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -1526,7 +1526,7 @@ func (m *awsAwsjson11_serializeOpGetCommentReactions) HandleSerialize(ctx contex
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -1581,7 +1581,7 @@ func (m *awsAwsjson11_serializeOpGetCommentsForComparedCommit) HandleSerialize(c
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -1636,7 +1636,7 @@ func (m *awsAwsjson11_serializeOpGetCommentsForPullRequest) HandleSerialize(ctx 
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -1691,7 +1691,7 @@ func (m *awsAwsjson11_serializeOpGetCommit) HandleSerialize(ctx context.Context,
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -1746,7 +1746,7 @@ func (m *awsAwsjson11_serializeOpGetDifferences) HandleSerialize(ctx context.Con
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -1801,7 +1801,7 @@ func (m *awsAwsjson11_serializeOpGetFile) HandleSerialize(ctx context.Context, i
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -1856,7 +1856,7 @@ func (m *awsAwsjson11_serializeOpGetFolder) HandleSerialize(ctx context.Context,
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -1911,7 +1911,7 @@ func (m *awsAwsjson11_serializeOpGetMergeCommit) HandleSerialize(ctx context.Con
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -1966,7 +1966,7 @@ func (m *awsAwsjson11_serializeOpGetMergeConflicts) HandleSerialize(ctx context.
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -2021,7 +2021,7 @@ func (m *awsAwsjson11_serializeOpGetMergeOptions) HandleSerialize(ctx context.Co
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -2076,7 +2076,7 @@ func (m *awsAwsjson11_serializeOpGetPullRequest) HandleSerialize(ctx context.Con
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -2131,7 +2131,7 @@ func (m *awsAwsjson11_serializeOpGetPullRequestApprovalStates) HandleSerialize(c
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -2186,7 +2186,7 @@ func (m *awsAwsjson11_serializeOpGetPullRequestOverrideState) HandleSerialize(ct
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -2241,7 +2241,7 @@ func (m *awsAwsjson11_serializeOpGetRepository) HandleSerialize(ctx context.Cont
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -2296,7 +2296,7 @@ func (m *awsAwsjson11_serializeOpGetRepositoryTriggers) HandleSerialize(ctx cont
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -2351,7 +2351,7 @@ func (m *awsAwsjson11_serializeOpListApprovalRuleTemplates) HandleSerialize(ctx 
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -2406,7 +2406,7 @@ func (m *awsAwsjson11_serializeOpListAssociatedApprovalRuleTemplatesForRepositor
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -2461,7 +2461,7 @@ func (m *awsAwsjson11_serializeOpListBranches) HandleSerialize(ctx context.Conte
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -2516,7 +2516,7 @@ func (m *awsAwsjson11_serializeOpListPullRequests) HandleSerialize(ctx context.C
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -2571,7 +2571,7 @@ func (m *awsAwsjson11_serializeOpListRepositories) HandleSerialize(ctx context.C
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -2626,7 +2626,7 @@ func (m *awsAwsjson11_serializeOpListRepositoriesForApprovalRuleTemplate) Handle
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -2681,7 +2681,7 @@ func (m *awsAwsjson11_serializeOpListTagsForResource) HandleSerialize(ctx contex
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -2736,7 +2736,7 @@ func (m *awsAwsjson11_serializeOpMergeBranchesByFastForward) HandleSerialize(ctx
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -2791,7 +2791,7 @@ func (m *awsAwsjson11_serializeOpMergeBranchesBySquash) HandleSerialize(ctx cont
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -2846,7 +2846,7 @@ func (m *awsAwsjson11_serializeOpMergeBranchesByThreeWay) HandleSerialize(ctx co
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -2901,7 +2901,7 @@ func (m *awsAwsjson11_serializeOpMergePullRequestByFastForward) HandleSerialize(
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -2956,7 +2956,7 @@ func (m *awsAwsjson11_serializeOpMergePullRequestBySquash) HandleSerialize(ctx c
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -3011,7 +3011,7 @@ func (m *awsAwsjson11_serializeOpMergePullRequestByThreeWay) HandleSerialize(ctx
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -3066,7 +3066,7 @@ func (m *awsAwsjson11_serializeOpOverridePullRequestApprovalRules) HandleSeriali
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -3121,7 +3121,7 @@ func (m *awsAwsjson11_serializeOpPostCommentForComparedCommit) HandleSerialize(c
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -3176,7 +3176,7 @@ func (m *awsAwsjson11_serializeOpPostCommentForPullRequest) HandleSerialize(ctx 
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -3231,7 +3231,7 @@ func (m *awsAwsjson11_serializeOpPostCommentReply) HandleSerialize(ctx context.C
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -3286,7 +3286,7 @@ func (m *awsAwsjson11_serializeOpPutCommentReaction) HandleSerialize(ctx context
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -3341,7 +3341,7 @@ func (m *awsAwsjson11_serializeOpPutFile) HandleSerialize(ctx context.Context, i
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -3396,7 +3396,7 @@ func (m *awsAwsjson11_serializeOpPutRepositoryTriggers) HandleSerialize(ctx cont
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -3451,7 +3451,7 @@ func (m *awsAwsjson11_serializeOpTagResource) HandleSerialize(ctx context.Contex
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -3506,7 +3506,7 @@ func (m *awsAwsjson11_serializeOpTestRepositoryTriggers) HandleSerialize(ctx con
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -3561,7 +3561,7 @@ func (m *awsAwsjson11_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -3616,7 +3616,7 @@ func (m *awsAwsjson11_serializeOpUpdateApprovalRuleTemplateContent) HandleSerial
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -3671,7 +3671,7 @@ func (m *awsAwsjson11_serializeOpUpdateApprovalRuleTemplateDescription) HandleSe
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -3726,7 +3726,7 @@ func (m *awsAwsjson11_serializeOpUpdateApprovalRuleTemplateName) HandleSerialize
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -3781,7 +3781,7 @@ func (m *awsAwsjson11_serializeOpUpdateComment) HandleSerialize(ctx context.Cont
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -3836,7 +3836,7 @@ func (m *awsAwsjson11_serializeOpUpdateDefaultBranch) HandleSerialize(ctx contex
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -3891,7 +3891,7 @@ func (m *awsAwsjson11_serializeOpUpdatePullRequestApprovalRuleContent) HandleSer
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -3946,7 +3946,7 @@ func (m *awsAwsjson11_serializeOpUpdatePullRequestApprovalState) HandleSerialize
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -4001,7 +4001,7 @@ func (m *awsAwsjson11_serializeOpUpdatePullRequestDescription) HandleSerialize(c
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -4056,7 +4056,7 @@ func (m *awsAwsjson11_serializeOpUpdatePullRequestStatus) HandleSerialize(ctx co
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -4111,7 +4111,7 @@ func (m *awsAwsjson11_serializeOpUpdatePullRequestTitle) HandleSerialize(ctx con
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -4166,7 +4166,7 @@ func (m *awsAwsjson11_serializeOpUpdateRepositoryDescription) HandleSerialize(ct
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -4221,7 +4221,7 @@ func (m *awsAwsjson11_serializeOpUpdateRepositoryName) HandleSerialize(ctx conte
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}

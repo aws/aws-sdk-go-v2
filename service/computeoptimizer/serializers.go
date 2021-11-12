@@ -42,7 +42,7 @@ func (m *awsAwsjson10_serializeOpDescribeRecommendationExportJobs) HandleSeriali
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -97,7 +97,7 @@ func (m *awsAwsjson10_serializeOpExportAutoScalingGroupRecommendations) HandleSe
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -152,7 +152,7 @@ func (m *awsAwsjson10_serializeOpExportEBSVolumeRecommendations) HandleSerialize
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -207,7 +207,7 @@ func (m *awsAwsjson10_serializeOpExportEC2InstanceRecommendations) HandleSeriali
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -262,7 +262,7 @@ func (m *awsAwsjson10_serializeOpExportLambdaFunctionRecommendations) HandleSeri
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -317,7 +317,7 @@ func (m *awsAwsjson10_serializeOpGetAutoScalingGroupRecommendations) HandleSeria
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -372,7 +372,7 @@ func (m *awsAwsjson10_serializeOpGetEBSVolumeRecommendations) HandleSerialize(ct
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -427,7 +427,7 @@ func (m *awsAwsjson10_serializeOpGetEC2InstanceRecommendations) HandleSerialize(
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -482,7 +482,7 @@ func (m *awsAwsjson10_serializeOpGetEC2RecommendationProjectedMetrics) HandleSer
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -537,7 +537,7 @@ func (m *awsAwsjson10_serializeOpGetEnrollmentStatus) HandleSerialize(ctx contex
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -592,7 +592,7 @@ func (m *awsAwsjson10_serializeOpGetEnrollmentStatusesForOrganization) HandleSer
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -647,7 +647,7 @@ func (m *awsAwsjson10_serializeOpGetLambdaFunctionRecommendations) HandleSeriali
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -702,7 +702,7 @@ func (m *awsAwsjson10_serializeOpGetRecommendationSummaries) HandleSerialize(ctx
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
@@ -757,7 +757,7 @@ func (m *awsAwsjson10_serializeOpUpdateEnrollmentStatus) HandleSerialize(ctx con
 		request.Request.URL.Path = operationPath
 	} else {
 		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if operationPath[len(operationPath)-1] == '/' {
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
 			request.Request.URL.Path += "/"
 		}
 	}
