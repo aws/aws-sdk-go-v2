@@ -18,25 +18,25 @@ import (
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html)
 // in the Amazon Elastic Container Service Developer Guide. Alternatively, you can
 // use StartTask to use your own scheduler or place tasks manually on specific
-// container instances. The Amazon ECS API follows an eventual consistency model,
-// due to the distributed nature of the system supporting the API. This means that
-// the result of an API command you run that affects your Amazon ECS resources
-// might not be immediately visible to all subsequent commands you run. Keep this
-// in mind when you carry out an API command that immediately follows a previous
-// API command. To manage eventual consistency, you can do the following:
+// container instances. The Amazon ECS API follows an eventual consistency model.
+// This is because the distributed nature of the system supporting the API. This
+// means that the result of an API command you run that affects your Amazon ECS
+// resources might not be immediately visible to all subsequent commands you run.
+// Keep this in mind when you carry out an API command that immediately follows a
+// previous API command. To manage eventual consistency, you can do the
+// following:
 //
-// *
-// Confirm the state of the resource before you run a command to modify it. Run the
-// DescribeTasks command using an exponential backoff algorithm to ensure that you
-// allow enough time for the previous command to propagate through the system. To
-// do this, run the DescribeTasks command repeatedly, starting with a couple of
-// seconds of wait time and increasing gradually up to five minutes of wait
-// time.
+// * Confirm the state of the resource before you run a command to
+// modify it. Run the DescribeTasks command using an exponential backoff algorithm
+// to ensure that you allow enough time for the previous command to propagate
+// through the system. To do this, run the DescribeTasks command repeatedly,
+// starting with a couple of seconds of wait time and increasing gradually up to
+// five minutes of wait time.
 //
-// * Add wait time between subsequent commands, even if the DescribeTasks
-// command returns an accurate response. Apply an exponential backoff algorithm
-// starting with a couple of seconds of wait time, and increase gradually up to
-// about five minutes of wait time.
+// * Add wait time between subsequent commands, even if
+// the DescribeTasks command returns an accurate response. Apply an exponential
+// backoff algorithm starting with a couple of seconds of wait time, and increase
+// gradually up to about five minutes of wait time.
 func (c *Client) RunTask(ctx context.Context, params *RunTaskInput, optFns ...func(*Options)) (*RunTaskOutput, error) {
 	if params == nil {
 		params = &RunTaskInput{}
@@ -55,9 +55,9 @@ func (c *Client) RunTask(ctx context.Context, params *RunTaskInput, optFns ...fu
 type RunTaskInput struct {
 
 	// The family and revision (family:revision) or full ARN of the task definition to
-	// run. If a revision is not specified, the latest ACTIVE revision is used. The
-	// full ARN value must match the value that you specified ias the Resource of the
-	// IAM principal's permissions policy. For example, if the Resource is
+	// run. If a revision isn't specified, the latest ACTIVE revision is used. The full
+	// ARN value must match the value that you specified as the Resource of the IAM
+	// principal's permissions policy. For example, if the Resource is
 	// arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:*, the
 	// taskDefinition ARN value must be
 	// arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName.
@@ -73,12 +73,12 @@ type RunTaskInput struct {
 	// capacity provider strategy may contain a maximum of 6 capacity providers.
 	CapacityProviderStrategy []types.CapacityProviderStrategyItem
 
-	// The short name or full Amazon Resource Name (ARN) of the cluster on which to run
-	// your task. If you do not specify a cluster, the default cluster is assumed.
+	// The short name or full Amazon Resource Name (ARN) of the cluster to run your
+	// task on. If you do not specify a cluster, the default cluster is assumed.
 	Cluster *string
 
 	// The number of instantiations of the specified task to place on your cluster. You
-	// can specify up to 10 tasks per call.
+	// can specify up to 10 tasks for each call.
 	Count *int32
 
 	// Specifies whether to enable Amazon ECS managed tags for the task. For more
@@ -87,17 +87,17 @@ type RunTaskInput struct {
 	// in the Amazon Elastic Container Service Developer Guide.
 	EnableECSManagedTags bool
 
-	// Whether or not to enable the execute command functionality for the containers in
-	// this task. If true, this enables execute command functionality on all containers
-	// in the task.
+	// Determines whether to enable the execute command functionality for the
+	// containers in this task. If true, this enables execute command functionality on
+	// all containers in the task.
 	EnableExecuteCommand bool
 
 	// The name of the task group to associate with the task. The default value is the
 	// family name of the task definition (for example, family:my-family-name).
 	Group *string
 
-	// The infrastructure on which to run your standalone task. For more information,
-	// see Amazon ECS launch types
+	// The infrastructure to run your standalone task on. For more information, see
+	// Amazon ECS launch types
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html)
 	// in the Amazon Elastic Container Service Developer Guide. The FARGATE launch type
 	// runs your tasks on Fargate On-Demand infrastructure. Fargate Spot infrastructure
@@ -106,16 +106,16 @@ type RunTaskInput struct {
 	// (https://docs.aws.amazon.com/AmazonECS/latest/userguide/fargate-capacity-providers.html)
 	// in the Amazon ECS User Guide for Fargate. The EC2 launch type runs your tasks on
 	// Amazon EC2 instances registered to your cluster. The EXTERNAL launch type runs
-	// your tasks on your on-premise server or virtual machine (VM) capacity registered
-	// to your cluster. A task can use either a launch type or a capacity provider
-	// strategy. If a launchType is specified, the capacityProviderStrategy parameter
-	// must be omitted. When you use cluster auto scaling, you must specify
+	// your tasks on your on-premises server or virtual machine (VM) capacity
+	// registered to your cluster. A task can use either a launch type or a capacity
+	// provider strategy. If a launchType is specified, the capacityProviderStrategy
+	// parameter must be omitted. When you use cluster auto scaling, you must specify
 	// capacityProviderStrategy and not launchType.
 	LaunchType types.LaunchType
 
 	// The network configuration for the task. This parameter is required for task
 	// definitions that use the awsvpc network mode to receive their own elastic
-	// network interface, and it is not supported for other network modes. For more
+	// network interface, and it isn't supported for other network modes. For more
 	// information, see Task networking
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html)
 	// in the Amazon Elastic Container Service Developer Guide.
@@ -123,7 +123,7 @@ type RunTaskInput struct {
 
 	// A list of container overrides in JSON format that specify the name of a
 	// container in the specified task definition and the overrides it should receive.
-	// You can override the default command for a container (that is specified in the
+	// You can override the default command for a container (that's specified in the
 	// task definition or Docker image) with a command override. You can also override
 	// existing environment variables (that are specified in the task definition or
 	// Docker image) on a container or add new environment variables to it with an
@@ -132,23 +132,23 @@ type RunTaskInput struct {
 	Overrides *types.TaskOverride
 
 	// An array of placement constraint objects to use for the task. You can specify up
-	// to 10 constraints per task (including constraints in the task definition and
-	// those specified at runtime).
+	// to 10 constraints for each task (including constraints in the task definition
+	// and those specified at runtime).
 	PlacementConstraints []types.PlacementConstraint
 
 	// The placement strategy objects to use for the task. You can specify a maximum of
-	// 5 strategy rules per task.
+	// 5 strategy rules for each task.
 	PlacementStrategy []types.PlacementStrategy
 
-	// The platform version the task should use. A platform version is only specified
-	// for tasks hosted on Fargate. If one is not specified, the LATEST platform
-	// version is used by default. For more information, see Fargate platform versions
+	// The platform version the task uses. A platform version is only specified for
+	// tasks hosted on Fargate. If one isn't specified, the LATEST platform version is
+	// used. For more information, see Fargate platform versions
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	PlatformVersion *string
 
 	// Specifies whether to propagate the tags from the task definition to the task. If
-	// no value is specified, the tags are not propagated. Tags can only be propagated
+	// no value is specified, the tags aren't propagated. Tags can only be propagated
 	// to the task during task creation. To add tags to a task after task creation, use
 	// the TagResource API action. An error will be received if you specify the SERVICE
 	// option when running a task.
@@ -163,9 +163,9 @@ type RunTaskInput struct {
 	// unique identifier for that job to your task with the startedBy parameter. You
 	// can then identify which tasks belong to that job by filtering the results of a
 	// ListTasks call with the startedBy value. Up to 36 letters (uppercase and
-	// lowercase), numbers, hyphens, and underscores are allowed. If a task is started
-	// by an Amazon ECS service, then the startedBy parameter contains the deployment
-	// ID of the service that starts it.
+	// lowercase), numbers, hyphens (-), and underscores (_) are allowed. If a task is
+	// started by an Amazon ECS service, then the startedBy parameter contains the
+	// deployment ID of the service that starts it.
 	StartedBy *string
 
 	// The metadata that you apply to the task to help you categorize and organize

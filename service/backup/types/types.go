@@ -366,10 +366,14 @@ type BackupSelection struct {
 	// This member is required.
 	SelectionName *string
 
+	Conditions *Conditions
+
 	// An array of conditions used to specify a set of resources to assign to a backup
 	// plan; for example, "StringEquals": {"ec2:ResourceTag/Department": "accounting".
 	// Assigns the backup plan to every resource with at least one matching tag.
 	ListOfTags []Condition
+
+	NotResources []string
 
 	// An array of strings that contain Amazon Resource Names (ARNs) of resources to
 	// assign to a backup plan.
@@ -521,6 +525,26 @@ type Condition struct {
 	//
 	// This member is required.
 	ConditionValue *string
+
+	noSmithyDocumentSerde
+}
+
+type ConditionParameter struct {
+	ConditionKey *string
+
+	ConditionValue *string
+
+	noSmithyDocumentSerde
+}
+
+type Conditions struct {
+	StringEquals []ConditionParameter
+
+	StringLike []ConditionParameter
+
+	StringNotEquals []ConditionParameter
+
+	StringNotLike []ConditionParameter
 
 	noSmithyDocumentSerde
 }

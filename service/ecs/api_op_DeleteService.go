@@ -13,7 +13,7 @@ import (
 
 // Deletes a specified service within a cluster. You can delete a service if you
 // have no running tasks in it and the desired task count is zero. If the service
-// is actively maintaining tasks, you cannot delete it, and you must update the
+// is actively maintaining tasks, you can't delete it, and you must update the
 // service to a desired task count of zero. For more information, see
 // UpdateService. When you delete a service, if there are still running tasks that
 // require cleanup, the service status moves from ACTIVE to DRAINING, and the
@@ -53,8 +53,8 @@ type DeleteServiceInput struct {
 	// assumed.
 	Cluster *string
 
-	// If true, allows you to delete a service even if it has not been scaled down to
-	// zero tasks. It is only necessary to use this if the service is using the REPLICA
+	// If true, allows you to delete a service even if it wasn't scaled down to zero
+	// tasks. It's only necessary to use this if the service uses the REPLICA
 	// scheduling strategy.
 	Force *bool
 

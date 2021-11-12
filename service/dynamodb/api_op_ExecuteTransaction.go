@@ -13,7 +13,13 @@ import (
 )
 
 // This operation allows you to perform transactional reads or writes on data
-// stored in DynamoDB, using PartiQL.
+// stored in DynamoDB, using PartiQL. The entire transaction must consist of either
+// read statements or write statements, you cannot mix both in one transaction. The
+// EXISTS function is an exception and can be used to check the condition of
+// specific attributes of the item in a similar manner to ConditionCheck in the
+// TransactWriteItems
+// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/transaction-apis.html#transaction-apis-txwriteitems)
+// API.
 func (c *Client) ExecuteTransaction(ctx context.Context, params *ExecuteTransactionInput, optFns ...func(*Options)) (*ExecuteTransactionOutput, error) {
 	if params == nil {
 		params = &ExecuteTransactionInput{}

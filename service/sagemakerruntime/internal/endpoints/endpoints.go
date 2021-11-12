@@ -363,7 +363,7 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "runtime.sagemaker-fips.{region}.amazonaws.com",
+				Hostname:          "runtime.sagemaker.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},

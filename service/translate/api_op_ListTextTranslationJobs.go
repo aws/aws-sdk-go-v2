@@ -46,7 +46,7 @@ type ListTextTranslationJobsInput struct {
 
 type ListTextTranslationJobsOutput struct {
 
-	// The token to use to retreive the next page of results. This value is null when
+	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
 

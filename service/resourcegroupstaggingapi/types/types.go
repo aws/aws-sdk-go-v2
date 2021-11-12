@@ -25,34 +25,36 @@ type ComplianceDetails struct {
 
 // Information about the errors that are returned for each failed resource. This
 // information can include InternalServiceException and InvalidParameterException
-// errors. It can also include any valid error code returned by the AWS service
-// that hosts the resource that the ARN key represents. The following are common
-// error codes that you might receive from other AWS services:
+// errors. It can also include any valid error code returned by the Amazon Web
+// Services service that hosts the resource that the ARN key represents. The
+// following are common error codes that you might receive from other Amazon Web
+// Services services:
 //
-// *
-// InternalServiceException – This can mean that the Resource Groups Tagging API
-// didn't receive a response from another AWS service. It can also mean the the
-// resource type in the request is not supported by the Resource Groups Tagging
-// API. In these cases, it's safe to retry the request and then call GetResources
-// (http://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html)
+// * InternalServiceException – This can mean that the Resource
+// Groups Tagging API didn't receive a response from another Amazon Web Services
+// service. It can also mean that the resource type in the request is not supported
+// by the Resource Groups Tagging API. In these cases, it's safe to retry the
+// request and then call GetResources
+// (https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html)
 // to verify the changes.
 //
 // * AccessDeniedException – This can mean that you need
-// permission to calling tagging operations in the AWS service that contains the
-// resource. For example, to use the Resource Groups Tagging API to tag a
-// CloudWatch alarm resource, you need permission to call TagResources
-// (http://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_TagResources.html)
+// permission to call the tagging operations in the Amazon Web Services service
+// that contains the resource. For example, to use the Resource Groups Tagging API
+// to tag a Amazon CloudWatch alarm resource, you need permission to call both
+// TagResources
+// (https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_TagResources.html)
 // and TagResource
-// (http://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html)
+// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html)
 // in the CloudWatch API.
 //
 // For more information on errors that are generated from
-// other AWS services, see the documentation for that service.
+// other Amazon Web Services services, see the documentation for that service.
 type FailureInfo struct {
 
 	// The code of the common error. Valid values include InternalServiceException,
-	// InvalidParameterException, and any valid error code returned by the AWS service
-	// that hosts the resource that you want to tag.
+	// InvalidParameterException, and any valid error code returned by the Amazon Web
+	// Services service that hosts the resource that you want to tag.
 	ErrorCode ErrorCode
 
 	// The message of the common error.
@@ -75,7 +77,7 @@ type ResourceTagMapping struct {
 	// The ARN of the resource.
 	ResourceARN *string
 
-	// The tags that have been applied to one or more AWS resources.
+	// The tags that have been applied to one or more Amazon Web Services resources.
 	Tags []Tag
 
 	noSmithyDocumentSerde
@@ -90,15 +92,15 @@ type Summary struct {
 	// The count of noncompliant resources.
 	NonCompliantResources int64
 
-	// The AWS Region that the summary applies to.
+	// The Amazon Web Services Region that the summary applies to.
 	Region *string
 
-	// The AWS resource type.
+	// The Amazon Web Services resource type.
 	ResourceType *string
 
 	// The account identifier or the root identifier of the organization. If you don't
-	// know the root ID, you can call the AWS Organizations ListRoots
-	// (http://docs.aws.amazon.com/organizations/latest/APIReference/API_ListRoots.html)
+	// know the root ID, you can call the Organizations ListRoots
+	// (https://docs.aws.amazon.com/organizations/latest/APIReference/API_ListRoots.html)
 	// API.
 	TargetId *string
 
@@ -108,11 +110,11 @@ type Summary struct {
 	noSmithyDocumentSerde
 }
 
-// The metadata that you apply to AWS resources to help you categorize and organize
-// them. Each tag consists of a key and a value, both of which you define. For more
-// information, see Tagging AWS Resources
-// (http://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the AWS
-// General Reference.
+// The metadata that you apply to Amazon Web Services resources to help you
+// categorize and organize them. Each tag consists of a key and a value, both of
+// which you define. For more information, see Tagging Amazon Web Services
+// Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in
+// the Amazon Web Services General Reference.
 type Tag struct {
 
 	// One part of a key-value pair that makes up a tag. A key is a general label that

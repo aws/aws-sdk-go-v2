@@ -20,8 +20,8 @@ import (
 // role for your task with the taskRoleArn parameter. When you specify an IAM role
 // for a task, its containers can then use the latest versions of the CLI or SDKs
 // to make API requests to the Amazon Web Services services that are specified in
-// the IAM policy associated with the role. For more information, see IAM Roles for
-// Tasks
+// the IAM policy that's associated with the role. For more information, see IAM
+// Roles for Tasks
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html)
 // in the Amazon Elastic Container Service Developer Guide. You can specify a
 // Docker networking mode for the containers in your task definition with the
@@ -57,41 +57,43 @@ type RegisterTaskDefinitionInput struct {
 	// This member is required.
 	ContainerDefinitions []types.ContainerDefinition
 
-	// You must specify a family for a task definition, which allows you to track
-	// multiple versions of the same task definition. The family is used as a name for
-	// your task definition. Up to 255 letters (uppercase and lowercase), numbers,
-	// underscores, and hyphens are allowed.
+	// You must specify a family for a task definition. You can use it track multiple
+	// versions of the same task definition. The family is used as a name for your task
+	// definition. Up to 255 letters (uppercase and lowercase), numbers, underscores,
+	// and hyphens are allowed.
 	//
 	// This member is required.
 	Family *string
 
 	// The number of CPU units used by the task. It can be expressed as an integer
-	// using CPU units, for example 1024, or as a string using vCPUs, for example 1
-	// vCPU or 1 vcpu, in a task definition. String values are converted to an integer
+	// using CPU units (for example, 1024) or as a string using vCPUs (for example, 1
+	// vCPU or 1 vcpu) in a task definition. String values are converted to an integer
 	// indicating the CPU units when the task definition is registered. Task-level CPU
 	// and memory parameters are ignored for Windows containers. We recommend
-	// specifying container-level resources for Windows containers. If you are using
-	// the EC2 launch type, this field is optional. Supported values are between 128
-	// CPU units (0.125 vCPUs) and 10240 CPU units (10 vCPUs). If you are using the
-	// Fargate launch type, this field is required and you must use one of the
-	// following values, which determines your range of supported values for the memory
-	// parameter:
+	// specifying container-level resources for Windows containers. If you're using the
+	// EC2 launch type, this field is optional. Supported values are between 128 CPU
+	// units (0.125 vCPUs) and 10240 CPU units (10 vCPUs). If you're using the Fargate
+	// launch type, this field is required and you must use one of the following
+	// values, which determines your range of supported values for the memory
+	// parameter: The CPU units cannot be less than 1 vCPU when you use Windows
+	// containers on Fargate.
 	//
-	// * 256 (.25 vCPU) - Available memory values: 512 (0.5 GB), 1024 (1
-	// GB), 2048 (2 GB)
+	// * 256 (.25 vCPU) - Available memory values: 512 (0.5
+	// GB), 1024 (1 GB), 2048 (2 GB)
 	//
-	// * 512 (.5 vCPU) - Available memory values: 1024 (1 GB), 2048
-	// (2 GB), 3072 (3 GB), 4096 (4 GB)
+	// * 512 (.5 vCPU) - Available memory values: 1024
+	// (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB)
 	//
-	// * 1024 (1 vCPU) - Available memory values:
-	// 2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB),
-	// 8192 (8 GB)
+	// * 1024 (1 vCPU) - Available
+	// memory values: 2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB),
+	// 7168 (7 GB), 8192 (8 GB)
 	//
-	// * 2048 (2 vCPU) - Available memory values: Between 4096 (4 GB) and
-	// 16384 (16 GB) in increments of 1024 (1 GB)
+	// * 2048 (2 vCPU) - Available memory values: Between
+	// 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB)
 	//
-	// * 4096 (4 vCPU) - Available memory
-	// values: Between 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB)
+	// * 4096 (4 vCPU) -
+	// Available memory values: Between 8192 (8 GB) and 30720 (30 GB) in increments of
+	// 1024 (1 GB)
 	Cpu *string
 
 	// The amount of ephemeral storage to allocate for the task. This parameter is used
@@ -150,30 +152,32 @@ type RegisterTaskDefinitionInput struct {
 	IpcMode types.IpcMode
 
 	// The amount of memory (in MiB) used by the task. It can be expressed as an
-	// integer using MiB, for example 1024, or as a string using GB, for example 1GB or
-	// 1 GB, in a task definition. String values are converted to an integer indicating
-	// the MiB when the task definition is registered. Task-level CPU and memory
-	// parameters are ignored for Windows containers. We recommend specifying
+	// integer using MiB (for example ,1024) or as a string using GB (for example, 1GB
+	// or 1 GB) in a task definition. String values are converted to an integer
+	// indicating the MiB when the task definition is registered. Task-level CPU and
+	// memory parameters are ignored for Windows containers. We recommend specifying
 	// container-level resources for Windows containers. If using the EC2 launch type,
 	// this field is optional. If using the Fargate launch type, this field is required
-	// and you must use one of the following values, which determines your range of
-	// supported values for the cpu parameter:
+	// and you must use one of the following values. This determines your range of
+	// supported values for the cpu parameter. The CPU units cannot be less than 1 vCPU
+	// when you use Windows containers on Fargate.
 	//
-	// * 512 (0.5 GB), 1024 (1 GB), 2048 (2
-	// GB) - Available cpu values: 256 (.25 vCPU)
+	// * 512 (0.5 GB), 1024 (1 GB), 2048
+	// (2 GB) - Available cpu values: 256 (.25 vCPU)
 	//
-	// * 1024 (1 GB), 2048 (2 GB), 3072 (3
-	// GB), 4096 (4 GB) - Available cpu values: 512 (.5 vCPU)
+	// * 1024 (1 GB), 2048 (2 GB), 3072
+	// (3 GB), 4096 (4 GB) - Available cpu values: 512 (.5 vCPU)
 	//
-	// * 2048 (2 GB), 3072 (3
-	// GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB) - Available
-	// cpu values: 1024 (1 vCPU)
+	// * 2048 (2 GB), 3072
+	// (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB) -
+	// Available cpu values: 1024 (1 vCPU)
 	//
-	// * Between 4096 (4 GB) and 16384 (16 GB) in increments
-	// of 1024 (1 GB) - Available cpu values: 2048 (2 vCPU)
+	// * Between 4096 (4 GB) and 16384 (16 GB) in
+	// increments of 1024 (1 GB) - Available cpu values: 2048 (2 vCPU)
 	//
-	// * Between 8192 (8 GB) and
-	// 30720 (30 GB) in increments of 1024 (1 GB) - Available cpu values: 4096 (4 vCPU)
+	// * Between 8192
+	// (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB) - Available cpu values:
+	// 4096 (4 vCPU)
 	Memory *string
 
 	// The Docker networking mode to use for the containers in the task. The valid
@@ -219,8 +223,8 @@ type RegisterTaskDefinitionInput struct {
 	PidMode types.PidMode
 
 	// An array of placement constraint objects to use for the task. You can specify a
-	// maximum of 10 constraints per task (this limit includes constraints in the task
-	// definition and those specified at runtime).
+	// maximum of 10 constraints for each task. This limit includes constraints in the
+	// task definition and those specified at runtime.
 	PlacementConstraints []types.TaskDefinitionPlacementConstraint
 
 	// The configuration details for the App Mesh proxy. For tasks hosted on Amazon EC2
@@ -234,10 +238,10 @@ type RegisterTaskDefinitionInput struct {
 	// in the Amazon Elastic Container Service Developer Guide.
 	ProxyConfiguration *types.ProxyConfiguration
 
-	// The task launch type that Amazon ECS should validate the task definition
-	// against. A client exception is returned if the task definition doesn't validate
-	// against the compatibilities specified. If no value is specified, the parameter
-	// is omitted from the response.
+	// The task launch type that Amazon ECS validates the task definition against. A
+	// client exception is returned if the task definition doesn't validate against the
+	// compatibilities specified. If no value is specified, the parameter is omitted
+	// from the response.
 	RequiresCompatibilities []types.Compatibility
 
 	// The operating system that your tasks definitions run on. A platform family is
@@ -247,8 +251,8 @@ type RegisterTaskDefinitionInput struct {
 	RuntimePlatform *types.RuntimePlatform
 
 	// The metadata that you apply to the task definition to help you categorize and
-	// organize them. Each tag consists of a key and an optional value, both of which
-	// you define. The following basic restrictions apply to tags:
+	// organize them. Each tag consists of a key and an optional value. You define both
+	// of them. The following basic restrictions apply to tags:
 	//
 	// * Maximum number of
 	// tags per resource - 50
@@ -284,7 +288,7 @@ type RegisterTaskDefinitionInput struct {
 	// in the Amazon Elastic Container Service Developer Guide.
 	TaskRoleArn *string
 
-	// A list of volume definitions in JSON format that containers in your task may
+	// A list of volume definitions in JSON format that containers in your task might
 	// use.
 	Volumes []types.Volume
 

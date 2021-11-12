@@ -29,20 +29,20 @@ func (c *Client) ListClusters(ctx context.Context, params *ListClustersInput, op
 
 type ListClustersInput struct {
 
-	// The maximum number of cluster results returned by ListClusters in paginated
+	// The maximum number of cluster results that ListClusters returned in paginated
 	// output. When this parameter is used, ListClusters only returns maxResults
 	// results in a single page along with a nextToken response element. The remaining
 	// results of the initial request can be seen by sending another ListClusters
 	// request with the returned nextToken value. This value can be between 1 and 100.
-	// If this parameter is not used, then ListClusters returns up to 100 results and a
+	// If this parameter isn't used, then ListClusters returns up to 100 results and a
 	// nextToken value if applicable.
 	MaxResults *int32
 
 	// The nextToken value returned from a ListClusters request indicating that more
-	// results are available to fulfill the request and further calls will be needed.
-	// If maxResults was provided, it is possible the number of results to be fewer
-	// than maxResults. This token should be treated as an opaque identifier that is
-	// only used to retrieve the next items in a list and not for other programmatic
+	// results are available to fulfill the request and further calls are needed. If
+	// maxResults was provided, it's possible the number of results to be fewer than
+	// maxResults. This token should be treated as an opaque identifier that is only
+	// used to retrieve the next items in a list and not for other programmatic
 	// purposes.
 	NextToken *string
 
@@ -51,8 +51,8 @@ type ListClustersInput struct {
 
 type ListClustersOutput struct {
 
-	// The list of full Amazon Resource Name (ARN) entries for each cluster associated
-	// with your account.
+	// The list of full Amazon Resource Name (ARN) entries for each cluster that's
+	// associated with your account.
 	ClusterArns []string
 
 	// The nextToken value to include in a future ListClusters request. When the
@@ -136,12 +136,12 @@ var _ ListClustersAPIClient = (*Client)(nil)
 
 // ListClustersPaginatorOptions is the paginator options for ListClusters
 type ListClustersPaginatorOptions struct {
-	// The maximum number of cluster results returned by ListClusters in paginated
+	// The maximum number of cluster results that ListClusters returned in paginated
 	// output. When this parameter is used, ListClusters only returns maxResults
 	// results in a single page along with a nextToken response element. The remaining
 	// results of the initial request can be seen by sending another ListClusters
 	// request with the returned nextToken value. This value can be between 1 and 100.
-	// If this parameter is not used, then ListClusters returns up to 100 results and a
+	// If this parameter isn't used, then ListClusters returns up to 100 results and a
 	// nextToken value if applicable.
 	Limit int32
 

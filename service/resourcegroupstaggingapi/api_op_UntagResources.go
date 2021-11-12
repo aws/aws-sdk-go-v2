@@ -22,7 +22,19 @@ import (
 // the service whose resource you want to untag.
 //
 // * You can only tag resources that
-// are located in the specified AWS Region for the calling AWS account.
+// are located in the specified Amazon Web Services Region for the calling Amazon
+// Web Services account.
+//
+// Minimum permissions In addition to the tag:UntagResources
+// permission required by this operation, you must also have the remove tags
+// permission defined by the service that created the resource. For example, to
+// remove the tags from an Amazon EC2 instance using the UntagResources operation,
+// you must have both of the following permissions:
+//
+// * tag:UntagResource
+//
+// *
+// ec2:DeleteTags
 func (c *Client) UntagResources(ctx context.Context, params *UntagResourcesInput, optFns ...func(*Options)) (*UntagResourcesOutput, error) {
 	if params == nil {
 		params = &UntagResourcesInput{}
@@ -42,9 +54,9 @@ type UntagResourcesInput struct {
 
 	// Specifies a list of ARNs of the resources that you want to remove tags from. An
 	// ARN (Amazon Resource Name) uniquely identifies a resource. For more information,
-	// see Amazon Resource Names (ARNs) and AWS Service Namespaces
-	// (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
+	// see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
+	// the Amazon Web Services General Reference.
 	//
 	// This member is required.
 	ResourceARNList []string

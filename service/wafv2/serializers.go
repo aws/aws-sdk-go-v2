@@ -2596,6 +2596,34 @@ func awsAwsjson11_serializeDocumentByteMatchStatement(v *types.ByteMatchStatemen
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentCaptchaAction(v *types.CaptchaAction, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CustomRequestHandling != nil {
+		ok := object.Key("CustomRequestHandling")
+		if err := awsAwsjson11_serializeDocumentCustomRequestHandling(v.CustomRequestHandling, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCaptchaConfig(v *types.CaptchaConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ImmunityTimeProperty != nil {
+		ok := object.Key("ImmunityTimeProperty")
+		if err := awsAwsjson11_serializeDocumentImmunityTimeProperty(v.ImmunityTimeProperty, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentCondition(v *types.Condition, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2933,6 +2961,18 @@ func awsAwsjson11_serializeDocumentGeoMatchStatement(v *types.GeoMatchStatement,
 		if err := awsAwsjson11_serializeDocumentForwardedIPConfig(v.ForwardedIPConfig, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentImmunityTimeProperty(v *types.ImmunityTimeProperty, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ImmunityTime != nil {
+		ok := object.Key("ImmunityTime")
+		ok.Long(*v.ImmunityTime)
 	}
 
 	return nil
@@ -3406,6 +3446,13 @@ func awsAwsjson11_serializeDocumentRule(v *types.Rule, value smithyjson.Value) e
 		}
 	}
 
+	if v.CaptchaConfig != nil {
+		ok := object.Key("CaptchaConfig")
+		if err := awsAwsjson11_serializeDocumentCaptchaConfig(v.CaptchaConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
@@ -3461,6 +3508,13 @@ func awsAwsjson11_serializeDocumentRuleAction(v *types.RuleAction, value smithyj
 	if v.Block != nil {
 		ok := object.Key("Block")
 		if err := awsAwsjson11_serializeDocumentBlockAction(v.Block, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Captcha != nil {
+		ok := object.Key("Captcha")
+		if err := awsAwsjson11_serializeDocumentCaptchaAction(v.Captcha, ok); err != nil {
 			return err
 		}
 	}
@@ -4048,6 +4102,13 @@ func awsAwsjson11_serializeOpDocumentCreateRuleGroupInput(v *CreateRuleGroupInpu
 func awsAwsjson11_serializeOpDocumentCreateWebACLInput(v *CreateWebACLInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CaptchaConfig != nil {
+		ok := object.Key("CaptchaConfig")
+		if err := awsAwsjson11_serializeDocumentCaptchaConfig(v.CaptchaConfig, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.CustomResponseBodies != nil {
 		ok := object.Key("CustomResponseBodies")
@@ -5011,6 +5072,13 @@ func awsAwsjson11_serializeOpDocumentUpdateRuleGroupInput(v *UpdateRuleGroupInpu
 func awsAwsjson11_serializeOpDocumentUpdateWebACLInput(v *UpdateWebACLInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CaptchaConfig != nil {
+		ok := object.Key("CaptchaConfig")
+		if err := awsAwsjson11_serializeDocumentCaptchaConfig(v.CaptchaConfig, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.CustomResponseBodies != nil {
 		ok := object.Key("CustomResponseBodies")

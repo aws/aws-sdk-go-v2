@@ -210,7 +210,8 @@ type ContainerInstanceField string
 
 // Enum values for ContainerInstanceField
 const (
-	ContainerInstanceFieldTags ContainerInstanceField = "TAGS"
+	ContainerInstanceFieldTags                    ContainerInstanceField = "TAGS"
+	ContainerInstanceFieldContainerInstanceHealth ContainerInstanceField = "CONTAINER_INSTANCE_HEALTH"
 )
 
 // Values returns all known values for ContainerInstanceField. Note that this can
@@ -219,6 +220,7 @@ const (
 func (ContainerInstanceField) Values() []ContainerInstanceField {
 	return []ContainerInstanceField{
 		"TAGS",
+		"CONTAINER_INSTANCE_HEALTH",
 	}
 }
 
@@ -451,6 +453,44 @@ func (HealthStatus) Values() []HealthStatus {
 		"HEALTHY",
 		"UNHEALTHY",
 		"UNKNOWN",
+	}
+}
+
+type InstanceHealthCheckState string
+
+// Enum values for InstanceHealthCheckState
+const (
+	InstanceHealthCheckStateOk               InstanceHealthCheckState = "OK"
+	InstanceHealthCheckStateImpaired         InstanceHealthCheckState = "IMPAIRED"
+	InstanceHealthCheckStateInsufficientData InstanceHealthCheckState = "INSUFFICIENT_DATA"
+	InstanceHealthCheckStateInitializing     InstanceHealthCheckState = "INITIALIZING"
+)
+
+// Values returns all known values for InstanceHealthCheckState. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceHealthCheckState) Values() []InstanceHealthCheckState {
+	return []InstanceHealthCheckState{
+		"OK",
+		"IMPAIRED",
+		"INSUFFICIENT_DATA",
+		"INITIALIZING",
+	}
+}
+
+type InstanceHealthCheckType string
+
+// Enum values for InstanceHealthCheckType
+const (
+	InstanceHealthCheckTypeContainerRuntime InstanceHealthCheckType = "CONTAINER_RUNTIME"
+)
+
+// Values returns all known values for InstanceHealthCheckType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceHealthCheckType) Values() []InstanceHealthCheckType {
+	return []InstanceHealthCheckType{
+		"CONTAINER_RUNTIME",
 	}
 }
 

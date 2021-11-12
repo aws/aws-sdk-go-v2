@@ -66,7 +66,7 @@ type ExecuteCommandOutput struct {
 	// The name of the container.
 	ContainerName *string
 
-	// Whether or not the execute command session is running in interactive mode.
+	// Determines whether the execute command session is running in interactive mode.
 	// Amazon ECS only supports initiating interactive sessions, so you must specify
 	// true for this value.
 	Interactive bool

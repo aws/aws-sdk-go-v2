@@ -51,7 +51,7 @@ type ExecuteStatementInput struct {
 
 type ExecuteStatementOutput struct {
 
-	// If a read operation was used, this property will contain the result of the reade
+	// If a read operation was used, this property will contain the result of the read
 	// operation; a map of attribute names and their values. For the write operations
 	// this value will be empty.
 	Items []map[string]types.AttributeValue

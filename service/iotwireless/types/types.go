@@ -4,6 +4,7 @@ package types
 
 import (
 	smithydocument "github.com/aws/smithy-go/document"
+	"time"
 )
 
 // ABP device object for LoRaWAN specification v1.0.x
@@ -85,6 +86,47 @@ type DeviceProfile struct {
 	noSmithyDocumentSerde
 }
 
+// Device registration state event configuration object for enabling and disabling
+// relevant topics.
+type DeviceRegistrationStateEventConfiguration struct {
+
+	// Device registration state event configuration object for enabling or disabling
+	// Sidewalk related event topics.
+	Sidewalk *SidewalkEventNotificationConfigurations
+
+	noSmithyDocumentSerde
+}
+
+// List of FPort assigned for different LoRaWAN application packages to use
+type FPorts struct {
+
+	// The Fport value.
+	ClockSync *int32
+
+	// The Fport value.
+	Fuota *int32
+
+	// The Fport value.
+	Multicast *int32
+
+	noSmithyDocumentSerde
+}
+
+// A FUOTA task.
+type FuotaTask struct {
+
+	// The arn of a FUOTA task.
+	Arn *string
+
+	// The ID of a FUOTA task.
+	Id *string
+
+	// The name of a FUOTA task.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 // LoRaWAN object for create functions.
 type LoRaWANDevice struct {
 
@@ -99,6 +141,9 @@ type LoRaWANDevice struct {
 
 	// The ID of the device profile for the new wireless device.
 	DeviceProfileId *string
+
+	// List of FPort assigned for different LoRaWAN application packages to use
+	FPorts *FPorts
 
 	// OTAA device object for create APIs for v1.0.x
 	OtaaV1_0_x *OtaaV1_0_x
@@ -196,6 +241,27 @@ type LoRaWANDeviceProfile struct {
 
 	// The SupportsJoin value.
 	SupportsJoin *bool
+
+	noSmithyDocumentSerde
+}
+
+// The LoRaWAN information used with a FUOTA task.
+type LoRaWANFuotaTask struct {
+
+	// Supported RfRegions
+	RfRegion SupportedRfRegion
+
+	noSmithyDocumentSerde
+}
+
+// The LoRaWAN information returned from getting a FUOTA task.
+type LoRaWANFuotaTaskGetInfo struct {
+
+	// The frequency band (RFRegion) value.
+	RfRegion *string
+
+	// Start time of a FUOTA task.
+	StartTime *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -333,6 +399,64 @@ type LoRaWANListDevice struct {
 	noSmithyDocumentSerde
 }
 
+// The LoRaWAN information that is to be used with the multicast group.
+type LoRaWANMulticast struct {
+
+	// DlClass for LoRaWAM, valid values are ClassB and ClassC.
+	DlClass DlClass
+
+	// Supported RfRegions
+	RfRegion SupportedRfRegion
+
+	noSmithyDocumentSerde
+}
+
+// The LoRaWAN information that is to be returned from getting multicast group
+// information.
+type LoRaWANMulticastGet struct {
+
+	// DlClass for LoRaWAM, valid values are ClassB and ClassC.
+	DlClass DlClass
+
+	// Number of devices that are associated to the multicast group.
+	NumberOfDevicesInGroup *int32
+
+	// Number of devices that are requested to be associated with the multicast group.
+	NumberOfDevicesRequested *int32
+
+	// Supported RfRegions
+	RfRegion SupportedRfRegion
+
+	noSmithyDocumentSerde
+}
+
+// The metadata information of the LoRaWAN multicast group.
+type LoRaWANMulticastMetadata struct {
+
+	// The Fport value.
+	FPort *int32
+
+	noSmithyDocumentSerde
+}
+
+// The LoRaWAN information used with the multicast session.
+type LoRaWANMulticastSession struct {
+
+	// Downlink data rate.
+	DlDr *int32
+
+	// Downlink frequency.
+	DlFreq *int32
+
+	// Timestamp of when the multicast group session is to start.
+	SessionStartTime *time.Time
+
+	// How long before a multicast group session is to timeout.
+	SessionTimeout *int32
+
+	noSmithyDocumentSerde
+}
+
 // LoRaWAN router info.
 type LoRaWANSendDataToDevice struct {
 
@@ -347,6 +471,15 @@ type LoRaWANServiceProfile struct {
 
 	// The AddGWMetaData value.
 	AddGwMetadata bool
+
+	noSmithyDocumentSerde
+}
+
+// The LoRaWAN information used to start a FUOTA task.
+type LoRaWANStartFuotaTask struct {
+
+	// Start time of a FUOTA task.
+	StartTime *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -393,6 +526,39 @@ type LoRaWANUpdateGatewayTaskEntry struct {
 	noSmithyDocumentSerde
 }
 
+// A multicast group.
+type MulticastGroup struct {
+
+	// The arn of the multicast group.
+	Arn *string
+
+	// The ID of the multicast group.
+	Id *string
+
+	// The name of the multicast group.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// A multicast group that is associated with a FUOTA task.
+type MulticastGroupByFuotaTask struct {
+
+	// The ID of the multicast group.
+	Id *string
+
+	noSmithyDocumentSerde
+}
+
+// Wireless metadata that is to be sent to multicast group.
+type MulticastWirelessMetadata struct {
+
+	// The metadata information of the LoRaWAN multicast group.
+	LoRaWAN *LoRaWANMulticastMetadata
+
+	noSmithyDocumentSerde
+}
+
 // OTAA device object for v1.0.x
 type OtaaV1_0_x struct {
 
@@ -401,6 +567,9 @@ type OtaaV1_0_x struct {
 
 	// The AppKey value.
 	AppKey *string
+
+	// The GenAppKey value.
+	GenAppKey *string
 
 	noSmithyDocumentSerde
 }
@@ -416,6 +585,16 @@ type OtaaV1_1 struct {
 
 	// The NwkKey value.
 	NwkKey *string
+
+	noSmithyDocumentSerde
+}
+
+// Proximity event configuration object for enabling and disabling relevant topics.
+type ProximityEventConfiguration struct {
+
+	// Proximity event configuration object for enabling or disabling Sidewalk related
+	// event topics.
+	Sidewalk *SidewalkEventNotificationConfigurations
 
 	noSmithyDocumentSerde
 }
@@ -524,6 +703,16 @@ type SidewalkDeviceMetadata struct {
 
 	// The RSSI value.
 	Rssi *int32
+
+	noSmithyDocumentSerde
+}
+
+// SidewalkEventNotificationConfigurations object Event configuration object for
+// Sidewalk related event topics.
+type SidewalkEventNotificationConfigurations struct {
+
+	// Enum to denote whether amazon id event topic is enabled or disabled.
+	AmazonIdEventTopic EventNotificationTopicStatus
 
 	noSmithyDocumentSerde
 }
@@ -662,6 +851,9 @@ type WirelessDeviceStatistics struct {
 	// The name of the destination to which the device is assigned.
 	DestinationName *string
 
+	// The status of a wireless device in a FUOTA task.
+	FuotaDeviceStatus FuotaDeviceStatus
+
 	// The ID of the wireless device reporting the data.
 	Id *string
 
@@ -670,6 +862,12 @@ type WirelessDeviceStatistics struct {
 
 	// LoRaWAN device info.
 	LoRaWAN *LoRaWANListDevice
+
+	// Id of the multicast group.
+	McGroupId *int32
+
+	// The status of the wireless device in the multicast group.
+	MulticastDeviceStatus *string
 
 	// The name of the resource.
 	Name *string

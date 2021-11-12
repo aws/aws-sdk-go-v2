@@ -68,6 +68,11 @@ type CreateWebACLInput struct {
 	// This member is required.
 	VisibilityConfig *types.VisibilityConfig
 
+	// Specifies how WAF should handle CAPTCHA evaluations for rules that don't have
+	// their own CaptchaConfig settings. If you don't specify this, WAF uses its
+	// default settings for CaptchaConfig.
+	CaptchaConfig *types.CaptchaConfig
+
 	// A map of custom response keys and content bodies. When you create a rule with a
 	// block action, you can send a custom response to the web request. You define
 	// these for the web ACL, and then use them in the rules and default actions that

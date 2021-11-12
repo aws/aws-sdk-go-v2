@@ -138,6 +138,13 @@ type CreateComputeEnvironmentInput struct {
 	// API operations. These tags don't propagate to the underlying compute resources.
 	Tags map[string]string
 
+	// The maximum number of vCPUs for an unmanaged compute environment. This parameter
+	// is only used for fair share scheduling to reserve vCPU capacity for new share
+	// identifiers. If this parameter is not provided for a fair share job queue, no
+	// vCPU capacity will be reserved. This parameter is only supported when the type
+	// parameter is set to UNMANAGED/
+	UnmanagedvCpus int32
+
 	noSmithyDocumentSerde
 }
 

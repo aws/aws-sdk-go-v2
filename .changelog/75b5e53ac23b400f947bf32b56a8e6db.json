@@ -1,0 +1,27 @@
+{
+    "id": "75b5e53a-c23b-400f-947b-f32b56a8e6db",
+    "type": "feature",
+    "description": "Updated service to latest API model.",
+    "modules": [
+        "service/backup",
+        "service/batch",
+        "service/computeoptimizer",
+        "service/connect",
+        "service/docdb",
+        "service/ec2",
+        "service/ecs",
+        "service/gamelift",
+        "service/greengrassv2",
+        "service/identitystore",
+        "service/iotwireless",
+        "service/neptune",
+        "service/rds",
+        "service/s3control",
+        "service/sagemaker",
+        "service/sagemakerruntime",
+        "service/ssmincidents",
+        "service/transcribe",
+        "service/translate",
+        "service/wafv2"
+    ]
+}

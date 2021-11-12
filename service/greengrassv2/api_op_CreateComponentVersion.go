@@ -49,7 +49,8 @@ import (
 // * Node.js 12 – nodejs12.x
 //
 // To create a component from a Lambda
-// function, specify lambdaFunction when you call this operation.
+// function, specify lambdaFunction when you call this operation. IoT Greengrass
+// currently supports Lambda functions on only Linux core devices.
 func (c *Client) CreateComponentVersion(ctx context.Context, params *CreateComponentVersionInput, optFns ...func(*Options)) (*CreateComponentVersionOutput, error) {
 	if params == nil {
 		params = &CreateComponentVersionInput{}

@@ -15,7 +15,7 @@ import (
 // instance has reached an ACTIVE state, you can change the status of a container
 // instance to DRAINING to manually remove an instance from a cluster, for example
 // to perform system updates, update the Docker daemon, or scale down the cluster
-// size. A container instance cannot be changed to DRAINING until it has reached an
+// size. A container instance can't be changed to DRAINING until it has reached an
 // ACTIVE status. If the instance is in any other status, an error will be
 // received. When you set a container instance to DRAINING, Amazon ECS prevents new
 // tasks from being scheduled for placement on the container instance and
@@ -33,21 +33,21 @@ import (
 // the scheduler to stop two existing tasks before starting two new tasks. If the
 // minimum is 100%, the service scheduler can't remove existing tasks until the
 // replacement tasks are considered healthy. Tasks for services that do not use a
-// load balancer are considered healthy if they are in the RUNNING state. Tasks for
-// services that use a load balancer are considered healthy if they are in the
-// RUNNING state and the container instance they are hosted on is reported as
+// load balancer are considered healthy if they're in the RUNNING state. Tasks for
+// services that use a load balancer are considered healthy if they're in the
+// RUNNING state and the container instance they're hosted on is reported as
 // healthy by the load balancer.
 //
 // * The maximumPercent parameter represents an
-// upper limit on the number of running tasks during task replacement, which
-// enables you to define the replacement batch size. For example, if desiredCount
-// is four tasks, a maximum of 200% starts four new tasks before stopping the four
-// tasks to be drained, provided that the cluster resources required to do this are
+// upper limit on the number of running tasks during task replacement. You can use
+// this to define the replacement batch size. For example, if desiredCount is four
+// tasks, a maximum of 200% starts four new tasks before stopping the four tasks to
+// be drained, provided that the cluster resources required to do this are
 // available. If the maximum is 100%, then replacement tasks can't start until the
 // draining tasks have stopped.
 //
 // Any PENDING or RUNNING tasks that do not belong to
-// a service are not affected. You must wait for them to finish or stop them
+// a service aren't affected. You must wait for them to finish or stop them
 // manually. A container instance has completed draining when it has no more
 // RUNNING tasks. You can verify this using ListTasks. When a container instance
 // has been drained, you can set a container instance to ACTIVE status and once it
@@ -75,12 +75,12 @@ type UpdateContainerInstancesStateInput struct {
 	// This member is required.
 	ContainerInstances []string
 
-	// The container instance state with which to update the container instance. The
-	// only valid values for this action are ACTIVE and DRAINING. A container instance
-	// can only be updated to DRAINING status once it has reached an ACTIVE state. If a
+	// The container instance state to update the container instance with. The only
+	// valid values for this action are ACTIVE and DRAINING. A container instance can
+	// only be updated to DRAINING status once it has reached an ACTIVE state. If a
 	// container instance is in REGISTERING, DEREGISTERING, or REGISTRATION_FAILED
-	// state you can describe the container instance but will be unable to update the
-	// container instance state.
+	// state you can describe the container instance but can't update the container
+	// instance state.
 	//
 	// This member is required.
 	Status types.ContainerInstanceStatus

@@ -106,7 +106,7 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname:          "s3-control.{region}.api.aws",
+				Hostname:          "s3-control.dualstack.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"s3v4"},
 			},
@@ -120,7 +120,7 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
 			}: {
-				Hostname:          "s3-control-fips.{region}.api.aws",
+				Hostname:          "s3-control-fips.dualstack.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"s3v4"},
 			},
@@ -616,7 +616,7 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname:          "s3-control.{region}.api.amazonwebservices.com.cn",
+				Hostname:          "s3-control.dualstack.{region}.amazonaws.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"s3v4"},
 			},
@@ -733,7 +733,7 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname:          "s3-control.{region}.api.aws",
+				Hostname:          "s3-control.dualstack.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"s3v4"},
 			},
@@ -747,7 +747,7 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
 			}: {
-				Hostname:          "s3-control-fips.{region}.api.aws",
+				Hostname:          "s3-control-fips.dualstack.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"s3v4"},
 			},

@@ -38,19 +38,19 @@ type SubmitTaskStateChangeInput struct {
 	// task.
 	Cluster *string
 
-	// Any containers associated with the state change request.
+	// Any containers that's associated with the state change request.
 	Containers []types.ContainerStateChange
 
-	// The Unix timestamp for when the task execution stopped.
+	// The Unix timestamp for the time when the task execution stopped.
 	ExecutionStoppedAt *time.Time
 
-	// The details for the managed agent associated with the task.
+	// The details for the managed agent that's associated with the task.
 	ManagedAgents []types.ManagedAgentStateChange
 
-	// The Unix timestamp for when the container image pull began.
+	// The Unix timestamp for the time when the container image pull started.
 	PullStartedAt *time.Time
 
-	// The Unix timestamp for when the container image pull completed.
+	// The Unix timestamp for the time when the container image pull completed.
 	PullStoppedAt *time.Time
 
 	// The reason for the state change request.

@@ -95,6 +95,10 @@ type CreateEndpointInput struct {
 	// This member is required.
 	EndpointName *string
 
+	// The deployment configuration for an endpoint, which contains the desired
+	// deployment strategy and rollback configurations.
+	DeploymentConfig *types.DeploymentConfig
+
 	// An array of key-value pairs. You can use tags to categorize your Amazon Web
 	// Services resources in different ways, for example, by purpose, owner, or
 	// environment. For more information, see Tagging Amazon Web Services Resources

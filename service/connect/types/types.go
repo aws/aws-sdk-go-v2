@@ -28,7 +28,7 @@ type AgentStatus struct {
 	// The state of the agent status.
 	State AgentStatusState
 
-	// One or more tags.
+	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 
 	// The type of agent status.
@@ -447,7 +447,7 @@ type HoursOfOperation struct {
 	// The name for the hours of operation.
 	Name *string
 
-	// One or more tags.
+	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 
 	// The time zone for the hours of operation.
@@ -853,7 +853,7 @@ type Queue struct {
 	// The status of the queue.
 	Status QueueStatus
 
-	// One or more tags.
+	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -924,7 +924,7 @@ type QuickConnect struct {
 	// The identifier for the quick connect.
 	QuickConnectId *string
 
-	// One or more tags.
+	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -1154,6 +1154,30 @@ type SecurityKey struct {
 
 	// The key of the security key.
 	Key *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a security profile.
+type SecurityProfile struct {
+
+	// The Amazon Resource Name (ARN) for the secruity profile.
+	Arn *string
+
+	// The description of the security profile.
+	Description *string
+
+	// The identifier for the security profile.
+	Id *string
+
+	// The organization resource identifier for the security profile.
+	OrganizationResourceId *string
+
+	// The name for the security profile.
+	SecurityProfileName *string
+
+	// The tags used to organize, track, or control access for this resource.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }

@@ -681,13 +681,19 @@
                 "posixUser": {
                     "target": "com.amazonaws.greengrassv2#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The POSIX system user and (optional) group to use to run this component. Specify the user\n      and group separated by a colon (<code>:</code>) in the following format:\n        <code>user:group</code>. The group is optional. If you don't specify a group, the IoT Greengrass Core\n      software uses the primary user for the group.</p>\n         <p>If you omit this parameter, the IoT Greengrass Core software uses the default system user and group that\n      you configure on the Greengrass nucleus component. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-user\">Configure the user and group that run components</a>.</p>"
+                        "smithy.api#documentation": "<p>The POSIX system user and, optionally, group to use to run this component on Linux core\n      devices. The user, and group if specified, must exist on each Linux core device. Specify the\n      user and group separated by a colon (<code>:</code>) in the following format:\n        <code>user:group</code>. The group is optional. If you don't specify a group, the IoT Greengrass Core\n      software uses the primary user for the group.</p>\n         <p>If you omit this parameter, the IoT Greengrass Core software uses the default system user and group that\n      you configure on the Greengrass nucleus component. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-user\">Configure the user and group that run components</a>.</p>"
                     }
                 },
                 "systemResourceLimits": {
                     "target": "com.amazonaws.greengrassv2#SystemResourceLimits",
                     "traits": {
-                        "smithy.api#documentation": "<p>The system resource limits to apply to this component's process on the core device.</p>\n         <p>If you omit this parameter, the IoT Greengrass Core software uses the default system resource limits\n      that you configure on the Greengrass nucleus component. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-system-resource-limits\">Configure system resource limits for components</a>.</p>"
+                        "smithy.api#documentation": "<p>The system resource limits to apply to this component's process on the core device. IoT Greengrass\n      currently supports this feature on only Linux core devices.</p>\n         <p>If you omit this parameter, the IoT Greengrass Core software uses the default system resource limits\n      that you configure on the Greengrass nucleus component. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-system-resource-limits\">Configure system resource limits for components</a>.</p>"
+                    }
+                },
+                "windowsUser": {
+                    "target": "com.amazonaws.greengrassv2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Windows user to use to run this component on Windows core devices. The user must exist\n      on each Windows core device, and its name and password must be in the LocalSystem account's\n      Credentials Manager instance.</p>\n         <p>If you omit this parameter, the IoT Greengrass Core software uses the default Windows user that you\n      configure on the Greengrass nucleus component. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-user\">Configure the user and group that run components</a>.</p>"
                     }
                 }
             },
@@ -903,7 +909,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a component. Components are software that run on Greengrass core devices. After you\n      develop and test a component on your core device, you can use this operation to upload your\n      component to IoT Greengrass. Then, you can deploy the component to other core devices.</p>\n         <p>You can use this operation to do the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Create components from recipes</b>\n               </p>\n               <p>Create a component from a recipe, which is a file that defines the component's\n          metadata, parameters, dependencies, lifecycle, artifacts, and platform capability. For\n          more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/component-recipe-reference.html\">IoT Greengrass component recipe\n            reference</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>\n               <p>To create a component from a recipe, specify <code>inlineRecipe</code> when you call\n          this operation.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Create components from Lambda functions</b>\n               </p>\n               <p>Create a component from an Lambda function that runs on IoT Greengrass. This creates a recipe\n          and artifacts from the Lambda function's deployment package. You can use this operation to\n          migrate Lambda functions from IoT Greengrass V1 to IoT Greengrass V2.</p>\n               <p>This function only accepts Lambda functions that use the following runtimes:</p>\n               <ul>\n                  <li>\n                     <p>Python 2.7 – <code>python2.7</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Python 3.7 – <code>python3.7</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Python 3.8 – <code>python3.8</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Java 8 – <code>java8</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Node.js 10 – <code>nodejs10.x</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Node.js 12 – <code>nodejs12.x</code>\n                     </p>\n                  </li>\n               </ul>\n               <p>To create a component from a Lambda function, specify <code>lambdaFunction</code>\n          when you call this operation.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Creates a component. Components are software that run on Greengrass core devices. After you\n      develop and test a component on your core device, you can use this operation to upload your\n      component to IoT Greengrass. Then, you can deploy the component to other core devices.</p>\n         <p>You can use this operation to do the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Create components from recipes</b>\n               </p>\n               <p>Create a component from a recipe, which is a file that defines the component's\n          metadata, parameters, dependencies, lifecycle, artifacts, and platform capability. For\n          more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/component-recipe-reference.html\">IoT Greengrass component recipe\n            reference</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>\n               <p>To create a component from a recipe, specify <code>inlineRecipe</code> when you call\n          this operation.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Create components from Lambda functions</b>\n               </p>\n               <p>Create a component from an Lambda function that runs on IoT Greengrass. This creates a recipe\n          and artifacts from the Lambda function's deployment package. You can use this operation to\n          migrate Lambda functions from IoT Greengrass V1 to IoT Greengrass V2.</p>\n               <p>This function only accepts Lambda functions that use the following runtimes:</p>\n               <ul>\n                  <li>\n                     <p>Python 2.7 – <code>python2.7</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Python 3.7 – <code>python3.7</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Python 3.8 – <code>python3.8</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Java 8 – <code>java8</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Node.js 10 – <code>nodejs10.x</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Node.js 12 – <code>nodejs12.x</code>\n                     </p>\n                  </li>\n               </ul>\n               <p>To create a component from a Lambda function, specify <code>lambdaFunction</code>\n          when you call this operation.</p>\n               <note>\n                  <p>IoT Greengrass currently supports Lambda functions on only Linux core devices.</p>\n               </note>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/greengrass/v2/createComponentVersion",
@@ -2102,6 +2108,21 @@
         },
         "com.amazonaws.greengrassv2#GreengrassV2": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "GreengrassV2",
+                    "arnNamespace": "greengrass",
+                    "cloudFormationName": "GreengrassV2",
+                    "cloudTrailEventSource": "greengrassv2.amazonaws.com",
+                    "endpointPrefix": "greengrass"
+                },
+                "aws.auth#sigv4": {
+                    "name": "greengrass"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>IoT Greengrass brings local compute, messaging, data management, sync, and ML inference capabilities\n      to edge devices. This enables devices to collect and analyze data closer to the source of\n      information, react autonomously to local events, and communicate securely with each other on\n      local networks. Local devices can also communicate securely with Amazon Web Services IoT Core and export IoT data\n      to the Amazon Web Services Cloud. IoT Greengrass developers can use Lambda functions and components to create and\n      deploy applications to fleets of edge devices for local operation.</p>\n         <p>IoT Greengrass Version 2 provides a new major version of the IoT Greengrass Core software, new APIs, and a new console.\n      Use this API reference to learn how to use the IoT Greengrass V2 API operations to manage components,\n      manage deployments, and core devices.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/what-is-iot-greengrass.html\">What is IoT Greengrass?</a> in\n      the <i>IoT Greengrass V2 Developer Guide</i>.</p>",
+                "smithy.api#title": "AWS IoT Greengrass V2"
+            },
             "version": "2020-11-30",
             "operations": [
                 {
@@ -2173,22 +2194,7 @@
                 {
                     "target": "com.amazonaws.greengrassv2#UntagResource"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "GreengrassV2",
-                    "arnNamespace": "greengrass",
-                    "cloudFormationName": "GreengrassV2",
-                    "cloudTrailEventSource": "greengrassv2.amazonaws.com",
-                    "endpointPrefix": "greengrass"
-                },
-                "aws.auth#sigv4": {
-                    "name": "greengrass"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>IoT Greengrass brings local compute, messaging, data management, sync, and ML inference capabilities\n      to edge devices. This enables devices to collect and analyze data closer to the source of\n      information, react autonomously to local events, and communicate securely with each other on\n      local networks. Local devices can also communicate securely with Amazon Web Services IoT Core and export IoT data\n      to the Amazon Web Services Cloud. IoT Greengrass developers can use Lambda functions and components to create and\n      deploy applications to fleets of edge devices for local operation.</p>\n         <p>IoT Greengrass Version 2 provides a new major version of the IoT Greengrass Core software, new APIs, and a new console.\n      Use this API reference to learn how to use the IoT Greengrass V2 API operations to manage components,\n      manage deployments, and core devices.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/what-is-iot-greengrass.html\">What is IoT Greengrass?</a> in\n      the <i>IoT Greengrass V2 Developer Guide</i>.</p>",
-                "smithy.api#title": "AWS IoT Greengrass V2"
-            }
+            ]
         },
         "com.amazonaws.greengrassv2#InstalledComponent": {
             "type": "structure",

@@ -47,7 +47,7 @@ type DescribeTaskSetsInput struct {
 
 	// Specifies whether to see the resource tags for the task set. If TAGS is
 	// specified, the tags are included in the response. If this field is omitted, tags
-	// are not included in the response.
+	// aren't included in the response.
 	Include []types.TaskSetField
 
 	// The ID or full Amazon Resource Name (ARN) of task sets to describe.

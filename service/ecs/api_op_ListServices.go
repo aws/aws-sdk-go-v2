@@ -39,12 +39,12 @@ type ListServicesInput struct {
 	// The launch type to use when filtering the ListServices results.
 	LaunchType types.LaunchType
 
-	// The maximum number of service results returned by ListServices in paginated
+	// The maximum number of service results that ListServices returned in paginated
 	// output. When this parameter is used, ListServices only returns maxResults
 	// results in a single page along with a nextToken response element. The remaining
 	// results of the initial request can be seen by sending another ListServices
 	// request with the returned nextToken value. This value can be between 1 and 100.
-	// If this parameter is not used, then ListServices returns up to 10 results and a
+	// If this parameter isn't used, then ListServices returns up to 10 results and a
 	// nextToken value if applicable.
 	MaxResults *int32
 
@@ -70,8 +70,8 @@ type ListServicesOutput struct {
 	// results to return.
 	NextToken *string
 
-	// The list of full ARN entries for each service associated with the specified
-	// cluster.
+	// The list of full ARN entries for each service that's associated with the
+	// specified cluster.
 	ServiceArns []string
 
 	// Metadata pertaining to the operation's result.
@@ -149,12 +149,12 @@ var _ ListServicesAPIClient = (*Client)(nil)
 
 // ListServicesPaginatorOptions is the paginator options for ListServices
 type ListServicesPaginatorOptions struct {
-	// The maximum number of service results returned by ListServices in paginated
+	// The maximum number of service results that ListServices returned in paginated
 	// output. When this parameter is used, ListServices only returns maxResults
 	// results in a single page along with a nextToken response element. The remaining
 	// results of the initial request can be seen by sending another ListServices
 	// request with the returned nextToken value. This value can be between 1 and 100.
-	// If this parameter is not used, then ListServices returns up to 10 results and a
+	// If this parameter isn't used, then ListServices returns up to 10 results and a
 	// nextToken value if applicable.
 	Limit int32
 

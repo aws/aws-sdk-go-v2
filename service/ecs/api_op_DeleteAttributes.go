@@ -30,9 +30,9 @@ func (c *Client) DeleteAttributes(ctx context.Context, params *DeleteAttributesI
 type DeleteAttributesInput struct {
 
 	// The attributes to delete from your resource. You can specify up to 10 attributes
-	// per request. For custom attributes, specify the attribute name and target ID,
-	// but do not specify the value. If you specify the target ID using the short form,
-	// you must also specify the target type.
+	// for each request. For custom attributes, specify the attribute name and target
+	// ID, but don't specify the value. If you specify the target ID using the short
+	// form, you must also specify the target type.
 	//
 	// This member is required.
 	Attributes []types.Attribute

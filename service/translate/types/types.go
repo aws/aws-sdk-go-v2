@@ -70,11 +70,16 @@ type InputDataConfig struct {
 	// application/vnd.openxmlformats-officedocument.spreadsheetml.sheet: The input
 	// data consists of one or more Excel Workbook files (.xlsx).
 	//
-	// If you structure
-	// your input data as HTML, ensure that you set this parameter to text/html. By
-	// doing so, you cut costs by limiting the translation to the contents of the html
-	// element in each file. Otherwise, if you set this parameter to text/plain, your
-	// costs will cover the translation of every character.
+	// *
+	// application/x-xliff+xml: The input data consists of one or more XML Localization
+	// Interchange File Format (XLIFF) files (.xlf). Amazon Translate supports only
+	// XLIFF version 1.2.
+	//
+	// If you structure your input data as HTML, ensure that you
+	// set this parameter to text/html. By doing so, you cut costs by limiting the
+	// translation to the contents of the html element in each file. Otherwise, if you
+	// set this parameter to text/plain, your costs will cover the translation of every
+	// character.
 	//
 	// This member is required.
 	ContentType *string
@@ -113,6 +118,9 @@ type OutputDataConfig struct {
 	// This member is required.
 	S3Uri *string
 
+	// The encryption key used to encrypt this object.
+	EncryptionKey *EncryptionKey
+
 	noSmithyDocumentSerde
 }
 
@@ -138,7 +146,14 @@ type ParallelDataConfig struct {
 type ParallelDataDataLocation struct {
 
 	// The Amazon S3 location of the parallel data input file. The location is returned
-	// as a presigned URL to that has a 30 minute expiration.
+	// as a presigned URL to that has a 30 minute expiration. Amazon Translate doesn't
+	// scan parallel data input files for the risk of CSV injection attacks. CSV
+	// injection occurs when a .csv or .tsv file is altered so that a record contains
+	// malicious code. The record begins with a special character, such as =, +, -, or
+	// @. When the file is opened in a spreadsheet program, the program might interpret
+	// the record as a formula and run the code within it. Before you download a
+	// parallel data input file from Amazon S3, ensure that you recognize the file and
+	// trust its creator.
 	//
 	// This member is required.
 	Location *string
@@ -238,10 +253,24 @@ type TerminologyData struct {
 	// This member is required.
 	File []byte
 
-	// The data format of the custom terminology. Either CSV or TMX.
+	// The data format of the custom terminology.
 	//
 	// This member is required.
 	Format TerminologyDataFormat
+
+	// The directionality of your terminology resource indicates whether it has one
+	// source language (uni-directional) or multiple (multi-directional). UNI The
+	// terminology resource has one source language (for example, the first column in a
+	// CSV file), and all of its other languages are target languages. MULTI Any
+	// language in the terminology resource can be the source language or a target
+	// language. A single multi-directional terminology resource can be used for jobs
+	// that translate different language pairs. For example, if the terminology
+	// contains terms in English and Spanish, then it can be used for jobs that
+	// translate English to Spanish and jobs that translate Spanish to English. When
+	// you create a custom terminology resource without specifying the directionality,
+	// it behaves as uni-directional terminology, although this parameter will have a
+	// null value.
+	Directionality Directionality
 
 	noSmithyDocumentSerde
 }
@@ -274,12 +303,25 @@ type TerminologyProperties struct {
 	// The description of the custom terminology properties.
 	Description *string
 
+	// The directionality of your terminology resource indicates whether it has one
+	// source language (uni-directional) or multiple (multi-directional). UNI The
+	// terminology resource has one source language (the first column in a CSV file),
+	// and all of its other languages are target languages. MULTI Any language in the
+	// terminology resource can be the source language.
+	Directionality Directionality
+
 	// The encryption key for the custom terminology.
 	EncryptionKey *EncryptionKey
+
+	// The format of the custom terminology input file.
+	Format TerminologyDataFormat
 
 	// The time at which the custom terminology was last update, based on the
 	// timestamp.
 	LastUpdatedAt *time.Time
+
+	// Additional information from Amazon Translate about the terminology resource.
+	Message *string
 
 	// The name of the custom terminology.
 	Name *string
@@ -287,12 +329,16 @@ type TerminologyProperties struct {
 	// The size of the file used when importing a custom terminology.
 	SizeBytes *int32
 
+	// The number of terms in the input file that Amazon Translate skipped when you
+	// created or updated the terminology resource.
+	SkippedTermCount *int32
+
 	// The language code for the source text of the translation request for which the
 	// custom terminology is being used.
 	SourceLanguageCode *string
 
 	// The language codes for the target languages available with the custom
-	// terminology file. All possible target languages are returned in array.
+	// terminology resource. All possible target languages are returned in array.
 	TargetLanguageCodes []string
 
 	// The number of terms included in the custom terminology.
@@ -351,7 +397,7 @@ type TextTranslationJobProperties struct {
 	// The status of the translation job.
 	JobStatus JobStatus
 
-	// An explanation of any errors that may have occured during the translation job.
+	// An explanation of any errors that may have occurred during the translation job.
 	Message *string
 
 	// The output configuration properties that were specified when the job was

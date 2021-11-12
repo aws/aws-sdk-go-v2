@@ -215,6 +215,183 @@
                 }
             }
         },
+        "com.amazonaws.iotwireless#AssociateMulticastGroupWithFuotaTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#AssociateMulticastGroupWithFuotaTaskRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#AssociateMulticastGroupWithFuotaTaskResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associate a multicast group with a FUOTA task.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/fuota-tasks/{Id}/multicast-group",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#AssociateMulticastGroupWithFuotaTaskRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.iotwireless#FuotaTaskId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MulticastGroupId": {
+                    "target": "com.amazonaws.iotwireless#MulticastGroupId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#AssociateMulticastGroupWithFuotaTaskResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.iotwireless#AssociateWirelessDeviceWithFuotaTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#AssociateWirelessDeviceWithFuotaTaskRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#AssociateWirelessDeviceWithFuotaTaskResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associate a wireless device with a FUOTA task.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/fuota-tasks/{Id}/wireless-device",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#AssociateWirelessDeviceWithFuotaTaskRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.iotwireless#FuotaTaskId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "WirelessDeviceId": {
+                    "target": "com.amazonaws.iotwireless#WirelessDeviceId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#AssociateWirelessDeviceWithFuotaTaskResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.iotwireless#AssociateWirelessDeviceWithMulticastGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#AssociateWirelessDeviceWithMulticastGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#AssociateWirelessDeviceWithMulticastGroupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates a wireless device with a multicast group.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/multicast-groups/{Id}/wireless-device",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#AssociateWirelessDeviceWithMulticastGroupRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.iotwireless#MulticastGroupId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "WirelessDeviceId": {
+                    "target": "com.amazonaws.iotwireless#WirelessDeviceId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#AssociateWirelessDeviceWithMulticastGroupResponse": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.iotwireless#AssociateWirelessDeviceWithThing": {
             "type": "operation",
             "input": {
@@ -428,6 +605,59 @@
                 ]
             }
         },
+        "com.amazonaws.iotwireless#CancelMulticastGroupSession": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#CancelMulticastGroupSessionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#CancelMulticastGroupSessionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Cancels an existing multicast group session.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/multicast-groups/{Id}/session",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#CancelMulticastGroupSessionRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.iotwireless#MulticastGroupId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#CancelMulticastGroupSessionResponse": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.iotwireless#CertificateList": {
             "type": "structure",
             "members": {
@@ -502,6 +732,7 @@
         "com.amazonaws.iotwireless#ClientRequestToken": {
             "type": "string",
             "traits": {
+                "smithy.api#documentation": "<p>Each resource must have a unique client request token. If you try to create a new resource with the same token as a resource that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request.</p>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 64
@@ -743,6 +974,167 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the new device profile.</p>"
                     }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#CreateFuotaTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#CreateFuotaTaskRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#CreateFuotaTaskResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a FUOTA task.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/fuota-tasks",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#CreateFuotaTaskRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.iotwireless#FuotaTaskName"
+                },
+                "Description": {
+                    "target": "com.amazonaws.iotwireless#Description"
+                },
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.iotwireless#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "LoRaWAN": {
+                    "target": "com.amazonaws.iotwireless#LoRaWANFuotaTask"
+                },
+                "FirmwareUpdateImage": {
+                    "target": "com.amazonaws.iotwireless#FirmwareUpdateImage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "FirmwareUpdateRole": {
+                    "target": "com.amazonaws.iotwireless#FirmwareUpdateRole",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.iotwireless#TagList"
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#CreateFuotaTaskResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.iotwireless#FuotaTaskArn"
+                },
+                "Id": {
+                    "target": "com.amazonaws.iotwireless#FuotaTaskId"
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#CreateMulticastGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#CreateMulticastGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#CreateMulticastGroupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a multicast group.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/multicast-groups",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#CreateMulticastGroupRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.iotwireless#MulticastGroupName"
+                },
+                "Description": {
+                    "target": "com.amazonaws.iotwireless#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the multicast group.</p>"
+                    }
+                },
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.iotwireless#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Each resource must have a unique client request token. If you try to create a new resource with the\n            same token as a resource that already exists, an exception occurs. If you omit this value,\n            AWS SDKs will automatically generate a unique client request. </p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "LoRaWAN": {
+                    "target": "com.amazonaws.iotwireless#LoRaWANMulticast",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.iotwireless#TagList"
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#CreateMulticastGroupResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.iotwireless#MulticastGroupArn"
+                },
+                "Id": {
+                    "target": "com.amazonaws.iotwireless#MulticastGroupId"
                 }
             }
         },
@@ -1184,6 +1576,12 @@
                 }
             }
         },
+        "com.amazonaws.iotwireless#CreatedAt": {
+            "type": "timestamp",
+            "traits": {
+                "smithy.api#documentation": "<p>Created at timestamp for the resource.</p>"
+            }
+        },
         "com.amazonaws.iotwireless#DeleteDestination": {
             "type": "operation",
             "input": {
@@ -1289,6 +1687,109 @@
             }
         },
         "com.amazonaws.iotwireless#DeleteDeviceProfileResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.iotwireless#DeleteFuotaTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#DeleteFuotaTaskRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#DeleteFuotaTaskResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a FUOTA task.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/fuota-tasks/{Id}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#DeleteFuotaTaskRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.iotwireless#FuotaTaskId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#DeleteFuotaTaskResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.iotwireless#DeleteMulticastGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#DeleteMulticastGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#DeleteMulticastGroupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a multicast group if it is not in use by a fuota task.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/multicast-groups/{Id}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#DeleteMulticastGroupRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.iotwireless#MulticastGroupId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#DeleteMulticastGroupResponse": {
             "type": "structure",
             "members": {}
         },
@@ -1553,6 +2054,7 @@
         "com.amazonaws.iotwireless#Description": {
             "type": "string",
             "traits": {
+                "smithy.api#documentation": "<p>The description of the new resource.</p>",
                 "smithy.api#length": {
                     "min": 0,
                     "max": 2048
@@ -1706,6 +2208,20 @@
                 }
             }
         },
+        "com.amazonaws.iotwireless#DeviceRegistrationStateEventConfiguration": {
+            "type": "structure",
+            "members": {
+                "Sidewalk": {
+                    "target": "com.amazonaws.iotwireless#SidewalkEventNotificationConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Device registration state event configuration object for enabling or disabling Sidewalk related event\n            topics.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Device registration state event configuration object for enabling and disabling relevant topics.</p>"
+            }
+        },
         "com.amazonaws.iotwireless#DeviceState": {
             "type": "string",
             "traits": {
@@ -1783,6 +2299,180 @@
             }
         },
         "com.amazonaws.iotwireless#DisassociateAwsAccountFromPartnerAccountResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.iotwireless#DisassociateMulticastGroupFromFuotaTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#DisassociateMulticastGroupFromFuotaTaskRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#DisassociateMulticastGroupFromFuotaTaskResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disassociates a multicast group from a fuota task.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/fuota-tasks/{Id}/multicast-groups/{MulticastGroupId}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#DisassociateMulticastGroupFromFuotaTaskRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.iotwireless#FuotaTaskId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MulticastGroupId": {
+                    "target": "com.amazonaws.iotwireless#MulticastGroupId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#DisassociateMulticastGroupFromFuotaTaskResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.iotwireless#DisassociateWirelessDeviceFromFuotaTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#DisassociateWirelessDeviceFromFuotaTaskRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#DisassociateWirelessDeviceFromFuotaTaskResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disassociates a wireless device from a FUOTA task.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/fuota-tasks/{Id}/wireless-devices/{WirelessDeviceId}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#DisassociateWirelessDeviceFromFuotaTaskRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.iotwireless#FuotaTaskId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "WirelessDeviceId": {
+                    "target": "com.amazonaws.iotwireless#WirelessDeviceId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#DisassociateWirelessDeviceFromFuotaTaskResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.iotwireless#DisassociateWirelessDeviceFromMulticastGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#DisassociateWirelessDeviceFromMulticastGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#DisassociateWirelessDeviceFromMulticastGroupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disassociates a wireless device from a multicast group.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/multicast-groups/{Id}/wireless-devices/{WirelessDeviceId}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#DisassociateWirelessDeviceFromMulticastGroupRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.iotwireless#MulticastGroupId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "WirelessDeviceId": {
+                    "target": "com.amazonaws.iotwireless#WirelessDeviceId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#DisassociateWirelessDeviceFromMulticastGroupResponse": {
             "type": "structure",
             "members": {}
         },
@@ -1955,6 +2645,48 @@
                 }
             }
         },
+        "com.amazonaws.iotwireless#DlClass": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>DlClass for LoRaWAM, valid values are ClassB and ClassC.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "ClassB",
+                        "name": "ClassB"
+                    },
+                    {
+                        "value": "ClassC",
+                        "name": "ClassC"
+                    }
+                ],
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#DlDr": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#documentation": "<p>Downlink data rate.</p>",
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 15
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#DlFreq": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#documentation": "<p>Downlink frequency.</p>",
+                "smithy.api#range": {
+                    "min": 100000000,
+                    "max": 1000000000
+                }
+            }
+        },
         "com.amazonaws.iotwireless#DlRate": {
             "type": "integer",
             "traits": {
@@ -2035,6 +2767,32 @@
                 ]
             }
         },
+        "com.amazonaws.iotwireless#EventNotificationPartnerType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Sidewalk",
+                        "name": "Sidewalk"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.iotwireless#EventNotificationTopicStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Enabled",
+                        "name": "Enabled"
+                    },
+                    {
+                        "value": "Disabled",
+                        "name": "Disabled"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.iotwireless#Expression": {
             "type": "string",
             "traits": {
@@ -2069,10 +2827,28 @@
             "type": "integer",
             "traits": {
                 "smithy.api#box": {},
+                "smithy.api#documentation": "<p>The Fport value.</p>",
                 "smithy.api#range": {
                     "min": 1,
                     "max": 223
                 }
+            }
+        },
+        "com.amazonaws.iotwireless#FPorts": {
+            "type": "structure",
+            "members": {
+                "Fuota": {
+                    "target": "com.amazonaws.iotwireless#FPort"
+                },
+                "Multicast": {
+                    "target": "com.amazonaws.iotwireless#FPort"
+                },
+                "ClockSync": {
+                    "target": "com.amazonaws.iotwireless#FPort"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List of FPort assigned for different LoRaWAN application packages to use</p>"
             }
         },
         "com.amazonaws.iotwireless#FactoryPresetFreqsList": {
@@ -2098,10 +2874,172 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.iotwireless#FirmwareUpdateImage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The S3 URI points to a firmware update image that is to be used with a FUOTA task.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4096
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#FirmwareUpdateRole": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The firmware update role that is to be used with a FUOTA task.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#FuotaDeviceStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The status of a wireless device in a FUOTA task.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "Initial",
+                        "name": "Initial"
+                    },
+                    {
+                        "value": "Package_Not_Supported",
+                        "name": "Package_Not_Supported"
+                    },
+                    {
+                        "value": "FragAlgo_unsupported",
+                        "name": "FragAlgo_unsupported"
+                    },
+                    {
+                        "value": "Not_enough_memory",
+                        "name": "Not_enough_memory"
+                    },
+                    {
+                        "value": "FragIndex_unsupported",
+                        "name": "FragIndex_unsupported"
+                    },
+                    {
+                        "value": "Wrong_descriptor",
+                        "name": "Wrong_descriptor"
+                    },
+                    {
+                        "value": "SessionCnt_replay",
+                        "name": "SessionCnt_replay"
+                    },
+                    {
+                        "value": "MissingFrag",
+                        "name": "MissingFrag"
+                    },
+                    {
+                        "value": "MemoryError",
+                        "name": "MemoryError"
+                    },
+                    {
+                        "value": "MICError",
+                        "name": "MICError"
+                    },
+                    {
+                        "value": "Successful",
+                        "name": "Successful"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.iotwireless#FuotaTask": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.iotwireless#FuotaTaskId"
+                },
+                "Arn": {
+                    "target": "com.amazonaws.iotwireless#FuotaTaskArn"
+                },
+                "Name": {
+                    "target": "com.amazonaws.iotwireless#FuotaTaskName"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A FUOTA task.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#FuotaTaskArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The arn of a FUOTA task.</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#FuotaTaskId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The ID of a FUOTA task.</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#FuotaTaskList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotwireless#FuotaTask"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the FUOTA tasks registered to your AWS account.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#FuotaTaskName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The name of a FUOTA task.</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#FuotaTaskStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The status of a FUOTA task.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "Pending",
+                        "name": "Pending"
+                    },
+                    {
+                        "value": "FuotaSession_Waiting",
+                        "name": "FuotaSession_Waiting"
+                    },
+                    {
+                        "value": "In_FuotaSession",
+                        "name": "In_FuotaSession"
+                    },
+                    {
+                        "value": "FuotaDone",
+                        "name": "FuotaDone"
+                    },
+                    {
+                        "value": "Delete_Waiting",
+                        "name": "Delete_Waiting"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.iotwireless#GatewayEui": {
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^(([0-9A-Fa-f]{2}-){7}|([0-9A-Fa-f]{2}:){7}|([0-9A-Fa-f]{2}\\s){7}|([0-9A-Fa-f]{2}){7})([0-9A-Fa-f]{2})$"
+            }
+        },
+        "com.amazonaws.iotwireless#GenAppKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-fA-F0-9]{32}$"
             }
         },
         "com.amazonaws.iotwireless#GetDestination": {
@@ -2268,6 +3206,84 @@
                 }
             }
         },
+        "com.amazonaws.iotwireless#GetFuotaTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#GetFuotaTaskRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#GetFuotaTaskResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information about a FUOTA task.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/fuota-tasks/{Id}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#GetFuotaTaskRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.iotwireless#FuotaTaskId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#GetFuotaTaskResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.iotwireless#FuotaTaskArn"
+                },
+                "Id": {
+                    "target": "com.amazonaws.iotwireless#FuotaTaskId"
+                },
+                "Status": {
+                    "target": "com.amazonaws.iotwireless#FuotaTaskStatus"
+                },
+                "Name": {
+                    "target": "com.amazonaws.iotwireless#FuotaTaskName"
+                },
+                "Description": {
+                    "target": "com.amazonaws.iotwireless#Description"
+                },
+                "LoRaWAN": {
+                    "target": "com.amazonaws.iotwireless#LoRaWANFuotaTaskGetInfo"
+                },
+                "FirmwareUpdateImage": {
+                    "target": "com.amazonaws.iotwireless#FirmwareUpdateImage"
+                },
+                "FirmwareUpdateRole": {
+                    "target": "com.amazonaws.iotwireless#FirmwareUpdateRole"
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.iotwireless#CreatedAt"
+                }
+            }
+        },
         "com.amazonaws.iotwireless#GetLogLevelsByResourceTypes": {
             "type": "operation",
             "input": {
@@ -2317,6 +3333,132 @@
                 },
                 "WirelessDeviceLogOptions": {
                     "target": "com.amazonaws.iotwireless#WirelessDeviceLogOptionList"
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#GetMulticastGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#GetMulticastGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#GetMulticastGroupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information about a multicast group.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/multicast-groups/{Id}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#GetMulticastGroupRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.iotwireless#MulticastGroupId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#GetMulticastGroupResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.iotwireless#MulticastGroupArn"
+                },
+                "Id": {
+                    "target": "com.amazonaws.iotwireless#MulticastGroupId"
+                },
+                "Name": {
+                    "target": "com.amazonaws.iotwireless#MulticastGroupName"
+                },
+                "Description": {
+                    "target": "com.amazonaws.iotwireless#Description"
+                },
+                "Status": {
+                    "target": "com.amazonaws.iotwireless#MulticastGroupStatus"
+                },
+                "LoRaWAN": {
+                    "target": "com.amazonaws.iotwireless#LoRaWANMulticastGet"
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.iotwireless#CreatedAt"
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#GetMulticastGroupSession": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#GetMulticastGroupSessionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#GetMulticastGroupSessionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information about a multicast group session.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/multicast-groups/{Id}/session",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#GetMulticastGroupSessionRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.iotwireless#MulticastGroupId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#GetMulticastGroupSessionResponse": {
+            "type": "structure",
+            "members": {
+                "LoRaWAN": {
+                    "target": "com.amazonaws.iotwireless#LoRaWANMulticastSession"
                 }
             }
         },
@@ -2385,6 +3527,85 @@
                     "target": "com.amazonaws.iotwireless#AccountLinked",
                     "traits": {
                         "smithy.api#documentation": "<p>Whether the partner account is linked to the AWS account.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#GetResourceEventConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#GetResourceEventConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#GetResourceEventConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get the event configuration for a particular resource identifier.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/event-configurations/{Identifier}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#GetResourceEventConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.iotwireless#Identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Resource identifier to opt in for event messaging.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "IdentifierType": {
+                    "target": "com.amazonaws.iotwireless#IdentifierType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier type of the particular resource identifier for event configuration.</p>",
+                        "smithy.api#httpQuery": "identifierType",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PartnerType": {
+                    "target": "com.amazonaws.iotwireless#EventNotificationPartnerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Partner type of the resource if the identifier type is PartnerAccountId.</p>",
+                        "smithy.api#httpQuery": "partnerType"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#GetResourceEventConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "DeviceRegistrationState": {
+                    "target": "com.amazonaws.iotwireless#DeviceRegistrationStateEventConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Event configuration for the device registration state event</p>"
+                    }
+                },
+                "Proximity": {
+                    "target": "com.amazonaws.iotwireless#ProximityEventConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Event configuration for the Proximity event</p>"
                     }
                 }
             }
@@ -3259,6 +4480,17 @@
                 }
             }
         },
+        "com.amazonaws.iotwireless#IdentifierType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PartnerAccountId",
+                        "name": "PartnerAccountId"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.iotwireless#Integer": {
             "type": "integer",
             "traits": {
@@ -3460,6 +4692,220 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The list of device profiles.</p>"
                     }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#ListFuotaTasks": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#ListFuotaTasksRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#ListFuotaTasksResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the FUOTA tasks registered to your AWS account.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/fuota-tasks",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#ListFuotaTasksRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.iotwireless#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise <b>null</b> to receive the first set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.iotwireless#MaxResults",
+                    "traits": {
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#ListFuotaTasksResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.iotwireless#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise <b>null</b> to receive the first set of results.</p>"
+                    }
+                },
+                "FuotaTaskList": {
+                    "target": "com.amazonaws.iotwireless#FuotaTaskList"
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#ListMulticastGroups": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#ListMulticastGroupsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#ListMulticastGroupsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the multicast groups registered to your AWS account.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/multicast-groups",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#ListMulticastGroupsByFuotaTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#ListMulticastGroupsByFuotaTaskRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#ListMulticastGroupsByFuotaTaskResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List all multicast groups associated with a fuota task.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/fuota-tasks/{Id}/multicast-groups",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#ListMulticastGroupsByFuotaTaskRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.iotwireless#FuotaTaskId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.iotwireless#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise <b>null</b> to receive the first set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.iotwireless#MaxResults",
+                    "traits": {
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#ListMulticastGroupsByFuotaTaskResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.iotwireless#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise <b>null</b> to receive the first set of results.</p>"
+                    }
+                },
+                "MulticastGroupList": {
+                    "target": "com.amazonaws.iotwireless#MulticastGroupListByFuotaTask"
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#ListMulticastGroupsRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.iotwireless#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise <b>null</b> to receive the first set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.iotwireless#MaxResults",
+                    "traits": {
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#ListMulticastGroupsResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.iotwireless#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise <b>null</b> to receive the first set of results.</p>"
+                    }
+                },
+                "MulticastGroupList": {
+                    "target": "com.amazonaws.iotwireless#MulticastGroupList"
                 }
             }
         },
@@ -3740,6 +5186,18 @@
                         "smithy.api#documentation": "<p>A filter to list only the wireless devices that use this wireless device type.</p>",
                         "smithy.api#httpQuery": "wirelessDeviceType"
                     }
+                },
+                "FuotaTaskId": {
+                    "target": "com.amazonaws.iotwireless#FuotaTaskId",
+                    "traits": {
+                        "smithy.api#httpQuery": "fuotaTaskId"
+                    }
+                },
+                "MulticastGroupId": {
+                    "target": "com.amazonaws.iotwireless#MulticastGroupId",
+                    "traits": {
+                        "smithy.api#httpQuery": "multicastGroupId"
+                    }
                 }
             }
         },
@@ -3950,6 +5408,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>LoRaWAN object for create APIs</p>"
                     }
+                },
+                "FPorts": {
+                    "target": "com.amazonaws.iotwireless#FPorts"
                 }
             },
             "traits": {
@@ -4120,6 +5581,31 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>LoRaWANDeviceProfile object.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#LoRaWANFuotaTask": {
+            "type": "structure",
+            "members": {
+                "RfRegion": {
+                    "target": "com.amazonaws.iotwireless#SupportedRfRegion"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The LoRaWAN information used with a FUOTA task.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#LoRaWANFuotaTaskGetInfo": {
+            "type": "structure",
+            "members": {
+                "RfRegion": {
+                    "target": "com.amazonaws.iotwireless#RfRegion"
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.iotwireless#StartTime"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The LoRaWAN information returned from getting a FUOTA task.</p>"
             }
         },
         "com.amazonaws.iotwireless#LoRaWANGateway": {
@@ -4359,14 +5845,76 @@
                 "smithy.api#documentation": "<p>LoRaWAN object for list functions.</p>"
             }
         },
+        "com.amazonaws.iotwireless#LoRaWANMulticast": {
+            "type": "structure",
+            "members": {
+                "RfRegion": {
+                    "target": "com.amazonaws.iotwireless#SupportedRfRegion"
+                },
+                "DlClass": {
+                    "target": "com.amazonaws.iotwireless#DlClass"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The LoRaWAN information that is to be used with the multicast group.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#LoRaWANMulticastGet": {
+            "type": "structure",
+            "members": {
+                "RfRegion": {
+                    "target": "com.amazonaws.iotwireless#SupportedRfRegion"
+                },
+                "DlClass": {
+                    "target": "com.amazonaws.iotwireless#DlClass"
+                },
+                "NumberOfDevicesRequested": {
+                    "target": "com.amazonaws.iotwireless#NumberOfDevicesRequested"
+                },
+                "NumberOfDevicesInGroup": {
+                    "target": "com.amazonaws.iotwireless#NumberOfDevicesInGroup"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The LoRaWAN information that is to be returned from getting multicast group information.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#LoRaWANMulticastMetadata": {
+            "type": "structure",
+            "members": {
+                "FPort": {
+                    "target": "com.amazonaws.iotwireless#FPort"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The metadata information of the LoRaWAN multicast group.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#LoRaWANMulticastSession": {
+            "type": "structure",
+            "members": {
+                "DlDr": {
+                    "target": "com.amazonaws.iotwireless#DlDr"
+                },
+                "DlFreq": {
+                    "target": "com.amazonaws.iotwireless#DlFreq"
+                },
+                "SessionStartTime": {
+                    "target": "com.amazonaws.iotwireless#SessionStartTimeTimestamp"
+                },
+                "SessionTimeout": {
+                    "target": "com.amazonaws.iotwireless#SessionTimeout"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The LoRaWAN information used with the multicast session.</p>"
+            }
+        },
         "com.amazonaws.iotwireless#LoRaWANSendDataToDevice": {
             "type": "structure",
             "members": {
                 "FPort": {
-                    "target": "com.amazonaws.iotwireless#FPort",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The Fport value.</p>"
-                    }
+                    "target": "com.amazonaws.iotwireless#FPort"
                 }
             },
             "traits": {
@@ -4385,6 +5933,17 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>LoRaWANServiceProfile object.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#LoRaWANStartFuotaTask": {
+            "type": "structure",
+            "members": {
+                "StartTime": {
+                    "target": "com.amazonaws.iotwireless#StartTime"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The LoRaWAN information used to start a FUOTA task.</p>"
             }
         },
         "com.amazonaws.iotwireless#LoRaWANUpdateDevice": {
@@ -4511,9 +6070,21 @@
         "com.amazonaws.iotwireless#MaxResults": {
             "type": "integer",
             "traits": {
+                "smithy.api#documentation": "<p>The maximum number of results to return in this operation.</p>",
                 "smithy.api#range": {
                     "min": 0,
                     "max": 250
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#McGroupId": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#documentation": "<p>Id of the multicast group.</p>",
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 256
                 }
             }
         },
@@ -4572,6 +6143,122 @@
                 }
             }
         },
+        "com.amazonaws.iotwireless#MulticastDeviceStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#MulticastGroup": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.iotwireless#MulticastGroupId"
+                },
+                "Arn": {
+                    "target": "com.amazonaws.iotwireless#MulticastGroupArn"
+                },
+                "Name": {
+                    "target": "com.amazonaws.iotwireless#MulticastGroupName"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A multicast group.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#MulticastGroupArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The arn of the multicast group.</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#MulticastGroupByFuotaTask": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.iotwireless#MulticastGroupId"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A multicast group that is associated with a FUOTA task.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#MulticastGroupId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The ID of the multicast group.</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#MulticastGroupList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotwireless#MulticastGroup"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List of multicast groups.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#MulticastGroupListByFuotaTask": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotwireless#MulticastGroupByFuotaTask"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List of multicast groups associated with a FUOTA task.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#MulticastGroupMessageId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>ID of a multicast group message.</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#MulticastGroupName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The name of the multicast group.</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#MulticastGroupStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The status of the multicast group.</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#MulticastWirelessMetadata": {
+            "type": "structure",
+            "members": {
+                "LoRaWAN": {
+                    "target": "com.amazonaws.iotwireless#LoRaWANMulticastMetadata"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Wireless metadata that is to be sent to multicast group.</p>"
+            }
+        },
         "com.amazonaws.iotwireless#NetId": {
             "type": "string",
             "traits": {
@@ -4599,6 +6286,20 @@
                     "min": 0,
                     "max": 4096
                 }
+            }
+        },
+        "com.amazonaws.iotwireless#NumberOfDevicesInGroup": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#documentation": "<p>Number of devices that are associated to the multicast group.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#NumberOfDevicesRequested": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#documentation": "<p>Number of devices that are requested to be associated with the multicast group.</p>"
             }
         },
         "com.amazonaws.iotwireless#NwkGeoLoc": {
@@ -4635,6 +6336,12 @@
                     "target": "com.amazonaws.iotwireless#AppEui",
                     "traits": {
                         "smithy.api#documentation": "<p>The AppEUI value.</p>"
+                    }
+                },
+                "GenAppKey": {
+                    "target": "com.amazonaws.iotwireless#GenAppKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The GenAppKey value.</p>"
                     }
                 }
             },
@@ -4703,6 +6410,7 @@
         "com.amazonaws.iotwireless#PayloadData": {
             "type": "string",
             "traits": {
+                "smithy.api#documentation": "<p>The binary to be sent to the end device, encoded in base64.</p>",
                 "smithy.api#length": {
                     "min": 0,
                     "max": 2048
@@ -4750,6 +6458,20 @@
                     "min": 1000000,
                     "max": 16700000
                 }
+            }
+        },
+        "com.amazonaws.iotwireless#ProximityEventConfiguration": {
+            "type": "structure",
+            "members": {
+                "Sidewalk": {
+                    "target": "com.amazonaws.iotwireless#SidewalkEventNotificationConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Proximity event configuration object for enabling or disabling Sidewalk related event topics.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Proximity event configuration object for enabling and disabling relevant topics.</p>"
             }
         },
         "com.amazonaws.iotwireless#PutResourceLogLevel": {
@@ -4815,6 +6537,16 @@
         "com.amazonaws.iotwireless#PutResourceLogLevelResponse": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.iotwireless#QueryString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Query string used to search for wireless devices as part of the bulk associate and disassociate process.</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 4096
+                }
+            }
         },
         "com.amazonaws.iotwireless#RaAllowed": {
             "type": "boolean"
@@ -4987,6 +6719,7 @@
         "com.amazonaws.iotwireless#RfRegion": {
             "type": "string",
             "traits": {
+                "smithy.api#documentation": "<p>The frequency band (RFRegion) value.</p>",
                 "smithy.api#length": {
                     "min": 0,
                     "max": 64
@@ -5048,6 +6781,75 @@
                 "smithy.api#pattern": "^[a-fA-F0-9]{32}$"
             }
         },
+        "com.amazonaws.iotwireless#SendDataToMulticastGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#SendDataToMulticastGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#SendDataToMulticastGroupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Sends the specified data to a multicast group.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/multicast-groups/{Id}/data",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#SendDataToMulticastGroupRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.iotwireless#MulticastGroupId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "PayloadData": {
+                    "target": "com.amazonaws.iotwireless#PayloadData",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "WirelessMetadata": {
+                    "target": "com.amazonaws.iotwireless#MulticastWirelessMetadata",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#SendDataToMulticastGroupResponse": {
+            "type": "structure",
+            "members": {
+                "MessageId": {
+                    "target": "com.amazonaws.iotwireless#MulticastGroupMessageId"
+                }
+            }
+        },
         "com.amazonaws.iotwireless#SendDataToWirelessDevice": {
             "type": "operation",
             "input": {
@@ -5100,7 +6902,6 @@
                 "PayloadData": {
                     "target": "com.amazonaws.iotwireless#PayloadData",
                     "traits": {
-                        "smithy.api#documentation": "<p>The binary to be sent to the end device, encoded in base64.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5238,6 +7039,24 @@
                 "smithy.api#documentation": "<p>Session keys for ABP v1.1</p>"
             }
         },
+        "com.amazonaws.iotwireless#SessionStartTimeTimestamp": {
+            "type": "timestamp",
+            "traits": {
+                "smithy.api#documentation": "<p>Timestamp of when the multicast group session is to start.</p>",
+                "smithy.api#timestampFormat": "date-time"
+            }
+        },
+        "com.amazonaws.iotwireless#SessionTimeout": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#documentation": "<p>How long before a multicast group session is to timeout.</p>",
+                "smithy.api#range": {
+                    "min": 60,
+                    "max": 172800
+                }
+            }
+        },
         "com.amazonaws.iotwireless#SidewalkAccountInfo": {
             "type": "structure",
             "members": {
@@ -5351,6 +7170,20 @@
                 "smithy.api#documentation": "<p>MetaData for Sidewalk device.</p>"
             }
         },
+        "com.amazonaws.iotwireless#SidewalkEventNotificationConfigurations": {
+            "type": "structure",
+            "members": {
+                "AmazonIdEventTopic": {
+                    "target": "com.amazonaws.iotwireless#EventNotificationTopicStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enum to denote whether amazon id event topic is enabled or disabled.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> SidewalkEventNotificationConfigurations object\n            Event configuration object for Sidewalk related event topics.</p>"
+            }
+        },
         "com.amazonaws.iotwireless#SidewalkId": {
             "type": "string",
             "traits": {
@@ -5449,6 +7282,240 @@
                 ]
             }
         },
+        "com.amazonaws.iotwireless#StartBulkAssociateWirelessDeviceWithMulticastGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#StartBulkAssociateWirelessDeviceWithMulticastGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#StartBulkAssociateWirelessDeviceWithMulticastGroupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts a bulk association of all qualifying wireless devices with a multicast group.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/multicast-groups/{Id}/bulk",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#StartBulkAssociateWirelessDeviceWithMulticastGroupRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.iotwireless#MulticastGroupId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "QueryString": {
+                    "target": "com.amazonaws.iotwireless#QueryString"
+                },
+                "Tags": {
+                    "target": "com.amazonaws.iotwireless#TagList"
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#StartBulkAssociateWirelessDeviceWithMulticastGroupResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.iotwireless#StartBulkDisassociateWirelessDeviceFromMulticastGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#StartBulkDisassociateWirelessDeviceFromMulticastGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#StartBulkDisassociateWirelessDeviceFromMulticastGroupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts a bulk disassociatin of all qualifying wireless devices from a multicast group.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/multicast-groups/{Id}/bulk",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#StartBulkDisassociateWirelessDeviceFromMulticastGroupRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.iotwireless#MulticastGroupId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "QueryString": {
+                    "target": "com.amazonaws.iotwireless#QueryString"
+                },
+                "Tags": {
+                    "target": "com.amazonaws.iotwireless#TagList"
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#StartBulkDisassociateWirelessDeviceFromMulticastGroupResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.iotwireless#StartFuotaTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#StartFuotaTaskRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#StartFuotaTaskResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts a FUOTA task.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/fuota-tasks/{Id}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#StartFuotaTaskRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.iotwireless#FuotaTaskId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "LoRaWAN": {
+                    "target": "com.amazonaws.iotwireless#LoRaWANStartFuotaTask"
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#StartFuotaTaskResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.iotwireless#StartMulticastGroupSession": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#StartMulticastGroupSessionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#StartMulticastGroupSessionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts a multicast group session.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/multicast-groups/{Id}/session",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#StartMulticastGroupSessionRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.iotwireless#MulticastGroupId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "LoRaWAN": {
+                    "target": "com.amazonaws.iotwireless#LoRaWANMulticastSession",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#StartMulticastGroupSessionResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.iotwireless#StartTime": {
+            "type": "timestamp",
+            "traits": {
+                "smithy.api#documentation": "<p>Start time of a FUOTA task.</p>",
+                "smithy.api#timestampFormat": "date-time"
+            }
+        },
         "com.amazonaws.iotwireless#Station": {
             "type": "string",
             "traits": {
@@ -5479,6 +7546,30 @@
                     "min": 0,
                     "max": 8
                 }
+            }
+        },
+        "com.amazonaws.iotwireless#SupportedRfRegion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Supported RfRegions</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "EU868",
+                        "name": "EU868"
+                    },
+                    {
+                        "value": "US915",
+                        "name": "US915"
+                    },
+                    {
+                        "value": "AU915",
+                        "name": "AU915"
+                    },
+                    {
+                        "value": "AS923-1",
+                        "name": "AS923_1"
+                    }
+                ]
             }
         },
         "com.amazonaws.iotwireless#Supports32BitFCnt": {
@@ -5545,6 +7636,7 @@
                 "target": "com.amazonaws.iotwireless#Tag"
             },
             "traits": {
+                "smithy.api#documentation": "<p>The tag to attach to the specified resource. Tags are metadata that you can use to manage a resource.</p>",
                 "smithy.api#length": {
                     "min": 0,
                     "max": 200
@@ -5905,6 +7997,74 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.iotwireless#UpdateFuotaTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#UpdateFuotaTaskRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#UpdateFuotaTaskResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates properties of a FUOTA task.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/fuota-tasks/{Id}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#UpdateFuotaTaskRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.iotwireless#FuotaTaskId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.iotwireless#FuotaTaskName"
+                },
+                "Description": {
+                    "target": "com.amazonaws.iotwireless#Description"
+                },
+                "LoRaWAN": {
+                    "target": "com.amazonaws.iotwireless#LoRaWANFuotaTask"
+                },
+                "FirmwareUpdateImage": {
+                    "target": "com.amazonaws.iotwireless#FirmwareUpdateImage"
+                },
+                "FirmwareUpdateRole": {
+                    "target": "com.amazonaws.iotwireless#FirmwareUpdateRole"
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#UpdateFuotaTaskResponse": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.iotwireless#UpdateLogLevelsByResourceTypes": {
             "type": "operation",
             "input": {
@@ -5957,6 +8117,68 @@
             }
         },
         "com.amazonaws.iotwireless#UpdateLogLevelsByResourceTypesResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.iotwireless#UpdateMulticastGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#UpdateMulticastGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#UpdateMulticastGroupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates properties of a multicast group session.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/multicast-groups/{Id}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#UpdateMulticastGroupRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.iotwireless#MulticastGroupId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.iotwireless#MulticastGroupName"
+                },
+                "Description": {
+                    "target": "com.amazonaws.iotwireless#Description"
+                },
+                "LoRaWAN": {
+                    "target": "com.amazonaws.iotwireless#LoRaWANMulticast"
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#UpdateMulticastGroupResponse": {
             "type": "structure",
             "members": {}
         },
@@ -6020,6 +8242,87 @@
             }
         },
         "com.amazonaws.iotwireless#UpdatePartnerAccountResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.iotwireless#UpdateResourceEventConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#UpdateResourceEventConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#UpdateResourceEventConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update the event configuration for a particular resource identifier.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/event-configurations/{Identifier}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#UpdateResourceEventConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.iotwireless#Identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Resource identifier to opt in for event messaging.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "IdentifierType": {
+                    "target": "com.amazonaws.iotwireless#IdentifierType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier type of the particular resource identifier for event configuration.</p>",
+                        "smithy.api#httpQuery": "identifierType",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PartnerType": {
+                    "target": "com.amazonaws.iotwireless#EventNotificationPartnerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Partner type of the resource if the identifier type is PartnerAccountId</p>",
+                        "smithy.api#httpQuery": "partnerType"
+                    }
+                },
+                "DeviceRegistrationState": {
+                    "target": "com.amazonaws.iotwireless#DeviceRegistrationStateEventConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Event configuration for the device registration state event</p>"
+                    }
+                },
+                "Proximity": {
+                    "target": "com.amazonaws.iotwireless#ProximityEventConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Event configuration for the Proximity event</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#UpdateResourceEventConfigurationResponse": {
             "type": "structure",
             "members": {}
         },
@@ -6304,6 +8607,7 @@
         "com.amazonaws.iotwireless#WirelessDeviceId": {
             "type": "string",
             "traits": {
+                "smithy.api#documentation": "<p>The ID of the wireless device.</p>",
                 "smithy.api#length": {
                     "min": 0,
                     "max": 256
@@ -6425,6 +8729,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Sidewalk account credentials.</p>"
                     }
+                },
+                "FuotaDeviceStatus": {
+                    "target": "com.amazonaws.iotwireless#FuotaDeviceStatus"
+                },
+                "MulticastDeviceStatus": {
+                    "target": "com.amazonaws.iotwireless#MulticastDeviceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the wireless device in the multicast group.</p>"
+                    }
+                },
+                "McGroupId": {
+                    "target": "com.amazonaws.iotwireless#McGroupId"
                 }
             },
             "traits": {
@@ -6744,6 +9060,15 @@
                     "target": "com.amazonaws.iotwireless#AssociateAwsAccountWithPartnerAccount"
                 },
                 {
+                    "target": "com.amazonaws.iotwireless#AssociateMulticastGroupWithFuotaTask"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#AssociateWirelessDeviceWithFuotaTask"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#AssociateWirelessDeviceWithMulticastGroup"
+                },
+                {
                     "target": "com.amazonaws.iotwireless#AssociateWirelessDeviceWithThing"
                 },
                 {
@@ -6753,10 +9078,19 @@
                     "target": "com.amazonaws.iotwireless#AssociateWirelessGatewayWithThing"
                 },
                 {
+                    "target": "com.amazonaws.iotwireless#CancelMulticastGroupSession"
+                },
+                {
                     "target": "com.amazonaws.iotwireless#CreateDestination"
                 },
                 {
                     "target": "com.amazonaws.iotwireless#CreateDeviceProfile"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#CreateFuotaTask"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#CreateMulticastGroup"
                 },
                 {
                     "target": "com.amazonaws.iotwireless#CreateServiceProfile"
@@ -6780,6 +9114,12 @@
                     "target": "com.amazonaws.iotwireless#DeleteDeviceProfile"
                 },
                 {
+                    "target": "com.amazonaws.iotwireless#DeleteFuotaTask"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#DeleteMulticastGroup"
+                },
+                {
                     "target": "com.amazonaws.iotwireless#DeleteServiceProfile"
                 },
                 {
@@ -6798,6 +9138,15 @@
                     "target": "com.amazonaws.iotwireless#DisassociateAwsAccountFromPartnerAccount"
                 },
                 {
+                    "target": "com.amazonaws.iotwireless#DisassociateMulticastGroupFromFuotaTask"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#DisassociateWirelessDeviceFromFuotaTask"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#DisassociateWirelessDeviceFromMulticastGroup"
+                },
+                {
                     "target": "com.amazonaws.iotwireless#DisassociateWirelessDeviceFromThing"
                 },
                 {
@@ -6813,10 +9162,22 @@
                     "target": "com.amazonaws.iotwireless#GetDeviceProfile"
                 },
                 {
+                    "target": "com.amazonaws.iotwireless#GetFuotaTask"
+                },
+                {
                     "target": "com.amazonaws.iotwireless#GetLogLevelsByResourceTypes"
                 },
                 {
+                    "target": "com.amazonaws.iotwireless#GetMulticastGroup"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#GetMulticastGroupSession"
+                },
+                {
                     "target": "com.amazonaws.iotwireless#GetPartnerAccount"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#GetResourceEventConfiguration"
                 },
                 {
                     "target": "com.amazonaws.iotwireless#GetResourceLogLevel"
@@ -6858,6 +9219,15 @@
                     "target": "com.amazonaws.iotwireless#ListDeviceProfiles"
                 },
                 {
+                    "target": "com.amazonaws.iotwireless#ListFuotaTasks"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ListMulticastGroups"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ListMulticastGroupsByFuotaTask"
+                },
+                {
                     "target": "com.amazonaws.iotwireless#ListPartnerAccounts"
                 },
                 {
@@ -6885,7 +9255,22 @@
                     "target": "com.amazonaws.iotwireless#ResetResourceLogLevel"
                 },
                 {
+                    "target": "com.amazonaws.iotwireless#SendDataToMulticastGroup"
+                },
+                {
                     "target": "com.amazonaws.iotwireless#SendDataToWirelessDevice"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#StartBulkAssociateWirelessDeviceWithMulticastGroup"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#StartBulkDisassociateWirelessDeviceFromMulticastGroup"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#StartFuotaTask"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#StartMulticastGroupSession"
                 },
                 {
                     "target": "com.amazonaws.iotwireless#TagResource"
@@ -6900,10 +9285,19 @@
                     "target": "com.amazonaws.iotwireless#UpdateDestination"
                 },
                 {
+                    "target": "com.amazonaws.iotwireless#UpdateFuotaTask"
+                },
+                {
                     "target": "com.amazonaws.iotwireless#UpdateLogLevelsByResourceTypes"
                 },
                 {
+                    "target": "com.amazonaws.iotwireless#UpdateMulticastGroup"
+                },
+                {
                     "target": "com.amazonaws.iotwireless#UpdatePartnerAccount"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#UpdateResourceEventConfiguration"
                 },
                 {
                     "target": "com.amazonaws.iotwireless#UpdateWirelessDevice"

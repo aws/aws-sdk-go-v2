@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the properties associated with an asycnhronous batch translation job
+// Gets the properties associated with an asynchronous batch translation job
 // including name, ID, status, source and target languages, input/output S3
 // buckets, and so on.
 func (c *Client) DescribeTextTranslationJob(ctx context.Context, params *DescribeTextTranslationJobInput, optFns ...func(*Options)) (*DescribeTextTranslationJobOutput, error) {

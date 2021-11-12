@@ -46,11 +46,11 @@ type ListTasksInput struct {
 
 	// The task desired status to use when filtering the ListTasks results. Specifying
 	// a desiredStatus of STOPPED limits the results to tasks that Amazon ECS has set
-	// the desired status to STOPPED. This can be useful for debugging tasks that are
-	// not starting properly or have died or finished. The default status filter is
+	// the desired status to STOPPED. This can be useful for debugging tasks that
+	// aren't starting properly or have died or finished. The default status filter is
 	// RUNNING, which shows tasks that Amazon ECS has set the desired status to
 	// RUNNING. Although you can filter results based on a desired status of PENDING,
-	// this does not return any results. Amazon ECS never sets the desired status of a
+	// this doesn't return any results. Amazon ECS never sets the desired status of a
 	// task to that value (only a task's lastStatus may have a value of PENDING).
 	DesiredStatus types.DesiredStatus
 
@@ -62,20 +62,20 @@ type ListTasksInput struct {
 	// The launch type to use when filtering the ListTasks results.
 	LaunchType types.LaunchType
 
-	// The maximum number of task results returned by ListTasks in paginated output.
+	// The maximum number of task results that ListTasks returned in paginated output.
 	// When this parameter is used, ListTasks only returns maxResults results in a
 	// single page along with a nextToken response element. The remaining results of
 	// the initial request can be seen by sending another ListTasks request with the
 	// returned nextToken value. This value can be between 1 and 100. If this parameter
-	// is not used, then ListTasks returns up to 100 results and a nextToken value if
+	// isn't used, then ListTasks returns up to 100 results and a nextToken value if
 	// applicable.
 	MaxResults *int32
 
 	// The nextToken value returned from a ListTasks request indicating that more
 	// results are available to fulfill the request and further calls will be needed.
-	// If maxResults was provided, it is possible the number of results to be fewer
-	// than maxResults. This token should be treated as an opaque identifier that is
-	// only used to retrieve the next items in a list and not for other programmatic
+	// If maxResults was provided, it's possible the number of results to be fewer than
+	// maxResults. This token should be treated as an opaque identifier that is only
+	// used to retrieve the next items in a list and not for other programmatic
 	// purposes.
 	NextToken *string
 
@@ -83,8 +83,8 @@ type ListTasksInput struct {
 	// a serviceName limits the results to tasks that belong to that service.
 	ServiceName *string
 
-	// The startedBy value with which to filter the task results. Specifying a
-	// startedBy value limits the results to tasks that were started with that value.
+	// The startedBy value to filter the task results with. Specifying a startedBy
+	// value limits the results to tasks that were started with that value.
 	StartedBy *string
 
 	noSmithyDocumentSerde
@@ -176,12 +176,12 @@ var _ ListTasksAPIClient = (*Client)(nil)
 
 // ListTasksPaginatorOptions is the paginator options for ListTasks
 type ListTasksPaginatorOptions struct {
-	// The maximum number of task results returned by ListTasks in paginated output.
+	// The maximum number of task results that ListTasks returned in paginated output.
 	// When this parameter is used, ListTasks only returns maxResults results in a
 	// single page along with a nextToken response element. The remaining results of
 	// the initial request can be seen by sending another ListTasks request with the
 	// returned nextToken value. This value can be between 1 and 100. If this parameter
-	// is not used, then ListTasks returns up to 100 results and a nextToken value if
+	// isn't used, then ListTasks returns up to 100 results and a nextToken value if
 	// applicable.
 	Limit int32
 

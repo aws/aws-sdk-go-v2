@@ -30,6 +30,66 @@ func (m *validateOpAssociateAwsAccountWithPartnerAccount) HandleInitialize(ctx c
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateMulticastGroupWithFuotaTask struct {
+}
+
+func (*validateOpAssociateMulticastGroupWithFuotaTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateMulticastGroupWithFuotaTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateMulticastGroupWithFuotaTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateMulticastGroupWithFuotaTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpAssociateWirelessDeviceWithFuotaTask struct {
+}
+
+func (*validateOpAssociateWirelessDeviceWithFuotaTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateWirelessDeviceWithFuotaTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateWirelessDeviceWithFuotaTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateWirelessDeviceWithFuotaTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpAssociateWirelessDeviceWithMulticastGroup struct {
+}
+
+func (*validateOpAssociateWirelessDeviceWithMulticastGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateWirelessDeviceWithMulticastGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateWirelessDeviceWithMulticastGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateWirelessDeviceWithMulticastGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAssociateWirelessDeviceWithThing struct {
 }
 
@@ -90,6 +150,26 @@ func (m *validateOpAssociateWirelessGatewayWithThing) HandleInitialize(ctx conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCancelMulticastGroupSession struct {
+}
+
+func (*validateOpCancelMulticastGroupSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelMulticastGroupSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelMulticastGroupSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelMulticastGroupSessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDestination struct {
 }
 
@@ -125,6 +205,46 @@ func (m *validateOpCreateDeviceProfile) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateDeviceProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateFuotaTask struct {
+}
+
+func (*validateOpCreateFuotaTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateFuotaTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateFuotaTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateFuotaTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateMulticastGroup struct {
+}
+
+func (*validateOpCreateMulticastGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateMulticastGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateMulticastGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateMulticastGroupInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -270,6 +390,46 @@ func (m *validateOpDeleteDeviceProfile) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteFuotaTask struct {
+}
+
+func (*validateOpDeleteFuotaTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteFuotaTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteFuotaTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteFuotaTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteMulticastGroup struct {
+}
+
+func (*validateOpDeleteMulticastGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteMulticastGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteMulticastGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteMulticastGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteServiceProfile struct {
 }
 
@@ -390,6 +550,66 @@ func (m *validateOpDisassociateAwsAccountFromPartnerAccount) HandleInitialize(ct
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateMulticastGroupFromFuotaTask struct {
+}
+
+func (*validateOpDisassociateMulticastGroupFromFuotaTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateMulticastGroupFromFuotaTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateMulticastGroupFromFuotaTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateMulticastGroupFromFuotaTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociateWirelessDeviceFromFuotaTask struct {
+}
+
+func (*validateOpDisassociateWirelessDeviceFromFuotaTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateWirelessDeviceFromFuotaTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateWirelessDeviceFromFuotaTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateWirelessDeviceFromFuotaTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociateWirelessDeviceFromMulticastGroup struct {
+}
+
+func (*validateOpDisassociateWirelessDeviceFromMulticastGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateWirelessDeviceFromMulticastGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateWirelessDeviceFromMulticastGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateWirelessDeviceFromMulticastGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisassociateWirelessDeviceFromThing struct {
 }
 
@@ -490,6 +710,66 @@ func (m *validateOpGetDeviceProfile) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetFuotaTask struct {
+}
+
+func (*validateOpGetFuotaTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetFuotaTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetFuotaTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetFuotaTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetMulticastGroup struct {
+}
+
+func (*validateOpGetMulticastGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMulticastGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMulticastGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMulticastGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetMulticastGroupSession struct {
+}
+
+func (*validateOpGetMulticastGroupSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMulticastGroupSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMulticastGroupSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMulticastGroupSessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetPartnerAccount struct {
 }
 
@@ -505,6 +785,26 @@ func (m *validateOpGetPartnerAccount) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetPartnerAccountInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetResourceEventConfiguration struct {
+}
+
+func (*validateOpGetResourceEventConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetResourceEventConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetResourceEventConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetResourceEventConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -710,6 +1010,26 @@ func (m *validateOpGetWirelessGatewayTask) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListMulticastGroupsByFuotaTask struct {
+}
+
+func (*validateOpListMulticastGroupsByFuotaTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListMulticastGroupsByFuotaTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListMulticastGroupsByFuotaTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListMulticastGroupsByFuotaTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -770,6 +1090,26 @@ func (m *validateOpResetResourceLogLevel) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSendDataToMulticastGroup struct {
+}
+
+func (*validateOpSendDataToMulticastGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSendDataToMulticastGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SendDataToMulticastGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSendDataToMulticastGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSendDataToWirelessDevice struct {
 }
 
@@ -785,6 +1125,86 @@ func (m *validateOpSendDataToWirelessDevice) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpSendDataToWirelessDeviceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartBulkAssociateWirelessDeviceWithMulticastGroup struct {
+}
+
+func (*validateOpStartBulkAssociateWirelessDeviceWithMulticastGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartBulkAssociateWirelessDeviceWithMulticastGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartBulkAssociateWirelessDeviceWithMulticastGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartBulkAssociateWirelessDeviceWithMulticastGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartBulkDisassociateWirelessDeviceFromMulticastGroup struct {
+}
+
+func (*validateOpStartBulkDisassociateWirelessDeviceFromMulticastGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartBulkDisassociateWirelessDeviceFromMulticastGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartBulkDisassociateWirelessDeviceFromMulticastGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartBulkDisassociateWirelessDeviceFromMulticastGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartFuotaTask struct {
+}
+
+func (*validateOpStartFuotaTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartFuotaTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartFuotaTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartFuotaTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartMulticastGroupSession struct {
+}
+
+func (*validateOpStartMulticastGroupSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartMulticastGroupSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartMulticastGroupSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartMulticastGroupSessionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -870,6 +1290,26 @@ func (m *validateOpUpdateDestination) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateFuotaTask struct {
+}
+
+func (*validateOpUpdateFuotaTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateFuotaTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateFuotaTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateFuotaTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateLogLevelsByResourceTypes struct {
 }
 
@@ -890,6 +1330,26 @@ func (m *validateOpUpdateLogLevelsByResourceTypes) HandleInitialize(ctx context.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateMulticastGroup struct {
+}
+
+func (*validateOpUpdateMulticastGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateMulticastGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateMulticastGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateMulticastGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdatePartnerAccount struct {
 }
 
@@ -905,6 +1365,26 @@ func (m *validateOpUpdatePartnerAccount) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdatePartnerAccountInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateResourceEventConfiguration struct {
+}
+
+func (*validateOpUpdateResourceEventConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateResourceEventConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateResourceEventConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateResourceEventConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -954,6 +1434,18 @@ func addOpAssociateAwsAccountWithPartnerAccountValidationMiddleware(stack *middl
 	return stack.Initialize.Add(&validateOpAssociateAwsAccountWithPartnerAccount{}, middleware.After)
 }
 
+func addOpAssociateMulticastGroupWithFuotaTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateMulticastGroupWithFuotaTask{}, middleware.After)
+}
+
+func addOpAssociateWirelessDeviceWithFuotaTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateWirelessDeviceWithFuotaTask{}, middleware.After)
+}
+
+func addOpAssociateWirelessDeviceWithMulticastGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateWirelessDeviceWithMulticastGroup{}, middleware.After)
+}
+
 func addOpAssociateWirelessDeviceWithThingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateWirelessDeviceWithThing{}, middleware.After)
 }
@@ -966,12 +1458,24 @@ func addOpAssociateWirelessGatewayWithThingValidationMiddleware(stack *middlewar
 	return stack.Initialize.Add(&validateOpAssociateWirelessGatewayWithThing{}, middleware.After)
 }
 
+func addOpCancelMulticastGroupSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelMulticastGroupSession{}, middleware.After)
+}
+
 func addOpCreateDestinationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDestination{}, middleware.After)
 }
 
 func addOpCreateDeviceProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDeviceProfile{}, middleware.After)
+}
+
+func addOpCreateFuotaTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateFuotaTask{}, middleware.After)
+}
+
+func addOpCreateMulticastGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateMulticastGroup{}, middleware.After)
 }
 
 func addOpCreateServiceProfileValidationMiddleware(stack *middleware.Stack) error {
@@ -1002,6 +1506,14 @@ func addOpDeleteDeviceProfileValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpDeleteDeviceProfile{}, middleware.After)
 }
 
+func addOpDeleteFuotaTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteFuotaTask{}, middleware.After)
+}
+
+func addOpDeleteMulticastGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteMulticastGroup{}, middleware.After)
+}
+
 func addOpDeleteServiceProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteServiceProfile{}, middleware.After)
 }
@@ -1026,6 +1538,18 @@ func addOpDisassociateAwsAccountFromPartnerAccountValidationMiddleware(stack *mi
 	return stack.Initialize.Add(&validateOpDisassociateAwsAccountFromPartnerAccount{}, middleware.After)
 }
 
+func addOpDisassociateMulticastGroupFromFuotaTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateMulticastGroupFromFuotaTask{}, middleware.After)
+}
+
+func addOpDisassociateWirelessDeviceFromFuotaTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateWirelessDeviceFromFuotaTask{}, middleware.After)
+}
+
+func addOpDisassociateWirelessDeviceFromMulticastGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateWirelessDeviceFromMulticastGroup{}, middleware.After)
+}
+
 func addOpDisassociateWirelessDeviceFromThingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateWirelessDeviceFromThing{}, middleware.After)
 }
@@ -1046,8 +1570,24 @@ func addOpGetDeviceProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDeviceProfile{}, middleware.After)
 }
 
+func addOpGetFuotaTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetFuotaTask{}, middleware.After)
+}
+
+func addOpGetMulticastGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMulticastGroup{}, middleware.After)
+}
+
+func addOpGetMulticastGroupSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMulticastGroupSession{}, middleware.After)
+}
+
 func addOpGetPartnerAccountValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetPartnerAccount{}, middleware.After)
+}
+
+func addOpGetResourceEventConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetResourceEventConfiguration{}, middleware.After)
 }
 
 func addOpGetResourceLogLevelValidationMiddleware(stack *middleware.Stack) error {
@@ -1090,6 +1630,10 @@ func addOpGetWirelessGatewayTaskValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpGetWirelessGatewayTask{}, middleware.After)
 }
 
+func addOpListMulticastGroupsByFuotaTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListMulticastGroupsByFuotaTask{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
@@ -1102,8 +1646,28 @@ func addOpResetResourceLogLevelValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpResetResourceLogLevel{}, middleware.After)
 }
 
+func addOpSendDataToMulticastGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSendDataToMulticastGroup{}, middleware.After)
+}
+
 func addOpSendDataToWirelessDeviceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSendDataToWirelessDevice{}, middleware.After)
+}
+
+func addOpStartBulkAssociateWirelessDeviceWithMulticastGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartBulkAssociateWirelessDeviceWithMulticastGroup{}, middleware.After)
+}
+
+func addOpStartBulkDisassociateWirelessDeviceFromMulticastGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartBulkDisassociateWirelessDeviceFromMulticastGroup{}, middleware.After)
+}
+
+func addOpStartFuotaTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartFuotaTask{}, middleware.After)
+}
+
+func addOpStartMulticastGroupSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartMulticastGroupSession{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1122,12 +1686,24 @@ func addOpUpdateDestinationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDestination{}, middleware.After)
 }
 
+func addOpUpdateFuotaTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateFuotaTask{}, middleware.After)
+}
+
 func addOpUpdateLogLevelsByResourceTypesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateLogLevelsByResourceTypes{}, middleware.After)
 }
 
+func addOpUpdateMulticastGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateMulticastGroup{}, middleware.After)
+}
+
 func addOpUpdatePartnerAccountValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdatePartnerAccount{}, middleware.After)
+}
+
+func addOpUpdateResourceEventConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateResourceEventConfiguration{}, middleware.After)
 }
 
 func addOpUpdateWirelessDeviceValidationMiddleware(stack *middleware.Stack) error {
@@ -1343,6 +1919,60 @@ func validateOpAssociateAwsAccountWithPartnerAccountInput(v *AssociateAwsAccount
 	}
 }
 
+func validateOpAssociateMulticastGroupWithFuotaTaskInput(v *AssociateMulticastGroupWithFuotaTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateMulticastGroupWithFuotaTaskInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.MulticastGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MulticastGroupId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateWirelessDeviceWithFuotaTaskInput(v *AssociateWirelessDeviceWithFuotaTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateWirelessDeviceWithFuotaTaskInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.WirelessDeviceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WirelessDeviceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateWirelessDeviceWithMulticastGroupInput(v *AssociateWirelessDeviceWithMulticastGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateWirelessDeviceWithMulticastGroupInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.WirelessDeviceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WirelessDeviceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAssociateWirelessDeviceWithThingInput(v *AssociateWirelessDeviceWithThingInput) error {
 	if v == nil {
 		return nil
@@ -1397,6 +2027,21 @@ func validateOpAssociateWirelessGatewayWithThingInput(v *AssociateWirelessGatewa
 	}
 }
 
+func validateOpCancelMulticastGroupSessionInput(v *CancelMulticastGroupSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelMulticastGroupSessionInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateDestinationInput(v *CreateDestinationInput) error {
 	if v == nil {
 		return nil
@@ -1431,6 +2076,49 @@ func validateOpCreateDeviceProfileInput(v *CreateDeviceProfileInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDeviceProfileInput"}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateFuotaTaskInput(v *CreateFuotaTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateFuotaTaskInput"}
+	if v.FirmwareUpdateImage == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FirmwareUpdateImage"))
+	}
+	if v.FirmwareUpdateRole == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FirmwareUpdateRole"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateMulticastGroupInput(v *CreateMulticastGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateMulticastGroupInput"}
+	if v.LoRaWAN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LoRaWAN"))
+	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
@@ -1568,6 +2256,36 @@ func validateOpDeleteDeviceProfileInput(v *DeleteDeviceProfileInput) error {
 	}
 }
 
+func validateOpDeleteFuotaTaskInput(v *DeleteFuotaTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteFuotaTaskInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteMulticastGroupInput(v *DeleteMulticastGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteMulticastGroupInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteServiceProfileInput(v *DeleteServiceProfileInput) error {
 	if v == nil {
 		return nil
@@ -1661,6 +2379,60 @@ func validateOpDisassociateAwsAccountFromPartnerAccountInput(v *DisassociateAwsA
 	}
 }
 
+func validateOpDisassociateMulticastGroupFromFuotaTaskInput(v *DisassociateMulticastGroupFromFuotaTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateMulticastGroupFromFuotaTaskInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.MulticastGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MulticastGroupId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateWirelessDeviceFromFuotaTaskInput(v *DisassociateWirelessDeviceFromFuotaTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateWirelessDeviceFromFuotaTaskInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.WirelessDeviceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WirelessDeviceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateWirelessDeviceFromMulticastGroupInput(v *DisassociateWirelessDeviceFromMulticastGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateWirelessDeviceFromMulticastGroupInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.WirelessDeviceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WirelessDeviceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDisassociateWirelessDeviceFromThingInput(v *DisassociateWirelessDeviceFromThingInput) error {
 	if v == nil {
 		return nil
@@ -1736,6 +2508,51 @@ func validateOpGetDeviceProfileInput(v *GetDeviceProfileInput) error {
 	}
 }
 
+func validateOpGetFuotaTaskInput(v *GetFuotaTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetFuotaTaskInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetMulticastGroupInput(v *GetMulticastGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMulticastGroupInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetMulticastGroupSessionInput(v *GetMulticastGroupSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMulticastGroupSessionInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetPartnerAccountInput(v *GetPartnerAccountInput) error {
 	if v == nil {
 		return nil
@@ -1746,6 +2563,24 @@ func validateOpGetPartnerAccountInput(v *GetPartnerAccountInput) error {
 	}
 	if len(v.PartnerType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("PartnerType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetResourceEventConfigurationInput(v *GetResourceEventConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetResourceEventConfigurationInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if len(v.IdentifierType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("IdentifierType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1913,6 +2748,21 @@ func validateOpGetWirelessGatewayTaskInput(v *GetWirelessGatewayTaskInput) error
 	}
 }
 
+func validateOpListMulticastGroupsByFuotaTaskInput(v *ListMulticastGroupsByFuotaTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListMulticastGroupsByFuotaTaskInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	if v == nil {
 		return nil
@@ -1967,6 +2817,27 @@ func validateOpResetResourceLogLevelInput(v *ResetResourceLogLevelInput) error {
 	}
 }
 
+func validateOpSendDataToMulticastGroupInput(v *SendDataToMulticastGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SendDataToMulticastGroupInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.PayloadData == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PayloadData"))
+	}
+	if v.WirelessMetadata == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WirelessMetadata"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpSendDataToWirelessDeviceInput(v *SendDataToWirelessDeviceInput) error {
 	if v == nil {
 		return nil
@@ -1980,6 +2851,79 @@ func validateOpSendDataToWirelessDeviceInput(v *SendDataToWirelessDeviceInput) e
 	}
 	if v.PayloadData == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PayloadData"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartBulkAssociateWirelessDeviceWithMulticastGroupInput(v *StartBulkAssociateWirelessDeviceWithMulticastGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartBulkAssociateWirelessDeviceWithMulticastGroupInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartBulkDisassociateWirelessDeviceFromMulticastGroupInput(v *StartBulkDisassociateWirelessDeviceFromMulticastGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartBulkDisassociateWirelessDeviceFromMulticastGroupInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartFuotaTaskInput(v *StartFuotaTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartFuotaTaskInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartMulticastGroupSessionInput(v *StartMulticastGroupSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartMulticastGroupSessionInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.LoRaWAN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LoRaWAN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2058,6 +3002,21 @@ func validateOpUpdateDestinationInput(v *UpdateDestinationInput) error {
 	}
 }
 
+func validateOpUpdateFuotaTaskInput(v *UpdateFuotaTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateFuotaTaskInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateLogLevelsByResourceTypesInput(v *UpdateLogLevelsByResourceTypesInput) error {
 	if v == nil {
 		return nil
@@ -2080,6 +3039,21 @@ func validateOpUpdateLogLevelsByResourceTypesInput(v *UpdateLogLevelsByResourceT
 	}
 }
 
+func validateOpUpdateMulticastGroupInput(v *UpdateMulticastGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateMulticastGroupInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdatePartnerAccountInput(v *UpdatePartnerAccountInput) error {
 	if v == nil {
 		return nil
@@ -2093,6 +3067,24 @@ func validateOpUpdatePartnerAccountInput(v *UpdatePartnerAccountInput) error {
 	}
 	if len(v.PartnerType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("PartnerType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateResourceEventConfigurationInput(v *UpdateResourceEventConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateResourceEventConfigurationInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if len(v.IdentifierType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("IdentifierType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -29,17 +29,6 @@ func (c *Client) ListLoggingConfigurations(ctx context.Context, params *ListLogg
 
 type ListLoggingConfigurationsInput struct {
 
-	// The maximum number of objects that you want WAF to return for this request. If
-	// more objects are available, in the response, WAF provides a NextMarker value
-	// that you can use in a subsequent call to get the next batch of objects.
-	Limit *int32
-
-	// When you request a list of objects with a Limit setting, if the number of
-	// objects that are still available for retrieval exceeds the limit, WAF returns a
-	// NextMarker value in the response. To retrieve the next batch of objects, provide
-	// the marker from the prior call in your next request.
-	NextMarker *string
-
 	// Specifies whether this is for an Amazon CloudFront distribution or for a
 	// regional application. A regional application can be an Application Load Balancer
 	// (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API. To work with
@@ -51,7 +40,20 @@ type ListLoggingConfigurationsInput struct {
 	//
 	// * API and SDKs - For all calls, use the
 	// Region endpoint us-east-1.
+	//
+	// This member is required.
 	Scope types.Scope
+
+	// The maximum number of objects that you want WAF to return for this request. If
+	// more objects are available, in the response, WAF provides a NextMarker value
+	// that you can use in a subsequent call to get the next batch of objects.
+	Limit *int32
+
+	// When you request a list of objects with a Limit setting, if the number of
+	// objects that are still available for retrieval exceeds the limit, WAF returns a
+	// NextMarker value in the response. To retrieve the next batch of objects, provide
+	// the marker from the prior call in your next request.
+	NextMarker *string
 
 	noSmithyDocumentSerde
 }
@@ -116,6 +118,9 @@ func (c *Client) addOperationListLoggingConfigurationsMiddlewares(stack *middlew
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addOpListLoggingConfigurationsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListLoggingConfigurations(options.Region), middleware.Before); err != nil {

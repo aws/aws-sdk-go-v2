@@ -69,8 +69,9 @@ type CreateTaskSetInput struct {
 	// cluster is created.
 	CapacityProviderStrategy []types.CapacityProviderStrategyItem
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. Up to 32 ASCII characters are allowed.
+	// The identifier that you provide to ensure the idempotency of the request. It's
+	// case sensitive and must be unique. It can be up to 32 ASCII characters are
+	// allowed.
 	ClientToken *string
 
 	// An optional non-unique tag that identifies this task set in external systems. If
@@ -79,8 +80,8 @@ type CreateTaskSetInput struct {
 	// provided value.
 	ExternalId *string
 
-	// The launch type that new tasks in the task set will use. For more information,
-	// see Amazon ECS Launch Types
+	// The launch type that new tasks in the task set uses. For more information, see
+	// Amazon ECS Launch Types
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html)
 	// in the Amazon Elastic Container Service Developer Guide. If a launchType is
 	// specified, the capacityProviderStrategy parameter must be omitted.
@@ -94,9 +95,9 @@ type CreateTaskSetInput struct {
 	// An object representing the network configuration for a task set.
 	NetworkConfiguration *types.NetworkConfiguration
 
-	// The platform version that the tasks in the task set should use. A platform
-	// version is specified only for tasks using the Fargate launch type. If one isn't
-	// specified, the LATEST platform version is used by default.
+	// The platform version that the tasks in the task set uses. A platform version is
+	// specified only for tasks using the Fargate launch type. If one isn't specified,
+	// the LATEST platform version is used.
 	PlatformVersion *string
 
 	// A floating-point percentage of the desired number of tasks to place and keep
@@ -109,34 +110,34 @@ type CreateTaskSetInput struct {
 	ServiceRegistries []types.ServiceRegistry
 
 	// The metadata that you apply to the task set to help you categorize and organize
-	// them. Each tag consists of a key and an optional value, both of which you
-	// define. When a service is deleted, the tags are deleted as well. The following
-	// basic restrictions apply to tags:
+	// them. Each tag consists of a key and an optional value. You define both. When a
+	// service is deleted, the tags are deleted. The following basic restrictions apply
+	// to tags:
 	//
 	// * Maximum number of tags per resource - 50
 	//
-	// *
-	// For each resource, each tag key must be unique, and each tag key can have only
-	// one value.
+	// * For each resource, each
+	// tag key must be unique, and each tag key can have only one value.
 	//
-	// * Maximum key length - 128 Unicode characters in UTF-8
+	// * Maximum key
+	// length - 128 Unicode characters in UTF-8
 	//
-	// * Maximum
-	// value length - 256 Unicode characters in UTF-8
+	// * Maximum value length - 256 Unicode
+	// characters in UTF-8
 	//
-	// * If your tagging schema is used
-	// across multiple services and resources, remember that other services may have
-	// restrictions on allowed characters. Generally allowed characters are: letters,
-	// numbers, and spaces representable in UTF-8, and the following characters: + - =
-	// . _ : / @.
+	// * If your tagging schema is used across multiple services
+	// and resources, remember that other services may have restrictions on allowed
+	// characters. Generally allowed characters are: letters, numbers, and spaces
+	// representable in UTF-8, and the following characters: + - = . _ : / @.
 	//
-	// * Tag keys and values are case-sensitive.
+	// * Tag
+	// keys and values are case-sensitive.
 	//
-	// * Do not use aws:, AWS:,
-	// or any upper or lowercase combination of such as a prefix for either keys or
-	// values as it is reserved for Amazon Web Services use. You cannot edit or delete
-	// tag keys or values with this prefix. Tags with this prefix do not count against
-	// your tags per resource limit.
+	// * Do not use aws:, AWS:, or any upper or
+	// lowercase combination of such as a prefix for either keys or values as it is
+	// reserved for Amazon Web Services use. You cannot edit or delete tag keys or
+	// values with this prefix. Tags with this prefix do not count against your tags
+	// per resource limit.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

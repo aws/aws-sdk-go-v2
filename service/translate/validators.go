@@ -318,6 +318,11 @@ func validateOutputDataConfig(v *types.OutputDataConfig) error {
 	if v.S3Uri == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
 	}
+	if v.EncryptionKey != nil {
+		if err := validateEncryptionKey(v.EncryptionKey); err != nil {
+			invalidParams.AddNested("EncryptionKey", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -458,9 +463,6 @@ func validateOpGetTerminologyInput(v *GetTerminologyInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetTerminologyInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if len(v.TerminologyDataFormat) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("TerminologyDataFormat"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

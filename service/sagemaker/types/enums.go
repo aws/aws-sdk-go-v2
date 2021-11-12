@@ -3820,6 +3820,7 @@ type TrafficRoutingConfigType string
 const (
 	TrafficRoutingConfigTypeAllAtOnce TrafficRoutingConfigType = "ALL_AT_ONCE"
 	TrafficRoutingConfigTypeCanary    TrafficRoutingConfigType = "CANARY"
+	TrafficRoutingConfigTypeLinear    TrafficRoutingConfigType = "LINEAR"
 )
 
 // Values returns all known values for TrafficRoutingConfigType. Note that this can
@@ -3829,6 +3830,7 @@ func (TrafficRoutingConfigType) Values() []TrafficRoutingConfigType {
 	return []TrafficRoutingConfigType{
 		"ALL_AT_ONCE",
 		"CANARY",
+		"LINEAR",
 	}
 }
 
@@ -4197,5 +4199,29 @@ func (VariantPropertyType) Values() []VariantPropertyType {
 		"DesiredInstanceCount",
 		"DesiredWeight",
 		"DataCaptureConfig",
+	}
+}
+
+type VariantStatus string
+
+// Enum values for VariantStatus
+const (
+	VariantStatusCreating          VariantStatus = "Creating"
+	VariantStatusUpdating          VariantStatus = "Updating"
+	VariantStatusDeleting          VariantStatus = "Deleting"
+	VariantStatusActivatingTraffic VariantStatus = "ActivatingTraffic"
+	VariantStatusBaking            VariantStatus = "Baking"
+)
+
+// Values returns all known values for VariantStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VariantStatus) Values() []VariantStatus {
+	return []VariantStatus{
+		"Creating",
+		"Updating",
+		"Deleting",
+		"ActivatingTraffic",
+		"Baking",
 	}
 }

@@ -24,12 +24,12 @@ import (
 //
 // *
 // When you call the DescribeEvents operation and specify an entity for the
-// entityValues parameter, AWS Health might return public events that aren't
-// specific to that resource. For example, if you call DescribeEvents and specify
-// an ID for an Amazon Elastic Compute Cloud (Amazon EC2) instance, AWS Health
-// might return events that aren't specific to that resource or service. To get
-// events that are specific to a service, use the services parameter in the filter
-// object. For more information, see Event
+// entityValues parameter, Health might return public events that aren't specific
+// to that resource. For example, if you call DescribeEvents and specify an ID for
+// an Amazon Elastic Compute Cloud (Amazon EC2) instance, Health might return
+// events that aren't specific to that resource or service. To get events that are
+// specific to a service, use the services parameter in the filter object. For more
+// information, see Event
 // (https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html).
 //
 // * This

@@ -18918,6 +18918,13 @@ func awsAwsjson11_serializeDocumentTrafficRoutingConfig(v *types.TrafficRoutingC
 		}
 	}
 
+	if v.LinearStepSize != nil {
+		ok := object.Key("LinearStepSize")
+		if err := awsAwsjson11_serializeDocumentCapacitySize(v.LinearStepSize, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.Type) > 0 {
 		ok := object.Key("Type")
 		ok.String(string(v.Type))
@@ -20291,6 +20298,13 @@ func awsAwsjson11_serializeOpDocumentCreateEndpointConfigInput(v *CreateEndpoint
 func awsAwsjson11_serializeOpDocumentCreateEndpointInput(v *CreateEndpointInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.DeploymentConfig != nil {
+		ok := object.Key("DeploymentConfig")
+		if err := awsAwsjson11_serializeDocumentDeploymentConfig(v.DeploymentConfig, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.EndpointConfigName != nil {
 		ok := object.Key("EndpointConfigName")
@@ -26221,6 +26235,11 @@ func awsAwsjson11_serializeOpDocumentUpdateEndpointInput(v *UpdateEndpointInput,
 	if v.RetainAllVariantProperties {
 		ok := object.Key("RetainAllVariantProperties")
 		ok.Boolean(v.RetainAllVariantProperties)
+	}
+
+	if v.RetainDeploymentConfig {
+		ok := object.Key("RetainDeploymentConfig")
+		ok.Boolean(v.RetainDeploymentConfig)
 	}
 
 	return nil

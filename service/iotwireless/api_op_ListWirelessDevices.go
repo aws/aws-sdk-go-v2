@@ -36,8 +36,14 @@ type ListWirelessDevicesInput struct {
 	// A filter to list only the wireless devices that use this device profile.
 	DeviceProfileId *string
 
+	// The ID of a FUOTA task.
+	FuotaTaskId *string
+
 	// The maximum number of results to return in this operation.
 	MaxResults int32
+
+	// The ID of the multicast group.
+	MulticastGroupId *string
 
 	// To retrieve the next set of results, the nextToken value from a previous
 	// response; otherwise null to receive the first set of results.

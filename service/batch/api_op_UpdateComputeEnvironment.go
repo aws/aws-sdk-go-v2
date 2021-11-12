@@ -71,6 +71,13 @@ type UpdateComputeEnvironmentInput struct {
 	// scale out. However, they scale in to minvCpus value after instances become idle.
 	State types.CEState
 
+	// The maximum number of vCPUs expected to be used for an unmanaged compute
+	// environment. This parameter should not be specified for a managed compute
+	// environment. This parameter is only used for fair share scheduling to reserve
+	// vCPU capacity for new share identifiers. If this parameter is not provided for a
+	// fair share job queue, no vCPU capacity will be reserved.
+	UnmanagedvCpus int32
+
 	noSmithyDocumentSerde
 }
 

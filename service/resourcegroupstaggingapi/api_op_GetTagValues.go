@@ -11,13 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns all tag values for the specified key that are used in the specified AWS
-// Region for the calling AWS account. This operation supports pagination, where
-// the response can be sent in multiple pages. You should check the PaginationToken
-// response parameter to determine if there are additional results available to
-// return. Repeat the query, passing the PaginationToken response parameter value
-// as an input to the next request until you recieve a null value. A null value for
-// PaginationToken indicates that there are no more results waiting to be returned.
+// Returns all tag values for the specified key that are used in the specified
+// Amazon Web Services Region for the calling account. This operation supports
+// pagination, where the response can be sent in multiple pages. You should check
+// the PaginationToken response parameter to determine if there are additional
+// results available to return. Repeat the query, passing the PaginationToken
+// response parameter value as an input to the next request until you recieve a
+// null value. A null value for PaginationToken indicates that there are no more
+// results waiting to be returned.
 func (c *Client) GetTagValues(ctx context.Context, params *GetTagValuesInput, optFns ...func(*Options)) (*GetTagValuesOutput, error) {
 	if params == nil {
 		params = &GetTagValuesInput{}
@@ -36,7 +37,8 @@ func (c *Client) GetTagValues(ctx context.Context, params *GetTagValuesInput, op
 type GetTagValuesInput struct {
 
 	// Specifies the tag key for which you want to list all existing values that are
-	// currently used in the specified AWS Region for the calling AWS account.
+	// currently used in the specified Amazon Web Services Region for the calling
+	// account.
 	//
 	// This member is required.
 	Key *string
@@ -57,7 +59,7 @@ type GetTagValuesOutput struct {
 	PaginationToken *string
 
 	// A list of all tag values for the specified key currently used in the specified
-	// AWS Region for the calling AWS account.
+	// Amazon Web Services Region for the calling account.
 	TagValues []string
 
 	// Metadata pertaining to the operation's result.

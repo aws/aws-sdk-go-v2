@@ -6,9 +6,11 @@ type ActionValue string
 
 // Enum values for ActionValue
 const (
-	ActionValueAllow ActionValue = "ALLOW"
-	ActionValueBlock ActionValue = "BLOCK"
-	ActionValueCount ActionValue = "COUNT"
+	ActionValueAllow           ActionValue = "ALLOW"
+	ActionValueBlock           ActionValue = "BLOCK"
+	ActionValueCount           ActionValue = "COUNT"
+	ActionValueCaptcha         ActionValue = "CAPTCHA"
+	ActionValueExcludedAsCount ActionValue = "EXCLUDED_AS_COUNT"
 )
 
 // Values returns all known values for ActionValue. Note that this can be expanded
@@ -19,6 +21,8 @@ func (ActionValue) Values() []ActionValue {
 		"ALLOW",
 		"BLOCK",
 		"COUNT",
+		"CAPTCHA",
+		"EXCLUDED_AS_COUNT",
 	}
 }
 
@@ -577,6 +581,24 @@ func (CountryCode) Values() []CountryCode {
 		"YE",
 		"ZM",
 		"ZW",
+	}
+}
+
+type FailureReason string
+
+// Enum values for FailureReason
+const (
+	FailureReasonTokenMissing FailureReason = "TOKEN_MISSING"
+	FailureReasonTokenExpired FailureReason = "TOKEN_EXPIRED"
+)
+
+// Values returns all known values for FailureReason. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FailureReason) Values() []FailureReason {
+	return []FailureReason{
+		"TOKEN_MISSING",
+		"TOKEN_EXPIRED",
 	}
 }
 

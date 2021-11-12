@@ -40,9 +40,9 @@ func TestUpdateEndpointBuild(t *testing.T) {
 			"DualStack": {
 				useDualstack: true,
 				tests: []s3controlEndpointTest{
-					{"abc", "123456789012", "https://123456789012.s3-control.mock-region.api.aws/v20180820/bucket/abc", ""},
-					{"a.b.c", "123456789012", "https://123456789012.s3-control.mock-region.api.aws/v20180820/bucket/a.b.c", ""},
-					{"a$b$c", "123456789012", "https://123456789012.s3-control.mock-region.api.aws/v20180820/bucket/a%24b%24c", ""},
+					{"abc", "123456789012", "https://123456789012.s3-control.dualstack.mock-region.amazonaws.com/v20180820/bucket/abc", ""},
+					{"a.b.c", "123456789012", "https://123456789012.s3-control.dualstack.mock-region.amazonaws.com/v20180820/bucket/a.b.c", ""},
+					{"a$b$c", "123456789012", "https://123456789012.s3-control.dualstack.mock-region.amazonaws.com/v20180820/bucket/a%24b%24c", ""},
 				},
 			},
 		},

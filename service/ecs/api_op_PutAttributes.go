@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create or update an attribute on an Amazon ECS resource. If the attribute does
-// not exist, it is created. If the attribute exists, its value is replaced with
+// Create or update an attribute on an Amazon ECS resource. If the attribute
+// doesn't exist, it's created. If the attribute exists, its value is replaced with
 // the specified value. To delete an attribute, use DeleteAttributes. For more
 // information, see Attributes
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html#attributes)
@@ -35,7 +35,8 @@ func (c *Client) PutAttributes(ctx context.Context, params *PutAttributesInput, 
 type PutAttributesInput struct {
 
 	// The attributes to apply to your resource. You can specify up to 10 custom
-	// attributes per resource. You can specify up to 10 attributes in a single call.
+	// attributes for each resource. You can specify up to 10 attributes in a single
+	// call.
 	//
 	// This member is required.
 	Attributes []types.Attribute

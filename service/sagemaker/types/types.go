@@ -69,10 +69,10 @@ type AgentVersion struct {
 	noSmithyDocumentSerde
 }
 
-// This API is not supported.
+// An Amazon CloudWatch alarm configured to monitor metrics on an endpoint.
 type Alarm struct {
 
-	//
+	// The name of a CloudWatch alarm in your account.
 	AlarmName *string
 
 	noSmithyDocumentSerde
@@ -1797,10 +1797,13 @@ type AutoMLSecurityConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Currently, the AutoRollbackConfig API is not supported.
+// Automatic rollback configuration for handling endpoint deployment failures and
+// recovery.
 type AutoRollbackConfig struct {
 
-	//
+	// List of CloudWatch alarms in your account that are configured to monitor metrics
+	// on an endpoint. If any alarms are tripped during a deployment, SageMaker rolls
+	// back the deployment.
 	Alarms []Alarm
 
 	noSmithyDocumentSerde
@@ -1871,18 +1874,27 @@ type Bias struct {
 	noSmithyDocumentSerde
 }
 
-// Currently, the BlueGreenUpdatePolicy API is not supported.
+// Update policy for a blue/green deployment. If this update policy is specified,
+// SageMaker creates a new fleet during the deployment while maintaining the old
+// fleet. SageMaker flips traffic to the new fleet according to the specified
+// traffic routing configuration. Only one update policy should be used in the
+// deployment configuration. If no update policy is specified, SageMaker uses a
+// blue/green deployment strategy with all at once traffic shifting by default.
 type BlueGreenUpdatePolicy struct {
 
-	//
+	// Defines the traffic routing strategy to shift traffic from the old fleet to the
+	// new fleet during an endpoint deployment.
 	//
 	// This member is required.
 	TrafficRoutingConfiguration *TrafficRoutingConfig
 
-	//
+	// Maximum execution timeout for the deployment. Note that the timeout value should
+	// be larger than the total waiting time specified in TerminationWaitInSeconds and
+	// WaitIntervalInSeconds.
 	MaximumExecutionTimeoutInSeconds *int32
 
-	//
+	// Additional waiting time in seconds after the completion of an endpoint
+	// deployment before terminating the old endpoint fleet. Default is 0.
 	TerminationWaitInSeconds *int32
 
 	noSmithyDocumentSerde
@@ -1937,15 +1949,22 @@ type CandidateProperties struct {
 	noSmithyDocumentSerde
 }
 
-// Currently, the CapacitySize API is not supported.
+// Specifies the endpoint capacity to activate for production.
 type CapacitySize struct {
 
-	// This API is not supported.
+	// Specifies the endpoint capacity type.
+	//
+	// * INSTANCE_COUNT: The endpoint activates
+	// based on the number of instances.
+	//
+	// * CAPACITY_PERCENT: The endpoint activates
+	// based on the specified percentage of capacity.
 	//
 	// This member is required.
 	Type CapacitySizeType
 
-	//
+	// Defines the capacity size, either as a number of instances or a capacity
+	// percentage.
 	//
 	// This member is required.
 	Value *int32
@@ -2797,15 +2816,22 @@ type DeployedImage struct {
 	noSmithyDocumentSerde
 }
 
-// Currently, the DeploymentConfig API is not supported.
+// The deployment configuration for an endpoint, which contains the desired
+// deployment strategy and rollback configurations.
 type DeploymentConfig struct {
 
-	//
+	// Update policy for a blue/green deployment. If this update policy is specified,
+	// SageMaker creates a new fleet during the deployment while maintaining the old
+	// fleet. SageMaker flips traffic to the new fleet according to the specified
+	// traffic routing configuration. Only one update policy should be used in the
+	// deployment configuration. If no update policy is specified, SageMaker uses a
+	// blue/green deployment strategy with all at once traffic shifting by default.
 	//
 	// This member is required.
 	BlueGreenUpdatePolicy *BlueGreenUpdatePolicy
 
-	//
+	// Automatic rollback configuration for handling endpoint deployment failures and
+	// recovery.
 	AutoRollbackConfiguration *AutoRollbackConfig
 
 	noSmithyDocumentSerde
@@ -2895,6 +2921,9 @@ type DeviceSummary struct {
 	//
 	// This member is required.
 	DeviceName *string
+
+	// Edge Manager agent version.
+	AgentVersion *string
 
 	// A description of the device.
 	Description *string
@@ -5097,8 +5126,9 @@ type HumanTaskConfig struct {
 	// * For 3D point cloud
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud.html) and video
 	// frame (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-video.html) labeling
-	// jobs, the maximum is 7 days (604,800 seconds). If you want to change these
-	// limits, contact Amazon Web Services Support.
+	// jobs, the maximum is 30 days (2952,000 seconds) for non-AL mode. For most users,
+	// the maximum is also 30 days. If you want to change these limits, contact Amazon
+	// Web Services Support.
 	//
 	// This member is required.
 	TaskTimeLimitInSeconds *int32
@@ -5137,8 +5167,8 @@ type HumanTaskConfig struct {
 	// seconds).
 	//
 	// * If you choose a private or vendor workforce, the default value is
-	// 10 days (864,000 seconds). For most users, the maximum is also 10 days. If you
-	// want to change this limit, contact Amazon Web Services Support.
+	// 30 days (2592,000 seconds) for non-AL mode. For most users, the maximum is also
+	// 30 days. If you want to change this limit, contact Amazon Web Services Support.
 	TaskAvailabilityLifetimeInSeconds *int32
 
 	// Keywords used to describe the task so that workers on Amazon Mechanical Turk can
@@ -8360,6 +8390,71 @@ type ParentHyperParameterTuningJob struct {
 	noSmithyDocumentSerde
 }
 
+// The summary of an in-progress deployment when an endpoint is creating or
+// updating with a new endpoint configuration.
+type PendingDeploymentSummary struct {
+
+	// The name of the endpoint configuration used in the deployment.
+	//
+	// This member is required.
+	EndpointConfigName *string
+
+	// List of PendingProductionVariantSummary objects.
+	ProductionVariants []PendingProductionVariantSummary
+
+	// The start time of the deployment.
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The production variant summary for a deployment when an endpoint is creating or
+// updating with the CreateEndpoint or UpdateEndpoint operations. Describes the
+// VariantStatus , weight and capacity for a production variant associated with an
+// endpoint.
+type PendingProductionVariantSummary struct {
+
+	// The name of the variant.
+	//
+	// This member is required.
+	VariantName *string
+
+	// The size of the Elastic Inference (EI) instance to use for the production
+	// variant. EI instances provide on-demand GPU computing for inference. For more
+	// information, see Using Elastic Inference in Amazon SageMaker
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html).
+	AcceleratorType ProductionVariantAcceleratorType
+
+	// The number of instances associated with the variant.
+	CurrentInstanceCount *int32
+
+	// The weight associated with the variant.
+	CurrentWeight *float32
+
+	// An array of DeployedImage objects that specify the Amazon EC2 Container Registry
+	// paths of the inference images deployed on instances of this ProductionVariant.
+	DeployedImages []DeployedImage
+
+	// The number of instances requested in this deployment, as specified in the
+	// endpoint configuration for the endpoint. The value is taken from the request to
+	// the CreateEndpointConfig operation.
+	DesiredInstanceCount *int32
+
+	// The requested weight for the variant in this deployment, as specified in the
+	// endpoint configuration for the endpoint. The value is taken from the request to
+	// the CreateEndpointConfig operation.
+	DesiredWeight *float32
+
+	// The type of instances associated with the variant.
+	InstanceType ProductionVariantInstanceType
+
+	// The endpoint variant status which describes the current deployment stage status
+	// or operational status.
+	VariantStatus []ProductionVariantStatus
+
+	noSmithyDocumentSerde
+}
+
 // A SageMaker Model Building Pipeline instance.
 type Pipeline struct {
 
@@ -9038,6 +9133,39 @@ type ProductionVariantCoreDumpConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the status of the production variant.
+type ProductionVariantStatus struct {
+
+	// The endpoint variant status which describes the current deployment stage status
+	// or operational status.
+	//
+	// * Creating: Creating inference resources for the
+	// production variant.
+	//
+	// * Deleting: Terminating inference resources for the
+	// production variant.
+	//
+	// * Updating: Updating capacity for the production
+	// variant.
+	//
+	// * ActivatingTraffic: Turning on traffic for the production variant.
+	//
+	// *
+	// Baking: Waiting period to monitor the CloudWatch alarms in the automatic
+	// rollback configuration.
+	//
+	// This member is required.
+	Status VariantStatus
+
+	// The start time of the current status change.
+	StartTime *time.Time
+
+	// A message that describes the status of the production variant.
+	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes weight and capacities for a production variant associated with an
 // endpoint. If you sent a request to the UpdateEndpointWeightsAndCapacities API
 // and the endpoint status is Updating, you get different desired and current
@@ -9066,6 +9194,10 @@ type ProductionVariantSummary struct {
 	// The requested weight, as specified in the UpdateEndpointWeightsAndCapacities
 	// request.
 	DesiredWeight *float32
+
+	// The endpoint variant status which describes the current deployment stage status
+	// or operational status.
+	VariantStatus []ProductionVariantStatus
 
 	noSmithyDocumentSerde
 }
@@ -10523,21 +10655,38 @@ type TensorBoardOutputConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Currently, the TrafficRoutingConfig API is not supported.
+// Defines the traffic routing strategy during an endpoint deployment to shift
+// traffic from the old fleet to the new fleet.
 type TrafficRoutingConfig struct {
 
+	// Traffic routing strategy type.
 	//
+	// * ALL_AT_ONCE: Endpoint traffic shifts to the
+	// new fleet in a single step.
+	//
+	// * CANARY: Endpoint traffic shifts to the new fleet
+	// in two steps. The first step is the canary, which is a small portion of the
+	// traffic. The second step is the remainder of the traffic.
+	//
+	// * LINEAR: Endpoint
+	// traffic shifts to the new fleet in n steps of a configurable size.
 	//
 	// This member is required.
 	Type TrafficRoutingConfigType
 
-	//
+	// The waiting time (in seconds) between incremental steps to turn on traffic on
+	// the new endpoint fleet.
 	//
 	// This member is required.
 	WaitIntervalInSeconds *int32
 
-	//
+	// Batch size for the first step to turn on traffic on the new endpoint fleet.
+	// Value must be less than or equal to 50% of the variant's total instance count.
 	CanarySize *CapacitySize
+
+	// Batch size for each step to turn on traffic on the new endpoint fleet. Value
+	// must be 10-50% of the variant's total instance count.
+	LinearStepSize *CapacitySize
 
 	noSmithyDocumentSerde
 }

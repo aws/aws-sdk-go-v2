@@ -46,9 +46,9 @@ type DescribeServicesInput struct {
 	// describing were launched in any cluster other than the default cluster.
 	Cluster *string
 
-	// Specifies whether you want to see the resource tags for the service. If TAGS is
+	// Determines whether you want to see the resource tags for the service. If TAGS is
 	// specified, the tags are included in the response. If this field is omitted, tags
-	// are not included in the response.
+	// aren't included in the response.
 	Include []types.ServiceField
 
 	noSmithyDocumentSerde

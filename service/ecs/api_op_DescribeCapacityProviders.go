@@ -35,7 +35,7 @@ type DescribeCapacityProvidersInput struct {
 
 	// Specifies whether or not you want to see the resource tags for the capacity
 	// provider. If TAGS is specified, the tags are included in the response. If this
-	// field is omitted, tags are not included in the response.
+	// field is omitted, tags aren't included in the response.
 	Include []types.CapacityProviderField
 
 	// The maximum number of account setting results returned by

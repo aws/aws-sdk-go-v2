@@ -8206,6 +8206,11 @@ func validateTrafficRoutingConfig(v *types.TrafficRoutingConfig) error {
 			invalidParams.AddNested("CanarySize", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.LinearStepSize != nil {
+		if err := validateCapacitySize(v.LinearStepSize); err != nil {
+			invalidParams.AddNested("LinearStepSize", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -9129,6 +9134,11 @@ func validateOpCreateEndpointInput(v *CreateEndpointInput) error {
 	}
 	if v.EndpointConfigName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndpointConfigName"))
+	}
+	if v.DeploymentConfig != nil {
+		if err := validateDeploymentConfig(v.DeploymentConfig); err != nil {
+			invalidParams.AddNested("DeploymentConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {

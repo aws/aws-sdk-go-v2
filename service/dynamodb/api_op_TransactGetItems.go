@@ -18,21 +18,21 @@ import (
 // Region. A TransactGetItems call can contain up to 25 TransactGetItem objects,
 // each of which contains a Get structure that specifies an item to retrieve from a
 // table in the account and Region. A call to TransactGetItems cannot retrieve
-// items from tables in more than one AWS account or Region. The aggregate size of
-// the items in the transaction cannot exceed 4 MB. DynamoDB rejects the entire
-// TransactGetItems request if any of the following is true:
+// items from tables in more than one Amazon Web Services account or Region. The
+// aggregate size of the items in the transaction cannot exceed 4 MB. DynamoDB
+// rejects the entire TransactGetItems request if any of the following is true:
 //
-// * A conflicting
-// operation is in the process of updating an item to be read.
+// *
+// A conflicting operation is in the process of updating an item to be read.
 //
-// * There is
-// insufficient provisioned capacity for the transaction to be completed.
+// *
+// There is insufficient provisioned capacity for the transaction to be
+// completed.
 //
-// * There
-// is a user error, such as an invalid data format.
+// * There is a user error, such as an invalid data format.
 //
-// * The aggregate size of the
-// items in the transaction cannot exceed 4 MB.
+// * The
+// aggregate size of the items in the transaction cannot exceed 4 MB.
 func (c *Client) TransactGetItems(ctx context.Context, params *TransactGetItemsInput, optFns ...func(*Options)) (*TransactGetItemsOutput, error) {
 	if params == nil {
 		params = &TransactGetItemsInput{}

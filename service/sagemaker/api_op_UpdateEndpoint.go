@@ -50,7 +50,8 @@ type UpdateEndpointInput struct {
 	// This member is required.
 	EndpointName *string
 
-	// The deployment configuration for the endpoint to be updated.
+	// The deployment configuration for an endpoint, which contains the desired
+	// deployment strategy and rollback configurations.
 	DeploymentConfig *types.DeploymentConfig
 
 	// When you are updating endpoint resources with
@@ -69,6 +70,10 @@ type UpdateEndpointInput struct {
 	// updating an endpoint, set RetainAllVariantProperties to false. The default is
 	// false.
 	RetainAllVariantProperties bool
+
+	// Specifies whether to reuse the last deployment configuration. The default value
+	// is false (the configuration is not reused).
+	RetainDeploymentConfig bool
 
 	noSmithyDocumentSerde
 }

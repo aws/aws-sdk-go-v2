@@ -12126,6 +12126,11 @@ func awsRestjson1_deserializeDocumentBackupSelection(v **types.BackupSelection, 
 
 	for key, value := range shape {
 		switch key {
+		case "Conditions":
+			if err := awsRestjson1_deserializeDocumentConditions(&sv.Conditions, value); err != nil {
+				return err
+			}
+
 		case "IamRoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12137,6 +12142,11 @@ func awsRestjson1_deserializeDocumentBackupSelection(v **types.BackupSelection, 
 
 		case "ListOfTags":
 			if err := awsRestjson1_deserializeDocumentListOfTags(&sv.ListOfTags, value); err != nil {
+				return err
+			}
+
+		case "NotResources":
+			if err := awsRestjson1_deserializeDocumentResourceArns(&sv.NotResources, value); err != nil {
 				return err
 			}
 
@@ -12652,6 +12662,140 @@ func awsRestjson1_deserializeDocumentCondition(v **types.Condition, value interf
 					return fmt.Errorf("expected ConditionValue to be of type string, got %T instead", value)
 				}
 				sv.ConditionValue = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentConditionParameter(v **types.ConditionParameter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ConditionParameter
+	if *v == nil {
+		sv = &types.ConditionParameter{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ConditionKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConditionKey to be of type string, got %T instead", value)
+				}
+				sv.ConditionKey = ptr.String(jtv)
+			}
+
+		case "ConditionValue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConditionValue to be of type string, got %T instead", value)
+				}
+				sv.ConditionValue = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentConditionParameters(v *[]types.ConditionParameter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ConditionParameter
+	if *v == nil {
+		cv = []types.ConditionParameter{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ConditionParameter
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentConditionParameter(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentConditions(v **types.Conditions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Conditions
+	if *v == nil {
+		sv = &types.Conditions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "StringEquals":
+			if err := awsRestjson1_deserializeDocumentConditionParameters(&sv.StringEquals, value); err != nil {
+				return err
+			}
+
+		case "StringLike":
+			if err := awsRestjson1_deserializeDocumentConditionParameters(&sv.StringLike, value); err != nil {
+				return err
+			}
+
+		case "StringNotEquals":
+			if err := awsRestjson1_deserializeDocumentConditionParameters(&sv.StringNotEquals, value); err != nil {
+				return err
+			}
+
+		case "StringNotLike":
+			if err := awsRestjson1_deserializeDocumentConditionParameters(&sv.StringNotLike, value); err != nil {
+				return err
 			}
 
 		default:

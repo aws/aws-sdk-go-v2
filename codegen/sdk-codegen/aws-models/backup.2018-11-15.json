@@ -636,6 +636,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An array of conditions used to specify a set of resources to assign to a backup plan;\n         for example, <code>\"StringEquals\": {\"ec2:ResourceTag/Department\": \"accounting\"</code>.\n         Assigns the backup plan to every resource with at least one matching tag.</p>"
                     }
+                },
+                "NotResources": {
+                    "target": "com.amazonaws.backup#ResourceArns"
+                },
+                "Conditions": {
+                    "target": "com.amazonaws.backup#Conditions"
                 }
             },
             "traits": {
@@ -924,6 +930,23 @@
         "com.amazonaws.backup#ConditionKey": {
             "type": "string"
         },
+        "com.amazonaws.backup#ConditionParameter": {
+            "type": "structure",
+            "members": {
+                "ConditionKey": {
+                    "target": "com.amazonaws.backup#ConditionKey"
+                },
+                "ConditionValue": {
+                    "target": "com.amazonaws.backup#ConditionValue"
+                }
+            }
+        },
+        "com.amazonaws.backup#ConditionParameters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.backup#ConditionParameter"
+            }
+        },
         "com.amazonaws.backup#ConditionType": {
             "type": "string",
             "traits": {
@@ -937,6 +960,23 @@
         },
         "com.amazonaws.backup#ConditionValue": {
             "type": "string"
+        },
+        "com.amazonaws.backup#Conditions": {
+            "type": "structure",
+            "members": {
+                "StringEquals": {
+                    "target": "com.amazonaws.backup#ConditionParameters"
+                },
+                "StringNotEquals": {
+                    "target": "com.amazonaws.backup#ConditionParameters"
+                },
+                "StringLike": {
+                    "target": "com.amazonaws.backup#ConditionParameters"
+                },
+                "StringNotLike": {
+                    "target": "com.amazonaws.backup#ConditionParameters"
+                }
+            }
         },
         "com.amazonaws.backup#ConflictException": {
             "type": "structure",

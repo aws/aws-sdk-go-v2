@@ -165,6 +165,73 @@ type ByteMatchStatement struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies that WAF should run a CAPTCHA check against the request:
+//
+// * If the
+// request includes a valid, unexpired CAPTCHA token, WAF allows the web request
+// inspection to proceed to the next rule, similar to a CountAction.
+//
+// * If the
+// request doesn't include a valid, unexpired CAPTCHA token, WAF discontinues the
+// web ACL evaluation of the request and blocks it from going to its intended
+// destination. WAF generates a response that it sends back to the client, which
+// includes the following:
+//
+// * The header x-amzn-waf-action with a value of
+// captcha.
+//
+// * The HTTP status code 405 Method Not Allowed.
+//
+// * If the request
+// contains an Accept header with a value of text/html, the response includes a
+// CAPTCHA challenge.
+//
+// You can configure the expiration time in the
+// CaptchaConfigImmunityTimeProperty setting at the rule and web ACL level. The
+// rule setting overrides the web ACL setting. This action option is available for
+// rules. It isn't available for web ACL default actions. This is used in the
+// context of other settings, for example to specify values for RuleAction and web
+// ACL DefaultAction.
+type CaptchaAction struct {
+
+	// Defines custom handling for the web request. For information about customizing
+	// web requests and responses, see Customizing web requests and responses in WAF
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html)
+	// in the WAF Developer Guide
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+	CustomRequestHandling *CustomRequestHandling
+
+	noSmithyDocumentSerde
+}
+
+// Specifies how WAF should handle CAPTCHA evaluations. This is available at the
+// web ACL level and in each rule.
+type CaptchaConfig struct {
+
+	// Determines how long a CAPTCHA token remains valid after the client successfully
+	// solves a CAPTCHA puzzle.
+	ImmunityTimeProperty *ImmunityTimeProperty
+
+	noSmithyDocumentSerde
+}
+
+// The result from the inspection of the web request for a valid CAPTCHA token.
+type CaptchaResponse struct {
+
+	// The reason for failure, populated when the evaluation of the token fails.
+	FailureReason FailureReason
+
+	// The HTTP response code indicating the status of the CAPTCHA token in the web
+	// request. If the token is missing, invalid, or expired, this code is 405 Method
+	// Not Allowed.
+	ResponseCode *int32
+
+	// The time that the CAPTCHA puzzle was solved for the supplied token.
+	SolveTimestamp *int64
+
+	noSmithyDocumentSerde
+}
+
 // A single match condition for a Filter.
 type Condition struct {
 
@@ -309,12 +376,13 @@ type DefaultAction struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies a single rule to exclude from the rule group. Excluding a rule
-// overrides its action setting for the rule group in the web ACL, setting it to
-// COUNT. This effectively excludes the rule from acting on web requests.
+// Specifies a single rule in a rule group whose action you want to override to
+// Count. When you exclude a rule, WAF evaluates it exactly as it would if the rule
+// action setting were Count. This is a useful option for testing the rules in a
+// rule group without modifying how they handle your web traffic.
 type ExcludedRule struct {
 
-	// The name of the rule to exclude.
+	// The name of the rule whose action you want to override to Count.
 	//
 	// This member is required.
 	Name *string
@@ -426,19 +494,15 @@ type FirewallManagerRuleGroup struct {
 	// This member is required.
 	Name *string
 
-	// The override action to apply to the rules in a rule group. Used only for rule
-	// statements that reference a rule group, like RuleGroupReferenceStatement and
-	// ManagedRuleGroupStatement. Set the override action to none to leave the rule
-	// actions in effect. Set it to count to only count matches, regardless of the rule
-	// action settings. In a Rule, you must specify either this OverrideAction setting
-	// or the rule Action setting, but not both:
-	//
-	// * If the rule statement references a
-	// rule group, use this override action setting and not the action setting.
-	//
-	// * If
-	// the rule statement does not reference a rule group, use the rule action setting
-	// and not this rule override action setting.
+	// The action to use in the place of the action that results from the rule group
+	// evaluation. Set the override action to none to leave the result of the rule
+	// group alone. Set it to count to override the result to count only. You can only
+	// use this for rule statements that reference a rule group, like
+	// RuleGroupReferenceStatement and ManagedRuleGroupStatement. This option is
+	// usually set to none. It does not affect how the rules in the rule group are
+	// evaluated. If you want the rules in the rule group to only count matches, do not
+	// use this and instead exclude those rules in your rule group reference statement
+	// settings.
 	//
 	// This member is required.
 	OverrideAction *OverrideAction
@@ -581,6 +645,19 @@ type HTTPRequest struct {
 	// The URI path of the request, which identifies the resource, for example,
 	// /images/daily-ad.jpg.
 	URI *string
+
+	noSmithyDocumentSerde
+}
+
+// Determines how long a CAPTCHA token remains valid after the client successfully
+// solves a CAPTCHA puzzle.
+type ImmunityTimeProperty struct {
+
+	// The amount of time, in seconds, that a CAPTCHA token is valid. The default
+	// setting is 300.
+	//
+	// This member is required.
+	ImmunityTime *int64
 
 	noSmithyDocumentSerde
 }
@@ -995,9 +1072,10 @@ type ManagedRuleGroupStatement struct {
 	// This member is required.
 	VendorName *string
 
-	// The rules whose actions are set to COUNT by the web ACL, regardless of the
-	// action that is set on the rule. This effectively excludes the rule from acting
-	// on web requests.
+	// The rules in the referenced rule group whose actions are set to Count. When you
+	// exclude a rule, WAF evaluates it exactly as it would if the rule action setting
+	// were Count. This is a useful option for testing the rules in a rule group
+	// without modifying how they handle your web traffic.
 	ExcludedRules []ExcludedRule
 
 	// An optional nested statement that narrows the scope of the web requests that are
@@ -1209,8 +1287,8 @@ type Method struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies that WAF should do nothing. This is generally used to try out a rule
-// without performing any actions. You set the OverrideAction on the Rule. This is
+// Specifies that WAF should do nothing. This is used for the OverrideAction
+// setting on a Rule when the rule uses a rule group reference statement. This is
 // used in the context of other settings, for example to specify values for
 // RuleAction and web ACL DefaultAction. JSON specification: "None": {}
 type NoneAction struct {
@@ -1242,25 +1320,25 @@ type OrStatement struct {
 	noSmithyDocumentSerde
 }
 
-// The override action to apply to the rules in a rule group. Used only for rule
-// statements that reference a rule group, like RuleGroupReferenceStatement and
-// ManagedRuleGroupStatement. Set the override action to none to leave the rule
-// actions in effect. Set it to count to only count matches, regardless of the rule
-// action settings. In a Rule, you must specify either this OverrideAction setting
-// or the rule Action setting, but not both:
-//
-// * If the rule statement references a
-// rule group, use this override action setting and not the action setting.
-//
-// * If
-// the rule statement does not reference a rule group, use the rule action setting
-// and not this rule override action setting.
+// The action to use in the place of the action that results from the rule group
+// evaluation. Set the override action to none to leave the result of the rule
+// group alone. Set it to count to override the result to count only. You can only
+// use this for rule statements that reference a rule group, like
+// RuleGroupReferenceStatement and ManagedRuleGroupStatement. This option is
+// usually set to none. It does not affect how the rules in the rule group are
+// evaluated. If you want the rules in the rule group to only count matches, do not
+// use this and instead exclude those rules in your rule group reference statement
+// settings.
 type OverrideAction struct {
 
-	// Override the rule action setting to count.
+	// Override the rule group evaluation result to count only. This option is usually
+	// set to none. It does not affect how the rules in the rule group are evaluated.
+	// If you want the rules in the rule group to only count matches, do not use this
+	// and instead exclude those rules in your rule group reference statement settings.
 	Count *CountAction
 
-	// Don't override the rule action setting.
+	// Don't override the rule group evaluation result. This is the most common
+	// setting.
 	None *NoneAction
 
 	noSmithyDocumentSerde
@@ -1531,19 +1609,19 @@ type Rule struct {
 	// override action setting and not this action setting.
 	Action *RuleAction
 
-	// The override action to apply to the rules in a rule group. Used only for rule
-	// statements that reference a rule group, like RuleGroupReferenceStatement and
-	// ManagedRuleGroupStatement. Set the override action to none to leave the rule
-	// actions in effect. Set it to count to only count matches, regardless of the rule
-	// action settings. In a Rule, you must specify either this OverrideAction setting
-	// or the rule Action setting, but not both:
-	//
-	// * If the rule statement references a
-	// rule group, use this override action setting and not the action setting.
-	//
-	// * If
-	// the rule statement does not reference a rule group, use the rule action setting
-	// and not this rule override action setting.
+	// Specifies how WAF should handle CAPTCHA evaluations. If you don't specify this,
+	// WAF uses the CAPTCHA configuration that's defined for the web ACL.
+	CaptchaConfig *CaptchaConfig
+
+	// The action to use in the place of the action that results from the rule group
+	// evaluation. Set the override action to none to leave the result of the rule
+	// group alone. Set it to count to override the result to count only. You can only
+	// use this for rule statements that reference a rule group, like
+	// RuleGroupReferenceStatement and ManagedRuleGroupStatement. This option is
+	// usually set to none. It does not affect how the rules in the rule group are
+	// evaluated. If you want the rules in the rule group to only count matches, do not
+	// use this and instead exclude those rules in your rule group reference statement
+	// settings.
 	OverrideAction *OverrideAction
 
 	// Labels to apply to web requests that match the rule match statement. WAF applies
@@ -1582,6 +1660,9 @@ type RuleAction struct {
 
 	// Instructs WAF to block the web request.
 	Block *BlockAction
+
+	// Instructs WAF to run a CAPTCHA check against the web request.
+	Captcha *CaptchaAction
 
 	// Instructs WAF to count the web request and allow it.
 	Count *CountAction
@@ -1692,8 +1773,10 @@ type RuleGroupReferenceStatement struct {
 	// This member is required.
 	ARN *string
 
-	// The names of rules that are in the referenced rule group, but that you want WAF
-	// to exclude from processing for this rule statement.
+	// The rules in the referenced rule group whose actions are set to Count. When you
+	// exclude a rule, WAF evaluates it exactly as it would if the rule action setting
+	// were Count. This is a useful option for testing the rules in a rule group
+	// without modifying how they handle your web traffic.
 	ExcludedRules []ExcludedRule
 
 	noSmithyDocumentSerde
@@ -1766,8 +1849,11 @@ type SampledHTTPRequest struct {
 	// This member is required.
 	Weight int64
 
-	// The action for the Rule that the request matched: ALLOW, BLOCK, or COUNT.
+	// The action for the Rule that the request matched: Allow, Block, or Count.
 	Action *string
+
+	// The CAPTCHA response for the request.
+	CaptchaResponse *CaptchaResponse
 
 	// Labels applied to the web request by matching rules. WAF applies fully qualified
 	// labels to matching web requests. A fully qualified label is the concatenation of
@@ -2336,6 +2422,11 @@ type WebACL struct {
 	// web ACL WCU usage when they use a rule group. The WCU limit for web ACLs is
 	// 1,500.
 	Capacity int64
+
+	// Specifies how WAF should handle CAPTCHA evaluations for rules that don't have
+	// their own CaptchaConfig settings. If you don't specify this, WAF uses its
+	// default settings for CaptchaConfig.
+	CaptchaConfig *CaptchaConfig
 
 	// A map of custom response keys and content bodies. When you create a rule with a
 	// block action, you can send a custom response to the web request. You define

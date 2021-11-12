@@ -12,6 +12,7 @@ import (
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsRestjson1_serializeOpCancelJob struct {
@@ -181,6 +182,11 @@ func awsRestjson1_serializeOpDocumentCreateComputeEnvironmentInput(v *CreateComp
 		ok.String(string(v.Type))
 	}
 
+	if v.UnmanagedvCpus != 0 {
+		ok := object.Key("unmanagedvCpus")
+		ok.Integer(v.UnmanagedvCpus)
+	}
+
 	return nil
 }
 
@@ -261,9 +267,96 @@ func awsRestjson1_serializeOpDocumentCreateJobQueueInput(v *CreateJobQueueInput,
 		ok.Integer(v.Priority)
 	}
 
+	if v.SchedulingPolicyArn != nil {
+		ok := object.Key("schedulingPolicyArn")
+		ok.String(*v.SchedulingPolicyArn)
+	}
+
 	if len(v.State) > 0 {
 		ok := object.Key("state")
 		ok.String(string(v.State))
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagrisTagsMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpCreateSchedulingPolicy struct {
+}
+
+func (*awsRestjson1_serializeOpCreateSchedulingPolicy) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateSchedulingPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateSchedulingPolicyInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/createschedulingpolicy")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateSchedulingPolicyInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateSchedulingPolicyInput(v *CreateSchedulingPolicyInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateSchedulingPolicyInput(v *CreateSchedulingPolicyInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FairsharePolicy != nil {
+		ok := object.Key("fairsharePolicy")
+		if err := awsRestjson1_serializeDocumentFairsharePolicy(v.FairsharePolicy, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
 	}
 
 	if v.Tags != nil {
@@ -407,6 +500,74 @@ func awsRestjson1_serializeOpDocumentDeleteJobQueueInput(v *DeleteJobQueueInput,
 	if v.JobQueue != nil {
 		ok := object.Key("jobQueue")
 		ok.String(*v.JobQueue)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeleteSchedulingPolicy struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteSchedulingPolicy) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteSchedulingPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteSchedulingPolicyInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/deleteschedulingpolicy")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentDeleteSchedulingPolicyInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteSchedulingPolicyInput(v *DeleteSchedulingPolicyInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentDeleteSchedulingPolicyInput(v *DeleteSchedulingPolicyInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Arn != nil {
+		ok := object.Key("arn")
+		ok.String(*v.Arn)
 	}
 
 	return nil
@@ -800,6 +961,76 @@ func awsRestjson1_serializeOpDocumentDescribeJobsInput(v *DescribeJobsInput, val
 	return nil
 }
 
+type awsRestjson1_serializeOpDescribeSchedulingPolicies struct {
+}
+
+func (*awsRestjson1_serializeOpDescribeSchedulingPolicies) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribeSchedulingPolicies) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeSchedulingPoliciesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/describeschedulingpolicies")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentDescribeSchedulingPoliciesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribeSchedulingPoliciesInput(v *DescribeSchedulingPoliciesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentDescribeSchedulingPoliciesInput(v *DescribeSchedulingPoliciesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Arns != nil {
+		ok := object.Key("arns")
+		if err := awsRestjson1_serializeDocumentStringList(v.Arns, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListJobs struct {
 }
 
@@ -890,6 +1121,79 @@ func awsRestjson1_serializeOpDocumentListJobsInput(v *ListJobsInput, value smith
 	if v.MultiNodeJobId != nil {
 		ok := object.Key("multiNodeJobId")
 		ok.String(*v.MultiNodeJobId)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListSchedulingPolicies struct {
+}
+
+func (*awsRestjson1_serializeOpListSchedulingPolicies) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListSchedulingPolicies) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListSchedulingPoliciesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/listschedulingpolicies")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentListSchedulingPoliciesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListSchedulingPoliciesInput(v *ListSchedulingPoliciesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentListSchedulingPoliciesInput(v *ListSchedulingPoliciesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResults != 0 {
+		ok := object.Key("maxResults")
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1063,6 +1367,11 @@ func awsRestjson1_serializeOpDocumentRegisterJobDefinitionInput(v *RegisterJobDe
 		}
 	}
 
+	if v.SchedulingPriority != 0 {
+		ok := object.Key("schedulingPriority")
+		ok.Integer(v.SchedulingPriority)
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocumentTagrisTagsMap(v.Tags, ok); err != nil {
@@ -1205,6 +1514,16 @@ func awsRestjson1_serializeOpDocumentSubmitJobInput(v *SubmitJobInput, value smi
 		if err := awsRestjson1_serializeDocumentRetryStrategy(v.RetryStrategy, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.SchedulingPriorityOverride != 0 {
+		ok := object.Key("schedulingPriorityOverride")
+		ok.Integer(v.SchedulingPriorityOverride)
+	}
+
+	if v.ShareIdentifier != nil {
+		ok := object.Key("shareIdentifier")
+		ok.String(*v.ShareIdentifier)
 	}
 
 	if v.Tags != nil {
@@ -1526,6 +1845,11 @@ func awsRestjson1_serializeOpDocumentUpdateComputeEnvironmentInput(v *UpdateComp
 		ok.String(string(v.State))
 	}
 
+	if v.UnmanagedvCpus != 0 {
+		ok := object.Key("unmanagedvCpus")
+		ok.Integer(v.UnmanagedvCpus)
+	}
+
 	return nil
 }
 
@@ -1606,9 +1930,89 @@ func awsRestjson1_serializeOpDocumentUpdateJobQueueInput(v *UpdateJobQueueInput,
 		ok.Integer(v.Priority)
 	}
 
+	if v.SchedulingPolicyArn != nil {
+		ok := object.Key("schedulingPolicyArn")
+		ok.String(*v.SchedulingPolicyArn)
+	}
+
 	if len(v.State) > 0 {
 		ok := object.Key("state")
 		ok.String(string(v.State))
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpUpdateSchedulingPolicy struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateSchedulingPolicy) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateSchedulingPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateSchedulingPolicyInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/updateschedulingpolicy")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateSchedulingPolicyInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateSchedulingPolicyInput(v *UpdateSchedulingPolicyInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateSchedulingPolicyInput(v *UpdateSchedulingPolicyInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Arn != nil {
+		ok := object.Key("arn")
+		ok.String(*v.Arn)
+	}
+
+	if v.FairsharePolicy != nil {
+		ok := object.Key("fairsharePolicy")
+		if err := awsRestjson1_serializeDocumentFairsharePolicy(v.FairsharePolicy, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -2150,6 +2554,30 @@ func awsRestjson1_serializeDocumentEvaluateOnExitList(v []types.EvaluateOnExit, 
 	return nil
 }
 
+func awsRestjson1_serializeDocumentFairsharePolicy(v *types.FairsharePolicy, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ComputeReservation != 0 {
+		ok := object.Key("computeReservation")
+		ok.Integer(v.ComputeReservation)
+	}
+
+	if v.ShareDecaySeconds != 0 {
+		ok := object.Key("shareDecaySeconds")
+		ok.Integer(v.ShareDecaySeconds)
+	}
+
+	if v.ShareDistribution != nil {
+		ok := object.Key("shareDistribution")
+		if err := awsRestjson1_serializeDocumentShareAttributesList(v.ShareDistribution, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentFargatePlatformConfiguration(v *types.FargatePlatformConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2614,6 +3042,49 @@ func awsRestjson1_serializeDocumentSecretList(v []types.Secret, value smithyjson
 	for i := range v {
 		av := array.Value()
 		if err := awsRestjson1_serializeDocumentSecret(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentShareAttributes(v *types.ShareAttributes, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ShareIdentifier != nil {
+		ok := object.Key("shareIdentifier")
+		ok.String(*v.ShareIdentifier)
+	}
+
+	if v.WeightFactor != 0 {
+		ok := object.Key("weightFactor")
+		switch {
+		case math.IsNaN(float64(v.WeightFactor)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(v.WeightFactor), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(v.WeightFactor), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(v.WeightFactor)
+
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentShareAttributesList(v []types.ShareAttributes, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentShareAttributes(&v[i], av); err != nil {
 			return err
 		}
 	}

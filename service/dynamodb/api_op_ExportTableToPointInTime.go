@@ -62,7 +62,8 @@ type ExportTableToPointInTimeInput struct {
 	// snapshot of the table's state at this point in time.
 	ExportTime *time.Time
 
-	// The ID of the AWS account that owns the bucket the export will be stored in.
+	// The ID of the Amazon Web Services account that owns the bucket the export will
+	// be stored in.
 	S3BucketOwner *string
 
 	// The Amazon S3 bucket prefix to use as the file name and path of the exported
@@ -75,11 +76,11 @@ type ExportTableToPointInTimeInput struct {
 	// * AES256 - server-side encryption with Amazon S3
 	// managed keys
 	//
-	// * KMS - server-side encryption with AWS KMS managed keys
+	// * KMS - server-side encryption with KMS managed keys
 	S3SseAlgorithm types.S3SseAlgorithm
 
-	// The ID of the AWS KMS managed key used to encrypt the S3 bucket where export
-	// data will be stored (if applicable).
+	// The ID of the KMS managed key used to encrypt the S3 bucket where export data
+	// will be stored (if applicable).
 	S3SseKmsKeyId *string
 
 	noSmithyDocumentSerde

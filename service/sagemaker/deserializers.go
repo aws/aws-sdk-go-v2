@@ -32711,6 +32711,15 @@ func awsAwsjson11_deserializeDocumentDeviceSummary(v **types.DeviceSummary, valu
 
 	for key, value := range shape {
 		switch key {
+		case "AgentVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EdgeVersion to be of type string, got %T instead", value)
+				}
+				sv.AgentVersion = ptr.String(jtv)
+			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -44474,6 +44483,263 @@ func awsAwsjson11_deserializeDocumentParents(v *[]types.Parent, value interface{
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentPendingDeploymentSummary(v **types.PendingDeploymentSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PendingDeploymentSummary
+	if *v == nil {
+		sv = &types.PendingDeploymentSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EndpointConfigName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EndpointConfigName to be of type string, got %T instead", value)
+				}
+				sv.EndpointConfigName = ptr.String(jtv)
+			}
+
+		case "ProductionVariants":
+			if err := awsAwsjson11_deserializeDocumentPendingProductionVariantSummaryList(&sv.ProductionVariants, value); err != nil {
+				return err
+			}
+
+		case "StartTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.StartTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPendingProductionVariantSummary(v **types.PendingProductionVariantSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PendingProductionVariantSummary
+	if *v == nil {
+		sv = &types.PendingProductionVariantSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AcceleratorType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProductionVariantAcceleratorType to be of type string, got %T instead", value)
+				}
+				sv.AcceleratorType = types.ProductionVariantAcceleratorType(jtv)
+			}
+
+		case "CurrentInstanceCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TaskCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.CurrentInstanceCount = ptr.Int32(int32(i64))
+			}
+
+		case "CurrentWeight":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CurrentWeight = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.CurrentWeight = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected VariantWeight to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "DeployedImages":
+			if err := awsAwsjson11_deserializeDocumentDeployedImages(&sv.DeployedImages, value); err != nil {
+				return err
+			}
+
+		case "DesiredInstanceCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TaskCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DesiredInstanceCount = ptr.Int32(int32(i64))
+			}
+
+		case "DesiredWeight":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.DesiredWeight = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.DesiredWeight = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected VariantWeight to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "InstanceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProductionVariantInstanceType to be of type string, got %T instead", value)
+				}
+				sv.InstanceType = types.ProductionVariantInstanceType(jtv)
+			}
+
+		case "VariantName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VariantName to be of type string, got %T instead", value)
+				}
+				sv.VariantName = ptr.String(jtv)
+			}
+
+		case "VariantStatus":
+			if err := awsAwsjson11_deserializeDocumentProductionVariantStatusList(&sv.VariantStatus, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPendingProductionVariantSummaryList(v *[]types.PendingProductionVariantSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.PendingProductionVariantSummary
+	if *v == nil {
+		cv = []types.PendingProductionVariantSummary{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.PendingProductionVariantSummary
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentPendingProductionVariantSummary(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentPipeline(v **types.Pipeline, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -46519,6 +46785,105 @@ func awsAwsjson11_deserializeDocumentProductionVariantList(v *[]types.Production
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentProductionVariantStatus(v **types.ProductionVariantStatus, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ProductionVariantStatus
+	if *v == nil {
+		sv = &types.ProductionVariantStatus{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "StartTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.StartTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VariantStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.VariantStatus(jtv)
+			}
+
+		case "StatusMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VariantStatusMessage to be of type string, got %T instead", value)
+				}
+				sv.StatusMessage = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentProductionVariantStatusList(v *[]types.ProductionVariantStatus, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ProductionVariantStatus
+	if *v == nil {
+		cv = []types.ProductionVariantStatus{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ProductionVariantStatus
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentProductionVariantStatus(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentProductionVariantSummary(v **types.ProductionVariantSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -46647,6 +47012,11 @@ func awsAwsjson11_deserializeDocumentProductionVariantSummary(v **types.Producti
 					return fmt.Errorf("expected VariantName to be of type string, got %T instead", value)
 				}
 				sv.VariantName = ptr.String(jtv)
+			}
+
+		case "VariantStatus":
+			if err := awsAwsjson11_deserializeDocumentProductionVariantStatusList(&sv.VariantStatus, value); err != nil {
+				return err
 			}
 
 		default:
@@ -49872,6 +50242,11 @@ func awsAwsjson11_deserializeDocumentTrafficRoutingConfig(v **types.TrafficRouti
 		switch key {
 		case "CanarySize":
 			if err := awsAwsjson11_deserializeDocumentCapacitySize(&sv.CanarySize, value); err != nil {
+				return err
+			}
+
+		case "LinearStepSize":
+			if err := awsAwsjson11_deserializeDocumentCapacitySize(&sv.LinearStepSize, value); err != nil {
 				return err
 			}
 
@@ -57775,6 +58150,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeDeviceOutput(v **DescribeDeviceOu
 
 	for key, value := range shape {
 		switch key {
+		case "AgentVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EdgeVersion to be of type string, got %T instead", value)
+				}
+				sv.AgentVersion = ptr.String(jtv)
+			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -58474,6 +58858,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeEndpointOutput(v **DescribeEndpoi
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "PendingDeploymentSummary":
+			if err := awsAwsjson11_deserializeDocumentPendingDeploymentSummary(&sv.PendingDeploymentSummary, value); err != nil {
+				return err
 			}
 
 		case "ProductionVariants":

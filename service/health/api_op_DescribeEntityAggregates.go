@@ -12,8 +12,7 @@ import (
 )
 
 // Returns the number of entities that are affected by each of the specified
-// events. If no events are specified, the counts of all affected entities are
-// returned.
+// events.
 func (c *Client) DescribeEntityAggregates(ctx context.Context, params *DescribeEntityAggregatesInput, optFns ...func(*Options)) (*DescribeEntityAggregatesOutput, error) {
 	if params == nil {
 		params = &DescribeEntityAggregatesInput{}

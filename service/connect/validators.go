@@ -330,6 +330,26 @@ func (m *validateOpCreateRoutingProfile) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateSecurityProfile struct {
+}
+
+func (*validateOpCreateSecurityProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateSecurityProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateSecurityProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateSecurityProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateUseCase struct {
 }
 
@@ -465,6 +485,26 @@ func (m *validateOpDeleteQuickConnect) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteQuickConnectInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteSecurityProfile struct {
+}
+
+func (*validateOpDeleteSecurityProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteSecurityProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteSecurityProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteSecurityProfileInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -705,6 +745,26 @@ func (m *validateOpDescribeRoutingProfile) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeRoutingProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeSecurityProfile struct {
+}
+
+func (*validateOpDescribeSecurityProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeSecurityProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeSecurityProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeSecurityProfileInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1365,6 +1425,26 @@ func (m *validateOpListSecurityKeys) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListSecurityKeysInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListSecurityProfilePermissions struct {
+}
+
+func (*validateOpListSecurityProfilePermissions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListSecurityProfilePermissions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListSecurityProfilePermissionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListSecurityProfilePermissionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2070,6 +2150,26 @@ func (m *validateOpUpdateRoutingProfileQueues) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateSecurityProfile struct {
+}
+
+func (*validateOpUpdateSecurityProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSecurityProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSecurityProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSecurityProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateUserHierarchyGroupName struct {
 }
 
@@ -2274,6 +2374,10 @@ func addOpCreateRoutingProfileValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpCreateRoutingProfile{}, middleware.After)
 }
 
+func addOpCreateSecurityProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateSecurityProfile{}, middleware.After)
+}
+
 func addOpCreateUseCaseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateUseCase{}, middleware.After)
 }
@@ -2300,6 +2404,10 @@ func addOpDeleteIntegrationAssociationValidationMiddleware(stack *middleware.Sta
 
 func addOpDeleteQuickConnectValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteQuickConnect{}, middleware.After)
+}
+
+func addOpDeleteSecurityProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteSecurityProfile{}, middleware.After)
 }
 
 func addOpDeleteUseCaseValidationMiddleware(stack *middleware.Stack) error {
@@ -2348,6 +2456,10 @@ func addOpDescribeQuickConnectValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpDescribeRoutingProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeRoutingProfile{}, middleware.After)
+}
+
+func addOpDescribeSecurityProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeSecurityProfile{}, middleware.After)
 }
 
 func addOpDescribeUserHierarchyGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -2480,6 +2592,10 @@ func addOpListRoutingProfilesValidationMiddleware(stack *middleware.Stack) error
 
 func addOpListSecurityKeysValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListSecurityKeys{}, middleware.After)
+}
+
+func addOpListSecurityProfilePermissionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListSecurityProfilePermissions{}, middleware.After)
 }
 
 func addOpListSecurityProfilesValidationMiddleware(stack *middleware.Stack) error {
@@ -2620,6 +2736,10 @@ func addOpUpdateRoutingProfileNameValidationMiddleware(stack *middleware.Stack) 
 
 func addOpUpdateRoutingProfileQueuesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateRoutingProfileQueues{}, middleware.After)
+}
+
+func addOpUpdateSecurityProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSecurityProfile{}, middleware.After)
 }
 
 func addOpUpdateUserHierarchyGroupNameValidationMiddleware(stack *middleware.Stack) error {
@@ -3526,6 +3646,24 @@ func validateOpCreateRoutingProfileInput(v *CreateRoutingProfileInput) error {
 	}
 }
 
+func validateOpCreateSecurityProfileInput(v *CreateSecurityProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSecurityProfileInput"}
+	if v.SecurityProfileName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityProfileName"))
+	}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateUseCaseInput(v *CreateUseCaseInput) error {
 	if v == nil {
 		return nil
@@ -3657,6 +3795,24 @@ func validateOpDeleteQuickConnectInput(v *DeleteQuickConnectInput) error {
 	}
 	if v.QuickConnectId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QuickConnectId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteSecurityProfileInput(v *DeleteSecurityProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteSecurityProfileInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.SecurityProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityProfileId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3876,6 +4032,24 @@ func validateOpDescribeRoutingProfileInput(v *DescribeRoutingProfileInput) error
 	}
 	if v.RoutingProfileId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoutingProfileId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeSecurityProfileInput(v *DescribeSecurityProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeSecurityProfileInput"}
+	if v.SecurityProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityProfileId"))
+	}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4445,6 +4619,24 @@ func validateOpListSecurityKeysInput(v *ListSecurityKeysInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListSecurityKeysInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListSecurityProfilePermissionsInput(v *ListSecurityProfilePermissionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListSecurityProfilePermissionsInput"}
+	if v.SecurityProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityProfileId"))
+	}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
@@ -5173,6 +5365,24 @@ func validateOpUpdateRoutingProfileQueuesInput(v *UpdateRoutingProfileQueuesInpu
 		if err := validateRoutingProfileQueueConfigList(v.QueueConfigs); err != nil {
 			invalidParams.AddNested("QueueConfigs", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSecurityProfileInput(v *UpdateSecurityProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSecurityProfileInput"}
+	if v.SecurityProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityProfileId"))
+	}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
