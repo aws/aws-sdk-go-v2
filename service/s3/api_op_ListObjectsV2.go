@@ -4,7 +4,7 @@ package s3
 
 import (
 	"context"
-	"fmt"
+	"errors"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	s3cust "github.com/aws/aws-sdk-go-v2/service/s3/internal/customizations"
@@ -12,6 +12,9 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
+
+// ErrNoMorePages says that no more pages are available in paginator
+var ErrNoMorePages = errors.New("no more pages are available")
 
 // Returns some or all (up to 1,000) of the objects in a bucket with each request.
 // You can use the request parameters as selection criteria to return a subset of
@@ -340,7 +343,7 @@ func (p *ListObjectsV2Paginator) HasMorePages() bool {
 // NextPage retrieves the next ListObjectsV2 page.
 func (p *ListObjectsV2Paginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListObjectsV2Output, error) {
 	if !p.HasMorePages() {
-		return nil, fmt.Errorf("no more pages available")
+		return nil, ErrNoMorePages
 	}
 
 	params := *p.params
