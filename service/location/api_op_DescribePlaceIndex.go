@@ -132,14 +132,12 @@ func (c *Client) addOperationDescribePlaceIndexMiddlewares(stack *middleware.Sta
 	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
 		return err
 	}
-
 	if err = addRetryMiddlewares(stack, options); err != nil {
 		return err
 	}
 	if err = addHTTPSignerV4Middleware(stack, options); err != nil {
 		return err
 	}
-
 	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
 		return err
 	}
