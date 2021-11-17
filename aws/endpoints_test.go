@@ -187,3 +187,31 @@ func TestGetUseFIPSEndpoint(t *testing.T) {
 		})
 	}
 }
+
+var _ EndpointResolverWithOptions = EndpointResolverWithOptionsFunc(nil)
+
+func TestEndpointResolverWithOptionsFunc_ResolveEndpoint(t *testing.T) {
+	var er EndpointResolverWithOptions = EndpointResolverWithOptionsFunc(func(service, region string, options ...interface{}) (Endpoint, error) {
+		if e, a := "foo", service; e != a {
+			t.Errorf("expect %v, got %v", e, a)
+		}
+		if e, a := "bar", region; e != a {
+			t.Errorf("expect %v, got %v", e, a)
+		}
+		if e, a := 2, len(options); e != a {
+			t.Errorf("expect %v, got %v", e, a)
+		}
+		return Endpoint{
+			URL: "https://foo.amazonaws.com",
+		}, nil
+	})
+
+	e, err := er.ResolveEndpoint("foo", "bar", 1, 2)
+	if err != nil {
+		t.Errorf("expect no error, got %v", err)
+	}
+
+	if e,a := "https://foo.amazonaws.com", e.URL; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+}
