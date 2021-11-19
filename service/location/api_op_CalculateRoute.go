@@ -16,7 +16,7 @@ import (
 // (https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html)
 // given the following required parameters: DeparturePostiton and
 // DestinationPosition. Requires that you first create a route calculator resource
-// (https://docs.aws.amazon.com/location-routes/latest/APIReference/API_CreateRouteCalculator.html)
+// (https://docs.aws.amazon.com/location-routes/latest/APIReference/API_CreateRouteCalculator.html).
 // By default, a request that doesn't specify a departure time uses the best time
 // of day to travel with the best traffic conditions when calculating the route.
 // Additional options include:
@@ -25,8 +25,8 @@ import (
 // (https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#departure-time)
 // using either DepartureTime or DepartureNow. This calculates a route based on
 // predictive traffic data at the given time. You can't specify both DepartureTime
-// and DepartureNow in a single request. Specifying both parameters returns an
-// error message.
+// and DepartureNow in a single request. Specifying both parameters returns a
+// validation error.
 //
 // * Specifying a travel mode
 // (https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#travel-mode)
@@ -49,7 +49,7 @@ func (c *Client) CalculateRoute(ctx context.Context, params *CalculateRouteInput
 
 type CalculateRouteInput struct {
 
-	// The name of the route calculator resource that you want to use to calculate a
+	// The name of the route calculator resource that you want to use to calculate the
 	// route.
 	//
 	// This member is required.
@@ -96,7 +96,7 @@ type CalculateRouteInput struct {
 	// Values: false | true
 	DepartNow *bool
 
-	// Specifies the desired time of departure. Uses the given time to calculate a
+	// Specifies the desired time of departure. Uses the given time to calculate the
 	// route. Otherwise, the best time of day to travel with the best traffic
 	// conditions is used to calculate the route. Setting a departure time in the past
 	// returns a 400 ValidationException error.

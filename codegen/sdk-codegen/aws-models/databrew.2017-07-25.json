@@ -31,6 +31,21 @@
     "shapes": {
         "com.amazonaws.databrew#AWSGlueDataBrew": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "DataBrew",
+                    "arnNamespace": "databrew",
+                    "cloudFormationName": "DataBrew",
+                    "cloudTrailEventSource": "databrew.amazonaws.com",
+                    "endpointPrefix": "databrew"
+                },
+                "aws.auth#sigv4": {
+                    "name": "databrew"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>Glue DataBrew is a visual, cloud-scale data-preparation service. DataBrew\n            simplifies data preparation tasks, targeting data issues that are hard to spot and\n            time-consuming to fix. DataBrew empowers users of all technical levels to visualize the\n            data and perform one-click data transformations, with no coding required.</p>",
+                "smithy.api#title": "AWS Glue DataBrew"
+            },
             "version": "2017-07-25",
             "operations": [
                 {
@@ -52,6 +67,9 @@
                     "target": "com.amazonaws.databrew#CreateRecipeJob"
                 },
                 {
+                    "target": "com.amazonaws.databrew#CreateRuleset"
+                },
+                {
                     "target": "com.amazonaws.databrew#CreateSchedule"
                 },
                 {
@@ -65,6 +83,9 @@
                 },
                 {
                     "target": "com.amazonaws.databrew#DeleteRecipeVersion"
+                },
+                {
+                    "target": "com.amazonaws.databrew#DeleteRuleset"
                 },
                 {
                     "target": "com.amazonaws.databrew#DeleteSchedule"
@@ -83,6 +104,9 @@
                 },
                 {
                     "target": "com.amazonaws.databrew#DescribeRecipe"
+                },
+                {
+                    "target": "com.amazonaws.databrew#DescribeRuleset"
                 },
                 {
                     "target": "com.amazonaws.databrew#DescribeSchedule"
@@ -104,6 +128,9 @@
                 },
                 {
                     "target": "com.amazonaws.databrew#ListRecipeVersions"
+                },
+                {
+                    "target": "com.amazonaws.databrew#ListRulesets"
                 },
                 {
                     "target": "com.amazonaws.databrew#ListSchedules"
@@ -148,24 +175,12 @@
                     "target": "com.amazonaws.databrew#UpdateRecipeJob"
                 },
                 {
+                    "target": "com.amazonaws.databrew#UpdateRuleset"
+                },
+                {
                     "target": "com.amazonaws.databrew#UpdateSchedule"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "DataBrew",
-                    "arnNamespace": "databrew",
-                    "cloudFormationName": "DataBrew",
-                    "cloudTrailEventSource": "databrew.amazonaws.com",
-                    "endpointPrefix": "databrew"
-                },
-                "aws.auth#sigv4": {
-                    "name": "databrew"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Glue DataBrew is a visual, cloud-scale data-preparation service. DataBrew\n            simplifies data preparation tasks, targeting data issues that are hard to spot and\n            time-consuming to fix. DataBrew empowers users of all technical levels to visualize the\n            data and perform one-click data transformations, with no coding required.</p>",
-                "smithy.api#title": "AWS Glue DataBrew"
-            }
+            ]
         },
         "com.amazonaws.databrew#AccessDeniedException": {
             "type": "structure",
@@ -193,6 +208,47 @@
             "type": "integer",
             "traits": {
                 "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.databrew#AllowedStatisticList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.databrew#AllowedStatistics"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.databrew#AllowedStatistics": {
+            "type": "structure",
+            "members": {
+                "Statistics": {
+                    "target": "com.amazonaws.databrew#StatisticList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more column statistics to allow for columns that contain detected entities.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration of statistics that are allowed to be run on columns that \n            contain detected entities. When undefined, no statistics will be computed \n            on columns that contain detected entities.</p>"
+            }
+        },
+        "com.amazonaws.databrew#AnalyticsMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ENABLE",
+                        "name": "ENABLE"
+                    },
+                    {
+                        "value": "DISABLE",
+                        "name": "DISABLE"
+                    }
+                ]
             }
         },
         "com.amazonaws.databrew#Arn": {
@@ -301,7 +357,8 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]*$"
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]*$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.databrew#ColumnName": {
@@ -352,7 +409,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Selector of a column from a dataset for profile job configuration. One selector includes either a column name or a regular \n            expression.</p>"
+                "smithy.api#documentation": "<p>Selector of a column from a dataset for profile job configuration. \n            One selector includes either a column name or a regular expression.</p>"
             }
         },
         "com.amazonaws.databrew#ColumnSelectorList": {
@@ -683,6 +740,12 @@
                     "target": "com.amazonaws.databrew#ProfileConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration for profile jobs. Used to select columns, do evaluations, \n            and override default parameters of evaluations. When configuration is null, the\n            profile job will run with default settings.</p>"
+                    }
+                },
+                "ValidationConfigurations": {
+                    "target": "com.amazonaws.databrew#ValidationConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of validation configurations that are applied to the profile job.</p>"
                     }
                 },
                 "RoleArn": {
@@ -1020,6 +1083,84 @@
                 }
             }
         },
+        "com.amazonaws.databrew#CreateRuleset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.databrew#CreateRulesetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.databrew#CreateRulesetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.databrew#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.databrew#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.databrew#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new ruleset that can be used in a profile job to validate \n            the data quality of a dataset.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/rulesets",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.databrew#CreateRulesetRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.databrew#RulesetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the ruleset to be created. Valid characters are alphanumeric \n            (A-Z, a-z, 0-9), hyphen (-), period (.), and space.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.databrew#RulesetDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the ruleset.</p>"
+                    }
+                },
+                "TargetArn": {
+                    "target": "com.amazonaws.databrew#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a resource (dataset) that the \n            ruleset is associated with.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Rules": {
+                    "target": "com.amazonaws.databrew#RuleList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of rules that are defined with the ruleset. A rule includes \n            one or more checks to be validated on a DataBrew dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.databrew#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata tags to apply to the ruleset.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.databrew#CreateRulesetResponse": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.databrew#RulesetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the created ruleset.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.databrew#CreateSchedule": {
             "type": "operation",
             "input": {
@@ -1177,7 +1318,7 @@
                 "CatalogId": {
                     "target": "com.amazonaws.databrew#CatalogId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Web Services account that holds the Data Catalog that stores the data.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Web Services account that holds the Data Catalog that \n            stores the data.</p>"
                     }
                 },
                 "DatabaseName": {
@@ -1197,7 +1338,7 @@
                 "S3Options": {
                     "target": "com.amazonaws.databrew#S3TableOutputOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents options that specify how and where DataBrew writes the Amazon S3 output generated \n            by recipe jobs.</p>"
+                        "smithy.api#documentation": "<p>Represents options that specify how and where DataBrew writes the Amazon S3 \n            output generated by recipe jobs.</p>"
                     }
                 },
                 "DatabaseOptions": {
@@ -1241,12 +1382,17 @@
                 "DatabaseTableName": {
                     "target": "com.amazonaws.databrew#DatabaseTableName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The table within the target database.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The table within the target database.</p>"
                     }
                 },
                 "TempDirectory": {
                     "target": "com.amazonaws.databrew#S3Location"
+                },
+                "QueryString": {
+                    "target": "com.amazonaws.databrew#QueryString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Custom SQL to run against the provided Glue connection. This SQL will be used as \n            the input for DataBrew projects and jobs.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1339,7 +1485,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents options that specify how and where DataBrew writes the database output generated by recipe \n            jobs.</p>"
+                "smithy.api#documentation": "<p>Represents options that specify how and where DataBrew writes the database \n            output generated by recipe jobs.</p>"
             }
         },
         "com.amazonaws.databrew#Dataset": {
@@ -1410,7 +1556,7 @@
                 "PathOptions": {
                     "target": "com.amazonaws.databrew#PathOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of options that defines how DataBrew interprets an Amazon S3 path of the dataset.</p>"
+                        "smithy.api#documentation": "<p>A set of options that defines how DataBrew interprets an Amazon S3 \n            path of the dataset.</p>"
                     }
                 },
                 "Tags": {
@@ -1751,6 +1897,59 @@
                 }
             }
         },
+        "com.amazonaws.databrew#DeleteRuleset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.databrew#DeleteRulesetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.databrew#DeleteRulesetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.databrew#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.databrew#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.databrew#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a ruleset.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/rulesets/{Name}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.databrew#DeleteRulesetRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.databrew#RulesetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the ruleset to be deleted.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.databrew#DeleteRulesetResponse": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.databrew#RulesetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the deleted ruleset.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.databrew#DeleteSchedule": {
             "type": "operation",
             "input": {
@@ -1873,7 +2072,7 @@
                 "Format": {
                     "target": "com.amazonaws.databrew#InputFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>The file format of a dataset that is created from an Amazon S3 file or folder.</p>"
+                        "smithy.api#documentation": "<p>The file format of a dataset that is created from an Amazon S3 file \n            or folder.</p>"
                     }
                 },
                 "FormatOptions": {
@@ -1900,13 +2099,13 @@
                 "Source": {
                     "target": "com.amazonaws.databrew#Source",
                     "traits": {
-                        "smithy.api#documentation": "<p>The location of the data for this dataset, Amazon S3 or the Glue Data Catalog.</p>"
+                        "smithy.api#documentation": "<p>The location of the data for this dataset, Amazon S3 or the \n            Glue Data Catalog.</p>"
                     }
                 },
                 "PathOptions": {
                     "target": "com.amazonaws.databrew#PathOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of options that defines how DataBrew interprets an Amazon S3 path of the dataset.</p>"
+                        "smithy.api#documentation": "<p>A set of options that defines how DataBrew interprets an Amazon S3 \n            path of the dataset.</p>"
                     }
                 },
                 "Tags": {
@@ -2067,6 +2266,12 @@
                         "smithy.api#documentation": "<p>Configuration for profile jobs. Used to select columns, do evaluations, \n            and override default parameters of evaluations. When configuration is null, the\n            profile job will run with default settings.</p>"
                     }
                 },
+                "ValidationConfigurations": {
+                    "target": "com.amazonaws.databrew#ValidationConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of validation configurations that are applied to the profile job.</p>"
+                    }
+                },
                 "RecipeReference": {
                     "target": "com.amazonaws.databrew#RecipeReference"
                 },
@@ -2192,6 +2397,12 @@
                     "target": "com.amazonaws.databrew#ProfileConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration for profile jobs. Used to select columns, do evaluations, \n            and override default parameters of evaluations. When configuration is null, the\n            profile job will run with default settings.</p>"
+                    }
+                },
+                "ValidationConfigurations": {
+                    "target": "com.amazonaws.databrew#ValidationConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of validation configurations that are applied to the profile job.</p>"
                     }
                 },
                 "RunId": {
@@ -2513,6 +2724,110 @@
                 }
             }
         },
+        "com.amazonaws.databrew#DescribeRuleset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.databrew#DescribeRulesetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.databrew#DescribeRulesetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.databrew#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.databrew#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves detailed information about the ruleset.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/rulesets/{Name}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.databrew#DescribeRulesetRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.databrew#RulesetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the ruleset to be described.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.databrew#DescribeRulesetResponse": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.databrew#RulesetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the ruleset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.databrew#RulesetDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the ruleset.</p>"
+                    }
+                },
+                "TargetArn": {
+                    "target": "com.amazonaws.databrew#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a resource (dataset) that the ruleset is \n            associated with.</p>"
+                    }
+                },
+                "Rules": {
+                    "target": "com.amazonaws.databrew#RuleList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of rules that are defined with the ruleset. A rule includes one \n            or more checks to be validated on a DataBrew dataset.</p>"
+                    }
+                },
+                "CreateDate": {
+                    "target": "com.amazonaws.databrew#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the ruleset was created.</p>"
+                    }
+                },
+                "CreatedBy": {
+                    "target": "com.amazonaws.databrew#CreatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the user who created the ruleset.</p>"
+                    }
+                },
+                "LastModifiedBy": {
+                    "target": "com.amazonaws.databrew#LastModifiedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the user who last modified the ruleset.</p>"
+                    }
+                },
+                "LastModifiedDate": {
+                    "target": "com.amazonaws.databrew#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The modification date and time of the ruleset.</p>"
+                    }
+                },
+                "ResourceArn": {
+                    "target": "com.amazonaws.databrew#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the ruleset.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.databrew#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata tags that have been applied to the ruleset.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.databrew#DescribeSchedule": {
             "type": "operation",
             "input": {
@@ -2611,6 +2926,9 @@
                 }
             }
         },
+        "com.amazonaws.databrew#Disabled": {
+            "type": "boolean"
+        },
         "com.amazonaws.databrew#EncryptionKeyArn": {
             "type": "string",
             "traits": {
@@ -2633,6 +2951,48 @@
                         "name": "SSES3"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.databrew#EntityDetectorConfiguration": {
+            "type": "structure",
+            "members": {
+                "EntityTypes": {
+                    "target": "com.amazonaws.databrew#EntityTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Entity types to detect. Can be any of the following:</p>\n        <ul>\n            <li>\n               <p>USA_SSN</p>\n            </li>\n            <li>\n               <p>EMAIL</p>\n            </li>\n            <li>\n               <p>USA_ITIN</p>\n            </li>\n            <li>\n               <p>USA_PASSPORT_NUMBER</p>\n            </li>\n            <li>\n               <p>PHONE_NUMBER</p>\n            </li>\n            <li>\n               <p>USA_DRIVING_LICENSE</p>\n            </li>\n            <li>\n               <p>BANK_ACCOUNT</p>\n            </li>\n            <li>\n               <p>CREDIT_CARD</p>\n            </li>\n            <li>\n               <p>IP_ADDRESS</p>\n            </li>\n            <li>\n               <p>MAC_ADDRESS</p>\n            </li>\n            <li>\n               <p>USA_DEA_NUMBER</p>\n            </li>\n            <li>\n               <p>USA_HCPCS_CODE</p>\n            </li>\n            <li>\n               <p>USA_NATIONAL_PROVIDER_IDENTIFIER</p>\n            </li>\n            <li>\n               <p>USA_NATIONAL_DRUG_CODE</p>\n            </li>\n            <li>\n               <p>USA_HEALTH_INSURANCE_CLAIM_NUMBER</p>\n            </li>\n            <li>\n               <p>USA_MEDICARE_BENEFICIARY_IDENTIFIER</p>\n            </li>\n            <li>\n               <p>USA_CPT_CODE</p>\n            </li>\n            <li>\n               <p>PERSON_NAME</p>\n            </li>\n            <li>\n               <p>DATE</p>\n            </li>\n         </ul>\n        <p>The Entity type group USA_ALL is also supported, and includes all of the \n            above entity types except PERSON_NAME and DATE.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AllowedStatistics": {
+                    "target": "com.amazonaws.databrew#AllowedStatisticList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration of statistics that are allowed to be run on columns that \n            contain detected entities. When undefined, no statistics will be computed \n            on columns that contain detected entities.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration of entity detection for a profile job. When undefined, entity \n            detection is disabled.</p>"
+            }
+        },
+        "com.amazonaws.databrew#EntityType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[A-Z_][A-Z\\\\d_]*$"
+            }
+        },
+        "com.amazonaws.databrew#EntityTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.databrew#EntityType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
             }
         },
         "com.amazonaws.databrew#ErrorCode": {
@@ -2677,7 +3037,7 @@
                     "min": 4,
                     "max": 1024
                 },
-                "smithy.api#pattern": "^[<>0-9A-Za-z_:)(!= ]+$"
+                "smithy.api#pattern": "^[<>0-9A-Za-z_.,:)(!= ]+$"
             }
         },
         "com.amazonaws.databrew#FilesLimit": {
@@ -2704,7 +3064,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a limit imposed on number of Amazon S3 files that should be selected for a dataset from a connected \n            Amazon S3 path.</p>"
+                "smithy.api#documentation": "<p>Represents a limit imposed on number of Amazon S3 files that should be selected for a \n            dataset from a connected Amazon S3 path.</p>"
             }
         },
         "com.amazonaws.databrew#FilterExpression": {
@@ -2726,7 +3086,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a structure for defining parameter conditions. Supported conditions are described\n            here: <a href=\"https://docs-aws.amazon.com/databrew/latest/dg/datasets.multiple-files.html#conditions.for.dynamic.datasets\">Supported \n                conditions for dynamic datasets</a> in the \n            <i>Glue DataBrew Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Represents a structure for defining parameter conditions. Supported conditions are described\n            here: <a href=\"https://docs.aws.amazon.com/databrew/latest/dg/datasets.multiple-files.html#conditions.for.dynamic.datasets\">Supported \n                conditions for dynamic datasets</a> in the \n            <i>Glue DataBrew Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.databrew#FormatOptions": {
@@ -2795,6 +3155,12 @@
                     "target": "com.amazonaws.databrew#DatabaseInputDefinition",
                     "traits": {
                         "smithy.api#documentation": "<p>Connection information for dataset input files stored in a database.</p>"
+                    }
+                },
+                "Metadata": {
+                    "target": "com.amazonaws.databrew#Metadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains additional resource information needed for specific datasets.</p>"
                     }
                 }
             },
@@ -2979,6 +3345,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A sample configuration for profile jobs only, which determines the number of rows on which the\n            profile job is run. If a <code>JobSample</code> value isn't provided, the default value\n            is used. The default value is CUSTOM_ROWS for the mode parameter and 20,000 for the\n            size parameter.</p>"
                     }
+                },
+                "ValidationConfigurations": {
+                    "target": "com.amazonaws.databrew#ValidationConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of validation configurations that are applied to the profile job.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3115,6 +3487,12 @@
                     "target": "com.amazonaws.databrew#JobSample",
                     "traits": {
                         "smithy.api#documentation": "<p>A sample configuration for profile jobs only, which determines the number of rows on which the\n            profile job is run. If a <code>JobSample</code> value isn't provided, the default\n            is used. The default value is CUSTOM_ROWS for the mode parameter and 20,000 for the\n            size parameter.</p>"
+                    }
+                },
+                "ValidationConfigurations": {
+                    "target": "com.amazonaws.databrew#ValidationConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of validation configurations that are applied to the profile job run.</p>"
                     }
                 }
             },
@@ -3672,6 +4050,81 @@
                 }
             }
         },
+        "com.amazonaws.databrew#ListRulesets": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.databrew#ListRulesetsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.databrew#ListRulesetsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.databrew#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.databrew#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List all rulesets available in the current account or rulesets associated \n            with a specific resource (dataset).</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/rulesets",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Rulesets",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.databrew#ListRulesetsRequest": {
+            "type": "structure",
+            "members": {
+                "TargetArn": {
+                    "target": "com.amazonaws.databrew#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a resource (dataset). Using this parameter \n            indicates to return only those rulesets that are associated with the specified resource.</p>",
+                        "smithy.api#httpQuery": "targetArn"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.databrew#MaxResults100",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in this request.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.databrew#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token generated by DataBrew that specifies where to continue pagination \n            if a previous request was truncated. To get the next set of pages, pass in \n            the NextToken value from the response object of the previous page call.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.databrew#ListRulesetsResponse": {
+            "type": "structure",
+            "members": {
+                "Rulesets": {
+                    "target": "com.amazonaws.databrew#RulesetItemList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of RulesetItem. RulesetItem contains meta data of a ruleset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.databrew#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that you can use in a subsequent call to retrieve the next set of\n            results.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.databrew#ListSchedules": {
             "type": "operation",
             "input": {
@@ -3861,6 +4314,20 @@
         },
         "com.amazonaws.databrew#Message": {
             "type": "string"
+        },
+        "com.amazonaws.databrew#Metadata": {
+            "type": "structure",
+            "members": {
+                "SourceArn": {
+                    "target": "com.amazonaws.databrew#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) associated with the dataset. Currently, DataBrew \n            only supports ARNs from Amazon AppFlow.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains additional resource information needed for specific datasets.</p>"
+            }
         },
         "com.amazonaws.databrew#MultiLine": {
             "type": "boolean"
@@ -4146,6 +4613,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>List of configurations for column evaluations. ColumnStatisticsConfigurations are used to \n            select evaluations and override parameters of evaluations for particular columns. When \n            ColumnStatisticsConfigurations is undefined,  the profile job will profile all supported columns \n            and run all supported  evaluations.\n        </p>"
                     }
+                },
+                "EntityDetectorConfiguration": {
+                    "target": "com.amazonaws.databrew#EntityDetectorConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration of entity detection for a profile job. When undefined, entity detection is disabled.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4322,6 +4795,15 @@
         },
         "com.amazonaws.databrew#PublishedBy": {
             "type": "string"
+        },
+        "com.amazonaws.databrew#QueryString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10000
+                }
+            }
         },
         "com.amazonaws.databrew#Recipe": {
             "type": "structure",
@@ -4575,6 +5057,186 @@
         "com.amazonaws.databrew#Result": {
             "type": "string"
         },
+        "com.amazonaws.databrew#RowRange": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.databrew#Rule": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.databrew#RuleName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Disabled": {
+                    "target": "com.amazonaws.databrew#Disabled",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that specifies whether the rule is disabled. Once a rule is \n            disabled, a profile job will not validate it during a job run. Default \n            value is false.</p>"
+                    }
+                },
+                "CheckExpression": {
+                    "target": "com.amazonaws.databrew#Expression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expression which includes column references, condition names followed by \n            variable references, possibly grouped and combined with other conditions. For \n            example, <code>(:col1 starts_with :prefix1 or :col1 starts_with :prefix2) and \n            (:col1 ends_with :suffix1 or :col1 ends_with :suffix2)</code>. Column and value \n            references are substitution variables that should start with the ':' symbol.\n            Depending on the context, substitution variables' values can be either an actual \n            value or a column name. These values are defined in the SubstitutionMap.\n            If a CheckExpression starts with a column reference, then ColumnSelectors in the \n            rule should be null. If ColumnSelectors has been defined, then there should be no\n            columnn reference in the left side of a condition, for example, \n            <code>is_between :val1 and :val2</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SubstitutionMap": {
+                    "target": "com.amazonaws.databrew#ValuesMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The map of substitution variable names to their values used in a check \n            expression. Variable names should start with a ':' (colon).  Variable values can either \n            be actual values or column names. To differentiate between the two, column names \n            should be enclosed in backticks, for example, <code>\":col1\": \"`Column A`\".</code>\n         </p>"
+                    }
+                },
+                "Threshold": {
+                    "target": "com.amazonaws.databrew#Threshold",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The threshold used with a non-aggregate check expression. Non-aggregate check expressions \n            will be applied to each row in a specific column, and the threshold will be used to determine \n            whether the validation succeeds.</p>"
+                    }
+                },
+                "ColumnSelectors": {
+                    "target": "com.amazonaws.databrew#ColumnSelectorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of column selectors. Selectors can be used to select columns using a name or regular \n            expression from the dataset. Rule will be applied to selected columns.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a single data quality requirement that should be validated in the \n            scope of this dataset.</p>"
+            }
+        },
+        "com.amazonaws.databrew#RuleCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.databrew#RuleList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.databrew#Rule"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.databrew#RuleName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.databrew#RulesetDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.databrew#RulesetItem": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.databrew#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the ruleset.</p>"
+                    }
+                },
+                "CreatedBy": {
+                    "target": "com.amazonaws.databrew#CreatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the user who created the ruleset.</p>"
+                    }
+                },
+                "CreateDate": {
+                    "target": "com.amazonaws.databrew#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the ruleset was created.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.databrew#RulesetDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the ruleset.</p>"
+                    }
+                },
+                "LastModifiedBy": {
+                    "target": "com.amazonaws.databrew#LastModifiedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the user who last modified the ruleset.</p>"
+                    }
+                },
+                "LastModifiedDate": {
+                    "target": "com.amazonaws.databrew#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The modification date and time of the ruleset.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.databrew#RulesetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the ruleset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceArn": {
+                    "target": "com.amazonaws.databrew#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the ruleset.</p>"
+                    }
+                },
+                "RuleCount": {
+                    "target": "com.amazonaws.databrew#RuleCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of rules that are defined in the ruleset.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.databrew#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata tags that have been applied to the ruleset.</p>"
+                    }
+                },
+                "TargetArn": {
+                    "target": "com.amazonaws.databrew#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a resource (dataset) that the ruleset is \n            associated with.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains metadata about the ruleset.</p>"
+            }
+        },
+        "com.amazonaws.databrew#RulesetItemList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.databrew#RulesetItem"
+            }
+        },
+        "com.amazonaws.databrew#RulesetName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
         "com.amazonaws.databrew#S3Location": {
             "type": "structure",
             "members": {
@@ -4608,7 +5270,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents options that specify how and where DataBrew writes the Amazon S3 output generated by \n            recipe jobs.</p>"
+                "smithy.api#documentation": "<p>Represents options that specify how and where DataBrew writes the Amazon S3 output \n            generated by recipe jobs.</p>"
             }
         },
         "com.amazonaws.databrew#Sample": {
@@ -5104,6 +5766,15 @@
                 }
             }
         },
+        "com.amazonaws.databrew#StartRowIndex": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
         "com.amazonaws.databrew#StartedBy": {
             "type": "string"
         },
@@ -5363,6 +6034,79 @@
                 }
             }
         },
+        "com.amazonaws.databrew#Threshold": {
+            "type": "structure",
+            "members": {
+                "Value": {
+                    "target": "com.amazonaws.databrew#ThresholdValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of a threshold.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.databrew#ThresholdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of a threshold. Used for comparison of an actual count of rows that satisfy the \n            rule to the threshold value.</p>"
+                    }
+                },
+                "Unit": {
+                    "target": "com.amazonaws.databrew#ThresholdUnit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unit of threshold value. Can be either a COUNT or PERCENTAGE of the full sample size \n            used for validation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The threshold used with a non-aggregate check expression. The non-aggregate check expression \n            will be applied to each row in a specific column. Then the threshold will be used to determine \n            whether the validation succeeds.</p>"
+            }
+        },
+        "com.amazonaws.databrew#ThresholdType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "GREATER_THAN_OR_EQUAL",
+                        "name": "GREATER_THAN_OR_EQUAL"
+                    },
+                    {
+                        "value": "LESS_THAN_OR_EQUAL",
+                        "name": "LESS_THAN_OR_EQUAL"
+                    },
+                    {
+                        "value": "GREATER_THAN",
+                        "name": "GREATER_THAN"
+                    },
+                    {
+                        "value": "LESS_THAN",
+                        "name": "LESS_THAN"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.databrew#ThresholdUnit": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "COUNT",
+                        "name": "COUNT"
+                    },
+                    {
+                        "value": "PERCENTAGE",
+                        "name": "PERCENTAGE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.databrew#ThresholdValue": {
+            "type": "double",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
         "com.amazonaws.databrew#Timeout": {
             "type": "integer",
             "traits": {
@@ -5587,6 +6331,12 @@
                     "target": "com.amazonaws.databrew#S3Location",
                     "traits": {
                         "smithy.api#required": {}
+                    }
+                },
+                "ValidationConfigurations": {
+                    "target": "com.amazonaws.databrew#ValidationConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of validation configurations that are applied to the profile job.</p>"
                     }
                 },
                 "RoleArn": {
@@ -5864,6 +6614,69 @@
                 }
             }
         },
+        "com.amazonaws.databrew#UpdateRuleset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.databrew#UpdateRulesetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.databrew#UpdateRulesetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.databrew#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.databrew#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates specified ruleset.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/rulesets/{Name}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.databrew#UpdateRulesetRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.databrew#RulesetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the ruleset to be updated.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.databrew#RulesetDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the ruleset.</p>"
+                    }
+                },
+                "Rules": {
+                    "target": "com.amazonaws.databrew#RuleList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of rules that are defined with the ruleset. A rule includes one or more \n            checks to be validated on a DataBrew dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.databrew#UpdateRulesetResponse": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.databrew#RulesetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the updated ruleset.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.databrew#UpdateSchedule": {
             "type": "operation",
             "input": {
@@ -5930,6 +6743,38 @@
                 }
             }
         },
+        "com.amazonaws.databrew#ValidationConfiguration": {
+            "type": "structure",
+            "members": {
+                "RulesetArn": {
+                    "target": "com.amazonaws.databrew#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the ruleset to be validated in the profile job. \n            The TargetArn of the selected ruleset should be the same as the Amazon Resource Name (ARN) of \n            the dataset that is associated with the profile job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ValidationMode": {
+                    "target": "com.amazonaws.databrew#ValidationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Mode of data quality validation. Default mode is “CHECK_ALL” which verifies all rules \n            defined in the selected ruleset.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for data quality validation. Used to select the Rulesets and Validation Mode \n            to be used in the profile job. When ValidationConfiguration is null, the profile \n            job will run without data quality validation.</p>"
+            }
+        },
+        "com.amazonaws.databrew#ValidationConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.databrew#ValidationConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
         "com.amazonaws.databrew#ValidationException": {
             "type": "structure",
             "members": {
@@ -5941,6 +6786,17 @@
                 "smithy.api#documentation": "<p>The input parameters for this request failed validation.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.databrew#ValidationMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CHECK_ALL",
+                        "name": "CHECK_ALL"
+                    }
+                ]
             }
         },
         "com.amazonaws.databrew#ValueReference": {
@@ -5982,6 +6838,24 @@
                     "target": "com.amazonaws.databrew#HiddenColumnList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of columns to hide in the view frame.</p>"
+                    }
+                },
+                "StartRowIndex": {
+                    "target": "com.amazonaws.databrew#StartRowIndex",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The starting index for the range of rows to return in the view frame.</p>"
+                    }
+                },
+                "RowRange": {
+                    "target": "com.amazonaws.databrew#RowRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of rows to include in the view frame, beginning with the \n            <code>StartRowIndex</code> value.</p>"
+                    }
+                },
+                "Analytics": {
+                    "target": "com.amazonaws.databrew#AnalyticsMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Controls if analytics computation is enabled or disabled. Enabled by default.</p>"
                     }
                 }
             },

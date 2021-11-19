@@ -7,6 +7,38 @@ import (
 	"time"
 )
 
+// Returns the number of open reactive insights, the number of open proactive
+// insights, and the number of metrics analyzed in your Amazon Web Services
+// account. Use these numbers to gauge the health of operations in your Amazon Web
+// Services account.
+type AccountHealth struct {
+
+	// The ID of the Amazon Web Services account.
+	AccountId *string
+
+	// Information about the health of the Amazon Web Services resources in your
+	// account, including the number of open proactive, open reactive insights, and the
+	// Mean Time to Recover (MTTR) of closed insights.
+	Insight *AccountInsightHealth
+
+	noSmithyDocumentSerde
+}
+
+// Information about the number of open reactive and proactive insights that can be
+// used to gauge the health of your system.
+type AccountInsightHealth struct {
+
+	// An integer that specifies the number of open proactive insights in your Amazon
+	// Web Services account.
+	OpenProactiveInsights int32
+
+	// An integer that specifies the number of open reactive insights in your Amazon
+	// Web Services account.
+	OpenReactiveInsights int32
+
+	noSmithyDocumentSerde
+}
+
 // A time range that specifies when DevOps Guru opens and then closes an anomaly.
 // This is different from AnomalyTimeRange, which specifies the time range when
 // DevOps Guru actually observes the anomalous behavior.
@@ -50,11 +82,11 @@ type AnomalyTimeRange struct {
 	noSmithyDocumentSerde
 }
 
-// Information about AWS CloudFormation stacks. You can use up to 500 stacks to
-// specify which AWS resources in your account to analyze. For more information,
-// see Stacks
+// Information about Amazon Web Services CloudFormation stacks. You can use up to
+// 500 stacks to specify which Amazon Web Services resources in your account to
+// analyze. For more information, see Stacks
 // (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html) in
-// the AWS CloudFormation User Guide.
+// the Amazon Web Services CloudFormation User Guide.
 type CloudFormationCollection struct {
 
 	// An array of CloudFormation stack names.
@@ -63,11 +95,11 @@ type CloudFormationCollection struct {
 	noSmithyDocumentSerde
 }
 
-// Information about AWS CloudFormation stacks. You can use up to 500 stacks to
-// specify which AWS resources in your account to analyze. For more information,
-// see Stacks
+// Information about Amazon Web Services CloudFormation stacks. You can use up to
+// 500 stacks to specify which Amazon Web Services resources in your account to
+// analyze. For more information, see Stacks
 // (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html) in
-// the AWS CloudFormation User Guide.
+// the Amazon Web Services CloudFormation User Guide.
 type CloudFormationCollectionFilter struct {
 
 	// An array of CloudFormation stack names.
@@ -76,13 +108,13 @@ type CloudFormationCollectionFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Information about an AWS CloudFormation stack used to create a monthly cost
-// estimate for DevOps Guru to analyze AWS resources. The maximum number of stacks
-// you can specify for a cost estimate is one. The estimate created is for the cost
-// to analyze the AWS resources defined by the stack. For more information, see
-// Stacks
+// Information about an Amazon Web Services CloudFormation stack used to create a
+// monthly cost estimate for DevOps Guru to analyze Amazon Web Services resources.
+// The maximum number of stacks you can specify for a cost estimate is one. The
+// estimate created is for the cost to analyze the Amazon Web Services resources
+// defined by the stack. For more information, see Stacks
 // (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html) in
-// the AWS CloudFormation User Guide.
+// the Amazon Web Services CloudFormation User Guide.
 type CloudFormationCostEstimationResourceCollectionFilter struct {
 
 	// An array of CloudFormation stack names. Its size is fixed at 1 item.
@@ -91,18 +123,32 @@ type CloudFormationCostEstimationResourceCollectionFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the health of AWS resources in your account that are specified
-// by an AWS CloudFormation stack.
+// Information about the health of Amazon Web Services resources in your account
+// that are specified by an Amazon Web Services CloudFormation stack.
 type CloudFormationHealth struct {
 
-	// Information about the health of the AWS resources in your account that are
-	// specified by an AWS CloudFormation stack, including the number of open
-	// proactive, open reactive insights, and the Mean Time to Recover (MTTR) of closed
-	// insights.
+	// Information about the health of the Amazon Web Services resources in your
+	// account that are specified by an Amazon Web Services CloudFormation stack,
+	// including the number of open proactive, open reactive insights, and the Mean
+	// Time to Recover (MTTR) of closed insights.
 	Insight *InsightHealth
 
 	// The name of the CloudFormation stack.
 	StackName *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the analyzed metrics that displayed anomalous
+// behavior.
+type CloudWatchMetricsDataSummary struct {
+
+	// This is enum of the status showing whether the metric value pair list has
+	// Partial or Complete data or there was an error.
+	StatusCode CloudWatchMetricDataStatusCode
+
+	// This is a list of cloudwatch metric values at given timestamp.
+	TimestampMetricValuePairList []TimestampMetricValuePair
 
 	noSmithyDocumentSerde
 }
@@ -112,6 +158,9 @@ type CloudWatchMetricsDetail struct {
 
 	// An array of CloudWatch dimensions associated with
 	Dimensions []CloudWatchMetricsDimension
+
+	// This object returns anomaly metric data.
+	MetricDataSummary *CloudWatchMetricsDataSummary
 
 	// The name of the CloudWatch metric.
 	MetricName *string
@@ -154,15 +203,15 @@ type CloudWatchMetricsDimension struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a filter used to specify which AWS resources are analyzed to
-// create a monthly DevOps Guru cost estimate. For more information, see Estimate
-// your Amazon DevOps Guru costs
+// Information about a filter used to specify which Amazon Web Services resources
+// are analyzed to create a monthly DevOps Guru cost estimate. For more
+// information, see Estimate your Amazon DevOps Guru costs
 // (https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html)
 // and Amazon DevOps Guru pricing (http://aws.amazon.com/devops-guru/pricing/).
 type CostEstimationResourceCollectionFilter struct {
 
-	// An object that specifies the CloudFormation stack that defines the AWS resources
-	// used to create a monthly estimate for DevOps Guru.
+	// An object that specifies the CloudFormation stack that defines the Amazon Web
+	// Services resources used to create a monthly estimate for DevOps Guru.
 	CloudFormation *CloudFormationCostEstimationResourceCollectionFilter
 
 	noSmithyDocumentSerde
@@ -193,9 +242,9 @@ type EndTimeRange struct {
 	noSmithyDocumentSerde
 }
 
-// An AWS resource event. AWS resource events and metrics are analyzed by DevOps
-// Guru to find anomalous behavior and provide recommendations to improve your
-// operational solutions.
+// An Amazon Web Services resource event. Amazon Web Services resource events and
+// metrics are analyzed by DevOps Guru to find anomalous behavior and provide
+// recommendations to improve your operational solutions.
 type Event struct {
 
 	// The source, AWS_CLOUD_TRAIL or AWS_CODE_DEPLOY, where DevOps Guru analysis found
@@ -206,7 +255,7 @@ type Event struct {
 	// as an infrastructure change, a deployment, or a schema change.
 	EventClass EventClass
 
-	// The AWS source that emitted the event.
+	// The Amazon Web Services source that emitted the event.
 	EventSource *string
 
 	// The ID of the event.
@@ -215,10 +264,11 @@ type Event struct {
 	// The name of the event.
 	Name *string
 
-	// A collection of AWS resources supported by DevOps Guru. The one type of AWS
-	// resource collection supported is AWS CloudFormation stacks. DevOps Guru can be
-	// configured to analyze only the AWS resources that are defined in the stacks. You
-	// can specify up to 500 AWS CloudFormation stacks.
+	// A collection of Amazon Web Services resources supported by DevOps Guru. The one
+	// type of Amazon Web Services resource collection supported is Amazon Web Services
+	// CloudFormation stacks. DevOps Guru can be configured to analyze only the Amazon
+	// Web Services resources that are defined in the stacks. You can specify up to 500
+	// Amazon Web Services CloudFormation stacks.
 	ResourceCollection *ResourceCollection
 
 	// An EventResource object that contains information about the resource that
@@ -231,9 +281,9 @@ type Event struct {
 	noSmithyDocumentSerde
 }
 
-// The AWS resource that emitted an event. AWS resource events and metrics are
-// analyzed by DevOps Guru to find anomalous behavior and provide recommendations
-// to improve your operational solutions.
+// The Amazon Web Services resource that emitted an event. Amazon Web Services
+// resource events and metrics are analyzed by DevOps Guru to find anomalous
+// behavior and provide recommendations to improve your operational solutions.
 type EventResource struct {
 
 	// The Amazon Resource Name (ARN) of the resource that emitted an event.
@@ -248,9 +298,10 @@ type EventResource struct {
 	noSmithyDocumentSerde
 }
 
-// The time range during which an AWS event occurred. AWS resource events and
-// metrics are analyzed by DevOps Guru to find anomalous behavior and provide
-// recommendations to improve your operational solutions.
+// The time range during which an Amazon Web Services event occurred. Amazon Web
+// Services resource events and metrics are analyzed by DevOps Guru to find
+// anomalous behavior and provide recommendations to improve your operational
+// solutions.
 type EventTimeRange struct {
 
 	// The time when the event started.
@@ -320,7 +371,7 @@ type ListEventsFilters struct {
 	// change, a deployment, or a schema change.
 	EventClass EventClass
 
-	// The AWS source that emitted the events you want to filter for.
+	// The Amazon Web Services source that emitted the events you want to filter for.
 	EventSource *string
 
 	// A time range during which you want the filtered events to have occurred.
@@ -329,10 +380,11 @@ type ListEventsFilters struct {
 	// An ID of an insight that is related to the events you want to filter for.
 	InsightId *string
 
-	// A collection of AWS resources supported by DevOps Guru. The one type of AWS
-	// resource collection supported is AWS CloudFormation stacks. DevOps Guru can be
-	// configured to analyze only the AWS resources that are defined in the stacks. You
-	// can specify up to 500 AWS CloudFormation stacks.
+	// A collection of Amazon Web Services resources supported by DevOps Guru. The one
+	// type of Amazon Web Services resource collection supported is Amazon Web Services
+	// CloudFormation stacks. DevOps Guru can be configured to analyze only the Amazon
+	// Web Services resources that are defined in the stacks. You can specify up to 500
+	// Amazon Web Services CloudFormation stacks.
 	ResourceCollection *ResourceCollection
 
 	noSmithyDocumentSerde
@@ -407,9 +459,10 @@ type ListInsightsStatusFilter struct {
 // your behalf to send notifications using Amazon SNS in your account. For more
 // information, see Permissions for cross account Amazon SNS topics
 // (https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html).
-// If you use an Amazon SNS topic that is encrypted by an AWS Key Management
-// Service customer-managed key (CMK), then you must add permissions to the CMK.
-// For more information, see Permissions for AWS KMS–encrypted Amazon SNS topics
+// If you use an Amazon SNS topic that is encrypted by an Amazon Web Services Key
+// Management Service customer-managed key (CMK), then you must add permissions to
+// the CMK. For more information, see Permissions for Amazon Web Services
+// KMS–encrypted Amazon SNS topics
 // (https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html).
 type NotificationChannel struct {
 
@@ -435,9 +488,10 @@ type NotificationChannelConfig struct {
 	// behalf to send notifications using Amazon SNS in your account. For more
 	// information, see Permissions for cross account Amazon SNS topics
 	// (https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html).
-	// If you use an Amazon SNS topic that is encrypted by an AWS Key Management
-	// Service customer-managed key (CMK), then you must add permissions to the CMK.
-	// For more information, see Permissions for AWS KMS–encrypted Amazon SNS topics
+	// If you use an Amazon SNS topic that is encrypted by an Amazon Web Services Key
+	// Management Service customer-managed key (CMK), then you must add permissions to
+	// the CMK. For more information, see Permissions for Amazon Web Services
+	// KMS–encrypted Amazon SNS topics
 	// (https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html).
 	//
 	// This member is required.
@@ -446,23 +500,23 @@ type NotificationChannelConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Information about whether DevOps Guru is configured to create an OpsItem in AWS
-// Systems Manager OpsCenter for each created insight.
+// Information about whether DevOps Guru is configured to create an OpsItem in
+// Amazon Web Services Systems Manager OpsCenter for each created insight.
 type OpsCenterIntegration struct {
 
-	// Specifies if DevOps Guru is enabled to create an AWS Systems Manager OpsItem for
-	// each created insight.
+	// Specifies if DevOps Guru is enabled to create an Amazon Web Services Systems
+	// Manager OpsItem for each created insight.
 	OptInStatus OptInStatus
 
 	noSmithyDocumentSerde
 }
 
-// Information about whether DevOps Guru is configured to create an OpsItem in AWS
-// Systems Manager OpsCenter for each created insight.
+// Information about whether DevOps Guru is configured to create an OpsItem in
+// Amazon Web Services Systems Manager OpsCenter for each created insight.
 type OpsCenterIntegrationConfig struct {
 
-	// Specifies if DevOps Guru is enabled to create an AWS Systems Manager OpsItem for
-	// each created insight.
+	// Specifies if DevOps Guru is enabled to create an Amazon Web Services Systems
+	// Manager OpsItem for each created insight.
 	OptInStatus OptInStatus
 
 	noSmithyDocumentSerde
@@ -511,10 +565,11 @@ type ProactiveAnomaly struct {
 	// insight is expected to occur.
 	PredictionTimeRange *PredictionTimeRange
 
-	// A collection of AWS resources supported by DevOps Guru. The one type of AWS
-	// resource collection supported is AWS CloudFormation stacks. DevOps Guru can be
-	// configured to analyze only the AWS resources that are defined in the stacks. You
-	// can specify up to 500 AWS CloudFormation stacks.
+	// A collection of Amazon Web Services resources supported by DevOps Guru. The one
+	// type of Amazon Web Services resource collection supported is Amazon Web Services
+	// CloudFormation stacks. DevOps Guru can be configured to analyze only the Amazon
+	// Web Services resources that are defined in the stacks. You can specify up to 500
+	// Amazon Web Services CloudFormation stacks.
 	ResourceCollection *ResourceCollection
 
 	// The severity of a proactive anomaly.
@@ -560,10 +615,11 @@ type ProactiveAnomalySummary struct {
 	// insight is expected to occur.
 	PredictionTimeRange *PredictionTimeRange
 
-	// A collection of AWS resources supported by DevOps Guru. The one type of AWS
-	// resource collection supported is AWS CloudFormation stacks. DevOps Guru can be
-	// configured to analyze only the AWS resources that are defined in the stacks. You
-	// can specify up to 500 AWS CloudFormation stacks.
+	// A collection of Amazon Web Services resources supported by DevOps Guru. The one
+	// type of Amazon Web Services resource collection supported is Amazon Web Services
+	// CloudFormation stacks. DevOps Guru can be configured to analyze only the Amazon
+	// Web Services resources that are defined in the stacks. You can specify up to 500
+	// Amazon Web Services CloudFormation stacks.
 	ResourceCollection *ResourceCollection
 
 	// The severity of the anomaly.
@@ -599,18 +655,19 @@ type ProactiveInsight struct {
 	// insight is expected to occur.
 	PredictionTimeRange *PredictionTimeRange
 
-	// A collection of AWS resources supported by DevOps Guru. The one type of AWS
-	// resource collection supported is AWS CloudFormation stacks. DevOps Guru can be
-	// configured to analyze only the AWS resources that are defined in the stacks. You
-	// can specify up to 500 AWS CloudFormation stacks.
+	// A collection of Amazon Web Services resources supported by DevOps Guru. The one
+	// type of Amazon Web Services resource collection supported is Amazon Web Services
+	// CloudFormation stacks. DevOps Guru can be configured to analyze only the Amazon
+	// Web Services resources that are defined in the stacks. You can specify up to 500
+	// Amazon Web Services CloudFormation stacks.
 	ResourceCollection *ResourceCollection
 
 	// The severity of the proactive insight.
 	Severity InsightSeverity
 
-	// The ID of the AWS System Manager OpsItem created for this insight. You must
-	// enable the creation of OpstItems insights before they are created for each
-	// insight.
+	// The ID of the Amazon Web Services System Manager OpsItem created for this
+	// insight. You must enable the creation of OpstItems insights before they are
+	// created for each insight.
 	SsmOpsItemId *string
 
 	// The status of the proactive insight.
@@ -636,19 +693,62 @@ type ProactiveInsightSummary struct {
 	// insight is expected to occur.
 	PredictionTimeRange *PredictionTimeRange
 
-	// A collection of AWS resources supported by DevOps Guru. The one type of AWS
-	// resource collection supported is AWS CloudFormation stacks. DevOps Guru can be
-	// configured to analyze only the AWS resources that are defined in the stacks. You
-	// can specify up to 500 AWS CloudFormation stacks.
+	// A collection of Amazon Web Services resources supported by DevOps Guru. The one
+	// type of Amazon Web Services resource collection supported is Amazon Web Services
+	// CloudFormation stacks. DevOps Guru can be configured to analyze only the Amazon
+	// Web Services resources that are defined in the stacks. You can specify up to 500
+	// Amazon Web Services CloudFormation stacks.
 	ResourceCollection *ResourceCollection
 
-	// A collection of the names of AWS services.
+	// A collection of the names of Amazon Web Services services.
 	ServiceCollection *ServiceCollection
 
 	// The severity of the proactive insight.
 	Severity InsightSeverity
 
 	// The status of the proactive insight.
+	Status InsightStatus
+
+	noSmithyDocumentSerde
+}
+
+// Details about a proactive insight. This object is returned by DescribeInsight.
+type ProactiveOrganizationInsightSummary struct {
+
+	// The ID of the Amazon Web Services account.
+	AccountId *string
+
+	// The ID of the insight summary.
+	Id *string
+
+	// A time ranged that specifies when the observed behavior in an insight started
+	// and ended.
+	InsightTimeRange *InsightTimeRange
+
+	// The name of the insight summary.
+	Name *string
+
+	// The ID of the organizational unit.
+	OrganizationalUnitId *string
+
+	// The time range during which anomalous behavior in a proactive anomaly or an
+	// insight is expected to occur.
+	PredictionTimeRange *PredictionTimeRange
+
+	// A collection of Amazon Web Services resources supported by DevOps Guru. The one
+	// type of Amazon Web Services resource collection supported is Amazon Web Services
+	// CloudFormation stacks. DevOps Guru can be configured to analyze only the Amazon
+	// Web Services resources that are defined in the stacks. You can specify up to 500
+	// Amazon Web Services CloudFormation stacks.
+	ResourceCollection *ResourceCollection
+
+	// A collection of the names of Amazon Web Services services.
+	ServiceCollection *ServiceCollection
+
+	// An array of severity values used to search for insights.
+	Severity InsightSeverity
+
+	// An array of status values used to search for insights.
 	Status InsightStatus
 
 	noSmithyDocumentSerde
@@ -673,10 +773,11 @@ type ReactiveAnomaly struct {
 	// The ID of the reactive anomaly.
 	Id *string
 
-	// A collection of AWS resources supported by DevOps Guru. The one type of AWS
-	// resource collection supported is AWS CloudFormation stacks. DevOps Guru can be
-	// configured to analyze only the AWS resources that are defined in the stacks. You
-	// can specify up to 500 AWS CloudFormation stacks.
+	// A collection of Amazon Web Services resources supported by DevOps Guru. The one
+	// type of Amazon Web Services resource collection supported is Amazon Web Services
+	// CloudFormation stacks. DevOps Guru can be configured to analyze only the Amazon
+	// Web Services resources that are defined in the stacks. You can specify up to 500
+	// Amazon Web Services CloudFormation stacks.
 	ResourceCollection *ResourceCollection
 
 	// The severity of the anomaly.
@@ -711,10 +812,11 @@ type ReactiveAnomalySummary struct {
 	// The ID of the reactive anomaly.
 	Id *string
 
-	// A collection of AWS resources supported by DevOps Guru. The one type of AWS
-	// resource collection supported is AWS CloudFormation stacks. DevOps Guru can be
-	// configured to analyze only the AWS resources that are defined in the stacks. You
-	// can specify up to 500 AWS CloudFormation stacks.
+	// A collection of Amazon Web Services resources supported by DevOps Guru. The one
+	// type of Amazon Web Services resource collection supported is Amazon Web Services
+	// CloudFormation stacks. DevOps Guru can be configured to analyze only the Amazon
+	// Web Services resources that are defined in the stacks. You can specify up to 500
+	// Amazon Web Services CloudFormation stacks.
 	ResourceCollection *ResourceCollection
 
 	// The severity of the reactive anomaly.
@@ -743,18 +845,19 @@ type ReactiveInsight struct {
 	// The name of a reactive insight.
 	Name *string
 
-	// A collection of AWS resources supported by DevOps Guru. The one type of AWS
-	// resource collection supported is AWS CloudFormation stacks. DevOps Guru can be
-	// configured to analyze only the AWS resources that are defined in the stacks. You
-	// can specify up to 500 AWS CloudFormation stacks.
+	// A collection of Amazon Web Services resources supported by DevOps Guru. The one
+	// type of Amazon Web Services resource collection supported is Amazon Web Services
+	// CloudFormation stacks. DevOps Guru can be configured to analyze only the Amazon
+	// Web Services resources that are defined in the stacks. You can specify up to 500
+	// Amazon Web Services CloudFormation stacks.
 	ResourceCollection *ResourceCollection
 
 	// The severity of a reactive insight.
 	Severity InsightSeverity
 
-	// The ID of the AWS System Manager OpsItem created for this insight. You must
-	// enable the creation of OpstItems insights before they are created for each
-	// insight.
+	// The ID of the Amazon Web Services System Manager OpsItem created for this
+	// insight. You must enable the creation of OpstItems insights before they are
+	// created for each insight.
 	SsmOpsItemId *string
 
 	// The status of a reactive insight.
@@ -777,19 +880,59 @@ type ReactiveInsightSummary struct {
 	// The name of a reactive insight.
 	Name *string
 
-	// A collection of AWS resources supported by DevOps Guru. The one type of AWS
-	// resource collection supported is AWS CloudFormation stacks. DevOps Guru can be
-	// configured to analyze only the AWS resources that are defined in the stacks. You
-	// can specify up to 500 AWS CloudFormation stacks.
+	// A collection of Amazon Web Services resources supported by DevOps Guru. The one
+	// type of Amazon Web Services resource collection supported is Amazon Web Services
+	// CloudFormation stacks. DevOps Guru can be configured to analyze only the Amazon
+	// Web Services resources that are defined in the stacks. You can specify up to 500
+	// Amazon Web Services CloudFormation stacks.
 	ResourceCollection *ResourceCollection
 
-	// A collection of the names of AWS services.
+	// A collection of the names of Amazon Web Services services.
 	ServiceCollection *ServiceCollection
 
 	// The severity of a reactive insight.
 	Severity InsightSeverity
 
 	// The status of a reactive insight.
+	Status InsightStatus
+
+	noSmithyDocumentSerde
+}
+
+// Information about a reactive insight. This object is returned by
+// DescribeInsight.
+type ReactiveOrganizationInsightSummary struct {
+
+	// The ID of the Amazon Web Services account.
+	AccountId *string
+
+	// The ID of the insight summary.
+	Id *string
+
+	// A time ranged that specifies when the observed behavior in an insight started
+	// and ended.
+	InsightTimeRange *InsightTimeRange
+
+	// The name of the insight summary.
+	Name *string
+
+	// The ID of the organizational unit.
+	OrganizationalUnitId *string
+
+	// A collection of Amazon Web Services resources supported by DevOps Guru. The one
+	// type of Amazon Web Services resource collection supported is Amazon Web Services
+	// CloudFormation stacks. DevOps Guru can be configured to analyze only the Amazon
+	// Web Services resources that are defined in the stacks. You can specify up to 500
+	// Amazon Web Services CloudFormation stacks.
+	ResourceCollection *ResourceCollection
+
+	// A collection of the names of Amazon Web Services services.
+	ServiceCollection *ServiceCollection
+
+	// An array of severity values used to search for insights.
+	Severity InsightSeverity
+
+	// An array of status values used to search for insights.
 	Status InsightStatus
 
 	noSmithyDocumentSerde
@@ -879,15 +1022,16 @@ type RecommendationRelatedEvent struct {
 	// The name of the event. This corresponds to the Name field in an Event object.
 	Name *string
 
-	// A ResourceCollection object that contains arrays of the names of AWS
-	// CloudFormation stacks. You can specify up to 500 AWS CloudFormation stacks.
+	// A ResourceCollection object that contains arrays of the names of Amazon Web
+	// Services CloudFormation stacks. You can specify up to 500 Amazon Web Services
+	// CloudFormation stacks.
 	Resources []RecommendationRelatedEventResource
 
 	noSmithyDocumentSerde
 }
 
-// Information about an AWS resource that emitted and event that is related to a
-// recommendation in an insight.
+// Information about an Amazon Web Services resource that emitted and event that is
+// related to a recommendation in an insight.
 type RecommendationRelatedEventResource struct {
 
 	// The name of the resource that emitted the event. This corresponds to the Name
@@ -901,29 +1045,30 @@ type RecommendationRelatedEventResource struct {
 	noSmithyDocumentSerde
 }
 
-// A collection of AWS resources supported by DevOps Guru. The one type of AWS
-// resource collection supported is AWS CloudFormation stacks. DevOps Guru can be
-// configured to analyze only the AWS resources that are defined in the stacks. You
-// can specify up to 500 AWS CloudFormation stacks.
+// A collection of Amazon Web Services resources supported by DevOps Guru. The one
+// type of Amazon Web Services resource collection supported is Amazon Web Services
+// CloudFormation stacks. DevOps Guru can be configured to analyze only the Amazon
+// Web Services resources that are defined in the stacks. You can specify up to 500
+// Amazon Web Services CloudFormation stacks.
 type ResourceCollection struct {
 
-	// An array of the names of AWS CloudFormation stacks. The stacks define AWS
-	// resources that DevOps Guru analyzes. You can specify up to 500 AWS
-	// CloudFormation stacks.
+	// An array of the names of Amazon Web Services CloudFormation stacks. The stacks
+	// define Amazon Web Services resources that DevOps Guru analyzes. You can specify
+	// up to 500 Amazon Web Services CloudFormation stacks.
 	CloudFormation *CloudFormationCollection
 
 	noSmithyDocumentSerde
 }
 
-// Information about a filter used to specify which AWS resources are analyzed for
-// anomalous behavior by DevOps Guru.
+// Information about a filter used to specify which Amazon Web Services resources
+// are analyzed for anomalous behavior by DevOps Guru.
 type ResourceCollectionFilter struct {
 
-	// Information about AWS CloudFormation stacks. You can use up to 500 stacks to
-	// specify which AWS resources in your account to analyze. For more information,
-	// see Stacks
+	// Information about Amazon Web Services CloudFormation stacks. You can use up to
+	// 500 stacks to specify which Amazon Web Services resources in your account to
+	// analyze. For more information, see Stacks
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html) in
-	// the AWS CloudFormation User Guide.
+	// the Amazon Web Services CloudFormation User Guide.
 	CloudFormation *CloudFormationCollectionFilter
 
 	noSmithyDocumentSerde
@@ -933,13 +1078,14 @@ type ResourceCollectionFilter struct {
 // used to search for insights.
 type SearchInsightsFilters struct {
 
-	// A collection of AWS resources supported by DevOps Guru. The one type of AWS
-	// resource collection supported is AWS CloudFormation stacks. DevOps Guru can be
-	// configured to analyze only the AWS resources that are defined in the stacks. You
-	// can specify up to 500 AWS CloudFormation stacks.
+	// A collection of Amazon Web Services resources supported by DevOps Guru. The one
+	// type of Amazon Web Services resource collection supported is Amazon Web Services
+	// CloudFormation stacks. DevOps Guru can be configured to analyze only the Amazon
+	// Web Services resources that are defined in the stacks. You can specify up to 500
+	// Amazon Web Services CloudFormation stacks.
 	ResourceCollection *ResourceCollection
 
-	// A collection of the names of AWS services.
+	// A collection of the names of Amazon Web Services services.
 	ServiceCollection *ServiceCollection
 
 	// An array of severity values used to search for insights.
@@ -951,55 +1097,80 @@ type SearchInsightsFilters struct {
 	noSmithyDocumentSerde
 }
 
-// A collection of the names of AWS services.
+// Filters you can use to specify which events are returned when ListEvents is
+// called.
+type SearchOrganizationInsightsFilters struct {
+
+	// A collection of Amazon Web Services resources supported by DevOps Guru. The one
+	// type of Amazon Web Services resource collection supported is Amazon Web Services
+	// CloudFormation stacks. DevOps Guru can be configured to analyze only the Amazon
+	// Web Services resources that are defined in the stacks. You can specify up to 500
+	// Amazon Web Services CloudFormation stacks.
+	ResourceCollection *ResourceCollection
+
+	// A collection of the names of Amazon Web Services services.
+	ServiceCollection *ServiceCollection
+
+	// An array of severity values used to search for insights.
+	Severities []InsightSeverity
+
+	// An array of status values used to search for insights.
+	Statuses []InsightStatus
+
+	noSmithyDocumentSerde
+}
+
+// A collection of the names of Amazon Web Services services.
 type ServiceCollection struct {
 
-	// An array of strings that each specifies the name of an AWS service.
+	// An array of strings that each specifies the name of an Amazon Web Services
+	// service.
 	ServiceNames []ServiceName
 
 	noSmithyDocumentSerde
 }
 
-// Represents the health of an AWS service.
+// Represents the health of an Amazon Web Services service.
 type ServiceHealth struct {
 
-	// Represents the health of an AWS service. This is a ServiceInsightHealth that
-	// contains the number of open proactive and reactive insights for this service.
+	// Represents the health of an Amazon Web Services service. This is a
+	// ServiceInsightHealth that contains the number of open proactive and reactive
+	// insights for this service.
 	Insight *ServiceInsightHealth
 
-	// The name of the AWS service.
+	// The name of the Amazon Web Services service.
 	ServiceName ServiceName
 
 	noSmithyDocumentSerde
 }
 
-// Contains the number of open proactive and reactive insights in an analyzed AWS
-// service.
+// Contains the number of open proactive and reactive insights in an analyzed
+// Amazon Web Services service.
 type ServiceInsightHealth struct {
 
-	// The number of open proactive insights in the AWS service
+	// The number of open proactive insights in the Amazon Web Services service
 	OpenProactiveInsights int32
 
-	// The number of open reactive insights in the AWS service
+	// The number of open reactive insights in the Amazon Web Services service
 	OpenReactiveInsights int32
 
 	noSmithyDocumentSerde
 }
 
-// Information about the integration of DevOps Guru with another AWS service, such
-// as AWS Systems Manager.
+// Information about the integration of DevOps Guru with another Amazon Web
+// Services service, such as Amazon Web Services Systems Manager.
 type ServiceIntegrationConfig struct {
 
-	// Information about whether DevOps Guru is configured to create an OpsItem in AWS
-	// Systems Manager OpsCenter for each created insight.
+	// Information about whether DevOps Guru is configured to create an OpsItem in
+	// Amazon Web Services Systems Manager OpsCenter for each created insight.
 	OpsCenter *OpsCenterIntegration
 
 	noSmithyDocumentSerde
 }
 
 // An object that contains information about the estimated monthly cost to analyze
-// an AWS resource. For more information, see Estimate your Amazon DevOps Guru
-// costs
+// an Amazon Web Services resource. For more information, see Estimate your Amazon
+// DevOps Guru costs
 // (https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html)
 // and Amazon DevOps Guru pricing (http://aws.amazon.com/devops-guru/pricing/).
 type ServiceResourceCost struct {
@@ -1014,11 +1185,11 @@ type ServiceResourceCost struct {
 
 	// The state of the resource. The resource is ACTIVE if it produces metrics,
 	// events, or logs within an hour, otherwise it is INACTIVE. You pay for the number
-	// of active AWS resource hours analyzed for each resource. Inactive resources are
-	// not charged.
+	// of active Amazon Web Services resource hours analyzed for each resource.
+	// Inactive resources are not charged.
 	State CostEstimationServiceResourceState
 
-	// The type of the AWS resource.
+	// The type of the Amazon Web Services resource.
 	Type *string
 
 	// The price per hour to analyze the resources in the service. For more
@@ -1037,9 +1208,10 @@ type ServiceResourceCost struct {
 // in your account. For more information, see Permissions for cross account Amazon
 // SNS topics
 // (https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html).
-// If you use an Amazon SNS topic that is encrypted by an AWS Key Management
-// Service customer-managed key (CMK), then you must add permissions to the CMK.
-// For more information, see Permissions for AWS KMS–encrypted Amazon SNS topics
+// If you use an Amazon SNS topic that is encrypted by an Amazon Web Services Key
+// Management Service customer-managed key (CMK), then you must add permissions to
+// the CMK. For more information, see Permissions for Amazon Web Services
+// KMS–encrypted Amazon SNS topics
 // (https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html).
 type SnsChannelConfig struct {
 
@@ -1061,33 +1233,47 @@ type StartTimeRange struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the names of AWS CloudFormation stacks used to update a collection of
-// stacks. You can specify up to 500 AWS CloudFormation stacks.
+// A pair that contains metric values at the respective timestamp.
+type TimestampMetricValuePair struct {
+
+	// Value of the anomalous metric data point at respective Timestamp.
+	MetricValue *float64
+
+	// A Timestamp that specifies the time the event occurred.
+	Timestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains the names of Amazon Web Services CloudFormation stacks used to update a
+// collection of stacks. You can specify up to 500 Amazon Web Services
+// CloudFormation stacks.
 type UpdateCloudFormationCollectionFilter struct {
 
-	// An array of the names of the AWS CloudFormation stacks to update. You can
-	// specify up to 500 AWS CloudFormation stacks.
+	// An array of the names of the Amazon Web Services CloudFormation stacks to
+	// update. You can specify up to 500 Amazon Web Services CloudFormation stacks.
 	StackNames []string
 
 	noSmithyDocumentSerde
 }
 
-// Contains information used to update a collection of AWS resources.
+// Contains information used to update a collection of Amazon Web Services
+// resources.
 type UpdateResourceCollectionFilter struct {
 
-	// An collection of AWS CloudFormation stacks. You can specify up to 500 AWS
-	// CloudFormation stacks.
+	// An collection of Amazon Web Services CloudFormation stacks. You can specify up
+	// to 500 Amazon Web Services CloudFormation stacks.
 	CloudFormation *UpdateCloudFormationCollectionFilter
 
 	noSmithyDocumentSerde
 }
 
-// Information about updating the integration status of an AWS service, such as AWS
-// Systems Manager, with DevOps Guru.
+// Information about updating the integration status of an Amazon Web Services
+// service, such as Amazon Web Services Systems Manager, with DevOps Guru.
 type UpdateServiceIntegrationConfig struct {
 
-	// Information about whether DevOps Guru is configured to create an OpsItem in AWS
-	// Systems Manager OpsCenter for each created insight.
+	// Information about whether DevOps Guru is configured to create an OpsItem in
+	// Amazon Web Services Systems Manager OpsCenter for each created insight.
 	OpsCenter *OpsCenterIntegrationConfig
 
 	noSmithyDocumentSerde

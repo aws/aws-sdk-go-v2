@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpCreateAutoPredictor struct {
+}
+
+func (*validateOpCreateAutoPredictor) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAutoPredictor) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAutoPredictorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAutoPredictorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDatasetGroup struct {
 }
 
@@ -65,6 +85,46 @@ func (m *validateOpCreateDataset) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateDatasetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateExplainabilityExport struct {
+}
+
+func (*validateOpCreateExplainabilityExport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateExplainabilityExport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateExplainabilityExportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateExplainabilityExportInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateExplainability struct {
+}
+
+func (*validateOpCreateExplainability) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateExplainability) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateExplainabilityInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateExplainabilityInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -210,6 +270,46 @@ func (m *validateOpDeleteDataset) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteExplainabilityExport struct {
+}
+
+func (*validateOpDeleteExplainabilityExport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteExplainabilityExport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteExplainabilityExportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteExplainabilityExportInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteExplainability struct {
+}
+
+func (*validateOpDeleteExplainability) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteExplainability) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteExplainabilityInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteExplainabilityInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteForecastExportJob struct {
 }
 
@@ -310,6 +410,26 @@ func (m *validateOpDeleteResourceTree) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeAutoPredictor struct {
+}
+
+func (*validateOpDescribeAutoPredictor) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAutoPredictor) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAutoPredictorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAutoPredictorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeDatasetGroup struct {
 }
 
@@ -365,6 +485,46 @@ func (m *validateOpDescribeDataset) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeDatasetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeExplainabilityExport struct {
+}
+
+func (*validateOpDescribeExplainabilityExport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeExplainabilityExport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeExplainabilityExportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeExplainabilityExportInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeExplainability struct {
+}
+
+func (*validateOpDescribeExplainability) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeExplainability) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeExplainabilityInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeExplainabilityInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -485,6 +645,46 @@ func (m *validateOpListDatasetImportJobs) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListDatasetImportJobsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListExplainabilities struct {
+}
+
+func (*validateOpListExplainabilities) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListExplainabilities) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListExplainabilitiesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListExplainabilitiesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListExplainabilityExports struct {
+}
+
+func (*validateOpListExplainabilityExports) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListExplainabilityExports) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListExplainabilityExportsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListExplainabilityExportsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -670,6 +870,10 @@ func (m *validateOpUpdateDatasetGroup) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpCreateAutoPredictorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAutoPredictor{}, middleware.After)
+}
+
 func addOpCreateDatasetGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDatasetGroup{}, middleware.After)
 }
@@ -680,6 +884,14 @@ func addOpCreateDatasetImportJobValidationMiddleware(stack *middleware.Stack) er
 
 func addOpCreateDatasetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDataset{}, middleware.After)
+}
+
+func addOpCreateExplainabilityExportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateExplainabilityExport{}, middleware.After)
+}
+
+func addOpCreateExplainabilityValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateExplainability{}, middleware.After)
 }
 
 func addOpCreateForecastExportJobValidationMiddleware(stack *middleware.Stack) error {
@@ -710,6 +922,14 @@ func addOpDeleteDatasetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDataset{}, middleware.After)
 }
 
+func addOpDeleteExplainabilityExportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteExplainabilityExport{}, middleware.After)
+}
+
+func addOpDeleteExplainabilityValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteExplainability{}, middleware.After)
+}
+
 func addOpDeleteForecastExportJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteForecastExportJob{}, middleware.After)
 }
@@ -730,6 +950,10 @@ func addOpDeleteResourceTreeValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpDeleteResourceTree{}, middleware.After)
 }
 
+func addOpDescribeAutoPredictorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAutoPredictor{}, middleware.After)
+}
+
 func addOpDescribeDatasetGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeDatasetGroup{}, middleware.After)
 }
@@ -740,6 +964,14 @@ func addOpDescribeDatasetImportJobValidationMiddleware(stack *middleware.Stack) 
 
 func addOpDescribeDatasetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeDataset{}, middleware.After)
+}
+
+func addOpDescribeExplainabilityExportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeExplainabilityExport{}, middleware.After)
+}
+
+func addOpDescribeExplainabilityValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeExplainability{}, middleware.After)
 }
 
 func addOpDescribeForecastExportJobValidationMiddleware(stack *middleware.Stack) error {
@@ -764,6 +996,14 @@ func addOpGetAccuracyMetricsValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpListDatasetImportJobsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListDatasetImportJobs{}, middleware.After)
+}
+
+func addOpListExplainabilitiesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListExplainabilities{}, middleware.After)
+}
+
+func addOpListExplainabilityExportsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListExplainabilityExports{}, middleware.After)
 }
 
 func addOpListForecastExportJobsValidationMiddleware(stack *middleware.Stack) error {
@@ -800,6 +1040,73 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateDatasetGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDatasetGroup{}, middleware.After)
+}
+
+func validateAdditionalDataset(v *types.AdditionalDataset) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AdditionalDataset"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAdditionalDatasets(v []types.AdditionalDataset) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AdditionalDatasets"}
+	for i := range v {
+		if err := validateAdditionalDataset(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAttributeConfig(v *types.AttributeConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AttributeConfig"}
+	if v.AttributeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttributeName"))
+	}
+	if v.Transformations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Transformations"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAttributeConfigs(v []types.AttributeConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AttributeConfigs"}
+	for i := range v {
+		if err := validateAttributeConfig(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateCategoricalParameterRange(v *types.CategoricalParameterRange) error {
@@ -875,6 +1182,31 @@ func validateContinuousParameterRanges(v []types.ContinuousParameterRange) error
 	}
 }
 
+func validateDataConfig(v *types.DataConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataConfig"}
+	if v.DatasetGroupArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetGroupArn"))
+	}
+	if v.AttributeConfigs != nil {
+		if err := validateAttributeConfigs(v.AttributeConfigs); err != nil {
+			invalidParams.AddNested("AttributeConfigs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AdditionalDatasets != nil {
+		if err := validateAdditionalDatasets(v.AdditionalDatasets); err != nil {
+			invalidParams.AddNested("AdditionalDatasets", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDataDestination(v *types.DataDestination) error {
 	if v == nil {
 		return nil
@@ -923,6 +1255,24 @@ func validateEncryptionConfig(v *types.EncryptionConfig) error {
 	}
 	if v.KMSKeyArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("KMSKeyArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateExplainabilityConfig(v *types.ExplainabilityConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExplainabilityConfig"}
+	if len(v.TimeSeriesGranularity) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TimeSeriesGranularity"))
+	}
+	if len(v.TimePointGranularity) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TimePointGranularity"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1248,6 +1598,36 @@ func validateTags(v []types.Tag) error {
 	}
 }
 
+func validateOpCreateAutoPredictorInput(v *CreateAutoPredictorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAutoPredictorInput"}
+	if v.PredictorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PredictorName"))
+	}
+	if v.DataConfig != nil {
+		if err := validateDataConfig(v.DataConfig); err != nil {
+			invalidParams.AddNested("DataConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EncryptionConfig != nil {
+		if err := validateEncryptionConfig(v.EncryptionConfig); err != nil {
+			invalidParams.AddNested("EncryptionConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateDatasetGroupInput(v *CreateDatasetGroupInput) error {
 	if v == nil {
 		return nil
@@ -1321,6 +1701,71 @@ func validateOpCreateDatasetInput(v *CreateDatasetInput) error {
 	if v.EncryptionConfig != nil {
 		if err := validateEncryptionConfig(v.EncryptionConfig); err != nil {
 			invalidParams.AddNested("EncryptionConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateExplainabilityExportInput(v *CreateExplainabilityExportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateExplainabilityExportInput"}
+	if v.ExplainabilityExportName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExplainabilityExportName"))
+	}
+	if v.ExplainabilityArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExplainabilityArn"))
+	}
+	if v.Destination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
+	} else if v.Destination != nil {
+		if err := validateDataDestination(v.Destination); err != nil {
+			invalidParams.AddNested("Destination", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateExplainabilityInput(v *CreateExplainabilityInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateExplainabilityInput"}
+	if v.ExplainabilityName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExplainabilityName"))
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.ExplainabilityConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExplainabilityConfig"))
+	} else if v.ExplainabilityConfig != nil {
+		if err := validateExplainabilityConfig(v.ExplainabilityConfig); err != nil {
+			invalidParams.AddNested("ExplainabilityConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DataSource != nil {
+		if err := validateDataSource(v.DataSource); err != nil {
+			invalidParams.AddNested("DataSource", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Tags != nil {
@@ -1510,6 +1955,36 @@ func validateOpDeleteDatasetInput(v *DeleteDatasetInput) error {
 	}
 }
 
+func validateOpDeleteExplainabilityExportInput(v *DeleteExplainabilityExportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteExplainabilityExportInput"}
+	if v.ExplainabilityExportArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExplainabilityExportArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteExplainabilityInput(v *DeleteExplainabilityInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteExplainabilityInput"}
+	if v.ExplainabilityArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExplainabilityArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteForecastExportJobInput(v *DeleteForecastExportJobInput) error {
 	if v == nil {
 		return nil
@@ -1585,6 +2060,21 @@ func validateOpDeleteResourceTreeInput(v *DeleteResourceTreeInput) error {
 	}
 }
 
+func validateOpDescribeAutoPredictorInput(v *DescribeAutoPredictorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAutoPredictorInput"}
+	if v.PredictorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PredictorArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeDatasetGroupInput(v *DescribeDatasetGroupInput) error {
 	if v == nil {
 		return nil
@@ -1622,6 +2112,36 @@ func validateOpDescribeDatasetInput(v *DescribeDatasetInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeDatasetInput"}
 	if v.DatasetArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatasetArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeExplainabilityExportInput(v *DescribeExplainabilityExportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeExplainabilityExportInput"}
+	if v.ExplainabilityExportArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExplainabilityExportArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeExplainabilityInput(v *DescribeExplainabilityInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeExplainabilityInput"}
+	if v.ExplainabilityArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExplainabilityArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1710,6 +2230,40 @@ func validateOpListDatasetImportJobsInput(v *ListDatasetImportJobsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListDatasetImportJobsInput"}
+	if v.Filters != nil {
+		if err := validateFilters(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListExplainabilitiesInput(v *ListExplainabilitiesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListExplainabilitiesInput"}
+	if v.Filters != nil {
+		if err := validateFilters(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListExplainabilityExportsInput(v *ListExplainabilityExportsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListExplainabilityExportsInput"}
 	if v.Filters != nil {
 		if err := validateFilters(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))

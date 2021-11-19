@@ -105,8 +105,8 @@ type StartDeploymentOutput struct {
 	// displayed first.
 	EventLog []types.DeploymentEvent
 
-	// The amount of time AppConfig monitored for alarms before considering the
-	// deployment to be complete and no longer eligible for automatic roll back.
+	// The amount of time that AppConfig monitored for alarms before considering the
+	// deployment to be complete and no longer eligible for automatic rollback.
 	FinalBakeTimeInMinutes int32
 
 	// The percentage of targets to receive a deployed configuration during each

@@ -12,8 +12,10 @@ import (
 	"time"
 )
 
-// Creates a place index resource in your AWS account, which supports functions
-// with geospatial data sourced from your chosen data provider.
+// Creates a place index resource in your AWS account. Use a place index resource
+// to geocode addresses and other text queries by using the SearchPlaceIndexForText
+// operation, and reverse geocode coordinates by using the
+// SearchPlaceIndexForPosition operation.
 func (c *Client) CreatePlaceIndex(ctx context.Context, params *CreatePlaceIndexInput, optFns ...func(*Options)) (*CreatePlaceIndexOutput, error) {
 	if params == nil {
 		params = &CreatePlaceIndexInput{}
@@ -31,11 +33,12 @@ func (c *Client) CreatePlaceIndex(ctx context.Context, params *CreatePlaceIndexI
 
 type CreatePlaceIndexInput struct {
 
-	// Specifies the data provider of geospatial data. This field is case-sensitive.
-	// Enter the valid values as shown. For example, entering HERE returns an error.
-	// Valid values include:
+	// Specifies the geospatial data provider for the new place index. This field is
+	// case-sensitive. Enter the valid values as shown. For example, entering HERE
+	// returns an error. Valid values include:
 	//
-	// * Esri – For additional information about Esri
+	// * Esri – For additional information
+	// about Esri
 	// (https://docs.aws.amazon.com/location/latest/developerguide/esri.html)'s
 	// coverage in your region of interest, see Esri details on geocoding coverage
 	// (https://developers.arcgis.com/rest/geocode/api-reference/geocode-coverage.htm).
@@ -45,7 +48,7 @@ type CreatePlaceIndexInput struct {
 	// (https://docs.aws.amazon.com/location/latest/developerguide/HERE.html)' coverage
 	// in your region of interest, see HERE details on goecoding coverage
 	// (https://developer.here.com/documentation/geocoder/dev_guide/topics/coverage-geocoder.html).
-	// Place index resources using HERE Technologies as a data provider can't store
+	// If you specify HERE Technologies (Here) as the data provider, you may not store
 	// results
 	// (https://docs.aws.amazon.com/location-places/latest/APIReference/API_DataSourceConfiguration.html)
 	// for locations in Japan. For more information, see the AWS Service Terms
@@ -87,22 +90,25 @@ type CreatePlaceIndexInput struct {
 	Description *string
 
 	// Applies one or more tags to the place index resource. A tag is a key-value pair
-	// helps manage, identify, search, and filter your resources by labelling them.
-	// Format: "key" : "value" Restrictions:
+	// that helps you manage, identify, search, and filter your resources. Format:
+	// "key" : "value" Restrictions:
 	//
-	// * Maximum 50 tags per resource
+	// * Maximum 50 tags per resource.
 	//
-	// * Each
-	// resource tag must be unique with a maximum of one value.
+	// * Each tag key
+	// must be unique and must have exactly one associated value.
 	//
-	// * Maximum key length:
-	// 128 Unicode characters in UTF-8
+	// * Maximum key
+	// length: 128 Unicode characters in UTF-8.
 	//
-	// * Maximum value length: 256 Unicode characters
-	// in UTF-8
+	// * Maximum value length: 256 Unicode
+	// characters in UTF-8.
 	//
-	// * Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
-	// characters: + - = . _ : / @.
+	// * Can use alphanumeric characters (A–Z, a–z, 0–9), and the
+	// following characters: + - = . _ : / @
+	//
+	// * Cannot use "aws:" as a prefix for a
+	// key.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

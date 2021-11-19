@@ -109,6 +109,9 @@ type DescribeJobRunOutput struct {
 	// The current state of the job run entity itself.
 	State types.JobRunState
 
+	// List of validation configurations that are applied to the profile job.
+	ValidationConfigurations []types.ValidationConfiguration
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

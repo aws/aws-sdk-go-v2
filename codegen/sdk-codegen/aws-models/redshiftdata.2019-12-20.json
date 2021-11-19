@@ -1285,6 +1285,22 @@
         },
         "com.amazonaws.redshiftdata#RedshiftData": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Redshift Data",
+                    "arnNamespace": "redshift-data",
+                    "cloudFormationName": "RedshiftData",
+                    "cloudTrailEventSource": "redshift-data.amazonaws.com",
+                    "endpointPrefix": "redshift-data"
+                },
+                "aws.auth#sigv4": {
+                    "name": "redshift-data"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#cors": {},
+                "smithy.api#documentation": "<p>You can use the Amazon Redshift Data API to run queries on Amazon Redshift tables. You\n      can run SQL statements, which are committed if the statement succeeds. </p>\n         <p>For more information about the Amazon Redshift Data API, see \n       <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n       <i>Amazon Redshift Cluster Management Guide</i>. </p>",
+                "smithy.api#title": "Redshift Data API Service"
+            },
             "version": "2019-12-20",
             "operations": [
                 {
@@ -1317,23 +1333,7 @@
                 {
                     "target": "com.amazonaws.redshiftdata#ListTables"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Redshift Data",
-                    "arnNamespace": "redshift-data",
-                    "cloudFormationName": "RedshiftData",
-                    "cloudTrailEventSource": "redshift-data.amazonaws.com",
-                    "endpointPrefix": "redshift-data"
-                },
-                "aws.auth#sigv4": {
-                    "name": "redshift-data"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#cors": {},
-                "smithy.api#documentation": "<p>You can use the Amazon Redshift Data API to run queries on Amazon Redshift tables. You\n      can run SQL statements, which are committed if the statement succeeds. </p>\n         <p>For more information about the Amazon Redshift Data API, see \n       <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n       <i>Amazon Redshift Cluster Management Guide</i>. </p>",
-                "smithy.api#title": "Redshift Data API Service"
-            }
+            ]
         },
         "com.amazonaws.redshiftdata#ResourceNotFoundException": {
             "type": "structure",

@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts the creation of an estimate of the monthly cost to analyze your AWS
-// resources.
+// Starts the creation of an estimate of the monthly cost to analyze your Amazon
+// Web Services resources.
 func (c *Client) StartCostEstimation(ctx context.Context, params *StartCostEstimationInput, optFns ...func(*Options)) (*StartCostEstimationOutput, error) {
 	if params == nil {
 		params = &StartCostEstimationInput{}
@@ -31,8 +31,8 @@ func (c *Client) StartCostEstimation(ctx context.Context, params *StartCostEstim
 
 type StartCostEstimationInput struct {
 
-	// The collection of AWS resources used to create a monthly DevOps Guru cost
-	// estimate.
+	// The collection of Amazon Web Services resources used to create a monthly DevOps
+	// Guru cost estimate.
 	//
 	// This member is required.
 	ResourceCollection *types.CostEstimationResourceCollectionFilter

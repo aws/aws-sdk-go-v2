@@ -10,9 +10,11 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"time"
 )
 
-// Initiates a contact flow to start a new task.
+// Initiates a contact flow to start a new task immediately or at a future date and
+// time.
 func (c *Client) StartTaskContact(ctx context.Context, params *StartTaskContactInput, optFns ...func(*Options)) (*StartTaskContactOutput, error) {
 	if params == nil {
 		params = &StartTaskContactInput{}
@@ -71,6 +73,11 @@ type StartTaskContactInput struct {
 
 	// A formatted URL that is shown to an agent in the Contact Control Panel (CCP).
 	References map[string]types.Reference
+
+	// The timestamp, in Unix Epoch seconds format, at which to start running the
+	// inbound contact flow. The scheduled time cannot be in the past. It must be
+	// within up to 6 days in future.
+	ScheduledTime *time.Time
 
 	noSmithyDocumentSerde
 }

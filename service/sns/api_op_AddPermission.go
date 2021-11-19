@@ -11,7 +11,7 @@ import (
 )
 
 // Adds a statement to a topic's access control policy, granting access for the
-// specified accounts to the specified actions.
+// specified Amazon Web Services accounts to the specified actions.
 func (c *Client) AddPermission(ctx context.Context, params *AddPermissionInput, optFns ...func(*Options)) (*AddPermissionOutput, error) {
 	if params == nil {
 		params = &AddPermissionInput{}
@@ -29,9 +29,9 @@ func (c *Client) AddPermission(ctx context.Context, params *AddPermissionInput, 
 
 type AddPermissionInput struct {
 
-	// The account IDs of the users (principals) who will be given access to the
-	// specified actions. The users must have account, but do not need to be signed up
-	// for this service.
+	// The Amazon Web Services account IDs of the users (principals) who will be given
+	// access to the specified actions. The users must have Amazon Web Services
+	// account, but do not need to be signed up for this service.
 	//
 	// This member is required.
 	AWSAccountId []string

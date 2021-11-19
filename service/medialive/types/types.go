@@ -3053,6 +3053,10 @@ type InputSettings struct {
 	// Input settings.
 	NetworkInputSettings *NetworkInputSettings
 
+	// PID from which to read SCTE-35 messages. If left undefined, EML will select the
+	// first SCTE-35 PID found in the input.
+	Scte35Pid int32
+
 	// Specifies whether to extract applicable ancillary data from a SMPTE-2038 source
 	// in this input. Applicable data types are captions, timecode, AFD, and SCTE-104
 	// messages.

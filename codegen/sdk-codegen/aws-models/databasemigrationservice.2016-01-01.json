@@ -127,6 +127,24 @@
         },
         "com.amazonaws.databasemigrationservice#AmazonDMSv20160101": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Database Migration Service",
+                    "arnNamespace": "dms",
+                    "cloudFormationName": "DMS",
+                    "cloudTrailEventSource": "databasemigrationservice.amazonaws.com",
+                    "endpointPrefix": "dms"
+                },
+                "aws.auth#sigv4": {
+                    "name": "dms"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<fullname>Database Migration Service</fullname>\n         <p>Database Migration Service (DMS) can migrate your data to and from the most\n         widely used commercial and open-source databases such as Oracle, PostgreSQL, Microsoft SQL\n         Server, Amazon Redshift, MariaDB, Amazon Aurora, MySQL, and SAP Adaptive Server Enterprise\n         (ASE). The service supports homogeneous migrations such as Oracle to Oracle, as well as\n         heterogeneous migrations between different database platforms, such as Oracle to MySQL or\n         SQL Server to PostgreSQL.</p>\n         <p>For more information about DMS, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html\">What Is Database Migration Service?</a>\n         in the <i>Database Migration Service User Guide.</i>\n         </p>",
+                "smithy.api#title": "AWS Database Migration Service",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://dms.amazonaws.com/doc/2016-01-01/"
+                }
+            },
             "version": "2016-01-01",
             "operations": [
                 {
@@ -294,25 +312,7 @@
                 {
                     "target": "com.amazonaws.databasemigrationservice#TestConnection"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Database Migration Service",
-                    "arnNamespace": "dms",
-                    "cloudFormationName": "DMS",
-                    "cloudTrailEventSource": "databasemigrationservice.amazonaws.com",
-                    "endpointPrefix": "dms"
-                },
-                "aws.auth#sigv4": {
-                    "name": "dms"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>Database Migration Service</fullname>\n         <p>Database Migration Service (DMS) can migrate your data to and from the most\n         widely used commercial and open-source databases such as Oracle, PostgreSQL, Microsoft SQL\n         Server, Amazon Redshift, MariaDB, Amazon Aurora, MySQL, and SAP Adaptive Server Enterprise\n         (ASE). The service supports homogeneous migrations such as Oracle to Oracle, as well as\n         heterogeneous migrations between different database platforms, such as Oracle to MySQL or\n         SQL Server to PostgreSQL.</p>\n         <p>For more information about DMS, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html\">What Is Database Migration Service?</a>\n         in the <i>Database Migration Service User Guide.</i>\n         </p>",
-                "smithy.api#title": "AWS Database Migration Service",
-                "smithy.api#xmlNamespace": {
-                    "uri": "http://dms.amazonaws.com/doc/2016-01-01/"
-                }
-            }
+            ]
         },
         "com.amazonaws.databasemigrationservice#ApplyPendingMaintenanceAction": {
             "type": "operation",
@@ -558,7 +558,7 @@
                 "CertificateWallet": {
                     "target": "com.amazonaws.databasemigrationservice#CertificateWallet",
                     "traits": {
-                        "smithy.api#documentation": "<p>The location of an imported Oracle Wallet certificate for use with SSL.</p>"
+                        "smithy.api#documentation": "<p>The location of an imported Oracle Wallet certificate for use with SSL. Example: <code>filebase64(\"${path.root}/rds-ca-2019-root.sso\")</code>\n         </p>"
                     }
                 },
                 "CertificateArn": {
@@ -756,7 +756,7 @@
                 "EngineName": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of engine for the endpoint. Valid values, depending on the\n         <code>EndpointType</code> value, include <code>\"mysql\"</code>, <code>\"oracle\"</code>,\n         <code>\"postgres\"</code>, <code>\"mariadb\"</code>, <code>\"aurora\"</code>,\n         <code>\"aurora-postgresql\"</code>, <code>\"redshift\"</code>, <code>\"s3\"</code>,\n         <code>\"db2\"</code>, <code>\"azuredb\"</code>, <code>\"sybase\"</code>, <code>\"dynamodb\"</code>, <code>\"mongodb\"</code>,\n         <code>\"kinesis\"</code>, <code>\"kafka\"</code>, <code>\"elasticsearch\"</code>, <code>\"docdb\"</code>,\n         <code>\"sqlserver\"</code>, and <code>\"neptune\"</code>.</p>",
+                        "smithy.api#documentation": "<p>The type of engine for the endpoint. Valid values, depending on the\n         <code>EndpointType</code> value, include <code>\"mysql\"</code>, <code>\"oracle\"</code>,\n          <code>\"postgres\"</code>, <code>\"mariadb\"</code>, <code>\"aurora\"</code>, \n          <code>\"aurora-postgresql\"</code>, <code>\"opensearch\"</code>, <code>\"redshift\"</code>, <code>\"s3\"</code>,\n         <code>\"db2\"</code>, <code>\"azuredb\"</code>, <code>\"sybase\"</code>, <code>\"dynamodb\"</code>, <code>\"mongodb\"</code>,\n         <code>\"kinesis\"</code>, <code>\"kafka\"</code>, <code>\"elasticsearch\"</code>, <code>\"docdb\"</code>,\n         <code>\"sqlserver\"</code>, and <code>\"neptune\"</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -871,7 +871,7 @@
                 "ElasticsearchSettings": {
                     "target": "com.amazonaws.databasemigrationservice#ElasticsearchSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Settings in JSON format for the target Elasticsearch endpoint. For more information\n         about the available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration\">Extra Connection Attributes When Using Elasticsearch as a Target for DMS</a> in\n          the <i>Database Migration Service User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Settings in JSON format for the target OpenSearch endpoint. For more information\n         about the available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration\">Extra Connection Attributes When Using OpenSearch as a Target for DMS</a> in\n          the <i>Database Migration Service User Guide</i>.</p>"
                     }
                 },
                 "NeptuneSettings": {
@@ -932,6 +932,12 @@
                     "target": "com.amazonaws.databasemigrationservice#RedisSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>Settings in JSON format for the target Redis endpoint.</p>"
+                    }
+                },
+                "GcpMySQLSettings": {
+                    "target": "com.amazonaws.databasemigrationservice#GcpMySQLSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings in JSON format for the source GCP MySQL endpoint.</p>"
                     }
                 }
             },
@@ -1531,7 +1537,7 @@
                 "CertificateArn": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the deleted certificate.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the certificate.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2062,7 +2068,7 @@
                 "Filters": {
                     "target": "com.amazonaws.databasemigrationservice#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters applied to the certificates described in the form of key-value pairs.</p>"
+                        "smithy.api#documentation": "<p>Filters applied to the certificates described in the form of key-value pairs. \n          Valid values are <code>certificate-arn</code> and <code>certificate-id</code>.</p>"
                     }
                 },
                 "MaxRecords": {
@@ -2495,7 +2501,7 @@
                 "Filters": {
                     "target": "com.amazonaws.databasemigrationservice#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters applied to event subscriptions.</p>"
+                        "smithy.api#documentation": "<p>Filters applied to event subscriptions.</p>\n         <p>Valid filter names: event-subscription-arn |  event-subscription-id </p>"
                     }
                 },
                 "MaxRecords": {
@@ -2594,7 +2600,7 @@
                 "Filters": {
                     "target": "com.amazonaws.databasemigrationservice#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters applied to events.</p>"
+                        "smithy.api#documentation": "<p>Filters applied to events. The only valid filter is <code>replication-instance-id</code>.</p>"
                     }
                 },
                 "MaxRecords": {
@@ -3116,7 +3122,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the task assessment results from the Amazon S3 bucket that DMS creates in your\n          Amazon Web Services account.  This action always returns the\n         latest results.</p>\n         <p>For more information about DMS task assessments, see  \n           <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.AssessmentReport.html\">Creating a task assessment report</a>\n           in the <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/Welcome.html\">\n               Database Migration Service User Guide</a>.</p>",
+                "smithy.api#documentation": "<p>Returns the task assessment results from the Amazon S3 bucket that DMS creates in your\n         Amazon Web Services account. This action always returns the latest results.</p>\n         <p>For more information about DMS task assessments, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.AssessmentReport.html\">Creating a task assessment\n            report</a> in the <i>Database Migration Service User Guide</i>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -4029,25 +4035,25 @@
                 "EndpointUri": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The endpoint for the Elasticsearch cluster. DMS uses HTTPS if a transport \n         protocol (http/https) is not specified.</p>",
+                        "smithy.api#documentation": "<p>The endpoint for the OpenSearch cluster. DMS uses HTTPS if a transport \n         protocol (http/https) is not specified.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "FullLoadErrorPercentage": {
                     "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum percentage of records that can fail to be written before a full load\n            operation stops.</p>\n         <p>To avoid early failure, this counter is only effective after 1000 records \n         are transferred. Elasticsearch also has the concept of error monitoring during the \n         last 10 minutes of an Observation Window. If transfer of all records fail in the \n         last 10 minutes, the full load operation stops. </p>"
+                        "smithy.api#documentation": "<p>The maximum percentage of records that can fail to be written before a full load\n            operation stops.</p>\n         <p>To avoid early failure, this counter is only effective after 1000 records \n         are transferred. OpenSearch also has the concept of error monitoring during the \n         last 10 minutes of an Observation Window. If transfer of all records fail in the \n         last 10 minutes, the full load operation stops. </p>"
                     }
                 },
                 "ErrorRetryDuration": {
                     "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of seconds for which DMS retries failed API requests to the\n         Elasticsearch cluster.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of seconds for which DMS retries failed API requests to the\n         OpenSearch cluster.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides information that defines an Elasticsearch endpoint.</p>"
+                "smithy.api#documentation": "<p>Provides information that defines an OpenSearch endpoint.</p>"
             }
         },
         "com.amazonaws.databasemigrationservice#EncodingTypeValue": {
@@ -4102,7 +4108,7 @@
                 "EngineName": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The database engine name. Valid values, depending on the EndpointType, include\n            <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>,\n            <code>\"mariadb\"</code>, <code>\"aurora\"</code>, <code>\"aurora-postgresql\"</code>,\n            <code>\"redshift\"</code>, <code>\"s3\"</code>, <code>\"db2\"</code>, <code>\"azuredb\"</code>,\n            <code>\"sybase\"</code>, <code>\"dynamodb\"</code>, <code>\"mongodb\"</code>,\n            <code>\"kinesis\"</code>, <code>\"kafka\"</code>, <code>\"elasticsearch\"</code>,\n            <code>\"documentdb\"</code>, <code>\"sqlserver\"</code>, and <code>\"neptune\"</code>.</p>"
+                        "smithy.api#documentation": "<p>The database engine name. Valid values, depending on the EndpointType, include\n            <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>,\n            <code>\"mariadb\"</code>, <code>\"aurora\"</code>, <code>\"aurora-postgresql\"</code>, <code>\"opensearch\"</code>,\n            <code>\"redshift\"</code>, <code>\"s3\"</code>, <code>\"db2\"</code>, <code>\"azuredb\"</code>,\n            <code>\"sybase\"</code>, <code>\"dynamodb\"</code>, <code>\"mongodb\"</code>,\n            <code>\"kinesis\"</code>, <code>\"kafka\"</code>, <code>\"elasticsearch\"</code>,\n            <code>\"documentdb\"</code>, <code>\"sqlserver\"</code>, and <code>\"neptune\"</code>.</p>"
                     }
                 },
                 "EngineDisplayName": {
@@ -4204,7 +4210,7 @@
                 "DmsTransferSettings": {
                     "target": "com.amazonaws.databasemigrationservice#DmsTransferSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The settings in JSON format for the DMS transfer type of source endpoint. </p>\n         <p>Possible settings include the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ServiceAccessRoleArn</code> -  - The Amazon Resource Name (ARN) used by the service access IAM role. \n                 The role must allow the <code>iam:PassRole</code> action.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BucketName</code> - The name of the S3 bucket to use.</p>\n            </li>\n         </ul>\n         <p>Shorthand syntax for these settings is as follows:\n            <code>ServiceAccessRoleArn=string,BucketName=string,</code>\n         </p>\n         <p>JSON syntax for these settings is as follows: <code>{ \"ServiceAccessRoleArn\":\n            \"string\", \"BucketName\": \"string\"} </code>\n         </p>"
+                        "smithy.api#documentation": "<p>The settings for the DMS Transfer type source. For more information, see the DmsTransferSettings structure.  </p>"
                     }
                 },
                 "MongoDbSettings": {
@@ -4228,7 +4234,7 @@
                 "ElasticsearchSettings": {
                     "target": "com.amazonaws.databasemigrationservice#ElasticsearchSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The settings for the Elasticsearch source endpoint. For more information, see the\n            <code>ElasticsearchSettings</code> structure.</p>"
+                        "smithy.api#documentation": "<p>The settings for the OpenSearch source endpoint. For more information, see the\n            <code>ElasticsearchSettings</code> structure.</p>"
                     }
                 },
                 "NeptuneSettings": {
@@ -4286,6 +4292,12 @@
                     "target": "com.amazonaws.databasemigrationservice#RedisSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>The settings for the Redis target endpoint. For more information, see the \n         <code>RedisSettings</code> structure.</p>"
+                    }
+                },
+                "GcpMySQLSettings": {
+                    "target": "com.amazonaws.databasemigrationservice#GcpMySQLSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings in JSON format for the source GCP MySQL endpoint.</p>"
                     }
                 }
             },
@@ -4604,6 +4616,98 @@
                 }
             }
         },
+        "com.amazonaws.databasemigrationservice#GcpMySQLSettings": {
+            "type": "structure",
+            "members": {
+                "AfterConnectScript": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a script to run immediately after DMS connects to the endpoint. \n         The migration task continues running regardless if the SQL statement succeeds or fails.</p>\n         \n         <p>For this parameter, provide the code of the script itself, not the name of a file containing the script. </p>"
+                    }
+                },
+                "CleanSourceMetadataOnMismatch": {
+                    "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Adjusts the behavior of DMS when migrating from an SQL Server source database \n         that is hosted as part of an Always On availability group cluster. If you need DMS\n         to poll all the nodes in the Always On cluster for transaction backups, set this attribute to <code>false</code>. </p>"
+                    }
+                },
+                "DatabaseName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Database name for the endpoint. For a MySQL source or target endpoint, don't explicitly specify \n         the database using the <code>DatabaseName</code> request parameter on either the <code>CreateEndpoint</code>\n         or <code>ModifyEndpoint</code> API call. Specifying <code>DatabaseName</code> when you create or modify a \n         MySQL endpoint replicates all the task tables to this single database. For MySQL endpoints, you specify \n         the database only when you specify the schema in the table-mapping rules of the DMS task. </p>"
+                    }
+                },
+                "EventsPollInterval": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how often to check the binary log for new changes/events when the database is idle. The default is five seconds.</p>\n         <p>Example: <code>eventsPollInterval=5;</code>\n         </p>\n         <p>In the example, DMS checks for changes in the binary logs every five seconds. </p>"
+                    }
+                },
+                "TargetDbType": {
+                    "target": "com.amazonaws.databasemigrationservice#TargetDbType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies where to migrate source tables on the target, either to a single database or multiple databases.</p>\n         <p>Example: <code>targetDbType=MULTIPLE_DATABASES</code> \n         </p>"
+                    }
+                },
+                "MaxFileSize": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the maximum size (in KB) of any .csv file used to transfer data to a MySQL-compatible database.</p>\n         <p>Example: <code>maxFileSize=512</code> \n         </p>"
+                    }
+                },
+                "ParallelLoadThreads": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Improves performance when loading data into the MySQL-compatible target database. Specifies how many \n         threads to use to load the data into the MySQL-compatible target database. Setting a large number of \n         threads can have an adverse effect on database performance, because a separate connection is required \n         for each thread. The default is one.</p>\n         \n         <p>Example: <code>parallelLoadThreads=1</code> \n         </p>"
+                    }
+                },
+                "Password": {
+                    "target": "com.amazonaws.databasemigrationservice#SecretString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Endpoint connection password.</p>"
+                    }
+                },
+                "Port": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "ServerName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Endpoint TCP port.</p>"
+                    }
+                },
+                "ServerTimezone": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the time zone for the source MySQL database.</p>\n         \n         <p>Example: <code>serverTimezone=US/Pacific;</code>\n         </p>\n         \n         <p>Note: Do not enclose time zones in single quotes.</p>"
+                    }
+                },
+                "Username": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Endpoint connection user name.</p>"
+                    }
+                },
+                "SecretsManagerAccessRoleArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full Amazon Resource Name (ARN) of the IAM role that specifies DMS\n         as the trusted entity and grants the required permissions to access the value in \n         <code>SecretsManagerSecret.</code> The role must allow the <code>iam:PassRole</code> action. \n         <code>SecretsManagerSecret</code> has the value of the Amazon Web Services Secrets Manager secret \n         that allows access to the MySQL endpoint.</p>\n         <note>\n            <p>You can specify one of two sets of values for these permissions. You can specify \n            the values for this setting and <code>SecretsManagerSecretId</code>. Or you can specify clear-text\n            values for <code>UserName</code>, <code>Password</code>, <code>ServerName</code>, and <code>Port</code>.\n            You can't specify both. For more information on creating this <code>SecretsManagerSecret</code> \n            and the <code>SecretsManagerAccessRoleArn</code> and <code>SecretsManagerSecretId</code> required to \n            access it, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access Database Migration Service resources</a> in the \n            Database Migration Service User Guide.\n         \n      </p>\n         </note>"
+                    }
+                },
+                "SecretsManagerSecretId": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full ARN, partial ARN, or friendly name of the <code>SecretsManagerSecret</code>\n         that contains the MySQL endpoint connection details. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Settings in JSON format for the source GCP MySQL endpoint.</p>"
+            }
+        },
         "com.amazonaws.databasemigrationservice#IBMDb2Settings": {
             "type": "structure",
             "members": {
@@ -4714,7 +4818,7 @@
                 "CertificateWallet": {
                     "target": "com.amazonaws.databasemigrationservice#CertificateWallet",
                     "traits": {
-                        "smithy.api#documentation": "<p>The location of an imported Oracle Wallet certificate for use with SSL. Provide the name of a <code>.sso</code> file\n          using the <code>fileb://</code> prefix. You can't provide the certificate inline.\n      </p>"
+                        "smithy.api#documentation": "<p>The location of an imported Oracle Wallet certificate for use with SSL. Provide the name of a <code>.sso</code> file\n          using the <code>fileb://</code> prefix. You can't provide the certificate inline.</p> \n          <p>Example: <code>filebase64(\"${path.root}/rds-ca-2019-root.sso\")</code>\n         </p>"
                     }
                 },
                 "Tags": {
@@ -4840,7 +4944,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The specified master key (CMK) isn't enabled.</p>",
+                "smithy.api#documentation": "<p>The specified KMS key isn't enabled.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -5354,7 +5458,7 @@
                 "EngineName": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of engine for the endpoint. Valid values, depending on the EndpointType,\n         include\n         <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>,\n         <code>\"mariadb\"</code>, <code>\"aurora\"</code>, <code>\"aurora-postgresql\"</code>,\n         <code>\"redshift\"</code>, <code>\"s3\"</code>, <code>\"db2\"</code>, <code>\"azuredb\"</code>,\n         <code>\"sybase\"</code>, <code>\"dynamodb\"</code>, <code>\"mongodb\"</code>,\n         <code>\"kinesis\"</code>, <code>\"kafka\"</code>, <code>\"elasticsearch\"</code>,\n         <code>\"documentdb\"</code>, <code>\"sqlserver\"</code>, and <code>\"neptune\"</code>.</p>"
+                        "smithy.api#documentation": "<p>The type of engine for the endpoint. Valid values, depending on the EndpointType,\n         include\n         <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>,\n         <code>\"mariadb\"</code>, <code>\"aurora\"</code>, <code>\"aurora-postgresql\"</code>, <code>\"opensearch\"</code>,\n         <code>\"redshift\"</code>, <code>\"s3\"</code>, <code>\"db2\"</code>, <code>\"azuredb\"</code>,\n         <code>\"sybase\"</code>, <code>\"dynamodb\"</code>, <code>\"mongodb\"</code>,\n         <code>\"kinesis\"</code>, <code>\"kafka\"</code>, <code>\"elasticsearch\"</code>,\n         <code>\"documentdb\"</code>, <code>\"sqlserver\"</code>, and <code>\"neptune\"</code>.</p>"
                     }
                 },
                 "Username": {
@@ -5456,7 +5560,7 @@
                 "ElasticsearchSettings": {
                     "target": "com.amazonaws.databasemigrationservice#ElasticsearchSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Settings in JSON format for the target Elasticsearch endpoint. For more information\n         about the available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration\">Extra Connection Attributes When Using Elasticsearch as a Target for DMS</a> in\n         the <i>Database Migration Service User Guide.</i>\n         </p>"
+                        "smithy.api#documentation": "<p>Settings in JSON format for the target OpenSearch endpoint. For more information\n         about the available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration\">Extra Connection Attributes When Using OpenSearch as a Target for DMS</a> in\n         the <i>Database Migration Service User Guide.</i>\n         </p>"
                     }
                 },
                 "NeptuneSettings": {
@@ -5520,6 +5624,12 @@
                     "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>If this attribute is Y, the current call to <code>ModifyEndpoint</code> replaces all\n         existing endpoint settings with the exact settings that you specify in this call. If this\n         attribute is N, the current call to <code>ModifyEndpoint</code> does two things: </p>\n         <ul>\n            <li>\n               <p>It replaces any endpoint settings that already exist with new values, for settings with the\n               same names.</p>\n            </li>\n            <li>\n               <p>It creates new endpoint settings that you specify in the call, for settings with different\n               names. </p>\n            </li>\n         </ul>\n         <p>For example, if you call <code>create-endpoint ... --endpoint-settings '{\"a\":1}'\n            ...</code>, the endpoint has the following endpoint settings: <code>'{\"a\":1}'</code>. If\n         you then call <code>modify-endpoint ... --endpoint-settings '{\"b\":2}' ...</code> for the\n         same endpoint, the endpoint has the following settings: <code>'{\"a\":1,\"b\":2}'</code>. </p>\n         <p>However, suppose that you follow this with a call to <code>modify-endpoint ...\n            --endpoint-settings '{\"b\":2}' --exact-settings ...</code> for that same endpoint again.\n         Then the endpoint has the following settings: <code>'{\"b\":2}'</code>. All existing settings\n         are replaced with the exact settings that you specify. </p>"
+                    }
+                },
+                "GcpMySQLSettings": {
+                    "target": "com.amazonaws.databasemigrationservice#GcpMySQLSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings in JSON format for the source GCP MySQL endpoint.</p>"
                     }
                 }
             },
@@ -6117,7 +6227,7 @@
                 "EventsPollInterval": {
                     "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies how often to check the binary log for new\n         changes/events when the database is idle.</p>\n         <p>Example: <code>eventsPollInterval=5;</code>\n         </p>\n         <p>In the example, DMS checks for changes in the binary\n         logs every five seconds.</p>"
+                        "smithy.api#documentation": "<p>Specifies how often to check the binary log for new\n         changes/events when the database is idle. The default is five seconds.</p>\n         <p>Example: <code>eventsPollInterval=5;</code>\n         </p>\n         <p>In the example, DMS checks for changes in the binary\n         logs every five seconds.</p>"
                     }
                 },
                 "TargetDbType": {
@@ -6135,7 +6245,7 @@
                 "ParallelLoadThreads": {
                     "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Improves performance when loading data into the MySQL-compatible target database.\n         Specifies how many threads to use to load the data into the MySQL-compatible target\n         database. Setting a large number of threads can have an adverse effect on database\n         performance, because a separate connection is required for each thread.</p>\n         <p>Example: <code>parallelLoadThreads=1</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Improves performance when loading data into the MySQL-compatible target database.\n         Specifies how many threads to use to load the data into the MySQL-compatible target\n         database. Setting a large number of threads can have an adverse effect on database\n         performance, because a separate connection is required for each thread. The default is one.</p>\n         <p>Example: <code>parallelLoadThreads=1</code>\n         </p>"
                     }
                 },
                 "Password": {
@@ -6739,7 +6849,7 @@
                 "Port": {
                     "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Endpoint TCP port.</p>"
+                        "smithy.api#documentation": "<p>Endpoint TCP port. The default is 5432.</p>"
                     }
                 },
                 "ServerName": {
@@ -8334,6 +8444,12 @@
                         "smithy.api#documentation": "<p>Specifies the folder path of CDC files. For an S3 source, this setting is required if a\n         task captures change data; otherwise, it's optional. If <code>CdcPath</code> is set, DMS\n          reads CDC files from this path and replicates the data changes to the target endpoint.\n         For an S3 target if you set <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-PreserveTransactions\">\n               <code>PreserveTransactions</code>\n            </a> to <code>true</code>, DMS\n          verifies that you have set this parameter to a folder path on your S3 target where DMS\n          can save the transaction order for the CDC load. DMS creates this CDC folder path\n         in either your S3 target working directory or the S3 target location specified by <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-BucketFolder\">\n               <code>BucketFolder</code>\n            </a> and <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-BucketName\">\n               <code>BucketName</code>\n            </a>.</p>\n         <p>For example, if you specify <code>CdcPath</code> as <code>MyChangedData</code>, and you\n         specify <code>BucketName</code> as <code>MyTargetBucket</code> but do not specify\n            <code>BucketFolder</code>, DMS creates the CDC folder path following:\n            <code>MyTargetBucket/MyChangedData</code>.</p>\n         <p>If you specify the same <code>CdcPath</code>, and you specify <code>BucketName</code> as\n            <code>MyTargetBucket</code> and <code>BucketFolder</code> as <code>MyTargetData</code>,\n         DMS creates the CDC folder path following:\n            <code>MyTargetBucket/MyTargetData/MyChangedData</code>.</p>\n         <p>For more information on CDC including transaction order on an S3 target, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.EndpointSettings.CdcPath\">Capturing data changes (CDC) including transaction order on the S3\n            target</a>.</p>\n         <note>\n            <p>This setting is supported in DMS versions 3.4.2 and later.</p>\n         </note>"
                     }
                 },
+                "UseTaskStartTimeForFullLoadTimestamp": {
+                    "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When set to true, this parameter uses the task start time as the timestamp column value instead of \n         the time data is written to target. For full load, when <code>useTaskStartTimeForFullLoadTimestamp</code>\n         is set to <code>true</code>, each row of the timestamp column contains the task start time. For CDC loads, \n         each row of the timestamp column contains the transaction commit time.</p>\n         \n         <p>When <code>useTaskStartTimeForFullLoadTimestamp</code> is set to <code>false</code>, the full load timestamp \n         in the timestamp column increments with the time data arrives at the target. </p>"
+                    }
+                },
                 "CannedAclForObjects": {
                     "target": "com.amazonaws.databasemigrationservice#CannedAclForObjectsValue",
                     "traits": {
@@ -8698,7 +8814,7 @@
                 "StartReplicationTaskType": {
                     "target": "com.amazonaws.databasemigrationservice#StartReplicationTaskTypeValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>A type of replication task.</p>",
+                        "smithy.api#documentation": "<p>The type of replication task to start.</p>\n         <p>When the migration type is <code>full-load</code> or <code>full-load-and-cdc</code>, the only valid value \n           for the first run of the task is <code>start-replication</code>. You use <code>reload-target</code> to restart\n       the task and <code>resume-processing</code> to resume the task.</p>\n         <p>When the migration type is <code>cdc</code>, you use <code>start-replication</code> to start or restart\n       the task, and <code>resume-processing</code> to resume the task. <code>reload-target</code> is not a valid value for \n       a task with migration type of <code>cdc</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8949,7 +9065,7 @@
                 "Port": {
                     "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Endpoint TCP port.</p>"
+                        "smithy.api#documentation": "<p>Endpoint TCP port. The default is 5000.</p>"
                     }
                 },
                 "ServerName": {

@@ -31,6 +31,24 @@
     "shapes": {
         "com.amazonaws.wafv2#AWSWAF_20190729": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "WAFV2",
+                    "arnNamespace": "wafv2",
+                    "cloudFormationName": "WAFv2",
+                    "cloudTrailEventSource": "wafv2.amazonaws.com",
+                    "endpointPrefix": "wafv2"
+                },
+                "aws.auth#sigv4": {
+                    "name": "wafv2"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<fullname>WAF</fullname>\n         <note>\n            <p>This is the latest version of the <b>WAF</b> API,\n            released in November, 2019. The names of the entities that you use to access this API,\n            like endpoints and namespaces, all have the versioning information added, like \"V2\" or\n            \"v2\", to distinguish from the prior version. We recommend migrating your resources to\n            this version, because it has a number of significant improvements.</p>\n            <p>If you used WAF prior to this release, you can't use this WAFV2 API to access any\n            WAF resources that you created before. You can access your old rules, web ACLs, and\n            other WAF resources only through the WAF Classic APIs. The WAF Classic APIs\n            have retained the prior names, endpoints, and namespaces. </p>\n            <p>For information, including how to migrate your WAF resources to this version,\n            see the <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html\">WAF Developer Guide</a>. </p>\n         </note>\n         <p>WAF is a web application firewall that lets you monitor the HTTP and HTTPS\n         requests that are forwarded to Amazon CloudFront, an Amazon API Gateway REST API, an Application Load Balancer, or an AppSync\n         GraphQL API. WAF also lets you control access to your content. Based on conditions that\n         you specify, such as the IP addresses that requests originate from or the values of query\n         strings, the Amazon API Gateway REST API, CloudFront distribution, the Application Load Balancer, or the AppSync GraphQL\n         API responds to requests either with the requested content or with an HTTP 403 status code\n         (Forbidden). You also can configure CloudFront to return a custom error page when a request is\n         blocked.</p>\n         <p>This API guide is for developers who need detailed information about WAF API actions,\n         data types, and errors. For detailed information about WAF features and an overview of\n         how to use WAF, see the <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html\">WAF Developer\n         Guide</a>.</p>\n         <p>You can make calls using the endpoints listed in <a href=\"https://docs.aws.amazon.com/general/latest/gr/waf.html\">WAF endpoints and quotas</a>. </p>\n         <ul>\n            <li>\n               <p>For regional applications, you can use any of the endpoints in the list.\n               A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API. </p>\n            </li>\n            <li>\n               <p>For Amazon CloudFront applications, you must use the API endpoint listed for\n               US East (N. Virginia): us-east-1.</p>\n            </li>\n         </ul>\n         <p>Alternatively, you can use one of the Amazon Web Services SDKs to access an API that's tailored to the\n         programming language or platform that you're using. For more information, see <a href=\"http://aws.amazon.com/tools/#SDKs\">Amazon Web Services SDKs</a>.</p>\n         <p>We currently provide two versions of the WAF API: this API and the prior versions,\n         the classic WAF APIs. This new API provides the same functionality as the older versions,\n         with the following major improvements:</p>\n         <ul>\n            <li>\n               <p>You use one API for both global and regional applications. Where you need to\n               distinguish the scope, you specify a <code>Scope</code> parameter and set it to\n                  <code>CLOUDFRONT</code> or <code>REGIONAL</code>. </p>\n            </li>\n            <li>\n               <p>You can define a web ACL or rule group with a single call, and update it with a\n               single call. You define all rule specifications in JSON format, and pass them to your\n               rule group or web ACL calls.</p>\n            </li>\n            <li>\n               <p>The limits WAF places on the use of rules more closely reflects the cost of\n               running each type of rule. Rule groups include capacity settings, so you know the\n               maximum cost of a rule group when you use it.</p>\n            </li>\n         </ul>",
+                "smithy.api#title": "AWS WAFV2",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://waf.amazonaws.com/doc/2019-07-29/"
+                }
+            },
             "version": "2019-07-29",
             "operations": [
                 {
@@ -168,25 +186,7 @@
                 {
                     "target": "com.amazonaws.wafv2#UpdateWebACL"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "WAFV2",
-                    "arnNamespace": "wafv2",
-                    "cloudFormationName": "WAFv2",
-                    "cloudTrailEventSource": "wafv2.amazonaws.com",
-                    "endpointPrefix": "wafv2"
-                },
-                "aws.auth#sigv4": {
-                    "name": "wafv2"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>WAF</fullname>\n         <note>\n            <p>This is the latest version of the <b>WAF</b> API,\n            released in November, 2019. The names of the entities that you use to access this API,\n            like endpoints and namespaces, all have the versioning information added, like \"V2\" or\n            \"v2\", to distinguish from the prior version. We recommend migrating your resources to\n            this version, because it has a number of significant improvements.</p>\n            <p>If you used WAF prior to this release, you can't use this WAFV2 API to access any\n            WAF resources that you created before. You can access your old rules, web ACLs, and\n            other WAF resources only through the WAF Classic APIs. The WAF Classic APIs\n            have retained the prior names, endpoints, and namespaces. </p>\n            <p>For information, including how to migrate your WAF resources to this version,\n            see the <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html\">WAF Developer Guide</a>. </p>\n         </note>\n         <p>WAF is a web application firewall that lets you monitor the HTTP and HTTPS\n         requests that are forwarded to Amazon CloudFront, an Amazon API Gateway REST API, an Application Load Balancer, or an AppSync\n         GraphQL API. WAF also lets you control access to your content. Based on conditions that\n         you specify, such as the IP addresses that requests originate from or the values of query\n         strings, the Amazon API Gateway REST API, CloudFront distribution, the Application Load Balancer, or the AppSync GraphQL\n         API responds to requests either with the requested content or with an HTTP 403 status code\n         (Forbidden). You also can configure CloudFront to return a custom error page when a request is\n         blocked.</p>\n         <p>This API guide is for developers who need detailed information about WAF API actions,\n         data types, and errors. For detailed information about WAF features and an overview of\n         how to use WAF, see the <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html\">WAF Developer\n         Guide</a>.</p>\n         <p>You can make calls using the endpoints listed in <a href=\"https://docs.aws.amazon.com/general/latest/gr/waf.html\">WAF endpoints and quotas</a>. </p>\n         <ul>\n            <li>\n               <p>For regional applications, you can use any of the endpoints in the list.\n               A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API. </p>\n            </li>\n            <li>\n               <p>For Amazon CloudFront applications, you must use the API endpoint listed for\n               US East (N. Virginia): us-east-1.</p>\n            </li>\n         </ul>\n         <p>Alternatively, you can use one of the Amazon Web Services SDKs to access an API that's tailored to the\n         programming language or platform that you're using. For more information, see <a href=\"http://aws.amazon.com/tools/#SDKs\">Amazon Web Services SDKs</a>.</p>\n         <p>We currently provide two versions of the WAF API: this API and the prior versions,\n         the classic WAF APIs. This new API provides the same functionality as the older versions,\n         with the following major improvements:</p>\n         <ul>\n            <li>\n               <p>You use one API for both global and regional applications. Where you need to\n               distinguish the scope, you specify a <code>Scope</code> parameter and set it to\n                  <code>CLOUDFRONT</code> or <code>REGIONAL</code>. </p>\n            </li>\n            <li>\n               <p>You can define a web ACL or rule group with a single call, and update it with a\n               single call. You define all rule specifications in JSON format, and pass them to your\n               rule group or web ACL calls.</p>\n            </li>\n            <li>\n               <p>The limits WAF places on the use of rules more closely reflects the cost of\n               running each type of rule. Rule groups include capacity settings, so you know the\n               maximum cost of a rule group when you use it.</p>\n            </li>\n         </ul>",
-                "smithy.api#title": "AWS WAFV2",
-                "smithy.api#xmlNamespace": {
-                    "uri": "http://waf.amazonaws.com/doc/2019-07-29/"
-                }
-            }
+            ]
         },
         "com.amazonaws.wafv2#Action": {
             "type": "string"
@@ -3942,11 +3942,6 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.wafv2#IPAddress"
-            },
-            "traits": {
-                "smithy.api#length": {
-                    "min": 1
-                }
             }
         },
         "com.amazonaws.wafv2#IPSet": {
@@ -5009,14 +5004,14 @@
                 "LogDestinationConfigs": {
                     "target": "com.amazonaws.wafv2#LogDestinationConfigs",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Kinesis Data Firehose Amazon Resource Name (ARNs) that you want to associate\n         with the web ACL.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the logging destinations that you want to associate\n         with the web ACL.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "RedactedFields": {
                     "target": "com.amazonaws.wafv2#RedactedFields",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parts of the request that you want to keep out of the logs. For\n          example, if you redact the <code>SingleHeader</code> field, the <code>HEADER</code> field in the firehose will be <code>xxx</code>. </p>\n         <note>\n           <p>You can specify only the following fields for redaction: <code>UriPath</code>, <code>QueryString</code>, <code>SingleHeader</code>, <code>Method</code>, and <code>JsonBody</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The parts of the request that you want to keep out of the logs. For\n          example, if you redact the <code>SingleHeader</code> field, the <code>HEADER</code> field in the logs will be <code>xxx</code>. </p>\n         <note>\n           <p>You can specify only the following fields for redaction: <code>UriPath</code>, <code>QueryString</code>, <code>SingleHeader</code>, <code>Method</code>, and <code>JsonBody</code>.</p>\n         </note>"
                     }
                 },
                 "ManagedByFirewallManager": {
@@ -5033,7 +5028,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines an association between Amazon Kinesis Data Firehose destinations and a web ACL\n         resource, for logging from WAF. As part of the association, you can specify parts of\n         the standard logging fields to keep out of the logs and you can specify filters so that you\n         log only a subset of the logging records. </p>"
+                "smithy.api#documentation": "<p>Defines an association between logging destinations and a web ACL\n         resource, for logging from WAF. As part of the association, you can specify parts of\n         the standard logging fields to keep out of the logs and you can specify filters so that you\n         log only a subset of the logging records. </p>\n         <p>For information about configuring web ACL logging destinations, see \n           <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging.html\">Logging web ACL traffic information</a> \n               in the <i>WAF Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.wafv2#LoggingConfigurations": {
@@ -5630,6 +5625,10 @@
                     {
                         "value": "ASSOCIABLE_RESOURCE",
                         "name": "ASSOCIABLE_RESOURCE"
+                    },
+                    {
+                        "value": "LOG_DESTINATION",
+                        "name": "LOG_DESTINATION"
                     }
                 ]
             }
@@ -5713,6 +5712,9 @@
                     "target": "com.amazonaws.wafv2#WAFLimitsExceededException"
                 },
                 {
+                    "target": "com.amazonaws.wafv2#WAFLogDestinationPermissionIssueException"
+                },
+                {
                     "target": "com.amazonaws.wafv2#WAFNonexistentItemException"
                 },
                 {
@@ -5723,7 +5725,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enables the specified <a>LoggingConfiguration</a>, to start logging from a\n         web ACL, according to the configuration provided.</p>\n         <p>You can access information about all traffic that WAF inspects using the following\n         steps:</p>\n         <ol>\n            <li>\n               <p>Create an Amazon Kinesis Data Firehose. </p>\n               <p>Create the data firehose with a PUT source and in the Region that you are\n               operating. If you are capturing logs for Amazon CloudFront, always create the firehose in US\n               East (N. Virginia). </p>\n               <p>Give the data firehose a name that starts with the prefix\n                  <code>aws-waf-logs-</code>. For example,\n                  <code>aws-waf-logs-us-east-2-analytics</code>.</p>\n               <note>\n                  <p>Do not create the data firehose using a <code>Kinesis stream</code> as your\n                  source.</p>\n               </note>\n            </li>\n            <li>\n               <p>Associate that firehose to your web ACL using a\n                  <code>PutLoggingConfiguration</code> request.</p>\n            </li>\n         </ol>\n         <p>When you successfully enable logging using a <code>PutLoggingConfiguration</code>\n         request, WAF will create a service linked role with the necessary permissions to write\n         logs to the Amazon Kinesis Data Firehose. For more information, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging.html\">Logging Web ACL\n            Traffic Information</a> in the <i>WAF Developer\n         Guide</i>.</p>\n         <note>\n            <p>This operation completely replaces the mutable specifications that you already have for the logging configuration with the ones that you provide to this call. To modify the logging configuration, retrieve it by calling <a>GetLoggingConfiguration</a>, update the settings as needed, and then provide the complete logging configuration specification to this call.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Enables the specified <a>LoggingConfiguration</a>, to start logging from a\n         web ACL, according to the configuration provided.</p>\n         <p>You can access information about all traffic that WAF inspects using the following\n         steps:</p>\n         <ol>\n            <li>\n               <p>Create your logging destination. You can use an Amazon CloudWatch Logs log group, an Amazon Simple Storage Service (Amazon S3) bucket, or an Amazon Kinesis Data Firehose. \n                 For information about configuring logging destinations and the permissions that are required for each, see \n                 <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging.html\">Logging web ACL traffic information</a> \n                 in the <i>WAF Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>Associate your logging destination to your web ACL using a\n                  <code>PutLoggingConfiguration</code> request.</p>\n            </li>\n         </ol>\n         <p>When you successfully enable logging using a <code>PutLoggingConfiguration</code>\n          request, WAF creates an additional role or policy that is required to write\n              logs to the logging destination. For an Amazon CloudWatch Logs log group, WAF creates a resource policy on the log group.\n          For an Amazon S3 bucket, WAF creates a bucket policy. For an Amazon Kinesis Data Firehose, WAF creates a service-linked role.</p>\n         <note>\n            <p>This operation completely replaces the mutable specifications that you already have for the logging configuration with the ones that you provide to this call. To modify the logging configuration, retrieve it by calling <a>GetLoggingConfiguration</a>, update the settings as needed, and then provide the complete logging configuration specification to this call.</p>\n         </note>"
             }
         },
         "com.amazonaws.wafv2#PutLoggingConfigurationRequest": {
@@ -7915,6 +7917,18 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>WAF couldn’t perform the operation because you exceeded your resource limit. For\n         example, the maximum number of <code>WebACL</code> objects that you can create for an Amazon Web Services\n         account. For more information, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/limits.html\">WAF quotas</a> in the\n            <i>WAF Developer Guide</i>.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.wafv2#WAFLogDestinationPermissionIssueException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.wafv2#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The operation failed because you don't have the permissions that your logging configuration requires. For information, see \n           <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging.html\">Logging web ACL traffic information</a> \n               in the <i>WAF Developer Guide</i>.</p>",
                 "smithy.api#error": "client"
             }
         },

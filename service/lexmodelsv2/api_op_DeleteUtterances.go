@@ -11,13 +11,15 @@ import (
 )
 
 // Deletes stored utterances. Amazon Lex stores the utterances that users send to
-// your bot. Utterances are stored for 15 days for use with the operation, and then
-// stored indefinitely for use in improving the ability of your bot to respond to
-// user input.. Use the DeleteUtterances operation to manually delete utterances
-// for a specific session. When you use the DeleteUtterances operation, utterances
-// stored for improving your bot's ability to respond to user input are deleted
-// immediately. Utterances stored for use with the ListAggregatedUtterances
-// operation are deleted after 15 days.
+// your bot. Utterances are stored for 15 days for use with the
+// ListAggregatedUtterances
+// (https://docs.aws.amazon.com/lexv2/latest/dg/API_ListAggregatedUtterances.html)
+// operation, and then stored indefinitely for use in improving the ability of your
+// bot to respond to user input.. Use the DeleteUtterances operation to manually
+// delete utterances for a specific session. When you use the DeleteUtterances
+// operation, utterances stored for improving your bot's ability to respond to user
+// input are deleted immediately. Utterances stored for use with the
+// ListAggregatedUtterances operation are deleted after 15 days.
 func (c *Client) DeleteUtterances(ctx context.Context, params *DeleteUtterancesInput, optFns ...func(*Options)) (*DeleteUtterancesOutput, error) {
 	if params == nil {
 		params = &DeleteUtterancesInput{}
@@ -47,7 +49,11 @@ type DeleteUtterancesInput struct {
 	LocaleId *string
 
 	// The unique identifier of the session with the user. The ID is returned in the
-	// response from the and operations.
+	// response from the RecognizeText
+	// (https://docs.aws.amazon.com/lexv2/latest/dg/API_runtime_RecognizeText.html) and
+	// RecognizeUtterance
+	// (https://docs.aws.amazon.com/lexv2/latest/dg/API_runtime_RecognizeUtterance.html)
+	// operations.
 	SessionId *string
 
 	noSmithyDocumentSerde

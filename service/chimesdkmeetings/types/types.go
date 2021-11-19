@@ -77,6 +77,10 @@ type EngineTranscribeMedicalSettings struct {
 	// This member is required.
 	Type TranscribeMedicalType
 
+	// Set this field to PHI to identify personal health information in the
+	// transcription output.
+	ContentIdentificationType TranscribeMedicalContentIdentificationType
+
 	// The AWS Region passed to Amazon Transcribe Medical. If you don't specify a
 	// Region, Amazon Chime uses the meeting's Region.
 	Region TranscribeMedicalRegion
@@ -94,6 +98,38 @@ type EngineTranscribeSettings struct {
 	//
 	// This member is required.
 	LanguageCode TranscribeLanguageCode
+
+	// Set this field to PII to identify personal health information in the
+	// transcription output.
+	ContentIdentificationType TranscribeContentIdentificationType
+
+	// Set this field to PII to redact personally identifiable information in the
+	// transcription output. Content redaction is performed only upon complete
+	// transcription of the audio segments. You can’t set both ContentRedactionType and
+	// ContentIdentificationType in the same request. If you set both, your request
+	// returns a BadRequestException.
+	ContentRedactionType TranscribeContentRedactionType
+
+	// Generates partial transcription results that are less likely to change as
+	// meeting attendees speak. It does so by only allowing the last few words from the
+	// partial results to change.
+	EnablePartialResultsStabilization bool
+
+	// The name of the language model used during transcription.
+	LanguageModelName *string
+
+	// The stabity level of a partial results transcription. Determines how stable you
+	// want the transcription results to be. A higher level means the transcription
+	// results are less likely to change.
+	PartialResultsStability TranscribePartialResultsStability
+
+	// Lists the PII entity types you want to identify or redact. To specify entity
+	// types, you must enable ContentIdentificationType or ContentRedactionType.
+	// PIIEntityTypes must be comma-separated. The available values are:
+	// BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_NUMBER, CREDIT_DEBIT_CVV,
+	// CREDIT_DEBIT_EXPIRY, PIN, EMAIL, ADDRESS, NAME, PHONE, SSN, and ALL.
+	// PiiEntityTypes is an optional parameter with a default value of ALL.
+	PiiEntityTypes *string
 
 	// The AWS Region passed to Amazon Transcribe. If you don't specify a Region,
 	// Amazon Chime uses the meeting's Region.

@@ -7,6 +7,18 @@ import (
 	"time"
 )
 
+// Information about the agent who accepted the contact.
+type AgentInfo struct {
+
+	// The timestamp when the contact was connected to the agent.
+	ConnectedToAgentTimestamp *time.Time
+
+	// The identifier of the agent who accepted the contact.
+	Id *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about an agent status.
 type AgentStatus struct {
 
@@ -28,7 +40,7 @@ type AgentStatus struct {
 	// The state of the agent status.
 	State AgentStatusState
 
-	// The tags used to organize, track, or control access for this resource.
+	// One or more tags.
 	Tags map[string]string
 
 	// The type of agent status.
@@ -64,6 +76,22 @@ type AnswerMachineDetectionConfig struct {
 	// The flag to indicate if answer machine detection analysis needs to be performed
 	// for a voice call. If set to true, TrafficType must be set as CAMPAIGN.
 	EnableAnswerMachineDetection bool
+
+	noSmithyDocumentSerde
+}
+
+// Information about the attachment reference if the referenceType is ATTACHMENT.
+// Otherwise, null.
+type AttachmentReference struct {
+
+	// Identifier of the attachment reference.
+	Name *string
+
+	// Status of an attachment reference type.
+	Status ReferenceStatus
+
+	// Contains the location path of the attachment reference.
+	Value *string
 
 	noSmithyDocumentSerde
 }
@@ -105,6 +133,61 @@ type ChatStreamingConfiguration struct {
 	//
 	// This member is required.
 	StreamingEndpointArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a contact.
+type Contact struct {
+
+	// Information about the agent who accepted the contact.
+	AgentInfo *AgentInfo
+
+	// The Amazon Resource Name (ARN) for the contact.
+	Arn *string
+
+	// How the contact reached your contact center.
+	Channel Channel
+
+	// The description of the contact.
+	Description *string
+
+	// The timestamp when the customer endpoint disconnected from Amazon Connect.
+	DisconnectTimestamp *time.Time
+
+	// The identifier for the contact.
+	Id *string
+
+	// If this contact is related to other contacts, this is the ID of the initial
+	// contact.
+	InitialContactId *string
+
+	// Indicates how the contact was initiated.
+	InitiationMethod ContactInitiationMethod
+
+	// The date and time this contact was initiated, in UTC time. For INBOUND, this is
+	// when the contact arrived. For OUTBOUND, this is when the agent began dialing.
+	// For CALLBACK, this is when the callback contact was created. For TRANSFER and
+	// QUEUE_TRANSFER, this is when the transfer was initiated. For API, this is when
+	// the request arrived.
+	InitiationTimestamp *time.Time
+
+	// The timestamp when contact was last updated.
+	LastUpdateTimestamp *time.Time
+
+	// The name of the contact.
+	Name *string
+
+	// If this contact is not the first contact, this is the ID of the previous
+	// contact.
+	PreviousContactId *string
+
+	// If this contact was queued, this contains information about the queue.
+	QueueInfo *QueueInfo
+
+	// The timestamp, in Unix epoch time format, at which to start running the inbound
+	// flow.
+	ScheduledTimestamp *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -447,7 +530,7 @@ type HoursOfOperation struct {
 	// The name for the hours of operation.
 	Name *string
 
-	// The tags used to organize, track, or control access for this resource.
+	// One or more tags.
 	Tags map[string]string
 
 	// The time zone for the hours of operation.
@@ -853,8 +936,20 @@ type Queue struct {
 	// The status of the queue.
 	Status QueueStatus
 
-	// The tags used to organize, track, or control access for this resource.
+	// One or more tags.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// If this contact was queued, this contains information about the queue.
+type QueueInfo struct {
+
+	// The timestamp when the contact was added to the queue.
+	EnqueueTimestamp *time.Time
+
+	// The identifier of the agent who accepted the contact.
+	Id *string
 
 	noSmithyDocumentSerde
 }
@@ -924,7 +1019,7 @@ type QuickConnect struct {
 	// The identifier for the quick connect.
 	QuickConnectId *string
 
-	// The tags used to organize, track, or control access for this resource.
+	// One or more tags.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -977,18 +1072,48 @@ type QuickConnectSummary struct {
 // UTF-8 bytes across all references for a contact.
 type Reference struct {
 
-	// A valid URL.
+	// The type of the reference. Only URL type can be added or updated on a contact.
 	//
 	// This member is required.
 	Type ReferenceType
 
-	// A formatted URL that displays to an agent in the Contact Control Panel (CCP)
+	// A valid value for the reference. For example, for a URL reference, a formatted
+	// URL that is displayed to an agent in the Contact Control Panel (CCP).
 	//
 	// This member is required.
 	Value *string
 
 	noSmithyDocumentSerde
 }
+
+// Contains summary information about a reference. ReferenceSummary contains only
+// one non null field between the URL and attachment based on the reference type.
+//
+// The following types satisfy this interface:
+//  ReferenceSummaryMemberAttachment
+//  ReferenceSummaryMemberUrl
+type ReferenceSummary interface {
+	isReferenceSummary()
+}
+
+// Information about the attachment reference if the referenceType is ATTACHMENT.
+// Otherwise, null.
+type ReferenceSummaryMemberAttachment struct {
+	Value AttachmentReference
+
+	noSmithyDocumentSerde
+}
+
+func (*ReferenceSummaryMemberAttachment) isReferenceSummary() {}
+
+// Information about Url reference if the referenceType is URL. Otherwise, null.
+type ReferenceSummaryMemberUrl struct {
+	Value UrlReference
+
+	noSmithyDocumentSerde
+}
+
+func (*ReferenceSummaryMemberUrl) isReferenceSummary() {}
 
 // Contains information about a routing profile.
 type RoutingProfile struct {
@@ -1176,7 +1301,7 @@ type SecurityProfile struct {
 	// The name for the security profile.
 	SecurityProfileName *string
 
-	// The tags used to organize, track, or control access for this resource.
+	// One or more tags.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -1205,6 +1330,18 @@ type Threshold struct {
 
 	// The threshold value to compare.
 	ThresholdValue *float64
+
+	noSmithyDocumentSerde
+}
+
+// The URL reference.
+type UrlReference struct {
+
+	// Identifier of the URL reference.
+	Name *string
+
+	// A valid URL.
+	Value *string
 
 	noSmithyDocumentSerde
 }
@@ -1342,3 +1479,14 @@ type VoiceRecordingConfiguration struct {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isReferenceSummary() {}

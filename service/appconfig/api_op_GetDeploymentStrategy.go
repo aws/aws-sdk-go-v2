@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieve information about a deployment strategy. A deployment strategy defines
+// Retrieves information about a deployment strategy. A deployment strategy defines
 // important criteria for rolling out your configuration to the designated targets.
-// A deployment strategy includes: the overall duration required, a percentage of
+// A deployment strategy includes the overall duration required, a percentage of
 // targets to receive the deployment during each interval, an algorithm that
 // defines how percentage grows, and bake time.
 func (c *Client) GetDeploymentStrategy(ctx context.Context, params *GetDeploymentStrategyInput, optFns ...func(*Options)) (*GetDeploymentStrategyOutput, error) {
@@ -49,8 +49,8 @@ type GetDeploymentStrategyOutput struct {
 	// The description of the deployment strategy.
 	Description *string
 
-	// The amount of time AppConfig monitored for alarms before considering the
-	// deployment to be complete and no longer eligible for automatic roll back.
+	// The amount of time that AppConfig monitored for alarms before considering the
+	// deployment to be complete and no longer eligible for automatic rollback.
 	FinalBakeTimeInMinutes int32
 
 	// The percentage of targets that received a deployed configuration during each

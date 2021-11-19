@@ -12,9 +12,9 @@ import (
 )
 
 // Enables or disables integration with a service that can be integrated with
-// DevOps Guru. The one service that can be integrated with DevOps Guru is AWS
-// Systems Manager, which can be used to create an OpsItem for each generated
-// insight.
+// DevOps Guru. The one service that can be integrated with DevOps Guru is Amazon
+// Web Services Systems Manager, which can be used to create an OpsItem for each
+// generated insight.
 func (c *Client) UpdateServiceIntegration(ctx context.Context, params *UpdateServiceIntegrationInput, optFns ...func(*Options)) (*UpdateServiceIntegrationOutput, error) {
 	if params == nil {
 		params = &UpdateServiceIntegrationInput{}

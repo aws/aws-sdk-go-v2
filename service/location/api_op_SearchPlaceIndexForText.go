@@ -12,10 +12,12 @@ import (
 )
 
 // Geocodes free-form text, such as an address, name, city, or region to allow you
-// to search for Places or points of interest. Includes the option to apply
-// additional parameters to narrow your list of results. You can search for places
-// near a given position using BiasPosition, or filter results within a bounding
-// box using FilterBBox. Providing both parameters simultaneously returns an error.
+// to search for Places or points of interest. Optional parameters let you narrow
+// your search results by bounding box or country, or bias your search toward a
+// specific position on the globe. You can search for places near a given position
+// using BiasPosition, or filter results within a bounding box using FilterBBox.
+// Providing both parameters simultaneously returns an error. Search results are
+// returned in order of highest to lowest relevance.
 func (c *Client) SearchPlaceIndexForText(ctx context.Context, params *SearchPlaceIndexForTextInput, optFns ...func(*Options)) (*SearchPlaceIndexForTextOutput, error) {
 	if params == nil {
 		params = &SearchPlaceIndexForTextInput{}
@@ -38,54 +40,48 @@ type SearchPlaceIndexForTextInput struct {
 	// This member is required.
 	IndexName *string
 
-	// The address, name, city, or region to be used in the search. In free-form text
+	// The address, name, city, or region to be used in the search in free-form text
 	// format. For example, 123 Any Street.
 	//
 	// This member is required.
 	Text *string
 
-	// Searches for results closest to the given position. An optional parameter
-	// defined by longitude, and latitude.
-	//
-	// * The first bias position is the X
-	// coordinate, or longitude.
-	//
-	// * The second bias position is the Y coordinate, or
-	// latitude.
-	//
-	// For example, bias=xLongitude&bias=yLatitude.
+	// An optional parameter that indicates a preference for places that are closer to
+	// a specified position. If provided, this parameter must contain a pair of
+	// numbers. The first number represents the X coordinate, or longitude; the second
+	// number represents the Y coordinate, or latitude. For example, [-123.1174,
+	// 49.2847] represents the position with longitude -123.1174 and latitude 49.2847.
+	// BiasPosition and FilterBBox are mutually exclusive. Specifying both options
+	// results in an error.
 	BiasPosition []float64
 
-	// Filters the results by returning only Places within the provided bounding box.
-	// An optional parameter. The first 2 bbox parameters describe the lower southwest
-	// corner:
-	//
-	// * The first bbox position is the X coordinate or longitude of the lower
-	// southwest corner.
-	//
-	// * The second bbox position is the Y coordinate or latitude of
-	// the lower southwest corner.
-	//
-	// For example, bbox=xLongitudeSW&bbox=yLatitudeSW.
-	// The next bbox parameters describe the upper northeast corner:
-	//
-	// * The third bbox
-	// position is the X coordinate, or longitude of the upper northeast corner.
-	//
-	// * The
-	// fourth bbox position is the Y coordinate, or longitude of the upper northeast
-	// corner.
-	//
-	// For example, bbox=xLongitudeNE&bbox=yLatitudeNE
+	// An optional parameter that limits the search results by returning only places
+	// that are within the provided bounding box. If provided, this parameter must
+	// contain a total of four consecutive numbers in two pairs. The first pair of
+	// numbers represents the X and Y coordinates (longitude and latitude,
+	// respectively) of the southwest corner of the bounding box; the second pair of
+	// numbers represents the X and Y coordinates (longitude and latitude,
+	// respectively) of the northeast corner of the bounding box. For example,
+	// [-12.7935, -37.4835, -12.0684, -36.9542] represents a bounding box where the
+	// southwest corner has longitude -12.7935 and latitude -37.4835, and the northeast
+	// corner has longitude -12.0684 and latitude -36.9542. FilterBBox and BiasPosition
+	// are mutually exclusive. Specifying both options results in an error.
 	FilterBBox []float64
 
-	// Limits the search to the given a list of countries/regions. An optional
-	// parameter.
+	// An optional parameter that limits the search results by returning only places
+	// that are in a specified list of countries.
 	//
-	// * Use the ISO 3166 (https://www.iso.org/iso-3166-country-codes.html)
-	// 3-digit country code. For example, Australia uses three upper-case characters:
-	// AUS.
+	// * Valid values include ISO 3166
+	// (https://www.iso.org/iso-3166-country-codes.html) 3-digit country codes. For
+	// example, Australia uses three upper-case characters: AUS.
 	FilterCountries []string
+
+	// The preferred language used to return results. The value must be a valid BCP 47
+	// (https://tools.ietf.org/search/bcp47) language tag, for example, en for English.
+	// This setting affects the languages used in the results. It does not change which
+	// results are returned. If the language is not specified, or not supported for a
+	// particular result, the partner automatically chooses a language for the result.
+	Language *string
 
 	// An optional parameter. The maximum number of results returned per request. The
 	// default: 50
@@ -96,14 +92,16 @@ type SearchPlaceIndexForTextInput struct {
 
 type SearchPlaceIndexForTextOutput struct {
 
-	// A list of Places closest to the specified position. Each result contains
-	// additional information about the specific point of interest.
+	// A list of Places matching the input text. Each result contains additional
+	// information about the specific point of interest.
 	//
 	// This member is required.
 	Results []types.SearchForTextResult
 
-	// Contains a summary of the request. Contains the BiasPosition, DataSource,
-	// FilterBBox, FilterCountries, MaxResults, ResultBBox, and Text.
+	// Contains a summary of the request. Echoes the input values for BiasPosition,
+	// FilterBBox, FilterCountries, Language, MaxResults, and Text. Also includes the
+	// DataSource of the place index and the bounding box, ResultBBox, which surrounds
+	// the search results.
 	//
 	// This member is required.
 	Summary *types.SearchPlaceIndexForTextSummary

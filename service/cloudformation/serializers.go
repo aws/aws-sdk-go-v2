@@ -4274,6 +4274,18 @@ func awsAwsquery_serializeDocumentLogicalResourceIds(v []string, value query.Val
 	return nil
 }
 
+func awsAwsquery_serializeDocumentManagedExecution(v *types.ManagedExecution, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Active != nil {
+		objectKey := object.Key("Active")
+		objectKey.Boolean(*v.Active)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeDocumentNotificationARNs(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
@@ -5141,6 +5153,13 @@ func awsAwsquery_serializeOpDocumentCreateStackSetInput(v *CreateStackSetInput, 
 	if v.ExecutionRoleName != nil {
 		objectKey := object.Key("ExecutionRoleName")
 		objectKey.String(*v.ExecutionRoleName)
+	}
+
+	if v.ManagedExecution != nil {
+		objectKey := object.Key("ManagedExecution")
+		if err := awsAwsquery_serializeDocumentManagedExecution(v.ManagedExecution, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.Parameters != nil {
@@ -6700,6 +6719,13 @@ func awsAwsquery_serializeOpDocumentUpdateStackSetInput(v *UpdateStackSetInput, 
 	if v.ExecutionRoleName != nil {
 		objectKey := object.Key("ExecutionRoleName")
 		objectKey.String(*v.ExecutionRoleName)
+	}
+
+	if v.ManagedExecution != nil {
+		objectKey := object.Key("ManagedExecution")
+		if err := awsAwsquery_serializeDocumentManagedExecution(v.ManagedExecution, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.OperationId != nil {

@@ -135,3 +135,23 @@ func (Shape) Values() []Shape {
 		"List",
 	}
 }
+
+type StyleType string
+
+// Enum values for StyleType
+const (
+	StyleTypeDefault       StyleType = "Default"
+	StyleTypeSpellByLetter StyleType = "SpellByLetter"
+	StyleTypeSpellByWord   StyleType = "SpellByWord"
+)
+
+// Values returns all known values for StyleType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (StyleType) Values() []StyleType {
+	return []StyleType{
+		"Default",
+		"SpellByLetter",
+		"SpellByWord",
+	}
+}

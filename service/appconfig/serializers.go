@@ -195,6 +195,11 @@ func awsRestjson1_serializeOpDocumentCreateConfigurationProfileInput(v *CreateCo
 		}
 	}
 
+	if v.Type != nil {
+		ok := object.Key("Type")
+		ok.String(*v.Type)
+	}
+
 	if v.Validators != nil {
 		ok := object.Key("Validators")
 		if err := awsRestjson1_serializeDocumentValidatorList(v.Validators, ok); err != nil {
@@ -1437,6 +1442,10 @@ func awsRestjson1_serializeOpHttpBindingsListConfigurationProfilesInput(v *ListC
 
 	if v.NextToken != nil {
 		encoder.SetQuery("next_token").String(*v.NextToken)
+	}
+
+	if v.Type != nil {
+		encoder.SetQuery("type").String(*v.Type)
 	}
 
 	return nil

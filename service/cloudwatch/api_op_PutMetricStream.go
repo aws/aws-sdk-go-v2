@@ -14,7 +14,7 @@ import (
 // Creates or updates a metric stream. Metric streams can automatically stream
 // CloudWatch metrics to Amazon Web Services destinations including Amazon S3 and
 // to many third-party solutions. For more information, see  Using Metric Streams
-// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Metric-Streams.html).
+// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html).
 // To create a metric stream, you must be logged on to an account that has the
 // iam:PassRole permission and either the CloudWatchFullAccess policy or the
 // cloudwatch:PutMetricStream permission. When you create or update a metric

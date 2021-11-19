@@ -7863,6 +7863,11 @@ func awsRestjson1_serializeDocumentInputSettings(v *types.InputSettings, value s
 		}
 	}
 
+	if v.Scte35Pid != 0 {
+		ok := object.Key("scte35Pid")
+		ok.Integer(v.Scte35Pid)
+	}
+
 	if len(v.Smpte2038DataPreference) > 0 {
 		ok := object.Key("smpte2038DataPreference")
 		ok.String(string(v.Smpte2038DataPreference))

@@ -1018,6 +1018,79 @@ func awsRestjson1_serializeOpDocumentGetStreamKeyInput(v *GetStreamKeyInput, val
 	return nil
 }
 
+type awsRestjson1_serializeOpGetStreamSession struct {
+}
+
+func (*awsRestjson1_serializeOpGetStreamSession) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetStreamSession) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetStreamSessionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/GetStreamSession")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentGetStreamSessionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetStreamSessionInput(v *GetStreamSessionInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentGetStreamSessionInput(v *GetStreamSessionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ChannelArn != nil {
+		ok := object.Key("channelArn")
+		ok.String(*v.ChannelArn)
+	}
+
+	if v.StreamId != nil {
+		ok := object.Key("streamId")
+		ok.String(*v.StreamId)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpImportPlaybackKeyPair struct {
 }
 
@@ -1464,6 +1537,91 @@ func awsRestjson1_serializeOpHttpBindingsListStreamsInput(v *ListStreamsInput, e
 func awsRestjson1_serializeOpDocumentListStreamsInput(v *ListStreamsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.FilterBy != nil {
+		ok := object.Key("filterBy")
+		if err := awsRestjson1_serializeDocumentStreamFilters(v.FilterBy, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != 0 {
+		ok := object.Key("maxResults")
+		ok.Integer(v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListStreamSessions struct {
+}
+
+func (*awsRestjson1_serializeOpListStreamSessions) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListStreamSessions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListStreamSessionsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/ListStreamSessions")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentListStreamSessionsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListStreamSessionsInput(v *ListStreamSessionsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentListStreamSessionsInput(v *ListStreamSessionsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ChannelArn != nil {
+		ok := object.Key("channelArn")
+		ok.String(*v.ChannelArn)
+	}
 
 	if v.MaxResults != 0 {
 		ok := object.Key("maxResults")
@@ -1949,6 +2107,18 @@ func awsRestjson1_serializeDocumentS3DestinationConfiguration(v *types.S3Destina
 	if v.BucketName != nil {
 		ok := object.Key("bucketName")
 		ok.String(*v.BucketName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentStreamFilters(v *types.StreamFilters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Health) > 0 {
+		ok := object.Key("health")
+		ok.String(string(v.Health))
 	}
 
 	return nil

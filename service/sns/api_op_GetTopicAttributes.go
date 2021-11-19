@@ -50,17 +50,17 @@ type GetTopicAttributesOutput struct {
 	// * DisplayName – The human-readable name used in the From field for
 	// notifications to email and email-json endpoints.
 	//
-	// * Owner – The account ID of
-	// the topic's owner.
+	// * Owner – The Amazon Web
+	// Services account ID of the topic's owner.
 	//
-	// * Policy – The JSON serialization of the topic's access
-	// control policy.
+	// * Policy – The JSON serialization of
+	// the topic's access control policy.
 	//
-	// * SubscriptionsConfirmed – The number of confirmed
-	// subscriptions for the topic.
+	// * SubscriptionsConfirmed – The number of
+	// confirmed subscriptions for the topic.
 	//
-	// * SubscriptionsDeleted – The number of deleted
-	// subscriptions for the topic.
+	// * SubscriptionsDeleted – The number of
+	// deleted subscriptions for the topic.
 	//
 	// * SubscriptionsPending – The number of
 	// subscriptions pending confirmation for the topic.

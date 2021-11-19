@@ -29,12 +29,12 @@ func (c *Client) GetAssessmentReportUrl(ctx context.Context, params *GetAssessme
 
 type GetAssessmentReportUrlInput struct {
 
-	// The identifier for the assessment.
+	// The unique identifier for the assessment.
 	//
 	// This member is required.
 	AssessmentId *string
 
-	// The identifier for the assessment report.
+	// The unique identifier for the assessment report.
 	//
 	// This member is required.
 	AssessmentReportId *string

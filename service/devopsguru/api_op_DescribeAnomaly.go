@@ -34,6 +34,9 @@ type DescribeAnomalyInput struct {
 	// This member is required.
 	Id *string
 
+	// The ID of the member account.
+	AccountId *string
+
 	noSmithyDocumentSerde
 }
 

@@ -21033,6 +21033,19 @@ func awsRestjson1_deserializeDocumentInputSettings(v **types.InputSettings, valu
 				return err
 			}
 
+		case "scte35Pid":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin32Max8191 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Scte35Pid = int32(i64)
+			}
+
 		case "smpte2038DataPreference":
 			if value != nil {
 				jtv, ok := value.(string)

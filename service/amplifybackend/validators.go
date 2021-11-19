@@ -110,6 +110,26 @@ func (m *validateOpCreateBackend) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateBackendStorage struct {
+}
+
+func (*validateOpCreateBackendStorage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateBackendStorage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateBackendStorageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateBackendStorageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateToken struct {
 }
 
@@ -185,6 +205,26 @@ func (m *validateOpDeleteBackend) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteBackendInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteBackendStorage struct {
+}
+
+func (*validateOpDeleteBackendStorage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteBackendStorage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteBackendStorageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteBackendStorageInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -330,6 +370,26 @@ func (m *validateOpGetBackendJob) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetBackendStorage struct {
+}
+
+func (*validateOpGetBackendStorage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetBackendStorage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetBackendStorageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetBackendStorageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetToken struct {
 }
 
@@ -365,6 +425,26 @@ func (m *validateOpImportBackendAuth) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpImportBackendAuthInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpImportBackendStorage struct {
+}
+
+func (*validateOpImportBackendStorage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpImportBackendStorage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ImportBackendStorageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpImportBackendStorageInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -510,6 +590,26 @@ func (m *validateOpUpdateBackendJob) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateBackendStorage struct {
+}
+
+func (*validateOpUpdateBackendStorage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateBackendStorage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateBackendStorageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateBackendStorageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpCloneBackendValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCloneBackend{}, middleware.After)
 }
@@ -530,6 +630,10 @@ func addOpCreateBackendValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateBackend{}, middleware.After)
 }
 
+func addOpCreateBackendStorageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateBackendStorage{}, middleware.After)
+}
+
 func addOpCreateTokenValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateToken{}, middleware.After)
 }
@@ -544,6 +648,10 @@ func addOpDeleteBackendAuthValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteBackendValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteBackend{}, middleware.After)
+}
+
+func addOpDeleteBackendStorageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteBackendStorage{}, middleware.After)
 }
 
 func addOpDeleteTokenValidationMiddleware(stack *middleware.Stack) error {
@@ -574,12 +682,20 @@ func addOpGetBackendJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetBackendJob{}, middleware.After)
 }
 
+func addOpGetBackendStorageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetBackendStorage{}, middleware.After)
+}
+
 func addOpGetTokenValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetToken{}, middleware.After)
 }
 
 func addOpImportBackendAuthValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpImportBackendAuth{}, middleware.After)
+}
+
+func addOpImportBackendStorageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpImportBackendStorage{}, middleware.After)
 }
 
 func addOpListBackendJobsValidationMiddleware(stack *middleware.Stack) error {
@@ -608,6 +724,25 @@ func addOpUpdateBackendConfigValidationMiddleware(stack *middleware.Stack) error
 
 func addOpUpdateBackendJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateBackendJob{}, middleware.After)
+}
+
+func addOpUpdateBackendStorageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateBackendStorage{}, middleware.After)
+}
+
+func validateBackendStoragePermissions(v *types.BackendStoragePermissions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BackendStoragePermissions"}
+	if v.Authenticated == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Authenticated"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateCreateBackendAuthForgotPasswordConfig(v *types.CreateBackendAuthForgotPasswordConfig) error {
@@ -762,6 +897,28 @@ func validateCreateBackendAuthUserPoolConfig(v *types.CreateBackendAuthUserPoolC
 	}
 }
 
+func validateCreateBackendStorageResourceConfig(v *types.CreateBackendStorageResourceConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateBackendStorageResourceConfig"}
+	if v.Permissions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Permissions"))
+	} else if v.Permissions != nil {
+		if err := validateBackendStoragePermissions(v.Permissions); err != nil {
+			invalidParams.AddNested("Permissions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.ServiceName) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateUpdateBackendAuthResourceConfig(v *types.UpdateBackendAuthResourceConfig) error {
 	if v == nil {
 		return nil
@@ -775,6 +932,28 @@ func validateUpdateBackendAuthResourceConfig(v *types.UpdateBackendAuthResourceC
 	}
 	if v.UserPoolConfigs == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserPoolConfigs"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateBackendStorageResourceConfig(v *types.UpdateBackendStorageResourceConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateBackendStorageResourceConfig"}
+	if v.Permissions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Permissions"))
+	} else if v.Permissions != nil {
+		if err := validateBackendStoragePermissions(v.Permissions); err != nil {
+			invalidParams.AddNested("Permissions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.ServiceName) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -892,6 +1071,34 @@ func validateOpCreateBackendInput(v *CreateBackendInput) error {
 	}
 }
 
+func validateOpCreateBackendStorageInput(v *CreateBackendStorageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateBackendStorageInput"}
+	if v.AppId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
+	}
+	if v.BackendEnvironmentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BackendEnvironmentName"))
+	}
+	if v.ResourceConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceConfig"))
+	} else if v.ResourceConfig != nil {
+		if err := validateCreateBackendStorageResourceConfig(v.ResourceConfig); err != nil {
+			invalidParams.AddNested("ResourceConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ResourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateTokenInput(v *CreateTokenInput) error {
 	if v == nil {
 		return nil
@@ -959,6 +1166,30 @@ func validateOpDeleteBackendInput(v *DeleteBackendInput) error {
 	}
 	if v.BackendEnvironmentName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BackendEnvironmentName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteBackendStorageInput(v *DeleteBackendStorageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteBackendStorageInput"}
+	if v.AppId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
+	}
+	if v.BackendEnvironmentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BackendEnvironmentName"))
+	}
+	if v.ResourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceName"))
+	}
+	if len(v.ServiceName) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1105,6 +1336,27 @@ func validateOpGetBackendJobInput(v *GetBackendJobInput) error {
 	}
 }
 
+func validateOpGetBackendStorageInput(v *GetBackendStorageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetBackendStorageInput"}
+	if v.AppId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
+	}
+	if v.BackendEnvironmentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BackendEnvironmentName"))
+	}
+	if v.ResourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetTokenInput(v *GetTokenInput) error {
 	if v == nil {
 		return nil
@@ -1142,6 +1394,27 @@ func validateOpImportBackendAuthInput(v *ImportBackendAuthInput) error {
 	}
 	if v.WebClientId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WebClientId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpImportBackendStorageInput(v *ImportBackendStorageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImportBackendStorageInput"}
+	if v.AppId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
+	}
+	if v.BackendEnvironmentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BackendEnvironmentName"))
+	}
+	if len(v.ServiceName) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1275,6 +1548,34 @@ func validateOpUpdateBackendJobInput(v *UpdateBackendJobInput) error {
 	}
 	if v.JobId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateBackendStorageInput(v *UpdateBackendStorageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateBackendStorageInput"}
+	if v.AppId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
+	}
+	if v.BackendEnvironmentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BackendEnvironmentName"))
+	}
+	if v.ResourceConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceConfig"))
+	} else if v.ResourceConfig != nil {
+		if err := validateUpdateBackendStorageResourceConfig(v.ResourceConfig); err != nil {
+			invalidParams.AddNested("ResourceConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ResourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

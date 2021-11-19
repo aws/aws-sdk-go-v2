@@ -46,7 +46,7 @@ type CreateUseCaseInput struct {
 	// This member is required.
 	UseCaseType types.UseCaseType
 
-	// The tags used to organize, track, or control access for this resource.
+	// One or more tags.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

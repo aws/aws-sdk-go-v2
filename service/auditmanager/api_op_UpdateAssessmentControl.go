@@ -29,17 +29,17 @@ func (c *Client) UpdateAssessmentControl(ctx context.Context, params *UpdateAsse
 
 type UpdateAssessmentControlInput struct {
 
-	// The identifier for the assessment.
+	// The unique identifier for the assessment.
 	//
 	// This member is required.
 	AssessmentId *string
 
-	// The identifier for the control.
+	// The unique identifier for the control.
 	//
 	// This member is required.
 	ControlId *string
 
-	// The identifier for the control set.
+	// The unique identifier for the control set.
 	//
 	// This member is required.
 	ControlSetId *string

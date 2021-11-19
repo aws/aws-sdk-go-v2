@@ -32,10 +32,10 @@ type DescribeDataSharesForProducerInput struct {
 
 	// An optional parameter that specifies the starting point to return a set of
 	// response records. When the results of a DescribeDataSharesForProducer request
-	// exceed the value specified in MaxRecords, AWS returns a value in the Marker
-	// field of the response. You can retrieve the next set of response records by
-	// providing the returned marker value in the Marker parameter and retrying the
-	// request.
+	// exceed the value specified in MaxRecords, Amazon Web Services returns a value in
+	// the Marker field of the response. You can retrieve the next set of response
+	// records by providing the returned marker value in the Marker parameter and
+	// retrying the request.
 	Marker *string
 
 	// The maximum number of response records to return in each call. If the number of
@@ -63,10 +63,10 @@ type DescribeDataSharesForProducerOutput struct {
 
 	// An optional parameter that specifies the starting point to return a set of
 	// response records. When the results of a DescribeDataSharesForProducer request
-	// exceed the value specified in MaxRecords, AWS returns a value in the Marker
-	// field of the response. You can retrieve the next set of response records by
-	// providing the returned marker value in the Marker parameter and retrying the
-	// request.
+	// exceed the value specified in MaxRecords, Amazon Web Services returns a value in
+	// the Marker field of the response. You can retrieve the next set of response
+	// records by providing the returned marker value in the Marker parameter and
+	// retrying the request.
 	Marker *string
 
 	// Metadata pertaining to the operation's result.

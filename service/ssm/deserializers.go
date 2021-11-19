@@ -38300,6 +38300,15 @@ func awsAwsjson11_deserializeDocumentSession(v **types.Session, value interface{
 				}
 			}
 
+		case "MaxSessionDuration":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MaxSessionDuration to be of type string, got %T instead", value)
+				}
+				sv.MaxSessionDuration = ptr.String(jtv)
+			}
+
 		case "OutputUrl":
 			if err := awsAwsjson11_deserializeDocumentSessionManagerOutputUrl(&sv.OutputUrl, value); err != nil {
 				return err
@@ -38312,6 +38321,15 @@ func awsAwsjson11_deserializeDocumentSession(v **types.Session, value interface{
 					return fmt.Errorf("expected SessionOwner to be of type string, got %T instead", value)
 				}
 				sv.Owner = ptr.String(jtv)
+			}
+
+		case "Reason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SessionReason to be of type string, got %T instead", value)
+				}
+				sv.Reason = ptr.String(jtv)
 			}
 
 		case "SessionId":

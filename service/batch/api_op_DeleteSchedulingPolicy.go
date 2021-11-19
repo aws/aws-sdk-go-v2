@@ -11,7 +11,7 @@ import (
 )
 
 // Deletes the specified scheduling policy. You can't delete a scheduling policy
-// that is used in any job queues.
+// that's used in any job queues.
 func (c *Client) DeleteSchedulingPolicy(ctx context.Context, params *DeleteSchedulingPolicyInput, optFns ...func(*Options)) (*DeleteSchedulingPolicyOutput, error) {
 	if params == nil {
 		params = &DeleteSchedulingPolicyInput{}

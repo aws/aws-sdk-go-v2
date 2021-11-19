@@ -35,7 +35,7 @@ type BrokerLogs struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the setup to be used for Kafka broker nodes in the cluster.
+// Describes the setup to be used for Apache Kafka broker nodes in the cluster.
 type BrokerNodeGroupInfo struct {
 
 	// The list of subnets to connect to in the client virtual private cloud (VPC). AWS
@@ -46,7 +46,7 @@ type BrokerNodeGroupInfo struct {
 	// This member is required.
 	ClientSubnets []string
 
-	// The type of Amazon EC2 instances to use for Kafka brokers. The following
+	// The type of Amazon EC2 instances to use for Apache Kafka brokers. The following
 	// instance types are allowed: kafka.m5.large, kafka.m5.xlarge, kafka.m5.2xlarge,
 	// kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
 	//
@@ -60,6 +60,9 @@ type BrokerNodeGroupInfo struct {
 	// Availability Zones that correspond to the subnets you provide when you create
 	// the cluster.
 	BrokerAZDistribution BrokerAZDistribution
+
+	// Information about the broker access configuration.
+	ConnectivityInfo *ConnectivityInfo
 
 	// The AWS security groups to associate with the elastic network interfaces in
 	// order to specify who can connect to and communicate with the Amazon MSK cluster.
@@ -88,7 +91,7 @@ type BrokerNodeInfo struct {
 	// The virtual private cloud (VPC) of the client.
 	ClientVpcIpAddress *string
 
-	// Information about the version of software currently deployed on the Kafka
+	// Information about the version of software currently deployed on the Apache Kafka
 	// brokers in the cluster.
 	CurrentBrokerSoftwareInfo *BrokerSoftwareInfo
 
@@ -161,7 +164,7 @@ type ClusterInfo struct {
 	// The time when the cluster was created.
 	CreationTime *time.Time
 
-	// Information about the version of software currently deployed on the Kafka
+	// Information about the version of software currently deployed on the Apache Kafka
 	// brokers in the cluster.
 	CurrentBrokerSoftwareInfo *BrokerSoftwareInfo
 
@@ -264,13 +267,14 @@ type ClusterOperationStepInfo struct {
 	noSmithyDocumentSerde
 }
 
-// Contains source Kafka versions and compatible target Kafka versions.
+// Contains source Apache Kafka versions and compatible target Apache Kafka
+// versions.
 type CompatibleKafkaVersion struct {
 
-	// A Kafka version.
+	// An Apache Kafka version.
 	SourceVersion *string
 
-	// A list of Kafka versions.
+	// A list of Apache Kafka versions.
 	TargetVersions []string
 
 	noSmithyDocumentSerde
@@ -355,8 +359,17 @@ type ConfigurationRevision struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about the EBS storage volumes attached to Kafka broker
-// nodes.
+// Information about the broker access configuration.
+type ConnectivityInfo struct {
+
+	// Public access control for brokers.
+	PublicAccess *PublicAccess
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the EBS storage volumes attached to Apache Kafka
+// broker nodes.
 type EBSStorageInfo struct {
 
 	// The size in GiB of the EBS volume for the data drive on each broker node.
@@ -441,10 +454,10 @@ type Iam struct {
 	noSmithyDocumentSerde
 }
 
-// Indicates whether you want to enable or disable the JMX Exporter.
+// Indicates whether you want to turn on or turn off the JMX Exporter.
 type JmxExporter struct {
 
-	// Indicates whether you want to enable or disable the JMX Exporter.
+	// Indicates whether you want to turn on or turn off the JMX Exporter.
 	//
 	// This member is required.
 	EnabledInBroker bool
@@ -452,10 +465,10 @@ type JmxExporter struct {
 	noSmithyDocumentSerde
 }
 
-// Indicates whether you want to enable or disable the JMX Exporter.
+// Indicates whether you want to turn on or turn off the JMX Exporter.
 type JmxExporterInfo struct {
 
-	// Indicates whether you want to enable or disable the JMX Exporter.
+	// Indicates whether you want to turn on or turn off the JMX Exporter.
 	//
 	// This member is required.
 	EnabledInBroker bool
@@ -491,6 +504,9 @@ type MutableClusterInfo struct {
 	// Information about the changes in the configuration of the brokers.
 	ConfigurationInfo *ConfigurationInfo
 
+	// Information about the broker access configuration.
+	ConnectivityInfo *ConnectivityInfo
+
 	// Includes all encryption-related information.
 	EncryptionInfo *EncryptionInfo
 
@@ -501,7 +517,7 @@ type MutableClusterInfo struct {
 	// Information about the Amazon MSK broker type.
 	InstanceType *string
 
-	// The Kafka version.
+	// The Apache Kafka version.
 	KafkaVersion *string
 
 	// You can configure your MSK cluster to send broker logs to different destination
@@ -517,10 +533,10 @@ type MutableClusterInfo struct {
 	noSmithyDocumentSerde
 }
 
-// Indicates whether you want to enable or disable the Node Exporter.
+// Indicates whether you want to turn on or turn off the Node Exporter.
 type NodeExporter struct {
 
-	// Indicates whether you want to enable or disable the Node Exporter.
+	// Indicates whether you want to turn on or turn off the Node Exporter.
 	//
 	// This member is required.
 	EnabledInBroker bool
@@ -528,10 +544,10 @@ type NodeExporter struct {
 	noSmithyDocumentSerde
 }
 
-// Indicates whether you want to enable or disable the Node Exporter.
+// Indicates whether you want to turn on or turn off the Node Exporter.
 type NodeExporterInfo struct {
 
-	// Indicates whether you want to enable or disable the Node Exporter.
+	// Indicates whether you want to turn on or turn off the Node Exporter.
 	//
 	// This member is required.
 	EnabledInBroker bool
@@ -588,10 +604,10 @@ type OpenMonitoringInfo struct {
 // Prometheus settings.
 type Prometheus struct {
 
-	// Indicates whether you want to enable or disable the JMX Exporter.
+	// Indicates whether you want to turn on or turn off the JMX Exporter.
 	JmxExporter *JmxExporter
 
-	// Indicates whether you want to enable or disable the Node Exporter.
+	// Indicates whether you want to turn on or turn off the Node Exporter.
 	NodeExporter *NodeExporter
 
 	noSmithyDocumentSerde
@@ -600,11 +616,21 @@ type Prometheus struct {
 // Prometheus settings.
 type PrometheusInfo struct {
 
-	// Indicates whether you want to enable or disable the JMX Exporter.
+	// Indicates whether you want to turn on or turn off the JMX Exporter.
 	JmxExporter *JmxExporterInfo
 
-	// Indicates whether you want to enable or disable the Node Exporter.
+	// Indicates whether you want to turn on or turn off the Node Exporter.
 	NodeExporter *NodeExporterInfo
+
+	noSmithyDocumentSerde
+}
+
+// Public access control for brokers.
+type PublicAccess struct {
+
+	// The value DISABLED indicates that public access is turned off.
+	// SERVICE_PROVIDED_EIPS indicates that public access is turned on.
+	Type *string
 
 	noSmithyDocumentSerde
 }
@@ -665,7 +691,7 @@ type Tls struct {
 	// List of ACM Certificate Authority ARNs.
 	CertificateAuthorityArnList []string
 
-	// Specifies whether you want to enable or disable TLS authentication.
+	// Specifies whether you want to turn on or turn off TLS authentication.
 	Enabled bool
 
 	noSmithyDocumentSerde
@@ -673,8 +699,8 @@ type Tls struct {
 
 type Unauthenticated struct {
 
-	// Specifies whether you want to enable or disable unauthenticated traffic to your
-	// cluster.
+	// Specifies whether you want to turn on or turn off unauthenticated traffic to
+	// your cluster.
 	Enabled bool
 
 	noSmithyDocumentSerde

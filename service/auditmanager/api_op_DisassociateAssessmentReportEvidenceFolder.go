@@ -29,12 +29,12 @@ func (c *Client) DisassociateAssessmentReportEvidenceFolder(ctx context.Context,
 
 type DisassociateAssessmentReportEvidenceFolderInput struct {
 
-	// The identifier for the assessment.
+	// The unique identifier for the assessment.
 	//
 	// This member is required.
 	AssessmentId *string
 
-	// The identifier for the folder in which evidence is stored.
+	// The unique identifier for the folder that the evidence is stored in.
 	//
 	// This member is required.
 	EvidenceFolderId *string

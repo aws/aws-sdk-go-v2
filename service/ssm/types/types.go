@@ -120,9 +120,10 @@ type AssociationDescription struct {
 	// The association version.
 	AssociationVersion *string
 
-	// Specify the target for the association. This target is required for associations
-	// that use an Automation runbook and target resources by using rate controls.
-	// Automation is a capability of Amazon Web Services Systems Manager.
+	// Choose the parameter that will define how your automation will branch out. This
+	// target is required for associations that use an Automation runbook and target
+	// resources by using rate controls. Automation is a capability of Amazon Web
+	// Services Systems Manager.
 	AutomationTargetParameterName *string
 
 	// The names or Amazon Resource Names (ARNs) of the Change Calendar type documents
@@ -3879,7 +3880,7 @@ type ParameterStringFilter struct {
 	// The name of the filter. The ParameterStringFilter object is used by the
 	// DescribeParameters and GetParametersByPath API operations. However, not all of
 	// the pattern values listed for Key can be used with both operations. For
-	// DescribeActions, all of the listed patterns are valid except Label. For
+	// DescribeParameters, all of the listed patterns are valid except Label. For
 	// GetParametersByPath, the following patterns listed for Key aren't valid: tag,
 	// DataType, Name, Path, and Tier. For examples of Amazon Web Services CLI commands
 	// demonstrating valid parameter filter constructions, see Searching for Systems
@@ -4684,11 +4685,17 @@ type Session struct {
 	// The date and time, in ISO-8601 Extended format, when the session was terminated.
 	EndDate *time.Time
 
+	// The maximum duration of a session before it terminates.
+	MaxSessionDuration *string
+
 	// Reserved for future use.
 	OutputUrl *SessionManagerOutputUrl
 
 	// The ID of the Amazon Web Services user account that started the session.
 	Owner *string
+
+	// The reason for connecting to the instance.
+	Reason *string
 
 	// The ID of the session.
 	SessionId *string

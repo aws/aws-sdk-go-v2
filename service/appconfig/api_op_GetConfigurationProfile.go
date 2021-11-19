@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieve information about a configuration profile.
+// Retrieves information about a configuration profile.
 func (c *Client) GetConfigurationProfile(ctx context.Context, params *GetConfigurationProfileInput, optFns ...func(*Options)) (*GetConfigurationProfileOutput, error) {
 	if params == nil {
 		params = &GetConfigurationProfileInput{}
@@ -35,7 +35,7 @@ type GetConfigurationProfileInput struct {
 	// This member is required.
 	ApplicationId *string
 
-	// The ID of the configuration profile you want to get.
+	// The ID of the configuration profile that you want to get.
 	//
 	// This member is required.
 	ConfigurationProfileId *string
@@ -63,6 +63,12 @@ type GetConfigurationProfileOutput struct {
 	// The ARN of an IAM role with permission to access the configuration at the
 	// specified LocationUri.
 	RetrievalRoleArn *string
+
+	// The type of configurations that the configuration profile contains. A
+	// configuration can be a feature flag used for enabling or disabling new features
+	// or a free-form configuration used for distributing configurations to your
+	// application.
+	Type *string
 
 	// A list of methods for validating the configuration.
 	Validators []types.Validator

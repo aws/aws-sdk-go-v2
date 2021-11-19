@@ -33,7 +33,8 @@ type CreateUploadUrlInput struct {
 
 type CreateUploadUrlOutput struct {
 
-	// An identifier for a unique import job. Use it when you call the operation.
+	// An identifier for a unique import job. Use it when you call the StartImport
+	// (https://docs.aws.amazon.com/lexv2/latest/dg/API_StartImport.html) operation.
 	ImportId *string
 
 	// A pre-signed S3 write URL. Upload the zip archive file that contains the

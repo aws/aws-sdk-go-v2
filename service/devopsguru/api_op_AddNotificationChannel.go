@@ -19,9 +19,10 @@ import (
 // in your account. For more information, see Permissions for cross account Amazon
 // SNS topics
 // (https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html).
-// If you use an Amazon SNS topic that is encrypted by an AWS Key Management
-// Service customer-managed key (CMK), then you must add permissions to the CMK.
-// For more information, see Permissions for AWS KMS–encrypted Amazon SNS topics
+// If you use an Amazon SNS topic that is encrypted by an Amazon Web Services Key
+// Management Service customer-managed key (CMK), then you must add permissions to
+// the CMK. For more information, see Permissions for Amazon Web Services
+// KMS–encrypted Amazon SNS topics
 // (https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html).
 func (c *Client) AddNotificationChannel(ctx context.Context, params *AddNotificationChannelInput, optFns ...func(*Options)) (*AddNotificationChannelOutput, error) {
 	if params == nil {

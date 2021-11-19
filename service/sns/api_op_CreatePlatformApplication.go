@@ -23,8 +23,12 @@ import (
 // * For Baidu, PlatformPrincipal is API key and PlatformCredential
 // is secret key.
 //
-// * For APNS and APNS_SANDBOX, PlatformPrincipal is SSL
-// certificate and PlatformCredential is private key.
+// * For APNS and APNS_SANDBOX using certificate credentials,
+// PlatformPrincipal is SSL certificate and PlatformCredential is private key.
+//
+// *
+// For APNS and APNS_SANDBOX using token credentials, PlatformPrincipal is signing
+// key ID and PlatformCredential is signing key.
 //
 // * For GCM (Firebase Cloud
 // Messaging), there is no PlatformPrincipal and the PlatformCredential is API

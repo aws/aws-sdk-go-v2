@@ -3919,7 +3919,7 @@
             }
         },
         "com.amazonaws.kendra#DocumentAttributeValue": {
-            "type": "union",
+            "type": "structure",
             "members": {
                 "StringValue": {
                     "target": "com.amazonaws.kendra#DocumentAttributeStringValue",

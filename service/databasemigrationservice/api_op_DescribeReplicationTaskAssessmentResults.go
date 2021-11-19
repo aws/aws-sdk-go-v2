@@ -17,8 +17,7 @@ import (
 // results. For more information about DMS task assessments, see Creating a task
 // assessment report
 // (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.AssessmentReport.html)
-// in the  Database Migration Service User Guide
-// (https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/Welcome.html).
+// in the Database Migration Service User Guide.
 func (c *Client) DescribeReplicationTaskAssessmentResults(ctx context.Context, params *DescribeReplicationTaskAssessmentResultsInput, optFns ...func(*Options)) (*DescribeReplicationTaskAssessmentResultsOutput, error) {
 	if params == nil {
 		params = &DescribeReplicationTaskAssessmentResultsInput{}

@@ -13,9 +13,19 @@ import (
 
 // Updates the specified fleet. If the fleet is in the STOPPED state, you can
 // update any attribute except the fleet name. If the fleet is in the RUNNING
-// state, you can update the DisplayName, ComputeCapacity, ImageARN, ImageName,
-// IdleDisconnectTimeoutInSeconds, and DisconnectTimeoutInSeconds attributes. If
-// the fleet is in the STARTING or STOPPING state, you can't update it.
+// state, you can update the following based on the fleet type:
+//
+// * Always-On and
+// On-Demand fleet types You can update the DisplayName, ComputeCapacity, ImageARN,
+// ImageName, IdleDisconnectTimeoutInSeconds, and DisconnectTimeoutInSeconds
+// attributes.
+//
+// * Elastic fleet type You can update the DisplayName,
+// IdleDisconnectTimeoutInSeconds, DisconnectTimeoutInSeconds,
+// MaxConcurrentSessions, and UsbDeviceFilterStrings attributes.
+//
+// If the fleet is
+// in the STARTING or STOPPED state, you can't update it.
 func (c *Client) UpdateFleet(ctx context.Context, params *UpdateFleetInput, optFns ...func(*Options)) (*UpdateFleetOutput, error) {
 	if params == nil {
 		params = &UpdateFleetInput{}
@@ -36,7 +46,7 @@ type UpdateFleetInput struct {
 	// The fleet attributes to delete.
 	AttributesToDelete []types.FleetAttribute
 
-	// The desired capacity for the fleet.
+	// The desired capacity for the fleet. This is not allowed for Elastic fleets.
 	ComputeCapacity *types.ComputeCapacity
 
 	// Deletes the VPC association for the specified fleet.
@@ -184,7 +194,17 @@ type UpdateFleetInput struct {
 	//
 	// *
 	// stream.graphics-pro.16xlarge
+	//
+	// The following instance types are available for
+	// Elastic fleets:
+	//
+	// * stream.standard.small
+	//
+	// * stream.standard.medium
 	InstanceType *string
+
+	// The maximum number of concurrent sessions for a fleet.
+	MaxConcurrentSessions *int32
 
 	// The maximum amount of time that a streaming session can remain active, in
 	// seconds. If users are still connected to a streaming instance five minutes
@@ -196,13 +216,24 @@ type UpdateFleetInput struct {
 	// A unique name for the fleet.
 	Name *string
 
+	// The platform of the fleet. WINDOWS_SERVER_2019 and AMAZON_LINUX2 are supported
+	// for Elastic fleets.
+	Platform types.PlatformType
+
 	// The AppStream 2.0 view that is displayed to your users when they stream from the
 	// fleet. When APP is specified, only the windows of applications opened by users
 	// display. When DESKTOP is specified, the standard desktop that is provided by the
 	// operating system displays. The default value is APP.
 	StreamView types.StreamView
 
-	// The VPC configuration for the fleet.
+	// The USB device filter strings that specify which USB devices a user can redirect
+	// to the fleet streaming session, when using the Windows native client. This is
+	// allowed but not required for Elastic fleets.
+	UsbDeviceFilterStrings []string
+
+	// The VPC configuration for the fleet. This is required for Elastic fleets, but
+	// not required for other fleet types. Elastic fleets require that you specify at
+	// least two subnets in different availability zones.
 	VpcConfig *types.VpcConfig
 
 	noSmithyDocumentSerde

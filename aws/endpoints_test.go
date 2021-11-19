@@ -211,7 +211,7 @@ func TestEndpointResolverWithOptionsFunc_ResolveEndpoint(t *testing.T) {
 		t.Errorf("expect no error, got %v", err)
 	}
 
-	if e,a := "https://foo.amazonaws.com", e.URL; e != a {
+	if e, a := "https://foo.amazonaws.com", e.URL; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 }

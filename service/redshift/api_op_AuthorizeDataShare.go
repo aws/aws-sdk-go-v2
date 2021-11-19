@@ -32,7 +32,7 @@ func (c *Client) AuthorizeDataShare(ctx context.Context, params *AuthorizeDataSh
 type AuthorizeDataShareInput struct {
 
 	// The identifier of the data consumer that is authorized to access the datashare.
-	// This identifier is an AWS account ID.
+	// This identifier is an Amazon Web Services account ID.
 	//
 	// This member is required.
 	ConsumerIdentifier *string

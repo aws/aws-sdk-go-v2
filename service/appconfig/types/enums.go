@@ -2,6 +2,22 @@
 
 package types
 
+type BadRequestReason string
+
+// Enum values for BadRequestReason
+const (
+	BadRequestReasonInvalidConfiguration BadRequestReason = "InvalidConfiguration"
+)
+
+// Values returns all known values for BadRequestReason. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BadRequestReason) Values() []BadRequestReason {
+	return []BadRequestReason{
+		"InvalidConfiguration",
+	}
+}
+
 type BytesMeasure string
 
 // Enum values for BytesMeasure

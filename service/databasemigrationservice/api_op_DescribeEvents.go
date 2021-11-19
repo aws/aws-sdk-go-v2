@@ -45,7 +45,7 @@ type DescribeEventsInput struct {
 	// A list of event categories for the source type that you've chosen.
 	EventCategories []string
 
-	// Filters applied to events.
+	// Filters applied to events. The only valid filter is replication-instance-id.
 	Filters []types.Filter
 
 	// An optional pagination token provided by a previous request. If this parameter

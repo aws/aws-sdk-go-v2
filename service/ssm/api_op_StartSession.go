@@ -52,6 +52,10 @@ type StartSessionInput struct {
 	// Reserved for future use.
 	Parameters map[string][]string
 
+	// The reason for connecting to the instance. This value is included in the details
+	// for the Amazon CloudWatch Events event created when you start the session.
+	Reason *string
+
 	noSmithyDocumentSerde
 }
 

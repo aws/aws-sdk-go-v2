@@ -130,6 +130,26 @@ func (m *validateOpCreateRecipeJob) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateRuleset struct {
+}
+
+func (*validateOpCreateRuleset) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateRuleset) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateRulesetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateRulesetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateSchedule struct {
 }
 
@@ -225,6 +245,26 @@ func (m *validateOpDeleteRecipeVersion) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteRecipeVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteRuleset struct {
+}
+
+func (*validateOpDeleteRuleset) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRuleset) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRulesetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRulesetInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -345,6 +385,26 @@ func (m *validateOpDescribeRecipe) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeRecipeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeRuleset struct {
+}
+
+func (*validateOpDescribeRuleset) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeRuleset) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeRulesetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeRulesetInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -670,6 +730,26 @@ func (m *validateOpUpdateRecipeJob) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateRuleset struct {
+}
+
+func (*validateOpUpdateRuleset) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateRuleset) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateRulesetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateRulesetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateSchedule struct {
 }
 
@@ -714,6 +794,10 @@ func addOpCreateRecipeJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateRecipeJob{}, middleware.After)
 }
 
+func addOpCreateRulesetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateRuleset{}, middleware.After)
+}
+
 func addOpCreateScheduleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateSchedule{}, middleware.After)
 }
@@ -732,6 +816,10 @@ func addOpDeleteProjectValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteRecipeVersionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteRecipeVersion{}, middleware.After)
+}
+
+func addOpDeleteRulesetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRuleset{}, middleware.After)
 }
 
 func addOpDeleteScheduleValidationMiddleware(stack *middleware.Stack) error {
@@ -756,6 +844,10 @@ func addOpDescribeProjectValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeRecipeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeRecipe{}, middleware.After)
+}
+
+func addOpDescribeRulesetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeRuleset{}, middleware.After)
 }
 
 func addOpDescribeScheduleValidationMiddleware(stack *middleware.Stack) error {
@@ -822,8 +914,44 @@ func addOpUpdateRecipeJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateRecipeJob{}, middleware.After)
 }
 
+func addOpUpdateRulesetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateRuleset{}, middleware.After)
+}
+
 func addOpUpdateScheduleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateSchedule{}, middleware.After)
+}
+
+func validateAllowedStatisticList(v []types.AllowedStatistics) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AllowedStatisticList"}
+	for i := range v {
+		if err := validateAllowedStatistics(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAllowedStatistics(v *types.AllowedStatistics) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AllowedStatistics"}
+	if v.Statistics == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Statistics"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateColumnStatisticsConfiguration(v *types.ColumnStatisticsConfiguration) error {
@@ -904,9 +1032,6 @@ func validateDatabaseInputDefinition(v *types.DatabaseInputDefinition) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DatabaseInputDefinition"}
 	if v.GlueConnectionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GlueConnectionName"))
-	}
-	if v.DatabaseTableName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DatabaseTableName"))
 	}
 	if v.TempDirectory != nil {
 		if err := validateS3Location(v.TempDirectory); err != nil {
@@ -1090,6 +1215,26 @@ func validateDatetimeOptions(v *types.DatetimeOptions) error {
 	}
 }
 
+func validateEntityDetectorConfiguration(v *types.EntityDetectorConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EntityDetectorConfiguration"}
+	if v.EntityTypes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityTypes"))
+	}
+	if v.AllowedStatistics != nil {
+		if err := validateAllowedStatisticList(v.AllowedStatistics); err != nil {
+			invalidParams.AddNested("AllowedStatistics", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateFilesLimit(v *types.FilesLimit) error {
 	if v == nil {
 		return nil
@@ -1243,6 +1388,11 @@ func validateProfileConfiguration(v *types.ProfileConfiguration) error {
 			invalidParams.AddNested("ColumnStatisticsConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.EntityDetectorConfiguration != nil {
+		if err := validateEntityDetectorConfiguration(v.EntityDetectorConfiguration); err != nil {
+			invalidParams.AddNested("EntityDetectorConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1311,6 +1461,46 @@ func validateRecipeStepList(v []types.RecipeStep) error {
 	invalidParams := smithy.InvalidParamsError{Context: "RecipeStepList"}
 	for i := range v {
 		if err := validateRecipeStep(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRule(v *types.Rule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Rule"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.CheckExpression == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CheckExpression"))
+	}
+	if v.Threshold != nil {
+		if err := validateThreshold(v.Threshold); err != nil {
+			invalidParams.AddNested("Threshold", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRuleList(v []types.Rule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RuleList"}
+	for i := range v {
+		if err := validateRule(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1422,6 +1612,50 @@ func validateStatisticsConfiguration(v *types.StatisticsConfiguration) error {
 	}
 }
 
+func validateThreshold(v *types.Threshold) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Threshold"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateValidationConfiguration(v *types.ValidationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ValidationConfiguration"}
+	if v.RulesetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RulesetArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateValidationConfigurationList(v []types.ValidationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ValidationConfigurationList"}
+	for i := range v {
+		if err := validateValidationConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateViewFrame(v *types.ViewFrame) error {
 	if v == nil {
 		return nil
@@ -1503,6 +1737,11 @@ func validateOpCreateProfileJobInput(v *CreateProfileJobInput) error {
 	if v.Configuration != nil {
 		if err := validateProfileConfiguration(v.Configuration); err != nil {
 			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ValidationConfigurations != nil {
+		if err := validateValidationConfigurationList(v.ValidationConfigurations); err != nil {
+			invalidParams.AddNested("ValidationConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.RoleArn == nil {
@@ -1604,6 +1843,31 @@ func validateOpCreateRecipeJobInput(v *CreateRecipeJobInput) error {
 	}
 }
 
+func validateOpCreateRulesetInput(v *CreateRulesetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRulesetInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.TargetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetArn"))
+	}
+	if v.Rules == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Rules"))
+	} else if v.Rules != nil {
+		if err := validateRuleList(v.Rules); err != nil {
+			invalidParams.AddNested("Rules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateScheduleInput(v *CreateScheduleInput) error {
 	if v == nil {
 		return nil
@@ -1677,6 +1941,21 @@ func validateOpDeleteRecipeVersionInput(v *DeleteRecipeVersionInput) error {
 	}
 	if v.RecipeVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RecipeVersion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteRulesetInput(v *DeleteRulesetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRulesetInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1768,6 +2047,21 @@ func validateOpDescribeRecipeInput(v *DescribeRecipeInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeRecipeInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeRulesetInput(v *DescribeRulesetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeRulesetInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
@@ -2009,6 +2303,11 @@ func validateOpUpdateProfileJobInput(v *UpdateProfileJobInput) error {
 			invalidParams.AddNested("OutputLocation", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ValidationConfigurations != nil {
+		if err := validateValidationConfigurationList(v.ValidationConfigurations); err != nil {
+			invalidParams.AddNested("ValidationConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
@@ -2087,6 +2386,28 @@ func validateOpUpdateRecipeJobInput(v *UpdateRecipeJobInput) error {
 	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateRulesetInput(v *UpdateRulesetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRulesetInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Rules == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Rules"))
+	} else if v.Rules != nil {
+		if err := validateRuleList(v.Rules); err != nil {
+			invalidParams.AddNested("Rules", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

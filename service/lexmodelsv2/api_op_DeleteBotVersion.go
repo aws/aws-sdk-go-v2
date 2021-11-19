@@ -12,7 +12,8 @@ import (
 )
 
 // Deletes a specific version of a bot. To delete all version of a bot, use the
-// DeleteBot operation.
+// DeleteBot (https://docs.aws.amazon.com/lexv2/latest/dg/API_DeleteBot.html)
+// operation.
 func (c *Client) DeleteBotVersion(ctx context.Context, params *DeleteBotVersionInput, optFns ...func(*Options)) (*DeleteBotVersionOutput, error) {
 	if params == nil {
 		params = &DeleteBotVersionInput{}

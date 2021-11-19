@@ -652,6 +652,11 @@ func awsRestjson1_serializeDocumentDialogAction(v *types.DialogAction, value smi
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.SlotElicitationStyle) > 0 {
+		ok := object.Key("slotElicitationStyle")
+		ok.String(string(v.SlotElicitationStyle))
+	}
+
 	if v.SlotToElicit != nil {
 		ok := object.Key("slotToElicit")
 		ok.String(*v.SlotToElicit)

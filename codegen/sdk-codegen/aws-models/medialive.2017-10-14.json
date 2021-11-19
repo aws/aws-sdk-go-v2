@@ -11709,6 +11709,13 @@
                         "smithy.api#jsonName": "networkInputSettings"
                     }
                 },
+                "Scte35Pid": {
+                    "target": "com.amazonaws.medialive#__integerMin32Max8191",
+                    "traits": {
+                        "smithy.api#documentation": "PID from which to read SCTE-35 messages. If left undefined, EML will select the first SCTE-35 PID found in the input.",
+                        "smithy.api#jsonName": "scte35Pid"
+                    }
+                },
                 "Smpte2038DataPreference": {
                     "target": "com.amazonaws.medialive#Smpte2038DataPreference",
                     "traits": {
@@ -13964,6 +13971,21 @@
         },
         "com.amazonaws.medialive#MediaLive": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "MediaLive",
+                    "arnNamespace": "medialive",
+                    "cloudFormationName": "MediaLive",
+                    "cloudTrailEventSource": "medialive.amazonaws.com",
+                    "endpointPrefix": "medialive"
+                },
+                "aws.auth#sigv4": {
+                    "name": "medialive"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "API for AWS Elemental MediaLive",
+                "smithy.api#title": "AWS Elemental MediaLive"
+            },
             "version": "2017-10-14",
             "operations": [
                 {
@@ -14137,22 +14159,7 @@
                 {
                     "target": "com.amazonaws.medialive#UpdateReservation"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "MediaLive",
-                    "arnNamespace": "medialive",
-                    "cloudFormationName": "MediaLive",
-                    "cloudTrailEventSource": "medialive.amazonaws.com",
-                    "endpointPrefix": "medialive"
-                },
-                "aws.auth#sigv4": {
-                    "name": "medialive"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "API for AWS Elemental MediaLive",
-                "smithy.api#title": "AWS Elemental MediaLive"
-            }
+            ]
         },
         "com.amazonaws.medialive#MediaPackageGroupSettings": {
             "type": "structure",
@@ -20844,6 +20851,16 @@
                 "smithy.api#documentation": "Placeholder documentation for __integerMin30",
                 "smithy.api#range": {
                     "min": 30
+                }
+            }
+        },
+        "com.amazonaws.medialive#__integerMin32Max8191": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __integerMin32Max8191",
+                "smithy.api#range": {
+                    "min": 32,
+                    "max": 8191
                 }
             }
         },

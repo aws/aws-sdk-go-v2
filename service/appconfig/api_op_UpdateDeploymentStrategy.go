@@ -40,17 +40,17 @@ type UpdateDeploymentStrategyInput struct {
 	// A description of the deployment strategy.
 	Description *string
 
-	// The amount of time AppConfig monitors for alarms before considering the
-	// deployment to be complete and no longer eligible for automatic roll back.
+	// The amount of time that AppConfig monitors for alarms before considering the
+	// deployment to be complete and no longer eligible for automatic rollback.
 	FinalBakeTimeInMinutes int32
 
 	// The percentage of targets to receive a deployed configuration during each
 	// interval.
 	GrowthFactor float32
 
-	// The algorithm used to define how percentage grows over time. AWS AppConfig
-	// supports the following growth types: Linear: For this type, AppConfig processes
-	// the deployment by increments of the growth factor evenly distributed over the
+	// The algorithm used to define how percentage grows over time. AppConfig supports
+	// the following growth types: Linear: For this type, AppConfig processes the
+	// deployment by increments of the growth factor evenly distributed over the
 	// deployment time. For example, a linear deployment that uses a growth factor of
 	// 20 initially makes the configuration available to 20 percent of the targets.
 	// After 1/5th of the deployment time has passed, the system updates the percentage
@@ -79,8 +79,8 @@ type UpdateDeploymentStrategyOutput struct {
 	// The description of the deployment strategy.
 	Description *string
 
-	// The amount of time AppConfig monitored for alarms before considering the
-	// deployment to be complete and no longer eligible for automatic roll back.
+	// The amount of time that AppConfig monitored for alarms before considering the
+	// deployment to be complete and no longer eligible for automatic rollback.
 	FinalBakeTimeInMinutes int32
 
 	// The percentage of targets that received a deployed configuration during each

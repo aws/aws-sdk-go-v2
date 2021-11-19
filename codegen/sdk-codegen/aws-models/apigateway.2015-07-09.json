@@ -361,6 +361,21 @@
         },
         "com.amazonaws.apigateway#BackplaneControlService": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "API Gateway",
+                    "arnNamespace": "apigateway",
+                    "cloudFormationName": "ApiGateway",
+                    "cloudTrailEventSource": "apigateway.amazonaws.com",
+                    "endpointPrefix": "apigateway"
+                },
+                "aws.auth#sigv4": {
+                    "name": "apigateway"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<fullname>Amazon API Gateway</fullname>\n        <p>Amazon API Gateway helps developers deliver robust, secure, and scalable mobile and web application back ends. API Gateway allows developers to securely connect mobile and web applications to APIs that run on AWS Lambda, Amazon EC2, or other publicly addressable web services that are hosted outside of AWS.</p>",
+                "smithy.api#title": "Amazon API Gateway"
+            },
             "version": "2015-07-09",
             "operations": [
                 {
@@ -723,22 +738,7 @@
                 {
                     "target": "com.amazonaws.apigateway#UpdateVpcLink"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "API Gateway",
-                    "arnNamespace": "apigateway",
-                    "cloudFormationName": "ApiGateway",
-                    "cloudTrailEventSource": "apigateway.amazonaws.com",
-                    "endpointPrefix": "apigateway"
-                },
-                "aws.auth#sigv4": {
-                    "name": "apigateway"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<fullname>Amazon API Gateway</fullname>\n        <p>Amazon API Gateway helps developers deliver robust, secure, and scalable mobile and web application back ends. API Gateway allows developers to securely connect mobile and web applications to APIs that run on AWS Lambda, Amazon EC2, or other publicly addressable web services that are hosted outside of AWS.</p>",
-                "smithy.api#title": "Amazon API Gateway"
-            }
+            ]
         },
         "com.amazonaws.apigateway#BadRequestException": {
             "type": "structure",
@@ -7902,7 +7902,7 @@
                 "dataTraceEnabled": {
                     "target": "com.amazonaws.apigateway#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether data trace logging is enabled for this method, which affects the log entries pushed to Amazon CloudWatch Logs. The PATCH path for this setting is <code>/{method_setting_key}/logging/dataTrace</code>, and the value is a Boolean.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether full requests and responses are logged for this method, which affects the log entries pushed to Amazon CloudWatch Logs. This can be useful to troubleshoot APIs, but can result in logging sensitive data. We recommend that you don't enable this option for production APIs. The PATCH path for this setting is <code>/{method_setting_key}/logging/dataTrace</code>, and the value is a Boolean.</p>"
                     }
                 },
                 "throttlingBurstLimit": {

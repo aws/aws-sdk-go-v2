@@ -11,9 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the anomaly detection models that you have created in your account. You
-// can list all models in your account or filter the results to only the models
-// that are related to a certain namespace, metric name, or metric dimension.
+// Lists the anomaly detection models that you have created in your account. For
+// single metric anomaly detectors, you can list all of the models in your account
+// or filter the results to only the models that are related to a certain
+// namespace, metric name, or metric dimension. For metric math anomaly detectors,
+// you can list them by adding METRIC_MATH to the AnomalyDetectorTypes array. This
+// will return all metric math anomaly detectors in your account.
 func (c *Client) DescribeAnomalyDetectors(ctx context.Context, params *DescribeAnomalyDetectorsInput, optFns ...func(*Options)) (*DescribeAnomalyDetectorsOutput, error) {
 	if params == nil {
 		params = &DescribeAnomalyDetectorsInput{}
@@ -30,6 +33,10 @@ func (c *Client) DescribeAnomalyDetectors(ctx context.Context, params *DescribeA
 }
 
 type DescribeAnomalyDetectorsInput struct {
+
+	// The anomaly detector types to request when using DescribeAnomalyDetectorsInput.
+	// If empty, defaults to SINGLE_METRIC.
+	AnomalyDetectorTypes []types.AnomalyDetectorType
 
 	// Limits the results to only the anomaly detection models that are associated with
 	// the specified metric dimensions. If there are multiple metrics that have these

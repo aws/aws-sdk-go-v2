@@ -36,6 +36,9 @@ type ListEventsInput struct {
 	// This member is required.
 	Filters *types.ListEventsFilters
 
+	// The ID of the Amazon Web Services account.
+	AccountId *string
+
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32

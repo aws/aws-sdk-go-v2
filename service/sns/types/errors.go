@@ -26,6 +26,44 @@ func (e *AuthorizationErrorException) ErrorMessage() string {
 func (e *AuthorizationErrorException) ErrorCode() string             { return "AuthorizationError" }
 func (e *AuthorizationErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Two or more batch entries in the request have the same Id.
+type BatchEntryIdsNotDistinctException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *BatchEntryIdsNotDistinctException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *BatchEntryIdsNotDistinctException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *BatchEntryIdsNotDistinctException) ErrorCode() string             { return "BatchEntryIdsNotDistinct" }
+func (e *BatchEntryIdsNotDistinctException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The length of all the batch messages put together is more than the limit.
+type BatchRequestTooLongException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *BatchRequestTooLongException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *BatchRequestTooLongException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *BatchRequestTooLongException) ErrorCode() string             { return "BatchRequestTooLong" }
+func (e *BatchRequestTooLongException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // Can't perform multiple operations on a tag simultaneously. Perform the
 // operations sequentially.
 type ConcurrentAccessException struct {
@@ -46,6 +84,25 @@ func (e *ConcurrentAccessException) ErrorMessage() string {
 func (e *ConcurrentAccessException) ErrorCode() string             { return "ConcurrentAccess" }
 func (e *ConcurrentAccessException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The batch request doesn't contain any entries.
+type EmptyBatchRequestException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *EmptyBatchRequestException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *EmptyBatchRequestException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *EmptyBatchRequestException) ErrorCode() string             { return "EmptyBatchRequest" }
+func (e *EmptyBatchRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // Exception error indicating endpoint disabled.
 type EndpointDisabledException struct {
 	Message *string
@@ -65,9 +122,9 @@ func (e *EndpointDisabledException) ErrorMessage() string {
 func (e *EndpointDisabledException) ErrorCode() string             { return "EndpointDisabled" }
 func (e *EndpointDisabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Indicates that the number of filter polices in your account exceeds the limit.
-// To add more filter polices, submit an SNS Limit Increase case in the Amazon Web
-// Services Support Center.
+// Indicates that the number of filter polices in your Amazon Web Services account
+// exceeds the limit. To add more filter polices, submit an Amazon SNS Limit
+// Increase case in the Amazon Web Services Support Center.
 type FilterPolicyLimitExceededException struct {
 	Message *string
 
@@ -106,6 +163,25 @@ func (e *InternalErrorException) ErrorMessage() string {
 }
 func (e *InternalErrorException) ErrorCode() string             { return "InternalError" }
 func (e *InternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
+// The Id of a batch entry in a batch request doesn't abide by the specification.
+type InvalidBatchEntryIdException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidBatchEntryIdException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidBatchEntryIdException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidBatchEntryIdException) ErrorCode() string             { return "InvalidBatchEntryId" }
+func (e *InvalidBatchEntryIdException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that a request parameter does not comply with the associated
 // constraints.
@@ -311,7 +387,8 @@ func (e *NotFoundException) ErrorCode() string             { return "NotFound" }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the specified phone number opted out of receiving SMS messages
-// from your account. You can't send SMS messages to phone numbers that opt out.
+// from your Amazon Web Services account. You can't send SMS messages to phone
+// numbers that opt out.
 type OptedOutException struct {
 	Message *string
 
@@ -455,7 +532,7 @@ func (e *TagPolicyException) ErrorCode() string             { return "TagPolicy"
 func (e *TagPolicyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the rate at which requests have been submitted for this action
-// exceeds the limit for your account.
+// exceeds the limit for your Amazon Web Services account.
 type ThrottledException struct {
 	Message *string
 
@@ -473,6 +550,29 @@ func (e *ThrottledException) ErrorMessage() string {
 }
 func (e *ThrottledException) ErrorCode() string             { return "Throttled" }
 func (e *ThrottledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The batch request contains more entries than permissible.
+type TooManyEntriesInBatchRequestException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *TooManyEntriesInBatchRequestException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TooManyEntriesInBatchRequestException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TooManyEntriesInBatchRequestException) ErrorCode() string {
+	return "TooManyEntriesInBatchRequest"
+}
+func (e *TooManyEntriesInBatchRequestException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
 
 // Indicates that the customer already owns the maximum allowed number of topics.
 type TopicLimitExceededException struct {

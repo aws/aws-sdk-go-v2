@@ -28,7 +28,7 @@ func (c *Client) DeleteAssessmentReport(ctx context.Context, params *DeleteAsses
 
 type DeleteAssessmentReportInput struct {
 
-	// The identifier for the assessment.
+	// The unique identifier for the assessment.
 	//
 	// This member is required.
 	AssessmentId *string

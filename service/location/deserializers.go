@@ -10813,6 +10813,15 @@ func awsRestjson1_deserializeDocumentPlace(v **types.Place, value interface{}) e
 				return err
 			}
 
+		case "Interpolated":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Interpolated = ptr.Bool(jtv)
+			}
+
 		case "Label":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10874,6 +10883,11 @@ func awsRestjson1_deserializeDocumentPlace(v **types.Place, value interface{}) e
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.SubRegion = ptr.String(jtv)
+			}
+
+		case "TimeZone":
+			if err := awsRestjson1_deserializeDocumentTimeZone(&sv.TimeZone, value); err != nil {
+				return err
 			}
 
 		default:
@@ -11044,6 +11058,40 @@ func awsRestjson1_deserializeDocumentSearchForPositionResult(v **types.SearchFor
 
 	for key, value := range shape {
 		switch key {
+		case "Distance":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Distance = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Distance = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "Place":
 			if err := awsRestjson1_deserializeDocumentPlace(&sv.Place, value); err != nil {
 				return err
@@ -11114,9 +11162,77 @@ func awsRestjson1_deserializeDocumentSearchForTextResult(v **types.SearchForText
 
 	for key, value := range shape {
 		switch key {
+		case "Distance":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Distance = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Distance = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "Place":
 			if err := awsRestjson1_deserializeDocumentPlace(&sv.Place, value); err != nil {
 				return err
+			}
+
+		case "Relevance":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Relevance = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Relevance = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
 			}
 
 		default:
@@ -11193,6 +11309,15 @@ func awsRestjson1_deserializeDocumentSearchPlaceIndexForPositionSummary(v **type
 				sv.DataSource = ptr.String(jtv)
 			}
 
+		case "Language":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LanguageTag to be of type string, got %T instead", value)
+				}
+				sv.Language = ptr.String(jtv)
+			}
+
 		case "MaxResults":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11264,6 +11389,15 @@ func awsRestjson1_deserializeDocumentSearchPlaceIndexForTextSummary(v **types.Se
 		case "FilterCountries":
 			if err := awsRestjson1_deserializeDocumentCountryCodeList(&sv.FilterCountries, value); err != nil {
 				return err
+			}
+
+		case "Language":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LanguageTag to be of type string, got %T instead", value)
+				}
+				sv.Language = ptr.String(jtv)
 			}
 
 		case "MaxResults":
@@ -11563,6 +11697,59 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTimeZone(v **types.TimeZone, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TimeZone
+	if *v == nil {
+		sv = &types.TimeZone{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "Offset":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Offset = ptr.Int32(int32(i64))
 			}
 
 		default:

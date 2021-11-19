@@ -40,6 +40,27 @@ func (AnomalyStatus) Values() []AnomalyStatus {
 	}
 }
 
+type CloudWatchMetricDataStatusCode string
+
+// Enum values for CloudWatchMetricDataStatusCode
+const (
+	CloudWatchMetricDataStatusCodeComplete      CloudWatchMetricDataStatusCode = "Complete"
+	CloudWatchMetricDataStatusCodeInternalError CloudWatchMetricDataStatusCode = "InternalError"
+	CloudWatchMetricDataStatusCodePartialData   CloudWatchMetricDataStatusCode = "PartialData"
+)
+
+// Values returns all known values for CloudWatchMetricDataStatusCode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CloudWatchMetricDataStatusCode) Values() []CloudWatchMetricDataStatusCode {
+	return []CloudWatchMetricDataStatusCode{
+		"Complete",
+		"InternalError",
+		"PartialData",
+	}
+}
+
 type CloudWatchMetricsStat string
 
 // Enum values for CloudWatchMetricsStat
@@ -280,6 +301,27 @@ func (OptInStatus) Values() []OptInStatus {
 	return []OptInStatus{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type OrganizationResourceCollectionType string
+
+// Enum values for OrganizationResourceCollectionType
+const (
+	OrganizationResourceCollectionTypeAwsCloudFormation OrganizationResourceCollectionType = "AWS_CLOUD_FORMATION"
+	OrganizationResourceCollectionTypeAwsService        OrganizationResourceCollectionType = "AWS_SERVICE"
+	OrganizationResourceCollectionTypeAwsAccount        OrganizationResourceCollectionType = "AWS_ACCOUNT"
+)
+
+// Values returns all known values for OrganizationResourceCollectionType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (OrganizationResourceCollectionType) Values() []OrganizationResourceCollectionType {
+	return []OrganizationResourceCollectionType{
+		"AWS_CLOUD_FORMATION",
+		"AWS_SERVICE",
+		"AWS_ACCOUNT",
 	}
 }
 

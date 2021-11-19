@@ -12,25 +12,27 @@ import (
 	"time"
 )
 
-// Describes a predictor created using the CreatePredictor operation. In addition
-// to listing the properties provided in the CreatePredictor request, this
-// operation lists the following properties:
+// This operation is only valid for legacy predictors created with CreatePredictor.
+// If you are not using a legacy predictor, use DescribeAutoPredictor. To upgrade a
+// legacy predictor to AutoPredictor, see Upgrading to AutoPredictor. Describes a
+// predictor created using the CreatePredictor operation. In addition to listing
+// the properties provided in the CreatePredictor request, this operation lists the
+// following properties:
 //
-// * DatasetImportJobArns - The dataset
-// import jobs used to import training data.
+// * DatasetImportJobArns - The dataset import jobs used to
+// import training data.
 //
-// * AutoMLAlgorithmArns - If AutoML is
-// performed, the algorithms that were evaluated.
+// * AutoMLAlgorithmArns - If AutoML is performed, the
+// algorithms that were evaluated.
 //
 // * CreationTime
 //
+// * LastModificationTime
+//
 // *
-// LastModificationTime
+// Status
 //
-// * Status
-//
-// * Message - If an error occurred, information
-// about the error.
+// * Message - If an error occurred, information about the error.
 func (c *Client) DescribePredictor(ctx context.Context, params *DescribePredictorInput, optFns ...func(*Options)) (*DescribePredictorOutput, error) {
 	if params == nil {
 		params = &DescribePredictorInput{}
@@ -109,6 +111,9 @@ type DescribePredictorOutput struct {
 	// Describes the dataset group that contains the data to use to train the
 	// predictor.
 	InputDataConfig *types.InputDataConfig
+
+	// Whether the predictor was created with CreateAutoPredictor.
+	IsAutoPredictor *bool
 
 	// The last time the resource was modified. The timestamp depends on the status of
 	// the job:

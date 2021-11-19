@@ -52,7 +52,9 @@ type DescribeAddonInput struct {
 
 type DescribeAddonOutput struct {
 
-	// An Amazon EKS add-on.
+	// An Amazon EKS add-on. For more information, see Amazon EKS add-ons
+	// (https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html) in the
+	// Amazon EKS User Guide.
 	Addon *types.Addon
 
 	// Metadata pertaining to the operation's result.

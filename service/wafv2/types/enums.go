@@ -792,6 +792,7 @@ const (
 	ParameterExceptionFieldExpireTimestamp                ParameterExceptionField = "EXPIRE_TIMESTAMP"
 	ParameterExceptionFieldChangePropagationStatus        ParameterExceptionField = "CHANGE_PROPAGATION_STATUS"
 	ParameterExceptionFieldAssociableResource             ParameterExceptionField = "ASSOCIABLE_RESOURCE"
+	ParameterExceptionFieldLogDestination                 ParameterExceptionField = "LOG_DESTINATION"
 )
 
 // Values returns all known values for ParameterExceptionField. Note that this can
@@ -855,6 +856,7 @@ func (ParameterExceptionField) Values() []ParameterExceptionField {
 		"EXPIRE_TIMESTAMP",
 		"CHANGE_PROPAGATION_STATUS",
 		"ASSOCIABLE_RESOURCE",
+		"LOG_DESTINATION",
 	}
 }
 

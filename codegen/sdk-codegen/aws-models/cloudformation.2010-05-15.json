@@ -806,6 +806,24 @@
         },
         "com.amazonaws.cloudformation#CloudFormation": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "CloudFormation",
+                    "arnNamespace": "cloudformation",
+                    "cloudFormationName": "CloudFormation",
+                    "cloudTrailEventSource": "cloudformation.amazonaws.com",
+                    "endpointPrefix": "cloudformation"
+                },
+                "aws.auth#sigv4": {
+                    "name": "cloudformation"
+                },
+                "aws.protocols#awsQuery": {},
+                "smithy.api#documentation": "<fullname>AWS CloudFormation</fullname>\n         <p>CloudFormation allows you to create and manage Amazon Web Services infrastructure deployments\n         predictably and repeatedly. You can use CloudFormation to leverage Amazon Web Services products, such\n         as Amazon Elastic Compute Cloud, Amazon Elastic Block Store, Amazon Simple Notification\n         Service, Elastic Load Balancing, and Auto Scaling to build highly-reliable, highly\n         scalable, cost-effective applications without creating or configuring the underlying Amazon Web Services\n         infrastructure.</p>\n         <p>With CloudFormation, you declare all of your resources and dependencies in a\n         template file. The template defines a collection of resources as a single unit called a\n         stack. CloudFormation creates and deletes all member resources of the stack together\n         and manages all dependencies between the resources for you.</p>\n         <p>For more information about CloudFormation, see the <a href=\"http://aws.amazon.com/cloudformation/\">CloudFormation Product Page</a>.</p>\n         <p>CloudFormation makes use of other Amazon Web Services products. If you need additional\n         technical information about a specific Amazon Web Services product, you can find the product's technical\n         documentation at <a href=\"https://docs.aws.amazon.com/\">\n               <code>docs.aws.amazon.com</code>\n            </a>.</p>",
+                "smithy.api#title": "AWS CloudFormation",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://cloudformation.amazonaws.com/doc/2010-05-15/"
+                }
+            },
             "version": "2010-05-15",
             "operations": [
                 {
@@ -1003,25 +1021,7 @@
                 {
                     "target": "com.amazonaws.cloudformation#ValidateTemplate"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "CloudFormation",
-                    "arnNamespace": "cloudformation",
-                    "cloudFormationName": "CloudFormation",
-                    "cloudTrailEventSource": "cloudformation.amazonaws.com",
-                    "endpointPrefix": "cloudformation"
-                },
-                "aws.auth#sigv4": {
-                    "name": "cloudformation"
-                },
-                "aws.protocols#awsQuery": {},
-                "smithy.api#documentation": "<fullname>AWS CloudFormation</fullname>\n         <p>CloudFormation allows you to create and manage Amazon Web Services infrastructure deployments\n         predictably and repeatedly. You can use CloudFormation to leverage Amazon Web Services products, such\n         as Amazon Elastic Compute Cloud, Amazon Elastic Block Store, Amazon Simple Notification\n         Service, Elastic Load Balancing, and Auto Scaling to build highly-reliable, highly\n         scalable, cost-effective applications without creating or configuring the underlying Amazon Web Services\n         infrastructure.</p>\n         <p>With CloudFormation, you declare all of your resources and dependencies in a\n         template file. The template defines a collection of resources as a single unit called a\n         stack. CloudFormation creates and deletes all member resources of the stack together\n         and manages all dependencies between the resources for you.</p>\n         <p>For more information about CloudFormation, see the <a href=\"http://aws.amazon.com/cloudformation/\">CloudFormation Product Page</a>.</p>\n         <p>CloudFormation makes use of other Amazon Web Services products. If you need additional\n         technical information about a specific Amazon Web Services product, you can find the product's technical\n         documentation at <a href=\"https://docs.aws.amazon.com/\">\n               <code>docs.aws.amazon.com</code>\n            </a>.</p>",
-                "smithy.api#title": "AWS CloudFormation",
-                "smithy.api#xmlNamespace": {
-                    "uri": "http://cloudformation.amazonaws.com/doc/2010-05-15/"
-                }
-            }
+            ]
         },
         "com.amazonaws.cloudformation#ConfigurationSchema": {
             "type": "string",
@@ -1615,6 +1615,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A unique identifier for this <code>CreateStackSet</code> request. Specify this token\n         if you plan to retry requests so that CloudFormation knows that you're not attempting\n         to create another stack set with the same name. You might retry <code>CreateStackSet</code>\n         requests to ensure that CloudFormation successfully received them.</p>\n         <p>If you don't specify an operation ID, the SDK generates one\n         automatically.</p>",
                         "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "ManagedExecution": {
+                    "target": "com.amazonaws.cloudformation#ManagedExecution",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes whether StackSets performs non-conflicting operations concurrently and queues conflicting operations.</p>"
                     }
                 }
             }
@@ -5309,7 +5315,7 @@
                 "Filters": {
                     "target": "com.amazonaws.cloudformation#TypeFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filter criteria to use in determining which extensions to return.</p>\n         <p>If you specify a filter, CloudFormation ignores any specified <code>Visibility</code>\n         value when returning the list of types.</p>"
+                        "smithy.api#documentation": "<p>Filter criteria to use in determining which extensions to return.</p>\n         <p>Filters must be compatible with <code>Visibility</code> to return valid results. For example, specifying <code>AWS_TYPES</code> for <code>Category</code> and <code>PRIVATE</code> for <code>Visibility</code> returns an empty list of types, but specifying <code>PUBLIC</code> for <code>Visibility</code> returns the desired list.</p>"
                     }
                 },
                 "MaxResults": {
@@ -5401,6 +5407,26 @@
                     "min": 1,
                     "max": 100000
                 }
+            }
+        },
+        "com.amazonaws.cloudformation#ManagedExecution": {
+            "type": "structure",
+            "members": {
+                "Active": {
+                    "target": "com.amazonaws.cloudformation#ManagedExecutionNullable",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When <code>true</code>, StackSets performs non-conflicting operations concurrently and queues conflicting operations. After conflicting operations finish, StackSets starts queued operations in request order.</p>\n         <note>\n            <p>If there are already running or queued operations, StackSets queues all incoming operations even if they are non-conflicting.</p>\n            <p>You can't modify your stack set's execution configuration while there are running or queued operations for that stack set.</p>\n         </note>\n         <p>When <code>false</code> (default), StackSets performs one operation at a time in request order.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes whether StackSets performs non-conflicting operations concurrently and queues conflicting operations.</p>"
+            }
+        },
+        "com.amazonaws.cloudformation#ManagedExecutionNullable": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
             }
         },
         "com.amazonaws.cloudformation#MaxConcurrentCount": {
@@ -5987,7 +6013,7 @@
                 "PublicVersionNumber": {
                     "target": "com.amazonaws.cloudformation#PublicVersionNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version number to assign to this version of the extension.</p>\n         <p>Use the following format, and adhere to semantic versioning when assigning a version\n         number to your extension: </p>\n         <p>\n            <code>MAJOR.MINOR.PATCH</code>\n         </p>\n         <p>For more information, see <a href=\"https://semver.org/\">Semantic Versioning\n            2.0.0</a>.</p>\n         <p>If you do not specify a version number, CloudFormation increments the version number by\n         one minor version release.</p>\n         <p>The first time you publish a type, CloudFormation sets the version number to <code>1.0.0</code>,\n         regardless of the value you specify.</p>"
+                        "smithy.api#documentation": "<p>The version number to assign to this version of the extension.</p>\n         <p>Use the following format, and adhere to semantic versioning when assigning a version\n         number to your extension: </p>\n         <p>\n            <code>MAJOR.MINOR.PATCH</code>\n         </p>\n         <p>For more information, see <a href=\"https://semver.org/\">Semantic Versioning\n            2.0.0</a>.</p>\n         <p>If you do not specify a version number, CloudFormation increments the version number by\n         one minor version release.</p>\n         <p>You cannot specify a version number the first time you publish a type. CloudFormation automatically sets the first version number to be <code>1.0.0</code>.</p>"
                     }
                 }
             }
@@ -8375,6 +8401,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>[Service-managed permissions] The organization root ID or organizational unit (OU) IDs\n         that you specified for <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html\">DeploymentTargets</a>.</p>"
                     }
+                },
+                "ManagedExecution": {
+                    "target": "com.amazonaws.cloudformation#ManagedExecution",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes whether StackSets performs non-conflicting operations concurrently and queues conflicting operations.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8901,6 +8933,12 @@
                     "target": "com.amazonaws.cloudformation#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>Most recent time when CloudFormation performed a drift detection operation on\n         the stack set. This value will be <code>NULL</code> for any stack set on which drift\n         detection has not yet been performed.</p>"
+                    }
+                },
+                "ManagedExecution": {
+                    "target": "com.amazonaws.cloudformation#ManagedExecution",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes whether StackSets performs non-conflicting operations concurrently and queues conflicting operations.</p>"
                     }
                 }
             },
@@ -10298,6 +10336,12 @@
                     "target": "com.amazonaws.cloudformation#CallAs",
                     "traits": {
                         "smithy.api#documentation": "<p>[Service-managed permissions] Specifies whether you are acting as an account\n         administrator in the organization's management account or as a delegated administrator in a\n         member account.</p>\n         <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with\n         self-managed permissions.</p>\n         <ul>\n            <li>\n               <p>If you are signed in to the management account, specify <code>SELF</code>.</p>\n            </li>\n            <li>\n               <p>If you are signed in to a delegated administrator account, specify\n                  <code>DELEGATED_ADMIN</code>.</p>\n               <p>Your Amazon Web Services account must be registered as a delegated administrator in\n               the management account. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html\">Register a delegated administrator</a> in the <i>CloudFormation User Guide</i>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "ManagedExecution": {
+                    "target": "com.amazonaws.cloudformation#ManagedExecution",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes whether StackSets performs non-conflicting operations concurrently and queues conflicting operations.</p>"
                     }
                 }
             }

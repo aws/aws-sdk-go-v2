@@ -19,7 +19,6 @@ import (
 	"io/ioutil"
 	"math"
 	"strings"
-	"time"
 )
 
 type awsAwsjson11_deserializeOpBatchDeleteDocument struct {
@@ -7851,7 +7850,7 @@ func awsAwsjson11_deserializeDocumentDocumentAttributeStringListValue(v *[]strin
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDocumentAttributeValue(v *types.DocumentAttributeValue, value interface{}) error {
+func awsAwsjson11_deserializeDocumentDocumentAttributeValue(v **types.DocumentAttributeValue, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7864,15 +7863,16 @@ func awsAwsjson11_deserializeDocumentDocumentAttributeValue(v *types.DocumentAtt
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var uv types.DocumentAttributeValue
-loop:
+	var sv *types.DocumentAttributeValue
+	if *v == nil {
+		sv = &types.DocumentAttributeValue{}
+	} else {
+		sv = *v
+	}
+
 	for key, value := range shape {
-		if value == nil {
-			continue
-		}
 		switch key {
 		case "DateValue":
-			var mv time.Time
 			if value != nil {
 				switch jtv := value.(type) {
 				case json.Number:
@@ -7880,18 +7880,15 @@ loop:
 					if err != nil {
 						return err
 					}
-					mv = smithytime.ParseEpochSeconds(f64)
+					sv.DateValue = ptr.Time(smithytime.ParseEpochSeconds(f64))
 
 				default:
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
 			}
-			uv = &types.DocumentAttributeValueMemberDateValue{Value: mv}
-			break loop
 
 		case "LongValue":
-			var mv int64
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
@@ -7901,38 +7898,29 @@ loop:
 				if err != nil {
 					return err
 				}
-				mv = i64
+				sv.LongValue = ptr.Int64(i64)
 			}
-			uv = &types.DocumentAttributeValueMemberLongValue{Value: mv}
-			break loop
 
 		case "StringListValue":
-			var mv []string
-			if err := awsAwsjson11_deserializeDocumentDocumentAttributeStringListValue(&mv, value); err != nil {
+			if err := awsAwsjson11_deserializeDocumentDocumentAttributeStringListValue(&sv.StringListValue, value); err != nil {
 				return err
 			}
-			uv = &types.DocumentAttributeValueMemberStringListValue{Value: mv}
-			break loop
 
 		case "StringValue":
-			var mv string
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
 					return fmt.Errorf("expected DocumentAttributeStringValue to be of type string, got %T instead", value)
 				}
-				mv = jtv
+				sv.StringValue = ptr.String(jtv)
 			}
-			uv = &types.DocumentAttributeValueMemberStringValue{Value: mv}
-			break loop
 
 		default:
-			uv = &types.UnknownUnionMember{Tag: key}
-			break loop
+			_, _ = key, value
 
 		}
 	}
-	*v = uv
+	*v = sv
 	return nil
 }
 

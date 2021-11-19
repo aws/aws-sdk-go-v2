@@ -7,6 +7,29 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+// You don't have permissions to perform the requested operation. The user or role
+// that is making the request must have at least one IAM permissions policy
+// attached that grants the required permissions. For more information, see Access
+// Management (https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html) in the
+// IAM User Guide.
+type AccessDeniedException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *AccessDeniedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *AccessDeniedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // This exception is thrown if the request contains a semantic error. The precise
 // meaning will depend on the API, and will be documented in the error message.
 type BadRequestException struct {

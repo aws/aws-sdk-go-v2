@@ -7,7 +7,9 @@ import (
 	"time"
 )
 
-// An Amazon EKS add-on.
+// An Amazon EKS add-on. For more information, see Amazon EKS add-ons
+// (https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html) in the
+// Amazon EKS User Guide.
 type Addon struct {
 
 	// The Amazon Resource Name (ARN) of the add-on.
@@ -243,8 +245,8 @@ type ConnectorConfigResponse struct {
 	// The cluster's cloud service provider.
 	Provider *string
 
-	// The Amazon Resource Name (ARN) of the role that is used by the EKS connector to
-	// communicate with AWS services from the connected Kubernetes cluster.
+	// The Amazon Resource Name (ARN) of the role to communicate with services from the
+	// connected Kubernetes cluster.
 	RoleArn *string
 
 	noSmithyDocumentSerde
@@ -460,7 +462,7 @@ type Issue struct {
 	// * NodeCreationFailure:
 	// Your launched instances are unable to register with your Amazon EKS cluster.
 	// Common causes of this failure are insufficient node IAM role
-	// (https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html)
+	// (https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html)
 	// permissions or lack of outbound internet access for the nodes.
 	Code NodegroupIssueCode
 
@@ -483,7 +485,7 @@ type KubernetesNetworkConfigRequest struct {
 	// VPC. The block must meet the following requirements:
 	//
 	// * Within one of the
-	// following private IP address blocks: 10.0.0.0/8, 172.16.0.0.0/12, or
+	// following private IP address blocks: 10.0.0.0/8, 172.16.0.0/12, or
 	// 192.168.0.0/16.
 	//
 	// * Doesn't overlap with any CIDR block assigned to the VPC that
@@ -702,7 +704,21 @@ type NodegroupResources struct {
 // specify any or none of the properties.
 type NodegroupScalingConfig struct {
 
-	// The current number of nodes that the managed node group should maintain.
+	// The current number of nodes that the managed node group should maintain. If you
+	// use Cluster Autoscaler, you shouldn't change the desiredSize value directly, as
+	// this can cause the Cluster Autoscaler to suddenly scale up or scale down.
+	// Whenever this parameter changes, the number of worker nodes in the node group is
+	// updated to the specified size. If this parameter is given a value that is
+	// smaller than the current number of running worker nodes, the necessary number of
+	// worker nodes are terminated to match the given value. When using CloudFormation,
+	// no action occurs if you remove this parameter from your CFN template. This
+	// parameter can be different from minSize in some cases, such as when starting
+	// with extra hosts for testing. This parameter can also be different when you want
+	// to start with an estimated number of needed hosts, but let Cluster Autoscaler
+	// reduce the number if there are too many. When Cluster Autoscaler is used, the
+	// desiredSize parameter is altered by Cluster Autoscaler (but can be out-of-date
+	// for short periods of time). Cluster Autoscaler doesn't scale a managed node
+	// group lower than minSize or higher than maxSize.
 	DesiredSize *int32
 
 	// The maximum number of nodes that the managed node group can scale out to. For

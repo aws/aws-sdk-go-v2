@@ -231,7 +231,10 @@ type DescribedServer struct {
 	// provide a Directory ID using the IdentityProviderDetails parameter. Use the
 	// API_GATEWAY value to integrate with an identity provider of your choosing. The
 	// API_GATEWAY setting requires you to provide an API Gateway endpoint URL to call
-	// for authentication using the IdentityProviderDetails parameter.
+	// for authentication using the IdentityProviderDetails parameter. Use the LAMBDA
+	// value to directly use a Lambda function as your identity provider. If you choose
+	// this value, you must specify the ARN for the lambda function in the Function
+	// parameter for the IdentityProviderDetails data type.
 	IdentityProviderType IdentityProviderType
 
 	// Specifies the Amazon Resource Name (ARN) of the Amazon Web Services Identity and
@@ -552,6 +555,9 @@ type IdentityProviderDetails struct {
 	// want to stop sharing.
 	DirectoryId *string
 
+	// The ARN for a lambda function to use for the Identity provider.
+	Function *string
+
 	// Provides the type of InvocationRole used to authenticate the user account.
 	InvocationRole *string
 
@@ -660,7 +666,10 @@ type ListedServer struct {
 	// provide a Directory ID using the IdentityProviderDetails parameter. Use the
 	// API_GATEWAY value to integrate with an identity provider of your choosing. The
 	// API_GATEWAY setting requires you to provide an API Gateway endpoint URL to call
-	// for authentication using the IdentityProviderDetails parameter.
+	// for authentication using the IdentityProviderDetails parameter. Use the LAMBDA
+	// value to directly use a Lambda function as your identity provider. If you choose
+	// this value, you must specify the ARN for the lambda function in the Function
+	// parameter for the IdentityProviderDetails data type.
 	IdentityProviderType IdentityProviderType
 
 	// Specifies the Amazon Resource Name (ARN) of the Amazon Web Services Identity and

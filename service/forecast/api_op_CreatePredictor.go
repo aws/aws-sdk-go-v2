@@ -11,6 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// This operation creates a legacy predictor that does not include all the
+// predictor functionalities provided by Amazon Forecast. To create a predictor
+// that is compatible with all aspects of Forecast, use CreateAutoPredictor.
 // Creates an Amazon Forecast predictor. In the request, provide a dataset group
 // and either specify an algorithm or let Amazon Forecast choose an algorithm for
 // you using AutoML. If you specify an algorithm, you also can override

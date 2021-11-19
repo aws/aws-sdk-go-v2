@@ -90,6 +90,46 @@ func (m *validateOpDescribeInsight) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeOrganizationOverview struct {
+}
+
+func (*validateOpDescribeOrganizationOverview) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeOrganizationOverview) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeOrganizationOverviewInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeOrganizationOverviewInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeOrganizationResourceCollectionHealth struct {
+}
+
+func (*validateOpDescribeOrganizationResourceCollectionHealth) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeOrganizationResourceCollectionHealth) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeOrganizationResourceCollectionHealthInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeOrganizationResourceCollectionHealthInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeResourceCollectionHealth struct {
 }
 
@@ -190,6 +230,26 @@ func (m *validateOpListInsights) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListOrganizationInsights struct {
+}
+
+func (*validateOpListOrganizationInsights) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListOrganizationInsights) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListOrganizationInsightsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListOrganizationInsightsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListRecommendations struct {
 }
 
@@ -245,6 +305,26 @@ func (m *validateOpSearchInsights) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpSearchInsightsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSearchOrganizationInsights struct {
+}
+
+func (*validateOpSearchOrganizationInsights) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchOrganizationInsights) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchOrganizationInsightsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchOrganizationInsightsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -326,6 +406,14 @@ func addOpDescribeInsightValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeInsight{}, middleware.After)
 }
 
+func addOpDescribeOrganizationOverviewValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeOrganizationOverview{}, middleware.After)
+}
+
+func addOpDescribeOrganizationResourceCollectionHealthValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeOrganizationResourceCollectionHealth{}, middleware.After)
+}
+
 func addOpDescribeResourceCollectionHealthValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeResourceCollectionHealth{}, middleware.After)
 }
@@ -346,6 +434,10 @@ func addOpListInsightsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListInsights{}, middleware.After)
 }
 
+func addOpListOrganizationInsightsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListOrganizationInsights{}, middleware.After)
+}
+
 func addOpListRecommendationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListRecommendations{}, middleware.After)
 }
@@ -356,6 +448,10 @@ func addOpRemoveNotificationChannelValidationMiddleware(stack *middleware.Stack)
 
 func addOpSearchInsightsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSearchInsights{}, middleware.After)
+}
+
+func addOpSearchOrganizationInsightsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchOrganizationInsights{}, middleware.After)
 }
 
 func addOpStartCostEstimationValidationMiddleware(stack *middleware.Stack) error {
@@ -562,6 +658,36 @@ func validateOpDescribeInsightInput(v *DescribeInsightInput) error {
 	}
 }
 
+func validateOpDescribeOrganizationOverviewInput(v *DescribeOrganizationOverviewInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeOrganizationOverviewInput"}
+	if v.FromTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FromTime"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeOrganizationResourceCollectionHealthInput(v *DescribeOrganizationResourceCollectionHealthInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeOrganizationResourceCollectionHealthInput"}
+	if len(v.OrganizationResourceCollectionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationResourceCollectionType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeResourceCollectionHealthInput(v *DescribeResourceCollectionHealthInput) error {
 	if v == nil {
 		return nil
@@ -645,6 +771,25 @@ func validateOpListInsightsInput(v *ListInsightsInput) error {
 	}
 }
 
+func validateOpListOrganizationInsightsInput(v *ListOrganizationInsightsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOrganizationInsightsInput"}
+	if v.StatusFilter == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StatusFilter"))
+	} else if v.StatusFilter != nil {
+		if err := validateListInsightsStatusFilter(v.StatusFilter); err != nil {
+			invalidParams.AddNested("StatusFilter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListRecommendationsInput(v *ListRecommendationsInput) error {
 	if v == nil {
 		return nil
@@ -680,6 +825,27 @@ func validateOpSearchInsightsInput(v *SearchInsightsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SearchInsightsInput"}
+	if v.StartTimeRange == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTimeRange"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSearchOrganizationInsightsInput(v *SearchOrganizationInsightsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchOrganizationInsightsInput"}
+	if v.AccountIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountIds"))
+	}
 	if v.StartTimeRange == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StartTimeRange"))
 	}

@@ -132,6 +132,9 @@ type DescribeJobOutput struct {
 	// RECIPE - The job applies one or more transformations to a dataset.
 	Type types.JobType
 
+	// List of validation configurations that are applied to the profile job.
+	ValidationConfigurations []types.ValidationConfiguration
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

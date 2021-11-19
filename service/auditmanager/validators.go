@@ -530,6 +530,26 @@ func (m *validateOpGetEvidence) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetInsightsByAssessment struct {
+}
+
+func (*validateOpGetInsightsByAssessment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetInsightsByAssessment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetInsightsByAssessmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetInsightsByAssessmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetSettings struct {
 }
 
@@ -545,6 +565,26 @@ func (m *validateOpGetSettings) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetSettingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAssessmentControlInsightsByControlDomain struct {
+}
+
+func (*validateOpListAssessmentControlInsightsByControlDomain) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAssessmentControlInsightsByControlDomain) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAssessmentControlInsightsByControlDomainInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAssessmentControlInsightsByControlDomainInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -585,6 +625,46 @@ func (m *validateOpListAssessmentFrameworks) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListAssessmentFrameworksInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListControlDomainInsightsByAssessment struct {
+}
+
+func (*validateOpListControlDomainInsightsByAssessment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListControlDomainInsightsByAssessment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListControlDomainInsightsByAssessmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListControlDomainInsightsByAssessmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListControlInsightsByControlDomain struct {
+}
+
+func (*validateOpListControlInsightsByControlDomain) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListControlInsightsByControlDomain) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListControlInsightsByControlDomainInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListControlInsightsByControlDomainInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -994,8 +1074,16 @@ func addOpGetEvidenceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEvidence{}, middleware.After)
 }
 
+func addOpGetInsightsByAssessmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetInsightsByAssessment{}, middleware.After)
+}
+
 func addOpGetSettingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSettings{}, middleware.After)
+}
+
+func addOpListAssessmentControlInsightsByControlDomainValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAssessmentControlInsightsByControlDomain{}, middleware.After)
 }
 
 func addOpListAssessmentFrameworkShareRequestsValidationMiddleware(stack *middleware.Stack) error {
@@ -1004,6 +1092,14 @@ func addOpListAssessmentFrameworkShareRequestsValidationMiddleware(stack *middle
 
 func addOpListAssessmentFrameworksValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAssessmentFrameworks{}, middleware.After)
+}
+
+func addOpListControlDomainInsightsByAssessmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListControlDomainInsightsByAssessment{}, middleware.After)
+}
+
+func addOpListControlInsightsByControlDomainValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListControlInsightsByControlDomain{}, middleware.After)
 }
 
 func addOpListControlsValidationMiddleware(stack *middleware.Stack) error {
@@ -1614,6 +1710,21 @@ func validateOpGetEvidenceInput(v *GetEvidenceInput) error {
 	}
 }
 
+func validateOpGetInsightsByAssessmentInput(v *GetInsightsByAssessmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetInsightsByAssessmentInput"}
+	if v.AssessmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssessmentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetSettingsInput(v *GetSettingsInput) error {
 	if v == nil {
 		return nil
@@ -1621,6 +1732,24 @@ func validateOpGetSettingsInput(v *GetSettingsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetSettingsInput"}
 	if len(v.Attribute) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Attribute"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAssessmentControlInsightsByControlDomainInput(v *ListAssessmentControlInsightsByControlDomainInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAssessmentControlInsightsByControlDomainInput"}
+	if v.ControlDomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ControlDomainId"))
+	}
+	if v.AssessmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssessmentId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1651,6 +1780,36 @@ func validateOpListAssessmentFrameworksInput(v *ListAssessmentFrameworksInput) e
 	invalidParams := smithy.InvalidParamsError{Context: "ListAssessmentFrameworksInput"}
 	if len(v.FrameworkType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("FrameworkType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListControlDomainInsightsByAssessmentInput(v *ListControlDomainInsightsByAssessmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListControlDomainInsightsByAssessmentInput"}
+	if v.AssessmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssessmentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListControlInsightsByControlDomainInput(v *ListControlInsightsByControlDomainInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListControlInsightsByControlDomainInput"}
+	if v.ControlDomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ControlDomainId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

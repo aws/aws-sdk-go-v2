@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Retrieve information about a configuration deployment.
+// Retrieves information about a configuration deployment.
 func (c *Client) GetDeployment(ctx context.Context, params *GetDeploymentInput, optFns ...func(*Options)) (*GetDeploymentOutput, error) {
 	if params == nil {
 		params = &GetDeploymentInput{}
@@ -87,8 +87,8 @@ type GetDeploymentOutput struct {
 	// displayed first.
 	EventLog []types.DeploymentEvent
 
-	// The amount of time AppConfig monitored for alarms before considering the
-	// deployment to be complete and no longer eligible for automatic roll back.
+	// The amount of time that AppConfig monitored for alarms before considering the
+	// deployment to be complete and no longer eligible for automatic rollback.
 	FinalBakeTimeInMinutes int32
 
 	// The percentage of targets to receive a deployed configuration during each

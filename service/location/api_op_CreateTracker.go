@@ -69,14 +69,14 @@ type CreateTrackerInput struct {
 	// ID.
 	//
 	// * DistanceBased - If the device has moved less than 30 m (98.4 ft),
-	// location updates are ignored. Location updates within this distance are neither
+	// location updates are ignored. Location updates within this area are neither
 	// evaluated against linked geofence collections, nor stored. This helps control
-	// costs by reducing the number of geofence evaluations and device positions to
-	// retrieve. Distance-based filtering can also reduce the jitter effect when
-	// displaying device trajectory on a map.
+	// costs by reducing the number of geofence evaluations and historical device
+	// positions to paginate through. Distance-based filtering can also reduce the
+	// effects of GPS noise when displaying device trajectories on a map.
 	//
-	// This field is optional. If not
-	// specified, the default value is TimeBased.
+	// This field
+	// is optional. If not specified, the default value is TimeBased.
 	PositionFiltering types.PositionFiltering
 
 	// Specifies the data provider for the tracker resource.
@@ -111,6 +111,8 @@ type CreateTrackerInput struct {
 	//
 	// * Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
 	// characters: + - = . _ : / @.
+	//
+	// * Cannot use "aws:" as a prefix for a key.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

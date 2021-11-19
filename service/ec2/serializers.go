@@ -50869,6 +50869,13 @@ func awsEc2query_serializeOpDocumentModifySubnetAttributeInput(v *ModifySubnetAt
 		objectKey.String(*v.CustomerOwnedIpv4Pool)
 	}
 
+	if v.EnableDns64 != nil {
+		objectKey := object.Key("EnableDns64")
+		if err := awsEc2query_serializeDocumentAttributeBooleanValue(v.EnableDns64, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.MapCustomerOwnedIpOnLaunch != nil {
 		objectKey := object.Key("MapCustomerOwnedIpOnLaunch")
 		if err := awsEc2query_serializeDocumentAttributeBooleanValue(v.MapCustomerOwnedIpOnLaunch, objectKey); err != nil {

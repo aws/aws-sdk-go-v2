@@ -9867,6 +9867,58 @@ func awsAwsquery_deserializeDocumentLogicalResourceIdsUnwrapped(v *[]string, dec
 	*v = sv
 	return nil
 }
+func awsAwsquery_deserializeDocumentManagedExecution(v **types.ManagedExecution, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.ManagedExecution
+	if *v == nil {
+		sv = &types.ManagedExecution{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Active", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected ManagedExecutionNullable to be of type *bool, got %T instead", val)
+				}
+				sv.Active = ptr.Bool(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeDocumentModuleInfo(v **types.ModuleInfo, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14723,6 +14775,12 @@ func awsAwsquery_deserializeDocumentStackSet(v **types.StackSet, decoder smithyx
 				sv.ExecutionRoleName = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("ManagedExecution", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentManagedExecution(&sv.ManagedExecution, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("OrganizationalUnitIds", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentOrganizationalUnitIdList(&sv.OrganizationalUnitIds, nodeDecoder); err != nil {
@@ -15895,6 +15953,12 @@ func awsAwsquery_deserializeDocumentStackSetSummary(v **types.StackSetSummary, d
 					return err
 				}
 				sv.LastDriftCheckTimestamp = ptr.Time(t)
+			}
+
+		case strings.EqualFold("ManagedExecution", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentManagedExecution(&sv.ManagedExecution, nodeDecoder); err != nil {
+				return err
 			}
 
 		case strings.EqualFold("PermissionModel", t.Name.Local):

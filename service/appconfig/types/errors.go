@@ -7,9 +7,13 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// The input fails to satisfy the constraints specified by an AWS service.
+// The input fails to satisfy the constraints specified by an Amazon Web Services
+// service.
 type BadRequestException struct {
 	Message *string
+
+	Reason  BadRequestReason
+	Details BadRequestDetails
 
 	noSmithyDocumentSerde
 }
@@ -110,7 +114,7 @@ func (e *ResourceNotFoundException) ErrorCode() string             { return "Res
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The number of hosted configuration versions exceeds the limit for the AppConfig
-// configuration store. Delete one or more versions and try again.
+// hosted configuration store. Delete one or more versions and try again.
 type ServiceQuotaExceededException struct {
 	Message *string
 

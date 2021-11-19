@@ -77,6 +77,8 @@ type CreateMapInput struct {
 	//
 	// * Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
 	// characters: + - = . _ : / @.
+	//
+	// * Cannot use "aws:" as a prefix for a key.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

@@ -270,6 +270,26 @@ func (m *validateOpGetStreamKey) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetStreamSession struct {
+}
+
+func (*validateOpGetStreamSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetStreamSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetStreamSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetStreamSessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpImportPlaybackKeyPair struct {
 }
 
@@ -305,6 +325,26 @@ func (m *validateOpListStreamKeys) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListStreamKeysInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListStreamSessions struct {
+}
+
+func (*validateOpListStreamSessions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListStreamSessions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListStreamSessionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListStreamSessionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -482,12 +522,20 @@ func addOpGetStreamKeyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetStreamKey{}, middleware.After)
 }
 
+func addOpGetStreamSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetStreamSession{}, middleware.After)
+}
+
 func addOpImportPlaybackKeyPairValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpImportPlaybackKeyPair{}, middleware.After)
 }
 
 func addOpListStreamKeysValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListStreamKeys{}, middleware.After)
+}
+
+func addOpListStreamSessionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListStreamSessions{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -745,6 +793,21 @@ func validateOpGetStreamKeyInput(v *GetStreamKeyInput) error {
 	}
 }
 
+func validateOpGetStreamSessionInput(v *GetStreamSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetStreamSessionInput"}
+	if v.ChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpImportPlaybackKeyPairInput(v *ImportPlaybackKeyPairInput) error {
 	if v == nil {
 		return nil
@@ -765,6 +828,21 @@ func validateOpListStreamKeysInput(v *ListStreamKeysInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListStreamKeysInput"}
+	if v.ChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListStreamSessionsInput(v *ListStreamSessionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListStreamSessionsInput"}
 	if v.ChannelArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
 	}

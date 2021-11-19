@@ -3324,33 +3324,32 @@ func awsAwsjson11_serializeDocumentDocumentAttributeStringListValue(v []string, 
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDocumentAttributeValue(v types.DocumentAttributeValue, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentDocumentAttributeValue(v *types.DocumentAttributeValue, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
-	switch uv := v.(type) {
-	case *types.DocumentAttributeValueMemberDateValue:
-		av := object.Key("DateValue")
-		av.Double(smithytime.FormatEpochSeconds(uv.Value))
+	if v.DateValue != nil {
+		ok := object.Key("DateValue")
+		ok.Double(smithytime.FormatEpochSeconds(*v.DateValue))
+	}
 
-	case *types.DocumentAttributeValueMemberLongValue:
-		av := object.Key("LongValue")
-		av.Long(uv.Value)
+	if v.LongValue != nil {
+		ok := object.Key("LongValue")
+		ok.Long(*v.LongValue)
+	}
 
-	case *types.DocumentAttributeValueMemberStringListValue:
-		av := object.Key("StringListValue")
-		if err := awsAwsjson11_serializeDocumentDocumentAttributeStringListValue(uv.Value, av); err != nil {
+	if v.StringListValue != nil {
+		ok := object.Key("StringListValue")
+		if err := awsAwsjson11_serializeDocumentDocumentAttributeStringListValue(v.StringListValue, ok); err != nil {
 			return err
 		}
-
-	case *types.DocumentAttributeValueMemberStringValue:
-		av := object.Key("StringValue")
-		av.String(uv.Value)
-
-	default:
-		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
-
 	}
+
+	if v.StringValue != nil {
+		ok := object.Key("StringValue")
+		ok.String(*v.StringValue)
+	}
+
 	return nil
 }
 

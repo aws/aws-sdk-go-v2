@@ -40,6 +40,24 @@ func (AnomalyDetectorStateValue) Values() []AnomalyDetectorStateValue {
 	}
 }
 
+type AnomalyDetectorType string
+
+// Enum values for AnomalyDetectorType
+const (
+	AnomalyDetectorTypeSingleMetric AnomalyDetectorType = "SINGLE_METRIC"
+	AnomalyDetectorTypeMetricMath   AnomalyDetectorType = "METRIC_MATH"
+)
+
+// Values returns all known values for AnomalyDetectorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AnomalyDetectorType) Values() []AnomalyDetectorType {
+	return []AnomalyDetectorType{
+		"SINGLE_METRIC",
+		"METRIC_MATH",
+	}
+}
+
 type ComparisonOperator string
 
 // Enum values for ComparisonOperator

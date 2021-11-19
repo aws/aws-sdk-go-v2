@@ -31,6 +31,21 @@
     "shapes": {
         "com.amazonaws.lambda#AWSGirApiService": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Lambda",
+                    "arnNamespace": "lambda",
+                    "cloudFormationName": "Lambda",
+                    "cloudTrailEventSource": "lambda.amazonaws.com",
+                    "endpointPrefix": "lambda"
+                },
+                "aws.auth#sigv4": {
+                    "name": "lambda"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<fullname>Lambda</fullname>\n         <p>\n            <b>Overview</b>\n         </p>\n         <p>Lambda is a compute service that lets you run code without provisioning or managing servers.\n        Lambda runs your code on a high-availability compute infrastructure and performs all of the\n      administration of the compute resources, including server and operating system maintenance, capacity provisioning\n      and automatic scaling, code monitoring and logging. With Lambda, you can run code for virtually any\n      type of application or backend service. For more information about the Lambda service, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/welcome.html\">What is Lambda</a> in the <b>Lambda Developer Guide</b>.</p>\n         <p>The <i>Lambda API Reference</i> provides information about\n      each of the API methods, including details about the parameters in each API request and\n      response. </p>\n         <p></p>\n         <p>You can use Software Development Kits (SDKs), Integrated Development Environment (IDE) Toolkits, and command\n      line tools to access the API. For installation instructions, see <a href=\"http://aws.amazon.com/tools/\">Tools for\n        Amazon Web Services</a>. </p>\n         <p>For a list of Region-specific endpoints that Lambda supports, \n      see <a href=\"https://docs.aws.amazon.com/general/latest/gr/lambda-service.html/\">Lambda\n        endpoints and quotas </a> in the Amazon Web Services General Reference. </p>",
+                "smithy.api#title": "AWS Lambda"
+            },
             "version": "2015-03-31",
             "operations": [
                 {
@@ -52,6 +67,9 @@
                     "target": "com.amazonaws.lambda#CreateFunction"
                 },
                 {
+                    "target": "com.amazonaws.lambda#CreateFunctionUrlConfig"
+                },
+                {
                     "target": "com.amazonaws.lambda#DeleteAlias"
                 },
                 {
@@ -71,6 +89,9 @@
                 },
                 {
                     "target": "com.amazonaws.lambda#DeleteFunctionEventInvokeConfig"
+                },
+                {
+                    "target": "com.amazonaws.lambda#DeleteFunctionUrlConfig"
                 },
                 {
                     "target": "com.amazonaws.lambda#DeleteLayerVersion"
@@ -104,6 +125,9 @@
                 },
                 {
                     "target": "com.amazonaws.lambda#GetFunctionEventInvokeConfig"
+                },
+                {
+                    "target": "com.amazonaws.lambda#GetFunctionUrlConfig"
                 },
                 {
                     "target": "com.amazonaws.lambda#GetLayerVersion"
@@ -143,6 +167,9 @@
                 },
                 {
                     "target": "com.amazonaws.lambda#ListFunctionsByCodeSigningConfig"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ListFunctionUrlConfigs"
                 },
                 {
                     "target": "com.amazonaws.lambda#ListLayers"
@@ -206,23 +233,11 @@
                 },
                 {
                     "target": "com.amazonaws.lambda#UpdateFunctionEventInvokeConfig"
+                },
+                {
+                    "target": "com.amazonaws.lambda#UpdateFunctionUrlConfig"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Lambda",
-                    "arnNamespace": "lambda",
-                    "cloudFormationName": "Lambda",
-                    "cloudTrailEventSource": "lambda.amazonaws.com",
-                    "endpointPrefix": "lambda"
-                },
-                "aws.auth#sigv4": {
-                    "name": "lambda"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<fullname>Lambda</fullname>\n         <p>\n            <b>Overview</b>\n         </p>\n         <p>This is the <i>Lambda API Reference</i>. The Lambda Developer Guide provides additional\n      information. For the service overview, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/welcome.html\">What is\n        Lambda</a>, and for information about how the service works, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html\">Lambda: How it Works</a> in the <b>Lambda Developer Guide</b>.</p>",
-                "smithy.api#title": "AWS Lambda"
-            }
+            ]
         },
         "com.amazonaws.lambda#AccountLimit": {
             "type": "structure",
@@ -609,6 +624,36 @@
                 "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html\">traffic-shifting</a> configuration of a Lambda function alias.</p>"
             }
         },
+        "com.amazonaws.lambda#AllowCredentials": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.lambda#AllowMethodsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lambda#Method"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 6
+                }
+            }
+        },
+        "com.amazonaws.lambda#AllowOriginsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lambda#Origin"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.lambda#AllowedPublishers": {
             "type": "structure",
             "members": {
@@ -655,6 +700,21 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:([a-z]{2}(-gov)?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$"
+            }
+        },
+        "com.amazonaws.lambda#AuthorizationType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "NONE",
+                        "name": "NONE"
+                    },
+                    {
+                        "value": "AWS_IAM",
+                        "name": "AWS_IAM"
+                    }
+                ]
             }
         },
         "com.amazonaws.lambda#BatchSize": {
@@ -874,6 +934,29 @@
                 }
             }
         },
+        "com.amazonaws.lambda#Cors": {
+            "type": "structure",
+            "members": {
+                "AllowCredentials": {
+                    "target": "com.amazonaws.lambda#AllowCredentials"
+                },
+                "AllowHeaders": {
+                    "target": "com.amazonaws.lambda#HeadersList"
+                },
+                "AllowMethods": {
+                    "target": "com.amazonaws.lambda#AllowMethodsList"
+                },
+                "AllowOrigins": {
+                    "target": "com.amazonaws.lambda#AllowOriginsList"
+                },
+                "ExposeHeaders": {
+                    "target": "com.amazonaws.lambda#HeadersList"
+                },
+                "MaxAge": {
+                    "target": "com.amazonaws.lambda#MaxAge"
+                }
+            }
+        },
         "com.amazonaws.lambda#CreateAlias": {
             "type": "operation",
             "input": {
@@ -1034,7 +1117,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a mapping between an event source and an Lambda function. Lambda reads items from the\n      event source and triggers the function.</p>\n         <p>For details about each event source type, see the following topics. </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-dynamodb-eventsourcemapping\">\n            Configuring a Dynamo DB stream as an event source</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-eventsourcemapping\">\n            Configuring a Kinesis stream as an event source</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-eventsource\"> Configuring an\n              Amazon SQS queue as an event source</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-eventsourcemapping\">\n            Configuring an MQ broker as an event source</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html\"> Configuring MSK as an event\n            source</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/kafka-smaa.html\"> Configuring Self-Managed Apache Kafka\n            as an event source</a>\n               </p>\n            </li>\n         </ul>\n    \n         <p>The following error handling options are only available for stream sources (DynamoDB and Kinesis):</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BisectBatchOnFunctionError</code> - If the function returns an error, split the batch in two and retry.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DestinationConfig</code> - Send discarded records to an Amazon SQS queue or Amazon SNS topic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MaximumRecordAgeInSeconds</code> - Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires</p>\n            </li>\n            <li>\n               <p>\n                  <code>MaximumRetryAttempts</code> - Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ParallelizationFactor</code> - Process multiple batches from each shard concurrently.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Creates a mapping between an event source and an Lambda function. Lambda reads items from the\n      event source and triggers the function.</p>\n         <p>For details about how to configure different event sources, see the following topics. </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-dynamodb-eventsourcemapping\">\n            Amazon DynamoDB Streams</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-eventsourcemapping\">\n            Amazon Kinesis</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-eventsource\">\n            Amazon SQS</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-eventsourcemapping\">\n            Amazon MQ and RabbitMQ</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html\">\n            Amazon MSK</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/kafka-smaa.html\">\n            Apache Kafka</a>\n               </p>\n            </li>\n         </ul>\n    \n         <p>The following error handling options are only available for stream sources (DynamoDB and Kinesis):</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BisectBatchOnFunctionError</code> - If the function returns an error, split the batch in two and retry.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DestinationConfig</code> - Send discarded records to an Amazon SQS queue or Amazon SNS topic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MaximumRecordAgeInSeconds</code> - Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires</p>\n            </li>\n            <li>\n               <p>\n                  <code>MaximumRetryAttempts</code> - Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ParallelizationFactor</code> - Process multiple batches from each shard concurrently.</p>\n            </li>\n         </ul>\n         <p>For information about which configuration parameters apply to each event source, see the following topics.</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-ddb-params\">\n          Amazon DynamoDB Streams</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-params\">\n          Amazon Kinesis</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#services-sqs-params\">\n          Amazon SQS</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-params\">\n          Amazon MQ and RabbitMQ</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-parms\">\n          Amazon MSK</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-kafka-parms\">\n          Apache Kafka</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2015-03-31/event-source-mappings",
@@ -1247,7 +1330,7 @@
                 "Timeout": {
                     "target": "com.amazonaws.lambda#Timeout",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds. The\n      maximum allowed value is 900 seconds. For additional information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html\">Lambda execution environment</a>.</p>"
+                        "smithy.api#documentation": "<p>The amount of time (in seconds) that Lambda allows a function to run before stopping it. The default is 3 seconds. The\n      maximum allowed value is 900 seconds. For additional information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html\">Lambda execution environment</a>.</p>"
                     }
                 },
                 "MemorySize": {
@@ -1332,6 +1415,98 @@
                     "target": "com.amazonaws.lambda#ArchitecturesList",
                     "traits": {
                         "smithy.api#documentation": "<p>The instruction set architecture that the function supports. Enter a string array with one of the valid values. \n    The default value is <code>x86_64</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lambda#CreateFunctionUrlConfig": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lambda#CreateFunctionUrlConfigRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lambda#CreateFunctionUrlConfigResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lambda#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2021-10-31/functions/{FunctionName}/url",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.lambda#CreateFunctionUrlConfigRequest": {
+            "type": "structure",
+            "members": {
+                "FunctionName": {
+                    "target": "com.amazonaws.lambda#FunctionName",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Qualifier": {
+                    "target": "com.amazonaws.lambda#FunctionUrlQualifier",
+                    "traits": {
+                        "smithy.api#httpQuery": "Qualifier"
+                    }
+                },
+                "AuthorizationType": {
+                    "target": "com.amazonaws.lambda#AuthorizationType",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Cors": {
+                    "target": "com.amazonaws.lambda#Cors"
+                }
+            }
+        },
+        "com.amazonaws.lambda#CreateFunctionUrlConfigResponse": {
+            "type": "structure",
+            "members": {
+                "FunctionUrl": {
+                    "target": "com.amazonaws.lambda#FunctionUrl",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "FunctionArn": {
+                    "target": "com.amazonaws.lambda#FunctionArn",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "AuthorizationType": {
+                    "target": "com.amazonaws.lambda#AuthorizationType",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Cors": {
+                    "target": "com.amazonaws.lambda#Cors"
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.lambda#Timestamp",
+                    "traits": {
+                        "smithy.api#required": {}
                     }
                 }
             }
@@ -1685,6 +1860,51 @@
                     "target": "com.amazonaws.lambda#Qualifier",
                     "traits": {
                         "smithy.api#documentation": "<p>Specify a version to delete. You can't delete a version that's referenced by an alias.</p>",
+                        "smithy.api#httpQuery": "Qualifier"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lambda#DeleteFunctionUrlConfig": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lambda#DeleteFunctionUrlConfigRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lambda#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/2021-10-31/functions/{FunctionName}/url",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.lambda#DeleteFunctionUrlConfigRequest": {
+            "type": "structure",
+            "members": {
+                "FunctionName": {
+                    "target": "com.amazonaws.lambda#FunctionName",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Qualifier": {
+                    "target": "com.amazonaws.lambda#FunctionUrlQualifier",
+                    "traits": {
                         "smithy.api#httpQuery": "Qualifier"
                     }
                 }
@@ -2485,7 +2705,7 @@
                 "KMSKeyArn": {
                     "target": "com.amazonaws.lambda#KMSKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS key that's used to encrypt the function's environment variables. This key is only returned if you've\n      configured a customer managed CMK.</p>"
+                        "smithy.api#documentation": "<p>The KMS key that's used to encrypt the function's environment variables. This key is only returned if you've\n      configured a customer managed key.</p>"
                     }
                 },
                 "TracingConfig": {
@@ -2497,7 +2717,7 @@
                 "MasterArn": {
                     "target": "com.amazonaws.lambda#FunctionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>For Lambda@Edge functions, the ARN of the master function.</p>"
+                        "smithy.api#documentation": "<p>For Lambda@Edge functions, the ARN of the main function.</p>"
                     }
                 },
                 "RevisionId": {
@@ -2667,6 +2887,69 @@
                     "min": 0,
                     "max": 1
                 }
+            }
+        },
+        "com.amazonaws.lambda#FunctionUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 40,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.lambda#FunctionUrlConfig": {
+            "type": "structure",
+            "members": {
+                "FunctionUrl": {
+                    "target": "com.amazonaws.lambda#FunctionUrl",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "FunctionArn": {
+                    "target": "com.amazonaws.lambda#FunctionArn",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.lambda#Timestamp",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.lambda#Timestamp",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Cors": {
+                    "target": "com.amazonaws.lambda#Cors"
+                },
+                "AuthorizationType": {
+                    "target": "com.amazonaws.lambda#AuthorizationType",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lambda#FunctionUrlConfigList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lambda#FunctionUrlConfig"
+            }
+        },
+        "com.amazonaws.lambda#FunctionUrlQualifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(^\\$LATEST$)|((?!^[0-9]+$)([a-zA-Z0-9-_]+))$"
             }
         },
         "com.amazonaws.lambda#FunctionVersion": {
@@ -3268,6 +3551,92 @@
                 }
             }
         },
+        "com.amazonaws.lambda#GetFunctionUrlConfig": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lambda#GetFunctionUrlConfigRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lambda#GetFunctionUrlConfigResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lambda#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2021-10-31/functions/{FunctionName}/url",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lambda#GetFunctionUrlConfigRequest": {
+            "type": "structure",
+            "members": {
+                "FunctionName": {
+                    "target": "com.amazonaws.lambda#FunctionName",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Qualifier": {
+                    "target": "com.amazonaws.lambda#FunctionUrlQualifier",
+                    "traits": {
+                        "smithy.api#httpQuery": "Qualifier"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lambda#GetFunctionUrlConfigResponse": {
+            "type": "structure",
+            "members": {
+                "FunctionUrl": {
+                    "target": "com.amazonaws.lambda#FunctionUrl",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "FunctionArn": {
+                    "target": "com.amazonaws.lambda#FunctionArn",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "AuthorizationType": {
+                    "target": "com.amazonaws.lambda#AuthorizationType",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Cors": {
+                    "target": "com.amazonaws.lambda#Cors"
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.lambda#Timestamp",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.lambda#Timestamp",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.lambda#GetLayerVersion": {
             "type": "operation",
             "input": {
@@ -3664,6 +4033,28 @@
                     "max": 128
                 },
                 "smithy.api#pattern": "^[^\\s]+$"
+            }
+        },
+        "com.amazonaws.lambda#Header": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.lambda#HeadersList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lambda#Header"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.lambda#HttpStatus": {
@@ -4863,6 +5254,80 @@
                 }
             }
         },
+        "com.amazonaws.lambda#ListFunctionUrlConfigs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lambda#ListFunctionUrlConfigsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lambda#ListFunctionUrlConfigsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lambda#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2021-10-31/functions/{FunctionName}/urls",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "NextMarker",
+                    "items": "FunctionUrlConfigs",
+                    "pageSize": "MaxItems"
+                }
+            }
+        },
+        "com.amazonaws.lambda#ListFunctionUrlConfigsRequest": {
+            "type": "structure",
+            "members": {
+                "FunctionName": {
+                    "target": "com.amazonaws.lambda#FunctionName",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.lambda#String",
+                    "traits": {
+                        "smithy.api#httpQuery": "Marker"
+                    }
+                },
+                "MaxItems": {
+                    "target": "com.amazonaws.lambda#MaxItems",
+                    "traits": {
+                        "smithy.api#httpQuery": "MaxItems"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lambda#ListFunctionUrlConfigsResponse": {
+            "type": "structure",
+            "members": {
+                "FunctionUrlConfigs": {
+                    "target": "com.amazonaws.lambda#FunctionUrlConfigList",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextMarker": {
+                    "target": "com.amazonaws.lambda#String"
+                }
+            }
+        },
         "com.amazonaws.lambda#ListFunctions": {
             "type": "operation",
             "input": {
@@ -5458,7 +5923,27 @@
                 "smithy.api#pattern": "^ALL|[a-z]{2}(-gov)?-[a-z]+-\\d{1}$"
             }
         },
+        "com.amazonaws.lambda#MaxAge": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 86400
+                }
+            }
+        },
         "com.amazonaws.lambda#MaxFunctionEventInvokeConfigListItems": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.lambda#MaxItems": {
             "type": "integer",
             "traits": {
                 "smithy.api#box": {},
@@ -5558,6 +6043,16 @@
                 }
             }
         },
+        "com.amazonaws.lambda#Method": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 6
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
         "com.amazonaws.lambda#NameSpacedFunctionArn": {
             "type": "string",
             "traits": {
@@ -5629,6 +6124,16 @@
                     "max": 34
                 },
                 "smithy.api#pattern": "^o-[a-z0-9]{10,32}$"
+            }
+        },
+        "com.amazonaws.lambda#Origin": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 253
+                },
+                "smithy.api#pattern": ".*"
             }
         },
         "com.amazonaws.lambda#PackageType": {
@@ -6848,6 +7353,14 @@
                     {
                         "value": "VIRTUAL_HOST",
                         "name": "VIRTUAL_HOST"
+                    },
+                    {
+                        "value": "CLIENT_CERTIFICATE_TLS_AUTH",
+                        "name": "CLIENT_CERTIFICATE_TLS_AUTH"
+                    },
+                    {
+                        "value": "SERVER_ROOT_CA_CERTIFICATE",
+                        "name": "SERVER_ROOT_CA_CERTIFICATE"
                     }
                 ]
             }
@@ -7484,7 +7997,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an event source mapping. You can change the function that Lambda invokes, or pause\n      invocation and resume later from the same location.</p>\n    \n         <p>The following error handling options are only available for stream sources (DynamoDB and Kinesis):</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BisectBatchOnFunctionError</code> - If the function returns an error, split the batch in two and retry.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DestinationConfig</code> - Send discarded records to an Amazon SQS queue or Amazon SNS topic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MaximumRecordAgeInSeconds</code> - Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires</p>\n            </li>\n            <li>\n               <p>\n                  <code>MaximumRetryAttempts</code> - Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ParallelizationFactor</code> - Process multiple batches from each shard concurrently.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Updates an event source mapping. You can change the function that Lambda invokes, or pause\n      invocation and resume later from the same location.</p>\n         <p>For details about how to configure different event sources, see the following topics. </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-dynamodb-eventsourcemapping\">\n            Amazon DynamoDB Streams</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-eventsourcemapping\">\n            Amazon Kinesis</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-eventsource\">\n            Amazon SQS</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-eventsourcemapping\">\n            Amazon MQ and RabbitMQ</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html\">\n            Amazon MSK</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/kafka-smaa.html\">\n            Apache Kafka</a>\n               </p>\n            </li>\n         </ul>\n    \n         <p>The following error handling options are only available for stream sources (DynamoDB and Kinesis):</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BisectBatchOnFunctionError</code> - If the function returns an error, split the batch in two and retry.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DestinationConfig</code> - Send discarded records to an Amazon SQS queue or Amazon SNS topic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MaximumRecordAgeInSeconds</code> - Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires</p>\n            </li>\n            <li>\n               <p>\n                  <code>MaximumRetryAttempts</code> - Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ParallelizationFactor</code> - Process multiple batches from each shard concurrently.</p>\n            </li>\n         </ul>\n         <p>For information about which configuration parameters apply to each event source, see the following topics.</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-ddb-params\">\n          Amazon DynamoDB Streams</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-params\">\n          Amazon Kinesis</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#services-sqs-params\">\n          Amazon SQS</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-params\">\n          Amazon MQ and RabbitMQ</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-parms\">\n          Amazon MSK</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-kafka-parms\">\n          Apache Kafka</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/2015-03-31/event-source-mappings/{UUID}",
@@ -7771,7 +8284,7 @@
                 "Timeout": {
                     "target": "com.amazonaws.lambda#Timeout",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds. The\n      maximum allowed value is 900 seconds. For additional information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html\">Lambda execution environment</a>.</p>"
+                        "smithy.api#documentation": "<p>The amount of time (in seconds) that Lambda allows a function to run before stopping it. The default is 3 seconds. The\n      maximum allowed value is 900 seconds. For additional information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html\">Lambda execution environment</a>.</p>"
                     }
                 },
                 "MemorySize": {
@@ -7910,6 +8423,101 @@
                     "target": "com.amazonaws.lambda#DestinationConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>A destination for events after they have been sent to a function for processing.</p>\n         <p class=\"title\">\n            <b>Destinations</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <b>Function</b> - The Amazon Resource Name (ARN) of a Lambda function.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Queue</b> - The ARN of an SQS queue.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Topic</b> - The ARN of an SNS topic.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Event Bus</b> - The ARN of an Amazon EventBridge event bus.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lambda#UpdateFunctionUrlConfig": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lambda#UpdateFunctionUrlConfigRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lambda#UpdateFunctionUrlConfigResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lambda#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/2021-10-31/functions/{FunctionName}/url",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lambda#UpdateFunctionUrlConfigRequest": {
+            "type": "structure",
+            "members": {
+                "FunctionName": {
+                    "target": "com.amazonaws.lambda#FunctionName",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Qualifier": {
+                    "target": "com.amazonaws.lambda#FunctionUrlQualifier",
+                    "traits": {
+                        "smithy.api#httpQuery": "Qualifier"
+                    }
+                },
+                "AuthorizationType": {
+                    "target": "com.amazonaws.lambda#AuthorizationType"
+                },
+                "Cors": {
+                    "target": "com.amazonaws.lambda#Cors"
+                }
+            }
+        },
+        "com.amazonaws.lambda#UpdateFunctionUrlConfigResponse": {
+            "type": "structure",
+            "members": {
+                "FunctionUrl": {
+                    "target": "com.amazonaws.lambda#FunctionUrl",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "FunctionArn": {
+                    "target": "com.amazonaws.lambda#FunctionArn",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "AuthorizationType": {
+                    "target": "com.amazonaws.lambda#AuthorizationType",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Cors": {
+                    "target": "com.amazonaws.lambda#Cors"
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.lambda#Timestamp",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.lambda#Timestamp",
+                    "traits": {
+                        "smithy.api#required": {}
                     }
                 }
             }

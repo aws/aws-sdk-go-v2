@@ -106,6 +106,19 @@ type DialogAction struct {
 	// This member is required.
 	Type DialogActionType
 
+	// Configures the slot to use spell-by-letter or spell-by-word style. When you use
+	// a style on a slot, users can spell out their input to make it clear to your
+	// bot.
+	//
+	// * Spell by letter - "b" "o" "b"
+	//
+	// * Spell by word - "b as in boy" "o as in
+	// oscar" "b as in boy"
+	//
+	// For more information, see  Using spelling to enter slot
+	// values  (https://docs.aws.amazon.com/lexv2/latest/dg/using-spelling.html).
+	SlotElicitationStyle StyleType
+
 	// The name of the slot that should be elicited from the user.
 	SlotToElicit *string
 

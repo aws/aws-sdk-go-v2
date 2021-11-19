@@ -58,7 +58,8 @@ type Certificate struct {
 	// The contents of a .pem file, which contains an X.509 certificate.
 	CertificatePem *string
 
-	// The location of an imported Oracle Wallet certificate for use with SSL.
+	// The location of an imported Oracle Wallet certificate for use with SSL. Example:
+	// filebase64("${path.root}/rds-ca-2019-root.sso")
 	CertificateWallet []byte
 
 	// The key length of the cryptographic algorithm being used.
@@ -200,11 +201,11 @@ type DynamoDbSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information that defines an Elasticsearch endpoint.
+// Provides information that defines an OpenSearch endpoint.
 type ElasticsearchSettings struct {
 
-	// The endpoint for the Elasticsearch cluster. DMS uses HTTPS if a transport
-	// protocol (http/https) is not specified.
+	// The endpoint for the OpenSearch cluster. DMS uses HTTPS if a transport protocol
+	// (http/https) is not specified.
 	//
 	// This member is required.
 	EndpointUri *string
@@ -216,12 +217,12 @@ type ElasticsearchSettings struct {
 	ServiceAccessRoleArn *string
 
 	// The maximum number of seconds for which DMS retries failed API requests to the
-	// Elasticsearch cluster.
+	// OpenSearch cluster.
 	ErrorRetryDuration *int32
 
 	// The maximum percentage of records that can fail to be written before a full load
 	// operation stops. To avoid early failure, this counter is only effective after
-	// 1000 records are transferred. Elasticsearch also has the concept of error
+	// 1000 records are transferred. OpenSearch also has the concept of error
 	// monitoring during the last 10 minutes of an Observation Window. If transfer of
 	// all records fail in the last 10 minutes, the full load operation stops.
 	FullLoadErrorPercentage *int32
@@ -245,19 +246,8 @@ type Endpoint struct {
 	// The name of the database at the endpoint.
 	DatabaseName *string
 
-	// The settings in JSON format for the DMS transfer type of source endpoint.
-	// Possible settings include the following:
-	//
-	// * ServiceAccessRoleArn - - The Amazon
-	// Resource Name (ARN) used by the service access IAM role. The role must allow the
-	// iam:PassRole action.
-	//
-	// * BucketName - The name of the S3 bucket to
-	// use.
-	//
-	// Shorthand syntax for these settings is as follows:
-	// ServiceAccessRoleArn=string,BucketName=string, JSON syntax for these settings is
-	// as follows: { "ServiceAccessRoleArn": "string", "BucketName": "string"}
+	// The settings for the DMS Transfer type source. For more information, see the
+	// DmsTransferSettings structure.
 	DmsTransferSettings *DmsTransferSettings
 
 	// Provides information that defines a DocumentDB endpoint.
@@ -267,8 +257,8 @@ type Endpoint struct {
 	// DynamoDBSettings structure.
 	DynamoDbSettings *DynamoDbSettings
 
-	// The settings for the Elasticsearch source endpoint. For more information, see
-	// the ElasticsearchSettings structure.
+	// The settings for the OpenSearch source endpoint. For more information, see the
+	// ElasticsearchSettings structure.
 	ElasticsearchSettings *ElasticsearchSettings
 
 	// The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
@@ -288,8 +278,9 @@ type Endpoint struct {
 
 	// The database engine name. Valid values, depending on the EndpointType, include
 	// "mysql", "oracle", "postgres", "mariadb", "aurora", "aurora-postgresql",
-	// "redshift", "s3", "db2", "azuredb", "sybase", "dynamodb", "mongodb", "kinesis",
-	// "kafka", "elasticsearch", "documentdb", "sqlserver", and "neptune".
+	// "opensearch", "redshift", "s3", "db2", "azuredb", "sybase", "dynamodb",
+	// "mongodb", "kinesis", "kafka", "elasticsearch", "documentdb", "sqlserver", and
+	// "neptune".
 	EngineName *string
 
 	// Value returned by a call to CreateEndpoint that can be used for cross-account
@@ -302,6 +293,9 @@ type Endpoint struct {
 
 	// Additional connection attributes used to connect to the endpoint.
 	ExtraConnectionAttributes *string
+
+	// Settings in JSON format for the source GCP MySQL endpoint.
+	GcpMySQLSettings *GcpMySQLSettings
 
 	// The settings for the IBM Db2 LUW source endpoint. For more information, see the
 	// IBMDb2Settings structure.
@@ -514,6 +508,87 @@ type Filter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Settings in JSON format for the source GCP MySQL endpoint.
+type GcpMySQLSettings struct {
+
+	// Specifies a script to run immediately after DMS connects to the endpoint. The
+	// migration task continues running regardless if the SQL statement succeeds or
+	// fails. For this parameter, provide the code of the script itself, not the name
+	// of a file containing the script.
+	AfterConnectScript *string
+
+	// Adjusts the behavior of DMS when migrating from an SQL Server source database
+	// that is hosted as part of an Always On availability group cluster. If you need
+	// DMS to poll all the nodes in the Always On cluster for transaction backups, set
+	// this attribute to false.
+	CleanSourceMetadataOnMismatch *bool
+
+	// Database name for the endpoint. For a MySQL source or target endpoint, don't
+	// explicitly specify the database using the DatabaseName request parameter on
+	// either the CreateEndpoint or ModifyEndpoint API call. Specifying DatabaseName
+	// when you create or modify a MySQL endpoint replicates all the task tables to
+	// this single database. For MySQL endpoints, you specify the database only when
+	// you specify the schema in the table-mapping rules of the DMS task.
+	DatabaseName *string
+
+	// Specifies how often to check the binary log for new changes/events when the
+	// database is idle. The default is five seconds. Example: eventsPollInterval=5; In
+	// the example, DMS checks for changes in the binary logs every five seconds.
+	EventsPollInterval *int32
+
+	// Specifies the maximum size (in KB) of any .csv file used to transfer data to a
+	// MySQL-compatible database. Example: maxFileSize=512
+	MaxFileSize *int32
+
+	// Improves performance when loading data into the MySQL-compatible target
+	// database. Specifies how many threads to use to load the data into the
+	// MySQL-compatible target database. Setting a large number of threads can have an
+	// adverse effect on database performance, because a separate connection is
+	// required for each thread. The default is one. Example: parallelLoadThreads=1
+	ParallelLoadThreads *int32
+
+	// Endpoint connection password.
+	Password *string
+
+	//
+	Port *int32
+
+	// The full Amazon Resource Name (ARN) of the IAM role that specifies DMS as the
+	// trusted entity and grants the required permissions to access the value in
+	// SecretsManagerSecret. The role must allow the iam:PassRole action.
+	// SecretsManagerSecret has the value of the Amazon Web Services Secrets Manager
+	// secret that allows access to the MySQL endpoint. You can specify one of two sets
+	// of values for these permissions. You can specify the values for this setting and
+	// SecretsManagerSecretId. Or you can specify clear-text values for UserName,
+	// Password, ServerName, and Port. You can't specify both. For more information on
+	// creating this SecretsManagerSecret and the SecretsManagerAccessRoleArn and
+	// SecretsManagerSecretId required to access it, see Using secrets to access
+	// Database Migration Service resources
+	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager)
+	// in the Database Migration Service User Guide.
+	SecretsManagerAccessRoleArn *string
+
+	// The full ARN, partial ARN, or friendly name of the SecretsManagerSecret that
+	// contains the MySQL endpoint connection details.
+	SecretsManagerSecretId *string
+
+	// Endpoint TCP port.
+	ServerName *string
+
+	// Specifies the time zone for the source MySQL database. Example:
+	// serverTimezone=US/Pacific; Note: Do not enclose time zones in single quotes.
+	ServerTimezone *string
+
+	// Specifies where to migrate source tables on the target, either to a single
+	// database or multiple databases. Example: targetDbType=MULTIPLE_DATABASES
+	TargetDbType TargetDbType
+
+	// Endpoint connection user name.
+	Username *string
 
 	noSmithyDocumentSerde
 }
@@ -907,8 +982,8 @@ type MySQLSettings struct {
 	DatabaseName *string
 
 	// Specifies how often to check the binary log for new changes/events when the
-	// database is idle. Example: eventsPollInterval=5; In the example, DMS checks for
-	// changes in the binary logs every five seconds.
+	// database is idle. The default is five seconds. Example: eventsPollInterval=5; In
+	// the example, DMS checks for changes in the binary logs every five seconds.
 	EventsPollInterval *int32
 
 	// Specifies the maximum size (in KB) of any .csv file used to transfer data to a
@@ -919,7 +994,7 @@ type MySQLSettings struct {
 	// database. Specifies how many threads to use to load the data into the
 	// MySQL-compatible target database. Setting a large number of threads can have an
 	// adverse effect on database performance, because a separate connection is
-	// required for each thread. Example: parallelLoadThreads=1
+	// required for each thread. The default is one. Example: parallelLoadThreads=1
 	ParallelLoadThreads *int32
 
 	// Endpoint connection password.
@@ -1423,7 +1498,7 @@ type PostgreSQLSettings struct {
 	// Specifies the plugin to use to create a replication slot.
 	PluginName PluginNameValue
 
-	// Endpoint TCP port.
+	// Endpoint TCP port. The default is 5432.
 	Port *int32
 
 	// The full Amazon Resource Name (ARN) of the IAM role that specifies DMS as the
@@ -2668,6 +2743,15 @@ type S3Settings struct {
 	// setting is supported in DMS versions 3.4.1 and later.
 	UseCsvNoSupValue *bool
 
+	// When set to true, this parameter uses the task start time as the timestamp
+	// column value instead of the time data is written to target. For full load, when
+	// useTaskStartTimeForFullLoadTimestamp is set to true, each row of the timestamp
+	// column contains the task start time. For CDC loads, each row of the timestamp
+	// column contains the transaction commit time. When
+	// useTaskStartTimeForFullLoadTimestamp is set to false, the full load timestamp in
+	// the timestamp column increments with the time data arrives at the target.
+	UseTaskStartTimeForFullLoadTimestamp *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -2727,7 +2811,7 @@ type SybaseSettings struct {
 	// Endpoint connection password.
 	Password *string
 
-	// Endpoint TCP port.
+	// Endpoint TCP port. The default is 5000.
 	Port *int32
 
 	// The full Amazon Resource Name (ARN) of the IAM role that specifies DMS as the

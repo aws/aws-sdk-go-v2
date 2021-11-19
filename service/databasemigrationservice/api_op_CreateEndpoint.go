@@ -49,9 +49,9 @@ type CreateEndpointInput struct {
 
 	// The type of engine for the endpoint. Valid values, depending on the EndpointType
 	// value, include "mysql", "oracle", "postgres", "mariadb", "aurora",
-	// "aurora-postgresql", "redshift", "s3", "db2", "azuredb", "sybase", "dynamodb",
-	// "mongodb", "kinesis", "kafka", "elasticsearch", "docdb", "sqlserver", and
-	// "neptune".
+	// "aurora-postgresql", "opensearch", "redshift", "s3", "db2", "azuredb", "sybase",
+	// "dynamodb", "mongodb", "kinesis", "kafka", "elasticsearch", "docdb",
+	// "sqlserver", and "neptune".
 	//
 	// This member is required.
 	EngineName *string
@@ -88,9 +88,9 @@ type CreateEndpointInput struct {
 	// in the Database Migration Service User Guide.
 	DynamoDbSettings *types.DynamoDbSettings
 
-	// Settings in JSON format for the target Elasticsearch endpoint. For more
-	// information about the available settings, see Extra Connection Attributes When
-	// Using Elasticsearch as a Target for DMS
+	// Settings in JSON format for the target OpenSearch endpoint. For more information
+	// about the available settings, see Extra Connection Attributes When Using
+	// OpenSearch as a Target for DMS
 	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration)
 	// in the Database Migration Service User Guide.
 	ElasticsearchSettings *types.ElasticsearchSettings
@@ -106,6 +106,9 @@ type CreateEndpointInput struct {
 	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Endpoints.html) in the
 	// Database Migration Service User Guide.
 	ExtraConnectionAttributes *string
+
+	// Settings in JSON format for the source GCP MySQL endpoint.
+	GcpMySQLSettings *types.GcpMySQLSettings
 
 	// Settings in JSON format for the source IBM Db2 LUW endpoint. For information
 	// about other available settings, see Extra connection attributes when using Db2

@@ -232,6 +232,9 @@ type Cluster struct {
 	//
 	DataTransferProgress *DataTransferProgress
 
+	// The Amazon Resource Name (ARN) for the IAM role set as default for the cluster.
+	DefaultIamRoleArn *string
+
 	// Describes a group of DeferredMaintenanceWindow objects.
 	DeferredMaintenanceWindows []DeferredMaintenanceWindow
 

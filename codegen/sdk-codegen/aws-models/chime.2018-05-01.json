@@ -7308,6 +7308,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The AWS Region passed to Amazon Transcribe Medical. If you don't specify a Region, Amazon Chime uses the meeting's Region.</p>"
                     }
+                },
+                "ContentIdentificationType": {
+                    "target": "com.amazonaws.chime#TranscribeMedicalContentIdentificationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set this field to <code>PHI</code> to identify personal health information in the transcription output.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7346,6 +7352,42 @@
                     "target": "com.amazonaws.chime#TranscribeRegion",
                     "traits": {
                         "smithy.api#documentation": "<p>The AWS Region passed to Amazon Transcribe. If you don't specify a Region, Amazon Chime uses the meeting's Region.</p>"
+                    }
+                },
+                "EnablePartialResultsStabilization": {
+                    "target": "com.amazonaws.chime#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Generates partial transcription results that are less likely to change as meeting attendees speak. It does so by only allowing the last few words from the partial results to change.</p>"
+                    }
+                },
+                "PartialResultsStability": {
+                    "target": "com.amazonaws.chime#TranscribePartialResultsStability",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The stabity level of a partial results transcription. Determines how stable you want the transcription results to be. A higher level means the transcription results are less likely to change.</p>"
+                    }
+                },
+                "ContentIdentificationType": {
+                    "target": "com.amazonaws.chime#TranscribeContentIdentificationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set this field to <code>PII</code> to identify personal health information in the transcription output.</p>"
+                    }
+                },
+                "ContentRedactionType": {
+                    "target": "com.amazonaws.chime#TranscribeContentRedactionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set this field to <code>PII</code> to redact personally identifiable information in the transcription output. Content redaction is performed only upon complete transcription of the audio segments.</p>"
+                    }
+                },
+                "PiiEntityTypes": {
+                    "target": "com.amazonaws.chime#TranscribePiiEntityTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists the PII entity types you want to identify or redact. To specify entity types, you must enable <code>ContentIdentificationType</code> or <code>ContentRedactionType</code>.</p>\n        <p>\n            <code>PIIEntityTypes</code> must be comma-separated. The available values are: \n            <code>BANK_ACCOUNT_NUMBER</code>, <code>BANK_ROUTING, CREDIT_DEBIT_NUMBER</code>, <code>CREDIT_DEBIT_CVV</code>, <code>CREDIT_DEBIT_EXPIRY</code>, <code>PIN</code>, <code>EMAIL</code>, \n            <code>ADDRESS</code>, <code>NAME</code>, <code>PHONE</code>, <code>SSN</code>, and <code>ALL</code>.</p>\n        \n        <p>\n            <code>PiiEntityTypes</code> is an optional parameter with a default value of <code>ALL</code>.</p>"
+                    }
+                },
+                "LanguageModelName": {
+                    "target": "com.amazonaws.chime#TranscribeLanguageModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the language model used during transcription.</p>"
                     }
                 }
             },
@@ -16651,6 +16693,28 @@
                 "smithy.api#pattern": "^8(00|33|44|55|66|77|88)$"
             }
         },
+        "com.amazonaws.chime#TranscribeContentIdentificationType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PII",
+                        "name": "PII"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.chime#TranscribeContentRedactionType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PII",
+                        "name": "PII"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.chime#TranscribeLanguageCode": {
             "type": "string",
             "traits": {
@@ -16702,6 +16766,27 @@
                     {
                         "value": "zh-CN",
                         "name": "ZH_CN"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.chime#TranscribeLanguageModelName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z._-]+$"
+            }
+        },
+        "com.amazonaws.chime#TranscribeMedicalContentIdentificationType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PHI",
+                        "name": "PHI"
                     }
                 ]
             }
@@ -16796,6 +16881,35 @@
                         "name": "Dictation"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.chime#TranscribePartialResultsStability": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "low",
+                        "name": "LOW"
+                    },
+                    {
+                        "value": "medium",
+                        "name": "MEDIUM"
+                    },
+                    {
+                        "value": "high",
+                        "name": "HIGH"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.chime#TranscribePiiEntityTypes": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 300
+                },
+                "smithy.api#pattern": "^[A-Z_, ]+$"
             }
         },
         "com.amazonaws.chime#TranscribeRegion": {
@@ -16894,6 +17008,21 @@
         },
         "com.amazonaws.chime#UCBuzzConsoleService": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Chime",
+                    "arnNamespace": "chime",
+                    "cloudFormationName": "Chime",
+                    "cloudTrailEventSource": "chime.amazonaws.com",
+                    "endpointPrefix": "chime"
+                },
+                "aws.auth#sigv4": {
+                    "name": "chime"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>The Amazon Chime API (application programming interface) is designed for developers to\n            perform key tasks, such as creating and managing Amazon Chime accounts, users, and Voice\n            Connectors. This guide provides detailed information about the Amazon Chime API,\n            including operations, types, inputs and outputs, and error codes. It also includes API actions for use with the Amazon Chime SDK, which developers use to build their own communication applications. For more information about the\n            Amazon Chime SDK, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">\n                Using the Amazon Chime SDK\n            </a> in the <i>Amazon Chime Developer Guide</i>.</p>\n         <p>You can use an AWS SDK, the AWS Command Line Interface (AWS CLI), or the REST API to make API calls. We recommend using an AWS SDK or the \n    AWS CLI. Each API operation includes links to information about using it with a language-specific AWS SDK or the AWS CLI.</p>\n         <dl>\n            <dt>Using an AWS SDK</dt>\n            <dd>\n               <p>\nYou don't need to write code to calculate a signature for request authentication. The SDK clients authenticate your requests by using access keys that you provide. For more information about AWS SDKs, see the \n<a href=\"http://aws.amazon.com/developer/\">AWS Developer Center</a>.\n</p>\n            </dd>\n            <dt>Using the AWS CLI</dt>\n            <dd>\n               <p>Use your access keys with the AWS CLI to make API calls. For information about setting up the AWS CLI, see \n<a href=\"https://docs.aws.amazon.com/cli/latest/userguide/installing.html\">Installing the AWS Command Line Interface</a>\nin the <i>AWS Command Line Interface User Guide</i>. For a list of available Amazon Chime commands, see the \n<a href=\"https://docs.aws.amazon.com/cli/latest/reference/chime/index.html\">Amazon Chime commands</a> in the \n    <i>AWS CLI Command Reference</i>.\n</p>\n            </dd>\n            <dt>Using REST APIs</dt>\n            <dd>\n               <p>If you use REST to make API calls, you must authenticate your request by providing a signature. Amazon Chime supports signature version 4. For more information, see \n<a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 Signing Process</a>\nin the <i>Amazon Web Services General Reference</i>.</p>\n\n               <p>When making REST API calls, use the service name <code>chime</code> and REST endpoint <code>https://service.chime.aws.amazon.com</code>.</p>\n            </dd>\n         </dl>\n\n         <p>Administrative permissions are controlled using AWS Identity and Access Management (IAM). For more information, see \n<a href=\"https://docs.aws.amazon.com/chime/latest/ag/security-iam.html\">Identity and Access Management for Amazon Chime</a>\nin the <i>Amazon Chime Administration Guide</i>.</p>",
+                "smithy.api#title": "Amazon Chime"
+            },
             "version": "2018-05-01",
             "operations": [
                 {
@@ -17466,22 +17595,7 @@
                 {
                     "target": "com.amazonaws.chime#UpdateVoiceConnectorGroup"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Chime",
-                    "arnNamespace": "chime",
-                    "cloudFormationName": "Chime",
-                    "cloudTrailEventSource": "chime.amazonaws.com",
-                    "endpointPrefix": "chime"
-                },
-                "aws.auth#sigv4": {
-                    "name": "chime"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>The Amazon Chime API (application programming interface) is designed for developers to\n            perform key tasks, such as creating and managing Amazon Chime accounts, users, and Voice\n            Connectors. This guide provides detailed information about the Amazon Chime API,\n            including operations, types, inputs and outputs, and error codes. It also includes some\n            server-side API actions to use with the Amazon Chime SDK. For more information about the\n            Amazon Chime SDK, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">\n                Using the Amazon Chime SDK\n            </a> in the <i>Amazon Chime Developer Guide</i>.</p>\n         <p>You can use an AWS SDK, the AWS Command Line Interface (AWS CLI), or the REST API to make API calls. We recommend using an AWS SDK or the \n    AWS CLI. Each API operation includes links to information about using it with a language-specific AWS SDK or the AWS CLI.</p>\n         <dl>\n            <dt>Using an AWS SDK</dt>\n            <dd>\n               <p>\nYou don't need to write code to calculate a signature for request authentication. The SDK clients authenticate your requests by using access keys that you provide. For more information about AWS SDKs, see the \n<a href=\"http://aws.amazon.com/developer/\">AWS Developer Center</a>.\n</p>\n            </dd>\n            <dt>Using the AWS CLI</dt>\n            <dd>\n               <p>Use your access keys with the AWS CLI to make API calls. For information about setting up the AWS CLI, see \n<a href=\"https://docs.aws.amazon.com/cli/latest/userguide/installing.html\">Installing the AWS Command Line Interface</a>\nin the <i>AWS Command Line Interface User Guide</i>. For a list of available Amazon Chime commands, see the \n<a href=\"https://docs.aws.amazon.com/cli/latest/reference/chime/index.html\">Amazon Chime commands</a> in the \n    <i>AWS CLI Command Reference</i>.\n</p>\n            </dd>\n            <dt>Using REST APIs</dt>\n            <dd>\n               <p>If you use REST to make API calls, you must authenticate your request by providing a signature. Amazon Chime supports signature version 4. For more information, see \n<a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 Signing Process</a>\nin the <i>Amazon Web Services General Reference</i>.</p>\n\n               <p>When making REST API calls, use the service name <code>chime</code> and REST endpoint <code>https://service.chime.aws.amazon.com</code>.</p>\n            </dd>\n         </dl>\n\n         <p>Administrative permissions are controlled using AWS Identity and Access Management (IAM). For more information, see \n<a href=\"https://docs.aws.amazon.com/chime/latest/ag/security-iam.html\">Identity and Access Management for Amazon Chime</a>\nin the <i>Amazon Chime Administration Guide</i>.</p>",
-                "smithy.api#title": "Amazon Chime"
-            }
+            ]
         },
         "com.amazonaws.chime#UnauthorizedClientException": {
             "type": "structure",

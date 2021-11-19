@@ -22,7 +22,8 @@ type InsightType string
 
 // Enum values for InsightType
 const (
-	InsightTypeApiCallRateInsight InsightType = "ApiCallRateInsight"
+	InsightTypeApiCallRateInsight  InsightType = "ApiCallRateInsight"
+	InsightTypeApiErrorRateInsight InsightType = "ApiErrorRateInsight"
 )
 
 // Values returns all known values for InsightType. Note that this can be expanded
@@ -31,6 +32,7 @@ const (
 func (InsightType) Values() []InsightType {
 	return []InsightType{
 		"ApiCallRateInsight",
+		"ApiErrorRateInsight",
 	}
 }
 

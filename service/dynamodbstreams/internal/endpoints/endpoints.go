@@ -148,10 +148,19 @@ var defaultPartitions = endpoints.Partitions{
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
 			endpoints.EndpointKey{
+				Region: "af-south-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region: "ap-east-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
 				Region: "ap-northeast-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "ap-northeast-2",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region: "ap-northeast-3",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "ap-south-1",
@@ -166,18 +175,13 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "ca-central-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
-				Region: "ca-central-1-fips",
-			}: endpoints.Endpoint{
-				Hostname: "dynamodb-fips.ca-central-1.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "ca-central-1",
-				},
-			},
-			endpoints.EndpointKey{
 				Region: "eu-central-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "eu-north-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region: "eu-south-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "eu-west-1",
@@ -207,46 +211,14 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "us-east-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
-				Region: "us-east-1-fips",
-			}: endpoints.Endpoint{
-				Hostname: "dynamodb-fips.us-east-1.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-east-1",
-				},
-			},
-			endpoints.EndpointKey{
 				Region: "us-east-2",
 			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "us-east-2-fips",
-			}: endpoints.Endpoint{
-				Hostname: "dynamodb-fips.us-east-2.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-east-2",
-				},
-			},
 			endpoints.EndpointKey{
 				Region: "us-west-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
-				Region: "us-west-1-fips",
-			}: endpoints.Endpoint{
-				Hostname: "dynamodb-fips.us-west-1.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-west-1",
-				},
-			},
-			endpoints.EndpointKey{
 				Region: "us-west-2",
 			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "us-west-2-fips",
-			}: endpoints.Endpoint{
-				Hostname: "dynamodb-fips.us-west-2.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-west-2",
-				},
-			},
 		},
 	},
 	{
@@ -311,7 +283,7 @@ var defaultPartitions = endpoints.Partitions{
 				Variant: endpoints.FIPSVariant,
 			}: {
 				Hostname:          "streams.dynamodb-fips.{region}.c2s.ic.gov",
-				Protocols:         []string{"http", "https"},
+				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 				CredentialScope: endpoints.CredentialScope{
 					Service: "dynamodb",
@@ -321,7 +293,7 @@ var defaultPartitions = endpoints.Partitions{
 				Variant: 0,
 			}: {
 				Hostname:          "streams.dynamodb.{region}.c2s.ic.gov",
-				Protocols:         []string{"http", "https"},
+				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 				CredentialScope: endpoints.CredentialScope{
 					Service: "dynamodb",
@@ -333,9 +305,7 @@ var defaultPartitions = endpoints.Partitions{
 		Endpoints: endpoints.Endpoints{
 			endpoints.EndpointKey{
 				Region: "us-iso-east-1",
-			}: endpoints.Endpoint{
-				Protocols: []string{"http", "https"},
-			},
+			}: endpoints.Endpoint{},
 		},
 	},
 	{
@@ -386,7 +356,7 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "streams.dynamodb-fips.{region}.amazonaws.com",
+				Hostname:          "streams.dynamodb.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 				CredentialScope: endpoints.CredentialScope{
@@ -421,23 +391,37 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "us-gov-east-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "us-gov-east-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "streams.dynamodb.us-gov-east-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
 				Region: "us-gov-east-1-fips",
 			}: endpoints.Endpoint{
-				Hostname: "dynamodb.us-gov-east-1.amazonaws.com",
+				Hostname: "streams.dynamodb.us-gov-east-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-gov-east-1",
 				},
+				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
 				Region: "us-gov-west-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "us-gov-west-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "streams.dynamodb.us-gov-west-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
 				Region: "us-gov-west-1-fips",
 			}: endpoints.Endpoint{
-				Hostname: "dynamodb.us-gov-west-1.amazonaws.com",
+				Hostname: "streams.dynamodb.us-gov-west-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-gov-west-1",
 				},
+				Deprecated: aws.TrueTernary,
 			},
 		},
 	},

@@ -35,22 +35,24 @@ type SearchPlaceIndexForPositionInput struct {
 	// This member is required.
 	IndexName *string
 
-	// Specifies a coordinate for the query defined by a longitude, and latitude.
-	//
-	// *
-	// The first position is the X coordinate, or longitude.
-	//
-	// * The second position is
-	// the Y coordinate, or latitude.
-	//
-	// For example,
-	// position=xLongitude&position=yLatitude .
+	// Specifies the longitude and latitude of the position to query. This parameter
+	// must contain a pair of numbers. The first number represents the X coordinate, or
+	// longitude; the second number represents the Y coordinate, or latitude. For
+	// example, [-123.1174, 49.2847] represents a position with longitude -123.1174 and
+	// latitude 49.2847.
 	//
 	// This member is required.
 	Position []float64
 
-	// An optional paramer. The maximum number of results returned per request. Default
-	// value: 50
+	// The preferred language used to return results. The value must be a valid BCP 47
+	// (https://tools.ietf.org/search/bcp47) language tag, for example, en for English.
+	// This setting affects the languages used in the results. It does not change which
+	// results are returned. If the language is not specified, or not supported for a
+	// particular result, the partner automatically chooses a language for the result.
+	Language *string
+
+	// An optional parameter. The maximum number of results returned per request.
+	// Default value: 50
 	MaxResults int32
 
 	noSmithyDocumentSerde
@@ -64,7 +66,8 @@ type SearchPlaceIndexForPositionOutput struct {
 	// This member is required.
 	Results []types.SearchForPositionResult
 
-	// Contains a summary of the request.
+	// Contains a summary of the request. Echoes the input values for Position,
+	// Language, MaxResults, and the DataSource of the place index.
 	//
 	// This member is required.
 	Summary *types.SearchPlaceIndexForPositionSummary

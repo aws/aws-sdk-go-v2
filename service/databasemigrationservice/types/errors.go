@@ -126,7 +126,7 @@ func (e *KMSAccessDeniedFault) ErrorMessage() string {
 func (e *KMSAccessDeniedFault) ErrorCode() string             { return "KMSAccessDeniedFault" }
 func (e *KMSAccessDeniedFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified master key (CMK) isn't enabled.
+// The specified KMS key isn't enabled.
 type KMSDisabledFault struct {
 	Message *string
 

@@ -17269,6 +17269,15 @@ func awsRestjson1_deserializeDocumentVoiceSettings(v **types.VoiceSettings, valu
 
 	for key, value := range shape {
 		switch key {
+		case "engine":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VoiceEngine to be of type string, got %T instead", value)
+				}
+				sv.Engine = types.VoiceEngine(jtv)
+			}
+
 		case "voiceId":
 			if value != nil {
 				jtv, ok := value.(string)

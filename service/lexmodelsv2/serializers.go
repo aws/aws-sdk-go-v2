@@ -7154,6 +7154,11 @@ func awsRestjson1_serializeDocumentVoiceSettings(v *types.VoiceSettings, value s
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.Engine) > 0 {
+		ok := object.Key("engine")
+		ok.String(string(v.Engine))
+	}
+
 	if v.VoiceId != nil {
 		ok := object.Key("voiceId")
 		ok.String(*v.VoiceId)

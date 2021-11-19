@@ -33,7 +33,8 @@ func (c *Client) BuildBotLocale(ctx context.Context, params *BuildBotLocaleInput
 type BuildBotLocaleInput struct {
 
 	// The identifier of the bot to build. The identifier is returned in the response
-	// from the operation.
+	// from the CreateBot
+	// (https://docs.aws.amazon.com/lexv2/latest/dg/API_CreateBot.html) operation.
 	//
 	// This member is required.
 	BotId *string

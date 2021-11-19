@@ -35,6 +35,7 @@
         "api_op_ListTopics.go",
         "api_op_OptInPhoneNumber.go",
         "api_op_Publish.go",
+        "api_op_PublishBatch.go",
         "api_op_RemovePermission.go",
         "api_op_SetEndpointAttributes.go",
         "api_op_SetPlatformApplicationAttributes.go",

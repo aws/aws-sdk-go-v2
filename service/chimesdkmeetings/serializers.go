@@ -864,6 +864,11 @@ func awsRestjson1_serializeDocumentEngineTranscribeMedicalSettings(v *types.Engi
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.ContentIdentificationType) > 0 {
+		ok := object.Key("ContentIdentificationType")
+		ok.String(string(v.ContentIdentificationType))
+	}
+
 	if len(v.LanguageCode) > 0 {
 		ok := object.Key("LanguageCode")
 		ok.String(string(v.LanguageCode))
@@ -896,9 +901,39 @@ func awsRestjson1_serializeDocumentEngineTranscribeSettings(v *types.EngineTrans
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.ContentIdentificationType) > 0 {
+		ok := object.Key("ContentIdentificationType")
+		ok.String(string(v.ContentIdentificationType))
+	}
+
+	if len(v.ContentRedactionType) > 0 {
+		ok := object.Key("ContentRedactionType")
+		ok.String(string(v.ContentRedactionType))
+	}
+
+	if v.EnablePartialResultsStabilization {
+		ok := object.Key("EnablePartialResultsStabilization")
+		ok.Boolean(v.EnablePartialResultsStabilization)
+	}
+
 	if len(v.LanguageCode) > 0 {
 		ok := object.Key("LanguageCode")
 		ok.String(string(v.LanguageCode))
+	}
+
+	if v.LanguageModelName != nil {
+		ok := object.Key("LanguageModelName")
+		ok.String(*v.LanguageModelName)
+	}
+
+	if len(v.PartialResultsStability) > 0 {
+		ok := object.Key("PartialResultsStability")
+		ok.String(string(v.PartialResultsStability))
+	}
+
+	if v.PiiEntityTypes != nil {
+		ok := object.Key("PiiEntityTypes")
+		ok.String(*v.PiiEntityTypes)
 	}
 
 	if len(v.Region) > 0 {

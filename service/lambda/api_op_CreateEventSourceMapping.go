@@ -13,36 +13,34 @@ import (
 )
 
 // Creates a mapping between an event source and an Lambda function. Lambda reads
-// items from the event source and triggers the function. For details about each
-// event source type, see the following topics.
+// items from the event source and triggers the function. For details about how to
+// configure different event sources, see the following topics.
 //
-// * Configuring a Dynamo DB stream
-// as an event source
+// * Amazon DynamoDB
+// Streams
 // (https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-dynamodb-eventsourcemapping)
 //
 // *
-// Configuring a Kinesis stream as an event source
+// Amazon Kinesis
 // (https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-eventsourcemapping)
 //
 // *
-// Configuring an Amazon SQS queue as an event source
+// Amazon SQS
 // (https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-eventsource)
 //
 // *
-// Configuring an MQ broker as an event source
+// Amazon MQ and RabbitMQ
 // (https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-eventsourcemapping)
 //
 // *
-// Configuring MSK as an event source
-// (https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html)
+// Amazon MSK (https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html)
 //
-// * Configuring
-// Self-Managed Apache Kafka as an event source
-// (https://docs.aws.amazon.com/lambda/latest/dg/kafka-smaa.html)
+// *
+// Apache Kafka (https://docs.aws.amazon.com/lambda/latest/dg/kafka-smaa.html)
 //
-// The following
-// error handling options are only available for stream sources (DynamoDB and
-// Kinesis):
+// The
+// following error handling options are only available for stream sources (DynamoDB
+// and Kinesis):
 //
 // * BisectBatchOnFunctionError - If the function returns an error,
 // split the batch in two and retry.
@@ -61,6 +59,33 @@ import (
 //
 // * ParallelizationFactor - Process
 // multiple batches from each shard concurrently.
+//
+// For information about which
+// configuration parameters apply to each event source, see the following
+// topics.
+//
+// * Amazon DynamoDB Streams
+// (https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-ddb-params)
+//
+// *
+// Amazon Kinesis
+// (https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-params)
+//
+// *
+// Amazon SQS
+// (https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#services-sqs-params)
+//
+// *
+// Amazon MQ and RabbitMQ
+// (https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-params)
+//
+// *
+// Amazon MSK
+// (https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-parms)
+//
+// *
+// Apache Kafka
+// (https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-kafka-parms)
 func (c *Client) CreateEventSourceMapping(ctx context.Context, params *CreateEventSourceMappingInput, optFns ...func(*Options)) (*CreateEventSourceMappingOutput, error) {
 	if params == nil {
 		params = &CreateEventSourceMappingInput{}

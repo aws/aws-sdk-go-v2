@@ -67,63 +67,83 @@ type AdvancedFieldSelector struct {
 	//
 	// * resources.type - This ﬁeld
 	// is required. resources.type can only use the Equals operator, and the value can
-	// be one of the following: AWS::S3::Object, AWS::S3::AccessPoint,
-	// AWS::Lambda::Function, AWS::DynamoDB::Table, AWS::S3Outposts::Object,
-	// AWS::ManagedBlockchain::Node, AWS::S3ObjectLambda::AccessPoint, or
-	// AWS::EC2::Snapshot. You can have only one resources.type ﬁeld per selector. To
-	// log data events on more than one resource type, add another selector.
+	// be one of the following:
+	//
+	// * AWS::S3::Object
+	//
+	// * AWS::Lambda::Function
 	//
 	// *
-	// resources.ARN - You can use any operator with resources.ARN, but if you use
-	// Equals or NotEquals, the value must exactly match the ARN of a valid resource of
-	// the type you've speciﬁed in the template as the value of resources.type. For
-	// example, if resources.type equals AWS::S3::Object, the ARN must be in one of the
-	// following formats. To log all data events for all objects in a specific S3
-	// bucket, use the StartsWith operator, and include only the bucket ARN as the
-	// matching value. The trailing slash is intentional; do not exclude it. Replace
-	// the text between less than and greater than symbols (<>) with resource-specific
-	// information.
+	// AWS::DynamoDB::Table
+	//
+	// * AWS::S3Outposts::Object
+	//
+	// *
+	// AWS::ManagedBlockchain::Node
+	//
+	// * AWS::S3ObjectLambda::AccessPoint
+	//
+	// *
+	// AWS::EC2::Snapshot
+	//
+	// * AWS::S3::AccessPoint
+	//
+	// * AWS::DynamoDB::Stream
+	//
+	// You can
+	// have only one resources.type ﬁeld per selector. To log data events on more than
+	// one resource type, add another selector.
+	//
+	// * resources.ARN - You can use any
+	// operator with resources.ARN, but if you use Equals or NotEquals, the value must
+	// exactly match the ARN of a valid resource of the type you've speciﬁed in the
+	// template as the value of resources.type. For example, if resources.type equals
+	// AWS::S3::Object, the ARN must be in one of the following formats. To log all
+	// data events for all objects in a specific S3 bucket, use the StartsWith
+	// operator, and include only the bucket ARN as the matching value. The trailing
+	// slash is intentional; do not exclude it. Replace the text between less than and
+	// greater than symbols (<>) with resource-specific information.
 	//
 	// * arn::s3:::/
 	//
-	// * arn::s3::://
+	// *
+	// arn::s3::://
 	//
-	// When resources.type equals
-	// AWS::S3::AccessPoint, and the operator is set to Equals or NotEquals, the ARN
-	// must be in one of the following formats. To log events on all objects in an S3
-	// access point, we recommend that you use only the access point ARN, don’t include
-	// the object path, and use the StartsWith or NotStartsWith operators.
+	// When resources.type equals AWS::S3::AccessPoint, and the operator
+	// is set to Equals or NotEquals, the ARN must be in one of the following formats.
+	// To log events on all objects in an S3 access point, we recommend that you use
+	// only the access point ARN, don’t include the object path, and use the StartsWith
+	// or NotStartsWith operators.
+	//
+	// * arn::s3:::accesspoint/
 	//
 	// *
-	// arn::s3:::accesspoint/
+	// arn::s3:::accesspoint//object/
 	//
-	// * arn::s3:::accesspoint//object/
-	//
-	// When resources.type
-	// equals AWS::Lambda::Function, and the operator is set to Equals or NotEquals,
-	// the ARN must be in the following format:
+	// When resources.type equals
+	// AWS::Lambda::Function, and the operator is set to Equals or NotEquals, the ARN
+	// must be in the following format:
 	//
 	// * arn::lambda:::function:
 	//
+	// When resources.type
+	// equals AWS::DynamoDB::Table, and the operator is set to Equals or NotEquals, the
+	// ARN must be in the following format:
+	//
+	// * arn::dynamodb:::table/
+	//
 	// When
-	// resources.type equals AWS::DynamoDB::Table, and the operator is set to Equals or
-	// NotEquals, the ARN must be in the following format:
+	// resources.type equals AWS::S3Outposts::Object, and the operator is set to Equals
+	// or NotEquals, the ARN must be in the following format:
 	//
 	// *
-	// arn::dynamodb:::table:
+	// arn::s3-outposts:::
 	//
-	// When resources.type equals AWS::S3Outposts::Object, and
-	// the operator is set to Equals or NotEquals, the ARN must be in the following
+	// When resources.type equals AWS::ManagedBlockchain::Node,
+	// and the operator is set to Equals or NotEquals, the ARN must be in the following
 	// format:
 	//
-	// * arn::s3-outposts:::
-	//
-	// When resources.type equals
-	// AWS::ManagedBlockchain::Node, and the operator is set to Equals or NotEquals,
-	// the ARN must be in the following format:
-	//
-	// *
-	// arn::managedblockchain:::nodes/
+	// * arn::managedblockchain:::nodes/
 	//
 	// When resources.type equals
 	// AWS::S3ObjectLambda::AccessPoint, and the operator is set to Equals or
@@ -137,6 +157,12 @@ type AdvancedFieldSelector struct {
 	// be in the following format:
 	//
 	// * arn::ec2:::snapshot/
+	//
+	// When resources.type equals
+	// AWS::DynamoDB::Stream, and the operator is set to Equals or NotEquals, the ARN
+	// must be in the following format:
+	//
+	// * arn::dynamodb:::table//stream/
 	//
 	// This member is required.
 	Field *string
@@ -218,12 +244,35 @@ type AdvancedFieldSelector struct {
 // trail doesn’t log the event.
 type DataResource struct {
 
-	// The resource type in which you want to log data events. You can specify
-	// AWS::S3::Object, AWS::Lambda::Function, or AWS::DynamoDB::Table resources. The
-	// AWS::S3Outposts::Object, AWS::ManagedBlockchain::Node,
-	// AWS::S3ObjectLambda::AccessPoint, and AWS::EC2::Snapshot resource types are not
-	// valid in basic event selectors. To log data events on these resource types, use
-	// advanced event selectors.
+	// The resource type in which you want to log data events. You can specify the
+	// following basic event selector resource types:
+	//
+	// * AWS::S3::Object
+	//
+	// *
+	// AWS::Lambda::Function
+	//
+	// * AWS::DynamoDB::Table
+	//
+	// The following resource types are
+	// also availble through advanced event selectors. Basic event selector resource
+	// types are valid in advanced event selectors, but advanced event selector
+	// resource types are not valid in basic event selectors. For more information, see
+	// AdvancedFieldSelector$Field.
+	//
+	// * AWS::S3Outposts::Object
+	//
+	// *
+	// AWS::ManagedBlockchain::Node
+	//
+	// * AWS::S3ObjectLambda::AccessPoint
+	//
+	// *
+	// AWS::EC2::Snapshot
+	//
+	// * AWS::S3::AccessPoint
+	//
+	// * AWS::DynamoDB::Stream
 	Type *string
 
 	// An array of Amazon Resource Name (ARN) strings or partial ARN strings for the

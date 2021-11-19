@@ -26,8 +26,58 @@ type AccessEndpoint struct {
 	noSmithyDocumentSerde
 }
 
+// Describes an app block. App blocks are an Amazon AppStream 2.0 resource that
+// stores the details about the virtual hard disk in an S3 bucket. It also stores
+// the setup script with details about how to mount the virtual hard disk. The
+// virtual hard disk includes the application binaries and other files necessary to
+// launch your applications. Multiple applications can be assigned to a single app
+// block. This is only supported for Elastic fleets.
+type AppBlock struct {
+
+	// The ARN of the app block.
+	//
+	// This member is required.
+	Arn *string
+
+	// The name of the app block.
+	//
+	// This member is required.
+	Name *string
+
+	// The setup script details of the app block.
+	//
+	// This member is required.
+	SetupScriptDetails *ScriptDetails
+
+	// The created time of the app block.
+	CreatedTime *time.Time
+
+	// The description of the app block.
+	Description *string
+
+	// The display name of the app block.
+	DisplayName *string
+
+	// The source S3 location of the app block.
+	SourceS3Location *S3Location
+
+	noSmithyDocumentSerde
+}
+
 // Describes an application in the application catalog.
 type Application struct {
+
+	// The app block ARN of the application.
+	AppBlockArn *string
+
+	// The ARN of the application.
+	Arn *string
+
+	// The time at which the application was created within the app block.
+	CreatedTime *time.Time
+
+	// The description of the application.
+	Description *string
 
 	// The application name to display.
 	DisplayName *string
@@ -35,8 +85,14 @@ type Application struct {
 	// If there is a problem, the application can be disabled after image creation.
 	Enabled bool
 
+	// The S3 location of the application icon.
+	IconS3Location *S3Location
+
 	// The URL for the application icon. This URL might be time-limited.
 	IconURL *string
+
+	// The instance families for the application.
+	InstanceFamilies []string
 
 	// The arguments that are passed to the application at launch.
 	LaunchParameters *string
@@ -49,6 +105,28 @@ type Application struct {
 
 	// The name of the application.
 	Name *string
+
+	// The platforms on which the application can run.
+	Platforms []PlatformType
+
+	// The working directory for the application.
+	WorkingDirectory *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the application fleet association.
+type ApplicationFleetAssociation struct {
+
+	// The ARN of the application associated with the fleet.
+	//
+	// This member is required.
+	ApplicationArn *string
+
+	// The name of the fleet associated with the application.
+	//
+	// This member is required.
+	FleetName *string
 
 	noSmithyDocumentSerde
 }
@@ -337,6 +415,9 @@ type Fleet struct {
 	// The name of the image used to create the fleet.
 	ImageName *string
 
+	// The maximum number of concurrent sessions for the fleet.
+	MaxConcurrentSessions *int32
+
 	// The maximum amount of time that a streaming session can remain active, in
 	// seconds. If users are still connected to a streaming instance five minutes
 	// before this limit is reached, they are prompted to save any open documents
@@ -344,11 +425,17 @@ type Fleet struct {
 	// and replaced by a new instance. Specify a value between 600 and 360000.
 	MaxUserDurationInSeconds *int32
 
+	// The platform of the fleet.
+	Platform PlatformType
+
 	// The AppStream 2.0 view that is displayed to your users when they stream from the
 	// fleet. When APP is specified, only the windows of applications opened by users
 	// display. When DESKTOP is specified, the standard desktop that is provided by the
 	// operating system displays. The default value is APP.
 	StreamView StreamView
+
+	// The USB device filter strings associated with the fleet.
+	UsbDeviceFilterStrings []string
 
 	// The VPC configuration for the fleet.
 	VpcConfig *VpcConfig
@@ -663,6 +750,46 @@ type ResourceError struct {
 
 	// The time the error occurred.
 	ErrorTimestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Describes the S3 location.
+type S3Location struct {
+
+	// The S3 bucket of the S3 object.
+	//
+	// This member is required.
+	S3Bucket *string
+
+	// The S3 key of the S3 object.
+	//
+	// This member is required.
+	S3Key *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the details of the script.
+type ScriptDetails struct {
+
+	// The run path for the script.
+	//
+	// This member is required.
+	ExecutablePath *string
+
+	// The S3 object location for the script.
+	//
+	// This member is required.
+	ScriptS3Location *S3Location
+
+	// The run timeout, in seconds, for the script.
+	//
+	// This member is required.
+	TimeoutInSeconds *int32
+
+	// The runtime parameters passed to the run path for the script.
+	ExecutableParameters *string
 
 	noSmithyDocumentSerde
 }

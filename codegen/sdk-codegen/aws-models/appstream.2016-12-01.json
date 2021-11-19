@@ -127,6 +127,65 @@
                 ]
             }
         },
+        "com.amazonaws.appstream#AppBlock": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the app block.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.appstream#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the app block.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the app block.</p>"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the app block.</p>"
+                    }
+                },
+                "SourceS3Location": {
+                    "target": "com.amazonaws.appstream#S3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source S3 location of the app block.</p>"
+                    }
+                },
+                "SetupScriptDetails": {
+                    "target": "com.amazonaws.appstream#ScriptDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The setup script details of the app block.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.appstream#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The created time of the app block.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an app block.</p>\n         <p>App blocks are an Amazon AppStream 2.0 resource that stores the details about the\n           virtual hard disk in an S3 bucket. It also stores the setup script with details about\n           how to mount the virtual hard disk. The virtual hard disk includes the application\n           binaries and other files necessary to launch your applications. Multiple applications\n           can be assigned to a single app block.</p>\n         <p>This is only supported for Elastic fleets.</p>"
+            }
+        },
+        "com.amazonaws.appstream#AppBlocks": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appstream#AppBlock"
+            }
+        },
         "com.amazonaws.appstream#Application": {
             "type": "structure",
             "members": {
@@ -171,10 +230,119 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Additional attributes that describe the application.</p>"
                     }
+                },
+                "WorkingDirectory": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The working directory for the application.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the application.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.appstream#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the application.</p>"
+                    }
+                },
+                "AppBlockArn": {
+                    "target": "com.amazonaws.appstream#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app block ARN of the application.</p>"
+                    }
+                },
+                "IconS3Location": {
+                    "target": "com.amazonaws.appstream#S3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 location of the application icon.</p>"
+                    }
+                },
+                "Platforms": {
+                    "target": "com.amazonaws.appstream#Platforms",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The platforms on which the application can run.</p>"
+                    }
+                },
+                "InstanceFamilies": {
+                    "target": "com.amazonaws.appstream#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance families for the application.</p>"
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.appstream#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the application was created within the app block.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes an application in the application catalog.</p>"
+            }
+        },
+        "com.amazonaws.appstream#ApplicationAttribute": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "LAUNCH_PARAMETERS",
+                        "name": "LAUNCH_PARAMETERS"
+                    },
+                    {
+                        "value": "WORKING_DIRECTORY",
+                        "name": "WORKING_DIRECTORY"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.appstream#ApplicationAttributes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appstream#ApplicationAttribute"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.appstream#ApplicationFleetAssociation": {
+            "type": "structure",
+            "members": {
+                "FleetName": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the fleet associated with the application.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ApplicationArn": {
+                    "target": "com.amazonaws.appstream#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the application associated with the fleet.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the application fleet association.</p>"
+            }
+        },
+        "com.amazonaws.appstream#ApplicationFleetAssociationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appstream#ApplicationFleetAssociation"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 25
+                }
             }
         },
         "com.amazonaws.appstream#ApplicationSettings": {
@@ -249,6 +417,65 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.appstream#Arn"
+            }
+        },
+        "com.amazonaws.appstream#AssociateApplicationFleet": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appstream#AssociateApplicationFleetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appstream#AssociateApplicationFleetResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appstream#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#InvalidParameterCombinationException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates the specified application with the specified fleet. This is only supported for Elastic fleets.</p>"
+            }
+        },
+        "com.amazonaws.appstream#AssociateApplicationFleetRequest": {
+            "type": "structure",
+            "members": {
+                "FleetName": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the fleet.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ApplicationArn": {
+                    "target": "com.amazonaws.appstream#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the application.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appstream#AssociateApplicationFleetResult": {
+            "type": "structure",
+            "members": {
+                "ApplicationFleetAssociation": {
+                    "target": "com.amazonaws.appstream#ApplicationFleetAssociation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If fleet name is specified, this returns the list of applications that are associated\n            to it. If application ARN is specified, this returns the list of fleets to which it is\n            associated.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.appstream#AssociateFleet": {
@@ -574,6 +801,201 @@
                 }
             }
         },
+        "com.amazonaws.appstream#CreateAppBlock": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appstream#CreateAppBlockRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appstream#CreateAppBlockResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appstream#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceAlreadyExistsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an app block.</p>\n        <p>App blocks are an Amazon AppStream 2.0 resource that stores the details about the\n            virtual hard disk in an S3 bucket. It also stores the setup script with details about\n            how to mount the virtual hard disk. The virtual hard disk includes the application\n            binaries and other files necessary to launch your applications. Multiple applications\n            can be assigned to a single app block.</p>\n        <p>This is only supported for Elastic fleets.</p>"
+            }
+        },
+        "com.amazonaws.appstream#CreateAppBlockRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the app block.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.appstream#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the app block.</p>"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.appstream#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the app block. This is not displayed to the user.</p>"
+                    }
+                },
+                "SourceS3Location": {
+                    "target": "com.amazonaws.appstream#S3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source S3 location of the app block.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SetupScriptDetails": {
+                    "target": "com.amazonaws.appstream#ScriptDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The setup script details of the app block.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.appstream#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags assigned to the app block.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appstream#CreateAppBlockResult": {
+            "type": "structure",
+            "members": {
+                "AppBlock": {
+                    "target": "com.amazonaws.appstream#AppBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app block.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appstream#CreateApplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appstream#CreateApplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appstream#CreateApplicationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appstream#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an application.</p>\n        <p>Applications are an Amazon AppStream 2.0 resource that stores the details about how to\n            launch applications on Elastic fleet streaming instances. An application consists of the\n            launch details, icon, and display name. Applications are associated with an app block\n            that contains the application binaries and other files. The applications assigned to an\n            Elastic fleet are the applications users can launch. </p>\n        <p>This is only supported for Elastic fleets.</p>"
+            }
+        },
+        "com.amazonaws.appstream#CreateApplicationRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the application. This name is visible to users when display name is not specified.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.appstream#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the application. This name is visible to users in the application catalog.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.appstream#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the application.</p>"
+                    }
+                },
+                "IconS3Location": {
+                    "target": "com.amazonaws.appstream#S3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location in S3 of the application icon.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LaunchPath": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The launch path of the application.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WorkingDirectory": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The working directory of the application.</p>"
+                    }
+                },
+                "LaunchParameters": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The launch parameters of the application.</p>"
+                    }
+                },
+                "Platforms": {
+                    "target": "com.amazonaws.appstream#Platforms",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The platforms the application supports. WINDOWS_SERVER_2019 and AMAZON_LINUX2 are supported for Elastic fleets.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceFamilies": {
+                    "target": "com.amazonaws.appstream#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance families the application supports. Valid values are GENERAL_PURPOSE and GRAPHICS_G4.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AppBlockArn": {
+                    "target": "com.amazonaws.appstream#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app block ARN to which the application should be associated</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.appstream#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags assigned to the application.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appstream#CreateApplicationResult": {
+            "type": "structure",
+            "members": {
+                "Application": {
+                    "target": "com.amazonaws.appstream#Application"
+                }
+            }
+        },
         "com.amazonaws.appstream#CreateDirectoryConfig": {
             "type": "operation",
             "input": {
@@ -686,7 +1108,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a fleet. A fleet consists of streaming instances that run a specified image.</p>"
+                "smithy.api#documentation": "<p>Creates a fleet. A fleet consists of streaming instances that run a specified image when using Always-On or On-Demand.</p>"
             }
         },
         "com.amazonaws.appstream#CreateFleetRequest": {
@@ -714,7 +1136,7 @@
                 "InstanceType": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The instance type to use when launching fleet instances. The following instance types are available:</p>    \n        <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.large</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.3xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.6xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.large</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-desktop.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.16xlarge</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The instance type to use when launching fleet instances. The following instance types are available:</p>    \n        <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.large</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.3xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.6xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.large</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-desktop.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.16xlarge</p>\n            </li>\n         </ul> \n        <p>The following instance types are available for Elastic fleets:</p>\n        <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -727,14 +1149,13 @@
                 "ComputeCapacity": {
                     "target": "com.amazonaws.appstream#ComputeCapacity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The desired capacity for the fleet.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The desired capacity for the fleet. This is not allowed for Elastic fleets. For Elastic fleets, specify MaxConcurrentSessions instead.</p>"
                     }
                 },
                 "VpcConfig": {
                     "target": "com.amazonaws.appstream#VpcConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The VPC configuration for the fleet.</p>"
+                        "smithy.api#documentation": "<p>The VPC configuration for the fleet. This is required for Elastic fleets, but not required for other fleet types. Elastic fleets require that you specify at least two subnets in different availability zones.</p>"
                     }
                 },
                 "MaxUserDurationInSeconds": {
@@ -770,7 +1191,7 @@
                 "DomainJoinInfo": {
                     "target": "com.amazonaws.appstream#DomainJoinInfo",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the directory and organizational unit (OU) to use to join the fleet to a Microsoft Active Directory domain. </p>"
+                        "smithy.api#documentation": "<p>The name of the directory and organizational unit (OU) to use to join the fleet to a Microsoft Active Directory domain. This is not allowed for Elastic fleets. </p>"
                     }
                 },
                 "Tags": {
@@ -795,6 +1216,24 @@
                     "target": "com.amazonaws.appstream#StreamView",
                     "traits": {
                         "smithy.api#documentation": "<p>The AppStream 2.0 view that is displayed to your users when they stream from the fleet. When <code>APP</code> is specified, only the windows of applications opened by users display. When <code>DESKTOP</code> is specified, the standard desktop that is provided by the operating system displays.</p>\n        \n        <p>The default value is <code>APP</code>.</p>"
+                    }
+                },
+                "Platform": {
+                    "target": "com.amazonaws.appstream#PlatformType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fleet platform. WINDOWS_SERVER_2019 and AMAZON_LINUX2 are supported for Elastic\n            fleets. </p>"
+                    }
+                },
+                "MaxConcurrentSessions": {
+                    "target": "com.amazonaws.appstream#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum concurrent sessions of the Elastic fleet. This is required for Elastic\n            fleets, and not allowed for other fleet types.</p>"
+                    }
+                },
+                "UsbDeviceFilterStrings": {
+                    "target": "com.amazonaws.appstream#UsbDeviceFilterStrings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The USB device filter strings that specify which USB devices a user can redirect to the fleet streaming session, when using the Windows native client. This is allowed but not required for Elastic fleets.</p>"
                     }
                 }
             }
@@ -1419,6 +1858,87 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.appstream#DeleteAppBlock": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appstream#DeleteAppBlockRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appstream#DeleteAppBlockResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appstream#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an app block.</p>"
+            }
+        },
+        "com.amazonaws.appstream#DeleteAppBlockRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the app block.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appstream#DeleteAppBlockResult": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.appstream#DeleteApplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appstream#DeleteApplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appstream#DeleteApplicationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appstream#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an application.</p>"
+            }
+        },
+        "com.amazonaws.appstream#DeleteApplicationRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the application.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appstream#DeleteApplicationResult": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.appstream#DeleteDirectoryConfig": {
             "type": "operation",
             "input": {
@@ -1738,6 +2258,192 @@
         "com.amazonaws.appstream#DeleteUserResult": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.appstream#DescribeAppBlocks": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appstream#DescribeAppBlocksRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appstream#DescribeAppBlocksResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appstream#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list that describes one or more app blocks.</p>"
+            }
+        },
+        "com.amazonaws.appstream#DescribeAppBlocksRequest": {
+            "type": "structure",
+            "members": {
+                "Arns": {
+                    "target": "com.amazonaws.appstream#ArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARNs of the app blocks.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token used to retrieve the next page of results for this\n            operation.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.appstream#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum size of each page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appstream#DescribeAppBlocksResult": {
+            "type": "structure",
+            "members": {
+                "AppBlocks": {
+                    "target": "com.amazonaws.appstream#AppBlocks",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app blocks in the list.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token used to retrieve the next page of results for this\n            operation.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appstream#DescribeApplicationFleetAssociations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appstream#DescribeApplicationFleetAssociationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appstream#DescribeApplicationFleetAssociationsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appstream#InvalidParameterCombinationException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#OperationNotPermittedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list that describes one or more application fleet associations. Either ApplicationArn or FleetName must be specified.</p>"
+            }
+        },
+        "com.amazonaws.appstream#DescribeApplicationFleetAssociationsRequest": {
+            "type": "structure",
+            "members": {
+                "FleetName": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the fleet.</p>"
+                    }
+                },
+                "ApplicationArn": {
+                    "target": "com.amazonaws.appstream#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the application.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.appstream#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum size of each page of results.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token used to retrieve the next page of results for this\n            operation.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appstream#DescribeApplicationFleetAssociationsResult": {
+            "type": "structure",
+            "members": {
+                "ApplicationFleetAssociations": {
+                    "target": "com.amazonaws.appstream#ApplicationFleetAssociationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The application fleet associations in the list.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token used to retrieve the next page of results for this\n            operation.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appstream#DescribeApplications": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appstream#DescribeApplicationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appstream#DescribeApplicationsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appstream#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list that describes one or more applications.</p>"
+            }
+        },
+        "com.amazonaws.appstream#DescribeApplicationsRequest": {
+            "type": "structure",
+            "members": {
+                "Arns": {
+                    "target": "com.amazonaws.appstream#ArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARNs for the applications.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token used to retrieve the next page of results for this\n            operation.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.appstream#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum size of each page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appstream#DescribeApplicationsResult": {
+            "type": "structure",
+            "members": {
+                "Applications": {
+                    "target": "com.amazonaws.appstream#Applications",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The applications in the list.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token used to retrieve the next page of results for this\n            operation.</p>"
+                    }
+                }
+            }
         },
         "com.amazonaws.appstream#DescribeDirectoryConfigs": {
             "type": "operation",
@@ -2405,6 +3111,9 @@
                     "target": "com.amazonaws.appstream#InvalidParameterCombinationException"
                 },
                 {
+                    "target": "com.amazonaws.appstream#OperationNotPermittedException"
+                },
+                {
                     "target": "com.amazonaws.appstream#ResourceNotFoundException"
                 }
             ],
@@ -2550,6 +3259,52 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.appstream#DisassociateApplicationFleet": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appstream#DisassociateApplicationFleetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appstream#DisassociateApplicationFleetResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appstream#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#InvalidParameterCombinationException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#OperationNotPermittedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disassociates the specified application from the fleet.</p>"
+            }
+        },
+        "com.amazonaws.appstream#DisassociateApplicationFleetRequest": {
+            "type": "structure",
+            "members": {
+                "FleetName": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the fleet.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ApplicationArn": {
+                    "target": "com.amazonaws.appstream#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the application.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appstream#DisassociateApplicationFleetResult": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.appstream#DisassociateFleet": {
             "type": "operation",
             "input": {
@@ -2658,7 +3413,7 @@
                     "min": 0,
                     "max": 128
                 },
-                "smithy.api#pattern": "(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]"
+                "smithy.api#pattern": "^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]$"
             }
         },
         "com.amazonaws.appstream#EmbedHostDomains": {
@@ -2886,6 +3641,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The AppStream 2.0 view that is displayed to your users when they stream from the fleet. When <code>APP</code> is specified, only the windows of applications opened by users display. When <code>DESKTOP</code> is specified, the standard desktop that is provided by the operating system displays.</p>\n        \n        <p>The default value is <code>APP</code>.</p>"
                     }
+                },
+                "Platform": {
+                    "target": "com.amazonaws.appstream#PlatformType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The platform of the fleet.</p>"
+                    }
+                },
+                "MaxConcurrentSessions": {
+                    "target": "com.amazonaws.appstream#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of concurrent sessions for the fleet.</p>"
+                    }
+                },
+                "UsbDeviceFilterStrings": {
+                    "target": "com.amazonaws.appstream#UsbDeviceFilterStrings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The USB device filter strings associated with the fleet.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2912,6 +3685,10 @@
                     {
                         "value": "IAM_ROLE_ARN",
                         "name": "IAM_ROLE_ARN"
+                    },
+                    {
+                        "value": "USB_DEVICE_FILTER_STRINGS",
+                        "name": "USB_DEVICE_FILTER_STRINGS"
                     }
                 ]
             }
@@ -3121,6 +3898,10 @@
                     {
                         "value": "ON_DEMAND",
                         "name": "ON_DEMAND"
+                    },
+                    {
+                        "value": "ELASTIC",
+                        "name": "ELASTIC"
                     }
                 ]
             }
@@ -3884,8 +4665,26 @@
         },
         "com.amazonaws.appstream#PhotonAdminProxyService": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "AppStream",
+                    "arnNamespace": "appstream",
+                    "cloudFormationName": "AppStream",
+                    "cloudTrailEventSource": "appstream.amazonaws.com",
+                    "endpointPrefix": "appstream2"
+                },
+                "aws.auth#sigv4": {
+                    "name": "appstream"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<fullname>Amazon AppStream 2.0</fullname>\n        <p>This is the <i>Amazon AppStream 2.0 API Reference</i>. This documentation provides descriptions and syntax for each of the actions and data types in AppStream 2.0. AppStream 2.0 is a fully managed, secure application streaming service that lets you stream desktop applications to users without rewriting applications. AppStream 2.0 manages the AWS resources that are required to host and run your applications, scales automatically, and provides access to your users on demand. </p>\n        \n        <note>\n            <p>You can call the AppStream 2.0 API operations by using an interface VPC endpoint (interface endpoint). For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/access-api-cli-through-interface-vpc-endpoint.html\">Access AppStream 2.0 API Operations and CLI Commands Through an Interface VPC Endpoint</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>\n         </note>\n        \n        <p>To learn more about AppStream 2.0, see the following resources:</p>\n            \n            <ul>\n            <li>\n               <p> \n                  <a href=\"http://aws.amazon.com/appstream2\">Amazon AppStream 2.0 product page</a>\n               </p>\n            </li>\n            <li>\n               <p> \n                  <a href=\"http://aws.amazon.com/documentation/appstream2\">Amazon AppStream 2.0 documentation</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#title": "Amazon AppStream"
+            },
             "version": "2016-12-01",
             "operations": [
+                {
+                    "target": "com.amazonaws.appstream#AssociateApplicationFleet"
+                },
                 {
                     "target": "com.amazonaws.appstream#AssociateFleet"
                 },
@@ -3897,6 +4696,12 @@
                 },
                 {
                     "target": "com.amazonaws.appstream#CopyImage"
+                },
+                {
+                    "target": "com.amazonaws.appstream#CreateAppBlock"
+                },
+                {
+                    "target": "com.amazonaws.appstream#CreateApplication"
                 },
                 {
                     "target": "com.amazonaws.appstream#CreateDirectoryConfig"
@@ -3926,6 +4731,12 @@
                     "target": "com.amazonaws.appstream#CreateUser"
                 },
                 {
+                    "target": "com.amazonaws.appstream#DeleteAppBlock"
+                },
+                {
+                    "target": "com.amazonaws.appstream#DeleteApplication"
+                },
+                {
                     "target": "com.amazonaws.appstream#DeleteDirectoryConfig"
                 },
                 {
@@ -3948,6 +4759,15 @@
                 },
                 {
                     "target": "com.amazonaws.appstream#DeleteUser"
+                },
+                {
+                    "target": "com.amazonaws.appstream#DescribeAppBlocks"
+                },
+                {
+                    "target": "com.amazonaws.appstream#DescribeApplicationFleetAssociations"
+                },
+                {
+                    "target": "com.amazonaws.appstream#DescribeApplications"
                 },
                 {
                     "target": "com.amazonaws.appstream#DescribeDirectoryConfigs"
@@ -3981,6 +4801,9 @@
                 },
                 {
                     "target": "com.amazonaws.appstream#DisableUser"
+                },
+                {
+                    "target": "com.amazonaws.appstream#DisassociateApplicationFleet"
                 },
                 {
                     "target": "com.amazonaws.appstream#DisassociateFleet"
@@ -4019,6 +4842,9 @@
                     "target": "com.amazonaws.appstream#UntagResource"
                 },
                 {
+                    "target": "com.amazonaws.appstream#UpdateApplication"
+                },
+                {
                     "target": "com.amazonaws.appstream#UpdateDirectoryConfig"
                 },
                 {
@@ -4030,22 +4856,7 @@
                 {
                     "target": "com.amazonaws.appstream#UpdateStack"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "AppStream",
-                    "arnNamespace": "appstream",
-                    "cloudFormationName": "AppStream",
-                    "cloudTrailEventSource": "appstream.amazonaws.com",
-                    "endpointPrefix": "appstream2"
-                },
-                "aws.auth#sigv4": {
-                    "name": "appstream"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>Amazon AppStream 2.0</fullname>\n        <p>This is the <i>Amazon AppStream 2.0 API Reference</i>. This documentation provides descriptions and syntax for each of the actions and data types in AppStream 2.0. AppStream 2.0 is a fully managed, secure application streaming service that lets you stream desktop applications to users without rewriting applications. AppStream 2.0 manages the AWS resources that are required to host and run your applications, scales automatically, and provides access to your users on demand. </p>\n        \n        <note>\n            <p>You can call the AppStream 2.0 API operations by using an interface VPC endpoint (interface endpoint). For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/access-api-cli-through-interface-vpc-endpoint.html\">Access AppStream 2.0 API Operations and CLI Commands Through an Interface VPC Endpoint</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>\n         </note>\n        \n        <p>To learn more about AppStream 2.0, see the following resources:</p>\n            \n            <ul>\n            <li>\n               <p> \n                  <a href=\"http://aws.amazon.com/appstream2\">Amazon AppStream 2.0 product page</a>\n               </p>\n            </li>\n            <li>\n               <p> \n                  <a href=\"http://aws.amazon.com/documentation/appstream2\">Amazon AppStream 2.0 documentation</a>\n               </p>\n            </li>\n         </ul>",
-                "smithy.api#title": "Amazon AppStream"
-            }
+            ]
         },
         "com.amazonaws.appstream#PlatformType": {
             "type": "string",
@@ -4062,8 +4873,24 @@
                     {
                         "value": "WINDOWS_SERVER_2019",
                         "name": "WINDOWS_SERVER_2019"
+                    },
+                    {
+                        "value": "AMAZON_LINUX2",
+                        "name": "AMAZON_LINUX2"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.appstream#Platforms": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appstream#PlatformType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 4
+                }
             }
         },
         "com.amazonaws.appstream#RedirectURL": {
@@ -4189,6 +5016,82 @@
                 "smithy.api#documentation": "<p>The specified resource was not found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.appstream#S3Bucket": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[0-9a-z\\.\\-]*(?<!\\.)$"
+            }
+        },
+        "com.amazonaws.appstream#S3Key": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.appstream#S3Location": {
+            "type": "structure",
+            "members": {
+                "S3Bucket": {
+                    "target": "com.amazonaws.appstream#S3Bucket",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 bucket of the S3 object.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "S3Key": {
+                    "target": "com.amazonaws.appstream#S3Key",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 key of the S3 object.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the S3 location.</p>"
+            }
+        },
+        "com.amazonaws.appstream#ScriptDetails": {
+            "type": "structure",
+            "members": {
+                "ScriptS3Location": {
+                    "target": "com.amazonaws.appstream#S3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 object location for the script.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExecutablePath": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The run path for the script.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExecutableParameters": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The runtime parameters passed to the run path for the script.</p>"
+                    }
+                },
+                "TimeoutInSeconds": {
+                    "target": "com.amazonaws.appstream#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The run timeout, in seconds, for the script.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the details of the script.</p>"
             }
         },
         "com.amazonaws.appstream#SecurityGroupIdList": {
@@ -4849,7 +5752,7 @@
                     "min": 2,
                     "max": 32
                 },
-                "smithy.api#pattern": "[\\w+=,.@-]*"
+                "smithy.api#pattern": "^[\\w+=,.@-]*$"
             }
         },
         "com.amazonaws.appstream#String": {
@@ -5011,6 +5914,97 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.appstream#UpdateApplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appstream#UpdateApplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appstream#UpdateApplicationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appstream#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the specified application.</p>"
+            }
+        },
+        "com.amazonaws.appstream#UpdateApplicationRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the application. This name is visible to users when display name is not specified.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.appstream#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the application. This name is visible to users in the application catalog.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.appstream#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the application.</p>"
+                    }
+                },
+                "IconS3Location": {
+                    "target": "com.amazonaws.appstream#S3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The icon S3 location of the application.</p>"
+                    }
+                },
+                "LaunchPath": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The launch path of the application.</p>"
+                    }
+                },
+                "WorkingDirectory": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The working directory of the application.</p>"
+                    }
+                },
+                "LaunchParameters": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The launch parameters of the application.</p>"
+                    }
+                },
+                "AppBlockArn": {
+                    "target": "com.amazonaws.appstream#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the app block.</p>"
+                    }
+                },
+                "AttributesToDelete": {
+                    "target": "com.amazonaws.appstream#ApplicationAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attributes to delete for an application.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appstream#UpdateApplicationResult": {
+            "type": "structure",
+            "members": {
+                "Application": {
+                    "target": "com.amazonaws.appstream#Application"
+                }
+            }
+        },
         "com.amazonaws.appstream#UpdateDirectoryConfig": {
             "type": "operation",
             "input": {
@@ -5119,7 +6113,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the specified fleet.</p>\n        <p>If the fleet is in the <code>STOPPED</code> state, you can update any attribute except the fleet name. \n            If the fleet is in the <code>RUNNING</code> state, you can update the <code>DisplayName</code>, <code>ComputeCapacity</code>, <code>ImageARN</code>, <code>ImageName</code>, <code>IdleDisconnectTimeoutInSeconds</code>, and <code>DisconnectTimeoutInSeconds</code> attributes. \n            If the fleet is in the <code>STARTING</code> or <code>STOPPING</code> state, you can't update it.</p>"
+                "smithy.api#documentation": "<p>Updates the specified fleet.</p>\n        <p>If the fleet is in the <code>STOPPED</code> state, you can update any attribute except\n            the fleet name.</p>\n        <p>If the fleet is in the <code>RUNNING</code> state, you can update the following based\n            on the fleet type:</p>\n        <ul>\n            <li>\n               <p>Always-On and On-Demand fleet types</p>\n                <p>You can update the  <code>DisplayName</code>, <code>ComputeCapacity</code>,\n                        <code>ImageARN</code>, <code>ImageName</code>,\n                        <code>IdleDisconnectTimeoutInSeconds</code>, and\n                        <code>DisconnectTimeoutInSeconds</code> attributes.</p>\n            </li>\n            <li>\n               <p>Elastic fleet type</p>\n                <p>You can update the  <code>DisplayName</code>,\n                        <code>IdleDisconnectTimeoutInSeconds</code>,\n                        <code>DisconnectTimeoutInSeconds</code>, <code>MaxConcurrentSessions</code>,\n                    and <code>UsbDeviceFilterStrings</code> attributes.</p>\n            </li>\n         </ul>\n        <p>If the fleet is in the <code>STARTING</code> or <code>STOPPED</code> state, you can't update it.</p>"
             }
         },
         "com.amazonaws.appstream#UpdateFleetRequest": {
@@ -5146,19 +6140,19 @@
                 "InstanceType": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The instance type to use when launching fleet instances. The following instance types are available:</p>\n        <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.large</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.3xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.6xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.large</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-desktop.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.16xlarge</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The instance type to use when launching fleet instances. The following instance types are available:</p>\n        <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.large</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.3xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.6xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.large</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-desktop.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.16xlarge</p>\n            </li>\n         </ul> \n        <p>The following instance types are available for Elastic fleets:</p>\n        <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ComputeCapacity": {
                     "target": "com.amazonaws.appstream#ComputeCapacity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The desired capacity for the fleet.</p>"
+                        "smithy.api#documentation": "<p>The desired capacity for the fleet. This is not allowed for Elastic fleets.</p>"
                     }
                 },
                 "VpcConfig": {
                     "target": "com.amazonaws.appstream#VpcConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The VPC configuration for the fleet.</p>"
+                        "smithy.api#documentation": "<p>The VPC configuration for the fleet. This is required for Elastic fleets, but not required for other fleet types. Elastic fleets require that you specify at least two subnets in different availability zones. </p>"
                     }
                 },
                 "MaxUserDurationInSeconds": {
@@ -5226,6 +6220,24 @@
                     "target": "com.amazonaws.appstream#StreamView",
                     "traits": {
                         "smithy.api#documentation": "<p>The AppStream 2.0 view that is displayed to your users when they stream from the fleet. When <code>APP</code> is specified, only the windows of applications opened by users display. When <code>DESKTOP</code> is specified, the standard desktop that is provided by the operating system displays.</p>\n        \n        <p>The default value is <code>APP</code>.</p>"
+                    }
+                },
+                "Platform": {
+                    "target": "com.amazonaws.appstream#PlatformType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The platform of the fleet. WINDOWS_SERVER_2019 and AMAZON_LINUX2 are supported for Elastic fleets. </p>"
+                    }
+                },
+                "MaxConcurrentSessions": {
+                    "target": "com.amazonaws.appstream#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of concurrent sessions for a fleet.</p>"
+                    }
+                },
+                "UsbDeviceFilterStrings": {
+                    "target": "com.amazonaws.appstream#UsbDeviceFilterStrings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The USB device filter strings that specify which USB devices a user can redirect to the fleet streaming session, when using the Windows native client. This is allowed but not required for Elastic fleets.</p>"
                     }
                 }
             }
@@ -5493,6 +6505,22 @@
                 "target": "com.amazonaws.appstream#UsageReportSubscription"
             }
         },
+        "com.amazonaws.appstream#UsbDeviceFilterString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^((\\w*)\\s*(\\w*)\\s*\\,\\s*(\\w*)\\s*\\,\\s*\\*?(\\w*)\\s*\\,\\s*\\*?(\\w*)\\s*\\,\\s*\\*?\\d*\\s*\\,\\s*\\*?\\d*\\s*\\,\\s*[0-1]\\s*\\,\\s*[0-1]\\s*)$"
+            }
+        },
+        "com.amazonaws.appstream#UsbDeviceFilterStrings": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appstream#UsbDeviceFilterString"
+            }
+        },
         "com.amazonaws.appstream#User": {
             "type": "structure",
             "members": {
@@ -5718,7 +6746,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+",
+                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+$",
                 "smithy.api#sensitive": {}
             }
         },

@@ -632,7 +632,7 @@
                 "ConsumerIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the data consumer that is authorized to access the datashare. This identifier is an AWS account ID.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the data consumer that is authorized to access the datashare. This identifier is an Amazon Web Services account ID.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1315,6 +1315,12 @@
                     "target": "com.amazonaws.redshift#AquaConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The AQUA (Advanced Query Accelerator) configuration of the cluster.</p>"
+                    }
+                },
+                "DefaultIamRoleArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the IAM role set as default for the cluster.</p>"
                     }
                 }
             },
@@ -2654,6 +2660,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) when it is created. Possible values include the following.</p>\n        <ul>\n            <li>\n               <p>enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.</p>\n            </li>\n            <li>\n               <p>disabled - Don't use AQUA. </p>\n            </li>\n            <li>\n               <p>auto - Amazon Redshift determines whether to use AQUA.</p>\n            </li>\n         </ul>"
                     }
+                },
+                "DefaultIamRoleArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the IAM role that was set as default for the cluster when the cluster was created. </p>"
+                    }
                 }
             },
             "traits": {
@@ -3731,7 +3743,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The association of a datashare from a producer account with a data consumer.\n        </p>"
+                "smithy.api#documentation": "<p>The association of a datashare from a producer account with a data consumer.\n</p>"
             }
         },
         "com.amazonaws.redshift#DataShareAssociationList": {
@@ -3902,7 +3914,7 @@
                 "ConsumerIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the data consumer that is to have authorization removed from the datashare. \n            This identifier is an AWS account ID.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the data consumer that is to have authorization removed from the datashare. \n            This identifier is an Amazon Web Services account ID.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5412,7 +5424,7 @@
                 "Marker": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional parameter that specifies the starting point to return a set of response\n            records. When the results of a <a>DescribeDataSharesForConsumer</a> request\n            exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the\n            <code>Marker</code> field of the response. You can retrieve the next set of response\n            records by providing the returned marker value in the <code>Marker</code> parameter and\n            retrying the request. </p>"
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the starting point to return a set of response\n            records. When the results of a <a>DescribeDataSharesForConsumer</a> request\n            exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the\n            <code>Marker</code> field of the response. You can retrieve the next set of response\n            records by providing the returned marker value in the <code>Marker</code> parameter and\n            retrying the request. </p>"
                     }
                 }
             }
@@ -5429,7 +5441,7 @@
                 "Marker": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional parameter that specifies the starting point to return a set of response\n            records. When the results of a <a>DescribeDataSharesForConsumer</a> request\n            exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the\n            <code>Marker</code> field of the response. You can retrieve the next set of response\n            records by providing the returned marker value in the <code>Marker</code> parameter and\n            retrying the request. </p>"
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the starting point to return a set of response\n            records. When the results of a <a>DescribeDataSharesForConsumer</a> request\n            exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the\n            <code>Marker</code> field of the response. You can retrieve the next set of response\n            records by providing the returned marker value in the <code>Marker</code> parameter and\n            retrying the request. </p>"
                     }
                 }
             }
@@ -5475,7 +5487,7 @@
                 "Marker": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional parameter that specifies the starting point to return a set of response\n            records. When the results of a <a>DescribeDataSharesForProducer</a> request\n            exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the\n            <code>Marker</code> field of the response. You can retrieve the next set of response\n            records by providing the returned marker value in the <code>Marker</code> parameter and\n            retrying the request. </p>"
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the starting point to return a set of response\n            records. When the results of a <a>DescribeDataSharesForProducer</a> request\n            exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the\n            <code>Marker</code> field of the response. You can retrieve the next set of response\n            records by providing the returned marker value in the <code>Marker</code> parameter and\n            retrying the request. </p>"
                     }
                 }
             }
@@ -5492,7 +5504,7 @@
                 "Marker": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional parameter that specifies the starting point to return a set of response\n            records. When the results of a <a>DescribeDataSharesForProducer</a> request\n            exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the\n            <code>Marker</code> field of the response. You can retrieve the next set of response\n            records by providing the returned marker value in the <code>Marker</code> parameter and\n            retrying the request. </p>"
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the starting point to return a set of response\n            records. When the results of a <a>DescribeDataSharesForProducer</a> request\n            exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the\n            <code>Marker</code> field of the response. You can retrieve the next set of response\n            records by providing the returned marker value in the <code>Marker</code> parameter and\n            retrying the request. </p>"
                     }
                 }
             }
@@ -5515,7 +5527,7 @@
                 "Marker": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataShares</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataShares</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
                     }
                 }
             }
@@ -5532,7 +5544,7 @@
                 "Marker": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataShares</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataShares</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
                     }
                 }
             }
@@ -9209,6 +9221,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Zero or more IAM roles in ARN format to disassociate from the cluster. You can\n            disassociate up to 10 IAM roles from a single cluster in a single request.</p>"
                     }
+                },
+                "DefaultIamRoleArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the IAM role that was set as default for the cluster when the cluster was last modified.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10884,6 +10902,24 @@
         },
         "com.amazonaws.redshift#RedshiftServiceVersion20121201": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Redshift",
+                    "arnNamespace": "redshift",
+                    "cloudFormationName": "Redshift",
+                    "cloudTrailEventSource": "redshift.amazonaws.com",
+                    "endpointPrefix": "redshift"
+                },
+                "aws.auth#sigv4": {
+                    "name": "redshift"
+                },
+                "aws.protocols#awsQuery": {},
+                "smithy.api#documentation": "<fullname>Amazon Redshift</fullname>\n        <p>\n            <b>Overview</b>\n        </p>\n        <p>This is an interface reference for Amazon Redshift. It contains documentation for one of\n            the programming or command line interfaces you can use to manage Amazon Redshift clusters.\n            Note that Amazon Redshift is asynchronous, which means that some interfaces may require\n            techniques, such as polling or asynchronous callback handlers, to determine when a\n            command has been applied. In this reference, the parameter descriptions indicate whether\n            a change is applied immediately, on the next instance reboot, or during the next\n            maintenance window. For a summary of the Amazon Redshift cluster management interfaces, go to\n                <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/using-aws-sdk.html\">Using the\n                Amazon Redshift Management Interfaces</a>.</p>\n        <p>Amazon Redshift manages all the work of setting up, operating, and scaling a data\n            warehouse: provisioning capacity, monitoring and backing up the cluster, and applying\n            patches and upgrades to the Amazon Redshift engine. You can focus on using your data to\n            acquire new insights for your business and customers.</p>\n        <p>If you are a first-time user of Amazon Redshift, we recommend that you begin by reading\n            the <a href=\"https://docs.aws.amazon.com/redshift/latest/gsg/getting-started.html\">Amazon Redshift Getting Started Guide</a>.</p>\n\n        <p>If you are a database developer, the <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/welcome.html\">Amazon Redshift Database Developer Guide</a> explains how to design,\n            build, query, and maintain the databases that make up your data warehouse. </p>",
+                "smithy.api#title": "Amazon Redshift",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://redshift.amazonaws.com/doc/2012-12-01/"
+                }
+            },
             "version": "2012-12-01",
             "operations": [
                 {
@@ -11234,25 +11270,7 @@
                 {
                     "target": "com.amazonaws.redshift#UpdatePartnerStatus"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Redshift",
-                    "arnNamespace": "redshift",
-                    "cloudFormationName": "Redshift",
-                    "cloudTrailEventSource": "redshift.amazonaws.com",
-                    "endpointPrefix": "redshift"
-                },
-                "aws.auth#sigv4": {
-                    "name": "redshift"
-                },
-                "aws.protocols#awsQuery": {},
-                "smithy.api#documentation": "<fullname>Amazon Redshift</fullname>\n        <p>\n            <b>Overview</b>\n        </p>\n        <p>This is an interface reference for Amazon Redshift. It contains documentation for one of\n            the programming or command line interfaces you can use to manage Amazon Redshift clusters.\n            Note that Amazon Redshift is asynchronous, which means that some interfaces may require\n            techniques, such as polling or asynchronous callback handlers, to determine when a\n            command has been applied. In this reference, the parameter descriptions indicate whether\n            a change is applied immediately, on the next instance reboot, or during the next\n            maintenance window. For a summary of the Amazon Redshift cluster management interfaces, go to\n                <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/using-aws-sdk.html\">Using the\n                Amazon Redshift Management Interfaces</a>.</p>\n        <p>Amazon Redshift manages all the work of setting up, operating, and scaling a data\n            warehouse: provisioning capacity, monitoring and backing up the cluster, and applying\n            patches and upgrades to the Amazon Redshift engine. You can focus on using your data to\n            acquire new insights for your business and customers.</p>\n        <p>If you are a first-time user of Amazon Redshift, we recommend that you begin by reading\n            the <a href=\"https://docs.aws.amazon.com/redshift/latest/gsg/getting-started.html\">Amazon Redshift Getting Started Guide</a>.</p>\n\n        <p>If you are a database developer, the <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/welcome.html\">Amazon Redshift Database Developer Guide</a> explains how to design,\n            build, query, and maintain the databases that make up your data warehouse. </p>",
-                "smithy.api#title": "Amazon Redshift",
-                "smithy.api#xmlNamespace": {
-                    "uri": "http://redshift.amazonaws.com/doc/2012-12-01/"
-                }
-            }
+            ]
         },
         "com.amazonaws.redshift#RejectDataShare": {
             "type": "operation",
@@ -12151,6 +12169,12 @@
                     "target": "com.amazonaws.redshift#AquaConfigurationStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored. Possible values include the following.</p>\n        <ul>\n            <li>\n               <p>enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.</p>\n            </li>\n            <li>\n               <p>disabled - Don't use AQUA. </p>\n            </li>\n            <li>\n               <p>auto - Amazon Redshift determines whether to use AQUA.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "DefaultIamRoleArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the IAM role that was set as default for the cluster when the cluster was last modified while it was restored from a snapshot.</p>"
                     }
                 }
             },

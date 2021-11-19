@@ -240,6 +240,22 @@ type LoggingConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Describes whether StackSets performs non-conflicting operations concurrently and
+// queues conflicting operations.
+type ManagedExecution struct {
+
+	// When true, StackSets performs non-conflicting operations concurrently and queues
+	// conflicting operations. After conflicting operations finish, StackSets starts
+	// queued operations in request order. If there are already running or queued
+	// operations, StackSets queues all incoming operations even if they are
+	// non-conflicting. You can't modify your stack set's execution configuration while
+	// there are running or queued operations for that stack set. When false (default),
+	// StackSets performs one operation at a time in request order.
+	Active *bool
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the module from which the resource was created, if
 // the resource was created from a module included in the stack template. For more
 // information on modules, see Using modules to encapsulate and reuse resource
@@ -1493,6 +1509,10 @@ type StackSet struct {
 	// include in their stack sets.
 	ExecutionRoleName *string
 
+	// Describes whether StackSets performs non-conflicting operations concurrently and
+	// queues conflicting operations.
+	ManagedExecution *ManagedExecution
+
 	// [Service-managed permissions] The organization root ID or organizational unit
 	// (OU) IDs that you specified for DeploymentTargets
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html).
@@ -1921,6 +1941,10 @@ type StackSetSummary struct {
 	// the stack set. This value will be NULL for any stack set on which drift
 	// detection has not yet been performed.
 	LastDriftCheckTimestamp *time.Time
+
+	// Describes whether StackSets performs non-conflicting operations concurrently and
+	// queues conflicting operations.
+	ManagedExecution *ManagedExecution
 
 	// Describes how the IAM roles required for stack set operations are created.
 	//

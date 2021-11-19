@@ -196,24 +196,36 @@
                 "Namespace": {
                     "target": "com.amazonaws.cloudwatch#Namespace",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "Use SingleMetricAnomalyDetector.Namespace property."
+                        },
                         "smithy.api#documentation": "<p>The namespace of the metric associated with the anomaly detection model.</p>"
                     }
                 },
                 "MetricName": {
                     "target": "com.amazonaws.cloudwatch#MetricName",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "Use SingleMetricAnomalyDetector.MetricName property."
+                        },
                         "smithy.api#documentation": "<p>The name of the metric associated with the anomaly detection model.</p>"
                     }
                 },
                 "Dimensions": {
                     "target": "com.amazonaws.cloudwatch#Dimensions",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "Use SingleMetricAnomalyDetector.Dimensions property."
+                        },
                         "smithy.api#documentation": "<p>The metric dimensions associated with the anomaly detection model.</p>"
                     }
                 },
                 "Stat": {
                     "target": "com.amazonaws.cloudwatch#AnomalyDetectorMetricStat",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "Use SingleMetricAnomalyDetector.Stat property."
+                        },
                         "smithy.api#documentation": "<p>The statistic associated with the anomaly detection model.</p>"
                     }
                 },
@@ -228,10 +240,22 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The current status of the anomaly detector's training. The possible values are <code>TRAINED | PENDING_TRAINING | TRAINED_INSUFFICIENT_DATA</code>\n         </p>"
                     }
+                },
+                "SingleMetricAnomalyDetector": {
+                    "target": "com.amazonaws.cloudwatch#SingleMetricAnomalyDetector",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CloudWatch metric and statistic for this anomaly detector.</p>"
+                    }
+                },
+                "MetricMathAnomalyDetector": {
+                    "target": "com.amazonaws.cloudwatch#MetricMathAnomalyDetector",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CloudWatch metric math expression for this anomaly detector.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An anomaly detection model associated with a particular CloudWatch metric and statistic. You\n\t\t\tcan use the model to display a band of expected normal values when the metric is\n\t\t\tgraphed.</p>"
+                "smithy.api#documentation": "<p>An anomaly detection model associated with a particular CloudWatch metric, statistic, or metric math expression. \n\t\t\tYou can use the model to display a band of expected, normal values \n\t\t\twhen the metric is graphed.</p>"
             }
         },
         "com.amazonaws.cloudwatch#AnomalyDetectorConfiguration": {
@@ -263,7 +287,11 @@
         "com.amazonaws.cloudwatch#AnomalyDetectorMetricStat": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^(SampleCount|Average|Sum|Minimum|Maximum|p(\\d{1,2}|100)(\\.\\d{0,2})?|[ou]\\d+(\\.\\d*)?)(_E|_L|_H)?$"
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                },
+                "smithy.api#pattern": "^(SampleCount|Average|Sum|Minimum|Maximum|IQM|(p|tc|tm|ts|wm)(\\d{1,2}(\\.\\d{0,10})?|100)|[ou]\\d+(\\.\\d*)?)(_E|_L|_H)?|(TM|TC|TS|WM)\\(((((\\d{1,2})(\\.\\d{0,10})?|100(\\.0{0,10})?)%)?:((\\d{1,2})(\\.\\d{0,10})?|100(\\.0{0,10})?)%|((\\d{1,2})(\\.\\d{0,10})?|100(\\.0{0,10})?)%:(((\\d{1,2})(\\.\\d{0,10})?|100(\\.0{0,10})?)%)?)\\)|(TM|TC|TS|WM|PR)\\(((\\d+(\\.\\d{0,10})?|(\\d+(\\.\\d{0,10})?[Ee][+-]?\\d+)):((\\d+(\\.\\d{0,10})?|(\\d+(\\.\\d{0,10})?[Ee][+-]?\\d+)))?|((\\d+(\\.\\d{0,10})?|(\\d+(\\.\\d{0,10})?[Ee][+-]?\\d+)))?:(\\d+(\\.\\d{0,10})?|(\\d+(\\.\\d{0,10})?[Ee][+-]?\\d+)))\\)$"
             }
         },
         "com.amazonaws.cloudwatch#AnomalyDetectorMetricTimezone": {
@@ -293,6 +321,33 @@
                         "name": "TRAINED"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.cloudwatch#AnomalyDetectorType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SINGLE_METRIC",
+                        "name": "SINGLE_METRIC"
+                    },
+                    {
+                        "value": "METRIC_MATH",
+                        "name": "METRIC_MATH"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.cloudwatch#AnomalyDetectorTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatch#AnomalyDetectorType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2
+                }
             }
         },
         "com.amazonaws.cloudwatch#AnomalyDetectors": {
@@ -716,6 +771,9 @@
                     "target": "com.amazonaws.cloudwatch#InternalServiceFault"
                 },
                 {
+                    "target": "com.amazonaws.cloudwatch#InvalidParameterCombinationException"
+                },
+                {
                     "target": "com.amazonaws.cloudwatch#InvalidParameterValueException"
                 },
                 {
@@ -735,28 +793,49 @@
                 "Namespace": {
                     "target": "com.amazonaws.cloudwatch#Namespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace associated with the anomaly detection model to delete.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#deprecated": {
+                            "message": "Use SingleMetricAnomalyDetector."
+                        },
+                        "smithy.api#documentation": "<p>The namespace associated with the anomaly detection model to delete.</p>"
                     }
                 },
                 "MetricName": {
                     "target": "com.amazonaws.cloudwatch#MetricName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The metric name associated with the anomaly detection model to delete.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#deprecated": {
+                            "message": "Use SingleMetricAnomalyDetector."
+                        },
+                        "smithy.api#documentation": "<p>The metric name associated with the anomaly detection model to delete.</p>"
                     }
                 },
                 "Dimensions": {
                     "target": "com.amazonaws.cloudwatch#Dimensions",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "Use SingleMetricAnomalyDetector."
+                        },
                         "smithy.api#documentation": "<p>The metric dimensions associated with the anomaly detection model to delete.</p>"
                     }
                 },
                 "Stat": {
                     "target": "com.amazonaws.cloudwatch#AnomalyDetectorMetricStat",
                     "traits": {
-                        "smithy.api#documentation": "<p>The statistic associated with the anomaly detection model to delete.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#deprecated": {
+                            "message": "Use SingleMetricAnomalyDetector."
+                        },
+                        "smithy.api#documentation": "<p>The statistic associated with the anomaly detection model to delete.</p>"
+                    }
+                },
+                "SingleMetricAnomalyDetector": {
+                    "target": "com.amazonaws.cloudwatch#SingleMetricAnomalyDetector",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A single metric anomaly detector to be deleted.</p>\n\t\t       <p>When using <code>SingleMetricAnomalyDetector</code>, \n\t\t\tyou cannot include the following parameters in the same operation:</p>\n\t\t\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>Dimensions</code>,</p>\n            </li>\n            <li>\n               <p>\n                  <code>MetricName</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Namespace</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Stat</code>\n               </p>\n            </li>\n            <li>\n               <p>the <code>MetricMathAnomalyDetector</code> parameters of <code>DeleteAnomalyDetectorInput</code>\n               </p>\n            </li>\n         </ul>\n\t\t\n\t\t       <p>Instead, specify the single metric anomaly detector attributes \n\t\t\tas part of the <code>SingleMetricAnomalyDetector</code> property.</p>"
+                    }
+                },
+                "MetricMathAnomalyDetector": {
+                    "target": "com.amazonaws.cloudwatch#MetricMathAnomalyDetector",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric math anomaly detector to be deleted.</p>\n\t\t       <p>When using <code>MetricMathAnomalyDetector</code>, you cannot include following parameters in the same operation:</p>\n\t\t\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>Dimensions</code>,</p>\n            </li>\n            <li>\n               <p>\n                  <code>MetricName</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Namespace</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Stat</code>\n               </p>\n            </li>\n            <li>\n               <p>the <code>SingleMetricAnomalyDetector</code> parameters of <code>DeleteAnomalyDetectorInput</code>\n               </p>\n            </li>\n         </ul>\n\t\t\n\t\t       <p>Instead, specify the metric math anomaly detector attributes as part of the\n\t\t\t<code>MetricMathAnomalyDetector</code> property.</p>"
                     }
                 }
             }
@@ -900,7 +979,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the history for the specified alarm. You can filter the results by date range or item type.\n\t\t\tIf an alarm name is not specified, the histories for either all metric alarms or all composite alarms are returned.</p>\n\t\t       <p>CloudWatch retains the history of an alarm even if you delete the alarm.</p>",
+                "smithy.api#documentation": "<p>Retrieves the history for the specified alarm. You can filter the results by date range or item type.\n\t\t\tIf an alarm name is not specified, the histories for either all metric alarms or all composite alarms are returned.</p>\n\t\t       <p>CloudWatch retains the history of an alarm even if you delete the alarm.</p>\n\t\t       <p>To use this operation and return information about a composite alarm, you must be signed on with \n\t\t\tthe <code>cloudwatch:DescribeAlarmHistory</code> permission that is scoped to <code>*</code>. You can't return information\n\t\t\tabout composite alarms if your <code>cloudwatch:DescribeAlarmHistory</code> permission has a narrower scope.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -993,7 +1072,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the specified alarms. You can filter the results by specifying a prefix for the alarm\n\t\t\tname, the alarm state, or a prefix for any action.</p>",
+                "smithy.api#documentation": "<p>Retrieves the specified alarms. You can filter the results by specifying a prefix for the alarm\n\t\t\tname, the alarm state, or a prefix for any action.</p>\n\t\t       <p>To use this operation and return information about composite alarms, you must be signed on with \n\t\tthe <code>cloudwatch:DescribeAlarms</code> permission that is scoped to <code>*</code>. You can't return information\n\t\t\tabout composite alarms if your <code>cloudwatch:DescribeAlarms</code> permission has a narrower scope.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1203,11 +1282,14 @@
                     "target": "com.amazonaws.cloudwatch#InvalidNextToken"
                 },
                 {
+                    "target": "com.amazonaws.cloudwatch#InvalidParameterCombinationException"
+                },
+                {
                     "target": "com.amazonaws.cloudwatch#InvalidParameterValueException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the anomaly detection models that you have created in your account. You can list all\n\t\t\tmodels in your account or filter the results to only the models that are related to a\n\t\t\tcertain namespace, metric name, or metric dimension.</p>"
+                "smithy.api#documentation": "<p>Lists the anomaly detection models that you have created in your account.\n\t\t\tFor single metric anomaly detectors, \n\t\t\tyou can list all of the models in your account or filter the results \n\t\t\tto only the models that are related to a certain namespace, metric name, or metric dimension.\n\t\t\tFor metric math anomaly detectors, \n\t\t\tyou can list them by adding <code>METRIC_MATH</code> to the <code>AnomalyDetectorTypes</code> array. \n\t\t\tThis will return all metric math anomaly detectors in your account.</p>"
             }
         },
         "com.amazonaws.cloudwatch#DescribeAnomalyDetectorsInput": {
@@ -1241,6 +1323,12 @@
                     "target": "com.amazonaws.cloudwatch#Dimensions",
                     "traits": {
                         "smithy.api#documentation": "<p>Limits the results to only the anomaly detection models that are associated with the\n\t\t\tspecified metric dimensions. If there are multiple metrics that have these dimensions\n\t\t\tand have anomaly detection models associated, they're all returned.</p>"
+                    }
+                },
+                "AnomalyDetectorTypes": {
+                    "target": "com.amazonaws.cloudwatch#AnomalyDetectorTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The anomaly detector types to request when using <code>DescribeAnomalyDetectorsInput</code>.\n\t\t\tIf empty, defaults to <code>SINGLE_METRIC</code>.</p>"
                     }
                 }
             }
@@ -2127,6 +2215,24 @@
         },
         "com.amazonaws.cloudwatch#GraniteServiceVersion20100801": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "CloudWatch",
+                    "arnNamespace": "monitoring",
+                    "cloudFormationName": "CloudWatch",
+                    "cloudTrailEventSource": "cloudwatch.amazonaws.com",
+                    "endpointPrefix": "monitoring"
+                },
+                "aws.auth#sigv4": {
+                    "name": "monitoring"
+                },
+                "aws.protocols#awsQuery": {},
+                "smithy.api#documentation": "<p>Amazon CloudWatch monitors your Amazon Web Services (Amazon Web Services) resources and the\n\t\t\tapplications you run on Amazon Web Services in real time. You can use CloudWatch to collect and track\n\t\t\tmetrics, which are the variables you want to measure for your resources and\n\t\t\tapplications.</p>\n\n\t\t       <p>CloudWatch alarms send notifications or automatically change the resources you are monitoring based on rules\n\t\t\tthat you define. For example, you can monitor the CPU usage and disk reads and writes of your Amazon EC2\n\t\t\tinstances. Then, use this data to determine whether you should launch\n\t\t\tadditional instances to handle increased load. You can also use this data to stop\n\t\t\tunder-used instances to save\n\t\t\tmoney.</p>\n\n\t\t       <p>In addition to monitoring the built-in metrics that come with Amazon Web Services, you can monitor\n\t\t\tyour own custom metrics. With CloudWatch, you gain system-wide visibility into resource\n\t\t\tutilization, application performance, and operational health.</p>",
+                "smithy.api#title": "Amazon CloudWatch",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://monitoring.amazonaws.com/doc/2010-08-01/"
+                }
+            },
             "version": "2010-08-01",
             "operations": [
                 {
@@ -2237,25 +2343,7 @@
                 {
                     "target": "com.amazonaws.cloudwatch#UntagResource"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "CloudWatch",
-                    "arnNamespace": "monitoring",
-                    "cloudFormationName": "CloudWatch",
-                    "cloudTrailEventSource": "cloudwatch.amazonaws.com",
-                    "endpointPrefix": "monitoring"
-                },
-                "aws.auth#sigv4": {
-                    "name": "monitoring"
-                },
-                "aws.protocols#awsQuery": {},
-                "smithy.api#documentation": "<p>Amazon CloudWatch monitors your Amazon Web Services (Amazon Web Services) resources and the\n\t\t\tapplications you run on Amazon Web Services in real time. You can use CloudWatch to collect and track\n\t\t\tmetrics, which are the variables you want to measure for your resources and\n\t\t\tapplications.</p>\n\n\t\t       <p>CloudWatch alarms send notifications or automatically change the resources you are monitoring based on rules\n\t\t\tthat you define. For example, you can monitor the CPU usage and disk reads and writes of your Amazon EC2\n\t\t\tinstances. Then, use this data to determine whether you should launch\n\t\t\tadditional instances to handle increased load. You can also use this data to stop\n\t\t\tunder-used instances to save\n\t\t\tmoney.</p>\n\n\t\t       <p>In addition to monitoring the built-in metrics that come with Amazon Web Services, you can monitor\n\t\t\tyour own custom metrics. With CloudWatch, you gain system-wide visibility into resource\n\t\t\tutilization, application performance, and operational health.</p>",
-                "smithy.api#title": "Amazon CloudWatch",
-                "smithy.api#xmlNamespace": {
-                    "uri": "http://monitoring.amazonaws.com/doc/2010-08-01/"
-                }
-            }
+            ]
         },
         "com.amazonaws.cloudwatch#HistoryData": {
             "type": "string",
@@ -2314,7 +2402,7 @@
                 "Schema": {
                     "target": "com.amazonaws.cloudwatch#InsightRuleSchema",
                     "traits": {
-                        "smithy.api#documentation": "<p>For rules that you create, this is always <code>{\"Name\": \"CloudWatchLogRule\", \"Version\": 1}</code>. For built-in rules, \n\t\t\tthis is <code>{\"Name\": \"ServiceLogRule\", \"Version\": 1}</code>\n         </p>",
+                        "smithy.api#documentation": "<p>For rules that you create, this is always <code>{\"Name\": \"CloudWatchLogRule\", \"Version\": 1}</code>. For managed rules, \n\t\t\tthis is <code>{\"Name\": \"ServiceLogRule\", \"Version\": 1}</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2327,7 +2415,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This structure contains the definition for a Contributor Insights rule.</p>"
+                "smithy.api#documentation": "<p>This structure contains the definition \n\t\t\tfor a Contributor Insights rule.\n\t\t\tFor more information about this rule, \n\t\t\tsee<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights.html\">\n\t\t\t\tUsing Constributor Insights to analyze high-cardinality data</a> \n\t\t\tin the <i>Amazon CloudWatch User Guide</i>.</p>"
             }
         },
         "com.amazonaws.cloudwatch#InsightRuleAggregationStatistic": {
@@ -3440,6 +3528,20 @@
         "com.amazonaws.cloudwatch#MetricLabel": {
             "type": "string"
         },
+        "com.amazonaws.cloudwatch#MetricMathAnomalyDetector": {
+            "type": "structure",
+            "members": {
+                "MetricDataQueries": {
+                    "target": "com.amazonaws.cloudwatch#MetricDataQueries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of metric data query structures \n\t\t\tthat enables you to create an anomaly detector \n\t\t\tbased on the result of a metric math expression.\n\t\t\tEach item in <code>MetricDataQueries</code> gets a metric or performs a math expression.\n\t\t\tOne item in <code>MetricDataQueries</code> is the expression \n\t\t\tthat provides the time series \n\t\t\tthat the anomaly detector uses as input. \n\t\t\tDesignate the expression by setting <code>ReturnData</code> to <code>True</code> \n\t\t\tfor this object in the array.\n\t\t\tFor all other expressions and metrics, set <code>ReturnData</code> to <code>False</code>.\n\t\t\tThe designated expression must return \n\t\t\ta single time series.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates the CloudWatch math expression that provides the time series the anomaly detector\n\t\t\tuses as input.\n\t\t\tThe designated math expression must return a single time series.</p>"
+            }
+        },
         "com.amazonaws.cloudwatch#MetricName": {
             "type": "string",
             "traits": {
@@ -3699,6 +3801,9 @@
                     "target": "com.amazonaws.cloudwatch#InternalServiceFault"
                 },
                 {
+                    "target": "com.amazonaws.cloudwatch#InvalidParameterCombinationException"
+                },
+                {
                     "target": "com.amazonaws.cloudwatch#InvalidParameterValueException"
                 },
                 {
@@ -3718,34 +3823,55 @@
                 "Namespace": {
                     "target": "com.amazonaws.cloudwatch#Namespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the metric to create the anomaly detection model for.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#deprecated": {
+                            "message": "Use SingleMetricAnomalyDetector."
+                        },
+                        "smithy.api#documentation": "<p>The namespace of the metric to create the anomaly detection model for.</p>"
                     }
                 },
                 "MetricName": {
                     "target": "com.amazonaws.cloudwatch#MetricName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the metric to create the anomaly detection model for.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#deprecated": {
+                            "message": "Use SingleMetricAnomalyDetector."
+                        },
+                        "smithy.api#documentation": "<p>The name of the metric to create the anomaly detection model for.</p>"
                     }
                 },
                 "Dimensions": {
                     "target": "com.amazonaws.cloudwatch#Dimensions",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "Use SingleMetricAnomalyDetector."
+                        },
                         "smithy.api#documentation": "<p>The metric dimensions to create the anomaly detection model for.</p>"
                     }
                 },
                 "Stat": {
                     "target": "com.amazonaws.cloudwatch#AnomalyDetectorMetricStat",
                     "traits": {
-                        "smithy.api#documentation": "<p>The statistic to use for the metric and the anomaly detection model.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#deprecated": {
+                            "message": "Use SingleMetricAnomalyDetector."
+                        },
+                        "smithy.api#documentation": "<p>The statistic to use for the metric and the anomaly detection model.</p>"
                     }
                 },
                 "Configuration": {
                     "target": "com.amazonaws.cloudwatch#AnomalyDetectorConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration specifies details about how the \n\t\t\tanomaly detection model is to be trained, including \n\t\t\ttime ranges to exclude when training and updating the model.\n\t\t\tYou can specify as many as 10 time ranges.</p>\n\t\t       <p>The configuration can also include the time zone to use for \n\t\t\tthe metric.</p>"
+                    }
+                },
+                "SingleMetricAnomalyDetector": {
+                    "target": "com.amazonaws.cloudwatch#SingleMetricAnomalyDetector",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A single metric anomaly detector to be created.</p>\n\t\t       <p>When using <code>SingleMetricAnomalyDetector</code>, \n\t\t\tyou cannot include the following parameters in the same operation:</p>\n\t\t\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>Dimensions</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>MetricName</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Namespace</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Stat</code>\n               </p>\n            </li>\n            <li>\n               <p>the <code>MetricMatchAnomalyDetector</code> parameters of <code>PutAnomalyDetectorInput</code>\n               </p>\n            </li>\n         </ul>\n\t\t\n\t\t       <p>Instead, specify the single metric anomaly detector attributes\n\t\t\tas part of the property <code>SingleMetricAnomalyDetector</code>.</p>"
+                    }
+                },
+                "MetricMathAnomalyDetector": {
+                    "target": "com.amazonaws.cloudwatch#MetricMathAnomalyDetector",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric math anomaly detector to be created.</p>\n\t\t\n\t\t       <p>When using <code>MetricMathAnomalyDetector</code>, you cannot include the following parameters in the same operation:</p>\n\t\t\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>Dimensions</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>MetricName</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Namespace</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Stat</code>\n               </p>\n            </li>\n            <li>\n               <p>the <code>SingleMetricAnomalyDetector</code> parameters of <code>PutAnomalyDetectorInput</code>\n               </p>\n            </li>\n         </ul>\n\t\t\n\t\t       <p>Instead, specify the metric math anomaly detector attributes\n\t\t\tas part of the property <code>MetricMathAnomalyDetector</code>.</p>"
                     }
                 }
             }
@@ -3765,7 +3891,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates a <i>composite alarm</i>. When you create a composite\n\t\t\talarm, you specify a rule expression for the alarm that takes into account the alarm\n\t\t\tstates of other alarms that you have created. The composite alarm goes into ALARM state\n\t\t\tonly if all conditions of the rule are met.</p>\n\t\t       <p>The alarms specified in a composite alarm's rule expression can include metric alarms\n\t\t\tand other composite alarms.</p>\n\t\t       <p>Using composite alarms can reduce\n\t\t\talarm noise. You can create multiple metric alarms,\n\t\t\tand also create a composite alarm and\n\t\t\tset up alerts only\n\t\t\tfor the composite alarm. For example, you could create a composite\n\t\t\talarm that goes into ALARM state only when more than one of the underlying metric alarms\n\t\t\tare in ALARM state.</p>\n\t\t       <p>Currently, the only alarm actions that can be taken by composite alarms are notifying\n\t\t\tSNS topics.</p>\n\t\t       <note>\n            <p>It is possible to create a loop or cycle of composite alarms, where composite alarm A depends on composite alarm B, and \n\t\t\tcomposite alarm B also depends on composite alarm A. In this scenario, you can't delete any composite alarm that is part of the cycle \n\t\t\tbecause there is always still a composite alarm that depends on that alarm that you want to delete.</p>\n\t\t\t         <p>To get out of such a situation, you must\n\t\t\tbreak the cycle by changing the rule of one of the composite alarms in the cycle to remove a dependency that creates the cycle. The simplest\n\t\t\tchange to make to break a cycle is to change the <code>AlarmRule</code> of one of the alarms to <code>False</code>. </p>\n\t\t\t         <p>Additionally, the evaluation of composite alarms stops if CloudWatch detects a cycle in the evaluation path.\n\t\t</p>\n         </note>\n\t\t       <p>When this operation creates an alarm, the alarm state is immediately set to\n\t\t\t\t<code>INSUFFICIENT_DATA</code>. The alarm is then evaluated and its state is set\n\t\t\tappropriately. Any actions associated with the new state are then executed. For a\n\t\t\tcomposite alarm, this initial time after creation is the only time that\n\t\t\tthe\n\t\t\talarm can be in <code>INSUFFICIENT_DATA</code> state.</p>\n\t\t       <p>When you update an existing alarm, its state is left unchanged, but the update\n\t\t\tcompletely overwrites the previous configuration of the alarm.</p>\n\t\t\n\t\t       <p>If you are an IAM user, you must have <code>iam:CreateServiceLinkedRole</code> to create\n\t\t\ta composite alarm that has Systems Manager OpsItem actions.</p>"
+                "smithy.api#documentation": "<p>Creates or updates a <i>composite alarm</i>. When you create a composite\n\t\t\talarm, you specify a rule expression for the alarm that takes into account the alarm\n\t\t\tstates of other alarms that you have created. The composite alarm goes into ALARM state\n\t\t\tonly if all conditions of the rule are met.</p>\n\t\t       <p>The alarms specified in a composite alarm's rule expression can include metric alarms\n\t\t\tand other composite alarms.</p>\n\t\t       <p>Using composite alarms can reduce\n\t\t\talarm noise. You can create multiple metric alarms,\n\t\t\tand also create a composite alarm and\n\t\t\tset up alerts only\n\t\t\tfor the composite alarm. For example, you could create a composite\n\t\t\talarm that goes into ALARM state only when more than one of the underlying metric alarms\n\t\t\tare in ALARM state.</p>\n\t\t       <p>Currently, the only alarm actions that can be taken by composite alarms are notifying\n\t\t\tSNS topics.</p>\n\t\t       <note>\n            <p>It is possible to create a loop or cycle of composite alarms, where composite alarm A depends on composite alarm B, and \n\t\t\tcomposite alarm B also depends on composite alarm A. In this scenario, you can't delete any composite alarm that is part of the cycle \n\t\t\tbecause there is always still a composite alarm that depends on that alarm that you want to delete.</p>\n\t\t\t         <p>To get out of such a situation, you must\n\t\t\tbreak the cycle by changing the rule of one of the composite alarms in the cycle to remove a dependency that creates the cycle. The simplest\n\t\t\tchange to make to break a cycle is to change the <code>AlarmRule</code> of one of the alarms to <code>False</code>. </p>\n\t\t\t         <p>Additionally, the evaluation of composite alarms stops if CloudWatch detects a cycle in the evaluation path.\n\t\t</p>\n         </note>\n\t\t       <p>When this operation creates an alarm, the alarm state is immediately set to\n\t\t\t\t<code>INSUFFICIENT_DATA</code>. The alarm is then evaluated and its state is set\n\t\t\tappropriately. Any actions associated with the new state are then executed. For a\n\t\t\tcomposite alarm, this initial time after creation is the only time that\n\t\t\tthe\n\t\t\talarm can be in <code>INSUFFICIENT_DATA</code> state.</p>\n\t\t       <p>When you update an existing alarm, its state is left unchanged, but the update\n\t\t\tcompletely overwrites the previous configuration of the alarm.</p>\n\t\t\n\t\t       <p>To use this operation, you must be signed on with \n\t\t\tthe <code>cloudwatch:PutCompositeAlarm</code> permission that is scoped to <code>*</code>. You can't create a\n\t\t\tcomposite alarms if your <code>cloudwatch:PutCompositeAlarm</code> permission has a narrower scope.</p>\n\t\t\n\t\t       <p>If you are an IAM user, you must have <code>iam:CreateServiceLinkedRole</code> to create\n\t\t\ta composite alarm that has Systems Manager OpsItem actions.</p>"
             }
         },
         "com.amazonaws.cloudwatch#PutCompositeAlarmInput": {
@@ -3942,7 +4068,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates an alarm and associates it with the specified metric, metric math expression, \n\t\t\tor anomaly detection model.</p>\n\t\t\n\t\t\n\t\t       <p>Alarms based on anomaly detection models cannot have Auto Scaling actions.</p>\n\t\t       <p>When this operation creates an alarm, the alarm state is immediately set to\n\t\t\t<code>INSUFFICIENT_DATA</code>. The alarm is then evaluated and its state is set\n\t\t\tappropriately. Any actions associated with the new state are then executed.</p>\n\t\t       <p>When you update an existing alarm, its state is left unchanged, but the\n\t\t\tupdate completely overwrites the previous configuration of the alarm.</p>\n\n\t\t       <p>If you are an IAM user, you must have \n\t\t\tAmazon EC2 permissions for some alarm operations:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>The <code>iam:CreateServiceLinkedRole</code> for all alarms with EC2 actions</p>\n\t\t\t\t\n\t\t\t         </li>\n            <li>\n\t\t\t\t\n\t\t\t\t           <p>The <code>iam:CreateServiceLinkedRole</code> to create an alarm\n\t\t\t\t\twith Systems Manager OpsItem actions.</p>\n\t\t\t         </li>\n         </ul>\n\t\t\n\t\t\n\t\t\n\n\t\t\n\t\t\n\t\t       <p>The first time you create an alarm in the \n\t\t\tManagement Console, the CLI, or by using the PutMetricAlarm API, CloudWatch\n\t\t\tcreates the necessary service-linked role for you. The service-linked roles \n\t\t\tare called <code>AWSServiceRoleForCloudWatchEvents</code> and \n\t\t\t<code>AWSServiceRoleForCloudWatchAlarms_ActionSSM</code>.\n\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role\">Amazon Web Services service-linked role</a>.</p>\n\t\t\t\n\t\t       <p>\n            <b>Cross-account alarms</b>\n         </p>\n\t\t\n\t\t       <p>You can set an alarm on metrics in the current account, or in another \n\t\t\taccount. To create a cross-account alarm that watches a metric in a different account, you must have completed the following\n\t\t\tpre-requisites:</p>\n\t\t       <ul>\n            <li>\n               <p>The account where the metrics are located (the <i>sharing account</i>) must \n\t\t\t\talready have a sharing role named <b>CloudWatch-CrossAccountSharingRole</b>. If it does not already \n\t\t\t\thave this role, you must create it using the instructions in <b>Set up a\n\t\t\t\t\tsharing account</b> in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Cross-Account-Cross-Region.html#enable-cross-account-cross-Region\">\n\t\t\t\t\tCross-account cross-Region CloudWatch console</a>. The policy for that\n\t\t\t\trole must grant access\n\t\t\t\tto the ID of the account where you are creating the alarm.\n\t\t\t</p>\n            </li>\n            <li>\n               <p>The account where you are creating the alarm (the <i>monitoring account</i>) must \n\t\t\t\talready have a service-linked role named\n\t\t\t\t<b>AWSServiceRoleForCloudWatchCrossAccount</b> to allow \n\t\t\t\tCloudWatch to assume the sharing role in the sharing account. If it does not, you must create it following the directions in <b>Set up a\n\t\t\t\t\tmonitoring account</b> in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Cross-Account-Cross-Region.html#enable-cross-account-cross-Region\">\n\t\t\t\t\t\tCross-account cross-Region CloudWatch console</a>.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Creates or updates an alarm and associates it with the specified metric, metric math expression, \n\t\t\tor anomaly detection model.</p>\n\t\t\n\t\t\n\t\t       <p>Alarms based on anomaly detection models cannot have Auto Scaling actions.</p>\n\t\t       <p>When this operation creates an alarm, the alarm state is immediately set to\n\t\t\t<code>INSUFFICIENT_DATA</code>. The alarm is then evaluated and its state is set\n\t\t\tappropriately. Any actions associated with the new state are then executed.</p>\n\t\t       <p>When you update an existing alarm, its state is left unchanged, but the\n\t\t\tupdate completely overwrites the previous configuration of the alarm.</p>\n\n\t\t       <p>If you are an IAM user, you must have \n\t\t\tAmazon EC2 permissions for some alarm operations:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>The <code>iam:CreateServiceLinkedRole</code> for all alarms with EC2 actions</p>\n\t\t\t\t\n\t\t\t         </li>\n            <li>\n\t\t\t\t\n\t\t\t\t           <p>The <code>iam:CreateServiceLinkedRole</code> to create an alarm\n\t\t\t\t\twith Systems Manager OpsItem actions.</p>\n\t\t\t         </li>\n         </ul>\n\t\t\n\t\t\n\t\t\n\n\t\t\n\t\t\n\t\t       <p>The first time you create an alarm in the \n\t\t\tAmazon Web Services Management Console, the CLI, or by using the PutMetricAlarm API, CloudWatch\n\t\t\tcreates the necessary service-linked role for you. The service-linked roles \n\t\t\tare called <code>AWSServiceRoleForCloudWatchEvents</code> and \n\t\t\t<code>AWSServiceRoleForCloudWatchAlarms_ActionSSM</code>.\n\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role\">Amazon Web Services service-linked role</a>.</p>\n\t\t\t\n\t\t       <p>\n            <b>Cross-account alarms</b>\n         </p>\n\t\t\n\t\t       <p>You can set an alarm on metrics in the current account, or in another \n\t\t\taccount. To create a cross-account alarm that watches a metric in a different account, you must have completed the following\n\t\t\tpre-requisites:</p>\n\t\t       <ul>\n            <li>\n               <p>The account where the metrics are located (the <i>sharing account</i>) must \n\t\t\t\talready have a sharing role named <b>CloudWatch-CrossAccountSharingRole</b>. If it does not already \n\t\t\t\thave this role, you must create it using the instructions in <b>Set up a\n\t\t\t\t\tsharing account</b> in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Cross-Account-Cross-Region.html#enable-cross-account-cross-Region\">\n\t\t\t\t\tCross-account cross-Region CloudWatch console</a>. The policy for that\n\t\t\t\trole must grant access\n\t\t\t\tto the ID of the account where you are creating the alarm.\n\t\t\t</p>\n            </li>\n            <li>\n               <p>The account where you are creating the alarm (the <i>monitoring account</i>) must \n\t\t\t\talready have a service-linked role named\n\t\t\t\t<b>AWSServiceRoleForCloudWatchCrossAccount</b> to allow \n\t\t\t\tCloudWatch to assume the sharing role in the sharing account. If it does not, you must create it following the directions in <b>Set up a\n\t\t\t\t\tmonitoring account</b> in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Cross-Account-Cross-Region.html#enable-cross-account-cross-Region\">\n\t\t\t\t\t\tCross-account cross-Region CloudWatch console</a>.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.cloudwatch#PutMetricAlarmInput": {
@@ -4153,7 +4279,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates a metric stream. Metric streams can automatically stream CloudWatch metrics \n\t\t\tto Amazon Web Services destinations including\n\t\t\tAmazon S3 and to many third-party solutions.</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Metric-Streams.html\">\n\t\tUsing Metric Streams</a>.</p>\n\t\t       <p>To create a metric stream, \n\t\t\tyou must be logged on to an account that has the <code>iam:PassRole</code> permission\n\t\t\tand either the <code>CloudWatchFullAccess</code>\n\t\tpolicy or the <code>cloudwatch:PutMetricStream</code> \n\t\tpermission.</p>\n\t\t       <p>When you create or update a metric stream, you choose one of the following:</p>\n\t\t       <ul>\n            <li>\n               <p>Stream metrics from all metric namespaces in the account.</p>\n            </li>\n            <li>\n               <p>Stream metrics from all metric namespaces in the account, except\n\t\t\t\tfor the namespaces that you list in <code>ExcludeFilters</code>.</p>\n            </li>\n            <li>\n               <p>Stream metrics from only the metric namespaces that you list in \n\t\t\t\t<code>IncludeFilters</code>.</p>\n            </li>\n         </ul>\n\t\t\n\t\t       <p>When you use <code>PutMetricStream</code> to create a new metric stream, the stream \n\t\tis created in the <code>running</code> state. If you use it to update an existing stream, \n\t\tthe state of the stream is not changed.</p>"
+                "smithy.api#documentation": "<p>Creates or updates a metric stream. Metric streams can automatically stream CloudWatch metrics \n\t\t\tto Amazon Web Services destinations including\n\t\t\tAmazon S3 and to many third-party solutions.</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html\">\n\t\tUsing Metric Streams</a>.</p>\n\t\t       <p>To create a metric stream, \n\t\t\tyou must be logged on to an account that has the <code>iam:PassRole</code> permission\n\t\t\tand either the <code>CloudWatchFullAccess</code>\n\t\tpolicy or the <code>cloudwatch:PutMetricStream</code> \n\t\tpermission.</p>\n\t\t       <p>When you create or update a metric stream, you choose one of the following:</p>\n\t\t       <ul>\n            <li>\n               <p>Stream metrics from all metric namespaces in the account.</p>\n            </li>\n            <li>\n               <p>Stream metrics from all metric namespaces in the account, except\n\t\t\t\tfor the namespaces that you list in <code>ExcludeFilters</code>.</p>\n            </li>\n            <li>\n               <p>Stream metrics from only the metric namespaces that you list in \n\t\t\t\t<code>IncludeFilters</code>.</p>\n            </li>\n         </ul>\n\t\t\n\t\t       <p>When you use <code>PutMetricStream</code> to create a new metric stream, the stream \n\t\tis created in the <code>running</code> state. If you use it to update an existing stream, \n\t\tthe state of the stream is not changed.</p>"
             }
         },
         "com.amazonaws.cloudwatch#PutMetricStreamInput": {
@@ -4389,6 +4515,38 @@
                         "smithy.api#documentation": "<p>The reason that this alarm is set to this specific state, in JSON format.</p>\n\t\t       <p>For SNS or EC2 alarm actions, this is just informational. But for EC2 Auto Scaling or application Auto Scaling\n\t\talarm actions, the Auto Scaling policy uses the information in this field to take the correct action.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.cloudwatch#SingleMetricAnomalyDetector": {
+            "type": "structure",
+            "members": {
+                "Namespace": {
+                    "target": "com.amazonaws.cloudwatch#Namespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace of the metric to create the anomaly detection model for.</p>"
+                    }
+                },
+                "MetricName": {
+                    "target": "com.amazonaws.cloudwatch#MetricName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the metric to create the anomaly detection model for.</p>"
+                    }
+                },
+                "Dimensions": {
+                    "target": "com.amazonaws.cloudwatch#Dimensions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric dimensions to create the anomaly detection model for.</p>"
+                    }
+                },
+                "Stat": {
+                    "target": "com.amazonaws.cloudwatch#AnomalyDetectorMetricStat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The statistic to use for the metric and anomaly detection model.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Designates the CloudWatch metric and statistic that provides the time series the anomaly detector\n\t\t\tuses as input.</p>"
             }
         },
         "com.amazonaws.cloudwatch#Size": {

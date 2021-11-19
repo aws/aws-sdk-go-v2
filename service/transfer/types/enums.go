@@ -121,6 +121,7 @@ const (
 	IdentityProviderTypeServiceManaged      IdentityProviderType = "SERVICE_MANAGED"
 	IdentityProviderTypeApiGateway          IdentityProviderType = "API_GATEWAY"
 	IdentityProviderTypeAwsDirectoryService IdentityProviderType = "AWS_DIRECTORY_SERVICE"
+	IdentityProviderTypeAwsLambda           IdentityProviderType = "AWS_LAMBDA"
 )
 
 // Values returns all known values for IdentityProviderType. Note that this can be
@@ -131,6 +132,7 @@ func (IdentityProviderType) Values() []IdentityProviderType {
 		"SERVICE_MANAGED",
 		"API_GATEWAY",
 		"AWS_DIRECTORY_SERVICE",
+		"AWS_LAMBDA",
 	}
 }
 
