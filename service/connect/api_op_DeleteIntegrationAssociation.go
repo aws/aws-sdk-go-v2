@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Amazon Web Services resource association from an Amazon Connect
-// instance. The association must not have any use cases associated with it.
+// Deletes an AWS resource association from an Amazon Connect instance. The
+// association must not have any use cases associated with it.
 func (c *Client) DeleteIntegrationAssociation(ctx context.Context, params *DeleteIntegrationAssociationInput, optFns ...func(*Options)) (*DeleteIntegrationAssociationOutput, error) {
 	if params == nil {
 		params = &DeleteIntegrationAssociationInput{}

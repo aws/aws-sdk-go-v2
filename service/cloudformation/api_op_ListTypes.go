@@ -41,9 +41,10 @@ type ListTypesInput struct {
 	// and can no longer be used in CloudFormation operations.
 	DeprecatedStatus types.DeprecatedStatus
 
-	// Filter criteria to use in determining which extensions to return. If you specify
-	// a filter, CloudFormation ignores any specified Visibility value when returning
-	// the list of types.
+	// Filter criteria to use in determining which extensions to return. Filters must
+	// be compatible with Visibility to return valid results. For example, specifying
+	// AWS_TYPES for Category and PRIVATE for Visibility returns an empty list of
+	// types, but specifying PUBLIC for Visibility returns the desired list.
 	Filters *types.TypeFilters
 
 	// The maximum number of results to be returned with a single call. If the number

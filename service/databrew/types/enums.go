@@ -2,6 +2,24 @@
 
 package types
 
+type AnalyticsMode string
+
+// Enum values for AnalyticsMode
+const (
+	AnalyticsModeEnable  AnalyticsMode = "ENABLE"
+	AnalyticsModeDisable AnalyticsMode = "DISABLE"
+)
+
+// Values returns all known values for AnalyticsMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AnalyticsMode) Values() []AnalyticsMode {
+	return []AnalyticsMode{
+		"ENABLE",
+		"DISABLE",
+	}
+}
+
 type CompressionFormat string
 
 // Enum values for CompressionFormat
@@ -327,5 +345,61 @@ func (Source) Values() []Source {
 		"S3",
 		"DATA-CATALOG",
 		"DATABASE",
+	}
+}
+
+type ThresholdType string
+
+// Enum values for ThresholdType
+const (
+	ThresholdTypeGreaterThanOrEqual ThresholdType = "GREATER_THAN_OR_EQUAL"
+	ThresholdTypeLessThanOrEqual    ThresholdType = "LESS_THAN_OR_EQUAL"
+	ThresholdTypeGreaterThan        ThresholdType = "GREATER_THAN"
+	ThresholdTypeLessThan           ThresholdType = "LESS_THAN"
+)
+
+// Values returns all known values for ThresholdType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ThresholdType) Values() []ThresholdType {
+	return []ThresholdType{
+		"GREATER_THAN_OR_EQUAL",
+		"LESS_THAN_OR_EQUAL",
+		"GREATER_THAN",
+		"LESS_THAN",
+	}
+}
+
+type ThresholdUnit string
+
+// Enum values for ThresholdUnit
+const (
+	ThresholdUnitCount      ThresholdUnit = "COUNT"
+	ThresholdUnitPercentage ThresholdUnit = "PERCENTAGE"
+)
+
+// Values returns all known values for ThresholdUnit. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ThresholdUnit) Values() []ThresholdUnit {
+	return []ThresholdUnit{
+		"COUNT",
+		"PERCENTAGE",
+	}
+}
+
+type ValidationMode string
+
+// Enum values for ValidationMode
+const (
+	ValidationModeCheckAll ValidationMode = "CHECK_ALL"
+)
+
+// Values returns all known values for ValidationMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ValidationMode) Values() []ValidationMode {
+	return []ValidationMode{
+		"CHECK_ALL",
 	}
 }

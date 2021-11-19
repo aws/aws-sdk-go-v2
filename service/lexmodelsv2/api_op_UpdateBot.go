@@ -31,7 +31,8 @@ func (c *Client) UpdateBot(ctx context.Context, params *UpdateBotInput, optFns .
 type UpdateBotInput struct {
 
 	// The unique identifier of the bot to update. This identifier is returned by the
-	// CreateBot operation.
+	// CreateBot (https://docs.aws.amazon.com/lexv2/latest/dg/API_CreateBot.html)
+	// operation.
 	//
 	// This member is required.
 	BotId *string

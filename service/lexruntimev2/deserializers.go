@@ -1702,6 +1702,15 @@ func awsRestjson1_deserializeDocumentDialogAction(v **types.DialogAction, value 
 
 	for key, value := range shape {
 		switch key {
+		case "slotElicitationStyle":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StyleType to be of type string, got %T instead", value)
+				}
+				sv.SlotElicitationStyle = types.StyleType(jtv)
+			}
+
 		case "slotToElicit":
 			if value != nil {
 				jtv, ok := value.(string)

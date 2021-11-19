@@ -30,15 +30,15 @@ func (c *Client) GetChangeLogs(ctx context.Context, params *GetChangeLogsInput, 
 
 type GetChangeLogsInput struct {
 
-	// The identifier for the assessment.
+	// The unique identifier for the assessment.
 	//
 	// This member is required.
 	AssessmentId *string
 
-	// The identifier for the control.
+	// The unique identifier for the control.
 	ControlId *string
 
-	// The identifier for the control set.
+	// The unique identifier for the control set.
 	ControlSetId *string
 
 	// Represents the maximum number of results on a page or for an API request call.

@@ -42,6 +42,10 @@ type ListConfigurationProfilesInput struct {
 	// A token to start the list. Use this token to get the next set of results.
 	NextToken *string
 
+	// A filter based on the type of configurations that the configuration profile
+	// contains. A configuration can be a feature flag or a free-form configuration.
+	Type *string
+
 	noSmithyDocumentSerde
 }
 

@@ -188,6 +188,10 @@ type UpdateStackSetInput struct {
 	// have permissions to perform operations on the stack set.
 	ExecutionRoleName *string
 
+	// Describes whether StackSets performs non-conflicting operations concurrently and
+	// queues conflicting operations.
+	ManagedExecution *types.ManagedExecution
+
 	// The unique ID for this stack set operation. The operation ID also functions as
 	// an idempotency token, to ensure that CloudFormation performs the stack set
 	// operation only once, even if you retry the request multiple times. You might

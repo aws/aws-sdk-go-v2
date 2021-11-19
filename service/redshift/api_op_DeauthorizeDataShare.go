@@ -30,7 +30,7 @@ func (c *Client) DeauthorizeDataShare(ctx context.Context, params *DeauthorizeDa
 type DeauthorizeDataShareInput struct {
 
 	// The identifier of the data consumer that is to have authorization removed from
-	// the datashare. This identifier is an AWS account ID.
+	// the datashare. This identifier is an Amazon Web Services account ID.
 	//
 	// This member is required.
 	ConsumerIdentifier *string

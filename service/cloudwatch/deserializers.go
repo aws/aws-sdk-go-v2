@@ -196,6 +196,9 @@ func awsAwsquery_deserializeOpErrorDeleteAnomalyDetector(response *smithyhttp.Re
 	case strings.EqualFold("InternalServiceError", errorCode):
 		return awsAwsquery_deserializeErrorInternalServiceFault(response, errorBody)
 
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
+		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
+
 	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
@@ -975,6 +978,9 @@ func awsAwsquery_deserializeOpErrorDescribeAnomalyDetectors(response *smithyhttp
 
 	case strings.EqualFold("InvalidNextToken", errorCode):
 		return awsAwsquery_deserializeErrorInvalidNextToken(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
+		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
 	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
@@ -2690,6 +2696,9 @@ func awsAwsquery_deserializeOpErrorPutAnomalyDetector(response *smithyhttp.Respo
 	switch {
 	case strings.EqualFold("InternalServiceError", errorCode):
 		return awsAwsquery_deserializeErrorInternalServiceFault(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterCombination", errorCode):
+		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
 	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
@@ -4613,6 +4622,12 @@ func awsAwsquery_deserializeDocumentAnomalyDetector(v **types.AnomalyDetector, d
 				return err
 			}
 
+		case strings.EqualFold("MetricMathAnomalyDetector", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentMetricMathAnomalyDetector(&sv.MetricMathAnomalyDetector, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("MetricName", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -4637,6 +4652,12 @@ func awsAwsquery_deserializeDocumentAnomalyDetector(v **types.AnomalyDetector, d
 			{
 				xtv := string(val)
 				sv.Namespace = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("SingleMetricAnomalyDetector", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentSingleMetricAnomalyDetector(&sv.SingleMetricAnomalyDetector, nodeDecoder); err != nil {
+				return err
 			}
 
 		case strings.EqualFold("Stat", t.Name.Local):
@@ -8364,6 +8385,48 @@ func awsAwsquery_deserializeDocumentMetricDataResultsUnwrapped(v *[]types.Metric
 	*v = sv
 	return nil
 }
+func awsAwsquery_deserializeDocumentMetricMathAnomalyDetector(v **types.MetricMathAnomalyDetector, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.MetricMathAnomalyDetector
+	if *v == nil {
+		sv = &types.MetricMathAnomalyDetector{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("MetricDataQueries", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentMetricDataQueries(&sv.MetricDataQueries, nodeDecoder); err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeDocumentMetrics(v *[]types.Metric, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9232,6 +9295,87 @@ func awsAwsquery_deserializeDocumentResourceNotFoundException(v **types.Resource
 			{
 				xtv := string(val)
 				sv.ResourceType = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentSingleMetricAnomalyDetector(v **types.SingleMetricAnomalyDetector, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.SingleMetricAnomalyDetector
+	if *v == nil {
+		sv = &types.SingleMetricAnomalyDetector{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Dimensions", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentDimensions(&sv.Dimensions, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("MetricName", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.MetricName = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("Namespace", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Namespace = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("Stat", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Stat = ptr.String(xtv)
 			}
 
 		default:

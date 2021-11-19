@@ -85,6 +85,9 @@ type UpdateProfileJobInput struct {
 	// timeout period ends with a status of TIMEOUT.
 	Timeout int32
 
+	// List of validation configurations that are applied to the profile job.
+	ValidationConfigurations []types.ValidationConfiguration
+
 	noSmithyDocumentSerde
 }
 

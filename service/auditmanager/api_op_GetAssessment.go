@@ -29,7 +29,7 @@ func (c *Client) GetAssessment(ctx context.Context, params *GetAssessmentInput, 
 
 type GetAssessmentInput struct {
 
-	// The identifier for the assessment.
+	// The unique identifier for the assessment.
 	//
 	// This member is required.
 	AssessmentId *string

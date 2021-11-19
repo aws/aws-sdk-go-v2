@@ -46,6 +46,24 @@ func (Action) Values() []Action {
 	}
 }
 
+type ApplicationAttribute string
+
+// Enum values for ApplicationAttribute
+const (
+	ApplicationAttributeLaunchParameters ApplicationAttribute = "LAUNCH_PARAMETERS"
+	ApplicationAttributeWorkingDirectory ApplicationAttribute = "WORKING_DIRECTORY"
+)
+
+// Values returns all known values for ApplicationAttribute. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ApplicationAttribute) Values() []ApplicationAttribute {
+	return []ApplicationAttribute{
+		"LAUNCH_PARAMETERS",
+		"WORKING_DIRECTORY",
+	}
+}
+
 type AuthenticationType string
 
 // Enum values for AuthenticationType
@@ -74,6 +92,7 @@ const (
 	FleetAttributeVpcConfigurationSecurityGroupIds FleetAttribute = "VPC_CONFIGURATION_SECURITY_GROUP_IDS"
 	FleetAttributeDomainJoinInfo                   FleetAttribute = "DOMAIN_JOIN_INFO"
 	FleetAttributeIamRoleArn                       FleetAttribute = "IAM_ROLE_ARN"
+	FleetAttributeUsbDeviceFilterStrings           FleetAttribute = "USB_DEVICE_FILTER_STRINGS"
 )
 
 // Values returns all known values for FleetAttribute. Note that this can be
@@ -85,6 +104,7 @@ func (FleetAttribute) Values() []FleetAttribute {
 		"VPC_CONFIGURATION_SECURITY_GROUP_IDS",
 		"DOMAIN_JOIN_INFO",
 		"IAM_ROLE_ARN",
+		"USB_DEVICE_FILTER_STRINGS",
 	}
 }
 
@@ -190,6 +210,7 @@ type FleetType string
 const (
 	FleetTypeAlwaysOn FleetType = "ALWAYS_ON"
 	FleetTypeOnDemand FleetType = "ON_DEMAND"
+	FleetTypeElastic  FleetType = "ELASTIC"
 )
 
 // Values returns all known values for FleetType. Note that this can be expanded in
@@ -199,6 +220,7 @@ func (FleetType) Values() []FleetType {
 	return []FleetType{
 		"ALWAYS_ON",
 		"ON_DEMAND",
+		"ELASTIC",
 	}
 }
 
@@ -348,6 +370,7 @@ const (
 	PlatformTypeWindows           PlatformType = "WINDOWS"
 	PlatformTypeWindowsServer2016 PlatformType = "WINDOWS_SERVER_2016"
 	PlatformTypeWindowsServer2019 PlatformType = "WINDOWS_SERVER_2019"
+	PlatformTypeAmazonLinux2      PlatformType = "AMAZON_LINUX2"
 )
 
 // Values returns all known values for PlatformType. Note that this can be expanded
@@ -358,6 +381,7 @@ func (PlatformType) Values() []PlatformType {
 		"WINDOWS",
 		"WINDOWS_SERVER_2016",
 		"WINDOWS_SERVER_2019",
+		"AMAZON_LINUX2",
 	}
 }
 

@@ -49,7 +49,7 @@ type ListLambdaFunctionsInput struct {
 
 type ListLambdaFunctionsOutput struct {
 
-	// The Lambda function ARNs associated with the specified instance.
+	// The Lambdafunction ARNs associated with the specified instance.
 	LambdaFunctions []string
 
 	// If there are additional results, this is the token for the next set of results.

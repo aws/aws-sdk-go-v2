@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a new configuration in the AppConfig configuration store.
+// Creates a new configuration in the AppConfig hosted configuration store.
 func (c *Client) CreateHostedConfigurationVersion(ctx context.Context, params *CreateHostedConfigurationVersionInput, optFns ...func(*Options)) (*CreateHostedConfigurationVersionOutput, error) {
 	if params == nil {
 		params = &CreateHostedConfigurationVersionInput{}
@@ -45,7 +45,7 @@ type CreateHostedConfigurationVersionInput struct {
 
 	// A standard MIME type describing the format of the configuration content. For
 	// more information, see Content-Type
-	// (https://docs.aws.amazon.com/https:/www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17).
+	// (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17).
 	//
 	// This member is required.
 	ContentType *string
@@ -56,7 +56,8 @@ type CreateHostedConfigurationVersionInput struct {
 	// An optional locking token used to prevent race conditions from overwriting
 	// configuration updates when creating a new version. To ensure your data is not
 	// overwritten when creating multiple hosted configuration versions in rapid
-	// succession, specify the version of the latest hosted configuration version.
+	// succession, specify the version number of the latest hosted configuration
+	// version.
 	LatestVersionNumber int32
 
 	noSmithyDocumentSerde
@@ -75,7 +76,7 @@ type CreateHostedConfigurationVersionOutput struct {
 
 	// A standard MIME type describing the format of the configuration content. For
 	// more information, see Content-Type
-	// (https://docs.aws.amazon.com/https:/www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17).
+	// (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17).
 	ContentType *string
 
 	// A description of the configuration.

@@ -13,7 +13,32 @@ import (
 )
 
 // Updates an event source mapping. You can change the function that Lambda
-// invokes, or pause invocation and resume later from the same location. The
+// invokes, or pause invocation and resume later from the same location. For
+// details about how to configure different event sources, see the following
+// topics.
+//
+// * Amazon DynamoDB Streams
+// (https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-dynamodb-eventsourcemapping)
+//
+// *
+// Amazon Kinesis
+// (https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-eventsourcemapping)
+//
+// *
+// Amazon SQS
+// (https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-eventsource)
+//
+// *
+// Amazon MQ and RabbitMQ
+// (https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-eventsourcemapping)
+//
+// *
+// Amazon MSK (https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html)
+//
+// *
+// Apache Kafka (https://docs.aws.amazon.com/lambda/latest/dg/kafka-smaa.html)
+//
+// The
 // following error handling options are only available for stream sources (DynamoDB
 // and Kinesis):
 //
@@ -34,6 +59,33 @@ import (
 //
 // * ParallelizationFactor - Process
 // multiple batches from each shard concurrently.
+//
+// For information about which
+// configuration parameters apply to each event source, see the following
+// topics.
+//
+// * Amazon DynamoDB Streams
+// (https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-ddb-params)
+//
+// *
+// Amazon Kinesis
+// (https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-params)
+//
+// *
+// Amazon SQS
+// (https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#services-sqs-params)
+//
+// *
+// Amazon MQ and RabbitMQ
+// (https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-params)
+//
+// *
+// Amazon MSK
+// (https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-parms)
+//
+// *
+// Apache Kafka
+// (https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-kafka-parms)
 func (c *Client) UpdateEventSourceMapping(ctx context.Context, params *UpdateEventSourceMappingInput, optFns ...func(*Options)) (*UpdateEventSourceMappingOutput, error) {
 	if params == nil {
 		params = &UpdateEventSourceMappingInput{}

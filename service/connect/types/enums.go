@@ -108,6 +108,32 @@ func (ContactFlowType) Values() []ContactFlowType {
 	}
 }
 
+type ContactInitiationMethod string
+
+// Enum values for ContactInitiationMethod
+const (
+	ContactInitiationMethodInbound       ContactInitiationMethod = "INBOUND"
+	ContactInitiationMethodOutbound      ContactInitiationMethod = "OUTBOUND"
+	ContactInitiationMethodTransfer      ContactInitiationMethod = "TRANSFER"
+	ContactInitiationMethodQueueTransfer ContactInitiationMethod = "QUEUE_TRANSFER"
+	ContactInitiationMethodCallback      ContactInitiationMethod = "CALLBACK"
+	ContactInitiationMethodApi           ContactInitiationMethod = "API"
+)
+
+// Values returns all known values for ContactInitiationMethod. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ContactInitiationMethod) Values() []ContactInitiationMethod {
+	return []ContactInitiationMethod{
+		"INBOUND",
+		"OUTBOUND",
+		"TRANSFER",
+		"QUEUE_TRANSFER",
+		"CALLBACK",
+		"API",
+	}
+}
+
 type CurrentMetricName string
 
 // Enum values for CurrentMetricName
@@ -990,11 +1016,30 @@ func (QuickConnectType) Values() []QuickConnectType {
 	}
 }
 
+type ReferenceStatus string
+
+// Enum values for ReferenceStatus
+const (
+	ReferenceStatusApproved ReferenceStatus = "APPROVED"
+	ReferenceStatusRejected ReferenceStatus = "REJECTED"
+)
+
+// Values returns all known values for ReferenceStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReferenceStatus) Values() []ReferenceStatus {
+	return []ReferenceStatus{
+		"APPROVED",
+		"REJECTED",
+	}
+}
+
 type ReferenceType string
 
 // Enum values for ReferenceType
 const (
-	ReferenceTypeUrl ReferenceType = "URL"
+	ReferenceTypeUrl        ReferenceType = "URL"
+	ReferenceTypeAttachment ReferenceType = "ATTACHMENT"
 )
 
 // Values returns all known values for ReferenceType. Note that this can be
@@ -1003,6 +1048,7 @@ const (
 func (ReferenceType) Values() []ReferenceType {
 	return []ReferenceType{
 		"URL",
+		"ATTACHMENT",
 	}
 }
 

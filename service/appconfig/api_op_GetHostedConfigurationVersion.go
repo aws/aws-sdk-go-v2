@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get information about a specific configuration version.
+// Retrieves information about a specific configuration version.
 func (c *Client) GetHostedConfigurationVersion(ctx context.Context, params *GetHostedConfigurationVersionInput, optFns ...func(*Options)) (*GetHostedConfigurationVersionOutput, error) {
 	if params == nil {
 		params = &GetHostedConfigurationVersionInput{}
@@ -59,7 +59,7 @@ type GetHostedConfigurationVersionOutput struct {
 
 	// A standard MIME type describing the format of the configuration content. For
 	// more information, see Content-Type
-	// (https://docs.aws.amazon.com/https:/www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17).
+	// (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17).
 	ContentType *string
 
 	// A description of the configuration.

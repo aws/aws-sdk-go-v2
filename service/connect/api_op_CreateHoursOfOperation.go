@@ -54,7 +54,7 @@ type CreateHoursOfOperationInput struct {
 	// The description of the hours of operation.
 	Description *string
 
-	// The tags used to organize, track, or control access for this resource.
+	// One or more tags.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

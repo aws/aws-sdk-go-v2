@@ -36,7 +36,7 @@ type DescribeJobDefinitionsInput struct {
 	JobDefinitionName *string
 
 	// A list of up to 100 job definitions. Each entry in the list can either be an ARN
-	// of the form
+	// in the format
 	// arn:aws:batch:${Region}:${Account}:job-definition/${JobDefinitionName}:${Revision}
 	// or a short version using the form ${JobDefinitionName}:${Revision}.
 	JobDefinitions []string

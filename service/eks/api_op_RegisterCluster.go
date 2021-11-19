@@ -21,8 +21,8 @@ import (
 // containing the activationID and activationCode must be applied to the Kubernetes
 // cluster through it's native provider to provide visibility. After the Manifest
 // is updated and applied, then the connected cluster is visible to the Amazon EKS
-// control plane. If the Manifest is not applied within a set amount of time, then
-// the connected cluster will no longer be visible and must be deregistered. See
+// control plane. If the Manifest is not applied within three days, then the
+// connected cluster will no longer be visible and must be deregistered. See
 // DeregisterCluster.
 func (c *Client) RegisterCluster(ctx context.Context, params *RegisterClusterInput, optFns ...func(*Options)) (*RegisterClusterOutput, error) {
 	if params == nil {
@@ -47,7 +47,7 @@ type RegisterClusterInput struct {
 	// This member is required.
 	ConnectorConfig *types.ConnectorConfigRequest
 
-	// Define a unique name for this cluster within your AWS account.
+	// Define a unique name for this cluster for your Region.
 	//
 	// This member is required.
 	Name *string
@@ -55,6 +55,12 @@ type RegisterClusterInput struct {
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request.
 	ClientRequestToken *string
+
+	// The metadata that you apply to the cluster to assist with categorization and
+	// organization. Each tag consists of a key and an optional value, both of which
+	// you define. Cluster tags do not propagate to any other resources associated with
+	// the cluster.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }

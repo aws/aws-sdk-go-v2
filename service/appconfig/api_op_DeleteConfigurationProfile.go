@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete a configuration profile. Deleting a configuration profile does not delete
-// a configuration from a host.
+// Deletes a configuration profile. Deleting a configuration profile does not
+// delete a configuration from a host.
 func (c *Client) DeleteConfigurationProfile(ctx context.Context, params *DeleteConfigurationProfileInput, optFns ...func(*Options)) (*DeleteConfigurationProfileOutput, error) {
 	if params == nil {
 		params = &DeleteConfigurationProfileInput{}

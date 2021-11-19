@@ -72,8 +72,9 @@ func (c *Client) CreateComputeEnvironment(ctx context.Context, params *CreateCom
 // Contains the parameters for CreateComputeEnvironment.
 type CreateComputeEnvironmentInput struct {
 
-	// The name for your compute environment. Up to 128 letters (uppercase and
-	// lowercase), numbers, hyphens, and underscores are allowed.
+	// The name for your compute environment. It can be up to 128 letters long. It can
+	// contain uppercase and lowercase letters, numbers, hyphens (-), and underscores
+	// (_).
 	//
 	// This member is required.
 	ComputeEnvironmentName *string
@@ -140,8 +141,8 @@ type CreateComputeEnvironmentInput struct {
 
 	// The maximum number of vCPUs for an unmanaged compute environment. This parameter
 	// is only used for fair share scheduling to reserve vCPU capacity for new share
-	// identifiers. If this parameter is not provided for a fair share job queue, no
-	// vCPU capacity will be reserved. This parameter is only supported when the type
+	// identifiers. If this parameter isn't provided for a fair share job queue, no
+	// vCPU capacity is reserved. This parameter is only supported when the type
 	// parameter is set to UNMANAGED/
 	UnmanagedvCpus int32
 
@@ -153,8 +154,9 @@ type CreateComputeEnvironmentOutput struct {
 	// The Amazon Resource Name (ARN) of the compute environment.
 	ComputeEnvironmentArn *string
 
-	// The name of the compute environment. Up to 128 letters (uppercase and
-	// lowercase), numbers, hyphens, and underscores are allowed.
+	// The name of the compute environment. It can be up to 128 letters long. It can
+	// contain uppercase and lowercase letters, numbers, hyphens (-), and underscores
+	// (_).
 	ComputeEnvironmentName *string
 
 	// Metadata pertaining to the operation's result.

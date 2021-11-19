@@ -29,8 +29,9 @@ func (c *Client) CreateSchedulingPolicy(ctx context.Context, params *CreateSched
 
 type CreateSchedulingPolicyInput struct {
 
-	// The name of the scheduling policy. Up to 128 letters (uppercase and lowercase),
-	// numbers, hyphens, and underscores are allowed.
+	// The name of the scheduling policy. It can be up to 128 letters long. It can
+	// contain uppercase and lowercase letters, numbers, hyphens (-), and underscores
+	// (_).
 	//
 	// This member is required.
 	Name *string

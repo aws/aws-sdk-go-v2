@@ -94919,6 +94919,22 @@ func awsEc2query_deserializeDocumentSubnet(v **types.Subnet, decoder smithyxml.N
 				sv.DefaultForAz = ptr.Bool(xtv)
 			}
 
+		case strings.EqualFold("enableDns64", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.EnableDns64 = ptr.Bool(xtv)
+			}
+
 		case strings.EqualFold("ipv6CidrBlockAssociationSet", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsEc2query_deserializeDocumentSubnetIpv6CidrBlockAssociationSet(&sv.Ipv6CidrBlockAssociationSet, nodeDecoder); err != nil {

@@ -605,6 +605,80 @@ type ControlComment struct {
 	noSmithyDocumentSerde
 }
 
+// A summary of the latest analytics data for a specific control domain. Control
+// domain insights are grouped by control domain, and ranked by the highest total
+// count of non-compliant evidence.
+type ControlDomainInsights struct {
+
+	// The number of controls in the control domain that collected non-compliant
+	// evidence on the lastUpdated date.
+	ControlsCountByNoncompliantEvidence *int32
+
+	// A breakdown of the compliance check status for the evidence that’s associated
+	// with the control domain.
+	EvidenceInsights *EvidenceInsights
+
+	// The unique identifier for the control domain.
+	Id *string
+
+	// The time when the control domain insights were last updated.
+	LastUpdated *time.Time
+
+	// The name of the control domain.
+	Name *string
+
+	// The total number of controls in the control domain.
+	TotalControlsCount *int32
+
+	noSmithyDocumentSerde
+}
+
+// A summary of the latest analytics data for a specific control in a specific
+// active assessment. Control insights are grouped by control domain, and ranked by
+// the highest total count of non-compliant evidence.
+type ControlInsightsMetadataByAssessmentItem struct {
+
+	// The name of the control set that the assessment control belongs to.
+	ControlSetName *string
+
+	// A breakdown of the compliance check status for the evidence that’s associated
+	// with the assessment control.
+	EvidenceInsights *EvidenceInsights
+
+	// The unique identifier for the assessment control.
+	Id *string
+
+	// The time when the assessment control insights were last updated.
+	LastUpdated *time.Time
+
+	// The name of the assessment control.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of the latest analytics data for a specific control. This data
+// reflects the total counts for the specified control across all active
+// assessments. Control insights are grouped by control domain, and ranked by the
+// highest total count of non-compliant evidence.
+type ControlInsightsMetadataItem struct {
+
+	// A breakdown of the compliance check status for the evidence that’s associated
+	// with the control.
+	EvidenceInsights *EvidenceInsights
+
+	// The unique identifier for the control.
+	Id *string
+
+	// The time when the control insights were last updated.
+	LastUpdated *time.Time
+
+	// The name of the control.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 // The data source that determines where Audit Manager collects evidence from for
 // the control.
 type ControlMappingSource struct {
@@ -885,6 +959,32 @@ type Evidence struct {
 	noSmithyDocumentSerde
 }
 
+// A breakdown of the latest compliance check status for the evidence in your Audit
+// Manager assessments.
+type EvidenceInsights struct {
+
+	// The number of compliance check evidence that Audit Manager classified as
+	// compliant. This includes evidence that was collected from Security Hub with a
+	// Pass ruling, or collected from Config with a Compliant ruling.
+	CompliantEvidenceCount *int32
+
+	// The number of evidence that a compliance check ruling isn't available for.
+	// Evidence is inconclusive when the associated control uses Security Hub or Config
+	// as a data source but you didn't enable those services. This is also the case
+	// when a control uses a data source that doesn’t support compliance checks (for
+	// example, manual evidence, API calls, or CloudTrail). If evidence has a
+	// compliance check status of not applicable in the console, it's classified as
+	// inconclusive in EvidenceInsights data.
+	InconclusiveEvidenceCount *int32
+
+	// The number of compliance check evidence that Audit Manager classified as
+	// non-compliant. This includes evidence that was collected from Security Hub with
+	// a Fail ruling, or collected from Config with a Non-compliant ruling.
+	NoncompliantEvidenceCount *int32
+
+	noSmithyDocumentSerde
+}
+
 // The file that's used to structure and automate Audit Manager assessments for a
 // given compliance standard.
 type Framework struct {
@@ -950,6 +1050,114 @@ type FrameworkMetadata struct {
 
 	// The name of the framework.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of the latest analytics data for all your active assessments. This
+// summary is a snapshot of the data that your active assessments collected on the
+// lastUpdated date. It’s important to understand that the following totals are
+// daily counts based on this date — they aren’t a total sum to date. The Insights
+// data is eventually consistent. This means that, when you read data from
+// Insights, the response might not instantly reflect the results of a recently
+// completed write or update operation. If you repeat your read request after a few
+// hours, the response should return the latest data. If you delete an assessment
+// or change its status to inactive, InsightsByAssessment includes data for that
+// assessment as follows.
+//
+// * Inactive assessments - If Audit Manager collected
+// evidence for your assessment before you changed it inactive, that evidence is
+// included in the InsightsByAssessment counts for that day.
+//
+// * Deleted assessments
+// - If Audit Manager collected evidence for your assessment before you deleted it,
+// that evidence isn't included in the InsightsByAssessment counts for that day.
+type Insights struct {
+
+	// The number of active assessments in Audit Manager.
+	ActiveAssessmentsCount *int32
+
+	// The number of assessment controls that collected non-compliant evidence on the
+	// lastUpdated date.
+	AssessmentControlsCountByNoncompliantEvidence *int32
+
+	// The number of compliance check evidence that Audit Manager classified as
+	// compliant on the lastUpdated date. This includes evidence that was collected
+	// from Security Hub with a Pass ruling, or collected from Config with a Compliant
+	// ruling.
+	CompliantEvidenceCount *int32
+
+	// The number of evidence without a compliance check ruling. Evidence is
+	// inconclusive when the associated control uses Security Hub or Config as a data
+	// source but you didn't enable those services. This is also the case when a
+	// control uses a data source that doesn’t support compliance checks (for example:
+	// manual evidence, API calls, or CloudTrail). If evidence has a compliance check
+	// status of not applicable, it's classed as inconclusive in Insights data.
+	InconclusiveEvidenceCount *int32
+
+	// The time when the cross-assessment insights were last updated.
+	LastUpdated *time.Time
+
+	// The number of compliance check evidence that Audit Manager classified as
+	// non-compliant on the lastUpdated date. This includes evidence that was collected
+	// from Security Hub with a Fail ruling, or collected from Config with a
+	// Non-compliant ruling.
+	NoncompliantEvidenceCount *int32
+
+	// The total number of controls across all active assessments.
+	TotalAssessmentControlsCount *int32
+
+	noSmithyDocumentSerde
+}
+
+// A summary of the latest analytics data for a specific active assessment. This
+// summary is a snapshot of the data that was collected on the lastUpdated date.
+// It’s important to understand that the totals in InsightsByAssessment are daily
+// counts based on this date — they aren’t a total sum to date. The
+// InsightsByAssessment data is eventually consistent. This means that when you
+// read data from InsightsByAssessment, the response might not instantly reflect
+// the results of a recently completed write or update operation. If you repeat
+// your read request after a few hours, the response returns the latest data. If
+// you delete an assessment or change its status to inactive, InsightsByAssessment
+// includes data for that assessment as follows.
+//
+// * Inactive assessments - If Audit
+// Manager collected evidence for your assessment before you changed it inactive,
+// that evidence is included in the InsightsByAssessment counts for that day.
+//
+// *
+// Deleted assessments - If Audit Manager collected evidence for your assessment
+// before you deleted it, that evidence isn't included in the InsightsByAssessment
+// counts for that day.
+type InsightsByAssessment struct {
+
+	// The number of assessment controls that collected non-compliant evidence on the
+	// lastUpdated date.
+	AssessmentControlsCountByNoncompliantEvidence *int32
+
+	// The number of compliance check evidence that Audit Manager classified as
+	// compliant. This includes evidence that was collected from Security Hub with a
+	// Pass ruling, or collected from Config with a Compliant ruling.
+	CompliantEvidenceCount *int32
+
+	// The amount of evidence without a compliance check ruling. Evidence is
+	// inconclusive if the associated control uses Security Hub or Config as a data
+	// source and you didn't enable those services. This is also the case if a control
+	// uses a data source that doesn’t support compliance checks (for example, manual
+	// evidence, API calls, or CloudTrail). If evidence has a compliance check status
+	// of not applicable, it's classified as inconclusive in InsightsByAssessment data.
+	InconclusiveEvidenceCount *int32
+
+	// The time when the assessment insights were last updated.
+	LastUpdated *time.Time
+
+	// The number of compliance check evidence that Audit Manager classified as
+	// non-compliant. This includes evidence that was collected from Security Hub with
+	// a Fail ruling, or collected from Config with a Non-compliant ruling.
+	NoncompliantEvidenceCount *int32
+
+	// The total number of controls in the assessment.
+	TotalAssessmentControlsCount *int32
 
 	noSmithyDocumentSerde
 }

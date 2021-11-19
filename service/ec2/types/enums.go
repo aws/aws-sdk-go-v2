@@ -2649,6 +2649,15 @@ const (
 	InstanceTypeC6gn8xlarge     InstanceType = "c6gn.8xlarge"
 	InstanceTypeC6gn12xlarge    InstanceType = "c6gn.12xlarge"
 	InstanceTypeC6gn16xlarge    InstanceType = "c6gn.16xlarge"
+	InstanceTypeC6iLarge        InstanceType = "c6i.large"
+	InstanceTypeC6iXlarge       InstanceType = "c6i.xlarge"
+	InstanceTypeC6i2xlarge      InstanceType = "c6i.2xlarge"
+	InstanceTypeC6i4xlarge      InstanceType = "c6i.4xlarge"
+	InstanceTypeC6i8xlarge      InstanceType = "c6i.8xlarge"
+	InstanceTypeC6i12xlarge     InstanceType = "c6i.12xlarge"
+	InstanceTypeC6i16xlarge     InstanceType = "c6i.16xlarge"
+	InstanceTypeC6i24xlarge     InstanceType = "c6i.24xlarge"
+	InstanceTypeC6i32xlarge     InstanceType = "c6i.32xlarge"
 	InstanceTypeCc14xlarge      InstanceType = "cc1.4xlarge"
 	InstanceTypeCc28xlarge      InstanceType = "cc2.8xlarge"
 	InstanceTypeG22xlarge       InstanceType = "g2.2xlarge"
@@ -2843,6 +2852,14 @@ const (
 	InstanceTypeVt13xlarge      InstanceType = "vt1.3xlarge"
 	InstanceTypeVt16xlarge      InstanceType = "vt1.6xlarge"
 	InstanceTypeVt124xlarge     InstanceType = "vt1.24xlarge"
+	InstanceTypeG5Xlarge        InstanceType = "g5.xlarge"
+	InstanceTypeG52xlarge       InstanceType = "g5.2xlarge"
+	InstanceTypeG54xlarge       InstanceType = "g5.4xlarge"
+	InstanceTypeG58xlarge       InstanceType = "g5.8xlarge"
+	InstanceTypeG512xlarge      InstanceType = "g5.12xlarge"
+	InstanceTypeG516xlarge      InstanceType = "g5.16xlarge"
+	InstanceTypeG524xlarge      InstanceType = "g5.24xlarge"
+	InstanceTypeG548xlarge      InstanceType = "g5.48xlarge"
 )
 
 // Values returns all known values for InstanceType. Note that this can be expanded
@@ -3077,6 +3094,15 @@ func (InstanceType) Values() []InstanceType {
 		"c6gn.8xlarge",
 		"c6gn.12xlarge",
 		"c6gn.16xlarge",
+		"c6i.large",
+		"c6i.xlarge",
+		"c6i.2xlarge",
+		"c6i.4xlarge",
+		"c6i.8xlarge",
+		"c6i.12xlarge",
+		"c6i.16xlarge",
+		"c6i.24xlarge",
+		"c6i.32xlarge",
 		"cc1.4xlarge",
 		"cc2.8xlarge",
 		"g2.2xlarge",
@@ -3271,6 +3297,14 @@ func (InstanceType) Values() []InstanceType {
 		"vt1.3xlarge",
 		"vt1.6xlarge",
 		"vt1.24xlarge",
+		"g5.xlarge",
+		"g5.2xlarge",
+		"g5.4xlarge",
+		"g5.8xlarge",
+		"g5.12xlarge",
+		"g5.16xlarge",
+		"g5.24xlarge",
+		"g5.48xlarge",
 	}
 }
 

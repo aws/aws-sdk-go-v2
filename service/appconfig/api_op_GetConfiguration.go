@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Receive information about a configuration. AWS AppConfig uses the value of the
+// Retrieves information about a configuration. AppConfig uses the value of the
 // ClientConfigurationVersion parameter to identify the configuration version on
 // your clients. If you don’t send ClientConfigurationVersion with each call to
 // GetConfiguration, your clients receive the current configuration. You are
@@ -42,9 +42,9 @@ type GetConfigurationInput struct {
 	// This member is required.
 	Application *string
 
-	// A unique ID to identify the client for the configuration. This ID enables
-	// AppConfig to deploy the configuration in intervals, as defined in the deployment
-	// strategy.
+	// The clientId parameter in the following command is a unique, user-specified ID
+	// to identify the client for the configuration. This ID enables AppConfig to
+	// deploy the configuration in intervals, as defined in the deployment strategy.
 	//
 	// This member is required.
 	ClientId *string
@@ -62,8 +62,8 @@ type GetConfigurationInput struct {
 	Environment *string
 
 	// The configuration version returned in the most recent GetConfiguration response.
-	// AWS AppConfig uses the value of the ClientConfigurationVersion parameter to
-	// identify the configuration version on your clients. If you don’t send
+	// AppConfig uses the value of the ClientConfigurationVersion parameter to identify
+	// the configuration version on your clients. If you don’t send
 	// ClientConfigurationVersion with each call to GetConfiguration, your clients
 	// receive the current configuration. You are charged each time your clients
 	// receive a configuration. To avoid excess charges, we recommend that you include
@@ -71,8 +71,8 @@ type GetConfigurationInput struct {
 	// value must be saved on your client. Subsequent calls to GetConfiguration must
 	// pass this value by using the ClientConfigurationVersion parameter. For more
 	// information about working with configurations, see Retrieving the Configuration
-	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/appconfig-retrieving-the-configuration.html)
-	// in the AWS AppConfig User Guide.
+	// (http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-retrieving-the-configuration.html)
+	// in the AppConfig User Guide.
 	ClientConfigurationVersion *string
 
 	noSmithyDocumentSerde
@@ -83,7 +83,13 @@ type GetConfigurationOutput struct {
 	// The configuration version.
 	ConfigurationVersion *string
 
-	// The content of the configuration or the configuration data.
+	// The content of the configuration or the configuration data. Compare the
+	// configuration version numbers of the configuration cached locally on your
+	// machine and the configuration number in the the header. If the configuration
+	// numbers are the same, the content can be ignored. The Content section only
+	// appears if the system finds new or updated configuration data. If the system
+	// doesn't find new or updated configuration data, then the Content section is not
+	// returned.
 	Content []byte
 
 	// A standard MIME type describing the format of the configuration content. For

@@ -2120,6 +2120,94 @@ func awsRestjson1_serializeOpDocumentUpdateConfigurationInput(v *UpdateConfigura
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateConnectivity struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateConnectivity) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateConnectivity) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateConnectivityInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/clusters/{ClusterArn}/connectivity")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateConnectivityInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateConnectivityInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateConnectivityInput(v *UpdateConnectivityInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ClusterArn == nil || len(*v.ClusterArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ClusterArn must not be empty")}
+	}
+	if v.ClusterArn != nil {
+		if err := encoder.SetURI("ClusterArn").String(*v.ClusterArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateConnectivityInput(v *UpdateConnectivityInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConnectivityInfo != nil {
+		ok := object.Key("connectivityInfo")
+		if err := awsRestjson1_serializeDocumentConnectivityInfo(v.ConnectivityInfo, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CurrentVersion != nil {
+		ok := object.Key("currentVersion")
+		ok.String(*v.CurrentVersion)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpdateMonitoring struct {
 }
 
@@ -2411,6 +2499,13 @@ func awsRestjson1_serializeDocumentBrokerNodeGroupInfo(v *types.BrokerNodeGroupI
 		}
 	}
 
+	if v.ConnectivityInfo != nil {
+		ok := object.Key("connectivityInfo")
+		if err := awsRestjson1_serializeDocumentConnectivityInfo(v.ConnectivityInfo, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.InstanceType != nil {
 		ok := object.Key("instanceType")
 		ok.String(*v.InstanceType)
@@ -2490,6 +2585,20 @@ func awsRestjson1_serializeDocumentConfigurationInfo(v *types.ConfigurationInfo,
 	{
 		ok := object.Key("revision")
 		ok.Long(v.Revision)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentConnectivityInfo(v *types.ConnectivityInfo, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PublicAccess != nil {
+		ok := object.Key("publicAccess")
+		if err := awsRestjson1_serializeDocumentPublicAccess(v.PublicAccess, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -2654,6 +2763,18 @@ func awsRestjson1_serializeDocumentPrometheusInfo(v *types.PrometheusInfo, value
 		if err := awsRestjson1_serializeDocumentNodeExporterInfo(v.NodeExporter, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPublicAccess(v *types.PublicAccess, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Type != nil {
+		ok := object.Key("type")
+		ok.String(*v.Type)
 	}
 
 	return nil

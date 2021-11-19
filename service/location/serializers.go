@@ -3213,6 +3213,11 @@ func awsRestjson1_serializeOpDocumentSearchPlaceIndexForPositionInput(v *SearchP
 	object := value.Object()
 	defer object.Close()
 
+	if v.Language != nil {
+		ok := object.Key("Language")
+		ok.String(*v.Language)
+	}
+
 	if v.MaxResults != 0 {
 		ok := object.Key("MaxResults")
 		ok.Integer(v.MaxResults)
@@ -3320,6 +3325,11 @@ func awsRestjson1_serializeOpDocumentSearchPlaceIndexForTextInput(v *SearchPlace
 		if err := awsRestjson1_serializeDocumentCountryCodeList(v.FilterCountries, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.Language != nil {
+		ok := object.Key("Language")
+		ok.String(*v.Language)
 	}
 
 	if v.MaxResults != 0 {

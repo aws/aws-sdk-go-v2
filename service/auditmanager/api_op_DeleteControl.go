@@ -28,7 +28,7 @@ func (c *Client) DeleteControl(ctx context.Context, params *DeleteControlInput, 
 
 type DeleteControlInput struct {
 
-	// The identifier for the control.
+	// The unique identifier for the control.
 	//
 	// This member is required.
 	ControlId *string

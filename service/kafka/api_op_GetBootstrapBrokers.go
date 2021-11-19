@@ -43,6 +43,16 @@ type GetBootstrapBrokersOutput struct {
 
 	// A string that contains one or more DNS names (or IP addresses) and SASL IAM port
 	// pairs.
+	BootstrapBrokerStringPublicSaslIam *string
+
+	// A string containing one or more DNS names (or IP) and Sasl Scram port pairs.
+	BootstrapBrokerStringPublicSaslScram *string
+
+	// A string containing one or more DNS names (or IP) and TLS port pairs.
+	BootstrapBrokerStringPublicTls *string
+
+	// A string that contains one or more DNS names (or IP addresses) and SASL IAM port
+	// pairs.
 	BootstrapBrokerStringSaslIam *string
 
 	// A string containing one or more DNS names (or IP) and Sasl Scram port pairs.

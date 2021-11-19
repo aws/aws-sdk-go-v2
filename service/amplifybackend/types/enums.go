@@ -24,6 +24,26 @@ func (AdditionalConstraintsElement) Values() []AdditionalConstraintsElement {
 	}
 }
 
+type AuthenticatedElement string
+
+// Enum values for AuthenticatedElement
+const (
+	AuthenticatedElementRead            AuthenticatedElement = "READ"
+	AuthenticatedElementCreateAndUpdate AuthenticatedElement = "CREATE_AND_UPDATE"
+	AuthenticatedElementDelete          AuthenticatedElement = "DELETE"
+)
+
+// Values returns all known values for AuthenticatedElement. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AuthenticatedElement) Values() []AuthenticatedElement {
+	return []AuthenticatedElement{
+		"READ",
+		"CREATE_AND_UPDATE",
+		"DELETE",
+	}
+}
+
 type AuthResources string
 
 // Enum values for AuthResources
@@ -249,6 +269,22 @@ func (Service) Values() []Service {
 	}
 }
 
+type ServiceName string
+
+// Enum values for ServiceName
+const (
+	ServiceNameS3 ServiceName = "S3"
+)
+
+// Values returns all known values for ServiceName. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ServiceName) Values() []ServiceName {
+	return []ServiceName{
+		"S3",
+	}
+}
+
 type SignInMethod string
 
 // Enum values for SignInMethod
@@ -286,5 +322,25 @@ func (Status) Values() []Status {
 	return []Status{
 		"LATEST",
 		"STALE",
+	}
+}
+
+type UnAuthenticatedElement string
+
+// Enum values for UnAuthenticatedElement
+const (
+	UnAuthenticatedElementRead            UnAuthenticatedElement = "READ"
+	UnAuthenticatedElementCreateAndUpdate UnAuthenticatedElement = "CREATE_AND_UPDATE"
+	UnAuthenticatedElementDelete          UnAuthenticatedElement = "DELETE"
+)
+
+// Values returns all known values for UnAuthenticatedElement. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UnAuthenticatedElement) Values() []UnAuthenticatedElement {
+	return []UnAuthenticatedElement{
+		"READ",
+		"CREATE_AND_UPDATE",
+		"DELETE",
 	}
 }

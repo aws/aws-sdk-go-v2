@@ -61,9 +61,10 @@ type UpdateAssociationInput struct {
 	// request succeeds, either specify $LATEST, or omit this parameter.
 	AssociationVersion *string
 
-	// Specify the target for the association. This target is required for associations
-	// that use an Automation runbook and target resources by using rate controls.
-	// Automation is a capability of Amazon Web Services Systems Manager.
+	// Choose the parameter that will define how your automation will branch out. This
+	// target is required for associations that use an Automation runbook and target
+	// resources by using rate controls. Automation is a capability of Amazon Web
+	// Services Systems Manager.
 	AutomationTargetParameterName *string
 
 	// The names or Amazon Resource Names (ARNs) of the Change Calendar type documents

@@ -8258,6 +8258,11 @@ func awsAwsquery_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, va
 		objectKey.String(*v.DBName)
 	}
 
+	if v.DefaultIamRoleArn != nil {
+		objectKey := object.Key("DefaultIamRoleArn")
+		objectKey.String(*v.DefaultIamRoleArn)
+	}
+
 	if v.ElasticIp != nil {
 		objectKey := object.Key("ElasticIp")
 		objectKey.String(*v.ElasticIp)
@@ -10357,6 +10362,11 @@ func awsAwsquery_serializeOpDocumentModifyClusterIamRolesInput(v *ModifyClusterI
 		objectKey.String(*v.ClusterIdentifier)
 	}
 
+	if v.DefaultIamRoleArn != nil {
+		objectKey := object.Key("DefaultIamRoleArn")
+		objectKey.String(*v.DefaultIamRoleArn)
+	}
+
 	if v.RemoveIamRoles != nil {
 		objectKey := object.Key("RemoveIamRoles")
 		if err := awsAwsquery_serializeDocumentIamRoleArnList(v.RemoveIamRoles, objectKey); err != nil {
@@ -10967,6 +10977,11 @@ func awsAwsquery_serializeOpDocumentRestoreFromClusterSnapshotInput(v *RestoreFr
 	if v.ClusterSubnetGroupName != nil {
 		objectKey := object.Key("ClusterSubnetGroupName")
 		objectKey.String(*v.ClusterSubnetGroupName)
+	}
+
+	if v.DefaultIamRoleArn != nil {
+		objectKey := object.Key("DefaultIamRoleArn")
+		objectKey.String(*v.DefaultIamRoleArn)
 	}
 
 	if v.ElasticIp != nil {

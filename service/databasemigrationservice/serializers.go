@@ -3234,6 +3234,83 @@ func awsAwsjson11_serializeDocumentFilterValueList(v []string, value smithyjson.
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentGcpMySQLSettings(v *types.GcpMySQLSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AfterConnectScript != nil {
+		ok := object.Key("AfterConnectScript")
+		ok.String(*v.AfterConnectScript)
+	}
+
+	if v.CleanSourceMetadataOnMismatch != nil {
+		ok := object.Key("CleanSourceMetadataOnMismatch")
+		ok.Boolean(*v.CleanSourceMetadataOnMismatch)
+	}
+
+	if v.DatabaseName != nil {
+		ok := object.Key("DatabaseName")
+		ok.String(*v.DatabaseName)
+	}
+
+	if v.EventsPollInterval != nil {
+		ok := object.Key("EventsPollInterval")
+		ok.Integer(*v.EventsPollInterval)
+	}
+
+	if v.MaxFileSize != nil {
+		ok := object.Key("MaxFileSize")
+		ok.Integer(*v.MaxFileSize)
+	}
+
+	if v.ParallelLoadThreads != nil {
+		ok := object.Key("ParallelLoadThreads")
+		ok.Integer(*v.ParallelLoadThreads)
+	}
+
+	if v.Password != nil {
+		ok := object.Key("Password")
+		ok.String(*v.Password)
+	}
+
+	if v.Port != nil {
+		ok := object.Key("Port")
+		ok.Integer(*v.Port)
+	}
+
+	if v.SecretsManagerAccessRoleArn != nil {
+		ok := object.Key("SecretsManagerAccessRoleArn")
+		ok.String(*v.SecretsManagerAccessRoleArn)
+	}
+
+	if v.SecretsManagerSecretId != nil {
+		ok := object.Key("SecretsManagerSecretId")
+		ok.String(*v.SecretsManagerSecretId)
+	}
+
+	if v.ServerName != nil {
+		ok := object.Key("ServerName")
+		ok.String(*v.ServerName)
+	}
+
+	if v.ServerTimezone != nil {
+		ok := object.Key("ServerTimezone")
+		ok.String(*v.ServerTimezone)
+	}
+
+	if len(v.TargetDbType) > 0 {
+		ok := object.Key("TargetDbType")
+		ok.String(string(v.TargetDbType))
+	}
+
+	if v.Username != nil {
+		ok := object.Key("Username")
+		ok.String(*v.Username)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentIBMDb2Settings(v *types.IBMDb2Settings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4440,6 +4517,11 @@ func awsAwsjson11_serializeDocumentS3Settings(v *types.S3Settings, value smithyj
 		ok.Boolean(*v.UseCsvNoSupValue)
 	}
 
+	if v.UseTaskStartTimeForFullLoadTimestamp != nil {
+		ok := object.Key("UseTaskStartTimeForFullLoadTimestamp")
+		ok.Boolean(*v.UseTaskStartTimeForFullLoadTimestamp)
+	}
+
 	return nil
 }
 
@@ -4701,6 +4783,13 @@ func awsAwsjson11_serializeOpDocumentCreateEndpointInput(v *CreateEndpointInput,
 	if v.ExtraConnectionAttributes != nil {
 		ok := object.Key("ExtraConnectionAttributes")
 		ok.String(*v.ExtraConnectionAttributes)
+	}
+
+	if v.GcpMySQLSettings != nil {
+		ok := object.Key("GcpMySQLSettings")
+		if err := awsAwsjson11_serializeDocumentGcpMySQLSettings(v.GcpMySQLSettings, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.IBMDb2Settings != nil {
@@ -5856,6 +5945,13 @@ func awsAwsjson11_serializeOpDocumentModifyEndpointInput(v *ModifyEndpointInput,
 	if v.ExtraConnectionAttributes != nil {
 		ok := object.Key("ExtraConnectionAttributes")
 		ok.String(*v.ExtraConnectionAttributes)
+	}
+
+	if v.GcpMySQLSettings != nil {
+		ok := object.Key("GcpMySQLSettings")
+		if err := awsAwsjson11_serializeDocumentGcpMySQLSettings(v.GcpMySQLSettings, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.IBMDb2Settings != nil {

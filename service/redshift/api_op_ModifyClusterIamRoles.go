@@ -43,6 +43,10 @@ type ModifyClusterIamRolesInput struct {
 	// single cluster in a single request.
 	AddIamRoles []string
 
+	// The Amazon Resource Name (ARN) for the IAM role that was set as default for the
+	// cluster when the cluster was last modified.
+	DefaultIamRoleArn *string
+
 	// Zero or more IAM roles in ARN format to disassociate from the cluster. You can
 	// disassociate up to 10 IAM roles from a single cluster in a single request.
 	RemoveIamRoles []string

@@ -11,24 +11,28 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Information that enables AppConfig to access the configuration source. Valid
-// configuration sources include Systems Manager (SSM) documents, SSM Parameter
-// Store parameters, and Amazon S3 objects. A configuration profile includes the
-// following information.
+// Creates a configuration profile, which is information that enables AppConfig to
+// access the configuration source. Valid configuration sources include the
+// AppConfig hosted configuration store, Amazon Web Services Systems Manager (SSM)
+// documents, SSM Parameter Store parameters, Amazon S3 objects, or any integration
+// source action
+// (http://docs.aws.amazon.com/codepipeline/latest/userguide/integrations-action-type.html#integrations-source)
+// supported by CodePipeline. A configuration profile includes the following
+// information:
 //
-// * The Uri location of the configuration data.
+// * The URI location of the configuration data.
 //
-// * The AWS
-// Identity and Access Management (IAM) role that provides access to the
-// configuration data.
+// * The Identity and
+// Access Management (IAM) role that provides access to the configuration data.
 //
-// * A validator for the configuration data. Available
-// validators include either a JSON Schema or an AWS Lambda function.
+// *
+// A validator for the configuration data. Available validators include either a
+// JSON Schema or an Lambda function.
 //
-// For more
-// information, see Create a Configuration and a Configuration Profile
-// (http://docs.aws.amazon.com/systems-manager/latest/userguide/appconfig-creating-configuration-and-profile.html)
-// in the AWS AppConfig User Guide.
+// For more information, see Create a
+// Configuration and a Configuration Profile
+// (http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-creating-configuration-and-profile.html)
+// in the AppConfig User Guide.
 func (c *Client) CreateConfigurationProfile(ctx context.Context, params *CreateConfigurationProfileInput, optFns ...func(*Options)) (*CreateConfigurationProfileOutput, error) {
 	if params == nil {
 		params = &CreateConfigurationProfileInput{}
@@ -51,13 +55,14 @@ type CreateConfigurationProfileInput struct {
 	// This member is required.
 	ApplicationId *string
 
-	// A URI to locate the configuration. You can specify a Systems Manager (SSM)
-	// document, an SSM Parameter Store parameter, or an Amazon S3 object. For an SSM
-	// document, specify either the document name in the format ssm-document:// or the
-	// Amazon Resource Name (ARN). For a parameter, specify either the parameter name
-	// in the format ssm-parameter:// or the ARN. For an Amazon S3 object, specify the
-	// URI in the following format: s3:/// . Here is an example:
-	// s3://my-bucket/my-app/us-east-1/my-config.json
+	// A URI to locate the configuration. You can specify the AppConfig hosted
+	// configuration store, Systems Manager (SSM) document, an SSM Parameter Store
+	// parameter, or an Amazon S3 object. For the hosted configuration store and for
+	// feature flags, specify hosted. For an SSM document, specify either the document
+	// name in the format ssm-document:// or the Amazon Resource Name (ARN). For a
+	// parameter, specify either the parameter name in the format ssm-parameter:// or
+	// the ARN. For an Amazon S3 object, specify the URI in the following format:
+	// s3:/// . Here is an example: s3://my-bucket/my-app/us-east-1/my-config.json
 	//
 	// This member is required.
 	LocationUri *string
@@ -71,13 +76,21 @@ type CreateConfigurationProfileInput struct {
 	Description *string
 
 	// The ARN of an IAM role with permission to access the configuration at the
-	// specified LocationUri.
+	// specified LocationUri. A retrieval role ARN is not required for configurations
+	// stored in the AppConfig hosted configuration store. It is required for all other
+	// sources that store your configuration.
 	RetrievalRoleArn *string
 
 	// Metadata to assign to the configuration profile. Tags help organize and
 	// categorize your AppConfig resources. Each tag consists of a key and an optional
 	// value, both of which you define.
 	Tags map[string]string
+
+	// The type of configurations that the configuration profile contains. A
+	// configuration can be a feature flag used for enabling or disabling new features
+	// or a free-form configuration used for distributing configurations to your
+	// application.
+	Type *string
 
 	// A list of methods for validating the configuration.
 	Validators []types.Validator
@@ -105,6 +118,12 @@ type CreateConfigurationProfileOutput struct {
 	// The ARN of an IAM role with permission to access the configuration at the
 	// specified LocationUri.
 	RetrievalRoleArn *string
+
+	// The type of configurations that the configuration profile contains. A
+	// configuration can be a feature flag used for enabling or disabling new features
+	// or a free-form configuration used for distributing configurations to your
+	// application.
+	Type *string
 
 	// A list of methods for validating the configuration.
 	Validators []types.Validator

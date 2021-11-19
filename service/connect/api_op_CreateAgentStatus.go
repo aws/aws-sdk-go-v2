@@ -52,7 +52,7 @@ type CreateAgentStatusInput struct {
 	// The display order of the status.
 	DisplayOrder *int32
 
-	// The tags used to organize, track, or control access for this resource.
+	// One or more tags.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

@@ -34,6 +34,9 @@ type DescribeInsightInput struct {
 	// This member is required.
 	Id *string
 
+	// The ID of the member account in the organization.
+	AccountId *string
+
 	noSmithyDocumentSerde
 }
 

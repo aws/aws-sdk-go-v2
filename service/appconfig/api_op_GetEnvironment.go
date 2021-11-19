@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieve information about an environment. An environment is a logical
+// Retrieves information about an environment. An environment is a logical
 // deployment group of AppConfig applications, such as applications in a Production
 // environment or in an EU_Region environment. Each configuration deployment
 // targets an environment. You can enable one or more Amazon CloudWatch alarms for
@@ -39,7 +39,7 @@ type GetEnvironmentInput struct {
 	// This member is required.
 	ApplicationId *string
 
-	// The ID of the environment you wnat to get.
+	// The ID of the environment that you want to get.
 	//
 	// This member is required.
 	EnvironmentId *string

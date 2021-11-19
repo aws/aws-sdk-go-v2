@@ -13657,6 +13657,11 @@ func awsAwsjson11_serializeOpDocumentStartSessionInput(v *StartSessionInput, val
 		}
 	}
 
+	if v.Reason != nil {
+		ok := object.Key("Reason")
+		ok.String(*v.Reason)
+	}
+
 	if v.Target != nil {
 		ok := object.Key("Target")
 		ok.String(*v.Target)

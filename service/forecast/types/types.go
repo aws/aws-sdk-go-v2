@@ -7,6 +7,239 @@ import (
 	"time"
 )
 
+// Describes an additional dataset. This object is part of the DataConfig object.
+// Forecast supports the Weather Index and Holidays additional datasets. Weather
+// Index The Amazon Forecast Weather Index is a built-in dataset that incorporates
+// historical and projected weather information into your model. The Weather Index
+// supplements your datasets with over two years of historical weather data and up
+// to 14 days of projected weather data. For more information, see Amazon Forecast
+// Weather Index (https://docs.aws.amazon.com/forecast/latest/dg/weather.html).
+// Holidays Holidays is a built-in dataset that incorporates national holiday
+// information into your model. It provides native support for the holiday
+// calendars of 66 countries. To view the holiday calendars, refer to the Jollyday
+// (http://jollyday.sourceforge.net/data.html) library. For more information, see
+// Holidays Featurization
+// (https://docs.aws.amazon.com/forecast/latest/dg/holidays.html).
+type AdditionalDataset struct {
+
+	// The name of the additional dataset. Valid names: "holiday" and "weather".
+	//
+	// This member is required.
+	Name *string
+
+	// Weather Index To enable the Weather Index, do not specify a value for
+	// Configuration. Holidays To enable Holidays, specify a country with one of the
+	// following two-letter country codes:
+	//
+	// * "AL" - ALBANIA
+	//
+	// * "AR" - ARGENTINA
+	//
+	// *
+	// "AT" - AUSTRIA
+	//
+	// * "AU" - AUSTRALIA
+	//
+	// * "BA" - BOSNIA HERZEGOVINA
+	//
+	// * "BE" -
+	// BELGIUM
+	//
+	// * "BG" - BULGARIA
+	//
+	// * "BO" - BOLIVIA
+	//
+	// * "BR" - BRAZIL
+	//
+	// * "BY" -
+	// BELARUS
+	//
+	// * "CA" - CANADA
+	//
+	// * "CL" - CHILE
+	//
+	// * "CO" - COLOMBIA
+	//
+	// * "CR" - COSTA
+	// RICA
+	//
+	// * "HR" - CROATIA
+	//
+	// * "CZ" - CZECH REPUBLIC
+	//
+	// * "DK" - DENMARK
+	//
+	// * "EC" -
+	// ECUADOR
+	//
+	// * "EE" - ESTONIA
+	//
+	// * "ET" - ETHIOPIA
+	//
+	// * "FI" - FINLAND
+	//
+	// * "FR" -
+	// FRANCE
+	//
+	// * "DE" - GERMANY
+	//
+	// * "GR" - GREECE
+	//
+	// * "HU" - HUNGARY
+	//
+	// * "IS" - ICELAND
+	//
+	// *
+	// "IN" - INDIA
+	//
+	// * "IE" - IRELAND
+	//
+	// * "IT" - ITALY
+	//
+	// * "JP" - JAPAN
+	//
+	// * "KZ" -
+	// KAZAKHSTAN
+	//
+	// * "KR" - KOREA
+	//
+	// * "LV" - LATVIA
+	//
+	// * "LI" - LIECHTENSTEIN
+	//
+	// * "LT" -
+	// LITHUANIA
+	//
+	// * "LU" - LUXEMBOURG
+	//
+	// * "MK" - MACEDONIA
+	//
+	// * "MT" - MALTA
+	//
+	// * "MX" -
+	// MEXICO
+	//
+	// * "MD" - MOLDOVA
+	//
+	// * "ME" - MONTENEGRO
+	//
+	// * "NL" - NETHERLANDS
+	//
+	// * "NZ" -
+	// NEW ZEALAND
+	//
+	// * "NI" - NICARAGUA
+	//
+	// * "NG" - NIGERIA
+	//
+	// * "NO" - NORWAY
+	//
+	// * "PA" -
+	// PANAMA
+	//
+	// * "PY" - PARAGUAY
+	//
+	// * "PE" - PERU
+	//
+	// * "PL" - POLAND
+	//
+	// * "PT" - PORTUGAL
+	//
+	// *
+	// "RO" - ROMANIA
+	//
+	// * "RU" - RUSSIA
+	//
+	// * "RS" - SERBIA
+	//
+	// * "SK" - SLOVAKIA
+	//
+	// * "SI" -
+	// SLOVENIA
+	//
+	// * "ZA" - SOUTH AFRICA
+	//
+	// * "ES" - SPAIN
+	//
+	// * "SE" - SWEDEN
+	//
+	// * "CH" -
+	// SWITZERLAND
+	//
+	// * "UA" - UKRAINE
+	//
+	// * "AE" - UNITED ARAB EMIRATES
+	//
+	// * "US" - UNITED
+	// STATES
+	//
+	// * "UK" - UNITED KINGDOM
+	//
+	// * "UY" - URUGUAY
+	//
+	// * "VE" - VENEZUELA
+	Configuration map[string][]string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about the method used to transform attributes. The
+// following is an example using the RETAIL domain: {
+//     "AttributeName":
+// "demand",
+//
+//     "Transformations": {"aggregation": "sum", "middlefill": "zero",
+// "backfill": "zero"}
+//
+//     }
+type AttributeConfig struct {
+
+	// The name of the attribute as specified in the schema. Amazon Forecast supports
+	// the target field of the target time series and the related time series datasets.
+	// For example, for the RETAIL domain, the target is demand.
+	//
+	// This member is required.
+	AttributeName *string
+
+	// The method parameters (key-value pairs), which are a map of override parameters.
+	// Specify these parameters to override the default values. Related Time Series
+	// attributes do not accept aggregation parameters. The following list shows the
+	// parameters and their valid values for the "filling" featurization method for a
+	// Target Time Series dataset. Default values are bolded.
+	//
+	// * aggregation: sum, avg,
+	// first, min, max
+	//
+	// * frontfill: none
+	//
+	// * middlefill: zero, nan (not a number),
+	// value, median, mean, min, max
+	//
+	// * backfill: zero, nan, value, median, mean, min,
+	// max
+	//
+	// The following list shows the parameters and their valid values for a
+	// Related Time Series featurization method (there are no defaults):
+	//
+	// * middlefill:
+	// zero, value, median, mean, min, max
+	//
+	// * backfill: zero, value, median, mean, min,
+	// max
+	//
+	// * futurefill: zero, value, median, mean, min, max
+	//
+	// To set a filling method
+	// to a specific value, set the fill parameter to value and define the value in a
+	// corresponding _value parameter. For example, to set backfilling to a value of 2,
+	// include the following: "backfill": "value" and "backfill_value":"2".
+	//
+	// This member is required.
+	Transformations map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies a categorical hyperparameter and it's range of tunable values. This
 // object is part of the ParameterRanges object.
 type CategoricalParameterRange struct {
@@ -57,6 +290,23 @@ type ContinuousParameterRange struct {
 	// (http://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-ranges.html#scaling-type).
 	// One of the following values:
 	ScalingType ScalingType
+
+	noSmithyDocumentSerde
+}
+
+// The data configuration for your dataset group and any additional datasets.
+type DataConfig struct {
+
+	// The ARN of the dataset group used to train the predictor.
+	//
+	// This member is required.
+	DatasetGroupArn *string
+
+	// Additional built-in datasets like Holidays and the Weather Index.
+	AdditionalDatasets []AdditionalDataset
+
+	// Aggregation and filling options for attributes in your dataset group.
+	AttributeConfigs []AttributeConfig
 
 	noSmithyDocumentSerde
 }
@@ -272,6 +522,158 @@ type EvaluationResult struct {
 	// NumberOfBacktestWindows from the EvaluationParameters object determines the
 	// number of windows in the array.
 	TestWindows []WindowSummary
+
+	noSmithyDocumentSerde
+}
+
+// The ExplainabilityConfig data type defines the number of time series and time
+// points included in CreateExplainability. If you provide a predictor ARN for
+// ResourceArn, you must set both TimePointGranularity and TimeSeriesGranularity to
+// “ALL”. When creating Predictor Explainability, Amazon Forecast considers all
+// time series and time points. If you provide a forecast ARN for ResourceArn, you
+// can set TimePointGranularity and TimeSeriesGranularity to either “ALL” or
+// “Specific”.
+type ExplainabilityConfig struct {
+
+	// To create an Explainability for all time points in your forecast horizon, use
+	// ALL. To create an Explainability for specific time points in your forecast
+	// horizon, use SPECIFIC. Specify time points with the StartDateTime and
+	// EndDateTime parameters within the CreateExplainability operation.
+	//
+	// This member is required.
+	TimePointGranularity TimePointGranularity
+
+	// To create an Explainability for all time series in your datasets, use ALL. To
+	// create an Explainability for specific time series in your datasets, use
+	// SPECIFIC. Specify time series by uploading a CSV file to an Amazon S3 bucket and
+	// set the location within the DataDestination data type.
+	//
+	// This member is required.
+	TimeSeriesGranularity TimeSeriesGranularity
+
+	noSmithyDocumentSerde
+}
+
+// Provides a summary of the Explainability export properties used in the
+// ListExplainabilityExports operation. To get a complete set of properties, call
+// the DescribeExplainabilityExport operation, and provide the
+// ExplainabilityExportArn.
+type ExplainabilityExportSummary struct {
+
+	// When the Explainability was created.
+	CreationTime *time.Time
+
+	// The destination for an export job. Provide an S3 path, an AWS Identity and
+	// Access Management (IAM) role that allows Amazon Forecast to access the location,
+	// and an AWS Key Management Service (KMS) key (optional).
+	Destination *DataDestination
+
+	// The Amazon Resource Name (ARN) of the Explainability export.
+	ExplainabilityExportArn *string
+
+	// The name of the Explainability export
+	ExplainabilityExportName *string
+
+	// The last time the resource was modified. The timestamp depends on the status of
+	// the job:
+	//
+	// * CREATE_PENDING - The CreationTime.
+	//
+	// * CREATE_IN_PROGRESS - The
+	// current timestamp.
+	//
+	// * CREATE_STOPPING - The current timestamp.
+	//
+	// * CREATE_STOPPED
+	// - When the job stopped.
+	//
+	// * ACTIVE or CREATE_FAILED - When the job finished or
+	// failed.
+	LastModificationTime *time.Time
+
+	// Information about any errors that may have occurred during the Explainability
+	// export.
+	Message *string
+
+	// The status of the Explainability export. States include:
+	//
+	// * ACTIVE
+	//
+	// *
+	// CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED
+	//
+	// * CREATE_STOPPING,
+	// CREATE_STOPPED
+	//
+	// * DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
+type ExplainabilityInfo struct {
+	ExplainabilityArn *string
+
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides a summary of the Explainability properties used in the
+// ListExplainabilities operation. To get a complete set of properties, call the
+// DescribeExplainability operation, and provide the listed ExplainabilityArn.
+type ExplainabilitySummary struct {
+
+	// When the Explainability was created.
+	CreationTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the Explainability.
+	ExplainabilityArn *string
+
+	// The configuration settings that define the granularity of time series and time
+	// points for the Explainability.
+	ExplainabilityConfig *ExplainabilityConfig
+
+	// The name of the Explainability.
+	ExplainabilityName *string
+
+	// The last time the resource was modified. The timestamp depends on the status of
+	// the job:
+	//
+	// * CREATE_PENDING - The CreationTime.
+	//
+	// * CREATE_IN_PROGRESS - The
+	// current timestamp.
+	//
+	// * CREATE_STOPPING - The current timestamp.
+	//
+	// * CREATE_STOPPED
+	// - When the job stopped.
+	//
+	// * ACTIVE or CREATE_FAILED - When the job finished or
+	// failed.
+	LastModificationTime *time.Time
+
+	// Information about any errors that may have occurred during the Explainability
+	// creation process.
+	Message *string
+
+	// The Amazon Resource Name (ARN) of the Predictor or Forecast used to create the
+	// Explainability.
+	ResourceArn *string
+
+	// The status of the Explainability. States include:
+	//
+	// * ACTIVE
+	//
+	// * CREATE_PENDING,
+	// CREATE_IN_PROGRESS, CREATE_FAILED
+	//
+	// * CREATE_STOPPING, CREATE_STOPPED
+	//
+	// *
+	// DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED
+	Status *string
 
 	noSmithyDocumentSerde
 }
@@ -495,6 +897,7 @@ type ForecastExportJobSummary struct {
 // operation. To get the complete set of properties, call the DescribeForecast
 // operation, and provide the ForecastArn that is listed in the summary.
 type ForecastSummary struct {
+	CreatedUsingAutoPredictor *bool
 
 	// When the forecast creation task was created.
 	CreationTime *time.Time
@@ -761,6 +1164,9 @@ type PredictorSummary struct {
 	// to train the predictor.
 	DatasetGroupArn *string
 
+	// Whether AutoPredictor was used to create the predictor.
+	IsAutoPredictor *bool
+
 	// The last time the resource was modified. The timestamp depends on the status of
 	// the job:
 	//
@@ -787,6 +1193,10 @@ type PredictorSummary struct {
 	// The name of the predictor.
 	PredictorName *string
 
+	// A summary of the reference predictor used if the predictor was retrained or
+	// upgraded.
+	ReferencePredictorSummary *ReferencePredictorSummary
+
 	// The status of the predictor. States include:
 	//
 	// * ACTIVE
@@ -802,6 +1212,19 @@ type PredictorSummary struct {
 	// The Status of the predictor
 	// must be ACTIVE before you can use the predictor to create a forecast.
 	Status *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides a summary of the reference predictor used when retraining or upgrading
+// a predictor.
+type ReferencePredictorSummary struct {
+
+	// The ARN of the reference predictor.
+	Arn *string
+
+	// Whether the reference predictor is Active or Deleted.
+	State State
 
 	noSmithyDocumentSerde
 }

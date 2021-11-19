@@ -32,6 +32,8 @@ func (c *Client) StartImport(ctx context.Context, params *StartImportInput, optF
 type StartImportInput struct {
 
 	// The unique identifier for the import. It is included in the response from the
+	// CreateUploadUrl
+	// (https://docs.aws.amazon.com/lexv2/latest/dg/API_CreateUploadUrl.html)
 	// operation.
 	//
 	// This member is required.

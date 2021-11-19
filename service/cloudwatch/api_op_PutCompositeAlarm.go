@@ -36,7 +36,10 @@ import (
 // the new state are then executed. For a composite alarm, this initial time after
 // creation is the only time that the alarm can be in INSUFFICIENT_DATA state. When
 // you update an existing alarm, its state is left unchanged, but the update
-// completely overwrites the previous configuration of the alarm. If you are an IAM
+// completely overwrites the previous configuration of the alarm. To use this
+// operation, you must be signed on with the cloudwatch:PutCompositeAlarm
+// permission that is scoped to *. You can't create a composite alarms if your
+// cloudwatch:PutCompositeAlarm permission has a narrower scope. If you are an IAM
 // user, you must have iam:CreateServiceLinkedRole to create a composite alarm that
 // has Systems Manager OpsItem actions.
 func (c *Client) PutCompositeAlarm(ctx context.Context, params *PutCompositeAlarmInput, optFns ...func(*Options)) (*PutCompositeAlarmOutput, error) {

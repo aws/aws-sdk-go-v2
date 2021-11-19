@@ -3262,6 +3262,7 @@ type H264GopSizeUnits string
 const (
 	H264GopSizeUnitsFrames  H264GopSizeUnits = "FRAMES"
 	H264GopSizeUnitsSeconds H264GopSizeUnits = "SECONDS"
+	H264GopSizeUnitsAuto    H264GopSizeUnits = "AUTO"
 )
 
 // Values returns all known values for H264GopSizeUnits. Note that this can be
@@ -3271,6 +3272,7 @@ func (H264GopSizeUnits) Values() []H264GopSizeUnits {
 	return []H264GopSizeUnits{
 		"FRAMES",
 		"SECONDS",
+		"AUTO",
 	}
 }
 
@@ -3741,6 +3743,7 @@ type H265GopSizeUnits string
 const (
 	H265GopSizeUnitsFrames  H265GopSizeUnits = "FRAMES"
 	H265GopSizeUnitsSeconds H265GopSizeUnits = "SECONDS"
+	H265GopSizeUnitsAuto    H265GopSizeUnits = "AUTO"
 )
 
 // Values returns all known values for H265GopSizeUnits. Note that this can be
@@ -3750,6 +3753,7 @@ func (H265GopSizeUnits) Values() []H265GopSizeUnits {
 	return []H265GopSizeUnits{
 		"FRAMES",
 		"SECONDS",
+		"AUTO",
 	}
 }
 

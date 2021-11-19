@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Metadata to assign to an AppConfig resource. Tags help organize and categorize
+// Assigns metadata to an AppConfig resource. Tags help organize and categorize
 // your AppConfig resources. Each tag consists of a key and an optional value, both
 // of which you define. You can specify a maximum of 50 tags for a resource.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {

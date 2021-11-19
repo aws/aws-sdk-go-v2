@@ -1937,6 +1937,11 @@ func awsAwsjson11_serializeDocumentIdentityProviderDetails(v *types.IdentityProv
 		ok.String(*v.DirectoryId)
 	}
 
+	if v.Function != nil {
+		ok := object.Key("Function")
+		ok.String(*v.Function)
+	}
+
 	if v.InvocationRole != nil {
 		ok := object.Key("InvocationRole")
 		ok.String(*v.InvocationRole)

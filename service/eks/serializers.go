@@ -2141,6 +2141,13 @@ func awsRestjson1_serializeOpDocumentRegisterClusterInput(v *RegisterClusterInpu
 		ok.String(*v.Name)
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

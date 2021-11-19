@@ -209,6 +209,10 @@ type CreateClusterInput struct {
 	// Amazon Redshift Database Developer Guide.
 	DBName *string
 
+	// The Amazon Resource Name (ARN) for the IAM role that was set as default for the
+	// cluster when the cluster was created.
+	DefaultIamRoleArn *string
+
 	// The Elastic IP (EIP) address for the cluster. Constraints: The cluster must be
 	// provisioned in EC2-VPC and publicly-accessible through an Internet gateway. For
 	// more information about provisioning clusters in EC2-VPC, go to Supported

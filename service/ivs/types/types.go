@@ -7,6 +7,25 @@ import (
 	"time"
 )
 
+// Object specifying a stream’s audio configuration.
+type AudioConfiguration struct {
+
+	// Number of audio channels.
+	Channels int64
+
+	// Codec used for the audio encoding.
+	Codec *string
+
+	// Number of audio samples recorded per second.
+	SampleRate int64
+
+	// The expected ingest bitrate (bits per second). This is configured in the
+	// encoder.
+	TargetBitrate int64
+
+	noSmithyDocumentSerde
+}
+
 // Error related to a specific channel, specified by its ARN.
 type BatchError struct {
 
@@ -110,6 +129,19 @@ type DestinationConfiguration struct {
 
 	// An S3 destination configuration where recorded videos will be stored.
 	S3 *S3DestinationConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Object specifying the ingest configuration set up by the broadcaster, usually in
+// an encoder.
+type IngestConfiguration struct {
+
+	// Encoder settings for audio.
+	Audio *AudioConfiguration
+
+	// Encoder settings for video.
+	Video *VideoConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -235,11 +267,40 @@ type Stream struct {
 	// The stream’s state.
 	State StreamState
 
+	// Unique identifier for a live or previously live stream in the specified channel.
+	StreamId *string
+
 	// A count of concurrent views of the stream. Typically, a new view appears in
 	// viewerCount within 15 seconds of when video playback starts and a view is
 	// removed from viewerCount within 1 minute of when video playback ends. A value of
 	// -1 indicates that the request timed out; in this case, retry.
 	ViewerCount int64
+
+	noSmithyDocumentSerde
+}
+
+// Object specifying a stream’s events. For a list of events, see Using Amazon
+// EventBridge with Amazon IVS
+// (https://docs.aws.amazon.com/ivs/latest/userguide/eventbridge.html).
+type StreamEvent struct {
+
+	// UTC ISO-8601 formatted timestamp of when the event occurred.
+	EventTime *time.Time
+
+	// Name that identifies the stream event within a type.
+	Name *string
+
+	// Logical group for certain events.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// Object specifying the stream attribute on which to filter.
+type StreamFilters struct {
+
+	// The stream’s health.
+	Health StreamHealth
 
 	noSmithyDocumentSerde
 }
@@ -277,6 +338,58 @@ type StreamKeySummary struct {
 	noSmithyDocumentSerde
 }
 
+// Object that captures the Amazon IVS configuration that the customer provisioned,
+// the ingest configurations that the broadcaster used, and the most recent Amazon
+// IVS stream events it encountered.
+type StreamSession struct {
+
+	// The properties of the channel at the time of going live.
+	Channel *Channel
+
+	// UTC ISO-8601 formatted timestamp of when the channel went offline. For live
+	// streams, this is NULL.
+	EndTime *time.Time
+
+	// The properties of the incoming RTMP stream for the stream.
+	IngestConfiguration *IngestConfiguration
+
+	// The properties of recording the live stream.
+	RecordingConfiguration *RecordingConfiguration
+
+	// UTC ISO-8601 formatted timestamp of when the channel went live.
+	StartTime *time.Time
+
+	// Unique identifier for a live or previously live stream in the specified channel.
+	StreamId *string
+
+	// List of Amazon IVS events that the stream encountered. The list is sorted by
+	// most recent events and contains up to 500 events. For Amazon IVS events, see
+	// Using Amazon EventBridge with Amazon IVS
+	// (https://docs.aws.amazon.com/ivs/latest/userguide/eventbridge.html).
+	TruncatedEvents []StreamEvent
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a stream session.
+type StreamSessionSummary struct {
+
+	// UTC ISO-8601 formatted timestamp of when the channel went offline. For live
+	// streams, this is NULL.
+	EndTime *time.Time
+
+	// If true, this stream encountered a quota breach or failure.
+	HasErrorEvent bool
+
+	// UTC ISO-8601 formatted timestamp of when the channel went live.
+	StartTime *time.Time
+
+	// Unique identifier for a live or previously live stream in the specified channel.
+	StreamId *string
+
+	noSmithyDocumentSerde
+}
+
 // Summary information about a stream.
 type StreamSummary struct {
 
@@ -292,11 +405,48 @@ type StreamSummary struct {
 	// The stream’s state.
 	State StreamState
 
+	// Unique identifier for a live or previously live stream in the specified channel.
+	StreamId *string
+
 	// A count of concurrent views of the stream. Typically, a new view appears in
 	// viewerCount within 15 seconds of when video playback starts and a view is
 	// removed from viewerCount within 1 minute of when video playback ends. A value of
 	// -1 indicates that the request timed out; in this case, retry.
 	ViewerCount int64
+
+	noSmithyDocumentSerde
+}
+
+// Object specifying a stream’s video configuration.
+type VideoConfiguration struct {
+
+	// Indicates the degree of required decoder performance for a profile. Normally
+	// this is set automatically by the encoder. For details, see the H.264
+	// specification.
+	AvcLevel *string
+
+	// Indicates to the decoder the requirements for decoding the stream. For
+	// definitions of the valid values, see the H.264 specification.
+	AvcProfile *string
+
+	// Codec used for the video encoding.
+	Codec *string
+
+	// Software or hardware used to encode the video.
+	Encoder *string
+
+	// The expected ingest bitrate (bits per second). This is configured in the
+	// encoder.
+	TargetBitrate int64
+
+	// The expected ingest framerate. This is configured in the encoder.
+	TargetFramerate int64
+
+	// Video-resolution height in pixels.
+	VideoHeight int64
+
+	// Video-resolution width in pixels.
+	VideoWidth int64
 
 	noSmithyDocumentSerde
 }

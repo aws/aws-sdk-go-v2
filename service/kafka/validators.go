@@ -510,6 +510,26 @@ func (m *validateOpUpdateConfiguration) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateConnectivity struct {
+}
+
+func (*validateOpUpdateConnectivity) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateConnectivity) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateConnectivityInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateConnectivityInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateMonitoring struct {
 }
 
@@ -648,6 +668,10 @@ func addOpUpdateClusterKafkaVersionValidationMiddleware(stack *middleware.Stack)
 
 func addOpUpdateConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateConfiguration{}, middleware.After)
+}
+
+func addOpUpdateConnectivityValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateConnectivity{}, middleware.After)
 }
 
 func addOpUpdateMonitoringValidationMiddleware(stack *middleware.Stack) error {
@@ -1360,6 +1384,27 @@ func validateOpUpdateConfigurationInput(v *UpdateConfigurationInput) error {
 	}
 	if v.ServerProperties == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServerProperties"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateConnectivityInput(v *UpdateConnectivityInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateConnectivityInput"}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if v.ConnectivityInfo == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectivityInfo"))
+	}
+	if v.CurrentVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CurrentVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

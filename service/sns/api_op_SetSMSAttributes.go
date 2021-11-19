@@ -37,15 +37,16 @@ func (c *Client) SetSMSAttributes(ctx context.Context, params *SetSMSAttributesI
 // The input for the SetSMSAttributes action.
 type SetSMSAttributesInput struct {
 
-	// The default settings for sending SMS messages from your account. You can set
-	// values for the following attribute names: MonthlySpendLimit – The maximum amount
-	// in USD that you are willing to spend each month to send SMS messages. When
-	// Amazon SNS determines that sending an SMS message would incur a cost that
-	// exceeds this limit, it stops sending SMS messages within minutes. Amazon SNS
-	// stops sending SMS messages within minutes of the limit being crossed. During
-	// that interval, if you continue to send SMS messages, you will incur costs that
-	// exceed your limit. By default, the spend limit is set to the maximum allowed by
-	// Amazon SNS. If you want to raise the limit, submit an SNS Limit Increase case
+	// The default settings for sending SMS messages from your Amazon Web Services
+	// account. You can set values for the following attribute names: MonthlySpendLimit
+	// – The maximum amount in USD that you are willing to spend each month to send SMS
+	// messages. When Amazon SNS determines that sending an SMS message would incur a
+	// cost that exceeds this limit, it stops sending SMS messages within minutes.
+	// Amazon SNS stops sending SMS messages within minutes of the limit being crossed.
+	// During that interval, if you continue to send SMS messages, you will incur costs
+	// that exceed your limit. By default, the spend limit is set to the maximum
+	// allowed by Amazon SNS. If you want to raise the limit, submit an SNS Limit
+	// Increase case
 	// (https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase&limitType=service-code-sns).
 	// For New limit value, enter your desired monthly spend limit. In the Use Case
 	// Description field, explain that you are requesting an SMS monthly spend limit
@@ -76,30 +77,30 @@ type SetSMSAttributesInput struct {
 	// UsageReportS3Bucket – The name of the Amazon S3 bucket to receive
 	// daily SMS usage reports from Amazon SNS. Each day, Amazon SNS will deliver a
 	// usage report as a CSV file to the bucket. The report includes the following
-	// information for each SMS message that was successfully delivered by your
-	// account:
+	// information for each SMS message that was successfully delivered by your Amazon
+	// Web Services account:
 	//
 	// * Time that the message was published (in UTC)
 	//
-	// * Message ID
+	// * Message
+	// ID
 	//
-	// *
-	// Destination phone number
+	// * Destination phone number
 	//
 	// * Message type
 	//
 	// * Delivery status
 	//
-	// * Message price (in
-	// USD)
+	// * Message
+	// price (in USD)
 	//
-	// * Part number (a message is split into multiple parts if it is too long
-	// for a single message)
+	// * Part number (a message is split into multiple parts if it is
+	// too long for a single message)
 	//
 	// * Total number of parts
 	//
-	// To receive the report, the
-	// bucket must have a policy that allows the Amazon SNS service principal to
+	// To receive the report,
+	// the bucket must have a policy that allows the Amazon SNS service principal to
 	// perform the s3:PutObject and s3:GetBucketLocation actions. For an example bucket
 	// policy and usage report, see Monitoring SMS Activity
 	// (https://docs.aws.amazon.com/sns/latest/dg/sms_stats.html) in the Amazon SNS

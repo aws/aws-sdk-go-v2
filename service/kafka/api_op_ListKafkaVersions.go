@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of Kafka versions.
+// Returns a list of Apache Kafka versions.
 func (c *Client) ListKafkaVersions(ctx context.Context, params *ListKafkaVersionsInput, optFns ...func(*Options)) (*ListKafkaVersionsOutput, error) {
 	if params == nil {
 		params = &ListKafkaVersionsInput{}

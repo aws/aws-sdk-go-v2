@@ -46,7 +46,7 @@ type CreateBackendInput struct {
 	// This member is required.
 	BackendEnvironmentName *string
 
-	// The resource configuration for the create backend request.
+	// The resource configuration for creating backend storage.
 	ResourceConfig *types.ResourceConfig
 
 	// The name of the resource.

@@ -36,6 +36,7 @@
         "api_op_UpdateClusterConfiguration.go",
         "api_op_UpdateClusterKafkaVersion.go",
         "api_op_UpdateConfiguration.go",
+        "api_op_UpdateConnectivity.go",
         "api_op_UpdateMonitoring.go",
         "api_op_UpdateSecurity.go",
         "deserializers.go",

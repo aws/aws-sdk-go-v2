@@ -27,10 +27,10 @@ import (
 // * The iam:CreateServiceLinkedRole to create an alarm with Systems
 // Manager OpsItem actions.
 //
-// The first time you create an alarm in the Management
-// Console, the CLI, or by using the PutMetricAlarm API, CloudWatch creates the
-// necessary service-linked role for you. The service-linked roles are called
-// AWSServiceRoleForCloudWatchEvents and
+// The first time you create an alarm in the Amazon Web
+// Services Management Console, the CLI, or by using the PutMetricAlarm API,
+// CloudWatch creates the necessary service-linked role for you. The service-linked
+// roles are called AWSServiceRoleForCloudWatchEvents and
 // AWSServiceRoleForCloudWatchAlarms_ActionSSM. For more information, see Amazon
 // Web Services service-linked role
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role).

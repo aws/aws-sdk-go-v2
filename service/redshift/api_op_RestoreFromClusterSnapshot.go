@@ -127,6 +127,11 @@ type RestoreFromClusterSnapshotInput struct {
 	// group name where you want the cluster restored.
 	ClusterSubnetGroupName *string
 
+	// The Amazon Resource Name (ARN) for the IAM role that was set as default for the
+	// cluster when the cluster was last modified while it was restored from a
+	// snapshot.
+	DefaultIamRoleArn *string
+
 	// The elastic IP (EIP) address for the cluster.
 	ElasticIp *string
 

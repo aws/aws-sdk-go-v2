@@ -63,6 +63,7 @@ func (PositionFiltering) Values() []PositionFiltering {
 	return []PositionFiltering{
 		"TimeBased",
 		"DistanceBased",
+		"AccuracyBased",
 	}
 }
 

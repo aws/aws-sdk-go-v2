@@ -174,9 +174,9 @@ type CreateFunctionInput struct {
 	// apply to the function.
 	Tags map[string]string
 
-	// The amount of time that Lambda allows a function to run before stopping it. The
-	// default is 3 seconds. The maximum allowed value is 900 seconds. For additional
-	// information, see Lambda execution environment
+	// The amount of time (in seconds) that Lambda allows a function to run before
+	// stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds.
+	// For additional information, see Lambda execution environment
 	// (https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html).
 	Timeout *int32
 
@@ -235,7 +235,7 @@ type CreateFunctionOutput struct {
 	ImageConfigResponse *types.ImageConfigResponse
 
 	// The KMS key that's used to encrypt the function's environment variables. This
-	// key is only returned if you've configured a customer managed CMK.
+	// key is only returned if you've configured a customer managed key.
 	KMSKeyArn *string
 
 	// The date and time that the function was last updated, in ISO-8601 format
@@ -256,7 +256,7 @@ type CreateFunctionOutput struct {
 	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
 	Layers []types.Layer
 
-	// For Lambda@Edge functions, the ARN of the master function.
+	// For Lambda@Edge functions, the ARN of the main function.
 	MasterArn *string
 
 	// The amount of memory available to the function at runtime.

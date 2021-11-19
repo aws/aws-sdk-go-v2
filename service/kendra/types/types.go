@@ -837,61 +837,32 @@ type DocumentAttribute struct {
 	// The value of the attribute.
 	//
 	// This member is required.
-	Value DocumentAttributeValue
+	Value *DocumentAttributeValue
 
 	noSmithyDocumentSerde
 }
 
 // The value of a custom document attribute. You can only provide one value for a
 // custom attribute.
-//
-// The following types satisfy this interface:
-//  DocumentAttributeValueMemberDateValue
-//  DocumentAttributeValueMemberLongValue
-//  DocumentAttributeValueMemberStringListValue
-//  DocumentAttributeValueMemberStringValue
-type DocumentAttributeValue interface {
-	isDocumentAttributeValue()
-}
+type DocumentAttributeValue struct {
 
-// A date expressed as an ISO 8601 string. It is important for the time zone to be
-// included in the ISO 8601 date-time format. For example, 20120325T123010+01:00 is
-// the ISO 8601 date-time format for March 25th 2012 at 12:30PM (plus 10 seconds)
-// in Central European Time.
-type DocumentAttributeValueMemberDateValue struct {
-	Value time.Time
+	// A date expressed as an ISO 8601 string. It is important for the time zone to be
+	// included in the ISO 8601 date-time format. For example, 20120325T123010+01:00 is
+	// the ISO 8601 date-time format for March 25th 2012 at 12:30PM (plus 10 seconds)
+	// in Central European Time.
+	DateValue *time.Time
 
-	noSmithyDocumentSerde
-}
+	// A long integer value.
+	LongValue *int64
 
-func (*DocumentAttributeValueMemberDateValue) isDocumentAttributeValue() {}
+	// A list of strings.
+	StringListValue []string
 
-// A long integer value.
-type DocumentAttributeValueMemberLongValue struct {
-	Value int64
+	// A string, such as "department".
+	StringValue *string
 
 	noSmithyDocumentSerde
 }
-
-func (*DocumentAttributeValueMemberLongValue) isDocumentAttributeValue() {}
-
-// A list of strings.
-type DocumentAttributeValueMemberStringListValue struct {
-	Value []string
-
-	noSmithyDocumentSerde
-}
-
-func (*DocumentAttributeValueMemberStringListValue) isDocumentAttributeValue() {}
-
-// A string, such as "department".
-type DocumentAttributeValueMemberStringValue struct {
-	Value string
-
-	noSmithyDocumentSerde
-}
-
-func (*DocumentAttributeValueMemberStringValue) isDocumentAttributeValue() {}
 
 // Provides the count of documents that match a particular attribute when doing a
 // faceted search.
@@ -902,7 +873,7 @@ type DocumentAttributeValueCountPair struct {
 	Count *int32
 
 	// The value of the attribute. For example, "HR."
-	DocumentAttributeValue DocumentAttributeValue
+	DocumentAttributeValue *DocumentAttributeValue
 
 	noSmithyDocumentSerde
 }
@@ -2606,14 +2577,3 @@ type WorkDocsConfiguration struct {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
-
-// UnknownUnionMember is returned when a union member is returned over the wire,
-// but has an unknown tag.
-type UnknownUnionMember struct {
-	Tag   string
-	Value []byte
-
-	noSmithyDocumentSerde
-}
-
-func (*UnknownUnionMember) isDocumentAttributeValue() {}

@@ -951,6 +951,23 @@ func validateMetricDatum(v *types.MetricDatum) error {
 	}
 }
 
+func validateMetricMathAnomalyDetector(v *types.MetricMathAnomalyDetector) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricMathAnomalyDetector"}
+	if v.MetricDataQueries != nil {
+		if err := validateMetricDataQueries(v.MetricDataQueries); err != nil {
+			invalidParams.AddNested("MetricDataQueries", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMetricStat(v *types.MetricStat) error {
 	if v == nil {
 		return nil
@@ -986,6 +1003,23 @@ func validateRange(v *types.Range) error {
 	}
 	if v.EndTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSingleMetricAnomalyDetector(v *types.SingleMetricAnomalyDetector) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SingleMetricAnomalyDetector"}
+	if v.Dimensions != nil {
+		if err := validateDimensions(v.Dimensions); err != nil {
+			invalidParams.AddNested("Dimensions", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1073,19 +1107,20 @@ func validateOpDeleteAnomalyDetectorInput(v *DeleteAnomalyDetectorInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteAnomalyDetectorInput"}
-	if v.Namespace == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
-	}
-	if v.MetricName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
-	}
 	if v.Dimensions != nil {
 		if err := validateDimensions(v.Dimensions); err != nil {
 			invalidParams.AddNested("Dimensions", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Stat == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Stat"))
+	if v.SingleMetricAnomalyDetector != nil {
+		if err := validateSingleMetricAnomalyDetector(v.SingleMetricAnomalyDetector); err != nil {
+			invalidParams.AddNested("SingleMetricAnomalyDetector", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MetricMathAnomalyDetector != nil {
+		if err := validateMetricMathAnomalyDetector(v.MetricMathAnomalyDetector); err != nil {
+			invalidParams.AddNested("MetricMathAnomalyDetector", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1402,23 +1437,24 @@ func validateOpPutAnomalyDetectorInput(v *PutAnomalyDetectorInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutAnomalyDetectorInput"}
-	if v.Namespace == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
-	}
-	if v.MetricName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
-	}
 	if v.Dimensions != nil {
 		if err := validateDimensions(v.Dimensions); err != nil {
 			invalidParams.AddNested("Dimensions", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Stat == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Stat"))
-	}
 	if v.Configuration != nil {
 		if err := validateAnomalyDetectorConfiguration(v.Configuration); err != nil {
 			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SingleMetricAnomalyDetector != nil {
+		if err := validateSingleMetricAnomalyDetector(v.SingleMetricAnomalyDetector); err != nil {
+			invalidParams.AddNested("SingleMetricAnomalyDetector", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MetricMathAnomalyDetector != nil {
+		if err := validateMetricMathAnomalyDetector(v.MetricMathAnomalyDetector); err != nil {
+			invalidParams.AddNested("MetricMathAnomalyDetector", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

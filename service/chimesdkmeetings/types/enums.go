@@ -2,6 +2,40 @@
 
 package types
 
+type TranscribeContentIdentificationType string
+
+// Enum values for TranscribeContentIdentificationType
+const (
+	TranscribeContentIdentificationTypePii TranscribeContentIdentificationType = "PII"
+)
+
+// Values returns all known values for TranscribeContentIdentificationType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (TranscribeContentIdentificationType) Values() []TranscribeContentIdentificationType {
+	return []TranscribeContentIdentificationType{
+		"PII",
+	}
+}
+
+type TranscribeContentRedactionType string
+
+// Enum values for TranscribeContentRedactionType
+const (
+	TranscribeContentRedactionTypePii TranscribeContentRedactionType = "PII"
+)
+
+// Values returns all known values for TranscribeContentRedactionType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (TranscribeContentRedactionType) Values() []TranscribeContentRedactionType {
+	return []TranscribeContentRedactionType{
+		"PII",
+	}
+}
+
 type TranscribeLanguageCode string
 
 // Enum values for TranscribeLanguageCode
@@ -37,6 +71,23 @@ func (TranscribeLanguageCode) Values() []TranscribeLanguageCode {
 		"ja-JP",
 		"ko-KR",
 		"zh-CN",
+	}
+}
+
+type TranscribeMedicalContentIdentificationType string
+
+// Enum values for TranscribeMedicalContentIdentificationType
+const (
+	TranscribeMedicalContentIdentificationTypePhi TranscribeMedicalContentIdentificationType = "PHI"
+)
+
+// Values returns all known values for TranscribeMedicalContentIdentificationType.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (TranscribeMedicalContentIdentificationType) Values() []TranscribeMedicalContentIdentificationType {
+	return []TranscribeMedicalContentIdentificationType{
+		"PHI",
 	}
 }
 
@@ -126,6 +177,27 @@ func (TranscribeMedicalType) Values() []TranscribeMedicalType {
 	return []TranscribeMedicalType{
 		"CONVERSATION",
 		"DICTATION",
+	}
+}
+
+type TranscribePartialResultsStability string
+
+// Enum values for TranscribePartialResultsStability
+const (
+	TranscribePartialResultsStabilityLow    TranscribePartialResultsStability = "low"
+	TranscribePartialResultsStabilityMedium TranscribePartialResultsStability = "medium"
+	TranscribePartialResultsStabilityHigh   TranscribePartialResultsStability = "high"
+)
+
+// Values returns all known values for TranscribePartialResultsStability. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (TranscribePartialResultsStability) Values() []TranscribePartialResultsStability {
+	return []TranscribePartialResultsStability{
+		"low",
+		"medium",
+		"high",
 	}
 }
 

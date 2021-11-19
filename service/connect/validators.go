@@ -610,6 +610,26 @@ func (m *validateOpDescribeContactFlow) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeContact struct {
+}
+
+func (*validateOpDescribeContact) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeContact) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeContactInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeContactInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeHoursOfOperation struct {
 }
 
@@ -1145,6 +1165,26 @@ func (m *validateOpListContactFlows) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListContactFlowsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListContactReferences struct {
+}
+
+func (*validateOpListContactReferences) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListContactReferences) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListContactReferencesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListContactReferencesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1870,6 +1910,46 @@ func (m *validateOpUpdateContactFlowName) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateContact struct {
+}
+
+func (*validateOpUpdateContact) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateContact) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateContactInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateContactInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateContactSchedule struct {
+}
+
+func (*validateOpUpdateContactSchedule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateContactSchedule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateContactScheduleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateContactScheduleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateHoursOfOperation struct {
 }
 
@@ -2430,6 +2510,10 @@ func addOpDescribeContactFlowValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpDescribeContactFlow{}, middleware.After)
 }
 
+func addOpDescribeContactValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeContact{}, middleware.After)
+}
+
 func addOpDescribeHoursOfOperationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeHoursOfOperation{}, middleware.After)
 }
@@ -2536,6 +2620,10 @@ func addOpListBotsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListContactFlowsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListContactFlows{}, middleware.After)
+}
+
+func addOpListContactReferencesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListContactReferences{}, middleware.After)
 }
 
 func addOpListHoursOfOperationsValidationMiddleware(stack *middleware.Stack) error {
@@ -2680,6 +2768,14 @@ func addOpUpdateContactFlowContentValidationMiddleware(stack *middleware.Stack) 
 
 func addOpUpdateContactFlowNameValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateContactFlowName{}, middleware.After)
+}
+
+func addOpUpdateContactValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateContact{}, middleware.After)
+}
+
+func addOpUpdateContactScheduleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateContactSchedule{}, middleware.After)
 }
 
 func addOpUpdateHoursOfOperationValidationMiddleware(stack *middleware.Stack) error {
@@ -3914,6 +4010,24 @@ func validateOpDescribeContactFlowInput(v *DescribeContactFlowInput) error {
 	}
 }
 
+func validateOpDescribeContactInput(v *DescribeContactInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeContactInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ContactId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeHoursOfOperationInput(v *DescribeHoursOfOperationInput) error {
 	if v == nil {
 		return nil
@@ -4402,6 +4516,27 @@ func validateOpListContactFlowsInput(v *ListContactFlowsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListContactFlowsInput"}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListContactReferencesInput(v *ListContactReferencesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListContactReferencesInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ContactId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactId"))
+	}
+	if v.ReferenceTypes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReferenceTypes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5062,6 +5197,50 @@ func validateOpUpdateContactFlowNameInput(v *UpdateContactFlowNameInput) error {
 	}
 	if v.ContactFlowId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContactFlowId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateContactInput(v *UpdateContactInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateContactInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ContactId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactId"))
+	}
+	if v.References != nil {
+		if err := validateContactReferences(v.References); err != nil {
+			invalidParams.AddNested("References", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateContactScheduleInput(v *UpdateContactScheduleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateContactScheduleInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ContactId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactId"))
+	}
+	if v.ScheduledTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScheduledTime"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// A deployment strategy defines important criteria for rolling out your
-// configuration to the designated targets. A deployment strategy includes: the
+// Creates a deployment strategy that defines important criteria for rolling out
+// your configuration to the designated targets. A deployment strategy includes the
 // overall duration required, a percentage of targets to receive the deployment
 // during each interval, an algorithm that defines how percentage grows, and bake
 // time.
@@ -61,24 +61,24 @@ type CreateDeploymentStrategyInput struct {
 	// deployment to be complete and no longer eligible for automatic roll back.
 	FinalBakeTimeInMinutes int32
 
-	// The algorithm used to define how percentage grows over time. AWS AppConfig
-	// supports the following growth types: Linear: For this type, AppConfig processes
-	// the deployment by dividing the total number of targets by the value specified
-	// for Step percentage. For example, a linear deployment that uses a Step
-	// percentage of 10 deploys the configuration to 10 percent of the hosts. After
-	// those deployments are complete, the system deploys the configuration to the next
-	// 10 percent. This continues until 100% of the targets have successfully received
-	// the configuration. Exponential: For this type, AppConfig processes the
-	// deployment exponentially using the following formula: G*(2^N). In this formula,
-	// G is the growth factor specified by the user and N is the number of steps until
-	// the configuration is deployed to all targets. For example, if you specify a
-	// growth factor of 2, then the system rolls out the configuration as follows:
-	// 2*(2^0)
-	//     2*(2^1)
+	// The algorithm used to define how percentage grows over time. AppConfig supports
+	// the following growth types: Linear: For this type, AppConfig processes the
+	// deployment by dividing the total number of targets by the value specified for
+	// Step percentage. For example, a linear deployment that uses a Step percentage of
+	// 10 deploys the configuration to 10 percent of the hosts. After those deployments
+	// are complete, the system deploys the configuration to the next 10 percent. This
+	// continues until 100% of the targets have successfully received the
+	// configuration. Exponential: For this type, AppConfig processes the deployment
+	// exponentially using the following formula: G*(2^N). In this formula, G is the
+	// growth factor specified by the user and N is the number of steps until the
+	// configuration is deployed to all targets. For example, if you specify a growth
+	// factor of 2, then the system rolls out the configuration as follows: 2*(2^0)
 	//
-	// 2*(2^2) Expressed numerically, the deployment rolls out as
-	// follows: 2% of the targets, 4% of the targets, 8% of the targets, and continues
-	// until the configuration has been deployed to all targets.
+	// 2*(2^1)
+	//
+	// 2*(2^2) Expressed numerically, the deployment rolls out as follows: 2%
+	// of the targets, 4% of the targets, 8% of the targets, and continues until the
+	// configuration has been deployed to all targets.
 	GrowthType types.GrowthType
 
 	// Metadata to assign to the deployment strategy. Tags help organize and categorize
@@ -97,8 +97,8 @@ type CreateDeploymentStrategyOutput struct {
 	// The description of the deployment strategy.
 	Description *string
 
-	// The amount of time AppConfig monitored for alarms before considering the
-	// deployment to be complete and no longer eligible for automatic roll back.
+	// The amount of time that AppConfig monitored for alarms before considering the
+	// deployment to be complete and no longer eligible for automatic rollback.
 	FinalBakeTimeInMinutes int32
 
 	// The percentage of targets that received a deployed configuration during each

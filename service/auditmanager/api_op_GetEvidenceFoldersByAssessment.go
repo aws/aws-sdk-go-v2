@@ -30,7 +30,7 @@ func (c *Client) GetEvidenceFoldersByAssessment(ctx context.Context, params *Get
 
 type GetEvidenceFoldersByAssessmentInput struct {
 
-	// The identifier for the assessment.
+	// The unique identifier for the assessment.
 	//
 	// This member is required.
 	AssessmentId *string

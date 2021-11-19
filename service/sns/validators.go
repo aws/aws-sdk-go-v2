@@ -390,6 +390,26 @@ func (m *validateOpOptInPhoneNumber) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPublishBatch struct {
+}
+
+func (*validateOpPublishBatch) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPublishBatch) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PublishBatchInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPublishBatchInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPublish struct {
 }
 
@@ -706,6 +726,10 @@ func addOpOptInPhoneNumberValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpOptInPhoneNumber{}, middleware.After)
 }
 
+func addOpPublishBatchValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPublishBatch{}, middleware.After)
+}
+
 func addOpPublishValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPublish{}, middleware.After)
 }
@@ -779,6 +803,46 @@ func validateMessageAttributeValue(v *types.MessageAttributeValue) error {
 	invalidParams := smithy.InvalidParamsError{Context: "MessageAttributeValue"}
 	if v.DataType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePublishBatchRequestEntry(v *types.PublishBatchRequestEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PublishBatchRequestEntry"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.Message == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Message"))
+	}
+	if v.MessageAttributes != nil {
+		if err := validateMessageAttributeMap(v.MessageAttributes); err != nil {
+			invalidParams.AddNested("MessageAttributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePublishBatchRequestEntryList(v []types.PublishBatchRequestEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PublishBatchRequestEntryList"}
+	for i := range v {
+		if err := validatePublishBatchRequestEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1125,6 +1189,28 @@ func validateOpOptInPhoneNumberInput(v *OptInPhoneNumberInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "OptInPhoneNumberInput"}
 	if v.PhoneNumber == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PhoneNumber"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPublishBatchInput(v *PublishBatchInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PublishBatchInput"}
+	if v.TopicArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TopicArn"))
+	}
+	if v.PublishBatchRequestEntries == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PublishBatchRequestEntries"))
+	} else if v.PublishBatchRequestEntries != nil {
+		if err := validatePublishBatchRequestEntryList(v.PublishBatchRequestEntries); err != nil {
+			invalidParams.AddNested("PublishBatchRequestEntries", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

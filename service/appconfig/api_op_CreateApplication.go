@@ -10,11 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// An application in AppConfig is a logical unit of code that provides capabilities
-// for your customers. For example, an application can be a microservice that runs
-// on Amazon EC2 instances, a mobile application installed by your users, a
-// serverless application using Amazon API Gateway and AWS Lambda, or any system
-// you run on behalf of others.
+// Creates an application. An application in AppConfig is a logical unit of code
+// that provides capabilities for your customers. For example, an application can
+// be a microservice that runs on Amazon EC2 instances, a mobile application
+// installed by your users, a serverless application using Amazon API Gateway and
+// Lambda, or any system you run on behalf of others.
 func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicationInput, optFns ...func(*Options)) (*CreateApplicationOutput, error) {
 	if params == nil {
 		params = &CreateApplicationInput{}

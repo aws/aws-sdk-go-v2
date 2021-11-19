@@ -29,17 +29,17 @@ func (c *Client) GetEvidenceFolder(ctx context.Context, params *GetEvidenceFolde
 
 type GetEvidenceFolderInput struct {
 
-	// The identifier for the assessment.
+	// The unique identifier for the assessment.
 	//
 	// This member is required.
 	AssessmentId *string
 
-	// The identifier for the control set.
+	// The unique identifier for the control set.
 	//
 	// This member is required.
 	ControlSetId *string
 
-	// The identifier for the folder that the evidence is stored in.
+	// The unique identifier for the folder that the evidence is stored in.
 	//
 	// This member is required.
 	EvidenceFolderId *string

@@ -105,8 +105,9 @@ type ComputeEnvironmentDetail struct {
 	// This member is required.
 	ComputeEnvironmentArn *string
 
-	// The name of the compute environment. Up to 128 letters (uppercase and
-	// lowercase), numbers, hyphens, and underscores are allowed.
+	// The name of the compute environment. It can be up to 128 letters long. It can
+	// contain uppercase and lowercase letters, numbers, hyphens (-), and underscores
+	// (_).
 	//
 	// This member is required.
 	ComputeEnvironmentName *string
@@ -1035,15 +1036,13 @@ type FairsharePolicy struct {
 
 	// The time period to use to calculate a fair share percentage for each fair share
 	// identifier in use, in seconds. A value of zero (0) indicates that only current
-	// usage should be measured; if there are four evenly weighted fair share
-	// identifiers then each can only use up to 25% of the available CPU resources,
-	// even if some of the fair share identifiers have no currently running jobs. The
-	// decay allows for more recently run jobs to have more weight than jobs that ran
-	// earlier. The maximum supported value is 604800 (1 week).
+	// usage should be measured. The decay allows for more recently run jobs to have
+	// more weight than jobs that ran earlier. The maximum supported value is 604800 (1
+	// week).
 	ShareDecaySeconds int32
 
-	// Array of SharedIdentifier objects that contain the weights for the fair share
-	// identifiers for the fair share policy. Fair share identifiers that are not
+	// An array of SharedIdentifier objects that contain the weights for the fair share
+	// identifiers for the fair share policy. Fair share identifiers that aren't
 	// included have a default weight of 1.0.
 	ShareDistribution []ShareAttributes
 
@@ -1145,8 +1144,8 @@ type JobDefinition struct {
 	// definition.
 	RetryStrategy *RetryStrategy
 
-	// The scheduling priority of the job definition. This will only affect jobs in job
-	// queues with a fair share policy. Jobs with a higher scheduling priority will be
+	// The scheduling priority of the job definition. This only affects jobs in job
+	// queues with a fair share policy. Jobs with a higher scheduling priority are
 	// scheduled before jobs with a lower scheduling priority.
 	SchedulingPriority int32
 
@@ -1264,8 +1263,8 @@ type JobDetail struct {
 	// The retry strategy to use for this job if an attempt fails.
 	RetryStrategy *RetryStrategy
 
-	// The scheduling policy of the job definition. This will only affect jobs in job
-	// queues with a fair share policy. Jobs with a higher scheduling priority will be
+	// The scheduling policy of the job definition. This only affects jobs in job
+	// queues with a fair share policy. Jobs with a higher scheduling priority are
 	// scheduled before jobs with a lower scheduling priority.
 	SchedulingPriority int32
 
@@ -1328,7 +1327,7 @@ type JobQueueDetail struct {
 	// This member is required.
 	State JQState
 
-	// Amazon Resource Name (ARN) of the scheduling policy. The format is
+	// The Amazon Resource Name (ARN) of the scheduling policy. The format is
 	// aws:Partition:batch:Region:Account:scheduling-policy/Name . For example,
 	// aws:aws:batch:us-west-2:012345678910:scheduling-policy/MySchedulingPolicy.
 	SchedulingPolicyArn *string
@@ -1368,10 +1367,10 @@ type JobSummary struct {
 	// job.
 	Container *ContainerSummary
 
-	// The Unix timestamp for when the job was created. For non-array jobs and parent
-	// array jobs, this is when the job entered the SUBMITTED state (at the time
-	// SubmitJob was called). For array child jobs, this is when the child job was
-	// spawned by its parent and entered the PENDING state.
+	// The Unix timestamp (in milliseconds) for when the job was created. For non-array
+	// jobs and parent array jobs, this is when the job entered the SUBMITTED state (at
+	// the time SubmitJob was called). For array child jobs, this is when the child job
+	// was spawned by its parent and entered the PENDING state.
 	CreatedAt int64
 
 	// The Amazon Resource Name (ARN) of the job.
@@ -1871,11 +1870,11 @@ type RetryStrategy struct {
 	noSmithyDocumentSerde
 }
 
-// An object representing a scheduling policy.
+// An object that represents a scheduling policy.
 type SchedulingPolicyDetail struct {
 
-	// Amazon Resource Name (ARN) of the scheduling policy. An example would be
-	// arn:aws:batch:us-east-1:123456789012:scheduling-policy/HighPriority
+	// The Amazon Resource Name (ARN) of the scheduling policy. An example is
+	// arn:aws:batch:us-east-1:123456789012:scheduling-policy/HighPriority .
 	//
 	// This member is required.
 	Arn *string
@@ -1888,9 +1887,9 @@ type SchedulingPolicyDetail struct {
 	// The fair share policy for the scheduling policy.
 	FairsharePolicy *FairsharePolicy
 
-	// The tags that you apply to the scheduling policy to help you categorize and
-	// organize your resources. Each tag consists of a key and an optional value. For
-	// more information, see Tagging Amazon Web Services Resources
+	// The tags that you apply to the scheduling policy to categorize and organize your
+	// resources. Each tag consists of a key and an optional value. For more
+	// information, see Tagging Amazon Web Services Resources
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in Amazon Web
 	// Services General Reference.
 	Tags map[string]string
@@ -1898,7 +1897,7 @@ type SchedulingPolicyDetail struct {
 	noSmithyDocumentSerde
 }
 
-// An object containing the details of a scheduling policy returned in a
+// An object that contains the details of a scheduling policy that's returned in a
 // ListSchedulingPolicy action.
 type SchedulingPolicyListingDetail struct {
 
@@ -1945,26 +1944,26 @@ type Secret struct {
 }
 
 // Specifies the weights for the fair share identifiers for the fair share policy.
-// Fair share identifiers that are not included have a default weight of 1.0.
+// Fair share identifiers that aren't included have a default weight of 1.0.
 type ShareAttributes struct {
 
 	// A fair share identifier or fair share identifier prefix. If the string ends with
-	// '*' then this entry specifies the weight factor to use for fair share
-	// identifiers that begin with that prefix. The list of fair share identifiers in a
-	// fair share policy cannot overlap. For example you cannot have one that specifies
+	// an asterisk (*), this entry specifies the weight factor to use for fair share
+	// identifiers that start with that prefix. The list of fair share identifiers in a
+	// fair share policy cannot overlap. For example, you can't have one that specifies
 	// a shareIdentifier of UserA* and another that specifies a shareIdentifier of
 	// UserA-1. There can be no more than 500 fair share identifiers active in a job
 	// queue. The string is limited to 255 alphanumeric characters, optionally followed
-	// by '*'.
+	// by an asterisk (*).
 	//
 	// This member is required.
 	ShareIdentifier *string
 
 	// The weight factor for the fair share identifier. The default value is 1.0. A
-	// lower value has a higher priority for compute resources. For example, jobs using
-	// a share identifier with a weight factor of 0.125 (1/8) will get 8 times the
-	// compute resources of jobs using a share identifier with a weight factor of 1.
-	// The smallest supported value is 0.0001 and the largest supported value is
+	// lower value has a higher priority for compute resources. For example, jobs that
+	// use a share identifier with a weight factor of 0.125 (1/8) get 8 times the
+	// compute resources of jobs that use a share identifier with a weight factor of 1.
+	// The smallest supported value is 0.0001, and the largest supported value is
 	// 999.9999.
 	WeightFactor float32
 
@@ -2035,9 +2034,10 @@ type Volume struct {
 	// Fargate resources and shouldn't be provided.
 	Host *Host
 
-	// The name of the volume. Up to 255 letters (uppercase and lowercase), numbers,
-	// hyphens, and underscores are allowed. This name is referenced in the
-	// sourceVolume parameter of container definition mountPoints.
+	// The name of the volume. It can be up to 255 letters long. It can contain
+	// uppercase and lowercase letters, numbers, hyphens (-), and underscores (_). This
+	// name is referenced in the sourceVolume parameter of container definition
+	// mountPoints.
 	Name *string
 
 	noSmithyDocumentSerde

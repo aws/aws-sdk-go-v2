@@ -4450,6 +4450,9 @@ func awsAwsjson11_deserializeOpErrorPutLoggingConfiguration(response *smithyhttp
 	case strings.EqualFold("WAFLimitsExceededException", errorCode):
 		return awsAwsjson11_deserializeErrorWAFLimitsExceededException(response, errorBody)
 
+	case strings.EqualFold("WAFLogDestinationPermissionIssueException", errorCode):
+		return awsAwsjson11_deserializeErrorWAFLogDestinationPermissionIssueException(response, errorBody)
+
 	case strings.EqualFold("WAFNonexistentItemException", errorCode):
 		return awsAwsjson11_deserializeErrorWAFNonexistentItemException(response, errorBody)
 
@@ -5924,6 +5927,41 @@ func awsAwsjson11_deserializeErrorWAFLimitsExceededException(response *smithyhtt
 
 	output := &types.WAFLimitsExceededException{}
 	err := awsAwsjson11_deserializeDocumentWAFLimitsExceededException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson11_deserializeErrorWAFLogDestinationPermissionIssueException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.WAFLogDestinationPermissionIssueException{}
+	err := awsAwsjson11_deserializeDocumentWAFLogDestinationPermissionIssueException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -11689,6 +11727,46 @@ func awsAwsjson11_deserializeDocumentWAFLimitsExceededException(v **types.WAFLim
 	var sv *types.WAFLimitsExceededException
 	if *v == nil {
 		sv = &types.WAFLimitsExceededException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentWAFLogDestinationPermissionIssueException(v **types.WAFLogDestinationPermissionIssueException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WAFLogDestinationPermissionIssueException
+	if *v == nil {
+		sv = &types.WAFLogDestinationPermissionIssueException{}
 	} else {
 		sv = *v
 	}

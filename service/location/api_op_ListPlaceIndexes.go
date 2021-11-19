@@ -48,8 +48,8 @@ type ListPlaceIndexesOutput struct {
 	// This member is required.
 	Entries []types.ListPlaceIndexesResponseEntry
 
-	// A pagination token indicating there are additional pages available. You can use
-	// the token in a following request to fetch the next set of results.
+	// A pagination token indicating that there are additional pages available. You can
+	// use the token in a new request to fetch the next page of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

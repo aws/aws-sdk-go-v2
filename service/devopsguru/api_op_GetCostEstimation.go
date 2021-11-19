@@ -12,8 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns an estimate of the monthly cost for DevOps Guru to analyze your AWS
-// resources. For more information, see Estimate your Amazon DevOps Guru costs
+// Returns an estimate of the monthly cost for DevOps Guru to analyze your Amazon
+// Web Services resources. For more information, see Estimate your Amazon DevOps
+// Guru costs
 // (https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html)
 // and Amazon DevOps Guru pricing (http://aws.amazon.com/devops-guru/pricing/).
 func (c *Client) GetCostEstimation(ctx context.Context, params *GetCostEstimationInput, optFns ...func(*Options)) (*GetCostEstimationOutput, error) {
@@ -43,15 +44,15 @@ type GetCostEstimationInput struct {
 type GetCostEstimationOutput struct {
 
 	// An array of ResourceCost objects that each contains details about the monthly
-	// cost estimate to analyze one of your AWS resources.
+	// cost estimate to analyze one of your Amazon Web Services resources.
 	Costs []types.ServiceResourceCost
 
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If there are no more pages, this value is null.
 	NextToken *string
 
-	// The collection of the AWS resources used to create your monthly DevOps Guru cost
-	// estimate.
+	// The collection of the Amazon Web Services resources used to create your monthly
+	// DevOps Guru cost estimate.
 	ResourceCollection *types.CostEstimationResourceCollectionFilter
 
 	// The status of creating this cost estimate. If it's still in progress, the status
@@ -61,9 +62,9 @@ type GetCostEstimationOutput struct {
 	// The start and end time of the cost estimation.
 	TimeRange *types.CostEstimationTimeRange
 
-	// The estimated monthly cost to analyze the AWS resources. This value is the sum
-	// of the estimated costs to analyze each resource in the Costs object in this
-	// response.
+	// The estimated monthly cost to analyze the Amazon Web Services resources. This
+	// value is the sum of the estimated costs to analyze each resource in the Costs
+	// object in this response.
 	TotalCost float64
 
 	// Metadata pertaining to the operation's result.

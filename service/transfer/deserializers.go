@@ -5350,6 +5350,15 @@ func awsAwsjson11_deserializeDocumentIdentityProviderDetails(v **types.IdentityP
 				sv.DirectoryId = ptr.String(jtv)
 			}
 
+		case "Function":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Function to be of type string, got %T instead", value)
+				}
+				sv.Function = ptr.String(jtv)
+			}
+
 		case "InvocationRole":
 			if value != nil {
 				jtv, ok := value.(string)

@@ -20,6 +20,24 @@ func (Architecture) Values() []Architecture {
 	}
 }
 
+type AuthorizationType string
+
+// Enum values for AuthorizationType
+const (
+	AuthorizationTypeNone   AuthorizationType = "NONE"
+	AuthorizationTypeAwsIam AuthorizationType = "AWS_IAM"
+)
+
+// Values returns all known values for AuthorizationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AuthorizationType) Values() []AuthorizationType {
+	return []AuthorizationType{
+		"NONE",
+		"AWS_IAM",
+	}
+}
+
 type CodeSigningPolicy string
 
 // Enum values for CodeSigningPolicy
@@ -305,12 +323,14 @@ type SourceAccessType string
 
 // Enum values for SourceAccessType
 const (
-	SourceAccessTypeBasicAuth        SourceAccessType = "BASIC_AUTH"
-	SourceAccessTypeVpcSubnet        SourceAccessType = "VPC_SUBNET"
-	SourceAccessTypeVpcSecurityGroup SourceAccessType = "VPC_SECURITY_GROUP"
-	SourceAccessTypeSaslScram512Auth SourceAccessType = "SASL_SCRAM_512_AUTH"
-	SourceAccessTypeSaslScram256Auth SourceAccessType = "SASL_SCRAM_256_AUTH"
-	SourceAccessTypeVirtualHost      SourceAccessType = "VIRTUAL_HOST"
+	SourceAccessTypeBasicAuth                SourceAccessType = "BASIC_AUTH"
+	SourceAccessTypeVpcSubnet                SourceAccessType = "VPC_SUBNET"
+	SourceAccessTypeVpcSecurityGroup         SourceAccessType = "VPC_SECURITY_GROUP"
+	SourceAccessTypeSaslScram512Auth         SourceAccessType = "SASL_SCRAM_512_AUTH"
+	SourceAccessTypeSaslScram256Auth         SourceAccessType = "SASL_SCRAM_256_AUTH"
+	SourceAccessTypeVirtualHost              SourceAccessType = "VIRTUAL_HOST"
+	SourceAccessTypeClientCertificateTlsAuth SourceAccessType = "CLIENT_CERTIFICATE_TLS_AUTH"
+	SourceAccessTypeServerRootCaCertificate  SourceAccessType = "SERVER_ROOT_CA_CERTIFICATE"
 )
 
 // Values returns all known values for SourceAccessType. Note that this can be
@@ -324,6 +344,8 @@ func (SourceAccessType) Values() []SourceAccessType {
 		"SASL_SCRAM_512_AUTH",
 		"SASL_SCRAM_256_AUTH",
 		"VIRTUAL_HOST",
+		"CLIENT_CERTIFICATE_TLS_AUTH",
+		"SERVER_ROOT_CA_CERTIFICATE",
 	}
 }
 

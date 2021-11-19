@@ -36,6 +36,9 @@ type ListRecommendationsInput struct {
 	// This member is required.
 	InsightId *string
 
+	// The ID of the Amazon Web Services account.
+	AccountId *string
+
 	// A locale that specifies the language to use for recommendations.
 	Locale types.Locale
 

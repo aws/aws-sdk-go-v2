@@ -14,10 +14,11 @@ import (
 
 // Returns the number of open proactive insights, open reactive insights, and the
 // Mean Time to Recover (MTTR) for all closed insights in resource collections in
-// your account. You specify the type of AWS resources collection. The one type of
-// AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can
-// be configured to analyze only the AWS resources that are defined in the stacks.
-// You can specify up to 500 AWS CloudFormation stacks.
+// your account. You specify the type of Amazon Web Services resources collection.
+// The one type of Amazon Web Services resource collection supported is Amazon Web
+// Services CloudFormation stacks. DevOps Guru can be configured to analyze only
+// the Amazon Web Services resources that are defined in the stacks. You can
+// specify up to 500 Amazon Web Services CloudFormation stacks.
 func (c *Client) DescribeResourceCollectionHealth(ctx context.Context, params *DescribeResourceCollectionHealthInput, optFns ...func(*Options)) (*DescribeResourceCollectionHealthOutput, error) {
 	if params == nil {
 		params = &DescribeResourceCollectionHealthInput{}
@@ -35,11 +36,12 @@ func (c *Client) DescribeResourceCollectionHealth(ctx context.Context, params *D
 
 type DescribeResourceCollectionHealthInput struct {
 
-	// An AWS resource collection type. This type specifies how analyzed AWS resources
-	// are defined. The one type of AWS resource collection supported is AWS
-	// CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS
-	// resources that are defined in the stacks. You can specify up to 500 AWS
-	// CloudFormation stacks.
+	// An Amazon Web Services resource collection type. This type specifies how
+	// analyzed Amazon Web Services resources are defined. The one type of Amazon Web
+	// Services resource collection supported is Amazon Web Services CloudFormation
+	// stacks. DevOps Guru can be configured to analyze only the Amazon Web Services
+	// resources that are defined in the stacks. You can specify up to 500 Amazon Web
+	// Services CloudFormation stacks.
 	//
 	// This member is required.
 	ResourceCollectionType types.ResourceCollectionType
@@ -63,8 +65,8 @@ type DescribeResourceCollectionHealthOutput struct {
 	// operation. If there are no more pages, this value is null.
 	NextToken *string
 
-	// An array of ServiceHealth objects that describes the health of the AWS services
-	// associated with the resources in the collection.
+	// An array of ServiceHealth objects that describes the health of the Amazon Web
+	// Services services associated with the resources in the collection.
 	Service []types.ServiceHealth
 
 	// Metadata pertaining to the operation's result.

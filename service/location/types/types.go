@@ -218,7 +218,7 @@ type CalculateRouteSummary struct {
 	// This member is required.
 	Distance *float64
 
-	// The unit of measurement for the distance.
+	// The unit of measurement for route distances.
 	//
 	// This member is required.
 	DistanceUnit DistanceUnit
@@ -629,15 +629,15 @@ type ListPlaceIndexesResponseEntry struct {
 	// This member is required.
 	CreateTime *time.Time
 
-	// The data provider of geospatial data. Indicates one of the available
-	// providers:
+	// The data provider of geospatial data. Values can be one of the following:
 	//
-	// * Esri
+	// *
+	// Esri
 	//
 	// * Here
 	//
-	// For additional details on data providers, see Amazon
-	// Location Service data providers
+	// For more information about data providers, see Amazon Location
+	// Service data providers
 	// (https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html).
 	//
 	// This member is required.
@@ -834,6 +834,14 @@ type Place struct {
 	// For example, CAN.
 	Country *string
 
+	// True if the result is interpolated from other known places. False if the Place
+	// is a known place. Not returned when the partner does not provide the
+	// information. For example, returns False for an address location that is found in
+	// the partner data, but returns True if an address does not exist in the partner
+	// data and its location is calculated by interpolating between other known
+	// addresses.
+	Interpolated *bool
+
 	// The full name and address of the point of interest such as a city, region, or
 	// country. For example, 123 Any Street, Any Town, USA.
 	Label *string
@@ -856,9 +864,13 @@ type Place struct {
 	// Street.
 	Street *string
 
-	// A country, or an area that's part of a larger region . For example, Metro
+	// A country, or an area that's part of a larger region. For example, Metro
 	// Vancouver.
 	SubRegion *string
+
+	// The time zone in which the Place is located. Returned only when using Here as
+	// the selected partner.
+	TimeZone *TimeZone
 
 	noSmithyDocumentSerde
 }
@@ -879,11 +891,18 @@ type PlaceGeometry struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies a single point of interest, or Place as a result of a search query
-// obtained from a dataset configured in the place index resource.
+// Contains a search result from a position search query that is run on a place
+// index resource.
 type SearchForPositionResult struct {
 
-	// Contains details about the relevant point of interest.
+	// The distance in meters of a great-circle arc between the query position and the
+	// result. A great-circle arc is the shortest path on a sphere, in this case the
+	// Earth. This returns the shortest distance between two locations.
+	//
+	// This member is required.
+	Distance *float64
+
+	// Details about the search result, such as its address and position.
 	//
 	// This member is required.
 	Place *Place
@@ -891,85 +910,107 @@ type SearchForPositionResult struct {
 	noSmithyDocumentSerde
 }
 
-// Contains relevant Places returned by calling SearchPlaceIndexForText.
+// Contains a search result from a text search query that is run on a place index
+// resource.
 type SearchForTextResult struct {
 
-	// Contains details about the relevant point of interest.
+	// Details about the search result, such as its address and position.
 	//
 	// This member is required.
 	Place *Place
 
+	// The distance in meters of a great-circle arc between the bias position specified
+	// and the result. Distance will be returned only if a bias position was specified
+	// in the query. A great-circle arc is the shortest path on a sphere, in this case
+	// the Earth. This returns the shortest distance between two locations.
+	Distance *float64
+
+	// The relative confidence in the match for a result among the results returned.
+	// For example, if more fields for an address match (including house number,
+	// street, city, country/region, and postal code), the relevance score is closer to
+	// 1. Returned only when the partner selected is Esri.
+	Relevance *float64
+
 	noSmithyDocumentSerde
 }
 
-// A summary of the reverse geocoding request sent using
-// SearchPlaceIndexForPosition.
+// A summary of the request sent by using SearchPlaceIndexForPosition.
 type SearchPlaceIndexForPositionSummary struct {
 
-	// The data provider of geospatial data. Indicates one of the available
-	// providers:
+	// The geospatial data provider attached to the place index resource specified in
+	// the request. Values can be one of the following:
 	//
 	// * Esri
 	//
-	// * HERE
+	// * Here
 	//
-	// For additional details on data providers, see Amazon
-	// Location Service data providers
+	// For more
+	// information about data providers, see Amazon Location Service data providers
 	// (https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html).
 	//
 	// This member is required.
 	DataSource *string
 
-	// The position given in the reverse geocoding request.
+	// The position specified in the request.
 	//
 	// This member is required.
 	Position []float64
 
-	// An optional parameter. The maximum number of results returned per request.
+	// The preferred language used to return results. Matches the language in the
+	// request. The value is a valid BCP 47 (https://tools.ietf.org/search/bcp47)
+	// language tag, for example, en for English.
+	Language *string
+
+	// Contains the optional result count limit that is specified in the request.
 	// Default value: 50
 	MaxResults int32
 
 	noSmithyDocumentSerde
 }
 
-// A summary of the geocoding request sent using SearchPlaceIndexForText.
+// A summary of the request sent by using SearchPlaceIndexForText.
 type SearchPlaceIndexForTextSummary struct {
 
-	// The data provider of geospatial data. Indicates one of the available
-	// providers:
+	// The geospatial data provider attached to the place index resource specified in
+	// the request. Values can be one of the following:
 	//
 	// * Esri
 	//
-	// * HERE
+	// * Here
 	//
-	// For additional details on data providers, see Amazon
-	// Location Service data providers
+	// For more
+	// information about data providers, see Amazon Location Service data providers
 	// (https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html).
 	//
 	// This member is required.
 	DataSource *string
 
-	// The address, name, city or region to be used in the geocoding request. In
-	// free-form text format. For example, Vancouver.
+	// The search text specified in the request.
 	//
 	// This member is required.
 	Text *string
 
-	// Contains the coordinates for the bias position entered in the geocoding request.
+	// Contains the coordinates for the optional bias position specified in the
+	// request.
 	BiasPosition []float64
 
-	// Contains the coordinates for the optional bounding box coordinated entered in
-	// the geocoding request.
+	// Contains the coordinates for the optional bounding box specified in the request.
 	FilterBBox []float64
 
-	// Contains the country filter entered in the geocoding request.
+	// Contains the optional country filter specified in the request.
 	FilterCountries []string
 
-	// Contains the maximum number of results indicated for the request.
+	// The preferred language used to return results. Matches the language in the
+	// request. The value is a valid BCP 47 (https://tools.ietf.org/search/bcp47)
+	// language tag, for example, en for English.
+	Language *string
+
+	// Contains the optional result count limit specified in the request.
 	MaxResults int32
 
-	// A bounding box that contains the search results within the specified area
-	// indicated by FilterBBox. A subset of bounding box specified using FilterBBox.
+	// The bounding box that fully contains all search results. If you specified the
+	// optional FilterBBox parameter in the request, ResultBBox is contained within
+	// FilterBBox.
 	ResultBBox []float64
 
 	noSmithyDocumentSerde
@@ -1007,6 +1048,22 @@ type Step struct {
 	// line string geometry. For example, the index of the first step in a leg geometry
 	// is 0. Included in the response for queries that set IncludeLegGeometry to True.
 	GeometryOffset *int32
+
+	noSmithyDocumentSerde
+}
+
+// Information about a time zone. Includes the name of the time zone and the offset
+// from UTC in seconds.
+type TimeZone struct {
+
+	// The name of the time zone, following the  IANA time zone standard
+	// (https://www.iana.org/time-zones). For example, America/Los_Angeles.
+	//
+	// This member is required.
+	Name *string
+
+	// The time zone's offset, in seconds, from UTC.
+	Offset *int32
 
 	noSmithyDocumentSerde
 }

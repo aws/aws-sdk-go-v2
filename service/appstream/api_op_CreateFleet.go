@@ -12,7 +12,7 @@ import (
 )
 
 // Creates a fleet. A fleet consists of streaming instances that run a specified
-// image.
+// image when using Always-On or On-Demand.
 func (c *Client) CreateFleet(ctx context.Context, params *CreateFleetInput, optFns ...func(*Options)) (*CreateFleetOutput, error) {
 	if params == nil {
 		params = &CreateFleetInput{}
@@ -29,11 +29,6 @@ func (c *Client) CreateFleet(ctx context.Context, params *CreateFleetInput, optF
 }
 
 type CreateFleetInput struct {
-
-	// The desired capacity for the fleet.
-	//
-	// This member is required.
-	ComputeCapacity *types.ComputeCapacity
 
 	// The instance type to use when launching fleet instances. The following instance
 	// types are available:
@@ -118,6 +113,13 @@ type CreateFleetInput struct {
 	// *
 	// stream.graphics-pro.16xlarge
 	//
+	// The following instance types are available for
+	// Elastic fleets:
+	//
+	// * stream.standard.small
+	//
+	// * stream.standard.medium
+	//
 	// This member is required.
 	InstanceType *string
 
@@ -125,6 +127,10 @@ type CreateFleetInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	// The desired capacity for the fleet. This is not allowed for Elastic fleets. For
+	// Elastic fleets, specify MaxConcurrentSessions instead.
+	ComputeCapacity *types.ComputeCapacity
 
 	// The description to display.
 	Description *string
@@ -140,7 +146,7 @@ type CreateFleetInput struct {
 	DisplayName *string
 
 	// The name of the directory and organizational unit (OU) to use to join the fleet
-	// to a Microsoft Active Directory domain.
+	// to a Microsoft Active Directory domain. This is not allowed for Elastic fleets.
 	DomainJoinInfo *types.DomainJoinInfo
 
 	// Enables or disables default internet access for the fleet.
@@ -192,12 +198,20 @@ type CreateFleetInput struct {
 	// The name of the image used to create the fleet.
 	ImageName *string
 
+	// The maximum concurrent sessions of the Elastic fleet. This is required for
+	// Elastic fleets, and not allowed for other fleet types.
+	MaxConcurrentSessions *int32
+
 	// The maximum amount of time that a streaming session can remain active, in
 	// seconds. If users are still connected to a streaming instance five minutes
 	// before this limit is reached, they are prompted to save any open documents
 	// before being disconnected. After this time elapses, the instance is terminated
 	// and replaced by a new instance. Specify a value between 600 and 360000.
 	MaxUserDurationInSeconds *int32
+
+	// The fleet platform. WINDOWS_SERVER_2019 and AMAZON_LINUX2 are supported for
+	// Elastic fleets.
+	Platform types.PlatformType
 
 	// The AppStream 2.0 view that is displayed to your users when they stream from the
 	// fleet. When APP is specified, only the windows of applications opened by users
@@ -215,7 +229,14 @@ type CreateFleetInput struct {
 	// in the Amazon AppStream 2.0 Administration Guide.
 	Tags map[string]string
 
-	// The VPC configuration for the fleet.
+	// The USB device filter strings that specify which USB devices a user can redirect
+	// to the fleet streaming session, when using the Windows native client. This is
+	// allowed but not required for Elastic fleets.
+	UsbDeviceFilterStrings []string
+
+	// The VPC configuration for the fleet. This is required for Elastic fleets, but
+	// not required for other fleet types. Elastic fleets require that you specify at
+	// least two subnets in different availability zones.
 	VpcConfig *types.VpcConfig
 
 	noSmithyDocumentSerde

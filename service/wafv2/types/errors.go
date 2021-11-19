@@ -234,6 +234,32 @@ func (e *WAFLimitsExceededException) ErrorMessage() string {
 func (e *WAFLimitsExceededException) ErrorCode() string             { return "WAFLimitsExceededException" }
 func (e *WAFLimitsExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The operation failed because you don't have the permissions that your logging
+// configuration requires. For information, see Logging web ACL traffic information
+// (https://docs.aws.amazon.com/waf/latest/developerguide/logging.html) in the WAF
+// Developer Guide.
+type WAFLogDestinationPermissionIssueException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *WAFLogDestinationPermissionIssueException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *WAFLogDestinationPermissionIssueException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *WAFLogDestinationPermissionIssueException) ErrorCode() string {
+	return "WAFLogDestinationPermissionIssueException"
+}
+func (e *WAFLogDestinationPermissionIssueException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // WAF couldn’t perform the operation because your resource doesn’t exist.
 type WAFNonexistentItemException struct {
 	Message *string

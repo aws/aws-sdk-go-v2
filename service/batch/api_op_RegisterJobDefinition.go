@@ -30,8 +30,9 @@ func (c *Client) RegisterJobDefinition(ctx context.Context, params *RegisterJobD
 // Contains the parameters for RegisterJobDefinition.
 type RegisterJobDefinitionInput struct {
 
-	// The name of the job definition to register. Up to 128 letters (uppercase and
-	// lowercase), numbers, hyphens, and underscores are allowed.
+	// The name of the job definition to register. It can be up to 128 letters long. It
+	// can contain uppercase and lowercase letters, numbers, hyphens (-), and
+	// underscores (_).
 	//
 	// This member is required.
 	JobDefinitionName *string

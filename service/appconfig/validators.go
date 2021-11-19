@@ -754,6 +754,38 @@ func addOpValidateConfigurationValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpValidateConfiguration{}, middleware.After)
 }
 
+func validateMonitor(v *types.Monitor) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Monitor"}
+	if v.AlarmArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AlarmArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMonitorList(v []types.Monitor) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MonitorList"}
+	for i := range v {
+		if err := validateMonitor(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateValidator(v *types.Validator) error {
 	if v == nil {
 		return nil
@@ -858,6 +890,11 @@ func validateOpCreateEnvironmentInput(v *CreateEnvironmentInput) error {
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Monitors != nil {
+		if err := validateMonitorList(v.Monitors); err != nil {
+			invalidParams.AddNested("Monitors", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1325,6 +1362,11 @@ func validateOpUpdateEnvironmentInput(v *UpdateEnvironmentInput) error {
 	}
 	if v.EnvironmentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if v.Monitors != nil {
+		if err := validateMonitorList(v.Monitors); err != nil {
+			invalidParams.AddNested("Monitors", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

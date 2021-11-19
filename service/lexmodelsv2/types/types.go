@@ -88,8 +88,9 @@ type AggregatedUtterancesSummary struct {
 type AudioLogDestination struct {
 
 	// The Amazon S3 bucket where the audio log files are stored. The IAM role
-	// specified in the roleArn parameter of the CreateBot operation must have
-	// permission to write to this bucket.
+	// specified in the roleArn parameter of the CreateBot
+	// (https://docs.aws.amazon.com/lexv2/latest/dg/API_CreateBot.html) operation must
+	// have permission to write to this bucket.
 	//
 	// This member is required.
 	S3Bucket *S3BucketLogDestination
@@ -149,11 +150,13 @@ type BotAliasLocaleSettings struct {
 }
 
 // Summary information about bot aliases returned from the ListBotAliases
-// operation.
+// (https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBotAliases.html) operation.
 type BotAliasSummary struct {
 
 	// The unique identifier assigned to the bot alias. You can use this ID to get
-	// detailed information about the alias using the DescribeBotAlias operation.
+	// detailed information about the alias using the DescribeBotAlias
+	// (https://docs.aws.amazon.com/lexv2/latest/dg/API_DescribeBotAlias.html)
+	// operation.
 	BotAliasId *string
 
 	// The name of the bot alias.
@@ -382,7 +385,8 @@ type BotLocaleSortBy struct {
 	noSmithyDocumentSerde
 }
 
-// Summary information about bot locales returned by the ListBotLocales operation.
+// Summary information about bot locales returned by the ListBotLocales
+// (https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBotLocales.html) operation.
 type BotLocaleSummary struct {
 
 	// The current status of the bot locale. When the status is Built the locale is
@@ -423,11 +427,13 @@ type BotSortBy struct {
 	noSmithyDocumentSerde
 }
 
-// Summary information about a bot returned by the ListBots operation.
+// Summary information about a bot returned by the ListBots
+// (https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBots.html) operation.
 type BotSummary struct {
 
 	// The unique identifier assigned to the bot. Use this ID to get detailed
-	// information about the bot with the DescribeBot operation.
+	// information about the bot with the DescribeBot
+	// (https://docs.aws.amazon.com/lexv2/latest/dg/API_DescribeBot.html) operation.
 	BotId *string
 
 	// The name of the bot.
@@ -477,6 +483,7 @@ type BotVersionSortBy struct {
 }
 
 // Summary information about a bot version returned by the ListBotVersions
+// (https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBotVersions.html)
 // operation.
 type BotVersionSummary struct {
 
@@ -516,7 +523,8 @@ type BuiltInIntentSortBy struct {
 	noSmithyDocumentSerde
 }
 
-// Provides summary information about a built-in intent for the ListBuiltInIntents
+// Provides summary information about a built-in intent for the  ListBuiltInIntents
+// (https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBuiltInIntents.html)
 // operation.
 type BuiltInIntentSummary struct {
 
@@ -547,7 +555,9 @@ type BuiltInSlotTypeSortBy struct {
 }
 
 // Provides summary information about a built-in slot type for the
-// ListBuiltInSlotTypes operation.
+// ListBuiltInSlotTypes
+// (https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBuiltInSlotTypes.html)
+// operation.
 type BuiltInSlotTypeSummary struct {
 
 	// The description of the built-in slot type.
@@ -680,7 +690,8 @@ type DialogCodeHookSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Filters the response form the operation
+// Filters the response form the ListExports
+// (https://docs.aws.amazon.com/lexv2/latest/dg/API_ListExports.html) operation
 type ExportFilter struct {
 
 	// The name of the field to use for filtering.
@@ -882,7 +893,8 @@ type ImageResponseCard struct {
 	noSmithyDocumentSerde
 }
 
-// Filters the response from the operation.
+// Filters the response from the ListImports
+// (https://docs.aws.amazon.com/lexv2/latest/dg/API_ListImports.html) operation.
 type ImportFilter struct {
 
 	// The name of the field to use for filtering.
@@ -1757,6 +1769,11 @@ type VoiceSettings struct {
 	//
 	// This member is required.
 	VoiceId *string
+
+	// Indicates the type of Amazon Polly voice that Amazon Lex should use for voice
+	// interaction with the user. For more information, see Voices in Amazon Polly
+	// (https://docs.aws.amazon.com/polly/latest/dg/voicelist.html).
+	Engine VoiceEngine
 
 	noSmithyDocumentSerde
 }

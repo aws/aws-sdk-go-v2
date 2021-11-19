@@ -11,11 +11,11 @@ import (
 )
 
 // Subscribes an endpoint to an Amazon SNS topic. If the endpoint type is HTTP/S or
-// email, or if the endpoint and the topic are not in the same account, the
-// endpoint owner must run the ConfirmSubscription action to confirm the
-// subscription. You call the ConfirmSubscription action with the token from the
-// subscription response. Confirmation tokens are valid for three days. This action
-// is throttled at 100 transactions per second (TPS).
+// email, or if the endpoint and the topic are not in the same Amazon Web Services
+// account, the endpoint owner must run the ConfirmSubscription action to confirm
+// the subscription. You call the ConfirmSubscription action with the token from
+// the subscription response. Confirmation tokens are valid for three days. This
+// action is throttled at 100 transactions per second (TPS).
 func (c *Client) Subscribe(ctx context.Context, params *SubscribeInput, optFns ...func(*Options)) (*SubscribeOutput, error) {
 	if params == nil {
 		params = &SubscribeInput{}

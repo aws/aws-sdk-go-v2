@@ -31,9 +31,9 @@ type AlarmHistoryItem struct {
 	noSmithyDocumentSerde
 }
 
-// An anomaly detection model associated with a particular CloudWatch metric and
-// statistic. You can use the model to display a band of expected normal values
-// when the metric is graphed.
+// An anomaly detection model associated with a particular CloudWatch metric,
+// statistic, or metric math expression. You can use the model to display a band of
+// expected, normal values when the metric is graphed.
 type AnomalyDetector struct {
 
 	// The configuration specifies details about how the anomaly detection model is to
@@ -42,15 +42,29 @@ type AnomalyDetector struct {
 	Configuration *AnomalyDetectorConfiguration
 
 	// The metric dimensions associated with the anomaly detection model.
+	//
+	// Deprecated: Use SingleMetricAnomalyDetector.Dimensions property.
 	Dimensions []Dimension
 
+	// The CloudWatch metric math expression for this anomaly detector.
+	MetricMathAnomalyDetector *MetricMathAnomalyDetector
+
 	// The name of the metric associated with the anomaly detection model.
+	//
+	// Deprecated: Use SingleMetricAnomalyDetector.MetricName property.
 	MetricName *string
 
 	// The namespace of the metric associated with the anomaly detection model.
+	//
+	// Deprecated: Use SingleMetricAnomalyDetector.Namespace property.
 	Namespace *string
 
+	// The CloudWatch metric and statistic for this anomaly detector.
+	SingleMetricAnomalyDetector *SingleMetricAnomalyDetector
+
 	// The statistic associated with the anomaly detection model.
+	//
+	// Deprecated: Use SingleMetricAnomalyDetector.Stat property.
 	Stat *string
 
 	// The current status of the anomaly detector's training. The possible values are
@@ -228,7 +242,11 @@ type DimensionFilter struct {
 	noSmithyDocumentSerde
 }
 
-// This structure contains the definition for a Contributor Insights rule.
+// This structure contains the definition for a Contributor Insights rule. For more
+// information about this rule, see Using Constributor Insights to analyze
+// high-cardinality data
+// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights.html)
+// in the Amazon CloudWatch User Guide.
 type InsightRule struct {
 
 	// The definition of the rule, as a JSON object. The definition contains the
@@ -246,7 +264,7 @@ type InsightRule struct {
 	Name *string
 
 	// For rules that you create, this is always {"Name": "CloudWatchLogRule",
-	// "Version": 1}. For built-in rules, this is {"Name": "ServiceLogRule", "Version":
+	// "Version": 1}. For managed rules, this is {"Name": "ServiceLogRule", "Version":
 	// 1}
 	//
 	// This member is required.
@@ -688,6 +706,23 @@ type MetricDatum struct {
 	noSmithyDocumentSerde
 }
 
+// Indicates the CloudWatch math expression that provides the time series the
+// anomaly detector uses as input. The designated math expression must return a
+// single time series.
+type MetricMathAnomalyDetector struct {
+
+	// An array of metric data query structures that enables you to create an anomaly
+	// detector based on the result of a metric math expression. Each item in
+	// MetricDataQueries gets a metric or performs a math expression. One item in
+	// MetricDataQueries is the expression that provides the time series that the
+	// anomaly detector uses as input. Designate the expression by setting ReturnData
+	// to True for this object in the array. For all other expressions and metrics, set
+	// ReturnData to False. The designated expression must return a single time series.
+	MetricDataQueries []MetricDataQuery
+
+	noSmithyDocumentSerde
+}
+
 // This structure defines the metric to be returned, along with the statistics,
 // period, and units.
 type MetricStat struct {
@@ -811,6 +846,25 @@ type Range struct {
 	//
 	// This member is required.
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Designates the CloudWatch metric and statistic that provides the time series the
+// anomaly detector uses as input.
+type SingleMetricAnomalyDetector struct {
+
+	// The metric dimensions to create the anomaly detection model for.
+	Dimensions []Dimension
+
+	// The name of the metric to create the anomaly detection model for.
+	MetricName *string
+
+	// The namespace of the metric to create the anomaly detection model for.
+	Namespace *string
+
+	// The statistic to use for the metric and anomaly detection model.
+	Stat *string
 
 	noSmithyDocumentSerde
 }

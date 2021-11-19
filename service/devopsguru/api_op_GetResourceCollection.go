@@ -12,10 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns lists AWS resources that are of the specified resource collection type.
-// The one type of AWS resource collection supported is AWS CloudFormation stacks.
-// DevOps Guru can be configured to analyze only the AWS resources that are defined
-// in the stacks. You can specify up to 500 AWS CloudFormation stacks.
+// Returns lists Amazon Web Services resources that are of the specified resource
+// collection type. The one type of Amazon Web Services resource collection
+// supported is Amazon Web Services CloudFormation stacks. DevOps Guru can be
+// configured to analyze only the Amazon Web Services resources that are defined in
+// the stacks. You can specify up to 500 Amazon Web Services CloudFormation stacks.
 func (c *Client) GetResourceCollection(ctx context.Context, params *GetResourceCollectionInput, optFns ...func(*Options)) (*GetResourceCollectionOutput, error) {
 	if params == nil {
 		params = &GetResourceCollectionInput{}
@@ -33,8 +34,8 @@ func (c *Client) GetResourceCollection(ctx context.Context, params *GetResourceC
 
 type GetResourceCollectionInput struct {
 
-	// The type of AWS resource collections to return. The one valid value is
-	// CLOUD_FORMATION for AWS CloudFormation stacks.
+	// The type of Amazon Web Services resource collections to return. The one valid
+	// value is CLOUD_FORMATION for Amazon Web Services CloudFormation stacks.
 	//
 	// This member is required.
 	ResourceCollectionType types.ResourceCollectionType
@@ -52,10 +53,11 @@ type GetResourceCollectionOutput struct {
 	// operation. If there are no more pages, this value is null.
 	NextToken *string
 
-	// The requested list of AWS resource collections. The one type of AWS resource
-	// collection supported is AWS CloudFormation stacks. DevOps Guru can be configured
-	// to analyze only the AWS resources that are defined in the stacks. You can
-	// specify up to 500 AWS CloudFormation stacks.
+	// The requested list of Amazon Web Services resource collections. The one type of
+	// Amazon Web Services resource collection supported is Amazon Web Services
+	// CloudFormation stacks. DevOps Guru can be configured to analyze only the Amazon
+	// Web Services resources that are defined in the stacks. You can specify up to 500
+	// Amazon Web Services CloudFormation stacks.
 	ResourceCollection *types.ResourceCollectionFilter
 
 	// Metadata pertaining to the operation's result.

@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete a version of a configuration from the AppConfig configuration store.
+// Deletes a version of a configuration from the AppConfig hosted configuration
+// store.
 func (c *Client) DeleteHostedConfigurationVersion(ctx context.Context, params *DeleteHostedConfigurationVersionInput, optFns ...func(*Options)) (*DeleteHostedConfigurationVersionOutput, error) {
 	if params == nil {
 		params = &DeleteHostedConfigurationVersionInput{}

@@ -76,6 +76,12 @@ type UpdateConfigurationProfileOutput struct {
 	// specified LocationUri.
 	RetrievalRoleArn *string
 
+	// The type of configurations that the configuration profile contains. A
+	// configuration can be a feature flag used for enabling or disabling new features
+	// or a free-form configuration used for distributing configurations to your
+	// application.
+	Type *string
+
 	// A list of methods for validating the configuration.
 	Validators []types.Validator
 

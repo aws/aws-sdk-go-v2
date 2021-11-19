@@ -21,6 +21,25 @@ type Application struct {
 	noSmithyDocumentSerde
 }
 
+// Detailed information about the input that failed to satisfy the constraints
+// specified by an AWS service.
+//
+// The following types satisfy this interface:
+//  BadRequestDetailsMemberInvalidConfiguration
+type BadRequestDetails interface {
+	isBadRequestDetails()
+}
+
+// Detailed information about the bad request exception error when creating a
+// hosted configuration version.
+type BadRequestDetailsMemberInvalidConfiguration struct {
+	Value []InvalidConfigurationDetail
+
+	noSmithyDocumentSerde
+}
+
+func (*BadRequestDetailsMemberInvalidConfiguration) isBadRequestDetails() {}
+
 // A summary of a configuration profile.
 type ConfigurationProfileSummary struct {
 
@@ -36,6 +55,11 @@ type ConfigurationProfileSummary struct {
 	// The name of the configuration profile.
 	Name *string
 
+	// The type of configurations that the configuration profile contains. A
+	// configuration can be a feature flag used for enabling or disabling new features
+	// or a free-form configuration used to introduce changes to your application.
+	Type *string
+
 	// The types of validators in the configuration profile.
 	ValidatorTypes []ValidatorType
 
@@ -46,21 +70,21 @@ type ConfigurationProfileSummary struct {
 type DeploymentEvent struct {
 
 	// A description of the deployment event. Descriptions include, but are not limited
-	// to, the user account or the CloudWatch alarm ARN that initiated a rollback, the
-	// percentage of hosts that received the deployment, or in the case of an internal
-	// error, a recommendation to attempt a new deployment.
+	// to, the user account or the Amazon CloudWatch alarm ARN that initiated a
+	// rollback, the percentage of hosts that received the deployment, or in the case
+	// of an internal error, a recommendation to attempt a new deployment.
 	Description *string
 
 	// The type of deployment event. Deployment event types include the start, stop, or
 	// completion of a deployment; a percentage update; the start or stop of a bake
-	// period; the start or completion of a rollback.
+	// period; and the start or completion of a rollback.
 	EventType DeploymentEventType
 
 	// The date and time the event occurred.
 	OccurredAt *time.Time
 
 	// The entity that triggered the deployment event. Events can be triggered by a
-	// user, AWS AppConfig, an Amazon CloudWatch alarm, or an internal error.
+	// user, AppConfig, an Amazon CloudWatch alarm, or an internal error.
 	TriggeredBy TriggeredBy
 
 	noSmithyDocumentSerde
@@ -74,8 +98,8 @@ type DeploymentStrategy struct {
 	// The description of the deployment strategy.
 	Description *string
 
-	// The amount of time AppConfig monitored for alarms before considering the
-	// deployment to be complete and no longer eligible for automatic roll back.
+	// The amount of time that AppConfig monitored for alarms before considering the
+	// deployment to be complete and no longer eligible for automatic rollback.
 	FinalBakeTimeInMinutes int32
 
 	// The percentage of targets that received a deployed configuration during each
@@ -115,8 +139,8 @@ type DeploymentSummary struct {
 	// The sequence number of the deployment.
 	DeploymentNumber int32
 
-	// The amount of time AppConfig monitors for alarms before considering the
-	// deployment to be complete and no longer eligible for automatic roll back.
+	// The amount of time that AppConfig monitors for alarms before considering the
+	// deployment to be complete and no longer eligible for automatic rollback.
 	FinalBakeTimeInMinutes int32
 
 	// The percentage of targets to receive a deployed configuration during each
@@ -173,7 +197,7 @@ type HostedConfigurationVersionSummary struct {
 
 	// A standard MIME type describing the format of the configuration content. For
 	// more information, see Content-Type
-	// (https://docs.aws.amazon.com/https:/www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17).
+	// (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17).
 	ContentType *string
 
 	// A description of the configuration.
@@ -185,27 +209,51 @@ type HostedConfigurationVersionSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Detailed information about the bad request exception error when creating a
+// hosted configuration version.
+type InvalidConfigurationDetail struct {
+
+	// The invalid or out-of-range validation constraint in your JSON schema that
+	// failed validation.
+	Constraint *string
+
+	// Location of the validation constraint in the configuration JSON schema that
+	// failed validation.
+	Location *string
+
+	// The reason for an invalid configuration error.
+	Reason *string
+
+	// The type of error for an invalid configuration.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
 // Amazon CloudWatch alarms to monitor during the deployment process.
 type Monitor struct {
 
-	// ARN of the Amazon CloudWatch alarm.
+	// Amazon Resource Name (ARN) of the Amazon CloudWatch alarm.
+	//
+	// This member is required.
 	AlarmArn *string
 
-	// ARN of an IAM role for AppConfig to monitor AlarmArn.
+	// ARN of an Identity and Access Management (IAM) role for AppConfig to monitor
+	// AlarmArn.
 	AlarmRoleArn *string
 
 	noSmithyDocumentSerde
 }
 
 // A validator provides a syntactic or semantic check to ensure the configuration
-// you want to deploy functions as intended. To validate your application
+// that you want to deploy functions as intended. To validate your application
 // configuration data, you provide a schema or a Lambda function that runs against
 // the configuration. The configuration deployment or update can only proceed when
 // the configuration data is valid.
 type Validator struct {
 
-	// Either the JSON Schema content or the Amazon Resource Name (ARN) of an AWS
-	// Lambda function.
+	// Either the JSON Schema content or the Amazon Resource Name (ARN) of an Lambda
+	// function.
 	//
 	// This member is required.
 	Content *string
@@ -219,3 +267,14 @@ type Validator struct {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isBadRequestDetails() {}

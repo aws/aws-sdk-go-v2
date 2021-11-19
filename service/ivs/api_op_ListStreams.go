@@ -31,6 +31,9 @@ func (c *Client) ListStreams(ctx context.Context, params *ListStreamsInput, optF
 
 type ListStreamsInput struct {
 
+	// Filters the stream list to match the specified criterion.
+	FilterBy *types.StreamFilters
+
 	// Maximum number of streams to return. Default: 50.
 	MaxResults int32
 

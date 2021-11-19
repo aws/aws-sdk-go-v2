@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// View a list of configurations stored in the AppConfig configuration store by
+// Lists configurations stored in the AppConfig hosted configuration store by
 // version.
 func (c *Client) ListHostedConfigurationVersions(ctx context.Context, params *ListHostedConfigurationVersionsInput, optFns ...func(*Options)) (*ListHostedConfigurationVersionsOutput, error) {
 	if params == nil {

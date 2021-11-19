@@ -20212,6 +20212,19 @@ func awsAwsquery_deserializeDocumentCluster(v **types.Cluster, decoder smithyxml
 				sv.DBName = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("DefaultIamRoleArn", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DefaultIamRoleArn = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("DeferredMaintenanceWindows", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentDeferredMaintenanceWindowsList(&sv.DeferredMaintenanceWindows, nodeDecoder); err != nil {

@@ -3,10 +3,21 @@
 // Package lambda provides the API client, operations, and parameter types for AWS
 // Lambda.
 //
-// Lambda Overview This is the Lambda API Reference. The Lambda Developer Guide
-// provides additional information. For the service overview, see What is Lambda
-// (https://docs.aws.amazon.com/lambda/latest/dg/welcome.html), and for information
-// about how the service works, see Lambda: How it Works
-// (https://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html) in the
-// Lambda Developer Guide.
+// Lambda Overview Lambda is a compute service that lets you run code without
+// provisioning or managing servers. Lambda runs your code on a high-availability
+// compute infrastructure and performs all of the administration of the compute
+// resources, including server and operating system maintenance, capacity
+// provisioning and automatic scaling, code monitoring and logging. With Lambda,
+// you can run code for virtually any type of application or backend service. For
+// more information about the Lambda service, see What is Lambda
+// (https://docs.aws.amazon.com/lambda/latest/dg/welcome.html) in the Lambda
+// Developer Guide. The Lambda API Reference provides information about each of the
+// API methods, including details about the parameters in each API request and
+// response. You can use Software Development Kits (SDKs), Integrated Development
+// Environment (IDE) Toolkits, and command line tools to access the API. For
+// installation instructions, see Tools for Amazon Web Services
+// (http://aws.amazon.com/tools/). For a list of Region-specific endpoints that
+// Lambda supports, see Lambda endpoints and quotas
+// (https://docs.aws.amazon.com/general/latest/gr/lambda-service.html/) in the
+// Amazon Web Services General Reference.
 package lambda

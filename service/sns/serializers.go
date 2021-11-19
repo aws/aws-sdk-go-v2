@@ -1804,6 +1804,70 @@ func (m *awsAwsquery_serializeOpPublish) HandleSerialize(ctx context.Context, in
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpPublishBatch struct {
+}
+
+func (*awsAwsquery_serializeOpPublishBatch) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpPublishBatch) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PublishBatchInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("PublishBatch")
+	body.Key("Version").String("2010-03-31")
+
+	if err := awsAwsquery_serializeOpDocumentPublishBatchInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpRemovePermission struct {
 }
 
@@ -2609,6 +2673,65 @@ func awsAwsquery_serializeDocumentMessageAttributeValue(v *types.MessageAttribut
 	return nil
 }
 
+func awsAwsquery_serializeDocumentPublishBatchRequestEntry(v *types.PublishBatchRequestEntry, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Id != nil {
+		objectKey := object.Key("Id")
+		objectKey.String(*v.Id)
+	}
+
+	if v.Message != nil {
+		objectKey := object.Key("Message")
+		objectKey.String(*v.Message)
+	}
+
+	if v.MessageAttributes != nil {
+		objectKey := object.Key("MessageAttributes")
+		if err := awsAwsquery_serializeDocumentMessageAttributeMap(v.MessageAttributes, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.MessageDeduplicationId != nil {
+		objectKey := object.Key("MessageDeduplicationId")
+		objectKey.String(*v.MessageDeduplicationId)
+	}
+
+	if v.MessageGroupId != nil {
+		objectKey := object.Key("MessageGroupId")
+		objectKey.String(*v.MessageGroupId)
+	}
+
+	if v.MessageStructure != nil {
+		objectKey := object.Key("MessageStructure")
+		objectKey.String(*v.MessageStructure)
+	}
+
+	if v.Subject != nil {
+		objectKey := object.Key("Subject")
+		objectKey.String(*v.Subject)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentPublishBatchRequestEntryList(v []types.PublishBatchRequestEntry, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsquery_serializeDocumentPublishBatchRequestEntry(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsquery_serializeDocumentSubscriptionAttributesMap(v map[string]string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
@@ -3105,6 +3228,25 @@ func awsAwsquery_serializeOpDocumentOptInPhoneNumberInput(v *OptInPhoneNumberInp
 	if v.PhoneNumber != nil {
 		objectKey := object.Key("phoneNumber")
 		objectKey.String(*v.PhoneNumber)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentPublishBatchInput(v *PublishBatchInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.PublishBatchRequestEntries != nil {
+		objectKey := object.Key("PublishBatchRequestEntries")
+		if err := awsAwsquery_serializeDocumentPublishBatchRequestEntryList(v.PublishBatchRequestEntries, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.TopicArn != nil {
+		objectKey := object.Key("TopicArn")
+		objectKey.String(*v.TopicArn)
 	}
 
 	return nil

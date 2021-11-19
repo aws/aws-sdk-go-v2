@@ -387,6 +387,15 @@ func awsRestjson1_deserializeOpDocumentCreateConfigurationProfileOutput(v **Crea
 				sv.RetrievalRoleArn = ptr.String(jtv)
 			}
 
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConfigurationProfileType to be of type string, got %T instead", value)
+				}
+				sv.Type = ptr.String(jtv)
+			}
+
 		case "Validators":
 			if err := awsRestjson1_deserializeDocumentValidatorList(&sv.Validators, value); err != nil {
 				return err
@@ -1986,6 +1995,15 @@ func awsRestjson1_deserializeOpDocumentGetConfigurationProfileOutput(v **GetConf
 					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
 				}
 				sv.RetrievalRoleArn = ptr.String(jtv)
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConfigurationProfileType to be of type string, got %T instead", value)
+				}
+				sv.Type = ptr.String(jtv)
 			}
 
 		case "Validators":
@@ -5411,6 +5429,15 @@ func awsRestjson1_deserializeOpDocumentUpdateConfigurationProfileOutput(v **Upda
 				sv.RetrievalRoleArn = ptr.String(jtv)
 			}
 
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConfigurationProfileType to be of type string, got %T instead", value)
+				}
+				sv.Type = ptr.String(jtv)
+			}
+
 		case "Validators":
 			if err := awsRestjson1_deserializeDocumentValidatorList(&sv.Validators, value); err != nil {
 				return err
@@ -6279,6 +6306,44 @@ func awsRestjson1_deserializeDocumentApplicationList(v *[]types.Application, val
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentBadRequestDetails(v *types.BadRequestDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.BadRequestDetails
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "InvalidConfiguration":
+			var mv []types.InvalidConfigurationDetail
+			if err := awsRestjson1_deserializeDocumentInvalidConfigurationDetailList(&mv, value); err != nil {
+				return err
+			}
+			uv = &types.BadRequestDetailsMemberInvalidConfiguration{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6301,6 +6366,11 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 
 	for key, value := range shape {
 		switch key {
+		case "Details":
+			if err := awsRestjson1_deserializeDocumentBadRequestDetails(&sv.Details, value); err != nil {
+				return err
+			}
+
 		case "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6308,6 +6378,15 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		case "Reason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BadRequestReason to be of type string, got %T instead", value)
+				}
+				sv.Reason = types.BadRequestReason(jtv)
 			}
 
 		default:
@@ -6375,6 +6454,15 @@ func awsRestjson1_deserializeDocumentConfigurationProfileSummary(v **types.Confi
 					return fmt.Errorf("expected Name to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConfigurationProfileType to be of type string, got %T instead", value)
+				}
+				sv.Type = ptr.String(jtv)
 			}
 
 		case "ValidatorTypes":
@@ -7243,6 +7331,107 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentInvalidConfigurationDetail(v **types.InvalidConfigurationDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InvalidConfigurationDetail
+	if *v == nil {
+		sv = &types.InvalidConfigurationDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Constraint":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Constraint = ptr.String(jtv)
+			}
+
+		case "Location":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Location = ptr.String(jtv)
+			}
+
+		case "Reason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Reason = ptr.String(jtv)
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Type = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentInvalidConfigurationDetailList(v *[]types.InvalidConfigurationDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.InvalidConfigurationDetail
+	if *v == nil {
+		cv = []types.InvalidConfigurationDetail{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.InvalidConfigurationDetail
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentInvalidConfigurationDetail(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentMonitor(v **types.Monitor, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7269,7 +7458,7 @@ func awsRestjson1_deserializeDocumentMonitor(v **types.Monitor, value interface{
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+					return fmt.Errorf("expected StringWithLengthBetween1And2048 to be of type string, got %T instead", value)
 				}
 				sv.AlarmArn = ptr.String(jtv)
 			}

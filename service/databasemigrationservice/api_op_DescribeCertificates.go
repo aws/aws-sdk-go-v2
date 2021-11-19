@@ -31,6 +31,7 @@ func (c *Client) DescribeCertificates(ctx context.Context, params *DescribeCerti
 type DescribeCertificatesInput struct {
 
 	// Filters applied to the certificates described in the form of key-value pairs.
+	// Valid values are certificate-arn and certificate-id.
 	Filters []types.Filter
 
 	// An optional pagination token provided by a previous request. If this parameter

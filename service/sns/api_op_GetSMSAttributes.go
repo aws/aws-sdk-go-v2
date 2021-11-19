@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the settings for sending SMS messages from your account. These settings
-// are set with the SetSMSAttributes action.
+// Returns the settings for sending SMS messages from your Amazon Web Services
+// account. These settings are set with the SetSMSAttributes action.
 func (c *Client) GetSMSAttributes(ctx context.Context, params *GetSMSAttributesInput, optFns ...func(*Options)) (*GetSMSAttributesOutput, error) {
 	if params == nil {
 		params = &GetSMSAttributesInput{}

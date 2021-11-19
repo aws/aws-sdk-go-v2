@@ -157,6 +157,22 @@ type Concurrency struct {
 	noSmithyDocumentSerde
 }
 
+type Cors struct {
+	AllowCredentials *bool
+
+	AllowHeaders []string
+
+	AllowMethods []string
+
+	AllowOrigins []string
+
+	ExposeHeaders []string
+
+	MaxAge *int32
+
+	noSmithyDocumentSerde
+}
+
 // The dead-letter queue
 // (https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq) for
 // failed asynchronous invocations.
@@ -424,7 +440,7 @@ type FunctionConfiguration struct {
 	ImageConfigResponse *ImageConfigResponse
 
 	// The KMS key that's used to encrypt the function's environment variables. This
-	// key is only returned if you've configured a customer managed CMK.
+	// key is only returned if you've configured a customer managed key.
 	KMSKeyArn *string
 
 	// The date and time that the function was last updated, in ISO-8601 format
@@ -445,7 +461,7 @@ type FunctionConfiguration struct {
 	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
 	Layers []Layer
 
-	// For Lambda@Edge functions, the ARN of the master function.
+	// For Lambda@Edge functions, the ARN of the main function.
 	MasterArn *string
 
 	// The amount of memory available to the function at runtime.
@@ -524,6 +540,28 @@ type FunctionEventInvokeConfig struct {
 
 	// The maximum number of times to retry when the function returns an error.
 	MaximumRetryAttempts *int32
+
+	noSmithyDocumentSerde
+}
+
+type FunctionUrlConfig struct {
+
+	// This member is required.
+	AuthorizationType AuthorizationType
+
+	// This member is required.
+	CreationTime *string
+
+	// This member is required.
+	FunctionArn *string
+
+	// This member is required.
+	FunctionUrl *string
+
+	// This member is required.
+	LastModifiedTime *string
+
+	Cors *Cors
 
 	noSmithyDocumentSerde
 }

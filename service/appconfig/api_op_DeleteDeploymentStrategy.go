@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete a deployment strategy. Deleting a deployment strategy does not delete a
+// Deletes a deployment strategy. Deleting a deployment strategy does not delete a
 // configuration from a host.
 func (c *Client) DeleteDeploymentStrategy(ctx context.Context, params *DeleteDeploymentStrategyInput, optFns ...func(*Options)) (*DeleteDeploymentStrategyOutput, error) {
 	if params == nil {

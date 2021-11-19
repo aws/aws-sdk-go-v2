@@ -2380,6 +2380,19 @@ func awsAwsquery_serializeDocumentAnomalyDetectorExcludedTimeRanges(v []types.Ra
 	return nil
 }
 
+func awsAwsquery_serializeDocumentAnomalyDetectorTypes(v []types.AnomalyDetectorType, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsAwsquery_serializeDocumentCounts(v []float64, value query.Value) error {
 	if len(v) == 0 {
 		return nil
@@ -2705,6 +2718,20 @@ func awsAwsquery_serializeDocumentMetricDatum(v *types.MetricDatum, value query.
 	return nil
 }
 
+func awsAwsquery_serializeDocumentMetricMathAnomalyDetector(v *types.MetricMathAnomalyDetector, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.MetricDataQueries != nil {
+		objectKey := object.Key("MetricDataQueries")
+		if err := awsAwsquery_serializeDocumentMetricDataQueries(v.MetricDataQueries, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeDocumentMetricStat(v *types.MetricStat, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -2801,6 +2828,35 @@ func awsAwsquery_serializeDocumentResourceList(v []string, value query.Value) er
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsquery_serializeDocumentSingleMetricAnomalyDetector(v *types.SingleMetricAnomalyDetector, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Dimensions != nil {
+		objectKey := object.Key("Dimensions")
+		if err := awsAwsquery_serializeDocumentDimensions(v.Dimensions, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.MetricName != nil {
+		objectKey := object.Key("MetricName")
+		objectKey.String(*v.MetricName)
+	}
+
+	if v.Namespace != nil {
+		objectKey := object.Key("Namespace")
+		objectKey.String(*v.Namespace)
+	}
+
+	if v.Stat != nil {
+		objectKey := object.Key("Stat")
+		objectKey.String(*v.Stat)
+	}
+
 	return nil
 }
 
@@ -2992,6 +3048,13 @@ func awsAwsquery_serializeOpDocumentDeleteAnomalyDetectorInput(v *DeleteAnomalyD
 		}
 	}
 
+	if v.MetricMathAnomalyDetector != nil {
+		objectKey := object.Key("MetricMathAnomalyDetector")
+		if err := awsAwsquery_serializeDocumentMetricMathAnomalyDetector(v.MetricMathAnomalyDetector, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.MetricName != nil {
 		objectKey := object.Key("MetricName")
 		objectKey.String(*v.MetricName)
@@ -3000,6 +3063,13 @@ func awsAwsquery_serializeOpDocumentDeleteAnomalyDetectorInput(v *DeleteAnomalyD
 	if v.Namespace != nil {
 		objectKey := object.Key("Namespace")
 		objectKey.String(*v.Namespace)
+	}
+
+	if v.SingleMetricAnomalyDetector != nil {
+		objectKey := object.Key("SingleMetricAnomalyDetector")
+		if err := awsAwsquery_serializeDocumentSingleMetricAnomalyDetector(v.SingleMetricAnomalyDetector, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.Stat != nil {
@@ -3202,6 +3272,13 @@ func awsAwsquery_serializeOpDocumentDescribeAlarmsInput(v *DescribeAlarmsInput, 
 func awsAwsquery_serializeOpDocumentDescribeAnomalyDetectorsInput(v *DescribeAnomalyDetectorsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
+
+	if v.AnomalyDetectorTypes != nil {
+		objectKey := object.Key("AnomalyDetectorTypes")
+		if err := awsAwsquery_serializeDocumentAnomalyDetectorTypes(v.AnomalyDetectorTypes, objectKey); err != nil {
+			return err
+		}
+	}
 
 	if v.Dimensions != nil {
 		objectKey := object.Key("Dimensions")
@@ -3593,6 +3670,13 @@ func awsAwsquery_serializeOpDocumentPutAnomalyDetectorInput(v *PutAnomalyDetecto
 		}
 	}
 
+	if v.MetricMathAnomalyDetector != nil {
+		objectKey := object.Key("MetricMathAnomalyDetector")
+		if err := awsAwsquery_serializeDocumentMetricMathAnomalyDetector(v.MetricMathAnomalyDetector, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.MetricName != nil {
 		objectKey := object.Key("MetricName")
 		objectKey.String(*v.MetricName)
@@ -3601,6 +3685,13 @@ func awsAwsquery_serializeOpDocumentPutAnomalyDetectorInput(v *PutAnomalyDetecto
 	if v.Namespace != nil {
 		objectKey := object.Key("Namespace")
 		objectKey.String(*v.Namespace)
+	}
+
+	if v.SingleMetricAnomalyDetector != nil {
+		objectKey := object.Key("SingleMetricAnomalyDetector")
+		if err := awsAwsquery_serializeDocumentSingleMetricAnomalyDetector(v.SingleMetricAnomalyDetector, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.Stat != nil {

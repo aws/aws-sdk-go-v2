@@ -54,14 +54,14 @@ type DescribeAccountOverviewOutput struct {
 	// This member is required.
 	MeanTimeToRecoverInMilliseconds *int64
 
-	// An integer that specifies the number of open proactive insights in your AWS
-	// account that were created during the time range passed in.
+	// An integer that specifies the number of open proactive insights in your Amazon
+	// Web Services account that were created during the time range passed in.
 	//
 	// This member is required.
 	ProactiveInsights int32
 
-	// An integer that specifies the number of open reactive insights in your AWS
-	// account that were created during the time range passed in.
+	// An integer that specifies the number of open reactive insights in your Amazon
+	// Web Services account that were created during the time range passed in.
 	//
 	// This member is required.
 	ReactiveInsights int32

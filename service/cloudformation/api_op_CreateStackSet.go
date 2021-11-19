@@ -166,6 +166,10 @@ type CreateStackSetInput struct {
 	// stack resources users and groups can include in their stack sets.
 	ExecutionRoleName *string
 
+	// Describes whether StackSets performs non-conflicting operations concurrently and
+	// queues conflicting operations.
+	ManagedExecution *types.ManagedExecution
+
 	// The input parameters for the stack set template.
 	Parameters []types.Parameter
 

@@ -217,7 +217,6 @@ const (
 	TierPostgresql                         Tier = "POSTGRESQL"
 	TierJavaJmx                            Tier = "JAVA_JMX"
 	TierOracle                             Tier = "ORACLE"
-	TierSapHana                            Tier = "SAP_HANA"
 	TierSapHanaMultiNode                   Tier = "SAP_HANA_MULTI_NODE"
 	TierSapHanaSingleNode                  Tier = "SAP_HANA_SINGLE_NODE"
 	TierSapHanaHighAvailability            Tier = "SAP_HANA_HIGH_AVAILABILITY"
@@ -241,7 +240,6 @@ func (Tier) Values() []Tier {
 		"POSTGRESQL",
 		"JAVA_JMX",
 		"ORACLE",
-		"SAP_HANA",
 		"SAP_HANA_MULTI_NODE",
 		"SAP_HANA_SINGLE_NODE",
 		"SAP_HANA_HIGH_AVAILABILITY",

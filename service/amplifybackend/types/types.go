@@ -161,6 +161,23 @@ type BackendJobRespObj struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the read, write, and delete permissions users have against your
+// storage S3 bucket.
+type BackendStoragePermissions struct {
+
+	// Lists all authenticated user read, write, and delete permissions for your S3
+	// bucket.
+	//
+	// This member is required.
+	Authenticated []AuthenticatedElement
+
+	// Lists all unauthenticated user read, write, and delete permissions for your S3
+	// bucket.
+	UnAuthenticated []UnAuthenticatedElement
+
+	noSmithyDocumentSerde
+}
+
 // Describes the forgot password policy for authenticating into the Amplify app.
 type CreateBackendAuthForgotPasswordConfig struct {
 
@@ -333,6 +350,25 @@ type CreateBackendAuthUserPoolConfig struct {
 	noSmithyDocumentSerde
 }
 
+// The resource configuration for creating backend storage.
+type CreateBackendStorageResourceConfig struct {
+
+	// The authorization configuration for the storage S3 bucket.
+	//
+	// This member is required.
+	Permissions *BackendStoragePermissions
+
+	// The name of the storage service.
+	//
+	// This member is required.
+	ServiceName ServiceName
+
+	// The name of the S3 bucket.
+	BucketName *string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for the email sent when an app user forgets their password.
 type EmailSettings struct {
 
@@ -341,6 +377,28 @@ type EmailSettings struct {
 
 	// The subject of the email.
 	EmailSubject *string
+
+	noSmithyDocumentSerde
+}
+
+// The details for a backend storage resource.
+type GetBackendStorageResourceConfig struct {
+
+	// Returns True if the storage resource has been imported.
+	//
+	// This member is required.
+	Imported bool
+
+	// The name of the storage service.
+	//
+	// This member is required.
+	ServiceName ServiceName
+
+	// The name of the S3 bucket.
+	BucketName *string
+
+	// The authorization configuration for the storage S3 bucket.
+	Permissions *BackendStoragePermissions
 
 	noSmithyDocumentSerde
 }
@@ -366,6 +424,18 @@ type LoginAuthConfigReqObj struct {
 
 // Defines the resource configuration for the data model in your Amplify project.
 type ResourceConfig struct {
+	noSmithyDocumentSerde
+}
+
+// Describes the metadata of the S3 bucket.
+type S3BucketInfo struct {
+
+	// The creation date of the S3 bucket.
+	CreationDate *string
+
+	// The name of the S3 bucket.
+	Name *string
+
 	noSmithyDocumentSerde
 }
 
@@ -543,6 +613,22 @@ type UpdateBackendAuthUserPoolConfig struct {
 	// Describes the password policy for your Amazon Cognito user pool, configured as a
 	// part of your Amplify project.
 	PasswordPolicy *UpdateBackendAuthPasswordPolicyConfig
+
+	noSmithyDocumentSerde
+}
+
+// The resource configuration for updating backend storage.
+type UpdateBackendStorageResourceConfig struct {
+
+	// The authorization configuration for the storage S3 bucket.
+	//
+	// This member is required.
+	Permissions *BackendStoragePermissions
+
+	// The name of the storage service.
+	//
+	// This member is required.
+	ServiceName ServiceName
 
 	noSmithyDocumentSerde
 }

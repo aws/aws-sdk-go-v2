@@ -34,7 +34,7 @@ type UpdateAssessmentFrameworkInput struct {
 	// This member is required.
 	ControlSets []types.UpdateAssessmentFrameworkControlSet
 
-	// The identifier for the framework.
+	// The unique identifier for the framework.
 	//
 	// This member is required.
 	FrameworkId *string

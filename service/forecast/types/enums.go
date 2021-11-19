@@ -30,7 +30,8 @@ type AutoMLOverrideStrategy string
 
 // Enum values for AutoMLOverrideStrategy
 const (
-	AutoMLOverrideStrategyLatencyOptimized AutoMLOverrideStrategy = "LatencyOptimized"
+	AutoMLOverrideStrategyLatencyOptimized  AutoMLOverrideStrategy = "LatencyOptimized"
+	AutoMLOverrideStrategyAccuracyOptimized AutoMLOverrideStrategy = "AccuracyOptimized"
 )
 
 // Values returns all known values for AutoMLOverrideStrategy. Note that this can
@@ -39,6 +40,7 @@ const (
 func (AutoMLOverrideStrategy) Values() []AutoMLOverrideStrategy {
 	return []AutoMLOverrideStrategy{
 		"LatencyOptimized",
+		"AccuracyOptimized",
 	}
 }
 
@@ -185,5 +187,59 @@ func (ScalingType) Values() []ScalingType {
 		"Linear",
 		"Logarithmic",
 		"ReverseLogarithmic",
+	}
+}
+
+type State string
+
+// Enum values for State
+const (
+	StateActive  State = "Active"
+	StateDeleted State = "Deleted"
+)
+
+// Values returns all known values for State. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (State) Values() []State {
+	return []State{
+		"Active",
+		"Deleted",
+	}
+}
+
+type TimePointGranularity string
+
+// Enum values for TimePointGranularity
+const (
+	TimePointGranularityAll      TimePointGranularity = "ALL"
+	TimePointGranularitySpecific TimePointGranularity = "SPECIFIC"
+)
+
+// Values returns all known values for TimePointGranularity. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TimePointGranularity) Values() []TimePointGranularity {
+	return []TimePointGranularity{
+		"ALL",
+		"SPECIFIC",
+	}
+}
+
+type TimeSeriesGranularity string
+
+// Enum values for TimeSeriesGranularity
+const (
+	TimeSeriesGranularityAll      TimeSeriesGranularity = "ALL"
+	TimeSeriesGranularitySpecific TimeSeriesGranularity = "SPECIFIC"
+)
+
+// Values returns all known values for TimeSeriesGranularity. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TimeSeriesGranularity) Values() []TimeSeriesGranularity {
+	return []TimeSeriesGranularity{
+		"ALL",
+		"SPECIFIC",
 	}
 }

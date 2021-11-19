@@ -143,12 +143,19 @@
 // * GetStream — Gets information about the active
 // (live) stream on a specified channel.
 //
-// * ListStreams — Gets summary information
-// about live streams in your account, in the Amazon Web Services region where the
-// API request is processed.
+// * GetStreamSession — Gets metadata on a
+// specified stream.
 //
-// * StopStream — Disconnects the incoming RTMPS stream
-// for the specified channel. Can be used in conjunction with DeleteStreamKey to
+// * ListStreams — Gets summary information about live streams
+// in your account, in the Amazon Web Services region where the API request is
+// processed.
+//
+// * ListStreamSessions — Gets a summary of current and previous
+// streams for a specified channel in your account, in the AWS region where the API
+// request is processed.
+//
+// * StopStream — Disconnects the incoming RTMPS stream for
+// the specified channel. Can be used in conjunction with DeleteStreamKey to
 // prevent further streaming to a channel.
 //
 // * PutMetadata — Inserts metadata into

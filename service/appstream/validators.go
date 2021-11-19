@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAssociateApplicationFleet struct {
+}
+
+func (*validateOpAssociateApplicationFleet) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateApplicationFleet) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateApplicationFleetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateApplicationFleetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAssociateFleet struct {
 }
 
@@ -85,6 +105,46 @@ func (m *validateOpCopyImage) HandleInitialize(ctx context.Context, in middlewar
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCopyImageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateAppBlock struct {
+}
+
+func (*validateOpCreateAppBlock) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAppBlock) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAppBlockInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAppBlockInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateApplication struct {
+}
+
+func (*validateOpCreateApplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateApplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateApplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateApplicationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -245,6 +305,46 @@ func (m *validateOpCreateUser) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateUserInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAppBlock struct {
+}
+
+func (*validateOpDeleteAppBlock) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAppBlock) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAppBlockInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAppBlockInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteApplication struct {
+}
+
+func (*validateOpDeleteApplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteApplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteApplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteApplicationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -465,6 +565,26 @@ func (m *validateOpDisableUser) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDisableUserInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociateApplicationFleet struct {
+}
+
+func (*validateOpDisassociateApplicationFleet) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateApplicationFleet) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateApplicationFleetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateApplicationFleetInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -710,6 +830,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateApplication struct {
+}
+
+func (*validateOpUpdateApplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateApplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateApplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateApplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateDirectoryConfig struct {
 }
 
@@ -790,6 +930,10 @@ func (m *validateOpUpdateStack) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAssociateApplicationFleetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateApplicationFleet{}, middleware.After)
+}
+
 func addOpAssociateFleetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateFleet{}, middleware.After)
 }
@@ -804,6 +948,14 @@ func addOpBatchDisassociateUserStackValidationMiddleware(stack *middleware.Stack
 
 func addOpCopyImageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCopyImage{}, middleware.After)
+}
+
+func addOpCreateAppBlockValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAppBlock{}, middleware.After)
+}
+
+func addOpCreateApplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateApplication{}, middleware.After)
 }
 
 func addOpCreateDirectoryConfigValidationMiddleware(stack *middleware.Stack) error {
@@ -836,6 +988,14 @@ func addOpCreateUpdatedImageValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpCreateUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateUser{}, middleware.After)
+}
+
+func addOpDeleteAppBlockValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAppBlock{}, middleware.After)
+}
+
+func addOpDeleteApplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteApplication{}, middleware.After)
 }
 
 func addOpDeleteDirectoryConfigValidationMiddleware(stack *middleware.Stack) error {
@@ -880,6 +1040,10 @@ func addOpDescribeUsersValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDisableUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisableUser{}, middleware.After)
+}
+
+func addOpDisassociateApplicationFleetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateApplicationFleet{}, middleware.After)
 }
 
 func addOpDisassociateFleetValidationMiddleware(stack *middleware.Stack) error {
@@ -928,6 +1092,10 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateApplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateApplication{}, middleware.After)
 }
 
 func addOpUpdateDirectoryConfigValidationMiddleware(stack *middleware.Stack) error {
@@ -997,6 +1165,49 @@ func validateComputeCapacity(v *types.ComputeCapacity) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ComputeCapacity"}
 	if v.DesiredInstances == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DesiredInstances"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3Location(v *types.S3Location) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3Location"}
+	if v.S3Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Bucket"))
+	}
+	if v.S3Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Key"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateScriptDetails(v *types.ScriptDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScriptDetails"}
+	if v.ScriptS3Location == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScriptS3Location"))
+	} else if v.ScriptS3Location != nil {
+		if err := validateS3Location(v.ScriptS3Location); err != nil {
+			invalidParams.AddNested("ScriptS3Location", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ExecutablePath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExecutablePath"))
+	}
+	if v.TimeoutInSeconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TimeoutInSeconds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1128,6 +1339,24 @@ func validateUserStackAssociationList(v []types.UserStackAssociation) error {
 	}
 }
 
+func validateOpAssociateApplicationFleetInput(v *AssociateApplicationFleetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateApplicationFleetInput"}
+	if v.FleetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FleetName"))
+	}
+	if v.ApplicationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAssociateFleetInput(v *AssociateFleetInput) error {
 	if v == nil {
 		return nil
@@ -1205,6 +1434,69 @@ func validateOpCopyImageInput(v *CopyImageInput) error {
 	}
 }
 
+func validateOpCreateAppBlockInput(v *CreateAppBlockInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAppBlockInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.SourceS3Location == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceS3Location"))
+	} else if v.SourceS3Location != nil {
+		if err := validateS3Location(v.SourceS3Location); err != nil {
+			invalidParams.AddNested("SourceS3Location", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SetupScriptDetails == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SetupScriptDetails"))
+	} else if v.SetupScriptDetails != nil {
+		if err := validateScriptDetails(v.SetupScriptDetails); err != nil {
+			invalidParams.AddNested("SetupScriptDetails", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateApplicationInput(v *CreateApplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateApplicationInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.IconS3Location == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IconS3Location"))
+	} else if v.IconS3Location != nil {
+		if err := validateS3Location(v.IconS3Location); err != nil {
+			invalidParams.AddNested("IconS3Location", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LaunchPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LaunchPath"))
+	}
+	if v.Platforms == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Platforms"))
+	}
+	if v.InstanceFamilies == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceFamilies"))
+	}
+	if v.AppBlockArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppBlockArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateDirectoryConfigInput(v *CreateDirectoryConfigInput) error {
 	if v == nil {
 		return nil
@@ -1239,9 +1531,7 @@ func validateOpCreateFleetInput(v *CreateFleetInput) error {
 	if v.InstanceType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
 	}
-	if v.ComputeCapacity == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ComputeCapacity"))
-	} else if v.ComputeCapacity != nil {
+	if v.ComputeCapacity != nil {
 		if err := validateComputeCapacity(v.ComputeCapacity); err != nil {
 			invalidParams.AddNested("ComputeCapacity", err.(smithy.InvalidParamsError))
 		}
@@ -1375,6 +1665,36 @@ func validateOpCreateUserInput(v *CreateUserInput) error {
 	}
 	if len(v.AuthenticationType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAppBlockInput(v *DeleteAppBlockInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAppBlockInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteApplicationInput(v *DeleteApplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteApplicationInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1552,6 +1872,24 @@ func validateOpDisableUserInput(v *DisableUserInput) error {
 	}
 	if len(v.AuthenticationType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateApplicationFleetInput(v *DisassociateApplicationFleetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateApplicationFleetInput"}
+	if v.FleetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FleetName"))
+	}
+	if v.ApplicationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1744,6 +2082,26 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateApplicationInput(v *UpdateApplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateApplicationInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.IconS3Location != nil {
+		if err := validateS3Location(v.IconS3Location); err != nil {
+			invalidParams.AddNested("IconS3Location", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

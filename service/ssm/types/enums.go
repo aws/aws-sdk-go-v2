@@ -1117,6 +1117,7 @@ const (
 	OperatingSystemOracleLinux           OperatingSystem = "ORACLE_LINUX"
 	OperatingSystemDebian                OperatingSystem = "DEBIAN"
 	OperatingSystemMacOS                 OperatingSystem = "MACOS"
+	OperatingSystemRaspbian              OperatingSystem = "RASPBIAN"
 )
 
 // Values returns all known values for OperatingSystem. Note that this can be
@@ -1134,6 +1135,7 @@ func (OperatingSystem) Values() []OperatingSystem {
 		"ORACLE_LINUX",
 		"DEBIAN",
 		"MACOS",
+		"RASPBIAN",
 	}
 }
 

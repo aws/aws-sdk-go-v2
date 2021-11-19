@@ -46,15 +46,15 @@ type DescribePlaceIndexOutput struct {
 	// This member is required.
 	CreateTime *time.Time
 
-	// The data provider of geospatial data. Indicates one of the available
-	// providers:
+	// The data provider of geospatial data. Values can be one of the following:
 	//
-	// * Esri
+	// *
+	// Esri
 	//
 	// * Here
 	//
-	// For additional details on data providers, see Amazon
-	// Location Service data providers
+	// For more information about data providers, see Amazon Location
+	// Service data providers
 	// (https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html).
 	//
 	// This member is required.

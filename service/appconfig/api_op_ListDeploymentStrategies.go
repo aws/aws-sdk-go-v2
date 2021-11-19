@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List deployment strategies.
+// Lists deployment strategies.
 func (c *Client) ListDeploymentStrategies(ctx context.Context, params *ListDeploymentStrategiesInput, optFns ...func(*Options)) (*ListDeploymentStrategiesOutput, error) {
 	if params == nil {
 		params = &ListDeploymentStrategiesInput{}

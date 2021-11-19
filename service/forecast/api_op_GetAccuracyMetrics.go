@@ -60,6 +60,9 @@ type GetAccuracyMetricsOutput struct {
 	// This parameter is only valid for predictors trained using AutoML.
 	AutoMLOverrideStrategy types.AutoMLOverrideStrategy
 
+	// Whether the predictor was created with CreateAutoPredictor.
+	IsAutoPredictor *bool
+
 	// The accuracy metric used to optimize the predictor.
 	OptimizationMetric types.OptimizationMetric
 

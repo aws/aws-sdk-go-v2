@@ -7,6 +7,20 @@ import (
 	"time"
 )
 
+// Configuration of statistics that are allowed to be run on columns that contain
+// detected entities. When undefined, no statistics will be computed on columns
+// that contain detected entities.
+type AllowedStatistics struct {
+
+	// One or more column statistics to allow for columns that contain detected
+	// entities.
+	//
+	// This member is required.
+	Statistics []string
+
+	noSmithyDocumentSerde
+}
+
 // Selector of a column from a dataset for profile job configuration. One selector
 // includes either a column name or a regular expression.
 type ColumnSelector struct {
@@ -93,16 +107,18 @@ type CsvOutputOptions struct {
 // Connection information for dataset input files stored in a database.
 type DatabaseInputDefinition struct {
 
-	// The table within the target database.
-	//
-	// This member is required.
-	DatabaseTableName *string
-
 	// The Glue Connection that stores the connection information for the target
 	// database.
 	//
 	// This member is required.
 	GlueConnectionName *string
+
+	// The table within the target database.
+	DatabaseTableName *string
+
+	// Custom SQL to run against the provided Glue connection. This SQL will be used as
+	// the input for DataBrew projects and jobs.
+	QueryString *string
 
 	// Represents an Amazon S3 location (bucket name and object key) where DataBrew can
 	// read input data, or write output from a job.
@@ -314,6 +330,70 @@ type DatetimeOptions struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration of entity detection for a profile job. When undefined, entity
+// detection is disabled.
+type EntityDetectorConfiguration struct {
+
+	// Entity types to detect. Can be any of the following:
+	//
+	// * USA_SSN
+	//
+	// * EMAIL
+	//
+	// *
+	// USA_ITIN
+	//
+	// * USA_PASSPORT_NUMBER
+	//
+	// * PHONE_NUMBER
+	//
+	// * USA_DRIVING_LICENSE
+	//
+	// *
+	// BANK_ACCOUNT
+	//
+	// * CREDIT_CARD
+	//
+	// * IP_ADDRESS
+	//
+	// * MAC_ADDRESS
+	//
+	// * USA_DEA_NUMBER
+	//
+	// *
+	// USA_HCPCS_CODE
+	//
+	// * USA_NATIONAL_PROVIDER_IDENTIFIER
+	//
+	// * USA_NATIONAL_DRUG_CODE
+	//
+	// *
+	// USA_HEALTH_INSURANCE_CLAIM_NUMBER
+	//
+	// * USA_MEDICARE_BENEFICIARY_IDENTIFIER
+	//
+	// *
+	// USA_CPT_CODE
+	//
+	// * PERSON_NAME
+	//
+	// * DATE
+	//
+	// The Entity type group USA_ALL is also
+	// supported, and includes all of the above entity types except PERSON_NAME and
+	// DATE.
+	//
+	// This member is required.
+	EntityTypes []string
+
+	// Configuration of statistics that are allowed to be run on columns that contain
+	// detected entities. When undefined, no statistics will be computed on columns
+	// that contain detected entities.
+	AllowedStatistics []AllowedStatistics
+
+	noSmithyDocumentSerde
+}
+
 // Represents a set of options that define how DataBrew will interpret a Microsoft
 // Excel file when creating a dataset from that file.
 type ExcelOptions struct {
@@ -356,7 +436,7 @@ type FilesLimit struct {
 
 // Represents a structure for defining parameter conditions. Supported conditions
 // are described here: Supported conditions for dynamic datasets
-// (https://docs-aws.amazon.com/databrew/latest/dg/datasets.multiple-files.html#conditions.for.dynamic.datasets)
+// (https://docs.aws.amazon.com/databrew/latest/dg/datasets.multiple-files.html#conditions.for.dynamic.datasets)
 // in the Glue DataBrew Developer Guide.
 type FilterExpression struct {
 
@@ -402,6 +482,9 @@ type Input struct {
 
 	// Connection information for dataset input files stored in a database.
 	DatabaseInputDefinition *DatabaseInputDefinition
+
+	// Contains additional resource information needed for specific datasets.
+	Metadata *Metadata
 
 	// The Amazon S3 location where the data is stored.
 	S3InputDefinition *S3Location
@@ -503,6 +586,9 @@ type Job struct {
 	// * RECIPE - A job to apply one or more transformations to a dataset.
 	Type JobType
 
+	// List of validation configurations that are applied to the profile job.
+	ValidationConfigurations []ValidationConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -566,6 +652,9 @@ type JobRun struct {
 	// The current state of the job run entity itself.
 	State JobRunState
 
+	// List of validation configurations that are applied to the profile job run.
+	ValidationConfigurations []ValidationConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -599,6 +688,16 @@ type JsonOptions struct {
 
 	// A value that specifies whether JSON input contains embedded new line characters.
 	MultiLine bool
+
+	noSmithyDocumentSerde
+}
+
+// Contains additional resource information needed for specific datasets.
+type Metadata struct {
+
+	// The Amazon Resource Name (ARN) associated with the dataset. Currently, DataBrew
+	// only supports ARNs from Amazon AppFlow.
+	SourceArn *string
 
 	noSmithyDocumentSerde
 }
@@ -678,6 +777,10 @@ type ProfileConfiguration struct {
 	// evaluations and override parameters of evaluations. When configuration is
 	// undefined, the profile job will run all supported inter-column evaluations.
 	DatasetStatisticsConfiguration *StatisticsConfiguration
+
+	// Configuration of entity detection for a profile job. When undefined, entity
+	// detection is disabled.
+	EntityDetectorConfiguration *EntityDetectorConfiguration
 
 	// List of column selectors. ProfileColumns can be used to select columns from the
 	// dataset. When ProfileColumns is undefined, the profile job will profile all
@@ -861,6 +964,98 @@ type RecipeVersionErrorDetail struct {
 	noSmithyDocumentSerde
 }
 
+// Represents a single data quality requirement that should be validated in the
+// scope of this dataset.
+type Rule struct {
+
+	// The expression which includes column references, condition names followed by
+	// variable references, possibly grouped and combined with other conditions. For
+	// example, (:col1 starts_with :prefix1 or :col1 starts_with :prefix2) and (:col1
+	// ends_with :suffix1 or :col1 ends_with :suffix2). Column and value references are
+	// substitution variables that should start with the ':' symbol. Depending on the
+	// context, substitution variables' values can be either an actual value or a
+	// column name. These values are defined in the SubstitutionMap. If a
+	// CheckExpression starts with a column reference, then ColumnSelectors in the rule
+	// should be null. If ColumnSelectors has been defined, then there should be no
+	// columnn reference in the left side of a condition, for example, is_between :val1
+	// and :val2.
+	//
+	// This member is required.
+	CheckExpression *string
+
+	// The name of the rule.
+	//
+	// This member is required.
+	Name *string
+
+	// List of column selectors. Selectors can be used to select columns using a name
+	// or regular expression from the dataset. Rule will be applied to selected
+	// columns.
+	ColumnSelectors []ColumnSelector
+
+	// A value that specifies whether the rule is disabled. Once a rule is disabled, a
+	// profile job will not validate it during a job run. Default value is false.
+	Disabled bool
+
+	// The map of substitution variable names to their values used in a check
+	// expression. Variable names should start with a ':' (colon). Variable values can
+	// either be actual values or column names. To differentiate between the two,
+	// column names should be enclosed in backticks, for example, ":col1": "`Column
+	// A`".
+	SubstitutionMap map[string]string
+
+	// The threshold used with a non-aggregate check expression. Non-aggregate check
+	// expressions will be applied to each row in a specific column, and the threshold
+	// will be used to determine whether the validation succeeds.
+	Threshold *Threshold
+
+	noSmithyDocumentSerde
+}
+
+// Contains metadata about the ruleset.
+type RulesetItem struct {
+
+	// The name of the ruleset.
+	//
+	// This member is required.
+	Name *string
+
+	// The Amazon Resource Name (ARN) of a resource (dataset) that the ruleset is
+	// associated with.
+	//
+	// This member is required.
+	TargetArn *string
+
+	// The ID of the Amazon Web Services account that owns the ruleset.
+	AccountId *string
+
+	// The date and time that the ruleset was created.
+	CreateDate *time.Time
+
+	// The Amazon Resource Name (ARN) of the user who created the ruleset.
+	CreatedBy *string
+
+	// The description of the ruleset.
+	Description *string
+
+	// The Amazon Resource Name (ARN) of the user who last modified the ruleset.
+	LastModifiedBy *string
+
+	// The modification date and time of the ruleset.
+	LastModifiedDate *time.Time
+
+	// The Amazon Resource Name (ARN) for the ruleset.
+	ResourceArn *string
+
+	// The number of rules that are defined in the ruleset.
+	RuleCount int32
+
+	// Metadata tags that have been applied to the ruleset.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // Represents an Amazon S3 location (bucket name and object key) where DataBrew can
 // read input data, or write output from a job.
 type S3Location struct {
@@ -974,6 +1169,46 @@ type StatisticsConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The threshold used with a non-aggregate check expression. The non-aggregate
+// check expression will be applied to each row in a specific column. Then the
+// threshold will be used to determine whether the validation succeeds.
+type Threshold struct {
+
+	// The value of a threshold.
+	//
+	// This member is required.
+	Value float64
+
+	// The type of a threshold. Used for comparison of an actual count of rows that
+	// satisfy the rule to the threshold value.
+	Type ThresholdType
+
+	// Unit of threshold value. Can be either a COUNT or PERCENTAGE of the full sample
+	// size used for validation.
+	Unit ThresholdUnit
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for data quality validation. Used to select the Rulesets and
+// Validation Mode to be used in the profile job. When ValidationConfiguration is
+// null, the profile job will run without data quality validation.
+type ValidationConfiguration struct {
+
+	// The Amazon Resource Name (ARN) for the ruleset to be validated in the profile
+	// job. The TargetArn of the selected ruleset should be the same as the Amazon
+	// Resource Name (ARN) of the dataset that is associated with the profile job.
+	//
+	// This member is required.
+	RulesetArn *string
+
+	// Mode of data quality validation. Default mode is “CHECK_ALL” which verifies all
+	// rules defined in the selected ruleset.
+	ValidationMode ValidationMode
+
+	noSmithyDocumentSerde
+}
+
 // Represents the data being transformed during an action.
 type ViewFrame struct {
 
@@ -982,12 +1217,22 @@ type ViewFrame struct {
 	// This member is required.
 	StartColumnIndex *int32
 
+	// Controls if analytics computation is enabled or disabled. Enabled by default.
+	Analytics AnalyticsMode
+
 	// The number of columns to include in the view frame, beginning with the
 	// StartColumnIndex value and ignoring any columns in the HiddenColumns list.
 	ColumnRange *int32
 
 	// A list of columns to hide in the view frame.
 	HiddenColumns []string
+
+	// The number of rows to include in the view frame, beginning with the
+	// StartRowIndex value.
+	RowRange *int32
+
+	// The starting index for the range of rows to return in the view frame.
+	StartRowIndex *int32
 
 	noSmithyDocumentSerde
 }

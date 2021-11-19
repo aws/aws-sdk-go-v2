@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Amazon Web Services resource association with an Amazon Connect
-// instance.
+// Creates an AWS resource association with an Amazon Connect instance.
 func (c *Client) CreateIntegrationAssociation(ctx context.Context, params *CreateIntegrationAssociationInput, optFns ...func(*Options)) (*CreateIntegrationAssociationOutput, error) {
 	if params == nil {
 		params = &CreateIntegrationAssociationInput{}
@@ -58,7 +57,7 @@ type CreateIntegrationAssociationInput struct {
 	// integration type.
 	SourceType types.SourceType
 
-	// The tags used to organize, track, or control access for this resource.
+	// One or more tags.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

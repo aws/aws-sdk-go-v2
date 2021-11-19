@@ -86,8 +86,9 @@ type UpdateComputeEnvironmentOutput struct {
 	// The Amazon Resource Name (ARN) of the compute environment.
 	ComputeEnvironmentArn *string
 
-	// The name of the compute environment. Up to 128 letters (uppercase and
-	// lowercase), numbers, hyphens, and underscores are allowed.
+	// The name of the compute environment. It can be up to 128 letters long. It can
+	// contain uppercase and lowercase letters, numbers, hyphens (-), and underscores
+	// (_).
 	ComputeEnvironmentName *string
 
 	// Metadata pertaining to the operation's result.

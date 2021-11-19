@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete an environment. Deleting an environment does not delete a configuration
+// Deletes an environment. Deleting an environment does not delete a configuration
 // from a host.
 func (c *Client) DeleteEnvironment(ctx context.Context, params *DeleteEnvironmentInput, optFns ...func(*Options)) (*DeleteEnvironmentOutput, error) {
 	if params == nil {
@@ -29,12 +29,12 @@ func (c *Client) DeleteEnvironment(ctx context.Context, params *DeleteEnvironmen
 
 type DeleteEnvironmentInput struct {
 
-	// The application ID that includes the environment you want to delete.
+	// The application ID that includes the environment that you want to delete.
 	//
 	// This member is required.
 	ApplicationId *string
 
-	// The ID of the environment you want to delete.
+	// The ID of the environment that you want to delete.
 	//
 	// This member is required.
 	EnvironmentId *string

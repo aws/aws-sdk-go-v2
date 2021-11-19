@@ -46,9 +46,9 @@ type SubmitJobInput struct {
 	// This member is required.
 	JobDefinition *string
 
-	// The name of the job. The first character must be alphanumeric, and up to 128
-	// letters (uppercase and lowercase), numbers, hyphens, and underscores are
-	// allowed.
+	// The name of the job. It can be up to 128 letters long. The first character must
+	// be alphanumeric, can contain uppercase and lowercase letters, numbers, hyphens
+	// (-), and underscores (_).
 	//
 	// This member is required.
 	JobName *string

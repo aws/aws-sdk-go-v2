@@ -71,10 +71,10 @@ type ListJobsInput struct {
 	// Asterisk (*) is not supported when the ARN is used. BEFORE_CREATED_AT The value
 	// for the filter is the time that's before the job was created. This corresponds
 	// to the createdAt value. The value is a string representation of the number of
-	// seconds since 00:00:00 UTC (midnight) on January 1, 1970. AFTER_CREATED_AT The
-	// value for the filter is the time that's after the job was created. This
+	// milliseconds since 00:00:00 UTC (midnight) on January 1, 1970. AFTER_CREATED_AT
+	// The value for the filter is the time that's after the job was created. This
 	// corresponds to the createdAt value. The value is a string representation of the
-	// number of seconds since 00:00:00 UTC (midnight) on January 1, 1970.
+	// number of milliseconds since 00:00:00 UTC (midnight) on January 1, 1970.
 	Filters []types.KeyValuesPair
 
 	// The name or full Amazon Resource Name (ARN) of the job queue used to list jobs.

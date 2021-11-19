@@ -36,6 +36,9 @@ type ListAssessmentsInput struct {
 	// The pagination token that's used to fetch the next set of results.
 	NextToken *string
 
+	// The current status of the assessment.
+	Status types.AssessmentStatus
+
 	noSmithyDocumentSerde
 }
 
