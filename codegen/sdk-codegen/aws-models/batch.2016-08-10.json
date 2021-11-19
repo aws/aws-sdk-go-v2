@@ -482,7 +482,7 @@
                 "computeEnvironmentName": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the compute environment. Up to 128 letters (uppercase and lowercase), numbers, hyphens, and\n underscores are allowed.</p>",
+                        "smithy.api#documentation": "<p>The name of the compute environment. It can be up to 128 letters long. It can contain uppercase and\n lowercase letters, numbers, hyphens (-), and underscores (_).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -695,7 +695,7 @@
                 "ec2Configuration": {
                     "target": "com.amazonaws.batch#Ec2ConfigurationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides information used to select Amazon Machine Images (AMIs) for EC2 instances in the compute environment.\n   If <code>Ec2Configuration</code> isn't specified, the default is <code>ECS_AL2</code>.</p>\n  \n         <p>One or two values can be provided.</p>\n  \n         <note>\n            <p>This parameter isn't applicable to jobs that are running on Fargate resources, and shouldn't be\n    specified.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Provides information used to select Amazon Machine Images (AMIs) for EC2 instances in the compute environment.\n   If <code>Ec2Configuration</code> isn't specified, the default is <code>ECS_AL2</code>.</p>\n         <p>One or two values can be provided.</p>\n         <note>\n            <p>This parameter isn't applicable to jobs that are running on Fargate resources, and shouldn't be\n    specified.</p>\n         </note>"
                     }
                 }
             },
@@ -914,7 +914,7 @@
                         "smithy.api#deprecated": {
                             "message": "This field is deprecated, use resourceRequirements instead."
                         },
-                        "smithy.api#documentation": "<p>This parameter is deprecated, use\n    <code>resourceRequirements</code> to  override the <code>vcpus</code> parameter that's set in the\n   job definition. It's not supported for jobs\n   that run on Fargate resources. For jobs run on EC2 resources, it overrides the <code>vcpus</code> parameter set in\n   the job definition, but doesn't override any vCPU requirement specified in the\n    <code>resourceRequirements</code> structure in the job definition. To override vCPU requirements that are specified\n   in the <code>resourceRequirements</code> structure in the job definition, <code>resourceRequirements</code> must be\n   specified in the <code>SubmitJob</code> request, with <code>type</code> set to <code>VCPU</code> and\n    <code>value</code> set to the new value. For\n   more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/troubleshooting.html#override-resource-requirements\">Can't override job definition\n    resource requirements</a> in the <i>Batch User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>This parameter is deprecated, use <code>resourceRequirements</code> to override the <code>vcpus</code> parameter\n   that's set in the job definition. It's not supported for jobs that run on Fargate resources. For jobs run on EC2\n   resources, it overrides the <code>vcpus</code> parameter set in the job definition, but doesn't override any vCPU\n   requirement specified in the <code>resourceRequirements</code> structure in the job definition. To override vCPU\n   requirements that are specified in the <code>resourceRequirements</code> structure in the job definition,\n    <code>resourceRequirements</code> must be specified in the <code>SubmitJob</code> request, with <code>type</code>\n   set to <code>VCPU</code> and <code>value</code> set to the new value. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/troubleshooting.html#override-resource-requirements\">Can't override\n    job definition resource requirements</a> in the <i>Batch User Guide</i>.</p>"
                     }
                 },
                 "memory": {
@@ -923,7 +923,7 @@
                         "smithy.api#deprecated": {
                             "message": "This field is deprecated, use resourceRequirements instead."
                         },
-                        "smithy.api#documentation": "<p>This parameter is deprecated, use\n    <code>resourceRequirements</code> to override the memory requirements specified in the job definition. It's not\n   supported for jobs that run on Fargate resources. For jobs run on EC2 resources, it overrides the\n    <code>memory</code> parameter set in the job definition, but doesn't override any memory requirement specified in\n   the <code>resourceRequirements</code> structure in the job definition. To override memory requirements that are\n   specified in the <code>resourceRequirements</code> structure in the job definition, <code>resourceRequirements</code>\n   must be specified in the <code>SubmitJob</code> request, with <code>type</code> set to <code>MEMORY</code> and\n    <code>value</code> set to the new value. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/troubleshooting.html#override-resource-requirements\">Can't override job definition\n    resource requirements</a> in the <i>Batch User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>This parameter is deprecated, use <code>resourceRequirements</code> to override the memory requirements\n   specified in the job definition. It's not supported for jobs that run on Fargate resources. For jobs run on EC2\n   resources, it overrides the <code>memory</code> parameter set in the job definition, but doesn't override any memory\n   requirement specified in the <code>resourceRequirements</code> structure in the job definition. To override memory\n   requirements that are specified in the <code>resourceRequirements</code> structure in the job definition,\n    <code>resourceRequirements</code> must be specified in the <code>SubmitJob</code> request, with <code>type</code>\n   set to <code>MEMORY</code> and <code>value</code> set to the new value. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/troubleshooting.html#override-resource-requirements\">Can't override\n    job definition resource requirements</a> in the <i>Batch User Guide</i>.</p>"
                     }
                 },
                 "command": {
@@ -970,7 +970,7 @@
                         "smithy.api#deprecated": {
                             "message": "This field is deprecated, use resourceRequirements instead."
                         },
-                        "smithy.api#documentation": "<p>This parameter is deprecated, use <code>resourceRequirements</code> to specify the vCPU requirements for the job\n   definition. It's not supported for jobs that run on Fargate resources. For jobs run on EC2 resources, it specifies\n   the number of vCPUs reserved for the job.</p>\n  \n         <p>Each vCPU is equivalent to 1,024 CPU shares. This parameter maps to <code>CpuShares</code> in the\n   <a href=\"https://docs.docker.com/engine/api/v1.23/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.23/\">Docker Remote API</a> and the <code>--cpu-shares</code> option to\n    <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>. The number of vCPUs must be specified but can be specified\n   in several places. You must specify it at least once for each node.</p>"
+                        "smithy.api#documentation": "<p>This parameter is deprecated, use <code>resourceRequirements</code> to specify the vCPU requirements for the job\n   definition. It's not supported for jobs that run on Fargate resources. For jobs run on EC2 resources, it specifies\n   the number of vCPUs reserved for the job.</p>\n         <p>Each vCPU is equivalent to 1,024 CPU shares. This parameter maps to <code>CpuShares</code> in the\n   <a href=\"https://docs.docker.com/engine/api/v1.23/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.23/\">Docker Remote API</a> and the <code>--cpu-shares</code> option to\n    <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>. The number of vCPUs must be specified but can be specified\n   in several places. You must specify it at least once for each node.</p>"
                     }
                 },
                 "memory": {
@@ -979,7 +979,7 @@
                         "smithy.api#deprecated": {
                             "message": "This field is deprecated, use resourceRequirements instead."
                         },
-                        "smithy.api#documentation": "<p>This parameter is deprecated, use\n    <code>resourceRequirements</code> to specify the memory requirements for the job definition. It's not supported for\n   jobs that run on Fargate resources. For jobs run on EC2 resources, it specifies the memory hard\n   limit (in MiB) for a container. If your container attempts to exceed the specified number, it's terminated. You must\n   specify at least 4 MiB of memory for a job using this parameter. The memory hard limit can be specified in several\n   places. It must be specified for each node at least once.</p>"
+                        "smithy.api#documentation": "<p>This parameter is deprecated, use <code>resourceRequirements</code> to specify the memory requirements for the\n   job definition. It's not supported for jobs that run on Fargate resources. For jobs run on EC2 resources, it\n   specifies the memory hard limit (in MiB) for a container. If your container attempts to exceed the specified number,\n   it's terminated. You must specify at least 4 MiB of memory for a job using this parameter. The memory hard limit can\n   be specified in several places. It must be specified for each node at least once.</p>"
                     }
                 },
                 "command": {
@@ -1126,7 +1126,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Batch compute environment. You can create <code>MANAGED</code> or <code>UNMANAGED</code> compute\n   environments. <code>MANAGED</code> compute environments can use Amazon EC2 or Fargate resources.\n    <code>UNMANAGED</code> compute environments can only use EC2 resources.</p>\n         <p>In a managed compute environment, Batch manages the capacity and instance types of the compute resources\n   within the environment. This is based on the compute resource specification that you define or the <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html\">launch template</a> that you\n   specify when you create the compute environment. Either, you can choose to use EC2 On-Demand Instances and EC2 Spot\n   Instances. Or, you can use Fargate and Fargate Spot capacity in your managed compute environment. You can\n   optionally set a maximum price so that Spot Instances only launch\n   when\n   the Spot Instance price is less than a specified percentage of the On-Demand price.</p>\n         <note>\n            <p>Multi-node parallel jobs aren't supported on Spot Instances.</p>\n         </note>\n         <p>In an unmanaged compute environment, you can manage your own EC2 compute resources and have a lot of flexibility\n   with how you configure your compute resources. For example, you can use custom AMIs. However, you must verify that\n   each of your AMIs meet the Amazon ECS container instance AMI specification. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container_instance_AMIs.html\">container instance AMIs</a> in the\n    <i>Amazon Elastic Container Service Developer Guide</i>. After you created your unmanaged compute environment, you can use the <a>DescribeComputeEnvironments</a> operation to find the Amazon ECS cluster that's associated with it. Then, launch\n   your container instances into that Amazon ECS cluster. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html\">Launching an Amazon ECS container instance</a> in the\n    <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <note>\n            <p>Batch doesn't upgrade the AMIs in a compute environment after the environment is created. For example, it\n    doesn't update the AMIs when a newer version of the Amazon ECS optimized AMI is available. Therefore, you're responsible\n    for managing the guest operating system (including its updates and security patches) and any additional application\n    software or utilities that you install on the compute resources. To use a new AMI for your Batch jobs, complete\n    these steps:</p>\n            <ol>\n               <li>\n                  <p>Create a new compute environment with the new AMI.</p>\n               </li>\n               <li>\n                  <p>Add the compute environment to an existing job queue.</p>\n               </li>\n               <li>\n                  <p>Remove the earlier compute environment from your job queue.</p>\n               </li>\n               <li>\n                  <p>Delete the earlier compute environment.</p>\n               </li>\n            </ol>\n         </note>",
+                "smithy.api#documentation": "<p>Creates an Batch compute environment. You can create <code>MANAGED</code> or <code>UNMANAGED</code> compute\n   environments. <code>MANAGED</code> compute environments can use Amazon EC2 or Fargate resources.\n    <code>UNMANAGED</code> compute environments can only use EC2 resources.</p>\n         <p>In a managed compute environment, Batch manages the capacity and instance types of the compute resources\n   within the environment. This is based on the compute resource specification that you define or the <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html\">launch template</a> that you\n   specify when you create the compute environment. Either, you can choose to use EC2 On-Demand Instances and EC2 Spot\n   Instances. Or, you can use Fargate and Fargate Spot capacity in your managed compute environment. You can\n   optionally set a maximum price so that Spot Instances only launch when the Spot Instance price is less than a\n   specified percentage of the On-Demand price.</p>\n         <note>\n            <p>Multi-node parallel jobs aren't supported on Spot Instances.</p>\n         </note>\n         <p>In an unmanaged compute environment, you can manage your own EC2 compute resources and have a lot of flexibility\n   with how you configure your compute resources. For example, you can use custom AMIs. However, you must verify that\n   each of your AMIs meet the Amazon ECS container instance AMI specification. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container_instance_AMIs.html\">container instance AMIs</a> in the\n    <i>Amazon Elastic Container Service Developer Guide</i>. After you created your unmanaged compute environment, you can use the <a>DescribeComputeEnvironments</a> operation to find the Amazon ECS cluster that's associated with it. Then, launch\n   your container instances into that Amazon ECS cluster. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html\">Launching an Amazon ECS container instance</a> in the\n    <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <note>\n            <p>Batch doesn't upgrade the AMIs in a compute environment after the environment is created. For example, it\n    doesn't update the AMIs when a newer version of the Amazon ECS optimized AMI is available. Therefore, you're responsible\n    for managing the guest operating system (including its updates and security patches) and any additional application\n    software or utilities that you install on the compute resources. To use a new AMI for your Batch jobs, complete\n    these steps:</p>\n            <ol>\n               <li>\n                  <p>Create a new compute environment with the new AMI.</p>\n               </li>\n               <li>\n                  <p>Add the compute environment to an existing job queue.</p>\n               </li>\n               <li>\n                  <p>Remove the earlier compute environment from your job queue.</p>\n               </li>\n               <li>\n                  <p>Delete the earlier compute environment.</p>\n               </li>\n            </ol>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/createcomputeenvironment",
@@ -1140,7 +1140,7 @@
                 "computeEnvironmentName": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name for your compute environment. Up to 128 letters (uppercase and lowercase), numbers, hyphens, and\n underscores are allowed.</p>",
+                        "smithy.api#documentation": "<p>The name for your compute environment. It can be up to 128 letters long. It can contain uppercase and\n lowercase letters, numbers, hyphens (-), and underscores (_).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1160,7 +1160,7 @@
                 "unmanagedvCpus": {
                     "target": "com.amazonaws.batch#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of vCPUs for an\n   unmanaged compute environment. This parameter is only used for fair share scheduling to reserve vCPU capacity for new\n   share identifiers. If this parameter is not provided for a fair share job queue, no vCPU capacity will be\n   reserved.</p>\n  \n         <note>\n            <p>This parameter is only supported when the <code>type</code> parameter is set to <code>UNMANAGED</code>/</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The maximum number of vCPUs for an unmanaged compute environment. This parameter is only used for fair share\n   scheduling to reserve vCPU capacity for new share identifiers. If this parameter isn't provided for a fair share job\n   queue, no vCPU capacity is reserved.</p>\n         <note>\n            <p>This parameter is only supported when the <code>type</code> parameter is set to <code>UNMANAGED</code>/</p>\n         </note>"
                     }
                 },
                 "computeResources": {
@@ -1192,7 +1192,7 @@
                 "computeEnvironmentName": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the compute environment. Up to 128 letters (uppercase and lowercase), numbers, hyphens, and\n underscores are allowed.</p>"
+                        "smithy.api#documentation": "<p>The name of the compute environment. It can be up to 128 letters long. It can contain uppercase and\n lowercase letters, numbers, hyphens (-), and underscores (_).</p>"
                     }
                 },
                 "computeEnvironmentArn": {
@@ -1234,7 +1234,7 @@
                 "jobQueueName": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the job queue. Up to 128 letters (uppercase and lowercase), numbers, and underscores are\n   allowed.</p>",
+                        "smithy.api#documentation": "<p>The name of the job queue. It can be up to 128 letters long. It can contain uppercase and lowercase letters,\n   numbers, hyphens (-), and underscores (_).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1247,7 +1247,7 @@
                 "schedulingPolicyArn": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of the fair share scheduling\n   policy. If this parameter is specified, the job queue will use a fair share scheduling policy. If this parameter is\n   not specified, the job queue will use a first in, first out (FIFO) scheduling policy. Once a job queue is created,\n   the fair share scheduling policy can be replaced but not removed. The format is\n     <code>aws:<i>Partition</i>:batch:<i>Region</i>:<i>Account</i>:scheduling-policy/<i>Name</i>\n            </code>.\n   For example,\n   <code>aws:aws:batch:us-west-2:012345678910:scheduling-policy/MySchedulingPolicy</code>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the fair share scheduling policy. If this parameter is specified, the job queue uses a fair\n   share scheduling policy. If this parameter isn't specified, the job queue uses a first in, first out (FIFO)\n   scheduling policy. After a job queue is created, you can replace but can't remove the fair share scheduling policy.\n   The format is\n     <code>aws:<i>Partition</i>:batch:<i>Region</i>:<i>Account</i>:scheduling-policy/<i>Name</i>\n            </code>.\n   An example is\n   <code>aws:aws:batch:us-west-2:012345678910:scheduling-policy/MySchedulingPolicy</code>.</p>"
                     }
                 },
                 "priority": {
@@ -1311,7 +1311,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Batch scheduling\n   policy.</p>",
+                "smithy.api#documentation": "<p>Creates an Batch scheduling policy.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/createschedulingpolicy",
@@ -1325,14 +1325,14 @@
                 "name": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the scheduling\n   policy. Up to 128 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed.</p>",
+                        "smithy.api#documentation": "<p>The name of the scheduling policy. It can be up to 128 letters long. It can contain uppercase and lowercase\n   letters, numbers, hyphens (-), and underscores (_).</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "fairsharePolicy": {
                     "target": "com.amazonaws.batch#FairsharePolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The fair share policy of the scheduling\n   policy.</p>"
+                        "smithy.api#documentation": "<p>The fair share policy of the scheduling policy.</p>"
                     }
                 },
                 "tags": {
@@ -1349,14 +1349,14 @@
                 "name": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the scheduling\n   policy.</p>",
+                        "smithy.api#documentation": "<p>The name of the scheduling policy.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "arn": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the scheduling policy.\n   The format is\n     <code>aws:<i>Partition</i>:batch:<i>Region</i>:<i>Account</i>:scheduling-policy/<i>Name</i>\n            </code>.\n   For example,\n   <code>aws:aws:batch:us-west-2:012345678910:scheduling-policy/MySchedulingPolicy</code>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the scheduling policy. The format is\n     <code>aws:<i>Partition</i>:batch:<i>Region</i>:<i>Account</i>:scheduling-policy/<i>Name</i>\n            </code>.\n   For example,\n   <code>aws:aws:batch:us-west-2:012345678910:scheduling-policy/MySchedulingPolicy</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1467,7 +1467,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified scheduling\n   policy.</p>\n         <p>You can't delete a scheduling policy that is used in any job queues.</p>",
+                "smithy.api#documentation": "<p>Deletes the specified scheduling policy.</p>\n         <p>You can't delete a scheduling policy that's used in any job queues.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/deleteschedulingpolicy",
@@ -1481,7 +1481,7 @@
                 "arn": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the scheduling policy to\n   delete.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the scheduling policy to delete.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1641,7 +1641,7 @@
                 "jobDefinitions": {
                     "target": "com.amazonaws.batch#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of up to 100 job definitions. Each\n   entry in the list can either be an ARN of the form\n    <code>arn:aws:batch:${Region}:${Account}:job-definition/${JobDefinitionName}:${Revision}</code> or a short version\n   using the form <code>${JobDefinitionName}:${Revision}</code>.</p>"
+                        "smithy.api#documentation": "<p>A list of up to 100 job definitions. Each entry in the list can either be an ARN in the format\n    <code>arn:aws:batch:${Region}:${Account}:job-definition/${JobDefinitionName}:${Revision}</code> or a short version\n   using the form <code>${JobDefinitionName}:${Revision}</code>.</p>"
                     }
                 },
                 "maxResults": {
@@ -1831,7 +1831,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes one or more of your scheduling\n   policies.</p>",
+                "smithy.api#documentation": "<p>Describes one or more of your scheduling policies.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/describeschedulingpolicies",
@@ -1845,7 +1845,7 @@
                 "arns": {
                     "target": "com.amazonaws.batch#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of up to 100 scheduling policy\n   Amazon Resource Name (ARN) entries.</p>",
+                        "smithy.api#documentation": "<p>A list of up to 100 scheduling policy Amazon Resource Name (ARN) entries.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1857,7 +1857,7 @@
                 "schedulingPolicies": {
                     "target": "com.amazonaws.batch#SchedulingPolicyDetailList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of scheduling\n   policies.</p>"
+                        "smithy.api#documentation": "<p>The list of scheduling policies.</p>"
                     }
                 }
             }
@@ -2048,19 +2048,19 @@
                 "onStatusReason": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains a glob pattern to match against the <code>StatusReason</code> returned for a job. The pattern can be up\n   to 512 characters in length. It can contain letters, numbers, periods (.), colons (:), and white space (including\n   spaces or tabs).\n   It can optionally end with an\n   asterisk (*) so that only the start of the string needs to be an exact match.</p>\n  \n         <p>The string can be between 1 and 512 characters in length.</p>"
+                        "smithy.api#documentation": "<p>Contains a glob pattern to match against the <code>StatusReason</code> returned for a job. The pattern can be up\n   to 512 characters in length. It can contain letters, numbers, periods (.), colons (:), and white space (including\n   spaces or tabs).\n   It can optionally end with an\n   asterisk (*) so that only the start of the string needs to be an exact match.</p>\n         <p>The string can be between 1 and 512 characters in length.</p>"
                     }
                 },
                 "onReason": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains a glob pattern to match against the <code>Reason</code> returned for a job. The pattern can be up to\n   512 characters in length. It can contain letters, numbers, periods (.), colons (:), and white space (including spaces\n   and tabs). It can optionally end with an asterisk (*) so that only the start of the string needs to be an exact\n   match.</p>\n  \n         <p>The string can be between 1 and 512 characters in length.</p>"
+                        "smithy.api#documentation": "<p>Contains a glob pattern to match against the <code>Reason</code> returned for a job. The pattern can be up to\n   512 characters in length. It can contain letters, numbers, periods (.), colons (:), and white space (including spaces\n   and tabs). It can optionally end with an asterisk (*) so that only the start of the string needs to be an exact\n   match.</p>\n         <p>The string can be between 1 and 512 characters in length.</p>"
                     }
                 },
                 "onExitCode": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains a glob pattern to match against the decimal representation of the <code>ExitCode</code> returned for a\n   job. The pattern can be up to 512 characters in length. It can contain only numbers, and can optionally end with an\n   asterisk (*) so that only the start of the string needs to be an exact match.</p>\n  \n         <p>The string can be between 1 and 512 characters in length.</p>"
+                        "smithy.api#documentation": "<p>Contains a glob pattern to match against the decimal representation of the <code>ExitCode</code> returned for a\n   job. The pattern can be up to 512 characters in length. It can contain only numbers, and can optionally end with an\n   asterisk (*) so that only the start of the string needs to be an exact match.</p>\n         <p>The string can be between 1 and 512 characters in length.</p>"
                     }
                 },
                 "action": {
@@ -2087,24 +2087,24 @@
                 "shareDecaySeconds": {
                     "target": "com.amazonaws.batch#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time period to use to calculate a\n   fair share percentage for each fair share identifier in use, in seconds. A value of zero (0) indicates that only\n   current usage should be measured; if there are four evenly weighted fair share identifiers then each can only use up\n   to 25% of the available CPU resources, even if some of the fair share identifiers have no currently running jobs. The\n   decay allows for more recently run jobs to have more weight than jobs that ran earlier. The maximum supported value\n   is 604800 (1 week).</p>"
+                        "smithy.api#documentation": "<p>The time period to use to calculate a fair share percentage for each fair share identifier in use, in seconds. A\n   value of zero (0) indicates that only current usage should be measured. The decay allows for more recently run jobs\n   to have more weight than jobs that ran earlier. The maximum supported value is 604800 (1 week).</p>"
                     }
                 },
                 "computeReservation": {
                     "target": "com.amazonaws.batch#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value used to reserve some of the\n   available maximum vCPU for fair share identifiers that have not yet been used.</p>\n         <p>The reserved ratio is\n    <code>(<i>computeReservation</i>/100)^<i>ActiveFairShares</i>\n            </code> where\n     <code>\n               <i>ActiveFairShares</i>\n            </code> is the number of active fair share identifiers.</p>\n         <p>For example, a <code>computeReservation</code> value of 50 indicates that Batch should reserve 50% of the\n   maximum available vCPU if there is only one fair share identifier, 25% if there are two fair share identifiers, and\n   12.5% if there are three fair share identifiers. A <code>computeReservation</code> value of 25 indicates that Batch\n   should reserve 25% of the maximum available vCPU if there is only one fair share identifier, 6.25% if there are two\n   fair share identifiers, and 1.56% if there are three fair share identifiers.</p>\n  \n         <p>The minimum value is 0 and the maximum value is 99.</p>"
+                        "smithy.api#documentation": "<p>A value used to reserve some of the available maximum vCPU for fair share identifiers that have not yet been\n   used.</p>\n         <p>The reserved ratio is\n    <code>(<i>computeReservation</i>/100)^<i>ActiveFairShares</i>\n            </code> where\n     <code>\n               <i>ActiveFairShares</i>\n            </code> is the number of active fair share identifiers.</p>\n         <p>For example, a <code>computeReservation</code> value of 50 indicates that Batch should reserve 50% of the\n   maximum available vCPU if there is only one fair share identifier, 25% if there are two fair share identifiers, and\n   12.5% if there are three fair share identifiers. A <code>computeReservation</code> value of 25 indicates that Batch\n   should reserve 25% of the maximum available vCPU if there is only one fair share identifier, 6.25% if there are two\n   fair share identifiers, and 1.56% if there are three fair share identifiers.</p>\n         <p>The minimum value is 0 and the maximum value is 99.</p>"
                     }
                 },
                 "shareDistribution": {
                     "target": "com.amazonaws.batch#ShareAttributesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Array of <code>SharedIdentifier</code>\n   objects that contain the weights for the fair\n   share identifiers for the fair share policy.\n   Fair share identifiers that\n   are not included have a default weight of <code>1.0</code>.</p>"
+                        "smithy.api#documentation": "<p>An array of <code>SharedIdentifier</code> objects that contain the weights for the fair share identifiers for\n   the fair share policy. Fair share identifiers that aren't included have a default weight of <code>1.0</code>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The fair share policy for a scheduling\n   policy.</p>"
+                "smithy.api#documentation": "<p>The fair share policy for a scheduling policy.</p>"
             }
         },
         "com.amazonaws.batch#FargatePlatformConfiguration": {
@@ -2238,14 +2238,14 @@
                 "type": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of job definition, either\n    <code>container</code> or <code>multinode</code>. If the job is run on Fargate resources, then\n    <code>multinode</code> isn't supported. For more information about multi-node parallel jobs, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/multi-node-job-def.html\">Creating a multi-node parallel job definition</a>\n   in the <i>Batch User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The type of job definition, either <code>container</code> or <code>multinode</code>. If the job is run on\n   Fargate resources, then <code>multinode</code> isn't supported. For more information about multi-node parallel\n   jobs, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/multi-node-job-def.html\">Creating a multi-node parallel job\n    definition</a> in the <i>Batch User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "schedulingPriority": {
                     "target": "com.amazonaws.batch#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The scheduling priority of the job\n   definition. This will only affect jobs in job queues with a fair share policy. Jobs with a higher scheduling priority\n   will be scheduled before jobs with a lower scheduling priority.</p>"
+                        "smithy.api#documentation": "<p>The scheduling priority of the job definition. This only affects jobs in job queues with a fair share policy.\n   Jobs with a higher scheduling priority are scheduled before jobs with a lower scheduling priority.</p>"
                     }
                 },
                 "parameters": {
@@ -2394,7 +2394,7 @@
                 "schedulingPriority": {
                     "target": "com.amazonaws.batch#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The scheduling policy of the job definition. This will only affect jobs in job queues with a fair share policy.\n   Jobs with a higher scheduling priority will be scheduled before jobs with a lower scheduling priority.</p>"
+                        "smithy.api#documentation": "<p>The scheduling policy of the job definition. This only affects jobs in job queues with a fair share policy. Jobs\n   with a higher scheduling priority are scheduled before jobs with a lower scheduling priority.</p>"
                     }
                 },
                 "attempts": {
@@ -2539,7 +2539,7 @@
                 "schedulingPolicyArn": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of the scheduling policy. The format is\n     <code>aws:<i>Partition</i>:batch:<i>Region</i>:<i>Account</i>:scheduling-policy/<i>Name</i>\n            </code>.\n   For example,\n   <code>aws:aws:batch:us-west-2:012345678910:scheduling-policy/MySchedulingPolicy</code>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the scheduling policy. The format is\n     <code>aws:<i>Partition</i>:batch:<i>Region</i>:<i>Account</i>:scheduling-policy/<i>Name</i>\n            </code>.\n   For example,\n   <code>aws:aws:batch:us-west-2:012345678910:scheduling-policy/MySchedulingPolicy</code>.</p>"
                     }
                 },
                 "status": {
@@ -2646,7 +2646,7 @@
                 "createdAt": {
                     "target": "com.amazonaws.batch#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Unix timestamp for when the job was created. For non-array jobs and parent array jobs, this is when the job\n   entered the <code>SUBMITTED</code> state (at the time <a>SubmitJob</a> was called). For array child jobs,\n   this is when the child job was spawned by its parent and entered the <code>PENDING</code> state.</p>"
+                        "smithy.api#documentation": "<p>The Unix timestamp (in milliseconds) for when the job was created. For non-array jobs and parent array jobs,\n   this is when the job entered the <code>SUBMITTED</code> state (at the time <a>SubmitJob</a> was called).\n   For array child jobs, this is when the child job was spawned by its parent and entered the <code>PENDING</code>\n   state.</p>"
                     }
                 },
                 "status": {
@@ -2910,7 +2910,7 @@
                 "filters": {
                     "target": "com.amazonaws.batch#ListJobsFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filter to apply to the query. Only one filter can be used at a time. When the filter is used,\n    <code>jobStatus</code> is ignored. The filter doesn't apply to child jobs in an array or multi-node parallel (MNP)\n   jobs. The results are sorted by the <code>createdAt</code> field, with the most recent jobs being first.</p>\n         <dl>\n            <dt>JOB_NAME</dt>\n            <dd>\n               <p>The value of the filter is a case-insensitive match for the job name. If the value ends with an asterisk (*),\n      the filter will match any job name that begins with the string before the '*'. This corresponds to the\n       <code>jobName</code> value. For example, <code>test1</code> matches both <code>Test1</code> and\n       <code>test1</code>, and <code>test1*</code> matches both <code>test1</code> and <code>Test10</code>. When the\n       <code>JOB_NAME</code> filter is used, the results are grouped by the job name and version.</p>\n            </dd>\n            <dt>JOB_DEFINITION</dt>\n            <dd>\n               <p>The value for the filter is the name or Amazon Resource Name (ARN) of the job definition. This corresponds to the\n       <code>jobDefinition</code> value. The value is case sensitive. When the value for the filter is the job\n      definition name, the results include all the jobs that used any revision of that job definition name. If the value\n      ends with an asterisk (*), the filter will match any job definition name that begins with the string before the\n      '*'. For example, <code>jd1</code> matches only <code>jd1</code>, and <code>jd1*</code> matches both\n       <code>jd1</code> and <code>jd1A</code>. The version of the job definition that's used doesn't affect the sort\n      order. When the <code>JOB_DEFINITION</code> filter is used and the ARN is used (which is in the form\n       <code>arn:${Partition}:batch:${Region}:${Account}:job-definition/${JobDefinitionName}:${Revision}</code>), the\n      results include jobs that used the specified revision of the job definition. Asterisk (*) is not supported when\n      the ARN is used.</p>\n            </dd>\n            <dt>BEFORE_CREATED_AT</dt>\n            <dd>\n               <p>The value for the filter is the time that's before the job was created. This corresponds to the\n       <code>createdAt</code> value. The value is a string representation of the number of seconds since 00:00:00 UTC\n      (midnight) on January 1, 1970.</p>\n            </dd>\n            <dt>AFTER_CREATED_AT</dt>\n            <dd>\n               <p>The value for the filter is the time that's after the job was created. This corresponds to the\n       <code>createdAt</code> value. The value is a string representation of the number of seconds since 00:00:00 UTC\n      (midnight) on January 1, 1970.</p>\n            </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p>The filter to apply to the query. Only one filter can be used at a time. When the filter is used,\n    <code>jobStatus</code> is ignored. The filter doesn't apply to child jobs in an array or multi-node parallel (MNP)\n   jobs. The results are sorted by the <code>createdAt</code> field, with the most recent jobs being first.</p>\n         <dl>\n            <dt>JOB_NAME</dt>\n            <dd>\n               <p>The value of the filter is a case-insensitive match for the job name. If the value ends with an asterisk (*),\n      the filter will match any job name that begins with the string before the '*'. This corresponds to the\n       <code>jobName</code> value. For example, <code>test1</code> matches both <code>Test1</code> and\n       <code>test1</code>, and <code>test1*</code> matches both <code>test1</code> and <code>Test10</code>. When the\n       <code>JOB_NAME</code> filter is used, the results are grouped by the job name and version.</p>\n            </dd>\n            <dt>JOB_DEFINITION</dt>\n            <dd>\n               <p>The value for the filter is the name or Amazon Resource Name (ARN) of the job definition. This corresponds to the\n       <code>jobDefinition</code> value. The value is case sensitive. When the value for the filter is the job\n      definition name, the results include all the jobs that used any revision of that job definition name. If the value\n      ends with an asterisk (*), the filter will match any job definition name that begins with the string before the\n      '*'. For example, <code>jd1</code> matches only <code>jd1</code>, and <code>jd1*</code> matches both\n       <code>jd1</code> and <code>jd1A</code>. The version of the job definition that's used doesn't affect the sort\n      order. When the <code>JOB_DEFINITION</code> filter is used and the ARN is used (which is in the form\n       <code>arn:${Partition}:batch:${Region}:${Account}:job-definition/${JobDefinitionName}:${Revision}</code>), the\n      results include jobs that used the specified revision of the job definition. Asterisk (*) is not supported when\n      the ARN is used.</p>\n            </dd>\n            <dt>BEFORE_CREATED_AT</dt>\n            <dd>\n               <p>The value for the filter is the time that's before the job was created. This corresponds to the\n       <code>createdAt</code> value. The value is a string representation of the number of milliseconds since 00:00:00\n      UTC (midnight) on January 1, 1970.</p>\n            </dd>\n            <dt>AFTER_CREATED_AT</dt>\n            <dd>\n               <p>The value for the filter is the time that's after the job was created. This corresponds to the\n       <code>createdAt</code> value. The value is a string representation of the number of milliseconds since 00:00:00\n      UTC (midnight) on January 1, 1970.</p>\n            </dd>\n         </dl>"
                     }
                 }
             },
@@ -2953,7 +2953,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of Batch scheduling\n   policies.</p>",
+                "smithy.api#documentation": "<p>Returns a list of Batch scheduling policies.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/listschedulingpolicies",
@@ -2972,13 +2972,13 @@
                 "maxResults": {
                     "target": "com.amazonaws.batch#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results returned by <code>ListSchedulingPolicies</code> in paginated output. When this\n   parameter is used, <code>ListSchedulingPolicies</code> only returns <code>maxResults</code> results in a single page\n   and a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending\n   another <code>ListSchedulingPolicies</code> request with the returned <code>nextToken</code> value. This value can be\n   between 1 and 100. If this parameter isn't used, then\n    <code>ListSchedulingPolicies</code> returns up to 100 results and a <code>nextToken</code> value\n   if applicable.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results that's returned by <code>ListSchedulingPolicies</code> in paginated output. When\n   this parameter is used, <code>ListSchedulingPolicies</code> only returns <code>maxResults</code> results in a single\n   page and a <code>nextToken</code> response element. You can see the remaining results of the initial request by\n   sending another <code>ListSchedulingPolicies</code> request with the returned <code>nextToken</code> value. This\n   value can be between 1 and 100. If this parameter isn't used,\n    <code>ListSchedulingPolicies</code> returns up to 100 results and a <code>nextToken</code> value\n   if applicable.</p>"
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated <code>ListSchedulingPolicies</code> request\n   where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues\n   from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code>\n   when there are no more results to return.</p>\n         <note>\n            <p>This token should be treated as an opaque identifier that's only used to\n retrieve the next items in a list and not for other programmatic purposes.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value that's returned from a previous paginated <code>ListSchedulingPolicies</code>\n   request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination\n   continues from the end of the previous results that returned the <code>nextToken</code> value. This value is\n    <code>null</code> when there are no more results to\n   return.</p>\n         <note>\n            <p>This token should be treated as an opaque identifier that's only used to\n retrieve the next items in a list and not for other programmatic purposes.</p>\n         </note>"
                     }
                 }
             }
@@ -2989,7 +2989,7 @@
                 "schedulingPolicies": {
                     "target": "com.amazonaws.batch#SchedulingPolicyListingDetailList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of scheduling policies that match\n   the request.</p>"
+                        "smithy.api#documentation": "<p>A list of scheduling policies that match the request.</p>"
                     }
                 },
                 "nextToken": {
@@ -3411,7 +3411,7 @@
                 "jobDefinitionName": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the job definition to register. Up to 128 letters (uppercase and lowercase), numbers, hyphens, and\n   underscores are allowed.</p>",
+                        "smithy.api#documentation": "<p>The name of the job definition to register. It can be up to 128 letters long. It can contain uppercase and\n   lowercase letters, numbers, hyphens (-), and underscores (_).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3431,7 +3431,7 @@
                 "schedulingPriority": {
                     "target": "com.amazonaws.batch#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The scheduling priority for jobs that are\n   submitted with this job definition. This will only affect jobs in job queues with a fair share policy. Jobs with a\n   higher scheduling priority will be scheduled before jobs with a lower scheduling priority.</p>\n  \n         <p>The minimum supported value is 0 and the maximum supported value is 9999.</p>"
+                        "smithy.api#documentation": "<p>The scheduling priority for jobs that are submitted with this job definition. This will only affect jobs in job\n   queues with a fair share policy. Jobs with a higher scheduling priority will be scheduled before jobs with a lower\n   scheduling priority.</p>\n         <p>The minimum supported value is 0 and the maximum supported value is 9999.</p>"
                     }
                 },
                 "containerProperties": {
@@ -3513,7 +3513,7 @@
                 "value": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The quantity of the specified resource to reserve for the container. The values vary based on the\n    <code>type</code> specified.</p>\n         <dl>\n            <dt>type=\"GPU\"</dt>\n            <dd>\n               <p>The number of physical GPUs to reserve for the container. The number of GPUs reserved for all containers in a\n      job shouldn't exceed the number of available GPUs on the compute resource that the job is launched on.</p>\n               <note>\n                  <p>GPUs are not available for jobs that are running on Fargate resources.</p>\n               </note>\n            </dd>\n            <dt>type=\"MEMORY\"</dt>\n            <dd>\n               <p>The memory hard limit (in MiB) present to the container. This parameter is supported for jobs that are\n      running on EC2 resources. If your container attempts to exceed the memory specified, the container is terminated.\n      This parameter maps to <code>Memory</code> in the <a href=\"https://docs.docker.com/engine/api/v1.23/#create-a-container\">Create a container</a> section of the\n      <a href=\"https://docs.docker.com/engine/api/v1.23/\">Docker Remote API</a> and the <code>--memory</code> option to <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>.\n      You must specify at least 4 MiB of memory for a job. This is required but can be specified in several places for\n      multi-node parallel (MNP) jobs. It must be specified for each node at least once. This parameter maps to\n       <code>Memory</code> in the <a href=\"https://docs.docker.com/engine/api/v1.23/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.23/\">Docker Remote API</a> and the\n       <code>--memory</code> option to <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>.</p>\n               <note>\n                  <p>If you're trying to maximize your resource utilization by providing your jobs as much memory as possible for\n       a particular instance type, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/memory-management.html\">Memory\n        Management</a> in the <i>Batch User Guide</i>.</p>\n               </note>\n               <p>For jobs that are running on Fargate resources, then <code>value</code> is the hard limit (in MiB), and\n      must match one of the supported values and the <code>VCPU</code> values must be one of the values supported for\n      that memory value.</p>\n               <dl>\n                  <dt>value = 512</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 0.25</p>\n                  </dd>\n                  <dt>value = 1024</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 0.25 or 0.5</p>\n                  </dd>\n                  <dt>value = 2048</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 0.25, 0.5, or 1</p>\n                  </dd>\n                  <dt>value = 3072</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 0.5, or 1</p>\n                  </dd>\n                  <dt>value = 4096</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 0.5, 1, or 2</p>\n                  </dd>\n                  <dt>value = 5120, 6144, or 7168</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 1 or 2</p>\n                  </dd>\n                  <dt>value = 8192</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 1, 2, or 4</p>\n                  </dd>\n                  <dt>value = 9216, 10240, 11264, 12288, 13312, 14336, 15360, or 16384</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 2 or 4</p>\n                  </dd>\n                  <dt>value = 17408, 18432, 19456, 20480, 21504, 22528, 23552, 24576, 25600, 26624, 27648, 28672, 29696, or 30720</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 4</p>\n                  </dd>\n               </dl>\n            </dd>\n            <dt>type=\"VCPU\"</dt>\n            <dd>\n               <p>The number of vCPUs reserved for the container. This parameter maps to <code>CpuShares</code> in the\n      <a href=\"https://docs.docker.com/engine/api/v1.23/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.23/\">Docker Remote API</a> and the <code>--cpu-shares</code> option to\n       <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>. Each vCPU is equivalent to 1,024 CPU shares. For EC2\n      resources, you must specify at least one vCPU. This is required but can be specified in several places; it must be\n      specified for each node at least once.</p>\n               <p>For jobs that are running on Fargate resources, then <code>value</code> must match one of the supported\n      values and the <code>MEMORY</code> values must be one of the values supported for that\n       <code>VCPU</code>\n      value. The supported values are 0.25, 0.5, 1, 2, and 4</p>\n               <dl>\n                  <dt>value = 0.25</dt>\n                  <dd>\n                     <p>\n                        <code>MEMORY</code> = 512, 1024, or 2048</p>\n                  </dd>\n                  <dt>value = 0.5</dt>\n                  <dd>\n                     <p>\n                        <code>MEMORY</code> = 1024, 2048, 3072, or 4096</p>\n                  </dd>\n                  <dt>value = 1</dt>\n                  <dd>\n                     <p>\n                        <code>MEMORY</code> = 2048, 3072, 4096, 5120, 6144, 7168, or 8192</p>\n                  </dd>\n                  <dt>value = 2</dt>\n                  <dd>\n                     <p>\n                        <code>MEMORY</code> = 4096, 5120, 6144, 7168, 8192, 9216, 10240, 11264, 12288, 13312, 14336, 15360, or 16384</p>\n                  </dd>\n                  <dt>value = 4</dt>\n                  <dd>\n                     <p>\n                        <code>MEMORY</code> = 8192, 9216, 10240, 11264, 12288, 13312, 14336, 15360, 16384, 17408, 18432, 19456,\n     20480, 21504, 22528, 23552, 24576, 25600, 26624, 27648, 28672, 29696, or 30720</p>\n                  </dd>\n               </dl>\n            </dd>\n         </dl>",
+                        "smithy.api#documentation": "<p>The quantity of the specified resource to reserve for the container. The values vary based on the\n    <code>type</code> specified.</p>\n         <dl>\n            <dt>type=\"GPU\"</dt>\n            <dd>\n               <p>The number of physical GPUs to reserve for the container. The number of GPUs reserved for all containers in a\n      job shouldn't exceed the number of available GPUs on the compute resource that the job is launched on.</p>\n               <note>\n                  <p>GPUs are not available for jobs that are running on Fargate resources.</p>\n               </note>\n            </dd>\n            <dt>type=\"MEMORY\"</dt>\n            <dd>\n               <p>The memory hard limit (in MiB) present to the container. This parameter is supported for jobs that are\n      running on EC2 resources. If your container attempts to exceed the memory specified, the container is terminated.\n      This parameter maps to <code>Memory</code> in the <a href=\"https://docs.docker.com/engine/api/v1.23/#create-a-container\">Create a container</a> section of the\n      <a href=\"https://docs.docker.com/engine/api/v1.23/\">Docker Remote API</a> and the <code>--memory</code> option to <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>.\n      You must specify at least 4 MiB of memory for a job. This is required but can be specified in several places for\n      multi-node parallel (MNP) jobs. It must be specified for each node at least once. This parameter maps to\n       <code>Memory</code> in the <a href=\"https://docs.docker.com/engine/api/v1.23/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.23/\">Docker Remote API</a> and the\n       <code>--memory</code> option to <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>.</p>\n               <note>\n                  <p>If you're trying to maximize your resource utilization by providing your jobs as much memory as possible for\n       a particular instance type, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/memory-management.html\">Memory\n        Management</a> in the <i>Batch User Guide</i>.</p>\n               </note>\n               <p>For jobs that are running on Fargate resources, then <code>value</code> is the hard limit (in MiB), and\n      must match one of the supported values and the <code>VCPU</code> values must be one of the values supported for\n      that memory value.</p>\n               <dl>\n                  <dt>value = 512</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 0.25</p>\n                  </dd>\n                  <dt>value = 1024</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 0.25 or 0.5</p>\n                  </dd>\n                  <dt>value = 2048</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 0.25, 0.5, or 1</p>\n                  </dd>\n                  <dt>value = 3072</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 0.5, or 1</p>\n                  </dd>\n                  <dt>value = 4096</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 0.5, 1, or 2</p>\n                  </dd>\n                  <dt>value = 5120, 6144, or 7168</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 1 or 2</p>\n                  </dd>\n                  <dt>value = 8192</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 1, 2, or 4</p>\n                  </dd>\n                  <dt>value = 9216, 10240, 11264, 12288, 13312, 14336, 15360, or 16384</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 2 or 4</p>\n                  </dd>\n                  <dt>value = 17408, 18432, 19456, 20480, 21504, 22528, 23552, 24576, 25600, 26624, 27648, 28672, 29696, or 30720</dt>\n                  <dd>\n                     <p>\n                        <code>VCPU</code> = 4</p>\n                  </dd>\n               </dl>\n            </dd>\n            <dt>type=\"VCPU\"</dt>\n            <dd>\n               <p>The number of vCPUs reserved for the container. This parameter maps to <code>CpuShares</code> in the\n      <a href=\"https://docs.docker.com/engine/api/v1.23/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.23/\">Docker Remote API</a> and the <code>--cpu-shares</code> option to\n       <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>. Each vCPU is equivalent to 1,024 CPU shares. For EC2\n      resources, you must specify at least one vCPU. This is required but can be specified in several places; it must be\n      specified for each node at least once.</p>\n               <p>For jobs that are running on Fargate resources, then <code>value</code> must match one of the supported\n      values and the <code>MEMORY</code> values must be one of the values supported for that <code>VCPU</code> value.\n      The supported values are 0.25, 0.5, 1, 2, and 4</p>\n               <dl>\n                  <dt>value = 0.25</dt>\n                  <dd>\n                     <p>\n                        <code>MEMORY</code> = 512, 1024, or 2048</p>\n                  </dd>\n                  <dt>value = 0.5</dt>\n                  <dd>\n                     <p>\n                        <code>MEMORY</code> = 1024, 2048, 3072, or 4096</p>\n                  </dd>\n                  <dt>value = 1</dt>\n                  <dd>\n                     <p>\n                        <code>MEMORY</code> = 2048, 3072, 4096, 5120, 6144, 7168, or 8192</p>\n                  </dd>\n                  <dt>value = 2</dt>\n                  <dd>\n                     <p>\n                        <code>MEMORY</code> = 4096, 5120, 6144, 7168, 8192, 9216, 10240, 11264, 12288, 13312, 14336, 15360, or 16384</p>\n                  </dd>\n                  <dt>value = 4</dt>\n                  <dd>\n                     <p>\n                        <code>MEMORY</code> = 8192, 9216, 10240, 11264, 12288, 13312, 14336, 15360, 16384, 17408, 18432, 19456,\n     20480, 21504, 22528, 23552, 24576, 25600, 26624, 27648, 28672, 29696, or 30720</p>\n                  </dd>\n               </dl>\n            </dd>\n         </dl>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3595,32 +3595,32 @@
                 "name": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the scheduling\n   policy.</p>",
+                        "smithy.api#documentation": "<p>The name of the scheduling policy.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "arn": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of the scheduling policy. An example would be\n     <code>arn:<i>aws</i>:batch:<i>us-east-1</i>:<i>123456789012</i>:scheduling-policy/<i>HighPriority</i>\n            </code>\n         </p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the scheduling policy. An example is\n     <code>arn:<i>aws</i>:batch:<i>us-east-1</i>:<i>123456789012</i>:scheduling-policy/<i>HighPriority</i>\n            </code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "fairsharePolicy": {
                     "target": "com.amazonaws.batch#FairsharePolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The fair share policy for the scheduling\n   policy.</p>"
+                        "smithy.api#documentation": "<p>The fair share policy for the scheduling policy.</p>"
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.batch#TagrisTagsMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags that you apply to the scheduling policy to help you categorize and organize your resources. Each tag\n   consists of a key and an optional value. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a> in <i>Amazon Web Services General\n    Reference</i>.</p>"
+                        "smithy.api#documentation": "<p>The tags that you apply to the scheduling policy to categorize and organize your resources. Each tag consists of\n   a key and an optional value. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a> in <i>Amazon Web Services General\n    Reference</i>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object representing a scheduling\n   policy.</p>"
+                "smithy.api#documentation": "<p>An object that represents a scheduling policy.</p>"
             }
         },
         "com.amazonaws.batch#SchedulingPolicyDetailList": {
@@ -3641,7 +3641,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object containing the details of a scheduling policy returned in a <code>ListSchedulingPolicy</code>\n   action.</p>"
+                "smithy.api#documentation": "<p>An object that contains the details of a scheduling policy that's returned in a\n    <code>ListSchedulingPolicy</code> action.</p>"
             }
         },
         "com.amazonaws.batch#SchedulingPolicyListingDetailList": {
@@ -3697,19 +3697,19 @@
                 "shareIdentifier": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A fair share identifier or fair share identifier prefix. If the string ends with '*' then this entry specifies\n   the weight factor to use for fair share identifiers that begin with that prefix. The list of fair share identifiers\n   in a fair share policy cannot overlap. For example you cannot have one that specifies a <code>shareIdentifier</code>\n   of <code>UserA*</code> and another that specifies a <code>shareIdentifier</code> of <code>UserA-1</code>.</p>\n         <p>There can be no more than 500 fair share identifiers active in a job queue.</p>\n         <p>The string is limited to 255 alphanumeric characters, optionally followed by '*'.</p>",
+                        "smithy.api#documentation": "<p>A fair share identifier or fair share identifier prefix. If the string ends with an asterisk (*), this entry\n   specifies the weight factor to use for fair share identifiers that start with that prefix. The list of fair share\n   identifiers in a fair share policy cannot overlap. For example, you can't have one that specifies a\n    <code>shareIdentifier</code> of <code>UserA*</code> and another that specifies a <code>shareIdentifier</code> of\n    <code>UserA-1</code>.</p>\n         <p>There can be no more than 500 fair share identifiers active in a job queue.</p>\n         <p>The string is limited to 255 alphanumeric characters, optionally followed by an asterisk (*).</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "weightFactor": {
                     "target": "com.amazonaws.batch#Float",
                     "traits": {
-                        "smithy.api#documentation": "<p>The weight factor for the fair share\n   identifier. The default value is 1.0. A lower value has a higher priority for compute resources. For example, jobs\n   using a share identifier with a weight factor of 0.125 (1/8) will get 8 times the compute resources of jobs using a\n   share identifier with a weight factor of 1.</p>\n         <p>The smallest supported value is 0.0001 and the largest supported value is 999.9999.</p>"
+                        "smithy.api#documentation": "<p>The weight factor for the fair share identifier. The default value is 1.0. A lower value has a higher priority\n   for compute resources. For example, jobs that use a share identifier with a weight factor of 0.125 (1/8) get 8 times\n   the compute resources of jobs that use a share identifier with a weight factor of 1.</p>\n         <p>The smallest supported value is 0.0001, and the largest supported value is 999.9999.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the weights for the fair share identifiers for the fair share policy. Fair share identifiers that are\n   not included have a default weight of <code>1.0</code>.</p>"
+                "smithy.api#documentation": "<p>Specifies the weights for the fair share identifiers for the fair share policy. Fair share identifiers that\n   aren't included have a default weight of <code>1.0</code>.</p>"
             }
         },
         "com.amazonaws.batch#ShareAttributesList": {
@@ -3744,7 +3744,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Submits an Batch job from a job definition. Parameters that are specified during <a>SubmitJob</a>\n   override parameters defined in the job definition. vCPU and memory requirements that are specified in the\n    <code>resourceRequirements</code> objects in the job definition are the exception. They can't be overridden this way\n   using the <code>memory</code> and <code>vcpus</code> parameters. Rather, you must specify updates to job definition\n   parameters in a <code>ResourceRequirements</code> object that's included in the <code>containerOverrides</code>\n   parameter.</p>\n  \n         <note>\n            <p>Job queues with a scheduling policy are limited to 500 active fair share identifiers at a time. </p>\n         </note>\n  \n         <important>\n            <p>Jobs that run on Fargate resources can't be guaranteed to run for more than 14 days. This is because, after 14\n    days, Fargate resources might become unavailable and job might be terminated.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Submits an Batch job from a job definition. Parameters that are specified during <a>SubmitJob</a>\n   override parameters defined in the job definition. vCPU and memory requirements that are specified in the\n    <code>resourceRequirements</code> objects in the job definition are the exception. They can't be overridden this way\n   using the <code>memory</code> and <code>vcpus</code> parameters. Rather, you must specify updates to job definition\n   parameters in a <code>ResourceRequirements</code> object that's included in the <code>containerOverrides</code>\n   parameter.</p>\n         <note>\n            <p>Job queues with a scheduling policy are limited to 500 active fair share identifiers at a time. </p>\n         </note>\n         <important>\n            <p>Jobs that run on Fargate resources can't be guaranteed to run for more than 14 days. This is because, after 14\n    days, Fargate resources might become unavailable and job might be terminated.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/submitjob",
@@ -3758,7 +3758,7 @@
                 "jobName": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the job. The first character must be alphanumeric, and up to 128 letters (uppercase and lowercase),\n   numbers, hyphens, and underscores are allowed.</p>",
+                        "smithy.api#documentation": "<p>The name of the job. It can be up to 128 letters long. The first character must be alphanumeric, can contain\n   uppercase and lowercase letters, numbers, hyphens (-), and underscores (_).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3772,13 +3772,13 @@
                 "shareIdentifier": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The share identifier for the\n   job.</p>"
+                        "smithy.api#documentation": "<p>The share identifier for the job.</p>"
                     }
                 },
                 "schedulingPriorityOverride": {
                     "target": "com.amazonaws.batch#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The scheduling priority for the job. This\n   will only affect jobs in job queues with a fair share policy. Jobs with a higher scheduling priority will be\n   scheduled before jobs with a lower scheduling priority. This will override any scheduling priority in the job\n   definition.</p>\n  \n         <p>The minimum supported value is 0 and the maximum supported value is 9999.</p>"
+                        "smithy.api#documentation": "<p>The scheduling priority for the job. This will only affect jobs in job queues with a fair share policy. Jobs\n   with a higher scheduling priority will be scheduled before jobs with a lower scheduling priority. This will override\n   any scheduling priority in the job definition.</p>\n         <p>The minimum supported value is 0 and the maximum supported value is 9999.</p>"
                     }
                 },
                 "arrayProperties": {
@@ -4189,7 +4189,7 @@
                 "unmanagedvCpus": {
                     "target": "com.amazonaws.batch#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of vCPUs expected to\n   be used for an unmanaged compute environment. This parameter should not be specified for a managed compute\n   environment. This parameter is only used for fair share scheduling to reserve vCPU capacity for new share\n   identifiers. If this parameter is not provided for a fair share job queue, no vCPU capacity will be\n   reserved.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of vCPUs expected to be used for an unmanaged compute environment. This parameter should not\n   be specified for a managed compute environment. This parameter is only used for fair share scheduling to reserve vCPU\n   capacity for new share identifiers. If this parameter is not provided for a fair share job queue, no vCPU capacity\n   will be reserved.</p>"
                     }
                 },
                 "computeResources": {
@@ -4215,7 +4215,7 @@
                 "computeEnvironmentName": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the compute environment. Up to 128 letters (uppercase and lowercase), numbers, hyphens, and\n underscores are allowed.</p>"
+                        "smithy.api#documentation": "<p>The name of the compute environment. It can be up to 128 letters long. It can contain uppercase and\n lowercase letters, numbers, hyphens (-), and underscores (_).</p>"
                     }
                 },
                 "computeEnvironmentArn": {
@@ -4324,7 +4324,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a scheduling\n   policy.</p>",
+                "smithy.api#documentation": "<p>Updates a scheduling policy.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/updateschedulingpolicy",
@@ -4345,7 +4345,7 @@
                 "fairsharePolicy": {
                     "target": "com.amazonaws.batch#FairsharePolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The fair share\n   policy.</p>"
+                        "smithy.api#documentation": "<p>The fair share policy.</p>"
                     }
                 }
             }
@@ -4366,7 +4366,7 @@
                 "name": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the volume. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are\n allowed. This name is referenced in the <code>sourceVolume</code>\n   parameter of container definition <code>mountPoints</code>.</p>"
+                        "smithy.api#documentation": "<p>The name of the volume. It can be up to 255 letters long. It can contain uppercase and lowercase letters,\n numbers, hyphens (-), and underscores (_). This name is referenced in the <code>sourceVolume</code>\n   parameter of container definition <code>mountPoints</code>.</p>"
                     }
                 },
                 "efsVolumeConfiguration": {

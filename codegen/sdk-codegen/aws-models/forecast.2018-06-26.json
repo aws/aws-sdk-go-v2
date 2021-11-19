@@ -29,10 +29,61 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.forecast#AdditionalDataset": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.forecast#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the additional dataset. Valid names: <code>\"holiday\"</code> and\n                <code>\"weather\"</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Configuration": {
+                    "target": "com.amazonaws.forecast#Configuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <b>Weather Index</b>\n         </p>\n        <p>To enable the Weather Index, do not specify a value for\n            <code>Configuration</code>.</p>\n        <p>\n            <b>Holidays</b>\n         </p>\n        <p>To enable Holidays, specify a country with one of the following two-letter country\n            codes:</p>\n        <ul>\n            <li>\n                <p>\"AL\" - ALBANIA</p>\n            </li>\n            <li>\n                <p>\"AR\" - ARGENTINA</p>\n            </li>\n            <li>\n                <p>\"AT\" - AUSTRIA</p>\n            </li>\n            <li>\n                <p>\"AU\" - AUSTRALIA</p>\n            </li>\n            <li>\n                <p>\"BA\" - BOSNIA HERZEGOVINA</p>\n            </li>\n            <li>\n                <p>\"BE\" - BELGIUM</p>\n            </li>\n            <li>\n                <p>\"BG\" - BULGARIA</p>\n            </li>\n            <li>\n                <p>\"BO\" - BOLIVIA</p>\n            </li>\n            <li>\n                <p>\"BR\" - BRAZIL</p>\n            </li>\n            <li>\n                <p>\"BY\" - BELARUS</p>\n            </li>\n            <li>\n                <p>\"CA\" - CANADA</p>\n            </li>\n            <li>\n                <p>\"CL\" - CHILE</p>\n            </li>\n            <li>\n                <p>\"CO\" - COLOMBIA</p>\n            </li>\n            <li>\n                <p>\"CR\" - COSTA RICA</p>\n            </li>\n            <li>\n                <p>\"HR\" - CROATIA</p>\n            </li>\n            <li>\n                <p>\"CZ\" - CZECH REPUBLIC</p>\n            </li>\n            <li>\n                <p>\"DK\" - DENMARK</p>\n            </li>\n            <li>\n                <p>\"EC\" - ECUADOR</p>\n            </li>\n            <li>\n                <p>\"EE\" - ESTONIA</p>\n            </li>\n            <li>\n                <p>\"ET\" - ETHIOPIA</p>\n            </li>\n            <li>\n                <p>\"FI\" - FINLAND</p>\n            </li>\n            <li>\n                <p>\"FR\" - FRANCE</p>\n            </li>\n            <li>\n                <p>\"DE\" - GERMANY</p>\n            </li>\n            <li>\n                <p>\"GR\" - GREECE</p>\n            </li>\n            <li>\n                <p>\"HU\" - HUNGARY</p>\n            </li>\n            <li>\n                <p>\"IS\" - ICELAND</p>\n            </li>\n            <li>\n                <p>\"IN\" - INDIA</p>\n            </li>\n            <li>\n                <p>\"IE\" - IRELAND</p>\n            </li>\n            <li>\n                <p>\"IT\" - ITALY</p>\n            </li>\n            <li>\n                <p>\"JP\" - JAPAN</p>\n            </li>\n            <li>\n                <p>\"KZ\" - KAZAKHSTAN</p>\n            </li>\n            <li>\n                <p>\"KR\" - KOREA</p>\n            </li>\n            <li>\n                <p>\"LV\" - LATVIA</p>\n            </li>\n            <li>\n                <p>\"LI\" - LIECHTENSTEIN</p>\n            </li>\n            <li>\n                <p>\"LT\" - LITHUANIA</p>\n            </li>\n            <li>\n                <p>\"LU\" - LUXEMBOURG</p>\n            </li>\n            <li>\n                <p>\"MK\" - MACEDONIA</p>\n            </li>\n            <li>\n                <p>\"MT\" - MALTA</p>\n            </li>\n            <li>\n                <p>\"MX\" - MEXICO</p>\n            </li>\n            <li>\n                <p>\"MD\" - MOLDOVA</p>\n            </li>\n            <li>\n                <p>\"ME\" - MONTENEGRO</p>\n            </li>\n            <li>\n                <p>\"NL\" - NETHERLANDS</p>\n            </li>\n            <li>\n                <p>\"NZ\" - NEW ZEALAND</p>\n            </li>\n            <li>\n                <p>\"NI\" - NICARAGUA</p>\n            </li>\n            <li>\n                <p>\"NG\" - NIGERIA</p>\n            </li>\n            <li>\n                <p>\"NO\" - NORWAY</p>\n            </li>\n            <li>\n                <p>\"PA\" - PANAMA</p>\n            </li>\n            <li>\n                <p>\"PY\" - PARAGUAY</p>\n            </li>\n            <li>\n                <p>\"PE\" - PERU</p>\n            </li>\n            <li>\n                <p>\"PL\" - POLAND</p>\n            </li>\n            <li>\n                <p>\"PT\" - PORTUGAL</p>\n            </li>\n            <li>\n                <p>\"RO\" - ROMANIA</p>\n            </li>\n            <li>\n                <p>\"RU\" - RUSSIA</p>\n            </li>\n            <li>\n                <p>\"RS\" - SERBIA</p>\n            </li>\n            <li>\n                <p>\"SK\" - SLOVAKIA</p>\n            </li>\n            <li>\n                <p>\"SI\" - SLOVENIA</p>\n            </li>\n            <li>\n                <p>\"ZA\" - SOUTH AFRICA</p>\n            </li>\n            <li>\n                <p>\"ES\" - SPAIN</p>\n            </li>\n            <li>\n                <p>\"SE\" - SWEDEN</p>\n            </li>\n            <li>\n                <p>\"CH\" - SWITZERLAND</p>\n            </li>\n            <li>\n                <p>\"UA\" - UKRAINE</p>\n            </li>\n            <li>\n                <p>\"AE\" - UNITED ARAB EMIRATES</p>\n            </li>\n            <li>\n                <p>\"US\" - UNITED STATES</p>\n            </li>\n            <li>\n                <p>\"UK\" - UNITED KINGDOM</p>\n            </li>\n            <li>\n                <p>\"UY\" - URUGUAY</p>\n            </li>\n            <li>\n                <p>\"VE\" - VENEZUELA</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an additional dataset. This object is part of the <a>DataConfig</a> object. Forecast supports the Weather Index and Holidays additional datasets.</p>\n        <p>\n            <b>Weather Index</b>\n         </p>\n        <p>The Amazon Forecast Weather Index is a built-in dataset that incorporates historical and\n            projected weather information into your model. The Weather Index supplements your\n            datasets with over two years of historical weather data and up to 14 days of projected\n            weather data. For more information, see <a href=\"https://docs.aws.amazon.com/forecast/latest/dg/weather.html\">Amazon Forecast\n                Weather Index</a>.</p>\n        <p>\n            <b>Holidays</b>\n         </p>\n        <p>Holidays is a built-in dataset that incorporates national holiday information into\n            your model. It provides native support for the holiday calendars of 66 countries. To\n            view the holiday calendars, refer to the <a href=\"http://jollyday.sourceforge.net/data.html\">Jollyday</a> library. For more\n            information, see <a href=\"https://docs.aws.amazon.com/forecast/latest/dg/holidays.html\">Holidays\n                Featurization</a>.</p>"
+            }
+        },
+        "com.amazonaws.forecast#AdditionalDatasets": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.forecast#AdditionalDataset"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
+            }
+        },
         "com.amazonaws.forecast#AmazonForecast": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "forecast",
+                    "arnNamespace": "forecast",
+                    "cloudFormationName": "Forecast",
+                    "cloudTrailEventSource": "forecast.amazonaws.com",
+                    "endpointPrefix": "forecast"
+                },
+                "aws.auth#sigv4": {
+                    "name": "forecast"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<p>Provides APIs for creating and managing Amazon Forecast resources.</p>",
+                "smithy.api#title": "Amazon Forecast Service"
+            },
             "version": "2018-06-26",
             "operations": [
+                {
+                    "target": "com.amazonaws.forecast#CreateAutoPredictor"
+                },
                 {
                     "target": "com.amazonaws.forecast#CreateDataset"
                 },
@@ -41,6 +92,12 @@
                 },
                 {
                     "target": "com.amazonaws.forecast#CreateDatasetImportJob"
+                },
+                {
+                    "target": "com.amazonaws.forecast#CreateExplainability"
+                },
+                {
+                    "target": "com.amazonaws.forecast#CreateExplainabilityExport"
                 },
                 {
                     "target": "com.amazonaws.forecast#CreateForecast"
@@ -64,6 +121,12 @@
                     "target": "com.amazonaws.forecast#DeleteDatasetImportJob"
                 },
                 {
+                    "target": "com.amazonaws.forecast#DeleteExplainability"
+                },
+                {
+                    "target": "com.amazonaws.forecast#DeleteExplainabilityExport"
+                },
+                {
                     "target": "com.amazonaws.forecast#DeleteForecast"
                 },
                 {
@@ -79,6 +142,9 @@
                     "target": "com.amazonaws.forecast#DeleteResourceTree"
                 },
                 {
+                    "target": "com.amazonaws.forecast#DescribeAutoPredictor"
+                },
+                {
                     "target": "com.amazonaws.forecast#DescribeDataset"
                 },
                 {
@@ -86,6 +152,12 @@
                 },
                 {
                     "target": "com.amazonaws.forecast#DescribeDatasetImportJob"
+                },
+                {
+                    "target": "com.amazonaws.forecast#DescribeExplainability"
+                },
+                {
+                    "target": "com.amazonaws.forecast#DescribeExplainabilityExport"
                 },
                 {
                     "target": "com.amazonaws.forecast#DescribeForecast"
@@ -110,6 +182,12 @@
                 },
                 {
                     "target": "com.amazonaws.forecast#ListDatasets"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ListExplainabilities"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ListExplainabilityExports"
                 },
                 {
                     "target": "com.amazonaws.forecast#ListForecastExportJobs"
@@ -138,22 +216,7 @@
                 {
                     "target": "com.amazonaws.forecast#UpdateDatasetGroup"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "forecast",
-                    "arnNamespace": "forecast",
-                    "cloudFormationName": "Forecast",
-                    "cloudTrailEventSource": "forecast.amazonaws.com",
-                    "endpointPrefix": "forecast"
-                },
-                "aws.auth#sigv4": {
-                    "name": "forecast"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>Provides APIs for creating and managing Amazon Forecast resources.</p>",
-                "smithy.api#title": "Amazon Forecast Service"
-            }
+            ]
         },
         "com.amazonaws.forecast#Arn": {
             "type": "string",
@@ -169,6 +232,40 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.forecast#Arn"
+            }
+        },
+        "com.amazonaws.forecast#AttributeConfig": {
+            "type": "structure",
+            "members": {
+                "AttributeName": {
+                    "target": "com.amazonaws.forecast#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the attribute as specified in the schema. Amazon Forecast supports the\n            target field of the target time series and the related time series datasets. For\n            example, for the RETAIL domain, the target is <code>demand</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Transformations": {
+                    "target": "com.amazonaws.forecast#Transformations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The method parameters (key-value pairs), which are a map of override parameters.\n            Specify these parameters to override the default values. Related Time Series attributes\n            do not accept aggregation parameters.</p>\n        <p>The following list shows the parameters and their valid values for the \"filling\"\n            featurization method for a <b>Target Time Series</b> dataset.\n            Default values are bolded.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>aggregation</code>: <b>sum</b>,\n                        <code>avg</code>, <code>first</code>, <code>min</code>,\n                    <code>max</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>frontfill</code>: <b>none</b>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>middlefill</code>: <b>zero</b>,\n                        <code>nan</code> (not a number), <code>value</code>, <code>median</code>,\n                        <code>mean</code>, <code>min</code>, <code>max</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>backfill</code>: <b>zero</b>,\n                    <code>nan</code>, <code>value</code>, <code>median</code>, <code>mean</code>,\n                        <code>min</code>, <code>max</code>\n               </p>\n            </li>\n         </ul>\n\n        <p>The following list shows the parameters and their valid values for a <b>Related Time Series</b> featurization method (there are no\n            defaults):</p>\n        <ul>\n            <li>\n                <p>\n                  <code>middlefill</code>: <code>zero</code>, <code>value</code>,\n                        <code>median</code>, <code>mean</code>, <code>min</code>,\n                    <code>max</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>backfill</code>: <code>zero</code>, <code>value</code>,\n                        <code>median</code>, <code>mean</code>, <code>min</code>,\n                    <code>max</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>futurefill</code>: <code>zero</code>, <code>value</code>,\n                        <code>median</code>, <code>mean</code>, <code>min</code>,\n                    <code>max</code>\n               </p>\n            </li>\n         </ul>\n        <p>To set a filling method to a specific value, set the fill parameter to\n                <code>value</code> and define the value in a corresponding <code>_value</code>\n            parameter. For example, to set backfilling to a value of 2, include the following:\n                <code>\"backfill\": \"value\"</code> and <code>\"backfill_value\":\"2\"</code>. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about the method used to transform attributes.</p>\n        <p>The following is an example using the RETAIL domain:</p>\n        <p>\n            <code>{</code>\n         </p>\n        <p>\n            <code>\"AttributeName\": \"demand\",</code>\n         </p>\n        <p>\n            <code>\"Transformations\": {\"aggregation\": \"sum\", \"middlefill\": \"zero\", \"backfill\":\n                \"zero\"}</code>\n         </p>\n        <p>\n            <code>}</code>\n         </p>"
+            }
+        },
+        "com.amazonaws.forecast#AttributeConfigs": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.forecast#AttributeConfig"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
             }
         },
         "com.amazonaws.forecast#AttributeType": {
@@ -205,6 +302,10 @@
                     {
                         "value": "LatencyOptimized",
                         "name": "LatencyOptimized"
+                    },
+                    {
+                        "value": "AccuracyOptimized",
+                        "name": "AccuracyOptimized"
                     }
                 ]
             }
@@ -247,6 +348,15 @@
                     "min": 1,
                     "max": 20
                 }
+            }
+        },
+        "com.amazonaws.forecast#Configuration": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.forecast#Name"
+            },
+            "value": {
+                "target": "com.amazonaws.forecast#Values"
             }
         },
         "com.amazonaws.forecast#ContinuousParameterRange": {
@@ -293,6 +403,112 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 20
+                }
+            }
+        },
+        "com.amazonaws.forecast#CreateAutoPredictor": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.forecast#CreateAutoPredictorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.forecast#CreateAutoPredictorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.forecast#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ResourceAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an Amazon Forecast predictor.</p>\n        <p>Amazon Forecast creates predictors with AutoPredictor, which involves applying the\n            optimal combination of algorithms to each time series in your datasets. You can use\n            CreateAutoPredictor to create new predictors or upgrade/retrain existing\n            predictors.</p>\n        <p>\n            <b>Creating new predictors</b>\n         </p>\n        <p>The following parameters are required when creating a new predictor:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>PredictorName</code> - A unique name for the predictor.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DatasetGroupArn</code> - The ARN of the dataset group used to train the\n                    predictor.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ForecastFrequency</code> - The granularity of your forecasts (hourly,\n                    daily, weekly, etc).</p>\n            </li>\n            <li>\n                <p>\n                  <code>ForecastHorizon</code> - The number of time steps being\n                    forecasted.</p>\n            </li>\n         </ul>\n        <p>When creating a new predictor, do not specify a value for\n                <code>ReferencePredictorArn</code>.</p>\n        <p>\n            <b>Upgrading and retraining predictors</b>\n         </p>\n        <p>The following parameters are required when retraining or upgrading a predictor:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>PredictorName</code> - A unique name for the predictor.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ReferencePredictorArn</code> - The ARN of the predictor to retrain or\n                    upgrade.</p>\n            </li>\n         </ul>\n        <p>When upgrading or retraining a predictor, only specify values for the\n                <code>ReferencePredictorArn</code> and <code>PredictorName</code>. </p>"
+            }
+        },
+        "com.amazonaws.forecast#CreateAutoPredictorRequest": {
+            "type": "structure",
+            "members": {
+                "PredictorName": {
+                    "target": "com.amazonaws.forecast#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique name for the predictor</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ForecastHorizon": {
+                    "target": "com.amazonaws.forecast#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of time-steps that the model predicts. The forecast horizon is also called\n            the prediction length.</p>"
+                    }
+                },
+                "ForecastTypes": {
+                    "target": "com.amazonaws.forecast#ForecastTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The forecast types used to train a predictor. You can specify up to five forecast\n            types. Forecast types can be quantiles from 0.01 to 0.99, by increments of 0.01 or\n            higher. You can also specify the mean forecast with <code>mean</code>.</p>"
+                    }
+                },
+                "ForecastDimensions": {
+                    "target": "com.amazonaws.forecast#ForecastDimensions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of dimension (field) names that specify how to group the generated\n            forecast.</p>\n        <p>For example, if you are generating forecasts for item sales across all your stores,\n            and your dataset contains a <code>store_id</code> field, you would specify\n                <code>store_id</code> as a dimension to group sales forecasts for each store.</p>"
+                    }
+                },
+                "ForecastFrequency": {
+                    "target": "com.amazonaws.forecast#Frequency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The frequency of predictions in a forecast.</p>\n        <p>Valid intervals are Y (Year), M (Month), W (Week), D (Day), H (Hour), 30min (30\n            minutes), 15min (15 minutes), 10min (10 minutes), 5min (5 minutes), and 1min (1 minute).\n            For example, \"Y\" indicates every year and \"5min\" indicates every five minutes.</p>\n        <p>The frequency must be greater than or equal to the TARGET_TIME_SERIES dataset\n            frequency.</p>\n        <p>When a RELATED_TIME_SERIES dataset is provided, the frequency must be equal to the\n            RELATED_TIME_SERIES dataset frequency.</p>"
+                    }
+                },
+                "DataConfig": {
+                    "target": "com.amazonaws.forecast#DataConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data configuration for your dataset group and any additional datasets.</p>"
+                    }
+                },
+                "EncryptionConfig": {
+                    "target": "com.amazonaws.forecast#EncryptionConfig"
+                },
+                "ReferencePredictorArn": {
+                    "target": "com.amazonaws.forecast#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the predictor to retrain or upgrade. This parameter is only used when\n            retraining or upgrading a predictor. When creating a new predictor, do not specify a\n            value for this parameter.</p>\n        <p>When upgrading or retraining a predictor, only specify values for the\n                <code>ReferencePredictorArn</code> and <code>PredictorName</code>. The value for\n                <code>PredictorName</code> must be a unique predictor name.</p>"
+                    }
+                },
+                "OptimizationMetric": {
+                    "target": "com.amazonaws.forecast#OptimizationMetric",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The accuracy metric used to optimize the predictor.</p>"
+                    }
+                },
+                "ExplainPredictor": {
+                    "target": "com.amazonaws.forecast#Boolean"
+                },
+                "Tags": {
+                    "target": "com.amazonaws.forecast#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional metadata to help you categorize and organize your predictors. Each tag\n            consists of a key and an optional value, both of which you define. Tag keys and values\n            are case sensitive.</p>\n        <p>The following restrictions apply to tags:</p>\n        <ul>\n            <li>\n                <p>For each resource, each tag key must be unique and each tag key must have one\n                    value.</p>\n            </li>\n            <li>\n                <p>Maximum number of tags per resource: 50.</p>\n            </li>\n            <li>\n                <p>Maximum key length: 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n                <p>Maximum value length: 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n                <p>Accepted characters: all letters and numbers, spaces representable in UTF-8,\n                    and + - = . _ : / @. If your tagging schema is used across other services and\n                    resources, the character restrictions of those services also apply. </p>\n            </li>\n            <li>\n                <p>Key prefixes cannot include any upper or lowercase combination of\n                        <code>aws:</code> or <code>AWS:</code>. Values can have this prefix. If a\n                    tag value has <code>aws</code> as its prefix but the key does not, Forecast\n                    considers it to be a user tag and will count against the limit of 50 tags. Tags\n                    with only the key prefix of <code>aws</code> do not count against your tags per\n                    resource limit. You cannot edit or delete tag keys with this prefix.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.forecast#CreateAutoPredictorResponse": {
+            "type": "structure",
+            "members": {
+                "PredictorArn": {
+                    "target": "com.amazonaws.forecast#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the predictor.</p>"
+                    }
                 }
             }
         },
@@ -548,6 +764,173 @@
                 }
             }
         },
+        "com.amazonaws.forecast#CreateExplainability": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.forecast#CreateExplainabilityRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.forecast#CreateExplainabilityResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.forecast#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ResourceAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<note>\n            <p>Explainability is only available for Forecasts and Predictors generated from an\n                AutoPredictor (<a>CreateAutoPredictor</a>)</p>\n        </note>\n        <p>Creates an Amazon Forecast Explainability.</p>\n        <p>Explainability helps you better understand how the attributes in your datasets impact\n            forecast. Amazon Forecast uses a metric called Impact scores to quantify the relative\n            impact of each attribute and determine whether they increase or decrease forecast\n            values.</p>\n        <p>To enable Forecast Explainability, your predictor must include at least one of the\n            following: related time series, item metadata, or additional datasets like Holidays and\n            the Weather Index.</p>\n        <p>CreateExplainability accepts either a Predictor ARN or Forecast ARN. To receive\n            aggregated Impact scores for all time series and time points in your datasets, provide a\n            Predictor ARN. To receive Impact scores for specific time series and time points,\n            provide a Forecast ARN.</p>\n        <p>\n            <b>CreateExplainability with a Predictor ARN</b>\n         </p>\n        <note>\n            <p>You can only have one Explainability resource per predictor. If you already\n                enabled <code>ExplainPredictor</code> in <a>CreateAutoPredictor</a>, that\n                predictor already has an Explainability resource.</p>\n        </note>\n        <p>The following parameters are required when providing a Predictor ARN:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>ExplainabilityName</code> - A unique name for the Explainability.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ResourceArn</code> - The Arn of the predictor.</p>\n            </li>\n            <li>\n                <p>\n                  <code>TimePointGranularity</code> - Must be set to “ALL”.</p>\n            </li>\n            <li>\n                <p>\n                  <code>TimeSeriesGranularity</code> - Must be set to “ALL”.</p>\n            </li>\n         </ul>\n        <p>Do not specify a value for the following parameters:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>DataSource</code> - Only valid when TimeSeriesGranularity is\n                    “SPECIFIC”.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Schema</code> - Only valid when TimeSeriesGranularity is\n                    “SPECIFIC”.</p>\n            </li>\n            <li>\n                <p>\n                  <code>StartDateTime</code> - Only valid when TimePointGranularity is\n                    “SPECIFIC”.</p>\n            </li>\n            <li>\n                <p>\n                  <code>EndDateTime</code> - Only valid when TimePointGranularity is\n                    “SPECIFIC”.</p>\n            </li>\n         </ul>\n        <p>\n            <b>CreateExplainability with a Forecast ARN</b>\n         </p>\n        <note>\n            <p>You can specify a maximum of 50 time series and 1500 time points.</p>\n        </note>\n        <p>The following parameters are required when providing a Predictor ARN:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>ExplainabilityName</code> - A unique name for the Explainability.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ResourceArn</code> - The Arn of the forecast.</p>\n            </li>\n            <li>\n                <p>\n                  <code>TimePointGranularity</code> - Either “ALL” or “SPECIFIC”.</p>\n            </li>\n            <li>\n                <p>\n                  <code>TimeSeriesGranularity</code> - Either “ALL” or “SPECIFIC”.</p>\n            </li>\n         </ul>\n        <p>If you set TimeSeriesGranularity to “SPECIFIC”, you must also provide the\n            following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>DataSource</code> - The S3 location of the CSV file specifying your time\n                    series.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Schema</code> - The Schema defines the attributes and attribute types\n                    listed in the Data Source.</p>\n            </li>\n         </ul>\n        <p>If you set TimePointGranularity to “SPECIFIC”, you must also provide the\n            following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>StartDateTime</code> - The first timestamp in the range of time\n                    points.</p>\n            </li>\n            <li>\n                <p>\n                  <code>EndDateTime</code> - The last timestamp in the range of time\n                    points.</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.forecast#CreateExplainabilityExport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.forecast#CreateExplainabilityExportRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.forecast#CreateExplainabilityExportResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.forecast#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ResourceAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Exports an Explainability resource created by the <a>CreateExplainability</a> operation. Exported files are exported to an Amazon Simple Storage Service (Amazon\n            S3) bucket.</p>\n        <p>You must specify a <a>DataDestination</a> object that includes an Amazon S3\n            bucket and an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the Amazon S3\n            bucket. For more information, see <a>aws-forecast-iam-roles</a>.</p>\n        <note>\n            <p>The <code>Status</code> of the export job must be <code>ACTIVE</code> before you\n                can access the export in your Amazon S3 bucket. To get the status, use the <a>DescribeExplainabilityExport</a> operation.</p>\n        </note>"
+            }
+        },
+        "com.amazonaws.forecast#CreateExplainabilityExportRequest": {
+            "type": "structure",
+            "members": {
+                "ExplainabilityExportName": {
+                    "target": "com.amazonaws.forecast#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique name for the Explainability export.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExplainabilityArn": {
+                    "target": "com.amazonaws.forecast#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Explainability to export.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Destination": {
+                    "target": "com.amazonaws.forecast#DataDestination",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.forecast#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional metadata to help you categorize and organize your resources. Each tag\n            consists of a key and an optional value, both of which you define. Tag keys and values\n            are case sensitive.</p>\n        <p>The following restrictions apply to tags:</p>\n        <ul>\n            <li>\n                <p>For each resource, each tag key must be unique and each tag key must have one\n                    value.</p>\n            </li>\n            <li>\n                <p>Maximum number of tags per resource: 50.</p>\n            </li>\n            <li>\n                <p>Maximum key length: 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n                <p>Maximum value length: 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n                <p>Accepted characters: all letters and numbers, spaces representable in UTF-8,\n                    and + - = . _ : / @. If your tagging schema is used across other services and\n                    resources, the character restrictions of those services also apply. </p>\n            </li>\n            <li>\n                <p>Key prefixes cannot include any upper or lowercase combination of\n                        <code>aws:</code> or <code>AWS:</code>. Values can have this prefix. If a\n                    tag value has <code>aws</code> as its prefix but the key does not, Forecast\n                    considers it to be a user tag and will count against the limit of 50 tags. Tags\n                    with only the key prefix of <code>aws</code> do not count against your tags per\n                    resource limit. You cannot edit or delete tag keys with this prefix.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.forecast#CreateExplainabilityExportResponse": {
+            "type": "structure",
+            "members": {
+                "ExplainabilityExportArn": {
+                    "target": "com.amazonaws.forecast#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the export.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.forecast#CreateExplainabilityRequest": {
+            "type": "structure",
+            "members": {
+                "ExplainabilityName": {
+                    "target": "com.amazonaws.forecast#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique name for the Explainability.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceArn": {
+                    "target": "com.amazonaws.forecast#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Predictor or Forecast used to create the\n            Explainability.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExplainabilityConfig": {
+                    "target": "com.amazonaws.forecast#ExplainabilityConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings that define the granularity of time series and time points\n            for the Explainability.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataSource": {
+                    "target": "com.amazonaws.forecast#DataSource"
+                },
+                "Schema": {
+                    "target": "com.amazonaws.forecast#Schema"
+                },
+                "EnableVisualization": {
+                    "target": "com.amazonaws.forecast#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Create an Expainability visualization that is viewable within the AWS console.</p>"
+                    }
+                },
+                "StartDateTime": {
+                    "target": "com.amazonaws.forecast#LocalDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>TimePointGranularity</code> is set to <code>SPECIFIC</code>, define the first\n            point for the Explainability.</p>"
+                    }
+                },
+                "EndDateTime": {
+                    "target": "com.amazonaws.forecast#LocalDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>TimePointGranularity</code> is set to <code>SPECIFIC</code>, define the last\n            time point for the Explainability.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.forecast#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional metadata to help you categorize and organize your resources. Each tag\n            consists of a key and an optional value, both of which you define. Tag keys and values\n            are case sensitive.</p>\n        <p>The following restrictions apply to tags:</p>\n        <ul>\n            <li>\n                <p>For each resource, each tag key must be unique and each tag key must have one\n                    value.</p>\n            </li>\n            <li>\n                <p>Maximum number of tags per resource: 50.</p>\n            </li>\n            <li>\n                <p>Maximum key length: 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n                <p>Maximum value length: 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n                <p>Accepted characters: all letters and numbers, spaces representable in UTF-8,\n                    and + - = . _ : / @. If your tagging schema is used across other services and\n                    resources, the character restrictions of those services also apply. </p>\n            </li>\n            <li>\n                <p>Key prefixes cannot include any upper or lowercase combination of\n                        <code>aws:</code> or <code>AWS:</code>. Values can have this prefix. If a\n                    tag value has <code>aws</code> as its prefix but the key does not, Forecast\n                    considers it to be a user tag and will count against the limit of 50 tags. Tags\n                    with only the key prefix of <code>aws</code> do not count against your tags per\n                    resource limit. You cannot edit or delete tag keys with this prefix.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.forecast#CreateExplainabilityResponse": {
+            "type": "structure",
+            "members": {
+                "ExplainabilityArn": {
+                    "target": "com.amazonaws.forecast#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Explainability.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.forecast#CreateForecast": {
             "type": "operation",
             "input": {
@@ -717,7 +1100,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon Forecast predictor.</p>\n         <p>In the request, provide a dataset group and either specify an algorithm or let\n      Amazon Forecast choose an algorithm for you using AutoML. If you specify an algorithm, you also can\n      override algorithm-specific hyperparameters.</p>\n         <p>Amazon Forecast uses the algorithm to train a predictor using the latest version of the\n      datasets in the specified dataset group. You can then generate a\n      forecast using the <a>CreateForecast</a> operation.</p>\n         <p>\n      To see the evaluation metrics, use the <a>GetAccuracyMetrics</a> operation.\n    </p>\n         <p>You can specify a featurization configuration to fill and aggregate the data\n      fields in the <code>TARGET_TIME_SERIES</code> dataset to improve model training. For more\n      information, see <a>FeaturizationConfig</a>.</p>\n         <p>For RELATED_TIME_SERIES datasets, <code>CreatePredictor</code> verifies that the\n        <code>DataFrequency</code> specified when the dataset was created matches the\n        <code>ForecastFrequency</code>. TARGET_TIME_SERIES datasets don't have this restriction.\n      Amazon Forecast also verifies the delimiter and timestamp format. For more information, see <a>howitworks-datasets-groups</a>.</p>\n         <p>By default, predictors are trained and evaluated at the 0.1 (P10), 0.5 (P50), and 0.9\n      (P90) quantiles. You can choose custom forecast types to train and evaluate your predictor\n      by setting the <code>ForecastTypes</code>.\n    </p>\n         <p>\n            <b>AutoML</b>\n         </p>\n         <p>If you want Amazon Forecast to evaluate each algorithm and choose the one that minimizes the\n        <code>objective function</code>, set <code>PerformAutoML</code> to <code>true</code>. The\n        <code>objective function</code> is defined as the mean of the weighted losses over the\n      forecast types. By default, these are the p10, p50, and p90\n      quantile losses. For more information, see <a>EvaluationResult</a>.</p>\n         <p>When AutoML is enabled, the following properties are disallowed:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AlgorithmArn</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>HPOConfig</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PerformHPO</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>TrainingParameters</code>\n               </p>\n            </li>\n         </ul>\n\n      \n\n         <p>To get a list of all of your predictors, use the <a>ListPredictors</a>\n      operation.</p>\n         <note>\n            <p>Before you can use the predictor to create a forecast, the <code>Status</code> of the\n        predictor must be <code>ACTIVE</code>, signifying that training has completed. To get the\n        status, use the <a>DescribePredictor</a> operation.</p>\n         </note>"
+                "smithy.api#documentation": "<note>\n            <p> This operation creates a legacy predictor that does not include all the predictor\n        functionalities provided by Amazon Forecast. To create a predictor that is compatible with all\n        aspects of Forecast, use CreateAutoPredictor.</p>\n         </note>\n         <p>Creates an Amazon Forecast predictor.</p>\n         <p>In the request, provide a dataset group and either specify an algorithm or let Amazon Forecast\n      choose an algorithm for you using AutoML. If you specify an algorithm, you also can override\n      algorithm-specific hyperparameters.</p>\n         <p>Amazon Forecast uses the algorithm to train a predictor using the latest version of the datasets\n      in the specified dataset group. You can then generate a forecast using the <a>CreateForecast</a> operation.</p>\n         <p> To see the evaluation metrics, use the <a>GetAccuracyMetrics</a> operation. </p>\n         <p>You can specify a featurization configuration to fill and aggregate the data fields in the\n        <code>TARGET_TIME_SERIES</code> dataset to improve model training. For more information, see\n        <a>FeaturizationConfig</a>.</p>\n         <p>For RELATED_TIME_SERIES datasets, <code>CreatePredictor</code> verifies that the\n        <code>DataFrequency</code> specified when the dataset was created matches the\n        <code>ForecastFrequency</code>. TARGET_TIME_SERIES datasets don't have this restriction.\n      Amazon Forecast also verifies the delimiter and timestamp format. For more information, see <a>howitworks-datasets-groups</a>.</p>\n         <p>By default, predictors are trained and evaluated at the 0.1 (P10), 0.5 (P50), and 0.9\n      (P90) quantiles. You can choose custom forecast types to train and evaluate your predictor by\n      setting the <code>ForecastTypes</code>. </p>\n         <p>\n            <b>AutoML</b>\n         </p>\n         <p>If you want Amazon Forecast to evaluate each algorithm and choose the one that minimizes the\n        <code>objective function</code>, set <code>PerformAutoML</code> to <code>true</code>. The\n        <code>objective function</code> is defined as the mean of the weighted losses over the\n      forecast types. By default, these are the p10, p50, and p90 quantile losses. For more\n      information, see <a>EvaluationResult</a>.</p>\n         <p>When AutoML is enabled, the following properties are disallowed:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AlgorithmArn</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>HPOConfig</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PerformHPO</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>TrainingParameters</code>\n               </p>\n            </li>\n         </ul>\n\n      \n\n         <p>To get a list of all of your predictors, use the <a>ListPredictors</a>\n      operation.</p>\n         <note>\n            <p>Before you can use the predictor to create a forecast, the <code>Status</code> of the\n        predictor must be <code>ACTIVE</code>, signifying that training has completed. To get the\n        status, use the <a>DescribePredictor</a> operation.</p>\n         </note>"
             }
         },
         "com.amazonaws.forecast#CreatePredictorBacktestExportJob": {
@@ -817,7 +1200,7 @@
                 "ForecastTypes": {
                     "target": "com.amazonaws.forecast#ForecastTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the forecast types used to train a predictor. You can specify up to five forecast types.\n      Forecast types can be quantiles from 0.01 to 0.99, by increments of 0.01 or higher. You can also specify \n      the mean forecast with <code>mean</code>.\n    </p>\n         <p>The default value is <code>[\"0.10\", \"0.50\", \"0.9\"]</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the forecast types used to train a predictor. You can specify up to five\n      forecast types. Forecast types can be quantiles from 0.01 to 0.99, by increments of 0.01 or\n      higher. You can also specify the mean forecast with <code>mean</code>. </p>\n         <p>The default value is <code>[\"0.10\", \"0.50\", \"0.9\"]</code>.</p>"
                     }
                 },
                 "PerformAutoML": {
@@ -899,6 +1282,33 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the predictor.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.forecast#DataConfig": {
+            "type": "structure",
+            "members": {
+                "DatasetGroupArn": {
+                    "target": "com.amazonaws.forecast#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the dataset group used to train the predictor.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AttributeConfigs": {
+                    "target": "com.amazonaws.forecast#AttributeConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Aggregation and filling options for attributes in your dataset group.</p>"
+                    }
+                },
+                "AdditionalDatasets": {
+                    "target": "com.amazonaws.forecast#AdditionalDatasets",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional built-in datasets like Holidays and the Weather Index.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The data configuration for your dataset group and any additional datasets.</p>"
             }
         },
         "com.amazonaws.forecast#DataDestination": {
@@ -1193,6 +1603,72 @@
                 }
             }
         },
+        "com.amazonaws.forecast#DeleteExplainability": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.forecast#DeleteExplainabilityRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.forecast#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an Explainability resource.</p>\n        <p>You can delete only predictor that have a status of <code>ACTIVE</code> or\n                <code>CREATE_FAILED</code>. To get the status, use the <a>DescribeExplainability</a> operation.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.forecast#DeleteExplainabilityExport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.forecast#DeleteExplainabilityExportRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.forecast#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an Explainability export job.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.forecast#DeleteExplainabilityExportRequest": {
+            "type": "structure",
+            "members": {
+                "ExplainabilityExportArn": {
+                    "target": "com.amazonaws.forecast#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Explainability export to delete. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.forecast#DeleteExplainabilityRequest": {
+            "type": "structure",
+            "members": {
+                "ExplainabilityArn": {
+                    "target": "com.amazonaws.forecast#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Explainability resource to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.forecast#DeleteForecast": {
             "type": "operation",
             "input": {
@@ -1355,6 +1831,134 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the parent resource to delete. All child resources\n            of the parent resource will also be deleted.</p>",
                         "smithy.api#required": {}
                     }
+                }
+            }
+        },
+        "com.amazonaws.forecast#DescribeAutoPredictor": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.forecast#DescribeAutoPredictorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.forecast#DescribeAutoPredictorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.forecast#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a predictor created using the CreateAutoPredictor operation.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.forecast#DescribeAutoPredictorRequest": {
+            "type": "structure",
+            "members": {
+                "PredictorArn": {
+                    "target": "com.amazonaws.forecast#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the predictor.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.forecast#DescribeAutoPredictorResponse": {
+            "type": "structure",
+            "members": {
+                "PredictorArn": {
+                    "target": "com.amazonaws.forecast#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the predictor</p>"
+                    }
+                },
+                "PredictorName": {
+                    "target": "com.amazonaws.forecast#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the predictor.</p>"
+                    }
+                },
+                "ForecastHorizon": {
+                    "target": "com.amazonaws.forecast#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of time-steps that the model predicts. The forecast horizon is also called\n            the prediction length.</p>"
+                    }
+                },
+                "ForecastTypes": {
+                    "target": "com.amazonaws.forecast#ForecastTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The forecast types used during predictor training. Default value is\n            [\"0.1\",\"0.5\",\"0.9\"].</p>"
+                    }
+                },
+                "ForecastFrequency": {
+                    "target": "com.amazonaws.forecast#Frequency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The frequency of predictions in a forecast.</p>\n        <p>Valid intervals are Y (Year), M (Month), W (Week), D (Day), H (Hour), 30min (30\n            minutes), 15min (15 minutes), 10min (10 minutes), 5min (5 minutes), and 1min (1 minute).\n            For example, \"Y\" indicates every year and \"5min\" indicates every five minutes.</p>"
+                    }
+                },
+                "DatasetImportJobArns": {
+                    "target": "com.amazonaws.forecast#ArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of the ARNs of the dataset import jobs used to import training data for the\n            predictor.</p>"
+                    }
+                },
+                "DataConfig": {
+                    "target": "com.amazonaws.forecast#DataConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data configuration for your dataset group and any additional datasets.</p>"
+                    }
+                },
+                "EncryptionConfig": {
+                    "target": "com.amazonaws.forecast#EncryptionConfig"
+                },
+                "ReferencePredictorSummary": {
+                    "target": "com.amazonaws.forecast#ReferencePredictorSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN and state of the reference predictor. This parameter is only valid for\n            retrained or upgraded predictors.</p>"
+                    }
+                },
+                "EstimatedTimeRemainingInMinutes": {
+                    "target": "com.amazonaws.forecast#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimated time remaining in minutes for the predictor training job to\n            complete.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.forecast#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the predictor. States include: </p>\n        <ul>\n            <li>\n                <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n                        <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                    <code>CREATE_STOPPING</code>, <code>CREATE_STOPPED</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n                        <code>DELETE_FAILED</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.forecast#Message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>In the event of an error, a message detailing the cause of the error.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.forecast#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the CreateAutoPredictor request.</p>"
+                    }
+                },
+                "LastModificationTime": {
+                    "target": "com.amazonaws.forecast#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time the resource was modified. The timestamp depends on the status of the\n            job:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>CREATE_PENDING</code> - The <code>CreationTime</code>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>\n            </li>\n            <li>\n                <p>\n                  <code>CREATE_STOPPING</code> - The current timestamp.</p>\n            </li>\n            <li>\n                <p>\n                  <code>CREATE_STOPPED</code> - When the job stopped.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or\n                    failed.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "OptimizationMetric": {
+                    "target": "com.amazonaws.forecast#OptimizationMetric",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The accuracy metric used to optimize the predictor.</p>"
+                    }
+                },
+                "ExplainabilityInfo": {
+                    "target": "com.amazonaws.forecast#ExplainabilityInfo"
                 }
             }
         },
@@ -1664,6 +2268,205 @@
                 }
             }
         },
+        "com.amazonaws.forecast#DescribeExplainability": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.forecast#DescribeExplainabilityRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.forecast#DescribeExplainabilityResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.forecast#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an Explainability resource created using the <a>CreateExplainability</a> operation.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.forecast#DescribeExplainabilityExport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.forecast#DescribeExplainabilityExportRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.forecast#DescribeExplainabilityExportResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.forecast#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an Explainability export created using the <a>CreateExplainabilityExport</a> operation.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.forecast#DescribeExplainabilityExportRequest": {
+            "type": "structure",
+            "members": {
+                "ExplainabilityExportArn": {
+                    "target": "com.amazonaws.forecast#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Explainability export.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.forecast#DescribeExplainabilityExportResponse": {
+            "type": "structure",
+            "members": {
+                "ExplainabilityExportArn": {
+                    "target": "com.amazonaws.forecast#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Explainability export.</p>"
+                    }
+                },
+                "ExplainabilityExportName": {
+                    "target": "com.amazonaws.forecast#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Explainability export.</p>"
+                    }
+                },
+                "ExplainabilityArn": {
+                    "target": "com.amazonaws.forecast#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Explainability.</p>"
+                    }
+                },
+                "Destination": {
+                    "target": "com.amazonaws.forecast#DataDestination"
+                },
+                "Message": {
+                    "target": "com.amazonaws.forecast#Message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about any errors that occurred during the export.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.forecast#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the Explainability export. States include: </p>\n        <ul>\n            <li>\n                <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n                        <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                    <code>CREATE_STOPPING</code>, <code>CREATE_STOPPED</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n                        <code>DELETE_FAILED</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.forecast#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the Explainability export was created.</p>"
+                    }
+                },
+                "LastModificationTime": {
+                    "target": "com.amazonaws.forecast#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time the resource was modified. The timestamp depends on the status of the\n            job:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>CREATE_PENDING</code> - The <code>CreationTime</code>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>\n            </li>\n            <li>\n                <p>\n                  <code>CREATE_STOPPING</code> - The current timestamp.</p>\n            </li>\n            <li>\n                <p>\n                  <code>CREATE_STOPPED</code> - When the job stopped.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or\n                    failed.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.forecast#DescribeExplainabilityRequest": {
+            "type": "structure",
+            "members": {
+                "ExplainabilityArn": {
+                    "target": "com.amazonaws.forecast#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Explaianability to describe.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.forecast#DescribeExplainabilityResponse": {
+            "type": "structure",
+            "members": {
+                "ExplainabilityArn": {
+                    "target": "com.amazonaws.forecast#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Explainability.</p>"
+                    }
+                },
+                "ExplainabilityName": {
+                    "target": "com.amazonaws.forecast#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Explainability.</p>"
+                    }
+                },
+                "ResourceArn": {
+                    "target": "com.amazonaws.forecast#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Predictor or Forecast used to create the\n            Explainability resource.</p>"
+                    }
+                },
+                "ExplainabilityConfig": {
+                    "target": "com.amazonaws.forecast#ExplainabilityConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings that define the granularity of time series and time points\n            for the Explainability.</p>"
+                    }
+                },
+                "EnableVisualization": {
+                    "target": "com.amazonaws.forecast#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the visualization was enabled for the Explainability resource.</p>"
+                    }
+                },
+                "DataSource": {
+                    "target": "com.amazonaws.forecast#DataSource"
+                },
+                "Schema": {
+                    "target": "com.amazonaws.forecast#Schema"
+                },
+                "StartDateTime": {
+                    "target": "com.amazonaws.forecast#LocalDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>TimePointGranularity</code> is set to <code>SPECIFIC</code>, the first time\n            point in the Explainability.</p>"
+                    }
+                },
+                "EndDateTime": {
+                    "target": "com.amazonaws.forecast#LocalDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>TimePointGranularity</code> is set to <code>SPECIFIC</code>, the last time\n            point in the Explainability.</p>"
+                    }
+                },
+                "EstimatedTimeRemainingInMinutes": {
+                    "target": "com.amazonaws.forecast#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimated time remaining in minutes for the <a>CreateExplainability</a>\n            job to complete.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.forecast#Message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If an error occurred, a message about the error.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.forecast#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the Explainability resource. States include: </p>\n        <ul>\n            <li>\n                <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n                        <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                    <code>CREATE_STOPPING</code>, <code>CREATE_STOPPED</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n                        <code>DELETE_FAILED</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.forecast#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the Explainability resource was created.</p>"
+                    }
+                },
+                "LastModificationTime": {
+                    "target": "com.amazonaws.forecast#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time the resource was modified. The timestamp depends on the status of the\n            job:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>CREATE_PENDING</code> - The <code>CreationTime</code>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>\n            </li>\n            <li>\n                <p>\n                  <code>CREATE_STOPPING</code> - The current timestamp.</p>\n            </li>\n            <li>\n                <p>\n                  <code>CREATE_STOPPED</code> - When the job stopped.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or\n                    failed.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.forecast#DescribeForecast": {
             "type": "operation",
             "input": {
@@ -1865,7 +2668,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes a predictor created using the <a>CreatePredictor</a>\n      operation.</p>\n         <p>In addition to listing the properties provided in the <code>CreatePredictor</code>\n      request, this operation lists the following properties:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DatasetImportJobArns</code> - The dataset import jobs used to import training\n          data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AutoMLAlgorithmArns</code> - If AutoML is performed, the algorithms that were\n          evaluated.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CreationTime</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>LastModificationTime</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Status</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Message</code> - If an error occurred, information about the error.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<note>\n            <p> This operation is only valid for legacy predictors created with CreatePredictor. If you\n        are not using a legacy predictor, use DescribeAutoPredictor.</p>\n            <p>To upgrade a legacy predictor to AutoPredictor, see Upgrading to AutoPredictor.</p>\n         </note>\n         <p>Describes a predictor created using the <a>CreatePredictor</a>\n      operation.</p>\n         <p>In addition to listing the properties provided in the <code>CreatePredictor</code>\n      request, this operation lists the following properties:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DatasetImportJobArns</code> - The dataset import jobs used to import training\n          data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AutoMLAlgorithmArns</code> - If AutoML is performed, the algorithms that were\n          evaluated.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CreationTime</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>LastModificationTime</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Status</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Message</code> - If an error occurred, information about the error.</p>\n            </li>\n         </ul>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -1985,6 +2788,12 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the algorithm used for model training.</p>"
                     }
                 },
+                "AutoMLAlgorithmArns": {
+                    "target": "com.amazonaws.forecast#ArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When <code>PerformAutoML</code> is specified, the ARN of the chosen algorithm.</p>"
+                    }
+                },
                 "ForecastHorizon": {
                     "target": "com.amazonaws.forecast#Integer",
                     "traits": {
@@ -1994,7 +2803,7 @@
                 "ForecastTypes": {
                     "target": "com.amazonaws.forecast#ForecastTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The forecast types used during predictor training. Default value is <code>[\"0.1\",\"0.5\",\"0.9\"]</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The forecast types used during predictor training. Default value is\n        <code>[\"0.1\",\"0.5\",\"0.9\"]</code>\n         </p>"
                     }
                 },
                 "PerformAutoML": {
@@ -2063,22 +2872,22 @@
                         "smithy.api#documentation": "<p>The estimated time remaining in minutes for the predictor training job to complete.</p>"
                     }
                 },
+                "IsAutoPredictor": {
+                    "target": "com.amazonaws.forecast#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the predictor was created with <a>CreateAutoPredictor</a>.</p>"
+                    }
+                },
                 "DatasetImportJobArns": {
                     "target": "com.amazonaws.forecast#ArnList",
                     "traits": {
                         "smithy.api#documentation": "<p>An array of the ARNs of the dataset import jobs used to import training data for the\n      predictor.</p>"
                     }
                 },
-                "AutoMLAlgorithmArns": {
-                    "target": "com.amazonaws.forecast#ArnList",
-                    "traits": {
-                        "smithy.api#documentation": "<p>When <code>PerformAutoML</code> is specified, the ARN of the chosen algorithm.</p>"
-                    }
-                },
                 "Status": {
                     "target": "com.amazonaws.forecast#Status",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the predictor. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n          <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n          <code>DELETE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code>, <code>CREATE_STOPPED</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>Status</code> of the predictor must be <code>ACTIVE</code> before you can use\n        the predictor to create a forecast.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The status of the predictor. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n            <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n            <code>DELETE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code>, <code>CREATE_STOPPED</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>Status</code> of the predictor must be <code>ACTIVE</code> before you can use\n        the predictor to create a forecast.</p>\n         </note>"
                     }
                 },
                 "Message": {
@@ -2096,7 +2905,7 @@
                 "LastModificationTime": {
                     "target": "com.amazonaws.forecast#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The last time the resource was modified. The timestamp depends on the status of the job:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code> - The <code>CreationTime</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPED</code> - When the job stopped.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or\n          failed.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The last time the resource was modified. The timestamp depends on the status of the\n      job:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code> - The <code>CreationTime</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPED</code> - When the job stopped.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or\n          failed.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "OptimizationMetric": {
@@ -2270,6 +3079,154 @@
                         "name": "COMPUTED"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.forecast#Explainabilities": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.forecast#ExplainabilitySummary"
+            }
+        },
+        "com.amazonaws.forecast#ExplainabilityConfig": {
+            "type": "structure",
+            "members": {
+                "TimeSeriesGranularity": {
+                    "target": "com.amazonaws.forecast#TimeSeriesGranularity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To create an Explainability for all time series in your datasets, use\n            <code>ALL</code>. To create an Explainability for specific time series in your datasets,\n            use <code>SPECIFIC</code>.</p>\n        <p>Specify time series by uploading a CSV file to an Amazon S3 bucket and set the location\n            within the <a>DataDestination</a> data type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TimePointGranularity": {
+                    "target": "com.amazonaws.forecast#TimePointGranularity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To create an Explainability for all time points in your forecast horizon, use\n                <code>ALL</code>. To create an Explainability for specific time points in your\n            forecast horizon, use <code>SPECIFIC</code>.</p>\n        <p>Specify time points with the <code>StartDateTime</code> and <code>EndDateTime</code>\n            parameters within the <a>CreateExplainability</a> operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The ExplainabilityConfig data type defines the number of time series and time points\n            included in <a>CreateExplainability</a>.</p>\n        <p>If you provide a predictor ARN for <code>ResourceArn</code>, you must set both\n                <code>TimePointGranularity</code> and <code>TimeSeriesGranularity</code> to “ALL”.\n            When creating Predictor Explainability, Amazon Forecast considers all time series and\n            time points.</p>\n        <p>If you provide a forecast ARN for <code>ResourceArn</code>, you can set <code>TimePointGranularity</code> and\n            <code>TimeSeriesGranularity</code> to either “ALL” or “Specific”.</p>"
+            }
+        },
+        "com.amazonaws.forecast#ExplainabilityExportSummary": {
+            "type": "structure",
+            "members": {
+                "ExplainabilityExportArn": {
+                    "target": "com.amazonaws.forecast#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Explainability export.</p>"
+                    }
+                },
+                "ExplainabilityExportName": {
+                    "target": "com.amazonaws.forecast#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Explainability export</p>"
+                    }
+                },
+                "Destination": {
+                    "target": "com.amazonaws.forecast#DataDestination"
+                },
+                "Status": {
+                    "target": "com.amazonaws.forecast#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the Explainability export. States include: </p>\n        <ul>\n            <li>\n                <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n                        <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                    <code>CREATE_STOPPING</code>, <code>CREATE_STOPPED</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n                        <code>DELETE_FAILED</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.forecast#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about any errors that may have occurred during the Explainability\n            export.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.forecast#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the Explainability was created.</p>"
+                    }
+                },
+                "LastModificationTime": {
+                    "target": "com.amazonaws.forecast#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time the resource was modified. The timestamp depends on the status of the\n            job:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>CREATE_PENDING</code> - The <code>CreationTime</code>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>\n            </li>\n            <li>\n                <p>\n                  <code>CREATE_STOPPING</code> - The current timestamp.</p>\n            </li>\n            <li>\n                <p>\n                  <code>CREATE_STOPPED</code> - When the job stopped.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or\n                    failed.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a summary of the Explainability export properties used in the <a>ListExplainabilityExports</a> operation. To get a complete set of\n            properties, call the <a>DescribeExplainabilityExport</a> operation, and\n            provide the <code>ExplainabilityExportArn</code>.</p>"
+            }
+        },
+        "com.amazonaws.forecast#ExplainabilityExports": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.forecast#ExplainabilityExportSummary"
+            }
+        },
+        "com.amazonaws.forecast#ExplainabilityInfo": {
+            "type": "structure",
+            "members": {
+                "ExplainabilityArn": {
+                    "target": "com.amazonaws.forecast#Arn"
+                },
+                "Status": {
+                    "target": "com.amazonaws.forecast#Status"
+                }
+            }
+        },
+        "com.amazonaws.forecast#ExplainabilitySummary": {
+            "type": "structure",
+            "members": {
+                "ExplainabilityArn": {
+                    "target": "com.amazonaws.forecast#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Explainability.</p>"
+                    }
+                },
+                "ExplainabilityName": {
+                    "target": "com.amazonaws.forecast#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Explainability.</p>"
+                    }
+                },
+                "ResourceArn": {
+                    "target": "com.amazonaws.forecast#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Predictor or Forecast used to create the\n            Explainability.</p>"
+                    }
+                },
+                "ExplainabilityConfig": {
+                    "target": "com.amazonaws.forecast#ExplainabilityConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings that define the granularity of time series and time points\n            for the Explainability.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.forecast#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the Explainability. States include: </p>\n        <ul>\n            <li>\n                <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n                        <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                    <code>CREATE_STOPPING</code>, <code>CREATE_STOPPED</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n                        <code>DELETE_FAILED</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.forecast#Message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about any errors that may have occurred during the Explainability creation\n            process.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.forecast#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the Explainability was created.</p>"
+                    }
+                },
+                "LastModificationTime": {
+                    "target": "com.amazonaws.forecast#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time the resource was modified. The timestamp depends on the status of the\n            job:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>CREATE_PENDING</code> - The <code>CreationTime</code>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>\n            </li>\n            <li>\n                <p>\n                  <code>CREATE_STOPPING</code> - The current timestamp.</p>\n            </li>\n            <li>\n                <p>\n                  <code>CREATE_STOPPED</code> - When the job stopped.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or\n                    failed.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a summary of the Explainability properties used in the <a>ListExplainabilities</a> operation. To get a complete set of properties,\n            call the <a>DescribeExplainability</a> operation, and provide the listed\n                <code>ExplainabilityArn</code>.</p>"
             }
         },
         "com.amazonaws.forecast#Featurization": {
@@ -2458,7 +3415,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 5
+                    "max": 10
                 }
             }
         },
@@ -2539,6 +3496,9 @@
                         "smithy.api#documentation": "<p>The ARN of the predictor used to generate the forecast.</p>"
                     }
                 },
+                "CreatedUsingAutoPredictor": {
+                    "target": "com.amazonaws.forecast#Boolean"
+                },
                 "DatasetGroupArn": {
                     "target": "com.amazonaws.forecast#String",
                     "traits": {
@@ -2577,6 +3537,10 @@
         "com.amazonaws.forecast#ForecastType": {
             "type": "string",
             "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 4
+                },
                 "smithy.api#pattern": "^(^0?\\.\\d\\d?$|^mean$)$"
             }
         },
@@ -2601,6 +3565,10 @@
         "com.amazonaws.forecast#Frequency": {
             "type": "string",
             "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                },
                 "smithy.api#pattern": "^Y|M|W|D|H|30min|15min|10min|5min|1min$"
             }
         },
@@ -2657,6 +3625,12 @@
                     "target": "com.amazonaws.forecast#PredictorEvaluationResults",
                     "traits": {
                         "smithy.api#documentation": "<p>An array of results from evaluating the predictor.</p>"
+                    }
+                },
+                "IsAutoPredictor": {
+                    "target": "com.amazonaws.forecast#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the predictor was created with <a>CreateAutoPredictor</a>.</p>"
                     }
                 },
                 "AutoMLOverrideStrategy": {
@@ -2993,6 +3967,128 @@
                 }
             }
         },
+        "com.amazonaws.forecast#ListExplainabilities": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.forecast#ListExplainabilitiesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.forecast#ListExplainabilitiesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.forecast#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#InvalidNextTokenException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of Explainability resources created using the <a>CreateExplainability</a> operation. This operation returns a summary for\n            each Explainability. You can filter the list using an array of <a>Filter</a>\n            objects.</p>\n        <p>To retrieve the complete set of properties for a particular Explainability resource,\n            use the ARN with the <a>DescribeExplainability</a> operation.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.forecast#ListExplainabilitiesRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.forecast#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the result of the previous request was truncated, the response includes a\n            NextToken. To retrieve the next set of results, use the token in the next request.\n            Tokens expire after 24 hours.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.forecast#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of items returned in the response.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.forecast#Filters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of filters. For each filter, provide a condition and a match statement. The\n            condition is either <code>IS</code> or <code>IS_NOT</code>, which specifies whether to\n            include or exclude the resources that match the statement from the list. The match\n            statement consists of a key and a value.</p>\n        <p>\n            <b>Filter properties</b>\n        </p>\n        <ul>\n            <li>\n                <p>\n                  <code>Condition</code> - The condition to apply. Valid values are\n                        <code>IS</code> and <code>IS_NOT</code>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Key</code> - The name of the parameter to filter on. Valid values are\n                        <code>PredictorArn</code> and <code>Status</code>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Value</code> - The value to match.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.forecast#ListExplainabilitiesResponse": {
+            "type": "structure",
+            "members": {
+                "Explainabilities": {
+                    "target": "com.amazonaws.forecast#Explainabilities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that summarize the properties of each Explainability\n            resource.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.forecast#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns this token if the response is truncated. To retrieve the next set of results,\n            use the token in the next request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.forecast#ListExplainabilityExports": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.forecast#ListExplainabilityExportsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.forecast#ListExplainabilityExportsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.forecast#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#InvalidNextTokenException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of Explainability exports created using the <a>CreateExplainabilityExport</a> operation. This operation returns a summary\n            for each Explainability export. You can filter the list using an array of <a>Filter</a> objects.</p>\n        <p>To retrieve the complete set of properties for a particular Explainability export, use\n            the ARN with the <a>DescribeExplainability</a> operation.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.forecast#ListExplainabilityExportsRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.forecast#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the result of the previous request was truncated, the response includes a\n            NextToken. To retrieve the next set of results, use the token in the next request.\n            Tokens expire after 24 hours.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.forecast#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of items to return in the response.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.forecast#Filters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of filters. For each filter, provide a condition and a match statement. The\n            condition is either <code>IS</code> or <code>IS_NOT</code>, which specifies whether to\n            include or exclude resources that match the statement from the list. The match statement\n            consists of a key and a value.</p>\n        <p>\n            <b>Filter properties</b>\n        </p>\n        <ul>\n            <li>\n                <p>\n                  <code>Condition</code> - The condition to apply. Valid values are\n                        <code>IS</code> and <code>IS_NOT</code>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Key</code> - The name of the parameter to filter on. Valid values are\n                        <code>PredictorArn</code> and <code>Status</code>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Value</code> - The value to match.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.forecast#ListExplainabilityExportsResponse": {
+            "type": "structure",
+            "members": {
+                "ExplainabilityExports": {
+                    "target": "com.amazonaws.forecast#ExplainabilityExports",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that summarize the properties of each Explainability\n            export.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.forecast#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns this token if the response is truncated. To retrieve the next set of results,\n            use the token in the next request.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.forecast#ListForecastExportJobs": {
             "type": "operation",
             "input": {
@@ -3304,6 +4400,16 @@
                 }
             }
         },
+        "com.amazonaws.forecast#LocalDateTime": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 19
+                },
+                "smithy.api#pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}$"
+            }
+        },
         "com.amazonaws.forecast#Long": {
             "type": "long",
             "traits": {
@@ -3374,7 +4480,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 3000
-                }
+                },
+                "smithy.api#pattern": "^.+$"
             }
         },
         "com.amazonaws.forecast#OptimizationMetric": {
@@ -3576,10 +4683,22 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset group that contains the data used to train\n      the predictor.</p>"
                     }
                 },
+                "IsAutoPredictor": {
+                    "target": "com.amazonaws.forecast#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether AutoPredictor was used to create the predictor.</p>"
+                    }
+                },
+                "ReferencePredictorSummary": {
+                    "target": "com.amazonaws.forecast#ReferencePredictorSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of the reference predictor used if the predictor was retrained or\n            upgraded.</p>"
+                    }
+                },
                 "Status": {
                     "target": "com.amazonaws.forecast#Status",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the predictor. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n          <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n          <code>DELETE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code>, <code>CREATE_STOPPED</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>Status</code> of the predictor must be <code>ACTIVE</code> before you can use\n        the predictor to create a forecast.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The status of the predictor. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n            <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n            <code>DELETE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code>, <code>CREATE_STOPPED</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>Status</code> of the predictor must be <code>ACTIVE</code> before you can use\n        the predictor to create a forecast.</p>\n         </note>"
                     }
                 },
                 "Message": {
@@ -3597,7 +4716,7 @@
                 "LastModificationTime": {
                     "target": "com.amazonaws.forecast#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The last time the resource was modified. The timestamp depends on the status of the job:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code> - The <code>CreationTime</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPED</code> - When the job stopped.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or\n          failed.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The last time the resource was modified. The timestamp depends on the status of the\n      job:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code> - The <code>CreationTime</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPED</code> - When the job stopped.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or\n          failed.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -3609,6 +4728,26 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.forecast#PredictorSummary"
+            }
+        },
+        "com.amazonaws.forecast#ReferencePredictorSummary": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.forecast#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the reference predictor.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.forecast#State",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the reference predictor is <code>Active</code> or <code>Deleted</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a summary of the reference predictor used when retraining or upgrading a\n            predictor.</p>"
             }
         },
         "com.amazonaws.forecast#ResourceAlreadyExistsException": {
@@ -3681,6 +4820,10 @@
         "com.amazonaws.forecast#S3Path": {
             "type": "string",
             "traits": {
+                "smithy.api#length": {
+                    "min": 7,
+                    "max": 4096
+                },
                 "smithy.api#pattern": "^s3://[a-z0-9].+$"
             }
         },
@@ -3751,6 +4894,21 @@
                     "min": 1,
                     "max": 100
                 }
+            }
+        },
+        "com.amazonaws.forecast#State": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Active",
+                        "name": "Active"
+                    },
+                    {
+                        "value": "Deleted",
+                        "name": "Deleted"
+                    }
+                ]
             }
         },
         "com.amazonaws.forecast#Statistics": {
@@ -3891,7 +5049,7 @@
                 "Name": {
                     "target": "com.amazonaws.forecast#Name",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the feature. Valid values: <code>\"holiday\"</code> and <code>\"weather\"</code>.</p>",
+                        "smithy.api#documentation": "<p>The name of the feature. Valid values: <code>\"holiday\"</code> and\n      <code>\"weather\"</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3904,7 +5062,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a supplementary feature of a dataset group. This object is part of the <a>InputDataConfig</a> object. Forecast supports the Weather Index and Holidays built-in\n      featurizations.</p>\n         <p>\n            <b>Weather Index</b>\n         </p>\n         <p>The Amazon Forecast Weather Index is a built-in featurization that incorporates historical and\n      projected weather information into your model. The Weather Index supplements your datasets\n      with over two years of historical weather data and up to 14 days of projected weather data.\n      For more information, see <a href=\"https://docs.aws.amazon.com/forecast/latest/dg/weather.html\">Amazon Forecast Weather Index</a>.</p>\n         <p>\n            <b>Holidays</b>\n         </p>\n         <p>Holidays is a built-in featurization that incorporates a feature-engineered dataset of\n      national holiday information into your model. It provides native support for the holiday\n      calendars of 66 countries. To view the holiday calendars, refer to the <a href=\"http://jollyday.sourceforge.net/data.html\">Jollyday</a> library. For more\n      information, see <a href=\"https://docs.aws.amazon.com/forecast/latest/dg/holidays.html\">Holidays Featurization</a>.</p>"
+                "smithy.api#documentation": "<p>Describes a supplementary feature of a dataset group. This object is part of the <a>InputDataConfig</a> object. Forecast supports the Weather Index and Holidays built-in\n      featurizations.</p>\n         <p>\n            <b>Weather Index</b>\n         </p>\n         <p>The Amazon Forecast Weather Index is a built-in featurization that incorporates historical and\n      projected weather information into your model. The Weather Index supplements your datasets\n      with over two years of historical weather data and up to 14 days of projected weather data.\n      For more information, see <a href=\"https://docs.aws.amazon.com/forecast/latest/dg/weather.html\">Amazon Forecast Weather\n        Index</a>.</p>\n         <p>\n            <b>Holidays</b>\n         </p>\n         <p>Holidays is a built-in featurization that incorporates a feature-engineered dataset of\n      national holiday information into your model. It provides native support for the holiday\n      calendars of 66 countries. To view the holiday calendars, refer to the <a href=\"http://jollyday.sourceforge.net/data.html\">Jollyday</a> library. For more\n      information, see <a href=\"https://docs.aws.amazon.com/forecast/latest/dg/holidays.html\">Holidays Featurization</a>.</p>"
             }
         },
         "com.amazonaws.forecast#SupplementaryFeatures": {
@@ -4077,6 +5235,36 @@
                 "target": "com.amazonaws.forecast#WindowSummary"
             }
         },
+        "com.amazonaws.forecast#TimePointGranularity": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ALL",
+                        "name": "ALL"
+                    },
+                    {
+                        "value": "SPECIFIC",
+                        "name": "SPECIFIC"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.forecast#TimeSeriesGranularity": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ALL",
+                        "name": "ALL"
+                    },
+                    {
+                        "value": "SPECIFIC",
+                        "name": "SPECIFIC"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.forecast#TimeZone": {
             "type": "string",
             "traits": {
@@ -4112,6 +5300,21 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 100
+                }
+            }
+        },
+        "com.amazonaws.forecast#Transformations": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.forecast#Name"
+            },
+            "value": {
+                "target": "com.amazonaws.forecast#Value"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
                 }
             }
         },

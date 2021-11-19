@@ -31,6 +31,21 @@
     "shapes": {
         "com.amazonaws.lexruntimev2#AWSDeepSenseRunTimeServiceApi2_0": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Lex Runtime V2",
+                    "arnNamespace": "lex",
+                    "cloudFormationName": "LexRuntimeV2",
+                    "cloudTrailEventSource": "lexruntimev2.amazonaws.com",
+                    "endpointPrefix": "runtime-v2-lex"
+                },
+                "aws.auth#sigv4": {
+                    "name": "lex"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#title": "Amazon Lex Runtime V2"
+            },
             "version": "2020-08-07",
             "operations": [
                 {
@@ -51,22 +66,7 @@
                 {
                     "target": "com.amazonaws.lexruntimev2#StartConversation"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Lex Runtime V2",
-                    "arnNamespace": "lex",
-                    "cloudFormationName": "LexRuntimeV2",
-                    "cloudTrailEventSource": "lexruntimev2.amazonaws.com",
-                    "endpointPrefix": "runtime-v2-lex"
-                },
-                "aws.auth#sigv4": {
-                    "name": "lex"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p></p>",
-                "smithy.api#title": "Amazon Lex Runtime V2"
-            }
+            ]
         },
         "com.amazonaws.lexruntimev2#AccessDeniedException": {
             "type": "structure",
@@ -645,6 +645,12 @@
                     "target": "com.amazonaws.lexruntimev2#NonEmptyString",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the slot that should be elicited from the user.</p>"
+                    }
+                },
+                "slotElicitationStyle": {
+                    "target": "com.amazonaws.lexruntimev2#StyleType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configures the slot to use spell-by-letter or spell-by-word style.\n         When you use a style on a slot, users can spell out their input to make\n         it clear to your bot.</p>\n         <ul>\n            <li>\n               <p>Spell by letter - \"b\" \"o\" \"b\"</p>\n            </li>\n            <li>\n               <p>Spell by word - \"b as in boy\" \"o as in oscar\" \"b as in\n               boy\"</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/using-spelling.html\">\n            Using spelling to enter slot values </a>.</p>"
                     }
                 }
             },
@@ -2088,6 +2094,25 @@
             },
             "value": {
                 "target": "com.amazonaws.lexruntimev2#String"
+            }
+        },
+        "com.amazonaws.lexruntimev2#StyleType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Default",
+                        "name": "DEFAULT"
+                    },
+                    {
+                        "value": "SpellByLetter",
+                        "name": "SPELL_BY_LETTER"
+                    },
+                    {
+                        "value": "SpellByWord",
+                        "name": "SPELL_BY_WORD"
+                    }
+                ]
             }
         },
         "com.amazonaws.lexruntimev2#Text": {

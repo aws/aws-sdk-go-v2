@@ -216,7 +216,7 @@
                 "s3Bucket": {
                     "target": "com.amazonaws.lexmodelsv2#S3BucketLogDestination",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 bucket where the audio log files are stored. The IAM\n         role specified in the <code>roleArn</code> parameter of the <a>CreateBot</a> operation must have permission to write to\n         this bucket.</p>",
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket where the audio log files are stored. The IAM\n         role specified in the <code>roleArn</code> parameter of the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_CreateBot.html\">CreateBot</a> operation must have permission to write to this\n         bucket.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -367,7 +367,7 @@
                 "botAliasId": {
                     "target": "com.amazonaws.lexmodelsv2#BotAliasId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier assigned to the bot alias. You can use this ID\n         to get detailed information about the alias using the <a>DescribeBotAlias</a> operation.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier assigned to the bot alias. You can use this ID\n         to get detailed information about the alias using the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_DescribeBotAlias.html\">DescribeBotAlias</a> operation.</p>"
                     }
                 },
                 "botAliasName": {
@@ -408,7 +408,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Summary information about bot aliases returned from the <a>ListBotAliases</a> operation.</p>"
+                "smithy.api#documentation": "<p>Summary information about bot aliases returned from the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBotAliases.html\">ListBotAliases</a> operation.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#BotAliasSummaryList": {
@@ -830,7 +830,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Summary information about bot locales returned by the <a>ListBotLocales</a> operation.</p>"
+                "smithy.api#documentation": "<p>Summary information about bot locales returned by the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBotLocales.html\">ListBotLocales</a> operation.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#BotLocaleSummaryList": {
@@ -913,7 +913,7 @@
                 "botId": {
                     "target": "com.amazonaws.lexmodelsv2#Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier assigned to the bot. Use this ID to get\n         detailed information about the bot with the <a>DescribeBot</a> operation.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier assigned to the bot. Use this ID to get\n         detailed information about the bot with the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_DescribeBot.html\">DescribeBot</a> operation.</p>"
                     }
                 },
                 "botName": {
@@ -948,7 +948,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Summary information about a bot returned by the <a>ListBots</a> operation.</p>"
+                "smithy.api#documentation": "<p>Summary information about a bot returned by the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBots.html\">ListBots</a> operation.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#BotSummaryList": {
@@ -1064,7 +1064,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Summary information about a bot version returned by the <a>ListBotVersions</a> operation.</p>"
+                "smithy.api#documentation": "<p>Summary information about a bot version returned by the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBotVersions.html\">ListBotVersions</a> operation.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#BotVersionSummaryList": {
@@ -1122,7 +1122,7 @@
                 "botId": {
                     "target": "com.amazonaws.lexmodelsv2#Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the bot to build. The identifier is returned in\n         the response from the  operation.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the bot to build. The identifier is returned in\n         the response from the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_CreateBot.html\">CreateBot</a> operation.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1230,7 +1230,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides summary information about a built-in intent for the <a>ListBuiltInIntents</a> operation.</p>"
+                "smithy.api#documentation": "<p>Provides summary information about a built-in intent for the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBuiltInIntents.html\"> ListBuiltInIntents </a> operation.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#BuiltInIntentSummaryList": {
@@ -1299,7 +1299,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides summary information about a built-in slot type for the\n            <a>ListBuiltInSlotTypes</a> operation.</p>"
+                "smithy.api#documentation": "<p>Provides summary information about a built-in slot type for the\n            <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBuiltInSlotTypes.html\"> ListBuiltInSlotTypes </a>\n         operation.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#BuiltInSlotTypeSummaryList": {
@@ -1640,7 +1640,7 @@
                 "botVersion": {
                     "target": "com.amazonaws.lexmodelsv2#NumericalBotVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the bot that this alias points to. You can use the\n             operation to change the bot\n         version associated with the alias.</p>"
+                        "smithy.api#documentation": "<p>The version of the bot that this alias points to. You can use the\n            <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_UpdateBotAlias.html\">UpdateBotAlias</a> operation to change the\n         bot version associated with the alias.</p>"
                     }
                 },
                 "botAliasLocaleSettings": {
@@ -2191,7 +2191,7 @@
                 "exportStatus": {
                     "target": "com.amazonaws.lexmodelsv2#ExportStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the export. When the status is <code>Completed</code>,\n         you can use the  operation to get\n         the pre-signed S3 URL link to your exported bot or bot locale.</p>"
+                        "smithy.api#documentation": "<p>The status of the export. When the status is <code>Completed</code>,\n         you can use the <a href=\"https://docs.aws.amazon.com/latest/dg/API_DescribeExport.html\">DescribeExport</a> operation to get the\n         pre-signed S3 URL link to your exported bot or bot locale.</p>"
                     }
                 },
                 "creationDateTime": {
@@ -3018,7 +3018,7 @@
                 "importId": {
                     "target": "com.amazonaws.lexmodelsv2#Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>An identifier for a unique import job. Use it when you call the\n             operation.</p>"
+                        "smithy.api#documentation": "<p>An identifier for a unique import job. Use it when you call the\n            <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_StartImport.html\">StartImport</a> operation.</p>"
                     }
                 },
                 "uploadUrl": {
@@ -3354,7 +3354,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a specific version of a bot. To delete all version of a bot,\n         use the <a>DeleteBot</a> operation.</p>",
+                "smithy.api#documentation": "<p>Deletes a specific version of a bot. To delete all version of a bot,\n         use the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_DeleteBot.html\">DeleteBot</a> operation.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/bots/{botId}/botversions/{botVersion}",
@@ -3472,7 +3472,7 @@
                 "exportStatus": {
                     "target": "com.amazonaws.lexmodelsv2#ExportStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the deletion. When the deletion is complete,\n         the export will no longer be returned by the  operation and calls to the  with the export identifier will\n         fail.</p>"
+                        "smithy.api#documentation": "<p>The current status of the deletion. When the deletion is complete,\n         the export will no longer be returned by the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_ListExports.html\">ListExports</a> operation and calls to the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_DescribeExport.html\">\n            DescribeExport</a> operation with the export identifier will\n         fail.</p>"
                     }
                 }
             }
@@ -3536,7 +3536,7 @@
                 "importStatus": {
                     "target": "com.amazonaws.lexmodelsv2#ImportStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the deletion. When the deletion is complete,\n         the import will no longer be returned by the  operation and calls to the  with the import identifier will\n         fail.</p>"
+                        "smithy.api#documentation": "<p>The current status of the deletion. When the deletion is complete,\n         the import will no longer be returned by the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_ListImports.html\">ListImports</a> operation and calls to the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_DescribeImport.html\">DescribeImport</a> operation with the import identifier will\n         fail.</p>"
                     }
                 }
             }
@@ -3933,7 +3933,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes stored utterances.</p>\n         <p>Amazon Lex stores the utterances that users send to your bot. Utterances\n         are stored for 15 days for use with the  operation, and then stored\n         indefinitely for use in improving the ability of your bot to respond to\n         user input..</p>\n         <p>Use the <code>DeleteUtterances</code> operation to manually delete\n         utterances for a specific session. When you use the\n            <code>DeleteUtterances</code> operation, utterances stored for\n         improving your bot's ability to respond to user input are deleted\n         immediately. Utterances stored for use with the\n            <code>ListAggregatedUtterances</code> operation are deleted after 15\n         days.</p>",
+                "smithy.api#documentation": "<p>Deletes stored utterances.</p>\n         <p>Amazon Lex stores the utterances that users send to your bot. Utterances\n         are stored for 15 days for use with the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_ListAggregatedUtterances.html\">ListAggregatedUtterances</a> operation, and\n         then stored indefinitely for use in improving the ability of your bot\n         to respond to user input..</p>\n         <p>Use the <code>DeleteUtterances</code> operation to manually delete\n         utterances for a specific session. When you use the\n            <code>DeleteUtterances</code> operation, utterances stored for\n         improving your bot's ability to respond to user input are deleted\n         immediately. Utterances stored for use with the\n            <code>ListAggregatedUtterances</code> operation are deleted after 15\n         days.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/bots/{botId}/utterances",
@@ -3962,7 +3962,7 @@
                 "sessionId": {
                     "target": "com.amazonaws.lexmodelsv2#SessionId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the session with the user. The ID is\n         returned in the response from the  and  operations.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the session with the user. The ID is\n         returned in the response from the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_runtime_RecognizeText.html\">RecognizeText</a> and <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_runtime_RecognizeUtterance.html\">RecognizeUtterance</a> operations.</p>",
                         "smithy.api#httpQuery": "sessionId"
                     }
                 }
@@ -5681,7 +5681,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Filters the response form the \n         operation</p>"
+                "smithy.api#documentation": "<p>Filters the response form the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_ListExports.html\">ListExports</a> operation</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#ExportFilterName": {
@@ -6121,7 +6121,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Filters the response from the \n         operation.</p>"
+                "smithy.api#documentation": "<p>Filters the response from the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_ListImports.html\">ListImports</a> operation.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#ImportFilterName": {
@@ -6637,6 +6637,21 @@
         },
         "com.amazonaws.lexmodelsv2#LexModelBuildingServiceV2": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Lex Models V2",
+                    "arnNamespace": "lex",
+                    "cloudFormationName": "LexModelsV2",
+                    "cloudTrailEventSource": "lexmodelsv2.amazonaws.com",
+                    "endpointPrefix": "models-v2-lex"
+                },
+                "aws.auth#sigv4": {
+                    "name": "lex"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#title": "Amazon Lex Model Building V2"
+            },
             "version": "2020-08-07",
             "operations": [
                 {
@@ -6813,22 +6828,7 @@
                 {
                     "target": "com.amazonaws.lexmodelsv2#UpdateSlotType"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Lex Models V2",
-                    "arnNamespace": "lex",
-                    "cloudFormationName": "LexModelsV2",
-                    "cloudTrailEventSource": "lexmodelsv2.amazonaws.com",
-                    "endpointPrefix": "models-v2-lex"
-                },
-                "aws.auth#sigv4": {
-                    "name": "lex"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p></p>",
-                "smithy.api#title": "Amazon Lex Model Building V2"
-            }
+            ]
         },
         "com.amazonaws.lexmodelsv2#ListAggregatedUtterances": {
             "type": "operation",
@@ -7383,7 +7383,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a list of built-in intents provided by Amazon Lex that you can use\n         in your bot. </p>\n         <p>To use a built-in intent as a the base for your own intent, include\n         the built-in intent signature in the <code>parentIntentSignature</code>\n         parameter when you call the <code>CreateIntent</code> operation. For\n         more information, see <a>CreateIntent</a>.</p>",
+                "smithy.api#documentation": "<p>Gets a list of built-in intents provided by Amazon Lex that you can use\n         in your bot. </p>\n         <p>To use a built-in intent as a the base for your own intent, include\n         the built-in intent signature in the <code>parentIntentSignature</code>\n         parameter when you call the <code>CreateIntent</code> operation. For\n         more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_CreateIntent.html\">CreateIntent</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/builtins/locales/{localeId}/intents",
@@ -9433,7 +9433,7 @@
                 "importId": {
                     "target": "com.amazonaws.lexmodelsv2#Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the import. It is included in the response\n         from the  operation.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier for the import. It is included in the response\n         from the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_CreateUploadUrl.html\">CreateUploadUrl</a> operation.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10174,7 +10174,7 @@
                 "botId": {
                     "target": "com.amazonaws.lexmodelsv2#Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the bot to update. This identifier is\n         returned by the <a>CreateBot</a> operation.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the bot to update. This identifier is\n         returned by the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_CreateBot.html\">CreateBot</a> operation.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -10303,7 +10303,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the password used to protect an export zip archive.</p>\n         <p>The password is not required. If you don't supply a password, Amazon Lex\n         generates a zip file that is not protected by a password. This is the\n         archive that is available at the pre-signed S3 URL provided by the\n             operation.</p>",
+                "smithy.api#documentation": "<p>Updates the password used to protect an export zip archive.</p>\n         <p>The password is not required. If you don't supply a password, Amazon Lex\n         generates a zip file that is not protected by a password. This is the\n         archive that is available at the pre-signed S3 URL provided by the\n            <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_DescribeExport.html\">DescribeExport</a> operation.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/exports/{exportId}",
@@ -11133,6 +11133,21 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#VoiceEngine": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "standard",
+                        "name": "Standard"
+                    },
+                    {
+                        "value": "neural",
+                        "name": "Neural"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.lexmodelsv2#VoiceId": {
             "type": "string"
         },
@@ -11144,6 +11159,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the Amazon Polly voice to use.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "engine": {
+                    "target": "com.amazonaws.lexmodelsv2#VoiceEngine",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the type of Amazon Polly\n         voice that Amazon Lex should use for voice interaction with the user. \n      For more information, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/voicelist.html\">Voices in Amazon Polly</a>.</p>"
                     }
                 }
             },

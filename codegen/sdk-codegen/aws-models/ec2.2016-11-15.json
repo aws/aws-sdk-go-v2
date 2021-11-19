@@ -42940,6 +42940,42 @@
                         "name": "c6gn_16xlarge"
                     },
                     {
+                        "value": "c6i.large",
+                        "name": "c6i_large"
+                    },
+                    {
+                        "value": "c6i.xlarge",
+                        "name": "c6i_xlarge"
+                    },
+                    {
+                        "value": "c6i.2xlarge",
+                        "name": "c6i_2xlarge"
+                    },
+                    {
+                        "value": "c6i.4xlarge",
+                        "name": "c6i_4xlarge"
+                    },
+                    {
+                        "value": "c6i.8xlarge",
+                        "name": "c6i_8xlarge"
+                    },
+                    {
+                        "value": "c6i.12xlarge",
+                        "name": "c6i_12xlarge"
+                    },
+                    {
+                        "value": "c6i.16xlarge",
+                        "name": "c6i_16xlarge"
+                    },
+                    {
+                        "value": "c6i.24xlarge",
+                        "name": "c6i_24xlarge"
+                    },
+                    {
+                        "value": "c6i.32xlarge",
+                        "name": "c6i_32xlarge"
+                    },
+                    {
                         "value": "cc1.4xlarge",
                         "name": "cc1_4xlarge"
                     },
@@ -43714,6 +43750,38 @@
                     {
                         "value": "vt1.24xlarge",
                         "name": "vt1_24xlarge"
+                    },
+                    {
+                        "value": "g5.xlarge",
+                        "name": "g5_xlarge"
+                    },
+                    {
+                        "value": "g5.2xlarge",
+                        "name": "g5_2xlarge"
+                    },
+                    {
+                        "value": "g5.4xlarge",
+                        "name": "g5_4xlarge"
+                    },
+                    {
+                        "value": "g5.8xlarge",
+                        "name": "g5_8xlarge"
+                    },
+                    {
+                        "value": "g5.12xlarge",
+                        "name": "g5_12xlarge"
+                    },
+                    {
+                        "value": "g5.16xlarge",
+                        "name": "g5_16xlarge"
+                    },
+                    {
+                        "value": "g5.24xlarge",
+                        "name": "g5_24xlarge"
+                    },
+                    {
+                        "value": "g5.48xlarge",
+                        "name": "g5_48xlarge"
                     }
                 ]
             }
@@ -49842,6 +49910,12 @@
                     "target": "com.amazonaws.ec2#CoipPoolId",
                     "traits": {
                         "smithy.api#documentation": "<p>The customer-owned IPv4 address pool associated with the subnet.</p>\n        <p>You must set this value when you specify <code>true</code> for <code>MapCustomerOwnedIpOnLaunch</code>.</p>"
+                    }
+                },
+                "EnableDns64": {
+                    "target": "com.amazonaws.ec2#AttributeBooleanValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether DNS queries made to the Amazon-provided DNS Resolver in this subnet \n            should return synthetic IPv6 addresses for IPv4-only destinations.</p>"
                     }
                 }
             }
@@ -64980,6 +65054,14 @@
                         "aws.protocols#ec2QueryName": "OutpostArn",
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Outpost.</p>",
                         "smithy.api#xmlName": "outpostArn"
+                    }
+                },
+                "EnableDns64": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "EnableDns64",
+                        "smithy.api#documentation": "<p>Indicates whether DNS queries made to the Amazon-provided DNS Resolver in this subnet \n            should return synthetic IPv6 addresses for IPv4-only destinations.</p>",
+                        "smithy.api#xmlName": "enableDns64"
                     }
                 }
             },

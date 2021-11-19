@@ -55,7 +55,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds a statement to a topic's access control policy, granting access for the specified\n            accounts to the specified actions.</p>"
+                "smithy.api#documentation": "<p>Adds a statement to a topic's access control policy, granting access for the specified\n            Amazon Web Services accounts to the specified actions.</p>"
             }
         },
         "com.amazonaws.sns#AddPermissionInput": {
@@ -78,7 +78,7 @@
                 "AWSAccountId": {
                     "target": "com.amazonaws.sns#DelegatesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account IDs of the users (principals) who will be given access to the\n            specified actions. The users must have account, but do not need to be signed up for\n            this service.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account IDs of the users (principals) who will be given access to the\n            specified actions. The users must have Amazon Web Services account, but do not need to be signed up for\n            this service.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -102,6 +102,24 @@
         },
         "com.amazonaws.sns#AmazonSimpleNotificationService": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "SNS",
+                    "arnNamespace": "sns",
+                    "cloudFormationName": "SNS",
+                    "cloudTrailEventSource": "sns.amazonaws.com",
+                    "endpointPrefix": "sns"
+                },
+                "aws.auth#sigv4": {
+                    "name": "sns"
+                },
+                "aws.protocols#awsQuery": {},
+                "smithy.api#documentation": "<fullname>Amazon Simple Notification Service</fullname>\n        <p>Amazon Simple Notification Service (Amazon SNS) is a web service that enables you to build\n            distributed web-enabled applications. Applications can use Amazon SNS to easily push\n            real-time notification messages to interested subscribers over multiple delivery\n            protocols. For more information about this product see the <a href=\"http://aws.amazon.com/sns/\">Amazon SNS product page</a>. For detailed information about Amazon SNS features\n            and their associated API calls, see the <a href=\"https://docs.aws.amazon.com/sns/latest/dg/\">Amazon SNS Developer Guide</a>. </p>\n        <p>For information on the permissions you need to use this API, see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-authentication-and-access-control.html\">Identity and access management in Amazon SNS</a> in the <i>Amazon SNS Developer\n                Guide.</i>\n         </p>\n        <p>We also provide SDKs that enable you to access Amazon SNS from your preferred programming\n            language. The SDKs contain functionality that automatically takes care of tasks such as:\n            cryptographically signing your service requests, retrying requests, and handling error\n            responses. For a list of available SDKs, go to <a href=\"http://aws.amazon.com/tools/\">Tools for Amazon Web Services</a>. </p>",
+                "smithy.api#title": "Amazon Simple Notification Service",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://sns.amazonaws.com/doc/2010-03-31/"
+                }
+            },
             "version": "2010-03-31",
             "operations": [
                 {
@@ -189,6 +207,9 @@
                     "target": "com.amazonaws.sns#Publish"
                 },
                 {
+                    "target": "com.amazonaws.sns#PublishBatch"
+                },
+                {
                     "target": "com.amazonaws.sns#RemovePermission"
                 },
                 {
@@ -221,25 +242,7 @@
                 {
                     "target": "com.amazonaws.sns#VerifySMSSandboxPhoneNumber"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "SNS",
-                    "arnNamespace": "sns",
-                    "cloudFormationName": "SNS",
-                    "cloudTrailEventSource": "sns.amazonaws.com",
-                    "endpointPrefix": "sns"
-                },
-                "aws.auth#sigv4": {
-                    "name": "sns"
-                },
-                "aws.protocols#awsQuery": {},
-                "smithy.api#documentation": "<fullname>Amazon Simple Notification Service</fullname>\n        <p>Amazon Simple Notification Service (Amazon SNS) is a web service that enables you to build\n            distributed web-enabled applications. Applications can use Amazon SNS to easily push\n            real-time notification messages to interested subscribers over multiple delivery\n            protocols. For more information about this product see the <a href=\"http://aws.amazon.com/sns/\">Amazon SNS product page</a>. For detailed information about Amazon SNS features\n            and their associated API calls, see the <a href=\"https://docs.aws.amazon.com/sns/latest/dg/\">Amazon SNS Developer Guide</a>. </p>\n        <p>For information on the permissions you need to use this API, see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-authentication-and-access-control.html\">Identity and access management in Amazon SNS</a> in the <i>Amazon SNS Developer\n                Guide.</i>\n         </p>\n        <p>We also provide SDKs that enable you to access Amazon SNS from your preferred programming\n            language. The SDKs contain functionality that automatically takes care of tasks such as:\n            cryptographically signing your service requests, retrying requests, and handling error\n            responses. For a list of available SDKs, go to <a href=\"http://aws.amazon.com/tools/\">Tools for Amazon Web Services</a>. </p>",
-                "smithy.api#title": "Amazon Simple Notification Service",
-                "smithy.api#xmlNamespace": {
-                    "uri": "http://sns.amazonaws.com/doc/2010-03-31/"
-                }
-            }
+            ]
         },
         "com.amazonaws.sns#AuthorizationErrorException": {
             "type": "structure",
@@ -256,6 +259,81 @@
                 "smithy.api#documentation": "<p>Indicates that the user has been denied access to the requested resource.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.sns#BatchEntryIdsNotDistinctException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.sns#String"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "BatchEntryIdsNotDistinct",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>Two or more batch entries in the request have the same <code>Id</code>.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.sns#BatchRequestTooLongException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.sns#String"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "BatchRequestTooLong",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The length of all the batch messages put together is more than the limit.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.sns#BatchResultErrorEntry": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.sns#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>Id</code> of an entry in a batch request</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Code": {
+                    "target": "com.amazonaws.sns#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An error code representing why the action failed on this entry.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.sns#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message explaining why the action failed on this entry.</p>"
+                    }
+                },
+                "SenderFault": {
+                    "target": "com.amazonaws.sns#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the error happened due to the caller of the batch API action.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Gives a detailed description of failed messages in the batch.</p>"
+            }
+        },
+        "com.amazonaws.sns#BatchResultErrorEntryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sns#BatchResultErrorEntry"
             }
         },
         "com.amazonaws.sns#Binary": {
@@ -284,7 +362,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Accepts a phone number and indicates whether the phone holder has opted out of\n            receiving SMS messages from your account. You cannot send SMS messages to a number that\n            is opted out.</p>\n        <p>To resume sending messages, you can opt in the number by using the\n                <code>OptInPhoneNumber</code> action.</p>"
+                "smithy.api#documentation": "<p>Accepts a phone number and indicates whether the phone holder has opted out of\n            receiving SMS messages from your Amazon Web Services account. You cannot send SMS messages to a number that\n            is opted out.</p>\n        <p>To resume sending messages, you can opt in the number by using the\n                <code>OptInPhoneNumber</code> action.</p>"
             }
         },
         "com.amazonaws.sns#CheckIfPhoneNumberIsOptedOutInput": {
@@ -441,7 +519,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a platform application object for one of the supported push notification\n            services, such as APNS and GCM (Firebase Cloud Messaging), to which devices and mobile\n            apps may register. You must specify <code>PlatformPrincipal</code> and\n                <code>PlatformCredential</code> attributes when using the\n                <code>CreatePlatformApplication</code> action.</p>\n        <p>\n            <code>PlatformPrincipal</code> and <code>PlatformCredential</code> are received from\n            the notification service.</p>\n        <ul>\n            <li>\n                <p>For <code>ADM</code>, <code>PlatformPrincipal</code> is <code>client id</code>\n                    and <code>PlatformCredential</code> is <code>client secret</code>.</p>\n            </li>\n            <li>\n                <p>For <code>Baidu</code>, <code>PlatformPrincipal</code> is <code>API key</code>\n                    and <code>PlatformCredential</code> is <code>secret key</code>.</p>\n            </li>\n            <li>\n                <p>For <code>APNS</code> and <code>APNS_SANDBOX</code>,\n                        <code>PlatformPrincipal</code> is <code>SSL certificate</code> and\n                        <code>PlatformCredential</code> is <code>private key</code>.</p>\n            </li>\n            <li>\n                <p>For <code>GCM</code> (Firebase Cloud Messaging), there is no\n                        <code>PlatformPrincipal</code> and the <code>PlatformCredential</code> is\n                        <code>API key</code>.</p>\n            </li>\n            <li>\n                <p>For <code>MPNS</code>, <code>PlatformPrincipal</code> is <code>TLS\n                        certificate</code> and <code>PlatformCredential</code> is <code>private\n                        key</code>.</p>\n            </li>\n            <li>\n                <p>For <code>WNS</code>, <code>PlatformPrincipal</code> is <code>Package Security\n                        Identifier</code> and <code>PlatformCredential</code> is <code>secret\n                        key</code>.</p>\n            </li>\n         </ul>\n        <p>You can use the returned <code>PlatformApplicationArn</code> as an attribute for the\n                <code>CreatePlatformEndpoint</code> action.</p>"
+                "smithy.api#documentation": "<p>Creates a platform application object for one of the supported push notification\n            services, such as APNS and GCM (Firebase Cloud Messaging), to which devices and mobile\n            apps may register. You must specify <code>PlatformPrincipal</code> and\n                <code>PlatformCredential</code> attributes when using the\n                <code>CreatePlatformApplication</code> action.</p>\n        <p>\n            <code>PlatformPrincipal</code> and <code>PlatformCredential</code> are received from\n            the notification service.</p>\n        <ul>\n            <li>\n                <p>For <code>ADM</code>, <code>PlatformPrincipal</code> is <code>client id</code>\n                    and <code>PlatformCredential</code> is <code>client secret</code>.</p>\n            </li>\n            <li>\n                <p>For <code>Baidu</code>, <code>PlatformPrincipal</code> is <code>API key</code>\n                    and <code>PlatformCredential</code> is <code>secret key</code>.</p>\n            </li>\n            <li>\n                <p>For <code>APNS</code> and <code>APNS_SANDBOX</code> using certificate credentials,\n                        <code>PlatformPrincipal</code> is <code>SSL certificate</code> and\n                        <code>PlatformCredential</code> is <code>private key</code>.</p>\n            </li>\n            <li>\n                <p>For <code>APNS</code> and <code>APNS_SANDBOX</code> using token credentials,\n                    <code>PlatformPrincipal</code> is <code>signing key ID</code> and\n                    <code>PlatformCredential</code> is <code>signing key</code>.</p>\n            </li>\n            <li>\n                <p>For <code>GCM</code> (Firebase Cloud Messaging), there is no\n                        <code>PlatformPrincipal</code> and the <code>PlatformCredential</code> is\n                        <code>API key</code>.</p>\n            </li>\n            <li>\n                <p>For <code>MPNS</code>, <code>PlatformPrincipal</code> is <code>TLS\n                        certificate</code> and <code>PlatformCredential</code> is <code>private\n                        key</code>.</p>\n            </li>\n            <li>\n                <p>For <code>WNS</code>, <code>PlatformPrincipal</code> is <code>Package Security\n                        Identifier</code> and <code>PlatformCredential</code> is <code>secret\n                        key</code>.</p>\n            </li>\n         </ul>\n        <p>You can use the returned <code>PlatformApplicationArn</code> as an attribute for the\n                <code>CreatePlatformEndpoint</code> action.</p>"
             }
         },
         "com.amazonaws.sns#CreatePlatformApplicationInput": {
@@ -576,7 +654,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds a destination phone number to an account in the SMS sandbox and sends a\n            one-time password (OTP) to that phone number.</p>\n        <p>When you start using Amazon SNS to send SMS messages, your account is in the\n                <i>SMS sandbox</i>. The SMS sandbox provides a safe environment for \n                you to try Amazon SNS features without risking your reputation as an SMS sender. While your \n                account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send \n                SMS messages only to verified destination phone numbers. For more information, including how to \n                move out of the sandbox to send messages without restrictions, \n                see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html\">SMS sandbox</a> in \n                the <i>Amazon SNS Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Adds a destination phone number to an Amazon Web Services account in the SMS sandbox and sends a\n            one-time password (OTP) to that phone number.</p>\n        <p>When you start using Amazon SNS to send SMS messages, your Amazon Web Services account is in the\n                <i>SMS sandbox</i>. The SMS sandbox provides a safe environment for \n                you to try Amazon SNS features without risking your reputation as an SMS sender. While your \n                Amazon Web Services account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send \n                SMS messages only to verified destination phone numbers. For more information, including how to \n                move out of the sandbox to send messages without restrictions, \n                see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html\">SMS sandbox</a> in \n                the <i>Amazon SNS Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.sns#CreateSMSSandboxPhoneNumberInput": {
@@ -788,7 +866,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an account's verified or pending phone number from the SMS sandbox.</p>\n        <p>When you start using Amazon SNS to send SMS messages, your account is in the\n                <i>SMS sandbox</i>. The SMS sandbox provides a safe environment for \n                you to try Amazon SNS features without risking your reputation as an SMS sender. While your \n                account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send \n                SMS messages only to verified destination phone numbers. For more information, including how to \n                move out of the sandbox to send messages without restrictions, \n                see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html\">SMS sandbox</a> in \n                the <i>Amazon SNS Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Deletes an Amazon Web Services account's verified or pending phone number from the SMS sandbox.</p>\n        <p>When you start using Amazon SNS to send SMS messages, your Amazon Web Services account is in the\n                <i>SMS sandbox</i>. The SMS sandbox provides a safe environment for \n                you to try Amazon SNS features without risking your reputation as an SMS sender. While your \n                Amazon Web Services account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send \n                SMS messages only to verified destination phone numbers. For more information, including how to \n                move out of the sandbox to send messages without restrictions, \n                see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html\">SMS sandbox</a> in \n                the <i>Amazon SNS Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.sns#DeleteSMSSandboxPhoneNumberInput": {
@@ -851,13 +929,30 @@
                 }
             }
         },
+        "com.amazonaws.sns#EmptyBatchRequestException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.sns#String"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "EmptyBatchRequest",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The batch request doesn't contain any entries.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.sns#Endpoint": {
             "type": "structure",
             "members": {
                 "EndpointArn": {
                     "target": "com.amazonaws.sns#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>EndpointArn for mobile app and device.</p>"
+                        "smithy.api#documentation": "<p>The <code>EndpointArn</code> for mobile app and device.</p>"
                     }
                 },
                 "Attributes": {
@@ -868,7 +963,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Endpoint for mobile app and device.</p>"
+                "smithy.api#documentation": "<p>The endpoint for mobile app and device.</p>"
             }
         },
         "com.amazonaws.sns#Endpoint2": {
@@ -906,7 +1001,7 @@
                     "code": "FilterPolicyLimitExceeded",
                     "httpResponseCode": 403
                 },
-                "smithy.api#documentation": "<p>Indicates that the number of filter polices in your account exceeds the limit. To\n            add more filter polices, submit an SNS Limit Increase case in the Amazon Web Services Support\n            Center.</p>",
+                "smithy.api#documentation": "<p>Indicates that the number of filter polices in your Amazon Web Services account exceeds the limit. To\n            add more filter polices, submit an Amazon SNS Limit Increase case in the Amazon Web Services Support\n            Center.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
             }
@@ -1013,7 +1108,7 @@
                 "Attributes": {
                     "target": "com.amazonaws.sns#MapStringToString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Attributes include the following:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>EventEndpointCreated</code> – Topic ARN to which EndpointCreated\n                    event notifications should be sent.</p>\n            </li>\n            <li>\n                <p>\n                    <code>EventEndpointDeleted</code> – Topic ARN to which EndpointDeleted\n                    event notifications should be sent.</p>\n            </li>\n            <li>\n                <p>\n                    <code>EventEndpointUpdated</code> – Topic ARN to which EndpointUpdate\n                    event notifications should be sent.</p>\n            </li>\n            <li>\n                <p>\n                    <code>EventDeliveryFailure</code> – Topic ARN to which DeliveryFailure\n                    event notifications should be sent upon Direct Publish delivery failure\n                    (permanent) to one of the application's endpoints.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Attributes include the following:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>AppleCertificateExpiryDate</code> – The expiry date of the SSL certificate used to configure certificate-based authentication.</p>\n            </li>\n            <li>\n                <p>\n                    <code>ApplePlatformTeamID</code> – The Apple developer account ID used to configure token-based authentication.</p>\n            </li>\n            <li>\n                <p>\n                    <code>ApplePlatformBundleID</code> – The app identifier used to configure token-based authentication.</p>\n            </li>\n            <li>\n                <p>\n                    <code>EventEndpointCreated</code> – Topic ARN to which EndpointCreated\n                    event notifications should be sent.</p>\n            </li>\n            <li>\n                <p>\n                    <code>EventEndpointDeleted</code> – Topic ARN to which EndpointDeleted\n                    event notifications should be sent.</p>\n            </li>\n            <li>\n                <p>\n                    <code>EventEndpointUpdated</code> – Topic ARN to which EndpointUpdate\n                    event notifications should be sent.</p>\n            </li>\n            <li>\n                <p>\n                    <code>EventDeliveryFailure</code> – Topic ARN to which DeliveryFailure\n                    event notifications should be sent upon Direct Publish delivery failure\n                    (permanent) to one of the application's endpoints.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -1044,7 +1139,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the settings for sending SMS messages from your account.</p>\n        <p>These settings are set with the <code>SetSMSAttributes</code> action.</p>"
+                "smithy.api#documentation": "<p>Returns the settings for sending SMS messages from your Amazon Web Services account.</p>\n        <p>These settings are set with the <code>SetSMSAttributes</code> action.</p>"
             }
         },
         "com.amazonaws.sns#GetSMSAttributesInput": {
@@ -1095,7 +1190,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the SMS sandbox status for the calling account in the target Region.</p>\n        <p>When you start using Amazon SNS to send SMS messages, your account is in the\n                <i>SMS sandbox</i>. The SMS sandbox provides a safe environment for \n                you to try Amazon SNS features without risking your reputation as an SMS sender. While your \n                account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send \n                SMS messages only to verified destination phone numbers. For more information, including how to \n                move out of the sandbox to send messages without restrictions, \n                see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html\">SMS sandbox</a> in \n                the <i>Amazon SNS Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Retrieves the SMS sandbox status for the calling Amazon Web Services account in the target Amazon Web Services Region.</p>\n        <p>When you start using Amazon SNS to send SMS messages, your Amazon Web Services account is in the\n                <i>SMS sandbox</i>. The SMS sandbox provides a safe environment for \n                you to try Amazon SNS features without risking your reputation as an SMS sender. While your \n                Amazon Web Services account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send \n                SMS messages only to verified destination phone numbers. For more information, including how to \n                move out of the sandbox to send messages without restrictions, \n                see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html\">SMS sandbox</a> in \n                the <i>Amazon SNS Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.sns#GetSMSSandboxAccountStatusInput": {
@@ -1108,7 +1203,7 @@
                 "IsInSandbox": {
                     "target": "com.amazonaws.sns#boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the calling account is in the SMS sandbox.</p>",
+                        "smithy.api#documentation": "<p>Indicates whether the calling Amazon Web Services account is in the SMS sandbox.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1161,7 +1256,7 @@
                 "Attributes": {
                     "target": "com.amazonaws.sns#SubscriptionAttributesMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of the subscription's attributes. Attributes in this map include the\n            following:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>ConfirmationWasAuthenticated</code> – <code>true</code> if the\n                    subscription confirmation request was authenticated.</p>\n            </li>\n            <li>\n                <p>\n                    <code>DeliveryPolicy</code> – The JSON serialization of the\n                    subscription's delivery policy.</p>\n            </li>\n            <li>\n                <p>\n                    <code>EffectiveDeliveryPolicy</code> – The JSON serialization of the\n                    effective delivery policy that takes into account the topic delivery policy and\n                    account system defaults.</p>\n            </li>\n            <li>\n                <p>\n                    <code>FilterPolicy</code> – The filter policy JSON that is assigned to\n                    the subscription. For more information, see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-message-filtering.html\">Amazon SNS Message\n                        Filtering</a> in the <i>Amazon SNS Developer Guide</i>.</p>\n            </li>\n            <li>\n                <p>\n                    <code>Owner</code> – The account ID of the subscription's\n                    owner.</p>\n            </li>\n            <li>\n                <p>\n                    <code>PendingConfirmation</code> – <code>true</code> if the subscription\n                    hasn't been confirmed. To confirm a pending subscription, call the\n                        <code>ConfirmSubscription</code> action with a confirmation token.</p>\n            </li>\n            <li>\n                <p>\n                    <code>RawMessageDelivery</code> – <code>true</code> if raw message\n                    delivery is enabled for the subscription. Raw messages are free of JSON\n                    formatting and can be sent to HTTP/S and Amazon SQS endpoints.</p>\n            </li>\n            <li>\n                <p>\n                  <code>RedrivePolicy</code> – When specified, sends undeliverable messages to the specified Amazon SQS dead-letter queue. \n    Messages that can't be delivered due to client errors (for example, when the subscribed endpoint is unreachable)\n    or server errors (for example, when the service that powers the subscribed endpoint becomes unavailable) are held \n    in the dead-letter queue for further analysis or reprocessing.</p>\n            </li>\n            <li>\n                <p>\n                    <code>SubscriptionArn</code> – The subscription's ARN.</p>\n            </li>\n            <li>\n                <p>\n                    <code>TopicArn</code> – The topic ARN that the subscription is associated\n                    with.</p>\n            </li>\n         </ul>\n        \n        <p>The following attribute applies only to Amazon Kinesis Data Firehose delivery stream subscriptions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SubscriptionRoleArn</code> – The ARN of the IAM role that has the following:</p>\n                <ul>\n                  <li>\n                        <p>Permission to write to the Kinesis Data Firehose delivery stream</p>\n                    </li>\n                  <li>\n                        <p>Amazon SNS listed as a trusted entity</p>\n                    </li>\n               </ul>\n                <p>Specifying a valid ARN for this attribute is required for Kinesis Data Firehose delivery stream subscriptions. \n                For more information, see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-firehose-as-subscriber.html\">Fanout \n                    to Kinesis Data Firehose delivery streams</a> in the <i>Amazon SNS Developer Guide</i>.</p>\n                    </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A map of the subscription's attributes. Attributes in this map include the\n            following:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>ConfirmationWasAuthenticated</code> – <code>true</code> if the\n                    subscription confirmation request was authenticated.</p>\n            </li>\n            <li>\n                <p>\n                    <code>DeliveryPolicy</code> – The JSON serialization of the\n                    subscription's delivery policy.</p>\n            </li>\n            <li>\n                <p>\n                    <code>EffectiveDeliveryPolicy</code> – The JSON serialization of the\n                    effective delivery policy that takes into account the topic delivery policy and\n                    account system defaults.</p>\n            </li>\n            <li>\n                <p>\n                    <code>FilterPolicy</code> – The filter policy JSON that is assigned to\n                    the subscription. For more information, see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-message-filtering.html\">Amazon SNS Message\n                        Filtering</a> in the <i>Amazon SNS Developer Guide</i>.</p>\n            </li>\n            <li>\n                <p>\n                    <code>Owner</code> – The Amazon Web Services account ID of the subscription's\n                    owner.</p>\n            </li>\n            <li>\n                <p>\n                    <code>PendingConfirmation</code> – <code>true</code> if the subscription\n                    hasn't been confirmed. To confirm a pending subscription, call the\n                        <code>ConfirmSubscription</code> action with a confirmation token.</p>\n            </li>\n            <li>\n                <p>\n                    <code>RawMessageDelivery</code> – <code>true</code> if raw message\n                    delivery is enabled for the subscription. Raw messages are free of JSON\n                    formatting and can be sent to HTTP/S and Amazon SQS endpoints.</p>\n            </li>\n            <li>\n                <p>\n                  <code>RedrivePolicy</code> – When specified, sends undeliverable messages to the specified Amazon SQS dead-letter queue. \n    Messages that can't be delivered due to client errors (for example, when the subscribed endpoint is unreachable)\n    or server errors (for example, when the service that powers the subscribed endpoint becomes unavailable) are held \n    in the dead-letter queue for further analysis or reprocessing.</p>\n            </li>\n            <li>\n                <p>\n                    <code>SubscriptionArn</code> – The subscription's ARN.</p>\n            </li>\n            <li>\n                <p>\n                    <code>TopicArn</code> – The topic ARN that the subscription is associated\n                    with.</p>\n            </li>\n         </ul>\n        \n        <p>The following attribute applies only to Amazon Kinesis Data Firehose delivery stream subscriptions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SubscriptionRoleArn</code> – The ARN of the IAM role that has the following:</p>\n                <ul>\n                  <li>\n                        <p>Permission to write to the Kinesis Data Firehose delivery stream</p>\n                    </li>\n                  <li>\n                        <p>Amazon SNS listed as a trusted entity</p>\n                    </li>\n               </ul>\n                <p>Specifying a valid ARN for this attribute is required for Kinesis Data Firehose delivery stream subscriptions. \n                For more information, see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-firehose-as-subscriber.html\">Fanout \n                    to Kinesis Data Firehose delivery streams</a> in the <i>Amazon SNS Developer Guide</i>.</p>\n                    </li>\n         </ul>"
                     }
                 }
             },
@@ -1219,7 +1314,7 @@
                 "Attributes": {
                     "target": "com.amazonaws.sns#TopicAttributesMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of the topic's attributes. Attributes in this map include the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>DeliveryPolicy</code> – The JSON serialization of the topic's\n                    delivery policy.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DisplayName</code> – The human-readable name used in the\n                        <code>From</code> field for notifications to <code>email</code> and\n                        <code>email-json</code> endpoints.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Owner</code> – The account ID of the topic's owner.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Policy</code> – The JSON serialization of the topic's access\n                    control policy.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SubscriptionsConfirmed</code> – The number of confirmed\n                    subscriptions for the topic.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SubscriptionsDeleted</code> – The number of deleted subscriptions\n                    for the topic.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SubscriptionsPending</code> – The number of subscriptions pending\n                    confirmation for the topic.</p>\n            </li>\n            <li>\n                <p>\n                  <code>TopicArn</code> – The topic's ARN.</p>\n            </li>\n            <li>\n                <p>\n                  <code>EffectiveDeliveryPolicy</code> – The JSON serialization of the\n                    effective delivery policy, taking system defaults into account.</p>\n            </li>\n         </ul>\n        \n        <p>The following attribute applies only to <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html\">server-side-encryption</a>:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>KmsMasterKeyId</code> - The ID of an Amazon Web Services managed customer master key\n                    (CMK) for Amazon SNS or a custom CMK. For more information, see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms\">Key\n                        Terms</a>. For more examples, see <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters\">KeyId</a> in the <i>Key Management Service API\n                        Reference</i>.</p>\n            </li>\n         </ul>\n        \n        \n        <p>The following attributes apply only to <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html\">FIFO topics</a>:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>FifoTopic</code> – When this is set to <code>true</code>, a FIFO\n                topic is created.</p>\n            </li>\n            <li>\n               <p>\n                    <code>ContentBasedDeduplication</code> – Enables content-based deduplication for\n                    FIFO topics.</p>\n               \n                <ul>\n                  <li>\n                        <p>By default, <code>ContentBasedDeduplication</code> is set to <code>false</code>.\n                            If you create a FIFO topic and this attribute is <code>false</code>, you must\n                            specify a value for the <code>MessageDeduplicationId</code> parameter for the\n                            <a href=\"https://docs.aws.amazon.com/sns/latest/api/API_Publish.html\">Publish</a> action. </p>\n                    </li>\n                  <li>\n                        <p>When you set <code>ContentBasedDeduplication</code> to <code>true</code>, \n                            Amazon SNS uses a SHA-256 hash to generate the <code>MessageDeduplicationId</code> using \n                            the body of the message (but not the attributes of the message).</p>\n                        <p>(Optional) To override the generated value, you can specify a value\n                            for the <code>MessageDeduplicationId</code> parameter for the <code>Publish</code>\n                            action.</p>\n                     </li>\n               </ul>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A map of the topic's attributes. Attributes in this map include the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>DeliveryPolicy</code> – The JSON serialization of the topic's\n                    delivery policy.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DisplayName</code> – The human-readable name used in the\n                        <code>From</code> field for notifications to <code>email</code> and\n                        <code>email-json</code> endpoints.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Owner</code> – The Amazon Web Services account ID of the topic's owner.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Policy</code> – The JSON serialization of the topic's access\n                    control policy.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SubscriptionsConfirmed</code> – The number of confirmed\n                    subscriptions for the topic.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SubscriptionsDeleted</code> – The number of deleted subscriptions\n                    for the topic.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SubscriptionsPending</code> – The number of subscriptions pending\n                    confirmation for the topic.</p>\n            </li>\n            <li>\n                <p>\n                  <code>TopicArn</code> – The topic's ARN.</p>\n            </li>\n            <li>\n                <p>\n                  <code>EffectiveDeliveryPolicy</code> – The JSON serialization of the\n                    effective delivery policy, taking system defaults into account.</p>\n            </li>\n         </ul>\n        \n        <p>The following attribute applies only to <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html\">server-side-encryption</a>:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>KmsMasterKeyId</code> - The ID of an Amazon Web Services managed customer master key\n                    (CMK) for Amazon SNS or a custom CMK. For more information, see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms\">Key\n                        Terms</a>. For more examples, see <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters\">KeyId</a> in the <i>Key Management Service API\n                        Reference</i>.</p>\n            </li>\n         </ul>\n        \n        \n        <p>The following attributes apply only to <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html\">FIFO topics</a>:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>FifoTopic</code> – When this is set to <code>true</code>, a FIFO\n                topic is created.</p>\n            </li>\n            <li>\n               <p>\n                    <code>ContentBasedDeduplication</code> – Enables content-based deduplication for\n                    FIFO topics.</p>\n               \n                <ul>\n                  <li>\n                        <p>By default, <code>ContentBasedDeduplication</code> is set to <code>false</code>.\n                            If you create a FIFO topic and this attribute is <code>false</code>, you must\n                            specify a value for the <code>MessageDeduplicationId</code> parameter for the\n                            <a href=\"https://docs.aws.amazon.com/sns/latest/api/API_Publish.html\">Publish</a> action. </p>\n                    </li>\n                  <li>\n                        <p>When you set <code>ContentBasedDeduplication</code> to <code>true</code>, \n                            Amazon SNS uses a SHA-256 hash to generate the <code>MessageDeduplicationId</code> using \n                            the body of the message (but not the attributes of the message).</p>\n                        <p>(Optional) To override the generated value, you can specify a value\n                            for the <code>MessageDeduplicationId</code> parameter for the <code>Publish</code>\n                            action.</p>\n                     </li>\n               </ul>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -1242,6 +1337,23 @@
                 "smithy.api#documentation": "<p>Indicates an internal service error.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.sns#InvalidBatchEntryIdException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.sns#String"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidBatchEntryId",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The <code>Id</code> of a batch entry in a batch request doesn't abide by the specification. </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
             }
         },
         "com.amazonaws.sns#InvalidParameterException": {
@@ -1267,7 +1379,7 @@
                 "message": {
                     "target": "com.amazonaws.sns#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parameter value is invalid.</p>"
+                        "smithy.api#documentation": "<p>The parameter of an entry in a request doesn't abide by the specification. </p>"
                     }
                 }
             },
@@ -1276,7 +1388,7 @@
                     "code": "ParameterValueInvalid",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>Indicates that a request parameter does not comply with the associated\n            constraints.</p>",
+                "smithy.api#documentation": "<p>Indicates that a request parameter does not comply with the associated constraints.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -1581,7 +1693,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the calling account's dedicated origination numbers and their metadata. For\n            more information about origination numbers, see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/channels-sms-originating-identities-origination-numbers.html\">Origination numbers</a> in the <i>Amazon SNS Developer\n            Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Lists the calling Amazon Web Services account's dedicated origination numbers and their metadata. For\n            more information about origination numbers, see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/channels-sms-originating-identities-origination-numbers.html\">Origination numbers</a> in the <i>Amazon SNS Developer\n            Guide</i>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1776,7 +1888,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the calling account's current verified and pending destination phone numbers\n            in the SMS sandbox.</p>\n        <p>When you start using Amazon SNS to send SMS messages, your account is in the\n                <i>SMS sandbox</i>. The SMS sandbox provides a safe environment for \n                you to try Amazon SNS features without risking your reputation as an SMS sender. While your \n                account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send \n                SMS messages only to verified destination phone numbers. For more information, including how to \n                move out of the sandbox to send messages without restrictions, \n                see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html\">SMS sandbox</a> in \n                the <i>Amazon SNS Developer Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Lists the calling Amazon Web Services account's current verified and pending destination phone numbers\n            in the SMS sandbox.</p>\n        <p>When you start using Amazon SNS to send SMS messages, your Amazon Web Services account is in the\n                <i>SMS sandbox</i>. The SMS sandbox provides a safe environment for \n                you to try Amazon SNS features without risking your reputation as an SMS sender. While your \n                Amazon Web Services account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send \n                SMS messages only to verified destination phone numbers. For more information, including how to \n                move out of the sandbox to send messages without restrictions, \n                see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html\">SMS sandbox</a> in \n                the <i>Amazon SNS Developer Guide</i>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -2128,7 +2240,7 @@
                 "StringValue": {
                     "target": "com.amazonaws.sns#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Strings are Unicode with UTF8 binary encoding. For a list of code values, see <a href=\"https://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters\">ASCII Printable\n                Characters</a>.</p>"
+                        "smithy.api#documentation": "<p>Strings are Unicode with UTF8 binary encoding. For a list of code values, see <a href=\"https://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters\">ASCII Printable\n            Characters</a>.</p>"
                     }
                 },
                 "BinaryValue": {
@@ -2139,7 +2251,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The user-specified message attribute value. For string data types, the value attribute\n            has the same restrictions on the content as the message body. For more information, see\n                <a href=\"https://docs.aws.amazon.com/sns/latest/api/API_Publish.html\">Publish</a>.</p>\n        <p>Name, type, and value must not be empty or null. In addition, the message body should\n            not be empty or null. All parts of the message attribute, including name, type, and\n            value, are included in the message size restriction, which is currently 256 KB (262,144\n            bytes). For more information, see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/SNSMessageAttributes.html\">Amazon SNS message attributes</a> and\n                <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sms_publish-to-phone.html\">Publishing\n                to a mobile phone</a> in the <i>Amazon SNS Developer Guide.</i>\n         </p>"
+                "smithy.api#documentation": "<p>The user-specified message attribute value. For string data types, the value attribute\n            has the same restrictions on the content as the message body. For more information, see\n            <a href=\"https://docs.aws.amazon.com/sns/latest/api/API_Publish.html\">Publish</a>.</p>\n        <p>Name, type, and value must not be empty or null. In addition, the message body should\n            not be empty or null. All parts of the message attribute, including name, type, and\n            value, are included in the message size restriction, which is currently 256 KB (262,144\n            bytes). For more information, see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/SNSMessageAttributes.html\">Amazon SNS message attributes</a> and\n            <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sms_publish-to-phone.html\">Publishing\n                to a mobile phone</a> in the <i>Amazon SNS Developer Guide.</i>\n         </p>"
             }
         },
         "com.amazonaws.sns#NotFoundException": {
@@ -2259,7 +2371,7 @@
                     "code": "OptedOut",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>Indicates that the specified phone number opted out of receiving SMS messages from\n            your account. You can't send SMS messages to phone numbers that opt out.</p>",
+                "smithy.api#documentation": "<p>Indicates that the specified phone number opted out of receiving SMS messages from\n            your Amazon Web Services account. You can't send SMS messages to phone numbers that opt out.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -2429,7 +2541,204 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sends a message to an Amazon SNS topic, a text message (SMS message) directly to a phone\n            number, or a message to a mobile platform endpoint (when you specify the\n                <code>TargetArn</code>).</p>\n        <p>If you send a message to a topic, Amazon SNS delivers the message to each endpoint that is\n            subscribed to the topic. The format of the message depends on the notification protocol\n            for each subscribed endpoint.</p>\n        <p>When a <code>messageId</code> is returned, the message has been saved and Amazon SNS\n            will attempt to deliver it shortly.</p>\n        <p>To use the <code>Publish</code> action for sending a message to a mobile endpoint,\n            such as an app on a Kindle device or mobile phone, you must specify the EndpointArn for\n            the TargetArn parameter. The EndpointArn is returned when making a call with the\n                <code>CreatePlatformEndpoint</code> action. </p>\n        <p>For more information about formatting messages, see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/mobile-push-send-custommessage.html\">Send Custom\n                Platform-Specific Payloads in Messages to Mobile Devices</a>. </p>\n        <important>\n            <p>You can publish messages only to topics and endpoints in the same Region.</p>\n        </important>"
+                "smithy.api#documentation": "<p>Sends a message to an Amazon SNS topic, a text message (SMS message) directly to a phone\n            number, or a message to a mobile platform endpoint (when you specify the\n                <code>TargetArn</code>).</p>\n        <p>If you send a message to a topic, Amazon SNS delivers the message to each endpoint that is\n            subscribed to the topic. The format of the message depends on the notification protocol\n            for each subscribed endpoint.</p>\n        <p>When a <code>messageId</code> is returned, the message is saved and Amazon SNS\n            immediately deliverers it to subscribers.</p>\n        <p>To use the <code>Publish</code> action for publishing a message to a mobile endpoint,\n            such as an app on a Kindle device or mobile phone, you must specify the EndpointArn for\n            the TargetArn parameter. The EndpointArn is returned when making a call with the\n                <code>CreatePlatformEndpoint</code> action. </p>\n        <p>For more information about formatting messages, see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/mobile-push-send-custommessage.html\">Send Custom\n                Platform-Specific Payloads in Messages to Mobile Devices</a>. </p>\n        <important>\n            <p>You can publish messages only to topics and endpoints in the same Amazon Web Services Region.</p>\n        </important>"
+            }
+        },
+        "com.amazonaws.sns#PublishBatch": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sns#PublishBatchInput"
+            },
+            "output": {
+                "target": "com.amazonaws.sns#PublishBatchResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sns#AuthorizationErrorException"
+                },
+                {
+                    "target": "com.amazonaws.sns#BatchEntryIdsNotDistinctException"
+                },
+                {
+                    "target": "com.amazonaws.sns#BatchRequestTooLongException"
+                },
+                {
+                    "target": "com.amazonaws.sns#EmptyBatchRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sns#EndpointDisabledException"
+                },
+                {
+                    "target": "com.amazonaws.sns#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.sns#InvalidBatchEntryIdException"
+                },
+                {
+                    "target": "com.amazonaws.sns#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.sns#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.sns#InvalidSecurityException"
+                },
+                {
+                    "target": "com.amazonaws.sns#KMSAccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.sns#KMSDisabledException"
+                },
+                {
+                    "target": "com.amazonaws.sns#KMSInvalidStateException"
+                },
+                {
+                    "target": "com.amazonaws.sns#KMSNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.sns#KMSOptInRequired"
+                },
+                {
+                    "target": "com.amazonaws.sns#KMSThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.sns#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.sns#PlatformApplicationDisabledException"
+                },
+                {
+                    "target": "com.amazonaws.sns#TooManyEntriesInBatchRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Publishes up to ten messages to the specified topic. This is a batch version of <code>Publish</code>. For FIFO topics, multiple messages within a single batch are published in the order they are sent, and messages are deduplicated within the batch and across batches for 5 minutes.</p>\n        <p>The result of publishing each message is reported individually in the response. Because the batch request can result in a combination of successful and unsuccessful actions, you should check for batch errors even when the call returns an HTTP status code of <code>200</code>.</p>\n        <p>The maximum allowed individual message size and the maximum total payload size (the sum of the individual lengths of all of the batched messages) are both 256 KB (262,144 bytes). </p> \n            <p>Some actions take lists of parameters. These lists are specified using the <code>param.n</code> notation. Values of <code>n</code> are integers starting from 1. For example, a parameter list with two elements looks like this: </p>\n            <p>&AttributeName.1=first</p>\n            <p>&AttributeName.2=second</p>  \n        <p>If you send a batch message to a topic, Amazon SNS publishes the batch message to each endpoint that is\n            subscribed to the topic. The format of the batch message depends on the notification protocol\n            for each subscribed endpoint.</p>\n        <p>When a <code>messageId</code> is returned, the batch message is saved and Amazon SNS immediately delivers the message to subscribers.</p>"
+            }
+        },
+        "com.amazonaws.sns#PublishBatchInput": {
+            "type": "structure",
+            "members": {
+                "TopicArn": {
+                    "target": "com.amazonaws.sns#topicARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the topic you want to batch publish to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PublishBatchRequestEntries": {
+                    "target": "com.amazonaws.sns#PublishBatchRequestEntryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>PublishBatch</code> request entries to be sent to the SNS topic.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sns#PublishBatchRequestEntry": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.sns#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identifier for the message in this batch.</p>  \n        <note>\n            <p>The <code>Ids</code> of a batch request must be unique within a request. </p>\n            <p>This identifier can have up to 80 characters. The following characters are accepted: alphanumeric characters, hyphens(-), and underscores (_). </p>\n        </note>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.sns#message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The body of the message.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Subject": {
+                    "target": "com.amazonaws.sns#subject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subject of the batch message.</p>"
+                    }
+                },
+                "MessageStructure": {
+                    "target": "com.amazonaws.sns#messageStructure",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set <code>MessageStructure</code> to <code>json</code> if you want to send a different message for each protocol. For example, using one publish action, you can send a short message to your SMS subscribers and a longer message to your email subscribers. If you set <code>MessageStructure</code> to <code>json</code>, the value of the <code>Message</code> parameter must: </p>                \n        <ul>\n            <li>\n               <p>be a syntactically valid JSON object; and</p>\n            </li>\n            <li>\n               <p>contain at least a top-level JSON key of \"default\" with a value that is a string.</p> \n            </li>\n         </ul>\n        <p>You can define other top-level keys that define the message you want to send to a\n            specific transport protocol (e.g. http). </p>"
+                    }
+                },
+                "MessageAttributes": {
+                    "target": "com.amazonaws.sns#MessageAttributeMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Each message attribute consists of a <code>Name</code>, <code>Type</code>, and <code>Value</code>. For more information, see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-message-attributes.html\">Amazon SNS message attributes</a> in the Amazon SNS Developer Guide.</p>"
+                    }
+                },
+                "MessageDeduplicationId": {
+                    "target": "com.amazonaws.sns#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This parameter applies only to FIFO (first-in-first-out) topics.</p>\n        <p>The token used for deduplication of messages within a 5-minute minimum deduplication interval. If a message with a particular <code>MessageDeduplicationId</code> is sent successfully, subsequent messages with the same <code>MessageDeduplicationId</code> are accepted successfully but aren't delivered.</p>\n        <ul>\n            <li>\n               <p>Every message must have a unique <code>MessageDeduplicationId</code>.</p>\n                <ul>\n                  <li>\n                     <p>You may provide a <code>MessageDeduplicationId</code> explicitly.</p>\n                  </li>\n                  <li>\n                     <p>If you aren't able to provide a <code>MessageDeduplicationId</code> and you enable <code>ContentBasedDeduplication</code> for your topic, Amazon SNS uses a SHA-256 hash to generate the <code>MessageDeduplicationId</code> using the body of the message (but not the attributes of the message).</p>\n                  </li>\n                  <li>\n                     <p>If you don't provide a <code>MessageDeduplicationId</code> and the topic doesn't have <code>ContentBasedDeduplication</code> set, the action fails with an error.</p>\n                  </li>\n                  <li>\n                     <p>If the topic has a <code>ContentBasedDeduplication</code> set, your\n                                <code>MessageDeduplicationId</code> overrides the generated one. </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>When <code>ContentBasedDeduplication</code> is in effect, messages with identical content sent within the deduplication interval are treated as duplicates and only one copy of the message is delivered.</p>\n            </li>\n            <li>\n               <p>If you send one message with <code>ContentBasedDeduplication</code> enabled, and then another\n                    message with a <code>MessageDeduplicationId</code> that is the same as the one\n                    generated for the first <code>MessageDeduplicationId</code>, the two messages\n                    are treated as duplicates and only one copy of the message is delivered. </p>\n            </li>\n         </ul> \n        <note>\n            <p>The <code>MessageDeduplicationId</code> is available to the consumer of the message (this can be useful for troubleshooting delivery issues).</p>\n            <p>If a message is sent successfully but the acknowledgement is lost and the message is resent with the same <code>MessageDeduplicationId</code> after the deduplication interval, Amazon SNS can't detect duplicate messages. </p>\n            <p>Amazon SNS continues to keep track of the message deduplication ID even after the message is received and deleted. </p>\n        </note>\n        <p>The length of <code>MessageDeduplicationId</code> is 128 characters.</p>\n        <p>\n            <code>MessageDeduplicationId</code> can contain alphanumeric characters <code>(a-z, A-Z, 0-9)</code> and punctuation <code>(!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~)</code>.</p>"
+                    }
+                },
+                "MessageGroupId": {
+                    "target": "com.amazonaws.sns#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This parameter applies only to FIFO (first-in-first-out) topics.</p>\n        <p>The tag that specifies that a message belongs to a specific message group. Messages that belong to the same message group are processed in a FIFO manner (however, messages in different message groups might be processed out of order). To interleave multiple ordered streams within a single topic, use <code>MessageGroupId</code> values (for example, session data for multiple users). In this scenario, multiple consumers can process the topic, but the session data of each user is processed in a FIFO fashion. </p>\n        <p>You must associate a non-empty <code>MessageGroupId</code> with a message. If you don't provide a <code>MessageGroupId</code>, the action fails. </p>\n        <p>The length of <code>MessageGroupId</code> is 128 characters.</p>\n        <p>\n            <code>MessageGroupId</code> can contain alphanumeric characters <code>(a-z, A-Z, 0-9)</code> and punctuation <code>(!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~)</code>.</p>      \n        \n        \n        <important>\n            <p>\n               <code>MessageGroupId</code> is required for FIFO topics. You can't use it for standard topics. </p>\n         </important>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the details of a single Amazon SNS message along with an <code>Id</code> that identifies a message within the batch. </p>"
+            }
+        },
+        "com.amazonaws.sns#PublishBatchRequestEntryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sns#PublishBatchRequestEntry"
+            }
+        },
+        "com.amazonaws.sns#PublishBatchResponse": {
+            "type": "structure",
+            "members": {
+                "Successful": {
+                    "target": "com.amazonaws.sns#PublishBatchResultEntryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of successful <code>PublishBatch</code> responses.</p>"
+                    }
+                },
+                "Failed": {
+                    "target": "com.amazonaws.sns#BatchResultErrorEntryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of failed <code>PublishBatch</code> responses. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sns#PublishBatchResultEntry": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.sns#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>Id</code> of an entry in a batch request.</p>"
+                    }
+                },
+                "MessageId": {
+                    "target": "com.amazonaws.sns#messageId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identifier for the message.</p>"
+                    }
+                },
+                "SequenceNumber": {
+                    "target": "com.amazonaws.sns#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This parameter applies only to FIFO (first-in-first-out) topics.</p>\n        <p>The large, non-consecutive number that Amazon SNS assigns to each message.</p>\n        <p>The length of <code>SequenceNumber</code> is 128 bits. <code>SequenceNumber</code> continues to increase for a particular <code>MessageGroupId</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Encloses data related to a successful message in a batch request for topic.</p>"
+            }
+        },
+        "com.amazonaws.sns#PublishBatchResultEntryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sns#PublishBatchResultEntry"
             }
         },
         "com.amazonaws.sns#PublishInput": {
@@ -2481,13 +2790,13 @@
                 "MessageDeduplicationId": {
                     "target": "com.amazonaws.sns#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>This parameter applies only to FIFO (first-in-first-out) topics. The\n                <code>MessageDeduplicationId</code> can contain up to 128 alphanumeric characters\n            (a-z, A-Z, 0-9) and punctuation\n            <code>(!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~)</code>.</p>\n        <p>Every message must have a unique <code>MessageDeduplicationId</code>, which is a token\n            used for deduplication of sent messages. If a message with a particular\n                <code>MessageDeduplicationId</code> is sent successfully, any message sent with the\n            same <code>MessageDeduplicationId</code> during the 5-minute deduplication interval is\n            treated as a duplicate. </p>\n        <p>If the topic has <code>ContentBasedDeduplication</code> set, the system generates a\n                <code>MessageDeduplicationId</code> based on the contents of the message. Your\n                <code>MessageDeduplicationId</code> overrides the generated one.</p>"
+                        "smithy.api#documentation": "<p>This parameter applies only to FIFO (first-in-first-out) topics. The\n                <code>MessageDeduplicationId</code> can contain up to 128 alphanumeric characters\n            <code>(a-z, A-Z, 0-9)</code> and punctuation\n            <code>(!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~)</code>.</p>\n        <p>Every message must have a unique <code>MessageDeduplicationId</code>, which is a token\n            used for deduplication of sent messages. If a message with a particular\n                <code>MessageDeduplicationId</code> is sent successfully, any message sent with the\n            same <code>MessageDeduplicationId</code> during the 5-minute deduplication interval is\n            treated as a duplicate. </p>\n        <p>If the topic has <code>ContentBasedDeduplication</code> set, the system generates a\n                <code>MessageDeduplicationId</code> based on the contents of the message. Your\n                <code>MessageDeduplicationId</code> overrides the generated one.</p>"
                     }
                 },
                 "MessageGroupId": {
                     "target": "com.amazonaws.sns#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>This parameter applies only to FIFO (first-in-first-out) topics. The\n                <code>MessageGroupId</code> can contain up to 128 alphanumeric characters (a-z, A-Z,\n            0-9) and punctuation <code>(!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~)</code>.</p>\n        <p>The <code>MessageGroupId</code> is a tag that specifies that a message belongs to a\n            specific message group. Messages that belong to the same message group are processed in\n            a FIFO manner (however, messages in different message groups might be processed out of\n            order). Every message must include a <code>MessageGroupId</code>.</p>"
+                        "smithy.api#documentation": "<p>This parameter applies only to FIFO (first-in-first-out) topics. The\n            <code>MessageGroupId</code> can contain up to 128 alphanumeric characters\n            <code>(a-z, A-Z, 0-9)</code> and punctuation\n            <code>(!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~)</code>.</p>        \n        <p>The <code>MessageGroupId</code> is a tag that specifies that a message belongs to a\n            specific message group. Messages that belong to the same message group are processed in\n            a FIFO manner (however, messages in different message groups might be processed out of\n            order). Every message must include a <code>MessageGroupId</code>.</p>"
                     }
                 }
             },
@@ -2614,7 +2923,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A verified or pending destination phone number in the SMS sandbox.</p>\n        <p>When you start using Amazon SNS to send SMS messages, your account is in the\n                <i>SMS sandbox</i>. The SMS sandbox provides a safe environment for \n                you to try Amazon SNS features without risking your reputation as an SMS sender. While your \n                account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send \n                SMS messages only to verified destination phone numbers. For more information, including how to \n                move out of the sandbox to send messages without restrictions, \n                see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html\">SMS sandbox</a> in \n                the <i>Amazon SNS Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>A verified or pending destination phone number in the SMS sandbox.</p>\n        <p>When you start using Amazon SNS to send SMS messages, your Amazon Web Services account is in the\n                <i>SMS sandbox</i>. The SMS sandbox provides a safe environment for \n                you to try Amazon SNS features without risking your reputation as an SMS sender. While your \n                Amazon Web Services account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send \n                SMS messages only to verified destination phone numbers. For more information, including how to \n                move out of the sandbox to send messages without restrictions, \n                see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html\">SMS sandbox</a> in \n                the <i>Amazon SNS Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.sns#SMSSandboxPhoneNumberList": {
@@ -2720,7 +3029,7 @@
                 "Attributes": {
                     "target": "com.amazonaws.sns#MapStringToString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of the platform application attributes. Attributes in this map include the\n            following:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>PlatformCredential</code> – The credential received from the\n                    notification service. For <code>APNS</code> and <code>APNS_SANDBOX</code>,\n                        <code>PlatformCredential</code> is <code>private key</code>. For\n                        <code>GCM</code> (Firebase Cloud Messaging), <code>PlatformCredential</code>\n                    is <code>API key</code>. For <code>ADM</code>, <code>PlatformCredential</code>\n                    is <code>client secret</code>.</p>\n            </li>\n            <li>\n                <p>\n                    <code>PlatformPrincipal</code> – The principal received from the\n                    notification service. For <code>APNS</code> and <code>APNS_SANDBOX</code>,\n                        <code>PlatformPrincipal</code> is <code>SSL certificate</code>. For\n                        <code>GCM</code> (Firebase Cloud Messaging), there is no\n                        <code>PlatformPrincipal</code>. For <code>ADM</code>,\n                        <code>PlatformPrincipal</code> is <code>client id</code>.</p>\n            </li>\n            <li>\n                <p>\n                    <code>EventEndpointCreated</code> – Topic ARN to which\n                        <code>EndpointCreated</code> event notifications are sent.</p>\n            </li>\n            <li>\n                <p>\n                    <code>EventEndpointDeleted</code> – Topic ARN to which\n                        <code>EndpointDeleted</code> event notifications are sent.</p>\n            </li>\n            <li>\n                <p>\n                    <code>EventEndpointUpdated</code> – Topic ARN to which\n                        <code>EndpointUpdate</code> event notifications are sent.</p>\n            </li>\n            <li>\n                <p>\n                    <code>EventDeliveryFailure</code> – Topic ARN to which\n                        <code>DeliveryFailure</code> event notifications are sent upon Direct\n                    Publish delivery failure (permanent) to one of the application's\n                    endpoints.</p>\n            </li>\n            <li>\n                <p>\n                    <code>SuccessFeedbackRoleArn</code> – IAM role ARN used to give Amazon SNS\n                    write access to use CloudWatch Logs on your behalf.</p>\n            </li>\n            <li>\n                <p>\n                    <code>FailureFeedbackRoleArn</code> – IAM role ARN used to give Amazon SNS\n                    write access to use CloudWatch Logs on your behalf.</p>\n            </li>\n            <li>\n                <p>\n                    <code>SuccessFeedbackSampleRate</code> – Sample rate percentage (0-100)\n                    of successfully delivered messages.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>A map of the platform application attributes. Attributes in this map include the\n            following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>PlatformCredential</code> – The credential received from the notification service.</p> \n                <ul>\n                  <li>\n                     <p>For ADM, <code>PlatformCredential</code>is client secret.</p>\n                  </li>\n                  <li>\n                     <p>For Apple Services using certificate credentials, <code>PlatformCredential</code> is private key.</p>\n                  </li>\n                  <li>\n                     <p>For Apple Services using token credentials, <code>PlatformCredential</code> is signing key.</p>\n                  </li>\n                  <li>\n                     <p>For GCM (Firebase Cloud Messaging), <code>PlatformCredential</code> is API key. </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n        <ul>\n            <li>\n               <p>\n                  <code>PlatformPrincipal</code> – The principal received from the notification service.</p>  \n               <ul>\n                  <li>\n                     <p>For ADM, <code>PlatformPrincipal</code>is client id.</p>\n                  </li>\n                  <li>\n                     <p>For Apple Services using certificate credentials, <code>PlatformPrincipal</code> is SSL certificate.</p>\n                  </li>\n                  <li>\n                     <p>For Apple Services using token credentials, <code>PlatformPrincipal</code> is signing key ID.</p>\n                  </li>\n                  <li>\n                     <p>For GCM (Firebase Cloud Messaging), there is no <code>PlatformPrincipal</code>. </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n        <ul>\n            <li>\n                   <p>\n                    <code>EventEndpointCreated</code> – Topic ARN to which\n                        <code>EndpointCreated</code> event notifications are sent.</p>\n            </li>\n            <li>\n                <p>\n                    <code>EventEndpointDeleted</code> – Topic ARN to which\n                        <code>EndpointDeleted</code> event notifications are sent.</p>\n            </li>\n            <li>\n                <p>\n                    <code>EventEndpointUpdated</code> – Topic ARN to which\n                        <code>EndpointUpdate</code> event notifications are sent.</p>\n            </li>\n            <li>\n                <p>\n                    <code>EventDeliveryFailure</code> – Topic ARN to which\n                        <code>DeliveryFailure</code> event notifications are sent upon Direct\n                    Publish delivery failure (permanent) to one of the application's\n                    endpoints.</p>\n            </li>\n            <li>\n                <p>\n                    <code>SuccessFeedbackRoleArn</code> – IAM role ARN used to give Amazon SNS\n                    write access to use CloudWatch Logs on your behalf.</p>\n            </li>\n            <li>\n                <p>\n                    <code>FailureFeedbackRoleArn</code> – IAM role ARN used to give Amazon SNS\n                    write access to use CloudWatch Logs on your behalf.</p>\n            </li>\n            <li>\n                <p>\n                    <code>SuccessFeedbackSampleRate</code> – Sample rate percentage (0-100)\n                    of successfully delivered messages.</p>\n            </li>\n         </ul> \n        <p>The following attributes only apply to <code>APNs</code> token-based authentication:</p>  \n        <ul>\n            <li>\n               <p>\n                  <code>ApplePlatformTeamID</code> – The identifier that's assigned to your Apple developer account team.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ApplePlatformBundleID</code> – The bundle identifier that's assigned to your iOS app.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2761,7 +3070,7 @@
                 "attributes": {
                     "target": "com.amazonaws.sns#MapStringToString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default settings for sending SMS messages from your account. You can set values\n            for the following attribute names:</p>\n        <p>\n            <code>MonthlySpendLimit</code> – The maximum amount in USD that you are willing to spend\n            each month to send SMS messages. When Amazon SNS determines that sending an SMS message would\n            incur a cost that exceeds this limit, it stops sending SMS messages within\n            minutes.</p>\n        <important>\n            <p>Amazon SNS stops sending SMS messages within minutes of the limit being crossed. During\n                that interval, if you continue to send SMS messages, you will incur costs that\n                exceed your limit.</p>\n        </important>\n        <p>By default, the spend limit is set to the maximum allowed by Amazon SNS. If you want to\n            raise the limit, submit an <a href=\"https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase&limitType=service-code-sns\">SNS Limit Increase case</a>. For <b>New limit\n                value</b>, enter your desired monthly spend limit. In the <b>Use Case Description</b> field, explain that you are requesting\n            an SMS monthly spend limit increase.</p>\n        <p>\n            <code>DeliveryStatusIAMRole</code> – The ARN of the IAM role that allows Amazon SNS to write\n            logs about SMS deliveries in CloudWatch Logs. For each SMS message that you send, Amazon SNS\n            writes a log that includes the message price, the success or failure status, the reason\n            for failure (if the message failed), the message dwell time, and other\n            information.</p>\n        <p>\n            <code>DeliveryStatusSuccessSamplingRate</code> – The percentage of successful SMS\n            deliveries for which Amazon SNS will write logs in CloudWatch Logs. The value can be an\n            integer from 0 - 100. For example, to write logs only for failed deliveries, set this\n            value to <code>0</code>. To write logs for 10% of your successful deliveries, set it to\n                <code>10</code>.</p>\n        <p>\n            <code>DefaultSenderID</code> – A string, such as your business brand, that is displayed\n            as the sender on the receiving device. Support for sender IDs varies by country. The\n            sender ID can be 1 - 11 alphanumeric characters, and it must contain at least one\n            letter.</p>\n        <p>\n            <code>DefaultSMSType</code> – The type of SMS message that you will send by default. You\n            can assign the following values:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>Promotional</code> – (Default) Noncritical messages, such as marketing\n                    messages. Amazon SNS optimizes the message delivery to incur the lowest cost.</p>\n            </li>\n            <li>\n                <p>\n                    <code>Transactional</code> – Critical messages that support customer\n                    transactions, such as one-time passcodes for multi-factor authentication. Amazon\n                    SNS optimizes the message delivery to achieve the highest reliability.</p>\n            </li>\n         </ul>\n        <p>\n            <code>UsageReportS3Bucket</code> – The name of the Amazon S3 bucket to receive daily SMS\n            usage reports from Amazon SNS. Each day, Amazon SNS will deliver a usage report as a CSV file to\n            the bucket. The report includes the following information for each SMS message that was\n            successfully delivered by your account:</p>\n        <ul>\n            <li>\n                <p>Time that the message was published (in UTC)</p>\n            </li>\n            <li>\n                <p>Message ID</p>\n            </li>\n            <li>\n                <p>Destination phone number</p>\n            </li>\n            <li>\n                <p>Message type</p>\n            </li>\n            <li>\n                <p>Delivery status</p>\n            </li>\n            <li>\n                <p>Message price (in USD)</p>\n            </li>\n            <li>\n                <p>Part number (a message is split into multiple parts if it is too long for a\n                    single message)</p>\n            </li>\n            <li>\n                <p>Total number of parts</p>\n            </li>\n         </ul>\n        <p>To receive the report, the bucket must have a policy that allows the Amazon SNS service\n            principal to perform the <code>s3:PutObject</code> and <code>s3:GetBucketLocation</code>\n            actions.</p>\n        <p>For an example bucket policy and usage report, see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sms_stats.html\">Monitoring SMS Activity</a> in the\n                <i>Amazon SNS Developer Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The default settings for sending SMS messages from your Amazon Web Services account. You can set values\n            for the following attribute names:</p>\n        <p>\n            <code>MonthlySpendLimit</code> – The maximum amount in USD that you are willing to spend\n            each month to send SMS messages. When Amazon SNS determines that sending an SMS message would\n            incur a cost that exceeds this limit, it stops sending SMS messages within\n            minutes.</p>\n        <important>\n            <p>Amazon SNS stops sending SMS messages within minutes of the limit being crossed. During\n                that interval, if you continue to send SMS messages, you will incur costs that\n                exceed your limit.</p>\n        </important>\n        <p>By default, the spend limit is set to the maximum allowed by Amazon SNS. If you want to\n            raise the limit, submit an <a href=\"https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase&limitType=service-code-sns\">SNS Limit Increase case</a>. For <b>New limit\n                value</b>, enter your desired monthly spend limit. In the <b>Use Case Description</b> field, explain that you are requesting\n            an SMS monthly spend limit increase.</p>\n        <p>\n            <code>DeliveryStatusIAMRole</code> – The ARN of the IAM role that allows Amazon SNS to write\n            logs about SMS deliveries in CloudWatch Logs. For each SMS message that you send, Amazon SNS\n            writes a log that includes the message price, the success or failure status, the reason\n            for failure (if the message failed), the message dwell time, and other\n            information.</p>\n        <p>\n            <code>DeliveryStatusSuccessSamplingRate</code> – The percentage of successful SMS\n            deliveries for which Amazon SNS will write logs in CloudWatch Logs. The value can be an\n            integer from 0 - 100. For example, to write logs only for failed deliveries, set this\n            value to <code>0</code>. To write logs for 10% of your successful deliveries, set it to\n                <code>10</code>.</p>\n        <p>\n            <code>DefaultSenderID</code> – A string, such as your business brand, that is displayed\n            as the sender on the receiving device. Support for sender IDs varies by country. The\n            sender ID can be 1 - 11 alphanumeric characters, and it must contain at least one\n            letter.</p>\n        <p>\n            <code>DefaultSMSType</code> – The type of SMS message that you will send by default. You\n            can assign the following values:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>Promotional</code> – (Default) Noncritical messages, such as marketing\n                    messages. Amazon SNS optimizes the message delivery to incur the lowest cost.</p>\n            </li>\n            <li>\n                <p>\n                    <code>Transactional</code> – Critical messages that support customer\n                    transactions, such as one-time passcodes for multi-factor authentication. Amazon SNS optimizes the message delivery to achieve the highest reliability.</p>\n            </li>\n         </ul>\n        <p>\n            <code>UsageReportS3Bucket</code> – The name of the Amazon S3 bucket to receive daily SMS\n            usage reports from Amazon SNS. Each day, Amazon SNS will deliver a usage report as a CSV file to\n            the bucket. The report includes the following information for each SMS message that was\n            successfully delivered by your Amazon Web Services account:</p>\n        <ul>\n            <li>\n                <p>Time that the message was published (in UTC)</p>\n            </li>\n            <li>\n                <p>Message ID</p>\n            </li>\n            <li>\n                <p>Destination phone number</p>\n            </li>\n            <li>\n                <p>Message type</p>\n            </li>\n            <li>\n                <p>Delivery status</p>\n            </li>\n            <li>\n                <p>Message price (in USD)</p>\n            </li>\n            <li>\n                <p>Part number (a message is split into multiple parts if it is too long for a\n                    single message)</p>\n            </li>\n            <li>\n                <p>Total number of parts</p>\n            </li>\n         </ul>\n        <p>To receive the report, the bucket must have a policy that allows the Amazon SNS service\n            principal to perform the <code>s3:PutObject</code> and <code>s3:GetBucketLocation</code>\n            actions.</p>\n        <p>For an example bucket policy and usage report, see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sms_stats.html\">Monitoring SMS Activity</a> in the\n                <i>Amazon SNS Developer Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2937,7 +3246,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Subscribes an endpoint to an Amazon SNS topic. If the endpoint type is HTTP/S or email, or\n            if the endpoint and the topic are not in the same account, the endpoint owner must\n            run the <code>ConfirmSubscription</code> action to confirm the subscription.</p>\n        <p>You call the <code>ConfirmSubscription</code> action with the token from the\n            subscription response. Confirmation tokens are valid for three days.</p>\n        <p>This action is throttled at 100 transactions per second (TPS).</p>"
+                "smithy.api#documentation": "<p>Subscribes an endpoint to an Amazon SNS topic. If the endpoint type is HTTP/S or email, or\n            if the endpoint and the topic are not in the same Amazon Web Services account, the endpoint owner must\n            run the <code>ConfirmSubscription</code> action to confirm the subscription.</p>\n        <p>You call the <code>ConfirmSubscription</code> action with the token from the\n            subscription response. Confirmation tokens are valid for three days.</p>\n        <p>This action is throttled at 100 transactions per second (TPS).</p>"
             }
         },
         "com.amazonaws.sns#SubscribeInput": {
@@ -3173,7 +3482,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Add tags to the specified Amazon SNS topic. For an overview, see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-tags.html\">Amazon SNS Tags</a> in the\n                <i>Amazon SNS Developer Guide</i>.</p>\n        <p>When you use topic tags, keep the following guidelines in mind:</p>\n        <ul>\n            <li>\n                <p>Adding more than 50 tags to a topic isn't recommended.</p>\n            </li>\n            <li>\n                <p>Tags don't have any semantic meaning. Amazon SNS interprets tags as character\n                    strings.</p>\n            </li>\n            <li>\n                <p>Tags are case-sensitive.</p>\n            </li>\n            <li>\n                <p>A new tag with a key identical to that of an existing tag overwrites the\n                    existing tag.</p>\n            </li>\n            <li>\n                <p>Tagging actions are limited to 10 TPS per account, per Region. If your\n                    application requires a higher throughput, file a <a href=\"https://console.aws.amazon.com/support/home#/case/create?issueType=technical\">technical support request</a>.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Add tags to the specified Amazon SNS topic. For an overview, see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-tags.html\">Amazon SNS Tags</a> in the\n                <i>Amazon SNS Developer Guide</i>.</p>\n        <p>When you use topic tags, keep the following guidelines in mind:</p>\n        <ul>\n            <li>\n                <p>Adding more than 50 tags to a topic isn't recommended.</p>\n            </li>\n            <li>\n                <p>Tags don't have any semantic meaning. Amazon SNS interprets tags as character\n                    strings.</p>\n            </li>\n            <li>\n                <p>Tags are case-sensitive.</p>\n            </li>\n            <li>\n                <p>A new tag with a key identical to that of an existing tag overwrites the\n                    existing tag.</p>\n            </li>\n            <li>\n                <p>Tagging actions are limited to 10 TPS per Amazon Web Services account, per Amazon Web Services Region. If your\n                    application requires a higher throughput, file a <a href=\"https://console.aws.amazon.com/support/home#/case/create?issueType=technical\">technical support request</a>.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.sns#TagResourceRequest": {
@@ -3223,13 +3532,30 @@
                     "code": "Throttled",
                     "httpResponseCode": 429
                 },
-                "smithy.api#documentation": "<p>Indicates that the rate at which requests have been submitted for this action exceeds\n            the limit for your account.</p>",
+                "smithy.api#documentation": "<p>Indicates that the rate at which requests have been submitted for this action exceeds the limit for your Amazon Web Services account.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
             }
         },
         "com.amazonaws.sns#Timestamp": {
             "type": "timestamp"
+        },
+        "com.amazonaws.sns#TooManyEntriesInBatchRequestException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.sns#String"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "TooManyEntriesInBatchRequest",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The batch request contains more entries than permissible.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
         },
         "com.amazonaws.sns#Topic": {
             "type": "structure",
@@ -3464,7 +3790,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Verifies a destination phone number with a one-time password (OTP) for the calling account.</p>\n        <p>When you start using Amazon SNS to send SMS messages, your account is in the\n                <i>SMS sandbox</i>. The SMS sandbox provides a safe environment for \n                you to try Amazon SNS features without risking your reputation as an SMS sender. While your \n                account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send \n                SMS messages only to verified destination phone numbers. For more information, including how to \n                move out of the sandbox to send messages without restrictions, \n                see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html\">SMS sandbox</a> in \n                the <i>Amazon SNS Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Verifies a destination phone number with a one-time password (OTP) for the calling Amazon Web Services account.</p>\n        <p>When you start using Amazon SNS to send SMS messages, your Amazon Web Services account is in the\n                <i>SMS sandbox</i>. The SMS sandbox provides a safe environment for \n                you to try Amazon SNS features without risking your reputation as an SMS sender. While your \n                Amazon Web Services account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send \n                SMS messages only to verified destination phone numbers. For more information, including how to \n                move out of the sandbox to send messages without restrictions, \n                see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html\">SMS sandbox</a> in \n                the <i>Amazon SNS Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.sns#VerifySMSSandboxPhoneNumberInput": {

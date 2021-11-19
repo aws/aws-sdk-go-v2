@@ -54,6 +54,21 @@
         },
         "com.amazonaws.amplifybackend#AmplifyBackend": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "AmplifyBackend",
+                    "arnNamespace": "amplifybackend",
+                    "cloudFormationName": "AmplifyBackend",
+                    "cloudTrailEventSource": "amplifybackend.amazonaws.com",
+                    "endpointPrefix": "amplifybackend"
+                },
+                "aws.auth#sigv4": {
+                    "name": "amplifybackend"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>AWS Amplify Admin API</p>",
+                "smithy.api#title": "AmplifyBackend"
+            },
             "version": "2020-08-11",
             "operations": [
                 {
@@ -72,6 +87,9 @@
                     "target": "com.amazonaws.amplifybackend#CreateBackendConfig"
                 },
                 {
+                    "target": "com.amazonaws.amplifybackend#CreateBackendStorage"
+                },
+                {
                     "target": "com.amazonaws.amplifybackend#CreateToken"
                 },
                 {
@@ -82,6 +100,9 @@
                 },
                 {
                     "target": "com.amazonaws.amplifybackend#DeleteBackendAuth"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#DeleteBackendStorage"
                 },
                 {
                     "target": "com.amazonaws.amplifybackend#DeleteToken"
@@ -105,13 +126,22 @@
                     "target": "com.amazonaws.amplifybackend#GetBackendJob"
                 },
                 {
+                    "target": "com.amazonaws.amplifybackend#GetBackendStorage"
+                },
+                {
                     "target": "com.amazonaws.amplifybackend#GetToken"
                 },
                 {
                     "target": "com.amazonaws.amplifybackend#ImportBackendAuth"
                 },
                 {
+                    "target": "com.amazonaws.amplifybackend#ImportBackendStorage"
+                },
+                {
                     "target": "com.amazonaws.amplifybackend#ListBackendJobs"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#ListS3Buckets"
                 },
                 {
                     "target": "com.amazonaws.amplifybackend#RemoveAllBackends"
@@ -130,23 +160,11 @@
                 },
                 {
                     "target": "com.amazonaws.amplifybackend#UpdateBackendJob"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#UpdateBackendStorage"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "AmplifyBackend",
-                    "arnNamespace": "amplifybackend",
-                    "cloudFormationName": "AmplifyBackend",
-                    "cloudTrailEventSource": "amplifybackend.amazonaws.com",
-                    "endpointPrefix": "amplifybackend"
-                },
-                "aws.auth#sigv4": {
-                    "name": "amplifybackend"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>AWS Amplify Admin API</p>",
-                "smithy.api#title": "AmplifyBackend"
-            }
+            ]
         },
         "com.amazonaws.amplifybackend#AuthResources": {
             "type": "string",
@@ -159,6 +177,25 @@
                     {
                         "value": "IDENTITY_POOL_AND_USER_POOL",
                         "name": "IDENTITY_POOL_AND_USER_POOL"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.amplifybackend#AuthenticatedElement": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "READ",
+                        "name": "READ"
+                    },
+                    {
+                        "value": "CREATE_AND_UPDATE",
+                        "name": "CREATE_AND_UPDATE"
+                    },
+                    {
+                        "value": "DELETE",
+                        "name": "DELETE"
                     }
                 ]
             }
@@ -436,6 +473,29 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The response object for this operation.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#BackendStoragePermissions": {
+            "type": "structure",
+            "members": {
+                "Authenticated": {
+                    "target": "com.amazonaws.amplifybackend#ListOfAuthenticatedElement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists all authenticated user read, write, and delete permissions for your S3 bucket.</p>",
+                        "smithy.api#jsonName": "authenticated",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UnAuthenticated": {
+                    "target": "com.amazonaws.amplifybackend#ListOfUnAuthenticatedElement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists all unauthenticated user read, write, and delete permissions for your S3 bucket.</p>",
+                        "smithy.api#jsonName": "unAuthenticated"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the read, write, and delete permissions users have against your storage S3 bucket.</p>"
             }
         },
         "com.amazonaws.amplifybackend#BadRequestException": {
@@ -1201,7 +1261,7 @@
                 "ResourceConfig": {
                     "target": "com.amazonaws.amplifybackend#ResourceConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource configuration for the create backend request.</p>",
+                        "smithy.api#documentation": "<p>The resource configuration for creating backend storage.</p>",
                         "smithy.api#jsonName": "resourceConfig"
                     }
                 },
@@ -1253,6 +1313,141 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the operation.</p>",
                         "smithy.api#jsonName": "operation"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the request.</p>",
+                        "smithy.api#jsonName": "status"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#CreateBackendStorage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifybackend#CreateBackendStorageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifybackend#CreateBackendStorageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifybackend#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a backend storage resource.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/backend/{AppId}/storage",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#CreateBackendStorageRequest": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#jsonName": "backendEnvironmentName",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceConfig": {
+                    "target": "com.amazonaws.amplifybackend#CreateBackendStorageResourceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource configuration for creating backend storage.</p>",
+                        "smithy.api#jsonName": "resourceConfig",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the storage resource.</p>",
+                        "smithy.api#jsonName": "resourceName",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request body for CreateBackendStorage.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#CreateBackendStorageResourceConfig": {
+            "type": "structure",
+            "members": {
+                "BucketName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the S3 bucket.</p>",
+                        "smithy.api#jsonName": "bucketName"
+                    }
+                },
+                "Permissions": {
+                    "target": "com.amazonaws.amplifybackend#BackendStoragePermissions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authorization configuration for the storage S3 bucket.</p>",
+                        "smithy.api#jsonName": "permissions",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ServiceName": {
+                    "target": "com.amazonaws.amplifybackend#ServiceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the storage service.</p>",
+                        "smithy.api#jsonName": "serviceName",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The resource configuration for creating backend storage.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#CreateBackendStorageResponse": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#jsonName": "appId"
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#jsonName": "backendEnvironmentName"
+                    }
+                },
+                "JobId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the job.</p>",
+                        "smithy.api#jsonName": "jobId"
                     }
                 },
                 "Status": {
@@ -1656,6 +1851,110 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the operation.</p>",
                         "smithy.api#jsonName": "operation"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the request.</p>",
+                        "smithy.api#jsonName": "status"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#DeleteBackendStorage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifybackend#DeleteBackendStorageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifybackend#DeleteBackendStorageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifybackend#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes the specified backend storage resource.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/backend/{AppId}/storage/{BackendEnvironmentName}/remove",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#DeleteBackendStorageRequest": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the storage resource.</p>",
+                        "smithy.api#jsonName": "resourceName",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ServiceName": {
+                    "target": "com.amazonaws.amplifybackend#ServiceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the storage service.</p>",
+                        "smithy.api#jsonName": "serviceName",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request body for DeleteBackendStorage.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#DeleteBackendStorageResponse": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#jsonName": "appId"
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#jsonName": "backendEnvironmentName"
+                    }
+                },
+                "JobId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the job.</p>",
+                        "smithy.api#jsonName": "jobId"
                     }
                 },
                 "Status": {
@@ -2419,6 +2718,140 @@
                 }
             }
         },
+        "com.amazonaws.amplifybackend#GetBackendStorage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifybackend#GetBackendStorageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifybackend#GetBackendStorageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifybackend#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets details for a backend storage resource.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/backend/{AppId}/storage/{BackendEnvironmentName}/details",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#GetBackendStorageRequest": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the storage resource.</p>",
+                        "smithy.api#jsonName": "resourceName",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request body for GetBackendStorage.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#GetBackendStorageResourceConfig": {
+            "type": "structure",
+            "members": {
+                "BucketName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the S3 bucket.</p>",
+                        "smithy.api#jsonName": "bucketName"
+                    }
+                },
+                "Imported": {
+                    "target": "com.amazonaws.amplifybackend#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns True if the storage resource has been imported.</p>",
+                        "smithy.api#jsonName": "imported",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Permissions": {
+                    "target": "com.amazonaws.amplifybackend#BackendStoragePermissions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authorization configuration for the storage S3 bucket.</p>",
+                        "smithy.api#jsonName": "permissions"
+                    }
+                },
+                "ServiceName": {
+                    "target": "com.amazonaws.amplifybackend#ServiceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the storage service.</p>",
+                        "smithy.api#jsonName": "serviceName",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details for a backend storage resource.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#GetBackendStorageResponse": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#jsonName": "appId"
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#jsonName": "backendEnvironmentName"
+                    }
+                },
+                "ResourceConfig": {
+                    "target": "com.amazonaws.amplifybackend#GetBackendStorageResourceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource configuration for the backend storage resource.</p>",
+                        "smithy.api#jsonName": "resourceConfig"
+                    }
+                },
+                "ResourceName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the storage resource.</p>",
+                        "smithy.api#jsonName": "resourceName"
+                    }
+                }
+            }
+        },
         "com.amazonaws.amplifybackend#GetToken": {
             "type": "operation",
             "input": {
@@ -2637,6 +3070,109 @@
                 }
             }
         },
+        "com.amazonaws.amplifybackend#ImportBackendStorage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifybackend#ImportBackendStorageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifybackend#ImportBackendStorageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifybackend#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Imports an existing backend storage resource.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/backend/{AppId}/storage/{BackendEnvironmentName}/import",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#ImportBackendStorageRequest": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "BucketName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the S3 bucket.</p>",
+                        "smithy.api#jsonName": "bucketName"
+                    }
+                },
+                "ServiceName": {
+                    "target": "com.amazonaws.amplifybackend#ServiceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the storage service.</p>",
+                        "smithy.api#jsonName": "serviceName",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request body for ImportBackendStorage.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#ImportBackendStorageResponse": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#jsonName": "appId"
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#jsonName": "backendEnvironmentName"
+                    }
+                },
+                "JobId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the job.</p>",
+                        "smithy.api#jsonName": "jobId"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the request.</p>",
+                        "smithy.api#jsonName": "status"
+                    }
+                }
+            }
+        },
         "com.amazonaws.amplifybackend#ListBackendJobs": {
             "type": "operation",
             "input": {
@@ -2752,6 +3288,12 @@
                 "target": "com.amazonaws.amplifybackend#AdditionalConstraintsElement"
             }
         },
+        "com.amazonaws.amplifybackend#ListOfAuthenticatedElement": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.amplifybackend#AuthenticatedElement"
+            }
+        },
         "com.amazonaws.amplifybackend#ListOfBackendAPIAuthType": {
             "type": "list",
             "member": {
@@ -2782,10 +3324,87 @@
                 "target": "com.amazonaws.amplifybackend#RequiredSignUpAttributesElement"
             }
         },
+        "com.amazonaws.amplifybackend#ListOfS3BucketInfo": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.amplifybackend#S3BucketInfo"
+            }
+        },
+        "com.amazonaws.amplifybackend#ListOfUnAuthenticatedElement": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.amplifybackend#UnAuthenticatedElement"
+            }
+        },
         "com.amazonaws.amplifybackend#ListOf__string": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.amplifybackend#__string"
+            }
+        },
+        "com.amazonaws.amplifybackend#ListS3Buckets": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifybackend#ListS3BucketsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifybackend#ListS3BucketsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifybackend#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>The list of S3 buckets in your account.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/s3Buckets",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#ListS3BucketsRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reserved for future use.</p>",
+                        "smithy.api#jsonName": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request body for S3Buckets.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#ListS3BucketsResponse": {
+            "type": "structure",
+            "members": {
+                "Buckets": {
+                    "target": "com.amazonaws.amplifybackend#ListOfS3BucketInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of S3 buckets.</p>",
+                        "smithy.api#jsonName": "buckets"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reserved for future use.</p>",
+                        "smithy.api#jsonName": "nextToken"
+                    }
+                }
             }
         },
         "com.amazonaws.amplifybackend#LoginAuthConfigReqObj": {
@@ -3202,6 +3821,28 @@
                 "smithy.api#documentation": "<p>Defines the resource configuration for the data model in your Amplify project.</p>"
             }
         },
+        "com.amazonaws.amplifybackend#S3BucketInfo": {
+            "type": "structure",
+            "members": {
+                "CreationDate": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation date of the S3 bucket.</p>",
+                        "smithy.api#jsonName": "creationDate"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the S3 bucket.</p>",
+                        "smithy.api#jsonName": "name"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the metadata of the S3 bucket.</p>"
+            }
+        },
         "com.amazonaws.amplifybackend#Service": {
             "type": "string",
             "traits": {
@@ -3209,6 +3850,17 @@
                     {
                         "value": "COGNITO",
                         "name": "COGNITO"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.amplifybackend#ServiceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "S3",
+                        "name": "S3"
                     }
                 ]
             }
@@ -3330,6 +3982,25 @@
                 "smithy.api#documentation": "<p>An error that is returned when a limit of a specific type has been exceeded.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.amplifybackend#UnAuthenticatedElement": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "READ",
+                        "name": "READ"
+                    },
+                    {
+                        "value": "CREATE_AND_UPDATE",
+                        "name": "CREATE_AND_UPDATE"
+                    },
+                    {
+                        "value": "DELETE",
+                        "name": "DELETE"
+                    }
+                ]
             }
         },
         "com.amazonaws.amplifybackend#UpdateBackendAPI": {
@@ -4000,6 +4671,134 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time when the job was last updated.</p>",
                         "smithy.api#jsonName": "updateTime"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#UpdateBackendStorage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifybackend#UpdateBackendStorageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifybackend#UpdateBackendStorageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifybackend#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an existing backend storage resource.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/backend/{AppId}/storage/{BackendEnvironmentName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#UpdateBackendStorageRequest": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceConfig": {
+                    "target": "com.amazonaws.amplifybackend#UpdateBackendStorageResourceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource configuration for updating backend storage.</p>",
+                        "smithy.api#jsonName": "resourceConfig",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the storage resource.</p>",
+                        "smithy.api#jsonName": "resourceName",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request body for UpdateBackendStorage.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#UpdateBackendStorageResourceConfig": {
+            "type": "structure",
+            "members": {
+                "Permissions": {
+                    "target": "com.amazonaws.amplifybackend#BackendStoragePermissions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authorization configuration for the storage S3 bucket.</p>",
+                        "smithy.api#jsonName": "permissions",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ServiceName": {
+                    "target": "com.amazonaws.amplifybackend#ServiceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the storage service.</p>",
+                        "smithy.api#jsonName": "serviceName",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The resource configuration for updating backend storage.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#UpdateBackendStorageResponse": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#jsonName": "appId"
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#jsonName": "backendEnvironmentName"
+                    }
+                },
+                "JobId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the job.</p>",
+                        "smithy.api#jsonName": "jobId"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the request.</p>",
+                        "smithy.api#jsonName": "status"
                     }
                 }
             }

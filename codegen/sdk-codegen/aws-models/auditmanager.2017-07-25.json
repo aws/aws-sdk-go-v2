@@ -1634,6 +1634,21 @@
         },
         "com.amazonaws.auditmanager#BedrockAssessmentManagerLambda": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "AuditManager",
+                    "arnNamespace": "auditmanager",
+                    "cloudFormationName": "AuditManager",
+                    "cloudTrailEventSource": "auditmanager.amazonaws.com",
+                    "endpointPrefix": "auditmanager"
+                },
+                "aws.auth#sigv4": {
+                    "name": "auditmanager"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>Welcome to the Audit Manager API reference. This guide is for developers who\n         need detailed information about the Audit Manager API operations, data types, and\n         errors. </p>\n         <p>Audit Manager is a service that provides automated evidence collection so that\n         you can continually audit your Amazon Web Services usage. You can use it to assess the\n         effectiveness of your controls, manage risk, and simplify compliance.</p>\n         <p>Audit Manager provides prebuilt frameworks that structure and automate\n         assessments for a given compliance standard. Frameworks include a prebuilt collection of\n         controls with descriptions and testing procedures. These controls are grouped according to\n         the requirements of the specified compliance standard or regulation. You can also customize\n         frameworks and controls to support internal audits with specific requirements. </p>\n         <p>Use the following links to get started with the Audit Manager API:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_Operations.html\">Actions</a>: An\n               alphabetical list of all Audit Manager API operations.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_Types.html\">Data types</a>: An alphabetical list of all Audit Manager data\n               types.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/CommonParameters.html\">Common\n                  parameters</a>: Parameters that all Query operations can use.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/CommonErrors.html\">Common errors</a>:\n               Client and server errors that all operations can return.</p>\n            </li>\n         </ul>\n         <p>If you're new to Audit Manager, we recommend that you review the <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/what-is.html\">\n            Audit Manager User Guide</a>.</p>",
+                "smithy.api#title": "AWS Audit Manager"
+            },
             "version": "2017-07-25",
             "operations": [
                 {
@@ -1727,6 +1742,12 @@
                     "target": "com.amazonaws.auditmanager#GetEvidenceFoldersByAssessmentControl"
                 },
                 {
+                    "target": "com.amazonaws.auditmanager#GetInsights"
+                },
+                {
+                    "target": "com.amazonaws.auditmanager#GetInsightsByAssessment"
+                },
+                {
                     "target": "com.amazonaws.auditmanager#GetOrganizationAdminAccount"
                 },
                 {
@@ -1734,6 +1755,9 @@
                 },
                 {
                     "target": "com.amazonaws.auditmanager#GetSettings"
+                },
+                {
+                    "target": "com.amazonaws.auditmanager#ListAssessmentControlInsightsByControlDomain"
                 },
                 {
                     "target": "com.amazonaws.auditmanager#ListAssessmentFrameworks"
@@ -1746,6 +1770,15 @@
                 },
                 {
                     "target": "com.amazonaws.auditmanager#ListAssessments"
+                },
+                {
+                    "target": "com.amazonaws.auditmanager#ListControlDomainInsights"
+                },
+                {
+                    "target": "com.amazonaws.auditmanager#ListControlDomainInsightsByAssessment"
+                },
+                {
+                    "target": "com.amazonaws.auditmanager#ListControlInsightsByControlDomain"
                 },
                 {
                     "target": "com.amazonaws.auditmanager#ListControls"
@@ -1801,22 +1834,7 @@
                 {
                     "target": "com.amazonaws.auditmanager#ValidateAssessmentReportIntegrity"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "AuditManager",
-                    "arnNamespace": "auditmanager",
-                    "cloudFormationName": "AuditManager",
-                    "cloudTrailEventSource": "auditmanager.amazonaws.com",
-                    "endpointPrefix": "auditmanager"
-                },
-                "aws.auth#sigv4": {
-                    "name": "auditmanager"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Welcome to the Audit Manager API reference. This guide is for developers who\n         need detailed information about the Audit Manager API operations, data types, and\n         errors. </p>\n         <p>Audit Manager is a service that provides automated evidence collection so that\n         you can continually audit your Amazon Web Services usage. You can use it to assess the\n         effectiveness of your controls, manage risk, and simplify compliance.</p>\n         <p>Audit Manager provides prebuilt frameworks that structure and automate\n         assessments for a given compliance standard. Frameworks include a prebuilt collection of\n         controls with descriptions and testing procedures. These controls are grouped according to\n         the requirements of the specified compliance standard or regulation. You can also customize\n         frameworks and controls to support internal audits with specific requirements. </p>\n         <p>Use the following links to get started with the Audit Manager API:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_Operations.html\">Actions</a>: An\n               alphabetical list of all Audit Manager API operations.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_Types.html\">Data types</a>: An alphabetical list of all Audit Manager data\n               types.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/CommonParameters.html\">Common\n                  parameters</a>: Parameters that all Query operations can use.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/CommonErrors.html\">Common errors</a>:\n               Client and server errors that all operations can return.</p>\n            </li>\n         </ul>\n         <p>If you're new to Audit Manager, we recommend that you review the <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/what-is.html\">\n            Audit Manager User Guide</a>.</p>",
-                "smithy.api#title": "AWS Audit Manager"
-            }
+            ]
         },
         "com.amazonaws.auditmanager#Boolean": {
             "type": "boolean",
@@ -2026,6 +2044,138 @@
                     "max": 1000
                 },
                 "smithy.api#pattern": "^[\\w\\W\\s\\S]*$"
+            }
+        },
+        "com.amazonaws.auditmanager#ControlDomainInsights": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.auditmanager#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the control domain. </p>"
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.auditmanager#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the control domain. </p>"
+                    }
+                },
+                "controlsCountByNoncompliantEvidence": {
+                    "target": "com.amazonaws.auditmanager#NullableInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of controls in the control domain that collected non-compliant evidence on the\n         <code>lastUpdated</code> date. </p>"
+                    }
+                },
+                "totalControlsCount": {
+                    "target": "com.amazonaws.auditmanager#NullableInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of controls in the control domain. </p>"
+                    }
+                },
+                "evidenceInsights": {
+                    "target": "com.amazonaws.auditmanager#EvidenceInsights",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A breakdown of the compliance check status for the evidence that’s associated with the control\n         domain. </p>"
+                    }
+                },
+                "lastUpdated": {
+                    "target": "com.amazonaws.auditmanager#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the control domain insights were last updated. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of the latest analytics data for a specific control domain.</p>\n         <p>Control domain insights are grouped by control domain, and ranked by the highest total count of non-compliant evidence.</p>"
+            }
+        },
+        "com.amazonaws.auditmanager#ControlDomainInsightsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.auditmanager#ControlDomainInsights"
+            }
+        },
+        "com.amazonaws.auditmanager#ControlInsightsMetadata": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.auditmanager#ControlInsightsMetadataItem"
+            }
+        },
+        "com.amazonaws.auditmanager#ControlInsightsMetadataByAssessment": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.auditmanager#ControlInsightsMetadataByAssessmentItem"
+            }
+        },
+        "com.amazonaws.auditmanager#ControlInsightsMetadataByAssessmentItem": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.auditmanager#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the assessment control. </p>"
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.auditmanager#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the assessment control. </p>"
+                    }
+                },
+                "evidenceInsights": {
+                    "target": "com.amazonaws.auditmanager#EvidenceInsights",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A breakdown of the compliance check status for the evidence that’s associated with the\n         assessment control. </p>"
+                    }
+                },
+                "controlSetName": {
+                    "target": "com.amazonaws.auditmanager#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the control set that the assessment control belongs to. </p>"
+                    }
+                },
+                "lastUpdated": {
+                    "target": "com.amazonaws.auditmanager#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the assessment control insights were last updated. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of the latest analytics data for a specific control in a specific active\n         assessment.</p>\n         <p>Control insights are grouped by control domain, and ranked by the highest total count of non-compliant evidence. \n      </p>"
+            }
+        },
+        "com.amazonaws.auditmanager#ControlInsightsMetadataItem": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.auditmanager#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the control. </p>"
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.auditmanager#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the control. </p>"
+                    }
+                },
+                "evidenceInsights": {
+                    "target": "com.amazonaws.auditmanager#EvidenceInsights",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A breakdown of the compliance check status for the evidence that’s associated with the\n         control. </p>"
+                    }
+                },
+                "lastUpdated": {
+                    "target": "com.amazonaws.auditmanager#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the control insights were last updated. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of the latest analytics data for a specific control. </p>\n         <p>This data reflects the total counts for the specified control across all active assessments. Control insights are grouped by control domain, and ranked by the highest total count of non-compliant evidence.</p>"
             }
         },
         "com.amazonaws.auditmanager#ControlMappingSource": {
@@ -3054,7 +3204,7 @@
                 "frameworkId": {
                     "target": "com.amazonaws.auditmanager#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p> The identifier for the framework. </p>",
+                        "smithy.api#documentation": "<p> The identifier for the custom framework. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3158,7 +3308,7 @@
                 "assessmentId": {
                     "target": "com.amazonaws.auditmanager#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p> The identifier for the assessment. </p>",
+                        "smithy.api#documentation": "<p> The unique identifier for the assessment. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3231,7 +3381,7 @@
                 "controlId": {
                     "target": "com.amazonaws.auditmanager#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p> The identifier for the control. </p>",
+                        "smithy.api#documentation": "<p> The unique identifier for the control. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3371,7 +3521,7 @@
                 "assessmentId": {
                     "target": "com.amazonaws.auditmanager#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p> The identifier for the assessment. </p>",
+                        "smithy.api#documentation": "<p> The unique identifier for the assessment. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3379,7 +3529,7 @@
                 "evidenceFolderId": {
                     "target": "com.amazonaws.auditmanager#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p> The identifier for the folder in which evidence is stored. </p>",
+                        "smithy.api#documentation": "<p> The unique identifier for the folder that the evidence is stored in. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3566,6 +3716,32 @@
                     "min": 0,
                     "max": 50
                 }
+            }
+        },
+        "com.amazonaws.auditmanager#EvidenceInsights": {
+            "type": "structure",
+            "members": {
+                "noncompliantEvidenceCount": {
+                    "target": "com.amazonaws.auditmanager#NullableInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of compliance check evidence that Audit Manager classified as non-compliant.\n         This includes evidence that was collected from Security Hub with a\n         <i>Fail</i> ruling, or collected from Config with a\n         <i>Non-compliant</i> ruling. </p>"
+                    }
+                },
+                "compliantEvidenceCount": {
+                    "target": "com.amazonaws.auditmanager#NullableInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of compliance check evidence that Audit Manager classified as compliant. This\n         includes evidence that was collected from Security Hub with a\n         <i>Pass</i> ruling, or collected from Config with a\n         <i>Compliant</i> ruling. </p>"
+                    }
+                },
+                "inconclusiveEvidenceCount": {
+                    "target": "com.amazonaws.auditmanager#NullableInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of evidence that a compliance check ruling isn't available for. Evidence is\n         inconclusive when the associated control uses Security Hub or Config as a data source but you didn't enable those services. This is also the case when a\n         control uses a data source that doesn’t support compliance checks (for example, manual\n         evidence, API calls, or CloudTrail). </p>\n         <note>\n            <p>If evidence has a compliance check status of <i>not applicable</i> in the\n         console, it's classified as <i>inconclusive</i> in\n         <code>EvidenceInsights</code> data.</p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A breakdown of the latest compliance check status for the evidence in your Audit Manager\n         assessments. </p>"
             }
         },
         "com.amazonaws.auditmanager#EvidenceList": {
@@ -3825,7 +4001,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Returns an assessment from Audit Manager. </p>",
+                "smithy.api#documentation": "<p>Returns an assessment from Audit Manager. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/assessments/{assessmentId}",
@@ -3856,7 +4032,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Returns a framework from Audit Manager. </p>",
+                "smithy.api#documentation": "<p>Returns a framework from Audit Manager. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/assessmentFrameworks/{frameworkId}",
@@ -3925,7 +4101,7 @@
                 "assessmentReportId": {
                     "target": "com.amazonaws.auditmanager#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p> The identifier for the assessment report. </p>",
+                        "smithy.api#documentation": "<p> The unique identifier for the assessment report. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3933,7 +4109,7 @@
                 "assessmentId": {
                     "target": "com.amazonaws.auditmanager#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p> The identifier for the assessment. </p>",
+                        "smithy.api#documentation": "<p> The unique identifier for the assessment. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3954,7 +4130,7 @@
                 "assessmentId": {
                     "target": "com.amazonaws.auditmanager#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p> The identifier for the assessment. </p>",
+                        "smithy.api#documentation": "<p>The unique identifier for the assessment. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4014,7 +4190,7 @@
                 "assessmentId": {
                     "target": "com.amazonaws.auditmanager#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p> The identifier for the assessment. </p>",
+                        "smithy.api#documentation": "<p>The unique identifier for the assessment. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4022,14 +4198,14 @@
                 "controlSetId": {
                     "target": "com.amazonaws.auditmanager#ControlSetId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The identifier for the control set. </p>",
+                        "smithy.api#documentation": "<p> The unique identifier for the control set. </p>",
                         "smithy.api#httpQuery": "controlSetId"
                     }
                 },
                 "controlId": {
                     "target": "com.amazonaws.auditmanager#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p> The identifier for the control. </p>",
+                        "smithy.api#documentation": "<p> The unique identifier for the control. </p>",
                         "smithy.api#httpQuery": "controlId"
                     }
                 },
@@ -4043,7 +4219,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.auditmanager#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p> Represents the maximum number of results on a page or for an API request call. </p>",
+                        "smithy.api#documentation": "<p>Represents the maximum number of results on a page or for an API request call. </p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
@@ -4055,13 +4231,13 @@
                 "changeLogs": {
                     "target": "com.amazonaws.auditmanager#ChangeLogs",
                     "traits": {
-                        "smithy.api#documentation": "<p> The list of user activity for the control. </p>"
+                        "smithy.api#documentation": "<p>The list of user activity for the control. </p>"
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.auditmanager#Token",
                     "traits": {
-                        "smithy.api#documentation": "<p> The pagination token that's used to fetch the next set of results. </p>"
+                        "smithy.api#documentation": "<p>The pagination token that's used to fetch the next set of results. </p>"
                     }
                 }
             }
@@ -4354,7 +4530,7 @@
                 "assessmentId": {
                     "target": "com.amazonaws.auditmanager#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p> The identifier for the assessment. </p>",
+                        "smithy.api#documentation": "<p> The unique identifier for the assessment. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4362,7 +4538,7 @@
                 "controlSetId": {
                     "target": "com.amazonaws.auditmanager#ControlSetId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The identifier for the control set. </p>",
+                        "smithy.api#documentation": "<p> The unique identifier for the control set. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4370,7 +4546,7 @@
                 "evidenceFolderId": {
                     "target": "com.amazonaws.auditmanager#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p> The identifier for the folder that the evidence is stored in. </p>",
+                        "smithy.api#documentation": "<p> The unique identifier for the folder that the evidence is stored in. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4526,7 +4702,7 @@
                 "assessmentId": {
                     "target": "com.amazonaws.auditmanager#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p> The identifier for the assessment. </p>",
+                        "smithy.api#documentation": "<p> The unique identifier for the assessment. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4570,7 +4746,7 @@
                 "assessmentId": {
                     "target": "com.amazonaws.auditmanager#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p> The identifier for the assessment. </p>",
+                        "smithy.api#documentation": "<p> The unique identifier for the assessment. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4578,7 +4754,7 @@
                 "controlSetId": {
                     "target": "com.amazonaws.auditmanager#ControlSetId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The identifier for the control set. </p>",
+                        "smithy.api#documentation": "<p> The unique identifier for the control set. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4586,7 +4762,7 @@
                 "evidenceFolderId": {
                     "target": "com.amazonaws.auditmanager#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p> The identifier for the folder that the evidence is stored in. </p>",
+                        "smithy.api#documentation": "<p> The unique identifier for the folder that the evidence is stored in. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4594,7 +4770,7 @@
                 "evidenceId": {
                     "target": "com.amazonaws.auditmanager#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p> The identifier for the evidence. </p>",
+                        "smithy.api#documentation": "<p> The unique identifier for the evidence. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4608,6 +4784,101 @@
                     "target": "com.amazonaws.auditmanager#Evidence",
                     "traits": {
                         "smithy.api#documentation": "<p> The evidence that the <code>GetEvidenceResponse</code> API returned. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.auditmanager#GetInsights": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.auditmanager#GetInsightsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.auditmanager#GetInsightsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.auditmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.auditmanager#InternalServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the latest analytics data for all your current active assessments. </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/insights",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.auditmanager#GetInsightsByAssessment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.auditmanager#GetInsightsByAssessmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.auditmanager#GetInsightsByAssessmentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.auditmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.auditmanager#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.auditmanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.auditmanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the latest analytics data for a specific active assessment. </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/insights/assessments/{assessmentId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.auditmanager#GetInsightsByAssessmentRequest": {
+            "type": "structure",
+            "members": {
+                "assessmentId": {
+                    "target": "com.amazonaws.auditmanager#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the assessment. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.auditmanager#GetInsightsByAssessmentResponse": {
+            "type": "structure",
+            "members": {
+                "insights": {
+                    "target": "com.amazonaws.auditmanager#InsightsByAssessment",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The assessment analytics data that the <code>GetInsightsByAssessment</code> API\n         returned. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.auditmanager#GetInsightsRequest": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.auditmanager#GetInsightsResponse": {
+            "type": "structure",
+            "members": {
+                "insights": {
+                    "target": "com.amazonaws.auditmanager#Insights",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The analytics data that the <code>GetInsights</code> API returned. </p>"
                     }
                 }
             }
@@ -4776,6 +5047,100 @@
                 "smithy.api#pattern": "^arn:.*:iam:"
             }
         },
+        "com.amazonaws.auditmanager#Insights": {
+            "type": "structure",
+            "members": {
+                "activeAssessmentsCount": {
+                    "target": "com.amazonaws.auditmanager#NullableInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of active assessments in Audit Manager. </p>"
+                    }
+                },
+                "noncompliantEvidenceCount": {
+                    "target": "com.amazonaws.auditmanager#NullableInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of compliance check evidence that Audit Manager classified as non-compliant\n         on the <code>lastUpdated</code> date. This includes evidence that was collected from\n         Security Hub with a <i>Fail</i> ruling, or collected from\n         Config with a <i>Non-compliant</i> ruling. </p>"
+                    }
+                },
+                "compliantEvidenceCount": {
+                    "target": "com.amazonaws.auditmanager#NullableInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of compliance check evidence that Audit Manager classified as compliant on\n         the <code>lastUpdated</code> date. This includes evidence that was collected from Security Hub with a <i>Pass</i> ruling, or collected from Config with a <i>Compliant</i> ruling. </p>"
+                    }
+                },
+                "inconclusiveEvidenceCount": {
+                    "target": "com.amazonaws.auditmanager#NullableInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of evidence without a compliance check ruling. Evidence is inconclusive when the\n         associated control uses Security Hub or Config as a data source\n         but you didn't enable those services. This is also the case when a control uses a data\n         source that doesn’t support compliance checks (for example: manual evidence, API calls, or\n         CloudTrail). </p>\n         <note>\n            <p>If evidence has a compliance check status of <i>not applicable</i>, it's classed\n         as <i>inconclusive</i> in <code>Insights</code> data.</p>\n         </note>"
+                    }
+                },
+                "assessmentControlsCountByNoncompliantEvidence": {
+                    "target": "com.amazonaws.auditmanager#NullableInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of assessment controls that collected non-compliant evidence on the\n         <code>lastUpdated</code> date. </p>"
+                    }
+                },
+                "totalAssessmentControlsCount": {
+                    "target": "com.amazonaws.auditmanager#NullableInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of controls across all active assessments. </p>"
+                    }
+                },
+                "lastUpdated": {
+                    "target": "com.amazonaws.auditmanager#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the cross-assessment insights were last updated. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of the latest analytics data for all your active assessments. </p>   \n         <p>This summary is a snapshot of the data that your active assessments collected on the\n         <code>lastUpdated</code> date. It’s important to understand that the following totals\n         are daily counts based on this date — they aren’t a total sum to date. </p>\n         <p>The <code>Insights</code> data is eventually consistent. This means that, when you read\n         data from <code>Insights</code>, the response might not instantly reflect the results of a\n         recently completed write or update operation. If you repeat your read request after a few\n         hours, the response should return the latest data.</p>\n         <note>\n            <p>If you delete an assessment or change its status to inactive,\n            <code>InsightsByAssessment</code> includes data for that assessment as\n            follows.</p>\n            <ul>\n               <li>      \n                  <p>\n                     <b>Inactive assessments</b> - If Audit Manager collected\n               evidence for your assessment before you changed it inactive, that evidence is\n               included in the <code>InsightsByAssessment</code> counts for that day.</p>\n               </li>\n               <li>      \n                  <p>\n                     <b>Deleted assessments</b> - If Audit Manager collected\n               evidence for your assessment before you deleted it, that evidence isn't included\n               in the <code>InsightsByAssessment</code> counts for that day.</p>\n               </li>\n            </ul>\n         </note>"
+            }
+        },
+        "com.amazonaws.auditmanager#InsightsByAssessment": {
+            "type": "structure",
+            "members": {
+                "noncompliantEvidenceCount": {
+                    "target": "com.amazonaws.auditmanager#NullableInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of compliance check evidence that Audit Manager classified as non-compliant.\n         This includes evidence that was collected from Security Hub with a\n         <i>Fail</i> ruling, or collected from Config with a\n         <i>Non-compliant</i> ruling. </p>"
+                    }
+                },
+                "compliantEvidenceCount": {
+                    "target": "com.amazonaws.auditmanager#NullableInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of compliance check evidence that Audit Manager classified as compliant.\n         This includes evidence that was collected from Security Hub with a\n         <i>Pass</i> ruling, or collected from Config with a\n         <i>Compliant</i> ruling. </p>"
+                    }
+                },
+                "inconclusiveEvidenceCount": {
+                    "target": "com.amazonaws.auditmanager#NullableInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of evidence without a compliance check ruling. Evidence is inconclusive if the\n         associated control uses Security Hub or Config as a data source\n         and you didn't enable those services. This is also the case if a control uses a data source\n         that doesn’t support compliance checks (for example, manual evidence, API calls, or CloudTrail). </p>\n         <note>\n            <p>If evidence has a compliance check status of <i>not applicable</i>, it's\n         classified as <i>inconclusive</i> in <code>InsightsByAssessment</code>\n         data.</p>\n         </note>"
+                    }
+                },
+                "assessmentControlsCountByNoncompliantEvidence": {
+                    "target": "com.amazonaws.auditmanager#NullableInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of assessment controls that collected non-compliant evidence on the\n         <code>lastUpdated</code> date. </p>"
+                    }
+                },
+                "totalAssessmentControlsCount": {
+                    "target": "com.amazonaws.auditmanager#NullableInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of controls in the assessment. </p>"
+                    }
+                },
+                "lastUpdated": {
+                    "target": "com.amazonaws.auditmanager#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the assessment insights were last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of the latest analytics data for a specific active assessment.</p>   \n         <p>This summary is a snapshot of the data that was collected on the <code>lastUpdated</code>\n         date. It’s important to understand that the totals in <code>InsightsByAssessment</code> are\n         daily counts based on this date — they aren’t a total sum to date. </p>\n         <p>The <code>InsightsByAssessment</code> data is eventually consistent. This means that\n         when you read data from <code>InsightsByAssessment</code>, the response might not instantly\n         reflect the results of a recently completed write or update operation. If you repeat your\n         read request after a few hours, the response returns the latest data.</p>\n         <note>\n            <p>If you delete an assessment or change its status to inactive,\n            <code>InsightsByAssessment</code> includes data for that assessment as\n            follows.</p>\n            <ul>\n               <li>   \n                  <p>\n                     <b>Inactive assessments</b> - If Audit Manager collected\n               evidence for your assessment before you changed it inactive, that evidence is\n               included in the <code>InsightsByAssessment</code> counts for that day.</p>\n               </li>\n               <li>      \n                  <p>\n                     <b>Deleted assessments</b> - If Audit Manager collected\n               evidence for your assessment before you deleted it, that evidence isn't included\n               in the <code>InsightsByAssessment</code> counts for that day.</p>\n               </li>\n            </ul>\n         </note>"
+            }
+        },
         "com.amazonaws.auditmanager#Integer": {
             "type": "integer"
         },
@@ -4840,6 +5205,94 @@
                     "max": 100
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9\\s-_()\\[\\]]+$"
+            }
+        },
+        "com.amazonaws.auditmanager#ListAssessmentControlInsightsByControlDomain": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.auditmanager#ListAssessmentControlInsightsByControlDomainRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.auditmanager#ListAssessmentControlInsightsByControlDomainResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.auditmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.auditmanager#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.auditmanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.auditmanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the latest analytics data for controls within a specific control domain and a\n         specific active assessment.</p>\n         <note>\n            <p>Control insights are listed only if the control belongs to the control domain and assessment\n         that was specified. Moreover, the control must have collected evidence on the\n         <code>lastUpdated</code> date of <code>controlInsightsByAssessment</code>. If neither\n         of these conditions are met, no data is listed for that control. </p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/insights/controls-by-assessment",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.auditmanager#ListAssessmentControlInsightsByControlDomainRequest": {
+            "type": "structure",
+            "members": {
+                "controlDomainId": {
+                    "target": "com.amazonaws.auditmanager#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the control domain. </p>",
+                        "smithy.api#httpQuery": "controlDomainId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "assessmentId": {
+                    "target": "com.amazonaws.auditmanager#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the active assessment. </p>",
+                        "smithy.api#httpQuery": "assessmentId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.auditmanager#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that's used to fetch the next set of results. </p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.auditmanager#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the maximum number of results on a page or for an API request call. </p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.auditmanager#ListAssessmentControlInsightsByControlDomainResponse": {
+            "type": "structure",
+            "members": {
+                "controlInsightsByAssessment": {
+                    "target": "com.amazonaws.auditmanager#ControlInsightsMetadataByAssessment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The assessment control analytics data that the\n         <code>ListAssessmentControlInsightsByControlDomain</code> API returned. </p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.auditmanager#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that's used to fetch the next set of results. </p>"
+                    }
+                }
             }
         },
         "com.amazonaws.auditmanager#ListAssessmentFrameworkShareRequests": {
@@ -5107,6 +5560,13 @@
         "com.amazonaws.auditmanager#ListAssessmentsRequest": {
             "type": "structure",
             "members": {
+                "status": {
+                    "target": "com.amazonaws.auditmanager#AssessmentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The current status of the assessment.</p>",
+                        "smithy.api#httpQuery": "status"
+                    }
+                },
                 "nextToken": {
                     "target": "com.amazonaws.auditmanager#Token",
                     "traits": {
@@ -5136,6 +5596,238 @@
                     "target": "com.amazonaws.auditmanager#Token",
                     "traits": {
                         "smithy.api#documentation": "<p> The pagination token that's used to fetch the next set of results. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.auditmanager#ListControlDomainInsights": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.auditmanager#ListControlDomainInsightsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.auditmanager#ListControlDomainInsightsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.auditmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.auditmanager#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.auditmanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.auditmanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the latest analytics data for control domains across all of your active\n         assessments. </p>\n         <note>\n            <p>A control domain is listed only if at least one of the controls within that domain collected\n         evidence on the <code>lastUpdated</code> date of <code>controlDomainInsights</code>. If\n         this condition isn’t met, no data is listed for that control domain.</p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/insights/control-domains",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.auditmanager#ListControlDomainInsightsByAssessment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.auditmanager#ListControlDomainInsightsByAssessmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.auditmanager#ListControlDomainInsightsByAssessmentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.auditmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.auditmanager#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.auditmanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.auditmanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists analytics data for control domains within a specified active assessment.</p>\n         <note>\n            <p>A control domain is listed only if at least one of the controls within that domain collected\n         evidence on the <code>lastUpdated</code> date of <code>controlDomainInsights</code>. If\n         this condition isn’t met, no data is listed for that domain.</p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/insights/control-domains-by-assessment",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.auditmanager#ListControlDomainInsightsByAssessmentRequest": {
+            "type": "structure",
+            "members": {
+                "assessmentId": {
+                    "target": "com.amazonaws.auditmanager#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the active assessment. </p>",
+                        "smithy.api#httpQuery": "assessmentId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.auditmanager#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that's used to fetch the next set of results. </p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.auditmanager#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the maximum number of results on a page or for an API request call. </p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.auditmanager#ListControlDomainInsightsByAssessmentResponse": {
+            "type": "structure",
+            "members": {
+                "controlDomainInsights": {
+                    "target": "com.amazonaws.auditmanager#ControlDomainInsightsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The control domain analytics data that the\n         <code>ListControlDomainInsightsByAssessment</code> API returned. </p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.auditmanager#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that's used to fetch the next set of results. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.auditmanager#ListControlDomainInsightsRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.auditmanager#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that's used to fetch the next set of results. </p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.auditmanager#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the maximum number of results on a page or for an API request call. </p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.auditmanager#ListControlDomainInsightsResponse": {
+            "type": "structure",
+            "members": {
+                "controlDomainInsights": {
+                    "target": "com.amazonaws.auditmanager#ControlDomainInsightsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The control domain analytics data that the <code>ListControlDomainInsights</code> API\n         returned. </p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.auditmanager#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that's used to fetch the next set of results. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.auditmanager#ListControlInsightsByControlDomain": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.auditmanager#ListControlInsightsByControlDomainRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.auditmanager#ListControlInsightsByControlDomainResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.auditmanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.auditmanager#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.auditmanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.auditmanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the latest analytics data for controls within a specific control domain across all\n         active assessments.</p> \n         <note>\n            <p>Control insights are listed only if the control belongs to the control domain that was\n         specified and the control collected evidence on the <code>lastUpdated</code> date of\n         <code>controlInsightsMetadata</code>. If neither of these conditions are met, no data\n         is listed for that control. </p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/insights/controls",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.auditmanager#ListControlInsightsByControlDomainRequest": {
+            "type": "structure",
+            "members": {
+                "controlDomainId": {
+                    "target": "com.amazonaws.auditmanager#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the control domain. </p>",
+                        "smithy.api#httpQuery": "controlDomainId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.auditmanager#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that's used to fetch the next set of results. </p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.auditmanager#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the maximum number of results on a page or for an API request call. </p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.auditmanager#ListControlInsightsByControlDomainResponse": {
+            "type": "structure",
+            "members": {
+                "controlInsightsMetadata": {
+                    "target": "com.amazonaws.auditmanager#ControlInsightsMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The control analytics data that the <code>ListControlInsightsByControlDomain</code> API\n         returned. </p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.auditmanager#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that's used to fetch the next set of results. </p>"
                     }
                 }
             }
@@ -6493,7 +7185,7 @@
                 "assessmentId": {
                     "target": "com.amazonaws.auditmanager#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p> The identifier for the assessment. </p>",
+                        "smithy.api#documentation": "<p> The unique identifier for the assessment. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6501,7 +7193,7 @@
                 "controlSetId": {
                     "target": "com.amazonaws.auditmanager#ControlSetId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The identifier for the control set. </p>",
+                        "smithy.api#documentation": "<p> The unique identifier for the control set. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6509,7 +7201,7 @@
                 "controlId": {
                     "target": "com.amazonaws.auditmanager#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p> The identifier for the control. </p>",
+                        "smithy.api#documentation": "<p> The unique identifier for the control. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6576,7 +7268,7 @@
                 "assessmentId": {
                     "target": "com.amazonaws.auditmanager#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p> The identifier for the assessment. </p>",
+                        "smithy.api#documentation": "<p> The unique identifier for the assessment. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6584,7 +7276,7 @@
                 "controlSetId": {
                     "target": "com.amazonaws.auditmanager#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The identifier for the control set. </p>",
+                        "smithy.api#documentation": "<p> The unique identifier for the control set. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6686,7 +7378,7 @@
                 "frameworkId": {
                     "target": "com.amazonaws.auditmanager#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p> The identifier for the framework. </p>",
+                        "smithy.api#documentation": "<p> The unique identifier for the framework. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6805,7 +7497,7 @@
                 "assessmentId": {
                     "target": "com.amazonaws.auditmanager#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p> The identifier for the assessment. </p>",
+                        "smithy.api#documentation": "<p> The unique identifier for the assessment. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6891,7 +7583,7 @@
                 "assessmentId": {
                     "target": "com.amazonaws.auditmanager#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p> The identifier for the assessment. </p>",
+                        "smithy.api#documentation": "<p> The unique identifier for the assessment. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }

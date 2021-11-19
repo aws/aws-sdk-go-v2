@@ -299,7 +299,7 @@
                 "InstanceType": {
                     "target": "com.amazonaws.kafka#__stringMin5Max32",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of Amazon EC2 instances to use for Kafka brokers. The following instance types are allowed: kafka.m5.large, kafka.m5.xlarge, kafka.m5.2xlarge,\nkafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.</p>",
+                        "smithy.api#documentation": "<p>The type of Amazon EC2 instances to use for Apache Kafka brokers. The following instance types are allowed: kafka.m5.large, kafka.m5.xlarge, kafka.m5.2xlarge,\nkafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.</p>",
                         "smithy.api#jsonName": "instanceType",
                         "smithy.api#required": {}
                     }
@@ -317,10 +317,17 @@
                         "smithy.api#documentation": "<p>Contains information about storage volumes attached to MSK broker nodes.</p>",
                         "smithy.api#jsonName": "storageInfo"
                     }
+                },
+                "ConnectivityInfo": {
+                    "target": "com.amazonaws.kafka#ConnectivityInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the broker access configuration.</p>",
+                        "smithy.api#jsonName": "connectivityInfo"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the setup to be used for Kafka broker nodes in the cluster.</p>"
+                "smithy.api#documentation": "<p>Describes the setup to be used for Apache Kafka broker nodes in the cluster.</p>"
             }
         },
         "com.amazonaws.kafka#BrokerNodeInfo": {
@@ -357,7 +364,7 @@
                 "CurrentBrokerSoftwareInfo": {
                     "target": "com.amazonaws.kafka#BrokerSoftwareInfo",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the version of software currently deployed on the Kafka brokers in the cluster.</p>",
+                        "smithy.api#documentation": "<p>Information about the version of software currently deployed on the Apache Kafka brokers in the cluster.</p>",
                         "smithy.api#jsonName": "currentBrokerSoftwareInfo"
                     }
                 },
@@ -517,7 +524,7 @@
                 "CurrentBrokerSoftwareInfo": {
                     "target": "com.amazonaws.kafka#BrokerSoftwareInfo",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the version of software currently deployed on the Kafka brokers in the cluster.</p>",
+                        "smithy.api#documentation": "<p>Information about the version of software currently deployed on the Apache Kafka brokers in the cluster.</p>",
                         "smithy.api#jsonName": "currentBrokerSoftwareInfo"
                     }
                 },
@@ -726,7 +733,7 @@
         "com.amazonaws.kafka#ClusterState": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The state of a Kafka cluster.</p>",
+                "smithy.api#documentation": "<p>The state of the Apache Kafka cluster.</p>",
                 "smithy.api#enum": [
                     {
                         "value": "ACTIVE",
@@ -769,20 +776,20 @@
                 "SourceVersion": {
                     "target": "com.amazonaws.kafka#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Kafka version.</p>",
+                        "smithy.api#documentation": "<p>An Apache Kafka version.</p>",
                         "smithy.api#jsonName": "sourceVersion"
                     }
                 },
                 "TargetVersions": {
                     "target": "com.amazonaws.kafka#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of Kafka versions.</p>",
+                        "smithy.api#documentation": "<p>A list of Apache Kafka versions.</p>",
                         "smithy.api#jsonName": "targetVersions"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains source Kafka versions and compatible target Kafka versions.</p>"
+                "smithy.api#documentation": "<p>Contains source Apache Kafka versions and compatible target Apache Kafka versions.</p>"
             }
         },
         "com.amazonaws.kafka#Configuration": {
@@ -946,6 +953,21 @@
                 "smithy.api#documentation": "<p>Returns information about an error.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.kafka#ConnectivityInfo": {
+            "type": "structure",
+            "members": {
+                "PublicAccess": {
+                    "target": "com.amazonaws.kafka#PublicAccess",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Public access control for brokers.</p>",
+                        "smithy.api#jsonName": "publicAccess"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the broker access configuration.</p>"
             }
         },
         "com.amazonaws.kafka#CreateCluster": {
@@ -1679,7 +1701,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about the EBS storage volumes attached to Kafka broker nodes.</p>"
+                "smithy.api#documentation": "<p>Contains information about the EBS storage volumes attached to Apache Kafka broker nodes.</p>"
             }
         },
         "com.amazonaws.kafka#EncryptionAtRest": {
@@ -1907,6 +1929,27 @@
                         "smithy.api#documentation": "<p>A string that contains one or more DNS names (or IP addresses) and SASL IAM port pairs.</p>",
                         "smithy.api#jsonName": "bootstrapBrokerStringSaslIam"
                     }
+                },
+                "BootstrapBrokerStringPublicTls": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing one or more DNS names (or IP) and TLS port pairs.</p>",
+                        "smithy.api#jsonName": "bootstrapBrokerStringPublicTls"
+                    }
+                },
+                "BootstrapBrokerStringPublicSaslScram": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing one or more DNS names (or IP) and Sasl Scram port pairs.</p>",
+                        "smithy.api#jsonName": "bootstrapBrokerStringPublicSaslScram"
+                    }
+                },
+                "BootstrapBrokerStringPublicSaslIam": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that contains one or more DNS names (or IP addresses) and SASL IAM port pairs.</p>",
+                        "smithy.api#jsonName": "bootstrapBrokerStringPublicSaslIam"
+                    }
                 }
             }
         },
@@ -2019,14 +2062,14 @@
                 "EnabledInBroker": {
                     "target": "com.amazonaws.kafka#__boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether you want to enable or disable the JMX Exporter.</p>",
+                        "smithy.api#documentation": "<p>Indicates whether you want to turn on or turn off the JMX Exporter.</p>",
                         "smithy.api#jsonName": "enabledInBroker",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Indicates whether you want to enable or disable the JMX Exporter.</p>"
+                "smithy.api#documentation": "<p>Indicates whether you want to turn on or turn off the JMX Exporter.</p>"
             }
         },
         "com.amazonaws.kafka#JmxExporterInfo": {
@@ -2035,18 +2078,33 @@
                 "EnabledInBroker": {
                     "target": "com.amazonaws.kafka#__boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether you want to enable or disable the JMX Exporter.</p>",
+                        "smithy.api#documentation": "<p>Indicates whether you want to turn on or turn off the JMX Exporter.</p>",
                         "smithy.api#jsonName": "enabledInBroker",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Indicates whether you want to enable or disable the JMX Exporter.</p>"
+                "smithy.api#documentation": "<p>Indicates whether you want to turn on or turn off the JMX Exporter.</p>"
             }
         },
         "com.amazonaws.kafka#Kafka": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Kafka",
+                    "arnNamespace": "kafka",
+                    "cloudFormationName": "MSK",
+                    "cloudTrailEventSource": "kafka.amazonaws.com",
+                    "endpointPrefix": "kafka"
+                },
+                "aws.auth#sigv4": {
+                    "name": "kafka"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>The operations for managing an Amazon MSK cluster.</p>",
+                "smithy.api#title": "Managed Streaming for Kafka"
+            },
             "version": "2018-11-14",
             "operations": [
                 {
@@ -2137,27 +2195,15 @@
                     "target": "com.amazonaws.kafka#UpdateConfiguration"
                 },
                 {
+                    "target": "com.amazonaws.kafka#UpdateConnectivity"
+                },
+                {
                     "target": "com.amazonaws.kafka#UpdateMonitoring"
                 },
                 {
                     "target": "com.amazonaws.kafka#UpdateSecurity"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Kafka",
-                    "arnNamespace": "kafka",
-                    "cloudFormationName": "MSK",
-                    "cloudTrailEventSource": "kafka.amazonaws.com",
-                    "endpointPrefix": "kafka"
-                },
-                "aws.auth#sigv4": {
-                    "name": "kafka"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>The operations for managing an Amazon MSK cluster.</p>",
-                "smithy.api#title": "Managed Streaming for Kafka"
-            }
+            ]
         },
         "com.amazonaws.kafka#KafkaVersion": {
             "type": "structure",
@@ -2546,7 +2592,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of Kafka versions.</p>",
+                "smithy.api#documentation": "<p>Returns a list of Apache Kafka versions.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/v1/kafka-versions",
@@ -2886,7 +2932,7 @@
                 "KafkaVersion": {
                     "target": "com.amazonaws.kafka#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Kafka version.</p>",
+                        "smithy.api#documentation": "<p>The Apache Kafka version.</p>",
                         "smithy.api#jsonName": "kafkaVersion"
                     }
                 },
@@ -2917,6 +2963,13 @@
                         "smithy.api#documentation": "<p>Includes all encryption-related information.</p>",
                         "smithy.api#jsonName": "encryptionInfo"
                     }
+                },
+                "ConnectivityInfo": {
+                    "target": "com.amazonaws.kafka#ConnectivityInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the broker access configuration.</p>",
+                        "smithy.api#jsonName": "connectivityInfo"
+                    }
                 }
             },
             "traits": {
@@ -2929,14 +2982,14 @@
                 "EnabledInBroker": {
                     "target": "com.amazonaws.kafka#__boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether you want to enable or disable the Node Exporter.</p>",
+                        "smithy.api#documentation": "<p>Indicates whether you want to turn on or turn off the Node Exporter.</p>",
                         "smithy.api#jsonName": "enabledInBroker",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Indicates whether you want to enable or disable the Node Exporter.</p>"
+                "smithy.api#documentation": "<p>Indicates whether you want to turn on or turn off the Node Exporter.</p>"
             }
         },
         "com.amazonaws.kafka#NodeExporterInfo": {
@@ -2945,14 +2998,14 @@
                 "EnabledInBroker": {
                     "target": "com.amazonaws.kafka#__boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether you want to enable or disable the Node Exporter.</p>",
+                        "smithy.api#documentation": "<p>Indicates whether you want to turn on or turn off the Node Exporter.</p>",
                         "smithy.api#jsonName": "enabledInBroker",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Indicates whether you want to enable or disable the Node Exporter.</p>"
+                "smithy.api#documentation": "<p>Indicates whether you want to turn on or turn off the Node Exporter.</p>"
             }
         },
         "com.amazonaws.kafka#NodeInfo": {
@@ -3079,14 +3132,14 @@
                 "JmxExporter": {
                     "target": "com.amazonaws.kafka#JmxExporter",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether you want to enable or disable the JMX Exporter.</p>",
+                        "smithy.api#documentation": "<p>Indicates whether you want to turn on or turn off the JMX Exporter.</p>",
                         "smithy.api#jsonName": "jmxExporter"
                     }
                 },
                 "NodeExporter": {
                     "target": "com.amazonaws.kafka#NodeExporter",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether you want to enable or disable the Node Exporter.</p>",
+                        "smithy.api#documentation": "<p>Indicates whether you want to turn on or turn off the Node Exporter.</p>",
                         "smithy.api#jsonName": "nodeExporter"
                     }
                 }
@@ -3101,20 +3154,35 @@
                 "JmxExporter": {
                     "target": "com.amazonaws.kafka#JmxExporterInfo",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether you want to enable or disable the JMX Exporter.</p>",
+                        "smithy.api#documentation": "<p>Indicates whether you want to turn on or turn off the JMX Exporter.</p>",
                         "smithy.api#jsonName": "jmxExporter"
                     }
                 },
                 "NodeExporter": {
                     "target": "com.amazonaws.kafka#NodeExporterInfo",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether you want to enable or disable the Node Exporter.</p>",
+                        "smithy.api#documentation": "<p>Indicates whether you want to turn on or turn off the Node Exporter.</p>",
                         "smithy.api#jsonName": "nodeExporter"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Prometheus settings.</p>"
+            }
+        },
+        "com.amazonaws.kafka#PublicAccess": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value DISABLED indicates that public access is turned off. SERVICE_PROVIDED_EIPS indicates that public access is turned on.</p>",
+                        "smithy.api#jsonName": "type"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Public access control for brokers."
             }
         },
         "com.amazonaws.kafka#RebootBroker": {
@@ -3376,7 +3444,7 @@
                 "Enabled": {
                     "target": "com.amazonaws.kafka#__boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether you want to enable or disable TLS authentication.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether you want to turn on or turn off TLS authentication.</p>",
                         "smithy.api#jsonName": "enabled"
                     }
                 }
@@ -3415,7 +3483,7 @@
                 "Enabled": {
                     "target": "com.amazonaws.kafka#__boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether you want to enable or disable unauthenticated traffic to your cluster.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether you want to turn on or turn off unauthenticated traffic to your cluster.</p>",
                         "smithy.api#jsonName": "enabled"
                     }
                 }
@@ -4032,6 +4100,94 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Latest revision of the configuration.</p>",
                         "smithy.api#jsonName": "latestRevision"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kafka#UpdateConnectivity": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kafka#UpdateConnectivityRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kafka#UpdateConnectivityResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kafka#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the cluster's connectivity configuration.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/v1/clusters/{ClusterArn}/connectivity",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.kafka#UpdateConnectivityRequest": {
+            "type": "structure",
+            "members": {
+                "ClusterArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the configuration.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConnectivityInfo": {
+                    "target": "com.amazonaws.kafka#ConnectivityInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the broker access configuration.</p>",
+                        "smithy.api#jsonName": "connectivityInfo",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CurrentVersion": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the MSK cluster to update. Cluster versions aren't simple numbers. You can describe an MSK cluster to find its version. When this update operation is successful, it generates a new cluster version.</p>",
+                        "smithy.api#jsonName": "currentVersion",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Request body for UpdateConnectivity."
+            }
+        },
+        "com.amazonaws.kafka#UpdateConnectivityResponse": {
+            "type": "structure",
+            "members": {
+                "ClusterArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster.</p>",
+                        "smithy.api#jsonName": "clusterArn"
+                    }
+                },
+                "ClusterOperationArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster operation.</p>",
+                        "smithy.api#jsonName": "clusterOperationArn"
                     }
                 }
             }

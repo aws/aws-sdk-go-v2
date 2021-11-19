@@ -293,6 +293,24 @@
         },
         "com.amazonaws.ssm#AmazonSSM": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "SSM",
+                    "arnNamespace": "ssm",
+                    "cloudFormationName": "SSM",
+                    "cloudTrailEventSource": "ssm.amazonaws.com",
+                    "endpointPrefix": "ssm"
+                },
+                "aws.auth#sigv4": {
+                    "name": "ssm"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<p>Amazon Web Services Systems Manager is a collection of capabilities that helps you automate management tasks such as\n   collecting system inventory, applying operating system (OS) patches, automating the creation of\n   Amazon Machine Images (AMIs), and configuring operating systems (OSs) and applications at scale.\n   Systems Manager lets you remotely and securely manage the configuration of your managed instances. A\n    <i>managed instance</i> is any Amazon Elastic Compute Cloud instance (EC2 instance), or any\n   on-premises server or virtual machine (VM) in your hybrid environment that has been configured\n   for Systems Manager.</p>\n         <p>This reference is intended to be used with the <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/\">Amazon Web Services Systems Manager User Guide</a>.</p>\n         <p>To get started, verify prerequisites and configure managed instances. For more information,\n   see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html\">Setting up\n    Amazon Web Services Systems Manager</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <p class=\"title\">\n            <b>Related resources</b>\n         </p>\n         <ul>\n            <li>\n               <p>For information about how to use a Query API, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/making-api-requests.html\">Making API requests</a>. </p>\n            </li>\n            <li>\n               <p>For information about other API operations you can perform on EC2 instances, see the\n      <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/\">Amazon EC2 API Reference</a>.</p>\n            </li>\n            <li>\n               <p>For information about AppConfig, a capability of Systems Manager, see the <a href=\"https://docs.aws.amazon.com/appconfig/latest/userguide/\">AppConfig User Guide</a> and the <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/\">AppConfig API\n     Reference</a>.</p>\n            </li>\n            <li>\n               <p>For information about Incident Manager, a capability of Systems Manager, see the <a href=\"https://docs.aws.amazon.com/incident-manager/latest/userguide/\">Incident Manager User Guide</a>\n     and the <a href=\"https://docs.aws.amazon.com/incident-manager/latest/APIReference/\">Incident Manager API\n      Reference</a>.</p>\n            </li>\n         </ul>",
+                "smithy.api#title": "Amazon Simple Systems Manager (SSM)",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://ssm.amazonaws.com/doc/2014-11-06/"
+                }
+            },
             "version": "2014-11-06",
             "operations": [
                 {
@@ -700,25 +718,7 @@
                 {
                     "target": "com.amazonaws.ssm#UpdateServiceSetting"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "SSM",
-                    "arnNamespace": "ssm",
-                    "cloudFormationName": "SSM",
-                    "cloudTrailEventSource": "ssm.amazonaws.com",
-                    "endpointPrefix": "ssm"
-                },
-                "aws.auth#sigv4": {
-                    "name": "ssm"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>Amazon Web Services Systems Manager is a collection of capabilities that helps you automate management tasks such as\n   collecting system inventory, applying operating system (OS) patches, automating the creation of\n   Amazon Machine Images (AMIs), and configuring operating systems (OSs) and applications at scale.\n   Systems Manager lets you remotely and securely manage the configuration of your managed instances. A\n    <i>managed instance</i> is any Amazon Elastic Compute Cloud instance (EC2 instance), or any\n   on-premises server or virtual machine (VM) in your hybrid environment that has been configured\n   for Systems Manager.</p>\n         <p>This reference is intended to be used with the <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/\">Amazon Web Services Systems Manager User Guide</a>.</p>\n         <p>To get started, verify prerequisites and configure managed instances. For more information,\n   see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html\">Setting up\n    Amazon Web Services Systems Manager</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <p class=\"title\">\n            <b>Related resources</b>\n         </p>\n         <ul>\n            <li>\n               <p>For information about how to use a Query API, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/making-api-requests.html\">Making API requests</a>. </p>\n            </li>\n            <li>\n               <p>For information about other API operations you can perform on EC2 instances, see the\n      <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/\">Amazon EC2 API Reference</a>.</p>\n            </li>\n            <li>\n               <p>For information about AppConfig, a capability of Systems Manager, see the <a href=\"https://docs.aws.amazon.com/appconfig/latest/userguide/\">AppConfig User Guide</a> and the <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/\">AppConfig API\n     Reference</a>.</p>\n            </li>\n            <li>\n               <p>For information about Incident Manager, a capability of Systems Manager, see the <a href=\"https://docs.aws.amazon.com/incident-manager/latest/userguide/\">Incident Manager User Guide</a>\n     and the <a href=\"https://docs.aws.amazon.com/incident-manager/latest/APIReference/\">Incident Manager API\n      Reference</a>.</p>\n            </li>\n         </ul>",
-                "smithy.api#title": "Amazon Simple Systems Manager (SSM)",
-                "smithy.api#xmlNamespace": {
-                    "uri": "http://ssm.amazonaws.com/doc/2014-11-06/"
-                }
-            }
+            ]
         },
         "com.amazonaws.ssm#ApplyOnlyAtCronInterval": {
             "type": "boolean"
@@ -978,7 +978,7 @@
                 "AutomationTargetParameterName": {
                     "target": "com.amazonaws.ssm#AutomationTargetParameterName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the target for the association. This target is required for associations that use an\n   Automation runbook and target resources by using rate controls. Automation is a capability of\n   Amazon Web Services Systems Manager.</p>"
+                        "smithy.api#documentation": "<p>Choose the parameter that will define how your automation will branch out. This target is\n   required for associations that use an Automation runbook and target resources by using rate\n   controls. Automation is a capability of Amazon Web Services Systems Manager.</p>"
                     }
                 },
                 "Parameters": {
@@ -4481,7 +4481,7 @@
                 "AutomationTargetParameterName": {
                     "target": "com.amazonaws.ssm#AutomationTargetParameterName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the target for the association. This target is required for associations that use an\n   Automation runbook and target resources by using rate controls. Automation is a capability of\n   Amazon Web Services Systems Manager.</p>"
+                        "smithy.api#documentation": "<p>Choose the parameter that will define how your automation will branch out. This target is\n   required for associations that use an Automation runbook and target resources by using rate\n   controls. Automation is a capability of Amazon Web Services Systems Manager.</p>"
                     }
                 },
                 "MaxErrors": {
@@ -16748,6 +16748,16 @@
                 }
             }
         },
+        "com.amazonaws.ssm#MaxSessionDuration": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4
+                },
+                "smithy.api#pattern": "^([1-9]|[1-9][0-9]|[1-9][0-9][0-9]|1[0-4][0-3][0-9]|1440)$"
+            }
+        },
         "com.amazonaws.ssm#MetadataKey": {
             "type": "string",
             "traits": {
@@ -17034,6 +17044,10 @@
                     {
                         "value": "MACOS",
                         "name": "MacOS"
+                    },
+                    {
+                        "value": "RASPBIAN",
+                        "name": "Raspbian"
                     }
                 ]
             }
@@ -19240,7 +19254,7 @@
                 "Key": {
                     "target": "com.amazonaws.ssm#ParameterStringFilterKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the filter.</p>\n         <p>The <code>ParameterStringFilter</code> object is used by the <a>DescribeParameters</a> and <a>GetParametersByPath</a> API operations.\n   However, not all of the pattern values listed for <code>Key</code> can be used with both\n   operations.</p>\n         <p>For <code>DescribeActions</code>, all of the listed patterns are valid except\n    <code>Label</code>.</p>\n         <p>For <code>GetParametersByPath</code>, the following patterns listed for <code>Key</code>\n   aren't valid: <code>tag</code>, <code>DataType</code>, <code>Name</code>, <code>Path</code>, and\n    <code>Tier</code>.</p>\n         <p>For examples of Amazon Web Services CLI commands demonstrating valid parameter filter constructions, see\n    <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-search.html\">Searching for Systems Manager parameters</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The name of the filter.</p>\n         <p>The <code>ParameterStringFilter</code> object is used by the <a>DescribeParameters</a> and <a>GetParametersByPath</a> API operations.\n   However, not all of the pattern values listed for <code>Key</code> can be used with both\n   operations.</p>\n         <p>For <code>DescribeParameters</code>, all of the listed patterns are valid except\n    <code>Label</code>.</p>\n         <p>For <code>GetParametersByPath</code>, the following patterns listed for <code>Key</code>\n   aren't valid: <code>tag</code>, <code>DataType</code>, <code>Name</code>, <code>Path</code>, and\n    <code>Tier</code>.</p>\n         <p>For examples of Amazon Web Services CLI commands demonstrating valid parameter filter constructions, see\n    <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-search.html\">Searching for Systems Manager parameters</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -22789,6 +22803,12 @@
                         "smithy.api#documentation": "<p>The ID of the Amazon Web Services user account that started the session.</p>"
                     }
                 },
+                "Reason": {
+                    "target": "com.amazonaws.ssm#SessionReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for connecting to the instance.</p>"
+                    }
+                },
                 "Details": {
                     "target": "com.amazonaws.ssm#SessionDetails",
                     "traits": {
@@ -22799,6 +22819,12 @@
                     "target": "com.amazonaws.ssm#SessionManagerOutputUrl",
                     "traits": {
                         "smithy.api#documentation": "<p>Reserved for future use.</p>"
+                    }
+                },
+                "MaxSessionDuration": {
+                    "target": "com.amazonaws.ssm#MaxSessionDuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum duration of a session before it terminates.</p>"
                     }
                 }
             },
@@ -22991,6 +23017,16 @@
                     "min": 1,
                     "max": 256
                 }
+            }
+        },
+        "com.amazonaws.ssm#SessionReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^.{1,256}$"
             }
         },
         "com.amazonaws.ssm#SessionState": {
@@ -23477,6 +23513,12 @@
                     "target": "com.amazonaws.ssm#DocumentARN",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the SSM document to define the parameters and plugin settings for the session.\n   For example, <code>SSM-SessionManagerRunShell</code>. You can call the <a>GetDocument</a> API to verify the document exists before attempting to start a session.\n   If no document name is provided, a shell to the instance is launched by default.</p>"
+                    }
+                },
+                "Reason": {
+                    "target": "com.amazonaws.ssm#SessionReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for connecting to the instance. This value is included in the details for the Amazon CloudWatch Events event created when you start the session.</p>"
                     }
                 },
                 "Parameters": {
@@ -24561,7 +24603,7 @@
                 "AutomationTargetParameterName": {
                     "target": "com.amazonaws.ssm#AutomationTargetParameterName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the target for the association. This target is required for associations that use an\n   Automation runbook and target resources by using rate controls. Automation is a capability of\n   Amazon Web Services Systems Manager.</p>"
+                        "smithy.api#documentation": "<p>Choose the parameter that will define how your automation will branch out. This target is\n   required for associations that use an Automation runbook and target resources by using rate\n   controls. Automation is a capability of Amazon Web Services Systems Manager.</p>"
                     }
                 },
                 "MaxErrors": {

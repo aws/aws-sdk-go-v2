@@ -301,7 +301,7 @@
                 "IdentityProviderType": {
                     "target": "com.amazonaws.transfer#IdentityProviderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the mode of authentication for a server. The default value is\n        <code>SERVICE_MANAGED</code>, which allows you to store and access user credentials within\n      the Amazon Web Services Transfer Family service.</p>\n         <p>Use <code>AWS_DIRECTORY_SERVICE</code> to provide access to\n      Active Directory groups in Amazon Web Services Managed Active Directory or Microsoft Active Directory in your\n      on-premises environment or in Amazon Web Services using AD Connectors. This option also requires you to\n      provide a Directory ID using the <code>IdentityProviderDetails</code> parameter.</p>\n         <p>Use the <code>API_GATEWAY</code> value to integrate with an identity provider of your choosing. The\n      <code>API_GATEWAY</code> setting requires you to provide an API Gateway endpoint URL to call\n      for authentication using the <code>IdentityProviderDetails</code> parameter.</p>"
+                        "smithy.api#documentation": "<p>Specifies the mode of authentication for a server. The default value is\n        <code>SERVICE_MANAGED</code>, which allows you to store and access user credentials within\n      the Amazon Web Services Transfer Family service.</p>\n         <p>Use <code>AWS_DIRECTORY_SERVICE</code> to provide access to\n      Active Directory groups in Amazon Web Services Managed Active Directory or Microsoft Active Directory in your\n      on-premises environment or in Amazon Web Services using AD Connectors. This option also requires you to\n      provide a Directory ID using the <code>IdentityProviderDetails</code> parameter.</p>\n         <p>Use the <code>API_GATEWAY</code> value to integrate with an identity provider of your choosing. The\n      <code>API_GATEWAY</code> setting requires you to provide an API Gateway endpoint URL to call\n      for authentication using the <code>IdentityProviderDetails</code> parameter.</p>\n         <p>Use the <code>LAMBDA</code> value to directly use a Lambda function as your identity provider. If you choose this value,\n      you must specify the ARN for the lambda function in the <code>Function</code> parameter for the <code>IdentityProviderDetails</code> data type.</p>"
                     }
                 },
                 "LoggingRole": {
@@ -1370,7 +1370,7 @@
                 "IdentityProviderType": {
                     "target": "com.amazonaws.transfer#IdentityProviderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the mode of authentication for a server. The default value is\n        <code>SERVICE_MANAGED</code>, which allows you to store and access user credentials within\n      the Amazon Web Services Transfer Family service.</p>\n         <p>Use <code>AWS_DIRECTORY_SERVICE</code> to provide access to\n      Active Directory groups in Amazon Web Services Managed Active Directory or Microsoft Active Directory in your\n      on-premises environment or in Amazon Web Services using AD Connectors. This option also requires you to\n      provide a Directory ID using the <code>IdentityProviderDetails</code> parameter.</p>\n         <p>Use the <code>API_GATEWAY</code> value to integrate with an identity provider of your choosing. The\n      <code>API_GATEWAY</code> setting requires you to provide an API Gateway endpoint URL to call\n      for authentication using the <code>IdentityProviderDetails</code> parameter.</p>"
+                        "smithy.api#documentation": "<p>Specifies the mode of authentication for a server. The default value is\n        <code>SERVICE_MANAGED</code>, which allows you to store and access user credentials within\n      the Amazon Web Services Transfer Family service.</p>\n         <p>Use <code>AWS_DIRECTORY_SERVICE</code> to provide access to\n      Active Directory groups in Amazon Web Services Managed Active Directory or Microsoft Active Directory in your\n      on-premises environment or in Amazon Web Services using AD Connectors. This option also requires you to\n      provide a Directory ID using the <code>IdentityProviderDetails</code> parameter.</p>\n         <p>Use the <code>API_GATEWAY</code> value to integrate with an identity provider of your choosing. The\n      <code>API_GATEWAY</code> setting requires you to provide an API Gateway endpoint URL to call\n      for authentication using the <code>IdentityProviderDetails</code> parameter.</p>\n         <p>Use the <code>LAMBDA</code> value to directly use a Lambda function as your identity provider. If you choose this value,\n      you must specify the ARN for the lambda function in the <code>Function</code> parameter for the <code>IdentityProviderDetails</code> data type.</p>"
                     }
                 },
                 "LoggingRole": {
@@ -1825,6 +1825,16 @@
                 "smithy.api#box": {}
             }
         },
+        "com.amazonaws.transfer#Function": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 170
+                },
+                "smithy.api#pattern": "^arn:[a-z-]+:lambda:.*$"
+            }
+        },
         "com.amazonaws.transfer#HomeDirectory": {
             "type": "string",
             "traits": {
@@ -1917,6 +1927,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the Amazon Web ServicesDirectory Service directory that you want to stop sharing.</p>"
                     }
+                },
+                "Function": {
+                    "target": "com.amazonaws.transfer#Function",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for a lambda function to use for the Identity provider.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1939,6 +1955,10 @@
                     {
                         "value": "AWS_DIRECTORY_SERVICE",
                         "name": "AWS_DIRECTORY_SERVICE"
+                    },
+                    {
+                        "value": "AWS_LAMBDA",
+                        "name": "AWS_LAMBDA"
                     }
                 ]
             }
@@ -2718,7 +2738,7 @@
                 "IdentityProviderType": {
                     "target": "com.amazonaws.transfer#IdentityProviderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the mode of authentication for a server. The default value is\n        <code>SERVICE_MANAGED</code>, which allows you to store and access user credentials within\n      the Amazon Web Services Transfer Family service.</p>\n         <p>Use <code>AWS_DIRECTORY_SERVICE</code> to provide access to\n      Active Directory groups in Amazon Web Services Managed Active Directory or Microsoft Active Directory in your\n      on-premises environment or in Amazon Web Services using AD Connectors. This option also requires you to\n      provide a Directory ID using the <code>IdentityProviderDetails</code> parameter.</p>\n         <p>Use the <code>API_GATEWAY</code> value to integrate with an identity provider of your choosing. The\n      <code>API_GATEWAY</code> setting requires you to provide an API Gateway endpoint URL to call\n      for authentication using the <code>IdentityProviderDetails</code> parameter.</p>"
+                        "smithy.api#documentation": "<p>Specifies the mode of authentication for a server. The default value is\n        <code>SERVICE_MANAGED</code>, which allows you to store and access user credentials within\n      the Amazon Web Services Transfer Family service.</p>\n         <p>Use <code>AWS_DIRECTORY_SERVICE</code> to provide access to\n      Active Directory groups in Amazon Web Services Managed Active Directory or Microsoft Active Directory in your\n      on-premises environment or in Amazon Web Services using AD Connectors. This option also requires you to\n      provide a Directory ID using the <code>IdentityProviderDetails</code> parameter.</p>\n         <p>Use the <code>API_GATEWAY</code> value to integrate with an identity provider of your choosing. The\n      <code>API_GATEWAY</code> setting requires you to provide an API Gateway endpoint URL to call\n      for authentication using the <code>IdentityProviderDetails</code> parameter.</p>\n         <p>Use the <code>LAMBDA</code> value to directly use a Lambda function as your identity provider. If you choose this value,\n      you must specify the ARN for the lambda function in the <code>Function</code> parameter for the <code>IdentityProviderDetails</code> data type.</p>"
                     }
                 },
                 "EndpointType": {
@@ -3906,6 +3926,21 @@
         },
         "com.amazonaws.transfer#TransferService": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Transfer",
+                    "arnNamespace": "transfer",
+                    "cloudFormationName": "Transfer",
+                    "cloudTrailEventSource": "transfer.amazonaws.com",
+                    "endpointPrefix": "transfer"
+                },
+                "aws.auth#sigv4": {
+                    "name": "transfer"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<p>Amazon Web Services Transfer Family is a fully managed service that enables the transfer of files over the\n      File Transfer Protocol (FTP), File Transfer Protocol over SSL (FTPS), or Secure Shell (SSH)\n      File Transfer Protocol (SFTP) directly into and out of Amazon Simple Storage Service (Amazon\n      S3). Amazon Web Services helps you seamlessly migrate your file transfer workflows to Amazon Web Services Transfer Family by\n      integrating with existing authentication systems, and providing DNS routing with Amazon Route\n      53 so nothing changes for your customers and partners, or their applications. With your data\n      in Amazon S3, you can use it with Amazon Web Services services for processing, analytics, machine learning,\n      and archiving. Getting started with Amazon Web Services Transfer Family is easy since there is no\n      infrastructure to buy and set up.</p>",
+                "smithy.api#title": "AWS Transfer Family"
+            },
             "version": "2018-11-05",
             "operations": [
                 {
@@ -4004,22 +4039,7 @@
                 {
                     "target": "com.amazonaws.transfer#UpdateUser"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Transfer",
-                    "arnNamespace": "transfer",
-                    "cloudFormationName": "Transfer",
-                    "cloudTrailEventSource": "transfer.amazonaws.com",
-                    "endpointPrefix": "transfer"
-                },
-                "aws.auth#sigv4": {
-                    "name": "transfer"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>Amazon Web Services Transfer Family is a fully managed service that enables the transfer of files over the\n      File Transfer Protocol (FTP), File Transfer Protocol over SSL (FTPS), or Secure Shell (SSH)\n      File Transfer Protocol (SFTP) directly into and out of Amazon Simple Storage Service (Amazon\n      S3). Amazon Web Services helps you seamlessly migrate your file transfer workflows to Amazon Web Services Transfer Family by\n      integrating with existing authentication systems, and providing DNS routing with Amazon Route\n      53 so nothing changes for your customers and partners, or their applications. With your data\n      in Amazon S3, you can use it with Amazon Web Services services for processing, analytics, machine learning,\n      and archiving. Getting started with Amazon Web Services Transfer Family is easy since there is no\n      infrastructure to buy and set up.</p>",
-                "smithy.api#title": "AWS Transfer Family"
-            }
+            ]
         },
         "com.amazonaws.transfer#UntagResource": {
             "type": "operation",
