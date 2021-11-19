@@ -1,3 +1,8 @@
+# v1.16.0 (2021-11-19)
+
+* **Feature**: API client updated
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.0 (2021-11-12)
 
 * **Feature**: Service clients now support custom endpoints that have an initial URI path defined.

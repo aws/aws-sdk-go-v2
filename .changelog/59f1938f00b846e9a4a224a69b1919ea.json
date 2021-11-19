@@ -1,8 +1,0 @@
-{
-    "id": "59f1938f-00b8-46e9-a4a2-24a69b1919ea",
-    "type": "announcement",
-    "description": "Fix API modeling bug incorrectly generating `DocumentAttributeValue` type as a union instead of a structure. This update corrects this bug by correcting the `DocumentAttributeValue` type to be a `struct` instead of an `interface`. This change also removes the `DocumentAttributeValueMember` types. To migrate to this change your application using service/kendra will need to be updated to use struct members in `DocumentAttributeValue` instead of `DocumentAttributeValueMember` types.",
-    "modules": [
-        "service/kendra"
-    ]
-}

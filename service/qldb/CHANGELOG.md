@@ -1,3 +1,8 @@
+# v1.9.0 (2021-11-19)
+
+* **Feature**: API client updated
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.8.0 (2021-11-06)
 
 * **Feature**: The SDK now supports configuration of FIPS and DualStack endpoints using environment variables, shared configuration, or programmatically.

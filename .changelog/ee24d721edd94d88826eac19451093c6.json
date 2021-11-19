@@ -1,8 +1,0 @@
-{
-    "id": "ee24d721-edd9-4d88-826e-ac19451093c6",
-    "type": "bugfix",
-    "description": "Fixed a bug that prevented aws.EndpointResolverWithOptionsFunc from satisfying the aws.EndpointResolverWithOptions interface.",
-    "modules": [
-        "."
-    ]
-}
