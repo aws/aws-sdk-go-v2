@@ -127,7 +127,7 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "places.geo.{region}.amazonaws.com",
+				Hostname:          "geo.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
@@ -239,7 +239,7 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "places.geo.{region}.amazonaws.com",
+				Hostname:          "geo.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
