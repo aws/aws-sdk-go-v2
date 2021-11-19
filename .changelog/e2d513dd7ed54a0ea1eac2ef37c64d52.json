@@ -3,7 +3,6 @@
     "type": "feature",
     "description": "API client updated",
     "modules": [
-        ".",
         "service/amplifybackend",
         "service/apigateway",
         "service/appconfig",
