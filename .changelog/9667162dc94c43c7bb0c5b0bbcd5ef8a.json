@@ -1,0 +1,8 @@
+{
+    "id": "9667162d-c94c-43c7-bb0c-5b0bbcd5ef8a",
+    "type": "bugfix",
+    "description": "Fixed a race condition that caused concurrent calls relying on endpoint discovery to share the same `url.URL` reference in their operation's http.Request.",
+    "modules": [
+        "service/internal/endpoint-discovery"
+    ]
+}
