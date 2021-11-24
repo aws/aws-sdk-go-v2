@@ -35,6 +35,7 @@ type UntagResourceInput struct {
 	ResourceArn *string
 
 	// The keys of the tags to be removed.
+	// Note:  This does not affect Docker tags, this only affects ECR Repository Tags
 	//
 	// This member is required.
 	TagKeys []string
