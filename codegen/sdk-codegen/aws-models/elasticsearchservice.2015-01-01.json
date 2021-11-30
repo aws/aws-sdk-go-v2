@@ -1690,6 +1690,15 @@
                 ]
             }
         },
+        "com.amazonaws.elasticsearchservice#DeploymentType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 128
+                }
+            }
+        },
         "com.amazonaws.elasticsearchservice#DescribeDomainAutoTunes": {
             "type": "operation",
             "input": {
@@ -2829,6 +2838,29 @@
             "type": "double",
             "traits": {
                 "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.elasticsearchservice#DryRun": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.elasticsearchservice#DryRunResults": {
+            "type": "structure",
+            "members": {
+                "DeploymentType": {
+                    "target": "com.amazonaws.elasticsearchservice#DeploymentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Specifies the deployment mechanism through which the update shall be applied on the domain.\n            Possible responses are\n            <code>Blue/Green</code> (The update will require a blue/green deployment.)\n            <code>DynamicUpdate</code> (The update can be applied in-place without a Blue/Green deployment required.)\n            <code>Undetermined</code> (The domain is undergoing an update which needs to complete before the deployment type can be predicted.)\n            <code>None</code> (The configuration change matches the current configuration and will not result in any update.)\n        </p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.elasticsearchservice#Message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains an optional message associated with the DryRunResults.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.elasticsearchservice#Duration": {
@@ -4834,6 +4866,15 @@
                 "smithy.api#documentation": "<p>\n      Maximum number of Instances that can be instantiated for given InstanceType.\n    </p>"
             }
         },
+        "com.amazonaws.elasticsearchservice#Message": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                }
+            }
+        },
         "com.amazonaws.elasticsearchservice#MinimumInstanceCount": {
             "type": "integer",
             "traits": {
@@ -6393,6 +6434,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies Auto-Tune options.</p>"
                     }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.elasticsearchservice#DryRun",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n           This flag, when set to True, specifies whether the <code>UpdateElasticsearchDomain</code> request should return the results of validation checks without actually applying the change.\n           This flag, when set to True, specifies the deployment mechanism through which the update shall be applied on the domain.\n           This will not actually perform the Update.\n       </p>"
+                    }
                 }
             },
             "traits": {
@@ -6407,6 +6454,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The status of the updated Elasticsearch domain. </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "DryRunResults": {
+                    "target": "com.amazonaws.elasticsearchservice#DryRunResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains result of DryRun. </p>"
                     }
                 }
             },

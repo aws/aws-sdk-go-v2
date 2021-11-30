@@ -5840,6 +5840,11 @@ func awsRestxml_serializeOpHttpBindingsPutBucketNotificationConfigurationInput(v
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 	}
 
+	if v.SkipDestinationValidation {
+		locationName := "X-Amz-Skip-Destination-Validation"
+		encoder.SetHeader(locationName).Boolean(v.SkipDestinationValidation)
+	}
+
 	return nil
 }
 
@@ -9110,6 +9115,11 @@ func awsRestxml_serializeDocumentErrorDocument(v *types.ErrorDocument, value smi
 	return nil
 }
 
+func awsRestxml_serializeDocumentEventBridgeConfiguration(v *types.EventBridgeConfiguration, value smithyxml.Value) error {
+	defer value.Close()
+	return nil
+}
+
 func awsRestxml_serializeDocumentEventList(v []types.Event, value smithyxml.Value) error {
 	var array *smithyxml.Array
 	if !value.IsFlattened() {
@@ -10020,6 +10030,28 @@ func awsRestxml_serializeDocumentLifecycleRule(v *types.LifecycleRule, value smi
 
 func awsRestxml_serializeDocumentLifecycleRuleAndOperator(v *types.LifecycleRuleAndOperator, value smithyxml.Value) error {
 	defer value.Close()
+	if v.ObjectSizeGreaterThan != 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ObjectSizeGreaterThan",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Long(v.ObjectSizeGreaterThan)
+	}
+	if v.ObjectSizeLessThan != 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ObjectSizeLessThan",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Long(v.ObjectSizeLessThan)
+	}
 	if v.Prefix != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
@@ -10062,6 +10094,28 @@ func awsRestxml_serializeDocumentLifecycleRuleFilter(v types.LifecycleRuleFilter
 		if err := awsRestxml_serializeDocumentLifecycleRuleAndOperator(&uv.Value, av); err != nil {
 			return err
 		}
+
+	case *types.LifecycleRuleFilterMemberObjectSizeGreaterThan:
+		customMemberNameAttr := []smithyxml.Attr{}
+		customMemberName := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ObjectSizeGreaterThan",
+			},
+			Attr: customMemberNameAttr,
+		}
+		av := value.MemberElement(customMemberName)
+		av.Long(uv.Value)
+
+	case *types.LifecycleRuleFilterMemberObjectSizeLessThan:
+		customMemberNameAttr := []smithyxml.Attr{}
+		customMemberName := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ObjectSizeLessThan",
+			},
+			Attr: customMemberNameAttr,
+		}
+		av := value.MemberElement(customMemberName)
+		av.Long(uv.Value)
 
 	case *types.LifecycleRuleFilterMemberPrefix:
 		customMemberNameAttr := []smithyxml.Attr{}
@@ -10334,6 +10388,17 @@ func awsRestxml_serializeDocumentMetricsFilter(v types.MetricsFilter, value smit
 
 func awsRestxml_serializeDocumentNoncurrentVersionExpiration(v *types.NoncurrentVersionExpiration, value smithyxml.Value) error {
 	defer value.Close()
+	if v.NewerNoncurrentVersions != 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "NewerNoncurrentVersions",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Integer(v.NewerNoncurrentVersions)
+	}
 	if v.NoncurrentDays != 0 {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
@@ -10350,6 +10415,17 @@ func awsRestxml_serializeDocumentNoncurrentVersionExpiration(v *types.Noncurrent
 
 func awsRestxml_serializeDocumentNoncurrentVersionTransition(v *types.NoncurrentVersionTransition, value smithyxml.Value) error {
 	defer value.Close()
+	if v.NewerNoncurrentVersions != 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "NewerNoncurrentVersions",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Integer(v.NewerNoncurrentVersions)
+	}
 	if v.NoncurrentDays != 0 {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
@@ -10392,6 +10468,19 @@ func awsRestxml_serializeDocumentNoncurrentVersionTransitionList(v []types.Noncu
 
 func awsRestxml_serializeDocumentNotificationConfiguration(v *types.NotificationConfiguration, value smithyxml.Value) error {
 	defer value.Close()
+	if v.EventBridgeConfiguration != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "EventBridgeConfiguration",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentEventBridgeConfiguration(v.EventBridgeConfiguration, el); err != nil {
+			return err
+		}
+	}
 	if v.LambdaFunctionConfigurations != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{

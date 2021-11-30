@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// For Redis engine version 6.x onwards: Deletes a user group. The user group must
+// For Redis engine version 6.0 onwards: Deletes a user group. The user group must
 // first be disassociated from the replication group before it can be deleted. For
 // more information, see Using Role Based Access Control (RBAC)
 // (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.RBAC.html).
@@ -47,6 +47,9 @@ type DeleteUserGroupOutput struct {
 
 	// The current supported value is Redis.
 	Engine *string
+
+	// The minimum engine version required, which is Redis 6.0
+	MinimumEngineVersion *string
 
 	// A list of updates being applied to the user group.
 	PendingChanges *types.UserGroupPendingChanges

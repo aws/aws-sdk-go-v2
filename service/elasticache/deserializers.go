@@ -1780,6 +1780,9 @@ func awsAwsquery_deserializeOpErrorCreateUser(response *smithyhttp.Response, met
 	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
+	case strings.EqualFold("ServiceLinkedRoleNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorServiceLinkedRoleNotFoundFault(response, errorBody)
+
 	case strings.EqualFold("TagQuotaPerResourceExceeded", errorCode):
 		return awsAwsquery_deserializeErrorTagQuotaPerResourceExceeded(response, errorBody)
 
@@ -1902,6 +1905,9 @@ func awsAwsquery_deserializeOpErrorCreateUserGroup(response *smithyhttp.Response
 
 	case strings.EqualFold("InvalidParameterValue", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
+
+	case strings.EqualFold("ServiceLinkedRoleNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorServiceLinkedRoleNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("TagQuotaPerResourceExceeded", errorCode):
 		return awsAwsquery_deserializeErrorTagQuotaPerResourceExceeded(response, errorBody)
@@ -3010,6 +3016,9 @@ func awsAwsquery_deserializeOpErrorDeleteUser(response *smithyhttp.Response, met
 	case strings.EqualFold("InvalidUserState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidUserStateFault(response, errorBody)
 
+	case strings.EqualFold("ServiceLinkedRoleNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorServiceLinkedRoleNotFoundFault(response, errorBody)
+
 	case strings.EqualFold("UserNotFound", errorCode):
 		return awsAwsquery_deserializeErrorUserNotFoundFault(response, errorBody)
 
@@ -3123,6 +3132,9 @@ func awsAwsquery_deserializeOpErrorDeleteUserGroup(response *smithyhttp.Response
 
 	case strings.EqualFold("InvalidUserGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidUserGroupStateFault(response, errorBody)
+
+	case strings.EqualFold("ServiceLinkedRoleNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorServiceLinkedRoleNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("UserGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorUserGroupNotFoundFault(response, errorBody)
@@ -4924,6 +4936,9 @@ func awsAwsquery_deserializeOpErrorDescribeUserGroups(response *smithyhttp.Respo
 	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
+	case strings.EqualFold("ServiceLinkedRoleNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorServiceLinkedRoleNotFoundFault(response, errorBody)
+
 	case strings.EqualFold("UserGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorUserGroupNotFoundFault(response, errorBody)
 
@@ -5034,6 +5049,9 @@ func awsAwsquery_deserializeOpErrorDescribeUsers(response *smithyhttp.Response, 
 	switch {
 	case strings.EqualFold("InvalidParameterCombination", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterCombinationException(response, errorBody)
+
+	case strings.EqualFold("ServiceLinkedRoleNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorServiceLinkedRoleNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("UserNotFound", errorCode):
 		return awsAwsquery_deserializeErrorUserNotFoundFault(response, errorBody)
@@ -6676,6 +6694,9 @@ func awsAwsquery_deserializeOpErrorModifyUser(response *smithyhttp.Response, met
 	case strings.EqualFold("InvalidUserState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidUserStateFault(response, errorBody)
 
+	case strings.EqualFold("ServiceLinkedRoleNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorServiceLinkedRoleNotFoundFault(response, errorBody)
+
 	case strings.EqualFold("UserNotFound", errorCode):
 		return awsAwsquery_deserializeErrorUserNotFoundFault(response, errorBody)
 
@@ -6798,6 +6819,9 @@ func awsAwsquery_deserializeOpErrorModifyUserGroup(response *smithyhttp.Response
 
 	case strings.EqualFold("InvalidUserGroupState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidUserGroupStateFault(response, errorBody)
+
+	case strings.EqualFold("ServiceLinkedRoleNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorServiceLinkedRoleNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("UserGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorUserGroupNotFoundFault(response, errorBody)
@@ -18796,6 +18820,19 @@ func awsAwsquery_deserializeDocumentReplicationGroup(v **types.ReplicationGroup,
 				return err
 			}
 
+		case strings.EqualFold("DataTiering", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DataTiering = types.DataTieringStatus(xtv)
+			}
+
 		case strings.EqualFold("Description", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -20856,6 +20893,19 @@ func awsAwsquery_deserializeDocumentSnapshot(v **types.Snapshot, decoder smithyx
 				sv.CacheSubnetGroupName = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("DataTiering", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DataTiering = types.DataTieringStatus(xtv)
+			}
+
 		case strings.EqualFold("Engine", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -22586,6 +22636,19 @@ func awsAwsquery_deserializeDocumentUser(v **types.User, decoder smithyxml.NodeD
 				sv.Engine = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("MinimumEngineVersion", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.MinimumEngineVersion = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("Status", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -22740,6 +22803,19 @@ func awsAwsquery_deserializeDocumentUserGroup(v **types.UserGroup, decoder smith
 			{
 				xtv := string(val)
 				sv.Engine = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("MinimumEngineVersion", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.MinimumEngineVersion = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("PendingChanges", t.Name.Local):
@@ -24043,6 +24119,19 @@ func awsAwsquery_deserializeOpDocumentCreateUserGroupOutput(v **CreateUserGroupO
 				sv.Engine = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("MinimumEngineVersion", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.MinimumEngineVersion = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("PendingChanges", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentUserGroupPendingChanges(&sv.PendingChanges, nodeDecoder); err != nil {
@@ -24166,6 +24255,19 @@ func awsAwsquery_deserializeOpDocumentCreateUserOutput(v **CreateUserOutput, dec
 			{
 				xtv := string(val)
 				sv.Engine = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("MinimumEngineVersion", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.MinimumEngineVersion = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Status", t.Name.Local):
@@ -24527,6 +24629,19 @@ func awsAwsquery_deserializeOpDocumentDeleteUserGroupOutput(v **DeleteUserGroupO
 				sv.Engine = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("MinimumEngineVersion", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.MinimumEngineVersion = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("PendingChanges", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentUserGroupPendingChanges(&sv.PendingChanges, nodeDecoder); err != nil {
@@ -24650,6 +24765,19 @@ func awsAwsquery_deserializeOpDocumentDeleteUserOutput(v **DeleteUserOutput, dec
 			{
 				xtv := string(val)
 				sv.Engine = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("MinimumEngineVersion", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.MinimumEngineVersion = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Status", t.Name.Local):
@@ -26204,6 +26332,19 @@ func awsAwsquery_deserializeOpDocumentModifyUserGroupOutput(v **ModifyUserGroupO
 				sv.Engine = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("MinimumEngineVersion", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.MinimumEngineVersion = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("PendingChanges", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentUserGroupPendingChanges(&sv.PendingChanges, nodeDecoder); err != nil {
@@ -26327,6 +26468,19 @@ func awsAwsquery_deserializeOpDocumentModifyUserOutput(v **ModifyUserOutput, dec
 			{
 				xtv := string(val)
 				sv.Engine = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("MinimumEngineVersion", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.MinimumEngineVersion = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Status", t.Name.Local):

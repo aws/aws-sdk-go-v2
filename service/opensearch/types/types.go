@@ -688,6 +688,21 @@ type DomainStatus struct {
 	noSmithyDocumentSerde
 }
 
+type DryRunResults struct {
+
+	// Specifies the way in which Amazon OpenSearch Service applies the update.
+	// Possible responses are Blue/Green (the update requires a blue/green deployment),
+	// DynamicUpdate (no blue/green required), Undetermined (the domain is undergoing
+	// an update and can't predict the deployment type; try again after the update is
+	// complete), and None (the request doesn't include any configuration changes).
+	DeploymentType *string
+
+	// Contains an optional message associated with the DryRunResults.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
 // The maintenance schedule duration: duration value and duration unit. See
 // Auto-Tune for Amazon OpenSearch Service
 // (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html)

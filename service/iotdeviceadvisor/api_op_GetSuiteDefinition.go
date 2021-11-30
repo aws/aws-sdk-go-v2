@@ -12,7 +12,10 @@ import (
 	"time"
 )
 
-// Gets information about a Device Advisor test suite.
+// Gets information about a Device Advisor test suite. Requires permission to
+// access the GetSuiteDefinition
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) GetSuiteDefinition(ctx context.Context, params *GetSuiteDefinitionInput, optFns ...func(*Options)) (*GetSuiteDefinitionOutput, error) {
 	if params == nil {
 		params = &GetSuiteDefinitionInput{}
@@ -30,7 +33,7 @@ func (c *Client) GetSuiteDefinition(ctx context.Context, params *GetSuiteDefinit
 
 type GetSuiteDefinitionInput struct {
 
-	// Suite definition Id of the test suite to get.
+	// Suite definition ID of the test suite to get.
 	//
 	// This member is required.
 	SuiteDefinitionId *string
@@ -58,7 +61,7 @@ type GetSuiteDefinitionOutput struct {
 	// Suite configuration of the suite definition.
 	SuiteDefinitionConfiguration *types.SuiteDefinitionConfiguration
 
-	// Suite definition Id of the suite definition.
+	// Suite definition ID of the suite definition.
 	SuiteDefinitionId *string
 
 	// Suite definition version of the suite definition.

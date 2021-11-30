@@ -59,7 +59,8 @@ type CreateDataSetInput struct {
 	// Currently, only geospatial hierarchy is supported.
 	ColumnGroups []types.ColumnGroup
 
-	// A set of one or more definitions of a ColumnLevelPermissionRule.
+	// A set of one or more definitions of a ColumnLevelPermissionRule
+	// (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_ColumnLevelPermissionRule.html).
 	ColumnLevelPermissionRules []types.ColumnLevelPermissionRule
 
 	// The usage configuration to apply to child datasets that reference this dataset

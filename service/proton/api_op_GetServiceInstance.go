@@ -50,7 +50,7 @@ type GetServiceInstanceInput struct {
 
 type GetServiceInstanceOutput struct {
 
-	// The service instance detail data that's returned by AWS Proton.
+	// The service instance detail data that's returned by Proton.
 	//
 	// This member is required.
 	ServiceInstance *types.ServiceInstance

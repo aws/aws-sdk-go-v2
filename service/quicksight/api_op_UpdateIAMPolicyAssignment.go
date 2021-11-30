@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an existing IAMpolicy assignment. This operation updates only the
+// Updates an existing IAM policy assignment. This operation updates only the
 // optional parameter or parameters that are specified in the request. This
 // overwrites all of the users included in Identities.
 func (c *Client) UpdateIAMPolicyAssignment(ctx context.Context, params *UpdateIAMPolicyAssignmentInput, optFns ...func(*Options)) (*UpdateIAMPolicyAssignmentOutput, error) {
@@ -37,7 +37,7 @@ type UpdateIAMPolicyAssignmentInput struct {
 	// This member is required.
 	AssignmentName *string
 
-	// The ID of the Amazon Web Services account that contains the IAMpolicy
+	// The ID of the Amazon Web Services account that contains the IAM policy
 	// assignment.
 	//
 	// This member is required.
@@ -65,7 +65,7 @@ type UpdateIAMPolicyAssignmentInput struct {
 	// to.
 	Identities map[string][]string
 
-	// The ARN for the IAMpolicy to apply to the Amazon QuickSight users and groups
+	// The ARN for the IAM policy to apply to the Amazon QuickSight users and groups
 	// specified in this assignment.
 	PolicyArn *string
 
@@ -93,10 +93,10 @@ type UpdateIAMPolicyAssignmentOutput struct {
 	// source.
 	AssignmentStatus types.AssignmentStatus
 
-	// The Amazon QuickSight users, groups, or both that the IAMpolicy is assigned to.
+	// The Amazon QuickSight users, groups, or both that the IAM policy is assigned to.
 	Identities map[string][]string
 
-	// The ARN for the IAMpolicy applied to the Amazon QuickSight users and groups
+	// The ARN for the IAM policy applied to the Amazon QuickSight users and groups
 	// specified in this assignment.
 	PolicyArn *string
 

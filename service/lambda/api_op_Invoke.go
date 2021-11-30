@@ -105,7 +105,9 @@ type InvokeInput struct {
 	// synchronously invoked functions only.
 	LogType types.LogType
 
-	// The JSON that you want to provide to your Lambda function as input.
+	// The JSON that you want to provide to your Lambda function as input. You can
+	// enter the JSON directly. For example, --payload '{ "key": "value" }'. You can
+	// also specify a file path. For example, --payload file://payload.json.
 	Payload []byte
 
 	// Specify a version or alias to invoke a published version of the function.

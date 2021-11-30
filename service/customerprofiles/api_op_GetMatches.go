@@ -19,17 +19,23 @@ import (
 // (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html)
 // to enable identity resolution: set Matching to true. GetMatches returns
 // potentially matching profiles, based on the results of the latest run of a
-// machine learning process. Amazon Connect starts a batch process every Saturday
-// at 12AM UTC to identify matching profiles. The results are returned up to seven
-// days after the Saturday run. Amazon Connect uses the following profile
-// attributes to identify matches:
+// machine learning process. The process of matching duplicate profiles. If
+// Matching = true, Amazon Connect Customer Profiles starts a weekly batch process
+// called Identity Resolution Job. If you do not specify a date and time for
+// Identity Resolution Job to run, by default it runs every Saturday at 12AM UTC to
+// detect duplicate profiles in your domains. After the Identity Resolution Job
+// completes, use the GetMatches
+// (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html)
+// API to return and review the results. Or, if you have configured ExportingConfig
+// in the MatchingRequest, you can download the results from S3. Amazon Connect
+// uses the following profile attributes to identify matches:
 //
 // * PhoneNumber
 //
-// * HomePhoneNumber
-//
 // *
-// BusinessPhoneNumber
+// HomePhoneNumber
+//
+// * BusinessPhoneNumber
 //
 // * MobilePhoneNumber
 //

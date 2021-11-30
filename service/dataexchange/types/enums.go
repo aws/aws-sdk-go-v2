@@ -8,6 +8,7 @@ type AssetType string
 const (
 	AssetTypeS3Snapshot        AssetType = "S3_SNAPSHOT"
 	AssetTypeRedshiftDataShare AssetType = "REDSHIFT_DATA_SHARE"
+	AssetTypeApiGatewayApi     AssetType = "API_GATEWAY_API"
 )
 
 // Values returns all known values for AssetType. Note that this can be expanded in
@@ -17,6 +18,7 @@ func (AssetType) Values() []AssetType {
 	return []AssetType{
 		"S3_SNAPSHOT",
 		"REDSHIFT_DATA_SHARE",
+		"API_GATEWAY_API",
 	}
 }
 
@@ -129,6 +131,9 @@ const (
 	LimitNameConcurrentInProgressJobsToImportAssetsFromAmazonRedshiftDatashares LimitName = "Concurrent in progress jobs to import assets from Amazon Redshift datashares"
 	LimitNameRevisionsPerAmazonRedshiftDatashareDataSet                         LimitName = "Revisions per Amazon Redshift datashare data set"
 	LimitNameAmazonRedshiftDatashareAssetsPerRevision                           LimitName = "Amazon Redshift datashare assets per revision"
+	LimitNameConcurrentInProgressJobsToImportAssetsFromAnApiGatewayApi          LimitName = "Concurrent in progress jobs to import assets from an API Gateway API"
+	LimitNameAmazonApiGatewayApiAssetsPerRevision                               LimitName = "Amazon API Gateway API assets per revision"
+	LimitNameRevisionsPerAmazonApiGatewayApiDataSet                             LimitName = "Revisions per Amazon API Gateway API data set"
 )
 
 // Values returns all known values for LimitName. Note that this can be expanded in
@@ -155,6 +160,9 @@ func (LimitName) Values() []LimitName {
 		"Concurrent in progress jobs to import assets from Amazon Redshift datashares",
 		"Revisions per Amazon Redshift datashare data set",
 		"Amazon Redshift datashare assets per revision",
+		"Concurrent in progress jobs to import assets from an API Gateway API",
+		"Amazon API Gateway API assets per revision",
+		"Revisions per Amazon API Gateway API data set",
 	}
 }
 
@@ -173,6 +181,22 @@ func (Origin) Values() []Origin {
 	return []Origin{
 		"OWNED",
 		"ENTITLED",
+	}
+}
+
+type ProtocolType string
+
+// Enum values for ProtocolType
+const (
+	ProtocolTypeRest ProtocolType = "REST"
+)
+
+// Values returns all known values for ProtocolType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ProtocolType) Values() []ProtocolType {
+	return []ProtocolType{
+		"REST",
 	}
 }
 
@@ -254,6 +278,7 @@ const (
 	TypeExportAssetToSignedUrl             Type = "EXPORT_ASSET_TO_SIGNED_URL"
 	TypeExportRevisionsToS3                Type = "EXPORT_REVISIONS_TO_S3"
 	TypeImportAssetsFromRedshiftDataShares Type = "IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES"
+	TypeImportAssetFromApiGatewayApi       Type = "IMPORT_ASSET_FROM_API_GATEWAY_API"
 )
 
 // Values returns all known values for Type. Note that this can be expanded in the
@@ -267,5 +292,6 @@ func (Type) Values() []Type {
 		"EXPORT_ASSET_TO_SIGNED_URL",
 		"EXPORT_REVISIONS_TO_S3",
 		"IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES",
+		"IMPORT_ASSET_FROM_API_GATEWAY_API",
 	}
 }

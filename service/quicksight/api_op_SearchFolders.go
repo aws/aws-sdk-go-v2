@@ -29,7 +29,7 @@ func (c *Client) SearchFolders(ctx context.Context, params *SearchFoldersInput, 
 
 type SearchFoldersInput struct {
 
-	// The AWS account ID.
+	// The ID for the Amazon Web Services account that contains the folder.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -52,17 +52,17 @@ type SearchFoldersInput struct {
 
 type SearchFoldersOutput struct {
 
-	// A structure that contains all of the folders in your AWS account. This structure
-	// provides basic information about the folders.
+	// A structure that contains all of the folders in the Amazon Web Services account.
+	// This structure provides basic information about the folders.
 	FolderSummaryList []types.FolderSummary
 
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
 
-	// The request ID.
+	// The Amazon Web Services request ID for this operation.
 	RequestId *string
 
-	// The status. If succeeded, the status is SC_OK.
+	// The HTTP status of the request.
 	Status int32
 
 	// Metadata pertaining to the operation's result.

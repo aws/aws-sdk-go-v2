@@ -10,11 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates an Identity and Access Management (IAM) role from an Amazon Aurora DB
-// cluster. For more information, see Authorizing Amazon Aurora MySQL to Access
-// Other Amazon Web Services Services on Your Behalf
-// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Integrating.Authorizing.html)
-// in the Amazon Aurora User Guide. This action only applies to Aurora DB clusters.
+// Associates an Identity and Access Management (IAM) role with a DB cluster.
 func (c *Client) AddRoleToDBCluster(ctx context.Context, params *AddRoleToDBClusterInput, optFns ...func(*Options)) (*AddRoleToDBClusterOutput, error) {
 	if params == nil {
 		params = &AddRoleToDBClusterInput{}
@@ -38,7 +34,7 @@ type AddRoleToDBClusterInput struct {
 	DBClusterIdentifier *string
 
 	// The Amazon Resource Name (ARN) of the IAM role to associate with the Aurora DB
-	// cluster, for example, arn:aws:iam::123456789012:role/AuroraAccessRole.
+	// cluster, for example arn:aws:iam::123456789012:role/AuroraAccessRole.
 	//
 	// This member is required.
 	RoleArn *string

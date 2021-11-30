@@ -58,6 +58,10 @@ type CreateMeetingWithAttendeesInput struct {
 	// This member is required.
 	MediaRegion *string
 
+	// Lists the audio and video features enabled for a meeting, such as echo
+	// reduction.
+	MeetingFeatures *types.MeetingFeaturesConfiguration
+
 	// Reserved.
 	MeetingHostId *string
 

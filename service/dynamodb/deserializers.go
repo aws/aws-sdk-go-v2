@@ -14147,6 +14147,11 @@ func awsAwsjson10_deserializeOpDocumentBatchExecuteStatementOutput(v **BatchExec
 
 	for key, value := range shape {
 		switch key {
+		case "ConsumedCapacity":
+			if err := awsAwsjson10_deserializeDocumentConsumedCapacityMultiple(&sv.ConsumedCapacity, value); err != nil {
+				return err
+			}
+
 		case "Responses":
 			if err := awsAwsjson10_deserializeDocumentPartiQLBatchResponse(&sv.Responses, value); err != nil {
 				return err
@@ -15162,6 +15167,11 @@ func awsAwsjson10_deserializeOpDocumentExecuteStatementOutput(v **ExecuteStateme
 
 	for key, value := range shape {
 		switch key {
+		case "ConsumedCapacity":
+			if err := awsAwsjson10_deserializeDocumentConsumedCapacity(&sv.ConsumedCapacity, value); err != nil {
+				return err
+			}
+
 		case "Items":
 			if err := awsAwsjson10_deserializeDocumentItemList(&sv.Items, value); err != nil {
 				return err
@@ -15207,6 +15217,11 @@ func awsAwsjson10_deserializeOpDocumentExecuteTransactionOutput(v **ExecuteTrans
 
 	for key, value := range shape {
 		switch key {
+		case "ConsumedCapacity":
+			if err := awsAwsjson10_deserializeDocumentConsumedCapacityMultiple(&sv.ConsumedCapacity, value); err != nil {
+				return err
+			}
+
 		case "Responses":
 			if err := awsAwsjson10_deserializeDocumentItemResponseList(&sv.Responses, value); err != nil {
 				return err

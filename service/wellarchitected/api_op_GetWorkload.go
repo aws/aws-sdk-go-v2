@@ -30,7 +30,8 @@ func (c *Client) GetWorkload(ctx context.Context, params *GetWorkloadInput, optF
 // Input to get a workload.
 type GetWorkloadInput struct {
 
-	// The ID assigned to the workload. This ID is unique within an AWS Region.
+	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
+	// Region.
 	//
 	// This member is required.
 	WorkloadId *string

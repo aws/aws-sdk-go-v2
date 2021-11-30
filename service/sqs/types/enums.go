@@ -74,6 +74,7 @@ const (
 	QueueAttributeNameDeduplicationScope                    QueueAttributeName = "DeduplicationScope"
 	QueueAttributeNameFifoThroughputLimit                   QueueAttributeName = "FifoThroughputLimit"
 	QueueAttributeNameRedriveAllowPolicy                    QueueAttributeName = "RedriveAllowPolicy"
+	QueueAttributeNameSqsManagedSseEnabled                  QueueAttributeName = "SqsManagedSseEnabled"
 )
 
 // Values returns all known values for QueueAttributeName. Note that this can be
@@ -102,5 +103,6 @@ func (QueueAttributeName) Values() []QueueAttributeName {
 		"DeduplicationScope",
 		"FifoThroughputLimit",
 		"RedriveAllowPolicy",
+		"SqsManagedSseEnabled",
 	}
 }

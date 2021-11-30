@@ -46,7 +46,7 @@ type UpdateEnvironmentTemplateInput struct {
 
 type UpdateEnvironmentTemplateOutput struct {
 
-	// The environment template detail data that's returned by AWS Proton.
+	// The environment template detail data that's returned by Proton.
 	//
 	// This member is required.
 	EnvironmentTemplate *types.EnvironmentTemplate

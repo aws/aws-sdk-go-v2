@@ -8395,6 +8395,58 @@ func awsRestxml_deserializeDocumentBucketsUnwrapped(v *[]string, decoder smithyx
 	*v = sv
 	return nil
 }
+func awsRestxml_deserializeDocumentCloudWatchMetrics(v **types.CloudWatchMetrics, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.CloudWatchMetrics
+	if *v == nil {
+		sv = &types.CloudWatchMetrics{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("IsEnabled", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected IsEnabled to be of type *bool, got %T instead", val)
+				}
+				sv.IsEnabled = xtv
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestxml_deserializeDocumentCreateMultiRegionAccessPointInput(v **types.CreateMultiRegionAccessPointInput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14639,6 +14691,12 @@ func awsRestxml_deserializeDocumentStorageLensDataExport(v **types.StorageLensDa
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("CloudWatchMetrics", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentCloudWatchMetrics(&sv.CloudWatchMetrics, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("S3BucketDestination", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsRestxml_deserializeDocumentS3BucketDestination(&sv.S3BucketDestination, nodeDecoder); err != nil {

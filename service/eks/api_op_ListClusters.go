@@ -30,8 +30,9 @@ func (c *Client) ListClusters(ctx context.Context, params *ListClustersInput, op
 
 type ListClustersInput struct {
 
-	// Indicates whether connected clusters are included in the returned list. Default
-	// value is 'ALL'.
+	// Indicates whether external clusters are included in the returned list. Use 'all'
+	// to return connected clusters, or blank to return only Amazon EKS clusters. 'all'
+	// must be in lowercase otherwise an error occurs.
 	Include []string
 
 	// The maximum number of cluster results returned by ListClusters in paginated

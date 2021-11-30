@@ -36,7 +36,8 @@ type GetLensReviewInput struct {
 	// This member is required.
 	LensAlias *string
 
-	// The ID assigned to the workload. This ID is unique within an AWS Region.
+	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
+	// Region.
 	//
 	// This member is required.
 	WorkloadId *string
@@ -56,7 +57,8 @@ type GetLensReviewOutput struct {
 	// The milestone number. A workload can have a maximum of 100 milestones.
 	MilestoneNumber int32
 
-	// The ID assigned to the workload. This ID is unique within an AWS Region.
+	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
+	// Region.
 	WorkloadId *string
 
 	// Metadata pertaining to the operation's result.

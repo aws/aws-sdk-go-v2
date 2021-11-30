@@ -21,7 +21,7 @@ import (
 // action to create DB instances for the restored DB cluster, specifying the
 // identifier of the restored DB cluster in DBClusterIdentifier. You can create DB
 // instances only after the RestoreDBClusterFromS3 action has completed and the DB
-// cluster is available. For more information on Amazon Aurora, see  What Is Amazon
+// cluster is available. For more information on Amazon Aurora, see  What is Amazon
 // Aurora?
 // (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
 // in the Amazon Aurora User Guide. This action only applies to Aurora DB clusters.
@@ -156,7 +156,7 @@ type RestoreDBClusterFromS3Input struct {
 
 	// A value that indicates whether the DB cluster has deletion protection enabled.
 	// The database can't be deleted when deletion protection is enabled. By default,
-	// deletion protection is disabled.
+	// deletion protection isn't enabled.
 	DeletionProtection *bool
 
 	// Specify the Active Directory directory ID to restore the DB cluster in. The
@@ -180,7 +180,7 @@ type RestoreDBClusterFromS3Input struct {
 
 	// A value that indicates whether to enable mapping of Amazon Web Services Identity
 	// and Access Management (IAM) accounts to database accounts. By default, mapping
-	// is disabled. For more information, see  IAM Database Authentication
+	// isn't enabled. For more information, see  IAM Database Authentication
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html)
 	// in the Amazon Aurora User Guide.
 	EnableIAMDatabaseAuthentication *bool
@@ -269,9 +269,23 @@ type RestoreDBClusterFromS3Input struct {
 
 type RestoreDBClusterFromS3Output struct {
 
-	// Contains the details of an Amazon Aurora DB cluster. This data type is used as a
-	// response element in the DescribeDBClusters, StopDBCluster, and StartDBCluster
-	// actions.
+	// Contains the details of an Amazon Aurora DB cluster or Multi-AZ DB cluster. For
+	// an Amazon Aurora DB cluster, this data type is used as a response element in the
+	// operations CreateDBCluster, DeleteDBCluster, DescribeDBClusters,
+	// FailoverDBCluster, ModifyDBCluster, PromoteReadReplicaDBCluster,
+	// RestoreDBClusterFromS3, RestoreDBClusterFromSnapshot,
+	// RestoreDBClusterToPointInTime, StartDBCluster, and StopDBCluster. For a Multi-AZ
+	// DB cluster, this data type is used as a response element in the operations
+	// CreateDBCluster, DeleteDBCluster, DescribeDBClusters, FailoverDBCluster,
+	// ModifyDBCluster, RebootDBCluster, RestoreDBClusterFromSnapshot, and
+	// RestoreDBClusterToPointInTime. For more information on Amazon Aurora DB
+	// clusters, see  What is Amazon Aurora?
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
+	// in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
+	// see  Multi-AZ deployments with two readable standby DB instances
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
+	// in the Amazon RDS User Guide. The Multi-AZ DB clusters feature is in preview and
+	// is subject to change.
 	DBCluster *types.DBCluster
 
 	// Metadata pertaining to the operation's result.

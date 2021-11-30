@@ -29,7 +29,7 @@ func (c *Client) UpdateEnvironmentTemplateVersion(ctx context.Context, params *U
 
 type UpdateEnvironmentTemplateVersionInput struct {
 
-	// To update a major version of an environment template, include majorVersion.
+	// To update a major version of an environment template, include major Version.
 	//
 	// This member is required.
 	MajorVersion *string
@@ -55,7 +55,7 @@ type UpdateEnvironmentTemplateVersionInput struct {
 
 type UpdateEnvironmentTemplateVersionOutput struct {
 
-	// The environment template version detail data that's returned by AWS Proton.
+	// The environment template version detail data that's returned by Proton.
 	//
 	// This member is required.
 	EnvironmentTemplateVersion *types.EnvironmentTemplateVersion

@@ -10,7 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops a Device Advisor test suite run that is currently running.
+// Stops a Device Advisor test suite run that is currently running. Requires
+// permission to access the StopSuiteRun
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) StopSuiteRun(ctx context.Context, params *StopSuiteRunInput, optFns ...func(*Options)) (*StopSuiteRunOutput, error) {
 	if params == nil {
 		params = &StopSuiteRunInput{}
@@ -28,12 +31,12 @@ func (c *Client) StopSuiteRun(ctx context.Context, params *StopSuiteRunInput, op
 
 type StopSuiteRunInput struct {
 
-	// Suite definition Id of the test suite run to be stopped.
+	// Suite definition ID of the test suite run to be stopped.
 	//
 	// This member is required.
 	SuiteDefinitionId *string
 
-	// Suite run Id of the test suite run to be stopped.
+	// Suite run ID of the test suite run to be stopped.
 	//
 	// This member is required.
 	SuiteRunId *string

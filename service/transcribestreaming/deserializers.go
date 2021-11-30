@@ -339,6 +339,15 @@ func awsRestjson1_deserializeOpHttpBindingsStartStreamTranscriptionOutput(v *Sta
 		v.EnablePartialResultsStabilization = vv
 	}
 
+	if headerValues := response.Header.Values("x-amzn-transcribe-identify-language"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		vv, err := strconv.ParseBool(headerValues[0])
+		if err != nil {
+			return err
+		}
+		v.IdentifyLanguage = vv
+	}
+
 	if headerValues := response.Header.Values("x-amzn-transcribe-language-code"); len(headerValues) != 0 {
 		headerValues[0] = strings.TrimSpace(headerValues[0])
 		v.LanguageCode = types.LanguageCode(headerValues[0])
@@ -347,6 +356,11 @@ func awsRestjson1_deserializeOpHttpBindingsStartStreamTranscriptionOutput(v *Sta
 	if headerValues := response.Header.Values("x-amzn-transcribe-language-model-name"); len(headerValues) != 0 {
 		headerValues[0] = strings.TrimSpace(headerValues[0])
 		v.LanguageModelName = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("x-amzn-transcribe-language-options"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.LanguageOptions = ptr.String(headerValues[0])
 	}
 
 	if headerValues := response.Header.Values("x-amzn-transcribe-media-encoding"); len(headerValues) != 0 {
@@ -380,6 +394,11 @@ func awsRestjson1_deserializeOpHttpBindingsStartStreamTranscriptionOutput(v *Sta
 	if headerValues := response.Header.Values("x-amzn-transcribe-pii-entity-types"); len(headerValues) != 0 {
 		headerValues[0] = strings.TrimSpace(headerValues[0])
 		v.PiiEntityTypes = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("x-amzn-transcribe-preferred-language"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.PreferredLanguage = types.LanguageCode(headerValues[0])
 	}
 
 	if headerValues := response.Header.Values("x-amzn-request-id"); len(headerValues) != 0 {
@@ -2225,6 +2244,114 @@ func awsRestjson1_deserializeDocumentItemList(v *[]types.Item, value interface{}
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentLanguageIdentification(v *[]types.LanguageWithScore, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.LanguageWithScore
+	if *v == nil {
+		cv = []types.LanguageWithScore{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.LanguageWithScore
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentLanguageWithScore(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLanguageWithScore(v **types.LanguageWithScore, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LanguageWithScore
+	if *v == nil {
+		sv = &types.LanguageWithScore{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "LanguageCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LanguageCode to be of type string, got %T instead", value)
+				}
+				sv.LanguageCode = types.LanguageCode(jtv)
+			}
+
+		case "Score":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Score = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Score = f64
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentResult(v **types.Result, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2302,6 +2429,20 @@ func awsRestjson1_deserializeDocumentResult(v **types.Result, value interface{})
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
 				sv.IsPartial = jtv
+			}
+
+		case "LanguageCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LanguageCode to be of type string, got %T instead", value)
+				}
+				sv.LanguageCode = types.LanguageCode(jtv)
+			}
+
+		case "LanguageIdentification":
+			if err := awsRestjson1_deserializeDocumentLanguageIdentification(&sv.LanguageIdentification, value); err != nil {
+				return err
 			}
 
 		case "ResultId":

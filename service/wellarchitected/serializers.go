@@ -97,6 +97,183 @@ func awsRestjson1_serializeOpDocumentAssociateLensesInput(v *AssociateLensesInpu
 	return nil
 }
 
+type awsRestjson1_serializeOpCreateLensShare struct {
+}
+
+func (*awsRestjson1_serializeOpCreateLensShare) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateLensShare) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateLensShareInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/lenses/{LensAlias}/shares")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsCreateLensShareInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateLensShareInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateLensShareInput(v *CreateLensShareInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.LensAlias == nil || len(*v.LensAlias) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member LensAlias must not be empty")}
+	}
+	if v.LensAlias != nil {
+		if err := encoder.SetURI("LensAlias").String(*v.LensAlias); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateLensShareInput(v *CreateLensShareInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientRequestToken != nil {
+		ok := object.Key("ClientRequestToken")
+		ok.String(*v.ClientRequestToken)
+	}
+
+	if v.SharedWith != nil {
+		ok := object.Key("SharedWith")
+		ok.String(*v.SharedWith)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpCreateLensVersion struct {
+}
+
+func (*awsRestjson1_serializeOpCreateLensVersion) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateLensVersion) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateLensVersionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/lenses/{LensAlias}/versions")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsCreateLensVersionInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateLensVersionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateLensVersionInput(v *CreateLensVersionInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.LensAlias == nil || len(*v.LensAlias) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member LensAlias must not be empty")}
+	}
+	if v.LensAlias != nil {
+		if err := encoder.SetURI("LensAlias").String(*v.LensAlias); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateLensVersionInput(v *CreateLensVersionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientRequestToken != nil {
+		ok := object.Key("ClientRequestToken")
+		ok.String(*v.ClientRequestToken)
+	}
+
+	if v.IsMajorVersion {
+		ok := object.Key("IsMajorVersion")
+		ok.Boolean(v.IsMajorVersion)
+	}
+
+	if v.LensVersion != nil {
+		ok := object.Key("LensVersion")
+		ok.String(*v.LensVersion)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateMilestone struct {
 }
 
@@ -424,6 +601,143 @@ func awsRestjson1_serializeOpDocumentCreateWorkloadShareInput(v *CreateWorkloadS
 	return nil
 }
 
+type awsRestjson1_serializeOpDeleteLens struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteLens) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteLens) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteLensInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/lenses/{LensAlias}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteLensInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteLensInput(v *DeleteLensInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ClientRequestToken != nil {
+		encoder.SetQuery("ClientRequestToken").String(*v.ClientRequestToken)
+	}
+
+	if v.LensAlias == nil || len(*v.LensAlias) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member LensAlias must not be empty")}
+	}
+	if v.LensAlias != nil {
+		if err := encoder.SetURI("LensAlias").String(*v.LensAlias); err != nil {
+			return err
+		}
+	}
+
+	if len(v.LensStatus) > 0 {
+		encoder.SetQuery("LensStatus").String(string(v.LensStatus))
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeleteLensShare struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteLensShare) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteLensShare) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteLensShareInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/lenses/{LensAlias}/shares/{ShareId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteLensShareInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteLensShareInput(v *DeleteLensShareInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ClientRequestToken != nil {
+		encoder.SetQuery("ClientRequestToken").String(*v.ClientRequestToken)
+	}
+
+	if v.LensAlias == nil || len(*v.LensAlias) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member LensAlias must not be empty")}
+	}
+	if v.LensAlias != nil {
+		if err := encoder.SetURI("LensAlias").String(*v.LensAlias); err != nil {
+			return err
+		}
+	}
+
+	if v.ShareId == nil || len(*v.ShareId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ShareId must not be empty")}
+	}
+	if v.ShareId != nil {
+		if err := encoder.SetURI("ShareId").String(*v.ShareId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDeleteWorkload struct {
 }
 
@@ -640,6 +954,68 @@ func awsRestjson1_serializeOpDocumentDisassociateLensesInput(v *DisassociateLens
 	return nil
 }
 
+type awsRestjson1_serializeOpExportLens struct {
+}
+
+func (*awsRestjson1_serializeOpExportLens) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpExportLens) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ExportLensInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/lenses/{LensAlias}/export")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsExportLensInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsExportLensInput(v *ExportLensInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.LensAlias == nil || len(*v.LensAlias) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member LensAlias must not be empty")}
+	}
+	if v.LensAlias != nil {
+		if err := encoder.SetURI("LensAlias").String(*v.LensAlias); err != nil {
+			return err
+		}
+	}
+
+	if v.LensVersion != nil {
+		encoder.SetQuery("LensVersion").String(*v.LensVersion)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetAnswer struct {
 }
 
@@ -715,6 +1091,68 @@ func awsRestjson1_serializeOpHttpBindingsGetAnswerInput(v *GetAnswerInput, encod
 		if err := encoder.SetURI("WorkloadId").String(*v.WorkloadId); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetLens struct {
+}
+
+func (*awsRestjson1_serializeOpGetLens) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetLens) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetLensInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/lenses/{LensAlias}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetLensInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetLensInput(v *GetLensInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.LensAlias == nil || len(*v.LensAlias) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member LensAlias must not be empty")}
+	}
+	if v.LensAlias != nil {
+		if err := encoder.SetURI("LensAlias").String(*v.LensAlias); err != nil {
+			return err
+		}
+	}
+
+	if v.LensVersion != nil {
+		encoder.SetQuery("LensVersion").String(*v.LensVersion)
 	}
 
 	return nil
@@ -921,6 +1359,10 @@ func awsRestjson1_serializeOpHttpBindingsGetLensVersionDifferenceInput(v *GetLen
 		}
 	}
 
+	if v.TargetLensVersion != nil {
+		encoder.SetQuery("TargetLensVersion").String(*v.TargetLensVersion)
+	}
+
 	return nil
 }
 
@@ -1039,6 +1481,91 @@ func awsRestjson1_serializeOpHttpBindingsGetWorkloadInput(v *GetWorkloadInput, e
 	}
 	if v.WorkloadId != nil {
 		if err := encoder.SetURI("WorkloadId").String(*v.WorkloadId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpImportLens struct {
+}
+
+func (*awsRestjson1_serializeOpImportLens) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpImportLens) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ImportLensInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/importLens")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentImportLensInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsImportLensInput(v *ImportLensInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentImportLensInput(v *ImportLensInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientRequestToken != nil {
+		ok := object.Key("ClientRequestToken")
+		ok.String(*v.ClientRequestToken)
+	}
+
+	if v.JSONString != nil {
+		ok := object.Key("JSONString")
+		ok.String(*v.JSONString)
+	}
+
+	if v.LensAlias != nil {
+		ok := object.Key("LensAlias")
+		ok.String(*v.LensAlias)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
 			return err
 		}
 	}
@@ -1173,6 +1700,18 @@ func (m *awsRestjson1_serializeOpListLenses) HandleSerialize(ctx context.Context
 func awsRestjson1_serializeOpHttpBindingsListLensesInput(v *ListLensesInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.LensName != nil {
+		encoder.SetQuery("LensName").String(*v.LensName)
+	}
+
+	if len(v.LensStatus) > 0 {
+		encoder.SetQuery("LensStatus").String(string(v.LensStatus))
+	}
+
+	if len(v.LensType) > 0 {
+		encoder.SetQuery("LensType").String(string(v.LensType))
 	}
 
 	if v.MaxResults != 0 {
@@ -1334,6 +1873,76 @@ func awsRestjson1_serializeOpHttpBindingsListLensReviewsInput(v *ListLensReviews
 		if err := encoder.SetURI("WorkloadId").String(*v.WorkloadId); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListLensShares struct {
+}
+
+func (*awsRestjson1_serializeOpListLensShares) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListLensShares) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListLensSharesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/lenses/{LensAlias}/shares")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListLensSharesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListLensSharesInput(v *ListLensSharesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.LensAlias == nil || len(*v.LensAlias) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member LensAlias must not be empty")}
+	}
+	if v.LensAlias != nil {
+		if err := encoder.SetURI("LensAlias").String(*v.LensAlias); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != 0 {
+		encoder.SetQuery("MaxResults").Integer(v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("NextToken").String(*v.NextToken)
+	}
+
+	if v.SharedWithPrefix != nil {
+		encoder.SetQuery("SharedWithPrefix").String(*v.SharedWithPrefix)
 	}
 
 	return nil
@@ -1549,12 +2158,20 @@ func awsRestjson1_serializeOpHttpBindingsListShareInvitationsInput(v *ListShareI
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.LensNamePrefix != nil {
+		encoder.SetQuery("LensNamePrefix").String(*v.LensNamePrefix)
+	}
+
 	if v.MaxResults != 0 {
 		encoder.SetQuery("MaxResults").Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
 		encoder.SetQuery("NextToken").String(*v.NextToken)
+	}
+
+	if len(v.ShareResourceType) > 0 {
+		encoder.SetQuery("ShareResourceType").String(string(v.ShareResourceType))
 	}
 
 	if v.WorkloadNamePrefix != nil {

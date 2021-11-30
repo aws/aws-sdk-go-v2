@@ -178,7 +178,8 @@ type AutoScalingGroup struct {
 	EnabledMetrics []EnabledMetric
 
 	// The amount of time, in seconds, that Amazon EC2 Auto Scaling waits before
-	// checking the health status of an EC2 instance that has come into service.
+	// checking the health status of an EC2 instance that has come into service and
+	// marking it unhealthy due to a failed health check.
 	HealthCheckGracePeriod *int32
 
 	// The EC2 instances associated with the group.
@@ -350,7 +351,7 @@ type BlockDeviceMapping struct {
 // capacity forecast, along with the timestamps of those data points.
 type CapacityForecast struct {
 
-	// The time stamps for the data points, in UTC format.
+	// The timestamps for the data points, in UTC format.
 	//
 	// This member is required.
 	Timestamps []time.Time
@@ -370,7 +371,7 @@ type CapacityForecast struct {
 // * Add values for each required parameter from CloudWatch. You
 // can use an existing metric, or a new metric that you create. To use your own
 // metric, you must first publish the metric to CloudWatch. For more information,
-// see Publish Custom Metrics
+// see Publish custom metrics
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html)
 // in the Amazon CloudWatch User Guide.
 //
@@ -380,11 +381,21 @@ type CapacityForecast struct {
 // value of the metric should decrease when capacity increases.
 //
 // For more
-// information about CloudWatch, see Amazon CloudWatch Concepts
+// information about the CloudWatch terminology below, see Amazon CloudWatch
+// concepts
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html).
+// Each individual service provides information about the metrics, namespace, and
+// dimensions they use. For more information, see Amazon Web Services services that
+// publish CloudWatch metrics
+// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html)
+// in the Amazon CloudWatch User Guide.
 type CustomizedMetricSpecification struct {
 
-	// The name of the metric.
+	// The name of the metric. To get the exact metric name, namespace, and dimensions,
+	// inspect the Metric
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html)
+	// object that is returned by a call to ListMetrics
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html).
 	//
 	// This member is required.
 	MetricName *string
@@ -403,7 +414,10 @@ type CustomizedMetricSpecification struct {
 	// dimensions, you must specify the same dimensions in your scaling policy.
 	Dimensions []MetricDimension
 
-	// The unit of the metric.
+	// The unit of the metric. For a complete list of the units that CloudWatch
+	// supports, see the MetricDatum
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html)
+	// data type in the Amazon CloudWatch API Reference.
 	Unit *string
 
 	noSmithyDocumentSerde
@@ -426,7 +440,7 @@ type DesiredConfiguration struct {
 	// that Amazon EC2 Auto Scaling can use to launch instances and help optimize your
 	// costs. For more information, see Auto Scaling groups with multiple instance
 	// types and purchase options
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html)
+	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	MixedInstancesPolicy *MixedInstancesPolicy
 
@@ -1254,7 +1268,7 @@ type LaunchTemplate struct {
 
 // Describes an override for a launch template. For more information, see
 // Configuring overrides
-// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-override-options.html)
+// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-configuring-overrides.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 type LaunchTemplateOverrides struct {
 
@@ -1278,7 +1292,7 @@ type LaunchTemplateOverrides struct {
 	// uses the launch template that's defined for your mixed instances policy. For
 	// more information, see Specifying a different launch template for an instance
 	// type
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-launch-template-overrides.html)
+	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups-launch-template-overrides.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	LaunchTemplateSpecification *LaunchTemplateSpecification
 
@@ -1292,7 +1306,7 @@ type LaunchTemplateOverrides struct {
 	// WeightedCapacity of five units, the instance is launched, and the desired
 	// capacity is exceeded by three units. For more information, see Instance
 	// weighting for Amazon EC2 Auto Scaling
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-weighting.html)
+	// (https://docs.aws.amazon.com/ec2-auto-scaling-mixed-instances-groups-instance-weighting.html)
 	// in the Amazon EC2 Auto Scaling User Guide. Value must be in the range of 1–999.
 	WeightedCapacity *string
 
@@ -1341,8 +1355,9 @@ type LaunchTemplateSpecification struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a lifecycle hook, which tells Amazon EC2 Auto Scaling that you want to
-// perform an action whenever it launches instances or terminates instances.
+// Describes a lifecycle hook, which enables an Auto Scaling group to be aware of
+// events in the Auto Scaling instance lifecycle, and then perform a custom action
+// when the corresponding lifecycle event occurs.
 type LifecycleHook struct {
 
 	// The name of the Auto Scaling group for the lifecycle hook.
@@ -1392,32 +1407,7 @@ type LifecycleHook struct {
 }
 
 // Describes information used to specify a lifecycle hook for an Auto Scaling
-// group. A lifecycle hook tells Amazon EC2 Auto Scaling to perform an action on an
-// instance when the instance launches (before it is put into service) or as the
-// instance terminates (before it is fully terminated). This step is a part of the
-// procedure for creating a lifecycle hook for an Auto Scaling group:
-//
-// * (Optional)
-// Create a Lambda function and a rule that allows CloudWatch Events to invoke your
-// Lambda function when Amazon EC2 Auto Scaling launches or terminates
-// instances.
-//
-// * (Optional) Create a notification target and an IAM role. The
-// target can be either an Amazon SQS queue or an Amazon SNS topic. The role allows
-// Amazon EC2 Auto Scaling to publish lifecycle notifications to the target.
-//
-// *
-// Create the lifecycle hook. Specify whether the hook is used when the instances
-// launch or terminate.
-//
-// * If you need more time, record the lifecycle action
-// heartbeat to keep the instance in a pending state.
-//
-// * If you finish before the
-// timeout period ends, complete the lifecycle action.
-//
-// For more information, see
-// Amazon EC2 Auto Scaling lifecycle hooks
+// group. For more information, see Amazon EC2 Auto Scaling lifecycle hooks
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html) in
 // the Amazon EC2 Auto Scaling User Guide.
 type LifecycleHookSpecification struct {
@@ -1534,7 +1524,7 @@ type LoadForecast struct {
 	// This member is required.
 	MetricSpecification *PredictiveScalingMetricSpecification
 
-	// The time stamps for the data points, in UTC format.
+	// The timestamps for the data points, in UTC format.
 	//
 	// This member is required.
 	Timestamps []time.Time
@@ -1571,6 +1561,33 @@ type MemoryMiBRequest struct {
 
 	// The memory maximum in MiB.
 	Max *int32
+
+	noSmithyDocumentSerde
+}
+
+// Represents a specific metric.
+type Metric struct {
+
+	// The name of the metric.
+	//
+	// This member is required.
+	MetricName *string
+
+	// The namespace of the metric. For more information, see the table in Amazon Web
+	// Services services that publish CloudWatch metrics
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html)
+	// in the Amazon CloudWatch User Guide.
+	//
+	// This member is required.
+	Namespace *string
+
+	// The dimensions for the metric. For the list of available dimensions, see the
+	// Amazon Web Services documentation available from the table in Amazon Web
+	// Services services that publish CloudWatch metrics
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html)
+	// in the Amazon CloudWatch User Guide. Conditional: If you published your metric
+	// with dimensions, you must specify the same dimensions in your scaling policy.
+	Dimensions []MetricDimension
 
 	noSmithyDocumentSerde
 }
@@ -1631,6 +1648,54 @@ type MetricCollectionType struct {
 	noSmithyDocumentSerde
 }
 
+// The metric data to return. Also defines whether this call is returning data for
+// one metric only, or whether it is performing a math expression on the values of
+// returned metric statistics to create a new time series. A time series is a
+// series of data points, each of which is associated with a timestamp. For more
+// information and examples, see Advanced predictive scaling policy configurations
+// using custom metrics
+// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/predictive-scaling-customized-metric-specification.html)
+// in the Amazon EC2 Auto Scaling User Guide.
+type MetricDataQuery struct {
+
+	// A short name that identifies the object's results in the response. This name
+	// must be unique among all MetricDataQuery objects specified for a single scaling
+	// policy. If you are performing math expressions on this set of data, this name
+	// represents that data and can serve as a variable in the mathematical expression.
+	// The valid characters are letters, numbers, and underscores. The first character
+	// must be a lowercase letter.
+	//
+	// This member is required.
+	Id *string
+
+	// The math expression to perform on the returned data, if this object is
+	// performing a math expression. This expression can use the Id of the other
+	// metrics to refer to those metrics, and can also use the Id of other expressions
+	// to use the result of those expressions. Conditional: Within each MetricDataQuery
+	// object, you must specify either Expression or MetricStat, but not both.
+	Expression *string
+
+	// A human-readable label for this metric or expression. This is especially useful
+	// if this is a math expression, so that you know what the value represents.
+	Label *string
+
+	// Information about the metric data to return. Conditional: Within each
+	// MetricDataQuery object, you must specify either Expression or MetricStat, but
+	// not both.
+	MetricStat *MetricStat
+
+	// Indicates whether to return the timestamps and raw data values of this metric.
+	// If you use any math expressions, specify true for this value for only the final
+	// math expression that the metric specification is based on. You must specify
+	// false for ReturnData for all the other metrics and expressions used in the
+	// metric specification. If you are only retrieving metrics and not performing any
+	// math expressions, do not specify anything for ReturnData. This sets it to its
+	// default (true).
+	ReturnData *bool
+
+	noSmithyDocumentSerde
+}
+
 // Describes the dimension of a metric.
 type MetricDimension struct {
 
@@ -1656,12 +1721,47 @@ type MetricGranularityType struct {
 	noSmithyDocumentSerde
 }
 
+// This structure defines the CloudWatch metric to return, along with the
+// statistic, period, and unit. For more information about the CloudWatch
+// terminology below, see Amazon CloudWatch concepts
+// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html)
+// in the Amazon CloudWatch User Guide.
+type MetricStat struct {
+
+	// The CloudWatch metric to return, including the metric name, namespace, and
+	// dimensions. To get the exact metric name, namespace, and dimensions, inspect the
+	// Metric
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html)
+	// object that is returned by a call to ListMetrics
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html).
+	//
+	// This member is required.
+	Metric *Metric
+
+	// The statistic to return. It can include any CloudWatch statistic or extended
+	// statistic. For a list of valid values, see the table in Statistics
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic)
+	// in the Amazon CloudWatch User Guide. The most commonly used metrics for
+	// predictive scaling are Average and Sum.
+	//
+	// This member is required.
+	Stat *string
+
+	// The unit to use for the returned data points. For a complete list of the units
+	// that CloudWatch supports, see the MetricDatum
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html)
+	// data type in the Amazon CloudWatch API Reference.
+	Unit *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes a mixed instances policy. A mixed instances policy contains the
 // instance types that Amazon EC2 Auto Scaling can launch and other information
 // that Amazon EC2 Auto Scaling can use to launch instances and help optimize your
 // costs. For more information, see Auto Scaling groups with multiple instance
 // types and purchase options
-// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html)
+// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 type MixedInstancesPolicy struct {
 
@@ -1711,8 +1811,7 @@ type NotificationConfiguration struct {
 	// * autoscaling:TEST_NOTIFICATION
 	NotificationType *string
 
-	// The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (Amazon
-	// SNS) topic.
+	// The Amazon Resource Name (ARN) of the Amazon SNS topic.
 	TopicARN *string
 
 	noSmithyDocumentSerde
@@ -1822,6 +1921,45 @@ type PredictiveScalingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Describes a customized capacity metric for a predictive scaling policy.
+type PredictiveScalingCustomizedCapacityMetric struct {
+
+	// One or more metric data queries to provide the data points for a capacity
+	// metric. Use multiple metric data queries only if you are performing a math
+	// expression on returned data.
+	//
+	// This member is required.
+	MetricDataQueries []MetricDataQuery
+
+	noSmithyDocumentSerde
+}
+
+// Describes a custom load metric for a predictive scaling policy.
+type PredictiveScalingCustomizedLoadMetric struct {
+
+	// One or more metric data queries to provide the data points for a load metric.
+	// Use multiple metric data queries only if you are performing a math expression on
+	// returned data.
+	//
+	// This member is required.
+	MetricDataQueries []MetricDataQuery
+
+	noSmithyDocumentSerde
+}
+
+// Describes a custom scaling metric for a predictive scaling policy.
+type PredictiveScalingCustomizedScalingMetric struct {
+
+	// One or more metric data queries to provide the data points for a scaling metric.
+	// Use multiple metric data queries only if you are performing a math expression on
+	// returned data.
+	//
+	// This member is required.
+	MetricDataQueries []MetricDataQuery
+
+	noSmithyDocumentSerde
+}
+
 // This structure specifies the metrics and target utilization settings for a
 // predictive scaling policy. You must specify either a metric pair, or a load
 // metric and a scaling metric individually. Specifying a metric pair instead of
@@ -1857,21 +1995,39 @@ type PredictiveScalingConfiguration struct {
 // group in each hour of the forecast period so that the average number of requests
 // received by each instance is as close to 1000 requests per minute as possible at
 // all times.
+//
+// For information about using custom metrics with predictive scaling,
+// see Advanced predictive scaling policy configurations using custom metrics
+// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/predictive-scaling-customized-metric-specification.html)
+// in the Amazon EC2 Auto Scaling User Guide.
 type PredictiveScalingMetricSpecification struct {
 
-	// Specifies the target utilization.
+	// Specifies the target utilization. Some metrics are based on a count instead of a
+	// percentage, such as the request count for an Application Load Balancer or the
+	// number of messages in an SQS queue. If the scaling policy specifies one of these
+	// metrics, specify the target utilization as the optimal average request or
+	// message count per instance during any one-minute interval.
 	//
 	// This member is required.
 	TargetValue *float64
 
-	// The load metric specification.
+	// The customized capacity metric specification.
+	CustomizedCapacityMetricSpecification *PredictiveScalingCustomizedCapacityMetric
+
+	// The customized load metric specification.
+	CustomizedLoadMetricSpecification *PredictiveScalingCustomizedLoadMetric
+
+	// The customized scaling metric specification.
+	CustomizedScalingMetricSpecification *PredictiveScalingCustomizedScalingMetric
+
+	// The predefined load metric specification.
 	PredefinedLoadMetricSpecification *PredictiveScalingPredefinedLoadMetric
 
-	// The metric pair specification from which Amazon EC2 Auto Scaling determines the
-	// appropriate scaling metric and load metric to use.
+	// The predefined metric pair specification from which Amazon EC2 Auto Scaling
+	// determines the appropriate scaling metric and load metric to use.
 	PredefinedMetricPairSpecification *PredictiveScalingPredefinedMetricPair
 
-	// The scaling metric specification.
+	// The predefined scaling metric specification.
 	PredefinedScalingMetricSpecification *PredictiveScalingPredefinedScalingMetric
 
 	noSmithyDocumentSerde

@@ -12,7 +12,7 @@ import (
 )
 
 // Creates a Amazon Web Services Systems Manager (SSM document). An SSM document
-// defines the actions that Systems Manager performs on your managed instances. For
+// defines the actions that Systems Manager performs on your managed nodes. For
 // more information about SSM documents, including information about supported
 // schemas, features, and syntax, see Amazon Web Services Systems Manager Documents
 // (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-ssm-docs.html)

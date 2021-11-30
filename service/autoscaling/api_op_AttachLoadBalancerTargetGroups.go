@@ -25,8 +25,10 @@ import (
 //
 // To describe the target groups for an Auto Scaling group, call
 // the DescribeLoadBalancerTargetGroups API. To detach the target group from the
-// Auto Scaling group, call the DetachLoadBalancerTargetGroups API. For more
-// information, see Elastic Load Balancing and Amazon EC2 Auto Scaling
+// Auto Scaling group, call the DetachLoadBalancerTargetGroups API. This operation
+// is additive and does not detach existing target groups or Classic Load Balancers
+// from the Auto Scaling group. For more information, see Elastic Load Balancing
+// and Amazon EC2 Auto Scaling
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 func (c *Client) AttachLoadBalancerTargetGroups(ctx context.Context, params *AttachLoadBalancerTargetGroupsInput, optFns ...func(*Options)) (*AttachLoadBalancerTargetGroupsOutput, error) {

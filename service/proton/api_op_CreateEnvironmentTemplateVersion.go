@@ -43,17 +43,16 @@ type CreateEnvironmentTemplateVersionInput struct {
 	// This member is required.
 	TemplateName *string
 
-	// When included, if two identicial requests are made with the same client token,
-	// AWS Proton returns the environment template version that the first request
-	// created.
+	// When included, if two identical requests are made with the same client token,
+	// Proton returns the environment template version that the first request created.
 	ClientToken *string
 
 	// A description of the new version of an environment template.
 	Description *string
 
-	// To create a new minor version of the environment template, include a
-	// majorVersion. To create a new major and minor version of the environment
-	// template, exclude majorVersion.
+	// To create a new minor version of the environment template, include a major
+	// Version. To create a new major and minor version of the environment template,
+	// exclude major Version.
 	MajorVersion *string
 
 	// Create tags for a new version of an environment template.
@@ -64,7 +63,7 @@ type CreateEnvironmentTemplateVersionInput struct {
 
 type CreateEnvironmentTemplateVersionOutput struct {
 
-	// The environment template detail data that's returned by AWS Proton.
+	// The environment template detail data that's returned by Proton.
 	//
 	// This member is required.
 	EnvironmentTemplateVersion *types.EnvironmentTemplateVersion

@@ -13,7 +13,7 @@ import (
 )
 
 // Returns information about backtracks for a DB cluster. For more information on
-// Amazon Aurora, see  What Is Amazon Aurora?
+// Amazon Aurora, see  What is Amazon Aurora?
 // (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
 // in the Amazon Aurora User Guide. This action only applies to Aurora MySQL DB
 // clusters.

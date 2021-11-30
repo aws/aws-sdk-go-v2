@@ -13,8 +13,7 @@ import (
 	"time"
 )
 
-// Initiates a contact flow to start a new task immediately or at a future date and
-// time.
+// Initiates a contact flow to start a new task.
 func (c *Client) StartTaskContact(ctx context.Context, params *StartTaskContactInput, optFns ...func(*Options)) (*StartTaskContactOutput, error) {
 	if params == nil {
 		params = &StartTaskContactInput{}

@@ -15,11 +15,13 @@ import (
 
 // Creates a new Timestream database. If the KMS key is not specified, the database
 // will be encrypted with a Timestream managed KMS key located in your account.
-// Refer to AWS managed KMS keys
+// Refer to Amazon Web Services managed KMS keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk)
-// for more info. Service quotas apply. For more information, see Access Management
-// (https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html) in
-// the Timestream Developer Guide.
+// for more info. Service quotas apply
+// (https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html).
+// See code sample
+// (https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.create-db.html)
+// for details.
 func (c *Client) CreateDatabase(ctx context.Context, params *CreateDatabaseInput, optFns ...func(*Options)) (*CreateDatabaseOutput, error) {
 	if params == nil {
 		params = &CreateDatabaseInput{}
@@ -44,7 +46,7 @@ type CreateDatabaseInput struct {
 
 	// The KMS key for the database. If the KMS key is not specified, the database will
 	// be encrypted with a Timestream managed KMS key located in your account. Refer to
-	// AWS managed KMS keys
+	// Amazon Web Services managed KMS keys
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk)
 	// for more info.
 	KmsKeyId *string

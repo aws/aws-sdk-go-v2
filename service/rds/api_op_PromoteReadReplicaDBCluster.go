@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Promotes a read replica DB cluster to a standalone DB cluster. This action only
-// applies to Aurora DB clusters.
+// Promotes a read replica DB cluster to a standalone DB cluster.
 func (c *Client) PromoteReadReplicaDBCluster(ctx context.Context, params *PromoteReadReplicaDBClusterInput, optFns ...func(*Options)) (*PromoteReadReplicaDBClusterOutput, error) {
 	if params == nil {
 		params = &PromoteReadReplicaDBClusterInput{}
@@ -47,9 +46,23 @@ type PromoteReadReplicaDBClusterInput struct {
 
 type PromoteReadReplicaDBClusterOutput struct {
 
-	// Contains the details of an Amazon Aurora DB cluster. This data type is used as a
-	// response element in the DescribeDBClusters, StopDBCluster, and StartDBCluster
-	// actions.
+	// Contains the details of an Amazon Aurora DB cluster or Multi-AZ DB cluster. For
+	// an Amazon Aurora DB cluster, this data type is used as a response element in the
+	// operations CreateDBCluster, DeleteDBCluster, DescribeDBClusters,
+	// FailoverDBCluster, ModifyDBCluster, PromoteReadReplicaDBCluster,
+	// RestoreDBClusterFromS3, RestoreDBClusterFromSnapshot,
+	// RestoreDBClusterToPointInTime, StartDBCluster, and StopDBCluster. For a Multi-AZ
+	// DB cluster, this data type is used as a response element in the operations
+	// CreateDBCluster, DeleteDBCluster, DescribeDBClusters, FailoverDBCluster,
+	// ModifyDBCluster, RebootDBCluster, RestoreDBClusterFromSnapshot, and
+	// RestoreDBClusterToPointInTime. For more information on Amazon Aurora DB
+	// clusters, see  What is Amazon Aurora?
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
+	// in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
+	// see  Multi-AZ deployments with two readable standby DB instances
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
+	// in the Amazon RDS User Guide. The Multi-AZ DB clusters feature is in preview and
+	// is subject to change.
 	DBCluster *types.DBCluster
 
 	// Metadata pertaining to the operation's result.

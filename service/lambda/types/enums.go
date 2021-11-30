@@ -20,24 +20,6 @@ func (Architecture) Values() []Architecture {
 	}
 }
 
-type AuthorizationType string
-
-// Enum values for AuthorizationType
-const (
-	AuthorizationTypeNone   AuthorizationType = "NONE"
-	AuthorizationTypeAwsIam AuthorizationType = "AWS_IAM"
-)
-
-// Values returns all known values for AuthorizationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
-func (AuthorizationType) Values() []AuthorizationType {
-	return []AuthorizationType{
-		"NONE",
-		"AWS_IAM",
-	}
-}
-
 type CodeSigningPolicy string
 
 // Enum values for CodeSigningPolicy

@@ -15,19 +15,19 @@ import (
 // Creates an Amazon EKS control plane. The Amazon EKS control plane consists of
 // control plane instances that run the Kubernetes software, such as etcd and the
 // API server. The control plane runs in an account managed by Amazon Web Services,
-// and the Kubernetes API is exposed via the Amazon EKS API server endpoint. Each
-// Amazon EKS cluster control plane is single-tenant and unique and runs on its own
+// and the Kubernetes API is exposed by the Amazon EKS API server endpoint. Each
+// Amazon EKS cluster control plane is single tenant and unique. It runs on its own
 // set of Amazon EC2 instances. The cluster control plane is provisioned across
 // multiple Availability Zones and fronted by an Elastic Load Balancing Network
 // Load Balancer. Amazon EKS also provisions elastic network interfaces in your VPC
 // subnets to provide connectivity from the control plane instances to the nodes
 // (for example, to support kubectl exec, logs, and proxy data flows). Amazon EKS
 // nodes run in your Amazon Web Services account and connect to your cluster's
-// control plane via the Kubernetes API server endpoint and a certificate file that
-// is created for your cluster. Cluster creation typically takes several minutes.
-// After you create an Amazon EKS cluster, you must configure your Kubernetes
-// tooling to communicate with the API server and launch nodes into your cluster.
-// For more information, see Managing Cluster Authentication
+// control plane over the Kubernetes API server endpoint and a certificate file
+// that is created for your cluster. In most cases, it takes several minutes to
+// create a cluster. After you create an Amazon EKS cluster, you must configure
+// your Kubernetes tooling to communicate with the API server and launch nodes into
+// your cluster. For more information, see Managing Cluster Authentication
 // (https://docs.aws.amazon.com/eks/latest/userguide/managing-auth.html) and
 // Launching Amazon EKS nodes
 // (https://docs.aws.amazon.com/eks/latest/userguide/launch-workers.html) in the
@@ -54,14 +54,14 @@ type CreateClusterInput struct {
 	// This member is required.
 	Name *string
 
-	// The VPC configuration used by the cluster control plane. Amazon EKS VPC
+	// The VPC configuration that's used by the cluster control plane. Amazon EKS VPC
 	// resources have specific requirements to work properly with Kubernetes. For more
 	// information, see Cluster VPC Considerations
 	// (https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html) and Cluster
 	// Security Group Considerations
 	// (https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html) in the
 	// Amazon EKS User Guide. You must specify at least two subnets. You can specify up
-	// to five security groups, but we recommend that you use a dedicated security
+	// to five security groups. However, we recommend that you use a dedicated security
 	// group for your cluster control plane.
 	//
 	// This member is required.
@@ -96,8 +96,7 @@ type CreateClusterInput struct {
 	Logging *types.Logging
 
 	// The metadata to apply to the cluster to assist with categorization and
-	// organization. Each tag consists of a key and an optional value, both of which
-	// you define.
+	// organization. Each tag consists of a key and an optional value. You define both.
 	Tags map[string]string
 
 	// The desired Kubernetes version for your cluster. If you don't specify a value

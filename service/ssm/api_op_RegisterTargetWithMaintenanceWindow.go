@@ -35,23 +35,20 @@ type RegisterTargetWithMaintenanceWindowInput struct {
 	// This member is required.
 	ResourceType types.MaintenanceWindowResourceType
 
-	// The targets to register with the maintenance window. In other words, the
-	// instances to run commands on when the maintenance window runs. If a single
+	// The targets to register with the maintenance window. In other words, the managed
+	// nodes to run commands on when the maintenance window runs. If a single
 	// maintenance window task is registered with multiple targets, its task
 	// invocations occur sequentially and not in parallel. If your task must run on
 	// multiple targets at the same time, register a task for each target individually
 	// and assign each task the same priority level. You can specify targets using
-	// instance IDs, resource group names, or tags that have been applied to instances.
-	// Example 1: Specify instance IDs
-	// Key=InstanceIds,Values=instance-id-1,instance-id-2,instance-id-3  Example 2: Use
-	// tag key-pairs applied to instances
-	// Key=tag:my-tag-key,Values=my-tag-value-1,my-tag-value-2  Example 3: Use tag-keys
-	// applied to instances Key=tag-key,Values=my-tag-key-1,my-tag-key-2  Example 4:
-	// Use resource group names Key=resource-groups:Name,Values=resource-group-name
-	// Example 5: Use filters for resource group types
-	// Key=resource-groups:ResourceTypeFilters,Values=resource-type-1,resource-type-2
-	// For Key=resource-groups:ResourceTypeFilters, specify resource types in the
-	// following format
+	// managed node IDs, resource group names, or tags that have been applied to
+	// managed nodes. Example 1: Specify managed node IDs Key=InstanceIds,Values=,,
+	// Example 2: Use tag key-pairs applied to managed nodes Key=tag:,Values=, Example
+	// 3: Use tag-keys applied to managed nodes Key=tag-key,Values=, Example 4: Use
+	// resource group names Key=resource-groups:Name,Values= Example 5: Use filters for
+	// resource group types Key=resource-groups:ResourceTypeFilters,Values=, For
+	// Key=resource-groups:ResourceTypeFilters, specify resource types in the following
+	// format
 	// Key=resource-groups:ResourceTypeFilters,Values=AWS::EC2::INSTANCE,AWS::EC2::VPC
 	// For more information about these examples formats, including the best use case
 	// for each one, see Examples: Register targets with a maintenance window

@@ -191,19 +191,19 @@
                 "status": {
                     "target": "com.amazonaws.macie2#AdminStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the account as the delegated administrator of Amazon Macie for the organization.</p>",
+                        "smithy.api#documentation": "<p>The current status of the account as the delegated Amazon Macie administrator account for the organization.</p>",
                         "smithy.api#jsonName": "status"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides information about the delegated Amazon Macie administrator account for an Amazon Web Services organization.</p>"
+                "smithy.api#documentation": "<p>Provides information about the delegated Amazon Macie administrator account for an organization in Organizations.</p>"
             }
         },
         "com.amazonaws.macie2#AdminStatus": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The current status of an account as the delegated Amazon Macie administrator account for an Amazon Web Services organization. Possible values are:</p>",
+                "smithy.api#documentation": "<p>The current status of an account as the delegated Amazon Macie administrator account for an organization in Organizations. Possible values are:</p>",
                 "smithy.api#enum": [
                     {
                         "value": "ENABLED",
@@ -1433,7 +1433,7 @@
                 "description": {
                     "target": "com.amazonaws.macie2#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>A custom description of the custom data identifier. The description can contain as many as 512 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the description of a custom data identifier. Other users of your account might be able to see the identifier's description, depending on the actions that they're allowed to perform in Amazon Macie.</p>",
+                        "smithy.api#documentation": "<p>A custom description of the custom data identifier. The description can contain as many as 512 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the description of a custom data identifier. Other users of your account might be able to see this description, depending on the actions that they're allowed to perform in Amazon Macie.</p>",
                         "smithy.api#jsonName": "description"
                     }
                 },
@@ -1461,7 +1461,7 @@
                 "name": {
                     "target": "com.amazonaws.macie2#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>A custom name for the custom data identifier. The name can contain as many as 128 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the name of a custom data identifier. Other users of your account might be able to see the identifier's name, depending on the actions that they're allowed to perform in Amazon Macie.</p>",
+                        "smithy.api#documentation": "<p>A custom name for the custom data identifier. The name can contain as many as 128 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the name of a custom data identifier. Other users of your account might be able to see this name, depending on the actions that they're allowed to perform in Amazon Macie.</p>",
                         "smithy.api#jsonName": "name"
                     }
                 },
@@ -1562,7 +1562,7 @@
                 "description": {
                     "target": "com.amazonaws.macie2#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>A custom description of the filter. The description can contain as many as 512 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the description of a filter. Other users of your account might be able to see the filter's description, depending on the actions that they're allowed to perform in Amazon Macie.</p>",
+                        "smithy.api#documentation": "<p>A custom description of the filter. The description can contain as many as 512 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the description of a filter. Other users of your account might be able to see this description, depending on the actions that they're allowed to perform in Amazon Macie.</p>",
                         "smithy.api#jsonName": "description"
                     }
                 },
@@ -1577,7 +1577,7 @@
                 "name": {
                     "target": "com.amazonaws.macie2#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>A custom name for the filter. The name must contain at least 3 characters and can contain as many as 64 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the name of a filter. Other users of your account might be able to see the filter's name, depending on the actions that they're allowed to perform in Amazon Macie.</p>",
+                        "smithy.api#documentation": "<p>A custom name for the filter. The name must contain at least 3 characters and can contain as many as 64 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the name of a filter. Other users of your account might be able to see this name, depending on the actions that they're allowed to perform in Amazon Macie.</p>",
                         "smithy.api#jsonName": "name",
                         "smithy.api#required": {}
                     }
@@ -1671,14 +1671,14 @@
                 "disableEmailNotification": {
                     "target": "com.amazonaws.macie2#__boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to send an email notification to the root user of each account that the invitation will be sent to. This notification is in addition to an alert that the root user receives in Personal Health Dashboard. To send an email notification to the root user of each account, set this value to true.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether to send the invitation as an email message. If this value is false, Amazon Macie sends the invitation (as an email message) to the email address that you specified for the recipient's account when you associated the account with your account. The default value is false.</p>",
                         "smithy.api#jsonName": "disableEmailNotification"
                     }
                 },
                 "message": {
                     "target": "com.amazonaws.macie2#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>A custom message to include in the invitation. Amazon Macie adds this message to the standard content that it sends for an invitation.</p>",
+                        "smithy.api#documentation": "<p>Custom text to include in the email message that contains the invitation. The text can contain as many as 80 alphanumeric characters.</p>",
                         "smithy.api#jsonName": "message"
                     }
                 }
@@ -2782,7 +2782,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the Amazon Macie configuration settings for an Amazon Web Services organization.</p>",
+                "smithy.api#documentation": "<p>Retrieves the Amazon Macie configuration settings for an organization in Organizations.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/admin/configuration",
@@ -2800,14 +2800,14 @@
                 "autoEnable": {
                     "target": "com.amazonaws.macie2#__boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether Amazon Macie is enabled automatically for accounts that are added to the Amazon Web Services organization.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether Amazon Macie is enabled automatically for accounts that are added to the organization.</p>",
                         "smithy.api#jsonName": "autoEnable"
                     }
                 },
                 "maxAccountLimitReached": {
                     "target": "com.amazonaws.macie2#__boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the maximum number of Amazon Macie member accounts are part of the Amazon Web Services organization.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether the maximum number of Amazon Macie member accounts are part of the organization.</p>",
                         "smithy.api#jsonName": "maxAccountLimitReached"
                     }
                 }
@@ -2845,7 +2845,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disables an Amazon Macie account and deletes Macie resources for the account.</p>",
+                "smithy.api#documentation": "<p>Disables Amazon Macie and deletes all settings and resources for a Macie account.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/macie",
@@ -2893,7 +2893,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disables an account as the delegated Amazon Macie administrator account for an Amazon Web Services organization.</p>",
+                "smithy.api#documentation": "<p>Disables an account as the delegated Amazon Macie administrator account for an organization in Organizations.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/admin",
@@ -3208,7 +3208,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Designates an account as the delegated Amazon Macie administrator account for an Amazon Web Services organization.</p>",
+                "smithy.api#documentation": "<p>Designates an account as the delegated Amazon Macie administrator account for an organization in Organizations.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/admin",
@@ -3767,7 +3767,7 @@
                 "administrator": {
                     "target": "com.amazonaws.macie2#Invitation",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services account ID for the administrator account. If the accounts are associated by a Macie membership invitation, this object also provides details about the invitation that was sent to establish the relationship between the accounts.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID for the administrator account. If the accounts are associated by an Amazon Macie membership invitation, this object also provides details about the invitation that was sent to establish the relationship between the accounts.</p>",
                         "smithy.api#jsonName": "administrator"
                     }
                 }
@@ -3805,7 +3805,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves (queries) aggregated statistical data for all the S3 buckets that Amazon Macie monitors and analyzes.</p>",
+                "smithy.api#documentation": "<p>Retrieves (queries) aggregated statistical data about S3 buckets that Amazon Macie monitors and analyzes.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/datasources/s3/statistics",
@@ -4560,28 +4560,28 @@
                 "findingPublishingFrequency": {
                     "target": "com.amazonaws.macie2#FindingPublishingFrequency",
                     "traits": {
-                        "smithy.api#documentation": "<p>The frequency with which Macie publishes updates to policy findings for the account. This includes publishing updates to Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events).</p>",
+                        "smithy.api#documentation": "<p>The frequency with which Amazon Macie publishes updates to policy findings for the account. This includes publishing updates to Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events).</p>",
                         "smithy.api#jsonName": "findingPublishingFrequency"
                     }
                 },
                 "serviceRole": {
                     "target": "com.amazonaws.macie2#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service-linked role that allows Macie to monitor and analyze data in Amazon Web Services resources for the account.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service-linked role that allows Amazon Macie to monitor and analyze data in Amazon Web Services resources for the account.</p>",
                         "smithy.api#jsonName": "serviceRole"
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.macie2#MacieStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the Macie account. Possible values are: PAUSED, the account is enabled but all Macie activities are suspended (paused) for the account; and, ENABLED, the account is enabled and all Macie activities are enabled for the account.</p>",
+                        "smithy.api#documentation": "<p>The current status of the Amazon Macie account. Possible values are: PAUSED, the account is enabled but all Macie activities are suspended (paused) for the account; and, ENABLED, the account is enabled and all Macie activities are enabled for the account.</p>",
                         "smithy.api#jsonName": "status"
                     }
                 },
                 "updatedAt": {
                     "target": "com.amazonaws.macie2#__timestampIso8601",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in UTC and extended ISO 8601 format, of the most recent change to the status of the Macie account.</p>",
+                        "smithy.api#documentation": "<p>The date and time, in UTC and extended ISO 8601 format, of the most recent change to the status of the Amazon Macie account.</p>",
                         "smithy.api#jsonName": "updatedAt"
                     }
                 }
@@ -4730,7 +4730,7 @@
                 "invitedAt": {
                     "target": "com.amazonaws.macie2#__timestampIso8601",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in UTC and extended ISO 8601 format, when an Amazon Macie membership invitation was last sent to the account. This value is null if a Macie invitation hasn't been sent to the account.</p>",
+                        "smithy.api#documentation": "<p>The date and time, in UTC and extended ISO 8601 format, when an Amazon Macie membership invitation was last sent to the account. This value is null if an invitation hasn't been sent to the account.</p>",
                         "smithy.api#jsonName": "invitedAt"
                     }
                 },
@@ -5058,7 +5058,7 @@
                 "invitationId": {
                     "target": "com.amazonaws.macie2#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the invitation. Amazon Macie uses this identifier to validate the inviter account with the invitee account.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier for the invitation.</p>",
                         "smithy.api#jsonName": "invitationId"
                     }
                 },
@@ -5072,13 +5072,13 @@
                 "relationshipStatus": {
                     "target": "com.amazonaws.macie2#RelationshipStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the relationship between the account that sent the invitation (<i>inviter account</i>) and the account that received the invitation (<i>invitee account</i>).</p>",
+                        "smithy.api#documentation": "<p>The status of the relationship between the account that sent the invitation and the account that received the invitation.</p>",
                         "smithy.api#jsonName": "relationshipStatus"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides information about an Amazon Macie membership invitation that was received by an account.</p>"
+                "smithy.api#documentation": "<p>Provides information about an Amazon Macie membership invitation.</p>"
             }
         },
         "com.amazonaws.macie2#IpAddressDetails": {
@@ -6275,7 +6275,7 @@
                 "members": {
                     "target": "com.amazonaws.macie2#__listOfMember",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of objects, one for each account that's associated with the administrator account and meets the criteria specified by the onlyAssociated request parameter.</p>",
+                        "smithy.api#documentation": "<p>An array of objects, one for each account that's associated with the administrator account and meets the criteria specified in the request.</p>",
                         "smithy.api#jsonName": "members"
                     }
                 },
@@ -6320,7 +6320,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves information about the delegated Amazon Macie administrator account for an Amazon Web Services organization.</p>",
+                "smithy.api#documentation": "<p>Retrieves information about the delegated Amazon Macie administrator account for an organization in Organizations.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/admin",
@@ -6825,7 +6825,7 @@
                 "invitedAt": {
                     "target": "com.amazonaws.macie2#__timestampIso8601",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in UTC and extended ISO 8601 format, when an Amazon Macie membership invitation was last sent to the account. This value is null if a Macie invitation hasn't been sent to the account.</p>",
+                        "smithy.api#documentation": "<p>The date and time, in UTC and extended ISO 8601 format, when an Amazon Macie membership invitation was last sent to the account. This value is null if an invitation hasn't been sent to the account.</p>",
                         "smithy.api#jsonName": "invitedAt"
                     }
                 },
@@ -7262,7 +7262,7 @@
         "com.amazonaws.macie2#RelationshipStatus": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The current status of the relationship between an account and an associated Amazon Macie administrator account (<i>inviter account</i>). Possible values are:</p>",
+                "smithy.api#documentation": "<p>The current status of the relationship between an account and an associated Amazon Macie administrator account. Possible values are:</p>",
                 "smithy.api#enum": [
                     {
                         "value": "Enabled",
@@ -8318,7 +8318,7 @@
                 "severity": {
                     "target": "com.amazonaws.macie2#DataIdentifierSeverity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The severity to assign to a finding if the number of occurrences is greater than or equal to the specified threshold (occurrencesThreshold) and, if applicable, is less than the threshold for the next consecutive severity level for the custom data identifier.</p>",
+                        "smithy.api#documentation": "<p>The severity to assign to a finding: if the number of occurrences is greater than or equal to the specified threshold (occurrencesThreshold); and, if applicable, the number of occurrences is less than the threshold for the next consecutive severity level for the custom data identifier, moving from LOW to HIGH.</p>",
                         "smithy.api#jsonName": "severity",
                         "smithy.api#required": {}
                     }
@@ -9036,7 +9036,7 @@
                 "description": {
                     "target": "com.amazonaws.macie2#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>A custom description of the filter. The description can contain as many as 512 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the description of a filter. Other users might be able to see the filter's description, depending on the actions that they're allowed to perform in Amazon Macie.</p>",
+                        "smithy.api#documentation": "<p>A custom description of the filter. The description can contain as many as 512 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the description of a filter. Other users might be able to see this description, depending on the actions that they're allowed to perform in Amazon Macie.</p>",
                         "smithy.api#jsonName": "description"
                     }
                 },
@@ -9058,7 +9058,7 @@
                 "name": {
                     "target": "com.amazonaws.macie2#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>A custom name for the filter. The name must contain at least 3 characters and can contain as many as 64 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the name of a filter. Other users might be able to see the filter's name, depending on the actions that they're allowed to perform in Amazon Macie.</p>",
+                        "smithy.api#documentation": "<p>A custom name for the filter. The name must contain at least 3 characters and can contain as many as 64 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the name of a filter. Other users might be able to see this name, depending on the actions that they're allowed to perform in Amazon Macie.</p>",
                         "smithy.api#jsonName": "name"
                     }
                 },
@@ -9130,7 +9130,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Suspends or re-enables an Amazon Macie account, or updates the configuration settings for a Macie account.</p>",
+                "smithy.api#documentation": "<p>Suspends or re-enables Amazon Macie, or updates the configuration settings for a Macie account.</p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/macie",
@@ -9258,7 +9258,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the Amazon Macie configuration settings for an Amazon Web Services organization.</p>",
+                "smithy.api#documentation": "<p>Updates the Amazon Macie configuration settings for an organization in Organizations.</p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/admin/configuration",
@@ -9272,7 +9272,7 @@
                 "autoEnable": {
                     "target": "com.amazonaws.macie2#__boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to enable Amazon Macie automatically for each account, when the account is added to the Amazon Web Services organization.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether to enable Amazon Macie automatically for an account when the account is added to the organization in Organizations.</p>",
                         "smithy.api#jsonName": "autoEnable",
                         "smithy.api#required": {}
                     }

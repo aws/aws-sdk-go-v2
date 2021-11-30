@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the Amazon Macie configuration settings for an Amazon Web Services
-// organization.
+// Retrieves the Amazon Macie configuration settings for an organization in
+// Organizations.
 func (c *Client) DescribeOrganizationConfiguration(ctx context.Context, params *DescribeOrganizationConfigurationInput, optFns ...func(*Options)) (*DescribeOrganizationConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeOrganizationConfigurationInput{}
@@ -34,11 +34,11 @@ type DescribeOrganizationConfigurationInput struct {
 type DescribeOrganizationConfigurationOutput struct {
 
 	// Specifies whether Amazon Macie is enabled automatically for accounts that are
-	// added to the Amazon Web Services organization.
+	// added to the organization.
 	AutoEnable bool
 
 	// Specifies whether the maximum number of Amazon Macie member accounts are part of
-	// the Amazon Web Services organization.
+	// the organization.
 	MaxAccountLimitReached bool
 
 	// Metadata pertaining to the operation's result.

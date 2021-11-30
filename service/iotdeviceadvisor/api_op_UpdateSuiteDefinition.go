@@ -12,7 +12,10 @@ import (
 	"time"
 )
 
-// Updates a Device Advisor test suite.
+// Updates a Device Advisor test suite. Requires permission to access the
+// UpdateSuiteDefinition
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) UpdateSuiteDefinition(ctx context.Context, params *UpdateSuiteDefinitionInput, optFns ...func(*Options)) (*UpdateSuiteDefinitionOutput, error) {
 	if params == nil {
 		params = &UpdateSuiteDefinitionInput{}
@@ -30,7 +33,7 @@ func (c *Client) UpdateSuiteDefinition(ctx context.Context, params *UpdateSuiteD
 
 type UpdateSuiteDefinitionInput struct {
 
-	// Suite definition Id of the test suite to be updated.
+	// Suite definition ID of the test suite to be updated.
 	//
 	// This member is required.
 	SuiteDefinitionId *string
@@ -49,10 +52,10 @@ type UpdateSuiteDefinitionOutput struct {
 	// Timestamp of when the test suite was updated.
 	LastUpdatedAt *time.Time
 
-	// Amazon Resource name of the updated test suite.
+	// Amazon Resource Name (ARN) of the updated test suite.
 	SuiteDefinitionArn *string
 
-	// Suite definition Id of the updated test suite.
+	// Suite definition ID of the updated test suite.
 	SuiteDefinitionId *string
 
 	// Suite definition name of the updated test suite.

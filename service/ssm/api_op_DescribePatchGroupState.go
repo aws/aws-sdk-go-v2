@@ -39,59 +39,59 @@ type DescribePatchGroupStateInput struct {
 
 type DescribePatchGroupStateOutput struct {
 
-	// The number of instances in the patch group.
+	// The number of managed nodes in the patch group.
 	Instances int32
 
-	// The number of instances where patches that are specified as Critical for
+	// The number of managed nodes where patches that are specified as Critical for
 	// compliance reporting in the patch baseline aren't installed. These patches might
 	// be missing, have failed installation, were rejected, or were installed but
-	// awaiting a required instance reboot. The status of these instances is
+	// awaiting a required managed node reboot. The status of these managed nodes is
 	// NON_COMPLIANT.
 	InstancesWithCriticalNonCompliantPatches int32
 
-	// The number of instances with patches from the patch baseline that failed to
+	// The number of managed nodes with patches from the patch baseline that failed to
 	// install.
 	InstancesWithFailedPatches int32
 
-	// The number of instances with patches installed that aren't defined in the patch
-	// baseline.
+	// The number of managed nodes with patches installed that aren't defined in the
+	// patch baseline.
 	InstancesWithInstalledOtherPatches int32
 
-	// The number of instances with installed patches.
+	// The number of managed nodes with installed patches.
 	InstancesWithInstalledPatches int32
 
-	// The number of instances with patches installed by Patch Manager that haven't
-	// been rebooted after the patch installation. The status of these instances is
+	// The number of managed nodes with patches installed by Patch Manager that haven't
+	// been rebooted after the patch installation. The status of these managed nodes is
 	// NON_COMPLIANT.
 	InstancesWithInstalledPendingRebootPatches int32
 
-	// The number of instances with patches installed that are specified in a
+	// The number of managed nodes with patches installed that are specified in a
 	// RejectedPatches list. Patches with a status of INSTALLED_REJECTED were typically
 	// installed before they were added to a RejectedPatches list. If
 	// ALLOW_AS_DEPENDENCY is the specified option for RejectedPatchesAction, the value
 	// of InstancesWithInstalledRejectedPatches will always be 0 (zero).
 	InstancesWithInstalledRejectedPatches int32
 
-	// The number of instances with missing patches from the patch baseline.
+	// The number of managed nodes with missing patches from the patch baseline.
 	InstancesWithMissingPatches int32
 
-	// The number of instances with patches that aren't applicable.
+	// The number of managed nodes with patches that aren't applicable.
 	InstancesWithNotApplicablePatches int32
 
-	// The number of instances with patches installed that are specified as other than
-	// Critical or Security but aren't compliant with the patch baseline. The status of
-	// these instances is NON_COMPLIANT.
+	// The number of managed nodes with patches installed that are specified as other
+	// than Critical or Security but aren't compliant with the patch baseline. The
+	// status of these managed nodes is NON_COMPLIANT.
 	InstancesWithOtherNonCompliantPatches int32
 
-	// The number of instances where patches that are specified as Security in a patch
-	// advisory aren't installed. These patches might be missing, have failed
-	// installation, were rejected, or were installed but awaiting a required instance
-	// reboot. The status of these instances is NON_COMPLIANT.
+	// The number of managed nodes where patches that are specified as Security in a
+	// patch advisory aren't installed. These patches might be missing, have failed
+	// installation, were rejected, or were installed but awaiting a required managed
+	// node reboot. The status of these managed nodes is NON_COMPLIANT.
 	InstancesWithSecurityNonCompliantPatches int32
 
-	// The number of instances with NotApplicable patches beyond the supported limit,
-	// which aren't reported by name to Inventory. Inventory is a capability of Amazon
-	// Web Services Systems Manager.
+	// The number of managed nodes with NotApplicable patches beyond the supported
+	// limit, which aren't reported by name to Inventory. Inventory is a capability of
+	// Amazon Web Services Systems Manager.
 	InstancesWithUnreportedNotApplicablePatches int32
 
 	// Metadata pertaining to the operation's result.

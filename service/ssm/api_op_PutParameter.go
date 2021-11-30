@@ -128,15 +128,15 @@ type PutParameterInput struct {
 	// update the expiration date and time by updating the policy. Updating the
 	// parameter doesn't affect the expiration date and time. When the expiration time
 	// is reached, Parameter Store deletes the parameter. ExpirationNotification: This
-	// policy triggers an event in Amazon CloudWatch Events that notifies you about the
-	// expiration. By using this policy, you can receive notification before or after
-	// the expiration time is reached, in units of days or hours. NoChangeNotification:
-	// This policy triggers a CloudWatch Events event if a parameter hasn't been
-	// modified for a specified period of time. This policy type is useful when, for
-	// example, a secret needs to be changed within a period of time, but it hasn't
-	// been changed. All existing policies are preserved until you send new policies or
-	// an empty policy. For more information about parameter policies, see Assigning
-	// parameter policies
+	// policy initiates an event in Amazon CloudWatch Events that notifies you about
+	// the expiration. By using this policy, you can receive notification before or
+	// after the expiration time is reached, in units of days or hours.
+	// NoChangeNotification: This policy initiates a CloudWatch Events event if a
+	// parameter hasn't been modified for a specified period of time. This policy type
+	// is useful when, for example, a secret needs to be changed within a period of
+	// time, but it hasn't been changed. All existing policies are preserved until you
+	// send new policies or an empty policy. For more information about parameter
+	// policies, see Assigning parameter policies
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-policies.html).
 	Policies *string
 

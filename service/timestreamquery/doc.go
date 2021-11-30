@@ -3,5 +3,5 @@
 // Package timestreamquery provides the API client, operations, and parameter types
 // for Amazon Timestream Query.
 //
-//
+// Amazon Timestream Query
 package timestreamquery

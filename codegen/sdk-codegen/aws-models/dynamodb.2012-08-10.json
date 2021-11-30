@@ -762,6 +762,9 @@
                         "smithy.api#documentation": "<p>The list of PartiQL statements representing the batch to run.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "ReturnConsumedCapacity": {
+                    "target": "com.amazonaws.dynamodb#ReturnConsumedCapacity"
                 }
             }
         },
@@ -772,6 +775,12 @@
                     "target": "com.amazonaws.dynamodb#PartiQLBatchResponse",
                     "traits": {
                         "smithy.api#documentation": "<p>The response to each PartiQL statement in the batch.</p>"
+                    }
+                },
+                "ConsumedCapacity": {
+                    "target": "com.amazonaws.dynamodb#ConsumedCapacityMultiple",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The capacity units consumed by the entire operation. The values of the list are\n            ordered according to the ordering of the statements.</p>"
                     }
                 }
             }
@@ -3334,6 +3343,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Set this value to get remaining results, if <code>NextToken</code> was returned in the\n            statement response.</p>"
                     }
+                },
+                "ReturnConsumedCapacity": {
+                    "target": "com.amazonaws.dynamodb#ReturnConsumedCapacity"
                 }
             }
         },
@@ -3351,6 +3363,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>If the response of a read request exceeds the response payload limit DynamoDB will set\n            this value in the response. If set, you can use that this value in the subsequent\n            request to get the remaining results.</p>"
                     }
+                },
+                "ConsumedCapacity": {
+                    "target": "com.amazonaws.dynamodb#ConsumedCapacity"
                 }
             }
         },
@@ -3405,6 +3420,12 @@
                         "smithy.api#documentation": "<p>Set this value to get remaining results, if <code>NextToken</code> was returned in the\n            statement response.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
+                },
+                "ReturnConsumedCapacity": {
+                    "target": "com.amazonaws.dynamodb#ReturnConsumedCapacity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines the level of detail about either provisioned or on-demand throughput consumption that is\n            returned in the response. For more information, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_TransactGetItems.html\">TransactGetItems</a> and <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_TransactWriteItems.html\">TransactWriteItems</a>.</p>"
+                    }
                 }
             }
         },
@@ -3415,6 +3436,12 @@
                     "target": "com.amazonaws.dynamodb#ItemResponseList",
                     "traits": {
                         "smithy.api#documentation": "<p>The response to a PartiQL transaction.</p>"
+                    }
+                },
+                "ConsumedCapacity": {
+                    "target": "com.amazonaws.dynamodb#ConsumedCapacityMultiple",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The capacity units consumed by the entire operation. The values of the list are\n            ordered according to the ordering of the statements.</p>"
                     }
                 }
             }
@@ -7016,7 +7043,7 @@
         "com.amazonaws.dynamodb#ReturnConsumedCapacity": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>Determines the level of detail about provisioned throughput consumption that is\n            returned in the response:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>INDEXES</code> - The response includes the aggregate\n                        <code>ConsumedCapacity</code> for the operation, together with\n                        <code>ConsumedCapacity</code> for each table and secondary index that was\n                    accessed.</p>\n                <p>Note that some operations, such as <code>GetItem</code> and\n                        <code>BatchGetItem</code>, do not access any indexes at all. In these cases,\n                    specifying <code>INDEXES</code> will only return <code>ConsumedCapacity</code>\n                    information for table(s).</p>\n            </li>\n            <li>\n                <p>\n                    <code>TOTAL</code> - The response includes only the aggregate\n                        <code>ConsumedCapacity</code> for the operation.</p>\n            </li>\n            <li>\n                <p>\n                    <code>NONE</code> - No <code>ConsumedCapacity</code> details are included in the\n                    response.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Determines the level of detail about either provisioned or on-demand throughput\n            consumption that is returned in the response:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>INDEXES</code> - The response includes the aggregate\n                        <code>ConsumedCapacity</code> for the operation, together with\n                        <code>ConsumedCapacity</code> for each table and secondary index that was\n                    accessed.</p>\n                <p>Note that some operations, such as <code>GetItem</code> and\n                        <code>BatchGetItem</code>, do not access any indexes at all. In these cases,\n                    specifying <code>INDEXES</code> will only return <code>ConsumedCapacity</code>\n                    information for table(s).</p>\n            </li>\n            <li>\n                <p>\n                    <code>TOTAL</code> - The response includes only the aggregate\n                        <code>ConsumedCapacity</code> for the operation.</p>\n            </li>\n            <li>\n                <p>\n                    <code>NONE</code> - No <code>ConsumedCapacity</code> details are included in the\n                    response.</p>\n            </li>\n         </ul>",
                 "smithy.api#enum": [
                     {
                         "value": "INDEXES",

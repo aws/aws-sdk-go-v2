@@ -336,9 +336,23 @@ type CustomAvailabilityZone struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the details of an Amazon Aurora DB cluster. This data type is used as a
-// response element in the DescribeDBClusters, StopDBCluster, and StartDBCluster
-// actions.
+// Contains the details of an Amazon Aurora DB cluster or Multi-AZ DB cluster. For
+// an Amazon Aurora DB cluster, this data type is used as a response element in the
+// operations CreateDBCluster, DeleteDBCluster, DescribeDBClusters,
+// FailoverDBCluster, ModifyDBCluster, PromoteReadReplicaDBCluster,
+// RestoreDBClusterFromS3, RestoreDBClusterFromSnapshot,
+// RestoreDBClusterToPointInTime, StartDBCluster, and StopDBCluster. For a Multi-AZ
+// DB cluster, this data type is used as a response element in the operations
+// CreateDBCluster, DeleteDBCluster, DescribeDBClusters, FailoverDBCluster,
+// ModifyDBCluster, RebootDBCluster, RestoreDBClusterFromSnapshot, and
+// RestoreDBClusterToPointInTime. For more information on Amazon Aurora DB
+// clusters, see  What is Amazon Aurora?
+// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
+// in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
+// see  Multi-AZ deployments with two readable standby DB instances
+// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
+// in the Amazon RDS User Guide. The Multi-AZ DB clusters feature is in preview and
+// is subject to change.
 type DBCluster struct {
 
 	// The name of the Amazon Kinesis data stream used for the database activity
@@ -369,6 +383,10 @@ type DBCluster struct {
 	// with a DB cluster grant permission for the DB cluster to access other Amazon Web
 	// Services on your behalf.
 	AssociatedRoles []DBClusterRole
+
+	// A value that indicates that minor version patches are applied automatically.
+	// This setting is only for non-Aurora Multi-AZ DB clusters.
+	AutoMinorVersionUpgrade bool
 
 	// The time when a stopped DB cluster is restarted automatically.
 	AutomaticRestartTime *time.Time
@@ -422,6 +440,10 @@ type DBCluster struct {
 	// Contains a user-supplied DB cluster identifier. This identifier is the unique
 	// key that identifies a DB cluster.
 	DBClusterIdentifier *string
+
+	// The name of the compute and memory capacity class of the DB instance. This
+	// setting is only for non-Aurora Multi-AZ DB clusters.
+	DBClusterInstanceClass *string
 
 	// Provides the list of instances that make up the DB cluster.
 	DBClusterMembers []DBClusterMember
@@ -509,6 +531,10 @@ type DBCluster struct {
 	// Access Management (IAM) accounts to database accounts is enabled.
 	IAMDatabaseAuthenticationEnabled *bool
 
+	// The Provisioned IOPS (I/O operations per second) value. This setting is only for
+	// non-Aurora Multi-AZ DB clusters.
+	Iops *int32
+
 	// If StorageEncrypted is enabled, the Amazon Web Services KMS key identifier for
 	// the encrypted DB cluster. The Amazon Web Services KMS key identifier is the key
 	// ARN, key ID, alias ARN, or alias name for the KMS key.
@@ -521,6 +547,16 @@ type DBCluster struct {
 	// Contains the master username for the DB cluster.
 	MasterUsername *string
 
+	// The interval, in seconds, between points when Enhanced Monitoring metrics are
+	// collected for the DB cluster. This setting is only for non-Aurora Multi-AZ DB
+	// clusters.
+	MonitoringInterval *int32
+
+	// The ARN for the IAM role that permits RDS to send Enhanced Monitoring metrics to
+	// Amazon CloudWatch Logs. This setting is only for non-Aurora Multi-AZ DB
+	// clusters.
+	MonitoringRoleArn *string
+
 	// Specifies whether the DB cluster has instances in multiple Availability Zones.
 	MultiAZ *bool
 
@@ -532,6 +568,21 @@ type DBCluster struct {
 	// Specifies the progress of the operation as a percentage.
 	PercentProgress *string
 
+	// True if Performance Insights is enabled for the DB cluster, and otherwise false.
+	// This setting is only for non-Aurora Multi-AZ DB clusters.
+	PerformanceInsightsEnabled *bool
+
+	// The Amazon Web Services KMS key identifier for encryption of Performance
+	// Insights data. The Amazon Web Services KMS key identifier is the key ARN, key
+	// ID, alias ARN, or alias name for the KMS key. This setting is only for
+	// non-Aurora Multi-AZ DB clusters.
+	PerformanceInsightsKMSKeyId *string
+
+	// The amount of time, in days, to retain Performance Insights data. Valid values
+	// are 7 or 731 (2 years). This setting is only for non-Aurora Multi-AZ DB
+	// clusters.
+	PerformanceInsightsRetentionPeriod *int32
+
 	// Specifies the port that the database engine is listening on.
 	Port *int32
 
@@ -542,6 +593,18 @@ type DBCluster struct {
 	// Specifies the weekly time range during which system maintenance can occur, in
 	// Universal Coordinated Time (UTC).
 	PreferredMaintenanceWindow *string
+
+	// Specifies the accessibility options for the DB instance. When the DB instance is
+	// publicly accessible, its Domain Name System (DNS) endpoint resolves to the
+	// private IP address from within the DB instance's virtual private cloud (VPC). It
+	// resolves to the public IP address from outside of the DB instance's VPC. Access
+	// to the DB instance is ultimately controlled by the security group it uses. That
+	// public access is not permitted if the security group assigned to the DB instance
+	// doesn't permit it. When the DB instance isn't publicly accessible, it is an
+	// internal DB instance with a DNS name that resolves to a private IP address. For
+	// more information, see CreateDBInstance. This setting is only for non-Aurora
+	// Multi-AZ DB clusters.
+	PubliclyAccessible *bool
 
 	// Contains one or more identifiers of the read replicas associated with this DB
 	// cluster.
@@ -573,6 +636,10 @@ type DBCluster struct {
 
 	// Specifies whether the DB cluster is encrypted.
 	StorageEncrypted bool
+
+	// The storage type associated with DB instance. This setting is only for
+	// non-Aurora Multi-AZ DB clusters.
+	StorageType *string
 
 	// A list of tags. For more information, see Tagging Amazon RDS Resources
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
@@ -995,7 +1062,11 @@ type DBEngineVersion struct {
 }
 
 // Contains the details of an Amazon RDS DB instance. This data type is used as a
-// response element in the DescribeDBInstances action.
+// response element in the operations CreateDBInstance,
+// CreateDBInstanceReadReplica, DeleteDBInstance, DescribeDBInstances,
+// ModifyDBInstance, PromoteReadReplica, RebootDBInstance,
+// RestoreDBInstanceFromDBSnapshot, RestoreDBInstanceFromS3,
+// RestoreDBInstanceToPointInTime, StartDBInstance, and StopDBInstance.
 type DBInstance struct {
 
 	// Indicates whether engine-native audit fields are included in the database
@@ -1047,6 +1118,10 @@ type DBInstance struct {
 
 	// Specifies the number of days for which automatic DB snapshots are retained.
 	BackupRetentionPeriod int32
+
+	// Specifies where automated backups and manual snapshots are stored: Amazon Web
+	// Services Outposts or the Amazon Web Services Region.
+	BackupTarget *string
 
 	// The identifier of the CA certificate for this DB instance.
 	CACertificateIdentifier *string
@@ -1276,21 +1351,22 @@ type DBInstance struct {
 	// in the Amazon Aurora User Guide.
 	PromotionTier *int32
 
-	// Specifies the accessibility options for the DB instance. When the DB instance is
-	// publicly accessible, its DNS endpoint resolves to the private IP address from
-	// within the DB instance's VPC, and to the public IP address from outside of the
-	// DB instance's VPC. Access to the DB instance is ultimately controlled by the
-	// security group it uses, and that public access is not permitted if the security
-	// group assigned to the DB instance doesn't permit it. When the DB instance isn't
-	// publicly accessible, it is an internal DB instance with a DNS name that resolves
-	// to a private IP address. For more information, see CreateDBInstance.
+	// Specifies the accessibility options for the DB instance. When the DB cluster is
+	// publicly accessible, its Domain Name System (DNS) endpoint resolves to the
+	// private IP address from within the DB cluster's virtual private cloud (VPC). It
+	// resolves to the public IP address from outside of the DB cluster's VPC. Access
+	// to the DB cluster is ultimately controlled by the security group it uses. That
+	// public access isn't permitted if the security group assigned to the DB cluster
+	// doesn't permit it. When the DB instance isn't publicly accessible, it is an
+	// internal DB instance with a DNS name that resolves to a private IP address. For
+	// more information, see CreateDBInstance.
 	PubliclyAccessible bool
 
 	// Contains one or more identifiers of Aurora DB clusters to which the RDS DB
 	// instance is replicated as a read replica. For example, when you create an Aurora
-	// read replica of an RDS MySQL DB instance, the Aurora MySQL DB cluster for the
-	// Aurora read replica is shown. This output does not contain information about
-	// cross region Aurora read replicas. Currently, each RDS DB instance can have only
+	// read replica of an RDS for MySQL DB instance, the Aurora MySQL DB cluster for
+	// the Aurora read replica is shown. This output doesn't contain information about
+	// cross-Region Aurora read replicas. Currently, each RDS DB instance can have only
 	// one Aurora read replica.
 	ReadReplicaDBClusterIdentifiers []string
 
@@ -1364,6 +1440,10 @@ type DBInstanceAutomatedBackup struct {
 
 	// The retention period for the automated backups.
 	BackupRetentionPeriod *int32
+
+	// Specifies where automated backups are stored: Amazon Web Services Outposts or
+	// the Amazon Web Services Region.
+	BackupTarget *string
 
 	// The Amazon Resource Name (ARN) for the automated backups.
 	DBInstanceArn *string
@@ -1897,6 +1977,10 @@ type DBSnapshot struct {
 	// Specifies when the snapshot was taken in Coordinated Universal Time (UTC).
 	// Changes for the copy when the snapshot is copied.
 	SnapshotCreateTime *time.Time
+
+	// Specifies where manual snapshots are stored: Amazon Web Services Outposts or the
+	// Amazon Web Services Region.
+	SnapshotTarget *string
 
 	// Provides the type of the DB snapshot.
 	SnapshotType *string
@@ -2803,6 +2887,14 @@ type OrderableDBInstanceOption struct {
 
 	// A list of the supported DB engine modes.
 	SupportedEngineModes []string
+
+	// Whether DB instances can be configured as a Multi-AZ DB cluster. The Multi-AZ DB
+	// clusters feature is in preview and is subject to change. For more information on
+	// Multi-AZ DB clusters, see  Multi-AZ deployments with two readable standby DB
+	// instances
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
+	// in the Amazon RDS User Guide.
+	SupportsClusters bool
 
 	// Indicates whether a DB instance supports Enhanced Monitoring at intervals from 1
 	// to 60 seconds.

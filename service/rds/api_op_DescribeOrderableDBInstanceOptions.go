@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of orderable DB instance options for the specified engine.
+// Returns a list of orderable DB instance options for the specified DB engine, DB
+// engine version, and DB instance class.
 func (c *Client) DescribeOrderableDBInstanceOptions(ctx context.Context, params *DescribeOrderableDBInstanceOptionsInput, optFns ...func(*Options)) (*DescribeOrderableDBInstanceOptionsOutput, error) {
 	if params == nil {
 		params = &DescribeOrderableDBInstanceOptionsInput{}

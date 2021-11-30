@@ -7,7 +7,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// You do not have sufficient access to perform this action.
+// You do not have sufficient permissions to perform this action.
 type AccessDeniedException struct {
 	Message *string
 
@@ -104,6 +104,25 @@ func (e *DuplicateResourceException) ErrorMessage() string {
 func (e *DuplicateResourceException) ErrorCode() string             { return "DuplicateResourceException" }
 func (e *DuplicateResourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// An entity with the same name already exists.
+type IdempotencyException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *IdempotencyException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *IdempotencyException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *IdempotencyException) ErrorCode() string             { return "IdempotencyException" }
+func (e *IdempotencyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // Request processing failed because of an error or failure with the service.
 type InternalServiceException struct {
 	Message *string
@@ -143,6 +162,29 @@ func (e *InvalidContactFlowException) ErrorMessage() string {
 }
 func (e *InvalidContactFlowException) ErrorCode() string             { return "InvalidContactFlowException" }
 func (e *InvalidContactFlowException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The problems with the module. Please fix before trying again.
+type InvalidContactFlowModuleException struct {
+	Message *string
+
+	Problems []ProblemDetail
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidContactFlowModuleException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidContactFlowModuleException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidContactFlowModuleException) ErrorCode() string {
+	return "InvalidContactFlowModuleException"
+}
+func (e *InvalidContactFlowModuleException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // One or more of the specified parameters are not valid.
 type InvalidParameterException struct {

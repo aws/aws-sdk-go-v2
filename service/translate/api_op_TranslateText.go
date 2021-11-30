@@ -53,6 +53,10 @@ type TranslateTextInput struct {
 	// This member is required.
 	Text *string
 
+	// Settings to configure your translation output, including the option to mask
+	// profane words and phrases.
+	Settings *types.TranslationSettings
+
 	// The name of the terminology list file to be used in the TranslateText request.
 	// You can use 1 terminology list at most in a TranslateText request. Terminology
 	// lists can contain a maximum of 256 terms.
@@ -77,6 +81,9 @@ type TranslateTextOutput struct {
 	//
 	// This member is required.
 	TranslatedText *string
+
+	// Settings that configure the translation output.
+	AppliedSettings *types.TranslationSettings
 
 	// The names of the custom terminologies applied to the input text by Amazon
 	// Translate for the translated text response.

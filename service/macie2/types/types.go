@@ -51,14 +51,14 @@ type AccountLevelPermissions struct {
 }
 
 // Provides information about the delegated Amazon Macie administrator account for
-// an Amazon Web Services organization.
+// an organization in Organizations.
 type AdminAccount struct {
 
 	// The Amazon Web Services account ID for the account.
 	AccountId *string
 
-	// The current status of the account as the delegated administrator of Amazon Macie
-	// for the organization.
+	// The current status of the account as the delegated Amazon Macie administrator
+	// account for the organization.
 	Status AdminStatus
 
 	noSmithyDocumentSerde
@@ -1188,24 +1188,21 @@ type IamUser struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information about an Amazon Macie membership invitation that was
-// received by an account.
+// Provides information about an Amazon Macie membership invitation.
 type Invitation struct {
 
 	// The Amazon Web Services account ID for the account that sent the invitation.
 	AccountId *string
 
-	// The unique identifier for the invitation. Amazon Macie uses this identifier to
-	// validate the inviter account with the invitee account.
+	// The unique identifier for the invitation.
 	InvitationId *string
 
 	// The date and time, in UTC and extended ISO 8601 format, when the invitation was
 	// sent.
 	InvitedAt *time.Time
 
-	// The status of the relationship between the account that sent the invitation
-	// (inviter account) and the account that received the invitation (invitee
-	// account).
+	// The status of the relationship between the account that sent the invitation and
+	// the account that received the invitation.
 	RelationshipStatus RelationshipStatus
 
 	noSmithyDocumentSerde
@@ -1677,8 +1674,8 @@ type Member struct {
 	Email *string
 
 	// The date and time, in UTC and extended ISO 8601 format, when an Amazon Macie
-	// membership invitation was last sent to the account. This value is null if a
-	// Macie invitation hasn't been sent to the account.
+	// membership invitation was last sent to the account. This value is null if an
+	// invitation hasn't been sent to the account.
 	InvitedAt *time.Time
 
 	// (Deprecated) The Amazon Web Services account ID for the administrator account.
@@ -2423,10 +2420,11 @@ type SeverityLevel struct {
 	// This member is required.
 	OccurrencesThreshold int64
 
-	// The severity to assign to a finding if the number of occurrences is greater than
-	// or equal to the specified threshold (occurrencesThreshold) and, if applicable,
-	// is less than the threshold for the next consecutive severity level for the
-	// custom data identifier.
+	// The severity to assign to a finding: if the number of occurrences is greater
+	// than or equal to the specified threshold (occurrencesThreshold); and, if
+	// applicable, the number of occurrences is less than the threshold for the next
+	// consecutive severity level for the custom data identifier, moving from LOW to
+	// HIGH.
 	//
 	// This member is required.
 	Severity DataIdentifierSeverity

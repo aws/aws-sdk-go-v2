@@ -4432,6 +4432,11 @@ func awsAwsjson11_serializeDocumentS3Settings(v *types.S3Settings, value smithyj
 		ok.String(string(v.DatePartitionSequence))
 	}
 
+	if v.DatePartitionTimezone != nil {
+		ok := object.Key("DatePartitionTimezone")
+		ok.String(*v.DatePartitionTimezone)
+	}
+
 	if v.DictPageSizeLimit != nil {
 		ok := object.Key("DictPageSizeLimit")
 		ok.Integer(*v.DictPageSizeLimit)

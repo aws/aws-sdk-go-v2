@@ -51,10 +51,9 @@ type ListResourceComplianceSummariesOutput struct {
 	// set of results.
 	NextToken *string
 
-	// A summary count for specified or targeted managed instances. Summary count
-	// includes information about compliant and non-compliant State Manager
-	// associations, patch status, or custom items according to the filter criteria
-	// that you specify.
+	// A summary count for specified or targeted managed nodes. Summary count includes
+	// information about compliant and non-compliant State Manager associations, patch
+	// status, or custom items according to the filter criteria that you specify.
 	ResourceComplianceSummaryItems []types.ResourceComplianceSummaryItem
 
 	// Metadata pertaining to the operation's result.

@@ -180,7 +180,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Analyzes an input document for financially related relationships between text.</p>\n         <p>Information is returned as <code>ExpenseDocuments</code> and seperated as follows.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LineItemGroups</code>- A data set containing <code>LineItems</code> which\n         store information about the lines of text, such as an item purchased and its price on a receipt.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SummaryFields</code>- Contains all other information a receipt, such as header information\n         or the vendors name.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>\n            <code>AnalyzeExpense</code> synchronously analyzes an input document for financially related relationships between text.</p>\n         <p>Information is returned as <code>ExpenseDocuments</code> and seperated as follows.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LineItemGroups</code>- A data set containing <code>LineItems</code> which\n         store information about the lines of text, such as an item purchased and its price on a receipt.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SummaryFields</code>- Contains all other information a receipt, such as header information\n         or the vendors name.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.textract#AnalyzeExpenseRequest": {
@@ -204,6 +204,106 @@
                     "target": "com.amazonaws.textract#ExpenseDocumentList",
                     "traits": {
                         "smithy.api#documentation": "<p>The expenses detected by Amazon Textract.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.textract#AnalyzeID": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.textract#AnalyzeIDRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.textract#AnalyzeIDResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.textract#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.textract#BadDocumentException"
+                },
+                {
+                    "target": "com.amazonaws.textract#DocumentTooLargeException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidS3ObjectException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.textract#UnsupportedDocumentException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Analyzes identity documents for relevant information. This information is extracted\n         and returned as <code>IdentityDocumentFields</code>, which records both the normalized\n         field and value of the extracted text.</p>"
+            }
+        },
+        "com.amazonaws.textract#AnalyzeIDDetections": {
+            "type": "structure",
+            "members": {
+                "Text": {
+                    "target": "com.amazonaws.textract#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Text of either the normalized field or value associated with it.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NormalizedValue": {
+                    "target": "com.amazonaws.textract#NormalizedValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Only returned for dates, returns the type of value detected and the date\n         written in a more machine readable way.</p>"
+                    }
+                },
+                "Confidence": {
+                    "target": "com.amazonaws.textract#Percent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The confidence score of the detected text.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Used to contain the information detected by an AnalyzeID operation.</p>"
+            }
+        },
+        "com.amazonaws.textract#AnalyzeIDRequest": {
+            "type": "structure",
+            "members": {
+                "DocumentPages": {
+                    "target": "com.amazonaws.textract#DocumentPages",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The document being passed to AnalyzeID.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.textract#AnalyzeIDResponse": {
+            "type": "structure",
+            "members": {
+                "IdentityDocuments": {
+                    "target": "com.amazonaws.textract#IdentityDocumentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of documents processed by AnalyzeID. Includes a number denoting their\n         place in the list and the response structure for the document.</p>"
+                    }
+                },
+                "DocumentMetadata": {
+                    "target": "com.amazonaws.textract#DocumentMetadata"
+                },
+                "AnalyzeIDModelVersion": {
+                    "target": "com.amazonaws.textract#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the AnalyzeIdentity API being used to process documents.</p>"
                     }
                 }
             }
@@ -549,6 +649,18 @@
                 "smithy.api#documentation": "<p>Information about the input document.</p>"
             }
         },
+        "com.amazonaws.textract#DocumentPages": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.textract#Document"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
+            }
+        },
         "com.amazonaws.textract#DocumentTooLargeException": {
             "type": "structure",
             "members": {
@@ -672,7 +784,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Breakdown of detected information, seperated into \n         the catagories Type, LableDetection, and ValueDetection</p>"
+                "smithy.api#documentation": "<p>Breakdown of detected information, seperated into \n         the catagories Type, LabelDetection, and ValueDetection</p>"
             }
         },
         "com.amazonaws.textract#ExpenseFieldList": {
@@ -1237,6 +1349,52 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.textract#IdentityDocument": {
+            "type": "structure",
+            "members": {
+                "DocumentIndex": {
+                    "target": "com.amazonaws.textract#UInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Denotes the placement of a document in the IdentityDocument list. The first document\n         is marked 1, the second 2 and so on.</p>"
+                    }
+                },
+                "IdentityDocumentFields": {
+                    "target": "com.amazonaws.textract#IdentityDocumentFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The structure used to record information extracted from identity documents.\n         Contains both normalized field and value of the extracted text.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The structure that lists each document processed in an AnalyzeID operation.</p>"
+            }
+        },
+        "com.amazonaws.textract#IdentityDocumentField": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.textract#AnalyzeIDDetections"
+                },
+                "ValueDetection": {
+                    "target": "com.amazonaws.textract#AnalyzeIDDetections"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Structure containing both the normalized type of the extracted information\n         and the text associated with it. These are extracted as Type and Value respectively.</p>"
+            }
+        },
+        "com.amazonaws.textract#IdentityDocumentFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.textract#IdentityDocumentField"
+            }
+        },
+        "com.amazonaws.textract#IdentityDocumentList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.textract#IdentityDocument"
+            }
+        },
         "com.amazonaws.textract#ImageBlob": {
             "type": "blob",
             "traits": {
@@ -1448,6 +1606,26 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "\\S"
+            }
+        },
+        "com.amazonaws.textract#NormalizedValue": {
+            "type": "structure",
+            "members": {
+                "Value": {
+                    "target": "com.amazonaws.textract#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the date, written as Year-Month-DayTHour:Minute:Second.</p>"
+                    }
+                },
+                "ValueType": {
+                    "target": "com.amazonaws.textract#ValueType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The normalized type of the value detected. In this case, DATE.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information relating to dates in a document, including the type\n         of value, and the value.</p>"
             }
         },
         "com.amazonaws.textract#NotificationChannel": {
@@ -2069,6 +2247,9 @@
                     "target": "com.amazonaws.textract#AnalyzeExpense"
                 },
                 {
+                    "target": "com.amazonaws.textract#AnalyzeID"
+                },
+                {
                     "target": "com.amazonaws.textract#DetectDocumentText"
                 },
                 {
@@ -2126,8 +2307,19 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The format of the input document isn't supported. Documents for synchronous operations can be in\n         PNG or JPEG format. Documents for asynchronous operations can also be in PDF format.</p>",
+                "smithy.api#documentation": "<p>The format of the input document isn't supported. Documents for synchronous operations can be in\n         PNG or JPEG format only. Documents for asynchronous operations can be in PDF format.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.textract#ValueType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "DATE",
+                        "name": "DATE"
+                    }
+                ]
             }
         },
         "com.amazonaws.textract#Warning": {

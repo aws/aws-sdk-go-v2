@@ -31,11 +31,18 @@ func (c *Client) ListShareInvitations(ctx context.Context, params *ListShareInvi
 // Input for List Share Invitations
 type ListShareInvitationsInput struct {
 
+	// An optional string added to the beginning of each lens name returned in the
+	// results.
+	LensNamePrefix *string
+
 	// The maximum number of results to return for this request.
 	MaxResults int32
 
 	// The token to use to retrieve the next set of results.
 	NextToken *string
+
+	// The type of share invitations to be returned.
+	ShareResourceType types.ShareResourceType
 
 	// An optional string added to the beginning of each workload name returned in the
 	// results.

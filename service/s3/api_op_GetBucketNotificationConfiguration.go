@@ -60,6 +60,9 @@ type GetBucketNotificationConfigurationInput struct {
 // element is empty, notifications are turned off for the bucket.
 type GetBucketNotificationConfigurationOutput struct {
 
+	// Enables delivery of events to Amazon EventBridge.
+	EventBridgeConfiguration *types.EventBridgeConfiguration
+
 	// Describes the Lambda functions to invoke and the events for which to invoke
 	// them.
 	LambdaFunctionConfigurations []types.LambdaFunctionConfiguration

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get detail data for the AWS Proton pipeline service role.
+// Get detail data for the Proton pipeline service role.
 func (c *Client) GetAccountSettings(ctx context.Context, params *GetAccountSettingsInput, optFns ...func(*Options)) (*GetAccountSettingsOutput, error) {
 	if params == nil {
 		params = &GetAccountSettingsInput{}
@@ -33,7 +33,7 @@ type GetAccountSettingsInput struct {
 
 type GetAccountSettingsOutput struct {
 
-	// The AWS Proton pipeline service role detail data that's returned by AWS Proton.
+	// The Proton pipeline service role detail data that's returned by Proton.
 	AccountSettings *types.AccountSettings
 
 	// Metadata pertaining to the operation's result.

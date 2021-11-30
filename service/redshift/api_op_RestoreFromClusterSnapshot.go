@@ -213,6 +213,9 @@ type RestoreFromClusterSnapshotInput struct {
 	// If true, the cluster can be accessed from a public network.
 	PubliclyAccessible *bool
 
+	// The identifier of the target reserved node offering.
+	ReservedNodeId *string
+
 	// The name of the cluster the source snapshot was created from. This parameter is
 	// required if your IAM user has a policy containing a snapshot resource element
 	// that specifies anything other than * for the cluster name.
@@ -220,6 +223,9 @@ type RestoreFromClusterSnapshotInput struct {
 
 	// A unique identifier for the snapshot schedule.
 	SnapshotScheduleIdentifier *string
+
+	// The identifier of the target reserved node offering.
+	TargetReservedNodeOfferingId *string
 
 	// A list of Virtual Private Cloud (VPC) security groups to be associated with the
 	// cluster. Default: The default VPC security group is associated with the cluster.

@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Query inventory information. This includes instance status, such as Stopped or
-// Terminated.
+// Query inventory information. This includes managed node status, such as Stopped
+// or Terminated.
 func (c *Client) GetInventory(ctx context.Context, params *GetInventoryInput, optFns ...func(*Options)) (*GetInventoryOutput, error) {
 	if params == nil {
 		params = &GetInventoryInput{}
@@ -34,7 +34,7 @@ type GetInventoryInput struct {
 	// Returns counts of inventory types based on one or more expressions. For example,
 	// if you aggregate by using an expression that uses the
 	// AWS:InstanceInformation.PlatformType type, you can see a count of how many
-	// Windows and Linux instances exist in your inventoried fleet.
+	// Windows and Linux managed nodes exist in your inventoried fleet.
 	Aggregators []types.InventoryAggregator
 
 	// One or more filters. Use a filter to return a more specific list of results.
@@ -56,7 +56,7 @@ type GetInventoryInput struct {
 
 type GetInventoryOutput struct {
 
-	// Collection of inventory entities such as a collection of instance inventory.
+	// Collection of inventory entities such as a collection of managed node inventory.
 	Entities []types.InventoryResultEntity
 
 	// The token to use when requesting the next set of items. If there are no

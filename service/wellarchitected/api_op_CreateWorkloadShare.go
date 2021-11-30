@@ -12,12 +12,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a workload share. The owner of a workload can share it with other AWS
-// accounts and IAM users in the same AWS Region. Shared access to a workload is
-// not removed until the workload invitation is deleted. For more information, see
-// Sharing a Workload
+// Create a workload share. The owner of a workload can share it with other Amazon
+// Web Services accounts and IAM users in the same Amazon Web Services Region.
+// Shared access to a workload is not removed until the workload invitation is
+// deleted. For more information, see Sharing a Workload
 // (https://docs.aws.amazon.com/wellarchitected/latest/userguide/workloads-sharing.html)
-// in the AWS Well-Architected Tool User Guide.
+// in the Well-Architected Tool User Guide.
 func (c *Client) CreateWorkloadShare(ctx context.Context, params *CreateWorkloadShareInput, optFns ...func(*Options)) (*CreateWorkloadShareOutput, error) {
 	if params == nil {
 		params = &CreateWorkloadShareInput{}
@@ -41,8 +41,9 @@ type CreateWorkloadShareInput struct {
 	// you retry a request with the same client request token and the same parameters
 	// after it has completed successfully, the result of the original request is
 	// returned. This token is listed as required, however, if you do not specify it,
-	// the AWS SDKs automatically generate one for you. If you are not using the AWS
-	// SDK or the AWS CLI, you must provide this token or the request will fail.
+	// the Amazon Web Services SDKs automatically generate one for you. If you are not
+	// using the Amazon Web Services SDK or the CLI, you must provide this token or the
+	// request will fail.
 	//
 	// This member is required.
 	ClientRequestToken *string
@@ -52,12 +53,14 @@ type CreateWorkloadShareInput struct {
 	// This member is required.
 	PermissionType types.PermissionType
 
-	// The AWS account ID or IAM role with which the workload is shared.
+	// The Amazon Web Services account ID or IAM role with which the workload is
+	// shared.
 	//
 	// This member is required.
 	SharedWith *string
 
-	// The ID assigned to the workload. This ID is unique within an AWS Region.
+	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
+	// Region.
 	//
 	// This member is required.
 	WorkloadId *string
@@ -71,7 +74,8 @@ type CreateWorkloadShareOutput struct {
 	// The ID associated with the workload share.
 	ShareId *string
 
-	// The ID assigned to the workload. This ID is unique within an AWS Region.
+	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
+	// Region.
 	WorkloadId *string
 
 	// Metadata pertaining to the operation's result.

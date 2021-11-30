@@ -161,3 +161,19 @@ func (TextType) Values() []TextType {
 		"PRINTED",
 	}
 }
+
+type ValueType string
+
+// Enum values for ValueType
+const (
+	ValueTypeDate ValueType = "DATE"
+)
+
+// Values returns all known values for ValueType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (ValueType) Values() []ValueType {
+	return []ValueType{
+		"DATE",
+	}
+}

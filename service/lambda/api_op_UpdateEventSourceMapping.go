@@ -126,6 +126,9 @@ type UpdateEventSourceMappingInput struct {
 	//
 	// *
 	// Self-Managed Apache Kafka - Default 100. Max 10,000.
+	//
+	// * Amazon MQ (ActiveMQ and
+	// RabbitMQ) - Default 100. Max 10,000.
 	BatchSize *int32
 
 	// (Streams only) If the function returns an error, split the batch in two and
@@ -139,6 +142,12 @@ type UpdateEventSourceMappingInput struct {
 	// When true, the event source mapping is active. When false, Lambda pauses polling
 	// and invocation. Default: True
 	Enabled *bool
+
+	// (Streams and Amazon SQS) An object that defines the filter criteria that
+	// determine whether Lambda should process an event. For more information, see
+	// Lambda event filtering
+	// (https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html).
+	FilterCriteria *types.FilterCriteria
 
 	// The name of the Lambda function. Name formats
 	//
@@ -159,8 +168,8 @@ type UpdateEventSourceMappingInput struct {
 	// in length.
 	FunctionName *string
 
-	// (Streams only) A list of current response type enums applied to the event source
-	// mapping.
+	// (Streams and Amazon SQS) A list of current response type enums applied to the
+	// event source mapping.
 	FunctionResponseTypes []types.FunctionResponseType
 
 	// (Streams and Amazon SQS standard queues) The maximum amount of time, in seconds,
@@ -215,6 +224,12 @@ type UpdateEventSourceMappingOutput struct {
 
 	// The Amazon Resource Name (ARN) of the event source.
 	EventSourceArn *string
+
+	// (Streams and Amazon SQS) An object that defines the filter criteria that
+	// determine whether Lambda should process an event. For more information, see
+	// Lambda event filtering
+	// (https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html).
+	FilterCriteria *types.FilterCriteria
 
 	// The ARN of the Lambda function.
 	FunctionArn *string

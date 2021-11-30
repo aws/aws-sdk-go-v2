@@ -31,10 +31,13 @@ import (
 // determine whether the request succeeded. Note that if CompleteMultipartUpload
 // fails, applications should be prepared to retry the failed requests. For more
 // information, see Amazon S3 Error Best Practices
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/ErrorBestPractices.html). For
-// more information about multipart uploads, see Uploading Objects Using Multipart
-// Upload (https://docs.aws.amazon.com/AmazonS3/latest/dev/uploadobjusingmpu.html).
-// For information about permissions required to use the multipart upload API, see
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/ErrorBestPractices.html). You
+// cannot use Content-Type: application/x-www-form-urlencoded with Complete
+// Multipart Upload requests. Also, if you do not provide a Content-Type header,
+// CompleteMultipartUpload returns a 200 OK response. For more information about
+// multipart uploads, see Uploading Objects Using Multipart Upload
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/uploadobjusingmpu.html). For
+// information about permissions required to use the multipart upload API, see
 // Multipart Upload and Permissions
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html).
 // CompleteMultipartUpload has the following special errors:

@@ -12,12 +12,14 @@ import (
 )
 
 // Creates a dashboard from a template. To first create a template, see the
-// CreateTemplate API operation. A dashboard is an entity in Amazon QuickSight that
-// identifies Amazon QuickSight reports, created from analyses. You can share
-// Amazon QuickSight dashboards. With the right permissions, you can create
-// scheduled email reports from them. If you have the correct permissions, you can
-// create a dashboard from a template that exists in a different Amazon Web
-// Services account.
+// CreateTemplate
+// (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_CreateTemplate.html)
+// API operation. A dashboard is an entity in Amazon QuickSight that identifies
+// Amazon QuickSight reports, created from analyses. You can share Amazon
+// QuickSight dashboards. With the right permissions, you can create scheduled
+// email reports from them. If you have the correct permissions, you can create a
+// dashboard from a template that exists in a different Amazon Web Services
+// account.
 func (c *Client) CreateDashboard(ctx context.Context, params *CreateDashboardInput, optFns ...func(*Options)) (*CreateDashboardOutput, error) {
 	if params == nil {
 		params = &CreateDashboardInput{}
@@ -41,7 +43,7 @@ type CreateDashboardInput struct {
 	// This member is required.
 	AwsAccountId *string
 
-	// The ID for the dashboard, also added to the IAMpolicy.
+	// The ID for the dashboard, also added to the IAM policy.
 	//
 	// This member is required.
 	DashboardId *string
@@ -55,12 +57,14 @@ type CreateDashboardInput struct {
 	// SourceEntity, you specify the type of object you're using as source. You can
 	// only create a dashboard from a template, so you use a SourceTemplate entity. If
 	// you need to create a dashboard from an analysis, first convert the analysis to a
-	// template by using the CreateTemplate API operation. For SourceTemplate, specify
-	// the Amazon Resource Name (ARN) of the source template. The SourceTemplateARN can
-	// contain any Amazon Web Services account and any Amazon QuickSight-supported
-	// Amazon Web Services Region. Use the DataSetReferences entity within
-	// SourceTemplate to list the replacement datasets for the placeholders listed in
-	// the original. The schema in each dataset must match its placeholder.
+	// template by using the CreateTemplate
+	// (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_CreateTemplate.html)
+	// API operation. For SourceTemplate, specify the Amazon Resource Name (ARN) of the
+	// source template. The SourceTemplateARN can contain any Amazon Web Services
+	// account and any Amazon QuickSight-supported Amazon Web Services Region. Use the
+	// DataSetReferences entity within SourceTemplate to list the replacement datasets
+	// for the placeholders listed in the original. The schema in each dataset must
+	// match its placeholder.
 	//
 	// This member is required.
 	SourceEntity *types.DashboardSourceEntity
@@ -88,7 +92,7 @@ type CreateDashboardInput struct {
 	Parameters *types.Parameters
 
 	// A structure that contains the permissions of the dashboard. You can use this
-	// structure for granting permissions by providing a list of IAMaction information
+	// structure for granting permissions by providing a list of IAM action information
 	// for each principal ARN. To specify no permissions, omit the permissions list.
 	Permissions []types.ResourcePermission
 

@@ -48,7 +48,7 @@ type CreateQuickConnectInput struct {
 	// The description of the quick connect.
 	Description *string
 
-	// One or more tags.
+	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

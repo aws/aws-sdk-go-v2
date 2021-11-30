@@ -31,6 +31,11 @@ func (c *Client) ListRecipes(ctx context.Context, params *ListRecipesInput, optF
 
 type ListRecipesInput struct {
 
+	// Filters returned recipes by domain for a Domain dataset group. Only recipes
+	// (Domain dataset group use cases) for this domain are included in the response.
+	// If you don't specify a domain, only non-domain recipes are returned.
+	Domain types.Domain
+
 	// The maximum number of recipes to return.
 	MaxResults *int32
 

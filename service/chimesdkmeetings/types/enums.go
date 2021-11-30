@@ -2,6 +2,24 @@
 
 package types
 
+type MeetingFeatureStatus string
+
+// Enum values for MeetingFeatureStatus
+const (
+	MeetingFeatureStatusAvailable   MeetingFeatureStatus = "AVAILABLE"
+	MeetingFeatureStatusUnavailable MeetingFeatureStatus = "UNAVAILABLE"
+)
+
+// Values returns all known values for MeetingFeatureStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MeetingFeatureStatus) Values() []MeetingFeatureStatus {
+	return []MeetingFeatureStatus{
+		"AVAILABLE",
+		"UNAVAILABLE",
+	}
+}
+
 type TranscribeContentIdentificationType string
 
 // Enum values for TranscribeContentIdentificationType

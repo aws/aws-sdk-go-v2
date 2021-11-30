@@ -2,30 +2,6 @@
 
 package types
 
-type ChangesetStatus string
-
-// Enum values for ChangesetStatus
-const (
-	ChangesetStatusPending       ChangesetStatus = "PENDING"
-	ChangesetStatusFailed        ChangesetStatus = "FAILED"
-	ChangesetStatusSuccess       ChangesetStatus = "SUCCESS"
-	ChangesetStatusRunning       ChangesetStatus = "RUNNING"
-	ChangesetStatusStopRequested ChangesetStatus = "STOP_REQUESTED"
-)
-
-// Values returns all known values for ChangesetStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
-func (ChangesetStatus) Values() []ChangesetStatus {
-	return []ChangesetStatus{
-		"PENDING",
-		"FAILED",
-		"SUCCESS",
-		"RUNNING",
-		"STOP_REQUESTED",
-	}
-}
-
 type ChangeType string
 
 // Enum values for ChangeType
@@ -46,18 +22,126 @@ func (ChangeType) Values() []ChangeType {
 	}
 }
 
+type ColumnDataType string
+
+// Enum values for ColumnDataType
+const (
+	ColumnDataTypeString   ColumnDataType = "STRING"
+	ColumnDataTypeChar     ColumnDataType = "CHAR"
+	ColumnDataTypeInteger  ColumnDataType = "INTEGER"
+	ColumnDataTypeTinyint  ColumnDataType = "TINYINT"
+	ColumnDataTypeSmallint ColumnDataType = "SMALLINT"
+	ColumnDataTypeBigint   ColumnDataType = "BIGINT"
+	ColumnDataTypeFloat    ColumnDataType = "FLOAT"
+	ColumnDataTypeDouble   ColumnDataType = "DOUBLE"
+	ColumnDataTypeDate     ColumnDataType = "DATE"
+	ColumnDataTypeDatetime ColumnDataType = "DATETIME"
+	ColumnDataTypeBoolean  ColumnDataType = "BOOLEAN"
+	ColumnDataTypeBinary   ColumnDataType = "BINARY"
+)
+
+// Values returns all known values for ColumnDataType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ColumnDataType) Values() []ColumnDataType {
+	return []ColumnDataType{
+		"STRING",
+		"CHAR",
+		"INTEGER",
+		"TINYINT",
+		"SMALLINT",
+		"BIGINT",
+		"FLOAT",
+		"DOUBLE",
+		"DATE",
+		"DATETIME",
+		"BOOLEAN",
+		"BINARY",
+	}
+}
+
+type DatasetKind string
+
+// Enum values for DatasetKind
+const (
+	DatasetKindTabular    DatasetKind = "TABULAR"
+	DatasetKindNonTabular DatasetKind = "NON_TABULAR"
+)
+
+// Values returns all known values for DatasetKind. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (DatasetKind) Values() []DatasetKind {
+	return []DatasetKind{
+		"TABULAR",
+		"NON_TABULAR",
+	}
+}
+
+type DatasetStatus string
+
+// Enum values for DatasetStatus
+const (
+	DatasetStatusPending DatasetStatus = "PENDING"
+	DatasetStatusFailed  DatasetStatus = "FAILED"
+	DatasetStatusSuccess DatasetStatus = "SUCCESS"
+	DatasetStatusRunning DatasetStatus = "RUNNING"
+)
+
+// Values returns all known values for DatasetStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DatasetStatus) Values() []DatasetStatus {
+	return []DatasetStatus{
+		"PENDING",
+		"FAILED",
+		"SUCCESS",
+		"RUNNING",
+	}
+}
+
+type DataViewStatus string
+
+// Enum values for DataViewStatus
+const (
+	DataViewStatusRunning             DataViewStatus = "RUNNING"
+	DataViewStatusStarting            DataViewStatus = "STARTING"
+	DataViewStatusFailed              DataViewStatus = "FAILED"
+	DataViewStatusCancelled           DataViewStatus = "CANCELLED"
+	DataViewStatusTimeout             DataViewStatus = "TIMEOUT"
+	DataViewStatusSuccess             DataViewStatus = "SUCCESS"
+	DataViewStatusPending             DataViewStatus = "PENDING"
+	DataViewStatusFailedCleanupFailed DataViewStatus = "FAILED_CLEANUP_FAILED"
+)
+
+// Values returns all known values for DataViewStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DataViewStatus) Values() []DataViewStatus {
+	return []DataViewStatus{
+		"RUNNING",
+		"STARTING",
+		"FAILED",
+		"CANCELLED",
+		"TIMEOUT",
+		"SUCCESS",
+		"PENDING",
+		"FAILED_CLEANUP_FAILED",
+	}
+}
+
 type ErrorCategory string
 
 // Enum values for ErrorCategory
 const (
-	ErrorCategoryValidation               ErrorCategory = "The_inputs_to_this_request_are_invalid"
-	ErrorCategoryServiceQuotaExceeded     ErrorCategory = "Service_limits_have_been_exceeded"
-	ErrorCategoryAccessDenied             ErrorCategory = "Missing_required_permission_to_perform_this_request"
-	ErrorCategoryResourceNotFound         ErrorCategory = "One_or_more_inputs_to_this_request_were_not_found"
-	ErrorCategoryThrottling               ErrorCategory = "The_system_temporarily_lacks_sufficient_resources_to_process_the_request"
-	ErrorCategoryInternalServiceException ErrorCategory = "An_internal_error_has_occurred"
-	ErrorCategoryCancelled                ErrorCategory = "Cancelled"
-	ErrorCategoryUserRecoverable          ErrorCategory = "A_user_recoverable_error_has_occurred"
+	ErrorCategoryValidation               ErrorCategory = "VALIDATION"
+	ErrorCategoryServiceQuotaExceeded     ErrorCategory = "SERVICE_QUOTA_EXCEEDED"
+	ErrorCategoryAccessDenied             ErrorCategory = "ACCESS_DENIED"
+	ErrorCategoryResourceNotFound         ErrorCategory = "RESOURCE_NOT_FOUND"
+	ErrorCategoryThrottling               ErrorCategory = "THROTTLING"
+	ErrorCategoryInternalServiceException ErrorCategory = "INTERNAL_SERVICE_EXCEPTION"
+	ErrorCategoryCancelled                ErrorCategory = "CANCELLED"
+	ErrorCategoryUserRecoverable          ErrorCategory = "USER_RECOVERABLE"
 )
 
 // Values returns all known values for ErrorCategory. Note that this can be
@@ -65,36 +149,38 @@ const (
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ErrorCategory) Values() []ErrorCategory {
 	return []ErrorCategory{
-		"The_inputs_to_this_request_are_invalid",
-		"Service_limits_have_been_exceeded",
-		"Missing_required_permission_to_perform_this_request",
-		"One_or_more_inputs_to_this_request_were_not_found",
-		"The_system_temporarily_lacks_sufficient_resources_to_process_the_request",
-		"An_internal_error_has_occurred",
-		"Cancelled",
-		"A_user_recoverable_error_has_occurred",
+		"VALIDATION",
+		"SERVICE_QUOTA_EXCEEDED",
+		"ACCESS_DENIED",
+		"RESOURCE_NOT_FOUND",
+		"THROTTLING",
+		"INTERNAL_SERVICE_EXCEPTION",
+		"CANCELLED",
+		"USER_RECOVERABLE",
 	}
 }
 
-type FormatType string
+type IngestionStatus string
 
-// Enum values for FormatType
+// Enum values for IngestionStatus
 const (
-	FormatTypeCsv     FormatType = "CSV"
-	FormatTypeJson    FormatType = "JSON"
-	FormatTypeParquet FormatType = "PARQUET"
-	FormatTypeXml     FormatType = "XML"
+	IngestionStatusPending       IngestionStatus = "PENDING"
+	IngestionStatusFailed        IngestionStatus = "FAILED"
+	IngestionStatusSuccess       IngestionStatus = "SUCCESS"
+	IngestionStatusRunning       IngestionStatus = "RUNNING"
+	IngestionStatusStopRequested IngestionStatus = "STOP_REQUESTED"
 )
 
-// Values returns all known values for FormatType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
-func (FormatType) Values() []FormatType {
-	return []FormatType{
-		"CSV",
-		"JSON",
-		"PARQUET",
-		"XML",
+// Values returns all known values for IngestionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IngestionStatus) Values() []IngestionStatus {
+	return []IngestionStatus{
+		"PENDING",
+		"FAILED",
+		"SUCCESS",
+		"RUNNING",
+		"STOP_REQUESTED",
 	}
 }
 
@@ -113,21 +199,5 @@ func (LocationType) Values() []LocationType {
 	return []LocationType{
 		"INGESTION",
 		"SAGEMAKER",
-	}
-}
-
-type SourceType string
-
-// Enum values for SourceType
-const (
-	SourceTypeS3 SourceType = "S3"
-)
-
-// Values returns all known values for SourceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
-func (SourceType) Values() []SourceType {
-	return []SourceType{
-		"S3",
 	}
 }

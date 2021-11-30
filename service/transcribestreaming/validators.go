@@ -89,9 +89,6 @@ func validateOpStartStreamTranscriptionInput(v *StartStreamTranscriptionInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartStreamTranscriptionInput"}
-	if len(v.LanguageCode) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
-	}
 	if v.MediaSampleRateHertz == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MediaSampleRateHertz"))
 	}

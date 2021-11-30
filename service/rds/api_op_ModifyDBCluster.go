@@ -11,12 +11,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modify a setting for an Amazon Aurora DB cluster. You can change one or more
-// database configuration parameters by specifying these parameters and the new
-// values in the request. For more information on Amazon Aurora, see  What Is
-// Amazon Aurora?
+// Modify the settings for an Amazon Aurora DB cluster or a Multi-AZ DB cluster.
+// You can change one or more settings by specifying these parameters and the new
+// values in the request. For more information on Amazon Aurora DB clusters, see
+// What is Amazon Aurora?
 // (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
-// in the Amazon Aurora User Guide. This action only applies to Aurora DB clusters.
+// in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
+// see  Multi-AZ deployments with two readable standby DB instances
+// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
+// in the Amazon RDS User Guide. The Multi-AZ DB clusters feature is in preview and
+// is subject to change.
 func (c *Client) ModifyDBCluster(ctx context.Context, params *ModifyDBClusterInput, optFns ...func(*Options)) (*ModifyDBClusterOutput, error) {
 	if params == nil {
 		params = &ModifyDBClusterInput{}
@@ -37,15 +41,19 @@ type ModifyDBClusterInput struct {
 
 	// The DB cluster identifier for the cluster being modified. This parameter isn't
 	// case-sensitive. Constraints: This identifier must match the identifier of an
-	// existing DB cluster.
+	// existing DB cluster. Valid for: Aurora DB clusters and Multi-AZ DB clusters
 	//
 	// This member is required.
 	DBClusterIdentifier *string
 
+	// The amount of storage in gibibytes (GiB) to allocate to each DB instance in the
+	// Multi-AZ DB cluster. Type: Integer Valid for: Multi-AZ DB clusters only
+	AllocatedStorage *int32
+
 	// A value that indicates whether major version upgrades are allowed. Constraints:
 	// You must allow major version upgrades when specifying a value for the
 	// EngineVersion parameter that is a different major version than the DB cluster's
-	// current version.
+	// current version. Valid for: Aurora DB clusters only
 	AllowMajorVersionUpgrade bool
 
 	// A value that indicates whether the modifications in this request and any pending
@@ -58,32 +66,52 @@ type ModifyDBClusterInput struct {
 	// EnableIAMDatabaseAuthentication, MasterUserPassword, and NewDBClusterIdentifier
 	// values are applied during the next maintenance window. All other changes are
 	// applied immediately, regardless of the value of the ApplyImmediately parameter.
-	// By default, this parameter is disabled.
+	// By default, this parameter is disabled. Valid for: Aurora DB clusters and
+	// Multi-AZ DB clusters
 	ApplyImmediately bool
 
+	// A value that indicates whether minor engine upgrades are applied automatically
+	// to the DB cluster during the maintenance window. By default, minor engine
+	// upgrades are applied automatically. Valid for: Multi-AZ DB clusters only
+	AutoMinorVersionUpgrade *bool
+
 	// The target backtrack window, in seconds. To disable backtracking, set this value
-	// to 0. Currently, Backtrack is only supported for Aurora MySQL DB clusters.
-	// Default: 0 Constraints:
+	// to 0. Default: 0 Constraints:
 	//
-	// * If specified, this value must be set to a number from
-	// 0 to 259,200 (72 hours).
+	// * If specified, this value must be set to a
+	// number from 0 to 259,200 (72 hours).
+	//
+	// Valid for: Aurora MySQL DB clusters only
 	BacktrackWindow *int64
 
-	// The number of days for which automated backups are retained. You must specify a
-	// minimum value of 1. Default: 1 Constraints:
+	// The number of days for which automated backups are retained. Specify a minimum
+	// value of 1. Default: 1 Constraints:
 	//
 	// * Must be a value from 1 to 35
+	//
+	// Valid for:
+	// Aurora DB clusters and Multi-AZ DB clusters
 	BackupRetentionPeriod *int32
 
 	// The configuration setting for the log types to be enabled for export to
-	// CloudWatch Logs for a specific DB cluster.
+	// CloudWatch Logs for a specific DB cluster. Valid for: Aurora DB clusters only
 	CloudwatchLogsExportConfiguration *types.CloudwatchLogsExportConfiguration
 
 	// A value that indicates whether to copy all tags from the DB cluster to snapshots
-	// of the DB cluster. The default is not to copy them.
+	// of the DB cluster. The default is not to copy them. Valid for: Aurora DB
+	// clusters only
 	CopyTagsToSnapshot *bool
 
-	// The name of the DB cluster parameter group to use for the DB cluster.
+	// The compute and memory capacity of each DB instance in the Multi-AZ DB cluster,
+	// for example db.m6g.xlarge. Not all DB instance classes are available in all
+	// Amazon Web Services Regions, or for all database engines. For the full list of
+	// DB instance classes and availability for your engine, see DB Instance Class
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html)
+	// in the Amazon RDS User Guide. Valid for: Multi-AZ DB clusters only
+	DBClusterInstanceClass *string
+
+	// The name of the DB cluster parameter group to use for the DB cluster. Valid for:
+	// Aurora DB clusters and Multi-AZ DB clusters
 	DBClusterParameterGroupName *string
 
 	// The name of the DB parameter group to apply to all instances of the DB cluster.
@@ -98,22 +126,25 @@ type ModifyDBClusterInput struct {
 	// * The
 	// DBInstanceParameterGroupName parameter is only valid in combination with the
 	// AllowMajorVersionUpgrade parameter.
+	//
+	// Valid for: Aurora DB clusters only
 	DBInstanceParameterGroupName *string
 
 	// A value that indicates whether the DB cluster has deletion protection enabled.
 	// The database can't be deleted when deletion protection is enabled. By default,
-	// deletion protection is disabled.
+	// deletion protection isn't enabled. Valid for: Aurora DB clusters and Multi-AZ DB
+	// clusters
 	DeletionProtection *bool
 
 	// The Active Directory directory ID to move the DB cluster to. Specify none to
 	// remove the cluster from its current domain. The domain must be created prior to
 	// this operation. For more information, see Kerberos Authentication
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/kerberos-authentication.html)
-	// in the Amazon Aurora User Guide.
+	// in the Amazon Aurora User Guide. Valid for: Aurora DB clusters only
 	Domain *string
 
 	// Specify the name of the IAM role to be used when making API calls to the
-	// Directory Service.
+	// Directory Service. Valid for: Aurora DB clusters only
 	DomainIAMRoleName *string
 
 	// A value that indicates whether to enable this DB cluster to forward write
@@ -125,7 +156,7 @@ type ModifyDBClusterInput struct {
 	// cluster and the resulting changes are replicated back to this cluster. For the
 	// primary DB cluster of an Aurora global database, this value is used immediately
 	// if the primary is demoted by the FailoverGlobalCluster API operation, but it
-	// does nothing until then.
+	// does nothing until then. Valid for: Aurora DB clusters only
 	EnableGlobalWriteForwarding *bool
 
 	// A value that indicates whether to enable the HTTP endpoint for an Aurora
@@ -135,34 +166,72 @@ type ModifyDBClusterInput struct {
 	// from inside the RDS console with the query editor. For more information, see
 	// Using the Data API for Aurora Serverless
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html) in
-	// the Amazon Aurora User Guide.
+	// the Amazon Aurora User Guide. Valid for: Aurora DB clusters only
 	EnableHttpEndpoint *bool
 
 	// A value that indicates whether to enable mapping of Amazon Web Services Identity
 	// and Access Management (IAM) accounts to database accounts. By default, mapping
-	// is disabled. For more information, see  IAM Database Authentication
+	// isn't enabled. For more information, see  IAM Database Authentication
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html)
-	// in the Amazon Aurora User Guide.
+	// in the Amazon Aurora User Guide. Valid for: Aurora DB clusters only
 	EnableIAMDatabaseAuthentication *bool
+
+	// A value that indicates whether to turn on Performance Insights for the DB
+	// cluster. For more information, see  Using Amazon Performance Insights
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html)
+	// in the Amazon RDS User Guide. Valid for: Multi-AZ DB clusters only
+	EnablePerformanceInsights *bool
 
 	// The version number of the database engine to which you want to upgrade. Changing
 	// this parameter results in an outage. The change is applied during the next
 	// maintenance window unless ApplyImmediately is enabled. To list all of the
-	// available engine versions for aurora (for MySQL 5.6-compatible Aurora), use the
-	// following command: aws rds describe-db-engine-versions --engine aurora --query
+	// available engine versions for MySQL 5.6-compatible Aurora, use the following
+	// command: aws rds describe-db-engine-versions --engine aurora --query
 	// "DBEngineVersions[].EngineVersion" To list all of the available engine versions
-	// for aurora-mysql (for MySQL 5.7-compatible Aurora), use the following command:
-	// aws rds describe-db-engine-versions --engine aurora-mysql --query
+	// for MySQL 5.7-compatible Aurora, use the following command: aws rds
+	// describe-db-engine-versions --engine aurora-mysql --query
 	// "DBEngineVersions[].EngineVersion" To list all of the available engine versions
-	// for aurora-postgresql, use the following command: aws rds
+	// for Aurora PostgreSQL, use the following command: aws rds
 	// describe-db-engine-versions --engine aurora-postgresql --query
-	// "DBEngineVersions[].EngineVersion"
+	// "DBEngineVersions[].EngineVersion" To list all of the available engine versions
+	// for RDS for MySQL, use the following command: aws rds
+	// describe-db-engine-versions --engine mysql --query
+	// "DBEngineVersions[].EngineVersion" To list all of the available engine versions
+	// for RDS for PostgreSQL, use the following command: aws rds
+	// describe-db-engine-versions --engine postgres --query
+	// "DBEngineVersions[].EngineVersion" Valid for: Aurora DB clusters and Multi-AZ DB
+	// clusters
 	EngineVersion *string
+
+	// The amount of Provisioned IOPS (input/output operations per second) to be
+	// initially allocated for each DB instance in the Multi-AZ DB cluster. For
+	// information about valid Iops values, see Amazon RDS Provisioned IOPS Storage to
+	// Improve Performance
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS)
+	// in the Amazon RDS User Guide. Constraints: Must be a multiple between .5 and 50
+	// of the storage amount for the DB cluster. Valid for: Multi-AZ DB clusters only
+	Iops *int32
 
 	// The new password for the master database user. This password can contain any
 	// printable ASCII character except "/", """, or "@". Constraints: Must contain
-	// from 8 to 41 characters.
+	// from 8 to 41 characters. Valid for: Aurora DB clusters and Multi-AZ DB clusters
 	MasterUserPassword *string
+
+	// The interval, in seconds, between points when Enhanced Monitoring metrics are
+	// collected for the DB cluster. To turn off collecting Enhanced Monitoring
+	// metrics, specify 0. The default is 0. If MonitoringRoleArn is specified, also
+	// set MonitoringInterval to a value other than 0. Valid Values: 0, 1, 5, 10, 15,
+	// 30, 60 Valid for: Multi-AZ DB clusters only
+	MonitoringInterval *int32
+
+	// The Amazon Resource Name (ARN) for the IAM role that permits RDS to send
+	// Enhanced Monitoring metrics to Amazon CloudWatch Logs. An example is
+	// arn:aws:iam:123456789012:role/emaccess. For information on creating a monitoring
+	// role, see To create an IAM role for Amazon RDS Enhanced Monitoring
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.html#USER_Monitoring.OS.IAMRole)
+	// in the Amazon RDS User Guide. If MonitoringInterval is set to a value other than
+	// 0, supply a MonitoringRoleArn value. Valid for: Multi-AZ DB clusters only
+	MonitoringRoleArn *string
 
 	// The new DB cluster identifier for the DB cluster when renaming a DB cluster.
 	// This value is stored as a lowercase string. Constraints:
@@ -176,21 +245,30 @@ type ModifyDBClusterInput struct {
 	// Can't end with a hyphen or contain two consecutive hyphens
 	//
 	// Example: my-cluster2
+	// Valid for: Aurora DB clusters only
 	NewDBClusterIdentifier *string
 
 	// A value that indicates that the DB cluster should be associated with the
-	// specified option group. Changing this parameter doesn't result in an outage
-	// except in the following case, and the change is applied during the next
-	// maintenance window unless the ApplyImmediately is enabled for this request. If
-	// the parameter change results in an option group that enables OEM, this change
-	// can cause a brief (sub-second) period during which new connections are rejected
-	// but existing connections are not interrupted. Permanent options can't be removed
-	// from an option group. The option group can't be removed from a DB cluster once
-	// it is associated with a DB cluster.
+	// specified option group. DB clusters are associated with a default option group
+	// that can't be modified.
 	OptionGroupName *string
 
+	// The Amazon Web Services KMS key identifier for encryption of Performance
+	// Insights data. The Amazon Web Services KMS key identifier is the key ARN, key
+	// ID, alias ARN, or alias name for the KMS key. If you don't specify a value for
+	// PerformanceInsightsKMSKeyId, then Amazon RDS uses your default KMS key. There is
+	// a default KMS key for your Amazon Web Services account. Your Amazon Web Services
+	// account has a different default KMS key for each Amazon Web Services Region.
+	// Valid for: Multi-AZ DB clusters only
+	PerformanceInsightsKMSKeyId *string
+
+	// The amount of time, in days, to retain Performance Insights data. Valid values
+	// are 7 or 731 (2 years). Valid for: Multi-AZ DB clusters only
+	PerformanceInsightsRetentionPeriod *int32
+
 	// The port number on which the DB cluster accepts connections. Constraints: Value
-	// must be 1150-65535 Default: The same port as the original DB cluster.
+	// must be 1150-65535 Default: The same port as the original DB cluster. Valid for:
+	// Aurora DB clusters only
 	Port *int32
 
 	// The daily time range during which automated backups are created if automated
@@ -208,7 +286,10 @@ type ModifyDBClusterInput struct {
 	// * Must not
 	// conflict with the preferred maintenance window.
 	//
-	// * Must be at least 30 minutes.
+	// * Must be at least 30
+	// minutes.
+	//
+	// Valid for: Aurora DB clusters and Multi-AZ DB clusters
 	PreferredBackupWindow *string
 
 	// The weekly time range during which system maintenance can occur, in Universal
@@ -218,14 +299,22 @@ type ModifyDBClusterInput struct {
 	// blocks available, see  Adjusting the Preferred DB Cluster Maintenance Window
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow.Aurora)
 	// in the Amazon Aurora User Guide. Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
-	// Constraints: Minimum 30-minute window.
+	// Constraints: Minimum 30-minute window. Valid for: Aurora DB clusters and
+	// Multi-AZ DB clusters
 	PreferredMaintenanceWindow *string
 
 	// The scaling properties of the DB cluster. You can only modify scaling properties
-	// for DB clusters in serverless DB engine mode.
+	// for DB clusters in serverless DB engine mode. Valid for: Aurora DB clusters only
 	ScalingConfiguration *types.ScalingConfiguration
 
-	// A list of VPC security groups that the DB cluster will belong to.
+	// Specifies the storage type to be associated with the DB cluster. Valid values:
+	// standard | gp2 | io1 If you specify io1, you must also include a value for the
+	// Iops parameter. Default: io1 if the Iops parameter is specified, otherwise gp2
+	// Valid for: Multi-AZ DB clusters only
+	StorageType *string
+
+	// A list of VPC security groups that the DB cluster will belong to. Valid for:
+	// Aurora DB clusters and Multi-AZ DB clusters
 	VpcSecurityGroupIds []string
 
 	noSmithyDocumentSerde
@@ -233,9 +322,23 @@ type ModifyDBClusterInput struct {
 
 type ModifyDBClusterOutput struct {
 
-	// Contains the details of an Amazon Aurora DB cluster. This data type is used as a
-	// response element in the DescribeDBClusters, StopDBCluster, and StartDBCluster
-	// actions.
+	// Contains the details of an Amazon Aurora DB cluster or Multi-AZ DB cluster. For
+	// an Amazon Aurora DB cluster, this data type is used as a response element in the
+	// operations CreateDBCluster, DeleteDBCluster, DescribeDBClusters,
+	// FailoverDBCluster, ModifyDBCluster, PromoteReadReplicaDBCluster,
+	// RestoreDBClusterFromS3, RestoreDBClusterFromSnapshot,
+	// RestoreDBClusterToPointInTime, StartDBCluster, and StopDBCluster. For a Multi-AZ
+	// DB cluster, this data type is used as a response element in the operations
+	// CreateDBCluster, DeleteDBCluster, DescribeDBClusters, FailoverDBCluster,
+	// ModifyDBCluster, RebootDBCluster, RestoreDBClusterFromSnapshot, and
+	// RestoreDBClusterToPointInTime. For more information on Amazon Aurora DB
+	// clusters, see  What is Amazon Aurora?
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
+	// in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
+	// see  Multi-AZ deployments with two readable standby DB instances
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
+	// in the Amazon RDS User Guide. The Multi-AZ DB clusters feature is in preview and
+	// is subject to change.
 	DBCluster *types.DBCluster
 
 	// Metadata pertaining to the operation's result.

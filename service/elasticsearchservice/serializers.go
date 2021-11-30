@@ -2668,6 +2668,11 @@ func awsRestjson1_serializeOpDocumentUpdateElasticsearchDomainConfigInput(v *Upd
 		}
 	}
 
+	if v.DryRun != nil {
+		ok := object.Key("DryRun")
+		ok.Boolean(*v.DryRun)
+	}
+
 	if v.EBSOptions != nil {
 		ok := object.Key("EBSOptions")
 		if err := awsRestjson1_serializeDocumentEBSOptions(v.EBSOptions, ok); err != nil {

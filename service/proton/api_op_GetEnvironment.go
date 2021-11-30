@@ -44,7 +44,7 @@ type GetEnvironmentInput struct {
 
 type GetEnvironmentOutput struct {
 
-	// The environment detail data that's returned by AWS Proton.
+	// The environment detail data that's returned by Proton.
 	//
 	// This member is required.
 	Environment *types.Environment

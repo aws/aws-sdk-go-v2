@@ -27,6 +27,7 @@
         "api_op_ListJobs.go",
         "api_op_ListRevisionAssets.go",
         "api_op_ListTagsForResource.go",
+        "api_op_SendApiAsset.go",
         "api_op_StartJob.go",
         "api_op_TagResource.go",
         "api_op_UntagResource.go",

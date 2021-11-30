@@ -139,7 +139,8 @@ type BackupJob struct {
 // Services resources.
 type BackupPlan struct {
 
-	// The display name of a backup plan.
+	// The display name of a backup plan. Must contain 1 to 50 alphanumeric or '-_.'
+	// characters.
 	//
 	// This member is required.
 	BackupPlanName *string
@@ -161,7 +162,8 @@ type BackupPlan struct {
 // separate scheduled task.
 type BackupPlanInput struct {
 
-	// The optional display name of a backup plan.
+	// The display name of a backup plan. Must contain 1 to 50 alphanumeric or '-_.'
+	// characters.
 	//
 	// This member is required.
 	BackupPlanName *string
@@ -203,7 +205,9 @@ type BackupPlansListMember struct {
 	CreationDate *time.Time
 
 	// A unique string that identifies the request and allows failed requests to be
-	// retried without the risk of running the operation twice.
+	// retried without the risk of running the operation twice. This parameter is
+	// optional. If used, this parameter must contain 1 to 50 alphanumeric or '-_.'
+	// characters.
 	CreatorRequestId *string
 
 	// The date and time a backup plan is deleted, in Unix format and Coordinated
@@ -240,7 +244,8 @@ type BackupPlanTemplatesListMember struct {
 // Specifies a scheduled task used to back up a selection of resources.
 type BackupRule struct {
 
-	// An optional display name for a backup rule.
+	// A display name for a backup rule. Must contain 1 to 50 alphanumeric or '-_.'
+	// characters.
 	//
 	// This member is required.
 	RuleName *string
@@ -285,11 +290,13 @@ type BackupRule struct {
 	RuleId *string
 
 	// A cron expression in UTC specifying when Backup initiates a backup job. For more
-	// information about cron expressions, see Schedule Expressions for Rules
+	// information about Amazon Web Services cron expressions, see Schedule Expressions
+	// for Rules
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html)
-	// in the Amazon CloudWatch Events User Guide.. Prior to specifying a value for
-	// this parameter, we recommend testing your cron expression using one of the many
-	// available cron generator and testing tools.
+	// in the Amazon CloudWatch Events User Guide.. Two examples of Amazon Web Services
+	// cron expressions are  15 * ? * * * (take a backup every hour at 15 minutes past
+	// the hour) and 0 12 * * ? * (take a backup every day at 12 noon UTC). For a table
+	// of examples, click the preceding link and scroll down the page.
 	ScheduleExpression *string
 
 	// A value in minutes after a backup is scheduled before a job will be canceled if
@@ -302,7 +309,8 @@ type BackupRule struct {
 // Specifies a scheduled task used to back up a selection of resources.
 type BackupRuleInput struct {
 
-	// An optional display name for a backup rule.
+	// A display name for a backup rule. Must contain 1 to 50 alphanumeric or '-_.'
+	// characters.
 	//
 	// This member is required.
 	RuleName *string
@@ -361,22 +369,50 @@ type BackupSelection struct {
 	// This member is required.
 	IamRoleArn *string
 
-	// The display name of a resource selection document.
+	// The display name of a resource selection document. Must contain 1 to 50
+	// alphanumeric or '-_.' characters.
 	//
 	// This member is required.
 	SelectionName *string
 
+	// A list of conditions that you define to assign resources to your backup plans
+	// using tags. For example, "StringEquals": {"Department": "accounting". Condition
+	// operators are case sensitive. Conditions differs from ListOfTags as follows:
+	//
+	// *
+	// When you specify more than one condition, you only assign the resources that
+	// match ALL conditions (using AND logic).
+	//
+	// * Conditions supports StringEquals,
+	// StringLike, StringNotEquals, and StringNotLike. ListOfTags only supports
+	// StringEquals.
 	Conditions *Conditions
 
-	// An array of conditions used to specify a set of resources to assign to a backup
-	// plan; for example, "StringEquals": {"ec2:ResourceTag/Department": "accounting".
-	// Assigns the backup plan to every resource with at least one matching tag.
+	// A list of conditions that you define to assign resources to your backup plans
+	// using tags. For example, "StringEquals": {"Department": "accounting". Condition
+	// operators are case sensitive. ListOfTags differs from Conditions as follows:
+	//
+	// *
+	// When you specify more than one condition, you assign all resources that match AT
+	// LEAST ONE condition (using OR logic).
+	//
+	// * ListOfTags only supports StringEquals.
+	// Conditions supports StringEquals, StringLike, StringNotEquals, and
+	// StringNotLike.
 	ListOfTags []Condition
 
+	// A list of Amazon Resource Names (ARNs) to exclude from a backup plan. The
+	// maximum number of ARNs is 500 without wildcards, or 30 ARNs with wildcards. If
+	// you need to exclude many resources from a backup plan, consider a different
+	// resource selection strategy, such as assigning only one or a few resource types
+	// or refining your resource selection using tags.
 	NotResources []string
 
-	// An array of strings that contain Amazon Resource Names (ARNs) of resources to
-	// assign to a backup plan.
+	// A list of Amazon Resource Names (ARNs) to assign to a backup plan. The maximum
+	// number of ARNs is 500 without wildcards, or 30 ARNs with wildcards. If you need
+	// to assign many resources to a backup plan, consider a different resource
+	// selection strategy, such as assigning all resources of a resource type or
+	// refining your resource selection using tags.
 	Resources []string
 
 	noSmithyDocumentSerde
@@ -395,7 +431,9 @@ type BackupSelectionsListMember struct {
 	CreationDate *time.Time
 
 	// A unique string that identifies the request and allows failed requests to be
-	// retried without the risk of running the operation twice.
+	// retried without the risk of running the operation twice. This parameter is
+	// optional. If used, this parameter must contain 1 to 50 alphanumeric or '-_.'
+	// characters.
 	CreatorRequestId *string
 
 	// Specifies the IAM role Amazon Resource Name (ARN) to create the target recovery
@@ -431,7 +469,9 @@ type BackupVaultListMember struct {
 	CreationDate *time.Time
 
 	// A unique string that identifies the request and allows failed requests to be
-	// retried without the risk of running the operation twice.
+	// retried without the risk of running the operation twice. This parameter is
+	// optional. If used, this parameter must contain 1 to 50 alphanumeric or '-_.'
+	// characters.
 	CreatorRequestId *string
 
 	// The server-side encryption key that is used to protect your backups; for
@@ -504,24 +544,27 @@ type CalculatedLifecycle struct {
 }
 
 // Contains an array of triplets made up of a condition type (such as
-// StringEquals), a key, and a value. Conditions are used to filter resources in a
-// selection that is assigned to a backup plan.
+// StringEquals), a key, and a value. Used to filter resources using their tags and
+// assign them to a backup plan. Case sensitive.
 type Condition struct {
 
-	// The key in a key-value pair. For example, in "ec2:ResourceTag/Department":
-	// "accounting", "ec2:ResourceTag/Department" is the key.
+	// The key in a key-value pair. For example, in the tag Department: Accounting,
+	// Department is the key.
 	//
 	// This member is required.
 	ConditionKey *string
 
-	// An operation, such as StringEquals, that is applied to a key-value pair used to
-	// filter resources in a selection.
+	// An operation applied to a key-value pair used to assign resources to your backup
+	// plan. Condition only supports StringEquals. For more flexible assignment
+	// options, incluidng StringLike and the ability to exclude resources from your
+	// backup plan, use Conditions (with an "s" on the end) for your BackupSelection
+	// (https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BackupSelection.html).
 	//
 	// This member is required.
 	ConditionType ConditionType
 
-	// The value in a key-value pair. For example, in "ec2:ResourceTag/Department":
-	// "accounting", "accounting" is the value.
+	// The value in a key-value pair. For example, in the tag Department: Accounting,
+	// Accounting is the value.
 	//
 	// This member is required.
 	ConditionValue *string
@@ -529,21 +572,40 @@ type Condition struct {
 	noSmithyDocumentSerde
 }
 
+// Includes information about tags you define to assign tagged resources to a
+// backup plan.
 type ConditionParameter struct {
+
+	// The key in a key-value pair. For example, in the tag Department: Accounting,
+	// Department is the key.
 	ConditionKey *string
 
+	// The value in a key-value pair. For example, in the tag Department: Accounting,
+	// Accounting is the value.
 	ConditionValue *string
 
 	noSmithyDocumentSerde
 }
 
+// Contains information about which resources to include or exclude from a backup
+// plan using their tags. Conditions are case sensitive.
 type Conditions struct {
+
+	// Filters the values of your tagged resources for only those resources that you
+	// tagged with the same value. Also called "exact matching."
 	StringEquals []ConditionParameter
 
+	// Filters the values of your tagged resources for matching tag values with the use
+	// of a wildcard character (*) anywhere in the string. For example, "prod*" or
+	// "*rod*" matches the tag value "production".
 	StringLike []ConditionParameter
 
+	// Filters the values of your tagged resources for only those resources that you
+	// tagged that do not have the same value. Also called "negated matching."
 	StringNotEquals []ConditionParameter
 
+	// Filters the values of your tagged resources for non-matching tag values with the
+	// use of a wildcard character (*) anywhere in the string.
 	StringNotLike []ConditionParameter
 
 	noSmithyDocumentSerde
@@ -565,11 +627,12 @@ type ControlInputParameter struct {
 }
 
 // A framework consists of one or more controls. Each control has its own control
-// scope. The control scope defines what the control will evaluate. Three examples
-// of control scopes are: a specific backup plan, all backup plans with a specific
-// tag, or all backup plans. To set a control scope that includes all of a
-// particular resource, leave the ControlScope empty or do not pass it when calling
-// CreateFramework.
+// scope. The control scope can include one or more resource types, a combination
+// of a tag key and value, or a combination of one resource type and one resource
+// ID. If no scope is specified, evaluations for the rule are triggered when any
+// resource in your recording group changes in configuration. To set a control
+// scope that includes all of a particular resource, leave the ControlScope empty
+// or do not pass it when calling CreateFramework.
 type ControlScope struct {
 
 	// The ID of the only Amazon Web Services resource that you want your control scope
@@ -580,8 +643,10 @@ type ControlScope struct {
 	// such as EFS or RDS.
 	ComplianceResourceTypes []string
 
-	// Describes whether the control scope includes resources with one or more tags.
-	// Each tag is a key-value pair.
+	// The tag key-value pair applied to those Amazon Web Services resources that you
+	// want to trigger an evaluation for a rule. A maximum of one key-value pair can be
+	// provided. The tag value is optional, but it cannot be an empty string. The
+	// structure to assign a tag is: [{"Key":"string","Value":"string"}].
 	Tags map[string]string
 
 	noSmithyDocumentSerde

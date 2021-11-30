@@ -7,10 +7,17 @@ import (
 	"time"
 )
 
-// The AWS Proton pipeline service role data.
+// The Proton pipeline service role and repository data.
 type AccountSettings struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Proton pipeline service role.
+	// The repository that you provide with pull request provisioning. Provisioning by
+	// pull request is currently in feature preview and is only usable with Terraform
+	// based Proton Templates. To learn more about Amazon Web Services Feature Preview
+	// terms (https://aws.amazon.com/service-terms), see section 2 on Beta and
+	// Previews.
+	PipelineProvisioningRepository *RepositoryBranch
+
+	// The Amazon Resource Name (ARN) of the Proton pipeline service role.
 	PipelineServiceRoleArn *string
 
 	noSmithyDocumentSerde
@@ -48,8 +55,8 @@ type CompatibleEnvironmentTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
-// The environment detail data. An AWS Proton environment is a set resources shared
-// across an AWS Proton service.
+// The environment detail data. An Proton environment is a set resources shared
+// across an Proton service.
 type Environment struct {
 
 	// The Amazon Resource Name (ARN) of the environment.
@@ -111,13 +118,20 @@ type Environment struct {
 	// are provisioned in.
 	EnvironmentAccountId *string
 
-	// The Amazon Resource Name (ARN) of the AWS Proton service role that allows AWS
-	// Proton to make calls to other services on your behalf.
+	// The Amazon Resource Name (ARN) of the Proton service role that allows Proton to
+	// make calls to other services on your behalf.
 	ProtonServiceRoleArn *string
 
 	// When included, indicates that the environment template is for customer
 	// provisioned and managed infrastructure.
 	Provisioning Provisioning
+
+	// The repository that you provide with pull request provisioning. Provisioning by
+	// pull request is currently in feature preview and is only usable with Terraform
+	// based Proton Templates. To learn more about Amazon Web Services Feature Preview
+	// terms (https://aws.amazon.com/service-terms), see section 2 on Beta and
+	// Previews.
+	ProvisioningRepository *RepositoryBranch
 
 	// The environment spec.
 	//
@@ -267,12 +281,12 @@ type EnvironmentSummary struct {
 	// This member is required.
 	Name *string
 
-	// The ID of the major version of the environment template.
+	// The major version of the environment template.
 	//
 	// This member is required.
 	TemplateMajorVersion *string
 
-	// The ID of the minor version of the environment template.
+	// The minor version of the environment template.
 	//
 	// This member is required.
 	TemplateMinorVersion *string
@@ -296,8 +310,8 @@ type EnvironmentSummary struct {
 	// are provisioned in.
 	EnvironmentAccountId *string
 
-	// The Amazon Resource Name (ARN) of the AWS Proton service role that allows AWS
-	// Proton to make calls to other services on your behalf.
+	// The Amazon Resource Name (ARN) of the Proton service role that allows Proton to
+	// make calls to other services on your behalf.
 	ProtonServiceRoleArn *string
 
 	// When included, indicates that the environment template is for customer
@@ -398,7 +412,7 @@ type EnvironmentTemplateSummary struct {
 	// provisioned and managed infrastructure.
 	Provisioning Provisioning
 
-	// The ID of the recommended version of the environment template.
+	// The recommended version of the environment template.
 	RecommendedVersion *string
 
 	noSmithyDocumentSerde
@@ -422,13 +436,13 @@ type EnvironmentTemplateVersion struct {
 	// This member is required.
 	LastModifiedAt *time.Time
 
-	// The ID of the latest major version that's associated with the version of an
-	// environment template.
+	// The latest major version that's associated with the version of an environment
+	// template.
 	//
 	// This member is required.
 	MajorVersion *string
 
-	// The ID of the minor version of an environment template.
+	// The minor version of an environment template.
 	//
 	// This member is required.
 	MinorVersion *string
@@ -446,7 +460,7 @@ type EnvironmentTemplateVersion struct {
 	// A description of the minor version of an environment template.
 	Description *string
 
-	// The ID of the recommended minor version of the environment template.
+	// The recommended minor version of the environment template.
 	RecommendedMinorVersion *string
 
 	// The schema of the version of an environment template.
@@ -478,13 +492,13 @@ type EnvironmentTemplateVersionSummary struct {
 	// This member is required.
 	LastModifiedAt *time.Time
 
-	// The ID of the latest major version that's associated with the version of an
-	// environment template.
+	// The latest major version that's associated with the version of an environment
+	// template.
 	//
 	// This member is required.
 	MajorVersion *string
 
-	// The ID of the version of an environment template.
+	// The version of an environment template.
 	//
 	// This member is required.
 	MinorVersion *string
@@ -502,11 +516,308 @@ type EnvironmentTemplateVersionSummary struct {
 	// A description of the version of an environment template.
 	Description *string
 
-	// The ID of the recommended minor version of the environment template.
+	// The recommended minor version of the environment template.
 	RecommendedMinorVersion *string
 
 	// The status message of the version of an environment template.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// An infrastructure as code defined resource output.
+type Output struct {
+
+	// The output key.
+	Key *string
+
+	// The output value.
+	ValueString *string
+
+	noSmithyDocumentSerde
+}
+
+// Detail data for a provisioned resource.
+type ProvisionedResource struct {
+
+	// The provisioned resource identifier.
+	Identifier *string
+
+	// The provisioned resource name.
+	Name *string
+
+	// The resource provisioning engine. Provisioning by pull request is currently in
+	// feature preview and is only usable with Terraform based Proton Templates. To
+	// learn more about Amazon Web Services Feature Preview terms
+	// (https://aws.amazon.com/service-terms), see section 2 on Beta and Previews.
+	ProvisioningEngine ProvisionedResourceEngine
+
+	noSmithyDocumentSerde
+}
+
+// Detail date for a repository that has been registered with Proton.
+type Repository struct {
+
+	// The repository Amazon Resource Name (ARN).
+	//
+	// This member is required.
+	Arn *string
+
+	// The repository Amazon Web Services CodeStar connection that connects Proton to
+	// your repository.
+	//
+	// This member is required.
+	ConnectionArn *string
+
+	// The repository name.
+	//
+	// This member is required.
+	Name *string
+
+	// The repository provider.
+	//
+	// This member is required.
+	Provider RepositoryProvider
+
+	// Your customer Amazon Web Services KMS encryption key.
+	EncryptionKey *string
+
+	noSmithyDocumentSerde
+}
+
+// Detail data for a repository branch. Provisioning by pull request is currently
+// in feature preview and is only usable with Terraform based Proton Templates. To
+// learn more about Amazon Web Services Feature Preview terms
+// (https://aws.amazon.com/service-terms), see section 2 on Beta and Previews.
+type RepositoryBranch struct {
+
+	// The Amazon Resource Name (ARN) of the repository branch.
+	//
+	// This member is required.
+	Arn *string
+
+	// The repository branch.
+	//
+	// This member is required.
+	Branch *string
+
+	// The repository name.
+	//
+	// This member is required.
+	Name *string
+
+	// The repository provider.
+	//
+	// This member is required.
+	Provider RepositoryProvider
+
+	noSmithyDocumentSerde
+}
+
+// Detail input data for a repository branch. Provisioning by pull request is
+// currently in feature preview and is only usable with Terraform based Proton
+// Templates. To learn more about Amazon Web Services Feature Preview terms
+// (https://aws.amazon.com/service-terms), see section 2 on Beta and Previews.
+type RepositoryBranchInput struct {
+
+	// The repository branch.
+	//
+	// This member is required.
+	Branch *string
+
+	// The repository name.
+	//
+	// This member is required.
+	Name *string
+
+	// The repository provider.
+	//
+	// This member is required.
+	Provider RepositoryProvider
+
+	noSmithyDocumentSerde
+}
+
+// A summary of detail data for a registered repository.
+type RepositorySummary struct {
+
+	// The Amazon Resource Name (ARN) for a repository.
+	//
+	// This member is required.
+	Arn *string
+
+	// The repository name.
+	//
+	// This member is required.
+	Name *string
+
+	// The repository provider.
+	//
+	// This member is required.
+	Provider RepositoryProvider
+
+	noSmithyDocumentSerde
+}
+
+// Detail data for a repository sync attempt activated by a push to a repository.
+type RepositorySyncAttempt struct {
+
+	// Detail data for sync attempt events.
+	//
+	// This member is required.
+	Events []RepositorySyncEvent
+
+	// The time when the sync attempt started.
+	//
+	// This member is required.
+	StartedAt *time.Time
+
+	// The sync attempt status.
+	//
+	// This member is required.
+	Status RepositorySyncStatus
+
+	noSmithyDocumentSerde
+}
+
+// The repository sync definition.
+type RepositorySyncDefinition struct {
+
+	// The repository branch.
+	//
+	// This member is required.
+	Branch *string
+
+	// The directory in the repository.
+	//
+	// This member is required.
+	Directory *string
+
+	// The resource that is synced from.
+	//
+	// This member is required.
+	Parent *string
+
+	// The resource that is synced to.
+	//
+	// This member is required.
+	Target *string
+
+	noSmithyDocumentSerde
+}
+
+// Repository sync event detail data for a sync attempt.
+type RepositorySyncEvent struct {
+
+	// Event detail for a repository sync attempt.
+	//
+	// This member is required.
+	Event *string
+
+	// The time that the sync event occurred.
+	//
+	// This member is required.
+	Time *time.Time
+
+	// The type of event.
+	//
+	// This member is required.
+	Type *string
+
+	// The external ID of the sync event.
+	ExternalId *string
+
+	noSmithyDocumentSerde
+}
+
+// Detail data for a resource sync attempt activated by a push to a repository.
+type ResourceSyncAttempt struct {
+
+	// An array of events with detail data.
+	//
+	// This member is required.
+	Events []ResourceSyncEvent
+
+	// Detail data for the initial repository commit, path and push.
+	//
+	// This member is required.
+	InitialRevision *Revision
+
+	// The time when the sync attempt started.
+	//
+	// This member is required.
+	StartedAt *time.Time
+
+	// The status of the sync attempt.
+	//
+	// This member is required.
+	Status ResourceSyncStatus
+
+	// The resource that is synced to.
+	//
+	// This member is required.
+	Target *string
+
+	// Detail data for the target revision.
+	//
+	// This member is required.
+	TargetRevision *Revision
+
+	noSmithyDocumentSerde
+}
+
+// Detail data for a resource sync event.
+type ResourceSyncEvent struct {
+
+	// A resource sync event.
+	//
+	// This member is required.
+	Event *string
+
+	// The time when the event occurred.
+	//
+	// This member is required.
+	Time *time.Time
+
+	// The type of event.
+	//
+	// This member is required.
+	Type *string
+
+	// The external ID for the event.
+	ExternalId *string
+
+	noSmithyDocumentSerde
+}
+
+// Revision detail data for a commit and push that activates a sync attempt
+type Revision struct {
+
+	// The repository branch.
+	//
+	// This member is required.
+	Branch *string
+
+	// The repository directory changed by a commit and push that activated the sync
+	// attempt.
+	//
+	// This member is required.
+	Directory *string
+
+	// The repository name.
+	//
+	// This member is required.
+	RepositoryName *string
+
+	// The repository provider.
+	//
+	// This member is required.
+	RepositoryProvider RepositoryProvider
+
+	// The secure hash algorithm (SHA) hash for the revision.
+	//
+	// This member is required.
+	Sha *string
 
 	noSmithyDocumentSerde
 }
@@ -568,7 +879,7 @@ type Service struct {
 	TemplateName *string
 
 	// The name of the code repository branch that holds the code that's deployed in
-	// AWS Proton.
+	// Proton.
 	BranchName *string
 
 	// A description of a service.
@@ -580,12 +891,12 @@ type Service struct {
 	// The Amazon Resource Name (ARN) of the repository connection. For more
 	// information, see Set up a repository connection
 	// (https://docs.aws.amazon.com/proton/latest/adminguide/setting-up-for-service.html#setting-up-vcontrol)
-	// in the AWS Proton Administrator Guide and Setting up with AWS Proton
+	// in the Proton Administrator Guide and Setting up with Proton
 	// (https://docs.aws.amazon.com/proton/latest/userguide/proton-setup.html#setup-repo-connection)
-	// in the AWS Proton User Guide.
+	// in the Proton User Guide.
 	RepositoryConnectionArn *string
 
-	// The ID of the code repository.
+	// The ID of the source code repository.
 	RepositoryId *string
 
 	// A service status message.
@@ -637,14 +948,14 @@ type ServiceInstance struct {
 	// This member is required.
 	ServiceName *string
 
-	// The ID of the major version of the service template that was used to create the
-	// service instance.
+	// The major version of the service template that was used to create the service
+	// instance.
 	//
 	// This member is required.
 	TemplateMajorVersion *string
 
-	// The ID of the minor version of the service template that was used to create the
-	// service instance.
+	// The minor version of the service template that was used to create the service
+	// instance.
 	//
 	// This member is required.
 	TemplateMinorVersion *string
@@ -708,12 +1019,12 @@ type ServiceInstanceSummary struct {
 	// This member is required.
 	ServiceName *string
 
-	// The ID of the major version of a service template.
+	// The service instance template major version.
 	//
 	// This member is required.
 	TemplateMajorVersion *string
 
-	// The ID of the minor version of a service template.
+	// The service instance template minor version.
 	//
 	// This member is required.
 	TemplateMinorVersion *string
@@ -757,14 +1068,14 @@ type ServicePipeline struct {
 	// This member is required.
 	LastDeploymentSucceededAt *time.Time
 
-	// The ID of the major version of the service template that was used to create the
-	// service pipeline.
+	// The major version of the service template that was used to create the service
+	// pipeline.
 	//
 	// This member is required.
 	TemplateMajorVersion *string
 
-	// The ID of the minor version of the service template that was used to create the
-	// service pipeline.
+	// The minor version of the service template that was used to create the service
+	// pipeline.
 	//
 	// This member is required.
 	TemplateMinorVersion *string
@@ -864,7 +1175,7 @@ type ServiceTemplate struct {
 	// template. Otherwise, a service pipeline isn't included in the service template.
 	PipelineProvisioning Provisioning
 
-	// The ID of the recommended version of the service template.
+	// The recommended version of the service template.
 	RecommendedVersion *string
 
 	noSmithyDocumentSerde
@@ -903,7 +1214,7 @@ type ServiceTemplateSummary struct {
 	// template, otherwise a service pipeline isn't included in the service template.
 	PipelineProvisioning Provisioning
 
-	// The ID of the recommended version of the service template.
+	// The recommended version of the service template.
 	RecommendedVersion *string
 
 	noSmithyDocumentSerde
@@ -933,13 +1244,13 @@ type ServiceTemplateVersion struct {
 	// This member is required.
 	LastModifiedAt *time.Time
 
-	// The ID of the latest major version that's associated with the version of a
-	// service template.
+	// The latest major version that's associated with the version of a service
+	// template.
 	//
 	// This member is required.
 	MajorVersion *string
 
-	// The ID of the minor version of a service template.
+	// The minor version of a service template.
 	//
 	// This member is required.
 	MinorVersion *string
@@ -957,7 +1268,7 @@ type ServiceTemplateVersion struct {
 	// A description of the version of a service template.
 	Description *string
 
-	// The ID of the recommended minor version of the service template.
+	// The recommended minor version of the service template.
 	RecommendedMinorVersion *string
 
 	// The schema of the version of a service template.
@@ -989,13 +1300,13 @@ type ServiceTemplateVersionSummary struct {
 	// This member is required.
 	LastModifiedAt *time.Time
 
-	// The ID of the latest major version that's associated with the version of a
-	// service template.
+	// The latest major version that's associated with the version of a service
+	// template.
 	//
 	// This member is required.
 	MajorVersion *string
 
-	// The ID of the minor version of a service template.
+	// The minor version of a service template.
 	//
 	// This member is required.
 	MinorVersion *string
@@ -1013,7 +1324,7 @@ type ServiceTemplateVersionSummary struct {
 	// A description of the version of a service template.
 	Description *string
 
-	// The ID of the recommended minor version of the service template.
+	// The recommended minor version of the service template.
 	RecommendedMinorVersion *string
 
 	// A service template minor version status message.
@@ -1034,6 +1345,40 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// The detail data for a template sync configuration.
+type TemplateSyncConfig struct {
+
+	// The repository branch.
+	//
+	// This member is required.
+	Branch *string
+
+	// The name of the repository, for example myrepos/myrepo.
+	//
+	// This member is required.
+	RepositoryName *string
+
+	// The repository provider.
+	//
+	// This member is required.
+	RepositoryProvider RepositoryProvider
+
+	// The template name.
+	//
+	// This member is required.
+	TemplateName *string
+
+	// The template type.
+	//
+	// This member is required.
+	TemplateType TemplateType
+
+	// A subdirectory path to your template bundle version.
+	Subdirectory *string
 
 	noSmithyDocumentSerde
 }

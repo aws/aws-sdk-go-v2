@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// For Redis engine version 6.x onwards: Creates a Redis user group. For more
+// For Redis engine version 6.0 onwards: Creates a Redis user group. For more
 // information, see Using Role Based Access Control (RBAC)
 // (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.RBAC.html)
 func (c *Client) CreateUserGroup(ctx context.Context, params *CreateUserGroupInput, optFns ...func(*Options)) (*CreateUserGroupOutput, error) {
@@ -58,6 +58,9 @@ type CreateUserGroupOutput struct {
 
 	// The current supported value is Redis.
 	Engine *string
+
+	// The minimum engine version required, which is Redis 6.0
+	MinimumEngineVersion *string
 
 	// A list of updates being applied to the user group.
 	PendingChanges *types.UserGroupPendingChanges

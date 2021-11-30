@@ -2565,6 +2565,16 @@ type S3Settings struct {
 	// set to true.
 	DatePartitionSequence DatePartitionSequenceValue
 
+	// When creating an S3 target endpoint, set DatePartitionTimezone to convert the
+	// current UTC time into a specified time zone. The conversion occurs when a date
+	// partition folder is created and a CDC filename is generated. The time zone
+	// format is Area/Location. Use this parameter when DatePartitionedEnabled is set
+	// to true, as shown in the following example.
+	// s3-settings='{"DatePartitionEnabled": true, "DatePartitionSequence":
+	// "YYYYMMDDHH", "DatePartitionDelimiter": "SLASH",
+	// "DatePartitionTimezone":"Asia/Seoul", "BucketName": "dms-nattarat-test"}'
+	DatePartitionTimezone *string
+
 	// The maximum size of an encoded dictionary page of a column. If the dictionary
 	// page exceeds this, this column is stored using an encoding type of PLAIN. This
 	// parameter defaults to 1024 * 1024 bytes (1 MiB), the maximum size of a

@@ -12,7 +12,10 @@ import (
 	"time"
 )
 
-// Gets information about a Device Advisor test suite run.
+// Gets information about a Device Advisor test suite run. Requires permission to
+// access the GetSuiteRun
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) GetSuiteRun(ctx context.Context, params *GetSuiteRunInput, optFns ...func(*Options)) (*GetSuiteRunOutput, error) {
 	if params == nil {
 		params = &GetSuiteRunInput{}
@@ -30,12 +33,12 @@ func (c *Client) GetSuiteRun(ctx context.Context, params *GetSuiteRunInput, optF
 
 type GetSuiteRunInput struct {
 
-	// Suite definition Id for the test suite run.
+	// Suite definition ID for the test suite run.
 	//
 	// This member is required.
 	SuiteDefinitionId *string
 
-	// Suite run Id for the test suite run.
+	// Suite run ID for the test suite run.
 	//
 	// This member is required.
 	SuiteRunId *string
@@ -51,13 +54,13 @@ type GetSuiteRunOutput struct {
 	// Error reason for any test suite run failure.
 	ErrorReason *string
 
-	// Date (in Unix epoch time) when the test suite run was started.
+	// Date (in Unix epoch time) when the test suite run started.
 	StartTime *time.Time
 
 	// Status for the test suite run.
 	Status types.SuiteRunStatus
 
-	// Suite definition Id for the test suite run.
+	// Suite definition ID for the test suite run.
 	SuiteDefinitionId *string
 
 	// Suite definition version for the test suite run.
@@ -69,7 +72,7 @@ type GetSuiteRunOutput struct {
 	// Suite run configuration for the test suite run.
 	SuiteRunConfiguration *types.SuiteRunConfiguration
 
-	// Suite run Id for the test suite run.
+	// Suite run ID for the test suite run.
 	SuiteRunId *string
 
 	// The tags attached to the suite run.

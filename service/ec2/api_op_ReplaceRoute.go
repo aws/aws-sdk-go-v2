@@ -41,6 +41,7 @@ type ReplaceRouteInput struct {
 	// [IPv4 traffic only] The ID of a carrier gateway.
 	CarrierGatewayId *string
 
+	// The Amazon Resource Name (ARN) of the core network.
 	CoreNetworkArn *string
 
 	// The IPv4 CIDR address block used for the destination match. The value that you

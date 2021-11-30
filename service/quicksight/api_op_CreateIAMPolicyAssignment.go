@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an assignment with one specified IAMpolicy, identified by its Amazon
+// Creates an assignment with one specified IAM policy, identified by its Amazon
 // Resource Name (ARN). This policy assignment is attached to the specified groups
 // or users of Amazon QuickSight. Assignment names are unique per Amazon Web
 // Services account. To avoid overwriting rules in other namespaces, use assignment
@@ -54,7 +54,7 @@ type CreateIAMPolicyAssignmentInput struct {
 	// This member is required.
 	AssignmentStatus types.AssignmentStatus
 
-	// The ID of the Amazon Web Services account where you want to assign an IAMpolicy
+	// The ID of the Amazon Web Services account where you want to assign an IAM policy
 	// to Amazon QuickSight users or groups.
 	//
 	// This member is required.
@@ -69,7 +69,7 @@ type CreateIAMPolicyAssignmentInput struct {
 	// to.
 	Identities map[string][]string
 
-	// The ARN for the IAMpolicy to apply to the Amazon QuickSight users and groups
+	// The ARN for the IAM policy to apply to the Amazon QuickSight users and groups
 	// specified in this assignment.
 	PolicyArn *string
 
@@ -98,10 +98,10 @@ type CreateIAMPolicyAssignmentOutput struct {
 	// source.
 	AssignmentStatus types.AssignmentStatus
 
-	// The Amazon QuickSight users, groups, or both that the IAMpolicy is assigned to.
+	// The Amazon QuickSight users, groups, or both that the IAM policy is assigned to.
 	Identities map[string][]string
 
-	// The ARN for the IAMpolicy that is applied to the Amazon QuickSight users and
+	// The ARN for the IAM policy that is applied to the Amazon QuickSight users and
 	// groups specified in this assignment.
 	PolicyArn *string
 

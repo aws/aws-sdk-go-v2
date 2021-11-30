@@ -38,8 +38,8 @@ type PutDefaultEncryptionConfigurationInput struct {
 	// This member is required.
 	EncryptionType types.EncryptionType
 
-	// The Key ID of the customer managed customer master key (CMK) used for KMS
-	// encryption. This is required if you use KMS_BASED_ENCRYPTION.
+	// The Key ID of the customer managed key used for KMS encryption. This is required
+	// if you use KMS_BASED_ENCRYPTION.
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
@@ -58,7 +58,7 @@ type PutDefaultEncryptionConfigurationOutput struct {
 	// This member is required.
 	EncryptionType types.EncryptionType
 
-	// The Key ARN of the KMS CMK used for KMS encryption if you use
+	// The Key ARN of the KMS key used for KMS encryption if you use
 	// KMS_BASED_ENCRYPTION.
 	KmsKeyArn *string
 

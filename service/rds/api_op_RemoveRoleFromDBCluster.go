@@ -10,11 +10,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates an Amazon Web Services Identity and Access Management (IAM) role
-// from an Amazon Aurora DB cluster. For more information, see Authorizing Amazon
-// Aurora MySQL to Access Other Amazon Web Services Services on Your Behalf
-// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Integrating.Authorizing.html)
-// in the Amazon Aurora User Guide. This action only applies to Aurora DB clusters.
+// Removes the asssociation of an Amazon Web Services Identity and Access
+// Management (IAM) role from a DB cluster. For more information on Amazon Aurora
+// DB clusters, see  What is Amazon Aurora?
+// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
+// in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
+// see  Multi-AZ deployments with two readable standby DB instances
+// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
+// in the Amazon RDS User Guide. The Multi-AZ DB clusters feature is in preview and
+// is subject to change.
 func (c *Client) RemoveRoleFromDBCluster(ctx context.Context, params *RemoveRoleFromDBClusterInput, optFns ...func(*Options)) (*RemoveRoleFromDBClusterOutput, error) {
 	if params == nil {
 		params = &RemoveRoleFromDBClusterInput{}

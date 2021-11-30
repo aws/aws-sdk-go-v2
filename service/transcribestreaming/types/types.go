@@ -65,7 +65,7 @@ func (*AudioStreamMemberAudioEvent) isAudioStream() {}
 // The entity identified as personally identifiable information (PII).
 type Entity struct {
 
-	// The category of of information identified in this entity; for example, PII.
+	// The category of information identified in this entity; for example, PII.
 	Category *string
 
 	// A value between zero and one that Amazon Transcribe assigns to PII identified in
@@ -92,7 +92,7 @@ type Entity struct {
 // A word, phrase, or punctuation mark that is transcribed from the input audio.
 type Item struct {
 
-	// A value between 0 and 1 for an item that is a confidence score that Amazon
+	// A value between zero and one for an item that is a confidence score that Amazon
 	// Transcribe assigns to each word or phrase that it transcribes.
 	Confidence *float64
 
@@ -103,8 +103,8 @@ type Item struct {
 	// resulted in the item.
 	EndTime float64
 
-	// If speaker identification is enabled, shows the speakers identified in the
-	// real-time stream.
+	// If speaker identification is enabled, shows the speakers identified in the media
+	// stream.
 	Speaker *string
 
 	// If partial result stabilization has been enabled, indicates whether the word or
@@ -121,9 +121,25 @@ type Item struct {
 	Type ItemType
 
 	// Indicates whether a word in the item matches a word in the vocabulary filter
-	// you've chosen for your real-time stream. If true then a word in the item matches
+	// you've chosen for your media stream. If true then a word in the item matches
 	// your vocabulary filter.
 	VocabularyFilterMatch bool
+
+	noSmithyDocumentSerde
+}
+
+// The language codes of the identified languages and their associated confidence
+// scores. The confidence score is a value between zero and one; a larger value
+// indicates a higher confidence in the identified language.
+type LanguageWithScore struct {
+
+	// The language code of the language identified by Amazon Transcribe.
+	LanguageCode LanguageCode
+
+	// The confidence score for the associated language code. Confidence scores are
+	// values between zero and one; larger values indicate a higher confidence in the
+	// identified language.
+	Score float64
 
 	noSmithyDocumentSerde
 }
@@ -301,6 +317,12 @@ type Result struct {
 	// transcription data to send, false to indicate that this is the last
 	// transcription result for the segment.
 	IsPartial bool
+
+	// The language code of the identified language in your media stream.
+	LanguageCode LanguageCode
+
+	// The language code of the dominant language identified in your media.
+	LanguageIdentification []LanguageWithScore
 
 	// A unique identifier for the result.
 	ResultId *string

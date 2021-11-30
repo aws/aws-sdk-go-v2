@@ -11,8 +11,8 @@ import (
 )
 
 // Removes the server or virtual machine from the list of registered servers. You
-// can reregister the instance again at any time. If you don't plan to use Run
-// Command on the server, we suggest uninstalling SSM Agent first.
+// can reregister the node again at any time. If you don't plan to use Run Command
+// on the server, we suggest uninstalling SSM Agent first.
 func (c *Client) DeregisterManagedInstance(ctx context.Context, params *DeregisterManagedInstanceInput, optFns ...func(*Options)) (*DeregisterManagedInstanceOutput, error) {
 	if params == nil {
 		params = &DeregisterManagedInstanceInput{}
@@ -30,8 +30,8 @@ func (c *Client) DeregisterManagedInstance(ctx context.Context, params *Deregist
 
 type DeregisterManagedInstanceInput struct {
 
-	// The ID assigned to the managed instance when you registered it using the
-	// activation process.
+	// The ID assigned to the managed node when you registered it using the activation
+	// process.
 	//
 	// This member is required.
 	InstanceId *string

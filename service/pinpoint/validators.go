@@ -1750,6 +1750,26 @@ func (m *validateOpSendMessages) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSendOTPMessage struct {
+}
+
+func (*validateOpSendOTPMessage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSendOTPMessage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SendOTPMessageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSendOTPMessageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSendUsersMessages struct {
 }
 
@@ -2290,6 +2310,26 @@ func (m *validateOpUpdateVoiceTemplate) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpVerifyOTPMessage struct {
+}
+
+func (*validateOpVerifyOTPMessage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpVerifyOTPMessage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*VerifyOTPMessageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpVerifyOTPMessageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpCreateAppValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateApp{}, middleware.After)
 }
@@ -2638,6 +2678,10 @@ func addOpSendMessagesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSendMessages{}, middleware.After)
 }
 
+func addOpSendOTPMessageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSendOTPMessage{}, middleware.After)
+}
+
 func addOpSendUsersMessagesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSendUsersMessages{}, middleware.After)
 }
@@ -2744,6 +2788,10 @@ func addOpUpdateVoiceChannelValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpUpdateVoiceTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateVoiceTemplate{}, middleware.After)
+}
+
+func addOpVerifyOTPMessageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpVerifyOTPMessage{}, middleware.After)
 }
 
 func validateActivity(v *types.Activity) error {
@@ -3898,6 +3946,33 @@ func validateSegmentReference(v *types.SegmentReference) error {
 	}
 }
 
+func validateSendOTPMessageRequestParameters(v *types.SendOTPMessageRequestParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SendOTPMessageRequestParameters"}
+	if v.BrandName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BrandName"))
+	}
+	if v.Channel == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Channel"))
+	}
+	if v.DestinationIdentity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationIdentity"))
+	}
+	if v.OriginationIdentity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OriginationIdentity"))
+	}
+	if v.ReferenceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReferenceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSendUsersMessageRequest(v *types.SendUsersMessageRequest) error {
 	if v == nil {
 		return nil
@@ -4023,6 +4098,27 @@ func validateUpdateRecommenderConfigurationShape(v *types.UpdateRecommenderConfi
 	}
 	if v.RecommendationProviderUri == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RecommendationProviderUri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVerifyOTPMessageRequestParameters(v *types.VerifyOTPMessageRequestParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VerifyOTPMessageRequestParameters"}
+	if v.DestinationIdentity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationIdentity"))
+	}
+	if v.Otp == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Otp"))
+	}
+	if v.ReferenceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReferenceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5642,6 +5738,28 @@ func validateOpSendMessagesInput(v *SendMessagesInput) error {
 	}
 }
 
+func validateOpSendOTPMessageInput(v *SendOTPMessageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SendOTPMessageInput"}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if v.SendOTPMessageRequestParameters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SendOTPMessageRequestParameters"))
+	} else if v.SendOTPMessageRequestParameters != nil {
+		if err := validateSendOTPMessageRequestParameters(v.SendOTPMessageRequestParameters); err != nil {
+			invalidParams.AddNested("SendOTPMessageRequestParameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpSendUsersMessagesInput(v *SendUsersMessagesInput) error {
 	if v == nil {
 		return nil
@@ -6186,6 +6304,28 @@ func validateOpUpdateVoiceTemplateInput(v *UpdateVoiceTemplateInput) error {
 	}
 	if v.VoiceTemplateRequest == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VoiceTemplateRequest"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpVerifyOTPMessageInput(v *VerifyOTPMessageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VerifyOTPMessageInput"}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if v.VerifyOTPMessageRequestParameters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VerifyOTPMessageRequestParameters"))
+	} else if v.VerifyOTPMessageRequestParameters != nil {
+		if err := validateVerifyOTPMessageRequestParameters(v.VerifyOTPMessageRequestParameters); err != nil {
+			invalidParams.AddNested("VerifyOTPMessageRequestParameters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

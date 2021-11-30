@@ -10,7 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associate a lens to a workload.
+// Associate a lens to a workload. Up to 10 lenses can be associated with a
+// workload in a single API operation. A maximum of 20 lenses can be associated
+// with a workload. Disclaimer By accessing and/or applying custom lenses created
+// by another Amazon Web Services user or account, you acknowledge that custom
+// lenses created by other users and shared with you are Third Party Content as
+// defined in the Amazon Web Services Customer Agreement.
 func (c *Client) AssociateLenses(ctx context.Context, params *AssociateLensesInput, optFns ...func(*Options)) (*AssociateLensesOutput, error) {
 	if params == nil {
 		params = &AssociateLensesInput{}
@@ -29,13 +34,14 @@ func (c *Client) AssociateLenses(ctx context.Context, params *AssociateLensesInp
 // Input to associate lens reviews.
 type AssociateLensesInput struct {
 
-	// List of lens aliases to associate or disassociate with a workload. Identify a
-	// lens using its LensSummary$LensAlias.
+	// List of lens aliases to associate or disassociate with a workload. Up to 10
+	// lenses can be specified. Identify a lens using its LensSummary$LensAlias.
 	//
 	// This member is required.
 	LensAliases []string
 
-	// The ID assigned to the workload. This ID is unique within an AWS Region.
+	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
+	// Region.
 	//
 	// This member is required.
 	WorkloadId *string

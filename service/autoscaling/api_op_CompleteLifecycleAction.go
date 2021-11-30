@@ -15,7 +15,7 @@ import (
 // hook to an Auto Scaling group:
 //
 // * (Optional) Create a Lambda function and a rule
-// that allows CloudWatch Events to invoke your Lambda function when Amazon EC2
+// that allows Amazon EventBridge to invoke your Lambda function when Amazon EC2
 // Auto Scaling launches or terminates instances.
 //
 // * (Optional) Create a
@@ -30,11 +30,11 @@ import (
 // more time, record the lifecycle action heartbeat to keep the instance in a
 // pending state.
 //
-// * If you finish before the timeout period ends, complete the
-// lifecycle action.
+// * If you finish before the timeout period ends, send a callback
+// by using the CompleteLifecycleAction API call.
 //
-// For more information, see Amazon EC2 Auto Scaling lifecycle
-// hooks
+// For more information, see Amazon
+// EC2 Auto Scaling lifecycle hooks
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html) in
 // the Amazon EC2 Auto Scaling User Guide.
 func (c *Client) CompleteLifecycleAction(ctx context.Context, params *CompleteLifecycleActionInput, optFns ...func(*Options)) (*CompleteLifecycleActionOutput, error) {

@@ -33,8 +33,7 @@ type DeleteNotificationConfigurationInput struct {
 	// This member is required.
 	AutoScalingGroupName *string
 
-	// The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (Amazon
-	// SNS) topic.
+	// The Amazon Resource Name (ARN) of the Amazon SNS topic.
 	//
 	// This member is required.
 	TopicARN *string

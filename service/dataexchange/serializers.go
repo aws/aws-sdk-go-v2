@@ -12,6 +12,8 @@ import (
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"net/http"
+	"strings"
 )
 
 type awsRestjson1_serializeOpCancelJob struct {
@@ -1359,6 +1361,109 @@ func awsRestjson1_serializeOpHttpBindingsListTagsForResourceInput(v *ListTagsFor
 	return nil
 }
 
+type awsRestjson1_serializeOpSendApiAsset struct {
+}
+
+func (*awsRestjson1_serializeOpSendApiAsset) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpSendApiAsset) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*SendApiAssetInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsSendApiAssetInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if input.Body != nil {
+		if !restEncoder.HasHeader("Content-Type") {
+			restEncoder.SetHeader("Content-Type").String("text/plain")
+		}
+
+		payload := strings.NewReader(*input.Body)
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsSendApiAssetInput(v *SendApiAssetInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AssetId != nil && len(*v.AssetId) > 0 {
+		locationName := "X-Amzn-Dataexchange-Asset-Id"
+		encoder.SetHeader(locationName).String(*v.AssetId)
+	}
+
+	if v.DataSetId != nil && len(*v.DataSetId) > 0 {
+		locationName := "X-Amzn-Dataexchange-Data-Set-Id"
+		encoder.SetHeader(locationName).String(*v.DataSetId)
+	}
+
+	if v.Method != nil && len(*v.Method) > 0 {
+		locationName := "X-Amzn-Dataexchange-Http-Method"
+		encoder.SetHeader(locationName).String(*v.Method)
+	}
+
+	if v.Path != nil && len(*v.Path) > 0 {
+		locationName := "X-Amzn-Dataexchange-Path"
+		encoder.SetHeader(locationName).String(*v.Path)
+	}
+
+	if v.QueryStringParameters != nil {
+		for qkey, qvalue := range v.QueryStringParameters {
+			if encoder.HasQuery(qkey) {
+				continue
+			}
+			encoder.SetQuery(qkey).String(qvalue)
+		}
+	}
+
+	if v.RequestHeaders != nil {
+		hv := encoder.Headers("X-Amzn-Dataexchange-Header-")
+		for mapKey, mapVal := range v.RequestHeaders {
+			if len(mapVal) > 0 {
+				hv.SetHeader(http.CanonicalHeaderKey(mapKey)).String(mapVal)
+			}
+		}
+	}
+
+	if v.RevisionId != nil && len(*v.RevisionId) > 0 {
+		locationName := "X-Amzn-Dataexchange-Revision-Id"
+		encoder.SetHeader(locationName).String(*v.RevisionId)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpStartJob struct {
 }
 
@@ -2128,6 +2233,58 @@ func awsRestjson1_serializeDocumentExportServerSideEncryption(v *types.ExportSer
 	return nil
 }
 
+func awsRestjson1_serializeDocumentImportAssetFromApiGatewayApiRequestDetails(v *types.ImportAssetFromApiGatewayApiRequestDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ApiDescription != nil {
+		ok := object.Key("ApiDescription")
+		ok.String(*v.ApiDescription)
+	}
+
+	if v.ApiId != nil {
+		ok := object.Key("ApiId")
+		ok.String(*v.ApiId)
+	}
+
+	if v.ApiKey != nil {
+		ok := object.Key("ApiKey")
+		ok.String(*v.ApiKey)
+	}
+
+	if v.ApiName != nil {
+		ok := object.Key("ApiName")
+		ok.String(*v.ApiName)
+	}
+
+	if v.ApiSpecificationMd5Hash != nil {
+		ok := object.Key("ApiSpecificationMd5Hash")
+		ok.String(*v.ApiSpecificationMd5Hash)
+	}
+
+	if v.DataSetId != nil {
+		ok := object.Key("DataSetId")
+		ok.String(*v.DataSetId)
+	}
+
+	if len(v.ProtocolType) > 0 {
+		ok := object.Key("ProtocolType")
+		ok.String(string(v.ProtocolType))
+	}
+
+	if v.RevisionId != nil {
+		ok := object.Key("RevisionId")
+		ok.String(*v.RevisionId)
+	}
+
+	if v.Stage != nil {
+		ok := object.Key("Stage")
+		ok.String(*v.Stage)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentImportAssetFromSignedUrlRequestDetails(v *types.ImportAssetFromSignedUrlRequestDetails, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2299,6 +2456,13 @@ func awsRestjson1_serializeDocumentRequestDetails(v *types.RequestDetails, value
 	if v.ExportRevisionsToS3 != nil {
 		ok := object.Key("ExportRevisionsToS3")
 		if err := awsRestjson1_serializeDocumentExportRevisionsToS3RequestDetails(v.ExportRevisionsToS3, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ImportAssetFromApiGatewayApi != nil {
+		ok := object.Key("ImportAssetFromApiGatewayApi")
+		if err := awsRestjson1_serializeDocumentImportAssetFromApiGatewayApiRequestDetails(v.ImportAssetFromApiGatewayApi, ok); err != nil {
 			return err
 		}
 	}

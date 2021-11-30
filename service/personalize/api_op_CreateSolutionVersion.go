@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Trains or retrains an active solution. A solution is created using the
-// CreateSolution operation and must be in the ACTIVE state before calling
-// CreateSolutionVersion. A new version of the solution is created every time you
-// call this operation. Status A solution version can be in one of the following
-// states:
+// Trains or retrains an active solution in a Custom dataset group. A solution is
+// created using the CreateSolution operation and must be in the ACTIVE state
+// before calling CreateSolutionVersion. A new version of the solution is created
+// every time you call this operation. Status A solution version can be in one of
+// the following states:
 //
 // * CREATE PENDING
 //
@@ -23,27 +23,27 @@ import (
 //
 // * ACTIVE
 //
-// * CREATE FAILED
-//
 // *
-// CREATE STOPPING
+// CREATE FAILED
+//
+// * CREATE STOPPING
 //
 // * CREATE STOPPED
 //
-// To get the status of the version, call
-// DescribeSolutionVersion. Wait until the status shows as ACTIVE before calling
-// CreateCampaign. If the status shows as CREATE FAILED, the response includes a
-// failureReason key, which describes why the job failed. Related APIs
+// To get the status of the
+// version, call DescribeSolutionVersion. Wait until the status shows as ACTIVE
+// before calling CreateCampaign. If the status shows as CREATE FAILED, the
+// response includes a failureReason key, which describes why the job failed.
+// Related APIs
 //
-// *
-// ListSolutionVersions
+// * ListSolutionVersions
 //
 // * DescribeSolutionVersion
 //
-// * ListSolutions
-//
 // *
-// CreateSolution
+// ListSolutions
+//
+// * CreateSolution
 //
 // * DescribeSolution
 //

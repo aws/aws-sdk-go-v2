@@ -35,7 +35,7 @@ type DescribeDashboardPermissionsInput struct {
 	// This member is required.
 	AwsAccountId *string
 
-	// The ID for the dashboard, also added to the IAMpolicy.
+	// The ID for the dashboard, also added to the IAM policy.
 	//
 	// This member is required.
 	DashboardId *string
@@ -50,6 +50,13 @@ type DescribeDashboardPermissionsOutput struct {
 
 	// The ID for the dashboard.
 	DashboardId *string
+
+	// A structure that contains the configuration of a shareable link that grants
+	// access to the dashboard. Your users can use the link to view and interact with
+	// the dashboard, if the dashboard has been shared with them. For more information
+	// about sharing dashboards, see Sharing Dashboards
+	// (https://docs.aws.amazon.com/quicksight/latest/user/sharing-a-dashboard.html).
+	LinkSharingConfiguration *types.LinkSharingConfiguration
 
 	// A structure that contains the permissions for the dashboard.
 	Permissions []types.ResourcePermission

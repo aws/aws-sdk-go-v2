@@ -11,13 +11,13 @@ import (
 )
 
 // Creates or updates a lifecycle hook for the specified Auto Scaling group. A
-// lifecycle hook tells Amazon EC2 Auto Scaling to perform an action on an instance
-// when the instance launches (before it is put into service) or as the instance
-// terminates (before it is fully terminated). This step is a part of the procedure
-// for adding a lifecycle hook to an Auto Scaling group:
+// lifecycle hook enables an Auto Scaling group to be aware of events in the Auto
+// Scaling instance lifecycle, and then perform a custom action when the
+// corresponding lifecycle event occurs. This step is a part of the procedure for
+// adding a lifecycle hook to an Auto Scaling group:
 //
-// * (Optional) Create a
-// Lambda function and a rule that allows CloudWatch Events to invoke your Lambda
+// * (Optional) Create a Lambda
+// function and a rule that allows Amazon EventBridge to invoke your Lambda
 // function when Amazon EC2 Auto Scaling launches or terminates instances.
 //
 // *
@@ -33,11 +33,11 @@ import (
 // keep the instance in a pending state using the RecordLifecycleActionHeartbeat
 // API call.
 //
-// * If you finish before the timeout period ends, complete the
-// lifecycle action using the CompleteLifecycleAction API call.
+// * If you finish before the timeout period ends, send a callback by
+// using the CompleteLifecycleAction API call.
 //
-// For more
-// information, see Amazon EC2 Auto Scaling lifecycle hooks
+// For more information, see Amazon
+// EC2 Auto Scaling lifecycle hooks
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html) in
 // the Amazon EC2 Auto Scaling User Guide. If you exceed your maximum limit of
 // lifecycle hooks, which by default is 50 per Auto Scaling group, the call fails.

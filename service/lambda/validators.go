@@ -130,26 +130,6 @@ func (m *validateOpCreateFunction) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpCreateFunctionUrlConfig struct {
-}
-
-func (*validateOpCreateFunctionUrlConfig) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpCreateFunctionUrlConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*CreateFunctionUrlConfigInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpCreateFunctionUrlConfigInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpDeleteAlias struct {
 }
 
@@ -285,26 +265,6 @@ func (m *validateOpDeleteFunction) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteFunctionInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpDeleteFunctionUrlConfig struct {
-}
-
-func (*validateOpDeleteFunctionUrlConfig) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpDeleteFunctionUrlConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*DeleteFunctionUrlConfigInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpDeleteFunctionUrlConfigInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -510,26 +470,6 @@ func (m *validateOpGetFunction) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpGetFunctionUrlConfig struct {
-}
-
-func (*validateOpGetFunctionUrlConfig) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpGetFunctionUrlConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*GetFunctionUrlConfigInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpGetFunctionUrlConfigInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpGetLayerVersionByArn struct {
 }
 
@@ -725,26 +665,6 @@ func (m *validateOpListFunctionsByCodeSigningConfig) HandleInitialize(ctx contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListFunctionsByCodeSigningConfigInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpListFunctionUrlConfigs struct {
-}
-
-func (*validateOpListFunctionUrlConfigs) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpListFunctionUrlConfigs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*ListFunctionUrlConfigsInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpListFunctionUrlConfigsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1150,26 +1070,6 @@ func (m *validateOpUpdateFunctionEventInvokeConfig) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpUpdateFunctionUrlConfig struct {
-}
-
-func (*validateOpUpdateFunctionUrlConfig) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpUpdateFunctionUrlConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*UpdateFunctionUrlConfigInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpUpdateFunctionUrlConfigInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 func addOpAddLayerVersionPermissionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAddLayerVersionPermission{}, middleware.After)
 }
@@ -1192,10 +1092,6 @@ func addOpCreateEventSourceMappingValidationMiddleware(stack *middleware.Stack) 
 
 func addOpCreateFunctionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateFunction{}, middleware.After)
-}
-
-func addOpCreateFunctionUrlConfigValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpCreateFunctionUrlConfig{}, middleware.After)
 }
 
 func addOpDeleteAliasValidationMiddleware(stack *middleware.Stack) error {
@@ -1224,10 +1120,6 @@ func addOpDeleteFunctionEventInvokeConfigValidationMiddleware(stack *middleware.
 
 func addOpDeleteFunctionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteFunction{}, middleware.After)
-}
-
-func addOpDeleteFunctionUrlConfigValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpDeleteFunctionUrlConfig{}, middleware.After)
 }
 
 func addOpDeleteLayerVersionValidationMiddleware(stack *middleware.Stack) error {
@@ -1270,10 +1162,6 @@ func addOpGetFunctionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetFunction{}, middleware.After)
 }
 
-func addOpGetFunctionUrlConfigValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpGetFunctionUrlConfig{}, middleware.After)
-}
-
 func addOpGetLayerVersionByArnValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetLayerVersionByArn{}, middleware.After)
 }
@@ -1312,10 +1200,6 @@ func addOpListFunctionEventInvokeConfigsValidationMiddleware(stack *middleware.S
 
 func addOpListFunctionsByCodeSigningConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListFunctionsByCodeSigningConfig{}, middleware.After)
-}
-
-func addOpListFunctionUrlConfigsValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpListFunctionUrlConfigs{}, middleware.After)
 }
 
 func addOpListLayerVersionsValidationMiddleware(stack *middleware.Stack) error {
@@ -1396,10 +1280,6 @@ func addOpUpdateFunctionConfigurationValidationMiddleware(stack *middleware.Stac
 
 func addOpUpdateFunctionEventInvokeConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateFunctionEventInvokeConfig{}, middleware.After)
-}
-
-func addOpUpdateFunctionUrlConfigValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpUpdateFunctionUrlConfig{}, middleware.After)
 }
 
 func validateAllowedPublishers(v *types.AllowedPublishers) error {
@@ -1581,24 +1461,6 @@ func validateOpCreateFunctionInput(v *CreateFunctionInput) error {
 	}
 }
 
-func validateOpCreateFunctionUrlConfigInput(v *CreateFunctionUrlConfigInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "CreateFunctionUrlConfigInput"}
-	if v.FunctionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
-	}
-	if len(v.AuthorizationType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("AuthorizationType"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateOpDeleteAliasInput(v *DeleteAliasInput) error {
 	if v == nil {
 		return nil
@@ -1697,21 +1559,6 @@ func validateOpDeleteFunctionInput(v *DeleteFunctionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteFunctionInput"}
-	if v.FunctionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpDeleteFunctionUrlConfigInput(v *DeleteFunctionUrlConfigInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DeleteFunctionUrlConfigInput"}
 	if v.FunctionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
 	}
@@ -1878,21 +1725,6 @@ func validateOpGetFunctionInput(v *GetFunctionInput) error {
 	}
 }
 
-func validateOpGetFunctionUrlConfigInput(v *GetFunctionUrlConfigInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "GetFunctionUrlConfigInput"}
-	if v.FunctionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateOpGetLayerVersionByArnInput(v *GetLayerVersionByArnInput) error {
 	if v == nil {
 		return nil
@@ -2041,21 +1873,6 @@ func validateOpListFunctionsByCodeSigningConfigInput(v *ListFunctionsByCodeSigni
 	invalidParams := smithy.InvalidParamsError{Context: "ListFunctionsByCodeSigningConfigInput"}
 	if v.CodeSigningConfigArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CodeSigningConfigArn"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpListFunctionUrlConfigsInput(v *ListFunctionUrlConfigsInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "ListFunctionUrlConfigsInput"}
-	if v.FunctionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2394,21 +2211,6 @@ func validateOpUpdateFunctionEventInvokeConfigInput(v *UpdateFunctionEventInvoke
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateFunctionEventInvokeConfigInput"}
-	if v.FunctionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpUpdateFunctionUrlConfigInput(v *UpdateFunctionUrlConfigInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "UpdateFunctionUrlConfigInput"}
 	if v.FunctionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
 	}

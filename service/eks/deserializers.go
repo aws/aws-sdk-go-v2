@@ -4325,8 +4325,14 @@ func awsRestjson1_deserializeOpErrorRegisterCluster(response *smithyhttp.Respons
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsRestjson1_deserializeErrorInvalidParameterException(response, errorBody)
 
+	case strings.EqualFold("ResourceInUseException", errorCode):
+		return awsRestjson1_deserializeErrorResourceInUseException(response, errorBody)
+
 	case strings.EqualFold("ResourceLimitExceededException", errorCode):
 		return awsRestjson1_deserializeErrorResourceLimitExceededException(response, errorBody)
+
+	case strings.EqualFold("ResourcePropagationDelayException", errorCode):
+		return awsRestjson1_deserializeErrorResourcePropagationDelayException(response, errorBody)
 
 	case strings.EqualFold("ServerException", errorCode):
 		return awsRestjson1_deserializeErrorServerException(response, errorBody)
@@ -5670,6 +5676,42 @@ func awsRestjson1_deserializeErrorResourceNotFoundException(response *smithyhttp
 	}
 
 	err := awsRestjson1_deserializeDocumentResourceNotFoundException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+
+	return output
+}
+
+func awsRestjson1_deserializeErrorResourcePropagationDelayException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.ResourcePropagationDelayException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	err := awsRestjson1_deserializeDocumentResourcePropagationDelayException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -8806,6 +8848,46 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.NodegroupName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentResourcePropagationDelayException(v **types.ResourcePropagationDelayException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ResourcePropagationDelayException
+	if *v == nil {
+		sv = &types.ResourcePropagationDelayException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:

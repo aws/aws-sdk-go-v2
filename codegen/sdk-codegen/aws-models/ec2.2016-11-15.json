@@ -2138,6 +2138,9 @@
                     "target": "com.amazonaws.ec2#DescribeSnapshots"
                 },
                 {
+                    "target": "com.amazonaws.ec2#DescribeSnapshotTierStatus"
+                },
+                {
                     "target": "com.amazonaws.ec2#DescribeSpotDatafeedSubscription"
                 },
                 {
@@ -2468,6 +2471,9 @@
                     "target": "com.amazonaws.ec2#ImportVolume"
                 },
                 {
+                    "target": "com.amazonaws.ec2#ListSnapshotsInRecycleBin"
+                },
+                {
                     "target": "com.amazonaws.ec2#ModifyAddressAttribute"
                 },
                 {
@@ -2537,6 +2543,9 @@
                     "target": "com.amazonaws.ec2#ModifyNetworkInterfaceAttribute"
                 },
                 {
+                    "target": "com.amazonaws.ec2#ModifyPrivateDnsNameOptions"
+                },
+                {
                     "target": "com.amazonaws.ec2#ModifyReservedInstances"
                 },
                 {
@@ -2544,6 +2553,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#ModifySnapshotAttribute"
+                },
+                {
+                    "target": "com.amazonaws.ec2#ModifySnapshotTier"
                 },
                 {
                     "target": "com.amazonaws.ec2#ModifySpotFleetRequest"
@@ -2715,6 +2727,12 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#RestoreManagedPrefixListVersion"
+                },
+                {
+                    "target": "com.amazonaws.ec2#RestoreSnapshotFromRecycleBin"
+                },
+                {
+                    "target": "com.amazonaws.ec2#RestoreSnapshotTier"
                 },
                 {
                     "target": "com.amazonaws.ec2#RevokeClientVpnIngress"
@@ -3951,7 +3969,7 @@
                     "target": "com.amazonaws.ec2#SubnetIpv6CidrBlockAssociation",
                     "traits": {
                         "aws.protocols#ec2QueryName": "Ipv6CidrBlockAssociation",
-                        "smithy.api#documentation": "<p>Information about the IPv6 CIDR block association.</p>",
+                        "smithy.api#documentation": "<p>Information about the IPv6 association.</p>",
                         "smithy.api#xmlName": "ipv6CidrBlockAssociation"
                     }
                 },
@@ -4932,7 +4950,7 @@
                 "target": "com.amazonaws.ec2#AuthorizeSecurityGroupEgressResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>[VPC only] Adds the specified outbound (egress) rules to a security group for use with a VPC.</p>\n         <p>An outbound rule permits instances to send traffic to the specified IPv4 or IPv6 CIDR address \n      ranges, or to the instances that are associated with the specified destination security groups.</p>\n         <p>You specify a protocol for each rule (for example, TCP). \n       For the TCP and UDP protocols, you must also specify the destination port or port range. \n       For the ICMP protocol, you must also specify the ICMP type and code. \n       You can use -1 for the type or code to mean all types or all codes.</p>\n         <p>Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur.</p>\n         <p>For information about VPC security group quotas, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html\">Amazon VPC quotas</a>.</p>"
+                "smithy.api#documentation": "<p>[VPC only] Adds the specified outbound (egress) rules to a security group for use with a VPC.</p>\n         <p>An outbound rule permits instances to send traffic to the specified IPv4 or IPv6 CIDR address \n      ranges, or to the instances that are associated with the specified source security groups.</p>\n         <p>You specify a protocol for each rule (for example, TCP). \n       For the TCP and UDP protocols, you must also specify the destination port or port range. \n       For the ICMP protocol, you must also specify the ICMP type and code. \n       You can use -1 for the type or code to mean all types or all codes.</p>\n         <p>Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur.</p>\n         <p>For information about VPC security group quotas, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html\">Amazon VPC quotas</a>.</p>"
             }
         },
         "com.amazonaws.ec2#AuthorizeSecurityGroupEgressRequest": {
@@ -10011,6 +10029,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
                     }
+                },
+                "Ipv6Native": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to create an IPv6 only subnet. If you already have a default subnet\n            for this Availability Zone, you must delete it before you can create an IPv6 only subnet.</p>"
+                    }
                 }
             }
         },
@@ -12232,7 +12256,10 @@
                     }
                 },
                 "CoreNetworkArn": {
-                    "target": "com.amazonaws.ec2#CoreNetworkArn"
+                    "target": "com.amazonaws.ec2#CoreNetworkArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the core network.</p>"
+                    }
                 }
             }
         },
@@ -12721,14 +12748,13 @@
                 "CidrBlock": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IPv4 network range for the subnet, in CIDR notation. For example, <code>10.0.0.0/24</code>. We modify the specified CIDR block to its canonical form; for example, if you specify <code>100.68.0.18/18</code>, we modify it to <code>100.68.0.0/18</code>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The IPv4 network range for the subnet, in CIDR notation. For example, <code>10.0.0.0/24</code>. \n           We modify the specified CIDR block to its canonical form; for example, if you specify \n           <code>100.68.0.18/18</code>, we modify it to <code>100.68.0.0/18</code>.</p>\n         <p>This parameter is not supported for an IPv6 only subnet.</p>"
                     }
                 },
                 "Ipv6CidrBlock": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IPv6 network range for the subnet, in CIDR notation. The subnet size must use a\n            /64 prefix length.</p>"
+                        "smithy.api#documentation": "<p>The IPv6 network range for the subnet, in CIDR notation. The subnet size must use a\n            /64 prefix length.</p>\n        <p>This parameter is required for an IPv6 only subnet.</p>"
                     }
                 },
                 "OutpostArn": {
@@ -12750,6 +12776,12 @@
                         "aws.protocols#ec2QueryName": "DryRun",
                         "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
                         "smithy.api#xmlName": "dryRun"
+                    }
+                },
+                "Ipv6Native": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to create an IPv6 only subnet.</p>"
                     }
                 }
             }
@@ -16501,7 +16533,7 @@
                     "target": "com.amazonaws.ec2#TagList",
                     "traits": {
                         "aws.protocols#ec2QueryName": "Tag",
-                        "smithy.api#documentation": "<p>The tags to delete. Specify a tag key and an optional tag value to delete\n            specific tags. If you specify a tag key without a tag value, we delete any tag with this\n            key regardless of its value. If you specify a tag key with an empty string as the tag\n            value, we delete the tag only if its value is an empty string.</p>\n        <p>If you omit this parameter, we delete all user-defined tags for the specified\n            resources. We do not delete Amazon Web Services-generated tags (tags that have the <code>aws:</code>\n            prefix).</p>",
+                        "smithy.api#documentation": "<p>The tags to delete. Specify a tag key and an optional tag value to delete\n            specific tags. If you specify a tag key without a tag value, we delete any tag with this\n            key regardless of its value. If you specify a tag key with an empty string as the tag\n            value, we delete the tag only if its value is an empty string.</p>\n        <p>If you omit this parameter, we delete all user-defined tags for the specified\n            resources. We do not delete Amazon Web Services-generated tags (tags that have the <code>aws:</code>\n            prefix).</p>\n         <p>Constraints: Up to 1000 tags.</p>",
                         "smithy.api#xmlName": "tag"
                     }
                 }
@@ -21311,7 +21343,7 @@
                 "target": "com.amazonaws.ec2#DescribeInstanceStatusResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the status of the specified instances or all of your instances. By default,\n            only running instances are described, unless you specifically indicate to return the\n            status of all instances.</p>\n        <p>Instance status includes the following components:</p>\n        <ul>\n            <li>\n                <p>\n                    <b>Status checks</b> - Amazon EC2 performs status\n                    checks on running EC2 instances to identify hardware and software issues. For\n                    more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-system-instance-status-check.html\">Status checks for your instances</a> and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstances.html\">Troubleshooting\n                        instances with failed status checks</a> in the <i>Amazon EC2 User Guide</i>.</p>\n            </li>\n            <li>\n                <p>\n                    <b>Scheduled events</b> - Amazon EC2 can schedule\n                    events (such as reboot, stop, or terminate) for your instances related to\n                    hardware issues, software updates, or system maintenance. For more information,\n                    see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-instances-status-check_sched.html\">Scheduled events for your instances</a> in the <i>Amazon EC2 User Guide</i>.</p>\n            </li>\n            <li>\n                <p>\n                    <b>Instance state</b> - You can manage your instances\n                    from the moment you launch them through their termination. For more information,\n                    see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html\">Instance\n                        lifecycle</a> in the <i>Amazon EC2 User Guide</i>.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Describes the status of the specified instances or all of your instances. By default,\n            only running instances are described, unless you specifically indicate to return the\n            status of all instances.</p>\n        <p>Instance status includes the following components:</p>\n        <ul>\n            <li>\n                <p>\n                    <b>Status checks</b> - Amazon EC2 performs status\n                    checks on running EC2 instances to identify hardware and software issues. For\n                    more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-system-instance-status-check.html\">Status checks for your instances</a> and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstances.html\">Troubleshoot\n                        instances with failed status checks</a> in the <i>Amazon EC2 User\n                        Guide</i>.</p>\n            </li>\n            <li>\n                <p>\n                    <b>Scheduled events</b> - Amazon EC2 can schedule\n                    events (such as reboot, stop, or terminate) for your instances related to\n                    hardware issues, software updates, or system maintenance. For more information,\n                    see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-instances-status-check_sched.html\">Scheduled events for your instances</a> in the <i>Amazon EC2 User Guide</i>.</p>\n            </li>\n            <li>\n                <p>\n                    <b>Instance state</b> - You can manage your instances\n                    from the moment you launch them through their termination. For more information,\n                    see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html\">Instance\n                        lifecycle</a> in the <i>Amazon EC2 User Guide</i>.</p>\n            </li>\n         </ul>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -24955,6 +24987,81 @@
                 }
             }
         },
+        "com.amazonaws.ec2#DescribeSnapshotTierStatus": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#DescribeSnapshotTierStatusRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#DescribeSnapshotTierStatusResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the storage tier status of one or more Amazon EBS snapshots.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "SnapshotTierStatuses",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.ec2#DescribeSnapshotTierStatusMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.ec2#DescribeSnapshotTierStatusRequest": {
+            "type": "structure",
+            "members": {
+                "Filters": {
+                    "target": "com.amazonaws.ec2#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>snapshot-id</code> - The snapshot ID.</p>\n            </li>\n            <li>\n               <p>\n                  <code>volume-id</code> - The ID of the volume the snapshot is for.</p>\n            </li>\n            <li>\n               <p>\n                  <code>last-tiering-operation</code> - The state of the last archive or restore action. (<code>archiving</code> | <code>archival_error</code> |\n          <code>archival_complete</code> | <code>restoring</code> | <code>restore_error</code> | <code>restore_complete</code>)</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "Filter"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ec2#DescribeSnapshotTierStatusMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call.\n\tTo retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#DescribeSnapshotTierStatusResult": {
+            "type": "structure",
+            "members": {
+                "SnapshotTierStatuses": {
+                    "target": "com.amazonaws.ec2#snapshotTierStatusSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "SnapshotTierStatusSet",
+                        "smithy.api#documentation": "<p>Information about the snapshot's storage tier.</p>",
+                        "smithy.api#xmlName": "snapshotTierStatusSet"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NextToken",
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+                        "smithy.api#xmlName": "nextToken"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ec2#DescribeSnapshots": {
             "type": "operation",
             "input": {
@@ -25006,7 +25113,7 @@
                 "Filters": {
                     "target": "com.amazonaws.ec2#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>description</code> - A description of the snapshot.</p>\n            </li>\n            <li>\n               <p>\n                  <code>encrypted</code> - Indicates whether the snapshot is encrypted\n            (<code>true</code> | <code>false</code>)</p>\n            </li>\n            <li>\n               <p>\n                  <code>owner-alias</code> - The owner alias, from an Amazon-maintained list  \n          (<code>amazon</code>). \n          This is not the user-configured Amazon Web Services account alias set using the IAM console.\n          We recommend that you use the related parameter instead of this filter.</p>\n            </li>\n            <li>\n               <p>\n                  <code>owner-id</code> - The Amazon Web Services account ID of the owner. We recommend that \n          you use the related parameter instead of this filter.</p>\n            </li>\n            <li>\n               <p>\n                  <code>progress</code> - The progress of the snapshot, as a percentage (for example,\n          80%).</p>\n            </li>\n            <li>\n               <p>\n                  <code>snapshot-id</code> - The snapshot ID.</p>\n            </li>\n            <li>\n               <p>\n                  <code>start-time</code> - The time stamp when the snapshot was initiated.</p>\n            </li>\n            <li>\n               <p>\n                  <code>status</code> - The status of the snapshot (<code>pending</code> |\n            <code>completed</code> | <code>error</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>volume-id</code> - The ID of the volume the snapshot is for.</p>\n            </li>\n            <li>\n               <p>\n                  <code>volume-size</code> - The size of the volume, in GiB.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>description</code> - A description of the snapshot.</p>\n            </li>\n            <li>\n               <p>\n                  <code>encrypted</code> - Indicates whether the snapshot is encrypted\n            (<code>true</code> | <code>false</code>)</p>\n            </li>\n            <li>\n               <p>\n                  <code>owner-alias</code> - The owner alias, from an Amazon-maintained list  \n          (<code>amazon</code>). \n          This is not the user-configured Amazon Web Services account alias set using the IAM console.\n          We recommend that you use the related parameter instead of this filter.</p>\n            </li>\n            <li>\n               <p>\n                  <code>owner-id</code> - The Amazon Web Services account ID of the owner. We recommend that \n          you use the related parameter instead of this filter.</p>\n            </li>\n            <li>\n               <p>\n                  <code>progress</code> - The progress of the snapshot, as a percentage (for example,\n          80%).</p>\n            </li>\n            <li>\n               <p>\n                  <code>snapshot-id</code> - The snapshot ID.</p>\n            </li>\n            <li>\n               <p>\n                  <code>start-time</code> - The time stamp when the snapshot was initiated.</p>\n            </li>\n            <li>\n               <p>\n                  <code>status</code> - The status of the snapshot (<code>pending</code> |\n            <code>completed</code> | <code>error</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>storage-tier</code> - The storage tier of the snapshot (<code>archive</code> |\n          <code>standard</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>volume-id</code> - The ID of the volume the snapshot is for.</p>\n            </li>\n            <li>\n               <p>\n                  <code>volume-size</code> - The size of the volume, in GiB.</p>\n            </li>\n         </ul>",
                         "smithy.api#xmlName": "Filter"
                     }
                 },
@@ -25922,7 +26029,7 @@
                 "Filters": {
                     "target": "com.amazonaws.ec2#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more filters.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>availability-zone</code> - The Availability Zone for the subnet. You can also use\n                    <code>availabilityZone</code> as the filter name.</p>\n            </li>\n            <li>\n                <p>\n                  <code>availability-zone-id</code> - The ID of the Availability Zone for the subnet.\n                    You can also use <code>availabilityZoneId</code> as the filter name.</p>\n            </li>\n            <li>\n                <p>\n                  <code>available-ip-address-count</code> - The number of IPv4 addresses in the\n                    subnet that are available.</p>\n            </li>\n            <li>\n                <p>\n                  <code>cidr-block</code> - The IPv4 CIDR block of the subnet. The CIDR block you\n                    specify must exactly match the subnet's CIDR block for information to be\n                    returned for the subnet. You can also use <code>cidr</code> or\n                    <code>cidrBlock</code> as the filter names.</p>\n            </li>\n            <li>\n                <p>\n                  <code>default-for-az</code> - Indicates whether this is the default subnet for the\n                    Availability Zone. You can also use <code>defaultForAz</code> as the filter name.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ipv6-cidr-block-association.ipv6-cidr-block</code> - An IPv6 CIDR\n                    block associated with the subnet.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ipv6-cidr-block-association.association-id</code> - An association ID\n                    for an IPv6 CIDR block associated with the subnet.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ipv6-cidr-block-association.state</code> - The state of an IPv6 CIDR\n                    block associated with the subnet.</p>\n            </li>\n            <li>\n                <p>\n                  <code>outpost-arn</code> - The Amazon Resource Name (ARN) of the Outpost.</p>\n            </li>\n            <li>\n                <p>\n                  <code>owner-id</code> - The ID of the Amazon Web Services account that owns the subnet.</p>\n            </li>\n            <li>\n                <p>\n                  <code>state</code> - The state of the subnet (<code>pending</code> | <code>available</code>).</p>\n            </li>\n            <li>\n                <p>\n                  <code>subnet-arn</code> - The Amazon Resource Name (ARN) of the subnet.</p>\n            </li>\n            <li>\n                <p>\n                  <code>subnet-id</code> - The ID of the subnet.</p>\n            </li>\n            <li>\n                <p>\n                  <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n            </li>\n            <li>\n                <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p>\n            </li>\n            <li>\n                <p>\n                  <code>vpc-id</code> - The ID of the VPC for the subnet.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>One or more filters.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>availability-zone</code> - The Availability Zone for the subnet. You can also use\n                    <code>availabilityZone</code> as the filter name.</p>\n            </li>\n            <li>\n                <p>\n                  <code>availability-zone-id</code> - The ID of the Availability Zone for the subnet.\n                    You can also use <code>availabilityZoneId</code> as the filter name.</p>\n            </li>\n            <li>\n                <p>\n                  <code>available-ip-address-count</code> - The number of IPv4 addresses in the\n                    subnet that are available.</p>\n            </li>\n            <li>\n                <p>\n                  <code>cidr-block</code> - The IPv4 CIDR block of the subnet. The CIDR block you\n                    specify must exactly match the subnet's CIDR block for information to be\n                    returned for the subnet. You can also use <code>cidr</code> or\n                    <code>cidrBlock</code> as the filter names.</p>\n            </li>\n            <li>\n                <p>\n                  <code>default-for-az</code> - Indicates whether this is the default subnet for the\n                    Availability Zone (<code>true</code> | <code>false</code>). You can also use \n                    <code>defaultForAz</code> as the filter name.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ipv6-cidr-block-association.ipv6-cidr-block</code> - An IPv6 CIDR\n                    block associated with the subnet.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ipv6-cidr-block-association.association-id</code> - An association ID\n                    for an IPv6 CIDR block associated with the subnet.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ipv6-cidr-block-association.state</code> - The state of an IPv6 CIDR\n                    block associated with the subnet.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ipv6-native</code> - Indicates whether this is an IPv6 only subnet (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n                <p>\n                  <code>outpost-arn</code> - The Amazon Resource Name (ARN) of the Outpost.</p>\n            </li>\n            <li>\n                <p>\n                  <code>owner-id</code> - The ID of the Amazon Web Services account that owns the subnet.</p>\n            </li>\n            <li>\n                <p>\n                  <code>state</code> - The state of the subnet (<code>pending</code> | <code>available</code>).</p>\n            </li>\n            <li>\n                <p>\n                  <code>subnet-arn</code> - The Amazon Resource Name (ARN) of the subnet.</p>\n            </li>\n            <li>\n                <p>\n                  <code>subnet-id</code> - The ID of the subnet.</p>\n            </li>\n            <li>\n                <p>\n                  <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n            </li>\n            <li>\n                <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p>\n            </li>\n            <li>\n                <p>\n                  <code>vpc-id</code> - The ID of the VPC for the subnet.</p>\n            </li>\n         </ul>",
                         "smithy.api#xmlName": "Filter"
                     }
                 },
@@ -33699,7 +33806,7 @@
                     "target": "com.amazonaws.ec2#Integer",
                     "traits": {
                         "aws.protocols#ec2QueryName": "TerminationDelay",
-                        "smithy.api#documentation": "<p>The amount of time (in seconds) that Amazon EC2 waits before terminating the old Spot\n         Instance after launching a new replacement Spot Instance.</p>",
+                        "smithy.api#documentation": "<p>The amount of time (in seconds) that Amazon EC2 waits before terminating the old Spot\n         Instance after launching a new replacement Spot Instance.</p>\n         <p>Valid only when <code>replacementStrategy</code> is set to <code>launch-before-terminate</code>.</p>\n         <p>Valid values: Minimum value of <code>120</code> seconds. Maximum value of <code>7200</code> seconds.</p>",
                         "smithy.api#xmlName": "terminationDelay"
                     }
                 }
@@ -33720,7 +33827,7 @@
                 "TerminationDelay": {
                     "target": "com.amazonaws.ec2#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of time (in seconds) that Amazon EC2 waits before terminating the old Spot\n         Instance after launching a new replacement Spot Instance.</p>"
+                        "smithy.api#documentation": "<p>The amount of time (in seconds) that Amazon EC2 waits before terminating the old Spot\n         Instance after launching a new replacement Spot Instance.</p>\n         <p>Valid only when <code>ReplacementStrategy</code> is set to <code>launch-before-terminate</code>.</p>\n         <p>Valid values: Minimum value of <code>120</code> seconds. Maximum value of <code>7200</code> seconds.</p>"
                     }
                 }
             },
@@ -37141,6 +37248,21 @@
                 ]
             }
         },
+        "com.amazonaws.ec2#HostnameType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ip-name",
+                        "name": "ip_name"
+                    },
+                    {
+                        "value": "resource-name",
+                        "name": "resource_name"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.ec2#Hour": {
             "type": "integer",
             "traits": {
@@ -39588,6 +39710,22 @@
                         "aws.protocols#ec2QueryName": "UsageOperationUpdateTime",
                         "smithy.api#documentation": "<p>The time that the usage operation was last updated.</p>",
                         "smithy.api#xmlName": "usageOperationUpdateTime"
+                    }
+                },
+                "PrivateDnsNameOptions": {
+                    "target": "com.amazonaws.ec2#PrivateDnsNameOptionsResponse",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "PrivateDnsNameOptions",
+                        "smithy.api#documentation": "<p>The options for the instance hostname.</p>",
+                        "smithy.api#xmlName": "privateDnsNameOptions"
+                    }
+                },
+                "Ipv6Address": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Ipv6Address",
+                        "smithy.api#documentation": "<p>The IPv6 address assigned to the instance.</p>",
+                        "smithy.api#xmlName": "ipv6Address"
                     }
                 }
             },
@@ -43664,6 +43802,46 @@
                         "name": "m6gd_16xlarge"
                     },
                     {
+                        "value": "m6a.large",
+                        "name": "m6a_large"
+                    },
+                    {
+                        "value": "m6a.xlarge",
+                        "name": "m6a_xlarge"
+                    },
+                    {
+                        "value": "m6a.2xlarge",
+                        "name": "m6a_2xlarge"
+                    },
+                    {
+                        "value": "m6a.4xlarge",
+                        "name": "m6a_4xlarge"
+                    },
+                    {
+                        "value": "m6a.8xlarge",
+                        "name": "m6a_8xlarge"
+                    },
+                    {
+                        "value": "m6a.12xlarge",
+                        "name": "m6a_12xlarge"
+                    },
+                    {
+                        "value": "m6a.16xlarge",
+                        "name": "m6a_16xlarge"
+                    },
+                    {
+                        "value": "m6a.24xlarge",
+                        "name": "m6a_24xlarge"
+                    },
+                    {
+                        "value": "m6a.32xlarge",
+                        "name": "m6a_32xlarge"
+                    },
+                    {
+                        "value": "m6a.48xlarge",
+                        "name": "m6a_48xlarge"
+                    },
+                    {
                         "value": "m6i.large",
                         "name": "m6i_large"
                     },
@@ -43750,6 +43928,30 @@
                     {
                         "value": "vt1.24xlarge",
                         "name": "vt1_24xlarge"
+                    },
+                    {
+                        "value": "g5g.xlarge",
+                        "name": "g5g_xlarge"
+                    },
+                    {
+                        "value": "g5g.2xlarge",
+                        "name": "g5g_2xlarge"
+                    },
+                    {
+                        "value": "g5g.4xlarge",
+                        "name": "g5g_4xlarge"
+                    },
+                    {
+                        "value": "g5g.8xlarge",
+                        "name": "g5g_8xlarge"
+                    },
+                    {
+                        "value": "g5g.16xlarge",
+                        "name": "g5g_16xlarge"
+                    },
+                    {
+                        "value": "g5g.metal",
+                        "name": "g5g_metal"
                     },
                     {
                         "value": "g5.xlarge",
@@ -46543,6 +46745,64 @@
                 "smithy.api#documentation": "<p>Describes the placement of an instance.</p>"
             }
         },
+        "com.amazonaws.ec2#LaunchTemplatePrivateDnsNameOptions": {
+            "type": "structure",
+            "members": {
+                "HostnameType": {
+                    "target": "com.amazonaws.ec2#HostnameType",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "HostnameType",
+                        "smithy.api#documentation": "<p>The type of hostname to assign to an instance.</p>",
+                        "smithy.api#xmlName": "hostnameType"
+                    }
+                },
+                "EnableResourceNameDnsARecord": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "EnableResourceNameDnsARecord",
+                        "smithy.api#documentation": "<p>Indicates whether to respond to DNS queries for instance hostnames with DNS A records.</p>",
+                        "smithy.api#xmlName": "enableResourceNameDnsARecord"
+                    }
+                },
+                "EnableResourceNameDnsAAAARecord": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "EnableResourceNameDnsAAAARecord",
+                        "smithy.api#documentation": "<p>Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records.</p>",
+                        "smithy.api#xmlName": "enableResourceNameDnsAAAARecord"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the options for instance hostnames.</p>"
+            }
+        },
+        "com.amazonaws.ec2#LaunchTemplatePrivateDnsNameOptionsRequest": {
+            "type": "structure",
+            "members": {
+                "HostnameType": {
+                    "target": "com.amazonaws.ec2#HostnameType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of hostname for Amazon EC2 instances. For IPv4 only subnets, an instance DNS name must \n            be based on the instance IPv4 address. For IPv6 native subnets, an instance DNS name must \n            be based on the instance ID. For dual-stack subnets, you can specify whether DNS names use \n            the instance IPv4 address or the instance ID.</p>"
+                    }
+                },
+                "EnableResourceNameDnsARecord": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to respond to DNS queries for instance hostnames with DNS A records.</p>"
+                    }
+                },
+                "EnableResourceNameDnsAAAARecord": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the options for instance hostnames.</p>"
+            }
+        },
         "com.amazonaws.ec2#LaunchTemplateSet": {
             "type": "list",
             "member": {
@@ -46883,6 +47143,85 @@
                 "target": "com.amazonaws.ec2#LicenseConfigurationRequest",
                 "traits": {
                     "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#ListSnapshotsInRecycleBin": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#ListSnapshotsInRecycleBinRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#ListSnapshotsInRecycleBinResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Lists one or more snapshots that are currently in the Recycle Bin.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Snapshots",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.ec2#ListSnapshotsInRecycleBinMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 5,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.ec2#ListSnapshotsInRecycleBinRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.ec2#ListSnapshotsInRecycleBinMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call.\n\tTo retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                },
+                "SnapshotIds": {
+                    "target": "com.amazonaws.ec2#SnapshotIdStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the snapshots to list. Omit this parameter to list all of the \n      snapshots that are in the Recycle Bin.</p>",
+                        "smithy.api#xmlName": "SnapshotId"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#ListSnapshotsInRecycleBinResult": {
+            "type": "structure",
+            "members": {
+                "Snapshots": {
+                    "target": "com.amazonaws.ec2#SnapshotRecycleBinInfoList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "SnapshotSet",
+                        "smithy.api#documentation": "<p>Information about the snapshots.</p>",
+                        "smithy.api#xmlName": "snapshotSet"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NextToken",
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+                        "smithy.api#xmlName": "nextToken"
+                    }
                 }
             }
         },
@@ -48898,7 +49237,7 @@
                 "target": "com.amazonaws.ec2#ModifyInstanceAttributeRequest"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Modifies the specified attribute of the specified instance. You can specify only one\n            attribute at a time.</p>\n        <p>\n            <b>Note: </b>Using this action to change the security groups\n            associated with an elastic network interface (ENI) attached to an instance in a VPC can\n            result in an error if the instance has more than one ENI. To change the security groups\n            associated with an ENI attached to an instance that has multiple ENIs, we recommend that\n            you use the <a>ModifyNetworkInterfaceAttribute</a> action.</p>\n        <p>To modify some attributes, the instance must be stopped. For more information, see\n                <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_ChangingAttributesWhileInstanceStopped.html\">Modifying attributes of a stopped instance</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Modifies the specified attribute of the specified instance. You can specify only one\n            attribute at a time.</p>\n        <p>\n            <b>Note: </b>Using this action to change the security groups\n            associated with an elastic network interface (ENI) attached to an instance in a VPC can\n            result in an error if the instance has more than one ENI. To change the security groups\n            associated with an ENI attached to an instance that has multiple ENIs, we recommend that\n            you use the <a>ModifyNetworkInterfaceAttribute</a> action.</p>\n        <p>To modify some attributes, the instance must be stopped. For more information, see\n                <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_ChangingAttributesWhileInstanceStopped.html\">Modify a stopped instance</a> in the <i>Amazon EC2 User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#ModifyInstanceAttributeRequest": {
@@ -48922,7 +49261,7 @@
                     "target": "com.amazonaws.ec2#InstanceBlockDeviceMappingSpecificationList",
                     "traits": {
                         "aws.protocols#ec2QueryName": "BlockDeviceMapping",
-                        "smithy.api#documentation": "<p>Modifies the <code>DeleteOnTermination</code> attribute for volumes that are currently\n            attached. The volume must be owned by the caller. If no value is specified for\n                <code>DeleteOnTermination</code>, the default is <code>true</code> and the volume is\n            deleted when the instance is terminated.</p>\n        <p>To add instance store volumes to an Amazon EBS-backed instance, you must add them when\n            you launch the instance. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html#Using_OverridingAMIBDM\">Updating the block device mapping when launching an instance</a> in the\n            <i>Amazon EC2 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>Modifies the <code>DeleteOnTermination</code> attribute for volumes that are currently\n            attached. The volume must be owned by the caller. If no value is specified for\n                <code>DeleteOnTermination</code>, the default is <code>true</code> and the volume is\n            deleted when the instance is terminated.</p>\n        <p>To add instance store volumes to an Amazon EBS-backed instance, you must add them when\n            you launch the instance. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html#Using_OverridingAMIBDM\">Update the block device mapping when launching an instance</a> in the\n            <i>Amazon EC2 User Guide</i>.</p>",
                         "smithy.api#xmlName": "blockDeviceMapping"
                     }
                 },
@@ -49295,19 +49634,19 @@
                 "HttpEndpoint": {
                     "target": "com.amazonaws.ec2#InstanceMetadataEndpointState",
                     "traits": {
-                        "smithy.api#documentation": "<p>This parameter enables or disables the HTTP metadata endpoint on your instances. If\n            the parameter is not specified, the existing state is maintained.</p>\n        <note>\n            <p>If you specify a value of <code>disabled</code>, you will not be able to access your\n                instance metadata.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>Enables or disables the HTTP metadata endpoint on your instances. If\n            the parameter is not specified, the existing state is maintained.</p>\n        <p>If you specify a value of <code>disabled</code>, you cannot access your\n            instance metadata.</p>"
                     }
                 },
                 "DryRun": {
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n            and provides an error response. If you have the required permissions, the error response is \n            <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
                     }
                 },
                 "HttpProtocolIpv6": {
                     "target": "com.amazonaws.ec2#InstanceMetadataProtocolState",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enables or disables the IPv6 endpoint for the instance metadata service.</p>"
+                        "smithy.api#documentation": "<p>Enables or disables the IPv6 endpoint for the instance metadata service. This setting \n            applies only if you have enabled the HTTP metadata endpoint.</p>"
                     }
                 }
             }
@@ -49390,7 +49729,7 @@
                 "PartitionNumber": {
                     "target": "com.amazonaws.ec2#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>Reserved for future use.</p>"
+                        "smithy.api#documentation": "<p>The number of the partition in which to place the instance. Valid only if the\n            placement group strategy is set to <code>partition</code>.</p>"
                     }
                 },
                 "HostResourceGroupArn": {
@@ -49615,6 +49954,66 @@
                 "smithy.api#documentation": "<p>Contains the parameters for ModifyNetworkInterfaceAttribute.</p>"
             }
         },
+        "com.amazonaws.ec2#ModifyPrivateDnsNameOptions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#ModifyPrivateDnsNameOptionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#ModifyPrivateDnsNameOptionsResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies the options for instance hostnames for the specified instance.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ModifyPrivateDnsNameOptionsRequest": {
+            "type": "structure",
+            "members": {
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n            and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n            Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                },
+                "InstanceId": {
+                    "target": "com.amazonaws.ec2#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the instance.</p>"
+                    }
+                },
+                "PrivateDnsHostnameType": {
+                    "target": "com.amazonaws.ec2#HostnameType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of hostname for EC2 instances. For IPv4 only subnets, an instance DNS name must be \n            based on the instance IPv4 address. For IPv6 only subnets, an instance DNS name must be based \n            on the instance ID. For dual-stack subnets, you can specify whether DNS names use the instance\n            IPv4 address or the instance ID.</p>"
+                    }
+                },
+                "EnableResourceNameDnsARecord": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to respond to DNS queries for instance hostnames with DNS A records.</p>"
+                    }
+                },
+                "EnableResourceNameDnsAAAARecord": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#ModifyPrivateDnsNameOptionsResult": {
+            "type": "structure",
+            "members": {
+                "Return": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Return",
+                        "smithy.api#documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, it returns an error.</p>",
+                        "smithy.api#xmlName": "return"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ec2#ModifyReservedInstances": {
             "type": "operation",
             "input": {
@@ -49787,6 +50186,63 @@
                 }
             }
         },
+        "com.amazonaws.ec2#ModifySnapshotTier": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#ModifySnapshotTierRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#ModifySnapshotTierResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Archives an Amazon EBS snapshot. When you archive a snapshot, it is converted to a full \n      snapshot that includes all of the blocks of data that were written to the volume at the \n      time the snapshot was created, and moved from the standard tier to the archive \n      tier. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-archive.html\">Archive Amazon EBS snapshots</a> \n      in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ModifySnapshotTierRequest": {
+            "type": "structure",
+            "members": {
+                "SnapshotId": {
+                    "target": "com.amazonaws.ec2#SnapshotId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the snapshot.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StorageTier": {
+                    "target": "com.amazonaws.ec2#TargetStorageTier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the storage tier. You must specify <code>archive</code>.</p>"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#ModifySnapshotTierResult": {
+            "type": "structure",
+            "members": {
+                "SnapshotId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "SnapshotId",
+                        "smithy.api#documentation": "<p>The ID of the snapshot.</p>",
+                        "smithy.api#xmlName": "snapshotId"
+                    }
+                },
+                "TieringStartTime": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TieringStartTime",
+                        "smithy.api#documentation": "<p>The date and time when the archive process was started.</p>",
+                        "smithy.api#xmlName": "tieringStartTime"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ec2#ModifySpotFleetRequest": {
             "type": "operation",
             "input": {
@@ -49916,6 +50372,24 @@
                     "target": "com.amazonaws.ec2#AttributeBooleanValue",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether DNS queries made to the Amazon-provided DNS Resolver in this subnet \n            should return synthetic IPv6 addresses for IPv4-only destinations.</p>"
+                    }
+                },
+                "PrivateDnsHostnameTypeOnLaunch": {
+                    "target": "com.amazonaws.ec2#HostnameType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of hostnames to assign to instances in the subnet at launch. For IPv4 only subnets, an\n            instance DNS name must be based on the instance IPv4 address. For IPv6 only subnets, an instance\n            DNS name must be based on the instance ID. For dual-stack subnets, you can specify whether DNS\n            names use the instance IPv4 address or the instance ID.</p>"
+                    }
+                },
+                "EnableResourceNameDnsARecordOnLaunch": {
+                    "target": "com.amazonaws.ec2#AttributeBooleanValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to respond to DNS queries for instance hostnames with DNS A records.</p>"
+                    }
+                },
+                "EnableResourceNameDnsAAAARecordOnLaunch": {
+                    "target": "com.amazonaws.ec2#AttributeBooleanValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records.</p>"
                     }
                 }
             }
@@ -51356,7 +51830,7 @@
                 "target": "com.amazonaws.ec2#MonitorInstancesResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Enables detailed monitoring for a running instance. Otherwise, basic monitoring is\n            enabled. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-cloudwatch.html\">Monitoring your instances and\n                volumes</a> in the <i>Amazon EC2 User Guide</i>.</p>\n        <p>To disable detailed monitoring, see .</p>"
+                "smithy.api#documentation": "<p>Enables detailed monitoring for a running instance. Otherwise, basic monitoring is\n            enabled. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-cloudwatch.html\">Monitor your instances using \n                CloudWatch</a> in the <i>Amazon EC2 User Guide</i>.</p>\n        <p>To disable detailed monitoring, see .</p>"
             }
         },
         "com.amazonaws.ec2#MonitorInstancesRequest": {
@@ -52557,6 +53031,22 @@
                         "smithy.api#documentation": "<p>Indicates whether a network interface with an IPv6 address is unreachable from the \n            public internet. If the value is <code>true</code>, inbound traffic from the internet \n            is dropped and you cannot assign an elastic IP address to the network interface. The \n            network interface is reachable from peered VPCs and resources connected through a \n            transit gateway, including on-premises networks.</p>",
                         "smithy.api#xmlName": "denyAllIgwTraffic"
                     }
+                },
+                "Ipv6Native": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Ipv6Native",
+                        "smithy.api#documentation": "<p>Indicates whether this is an IPv6 only network interface.</p>",
+                        "smithy.api#xmlName": "ipv6Native"
+                    }
+                },
+                "Ipv6Address": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Ipv6Address",
+                        "smithy.api#documentation": "<p>The IPv6 globally unique address associated with the network interface.</p>",
+                        "smithy.api#xmlName": "ipv6Address"
+                    }
                 }
             },
             "traits": {
@@ -53205,7 +53695,7 @@
                     "target": "com.amazonaws.ec2#FleetOnDemandAllocationStrategy",
                     "traits": {
                         "aws.protocols#ec2QueryName": "AllocationStrategy",
-                        "smithy.api#documentation": "<p>The order of the launch template overrides to use in fulfilling On-Demand capacity. If\n         you specify <code>lowest-price</code>, EC2 Fleet uses price to determine the order, launching\n         the lowest price first. If you specify <code>prioritized</code>, EC2 Fleet uses the priority\n         that you assigned to each launch template override, launching the highest priority first.\n         If you do not specify a value, EC2 Fleet defaults to <code>lowest-price</code>.</p>",
+                        "smithy.api#documentation": "<p>The strategy that determines the order of the launch template overrides to use in\n         fulfilling On-Demand capacity.</p>\n         <p>\n            <code>lowest-price</code> - EC2 Fleet uses price to determine the order, launching the lowest\n         price first.</p>\n         <p>\n            <code>prioritized</code> - EC2 Fleet uses the priority that you assigned to each launch\n         template override, launching the highest priority first.</p>\n         <p>Default: <code>lowest-price</code>\n         </p>",
                         "smithy.api#xmlName": "allocationStrategy"
                     }
                 },
@@ -53213,7 +53703,7 @@
                     "target": "com.amazonaws.ec2#CapacityReservationOptions",
                     "traits": {
                         "aws.protocols#ec2QueryName": "CapacityReservationOptions",
-                        "smithy.api#documentation": "<p>The strategy for using unused Capacity Reservations for fulfilling On-Demand capacity.\n         Supported only for fleets of type <code>instant</code>.</p>",
+                        "smithy.api#documentation": "<p>The strategy for using unused Capacity Reservations for fulfilling On-Demand\n         capacity.</p>\n         <p>Supported only for fleets of type <code>instant</code>.</p>",
                         "smithy.api#xmlName": "capacityReservationOptions"
                     }
                 },
@@ -53221,7 +53711,7 @@
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
                         "aws.protocols#ec2QueryName": "SingleInstanceType",
-                        "smithy.api#documentation": "<p>Indicates that the fleet uses a single instance type to launch all On-Demand Instances in the fleet.\n         Supported only for fleets of type <code>instant</code>.</p>",
+                        "smithy.api#documentation": "<p>Indicates that the fleet uses a single instance type to launch all On-Demand Instances in the\n         fleet.</p>\n         <p>Supported only for fleets of type <code>instant</code>.</p>",
                         "smithy.api#xmlName": "singleInstanceType"
                     }
                 },
@@ -53229,7 +53719,7 @@
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
                         "aws.protocols#ec2QueryName": "SingleAvailabilityZone",
-                        "smithy.api#documentation": "<p>Indicates that the fleet launches all On-Demand Instances into a single Availability Zone. Supported\n         only for fleets of type <code>instant</code>.</p>",
+                        "smithy.api#documentation": "<p>Indicates that the fleet launches all On-Demand Instances into a single Availability Zone.</p>\n         <p>Supported only for fleets of type <code>instant</code>.</p>",
                         "smithy.api#xmlName": "singleAvailabilityZone"
                     }
                 },
@@ -53237,7 +53727,7 @@
                     "target": "com.amazonaws.ec2#Integer",
                     "traits": {
                         "aws.protocols#ec2QueryName": "MinTargetCapacity",
-                        "smithy.api#documentation": "<p>The minimum target capacity for On-Demand Instances in the fleet. If the minimum target capacity is\n         not reached, the fleet launches no instances.</p>",
+                        "smithy.api#documentation": "<p>The minimum target capacity for On-Demand Instances in the fleet. If the minimum target capacity is\n         not reached, the fleet launches no instances.</p>\n         <p>Supported only for fleets of type <code>instant</code>.</p>\n         <p>At least one of the following must be specified: <code>SingleAvailabilityZone</code> |\n         <code>SingleInstanceType</code>\n         </p>",
                         "smithy.api#xmlName": "minTargetCapacity"
                     }
                 },
@@ -53260,31 +53750,31 @@
                 "AllocationStrategy": {
                     "target": "com.amazonaws.ec2#FleetOnDemandAllocationStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The order of the launch template overrides to use in fulfilling On-Demand capacity. If\n         you specify <code>lowest-price</code>, EC2 Fleet uses price to determine the order, launching\n         the lowest price first. If you specify <code>prioritized</code>, EC2 Fleet uses the priority\n         that you assigned to each launch template override, launching the highest priority first.\n         If you do not specify a value, EC2 Fleet defaults to <code>lowest-price</code>.</p>"
+                        "smithy.api#documentation": "<p>The strategy that determines the order of the launch template overrides to use in\n         fulfilling On-Demand capacity.</p>\n         <p>\n            <code>lowest-price</code> - EC2 Fleet uses price to determine the order, launching the lowest\n         price first.</p>\n         <p>\n            <code>prioritized</code> - EC2 Fleet uses the priority that you assigned to each launch\n         template override, launching the highest priority first.</p>\n         <p>Default: <code>lowest-price</code>\n         </p>"
                     }
                 },
                 "CapacityReservationOptions": {
                     "target": "com.amazonaws.ec2#CapacityReservationOptionsRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>The strategy for using unused Capacity Reservations for fulfilling On-Demand capacity.\n         Supported only for fleets of type <code>instant</code>.</p>"
+                        "smithy.api#documentation": "<p>The strategy for using unused Capacity Reservations for fulfilling On-Demand\n         capacity.</p>\n         <p>Supported only for fleets of type <code>instant</code>.</p>"
                     }
                 },
                 "SingleInstanceType": {
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates that the fleet uses a single instance type to launch all On-Demand Instances in the fleet.\n         Supported only for fleets of type <code>instant</code>.</p>"
+                        "smithy.api#documentation": "<p>Indicates that the fleet uses a single instance type to launch all On-Demand Instances in the\n         fleet.</p>\n         <p>Supported only for fleets of type <code>instant</code>.</p>"
                     }
                 },
                 "SingleAvailabilityZone": {
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates that the fleet launches all On-Demand Instances into a single Availability Zone. Supported\n         only for fleets of type <code>instant</code>.</p>"
+                        "smithy.api#documentation": "<p>Indicates that the fleet launches all On-Demand Instances into a single Availability Zone.</p>\n         <p>Supported only for fleets of type <code>instant</code>.</p>"
                     }
                 },
                 "MinTargetCapacity": {
                     "target": "com.amazonaws.ec2#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The minimum target capacity for On-Demand Instances in the fleet. If the minimum target capacity is\n         not reached, the fleet launches no instances.</p>"
+                        "smithy.api#documentation": "<p>The minimum target capacity for On-Demand Instances in the fleet. If the minimum target capacity is\n         not reached, the fleet launches no instances.</p>\n         <p>Supported only for fleets of type <code>instant</code>.</p>\n         <p>At least one of the following must be specified: <code>SingleAvailabilityZone</code> |\n         <code>SingleInstanceType</code>\n         </p>"
                     }
                 },
                 "MaxTotalPrice": {
@@ -53969,7 +54459,7 @@
                     "target": "com.amazonaws.ec2#Integer",
                     "traits": {
                         "aws.protocols#ec2QueryName": "PartitionNumber",
-                        "smithy.api#documentation": "<p>The number of the partition the instance is in. Valid only if the placement group\n            strategy is set to <code>partition</code>.</p>\n        <p>This parameter is not supported by <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet\">CreateFleet</a>.</p>",
+                        "smithy.api#documentation": "<p>The number of the partition that the instance is in. Valid only if the placement group\n            strategy is set to <code>partition</code>.</p>\n        <p>This parameter is not supported by <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet\">CreateFleet</a>.</p>",
                         "smithy.api#xmlName": "partitionNumber"
                     }
                 },
@@ -54760,6 +55250,96 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about the private DNS name for the service endpoint. For more information\n            about these parameters, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/ndpoint-services-dns-validation.html\">VPC Endpoint Service\n                Private DNS Name Verification</a> in the\n            <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#PrivateDnsNameOptionsOnLaunch": {
+            "type": "structure",
+            "members": {
+                "HostnameType": {
+                    "target": "com.amazonaws.ec2#HostnameType",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "HostnameType",
+                        "smithy.api#documentation": "<p>The type of hostname for EC2 instances. For IPv4 only subnets, an instance DNS name must be \n            based on the instance IPv4 address. For IPv6 only subnets, an instance DNS name must be based \n            on the instance ID. For dual-stack subnets, you can specify whether DNS names use the instance\n            IPv4 address or the instance ID.</p>",
+                        "smithy.api#xmlName": "hostnameType"
+                    }
+                },
+                "EnableResourceNameDnsARecord": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "EnableResourceNameDnsARecord",
+                        "smithy.api#documentation": "<p>Indicates whether to respond to DNS queries for instance hostnames with DNS A records.</p>",
+                        "smithy.api#xmlName": "enableResourceNameDnsARecord"
+                    }
+                },
+                "EnableResourceNameDnsAAAARecord": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "EnableResourceNameDnsAAAARecord",
+                        "smithy.api#documentation": "<p>Indicates whether to respond to DNS queries for instance hostname with DNS AAAA records.</p>",
+                        "smithy.api#xmlName": "enableResourceNameDnsAAAARecord"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the options for instance hostnames.</p>"
+            }
+        },
+        "com.amazonaws.ec2#PrivateDnsNameOptionsRequest": {
+            "type": "structure",
+            "members": {
+                "HostnameType": {
+                    "target": "com.amazonaws.ec2#HostnameType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of hostname for EC2 instances. For IPv4 only subnets, an instance DNS name must be \n            based on the instance IPv4 address. For IPv6 only subnets, an instance DNS name must be based \n            on the instance ID. For dual-stack subnets, you can specify whether DNS names use the instance\n            IPv4 address or the instance ID.</p>"
+                    }
+                },
+                "EnableResourceNameDnsARecord": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to respond to DNS queries for instance hostnames with DNS A records.</p>"
+                    }
+                },
+                "EnableResourceNameDnsAAAARecord": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the options for instance hostnames.</p>"
+            }
+        },
+        "com.amazonaws.ec2#PrivateDnsNameOptionsResponse": {
+            "type": "structure",
+            "members": {
+                "HostnameType": {
+                    "target": "com.amazonaws.ec2#HostnameType",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "HostnameType",
+                        "smithy.api#documentation": "<p>The type of hostname to assign to an instance.</p>",
+                        "smithy.api#xmlName": "hostnameType"
+                    }
+                },
+                "EnableResourceNameDnsARecord": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "EnableResourceNameDnsARecord",
+                        "smithy.api#documentation": "<p>Indicates whether to respond to DNS queries for instance hostnames with DNS A records.</p>",
+                        "smithy.api#xmlName": "enableResourceNameDnsARecord"
+                    }
+                },
+                "EnableResourceNameDnsAAAARecord": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "EnableResourceNameDnsAAAARecord",
+                        "smithy.api#documentation": "<p>Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records.</p>",
+                        "smithy.api#xmlName": "enableResourceNameDnsAAAARecord"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the options for instance hostnames.</p>"
             }
         },
         "com.amazonaws.ec2#PrivateIpAddressConfigSet": {
@@ -55647,7 +56227,7 @@
                 "target": "com.amazonaws.ec2#RebootInstancesRequest"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Requests a reboot of the specified instances. This operation is asynchronous; it only\n            queues a request to reboot the specified instances. The operation succeeds if the\n            instances are valid and belong to you. Requests to reboot terminated instances are\n            ignored.</p>\n        <p>If an instance does not cleanly shut down within a few minutes, Amazon EC2 performs a\n            hard reboot.</p>\n        <p>For more information about troubleshooting, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-console.html\">Getting console output and\n            rebooting instances</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Requests a reboot of the specified instances. This operation is asynchronous; it only\n            queues a request to reboot the specified instances. The operation succeeds if the\n            instances are valid and belong to you. Requests to reboot terminated instances are\n            ignored.</p>\n        <p>If an instance does not cleanly shut down within a few minutes, Amazon EC2 performs a\n            hard reboot.</p>\n        <p>For more information about troubleshooting, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-console.html\">Troubleshoot an unreachable \n            instance</a> in the <i>Amazon EC2 User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#RebootInstancesRequest": {
@@ -56926,7 +57506,10 @@
                     }
                 },
                 "CoreNetworkArn": {
-                    "target": "com.amazonaws.ec2#CoreNetworkArn"
+                    "target": "com.amazonaws.ec2#CoreNetworkArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the core network.</p>"
+                    }
                 }
             }
         },
@@ -57409,6 +57992,12 @@
                     "target": "com.amazonaws.ec2#InstanceRequirementsRequest",
                     "traits": {
                         "smithy.api#documentation": "<p>The attributes for the instance types. When you specify instance attributes, Amazon EC2 will\n         identify instance types with these attributes.</p>\n         <p>If you specify <code>InstanceRequirements</code>, you can't specify\n            <code>InstanceTypes</code>.</p>"
+                    }
+                },
+                "PrivateDnsNameOptions": {
+                    "target": "com.amazonaws.ec2#LaunchTemplatePrivateDnsNameOptionsRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The options for the instance hostname. The default values are inherited from the subnet.</p>"
                     }
                 }
             },
@@ -59516,6 +60105,14 @@
                         "smithy.api#documentation": "<p>The attributes for the instance types. When you specify instance attributes, Amazon EC2 will\n         identify instance types with these attributes.</p>\n         <p>If you specify <code>InstanceRequirements</code>, you can't specify\n         <code>InstanceTypes</code>.</p>",
                         "smithy.api#xmlName": "instanceRequirements"
                     }
+                },
+                "PrivateDnsNameOptions": {
+                    "target": "com.amazonaws.ec2#LaunchTemplatePrivateDnsNameOptions",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "PrivateDnsNameOptions",
+                        "smithy.api#documentation": "<p>The options for the instance hostname.</p>",
+                        "smithy.api#xmlName": "privateDnsNameOptions"
+                    }
                 }
             },
             "traits": {
@@ -59636,6 +60233,206 @@
                         "aws.protocols#ec2QueryName": "PrefixList",
                         "smithy.api#documentation": "<p>Information about the prefix list.</p>",
                         "smithy.api#xmlName": "prefixList"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#RestoreSnapshotFromRecycleBin": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#RestoreSnapshotFromRecycleBinRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#RestoreSnapshotFromRecycleBinResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Restores a snapshot from the Recycle Bin. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recycle-bin-working-with-snaps.html#recycle-bin-restore-snaps\">Restore \n      snapshots from the Recycle Bin</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#RestoreSnapshotFromRecycleBinRequest": {
+            "type": "structure",
+            "members": {
+                "SnapshotId": {
+                    "target": "com.amazonaws.ec2#SnapshotId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the snapshot to restore.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#RestoreSnapshotFromRecycleBinResult": {
+            "type": "structure",
+            "members": {
+                "SnapshotId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "SnapshotId",
+                        "smithy.api#documentation": "<p>The ID of the snapshot.</p>",
+                        "smithy.api#xmlName": "snapshotId"
+                    }
+                },
+                "OutpostArn": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "OutpostArn",
+                        "smithy.api#documentation": "<p>The ARN of the Outpost on which the snapshot is stored. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html\">Amazon EBS local snapshots on Outposts</a> in the \n      <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
+                        "smithy.api#xmlName": "outpostArn"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Description",
+                        "smithy.api#documentation": "<p>The description for the snapshot.</p>",
+                        "smithy.api#xmlName": "description"
+                    }
+                },
+                "Encrypted": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Encrypted",
+                        "smithy.api#documentation": "<p>Indicates whether the snapshot is encrypted.</p>",
+                        "smithy.api#xmlName": "encrypted"
+                    }
+                },
+                "OwnerId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "OwnerId",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the EBS snapshot.</p>",
+                        "smithy.api#xmlName": "ownerId"
+                    }
+                },
+                "Progress": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Progress",
+                        "smithy.api#documentation": "<p>The progress of the snapshot, as a percentage.</p>",
+                        "smithy.api#xmlName": "progress"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "StartTime",
+                        "smithy.api#documentation": "<p>The time stamp when the snapshot was initiated.</p>",
+                        "smithy.api#xmlName": "startTime"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.ec2#SnapshotState",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Status",
+                        "smithy.api#documentation": "<p>The state of the snapshot.</p>",
+                        "smithy.api#xmlName": "status"
+                    }
+                },
+                "VolumeId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "VolumeId",
+                        "smithy.api#documentation": "<p>The ID of the volume that was used to create the snapshot.</p>",
+                        "smithy.api#xmlName": "volumeId"
+                    }
+                },
+                "VolumeSize": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "VolumeSize",
+                        "smithy.api#documentation": "<p>The size of the volume, in GiB.</p>",
+                        "smithy.api#xmlName": "volumeSize"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#RestoreSnapshotTier": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#RestoreSnapshotTierRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#RestoreSnapshotTierResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Restores an archived Amazon EBS snapshot for use temporarily or permanently, or modifies the restore \n      period or restore type for a snapshot that was previously temporarily restored.</p> \n      \n         <p>For more information see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/working-with-snapshot-archiving.html#restore-archived-snapshot\">\n      Restore an archived snapshot</a> and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/working-with-snapshot-archiving.html#modify-temp-restore-period\">\n        modify the restore period or restore type for a temporarily restored snapshot</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#RestoreSnapshotTierRequest": {
+            "type": "structure",
+            "members": {
+                "SnapshotId": {
+                    "target": "com.amazonaws.ec2#SnapshotId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the snapshot to restore.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TemporaryRestoreDays": {
+                    "target": "com.amazonaws.ec2#RestoreSnapshotTierRequestTemporaryRestoreDays",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the number of days for which to temporarily restore an archived snapshot. \n      Required for temporary restores only. The snapshot will be automatically re-archived \n      after this period.</p>\n         <p>To temporarily restore an archived snapshot, specify the number of days and omit \n      the <b>PermanentRestore</b> parameter or set it to \n      <code>false</code>.</p>"
+                    }
+                },
+                "PermanentRestore": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to permanently restore an archived snapshot. To permanently restore \n      an archived snapshot, specify <code>true</code> and omit the \n      <b>RestoreSnapshotTierRequest$TemporaryRestoreDays</b> parameter.</p>"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#RestoreSnapshotTierRequestTemporaryRestoreDays": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.ec2#RestoreSnapshotTierResult": {
+            "type": "structure",
+            "members": {
+                "SnapshotId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "SnapshotId",
+                        "smithy.api#documentation": "<p>The ID of the snapshot.</p>",
+                        "smithy.api#xmlName": "snapshotId"
+                    }
+                },
+                "RestoreStartTime": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "RestoreStartTime",
+                        "smithy.api#documentation": "<p>The date and time when the snapshot restore process started.</p>",
+                        "smithy.api#xmlName": "restoreStartTime"
+                    }
+                },
+                "RestoreDuration": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "RestoreDuration",
+                        "smithy.api#documentation": "<p>For temporary restores only. The number of days for which the archived snapshot \n      is temporarily restored.</p>",
+                        "smithy.api#xmlName": "restoreDuration"
+                    }
+                },
+                "IsPermanentRestore": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "IsPermanentRestore",
+                        "smithy.api#documentation": "<p>Indicates whether the snapshot is permanently restored. <code>true</code> indicates a permanent \n      restore. <code>false</code> indicates a temporary restore.</p>",
+                        "smithy.api#xmlName": "isPermanentRestore"
                     }
                 }
             }
@@ -60087,6 +60884,7 @@
                     "target": "com.amazonaws.ec2#CoreNetworkArn",
                     "traits": {
                         "aws.protocols#ec2QueryName": "CoreNetworkArn",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the core network.</p>",
                         "smithy.api#xmlName": "coreNetworkArn"
                     }
                 }
@@ -60491,7 +61289,7 @@
                 "UserData": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user data to make available to the instance. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html\">Running commands\n                on your Linux instance at launch</a> (Linux) and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html#instancedata-add-user-data\">Adding User Data</a> (Windows). If you are using a command line tool,\n            base64-encoding is performed for you, and you can load the text from a file. Otherwise,\n            you must provide base64-encoded text. User data is limited to 16 KB.</p>"
+                        "smithy.api#documentation": "<p>The user data to make available to the instance. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html\">Run commands\n                on your Linux instance at launch</a> and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-windows-user-data.html\">Run commands on your Windows instance at launch</a>. If you are using a command line tool,\n            base64-encoding is performed for you, and you can load the text from a file. Otherwise,\n            you must provide base64-encoded text. User data is limited to 16 KB.</p>"
                     }
                 },
                 "AdditionalInfo": {
@@ -60608,7 +61406,7 @@
                 "CpuOptions": {
                     "target": "com.amazonaws.ec2#CpuOptionsRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>The CPU options for the instance. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html\">Optimizing CPU options</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The CPU options for the instance. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html\">Optimize CPU options</a> in the <i>Amazon EC2 User Guide</i>.</p>"
                     }
                 },
                 "CapacityReservationSpecification": {
@@ -60640,6 +61438,12 @@
                     "target": "com.amazonaws.ec2#EnclaveOptionsRequest",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the instance is enabled for Amazon Web Services Nitro Enclaves. For more information, \n\t\t\tsee <a href=\"https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html\">\n\t\t\t    What is Amazon Web Services Nitro Enclaves?</a> in the <i>Amazon Web Services Nitro Enclaves User Guide</i>.</p>\t\t\n\t        <p>You can't enable Amazon Web Services Nitro Enclaves and hibernation on the same instance.</p>"
+                    }
+                },
+                "PrivateDnsNameOptions": {
+                    "target": "com.amazonaws.ec2#PrivateDnsNameOptionsRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The options for the instance hostname. The default values are inherited from the subnet.</p>"
                     }
                 }
             }
@@ -62178,7 +62982,7 @@
                 "target": "com.amazonaws.ec2#SendDiagnosticInterruptRequest"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Sends a diagnostic interrupt to the specified Amazon EC2 instance to trigger a \n\t\t\t<i>kernel panic</i> (on Linux instances), or a \n\t\t\t<i>blue screen</i>/<i>stop error</i> (on Windows \n\t\t\tinstances). For instances based on Intel and AMD processors, the interrupt is \n\t\t\treceived as a <i>non-maskable interrupt</i> (NMI).</p>\n\t\t\n\t\t       <p>In general, the operating system crashes and reboots when a kernel panic or stop \n\t\t\terror is triggered. The operating system can also be configured to perform diagnostic \n\t\t\ttasks, such as generating a memory dump file, loading a secondary kernel, or \n\t\t\tobtaining a call trace.</p>\n\t\t\n\t\t       <p>Before sending a diagnostic interrupt to your instance, ensure that its operating \n\t\t\tsystem is configured to perform the required diagnostic tasks.</p>\n\t\t\n\t\t       <p>For more information about configuring your operating system to generate a crash dump\n\t\t\twhen a kernel panic or stop error occurs, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/diagnostic-interrupt.html\">Send a diagnostic interrupt</a> (Linux instances) or <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/diagnostic-interrupt.html\">Send a Diagnostic Interrupt</a> (Windows instances).</p>"
+                "smithy.api#documentation": "<p>Sends a diagnostic interrupt to the specified Amazon EC2 instance to trigger a \n\t\t\t<i>kernel panic</i> (on Linux instances), or a \n\t\t\t<i>blue screen</i>/<i>stop error</i> (on Windows \n\t\t\tinstances). For instances based on Intel and AMD processors, the interrupt is \n\t\t\treceived as a <i>non-maskable interrupt</i> (NMI).</p>\n\t\t\n\t\t       <p>In general, the operating system crashes and reboots when a kernel panic or stop \n\t\t\terror is triggered. The operating system can also be configured to perform diagnostic \n\t\t\ttasks, such as generating a memory dump file, loading a secondary kernel, or \n\t\t\tobtaining a call trace.</p>\n\t\t\n\t\t       <p>Before sending a diagnostic interrupt to your instance, ensure that its operating \n\t\t\tsystem is configured to perform the required diagnostic tasks.</p>\n\t\t\n\t\t       <p>For more information about configuring your operating system to generate a crash dump\n\t\t\twhen a kernel panic or stop error occurs, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/diagnostic-interrupt.html\">Send a diagnostic interrupt (for advanced users)</a> (Linux instances) or <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/diagnostic-interrupt.html\">Send a diagnostic interrupt (for advanced users)</a> (Windows instances).</p>"
             }
         },
         "com.amazonaws.ec2#SendDiagnosticInterruptRequest": {
@@ -62697,6 +63501,22 @@
                         "smithy.api#documentation": "<p>Any tags assigned to the snapshot.</p>",
                         "smithy.api#xmlName": "tagSet"
                     }
+                },
+                "StorageTier": {
+                    "target": "com.amazonaws.ec2#StorageTier",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "StorageTier",
+                        "smithy.api#documentation": "<p>The storage tier in which the snapshot is stored. <code>standard</code> indicates \n      that the snapshot is stored in the standard snapshot storage tier and that it is ready \n      for use. <code>archive</code> indicates that the snapshot is currently archived and that \n      it must be restored before it can be used.</p>",
+                        "smithy.api#xmlName": "storageTier"
+                    }
+                },
+                "RestoreExpiryTime": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "RestoreExpiryTime",
+                        "smithy.api#documentation": "<p>Only for archived snapshots that are temporarily restored. Indicates the date and \n      time when a temporarily restored snapshot will be automatically re-archived.</p>",
+                        "smithy.api#xmlName": "restoreExpiryTime"
+                    }
                 }
             },
             "traits": {
@@ -62964,6 +63784,63 @@
                 }
             }
         },
+        "com.amazonaws.ec2#SnapshotRecycleBinInfo": {
+            "type": "structure",
+            "members": {
+                "SnapshotId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "SnapshotId",
+                        "smithy.api#documentation": "<p>The ID of the snapshot.</p>",
+                        "smithy.api#xmlName": "snapshotId"
+                    }
+                },
+                "RecycleBinEnterTime": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "RecycleBinEnterTime",
+                        "smithy.api#documentation": "<p>The date and time when the snaphsot entered the Recycle Bin.</p>",
+                        "smithy.api#xmlName": "recycleBinEnterTime"
+                    }
+                },
+                "RecycleBinExitTime": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "RecycleBinExitTime",
+                        "smithy.api#documentation": "<p>The date and time when the snapshot is to be permanently deleted from the Recycle Bin.</p>",
+                        "smithy.api#xmlName": "recycleBinExitTime"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Description",
+                        "smithy.api#documentation": "<p>The description for the snapshot.</p>",
+                        "smithy.api#xmlName": "description"
+                    }
+                },
+                "VolumeId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "VolumeId",
+                        "smithy.api#documentation": "<p>The ID of the volume from which the snapshot was created.</p>",
+                        "smithy.api#xmlName": "volumeId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a snapshot that is currently in the Recycle Bin.</p>"
+            }
+        },
+        "com.amazonaws.ec2#SnapshotRecycleBinInfoList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#SnapshotRecycleBinInfo",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
         "com.amazonaws.ec2#SnapshotSet": {
             "type": "list",
             "member": {
@@ -62988,6 +63865,14 @@
                     {
                         "value": "error",
                         "name": "error"
+                    },
+                    {
+                        "value": "recoverable",
+                        "name": "recoverable"
+                    },
+                    {
+                        "value": "recovering",
+                        "name": "recovering"
                     }
                 ]
             }
@@ -63088,6 +63973,110 @@
                 "smithy.api#documentation": "<p>Details about the import snapshot task.</p>"
             }
         },
+        "com.amazonaws.ec2#SnapshotTierStatus": {
+            "type": "structure",
+            "members": {
+                "SnapshotId": {
+                    "target": "com.amazonaws.ec2#SnapshotId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "SnapshotId",
+                        "smithy.api#documentation": "<p>The ID of the snapshot.</p>",
+                        "smithy.api#xmlName": "snapshotId"
+                    }
+                },
+                "VolumeId": {
+                    "target": "com.amazonaws.ec2#VolumeId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "VolumeId",
+                        "smithy.api#documentation": "<p>The ID of the volume from which the snapshot was created.</p>",
+                        "smithy.api#xmlName": "volumeId"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.ec2#SnapshotState",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Status",
+                        "smithy.api#documentation": "<p>The state of the snapshot.</p>",
+                        "smithy.api#xmlName": "status"
+                    }
+                },
+                "OwnerId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "OwnerId",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the snapshot.</p>",
+                        "smithy.api#xmlName": "ownerId"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.ec2#TagList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TagSet",
+                        "smithy.api#documentation": "<p>The tags that are assigned to the snapshot.</p>",
+                        "smithy.api#xmlName": "tagSet"
+                    }
+                },
+                "StorageTier": {
+                    "target": "com.amazonaws.ec2#StorageTier",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "StorageTier",
+                        "smithy.api#documentation": "<p>The storage tier in which the snapshot is stored. <code>standard</code> indicates \n      that the snapshot is stored in the standard snapshot storage tier and that it is ready \n      for use. <code>archive</code> indicates that the snapshot is currently archived and that \n      it must be restored before it can be used.</p>",
+                        "smithy.api#xmlName": "storageTier"
+                    }
+                },
+                "LastTieringStartTime": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "LastTieringStartTime",
+                        "smithy.api#documentation": "<p>The date and time when the last archive or restore process was started.</p>",
+                        "smithy.api#xmlName": "lastTieringStartTime"
+                    }
+                },
+                "LastTieringProgress": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "LastTieringProgress",
+                        "smithy.api#documentation": "<p>The progress of the last archive or restore process, as a percentage.</p>",
+                        "smithy.api#xmlName": "lastTieringProgress"
+                    }
+                },
+                "LastTieringOperationStatus": {
+                    "target": "com.amazonaws.ec2#TieringOperationStatus",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "LastTieringOperationStatus",
+                        "smithy.api#documentation": "<p>The status of the last archive or restore process.</p>",
+                        "smithy.api#xmlName": "lastTieringOperationStatus"
+                    }
+                },
+                "LastTieringOperationStatusDetail": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "LastTieringOperationStatusDetail",
+                        "smithy.api#documentation": "<p>A message describing the status of the last archive or restore process.</p>",
+                        "smithy.api#xmlName": "lastTieringOperationStatusDetail"
+                    }
+                },
+                "ArchivalCompleteTime": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ArchivalCompleteTime",
+                        "smithy.api#documentation": "<p>The date and time when the last archive process was completed.</p>",
+                        "smithy.api#xmlName": "archivalCompleteTime"
+                    }
+                },
+                "RestoreExpiryTime": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "RestoreExpiryTime",
+                        "smithy.api#documentation": "<p>Only for archived snapshots that are temporarily restored. Indicates the date and \n      time when a temporarily restored snapshot will be automatically re-archived.</p>",
+                        "smithy.api#xmlName": "restoreExpiryTime"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about a snapshot's storage tier.</p>"
+            }
+        },
         "com.amazonaws.ec2#SpotAllocationStrategy": {
             "type": "string",
             "traits": {
@@ -63126,7 +64115,7 @@
                     "target": "com.amazonaws.ec2#Integer",
                     "traits": {
                         "aws.protocols#ec2QueryName": "TerminationDelay",
-                        "smithy.api#documentation": "<p>The amount of time (in seconds) that Amazon EC2 waits before terminating the old Spot\n            Instance after launching a new replacement Spot Instance.</p>",
+                        "smithy.api#documentation": "<p>The amount of time (in seconds) that Amazon EC2 waits before terminating the old Spot\n            Instance after launching a new replacement Spot Instance.</p>\n        <p>Valid only when <code>ReplacementStrategy</code> is set to <code>launch-before-terminate</code>.</p>\n        <p>Valid values: Minimum value of <code>120</code> seconds. Maximum value of <code>7200</code> seconds.</p>",
                         "smithy.api#xmlName": "terminationDelay"
                     }
                 }
@@ -64045,7 +65034,7 @@
                     "target": "com.amazonaws.ec2#SpotAllocationStrategy",
                     "traits": {
                         "aws.protocols#ec2QueryName": "AllocationStrategy",
-                        "smithy.api#documentation": "<p>Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by\n         the EC2 Fleet.</p>\n         <p>If the allocation strategy is <code>lowest-price</code>, EC2 Fleet launches instances from\n         the Spot Instance pools with the lowest price. This is the default allocation strategy.</p>\n         <p>If the allocation strategy is <code>diversified</code>, EC2 Fleet launches instances from all\n         of the Spot Instance pools that you specify.</p>\n         <p>If the allocation strategy is <code>capacity-optimized</code> (recommended), EC2 Fleet\n         launches instances from Spot Instance pools with optimal capacity for the number of instances that\n         are launching. To give certain instance types a higher chance of launching first, use\n            <code>capacity-optimized-prioritized</code>. Set a priority for each instance type by\n         using the <code>Priority</code> parameter for <code>LaunchTemplateOverrides</code>. You can\n         assign the same priority to different <code>LaunchTemplateOverrides</code>. EC2 implements\n         the priorities on a best-effort basis, but optimizes for capacity first.\n            <code>capacity-optimized-prioritized</code> is supported only if your fleet uses a\n         launch template. Note that if the On-Demand <code>AllocationStrategy</code> is set to\n            <code>prioritized</code>, the same priority is applied when fulfilling On-Demand\n         capacity.</p>",
+                        "smithy.api#documentation": "<p>The strategy that determines how to allocate the target Spot Instance capacity across the Spot Instance\n         pools specified by the EC2 Fleet.</p>\n         <p>\n            <code>lowest-price</code> - EC2 Fleet launches instances from the Spot Instance pools with the lowest\n         price.</p>\n         <p>\n            <code>diversified</code> - EC2 Fleet launches instances from all of the Spot Instance pools that you\n         specify.</p>\n         <p>\n            <code>capacity-optimized</code> (recommended) - EC2 Fleet launches instances from Spot Instance pools\n         with optimal capacity for the number of instances that are launching. To give certain\n         instance types a higher chance of launching first, use\n            <code>capacity-optimized-prioritized</code>. Set a priority for each instance type by\n         using the <code>Priority</code> parameter for <code>LaunchTemplateOverrides</code>. You can\n         assign the same priority to different <code>LaunchTemplateOverrides</code>. EC2 implements\n         the priorities on a best-effort basis, but optimizes for capacity first.\n            <code>capacity-optimized-prioritized</code> is supported only if your fleet uses a\n         launch template. Note that if the On-Demand <code>AllocationStrategy</code> is set to\n            <code>prioritized</code>, the same priority is applied when fulfilling On-Demand\n         capacity.</p>\n         <p>Default: <code>lowest-price</code>\n         </p>",
                         "smithy.api#xmlName": "allocationStrategy"
                     }
                 },
@@ -64061,7 +65050,7 @@
                     "target": "com.amazonaws.ec2#SpotInstanceInterruptionBehavior",
                     "traits": {
                         "aws.protocols#ec2QueryName": "InstanceInterruptionBehavior",
-                        "smithy.api#documentation": "<p>The behavior when a Spot Instance is interrupted. The default is <code>terminate</code>.</p>",
+                        "smithy.api#documentation": "<p>The behavior when a Spot Instance is interrupted.</p>\n         <p>Default: <code>terminate</code>\n         </p>",
                         "smithy.api#xmlName": "instanceInterruptionBehavior"
                     }
                 },
@@ -64069,7 +65058,7 @@
                     "target": "com.amazonaws.ec2#Integer",
                     "traits": {
                         "aws.protocols#ec2QueryName": "InstancePoolsToUseCount",
-                        "smithy.api#documentation": "<p>The number of Spot pools across which to allocate your target Spot capacity. Valid only\n         when <b>AllocationStrategy</b> is set to\n            <code>lowest-price</code>. EC2 Fleet selects the cheapest Spot pools and evenly allocates\n         your target Spot capacity across the number of Spot pools that you specify.</p>\n         <p>Note that EC2 Fleet attempts to draw Spot Instances from the number of pools that you specify on a\n         best effort basis. If a pool runs out of Spot capacity before fulfilling your target\n         capacity, EC2 Fleet will continue to fulfill your request by drawing from the next cheapest\n         pool. To ensure that your target capacity is met, you might receive Spot Instances from more than\n         the number of pools that you specified. Similarly, if most of the pools have no Spot\n         capacity, you might receive your full target capacity from fewer than the number of pools\n         that you specified.</p>",
+                        "smithy.api#documentation": "<p>The number of Spot pools across which to allocate your target Spot capacity. Supported\n         only when <code>AllocationStrategy</code> is set to <code>lowest-price</code>. EC2 Fleet selects\n         the cheapest Spot pools and evenly allocates your target Spot capacity across the number of\n         Spot pools that you specify.</p>\n         <p>Note that EC2 Fleet attempts to draw Spot Instances from the number of pools that you specify on a\n         best effort basis. If a pool runs out of Spot capacity before fulfilling your target\n         capacity, EC2 Fleet will continue to fulfill your request by drawing from the next cheapest\n         pool. To ensure that your target capacity is met, you might receive Spot Instances from more than\n         the number of pools that you specified. Similarly, if most of the pools have no Spot\n         capacity, you might receive your full target capacity from fewer than the number of pools\n         that you specified.</p>",
                         "smithy.api#xmlName": "instancePoolsToUseCount"
                     }
                 },
@@ -64077,7 +65066,7 @@
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
                         "aws.protocols#ec2QueryName": "SingleInstanceType",
-                        "smithy.api#documentation": "<p>Indicates that the fleet uses a single instance type to launch all Spot Instances in the fleet.\n         Supported only for fleets of type <code>instant</code>.</p>",
+                        "smithy.api#documentation": "<p>Indicates that the fleet uses a single instance type to launch all Spot Instances in the\n         fleet.</p>\n         <p>Supported only for fleets of type <code>instant</code>.</p>",
                         "smithy.api#xmlName": "singleInstanceType"
                     }
                 },
@@ -64085,7 +65074,7 @@
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
                         "aws.protocols#ec2QueryName": "SingleAvailabilityZone",
-                        "smithy.api#documentation": "<p>Indicates that the fleet launches all Spot Instances into a single Availability Zone. Supported\n         only for fleets of type <code>instant</code>.</p>",
+                        "smithy.api#documentation": "<p>Indicates that the fleet launches all Spot Instances into a single Availability Zone.</p>\n         <p>Supported only for fleets of type <code>instant</code>.</p>",
                         "smithy.api#xmlName": "singleAvailabilityZone"
                     }
                 },
@@ -64093,7 +65082,7 @@
                     "target": "com.amazonaws.ec2#Integer",
                     "traits": {
                         "aws.protocols#ec2QueryName": "MinTargetCapacity",
-                        "smithy.api#documentation": "<p>The minimum target capacity for Spot Instances in the fleet. If the minimum target capacity is\n         not reached, the fleet launches no instances.</p>",
+                        "smithy.api#documentation": "<p>The minimum target capacity for Spot Instances in the fleet. If the minimum target capacity is\n         not reached, the fleet launches no instances.</p>\n         <p>Supported only for fleets of type <code>instant</code>.</p>\n         <p>At least one of the following must be specified: <code>SingleAvailabilityZone</code> |\n            <code>SingleInstanceType</code>\n         </p>",
                         "smithy.api#xmlName": "minTargetCapacity"
                     }
                 },
@@ -64116,7 +65105,7 @@
                 "AllocationStrategy": {
                     "target": "com.amazonaws.ec2#SpotAllocationStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by\n         the EC2 Fleet.</p>\n         <p>If the allocation strategy is <code>lowest-price</code>, EC2 Fleet launches instances from\n         the Spot Instance pools with the lowest price. This is the default allocation strategy.</p>\n         <p>If the allocation strategy is <code>diversified</code>, EC2 Fleet launches instances from all\n         of the Spot Instance pools that you specify.</p>\n         <p>If the allocation strategy is <code>capacity-optimized</code> (recommended), EC2 Fleet\n         launches instances from Spot Instance pools with optimal capacity for the number of instances that\n         are launching. To give certain instance types a higher chance of launching first, use\n            <code>capacity-optimized-prioritized</code>. Set a priority for each instance type by\n         using the <code>Priority</code> parameter for <code>LaunchTemplateOverrides</code>. You can\n         assign the same priority to different <code>LaunchTemplateOverrides</code>. EC2 implements\n         the priorities on a best-effort basis, but optimizes for capacity first.\n            <code>capacity-optimized-prioritized</code> is supported only if your fleet uses a\n         launch template. Note that if the On-Demand <code>AllocationStrategy</code> is set to\n            <code>prioritized</code>, the same priority is applied when fulfilling On-Demand\n         capacity.</p>"
+                        "smithy.api#documentation": "<p>The strategy that determines how to allocate the target Spot Instance capacity across the Spot Instance pools specified by\n         the EC2 Fleet.</p>\n         <p>\n            <code>lowest-price</code> - EC2 Fleet launches instances from\n         the Spot Instance pools with the lowest price.</p>\n         <p>\n            <code>diversified</code> - EC2 Fleet launches instances from all\n         of the Spot Instance pools that you specify.</p>\n         <p>\n            <code>capacity-optimized</code> (recommended) - EC2 Fleet\n         launches instances from Spot Instance pools with optimal capacity for the number of instances that\n         are launching. To give certain instance types a higher chance of launching first, use\n            <code>capacity-optimized-prioritized</code>. Set a priority for each instance type by\n         using the <code>Priority</code> parameter for <code>LaunchTemplateOverrides</code>. You can\n         assign the same priority to different <code>LaunchTemplateOverrides</code>. EC2 implements\n         the priorities on a best-effort basis, but optimizes for capacity first.\n            <code>capacity-optimized-prioritized</code> is supported only if your fleet uses a\n         launch template. Note that if the On-Demand <code>AllocationStrategy</code> is set to\n            <code>prioritized</code>, the same priority is applied when fulfilling On-Demand\n         capacity.</p>\n         <p>Default: <code>lowest-price</code>\n         </p>"
                     }
                 },
                 "MaintenanceStrategies": {
@@ -64128,31 +65117,31 @@
                 "InstanceInterruptionBehavior": {
                     "target": "com.amazonaws.ec2#SpotInstanceInterruptionBehavior",
                     "traits": {
-                        "smithy.api#documentation": "<p>The behavior when a Spot Instance is interrupted. The default is <code>terminate</code>.</p>"
+                        "smithy.api#documentation": "<p>The behavior when a Spot Instance is interrupted.</p>\n         <p>Default: <code>terminate</code>\n         </p>"
                     }
                 },
                 "InstancePoolsToUseCount": {
                     "target": "com.amazonaws.ec2#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of Spot pools across which to allocate your target Spot capacity. Valid only\n         when Spot <b>AllocationStrategy</b> is set to\n            <code>lowest-price</code>. EC2 Fleet selects the cheapest Spot pools and evenly allocates\n         your target Spot capacity across the number of Spot pools that you specify.</p>\n         <p>Note that EC2 Fleet attempts to draw Spot Instances from the number of pools that you specify on a\n         best effort basis. If a pool runs out of Spot capacity before fulfilling your target\n         capacity, EC2 Fleet will continue to fulfill your request by drawing from the next cheapest\n         pool. To ensure that your target capacity is met, you might receive Spot Instances from more than\n         the number of pools that you specified. Similarly, if most of the pools have no Spot\n         capacity, you might receive your full target capacity from fewer than the number of pools\n         that you specified.</p>"
+                        "smithy.api#documentation": "<p>The number of Spot pools across which to allocate your target Spot capacity. Supported\n         only when Spot <code>AllocationStrategy</code> is set to <code>lowest-price</code>. EC2 Fleet\n         selects the cheapest Spot pools and evenly allocates your target Spot capacity across the\n         number of Spot pools that you specify.</p>\n         <p>Note that EC2 Fleet attempts to draw Spot Instances from the number of pools that you specify on a\n         best effort basis. If a pool runs out of Spot capacity before fulfilling your target\n         capacity, EC2 Fleet will continue to fulfill your request by drawing from the next cheapest\n         pool. To ensure that your target capacity is met, you might receive Spot Instances from more than\n         the number of pools that you specified. Similarly, if most of the pools have no Spot\n         capacity, you might receive your full target capacity from fewer than the number of pools\n         that you specified.</p>"
                     }
                 },
                 "SingleInstanceType": {
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates that the fleet uses a single instance type to launch all Spot Instances in the fleet.\n         Supported only for fleets of type <code>instant</code>.</p>"
+                        "smithy.api#documentation": "<p>Indicates that the fleet uses a single instance type to launch all Spot Instances in the\n         fleet.</p>\n         <p>Supported only for fleets of type <code>instant</code>.</p>"
                     }
                 },
                 "SingleAvailabilityZone": {
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates that the fleet launches all Spot Instances into a single Availability Zone. Supported\n         only for fleets of type <code>instant</code>.</p>"
+                        "smithy.api#documentation": "<p>Indicates that the fleet launches all Spot Instances into a single Availability Zone.</p>\n         <p>Supported only for fleets of type <code>instant</code>.</p>"
                     }
                 },
                 "MinTargetCapacity": {
                     "target": "com.amazonaws.ec2#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The minimum target capacity for Spot Instances in the fleet. If the minimum target capacity is\n         not reached, the fleet launches no instances.</p>"
+                        "smithy.api#documentation": "<p>The minimum target capacity for Spot Instances in the fleet. If the minimum target capacity is\n         not reached, the fleet launches no instances.</p>\n         <p>Supported only for fleets of type <code>instant</code>.</p>\n         <p>At least one of the following must be specified: <code>SingleAvailabilityZone</code> |\n         <code>SingleInstanceType</code>\n         </p>"
                     }
                 },
                 "MaxTotalPrice": {
@@ -64453,7 +65442,7 @@
                 "target": "com.amazonaws.ec2#StartInstancesResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Starts an Amazon EBS-backed instance that you've previously stopped.</p>\n        <p>Instances that use Amazon EBS volumes as their root devices can be quickly stopped and\n            started. When an instance is stopped, the compute resources are released and you are not\n            billed for instance usage. However, your root partition Amazon EBS volume remains and\n            continues to persist your data, and you are charged for Amazon EBS volume usage. You can\n            restart your instance at any time. Every time you start your instance, Amazon EC2\n            charges a one-minute minimum for instance usage, and thereafter charges per second for\n            instance usage.</p>\n        <p>Before stopping an instance, make sure it is in a state from which it can be\n            restarted. Stopping an instance does not preserve data stored in RAM.</p>\n        <p>Performing this operation on an instance that uses an instance store as its root\n            device returns an error.</p>\n        \n        <p>If you attempt to start a T3 instance with <code>host</code> tenancy and the <code>unlimted</code> \n            CPU credit option, the request fails. The <code>unlimited</code> CPU credit option is not \n            supported on Dedicated Hosts. Before you start the instance, either change its CPU credit \n            option to <code>standard</code>, or change its tenancy to <code>default</code> or <code>dedicated</code>.</p>\n        \n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html\">Stopping instances</a> in the\n                <i>Amazon EC2 User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Starts an Amazon EBS-backed instance that you've previously stopped.</p>\n        <p>Instances that use Amazon EBS volumes as their root devices can be quickly stopped and\n            started. When an instance is stopped, the compute resources are released and you are not\n            billed for instance usage. However, your root partition Amazon EBS volume remains and\n            continues to persist your data, and you are charged for Amazon EBS volume usage. You can\n            restart your instance at any time. Every time you start your instance, Amazon EC2\n            charges a one-minute minimum for instance usage, and thereafter charges per second for\n            instance usage.</p>\n        <p>Before stopping an instance, make sure it is in a state from which it can be\n            restarted. Stopping an instance does not preserve data stored in RAM.</p>\n        <p>Performing this operation on an instance that uses an instance store as its root\n            device returns an error.</p>\n        \n        <p>If you attempt to start a T3 instance with <code>host</code> tenancy and the <code>unlimted</code> \n            CPU credit option, the request fails. The <code>unlimited</code> CPU credit option is not \n            supported on Dedicated Hosts. Before you start the instance, either change its CPU credit \n            option to <code>standard</code>, or change its tenancy to <code>default</code> or <code>dedicated</code>.</p>\n        \n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html\">Stop and start your instance</a>\n            in the <i>Amazon EC2 User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#StartInstancesRequest": {
@@ -64746,7 +65735,7 @@
                 "target": "com.amazonaws.ec2#StopInstancesResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Stops an Amazon EBS-backed instance.</p>\n        <p>You can use the Stop action to hibernate an instance if the instance is <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#enabling-hibernation\">enabled for\n                hibernation</a> and it meets the <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites\">hibernation\n                prerequisites</a>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html\">Hibernate your instance</a> in the\n                <i>Amazon EC2 User Guide</i>.</p>\n        <p>We don't charge usage for a stopped instance, or data transfer fees; however, your\n            root partition Amazon EBS volume remains and continues to persist your data, and you are\n            charged for Amazon EBS volume usage. Every time you start your instance, Amazon EC2\n            charges a one-minute minimum for instance usage, and thereafter charges per second for\n            instance usage.</p>\n        <p>You can't stop or hibernate instance store-backed instances. You can't use the Stop\n            action to hibernate Spot Instances, but you can specify that Amazon EC2 should hibernate\n            Spot Instances when they are interrupted. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-interruptions.html#hibernate-spot-instances\">Hibernating interrupted Spot Instances</a> in the <i>Amazon EC2 User Guide</i>.</p>\n        <p>When you stop or hibernate an instance, we shut it down. You can restart your instance\n            at any time. Before stopping or hibernating an instance, make sure it is in a state from\n            which it can be restarted. Stopping an instance does not preserve data stored in RAM,\n            but hibernating an instance does preserve data stored in RAM. If an instance cannot\n            hibernate successfully, a normal shutdown occurs.</p>\n        <p>Stopping and hibernating an instance is different to rebooting or terminating it. For\n            example, when you stop or hibernate an instance, the root device and any other devices\n            attached to the instance persist. When you terminate an instance, the root device and\n            any other devices attached during the instance launch are automatically deleted. For\n            more information about the differences between rebooting, stopping, hibernating, and\n            terminating instances, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html\">Instance lifecycle</a>\n            in the <i>Amazon EC2 User Guide</i>.</p>\n        <p>When you stop an instance, we attempt to shut it down forcibly after a short while. If\n            your instance appears stuck in the stopping state after a period of time, there may be\n            an issue with the underlying host computer. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesStopping.html\">Troubleshooting\n                stopping your instance</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Stops an Amazon EBS-backed instance.</p>\n        <p>You can use the Stop action to hibernate an instance if the instance is <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#enabling-hibernation\">enabled for\n                hibernation</a> and it meets the <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites\">hibernation\n                prerequisites</a>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html\">Hibernate your instance</a> in the\n                <i>Amazon EC2 User Guide</i>.</p>\n        <p>We don't charge usage for a stopped instance, or data transfer fees; however, your\n            root partition Amazon EBS volume remains and continues to persist your data, and you are\n            charged for Amazon EBS volume usage. Every time you start your instance, Amazon EC2\n            charges a one-minute minimum for instance usage, and thereafter charges per second for\n            instance usage.</p>\n        <p>You can't stop or hibernate instance store-backed instances. You can't use the Stop\n            action to hibernate Spot Instances, but you can specify that Amazon EC2 should hibernate\n            Spot Instances when they are interrupted. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-interruptions.html#hibernate-spot-instances\">Hibernating interrupted Spot Instances</a> in the <i>Amazon EC2 User Guide</i>.</p>\n        <p>When you stop or hibernate an instance, we shut it down. You can restart your instance\n            at any time. Before stopping or hibernating an instance, make sure it is in a state from\n            which it can be restarted. Stopping an instance does not preserve data stored in RAM,\n            but hibernating an instance does preserve data stored in RAM. If an instance cannot\n            hibernate successfully, a normal shutdown occurs.</p>\n        <p>Stopping and hibernating an instance is different to rebooting or terminating it. For\n            example, when you stop or hibernate an instance, the root device and any other devices\n            attached to the instance persist. When you terminate an instance, the root device and\n            any other devices attached during the instance launch are automatically deleted. For\n            more information about the differences between rebooting, stopping, hibernating, and\n            terminating instances, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html\">Instance lifecycle</a>\n            in the <i>Amazon EC2 User Guide</i>.</p>\n        <p>When you stop an instance, we attempt to shut it down forcibly after a short while. If\n            your instance appears stuck in the stopping state after a period of time, there may be\n            an issue with the underlying host computer. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesStopping.html\">Troubleshoot\n                stopping your instance</a> in the <i>Amazon EC2 User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#StopInstancesRequest": {
@@ -64830,6 +65819,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes a storage location in Amazon S3.</p>"
+            }
+        },
+        "com.amazonaws.ec2#StorageTier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "archive",
+                        "name": "archive"
+                    },
+                    {
+                        "value": "standard",
+                        "name": "standard"
+                    }
+                ]
             }
         },
         "com.amazonaws.ec2#StoreImageTaskResult": {
@@ -65063,6 +66067,22 @@
                         "smithy.api#documentation": "<p>Indicates whether DNS queries made to the Amazon-provided DNS Resolver in this subnet \n            should return synthetic IPv6 addresses for IPv4-only destinations.</p>",
                         "smithy.api#xmlName": "enableDns64"
                     }
+                },
+                "Ipv6Native": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Ipv6Native",
+                        "smithy.api#documentation": "<p>Indicates whether this is an IPv6 only subnet.</p>",
+                        "smithy.api#xmlName": "ipv6Native"
+                    }
+                },
+                "PrivateDnsNameOptionsOnLaunch": {
+                    "target": "com.amazonaws.ec2#PrivateDnsNameOptionsOnLaunch",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "PrivateDnsNameOptionsOnLaunch",
+                        "smithy.api#documentation": "<p>The type of hostnames to assign to instances in the subnet at launch. An instance hostname\n            is based on the IPv4 address or ID of the instance.</p>",
+                        "smithy.api#xmlName": "privateDnsNameOptionsOnLaunch"
+                    }
                 }
             },
             "traits": {
@@ -65270,7 +66290,7 @@
                     "target": "com.amazonaws.ec2#SubnetCidrAssociationId",
                     "traits": {
                         "aws.protocols#ec2QueryName": "AssociationId",
-                        "smithy.api#documentation": "<p>The association ID for the CIDR block.</p>",
+                        "smithy.api#documentation": "<p>The ID of the association.</p>",
                         "smithy.api#xmlName": "associationId"
                     }
                 },
@@ -65286,13 +66306,13 @@
                     "target": "com.amazonaws.ec2#SubnetCidrBlockState",
                     "traits": {
                         "aws.protocols#ec2QueryName": "Ipv6CidrBlockState",
-                        "smithy.api#documentation": "<p>Information about the state of the CIDR block.</p>",
+                        "smithy.api#documentation": "<p>The state of the CIDR block.</p>",
                         "smithy.api#xmlName": "ipv6CidrBlockState"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes an IPv6 CIDR block associated with a subnet.</p>"
+                "smithy.api#documentation": "<p>Describes an association between a subnet and an IPv6 CIDR block.</p>"
             }
         },
         "com.amazonaws.ec2#SubnetIpv6CidrBlockAssociationSet": {
@@ -65827,6 +66847,17 @@
                 }
             }
         },
+        "com.amazonaws.ec2#TargetStorageTier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "archive",
+                        "name": "archive"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.ec2#TelemetryStatus": {
             "type": "string",
             "traits": {
@@ -66032,6 +67063,49 @@
                 "traits": {
                     "smithy.api#xmlName": "item"
                 }
+            }
+        },
+        "com.amazonaws.ec2#TieringOperationStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "archival-in-progress",
+                        "name": "archival_in_progress"
+                    },
+                    {
+                        "value": "archival-completed",
+                        "name": "archival_completed"
+                    },
+                    {
+                        "value": "archival-failed",
+                        "name": "archival_failed"
+                    },
+                    {
+                        "value": "temporary-restore-in-progress",
+                        "name": "temporary_restore_in_progress"
+                    },
+                    {
+                        "value": "temporary-restore-completed",
+                        "name": "temporary_restore_completed"
+                    },
+                    {
+                        "value": "temporary-restore-failed",
+                        "name": "temporary_restore_failed"
+                    },
+                    {
+                        "value": "permanent-restore-in-progress",
+                        "name": "permanent_restore_in_progress"
+                    },
+                    {
+                        "value": "permanent-restore-completed",
+                        "name": "permanent_restore_completed"
+                    },
+                    {
+                        "value": "permanent-restore-failed",
+                        "name": "permanent_restore_failed"
+                    }
+                ]
             }
         },
         "com.amazonaws.ec2#TotalLocalStorageGB": {
@@ -72553,6 +73627,15 @@
                         "name": "REGIONAL"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.ec2#snapshotTierStatusSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#SnapshotTierStatus",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
             }
         },
         "com.amazonaws.ec2#totalFpgaMemory": {

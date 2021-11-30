@@ -1896,6 +1896,46 @@ func awsRestjson1_deserializeDocumentAttendeeList(v *[]types.Attendee, value int
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAudioFeatures(v **types.AudioFeatures, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AudioFeatures
+	if *v == nil {
+		sv = &types.AudioFeatures{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EchoReduction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MeetingFeatureStatus to be of type string, got %T instead", value)
+				}
+				sv.EchoReduction = types.MeetingFeatureStatus(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2310,6 +2350,11 @@ func awsRestjson1_deserializeDocumentMeeting(v **types.Meeting, value interface{
 				sv.MediaRegion = ptr.String(jtv)
 			}
 
+		case "MeetingFeatures":
+			if err := awsRestjson1_deserializeDocumentMeetingFeaturesConfiguration(&sv.MeetingFeatures, value); err != nil {
+				return err
+			}
+
 		case "MeetingHostId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2326,6 +2371,42 @@ func awsRestjson1_deserializeDocumentMeeting(v **types.Meeting, value interface{
 					return fmt.Errorf("expected GuidString to be of type string, got %T instead", value)
 				}
 				sv.MeetingId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMeetingFeaturesConfiguration(v **types.MeetingFeaturesConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MeetingFeaturesConfiguration
+	if *v == nil {
+		sv = &types.MeetingFeaturesConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Audio":
+			if err := awsRestjson1_deserializeDocumentAudioFeatures(&sv.Audio, value); err != nil {
+				return err
 			}
 
 		default:

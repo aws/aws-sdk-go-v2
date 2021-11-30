@@ -19,10 +19,9 @@ import (
 // initially set to 2 hours and then changed to 24 hours, the memory store will be
 // capable of holding 24 hours of data, but will be populated with 24 hours of data
 // 22 hours after this change was made. Timestream does not retrieve data from the
-// magnetic store to populate the memory store. Service quotas apply. For more
-// information, see Access Management
-// (https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html) in
-// the Timestream Developer Guide.
+// magnetic store to populate the memory store. See code sample
+// (https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.update-table.html)
+// for details.
 func (c *Client) UpdateTable(ctx context.Context, params *UpdateTableInput, optFns ...func(*Options)) (*UpdateTableOutput, error) {
 	if params == nil {
 		params = &UpdateTableInput{}
@@ -45,15 +44,16 @@ type UpdateTableInput struct {
 	// This member is required.
 	DatabaseName *string
 
-	// The retention duration of the memory store and the magnetic store.
-	//
-	// This member is required.
-	RetentionProperties *types.RetentionProperties
-
-	// The name of the Timesream table.
+	// The name of the Timestream table.
 	//
 	// This member is required.
 	TableName *string
+
+	// Contains properties to set on the table when enabling magnetic store writes.
+	MagneticStoreWriteProperties *types.MagneticStoreWriteProperties
+
+	// The retention duration of the memory store and the magnetic store.
+	RetentionProperties *types.RetentionProperties
 
 	noSmithyDocumentSerde
 }

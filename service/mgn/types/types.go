@@ -59,6 +59,9 @@ type DataReplicationInfo struct {
 	// Request to query data replication lag durating.
 	LagDuration *string
 
+	// Request to query data replication last snapshot time.
+	LastSnapshotDateTime *string
+
 	// Request to query disks replicated.
 	ReplicatedDisks []DataReplicationInfoReplicatedDisk
 
@@ -134,6 +137,12 @@ type DescribeSourceServersRequestFilters struct {
 	// Request to filter Source Servers list by archived.
 	IsArchived *bool
 
+	// Request to filter Source Servers list by life cycle states.
+	LifeCycleStates []LifeCycleState
+
+	// Request to filter Source Servers list by replication type.
+	ReplicationTypes []ReplicationType
+
 	// Request to filter Source Servers list by Source Server ID.
 	SourceServerIDs []string
 
@@ -163,6 +172,9 @@ type IdentificationHints struct {
 
 	// Hostname identification hint.
 	Hostname *string
+
+	// vCenter VM path identification hint.
+	VmPath *string
 
 	// vmWare UUID identification hint.
 	VmWareUuid *string
@@ -533,6 +545,9 @@ type SourceServer struct {
 	// Source server lifecycle state.
 	LifeCycle *LifeCycle
 
+	// Source server replication type.
+	ReplicationType ReplicationType
+
 	// Source server properties.
 	SourceProperties *SourceProperties
 
@@ -541,6 +556,9 @@ type SourceServer struct {
 
 	// Source server Tags.
 	Tags map[string]string
+
+	// Source server vCenter client id.
+	VcenterClientID *string
 
 	noSmithyDocumentSerde
 }
@@ -553,6 +571,36 @@ type ValidationExceptionField struct {
 
 	// Validate exception field name.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// vCenter client.
+type VcenterClient struct {
+
+	// Arn of vCenter client.
+	Arn *string
+
+	// Datacenter name of vCenter client.
+	DatacenterName *string
+
+	// Hostname of vCenter client .
+	Hostname *string
+
+	// Last seen time of vCenter client.
+	LastSeenDatetime *string
+
+	// Tags for Source Server of vCenter client.
+	SourceServerTags map[string]string
+
+	// Tags for vCenter client.
+	Tags map[string]string
+
+	// ID of vCenter client.
+	VcenterClientID *string
+
+	// Vcenter UUID of vCenter client.
+	VcenterUUID *string
 
 	noSmithyDocumentSerde
 }

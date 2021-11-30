@@ -56,6 +56,9 @@ type GetProfileObjectTypeTemplateOutput struct {
 	// A list of unique keys that can be used to map data to the profile.
 	Keys map[string][]types.ObjectTypeKey
 
+	// The format of your sourceLastUpdatedTimestamp that was previously set up.
+	SourceLastUpdatedTimestampFormat *string
+
 	// The name of the source of the object template.
 	SourceName *string
 

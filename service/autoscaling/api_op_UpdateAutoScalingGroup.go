@@ -76,7 +76,7 @@ type UpdateAutoScalingGroupInput struct {
 
 	// Enables or disables Capacity Rebalancing. For more information, see Amazon EC2
 	// Auto Scaling Capacity Rebalancing
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/capacity-rebalance.html)
+	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-capacity-rebalancing.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	CapacityRebalance *bool
 
@@ -109,8 +109,9 @@ type UpdateAutoScalingGroupInput struct {
 	DesiredCapacityType *string
 
 	// The amount of time, in seconds, that Amazon EC2 Auto Scaling waits before
-	// checking the health status of an EC2 instance that has come into service. The
-	// default value is 0. For more information, see Health check grace period
+	// checking the health status of an EC2 instance that has come into service and
+	// marking it unhealthy due to a failed health check. The default value is 0. For
+	// more information, see Health check grace period
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html#health-check-grace-period)
 	// in the Amazon EC2 Auto Scaling User Guide. Conditional: Required if you are
 	// adding an ELB health check.
@@ -154,14 +155,14 @@ type UpdateAutoScalingGroupInput struct {
 	// An embedded object that specifies a mixed instances policy. For more
 	// information, see Auto Scaling groups with multiple instance types and purchase
 	// options
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html)
+	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	MixedInstancesPolicy *types.MixedInstancesPolicy
 
 	// Indicates whether newly launched instances are protected from termination by
 	// Amazon EC2 Auto Scaling when scaling in. For more information about preventing
-	// instances from terminating on scale in, see Instance scale-in protection
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection)
+	// instances from terminating on scale in, see Using instance scale-in protection
+	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-protection.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	NewInstancesProtectedFromScaleIn *bool
 

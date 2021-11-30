@@ -78,14 +78,20 @@ import (
 // To cancel the copy
 // operation once it is in progress, delete the target DB cluster snapshot
 // identified by TargetDBClusterSnapshotIdentifier while that DB cluster snapshot
-// is in "copying" status. For more information on copying encrypted DB cluster
-// snapshots from one Amazon Web Services Region to another, see  Copying a
-// Snapshot
+// is in "copying" status. For more information on copying encrypted Amazon Aurora
+// DB cluster snapshots from one Amazon Web Services Region to another, see
+// Copying a Snapshot
 // (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_CopySnapshot.html)
-// in the Amazon Aurora User Guide. For more information on Amazon Aurora, see
-// What Is Amazon Aurora?
+// in the Amazon Aurora User Guide. For more information on Amazon Aurora DB
+// clusters, see
+//
+// What is Amazon Aurora?
 // (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
-// in the Amazon Aurora User Guide. This action only applies to Aurora DB clusters.
+// in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
+// see  Multi-AZ deployments with two readable standby DB instances
+// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
+// in the Amazon RDS User Guide. The Multi-AZ DB clusters feature is in preview and
+// is subject to change.
 func (c *Client) CopyDBClusterSnapshot(ctx context.Context, params *CopyDBClusterSnapshotInput, optFns ...func(*Options)) (*CopyDBClusterSnapshotOutput, error) {
 	if params == nil {
 		params = &CopyDBClusterSnapshotInput{}

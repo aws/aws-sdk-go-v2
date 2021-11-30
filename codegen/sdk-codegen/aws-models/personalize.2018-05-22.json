@@ -129,10 +129,28 @@
         },
         "com.amazonaws.personalize#AmazonPersonalize": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Personalize",
+                    "arnNamespace": "personalize",
+                    "cloudFormationName": "Personalize",
+                    "cloudTrailEventSource": "personalize.amazonaws.com",
+                    "endpointPrefix": "personalize"
+                },
+                "aws.auth#sigv4": {
+                    "name": "personalize"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<p>Amazon Personalize is a machine learning service that makes it easy to add individualized\n      recommendations to customers.</p>",
+                "smithy.api#title": "Amazon Personalize"
+            },
             "version": "2018-05-22",
             "operations": [
                 {
                     "target": "com.amazonaws.personalize#CreateBatchInferenceJob"
+                },
+                {
+                    "target": "com.amazonaws.personalize#CreateBatchSegmentJob"
                 },
                 {
                     "target": "com.amazonaws.personalize#CreateCampaign"
@@ -154,6 +172,9 @@
                 },
                 {
                     "target": "com.amazonaws.personalize#CreateFilter"
+                },
+                {
+                    "target": "com.amazonaws.personalize#CreateRecommender"
                 },
                 {
                     "target": "com.amazonaws.personalize#CreateSchema"
@@ -180,6 +201,9 @@
                     "target": "com.amazonaws.personalize#DeleteFilter"
                 },
                 {
+                    "target": "com.amazonaws.personalize#DeleteRecommender"
+                },
+                {
                     "target": "com.amazonaws.personalize#DeleteSchema"
                 },
                 {
@@ -190,6 +214,9 @@
                 },
                 {
                     "target": "com.amazonaws.personalize#DescribeBatchInferenceJob"
+                },
+                {
+                    "target": "com.amazonaws.personalize#DescribeBatchSegmentJob"
                 },
                 {
                     "target": "com.amazonaws.personalize#DescribeCampaign"
@@ -219,6 +246,9 @@
                     "target": "com.amazonaws.personalize#DescribeRecipe"
                 },
                 {
+                    "target": "com.amazonaws.personalize#DescribeRecommender"
+                },
+                {
                     "target": "com.amazonaws.personalize#DescribeSchema"
                 },
                 {
@@ -232,6 +262,9 @@
                 },
                 {
                     "target": "com.amazonaws.personalize#ListBatchInferenceJobs"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ListBatchSegmentJobs"
                 },
                 {
                     "target": "com.amazonaws.personalize#ListCampaigns"
@@ -258,6 +291,9 @@
                     "target": "com.amazonaws.personalize#ListRecipes"
                 },
                 {
+                    "target": "com.amazonaws.personalize#ListRecommenders"
+                },
+                {
                     "target": "com.amazonaws.personalize#ListSchemas"
                 },
                 {
@@ -271,23 +307,11 @@
                 },
                 {
                     "target": "com.amazonaws.personalize#UpdateCampaign"
+                },
+                {
+                    "target": "com.amazonaws.personalize#UpdateRecommender"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Personalize",
-                    "arnNamespace": "personalize",
-                    "cloudFormationName": "Personalize",
-                    "cloudTrailEventSource": "personalize.amazonaws.com",
-                    "endpointPrefix": "personalize"
-                },
-                "aws.auth#sigv4": {
-                    "name": "personalize"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>Amazon Personalize is a machine learning service that makes it easy to add individualized\n      recommendations to customers.</p>",
-                "smithy.api#title": "Amazon Personalize"
-            }
+            ]
         },
         "com.amazonaws.personalize#Arn": {
             "type": "string",
@@ -546,6 +570,176 @@
                 }
             }
         },
+        "com.amazonaws.personalize#BatchSegmentJob": {
+            "type": "structure",
+            "members": {
+                "jobName": {
+                    "target": "com.amazonaws.personalize#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the batch segment job.</p>"
+                    }
+                },
+                "batchSegmentJobArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the batch segment job.</p>"
+                    }
+                },
+                "filterArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the filter used on the batch segment job.</p>"
+                    }
+                },
+                "failureReason": {
+                    "target": "com.amazonaws.personalize#FailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the batch segment job failed, the reason for the failure.</p>"
+                    }
+                },
+                "solutionVersionArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the solution version used by the batch segment job to generate batch segments.</p>"
+                    }
+                },
+                "numResults": {
+                    "target": "com.amazonaws.personalize#NumBatchResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of predicted users generated by the batch segment job for each line of input data.</p>"
+                    }
+                },
+                "jobInput": {
+                    "target": "com.amazonaws.personalize#BatchSegmentJobInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 path that leads to the input data used to generate the batch segment job.</p>"
+                    }
+                },
+                "jobOutput": {
+                    "target": "com.amazonaws.personalize#BatchSegmentJobOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket that contains the output data generated by the batch segment job.</p>"
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.personalize#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Amazon Identity and Access Management (IAM) role that requested the batch segment job.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.personalize#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the batch segment job. The status is one of the following values:</p>\n         <ul>\n            <li>\n               <p>PENDING</p>\n            </li>\n            <li>\n               <p>IN PROGRESS</p>\n            </li>\n            <li>\n               <p>ACTIVE</p>\n            </li>\n            <li>\n               <p>CREATE FAILED</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.personalize#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the batch segment job was created.</p>"
+                    }
+                },
+                "lastUpdatedDateTime": {
+                    "target": "com.amazonaws.personalize#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the batch segment job last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information on a batch segment job.</p>"
+            }
+        },
+        "com.amazonaws.personalize#BatchSegmentJobInput": {
+            "type": "structure",
+            "members": {
+                "s3DataSource": {
+                    "target": "com.amazonaws.personalize#S3DataConfig",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input configuration of a batch segment job.</p>"
+            }
+        },
+        "com.amazonaws.personalize#BatchSegmentJobOutput": {
+            "type": "structure",
+            "members": {
+                "s3DataDestination": {
+                    "target": "com.amazonaws.personalize#S3DataConfig",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The output configuration parameters of a batch segment job.</p>"
+            }
+        },
+        "com.amazonaws.personalize#BatchSegmentJobSummary": {
+            "type": "structure",
+            "members": {
+                "batchSegmentJobArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the batch segment job.</p>"
+                    }
+                },
+                "jobName": {
+                    "target": "com.amazonaws.personalize#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the batch segment job.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.personalize#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the batch segment job. The status is one of the following values:</p>\n         <ul>\n            <li>\n               <p>PENDING</p>\n            </li>\n            <li>\n               <p>IN PROGRESS</p>\n            </li>\n            <li>\n               <p>ACTIVE</p>\n            </li>\n            <li>\n               <p>CREATE FAILED</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.personalize#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the batch segment job was created.</p>"
+                    }
+                },
+                "lastUpdatedDateTime": {
+                    "target": "com.amazonaws.personalize#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the batch segment job was last updated.</p>"
+                    }
+                },
+                "failureReason": {
+                    "target": "com.amazonaws.personalize#FailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the batch segment job failed, the reason for the failure.</p>"
+                    }
+                },
+                "solutionVersionArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the solution version used by the batch segment job to generate batch segments.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A truncated version of the <a>BatchSegmentJob</a> datatype. The <a>ListBatchSegmentJobs</a> operation returns a list of batch segment job\n      summaries.</p>"
+            }
+        },
+        "com.amazonaws.personalize#BatchSegmentJobs": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.personalize#BatchSegmentJobSummary"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.personalize#Boolean": {
             "type": "boolean",
             "traits": {
@@ -614,7 +808,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a deployed solution version, otherwise known as a campaign.\n      For more information on campaigns, see <a>CreateCampaign</a>.</p>"
+                "smithy.api#documentation": "<p>An object that describes the deployment of a solution version.\n      For more information on campaigns, see <a>CreateCampaign</a>.</p>"
             }
         },
         "com.amazonaws.personalize#CampaignConfig": {
@@ -623,7 +817,7 @@
                 "itemExplorationConfig": {
                     "target": "com.amazonaws.personalize#HyperParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string to string map specifying the exploration configuration hyperparameters, including <code>explorationWeight</code> and \n      <code>explorationItemAgeCutOff</code>, you want to use to configure the amount of item exploration Amazon Personalize uses when\n      recommending items. Provide <code>itemExplorationConfig</code> data only if your solution uses the\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html\">User-Personalization</a> recipe.</p>"
+                        "smithy.api#documentation": "<p>Specifies the exploration configuration hyperparameters, including <code>explorationWeight</code> and \n      <code>explorationItemAgeCutOff</code>, you want to use to configure the amount of item exploration Amazon Personalize uses when\n      recommending items. Provide <code>itemExplorationConfig</code> data only if your solution uses the\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html\">User-Personalization</a> recipe.</p>"
                     }
                 }
             },
@@ -939,6 +1133,98 @@
                 }
             }
         },
+        "com.amazonaws.personalize#CreateBatchSegmentJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.personalize#CreateBatchSegmentJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.personalize#CreateBatchSegmentJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.personalize#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ResourceAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a batch segment job. The operation can handle up to 50 million records and the\n      input file must be in JSON format. For more information, see <a>recommendations-batch</a>.</p>"
+            }
+        },
+        "com.amazonaws.personalize#CreateBatchSegmentJobRequest": {
+            "type": "structure",
+            "members": {
+                "jobName": {
+                    "target": "com.amazonaws.personalize#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the batch segment job to create.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "solutionVersionArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the solution version you want the batch segment job to use to generate\n      batch segments.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "filterArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the filter to apply to the batch segment job. For more information on using\n      filters, see <a>filter-batch</a>.</p>"
+                    }
+                },
+                "numResults": {
+                    "target": "com.amazonaws.personalize#NumBatchResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of predicted users generated by the batch segment job for each line of input data.</p>"
+                    }
+                },
+                "jobInput": {
+                    "target": "com.amazonaws.personalize#BatchSegmentJobInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 path for the input data used to generate the batch segment job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobOutput": {
+                    "target": "com.amazonaws.personalize#BatchSegmentJobOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 path for the bucket where the job's output will be stored.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.personalize#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Amazon Identity and Access Management role that has permissions to read and write to your input and output\n      Amazon S3 buckets respectively.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.personalize#CreateBatchSegmentJobResponse": {
+            "type": "structure",
+            "members": {
+                "batchSegmentJobArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the batch segment job.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.personalize#CreateCampaign": {
             "type": "operation",
             "input": {
@@ -965,7 +1251,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a campaign by deploying a solution version. When a client calls the\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html\">GetRecommendations</a>\n      and\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetPersonalizedRanking.html\">GetPersonalizedRanking</a>\n      APIs, a campaign is specified in the request.</p>\n\n         <p>\n            <b>Minimum Provisioned TPS and Auto-Scaling</b>\n         </p>\n    \n         <p>A transaction is a single <code>GetRecommendations</code> or\n       <code>GetPersonalizedRanking</code> call. Transactions per second (TPS) is the throughput\n       and unit of billing for Amazon Personalize. The minimum provisioned TPS\n       (<code>minProvisionedTPS</code>) specifies the baseline throughput provisioned by\n       Amazon Personalize, and thus, the minimum billing charge. \n    </p>\n         <p>\n       If your TPS increases beyond\n       <code>minProvisionedTPS</code>, Amazon Personalize auto-scales the provisioned capacity up and down,\n       but never below <code>minProvisionedTPS</code>.\n       There's a short time delay while the capacity is increased that might cause loss of\n       transactions.</p>\n         <p>The actual TPS used is calculated as the average requests/second within a 5-minute window.\n      You pay for maximum of either the minimum provisioned TPS or the actual TPS.\n      We recommend starting with a low <code>minProvisionedTPS</code>, track\n       your usage using Amazon CloudWatch metrics, and then increase the <code>minProvisionedTPS</code>\n       as necessary.</p>\n\n         <p>\n            <b>Status</b>\n         </p>\n         <p>A campaign can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>\n         <p>To get the campaign status, call <a>DescribeCampaign</a>.</p>\n         <note>\n            <p>Wait until the <code>status</code> of the campaign\n        is <code>ACTIVE</code> before asking the campaign for recommendations.</p>\n         </note>\n    \n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>ListCampaigns</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeCampaign</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdateCampaign</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteCampaign</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Creates a campaign that deploys a solution version. When a client calls the\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html\">GetRecommendations</a>\n      and\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetPersonalizedRanking.html\">GetPersonalizedRanking</a>\n      APIs, a campaign is specified in the request.</p>\n\n         <p>\n            <b>Minimum Provisioned TPS and Auto-Scaling</b>\n         </p>\n    \n         <p>A transaction is a single <code>GetRecommendations</code> or\n       <code>GetPersonalizedRanking</code> call. Transactions per second (TPS) is the throughput\n       and unit of billing for Amazon Personalize. The minimum provisioned TPS\n       (<code>minProvisionedTPS</code>) specifies the baseline throughput provisioned by\n       Amazon Personalize, and thus, the minimum billing charge. \n    </p>\n         <p>\n       If your TPS increases beyond\n       <code>minProvisionedTPS</code>, Amazon Personalize auto-scales the provisioned capacity up and down,\n       but never below <code>minProvisionedTPS</code>.\n       There's a short time delay while the capacity is increased that might cause loss of\n       transactions.</p>\n         <p>The actual TPS used is calculated as the average requests/second within a 5-minute window.\n      You pay for maximum of either the minimum provisioned TPS or the actual TPS.\n      We recommend starting with a low <code>minProvisionedTPS</code>, track\n       your usage using Amazon CloudWatch metrics, and then increase the <code>minProvisionedTPS</code>\n       as necessary.</p>\n\n         <p>\n            <b>Status</b>\n         </p>\n         <p>A campaign can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>\n         <p>To get the campaign status, call <a>DescribeCampaign</a>.</p>\n         <note>\n            <p>Wait until the <code>status</code> of the campaign\n        is <code>ACTIVE</code> before asking the campaign for recommendations.</p>\n         </note>\n    \n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>ListCampaigns</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeCampaign</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdateCampaign</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteCampaign</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -1141,7 +1427,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an empty dataset group. A dataset group contains related datasets that supply data\n      for training a model. A dataset group can contain at most three datasets, one for each type of\n      dataset:</p>\n         <ul>\n            <li>\n               <p>Interactions</p>\n            </li>\n            <li>\n               <p>Items</p>\n            </li>\n            <li>\n               <p>Users</p>\n            </li>\n         </ul>\n         <p>To train a model (create a solution), a dataset group that contains an\n        <code>Interactions</code> dataset is required. Call <a>CreateDataset</a> to add a\n      dataset to the group.</p>\n         <p>A dataset group can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING</p>\n            </li>\n         </ul>\n         <p>To get the status of the dataset group, call <a>DescribeDatasetGroup</a>. If\n      the status shows as CREATE FAILED, the response includes a <code>failureReason</code> key,\n      which describes why the creation failed.</p>\n         <note>\n            <p>You must wait until the <code>status</code> of the dataset group is <code>ACTIVE</code>\n        before adding a dataset to the group.</p>\n         </note>\n         <p>You can specify an Key Management Service (KMS) key to encrypt the datasets in the group. If you\n      specify a KMS key, you must also include an Identity and Access Management (IAM) role that has permission to\n      access the key.</p>\n         <p class=\"title\">\n            <b>APIs that require a dataset group ARN in the request</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateDataset</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>CreateEventTracker</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>CreateSolution</a>\n               </p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>ListDatasetGroups</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeDatasetGroup</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteDatasetGroup</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Creates an empty dataset group. A dataset group is a container for Amazon Personalize resources. \n      A dataset group can contain at most three datasets, one for each type of\n      dataset:</p>\n         <ul>\n            <li>\n               <p>Interactions</p>\n            </li>\n            <li>\n               <p>Items</p>\n            </li>\n            <li>\n               <p>Users</p>\n            </li>\n         </ul>\n         <p>\n      A dataset group can be a Domain dataset group, where you specify a domain and use\n      pre-configured resources like recommenders, or a Custom dataset group, where you use custom resources, such as a solution with a solution version, that\n      you deploy with a campaign.  If you start with a Domain dataset group, you can still add custom resources such as\n      solutions and solution versions trained with recipes for custom use cases and deployed with campaigns.\n    </p>\n         <p>A dataset group can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING</p>\n            </li>\n         </ul>\n         <p>To get the status of the dataset group, call <a>DescribeDatasetGroup</a>. If\n      the status shows as CREATE FAILED, the response includes a <code>failureReason</code> key,\n      which describes why the creation failed.</p>\n         <note>\n            <p>You must wait until the <code>status</code> of the dataset group is <code>ACTIVE</code>\n        before adding a dataset to the group.</p>\n         </note>\n         <p>You can specify an Key Management Service (KMS) key to encrypt the datasets in the group. If you\n      specify a KMS key, you must also include an Identity and Access Management (IAM) role that has permission to\n      access the key.</p>\n         <p class=\"title\">\n            <b>APIs that require a dataset group ARN in the request</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateDataset</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>CreateEventTracker</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>CreateSolution</a>\n               </p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>ListDatasetGroups</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeDatasetGroup</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteDatasetGroup</a>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.personalize#CreateDatasetGroupRequest": {
@@ -1165,6 +1451,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a Key Management Service (KMS) key used to encrypt the datasets.</p>"
                     }
+                },
+                "domain": {
+                    "target": "com.amazonaws.personalize#Domain",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain of the dataset group. Specify a domain to create a Domain dataset group. The domain you specify \n      determines the default schemas for datasets and the use cases available for recommenders. If you don't specify a domain,\n      you create a Custom dataset group with solution versions that you deploy with a campaign.\n    </p>"
+                    }
                 }
             }
         },
@@ -1175,6 +1467,12 @@
                     "target": "com.amazonaws.personalize#Arn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the new dataset group.</p>"
+                    }
+                },
+                "domain": {
+                    "target": "com.amazonaws.personalize#Domain",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain for the new Domain dataset group.</p>"
                     }
                 }
             }
@@ -1425,6 +1723,76 @@
                 }
             }
         },
+        "com.amazonaws.personalize#CreateRecommender": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.personalize#CreateRecommenderRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.personalize#CreateRecommenderResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.personalize#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ResourceAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a recommender with the recipe (a Domain dataset group use case) you specify. \n      You create recommenders for a Domain dataset group and specify the recommender's Amazon Resource Name (ARN) when you make a\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html\">GetRecommendations</a>\n      request.\n     </p>\n    \n    \n    \n         <p>\n            <b>Status</b>\n         </p>\n         <p>A recommender can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>\n         <p>To get the recommender status, call <a>DescribeRecommender</a>.</p>\n         <note>\n            <p>Wait until the <code>status</code> of the recommender\n        is <code>ACTIVE</code> before asking the recommender for recommendations.</p>\n         </note>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>ListRecommenders</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeRecommender</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdateRecommender</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteRecommender</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.personalize#CreateRecommenderRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.personalize#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the recommender.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetGroupArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the destination domain dataset group for the recommender.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "recipeArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the recipe that the recommender will use. For a recommender, a recipe is a Domain dataset group\n      use case. Only Domain dataset group use cases can be used to create a recommender. For information about use cases see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/domain-use-cases.html\">Choosing recommender use cases</a>.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "recommenderConfig": {
+                    "target": "com.amazonaws.personalize#RecommenderConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration details of the recommender.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.personalize#CreateRecommenderResponse": {
+            "type": "structure",
+            "members": {
+                "recommenderArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the recommender.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.personalize#CreateSchema": {
             "type": "operation",
             "input": {
@@ -1445,7 +1813,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon Personalize schema from the specified schema string. The schema you create\n      must be in Avro JSON format.</p>\n         <p>Amazon Personalize recognizes three schema variants. Each schema is associated with a dataset\n      type and has a set of required field and keywords.\n      You specify a schema when you call <a>CreateDataset</a>.</p>\n    \n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>ListSchemas</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeSchema</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteSchema</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Creates an Amazon Personalize schema from the specified schema string. The schema you create\n      must be in Avro JSON format.</p>\n         <p>Amazon Personalize recognizes three schema variants. Each schema is associated with a dataset\n      type and has a set of required field and keywords. If you are creating a schema for a dataset in a Domain dataset group, you\n    provide the domain of the Domain dataset group.\n      You specify a schema when you call <a>CreateDataset</a>.</p>\n    \n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>ListSchemas</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeSchema</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteSchema</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -1464,6 +1832,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A schema in Avro JSON format.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "domain": {
+                    "target": "com.amazonaws.personalize#Domain",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain for the schema. If you are creating a schema for a dataset in a Domain dataset group, specify\n    the domain you chose when you created the Domain dataset group.</p>"
                     }
                 }
             }
@@ -1591,7 +1965,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Trains or retrains an active solution. A solution is created using the <a>CreateSolution</a> operation and must be in the ACTIVE state before calling\n        <code>CreateSolutionVersion</code>. A new version of the solution is created every time you\n      call this operation.</p>\n         <p>\n            <b>Status</b>\n         </p>\n         <p>A solution version can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING</p>\n            </li>\n            <li>\n               <p>CREATE IN_PROGRESS</p>\n            </li>\n            <li>\n               <p>ACTIVE</p>\n            </li>\n            <li>\n               <p>CREATE FAILED</p>\n            </li>\n            <li>\n               <p>CREATE STOPPING</p>\n            </li>\n            <li>\n               <p>CREATE STOPPED</p>\n            </li>\n         </ul>\n         <p>To get the status of the version, call <a>DescribeSolutionVersion</a>. Wait\n      until the status shows as ACTIVE before calling <code>CreateCampaign</code>.</p>\n         <p>If the status shows as CREATE FAILED, the response includes a <code>failureReason</code>\n      key, which describes why the job failed.</p>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>ListSolutionVersions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeSolutionVersion</a>\n               </p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <a>ListSolutions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>CreateSolution</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeSolution</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteSolution</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Trains or retrains an active solution in a Custom dataset group. A solution is created using the <a>CreateSolution</a> operation and must be in the ACTIVE state before calling\n        <code>CreateSolutionVersion</code>. A new version of the solution is created every time you\n      call this operation.</p>\n         <p>\n            <b>Status</b>\n         </p>\n         <p>A solution version can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING</p>\n            </li>\n            <li>\n               <p>CREATE IN_PROGRESS</p>\n            </li>\n            <li>\n               <p>ACTIVE</p>\n            </li>\n            <li>\n               <p>CREATE FAILED</p>\n            </li>\n            <li>\n               <p>CREATE STOPPING</p>\n            </li>\n            <li>\n               <p>CREATE STOPPED</p>\n            </li>\n         </ul>\n         <p>To get the status of the version, call <a>DescribeSolutionVersion</a>. Wait\n      until the status shows as ACTIVE before calling <code>CreateCampaign</code>.</p>\n         <p>If the status shows as CREATE FAILED, the response includes a <code>failureReason</code>\n      key, which describes why the job failed.</p>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>ListSolutionVersions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeSolutionVersion</a>\n               </p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <a>ListSolutions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>CreateSolution</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeSolution</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteSolution</a>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.personalize#CreateSolutionVersionRequest": {
@@ -1881,6 +2255,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>If creating a dataset group fails, provides the reason why.</p>"
                     }
+                },
+                "domain": {
+                    "target": "com.amazonaws.personalize#Domain",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain of a Domain dataset group.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1924,6 +2304,12 @@
                     "target": "com.amazonaws.personalize#FailureReason",
                     "traits": {
                         "smithy.api#documentation": "<p>If creating a dataset group fails, the reason behind the failure.</p>"
+                    }
+                },
+                "domain": {
+                    "target": "com.amazonaws.personalize#Domain",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain of a Domain dataset group.</p>"
                     }
                 }
             },
@@ -2093,6 +2479,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time (in Unix time) that the schema was last updated.</p>"
                     }
+                },
+                "domain": {
+                    "target": "com.amazonaws.personalize#Domain",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain of a schema that you created for a dataset in a Domain dataset group.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2124,6 +2516,12 @@
                     "target": "com.amazonaws.personalize#Date",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time (in Unix time) that the schema was last updated.</p>"
+                    }
+                },
+                "domain": {
+                    "target": "com.amazonaws.personalize#Domain",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain of a schema that you created for a dataset in a Domain dataset group.</p>"
                     }
                 }
             },
@@ -2515,6 +2913,39 @@
                 }
             }
         },
+        "com.amazonaws.personalize#DeleteRecommender": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.personalize#DeleteRecommenderRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.personalize#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deactivates and removes a recommender. A deleted recommender can no longer be specified in a <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html\">GetRecommendations</a>\n    request.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.personalize#DeleteRecommenderRequest": {
+            "type": "structure",
+            "members": {
+                "recommenderArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the recommender to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.personalize#DeleteSchema": {
             "type": "operation",
             "input": {
@@ -2665,6 +3096,50 @@
                     "target": "com.amazonaws.personalize#BatchInferenceJob",
                     "traits": {
                         "smithy.api#documentation": "<p>Information on the specified batch inference job.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.personalize#DescribeBatchSegmentJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.personalize#DescribeBatchSegmentJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.personalize#DescribeBatchSegmentJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.personalize#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the properties of a batch segment job including name, Amazon Resource Name (ARN),\n      status, input and output configurations, and the ARN of the solution version used to generate\n      segments.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.personalize#DescribeBatchSegmentJobRequest": {
+            "type": "structure",
+            "members": {
+                "batchSegmentJobArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the batch segment job to describe.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.personalize#DescribeBatchSegmentJobResponse": {
+            "type": "structure",
+            "members": {
+                "batchSegmentJob": {
+                    "target": "com.amazonaws.personalize#BatchSegmentJob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information on the specified batch segment job.</p>"
                     }
                 }
             }
@@ -3065,6 +3540,50 @@
                 }
             }
         },
+        "com.amazonaws.personalize#DescribeRecommender": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.personalize#DescribeRecommenderRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.personalize#DescribeRecommenderResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.personalize#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the given recommender, including its status.</p>\n         <p>A recommender can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>\n         <p>When the <code>status</code> is <code>CREATE FAILED</code>, the response includes the\n      <code>failureReason</code> key, which describes why.</p>\n         <p>For more information on recommenders, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateRecommender.html\">CreateRecommender</a>.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.personalize#DescribeRecommenderRequest": {
+            "type": "structure",
+            "members": {
+                "recommenderArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the recommender to describe.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.personalize#DescribeRecommenderResponse": {
+            "type": "structure",
+            "members": {
+                "recommender": {
+                    "target": "com.amazonaws.personalize#Recommender",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The properties of the recommender.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.personalize#DescribeSchema": {
             "type": "operation",
             "input": {
@@ -3207,6 +3726,21 @@
                     "min": 0,
                     "max": 256
                 }
+            }
+        },
+        "com.amazonaws.personalize#Domain": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ECOMMERCE",
+                        "name": "ECOMMERCE"
+                    },
+                    {
+                        "value": "VIDEO_ON_DEMAND",
+                        "name": "VIDEO_ON_DEMAND"
+                    }
+                ]
             }
         },
         "com.amazonaws.personalize#ErrorMessage": {
@@ -3835,6 +4369,10 @@
         "com.amazonaws.personalize#KmsKeyArn": {
             "type": "string",
             "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
                 "smithy.api#pattern": "^arn:aws.*:kms:.*:[0-9]{12}:key/"
             }
         },
@@ -3906,6 +4444,73 @@
             "members": {
                 "batchInferenceJobs": {
                     "target": "com.amazonaws.personalize#BatchInferenceJobs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list containing information on each job that is returned.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.personalize#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. The value is <code>null</code> when\n      there are no more results to return.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.personalize#ListBatchSegmentJobs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.personalize#ListBatchSegmentJobsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.personalize#ListBatchSegmentJobsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.personalize#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#InvalidNextTokenException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets a list of the batch segment jobs that have been performed off of a solution\n      version that you specify.</p>",
+                "smithy.api#idempotent": {},
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "batchSegmentJobs",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.personalize#ListBatchSegmentJobsRequest": {
+            "type": "structure",
+            "members": {
+                "solutionVersionArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the solution version that the batch segment jobs used to generate batch segments.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.personalize#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to request the next page of results.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.personalize#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of batch segment job results to return in each page. The default\n      value is 100.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.personalize#ListBatchSegmentJobsResponse": {
+            "type": "structure",
+            "members": {
+                "batchSegmentJobs": {
+                    "target": "com.amazonaws.personalize#BatchSegmentJobs",
                     "traits": {
                         "smithy.api#documentation": "<p>A list containing information on each job that is returned.</p>"
                     }
@@ -4388,6 +4993,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.personalize#InvalidInputException"
+                },
+                {
                     "target": "com.amazonaws.personalize#InvalidNextTokenException"
                 }
             ],
@@ -4422,6 +5030,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of recipes to return.</p>"
                     }
+                },
+                "domain": {
+                    "target": "com.amazonaws.personalize#Domain",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Filters returned recipes by domain for a Domain dataset group. Only recipes (Domain dataset group use cases)\n      for this domain are included in the response. If you don't specify a domain, only non-domain recipes are returned.\n    </p>"
+                    }
                 }
             }
         },
@@ -4438,6 +5052,73 @@
                     "target": "com.amazonaws.personalize#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>A token for getting the next set of recipes.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.personalize#ListRecommenders": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.personalize#ListRecommendersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.personalize#ListRecommendersResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.personalize#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#InvalidNextTokenException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of recommenders in a given Domain dataset group.\n      When a Domain dataset group is not specified, all the recommenders associated with the account are listed.\n      The response provides the properties for each recommender, including the Amazon Resource Name (ARN).\n      For more information on recommenders, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateRecommender.html\">CreateRecommender</a>.</p>",
+                "smithy.api#idempotent": {},
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "recommenders",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.personalize#ListRecommendersRequest": {
+            "type": "structure",
+            "members": {
+                "datasetGroupArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Domain dataset group to list the recommenders for. When\n      a Domain dataset group is not specified, all the recommenders associated with the account are listed.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.personalize#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token returned from the previous call to <code>ListRecommenders</code> for getting\n      the next set of recommenders (if they exist).</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.personalize#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of recommenders to return.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.personalize#ListRecommendersResponse": {
+            "type": "structure",
+            "members": {
+                "recommenders": {
+                    "target": "com.amazonaws.personalize#Recommenders",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the recommenders.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.personalize#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token for getting the next set of recommenders (if they exist).</p>"
                     }
                 }
             }
@@ -4698,7 +5379,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 1300
+                    "max": 1500
                 }
             }
         },
@@ -4880,6 +5561,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time (in Unix time) that the recipe was last updated.</p>"
                     }
+                },
+                "domain": {
+                    "target": "com.amazonaws.personalize#Domain",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain of the recipe (if the recipe is a Domain dataset group use case).</p>"
+                    }
                 }
             },
             "traits": {
@@ -4899,6 +5586,194 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.personalize#RecipeSummary"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.personalize#Recommender": {
+            "type": "structure",
+            "members": {
+                "recommenderArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the recommender.</p>"
+                    }
+                },
+                "datasetGroupArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Domain dataset group that contains the recommender.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.personalize#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the recommender.</p>"
+                    }
+                },
+                "recipeArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the recipe (Domain dataset group use case) that the recommender was created for.\n</p>"
+                    }
+                },
+                "recommenderConfig": {
+                    "target": "com.amazonaws.personalize#RecommenderConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration details of the recommender.</p>"
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.personalize#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time (in Unix format) that the recommender was created.</p>"
+                    }
+                },
+                "lastUpdatedDateTime": {
+                    "target": "com.amazonaws.personalize#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time (in Unix format) that the recommender was last updated.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.personalize#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the recommender.</p>\n         <p>A recommender can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "failureReason": {
+                    "target": "com.amazonaws.personalize#FailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If a recommender fails, the reason behind the failure.</p>"
+                    }
+                },
+                "latestRecommenderUpdate": {
+                    "target": "com.amazonaws.personalize#RecommenderUpdateSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides a summary of the latest updates to the recommender. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a recommendation generator for a Domain dataset group. You create a recommender in a Domain dataset group\n      for a specific domain use case (domain recipe), and specify the recommender in a <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html\">GetRecommendations</a> request.</p>"
+            }
+        },
+        "com.amazonaws.personalize#RecommenderConfig": {
+            "type": "structure",
+            "members": {
+                "itemExplorationConfig": {
+                    "target": "com.amazonaws.personalize#HyperParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the exploration configuration hyperparameters, including <code>explorationWeight</code> and \n      <code>explorationItemAgeCutOff</code>, you want to use to configure the amount of item exploration Amazon Personalize uses when\n      recommending items. Provide <code>itemExplorationConfig</code> data only if your recommenders generate personalized recommendations for a user\n      (not popular items or similar items).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration details of the recommender.</p>"
+            }
+        },
+        "com.amazonaws.personalize#RecommenderSummary": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.personalize#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the recommender.</p>"
+                    }
+                },
+                "recommenderArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the recommender.</p>"
+                    }
+                },
+                "datasetGroupArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Domain dataset group that contains the recommender.</p>"
+                    }
+                },
+                "recipeArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the recipe (Domain dataset group use case) that the recommender was created for.</p>"
+                    }
+                },
+                "recommenderConfig": {
+                    "target": "com.amazonaws.personalize#RecommenderConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration details of the recommender.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.personalize#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the recommender. A recommender can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.personalize#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time (in Unix format) that the recommender was created.</p>"
+                    }
+                },
+                "lastUpdatedDateTime": {
+                    "target": "com.amazonaws.personalize#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time (in Unix format) that the recommender was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a summary of the properties of the recommender.</p>"
+            }
+        },
+        "com.amazonaws.personalize#RecommenderUpdateSummary": {
+            "type": "structure",
+            "members": {
+                "recommenderConfig": {
+                    "target": "com.amazonaws.personalize#RecommenderConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration details of the recommender update.</p>"
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.personalize#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time (in Unix format) that the recommender update was created.</p>"
+                    }
+                },
+                "lastUpdatedDateTime": {
+                    "target": "com.amazonaws.personalize#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time (in Unix time) that the recommender update was last updated.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.personalize#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the recommender update.</p>\n         <p>A recommender can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "failureReason": {
+                    "target": "com.amazonaws.personalize#FailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If a recommender update fails, the reason behind the failure.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a summary of the properties of a recommender update. For a complete listing, call the\n      <a>DescribeRecommender</a> API.</p>"
+            }
+        },
+        "com.amazonaws.personalize#Recommenders": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.personalize#RecommenderSummary"
             },
             "traits": {
                 "smithy.api#length": {
@@ -5277,7 +6152,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that provides information about a specific version of a <a>Solution</a>.</p>"
+                "smithy.api#documentation": "<p>An object that provides information about a specific version of a <a>Solution</a> in a Custom dataset group.</p>"
             }
         },
         "com.amazonaws.personalize#SolutionVersionSummary": {
@@ -5513,6 +6388,60 @@
                     "target": "com.amazonaws.personalize#Arn",
                     "traits": {
                         "smithy.api#documentation": "<p>The same campaign ARN as given in the request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.personalize#UpdateRecommender": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.personalize#UpdateRecommenderRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.personalize#UpdateRecommenderResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.personalize#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the recommender to modify the recommender configuration.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.personalize#UpdateRecommenderRequest": {
+            "type": "structure",
+            "members": {
+                "recommenderArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the recommender to modify.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "recommenderConfig": {
+                    "target": "com.amazonaws.personalize#RecommenderConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration details of the recommender.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.personalize#UpdateRecommenderResponse": {
+            "type": "structure",
+            "members": {
+                "recommenderArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The same recommender Amazon Resource Name (ARN) as given in the request.</p>"
                     }
                 }
             }

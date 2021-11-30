@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Retrieves (queries) aggregated statistical data for all the S3 buckets that
-// Amazon Macie monitors and analyzes.
+// Retrieves (queries) aggregated statistical data about S3 buckets that Amazon
+// Macie monitors and analyzes.
 func (c *Client) GetBucketStatistics(ctx context.Context, params *GetBucketStatisticsInput, optFns ...func(*Options)) (*GetBucketStatisticsOutput, error) {
 	if params == nil {
 		params = &GetBucketStatisticsInput{}

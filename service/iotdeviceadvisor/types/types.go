@@ -7,13 +7,13 @@ import (
 	"time"
 )
 
-// Lists all the devices under test
+// Information of a test device. A thing ARN or a certificate ARN is required.
 type DeviceUnderTest struct {
 
-	// Lists devices certificate arn
+	// Lists devices certificate ARN.
 	CertificateArn *string
 
-	// Lists devices thing arn
+	// Lists devices thing ARN.
 	ThingArn *string
 
 	noSmithyDocumentSerde
@@ -22,7 +22,7 @@ type DeviceUnderTest struct {
 // Show Group Result.
 type GroupResult struct {
 
-	// Group result Id.
+	// Group result ID.
 	GroupId *string
 
 	// Group Result Name.
@@ -37,7 +37,7 @@ type GroupResult struct {
 // Gets Suite Definition Configuration.
 type SuiteDefinitionConfiguration struct {
 
-	// Gets device permission arn.
+	// Gets the device permission ARN.
 	DevicePermissionRoleArn *string
 
 	// Gets the devices configured.
@@ -61,13 +61,13 @@ type SuiteDefinitionInformation struct {
 	// Date (in Unix epoch time) when the test suite was created.
 	CreatedAt *time.Time
 
-	// Specifies the devices under test for the test suite.
+	// Specifies the devices that are under test for the test suite.
 	DefaultDevices []DeviceUnderTest
 
 	// Specifies if the test suite is intended for qualification.
 	IntendedForQualification bool
 
-	// Suite definition Id of the test suite.
+	// Suite definition ID of the test suite.
 	SuiteDefinitionId *string
 
 	// Suite name of the test suite.
@@ -79,6 +79,9 @@ type SuiteDefinitionInformation struct {
 // Gets suite run configuration.
 type SuiteRunConfiguration struct {
 
+	// TRUE if multiple test suites run in parallel.
+	ParallelRun bool
+
 	// Gets the primary device for suite run.
 	PrimaryDevice *DeviceUnderTest
 
@@ -88,7 +91,10 @@ type SuiteRunConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the suite run.
+// Information about the suite run. Requires permission to access the
+// SuiteRunInformation
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 type SuiteRunInformation struct {
 
 	// Date (in Unix epoch time) when the suite run was created.
@@ -109,7 +115,7 @@ type SuiteRunInformation struct {
 	// Status of the suite run.
 	Status SuiteRunStatus
 
-	// Suite definition Id of the suite run.
+	// Suite definition ID of the suite run.
 	SuiteDefinitionId *string
 
 	// Suite definition name of the suite run.
@@ -118,13 +124,13 @@ type SuiteRunInformation struct {
 	// Suite definition version of the suite run.
 	SuiteDefinitionVersion *string
 
-	// Suite run Id of the suite run.
+	// Suite run ID of the suite run.
 	SuiteRunId *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides test case run.
+// Provides the test case run.
 type TestCaseRun struct {
 
 	// Provides test case run end time.
@@ -133,22 +139,44 @@ type TestCaseRun struct {
 	// Provides test case run failure result.
 	Failure *string
 
-	// Provides test case run log Url.
+	// Provides test case run log URL.
 	LogUrl *string
 
 	// Provides test case run start time.
 	StartTime *time.Time
 
-	// Provides test case run status.
+	// Provides the test case run status. Status is one of the following:
+	//
+	// * PASS: Test
+	// passed.
+	//
+	// * FAIL: Test failed.
+	//
+	// * PENDING: Test has not started running but is
+	// scheduled.
+	//
+	// * RUNNING: Test is running.
+	//
+	// * STOPPING: Test is performing cleanup
+	// steps. You will see this status only if you stop a suite run.
+	//
+	// * STOPPED Test is
+	// stopped. You will see this status only if you stop a suite run.
+	//
+	// *
+	// PASS_WITH_WARNINGS: Test passed with warnings.
+	//
+	// * ERORR: Test faced an error
+	// when running due to an internal issue.
 	Status Status
 
-	// Provides test case run definition Id.
+	// Provides the test case run definition ID.
 	TestCaseDefinitionId *string
 
-	// Provides test case run definition Name.
+	// Provides the test case run definition name.
 	TestCaseDefinitionName *string
 
-	// Provides test case run Id.
+	// Provides the test case run ID.
 	TestCaseRunId *string
 
 	// Provides test case run warnings.

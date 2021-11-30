@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// This API is in preview release for Amazon Connect and is subject to change.
 // Describes the hours of operation.
 func (c *Client) DescribeHoursOfOperation(ctx context.Context, params *DescribeHoursOfOperationInput, optFns ...func(*Options)) (*DescribeHoursOfOperationOutput, error) {
 	if params == nil {

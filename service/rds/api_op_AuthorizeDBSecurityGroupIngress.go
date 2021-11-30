@@ -15,7 +15,7 @@ import (
 // First, EC2 or VPC security groups can be added to the DBSecurityGroup if the
 // application using the database is running on EC2 or VPC instances. Second, IP
 // ranges are available if the application accessing your database is running on
-// the Internet. Required parameters for this API are one of CIDR range,
+// the internet. Required parameters for this API are one of CIDR range,
 // EC2SecurityGroupId for VPC, or (EC2SecurityGroupOwnerId and either
 // EC2SecurityGroupName or EC2SecurityGroupId for non-VPC). You can't authorize
 // ingress from an EC2 security group in one Amazon Web Services Region to an

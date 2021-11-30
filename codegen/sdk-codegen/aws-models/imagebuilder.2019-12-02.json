@@ -120,7 +120,7 @@
                 "description": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description of the distribution configuration. Minimum and maximum length are in characters.</p>"
+                        "smithy.api#documentation": "<p>The description of the AMI distribution configuration. Minimum and maximum length are in characters.</p>"
                     }
                 },
                 "targetAccountIds": {
@@ -558,9 +558,9 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 1
+                    "min": 0
                 },
-                "smithy.api#pattern": "^[^\\x00]+$"
+                "smithy.api#pattern": "^[^\\x00]*$"
             }
         },
         "com.amazonaws.imagebuilder#ComponentParameterValueList": {
@@ -2317,7 +2317,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an Image Builder image resource. This does not delete any EC2 AMIs or ECR container images\n\t\t\tthat are created during the image build process. You must clean those up separately,\n\t\t\tusing the appropriate Amazon EC2 or Amazon ECR console actions, or API or CLI commands.</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>To deregister an EC2 Linux AMI, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/deregister-ami.html\">Deregister \n\t\t\t\t\t\tyour Linux AMI</a> in the <i>\n                     <i>Amazon EC2 User Guide</i>\n                  </i>.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>To deregister an EC2 Windows AMI, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/deregister-ami.html\">Deregister \n\t\t\t\t\t\tyour Windows AMI</a> in the <i>\n                     <i>Amazon EC2 Windows Guide</i>\n                  </i>.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>To delete a container image from Amazon ECR, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.comAmazonECR/latest/userguide/delete_image.html\">Deleting \n\t\t\t\t\t\tan image</a> in the <i>Amazon ECR User Guide</i>.</p>\n\t\t\t         </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Deletes an Image Builder image resource. This does not delete any EC2 AMIs or ECR container images\n\t\t\tthat are created during the image build process. You must clean those up separately,\n\t\t\tusing the appropriate Amazon EC2 or Amazon ECR console actions, or API or CLI commands.</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>To deregister an EC2 Linux AMI, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/deregister-ami.html\">Deregister \n\t\t\t\t\t\tyour Linux AMI</a> in the <i>\n                     <i>Amazon EC2 User Guide</i>\n                  </i>.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>To deregister an EC2 Windows AMI, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/deregister-ami.html\">Deregister \n\t\t\t\t\t\tyour Windows AMI</a> in the <i>\n                     <i>Amazon EC2 Windows Guide</i>\n                  </i>.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>To delete a container image from Amazon ECR, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/delete_image.html\">Deleting \n\t\t\t\t\t\tan image</a> in the <i>Amazon ECR User Guide</i>.</p>\n\t\t\t         </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/DeleteImage",
@@ -4959,10 +4959,22 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the group.</p>"
                     }
+                },
+                "organizationArns": {
+                    "target": "com.amazonaws.imagebuilder#OrganizationArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for an Amazon Web Services Organization that you want to share your AMI with. For more information, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html\">What is Organizations?</a>.</p>"
+                    }
+                },
+                "organizationalUnitArns": {
+                    "target": "com.amazonaws.imagebuilder#OrganizationalUnitArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for an Organizations organizational unit (OU) that you want to share your AMI with. For more \n\t\t\tinformation about key concepts for Organizations, see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html\">Organizations terminology and concepts</a>.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the configuration for a launch permission. The launch permission modification request is sent to the \n\t\t\t<a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html\">Amazon EC2 ModifyImageAttribute</a> \n\t\t\tAPI on behalf of the user for each Region they have selected to distribute the AMI. To make an AMI public, \n\t\t\tset the launch permission authorized accounts to <code>all</code>. See the examples for making an AMI public at \n\t\t\t<a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html\">Amazon EC2 ModifyImageAttribute</a>.</p>"
+                "smithy.api#documentation": "<p>Describes the configuration for a launch permission. The launch permission modification \n\t\t\trequest is sent to the <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html\">Amazon EC2 ModifyImageAttribute</a> \n\t\t\tAPI on behalf of the user for each Region they have selected to distribute the AMI. To make an AMI public, \n\t\t\tset the launch permission authorized accounts to <code>all</code>. See the examples for making an AMI \n\t\t\tpublic at <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html\">Amazon EC2 ModifyImageAttribute</a>.</p>"
             }
         },
         "com.amazonaws.imagebuilder#LaunchTemplateConfiguration": {
@@ -6185,6 +6197,42 @@
                 "smithy.api#box": {}
             }
         },
+        "com.amazonaws.imagebuilder#OrganizationArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws[^:]*:organizations::[0-9]{12}:organization/o-[a-z0-9]{10,32}$"
+            }
+        },
+        "com.amazonaws.imagebuilder#OrganizationArnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.imagebuilder#OrganizationArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#OrganizationalUnitArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws[^:]*:organizations::[0-9]{12}:ou/o-[a-z0-9]{10,32}/ou-[0-9a-z]{4,32}-[0-9a-z]{8,32}$"
+            }
+        },
+        "com.amazonaws.imagebuilder#OrganizationalUnitArnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.imagebuilder#OrganizationalUnitArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 25
+                }
+            }
+        },
         "com.amazonaws.imagebuilder#OsVersion": {
             "type": "string",
             "traits": {
@@ -6412,7 +6460,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Applies a policy to a container image. We recommend that you call the RAM API CreateResourceShare (https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html) to share resources. If you call the Image Builder API <code>PutContainerImagePolicy</code>, you must also call the RAM API PromoteResourceShareCreatedFromPolicy (https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html) in order for the resource to be visible to all principals with whom the resource is shared.</p>",
+                "smithy.api#documentation": "<p>Applies a policy to a container image. We recommend that you call the RAM API CreateResourceShare (https://docs.aws.amazon.com//ram/latest/APIReference/API_CreateResourceShare.html) to share resources. If you call the Image Builder API <code>PutContainerImagePolicy</code>, you must also call the RAM API PromoteResourceShareCreatedFromPolicy (https://docs.aws.amazon.com//ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html) in order for the resource to be visible to all principals with whom the resource is shared.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/PutContainerRecipePolicy",
@@ -7517,6 +7565,21 @@
         },
         "com.amazonaws.imagebuilder#imagebuilder": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "imagebuilder",
+                    "arnNamespace": "imagebuilder",
+                    "cloudFormationName": "Imagebuilder",
+                    "cloudTrailEventSource": "imagebuilder.amazonaws.com",
+                    "endpointPrefix": "imagebuilder"
+                },
+                "aws.auth#sigv4": {
+                    "name": "imagebuilder"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>EC2 Image Builder is a fully managed Amazon Web Services service that makes it easier to automate the \n      creation, management, and deployment of customized, secure, and up-to-date \"golden\" server \n      images that are pre-installed and pre-configured with software and settings to meet specific\n      IT standards.</p>",
+                "smithy.api#title": "EC2 Image Builder"
+            },
             "version": "2019-12-02",
             "operations": [
                 {
@@ -7666,22 +7729,7 @@
                 {
                     "target": "com.amazonaws.imagebuilder#UpdateInfrastructureConfiguration"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "imagebuilder",
-                    "arnNamespace": "imagebuilder",
-                    "cloudFormationName": "Imagebuilder",
-                    "cloudTrailEventSource": "imagebuilder.amazonaws.com",
-                    "endpointPrefix": "imagebuilder"
-                },
-                "aws.auth#sigv4": {
-                    "name": "imagebuilder"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>EC2 Image Builder is a fully managed Amazon Web Services service that makes it easier to automate the \n      creation, management, and deployment of customized, secure, and up-to-date \"golden\" server \n      images that are pre-installed and pre-configured with software and settings to meet specific\n      IT standards.</p>",
-                "smithy.api#title": "EC2 Image Builder"
-            }
+            ]
         }
     }
 }

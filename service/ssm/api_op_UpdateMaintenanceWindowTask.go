@@ -153,13 +153,14 @@ type UpdateMaintenanceWindowTaskInput struct {
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role)
 	ServiceRoleArn *string
 
-	// The targets (either instances or tags) to modify. Instances are specified using
-	// the format Key=instanceids,Values=instanceID_1,instanceID_2. Tags are specified
-	// using the format  Key=tag_name,Values=tag_value. One or more targets must be
-	// specified for maintenance window Run Command-type tasks. Depending on the task,
-	// targets are optional for other maintenance window task types (Automation,
-	// Lambda, and Step Functions). For more information about running tasks that don't
-	// specify targets, see Registering maintenance window tasks without targets
+	// The targets (either managed nodes or tags) to modify. Managed nodes are
+	// specified using the format Key=instanceids,Values=instanceID_1,instanceID_2.
+	// Tags are specified using the format  Key=tag_name,Values=tag_value. One or more
+	// targets must be specified for maintenance window Run Command-type tasks.
+	// Depending on the task, targets are optional for other maintenance window task
+	// types (Automation, Lambda, and Step Functions). For more information about
+	// running tasks that don't specify targets, see Registering maintenance window
+	// tasks without targets
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	Targets []types.Target

@@ -172,7 +172,7 @@
                 "Category": {
                     "target": "com.amazonaws.transcribestreaming#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The category of of information identified in this entity; for example, PII.</p>"
+                        "smithy.api#documentation": "<p>The category of information identified in this entity; for example, PII.</p>"
                     }
                 },
                 "Type": {
@@ -235,7 +235,7 @@
                 "Type": {
                     "target": "com.amazonaws.transcribestreaming#ItemType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the item. <code>PRONUNCIATION</code> indicates that the item is a word that\n      was recognized in the input audio. <code>PUNCTUATION</code> indicates that the item was\n      interpreted as a pause in the input audio.</p>"
+                        "smithy.api#documentation": "<p>The type of the item. <code>PRONUNCIATION</code> indicates that the item is a word\n      that was recognized in the input audio. <code>PUNCTUATION</code> indicates that the item\n      was interpreted as a pause in the input audio.</p>"
                     }
                 },
                 "Content": {
@@ -247,19 +247,19 @@
                 "VocabularyFilterMatch": {
                     "target": "com.amazonaws.transcribestreaming#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether a word in the item matches a word in the vocabulary filter you've chosen\n      for your real-time stream. If <code>true</code> then a word in the item matches your\n      vocabulary filter.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether a word in the item matches a word in the vocabulary filter you've chosen\n      for your media stream. If <code>true</code> then a word in the item matches your\n      vocabulary filter.</p>"
                     }
                 },
                 "Speaker": {
                     "target": "com.amazonaws.transcribestreaming#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>If speaker identification is enabled, shows the speakers identified in the real-time\n      stream.</p>"
+                        "smithy.api#documentation": "<p>If speaker identification is enabled, shows the speakers identified in the media\n      stream.</p>"
                     }
                 },
                 "Confidence": {
                     "target": "com.amazonaws.transcribestreaming#Confidence",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value between 0 and 1 for an item that is a confidence score that Amazon Transcribe assigns to each\n      word or phrase that it transcribes.</p>"
+                        "smithy.api#documentation": "<p>A value between zero and one for an item that is a confidence score that Amazon Transcribe assigns to each\n      word or phrase that it transcribes.</p>"
                     }
                 },
                 "Stable": {
@@ -347,6 +347,42 @@
                         "name": "ZH_CN"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.transcribestreaming#LanguageIdentification": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transcribestreaming#LanguageWithScore"
+            }
+        },
+        "com.amazonaws.transcribestreaming#LanguageOptions": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^[a-zA-Z-,]+$"
+            }
+        },
+        "com.amazonaws.transcribestreaming#LanguageWithScore": {
+            "type": "structure",
+            "members": {
+                "LanguageCode": {
+                    "target": "com.amazonaws.transcribestreaming#LanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language code of the language identified by Amazon Transcribe.</p>"
+                    }
+                },
+                "Score": {
+                    "target": "com.amazonaws.transcribestreaming#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The confidence score for the associated language code. Confidence scores are values\n      between zero and one; larger values indicate a higher confidence in the identified language.\n     </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The language codes of the identified languages and their associated confidence scores. \n      The confidence score is a value between zero and one; a larger value indicates a higher \n      confidence in the identified language.</p>"
             }
         },
         "com.amazonaws.transcribestreaming#LimitExceededException": {
@@ -717,13 +753,25 @@
                 "Alternatives": {
                     "target": "com.amazonaws.transcribestreaming#AlternativeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of possible transcriptions for the audio. Each alternative typically contains one\n        <code>item</code> that contains the result of the transcription.</p>"
+                        "smithy.api#documentation": "<p>A list of possible transcriptions for the audio. Each alternative typically contains one\n      <code>item</code> that contains the result of the transcription.</p>"
                     }
                 },
                 "ChannelId": {
                     "target": "com.amazonaws.transcribestreaming#String",
                     "traits": {
                         "smithy.api#documentation": "<p>When channel identification is enabled, Amazon Transcribe transcribes the speech from each audio\n      channel separately.</p>\n         <p>You can use <code>ChannelId</code> to retrieve the transcription results for a single\n      channel in your audio stream.</p>"
+                    }
+                },
+                "LanguageCode": {
+                    "target": "com.amazonaws.transcribestreaming#LanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language code of the identified language in your media stream.</p>"
+                    }
+                },
+                "LanguageIdentification": {
+                    "target": "com.amazonaws.transcribestreaming#LanguageIdentification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language code of the dominant language identified in your media.</p>"
                     }
                 }
             },
@@ -1061,15 +1109,14 @@
                 "LanguageCode": {
                     "target": "com.amazonaws.transcribestreaming#LanguageCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the source language used in the input audio stream.</p>",
-                        "smithy.api#httpHeader": "x-amzn-transcribe-language-code",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The language code of the input audio stream.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-language-code"
                     }
                 },
                 "MediaSampleRateHertz": {
                     "target": "com.amazonaws.transcribestreaming#MediaSampleRateHertz",
                     "traits": {
-                        "smithy.api#documentation": "<p>The sample rate, in Hertz, of the input audio. We suggest that you use 8,000 Hz for low\n      quality audio and 16,000 Hz for high quality audio.</p>",
+                        "smithy.api#documentation": "<p>The sample rate, in Hertz (Hz), of the input audio. We suggest that you use 8,000 Hz \n      for low quality audio and 16,000 Hz or higher for high quality audio.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-sample-rate",
                         "smithy.api#required": {}
                     }
@@ -1114,21 +1161,21 @@
                 "VocabularyFilterMethod": {
                     "target": "com.amazonaws.transcribestreaming#VocabularyFilterMethod",
                     "traits": {
-                        "smithy.api#documentation": "<p>The manner in which you use your vocabulary filter to filter words in your transcript.\n        <code>Remove</code> removes filtered words from your transcription results.\n        <code>Mask</code> masks filtered words with a <code>***</code> in your transcription results.\n        <code>Tag</code> keeps the filtered words in your transcription results and tags them. The\n      tag appears as <code>VocabularyFilterMatch</code> equal to <code>True</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The manner in which you use your vocabulary filter to filter words in your transcript.\n      <code>Remove</code> removes filtered words from your transcription results.\n      <code>Mask</code> masks filtered words with a <code>***</code> in your transcription\n      results. <code>Tag</code> keeps the filtered words in your transcription results and tags \n      them. The tag appears as <code>VocabularyFilterMatch</code> equal to \n      <code>True</code>.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-vocabulary-filter-method"
                     }
                 },
                 "ShowSpeakerLabel": {
                     "target": "com.amazonaws.transcribestreaming#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>When <code>true</code>, enables speaker identification in your real-time stream.</p>",
+                        "smithy.api#documentation": "<p>When <code>true</code>, enables speaker identification in your media stream.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-show-speaker-label"
                     }
                 },
                 "EnableChannelIdentification": {
                     "target": "com.amazonaws.transcribestreaming#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>When <code>true</code>, instructs Amazon Transcribe to process each audio channel separately and then\n      merge the transcription output of each channel into a single transcription.</p>\n         <p>Amazon Transcribe also produces a transcription of each item. An item includes the start time, end\n      time, and any alternative transcriptions.</p>\n         <p>You can't set both <code>ShowSpeakerLabel</code> and\n        <code>EnableChannelIdentification</code> in the same request. If you set both, your request\n      returns a <code>BadRequestException</code>.</p>",
+                        "smithy.api#documentation": "<p>When <code>true</code>, instructs Amazon Transcribe to process each audio channel separately,\n      then merges the transcription output of each channel into a single transcription.</p>\n         <p>Amazon Transcribe also produces a transcription of each item. An item includes the start time, end\n      time, and any alternative transcriptions.</p>\n         <p>You can't set both <code>ShowSpeakerLabel</code> and\n      <code>EnableChannelIdentification</code> in the same request. If you set both, your request\n      returns a <code>BadRequestException</code>.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-enable-channel-identification"
                     }
                 },
@@ -1156,21 +1203,21 @@
                 "ContentIdentificationType": {
                     "target": "com.amazonaws.transcribestreaming#ContentIdentificationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set this field to PII to identify personally identifiable information (PII) in the transcription output. Content identification is performed only upon complete transcription of the audio segments.</p> \n         <p>You can’t set both <code>ContentIdentificationType</code> and <code>ContentRedactionType</code> in the same request. If you set both, your request returns a <code>BadRequestException</code>.</p>",
+                        "smithy.api#documentation": "<p>Set this field to PII to identify personally identifiable information (PII) in the transcription\n      output. Content identification is performed only upon complete transcription of the audio\n      segments.</p> \n         <p>You can’t set both <code>ContentIdentificationType</code> and\n      <code>ContentRedactionType</code> in the same request. If you set both, your request \n      returns a <code>BadRequestException</code>.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-content-identification-type"
                     }
                 },
                 "ContentRedactionType": {
                     "target": "com.amazonaws.transcribestreaming#ContentRedactionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set this field to PII to redact personally identifiable information (PII) in the transcription output. Content redaction is performed only upon complete transcription of the audio segments.</p> \n         <p>You can’t set both <code>ContentRedactionType</code> and <code>ContentIdentificationType</code> in the same request. If you set both, your request returns a <code>BadRequestException</code>.</p>",
+                        "smithy.api#documentation": "<p>Set this field to PII to redact personally identifiable information (PII) in the transcription\n      output. Content redaction is performed only upon complete transcription of the audio\n      segments.</p> \n         <p>You can’t set both <code>ContentRedactionType</code> and\n      <code>ContentIdentificationType</code> in the same request. If you set both, your request\n      returns a <code>BadRequestException</code>.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-content-redaction-type"
                     }
                 },
                 "PiiEntityTypes": {
                     "target": "com.amazonaws.transcribestreaming#PiiEntityTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>List the PII entity types you want to identify or redact. In order to specify entity types, you must have \n      either <code>ContentIdentificationType</code> or <code>ContentRedactionType</code> enabled.</p>    \n         <p>\n            <code>PiiEntityTypes</code> is an optional parameter with a default value of <code>ALL</code>.</p>",
+                        "smithy.api#documentation": "<p>List the PII entity types you want to identify or redact. In order to specify entity types,\n      you must have either <code>ContentIdentificationType</code> or\n      <code>ContentRedactionType</code> enabled.</p>\n         <p> \n            <code>PIIEntityTypes</code> must be comma-separated; the available values are:\n      <code>BANK_ACCOUNT_NUMBER</code>, <code>BANK_ROUTING</code>,\n      <code>CREDIT_DEBIT_NUMBER</code>, <code>CREDIT_DEBIT_CVV</code>, \n      <code>CREDIT_DEBIT_EXPIRY</code>, <code>PIN</code>, <code>EMAIL</code>, \n      <code>ADDRESS</code>, <code>NAME</code>, <code>PHONE</code>, \n      <code>SSN</code>, and <code>ALL</code>.</p>\n         <p>\n            <code>PiiEntityTypes</code> is an optional parameter with a default value of\n      <code>ALL</code>.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-pii-entity-types"
                     }
                 },
@@ -1179,6 +1226,27 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the language model you want to use.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-language-model-name"
+                    }
+                },
+                "IdentifyLanguage": {
+                    "target": "com.amazonaws.transcribestreaming#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional. Set this value to <code>true</code> to enable language identification for \n      your media stream.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-identify-language"
+                    }
+                },
+                "LanguageOptions": {
+                    "target": "com.amazonaws.transcribestreaming#LanguageOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object containing a list of languages that might be present in your audio.</p>\n         <p>You must provide two or more language codes to help Amazon Transcribe identify the correct \n      language of your media stream with the highest possible accuracy. You can only select one\n      variant per language; for example, you can't include both <code>en-US</code> and\n      <code>en-UK</code> in the same request.</p>\n         <p>You can only use this parameter if you've set <code>IdentifyLanguage</code> to\n      <code>true</code>in your request.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-language-options"
+                    }
+                },
+                "PreferredLanguage": {
+                    "target": "com.amazonaws.transcribestreaming#LanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional. From the subset of languages codes you provided for \n      <code>LanguageOptions</code>, you can select one preferred language for your \n      transcription.</p>\n         <p>You can only use this parameter if you've set <code>IdentifyLanguage</code> to\n      <code>true</code>in your request.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-preferred-language"
                     }
                 }
             }
@@ -1196,14 +1264,14 @@
                 "LanguageCode": {
                     "target": "com.amazonaws.transcribestreaming#LanguageCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code for the input audio stream.</p>",
+                        "smithy.api#documentation": "<p>The language code of the input audio stream.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-language-code"
                     }
                 },
                 "MediaSampleRateHertz": {
                     "target": "com.amazonaws.transcribestreaming#MediaSampleRateHertz",
                     "traits": {
-                        "smithy.api#documentation": "<p>The sample rate for the input audio stream. Use 8,000 Hz for low quality audio and 16,000 Hz\n      for high quality audio.</p>",
+                        "smithy.api#documentation": "<p>The sample rate, in Hertz (Hz), for the input audio stream. Use 8,000 Hz for low quality \n      audio and 16,000 Hz or higher for high quality audio.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-sample-rate"
                     }
                 },
@@ -1238,14 +1306,14 @@
                 "VocabularyFilterName": {
                     "target": "com.amazonaws.transcribestreaming#VocabularyFilterName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the vocabulary filter used in your real-time stream.</p>",
+                        "smithy.api#documentation": "<p>The name of the vocabulary filter used in your media stream.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-vocabulary-filter-name"
                     }
                 },
                 "VocabularyFilterMethod": {
                     "target": "com.amazonaws.transcribestreaming#VocabularyFilterMethod",
                     "traits": {
-                        "smithy.api#documentation": "<p>The vocabulary filtering method used in the real-time stream.</p>",
+                        "smithy.api#documentation": "<p>The vocabulary filtering method used in the media stream.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-vocabulary-filter-method"
                     }
                 },
@@ -1308,7 +1376,29 @@
                 "LanguageModelName": {
                     "target": "com.amazonaws.transcribestreaming#ModelName",
                     "traits": {
+                        "smithy.api#documentation": "<p>The name of the language model used in your media stream.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-language-model-name"
+                    }
+                },
+                "IdentifyLanguage": {
+                    "target": "com.amazonaws.transcribestreaming#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language code of the language identified in your media stream.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-identify-language"
+                    }
+                },
+                "LanguageOptions": {
+                    "target": "com.amazonaws.transcribestreaming#LanguageOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language codes used in the identification of your media stream's predominant \n      language.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-language-options"
+                    }
+                },
+                "PreferredLanguage": {
+                    "target": "com.amazonaws.transcribestreaming#LanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The preferred language you specified in your request.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-preferred-language"
                     }
                 }
             }
@@ -1318,15 +1408,6 @@
         },
         "com.amazonaws.transcribestreaming#Transcribe": {
             "type": "service",
-            "version": "2017-10-26",
-            "operations": [
-                {
-                    "target": "com.amazonaws.transcribestreaming#StartMedicalStreamTranscription"
-                },
-                {
-                    "target": "com.amazonaws.transcribestreaming#StartStreamTranscription"
-                }
-            ],
             "traits": {
                 "aws.api#service": {
                     "sdkId": "Transcribe Streaming",
@@ -1341,7 +1422,16 @@
                 "aws.protocols#restJson1": {},
                 "smithy.api#documentation": "<p>Operations and objects for transcribing streaming speech to text.</p>",
                 "smithy.api#title": "Amazon Transcribe Streaming Service"
-            }
+            },
+            "version": "2017-10-26",
+            "operations": [
+                {
+                    "target": "com.amazonaws.transcribestreaming#StartMedicalStreamTranscription"
+                },
+                {
+                    "target": "com.amazonaws.transcribestreaming#StartStreamTranscription"
+                }
+            ]
         },
         "com.amazonaws.transcribestreaming#Transcript": {
             "type": "structure",
@@ -1377,7 +1467,7 @@
                 "TranscriptEvent": {
                     "target": "com.amazonaws.transcribestreaming#TranscriptEvent",
                     "traits": {
-                        "smithy.api#documentation": "<p>A portion of the transcription of the audio stream. Events are sent periodically from\n      Amazon Transcribe to your application. The event can be a partial transcription of a section of the audio\n      stream, or it can be the entire transcription of that portion of the audio stream.\n      </p>"
+                        "smithy.api#documentation": "<p>A portion of the transcription of the audio stream. Events are sent periodically from\n      Amazon Transcribe to your application. The event can be a partial transcription of a section of the audio\n      stream, or it can be the entire transcription of that portion of the audio stream. </p>"
                     }
                 },
                 "BadRequestException": {

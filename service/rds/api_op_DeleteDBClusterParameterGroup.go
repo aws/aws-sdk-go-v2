@@ -12,9 +12,13 @@ import (
 
 // Deletes a specified DB cluster parameter group. The DB cluster parameter group
 // to be deleted can't be associated with any DB clusters. For more information on
-// Amazon Aurora, see  What Is Amazon Aurora?
+// Amazon Aurora, see  What is Amazon Aurora?
 // (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
-// in the Amazon Aurora User Guide. This action only applies to Aurora DB clusters.
+// in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
+// see  Multi-AZ deployments with two readable standby DB instances
+// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
+// in the Amazon RDS User Guide. The Multi-AZ DB clusters feature is in preview and
+// is subject to change.
 func (c *Client) DeleteDBClusterParameterGroup(ctx context.Context, params *DeleteDBClusterParameterGroupInput, optFns ...func(*Options)) (*DeleteDBClusterParameterGroupOutput, error) {
 	if params == nil {
 		params = &DeleteDBClusterParameterGroupInput{}

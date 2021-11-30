@@ -109,21 +109,23 @@ type DescribeSnapshotsInput struct {
 	// * status -
 	// The status of the snapshot (pending | completed | error).
 	//
-	// * tag: - The
-	// key/value combination of a tag assigned to the resource. Use the tag key in the
-	// filter name and the tag value as the filter value. For example, to find all
-	// resources that have a tag with the key Owner and the value TeamA, specify
-	// tag:Owner for the filter name and TeamA for the filter value.
+	// * storage-tier - The
+	// storage tier of the snapshot (archive | standard).
 	//
-	// * tag-key - The
-	// key of a tag assigned to the resource. Use this filter to find all resources
-	// assigned a tag with a specific key, regardless of the tag value.
+	// * tag: - The key/value
+	// combination of a tag assigned to the resource. Use the tag key in the filter
+	// name and the tag value as the filter value. For example, to find all resources
+	// that have a tag with the key Owner and the value TeamA, specify tag:Owner for
+	// the filter name and TeamA for the filter value.
 	//
-	// * volume-id -
-	// The ID of the volume the snapshot is for.
+	// * tag-key - The key of a tag
+	// assigned to the resource. Use this filter to find all resources assigned a tag
+	// with a specific key, regardless of the tag value.
 	//
-	// * volume-size - The size of the
-	// volume, in GiB.
+	// * volume-id - The ID of the
+	// volume the snapshot is for.
+	//
+	// * volume-size - The size of the volume, in GiB.
 	Filters []types.Filter
 
 	// The maximum number of snapshot results returned by DescribeSnapshots in

@@ -12,14 +12,14 @@ import (
 )
 
 // In an environment account, delete an environment account connection. After you
-// delete an environment account connection that’s in use by an AWS Proton
-// environment, AWS Proton can’t manage the environment infrastructure resources
-// until a new environment account connection is accepted for the environment
-// account and associated environment. You're responsible for cleaning up
-// provisioned resources that remain without an environment connection. For more
-// information, see Environment account connections
+// delete an environment account connection that’s in use by an Proton environment,
+// Proton can’t manage the environment infrastructure resources until a new
+// environment account connection is accepted for the environment account and
+// associated environment. You're responsible for cleaning up provisioned resources
+// that remain without an environment connection. For more information, see
+// Environment account connections
 // (https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html)
-// in the AWS Proton Administrator guide.
+// in the Proton Administrator guide.
 func (c *Client) DeleteEnvironmentAccountConnection(ctx context.Context, params *DeleteEnvironmentAccountConnectionInput, optFns ...func(*Options)) (*DeleteEnvironmentAccountConnectionOutput, error) {
 	if params == nil {
 		params = &DeleteEnvironmentAccountConnectionInput{}
@@ -47,7 +47,7 @@ type DeleteEnvironmentAccountConnectionInput struct {
 
 type DeleteEnvironmentAccountConnectionOutput struct {
 
-	// The environment account connection detail data that's returned by AWS Proton.
+	// The environment account connection detail data that's returned by Proton.
 	EnvironmentAccountConnection *types.EnvironmentAccountConnection
 
 	// Metadata pertaining to the operation's result.

@@ -50,8 +50,8 @@ type ListContactReferencesInput struct {
 
 	// The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results. This is not
-	// expected to be set since the value returned in the previous response is always
-	// null.
+	// expected to be set, because the value returned in the previous response is
+	// always null.
 	NextToken *string
 
 	noSmithyDocumentSerde

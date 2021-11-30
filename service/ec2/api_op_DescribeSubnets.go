@@ -60,45 +60,48 @@ type DescribeSubnetsInput struct {
 	// also use cidr or cidrBlock as the filter names.
 	//
 	// * default-for-az - Indicates
-	// whether this is the default subnet for the Availability Zone. You can also use
-	// defaultForAz as the filter name.
-	//
-	// * ipv6-cidr-block-association.ipv6-cidr-block
-	// - An IPv6 CIDR block associated with the subnet.
+	// whether this is the default subnet for the Availability Zone (true | false). You
+	// can also use defaultForAz as the filter name.
 	//
 	// *
-	// ipv6-cidr-block-association.association-id - An association ID for an IPv6 CIDR
-	// block associated with the subnet.
+	// ipv6-cidr-block-association.ipv6-cidr-block - An IPv6 CIDR block associated with
+	// the subnet.
 	//
-	// * ipv6-cidr-block-association.state - The
-	// state of an IPv6 CIDR block associated with the subnet.
+	// * ipv6-cidr-block-association.association-id - An association ID
+	// for an IPv6 CIDR block associated with the subnet.
 	//
-	// * outpost-arn - The
-	// Amazon Resource Name (ARN) of the Outpost.
+	// *
+	// ipv6-cidr-block-association.state - The state of an IPv6 CIDR block associated
+	// with the subnet.
 	//
-	// * owner-id - The ID of the Amazon
-	// Web Services account that owns the subnet.
+	// * ipv6-native - Indicates whether this is an IPv6 only subnet
+	// (true | false).
 	//
-	// * state - The state of the subnet
-	// (pending | available).
+	// * outpost-arn - The Amazon Resource Name (ARN) of the
+	// Outpost.
 	//
-	// * subnet-arn - The Amazon Resource Name (ARN) of the
+	// * owner-id - The ID of the Amazon Web Services account that owns the
 	// subnet.
 	//
-	// * subnet-id - The ID of the subnet.
+	// * state - The state of the subnet (pending | available).
 	//
-	// * tag: - The key/value combination
-	// of a tag assigned to the resource. Use the tag key in the filter name and the
-	// tag value as the filter value. For example, to find all resources that have a
-	// tag with the key Owner and the value TeamA, specify tag:Owner for the filter
-	// name and TeamA for the filter value.
+	// * subnet-arn
+	// - The Amazon Resource Name (ARN) of the subnet.
 	//
-	// * tag-key - The key of a tag assigned to
-	// the resource. Use this filter to find all resources assigned a tag with a
-	// specific key, regardless of the tag value.
-	//
-	// * vpc-id - The ID of the VPC for the
+	// * subnet-id - The ID of the
 	// subnet.
+	//
+	// * tag: - The key/value combination of a tag assigned to the resource.
+	// Use the tag key in the filter name and the tag value as the filter value. For
+	// example, to find all resources that have a tag with the key Owner and the value
+	// TeamA, specify tag:Owner for the filter name and TeamA for the filter value.
+	//
+	// *
+	// tag-key - The key of a tag assigned to the resource. Use this filter to find all
+	// resources assigned a tag with a specific key, regardless of the tag value.
+	//
+	// *
+	// vpc-id - The ID of the VPC for the subnet.
 	Filters []types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the

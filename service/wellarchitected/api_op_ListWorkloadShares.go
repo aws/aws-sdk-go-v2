@@ -31,7 +31,8 @@ func (c *Client) ListWorkloadShares(ctx context.Context, params *ListWorkloadSha
 // Input for List Workload Share
 type ListWorkloadSharesInput struct {
 
-	// The ID assigned to the workload. This ID is unique within an AWS Region.
+	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
+	// Region.
 	//
 	// This member is required.
 	WorkloadId *string
@@ -42,7 +43,8 @@ type ListWorkloadSharesInput struct {
 	// The token to use to retrieve the next set of results.
 	NextToken *string
 
-	// The AWS account ID or IAM role with which the workload is shared.
+	// The Amazon Web Services account ID or IAM role with which the workload is
+	// shared.
 	SharedWithPrefix *string
 
 	noSmithyDocumentSerde
@@ -54,7 +56,8 @@ type ListWorkloadSharesOutput struct {
 	// The token to use to retrieve the next set of results.
 	NextToken *string
 
-	// The ID assigned to the workload. This ID is unique within an AWS Region.
+	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
+	// Region.
 	WorkloadId *string
 
 	// A list of workload share summaries.

@@ -505,22 +505,27 @@ type LoadBalancerAttribute struct {
 	// * access_logs.s3.prefix -
 	// The prefix for the location in the S3 bucket for the access logs.
 	//
-	// The following
-	// attributes are supported by only Application Load Balancers:
-	//
 	// *
-	// idle_timeout.timeout_seconds - The idle timeout value, in seconds. The valid
-	// range is 1-4000 seconds. The default is 60 seconds.
+	// ipv6.deny-all-igw-traffic - Blocks internet gateway (IGW) access to the load
+	// balancer. It is set to false for internet-facing load balancers and true for
+	// internal load balancers, preventing unintended access to your internal load
+	// balancer through an internet gateway.
 	//
-	// *
-	// routing.http.desync_mitigation_mode - Determines how the load balancer handles
-	// requests that might pose a security risk to your application. The possible
-	// values are monitor, defensive, and strictest. The default is defensive.
+	// The following attributes are supported by
+	// only Application Load Balancers:
 	//
-	// *
-	// routing.http.drop_invalid_header_fields.enabled - Indicates whether HTTP headers
-	// with invalid header fields are removed by the load balancer (true) or routed to
-	// targets (false). The default is false.
+	// * idle_timeout.timeout_seconds - The idle
+	// timeout value, in seconds. The valid range is 1-4000 seconds. The default is 60
+	// seconds.
+	//
+	// * routing.http.desync_mitigation_mode - Determines how the load
+	// balancer handles requests that might pose a security risk to your application.
+	// The possible values are monitor, defensive, and strictest. The default is
+	// defensive.
+	//
+	// * routing.http.drop_invalid_header_fields.enabled - Indicates
+	// whether HTTP headers with invalid header fields are removed by the load balancer
+	// (true) or routed to targets (false). The default is false.
 	//
 	// *
 	// routing.http.x_amzn_tls_version_and_cipher_suite.enabled - Indicates whether the

@@ -354,6 +354,24 @@ func (WirelessDeviceEvent) Values() []WirelessDeviceEvent {
 	}
 }
 
+type WirelessDeviceFrameInfo string
+
+// Enum values for WirelessDeviceFrameInfo
+const (
+	WirelessDeviceFrameInfoEnabled  WirelessDeviceFrameInfo = "ENABLED"
+	WirelessDeviceFrameInfoDisabled WirelessDeviceFrameInfo = "DISABLED"
+)
+
+// Values returns all known values for WirelessDeviceFrameInfo. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WirelessDeviceFrameInfo) Values() []WirelessDeviceFrameInfo {
+	return []WirelessDeviceFrameInfo{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type WirelessDeviceIdType string
 
 // Enum values for WirelessDeviceIdType

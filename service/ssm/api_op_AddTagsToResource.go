@@ -12,36 +12,35 @@ import (
 )
 
 // Adds or overwrites one or more tags for the specified resource. Tags are
-// metadata that you can assign to your documents, managed instances, maintenance
+// metadata that you can assign to your documents, managed nodes, maintenance
 // windows, Parameter Store parameters, and patch baselines. Tags enable you to
 // categorize your resources in different ways, for example, by purpose, owner, or
 // environment. Each tag consists of a key and an optional value, both of which you
 // define. For example, you could define a set of tags for your account's managed
-// instances that helps you track each instance's owner and stack level. For
-// example:
+// nodes that helps you track each node's owner and stack level. For example:
 //
-// * Key=Owner,Value=DbAdmin
+// *
+// Key=Owner,Value=DbAdmin
 //
 // * Key=Owner,Value=SysAdmin
 //
-// *
-// Key=Owner,Value=Dev
-//
-// * Key=Stack,Value=Production
+// * Key=Owner,Value=Dev
 //
 // *
-// Key=Stack,Value=Pre-Production
+// Key=Stack,Value=Production
 //
-// * Key=Stack,Value=Test
+// * Key=Stack,Value=Pre-Production
 //
-// Each resource can have a
-// maximum of 50 tags. We recommend that you devise a set of tag keys that meets
-// your needs for each resource type. Using a consistent set of tag keys makes it
-// easier for you to manage your resources. You can search and filter the resources
-// based on the tags you add. Tags don't have any semantic meaning to and are
-// interpreted strictly as a string of characters. For more information about using
-// tags with Amazon Elastic Compute Cloud (Amazon EC2) instances, see Tagging your
-// Amazon EC2 resources
+// *
+// Key=Stack,Value=Test
+//
+// Each resource can have a maximum of 50 tags. We recommend
+// that you devise a set of tag keys that meets your needs for each resource type.
+// Using a consistent set of tag keys makes it easier for you to manage your
+// resources. You can search and filter the resources based on the tags you add.
+// Tags don't have any semantic meaning to and are interpreted strictly as a string
+// of characters. For more information about using tags with Amazon Elastic Compute
+// Cloud (Amazon EC2) instances, see Tagging your Amazon EC2 resources
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html) in the
 // Amazon EC2 User Guide.
 func (c *Client) AddTagsToResource(ctx context.Context, params *AddTagsToResourceInput, optFns ...func(*Options)) (*AddTagsToResourceOutput, error) {
@@ -71,17 +70,16 @@ type AddTagsToResourceInput struct {
 	// ResourceID of either aws/ssm/MyGroup/appmanager or /aws/ssm/MyGroup/appmanager.
 	// For the Document and Parameter values, use the name of the resource.
 	// ManagedInstance: mi-012345abcde The ManagedInstance type for this API operation
-	// is only for on-premises managed instances. You must specify the name of the
-	// managed instance in the following format: mi-ID_number . For example,
-	// mi-1a2b3c4d5e6f.
+	// is only for on-premises managed nodes. You must specify the name of the managed
+	// node in the following format: mi-ID_number . For example, mi-1a2b3c4d5e6f.
 	//
 	// This member is required.
 	ResourceId *string
 
 	// Specifies the type of resource you are tagging. The ManagedInstance type for
-	// this API operation is for on-premises managed instances. You must specify the
-	// name of the managed instance in the following format: mi-ID_number . For
-	// example, mi-1a2b3c4d5e6f.
+	// this API operation is for on-premises managed nodes. You must specify the name
+	// of the managed node in the following format: mi-ID_number . For example,
+	// mi-1a2b3c4d5e6f.
 	//
 	// This member is required.
 	ResourceType types.ResourceTypeForTagging

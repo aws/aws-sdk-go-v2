@@ -35,10 +35,10 @@ func (c *Client) RestoreDBInstanceFromS3(ctx context.Context, params *RestoreDBI
 
 type RestoreDBInstanceFromS3Input struct {
 
-	// The compute and memory capacity of the DB instance, for example, db.m4.large.
-	// Not all DB instance classes are available in all Amazon Web Services Regions, or
-	// for all database engines. For the full list of DB instance classes, and
-	// availability for your engine, see DB Instance Class
+	// The compute and memory capacity of the DB instance, for example db.m4.large. Not
+	// all DB instance classes are available in all Amazon Web Services Regions, or for
+	// all database engines. For the full list of DB instance classes, and availability
+	// for your engine, see DB Instance Class
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html)
 	// in the Amazon RDS User Guide. Importing from Amazon S3 isn't supported on the
 	// db.t2.micro DB instance class.
@@ -139,7 +139,7 @@ type RestoreDBInstanceFromS3Input struct {
 
 	// A value that indicates whether the DB instance has deletion protection enabled.
 	// The database can't be deleted when deletion protection is enabled. By default,
-	// deletion protection is disabled. For more information, see  Deleting a DB
+	// deletion protection isn't enabled. For more information, see  Deleting a DB
 	// Instance
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html).
 	DeletionProtection *bool
@@ -153,7 +153,7 @@ type RestoreDBInstanceFromS3Input struct {
 
 	// A value that indicates whether to enable mapping of Amazon Web Services Identity
 	// and Access Management (IAM) accounts to database accounts. By default, mapping
-	// is disabled. For more information about IAM database authentication, see  IAM
+	// isn't enabled. For more information about IAM database authentication, see  IAM
 	// Database Authentication for MySQL and PostgreSQL
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html)
 	// in the Amazon RDS User Guide.
@@ -295,14 +295,14 @@ type RestoreDBInstanceFromS3Input struct {
 	ProcessorFeatures []types.ProcessorFeature
 
 	// A value that indicates whether the DB instance is publicly accessible. When the
-	// DB instance is publicly accessible, its DNS endpoint resolves to the private IP
-	// address from within the DB instance's VPC, and to the public IP address from
-	// outside of the DB instance's VPC. Access to the DB instance is ultimately
-	// controlled by the security group it uses, and that public access is not
-	// permitted if the security group assigned to the DB instance doesn't permit it.
-	// When the DB instance isn't publicly accessible, it is an internal DB instance
-	// with a DNS name that resolves to a private IP address. For more information, see
-	// CreateDBInstance.
+	// DB instance is publicly accessible, its Domain Name System (DNS) endpoint
+	// resolves to the private IP address from within the DB instance's virtual private
+	// cloud (VPC). It resolves to the public IP address from outside of the DB
+	// instance's VPC. Access to the DB instance is ultimately controlled by the
+	// security group it uses. That public access is not permitted if the security
+	// group assigned to the DB instance doesn't permit it. When the DB instance isn't
+	// publicly accessible, it is an internal DB instance with a DNS name that resolves
+	// to a private IP address. For more information, see CreateDBInstance.
 	PubliclyAccessible *bool
 
 	// The prefix of your Amazon S3 bucket.
@@ -335,7 +335,11 @@ type RestoreDBInstanceFromS3Input struct {
 type RestoreDBInstanceFromS3Output struct {
 
 	// Contains the details of an Amazon RDS DB instance. This data type is used as a
-	// response element in the DescribeDBInstances action.
+	// response element in the operations CreateDBInstance,
+	// CreateDBInstanceReadReplica, DeleteDBInstance, DescribeDBInstances,
+	// ModifyDBInstance, PromoteReadReplica, RebootDBInstance,
+	// RestoreDBInstanceFromDBSnapshot, RestoreDBInstanceFromS3,
+	// RestoreDBInstanceToPointInTime, StartDBInstance, and StopDBInstance.
 	DBInstance *types.DBInstance
 
 	// Metadata pertaining to the operation's result.

@@ -109,6 +109,14 @@ type ReceiveMessageInput struct {
 	// (http://en.wikipedia.org/wiki/Unix_time) in milliseconds).
 	//
 	// *
+	// SqsManagedSseEnabled – Enables server-side queue encryption using SQS owned
+	// encryption keys. Only one server-side encryption option is supported per queue
+	// (e.g. SSE-KMS
+	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sse-existing-queue.html)
+	// or SSE-SQS
+	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sqs-sse-queue.html)).
+	//
+	// *
 	// MessageDeduplicationId – Returns the value provided by the producer that calls
 	// the SendMessage action.
 	//

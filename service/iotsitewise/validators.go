@@ -30,6 +30,26 @@ func (m *validateOpAssociateAssets) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateTimeSeriesToAssetProperty struct {
+}
+
+func (*validateOpAssociateTimeSeriesToAssetProperty) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateTimeSeriesToAssetProperty) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateTimeSeriesToAssetPropertyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateTimeSeriesToAssetPropertyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchAssociateProjectAssets struct {
 }
 
@@ -570,6 +590,26 @@ func (m *validateOpDisassociateAssets) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateTimeSeriesFromAssetProperty struct {
+}
+
+func (*validateOpDisassociateTimeSeriesFromAssetProperty) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateTimeSeriesFromAssetProperty) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateTimeSeriesFromAssetPropertyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateTimeSeriesFromAssetPropertyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetAssetPropertyAggregates struct {
 }
 
@@ -1014,6 +1054,10 @@ func addOpAssociateAssetsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateAssets{}, middleware.After)
 }
 
+func addOpAssociateTimeSeriesToAssetPropertyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateTimeSeriesToAssetProperty{}, middleware.After)
+}
+
 func addOpBatchAssociateProjectAssetsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchAssociateProjectAssets{}, middleware.After)
 }
@@ -1120,6 +1164,10 @@ func addOpDescribeProjectValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDisassociateAssetsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateAssets{}, middleware.After)
+}
+
+func addOpDisassociateTimeSeriesFromAssetPropertyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateTimeSeriesFromAssetProperty{}, middleware.After)
 }
 
 func addOpGetAssetPropertyAggregatesValidationMiddleware(stack *middleware.Stack) error {
@@ -2116,6 +2164,27 @@ func validateOpAssociateAssetsInput(v *AssociateAssetsInput) error {
 	}
 }
 
+func validateOpAssociateTimeSeriesToAssetPropertyInput(v *AssociateTimeSeriesToAssetPropertyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateTimeSeriesToAssetPropertyInput"}
+	if v.Alias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Alias"))
+	}
+	if v.AssetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetId"))
+	}
+	if v.PropertyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PropertyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchAssociateProjectAssetsInput(v *BatchAssociateProjectAssetsInput) error {
 	if v == nil {
 		return nil
@@ -2599,6 +2668,27 @@ func validateOpDisassociateAssetsInput(v *DisassociateAssetsInput) error {
 	}
 	if v.ChildAssetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChildAssetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateTimeSeriesFromAssetPropertyInput(v *DisassociateTimeSeriesFromAssetPropertyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateTimeSeriesFromAssetPropertyInput"}
+	if v.Alias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Alias"))
+	}
+	if v.AssetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetId"))
+	}
+	if v.PropertyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PropertyId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

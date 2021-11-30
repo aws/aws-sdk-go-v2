@@ -52,6 +52,10 @@ type CreateJobInput struct {
 	// The job document. Required if you don't specify a value for documentSource.
 	Document *string
 
+	// Parameters of a managed template that you can specify to create the job
+	// document.
+	DocumentParameters map[string]string
+
 	// An S3 link to the job document. Required if you don't specify a value for
 	// document. If the job document resides in an S3 bucket, you must use a
 	// placeholder link when specifying the document. The placeholder link is of the

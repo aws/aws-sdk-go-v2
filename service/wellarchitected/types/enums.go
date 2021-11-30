@@ -90,6 +90,26 @@ func (DifferenceStatus) Values() []DifferenceStatus {
 	}
 }
 
+type ImportLensStatus string
+
+// Enum values for ImportLensStatus
+const (
+	ImportLensStatusInProgress ImportLensStatus = "IN_PROGRESS"
+	ImportLensStatusComplete   ImportLensStatus = "COMPLETE"
+	ImportLensStatusError      ImportLensStatus = "ERROR"
+)
+
+// Values returns all known values for ImportLensStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ImportLensStatus) Values() []ImportLensStatus {
+	return []ImportLensStatus{
+		"IN_PROGRESS",
+		"COMPLETE",
+		"ERROR",
+	}
+}
+
 type LensStatus string
 
 // Enum values for LensStatus
@@ -97,6 +117,8 @@ const (
 	LensStatusCurrent    LensStatus = "CURRENT"
 	LensStatusNotCurrent LensStatus = "NOT_CURRENT"
 	LensStatusDeprecated LensStatus = "DEPRECATED"
+	LensStatusDeleted    LensStatus = "DELETED"
+	LensStatusUnshared   LensStatus = "UNSHARED"
 )
 
 // Values returns all known values for LensStatus. Note that this can be expanded
@@ -107,6 +129,48 @@ func (LensStatus) Values() []LensStatus {
 		"CURRENT",
 		"NOT_CURRENT",
 		"DEPRECATED",
+		"DELETED",
+		"UNSHARED",
+	}
+}
+
+type LensStatusType string
+
+// Enum values for LensStatusType
+const (
+	LensStatusTypeAll       LensStatusType = "ALL"
+	LensStatusTypeDraft     LensStatusType = "DRAFT"
+	LensStatusTypePublished LensStatusType = "PUBLISHED"
+)
+
+// Values returns all known values for LensStatusType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LensStatusType) Values() []LensStatusType {
+	return []LensStatusType{
+		"ALL",
+		"DRAFT",
+		"PUBLISHED",
+	}
+}
+
+type LensType string
+
+// Enum values for LensType
+const (
+	LensTypeAwsOfficial  LensType = "AWS_OFFICIAL"
+	LensTypeCustomShared LensType = "CUSTOM_SHARED"
+	LensTypeCustomSelf   LensType = "CUSTOM_SELF"
+)
+
+// Values returns all known values for LensType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (LensType) Values() []LensType {
+	return []LensType{
+		"AWS_OFFICIAL",
+		"CUSTOM_SHARED",
+		"CUSTOM_SELF",
 	}
 }
 
@@ -185,6 +249,24 @@ func (ShareInvitationAction) Values() []ShareInvitationAction {
 	return []ShareInvitationAction{
 		"ACCEPT",
 		"REJECT",
+	}
+}
+
+type ShareResourceType string
+
+// Enum values for ShareResourceType
+const (
+	ShareResourceTypeWorkload ShareResourceType = "WORKLOAD"
+	ShareResourceTypeLens     ShareResourceType = "LENS"
+)
+
+// Values returns all known values for ShareResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ShareResourceType) Values() []ShareResourceType {
+	return []ShareResourceType{
+		"WORKLOAD",
+		"LENS",
 	}
 }
 

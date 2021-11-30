@@ -1322,6 +1322,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the IAM role set as default for the cluster.</p>"
                     }
+                },
+                "ReservedNodeExchangeStatus": {
+                    "target": "com.amazonaws.redshift#ReservedNodeExchangeStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the reserved-node exchange request. Statuses include in-progress and requested.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5380,7 +5386,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Shows the status of any inbound or outbound datashares available in the specified\n            account.</p>"
+                "smithy.api#documentation": "<p>Shows the status of any inbound or outbound datashares available in the specified\n            account.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "Marker",
+                    "items": "DataShares",
+                    "pageSize": "MaxRecords"
+                }
             }
         },
         "com.amazonaws.redshift#DescribeDataSharesForConsumer": {
@@ -5397,7 +5409,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of datashares where the account identifier being called is a consumer account identifier.</p>"
+                "smithy.api#documentation": "<p>Returns a list of datashares where the account identifier being called is a consumer account identifier.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "Marker",
+                    "items": "DataShares",
+                    "pageSize": "MaxRecords"
+                }
             }
         },
         "com.amazonaws.redshift#DescribeDataSharesForConsumerMessage": {
@@ -5460,7 +5478,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of datashares when the account identifier being called is a producer account identifier.</p>"
+                "smithy.api#documentation": "<p>Returns a list of datashares when the account identifier being called is a producer account identifier.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "Marker",
+                    "items": "DataShares",
+                    "pageSize": "MaxRecords"
+                }
             }
         },
         "com.amazonaws.redshift#DescribeDataSharesForProducerMessage": {
@@ -6240,6 +6264,81 @@
                     "target": "com.amazonaws.redshift#PartnerIntegrationInfoList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of partner integrations.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.redshift#DescribeReservedNodeExchangeStatus": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshift#DescribeReservedNodeExchangeStatusInputMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.redshift#DescribeReservedNodeExchangeStatusOutputMessage"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshift#ReservedNodeExchangeNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#ReservedNodeNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns exchange status details and associated metadata for a reserved-node\n            exchange. Statuses include such values as in progress and requested.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "Marker",
+                    "items": "ReservedNodeExchangeStatusDetails",
+                    "pageSize": "MaxRecords"
+                }
+            }
+        },
+        "com.amazonaws.redshift#DescribeReservedNodeExchangeStatusInputMessage": {
+            "type": "structure",
+            "members": {
+                "ReservedNodeId": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the source reserved node in a reserved-node exchange request.</p>"
+                    }
+                },
+                "ReservedNodeExchangeRequestId": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the reserved-node exchange request.</p>"
+                    }
+                },
+                "MaxRecords": {
+                    "target": "com.amazonaws.redshift#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of response records to return in each call. If the number of\n            remaining response records exceeds the specified <code>MaxRecords</code> value, a value\n            is returned in a <code>Marker</code> field of the response. You can retrieve the next\n            set of records by retrying the command with the returned marker value.</p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous <code>DescribeReservedNodeExchangeStatus</code> request. If this \n            parameter is specified, the response includes only records beyond the marker, up to the value \n            specified by the <code>MaxRecords</code> parameter. You can retrieve the next set of response\n            records by providing the returned marker value in the <code>Marker</code> parameter and\n            retrying the request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.redshift#DescribeReservedNodeExchangeStatusOutputMessage": {
+            "type": "structure",
+            "members": {
+                "ReservedNodeExchangeStatusDetails": {
+                    "target": "com.amazonaws.redshift#ReservedNodeExchangeStatusList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the reserved-node exchange request, including the status, request\n            time, source reserved-node identifier, and additional details.</p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token provided by a previous <code>DescribeReservedNodeExchangeStatus</code> request.</p>"
                     }
                 }
             }
@@ -7854,6 +7953,103 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The request parameters to get cluster credentials.</p>"
+            }
+        },
+        "com.amazonaws.redshift#GetReservedNodeExchangeConfigurationOptions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshift#GetReservedNodeExchangeConfigurationOptionsInputMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.redshift#GetReservedNodeExchangeConfigurationOptionsOutputMessage"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshift#ClusterNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#ClusterSnapshotNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#DependentServiceUnavailableFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#InvalidReservedNodeStateFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#ReservedNodeAlreadyMigratedFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#ReservedNodeNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#ReservedNodeOfferingNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the configuration options for the reserved-node exchange. These options\n            include information about the source reserved node and target reserved node offering.\n            Details include the node type, the price, the node count, and the offering type.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "Marker",
+                    "items": "ReservedNodeConfigurationOptionList",
+                    "pageSize": "MaxRecords"
+                }
+            }
+        },
+        "com.amazonaws.redshift#GetReservedNodeExchangeConfigurationOptionsInputMessage": {
+            "type": "structure",
+            "members": {
+                "ActionType": {
+                    "target": "com.amazonaws.redshift#ReservedNodeExchangeActionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action type of the reserved-node configuration. The action type can be an exchange initiated from either a snapshot or a resize.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClusterIdentifier": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the cluster that is the source for a reserved-node exchange.</p>"
+                    }
+                },
+                "SnapshotIdentifier": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the snapshot that is the source for the reserved-node exchange.</p>"
+                    }
+                },
+                "MaxRecords": {
+                    "target": "com.amazonaws.redshift#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of response records to return in each call. If the number of\n            remaining response records exceeds the specified <code>MaxRecords</code> value, a value\n            is returned in a <code>Marker</code> field of the response. You can retrieve the next\n            set of records by retrying the command with the returned marker value.</p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous <code>GetReservedNodeExchangeConfigurationOptions</code> request. If this \n            parameter is specified, the response includes only records beyond the marker, up to the value \n            specified by the <code>MaxRecords</code> parameter. You can retrieve the next set of response\n            records by providing the returned marker value in the <code>Marker</code> parameter and\n            retrying the request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.redshift#GetReservedNodeExchangeConfigurationOptionsOutputMessage": {
+            "type": "structure",
+            "members": {
+                "Marker": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token provided by a previous <code>GetReservedNodeExchangeConfigurationOptions</code> request.</p>"
+                    }
+                },
+                "ReservedNodeConfigurationOptionList": {
+                    "target": "com.amazonaws.redshift#ReservedNodeConfigurationOptionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>the configuration options for the reserved-node\n            exchange. These options include information about the source reserved node and target reserved\n            node. Details include the node type, the price, the node count, and the offering\n            type.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.redshift#GetReservedNodeExchangeOfferings": {
@@ -11130,6 +11326,9 @@
                     "target": "com.amazonaws.redshift#DescribePartners"
                 },
                 {
+                    "target": "com.amazonaws.redshift#DescribeReservedNodeExchangeStatus"
+                },
+                {
                     "target": "com.amazonaws.redshift#DescribeReservedNodeOfferings"
                 },
                 {
@@ -11176,6 +11375,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#GetClusterCredentials"
+                },
+                {
+                    "target": "com.amazonaws.redshift#GetReservedNodeExchangeConfigurationOptions"
                 },
                 {
                     "target": "com.amazonaws.redshift#GetReservedNodeExchangeOfferings"
@@ -11419,6 +11621,169 @@
                 "smithy.api#documentation": "<p>Indicates that the reserved node has already been exchanged.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.redshift#ReservedNodeConfigurationOption": {
+            "type": "structure",
+            "members": {
+                "SourceReservedNode": {
+                    "target": "com.amazonaws.redshift#ReservedNode"
+                },
+                "TargetReservedNodeCount": {
+                    "target": "com.amazonaws.redshift#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target reserved-node count.</p>"
+                    }
+                },
+                "TargetReservedNodeOffering": {
+                    "target": "com.amazonaws.redshift#ReservedNodeOffering"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details for a reserved-node exchange. Examples include the node type for a\n            reserved node, the price for a node, the node's state, and other details.</p>"
+            }
+        },
+        "com.amazonaws.redshift#ReservedNodeConfigurationOptionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshift#ReservedNodeConfigurationOption",
+                "traits": {
+                    "smithy.api#xmlName": "ReservedNodeConfigurationOption"
+                }
+            }
+        },
+        "com.amazonaws.redshift#ReservedNodeExchangeActionType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "restore-cluster",
+                        "name": "RESTORE_CLUSTER"
+                    },
+                    {
+                        "value": "resize-cluster",
+                        "name": "RESIZE_CLUSTER"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.redshift#ReservedNodeExchangeNotFoundFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.redshift#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ReservedNodeExchangeNotFond",
+                    "httpResponseCode": 404
+                },
+                "smithy.api#documentation": "<p>The reserved-node exchange status wasn't found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.redshift#ReservedNodeExchangeStatus": {
+            "type": "structure",
+            "members": {
+                "ReservedNodeExchangeRequestId": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the reserved-node exchange request.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.redshift#ReservedNodeExchangeStatusType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the reserved-node exchange request. Statuses include in-progress and requested.</p>"
+                    }
+                },
+                "RequestTime": {
+                    "target": "com.amazonaws.redshift#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A date and time that indicate when the reserved-node exchange was requested.</p>"
+                    }
+                },
+                "SourceReservedNodeId": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the source reserved node.</p>"
+                    }
+                },
+                "SourceReservedNodeType": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source reserved-node type, for example ds2.xlarge.</p>"
+                    }
+                },
+                "SourceReservedNodeCount": {
+                    "target": "com.amazonaws.redshift#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source reserved-node count in the cluster.</p>"
+                    }
+                },
+                "TargetReservedNodeOfferingId": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the target reserved node offering.</p>"
+                    }
+                },
+                "TargetReservedNodeType": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The node type of the target reserved node, for example ra3.4xlarge.</p>"
+                    }
+                },
+                "TargetReservedNodeCount": {
+                    "target": "com.amazonaws.redshift#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The count of target reserved nodes in the cluster.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Reserved-node status details, such as the source reserved-node\n            identifier, the target reserved-node identifier, the node type, the node count, and\n            other details.</p>"
+            }
+        },
+        "com.amazonaws.redshift#ReservedNodeExchangeStatusList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshift#ReservedNodeExchangeStatus",
+                "traits": {
+                    "smithy.api#xmlName": "ReservedNodeExchangeStatus"
+                }
+            }
+        },
+        "com.amazonaws.redshift#ReservedNodeExchangeStatusType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "REQUESTED",
+                        "name": "REQUESTED"
+                    },
+                    {
+                        "value": "PENDING",
+                        "name": "PENDING"
+                    },
+                    {
+                        "value": "IN_PROGRESS",
+                        "name": "IN_PROGRESS"
+                    },
+                    {
+                        "value": "RETRYING",
+                        "name": "RETRYING"
+                    },
+                    {
+                        "value": "SUCCEEDED",
+                        "name": "SUCCEEDED"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    }
+                ]
             }
         },
         "com.amazonaws.redshift#ReservedNodeList": {
@@ -11667,10 +12032,16 @@
                     "target": "com.amazonaws.redshift#ClusterNotFoundFault"
                 },
                 {
+                    "target": "com.amazonaws.redshift#DependentServiceUnavailableFault"
+                },
+                {
                     "target": "com.amazonaws.redshift#InsufficientClusterCapacityFault"
                 },
                 {
                     "target": "com.amazonaws.redshift#InvalidClusterStateFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#InvalidReservedNodeStateFault"
                 },
                 {
                     "target": "com.amazonaws.redshift#LimitExceededFault"
@@ -11680,6 +12051,18 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#NumberOfNodesQuotaExceededFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#ReservedNodeAlreadyExistsFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#ReservedNodeAlreadyMigratedFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#ReservedNodeNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#ReservedNodeOfferingNotFoundFault"
                 },
                 {
                     "target": "com.amazonaws.redshift#UnauthorizedOperation"
@@ -11727,6 +12110,18 @@
                     "target": "com.amazonaws.redshift#BooleanOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>A boolean value indicating whether the resize operation is using the classic resize\n            process. If you don't provide this parameter or set the value to\n            <code>false</code>, the resize type is elastic. </p>"
+                    }
+                },
+                "ReservedNodeId": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the reserved node.</p>"
+                    }
+                },
+                "TargetReservedNodeOfferingId": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the target reserved node offering.</p>"
                     }
                 }
             },
@@ -11943,6 +12338,9 @@
                     "target": "com.amazonaws.redshift#DependentServiceRequestThrottlingFault"
                 },
                 {
+                    "target": "com.amazonaws.redshift#DependentServiceUnavailableFault"
+                },
+                {
                     "target": "com.amazonaws.redshift#HsmClientCertificateNotFoundFault"
                 },
                 {
@@ -11962,6 +12360,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#InvalidElasticIpFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#InvalidReservedNodeStateFault"
                 },
                 {
                     "target": "com.amazonaws.redshift#InvalidRestoreFault"
@@ -11985,6 +12386,18 @@
                     "target": "com.amazonaws.redshift#NumberOfNodesQuotaExceededFault"
                 },
                 {
+                    "target": "com.amazonaws.redshift#ReservedNodeAlreadyExistsFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#ReservedNodeAlreadyMigratedFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#ReservedNodeNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#ReservedNodeOfferingNotFoundFault"
+                },
+                {
                     "target": "com.amazonaws.redshift#SnapshotScheduleNotFoundFault"
                 },
                 {
@@ -11992,6 +12405,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#UnauthorizedOperation"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
                 }
             ],
             "traits": {
@@ -12175,6 +12591,18 @@
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the IAM role that was set as default for the cluster when the cluster was last modified while it was restored from a snapshot.</p>"
+                    }
+                },
+                "ReservedNodeId": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the target reserved node offering.</p>"
+                    }
+                },
+                "TargetReservedNodeOfferingId": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the target reserved node offering.</p>"
                     }
                 }
             },

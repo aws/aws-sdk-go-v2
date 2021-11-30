@@ -82,7 +82,9 @@ type ModifyReplicationGroupInput struct {
 	// (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html)
 	AuthTokenUpdateStrategy types.AuthTokenUpdateStrategyType
 
-	// This parameter is currently disabled.
+	// If you are running Redis engine version 6.0 or later, set this parameter to yes
+	// if you want to opt-in to the next auto minor version upgrade campaign. This
+	// parameter is disabled for previous versions.
 	AutoMinorVersionUpgrade *bool
 
 	// Determines whether a read replica is automatically promoted to read/write

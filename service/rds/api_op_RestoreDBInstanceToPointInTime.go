@@ -65,6 +65,14 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	// us-east-1a
 	AvailabilityZone *string
 
+	// Specifies where automated backups and manual snapshots are stored for the
+	// restored DB instance. Possible values are outposts (Amazon Web Services
+	// Outposts) and region (Amazon Web Services Region). The default is region. For
+	// more information, see Working with Amazon RDS on Amazon Web Services Outposts
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html) in
+	// the Amazon RDS User Guide.
+	BackupTarget *string
+
 	// A value that indicates whether to copy all tags from the restored DB instance to
 	// snapshots of the DB instance. By default, tags are not copied.
 	CopyTagsToSnapshot *bool
@@ -89,7 +97,7 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	// for RDS Custom.
 	CustomIamInstanceProfile *string
 
-	// The compute and memory capacity of the Amazon RDS DB instance, for example,
+	// The compute and memory capacity of the Amazon RDS DB instance, for example
 	// db.m4.large. Not all DB instance classes are available in all Amazon Web
 	// Services Regions, or for all database engines. For the full list of DB instance
 	// classes, and availability for your engine, see DB Instance Class
@@ -125,7 +133,7 @@ type RestoreDBInstanceToPointInTimeInput struct {
 
 	// A value that indicates whether the DB instance has deletion protection enabled.
 	// The database can't be deleted when deletion protection is enabled. By default,
-	// deletion protection is disabled. For more information, see  Deleting a DB
+	// deletion protection isn't enabled. For more information, see  Deleting a DB
 	// Instance
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html).
 	DeletionProtection *bool
@@ -166,7 +174,7 @@ type RestoreDBInstanceToPointInTimeInput struct {
 
 	// A value that indicates whether to enable mapping of Amazon Web Services Identity
 	// and Access Management (IAM) accounts to database accounts. By default, mapping
-	// is disabled. This setting doesn't apply to RDS Custom. For more information
+	// isn't enabled. This setting doesn't apply to RDS Custom. For more information
 	// about IAM database authentication, see  IAM Database Authentication for MySQL
 	// and PostgreSQL
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html)
@@ -242,14 +250,14 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	ProcessorFeatures []types.ProcessorFeature
 
 	// A value that indicates whether the DB instance is publicly accessible. When the
-	// DB instance is publicly accessible, its DNS endpoint resolves to the private IP
-	// address from within the DB instance's VPC, and to the public IP address from
-	// outside of the DB instance's VPC. Access to the DB instance is ultimately
-	// controlled by the security group it uses, and that public access is not
-	// permitted if the security group assigned to the DB instance doesn't permit it.
-	// When the DB instance isn't publicly accessible, it is an internal DB instance
-	// with a DNS name that resolves to a private IP address. For more information, see
-	// CreateDBInstance.
+	// DB cluster is publicly accessible, its Domain Name System (DNS) endpoint
+	// resolves to the private IP address from within the DB cluster's virtual private
+	// cloud (VPC). It resolves to the public IP address from outside of the DB
+	// cluster's VPC. Access to the DB cluster is ultimately controlled by the security
+	// group it uses. That public access isn't permitted if the security group assigned
+	// to the DB cluster doesn't permit it. When the DB instance isn't publicly
+	// accessible, it is an internal DB instance with a DNS name that resolves to a
+	// private IP address. For more information, see CreateDBInstance.
 	PubliclyAccessible *bool
 
 	// The date and time to restore from. Valid Values: Value must be a time in
@@ -316,7 +324,11 @@ type RestoreDBInstanceToPointInTimeInput struct {
 type RestoreDBInstanceToPointInTimeOutput struct {
 
 	// Contains the details of an Amazon RDS DB instance. This data type is used as a
-	// response element in the DescribeDBInstances action.
+	// response element in the operations CreateDBInstance,
+	// CreateDBInstanceReadReplica, DeleteDBInstance, DescribeDBInstances,
+	// ModifyDBInstance, PromoteReadReplica, RebootDBInstance,
+	// RestoreDBInstanceFromDBSnapshot, RestoreDBInstanceFromS3,
+	// RestoreDBInstanceToPointInTime, StartDBInstance, and StopDBInstance.
 	DBInstance *types.DBInstance
 
 	// Metadata pertaining to the operation's result.

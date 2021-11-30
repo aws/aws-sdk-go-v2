@@ -27,7 +27,7 @@ import (
 // instances to identify hardware and software issues. For more information, see
 // Status checks for your instances
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-system-instance-status-check.html)
-// and Troubleshooting instances with failed status checks
+// and Troubleshoot instances with failed status checks
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstances.html)
 // in the Amazon EC2 User Guide.
 //

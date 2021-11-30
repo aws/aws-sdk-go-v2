@@ -29,12 +29,12 @@ func (c *Client) DescribeFolder(ctx context.Context, params *DescribeFolderInput
 
 type DescribeFolderInput struct {
 
-	// The AWS account ID.
+	// The ID for the Amazon Web Services account that contains the folder.
 	//
 	// This member is required.
 	AwsAccountId *string
 
-	// The folder ID.
+	// The ID of the folder.
 	//
 	// This member is required.
 	FolderId *string
@@ -47,10 +47,10 @@ type DescribeFolderOutput struct {
 	// Information about the folder.
 	Folder *types.Folder
 
-	// The request ID.
+	// The Amazon Web Services request ID for this operation.
 	RequestId *string
 
-	// The status. If succeeded, the status is SC_OK (200).
+	// The HTTP status of the request.
 	Status int32
 
 	// Metadata pertaining to the operation's result.

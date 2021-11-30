@@ -84,15 +84,17 @@ import (
 // Versioning By default, the GET action returns the current version of an
 // object. To return a different version, use the versionId subresource.
 //
-// * You
-// need the s3:GetObjectVersion permission to access a specific version of an
-// object.
+// * If you
+// supply a versionId, you need the s3:GetObjectVersion permission to access a
+// specific version of an object. If you request a specific version, you do not
+// need to have the s3:GetObject permission.
 //
-// * If the current version of the object is a delete marker, Amazon S3
-// behaves as if the object was deleted and includes x-amz-delete-marker: true in
-// the response.
+// * If the current version of the
+// object is a delete marker, Amazon S3 behaves as if the object was deleted and
+// includes x-amz-delete-marker: true in the response.
 //
-// For more information about versioning, see PutBucketVersioning
+// For more information about
+// versioning, see PutBucketVersioning
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketVersioning.html).
 // Overriding Response Header Values There are times when you want to override
 // certain response header values in a GET response. For example, you might

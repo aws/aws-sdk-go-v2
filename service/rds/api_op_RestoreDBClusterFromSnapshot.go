@@ -11,18 +11,22 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new DB cluster from a DB snapshot or DB cluster snapshot. This action
-// only applies to Aurora DB clusters. The target DB cluster is created from the
-// source snapshot with a default configuration. If you don't specify a security
-// group, the new DB cluster is associated with the default security group. This
-// action only restores the DB cluster, not the DB instances for that DB cluster.
-// You must invoke the CreateDBInstance action to create DB instances for the
-// restored DB cluster, specifying the identifier of the restored DB cluster in
-// DBClusterIdentifier. You can create DB instances only after the
-// RestoreDBClusterFromSnapshot action has completed and the DB cluster is
-// available. For more information on Amazon Aurora, see  What Is Amazon Aurora?
+// Creates a new DB cluster from a DB snapshot or DB cluster snapshot. The target
+// DB cluster is created from the source snapshot with a default configuration. If
+// you don't specify a security group, the new DB cluster is associated with the
+// default security group. This action only restores the DB cluster, not the DB
+// instances for that DB cluster. You must invoke the CreateDBInstance action to
+// create DB instances for the restored DB cluster, specifying the identifier of
+// the restored DB cluster in DBClusterIdentifier. You can create DB instances only
+// after the RestoreDBClusterFromSnapshot action has completed and the DB cluster
+// is available. For more information on Amazon Aurora DB clusters, see  What is
+// Amazon Aurora?
 // (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
-// in the Amazon Aurora User Guide. This action only applies to Aurora DB clusters.
+// in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
+// see  Multi-AZ deployments with two readable standby DB instances
+// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
+// in the Amazon RDS User Guide. The Multi-AZ DB clusters feature is in preview and
+// is subject to change.
 func (c *Client) RestoreDBClusterFromSnapshot(ctx context.Context, params *RestoreDBClusterFromSnapshotInput, optFns ...func(*Options)) (*RestoreDBClusterFromSnapshotOutput, error) {
 	if params == nil {
 		params = &RestoreDBClusterFromSnapshotInput{}
@@ -53,13 +57,14 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// Can't end with a hyphen or contain two consecutive hyphens
 	//
 	// Example:
-	// my-snapshot-id
+	// my-snapshot-id Valid for: Aurora DB clusters and Multi-AZ DB clusters
 	//
 	// This member is required.
 	DBClusterIdentifier *string
 
 	// The database engine to use for the new DB cluster. Default: The same as source
-	// Constraint: Must be compatible with the engine of the source
+	// Constraint: Must be compatible with the engine of the source Valid for: Aurora
+	// DB clusters and Multi-AZ DB clusters
 	//
 	// This member is required.
 	Engine *string
@@ -71,11 +76,14 @@ type RestoreDBClusterFromSnapshotInput struct {
 	//
 	// * Must match the identifier of an existing Snapshot.
 	//
+	// Valid for:
+	// Aurora DB clusters and Multi-AZ DB clusters
+	//
 	// This member is required.
 	SnapshotIdentifier *string
 
 	// Provides the list of Availability Zones (AZs) where instances in the restored DB
-	// cluster can be created.
+	// cluster can be created. Valid for: Aurora DB clusters only
 	AvailabilityZones []string
 
 	// The target backtrack window, in seconds. To disable backtracking, set this value
@@ -84,11 +92,23 @@ type RestoreDBClusterFromSnapshotInput struct {
 	//
 	// * If specified, this value must be set to a number from
 	// 0 to 259,200 (72 hours).
+	//
+	// Valid for: Aurora DB clusters only
 	BacktrackWindow *int64
 
 	// A value that indicates whether to copy all tags from the restored DB cluster to
-	// snapshots of the restored DB cluster. The default is not to copy them.
+	// snapshots of the restored DB cluster. The default is not to copy them. Valid
+	// for: Aurora DB clusters only
 	CopyTagsToSnapshot *bool
+
+	// The compute and memory capacity of the each DB instance in the Multi-AZ DB
+	// cluster, for example db.m6g.xlarge. Not all DB instance classes are available in
+	// all Amazon Web Services Regions, or for all database engines. For the full list
+	// of DB instance classes, and availability for your engine, see DB Instance Class
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html)
+	// in the Amazon RDS User Guide. Valid for: Aurora DB clusters and Multi-AZ DB
+	// clusters
+	DBClusterInstanceClass *string
 
 	// The name of the DB cluster parameter group to associate with this DB cluster. If
 	// this argument is omitted, the default DB cluster parameter group for the
@@ -104,19 +124,24 @@ type RestoreDBClusterFromSnapshotInput struct {
 	//
 	// * Can't end with a
 	// hyphen or contain two consecutive hyphens.
+	//
+	// Valid for: Aurora DB clusters and
+	// Multi-AZ DB clusters
 	DBClusterParameterGroupName *string
 
 	// The name of the DB subnet group to use for the new DB cluster. Constraints: If
 	// supplied, must match the name of an existing DB subnet group. Example:
-	// mySubnetgroup
+	// mySubnetgroup Valid for: Aurora DB clusters and Multi-AZ DB clusters
 	DBSubnetGroupName *string
 
-	// The database name for the restored DB cluster.
+	// The database name for the restored DB cluster. Valid for: Aurora DB clusters and
+	// Multi-AZ DB clusters
 	DatabaseName *string
 
 	// A value that indicates whether the DB cluster has deletion protection enabled.
 	// The database can't be deleted when deletion protection is enabled. By default,
-	// deletion protection is disabled.
+	// deletion protection isn't enabled. Valid for: Aurora DB clusters and Multi-AZ DB
+	// clusters
 	DeletionProtection *bool
 
 	// Specify the Active Directory directory ID to restore the DB cluster in. The
@@ -124,47 +149,72 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// SQL Server, Oracle, and PostgreSQL DB instances can be created in an Active
 	// Directory Domain. For more information, see  Kerberos Authentication
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html)
-	// in the Amazon RDS User Guide.
+	// in the Amazon RDS User Guide. Valid for: Aurora DB clusters only
 	Domain *string
 
 	// Specify the name of the IAM role to be used when making API calls to the
-	// Directory Service.
+	// Directory Service. Valid for: Aurora DB clusters only
 	DomainIAMRoleName *string
 
 	// The list of logs that the restored DB cluster is to export to Amazon CloudWatch
 	// Logs. The values in the list depend on the DB engine being used. For more
 	// information, see Publishing Database Logs to Amazon CloudWatch Logs
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
-	// in the Amazon Aurora User Guide.
+	// in the Amazon Aurora User Guide. Valid for: Aurora DB clusters only
 	EnableCloudwatchLogsExports []string
 
 	// A value that indicates whether to enable mapping of Amazon Web Services Identity
 	// and Access Management (IAM) accounts to database accounts. By default, mapping
-	// is disabled. For more information, see  IAM Database Authentication
+	// isn't enabled. For more information, see  IAM Database Authentication
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html)
-	// in the Amazon Aurora User Guide.
+	// in the Amazon Aurora User Guide. Valid for: Aurora DB clusters only
 	EnableIAMDatabaseAuthentication *bool
 
 	// The DB engine mode of the DB cluster, either provisioned, serverless,
 	// parallelquery, global, or multimaster. For more information, see
 	// CreateDBCluster
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html).
+	// Valid for: Aurora DB clusters only
 	EngineMode *string
 
 	// The version of the database engine to use for the new DB cluster. To list all of
-	// the available engine versions for aurora (for MySQL 5.6-compatible Aurora), use
-	// the following command: aws rds describe-db-engine-versions --engine aurora
-	// --query "DBEngineVersions[].EngineVersion" To list all of the available engine
-	// versions for aurora-mysql (for MySQL 5.7-compatible Aurora), use the following
-	// command: aws rds describe-db-engine-versions --engine aurora-mysql --query
+	// the available engine versions for MySQL 5.6-compatible Aurora, use the following
+	// command: aws rds describe-db-engine-versions --engine aurora --query
 	// "DBEngineVersions[].EngineVersion" To list all of the available engine versions
-	// for aurora-postgresql, use the following command: aws rds
+	// for MySQL 5.7-compatible Aurora, use the following command: aws rds
+	// describe-db-engine-versions --engine aurora-mysql --query
+	// "DBEngineVersions[].EngineVersion" To list all of the available engine versions
+	// for Aurora PostgreSQL, use the following command: aws rds
 	// describe-db-engine-versions --engine aurora-postgresql --query
-	// "DBEngineVersions[].EngineVersion" If you aren't using the default engine
-	// version, then you must specify the engine version. Aurora MySQL Example:
-	// 5.6.10a, 5.6.mysql_aurora.1.19.2, 5.7.12, 5.7.mysql_aurora.2.04.5 Aurora
-	// PostgreSQL Example: 9.6.3, 10.7
+	// "DBEngineVersions[].EngineVersion" To list all of the available engine versions
+	// for RDS for MySQL, use the following command: aws rds
+	// describe-db-engine-versions --engine mysql --query
+	// "DBEngineVersions[].EngineVersion" To list all of the available engine versions
+	// for RDS for PostgreSQL, use the following command: aws rds
+	// describe-db-engine-versions --engine postgres --query
+	// "DBEngineVersions[].EngineVersion" Aurora MySQL See MySQL on Amazon RDS Versions
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.html)
+	// in the Amazon Aurora User Guide. Aurora PostgreSQL See Amazon Aurora PostgreSQL
+	// releases and engine versions
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Updates.20180305.html)
+	// in the Amazon Aurora User Guide. MySQL See MySQL on Amazon RDS Versions
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt)
+	// in the Amazon RDS User Guide. PostgreSQL See Amazon RDS for PostgreSQL versions
+	// and extensions
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts)
+	// in the Amazon RDS User Guide. Valid for: Aurora DB clusters and Multi-AZ DB
+	// clusters
 	EngineVersion *string
+
+	// The amount of Provisioned IOPS (input/output operations per second) to be
+	// initially allocated for each DB instance in the Multi-AZ DB cluster. For
+	// information about valid Iops values, see Amazon RDS Provisioned IOPS Storage to
+	// Improve Performance
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS)
+	// in the Amazon RDS User Guide. Constraints: Must be a multiple between .5 and 50
+	// of the storage amount for the DB instance. Valid for: Aurora DB clusters and
+	// Multi-AZ DB clusters
+	Iops *int32
 
 	// The Amazon Web Services KMS key identifier to use when restoring an encrypted DB
 	// cluster from a DB snapshot or DB cluster snapshot. The Amazon Web Services KMS
@@ -180,23 +230,70 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// *
 	// If the DB snapshot or DB cluster snapshot in SnapshotIdentifier isn't encrypted,
 	// then the restored DB cluster isn't encrypted.
+	//
+	// Valid for: Aurora DB clusters and
+	// Multi-AZ DB clusters
 	KmsKeyId *string
 
-	// The name of the option group to use for the restored DB cluster.
+	// The name of the option group to use for the restored DB cluster. DB clusters are
+	// associated with a default option group that can't be modified.
 	OptionGroupName *string
 
 	// The port number on which the new DB cluster accepts connections. Constraints:
 	// This value must be 1150-65535 Default: The same port as the original DB cluster.
+	// Valid for: Aurora DB clusters and Multi-AZ DB clusters
 	Port *int32
 
+	// A value that indicates whether the DB cluster is publicly accessible. When the
+	// DB cluster is publicly accessible, its Domain Name System (DNS) endpoint
+	// resolves to the private IP address from within the DB cluster's virtual private
+	// cloud (VPC). It resolves to the public IP address from outside of the DB
+	// cluster's VPC. Access to the DB cluster is ultimately controlled by the security
+	// group it uses. That public access is not permitted if the security group
+	// assigned to the DB cluster doesn't permit it. When the DB cluster isn't publicly
+	// accessible, it is an internal DB cluster with a DNS name that resolves to a
+	// private IP address. Default: The default behavior varies depending on whether
+	// DBSubnetGroupName is specified. If DBSubnetGroupName isn't specified, and
+	// PubliclyAccessible isn't specified, the following applies:
+	//
+	// * If the default VPC
+	// in the target Region doesn’t have an internet gateway attached to it, the DB
+	// cluster is private.
+	//
+	// * If the default VPC in the target Region has an internet
+	// gateway attached to it, the DB cluster is public.
+	//
+	// If DBSubnetGroupName is
+	// specified, and PubliclyAccessible isn't specified, the following applies:
+	//
+	// * If
+	// the subnets are part of a VPC that doesn’t have an internet gateway attached to
+	// it, the DB cluster is private.
+	//
+	// * If the subnets are part of a VPC that has an
+	// internet gateway attached to it, the DB cluster is public.
+	//
+	// Valid for: Aurora DB
+	// clusters and Multi-AZ DB clusters
+	PubliclyAccessible *bool
+
 	// For DB clusters in serverless DB engine mode, the scaling properties of the DB
-	// cluster.
+	// cluster. Valid for: Aurora DB clusters only
 	ScalingConfiguration *types.ScalingConfiguration
 
-	// The tags to be assigned to the restored DB cluster.
+	// Specifies the storage type to be associated with the each DB instance in the
+	// Multi-AZ DB cluster. Valid values: standard | gp2 | io1 If you specify io1, you
+	// must also include a value for the Iops parameter. Default: io1 if the Iops
+	// parameter is specified, otherwise gp2 Valid for: Aurora DB clusters and Multi-AZ
+	// DB clusters
+	StorageType *string
+
+	// The tags to be assigned to the restored DB cluster. Valid for: Aurora DB
+	// clusters and Multi-AZ DB clusters
 	Tags []types.Tag
 
-	// A list of VPC security groups that the new DB cluster will belong to.
+	// A list of VPC security groups that the new DB cluster will belong to. Valid for:
+	// Aurora DB clusters and Multi-AZ DB clusters
 	VpcSecurityGroupIds []string
 
 	noSmithyDocumentSerde
@@ -204,9 +301,23 @@ type RestoreDBClusterFromSnapshotInput struct {
 
 type RestoreDBClusterFromSnapshotOutput struct {
 
-	// Contains the details of an Amazon Aurora DB cluster. This data type is used as a
-	// response element in the DescribeDBClusters, StopDBCluster, and StartDBCluster
-	// actions.
+	// Contains the details of an Amazon Aurora DB cluster or Multi-AZ DB cluster. For
+	// an Amazon Aurora DB cluster, this data type is used as a response element in the
+	// operations CreateDBCluster, DeleteDBCluster, DescribeDBClusters,
+	// FailoverDBCluster, ModifyDBCluster, PromoteReadReplicaDBCluster,
+	// RestoreDBClusterFromS3, RestoreDBClusterFromSnapshot,
+	// RestoreDBClusterToPointInTime, StartDBCluster, and StopDBCluster. For a Multi-AZ
+	// DB cluster, this data type is used as a response element in the operations
+	// CreateDBCluster, DeleteDBCluster, DescribeDBClusters, FailoverDBCluster,
+	// ModifyDBCluster, RebootDBCluster, RestoreDBClusterFromSnapshot, and
+	// RestoreDBClusterToPointInTime. For more information on Amazon Aurora DB
+	// clusters, see  What is Amazon Aurora?
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
+	// in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
+	// see  Multi-AZ deployments with two readable standby DB instances
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
+	// in the Amazon RDS User Guide. The Multi-AZ DB clusters feature is in preview and
+	// is subject to change.
 	DBCluster *types.DBCluster
 
 	// Metadata pertaining to the operation's result.

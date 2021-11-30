@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a project in the specified portal.
+// Creates a project in the specified portal. Make sure that the project name and
+// description don't contain confidential information.
 func (c *Client) CreateProject(ctx context.Context, params *CreateProjectInput, optFns ...func(*Options)) (*CreateProjectOutput, error) {
 	if params == nil {
 		params = &CreateProjectInput{}

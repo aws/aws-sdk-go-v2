@@ -74,7 +74,7 @@ type RegisterTaskWithMaintenanceWindowInput struct {
 	Description *string
 
 	// A structure containing information about an Amazon Simple Storage Service
-	// (Amazon S3) bucket to write instance-level logs to. LoggingInfo has been
+	// (Amazon S3) bucket to write managed node-level logs to. LoggingInfo has been
 	// deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to
 	// contain logs, instead use the OutputS3BucketName and OutputS3KeyPrefix options
 	// in the TaskInvocationParameters structure. For information about how Amazon Web
@@ -119,15 +119,15 @@ type RegisterTaskWithMaintenanceWindowInput struct {
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role)
 	ServiceRoleArn *string
 
-	// The targets (either instances or maintenance window targets). One or more
+	// The targets (either managed nodes or maintenance window targets). One or more
 	// targets must be specified for maintenance window Run Command-type tasks.
 	// Depending on the task, targets are optional for other maintenance window task
 	// types (Automation, Lambda, and Step Functions). For more information about
 	// running tasks that don't specify targets, see Registering maintenance window
 	// tasks without targets
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html)
-	// in the Amazon Web Services Systems Manager User Guide. Specify instances using
-	// the following format: Key=InstanceIds,Values=, Specify maintenance window
+	// in the Amazon Web Services Systems Manager User Guide. Specify managed nodes
+	// using the following format: Key=InstanceIds,Values=, Specify maintenance window
 	// targets using the following format: Key=WindowTargetIds,Values=,
 	Targets []types.Target
 

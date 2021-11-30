@@ -12,8 +12,8 @@ import (
 )
 
 // Create a new major or minor version of a service template. A major version of a
-// service template is a version that isn't backwards compatible. A minor version
-// of a service template is a version that's backwards compatible within its major
+// service template is a version that isn't backward compatible. A minor version of
+// a service template is a version that's backward compatible within its major
 // version.
 func (c *Client) CreateServiceTemplateVersion(ctx context.Context, params *CreateServiceTemplateVersionInput, optFns ...func(*Options)) (*CreateServiceTemplateVersionOutput, error) {
 	if params == nil {
@@ -49,16 +49,16 @@ type CreateServiceTemplateVersionInput struct {
 	// This member is required.
 	TemplateName *string
 
-	// When included, if two identicial requests are made with the same client token,
-	// AWS Proton returns the service template version that the first request created.
+	// When included, if two identical requests are made with the same client token,
+	// Proton returns the service template version that the first request created.
 	ClientToken *string
 
 	// A description of the new version of a service template.
 	Description *string
 
-	// To create a new minor version of the service template, include a majorVersion.
-	// To create a new major and minor version of the service template, exclude
-	// majorVersion.
+	// To create a new minor version of the service template, include a major Version.
+	// To create a new major and minor version of the service template, exclude major
+	// Version.
 	MajorVersion *string
 
 	// Create tags for a new version of a service template.
@@ -69,8 +69,7 @@ type CreateServiceTemplateVersionInput struct {
 
 type CreateServiceTemplateVersionOutput struct {
 
-	// The service template version summary of detail data that's returned by AWS
-	// Proton.
+	// The service template version summary of detail data that's returned by Proton.
 	//
 	// This member is required.
 	ServiceTemplateVersion *types.ServiceTemplateVersion

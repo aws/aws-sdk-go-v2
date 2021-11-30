@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides a summary and status of IP Rules.
+// Provides a summary and status of IP rules.
 func (c *Client) DescribeIpRestriction(ctx context.Context, params *DescribeIpRestrictionInput, optFns ...func(*Options)) (*DescribeIpRestrictionOutput, error) {
 	if params == nil {
 		params = &DescribeIpRestrictionInput{}
@@ -28,7 +28,7 @@ func (c *Client) DescribeIpRestriction(ctx context.Context, params *DescribeIpRe
 
 type DescribeIpRestrictionInput struct {
 
-	// Your AWS account ID.
+	// The ID of the Amazon Web Services account that contains the IP rules.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -38,20 +38,19 @@ type DescribeIpRestrictionInput struct {
 
 type DescribeIpRestrictionOutput struct {
 
-	// Your AWS account ID.
+	// The ID of the Amazon Web Services account that contains the IP rules.
 	AwsAccountId *string
 
-	// Whether or not IP rules are enabled.
+	// A value that specifies whether IP rules are turned on.
 	Enabled *bool
 
-	// Describes the IP rules with CIDR range and description.
+	// A map that describes the IP rules with CIDR range and description.
 	IpRestrictionRuleMap map[string]string
 
-	// The ID of the describe request.
+	// The Amazon Web Services request ID for this operation.
 	RequestId *string
 
-	// The status of a set of IP restrictions. A successful request returns a 200
-	// status code.
+	// The HTTP status of the request.
 	Status int32
 
 	// Metadata pertaining to the operation's result.

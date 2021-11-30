@@ -47,7 +47,7 @@ type DescribeMaintenanceWindowScheduleInput struct {
 	// INSTANCE.
 	ResourceType types.MaintenanceWindowResourceType
 
-	// The instance ID or key-value pair to retrieve information about.
+	// The managed node ID or key-value pair to retrieve information about.
 	Targets []types.Target
 
 	// The ID of the maintenance window to retrieve information about.

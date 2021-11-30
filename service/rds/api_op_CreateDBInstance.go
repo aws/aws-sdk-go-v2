@@ -30,10 +30,10 @@ func (c *Client) CreateDBInstance(ctx context.Context, params *CreateDBInstanceI
 //
 type CreateDBInstanceInput struct {
 
-	// The compute and memory capacity of the DB instance, for example, db.m4.large.
-	// Not all DB instance classes are available in all Amazon Web Services Regions, or
-	// for all database engines. For the full list of DB instance classes, and
-	// availability for your engine, see DB Instance Class
+	// The compute and memory capacity of the DB instance, for example db.m4.large. Not
+	// all DB instance classes are available in all Amazon Web Services Regions, or for
+	// all database engines. For the full list of DB instance classes, and availability
+	// for your engine, see DB Instance Class
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html)
 	// in the Amazon RDS User Guide.
 	//
@@ -220,6 +220,14 @@ type CreateDBInstanceInput struct {
 	// * Can't be set to 0 or 35 for an RDS Custom DB instance
 	BackupRetentionPeriod *int32
 
+	// Specifies where automated backups and manual snapshots are stored. Possible
+	// values are outposts (Amazon Web Services Outposts) and region (Amazon Web
+	// Services Region). The default is region. For more information, see Working with
+	// Amazon RDS on Amazon Web Services Outposts
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html) in
+	// the Amazon RDS User Guide.
+	BackupTarget *string
+
 	// For supported engines, this value indicates that the DB instance should be
 	// associated with the specified CharacterSet. This setting doesn't apply to RDS
 	// Custom. However, if you need to change the character set, you can change it on
@@ -366,7 +374,7 @@ type CreateDBInstanceInput struct {
 
 	// A value that indicates whether the DB instance has deletion protection enabled.
 	// The database can't be deleted when deletion protection is enabled. By default,
-	// deletion protection is disabled. For more information, see  Deleting a DB
+	// deletion protection isn't enabled. For more information, see  Deleting a DB
 	// Instance
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html).
 	// Amazon Aurora Not applicable. You can enable or disable deletion protection for
@@ -416,7 +424,7 @@ type CreateDBInstanceInput struct {
 
 	// A value that indicates whether to enable mapping of Amazon Web Services Identity
 	// and Access Management (IAM) accounts to database accounts. By default, mapping
-	// is disabled. This setting doesn't apply to RDS Custom or Amazon Aurora. In
+	// isn't enabled. This setting doesn't apply to RDS Custom or Amazon Aurora. In
 	// Aurora, mapping Amazon Web Services IAM accounts to database accounts is managed
 	// by the DB cluster. For more information, see  IAM Database Authentication for
 	// MySQL and PostgreSQL
@@ -442,24 +450,27 @@ type CreateDBInstanceInput struct {
 	// the following format: 19.customized_string . An example identifier is
 	// 19.my_cev1. For more information, see  Creating an RDS Custom DB instance
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-creating.html#custom-creating.create)
-	// in the Amazon RDS User Guide.. MariaDB See MariaDB on Amazon RDS Versions
+	// in the Amazon RDS User Guide.. MariaDB For information, see MariaDB on Amazon
+	// RDS Versions
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt)
-	// in the Amazon RDS User Guide. Microsoft SQL Server See Microsoft SQL Server
-	// Versions on Amazon RDS
+	// in the Amazon RDS User Guide. Microsoft SQL Server For information, see
+	// Microsoft SQL Server Versions on Amazon RDS
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport)
-	// in the Amazon RDS User Guide. MySQL See MySQL on Amazon RDS Versions
+	// in the Amazon RDS User Guide. MySQL For information, see MySQL on Amazon RDS
+	// Versions
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt)
-	// in the Amazon RDS User Guide. Oracle See Oracle Database Engine Release Notes
+	// in the Amazon RDS User Guide. Oracle For information, see Oracle Database Engine
+	// Release Notes
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html)
-	// in the Amazon RDS User Guide. PostgreSQL See Amazon RDS for PostgreSQL versions
-	// and extensions
+	// in the Amazon RDS User Guide. PostgreSQL For information, see Amazon RDS for
+	// PostgreSQL versions and extensions
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts)
 	// in the Amazon RDS User Guide.
 	EngineVersion *string
 
 	// The amount of Provisioned IOPS (input/output operations per second) to be
 	// initially allocated for the DB instance. For information about valid Iops
-	// values, see Amazon RDS Provisioned IOPS Storage to Improve Performance
+	// values, see Amazon RDS Provisioned IOPS storage to improve performance
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS)
 	// in the Amazon RDS User Guide. Constraints: For MariaDB, MySQL, Oracle, and
 	// PostgreSQL DB instances, must be a multiple between .5 and 50 of the storage
@@ -498,64 +509,18 @@ type CreateDBInstanceInput struct {
 	MasterUserPassword *string
 
 	// The name for the master user. Amazon Aurora Not applicable. The name for the
-	// master user is managed by the DB cluster. MariaDB Constraints:
-	//
-	// * Required for
-	// MariaDB.
-	//
-	// * Must be 1 to 16 letters or numbers.
-	//
-	// * Can't be a reserved word for
-	// the chosen database engine.
-	//
-	// Microsoft SQL Server Constraints:
-	//
-	// * Required for
-	// SQL Server.
-	//
-	// * Must be 1 to 128 letters or numbers.
-	//
-	// * The first character must
-	// be a letter.
-	//
-	// * Can't be a reserved word for the chosen database engine.
-	//
-	// MySQL
-	// Constraints:
-	//
-	// * Required for MySQL.
-	//
-	// * Must be 1 to 16 letters or numbers.
+	// master user is managed by the DB cluster. Amazon RDS Constraints:
 	//
 	// *
-	// First character must be a letter.
+	// Required.
 	//
-	// * Can't be a reserved word for the chosen
-	// database engine.
+	// * Must be 1 to 16 letters, numbers, or underscores.
 	//
-	// Oracle Constraints:
+	// * First
+	// character must be a letter.
 	//
-	// * Required for Oracle.
-	//
-	// * Must be 1 to 30
-	// letters or numbers.
-	//
-	// * First character must be a letter.
-	//
-	// * Can't be a reserved
-	// word for the chosen database engine.
-	//
-	// PostgreSQL Constraints:
-	//
-	// * Required for
-	// PostgreSQL.
-	//
-	// * Must be 1 to 63 letters or numbers.
-	//
-	// * First character must be a
-	// letter.
-	//
-	// * Can't be a reserved word for the chosen database engine.
+	// * Can't be a reserved word for the chosen database
+	// engine.
 	MasterUsername *string
 
 	// The upper limit in gibibytes (GiB) to which Amazon RDS can automatically scale
@@ -662,33 +627,33 @@ type CreateDBInstanceInput struct {
 	PromotionTier *int32
 
 	// A value that indicates whether the DB instance is publicly accessible. When the
-	// DB instance is publicly accessible, its DNS endpoint resolves to the private IP
-	// address from within the DB instance's VPC, and to the public IP address from
-	// outside of the DB instance's VPC. Access to the DB instance is ultimately
-	// controlled by the security group it uses, and that public access is not
-	// permitted if the security group assigned to the DB instance doesn't permit it.
-	// When the DB instance isn't publicly accessible, it is an internal DB instance
-	// with a DNS name that resolves to a private IP address. Default: The default
-	// behavior varies depending on whether DBSubnetGroupName is specified. If
-	// DBSubnetGroupName isn't specified, and PubliclyAccessible isn't specified, the
-	// following applies:
-	//
-	// * If the default VPC in the target region doesn’t have an
-	// Internet gateway attached to it, the DB instance is private.
+	// DB instance is publicly accessible, its Domain Name System (DNS) endpoint
+	// resolves to the private IP address from within the DB instance's virtual private
+	// cloud (VPC). It resolves to the public IP address from outside of the DB
+	// instance's VPC. Access to the DB instance is ultimately controlled by the
+	// security group it uses. That public access is not permitted if the security
+	// group assigned to the DB instance doesn't permit it. When the DB instance isn't
+	// publicly accessible, it is an internal DB instance with a DNS name that resolves
+	// to a private IP address. Default: The default behavior varies depending on
+	// whether DBSubnetGroupName is specified. If DBSubnetGroupName isn't specified,
+	// and PubliclyAccessible isn't specified, the following applies:
 	//
 	// * If the default
-	// VPC in the target region has an Internet gateway attached to it, the DB instance
-	// is public.
+	// VPC in the target Region doesn’t have an internet gateway attached to it, the DB
+	// instance is private.
 	//
-	// If DBSubnetGroupName is specified, and PubliclyAccessible isn't
-	// specified, the following applies:
+	// * If the default VPC in the target Region has an internet
+	// gateway attached to it, the DB instance is public.
 	//
-	// * If the subnets are part of a VPC that
-	// doesn’t have an Internet gateway attached to it, the DB instance is private.
+	// If DBSubnetGroupName is
+	// specified, and PubliclyAccessible isn't specified, the following applies:
 	//
-	// *
-	// If the subnets are part of a VPC that has an Internet gateway attached to it,
-	// the DB instance is public.
+	// * If
+	// the subnets are part of a VPC that doesn’t have an internet gateway attached to
+	// it, the DB instance is private.
+	//
+	// * If the subnets are part of a VPC that has an
+	// internet gateway attached to it, the DB instance is public.
 	PubliclyAccessible *bool
 
 	// A value that indicates whether the DB instance is encrypted. By default, it
@@ -731,7 +696,11 @@ type CreateDBInstanceInput struct {
 type CreateDBInstanceOutput struct {
 
 	// Contains the details of an Amazon RDS DB instance. This data type is used as a
-	// response element in the DescribeDBInstances action.
+	// response element in the operations CreateDBInstance,
+	// CreateDBInstanceReadReplica, DeleteDBInstance, DescribeDBInstances,
+	// ModifyDBInstance, PromoteReadReplica, RebootDBInstance,
+	// RestoreDBInstanceFromDBSnapshot, RestoreDBInstanceFromS3,
+	// RestoreDBInstanceToPointInTime, StartDBInstance, and StopDBInstance.
 	DBInstance *types.DBInstance
 
 	// Metadata pertaining to the operation's result.

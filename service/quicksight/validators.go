@@ -3234,6 +3234,11 @@ func validateDataSourceParameters(v types.DataSourceParameters) error {
 			invalidParams.AddNested("[AwsIotAnalyticsParameters]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.DataSourceParametersMemberExasolParameters:
+		if err := validateExasolParameters(&uv.Value); err != nil {
+			invalidParams.AddNested("[ExasolParameters]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.DataSourceParametersMemberJiraParameters:
 		if err := validateJiraParameters(&uv.Value); err != nil {
 			invalidParams.AddNested("[JiraParameters]", err.(smithy.InvalidParamsError))
@@ -3396,6 +3401,21 @@ func validateDecimalParameterList(v []types.DecimalParameter) error {
 		if err := validateDecimalParameter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateExasolParameters(v *types.ExasolParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExasolParameters"}
+	if v.Host == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Host"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4428,6 +4448,23 @@ func validateUntagColumnOperation(v *types.UntagColumnOperation) error {
 	}
 	if v.TagNames == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagNames"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateLinkPermissionList(v []types.ResourcePermission) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateLinkPermissionList"}
+	for i := range v {
+		if err := validateResourcePermission(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6552,6 +6589,16 @@ func validateOpUpdateDashboardPermissionsInput(v *UpdateDashboardPermissionsInpu
 	if v.RevokePermissions != nil {
 		if err := validateUpdateResourcePermissionList(v.RevokePermissions); err != nil {
 			invalidParams.AddNested("RevokePermissions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GrantLinkPermissions != nil {
+		if err := validateUpdateLinkPermissionList(v.GrantLinkPermissions); err != nil {
+			invalidParams.AddNested("GrantLinkPermissions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RevokeLinkPermissions != nil {
+		if err := validateUpdateLinkPermissionList(v.RevokeLinkPermissions); err != nil {
+			invalidParams.AddNested("RevokeLinkPermissions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

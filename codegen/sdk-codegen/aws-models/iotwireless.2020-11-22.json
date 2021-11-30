@@ -3462,6 +3462,72 @@
                 }
             }
         },
+        "com.amazonaws.iotwireless#GetNetworkAnalyzerConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#GetNetworkAnalyzerConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#GetNetworkAnalyzerConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get NetworkAnalyzer configuration.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/network-analyzer-configurations/{ConfigurationName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#GetNetworkAnalyzerConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "ConfigurationName": {
+                    "target": "com.amazonaws.iotwireless#NetworkAnalyzerConfigurationName",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#GetNetworkAnalyzerConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "TraceContent": {
+                    "target": "com.amazonaws.iotwireless#TraceContent"
+                },
+                "WirelessDevices": {
+                    "target": "com.amazonaws.iotwireless#WirelessDeviceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of WirelessDevices in the NetworkAnalyzerConfiguration.</p>"
+                    }
+                },
+                "WirelessGateways": {
+                    "target": "com.amazonaws.iotwireless#WirelessGatewayList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of WirelessGateways in the NetworkAnalyzerConfiguration.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.iotwireless#GetPartnerAccount": {
             "type": "operation",
             "input": {
@@ -6279,6 +6345,17 @@
                 }
             }
         },
+        "com.amazonaws.iotwireless#NetworkAnalyzerConfigurationName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>NetworkAnalyzer configuration name.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^NetworkAnalyzerConfig_Default$"
+            }
+        },
         "com.amazonaws.iotwireless#NextToken": {
             "type": "string",
             "traits": {
@@ -7815,6 +7892,20 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.iotwireless#TraceContent": {
+            "type": "structure",
+            "members": {
+                "WirelessDeviceFrameInfo": {
+                    "target": "com.amazonaws.iotwireless#WirelessDeviceFrameInfo"
+                },
+                "LogLevel": {
+                    "target": "com.amazonaws.iotwireless#LogLevel"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Trace Content for resources.</p>"
+            }
+        },
         "com.amazonaws.iotwireless#TransmitMode": {
             "type": "integer",
             "traits": {
@@ -8179,6 +8270,83 @@
             }
         },
         "com.amazonaws.iotwireless#UpdateMulticastGroupResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.iotwireless#UpdateNetworkAnalyzerConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#UpdateNetworkAnalyzerConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#UpdateNetworkAnalyzerConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update NetworkAnalyzer configuration.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/network-analyzer-configurations/{ConfigurationName}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#UpdateNetworkAnalyzerConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "ConfigurationName": {
+                    "target": "com.amazonaws.iotwireless#NetworkAnalyzerConfigurationName",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TraceContent": {
+                    "target": "com.amazonaws.iotwireless#TraceContent"
+                },
+                "WirelessDevicesToAdd": {
+                    "target": "com.amazonaws.iotwireless#WirelessDeviceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>WirelessDevices to add into NetworkAnalyzerConfiguration.</p>"
+                    }
+                },
+                "WirelessDevicesToRemove": {
+                    "target": "com.amazonaws.iotwireless#WirelessDeviceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>WirelessDevices to remove from NetworkAnalyzerConfiguration.</p>"
+                    }
+                },
+                "WirelessGatewaysToAdd": {
+                    "target": "com.amazonaws.iotwireless#WirelessGatewayList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>WirelessGateways to add into NetworkAnalyzerConfiguration.</p>"
+                    }
+                },
+                "WirelessGatewaysToRemove": {
+                    "target": "com.amazonaws.iotwireless#WirelessGatewayList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>WirelessGateways to remove from NetworkAnalyzerConfiguration.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#UpdateNetworkAnalyzerConfigurationResponse": {
             "type": "structure",
             "members": {}
         },
@@ -8604,6 +8772,22 @@
                 "smithy.api#documentation": "<p>The list of wireless device event log options.</p>"
             }
         },
+        "com.amazonaws.iotwireless#WirelessDeviceFrameInfo": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>WirelessDevice FrameInfo for trace content.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "ENABLED",
+                        "name": "ENABLED"
+                    },
+                    {
+                        "value": "DISABLED",
+                        "name": "DISABLED"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.iotwireless#WirelessDeviceId": {
             "type": "string",
             "traits": {
@@ -8635,6 +8819,18 @@
                         "name": "SidewalkManufacturingSn"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.iotwireless#WirelessDeviceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotwireless#WirelessDeviceId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 250
+                }
             }
         },
         "com.amazonaws.iotwireless#WirelessDeviceLogOption": {
@@ -8842,6 +9038,12 @@
                         "name": "ThingName"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.iotwireless#WirelessGatewayList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotwireless#WirelessGatewayId"
             }
         },
         "com.amazonaws.iotwireless#WirelessGatewayLogOption": {
@@ -9054,6 +9256,21 @@
         },
         "com.amazonaws.iotwireless#iotwireless": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "IoT Wireless",
+                    "arnNamespace": "iotwireless",
+                    "cloudFormationName": "IoTWireless",
+                    "cloudTrailEventSource": "iotwireless.amazonaws.com",
+                    "endpointPrefix": "api.iotwireless"
+                },
+                "aws.auth#sigv4": {
+                    "name": "iotwireless"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>AWS IoT Wireless API documentation</p>",
+                "smithy.api#title": "AWS IoT Wireless"
+            },
             "version": "2020-11-22",
             "operations": [
                 {
@@ -9172,6 +9389,9 @@
                 },
                 {
                     "target": "com.amazonaws.iotwireless#GetMulticastGroupSession"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#GetNetworkAnalyzerConfiguration"
                 },
                 {
                     "target": "com.amazonaws.iotwireless#GetPartnerAccount"
@@ -9294,6 +9514,9 @@
                     "target": "com.amazonaws.iotwireless#UpdateMulticastGroup"
                 },
                 {
+                    "target": "com.amazonaws.iotwireless#UpdateNetworkAnalyzerConfiguration"
+                },
+                {
                     "target": "com.amazonaws.iotwireless#UpdatePartnerAccount"
                 },
                 {
@@ -9305,22 +9528,7 @@
                 {
                     "target": "com.amazonaws.iotwireless#UpdateWirelessGateway"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "IoT Wireless",
-                    "arnNamespace": "iotwireless",
-                    "cloudFormationName": "IoTWireless",
-                    "cloudTrailEventSource": "iotwireless.amazonaws.com",
-                    "endpointPrefix": "api.iotwireless"
-                },
-                "aws.auth#sigv4": {
-                    "name": "iotwireless"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>AWS IoT Wireless API documentation</p>",
-                "smithy.api#title": "AWS IoT Wireless"
-            }
+            ]
         }
     }
 }

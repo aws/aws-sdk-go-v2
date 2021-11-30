@@ -36,7 +36,8 @@ type ListNotificationsInput struct {
 	// The token to use to retrieve the next set of results.
 	NextToken *string
 
-	// The ID assigned to the workload. This ID is unique within an AWS Region.
+	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
+	// Region.
 	WorkloadId *string
 
 	noSmithyDocumentSerde

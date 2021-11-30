@@ -13,10 +13,11 @@ import (
 )
 
 // Create a new workload. The owner of a workload can share the workload with other
-// AWS accounts and IAM users in the same AWS Region. Only the owner of a workload
-// can delete it. For more information, see Defining a Workload
+// Amazon Web Services accounts and IAM users in the same Amazon Web Services
+// Region. Only the owner of a workload can delete it. For more information, see
+// Defining a Workload
 // (https://docs.aws.amazon.com/wellarchitected/latest/userguide/define-workload.html)
-// in the AWS Well-Architected Tool User Guide.
+// in the Well-Architected Tool User Guide.
 func (c *Client) CreateWorkload(ctx context.Context, params *CreateWorkloadInput, optFns ...func(*Options)) (*CreateWorkloadOutput, error) {
 	if params == nil {
 		params = &CreateWorkloadInput{}
@@ -40,8 +41,9 @@ type CreateWorkloadInput struct {
 	// you retry a request with the same client request token and the same parameters
 	// after it has completed successfully, the result of the original request is
 	// returned. This token is listed as required, however, if you do not specify it,
-	// the AWS SDKs automatically generate one for you. If you are not using the AWS
-	// SDK or the AWS CLI, you must provide this token or the request will fail.
+	// the Amazon Web Services SDKs automatically generate one for you. If you are not
+	// using the Amazon Web Services SDK or the CLI, you must provide this token or the
+	// request will fail.
 	//
 	// This member is required.
 	ClientRequestToken *string
@@ -68,20 +70,21 @@ type CreateWorkloadInput struct {
 	// This member is required.
 	ReviewOwner *string
 
-	// The name of the workload. The name must be unique within an account within a
-	// Region. Spaces and capitalization are ignored when checking for uniqueness.
+	// The name of the workload. The name must be unique within an account within an
+	// Amazon Web Services Region. Spaces and capitalization are ignored when checking
+	// for uniqueness.
 	//
 	// This member is required.
 	WorkloadName *string
 
-	// The list of AWS account IDs associated with the workload.
+	// The list of Amazon Web Services account IDs associated with the workload.
 	AccountIds []string
 
 	// The URL of the architectural design for the workload.
 	ArchitecturalDesign *string
 
-	// The list of AWS Regions associated with the workload, for example, us-east-2, or
-	// ca-central-1.
+	// The list of Amazon Web Services Regions associated with the workload, for
+	// example, us-east-2, or ca-central-1.
 	AwsRegions []string
 
 	// The industry for the workload.
@@ -152,7 +155,7 @@ type CreateWorkloadInput struct {
 	// Other
 	IndustryType *string
 
-	// The list of non-AWS Regions associated with the workload.
+	// The list of non-Amazon Web Services Regions associated with the workload.
 	NonAwsRegions []string
 
 	// The notes associated with the workload.
@@ -174,7 +177,8 @@ type CreateWorkloadOutput struct {
 	// The ARN for the workload.
 	WorkloadArn *string
 
-	// The ID assigned to the workload. This ID is unique within an AWS Region.
+	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
+	// Region.
 	WorkloadId *string
 
 	// Metadata pertaining to the operation's result.

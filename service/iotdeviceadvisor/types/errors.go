@@ -7,7 +7,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// Sends Conflict Exception.
+// Sends a Conflict Exception.
 type ConflictException struct {
 	Message *string
 
@@ -26,7 +26,7 @@ func (e *ConflictException) ErrorMessage() string {
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Sends Internal Failure Exception.
+// Sends an Internal Failure exception.
 type InternalServerException struct {
 	Message *string
 
@@ -45,7 +45,7 @@ func (e *InternalServerException) ErrorMessage() string {
 func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// Sends Resource Not Found Exception.
+// Sends a Resource Not Found exception.
 type ResourceNotFoundException struct {
 	Message *string
 
@@ -64,7 +64,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Sends invalid request exception.
+// Sends a validation exception.
 type ValidationException struct {
 	Message *string
 

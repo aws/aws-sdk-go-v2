@@ -58,8 +58,8 @@ type AmiDistributionConfiguration struct {
 	// The tags to apply to AMIs distributed to this Region.
 	AmiTags map[string]string
 
-	// The description of the distribution configuration. Minimum and maximum length
-	// are in characters.
+	// The description of the AMI distribution configuration. Minimum and maximum
+	// length are in characters.
 	Description *string
 
 	// The KMS key identifier used to encrypt the distributed image.
@@ -1110,6 +1110,17 @@ type InstanceMetadataOptions struct {
 // ModifyImageAttribute
 // (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html).
 type LaunchPermissionConfiguration struct {
+
+	// The ARN for an Amazon Web Services Organization that you want to share your AMI
+	// with. For more information, see What is Organizations?
+	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html).
+	OrganizationArns []string
+
+	// The ARN for an Organizations organizational unit (OU) that you want to share
+	// your AMI with. For more information about key concepts for Organizations, see
+	// Organizations terminology and concepts
+	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html).
+	OrganizationalUnitArns []string
 
 	// The name of the group.
 	UserGroups []string

@@ -7530,6 +7530,120 @@ func awsAwsquery_deserializeOpErrorDescribePartners(response *smithyhttp.Respons
 	}
 }
 
+type awsAwsquery_deserializeOpDescribeReservedNodeExchangeStatus struct {
+}
+
+func (*awsAwsquery_deserializeOpDescribeReservedNodeExchangeStatus) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsquery_deserializeOpDescribeReservedNodeExchangeStatus) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsquery_deserializeOpErrorDescribeReservedNodeExchangeStatus(response, &metadata)
+	}
+	output := &DescribeReservedNodeExchangeStatusOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("DescribeReservedNodeExchangeStatusResult")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsAwsquery_deserializeOpDocumentDescribeReservedNodeExchangeStatusOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsquery_deserializeOpErrorDescribeReservedNodeExchangeStatus(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
+	if err != nil {
+		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	case strings.EqualFold("ReservedNodeExchangeNotFond", errorCode):
+		return awsAwsquery_deserializeErrorReservedNodeExchangeNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("ReservedNodeNotFound", errorCode):
+		return awsAwsquery_deserializeErrorReservedNodeNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("UnsupportedOperation", errorCode):
+		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsquery_deserializeOpDescribeReservedNodeOfferings struct {
 }
 
@@ -9328,6 +9442,135 @@ func awsAwsquery_deserializeOpErrorGetClusterCredentials(response *smithyhttp.Re
 	switch {
 	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("UnsupportedOperation", errorCode):
+		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsquery_deserializeOpGetReservedNodeExchangeConfigurationOptions struct {
+}
+
+func (*awsAwsquery_deserializeOpGetReservedNodeExchangeConfigurationOptions) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsquery_deserializeOpGetReservedNodeExchangeConfigurationOptions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsquery_deserializeOpErrorGetReservedNodeExchangeConfigurationOptions(response, &metadata)
+	}
+	output := &GetReservedNodeExchangeConfigurationOptionsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("GetReservedNodeExchangeConfigurationOptionsResult")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsAwsquery_deserializeOpDocumentGetReservedNodeExchangeConfigurationOptionsOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsquery_deserializeOpErrorGetReservedNodeExchangeConfigurationOptions(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
+	if err != nil {
+		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	case strings.EqualFold("ClusterNotFound", errorCode):
+		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("ClusterSnapshotNotFound", errorCode):
+		return awsAwsquery_deserializeErrorClusterSnapshotNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("DependentServiceUnavailableFault", errorCode):
+		return awsAwsquery_deserializeErrorDependentServiceUnavailableFault(response, errorBody)
+
+	case strings.EqualFold("InvalidReservedNodeState", errorCode):
+		return awsAwsquery_deserializeErrorInvalidReservedNodeStateFault(response, errorBody)
+
+	case strings.EqualFold("ReservedNodeAlreadyMigrated", errorCode):
+		return awsAwsquery_deserializeErrorReservedNodeAlreadyMigratedFault(response, errorBody)
+
+	case strings.EqualFold("ReservedNodeNotFound", errorCode):
+		return awsAwsquery_deserializeErrorReservedNodeNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("ReservedNodeOfferingNotFound", errorCode):
+		return awsAwsquery_deserializeErrorReservedNodeOfferingNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("UnsupportedOperation", errorCode):
 		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
@@ -11997,11 +12240,17 @@ func awsAwsquery_deserializeOpErrorResizeCluster(response *smithyhttp.Response, 
 	case strings.EqualFold("ClusterNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
 
+	case strings.EqualFold("DependentServiceUnavailableFault", errorCode):
+		return awsAwsquery_deserializeErrorDependentServiceUnavailableFault(response, errorBody)
+
 	case strings.EqualFold("InsufficientClusterCapacity", errorCode):
 		return awsAwsquery_deserializeErrorInsufficientClusterCapacityFault(response, errorBody)
 
 	case strings.EqualFold("InvalidClusterState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterStateFault(response, errorBody)
+
+	case strings.EqualFold("InvalidReservedNodeState", errorCode):
+		return awsAwsquery_deserializeErrorInvalidReservedNodeStateFault(response, errorBody)
 
 	case strings.EqualFold("LimitExceededFault", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededFault(response, errorBody)
@@ -12011,6 +12260,18 @@ func awsAwsquery_deserializeOpErrorResizeCluster(response *smithyhttp.Response, 
 
 	case strings.EqualFold("NumberOfNodesQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorNumberOfNodesQuotaExceededFault(response, errorBody)
+
+	case strings.EqualFold("ReservedNodeAlreadyExists", errorCode):
+		return awsAwsquery_deserializeErrorReservedNodeAlreadyExistsFault(response, errorBody)
+
+	case strings.EqualFold("ReservedNodeAlreadyMigrated", errorCode):
+		return awsAwsquery_deserializeErrorReservedNodeAlreadyMigratedFault(response, errorBody)
+
+	case strings.EqualFold("ReservedNodeNotFound", errorCode):
+		return awsAwsquery_deserializeErrorReservedNodeNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("ReservedNodeOfferingNotFound", errorCode):
+		return awsAwsquery_deserializeErrorReservedNodeOfferingNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("UnauthorizedOperation", errorCode):
 		return awsAwsquery_deserializeErrorUnauthorizedOperation(response, errorBody)
@@ -12150,6 +12411,9 @@ func awsAwsquery_deserializeOpErrorRestoreFromClusterSnapshot(response *smithyht
 	case strings.EqualFold("DependentServiceRequestThrottlingFault", errorCode):
 		return awsAwsquery_deserializeErrorDependentServiceRequestThrottlingFault(response, errorBody)
 
+	case strings.EqualFold("DependentServiceUnavailableFault", errorCode):
+		return awsAwsquery_deserializeErrorDependentServiceUnavailableFault(response, errorBody)
+
 	case strings.EqualFold("HsmClientCertificateNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorHsmClientCertificateNotFoundFault(response, errorBody)
 
@@ -12170,6 +12434,9 @@ func awsAwsquery_deserializeOpErrorRestoreFromClusterSnapshot(response *smithyht
 
 	case strings.EqualFold("InvalidElasticIpFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidElasticIpFault(response, errorBody)
+
+	case strings.EqualFold("InvalidReservedNodeState", errorCode):
+		return awsAwsquery_deserializeErrorInvalidReservedNodeStateFault(response, errorBody)
 
 	case strings.EqualFold("InvalidRestore", errorCode):
 		return awsAwsquery_deserializeErrorInvalidRestoreFault(response, errorBody)
@@ -12192,6 +12459,18 @@ func awsAwsquery_deserializeOpErrorRestoreFromClusterSnapshot(response *smithyht
 	case strings.EqualFold("NumberOfNodesQuotaExceeded", errorCode):
 		return awsAwsquery_deserializeErrorNumberOfNodesQuotaExceededFault(response, errorBody)
 
+	case strings.EqualFold("ReservedNodeAlreadyExists", errorCode):
+		return awsAwsquery_deserializeErrorReservedNodeAlreadyExistsFault(response, errorBody)
+
+	case strings.EqualFold("ReservedNodeAlreadyMigrated", errorCode):
+		return awsAwsquery_deserializeErrorReservedNodeAlreadyMigratedFault(response, errorBody)
+
+	case strings.EqualFold("ReservedNodeNotFound", errorCode):
+		return awsAwsquery_deserializeErrorReservedNodeNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("ReservedNodeOfferingNotFound", errorCode):
+		return awsAwsquery_deserializeErrorReservedNodeOfferingNotFoundFault(response, errorBody)
+
 	case strings.EqualFold("SnapshotScheduleNotFound", errorCode):
 		return awsAwsquery_deserializeErrorSnapshotScheduleNotFoundFault(response, errorBody)
 
@@ -12200,6 +12479,9 @@ func awsAwsquery_deserializeOpErrorRestoreFromClusterSnapshot(response *smithyht
 
 	case strings.EqualFold("UnauthorizedOperation", errorCode):
 		return awsAwsquery_deserializeErrorUnauthorizedOperation(response, errorBody)
+
+	case strings.EqualFold("UnsupportedOperation", errorCode):
+		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -16773,6 +17055,50 @@ func awsAwsquery_deserializeErrorReservedNodeAlreadyMigratedFault(response *smit
 	return output
 }
 
+func awsAwsquery_deserializeErrorReservedNodeExchangeNotFoundFault(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.ReservedNodeExchangeNotFoundFault{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsAwsquery_deserializeDocumentReservedNodeExchangeNotFoundFault(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
 func awsAwsquery_deserializeErrorReservedNodeNotFoundFault(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.ReservedNodeNotFoundFault{}
 	var buff [1024]byte
@@ -20485,6 +20811,12 @@ func awsAwsquery_deserializeDocumentCluster(v **types.Cluster, decoder smithyxml
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
 				sv.PubliclyAccessible = xtv
+			}
+
+		case strings.EqualFold("ReservedNodeExchangeStatus", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentReservedNodeExchangeStatus(&sv.ReservedNodeExchangeStatus, nodeDecoder); err != nil {
+				return err
 			}
 
 		case strings.EqualFold("ResizeInfo", t.Name.Local):
@@ -30500,6 +30832,421 @@ func awsAwsquery_deserializeDocumentReservedNodeAlreadyMigratedFault(v **types.R
 	return nil
 }
 
+func awsAwsquery_deserializeDocumentReservedNodeConfigurationOption(v **types.ReservedNodeConfigurationOption, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.ReservedNodeConfigurationOption
+	if *v == nil {
+		sv = &types.ReservedNodeConfigurationOption{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("SourceReservedNode", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentReservedNode(&sv.SourceReservedNode, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("TargetReservedNodeCount", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.TargetReservedNodeCount = int32(i64)
+			}
+
+		case strings.EqualFold("TargetReservedNodeOffering", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentReservedNodeOffering(&sv.TargetReservedNodeOffering, nodeDecoder); err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentReservedNodeConfigurationOptionList(v *[]types.ReservedNodeConfigurationOption, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []types.ReservedNodeConfigurationOption
+	if *v == nil {
+		sv = make([]types.ReservedNodeConfigurationOption, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		switch {
+		case strings.EqualFold("ReservedNodeConfigurationOption", t.Name.Local):
+			var col types.ReservedNodeConfigurationOption
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentReservedNodeConfigurationOption(&destAddr, nodeDecoder); err != nil {
+				return err
+			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentReservedNodeConfigurationOptionListUnwrapped(v *[]types.ReservedNodeConfigurationOption, decoder smithyxml.NodeDecoder) error {
+	var sv []types.ReservedNodeConfigurationOption
+	if *v == nil {
+		sv = make([]types.ReservedNodeConfigurationOption, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv types.ReservedNodeConfigurationOption
+		t := decoder.StartEl
+		_ = t
+		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		destAddr := &mv
+		if err := awsAwsquery_deserializeDocumentReservedNodeConfigurationOption(&destAddr, nodeDecoder); err != nil {
+			return err
+		}
+		mv = *destAddr
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
+func awsAwsquery_deserializeDocumentReservedNodeExchangeNotFoundFault(v **types.ReservedNodeExchangeNotFoundFault, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.ReservedNodeExchangeNotFoundFault
+	if *v == nil {
+		sv = &types.ReservedNodeExchangeNotFoundFault{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("message", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentReservedNodeExchangeStatus(v **types.ReservedNodeExchangeStatus, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.ReservedNodeExchangeStatus
+	if *v == nil {
+		sv = &types.ReservedNodeExchangeStatus{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("RequestTime", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				t, err := smithytime.ParseDateTime(xtv)
+				if err != nil {
+					return err
+				}
+				sv.RequestTime = ptr.Time(t)
+			}
+
+		case strings.EqualFold("ReservedNodeExchangeRequestId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ReservedNodeExchangeRequestId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("SourceReservedNodeCount", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.SourceReservedNodeCount = int32(i64)
+			}
+
+		case strings.EqualFold("SourceReservedNodeId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.SourceReservedNodeId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("SourceReservedNodeType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.SourceReservedNodeType = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("Status", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Status = types.ReservedNodeExchangeStatusType(xtv)
+			}
+
+		case strings.EqualFold("TargetReservedNodeCount", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.TargetReservedNodeCount = int32(i64)
+			}
+
+		case strings.EqualFold("TargetReservedNodeOfferingId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.TargetReservedNodeOfferingId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("TargetReservedNodeType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.TargetReservedNodeType = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentReservedNodeExchangeStatusList(v *[]types.ReservedNodeExchangeStatus, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []types.ReservedNodeExchangeStatus
+	if *v == nil {
+		sv = make([]types.ReservedNodeExchangeStatus, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		switch {
+		case strings.EqualFold("ReservedNodeExchangeStatus", t.Name.Local):
+			var col types.ReservedNodeExchangeStatus
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentReservedNodeExchangeStatus(&destAddr, nodeDecoder); err != nil {
+				return err
+			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentReservedNodeExchangeStatusListUnwrapped(v *[]types.ReservedNodeExchangeStatus, decoder smithyxml.NodeDecoder) error {
+	var sv []types.ReservedNodeExchangeStatus
+	if *v == nil {
+		sv = make([]types.ReservedNodeExchangeStatus, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv types.ReservedNodeExchangeStatus
+		t := decoder.StartEl
+		_ = t
+		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		destAddr := &mv
+		if err := awsAwsquery_deserializeDocumentReservedNodeExchangeStatus(&destAddr, nodeDecoder); err != nil {
+			return err
+		}
+		mv = *destAddr
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
 func awsAwsquery_deserializeDocumentReservedNodeList(v *[]types.ReservedNode, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -31033,6 +31780,32 @@ func awsAwsquery_deserializeDocumentResizeClusterMessage(v **types.ResizeCluster
 					return err
 				}
 				sv.NumberOfNodes = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("ReservedNodeId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ReservedNodeId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("TargetReservedNodeOfferingId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.TargetReservedNodeOfferingId = ptr.String(xtv)
 			}
 
 		default:
@@ -40387,6 +41160,61 @@ func awsAwsquery_deserializeOpDocumentDescribePartnersOutput(v **DescribePartner
 	return nil
 }
 
+func awsAwsquery_deserializeOpDocumentDescribeReservedNodeExchangeStatusOutput(v **DescribeReservedNodeExchangeStatusOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *DescribeReservedNodeExchangeStatusOutput
+	if *v == nil {
+		sv = &DescribeReservedNodeExchangeStatusOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Marker", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Marker = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("ReservedNodeExchangeStatusDetails", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentReservedNodeExchangeStatusList(&sv.ReservedNodeExchangeStatusDetails, nodeDecoder); err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeOpDocumentDescribeReservedNodeOfferingsOutput(v **DescribeReservedNodeOfferingsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -41629,6 +42457,61 @@ func awsAwsquery_deserializeOpDocumentGetClusterCredentialsOutput(v **GetCluster
 					return err
 				}
 				sv.Expiration = ptr.Time(t)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeOpDocumentGetReservedNodeExchangeConfigurationOptionsOutput(v **GetReservedNodeExchangeConfigurationOptionsOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *GetReservedNodeExchangeConfigurationOptionsOutput
+	if *v == nil {
+		sv = &GetReservedNodeExchangeConfigurationOptionsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Marker", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Marker = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("ReservedNodeConfigurationOptionList", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentReservedNodeConfigurationOptionList(&sv.ReservedNodeConfigurationOptionList, nodeDecoder); err != nil {
+				return err
 			}
 
 		default:

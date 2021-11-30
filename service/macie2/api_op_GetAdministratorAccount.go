@@ -35,8 +35,8 @@ type GetAdministratorAccountInput struct {
 type GetAdministratorAccountOutput struct {
 
 	// The Amazon Web Services account ID for the administrator account. If the
-	// accounts are associated by a Macie membership invitation, this object also
-	// provides details about the invitation that was sent to establish the
+	// accounts are associated by an Amazon Macie membership invitation, this object
+	// also provides details about the invitation that was sent to establish the
 	// relationship between the accounts.
 	Administrator *types.Invitation
 

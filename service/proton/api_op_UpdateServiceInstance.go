@@ -86,7 +86,7 @@ type UpdateServiceInstanceInput struct {
 
 type UpdateServiceInstanceOutput struct {
 
-	// The service instance summary data returned by AWS Proton.
+	// The service instance summary data returned by Proton.
 	//
 	// This member is required.
 	ServiceInstance *types.ServiceInstance

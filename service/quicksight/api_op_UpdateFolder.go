@@ -28,12 +28,12 @@ func (c *Client) UpdateFolder(ctx context.Context, params *UpdateFolderInput, op
 
 type UpdateFolderInput struct {
 
-	// The AWS account ID.
+	// The ID for the Amazon Web Services account that contains the folder to update.
 	//
 	// This member is required.
 	AwsAccountId *string
 
-	// The folder ID.
+	// The ID of the folder.
 	//
 	// This member is required.
 	FolderId *string
@@ -48,16 +48,16 @@ type UpdateFolderInput struct {
 
 type UpdateFolderOutput struct {
 
-	// The Amazon Resource Name (ARN).
+	// The Amazon Resource Name (ARN) of the folder.
 	Arn *string
 
-	// The folder ID.
+	// The ID of the folder.
 	FolderId *string
 
-	// The request ID.
+	// The Amazon Web Services request ID for this operation.
 	RequestId *string
 
-	// The status. If succeeded, the status is SC_OK.
+	// The HTTP status of the request.
 	Status int32
 
 	// Metadata pertaining to the operation's result.

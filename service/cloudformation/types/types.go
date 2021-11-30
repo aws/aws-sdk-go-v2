@@ -310,10 +310,10 @@ type Parameter struct {
 	// The input value associated with the parameter.
 	ParameterValue *string
 
-	// Read-only. The value that corresponds to a Systems Manager parameter key. This
-	// field is returned only for SSM parameter types
+	// Read-only. Read-only. The value that corresponds to a SSM parameter key. This
+	// field is returned only for SSM
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/parameters-section-structure.html#aws-ssm-parameter-types)
-	// in the template.
+	// parameter types in the template.
 	ResolvedValue *string
 
 	// During a stack update, use the existing parameter value that the stack is using
@@ -695,9 +695,11 @@ type RollbackTrigger struct {
 	// This member is required.
 	Arn *string
 
-	// The resource type of the rollback trigger. Currently, AWS::CloudWatch::Alarm
+	// The resource type of the rollback trigger. Specify either AWS::CloudWatch::Alarm
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html)
-	// is the only supported resource type.
+	// or AWS::CloudWatch::CompositeAlarm
+	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudwatch-compositealarm.html)
+	// resource types.
 	//
 	// This member is required.
 	Type *string
@@ -2155,7 +2157,7 @@ type TypeFilters struct {
 	// * ACTIVATED: Public
 	// extensions that have been activated for this account and region.
 	//
-	// * THIRD-PARTY:
+	// * THIRD_PARTY:
 	// Extensions available for use from publishers other than Amazon. This
 	// includes:
 	//
@@ -2164,12 +2166,12 @@ type TypeFilters struct {
 	// * Public extensions
 	// from publishers other than Amazon, whether activated or not.
 	//
-	// * AWS-TYPES:
+	// * AWS_TYPES:
 	// Extensions available for use from Amazon.
 	Category Category
 
 	// The id of the publisher of the extension. Extensions published by Amazon are not
-	// assigned a publisher ID. Use the AWS-TYPES category to specify a list of types
+	// assigned a publisher ID. Use the AWS_TYPE category to specify a list of types
 	// published by Amazon.
 	PublisherId *string
 

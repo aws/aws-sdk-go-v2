@@ -12,7 +12,10 @@ import (
 	"time"
 )
 
-// Creates a Device Advisor test suite.
+// Creates a Device Advisor test suite. Requires permission to access the
+// CreateSuiteDefinition
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) CreateSuiteDefinition(ctx context.Context, params *CreateSuiteDefinitionInput, optFns ...func(*Options)) (*CreateSuiteDefinitionOutput, error) {
 	if params == nil {
 		params = &CreateSuiteDefinitionInput{}
@@ -44,7 +47,7 @@ type CreateSuiteDefinitionOutput struct {
 	// Creates a Device Advisor test suite with TimeStamp of when it was created.
 	CreatedAt *time.Time
 
-	// Creates a Device Advisor test suite with Amazon Resource name.
+	// Creates a Device Advisor test suite with Amazon Resource Name (ARN).
 	SuiteDefinitionArn *string
 
 	// Creates a Device Advisor test suite with suite UUID.

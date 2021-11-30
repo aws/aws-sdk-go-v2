@@ -37,9 +37,22 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            You are not authorized to perform this action.\n        </p>",
+                "aws.protocols#awsQueryError": {
+                    "code": "AccessDenied",
+                    "httpResponseCode": 403
+                },
+                "smithy.api#documentation": "<p> You are not authorized to perform this action. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.timestreamquery#AmazonResourceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
             }
         },
         "com.amazonaws.timestreamquery#CancelQuery": {
@@ -71,7 +84,7 @@
                 "aws.api#clientDiscoveredEndpoint": {
                     "required": true
                 },
-                "smithy.api#documentation": "<p>\n        Cancels a query that has been issued. Cancellation is guaranteed only if the query has not \n        completed execution before the cancellation request was issued. Because cancellation is an idempotent operation, \n        subsequent cancellation requests will return a <code>CancellationMessage</code>, indicating that the query has already been canceled.\n    </p>",
+                "smithy.api#documentation": "<p> Cancels a query that has been issued. Cancellation is provided only if the query has\n            not completed running before the cancellation request was issued. Because cancellation\n            is an idempotent operation, subsequent cancellation requests will return a\n                <code>CancellationMessage</code>, indicating that the query has already been\n            canceled. See <a href=\"https://docs.aws.amazon.com/Timestream/latest/developerguide/code-samples.cancel-query.html\">code\n                sample</a> for details. </p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -81,7 +94,7 @@
                 "QueryId": {
                     "target": "com.amazonaws.timestreamquery#QueryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The id of the query that needs to be cancelled. <code>QueryID</code> is returned as part of QueryResult.\n    </p>",
+                        "smithy.api#documentation": "<p> The ID of the query that needs to be cancelled. <code>QueryID</code> is returned as\n            part of the query result. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -93,12 +106,22 @@
                 "CancellationMessage": {
                     "target": "com.amazonaws.timestreamquery#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        A <code>CancellationMessage</code> is returned when a <code>CancelQuery</code> request for the query specified by <code>QueryId</code> has already been issued. \n    </p>"
+                        "smithy.api#documentation": "<p> A <code>CancellationMessage</code> is returned when a <code>CancelQuery</code>\n            request for the query specified by <code>QueryId</code> has already been issued. </p>"
                     }
                 }
             }
         },
         "com.amazonaws.timestreamquery#ClientRequestToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 32,
+                    "max": 128
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.timestreamquery#ClientToken": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
@@ -114,19 +137,19 @@
                 "Name": {
                     "target": "com.amazonaws.timestreamquery#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The name of the result set column. The name of the result set is available for columns of all data types except for arrays.\n        </p>"
+                        "smithy.api#documentation": "<p> The name of the result set column. The name of the result set is available for\n            columns of all data types except for arrays. </p>"
                     }
                 },
                 "Type": {
                     "target": "com.amazonaws.timestreamquery#Type",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The data type of the result set column. The data type can be a scalar or complex. Scalar data types are integers, strings, doubles, booleans, and others. Complex data types are types such as arrays, rows, and others.\n        </p>",
+                        "smithy.api#documentation": "<p>The data type of the result set column. The data type can be a scalar or complex.\n            Scalar data types are integers, strings, doubles, Booleans, and others. Complex data\n            types are types such as arrays, rows, and others. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            Contains the meta data for query results such as the column names, data types, and other attributes.\n        </p>"
+                "smithy.api#documentation": "<p> Contains the metadata for query results such as the column names, data types, and\n            other attributes. </p>"
             }
         },
         "com.amazonaws.timestreamquery#ColumnInfoList": {
@@ -143,9 +166,132 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n       Unable to poll results for a cancelled query.\n    </p>",
+                "smithy.api#documentation": "<p> Unable to poll results for a cancelled query. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.timestreamquery#CreateScheduledQuery": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.timestreamquery#CreateScheduledQueryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.timestreamquery#CreateScheduledQueryResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.timestreamquery#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#InvalidEndpointException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": true
+                },
+                "smithy.api#documentation": "<p> Create a scheduled query that will be run on your behalf at the configured schedule.\n            Timestream assumes the execution role provided as part of the\n                <code>ScheduledQueryExecutionRoleArn</code> parameter to run the query. You can use\n            the <code>NotificationConfiguration</code> parameter to configure notification for your\n            scheduled query operations.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.timestreamquery#CreateScheduledQueryRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.timestreamquery#ScheduledQueryName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the scheduled query.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "QueryString": {
+                    "target": "com.amazonaws.timestreamquery#QueryString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The query string to run. Parameter\n            names can be specified in the query string <code>@</code> character followed by an\n            identifier. The named Parameter <code>@scheduled_runtime</code> is reserved and can be used in the query to get the time at which the query is scheduled to run.</p>\n            <p>The timestamp calculated according to the ScheduleConfiguration parameter, will be the value of <code>@scheduled_runtime</code> paramater for each query run. \n            For example, consider an instance of a scheduled query executing on 2021-12-01 00:00:00. For this instance, the <code>@scheduled_runtime</code> parameter is \n            initialized to the timestamp 2021-12-01 00:00:00 when invoking the query.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ScheduleConfiguration": {
+                    "target": "com.amazonaws.timestreamquery#ScheduleConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schedule configuration for the query.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NotificationConfiguration": {
+                    "target": "com.amazonaws.timestreamquery#NotificationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Notification configuration for the scheduled query. A notification is sent by\n            Timestream when a query run finishes, when the state is updated or when you delete it. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetConfiguration": {
+                    "target": "com.amazonaws.timestreamquery#TargetConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration used for writing the result of a query.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.timestreamquery#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Using a ClientToken makes the call to CreateScheduledQuery idempotent, in other words, making the same request repeatedly will produce the same result. Making \n            multiple identical CreateScheduledQuery requests has the same effect as making a single request.\n\n </p>\n         <ul>\n            <li>\n                <p> If CreateScheduledQuery is called without a <code>ClientToken</code>, the\n                    Query SDK generates a <code>ClientToken</code> on your behalf.</p>\n            </li>\n            <li>\n                <p> After 8 hours, any request with the same <code>ClientToken</code> is treated\n                    as a new request. </p>\n            </li>\n         </ul>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "ScheduledQueryExecutionRoleArn": {
+                    "target": "com.amazonaws.timestreamquery#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the IAM role that Timestream will assume when running the scheduled query. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.timestreamquery#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of key-value pairs to label the scheduled query.</p>"
+                    }
+                },
+                "KmsKeyId": {
+                    "target": "com.amazonaws.timestreamquery#StringValue2048",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon KMS key used to encrypt the scheduled query resource, at-rest. If the Amazon KMS\n            key is not specified, the scheduled query resource will be encrypted with a Timestream\n            owned Amazon KMS key. To specify a KMS key, use the key ID, key ARN, alias name, or alias\n            ARN. When using an alias name, prefix the name with <i>alias/</i>\n         </p>\n            <p>If ErrorReportConfiguration uses <code>SSE_KMS</code> as encryption type, the same KmsKeyId is used to encrypt the error report at rest.</p>"
+                    }
+                },
+                "ErrorReportConfiguration": {
+                    "target": "com.amazonaws.timestreamquery#ErrorReportConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for error reporting. Error reports will be generated when a problem is encountered when writing the query results. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.timestreamquery#CreateScheduledQueryResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.timestreamquery#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN for the created scheduled query.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
             }
         },
         "com.amazonaws.timestreamquery#Datum": {
@@ -154,42 +300,87 @@
                 "ScalarValue": {
                     "target": "com.amazonaws.timestreamquery#ScalarValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Indicates if the data point is a scalar value such as integer, string, double, or boolean.\n        </p>"
+                        "smithy.api#documentation": "<p> Indicates if the data point is a scalar value such as integer, string, double, or\n            Boolean. </p>"
                     }
                 },
                 "TimeSeriesValue": {
                     "target": "com.amazonaws.timestreamquery#TimeSeriesDataPointList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Indicates if the data point is of timeseries data type.\n        </p>"
+                        "smithy.api#documentation": "<p> Indicates if the data point is a timeseries data type. </p>"
                     }
                 },
                 "ArrayValue": {
                     "target": "com.amazonaws.timestreamquery#DatumList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Indicates if the data point is an array.\n        </p>"
+                        "smithy.api#documentation": "<p> Indicates if the data point is an array. </p>"
                     }
                 },
                 "RowValue": {
                     "target": "com.amazonaws.timestreamquery#Row",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Indicates if the data point is a row.\n        </p>"
+                        "smithy.api#documentation": "<p> Indicates if the data point is a row. </p>"
                     }
                 },
                 "NullValue": {
                     "target": "com.amazonaws.timestreamquery#NullableBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Indicates if the data point is null.\n        </p>"
+                        "smithy.api#documentation": "<p> Indicates if the data point is null. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            Datum represents a single data point in a query result.\n        </p>"
+                "smithy.api#documentation": "<p> Datum represents a single data point in a query result. </p>"
             }
         },
         "com.amazonaws.timestreamquery#DatumList": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.timestreamquery#Datum"
+            }
+        },
+        "com.amazonaws.timestreamquery#DeleteScheduledQuery": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.timestreamquery#DeleteScheduledQueryRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.timestreamquery#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#InvalidEndpointException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": true
+                },
+                "smithy.api#documentation": "<p>Deletes a given scheduled query. This is an irreversible operation. </p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.timestreamquery#DeleteScheduledQueryRequest": {
+            "type": "structure",
+            "members": {
+                "ScheduledQueryArn": {
+                    "target": "com.amazonaws.timestreamquery#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the scheduled query. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
             }
         },
         "com.amazonaws.timestreamquery#DescribeEndpoints": {
@@ -212,7 +403,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>DescribeEndpoints returns a list of available endpoints to make Timestream API calls against.\n            This API is available through both Write and Query.</p>\n        <p>Because Timestream’s SDKs are designed to transparently work with the service’s architecture, \n            including the management and mapping of the service endpoints,\n            <i>it is not recommended that you use this API unless</i>:</p>\n        <ul>\n            <li>\n               <p>Your application uses a programming language that does not yet have SDK support</p>\n            </li>\n            <li>\n               <p>You require better control over the client-side implementation</p>\n            </li>\n         </ul>\n        <p>For detailed information on how to use DescribeEndpoints, \n            see <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/Using-API.endpoint-discovery.html\">The Endpoint Discovery Pattern and REST APIs</a>.</p>"
+                "smithy.api#documentation": "<p>DescribeEndpoints returns a list of available endpoints to make Timestream\n            API calls against. This API is available through both Write and Query.</p>\n        <p>Because the Timestream SDKs are designed to transparently work with the\n            service’s architecture, including the management and mapping of the service endpoints,\n                <i>it is not recommended that you use this API unless</i>:</p>\n        <ul>\n            <li>\n                <p>You are using <a href=\"https://docs.aws.amazon.com/Timestream/latest/developerguide/VPCEndpoints\">VPC endpoints (Amazon Web Services PrivateLink) with Timestream\n                    </a>\n               </p>\n            </li>\n            <li>\n                <p>Your application uses a programming language that does not yet have SDK\n                    support</p>\n            </li>\n            <li>\n                <p>You require better control over the client-side implementation</p>\n            </li>\n         </ul>\n        <p>For detailed information on how and when to use and implement DescribeEndpoints, see\n                <a href=\"https://docs.aws.amazon.com/Timestream/latest/developerguide/Using.API.html#Using-API.endpoint-discovery\">The Endpoint Discovery Pattern</a>.</p>"
             }
         },
         "com.amazonaws.timestreamquery#DescribeEndpointsRequest": {
@@ -225,10 +416,108 @@
                 "Endpoints": {
                     "target": "com.amazonaws.timestreamquery#Endpoints",
                     "traits": {
-                        "smithy.api#documentation": "<p>An <code>Endpoints</code> object is returned when a <code>DescribeEndpoints</code> request is made.</p>",
+                        "smithy.api#documentation": "<p>An <code>Endpoints</code> object is returned when a <code>DescribeEndpoints</code>\n            request is made.</p>",
                         "smithy.api#required": {}
                     }
                 }
+            }
+        },
+        "com.amazonaws.timestreamquery#DescribeScheduledQuery": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.timestreamquery#DescribeScheduledQueryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.timestreamquery#DescribeScheduledQueryResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.timestreamquery#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#InvalidEndpointException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": true
+                },
+                "smithy.api#documentation": "<p>Provides detailed information about a scheduled query.</p>"
+            }
+        },
+        "com.amazonaws.timestreamquery#DescribeScheduledQueryRequest": {
+            "type": "structure",
+            "members": {
+                "ScheduledQueryArn": {
+                    "target": "com.amazonaws.timestreamquery#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the scheduled query.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.timestreamquery#DescribeScheduledQueryResponse": {
+            "type": "structure",
+            "members": {
+                "ScheduledQuery": {
+                    "target": "com.amazonaws.timestreamquery#ScheduledQueryDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scheduled query.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.timestreamquery#DimensionMapping": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.timestreamquery#SchemaName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Column name from query result.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DimensionValueType": {
+                    "target": "com.amazonaws.timestreamquery#DimensionValueType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type for the dimension. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This type is used to map column(s) from the query result to a dimension in the\n            destination table.</p>"
+            }
+        },
+        "com.amazonaws.timestreamquery#DimensionMappingList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.timestreamquery#DimensionMapping"
+            }
+        },
+        "com.amazonaws.timestreamquery#DimensionValueType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "VARCHAR",
+                        "name": "VARCHAR"
+                    }
+                ]
             }
         },
         "com.amazonaws.timestreamquery#Double": {
@@ -253,7 +542,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents an available endpoint against which to make API calls agaisnt, as well as the TTL for that endpoint.</p>"
+                "smithy.api#documentation": "<p>Represents an available endpoint against which to make API calls against, as well as\n            the TTL for that endpoint.</p>"
             }
         },
         "com.amazonaws.timestreamquery#Endpoints": {
@@ -265,6 +554,132 @@
         "com.amazonaws.timestreamquery#ErrorMessage": {
             "type": "string"
         },
+        "com.amazonaws.timestreamquery#ErrorReportConfiguration": {
+            "type": "structure",
+            "members": {
+                "S3Configuration": {
+                    "target": "com.amazonaws.timestreamquery#S3Configuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 configuration for the error reports.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration required for error reporting.</p>"
+            }
+        },
+        "com.amazonaws.timestreamquery#ErrorReportLocation": {
+            "type": "structure",
+            "members": {
+                "S3ReportLocation": {
+                    "target": "com.amazonaws.timestreamquery#S3ReportLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 location where error reports are written.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This contains the location of the error report for a single scheduled query call.\n        </p>"
+            }
+        },
+        "com.amazonaws.timestreamquery#ExecuteScheduledQuery": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.timestreamquery#ExecuteScheduledQueryRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.timestreamquery#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#InvalidEndpointException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": true
+                },
+                "smithy.api#documentation": "<p> You can use this API to run a scheduled query manually. </p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.timestreamquery#ExecuteScheduledQueryRequest": {
+            "type": "structure",
+            "members": {
+                "ScheduledQueryArn": {
+                    "target": "com.amazonaws.timestreamquery#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the scheduled query.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InvocationTime": {
+                    "target": "com.amazonaws.timestreamquery#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp in UTC. Query will be run as if it was invoked at this timestamp. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.timestreamquery#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Not used. </p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.timestreamquery#ExecutionStats": {
+            "type": "structure",
+            "members": {
+                "ExecutionTimeInMillis": {
+                    "target": "com.amazonaws.timestreamquery#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Total time, measured in milliseconds, that was needed for the scheduled query run to complete.</p>"
+                    }
+                },
+                "DataWrites": {
+                    "target": "com.amazonaws.timestreamquery#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Data writes metered for records ingested in a single scheduled query run.</p>"
+                    }
+                },
+                "BytesMetered": {
+                    "target": "com.amazonaws.timestreamquery#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Bytes metered for a single scheduled query run.</p>"
+                    }
+                },
+                "RecordsIngested": {
+                    "target": "com.amazonaws.timestreamquery#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of records ingested for a single scheduled query run. </p>"
+                    }
+                },
+                "QueryResultRows": {
+                    "target": "com.amazonaws.timestreamquery#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Number of rows present in the output from running a query before ingestion to\n            destination data source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Statistics for a single scheduled query run.</p>"
+            }
+        },
         "com.amazonaws.timestreamquery#InternalServerException": {
             "type": "structure",
             "members": {
@@ -273,7 +688,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            Timestream was unable to fully process this request because of an internal server error.\n        </p>",
+                "smithy.api#documentation": "<p>\n            Timestream was unable to fully process this request because of an internal\n            server error. </p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
             }
@@ -286,9 +701,157 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The requested endpoint was invalid.</p>",
+                "smithy.api#documentation": "<p>The requested endpoint was not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 421
+            }
+        },
+        "com.amazonaws.timestreamquery#ListScheduledQueries": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.timestreamquery#ListScheduledQueriesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.timestreamquery#ListScheduledQueriesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.timestreamquery#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#InvalidEndpointException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": true
+                },
+                "smithy.api#documentation": "<p>Gets a list of all scheduled queries in the caller's Amazon account and Region. <code>ListScheduledQueries</code> is eventually consistent. </p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.timestreamquery#ListScheduledQueriesRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.timestreamquery#MaxScheduledQueriesResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to return in the output. If the total number of items\n            available is more than the value specified, a <code>NextToken</code> is provided in the\n            output. To resume pagination, provide the <code>NextToken</code> value as the argument\n            to the subsequent call to <code>ListScheduledQueriesRequest</code>.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.timestreamquery#NextScheduledQueriesResultsToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A pagination token to resume pagination.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.timestreamquery#ListScheduledQueriesResponse": {
+            "type": "structure",
+            "members": {
+                "ScheduledQueries": {
+                    "target": "com.amazonaws.timestreamquery#ScheduledQueryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of scheduled queries.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.timestreamquery#NextScheduledQueriesResultsToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the NextToken from a previously\n            truncated response.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.timestreamquery#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.timestreamquery#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.timestreamquery#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.timestreamquery#InvalidEndpointException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": true
+                },
+                "smithy.api#documentation": "<p>List all tags on a Timestream query resource.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.timestreamquery#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceARN": {
+                    "target": "com.amazonaws.timestreamquery#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Timestream resource with tags to be listed. This value is an Amazon Resource Name\n            (ARN).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.timestreamquery#MaxTagsForResourceResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of tags to return.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.timestreamquery#NextTagsForResourceResultsToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token to resume pagination.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.timestreamquery#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "Tags": {
+                    "target": "com.amazonaws.timestreamquery#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags currently associated with the Timestream resource. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.timestreamquery#NextTagsForResourceResultsToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token to resume pagination with a subsequent call to\n                <code>ListTagsForResourceResponse</code>.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.timestreamquery#Long": {
@@ -304,10 +867,301 @@
                 }
             }
         },
+        "com.amazonaws.timestreamquery#MaxScheduledQueriesResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.timestreamquery#MaxTagsForResourceResult": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.timestreamquery#MeasureValueType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "BIGINT",
+                        "name": "BIGINT"
+                    },
+                    {
+                        "value": "BOOLEAN",
+                        "name": "BOOLEAN"
+                    },
+                    {
+                        "value": "DOUBLE",
+                        "name": "DOUBLE"
+                    },
+                    {
+                        "value": "VARCHAR",
+                        "name": "VARCHAR"
+                    },
+                    {
+                        "value": "MULTI",
+                        "name": "MULTI"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.timestreamquery#MixedMeasureMapping": {
+            "type": "structure",
+            "members": {
+                "MeasureName": {
+                    "target": "com.amazonaws.timestreamquery#SchemaName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Refers to the value of measure_name in a result row. This field is required if\n            MeasureNameColumn is provided.</p>"
+                    }
+                },
+                "SourceColumn": {
+                    "target": "com.amazonaws.timestreamquery#SchemaName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This field refers to the source column from which measure-value is to be read for\n            result materialization.</p>"
+                    }
+                },
+                "TargetMeasureName": {
+                    "target": "com.amazonaws.timestreamquery#SchemaName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Target measure name to be used. If not provided, the target measure name by default\n            would be measure-name if provided, or sourceColumn otherwise. </p>"
+                    }
+                },
+                "MeasureValueType": {
+                    "target": "com.amazonaws.timestreamquery#MeasureValueType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of the value that is to be read from sourceColumn. If the mapping is for MULTI,\n            use MeasureValueType.MULTI.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MultiMeasureAttributeMappings": {
+                    "target": "com.amazonaws.timestreamquery#MultiMeasureAttributeMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required when measureValueType is MULTI. Attribute mappings for MULTI value\n            measures.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>MixedMeasureMappings are mappings that can be used to ingest data into a mixture of\n            narrow and multi measures in the derived table.</p>"
+            }
+        },
+        "com.amazonaws.timestreamquery#MixedMeasureMappingList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.timestreamquery#MixedMeasureMapping"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.timestreamquery#MultiMeasureAttributeMapping": {
+            "type": "structure",
+            "members": {
+                "SourceColumn": {
+                    "target": "com.amazonaws.timestreamquery#SchemaName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Source column from where the attribute value is to be read.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetMultiMeasureAttributeName": {
+                    "target": "com.amazonaws.timestreamquery#SchemaName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Custom name to be used for attribute name in derived table. If not provided, source\n            column name would be used.</p>"
+                    }
+                },
+                "MeasureValueType": {
+                    "target": "com.amazonaws.timestreamquery#ScalarMeasureValueType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of the attribute to be read from the source column.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Attribute mapping for MULTI value measures.</p>"
+            }
+        },
+        "com.amazonaws.timestreamquery#MultiMeasureAttributeMappingList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.timestreamquery#MultiMeasureAttributeMapping"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.timestreamquery#MultiMeasureMappings": {
+            "type": "structure",
+            "members": {
+                "TargetMultiMeasureName": {
+                    "target": "com.amazonaws.timestreamquery#SchemaName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the target multi-measure name in the derived table. This input is required\n            when measureNameColumn is not provided. If MeasureNameColumn is provided, then value\n            from that column will be used as multi-measure name.</p>"
+                    }
+                },
+                "MultiMeasureAttributeMappings": {
+                    "target": "com.amazonaws.timestreamquery#MultiMeasureAttributeMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required. Attribute mappings to be used for mapping query results to ingest data for\n            multi-measure attributes.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Only one of MixedMeasureMappings or MultiMeasureMappings is to be provided.\n            MultiMeasureMappings can be used to ingest data as multi measures in the derived\n            table.</p>"
+            }
+        },
+        "com.amazonaws.timestreamquery#NextScheduledQueriesResultsToken": {
+            "type": "string"
+        },
+        "com.amazonaws.timestreamquery#NextTagsForResourceResultsToken": {
+            "type": "string"
+        },
+        "com.amazonaws.timestreamquery#NotificationConfiguration": {
+            "type": "structure",
+            "members": {
+                "SnsConfiguration": {
+                    "target": "com.amazonaws.timestreamquery#SnsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details on SNS configuration. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Notification configuration for a scheduled query. A notification is sent by\n            Timestream when a scheduled query is created, its state is updated or when it is deleted. </p>"
+            }
+        },
         "com.amazonaws.timestreamquery#NullableBoolean": {
             "type": "boolean",
             "traits": {
                 "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.timestreamquery#PaginationToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.timestreamquery#ParameterMapping": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.timestreamquery#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Parameter name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.timestreamquery#Type",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Mapping for named parameters.</p>"
+            }
+        },
+        "com.amazonaws.timestreamquery#ParameterMappingList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.timestreamquery#ParameterMapping"
+            }
+        },
+        "com.amazonaws.timestreamquery#PrepareQuery": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.timestreamquery#PrepareQueryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.timestreamquery#PrepareQueryResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.timestreamquery#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#InvalidEndpointException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": true
+                },
+                "smithy.api#documentation": "<p>A synchronous operation that allows you to submit a query with parameters to be stored\n            by Timestream for later running. Timestream only supports using this operation with the\n                <code>PrepareQueryRequest$ValidateOnly</code> set to <code>true</code>. </p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.timestreamquery#PrepareQueryRequest": {
+            "type": "structure",
+            "members": {
+                "QueryString": {
+                    "target": "com.amazonaws.timestreamquery#QueryString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Timestream query string that you want to use as a prepared statement. Parameter\n            names can be specified in the query string <code>@</code> character followed by an\n            identifier. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ValidateOnly": {
+                    "target": "com.amazonaws.timestreamquery#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>By setting this value to <code>true</code>, Timestream will only validate that the\n            query string is a valid Timestream query, and not store the prepared query for later\n            use.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.timestreamquery#PrepareQueryResponse": {
+            "type": "structure",
+            "members": {
+                "QueryString": {
+                    "target": "com.amazonaws.timestreamquery#QueryString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The query string that you want prepare.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Columns": {
+                    "target": "com.amazonaws.timestreamquery#SelectColumnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of SELECT clause columns of the submitted query string. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Parameters": {
+                    "target": "com.amazonaws.timestreamquery#ParameterMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of parameters used in the submitted query string. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
             }
         },
         "com.amazonaws.timestreamquery#Query": {
@@ -345,7 +1199,7 @@
                 "aws.api#clientDiscoveredEndpoint": {
                     "required": true
                 },
-                "smithy.api#documentation": "<p>\n            Query is a synchronous operation that enables you to execute a query. Query will timeout after 60 seconds. You must update the default timeout in the SDK to support a timeout of 60 seconds. The result set will be truncated to 1MB. Service quotas apply. For more information, see Quotas in the Timestream Developer Guide.\n        </p>",
+                "smithy.api#documentation": "<p>\n            <code>Query</code> is a synchronous operation that enables you to run a query against\n            your Amazon Timestream data. <code>Query</code> will time out after 60 seconds.\n            You must update the default timeout in the SDK to support a timeout of 60 seconds. See\n            the <a href=\"https://docs.aws.amazon.com/Timestream/latest/developerguide/code-samples.run-query.html\">code\n                sample</a> for details. </p>\n        <p>Your query request will fail in the following cases:</p>\n        <ul>\n            <li>\n                <p> If you submit a <code>Query</code> request with the same client token outside\n                    of the 5-minute idempotency window. </p>\n            </li>\n            <li>\n                <p> If you submit a <code>Query</code> request with the same client token, but\n                    change other parameters, within the 5-minute idempotency window. </p>\n            </li>\n            <li>\n                <p> If the size of the row (including the query metadata) exceeds 1 MB, then the\n                    query will fail with the following error message: </p>\n                <p>\n                  <code>Query aborted as max page response size has been exceeded by the output\n                        result row</code>\n                </p>\n            </li>\n            <li>\n                <p> If the IAM principal of the query initiator and the result reader are not the\n                    same and/or the query initiator and the result reader do not have the same query\n                    string in the query requests, the query will fail with an <code>Invalid\n                        pagination token</code> error. </p>\n            </li>\n         </ul>",
                 "smithy.api#idempotent": {},
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -363,7 +1217,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n        Timestream was unable to run the query successfully.\n    </p>",
+                "smithy.api#documentation": "<p>\n            Timestream was unable to run the query successfully. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -375,7 +1229,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9]+$"
             }
         },
         "com.amazonaws.timestreamquery#QueryRequest": {
@@ -384,27 +1238,27 @@
                 "QueryString": {
                     "target": "com.amazonaws.timestreamquery#QueryString",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The query to be executed by Timestream.\n        </p>",
+                        "smithy.api#documentation": "<p> The query to be run by Timestream. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ClientToken": {
                     "target": "com.amazonaws.timestreamquery#ClientRequestToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n       Unique, case-sensitive string of up to 64 ASCII characters that you specify when you make a Query request.\n       Providing a <code>ClientToken</code> makes the call to <code>Query</code> idempotent, meaning that multiple identical calls \n       have the same effect as one single call.\n    </p>\n\n         <p>Your query request will fail in the following cases:</p> \n         <ul>\n            <li>\n               <p>\n                  If you submit a request with the same client token outside the 5-minute idepotency window.\n               </p>\n           </li>\n            <li>\n               <p>\n                  If you submit a request with the same client token but a change in other parameters within the 5-minute idempotency window.  \n               </p>\n           </li>\n         </ul>\n\n         <p>\n      After 4 hours, any request with the same client token is treated as a new request.\n      </p>",
+                        "smithy.api#documentation": "<p> Unique, case-sensitive string of up to 64 ASCII characters specified when a\n                <code>Query</code> request is made. Providing a <code>ClientToken</code> makes the\n            call to <code>Query</code>\n            <i>idempotent</i>. This means that running the same query repeatedly will\n            produce the same result. In other words, making multiple identical <code>Query</code>\n            requests has the same effect as making a single request. When using\n                <code>ClientToken</code> in a query, note the following: </p>\n        <ul>\n            <li>\n                <p> If the Query API is instantiated without a <code>ClientToken</code>, the\n                    Query SDK generates a <code>ClientToken</code> on your behalf.</p>\n            </li>\n            <li>\n                <p>If the <code>Query</code> invocation only contains the\n                        <code>ClientToken</code> but does not include a <code>NextToken</code>, that\n                    invocation of <code>Query</code> is assumed to be a new query run.</p>\n            </li>\n            <li>\n                <p>If the invocation contains <code>NextToken</code>, that particular invocation\n                    is assumed to be a subsequent invocation of a prior call to the Query API, and a\n                    result set is returned.</p>\n            </li>\n            <li>\n                <p> After 4 hours, any request with the same <code>ClientToken</code> is treated\n                    as a new request. </p>\n            </li>\n         </ul>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
                 "NextToken": {
-                    "target": "com.amazonaws.timestreamquery#String",
+                    "target": "com.amazonaws.timestreamquery#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n       A pagination token passed to get a set of results.\n    </p>"
+                        "smithy.api#documentation": "<p> A pagination token used to return a set of results. When the <code>Query</code> API\n            is invoked using <code>NextToken</code>, that particular invocation is assumed to be a\n            subsequent invocation of a prior call to <code>Query</code>, and a result set is\n            returned. However, if the <code>Query</code> invocation only contains the\n                <code>ClientToken</code>, that invocation of <code>Query</code> is assumed to be a\n            new query run. </p>\n        <p>Note the following when using NextToken in a query:</p>\n        <ul>\n            <li>\n                <p>A pagination token can be used for up to five <code>Query</code> invocations,\n                    OR for a duration of up to 1 hour – whichever comes first.</p>\n            </li>\n            <li>\n                <p>Using the same <code>NextToken</code> will return the same set of records. To\n                    keep paginating through the result set, you must to use the most recent\n                        <code>nextToken</code>.</p>\n            </li>\n            <li>\n                <p>Suppose a <code>Query</code> invocation returns two <code>NextToken</code>\n                    values, <code>TokenA</code> and <code>TokenB</code>. If <code>TokenB</code> is\n                    used in a subsequent <code>Query</code> invocation, then <code>TokenA</code> is\n                    invalidated and cannot be reused.</p>\n            </li>\n            <li>\n                <p>To request a previous result set from a query after pagination has begun, you\n                    must re-invoke the Query API.</p>\n            </li>\n            <li>\n                <p>The latest <code>NextToken</code> should be used to paginate until\n                        <code>null</code> is returned, at which point a new <code>NextToken</code>\n                    should be used.</p>\n            </li>\n            <li>\n                <p> If the IAM principal of the query initiator and the result reader are not the\n                    same and/or the query initiator and the result reader do not have the same query\n                    string in the query requests, the query will fail with an <code>Invalid\n                        pagination token</code> error. </p>\n            </li>\n         </ul>"
                     }
                 },
                 "MaxRows": {
                     "target": "com.amazonaws.timestreamquery#MaxQueryResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The total number of rows to return in the output. If the total number of rows available\n      is more than the value specified, a NextToken is provided in the command's output.\n      To resume pagination, provide the NextToken value in the starting-token argument of a \n      subsequent command.\n    </p>"
+                        "smithy.api#documentation": "<p> The total number of rows to be returned in the <code>Query</code> output. The initial\n            run of <code>Query</code> with a <code>MaxRows</code> value specified will return the\n            result set of the query in two cases: </p>\n        <ul>\n            <li>\n                <p>The size of the result is less than <code>1MB</code>.</p>\n            </li>\n            <li>\n                <p>The number of rows in the result set is less than the value of\n                        <code>maxRows</code>.</p>\n            </li>\n         </ul>\n        <p>Otherwise, the initial invocation of <code>Query</code> only returns a\n                <code>NextToken</code>, which can then be used in subsequent calls to fetch the\n            result set. To resume pagination, provide the <code>NextToken</code> value in the\n            subsequent command.</p>\n        <p>If the row size is large (e.g. a row has many columns), Timestream may return\n            fewer rows to keep the response size from exceeding the 1 MB limit. If\n                <code>MaxRows</code> is not provided, Timestream will send the necessary\n            number of rows to meet the 1 MB limit.</p>"
                     }
                 }
             }
@@ -415,34 +1269,34 @@
                 "QueryId": {
                     "target": "com.amazonaws.timestreamquery#QueryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n       A unique ID for the given query.\n    </p>",
+                        "smithy.api#documentation": "<p> A unique ID for the given query. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "NextToken": {
-                    "target": "com.amazonaws.timestreamquery#String",
+                    "target": "com.amazonaws.timestreamquery#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n       A pagination token that can be used again on a <code>Query</code> call to get the next set of results. \n    </p>"
+                        "smithy.api#documentation": "<p> A pagination token that can be used again on a <code>Query</code> call to get the\n            next set of results. </p>"
                     }
                 },
                 "Rows": {
                     "target": "com.amazonaws.timestreamquery#RowList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The result set rows returned by the query.\n        </p>",
+                        "smithy.api#documentation": "<p> The result set rows returned by the query. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ColumnInfo": {
                     "target": "com.amazonaws.timestreamquery#ColumnInfoList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The column data types of the returned result set.\n        </p>",
+                        "smithy.api#documentation": "<p> The column data types of the returned result set. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "QueryStatus": {
                     "target": "com.amazonaws.timestreamquery#QueryStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the status of the query, including progress and bytes scannned.</p>"
+                        "smithy.api#documentation": "<p>Information about the status of the query, including progress and bytes\n            scanned.</p>"
                     }
                 }
             }
@@ -459,24 +1313,50 @@
                 "CumulativeBytesScanned": {
                     "target": "com.amazonaws.timestreamquery#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of data scanned by the query in bytes. \n            This is a cumulative sum and represents the total amount of bytes scanned since the query was started.\n        </p>"
+                        "smithy.api#documentation": "<p>The amount of data scanned by the query in bytes. This is a cumulative sum and\n            represents the total amount of bytes scanned since the query was started. </p>"
                     }
                 },
                 "CumulativeBytesMetered": {
                     "target": "com.amazonaws.timestreamquery#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of data scanned by the query in bytes that you will be charged for. \n            This is a cumulative sum and represents the total amount of data that you will be charged \n            for since the query was started. \n            The charge is applied only once and is either applied when \n            the query completes execution or when the query is cancelled.\n        </p>"
+                        "smithy.api#documentation": "<p>The amount of data scanned by the query in bytes that you will be charged for. This is\n            a cumulative sum and represents the total amount of data that you will be charged for\n            since the query was started. The charge is applied only once and is either applied when\n            the query completes running or when the query is cancelled. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about the status of the query, including progress and bytes scannned.</p>"
+                "smithy.api#documentation": "<p>Information about the status of the query, including progress and bytes\n            scanned.</p>"
             }
         },
         "com.amazonaws.timestreamquery#QueryString": {
             "type": "string",
             "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 262144
+                },
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.timestreamquery#ResourceName": {
+            "type": "string"
+        },
+        "com.amazonaws.timestreamquery#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.timestreamquery#ErrorMessage"
+                },
+                "ScheduledQueryArn": {
+                    "target": "com.amazonaws.timestreamquery#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the scheduled query.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The requested resource could not be found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
             }
         },
         "com.amazonaws.timestreamquery#Row": {
@@ -498,6 +1378,114 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.timestreamquery#Row"
+            }
+        },
+        "com.amazonaws.timestreamquery#S3BucketName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"
+            }
+        },
+        "com.amazonaws.timestreamquery#S3Configuration": {
+            "type": "structure",
+            "members": {
+                "BucketName": {
+                    "target": "com.amazonaws.timestreamquery#S3BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Name of the S3 bucket under which error reports will be created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ObjectKeyPrefix": {
+                    "target": "com.amazonaws.timestreamquery#S3ObjectKeyPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Prefix for the error report key. Timestream by default adds the following prefix to\n            the error report path. </p>"
+                    }
+                },
+                "EncryptionOption": {
+                    "target": "com.amazonaws.timestreamquery#S3EncryptionOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Encryption at rest options for the error reports. If no encryption option is\n            specified, Timestream will choose SSE_S3 as default. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details on S3 location for error reports that result from running a query. </p>"
+            }
+        },
+        "com.amazonaws.timestreamquery#S3EncryptionOption": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SSE_S3",
+                        "name": "SSE_S3"
+                    },
+                    {
+                        "value": "SSE_KMS",
+                        "name": "SSE_KMS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.timestreamquery#S3ObjectKey": {
+            "type": "string"
+        },
+        "com.amazonaws.timestreamquery#S3ObjectKeyPrefix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 896
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9|!\\-_*'\\(\\)]([a-zA-Z0-9]|[!\\-_*'\\(\\)\\/.])+$"
+            }
+        },
+        "com.amazonaws.timestreamquery#S3ReportLocation": {
+            "type": "structure",
+            "members": {
+                "BucketName": {
+                    "target": "com.amazonaws.timestreamquery#S3BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> S3 bucket name. </p>"
+                    }
+                },
+                "ObjectKey": {
+                    "target": "com.amazonaws.timestreamquery#S3ObjectKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>S3 key. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> S3 report location for the scheduled query run.</p>"
+            }
+        },
+        "com.amazonaws.timestreamquery#ScalarMeasureValueType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "BIGINT",
+                        "name": "BIGINT"
+                    },
+                    {
+                        "value": "BOOLEAN",
+                        "name": "BOOLEAN"
+                    },
+                    {
+                        "value": "DOUBLE",
+                        "name": "DOUBLE"
+                    },
+                    {
+                        "value": "VARCHAR",
+                        "name": "VARCHAR"
+                    }
+                ]
             }
         },
         "com.amazonaws.timestreamquery#ScalarType": {
@@ -554,11 +1542,537 @@
         "com.amazonaws.timestreamquery#ScalarValue": {
             "type": "string"
         },
+        "com.amazonaws.timestreamquery#ScheduleConfiguration": {
+            "type": "structure",
+            "members": {
+                "ScheduleExpression": {
+                    "target": "com.amazonaws.timestreamquery#ScheduleExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An expression that denotes when to trigger the scheduled query run. This can be a cron\n            expression or a rate expression. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration of the schedule of the query.</p>"
+            }
+        },
+        "com.amazonaws.timestreamquery#ScheduleExpression": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.timestreamquery#ScheduledQuery": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.timestreamquery#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.timestreamquery#ScheduledQueryName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the scheduled query.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.timestreamquery#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation time of the scheduled query.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.timestreamquery#ScheduledQueryState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>State of scheduled query. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PreviousInvocationTime": {
+                    "target": "com.amazonaws.timestreamquery#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time the scheduled query was run.</p>"
+                    }
+                },
+                "NextInvocationTime": {
+                    "target": "com.amazonaws.timestreamquery#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next time the scheduled query is to be run.</p>"
+                    }
+                },
+                "ErrorReportConfiguration": {
+                    "target": "com.amazonaws.timestreamquery#ErrorReportConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for scheduled query error reporting.</p>"
+                    }
+                },
+                "TargetDestination": {
+                    "target": "com.amazonaws.timestreamquery#TargetDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Target data source where final scheduled query result will be written.</p>"
+                    }
+                },
+                "LastRunStatus": {
+                    "target": "com.amazonaws.timestreamquery#ScheduledQueryRunStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status of the last scheduled query run.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Scheduled Query</p>"
+            }
+        },
+        "com.amazonaws.timestreamquery#ScheduledQueryDescription": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.timestreamquery#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Scheduled query ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.timestreamquery#ScheduledQueryName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the scheduled query.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "QueryString": {
+                    "target": "com.amazonaws.timestreamquery#QueryString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The query to be run.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.timestreamquery#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Creation time of the scheduled query.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.timestreamquery#ScheduledQueryState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>State of the scheduled query. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PreviousInvocationTime": {
+                    "target": "com.amazonaws.timestreamquery#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Last time the query was run.</p>"
+                    }
+                },
+                "NextInvocationTime": {
+                    "target": "com.amazonaws.timestreamquery#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next time the scheduled query is scheduled to run.</p>"
+                    }
+                },
+                "ScheduleConfiguration": {
+                    "target": "com.amazonaws.timestreamquery#ScheduleConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Schedule configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NotificationConfiguration": {
+                    "target": "com.amazonaws.timestreamquery#NotificationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Notification configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetConfiguration": {
+                    "target": "com.amazonaws.timestreamquery#TargetConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Scheduled query target store configuration.</p>"
+                    }
+                },
+                "ScheduledQueryExecutionRoleArn": {
+                    "target": "com.amazonaws.timestreamquery#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>IAM role that Timestream uses to run the schedule query.</p>"
+                    }
+                },
+                "KmsKeyId": {
+                    "target": "com.amazonaws.timestreamquery#StringValue2048",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A customer provided KMS key used to encrypt the scheduled query resource.</p>"
+                    }
+                },
+                "ErrorReportConfiguration": {
+                    "target": "com.amazonaws.timestreamquery#ErrorReportConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Error-reporting configuration for the scheduled query.</p>"
+                    }
+                },
+                "LastRunSummary": {
+                    "target": "com.amazonaws.timestreamquery#ScheduledQueryRunSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Runtime summary for the last scheduled query run. </p>"
+                    }
+                },
+                "RecentlyFailedRuns": {
+                    "target": "com.amazonaws.timestreamquery#ScheduledQueryRunSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Runtime summary for the last five failed scheduled query runs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Structure that describes scheduled query.</p>"
+            }
+        },
+        "com.amazonaws.timestreamquery#ScheduledQueryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.timestreamquery#ScheduledQuery"
+            }
+        },
+        "com.amazonaws.timestreamquery#ScheduledQueryName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_.-]+$"
+            }
+        },
+        "com.amazonaws.timestreamquery#ScheduledQueryRunStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AUTO_TRIGGER_SUCCESS",
+                        "name": "AUTO_TRIGGER_SUCCESS"
+                    },
+                    {
+                        "value": "AUTO_TRIGGER_FAILURE",
+                        "name": "AUTO_TRIGGER_FAILURE"
+                    },
+                    {
+                        "value": "MANUAL_TRIGGER_SUCCESS",
+                        "name": "MANUAL_TRIGGER_SUCCESS"
+                    },
+                    {
+                        "value": "MANUAL_TRIGGER_FAILURE",
+                        "name": "MANUAL_TRIGGER_FAILURE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.timestreamquery#ScheduledQueryRunSummary": {
+            "type": "structure",
+            "members": {
+                "InvocationTime": {
+                    "target": "com.amazonaws.timestreamquery#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>InvocationTime for this run. This is the time at which the query is scheduled to run.\n            Parameter <code>@scheduled_runtime</code> can be used in the query to get the value. </p>"
+                    }
+                },
+                "TriggerTime": {
+                    "target": "com.amazonaws.timestreamquery#Time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The actual time when the query was run.</p>"
+                    }
+                },
+                "RunStatus": {
+                    "target": "com.amazonaws.timestreamquery#ScheduledQueryRunStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of a scheduled query run.</p>"
+                    }
+                },
+                "ExecutionStats": {
+                    "target": "com.amazonaws.timestreamquery#ExecutionStats",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Runtime statistics for a scheduled run.</p>"
+                    }
+                },
+                "ErrorReportLocation": {
+                    "target": "com.amazonaws.timestreamquery#ErrorReportLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>S3 location for error report.</p>"
+                    }
+                },
+                "FailureReason": {
+                    "target": "com.amazonaws.timestreamquery#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Error message for the scheduled query in case of failure. You might have to look at\n            the error report to get more detailed error reasons. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Run summary for the scheduled query</p>"
+            }
+        },
+        "com.amazonaws.timestreamquery#ScheduledQueryRunSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.timestreamquery#ScheduledQueryRunSummary"
+            }
+        },
+        "com.amazonaws.timestreamquery#ScheduledQueryState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ENABLED",
+                        "name": "ENABLED"
+                    },
+                    {
+                        "value": "DISABLED",
+                        "name": "DISABLED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.timestreamquery#SchemaName": {
+            "type": "string"
+        },
+        "com.amazonaws.timestreamquery#SelectColumn": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.timestreamquery#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the column.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.timestreamquery#Type"
+                },
+                "DatabaseName": {
+                    "target": "com.amazonaws.timestreamquery#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Database that has this column.</p>"
+                    }
+                },
+                "TableName": {
+                    "target": "com.amazonaws.timestreamquery#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Table within the database that has this column. </p>"
+                    }
+                },
+                "Aliased": {
+                    "target": "com.amazonaws.timestreamquery#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>True, if the column name was aliased by the query. False otherwise.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details of the column that is returned by the query. </p>"
+            }
+        },
+        "com.amazonaws.timestreamquery#SelectColumnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.timestreamquery#SelectColumn"
+            }
+        },
         "com.amazonaws.timestreamquery#ServiceErrorMessage": {
             "type": "string"
         },
+        "com.amazonaws.timestreamquery#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.timestreamquery#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You have exceeded the service quota.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.timestreamquery#SnsConfiguration": {
+            "type": "structure",
+            "members": {
+                "TopicArn": {
+                    "target": "com.amazonaws.timestreamquery#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>SNS topic ARN that the scheduled query status notifications will be sent to.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details on SNS that are required to send the notification.</p>"
+            }
+        },
         "com.amazonaws.timestreamquery#String": {
             "type": "string"
+        },
+        "com.amazonaws.timestreamquery#StringValue2048": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.timestreamquery#Tag": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.timestreamquery#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key of the tag. Tag keys are case sensitive. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.timestreamquery#TagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the tag. Tag values are case sensitive and can be null. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A tag is a label that you assign to a Timestream database and/or table. Each tag\n            consists of a key and an optional value, both of which you define. Tags enable you to\n            categorize databases and/or tables, for example, by purpose, owner, or environment.\n        </p>"
+            }
+        },
+        "com.amazonaws.timestreamquery#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.timestreamquery#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.timestreamquery#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.timestreamquery#TagList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.timestreamquery#Tag"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.timestreamquery#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.timestreamquery#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.timestreamquery#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.timestreamquery#InvalidEndpointException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": true
+                },
+                "smithy.api#documentation": "<p>Associate a set of tags with a Timestream resource. You can then activate these\n            user-defined tags so that they appear on the Billing and Cost Management console for\n            cost allocation tracking. </p>"
+            }
+        },
+        "com.amazonaws.timestreamquery#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceARN": {
+                    "target": "com.amazonaws.timestreamquery#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the Timestream resource to which tags should be added. This value is an\n            Amazon Resource Name (ARN).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.timestreamquery#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to be assigned to the Timestream resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.timestreamquery#TagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.timestreamquery#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.timestreamquery#TargetConfiguration": {
+            "type": "structure",
+            "members": {
+                "TimestreamConfiguration": {
+                    "target": "com.amazonaws.timestreamquery#TimestreamConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration needed to write data into the Timestream database and table.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration used for writing the output of a query.</p>"
+            }
+        },
+        "com.amazonaws.timestreamquery#TargetDestination": {
+            "type": "structure",
+            "members": {
+                "TimestreamDestination": {
+                    "target": "com.amazonaws.timestreamquery#TimestreamDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Query result destination details for Timestream data source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Destination details to write data for a target data source. Current supported data\n            source is Timestream.</p>"
+            }
         },
         "com.amazonaws.timestreamquery#ThrottlingException": {
             "type": "structure",
@@ -573,6 +2087,9 @@
                 "smithy.api#httpError": 429
             }
         },
+        "com.amazonaws.timestreamquery#Time": {
+            "type": "timestamp"
+        },
         "com.amazonaws.timestreamquery#TimeSeriesDataPoint": {
             "type": "structure",
             "members": {
@@ -586,13 +2103,13 @@
                 "Value": {
                     "target": "com.amazonaws.timestreamquery#Datum",
                     "traits": {
-                        "smithy.api#documentation": "<p>The measure value for the  data point.</p>",
+                        "smithy.api#documentation": "<p>The measure value for the data point.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The timeseries datatype represents the values of a measure over time. A time series is an array of rows of timestamps and measure values, with rows sorted in ascending order of time. A TimeSeriesDataPoint is a single data point in the timeseries. It represents a tuple of (time, measure value) in a timeseries. </p>"
+                "smithy.api#documentation": "<p>The timeseries data type represents the values of a measure over time. A time series\n            is an array of rows of timestamps and measure values, with rows sorted in ascending\n            order of time. A TimeSeriesDataPoint is a single data point in the time series. It\n            represents a tuple of (time, measure value) in a time series. </p>"
             }
         },
         "com.amazonaws.timestreamquery#TimeSeriesDataPointList": {
@@ -604,20 +2121,82 @@
         "com.amazonaws.timestreamquery#Timestamp": {
             "type": "string"
         },
+        "com.amazonaws.timestreamquery#TimestreamConfiguration": {
+            "type": "structure",
+            "members": {
+                "DatabaseName": {
+                    "target": "com.amazonaws.timestreamquery#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of Timestream database to which the query result will be written.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TableName": {
+                    "target": "com.amazonaws.timestreamquery#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of Timestream table that the query result will be written to. The table should\n            be within the same database that is provided in Timestream configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TimeColumn": {
+                    "target": "com.amazonaws.timestreamquery#SchemaName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Column from query result that should be used as the time column in destination table.\n            Column type for this should be TIMESTAMP.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DimensionMappings": {
+                    "target": "com.amazonaws.timestreamquery#DimensionMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> This is to allow mapping column(s) from the query result to the dimension in the\n            destination table. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MultiMeasureMappings": {
+                    "target": "com.amazonaws.timestreamquery#MultiMeasureMappings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Multi-measure mappings.</p>"
+                    }
+                },
+                "MixedMeasureMappings": {
+                    "target": "com.amazonaws.timestreamquery#MixedMeasureMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how to map measures to multi-measure records.</p>"
+                    }
+                },
+                "MeasureNameColumn": {
+                    "target": "com.amazonaws.timestreamquery#SchemaName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the measure column.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Configuration to write data into Timestream database and table. This configuration\n            allows the user to map the query result select columns into the destination table\n            columns. </p>"
+            }
+        },
+        "com.amazonaws.timestreamquery#TimestreamDestination": {
+            "type": "structure",
+            "members": {
+                "DatabaseName": {
+                    "target": "com.amazonaws.timestreamquery#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Timestream database name. </p>"
+                    }
+                },
+                "TableName": {
+                    "target": "com.amazonaws.timestreamquery#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Timestream table name. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Destination for scheduled query.</p>"
+            }
+        },
         "com.amazonaws.timestreamquery#Timestream_20181101": {
             "type": "service",
-            "version": "2018-11-01",
-            "operations": [
-                {
-                    "target": "com.amazonaws.timestreamquery#CancelQuery"
-                },
-                {
-                    "target": "com.amazonaws.timestreamquery#DescribeEndpoints"
-                },
-                {
-                    "target": "com.amazonaws.timestreamquery#Query"
-                }
-            ],
             "traits": {
                 "aws.api#clientEndpointDiscovery": {
                     "operation": "com.amazonaws.timestreamquery#DescribeEndpoints",
@@ -634,9 +2213,51 @@
                     "name": "timestream"
                 },
                 "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<p>\n            \n        </p>",
+                "smithy.api#documentation": "<fullname>Amazon Timestream Query\n        </fullname>\n        <p></p>",
                 "smithy.api#title": "Amazon Timestream Query"
-            }
+            },
+            "version": "2018-11-01",
+            "operations": [
+                {
+                    "target": "com.amazonaws.timestreamquery#CancelQuery"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#CreateScheduledQuery"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#DeleteScheduledQuery"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#DescribeEndpoints"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#DescribeScheduledQuery"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#ExecuteScheduledQuery"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#ListScheduledQueries"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#PrepareQuery"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#Query"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#UpdateScheduledQuery"
+                }
+            ]
         },
         "com.amazonaws.timestreamquery#Type": {
             "type": "structure",
@@ -644,7 +2265,7 @@
                 "ScalarType": {
                     "target": "com.amazonaws.timestreamquery#ScalarType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates if the column is of type string, integer, boolean, double, timestamp, date, time. </p>"
+                        "smithy.api#documentation": "<p>Indicates if the column is of type string, integer, Boolean, double, timestamp, date,\n            time. </p>"
                     }
                 },
                 "ArrayColumnInfo": {
@@ -667,7 +2288,110 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the data type of a column in a query result set. The data type can be scalar or complex. The supported scalar data types are integers, boolean, string, double, timestamp, date, time, and intervals. The supported complex data types are arrays, rows, and timeseries.</p>"
+                "smithy.api#documentation": "<p>Contains the data type of a column in a query result set. The data type can be scalar\n            or complex. The supported scalar data types are integers, Boolean, string, double,\n            timestamp, date, time, and intervals. The supported complex data types are arrays, rows,\n            and timeseries.</p>"
+            }
+        },
+        "com.amazonaws.timestreamquery#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.timestreamquery#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.timestreamquery#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.timestreamquery#InvalidEndpointException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": true
+                },
+                "smithy.api#documentation": "<p>Removes the association of tags from a Timestream query resource.</p>"
+            }
+        },
+        "com.amazonaws.timestreamquery#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceARN": {
+                    "target": "com.amazonaws.timestreamquery#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Timestream resource that the tags will be removed from. This value is an Amazon\n            Resource Name (ARN). </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagKeys": {
+                    "target": "com.amazonaws.timestreamquery#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags keys. Existing tags of the resource whose keys are members of this list\n            will be removed from the Timestream resource. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.timestreamquery#UntagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.timestreamquery#UpdateScheduledQuery": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.timestreamquery#UpdateScheduledQueryRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.timestreamquery#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#InvalidEndpointException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": true
+                },
+                "smithy.api#documentation": "<p>Update a scheduled query.</p>"
+            }
+        },
+        "com.amazonaws.timestreamquery#UpdateScheduledQueryRequest": {
+            "type": "structure",
+            "members": {
+                "ScheduledQueryArn": {
+                    "target": "com.amazonaws.timestreamquery#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the scheuled query.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.timestreamquery#ScheduledQueryState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>State of the scheduled query. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
             }
         },
         "com.amazonaws.timestreamquery#ValidationException": {
@@ -678,7 +2402,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            Invalid or malformed request.\n        </p>",
+                "smithy.api#documentation": "<p> Invalid or malformed request. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }

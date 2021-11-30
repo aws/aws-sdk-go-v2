@@ -142,6 +142,9 @@ type CreateEventSourceMappingInput struct {
 	//
 	// *
 	// Self-Managed Apache Kafka - Default 100. Max 10,000.
+	//
+	// * Amazon MQ (ActiveMQ and
+	// RabbitMQ) - Default 100. Max 10,000.
 	BatchSize *int32
 
 	// (Streams only) If the function returns an error, split the batch in two and
@@ -170,8 +173,14 @@ type CreateEventSourceMappingInput struct {
 	// Managed Streaming for Apache Kafka - The ARN of the cluster.
 	EventSourceArn *string
 
-	// (Streams only) A list of current response type enums applied to the event source
-	// mapping.
+	// (Streams and Amazon SQS) An object that defines the filter criteria that
+	// determine whether Lambda should process an event. For more information, see
+	// Lambda event filtering
+	// (https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html).
+	FilterCriteria *types.FilterCriteria
+
+	// (Streams and Amazon SQS) A list of current response type enums applied to the
+	// event source mapping.
 	FunctionResponseTypes []types.FunctionResponseType
 
 	// (Streams and Amazon SQS standard queues) The maximum amount of time, in seconds,
@@ -243,6 +252,12 @@ type CreateEventSourceMappingOutput struct {
 
 	// The Amazon Resource Name (ARN) of the event source.
 	EventSourceArn *string
+
+	// (Streams and Amazon SQS) An object that defines the filter criteria that
+	// determine whether Lambda should process an event. For more information, see
+	// Lambda event filtering
+	// (https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html).
+	FilterCriteria *types.FilterCriteria
 
 	// The ARN of the Lambda function.
 	FunctionArn *string

@@ -51,6 +51,9 @@ type ModifyUserGroupOutput struct {
 	// The current supported value is Redis.
 	Engine *string
 
+	// The minimum engine version required, which is Redis 6.0
+	MinimumEngineVersion *string
+
 	// A list of updates being applied to the user group.
 	PendingChanges *types.UserGroupPendingChanges
 

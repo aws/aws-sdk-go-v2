@@ -40,7 +40,7 @@ type DeleteServiceTemplateInput struct {
 
 type DeleteServiceTemplateOutput struct {
 
-	// The service template detail data that's returned by AWS Proton.
+	// The service template detail data that's returned by Proton.
 	ServiceTemplate *types.ServiceTemplate
 
 	// Metadata pertaining to the operation's result.

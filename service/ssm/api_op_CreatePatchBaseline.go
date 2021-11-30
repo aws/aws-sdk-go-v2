@@ -52,8 +52,8 @@ type CreatePatchBaselineInput struct {
 	ApprovedPatchesComplianceLevel types.PatchComplianceLevel
 
 	// Indicates whether the list of approved patches includes non-security updates
-	// that should be applied to the instances. The default value is false. Applies to
-	// Linux instances only.
+	// that should be applied to the managed nodes. The default value is false. Applies
+	// to Linux managed nodes only.
 	ApprovedPatchesEnableNonSecurity bool
 
 	// User-provided idempotency token.
@@ -91,8 +91,9 @@ type CreatePatchBaselineInput struct {
 	// patch baseline, and its status is reported as InstalledRejected.
 	RejectedPatchesAction types.PatchAction
 
-	// Information about the patches to use to update the instances, including target
-	// operating systems and source repositories. Applies to Linux instances only.
+	// Information about the patches to use to update the managed nodes, including
+	// target operating systems and source repositories. Applies to Linux managed nodes
+	// only.
 	Sources []types.PatchSource
 
 	// Optional metadata that you assign to a resource. Tags enable you to categorize a

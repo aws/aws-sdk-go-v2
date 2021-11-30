@@ -59,7 +59,7 @@ type CreateQueueInput struct {
 	// The quick connects available to agents who are working the queue.
 	QuickConnectIds []string
 
-	// One or more tags.
+	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

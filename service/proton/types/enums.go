@@ -94,6 +94,24 @@ func (EnvironmentAccountConnectionStatus) Values() []EnvironmentAccountConnectio
 	}
 }
 
+type ProvisionedResourceEngine string
+
+// Enum values for ProvisionedResourceEngine
+const (
+	ProvisionedResourceEngineCloudformation ProvisionedResourceEngine = "CLOUDFORMATION"
+	ProvisionedResourceEngineTerraform      ProvisionedResourceEngine = "TERRAFORM"
+)
+
+// Values returns all known values for ProvisionedResourceEngine. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProvisionedResourceEngine) Values() []ProvisionedResourceEngine {
+	return []ProvisionedResourceEngine{
+		"CLOUDFORMATION",
+		"TERRAFORM",
+	}
+}
+
 type Provisioning string
 
 // Enum values for Provisioning
@@ -107,6 +125,102 @@ const (
 func (Provisioning) Values() []Provisioning {
 	return []Provisioning{
 		"CUSTOMER_MANAGED",
+	}
+}
+
+type RepositoryProvider string
+
+// Enum values for RepositoryProvider
+const (
+	RepositoryProviderGithub           RepositoryProvider = "GITHUB"
+	RepositoryProviderGithubEnterprise RepositoryProvider = "GITHUB_ENTERPRISE"
+	RepositoryProviderBitbucket        RepositoryProvider = "BITBUCKET"
+)
+
+// Values returns all known values for RepositoryProvider. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RepositoryProvider) Values() []RepositoryProvider {
+	return []RepositoryProvider{
+		"GITHUB",
+		"GITHUB_ENTERPRISE",
+		"BITBUCKET",
+	}
+}
+
+type RepositorySyncStatus string
+
+// Enum values for RepositorySyncStatus
+const (
+	// A repository sync attempt has been created and will begin soon.
+	RepositorySyncStatusInitiated RepositorySyncStatus = "INITIATED"
+	// A repository sync attempt has started and work is being done to reconcile the
+	// branch.
+	RepositorySyncStatusInProgress RepositorySyncStatus = "IN_PROGRESS"
+	// The repository sync attempt has completed successfully.
+	RepositorySyncStatusSucceeded RepositorySyncStatus = "SUCCEEDED"
+	// The repository sync attempt has failed.
+	RepositorySyncStatusFailed RepositorySyncStatus = "FAILED"
+	// The repository sync attempt didn't execute and was queued.
+	RepositorySyncStatusQueued RepositorySyncStatus = "QUEUED"
+)
+
+// Values returns all known values for RepositorySyncStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RepositorySyncStatus) Values() []RepositorySyncStatus {
+	return []RepositorySyncStatus{
+		"INITIATED",
+		"IN_PROGRESS",
+		"SUCCEEDED",
+		"FAILED",
+		"QUEUED",
+	}
+}
+
+type ResourceDeploymentStatus string
+
+// Enum values for ResourceDeploymentStatus
+const (
+	ResourceDeploymentStatusInProgress ResourceDeploymentStatus = "IN_PROGRESS"
+	ResourceDeploymentStatusFailed     ResourceDeploymentStatus = "FAILED"
+	ResourceDeploymentStatusSucceeded  ResourceDeploymentStatus = "SUCCEEDED"
+)
+
+// Values returns all known values for ResourceDeploymentStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceDeploymentStatus) Values() []ResourceDeploymentStatus {
+	return []ResourceDeploymentStatus{
+		"IN_PROGRESS",
+		"FAILED",
+		"SUCCEEDED",
+	}
+}
+
+type ResourceSyncStatus string
+
+// Enum values for ResourceSyncStatus
+const (
+	// A sync attempt has been created and will begin soon.
+	ResourceSyncStatusInitiated ResourceSyncStatus = "INITIATED"
+	// Syncing has started and work is being done to reconcile state.
+	ResourceSyncStatusInProgress ResourceSyncStatus = "IN_PROGRESS"
+	// Syncing has completed successfully.
+	ResourceSyncStatusSucceeded ResourceSyncStatus = "SUCCEEDED"
+	// Syncing has failed.
+	ResourceSyncStatusFailed ResourceSyncStatus = "FAILED"
+)
+
+// Values returns all known values for ResourceSyncStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceSyncStatus) Values() []ResourceSyncStatus {
+	return []ResourceSyncStatus{
+		"INITIATED",
+		"IN_PROGRESS",
+		"SUCCEEDED",
+		"FAILED",
 	}
 }
 
@@ -149,6 +263,40 @@ func (ServiceStatus) Values() []ServiceStatus {
 		"UPDATE_FAILED_CLEANUP_FAILED",
 		"UPDATE_FAILED",
 		"UPDATE_COMPLETE_CLEANUP_FAILED",
+	}
+}
+
+type SyncType string
+
+// Enum values for SyncType
+const (
+	SyncTypeTemplateSync SyncType = "TEMPLATE_SYNC"
+)
+
+// Values returns all known values for SyncType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (SyncType) Values() []SyncType {
+	return []SyncType{
+		"TEMPLATE_SYNC",
+	}
+}
+
+type TemplateType string
+
+// Enum values for TemplateType
+const (
+	TemplateTypeEnvironment TemplateType = "ENVIRONMENT"
+	TemplateTypeService     TemplateType = "SERVICE"
+)
+
+// Values returns all known values for TemplateType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (TemplateType) Values() []TemplateType {
+	return []TemplateType{
+		"ENVIRONMENT",
+		"SERVICE",
 	}
 }
 

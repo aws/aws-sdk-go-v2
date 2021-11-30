@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Runs commands on one or more managed instances.
+// Runs commands on one or more managed nodes.
 func (c *Client) SendCommand(ctx context.Context, params *SendCommandInput, optFns ...func(*Options)) (*SendCommandOutput, error) {
 	if params == nil {
 		params = &SendCommandInput{}
@@ -66,21 +66,21 @@ type SendCommandInput struct {
 	// --document-version "\$LATEST" --document-version "3"
 	DocumentVersion *string
 
-	// The IDs of the instances where the command should run. Specifying instance IDs
-	// is most useful when you are targeting a limited number of instances, though you
-	// can specify up to 50 IDs. To target a larger number of instances, or if you
-	// prefer not to list individual instance IDs, we recommend using the Targets
-	// option instead. Using Targets, which accepts tag key-value pairs to identify the
-	// instances to send commands to, you can a send command to tens, hundreds, or
-	// thousands of instances at once. For more information about how to use targets,
-	// see Using targets and rate controls to send commands to a fleet
+	// The IDs of the managed nodes where the command should run. Specifying managed
+	// node IDs is most useful when you are targeting a limited number of managed
+	// nodes, though you can specify up to 50 IDs. To target a larger number of managed
+	// nodes, or if you prefer not to list individual node IDs, we recommend using the
+	// Targets option instead. Using Targets, which accepts tag key-value pairs to
+	// identify the managed nodes to send commands to, you can a send command to tens,
+	// hundreds, or thousands of nodes at once. For more information about how to use
+	// targets, see Using targets and rate controls to send commands to a fleet
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	InstanceIds []string
 
-	// (Optional) The maximum number of instances that are allowed to run the command
-	// at the same time. You can specify a number such as 10 or a percentage such as
-	// 10%. The default value is 50. For more information about how to use
+	// (Optional) The maximum number of managed nodes that are allowed to run the
+	// command at the same time. You can specify a number such as 10 or a percentage
+	// such as 10%. The default value is 50. For more information about how to use
 	// MaxConcurrency, see Using concurrency controls
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-velocity)
 	// in the Amazon Web Services Systems Manager User Guide.
@@ -118,13 +118,13 @@ type SendCommandInput struct {
 	// Command commands.
 	ServiceRoleArn *string
 
-	// An array of search criteria that targets instances using a Key,Value combination
-	// that you specify. Specifying targets is most useful when you want to send a
-	// command to a large number of instances at once. Using Targets, which accepts tag
-	// key-value pairs to identify instances, you can send a command to tens, hundreds,
-	// or thousands of instances at once. To send a command to a smaller number of
-	// instances, you can use the InstanceIds option instead. For more information
-	// about how to use targets, see Sending commands to a fleet
+	// An array of search criteria that targets managed nodes using a Key,Value
+	// combination that you specify. Specifying targets is most useful when you want to
+	// send a command to a large number of managed nodes at once. Using Targets, which
+	// accepts tag key-value pairs to identify managed nodes, you can send a command to
+	// tens, hundreds, or thousands of nodes at once. To send a command to a smaller
+	// number of managed nodes, you can use the InstanceIds option instead. For more
+	// information about how to use targets, see Sending commands to a fleet
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	Targets []types.Target

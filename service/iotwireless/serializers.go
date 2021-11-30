@@ -2770,6 +2770,64 @@ func awsRestjson1_serializeOpHttpBindingsGetMulticastGroupSessionInput(v *GetMul
 	return nil
 }
 
+type awsRestjson1_serializeOpGetNetworkAnalyzerConfiguration struct {
+}
+
+func (*awsRestjson1_serializeOpGetNetworkAnalyzerConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetNetworkAnalyzerConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetNetworkAnalyzerConfigurationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/network-analyzer-configurations/{ConfigurationName}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetNetworkAnalyzerConfigurationInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetNetworkAnalyzerConfigurationInput(v *GetNetworkAnalyzerConfigurationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ConfigurationName == nil || len(*v.ConfigurationName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ConfigurationName must not be empty")}
+	}
+	if v.ConfigurationName != nil {
+		if err := encoder.SetURI("ConfigurationName").String(*v.ConfigurationName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetPartnerAccount struct {
 }
 
@@ -5487,6 +5545,117 @@ func awsRestjson1_serializeOpDocumentUpdateMulticastGroupInput(v *UpdateMulticas
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateNetworkAnalyzerConfiguration struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateNetworkAnalyzerConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateNetworkAnalyzerConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateNetworkAnalyzerConfigurationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/network-analyzer-configurations/{ConfigurationName}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PATCH"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateNetworkAnalyzerConfigurationInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateNetworkAnalyzerConfigurationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateNetworkAnalyzerConfigurationInput(v *UpdateNetworkAnalyzerConfigurationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ConfigurationName == nil || len(*v.ConfigurationName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ConfigurationName must not be empty")}
+	}
+	if v.ConfigurationName != nil {
+		if err := encoder.SetURI("ConfigurationName").String(*v.ConfigurationName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateNetworkAnalyzerConfigurationInput(v *UpdateNetworkAnalyzerConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TraceContent != nil {
+		ok := object.Key("TraceContent")
+		if err := awsRestjson1_serializeDocumentTraceContent(v.TraceContent, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.WirelessDevicesToAdd != nil {
+		ok := object.Key("WirelessDevicesToAdd")
+		if err := awsRestjson1_serializeDocumentWirelessDeviceList(v.WirelessDevicesToAdd, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.WirelessDevicesToRemove != nil {
+		ok := object.Key("WirelessDevicesToRemove")
+		if err := awsRestjson1_serializeDocumentWirelessDeviceList(v.WirelessDevicesToRemove, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.WirelessGatewaysToAdd != nil {
+		ok := object.Key("WirelessGatewaysToAdd")
+		if err := awsRestjson1_serializeDocumentWirelessGatewayList(v.WirelessGatewaysToAdd, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.WirelessGatewaysToRemove != nil {
+		ok := object.Key("WirelessGatewaysToRemove")
+		if err := awsRestjson1_serializeDocumentWirelessGatewayList(v.WirelessGatewaysToRemove, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpdatePartnerAccount struct {
 }
 
@@ -6581,6 +6750,23 @@ func awsRestjson1_serializeDocumentTagList(v []types.Tag, value smithyjson.Value
 	return nil
 }
 
+func awsRestjson1_serializeDocumentTraceContent(v *types.TraceContent, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.LogLevel) > 0 {
+		ok := object.Key("LogLevel")
+		ok.String(string(v.LogLevel))
+	}
+
+	if len(v.WirelessDeviceFrameInfo) > 0 {
+		ok := object.Key("WirelessDeviceFrameInfo")
+		ok.String(string(v.WirelessDeviceFrameInfo))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentUpdateWirelessGatewayTaskCreate(v *types.UpdateWirelessGatewayTaskCreate, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6631,6 +6817,17 @@ func awsRestjson1_serializeDocumentWirelessDeviceEventLogOptionList(v []types.Wi
 		if err := awsRestjson1_serializeDocumentWirelessDeviceEventLogOption(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWirelessDeviceList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }
@@ -6698,6 +6895,17 @@ func awsRestjson1_serializeDocumentWirelessGatewayEventLogOptionList(v []types.W
 		if err := awsRestjson1_serializeDocumentWirelessGatewayEventLogOption(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWirelessGatewayList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }

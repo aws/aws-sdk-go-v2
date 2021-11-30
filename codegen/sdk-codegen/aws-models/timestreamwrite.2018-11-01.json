@@ -54,6 +54,12 @@
                 }
             }
         },
+        "com.amazonaws.timestreamwrite#Boolean": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
         "com.amazonaws.timestreamwrite#ConflictException": {
             "type": "structure",
             "members": {
@@ -105,14 +111,14 @@
                 "aws.api#clientDiscoveredEndpoint": {
                     "required": true
                 },
-                "smithy.api#documentation": "<p>Creates a new Timestream database. If the KMS key is not specified, the database will be encrypted with a Timestream managed KMS key located in your account.\n         Refer to <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk\">AWS managed KMS keys</a> for more info. \n         Service quotas apply. For more information, see <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html\">Access Management</a> in the Timestream Developer Guide.\n      </p>"
+                "smithy.api#documentation": "<p>Creates a new Timestream database. If the KMS key is not specified, the database will be encrypted with a Timestream managed KMS \n         key located in your account.\n         Refer to <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk\">Amazon Web Services managed KMS keys</a> for more info. \n         <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html\">Service quotas apply</a>.\n         See \n         <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.create-db.html\">code sample</a> for details.\n      </p>"
             }
         },
         "com.amazonaws.timestreamwrite#CreateDatabaseRequest": {
             "type": "structure",
             "members": {
                 "DatabaseName": {
-                    "target": "com.amazonaws.timestreamwrite#ResourceName",
+                    "target": "com.amazonaws.timestreamwrite#ResourceCreateAPIName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the Timestream database.</p>",
                         "smithy.api#required": {}
@@ -121,7 +127,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.timestreamwrite#StringValue2048",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS key for the database. If the KMS key is not specified, the database will be encrypted with a Timestream\n         managed KMS key located in your account. Refer to <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk\">AWS managed KMS keys</a> for more info.</p>"
+                        "smithy.api#documentation": "<p>The KMS key for the database. \n         If the KMS key is not specified, the database will be encrypted with a Timestream\n         managed KMS key located in your account. \n         Refer to <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk\">Amazon Web Services managed KMS keys</a> for more info.</p>"
                     }
                 },
                 "Tags": {
@@ -181,21 +187,21 @@
                 "aws.api#clientDiscoveredEndpoint": {
                     "required": true
                 },
-                "smithy.api#documentation": "<p>The CreateTable operation adds a new table to an existing database in your account. In an AWS account,\n      table names must be at least unique within each Region if they are in the same database. \n      You may have identical table names in the same Region if the tables are in seperate databases.\n         While creating the table, you must specify the table name, database name,\n         and the retention properties.\n         Service quotas apply. For more information, see <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html\">Access Management</a>\n         in the Timestream Developer Guide.\n         </p>"
+                "smithy.api#documentation": "<p>The CreateTable operation adds a new table to an existing database in your account. In an Amazon Web Services account,\n      table names must be at least unique within each Region if they are in the same database. \n      You may have identical table names in the same Region if the tables are in separate databases.\n         While creating the table, you must specify the table name, database name,\n         and the retention properties.\n         <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html\">Service quotas apply</a>.\n         See \n         <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.create-table.html\">code sample</a> for details.\n         </p>"
             }
         },
         "com.amazonaws.timestreamwrite#CreateTableRequest": {
             "type": "structure",
             "members": {
                 "DatabaseName": {
-                    "target": "com.amazonaws.timestreamwrite#ResourceName",
+                    "target": "com.amazonaws.timestreamwrite#ResourceCreateAPIName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the Timestream database.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "TableName": {
-                    "target": "com.amazonaws.timestreamwrite#ResourceName",
+                    "target": "com.amazonaws.timestreamwrite#ResourceCreateAPIName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the Timestream table.</p>",
                         "smithy.api#required": {}
@@ -211,6 +217,12 @@
                     "target": "com.amazonaws.timestreamwrite#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>\n      A list of key-value pairs to label the table. \n   </p>"
+                    }
+                },
+                "MagneticStoreWriteProperties": {
+                    "target": "com.amazonaws.timestreamwrite#MagneticStoreWriteProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains properties to set on the table when enabling magnetic store writes.</p>"
                     }
                 }
             }
@@ -308,7 +320,7 @@
                 "aws.api#clientDiscoveredEndpoint": {
                     "required": true
                 },
-                "smithy.api#documentation": "<p>Deletes a given Timestream database. <i>This is an irreversible operation.\n      After a database is deleted, the time series data from its tables cannot be recovered.</i>\n         </p>\n      \n         <p>All tables in the database must be deleted first, or a ValidationException error will be thrown.\n      </p>\n      \n         <p>Due to the nature of distributed retries, \n         the operation can return either success or a ResourceNotFoundException. Clients should consider them equivalent.</p>"
+                "smithy.api#documentation": "<p>Deletes a given Timestream database. <i>This is an irreversible operation.\n      After a database is deleted, the time series data from its tables cannot be recovered.</i>\n         </p>\n      \n         <note>\n            <p>All tables in the database must be deleted first, or a ValidationException error will be thrown.\n      </p>\n      \n            <p>Due to the nature of distributed retries, \n         the operation can return either success or a ResourceNotFoundException. Clients should consider them equivalent.</p>\n         </note>\n      \n         <p>See \n         <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.delete-db.html\">code sample</a> for details.</p>"
             }
         },
         "com.amazonaws.timestreamwrite#DeleteDatabaseRequest": {
@@ -352,7 +364,7 @@
                 "aws.api#clientDiscoveredEndpoint": {
                     "required": true
                 },
-                "smithy.api#documentation": "<p>Deletes a given Timestream table. This is an irreversible operation.\n       After a Timestream database table is deleted, the time series data stored in \n       the table cannot be recovered.\n       </p>\n         <p>Due to the nature of distributed retries, \n         the operation can return either success or a ResourceNotFoundException. Clients should consider them equivalent.</p>"
+                "smithy.api#documentation": "<p>Deletes a given Timestream table. This is an irreversible operation.\n       After a Timestream database table is deleted, the time series data stored in \n       the table cannot be recovered.\n       </p>\n         <note>\n            <p>Due to the nature of distributed retries, \n         the operation can return either success or a ResourceNotFoundException. Clients should consider them equivalent.</p>\n         </note>\n         <p>See \n         <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.delete-table.html\">code sample</a> for details.</p>"
             }
         },
         "com.amazonaws.timestreamwrite#DeleteTableRequest": {
@@ -406,7 +418,7 @@
                 "aws.api#clientDiscoveredEndpoint": {
                     "required": true
                 },
-                "smithy.api#documentation": "<p>Returns information about the database, including the database name, time that the database was created, \n         and the total number of tables found within the database.\n         Service quotas apply. For more information, see <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html\">Access Management</a> in the Timestream Developer Guide.</p>"
+                "smithy.api#documentation": "<p>Returns information about the database, including the database name, time that the database was created, \n         and the total number of tables found within the database.\n         <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html\">Service quotas apply</a>. See \n         <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.describe-db.html\">code sample</a> for details.</p>"
             }
         },
         "com.amazonaws.timestreamwrite#DescribeDatabaseRequest": {
@@ -452,7 +464,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>DescribeEndpoints returns a list of available endpoints to make Timestream API calls against. This API is available through both Write and Query.</p>\n         <p>Because Timestream’s SDKs are designed to transparently work with the service’s architecture, \n         including the management and mapping of the service endpoints,\n         <i>it is not recommended that you use this API unless</i>:</p>\n         <ul>\n            <li>\n               <p>Your application uses a programming language that does not yet have SDK support</p>\n            </li>\n            <li>\n               <p>You require better control over the client-side implementation</p>\n            </li>\n         </ul>\n         <p>For detailed information on how to use DescribeEndpoints, \n         see <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/Using-API.endpoint-discovery.html\">The Endpoint Discovery Pattern and REST APIs</a>.</p>"
+                "smithy.api#documentation": "<p>DescribeEndpoints returns a list of available endpoints to make Timestream API calls against.\n         This API is available through both Write and Query.</p>\n         <p>Because the Timestream SDKs are designed to transparently work with the service’s architecture, \n         including the management and mapping of the service endpoints,\n         <i>it is not recommended that you use this API unless</i>:</p>\n         <ul>\n            <li>\n               <p>You are using <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/VPCEndpoints\">VPC endpoints (Amazon Web Services PrivateLink) with Timestream</a>\n               </p>\n            </li>\n            <li>\n               <p>Your application uses a programming language that does not yet have SDK support</p>\n            </li>\n            <li>\n               <p>You require better control over the client-side implementation</p>\n            </li>\n         </ul>\n         <p>For detailed information on how and when to use and implement DescribeEndpoints, \n         see <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/Using.API.html#Using-API.endpoint-discovery\">The Endpoint Discovery Pattern</a>.</p>"
             }
         },
         "com.amazonaws.timestreamwrite#DescribeEndpointsRequest": {
@@ -503,7 +515,7 @@
                 "aws.api#clientDiscoveredEndpoint": {
                     "required": true
                 },
-                "smithy.api#documentation": "<p>Returns information about the table, including the table name, database name, \n      retention duration of the memory store and the magnetic store.\n         Service quotas apply. For more information, see <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html\">Access Management</a> in the Timestream Developer Guide.\n      </p>"
+                "smithy.api#documentation": "<p>Returns information about the table, including the table name, database name, \n      retention duration of the memory store and the magnetic store.\n         <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html\">Service quotas apply</a>. See \n         <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.describe-table.html\">code sample</a> for details.\n      </p>"
             }
         },
         "com.amazonaws.timestreamwrite#DescribeTableRequest": {
@@ -540,14 +552,14 @@
             "type": "structure",
             "members": {
                 "Name": {
-                    "target": "com.amazonaws.timestreamwrite#StringValue256",
+                    "target": "com.amazonaws.timestreamwrite#SchemaName",
                     "traits": {
                         "smithy.api#documentation": "<p>\n         Dimension represents the meta data attributes of the time series. \n         For example, the name and availability zone of an EC2 instance or \n         the name of the manufacturer of a wind turbine are dimensions.\n         \n      </p>\n         <p>For constraints on Dimension names, \n         see <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html#limits.naming\">Naming Constraints</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Value": {
-                    "target": "com.amazonaws.timestreamwrite#StringValue2048",
+                    "target": "com.amazonaws.timestreamwrite#SchemaValue",
                     "traits": {
                         "smithy.api#documentation": "<p>The value of the dimension.</p>",
                         "smithy.api#required": {}
@@ -618,6 +630,9 @@
         "com.amazonaws.timestreamwrite#ErrorMessage": {
             "type": "string"
         },
+        "com.amazonaws.timestreamwrite#Integer": {
+            "type": "integer"
+        },
         "com.amazonaws.timestreamwrite#InternalServerException": {
             "type": "structure",
             "members": {
@@ -676,7 +691,7 @@
                 "aws.api#clientDiscoveredEndpoint": {
                     "required": true
                 },
-                "smithy.api#documentation": "<p>Returns a list of your Timestream databases.  \n         Service quotas apply. For more information, see <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html\">Access Management</a> in the Timestream Developer Guide.\n      </p>",
+                "smithy.api#documentation": "<p>Returns a list of your Timestream databases.  \n         <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html\">Service quotas apply</a>. See \n         <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.list-db.html\">code sample</a> for details.\n      </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -750,7 +765,7 @@
                 "aws.api#clientDiscoveredEndpoint": {
                     "required": true
                 },
-                "smithy.api#documentation": "<p>A list of tables, along with the name, status and retention properties of each table.\n      </p>",
+                "smithy.api#documentation": "<p>A list of tables, along with the name, status and retention properties of each table.\n         See \n         <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.list-table.html\">code sample</a> for details.\n      </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -853,6 +868,20 @@
         "com.amazonaws.timestreamwrite#Long": {
             "type": "long"
         },
+        "com.amazonaws.timestreamwrite#MagneticStoreRejectedDataLocation": {
+            "type": "structure",
+            "members": {
+                "S3Configuration": {
+                    "target": "com.amazonaws.timestreamwrite#S3Configuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration of an S3 location to write error reports for records rejected, asynchronously, during magnetic store writes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The location to write error reports for records rejected, asynchronously, during magnetic store writes.</p>"
+            }
+        },
         "com.amazonaws.timestreamwrite#MagneticStoreRetentionPeriodInDays": {
             "type": "long",
             "traits": {
@@ -860,6 +889,56 @@
                     "min": 1,
                     "max": 73000
                 }
+            }
+        },
+        "com.amazonaws.timestreamwrite#MagneticStoreWriteProperties": {
+            "type": "structure",
+            "members": {
+                "EnableMagneticStoreWrites": {
+                    "target": "com.amazonaws.timestreamwrite#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A flag to enable magnetic store writes.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MagneticStoreRejectedDataLocation": {
+                    "target": "com.amazonaws.timestreamwrite#MagneticStoreRejectedDataLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location to write error reports for records rejected asynchronously during magnetic store writes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The set of properties on a table for configuring magnetic store writes.</p>"
+            }
+        },
+        "com.amazonaws.timestreamwrite#MeasureValue": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.timestreamwrite#SchemaName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Name of the MeasureValue.  </p>\n         <p> For constraints on MeasureValue names, refer to <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html#limits.naming\">\n      Naming Constraints</a> in the Timestream developer guide.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.timestreamwrite#StringValue2048",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Value for the MeasureValue. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.timestreamwrite#MeasureValueType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the data type of the MeasureValue for the time series data point.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> MeasureValue represents the data attribute of the time series. For example, the CPU utilization of an EC2 instance or the RPM of a wind turbine are measures. MeasureValue has both name and value. </p>\n         <p> MeasureValue is only allowed for type <code>MULTI</code>. Using <code>MULTI</code> type, you can pass multiple data attributes associated with the same time series in a single record </p>"
             }
         },
         "com.amazonaws.timestreamwrite#MeasureValueType": {
@@ -881,8 +960,22 @@
                     {
                         "value": "BOOLEAN",
                         "name": "BOOLEAN"
+                    },
+                    {
+                        "value": "TIMESTAMP",
+                        "name": "TIMESTAMP"
+                    },
+                    {
+                        "value": "MULTI",
+                        "name": "MULTI"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.timestreamwrite#MeasureValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.timestreamwrite#MeasureValue"
             }
         },
         "com.amazonaws.timestreamwrite#MemoryStoreRetentionPeriodInHours": {
@@ -914,7 +1007,7 @@
                     }
                 },
                 "MeasureName": {
-                    "target": "com.amazonaws.timestreamwrite#StringValue256",
+                    "target": "com.amazonaws.timestreamwrite#SchemaName",
                     "traits": {
                         "smithy.api#documentation": "<p>Measure represents the data attribute of the time series. For example, the CPU utilization of an EC2 instance or the RPM of a wind turbine are measures. </p>"
                     }
@@ -928,7 +1021,7 @@
                 "MeasureValueType": {
                     "target": "com.amazonaws.timestreamwrite#MeasureValueType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nContains the data type of the measure value for the time series data point.\n</p>"
+                        "smithy.api#documentation": "<p>\nContains the data type of the measure value for the time series data point. Default type is <code>DOUBLE</code>.\n</p>"
                     }
                 },
                 "Time": {
@@ -940,19 +1033,25 @@
                 "TimeUnit": {
                     "target": "com.amazonaws.timestreamwrite#TimeUnit",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe granularity of the timestamp unit. It indicates if the time value is in seconds, milliseconds, nanoseconds or other supported values.\n</p>"
+                        "smithy.api#documentation": "<p>\nThe granularity of the timestamp unit. It indicates if the time value is in seconds, milliseconds, nanoseconds or other supported values. \nDefault is <code>MILLISECONDS</code>.\n</p>"
                     }
                 },
                 "Version": {
                     "target": "com.amazonaws.timestreamwrite#RecordVersion",
                     "traits": {
                         "smithy.api#box": {},
-                        "smithy.api#documentation": "<p>64-bit attribute used for record updates. \n         Write requests for duplicate data with a higher version number will update the existing measure value and version. \n         In cases where the measure value is the same, <code>Version</code> will still be updated . Default value is to 1.</p>"
+                        "smithy.api#documentation": "<p>64-bit attribute used for record updates. \n         Write requests for duplicate data with a higher version number will update the existing measure value and version. \n         In cases where the measure value is the same, <code>Version</code> will still be updated . Default value is <code>1</code>.</p>\n      \n         <note>\n            <p>\n               <code>Version</code> must be <code>1</code> or greater, or you will receive a <code>ValidationException</code> error.</p>\n         </note>"
+                    }
+                },
+                "MeasureValues": {
+                    "target": "com.amazonaws.timestreamwrite#MeasureValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Contains the list of MeasureValue for time series data points. </p>\n         <p> This is only allowed for type <code>MULTI</code>. For scalar values, use <code>MeasureValue</code> attribute of the Record directly. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Record represents a time series data point being written into \n       Timestream. Each record contains an array of dimensions. Dimensions \n       represent the meta data attributes of a time series data point such as\n       the instance name or availability zone of an EC2 instance. A record also \n       contains the measure name which is the name of the measure being collected \n       for example the CPU utilization of an EC2 instance. A record also contains \n       the measure value and the value type which is the data type of the measure value.\n       In addition, the record contains the timestamp when the measure was collected that \n       the timestamp unit which represents the granularity of the timestamp.\n       </p>"
+                "smithy.api#documentation": "<p>Record represents a time series data point being written into \n       Timestream. Each record contains an array of dimensions. Dimensions \n       represent the meta data attributes of a time series data point such as\n       the instance name or availability zone of an EC2 instance. A record also \n       contains the measure name which is the name of the measure being collected \n       for example the CPU utilization of an EC2 instance. A record also contains \n       the measure value and the value type which is the data type of the measure value.\n       In addition, the record contains the timestamp when the measure was collected that \n       the timestamp unit which represents the granularity of the timestamp.\n       </p>\n         <p>\n        Records have a <code>Version</code> field, which is a 64-bit <code>long</code> that you can use for updating data points. \n        Writes of a duplicate record with the same dimension, \n        timestamp, and measure name \n        but different measure value will only succeed if the <code>Version</code> attribute of the record in the write request \n        is higher than that of the existing record. \n        Timestream defaults to a <code>Version</code> of <code>1</code> for records without the <code>Version</code> field.\n     </p>"
             }
         },
         "com.amazonaws.timestreamwrite#RecordIndex": {
@@ -973,6 +1072,32 @@
                 }
             }
         },
+        "com.amazonaws.timestreamwrite#RecordsIngested": {
+            "type": "structure",
+            "members": {
+                "Total": {
+                    "target": "com.amazonaws.timestreamwrite#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Total count of successfully ingested records.</p>"
+                    }
+                },
+                "MemoryStore": {
+                    "target": "com.amazonaws.timestreamwrite#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Count of records ingested into the memory store.</p>"
+                    }
+                },
+                "MagneticStore": {
+                    "target": "com.amazonaws.timestreamwrite#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Count of records ingested into the magnetic store.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information on the records ingested by this request.</p>"
+            }
+        },
         "com.amazonaws.timestreamwrite#RejectedRecord": {
             "type": "structure",
             "members": {
@@ -985,7 +1110,7 @@
                 "Reason": {
                     "target": "com.amazonaws.timestreamwrite#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The reason why a record was not successfully inserted into Timestream. Possible causes of failure include:\n      </p>\n         <ul>\n            <li>\n               <p>\n                 Records with duplicate data where there are multiple records with the same dimensions,\n         timestamps, and measure names but different measure values.\n               </p>\n            </li>\n            <li>\n               <p>\n                 Records with timestamps that lie outside the retention duration of the memory store\n               </p>\n               <note>\n                  <p>When the retention window is updated, you will receive a <code>RejectedRecords</code> exception \n                  if you immediately try to ingest data within the new window. \n                  To avoid a <code>RejectedRecords</code> exception, \n                  wait until the duration of the new window to ingest new data.\n                  For further information, \n                  see \n                  <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/best-practices.html#configuration\">\n                     Best Practices for Configuring Timestream</a>\n                  and \n                  <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/storage.html\">the explanation of how storage works in Timestream</a>.</p>\n               </note>\n            </li>\n            <li>\n               <p>\n                 Records with dimensions or measures that exceed the Timestream defined limits.\n               </p>\n            </li>\n         </ul>\n         <p>\n            For more information, see <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html\">Access Management</a> in the Timestream Developer Guide.\n         </p>"
+                        "smithy.api#documentation": "<p>\n         The reason why a record was not successfully inserted into Timestream. Possible causes of failure include:\n      </p>\n         <ul>\n            <li>\n               <p>Records with duplicate data where there are multiple records with the same dimensions,\n                  timestamps, and measure names but:\n               </p>\n               <ul>\n                  <li>\n                     <p>Measure values are different</p>\n                  </li>\n                  <li>\n                     <p>Version is not present in the request <i>or</i>\n                     the value of version in the new record is equal to or lower than the existing value</p>\n                  </li>\n               </ul>\n               <p>\n                  If Timestream rejects data for this case, the <code>ExistingVersion</code> field in the <code>RejectedRecords</code> \n                  response will indicate the current record’s version. \n                  To force an update, you can resend the request with a version for the record set to a value greater than the <code>ExistingVersion</code>.</p>\n            </li>\n            <li>\n               <p>\n                 Records with timestamps that lie outside the retention duration of the memory store\n               </p>\n               <note>\n                  <p>When the retention window is updated, you will receive a <code>RejectedRecords</code> exception \n                  if you immediately try to ingest data within the new window. \n                  To avoid a <code>RejectedRecords</code> exception, \n                  wait until the duration of the new window to ingest new data.\n                  For further information, \n                  see \n                  <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/best-practices.html#configuration\">\n                     Best Practices for Configuring Timestream</a>\n                  and \n                  <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/storage.html\">the explanation of how storage works in Timestream</a>.</p>\n               </note>\n            </li>\n            <li>\n               <p>\n                 Records with dimensions or measures that exceed the Timestream defined limits.\n               </p>\n            </li>\n         </ul>\n         <p>\n            For more information, see <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html\">Access Management</a> in the Timestream Developer Guide.\n         </p>"
                     }
                 },
                 "ExistingVersion": {
@@ -1017,20 +1142,19 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n         WriteRecords would throw this exception in the following cases:\n      </p>\n         <ul>\n            <li>\n               <p>\n                 Records with duplicate data where there are multiple records with the same dimensions,\n         timestamps, and measure names but different measure values.\n               </p>\n            </li>\n            <li>\n               <p>\n                 Records with timestamps that lie outside the retention duration of the memory store\n               </p>\n            </li>\n            <li>\n               <p>\n                 Records with dimensions or measures that exceed the Timestream defined limits.\n               </p>\n            </li>\n         </ul>\n         <p>\n         For more information, see <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html\">Access Management</a> in the Timestream Developer Guide.\n         </p>",
+                "smithy.api#documentation": "<p>\n         WriteRecords would throw this exception in the following cases:\n      </p>\n         <ul>\n            <li>\n               <p>Records with duplicate data where there are multiple records with the same dimensions,\n                  timestamps, and measure names but:\n                  </p>\n                  <ul>\n                  <li>\n                     <p>Measure values are different</p>\n                  </li>\n                  <li>\n                     <p>Version is not present in the request <i>or</i>\n                        the value of version in the new record is equal to or lower than the existing value</p>\n                  </li>\n               </ul>\n                  <p>\n                  In this case, if Timestream rejects data, the <code>ExistingVersion</code> field in the <code>RejectedRecords</code> \n                  response will indicate the current record’s version. \n                  To force an update, you can resend the request with a version for the record set to a value greater than the <code>ExistingVersion</code>.</p>\n            </li>\n            <li>\n               <p>\n                 Records with timestamps that lie outside the retention duration of the memory store\n               </p>\n            </li>\n            <li>\n               <p>\n                 Records with dimensions or measures that exceed the Timestream defined limits.\n               </p>\n            </li>\n         </ul>\n         <p>\n         For more information, see <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html\">Quotas</a> in the Timestream Developer Guide.\n         </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 419
             }
         },
-        "com.amazonaws.timestreamwrite#ResourceName": {
+        "com.amazonaws.timestreamwrite#ResourceCreateAPIName": {
             "type": "string",
             "traits": {
-                "smithy.api#length": {
-                    "min": 3,
-                    "max": 64
-                },
-                "smithy.api#pattern": "[a-zA-Z0-9_.-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9_.-]+$"
             }
+        },
+        "com.amazonaws.timestreamwrite#ResourceName": {
+            "type": "string"
         },
         "com.amazonaws.timestreamwrite#ResourceNotFoundException": {
             "type": "structure",
@@ -1066,6 +1190,84 @@
             "traits": {
                 "smithy.api#documentation": "<p>Retention properties contain the duration for which your time series data must be stored in the magnetic store and the memory store.\n      </p>"
             }
+        },
+        "com.amazonaws.timestreamwrite#S3BucketName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"
+            }
+        },
+        "com.amazonaws.timestreamwrite#S3Configuration": {
+            "type": "structure",
+            "members": {
+                "BucketName": {
+                    "target": "com.amazonaws.timestreamwrite#S3BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>>Bucket name of the customer S3 bucket.</p>"
+                    }
+                },
+                "ObjectKeyPrefix": {
+                    "target": "com.amazonaws.timestreamwrite#S3ObjectKeyPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Object key preview for the customer S3 location.</p>"
+                    }
+                },
+                "EncryptionOption": {
+                    "target": "com.amazonaws.timestreamwrite#S3EncryptionOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Encryption option for the customer s3 location. Options are S3 server side encryption with an S3-managed key or KMS managed key.</p>"
+                    }
+                },
+                "KmsKeyId": {
+                    "target": "com.amazonaws.timestreamwrite#StringValue2048",
+                    "traits": {
+                        "smithy.api#documentation": "<p>KMS key id for the customer s3 location when encrypting with a KMS managed key.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration specifing an S3 location.</p>"
+            }
+        },
+        "com.amazonaws.timestreamwrite#S3EncryptionOption": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SSE_S3",
+                        "name": "SSE_S3"
+                    },
+                    {
+                        "value": "SSE_KMS",
+                        "name": "SSE_KMS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.timestreamwrite#S3ObjectKeyPrefix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 928
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9|!\\-_*'\\(\\)]([a-zA-Z0-9]|[!\\-_*'\\(\\)\\/.])+$"
+            }
+        },
+        "com.amazonaws.timestreamwrite#SchemaName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.timestreamwrite#SchemaValue": {
+            "type": "string"
         },
         "com.amazonaws.timestreamwrite#ServiceQuotaExceededException": {
             "type": "structure",
@@ -1144,6 +1346,12 @@
                     "target": "com.amazonaws.timestreamwrite#Date",
                     "traits": {
                         "smithy.api#documentation": "<p>The time when the Timestream table was last updated.</p>"
+                    }
+                },
+                "MagneticStoreWriteProperties": {
+                    "target": "com.amazonaws.timestreamwrite#MagneticStoreWriteProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains properties to set on the table when enabling magnetic store writes.</p>"
                     }
                 }
             },
@@ -1332,6 +1540,25 @@
         },
         "com.amazonaws.timestreamwrite#Timestream_20181101": {
             "type": "service",
+            "traits": {
+                "aws.api#clientEndpointDiscovery": {
+                    "operation": "com.amazonaws.timestreamwrite#DescribeEndpoints",
+                    "error": "com.amazonaws.timestreamwrite#InvalidEndpointException"
+                },
+                "aws.api#service": {
+                    "sdkId": "Timestream Write",
+                    "arnNamespace": "timestream",
+                    "cloudFormationName": "TimestreamWrite",
+                    "cloudTrailEventSource": "timestreamwrite.amazonaws.com",
+                    "endpointPrefix": "ingest.timestream"
+                },
+                "aws.auth#sigv4": {
+                    "name": "timestream"
+                },
+                "aws.protocols#awsJson1_0": {},
+                "smithy.api#documentation": "<fullname>Amazon Timestream Write</fullname>\n         <p>Amazon Timestream is a fast, scalable, fully managed time series database service that makes it easy to store and analyze trillions of time series data points per day. \n       With Timestream, you can easily store and analyze IoT sensor data to derive insights from your IoT applications. \n         You can analyze industrial telemetry to streamline equipment management and maintenance. \n         You can also store and analyze log data and metrics to improve the performance and availability of your applications. \n       Timestream is built from the ground up to effectively ingest, process, \n         and store time series data. It organizes data to optimize query processing. It automatically scales based on the volume of data ingested and on the query volume to ensure you receive optimal performance while inserting and querying data. As your data grows over time, Timestream’s adaptive query processing engine spans across storage tiers to provide fast analysis while reducing costs.</p>",
+                "smithy.api#title": "Amazon Timestream Write"
+            },
             "version": "2018-11-01",
             "operations": [
                 {
@@ -1379,26 +1606,7 @@
                 {
                     "target": "com.amazonaws.timestreamwrite#WriteRecords"
                 }
-            ],
-            "traits": {
-                "aws.api#clientEndpointDiscovery": {
-                    "operation": "com.amazonaws.timestreamwrite#DescribeEndpoints",
-                    "error": "com.amazonaws.timestreamwrite#InvalidEndpointException"
-                },
-                "aws.api#service": {
-                    "sdkId": "Timestream Write",
-                    "arnNamespace": "timestream",
-                    "cloudFormationName": "TimestreamWrite",
-                    "cloudTrailEventSource": "timestreamwrite.amazonaws.com",
-                    "endpointPrefix": "ingest.timestream"
-                },
-                "aws.auth#sigv4": {
-                    "name": "timestream"
-                },
-                "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<p>Amazon Timestream is a fast, scalable, fully managed time series database service that makes it easy to store and analyze trillions of time series data points per day. With Timestream, you can easily store and analyze IoT sensor data to derive insights from your IoT applications. You can analyze industrial telemetry to streamline equipment management and maintenance. You can also store and analyze log data and metrics to improve the performance and availability of your applications. Timestream is built from the ground up to effectively ingest, process, and store time series data. It organizes data to optimize query processing. It automatically scales based on the volume of data ingested and on the query volume to ensure you receive optimal performance while inserting and querying data. As your data grows over time, Timestream’s adaptive query processing engine spans across storage tiers to provide fast analysis while reducing costs.</p>",
-                "smithy.api#title": "Amazon Timestream Write"
-            }
+            ]
         },
         "com.amazonaws.timestreamwrite#UntagResource": {
             "type": "operation",
@@ -1490,7 +1698,7 @@
                 "aws.api#clientDiscoveredEndpoint": {
                     "required": true
                 },
-                "smithy.api#documentation": "<p>\n    Modifies the KMS key for an existing database. While updating the database, \n    you must specify the database name and the identifier of the new KMS key to be used (<code>KmsKeyId</code>).\n    If there are any concurrent <code>UpdateDatabase</code> requests, first writer wins.\n   </p>"
+                "smithy.api#documentation": "<p>\n    Modifies the KMS key for an existing database. While updating the database, \n    you must specify the database name and the identifier of the new KMS key to be used (<code>KmsKeyId</code>).\n    If there are any concurrent <code>UpdateDatabase</code> requests, first writer wins.\n   </p>\n         <p>See \n         <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.update-db.html\">code sample</a> for details.</p>"
             }
         },
         "com.amazonaws.timestreamwrite#UpdateDatabaseRequest": {
@@ -1552,7 +1760,7 @@
                 "aws.api#clientDiscoveredEndpoint": {
                     "required": true
                 },
-                "smithy.api#documentation": "<p>Modifies the retention duration of the memory store and magnetic store for your Timestream table. \n         Note that the change in retention duration takes effect immediately. \n         For example, if the retention period of the memory store was initially set to 2 hours and then changed to 24 hours, \n         the memory store will be capable of holding 24 hours of data, but will\n         be populated with 24 hours of data 22 hours after this change was made.\n         Timestream does not retrieve data from the magnetic store to populate the memory store. </p>\n         <p>Service quotas apply. For more information, see <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html\">Access Management</a> in the Timestream Developer Guide.</p>"
+                "smithy.api#documentation": "<p>Modifies the retention duration of the memory store and magnetic store for your Timestream table. \n         Note that the change in retention duration takes effect immediately. \n         For example, if the retention period of the memory store was initially set to 2 hours and then changed to 24 hours, \n         the memory store will be capable of holding 24 hours of data, but will\n         be populated with 24 hours of data 22 hours after this change was made.\n         Timestream does not retrieve data from the magnetic store to populate the memory store. </p>\n         <p>See \n         <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.update-table.html\">code sample</a> for details.</p>"
             }
         },
         "com.amazonaws.timestreamwrite#UpdateTableRequest": {
@@ -1568,15 +1776,20 @@
                 "TableName": {
                     "target": "com.amazonaws.timestreamwrite#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Timesream table.</p>",
+                        "smithy.api#documentation": "<p>The name of the Timestream table.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "RetentionProperties": {
                     "target": "com.amazonaws.timestreamwrite#RetentionProperties",
                     "traits": {
-                        "smithy.api#documentation": "<p>The retention duration of the memory store and the magnetic store.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The retention duration of the memory store and the magnetic store.</p>"
+                    }
+                },
+                "MagneticStoreWriteProperties": {
+                    "target": "com.amazonaws.timestreamwrite#MagneticStoreWriteProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains properties to set on the table when enabling magnetic store writes.</p>"
                     }
                 }
             }
@@ -1613,6 +1826,9 @@
             "input": {
                 "target": "com.amazonaws.timestreamwrite#WriteRecordsRequest"
             },
+            "output": {
+                "target": "com.amazonaws.timestreamwrite#WriteRecordsResponse"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.timestreamwrite#AccessDeniedException"
@@ -1640,7 +1856,7 @@
                 "aws.api#clientDiscoveredEndpoint": {
                     "required": true
                 },
-                "smithy.api#documentation": "<p>The WriteRecords operation enables you to write your time series \n      data into Timestream. You can specify a single data point or a batch \n      of data points to be inserted into the system. Timestream offers you \n      with a flexible schema that auto detects the column names and data types \n      for your Timestream tables based on the dimension names and data types of\n      the data points you specify when invoking writes into the database. \n      Timestream support eventual consistency read semantics. This means that \n      when you query data immediately after writing a batch of data into Timestream, \n      the query results might not reflect the results of a recently completed write \n      operation. The results may also include some stale data. If you repeat the \n      query request after a short time, the results should return the latest data.\n      Service quotas apply. For more information, \n      see <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html\">Access Management</a> in the Timestream Developer Guide.\n        </p>"
+                "smithy.api#documentation": "<p>The WriteRecords operation enables you to write your time series \n      data into Timestream. You can specify a single data point or a batch \n      of data points to be inserted into the system. Timestream offers you \n      with a flexible schema that auto detects the column names and data types \n      for your Timestream tables based on the dimension names and data types of\n      the data points you specify when invoking writes into the database. \n      Timestream support eventual consistency read semantics. This means that \n      when you query data immediately after writing a batch of data into Timestream, \n      the query results might not reflect the results of a recently completed write \n      operation. The results may also include some stale data. If you repeat the \n      query request after a short time, the results should return the latest data.\n         <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html\">Service quotas apply</a>.\n        </p>\n      \n         <p>See \n         <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.write.html\">code sample</a> for details.</p>\n      \n         <p>\n            <b>Upserts</b>\n         </p>\n      \n         <p>You can use the <code>Version</code> parameter in a <code>WriteRecords</code> request to update data points. \n         Timestream tracks a version number with each record. <code>Version</code> defaults to <code>1</code> when not specified for the record in the request. \n         Timestream will update an existing record’s measure value along with its <code>Version</code> upon receiving a write request with a higher \n         <code>Version</code> number for that record. \n         Upon receiving an update request where the measure value is the same as that of the existing record, \n         Timestream still updates <code>Version</code>, if it is greater than the existing value of <code>Version</code>. \n         You can update a data point as many times as desired, as long as the value of <code>Version</code> continuously increases. \n      </p>\n         <p>\n         For example, suppose you write a new record without indicating <code>Version</code> in the request. \n         Timestream will store this record, and set <code>Version</code> to <code>1</code>. \n         Now, suppose you try to update this record with a <code>WriteRecords</code> request of the same record with a different measure value but, \n         like before, do not provide <code>Version</code>. \n         In this case, Timestream will reject this update with a <code>RejectedRecordsException</code> since the updated record’s version is not greater than the existing value of Version. \n         However, if you were to resend the update request with <code>Version</code> set to <code>2</code>, \n         Timestream would then succeed in updating the record’s value, \n         and the <code>Version</code> would be set to <code>2</code>. \n         Next, suppose you sent a <code>WriteRecords</code> request with this same record and an identical measure value, \n         but with <code>Version</code> set to <code>3</code>. \n         In this case, Timestream would only update <code>Version</code> to <code>3</code>. \n         Any further updates would need to send a version number greater than <code>3</code>, \n         or the update requests would receive a <code>RejectedRecordsException</code>.\n      </p>"
             }
         },
         "com.amazonaws.timestreamwrite#WriteRecordsRequest": {
@@ -1656,21 +1872,32 @@
                 "TableName": {
                     "target": "com.amazonaws.timestreamwrite#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Timesream table.</p>",
+                        "smithy.api#documentation": "<p>The name of the Timestream table.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "CommonAttributes": {
                     "target": "com.amazonaws.timestreamwrite#Record",
                     "traits": {
-                        "smithy.api#documentation": "<p>A record containing the common measure and dimension attributes \n       shared across all the records in the request. The measure and dimension \n       attributes specified in here will be merged with the measure and dimension\n       attributes in the records object when the data is written into Timestream.\n       </p>"
+                        "smithy.api#documentation": "<p>A record containing the common measure, dimension, time, \n         and version attributes  \n       shared across all the records in the request. The measure and dimension \n       attributes specified will be merged with the measure and dimension\n       attributes in the records object when the data is written into Timestream.\n       Dimensions may not overlap,\n       or a <code>ValidationException</code> will be thrown.\n         In other words, a record must contain dimensions with unique names.\n       </p>"
                     }
                 },
                 "Records": {
                     "target": "com.amazonaws.timestreamwrite#Records",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of records containing the unique dimension and measure \n       attributes for each time series data point.\n       </p>",
+                        "smithy.api#documentation": "<p>An array of records containing the unique measure, dimension, time, and version  \n       attributes for each time series data point.\n       </p>",
                         "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.timestreamwrite#WriteRecordsResponse": {
+            "type": "structure",
+            "members": {
+                "RecordsIngested": {
+                    "target": "com.amazonaws.timestreamwrite#RecordsIngested",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information on the records ingested by this request.</p>"
                     }
                 }
             }

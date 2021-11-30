@@ -49,8 +49,8 @@ type DescribeDefaultEncryptionConfigurationOutput struct {
 	// This member is required.
 	EncryptionType types.EncryptionType
 
-	// The key ARN of the customer managed customer master key (CMK) used for KMS
-	// encryption if you use KMS_BASED_ENCRYPTION.
+	// The key ARN of the customer managed key used for KMS encryption if you use
+	// KMS_BASED_ENCRYPTION.
 	KmsKeyArn *string
 
 	// Metadata pertaining to the operation's result.

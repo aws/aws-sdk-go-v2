@@ -150,7 +150,7 @@ type Message struct {
 	MessageAttributes map[string]MessageAttributeValue
 
 	// A unique identifier for the message. A MessageIdis considered unique across all
-	// accounts for an extended period of time.
+	// Amazon Web Services accounts for an extended period of time.
 	MessageId *string
 
 	// An identifier associated with the act of receiving the message. A new receipt

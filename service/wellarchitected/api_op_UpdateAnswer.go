@@ -41,7 +41,8 @@ type UpdateAnswerInput struct {
 	// This member is required.
 	QuestionId *string
 
-	// The ID assigned to the workload. This ID is unique within an AWS Region.
+	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
+	// Region.
 	//
 	// This member is required.
 	WorkloadId *string
@@ -76,7 +77,11 @@ type UpdateAnswerOutput struct {
 	// LensSummary$LensAlias.
 	LensAlias *string
 
-	// The ID assigned to the workload. This ID is unique within an AWS Region.
+	// The ARN for the lens.
+	LensArn *string
+
+	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
+	// Region.
 	WorkloadId *string
 
 	// Metadata pertaining to the operation's result.

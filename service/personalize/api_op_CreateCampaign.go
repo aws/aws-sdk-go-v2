@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a campaign by deploying a solution version. When a client calls the
+// Creates a campaign that deploys a solution version. When a client calls the
 // GetRecommendations
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html)
 // and GetPersonalizedRanking

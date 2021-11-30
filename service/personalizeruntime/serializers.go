@@ -206,6 +206,11 @@ func awsRestjson1_serializeOpDocumentGetRecommendationsInput(v *GetRecommendatio
 		ok.Integer(v.NumResults)
 	}
 
+	if v.RecommenderArn != nil {
+		ok := object.Key("recommenderArn")
+		ok.String(*v.RecommenderArn)
+	}
+
 	if v.UserId != nil {
 		ok := object.Key("userId")
 		ok.String(*v.UserId)

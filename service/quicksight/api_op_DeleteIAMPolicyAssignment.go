@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an existing IAMpolicy assignment.
+// Deletes an existing IAM policy assignment.
 func (c *Client) DeleteIAMPolicyAssignment(ctx context.Context, params *DeleteIAMPolicyAssignmentInput, optFns ...func(*Options)) (*DeleteIAMPolicyAssignmentOutput, error) {
 	if params == nil {
 		params = &DeleteIAMPolicyAssignmentInput{}
@@ -33,7 +33,7 @@ type DeleteIAMPolicyAssignmentInput struct {
 	// This member is required.
 	AssignmentName *string
 
-	// The Amazon Web Services account ID where you want to delete the IAMpolicy
+	// The Amazon Web Services account ID where you want to delete the IAM policy
 	// assignment.
 	//
 	// This member is required.

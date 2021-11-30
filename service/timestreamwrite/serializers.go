@@ -874,6 +874,74 @@ func awsAwsjson10_serializeDocumentDimensions(v []types.Dimension, value smithyj
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentMagneticStoreRejectedDataLocation(v *types.MagneticStoreRejectedDataLocation, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.S3Configuration != nil {
+		ok := object.Key("S3Configuration")
+		if err := awsAwsjson10_serializeDocumentS3Configuration(v.S3Configuration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentMagneticStoreWriteProperties(v *types.MagneticStoreWriteProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EnableMagneticStoreWrites != nil {
+		ok := object.Key("EnableMagneticStoreWrites")
+		ok.Boolean(*v.EnableMagneticStoreWrites)
+	}
+
+	if v.MagneticStoreRejectedDataLocation != nil {
+		ok := object.Key("MagneticStoreRejectedDataLocation")
+		if err := awsAwsjson10_serializeDocumentMagneticStoreRejectedDataLocation(v.MagneticStoreRejectedDataLocation, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentMeasureValue(v *types.MeasureValue, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentMeasureValues(v []types.MeasureValue, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentMeasureValue(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentRecord(v *types.Record, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -893,6 +961,13 @@ func awsAwsjson10_serializeDocumentRecord(v *types.Record, value smithyjson.Valu
 	if v.MeasureValue != nil {
 		ok := object.Key("MeasureValue")
 		ok.String(*v.MeasureValue)
+	}
+
+	if v.MeasureValues != nil {
+		ok := object.Key("MeasureValues")
+		if err := awsAwsjson10_serializeDocumentMeasureValues(v.MeasureValues, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.MeasureValueType) > 0 {
@@ -943,6 +1018,33 @@ func awsAwsjson10_serializeDocumentRetentionProperties(v *types.RetentionPropert
 	{
 		ok := object.Key("MemoryStoreRetentionPeriodInHours")
 		ok.Long(v.MemoryStoreRetentionPeriodInHours)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentS3Configuration(v *types.S3Configuration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BucketName != nil {
+		ok := object.Key("BucketName")
+		ok.String(*v.BucketName)
+	}
+
+	if len(v.EncryptionOption) > 0 {
+		ok := object.Key("EncryptionOption")
+		ok.String(string(v.EncryptionOption))
+	}
+
+	if v.KmsKeyId != nil {
+		ok := object.Key("KmsKeyId")
+		ok.String(*v.KmsKeyId)
+	}
+
+	if v.ObjectKeyPrefix != nil {
+		ok := object.Key("ObjectKeyPrefix")
+		ok.String(*v.ObjectKeyPrefix)
 	}
 
 	return nil
@@ -1020,6 +1122,13 @@ func awsAwsjson10_serializeOpDocumentCreateTableInput(v *CreateTableInput, value
 	if v.DatabaseName != nil {
 		ok := object.Key("DatabaseName")
 		ok.String(*v.DatabaseName)
+	}
+
+	if v.MagneticStoreWriteProperties != nil {
+		ok := object.Key("MagneticStoreWriteProperties")
+		if err := awsAwsjson10_serializeDocumentMagneticStoreWriteProperties(v.MagneticStoreWriteProperties, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.RetentionProperties != nil {
@@ -1222,6 +1331,13 @@ func awsAwsjson10_serializeOpDocumentUpdateTableInput(v *UpdateTableInput, value
 	if v.DatabaseName != nil {
 		ok := object.Key("DatabaseName")
 		ok.String(*v.DatabaseName)
+	}
+
+	if v.MagneticStoreWriteProperties != nil {
+		ok := object.Key("MagneticStoreWriteProperties")
+		if err := awsAwsjson10_serializeDocumentMagneticStoreWriteProperties(v.MagneticStoreWriteProperties, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.RetentionProperties != nil {

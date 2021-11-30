@@ -39,16 +39,16 @@ type RemoveTagsFromResourceInput struct {
 	// ResourceID of either aws/ssm/MyGroup/appmanager or /aws/ssm/MyGroup/appmanager.
 	// For the Document and Parameter values, use the name of the resource. The
 	// ManagedInstance type for this API operation is only for on-premises managed
-	// instances. Specify the name of the managed instance in the following format:
+	// nodes. Specify the name of the managed node in the following format:
 	// mi-ID_number. For example, mi-1a2b3c4d5e6f.
 	//
 	// This member is required.
 	ResourceId *string
 
 	// The type of resource from which you want to remove a tag. The ManagedInstance
-	// type for this API operation is only for on-premises managed instances. Specify
-	// the name of the managed instance in the following format: mi-ID_number . For
-	// example, mi-1a2b3c4d5e6f.
+	// type for this API operation is only for on-premises managed nodes. Specify the
+	// name of the managed node in the following format: mi-ID_number . For example,
+	// mi-1a2b3c4d5e6f.
 	//
 	// This member is required.
 	ResourceType types.ResourceTypeForTagging

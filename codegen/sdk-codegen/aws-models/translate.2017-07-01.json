@@ -445,14 +445,14 @@
                 "Type": {
                     "target": "com.amazonaws.translate#EncryptionKeyType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of encryption key used by Amazon Translate to encrypt custom terminologies.</p>",
+                        "smithy.api#documentation": "<p>The type of encryption key used by Amazon Translate to encrypt this object.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Id": {
                     "target": "com.amazonaws.translate#EncryptionKeyID",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the encryption key being used to encrypt the custom\n      terminology.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the encryption key being used to encrypt this object.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -532,7 +532,7 @@
                 "DataLocation": {
                     "target": "com.amazonaws.translate#ParallelDataDataLocation",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 location of the most recent parallel data input file that was successfully\n      imported into Amazon Translate. The location is returned as a presigned URL that has a 30\n      minute expiration.</p>\n    \n         <important>\n            <p>Amazon Translate doesn't scan parallel data input files for the risk of CSV injection\n        attacks. </p>\n            <p>CSV injection occurs when a .csv or .tsv file is altered so that a record contains\n        malicious code. The record begins with a special character, such as =, +, -, or @. When the\n        file is opened in a spreadsheet program, the program might interpret the record as a formula\n        and run the code within it.</p>\n            <p>Before you download a parallel data input file from Amazon S3, ensure that you recognize the file and trust its creator.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The Amazon S3 location of the most recent parallel data input file that was successfully\n      imported into Amazon Translate. The location is returned as a presigned URL that has a 30\n      minute expiration.</p>\n    \n         <important>\n            <p>Amazon Translate doesn't scan all input files for the risk of CSV injection\n        attacks. </p>\n            <p>CSV injection occurs when a .csv or .tsv file is altered so that a record contains\n        malicious code. The record begins with a special character, such as =, +, -, or @. When the\n        file is opened in a spreadsheet program, the program might interpret the record as a formula\n        and run the code within it.</p>\n            <p>Before you download an input file from Amazon S3, ensure that you recognize the file and trust its creator.</p>\n         </important>"
                     }
                 },
                 "AuxiliaryDataLocation": {
@@ -605,7 +605,7 @@
                 "TerminologyDataLocation": {
                     "target": "com.amazonaws.translate#TerminologyDataLocation",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data location of the custom terminology being retrieved. The custom terminology file\n      is returned in a presigned url that has a 30 minute expiration.</p>"
+                        "smithy.api#documentation": "<p>The Amazon S3 location of the most recent custom terminology input file that was\n      successfully imported into Amazon Translate. The location is returned as a presigned URL that\n      has a 30 minute expiration.</p>\n    \n         <important>\n            <p>Amazon Translate doesn't scan all input files for the risk of CSV injection\n        attacks. </p>\n            <p>CSV injection occurs when a .csv or .tsv file is altered so that a record contains\n        malicious code. The record begins with a special character, such as =, +, -, or @. When the\n        file is opened in a spreadsheet program, the program might interpret the record as a formula\n        and run the code within it.</p>\n            <p>Before you download an input file from Amazon S3, ensure that you recognize the file and trust its creator.</p>\n         </important>"
                     }
                 },
                 "AuxiliaryDataLocation": {
@@ -1190,7 +1190,7 @@
                 "Location": {
                     "target": "com.amazonaws.translate#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 location of the parallel data input file. The location is returned as a\n      presigned URL to that has a 30 minute expiration.</p>\n    \n         <important>\n            <p>Amazon Translate doesn't scan parallel data input files for the risk of CSV injection\n        attacks. </p>\n            <p>CSV injection occurs when a .csv or .tsv file is altered so that a record contains\n        malicious code. The record begins with a special character, such as =, +, -, or @. When the\n        file is opened in a spreadsheet program, the program might interpret the record as a formula\n        and run the code within it.</p>\n            <p>Before you download a parallel data input file from Amazon S3, ensure that you recognize the file and trust its creator.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>The Amazon S3 location of the parallel data input file. The location is returned as a\n      presigned URL to that has a 30 minute expiration.</p>\n    \n         <important>\n            <p>Amazon Translate doesn't scan all input files for the risk of CSV injection\n        attacks. </p>\n            <p>CSV injection occurs when a .csv or .tsv file is altered so that a record contains\n        malicious code. The record begins with a special character, such as =, +, -, or @. When the\n        file is opened in a spreadsheet program, the program might interpret the record as a formula\n        and run the code within it.</p>\n            <p>Before you download an input file from Amazon S3, ensure that you recognize the file and trust its creator.</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1358,6 +1358,17 @@
                 ]
             }
         },
+        "com.amazonaws.translate#Profanity": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "MASK",
+                        "name": "MASK"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.translate#ResourceName": {
             "type": "string",
             "traits": {
@@ -1504,6 +1515,12 @@
                         "smithy.api#documentation": "<p>A unique identifier for the request. This token is auto-generated when using the Amazon Translate\n      SDK.</p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "Settings": {
+                    "target": "com.amazonaws.translate#TranslationSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings to configure your translation output, including the option to mask profane words\n      and phrases.</p>"
                     }
                 }
             }
@@ -1694,7 +1711,7 @@
                 "Location": {
                     "target": "com.amazonaws.translate#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The location of the custom terminology data.</p>",
+                        "smithy.api#documentation": "<p>The Amazon S3 location of the most recent custom terminology input file that was\n      successfully imported into Amazon Translate. The location is returned as a presigned URL that\n      has a 30 minute expiration.</p>\n    \n         <important>\n            <p>Amazon Translate doesn't scan all input files for the risk of CSV injection\n        attacks. </p>\n            <p>CSV injection occurs when a .csv or .tsv file is altered so that a record contains\n        malicious code. The record begins with a special character, such as =, +, -, or @. When the\n        file is opened in a spreadsheet program, the program might interpret the record as a formula\n        and run the code within it.</p>\n            <p>Before you download an input file from Amazon S3, ensure that you recognize the file and trust its creator.</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1942,6 +1959,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an AWS Identity Access and Management (IAM) role\n      that granted Amazon Translate read access to the job's input data.</p>"
                     }
+                },
+                "Settings": {
+                    "target": "com.amazonaws.translate#TranslationSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings that configure the translation output.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2037,6 +2060,12 @@
                         "smithy.api#documentation": "<p>The language code requested for the language of the target text. The language must be a\n      language supported by Amazon Translate.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "Settings": {
+                    "target": "com.amazonaws.translate#TranslationSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings to configure your translation output, including the option to mask profane words\n      and phrases.</p>"
+                    }
                 }
             }
         },
@@ -2069,7 +2098,27 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The names of the custom terminologies applied to the input text by Amazon Translate for the\n      translated text response.</p>"
                     }
+                },
+                "AppliedSettings": {
+                    "target": "com.amazonaws.translate#TranslationSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings that configure the translation output.</p>"
+                    }
                 }
+            }
+        },
+        "com.amazonaws.translate#TranslationSettings": {
+            "type": "structure",
+            "members": {
+                "Profanity": {
+                    "target": "com.amazonaws.translate#Profanity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enable the profanity setting if you want Amazon Translate to mask profane words and\n      phrases in your translation output.</p>\n         <p>To mask profane words and phrases, Amazon Translate replaces them with the grawlix string\n      “?$#@$“. This 5-character sequence is used for each profane word or phrase, regardless of the\n      length or number of words.</p>\n         <p>Amazon Translate does not detect profanity in all of its supported languages. For\n      languages that support profanity detection, see <a href=\"https://docs.aws.amazon.com/translate/latest/dg/what-is.html#what-is-languages\">Supported\n        Languages and Language Codes in the Amazon Translate Developer Guide</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Settings that configure the translation output.</p>"
             }
         },
         "com.amazonaws.translate#UnboundedLengthString": {

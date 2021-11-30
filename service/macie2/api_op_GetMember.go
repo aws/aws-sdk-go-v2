@@ -55,8 +55,8 @@ type GetMemberOutput struct {
 	Email *string
 
 	// The date and time, in UTC and extended ISO 8601 format, when an Amazon Macie
-	// membership invitation was last sent to the account. This value is null if a
-	// Macie invitation hasn't been sent to the account.
+	// membership invitation was last sent to the account. This value is null if an
+	// invitation hasn't been sent to the account.
 	InvitedAt *time.Time
 
 	// (Deprecated) The Amazon Web Services account ID for the administrator account.

@@ -39,7 +39,7 @@ type GetServiceTemplateInput struct {
 
 type GetServiceTemplateOutput struct {
 
-	// The service template detail data that's returned by AWS Proton.
+	// The service template detail data that's returned by Proton.
 	//
 	// This member is required.
 	ServiceTemplate *types.ServiceTemplate

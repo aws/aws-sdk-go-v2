@@ -11,11 +11,21 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deploy a new environment. An AWS Proton environment is created from an
-// environment template that defines infrastructure and resources that can be
-// shared across services. For more information, see the Environments
+// Deploy a new environment. An Proton environment is created from an environment
+// template that defines infrastructure and resources that can be shared across
+// services. You can provision environments using the following methods:
+//
+// *
+// Standard provisioning: Proton makes direct calls to provision your resources.
+//
+// *
+// Pull request provisioning: Proton makes pull requests on your repository to
+// provide compiled infrastructure as code (IaC) files that your IaC engine uses to
+// provision resources.
+//
+// For more information, see the Environments
 // (https://docs.aws.amazon.com/proton/latest/adminguide/ag-environments.html) in
-// the AWS Proton Administrator Guide.
+// the Proton Administrator Guide.
 func (c *Client) CreateEnvironment(ctx context.Context, params *CreateEnvironmentInput, optFns ...func(*Options)) (*CreateEnvironmentOutput, error) {
 	if params == nil {
 		params = &CreateEnvironmentInput{}
@@ -41,14 +51,14 @@ type CreateEnvironmentInput struct {
 	// A link to a YAML formatted spec file that provides inputs as defined in the
 	// environment template bundle schema file. For more information, see Environments
 	// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-environments.html) in
-	// the AWS Proton Administrator Guide.
+	// the Proton Administrator Guide.
 	//
 	// This value conforms to the media type: application/yaml
 	//
 	// This member is required.
 	Spec *string
 
-	// The ID of the major version of the environment template.
+	// The major version of the environment template.
 	//
 	// This member is required.
 	TemplateMajorVersion *string
@@ -56,7 +66,7 @@ type CreateEnvironmentInput struct {
 	// The name of the environment template. For more information, see Environment
 	// Templates
 	// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-templates.html) in the
-	// AWS Proton Administrator Guide.
+	// Proton Administrator Guide.
 	//
 	// This member is required.
 	TemplateName *string
@@ -67,25 +77,33 @@ type CreateEnvironmentInput struct {
 	// The ID of the environment account connection that you provide if you're
 	// provisioning your environment infrastructure resources to an environment
 	// account. You must include either the environmentAccountConnectionId or
-	// protonServiceRoleArn parameter and value. For more information, see Environment
-	// account connections
+	// protonServiceRoleArn parameter and value and omit the provisioningRepository
+	// parameter and values. For more information, see Environment account connections
 	// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html)
-	// in the AWS Proton Administrator guide.
+	// in the Proton Administrator guide.
 	EnvironmentAccountConnectionId *string
 
-	// The Amazon Resource Name (ARN) of the AWS Proton service role that allows AWS
-	// Proton to make calls to other services on your behalf. You must include either
-	// the environmentAccountConnectionId or protonServiceRoleArn parameter and value.
+	// The Amazon Resource Name (ARN) of the Proton service role that allows Proton to
+	// make calls to other services on your behalf. You must include either the
+	// environmentAccountConnectionId or protonServiceRoleArn parameter and value and
+	// omit the provisioningRepository parameter when you use standard provisioning.
 	ProtonServiceRoleArn *string
 
-	// Create tags for your environment. For more information, see AWS Proton resources
-	// and tagging in the AWS Proton Administrator Guide
-	// (https://docs.aws.amazon.com/proton/latest/adminguide/resources.html) or AWS
-	// Proton User Guide
-	// (https://docs.aws.amazon.com/proton/latest/userguide/resources.html).
+	// The repository that you provide with pull request provisioning. If you provide
+	// this parameter, you must omit the environmentAccountConnectionId and
+	// protonServiceRoleArn parameters. Provisioning by pull request is currently in
+	// feature preview and is only usable with Terraform based Proton Templates. To
+	// learn more about Amazon Web Services Feature Preview terms
+	// (https://aws.amazon.com/service-terms), see section 2 on Beta and Previews.
+	ProvisioningRepository *types.RepositoryBranchInput
+
+	// Create tags for your environment. For more information, see Proton resources and
+	// tagging in the Proton Administrator Guide
+	// (https://docs.aws.amazon.com/proton/latest/adminguide/resources.html) or Proton
+	// User Guide (https://docs.aws.amazon.com/proton/latest/userguide/resources.html).
 	Tags []types.Tag
 
-	// The ID of the minor version of the environment template.
+	// The minor version of the environment template.
 	TemplateMinorVersion *string
 
 	noSmithyDocumentSerde
@@ -93,7 +111,7 @@ type CreateEnvironmentInput struct {
 
 type CreateEnvironmentOutput struct {
 
-	// The environment detail data that's returned by AWS Proton.
+	// The environment detail data that's returned by Proton.
 	//
 	// This member is required.
 	Environment *types.Environment

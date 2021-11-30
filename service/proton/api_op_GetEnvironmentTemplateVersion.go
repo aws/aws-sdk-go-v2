@@ -34,7 +34,7 @@ func (c *Client) GetEnvironmentTemplateVersion(ctx context.Context, params *GetE
 
 type GetEnvironmentTemplateVersionInput struct {
 
-	// To view environment template major version detail data, include majorVersion.
+	// To view environment template major version detail data, include major Version.
 	//
 	// This member is required.
 	MajorVersion *string
@@ -54,7 +54,7 @@ type GetEnvironmentTemplateVersionInput struct {
 
 type GetEnvironmentTemplateVersionOutput struct {
 
-	// The environment template version detail data that's returned by AWS Proton.
+	// The environment template version detail data that's returned by Proton.
 	//
 	// This member is required.
 	EnvironmentTemplateVersion *types.EnvironmentTemplateVersion

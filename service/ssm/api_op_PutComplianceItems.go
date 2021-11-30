@@ -25,7 +25,7 @@ import (
 //
 // *
 // ExecutionTime. The time the patch, association, or custom compliance item was
-// applied to the instance.
+// applied to the managed node.
 //
 // * Id: The patch, association, or custom compliance
 // ID.
@@ -98,8 +98,7 @@ type PutComplianceItemsInput struct {
 	// This member is required.
 	Items []types.ComplianceItemEntry
 
-	// Specify an ID for this resource. For a managed instance, this is the instance
-	// ID.
+	// Specify an ID for this resource. For a managed node, this is the node ID.
 	//
 	// This member is required.
 	ResourceId *string

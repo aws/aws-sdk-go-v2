@@ -257,6 +257,52 @@ func (PartnerIntegrationStatus) Values() []PartnerIntegrationStatus {
 	}
 }
 
+type ReservedNodeExchangeActionType string
+
+// Enum values for ReservedNodeExchangeActionType
+const (
+	ReservedNodeExchangeActionTypeRestoreCluster ReservedNodeExchangeActionType = "restore-cluster"
+	ReservedNodeExchangeActionTypeResizeCluster  ReservedNodeExchangeActionType = "resize-cluster"
+)
+
+// Values returns all known values for ReservedNodeExchangeActionType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ReservedNodeExchangeActionType) Values() []ReservedNodeExchangeActionType {
+	return []ReservedNodeExchangeActionType{
+		"restore-cluster",
+		"resize-cluster",
+	}
+}
+
+type ReservedNodeExchangeStatusType string
+
+// Enum values for ReservedNodeExchangeStatusType
+const (
+	ReservedNodeExchangeStatusTypeRequested  ReservedNodeExchangeStatusType = "REQUESTED"
+	ReservedNodeExchangeStatusTypePending    ReservedNodeExchangeStatusType = "PENDING"
+	ReservedNodeExchangeStatusTypeInProgress ReservedNodeExchangeStatusType = "IN_PROGRESS"
+	ReservedNodeExchangeStatusTypeRetrying   ReservedNodeExchangeStatusType = "RETRYING"
+	ReservedNodeExchangeStatusTypeSucceeded  ReservedNodeExchangeStatusType = "SUCCEEDED"
+	ReservedNodeExchangeStatusTypeFailed     ReservedNodeExchangeStatusType = "FAILED"
+)
+
+// Values returns all known values for ReservedNodeExchangeStatusType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ReservedNodeExchangeStatusType) Values() []ReservedNodeExchangeStatusType {
+	return []ReservedNodeExchangeStatusType{
+		"REQUESTED",
+		"PENDING",
+		"IN_PROGRESS",
+		"RETRYING",
+		"SUCCEEDED",
+		"FAILED",
+	}
+}
+
 type ReservedNodeOfferingType string
 
 // Enum values for ReservedNodeOfferingType

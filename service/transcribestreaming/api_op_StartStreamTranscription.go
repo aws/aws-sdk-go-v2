@@ -49,18 +49,13 @@ func (c *Client) StartStreamTranscription(ctx context.Context, params *StartStre
 
 type StartStreamTranscriptionInput struct {
 
-	// Indicates the source language used in the input audio stream.
-	//
-	// This member is required.
-	LanguageCode types.LanguageCode
-
 	// The encoding used for the input audio.
 	//
 	// This member is required.
 	MediaEncoding types.MediaEncoding
 
-	// The sample rate, in Hertz, of the input audio. We suggest that you use 8,000 Hz
-	// for low quality audio and 16,000 Hz for high quality audio.
+	// The sample rate, in Hertz (Hz), of the input audio. We suggest that you use
+	// 8,000 Hz for low quality audio and 16,000 Hz or higher for high quality audio.
 	//
 	// This member is required.
 	MediaSampleRateHertz *int32
@@ -79,8 +74,8 @@ type StartStreamTranscriptionInput struct {
 	// returns a BadRequestException.
 	ContentRedactionType types.ContentRedactionType
 
-	// When true, instructs Amazon Transcribe to process each audio channel separately
-	// and then merge the transcription output of each channel into a single
+	// When true, instructs Amazon Transcribe to process each audio channel separately,
+	// then merges the transcription output of each channel into a single
 	// transcription. Amazon Transcribe also produces a transcription of each item. An
 	// item includes the start time, end time, and any alternative transcriptions. You
 	// can't set both ShowSpeakerLabel and EnableChannelIdentification in the same
@@ -94,8 +89,23 @@ type StartStreamTranscriptionInput struct {
 	// in another partial result.
 	EnablePartialResultsStabilization bool
 
+	// Optional. Set this value to true to enable language identification for your
+	// media stream.
+	IdentifyLanguage bool
+
+	// The language code of the input audio stream.
+	LanguageCode types.LanguageCode
+
 	// The name of the language model you want to use.
 	LanguageModelName *string
+
+	// An object containing a list of languages that might be present in your audio.
+	// You must provide two or more language codes to help Amazon Transcribe identify
+	// the correct language of your media stream with the highest possible accuracy.
+	// You can only select one variant per language; for example, you can't include
+	// both en-US and en-UK in the same request. You can only use this parameter if
+	// you've set IdentifyLanguage to truein your request.
+	LanguageOptions *string
 
 	// The number of channels that are in your audio stream.
 	NumberOfChannels *int32
@@ -108,23 +118,30 @@ type StartStreamTranscriptionInput struct {
 
 	// List the PII entity types you want to identify or redact. In order to specify
 	// entity types, you must have either ContentIdentificationType or
-	// ContentRedactionType enabled. PiiEntityTypes is an optional parameter with a
-	// default value of ALL.
+	// ContentRedactionType enabled. PIIEntityTypes must be comma-separated; the
+	// available values are: BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_NUMBER,
+	// CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, PIN, EMAIL, ADDRESS, NAME, PHONE, SSN,
+	// and ALL. PiiEntityTypes is an optional parameter with a default value of ALL.
 	PiiEntityTypes *string
+
+	// Optional. From the subset of languages codes you provided for LanguageOptions,
+	// you can select one preferred language for your transcription. You can only use
+	// this parameter if you've set IdentifyLanguage to truein your request.
+	PreferredLanguage types.LanguageCode
 
 	// A identifier for the transcription session. Use this parameter when you want to
 	// retry a session. If you don't provide a session ID, Amazon Transcribe will
 	// generate one for you and return it in the response.
 	SessionId *string
 
-	// When true, enables speaker identification in your real-time stream.
+	// When true, enables speaker identification in your media stream.
 	ShowSpeakerLabel bool
 
 	// The manner in which you use your vocabulary filter to filter words in your
 	// transcript. Remove removes filtered words from your transcription results. Mask
 	// masks filtered words with a *** in your transcription results. Tag keeps the
 	// filtered words in your transcription results and tags them. The tag appears as
-	// VocabularyFilterMatch equal to True
+	// VocabularyFilterMatch equal to True.
 	VocabularyFilterMethod types.VocabularyFilterMethod
 
 	// The name of the vocabulary filter you've created that is unique to your account.
@@ -151,16 +168,24 @@ type StartStreamTranscriptionOutput struct {
 	// Shows whether partial results stabilization has been enabled in the stream.
 	EnablePartialResultsStabilization bool
 
-	// The language code for the input audio stream.
+	// The language code of the language identified in your media stream.
+	IdentifyLanguage bool
+
+	// The language code of the input audio stream.
 	LanguageCode types.LanguageCode
 
+	// The name of the language model used in your media stream.
 	LanguageModelName *string
+
+	// The language codes used in the identification of your media stream's predominant
+	// language.
+	LanguageOptions *string
 
 	// The encoding used for the input audio stream.
 	MediaEncoding types.MediaEncoding
 
-	// The sample rate for the input audio stream. Use 8,000 Hz for low quality audio
-	// and 16,000 Hz for high quality audio.
+	// The sample rate, in Hertz (Hz), for the input audio stream. Use 8,000 Hz for low
+	// quality audio and 16,000 Hz or higher for high quality audio.
 	MediaSampleRateHertz *int32
 
 	// The number of channels identified in the stream.
@@ -173,6 +198,9 @@ type StartStreamTranscriptionOutput struct {
 	// Lists the PII entity types you specified in your request.
 	PiiEntityTypes *string
 
+	// The preferred language you specified in your request.
+	PreferredLanguage types.LanguageCode
+
 	// An identifier for the streaming transcription.
 	RequestId *string
 
@@ -182,10 +210,10 @@ type StartStreamTranscriptionOutput struct {
 	// Shows whether speaker identification was enabled in the stream.
 	ShowSpeakerLabel bool
 
-	// The vocabulary filtering method used in the real-time stream.
+	// The vocabulary filtering method used in the media stream.
 	VocabularyFilterMethod types.VocabularyFilterMethod
 
-	// The name of the vocabulary filter used in your real-time stream.
+	// The name of the vocabulary filter used in your media stream.
 	VocabularyFilterName *string
 
 	// The name of the vocabulary used when processing the stream.

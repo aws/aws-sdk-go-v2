@@ -239,6 +239,25 @@ func (DetailedErrorCode) Values() []DetailedErrorCode {
 	}
 }
 
+type DisassociatedDataStorageState string
+
+// Enum values for DisassociatedDataStorageState
+const (
+	DisassociatedDataStorageStateEnabled  DisassociatedDataStorageState = "ENABLED"
+	DisassociatedDataStorageStateDisabled DisassociatedDataStorageState = "DISABLED"
+)
+
+// Values returns all known values for DisassociatedDataStorageState. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (DisassociatedDataStorageState) Values() []DisassociatedDataStorageState {
+	return []DisassociatedDataStorageState{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type EncryptionType string
 
 // Enum values for EncryptionType
@@ -344,6 +363,24 @@ func (ListAssetsFilter) Values() []ListAssetsFilter {
 	return []ListAssetsFilter{
 		"ALL",
 		"TOP_LEVEL",
+	}
+}
+
+type ListTimeSeriesType string
+
+// Enum values for ListTimeSeriesType
+const (
+	ListTimeSeriesTypeAssociated    ListTimeSeriesType = "ASSOCIATED"
+	ListTimeSeriesTypeDisassociated ListTimeSeriesType = "DISASSOCIATED"
+)
+
+// Values returns all known values for ListTimeSeriesType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ListTimeSeriesType) Values() []ListTimeSeriesType {
+	return []ListTimeSeriesType{
+		"ASSOCIATED",
+		"DISASSOCIATED",
 	}
 }
 

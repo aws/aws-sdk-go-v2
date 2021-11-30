@@ -62,6 +62,13 @@ type UpdateElasticsearchDomainConfigInput struct {
 	// Options to specify configuration that will be applied to the domain endpoint.
 	DomainEndpointOptions *types.DomainEndpointOptions
 
+	// This flag, when set to True, specifies whether the UpdateElasticsearchDomain
+	// request should return the results of validation checks without actually applying
+	// the change. This flag, when set to True, specifies the deployment mechanism
+	// through which the update shall be applied on the domain. This will not actually
+	// perform the Update.
+	DryRun *bool
+
 	// Specify the type and size of the EBS volume that you want to use.
 	EBSOptions *types.EBSOptions
 
@@ -99,6 +106,9 @@ type UpdateElasticsearchDomainConfigOutput struct {
 	//
 	// This member is required.
 	DomainConfig *types.ElasticsearchDomainConfig
+
+	// Contains result of DryRun.
+	DryRunResults *types.DryRunResults
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

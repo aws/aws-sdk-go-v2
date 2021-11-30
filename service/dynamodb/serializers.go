@@ -4587,6 +4587,11 @@ func awsAwsjson10_serializeOpDocumentBatchExecuteStatementInput(v *BatchExecuteS
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.ReturnConsumedCapacity) > 0 {
+		ok := object.Key("ReturnConsumedCapacity")
+		ok.String(string(v.ReturnConsumedCapacity))
+	}
+
 	if v.Statements != nil {
 		ok := object.Key("Statements")
 		if err := awsAwsjson10_serializeDocumentPartiQLBatchRequest(v.Statements, ok); err != nil {
@@ -5032,6 +5037,11 @@ func awsAwsjson10_serializeOpDocumentExecuteStatementInput(v *ExecuteStatementIn
 		}
 	}
 
+	if len(v.ReturnConsumedCapacity) > 0 {
+		ok := object.Key("ReturnConsumedCapacity")
+		ok.String(string(v.ReturnConsumedCapacity))
+	}
+
 	if v.Statement != nil {
 		ok := object.Key("Statement")
 		ok.String(*v.Statement)
@@ -5047,6 +5057,11 @@ func awsAwsjson10_serializeOpDocumentExecuteTransactionInput(v *ExecuteTransacti
 	if v.ClientRequestToken != nil {
 		ok := object.Key("ClientRequestToken")
 		ok.String(*v.ClientRequestToken)
+	}
+
+	if len(v.ReturnConsumedCapacity) > 0 {
+		ok := object.Key("ReturnConsumedCapacity")
+		ok.String(string(v.ReturnConsumedCapacity))
 	}
 
 	if v.TransactStatements != nil {

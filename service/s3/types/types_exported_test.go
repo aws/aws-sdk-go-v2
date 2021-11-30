@@ -40,6 +40,12 @@ func ExampleLifecycleRuleFilter_outputUsage() {
 	case *types.LifecycleRuleFilterMemberAnd:
 		_ = v.Value // Value is types.LifecycleRuleAndOperator
 
+	case *types.LifecycleRuleFilterMemberObjectSizeGreaterThan:
+		_ = v.Value // Value is int64
+
+	case *types.LifecycleRuleFilterMemberObjectSizeLessThan:
+		_ = v.Value // Value is int64
+
 	case *types.LifecycleRuleFilterMemberPrefix:
 		_ = v.Value // Value is string
 
@@ -57,6 +63,8 @@ func ExampleLifecycleRuleFilter_outputUsage() {
 
 var _ *string
 var _ *types.LifecycleRuleAndOperator
+var _ int64
+var _ int64
 var _ *types.Tag
 
 func ExampleMetricsFilter_outputUsage() {

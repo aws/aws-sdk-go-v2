@@ -20,8 +20,7 @@ import (
 // and can be copied or restored by all Amazon Web Services accounts. To add or
 // remove access for an Amazon Web Services account to copy or restore a manual DB
 // cluster snapshot, or to make the manual DB cluster snapshot public or private,
-// use the ModifyDBClusterSnapshotAttribute API action. This action only applies to
-// Aurora DB clusters.
+// use the ModifyDBClusterSnapshotAttribute API action.
 func (c *Client) DescribeDBClusterSnapshotAttributes(ctx context.Context, params *DescribeDBClusterSnapshotAttributesInput, optFns ...func(*Options)) (*DescribeDBClusterSnapshotAttributesOutput, error) {
 	if params == nil {
 		params = &DescribeDBClusterSnapshotAttributesInput{}

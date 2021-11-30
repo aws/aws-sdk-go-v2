@@ -75,10 +75,10 @@ type UpdateFunctionConfigurationInput struct {
 	FileSystemConfigs []types.FileSystemConfig
 
 	// The name of the method within your code that Lambda calls to execute your
-	// function. The format includes the file name. It can also include namespaces and
-	// other qualifiers, depending on the runtime. For more information, see
-	// Programming Model
-	// (https://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html).
+	// function. Handler is required if the deployment package is a .zip file archive.
+	// The format includes the file name. It can also include namespaces and other
+	// qualifiers, depending on the runtime. For more information, see Programming
+	// Model (https://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html).
 	Handler *string
 
 	// Container image configuration values
@@ -112,7 +112,8 @@ type UpdateFunctionConfigurationInput struct {
 	Role *string
 
 	// The identifier of the function's runtime
-	// (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html).
+	// (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html). Runtime is
+	// required if the deployment package is a .zip file archive.
 	Runtime types.Runtime
 
 	// The amount of time (in seconds) that Lambda allows a function to run before

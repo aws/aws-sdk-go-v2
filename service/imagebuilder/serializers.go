@@ -4296,6 +4296,20 @@ func awsRestjson1_serializeDocumentLaunchPermissionConfiguration(v *types.Launch
 	object := value.Object()
 	defer object.Close()
 
+	if v.OrganizationalUnitArns != nil {
+		ok := object.Key("organizationalUnitArns")
+		if err := awsRestjson1_serializeDocumentOrganizationalUnitArnList(v.OrganizationalUnitArns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OrganizationArns != nil {
+		ok := object.Key("organizationArns")
+		if err := awsRestjson1_serializeDocumentOrganizationArnList(v.OrganizationArns, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.UserGroups != nil {
 		ok := object.Key("userGroups")
 		if err := awsRestjson1_serializeDocumentStringList(v.UserGroups, ok); err != nil {
@@ -4370,6 +4384,28 @@ func awsRestjson1_serializeDocumentLogging(v *types.Logging, value smithyjson.Va
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOrganizationalUnitArnList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOrganizationArnList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 

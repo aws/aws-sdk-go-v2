@@ -2,6 +2,24 @@
 
 package types
 
+type ConflictResolvingModel string
+
+// Enum values for ConflictResolvingModel
+const (
+	ConflictResolvingModelRecency ConflictResolvingModel = "RECENCY"
+	ConflictResolvingModelSource  ConflictResolvingModel = "SOURCE"
+)
+
+// Values returns all known values for ConflictResolvingModel. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConflictResolvingModel) Values() []ConflictResolvingModel {
+	return []ConflictResolvingModel{
+		"RECENCY",
+		"SOURCE",
+	}
+}
+
 type DataPullMode string
 
 // Enum values for DataPullMode
@@ -61,6 +79,62 @@ func (Gender) Values() []Gender {
 		"MALE",
 		"FEMALE",
 		"UNSPECIFIED",
+	}
+}
+
+type IdentityResolutionJobStatus string
+
+// Enum values for IdentityResolutionJobStatus
+const (
+	IdentityResolutionJobStatusPending        IdentityResolutionJobStatus = "PENDING"
+	IdentityResolutionJobStatusPreprocessing  IdentityResolutionJobStatus = "PREPROCESSING"
+	IdentityResolutionJobStatusFindMatching   IdentityResolutionJobStatus = "FIND_MATCHING"
+	IdentityResolutionJobStatusMerging        IdentityResolutionJobStatus = "MERGING"
+	IdentityResolutionJobStatusCompleted      IdentityResolutionJobStatus = "COMPLETED"
+	IdentityResolutionJobStatusPartialSuccess IdentityResolutionJobStatus = "PARTIAL_SUCCESS"
+	IdentityResolutionJobStatusFailed         IdentityResolutionJobStatus = "FAILED"
+)
+
+// Values returns all known values for IdentityResolutionJobStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IdentityResolutionJobStatus) Values() []IdentityResolutionJobStatus {
+	return []IdentityResolutionJobStatus{
+		"PENDING",
+		"PREPROCESSING",
+		"FIND_MATCHING",
+		"MERGING",
+		"COMPLETED",
+		"PARTIAL_SUCCESS",
+		"FAILED",
+	}
+}
+
+type JobScheduleDayOfTheWeek string
+
+// Enum values for JobScheduleDayOfTheWeek
+const (
+	JobScheduleDayOfTheWeekSunday    JobScheduleDayOfTheWeek = "SUNDAY"
+	JobScheduleDayOfTheWeekMonday    JobScheduleDayOfTheWeek = "MONDAY"
+	JobScheduleDayOfTheWeekTuesday   JobScheduleDayOfTheWeek = "TUESDAY"
+	JobScheduleDayOfTheWeekWednesday JobScheduleDayOfTheWeek = "WEDNESDAY"
+	JobScheduleDayOfTheWeekThursday  JobScheduleDayOfTheWeek = "THURSDAY"
+	JobScheduleDayOfTheWeekFriday    JobScheduleDayOfTheWeek = "FRIDAY"
+	JobScheduleDayOfTheWeekSaturday  JobScheduleDayOfTheWeek = "SATURDAY"
+)
+
+// Values returns all known values for JobScheduleDayOfTheWeek. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (JobScheduleDayOfTheWeek) Values() []JobScheduleDayOfTheWeek {
+	return []JobScheduleDayOfTheWeek{
+		"SUNDAY",
+		"MONDAY",
+		"TUESDAY",
+		"WEDNESDAY",
+		"THURSDAY",
+		"FRIDAY",
+		"SATURDAY",
 	}
 }
 

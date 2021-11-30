@@ -4026,6 +4026,41 @@ func validatePatchSourceList(v []types.PatchSource) error {
 	}
 }
 
+func validateRegistrationMetadataItem(v *types.RegistrationMetadataItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegistrationMetadataItem"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRegistrationMetadataList(v []types.RegistrationMetadataItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegistrationMetadataList"}
+	for i := range v {
+		if err := validateRegistrationMetadataItem(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRelatedOpsItem(v *types.RelatedOpsItem) error {
 	if v == nil {
 		return nil
@@ -4376,6 +4411,11 @@ func validateOpCreateActivationInput(v *CreateActivationInput) error {
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RegistrationMetadata != nil {
+		if err := validateRegistrationMetadataList(v.RegistrationMetadata); err != nil {
+			invalidParams.AddNested("RegistrationMetadata", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
