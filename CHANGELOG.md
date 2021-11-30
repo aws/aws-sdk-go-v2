@@ -1,3 +1,118 @@
+# Release (2021-11-30)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.16.0](service/autoscaling/CHANGELOG.md#v1160-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/backup`: [v1.10.0](service/backup/CHANGELOG.md#v1100-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/braket`: [v1.10.0](service/braket/CHANGELOG.md#v1100-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings`: [v1.2.0](service/chimesdkmeetings/CHANGELOG.md#v120-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.15.0](service/cloudformation/CHANGELOG.md#v1150-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizer`: [v1.13.0](service/computeoptimizer/CHANGELOG.md#v1130-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.13.0](service/connect/CHANGELOG.md#v1130-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.12.0](service/customerprofiles/CHANGELOG.md#v1120-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.13.0](service/databasemigrationservice/CHANGELOG.md#v1130-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/dataexchange`: [v1.9.0](service/dataexchange/CHANGELOG.md#v190-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.9.0](service/dynamodb/CHANGELOG.md#v190-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.24.0](service/ec2/CHANGELOG.md#v1240-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.11.0](service/ecr/CHANGELOG.md#v1110-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.13.0](service/ecs/CHANGELOG.md#v1130-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.15.0](service/eks/CHANGELOG.md#v1150-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.15.0](service/elasticache/CHANGELOG.md#v1150-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.13.0](service/elasticloadbalancingv2/CHANGELOG.md#v1130-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/elasticsearchservice`: [v1.10.0](service/elasticsearchservice/CHANGELOG.md#v1100-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/evidently`: [v1.0.0](service/evidently/CHANGELOG.md#v100-2021-11-30)
+  * **Release**: New AWS service client module
+* `github.com/aws/aws-sdk-go-v2/service/finspacedata`: [v1.5.0](service/finspacedata/CHANGELOG.md#v150-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.14.0](service/imagebuilder/CHANGELOG.md#v1140-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.0.0](service/inspector2/CHANGELOG.md#v100-2021-11-30)
+  * **Release**: New AWS service client module
+* `github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery`: [v1.3.2](service/internal/endpoint-discovery/CHANGELOG.md#v132-2021-11-30)
+  * **Bug Fix**: Fixed a race condition that caused concurrent calls relying on endpoint discovery to share the same `url.URL` reference in their operation's http.Request.
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.17.0](service/iot/CHANGELOG.md#v1170-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor`: [v1.9.0](service/iotdeviceadvisor/CHANGELOG.md#v190-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/iotsitewise`: [v1.15.0](service/iotsitewise/CHANGELOG.md#v1150-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/iotwireless`: [v1.13.0](service/iotwireless/CHANGELOG.md#v1130-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.14.0](service/lambda/CHANGELOG.md#v1140-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/macie2`: [v1.14.0](service/macie2/CHANGELOG.md#v1140-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/mgn`: [v1.8.0](service/mgn/CHANGELOG.md#v180-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces`: [v1.0.0](service/migrationhubrefactorspaces/CHANGELOG.md#v100-2021-11-30)
+  * **Release**: New AWS service client module
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.4.0](service/opensearch/CHANGELOG.md#v140-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.11.0](service/outposts/CHANGELOG.md#v1110-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/personalize`: [v1.12.0](service/personalize/CHANGELOG.md#v1120-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/personalizeruntime`: [v1.7.0](service/personalizeruntime/CHANGELOG.md#v170-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/pinpoint`: [v1.12.0](service/pinpoint/CHANGELOG.md#v1120-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/proton`: [v1.7.0](service/proton/CHANGELOG.md#v170-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.15.0](service/quicksight/CHANGELOG.md#v1150-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/rbin`: [v1.0.0](service/rbin/CHANGELOG.md#v100-2021-11-30)
+  * **Release**: New AWS service client module
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.13.0](service/rds/CHANGELOG.md#v1130-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.16.0](service/redshift/CHANGELOG.md#v1160-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/rum`: [v1.0.0](service/rum/CHANGELOG.md#v100-2021-11-30)
+  * **Release**: New AWS service client module
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.20.0](service/s3/CHANGELOG.md#v1200-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.15.0](service/s3control/CHANGELOG.md#v1150-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/sqs`: [v1.13.0](service/sqs/CHANGELOG.md#v1130-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.17.0](service/ssm/CHANGELOG.md#v1170-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/sts`: [v1.11.0](service/sts/CHANGELOG.md#v1110-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/textract`: [v1.10.0](service/textract/CHANGELOG.md#v1100-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/timestreamquery`: [v1.8.0](service/timestreamquery/CHANGELOG.md#v180-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/timestreamwrite`: [v1.8.0](service/timestreamwrite/CHANGELOG.md#v180-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/transcribestreaming`: [v1.1.0](service/transcribestreaming/CHANGELOG.md#v110-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/translate`: [v1.8.0](service/translate/CHANGELOG.md#v180-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/wellarchitected`: [v1.9.0](service/wellarchitected/CHANGELOG.md#v190-2021-11-30)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.11.0](service/workspaces/CHANGELOG.md#v1110-2021-11-30)
+  * **Feature**: API client updated
+
 # Release (2021-11-19)
 
 ## General Highlights
