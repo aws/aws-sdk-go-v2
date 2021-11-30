@@ -31,18 +31,6 @@
     "shapes": {
         "com.amazonaws.finspacedata#AWSHabaneroPublicAPI": {
             "type": "service",
-            "version": "2020-07-13",
-            "operations": [
-                {
-                    "target": "com.amazonaws.finspacedata#CreateChangeset"
-                },
-                {
-                    "target": "com.amazonaws.finspacedata#GetProgrammaticAccessCredentials"
-                },
-                {
-                    "target": "com.amazonaws.finspacedata#GetWorkingLocation"
-                }
-            ],
             "traits": {
                 "aws.api#service": {
                     "sdkId": "finspace data",
@@ -55,15 +43,60 @@
                     "name": "finspace-api"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p> The FinSpace APIs let you take actions inside the FinSpace environment.  </p>",
+                "smithy.api#documentation": "<p> The FinSpace APIs let you take actions inside the FinSpace.</p>",
                 "smithy.api#title": "FinSpace Public API"
-            }
+            },
+            "version": "2020-07-13",
+            "operations": [
+                {
+                    "target": "com.amazonaws.finspacedata#CreateChangeset"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#CreateDataset"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#CreateDataView"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#DeleteDataset"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#GetChangeset"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#GetDataset"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#GetDataView"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#GetProgrammaticAccessCredentials"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#GetWorkingLocation"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ListChangesets"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ListDatasets"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ListDataViews"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#UpdateChangeset"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#UpdateDataset"
+                }
+            ]
         },
         "com.amazonaws.finspacedata#AccessDeniedException": {
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "com.amazonaws.finspacedata#errorMessage"
+                    "target": "com.amazonaws.finspacedata#ErrorMessage2"
                 }
             },
             "traits": {
@@ -72,9 +105,26 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.finspacedata#AliasString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^alias\\/\\S+$"
+            }
+        },
+        "com.amazonaws.finspacedata#Boolean": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#documentation": "Common Boolean data type"
+            }
+        },
         "com.amazonaws.finspacedata#ChangeType": {
             "type": "string",
             "traits": {
+                "smithy.api#documentation": "Indicates how the given change will be applied to the dataset.",
                 "smithy.api#enum": [
                     {
                         "value": "REPLACE",
@@ -91,123 +141,276 @@
                 ]
             }
         },
-        "com.amazonaws.finspacedata#ChangesetInfo": {
+        "com.amazonaws.finspacedata#ChangesetArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Arn for a given Changeset"
+            }
+        },
+        "com.amazonaws.finspacedata#ChangesetErrorInfo": {
             "type": "structure",
             "members": {
-                "id": {
-                    "target": "com.amazonaws.finspacedata#IdType",
+                "errorMessage": {
+                    "target": "com.amazonaws.finspacedata#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Unique identifier for a changeset.</p>"
+                        "smithy.api#documentation": "<p>The text of the error message.</p>"
+                    }
+                },
+                "errorCategory": {
+                    "target": "com.amazonaws.finspacedata#ErrorCategory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category of the error.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>VALIDATION</code> -The inputs to this request are invalid.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SERVICE_QUOTA_EXCEEDED</code> - Service quotas have been exceeded. Please\n          contact AWS support to increase quotas.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACCESS_DENIED</code> - Missing required permission to perform this\n          request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESOURCE_NOT_FOUND</code> - One or more inputs to this request were not\n          found.</p>\n            </li>\n            <li>\n               <p>\n                  <code>THROTTLING</code> - The system temporarily lacks sufficient resources to process\n          the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INTERNAL_SERVICE_EXCEPTION</code> - An internal service error has\n          occurred.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCELLED</code> - Cancelled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>USER_RECOVERABLE</code> - A user recoverable error has occurred.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The structure with error messages.</p>"
+            }
+        },
+        "com.amazonaws.finspacedata#ChangesetId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "ID used to identify a Changeset",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 26
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#ChangesetList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.finspacedata#ChangesetSummary"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of Changeset Summaries"
+            }
+        },
+        "com.amazonaws.finspacedata#ChangesetSummary": {
+            "type": "structure",
+            "members": {
+                "changesetId": {
+                    "target": "com.amazonaws.finspacedata#ChangesetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for a Changeset.</p>"
                     }
                 },
                 "changesetArn": {
-                    "target": "com.amazonaws.finspacedata#arn",
+                    "target": "com.amazonaws.finspacedata#ChangesetArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN identifier of the changeset.</p>"
+                        "smithy.api#documentation": "<p>The ARN identifier of the Changeset.</p>"
                     }
                 },
                 "datasetId": {
-                    "target": "com.amazonaws.finspacedata#IdType",
+                    "target": "com.amazonaws.finspacedata#DatasetId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the FinSpace dataset in which the changeset is created.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier for the FinSpace Dataset in which the Changeset is created.</p>"
                     }
                 },
                 "changeType": {
                     "target": "com.amazonaws.finspacedata#ChangeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Change type indicates how a changeset is applied to a dataset.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>REPLACE</code> - Changeset is considered as a replacement to all prior loaded\n          changesets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>APPEND</code> - Changeset is considered as an addition to the end of all prior\n          loaded changesets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MODIFY</code> - Changeset is considered as a replacement to a specific prior\n          ingested changeset.</p>\n            </li>\n         </ul>"
-                    }
-                },
-                "sourceType": {
-                    "target": "com.amazonaws.finspacedata#SourceType",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Type of the data source from which the files to create the changeset are sourced.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>S3</code> - Amazon S3.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Type that indicates how a Changeset is applied to a Dataset.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>REPLACE</code> - Changeset is considered as a replacement to all prior loaded\n          Changesets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>APPEND</code> - Changeset is considered as an addition to the end of all prior\n          loaded Changesets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MODIFY</code> - Changeset is considered as a replacement to a specific prior\n          ingested Changeset.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "sourceParams": {
-                    "target": "com.amazonaws.finspacedata#stringMap",
+                    "target": "com.amazonaws.finspacedata#SourceParams",
                     "traits": {
-                        "smithy.api#documentation": "<p>Source path from which the files to create the changeset are sourced.</p>"
-                    }
-                },
-                "formatType": {
-                    "target": "com.amazonaws.finspacedata#FormatType",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Format type of the input files loaded into the changeset.</p>"
+                        "smithy.api#documentation": "<p>Options that define the location of the data being ingested.</p>"
                     }
                 },
                 "formatParams": {
-                    "target": "com.amazonaws.finspacedata#stringMap",
+                    "target": "com.amazonaws.finspacedata#FormatParams",
                     "traits": {
-                        "smithy.api#documentation": "<p>Structure of the source file(s).</p>"
+                        "smithy.api#documentation": "<p>Options that define the structure of the source file(s).</p>"
                     }
                 },
-                "createTimestamp": {
-                    "target": "com.amazonaws.finspacedata#Timestamp",
+                "createTime": {
+                    "target": "com.amazonaws.finspacedata#TimestampEpoch",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp at which the changeset was created in FinSpace.</p>"
+                        "smithy.api#documentation": "<p>The timestamp at which the Changeset was created in FinSpace. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
                     }
                 },
                 "status": {
-                    "target": "com.amazonaws.finspacedata#ChangesetStatus",
+                    "target": "com.amazonaws.finspacedata#IngestionStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of changeset creation operation.</p>"
+                        "smithy.api#documentation": "<p>Status of the Changeset ingestion.</p>\n         <ul>\n            <li> \n               <p>\n                  <code>PENDING</code> - Changeset is pending creation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - Changeset creation has failed.</p>\n            </li>\n            <li> \n               <p>\n                  <code>SUCCESS</code> - Changeset creation has succeeded.</p>\n            </li>\n            <li> \n               <p>\n                  <code>RUNNING</code> - Changeset creation is running.</p>\n            </li>\n            <li> \n               <p>\n                  <code>STOP_REQUESTED</code> - User requested Changeset creation to stop.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "errorInfo": {
-                    "target": "com.amazonaws.finspacedata#ErrorInfo",
+                    "target": "com.amazonaws.finspacedata#ChangesetErrorInfo",
                     "traits": {
                         "smithy.api#documentation": "<p>The structure with error messages.</p>"
                     }
                 },
-                "changesetLabels": {
-                    "target": "com.amazonaws.finspacedata#stringMap",
+                "activeUntilTimestamp": {
+                    "target": "com.amazonaws.finspacedata#TimestampEpoch",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags associated with the changeset.</p>"
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>Time until which the Changeset is active. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
                     }
                 },
                 "updatesChangesetId": {
-                    "target": "com.amazonaws.finspacedata#stringValue",
+                    "target": "com.amazonaws.finspacedata#ChangesetId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Unique identifier of the changeset that is updated.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier of the Changeset that is updated.</p>"
                     }
                 },
                 "updatedByChangesetId": {
-                    "target": "com.amazonaws.finspacedata#stringValue",
+                    "target": "com.amazonaws.finspacedata#ChangesetId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Unique identifier of the changeset that is updated a changeset.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier of the updated Changeset.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A changeset is unit of data in a dataset.</p>"
+                "smithy.api#documentation": "<p>A Changeset is unit of data in a Dataset.</p>"
             }
         },
-        "com.amazonaws.finspacedata#ChangesetStatus": {
+        "com.amazonaws.finspacedata#ClientToken": {
             "type": "string",
             "traits": {
+                "smithy.api#documentation": "Idempotence Token for API operations",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "\\S"
+            }
+        },
+        "com.amazonaws.finspacedata#ColumnDataType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Data type of a column.",
                 "smithy.api#enum": [
                     {
-                        "value": "PENDING",
-                        "name": "PENDING"
+                        "value": "STRING",
+                        "name": "STRING"
                     },
                     {
-                        "value": "FAILED",
-                        "name": "FAILED"
+                        "value": "CHAR",
+                        "name": "CHAR"
                     },
                     {
-                        "value": "SUCCESS",
-                        "name": "SUCCESS"
+                        "value": "INTEGER",
+                        "name": "INTEGER"
                     },
                     {
-                        "value": "RUNNING",
-                        "name": "RUNNING"
+                        "value": "TINYINT",
+                        "name": "TINYINT"
                     },
                     {
-                        "value": "STOP_REQUESTED",
-                        "name": "STOP_REQUESTED"
+                        "value": "SMALLINT",
+                        "name": "SMALLINT"
+                    },
+                    {
+                        "value": "BIGINT",
+                        "name": "BIGINT"
+                    },
+                    {
+                        "value": "FLOAT",
+                        "name": "FLOAT"
+                    },
+                    {
+                        "value": "DOUBLE",
+                        "name": "DOUBLE"
+                    },
+                    {
+                        "value": "DATE",
+                        "name": "DATE"
+                    },
+                    {
+                        "value": "DATETIME",
+                        "name": "DATETIME"
+                    },
+                    {
+                        "value": "BOOLEAN",
+                        "name": "BOOLEAN"
+                    },
+                    {
+                        "value": "BINARY",
+                        "name": "BINARY"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.finspacedata#ColumnDefinition": {
+            "type": "structure",
+            "members": {
+                "dataType": {
+                    "target": "com.amazonaws.finspacedata#ColumnDataType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Data type of a column.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>STRING</code> - A String data type.</p>\n               <p>\n                  <code>CHAR</code> - A char data type.</p>\n               <p>\n                  <code>INTEGER</code> - An integer data type.</p>\n               <p>\n                  <code>TINYINT</code> - A tinyint data type.</p>\n               <p>\n                  <code>SMALLINT</code> - A smallint data type.</p>\n               <p>\n                  <code>BIGINT</code> - A bigint data type.</p>\n               <p>\n                  <code>FLOAT</code> - A float data type.</p>\n               <p>\n                  <code>DOUBLE</code> - A double data type.</p>\n               <p>\n                  <code>DATE</code> - A date data type.</p>\n               <p>\n                  <code>DATETIME</code> - A datetime data type.</p>\n               <p>\n                  <code>BOOLEAN</code> - A boolean data type.</p>\n               <p>\n                  <code>BINARY</code> - A binary data type.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "columnName": {
+                    "target": "com.amazonaws.finspacedata#ColumnName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name for a column.</p>"
+                    }
+                },
+                "columnDescription": {
+                    "target": "com.amazonaws.finspacedata#ColumnDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description for a column.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The definition of a column in a tabular Dataset.</p>"
+            }
+        },
+        "com.amazonaws.finspacedata#ColumnDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Column Description",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^[\\s\\S]*\\S[\\s\\S]*$"
+            }
+        },
+        "com.amazonaws.finspacedata#ColumnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.finspacedata#ColumnDefinition"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of Column Definitions"
+            }
+        },
+        "com.amazonaws.finspacedata#ColumnName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Column Name",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 126
+                },
+                "smithy.api#pattern": "\\S"
+            }
+        },
+        "com.amazonaws.finspacedata#ColumnNameList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.finspacedata#ColumnName"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of Column Names"
+            }
+        },
+        "com.amazonaws.finspacedata#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.finspacedata#ErrorMessage2"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request conflicts with an existing resource.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
             }
         },
         "com.amazonaws.finspacedata#CreateChangeset": {
@@ -223,7 +426,13 @@
                     "target": "com.amazonaws.finspacedata#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.finspacedata#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.finspacedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#LimitExceededException"
                 },
                 {
                     "target": "com.amazonaws.finspacedata#ResourceNotFoundException"
@@ -236,10 +445,10 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new changeset in a FinSpace dataset.</p>",
+                "smithy.api#documentation": "<p>Creates a new Changeset in a FinSpace Dataset.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/datasets/{datasetId}/changesets",
+                    "uri": "/datasets/{datasetId}/changesetsv2",
                     "code": 200
                 }
             }
@@ -247,10 +456,17 @@
         "com.amazonaws.finspacedata#CreateChangesetRequest": {
             "type": "structure",
             "members": {
-                "datasetId": {
-                    "target": "com.amazonaws.finspacedata#IdType",
+                "clientToken": {
+                    "target": "com.amazonaws.finspacedata#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the FinSpace dataset in which the changeset will be\n      created.</p>",
+                        "smithy.api#documentation": "<p>A token used to ensure idempotency.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "datasetId": {
+                    "target": "com.amazonaws.finspacedata#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the FinSpace Dataset where the Changeset will be created.\n    </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -258,60 +474,282 @@
                 "changeType": {
                     "target": "com.amazonaws.finspacedata#ChangeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Option to indicate how a changeset will be applied to a dataset.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>REPLACE</code> - Changeset will be considered as a replacement to all prior\n          loaded changesets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>APPEND</code> - Changeset will be considered as an addition to the end of all\n          prior loaded changesets.</p>\n            </li>\n         </ul>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "sourceType": {
-                    "target": "com.amazonaws.finspacedata#SourceType",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Type of the data source from which the files to create the changeset will be\n      sourced.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>S3</code> - Amazon S3.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Option to indicate how a Changeset will be applied to a Dataset.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>REPLACE</code> - Changeset will be considered as a replacement to all prior\n          loaded Changesets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>APPEND</code> - Changeset will be considered as an addition to the end of all\n          prior loaded Changesets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MODIFY</code> - Changeset is considered as a replacement to a specific prior ingested Changeset.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "sourceParams": {
-                    "target": "com.amazonaws.finspacedata#stringMap",
+                    "target": "com.amazonaws.finspacedata#SourceParams",
                     "traits": {
-                        "smithy.api#documentation": "<p>Source path from which the files to create the changeset will be sourced.</p>",
+                        "smithy.api#documentation": "<p>Options that define the location of the data being ingested.</p>",
                         "smithy.api#required": {}
                     }
                 },
-                "formatType": {
-                    "target": "com.amazonaws.finspacedata#FormatType",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Format type of the input files being loaded into the changeset.</p>"
-                    }
-                },
                 "formatParams": {
-                    "target": "com.amazonaws.finspacedata#stringMap",
+                    "target": "com.amazonaws.finspacedata#FormatParams",
                     "traits": {
-                        "smithy.api#documentation": "<p>Options that define the structure of the source file(s).</p>"
-                    }
-                },
-                "tags": {
-                    "target": "com.amazonaws.finspacedata#stringMap",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Metadata tags to apply to this changeset.</p>"
+                        "smithy.api#documentation": "<p>Options that define the structure of the source file(s) including the format type (<code>formatType</code>), header row (<code>withHeader</code>), data separation character (<code>separator</code>) and the type of compression (<code>compression</code>).\n    </p>\n         <p>\n            <code>formatType</code> is a required attribute and can have the following values:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>PARQUET</code> - Parquet source file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CSV</code> - CSV source file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>JSON</code> - JSON source file format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>XML</code> - XML source file format.</p>\n            </li>\n         </ul>\n    \n         <p>\n      \n      For example, you could specify the following for <code>formatParams</code>:\n     \n    <code>\n          \"formatParams\": \n        {\n         \"formatType\": \"CSV\",\n         \"withHeader\": \"true\",\n         \"separator\": \",\",\n         \"compression\":\"None\"\n         } \n    </code> \n         </p>",
+                        "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "The request for a CreateChangeset operation."
             }
         },
         "com.amazonaws.finspacedata#CreateChangesetResponse": {
             "type": "structure",
             "members": {
-                "changeset": {
-                    "target": "com.amazonaws.finspacedata#ChangesetInfo",
+                "datasetId": {
+                    "target": "com.amazonaws.finspacedata#DatasetId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns the changeset details.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier for the FinSpace Dataset where the Changeset is created.</p>"
+                    }
+                },
+                "changesetId": {
+                    "target": "com.amazonaws.finspacedata#ChangesetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Changeset that is created.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "The response from a CreateChangeset operation."
+            }
+        },
+        "com.amazonaws.finspacedata#CreateDataView": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspacedata#CreateDataViewRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspacedata#CreateDataViewResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspacedata#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a Dataview for a Dataset.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/datasets/{datasetId}/dataviewsv2",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#CreateDataViewRequest": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.finspacedata#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token used to ensure idempotency.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "datasetId": {
+                    "target": "com.amazonaws.finspacedata#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique Dataset identifier that is used to create a Dataview.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "autoUpdate": {
+                    "target": "com.amazonaws.finspacedata#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Flag to indicate Dataview should be updated automatically.</p>"
+                    }
+                },
+                "sortColumns": {
+                    "target": "com.amazonaws.finspacedata#SortColumnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Columns to be used for sorting the data.</p>"
+                    }
+                },
+                "partitionColumns": {
+                    "target": "com.amazonaws.finspacedata#PartitionColumnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Ordered set of column names used to partition data.</p>"
+                    }
+                },
+                "asOfTimestamp": {
+                    "target": "com.amazonaws.finspacedata#TimestampEpoch",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>Beginning time to use for the Dataview. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                    }
+                },
+                "destinationTypeParams": {
+                    "target": "com.amazonaws.finspacedata#DataViewDestinationTypeParams",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Options that define the destination type for the Dataview.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Request for creating a data view."
+            }
+        },
+        "com.amazonaws.finspacedata#CreateDataViewResponse": {
+            "type": "structure",
+            "members": {
+                "datasetId": {
+                    "target": "com.amazonaws.finspacedata#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Dataset used for the Dataview.</p>"
+                    }
+                },
+                "dataViewId": {
+                    "target": "com.amazonaws.finspacedata#DataViewId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the created Dataview.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Response for creating a data view."
+            }
+        },
+        "com.amazonaws.finspacedata#CreateDataset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspacedata#CreateDatasetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspacedata#CreateDatasetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspacedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new FinSpace Dataset.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/datasetsv2",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#CreateDatasetRequest": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.finspacedata#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token used to ensure idempotency.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "datasetTitle": {
+                    "target": "com.amazonaws.finspacedata#DatasetTitle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Display title for a FinSpace Dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "kind": {
+                    "target": "com.amazonaws.finspacedata#DatasetKind",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format in which Dataset data is structured.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TABULAR</code> - Data is structured in a tabular format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NON_TABULAR</code> - Data is structured in a non-tabular format.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetDescription": {
+                    "target": "com.amazonaws.finspacedata#DatasetDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description of a Dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ownerInfo": {
+                    "target": "com.amazonaws.finspacedata#DatasetOwnerInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contact information for a Dataset owner.</p>"
+                    }
+                },
+                "permissionGroupParams": {
+                    "target": "com.amazonaws.finspacedata#PermissionGroupParams",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Permission group parameters for Dataset permissions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "alias": {
+                    "target": "com.amazonaws.finspacedata#AliasString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique resource identifier for a Dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "schemaDefinition": {
+                    "target": "com.amazonaws.finspacedata#SchemaUnion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Definition for a schema on a tabular Dataset.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The request for a CreateDataset operation"
+            }
+        },
+        "com.amazonaws.finspacedata#CreateDatasetResponse": {
+            "type": "structure",
+            "members": {
+                "datasetId": {
+                    "target": "com.amazonaws.finspacedata#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the created Dataset.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The response from a CreateDataset operation"
             }
         },
         "com.amazonaws.finspacedata#Credentials": {
             "type": "structure",
             "members": {
                 "accessKeyId": {
-                    "target": "com.amazonaws.finspacedata#stringValueLength1to255",
+                    "target": "com.amazonaws.finspacedata#StringValueLength1to2552",
                     "traits": {
                         "smithy.api#documentation": "<p>The access key identifier.</p>"
                     }
@@ -330,53 +768,41 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Set short term API credentials.</p>"
+                "smithy.api#documentation": "<p>Short term API credentials.</p>"
             }
         },
-        "com.amazonaws.finspacedata#ErrorCategory": {
+        "com.amazonaws.finspacedata#DataViewArn": {
             "type": "string",
             "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "The_inputs_to_this_request_are_invalid",
-                        "name": "VALIDATION"
-                    },
-                    {
-                        "value": "Service_limits_have_been_exceeded",
-                        "name": "SERVICE_QUOTA_EXCEEDED"
-                    },
-                    {
-                        "value": "Missing_required_permission_to_perform_this_request",
-                        "name": "ACCESS_DENIED"
-                    },
-                    {
-                        "value": "One_or_more_inputs_to_this_request_were_not_found",
-                        "name": "RESOURCE_NOT_FOUND"
-                    },
-                    {
-                        "value": "The_system_temporarily_lacks_sufficient_resources_to_process_the_request",
-                        "name": "THROTTLING"
-                    },
-                    {
-                        "value": "An_internal_error_has_occurred",
-                        "name": "INTERNAL_SERVICE_EXCEPTION"
-                    },
-                    {
-                        "value": "Cancelled",
-                        "name": "CANCELLED"
-                    },
-                    {
-                        "value": "A_user_recoverable_error_has_occurred",
-                        "name": "USER_RECOVERABLE"
-                    }
-                ]
+                "smithy.api#documentation": "Arn of a DataView"
             }
         },
-        "com.amazonaws.finspacedata#ErrorInfo": {
+        "com.amazonaws.finspacedata#DataViewDestinationType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "DataView Destination Type"
+            }
+        },
+        "com.amazonaws.finspacedata#DataViewDestinationTypeParams": {
+            "type": "structure",
+            "members": {
+                "destinationType": {
+                    "target": "com.amazonaws.finspacedata#DataViewDestinationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Destination type for a Dataview.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>GLUE_TABLE</code> - Glue table destination type.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Structure for the Dataview destination type parameters.</p>"
+            }
+        },
+        "com.amazonaws.finspacedata#DataViewErrorInfo": {
             "type": "structure",
             "members": {
                 "errorMessage": {
-                    "target": "com.amazonaws.finspacedata#stringValueMaxLength1000",
+                    "target": "com.amazonaws.finspacedata#ErrorMessage",
                     "traits": {
                         "smithy.api#documentation": "<p>The text of the error message.</p>"
                     }
@@ -384,35 +810,889 @@
                 "errorCategory": {
                     "target": "com.amazonaws.finspacedata#ErrorCategory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The category of the error.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>VALIDATION</code> -The inputs to this request are invalid.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SERVICE_QUOTA_EXCEEDED</code> - Service quotas have been exceeded. Please\n          contact AWS support to increase quotas.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACCESS_DENIED</code> - Missing required permission to perform this\n          request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESOURCE_NOT_FOUND</code> - One or more inputs to this request were not\n          found.</p>\n            </li>\n            <li>\n               <p>\n                  <code>THROTTLING</code> - The system temporarily lacks sufficient resources to process\n          the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INTERNAL_SERVICE_EXCEPTION</code> - An internal service error has\n          occurred.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCELLED</code> - A user recoverable error has occurred.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The category of the error.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>VALIDATION</code> -The inputs to this request are invalid.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SERVICE_QUOTA_EXCEEDED</code> - Service quotas have been exceeded. Please\n          contact AWS support to increase quotas.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACCESS_DENIED</code> - Missing required permission to perform this\n          request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESOURCE_NOT_FOUND</code> - One or more inputs to this request were not\n          found.</p>\n            </li>\n            <li>\n               <p>\n                  <code>THROTTLING</code> - The system temporarily lacks sufficient resources to process\n          the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INTERNAL_SERVICE_EXCEPTION</code> - An internal service error has\n          occurred.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCELLED</code> - Cancelled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>USER_RECOVERABLE</code> - A user recoverable error has occurred.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Error message.</p>"
+                "smithy.api#documentation": "<p>The structure with error messages.</p>"
             }
         },
-        "com.amazonaws.finspacedata#FormatType": {
+        "com.amazonaws.finspacedata#DataViewId": {
             "type": "string",
             "traits": {
+                "smithy.api#documentation": "DataView ID",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 26
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#DataViewList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.finspacedata#DataViewSummary"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of Data Views"
+            }
+        },
+        "com.amazonaws.finspacedata#DataViewStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Status of a DataView",
                 "smithy.api#enum": [
                     {
-                        "value": "CSV",
-                        "name": "CSV"
+                        "value": "RUNNING",
+                        "name": "RUNNING"
                     },
                     {
-                        "value": "JSON",
-                        "name": "JSON"
+                        "value": "STARTING",
+                        "name": "STARTING"
                     },
                     {
-                        "value": "PARQUET",
-                        "name": "PARQUET"
+                        "value": "FAILED",
+                        "name": "FAILED"
                     },
                     {
-                        "value": "XML",
-                        "name": "XML"
+                        "value": "CANCELLED",
+                        "name": "CANCELLED"
+                    },
+                    {
+                        "value": "TIMEOUT",
+                        "name": "TIMEOUT"
+                    },
+                    {
+                        "value": "SUCCESS",
+                        "name": "SUCCESS"
+                    },
+                    {
+                        "value": "PENDING",
+                        "name": "PENDING"
+                    },
+                    {
+                        "value": "FAILED_CLEANUP_FAILED",
+                        "name": "FAILED_CLEANUP_FAILED"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.finspacedata#DataViewSummary": {
+            "type": "structure",
+            "members": {
+                "dataViewId": {
+                    "target": "com.amazonaws.finspacedata#DataViewId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the Dataview.</p>"
+                    }
+                },
+                "dataViewArn": {
+                    "target": "com.amazonaws.finspacedata#DataViewArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN identifier of the Dataview.</p>"
+                    }
+                },
+                "datasetId": {
+                    "target": "com.amazonaws.finspacedata#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Th unique identifier for the Dataview Dataset.</p>"
+                    }
+                },
+                "asOfTimestamp": {
+                    "target": "com.amazonaws.finspacedata#TimestampEpoch",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>Time range to use for the Dataview. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                    }
+                },
+                "partitionColumns": {
+                    "target": "com.amazonaws.finspacedata#PartitionColumnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Ordered set of column names used to partition data.</p>"
+                    }
+                },
+                "sortColumns": {
+                    "target": "com.amazonaws.finspacedata#SortColumnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Columns to be used for sorting the data.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.finspacedata#DataViewStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of a Dataview creation.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>RUNNING</code> - Dataview creation is running.</p> \n            </li>\n            <li>\n               <p>\n                  <code>STARTING</code> - Dataview creation is starting.</p> \n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - Dataview creation has failed.</p> \n            </li>\n            <li>\n               <p>\n                  <code>CANCELLED</code> - Dataview creation has been cancelled.</p> \n            </li>\n            <li>\n               <p>\n                  <code>TIMEOUT</code> - Dataview creation has timed out.</p> \n            </li>\n            <li>\n               <p>\n                  <code>SUCCESS</code> - Dataview creation has succeeded.</p> \n            </li>\n            <li>\n               <p>\n                  <code>PENDING</code> - Dataview creation is pending.</p> \n            </li>\n            <li>\n               <p>\n                  <code>FAILED_CLEANUP_FAILED</code> - Dataview creation failed and resource cleanup failed.</p> \n            </li>\n         </ul>"
+                    }
+                },
+                "errorInfo": {
+                    "target": "com.amazonaws.finspacedata#DataViewErrorInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The structure with error messages.</p>"
+                    }
+                },
+                "destinationTypeProperties": {
+                    "target": "com.amazonaws.finspacedata#DataViewDestinationTypeParams",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the Dataview destination.</p>"
+                    }
+                },
+                "autoUpdate": {
+                    "target": "com.amazonaws.finspacedata#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The flag to indicate Dataview should be updated automatically.</p>"
+                    }
+                },
+                "createTime": {
+                    "target": "com.amazonaws.finspacedata#TimestampEpoch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the Dataview was created in FinSpace. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                    }
+                },
+                "lastModifiedTime": {
+                    "target": "com.amazonaws.finspacedata#TimestampEpoch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time that a Dataview was modified. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Structure for the summary of a Dataview.</p>"
+            }
+        },
+        "com.amazonaws.finspacedata#Dataset": {
+            "type": "structure",
+            "members": {
+                "datasetId": {
+                    "target": "com.amazonaws.finspacedata#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identifier for a Dataset.</p>"
+                    }
+                },
+                "datasetArn": {
+                    "target": "com.amazonaws.finspacedata#DatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN identifier of the Dataset.</p>"
+                    }
+                },
+                "datasetTitle": {
+                    "target": "com.amazonaws.finspacedata#DatasetTitle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Display title for a Dataset.</p>"
+                    }
+                },
+                "kind": {
+                    "target": "com.amazonaws.finspacedata#DatasetKind",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format in which Dataset data is structured.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TABULAR</code> - Data is structured in a tabular format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NON_TABULAR</code> - Data is structured in a non-tabular format.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "datasetDescription": {
+                    "target": "com.amazonaws.finspacedata#DatasetDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description for a Dataset.</p>"
+                    }
+                },
+                "ownerInfo": {
+                    "target": "com.amazonaws.finspacedata#DatasetOwnerInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contact information for a Dataset owner.</p>"
+                    }
+                },
+                "createTime": {
+                    "target": "com.amazonaws.finspacedata#TimestampEpoch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the Dataset was created in FinSpace. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                    }
+                },
+                "lastModifiedTime": {
+                    "target": "com.amazonaws.finspacedata#TimestampEpoch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time that the Dataset was modified. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                    }
+                },
+                "schemaDefinition": {
+                    "target": "com.amazonaws.finspacedata#SchemaUnion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Definition for a schema on a tabular Dataset.</p>"
+                    }
+                },
+                "alias": {
+                    "target": "com.amazonaws.finspacedata#AliasString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique resource identifier for a Dataset.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The structure for a Dataset.</p>"
+            }
+        },
+        "com.amazonaws.finspacedata#DatasetArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Arn of a Dataset"
+            }
+        },
+        "com.amazonaws.finspacedata#DatasetDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Description of a dataset",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[\\s\\S]*\\S[\\s\\S]*$"
+            }
+        },
+        "com.amazonaws.finspacedata#DatasetId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "ID for a given Dataset",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 26
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#DatasetKind": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Dataset Kind",
+                "smithy.api#enum": [
+                    {
+                        "value": "TABULAR",
+                        "name": "TABULAR"
+                    },
+                    {
+                        "value": "NON_TABULAR",
+                        "name": "NON_TABULAR"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.finspacedata#DatasetList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.finspacedata#Dataset"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of Dataset structures"
+            }
+        },
+        "com.amazonaws.finspacedata#DatasetOwnerInfo": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.finspacedata#OwnerName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the Dataset owner.</p>"
+                    }
+                },
+                "phoneNumber": {
+                    "target": "com.amazonaws.finspacedata#PhoneNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Phone number for the Dataset owner.</p>"
+                    }
+                },
+                "email": {
+                    "target": "com.amazonaws.finspacedata#Email",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Email address for the Dataset owner.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure for Dataset owner info.</p>"
+            }
+        },
+        "com.amazonaws.finspacedata#DatasetStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Status of the dataset process returned from scheduler service.",
+                "smithy.api#enum": [
+                    {
+                        "value": "PENDING",
+                        "name": "PENDING"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    },
+                    {
+                        "value": "SUCCESS",
+                        "name": "SUCCESS"
+                    },
+                    {
+                        "value": "RUNNING",
+                        "name": "RUNNING"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.finspacedata#DatasetTitle": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Title for a given Dataset",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "\\S"
+            }
+        },
+        "com.amazonaws.finspacedata#DeleteDataset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspacedata#DeleteDatasetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspacedata#DeleteDatasetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspacedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a FinSpace Dataset.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/datasetsv2/{datasetId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#DeleteDatasetRequest": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.finspacedata#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token used to ensure idempotency.</p>",
+                        "smithy.api#httpQuery": "clientToken",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "datasetId": {
+                    "target": "com.amazonaws.finspacedata#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Dataset to be deleted.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The request for a DeleteDataset operation."
+            }
+        },
+        "com.amazonaws.finspacedata#DeleteDatasetResponse": {
+            "type": "structure",
+            "members": {
+                "datasetId": {
+                    "target": "com.amazonaws.finspacedata#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the deleted Dataset.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The response from an DeleteDataset operation"
+            }
+        },
+        "com.amazonaws.finspacedata#Email": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Email of Dataset Owner",
+                "smithy.api#length": {
+                    "min": 4,
+                    "max": 320
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}$"
+            }
+        },
+        "com.amazonaws.finspacedata#ErrorCategory": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Changeset Error Category",
+                "smithy.api#enum": [
+                    {
+                        "value": "VALIDATION",
+                        "name": "VALIDATION"
+                    },
+                    {
+                        "value": "SERVICE_QUOTA_EXCEEDED",
+                        "name": "SERVICE_QUOTA_EXCEEDED"
+                    },
+                    {
+                        "value": "ACCESS_DENIED",
+                        "name": "ACCESS_DENIED"
+                    },
+                    {
+                        "value": "RESOURCE_NOT_FOUND",
+                        "name": "RESOURCE_NOT_FOUND"
+                    },
+                    {
+                        "value": "THROTTLING",
+                        "name": "THROTTLING"
+                    },
+                    {
+                        "value": "INTERNAL_SERVICE_EXCEPTION",
+                        "name": "INTERNAL_SERVICE_EXCEPTION"
+                    },
+                    {
+                        "value": "CANCELLED",
+                        "name": "CANCELLED"
+                    },
+                    {
+                        "value": "USER_RECOVERABLE",
+                        "name": "USER_RECOVERABLE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.finspacedata#ErrorMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Changeset Error Message",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#ErrorMessage2": {
+            "type": "string"
+        },
+        "com.amazonaws.finspacedata#FormatParams": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.finspacedata#StringMapKey"
+            },
+            "value": {
+                "target": "com.amazonaws.finspacedata#StringMapValue"
+            },
+            "traits": {
+                "smithy.api#documentation": "Format Parameters of a Changeset"
+            }
+        },
+        "com.amazonaws.finspacedata#GetChangeset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspacedata#GetChangesetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspacedata#GetChangesetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspacedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get information about a Changeset.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/datasets/{datasetId}/changesetsv2/{changesetId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#GetChangesetRequest": {
+            "type": "structure",
+            "members": {
+                "datasetId": {
+                    "target": "com.amazonaws.finspacedata#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the FinSpace Dataset where the Changeset is created.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "changesetId": {
+                    "target": "com.amazonaws.finspacedata#ChangesetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Changeset for which to get data.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Request to describe a changeset."
+            }
+        },
+        "com.amazonaws.finspacedata#GetChangesetResponse": {
+            "type": "structure",
+            "members": {
+                "changesetId": {
+                    "target": "com.amazonaws.finspacedata#ChangesetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for a Changeset.</p>"
+                    }
+                },
+                "changesetArn": {
+                    "target": "com.amazonaws.finspacedata#ChangesetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN identifier of the Changeset.</p>"
+                    }
+                },
+                "datasetId": {
+                    "target": "com.amazonaws.finspacedata#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the FinSpace Dataset where the Changeset is created.</p>"
+                    }
+                },
+                "changeType": {
+                    "target": "com.amazonaws.finspacedata#ChangeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type that indicates how a Changeset is applied to a Dataset.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>REPLACE</code> - Changeset is considered as a replacement to all prior loaded Changesets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>APPEND</code> - Changeset is considered as an addition to the end of all prior loaded Changesets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MODIFY</code> - Changeset is considered as a replacement to a specific prior ingested Changeset.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "sourceParams": {
+                    "target": "com.amazonaws.finspacedata#SourceParams",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Options that define the location of the data being ingested.</p>"
+                    }
+                },
+                "formatParams": {
+                    "target": "com.amazonaws.finspacedata#FormatParams",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Structure of the source file(s).</p>"
+                    }
+                },
+                "createTime": {
+                    "target": "com.amazonaws.finspacedata#TimestampEpoch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the Changeset was created in FinSpace. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.finspacedata#IngestionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of Changeset creation operation.</p>"
+                    }
+                },
+                "errorInfo": {
+                    "target": "com.amazonaws.finspacedata#ChangesetErrorInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The structure with error messages.</p>"
+                    }
+                },
+                "activeUntilTimestamp": {
+                    "target": "com.amazonaws.finspacedata#TimestampEpoch",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>Time until which the Changeset is active. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                    }
+                },
+                "updatesChangesetId": {
+                    "target": "com.amazonaws.finspacedata#ChangesetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Changeset that is being updated.</p>"
+                    }
+                },
+                "updatedByChangesetId": {
+                    "target": "com.amazonaws.finspacedata#ChangesetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the updated Changeset.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The response from a describe changeset operation"
+            }
+        },
+        "com.amazonaws.finspacedata#GetDataView": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspacedata#GetDataViewRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspacedata#GetDataViewResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspacedata#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information about a Dataview.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/datasets/{datasetId}/dataviewsv2/{dataViewId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#GetDataViewRequest": {
+            "type": "structure",
+            "members": {
+                "dataViewId": {
+                    "target": "com.amazonaws.finspacedata#DataViewId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the Dataview.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetId": {
+                    "target": "com.amazonaws.finspacedata#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the Dataset used in the Dataview.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Request for retrieving a data view detail. Grouped / accessible within a dataset by its dataset id."
+            }
+        },
+        "com.amazonaws.finspacedata#GetDataViewResponse": {
+            "type": "structure",
+            "members": {
+                "autoUpdate": {
+                    "target": "com.amazonaws.finspacedata#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Flag to indicate Dataview should be updated automatically.</p>"
+                    }
+                },
+                "partitionColumns": {
+                    "target": "com.amazonaws.finspacedata#PartitionColumnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Ordered set of column names used to partition data.</p>"
+                    }
+                },
+                "datasetId": {
+                    "target": "com.amazonaws.finspacedata#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the Dataset used in the Dataview.</p>"
+                    }
+                },
+                "asOfTimestamp": {
+                    "target": "com.amazonaws.finspacedata#TimestampEpoch",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>Time range to use for the Dataview. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                    }
+                },
+                "errorInfo": {
+                    "target": "com.amazonaws.finspacedata#DataViewErrorInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about an error that occurred for the Dataview.</p>"
+                    }
+                },
+                "lastModifiedTime": {
+                    "target": "com.amazonaws.finspacedata#TimestampEpoch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time that a Dataview was modified. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                    }
+                },
+                "createTime": {
+                    "target": "com.amazonaws.finspacedata#TimestampEpoch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the Dataview was created in FinSpace. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                    }
+                },
+                "sortColumns": {
+                    "target": "com.amazonaws.finspacedata#SortColumnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Columns to be used for sorting the data.</p>"
+                    }
+                },
+                "dataViewId": {
+                    "target": "com.amazonaws.finspacedata#DataViewId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the Dataview.</p>"
+                    }
+                },
+                "dataViewArn": {
+                    "target": "com.amazonaws.finspacedata#DataViewArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN identifier of the Dataview.</p>"
+                    }
+                },
+                "destinationTypeParams": {
+                    "target": "com.amazonaws.finspacedata#DataViewDestinationTypeParams",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Options that define the destination type for the Dataview.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.finspacedata#DataViewStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of a Dataview creation.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>RUNNING</code> - Dataview creation is running.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STARTING</code> - Dataview creation is starting.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - Dataview creation has failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCELLED</code> - Dataview creation has been cancelled.</p>\n            </li>\n            <li> \n               <p>\n                  <code>TIMEOUT</code> - Dataview creation has timed out.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCESS</code> - Dataview creation has succeeded.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PENDING</code> - Dataview creation is pending.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED_CLEANUP_FAILED</code> - Dataview creation failed and resource cleanup failed.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Response from retrieving a dataview, which includes details on the target database and table name"
+            }
+        },
+        "com.amazonaws.finspacedata#GetDataset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspacedata#GetDatasetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspacedata#GetDatasetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspacedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about a Dataset.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/datasetsv2/{datasetId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#GetDatasetRequest": {
+            "type": "structure",
+            "members": {
+                "datasetId": {
+                    "target": "com.amazonaws.finspacedata#StringValueLength1to255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for a Dataset.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Request for the GetDataset operation."
+            }
+        },
+        "com.amazonaws.finspacedata#GetDatasetResponse": {
+            "type": "structure",
+            "members": {
+                "datasetId": {
+                    "target": "com.amazonaws.finspacedata#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for a Dataset.</p>"
+                    }
+                },
+                "datasetArn": {
+                    "target": "com.amazonaws.finspacedata#DatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN identifier of the Dataset.</p>"
+                    }
+                },
+                "datasetTitle": {
+                    "target": "com.amazonaws.finspacedata#DatasetTitle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Display title for a Dataset.</p>"
+                    }
+                },
+                "kind": {
+                    "target": "com.amazonaws.finspacedata#DatasetKind",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format in which Dataset data is structured.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TABULAR</code> - Data is structured in a tabular format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NON_TABULAR</code> - Data is structured in a non-tabular format.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "datasetDescription": {
+                    "target": "com.amazonaws.finspacedata#DatasetDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the Dataset.</p>"
+                    }
+                },
+                "createTime": {
+                    "target": "com.amazonaws.finspacedata#TimestampEpoch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the Dataset was created in FinSpace. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                    }
+                },
+                "lastModifiedTime": {
+                    "target": "com.amazonaws.finspacedata#TimestampEpoch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time that the Dataset was modified. The value is determined as Epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
+                    }
+                },
+                "schemaDefinition": {
+                    "target": "com.amazonaws.finspacedata#SchemaUnion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Definition for a schema on a tabular Dataset.</p>"
+                    }
+                },
+                "alias": {
+                    "target": "com.amazonaws.finspacedata#AliasString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique resource identifier for a Dataset.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.finspacedata#DatasetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status of the Dataset creation.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code> - Dataset is pending creation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - Dataset creation has failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCESS</code> - Dataset creation has succeeded.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RUNNING</code> - Dataset creation is running.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Response for the GetDataset operation"
             }
         },
         "com.amazonaws.finspacedata#GetProgrammaticAccessCredentials": {
@@ -432,10 +1712,13 @@
                 },
                 {
                     "target": "com.amazonaws.finspacedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ValidationException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Request programmatic credentials to use with Habanero SDK.</p>",
+                "smithy.api#documentation": "<p>Request programmatic credentials to use with FinSpace SDK.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/credentials/programmatic",
@@ -456,11 +1739,14 @@
                 "environmentId": {
                     "target": "com.amazonaws.finspacedata#IdType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The habanero environment identifier.</p>",
+                        "smithy.api#documentation": "<p>The FinSpace environment identifier.</p>",
                         "smithy.api#httpQuery": "environmentId",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "Request for GetProgrammaticAccessCredentials operation"
             }
         },
         "com.amazonaws.finspacedata#GetProgrammaticAccessCredentialsResponse": {
@@ -478,6 +1764,9 @@
                         "smithy.api#documentation": "<p>Returns the duration in which the credentials will remain valid.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "Response for GetProgrammaticAccessCredentials operation"
             }
         },
         "com.amazonaws.finspacedata#GetWorkingLocation": {
@@ -503,7 +1792,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>A temporary Amazon S3 location to copy your files from a source location to stage or use\n      as a scratch space in Habanero notebook.</p>",
+                "smithy.api#documentation": "<p>A temporary Amazon S3 location, where you can copy your files from a source location to stage or use\n      as a scratch space in FinSpace notebook.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/workingLocationV1",
@@ -517,7 +1806,7 @@
                 "locationType": {
                     "target": "com.amazonaws.finspacedata#locationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the type of the working location.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SAGEMAKER</code> - Use the Amazon S3 location as a temporary location to store data content when\n          working with FinSpace Notebooks that run on SageMaker studio.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INGESTION</code> - Use the Amazon S3 location as a staging location to copy your\n          data content and then use the location with the changeset creation operation.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specify the type of the working location.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SAGEMAKER</code> - Use the Amazon S3 location as a temporary location to store data content when\n          working with FinSpace Notebooks that run on SageMaker studio.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INGESTION</code> - Use the Amazon S3 location as a staging location to copy your\n          data content and then use the location with the Changeset creation operation.</p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -554,11 +1843,39 @@
                 }
             }
         },
+        "com.amazonaws.finspacedata#IngestionStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Status of the ingestion process returned from scheduler service.",
+                "smithy.api#enum": [
+                    {
+                        "value": "PENDING",
+                        "name": "PENDING"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    },
+                    {
+                        "value": "SUCCESS",
+                        "name": "SUCCESS"
+                    },
+                    {
+                        "value": "RUNNING",
+                        "name": "RUNNING"
+                    },
+                    {
+                        "value": "STOP_REQUESTED",
+                        "name": "STOP_REQUESTED"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.finspacedata#InternalServerException": {
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "com.amazonaws.finspacedata#errorMessage"
+                    "target": "com.amazonaws.finspacedata#ErrorMessage2"
                 }
             },
             "traits": {
@@ -567,17 +1884,426 @@
                 "smithy.api#httpError": 500
             }
         },
+        "com.amazonaws.finspacedata#LimitExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.finspacedata#ErrorMessage2"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A limit has exceeded.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.finspacedata#ListChangesets": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspacedata#ListChangesetsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspacedata#ListChangesetsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspacedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the FinSpace Changesets for a Dataset.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/datasets/{datasetId}/changesetsv2",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#ListChangesetsRequest": {
+            "type": "structure",
+            "members": {
+                "datasetId": {
+                    "target": "com.amazonaws.finspacedata#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the FinSpace Dataset to which the Changeset belongs.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.finspacedata#ResultLimit",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>The maximum number of results per page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.finspacedata#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token indicating where a results page should begin.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Request to ListChangesetsRequest. It exposes minimal query filters."
+            }
+        },
+        "com.amazonaws.finspacedata#ListChangesetsResponse": {
+            "type": "structure",
+            "members": {
+                "changesets": {
+                    "target": "com.amazonaws.finspacedata#ChangesetList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of Changesets found.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.finspacedata#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token indicating where a results page should begin.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Response to ListChangesetsResponse. This returns a list of dataset changesets that match the query criteria."
+            }
+        },
+        "com.amazonaws.finspacedata#ListDataViews": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspacedata#ListDataViewsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspacedata#ListDataViewsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspacedata#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all available Dataviews for a Dataset.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/datasets/{datasetId}/dataviewsv2",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#ListDataViewsRequest": {
+            "type": "structure",
+            "members": {
+                "datasetId": {
+                    "target": "com.amazonaws.finspacedata#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Dataset for which to retrieve Dataviews.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.finspacedata#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token indicating where a results page should begin.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.finspacedata#ResultLimit",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>The maximum number of results per page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Request for a list data views."
+            }
+        },
+        "com.amazonaws.finspacedata#ListDataViewsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.finspacedata#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token indicating where a results page should begin.</p>"
+                    }
+                },
+                "dataViews": {
+                    "target": "com.amazonaws.finspacedata#DataViewList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Dataviews.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#ListDatasets": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspacedata#ListDatasetsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspacedata#ListDatasetsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspacedata#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all of the active Datasets that a user has access to.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/datasetsv2",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#ListDatasetsRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.finspacedata#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token indicating where a results page should begin.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.finspacedata#ResultLimit",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>The maximum number of results per page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Request for the ListDatasets operation."
+            }
+        },
+        "com.amazonaws.finspacedata#ListDatasetsResponse": {
+            "type": "structure",
+            "members": {
+                "datasets": {
+                    "target": "com.amazonaws.finspacedata#DatasetList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of Datasets.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.finspacedata#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token indicating where a results page should begin.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Response for the ListDatasets operation"
+            }
+        },
+        "com.amazonaws.finspacedata#OwnerName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "1 - 250 character String",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 250
+                },
+                "smithy.api#pattern": "\\S"
+            }
+        },
+        "com.amazonaws.finspacedata#PaginationToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Pagination token for list operations"
+            }
+        },
+        "com.amazonaws.finspacedata#PartitionColumnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.finspacedata#StringValueLength1to255"
+            },
+            "traits": {
+                "smithy.api#documentation": "DataView Partition Column List"
+            }
+        },
+        "com.amazonaws.finspacedata#PermissionGroupId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Id of the associated PermissionGroup",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 26
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#PermissionGroupParams": {
+            "type": "structure",
+            "members": {
+                "permissionGroupId": {
+                    "target": "com.amazonaws.finspacedata#PermissionGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the PermissionGroup.</p>"
+                    }
+                },
+                "datasetPermissions": {
+                    "target": "com.amazonaws.finspacedata#ResourcePermissionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of resource permissions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Permission group parameters for Dataset permissions.</p>"
+            }
+        },
+        "com.amazonaws.finspacedata#PhoneNumber": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "PhoneNumber of Dataset Owner",
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 20
+                },
+                "smithy.api#pattern": "^[\\+0-9\\#\\,\\(][\\+0-9\\-\\.\\/\\(\\)\\,\\#\\s]+$"
+            }
+        },
         "com.amazonaws.finspacedata#ResourceNotFoundException": {
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "com.amazonaws.finspacedata#errorMessage"
+                    "target": "com.amazonaws.finspacedata#ErrorMessage2"
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>One or more resources can't be found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.finspacedata#ResourcePermission": {
+            "type": "structure",
+            "members": {
+                "permission": {
+                    "target": "com.amazonaws.finspacedata#StringValueLength1to250",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Permission for a resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Resource permission for a Dataset.</p>"
+            }
+        },
+        "com.amazonaws.finspacedata#ResourcePermissionsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.finspacedata#ResourcePermission"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of Resource Permissions"
+            }
+        },
+        "com.amazonaws.finspacedata#ResultLimit": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "Maximum number of results to be returned as part of a list operation",
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#SchemaDefinition": {
+            "type": "structure",
+            "members": {
+                "columns": {
+                    "target": "com.amazonaws.finspacedata#ColumnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of column definitions.</p>"
+                    }
+                },
+                "primaryKeyColumns": {
+                    "target": "com.amazonaws.finspacedata#ColumnNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of column names used for primary key.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Definition for a schema on a tabular Dataset.</p>"
+            }
+        },
+        "com.amazonaws.finspacedata#SchemaUnion": {
+            "type": "structure",
+            "members": {
+                "tabularSchemaConfig": {
+                    "target": "com.amazonaws.finspacedata#SchemaDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for a schema on a tabular Dataset.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A union of schema types.</p>"
             }
         },
         "com.amazonaws.finspacedata#SessionDuration": {
@@ -589,15 +2315,76 @@
                 }
             }
         },
-        "com.amazonaws.finspacedata#SourceType": {
+        "com.amazonaws.finspacedata#SortColumnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.finspacedata#StringValueLength1to255"
+            },
+            "traits": {
+                "smithy.api#documentation": "DataView Sort Column List"
+            }
+        },
+        "com.amazonaws.finspacedata#SourceParams": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.finspacedata#StringMapKey"
+            },
+            "value": {
+                "target": "com.amazonaws.finspacedata#StringMapValue"
+            },
+            "traits": {
+                "smithy.api#documentation": "Source Parameters of a Changeset"
+            }
+        },
+        "com.amazonaws.finspacedata#StringMapKey": {
             "type": "string",
             "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "S3",
-                        "name": "S3"
-                    }
-                ]
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[\\s\\S]*\\S[\\s\\S]*$"
+            }
+        },
+        "com.amazonaws.finspacedata#StringMapValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                },
+                "smithy.api#pattern": "^[\\s\\S]*\\S[\\s\\S]*$"
+            }
+        },
+        "com.amazonaws.finspacedata#StringValueLength1to250": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "1 - 250 character String",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 250
+                },
+                "smithy.api#pattern": "^[\\s\\S]*\\S[\\s\\S]*$"
+            }
+        },
+        "com.amazonaws.finspacedata#StringValueLength1to255": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "1 - 255 character String",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[\\s\\S]*\\S[\\s\\S]*$"
+            }
+        },
+        "com.amazonaws.finspacedata#StringValueLength1to2552": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
             }
         },
         "com.amazonaws.finspacedata#ThrottlingException": {
@@ -609,14 +2396,226 @@
                 "smithy.api#httpError": 429
             }
         },
-        "com.amazonaws.finspacedata#Timestamp": {
-            "type": "timestamp"
+        "com.amazonaws.finspacedata#TimestampEpoch": {
+            "type": "long",
+            "traits": {
+                "smithy.api#documentation": "Milliseconds since UTC epoch"
+            }
+        },
+        "com.amazonaws.finspacedata#UpdateChangeset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspacedata#UpdateChangesetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspacedata#UpdateChangesetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspacedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a FinSpace Changeset.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/datasets/{datasetId}/changesetsv2/{changesetId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#UpdateChangesetRequest": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.finspacedata#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token used to ensure idempotency.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "datasetId": {
+                    "target": "com.amazonaws.finspacedata#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the FinSpace Dataset in which the Changeset is created.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "changesetId": {
+                    "target": "com.amazonaws.finspacedata#ChangesetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the Changeset to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "sourceParams": {
+                    "target": "com.amazonaws.finspacedata#SourceParams",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Options that define the location of the data being ingested.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "formatParams": {
+                    "target": "com.amazonaws.finspacedata#FormatParams",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Options that define the structure of the source file(s).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Request to update an existing changeset."
+            }
+        },
+        "com.amazonaws.finspacedata#UpdateChangesetResponse": {
+            "type": "structure",
+            "members": {
+                "changesetId": {
+                    "target": "com.amazonaws.finspacedata#ChangesetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the Changeset to update.</p>"
+                    }
+                },
+                "datasetId": {
+                    "target": "com.amazonaws.finspacedata#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the FinSpace Dataset in which the Changeset is created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The response from a update changeset operation."
+            }
+        },
+        "com.amazonaws.finspacedata#UpdateDataset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspacedata#UpdateDatasetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspacedata#UpdateDatasetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspacedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspacedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a FinSpace Dataset.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/datasetsv2/{datasetId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspacedata#UpdateDatasetRequest": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.finspacedata#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token used to ensure idempotency.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "datasetId": {
+                    "target": "com.amazonaws.finspacedata#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the Dataset to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetTitle": {
+                    "target": "com.amazonaws.finspacedata#DatasetTitle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A display title for the Dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "kind": {
+                    "target": "com.amazonaws.finspacedata#DatasetKind",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format in which the Dataset data is structured.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TABULAR</code> - Data is structured in a tabular format.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NON_TABULAR</code> - Data is structured in a non-tabular format.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetDescription": {
+                    "target": "com.amazonaws.finspacedata#DatasetDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description for the Dataset.</p>"
+                    }
+                },
+                "alias": {
+                    "target": "com.amazonaws.finspacedata#AliasString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique resource identifier for a Dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "schemaDefinition": {
+                    "target": "com.amazonaws.finspacedata#SchemaUnion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Definition for a schema on a tabular Dataset.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The request for an UpdateDataset operation"
+            }
+        },
+        "com.amazonaws.finspacedata#UpdateDatasetResponse": {
+            "type": "structure",
+            "members": {
+                "datasetId": {
+                    "target": "com.amazonaws.finspacedata#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for updated Dataset.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The response from an UpdateDataset operation"
+            }
         },
         "com.amazonaws.finspacedata#ValidationException": {
             "type": "structure",
             "members": {
                 "message": {
-                    "target": "com.amazonaws.finspacedata#errorMessage"
+                    "target": "com.amazonaws.finspacedata#ErrorMessage2"
                 }
             },
             "traits": {
@@ -624,18 +2623,6 @@
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
-        },
-        "com.amazonaws.finspacedata#arn": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 20,
-                    "max": 2048
-                }
-            }
-        },
-        "com.amazonaws.finspacedata#errorMessage": {
-            "type": "string"
         },
         "com.amazonaws.finspacedata#locationType": {
             "type": "string",
@@ -652,24 +2639,6 @@
                 ]
             }
         },
-        "com.amazonaws.finspacedata#stringMap": {
-            "type": "map",
-            "key": {
-                "target": "com.amazonaws.finspacedata#stringMapKey"
-            },
-            "value": {
-                "target": "com.amazonaws.finspacedata#stringMapValue"
-            }
-        },
-        "com.amazonaws.finspacedata#stringMapKey": {
-            "type": "string"
-        },
-        "com.amazonaws.finspacedata#stringMapValue": {
-            "type": "string"
-        },
-        "com.amazonaws.finspacedata#stringValue": {
-            "type": "string"
-        },
         "com.amazonaws.finspacedata#stringValueLength1to1024": {
             "type": "string",
             "traits": {
@@ -677,16 +2646,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": ".*\\S.*"
-            }
-        },
-        "com.amazonaws.finspacedata#stringValueLength1to255": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 1,
-                    "max": 255
-                }
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.finspacedata#stringValueLength1to63": {
@@ -696,7 +2656,7 @@
                     "min": 1,
                     "max": 63
                 },
-                "smithy.api#pattern": ".*\\S.*"
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.finspacedata#stringValueMaxLength1000": {

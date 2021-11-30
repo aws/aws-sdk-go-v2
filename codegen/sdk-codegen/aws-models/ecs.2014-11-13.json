@@ -1127,7 +1127,7 @@
                 "memory": {
                     "target": "com.amazonaws.ecs#BoxedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount (in MiB) of memory to present to the container. If your container attempts\n\t\t\tto exceed the memory specified here, the container is killed. The total amount of memory\n\t\t\treserved for all containers within a task must be lower than the task\n\t\t\t\t<code>memory</code> value, if one is specified. This parameter maps to\n\t\t\t\t<code>Memory</code> in the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the\n\t\t\t<a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the <code>--memory</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker run</a>.</p>\n\t\t       <p>If using the Fargate launch type, this parameter is optional.</p>\n\t\t       <p>If using the EC2 launch type, you must specify either a task-level\n\t\t\tmemory value or a container-level memory value. If you specify both a container-level\n\t\t\t\t<code>memory</code> and <code>memoryReservation</code> value, <code>memory</code>\n\t\t\tmust be greater than <code>memoryReservation</code>. If you specify\n\t\t\t\t<code>memoryReservation</code>, then that value is subtracted from the available\n\t\t\tmemory resources for the container instance where the container is placed. Otherwise,\n\t\t\tthe value of <code>memory</code> is used.</p>\n\t\t       <p>The Docker daemon reserves a minimum of 4 MiB of memory for a container. Therefore, we\n\t\t\trecommend that you specify fewer than 4 MiB of memory for your containers.</p>"
+                        "smithy.api#documentation": "<p>The amount (in MiB) of memory to present to the container. If your container attempts\n\t\t\tto exceed the memory specified here, the container is killed. The total amount of memory\n\t\t\treserved for all containers within a task must be lower than the task\n\t\t\t\t<code>memory</code> value, if one is specified. This parameter maps to\n\t\t\t\t<code>Memory</code> in the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the\n\t\t\t<a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the <code>--memory</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker run</a>.</p>\n\t\t       <p>If using the Fargate launch type, this parameter is optional.</p>\n\t\t       <p>If using the EC2 launch type, you must specify either a task-level\n\t\t\tmemory value or a container-level memory value. If you specify both a container-level\n\t\t\t\t<code>memory</code> and <code>memoryReservation</code> value, <code>memory</code>\n\t\t\tmust be greater than <code>memoryReservation</code>. If you specify\n\t\t\t\t<code>memoryReservation</code>, then that value is subtracted from the available\n\t\t\tmemory resources for the container instance where the container is placed. Otherwise,\n\t\t\tthe value of <code>memory</code> is used.</p>\n\t\t       <p>The Docker 20.10.0 or later daemon reserves a minimum of 6 MiB of\n\t\t\tmemory for a container, so you should not specify fewer than 6 MiB of\n\t\t\tmemory for your containers.</p>\n\t\t       <p>The Docker 19.03.13-ce or earlier daemon reserves a minimum of 4 MiB\n\t\t\tof memory for a container, so you should not specify fewer than 4 MiB of\n\t\t\tmemory for your containers.</p>"
                     }
                 },
                 "memoryReservation": {
@@ -6695,7 +6695,7 @@
                 "cpuArchitecture": {
                     "target": "com.amazonaws.ecs#CPUArchitecture",
                     "traits": {
-                        "smithy.api#documentation": "<p>The CPU architecture.</p>"
+                        "smithy.api#documentation": "<p>The CPU architecture.</p>\n\t\t       <p>You can run your Linux tasks on an ARM-based platform by setting the value  to <code>ARM64</code>. This option is avaiable\n\t\t\tfor tasks that run on Linuc Amazon EC2 instance or Linux containers on Fargate.</p>"
                     }
                 },
                 "operatingSystemFamily": {
@@ -6706,7 +6706,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about the platform for the Amazon ECS service or task.</p>"
+                "smithy.api#documentation": "<p>Information about the platform for the Amazon ECS service or task.</p>\n\t\t       <p>For more informataion about <code>RuntimePlatform</code>, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#runtime-platform\">RuntimePlatform</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.ecs#Scale": {

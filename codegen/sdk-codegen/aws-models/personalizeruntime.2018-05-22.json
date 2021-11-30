@@ -31,15 +31,6 @@
     "shapes": {
         "com.amazonaws.personalizeruntime#AmazonPersonalizeRuntime": {
             "type": "service",
-            "version": "2018-05-22",
-            "operations": [
-                {
-                    "target": "com.amazonaws.personalizeruntime#GetPersonalizedRanking"
-                },
-                {
-                    "target": "com.amazonaws.personalizeruntime#GetRecommendations"
-                }
-            ],
             "traits": {
                 "aws.api#service": {
                     "sdkId": "Personalize Runtime",
@@ -54,7 +45,16 @@
                 "aws.protocols#restJson1": {},
                 "smithy.api#documentation": "<p></p>",
                 "smithy.api#title": "Amazon Personalize Runtime"
-            }
+            },
+            "version": "2018-05-22",
+            "operations": [
+                {
+                    "target": "com.amazonaws.personalizeruntime#GetPersonalizedRanking"
+                },
+                {
+                    "target": "com.amazonaws.personalizeruntime#GetRecommendations"
+                }
+            ]
         },
         "com.amazonaws.personalizeruntime#Arn": {
             "type": "string",
@@ -63,7 +63,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+"
+                "smithy.api#pattern": "^arn:([a-z\\d-]+):personalize:.*:.*:.+$"
             }
         },
         "com.amazonaws.personalizeruntime#AttributeName": {
@@ -73,7 +73,7 @@
                     "min": 0,
                     "max": 150
                 },
-                "smithy.api#pattern": "[A-Za-z\\d_]+"
+                "smithy.api#pattern": "^[A-Za-z\\d_]+$"
             }
         },
         "com.amazonaws.personalizeruntime#AttributeValue": {
@@ -111,7 +111,7 @@
                     "min": 0,
                     "max": 50
                 },
-                "smithy.api#pattern": "[A-Za-z0-9_]+"
+                "smithy.api#pattern": "^[A-Za-z0-9_]+$"
             }
         },
         "com.amazonaws.personalizeruntime#FilterAttributeValue": {
@@ -243,7 +243,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of recommended items. The required input depends on the recipe type used to\n      create the solution backing the campaign, as follows:</p>\n         <ul>\n            <li>\n               <p>RELATED_ITEMS - <code>itemId</code> required, <code>userId</code> not used</p>\n            </li>\n            <li>\n               <p>USER_PERSONALIZATION - <code>itemId</code> optional, <code>userId</code>\n          required</p>\n            </li>\n         </ul>\n         <note>\n            <p>Campaigns that are backed by a solution created using a recipe of type\n        PERSONALIZED_RANKING use the  API.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Returns a list of recommended items. For campaigns, the campaign's Amazon Resource Name (ARN) is required and the required user and item input depends on the recipe type used to\n      create the solution backing the campaign as follows:</p>\n         <ul>\n            <li>\n               <p>USER_PERSONALIZATION - <code>userId</code> required, <code>itemId</code> not used</p>\n            </li>\n            <li>\n               <p>RELATED_ITEMS - <code>itemId</code> required, <code>userId</code> not used</p>\n            </li>\n         </ul>\n         <note>\n            <p>Campaigns that are backed by a solution created using a recipe of type\n        PERSONALIZED_RANKING use the  API.</p>\n         </note>\n         <p>\n      For recommenders, the recommender's ARN is required and the required item and user input depends on the use case (domain-based recipe) backing the recommender.\n      For information on use case requirements see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/domain-use-cases.html\">Choosing recommender use cases</a>.\n    </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/recommendations",
@@ -258,8 +258,7 @@
                 "campaignArn": {
                     "target": "com.amazonaws.personalizeruntime#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the campaign to use for getting recommendations.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the campaign to use for getting recommendations.</p>"
                     }
                 },
                 "itemId": {
@@ -297,6 +296,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The values to use when filtering recommendations. For each placeholder parameter in your filter expression, provide the parameter name (in matching case)\n      as a key and the filter value(s) as the corresponding value. Separate multiple values for one parameter with a comma.\n    </p> \n         <p>For filter expressions that use an <code>INCLUDE</code> element to include items,\n    you must provide values for all parameters that are defined in the expression. For\n    filters with expressions that use an <code>EXCLUDE</code> element to exclude items, you\n      can omit the <code>filter-values</code>.In this case, Amazon Personalize doesn't use that portion of\n    the expression to filter recommendations.</p>\n         <p>For more information, see\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/filter.html\">Filtering Recommendations</a>.</p>"
                     }
+                },
+                "recommenderArn": {
+                    "target": "com.amazonaws.personalizeruntime#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the recommender to use to get recommendations. Provide a recommender ARN if you\n    created a Domain dataset group with a recommender for a domain use case.</p>"
+                    }
                 }
             }
         },
@@ -306,7 +311,7 @@
                 "itemList": {
                     "target": "com.amazonaws.personalizeruntime#ItemList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of recommendations sorted in ascending order by prediction score. There can be a\n      maximum of 500 items in the list.</p>"
+                        "smithy.api#documentation": "<p>A list of recommendations sorted in descending order by prediction score. There can be a\n      maximum of 500 items in the list.</p>"
                     }
                 },
                 "recommendationId": {

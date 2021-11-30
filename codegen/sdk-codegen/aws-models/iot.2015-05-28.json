@@ -31,6 +31,21 @@
     "shapes": {
         "com.amazonaws.iot#AWSIotService": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "IoT",
+                    "arnNamespace": "iot",
+                    "cloudFormationName": "IoT",
+                    "cloudTrailEventSource": "iot.amazonaws.com",
+                    "endpointPrefix": "iot"
+                },
+                "aws.auth#sigv4": {
+                    "name": "execute-api"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<fullname>IoT</fullname>\n        <p>IoT provides secure, bi-directional communication between Internet-connected\n            devices (such as sensors, actuators, embedded devices, or smart appliances) and the Amazon Web Services\n            cloud. You can discover your custom IoT-Data endpoint to communicate with, configure\n            rules for data processing and integration with other services, organize resources\n            associated with each device (Registry), configure logging, and create and manage\n            policies and credentials to authenticate devices.</p>\n        <p>The service endpoints that expose this API are listed in\n            <a href=\"https://docs.aws.amazon.com/general/latest/gr/iot-core.html\">Amazon Web Services IoT Core Endpoints and Quotas</a>.\n            You must use the endpoint for the region that has the resources you want to access.</p>\n        <p>The service name used by <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Amazon Web Services\n                Signature Version 4</a> to sign the request is:\n            <i>execute-api</i>.</p>\n        <p>For more information about how IoT works, see the <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/aws-iot-how-it-works.html\">Developer\n            Guide</a>.</p>\n        <p>For information about how to use the credentials provider for IoT, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/authorizing-direct-aws.html\">Authorizing Direct Calls to Amazon Web Services Services</a>.</p>",
+                "smithy.api#title": "AWS IoT"
+            },
             "version": "2015-05-28",
             "operations": [
                 {
@@ -325,6 +340,9 @@
                     "target": "com.amazonaws.iot#DescribeJobTemplate"
                 },
                 {
+                    "target": "com.amazonaws.iot#DescribeManagedJobTemplate"
+                },
+                {
                     "target": "com.amazonaws.iot#DescribeMitigationAction"
                 },
                 {
@@ -491,6 +509,9 @@
                 },
                 {
                     "target": "com.amazonaws.iot#ListJobTemplates"
+                },
+                {
+                    "target": "com.amazonaws.iot#ListManagedJobTemplates"
                 },
                 {
                     "target": "com.amazonaws.iot#ListMitigationActions"
@@ -735,22 +756,7 @@
                 {
                     "target": "com.amazonaws.iot#ValidateSecurityProfileBehaviors"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "IoT",
-                    "arnNamespace": "iot",
-                    "cloudFormationName": "IoT",
-                    "cloudTrailEventSource": "iot.amazonaws.com",
-                    "endpointPrefix": "iot"
-                },
-                "aws.auth#sigv4": {
-                    "name": "execute-api"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<fullname>IoT</fullname>\n        <p>IoT provides secure, bi-directional communication between Internet-connected\n            devices (such as sensors, actuators, embedded devices, or smart appliances) and the Amazon Web Services\n            cloud. You can discover your custom IoT-Data endpoint to communicate with, configure\n            rules for data processing and integration with other services, organize resources\n            associated with each device (Registry), configure logging, and create and manage\n            policies and credentials to authenticate devices.</p>\n        <p>The service endpoints that expose this API are listed in\n            <a href=\"https://docs.aws.amazon.com/general/latest/gr/iot-core.html\">Amazon Web Services IoT Core Endpoints and Quotas</a>.\n            You must use the endpoint for the region that has the resources you want to access.</p>\n        <p>The service name used by <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Amazon Web Services\n                Signature Version 4</a> to sign the request is:\n            <i>execute-api</i>.</p>\n        <p>For more information about how IoT works, see the <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/aws-iot-how-it-works.html\">Developer\n            Guide</a>.</p>\n        <p>For information about how to use the credentials provider for IoT, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/authorizing-direct-aws.html\">Authorizing Direct Calls to Amazon Web Services Services</a>.</p>",
-                "smithy.api#title": "AWS IoT"
-            }
+            ]
         },
         "com.amazonaws.iot#AbortAction": {
             "type": "string",
@@ -1190,7 +1196,7 @@
                 "billingGroupName": {
                     "target": "com.amazonaws.iot#BillingGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the billing group.</p>"
+                        "smithy.api#documentation": "<p>The name of the billing group.</p>\n\t\t       <note>\n            <p>This call is asynchronous. It might take several seconds for the detachment to propagate.</p>\n         </note>"
                     }
                 },
                 "billingGroupArn": {
@@ -4865,7 +4871,7 @@
                 "clientRequestToken": {
                     "target": "com.amazonaws.iot#ClientRequestToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Each audit supression must have a unique client request token. If you try to create a new audit\n      suppression with the same token as one that already exists, an exception occurs. If you omit this\n      value, Amazon Web Services SDKs will automatically generate a unique client request.\n    </p>",
+                        "smithy.api#documentation": "<p>\n      Each audit supression must have a unique client request token. If you try to create a new audit\n      suppression with the same token as one that already exists, an exception occurs. If you omit this\n      value, Amazon Web Services SDKs will automatically generate a unique client request.</p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
@@ -5088,7 +5094,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an X.509 certificate using the specified certificate signing\n         request.</p>\n         <p>\n            <b>Note:</b> The CSR must include a public key that is either an\n         RSA key with a length of at least 2048 bits or an ECC key from NIST P-256 or NIST P-384\n         curves. </p>\n         <p>\n            <b>Note:</b> Reusing the same certificate signing request (CSR)\n         results in a distinct certificate.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateCertificateFromCsr</a> action.</p>\n      \n         <p>You can create multiple certificates in a batch by creating a directory, copying\n         multiple .csr files into that directory, and then specifying that directory on the command\n         line. The following commands show how to create a batch of certificates given a batch of\n         CSRs.</p>\n         <p>Assuming a set of CSRs are located inside of the directory\n         my-csr-directory:</p>\n\n         <p>On Linux and OS X, the command is:</p>\n\n         <p>$ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr\n         --certificate-signing-request file://my-csr-directory/{}</p>\n         <p>This command lists all of the CSRs in my-csr-directory and pipes each CSR file name\n         to the aws iot create-certificate-from-csr Amazon Web Services CLI command to create a certificate for the\n         corresponding CSR.</p>\n         <p>The aws iot create-certificate-from-csr part of the command can also be run in\n         parallel to speed up the certificate creation process:</p>\n         <p>$ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr\n         --certificate-signing-request file://my-csr-directory/{}</p>\n         <p>On Windows PowerShell, the command to create certificates for all CSRs in\n         my-csr-directory is:</p>\n         <p>> ls -Name my-csr-directory | %{aws iot create-certificate-from-csr\n         --certificate-signing-request file://my-csr-directory/$_}</p>\n         <p>On a Windows command prompt, the command to create certificates for all CSRs in\n         my-csr-directory is:</p>\n         <p>> forfiles /p my-csr-directory /c \"cmd /c aws iot create-certificate-from-csr\n         --certificate-signing-request file://@path\"</p>",
+                "smithy.api#documentation": "<p>Creates an X.509 certificate using the specified certificate signing\n         request.</p>\n         <p>\n            <b>Note:</b> The CSR must include a public key that is either an\n         RSA key with a length of at least 2048 bits or an ECC key from NIST P-256, NIST P-384, or NIST P-512\n         curves. For supported certificates, consult <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/x509-client-certs.html#x509-cert-algorithms\">\n            Certificate signing algorithms supported by IoT</a>.</p>\n         <p>\n            <b>Note:</b> Reusing the same certificate signing request (CSR)\n         results in a distinct certificate.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateCertificateFromCsr</a> action.</p>\n      \n         <p>You can create multiple certificates in a batch by creating a directory, copying\n         multiple .csr files into that directory, and then specifying that directory on the command\n         line. The following commands show how to create a batch of certificates given a batch of\n         CSRs.</p>\n         <p>Assuming a set of CSRs are located inside of the directory\n         my-csr-directory:</p>\n\n         <p>On Linux and OS X, the command is:</p>\n\n         <p>$ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr\n         --certificate-signing-request file://my-csr-directory/{}</p>\n         <p>This command lists all of the CSRs in my-csr-directory and pipes each CSR file name\n         to the aws iot create-certificate-from-csr Amazon Web Services CLI command to create a certificate for the\n         corresponding CSR.</p>\n         <p>The aws iot create-certificate-from-csr part of the command can also be run in\n         parallel to speed up the certificate creation process:</p>\n         <p>$ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr\n         --certificate-signing-request file://my-csr-directory/{}</p>\n         <p>On Windows PowerShell, the command to create certificates for all CSRs in\n         my-csr-directory is:</p>\n         <p>> ls -Name my-csr-directory | %{aws iot create-certificate-from-csr\n         --certificate-signing-request file://my-csr-directory/$_}</p>\n         <p>On a Windows command prompt, the command to create certificates for all CSRs in\n         my-csr-directory is:</p>\n         <p>> forfiles /p my-csr-directory /c \"cmd /c aws iot create-certificate-from-csr\n         --certificate-signing-request file://@path\"</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/certificates",
@@ -5820,6 +5826,12 @@
                     "target": "com.amazonaws.iot#JobTemplateArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the job template used to create the job.</p>"
+                    }
+                },
+                "documentParameters": {
+                    "target": "com.amazonaws.iot#ParameterMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Parameters of a managed template that you can specify to create the job document.</p>"
                     }
                 }
             }
@@ -7128,7 +7140,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.iot#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>An IAM role that allows the IoT service principal assumes to access your S3 files.</p>",
+                        "smithy.api#documentation": "<p>An IAM role that allows the IoT service principal to access your S3 files.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -11121,6 +11133,104 @@
                 }
             }
         },
+        "com.amazonaws.iot#DescribeManagedJobTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot#DescribeManagedJobTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#DescribeManagedJobTemplateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>View details of a managed job template.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/managed-job-templates/{templateName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iot#DescribeManagedJobTemplateRequest": {
+            "type": "structure",
+            "members": {
+                "templateName": {
+                    "target": "com.amazonaws.iot#ManagedJobTemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of a managed job template, which is required.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "templateVersion": {
+                    "target": "com.amazonaws.iot#ManagedTemplateVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional parameter to specify version of a managed template. If not specified, the \n            pre-defined default version is returned.</p>",
+                        "smithy.api#httpQuery": "templateVersion"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot#DescribeManagedJobTemplateResponse": {
+            "type": "structure",
+            "members": {
+                "templateName": {
+                    "target": "com.amazonaws.iot#ManagedJobTemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of a managed template, such as <code>AWS-Reboot</code>.</p>"
+                    }
+                },
+                "templateArn": {
+                    "target": "com.amazonaws.iot#JobTemplateArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique Amazon Resource Name (ARN) of the managed template.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.iot#JobDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique description of a managed template.</p>"
+                    }
+                },
+                "templateVersion": {
+                    "target": "com.amazonaws.iot#ManagedTemplateVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version for a managed template.</p>"
+                    }
+                },
+                "environments": {
+                    "target": "com.amazonaws.iot#Environments",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of environments that are supported with the managed job template.</p>"
+                    }
+                },
+                "documentParameters": {
+                    "target": "com.amazonaws.iot#DocumentParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of key-value pairs that you can use as guidance to specify the inputs for creating \n            a job from a managed template.</p>"
+                    }
+                },
+                "document": {
+                    "target": "com.amazonaws.iot#JobDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The document schema for a managed job template.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.iot#DescribeMitigationAction": {
             "type": "operation",
             "input": {
@@ -12842,6 +12952,50 @@
         "com.amazonaws.iot#DisconnectReason": {
             "type": "string"
         },
+        "com.amazonaws.iot#DocumentParameter": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "com.amazonaws.iot#ParameterKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Key of the map field containing the patterns that need to be replaced in a managed\n            template job document schema.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.iot#JobDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description of the map field containing the patterns that need to be replaced in a \n            managed template job document schema.</p>"
+                    }
+                },
+                "regex": {
+                    "target": "com.amazonaws.iot#Regex",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A regular expression of the patterns that need to be replaced in a managed template \n            job document schema.</p>"
+                    }
+                },
+                "example": {
+                    "target": "com.amazonaws.iot#Example",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An example illustrating a pattern that need to be replaced in a managed template \n            job document schema.</p>"
+                    }
+                },
+                "optional": {
+                    "target": "com.amazonaws.iot#Optional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether a pattern that needs to be replaced in a managed template job document \n            schema is optional or required.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A map of key-value pairs containing the patterns that need to be replaced in a managed\n            template job document schema. You can use the description of each key as a guidance to specify \n            the inputs during runtime when creating a job.</p>"
+            }
+        },
+        "com.amazonaws.iot#DocumentParameters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iot#DocumentParameter"
+            }
+        },
         "com.amazonaws.iot#DomainConfigurationArn": {
             "type": "string"
         },
@@ -13241,6 +13395,18 @@
                 }
             }
         },
+        "com.amazonaws.iot#Environment": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[^\\p{C}]+$"
+            }
+        },
+        "com.amazonaws.iot#Environments": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iot#Environment"
+            }
+        },
         "com.amazonaws.iot#ErrorCode": {
             "type": "string"
         },
@@ -13340,6 +13506,12 @@
                         "name": "CA_CERTIFICATE"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.iot#Example": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[^\\p{C}]+$"
             }
         },
         "com.amazonaws.iot#ExecutionNamePrefix": {
@@ -13961,7 +14133,7 @@
                 "totalCount": {
                     "target": "com.amazonaws.iot#Count",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total number of documents that fit the query string criteria and contain a value for\n      the Aggregation field targeted in the request.</p>"
+                        "smithy.api#documentation": "<p>The total number of things that fit the query string criteria.</p>"
                     }
                 },
                 "buckets": {
@@ -15249,7 +15421,7 @@
             "type": "double",
             "traits": {
                 "smithy.api#range": {
-                    "min": 1,
+                    "min": 1.1,
                     "max": 5
                 }
             }
@@ -15348,6 +15520,19 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>An unexpected error has occurred.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.iot#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.iot#ErrorMessage2"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Internal error from the service that indicates an unexpected error or that the service\n            is unavailable.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
             }
@@ -15653,6 +15838,12 @@
                     "target": "com.amazonaws.iot#JobTemplateArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the job template used to create the job.</p>"
+                    }
+                },
+                "documentParameters": {
+                    "target": "com.amazonaws.iot#ParameterMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A key-value map that pairs the patterns that need to be replaced in a managed \n            template job document schema. You can use the description of each key as a guidance \n            to specify the inputs during runtime when creating a job.</p>"
                     }
                 }
             },
@@ -18395,6 +18586,80 @@
                     "target": "com.amazonaws.iot#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next set of results, or <b>null</b> if there are no\n            additional results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot#ListManagedJobTemplates": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot#ListManagedJobTemplatesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#ListManagedJobTemplatesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of managed job templates.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/managed-job-templates",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iot#ListManagedJobTemplatesRequest": {
+            "type": "structure",
+            "members": {
+                "templateName": {
+                    "target": "com.amazonaws.iot#ManagedJobTemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional parameter for template name. If specified, only the versions of the\n            managed job templates that have the specified template name will be returned.</p>",
+                        "smithy.api#httpQuery": "templateName"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.iot#LaserMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of entries that can be returned.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iot#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot#ListManagedJobTemplatesResponse": {
+            "type": "structure",
+            "members": {
+                "managedJobTemplates": {
+                    "target": "com.amazonaws.iot#ManagedJobTemplatesSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of managed job templates that are returned.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iot#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to retrieve the next set of results.</p>"
                     }
                 }
             }
@@ -21242,6 +21507,65 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.iot#ManagedJobTemplateName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.iot#ManagedJobTemplateSummary": {
+            "type": "structure",
+            "members": {
+                "templateArn": {
+                    "target": "com.amazonaws.iot#JobTemplateArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for a managed template.</p>"
+                    }
+                },
+                "templateName": {
+                    "target": "com.amazonaws.iot#ManagedJobTemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique Name for a managed template.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.iot#JobDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description for a managed template.</p>"
+                    }
+                },
+                "environments": {
+                    "target": "com.amazonaws.iot#Environments",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of environments that are supported with the managed job template.</p>"
+                    }
+                },
+                "templateVersion": {
+                    "target": "com.amazonaws.iot#ManagedTemplateVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version for a managed template.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains information about the managed template.</p>"
+            }
+        },
+        "com.amazonaws.iot#ManagedJobTemplatesSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iot#ManagedJobTemplateSummary"
+            }
+        },
+        "com.amazonaws.iot#ManagedTemplateVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[1-9]+.[0-9]+$"
+            }
+        },
         "com.amazonaws.iot#Marker": {
             "type": "string",
             "traits": {
@@ -22085,6 +22409,9 @@
                 "smithy.api#documentation": "<p>Describes an action that writes data to an Amazon OpenSearch Service\n         domain.</p>"
             }
         },
+        "com.amazonaws.iot#Optional": {
+            "type": "boolean"
+        },
         "com.amazonaws.iot#OptionalVersion": {
             "type": "long",
             "traits": {
@@ -22156,6 +22483,35 @@
         },
         "com.amazonaws.iot#Parameter": {
             "type": "string"
+        },
+        "com.amazonaws.iot#ParameterKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
+            }
+        },
+        "com.amazonaws.iot#ParameterMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.iot#ParameterKey"
+            },
+            "value": {
+                "target": "com.amazonaws.iot#ParameterValue"
+            }
+        },
+        "com.amazonaws.iot#ParameterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^[^\\p{C}]+$"
+            }
         },
         "com.amazonaws.iot#Parameters": {
             "type": "map",
@@ -22840,6 +23196,9 @@
                 "smithy.api#box": {}
             }
         },
+        "com.amazonaws.iot#Regex": {
+            "type": "string"
+        },
         "com.amazonaws.iot#RegisterCACertificate": {
             "type": "operation",
             "input": {
@@ -23090,7 +23449,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Register a certificate that does not have a certificate authority (CA).</p>",
+                "smithy.api#documentation": "<p>Register a certificate that does not have a certificate authority (CA). \n         For supported certificates, consult <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/x509-client-certs.html#x509-cert-algorithms\">\n         Certificate signing algorithms supported by IoT</a>.\n      </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/certificate/register-no-ca",
@@ -23416,7 +23775,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes the given thing from the billing group.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">RemoveThingFromBillingGroup</a> action.</p>",
+                "smithy.api#documentation": "<p>Removes the given thing from the billing group.</p>\n\t\t       <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">RemoveThingFromBillingGroup</a> action.</p>\n\t\t       <note>\n            <p>This call is asynchronous. It might take several seconds for the detachment to propagate.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/billing-groups/removeThingFromBillingGroup",
@@ -25303,7 +25662,7 @@
                 "count": {
                     "target": "com.amazonaws.iot#Count",
                     "traits": {
-                        "smithy.api#documentation": "<p>The count of things that match the query.</p>"
+                        "smithy.api#documentation": "<p>The count of things that match the query string criteria and contain a valid aggregation field value.</p>"
                     }
                 },
                 "average": {
@@ -25357,7 +25716,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A map of key-value pairs for all supported statistics. Currently, only count is\n      supported.</p>"
+                "smithy.api#documentation": "<p>A map of key-value pairs for all supported statistics. For issues with missing or unexpected values for this API, \n      consult <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/fleet-indexing-troubleshooting.html\">\n        Fleet indexing troubleshooting guide</a>.</p>"
             }
         },
         "com.amazonaws.iot#Status": {

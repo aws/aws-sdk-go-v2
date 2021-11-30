@@ -56,10 +56,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The default theme for this Amazon QuickSight subscription.</p>"
                     }
+                },
+                "DefaultEmailCustomizationTemplate": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default email customization template.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon QuickSight customizations associated with your Amazon Web Services account or a Amazon QuickSight namespace in a specific Amazon Web Services Region.</p>"
+                "smithy.api#documentation": "<p>The Amazon QuickSight customizations associated with your Amazon Web Services account or a QuickSight namespace in a specific Amazon Web Services Region.</p>"
             }
         },
         "com.amazonaws.quicksight#AccountSettings": {
@@ -112,7 +118,7 @@
                 "AssignmentName": {
                     "target": "com.amazonaws.quicksight#IAMPolicyAssignmentName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A name for the IAMpolicy assignment.</p>"
+                        "smithy.api#documentation": "<p>A name for the IAM policy assignment.</p>"
                     }
                 },
                 "PolicyArn": {
@@ -189,9 +195,13 @@
                 "Domain": {
                     "target": "com.amazonaws.quicksight#Domain",
                     "traits": {
+                        "smithy.api#documentation": "<p>The OpenSearch domain.</p>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The parameters for OpenSearch.</p>"
             }
         },
         "com.amazonaws.quicksight#Analysis": {
@@ -511,12 +521,12 @@
                 "Dashboard": {
                     "target": "com.amazonaws.quicksight#AnonymousUserDashboardEmbeddingConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of embedding experience. In this case, an Amazon QuickSight dashboard.</p>"
+                        "smithy.api#documentation": "<p>The type of embedding experience. In this case, Amazon QuickSight dashboards.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The type of experience you want to embed. For anonymous users, you can embed an Amazon QuickSight dashboard.</p>"
+                "smithy.api#documentation": "<p>The type of experience you want to embed. For anonymous users, you can embed Amazon QuickSight dashboards.</p>"
             }
         },
         "com.amazonaws.quicksight#Arn": {
@@ -1135,7 +1145,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A tag for a column in a <a>TagColumnOperation</a> structure. This is a\n            variant type structure. For this structure to be valid, only one of the attributes can\n            be non-null.</p>"
+                "smithy.api#documentation": "<p>A tag for a column in a\n            <code>\n               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_TagColumnOperation.html\">TagColumnOperation</a>\n            </code>\n            structure. This is a\n            variant type structure. For this structure to be valid, only one of the attributes can\n            be non-null.</p>"
             }
         },
         "com.amazonaws.quicksight#ColumnTagList": {
@@ -1225,6 +1235,9 @@
                     "target": "com.amazonaws.quicksight#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.quicksight#InternalFailureException"
                 },
                 {
@@ -1244,7 +1257,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates Amazon QuickSight customizations the current Amazon Web Services Region. Currently, you can\n            add a custom default theme by using the <code>CreateAccountCustomization</code> or\n                <code>UpdateAccountCustomization</code> API operation. To further customize\n            Amazon QuickSight by removing Amazon QuickSight sample assets and videos for all new users, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/customizing-quicksight.html\">Customizing Amazon QuickSight</a> in the <i>Amazon QuickSight User\n                Guide.</i>\n         </p>\n        <p>You can create customizations for your Amazon Web Services account or, if you specify a namespace, for\n            a Amazon QuickSight namespace instead. Customizations that apply to a namespace always override\n            customizations that apply to an Amazon Web Services account. To find out which customizations apply, use\n            the <code>DescribeAccountCustomization</code> API operation.</p>\n        <p>Before you use the <code>CreateAccountCustomization</code> API operation to add a theme\n            as the namespace default, make sure that you first share the theme with the namespace.\n            If you don't share it with the namespace, the theme isn't visible to your users\n            even if you make it the default theme.\n            To check if the theme is shared, view the current permissions by using the\n            <code>\n               <a>DescribeThemePermissions</a>\n            </code> API operation.\n            To share the theme, grant permissions by using the\n            <code>\n               <a>UpdateThemePermissions</a>\n            </code> API operation. </p>",
+                "smithy.api#documentation": "<p>Creates Amazon QuickSight customizations the current Amazon Web Services Region. Currently, you can\n            add a custom default theme by using the <code>CreateAccountCustomization</code> or\n                <code>UpdateAccountCustomization</code> API operation. To further customize\n            Amazon QuickSight by removing Amazon QuickSight sample assets and videos for all new users, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/customizing-quicksight.html\">Customizing Amazon QuickSight</a> in the <i>Amazon QuickSight User\n                Guide.</i>\n         </p>\n        <p>You can create customizations for your Amazon Web Services account or, if you specify a namespace, for\n            a QuickSight namespace instead. Customizations that apply to a namespace always override\n            customizations that apply to an Amazon Web Services account. To find out which customizations apply, use\n            the <code>DescribeAccountCustomization</code> API operation.</p>\n        <p>Before you use the <code>CreateAccountCustomization</code> API operation to add a theme\n            as the namespace default, make sure that you first share the theme with the namespace.\n            If you don't share it with the namespace, the theme isn't visible to your users\n            even if you make it the default theme.\n            To check if the theme is shared, view the current permissions by using the\n            <code>\n               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DescribeThemePermissions.html\">DescribeThemePermissions</a>\n            </code>\n            API operation.\n            To share the theme, grant permissions by using the\n            <code>\n               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdateThemePermissions.html\">UpdateThemePermissions</a>\n            </code>\n            API operation. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/accounts/{AwsAccountId}/customizations",
@@ -1273,7 +1286,7 @@
                 "AccountCustomization": {
                     "target": "com.amazonaws.quicksight#AccountCustomization",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon QuickSight customizations you're adding in the current Amazon Web Services Region. You can add\n            these to an Amazon Web Services account and a Amazon QuickSight namespace. </p>\n        <p>For example, you can add a default theme by setting <code>AccountCustomization</code>\n            to the midnight theme: <code>\"AccountCustomization\": { \"DefaultTheme\":\n                \"arn:aws:quicksight::aws:theme/MIDNIGHT\" }</code>. Or, you can add a custom theme by\n            specifying <code>\"AccountCustomization\": { \"DefaultTheme\":\n                \"arn:aws:quicksight:us-west-2:111122223333:theme/bdb844d0-0fe9-4d9d-b520-0fe602d93639\"\n                }</code>. </p>",
+                        "smithy.api#documentation": "<p>The Amazon QuickSight customizations you're adding in the current Amazon Web Services Region. You can add\n            these to an Amazon Web Services account and a QuickSight namespace. </p>\n        <p>For example, you can add a default theme by setting <code>AccountCustomization</code>\n            to the midnight theme: <code>\"AccountCustomization\": { \"DefaultTheme\":\n                \"arn:aws:quicksight::aws:theme/MIDNIGHT\" }</code>. Or, you can add a custom theme by\n            specifying <code>\"AccountCustomization\": { \"DefaultTheme\":\n                \"arn:aws:quicksight:us-west-2:111122223333:theme/bdb844d0-0fe9-4d9d-b520-0fe602d93639\"\n                }</code>. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1509,7 +1522,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a dashboard from a template. To first create a template, see the <code>\n               <a>CreateTemplate</a>\n            </code> API operation.</p>\n        <p>A dashboard is an entity in Amazon QuickSight that identifies Amazon QuickSight reports, created\n            from analyses. You can share Amazon QuickSight dashboards. With the right permissions, you can\n            create scheduled email reports from them. If you have the correct permissions, you can\n            create a dashboard from a template that exists in a different Amazon Web Services account.</p>",
+                "smithy.api#documentation": "<p>Creates a dashboard from a template. To first create a template, see the \n        <code>\n               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_CreateTemplate.html\">CreateTemplate</a>\n            </code> \n            API operation.</p>\n        <p>A dashboard is an entity in Amazon QuickSight that identifies Amazon QuickSight reports, created\n            from analyses. You can share Amazon QuickSight dashboards. With the right permissions, you can\n            create scheduled email reports from them. If you have the correct permissions, you can\n            create a dashboard from a template that exists in a different Amazon Web Services account.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/accounts/{AwsAccountId}/dashboards/{DashboardId}",
@@ -1531,7 +1544,7 @@
                 "DashboardId": {
                     "target": "com.amazonaws.quicksight#RestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID for the dashboard, also added to the IAMpolicy.</p>",
+                        "smithy.api#documentation": "<p>The ID for the dashboard, also added to the IAM policy.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1552,13 +1565,13 @@
                 "Permissions": {
                     "target": "com.amazonaws.quicksight#ResourcePermissionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure that contains the permissions of the dashboard. You can use this structure\n            for granting permissions by providing a list of IAMaction information for each\n            principal ARN. </p>\n\n        <p>To specify no permissions, omit the permissions list.</p>"
+                        "smithy.api#documentation": "<p>A structure that contains the permissions of the dashboard. You can use this structure\n            for granting permissions by providing a list of IAM action information for each\n            principal ARN. </p>\n\n        <p>To specify no permissions, omit the permissions list.</p>"
                     }
                 },
                 "SourceEntity": {
                     "target": "com.amazonaws.quicksight#DashboardSourceEntity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The entity that you are using as a source when you create the dashboard. In\n            <code>SourceEntity</code>, you specify the type of object you're using as source. You\n            can only create a dashboard from a template, so you use a <code>SourceTemplate</code>\n            entity. If you need to create a dashboard from an analysis, first convert the analysis\n            to a template by using the <a>CreateTemplate</a> API operation. For\n            <code>SourceTemplate</code>, specify the Amazon Resource Name (ARN) of the source\n            template. The <code>SourceTemplate</code>ARN can contain any Amazon Web Services account and any\n            Amazon QuickSight-supported Amazon Web Services Region. </p>\n        <p>Use the <code>DataSetReferences</code> entity within <code>SourceTemplate</code> to\n            list the replacement datasets for the placeholders listed in the original. The schema in\n            each dataset must match its placeholder. </p>",
+                        "smithy.api#documentation": "<p>The entity that you are using as a source when you create the dashboard. In\n            <code>SourceEntity</code>, you specify the type of object you're using as source. You\n            can only create a dashboard from a template, so you use a <code>SourceTemplate</code>\n            entity. If you need to create a dashboard from an analysis, first convert the analysis\n            to a template by using the <code>\n               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_CreateTemplate.html\">CreateTemplate</a>\n            </code> \n            API operation. For\n            <code>SourceTemplate</code>, specify the Amazon Resource Name (ARN) of the source\n            template. The <code>SourceTemplate</code>ARN can contain any Amazon Web Services account and any\n            Amazon QuickSight-supported Amazon Web Services Region. </p>\n        <p>Use the <code>DataSetReferences</code> entity within <code>SourceTemplate</code> to\n            list the replacement datasets for the placeholders listed in the original. The schema in\n            each dataset must match its placeholder. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1754,7 +1767,7 @@
                 "ColumnLevelPermissionRules": {
                     "target": "com.amazonaws.quicksight#ColumnLevelPermissionRuleList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of one or more definitions of a <code>\n               <a>ColumnLevelPermissionRule</a>\n            </code>.</p>"
+                        "smithy.api#documentation": "<p>A set of one or more definitions of a <code>\n               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_ColumnLevelPermissionRule.html\">ColumnLevelPermissionRule</a>\n            </code>.</p>"
                     }
                 },
                 "Tags": {
@@ -2054,7 +2067,7 @@
                 "AwsAccountId": {
                     "target": "com.amazonaws.quicksight#AwsAccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Account ID.</p>",
+                        "smithy.api#documentation": "<p>The ID for the Amazon Web Services account that contains the folder.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2062,7 +2075,7 @@
                 "FolderId": {
                     "target": "com.amazonaws.quicksight#RestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The folder ID.</p>",
+                        "smithy.api#documentation": "<p>The ID of the folder.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2091,7 +2104,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the folder membership. If succeeded, the status is <code>SC_OK (200)</code>.</p>"
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>"
                     }
                 },
                 "FolderMember": {
@@ -2103,7 +2116,7 @@
                 "RequestId": {
                     "target": "com.amazonaws.quicksight#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The request ID.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
             }
@@ -2114,7 +2127,7 @@
                 "AwsAccountId": {
                     "target": "com.amazonaws.quicksight#AwsAccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Account ID.</p>",
+                        "smithy.api#documentation": "<p>The ID for the Amazon Web Services account where you want to create the folder.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2122,7 +2135,7 @@
                 "FolderId": {
                     "target": "com.amazonaws.quicksight#RestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The folder ID.</p>",
+                        "smithy.api#documentation": "<p>The ID of the folder.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2142,13 +2155,13 @@
                 "ParentFolderArn": {
                     "target": "com.amazonaws.quicksight#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the parent folder.</p>\n\t        <p>\n            <code>ParentFolderArn</code> can be null. An empty <code>parentFolderArn</code> creates a root-level folder.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the parent folder.</p>\n        <p>\n            <code>ParentFolderArn</code> can be null. An empty <code>parentFolderArn</code> creates a root-level folder.</p>"
                     }
                 },
                 "Permissions": {
                     "target": "com.amazonaws.quicksight#ResourcePermissionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure that describes the principals and the resource-level permissions of a folder.</p>\n\t        <p>To specify no permissions, omit <code>Permissions</code>.</p>"
+                        "smithy.api#documentation": "<p>A structure that describes the principals and the resource-level permissions of a folder.</p>\n        <p>To specify no permissions, omit <code>Permissions</code>.</p>"
                     }
                 },
                 "Tags": {
@@ -2165,7 +2178,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the newly created folder. If succeeded, the status is <code>SC_OK (200)</code>.</p>",
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
                 },
@@ -2297,7 +2310,7 @@
                 "AwsAccountId": {
                     "target": "com.amazonaws.quicksight#AwsAccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the\n\t\t\tAmazon Web Services account that contains your Amazon QuickSight account.</p>",
+                        "smithy.api#documentation": "<p>The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the \n\t\t\tAmazon Web Services account that contains your Amazon QuickSight account.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2432,7 +2445,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an assignment with one specified IAMpolicy, identified by its Amazon Resource Name \n\t\t\t(ARN). This policy assignment is attached to the specified groups or users of Amazon QuickSight.\n\t\t\tAssignment names are unique per Amazon Web Services account. To avoid overwriting rules in other namespaces, \n\t\t\tuse assignment names that are unique.</p>",
+                "smithy.api#documentation": "<p>Creates an assignment with one specified IAM policy, identified by its Amazon Resource Name\n\t\t\t(ARN). This policy assignment is attached to the specified groups or users of Amazon QuickSight.\n\t\t\tAssignment names are unique per Amazon Web Services account. To avoid overwriting rules in other namespaces,\n\t\t\tuse assignment names that are unique.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/accounts/{AwsAccountId}/namespaces/{Namespace}/iam-policy-assignments",
@@ -2446,7 +2459,7 @@
                 "AwsAccountId": {
                     "target": "com.amazonaws.quicksight#AwsAccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account where you want to assign an IAMpolicy to Amazon QuickSight users or\n\t\t\tgroups.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account where you want to assign an IAM policy to Amazon QuickSight users or\n\t\t\tgroups.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2468,7 +2481,7 @@
                 "PolicyArn": {
                     "target": "com.amazonaws.quicksight#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN for the IAMpolicy to apply to the Amazon QuickSight users and groups\n\t\t\tspecified in this assignment.</p>"
+                        "smithy.api#documentation": "<p>The ARN for the IAM policy to apply to the Amazon QuickSight users and groups\n\t\t\tspecified in this assignment.</p>"
                     }
                 },
                 "Identities": {
@@ -2511,13 +2524,13 @@
                 "PolicyArn": {
                     "target": "com.amazonaws.quicksight#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN for the IAMpolicy that is applied to the Amazon QuickSight users and groups specified in this assignment.</p>"
+                        "smithy.api#documentation": "<p>The ARN for the IAM policy that is applied to the Amazon QuickSight users and groups specified in this assignment.</p>"
                     }
                 },
                 "Identities": {
                     "target": "com.amazonaws.quicksight#IdentityMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon QuickSight users, groups, or both that the IAMpolicy is assigned to.</p>"
+                        "smithy.api#documentation": "<p>The Amazon QuickSight users, groups, or both that the IAM policy is assigned to.</p>"
                     }
                 },
                 "RequestId": {
@@ -3191,7 +3204,7 @@
                 "BaseThemeId": {
                     "target": "com.amazonaws.quicksight#RestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the theme that a custom theme will inherit from. All themes inherit from one of\n\t\t\tthe starting themes defined by Amazon QuickSight. For a list of the starting themes, use\n\t\t\t\t<code>ListThemes</code> or choose <b>Themes</b> from\n\t\t\twithin a Amazon QuickSight analysis. </p>",
+                        "smithy.api#documentation": "<p>The ID of the theme that a custom theme will inherit from. All themes inherit from one of\n\t\t\tthe starting themes defined by Amazon QuickSight. For a list of the starting themes, use\n\t\t\t\t<code>ListThemes</code> or choose <b>Themes</b> from\n\t\t\twithin an analysis. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3917,7 +3930,7 @@
                 "ColumnLevelPermissionRules": {
                     "target": "com.amazonaws.quicksight#ColumnLevelPermissionRuleList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of one or more definitions of a <code>\n               <a>ColumnLevelPermissionRule</a>\n            </code>.</p>"
+                        "smithy.api#documentation": "<p>A set of one or more definitions of a <code>\n               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_ColumnLevelPermissionRule.html\">ColumnLevelPermissionRule</a>\n            </code>.</p>"
                     }
                 },
                 "DataSetUsageConfiguration": {
@@ -4226,7 +4239,7 @@
                 "CredentialPair": {
                     "target": "com.amazonaws.quicksight#CredentialPair",
                     "traits": {
-                        "smithy.api#documentation": "<p>Credential pair. For more information, see <a>CredentialPair</a>.</p>"
+                        "smithy.api#documentation": "<p>Credential pair. For more information, see\n            <code>\n               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_CredentialPair.html\">CredentialPair</a>\n            </code>.</p>"
                     }
                 },
                 "CopySourceArn": {
@@ -4430,7 +4443,16 @@
                     }
                 },
                 "AmazonOpenSearchParameters": {
-                    "target": "com.amazonaws.quicksight#AmazonOpenSearchParameters"
+                    "target": "com.amazonaws.quicksight#AmazonOpenSearchParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters for OpenSearch.</p>"
+                    }
+                },
+                "ExasolParameters": {
+                    "target": "com.amazonaws.quicksight#ExasolParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters for Exasol.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4548,6 +4570,10 @@
                     {
                         "value": "AMAZON_OPENSEARCH",
                         "name": "AMAZON_OPENSEARCH"
+                    },
+                    {
+                        "value": "EXASOL",
+                        "name": "EXASOL"
                     }
                 ]
             }
@@ -4640,6 +4666,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.quicksight#InternalFailureException"
@@ -5163,7 +5192,7 @@
                 "AwsAccountId": {
                     "target": "com.amazonaws.quicksight#AwsAccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Account ID.</p>",
+                        "smithy.api#documentation": "<p>The ID for the Amazon Web Services account that contains the folder.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5200,13 +5229,13 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of deleting the asset. If succeeded, the status is <code>SC_OK (200)</code>.</p>"
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>"
                     }
                 },
                 "RequestId": {
                     "target": "com.amazonaws.quicksight#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The request ID.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
             }
@@ -5217,7 +5246,7 @@
                 "AwsAccountId": {
                     "target": "com.amazonaws.quicksight#AwsAccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Account ID for the folder.</p>",
+                        "smithy.api#documentation": "<p>The ID for the Amazon Web Services account that contains the folder.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5225,7 +5254,7 @@
                 "FolderId": {
                     "target": "com.amazonaws.quicksight#RestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The folder ID.</p>",
+                        "smithy.api#documentation": "<p>The ID of the folder.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5238,7 +5267,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of deleting the folder. If succeeded, the status is <code>SC_OK (200)</code>.</p>",
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
                 },
@@ -5251,13 +5280,13 @@
                 "FolderId": {
                     "target": "com.amazonaws.quicksight#RestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The folder ID.</p>"
+                        "smithy.api#documentation": "<p>The ID of the folder.</p>"
                     }
                 },
                 "RequestId": {
                     "target": "com.amazonaws.quicksight#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The request ID.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
             }
@@ -5476,7 +5505,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an existing IAMpolicy assignment.</p>",
+                "smithy.api#documentation": "<p>Deletes an existing IAM policy assignment.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/accounts/{AwsAccountId}/namespace/{Namespace}/iam-policy-assignments/{AssignmentName}",
@@ -5490,7 +5519,7 @@
                 "AwsAccountId": {
                     "target": "com.amazonaws.quicksight#AwsAccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services account ID where you want to delete the IAMpolicy assignment.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID where you want to delete the IAM policy assignment.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6228,7 +6257,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the customizations associated with the provided Amazon Web Services account and Amazon\n            Amazon QuickSight namespace in an Amazon Web Services Region. The Amazon QuickSight console evaluates which\n            customizations to apply by running this API operation with the <code>Resolved</code> flag\n            included. </p>\n        <p>To determine what customizations display when you run this command, it can help to\n            visualize the relationship of the entities involved. </p>\n        <ul>\n            <li>\n                <p>\n                  <code>Amazon Web Services account</code> - The Amazon Web Services account exists at the top of the hierarchy.\n                    It has the potential to use all of the Amazon Web Services Regions and AWS Services. When you\n                    subscribe to Amazon QuickSight, you choose one Amazon Web Services Region to use as your home Region.\n                    That's where your free SPICE capacity is located. You can use Amazon QuickSight in any\n                    supported Amazon Web Services Region. </p>\n            </li>\n            <li>\n                <p>\n                  <code>Amazon Web Services Region</code> - In each Amazon Web Services Region where you sign in to Amazon QuickSight\n                    at least once, Amazon QuickSight acts as a separate instance of the same service. If\n                    you have a user directory, it resides in us-east-1, which is the US East (N.\n                    Virginia). Generally speaking, these users have access to Amazon QuickSight in any\n                    Amazon Web Services Region, unless they are constrained to a namespace. </p>\n                <p>To run the command in a different Amazon Web Services Region, you change your Region settings.\n                    If you're using the AWS CLI, you can use one of the following options:</p>\n                <ul>\n                  <li>\n                        <p>Use <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-options.html\">command line options</a>. </p>\n                    </li>\n                  <li>\n                        <p>Use <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html\">named profiles</a>. </p>\n                    </li>\n                  <li>\n                        <p>Run <code>aws configure</code> to change your default Amazon Web Services Region. Use\n                            Enter to key the same settings for your keys. For more information, see\n                            <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html\">Configuring the AWS CLI</a>.</p>\n                    </li>\n               </ul>\n            </li>\n            <li>\n                <p>\n                  <code>Namespace</code> - A Amazon QuickSight namespace is a partition that contains\n                    users and assets (data sources, datasets, dashboards, and so on). To access\n                    assets that are in a specific namespace, users and groups must also be part of\n                    the same namespace. People who share a namespace are completely isolated from\n                    users and assets in other namespaces, even if they are in the same Amazon Web Services account\n                    and Amazon Web Services Region.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Applied customizations</code> -  Within an Amazon Web Services Region, a set of\n                    Amazon QuickSight customizations can apply to an Amazon Web Services account or to a namespace.\n                    Settings that you apply to a namespace override settings that you apply to an\n                    Amazon Web Services account. All settings are isolated to a single Amazon Web Services Region. To apply them in\n                    other Amazon Web Services Regions, run the <code>CreateAccountCustomization</code> command in\n                    each Amazon Web Services Region where you want to apply the same customizations. </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Describes the customizations associated with the provided Amazon Web Services account and Amazon\n            Amazon QuickSight namespace in an Amazon Web Services Region. The Amazon QuickSight console evaluates which\n            customizations to apply by running this API operation with the <code>Resolved</code> flag\n            included. </p>\n        <p>To determine what customizations display when you run this command, it can help to\n            visualize the relationship of the entities involved. </p>\n        <ul>\n            <li>\n                <p>\n                  <code>Amazon Web Services account</code> - The Amazon Web Services account exists at the top of the hierarchy.\n                    It has the potential to use all of the Amazon Web Services Regions and Amazon Web Services Services. When you\n                    subscribe to Amazon QuickSight, you choose one Amazon Web Services Region to use as your home Region.\n                    That's where your free SPICE capacity is located. You can use Amazon QuickSight in any\n                    supported Amazon Web Services Region. </p>\n            </li>\n            <li>\n                <p>\n                  <code>Amazon Web Services Region</code> - In each Amazon Web Services Region where you sign in to Amazon QuickSight\n                    at least once, Amazon QuickSight acts as a separate instance of the same service. If\n                    you have a user directory, it resides in us-east-1, which is the US East (N.\n                    Virginia). Generally speaking, these users have access to Amazon QuickSight in any\n                    Amazon Web Services Region, unless they are constrained to a namespace. </p>\n                <p>To run the command in a different Amazon Web Services Region, you change your Region settings.\n                    If you're using the CLI, you can use one of the following options:</p>\n                <ul>\n                  <li>\n                        <p>Use <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-options.html\">command line options</a>. </p>\n                    </li>\n                  <li>\n                        <p>Use <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html\">named profiles</a>. </p>\n                    </li>\n                  <li>\n                        <p>Run <code>aws configure</code> to change your default Amazon Web Services Region. Use\n                            Enter to key the same settings for your keys. For more information, see\n                            <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html\">Configuring the CLI</a>.</p>\n                    </li>\n               </ul>\n            </li>\n            <li>\n                <p>\n                  <code>Namespace</code> - A QuickSight namespace is a partition that contains\n                    users and assets (data sources, datasets, dashboards, and so on). To access\n                    assets that are in a specific namespace, users and groups must also be part of\n                    the same namespace. People who share a namespace are completely isolated from\n                    users and assets in other namespaces, even if they are in the same Amazon Web Services account\n                    and Amazon Web Services Region.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Applied customizations</code> -  Within an Amazon Web Services Region, a set of\n                    Amazon QuickSight customizations can apply to an Amazon Web Services account or to a namespace.\n                    Settings that you apply to a namespace override settings that you apply to an\n                    Amazon Web Services account. All settings are isolated to a single Amazon Web Services Region. To apply them in\n                    other Amazon Web Services Regions, run the <code>CreateAccountCustomization</code> command in\n                    each Amazon Web Services Region where you want to apply the same customizations. </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/accounts/{AwsAccountId}/customizations",
@@ -6361,7 +6390,7 @@
                 "AccountSettings": {
                     "target": "com.amazonaws.quicksight#AccountSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon QuickSight settings for this Amazon Web Services account. This information includes the edition of Amazon\n            Amazon QuickSight that you subscribed to (Standard or Enterprise) and the notification email for the\n            Amazon QuickSight subscription. In the Amazon QuickSight console, the Amazon QuickSight subscription is sometimes\n            referred to as a Amazon QuickSight \"account\" even though it's technically not an account\n            by itself. Instead, it's a subscription to the Amazon QuickSight service for your Amazon Web Services account. The\n            edition that you subscribe to applies to Amazon QuickSight in every Amazon Web Services Region where you use it.</p>"
+                        "smithy.api#documentation": "<p>The Amazon QuickSight settings for this Amazon Web Services account. This information includes the edition of Amazon\n            Amazon QuickSight that you subscribed to (Standard or Enterprise) and the notification email for the\n            Amazon QuickSight subscription. In the QuickSight console, the Amazon QuickSight subscription is sometimes\n            referred to as a QuickSight \"account\" even though it's technically not an account\n            by itself. Instead, it's a subscription to the Amazon QuickSight service for your Amazon Web Services account. The\n            edition that you subscribe to applies to Amazon QuickSight in every Amazon Web Services Region where you use it.</p>"
                     }
                 },
                 "RequestId": {
@@ -6637,7 +6666,7 @@
                 "DashboardId": {
                     "target": "com.amazonaws.quicksight#RestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID for the dashboard, also added to the IAMpolicy.</p>",
+                        "smithy.api#documentation": "<p>The ID for the dashboard, also added to the IAM policy.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6676,6 +6705,12 @@
                     "target": "com.amazonaws.quicksight#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "LinkSharingConfiguration": {
+                    "target": "com.amazonaws.quicksight#LinkSharingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains the configuration of a shareable link that grants access to\n            the dashboard. Your users can use the link to view and interact with the dashboard, if\n            the dashboard has been shared with them. For more information about sharing dashboards,\n            see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/sharing-a-dashboard.html\">Sharing Dashboards</a>.</p>"
                     }
                 }
             }
@@ -7159,7 +7194,7 @@
                 "AwsAccountId": {
                     "target": "com.amazonaws.quicksight#AwsAccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Account ID.</p>",
+                        "smithy.api#documentation": "<p>The ID for the Amazon Web Services account that contains the folder.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -7167,7 +7202,7 @@
                 "FolderId": {
                     "target": "com.amazonaws.quicksight#RestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The folder ID.</p>",
+                        "smithy.api#documentation": "<p>The ID of the folder.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -7180,14 +7215,14 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status. If succeeded, the status is <code>SC_OK</code>.</p>",
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
                 },
                 "FolderId": {
                     "target": "com.amazonaws.quicksight#RestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The folder ID.</p>"
+                        "smithy.api#documentation": "<p>The ID of the folder.</p>"
                     }
                 },
                 "Arn": {
@@ -7205,7 +7240,7 @@
                 "RequestId": {
                     "target": "com.amazonaws.quicksight#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The request ID.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
             }
@@ -7216,7 +7251,7 @@
                 "AwsAccountId": {
                     "target": "com.amazonaws.quicksight#AwsAccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID.</p>",
+                        "smithy.api#documentation": "<p>The ID for the Amazon Web Services account that contains the folder.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -7224,7 +7259,7 @@
                 "FolderId": {
                     "target": "com.amazonaws.quicksight#RestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The folder ID.</p>",
+                        "smithy.api#documentation": "<p>The ID of the folder.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -7274,7 +7309,7 @@
                 "AwsAccountId": {
                     "target": "com.amazonaws.quicksight#AwsAccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID.</p>",
+                        "smithy.api#documentation": "<p>The ID for the Amazon Web Services account that contains the folder.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -7282,7 +7317,7 @@
                 "FolderId": {
                     "target": "com.amazonaws.quicksight#RestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The folder ID.</p>",
+                        "smithy.api#documentation": "<p>The ID of the folder.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -7295,32 +7330,32 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status. If succeeded, the status is <code>SC_OK</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
                 },
                 "FolderId": {
                     "target": "com.amazonaws.quicksight#RestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The folder ID.</p>"
+                        "smithy.api#documentation": "<p>The ID of the folder.</p>"
                     }
                 },
                 "Arn": {
                     "target": "com.amazonaws.quicksight#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN).</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the folder.</p>"
                     }
                 },
                 "Permissions": {
                     "target": "com.amazonaws.quicksight#ResourcePermissionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the permissions on the dashboard.</p>"
+                        "smithy.api#documentation": "<p>Information about the permissions for the folder.</p>"
                     }
                 },
                 "RequestId": {
                     "target": "com.amazonaws.quicksight#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The request ID.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
             }
@@ -7331,7 +7366,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status. If succeeded, the status is <code>SC_OK (200)</code>.</p>",
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
                 },
@@ -7344,7 +7379,7 @@
                 "RequestId": {
                     "target": "com.amazonaws.quicksight#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The request ID.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
             }
@@ -7471,7 +7506,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes an existing IAMpolicy assignment, as specified by the assignment name.</p>",
+                "smithy.api#documentation": "<p>Describes an existing IAM policy assignment, as specified by the assignment name.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/accounts/{AwsAccountId}/namespaces/{Namespace}/iam-policy-assignments/{AssignmentName}",
@@ -7514,7 +7549,7 @@
                 "IAMPolicyAssignment": {
                     "target": "com.amazonaws.quicksight#IAMPolicyAssignment",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information describing the IAMpolicy assignment.</p>"
+                        "smithy.api#documentation": "<p>Information describing the IAM policy assignment.</p>"
                     }
                 },
                 "RequestId": {
@@ -7648,7 +7683,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides a summary and status of IP Rules.</p>",
+                "smithy.api#documentation": "<p>Provides a summary and status of IP rules.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/accounts/{AwsAccountId}/ip-restriction",
@@ -7662,7 +7697,7 @@
                 "AwsAccountId": {
                     "target": "com.amazonaws.quicksight#AwsAccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Your AWS account ID.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the IP rules.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -7675,31 +7710,31 @@
                 "AwsAccountId": {
                     "target": "com.amazonaws.quicksight#AwsAccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Your AWS account ID.</p>"
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the IP rules.</p>"
                     }
                 },
                 "IpRestrictionRuleMap": {
                     "target": "com.amazonaws.quicksight#IpRestrictionRuleMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the IP rules with CIDR range and description.</p>"
+                        "smithy.api#documentation": "<p>A map that describes the IP rules with CIDR range and description.</p>"
                     }
                 },
                 "Enabled": {
                     "target": "com.amazonaws.quicksight#NullableBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether or not IP rules are enabled.</p>"
+                        "smithy.api#documentation": "<p>A value that specifies whether IP rules are turned on.</p>"
                     }
                 },
                 "RequestId": {
                     "target": "com.amazonaws.quicksight#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the describe request.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 },
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of a set of IP restrictions. A successful request returns a 200 status code.</p>",
+                        "smithy.api#documentation": "<p>The HTTP status of the request. </p>",
                         "smithy.api#httpResponseCode": {}
                     }
                 }
@@ -8558,6 +8593,28 @@
                 "smithy.api#documentation": "<p>Error information for the SPICE ingestion of a dataset.</p>"
             }
         },
+        "com.amazonaws.quicksight#ExasolParameters": {
+            "type": "structure",
+            "members": {
+                "Host": {
+                    "target": "com.amazonaws.quicksight#Host",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The hostname or IP address of the Exasol data source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Port": {
+                    "target": "com.amazonaws.quicksight#Port",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port for the Exasol data source.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The required parameters for connecting to an Exasol data source.</p>"
+            }
+        },
         "com.amazonaws.quicksight#ExceptionResourceType": {
             "type": "string",
             "traits": {
@@ -8734,13 +8791,13 @@
                 "FolderId": {
                     "target": "com.amazonaws.quicksight#RestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The folder ID.</p>"
+                        "smithy.api#documentation": "<p>The ID of the folder.</p>"
                     }
                 },
                 "Arn": {
                     "target": "com.amazonaws.quicksight#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The folder Amazon Resource Name (ARN).</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the folder.</p>"
                     }
                 },
                 "Name": {
@@ -8752,13 +8809,13 @@
                 "FolderType": {
                     "target": "com.amazonaws.quicksight#FolderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the folder.</p>"
+                        "smithy.api#documentation": "<p>The type of folder it is.</p>"
                     }
                 },
                 "FolderPath": {
                     "target": "com.amazonaws.quicksight#Path",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of ancestor folder ARN strings.</p>"
+                        "smithy.api#documentation": "<p>An array of ancestor ARN strings for the folder.</p>"
                     }
                 },
                 "CreatedTime": {
@@ -8775,7 +8832,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A folder.</p>"
+                "smithy.api#documentation": "<p>A folder in Amazon QuickSight.</p>"
             }
         },
         "com.amazonaws.quicksight#FolderColumnList": {
@@ -8807,18 +8864,18 @@
                 "MemberId": {
                     "target": "com.amazonaws.quicksight#RestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the asset.</p>"
+                        "smithy.api#documentation": "<p>The ID of an asset in the folder.</p>"
                     }
                 },
                 "MemberType": {
                     "target": "com.amazonaws.quicksight#MemberType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the asset.</p>"
+                        "smithy.api#documentation": "<p>The type of asset that it is.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An asset in a folder, such as a dashboard, analysis, or dataset.</p>"
+                "smithy.api#documentation": "<p>An asset in a Amazon QuickSight folder, such as a dashboard, analysis, or dataset.</p>"
             }
         },
         "com.amazonaws.quicksight#FolderMemberList": {
@@ -8848,13 +8905,13 @@
                 "Operator": {
                     "target": "com.amazonaws.quicksight#FilterOperator",
                     "traits": {
-                        "smithy.api#documentation": "<p>The comparison operator that you want to use as a filter. For example, <code>\"Operator\": \"StringEquals\"</code>.</p>"
+                        "smithy.api#documentation": "<p>The comparison operator that you want to use in the filter. For example, <code>\"Operator\": \"StringEquals\"</code>.</p>"
                     }
                 },
                 "Name": {
                     "target": "com.amazonaws.quicksight#FolderFilterAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the value that you want to use as a filter. For example, <code>\"Name\": \"PARENT_FOLDER_ARN\"</code>.</p>"
+                        "smithy.api#documentation": "<p>The name of a value that you want to use in the filter. For example, <code>\"Name\": \"PARENT_FOLDER_ARN\"</code>.</p>"
                     }
                 },
                 "Value": {
@@ -8865,7 +8922,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Searches a folder by a filter.</p>"
+                "smithy.api#documentation": "<p>A filter to use to search a Amazon QuickSight folder.</p>"
             }
         },
         "com.amazonaws.quicksight#FolderSearchFilterList": {
@@ -8886,13 +8943,13 @@
                 "Arn": {
                     "target": "com.amazonaws.quicksight#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN).</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the folder.</p>"
                     }
                 },
                 "FolderId": {
                     "target": "com.amazonaws.quicksight#RestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The folder ID.</p>"
+                        "smithy.api#documentation": "<p>The ID of the folder.</p>"
                     }
                 },
                 "Name": {
@@ -8921,7 +8978,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A summary of the folder. </p>"
+                "smithy.api#documentation": "<p>A summary of information about an existing Amazon QuickSight folder. </p>"
             }
         },
         "com.amazonaws.quicksight#FolderSummaryList": {
@@ -9136,7 +9193,7 @@
                 "ExperienceConfiguration": {
                     "target": "com.amazonaws.quicksight#RegisteredUserEmbeddingExperienceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The experience you are embedding. For registered users, you can embed Amazon QuickSight dashboards, the entire Amazon QuickSight console, or the Amazon QuickSight Q search bar.</p>",
+                        "smithy.api#documentation": "<p>The experience you are embedding. For registered users, you can embed Amazon QuickSight dashboards or the entire Amazon QuickSight console.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -9148,7 +9205,7 @@
                 "EmbedUrl": {
                     "target": "com.amazonaws.quicksight#EmbeddingUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p>The embed URL for the Amazon QuickSight dashboard, console, or Q search bar.</p>",
+                        "smithy.api#documentation": "<p>The embed URL for the Amazon QuickSight dashboard or console.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9357,7 +9414,7 @@
                 "UserArn": {
                     "target": "com.amazonaws.quicksight#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon QuickSight user's Amazon Resource Name (ARN), for use with <code>QUICKSIGHT</code> identity type.\n\t\t\tYou can use this for any Amazon QuickSight users in your account (readers, authors, or\n\t\t\tadmins) authenticated as one of the following:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>Active Directory (AD) users or group members</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>Invited nonfederated users</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>IAMusers and IAMrole-based sessions authenticated through Federated Single Sign-On using\n\t\t\t\t\tSAML, OpenID Connect, or IAMfederation.</p>\n\t\t\t         </li>\n         </ul>\n         <p>Omit this parameter for users in the third group – IAMusers and IAM\n            role-based sessions.</p>",
+                        "smithy.api#documentation": "<p>The Amazon QuickSight user's Amazon Resource Name (ARN), for use with <code>QUICKSIGHT</code> identity type.\n\t\t\tYou can use this for any Amazon QuickSight users in your account (readers, authors, or\n\t\t\tadmins) authenticated as one of the following:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>Active Directory (AD) users or group members</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>Invited nonfederated users</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>IAM users and IAM role-based sessions authenticated through Federated Single Sign-On using\n\t\t\t\t\tSAML, OpenID Connect, or IAM federation.</p>\n\t\t\t         </li>\n         </ul>\n         <p>Omit this parameter for users in the third group – IAM users and IAM\n            role-based sessions.</p>",
                         "smithy.api#httpQuery": "user-arn"
                     }
                 },
@@ -9371,7 +9428,7 @@
                 "AdditionalDashboardIds": {
                     "target": "com.amazonaws.quicksight#AdditionalDashboardIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of one or more dashboard IDs that you want to add to a session that includes\n            anonymous users. The <code>IdentityType</code> parameter must be set to\n                <code>ANONYMOUS</code> for this to work, because other identity types authenticate\n            as Amazon QuickSight or IAMusers. For example, if you set \"<code>--dashboard-id dash_id1\n                --dashboard-id dash_id2 dash_id3 identity-type ANONYMOUS</code>\", the session\n            can access all three dashboards. </p>",
+                        "smithy.api#documentation": "<p>A list of one or more dashboard IDs that you want to add to a session that includes\n            anonymous users. The <code>IdentityType</code> parameter must be set to\n                <code>ANONYMOUS</code> for this to work, because other identity types authenticate\n            as Amazon QuickSight or IAM users. For example, if you set \"<code>--dashboard-id dash_id1\n                --dashboard-id dash_id2 dash_id3 identity-type ANONYMOUS</code>\", the session\n            can access all three dashboards. </p>",
                         "smithy.api#httpQuery": "additional-dashboard-ids"
                     }
                 }
@@ -9442,7 +9499,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Generates a session URL and authorization code that you can use to embed the Amazon\n            Amazon QuickSight console in your web server code. Use <code>GetSessionEmbedUrl</code> where\n            you want to provide an authoring portal that allows users to create data sources,\n            datasets, analyses, and dashboards. The users who access an embedded Amazon QuickSight console\n            need belong to the author or admin security cohort. If you want to restrict permissions\n            to some of these features, add a custom permissions profile to the user with the\n            <code>\n               <a>UpdateUser</a>\n            </code> API operation. Use <code>\n               <a>RegisterUser</a>\n            </code> API operation to add a new user with a custom permission profile attached. For more\n            information, see the following sections in the <i>Amazon QuickSight User\n            Guide</i>:</p>\n        <ul>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html\">Embedding Analytics</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html\">Customizing Access to the Amazon QuickSight Console</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Generates a session URL and authorization code that you can use to embed the Amazon\n            Amazon QuickSight console in your web server code. Use <code>GetSessionEmbedUrl</code> where\n            you want to provide an authoring portal that allows users to create data sources,\n            datasets, analyses, and dashboards. The users who access an embedded Amazon QuickSight console\n            need belong to the author or admin security cohort. If you want to restrict permissions\n            to some of these features, add a custom permissions profile to the user with the\n            <code>\n               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdateUser.html\">UpdateUser</a>\n            </code> API operation. Use <code>\n               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_RegisterUser.html\">RegisterUser</a>\n            </code>\n            API operation to add a new user with a custom permission profile attached. For more\n            information, see the following sections in the <i>Amazon QuickSight User\n            Guide</i>:</p>\n        <ul>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html\">Embedding Analytics</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html\">Customizing Access to the Amazon QuickSight Console</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/accounts/{AwsAccountId}/session-embed-url",
@@ -9654,7 +9711,7 @@
                 "PolicyArn": {
                     "target": "com.amazonaws.quicksight#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the IAMpolicy.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the IAM policy.</p>"
                     }
                 },
                 "Identities": {
@@ -9700,7 +9757,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>IAMpolicy assignment summary.</p>"
+                "smithy.api#documentation": "<p>IAM policy assignment summary.</p>"
             }
         },
         "com.amazonaws.quicksight#IAMPolicyAssignmentSummaryList": {
@@ -10458,6 +10515,20 @@
                 "smithy.api#httpError": 409
             }
         },
+        "com.amazonaws.quicksight#LinkSharingConfiguration": {
+            "type": "structure",
+            "members": {
+                "Permissions": {
+                    "target": "com.amazonaws.quicksight#ResourcePermissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains the permissions of a shareable link.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains the configuration of a shareable link to the dashboard.</p>"
+            }
+        },
         "com.amazonaws.quicksight#ListAnalyses": {
             "type": "operation",
             "input": {
@@ -10994,7 +11065,7 @@
                 "AwsAccountId": {
                     "target": "com.amazonaws.quicksight#AwsAccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID.</p>",
+                        "smithy.api#documentation": "<p>The ID for the Amazon Web Services account that contains the folder.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -11002,7 +11073,7 @@
                 "FolderId": {
                     "target": "com.amazonaws.quicksight#RestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The folder ID.</p>",
+                        "smithy.api#documentation": "<p>The ID of the folder.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -11030,7 +11101,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status. If succeeded, the status is <code>SC_OK</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
                 },
@@ -11049,7 +11120,7 @@
                 "RequestId": {
                     "target": "com.amazonaws.quicksight#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The request ID.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
             }
@@ -11100,7 +11171,7 @@
                 "AwsAccountId": {
                     "target": "com.amazonaws.quicksight#AwsAccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID.</p>",
+                        "smithy.api#documentation": "<p>The ID for the Amazon Web Services account that contains the folder.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -11128,14 +11199,14 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status. If succeeded, the status is <code>SC_OK</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
                 },
                 "FolderSummaryList": {
                     "target": "com.amazonaws.quicksight#FolderSummaryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure that contains all of the folders in your AWS account. This structure provides basic information about the folders.</p>"
+                        "smithy.api#documentation": "<p>A structure that contains all of the folders in the Amazon Web Services account. This structure provides basic information about the folders.</p>"
                     }
                 },
                 "NextToken": {
@@ -11147,7 +11218,7 @@
                 "RequestId": {
                     "target": "com.amazonaws.quicksight#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The request ID.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
             }
@@ -11407,7 +11478,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists IAMpolicy assignments in the current Amazon QuickSight account.</p>",
+                "smithy.api#documentation": "<p>Lists IAM policy assignments in the current Amazon QuickSight account.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/accounts/{AwsAccountId}/namespaces/{Namespace}/iam-policy-assignments",
@@ -11447,7 +11518,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all the IAMpolicy assignments, including the Amazon Resource Names (ARNs) for the IAM\n\t\t\tpolicies assigned to the specified user and group or groups that the user belongs\n\t\t\tto.</p>",
+                "smithy.api#documentation": "<p>Lists all the IAM policy assignments, including the Amazon Resource Names (ARNs) for the IAM\n\t\t\tpolicies assigned to the specified user and group or groups that the user belongs\n\t\t\tto.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/accounts/{AwsAccountId}/namespaces/{Namespace}/users/{UserName}/iam-policy-assignments",
@@ -11535,7 +11606,7 @@
                 "AwsAccountId": {
                     "target": "com.amazonaws.quicksight#AwsAccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains these IAMpolicy assignments.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains these IAM policy assignments.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -11577,7 +11648,7 @@
                 "IAMPolicyAssignments": {
                     "target": "com.amazonaws.quicksight#IAMPolicyAssignmentSummaryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information describing the IAMpolicy assignments.</p>"
+                        "smithy.api#documentation": "<p>Information describing the IAM policy assignments.</p>"
                     }
                 },
                 "NextToken": {
@@ -12941,7 +13012,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that consists of the member Amazon Resource Name (ARN) and member ID.</p>"
+                "smithy.api#documentation": "<p>An object that consists of a member Amazon Resource Name (ARN) and a member ID.</p>"
             }
         },
         "com.amazonaws.quicksight#MemberType": {
@@ -13503,6 +13574,21 @@
         },
         "com.amazonaws.quicksight#QuickSight_20180401": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "QuickSight",
+                    "arnNamespace": "quicksight",
+                    "cloudFormationName": "QuickSight",
+                    "cloudTrailEventSource": "quicksight.amazonaws.com",
+                    "endpointPrefix": "quicksight"
+                },
+                "aws.auth#sigv4": {
+                    "name": "quicksight"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<fullname>Amazon QuickSight API Reference</fullname>\n        <p>Amazon QuickSight is a fully managed, serverless business intelligence service for the\n            Amazon Web Services Cloud that makes it easy to extend data and insights to every user in your\n            organization. This API reference contains documentation for a programming interface that\n            you can use to manage Amazon QuickSight. </p>",
+                "smithy.api#title": "Amazon QuickSight"
+            },
             "version": "2018-04-01",
             "operations": [
                 {
@@ -13850,22 +13936,7 @@
                 {
                     "target": "com.amazonaws.quicksight#UpdateUser"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "QuickSight",
-                    "arnNamespace": "quicksight",
-                    "cloudFormationName": "QuickSight",
-                    "cloudTrailEventSource": "quicksight.amazonaws.com",
-                    "endpointPrefix": "quicksight"
-                },
-                "aws.auth#sigv4": {
-                    "name": "quicksight"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<fullname>Amazon QuickSight API Reference</fullname>\n        <p>Amazon QuickSight is a fully managed, serverless business intelligence service for the\n            Amazon Web Services Cloud that makes it easy to extend data and insights to every user in your\n            organization. This API reference contains documentation for a programming interface that\n            you can use to manage Amazon QuickSight. </p>",
-                "smithy.api#title": "Amazon QuickSight"
-            }
+            ]
         },
         "com.amazonaws.quicksight#RdsParameters": {
             "type": "structure",
@@ -13970,7 +14041,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon QuickSight user, whose identity is associated with the AWS Identity\n\t\t\tand Access Management (IAM) identity or role specified in the request. </p>",
+                "smithy.api#documentation": "<p>Creates an Amazon QuickSight user, whose identity is associated with the Identity and Access Management (IAM) identity or role specified in the request. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/accounts/{AwsAccountId}/namespaces/{Namespace}/users",
@@ -13984,7 +14055,7 @@
                 "IdentityType": {
                     "target": "com.amazonaws.quicksight#IdentityType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon QuickSight supports several ways of managing the identity of users. This\n\t\t\tparameter accepts two values:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <code>IAM</code>: A user whose identity maps to an existing IAMuser or role.\n\t\t\t\t</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>QUICKSIGHT</code>: A user whose identity is owned and managed internally by\n\t\t\t\t\tAmazon QuickSight. </p>\n\t\t\t         </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Amazon QuickSight supports several ways of managing the identity of users. This\n\t\t\tparameter accepts two values:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <code>IAM</code>: A user whose identity maps to an existing IAM user or role.\n\t\t\t\t</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>QUICKSIGHT</code>: A user whose identity is owned and managed internally by\n\t\t\t\t\tAmazon QuickSight. </p>\n\t\t\t         </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -14005,13 +14076,13 @@
                 "IamArn": {
                     "target": "com.amazonaws.quicksight#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAMuser or role that you are registering with Amazon QuickSight. </p>"
+                        "smithy.api#documentation": "<p>The ARN of the IAM user or role that you are registering with Amazon QuickSight. </p>"
                     }
                 },
                 "SessionName": {
                     "target": "com.amazonaws.quicksight#RoleSessionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>You need to use this parameter only when you register one or more users using an assumed\n\t\t\tIAMrole. You don't need to provide the session name for other scenarios, for example when\n\t\t\tyou are registering an IAMuser or an Amazon QuickSight user. You can register multiple\n\t\t\tusers using the same IAMrole if each user has a different session name. For more\n\t\t\tinformation on assuming IAMroles, see <a href=\"https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role.html\">\n               <code>assume-role</code>\n            </a> in the <i>AWS CLI Reference.</i>\n         </p>"
+                        "smithy.api#documentation": "<p>You need to use this parameter only when you register one or more users using an assumed\n\t\t\tIAM role. You don't need to provide the session name for other scenarios, for example when\n\t\t\tyou are registering an IAM user or an Amazon QuickSight user. You can register multiple\n\t\t\tusers using the same IAM role if each user has a different session name. For more\n\t\t\tinformation on assuming IAM roles, see <a href=\"https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role.html\">\n               <code>assume-role</code>\n            </a> in the <i>CLI Reference.</i>\n         </p>"
                     }
                 },
                 "AwsAccountId": {
@@ -14039,7 +14110,7 @@
                 "CustomPermissionsName": {
                     "target": "com.amazonaws.quicksight#RoleName",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Enterprise edition only) The name of the custom permissions profile that you want to\n            assign to this user. Customized permissions allows you to control a user's access by\n            restricting access the following operations:</p>\n        <ul>\n            <li>\n                <p>Create and update data sources</p>\n            </li>\n            <li>\n                <p>Create and update datasets</p>\n            </li>\n            <li>\n                <p>Create and update email reports</p>\n            </li>\n            <li>\n                <p>Subscribe to email reports</p>\n            </li>\n         </ul>\n        <p>To add custom permissions to an existing user, use <code>\n               <a>UpdateUser</a>\n            </code> instead.</p>\n        <p>A set of custom permissions includes any combination of these restrictions. Currently,\n            you need to create the profile names for custom permission sets by using the Amazon QuickSight\n            console. Then, you use the <code>RegisterUser</code> API operation to assign the named set of\n            permissions to a Amazon QuickSight user. </p>\n        <p>Amazon QuickSight custom permissions are applied through IAMpolicies. Therefore, they\n            override the permissions typically granted by assigning Amazon QuickSight users to one of the\n            default security cohorts in Amazon QuickSight (admin, author, reader).</p>\n        <p>This feature is available only to Amazon QuickSight Enterprise edition subscriptions.</p>"
+                        "smithy.api#documentation": "<p>(Enterprise edition only) The name of the custom permissions profile that you want to\n            assign to this user. Customized permissions allows you to control a user's access by\n            restricting access the following operations:</p>\n        <ul>\n            <li>\n                <p>Create and update data sources</p>\n            </li>\n            <li>\n                <p>Create and update datasets</p>\n            </li>\n            <li>\n                <p>Create and update email reports</p>\n            </li>\n            <li>\n                <p>Subscribe to email reports</p>\n            </li>\n         </ul>\n        <p>To add custom permissions to an existing user, use <code>\n               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdateUser.html\">UpdateUser</a>\n            </code> instead.</p>\n        <p>A set of custom permissions includes any combination of these restrictions. Currently,\n            you need to create the profile names for custom permission sets by using the Amazon QuickSight\n            console. Then, you use the <code>RegisterUser</code> API operation to assign the named set of\n            permissions to a QuickSight user. </p>\n        <p>Amazon QuickSight custom permissions are applied through IAM policies. Therefore, they\n            override the permissions typically granted by assigning Amazon QuickSight users to one of the\n            default security cohorts in Amazon QuickSight (admin, author, reader).</p>\n        <p>This feature is available only to Amazon QuickSight Enterprise edition subscriptions.</p>"
                     }
                 },
                 "ExternalLoginFederationProviderType": {
@@ -14119,18 +14190,18 @@
                 "QuickSightConsole": {
                     "target": "com.amazonaws.quicksight#RegisteredUserQuickSightConsoleEmbeddingConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration details for providing an Amazon QuickSight console embedding experience. This can be used along with custom permissions to restrict access to certain features. For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html\">Customizing Access to the Amazon QuickSight Console</a> in the <i>Amazon QuickSight User\n            Guide</i>.</p>\n        <p>Use <code>GenerateEmbedUrlForRegisteredUser</code> where\n            you want to provide an authoring portal that allows users to create data sources,\n            datasets, analyses, and dashboards. The users who accesses an embedded Amazon QuickSight console\n            needs to belong to the author or admin security cohort. If you want to restrict permissions\n            to some of these features, add a custom permissions profile to the user with the\n            <code>\n               <a>UpdateUser</a>\n            </code> API operation. Use <code>\n               <a>RegisterUser</a>\n            </code> API operation to add a new user with a custom permission profile attached. For more\n            information, see the following sections in the <i>Amazon QuickSight User\n            Guide</i>:</p>\n        <ul>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics-full-console-for-authenticated-users.html\">Embedding the Full Functionality of the Amazon QuickSight Console for Authenticated Users</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html\">Customizing Access to the Amazon QuickSight Console</a>\n               </p>\n            </li>\n         </ul>\n        <p>For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html\">Amazon QuickSight Developer Portal</a>.</p>"
+                        "smithy.api#documentation": "<p>The configuration details for providing each Amazon QuickSight console embedding experience. This can be used along with custom permissions to restrict access to certain features. For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html\">Customizing Access to the Amazon QuickSight Console</a> in the <i>Amazon QuickSight User\n            Guide</i>.</p>\n        <p>Use <code>\n               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForRegisteredUser.html\">GenerateEmbedUrlForRegisteredUser</a>\n            </code>\n            where\n            you want to provide an authoring portal that allows users to create data sources,\n            datasets, analyses, and dashboards. The users who accesses an embedded Amazon QuickSight console\n            needs to belong to the author or admin security cohort. If you want to restrict permissions\n            to some of these features, add a custom permissions profile to the user with the\n            <code>\n               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdateUser.html\">UpdateUser</a>\n            </code> API operation. Use the <code>\n               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_RegisterUser.html\">RegisterUser</a>\n            </code> API operation to add a new user with a custom permission profile attached. For more\n            information, see the following sections in the <i>Amazon QuickSight User\n            Guide</i>:</p>\n        <ul>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics-full-console-for-authenticated-users.html\">Embedding the Full Functionality of the Amazon QuickSight Console for Authenticated Users</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html\">Customizing Access to the Amazon QuickSight Console</a>\n               </p>\n            </li>\n         </ul>\n        <p>For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html\">Amazon QuickSight Developer Portal</a>.</p>"
                     }
                 },
                 "QSearchBar": {
                     "target": "com.amazonaws.quicksight#RegisteredUserQSearchBarEmbeddingConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration details for embedding the Q search bar.</p>\n         <p>For more information about embedding the Q search bar, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedding-overview.html\">Embedding Overview</a>.</p>"
+                        "smithy.api#documentation": "<p>The configuration details for embedding the Q search bar.</p>\n         <p>For more information about embedding the Q search bar, see\n      <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedding-overview.html\">Embedding Overview</a>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The type of experience you want to embed. For registered users, you can embed an Amazon QuickSight dashboard or the Amazon QuickSight console.</p>\n         <note>\n            <p>Exactly one of the experience configurations is required. You can choose <code>Dashboard</code> or <code>QuickSightConsole</code>. You cannot choose more than one experience configuraton.</p>\n         </note>"
+                "smithy.api#documentation": "<p>The type of experience you want to embed. For registered users, you can embed Amazon QuickSight dashboards or the Amazon QuickSight console.</p>\n         <note>\n            <p>Exactly one of the experience configurations is required. You can choose\n                    <code>Dashboard</code> or <code>QuickSightConsole</code>. You cannot choose more\n                than one experience configuration.</p>\n         </note>"
             }
         },
         "com.amazonaws.quicksight#RegisteredUserQSearchBarEmbeddingConfiguration": {
@@ -14139,7 +14210,7 @@
                 "InitialTopicId": {
                     "target": "com.amazonaws.quicksight#RestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the Q topic that you want to make the starting topic in the Q search bar. You can find a topic ID by navigating to the Topics pane in the Amazon QuickSight application and opening a topic. The ID is in the URL for the topic that you open.</p>\n         <p>If you don't specify an initial topic, a list of all shared topics is shown in the Q bar for your readers. When you select an initial topic, you can specify whether or not readers are allowed to select other topics from the available ones in the list.</p>"
+                        "smithy.api#documentation": "<p>The ID of the Q topic that you want to make the starting topic in the Q search bar.\n      You can find a topic ID by navigating to the Topics pane in the Amazon QuickSight application and opening\n      a topic. The ID is in the URL for the topic that you open.</p>\n         <p>If you don't specify an initial topic, a list of all shared topics is shown in the Q bar\n      for your readers. When you select an initial topic, you can specify whether or not readers\n      are allowed to select other topics from the available ones in the list.</p>"
                     }
                 }
             },
@@ -14319,14 +14390,14 @@
                 "Principal": {
                     "target": "com.amazonaws.quicksight#Principal",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:</p>\n        <ul>\n            <li>\n                <p>The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)</p>\n            </li>\n            <li>\n                <p>The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>\n            </li>\n            <li>\n                <p>The ARN of an Amazon Web Services account root: This is an IAMARN rather than a Amazon QuickSight\n                    ARN. Use this option only to share resources (templates) across Amazon Web Services accounts.\n                    (This is less common.) </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:</p>\n        <ul>\n            <li>\n                <p>The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)</p>\n            </li>\n            <li>\n                <p>The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>\n            </li>\n            <li>\n                <p>The ARN of an Amazon Web Services account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across Amazon Web Services accounts.\n                    (This is less common.) </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "Actions": {
                     "target": "com.amazonaws.quicksight#ActionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IAMaction to grant or revoke permissions on.</p>",
+                        "smithy.api#documentation": "<p>The IAM action to grant or revoke permissions on.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -15017,7 +15088,7 @@
                 "AwsAccountId": {
                     "target": "com.amazonaws.quicksight#AwsAccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID.</p>",
+                        "smithy.api#documentation": "<p>The ID for the Amazon Web Services account that contains the folder.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -15050,14 +15121,14 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status. If succeeded, the status is <code>SC_OK</code>.</p>",
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
                 },
                 "FolderSummaryList": {
                     "target": "com.amazonaws.quicksight#FolderSummaryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure that contains all of the folders in your AWS account. This structure provides basic information about the folders.</p>"
+                        "smithy.api#documentation": "<p>A structure that contains all of the folders in the Amazon Web Services account. This structure provides basic information about the folders.</p>"
                     }
                 },
                 "NextToken": {
@@ -15069,7 +15140,7 @@
                 "RequestId": {
                     "target": "com.amazonaws.quicksight#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The request ID.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
             }
@@ -15516,7 +15587,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the specified Amazon QuickSight resource. </p>\n\t\t       <p>Tags can help you organize and categorize your resources. You can also use them to\n\t\t\tscope user permissions, by granting a user permission to access or change only resources\n\t\t\twith certain tag values. You can use the <code>TagResource</code> operation with a\n\t\t\tresource that already has tags. If you specify a new tag key for the resource, this tag\n\t\t\tis appended to the list of tags associated with the resource. If you specify a tag key\n\t\t\tthat is already associated with the resource, the new tag value that you specify\n\t\t\treplaces the previous value for that tag.</p>\n\t\t       <p>You can associate as many as 50 tags with a resource. Amazon QuickSight supports tagging on data\n\t\t\tset, data source, dashboard, and template. </p>\n\t\t       <p>Tagging for Amazon QuickSight works in a similar way to tagging for other AWS services, except for\n\t\t\tthe following:</p>\n\t\t       <ul>\n            <li>\n               <p>You can't use tags to track AWS costs for Amazon QuickSight. This restriction is because Amazon QuickSight\n\t\t\t\t\tcosts are based on users and SPICE capacity, which aren't taggable\n\t\t\t\t\tresources.</p>\n            </li>\n            <li>\n               <p>Amazon QuickSight doesn't currently support the Tag Editor for Resource Groups.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the specified Amazon QuickSight resource. </p>\n\t\t       <p>Tags can help you organize and categorize your resources. You can also use them to\n\t\t\tscope user permissions, by granting a user permission to access or change only resources\n\t\t\twith certain tag values. You can use the <code>TagResource</code> operation with a\n\t\t\tresource that already has tags. If you specify a new tag key for the resource, this tag\n\t\t\tis appended to the list of tags associated with the resource. If you specify a tag key\n\t\t\tthat is already associated with the resource, the new tag value that you specify\n\t\t\treplaces the previous value for that tag.</p>\n\t\t       <p>You can associate as many as 50 tags with a resource. Amazon QuickSight supports tagging on data\n\t\t\tset, data source, dashboard, and template. </p>\n\t\t       <p>Tagging for Amazon QuickSight works in a similar way to tagging for other Amazon Web Services services, except for\n\t\t\tthe following:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>You can't use tags to track costs for Amazon QuickSight. This isn't\n\t\t\t\tpossible because you can't tag the resources that Amazon QuickSight costs are based \n\t\t\t\ton, for example Amazon QuickSight storage capacity (SPICE), number of users, type \n\t\t\t\tof users, and usage metrics.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>Amazon QuickSight doesn't currently support the tag editor for Resource Groups.</p>\n\t\t\t\t        </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/resources/{ResourceArn}/tags",
@@ -16598,7 +16669,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This error indicates that you are calling an embedding operation in Amazon QuickSight\n\t\t\twithout the required pricing plan on your Amazon Web Services account. Before you can use embedding \n\t\t\tfor anonymous users, a Amazon QuickSight administrator needs to add capacity pricing to Amazon QuickSight. You \n\t\t    can do this on the <b>Manage Amazon QuickSight</b> page. </p>\n        <p>After capacity pricing is added, you can use the \n            <a>GetDashboardEmbedUrl</a> API operation with the \n            <code>--identity-type ANONYMOUS</code> option.</p>",
+                "smithy.api#documentation": "<p>This error indicates that you are calling an embedding operation in Amazon QuickSight\n\t\t\twithout the required pricing plan on your Amazon Web Services account. Before you can use embedding \n\t\t\tfor anonymous users, a QuickSight administrator needs to add capacity pricing to Amazon QuickSight. You \n\t\t    can do this on the <b>Manage Amazon QuickSight</b> page. </p>\n        <p>After capacity pricing is added, you can use the \n            <code>\n               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GetDashboardEmbedUrl.html\">GetDashboardEmbedUrl</a>\n            </code> API operation with the \n            <code>--identity-type ANONYMOUS</code> option.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
             }
@@ -16728,6 +16799,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.quicksight#InternalFailureException"
@@ -17165,7 +17239,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a dashboard in an Amazon Web Services account.</p>\n        <note>\n            <p>Updating a Dashboard creates a new dashboard version but does not immediately publish\n                the new version.  You can update the published version of a dashboard by\n                using the <a>UpdateDashboardPublishedVersion</a> API operation.</p>\n        </note>",
+                "smithy.api#documentation": "<p>Updates a dashboard in an Amazon Web Services account.</p>\n        <note>\n            <p>Updating a Dashboard creates a new dashboard version but does not immediately publish\n                the new version.  You can update the published version of a dashboard by\n                using the <code>\n                  <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdateDashboardPublishedVersion.html\">UpdateDashboardPublishedVersion</a>\n               </code> API operation.</p>\n        </note>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/accounts/{AwsAccountId}/dashboards/{DashboardId}",
@@ -17240,6 +17314,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The permissions that you want to revoke from this resource.</p>"
                     }
+                },
+                "GrantLinkPermissions": {
+                    "target": "com.amazonaws.quicksight#UpdateLinkPermissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Grants link permissions to all users in a defined namespace.</p>"
+                    }
+                },
+                "RevokeLinkPermissions": {
+                    "target": "com.amazonaws.quicksight#UpdateLinkPermissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Revokes link permissions from all users in a defined namespace.</p>"
+                    }
                 }
             }
         },
@@ -17275,6 +17361,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
+                    }
+                },
+                "LinkSharingConfiguration": {
+                    "target": "com.amazonaws.quicksight#LinkSharingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates the permissions of a shared link to an Amazon QuickSight dashboard.</p>"
                     }
                 }
             }
@@ -17404,7 +17496,7 @@
                 "SourceEntity": {
                     "target": "com.amazonaws.quicksight#DashboardSourceEntity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The entity that you are using as a source when you update the dashboard. In\n            <code>SourceEntity</code>, you specify the type of object you're using as source. You\n            can only update a dashboard from a template, so you use a <code>SourceTemplate</code>\n            entity. If you need to update a dashboard from an analysis, first convert the analysis\n            to a template by using the <a>CreateTemplate</a> API operation. For\n            <code>SourceTemplate</code>, specify the Amazon Resource Name (ARN) of the source\n            template. The <code>SourceTemplate</code> ARN can contain any Amazon Web Services account and any\n            Amazon QuickSight-supported Amazon Web Services Region. </p>\n        <p>Use the <code>DataSetReferences</code> entity within <code>SourceTemplate</code> to\n            list the replacement datasets for the placeholders listed in the original. The schema in\n            each dataset must match its placeholder. </p>",
+                        "smithy.api#documentation": "<p>The entity that you are using as a source when you update the dashboard. In\n            <code>SourceEntity</code>, you specify the type of object you're using as source. You\n            can only update a dashboard from a template, so you use a <code>SourceTemplate</code>\n            entity. If you need to update a dashboard from an analysis, first convert the analysis\n            to a template by using the <code>\n               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_CreateTemplate.html\">CreateTemplate</a>\n            </code> API operation. For\n            <code>SourceTemplate</code>, specify the Amazon Resource Name (ARN) of the source\n            template. The <code>SourceTemplate</code> ARN can contain any Amazon Web Services account and any\n            Amazon QuickSight-supported Amazon Web Services Region. </p>\n        <p>Use the <code>DataSetReferences</code> entity within <code>SourceTemplate</code> to\n            list the replacement datasets for the placeholders listed in the original. The schema in\n            each dataset must match its placeholder. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -17691,7 +17783,7 @@
                 "ColumnLevelPermissionRules": {
                     "target": "com.amazonaws.quicksight#ColumnLevelPermissionRuleList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of one or more definitions of a <code>\n               <a>ColumnLevelPermissionRule</a>\n            </code>.</p>"
+                        "smithy.api#documentation": "<p>A set of one or more definitions of a <code>\n               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_ColumnLevelPermissionRule.html\">ColumnLevelPermissionRule</a>\n            </code>.</p>"
                     }
                 },
                 "DataSetUsageConfiguration": {
@@ -18055,7 +18147,7 @@
                 "AwsAccountId": {
                     "target": "com.amazonaws.quicksight#AwsAccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID.</p>",
+                        "smithy.api#documentation": "<p>The ID for the Amazon Web Services account that contains the folder to update.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -18063,7 +18155,7 @@
                 "FolderId": {
                     "target": "com.amazonaws.quicksight#RestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The folder ID.</p>",
+                        "smithy.api#documentation": "<p>The ID of the folder.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -18088,31 +18180,31 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status. If succeeded, the status is <code>SC_OK</code>.</p>"
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>"
                     }
                 },
                 "Arn": {
                     "target": "com.amazonaws.quicksight#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN).</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the folder.</p>"
                     }
                 },
                 "FolderId": {
                     "target": "com.amazonaws.quicksight#RestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The folder ID.</p>"
+                        "smithy.api#documentation": "<p>The ID of the folder.</p>"
                     }
                 },
                 "Permissions": {
                     "target": "com.amazonaws.quicksight#ResourcePermissionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the permissions on the dashboard.</p>"
+                        "smithy.api#documentation": "<p>Information about the permissions for the folder.</p>"
                     }
                 },
                 "RequestId": {
                     "target": "com.amazonaws.quicksight#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The request ID.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
             }
@@ -18123,7 +18215,7 @@
                 "AwsAccountId": {
                     "target": "com.amazonaws.quicksight#AwsAccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID.</p>",
+                        "smithy.api#documentation": "<p>The ID for the Amazon Web Services account that contains the folder to update.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -18131,7 +18223,7 @@
                 "FolderId": {
                     "target": "com.amazonaws.quicksight#RestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The folder ID.</p>",
+                        "smithy.api#documentation": "<p>The ID of the folder.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -18151,26 +18243,26 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status. If succeeded, the status is <code>SC_OK</code>.</p>",
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
                 },
                 "Arn": {
                     "target": "com.amazonaws.quicksight#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN).</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the folder.</p>"
                     }
                 },
                 "FolderId": {
                     "target": "com.amazonaws.quicksight#RestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The folder ID.</p>"
+                        "smithy.api#documentation": "<p>The ID of the folder.</p>"
                     }
                 },
                 "RequestId": {
                     "target": "com.amazonaws.quicksight#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The request ID.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
             }
@@ -18306,7 +18398,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an existing IAMpolicy assignment. This operation updates only the optional\n\t\t\tparameter or parameters that are specified in the request. \n\t\t    This overwrites all of the users included in <code>Identities</code>. \n\t\t</p>",
+                "smithy.api#documentation": "<p>Updates an existing IAM policy assignment. This operation updates only the optional\n\t\t\tparameter or parameters that are specified in the request.\n\t\t    This overwrites all of the users included in <code>Identities</code>.\n\t\t</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/accounts/{AwsAccountId}/namespaces/{Namespace}/iam-policy-assignments/{AssignmentName}",
@@ -18320,7 +18412,7 @@
                 "AwsAccountId": {
                     "target": "com.amazonaws.quicksight#AwsAccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the IAMpolicy assignment. </p>",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the IAM policy assignment. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -18350,7 +18442,7 @@
                 "PolicyArn": {
                     "target": "com.amazonaws.quicksight#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN for the IAMpolicy to apply to the Amazon QuickSight users and groups\n\t\t\tspecified in this assignment.</p>"
+                        "smithy.api#documentation": "<p>The ARN for the IAM policy to apply to the Amazon QuickSight users and groups\n\t\t\tspecified in this assignment.</p>"
                     }
                 },
                 "Identities": {
@@ -18379,13 +18471,13 @@
                 "PolicyArn": {
                     "target": "com.amazonaws.quicksight#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN for the IAMpolicy applied to the Amazon QuickSight users and groups specified in this\n\t\t\tassignment.</p>"
+                        "smithy.api#documentation": "<p>The ARN for the IAM policy applied to the Amazon QuickSight users and groups specified in this\n\t\t\tassignment.</p>"
                     }
                 },
                 "Identities": {
                     "target": "com.amazonaws.quicksight#IdentityMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon QuickSight users, groups, or both that the IAMpolicy is assigned to.</p>"
+                        "smithy.api#documentation": "<p>The Amazon QuickSight users, groups, or both that the IAM policy is assigned to.</p>"
                     }
                 },
                 "AssignmentStatus": {
@@ -18438,7 +18530,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates content and status of IP Rules.</p>",
+                "smithy.api#documentation": "<p>Updates the content and status of IP rules. To use this operation, you need to provide the entire map of rules. You can use the <code>DescribeIpRestriction</code> operation to get the current rule map.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/accounts/{AwsAccountId}/ip-restriction",
@@ -18452,7 +18544,7 @@
                 "AwsAccountId": {
                     "target": "com.amazonaws.quicksight#AwsAccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Your AWS account ID.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the IP rules.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -18460,13 +18552,13 @@
                 "IpRestrictionRuleMap": {
                     "target": "com.amazonaws.quicksight#IpRestrictionRuleMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes updated IP rules.</p>"
+                        "smithy.api#documentation": "<p>A map that describes the updated IP rules with CIDR ranges and descriptions.</p>"
                     }
                 },
                 "Enabled": {
                     "target": "com.amazonaws.quicksight#NullableBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether or not IP rules are enabled.</p>"
+                        "smithy.api#documentation": "<p>A value that specifies whether IP rules are turned on.</p>"
                     }
                 }
             }
@@ -18477,21 +18569,33 @@
                 "AwsAccountId": {
                     "target": "com.amazonaws.quicksight#AwsAccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Your AWS account ID.</p>"
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the IP rules.</p>"
                     }
                 },
                 "RequestId": {
                     "target": "com.amazonaws.quicksight#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the update request.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 },
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the updated IP rules. A successful request returns a 200 code.</p>",
+                        "smithy.api#documentation": "<p>The HTTP status of the request. </p>",
                         "smithy.api#httpResponseCode": {}
                     }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#UpdateLinkPermissionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#ResourcePermission"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2
                 }
             }
         },
@@ -19253,7 +19357,7 @@
                 "CustomPermissionsName": {
                     "target": "com.amazonaws.quicksight#RoleName",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Enterprise edition only) The name of the custom permissions profile that you want to\n            assign to this user. Customized permissions allows you to control a user's access by\n            restricting access the following operations:</p>\n        <ul>\n            <li>\n                <p>Create and update data sources</p>\n            </li>\n            <li>\n                <p>Create and update datasets</p>\n            </li>\n            <li>\n                <p>Create and update email reports</p>\n            </li>\n            <li>\n                <p>Subscribe to email reports</p>\n            </li>\n         </ul>\n        <p>A set of custom permissions includes any combination of these restrictions. Currently,\n            you need to create the profile names for custom permission sets by using the Amazon QuickSight\n            console. Then, you use the <code>RegisterUser</code> API operation to assign the named set of\n            permissions to a Amazon QuickSight user. </p>\n        <p>Amazon QuickSight custom permissions are applied through IAMpolicies. Therefore, they\n            override the permissions typically granted by assigning Amazon QuickSight users to one of the\n            default security cohorts in Amazon QuickSight (admin, author, reader).</p>\n        <p>This feature is available only to Amazon QuickSight Enterprise edition subscriptions.</p>"
+                        "smithy.api#documentation": "<p>(Enterprise edition only) The name of the custom permissions profile that you want to\n            assign to this user. Customized permissions allows you to control a user's access by\n            restricting access the following operations:</p>\n        <ul>\n            <li>\n                <p>Create and update data sources</p>\n            </li>\n            <li>\n                <p>Create and update datasets</p>\n            </li>\n            <li>\n                <p>Create and update email reports</p>\n            </li>\n            <li>\n                <p>Subscribe to email reports</p>\n            </li>\n         </ul>\n        <p>A set of custom permissions includes any combination of these restrictions. Currently,\n            you need to create the profile names for custom permission sets by using the Amazon QuickSight\n            console. Then, you use the <code>RegisterUser</code> API operation to assign the named set of\n            permissions to a QuickSight user. </p>\n        <p>Amazon QuickSight custom permissions are applied through IAM policies. Therefore, they\n            override the permissions typically granted by assigning Amazon QuickSight users to one of the\n            default security cohorts in Amazon QuickSight (admin, author, reader).</p>\n        <p>This feature is available only to Amazon QuickSight Enterprise edition subscriptions.</p>"
                     }
                 },
                 "UnapplyCustomPermissions": {
@@ -19265,7 +19369,7 @@
                 "ExternalLoginFederationProviderType": {
                     "target": "com.amazonaws.quicksight#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of supported external login provider that provides identity to let a user federate into Amazon QuickSight with an associated Identity and Access Management(IAM) role. The type of supported external login provider can be one of the following.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>COGNITO</code>: Amazon Cognito. The provider URL is cognito-identity.amazonaws.com. When choosing the <code>COGNITO</code> provider type, don’t use the \"CustomFederationProviderUrl\" parameter which is only needed when the external provider is custom.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CUSTOM_OIDC</code>: Custom OpenID Connect (OIDC) provider. When choosing <code>CUSTOM_OIDC</code> type, use the <code>CustomFederationProviderUrl</code> parameter to provide the custom OIDC provider URL.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code>: This clears all the previously saved external login information for a user. Use <code>\n                     <a>DescribeUser</a>\n                  </code> API to check the external login information.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of supported external login provider that provides identity to let a user federate into Amazon QuickSight with an associated Identity and Access Management(IAM) role. The type of supported external login provider can be one of the following.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>COGNITO</code>: Amazon Cognito. The provider URL is cognito-identity.amazonaws.com. When choosing the <code>COGNITO</code> provider type, don’t use the \"CustomFederationProviderUrl\" parameter which is only needed when the external provider is custom.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CUSTOM_OIDC</code>: Custom OpenID Connect (OIDC) provider. When choosing <code>CUSTOM_OIDC</code> type, use the <code>CustomFederationProviderUrl</code> parameter to provide the custom OIDC provider URL.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code>: This clears all the previously saved external login information for a user. Use the\n          <code>\n                     <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DescribeUser.html\">DescribeUser</a>\n                  </code>\n          API operation to check the external login information.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "CustomFederationProviderUrl": {
@@ -19358,7 +19462,7 @@
                 "UserName": {
                     "target": "com.amazonaws.quicksight#UserName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user's user name.</p>"
+                        "smithy.api#documentation": "<p>The user's user name. In the output, the value for <code>UserName</code> is\n                <code>N/A</code> when the value for <code>IdentityType</code> is <code>IAM</code>\n            and the corresponding IAM user is deleted.</p>"
                     }
                 },
                 "Email": {
@@ -19400,7 +19504,7 @@
                 "ExternalLoginFederationProviderType": {
                     "target": "com.amazonaws.quicksight#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of supported external login provider that provides identity to let the user\n            federate into Amazon QuickSight with an associated IAMrole. The type can be one of the following.</p>\n        <ul>\n            <li>\n                    <p>\n                  <code>COGNITO</code>: Amazon Cognito. The provider URL is cognito-identity.amazonaws.com.</p>\n                </li>\n            <li>\n                    <p>\n                  <code>CUSTOM_OIDC</code>: Custom OpenID Connect (OIDC) provider.</p>\n                </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of supported external login provider that provides identity to let the user\n            federate into Amazon QuickSight with an associated IAM role. The type can be one of the following.</p>\n        <ul>\n            <li>\n                    <p>\n                  <code>COGNITO</code>: Amazon Cognito. The provider URL is cognito-identity.amazonaws.com.</p>\n                </li>\n            <li>\n                    <p>\n                  <code>CUSTOM_OIDC</code>: Custom OpenID Connect (OIDC) provider.</p>\n                </li>\n         </ul>"
                     }
                 },
                 "ExternalLoginFederationProviderUrl": {

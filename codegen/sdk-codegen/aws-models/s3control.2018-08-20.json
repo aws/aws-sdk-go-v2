@@ -31,6 +31,24 @@
     "shapes": {
         "com.amazonaws.s3control#AWSS3ControlServiceV20180820": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "S3 Control",
+                    "arnNamespace": "s3",
+                    "cloudFormationName": "S3Control",
+                    "cloudTrailEventSource": "s3control.amazonaws.com",
+                    "endpointPrefix": "s3-control"
+                },
+                "aws.auth#sigv4": {
+                    "name": "s3"
+                },
+                "aws.protocols#restXml": {},
+                "smithy.api#documentation": "<p>\n         Amazon Web Services S3 Control provides access to Amazon S3 control plane actions.\n          \n      </p>",
+                "smithy.api#title": "AWS S3 Control",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://awss3control.amazonaws.com/doc/2018-08-20/"
+                }
+            },
             "version": "2018-08-20",
             "operations": [
                 {
@@ -204,25 +222,7 @@
                 {
                     "target": "com.amazonaws.s3control#UpdateJobStatus"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "S3 Control",
-                    "arnNamespace": "s3",
-                    "cloudFormationName": "S3Control",
-                    "cloudTrailEventSource": "s3control.amazonaws.com",
-                    "endpointPrefix": "s3-control"
-                },
-                "aws.auth#sigv4": {
-                    "name": "s3"
-                },
-                "aws.protocols#restXml": {},
-                "smithy.api#documentation": "<p>\n         Amazon Web Services S3 Control provides access to Amazon S3 control plane actions.\n          \n      </p>",
-                "smithy.api#title": "AWS S3 Control",
-                "smithy.api#xmlNamespace": {
-                    "uri": "http://awss3control.amazonaws.com/doc/2018-08-20/"
-                }
-            }
+            ]
         },
         "com.amazonaws.s3control#AbortIncompleteMultipartUpload": {
             "type": "structure",
@@ -692,6 +692,21 @@
                 }
             }
         },
+        "com.amazonaws.s3control#CloudWatchMetrics": {
+            "type": "structure",
+            "members": {
+                "IsEnabled": {
+                    "target": "com.amazonaws.s3control#IsEnabled",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A container that indicates whether CloudWatch publishing for S3 Storage Lens metrics is enabled. A value of <code>true</code> indicates that CloudWatch publishing for S3 Storage Lens metrics is enabled.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A container for enabling Amazon CloudWatch publishing for S3 Storage Lens metrics.</p>\n         <p>For more information about publishing S3 Storage Lens metrics to CloudWatch, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_view_metrics_cloudwatch.html\">Monitor S3 Storage Lens metrics in CloudWatch</a> in the <i>Amazon S3 User Guide</i>.</p>"
+            }
+        },
         "com.amazonaws.s3control#ConfigId": {
             "type": "string",
             "traits": {
@@ -907,6 +922,14 @@
                         "smithy.api#required": {}
                     }
                 },
+                "CreateBucketConfiguration": {
+                    "target": "com.amazonaws.s3control#CreateBucketConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration information for the bucket.</p>\n         <note>\n            <p>This is not supported by Amazon S3 on Outposts buckets.</p>\n         </note>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#xmlName": "CreateBucketConfiguration"
+                    }
+                },
                 "GrantFullControl": {
                     "target": "com.amazonaws.s3control#GrantFullControl",
                     "traits": {
@@ -954,14 +977,6 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the Outposts where the bucket is being created.</p>\n         <note>\n            <p>This is required by Amazon S3 on Outposts buckets.</p> \n         </note>",
                         "smithy.api#httpHeader": "x-amz-outpost-id"
-                    }
-                },
-                "CreateBucketConfiguration": {
-                    "target": "com.amazonaws.s3control#CreateBucketConfiguration",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The configuration information for the bucket.</p>\n         <note>\n            <p>This is not supported by Amazon S3 on Outposts buckets.</p>\n         </note>",
-                        "smithy.api#httpPayload": {},
-                        "smithy.api#xmlName": "CreateBucketConfiguration"
                     }
                 }
             }
@@ -5522,15 +5537,6 @@
         "com.amazonaws.s3control#PutPublicAccessBlockRequest": {
             "type": "structure",
             "members": {
-                "AccountId": {
-                    "target": "com.amazonaws.s3control#AccountId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The account ID for the Amazon Web Services account whose <code>PublicAccessBlock</code> configuration you want\n         to set.</p>",
-                        "smithy.api#hostLabel": {},
-                        "smithy.api#httpHeader": "x-amz-account-id",
-                        "smithy.api#required": {}
-                    }
-                },
                 "PublicAccessBlockConfiguration": {
                     "target": "com.amazonaws.s3control#PublicAccessBlockConfiguration",
                     "traits": {
@@ -5538,6 +5544,15 @@
                         "smithy.api#httpPayload": {},
                         "smithy.api#required": {},
                         "smithy.api#xmlName": "PublicAccessBlockConfiguration"
+                    }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID for the Amazon Web Services account whose <code>PublicAccessBlock</code> configuration you want\n         to set.</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {}
                     }
                 }
             }
@@ -6739,8 +6754,13 @@
                 "S3BucketDestination": {
                     "target": "com.amazonaws.s3control#S3BucketDestination",
                     "traits": {
-                        "smithy.api#documentation": "<p>A container for the bucket where the S3 Storage Lens metrics export will be located.</p>\n         <note>\n            <p>This bucket must be located in the same Region as the storage lens configuration. </p>\n         </note>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>A container for the bucket where the S3 Storage Lens metrics export will be located.</p>\n         <note>\n            <p>This bucket must be located in the same Region as the storage lens configuration. </p>\n         </note>"
+                    }
+                },
+                "CloudWatchMetrics": {
+                    "target": "com.amazonaws.s3control#CloudWatchMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A container for enabling Amazon CloudWatch publishing for S3 Storage Lens metrics.</p>"
                     }
                 }
             },

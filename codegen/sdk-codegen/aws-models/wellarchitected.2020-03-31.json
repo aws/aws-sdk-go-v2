@@ -66,6 +66,12 @@
                 "HelpfulResourceUrl": {
                     "target": "com.amazonaws.wellarchitected#HelpfulResourceUrl"
                 },
+                "HelpfulResourceDisplayText": {
+                    "target": "com.amazonaws.wellarchitected#DisplayText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The helpful resource text to be displayed.</p>"
+                    }
+                },
                 "Choices": {
                     "target": "com.amazonaws.wellarchitected#Choices"
                 },
@@ -201,7 +207,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associate a lens to a workload.</p>",
+                "smithy.api#documentation": "<p>Associate a lens to a workload.</p>\n        <p>Up to 10 lenses can be associated with a workload in a single API operation. A \n        maximum of 20 lenses can be associated with a workload.</p>\n        <note>\n            <p>\n               <b>Disclaimer</b>\n            </p>\n            <p>By accessing and/or applying custom lenses created by another Amazon Web Services user or account, \n            you acknowledge that custom lenses created by other users and shared with you are \n            Third Party Content as defined in the Amazon Web Services Customer Agreement.    </p>\n         </note>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/workloads/{WorkloadId}/associateLenses",
@@ -233,14 +239,14 @@
         "com.amazonaws.wellarchitected#AwsAccountId": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>An AWS account ID.</p>",
+                "smithy.api#documentation": "<p>An Amazon Web Services account ID.</p>",
                 "smithy.api#pattern": "^[0-9]{12}$"
             }
         },
         "com.amazonaws.wellarchitected#AwsRegion": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>An AWS Region, for example, <code>us-west-2</code> or\n            <code>ap-northeast-1</code>.</p>",
+                "smithy.api#documentation": "<p>An Amazon Web Services Region, for example, <code>us-west-2</code> or\n            <code>ap-northeast-1</code>.</p>",
                 "smithy.api#length": {
                     "min": 0,
                     "max": 100
@@ -264,6 +270,18 @@
                 },
                 "Description": {
                     "target": "com.amazonaws.wellarchitected#ChoiceDescription"
+                },
+                "HelpfulResource": {
+                    "target": "com.amazonaws.wellarchitected#ChoiceContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The choice level helpful resource.</p>"
+                    }
+                },
+                "ImprovementPlan": {
+                    "target": "com.amazonaws.wellarchitected#ChoiceContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The choice level improvement plan.</p>"
+                    }
                 }
             },
             "traits": {
@@ -334,6 +352,44 @@
                 "target": "com.amazonaws.wellarchitected#ChoiceAnswer"
             }
         },
+        "com.amazonaws.wellarchitected#ChoiceContent": {
+            "type": "structure",
+            "members": {
+                "DisplayText": {
+                    "target": "com.amazonaws.wellarchitected#ChoiceContentDisplayText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display text for the choice content.</p>"
+                    }
+                },
+                "Url": {
+                    "target": "com.amazonaws.wellarchitected#ChoiceContentUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL for the choice content.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The choice content.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ChoiceContentDisplayText": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ChoiceContentUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
         "com.amazonaws.wellarchitected#ChoiceDescription": {
             "type": "string",
             "traits": {
@@ -352,6 +408,32 @@
                     "min": 1,
                     "max": 64
                 }
+            }
+        },
+        "com.amazonaws.wellarchitected#ChoiceImprovementPlan": {
+            "type": "structure",
+            "members": {
+                "ChoiceId": {
+                    "target": "com.amazonaws.wellarchitected#ChoiceId"
+                },
+                "DisplayText": {
+                    "target": "com.amazonaws.wellarchitected#DisplayText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display text for the improvement plan.</p>"
+                    }
+                },
+                "ImprovementPlanUrl": {
+                    "target": "com.amazonaws.wellarchitected#ImprovementPlanUrl"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The choice level improvement plan.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ChoiceImprovementPlans": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#ChoiceImprovementPlan"
             }
         },
         "com.amazonaws.wellarchitected#ChoiceNotes": {
@@ -467,7 +549,7 @@
         "com.amazonaws.wellarchitected#ClientRequestToken": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>A unique case-sensitive string used to ensure that this request is idempotent\n            (executes only once).</p>\n        <p>You should not reuse the same token for other requests. If you retry a request with\n            the same client request token and the same parameters after it has completed\n            successfully, the result of the original request is returned. </p>\n        <important>\n            <p>This token is listed as required, however, if you do not specify it, the AWS SDKs\n                automatically generate one for you. If you are not using the AWS SDK or the AWS CLI,\n                you must provide this token or the request will fail.</p>\n        </important>"
+                "smithy.api#documentation": "<p>A unique case-sensitive string used to ensure that this request is idempotent\n            (executes only once).</p>\n        <p>You should not reuse the same token for other requests. If you retry a request with\n            the same client request token and the same parameters after it has completed\n            successfully, the result of the original request is returned. </p>\n        <important>\n            <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs\n                automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI,\n                you must provide this token or the request will fail.</p>\n        </important>"
             }
         },
         "com.amazonaws.wellarchitected#ConflictException": {
@@ -504,6 +586,168 @@
                 "smithy.api#documentation": "<p>A non-negative integer that denotes how many.</p>",
                 "smithy.api#range": {
                     "min": 0
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#CreateLensShare": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#CreateLensShareInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#CreateLensShareOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Create a lens share.</p>\n        <p>The owner of a lens can share it with other Amazon Web Services accounts and IAM users in the same Amazon Web Services Region. \n            Shared access to a lens is not removed until the lens invitation is deleted.</p>\n        <note>\n            <p>\n               <b>Disclaimer</b>\n            </p>\n            <p>By sharing your custom lenses with other Amazon Web Services accounts, \n                you acknowledge that Amazon Web Services will make your custom lenses available to those \n                other accounts. Those other accounts may continue to access and use your \n                shared custom lenses even if you delete the custom lenses \n                from your own Amazon Web Services account or terminate \n                your Amazon Web Services account.</p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/lenses/{LensAlias}/shares",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#CreateLensShareInput": {
+            "type": "structure",
+            "members": {
+                "LensAlias": {
+                    "target": "com.amazonaws.wellarchitected#LensAlias",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SharedWith": {
+                    "target": "com.amazonaws.wellarchitected#SharedWith",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.wellarchitected#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#CreateLensShareOutput": {
+            "type": "structure",
+            "members": {
+                "ShareId": {
+                    "target": "com.amazonaws.wellarchitected#ShareId"
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#CreateLensVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#CreateLensVersionInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#CreateLensVersionOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Create a new lens version.</p>\n        <p>A lens can have up to 100 versions.</p>\n        <p>After a lens has been imported, create a new lens version to publish it.  The owner of a lens can share the lens with other \n            Amazon Web Services accounts and IAM users in the same Amazon Web Services Region. Only the owner of a lens can delete it.\n        </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/lenses/{LensAlias}/versions",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#CreateLensVersionInput": {
+            "type": "structure",
+            "members": {
+                "LensAlias": {
+                    "target": "com.amazonaws.wellarchitected#LensAlias",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "LensVersion": {
+                    "target": "com.amazonaws.wellarchitected#LensVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the lens being created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IsMajorVersion": {
+                    "target": "com.amazonaws.wellarchitected#IsMajorVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set to true if this new major lens version.</p>"
+                    }
+                },
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.wellarchitected#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#CreateLensVersionOutput": {
+            "type": "structure",
+            "members": {
+                "LensArn": {
+                    "target": "com.amazonaws.wellarchitected#LensArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the lens.</p>"
+                    }
+                },
+                "LensVersion": {
+                    "target": "com.amazonaws.wellarchitected#LensVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the lens.</p>"
+                    }
                 }
             }
         },
@@ -618,7 +862,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Create a new workload.</p>\n        <p>The owner of a workload can share the workload with other AWS accounts and IAM users\n            in the same AWS Region. Only the owner of a workload can delete it.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/define-workload.html\">Defining a Workload</a> in the\n                <i>AWS Well-Architected Tool User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Create a new workload.</p>\n        <p>The owner of a workload can share the workload with other Amazon Web Services accounts and IAM users\n            in the same Amazon Web Services Region. Only the owner of a workload can delete it.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/define-workload.html\">Defining a Workload</a> in the\n                <i>Well-Architected Tool User Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/workloads",
@@ -747,7 +991,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Create a workload share.</p>\n        <p>The owner of a workload can share it with other AWS accounts and IAM users in the same\n            AWS Region. Shared access to a workload is not removed until the workload invitation is\n            deleted.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/workloads-sharing.html\">Sharing a Workload</a> in the\n                <i>AWS Well-Architected Tool User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Create a workload share.</p>\n        <p>The owner of a workload can share it with other Amazon Web Services accounts and IAM users in the same\n            Amazon Web Services Region. Shared access to a workload is not removed until the workload invitation is\n            deleted.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/workloads-sharing.html\">Sharing a Workload</a> in the\n                <i>Well-Architected Tool User Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/workloads/{WorkloadId}/shares",
@@ -801,6 +1045,129 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Input for Create Workload Share</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#DeleteLens": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#DeleteLensInput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete an existing lens.</p>\n        <p>Only the owner of a lens can delete it.  After the lens is deleted,  Amazon Web Services accounts and IAM users \n              that you shared the lens with can continue to use it, but they will no longer be able to apply it to new workloads.\n        </p>\n        <note>\n            <p>\n               <b>Disclaimer</b>\n            </p>\n            <p>By sharing your custom lenses with other Amazon Web Services accounts, \n                you acknowledge that Amazon Web Services will make your custom lenses available to those \n                other accounts. Those other accounts may continue to access and use your \n                shared custom lenses even if you delete the custom lenses \n                from your own Amazon Web Services account or terminate \n                your Amazon Web Services account.</p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/lenses/{LensAlias}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#DeleteLensInput": {
+            "type": "structure",
+            "members": {
+                "LensAlias": {
+                    "target": "com.amazonaws.wellarchitected#LensAlias",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.wellarchitected#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#httpQuery": "ClientRequestToken",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "LensStatus": {
+                    "target": "com.amazonaws.wellarchitected#LensStatusType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the lens to be deleted.</p>",
+                        "smithy.api#httpQuery": "LensStatus",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#DeleteLensShare": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#DeleteLensShareInput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete a lens share.</p>\n        <p>After the lens share is deleted,  Amazon Web Services accounts and IAM users \n            that you shared the lens with can continue to use it, but they will no longer be able to apply it to new workloads.</p>\n        <note>\n            <p>\n               <b>Disclaimer</b>\n            </p>\n            <p>By sharing your custom lenses with other Amazon Web Services accounts, \n                you acknowledge that Amazon Web Services will make your custom lenses available to those \n                other accounts. Those other accounts may continue to access and use your \n                shared custom lenses even if you delete the custom lenses \n                from your own Amazon Web Services account or terminate \n                your Amazon Web Services account.</p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/lenses/{LensAlias}/shares/{ShareId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#DeleteLensShareInput": {
+            "type": "structure",
+            "members": {
+                "ShareId": {
+                    "target": "com.amazonaws.wellarchitected#ShareId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "LensAlias": {
+                    "target": "com.amazonaws.wellarchitected#LensAlias",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.wellarchitected#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#httpQuery": "ClientRequestToken",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                }
             }
         },
         "com.amazonaws.wellarchitected#DeleteWorkload": {
@@ -969,7 +1336,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disassociate a lens from a workload.</p>\n        <note>\n            <p>The AWS Well-Architected Framework lens (<code>wellarchitected</code>) cannot be\n                removed from a workload.</p>\n        </note>",
+                "smithy.api#documentation": "<p>Disassociate a lens from a workload.</p>\n        <p>Up to 10 lenses can be disassociated from a workload in a single API operation.</p>\n        <note>\n            <p>The Amazon Web Services Well-Architected Framework lens (<code>wellarchitected</code>) cannot be\n                removed from a workload.</p>\n        </note>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/workloads/{WorkloadId}/disassociateLenses",
@@ -998,6 +1365,15 @@
                 "smithy.api#documentation": "<p>Input to disassociate lens reviews.</p>"
             }
         },
+        "com.amazonaws.wellarchitected#DisplayText": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
         "com.amazonaws.wellarchitected#ExceptionMessage": {
             "type": "string",
             "traits": {
@@ -1014,6 +1390,70 @@
             "type": "string",
             "traits": {
                 "smithy.api#documentation": "<p>Type of the resource affected.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ExportLens": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#ExportLensInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#ExportLensOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Export an existing lens.</p>\n        <p>Lenses are defined in JSON. For more information, see <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/lenses-format-specification.html\">JSON format specification</a> \n            in the <i>Well-Architected Tool User Guide</i>. Only the owner of a lens can export it.               \n        </p>\n        <note>\n            <p>\n               <b>Disclaimer</b>\n            </p>\n            <p>Do not include or gather personal identifiable information (PII) of end users or \n                other identifiable individuals in or via your custom lenses. If your custom \n                lens or those shared with you and used in your account do include or collect \n                PII you are responsible for: ensuring that the included PII is processed in accordance \n                with applicable law, providing adequate privacy notices, and obtaining necessary \n                consents for processing such data.</p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/lenses/{LensAlias}/export",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ExportLensInput": {
+            "type": "structure",
+            "members": {
+                "LensAlias": {
+                    "target": "com.amazonaws.wellarchitected#LensAlias",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "LensVersion": {
+                    "target": "com.amazonaws.wellarchitected#LensVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lens version to be exported.</p>",
+                        "smithy.api#httpQuery": "LensVersion"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ExportLensOutput": {
+            "type": "structure",
+            "members": {
+                "LensJSON": {
+                    "target": "com.amazonaws.wellarchitected#LensJSON",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON for the lens.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.wellarchitected#GetAnswer": {
@@ -1097,12 +1537,82 @@
                 "LensAlias": {
                     "target": "com.amazonaws.wellarchitected#LensAlias"
                 },
+                "LensArn": {
+                    "target": "com.amazonaws.wellarchitected#LensArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the lens.</p>"
+                    }
+                },
                 "Answer": {
                     "target": "com.amazonaws.wellarchitected#Answer"
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Output of a get answer call.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#GetLens": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#GetLensInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#GetLensOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get an existing lens.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/lenses/{LensAlias}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#GetLensInput": {
+            "type": "structure",
+            "members": {
+                "LensAlias": {
+                    "target": "com.amazonaws.wellarchitected#LensAlias",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "LensVersion": {
+                    "target": "com.amazonaws.wellarchitected#LensVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lens version to be retrieved.</p>",
+                        "smithy.api#httpQuery": "LensVersion"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#GetLensOutput": {
+            "type": "structure",
+            "members": {
+                "Lens": {
+                    "target": "com.amazonaws.wellarchitected#Lens",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A lens return object.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.wellarchitected#GetLensReview": {
@@ -1311,8 +1821,14 @@
                     "target": "com.amazonaws.wellarchitected#LensVersion",
                     "traits": {
                         "smithy.api#documentation": "<p>The base version of the lens.</p>",
-                        "smithy.api#httpQuery": "BaseLensVersion",
-                        "smithy.api#required": {}
+                        "smithy.api#httpQuery": "BaseLensVersion"
+                    }
+                },
+                "TargetLensVersion": {
+                    "target": "com.amazonaws.wellarchitected#LensVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lens version to target a difference for.</p>",
+                        "smithy.api#httpQuery": "TargetLensVersion"
                     }
                 }
             }
@@ -1323,10 +1839,22 @@
                 "LensAlias": {
                     "target": "com.amazonaws.wellarchitected#LensAlias"
                 },
+                "LensArn": {
+                    "target": "com.amazonaws.wellarchitected#LensArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the lens.</p>"
+                    }
+                },
                 "BaseLensVersion": {
                     "target": "com.amazonaws.wellarchitected#LensVersion",
                     "traits": {
                         "smithy.api#documentation": "<p>The base version of the lens.</p>"
+                    }
+                },
+                "TargetLensVersion": {
+                    "target": "com.amazonaws.wellarchitected#LensVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target lens version for the lens.</p>"
                     }
                 },
                 "LatestLensVersion": {
@@ -1480,6 +2008,110 @@
                 }
             }
         },
+        "com.amazonaws.wellarchitected#ImportLens": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#ImportLensInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#ImportLensOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Import a new lens.</p>\n        <p>The lens cannot be applied to workloads or shared with other Amazon Web Services accounts\n            until it's published with <a>CreateLensVersion</a>\n         </p>\n        <p>Lenses are defined in JSON. For more information, see <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/lenses-format-specification.html\">JSON format specification</a> \n            in the <i>Well-Architected Tool User Guide</i>.</p>\n        <p>A custom lens cannot exceed 500 KB in size.</p>\n        \n        <note>\n            <p>\n               <b>Disclaimer</b>\n            </p>\n            <p>Do not include or gather personal identifiable information (PII) of end users or \n                other identifiable individuals in or via your custom lenses. If your custom \n                lens or those shared with you and used in your account do include or collect \n                PII you are responsible for: ensuring that the included PII is processed in accordance \n                with applicable law, providing adequate privacy notices, and obtaining necessary \n                consents for processing such data.</p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/importLens",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ImportLensInput": {
+            "type": "structure",
+            "members": {
+                "LensAlias": {
+                    "target": "com.amazonaws.wellarchitected#LensAlias"
+                },
+                "JSONString": {
+                    "target": "com.amazonaws.wellarchitected#LensJSON",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON representation of a lens.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.wellarchitected#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.wellarchitected#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags to associate to a lens.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ImportLensOutput": {
+            "type": "structure",
+            "members": {
+                "LensArn": {
+                    "target": "com.amazonaws.wellarchitected#LensArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the lens.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.wellarchitected#ImportLensStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the imported lens.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ImportLensStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "IN_PROGRESS",
+                        "name": "IN_PROGRESS"
+                    },
+                    {
+                        "value": "COMPLETE",
+                        "name": "COMPLETE"
+                    },
+                    {
+                        "value": "ERROR",
+                        "name": "ERROR"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.wellarchitected#ImprovementPlanUrl": {
             "type": "string",
             "traits": {
@@ -1516,6 +2148,12 @@
                 },
                 "ImprovementPlanUrl": {
                     "target": "com.amazonaws.wellarchitected#ImprovementPlanUrl"
+                },
+                "ImprovementPlans": {
+                    "target": "com.amazonaws.wellarchitected#ChoiceImprovementPlans",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The improvement plan details.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1533,7 +2171,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>There is a problem with the AWS Well-Architected Tool API service.</p>",
+                "smithy.api#documentation": "<p>There is a problem with the Well-Architected Tool API service.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
             }
@@ -1544,8 +2182,49 @@
                 "smithy.api#documentation": "<p>Defines whether this question is applicable to a lens review.</p>"
             }
         },
+        "com.amazonaws.wellarchitected#IsMajorVersion": {
+            "type": "boolean"
+        },
         "com.amazonaws.wellarchitected#IsReviewOwnerUpdateAcknowledged": {
             "type": "boolean"
+        },
+        "com.amazonaws.wellarchitected#Lens": {
+            "type": "structure",
+            "members": {
+                "LensArn": {
+                    "target": "com.amazonaws.wellarchitected#LensArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of a lens.</p>"
+                    }
+                },
+                "LensVersion": {
+                    "target": "com.amazonaws.wellarchitected#LensVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of a lens.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.wellarchitected#LensName"
+                },
+                "Description": {
+                    "target": "com.amazonaws.wellarchitected#LensDescription"
+                },
+                "Owner": {
+                    "target": "com.amazonaws.wellarchitected#LensOwner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that owns the lens.</p>"
+                    }
+                },
+                "ShareInvitationId": {
+                    "target": "com.amazonaws.wellarchitected#ShareInvitationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID assigned to the share invitation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A lens return object.</p>"
+            }
         },
         "com.amazonaws.wellarchitected#LensAlias": {
             "type": "string",
@@ -1553,7 +2232,7 @@
                 "smithy.api#documentation": "<p>The alias of the lens, for example, <code>serverless</code>.</p>\n        <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>",
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 64
+                    "max": 128
                 }
             }
         },
@@ -1563,11 +2242,14 @@
                 "target": "com.amazonaws.wellarchitected#LensAlias"
             },
             "traits": {
-                "smithy.api#documentation": "<p>List of lens aliases to associate or disassociate with a workload.</p>\n        <p>Identify a lens using its <a>LensSummary$LensAlias</a>.</p>",
+                "smithy.api#documentation": "<p>List of lens aliases to associate or disassociate with a workload. Up to 10 lenses can be specified.</p>\n        <p>Identify a lens using its <a>LensSummary$LensAlias</a>.</p>",
                 "smithy.api#length": {
                     "min": 1
                 }
             }
+        },
+        "com.amazonaws.wellarchitected#LensArn": {
+            "type": "string"
         },
         "com.amazonaws.wellarchitected#LensDescription": {
             "type": "string",
@@ -1576,6 +2258,15 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#LensJSON": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 500000
                 }
             }
         },
@@ -1589,11 +2280,29 @@
                 }
             }
         },
+        "com.amazonaws.wellarchitected#LensNamePrefix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#LensOwner": {
+            "type": "string"
+        },
         "com.amazonaws.wellarchitected#LensReview": {
             "type": "structure",
             "members": {
                 "LensAlias": {
                     "target": "com.amazonaws.wellarchitected#LensAlias"
+                },
+                "LensArn": {
+                    "target": "com.amazonaws.wellarchitected#LensArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the lens.</p>"
+                    }
                 },
                 "LensVersion": {
                     "target": "com.amazonaws.wellarchitected#LensVersion",
@@ -1636,6 +2345,12 @@
                 "LensAlias": {
                     "target": "com.amazonaws.wellarchitected#LensAlias"
                 },
+                "LensArn": {
+                    "target": "com.amazonaws.wellarchitected#LensArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the lens.</p>"
+                    }
+                },
                 "Base64String": {
                     "target": "com.amazonaws.wellarchitected#Base64String"
                 }
@@ -1658,6 +2373,12 @@
             "members": {
                 "LensAlias": {
                     "target": "com.amazonaws.wellarchitected#LensAlias"
+                },
+                "LensArn": {
+                    "target": "com.amazonaws.wellarchitected#LensArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the lens.</p>"
+                    }
                 },
                 "LensVersion": {
                     "target": "com.amazonaws.wellarchitected#LensVersion",
@@ -1685,6 +2406,29 @@
                 "smithy.api#documentation": "<p>A lens review summary of a workload.</p>"
             }
         },
+        "com.amazonaws.wellarchitected#LensShareSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#LensShareSummary"
+            }
+        },
+        "com.amazonaws.wellarchitected#LensShareSummary": {
+            "type": "structure",
+            "members": {
+                "ShareId": {
+                    "target": "com.amazonaws.wellarchitected#ShareId"
+                },
+                "SharedWith": {
+                    "target": "com.amazonaws.wellarchitected#SharedWith"
+                },
+                "Status": {
+                    "target": "com.amazonaws.wellarchitected#ShareStatus"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A lens share summary return object.</p>"
+            }
+        },
         "com.amazonaws.wellarchitected#LensStatus": {
             "type": "string",
             "traits": {
@@ -1700,6 +2444,33 @@
                     {
                         "value": "DEPRECATED",
                         "name": "DEPRECATED"
+                    },
+                    {
+                        "value": "DELETED",
+                        "name": "DELETED"
+                    },
+                    {
+                        "value": "UNSHARED",
+                        "name": "UNSHARED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.wellarchitected#LensStatusType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ALL",
+                        "name": "ALL"
+                    },
+                    {
+                        "value": "DRAFT",
+                        "name": "DRAFT"
+                    },
+                    {
+                        "value": "PUBLISHED",
+                        "name": "PUBLISHED"
                     }
                 ]
             }
@@ -1716,8 +2487,32 @@
         "com.amazonaws.wellarchitected#LensSummary": {
             "type": "structure",
             "members": {
+                "LensArn": {
+                    "target": "com.amazonaws.wellarchitected#LensArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the lens.</p>"
+                    }
+                },
                 "LensAlias": {
                     "target": "com.amazonaws.wellarchitected#LensAlias"
+                },
+                "LensName": {
+                    "target": "com.amazonaws.wellarchitected#LensName"
+                },
+                "LensType": {
+                    "target": "com.amazonaws.wellarchitected#LensType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the lens.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.wellarchitected#LensDescription"
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.wellarchitected#Timestamp"
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.wellarchitected#Timestamp"
                 },
                 "LensVersion": {
                     "target": "com.amazonaws.wellarchitected#LensVersion",
@@ -1725,15 +2520,37 @@
                         "smithy.api#documentation": "<p>The version of the lens.</p>"
                     }
                 },
-                "LensName": {
-                    "target": "com.amazonaws.wellarchitected#LensName"
+                "Owner": {
+                    "target": "com.amazonaws.wellarchitected#AwsAccountId"
                 },
-                "Description": {
-                    "target": "com.amazonaws.wellarchitected#LensDescription"
+                "LensStatus": {
+                    "target": "com.amazonaws.wellarchitected#LensStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the lens.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>A lens summary of a lens.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#LensType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AWS_OFFICIAL",
+                        "name": "AWS_OFFICIAL"
+                    },
+                    {
+                        "value": "CUSTOM_SHARED",
+                        "name": "CUSTOM_SHARED"
+                    },
+                    {
+                        "value": "CUSTOM_SELF",
+                        "name": "CUSTOM_SELF"
+                    }
+                ]
             }
         },
         "com.amazonaws.wellarchitected#LensUpgradeSummary": {
@@ -1747,6 +2564,12 @@
                 },
                 "LensAlias": {
                     "target": "com.amazonaws.wellarchitected#LensAlias"
+                },
+                "LensArn": {
+                    "target": "com.amazonaws.wellarchitected#LensArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the lens.</p>"
+                    }
                 },
                 "CurrentLensVersion": {
                     "target": "com.amazonaws.wellarchitected#LensVersion",
@@ -1770,7 +2593,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 128
+                    "max": 32
                 }
             }
         },
@@ -1880,6 +2703,12 @@
                 },
                 "LensAlias": {
                     "target": "com.amazonaws.wellarchitected#LensAlias"
+                },
+                "LensArn": {
+                    "target": "com.amazonaws.wellarchitected#LensArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the lens.</p>"
+                    }
                 },
                 "AnswerSummaries": {
                     "target": "com.amazonaws.wellarchitected#AnswerSummaries"
@@ -1999,6 +2828,12 @@
                 "LensAlias": {
                     "target": "com.amazonaws.wellarchitected#LensAlias"
                 },
+                "LensArn": {
+                    "target": "com.amazonaws.wellarchitected#LensArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the lens.</p>"
+                    }
+                },
                 "ImprovementSummaries": {
                     "target": "com.amazonaws.wellarchitected#ImprovementSummaries"
                 },
@@ -2102,6 +2937,91 @@
                 "smithy.api#documentation": "<p>Output of a list lens reviews call.</p>"
             }
         },
+        "com.amazonaws.wellarchitected#ListLensShares": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#ListLensSharesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#ListLensSharesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List the lens shares associated with the lens.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/lenses/{LensAlias}/shares",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ListLensSharesInput": {
+            "type": "structure",
+            "members": {
+                "LensAlias": {
+                    "target": "com.amazonaws.wellarchitected#LensAlias",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SharedWithPrefix": {
+                    "target": "com.amazonaws.wellarchitected#SharedWithPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID or IAM role with which the lens is shared.</p>",
+                        "smithy.api#httpQuery": "SharedWithPrefix"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.wellarchitected#NextToken",
+                    "traits": {
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.wellarchitected#ListWorkloadSharesMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return for this request.</p>",
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ListLensSharesOutput": {
+            "type": "structure",
+            "members": {
+                "LensShareSummaries": {
+                    "target": "com.amazonaws.wellarchitected#LensShareSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of lens share summaries.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.wellarchitected#NextToken"
+                }
+            }
+        },
         "com.amazonaws.wellarchitected#ListLenses": {
             "type": "operation",
             "input": {
@@ -2151,6 +3071,26 @@
                     "target": "com.amazonaws.wellarchitected#MaxResults",
                     "traits": {
                         "smithy.api#httpQuery": "MaxResults"
+                    }
+                },
+                "LensType": {
+                    "target": "com.amazonaws.wellarchitected#LensType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of lenses to be returned.</p>",
+                        "smithy.api#httpQuery": "LensType"
+                    }
+                },
+                "LensStatus": {
+                    "target": "com.amazonaws.wellarchitected#LensStatusType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of lenses to be returned.</p>",
+                        "smithy.api#httpQuery": "LensStatus"
+                    }
+                },
+                "LensName": {
+                    "target": "com.amazonaws.wellarchitected#LensName",
+                    "traits": {
+                        "smithy.api#httpQuery": "LensName"
                     }
                 }
             },
@@ -2370,6 +3310,20 @@
                         "smithy.api#httpQuery": "WorkloadNamePrefix"
                     }
                 },
+                "LensNamePrefix": {
+                    "target": "com.amazonaws.wellarchitected#LensNamePrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional string added to the beginning of each lens name returned in the results.</p>",
+                        "smithy.api#httpQuery": "LensNamePrefix"
+                    }
+                },
+                "ShareResourceType": {
+                    "target": "com.amazonaws.wellarchitected#ShareResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of share invitations to be returned.</p>",
+                        "smithy.api#httpQuery": "ShareResourceType"
+                    }
+                },
                 "NextToken": {
                     "target": "com.amazonaws.wellarchitected#NextToken",
                     "traits": {
@@ -2514,7 +3468,7 @@
                 "SharedWithPrefix": {
                     "target": "com.amazonaws.wellarchitected#SharedWithPrefix",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID or IAM role with which the workload is shared.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID or IAM role with which the workload is shared.</p>",
                         "smithy.api#httpQuery": "SharedWithPrefix"
                     }
                 },
@@ -2799,6 +3753,9 @@
                 "PillarId": {
                     "target": "com.amazonaws.wellarchitected#PillarId"
                 },
+                "PillarName": {
+                    "target": "com.amazonaws.wellarchitected#PillarName"
+                },
                 "DifferenceStatus": {
                     "target": "com.amazonaws.wellarchitected#DifferenceStatus",
                     "traits": {
@@ -3078,8 +4035,23 @@
                         "smithy.api#documentation": "<p>The ID assigned to the share invitation.</p>"
                     }
                 },
+                "ShareResourceType": {
+                    "target": "com.amazonaws.wellarchitected#ShareResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource type of the share invitation.</p>"
+                    }
+                },
                 "WorkloadId": {
                     "target": "com.amazonaws.wellarchitected#WorkloadId"
+                },
+                "LensAlias": {
+                    "target": "com.amazonaws.wellarchitected#LensAlias"
+                },
+                "LensArn": {
+                    "target": "com.amazonaws.wellarchitected#LensArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the lens.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3132,15 +4104,45 @@
                 "PermissionType": {
                     "target": "com.amazonaws.wellarchitected#PermissionType"
                 },
+                "ShareResourceType": {
+                    "target": "com.amazonaws.wellarchitected#ShareResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource type of the share invitation.</p>"
+                    }
+                },
                 "WorkloadName": {
                     "target": "com.amazonaws.wellarchitected#WorkloadName"
                 },
                 "WorkloadId": {
                     "target": "com.amazonaws.wellarchitected#WorkloadId"
+                },
+                "LensName": {
+                    "target": "com.amazonaws.wellarchitected#LensName"
+                },
+                "LensArn": {
+                    "target": "com.amazonaws.wellarchitected#LensArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the lens.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>A share invitation summary return object.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ShareResourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "WORKLOAD",
+                        "name": "WORKLOAD"
+                    },
+                    {
+                        "value": "LENS",
+                        "name": "LENS"
+                    }
+                ]
             }
         },
         "com.amazonaws.wellarchitected#ShareStatus": {
@@ -3174,7 +4176,7 @@
         "com.amazonaws.wellarchitected#SharedWith": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The AWS account ID or IAM role with which the workload is shared.</p>",
+                "smithy.api#documentation": "<p>The Amazon Web Services account ID or IAM role with which the workload is shared.</p>",
                 "smithy.api#length": {
                     "min": 12,
                     "max": 2048
@@ -3455,6 +4457,12 @@
                 },
                 "LensAlias": {
                     "target": "com.amazonaws.wellarchitected#LensAlias"
+                },
+                "LensArn": {
+                    "target": "com.amazonaws.wellarchitected#LensArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the lens.</p>"
+                    }
                 },
                 "Answer": {
                     "target": "com.amazonaws.wellarchitected#Answer"
@@ -3959,10 +4967,31 @@
         },
         "com.amazonaws.wellarchitected#WellArchitectedApiServiceLambda": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "WellArchitected",
+                    "arnNamespace": "wellarchitected",
+                    "cloudFormationName": "WellArchitected",
+                    "cloudTrailEventSource": "wellarchitected.amazonaws.com",
+                    "endpointPrefix": "wellarchitected"
+                },
+                "aws.auth#sigv4": {
+                    "name": "wellarchitected"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<fullname>Well-Architected Tool</fullname>\n        \n         <p>This is the <i>Well-Architected Tool API Reference</i>. The WA Tool API provides programmatic access to the \n            <a href=\"http://aws.amazon.com/well-architected-tool\">Well-Architected Tool</a> in the \n           <a href=\"https://console.aws.amazon.com/wellarchitected\">Amazon Web Services Management Console</a>. For information \n            about the Well-Architected Tool, see the \n           <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/intro.html\">Well-Architected Tool User Guide</a>.</p>",
+                "smithy.api#title": "AWS Well-Architected Tool"
+            },
             "version": "2020-03-31",
             "operations": [
                 {
                     "target": "com.amazonaws.wellarchitected#AssociateLenses"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#CreateLensShare"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#CreateLensVersion"
                 },
                 {
                     "target": "com.amazonaws.wellarchitected#CreateMilestone"
@@ -3974,6 +5003,12 @@
                     "target": "com.amazonaws.wellarchitected#CreateWorkloadShare"
                 },
                 {
+                    "target": "com.amazonaws.wellarchitected#DeleteLens"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#DeleteLensShare"
+                },
+                {
                     "target": "com.amazonaws.wellarchitected#DeleteWorkload"
                 },
                 {
@@ -3983,7 +5018,13 @@
                     "target": "com.amazonaws.wellarchitected#DisassociateLenses"
                 },
                 {
+                    "target": "com.amazonaws.wellarchitected#ExportLens"
+                },
+                {
                     "target": "com.amazonaws.wellarchitected#GetAnswer"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#GetLens"
                 },
                 {
                     "target": "com.amazonaws.wellarchitected#GetLensReview"
@@ -4001,6 +5042,9 @@
                     "target": "com.amazonaws.wellarchitected#GetWorkload"
                 },
                 {
+                    "target": "com.amazonaws.wellarchitected#ImportLens"
+                },
+                {
                     "target": "com.amazonaws.wellarchitected#ListAnswers"
                 },
                 {
@@ -4011,6 +5055,9 @@
                 },
                 {
                     "target": "com.amazonaws.wellarchitected#ListLensReviews"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ListLensShares"
                 },
                 {
                     "target": "com.amazonaws.wellarchitected#ListMilestones"
@@ -4054,22 +5101,7 @@
                 {
                     "target": "com.amazonaws.wellarchitected#UpgradeLensReview"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "WellArchitected",
-                    "arnNamespace": "wellarchitected",
-                    "cloudFormationName": "WellArchitected",
-                    "cloudTrailEventSource": "wellarchitected.amazonaws.com",
-                    "endpointPrefix": "wellarchitected"
-                },
-                "aws.auth#sigv4": {
-                    "name": "wellarchitected"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<fullname>AWS Well-Architected Tool</fullname>\n        \n         <p>This is the <i>AWS Well-Architected Tool API Reference</i>. The AWS Well-Architected Tool API provides programmatic access to the \n            <a href=\"http://aws.amazon.com/well-architected-tool\">AWS Well-Architected Tool</a> in the \n            <a href=\"https://console.aws.amazon.com/wellarchitected\">AWS Management Console</a>. For information \n            about the AWS Well-Architected Tool, see the \n            <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/intro.html\">AWS Well-Architected Tool User Guide</a>.</p>",
-                "smithy.api#title": "AWS Well-Architected Tool"
-            }
+            ]
         },
         "com.amazonaws.wellarchitected#Workload": {
             "type": "structure",
@@ -4163,7 +5195,7 @@
                 "target": "com.amazonaws.wellarchitected#AwsAccountId"
             },
             "traits": {
-                "smithy.api#documentation": "<p>The list of AWS account IDs associated with the workload.</p>",
+                "smithy.api#documentation": "<p>The list of Amazon Web Services account IDs associated with the workload.</p>",
                 "smithy.api#length": {
                     "min": 0,
                     "max": 100
@@ -4192,7 +5224,7 @@
                 "target": "com.amazonaws.wellarchitected#AwsRegion"
             },
             "traits": {
-                "smithy.api#documentation": "<p>The list of AWS Regions associated with the workload, for example,\n                <code>us-east-2</code>, or <code>ca-central-1</code>.</p>",
+                "smithy.api#documentation": "<p>The list of Amazon Web Services Regions associated with the workload, for example,\n                <code>us-east-2</code>, or <code>ca-central-1</code>.</p>",
                 "smithy.api#length": {
                     "min": 0,
                     "max": 50
@@ -4228,7 +5260,7 @@
         "com.amazonaws.wellarchitected#WorkloadId": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The ID assigned to the workload. This ID is unique within an AWS Region.</p>",
+                "smithy.api#documentation": "<p>The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.</p>",
                 "smithy.api#pattern": "^[0-9a-f]{32}$"
             }
         },
@@ -4292,7 +5324,7 @@
         "com.amazonaws.wellarchitected#WorkloadName": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The name of the workload.</p>\n        <p>The name must be unique within an account within a Region. Spaces and capitalization\n            are ignored when checking for uniqueness.</p>",
+                "smithy.api#documentation": "<p>The name of the workload.</p>\n        <p>The name must be unique within an account within an Amazon Web Services Region. Spaces and capitalization\n            are ignored when checking for uniqueness.</p>",
                 "smithy.api#length": {
                     "min": 3,
                     "max": 100
@@ -4324,7 +5356,7 @@
                 "target": "com.amazonaws.wellarchitected#WorkloadNonAwsRegion"
             },
             "traits": {
-                "smithy.api#documentation": "<p> The list of non-AWS Regions associated with the workload.</p>",
+                "smithy.api#documentation": "<p> The list of non-Amazon Web Services Regions associated with the workload.</p>",
                 "smithy.api#length": {
                     "min": 0,
                     "max": 5

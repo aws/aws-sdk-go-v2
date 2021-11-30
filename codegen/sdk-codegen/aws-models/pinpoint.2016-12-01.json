@@ -12951,6 +12951,21 @@
         },
         "com.amazonaws.pinpoint#Pinpoint": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Pinpoint",
+                    "arnNamespace": "mobiletargeting",
+                    "cloudFormationName": "Pinpoint",
+                    "cloudTrailEventSource": "pinpoint.amazonaws.com",
+                    "endpointPrefix": "pinpoint"
+                },
+                "aws.auth#sigv4": {
+                    "name": "mobiletargeting"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>Doc Engage API - Amazon Pinpoint API</p>",
+                "smithy.api#title": "Amazon Pinpoint"
+            },
             "version": "2016-12-01",
             "operations": [
                 {
@@ -13224,6 +13239,9 @@
                     "target": "com.amazonaws.pinpoint#SendMessages"
                 },
                 {
+                    "target": "com.amazonaws.pinpoint#SendOTPMessage"
+                },
+                {
                     "target": "com.amazonaws.pinpoint#SendUsersMessages"
                 },
                 {
@@ -13303,23 +13321,11 @@
                 },
                 {
                     "target": "com.amazonaws.pinpoint#UpdateVoiceTemplate"
+                },
+                {
+                    "target": "com.amazonaws.pinpoint#VerifyOTPMessage"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Pinpoint",
-                    "arnNamespace": "mobiletargeting",
-                    "cloudFormationName": "Pinpoint",
-                    "cloudTrailEventSource": "pinpoint.amazonaws.com",
-                    "endpointPrefix": "pinpoint"
-                },
-                "aws.auth#sigv4": {
-                    "name": "mobiletargeting"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Doc Engage API - Amazon Pinpoint API</p>",
-                "smithy.api#title": "Amazon Pinpoint"
-            }
+            ]
         },
         "com.amazonaws.pinpoint#PublicEndpoint": {
             "type": "structure",
@@ -14882,6 +14888,157 @@
             }
         },
         "com.amazonaws.pinpoint#SendMessagesResponse": {
+            "type": "structure",
+            "members": {
+                "MessageResponse": {
+                    "target": "com.amazonaws.pinpoint#MessageResponse",
+                    "traits": {
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.pinpoint#SendOTPMessage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pinpoint#SendOTPMessageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pinpoint#SendOTPMessageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pinpoint#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.pinpoint#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.pinpoint#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.pinpoint#MethodNotAllowedException"
+                },
+                {
+                    "target": "com.amazonaws.pinpoint#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.pinpoint#PayloadTooLargeException"
+                },
+                {
+                    "target": "com.amazonaws.pinpoint#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Send an OTP message</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/apps/{ApplicationId}/otp",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.pinpoint#SendOTPMessageRequest": {
+            "type": "structure",
+            "members": {
+                "ApplicationId": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of your Amazon Pinpoint application.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SendOTPMessageRequestParameters": {
+                    "target": "com.amazonaws.pinpoint#SendOTPMessageRequestParameters",
+                    "traits": {
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.pinpoint#SendOTPMessageRequestParameters": {
+            "type": "structure",
+            "members": {
+                "AllowedAttempts": {
+                    "target": "com.amazonaws.pinpoint#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attempts allowed to validate an OTP.</p>"
+                    }
+                },
+                "BrandName": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The brand name that will be substituted into the OTP message body. Should be owned by calling AWS account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Channel": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Channel type for the OTP message. Supported values: [SMS].</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CodeLength": {
+                    "target": "com.amazonaws.pinpoint#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of characters in the generated OTP.</p>"
+                    }
+                },
+                "DestinationIdentity": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination identity to send OTP to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EntityId": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique Entity ID received from DLT after entity registration is approved.</p>"
+                    }
+                },
+                "Language": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language to be used for the outgoing message body containing the OTP.</p>"
+                    }
+                },
+                "OriginationIdentity": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The origination identity used to send OTP from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ReferenceId": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Developer-specified reference identifier. Required to match during OTP verification.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TemplateId": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique Template ID received from DLT after entity registration is approved.</p>"
+                    }
+                },
+                "ValidityPeriod": {
+                    "target": "com.amazonaws.pinpoint#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time in minutes before the OTP is no longer valid.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Send OTP message request parameters.</p>"
+            }
+        },
+        "com.amazonaws.pinpoint#SendOTPMessageResponse": {
             "type": "structure",
             "members": {
                 "MessageResponse": {
@@ -17638,6 +17795,121 @@
             "members": {
                 "MessageBody": {
                     "target": "com.amazonaws.pinpoint#MessageBody",
+                    "traits": {
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.pinpoint#VerificationResponse": {
+            "type": "structure",
+            "members": {
+                "Valid": {
+                    "target": "com.amazonaws.pinpoint#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the OTP is valid or not.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Verify OTP Message Response.</p>"
+            }
+        },
+        "com.amazonaws.pinpoint#VerifyOTPMessage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pinpoint#VerifyOTPMessageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pinpoint#VerifyOTPMessageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pinpoint#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.pinpoint#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.pinpoint#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.pinpoint#MethodNotAllowedException"
+                },
+                {
+                    "target": "com.amazonaws.pinpoint#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.pinpoint#PayloadTooLargeException"
+                },
+                {
+                    "target": "com.amazonaws.pinpoint#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Verify an OTP</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/apps/{ApplicationId}/verify-otp",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.pinpoint#VerifyOTPMessageRequest": {
+            "type": "structure",
+            "members": {
+                "ApplicationId": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of your Amazon Pinpoint application.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "VerifyOTPMessageRequestParameters": {
+                    "target": "com.amazonaws.pinpoint#VerifyOTPMessageRequestParameters",
+                    "traits": {
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.pinpoint#VerifyOTPMessageRequestParameters": {
+            "type": "structure",
+            "members": {
+                "DestinationIdentity": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination identity to send OTP to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Otp": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OTP the end user provided for verification.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ReferenceId": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reference identifier provided when the OTP was previously sent.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Verify OTP message request.</p>"
+            }
+        },
+        "com.amazonaws.pinpoint#VerifyOTPMessageResponse": {
+            "type": "structure",
+            "members": {
+                "VerificationResponse": {
+                    "target": "com.amazonaws.pinpoint#VerificationResponse",
                     "traits": {
                         "smithy.api#httpPayload": {},
                         "smithy.api#required": {}
