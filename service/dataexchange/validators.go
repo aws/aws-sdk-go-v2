@@ -350,6 +350,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSendApiAsset struct {
+}
+
+func (*validateOpSendApiAsset) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSendApiAsset) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SendApiAssetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSendApiAssetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartJob struct {
 }
 
@@ -556,6 +576,10 @@ func addOpListRevisionAssetsValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpSendApiAssetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSendApiAsset{}, middleware.After)
 }
 
 func addOpStartJobValidationMiddleware(stack *middleware.Stack) error {
@@ -788,6 +812,39 @@ func validateExportServerSideEncryption(v *types.ExportServerSideEncryption) err
 	}
 }
 
+func validateImportAssetFromApiGatewayApiRequestDetails(v *types.ImportAssetFromApiGatewayApiRequestDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImportAssetFromApiGatewayApiRequestDetails"}
+	if v.ApiId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	}
+	if v.ApiName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiName"))
+	}
+	if v.ApiSpecificationMd5Hash == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiSpecificationMd5Hash"))
+	}
+	if v.DataSetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSetId"))
+	}
+	if len(v.ProtocolType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ProtocolType"))
+	}
+	if v.RevisionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RevisionId"))
+	}
+	if v.Stage == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Stage"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateImportAssetFromSignedUrlRequestDetails(v *types.ImportAssetFromSignedUrlRequestDetails) error {
 	if v == nil {
 		return nil
@@ -978,6 +1035,11 @@ func validateRequestDetails(v *types.RequestDetails) error {
 	if v.ImportAssetsFromRedshiftDataShares != nil {
 		if err := validateImportAssetsFromRedshiftDataSharesRequestDetails(v.ImportAssetsFromRedshiftDataShares); err != nil {
 			invalidParams.AddNested("ImportAssetsFromRedshiftDataShares", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ImportAssetFromApiGatewayApi != nil {
+		if err := validateImportAssetFromApiGatewayApiRequestDetails(v.ImportAssetFromApiGatewayApi); err != nil {
+			invalidParams.AddNested("ImportAssetFromApiGatewayApi", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1312,6 +1374,27 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSendApiAssetInput(v *SendApiAssetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SendApiAssetInput"}
+	if v.AssetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetId"))
+	}
+	if v.DataSetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSetId"))
+	}
+	if v.RevisionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RevisionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

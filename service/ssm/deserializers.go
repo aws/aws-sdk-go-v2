@@ -601,6 +601,9 @@ func awsAwsjson11_deserializeOpErrorCreateActivation(response *smithyhttp.Respon
 	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServerError(response, errorBody)
 
+	case strings.EqualFold("InvalidParameters", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameters(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -27060,6 +27063,24 @@ func awsAwsjson11_deserializeDocumentInstanceInformation(v **types.InstanceInfor
 					return fmt.Errorf("expected ResourceType to be of type string, got %T instead", value)
 				}
 				sv.ResourceType = types.ResourceType(jtv)
+			}
+
+		case "SourceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SourceId to be of type string, got %T instead", value)
+				}
+				sv.SourceId = ptr.String(jtv)
+			}
+
+		case "SourceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SourceType to be of type string, got %T instead", value)
+				}
+				sv.SourceType = types.SourceType(jtv)
 			}
 
 		default:

@@ -13,7 +13,7 @@ import (
 )
 
 // Retrieves information about the delegated Amazon Macie administrator account for
-// an Amazon Web Services organization.
+// an organization in Organizations.
 func (c *Client) ListOrganizationAdminAccounts(ctx context.Context, params *ListOrganizationAdminAccountsInput, optFns ...func(*Options)) (*ListOrganizationAdminAccountsOutput, error) {
 	if params == nil {
 		params = &ListOrganizationAdminAccountsInput{}

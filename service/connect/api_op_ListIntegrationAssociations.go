@@ -37,7 +37,7 @@ type ListIntegrationAssociationsInput struct {
 	// This member is required.
 	InstanceId *string
 
-	//
+	// The integration type.
 	IntegrationType types.IntegrationType
 
 	// The maximum number of results to return per page.

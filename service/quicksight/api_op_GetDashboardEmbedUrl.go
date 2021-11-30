@@ -72,7 +72,7 @@ type GetDashboardEmbedUrlInput struct {
 	// A list of one or more dashboard IDs that you want to add to a session that
 	// includes anonymous users. The IdentityType parameter must be set to ANONYMOUS
 	// for this to work, because other identity types authenticate as Amazon QuickSight
-	// or IAMusers. For example, if you set "--dashboard-id dash_id1 --dashboard-id
+	// or IAM users. For example, if you set "--dashboard-id dash_id1 --dashboard-id
 	// dash_id2 dash_id3 identity-type ANONYMOUS", the session can access all three
 	// dashboards.
 	AdditionalDashboardIds []string
@@ -111,12 +111,12 @@ type GetDashboardEmbedUrlInput struct {
 	//
 	// * Invited nonfederated users
 	//
-	// * IAMusers
-	// and IAMrole-based sessions authenticated through Federated Single Sign-On using
-	// SAML, OpenID Connect, or IAMfederation.
+	// * IAM users
+	// and IAM role-based sessions authenticated through Federated Single Sign-On using
+	// SAML, OpenID Connect, or IAM federation.
 	//
 	// Omit this parameter for users in the
-	// third group – IAMusers and IAM role-based sessions.
+	// third group – IAM users and IAM role-based sessions.
 	UserArn *string
 
 	noSmithyDocumentSerde

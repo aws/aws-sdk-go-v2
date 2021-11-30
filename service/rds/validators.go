@@ -2210,6 +2210,26 @@ func (m *validateOpPurchaseReservedDBInstancesOffering) HandleInitialize(ctx con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRebootDBCluster struct {
+}
+
+func (*validateOpRebootDBCluster) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRebootDBCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RebootDBClusterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRebootDBClusterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRebootDBInstance struct {
 }
 
@@ -3128,6 +3148,10 @@ func addOpPromoteReadReplicaValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpPurchaseReservedDBInstancesOfferingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPurchaseReservedDBInstancesOffering{}, middleware.After)
+}
+
+func addOpRebootDBClusterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRebootDBCluster{}, middleware.After)
 }
 
 func addOpRebootDBInstanceValidationMiddleware(stack *middleware.Stack) error {
@@ -5224,6 +5248,21 @@ func validateOpPurchaseReservedDBInstancesOfferingInput(v *PurchaseReservedDBIns
 	invalidParams := smithy.InvalidParamsError{Context: "PurchaseReservedDBInstancesOfferingInput"}
 	if v.ReservedDBInstancesOfferingId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReservedDBInstancesOfferingId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRebootDBClusterInput(v *RebootDBClusterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RebootDBClusterInput"}
+	if v.DBClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DBClusterIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

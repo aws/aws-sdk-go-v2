@@ -35,7 +35,8 @@ type GetMilestoneInput struct {
 	// This member is required.
 	MilestoneNumber int32
 
-	// The ID assigned to the workload. This ID is unique within an AWS Region.
+	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
+	// Region.
 	//
 	// This member is required.
 	WorkloadId *string
@@ -49,7 +50,8 @@ type GetMilestoneOutput struct {
 	// A milestone return object.
 	Milestone *types.Milestone
 
-	// The ID assigned to the workload. This ID is unique within an AWS Region.
+	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
+	// Region.
 	WorkloadId *string
 
 	// Metadata pertaining to the operation's result.

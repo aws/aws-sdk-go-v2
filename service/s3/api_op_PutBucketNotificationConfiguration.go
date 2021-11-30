@@ -79,6 +79,10 @@ type PutBucketNotificationConfigurationInput struct {
 	// different account, the request will fail with an HTTP 403 (Access Denied) error.
 	ExpectedBucketOwner *string
 
+	// Skips validation of Amazon SQS, Amazon SNS, and Lambda destinations. True or
+	// false value.
+	SkipDestinationValidation bool
+
 	noSmithyDocumentSerde
 }
 

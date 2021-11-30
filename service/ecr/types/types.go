@@ -42,6 +42,88 @@ type AuthorizationData struct {
 	noSmithyDocumentSerde
 }
 
+// The image details of the Amazon ECR container image.
+type AwsEcrContainerImageDetails struct {
+
+	// The architecture of the Amazon ECR container image.
+	Architecture *string
+
+	// The image author of the Amazon ECR container image.
+	Author *string
+
+	// The image hash of the Amazon ECR container image.
+	ImageHash *string
+
+	// The image tags attached to the Amazon ECR container image.
+	ImageTags []string
+
+	// The platform of the Amazon ECR container image.
+	Platform *string
+
+	// The date and time the Amazon ECR container image was pushed.
+	PushedAt *time.Time
+
+	// The registry the Amazon ECR container image belongs to.
+	Registry *string
+
+	// The name of the repository the Amazon ECR container image resides in.
+	RepositoryName *string
+
+	noSmithyDocumentSerde
+}
+
+// The CVSS score for a finding.
+type CvssScore struct {
+
+	// The base CVSS score used for the finding.
+	BaseScore float64
+
+	// The vector string of the CVSS score.
+	ScoringVector *string
+
+	// The source of the CVSS score.
+	Source *string
+
+	// The version of CVSS used for the score.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
+// Details on adjustments Amazon Inspector made to the CVSS score for a finding.
+type CvssScoreAdjustment struct {
+
+	// The metric used to adjust the CVSS score.
+	Metric *string
+
+	// The reason the CVSS score has been adjustment.
+	Reason *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the CVSS score.
+type CvssScoreDetails struct {
+
+	// An object that contains details about adjustment Amazon Inspector made to the
+	// CVSS score.
+	Adjustments []CvssScoreAdjustment
+
+	// The CVSS score.
+	Score float64
+
+	// The source for the CVSS score.
+	ScoreSource *string
+
+	// The vector for the CVSS score.
+	ScoringVector *string
+
+	// The CVSS version used in scoring.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
 // An object representing a filter on a DescribeImages operation.
 type DescribeImagesFilter struct {
 
@@ -73,13 +155,13 @@ type EncryptionConfiguration struct {
 	// see Protecting data using server-side encryption with an KMS key stored in Key
 	// Management Service (SSE-KMS)
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html) in the
-	// Amazon Simple Storage Service Console Developer Guide.. If you use the AES256
+	// Amazon Simple Storage Service Console Developer Guide. If you use the AES256
 	// encryption type, Amazon ECR uses server-side encryption with Amazon S3-managed
 	// encryption keys which encrypts the images in the repository using an AES-256
 	// encryption algorithm. For more information, see Protecting data using
 	// server-side encryption with Amazon S3-managed encryption keys (SSE-S3)
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)
-	// in the Amazon Simple Storage Service Console Developer Guide..
+	// in the Amazon Simple Storage Service Console Developer Guide.
 	//
 	// This member is required.
 	EncryptionType EncryptionType
@@ -89,6 +171,58 @@ type EncryptionConfiguration struct {
 	// exist in the same Region as the repository. If no key is specified, the default
 	// Amazon Web Services managed KMS key for Amazon ECR will be used.
 	KmsKey *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of an enhanced image scan. This is returned when enhanced scanning
+// is enabled for your private registry.
+type EnhancedImageScanFinding struct {
+
+	// The Amazon Web Services account ID associated with the image.
+	AwsAccountId *string
+
+	// The description of the finding.
+	Description *string
+
+	// The Amazon Resource Number (ARN) of the finding.
+	FindingArn *string
+
+	// The date and time that the finding was first observed.
+	FirstObservedAt *time.Time
+
+	// The date and time that the finding was last observed.
+	LastObservedAt *time.Time
+
+	// An object that contains the details of a package vulnerability finding.
+	PackageVulnerabilityDetails *PackageVulnerabilityDetails
+
+	// An object that contains the details about how to remediate a finding.
+	Remediation *Remediation
+
+	// Contains information on the resources involved in a finding.
+	Resources []Resource
+
+	// The Amazon Inspector score given to the finding.
+	Score float64
+
+	// An object that contains details of the Amazon Inspector score.
+	ScoreDetails *ScoreDetails
+
+	// The severity of the finding.
+	Severity *string
+
+	// The status of the finding.
+	Status *string
+
+	// The title of the finding.
+	Title *string
+
+	// The type of the finding.
+	Type *string
+
+	// The date and time the finding was last updated at.
+	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -194,7 +328,8 @@ type ImageReplicationStatus struct {
 	// The destination Region for the image replication.
 	Region *string
 
-	// The AWS account ID associated with the registry to which the image belongs.
+	// The Amazon Web Services account ID associated with the registry to which the
+	// image belongs.
 	RegistryId *string
 
 	// The image replication status.
@@ -226,6 +361,9 @@ type ImageScanFinding struct {
 
 // The details of an image scan.
 type ImageScanFindings struct {
+
+	// Details about the enhanced scan findings from Amazon Inspector.
+	EnhancedFindings []EnhancedImageScanFinding
 
 	// The image vulnerability counts, sorted by severity.
 	FindingSeverityCounts map[string]int32
@@ -377,6 +515,113 @@ type ListImagesFilter struct {
 	noSmithyDocumentSerde
 }
 
+// Information about a package vulnerability finding.
+type PackageVulnerabilityDetails struct {
+
+	// An object that contains details about the CVSS score of a finding.
+	Cvss []CvssScore
+
+	// One or more URLs that contain details about this vulnerability type.
+	ReferenceUrls []string
+
+	// One or more vulnerabilities related to the one identified in this finding.
+	RelatedVulnerabilities []string
+
+	// The source of the vulnerability information.
+	Source *string
+
+	// A URL to the source of the vulnerability information.
+	SourceUrl *string
+
+	// The date and time that this vulnerability was first added to the vendor's
+	// database.
+	VendorCreatedAt *time.Time
+
+	// The severity the vendor has given to this vulnerability type.
+	VendorSeverity *string
+
+	// The date and time the vendor last updated this vulnerability in their database.
+	VendorUpdatedAt *time.Time
+
+	// The ID given to this vulnerability.
+	VulnerabilityId *string
+
+	// The packages impacted by this vulnerability.
+	VulnerablePackages []VulnerablePackage
+
+	noSmithyDocumentSerde
+}
+
+// The details of a pull through cache rule.
+type PullThroughCacheRule struct {
+
+	// The date and time the pull through cache was created.
+	CreatedAt *time.Time
+
+	// The Amazon ECR repository prefix associated with the pull through cache rule.
+	EcrRepositoryPrefix *string
+
+	// The Amazon Web Services account ID associated with the registry the pull through
+	// cache rule is associated with.
+	RegistryId *string
+
+	// The upstream registry URL associated with the pull through cache rule.
+	UpstreamRegistryUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about the recommended course of action to remediate the finding.
+type Recommendation struct {
+
+	// The recommended course of action to remediate the finding.
+	Text *string
+
+	// The URL address to the CVE remediation recommendations.
+	Url *string
+
+	noSmithyDocumentSerde
+}
+
+// The scanning configuration for a private registry.
+type RegistryScanningConfiguration struct {
+
+	// The scanning rules associated with the registry.
+	Rules []RegistryScanningRule
+
+	// The type of scanning configured for the registry.
+	ScanType ScanType
+
+	noSmithyDocumentSerde
+}
+
+// The details of a scanning rule for a private registry.
+type RegistryScanningRule struct {
+
+	// The repository filters associated with the scanning configuration for a private
+	// registry.
+	//
+	// This member is required.
+	RepositoryFilters []ScanningRepositoryFilter
+
+	// The frequency that scans are performed at for a private registry.
+	//
+	// This member is required.
+	ScanFrequency ScanFrequency
+
+	noSmithyDocumentSerde
+}
+
+// Information on how to remediate a finding.
+type Remediation struct {
+
+	// An object that contains information about the recommended course of action to
+	// remediate the finding.
+	Recommendation *Recommendation
+
+	noSmithyDocumentSerde
+}
+
 // The replication configuration for a registry.
 type ReplicationConfiguration struct {
 
@@ -482,6 +727,96 @@ type RepositoryFilter struct {
 	noSmithyDocumentSerde
 }
 
+// The details of the scanning configuration for a repository.
+type RepositoryScanningConfiguration struct {
+
+	// The scan filters applied to the repository.
+	AppliedScanFilters []ScanningRepositoryFilter
+
+	// The ARN of the repository.
+	RepositoryArn *string
+
+	// The name of the repository.
+	RepositoryName *string
+
+	// The scan frequency for the repository.
+	ScanFrequency ScanFrequency
+
+	// Whether or not scan on push is configured for the repository.
+	ScanOnPush bool
+
+	noSmithyDocumentSerde
+}
+
+// The details about any failures associated with the scanning configuration of a
+// repository.
+type RepositoryScanningConfigurationFailure struct {
+
+	// The failure code.
+	FailureCode ScanningConfigurationFailureCode
+
+	// The reason for the failure.
+	FailureReason *string
+
+	// The name of the repository.
+	RepositoryName *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about the resource involved in a finding.
+type Resource struct {
+
+	// An object that contains details about the resource involved in a finding.
+	Details *ResourceDetails
+
+	// The ID of the resource.
+	Id *string
+
+	// The tags attached to the resource.
+	Tags map[string]string
+
+	// The type of resource.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about the resource involved in the finding.
+type ResourceDetails struct {
+
+	// An object that contains details about the Amazon ECR container image involved in
+	// the finding.
+	AwsEcrContainerImage *AwsEcrContainerImageDetails
+
+	noSmithyDocumentSerde
+}
+
+// The details of a scanning repository filter.
+type ScanningRepositoryFilter struct {
+
+	// The filter to use when scanning.
+	//
+	// This member is required.
+	Filter *string
+
+	// The type associated with the filter.
+	//
+	// This member is required.
+	FilterType ScanningRepositoryFilterType
+
+	noSmithyDocumentSerde
+}
+
+// Information about the Amazon Inspector score given to a finding.
+type ScoreDetails struct {
+
+	// An object that contains details about the CVSS score given to a finding.
+	Cvss *CvssScoreDetails
+
+	noSmithyDocumentSerde
+}
+
 // The metadata that you apply to a resource to help you categorize and organize
 // them. Each tag consists of a key and an optional value, both of which you
 // define. Tag keys can have a maximum character length of 128 characters, and tag
@@ -495,6 +830,36 @@ type Tag struct {
 	// The optional part of a key-value pair that make up a tag. A value acts as a
 	// descriptor within a tag category (key).
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Information on the vulnerable package identified by a finding.
+type VulnerablePackage struct {
+
+	// The architecture of the vulnerable package.
+	Arch *string
+
+	// The epoch of the vulnerable package.
+	Epoch *int32
+
+	// The file path of the vulnerable package.
+	FilePath *string
+
+	// The name of the vulnerable package.
+	Name *string
+
+	// The package manager of the vulnerable package.
+	PackageManager *string
+
+	// The release of the vulnerable package.
+	Release *string
+
+	// The source layer hash of the vulnerable package.
+	SourceLayerHash *string
+
+	// The version of the vulnerable package.
+	Version *string
 
 	noSmithyDocumentSerde
 }

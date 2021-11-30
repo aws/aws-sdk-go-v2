@@ -107,7 +107,8 @@ type CreateFunctionInput struct {
 	Role *string
 
 	// The instruction set architecture that the function supports. Enter a string
-	// array with one of the valid values. The default value is x86_64.
+	// array with one of the valid values (arm64 or x86_64). The default value is
+	// x86_64.
 	Architectures []types.Architecture
 
 	// To enable code signing for this function, specify the ARN of a code-signing
@@ -131,10 +132,10 @@ type CreateFunctionInput struct {
 	FileSystemConfigs []types.FileSystemConfig
 
 	// The name of the method within your code that Lambda calls to execute your
-	// function. The format includes the file name. It can also include namespaces and
-	// other qualifiers, depending on the runtime. For more information, see
-	// Programming Model
-	// (https://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html).
+	// function. Handler is required if the deployment package is a .zip file archive.
+	// The format includes the file name. It can also include namespaces and other
+	// qualifiers, depending on the runtime. For more information, see Programming
+	// Model (https://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html).
 	Handler *string
 
 	// Container image configuration values
@@ -167,7 +168,8 @@ type CreateFunctionInput struct {
 	Publish bool
 
 	// The identifier of the function's runtime
-	// (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html).
+	// (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html). Runtime is
+	// required if the deployment package is a .zip file archive.
 	Runtime types.Runtime
 
 	// A list of tags (https://docs.aws.amazon.com/lambda/latest/dg/tagging.html) to

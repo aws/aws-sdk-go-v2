@@ -14,7 +14,7 @@ import (
 // In an environment account, view the detail data for an environment account
 // connection. For more information, see Environment account connections
 // (https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html)
-// in the AWS Proton Administrator guide.
+// in the Proton Administrator guide.
 func (c *Client) GetEnvironmentAccountConnection(ctx context.Context, params *GetEnvironmentAccountConnectionInput, optFns ...func(*Options)) (*GetEnvironmentAccountConnectionOutput, error) {
 	if params == nil {
 		params = &GetEnvironmentAccountConnectionInput{}
@@ -42,7 +42,7 @@ type GetEnvironmentAccountConnectionInput struct {
 
 type GetEnvironmentAccountConnectionOutput struct {
 
-	// The environment account connection detail data that's returned by AWS Proton.
+	// The environment account connection detail data that's returned by Proton.
 	//
 	// This member is required.
 	EnvironmentAccountConnection *types.EnvironmentAccountConnection

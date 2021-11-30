@@ -4460,6 +4460,22 @@ func awsRestxml_serializeDocumentBuckets(v []string, value smithyxml.Value) erro
 	return nil
 }
 
+func awsRestxml_serializeDocumentCloudWatchMetrics(v *types.CloudWatchMetrics, value smithyxml.Value) error {
+	defer value.Close()
+	{
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "IsEnabled",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Boolean(v.IsEnabled)
+	}
+	return nil
+}
+
 func awsRestxml_serializeDocumentCreateBucketConfiguration(v *types.CreateBucketConfiguration, value smithyxml.Value) error {
 	defer value.Close()
 	if len(v.LocationConstraint) > 0 {
@@ -6550,6 +6566,19 @@ func awsRestxml_serializeDocumentStorageLensConfiguration(v *types.StorageLensCo
 
 func awsRestxml_serializeDocumentStorageLensDataExport(v *types.StorageLensDataExport, value smithyxml.Value) error {
 	defer value.Close()
+	if v.CloudWatchMetrics != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "CloudWatchMetrics",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentCloudWatchMetrics(v.CloudWatchMetrics, el); err != nil {
+			return err
+		}
+	}
 	if v.S3BucketDestination != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{

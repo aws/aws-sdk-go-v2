@@ -4,88 +4,10 @@ package types
 
 import (
 	smithydocument "github.com/aws/smithy-go/document"
-	"time"
 )
 
-// A changeset is unit of data in a dataset.
-type ChangesetInfo struct {
-
-	// Change type indicates how a changeset is applied to a dataset.
-	//
-	// * REPLACE -
-	// Changeset is considered as a replacement to all prior loaded changesets.
-	//
-	// *
-	// APPEND - Changeset is considered as an addition to the end of all prior loaded
-	// changesets.
-	//
-	// * MODIFY - Changeset is considered as a replacement to a specific
-	// prior ingested changeset.
-	ChangeType ChangeType
-
-	// The ARN identifier of the changeset.
-	ChangesetArn *string
-
-	// Tags associated with the changeset.
-	ChangesetLabels map[string]string
-
-	// The timestamp at which the changeset was created in FinSpace.
-	CreateTimestamp *time.Time
-
-	// The unique identifier for the FinSpace dataset in which the changeset is
-	// created.
-	DatasetId *string
-
-	// The structure with error messages.
-	ErrorInfo *ErrorInfo
-
-	// Structure of the source file(s).
-	FormatParams map[string]string
-
-	// Format type of the input files loaded into the changeset.
-	FormatType FormatType
-
-	// Unique identifier for a changeset.
-	Id *string
-
-	// Source path from which the files to create the changeset are sourced.
-	SourceParams map[string]string
-
-	// Type of the data source from which the files to create the changeset are
-	// sourced.
-	//
-	// * S3 - Amazon S3.
-	SourceType SourceType
-
-	// The status of changeset creation operation.
-	Status ChangesetStatus
-
-	// Unique identifier of the changeset that is updated a changeset.
-	UpdatedByChangesetId *string
-
-	// Unique identifier of the changeset that is updated.
-	UpdatesChangesetId *string
-
-	noSmithyDocumentSerde
-}
-
-// Set short term API credentials.
-type Credentials struct {
-
-	// The access key identifier.
-	AccessKeyId *string
-
-	// The access key.
-	SecretAccessKey *string
-
-	// The session token.
-	SessionToken *string
-
-	noSmithyDocumentSerde
-}
-
-// Error message.
-type ErrorInfo struct {
+// The structure with error messages.
+type ChangesetErrorInfo struct {
 
 	// The category of the error.
 	//
@@ -107,12 +29,340 @@ type ErrorInfo struct {
 	// * INTERNAL_SERVICE_EXCEPTION - An
 	// internal service error has occurred.
 	//
-	// * CANCELLED - A user recoverable error has
-	// occurred.
+	// * CANCELLED - Cancelled.
+	//
+	// *
+	// USER_RECOVERABLE - A user recoverable error has occurred.
 	ErrorCategory ErrorCategory
 
 	// The text of the error message.
 	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// A Changeset is unit of data in a Dataset.
+type ChangesetSummary struct {
+
+	// Time until which the Changeset is active. The value is determined as Epoch time
+	// in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM
+	// UTC is specified as 1635768000000.
+	ActiveUntilTimestamp int64
+
+	// Type that indicates how a Changeset is applied to a Dataset.
+	//
+	// * REPLACE -
+	// Changeset is considered as a replacement to all prior loaded Changesets.
+	//
+	// *
+	// APPEND - Changeset is considered as an addition to the end of all prior loaded
+	// Changesets.
+	//
+	// * MODIFY - Changeset is considered as a replacement to a specific
+	// prior ingested Changeset.
+	ChangeType ChangeType
+
+	// The ARN identifier of the Changeset.
+	ChangesetArn *string
+
+	// The unique identifier for a Changeset.
+	ChangesetId *string
+
+	// The timestamp at which the Changeset was created in FinSpace. The value is
+	// determined as Epoch time in milliseconds. For example, the value for Monday,
+	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+	CreateTime int64
+
+	// The unique identifier for the FinSpace Dataset in which the Changeset is
+	// created.
+	DatasetId *string
+
+	// The structure with error messages.
+	ErrorInfo *ChangesetErrorInfo
+
+	// Options that define the structure of the source file(s).
+	FormatParams map[string]string
+
+	// Options that define the location of the data being ingested.
+	SourceParams map[string]string
+
+	// Status of the Changeset ingestion.
+	//
+	// * PENDING - Changeset is pending
+	// creation.
+	//
+	// * FAILED - Changeset creation has failed.
+	//
+	// * SUCCESS - Changeset
+	// creation has succeeded.
+	//
+	// * RUNNING - Changeset creation is running.
+	//
+	// *
+	// STOP_REQUESTED - User requested Changeset creation to stop.
+	Status IngestionStatus
+
+	// The unique identifier of the updated Changeset.
+	UpdatedByChangesetId *string
+
+	// The unique identifier of the Changeset that is updated.
+	UpdatesChangesetId *string
+
+	noSmithyDocumentSerde
+}
+
+// The definition of a column in a tabular Dataset.
+type ColumnDefinition struct {
+
+	// Description for a column.
+	ColumnDescription *string
+
+	// Name for a column.
+	ColumnName *string
+
+	// Data type of a column.
+	//
+	// * STRING - A String data type. CHAR - A char data type.
+	// INTEGER - An integer data type. TINYINT - A tinyint data type. SMALLINT - A
+	// smallint data type. BIGINT - A bigint data type. FLOAT - A float data type.
+	// DOUBLE - A double data type. DATE - A date data type. DATETIME - A datetime data
+	// type. BOOLEAN - A boolean data type. BINARY - A binary data type.
+	DataType ColumnDataType
+
+	noSmithyDocumentSerde
+}
+
+// Short term API credentials.
+type Credentials struct {
+
+	// The access key identifier.
+	AccessKeyId *string
+
+	// The access key.
+	SecretAccessKey *string
+
+	// The session token.
+	SessionToken *string
+
+	noSmithyDocumentSerde
+}
+
+// The structure for a Dataset.
+type Dataset struct {
+
+	// The unique resource identifier for a Dataset.
+	Alias *string
+
+	// The timestamp at which the Dataset was created in FinSpace. The value is
+	// determined as Epoch time in milliseconds. For example, the value for Monday,
+	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+	CreateTime int64
+
+	// The ARN identifier of the Dataset.
+	DatasetArn *string
+
+	// Description for a Dataset.
+	DatasetDescription *string
+
+	// An identifier for a Dataset.
+	DatasetId *string
+
+	// Display title for a Dataset.
+	DatasetTitle *string
+
+	// The format in which Dataset data is structured.
+	//
+	// * TABULAR - Data is structured
+	// in a tabular format.
+	//
+	// * NON_TABULAR - Data is structured in a non-tabular
+	// format.
+	Kind DatasetKind
+
+	// The last time that the Dataset was modified. The value is determined as Epoch
+	// time in milliseconds. For example, the value for Monday, November 1, 2021
+	// 12:00:00 PM UTC is specified as 1635768000000.
+	LastModifiedTime int64
+
+	// Contact information for a Dataset owner.
+	OwnerInfo *DatasetOwnerInfo
+
+	// Definition for a schema on a tabular Dataset.
+	SchemaDefinition *SchemaUnion
+
+	noSmithyDocumentSerde
+}
+
+// A structure for Dataset owner info.
+type DatasetOwnerInfo struct {
+
+	// Email address for the Dataset owner.
+	Email *string
+
+	// Name of the Dataset owner.
+	Name *string
+
+	// Phone number for the Dataset owner.
+	PhoneNumber *string
+
+	noSmithyDocumentSerde
+}
+
+// Structure for the Dataview destination type parameters.
+type DataViewDestinationTypeParams struct {
+
+	// Destination type for a Dataview.
+	//
+	// * GLUE_TABLE - Glue table destination type.
+	//
+	// This member is required.
+	DestinationType *string
+
+	noSmithyDocumentSerde
+}
+
+// The structure with error messages.
+type DataViewErrorInfo struct {
+
+	// The category of the error.
+	//
+	// * VALIDATION -The inputs to this request are
+	// invalid.
+	//
+	// * SERVICE_QUOTA_EXCEEDED - Service quotas have been exceeded. Please
+	// contact AWS support to increase quotas.
+	//
+	// * ACCESS_DENIED - Missing required
+	// permission to perform this request.
+	//
+	// * RESOURCE_NOT_FOUND - One or more inputs
+	// to this request were not found.
+	//
+	// * THROTTLING - The system temporarily lacks
+	// sufficient resources to process the request.
+	//
+	// * INTERNAL_SERVICE_EXCEPTION - An
+	// internal service error has occurred.
+	//
+	// * CANCELLED - Cancelled.
+	//
+	// *
+	// USER_RECOVERABLE - A user recoverable error has occurred.
+	ErrorCategory ErrorCategory
+
+	// The text of the error message.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// Structure for the summary of a Dataview.
+type DataViewSummary struct {
+
+	// Time range to use for the Dataview. The value is determined as Epoch time in
+	// milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM
+	// UTC is specified as 1635768000000.
+	AsOfTimestamp int64
+
+	// The flag to indicate Dataview should be updated automatically.
+	AutoUpdate bool
+
+	// The timestamp at which the Dataview was created in FinSpace. The value is
+	// determined as Epoch time in milliseconds. For example, the value for Monday,
+	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+	CreateTime int64
+
+	// The ARN identifier of the Dataview.
+	DataViewArn *string
+
+	// The unique identifier for the Dataview.
+	DataViewId *string
+
+	// Th unique identifier for the Dataview Dataset.
+	DatasetId *string
+
+	// Information about the Dataview destination.
+	DestinationTypeProperties *DataViewDestinationTypeParams
+
+	// The structure with error messages.
+	ErrorInfo *DataViewErrorInfo
+
+	// The last time that a Dataview was modified. The value is determined as Epoch
+	// time in milliseconds. For example, the value for Monday, November 1, 2021
+	// 12:00:00 PM UTC is specified as 1635768000000.
+	LastModifiedTime int64
+
+	// Ordered set of column names used to partition data.
+	PartitionColumns []string
+
+	// Columns to be used for sorting the data.
+	SortColumns []string
+
+	// The status of a Dataview creation.
+	//
+	// * RUNNING - Dataview creation is running.
+	//
+	// *
+	// STARTING - Dataview creation is starting.
+	//
+	// * FAILED - Dataview creation has
+	// failed.
+	//
+	// * CANCELLED - Dataview creation has been cancelled.
+	//
+	// * TIMEOUT -
+	// Dataview creation has timed out.
+	//
+	// * SUCCESS - Dataview creation has
+	// succeeded.
+	//
+	// * PENDING - Dataview creation is pending.
+	//
+	// * FAILED_CLEANUP_FAILED -
+	// Dataview creation failed and resource cleanup failed.
+	Status DataViewStatus
+
+	noSmithyDocumentSerde
+}
+
+// Permission group parameters for Dataset permissions.
+type PermissionGroupParams struct {
+
+	// List of resource permissions.
+	DatasetPermissions []ResourcePermission
+
+	// The unique identifier of the PermissionGroup.
+	PermissionGroupId *string
+
+	noSmithyDocumentSerde
+}
+
+// Resource permission for a Dataset.
+type ResourcePermission struct {
+
+	// Permission for a resource.
+	Permission *string
+
+	noSmithyDocumentSerde
+}
+
+// Definition for a schema on a tabular Dataset.
+type SchemaDefinition struct {
+
+	// List of column definitions.
+	Columns []ColumnDefinition
+
+	// List of column names used for primary key.
+	PrimaryKeyColumns []string
+
+	noSmithyDocumentSerde
+}
+
+// A union of schema types.
+type SchemaUnion struct {
+
+	// The configuration for a schema on a tabular Dataset.
+	TabularSchemaConfig *SchemaDefinition
 
 	noSmithyDocumentSerde
 }

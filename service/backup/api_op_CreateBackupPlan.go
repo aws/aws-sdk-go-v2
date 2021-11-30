@@ -47,7 +47,8 @@ type CreateBackupPlanInput struct {
 	// Identifies the request and allows failed requests to be retried without the risk
 	// of running the operation twice. If the request includes a CreatorRequestId that
 	// matches an existing backup plan, that plan is returned. This parameter is
-	// optional.
+	// optional. If used, this parameter must contain 1 to 50 alphanumeric or '-_.'
+	// characters.
 	CreatorRequestId *string
 
 	noSmithyDocumentSerde

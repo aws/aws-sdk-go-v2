@@ -4756,6 +4756,79 @@ func awsAwsquery_serializeDocumentMemoryMiBRequest(v *types.MemoryMiBRequest, va
 	return nil
 }
 
+func awsAwsquery_serializeDocumentMetric(v *types.Metric, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Dimensions != nil {
+		objectKey := object.Key("Dimensions")
+		if err := awsAwsquery_serializeDocumentMetricDimensions(v.Dimensions, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.MetricName != nil {
+		objectKey := object.Key("MetricName")
+		objectKey.String(*v.MetricName)
+	}
+
+	if v.Namespace != nil {
+		objectKey := object.Key("Namespace")
+		objectKey.String(*v.Namespace)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentMetricDataQueries(v []types.MetricDataQuery, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsquery_serializeDocumentMetricDataQuery(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsquery_serializeDocumentMetricDataQuery(v *types.MetricDataQuery, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Expression != nil {
+		objectKey := object.Key("Expression")
+		objectKey.String(*v.Expression)
+	}
+
+	if v.Id != nil {
+		objectKey := object.Key("Id")
+		objectKey.String(*v.Id)
+	}
+
+	if v.Label != nil {
+		objectKey := object.Key("Label")
+		objectKey.String(*v.Label)
+	}
+
+	if v.MetricStat != nil {
+		objectKey := object.Key("MetricStat")
+		if err := awsAwsquery_serializeDocumentMetricStat(v.MetricStat, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.ReturnData != nil {
+		objectKey := object.Key("ReturnData")
+		objectKey.Boolean(*v.ReturnData)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeDocumentMetricDimension(v *types.MetricDimension, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -4798,6 +4871,30 @@ func awsAwsquery_serializeDocumentMetrics(v []string, value query.Value) error {
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsquery_serializeDocumentMetricStat(v *types.MetricStat, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Metric != nil {
+		objectKey := object.Key("Metric")
+		if err := awsAwsquery_serializeDocumentMetric(v.Metric, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.Stat != nil {
+		objectKey := object.Key("Stat")
+		objectKey.String(*v.Stat)
+	}
+
+	if v.Unit != nil {
+		objectKey := object.Key("Unit")
+		objectKey.String(*v.Unit)
+	}
+
 	return nil
 }
 
@@ -4931,9 +5028,72 @@ func awsAwsquery_serializeDocumentPredictiveScalingConfiguration(v *types.Predic
 	return nil
 }
 
+func awsAwsquery_serializeDocumentPredictiveScalingCustomizedCapacityMetric(v *types.PredictiveScalingCustomizedCapacityMetric, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.MetricDataQueries != nil {
+		objectKey := object.Key("MetricDataQueries")
+		if err := awsAwsquery_serializeDocumentMetricDataQueries(v.MetricDataQueries, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentPredictiveScalingCustomizedLoadMetric(v *types.PredictiveScalingCustomizedLoadMetric, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.MetricDataQueries != nil {
+		objectKey := object.Key("MetricDataQueries")
+		if err := awsAwsquery_serializeDocumentMetricDataQueries(v.MetricDataQueries, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentPredictiveScalingCustomizedScalingMetric(v *types.PredictiveScalingCustomizedScalingMetric, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.MetricDataQueries != nil {
+		objectKey := object.Key("MetricDataQueries")
+		if err := awsAwsquery_serializeDocumentMetricDataQueries(v.MetricDataQueries, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeDocumentPredictiveScalingMetricSpecification(v *types.PredictiveScalingMetricSpecification, value query.Value) error {
 	object := value.Object()
 	_ = object
+
+	if v.CustomizedCapacityMetricSpecification != nil {
+		objectKey := object.Key("CustomizedCapacityMetricSpecification")
+		if err := awsAwsquery_serializeDocumentPredictiveScalingCustomizedCapacityMetric(v.CustomizedCapacityMetricSpecification, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.CustomizedLoadMetricSpecification != nil {
+		objectKey := object.Key("CustomizedLoadMetricSpecification")
+		if err := awsAwsquery_serializeDocumentPredictiveScalingCustomizedLoadMetric(v.CustomizedLoadMetricSpecification, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.CustomizedScalingMetricSpecification != nil {
+		objectKey := object.Key("CustomizedScalingMetricSpecification")
+		if err := awsAwsquery_serializeDocumentPredictiveScalingCustomizedScalingMetric(v.CustomizedScalingMetricSpecification, objectKey); err != nil {
+			return err
+		}
+	}
 
 	if v.PredefinedLoadMetricSpecification != nil {
 		objectKey := object.Key("PredefinedLoadMetricSpecification")

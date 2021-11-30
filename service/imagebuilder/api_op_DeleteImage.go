@@ -27,8 +27,8 @@ import (
 //
 // * To delete a container image from Amazon ECR,
 // see Deleting an image
-// (https://docs.aws.amazon.com/https:/docs.aws.amazon.comAmazonECR/latest/userguide/delete_image.html)
-// in the Amazon ECR User Guide.
+// (https://docs.aws.amazon.com/AmazonECR/latest/userguide/delete_image.html) in
+// the Amazon ECR User Guide.
 func (c *Client) DeleteImage(ctx context.Context, params *DeleteImageInput, optFns ...func(*Options)) (*DeleteImageOutput, error) {
 	if params == nil {
 		params = &DeleteImageInput{}

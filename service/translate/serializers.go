@@ -926,6 +926,18 @@ func awsAwsjson11_serializeDocumentTextTranslationJobFilter(v *types.TextTransla
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentTranslationSettings(v *types.TranslationSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Profanity) > 0 {
+		ok := object.Key("Profanity")
+		ok.String(string(v.Profanity))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentCreateParallelDataInput(v *CreateParallelDataInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1161,6 +1173,13 @@ func awsAwsjson11_serializeOpDocumentStartTextTranslationJobInput(v *StartTextTr
 		}
 	}
 
+	if v.Settings != nil {
+		ok := object.Key("Settings")
+		if err := awsAwsjson11_serializeDocumentTranslationSettings(v.Settings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SourceLanguageCode != nil {
 		ok := object.Key("SourceLanguageCode")
 		ok.String(*v.SourceLanguageCode)
@@ -1198,6 +1217,13 @@ func awsAwsjson11_serializeOpDocumentStopTextTranslationJobInput(v *StopTextTran
 func awsAwsjson11_serializeOpDocumentTranslateTextInput(v *TranslateTextInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Settings != nil {
+		ok := object.Key("Settings")
+		if err := awsAwsjson11_serializeDocumentTranslationSettings(v.Settings, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.SourceLanguageCode != nil {
 		ok := object.Key("SourceLanguageCode")

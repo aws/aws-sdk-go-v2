@@ -41,9 +41,8 @@ type Addon struct {
 	Status AddonStatus
 
 	// The metadata that you apply to the add-on to assist with categorization and
-	// organization. Each tag consists of a key and an optional value, both of which
-	// you define. Add-on tags do not propagate to any other resources associated with
-	// the cluster.
+	// organization. Each tag consists of a key and an optional value. You define both.
+	// Add-on tags do not propagate to any other resources associated with the cluster.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -186,9 +185,9 @@ type Cluster struct {
 	Status ClusterStatus
 
 	// The metadata that you apply to the cluster to assist with categorization and
-	// organization. Each tag consists of a key and an optional value, both of which
-	// you define. Cluster tags do not propagate to any other resources associated with
-	// the cluster.
+	// organization. Each tag consists of a key and an optional value. You define both.
+	// Cluster tags do not propagate to any other resources associated with the
+	// cluster.
 	Tags map[string]string
 
 	// The Kubernetes server version for the cluster.
@@ -333,10 +332,9 @@ type FargateProfile struct {
 	Subnets []string
 
 	// The metadata applied to the Fargate profile to assist with categorization and
-	// organization. Each tag consists of a key and an optional value, both of which
-	// you define. Fargate profile tags do not propagate to any other resources
-	// associated with the Fargate profile, such as the pods that are scheduled with
-	// it.
+	// organization. Each tag consists of a key and an optional value. You define both.
+	// Fargate profile tags do not propagate to any other resources associated with the
+	// Fargate profile, such as the pods that are scheduled with it.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -655,9 +653,9 @@ type Nodegroup struct {
 	Subnets []string
 
 	// The metadata applied to the node group to assist with categorization and
-	// organization. Each tag consists of a key and an optional value, both of which
-	// you define. Node group tags do not propagate to any other resources associated
-	// with the node group, such as the Amazon EC2 instances or subnets.
+	// organization. Each tag consists of a key and an optional value. You define both.
+	// Node group tags do not propagate to any other resources associated with the node
+	// group, such as the Amazon EC2 instances or subnets.
 	Tags map[string]string
 
 	// The Kubernetes taints to be applied to the nodes in the node group when they are
@@ -798,7 +796,7 @@ type OidcIdentityProviderConfig struct {
 
 	// The metadata to apply to the provider configuration to assist with
 	// categorization and organization. Each tag consists of a key and an optional
-	// value, both of which you defined.
+	// value. You define both.
 	Tags map[string]string
 
 	// The JSON Web token (JWT) claim that is used as the username.

@@ -29,12 +29,12 @@ func (c *Client) CreateFolder(ctx context.Context, params *CreateFolderInput, op
 
 type CreateFolderInput struct {
 
-	// The AWS Account ID.
+	// The ID for the Amazon Web Services account where you want to create the folder.
 	//
 	// This member is required.
 	AwsAccountId *string
 
-	// The folder ID.
+	// The ID of the folder.
 	//
 	// This member is required.
 	FolderId *string
@@ -70,7 +70,7 @@ type CreateFolderOutput struct {
 	// The request ID for the newly created folder.
 	RequestId *string
 
-	// The status of the newly created folder. If succeeded, the status is SC_OK (200).
+	// The HTTP status of the request.
 	Status int32
 
 	// Metadata pertaining to the operation's result.

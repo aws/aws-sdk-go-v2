@@ -36,8 +36,8 @@ type CancelCommandInput struct {
 	// This member is required.
 	CommandId *string
 
-	// (Optional) A list of instance IDs on which you want to cancel the command. If
-	// not provided, the command is canceled on every instance on which it was
+	// (Optional) A list of managed node IDs on which you want to cancel the command.
+	// If not provided, the command is canceled on every node on which it was
 	// requested.
 	InstanceIds []string
 

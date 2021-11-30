@@ -36,6 +36,11 @@ type DescribeRegionSettingsInput struct {
 
 type DescribeRegionSettingsOutput struct {
 
+	// Returns whether a DynamoDB recovery point was taken using  Backup's advanced
+	// DynamoDB backup features
+	// (https://docs.aws.amazon.com/aws-backup/latest/devguide/advanced-ddb-backup.html).
+	ResourceTypeManagementPreference map[string]bool
+
 	// Returns a list of all services along with the opt-in preferences in the Region.
 	ResourceTypeOptInPreference map[string]bool
 

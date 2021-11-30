@@ -29,16 +29,17 @@ func (c *Client) GetLensVersionDifference(ctx context.Context, params *GetLensVe
 
 type GetLensVersionDifferenceInput struct {
 
-	// The base version of the lens.
-	//
-	// This member is required.
-	BaseLensVersion *string
-
 	// The alias of the lens, for example, serverless. Each lens is identified by its
 	// LensSummary$LensAlias.
 	//
 	// This member is required.
 	LensAlias *string
+
+	// The base version of the lens.
+	BaseLensVersion *string
+
+	// The lens version to target a difference for.
+	TargetLensVersion *string
 
 	noSmithyDocumentSerde
 }
@@ -54,6 +55,12 @@ type GetLensVersionDifferenceOutput struct {
 	// The alias of the lens, for example, serverless. Each lens is identified by its
 	// LensSummary$LensAlias.
 	LensAlias *string
+
+	// The ARN for the lens.
+	LensArn *string
+
+	// The target lens version for the lens.
+	TargetLensVersion *string
 
 	// The differences between the base and latest versions of the lens.
 	VersionDifferences *types.VersionDifferences

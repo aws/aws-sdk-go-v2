@@ -170,6 +170,26 @@ func (m *validateOpCreateEnvironmentTemplateVersion) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateRepository struct {
+}
+
+func (*validateOpCreateRepository) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateRepository) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateRepositoryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateRepositoryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateService struct {
 }
 
@@ -225,6 +245,26 @@ func (m *validateOpCreateServiceTemplateVersion) HandleInitialize(ctx context.Co
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateServiceTemplateVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateTemplateSyncConfig struct {
+}
+
+func (*validateOpCreateTemplateSyncConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateTemplateSyncConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateTemplateSyncConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateTemplateSyncConfigInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -310,6 +350,26 @@ func (m *validateOpDeleteEnvironmentTemplateVersion) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteRepository struct {
+}
+
+func (*validateOpDeleteRepository) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRepository) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRepositoryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRepositoryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteService struct {
 }
 
@@ -365,6 +425,26 @@ func (m *validateOpDeleteServiceTemplateVersion) HandleInitialize(ctx context.Co
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteServiceTemplateVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteTemplateSyncConfig struct {
+}
+
+func (*validateOpDeleteTemplateSyncConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteTemplateSyncConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteTemplateSyncConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteTemplateSyncConfigInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -450,6 +530,46 @@ func (m *validateOpGetEnvironmentTemplateVersion) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetRepository struct {
+}
+
+func (*validateOpGetRepository) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRepository) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRepositoryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRepositoryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetRepositorySyncStatus struct {
+}
+
+func (*validateOpGetRepositorySyncStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRepositorySyncStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRepositorySyncStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRepositorySyncStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetService struct {
 }
 
@@ -530,6 +650,46 @@ func (m *validateOpGetServiceTemplateVersion) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetTemplateSyncConfig struct {
+}
+
+func (*validateOpGetTemplateSyncConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTemplateSyncConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTemplateSyncConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTemplateSyncConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetTemplateSyncStatus struct {
+}
+
+func (*validateOpGetTemplateSyncStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTemplateSyncStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTemplateSyncStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTemplateSyncStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListEnvironmentAccountConnections struct {
 }
 
@@ -545,6 +705,46 @@ func (m *validateOpListEnvironmentAccountConnections) HandleInitialize(ctx conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListEnvironmentAccountConnectionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListEnvironmentOutputs struct {
+}
+
+func (*validateOpListEnvironmentOutputs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListEnvironmentOutputs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListEnvironmentOutputsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListEnvironmentOutputsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListEnvironmentProvisionedResources struct {
+}
+
+func (*validateOpListEnvironmentProvisionedResources) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListEnvironmentProvisionedResources) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListEnvironmentProvisionedResourcesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListEnvironmentProvisionedResourcesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -590,6 +790,106 @@ func (m *validateOpListEnvironmentTemplateVersions) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListRepositorySyncDefinitions struct {
+}
+
+func (*validateOpListRepositorySyncDefinitions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListRepositorySyncDefinitions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListRepositorySyncDefinitionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListRepositorySyncDefinitionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListServiceInstanceOutputs struct {
+}
+
+func (*validateOpListServiceInstanceOutputs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListServiceInstanceOutputs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListServiceInstanceOutputsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListServiceInstanceOutputsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListServiceInstanceProvisionedResources struct {
+}
+
+func (*validateOpListServiceInstanceProvisionedResources) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListServiceInstanceProvisionedResources) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListServiceInstanceProvisionedResourcesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListServiceInstanceProvisionedResourcesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListServicePipelineOutputs struct {
+}
+
+func (*validateOpListServicePipelineOutputs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListServicePipelineOutputs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListServicePipelineOutputsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListServicePipelineOutputsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListServicePipelineProvisionedResources struct {
+}
+
+func (*validateOpListServicePipelineProvisionedResources) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListServicePipelineProvisionedResources) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListServicePipelineProvisionedResourcesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListServicePipelineProvisionedResourcesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListServiceTemplateVersions struct {
 }
 
@@ -625,6 +925,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpNotifyResourceDeploymentStatusChange struct {
+}
+
+func (*validateOpNotifyResourceDeploymentStatusChange) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpNotifyResourceDeploymentStatusChange) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*NotifyResourceDeploymentStatusChangeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpNotifyResourceDeploymentStatusChangeInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -685,6 +1005,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUntagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateAccountSettings struct {
+}
+
+func (*validateOpUpdateAccountSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAccountSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAccountSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAccountSettingsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -870,6 +1210,26 @@ func (m *validateOpUpdateServiceTemplateVersion) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateTemplateSyncConfig struct {
+}
+
+func (*validateOpUpdateTemplateSyncConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateTemplateSyncConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateTemplateSyncConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateTemplateSyncConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpAcceptEnvironmentAccountConnectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAcceptEnvironmentAccountConnection{}, middleware.After)
 }
@@ -902,6 +1262,10 @@ func addOpCreateEnvironmentTemplateVersionValidationMiddleware(stack *middleware
 	return stack.Initialize.Add(&validateOpCreateEnvironmentTemplateVersion{}, middleware.After)
 }
 
+func addOpCreateRepositoryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateRepository{}, middleware.After)
+}
+
 func addOpCreateServiceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateService{}, middleware.After)
 }
@@ -912,6 +1276,10 @@ func addOpCreateServiceTemplateValidationMiddleware(stack *middleware.Stack) err
 
 func addOpCreateServiceTemplateVersionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateServiceTemplateVersion{}, middleware.After)
+}
+
+func addOpCreateTemplateSyncConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateTemplateSyncConfig{}, middleware.After)
 }
 
 func addOpDeleteEnvironmentAccountConnectionValidationMiddleware(stack *middleware.Stack) error {
@@ -930,6 +1298,10 @@ func addOpDeleteEnvironmentTemplateVersionValidationMiddleware(stack *middleware
 	return stack.Initialize.Add(&validateOpDeleteEnvironmentTemplateVersion{}, middleware.After)
 }
 
+func addOpDeleteRepositoryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRepository{}, middleware.After)
+}
+
 func addOpDeleteServiceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteService{}, middleware.After)
 }
@@ -940,6 +1312,10 @@ func addOpDeleteServiceTemplateValidationMiddleware(stack *middleware.Stack) err
 
 func addOpDeleteServiceTemplateVersionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteServiceTemplateVersion{}, middleware.After)
+}
+
+func addOpDeleteTemplateSyncConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteTemplateSyncConfig{}, middleware.After)
 }
 
 func addOpGetEnvironmentAccountConnectionValidationMiddleware(stack *middleware.Stack) error {
@@ -958,6 +1334,14 @@ func addOpGetEnvironmentTemplateVersionValidationMiddleware(stack *middleware.St
 	return stack.Initialize.Add(&validateOpGetEnvironmentTemplateVersion{}, middleware.After)
 }
 
+func addOpGetRepositoryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRepository{}, middleware.After)
+}
+
+func addOpGetRepositorySyncStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRepositorySyncStatus{}, middleware.After)
+}
+
 func addOpGetServiceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetService{}, middleware.After)
 }
@@ -974,8 +1358,24 @@ func addOpGetServiceTemplateVersionValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpGetServiceTemplateVersion{}, middleware.After)
 }
 
+func addOpGetTemplateSyncConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTemplateSyncConfig{}, middleware.After)
+}
+
+func addOpGetTemplateSyncStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTemplateSyncStatus{}, middleware.After)
+}
+
 func addOpListEnvironmentAccountConnectionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListEnvironmentAccountConnections{}, middleware.After)
+}
+
+func addOpListEnvironmentOutputsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListEnvironmentOutputs{}, middleware.After)
+}
+
+func addOpListEnvironmentProvisionedResourcesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListEnvironmentProvisionedResources{}, middleware.After)
 }
 
 func addOpListEnvironmentsValidationMiddleware(stack *middleware.Stack) error {
@@ -986,12 +1386,36 @@ func addOpListEnvironmentTemplateVersionsValidationMiddleware(stack *middleware.
 	return stack.Initialize.Add(&validateOpListEnvironmentTemplateVersions{}, middleware.After)
 }
 
+func addOpListRepositorySyncDefinitionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListRepositorySyncDefinitions{}, middleware.After)
+}
+
+func addOpListServiceInstanceOutputsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListServiceInstanceOutputs{}, middleware.After)
+}
+
+func addOpListServiceInstanceProvisionedResourcesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListServiceInstanceProvisionedResources{}, middleware.After)
+}
+
+func addOpListServicePipelineOutputsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListServicePipelineOutputs{}, middleware.After)
+}
+
+func addOpListServicePipelineProvisionedResourcesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListServicePipelineProvisionedResources{}, middleware.After)
+}
+
 func addOpListServiceTemplateVersionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListServiceTemplateVersions{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpNotifyResourceDeploymentStatusChangeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpNotifyResourceDeploymentStatusChange{}, middleware.After)
 }
 
 func addOpRejectEnvironmentAccountConnectionValidationMiddleware(stack *middleware.Stack) error {
@@ -1004,6 +1428,10 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateAccountSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAccountSettings{}, middleware.After)
 }
 
 func addOpUpdateEnvironmentAccountConnectionValidationMiddleware(stack *middleware.Stack) error {
@@ -1040,6 +1468,10 @@ func addOpUpdateServiceTemplateValidationMiddleware(stack *middleware.Stack) err
 
 func addOpUpdateServiceTemplateVersionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateServiceTemplateVersion{}, middleware.After)
+}
+
+func addOpUpdateTemplateSyncConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateTemplateSyncConfig{}, middleware.After)
 }
 
 func validateCompatibleEnvironmentTemplateInput(v *types.CompatibleEnvironmentTemplateInput) error {
@@ -1104,6 +1536,27 @@ func validateEnvironmentTemplateFilterList(v []types.EnvironmentTemplateFilter) 
 		if err := validateEnvironmentTemplateFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRepositoryBranchInput(v *types.RepositoryBranchInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RepositoryBranchInput"}
+	if len(v.Provider) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Provider"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Branch == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Branch"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1261,6 +1714,11 @@ func validateOpCreateEnvironmentAccountConnectionInput(v *CreateEnvironmentAccou
 	if v.EnvironmentName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentName"))
 	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1288,6 +1746,11 @@ func validateOpCreateEnvironmentInput(v *CreateEnvironmentInput) error {
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ProvisioningRepository != nil {
+		if err := validateRepositoryBranchInput(v.ProvisioningRepository); err != nil {
+			invalidParams.AddNested("ProvisioningRepository", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1336,6 +1799,27 @@ func validateOpCreateEnvironmentTemplateVersionInput(v *CreateEnvironmentTemplat
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateRepositoryInput(v *CreateRepositoryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRepositoryInput"}
+	if len(v.Provider) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Provider"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ConnectionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1427,6 +1911,33 @@ func validateOpCreateServiceTemplateVersionInput(v *CreateServiceTemplateVersion
 	}
 }
 
+func validateOpCreateTemplateSyncConfigInput(v *CreateTemplateSyncConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateTemplateSyncConfigInput"}
+	if v.TemplateName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateName"))
+	}
+	if len(v.TemplateType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateType"))
+	}
+	if len(v.RepositoryProvider) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryProvider"))
+	}
+	if v.RepositoryName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
+	}
+	if v.Branch == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Branch"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteEnvironmentAccountConnectionInput(v *DeleteEnvironmentAccountConnectionInput) error {
 	if v == nil {
 		return nil
@@ -1493,6 +2004,24 @@ func validateOpDeleteEnvironmentTemplateVersionInput(v *DeleteEnvironmentTemplat
 	}
 }
 
+func validateOpDeleteRepositoryInput(v *DeleteRepositoryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRepositoryInput"}
+	if len(v.Provider) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Provider"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteServiceInput(v *DeleteServiceInput) error {
 	if v == nil {
 		return nil
@@ -1536,6 +2065,24 @@ func validateOpDeleteServiceTemplateVersionInput(v *DeleteServiceTemplateVersion
 	}
 	if v.MinorVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MinorVersion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteTemplateSyncConfigInput(v *DeleteTemplateSyncConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteTemplateSyncConfigInput"}
+	if v.TemplateName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateName"))
+	}
+	if len(v.TemplateType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1602,6 +2149,48 @@ func validateOpGetEnvironmentTemplateVersionInput(v *GetEnvironmentTemplateVersi
 	}
 	if v.MinorVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MinorVersion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetRepositoryInput(v *GetRepositoryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRepositoryInput"}
+	if len(v.Provider) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Provider"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetRepositorySyncStatusInput(v *GetRepositorySyncStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRepositorySyncStatusInput"}
+	if v.RepositoryName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
+	}
+	if len(v.RepositoryProvider) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryProvider"))
+	}
+	if v.Branch == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Branch"))
+	}
+	if len(v.SyncType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SyncType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1679,6 +2268,45 @@ func validateOpGetServiceTemplateVersionInput(v *GetServiceTemplateVersionInput)
 	}
 }
 
+func validateOpGetTemplateSyncConfigInput(v *GetTemplateSyncConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTemplateSyncConfigInput"}
+	if v.TemplateName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateName"))
+	}
+	if len(v.TemplateType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetTemplateSyncStatusInput(v *GetTemplateSyncStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTemplateSyncStatusInput"}
+	if v.TemplateName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateName"))
+	}
+	if len(v.TemplateType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateType"))
+	}
+	if v.TemplateVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateVersion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListEnvironmentAccountConnectionsInput(v *ListEnvironmentAccountConnectionsInput) error {
 	if v == nil {
 		return nil
@@ -1686,6 +2314,36 @@ func validateOpListEnvironmentAccountConnectionsInput(v *ListEnvironmentAccountC
 	invalidParams := smithy.InvalidParamsError{Context: "ListEnvironmentAccountConnectionsInput"}
 	if len(v.RequestedBy) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("RequestedBy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListEnvironmentOutputsInput(v *ListEnvironmentOutputsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListEnvironmentOutputsInput"}
+	if v.EnvironmentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListEnvironmentProvisionedResourcesInput(v *ListEnvironmentProvisionedResourcesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListEnvironmentProvisionedResourcesInput"}
+	if v.EnvironmentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1726,6 +2384,93 @@ func validateOpListEnvironmentTemplateVersionsInput(v *ListEnvironmentTemplateVe
 	}
 }
 
+func validateOpListRepositorySyncDefinitionsInput(v *ListRepositorySyncDefinitionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListRepositorySyncDefinitionsInput"}
+	if v.RepositoryName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
+	}
+	if len(v.RepositoryProvider) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryProvider"))
+	}
+	if len(v.SyncType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SyncType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListServiceInstanceOutputsInput(v *ListServiceInstanceOutputsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListServiceInstanceOutputsInput"}
+	if v.ServiceInstanceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceInstanceName"))
+	}
+	if v.ServiceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListServiceInstanceProvisionedResourcesInput(v *ListServiceInstanceProvisionedResourcesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListServiceInstanceProvisionedResourcesInput"}
+	if v.ServiceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
+	}
+	if v.ServiceInstanceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceInstanceName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListServicePipelineOutputsInput(v *ListServicePipelineOutputsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListServicePipelineOutputsInput"}
+	if v.ServiceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListServicePipelineProvisionedResourcesInput(v *ListServicePipelineProvisionedResourcesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListServicePipelineProvisionedResourcesInput"}
+	if v.ServiceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListServiceTemplateVersionsInput(v *ListServiceTemplateVersionsInput) error {
 	if v == nil {
 		return nil
@@ -1748,6 +2493,24 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpNotifyResourceDeploymentStatusChangeInput(v *NotifyResourceDeploymentStatusChangeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NotifyResourceDeploymentStatusChangeInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1811,6 +2574,23 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 }
 
+func validateOpUpdateAccountSettingsInput(v *UpdateAccountSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAccountSettingsInput"}
+	if v.PipelineProvisioningRepository != nil {
+		if err := validateRepositoryBranchInput(v.PipelineProvisioningRepository); err != nil {
+			invalidParams.AddNested("PipelineProvisioningRepository", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateEnvironmentAccountConnectionInput(v *UpdateEnvironmentAccountConnectionInput) error {
 	if v == nil {
 		return nil
@@ -1839,6 +2619,11 @@ func validateOpUpdateEnvironmentInput(v *UpdateEnvironmentInput) error {
 	}
 	if len(v.DeploymentType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("DeploymentType"))
+	}
+	if v.ProvisioningRepository != nil {
+		if err := validateRepositoryBranchInput(v.ProvisioningRepository); err != nil {
+			invalidParams.AddNested("ProvisioningRepository", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1973,6 +2758,33 @@ func validateOpUpdateServiceTemplateVersionInput(v *UpdateServiceTemplateVersion
 		if err := validateCompatibleEnvironmentTemplateInputList(v.CompatibleEnvironmentTemplates); err != nil {
 			invalidParams.AddNested("CompatibleEnvironmentTemplates", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateTemplateSyncConfigInput(v *UpdateTemplateSyncConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateTemplateSyncConfigInput"}
+	if v.TemplateName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateName"))
+	}
+	if len(v.TemplateType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateType"))
+	}
+	if len(v.RepositoryProvider) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryProvider"))
+	}
+	if v.RepositoryName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
+	}
+	if v.Branch == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Branch"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

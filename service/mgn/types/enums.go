@@ -41,6 +41,8 @@ const (
 	DataReplicationErrorStringFailedToPairReplicationServerWithAgent  DataReplicationErrorString = "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT"
 	DataReplicationErrorStringFailedToConnectAgentToReplicationServer DataReplicationErrorString = "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER"
 	DataReplicationErrorStringFailedToStartDataTransfer               DataReplicationErrorString = "FAILED_TO_START_DATA_TRANSFER"
+	DataReplicationErrorStringUnsupportedVmConfiguration              DataReplicationErrorString = "UNSUPPORTED_VM_CONFIGURATION"
+	DataReplicationErrorStringLastSnapshotJobFailed                   DataReplicationErrorString = "LAST_SNAPSHOT_JOB_FAILED"
 )
 
 // Values returns all known values for DataReplicationErrorString. Note that this
@@ -62,6 +64,8 @@ func (DataReplicationErrorString) Values() []DataReplicationErrorString {
 		"FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT",
 		"FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER",
 		"FAILED_TO_START_DATA_TRANSFER",
+		"UNSUPPORTED_VM_CONFIGURATION",
+		"LAST_SNAPSHOT_JOB_FAILED",
 	}
 }
 
@@ -131,16 +135,18 @@ type DataReplicationState string
 
 // Enum values for DataReplicationState
 const (
-	DataReplicationStateStopped          DataReplicationState = "STOPPED"
-	DataReplicationStateInitiating       DataReplicationState = "INITIATING"
-	DataReplicationStateInitialSync      DataReplicationState = "INITIAL_SYNC"
-	DataReplicationStateBacklog          DataReplicationState = "BACKLOG"
-	DataReplicationStateCreatingSnapshot DataReplicationState = "CREATING_SNAPSHOT"
-	DataReplicationStateContinuous       DataReplicationState = "CONTINUOUS"
-	DataReplicationStatePaused           DataReplicationState = "PAUSED"
-	DataReplicationStateRescan           DataReplicationState = "RESCAN"
-	DataReplicationStateStalled          DataReplicationState = "STALLED"
-	DataReplicationStateDisconnected     DataReplicationState = "DISCONNECTED"
+	DataReplicationStateStopped                 DataReplicationState = "STOPPED"
+	DataReplicationStateInitiating              DataReplicationState = "INITIATING"
+	DataReplicationStateInitialSync             DataReplicationState = "INITIAL_SYNC"
+	DataReplicationStateBacklog                 DataReplicationState = "BACKLOG"
+	DataReplicationStateCreatingSnapshot        DataReplicationState = "CREATING_SNAPSHOT"
+	DataReplicationStateContinuous              DataReplicationState = "CONTINUOUS"
+	DataReplicationStatePaused                  DataReplicationState = "PAUSED"
+	DataReplicationStateRescan                  DataReplicationState = "RESCAN"
+	DataReplicationStateStalled                 DataReplicationState = "STALLED"
+	DataReplicationStateDisconnected            DataReplicationState = "DISCONNECTED"
+	DataReplicationStatePendingSnapshotShipping DataReplicationState = "PENDING_SNAPSHOT_SHIPPING"
+	DataReplicationStateShippingSnapshot        DataReplicationState = "SHIPPING_SNAPSHOT"
 )
 
 // Values returns all known values for DataReplicationState. Note that this can be
@@ -158,6 +164,8 @@ func (DataReplicationState) Values() []DataReplicationState {
 		"RESCAN",
 		"STALLED",
 		"DISCONNECTED",
+		"PENDING_SNAPSHOT_SHIPPING",
+		"SHIPPING_SNAPSHOT",
 	}
 }
 
@@ -343,6 +351,7 @@ const (
 	LifeCycleStateCuttingOver     LifeCycleState = "CUTTING_OVER"
 	LifeCycleStateCutover         LifeCycleState = "CUTOVER"
 	LifeCycleStateDisconnected    LifeCycleState = "DISCONNECTED"
+	LifeCycleStateDiscovered      LifeCycleState = "DISCOVERED"
 )
 
 // Values returns all known values for LifeCycleState. Note that this can be
@@ -358,6 +367,7 @@ func (LifeCycleState) Values() []LifeCycleState {
 		"CUTTING_OVER",
 		"CUTOVER",
 		"DISCONNECTED",
+		"DISCOVERED",
 	}
 }
 
@@ -442,6 +452,24 @@ func (ReplicationConfigurationReplicatedDiskStagingDiskType) Values() []Replicat
 		"SC1",
 		"ST1",
 		"STANDARD",
+	}
+}
+
+type ReplicationType string
+
+// Enum values for ReplicationType
+const (
+	ReplicationTypeAgentBased       ReplicationType = "AGENT_BASED"
+	ReplicationTypeSnapshotShipping ReplicationType = "SNAPSHOT_SHIPPING"
+)
+
+// Values returns all known values for ReplicationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReplicationType) Values() []ReplicationType {
+	return []ReplicationType{
+		"AGENT_BASED",
+		"SNAPSHOT_SHIPPING",
 	}
 }
 

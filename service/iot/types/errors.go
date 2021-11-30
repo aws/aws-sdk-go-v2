@@ -185,6 +185,26 @@ func (e *InternalFailureException) ErrorMessage() string {
 func (e *InternalFailureException) ErrorCode() string             { return "InternalFailureException" }
 func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
+// Internal error from the service that indicates an unexpected error or that the
+// service is unavailable.
+type InternalServerException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InternalServerException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InternalServerException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
+func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
 // The aggregation is invalid.
 type InvalidAggregationException struct {
 	Message *string

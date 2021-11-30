@@ -44,6 +44,51 @@ type Address struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration settings for how to perform the auto-merging of profiles.
+type AutoMerging struct {
+
+	// The flag that enables the auto-merging of duplicate profiles.
+	//
+	// This member is required.
+	Enabled *bool
+
+	// How the auto-merging process should resolve conflicts between different
+	// profiles. For example, if Profile A and Profile B have the same FirstName and
+	// LastName (and that is the matching criteria), which EmailAddress should be used?
+	ConflictResolution *ConflictResolution
+
+	// A list of matching attributes that represent matching criteria. If two profiles
+	// meet at least one of the requirements in the matching attributes list, they will
+	// be merged.
+	Consolidation *Consolidation
+
+	noSmithyDocumentSerde
+}
+
+// How the auto-merging process should resolve conflicts between different
+// profiles.
+type ConflictResolution struct {
+
+	// How the auto-merging process should resolve conflicts between different
+	// profiles.
+	//
+	// * RECENCY: Uses the data that was most recently updated.
+	//
+	// * SOURCE:
+	// Uses the data from a specific source. For example, if a company has been aquired
+	// or two departments have merged, data from the specified source is used. If two
+	// duplicate profiles are from the same source, then RECENCY is used again.
+	//
+	// This member is required.
+	ConflictResolvingModel ConflictResolvingModel
+
+	// The ObjectType name that is used to resolve profile merging conflicts when
+	// choosing SOURCE as the ConflictResolvingModel.
+	SourceName *string
+
+	noSmithyDocumentSerde
+}
+
 // The operation to be performed on the provided source fields.
 type ConnectorOperator struct {
 
@@ -65,6 +110,17 @@ type ConnectorOperator struct {
 	noSmithyDocumentSerde
 }
 
+// The matching criteria to be used during the auto-merging process.
+type Consolidation struct {
+
+	// A list of matching criteria.
+	//
+	// This member is required.
+	MatchingAttributesList [][]string
+
+	noSmithyDocumentSerde
+}
+
 // Usage-specific statistics about the domain.
 type DomainStats struct {
 
@@ -82,6 +138,30 @@ type DomainStats struct {
 
 	// The total size, in bytes, of all objects in the domain.
 	TotalSize int64
+
+	noSmithyDocumentSerde
+}
+
+// Configuration information about the S3 bucket where Identity Resolution Jobs
+// writes result files. You need to give Customer Profiles service principal write
+// permission to your S3 bucket. Otherwise, you'll get an exception in the API
+// response. For an example policy, see Amazon Connect Customer Profiles
+// cross-service confused deputy prevention
+// (https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html#customer-profiles-cross-service).
+type ExportingConfig struct {
+
+	// The S3 location where Identity Resolution Jobs write result files.
+	S3Exporting *S3ExportingConfig
+
+	noSmithyDocumentSerde
+}
+
+// The S3 location where Identity Resolution Jobs write result files.
+type ExportingLocation struct {
+
+	// Information about the S3 location where Identity Resolution Jobs write result
+	// files.
+	S3Exporting *S3ExportingLocation
 
 	noSmithyDocumentSerde
 }
@@ -195,6 +275,61 @@ type FlowDefinition struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the Identity Resolution Job.
+type IdentityResolutionJob struct {
+
+	// The unique name of the domain.
+	DomainName *string
+
+	// The S3 location where the Identity Resolution Job writes result files.
+	ExportingLocation *ExportingLocation
+
+	// The timestamp of when the job was completed.
+	JobEndTime *time.Time
+
+	// The unique identifier of the Identity Resolution Job.
+	JobId *string
+
+	// The timestamp of when the job was started or will be started.
+	JobStartTime *time.Time
+
+	// Statistics about an Identity Resolution Job.
+	JobStats *JobStats
+
+	// The error messages that are generated when the Identity Resolution Job runs.
+	Message *string
+
+	// The status of the Identity Resolution Job.
+	//
+	// * PENDING: The Identity Resolution
+	// Job is scheduled but has not started yet. If you turn off the Identity
+	// Resolution feature in your domain, jobs in the PENDING state are deleted.
+	//
+	// *
+	// PREPROCESSING: The Identity Resolution Job is loading your data.
+	//
+	// *
+	// FIND_MATCHING: The Identity Resolution Job is using the machine learning model
+	// to identify profiles that belong to the same matching group.
+	//
+	// * MERGING: The
+	// Identity Resolution Job is merging duplicate profiles.
+	//
+	// * COMPLETED: The
+	// Identity Resolution Job completed successfully.
+	//
+	// * PARTIAL_SUCCESS: There's a
+	// system error and not all of the data is merged. The Identity Resolution Job
+	// writes a message indicating the source of the problem.
+	//
+	// * FAILED: The Identity
+	// Resolution Job did not merge any data. It writes a message indicating the source
+	// of the problem.
+	Status IdentityResolutionJobStatus
+
+	noSmithyDocumentSerde
+}
+
 // Specifies the configuration used when importing incremental records from the
 // source.
 type IncrementalPullConfig struct {
@@ -202,6 +337,38 @@ type IncrementalPullConfig struct {
 	// A field that specifies the date time or timestamp field as the criteria to use
 	// when importing incremental records from the source.
 	DatetimeTypeFieldName *string
+
+	noSmithyDocumentSerde
+}
+
+// The day and time when do you want to start the Identity Resolution Job every
+// week.
+type JobSchedule struct {
+
+	// The day when the Identity Resolution Job should run every week.
+	//
+	// This member is required.
+	DayOfTheWeek JobScheduleDayOfTheWeek
+
+	// The time when the Identity Resolution Job should run every week.
+	//
+	// This member is required.
+	Time *string
+
+	noSmithyDocumentSerde
+}
+
+// Statistics about the Identity Resolution Job.
+type JobStats struct {
+
+	// The number of matches found.
+	NumberOfMatchesFound int64
+
+	// The number of merges completed.
+	NumberOfMergesDone int64
+
+	// The number of profiles reviewed.
+	NumberOfProfilesReviewed int64
 
 	noSmithyDocumentSerde
 }
@@ -339,20 +506,46 @@ type MatchingRequest struct {
 	// This member is required.
 	Enabled *bool
 
+	// Configuration information about the auto-merging process.
+	AutoMerging *AutoMerging
+
+	// Configuration information for exporting Identity Resolution results, for
+	// example, to an S3 bucket.
+	ExportingConfig *ExportingConfig
+
+	// The day and time when do you want to start the Identity Resolution Job every
+	// week.
+	JobSchedule *JobSchedule
+
 	noSmithyDocumentSerde
 }
 
 // The flag that enables the matching process of duplicate profiles.
 type MatchingResponse struct {
 
+	// Configuration information about the auto-merging process.
+	AutoMerging *AutoMerging
+
 	// The flag that enables the matching process of duplicate profiles.
 	Enabled *bool
+
+	// Configuration information for exporting Identity Resolution results, for
+	// example, to an S3 bucket.
+	ExportingConfig *ExportingConfig
+
+	// The day and time when do you want to start the Identity Resolution Job every
+	// week.
+	JobSchedule *JobSchedule
 
 	noSmithyDocumentSerde
 }
 
 // The Match group object.
 type MatchItem struct {
+
+	// A number between 0 and 1 that represents the confidence level of assigning
+	// profiles to a matching group. A score of 1 likely indicates an exact match.
+	ConfidenceScore *float64
 
 	// The unique identifiers for this group of profiles that match.
 	MatchId *string
@@ -493,6 +686,36 @@ type Profile struct {
 
 	// The customer’s shipping address.
 	ShippingAddress *Address
+
+	noSmithyDocumentSerde
+}
+
+// Configuration information about the S3 bucket where Identity Resolution Jobs
+// write result files.
+type S3ExportingConfig struct {
+
+	// The name of the S3 bucket where Identity Resolution Jobs write result files.
+	//
+	// This member is required.
+	S3BucketName *string
+
+	// The S3 key name of the location where Identity Resolution Jobs write result
+	// files.
+	S3KeyName *string
+
+	noSmithyDocumentSerde
+}
+
+// The S3 location where Identity Resolution Jobs write result files.
+type S3ExportingLocation struct {
+
+	// The name of the S3 bucket name where Identity Resolution Jobs write result
+	// files.
+	S3BucketName *string
+
+	// The S3 key name of the location where Identity Resolution Jobs write result
+	// files.
+	S3KeyName *string
 
 	noSmithyDocumentSerde
 }

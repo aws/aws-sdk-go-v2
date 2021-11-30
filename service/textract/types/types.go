@@ -6,6 +6,24 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
+// Used to contain the information detected by an AnalyzeID operation.
+type AnalyzeIDDetections struct {
+
+	// Text of either the normalized field or value associated with it.
+	//
+	// This member is required.
+	Text *string
+
+	// The confidence score of the detected text.
+	Confidence *float32
+
+	// Only returned for dates, returns the type of value detected and the date written
+	// in a more machine readable way.
+	NormalizedValue *NormalizedValue
+
+	noSmithyDocumentSerde
+}
+
 // A Block represents items that are recognized in a document within a group of
 // pixels close to each other. The information returned in a Block object depends
 // on the type of operation. In text detection for documents (for example
@@ -254,7 +272,7 @@ type ExpenseDocument struct {
 }
 
 // Breakdown of detected information, seperated into the catagories Type,
-// LableDetection, and ValueDetection
+// LabelDetection, and ValueDetection
 type ExpenseField struct {
 
 	// The explicitly stated label of a detected element.
@@ -352,6 +370,33 @@ type HumanLoopDataAttributes struct {
 	noSmithyDocumentSerde
 }
 
+// The structure that lists each document processed in an AnalyzeID operation.
+type IdentityDocument struct {
+
+	// Denotes the placement of a document in the IdentityDocument list. The first
+	// document is marked 1, the second 2 and so on.
+	DocumentIndex *int32
+
+	// The structure used to record information extracted from identity documents.
+	// Contains both normalized field and value of the extracted text.
+	IdentityDocumentFields []IdentityDocumentField
+
+	noSmithyDocumentSerde
+}
+
+// Structure containing both the normalized type of the extracted information and
+// the text associated with it. These are extracted as Type and Value respectively.
+type IdentityDocumentField struct {
+
+	// Used to contain the information detected by an AnalyzeID operation.
+	Type *AnalyzeIDDetections
+
+	// Used to contain the information detected by an AnalyzeID operation.
+	ValueDetection *AnalyzeIDDetections
+
+	noSmithyDocumentSerde
+}
+
 // A structure that holds information about the different lines found in a
 // document's tables.
 type LineItemFields struct {
@@ -372,6 +417,19 @@ type LineItemGroup struct {
 
 	// The breakdown of information on a particular line of a table.
 	LineItems []LineItemFields
+
+	noSmithyDocumentSerde
+}
+
+// Contains information relating to dates in a document, including the type of
+// value, and the value.
+type NormalizedValue struct {
+
+	// The value of the date, written as Year-Month-DayTHour:Minute:Second.
+	Value *string
+
+	// The normalized type of the value detected. In this case, DATE.
+	ValueType ValueType
 
 	noSmithyDocumentSerde
 }

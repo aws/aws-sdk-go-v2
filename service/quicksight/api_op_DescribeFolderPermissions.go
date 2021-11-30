@@ -29,12 +29,12 @@ func (c *Client) DescribeFolderPermissions(ctx context.Context, params *Describe
 
 type DescribeFolderPermissionsInput struct {
 
-	// The AWS Account ID.
+	// The ID for the Amazon Web Services account that contains the folder.
 	//
 	// This member is required.
 	AwsAccountId *string
 
-	// The folder ID.
+	// The ID of the folder.
 	//
 	// This member is required.
 	FolderId *string
@@ -47,16 +47,16 @@ type DescribeFolderPermissionsOutput struct {
 	// The Amazon Resource Name (ARN) for the folder.
 	Arn *string
 
-	// The folder ID.
+	// The ID of the folder.
 	FolderId *string
 
 	// Information about the permissions on the folder.
 	Permissions []types.ResourcePermission
 
-	// The request ID.
+	// The Amazon Web Services request ID for this operation.
 	RequestId *string
 
-	// The status. If succeeded, the status is SC_OK.
+	// The HTTP status of the request.
 	Status int32
 
 	// Metadata pertaining to the operation's result.

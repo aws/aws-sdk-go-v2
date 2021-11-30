@@ -12,28 +12,33 @@ import (
 )
 
 // Update an environment. If the environment is associated with an environment
-// account connection, don't update or include the protonServiceRoleArn parameter
-// to update or connect to an environment account connection. You can only update
-// to a new environment account connection if it was created in the same
-// environment account that the current environment account connection was created
-// in and is associated with the current environment. If the environment isn't
-// associated with an environment account connection, don't update or include the
-// environmentAccountConnectionId parameter to update or connect to an environment
-// account connection. You can update either the environmentAccountConnectionId or
-// protonServiceRoleArn parameter and value. You can’t update both. There are four
-// modes for updating an environment as described in the following. The
-// deploymentType field defines the mode. NONE In this mode, a deployment doesn't
-// occur. Only the requested metadata parameters are updated. CURRENT_VERSION In
-// this mode, the environment is deployed and updated with the new spec that you
-// provide. Only requested parameters are updated. Don’t include minor or major
-// version parameters when you use this deployment-type. MINOR_VERSION In this
-// mode, the environment is deployed and updated with the published, recommended
-// (latest) minor version of the current major version in use, by default. You can
-// also specify a different minor version of the current major version in use.
-// MAJOR_VERSION In this mode, the environment is deployed and updated with the
-// published, recommended (latest) major and minor version of the current template,
-// by default. You can also specify a different major version that's higher than
-// the major version in use and a minor version (optional).
+// account connection, don't update or include the protonServiceRoleArn and
+// provisioningRepository parameter to update or connect to an environment account
+// connection. You can only update to a new environment account connection if it
+// was created in the same environment account that the current environment account
+// connection was created in and is associated with the current environment. If the
+// environment isn't associated with an environment account connection, don't
+// update or include the environmentAccountConnectionId parameter to update or
+// connect to an environment account connection. You can update either the
+// environmentAccountConnectionId or protonServiceRoleArn parameter and value. You
+// can’t update both. If the environment was provisioned with pull request
+// provisioning, include the provisioningRepository parameter and omit the
+// protonServiceRoleArn and environmentAccountConnectionId parameters. If the
+// environment wasn't provisioned with pull request provisioning, omit the
+// provisioningRepository parameter. There are four modes for updating an
+// environment as described in the following. The deploymentType field defines the
+// mode. NONE In this mode, a deployment doesn't occur. Only the requested metadata
+// parameters are updated. CURRENT_VERSION In this mode, the environment is
+// deployed and updated with the new spec that you provide. Only requested
+// parameters are updated. Don’t include minor or major version parameters when you
+// use this deployment-type. MINOR_VERSION In this mode, the environment is
+// deployed and updated with the published, recommended (latest) minor version of
+// the current major version in use, by default. You can also specify a different
+// minor version of the current major version in use. MAJOR_VERSION In this mode,
+// the environment is deployed and updated with the published, recommended (latest)
+// major and minor version of the current template, by default. You can also
+// specify a different major version that's higher than the major version in use
+// and a minor version (optional).
 func (c *Client) UpdateEnvironment(ctx context.Context, params *UpdateEnvironmentInput, optFns ...func(*Options)) (*UpdateEnvironmentOutput, error) {
 	if params == nil {
 		params = &UpdateEnvironmentInput{}
@@ -82,19 +87,26 @@ type UpdateEnvironmentInput struct {
 	// with the current environment.
 	EnvironmentAccountConnectionId *string
 
-	// The Amazon Resource Name (ARN) of the AWS Proton service role that allows AWS
-	// Proton to make API calls to other services your behalf.
+	// The Amazon Resource Name (ARN) of the Proton service role that allows Proton to
+	// make API calls to other services your behalf.
 	ProtonServiceRoleArn *string
+
+	// The repository that you provide with pull request provisioning. Provisioning by
+	// pull request is currently in feature preview and is only usable with Terraform
+	// based Proton Templates. To learn more about Amazon Web Services Feature Preview
+	// terms (https://aws.amazon.com/service-terms), see section 2 on Beta and
+	// Previews.
+	ProvisioningRepository *types.RepositoryBranchInput
 
 	// The formatted specification that defines the update.
 	//
 	// This value conforms to the media type: application/yaml
 	Spec *string
 
-	// The ID of the major version of the environment to update.
+	// The major version of the environment to update.
 	TemplateMajorVersion *string
 
-	// The ID of the minor version of the environment to update.
+	// The minor version of the environment to update.
 	TemplateMinorVersion *string
 
 	noSmithyDocumentSerde
@@ -102,7 +114,7 @@ type UpdateEnvironmentInput struct {
 
 type UpdateEnvironmentOutput struct {
 
-	// The environment detail data that's returned by AWS Proton.
+	// The environment detail data that's returned by Proton.
 	//
 	// This member is required.
 	Environment *types.Environment

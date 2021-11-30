@@ -64,8 +64,7 @@ type GetBucketsAggregationOutput struct {
 	// particular bucket. count: The number of documents that have that value.
 	Buckets []types.Bucket
 
-	// The total number of documents that fit the query string criteria and contain a
-	// value for the Aggregation field targeted in the request.
+	// The total number of things that fit the query string criteria.
 	TotalCount int32
 
 	// Metadata pertaining to the operation's result.

@@ -333,6 +333,59 @@ func validateDimensions(v []types.Dimension) error {
 	}
 }
 
+func validateMagneticStoreWriteProperties(v *types.MagneticStoreWriteProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MagneticStoreWriteProperties"}
+	if v.EnableMagneticStoreWrites == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnableMagneticStoreWrites"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMeasureValue(v *types.MeasureValue) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MeasureValue"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMeasureValues(v []types.MeasureValue) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MeasureValues"}
+	for i := range v {
+		if err := validateMeasureValue(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRecord(v *types.Record) error {
 	if v == nil {
 		return nil
@@ -341,6 +394,11 @@ func validateRecord(v *types.Record) error {
 	if v.Dimensions != nil {
 		if err := validateDimensions(v.Dimensions); err != nil {
 			invalidParams.AddNested("Dimensions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MeasureValues != nil {
+		if err := validateMeasureValues(v.MeasureValues); err != nil {
+			invalidParams.AddNested("MeasureValues", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -453,6 +511,11 @@ func validateOpCreateTableInput(v *CreateTableInput) error {
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MagneticStoreWriteProperties != nil {
+		if err := validateMagneticStoreWriteProperties(v.MagneticStoreWriteProperties); err != nil {
+			invalidParams.AddNested("MagneticStoreWriteProperties", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -612,11 +675,14 @@ func validateOpUpdateTableInput(v *UpdateTableInput) error {
 	if v.TableName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
 	}
-	if v.RetentionProperties == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RetentionProperties"))
-	} else if v.RetentionProperties != nil {
+	if v.RetentionProperties != nil {
 		if err := validateRetentionProperties(v.RetentionProperties); err != nil {
 			invalidParams.AddNested("RetentionProperties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MagneticStoreWriteProperties != nil {
+		if err := validateMagneticStoreWriteProperties(v.MagneticStoreWriteProperties); err != nil {
+			invalidParams.AddNested("MagneticStoreWriteProperties", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

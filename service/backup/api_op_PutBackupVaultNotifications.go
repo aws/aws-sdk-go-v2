@@ -30,11 +30,22 @@ func (c *Client) PutBackupVaultNotifications(ctx context.Context, params *PutBac
 type PutBackupVaultNotificationsInput struct {
 
 	// An array of events that indicate the status of jobs to back up resources to the
-	// backup vault. The following events are supported: BACKUP_JOB_STARTED,
-	// BACKUP_JOB_COMPLETED, COPY_JOB_STARTED, COPY_JOB_SUCCESSFUL, COPY_JOB_FAILED,
-	// RESTORE_JOB_STARTED, RESTORE_JOB_COMPLETED, and RECOVERY_POINT_MODIFIED. To find
-	// failed backup jobs, use BACKUP_JOB_COMPLETED and filter using event metadata.
-	// Other events in the following list are deprecated.
+	// backup vault. For common use cases and code samples, see Using Amazon SNS to
+	// track Backup events
+	// (https://docs.aws.amazon.com/aws-backup/latest/devguide/sns-notifications.html).
+	// The following events are supported:
+	//
+	// * BACKUP_JOB_STARTED |
+	// BACKUP_JOB_COMPLETED
+	//
+	// * COPY_JOB_STARTED | COPY_JOB_SUCCESSFUL |
+	// COPY_JOB_FAILED
+	//
+	// * RESTORE_JOB_STARTED | RESTORE_JOB_COMPLETED |
+	// RECOVERY_POINT_MODIFIED
+	//
+	// Ignore the list below because it includes deprecated
+	// events. Refer to the list above.
 	//
 	// This member is required.
 	BackupVaultEvents []types.BackupVaultEvent

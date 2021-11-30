@@ -65,7 +65,7 @@ func (e *InternalServerException) ErrorMessage() string {
 func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The requested endpoint was invalid.
+// The requested endpoint was not valid.
 type InvalidEndpointException struct {
 	Message *string
 
@@ -102,6 +102,46 @@ func (e *QueryExecutionException) ErrorMessage() string {
 }
 func (e *QueryExecutionException) ErrorCode() string             { return "QueryExecutionException" }
 func (e *QueryExecutionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The requested resource could not be found.
+type ResourceNotFoundException struct {
+	Message *string
+
+	ScheduledQueryArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ResourceNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourceNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// You have exceeded the service quota.
+type ServiceQuotaExceededException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ServiceQuotaExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServiceQuotaExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServiceQuotaExceededException) ErrorCode() string             { return "ServiceQuotaExceededException" }
+func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was denied due to request throttling.
 type ThrottlingException struct {

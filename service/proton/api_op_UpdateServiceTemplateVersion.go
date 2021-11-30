@@ -29,7 +29,7 @@ func (c *Client) UpdateServiceTemplateVersion(ctx context.Context, params *Updat
 
 type UpdateServiceTemplateVersionInput struct {
 
-	// To update a major version of a service template, include majorVersion.
+	// To update a major version of a service template, include major Version.
 	//
 	// This member is required.
 	MajorVersion *string
@@ -59,7 +59,7 @@ type UpdateServiceTemplateVersionInput struct {
 
 type UpdateServiceTemplateVersionOutput struct {
 
-	// The service template version detail data that's returned by AWS Proton.
+	// The service template version detail data that's returned by Proton.
 	//
 	// This member is required.
 	ServiceTemplateVersion *types.ServiceTemplateVersion

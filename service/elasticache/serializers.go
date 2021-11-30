@@ -5347,6 +5347,11 @@ func awsAwsquery_serializeOpDocumentCreateReplicationGroupInput(v *CreateReplica
 		objectKey.String(*v.CacheSubnetGroupName)
 	}
 
+	if v.DataTieringEnabled != nil {
+		objectKey := object.Key("DataTieringEnabled")
+		objectKey.Boolean(*v.DataTieringEnabled)
+	}
+
 	if v.Engine != nil {
 		objectKey := object.Key("Engine")
 		objectKey.String(*v.Engine)

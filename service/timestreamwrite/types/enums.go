@@ -22,10 +22,12 @@ type MeasureValueType string
 
 // Enum values for MeasureValueType
 const (
-	MeasureValueTypeDouble  MeasureValueType = "DOUBLE"
-	MeasureValueTypeBigint  MeasureValueType = "BIGINT"
-	MeasureValueTypeVarchar MeasureValueType = "VARCHAR"
-	MeasureValueTypeBoolean MeasureValueType = "BOOLEAN"
+	MeasureValueTypeDouble    MeasureValueType = "DOUBLE"
+	MeasureValueTypeBigint    MeasureValueType = "BIGINT"
+	MeasureValueTypeVarchar   MeasureValueType = "VARCHAR"
+	MeasureValueTypeBoolean   MeasureValueType = "BOOLEAN"
+	MeasureValueTypeTimestamp MeasureValueType = "TIMESTAMP"
+	MeasureValueTypeMulti     MeasureValueType = "MULTI"
 )
 
 // Values returns all known values for MeasureValueType. Note that this can be
@@ -37,6 +39,26 @@ func (MeasureValueType) Values() []MeasureValueType {
 		"BIGINT",
 		"VARCHAR",
 		"BOOLEAN",
+		"TIMESTAMP",
+		"MULTI",
+	}
+}
+
+type S3EncryptionOption string
+
+// Enum values for S3EncryptionOption
+const (
+	S3EncryptionOptionSseS3  S3EncryptionOption = "SSE_S3"
+	S3EncryptionOptionSseKms S3EncryptionOption = "SSE_KMS"
+)
+
+// Values returns all known values for S3EncryptionOption. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (S3EncryptionOption) Values() []S3EncryptionOption {
+	return []S3EncryptionOption{
+		"SSE_S3",
+		"SSE_KMS",
 	}
 }
 

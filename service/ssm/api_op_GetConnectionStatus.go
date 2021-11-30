@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the Session Manager connection status for an instance to determine
+// Retrieves the Session Manager connection status for a managed node to determine
 // whether it is running and ready to receive Session Manager connections.
 func (c *Client) GetConnectionStatus(ctx context.Context, params *GetConnectionStatusInput, optFns ...func(*Options)) (*GetConnectionStatusOutput, error) {
 	if params == nil {
@@ -30,7 +30,7 @@ func (c *Client) GetConnectionStatus(ctx context.Context, params *GetConnectionS
 
 type GetConnectionStatusInput struct {
 
-	// The instance ID.
+	// The managed node ID.
 	//
 	// This member is required.
 	Target *string
@@ -40,11 +40,11 @@ type GetConnectionStatusInput struct {
 
 type GetConnectionStatusOutput struct {
 
-	// The status of the connection to the instance. For example, 'Connected' or 'Not
-	// Connected'.
+	// The status of the connection to the managed node. For example, 'Connected' or
+	// 'Not Connected'.
 	Status types.ConnectionStatus
 
-	// The ID of the instance to check connection status.
+	// The ID of the managed node to check connection status.
 	Target *string
 
 	// Metadata pertaining to the operation's result.

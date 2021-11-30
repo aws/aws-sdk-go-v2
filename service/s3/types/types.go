@@ -231,7 +231,8 @@ type CommonPrefix struct {
 // The container for the completed multipart upload details.
 type CompletedMultipartUpload struct {
 
-	// Array of CompletedPart data types.
+	// Array of CompletedPart data types. If you do not supply a valid Part with your
+	// request, the service sends back an HTTP 400 response.
 	Parts []CompletedPart
 
 	noSmithyDocumentSerde
@@ -1620,6 +1621,11 @@ type ErrorDocument struct {
 	noSmithyDocumentSerde
 }
 
+// A container for specifying the configuration for Amazon EventBridge.
+type EventBridgeConfiguration struct {
+	noSmithyDocumentSerde
+}
+
 // Optional configuration to replicate existing source bucket objects. For more
 // information, see Replicating Existing Objects
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-what-is-isnot-replicated.html#existing-object-replication)
@@ -2094,6 +2100,12 @@ type LifecycleRule struct {
 // predicates configured inside the And operator.
 type LifecycleRuleAndOperator struct {
 
+	// Minimum object size to which the rule applies.
+	ObjectSizeGreaterThan int64
+
+	// Maximum object size to which the rule applies.
+	ObjectSizeLessThan int64
+
 	// Prefix identifying one or more objects to which the rule applies.
 	Prefix *string
 
@@ -2109,6 +2121,8 @@ type LifecycleRuleAndOperator struct {
 //
 // The following types satisfy this interface:
 //  LifecycleRuleFilterMemberAnd
+//  LifecycleRuleFilterMemberObjectSizeGreaterThan
+//  LifecycleRuleFilterMemberObjectSizeLessThan
 //  LifecycleRuleFilterMemberPrefix
 //  LifecycleRuleFilterMemberTag
 type LifecycleRuleFilter interface {
@@ -2125,6 +2139,24 @@ type LifecycleRuleFilterMemberAnd struct {
 }
 
 func (*LifecycleRuleFilterMemberAnd) isLifecycleRuleFilter() {}
+
+// Minimum object size to which the rule applies.
+type LifecycleRuleFilterMemberObjectSizeGreaterThan struct {
+	Value int64
+
+	noSmithyDocumentSerde
+}
+
+func (*LifecycleRuleFilterMemberObjectSizeGreaterThan) isLifecycleRuleFilter() {}
+
+// Maximum object size to which the rule applies.
+type LifecycleRuleFilterMemberObjectSizeLessThan struct {
+	Value int64
+
+	noSmithyDocumentSerde
+}
+
+func (*LifecycleRuleFilterMemberObjectSizeLessThan) isLifecycleRuleFilter() {}
 
 // Prefix identifying one or more objects to which the rule applies. Replacement
 // must be made for object keys containing special characters (such as carriage
@@ -2327,6 +2359,14 @@ type MultipartUpload struct {
 // the object's lifetime.
 type NoncurrentVersionExpiration struct {
 
+	// Specifies how many noncurrent versions Amazon S3 will retain. If there are this
+	// many more recent noncurrent versions, Amazon S3 will take the associated action.
+	// For more information about noncurrent versions, see Lifecycle configuration
+	// elements
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/intro-lifecycle-rules.html)
+	// in the Amazon S3 User Guide.
+	NewerNoncurrentVersions int32
+
 	// Specifies the number of days an object is noncurrent before Amazon S3 can
 	// perform the associated action. For information about the noncurrent days
 	// calculations, see How Amazon S3 Calculates When an Object Became Noncurrent
@@ -2346,6 +2386,14 @@ type NoncurrentVersionExpiration struct {
 // lifetime.
 type NoncurrentVersionTransition struct {
 
+	// Specifies how many noncurrent versions Amazon S3 will retain. If there are this
+	// many more recent noncurrent versions, Amazon S3 will take the associated action.
+	// For more information about noncurrent versions, see Lifecycle configuration
+	// elements
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/intro-lifecycle-rules.html)
+	// in the Amazon S3 User Guide.
+	NewerNoncurrentVersions int32
+
 	// Specifies the number of days an object is noncurrent before Amazon S3 can
 	// perform the associated action. For information about the noncurrent days
 	// calculations, see How Amazon S3 Calculates How Long an Object Has Been
@@ -2363,6 +2411,9 @@ type NoncurrentVersionTransition struct {
 // A container for specifying the notification configuration of the bucket. If this
 // element is empty, notifications are turned off for the bucket.
 type NotificationConfiguration struct {
+
+	// Enables delivery of events to Amazon EventBridge.
+	EventBridgeConfiguration *EventBridgeConfiguration
 
 	// Describes the Lambda functions to invoke and the events for which to invoke
 	// them.

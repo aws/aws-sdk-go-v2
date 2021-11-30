@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// All associations for the instance(s).
+// All associations for the managed node(s).
 func (c *Client) DescribeEffectiveInstanceAssociations(ctx context.Context, params *DescribeEffectiveInstanceAssociationsInput, optFns ...func(*Options)) (*DescribeEffectiveInstanceAssociationsOutput, error) {
 	if params == nil {
 		params = &DescribeEffectiveInstanceAssociationsInput{}
@@ -30,7 +30,7 @@ func (c *Client) DescribeEffectiveInstanceAssociations(ctx context.Context, para
 
 type DescribeEffectiveInstanceAssociationsInput struct {
 
-	// The instance ID for which you want to view all associations.
+	// The managed node ID for which you want to view all associations.
 	//
 	// This member is required.
 	InstanceId *string
@@ -48,7 +48,7 @@ type DescribeEffectiveInstanceAssociationsInput struct {
 
 type DescribeEffectiveInstanceAssociationsOutput struct {
 
-	// The associations for the requested instance.
+	// The associations for the requested managed node.
 	Associations []types.InstanceAssociation
 
 	// The token to use when requesting the next set of items. If there are no

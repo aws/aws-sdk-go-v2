@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disables an Amazon Macie account and deletes Macie resources for the account.
+// Disables Amazon Macie and deletes all settings and resources for a Macie
+// account.
 func (c *Client) DisableMacie(ctx context.Context, params *DisableMacieInput, optFns ...func(*Options)) (*DisableMacieOutput, error) {
 	if params == nil {
 		params = &DisableMacieInput{}

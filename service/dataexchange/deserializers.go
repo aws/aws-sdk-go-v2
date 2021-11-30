@@ -3586,6 +3586,143 @@ func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 	return nil
 }
 
+type awsRestjson1_deserializeOpSendApiAsset struct {
+}
+
+func (*awsRestjson1_deserializeOpSendApiAsset) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpSendApiAsset) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorSendApiAsset(response, &metadata)
+	}
+	output := &SendApiAssetOutput{}
+	out.Result = output
+
+	err = awsRestjson1_deserializeOpHttpBindingsSendApiAssetOutput(output, response)
+	if err != nil {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
+	}
+
+	err = awsRestjson1_deserializeOpDocumentSendApiAssetOutput(output, response.Body)
+	if err != nil {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorSendApiAsset(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpHttpBindingsSendApiAssetOutput(v *SendApiAssetOutput, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	for headerKey, headerValues := range response.Header {
+		if lenPrefix := len(""); len(headerKey) >= lenPrefix && strings.EqualFold(headerKey[:lenPrefix], "") {
+			if v.ResponseHeaders == nil {
+				v.ResponseHeaders = map[string]string{}
+			}
+			headerValues[0] = strings.TrimSpace(headerValues[0])
+			v.ResponseHeaders[strings.ToLower(headerKey[lenPrefix:])] = headerValues[0]
+		}
+	}
+
+	return nil
+}
+func awsRestjson1_deserializeOpDocumentSendApiAssetOutput(v *SendApiAssetOutput, body io.ReadCloser) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization of nil %T", v)
+	}
+
+	bs, err := ioutil.ReadAll(body)
+	if err != nil {
+		return err
+	}
+	if len(bs) > 0 {
+		v.Body = ptr.String(string(bs))
+	}
+	return nil
+}
+
 type awsRestjson1_deserializeOpStartJob struct {
 }
 
@@ -5128,6 +5265,122 @@ func awsRestjson1_deserializeDocumentAction(v **types.Action, value interface{})
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentApiGatewayApiAsset(v **types.ApiGatewayApiAsset, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ApiGatewayApiAsset
+	if *v == nil {
+		sv = &types.ApiGatewayApiAsset{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ApiDescription":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ApiDescription to be of type string, got %T instead", value)
+				}
+				sv.ApiDescription = ptr.String(jtv)
+			}
+
+		case "ApiEndpoint":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.ApiEndpoint = ptr.String(jtv)
+			}
+
+		case "ApiId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.ApiId = ptr.String(jtv)
+			}
+
+		case "ApiKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.ApiKey = ptr.String(jtv)
+			}
+
+		case "ApiName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.ApiName = ptr.String(jtv)
+			}
+
+		case "ApiSpecificationDownloadUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.ApiSpecificationDownloadUrl = ptr.String(jtv)
+			}
+
+		case "ApiSpecificationDownloadUrlExpiresAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.ApiSpecificationDownloadUrlExpiresAt = ptr.Time(t)
+			}
+
+		case "ProtocolType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProtocolType to be of type string, got %T instead", value)
+				}
+				sv.ProtocolType = types.ProtocolType(jtv)
+			}
+
+		case "Stage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Stage = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAssetDestinationEntry(v **types.AssetDestinationEntry, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5208,6 +5461,11 @@ func awsRestjson1_deserializeDocumentAssetDetails(v **types.AssetDetails, value 
 
 	for key, value := range shape {
 		switch key {
+		case "ApiGatewayApiAsset":
+			if err := awsRestjson1_deserializeDocumentApiGatewayApiAsset(&sv.ApiGatewayApiAsset, value); err != nil {
+				return err
+			}
+
 		case "RedshiftDataShareAsset":
 			if err := awsRestjson1_deserializeDocumentRedshiftDataShareAsset(&sv.RedshiftDataShareAsset, value); err != nil {
 				return err
@@ -6072,6 +6330,140 @@ func awsRestjson1_deserializeDocumentExportServerSideEncryption(v **types.Export
 					return fmt.Errorf("expected ServerSideEncryptionTypes to be of type string, got %T instead", value)
 				}
 				sv.Type = types.ServerSideEncryptionTypes(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentImportAssetFromApiGatewayApiResponseDetails(v **types.ImportAssetFromApiGatewayApiResponseDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ImportAssetFromApiGatewayApiResponseDetails
+	if *v == nil {
+		sv = &types.ImportAssetFromApiGatewayApiResponseDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ApiDescription":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ApiDescription to be of type string, got %T instead", value)
+				}
+				sv.ApiDescription = ptr.String(jtv)
+			}
+
+		case "ApiId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.ApiId = ptr.String(jtv)
+			}
+
+		case "ApiKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.ApiKey = ptr.String(jtv)
+			}
+
+		case "ApiName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.ApiName = ptr.String(jtv)
+			}
+
+		case "ApiSpecificationMd5Hash":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMin24Max24PatternAZaZ094AZaZ092AZaZ093 to be of type string, got %T instead", value)
+				}
+				sv.ApiSpecificationMd5Hash = ptr.String(jtv)
+			}
+
+		case "ApiSpecificationUploadUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.ApiSpecificationUploadUrl = ptr.String(jtv)
+			}
+
+		case "ApiSpecificationUploadUrlExpiresAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.ApiSpecificationUploadUrlExpiresAt = ptr.Time(t)
+			}
+
+		case "DataSetId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Id to be of type string, got %T instead", value)
+				}
+				sv.DataSetId = ptr.String(jtv)
+			}
+
+		case "ProtocolType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProtocolType to be of type string, got %T instead", value)
+				}
+				sv.ProtocolType = types.ProtocolType(jtv)
+			}
+
+		case "RevisionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Id to be of type string, got %T instead", value)
+				}
+				sv.RevisionId = ptr.String(jtv)
+			}
+
+		case "Stage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Stage = ptr.String(jtv)
 			}
 
 		default:
@@ -7166,6 +7558,11 @@ func awsRestjson1_deserializeDocumentResponseDetails(v **types.ResponseDetails, 
 
 		case "ExportRevisionsToS3":
 			if err := awsRestjson1_deserializeDocumentExportRevisionsToS3ResponseDetails(&sv.ExportRevisionsToS3, value); err != nil {
+				return err
+			}
+
+		case "ImportAssetFromApiGatewayApi":
+			if err := awsRestjson1_deserializeDocumentImportAssetFromApiGatewayApiResponseDetails(&sv.ImportAssetFromApiGatewayApi, value); err != nil {
 				return err
 			}
 

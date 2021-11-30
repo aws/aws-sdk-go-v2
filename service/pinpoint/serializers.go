@@ -6073,6 +6073,87 @@ func awsRestjson1_serializeOpHttpBindingsSendMessagesInput(v *SendMessagesInput,
 	return nil
 }
 
+type awsRestjson1_serializeOpSendOTPMessage struct {
+}
+
+func (*awsRestjson1_serializeOpSendOTPMessage) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpSendOTPMessage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*SendOTPMessageInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/apps/{ApplicationId}/otp")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsSendOTPMessageInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
+
+	if input.SendOTPMessageRequestParameters != nil {
+		jsonEncoder := smithyjson.NewEncoder()
+		if err := awsRestjson1_serializeDocumentSendOTPMessageRequestParameters(input.SendOTPMessageRequestParameters, jsonEncoder.Value); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsSendOTPMessageInput(v *SendOTPMessageInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ApplicationId == nil || len(*v.ApplicationId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ApplicationId must not be empty")}
+	}
+	if v.ApplicationId != nil {
+		if err := encoder.SetURI("ApplicationId").String(*v.ApplicationId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpSendUsersMessages struct {
 }
 
@@ -8332,6 +8413,87 @@ func awsRestjson1_serializeOpHttpBindingsUpdateVoiceTemplateInput(v *UpdateVoice
 
 	if v.Version != nil {
 		encoder.SetQuery("version").String(*v.Version)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpVerifyOTPMessage struct {
+}
+
+func (*awsRestjson1_serializeOpVerifyOTPMessage) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpVerifyOTPMessage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*VerifyOTPMessageInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/apps/{ApplicationId}/verify-otp")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsVerifyOTPMessageInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if !restEncoder.HasHeader("Content-Type") {
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
+
+	if input.VerifyOTPMessageRequestParameters != nil {
+		jsonEncoder := smithyjson.NewEncoder()
+		if err := awsRestjson1_serializeDocumentVerifyOTPMessageRequestParameters(input.VerifyOTPMessageRequestParameters, jsonEncoder.Value); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsVerifyOTPMessageInput(v *VerifyOTPMessageInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ApplicationId == nil || len(*v.ApplicationId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ApplicationId must not be empty")}
+	}
+	if v.ApplicationId != nil {
+		if err := encoder.SetURI("ApplicationId").String(*v.ApplicationId); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -11974,6 +12136,68 @@ func awsRestjson1_serializeDocumentSegmentReference(v *types.SegmentReference, v
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSendOTPMessageRequestParameters(v *types.SendOTPMessageRequestParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllowedAttempts != 0 {
+		ok := object.Key("AllowedAttempts")
+		ok.Integer(v.AllowedAttempts)
+	}
+
+	if v.BrandName != nil {
+		ok := object.Key("BrandName")
+		ok.String(*v.BrandName)
+	}
+
+	if v.Channel != nil {
+		ok := object.Key("Channel")
+		ok.String(*v.Channel)
+	}
+
+	if v.CodeLength != 0 {
+		ok := object.Key("CodeLength")
+		ok.Integer(v.CodeLength)
+	}
+
+	if v.DestinationIdentity != nil {
+		ok := object.Key("DestinationIdentity")
+		ok.String(*v.DestinationIdentity)
+	}
+
+	if v.EntityId != nil {
+		ok := object.Key("EntityId")
+		ok.String(*v.EntityId)
+	}
+
+	if v.Language != nil {
+		ok := object.Key("Language")
+		ok.String(*v.Language)
+	}
+
+	if v.OriginationIdentity != nil {
+		ok := object.Key("OriginationIdentity")
+		ok.String(*v.OriginationIdentity)
+	}
+
+	if v.ReferenceId != nil {
+		ok := object.Key("ReferenceId")
+		ok.String(*v.ReferenceId)
+	}
+
+	if v.TemplateId != nil {
+		ok := object.Key("TemplateId")
+		ok.String(*v.TemplateId)
+	}
+
+	if v.ValidityPeriod != 0 {
+		ok := object.Key("ValidityPeriod")
+		ok.Integer(v.ValidityPeriod)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSendUsersMessageRequest(v *types.SendUsersMessageRequest, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -12439,6 +12663,28 @@ func awsRestjson1_serializeDocumentUpdateRecommenderConfigurationShape(v *types.
 	if v.RecommendationTransformerUri != nil {
 		ok := object.Key("RecommendationTransformerUri")
 		ok.String(*v.RecommendationTransformerUri)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVerifyOTPMessageRequestParameters(v *types.VerifyOTPMessageRequestParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DestinationIdentity != nil {
+		ok := object.Key("DestinationIdentity")
+		ok.String(*v.DestinationIdentity)
+	}
+
+	if v.Otp != nil {
+		ok := object.Key("Otp")
+		ok.String(*v.Otp)
+	}
+
+	if v.ReferenceId != nil {
+		ok := object.Key("ReferenceId")
+		ok.String(*v.ReferenceId)
 	}
 
 	return nil

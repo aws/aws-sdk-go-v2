@@ -13,9 +13,9 @@ import (
 
 // Attempts to cancel a service instance deployment on an UpdateServiceInstance
 // action, if the deployment is IN_PROGRESS. For more information, see Update a
-// service instance in the AWS Proton Administrator guide
+// service instance in the Proton Administrator guide
 // (https://docs.aws.amazon.com/proton/latest/adminguide/ag-svc-instance-update.html)
-// or the AWS Proton User guide
+// or the Proton User guide
 // (https://docs.aws.amazon.com/proton/latest/userguide/ug-svc-instance-update.html).
 // The following list includes potential cancellation scenarios.
 //
@@ -61,7 +61,7 @@ type CancelServiceInstanceDeploymentInput struct {
 
 type CancelServiceInstanceDeploymentOutput struct {
 
-	// The service instance summary data that's returned by AWS Proton.
+	// The service instance summary data that's returned by Proton.
 	//
 	// This member is required.
 	ServiceInstance *types.ServiceInstance

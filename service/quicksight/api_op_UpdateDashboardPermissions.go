@@ -40,8 +40,14 @@ type UpdateDashboardPermissionsInput struct {
 	// This member is required.
 	DashboardId *string
 
+	// Grants link permissions to all users in a defined namespace.
+	GrantLinkPermissions []types.ResourcePermission
+
 	// The permissions that you want to grant on this resource.
 	GrantPermissions []types.ResourcePermission
+
+	// Revokes link permissions from all users in a defined namespace.
+	RevokeLinkPermissions []types.ResourcePermission
 
 	// The permissions that you want to revoke from this resource.
 	RevokePermissions []types.ResourcePermission
@@ -56,6 +62,9 @@ type UpdateDashboardPermissionsOutput struct {
 
 	// The ID for the dashboard.
 	DashboardId *string
+
+	// Updates the permissions of a shared link to an Amazon QuickSight dashboard.
+	LinkSharingConfiguration *types.LinkSharingConfiguration
 
 	// Information about the permissions on the dashboard.
 	Permissions []types.ResourcePermission

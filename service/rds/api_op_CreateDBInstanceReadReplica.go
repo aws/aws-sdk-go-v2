@@ -70,7 +70,7 @@ type CreateDBInstanceReadReplicaInput struct {
 	//
 	// * Can specify a PostgreSQL DB instance only if
 	// the source is running PostgreSQL 9.3.5 or later (9.4.7 and higher for
-	// cross-region replication).
+	// cross-Region replication).
 	//
 	// * The specified DB instance must have automatic
 	// backups enabled, that is, its backup retention period must be greater than 0.
@@ -123,7 +123,7 @@ type CreateDBInstanceReadReplicaInput struct {
 	// for RDS Custom.
 	CustomIamInstanceProfile *string
 
-	// The compute and memory capacity of the read replica, for example, db.m4.large.
+	// The compute and memory capacity of the read replica, for example db.m4.large.
 	// Not all DB instance classes are available in all Amazon Web Services Regions, or
 	// for all database engines. For the full list of DB instance classes, and
 	// availability for your engine, see DB Instance Class
@@ -133,8 +133,8 @@ type CreateDBInstanceReadReplicaInput struct {
 
 	// The name of the DB parameter group to associate with this DB instance. If you do
 	// not specify a value for DBParameterGroupName, then Amazon RDS uses the
-	// DBParameterGroup of source DB instance for a same region read replica, or the
-	// default DBParameterGroup for the specified DB engine for a cross region read
+	// DBParameterGroup of source DB instance for a same Region read replica, or the
+	// default DBParameterGroup for the specified DB engine for a cross-Region read
 	// replica. Specifying a parameter group for this operation is only supported for
 	// Oracle DB instances. It isn't supported for RDS Custom. Constraints:
 	//
@@ -177,7 +177,7 @@ type CreateDBInstanceReadReplicaInput struct {
 
 	// A value that indicates whether the DB instance has deletion protection enabled.
 	// The database can't be deleted when deletion protection is enabled. By default,
-	// deletion protection is disabled. For more information, see  Deleting a DB
+	// deletion protection isn't enabled. For more information, see  Deleting a DB
 	// Instance
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html).
 	DeletionProtection *bool
@@ -203,7 +203,7 @@ type CreateDBInstanceReadReplicaInput struct {
 
 	// A value that indicates whether to enable mapping of Amazon Web Services Identity
 	// and Access Management (IAM) accounts to database accounts. By default, mapping
-	// is disabled. For more information about IAM database authentication, see  IAM
+	// isn't enabled. For more information about IAM database authentication, see  IAM
 	// Database Authentication for MySQL and PostgreSQL
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html)
 	// in the Amazon RDS User Guide. This setting doesn't apply to RDS Custom.
@@ -338,7 +338,7 @@ type CreateDBInstanceReadReplicaInput struct {
 	// manually. Specifying SourceRegion autogenerates a presigned URL that is a valid
 	// request for the operation that can be executed in the source Amazon Web Services
 	// Region. SourceRegion isn't supported for SQL Server, because SQL Server on
-	// Amazon RDS doesn't support cross-region read replicas. This setting doesn't
+	// Amazon RDS doesn't support cross-Region read replicas. This setting doesn't
 	// apply to RDS Custom.
 	PreSignedUrl *string
 
@@ -347,14 +347,14 @@ type CreateDBInstanceReadReplicaInput struct {
 	ProcessorFeatures []types.ProcessorFeature
 
 	// A value that indicates whether the DB instance is publicly accessible. When the
-	// DB instance is publicly accessible, its DNS endpoint resolves to the private IP
-	// address from within the DB instance's VPC, and to the public IP address from
-	// outside of the DB instance's VPC. Access to the DB instance is ultimately
-	// controlled by the security group it uses, and that public access is not
-	// permitted if the security group assigned to the DB instance doesn't permit it.
-	// When the DB instance isn't publicly accessible, it is an internal DB instance
-	// with a DNS name that resolves to a private IP address. For more information, see
-	// CreateDBInstance.
+	// DB cluster is publicly accessible, its Domain Name System (DNS) endpoint
+	// resolves to the private IP address from within the DB cluster's virtual private
+	// cloud (VPC). It resolves to the public IP address from outside of the DB
+	// cluster's VPC. Access to the DB cluster is ultimately controlled by the security
+	// group it uses. That public access isn't permitted if the security group assigned
+	// to the DB cluster doesn't permit it. When the DB instance isn't publicly
+	// accessible, it is an internal DB instance with a DNS name that resolves to a
+	// private IP address. For more information, see CreateDBInstance.
 	PubliclyAccessible *bool
 
 	// The open mode of the replica database: mounted or read-only. This parameter is
@@ -405,7 +405,11 @@ type CreateDBInstanceReadReplicaInput struct {
 type CreateDBInstanceReadReplicaOutput struct {
 
 	// Contains the details of an Amazon RDS DB instance. This data type is used as a
-	// response element in the DescribeDBInstances action.
+	// response element in the operations CreateDBInstance,
+	// CreateDBInstanceReadReplica, DeleteDBInstance, DescribeDBInstances,
+	// ModifyDBInstance, PromoteReadReplica, RebootDBInstance,
+	// RestoreDBInstanceFromDBSnapshot, RestoreDBInstanceFromS3,
+	// RestoreDBInstanceToPointInTime, StartDBInstance, and StopDBInstance.
 	DBInstance *types.DBInstance
 
 	// Metadata pertaining to the operation's result.

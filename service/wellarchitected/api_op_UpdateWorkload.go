@@ -30,19 +30,20 @@ func (c *Client) UpdateWorkload(ctx context.Context, params *UpdateWorkloadInput
 // Input to update a workload.
 type UpdateWorkloadInput struct {
 
-	// The ID assigned to the workload. This ID is unique within an AWS Region.
+	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
+	// Region.
 	//
 	// This member is required.
 	WorkloadId *string
 
-	// The list of AWS account IDs associated with the workload.
+	// The list of Amazon Web Services account IDs associated with the workload.
 	AccountIds []string
 
 	// The URL of the architectural design for the workload.
 	ArchitecturalDesign *string
 
-	// The list of AWS Regions associated with the workload, for example, us-east-2, or
-	// ca-central-1.
+	// The list of Amazon Web Services Regions associated with the workload, for
+	// example, us-east-2, or ca-central-1.
 	AwsRegions []string
 
 	// The description for the workload.
@@ -128,7 +129,7 @@ type UpdateWorkloadInput struct {
 	// is added.
 	IsReviewOwnerUpdateAcknowledged bool
 
-	// The list of non-AWS Regions associated with the workload.
+	// The list of non-Amazon Web Services Regions associated with the workload.
 	NonAwsRegions []string
 
 	// The notes associated with the workload.
@@ -142,8 +143,9 @@ type UpdateWorkloadInput struct {
 	// primary group or individual that owns the workload review process.
 	ReviewOwner *string
 
-	// The name of the workload. The name must be unique within an account within a
-	// Region. Spaces and capitalization are ignored when checking for uniqueness.
+	// The name of the workload. The name must be unique within an account within an
+	// Amazon Web Services Region. Spaces and capitalization are ignored when checking
+	// for uniqueness.
 	WorkloadName *string
 
 	noSmithyDocumentSerde

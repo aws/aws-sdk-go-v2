@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// A temporary Amazon S3 location to copy your files from a source location to
-// stage or use as a scratch space in Habanero notebook.
+// A temporary Amazon S3 location, where you can copy your files from a source
+// location to stage or use as a scratch space in FinSpace notebook.
 func (c *Client) GetWorkingLocation(ctx context.Context, params *GetWorkingLocationInput, optFns ...func(*Options)) (*GetWorkingLocationOutput, error) {
 	if params == nil {
 		params = &GetWorkingLocationInput{}
@@ -38,7 +38,7 @@ type GetWorkingLocationInput struct {
 	//
 	// * INGESTION - Use the Amazon
 	// S3 location as a staging location to copy your data content and then use the
-	// location with the changeset creation operation.
+	// location with the Changeset creation operation.
 	LocationType types.LocationType
 
 	noSmithyDocumentSerde

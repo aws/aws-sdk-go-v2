@@ -110,6 +110,26 @@ func (m *validateOpDeleteSourceServer) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteVcenterClient struct {
+}
+
+func (*validateOpDeleteVcenterClient) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteVcenterClient) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteVcenterClientInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteVcenterClientInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeJobLogItems struct {
 }
 
@@ -350,6 +370,26 @@ func (m *validateOpStartCutover) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartReplication struct {
+}
+
+func (*validateOpStartReplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartReplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartReplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartReplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartTest struct {
 }
 
@@ -490,6 +530,26 @@ func (m *validateOpUpdateReplicationConfigurationTemplate) HandleInitialize(ctx 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateSourceServerReplicationType struct {
+}
+
+func (*validateOpUpdateSourceServerReplicationType) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSourceServerReplicationType) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSourceServerReplicationTypeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSourceServerReplicationTypeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpChangeServerLifeCycleStateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpChangeServerLifeCycleState{}, middleware.After)
 }
@@ -508,6 +568,10 @@ func addOpDeleteReplicationConfigurationTemplateValidationMiddleware(stack *midd
 
 func addOpDeleteSourceServerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteSourceServer{}, middleware.After)
+}
+
+func addOpDeleteVcenterClientValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteVcenterClient{}, middleware.After)
 }
 
 func addOpDescribeJobLogItemsValidationMiddleware(stack *middleware.Stack) error {
@@ -558,6 +622,10 @@ func addOpStartCutoverValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartCutover{}, middleware.After)
 }
 
+func addOpStartReplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartReplication{}, middleware.After)
+}
+
 func addOpStartTestValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartTest{}, middleware.After)
 }
@@ -584,6 +652,10 @@ func addOpUpdateReplicationConfigurationValidationMiddleware(stack *middleware.S
 
 func addOpUpdateReplicationConfigurationTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateReplicationConfigurationTemplate{}, middleware.After)
+}
+
+func addOpUpdateSourceServerReplicationTypeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSourceServerReplicationType{}, middleware.After)
 }
 
 func validateChangeServerLifeCycleStateSourceServerLifecycle(v *types.ChangeServerLifeCycleStateSourceServerLifecycle) error {
@@ -702,6 +774,21 @@ func validateOpDeleteSourceServerInput(v *DeleteSourceServerInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteSourceServerInput"}
 	if v.SourceServerID == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceServerID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteVcenterClientInput(v *DeleteVcenterClientInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteVcenterClientInput"}
+	if v.VcenterClientID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VcenterClientID"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -890,6 +977,21 @@ func validateOpStartCutoverInput(v *StartCutoverInput) error {
 	}
 }
 
+func validateOpStartReplicationInput(v *StartReplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartReplicationInput"}
+	if v.SourceServerID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceServerID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartTestInput(v *StartTestInput) error {
 	if v == nil {
 		return nil
@@ -993,6 +1095,24 @@ func validateOpUpdateReplicationConfigurationTemplateInput(v *UpdateReplicationC
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateReplicationConfigurationTemplateInput"}
 	if v.ReplicationConfigurationTemplateID == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReplicationConfigurationTemplateID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSourceServerReplicationTypeInput(v *UpdateSourceServerReplicationTypeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSourceServerReplicationTypeInput"}
+	if v.SourceServerID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceServerID"))
+	}
+	if len(v.ReplicationType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicationType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

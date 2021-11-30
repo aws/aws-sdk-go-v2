@@ -16,6 +16,9 @@ type Answer struct {
 	// List of choices available for a question.
 	Choices []Choice
 
+	// The helpful resource text to be displayed.
+	HelpfulResourceDisplayText *string
+
 	// The helpful resource URL for a question.
 	HelpfulResourceUrl *string
 
@@ -99,6 +102,12 @@ type Choice struct {
 	// The description of a choice.
 	Description *string
 
+	// The choice level helpful resource.
+	HelpfulResource *ChoiceContent
+
+	// The choice level improvement plan.
+	ImprovementPlan *ChoiceContent
+
 	// The title of a choice.
 	Title *string
 
@@ -138,6 +147,34 @@ type ChoiceAnswerSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The choice content.
+type ChoiceContent struct {
+
+	// The display text for the choice content.
+	DisplayText *string
+
+	// The URL for the choice content.
+	Url *string
+
+	noSmithyDocumentSerde
+}
+
+// The choice level improvement plan.
+type ChoiceImprovementPlan struct {
+
+	// The ID of a choice.
+	ChoiceId *string
+
+	// The display text for the improvement plan.
+	DisplayText *string
+
+	// The improvement plan URL for a question. This value is only available if the
+	// question has been answered.
+	ImprovementPlanUrl *string
+
+	noSmithyDocumentSerde
+}
+
 // A list of choices to be updated.
 type ChoiceUpdate struct {
 
@@ -162,6 +199,9 @@ type ImprovementSummary struct {
 	// question has been answered.
 	ImprovementPlanUrl *string
 
+	// The improvement plan details.
+	ImprovementPlans []ChoiceImprovementPlan
+
 	// The ID used to identify a pillar, for example, security. A pillar is identified
 	// by its PillarReviewSummary$PillarId.
 	PillarId *string
@@ -178,12 +218,39 @@ type ImprovementSummary struct {
 	noSmithyDocumentSerde
 }
 
+// A lens return object.
+type Lens struct {
+
+	// The description of the lens.
+	Description *string
+
+	// The ARN of a lens.
+	LensArn *string
+
+	// The version of a lens.
+	LensVersion *string
+
+	// The full name of the lens.
+	Name *string
+
+	// The Amazon Web Services account ID that owns the lens.
+	Owner *string
+
+	// The ID assigned to the share invitation.
+	ShareInvitationId *string
+
+	noSmithyDocumentSerde
+}
+
 // A lens review of a question.
 type LensReview struct {
 
 	// The alias of the lens, for example, serverless. Each lens is identified by its
 	// LensSummary$LensAlias.
 	LensAlias *string
+
+	// The ARN for the lens.
+	LensArn *string
 
 	// The full name of the lens.
 	LensName *string
@@ -223,6 +290,9 @@ type LensReviewReport struct {
 	// LensSummary$LensAlias.
 	LensAlias *string
 
+	// The ARN for the lens.
+	LensArn *string
+
 	noSmithyDocumentSerde
 }
 
@@ -232,6 +302,9 @@ type LensReviewSummary struct {
 	// The alias of the lens, for example, serverless. Each lens is identified by its
 	// LensSummary$LensAlias.
 	LensAlias *string
+
+	// The ARN for the lens.
+	LensArn *string
 
 	// The full name of the lens.
 	LensName *string
@@ -251,8 +324,27 @@ type LensReviewSummary struct {
 	noSmithyDocumentSerde
 }
 
+// A lens share summary return object.
+type LensShareSummary struct {
+
+	// The ID associated with the workload share.
+	ShareId *string
+
+	// The Amazon Web Services account ID or IAM role with which the workload is
+	// shared.
+	SharedWith *string
+
+	// The status of a workload share.
+	Status ShareStatus
+
+	noSmithyDocumentSerde
+}
+
 // A lens summary of a lens.
 type LensSummary struct {
+
+	// The date and time recorded.
+	CreatedAt *time.Time
 
 	// The description of the lens.
 	Description *string
@@ -261,11 +353,26 @@ type LensSummary struct {
 	// LensSummary$LensAlias.
 	LensAlias *string
 
+	// The ARN of the lens.
+	LensArn *string
+
 	// The full name of the lens.
 	LensName *string
 
+	// The status of the lens.
+	LensStatus LensStatus
+
+	// The type of the lens.
+	LensType LensType
+
 	// The version of the lens.
 	LensVersion *string
+
+	// An Amazon Web Services account ID.
+	Owner *string
+
+	// The date and time recorded.
+	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -283,11 +390,16 @@ type LensUpgradeSummary struct {
 	// LensSummary$LensAlias.
 	LensAlias *string
 
-	// The ID assigned to the workload. This ID is unique within an AWS Region.
+	// The ARN for the lens.
+	LensArn *string
+
+	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
+	// Region.
 	WorkloadId *string
 
-	// The name of the workload. The name must be unique within an account within a
-	// Region. Spaces and capitalization are ignored when checking for uniqueness.
+	// The name of the workload. The name must be unique within an account within an
+	// Amazon Web Services Region. Spaces and capitalization are ignored when checking
+	// for uniqueness.
 	WorkloadName *string
 
 	noSmithyDocumentSerde
@@ -353,6 +465,9 @@ type PillarDifference struct {
 	// by its PillarReviewSummary$PillarId.
 	PillarId *string
 
+	// The name of the pillar.
+	PillarName *string
+
 	// List of question differences.
 	QuestionDifferences []QuestionDifference
 
@@ -396,10 +511,21 @@ type QuestionDifference struct {
 // The share invitation.
 type ShareInvitation struct {
 
+	// The alias of the lens, for example, serverless. Each lens is identified by its
+	// LensSummary$LensAlias.
+	LensAlias *string
+
+	// The ARN for the lens.
+	LensArn *string
+
 	// The ID assigned to the share invitation.
 	ShareInvitationId *string
 
-	// The ID assigned to the workload. This ID is unique within an AWS Region.
+	// The resource type of the share invitation.
+	ShareResourceType ShareResourceType
+
+	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
+	// Region.
 	WorkloadId *string
 
 	noSmithyDocumentSerde
@@ -408,23 +534,35 @@ type ShareInvitation struct {
 // A share invitation summary return object.
 type ShareInvitationSummary struct {
 
+	// The ARN for the lens.
+	LensArn *string
+
+	// The full name of the lens.
+	LensName *string
+
 	// Permission granted on a workload share.
 	PermissionType PermissionType
 
 	// The ID assigned to the share invitation.
 	ShareInvitationId *string
 
-	// An AWS account ID.
+	// The resource type of the share invitation.
+	ShareResourceType ShareResourceType
+
+	// An Amazon Web Services account ID.
 	SharedBy *string
 
-	// The AWS account ID or IAM role with which the workload is shared.
+	// The Amazon Web Services account ID or IAM role with which the workload is
+	// shared.
 	SharedWith *string
 
-	// The ID assigned to the workload. This ID is unique within an AWS Region.
+	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
+	// Region.
 	WorkloadId *string
 
-	// The name of the workload. The name must be unique within an account within a
-	// Region. Spaces and capitalization are ignored when checking for uniqueness.
+	// The name of the workload. The name must be unique within an account within an
+	// Amazon Web Services Region. Spaces and capitalization are ignored when checking
+	// for uniqueness.
 	WorkloadName *string
 
 	noSmithyDocumentSerde
@@ -459,14 +597,14 @@ type VersionDifferences struct {
 // A workload return object.
 type Workload struct {
 
-	// The list of AWS account IDs associated with the workload.
+	// The list of Amazon Web Services account IDs associated with the workload.
 	AccountIds []string
 
 	// The URL of the architectural design for the workload.
 	ArchitecturalDesign *string
 
-	// The list of AWS Regions associated with the workload, for example, us-east-2, or
-	// ca-central-1.
+	// The list of Amazon Web Services Regions associated with the workload, for
+	// example, us-east-2, or ca-central-1.
 	AwsRegions []string
 
 	// The description for the workload.
@@ -556,13 +694,13 @@ type Workload struct {
 	// LensSummary$LensAlias.
 	Lenses []string
 
-	// The list of non-AWS Regions associated with the workload.
+	// The list of non-Amazon Web Services Regions associated with the workload.
 	NonAwsRegions []string
 
 	// The notes associated with the workload.
 	Notes *string
 
-	// An AWS account ID.
+	// An Amazon Web Services account ID.
 	Owner *string
 
 	// The priorities of the pillars, which are used to order items in the improvement
@@ -591,11 +729,13 @@ type Workload struct {
 	// The ARN for the workload.
 	WorkloadArn *string
 
-	// The ID assigned to the workload. This ID is unique within an AWS Region.
+	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
+	// Region.
 	WorkloadId *string
 
-	// The name of the workload. The name must be unique within an account within a
-	// Region. Spaces and capitalization are ignored when checking for uniqueness.
+	// The name of the workload. The name must be unique within an account within an
+	// Amazon Web Services Region. Spaces and capitalization are ignored when checking
+	// for uniqueness.
 	WorkloadName *string
 
 	noSmithyDocumentSerde
@@ -610,20 +750,23 @@ type WorkloadShare struct {
 	// The ID associated with the workload share.
 	ShareId *string
 
-	// An AWS account ID.
+	// An Amazon Web Services account ID.
 	SharedBy *string
 
-	// The AWS account ID or IAM role with which the workload is shared.
+	// The Amazon Web Services account ID or IAM role with which the workload is
+	// shared.
 	SharedWith *string
 
 	// The status of a workload share.
 	Status ShareStatus
 
-	// The ID assigned to the workload. This ID is unique within an AWS Region.
+	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
+	// Region.
 	WorkloadId *string
 
-	// The name of the workload. The name must be unique within an account within a
-	// Region. Spaces and capitalization are ignored when checking for uniqueness.
+	// The name of the workload. The name must be unique within an account within an
+	// Amazon Web Services Region. Spaces and capitalization are ignored when checking
+	// for uniqueness.
 	WorkloadName *string
 
 	noSmithyDocumentSerde
@@ -638,7 +781,8 @@ type WorkloadShareSummary struct {
 	// The ID associated with the workload share.
 	ShareId *string
 
-	// The AWS account ID or IAM role with which the workload is shared.
+	// The Amazon Web Services account ID or IAM role with which the workload is
+	// shared.
 	SharedWith *string
 
 	// The status of a workload share.
@@ -657,7 +801,7 @@ type WorkloadSummary struct {
 	// LensSummary$LensAlias.
 	Lenses []string
 
-	// An AWS account ID.
+	// An Amazon Web Services account ID.
 	Owner *string
 
 	// A map from risk names to the count of how questions have that rating.
@@ -669,11 +813,13 @@ type WorkloadSummary struct {
 	// The ARN for the workload.
 	WorkloadArn *string
 
-	// The ID assigned to the workload. This ID is unique within an AWS Region.
+	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
+	// Region.
 	WorkloadId *string
 
-	// The name of the workload. The name must be unique within an account within a
-	// Region. Spaces and capitalization are ignored when checking for uniqueness.
+	// The name of the workload. The name must be unique within an account within an
+	// Amazon Web Services Region. Spaces and capitalization are ignored when checking
+	// for uniqueness.
 	WorkloadName *string
 
 	noSmithyDocumentSerde

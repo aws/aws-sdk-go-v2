@@ -772,6 +772,18 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+// Trace Content for resources.
+type TraceContent struct {
+
+	// The log level for a log message.
+	LogLevel LogLevel
+
+	// WirelessDevice FrameInfo for trace content.
+	WirelessDeviceFrameInfo WirelessDeviceFrameInfo
+
+	noSmithyDocumentSerde
+}
+
 // UpdateWirelessGatewayTaskCreate object.
 type UpdateWirelessGatewayTaskCreate struct {
 

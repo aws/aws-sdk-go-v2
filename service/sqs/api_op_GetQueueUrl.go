@@ -42,7 +42,7 @@ type GetQueueUrlInput struct {
 	// This member is required.
 	QueueName *string
 
-	// The account ID of the account that created the queue.
+	// The Amazon Web Services account ID of the account that created the queue.
 	QueueOwnerAWSAccountId *string
 
 	noSmithyDocumentSerde

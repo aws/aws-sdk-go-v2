@@ -13353,6 +13353,16 @@ func awsRestjson1_deserializeDocumentLaunchPermissionConfiguration(v **types.Lau
 
 	for key, value := range shape {
 		switch key {
+		case "organizationalUnitArns":
+			if err := awsRestjson1_deserializeDocumentOrganizationalUnitArnList(&sv.OrganizationalUnitArns, value); err != nil {
+				return err
+			}
+
+		case "organizationArns":
+			if err := awsRestjson1_deserializeDocumentOrganizationArnList(&sv.OrganizationArns, value); err != nil {
+				return err
+			}
+
 		case "userGroups":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.UserGroups, value); err != nil {
 				return err
@@ -13533,6 +13543,78 @@ func awsRestjson1_deserializeDocumentLogging(v **types.Logging, value interface{
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentOrganizationalUnitArnList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected OrganizationalUnitArn to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentOrganizationArnList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected OrganizationArn to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

@@ -13,13 +13,13 @@ import (
 
 // Create a service template. The administrator creates a service template to
 // define standardized infrastructure and an optional CICD service pipeline.
-// Developers, in turn, select the service template from AWS Proton. If the
-// selected service template includes a service pipeline definition, they provide a
-// link to their source code repository. AWS Proton then deploys and manages the
-// infrastructure defined by the selected service template. For more information,
-// see Service Templates
+// Developers, in turn, select the service template from Proton. If the selected
+// service template includes a service pipeline definition, they provide a link to
+// their source code repository. Proton then deploys and manages the infrastructure
+// defined by the selected service template. For more information, see Service
+// Templates
 // (https://docs.aws.amazon.com/proton/latest/adminguide/managing-svc-templates.html)
-// in the AWS Proton Administrator Guide.
+// in the Proton Administrator Guide.
 func (c *Client) CreateServiceTemplate(ctx context.Context, params *CreateServiceTemplateInput, optFns ...func(*Options)) (*CreateServiceTemplateOutput, error) {
 	if params == nil {
 		params = &CreateServiceTemplateInput{}
@@ -51,19 +51,18 @@ type CreateServiceTemplateInput struct {
 	// A customer provided encryption key that's used to encrypt data.
 	EncryptionKey *string
 
-	// AWS Proton includes a service pipeline for your service by default. When
-	// included, this parameter indicates that an AWS Proton service pipeline won't be
-	// included for your service. Once specified, this parameter can't be changed. For
-	// more information, see Service template bundles
+	// Proton includes a service pipeline for your service by default. When included,
+	// this parameter indicates that an Proton service pipeline won't be included for
+	// your service. Once specified, this parameter can't be changed. For more
+	// information, see Service template bundles
 	// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-template-bundles.html)
-	// in the AWS Proton Administrator Guide.
+	// in the Proton Administrator Guide.
 	PipelineProvisioning types.Provisioning
 
-	// Create tags for your service template. For more information, see AWS Proton
-	// resources and tagging in the AWS Proton Administrator Guide
-	// (https://docs.aws.amazon.com/proton/latest/adminguide/resources.html) or AWS
-	// Proton User Guide
-	// (https://docs.aws.amazon.com/proton/latest/userguide/resources.html).
+	// Create tags for your service template. For more information, see Proton
+	// resources and tagging in the Proton Administrator Guide
+	// (https://docs.aws.amazon.com/proton/latest/adminguide/resources.html) or Proton
+	// User Guide (https://docs.aws.amazon.com/proton/latest/userguide/resources.html).
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -71,7 +70,7 @@ type CreateServiceTemplateInput struct {
 
 type CreateServiceTemplateOutput struct {
 
-	// The service template detail data that's returned by AWS Proton.
+	// The service template detail data that's returned by Proton.
 	//
 	// This member is required.
 	ServiceTemplate *types.ServiceTemplate

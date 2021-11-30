@@ -116,6 +116,24 @@ func (ChangeType) Values() []ChangeType {
 	}
 }
 
+type DataTieringStatus string
+
+// Enum values for DataTieringStatus
+const (
+	DataTieringStatusEnabled  DataTieringStatus = "enabled"
+	DataTieringStatusDisabled DataTieringStatus = "disabled"
+)
+
+// Values returns all known values for DataTieringStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DataTieringStatus) Values() []DataTieringStatus {
+	return []DataTieringStatus{
+		"enabled",
+		"disabled",
+	}
+}
+
 type DestinationType string
 
 // Enum values for DestinationType

@@ -8028,9 +8028,23 @@ func awsRestjson1_serializeOpDocumentUpdateDashboardPermissionsInput(v *UpdateDa
 	object := value.Object()
 	defer object.Close()
 
+	if v.GrantLinkPermissions != nil {
+		ok := object.Key("GrantLinkPermissions")
+		if err := awsRestjson1_serializeDocumentUpdateLinkPermissionList(v.GrantLinkPermissions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.GrantPermissions != nil {
 		ok := object.Key("GrantPermissions")
 		if err := awsRestjson1_serializeDocumentUpdateResourcePermissionList(v.GrantPermissions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RevokeLinkPermissions != nil {
+		ok := object.Key("RevokeLinkPermissions")
+		if err := awsRestjson1_serializeDocumentUpdateLinkPermissionList(v.RevokeLinkPermissions, ok); err != nil {
 			return err
 		}
 	}
@@ -9813,6 +9827,11 @@ func awsRestjson1_serializeDocumentAccountCustomization(v *types.AccountCustomiz
 	object := value.Object()
 	defer object.Close()
 
+	if v.DefaultEmailCustomizationTemplate != nil {
+		ok := object.Key("DefaultEmailCustomizationTemplate")
+		ok.String(*v.DefaultEmailCustomizationTemplate)
+	}
+
 	if v.DefaultTheme != nil {
 		ok := object.Key("DefaultTheme")
 		ok.String(*v.DefaultTheme)
@@ -10555,6 +10574,12 @@ func awsRestjson1_serializeDocumentDataSourceParameters(v types.DataSourceParame
 			return err
 		}
 
+	case *types.DataSourceParametersMemberExasolParameters:
+		av := object.Key("ExasolParameters")
+		if err := awsRestjson1_serializeDocumentExasolParameters(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.DataSourceParametersMemberJiraParameters:
 		av := object.Key("JiraParameters")
 		if err := awsRestjson1_serializeDocumentJiraParameters(&uv.Value, av); err != nil {
@@ -10753,6 +10778,23 @@ func awsRestjson1_serializeDocumentDoubleList(v []float64, value smithyjson.Valu
 
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentExasolParameters(v *types.ExasolParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Host != nil {
+		ok := object.Key("Host")
+		ok.String(*v.Host)
+	}
+
+	{
+		ok := object.Key("Port")
+		ok.Integer(v.Port)
+	}
+
 	return nil
 }
 
@@ -12291,6 +12333,19 @@ func awsRestjson1_serializeDocumentUntagColumnOperation(v *types.UntagColumnOper
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUpdateLinkPermissionList(v []types.ResourcePermission, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentResourcePermission(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

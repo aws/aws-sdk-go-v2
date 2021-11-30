@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Amazon QuickSight user, whose identity is associated with the AWS
+// Creates an Amazon QuickSight user, whose identity is associated with the
 // Identity and Access Management (IAM) identity or role specified in the request.
 func (c *Client) RegisterUser(ctx context.Context, params *RegisterUserInput, optFns ...func(*Options)) (*RegisterUserOutput, error) {
 	if params == nil {
@@ -46,7 +46,7 @@ type RegisterUserInput struct {
 	// parameter accepts two values:
 	//
 	// * IAM: A user whose identity maps to an existing
-	// IAMuser or role.
+	// IAM user or role.
 	//
 	// * QUICKSIGHT: A user whose identity is owned and managed
 	// internally by Amazon QuickSight.
@@ -100,13 +100,15 @@ type RegisterUserInput struct {
 	// * Subscribe to email reports
 	//
 	// To add custom permissions to an existing
-	// user, use UpdateUser instead. A set of custom permissions includes any
-	// combination of these restrictions. Currently, you need to create the profile
-	// names for custom permission sets by using the Amazon QuickSight console. Then,
-	// you use the RegisterUser API operation to assign the named set of permissions to
-	// a Amazon QuickSight user. Amazon QuickSight custom permissions are applied
-	// through IAMpolicies. Therefore, they override the permissions typically granted
-	// by assigning Amazon QuickSight users to one of the default security cohorts in
+	// user, use UpdateUser
+	// (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdateUser.html)
+	// instead. A set of custom permissions includes any combination of these
+	// restrictions. Currently, you need to create the profile names for custom
+	// permission sets by using the Amazon QuickSight console. Then, you use the
+	// RegisterUser API operation to assign the named set of permissions to a
+	// QuickSight user. Amazon QuickSight custom permissions are applied through IAM
+	// policies. Therefore, they override the permissions typically granted by
+	// assigning Amazon QuickSight users to one of the default security cohorts in
 	// Amazon QuickSight (admin, author, reader). This feature is available only to
 	// Amazon QuickSight Enterprise edition subscriptions.
 	CustomPermissionsName *string
@@ -129,17 +131,17 @@ type RegisterUserInput struct {
 	// The identity ID for a user in the external login provider.
 	ExternalLoginId *string
 
-	// The ARN of the IAMuser or role that you are registering with Amazon QuickSight.
+	// The ARN of the IAM user or role that you are registering with Amazon QuickSight.
 	IamArn *string
 
 	// You need to use this parameter only when you register one or more users using an
-	// assumed IAMrole. You don't need to provide the session name for other scenarios,
-	// for example when you are registering an IAMuser or an Amazon QuickSight user.
-	// You can register multiple users using the same IAMrole if each user has a
-	// different session name. For more information on assuming IAMroles, see
-	// assume-role
+	// assumed IAM role. You don't need to provide the session name for other
+	// scenarios, for example when you are registering an IAM user or an Amazon
+	// QuickSight user. You can register multiple users using the same IAM role if each
+	// user has a different session name. For more information on assuming IAM roles,
+	// see assume-role
 	// (https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role.html) in the
-	// AWS CLI Reference.
+	// CLI Reference.
 	SessionName *string
 
 	// The Amazon QuickSight user name that you want to create for the user you are

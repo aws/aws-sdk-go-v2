@@ -31,7 +31,8 @@ func (c *Client) ListMilestones(ctx context.Context, params *ListMilestonesInput
 // Input to list all milestones for a workload.
 type ListMilestonesInput struct {
 
-	// The ID assigned to the workload. This ID is unique within an AWS Region.
+	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
+	// Region.
 	//
 	// This member is required.
 	WorkloadId *string
@@ -54,7 +55,8 @@ type ListMilestonesOutput struct {
 	// The token to use to retrieve the next set of results.
 	NextToken *string
 
-	// The ID assigned to the workload. This ID is unique within an AWS Region.
+	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
+	// Region.
 	WorkloadId *string
 
 	// Metadata pertaining to the operation's result.

@@ -55,7 +55,8 @@ type UpdateFunctionCodeInput struct {
 	FunctionName *string
 
 	// The instruction set architecture that the function supports. Enter a string
-	// array with one of the valid values. The default value is x86_64.
+	// array with one of the valid values (arm64 or x86_64). The default value is
+	// x86_64.
 	Architectures []types.Architecture
 
 	// Set to true to validate the request parameters and access permissions without

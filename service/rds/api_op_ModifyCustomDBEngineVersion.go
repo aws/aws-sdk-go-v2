@@ -20,7 +20,7 @@ import (
 // calls from the API gateway that accesses your Amazon S3 bucket. These calls
 // originate from the MediaImport service for the ModifyCustomDbEngineVersion
 // event. For more information, see Modifying CEV status
-// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.html#custom-cev.preparing.manifest)
+// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.html#custom-cev.modify)
 // in the Amazon RDS User Guide.
 func (c *Client) ModifyCustomDBEngineVersion(ctx context.Context, params *ModifyCustomDBEngineVersionInput, optFns ...func(*Options)) (*ModifyCustomDBEngineVersionOutput, error) {
 	if params == nil {

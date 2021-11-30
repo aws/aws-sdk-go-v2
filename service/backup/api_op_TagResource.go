@@ -36,7 +36,8 @@ type TagResourceInput struct {
 	ResourceArn *string
 
 	// Key-value pairs that are used to help organize your resources. You can assign
-	// your own metadata to the resources you create.
+	// your own metadata to the resources you create. For clarity, this is the
+	// structure to assign tags: [{"Key":"string","Value":"string"}].
 	//
 	// This member is required.
 	Tags map[string]string

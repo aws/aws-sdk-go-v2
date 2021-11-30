@@ -179,6 +179,23 @@ type BucketLevel struct {
 	noSmithyDocumentSerde
 }
 
+// A container for enabling Amazon CloudWatch publishing for S3 Storage Lens
+// metrics. For more information about publishing S3 Storage Lens metrics to
+// CloudWatch, see Monitor S3 Storage Lens metrics in CloudWatch
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_view_metrics_cloudwatch.html)
+// in the Amazon S3 User Guide.
+type CloudWatchMetrics struct {
+
+	// A container that indicates whether CloudWatch publishing for S3 Storage Lens
+	// metrics is enabled. A value of true indicates that CloudWatch publishing for S3
+	// Storage Lens metrics is enabled.
+	//
+	// This member is required.
+	IsEnabled bool
+
+	noSmithyDocumentSerde
+}
+
 // The container for the bucket configuration. This is not supported by Amazon S3
 // on Outposts buckets.
 type CreateBucketConfiguration struct {
@@ -1480,11 +1497,13 @@ type StorageLensConfiguration struct {
 // including the destination, schema, and format.
 type StorageLensDataExport struct {
 
+	// A container for enabling Amazon CloudWatch publishing for S3 Storage Lens
+	// metrics.
+	CloudWatchMetrics *CloudWatchMetrics
+
 	// A container for the bucket where the S3 Storage Lens metrics export will be
 	// located. This bucket must be located in the same Region as the storage lens
 	// configuration.
-	//
-	// This member is required.
 	S3BucketDestination *S3BucketDestination
 
 	noSmithyDocumentSerde

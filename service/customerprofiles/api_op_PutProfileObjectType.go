@@ -65,6 +65,9 @@ type PutProfileObjectTypeInput struct {
 	// A list of unique keys that can be used to map data to the profile.
 	Keys map[string][]types.ObjectTypeKey
 
+	// The format of your sourceLastUpdatedTimestamp that was previously set up.
+	SourceLastUpdatedTimestampFormat *string
+
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 
@@ -111,6 +114,13 @@ type PutProfileObjectTypeOutput struct {
 
 	// The timestamp of when the domain was most recently edited.
 	LastUpdatedAt *time.Time
+
+	// The format of your sourceLastUpdatedTimestamp that was previously set up in
+	// fields that were parsed using SimpleDateFormat
+	// (https://docs.oracle.com/javase/10/docs/api/java/text/SimpleDateFormat.html). If
+	// you have sourceLastUpdatedTimestamp in your field, you must set up
+	// sourceLastUpdatedTimestampFormat.
+	SourceLastUpdatedTimestampFormat *string
 
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string

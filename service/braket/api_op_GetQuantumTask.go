@@ -88,6 +88,9 @@ type GetQuantumTaskOutput struct {
 	// The reason that a task failed.
 	FailureReason *string
 
+	// The ARN of the Amazon Braket job associated with the quantum task.
+	JobArn *string
+
 	// The tags that belong to this task.
 	Tags map[string]string
 

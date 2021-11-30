@@ -10,7 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates content and status of IP Rules.
+// Updates the content and status of IP rules. To use this operation, you need to
+// provide the entire map of rules. You can use the DescribeIpRestriction operation
+// to get the current rule map.
 func (c *Client) UpdateIpRestriction(ctx context.Context, params *UpdateIpRestrictionInput, optFns ...func(*Options)) (*UpdateIpRestrictionOutput, error) {
 	if params == nil {
 		params = &UpdateIpRestrictionInput{}
@@ -28,15 +30,15 @@ func (c *Client) UpdateIpRestriction(ctx context.Context, params *UpdateIpRestri
 
 type UpdateIpRestrictionInput struct {
 
-	// Your AWS account ID.
+	// The ID of the Amazon Web Services account that contains the IP rules.
 	//
 	// This member is required.
 	AwsAccountId *string
 
-	// Whether or not IP rules are enabled.
+	// A value that specifies whether IP rules are turned on.
 	Enabled *bool
 
-	// Describes updated IP rules.
+	// A map that describes the updated IP rules with CIDR ranges and descriptions.
 	IpRestrictionRuleMap map[string]string
 
 	noSmithyDocumentSerde
@@ -44,13 +46,13 @@ type UpdateIpRestrictionInput struct {
 
 type UpdateIpRestrictionOutput struct {
 
-	// Your AWS account ID.
+	// The ID of the Amazon Web Services account that contains the IP rules.
 	AwsAccountId *string
 
-	// The ID of the update request.
+	// The Amazon Web Services request ID for this operation.
 	RequestId *string
 
-	// The status of the updated IP rules. A successful request returns a 200 code.
+	// The HTTP status of the request.
 	Status int32
 
 	// Metadata pertaining to the operation's result.

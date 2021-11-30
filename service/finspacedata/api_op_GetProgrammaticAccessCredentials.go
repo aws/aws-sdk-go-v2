@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Request programmatic credentials to use with Habanero SDK.
+// Request programmatic credentials to use with FinSpace SDK.
 func (c *Client) GetProgrammaticAccessCredentials(ctx context.Context, params *GetProgrammaticAccessCredentialsInput, optFns ...func(*Options)) (*GetProgrammaticAccessCredentialsOutput, error) {
 	if params == nil {
 		params = &GetProgrammaticAccessCredentialsInput{}
@@ -27,9 +27,10 @@ func (c *Client) GetProgrammaticAccessCredentials(ctx context.Context, params *G
 	return out, nil
 }
 
+// Request for GetProgrammaticAccessCredentials operation
 type GetProgrammaticAccessCredentialsInput struct {
 
-	// The habanero environment identifier.
+	// The FinSpace environment identifier.
 	//
 	// This member is required.
 	EnvironmentId *string
@@ -40,6 +41,7 @@ type GetProgrammaticAccessCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
+// Response for GetProgrammaticAccessCredentials operation
 type GetProgrammaticAccessCredentialsOutput struct {
 
 	// Returns the programmatic credentials.

@@ -65,6 +65,9 @@ type CreateQuantumTaskInput struct {
 	// This value conforms to the media type: application/json
 	DeviceParameters *string
 
+	// The token for an Amazon Braket job that associates it with the quantum task.
+	JobToken *string
+
 	// Tags to be added to the quantum task you're creating.
 	Tags map[string]string
 

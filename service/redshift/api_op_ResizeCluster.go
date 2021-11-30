@@ -82,6 +82,12 @@ type ResizeClusterInput struct {
 	// number of nodes is used.
 	NumberOfNodes *int32
 
+	// The identifier of the reserved node.
+	ReservedNodeId *string
+
+	// The identifier of the target reserved node offering.
+	TargetReservedNodeOfferingId *string
+
 	noSmithyDocumentSerde
 }
 

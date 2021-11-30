@@ -4512,6 +4512,13 @@ func awsRestjson1_serializeOpDocumentUpdateRegionSettingsInput(v *UpdateRegionSe
 	object := value.Object()
 	defer object.Close()
 
+	if v.ResourceTypeManagementPreference != nil {
+		ok := object.Key("ResourceTypeManagementPreference")
+		if err := awsRestjson1_serializeDocumentResourceTypeManagementPreference(v.ResourceTypeManagementPreference, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ResourceTypeOptInPreference != nil {
 		ok := object.Key("ResourceTypeOptInPreference")
 		if err := awsRestjson1_serializeDocumentResourceTypeOptInPreference(v.ResourceTypeOptInPreference, ok); err != nil {
@@ -5174,6 +5181,17 @@ func awsRestjson1_serializeDocumentResourceTypeList(v []string, value smithyjson
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentResourceTypeManagementPreference(v map[string]bool, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.Boolean(v[key])
 	}
 	return nil
 }

@@ -13,9 +13,9 @@ import (
 
 // Attempts to cancel a service pipeline deployment on an UpdateServicePipeline
 // action, if the deployment is IN_PROGRESS. For more information, see Update a
-// service pipeline in the AWS Proton Administrator guide
+// service pipeline in the Proton Administrator guide
 // (https://docs.aws.amazon.com/proton/latest/adminguide/ag-svc-pipeline-update.html)
-// or the AWS Proton User guide
+// or the Proton User guide
 // (https://docs.aws.amazon.com/proton/latest/userguide/ug-svc-pipeline-update.html).
 // The following list includes potential cancellation scenarios.
 //
@@ -56,7 +56,7 @@ type CancelServicePipelineDeploymentInput struct {
 
 type CancelServicePipelineDeploymentOutput struct {
 
-	// The service pipeline detail data that's returned by AWS Proton.
+	// The service pipeline detail data that's returned by Proton.
 	//
 	// This member is required.
 	Pipeline *types.ServicePipeline

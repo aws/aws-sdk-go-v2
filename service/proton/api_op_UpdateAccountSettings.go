@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update the AWS Proton pipeline service account settings.
+// Update the Proton service pipeline role or repository settings.
 func (c *Client) UpdateAccountSettings(ctx context.Context, params *UpdateAccountSettingsInput, optFns ...func(*Options)) (*UpdateAccountSettingsOutput, error) {
 	if params == nil {
 		params = &UpdateAccountSettingsInput{}
@@ -29,7 +29,18 @@ func (c *Client) UpdateAccountSettings(ctx context.Context, params *UpdateAccoun
 
 type UpdateAccountSettingsInput struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Proton pipeline service role.
+	// The repository that you provide with pull request provisioning. Provisioning by
+	// pull request is currently in feature preview and is only usable with Terraform
+	// based Proton Templates. To learn more about Amazon Web Services Feature Preview
+	// terms (https://aws.amazon.com/service-terms), see section 2 on Beta and
+	// Previews.
+	PipelineProvisioningRepository *types.RepositoryBranchInput
+
+	// The Amazon Resource Name (ARN) of the Proton pipeline service role. Provisioning
+	// by pull request is currently in feature preview and is only usable with
+	// Terraform based Proton Templates. To learn more about Amazon Web Services
+	// Feature Preview terms (https://aws.amazon.com/service-terms), see section 2 on
+	// Beta and Previews.
 	PipelineServiceRoleArn *string
 
 	noSmithyDocumentSerde
@@ -37,7 +48,8 @@ type UpdateAccountSettingsInput struct {
 
 type UpdateAccountSettingsOutput struct {
 
-	// The AWS Proton pipeline service role detail data that's returned by AWS Proton.
+	// The Proton pipeline service role repository detail data that's returned by
+	// Proton.
 	//
 	// This member is required.
 	AccountSettings *types.AccountSettings
@@ -91,6 +103,9 @@ func (c *Client) addOperationUpdateAccountSettingsMiddlewares(stack *middleware.
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addOpUpdateAccountSettingsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAccountSettings(options.Region), middleware.Before); err != nil {

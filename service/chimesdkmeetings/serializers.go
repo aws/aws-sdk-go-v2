@@ -253,6 +253,13 @@ func awsRestjson1_serializeOpDocumentCreateMeetingInput(v *CreateMeetingInput, v
 		ok.String(*v.MediaRegion)
 	}
 
+	if v.MeetingFeatures != nil {
+		ok := object.Key("MeetingFeatures")
+		if err := awsRestjson1_serializeDocumentMeetingFeaturesConfiguration(v.MeetingFeatures, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MeetingHostId != nil {
 		ok := object.Key("MeetingHostId")
 		ok.String(*v.MeetingHostId)
@@ -348,6 +355,13 @@ func awsRestjson1_serializeOpDocumentCreateMeetingWithAttendeesInput(v *CreateMe
 	if v.MediaRegion != nil {
 		ok := object.Key("MediaRegion")
 		ok.String(*v.MediaRegion)
+	}
+
+	if v.MeetingFeatures != nil {
+		ok := object.Key("MeetingFeatures")
+		if err := awsRestjson1_serializeDocumentMeetingFeaturesConfiguration(v.MeetingFeatures, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.MeetingHostId != nil {
@@ -822,6 +836,18 @@ func awsRestjson1_serializeOpHttpBindingsStopMeetingTranscriptionInput(v *StopMe
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAudioFeatures(v *types.AudioFeatures, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.EchoReduction) > 0 {
+		ok := object.Key("EchoReduction")
+		ok.String(string(v.EchoReduction))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCreateAttendeeRequestItem(v *types.CreateAttendeeRequestItem, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -954,6 +980,20 @@ func awsRestjson1_serializeDocumentEngineTranscribeSettings(v *types.EngineTrans
 	if v.VocabularyName != nil {
 		ok := object.Key("VocabularyName")
 		ok.String(*v.VocabularyName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMeetingFeaturesConfiguration(v *types.MeetingFeaturesConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Audio != nil {
+		ok := object.Key("Audio")
+		if err := awsRestjson1_serializeDocumentAudioFeatures(v.Audio, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

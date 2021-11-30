@@ -42,14 +42,14 @@ type CreateDBClusterEndpointInput struct {
 	// This member is required.
 	DBClusterIdentifier *string
 
-	// The type of the endpoint. One of: READER, WRITER, ANY.
+	// The type of the endpoint, one of: READER, WRITER, ANY.
 	//
 	// This member is required.
 	EndpointType *string
 
 	// List of DB instance identifiers that aren't part of the custom endpoint group.
-	// All other eligible instances are reachable through the custom endpoint. Only
-	// relevant if the list of static members is empty.
+	// All other eligible instances are reachable through the custom endpoint. This
+	// parameter is relevant only if the list of static members is empty.
 	ExcludedMembers []string
 
 	// List of DB instance identifiers that are part of the custom endpoint group.

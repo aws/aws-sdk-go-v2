@@ -1299,6 +1299,66 @@ func validateMemoryMiBRequest(v *types.MemoryMiBRequest) error {
 	}
 }
 
+func validateMetric(v *types.Metric) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Metric"}
+	if v.Namespace == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	}
+	if v.MetricName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
+	}
+	if v.Dimensions != nil {
+		if err := validateMetricDimensions(v.Dimensions); err != nil {
+			invalidParams.AddNested("Dimensions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetricDataQueries(v []types.MetricDataQuery) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricDataQueries"}
+	for i := range v {
+		if err := validateMetricDataQuery(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetricDataQuery(v *types.MetricDataQuery) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricDataQuery"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.MetricStat != nil {
+		if err := validateMetricStat(v.MetricStat); err != nil {
+			invalidParams.AddNested("MetricStat", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMetricDimension(v *types.MetricDimension) error {
 	if v == nil {
 		return nil
@@ -1326,6 +1386,28 @@ func validateMetricDimensions(v []types.MetricDimension) error {
 		if err := validateMetricDimension(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetricStat(v *types.MetricStat) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricStat"}
+	if v.Metric == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Metric"))
+	} else if v.Metric != nil {
+		if err := validateMetric(v.Metric); err != nil {
+			invalidParams.AddNested("Metric", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Stat == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Stat"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1402,6 +1484,63 @@ func validatePredictiveScalingConfiguration(v *types.PredictiveScalingConfigurat
 	}
 }
 
+func validatePredictiveScalingCustomizedCapacityMetric(v *types.PredictiveScalingCustomizedCapacityMetric) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PredictiveScalingCustomizedCapacityMetric"}
+	if v.MetricDataQueries == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricDataQueries"))
+	} else if v.MetricDataQueries != nil {
+		if err := validateMetricDataQueries(v.MetricDataQueries); err != nil {
+			invalidParams.AddNested("MetricDataQueries", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePredictiveScalingCustomizedLoadMetric(v *types.PredictiveScalingCustomizedLoadMetric) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PredictiveScalingCustomizedLoadMetric"}
+	if v.MetricDataQueries == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricDataQueries"))
+	} else if v.MetricDataQueries != nil {
+		if err := validateMetricDataQueries(v.MetricDataQueries); err != nil {
+			invalidParams.AddNested("MetricDataQueries", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePredictiveScalingCustomizedScalingMetric(v *types.PredictiveScalingCustomizedScalingMetric) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PredictiveScalingCustomizedScalingMetric"}
+	if v.MetricDataQueries == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricDataQueries"))
+	} else if v.MetricDataQueries != nil {
+		if err := validateMetricDataQueries(v.MetricDataQueries); err != nil {
+			invalidParams.AddNested("MetricDataQueries", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePredictiveScalingMetricSpecification(v *types.PredictiveScalingMetricSpecification) error {
 	if v == nil {
 		return nil
@@ -1423,6 +1562,21 @@ func validatePredictiveScalingMetricSpecification(v *types.PredictiveScalingMetr
 	if v.PredefinedLoadMetricSpecification != nil {
 		if err := validatePredictiveScalingPredefinedLoadMetric(v.PredefinedLoadMetricSpecification); err != nil {
 			invalidParams.AddNested("PredefinedLoadMetricSpecification", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomizedScalingMetricSpecification != nil {
+		if err := validatePredictiveScalingCustomizedScalingMetric(v.CustomizedScalingMetricSpecification); err != nil {
+			invalidParams.AddNested("CustomizedScalingMetricSpecification", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomizedLoadMetricSpecification != nil {
+		if err := validatePredictiveScalingCustomizedLoadMetric(v.CustomizedLoadMetricSpecification); err != nil {
+			invalidParams.AddNested("CustomizedLoadMetricSpecification", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomizedCapacityMetricSpecification != nil {
+		if err := validatePredictiveScalingCustomizedCapacityMetric(v.CustomizedCapacityMetricSpecification); err != nil {
+			invalidParams.AddNested("CustomizedCapacityMetricSpecification", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

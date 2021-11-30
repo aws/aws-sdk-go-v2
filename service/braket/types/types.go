@@ -7,6 +7,54 @@ import (
 	"time"
 )
 
+// Defines the Amazon Braket job to be created. Specifies the container image the
+// job uses and the paths to the Python scripts used for entry and training.
+type AlgorithmSpecification struct {
+
+	// The container image used to create an Amazon Braket job.
+	ContainerImage *ContainerImage
+
+	// Configures the paths to the Python scripts used for entry and training.
+	ScriptModeConfig *ScriptModeConfig
+
+	noSmithyDocumentSerde
+}
+
+// The container image used to create an Amazon Braket job.
+type ContainerImage struct {
+
+	// The URI locating the container image.
+	//
+	// This member is required.
+	Uri *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the source of the data used by the Amazon Braket job.
+type DataSource struct {
+
+	// Information about the data stored in Amazon S3 used by the Amazon Braket job.
+	//
+	// This member is required.
+	S3DataSource *S3DataSource
+
+	noSmithyDocumentSerde
+}
+
+// Configures the quantum processing units (QPUs) or simulator used to create and
+// run an Amazon Braket job.
+type DeviceConfig struct {
+
+	// The primary quantum processing unit (QPU) or simulator used to create and run an
+	// Amazon Braket job.
+	//
+	// This member is required.
+	Device *string
+
+	noSmithyDocumentSerde
+}
+
 // Includes information about the device.
 type DeviceSummary struct {
 
@@ -34,6 +82,144 @@ type DeviceSummary struct {
 	//
 	// This member is required.
 	ProviderName *string
+
+	noSmithyDocumentSerde
+}
+
+// A list of parameters that specify the input channels, type of input data, and
+// where it is located.
+type InputFileConfig struct {
+
+	// A named input source that an Amazon Braket job can consume.
+	//
+	// This member is required.
+	ChannelName *string
+
+	// The location of the channel data.
+	//
+	// This member is required.
+	DataSource *DataSource
+
+	// The MIME type of the data.
+	ContentType *string
+
+	noSmithyDocumentSerde
+}
+
+// Configures the resource instances to use while running the Amazon Braket hybrid
+// job on Amazon Braket.
+type InstanceConfig struct {
+
+	// Configures the type resource instances to use while running an Amazon Braket
+	// hybrid job.
+	//
+	// This member is required.
+	InstanceType InstanceType
+
+	// The size of the storage volume, in GB, that user wants to provision.
+	//
+	// This member is required.
+	VolumeSizeInGb *int32
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the output locations for job checkpoint data.
+type JobCheckpointConfig struct {
+
+	// Identifies the S3 path where you want Amazon Braket to store checkpoints. For
+	// example, s3://bucket-name/key-name-prefix.
+	//
+	// This member is required.
+	S3Uri *string
+
+	// (Optional) The local directory where checkpoints are written. The default
+	// directory is /opt/braket/checkpoints/.
+	LocalPath *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about the type and time events occurred related to the Amazon Braket
+// job.
+type JobEventDetails struct {
+
+	// The type of event that occurred related to the Amazon Braket job.
+	EventType JobEventType
+
+	// A message describing the event that occurred related to the Amazon Braket job.
+	Message *string
+
+	// TThe type of event that occurred related to the Amazon Braket job.
+	TimeOfEvent *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the path to the S3 location where you want to store job artifacts and
+// the encryption key used to store them.
+type JobOutputDataConfig struct {
+
+	// Identifies the S3 path where you want Amazon Braket to store the job training
+	// artifacts. For example, s3://bucket-name/key-name-prefix.
+	//
+	// This member is required.
+	S3Path *string
+
+	// The AWS Key Management Service (AWS KMS) key that Amazon Braket uses to encrypt
+	// the job training artifacts at rest using Amazon S3 server-side encryption.
+	KmsKeyId *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies limits for how long an Amazon Braket job can run.
+type JobStoppingCondition struct {
+
+	// The maximum length of time, in seconds, that an Amazon Braket job can run.
+	MaxRuntimeInSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
+// Provides summary information about an Amazon Braket job.
+type JobSummary struct {
+
+	// The date and time that the Amazon Braket job was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// Provides summary information about the primary device used by an Amazon Braket
+	// job.
+	//
+	// This member is required.
+	Device *string
+
+	// The ARN of the Amazon Braket job.
+	//
+	// This member is required.
+	JobArn *string
+
+	// The name of the Amazon Braket job.
+	//
+	// This member is required.
+	JobName *string
+
+	// The status of the Amazon Braket job.
+	//
+	// This member is required.
+	Status JobPrimaryStatus
+
+	// The date and time that the Amazon Braket job ended.
+	EndedAt *time.Time
+
+	// The date and time that the Amazon Braket job was started.
+	StartedAt *time.Time
+
+	// A tag object that consists of a key and an optional value, used to manage
+	// metadata for Amazon Braket resources.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -85,6 +271,40 @@ type QuantumTaskSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the data stored in Amazon S3 used by the Amazon Braket job.
+type S3DataSource struct {
+
+	// Depending on the value specified for the S3DataType, identifies either a key
+	// name prefix or a manifest that locates the S3 data source.
+	//
+	// This member is required.
+	S3Uri *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the Python scripts used for entry and by an Amazon
+// Braket job.
+type ScriptModeConfig struct {
+
+	// The path to the Python script that serves as the entry point for an Amazon
+	// Braket job.
+	//
+	// This member is required.
+	EntryPoint *string
+
+	// The URI that specifies the S3 path to the Python script module that contains the
+	// training script used by an Amazon Braket job.
+	//
+	// This member is required.
+	S3Uri *string
+
+	// The type of compression used by the Python scripts for an Amazon Braket job.
+	CompressionType CompressionType
+
+	noSmithyDocumentSerde
+}
+
 // The filter to use for searching devices.
 type SearchDevicesFilter struct {
 
@@ -94,6 +314,27 @@ type SearchDevicesFilter struct {
 	Name *string
 
 	// The values to use to filter results.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// A filter used to search for Amazon Braket jobs.
+type SearchJobsFilter struct {
+
+	// The name to use for the jobs filter.
+	//
+	// This member is required.
+	Name *string
+
+	// An operator to use for the jobs filter.
+	//
+	// This member is required.
+	Operator SearchJobsFilterOperator
+
+	// The values to use for the jobs filter.
 	//
 	// This member is required.
 	Values []string

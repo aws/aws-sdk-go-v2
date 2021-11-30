@@ -34,7 +34,7 @@ func (c *Client) GetServiceTemplateVersion(ctx context.Context, params *GetServi
 
 type GetServiceTemplateVersionInput struct {
 
-	// To view service template major version detail data, include majorVersion.
+	// To view service template major version detail data, include major Version.
 	//
 	// This member is required.
 	MajorVersion *string
@@ -54,7 +54,7 @@ type GetServiceTemplateVersionInput struct {
 
 type GetServiceTemplateVersionOutput struct {
 
-	// The service template version detail data that's returned by AWS Proton.
+	// The service template version detail data that's returned by Proton.
 	//
 	// This member is required.
 	ServiceTemplateVersion *types.ServiceTemplateVersion

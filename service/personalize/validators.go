@@ -30,6 +30,26 @@ func (m *validateOpCreateBatchInferenceJob) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateBatchSegmentJob struct {
+}
+
+func (*validateOpCreateBatchSegmentJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateBatchSegmentJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateBatchSegmentJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateBatchSegmentJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateCampaign struct {
 }
 
@@ -165,6 +185,26 @@ func (m *validateOpCreateFilter) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateFilterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateRecommender struct {
+}
+
+func (*validateOpCreateRecommender) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateRecommender) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateRecommenderInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateRecommenderInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -330,6 +370,26 @@ func (m *validateOpDeleteFilter) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteRecommender struct {
+}
+
+func (*validateOpDeleteRecommender) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRecommender) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRecommenderInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRecommenderInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteSchema struct {
 }
 
@@ -405,6 +465,26 @@ func (m *validateOpDescribeBatchInferenceJob) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeBatchInferenceJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeBatchSegmentJob struct {
+}
+
+func (*validateOpDescribeBatchSegmentJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeBatchSegmentJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeBatchSegmentJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeBatchSegmentJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -590,6 +670,26 @@ func (m *validateOpDescribeRecipe) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeRecommender struct {
+}
+
+func (*validateOpDescribeRecommender) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeRecommender) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeRecommenderInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeRecommenderInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeSchema struct {
 }
 
@@ -710,8 +810,32 @@ func (m *validateOpUpdateCampaign) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateRecommender struct {
+}
+
+func (*validateOpUpdateRecommender) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateRecommender) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateRecommenderInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateRecommenderInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpCreateBatchInferenceJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateBatchInferenceJob{}, middleware.After)
+}
+
+func addOpCreateBatchSegmentJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateBatchSegmentJob{}, middleware.After)
 }
 
 func addOpCreateCampaignValidationMiddleware(stack *middleware.Stack) error {
@@ -740,6 +864,10 @@ func addOpCreateEventTrackerValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpCreateFilterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateFilter{}, middleware.After)
+}
+
+func addOpCreateRecommenderValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateRecommender{}, middleware.After)
 }
 
 func addOpCreateSchemaValidationMiddleware(stack *middleware.Stack) error {
@@ -774,6 +902,10 @@ func addOpDeleteFilterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteFilter{}, middleware.After)
 }
 
+func addOpDeleteRecommenderValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRecommender{}, middleware.After)
+}
+
 func addOpDeleteSchemaValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteSchema{}, middleware.After)
 }
@@ -788,6 +920,10 @@ func addOpDescribeAlgorithmValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeBatchInferenceJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeBatchInferenceJob{}, middleware.After)
+}
+
+func addOpDescribeBatchSegmentJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeBatchSegmentJob{}, middleware.After)
 }
 
 func addOpDescribeCampaignValidationMiddleware(stack *middleware.Stack) error {
@@ -826,6 +962,10 @@ func addOpDescribeRecipeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeRecipe{}, middleware.After)
 }
 
+func addOpDescribeRecommenderValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeRecommender{}, middleware.After)
+}
+
 func addOpDescribeSchemaValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeSchema{}, middleware.After)
 }
@@ -848,6 +988,10 @@ func addOpStopSolutionVersionCreationValidationMiddleware(stack *middleware.Stac
 
 func addOpUpdateCampaignValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateCampaign{}, middleware.After)
+}
+
+func addOpUpdateRecommenderValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateRecommender{}, middleware.After)
 }
 
 func validateBatchInferenceJobInput(v *types.BatchInferenceJobInput) error {
@@ -874,6 +1018,44 @@ func validateBatchInferenceJobOutput(v *types.BatchInferenceJobOutput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchInferenceJobOutput"}
+	if v.S3DataDestination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3DataDestination"))
+	} else if v.S3DataDestination != nil {
+		if err := validateS3DataConfig(v.S3DataDestination); err != nil {
+			invalidParams.AddNested("S3DataDestination", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchSegmentJobInput(v *types.BatchSegmentJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchSegmentJobInput"}
+	if v.S3DataSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3DataSource"))
+	} else if v.S3DataSource != nil {
+		if err := validateS3DataConfig(v.S3DataSource); err != nil {
+			invalidParams.AddNested("S3DataSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchSegmentJobOutput(v *types.BatchSegmentJobOutput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchSegmentJobOutput"}
 	if v.S3DataDestination == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3DataDestination"))
 	} else if v.S3DataDestination != nil {
@@ -944,6 +1126,41 @@ func validateOpCreateBatchInferenceJobInput(v *CreateBatchInferenceJobInput) err
 		invalidParams.Add(smithy.NewErrParamRequired("JobOutput"))
 	} else if v.JobOutput != nil {
 		if err := validateBatchInferenceJobOutput(v.JobOutput); err != nil {
+			invalidParams.AddNested("JobOutput", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateBatchSegmentJobInput(v *CreateBatchSegmentJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateBatchSegmentJobInput"}
+	if v.JobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobName"))
+	}
+	if v.SolutionVersionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SolutionVersionArn"))
+	}
+	if v.JobInput == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobInput"))
+	} else if v.JobInput != nil {
+		if err := validateBatchSegmentJobInput(v.JobInput); err != nil {
+			invalidParams.AddNested("JobInput", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.JobOutput == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobOutput"))
+	} else if v.JobOutput != nil {
+		if err := validateBatchSegmentJobOutput(v.JobOutput); err != nil {
 			invalidParams.AddNested("JobOutput", err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1105,6 +1322,27 @@ func validateOpCreateFilterInput(v *CreateFilterInput) error {
 	}
 }
 
+func validateOpCreateRecommenderInput(v *CreateRecommenderInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRecommenderInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.DatasetGroupArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetGroupArn"))
+	}
+	if v.RecipeArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecipeArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateSchemaInput(v *CreateSchemaInput) error {
 	if v == nil {
 		return nil
@@ -1231,6 +1469,21 @@ func validateOpDeleteFilterInput(v *DeleteFilterInput) error {
 	}
 }
 
+func validateOpDeleteRecommenderInput(v *DeleteRecommenderInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRecommenderInput"}
+	if v.RecommenderArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecommenderArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteSchemaInput(v *DeleteSchemaInput) error {
 	if v == nil {
 		return nil
@@ -1283,6 +1536,21 @@ func validateOpDescribeBatchInferenceJobInput(v *DescribeBatchInferenceJobInput)
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeBatchInferenceJobInput"}
 	if v.BatchInferenceJobArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BatchInferenceJobArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeBatchSegmentJobInput(v *DescribeBatchSegmentJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeBatchSegmentJobInput"}
+	if v.BatchSegmentJobArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BatchSegmentJobArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1426,6 +1694,21 @@ func validateOpDescribeRecipeInput(v *DescribeRecipeInput) error {
 	}
 }
 
+func validateOpDescribeRecommenderInput(v *DescribeRecommenderInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeRecommenderInput"}
+	if v.RecommenderArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecommenderArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeSchemaInput(v *DescribeSchemaInput) error {
 	if v == nil {
 		return nil
@@ -1508,6 +1791,24 @@ func validateOpUpdateCampaignInput(v *UpdateCampaignInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateCampaignInput"}
 	if v.CampaignArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CampaignArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateRecommenderInput(v *UpdateRecommenderInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRecommenderInput"}
+	if v.RecommenderArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecommenderArn"))
+	}
+	if v.RecommenderConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecommenderConfig"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

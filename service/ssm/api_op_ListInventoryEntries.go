@@ -29,7 +29,7 @@ func (c *Client) ListInventoryEntries(ctx context.Context, params *ListInventory
 
 type ListInventoryEntriesInput struct {
 
-	// The instance ID for which you want inventory information.
+	// The managed node ID for which you want inventory information.
 	//
 	// This member is required.
 	InstanceId *string
@@ -55,20 +55,20 @@ type ListInventoryEntriesInput struct {
 
 type ListInventoryEntriesOutput struct {
 
-	// The time that inventory information was collected for the instance(s).
+	// The time that inventory information was collected for the managed node(s).
 	CaptureTime *string
 
-	// A list of inventory items on the instance(s).
+	// A list of inventory items on the managed node(s).
 	Entries []map[string]string
 
-	// The instance ID targeted by the request to query inventory information.
+	// The managed node ID targeted by the request to query inventory information.
 	InstanceId *string
 
 	// The token to use when requesting the next set of items. If there are no
 	// additional items to return, the string is empty.
 	NextToken *string
 
-	// The inventory schema version used by the instance(s).
+	// The inventory schema version used by the managed node(s).
 	SchemaVersion *string
 
 	// The type of inventory item returned by the request.

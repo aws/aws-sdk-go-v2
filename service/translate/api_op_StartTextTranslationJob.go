@@ -86,6 +86,10 @@ type StartTextTranslationJobInput struct {
 	// information, see customizing-translations-parallel-data.
 	ParallelDataNames []string
 
+	// Settings to configure your translation output, including the option to mask
+	// profane words and phrases.
+	Settings *types.TranslationSettings
+
 	// The name of a custom terminology resource to add to the translation job. This
 	// resource lists examples source terms and the desired translation for each term.
 	// This parameter accepts only one custom terminology resource. For a list of

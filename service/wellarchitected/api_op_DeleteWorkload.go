@@ -35,13 +35,15 @@ type DeleteWorkloadInput struct {
 	// you retry a request with the same client request token and the same parameters
 	// after it has completed successfully, the result of the original request is
 	// returned. This token is listed as required, however, if you do not specify it,
-	// the AWS SDKs automatically generate one for you. If you are not using the AWS
-	// SDK or the AWS CLI, you must provide this token or the request will fail.
+	// the Amazon Web Services SDKs automatically generate one for you. If you are not
+	// using the Amazon Web Services SDK or the CLI, you must provide this token or the
+	// request will fail.
 	//
 	// This member is required.
 	ClientRequestToken *string
 
-	// The ID assigned to the workload. This ID is unique within an AWS Region.
+	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
+	// Region.
 	//
 	// This member is required.
 	WorkloadId *string

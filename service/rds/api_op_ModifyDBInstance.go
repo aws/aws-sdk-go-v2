@@ -161,10 +161,10 @@ type ModifyDBInstanceInput struct {
 	// more information, see ModifyDBCluster.
 	CopyTagsToSnapshot *bool
 
-	// The new compute and memory capacity of the DB instance, for example,
-	// db.m4.large. Not all DB instance classes are available in all Amazon Web
-	// Services Regions, or for all database engines. For the full list of DB instance
-	// classes, and availability for your engine, see DB Instance Class
+	// The new compute and memory capacity of the DB instance, for example db.m4.large.
+	// Not all DB instance classes are available in all Amazon Web Services Regions, or
+	// for all database engines. For the full list of DB instance classes, and
+	// availability for your engine, see DB Instance Class
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html)
 	// in the Amazon RDS User Guide. If you modify the DB instance class, an outage
 	// occurs during the change. The change is applied during the next maintenance
@@ -218,7 +218,7 @@ type ModifyDBInstanceInput struct {
 
 	// A value that indicates whether the DB instance has deletion protection enabled.
 	// The database can't be deleted when deletion protection is enabled. By default,
-	// deletion protection is disabled. For more information, see  Deleting a DB
+	// deletion protection isn't enabled. For more information, see  Deleting a DB
 	// Instance
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html).
 	DeletionProtection *bool
@@ -252,7 +252,7 @@ type ModifyDBInstanceInput struct {
 
 	// A value that indicates whether to enable mapping of Amazon Web Services Identity
 	// and Access Management (IAM) accounts to database accounts. By default, mapping
-	// is disabled. This setting doesn't apply to Amazon Aurora. Mapping Amazon Web
+	// isn't enabled. This setting doesn't apply to Amazon Aurora. Mapping Amazon Web
 	// Services IAM accounts to database accounts is managed by the DB cluster. For
 	// more information about IAM database authentication, see  IAM Database
 	// Authentication for MySQL and PostgreSQL
@@ -449,18 +449,18 @@ type ModifyDBInstanceInput struct {
 	PromotionTier *int32
 
 	// A value that indicates whether the DB instance is publicly accessible. When the
-	// DB instance is publicly accessible, its DNS endpoint resolves to the private IP
-	// address from within the DB instance's VPC, and to the public IP address from
-	// outside of the DB instance's VPC. Access to the DB instance is ultimately
-	// controlled by the security group it uses, and that public access is not
-	// permitted if the security group assigned to the DB instance doesn't permit it.
-	// When the DB instance isn't publicly accessible, it is an internal DB instance
-	// with a DNS name that resolves to a private IP address. PubliclyAccessible only
-	// applies to DB instances in a VPC. The DB instance must be part of a public
-	// subnet and PubliclyAccessible must be enabled for it to be publicly accessible.
-	// Changes to the PubliclyAccessible parameter are applied immediately regardless
-	// of the value of the ApplyImmediately parameter. This setting doesn't apply to
-	// RDS Custom.
+	// DB cluster is publicly accessible, its Domain Name System (DNS) endpoint
+	// resolves to the private IP address from within the DB cluster's virtual private
+	// cloud (VPC). It resolves to the public IP address from outside of the DB
+	// cluster's VPC. Access to the DB cluster is ultimately controlled by the security
+	// group it uses. That public access isn't permitted if the security group assigned
+	// to the DB cluster doesn't permit it. When the DB instance isn't publicly
+	// accessible, it is an internal DB instance with a DNS name that resolves to a
+	// private IP address. PubliclyAccessible only applies to DB instances in a VPC.
+	// The DB instance must be part of a public subnet and PubliclyAccessible must be
+	// enabled for it to be publicly accessible. Changes to the PubliclyAccessible
+	// parameter are applied immediately regardless of the value of the
+	// ApplyImmediately parameter. This setting doesn't apply to RDS Custom.
 	PubliclyAccessible *bool
 
 	// A value that sets the open mode of a replica database to either mounted or
@@ -526,7 +526,11 @@ type ModifyDBInstanceInput struct {
 type ModifyDBInstanceOutput struct {
 
 	// Contains the details of an Amazon RDS DB instance. This data type is used as a
-	// response element in the DescribeDBInstances action.
+	// response element in the operations CreateDBInstance,
+	// CreateDBInstanceReadReplica, DeleteDBInstance, DescribeDBInstances,
+	// ModifyDBInstance, PromoteReadReplica, RebootDBInstance,
+	// RestoreDBInstanceFromDBSnapshot, RestoreDBInstanceFromS3,
+	// RestoreDBInstanceToPointInTime, StartDBInstance, and StopDBInstance.
 	DBInstance *types.DBInstance
 
 	// Metadata pertaining to the operation's result.

@@ -65,6 +65,11 @@ type UpdateDomainConfigInput struct {
 	// Options to specify configuration that will be applied to the domain endpoint.
 	DomainEndpointOptions *types.DomainEndpointOptions
 
+	// This flag, when set to True, specifies whether the UpdateDomain request should
+	// return the results of validation checks (DryRunResults) without actually
+	// applying the change.
+	DryRun *bool
+
 	// Specify the type and size of the EBS volume to use.
 	EBSOptions *types.EBSOptions
 
@@ -99,6 +104,9 @@ type UpdateDomainConfigOutput struct {
 	//
 	// This member is required.
 	DomainConfig *types.DomainConfig
+
+	// Contains result of DryRun.
+	DryRunResults *types.DryRunResults
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

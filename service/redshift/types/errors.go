@@ -1832,6 +1832,25 @@ func (e *ReservedNodeAlreadyMigratedFault) ErrorMessage() string {
 func (e *ReservedNodeAlreadyMigratedFault) ErrorCode() string             { return "ReservedNodeAlreadyMigrated" }
 func (e *ReservedNodeAlreadyMigratedFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The reserved-node exchange status wasn't found.
+type ReservedNodeExchangeNotFoundFault struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ReservedNodeExchangeNotFoundFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ReservedNodeExchangeNotFoundFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ReservedNodeExchangeNotFoundFault) ErrorCode() string             { return "ReservedNodeExchangeNotFond" }
+func (e *ReservedNodeExchangeNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The specified reserved compute node not found.
 type ReservedNodeNotFoundFault struct {
 	Message *string

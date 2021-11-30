@@ -39,8 +39,7 @@ type CreateStreamInput struct {
 	// This member is required.
 	Files []types.StreamFile
 
-	// An IAM role that allows the IoT service principal assumes to access your S3
-	// files.
+	// An IAM role that allows the IoT service principal to access your S3 files.
 	//
 	// This member is required.
 	RoleArn *string

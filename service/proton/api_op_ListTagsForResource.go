@@ -12,11 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List tags for a resource. For more information, see AWS Proton resources and
-// tagging in the AWS Proton Administrator Guide
-// (https://docs.aws.amazon.com/proton/latest/adminguide/resources.html) or AWS
-// Proton User Guide
-// (https://docs.aws.amazon.com/proton/latest/userguide/resources.html).
+// List tags for a resource. For more information, see Proton resources and tagging
+// in the Proton Administrator Guide
+// (https://docs.aws.amazon.com/proton/latest/adminguide/resources.html) or Proton
+// User Guide (https://docs.aws.amazon.com/proton/latest/userguide/resources.html).
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

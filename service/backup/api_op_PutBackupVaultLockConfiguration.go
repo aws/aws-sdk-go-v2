@@ -15,7 +15,8 @@ import (
 // attempts to update the lifecycle policy that controls the retention period of
 // any recovery point currently stored in a backup vault. If specified, Vault Lock
 // enforces a minimum and maximum retention period for future backup and copy jobs
-// that target a backup vault.
+// that target a backup vault. Backup Vault Lock has yet to receive a third-party
+// assessment for SEC 17a-4(f) and CFTC.
 func (c *Client) PutBackupVaultLockConfiguration(ctx context.Context, params *PutBackupVaultLockConfigurationInput, optFns ...func(*Options)) (*PutBackupVaultLockConfigurationOutput, error) {
 	if params == nil {
 		params = &PutBackupVaultLockConfigurationInput{}

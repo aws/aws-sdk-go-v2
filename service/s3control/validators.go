@@ -1429,6 +1429,18 @@ func validateBucketLevel(v *types.BucketLevel) error {
 	}
 }
 
+func validateCloudWatchMetrics(v *types.CloudWatchMetrics) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CloudWatchMetrics"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCreateMultiRegionAccessPointInput(v *types.CreateMultiRegionAccessPointInput) error {
 	if v == nil {
 		return nil
@@ -2075,11 +2087,14 @@ func validateStorageLensDataExport(v *types.StorageLensDataExport) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StorageLensDataExport"}
-	if v.S3BucketDestination == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("S3BucketDestination"))
-	} else if v.S3BucketDestination != nil {
+	if v.S3BucketDestination != nil {
 		if err := validateS3BucketDestination(v.S3BucketDestination); err != nil {
 			invalidParams.AddNested("S3BucketDestination", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudWatchMetrics != nil {
+		if err := validateCloudWatchMetrics(v.CloudWatchMetrics); err != nil {
+			invalidParams.AddNested("CloudWatchMetrics", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3189,11 +3204,11 @@ func validateOpPutPublicAccessBlockInput(v *PutPublicAccessBlockInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutPublicAccessBlockInput"}
-	if v.AccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
-	}
 	if v.PublicAccessBlockConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PublicAccessBlockConfiguration"))
+	}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

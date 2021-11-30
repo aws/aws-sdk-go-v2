@@ -9749,6 +9749,36 @@ func awsAwsjson11_serializeDocumentRegions(v []string, value smithyjson.Value) e
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentRegistrationMetadataItem(v *types.RegistrationMetadataItem, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Key != nil {
+		ok := object.Key("Key")
+		ok.String(*v.Key)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRegistrationMetadataList(v []types.RegistrationMetadataItem, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentRegistrationMetadataItem(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentRelatedOpsItem(v *types.RelatedOpsItem, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -10414,6 +10444,13 @@ func awsAwsjson11_serializeOpDocumentCreateActivationInput(v *CreateActivationIn
 	if v.RegistrationLimit != 0 {
 		ok := object.Key("RegistrationLimit")
 		ok.Integer(v.RegistrationLimit)
+	}
+
+	if v.RegistrationMetadata != nil {
+		ok := object.Key("RegistrationMetadata")
+		if err := awsAwsjson11_serializeDocumentRegistrationMetadataList(v.RegistrationMetadata, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Tags != nil {

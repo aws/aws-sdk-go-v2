@@ -18,7 +18,7 @@ import (
 // account that maintains authorization and permissions. For more information, see
 // Environment account connections
 // (https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html)
-// in the AWS Proton Administrator guide.
+// in the Proton Administrator guide.
 func (c *Client) CreateEnvironmentAccountConnection(ctx context.Context, params *CreateEnvironmentAccountConnectionInput, optFns ...func(*Options)) (*CreateEnvironmentAccountConnectionOutput, error) {
 	if params == nil {
 		params = &CreateEnvironmentAccountConnectionInput{}
@@ -36,39 +36,45 @@ func (c *Client) CreateEnvironmentAccountConnection(ctx context.Context, params 
 
 type CreateEnvironmentAccountConnectionInput struct {
 
-	// The name of the AWS Proton environment that's created in the associated
-	// management account.
+	// The name of the Proton environment that's created in the associated management
+	// account.
 	//
 	// This member is required.
 	EnvironmentName *string
 
 	// The ID of the management account that accepts or rejects the environment account
-	// connection. You create an manage the AWS Proton environment in this account. If
-	// the management account accepts the environment account connection, AWS Proton
-	// can use the associated IAM role to provision environment infrastructure
-	// resources in the associated environment account.
+	// connection. You create an manage the Proton environment in this account. If the
+	// management account accepts the environment account connection, Proton can use
+	// the associated IAM role to provision environment infrastructure resources in the
+	// associated environment account.
 	//
 	// This member is required.
 	ManagementAccountId *string
 
 	// The Amazon Resource Name (ARN) of the IAM service role that's created in the
-	// environment account. AWS Proton uses this role to provision infrastructure
-	// resources in the associated environment account.
+	// environment account. Proton uses this role to provision infrastructure resources
+	// in the associated environment account.
 	//
 	// This member is required.
 	RoleArn *string
 
-	// When included, if two identicial requests are made with the same client token,
-	// AWS Proton returns the environment account connection that the first request
+	// When included, if two identical requests are made with the same client token,
+	// Proton returns the environment account connection that the first request
 	// created.
 	ClientToken *string
+
+	// Tags for your environment account connection. For more information, see Proton
+	// resources and tagging
+	// (https://docs.aws.amazon.com/proton/latest/adminguide/resources.html) in the
+	// Proton Administrator Guide.
+	Tags []types.Tag
 
 	noSmithyDocumentSerde
 }
 
 type CreateEnvironmentAccountConnectionOutput struct {
 
-	// The environment account connection detail data that's returned by AWS Proton.
+	// The environment account connection detail data that's returned by Proton.
 	//
 	// This member is required.
 	EnvironmentAccountConnection *types.EnvironmentAccountConnection

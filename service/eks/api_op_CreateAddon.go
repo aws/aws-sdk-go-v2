@@ -76,8 +76,7 @@ type CreateAddonInput struct {
 	ServiceAccountRoleArn *string
 
 	// The metadata to apply to the cluster to assist with categorization and
-	// organization. Each tag consists of a key and an optional value, both of which
-	// you define.
+	// organization. Each tag consists of a key and an optional value. You define both.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

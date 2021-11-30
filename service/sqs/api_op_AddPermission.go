@@ -58,10 +58,10 @@ func (c *Client) AddPermission(ctx context.Context, params *AddPermissionInput, 
 //
 type AddPermissionInput struct {
 
-	// The account numbers of the principals
+	// The Amazon Web Services account numbers of the principals
 	// (https://docs.aws.amazon.com/general/latest/gr/glos-chap.html#P) who are to
-	// receive permission. For information about locating the account identification,
-	// see Your Amazon Web Services Identifiers
+	// receive permission. For information about locating the Amazon Web Services
+	// account identification, see Your Amazon Web Services Identifiers
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-making-api-requests.html#sqs-api-request-authentication)
 	// in the Amazon SQS Developer Guide.
 	//

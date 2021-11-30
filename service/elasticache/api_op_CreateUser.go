@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// For Redis engine version 6.x onwards: Creates a Redis user. For more
+// For Redis engine version 6.0 onwards: Creates a Redis user. For more
 // information, see Using Role Based Access Control (RBAC)
 // (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.RBAC.html).
 func (c *Client) CreateUser(ctx context.Context, params *CreateUserInput, optFns ...func(*Options)) (*CreateUserOutput, error) {
@@ -77,6 +77,9 @@ type CreateUserOutput struct {
 
 	// The current supported value is Redis.
 	Engine *string
+
+	// The minimum engine version required, which is Redis 6.0
+	MinimumEngineVersion *string
 
 	// Indicates the user status. Can be "active", "modifying" or "deleting".
 	Status *string

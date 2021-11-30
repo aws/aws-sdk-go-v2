@@ -12,15 +12,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes one or more of your instances, including information about the
-// operating system platform, the version of SSM Agent installed on the instance,
-// instance status, and so on. If you specify one or more instance IDs, it returns
-// information for those instances. If you don't specify instance IDs, it returns
-// information for all your instances. If you specify an instance ID that isn't
-// valid or an instance that you don't own, you receive an error. The IamRole field
-// for this API operation is the Identity and Access Management (IAM) role assigned
-// to on-premises instances. This call doesn't return the IAM role for EC2
-// instances.
+// Describes one or more of your managed nodes, including information about the
+// operating system platform, the version of SSM Agent installed on the managed
+// node, node status, and so on. If you specify one or more managed node IDs, it
+// returns information for those managed nodes. If you don't specify node IDs, it
+// returns information for all your managed nodes. If you specify a node ID that
+// isn't valid or a node that you don't own, you receive an error. The IamRole
+// field for this API operation is the Identity and Access Management (IAM) role
+// assigned to on-premises managed nodes. This call doesn't return the IAM role for
+// EC2 instances.
 func (c *Client) DescribeInstanceInformation(ctx context.Context, params *DescribeInstanceInformationInput, optFns ...func(*Options)) (*DescribeInstanceInformationOutput, error) {
 	if params == nil {
 		params = &DescribeInstanceInformationInput{}
@@ -38,14 +38,14 @@ func (c *Client) DescribeInstanceInformation(ctx context.Context, params *Descri
 
 type DescribeInstanceInformationInput struct {
 
-	// One or more filters. Use a filter to return a more specific list of instances.
-	// You can filter based on tags applied to EC2 instances. Use this Filters data
-	// type instead of InstanceInformationFilterList, which is deprecated.
+	// One or more filters. Use a filter to return a more specific list of managed
+	// nodes. You can filter based on tags applied to EC2 instances. Use this Filters
+	// data type instead of InstanceInformationFilterList, which is deprecated.
 	Filters []types.InstanceInformationStringFilter
 
 	// This is a legacy method. We recommend that you don't use this method. Instead,
-	// use the Filters data type. Filters enables you to return instance information by
-	// filtering based on tags applied to managed instances. Attempting to use
+	// use the Filters data type. Filters enables you to return node information by
+	// filtering based on tags applied to managed nodes. Attempting to use
 	// InstanceInformationFilterList and Filters leads to an exception error.
 	InstanceInformationFilterList []types.InstanceInformationFilter
 
@@ -62,7 +62,7 @@ type DescribeInstanceInformationInput struct {
 
 type DescribeInstanceInformationOutput struct {
 
-	// The instance information list.
+	// The managed node information list.
 	InstanceInformationList []types.InstanceInformation
 
 	// The token to use when requesting the next set of items. If there are no

@@ -43,9 +43,9 @@ type UpdateServiceInput struct {
 	// Lists the service instances to add and the existing service instances to remain.
 	// Omit the existing service instances to delete from the list. Don't include edits
 	// to the existing service instances or pipeline. For more information, see Edit a
-	// service in the AWS Proton Administrator Guide
+	// service in the Proton Administrator Guide
 	// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-svc-update.html) or the
-	// AWS Proton User Guide
+	// Proton User Guide
 	// (https://docs.aws.amazon.com/proton/latest/userguide/ug-svc-update.html).
 	//
 	// This value conforms to the media type: application/yaml
@@ -56,7 +56,7 @@ type UpdateServiceInput struct {
 
 type UpdateServiceOutput struct {
 
-	// The service detail data that's returned by AWS Proton.
+	// The service detail data that's returned by Proton.
 	//
 	// This member is required.
 	Service *types.Service

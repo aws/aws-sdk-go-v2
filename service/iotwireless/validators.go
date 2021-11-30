@@ -770,6 +770,26 @@ func (m *validateOpGetMulticastGroupSession) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetNetworkAnalyzerConfiguration struct {
+}
+
+func (*validateOpGetNetworkAnalyzerConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetNetworkAnalyzerConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetNetworkAnalyzerConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetNetworkAnalyzerConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetPartnerAccount struct {
 }
 
@@ -1350,6 +1370,26 @@ func (m *validateOpUpdateMulticastGroup) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateNetworkAnalyzerConfiguration struct {
+}
+
+func (*validateOpUpdateNetworkAnalyzerConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateNetworkAnalyzerConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateNetworkAnalyzerConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateNetworkAnalyzerConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdatePartnerAccount struct {
 }
 
@@ -1582,6 +1622,10 @@ func addOpGetMulticastGroupSessionValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpGetMulticastGroupSession{}, middleware.After)
 }
 
+func addOpGetNetworkAnalyzerConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetNetworkAnalyzerConfiguration{}, middleware.After)
+}
+
 func addOpGetPartnerAccountValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetPartnerAccount{}, middleware.After)
 }
@@ -1696,6 +1740,10 @@ func addOpUpdateLogLevelsByResourceTypesValidationMiddleware(stack *middleware.S
 
 func addOpUpdateMulticastGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateMulticastGroup{}, middleware.After)
+}
+
+func addOpUpdateNetworkAnalyzerConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateNetworkAnalyzerConfiguration{}, middleware.After)
 }
 
 func addOpUpdatePartnerAccountValidationMiddleware(stack *middleware.Stack) error {
@@ -2553,6 +2601,21 @@ func validateOpGetMulticastGroupSessionInput(v *GetMulticastGroupSessionInput) e
 	}
 }
 
+func validateOpGetNetworkAnalyzerConfigurationInput(v *GetNetworkAnalyzerConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetNetworkAnalyzerConfigurationInput"}
+	if v.ConfigurationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetPartnerAccountInput(v *GetPartnerAccountInput) error {
 	if v == nil {
 		return nil
@@ -3046,6 +3109,21 @@ func validateOpUpdateMulticastGroupInput(v *UpdateMulticastGroupInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateMulticastGroupInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateNetworkAnalyzerConfigurationInput(v *UpdateNetworkAnalyzerConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateNetworkAnalyzerConfigurationInput"}
+	if v.ConfigurationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

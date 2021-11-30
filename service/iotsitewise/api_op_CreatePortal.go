@@ -89,11 +89,10 @@ type CreatePortalInput struct {
 	// Services Regions other than the China Regions.
 	//
 	// * IAM – The portal uses Identity
-	// and Access Management to authenticate users and manage user permissions. This
-	// option is only available in the China Regions.
+	// and Access Management to authenticate users and manage user permissions.
 	//
-	// You can't change this value
-	// after you create a portal. Default: SSO
+	// You
+	// can't change this value after you create a portal. Default: SSO
 	PortalAuthMode types.AuthMode
 
 	// A description for the portal.

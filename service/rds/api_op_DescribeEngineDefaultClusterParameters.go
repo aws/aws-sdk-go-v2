@@ -12,7 +12,7 @@ import (
 )
 
 // Returns the default engine and system parameter information for the cluster
-// database engine. For more information on Amazon Aurora, see  What Is Amazon
+// database engine. For more information on Amazon Aurora, see  What is Amazon
 // Aurora?
 // (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
 // in the Amazon Aurora User Guide.

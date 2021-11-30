@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// This API is in preview release for Amazon Connect and is subject to change.
 // Creates hours of operation.
 func (c *Client) CreateHoursOfOperation(ctx context.Context, params *CreateHoursOfOperationInput, optFns ...func(*Options)) (*CreateHoursOfOperationOutput, error) {
 	if params == nil {
@@ -54,7 +55,7 @@ type CreateHoursOfOperationInput struct {
 	// The description of the hours of operation.
 	Description *string
 
-	// One or more tags.
+	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

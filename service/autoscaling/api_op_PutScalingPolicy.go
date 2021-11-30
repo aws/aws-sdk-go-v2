@@ -117,9 +117,9 @@ type PutScalingPolicyInput struct {
 	// * PredictiveScaling
 	PolicyType *string
 
-	// A predictive scaling policy. Provides support for only predefined metrics.
-	// Predictive scaling works with CPU utilization, network in/out, and the
-	// Application Load Balancer request count. For more information, see
+	// A predictive scaling policy. Provides support for predefined and custom metrics.
+	// Predefined metrics include CPU utilization, network in/out, and the Application
+	// Load Balancer request count. For more information, see
 	// PredictiveScalingConfiguration
 	// (https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_PredictiveScalingConfiguration.html)
 	// in the Amazon EC2 Auto Scaling API Reference. Required if the policy type is
@@ -138,7 +138,7 @@ type PutScalingPolicyInput struct {
 	// policy type.)
 	StepAdjustments []types.StepAdjustment
 
-	// A target tracking scaling policy. Provides support for predefined or customized
+	// A target tracking scaling policy. Provides support for predefined or custom
 	// metrics. The following predefined metrics are available:
 	//
 	// *

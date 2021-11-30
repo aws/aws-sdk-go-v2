@@ -188,6 +188,11 @@ func awsRestjson1_serializeOpHttpBindingsStartStreamTranscriptionInput(v *StartS
 		encoder.SetHeader(locationName).Boolean(v.EnablePartialResultsStabilization)
 	}
 
+	if v.IdentifyLanguage {
+		locationName := "X-Amzn-Transcribe-Identify-Language"
+		encoder.SetHeader(locationName).Boolean(v.IdentifyLanguage)
+	}
+
 	if len(v.LanguageCode) > 0 {
 		locationName := "X-Amzn-Transcribe-Language-Code"
 		encoder.SetHeader(locationName).String(string(v.LanguageCode))
@@ -196,6 +201,11 @@ func awsRestjson1_serializeOpHttpBindingsStartStreamTranscriptionInput(v *StartS
 	if v.LanguageModelName != nil && len(*v.LanguageModelName) > 0 {
 		locationName := "X-Amzn-Transcribe-Language-Model-Name"
 		encoder.SetHeader(locationName).String(*v.LanguageModelName)
+	}
+
+	if v.LanguageOptions != nil && len(*v.LanguageOptions) > 0 {
+		locationName := "X-Amzn-Transcribe-Language-Options"
+		encoder.SetHeader(locationName).String(*v.LanguageOptions)
 	}
 
 	if len(v.MediaEncoding) > 0 {
@@ -221,6 +231,11 @@ func awsRestjson1_serializeOpHttpBindingsStartStreamTranscriptionInput(v *StartS
 	if v.PiiEntityTypes != nil && len(*v.PiiEntityTypes) > 0 {
 		locationName := "X-Amzn-Transcribe-Pii-Entity-Types"
 		encoder.SetHeader(locationName).String(*v.PiiEntityTypes)
+	}
+
+	if len(v.PreferredLanguage) > 0 {
+		locationName := "X-Amzn-Transcribe-Preferred-Language"
+		encoder.SetHeader(locationName).String(string(v.PreferredLanguage))
 	}
 
 	if v.SessionId != nil && len(*v.SessionId) > 0 {

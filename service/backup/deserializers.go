@@ -3787,6 +3787,11 @@ func awsRestjson1_deserializeOpDocumentDescribeRegionSettingsOutput(v **Describe
 
 	for key, value := range shape {
 		switch key {
+		case "ResourceTypeManagementPreference":
+			if err := awsRestjson1_deserializeDocumentResourceTypeManagementPreference(&sv.ResourceTypeManagementPreference, value); err != nil {
+				return err
+			}
+
 		case "ResourceTypeOptInPreference":
 			if err := awsRestjson1_deserializeDocumentResourceTypeOptInPreference(&sv.ResourceTypeOptInPreference, value); err != nil {
 				return err
@@ -10429,6 +10434,9 @@ func awsRestjson1_deserializeOpErrorUpdateRecoveryPointLifecycle(response *smith
 	case strings.EqualFold("InvalidParameterValueException", errorCode):
 		return awsRestjson1_deserializeErrorInvalidParameterValueException(response, errorBody)
 
+	case strings.EqualFold("InvalidRequestException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidRequestException(response, errorBody)
+
 	case strings.EqualFold("MissingParameterValueException", errorCode):
 		return awsRestjson1_deserializeErrorMissingParameterValueException(response, errorBody)
 
@@ -15255,6 +15263,42 @@ func awsRestjson1_deserializeDocumentResourceTypeList(v *[]string, value interfa
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentResourceTypeManagementPreference(v *map[string]bool, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]bool
+	if *v == nil {
+		mv = map[string]bool{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal bool
+		if value != nil {
+			jtv, ok := value.(bool)
+			if !ok {
+				return fmt.Errorf("expected IsEnabled to be of type *bool, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 

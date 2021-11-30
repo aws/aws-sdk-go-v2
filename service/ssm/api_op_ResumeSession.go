@@ -10,10 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Reconnects a session to an instance after it has been disconnected. Connections
-// can be resumed for disconnected sessions, but not terminated sessions. This
-// command is primarily for use by client machines to automatically reconnect
-// during intermittent network issues. It isn't intended for any other use.
+// Reconnects a session to a managed node after it has been disconnected.
+// Connections can be resumed for disconnected sessions, but not terminated
+// sessions. This command is primarily for use by client machines to automatically
+// reconnect during intermittent network issues. It isn't intended for any other
+// use.
 func (c *Client) ResumeSession(ctx context.Context, params *ResumeSessionInput, optFns ...func(*Options)) (*ResumeSessionOutput, error) {
 	if params == nil {
 		params = &ResumeSessionInput{}
@@ -44,8 +45,8 @@ type ResumeSessionOutput struct {
 	// The ID of the session.
 	SessionId *string
 
-	// A URL back to SSM Agent on the instance that the Session Manager client uses to
-	// send commands and receive output from the instance. Format:
+	// A URL back to SSM Agent on the managed node that the Session Manager client uses
+	// to send commands and receive output from the managed node. Format:
 	// wss://ssmmessages.region.amazonaws.com/v1/data-channel/session-id?stream=(input|output).
 	// region represents the Region identifier for an Amazon Web Services Region
 	// supported by Amazon Web Services Systems Manager, such as us-east-2 for the US
@@ -57,7 +58,7 @@ type ResumeSessionOutput struct {
 	StreamUrl *string
 
 	// An encrypted token value containing session and caller information. Used to
-	// authenticate the connection to the instance.
+	// authenticate the connection to the managed node.
 	TokenValue *string
 
 	// Metadata pertaining to the operation's result.

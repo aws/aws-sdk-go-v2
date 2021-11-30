@@ -29,14 +29,13 @@ type AppliedTerminology struct {
 // The encryption key used to encrypt this object.
 type EncryptionKey struct {
 
-	// The Amazon Resource Name (ARN) of the encryption key being used to encrypt the
-	// custom terminology.
+	// The Amazon Resource Name (ARN) of the encryption key being used to encrypt this
+	// object.
 	//
 	// This member is required.
 	Id *string
 
-	// The type of encryption key used by Amazon Translate to encrypt custom
-	// terminologies.
+	// The type of encryption key used by Amazon Translate to encrypt this object.
 	//
 	// This member is required.
 	Type EncryptionKeyType
@@ -147,13 +146,12 @@ type ParallelDataDataLocation struct {
 
 	// The Amazon S3 location of the parallel data input file. The location is returned
 	// as a presigned URL to that has a 30 minute expiration. Amazon Translate doesn't
-	// scan parallel data input files for the risk of CSV injection attacks. CSV
-	// injection occurs when a .csv or .tsv file is altered so that a record contains
-	// malicious code. The record begins with a special character, such as =, +, -, or
-	// @. When the file is opened in a spreadsheet program, the program might interpret
-	// the record as a formula and run the code within it. Before you download a
-	// parallel data input file from Amazon S3, ensure that you recognize the file and
-	// trust its creator.
+	// scan all input files for the risk of CSV injection attacks. CSV injection occurs
+	// when a .csv or .tsv file is altered so that a record contains malicious code.
+	// The record begins with a special character, such as =, +, -, or @. When the file
+	// is opened in a spreadsheet program, the program might interpret the record as a
+	// formula and run the code within it. Before you download an input file from
+	// Amazon S3, ensure that you recognize the file and trust its creator.
 	//
 	// This member is required.
 	Location *string
@@ -278,7 +276,15 @@ type TerminologyData struct {
 // The location of the custom terminology data.
 type TerminologyDataLocation struct {
 
-	// The location of the custom terminology data.
+	// The Amazon S3 location of the most recent custom terminology input file that was
+	// successfully imported into Amazon Translate. The location is returned as a
+	// presigned URL that has a 30 minute expiration. Amazon Translate doesn't scan all
+	// input files for the risk of CSV injection attacks. CSV injection occurs when a
+	// .csv or .tsv file is altered so that a record contains malicious code. The
+	// record begins with a special character, such as =, +, -, or @. When the file is
+	// opened in a spreadsheet program, the program might interpret the record as a
+	// formula and run the code within it. Before you download an input file from
+	// Amazon S3, ensure that you recognize the file and trust its creator.
 	//
 	// This member is required.
 	Location *string
@@ -408,6 +414,9 @@ type TextTranslationJobProperties struct {
 	// translation job.
 	ParallelDataNames []string
 
+	// Settings that configure the translation output.
+	Settings *TranslationSettings
+
 	// The language code of the language of the source text. The language must be a
 	// language supported by Amazon Translate.
 	SourceLanguageCode *string
@@ -423,6 +432,22 @@ type TextTranslationJobProperties struct {
 	// Only one terminology can be applied per StartTextTranslationJob request at this
 	// time.
 	TerminologyNames []string
+
+	noSmithyDocumentSerde
+}
+
+// Settings that configure the translation output.
+type TranslationSettings struct {
+
+	// Enable the profanity setting if you want Amazon Translate to mask profane words
+	// and phrases in your translation output. To mask profane words and phrases,
+	// Amazon Translate replaces them with the grawlix string “?$#@$“. This 5-character
+	// sequence is used for each profane word or phrase, regardless of the length or
+	// number of words. Amazon Translate does not detect profanity in all of its
+	// supported languages. For languages that support profanity detection, see
+	// Supported Languages and Language Codes in the Amazon Translate Developer Guide
+	// (https://docs.aws.amazon.com/translate/latest/dg/what-is.html#what-is-languages).
+	Profanity Profanity
 
 	noSmithyDocumentSerde
 }

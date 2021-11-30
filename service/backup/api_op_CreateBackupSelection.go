@@ -13,26 +13,8 @@ import (
 )
 
 // Creates a JSON document that specifies a set of resources to assign to a backup
-// plan. Resources can be included by specifying patterns for a ListOfTags and
-// selected Resources. For example, consider the following patterns:
-//
-// * Resources:
-// "arn:aws:ec2:region:account-id:volume/volume-id"
-//
-// *
-// ConditionKey:"department"ConditionValue:"finance"ConditionType:"StringEquals"
-//
-// *
-// ConditionKey:"importance"ConditionValue:"critical"ConditionType:"StringEquals"
-//
-// Using
-// these patterns would back up all Amazon Elastic Block Store (Amazon EBS) volumes
-// that are tagged as "department=finance", "importance=critical", in addition to
-// an EBS volume with the specified volume ID. Resources and conditions are
-// additive in that all resources that match the pattern are selected. This
-// shouldn't be confused with a logical AND, where all conditions must match. The
-// matching patterns are logically put together using the OR operator. In other
-// words, all patterns that match are selected for backup.
+// plan. For examples, see Assigning resources programmatically
+// (https://docs.aws.amazon.com/assigning-resources.html#assigning-resources-json).
 func (c *Client) CreateBackupSelection(ctx context.Context, params *CreateBackupSelectionInput, optFns ...func(*Options)) (*CreateBackupSelectionOutput, error) {
 	if params == nil {
 		params = &CreateBackupSelectionInput{}
@@ -62,7 +44,9 @@ type CreateBackupSelectionInput struct {
 	BackupSelection *types.BackupSelection
 
 	// A unique string that identifies the request and allows failed requests to be
-	// retried without the risk of running the operation twice.
+	// retried without the risk of running the operation twice. This parameter is
+	// optional. If used, this parameter must contain 1 to 50 alphanumeric or '-_.'
+	// characters.
 	CreatorRequestId *string
 
 	noSmithyDocumentSerde

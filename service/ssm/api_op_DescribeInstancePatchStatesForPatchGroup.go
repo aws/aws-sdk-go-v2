@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the high-level patch state for the instances in the specified patch
-// group.
+// Retrieves the high-level patch state for the managed nodes in the specified
+// patch group.
 func (c *Client) DescribeInstancePatchStatesForPatchGroup(ctx context.Context, params *DescribeInstancePatchStatesForPatchGroupInput, optFns ...func(*Options)) (*DescribeInstancePatchStatesForPatchGroupOutput, error) {
 	if params == nil {
 		params = &DescribeInstancePatchStatesForPatchGroupInput{}
@@ -60,7 +60,7 @@ type DescribeInstancePatchStatesForPatchGroupInput struct {
 
 type DescribeInstancePatchStatesForPatchGroupOutput struct {
 
-	// The high-level patch state for the requested instances.
+	// The high-level patch state for the requested managed nodes.
 	InstancePatchStates []types.InstancePatchState
 
 	// The token to use when requesting the next set of items. If there are no

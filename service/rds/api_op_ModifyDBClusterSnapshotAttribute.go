@@ -26,8 +26,7 @@ import (
 // accounts have access to copy or restore a manual DB cluster snapshot, or whether
 // a manual DB cluster snapshot is public or private, use the
 // DescribeDBClusterSnapshotAttributes API action. The accounts are returned as
-// values for the restore attribute. This action only applies to Aurora DB
-// clusters.
+// values for the restore attribute.
 func (c *Client) ModifyDBClusterSnapshotAttribute(ctx context.Context, params *ModifyDBClusterSnapshotAttributeInput, optFns ...func(*Options)) (*ModifyDBClusterSnapshotAttributeOutput, error) {
 	if params == nil {
 		params = &ModifyDBClusterSnapshotAttributeInput{}

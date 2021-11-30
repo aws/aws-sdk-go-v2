@@ -50,6 +50,26 @@ func (m *validateOpAnalyzeExpense) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAnalyzeID struct {
+}
+
+func (*validateOpAnalyzeID) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAnalyzeID) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AnalyzeIDInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAnalyzeIDInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDetectDocumentText struct {
 }
 
@@ -198,6 +218,10 @@ func addOpAnalyzeExpenseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAnalyzeExpense{}, middleware.After)
 }
 
+func addOpAnalyzeIDValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAnalyzeID{}, middleware.After)
+}
+
 func addOpDetectDocumentTextValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDetectDocumentText{}, middleware.After)
 }
@@ -307,6 +331,21 @@ func validateOpAnalyzeExpenseInput(v *AnalyzeExpenseInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "AnalyzeExpenseInput"}
 	if v.Document == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Document"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAnalyzeIDInput(v *AnalyzeIDInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalyzeIDInput"}
+	if v.DocumentPages == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DocumentPages"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

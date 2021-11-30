@@ -1443,6 +1443,21 @@ type Resource struct {
 	noSmithyDocumentSerde
 }
 
+// How many days your data is kept in the hot tier. By default, your data is kept
+// indefinitely in the hot tier.
+type RetentionPeriod struct {
+
+	// The number of days that your data is kept. If you specified a value for this
+	// parameter, the unlimited parameter must be false.
+	NumberOfDays *int32
+
+	// If true, your data is kept indefinitely. If configured to true, you must not
+	// specify a value for the numberOfDays parameter.
+	Unlimited *bool
+
+	noSmithyDocumentSerde
+}
+
 // Contains a timestamp with optional nanosecond granularity.
 type TimeInNanos struct {
 
@@ -1454,6 +1469,49 @@ type TimeInNanos struct {
 
 	// The nanosecond offset from timeInSeconds.
 	OffsetInNanos *int32
+
+	noSmithyDocumentSerde
+}
+
+// Contains a summary of a time series (data stream).
+type TimeSeriesSummary struct {
+
+	// The data type of the time series. If you specify STRUCT, you must also specify
+	// dataTypeSpec to identify the type of the structure for this time series.
+	//
+	// This member is required.
+	DataType PropertyDataType
+
+	// The date that the time series was created, in Unix epoch time.
+	//
+	// This member is required.
+	TimeSeriesCreationDate *time.Time
+
+	// The ID of the time series.
+	//
+	// This member is required.
+	TimeSeriesId *string
+
+	// The date that the time series was last updated, in Unix epoch time.
+	//
+	// This member is required.
+	TimeSeriesLastUpdateDate *time.Time
+
+	// The alias that identifies the time series.
+	Alias *string
+
+	// The ID of the asset in which the asset property was created.
+	AssetId *string
+
+	// The data type of the structure for this time series. This parameter is required
+	// for time series that have the STRUCT data type. The options for this parameter
+	// depend on the type of the composite model in which you created the asset
+	// property that is associated with your time series. Use AWS/ALARM_STATE for alarm
+	// state in alarm composite models.
+	DataTypeSpec *string
+
+	// The ID of the asset property.
+	PropertyId *string
 
 	noSmithyDocumentSerde
 }
@@ -1507,13 +1565,13 @@ type TransformProcessingConfig struct {
 }
 
 // Contains a tumbling window, which is a repeating fixed-sized, non-overlapping,
-// and contiguous time window. You use this window in metrics to aggregate data
+// and contiguous time window. You can use this window in metrics to aggregate data
 // from properties and other assets. You can use m, h, d, and w when you specify an
-// interval or offset. Note that m represents minutes, and w represents weeks. You
-// can also use s to represent seconds in offset. The interval and offset
-// parameters support the ISO 8601 format (https://en.wikipedia.org/wiki/ISO_8601).
-// For example, PT5S represents five seconds, PT5M represents five minutes, and
-// PT5H represents five hours.
+// interval or offset. Note that m represents minutes, h represents hours, d
+// represents days, and w represents weeks. You can also use s to represent seconds
+// in offset. The interval and offset parameters support the ISO 8601 format
+// (https://en.wikipedia.org/wiki/ISO_8601). For example, PT5S represents 5
+// seconds, PT5M represents 5 minutes, and PT5H represents 5 hours.
 type TumblingWindow struct {
 
 	// The time interval for the tumbling window. The interval time must be between 1
@@ -1534,27 +1592,27 @@ type TumblingWindow struct {
 	// for interval, IoT SiteWise aggregates data in one of the following ways:
 	//
 	// * If
-	// you create the metric before or at 6:00 PM (UTC), you get the first aggregation
+	// you create the metric before or at 6 PM (UTC), you get the first aggregation
 	// result at 6 PM (UTC) on the day when you create the metric.
 	//
 	// * If you create the
-	// metric after 6:00 PM (UTC), you get the first aggregation result at 6 PM (UTC)
-	// the next day.
+	// metric after 6 PM (UTC), you get the first aggregation result at 6 PM (UTC) the
+	// next day.
 	//
-	// * The ISO 8601 format. For example, if you specify PT18H for
-	// offset and 1d for interval, IoT SiteWise aggregates data in one of the following
+	// * The ISO 8601 format. For example, if you specify PT18H for offset
+	// and 1d for interval, IoT SiteWise aggregates data in one of the following
 	// ways:
 	//
-	// * If you create the metric before or at 6:00 PM (UTC), you get the first
+	// * If you create the metric before or at 6 PM (UTC), you get the first
 	// aggregation result at 6 PM (UTC) on the day when you create the metric.
 	//
 	// * If
-	// you create the metric after 6:00 PM (UTC), you get the first aggregation result
-	// at 6 PM (UTC) the next day.
+	// you create the metric after 6 PM (UTC), you get the first aggregation result at
+	// 6 PM (UTC) the next day.
 	//
 	// * The 24-hour clock. For example, if you specify
-	// 00:03:00 for offset and 5m for interval, and you create the metric at 2 PM
-	// (UTC), you get the first aggregation result at 2:03 PM (UTC). You get the second
+	// 00:03:00 for offset, 5m for interval, and you create the metric at 2 PM (UTC),
+	// you get the first aggregation result at 2:03 PM (UTC). You get the second
 	// aggregation result at 2:08 PM (UTC).
 	//
 	// * The offset time zone. For example, if
@@ -1562,11 +1620,11 @@ type TumblingWindow struct {
 	// aggregates data in one of the following ways:
 	//
 	// * If you create the metric before
-	// or at 6:00 PM (PST), you get the first aggregation result at 6 PM (PST) on the
-	// day when you create the metric.
+	// or at 6 PM (PST), you get the first aggregation result at 6 PM (PST) on the day
+	// when you create the metric.
 	//
-	// * If you create the metric after 6:00 PM (PST),
-	// you get the first aggregation result at 6 PM (PST) the next day.
+	// * If you create the metric after 6 PM (PST), you
+	// get the first aggregation result at 6 PM (PST) the next day.
 	Offset *string
 
 	noSmithyDocumentSerde

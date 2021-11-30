@@ -327,6 +327,10 @@ type Cluster struct {
 	// public network.
 	PubliclyAccessible bool
 
+	// The status of the reserved-node exchange request. Statuses include in-progress
+	// and requested.
+	ReservedNodeExchangeStatus *ReservedNodeExchangeStatus
+
 	// Returns the following:
 	//
 	// * AllowCancelResize: a boolean value indicating if the
@@ -1332,6 +1336,59 @@ type ReservedNode struct {
 	noSmithyDocumentSerde
 }
 
+// Details for a reserved-node exchange. Examples include the node type for a
+// reserved node, the price for a node, the node's state, and other details.
+type ReservedNodeConfigurationOption struct {
+
+	// Describes a reserved node. You can call the DescribeReservedNodeOfferings API to
+	// obtain the available reserved node offerings.
+	SourceReservedNode *ReservedNode
+
+	// The target reserved-node count.
+	TargetReservedNodeCount int32
+
+	// Describes a reserved node offering.
+	TargetReservedNodeOffering *ReservedNodeOffering
+
+	noSmithyDocumentSerde
+}
+
+// Reserved-node status details, such as the source reserved-node identifier, the
+// target reserved-node identifier, the node type, the node count, and other
+// details.
+type ReservedNodeExchangeStatus struct {
+
+	// A date and time that indicate when the reserved-node exchange was requested.
+	RequestTime *time.Time
+
+	// The identifier of the reserved-node exchange request.
+	ReservedNodeExchangeRequestId *string
+
+	// The source reserved-node count in the cluster.
+	SourceReservedNodeCount int32
+
+	// The identifier of the source reserved node.
+	SourceReservedNodeId *string
+
+	// The source reserved-node type, for example ds2.xlarge.
+	SourceReservedNodeType *string
+
+	// The status of the reserved-node exchange request. Statuses include in-progress
+	// and requested.
+	Status ReservedNodeExchangeStatusType
+
+	// The count of target reserved nodes in the cluster.
+	TargetReservedNodeCount int32
+
+	// The identifier of the target reserved node offering.
+	TargetReservedNodeOfferingId *string
+
+	// The node type of the target reserved node, for example ra3.4xlarge.
+	TargetReservedNodeType *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes a reserved node offering.
 type ReservedNodeOffering struct {
 
@@ -1394,6 +1451,12 @@ type ResizeClusterMessage struct {
 	// The new number of nodes for the cluster. If not specified, the cluster's current
 	// number of nodes is used.
 	NumberOfNodes *int32
+
+	// The identifier of the reserved node.
+	ReservedNodeId *string
+
+	// The identifier of the target reserved node offering.
+	TargetReservedNodeOfferingId *string
 
 	noSmithyDocumentSerde
 }

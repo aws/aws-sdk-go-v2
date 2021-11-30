@@ -35,14 +35,14 @@ type CreateInvitationsInput struct {
 	// This member is required.
 	AccountIds []string
 
-	// Specifies whether to send an email notification to the root user of each account
-	// that the invitation will be sent to. This notification is in addition to an
-	// alert that the root user receives in Personal Health Dashboard. To send an email
-	// notification to the root user of each account, set this value to true.
+	// Specifies whether to send the invitation as an email message. If this value is
+	// false, Amazon Macie sends the invitation (as an email message) to the email
+	// address that you specified for the recipient's account when you associated the
+	// account with your account. The default value is false.
 	DisableEmailNotification bool
 
-	// A custom message to include in the invitation. Amazon Macie adds this message to
-	// the standard content that it sends for an invitation.
+	// Custom text to include in the email message that contains the invitation. The
+	// text can contain as many as 80 alphanumeric characters.
 	Message *string
 
 	noSmithyDocumentSerde

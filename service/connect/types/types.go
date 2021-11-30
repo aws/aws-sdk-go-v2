@@ -40,7 +40,7 @@ type AgentStatus struct {
 	// The state of the agent status.
 	State AgentStatusState
 
-	// One or more tags.
+	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 
 	// The type of agent status.
@@ -210,6 +210,9 @@ type ContactFlow struct {
 	// The name of the contact flow.
 	Name *string
 
+	// The type of contact flow.
+	State ContactFlowState
+
 	// One or more tags.
 	Tags map[string]string
 
@@ -222,6 +225,54 @@ type ContactFlow struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about a contact flow module.
+type ContactFlowModule struct {
+
+	// The Amazon Resource Name (ARN).
+	Arn *string
+
+	// The content of the contact flow module.
+	Content *string
+
+	// The description of the contact flow module.
+	Description *string
+
+	// The identifier of the contact flow module.
+	Id *string
+
+	// The name of the contact flow module.
+	Name *string
+
+	// The type of contact flow module.
+	State ContactFlowModuleState
+
+	// The status of the contact flow module.
+	Status ContactFlowModuleStatus
+
+	// The tags used to organize, track, or control access for this resource.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a contact flow.
+type ContactFlowModuleSummary struct {
+
+	// The Amazon Resource Name (ARN) of the contact flow module.
+	Arn *string
+
+	// The identifier of the contact flow module.
+	Id *string
+
+	// The name of the contact flow module.
+	Name *string
+
+	// The type of contact flow module.
+	State ContactFlowModuleState
+
+	noSmithyDocumentSerde
+}
+
 // Contains summary information about a contact flow. You can also create and
 // update contact flows using the Amazon Connect Flow language
 // (https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html).
@@ -229,6 +280,9 @@ type ContactFlowSummary struct {
 
 	// The Amazon Resource Name (ARN) of the contact flow.
 	Arn *string
+
+	// The type of contact flow.
+	ContactFlowState ContactFlowState
 
 	// The type of contact flow.
 	ContactFlowType ContactFlowType
@@ -530,7 +584,7 @@ type HoursOfOperation struct {
 	// The name for the hours of operation.
 	Name *string
 
-	// One or more tags.
+	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 
 	// The time zone for the hours of operation.
@@ -936,7 +990,7 @@ type Queue struct {
 	// The status of the queue.
 	Status QueueStatus
 
-	// One or more tags.
+	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -1019,7 +1073,7 @@ type QuickConnect struct {
 	// The identifier for the quick connect.
 	QuickConnectId *string
 
-	// One or more tags.
+	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -1106,7 +1160,8 @@ type ReferenceSummaryMemberAttachment struct {
 
 func (*ReferenceSummaryMemberAttachment) isReferenceSummary() {}
 
-// Information about Url reference if the referenceType is URL. Otherwise, null.
+// Information about the URL reference if the referenceType is URL. Otherwise,
+// null.
 type ReferenceSummaryMemberUrl struct {
 	Value UrlReference
 
@@ -1301,7 +1356,7 @@ type SecurityProfile struct {
 	// The name for the security profile.
 	SecurityProfileName *string
 
-	// One or more tags.
+	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

@@ -6,13 +6,14 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an empty dataset group. A dataset group contains related datasets that
-// supply data for training a model. A dataset group can contain at most three
-// datasets, one for each type of dataset:
+// Creates an empty dataset group. A dataset group is a container for Amazon
+// Personalize resources. A dataset group can contain at most three datasets, one
+// for each type of dataset:
 //
 // * Interactions
 //
@@ -20,38 +21,42 @@ import (
 //
 // * Users
 //
-// To
-// train a model (create a solution), a dataset group that contains an Interactions
-// dataset is required. Call CreateDataset to add a dataset to the group. A dataset
-// group can be in one of the following states:
+// A dataset group can
+// be a Domain dataset group, where you specify a domain and use pre-configured
+// resources like recommenders, or a Custom dataset group, where you use custom
+// resources, such as a solution with a solution version, that you deploy with a
+// campaign. If you start with a Domain dataset group, you can still add custom
+// resources such as solutions and solution versions trained with recipes for
+// custom use cases and deployed with campaigns. A dataset group can be in one of
+// the following states:
 //
-// * CREATE PENDING > CREATE
-// IN_PROGRESS > ACTIVE -or- CREATE FAILED
+// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or-
+// CREATE FAILED
 //
 // * DELETE PENDING
 //
-// To get the status of
-// the dataset group, call DescribeDatasetGroup. If the status shows as CREATE
-// FAILED, the response includes a failureReason key, which describes why the
-// creation failed. You must wait until the status of the dataset group is ACTIVE
-// before adding a dataset to the group. You can specify an Key Management Service
-// (KMS) key to encrypt the datasets in the group. If you specify a KMS key, you
-// must also include an Identity and Access Management (IAM) role that has
-// permission to access the key. APIs that require a dataset group ARN in the
-// request
+// To get the status of the dataset group, call
+// DescribeDatasetGroup. If the status shows as CREATE FAILED, the response
+// includes a failureReason key, which describes why the creation failed. You must
+// wait until the status of the dataset group is ACTIVE before adding a dataset to
+// the group. You can specify an Key Management Service (KMS) key to encrypt the
+// datasets in the group. If you specify a KMS key, you must also include an
+// Identity and Access Management (IAM) role that has permission to access the key.
+// APIs that require a dataset group ARN in the request
 //
 // * CreateDataset
 //
-// * CreateEventTracker
+// *
+// CreateEventTracker
 //
 // * CreateSolution
 //
-// Related
-// APIs
+// Related APIs
 //
 // * ListDatasetGroups
 //
-// * DescribeDatasetGroup
+// *
+// DescribeDatasetGroup
 //
 // * DeleteDatasetGroup
 func (c *Client) CreateDatasetGroup(ctx context.Context, params *CreateDatasetGroupInput, optFns ...func(*Options)) (*CreateDatasetGroupOutput, error) {
@@ -76,6 +81,13 @@ type CreateDatasetGroupInput struct {
 	// This member is required.
 	Name *string
 
+	// The domain of the dataset group. Specify a domain to create a Domain dataset
+	// group. The domain you specify determines the default schemas for datasets and
+	// the use cases available for recommenders. If you don't specify a domain, you
+	// create a Custom dataset group with solution versions that you deploy with a
+	// campaign.
+	Domain types.Domain
+
 	// The Amazon Resource Name (ARN) of a Key Management Service (KMS) key used to
 	// encrypt the datasets.
 	KmsKeyArn *string
@@ -92,6 +104,9 @@ type CreateDatasetGroupOutput struct {
 
 	// The Amazon Resource Name (ARN) of the new dataset group.
 	DatasetGroupArn *string
+
+	// The domain for the new Domain dataset group.
+	Domain types.Domain
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Bulk update custom inventory items on one more instance. The request adds an
-// inventory item, if it doesn't already exist, or updates an inventory item, if it
-// does exist.
+// Bulk update custom inventory items on one or more managed nodes. The request
+// adds an inventory item, if it doesn't already exist, or updates an inventory
+// item, if it does exist.
 func (c *Client) PutInventory(ctx context.Context, params *PutInventoryInput, optFns ...func(*Options)) (*PutInventoryOutput, error) {
 	if params == nil {
 		params = &PutInventoryInput{}
@@ -31,12 +31,12 @@ func (c *Client) PutInventory(ctx context.Context, params *PutInventoryInput, op
 
 type PutInventoryInput struct {
 
-	// An instance ID where you want to add or update inventory items.
+	// An managed node ID where you want to add or update inventory items.
 	//
 	// This member is required.
 	InstanceId *string
 
-	// The inventory items that you want to add or update on instances.
+	// The inventory items that you want to add or update on managed nodes.
 	//
 	// This member is required.
 	Items []types.InventoryItem

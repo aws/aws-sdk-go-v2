@@ -215,6 +215,28 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Required resources (such as Service Linked Roles) were created and are still
+// propagating. Retry later.
+type ResourcePropagationDelayException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ResourcePropagationDelayException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourcePropagationDelayException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourcePropagationDelayException) ErrorCode() string {
+	return "ResourcePropagationDelayException"
+}
+func (e *ResourcePropagationDelayException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // These errors are usually caused by a server-side issue.
 type ServerException struct {
 	Message *string

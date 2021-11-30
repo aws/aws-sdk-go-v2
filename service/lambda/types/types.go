@@ -157,22 +157,6 @@ type Concurrency struct {
 	noSmithyDocumentSerde
 }
 
-type Cors struct {
-	AllowCredentials *bool
-
-	AllowHeaders []string
-
-	AllowMethods []string
-
-	AllowOrigins []string
-
-	ExposeHeaders []string
-
-	MaxAge *int32
-
-	noSmithyDocumentSerde
-}
-
 // The dead-letter queue
 // (https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq) for
 // failed asynchronous invocations.
@@ -260,6 +244,12 @@ type EventSourceMappingConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of the event source.
 	EventSourceArn *string
+
+	// (Streams and Amazon SQS) An object that defines the filter criteria that
+	// determine whether Lambda should process an event. For more information, see
+	// Lambda event filtering
+	// (https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html).
+	FilterCriteria *FilterCriteria
 
 	// The ARN of the Lambda function.
 	FunctionArn *string
@@ -350,6 +340,27 @@ type FileSystemConfig struct {
 	//
 	// This member is required.
 	LocalMountPath *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure within a FilterCriteria object that defines an event filtering
+// pattern.
+type Filter struct {
+
+	// A filter pattern. For more information on the syntax of a filter pattern, see
+	// Filter rule syntax
+	// (https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html#filtering-syntax).
+	Pattern *string
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains the filters for an event source.
+type FilterCriteria struct {
+
+	// A list of filters.
+	Filters []Filter
 
 	noSmithyDocumentSerde
 }
@@ -540,28 +551,6 @@ type FunctionEventInvokeConfig struct {
 
 	// The maximum number of times to retry when the function returns an error.
 	MaximumRetryAttempts *int32
-
-	noSmithyDocumentSerde
-}
-
-type FunctionUrlConfig struct {
-
-	// This member is required.
-	AuthorizationType AuthorizationType
-
-	// This member is required.
-	CreationTime *string
-
-	// This member is required.
-	FunctionArn *string
-
-	// This member is required.
-	FunctionUrl *string
-
-	// This member is required.
-	LastModifiedTime *string
-
-	Cors *Cors
 
 	noSmithyDocumentSerde
 }
@@ -806,7 +795,18 @@ type SourceAccessConfiguration struct {
 	//
 	// * VIRTUAL_HOST - (Amazon MQ) The name of the
 	// virtual host in your RabbitMQ broker. Lambda uses this RabbitMQ host as the
-	// event source.
+	// event source. This property cannot be specified in an UpdateEventSourceMapping
+	// API call.
+	//
+	// * CLIENT_CERTIFICATE_TLS_AUTH - (Amazon MSK, Self-managed Apache
+	// Kafka) The Secrets Manager ARN of your secret key containing the certificate
+	// chain (X.509 PEM), private key (PKCS#8 PEM), and private key password (optional)
+	// used for mutual TLS authentication of your MSK/Apache Kafka brokers.
+	//
+	// *
+	// SERVER_ROOT_CA_CERTIFICATE - (Self-managed Apache Kafka) The Secrets Manager ARN
+	// of your secret key containing the root CA certificate (X.509 PEM) used for TLS
+	// encryption of your Apache Kafka brokers.
 	Type SourceAccessType
 
 	// The value for your chosen configuration in Type. For example: "URI":

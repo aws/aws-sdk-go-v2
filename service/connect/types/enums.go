@@ -76,6 +76,60 @@ func (Comparison) Values() []Comparison {
 	}
 }
 
+type ContactFlowModuleState string
+
+// Enum values for ContactFlowModuleState
+const (
+	ContactFlowModuleStateActive   ContactFlowModuleState = "ACTIVE"
+	ContactFlowModuleStateArchived ContactFlowModuleState = "ARCHIVED"
+)
+
+// Values returns all known values for ContactFlowModuleState. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ContactFlowModuleState) Values() []ContactFlowModuleState {
+	return []ContactFlowModuleState{
+		"ACTIVE",
+		"ARCHIVED",
+	}
+}
+
+type ContactFlowModuleStatus string
+
+// Enum values for ContactFlowModuleStatus
+const (
+	ContactFlowModuleStatusPublished ContactFlowModuleStatus = "PUBLISHED"
+	ContactFlowModuleStatusSaved     ContactFlowModuleStatus = "SAVED"
+)
+
+// Values returns all known values for ContactFlowModuleStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ContactFlowModuleStatus) Values() []ContactFlowModuleStatus {
+	return []ContactFlowModuleStatus{
+		"PUBLISHED",
+		"SAVED",
+	}
+}
+
+type ContactFlowState string
+
+// Enum values for ContactFlowState
+const (
+	ContactFlowStateActive   ContactFlowState = "ACTIVE"
+	ContactFlowStateArchived ContactFlowState = "ARCHIVED"
+)
+
+// Values returns all known values for ContactFlowState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ContactFlowState) Values() []ContactFlowState {
+	return []ContactFlowState{
+		"ACTIVE",
+		"ARCHIVED",
+	}
+}
+
 type ContactFlowType string
 
 // Enum values for ContactFlowType

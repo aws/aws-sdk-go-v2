@@ -124,6 +124,22 @@ func (ParallelDataStatus) Values() []ParallelDataStatus {
 	}
 }
 
+type Profanity string
+
+// Enum values for Profanity
+const (
+	ProfanityMask Profanity = "MASK"
+)
+
+// Values returns all known values for Profanity. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Profanity) Values() []Profanity {
+	return []Profanity{
+		"MASK",
+	}
+}
+
 type TerminologyDataFormat string
 
 // Enum values for TerminologyDataFormat

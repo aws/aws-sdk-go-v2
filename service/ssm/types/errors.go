@@ -27,7 +27,8 @@ func (e *AlreadyExistsException) ErrorMessage() string {
 func (e *AlreadyExistsException) ErrorCode() string             { return "AlreadyExistsException" }
 func (e *AlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You must disassociate a document from all instances before you can delete it.
+// You must disassociate a document from all managed nodes before you can delete
+// it.
 type AssociatedInstances struct {
 	Message *string
 
@@ -477,7 +478,7 @@ func (e *DuplicateDocumentVersionName) ErrorMessage() string {
 func (e *DuplicateDocumentVersionName) ErrorCode() string             { return "DuplicateDocumentVersionName" }
 func (e *DuplicateDocumentVersionName) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You can't specify an instance ID in more than one association.
+// You can't specify a managed node ID in more than one association.
 type DuplicateInstanceId struct {
 	Message *string
 
@@ -1072,7 +1073,7 @@ func (e *InvalidFilterValue) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // The following problems can cause this exception:
 //
 // * You don't have permission to
-// access the instance.
+// access the managed node.
 //
 // * Amazon Web Services Systems Manager Agent(SSM Agent)
 // isn't running. Verify that SSM Agent is running.
@@ -1080,7 +1081,7 @@ func (e *InvalidFilterValue) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // * SSM Agent isn't registered
 // with the SSM endpoint. Try reinstalling SSM Agent.
 //
-// * The instance isn't in
+// * The managed node isn't in
 // valid state. Valid states are: Running, Pending, Stopped, and Stopping. Invalid
 // states are: Shutting-down and Terminated.
 type InvalidInstanceId struct {
@@ -1446,8 +1447,8 @@ func (e *InvalidResourceId) ErrorMessage() string {
 func (e *InvalidResourceId) ErrorCode() string             { return "InvalidResourceId" }
 func (e *InvalidResourceId) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The resource type isn't valid. For example, if you are attempting to tag an
-// instance, the instance must be a registered, managed instance.
+// The resource type isn't valid. For example, if you are attempting to tag an EC2
+// instance, the instance must be a registered managed node.
 type InvalidResourceType struct {
 	Message *string
 
@@ -1588,8 +1589,8 @@ func (e *InvalidUpdate) ErrorMessage() string {
 func (e *InvalidUpdate) ErrorCode() string             { return "InvalidUpdate" }
 func (e *InvalidUpdate) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The command ID and instance ID you specified didn't match any invocations.
-// Verify the command ID and the instance ID and try again.
+// The command ID and managed node ID you specified didn't match any invocations.
+// Verify the command ID and the managed node ID and try again.
 type InvocationDoesNotExist struct {
 	Message *string
 
@@ -2365,13 +2366,13 @@ func (e *TargetInUseException) ErrorMessage() string {
 func (e *TargetInUseException) ErrorCode() string             { return "TargetInUseException" }
 func (e *TargetInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified target instance for the session isn't fully configured for use
+// The specified target managed node for the session isn't fully configured for use
 // with Session Manager. For more information, see Getting started with Session
 // Manager
 // (https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-getting-started.html)
 // in the Amazon Web Services Systems Manager User Guide. This error is also
-// returned if you attempt to start a session on an instance that is located in a
-// different account or Region
+// returned if you attempt to start a session on a managed node that is located in
+// a different account or Region
 type TargetNotConnected struct {
 	Message *string
 
@@ -2588,8 +2589,8 @@ func (e *UnsupportedParameterType) ErrorMessage() string {
 func (e *UnsupportedParameterType) ErrorCode() string             { return "UnsupportedParameterType" }
 func (e *UnsupportedParameterType) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The document doesn't support the platform type of the given instance ID(s). For
-// example, you sent an document for a Windows instance to a Linux instance.
+// The document doesn't support the platform type of the given managed node ID(s).
+// For example, you sent an document for a Windows managed node to a Linux node.
 type UnsupportedPlatformType struct {
 	Message *string
 

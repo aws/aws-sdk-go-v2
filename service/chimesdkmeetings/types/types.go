@@ -28,6 +28,16 @@ type Attendee struct {
 	noSmithyDocumentSerde
 }
 
+// An optional category of meeting features that contains audio-specific
+// configurations, such as operating parameters for Amazon Voice Focus.
+type AudioFeatures struct {
+
+	// Makes echo reduction available to clients who connect to the meeting.
+	EchoReduction MeetingFeatureStatus
+
+	noSmithyDocumentSerde
+}
+
 // The list of errors returned when errors are encountered during the
 // BatchCreateAttendee and CreateAttendee actions. This includes external user IDs,
 // error codes, and error messages.
@@ -99,13 +109,13 @@ type EngineTranscribeSettings struct {
 	// This member is required.
 	LanguageCode TranscribeLanguageCode
 
-	// Set this field to PII to identify personal health information in the
+	// Set this field to PII to identify personally identifiable information in the
 	// transcription output.
 	ContentIdentificationType TranscribeContentIdentificationType
 
 	// Set this field to PII to redact personally identifiable information in the
 	// transcription output. Content redaction is performed only upon complete
-	// transcription of the audio segments. You can’t set both ContentRedactionType and
+	// transcription of the audio segments. You can’t set ContentRedactionType and
 	// ContentIdentificationType in the same request. If you set both, your request
 	// returns a BadRequestException.
 	ContentRedactionType TranscribeContentRedactionType
@@ -193,11 +203,23 @@ type Meeting struct {
 	// eu-west-3, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2.
 	MediaRegion *string
 
+	// The features available to a meeting, such as Amazon Voice Focus.
+	MeetingFeatures *MeetingFeaturesConfiguration
+
 	// Reserved.
 	MeetingHostId *string
 
 	// The Amazon Chime SDK meeting ID.
 	MeetingId *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration settings of the features available to a meeting.
+type MeetingFeaturesConfiguration struct {
+
+	// The configuration settings for the audio features available to a meeting.
+	Audio *AudioFeatures
 
 	noSmithyDocumentSerde
 }

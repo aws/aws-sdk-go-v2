@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the sites for the specified AWS account.
+// Lists the sites for your Amazon Web Services account.
 func (c *Client) ListSites(ctx context.Context, params *ListSitesInput, optFns ...func(*Options)) (*ListSitesOutput, error) {
 	if params == nil {
 		params = &ListSitesInput{}

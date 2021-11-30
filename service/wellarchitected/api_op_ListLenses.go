@@ -31,6 +31,15 @@ func (c *Client) ListLenses(ctx context.Context, params *ListLensesInput, optFns
 // Input to list lenses.
 type ListLensesInput struct {
 
+	// The full name of the lens.
+	LensName *string
+
+	// The status of lenses to be returned.
+	LensStatus types.LensStatusType
+
+	// The type of lenses to be returned.
+	LensType types.LensType
+
 	// The maximum number of results to return for this request.
 	MaxResults int32
 

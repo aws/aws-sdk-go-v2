@@ -85,7 +85,7 @@ type UpdateServicePipelineInput struct {
 
 type UpdateServicePipelineOutput struct {
 
-	// The pipeline details returned by AWS Proton.
+	// The pipeline details returned by Proton.
 	//
 	// This member is required.
 	Pipeline *types.ServicePipeline

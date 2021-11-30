@@ -59,7 +59,10 @@ type DescribeExportTasksInput struct {
 	//
 	// * failed
 	//
-	// * starting
+	// * in_progress
+	//
+	// *
+	// starting
 	Filters []types.Filter
 
 	// An optional pagination token provided by a previous DescribeExportTasks request.

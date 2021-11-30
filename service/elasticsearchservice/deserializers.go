@@ -5973,6 +5973,11 @@ func awsRestjson1_deserializeOpDocumentUpdateElasticsearchDomainConfigOutput(v *
 				return err
 			}
 
+		case "DryRunResults":
+			if err := awsRestjson1_deserializeDocumentDryRunResults(&sv.DryRunResults, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -8268,6 +8273,55 @@ func awsRestjson1_deserializeDocumentDomainPackageDetailsList(v *[]types.DomainP
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDryRunResults(v **types.DryRunResults, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DryRunResults
+	if *v == nil {
+		sv = &types.DryRunResults{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DeploymentType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeploymentType to be of type string, got %T instead", value)
+				}
+				sv.DeploymentType = ptr.String(jtv)
+			}
+
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

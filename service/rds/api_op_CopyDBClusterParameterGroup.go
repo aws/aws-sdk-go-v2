@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Copies the specified DB cluster parameter group. This action only applies to
-// Aurora DB clusters.
+// Copies the specified DB cluster parameter group.
 func (c *Client) CopyDBClusterParameterGroup(ctx context.Context, params *CopyDBClusterParameterGroupInput, optFns ...func(*Options)) (*CopyDBClusterParameterGroupOutput, error) {
 	if params == nil {
 		params = &CopyDBClusterParameterGroupInput{}

@@ -45,7 +45,7 @@ type GetServiceInput struct {
 
 type GetServiceOutput struct {
 
-	// The service detail data that's returned by AWS Proton.
+	// The service detail data that's returned by Proton.
 	Service *types.Service
 
 	// Metadata pertaining to the operation's result.

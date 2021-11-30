@@ -63,6 +63,16 @@ type AutoScalingGroupRecommendation struct {
 	// group.
 	CurrentConfiguration *AutoScalingGroupConfiguration
 
+	// The risk of the current Auto Scaling group not meeting the performance needs of
+	// its workloads. The higher the risk, the more likely the current Auto Scaling
+	// group configuration has insufficient capacity and cannot meet workload
+	// requirements.
+	CurrentPerformanceRisk CurrentPerformanceRisk
+
+	// An object that describes the effective recommendation preferences for the Auto
+	// Scaling group.
+	EffectiveRecommendationPreferences *EffectiveRecommendationPreferences
+
 	// The finding classification of the Auto Scaling group. Findings for Auto Scaling
 	// groups include:
 	//
@@ -77,7 +87,7 @@ type AutoScalingGroupRecommendation struct {
 	// instance type.
 	Finding Finding
 
-	// The timestamp of when the Auto Scaling group recommendation was last refreshed.
+	// The timestamp of when the Auto Scaling group recommendation was last generated.
 	LastRefreshTimestamp *time.Time
 
 	// The number of days for which utilization metrics were analyzed for the Auto
@@ -127,6 +137,33 @@ type AutoScalingGroupRecommendationOption struct {
 	// The rank of the Auto Scaling group recommendation option. The top recommendation
 	// option is ranked as 1.
 	Rank int32
+
+	// An object that describes the savings opportunity for the Auto Scaling group
+	// recommendation option. Savings opportunity includes the estimated monthly
+	// savings amount and percentage.
+	SavingsOpportunity *SavingsOpportunity
+
+	noSmithyDocumentSerde
+}
+
+// Describes the performance risk ratings for a given resource type. Resources with
+// a high or medium rating are at risk of not meeting the performance needs of
+// their workloads, while resources with a low rating are performing well in their
+// workloads.
+type CurrentPerformanceRiskRatings struct {
+
+	// A count of the applicable resource types with a high performance risk rating.
+	High int64
+
+	// A count of the applicable resource types with a low performance risk rating.
+	Low int64
+
+	// A count of the applicable resource types with a medium performance risk rating.
+	Medium int64
+
+	// A count of the applicable resource types with a very low performance risk
+	// rating.
+	VeryLow int64
 
 	noSmithyDocumentSerde
 }
@@ -193,6 +230,35 @@ type EBSUtilizationMetric struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the effective recommendation preferences for a resource.
+type EffectiveRecommendationPreferences struct {
+
+	// Describes the CPU vendor and architecture for an instance or Auto Scaling group
+	// recommendations. For example, when you specify AWS_ARM64 with:
+	//
+	// * A
+	// GetEC2InstanceRecommendations or GetAutoScalingGroupRecommendations request,
+	// Compute Optimizer returns recommendations that consist of Graviton2 instance
+	// types only.
+	//
+	// * A GetEC2RecommendationProjectedMetrics request, Compute Optimizer
+	// returns projected utilization metrics for Graviton2 instance type
+	// recommendations only.
+	//
+	// * A ExportEC2InstanceRecommendations or
+	// ExportAutoScalingGroupRecommendations request, Compute Optimizer exports
+	// recommendations that consist of Graviton2 instance types only.
+	CpuVendorArchitectures []CpuVendorArchitecture
+
+	// Describes the activation status of the enhanced infrastructure metrics
+	// preference. A status of Active confirms that the preference is applied in the
+	// latest recommendation refresh, and a status of Inactive confirms that it's not
+	// yet applied.
+	EnhancedInfrastructureMetrics EnhancedInfrastructureMetrics
+
+	noSmithyDocumentSerde
+}
+
 // Describes a filter that returns a more specific list of account enrollment
 // statuses. Use this filter with the GetEnrollmentStatusesForOrganization action.
 type EnrollmentFilter struct {
@@ -204,6 +270,22 @@ type EnrollmentFilter struct {
 	// The value of the filter. The valid values are Active, Inactive, Pending, and
 	// Failed.
 	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the estimated monthly savings amount possible for a given resource
+// based on On-Demand instance pricing For more information, see Estimated monthly
+// savings and savings opportunities
+// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/view-ec2-recommendations.html#ec2-savings-calculation)
+// in the Compute Optimizer User Guide.
+type EstimatedMonthlySavings struct {
+
+	// The currency of the estimated monthly savings.
+	Currency Currency
+
+	// The value of the estimated monthly savings.
+	Value float64
 
 	noSmithyDocumentSerde
 }
@@ -357,6 +439,15 @@ type InstanceRecommendation struct {
 	// The instance type of the current instance.
 	CurrentInstanceType *string
 
+	// The risk of the current instance not meeting the performance needs of its
+	// workloads. The higher the risk, the more likely the current Lambda function
+	// requires more memory.
+	CurrentPerformanceRisk CurrentPerformanceRisk
+
+	// An object that describes the effective recommendation preferences for the
+	// instance.
+	EffectiveRecommendationPreferences *EffectiveRecommendationPreferences
+
 	// The finding classification of the instance. Findings for instances include:
 	//
 	// *
@@ -505,7 +596,7 @@ type InstanceRecommendation struct {
 	// The name of the current instance.
 	InstanceName *string
 
-	// The timestamp of when the instance recommendation was last refreshed.
+	// The timestamp of when the instance recommendation was last generated.
 	LastRefreshTimestamp *time.Time
 
 	// The number of days for which utilization metrics were analyzed for the instance.
@@ -649,6 +740,11 @@ type InstanceRecommendationOption struct {
 	// ranked as 1.
 	Rank int32
 
+	// An object that describes the savings opportunity for the instance recommendation
+	// option. Savings opportunity includes the estimated monthly savings amount and
+	// percentage.
+	SavingsOpportunity *SavingsOpportunity
+
 	noSmithyDocumentSerde
 }
 
@@ -710,6 +806,11 @@ type LambdaFunctionMemoryRecommendationOption struct {
 	// ranked as 1.
 	Rank int32
 
+	// An object that describes the savings opportunity for the Lambda function
+	// recommendation option. Savings opportunity includes the estimated monthly
+	// savings amount and percentage.
+	SavingsOpportunity *SavingsOpportunity
+
 	noSmithyDocumentSerde
 }
 
@@ -721,6 +822,11 @@ type LambdaFunctionRecommendation struct {
 
 	// The amount of memory, in MB, that's allocated to the current function.
 	CurrentMemorySize int32
+
+	// The risk of the current Lambda function not meeting the performance needs of its
+	// workloads. The higher the risk, the more likely the current Lambda function
+	// configuration is underperforming in its workload.
+	CurrentPerformanceRisk CurrentPerformanceRisk
 
 	// The finding classification of the function. Findings for functions include:
 	//
@@ -782,7 +888,7 @@ type LambdaFunctionRecommendation struct {
 	// The version number of the current function.
 	FunctionVersion *string
 
-	// The timestamp of when the function recommendation was last refreshed.
+	// The timestamp of when the function recommendation was last generated.
 	LastRefreshTimestamp *time.Time
 
 	// The number of days for which utilization metrics were analyzed for the function.
@@ -944,7 +1050,9 @@ type RecommendationExportJob struct {
 	noSmithyDocumentSerde
 }
 
-// Describes preferences for recommendations.
+// Describes the recommendation preferences to return in the response of a
+// GetAutoScalingGroupRecommendations, GetEC2InstanceRecommendations, and
+// GetEC2RecommendationProjectedMetrics request.
 type RecommendationPreferences struct {
 
 	// Specifies the CPU vendor and architecture for Amazon EC2 instance and Auto
@@ -963,6 +1071,32 @@ type RecommendationPreferences struct {
 	// ExportAutoScalingGroupRecommendations request, Compute Optimizer exports
 	// recommendations that consist of Graviton2 instance types only.
 	CpuVendorArchitectures []CpuVendorArchitecture
+
+	noSmithyDocumentSerde
+}
+
+// Describes a recommendation preference.
+type RecommendationPreferencesDetail struct {
+
+	// The status of the enhanced infrastructure metrics recommendation preference. A
+	// status of Active confirms that the preference is applied in the latest
+	// recommendation refresh, and a status of Inactive confirms that it's not yet
+	// applied.
+	EnhancedInfrastructureMetrics EnhancedInfrastructureMetrics
+
+	// The target resource type of the recommendation preference to create. The
+	// Ec2Instance option encompasses standalone instances and instances that are part
+	// of Auto Scaling groups. The AutoScalingGroup option encompasses only instances
+	// that are part of an Auto Scaling group.
+	ResourceType ResourceType
+
+	// An object that describes the scope of the recommendation preference.
+	// Recommendation preferences can be created at the organization level (for
+	// management accounts of an organization only), account level, and resource level.
+	// For more information, see Activating enhanced infrastructure metrics
+	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
+	// in the Compute Optimizer User Guide.
+	Scope *Scope
 
 	noSmithyDocumentSerde
 }
@@ -986,8 +1120,16 @@ type RecommendationSummary struct {
 	// The Amazon Web Services account ID of the recommendation summary.
 	AccountId *string
 
-	// The resource type of the recommendation.
+	// An object that describes the performance risk ratings for a given resource type.
+	CurrentPerformanceRiskRatings *CurrentPerformanceRiskRatings
+
+	// The resource type that the recommendation summary applies to.
 	RecommendationResourceType RecommendationSourceType
+
+	// An object that describes the savings opportunity for a given resource type.
+	// Savings opportunity includes the estimated monthly savings amount and
+	// percentage.
+	SavingsOpportunity *SavingsOpportunity
 
 	// An array of objects that describe a recommendation summary.
 	Summaries []Summary
@@ -1057,6 +1199,79 @@ type S3DestinationConfig struct {
 
 	// The Amazon S3 bucket prefix for an export job.
 	KeyPrefix *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the savings opportunity for recommendations of a given resource type
+// or for the recommendation option of an individual resource. Savings opportunity
+// represents the estimated monthly savings you can achieve by implementing a given
+// Compute Optimizer recommendation. Savings opportunity data requires that you opt
+// in to Cost Explorer, as well as activate Receive Amazon EC2 resource
+// recommendations in the Cost Explorer preferences page. That creates a connection
+// between Cost Explorer and Compute Optimizer. With this connection, Cost Explorer
+// generates savings estimates considering the price of existing resources, the
+// price of recommended resources, and historical usage data. Estimated monthly
+// savings reflects the projected dollar savings associated with each of the
+// recommendations generated. For more information, see Enabling Cost Explorer
+// (https://docs.aws.amazon.com/cost-management/latest/userguide/ce-enable.html)
+// and Optimizing your cost with Rightsizing Recommendations
+// (https://docs.aws.amazon.com/cost-management/latest/userguide/ce-rightsizing.html)
+// in the Cost Management User Guide.
+type SavingsOpportunity struct {
+
+	// An object that describes the estimated monthly savings amount possible based on
+	// On-Demand instance pricing.
+	EstimatedMonthlySavings *EstimatedMonthlySavings
+
+	// The estimated monthly savings possible as a percentage of monthly cost.
+	SavingsOpportunityPercentage float64
+
+	noSmithyDocumentSerde
+}
+
+// Describes the scope of a recommendation preference. Recommendation preferences
+// can be created at the organization level (for management accounts of an
+// organization only), account level, and resource level. For more information, see
+// Activating enhanced infrastructure metrics
+// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
+// in the Compute Optimizer User Guide. You cannot create recommendation
+// preferences for Auto Scaling groups at the organization and account levels. You
+// can create recommendation preferences for Auto Scaling groups only at the
+// resource level by specifying a scope name of ResourceArn and a scope value of
+// the Auto Scaling group Amazon Resource Name (ARN). This will configure the
+// preference for all instances that are part of the specified the Auto Scaling
+// group.
+type Scope struct {
+
+	// The name of the scope. The following scopes are possible:
+	//
+	// * Organization -
+	// Specifies that the recommendation preference applies at the organization level,
+	// for all member accounts of an organization.
+	//
+	// * AccountId - Specifies that the
+	// recommendation preference applies at the account level, for all resources of a
+	// given resource type in an account.
+	//
+	// * ResourceArn - Specifies that the
+	// recommendation preference applies at the individual resource level.
+	Name ScopeName
+
+	// The value of the scope. If you specified the name of the scope as:
+	//
+	// *
+	// Organization - The value must be ALL_ACCOUNTS.
+	//
+	// * AccountId - The value must be
+	// a 12-digit Amazon Web Services account ID.
+	//
+	// * ResourceArn - The value must be
+	// the Amazon Resource Name (ARN) of an EC2 instance or an Auto Scaling
+	// group.
+	//
+	// Only EC2 instance and Auto Scaling group ARNs are currently supported.
+	Value *string
 
 	noSmithyDocumentSerde
 }
@@ -1214,6 +1429,11 @@ type VolumeRecommendation struct {
 	// An array of objects that describe the current configuration of the volume.
 	CurrentConfiguration *VolumeConfiguration
 
+	// The risk of the current EBS volume not meeting the performance needs of its
+	// workloads. The higher the risk, the more likely the current EBS volume doesn't
+	// have sufficient capacity.
+	CurrentPerformanceRisk CurrentPerformanceRisk
+
 	// The finding classification of the volume. Findings for volumes include:
 	//
 	// *
@@ -1227,7 +1447,7 @@ type VolumeRecommendation struct {
 	// recommend a new generation volume type.
 	Finding EBSFinding
 
-	// The timestamp of when the volume recommendation was last refreshed.
+	// The timestamp of when the volume recommendation was last generated.
 	LastRefreshTimestamp *time.Time
 
 	// The number of days for which utilization metrics were analyzed for the volume.
@@ -1264,6 +1484,11 @@ type VolumeRecommendationOption struct {
 	// The rank of the volume recommendation option. The top recommendation option is
 	// ranked as 1.
 	Rank int32
+
+	// An object that describes the savings opportunity for the EBS volume
+	// recommendation option. Savings opportunity includes the estimated monthly
+	// savings amount and percentage.
+	SavingsOpportunity *SavingsOpportunity
 
 	noSmithyDocumentSerde
 }

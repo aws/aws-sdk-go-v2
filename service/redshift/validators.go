@@ -1130,6 +1130,26 @@ func (m *validateOpGetClusterCredentials) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetReservedNodeExchangeConfigurationOptions struct {
+}
+
+func (*validateOpGetReservedNodeExchangeConfigurationOptions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetReservedNodeExchangeConfigurationOptions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetReservedNodeExchangeConfigurationOptionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetReservedNodeExchangeConfigurationOptionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetReservedNodeExchangeOfferings struct {
 }
 
@@ -1952,6 +1972,10 @@ func addOpEnableSnapshotCopyValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpGetClusterCredentialsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetClusterCredentials{}, middleware.After)
+}
+
+func addOpGetReservedNodeExchangeConfigurationOptionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetReservedNodeExchangeConfigurationOptions{}, middleware.After)
 }
 
 func addOpGetReservedNodeExchangeOfferingsValidationMiddleware(stack *middleware.Stack) error {
@@ -3206,6 +3230,21 @@ func validateOpGetClusterCredentialsInput(v *GetClusterCredentialsInput) error {
 	}
 	if v.ClusterIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetReservedNodeExchangeConfigurationOptionsInput(v *GetReservedNodeExchangeConfigurationOptionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetReservedNodeExchangeConfigurationOptionsInput"}
+	if len(v.ActionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

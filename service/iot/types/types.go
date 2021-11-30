@@ -1307,6 +1307,34 @@ type DetectMitigationActionsTaskTarget struct {
 	noSmithyDocumentSerde
 }
 
+// A map of key-value pairs containing the patterns that need to be replaced in a
+// managed template job document schema. You can use the description of each key as
+// a guidance to specify the inputs during runtime when creating a job.
+type DocumentParameter struct {
+
+	// Description of the map field containing the patterns that need to be replaced in
+	// a managed template job document schema.
+	Description *string
+
+	// An example illustrating a pattern that need to be replaced in a managed template
+	// job document schema.
+	Example *string
+
+	// Key of the map field containing the patterns that need to be replaced in a
+	// managed template job document schema.
+	Key *string
+
+	// Specifies whether a pattern that needs to be replaced in a managed template job
+	// document schema is optional or required.
+	Optional bool
+
+	// A regular expression of the patterns that need to be replaced in a managed
+	// template job document schema.
+	Regex *string
+
+	noSmithyDocumentSerde
+}
+
 // The summary of a domain configuration. A domain configuration specifies custom
 // IoT-specific information about a domain. A domain configuration can be
 // associated with an Amazon Web Services-managed domain (for example,
@@ -1799,6 +1827,11 @@ type Job struct {
 	// A short text description of the job.
 	Description *string
 
+	// A key-value map that pairs the patterns that need to be replaced in a managed
+	// template job document schema. You can use the description of each key as a
+	// guidance to specify the inputs during runtime when creating a job.
+	DocumentParameters map[string]string
+
 	// Will be true if the job was canceled with the optional force parameter set to
 	// true.
 	ForceCanceled *bool
@@ -2184,6 +2217,27 @@ type MachineLearningDetectionConfig struct {
 	//
 	// This member is required.
 	ConfidenceLevel ConfidenceLevel
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains information about the managed template.
+type ManagedJobTemplateSummary struct {
+
+	// The description for a managed template.
+	Description *string
+
+	// A list of environments that are supported with the managed job template.
+	Environments []string
+
+	// The Amazon Resource Name (ARN) for a managed template.
+	TemplateArn *string
+
+	// The unique Name for a managed template.
+	TemplateName *string
+
+	// The version for a managed template.
+	TemplateVersion *string
 
 	noSmithyDocumentSerde
 }
@@ -3078,14 +3132,16 @@ type StatisticalThreshold struct {
 	noSmithyDocumentSerde
 }
 
-// A map of key-value pairs for all supported statistics. Currently, only count is
-// supported.
+// A map of key-value pairs for all supported statistics. For issues with missing
+// or unexpected values for this API, consult  Fleet indexing troubleshooting guide
+// (https://docs.aws.amazon.com/iot/latest/developerguide/fleet-indexing-troubleshooting.html).
 type Statistics struct {
 
 	// The average of the aggregated field values.
 	Average float64
 
-	// The count of things that match the query.
+	// The count of things that match the query string criteria and contain a valid
+	// aggregation field value.
 	Count int32
 
 	// The maximum aggregated field value.

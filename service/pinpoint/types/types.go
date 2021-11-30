@@ -5443,6 +5443,57 @@ type SegmentsResponse struct {
 	noSmithyDocumentSerde
 }
 
+// Send OTP message request parameters.
+type SendOTPMessageRequestParameters struct {
+
+	// The brand name that will be substituted into the OTP message body. Should be
+	// owned by calling AWS account.
+	//
+	// This member is required.
+	BrandName *string
+
+	// Channel type for the OTP message. Supported values: [SMS].
+	//
+	// This member is required.
+	Channel *string
+
+	// The destination identity to send OTP to.
+	//
+	// This member is required.
+	DestinationIdentity *string
+
+	// The origination identity used to send OTP from.
+	//
+	// This member is required.
+	OriginationIdentity *string
+
+	// Developer-specified reference identifier. Required to match during OTP
+	// verification.
+	//
+	// This member is required.
+	ReferenceId *string
+
+	// The attempts allowed to validate an OTP.
+	AllowedAttempts int32
+
+	// The number of characters in the generated OTP.
+	CodeLength int32
+
+	// A unique Entity ID received from DLT after entity registration is approved.
+	EntityId *string
+
+	// The language to be used for the outgoing message body containing the OTP.
+	Language *string
+
+	// A unique Template ID received from DLT after entity registration is approved.
+	TemplateId *string
+
+	// The time in minutes before the OTP is no longer valid.
+	ValidityPeriod int32
+
+	noSmithyDocumentSerde
+}
+
 // Specifies the configuration and other settings for a message to send to all the
 // endpoints that are associated with a list of users.
 type SendUsersMessageRequest struct {
@@ -6218,6 +6269,36 @@ type UpdateRecommenderConfigurationShape struct {
 	// variables, you have to use an AWS Lambda function (RecommendationTransformerUri)
 	// to perform additional processing of recommendation data.
 	RecommendationsPerMessage int32
+
+	noSmithyDocumentSerde
+}
+
+// Verify OTP Message Response.
+type VerificationResponse struct {
+
+	// Specifies whether the OTP is valid or not.
+	Valid bool
+
+	noSmithyDocumentSerde
+}
+
+// Verify OTP message request.
+type VerifyOTPMessageRequestParameters struct {
+
+	// The destination identity to send OTP to.
+	//
+	// This member is required.
+	DestinationIdentity *string
+
+	// The OTP the end user provided for verification.
+	//
+	// This member is required.
+	Otp *string
+
+	// The reference identifier provided when the OTP was previously sent.
+	//
+	// This member is required.
+	ReferenceId *string
 
 	noSmithyDocumentSerde
 }

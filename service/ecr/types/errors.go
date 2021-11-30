@@ -382,6 +382,54 @@ func (e *LimitExceededException) ErrorMessage() string {
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// A pull through cache rule with these settings already exists for the private
+// registry.
+type PullThroughCacheRuleAlreadyExistsException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *PullThroughCacheRuleAlreadyExistsException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *PullThroughCacheRuleAlreadyExistsException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *PullThroughCacheRuleAlreadyExistsException) ErrorCode() string {
+	return "PullThroughCacheRuleAlreadyExistsException"
+}
+func (e *PullThroughCacheRuleAlreadyExistsException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// The pull through cache rule was not found. Specify a valid pull through cache
+// rule and try again.
+type PullThroughCacheRuleNotFoundException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *PullThroughCacheRuleNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *PullThroughCacheRuleNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *PullThroughCacheRuleNotFoundException) ErrorCode() string {
+	return "PullThroughCacheRuleNotFoundException"
+}
+func (e *PullThroughCacheRuleNotFoundException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // The manifest list is referencing an image that does not exist.
 type ReferencedImagesNotFoundException struct {
 	Message *string
@@ -585,6 +633,29 @@ func (e *UnsupportedImageTypeException) ErrorMessage() string {
 }
 func (e *UnsupportedImageTypeException) ErrorCode() string             { return "UnsupportedImageTypeException" }
 func (e *UnsupportedImageTypeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The specified upstream registry isn't supported.
+type UnsupportedUpstreamRegistryException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *UnsupportedUpstreamRegistryException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *UnsupportedUpstreamRegistryException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *UnsupportedUpstreamRegistryException) ErrorCode() string {
+	return "UnsupportedUpstreamRegistryException"
+}
+func (e *UnsupportedUpstreamRegistryException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
 
 // The upload could not be found, or the specified upload ID is not valid for this
 // repository.

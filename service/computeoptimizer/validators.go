@@ -9,6 +9,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpDeleteRecommendationPreferences struct {
+}
+
+func (*validateOpDeleteRecommendationPreferences) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRecommendationPreferences) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRecommendationPreferencesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRecommendationPreferencesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpExportAutoScalingGroupRecommendations struct {
 }
 
@@ -109,6 +129,66 @@ func (m *validateOpGetEC2RecommendationProjectedMetrics) HandleInitialize(ctx co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetEffectiveRecommendationPreferences struct {
+}
+
+func (*validateOpGetEffectiveRecommendationPreferences) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetEffectiveRecommendationPreferences) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetEffectiveRecommendationPreferencesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetEffectiveRecommendationPreferencesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetRecommendationPreferences struct {
+}
+
+func (*validateOpGetRecommendationPreferences) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRecommendationPreferences) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRecommendationPreferencesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRecommendationPreferencesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutRecommendationPreferences struct {
+}
+
+func (*validateOpPutRecommendationPreferences) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutRecommendationPreferences) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutRecommendationPreferencesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutRecommendationPreferencesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateEnrollmentStatus struct {
 }
 
@@ -127,6 +207,10 @@ func (m *validateOpUpdateEnrollmentStatus) HandleInitialize(ctx context.Context,
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
+}
+
+func addOpDeleteRecommendationPreferencesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRecommendationPreferences{}, middleware.After)
 }
 
 func addOpExportAutoScalingGroupRecommendationsValidationMiddleware(stack *middleware.Stack) error {
@@ -149,8 +233,38 @@ func addOpGetEC2RecommendationProjectedMetricsValidationMiddleware(stack *middle
 	return stack.Initialize.Add(&validateOpGetEC2RecommendationProjectedMetrics{}, middleware.After)
 }
 
+func addOpGetEffectiveRecommendationPreferencesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetEffectiveRecommendationPreferences{}, middleware.After)
+}
+
+func addOpGetRecommendationPreferencesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRecommendationPreferences{}, middleware.After)
+}
+
+func addOpPutRecommendationPreferencesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutRecommendationPreferences{}, middleware.After)
+}
+
 func addOpUpdateEnrollmentStatusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateEnrollmentStatus{}, middleware.After)
+}
+
+func validateOpDeleteRecommendationPreferencesInput(v *DeleteRecommendationPreferencesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRecommendationPreferencesInput"}
+	if len(v.ResourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if v.RecommendationPreferenceNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecommendationPreferenceNames"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateOpExportAutoScalingGroupRecommendationsInput(v *ExportAutoScalingGroupRecommendationsInput) error {
@@ -229,6 +343,51 @@ func validateOpGetEC2RecommendationProjectedMetricsInput(v *GetEC2Recommendation
 	}
 	if v.EndTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetEffectiveRecommendationPreferencesInput(v *GetEffectiveRecommendationPreferencesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetEffectiveRecommendationPreferencesInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetRecommendationPreferencesInput(v *GetRecommendationPreferencesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRecommendationPreferencesInput"}
+	if len(v.ResourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutRecommendationPreferencesInput(v *PutRecommendationPreferencesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutRecommendationPreferencesInput"}
+	if len(v.ResourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

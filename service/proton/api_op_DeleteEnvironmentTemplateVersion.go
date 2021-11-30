@@ -15,11 +15,11 @@ import (
 // version of the environment template if it's not the Recommended version. Delete
 // the Recommended version of the environment template if no other major versions
 // or minor versions of the environment template exist. A major version of an
-// environment template is a version that's not backwards compatible. Delete a
-// minor version of an environment template if it isn't the Recommended version.
-// Delete a Recommended minor version of the environment template if no other minor
-// versions of the environment template exist. A minor version of an environment
-// template is a version that's backwards compatible.
+// environment template is a version that's not backward compatible. Delete a minor
+// version of an environment template if it isn't the Recommended version. Delete a
+// Recommended minor version of the environment template if no other minor versions
+// of the environment template exist. A minor version of an environment template is
+// a version that's backward compatible.
 func (c *Client) DeleteEnvironmentTemplateVersion(ctx context.Context, params *DeleteEnvironmentTemplateVersionInput, optFns ...func(*Options)) (*DeleteEnvironmentTemplateVersionOutput, error) {
 	if params == nil {
 		params = &DeleteEnvironmentTemplateVersionInput{}
@@ -57,7 +57,7 @@ type DeleteEnvironmentTemplateVersionInput struct {
 
 type DeleteEnvironmentTemplateVersionOutput struct {
 
-	// The environment template version detail data that's returned by AWS Proton.
+	// The environment template version detail data that's returned by Proton.
 	EnvironmentTemplateVersion *types.EnvironmentTemplateVersion
 
 	// Metadata pertaining to the operation's result.

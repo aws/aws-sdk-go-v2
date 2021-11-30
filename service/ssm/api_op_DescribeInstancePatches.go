@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about the patches on the specified instance and their
-// state relative to the patch baseline being used for the instance.
+// Retrieves information about the patches on the specified managed node and their
+// state relative to the patch baseline being used for the node.
 func (c *Client) DescribeInstancePatches(ctx context.Context, params *DescribeInstancePatchesInput, optFns ...func(*Options)) (*DescribeInstancePatchesOutput, error) {
 	if params == nil {
 		params = &DescribeInstancePatchesInput{}
@@ -31,7 +31,7 @@ func (c *Client) DescribeInstancePatches(ctx context.Context, params *DescribeIn
 
 type DescribeInstancePatchesInput struct {
 
-	// The ID of the instance whose patch state information should be retrieved.
+	// The ID of the managed node whose patch state information should be retrieved.
 	//
 	// This member is required.
 	InstanceId *string

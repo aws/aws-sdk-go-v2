@@ -23,10 +23,31 @@ import (
 // of data into Timestream, the query results might not reflect the results of a
 // recently completed write operation. The results may also include some stale
 // data. If you repeat the query request after a short time, the results should
-// return the latest data. Service quotas apply. For more information, see Access
-// Management
-// (https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html) in
-// the Timestream Developer Guide.
+// return the latest data. Service quotas apply
+// (https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html).
+// See code sample
+// (https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.write.html)
+// for details. Upserts You can use the Version parameter in a WriteRecords request
+// to update data points. Timestream tracks a version number with each record.
+// Version defaults to 1 when not specified for the record in the request.
+// Timestream will update an existing record’s measure value along with its Version
+// upon receiving a write request with a higher Version number for that record.
+// Upon receiving an update request where the measure value is the same as that of
+// the existing record, Timestream still updates Version, if it is greater than the
+// existing value of Version. You can update a data point as many times as desired,
+// as long as the value of Version continuously increases. For example, suppose you
+// write a new record without indicating Version in the request. Timestream will
+// store this record, and set Version to 1. Now, suppose you try to update this
+// record with a WriteRecords request of the same record with a different measure
+// value but, like before, do not provide Version. In this case, Timestream will
+// reject this update with a RejectedRecordsException since the updated record’s
+// version is not greater than the existing value of Version. However, if you were
+// to resend the update request with Version set to 2, Timestream would then
+// succeed in updating the record’s value, and the Version would be set to 2. Next,
+// suppose you sent a WriteRecords request with this same record and an identical
+// measure value, but with Version set to 3. In this case, Timestream would only
+// update Version to 3. Any further updates would need to send a version number
+// greater than 3, or the update requests would receive a RejectedRecordsException.
 func (c *Client) WriteRecords(ctx context.Context, params *WriteRecordsInput, optFns ...func(*Options)) (*WriteRecordsOutput, error) {
 	if params == nil {
 		params = &WriteRecordsInput{}
@@ -49,27 +70,33 @@ type WriteRecordsInput struct {
 	// This member is required.
 	DatabaseName *string
 
-	// An array of records containing the unique dimension and measure attributes for
-	// each time series data point.
+	// An array of records containing the unique measure, dimension, time, and version
+	// attributes for each time series data point.
 	//
 	// This member is required.
 	Records []types.Record
 
-	// The name of the Timesream table.
+	// The name of the Timestream table.
 	//
 	// This member is required.
 	TableName *string
 
-	// A record containing the common measure and dimension attributes shared across
-	// all the records in the request. The measure and dimension attributes specified
-	// in here will be merged with the measure and dimension attributes in the records
-	// object when the data is written into Timestream.
+	// A record containing the common measure, dimension, time, and version attributes
+	// shared across all the records in the request. The measure and dimension
+	// attributes specified will be merged with the measure and dimension attributes in
+	// the records object when the data is written into Timestream. Dimensions may not
+	// overlap, or a ValidationException will be thrown. In other words, a record must
+	// contain dimensions with unique names.
 	CommonAttributes *types.Record
 
 	noSmithyDocumentSerde
 }
 
 type WriteRecordsOutput struct {
+
+	// Information on the records ingested by this request.
+	RecordsIngested *types.RecordsIngested
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

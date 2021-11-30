@@ -40,8 +40,7 @@ type CreateThemeInput struct {
 
 	// The ID of the theme that a custom theme will inherit from. All themes inherit
 	// from one of the starting themes defined by Amazon QuickSight. For a list of the
-	// starting themes, use ListThemes or choose Themes from within a Amazon QuickSight
-	// analysis.
+	// starting themes, use ListThemes or choose Themes from within an analysis.
 	//
 	// This member is required.
 	BaseThemeId *string

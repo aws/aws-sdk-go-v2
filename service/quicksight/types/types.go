@@ -8,9 +8,11 @@ import (
 )
 
 // The Amazon QuickSight customizations associated with your Amazon Web Services
-// account or a Amazon QuickSight namespace in a specific Amazon Web Services
-// Region.
+// account or a QuickSight namespace in a specific Amazon Web Services Region.
 type AccountCustomization struct {
+
+	// The default email customization template.
+	DefaultEmailCustomizationTemplate *string
 
 	// The default theme for this Amazon QuickSight subscription.
 	DefaultTheme *string
@@ -43,7 +45,7 @@ type AccountSettings struct {
 // The active Identity and Access Management (IAM) policy assignment.
 type ActiveIAMPolicyAssignment struct {
 
-	// A name for the IAMpolicy assignment.
+	// A name for the IAM policy assignment.
 	AssignmentName *string
 
 	// The Amazon Resource Name (ARN) of the resource.
@@ -72,8 +74,11 @@ type AmazonElasticsearchParameters struct {
 	noSmithyDocumentSerde
 }
 
+// The parameters for OpenSearch.
 type AmazonOpenSearchParameters struct {
 
+	// The OpenSearch domain.
+	//
 	// This member is required.
 	Domain *string
 
@@ -213,11 +218,11 @@ type AnonymousUserDashboardEmbeddingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The type of experience you want to embed. For anonymous users, you can embed an
-// Amazon QuickSight dashboard.
+// The type of experience you want to embed. For anonymous users, you can embed
+// Amazon QuickSight dashboards.
 type AnonymousUserEmbeddingExperienceConfiguration struct {
 
-	// The type of embedding experience. In this case, an Amazon QuickSight dashboard.
+	// The type of embedding experience. In this case, Amazon QuickSight dashboards.
 	Dashboard *AnonymousUserDashboardEmbeddingConfiguration
 
 	noSmithyDocumentSerde
@@ -409,9 +414,10 @@ type ColumnSchema struct {
 	noSmithyDocumentSerde
 }
 
-// A tag for a column in a TagColumnOperation structure. This is a variant type
-// structure. For this structure to be valid, only one of the attributes can be
-// non-null.
+// A tag for a column in a TagColumnOperation
+// (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_TagColumnOperation.html)
+// structure. This is a variant type structure. For this structure to be valid,
+// only one of the attributes can be non-null.
 type ColumnTag struct {
 
 	// A description for a column.
@@ -703,7 +709,8 @@ type DataSet struct {
 	// Currently, only geospatial hierarchy is supported.
 	ColumnGroups []ColumnGroup
 
-	// A set of one or more definitions of a ColumnLevelPermissionRule.
+	// A set of one or more definitions of a ColumnLevelPermissionRule
+	// (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_ColumnLevelPermissionRule.html).
 	ColumnLevelPermissionRules []ColumnLevelPermissionRule
 
 	// The amount of SPICE capacity used by this dataset. This is 0 if the dataset
@@ -907,7 +914,8 @@ type DataSourceCredentials struct {
 	// DataSourceCredentials structure.
 	CopySourceArn *string
 
-	// Credential pair. For more information, see CredentialPair.
+	// Credential pair. For more information, see CredentialPair
+	// (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_CredentialPair.html).
 	CredentialPair *CredentialPair
 
 	noSmithyDocumentSerde
@@ -936,6 +944,7 @@ type DataSourceErrorInfo struct {
 //  DataSourceParametersMemberAuroraParameters
 //  DataSourceParametersMemberAuroraPostgreSqlParameters
 //  DataSourceParametersMemberAwsIotAnalyticsParameters
+//  DataSourceParametersMemberExasolParameters
 //  DataSourceParametersMemberJiraParameters
 //  DataSourceParametersMemberMariaDbParameters
 //  DataSourceParametersMemberMySqlParameters
@@ -964,6 +973,7 @@ type DataSourceParametersMemberAmazonElasticsearchParameters struct {
 
 func (*DataSourceParametersMemberAmazonElasticsearchParameters) isDataSourceParameters() {}
 
+// The parameters for OpenSearch.
 type DataSourceParametersMemberAmazonOpenSearchParameters struct {
 	Value AmazonOpenSearchParameters
 
@@ -1007,6 +1017,15 @@ type DataSourceParametersMemberAwsIotAnalyticsParameters struct {
 }
 
 func (*DataSourceParametersMemberAwsIotAnalyticsParameters) isDataSourceParameters() {}
+
+// The parameters for Exasol.
+type DataSourceParametersMemberExasolParameters struct {
+	Value ExasolParameters
+
+	noSmithyDocumentSerde
+}
+
+func (*DataSourceParametersMemberExasolParameters) isDataSourceParameters() {}
 
 // The parameters for Jira.
 type DataSourceParametersMemberJiraParameters struct {
@@ -1187,6 +1206,22 @@ type ErrorInfo struct {
 	noSmithyDocumentSerde
 }
 
+// The required parameters for connecting to an Exasol data source.
+type ExasolParameters struct {
+
+	// The hostname or IP address of the Exasol data source.
+	//
+	// This member is required.
+	Host *string
+
+	// The port for the Exasol data source.
+	//
+	// This member is required.
+	Port int32
+
+	noSmithyDocumentSerde
+}
+
 // Export to .csv option.
 type ExportToCSVOption struct {
 
@@ -1220,22 +1255,22 @@ type FilterOperation struct {
 	noSmithyDocumentSerde
 }
 
-// A folder.
+// A folder in Amazon QuickSight.
 type Folder struct {
 
-	// The folder Amazon Resource Name (ARN).
+	// The Amazon Resource Name (ARN) for the folder.
 	Arn *string
 
 	// The time that the folder was created.
 	CreatedTime *time.Time
 
-	// The folder ID.
+	// The ID of the folder.
 	FolderId *string
 
-	// An array of ancestor folder ARN strings.
+	// An array of ancestor ARN strings for the folder.
 	FolderPath []string
 
-	// The type of the folder.
+	// The type of folder it is.
 	FolderType FolderType
 
 	// The time that the folder was last updated.
@@ -1247,26 +1282,27 @@ type Folder struct {
 	noSmithyDocumentSerde
 }
 
-// An asset in a folder, such as a dashboard, analysis, or dataset.
+// An asset in a Amazon QuickSight folder, such as a dashboard, analysis, or
+// dataset.
 type FolderMember struct {
 
-	// The ID of the asset.
+	// The ID of an asset in the folder.
 	MemberId *string
 
-	// The type of the asset.
+	// The type of asset that it is.
 	MemberType MemberType
 
 	noSmithyDocumentSerde
 }
 
-// Searches a folder by a filter.
+// A filter to use to search a Amazon QuickSight folder.
 type FolderSearchFilter struct {
 
-	// The name of the value that you want to use as a filter. For example, "Name":
+	// The name of a value that you want to use in the filter. For example, "Name":
 	// "PARENT_FOLDER_ARN".
 	Name FolderFilterAttribute
 
-	// The comparison operator that you want to use as a filter. For example,
+	// The comparison operator that you want to use in the filter. For example,
 	// "Operator": "StringEquals".
 	Operator FilterOperator
 
@@ -1278,16 +1314,16 @@ type FolderSearchFilter struct {
 	noSmithyDocumentSerde
 }
 
-// A summary of the folder.
+// A summary of information about an existing Amazon QuickSight folder.
 type FolderSummary struct {
 
-	// The Amazon Resource Name (ARN).
+	// The Amazon Resource Name (ARN) of the folder.
 	Arn *string
 
 	// The time that the folder was created.
 	CreatedTime *time.Time
 
-	// The folder ID.
+	// The ID of the folder.
 	FolderId *string
 
 	// The type of folder.
@@ -1383,13 +1419,13 @@ type IAMPolicyAssignment struct {
 	// Identities.
 	Identities map[string][]string
 
-	// The Amazon Resource Name (ARN) for the IAMpolicy.
+	// The Amazon Resource Name (ARN) for the IAM policy.
 	PolicyArn *string
 
 	noSmithyDocumentSerde
 }
 
-// IAMpolicy assignment summary.
+// IAM policy assignment summary.
 type IAMPolicyAssignmentSummary struct {
 
 	// Assignment name.
@@ -1532,6 +1568,16 @@ type JoinKeyProperties struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that contains the configuration of a shareable link to the
+// dashboard.
+type LinkSharingConfiguration struct {
+
+	// A structure that contains the permissions of a shareable link.
+	Permissions []ResourcePermission
+
+	noSmithyDocumentSerde
+}
+
 // A logical table is a unit that joins and that data transformations operate on. A
 // logical table has a source, which can be either a physical table or result of a
 // join. When a logical table points to a physical table, the logical table acts as
@@ -1617,7 +1663,7 @@ type MariaDbParameters struct {
 	noSmithyDocumentSerde
 }
 
-// An object that consists of the member Amazon Resource Name (ARN) and member ID.
+// An object that consists of a member Amazon Resource Name (ARN) and a member ID.
 type MemberIdArnPair struct {
 
 	// The Amazon Resource Name (ARN) of the member.
@@ -1903,10 +1949,10 @@ type RegisteredUserDashboardEmbeddingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The type of experience you want to embed. For registered users, you can embed an
-// Amazon QuickSight dashboard or the Amazon QuickSight console. Exactly one of the
-// experience configurations is required. You can choose Dashboard or
-// QuickSightConsole. You cannot choose more than one experience configuraton.
+// The type of experience you want to embed. For registered users, you can embed
+// Amazon QuickSight dashboards or the Amazon QuickSight console. Exactly one of
+// the experience configurations is required. You can choose Dashboard or
+// QuickSightConsole. You cannot choose more than one experience configuration.
 type RegisteredUserEmbeddingExperienceConfiguration struct {
 
 	// The configuration details for providing a dashboard embedding experience.
@@ -1917,23 +1963,27 @@ type RegisteredUserEmbeddingExperienceConfiguration struct {
 	// (https://docs.aws.amazon.com/quicksight/latest/user/embedding-overview.html).
 	QSearchBar *RegisteredUserQSearchBarEmbeddingConfiguration
 
-	// The configuration details for providing an Amazon QuickSight console embedding
+	// The configuration details for providing each Amazon QuickSight console embedding
 	// experience. This can be used along with custom permissions to restrict access to
 	// certain features. For more information, see Customizing Access to the Amazon
 	// QuickSight Console
 	// (https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html)
-	// in the Amazon QuickSight User Guide. Use GenerateEmbedUrlForRegisteredUser where
-	// you want to provide an authoring portal that allows users to create data
+	// in the Amazon QuickSight User Guide. Use GenerateEmbedUrlForRegisteredUser
+	// (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForRegisteredUser.html)
+	// where you want to provide an authoring portal that allows users to create data
 	// sources, datasets, analyses, and dashboards. The users who accesses an embedded
 	// Amazon QuickSight console needs to belong to the author or admin security
 	// cohort. If you want to restrict permissions to some of these features, add a
-	// custom permissions profile to the user with the UpdateUser API operation. Use
-	// RegisterUser API operation to add a new user with a custom permission profile
-	// attached. For more information, see the following sections in the Amazon
-	// QuickSight User Guide:
+	// custom permissions profile to the user with the UpdateUser
+	// (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdateUser.html)
+	// API operation. Use the RegisterUser
+	// (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_RegisterUser.html)
+	// API operation to add a new user with a custom permission profile attached. For
+	// more information, see the following sections in the Amazon QuickSight User
+	// Guide:
 	//
-	// * Embedding the Full Functionality of the Amazon
-	// QuickSight Console for Authenticated Users
+	// * Embedding the Full Functionality of the Amazon QuickSight Console for
+	// Authenticated Users
 	// (https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics-full-console-for-authenticated-users.html)
 	//
 	// *
@@ -2037,7 +2087,7 @@ type RenameColumnOperation struct {
 // Permission for the resource.
 type ResourcePermission struct {
 
-	// The IAMaction to grant or revoke permissions on.
+	// The IAM action to grant or revoke permissions on.
 	//
 	// This member is required.
 	Actions []string
@@ -2053,7 +2103,7 @@ type ResourcePermission struct {
 	// theme. (This is common.)
 	//
 	// * The ARN of an Amazon Web Services account root: This
-	// is an IAMARN rather than a Amazon QuickSight ARN. Use this option only to share
+	// is an IAM ARN rather than a QuickSight ARN. Use this option only to share
 	// resources (templates) across Amazon Web Services accounts. (This is less
 	// common.)
 	//
@@ -2963,8 +3013,8 @@ type User struct {
 	Email *string
 
 	// The type of supported external login provider that provides identity to let the
-	// user federate into Amazon QuickSight with an associated IAMrole. The type can be
-	// one of the following.
+	// user federate into Amazon QuickSight with an associated IAM role. The type can
+	// be one of the following.
 	//
 	// * COGNITO: Amazon Cognito. The provider URL is
 	// cognito-identity.amazonaws.com.
@@ -3003,7 +3053,8 @@ type User struct {
 	// RESTRICTED_AUTHOR: This role isn't currently available for use.
 	Role UserRole
 
-	// The user's user name.
+	// The user's user name. In the output, the value for UserName is N/A when the
+	// value for IdentityType is IAM and the corresponding IAM user is deleted.
 	UserName *string
 
 	noSmithyDocumentSerde

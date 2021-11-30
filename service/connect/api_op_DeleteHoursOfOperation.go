@@ -10,6 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// This API is in preview release for Amazon Connect and is subject to change.
 // Deletes an hours of operation.
 func (c *Client) DeleteHoursOfOperation(ctx context.Context, params *DeleteHoursOfOperationInput, optFns ...func(*Options)) (*DeleteHoursOfOperationOutput, error) {
 	if params == nil {

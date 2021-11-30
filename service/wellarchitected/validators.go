@@ -30,6 +30,46 @@ func (m *validateOpAssociateLenses) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateLensShare struct {
+}
+
+func (*validateOpCreateLensShare) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateLensShare) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateLensShareInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateLensShareInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateLensVersion struct {
+}
+
+func (*validateOpCreateLensVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateLensVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateLensVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateLensVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateMilestone struct {
 }
 
@@ -85,6 +125,46 @@ func (m *validateOpCreateWorkloadShare) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateWorkloadShareInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteLens struct {
+}
+
+func (*validateOpDeleteLens) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteLens) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteLensInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteLensInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteLensShare struct {
+}
+
+func (*validateOpDeleteLensShare) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteLensShare) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteLensShareInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteLensShareInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -150,6 +230,26 @@ func (m *validateOpDisassociateLenses) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpExportLens struct {
+}
+
+func (*validateOpExportLens) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpExportLens) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ExportLensInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpExportLensInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetAnswer struct {
 }
 
@@ -165,6 +265,26 @@ func (m *validateOpGetAnswer) HandleInitialize(ctx context.Context, in middlewar
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetAnswerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetLens struct {
+}
+
+func (*validateOpGetLens) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetLens) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetLensInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetLensInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -270,6 +390,26 @@ func (m *validateOpGetWorkload) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpImportLens struct {
+}
+
+func (*validateOpImportLens) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpImportLens) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ImportLensInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpImportLensInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListAnswers struct {
 }
 
@@ -325,6 +465,26 @@ func (m *validateOpListLensReviews) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListLensReviewsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListLensShares struct {
+}
+
+func (*validateOpListLensShares) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListLensShares) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListLensSharesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListLensSharesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -554,6 +714,14 @@ func addOpAssociateLensesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateLenses{}, middleware.After)
 }
 
+func addOpCreateLensShareValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateLensShare{}, middleware.After)
+}
+
+func addOpCreateLensVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateLensVersion{}, middleware.After)
+}
+
 func addOpCreateMilestoneValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateMilestone{}, middleware.After)
 }
@@ -564,6 +732,14 @@ func addOpCreateWorkloadValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateWorkloadShareValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateWorkloadShare{}, middleware.After)
+}
+
+func addOpDeleteLensValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteLens{}, middleware.After)
+}
+
+func addOpDeleteLensShareValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteLensShare{}, middleware.After)
 }
 
 func addOpDeleteWorkloadValidationMiddleware(stack *middleware.Stack) error {
@@ -578,8 +754,16 @@ func addOpDisassociateLensesValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpDisassociateLenses{}, middleware.After)
 }
 
+func addOpExportLensValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpExportLens{}, middleware.After)
+}
+
 func addOpGetAnswerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAnswer{}, middleware.After)
+}
+
+func addOpGetLensValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetLens{}, middleware.After)
 }
 
 func addOpGetLensReviewValidationMiddleware(stack *middleware.Stack) error {
@@ -602,6 +786,10 @@ func addOpGetWorkloadValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetWorkload{}, middleware.After)
 }
 
+func addOpImportLensValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpImportLens{}, middleware.After)
+}
+
 func addOpListAnswersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAnswers{}, middleware.After)
 }
@@ -612,6 +800,10 @@ func addOpListLensReviewImprovementsValidationMiddleware(stack *middleware.Stack
 
 func addOpListLensReviewsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListLensReviews{}, middleware.After)
+}
+
+func addOpListLensSharesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListLensShares{}, middleware.After)
 }
 
 func addOpListMilestonesValidationMiddleware(stack *middleware.Stack) error {
@@ -709,6 +901,48 @@ func validateOpAssociateLensesInput(v *AssociateLensesInput) error {
 	}
 }
 
+func validateOpCreateLensShareInput(v *CreateLensShareInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateLensShareInput"}
+	if v.LensAlias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LensAlias"))
+	}
+	if v.SharedWith == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SharedWith"))
+	}
+	if v.ClientRequestToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateLensVersionInput(v *CreateLensVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateLensVersionInput"}
+	if v.LensAlias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LensAlias"))
+	}
+	if v.LensVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LensVersion"))
+	}
+	if v.ClientRequestToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateMilestoneInput(v *CreateMilestoneInput) error {
 	if v == nil {
 		return nil
@@ -784,6 +1018,48 @@ func validateOpCreateWorkloadShareInput(v *CreateWorkloadShareInput) error {
 	}
 }
 
+func validateOpDeleteLensInput(v *DeleteLensInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteLensInput"}
+	if v.LensAlias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LensAlias"))
+	}
+	if v.ClientRequestToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
+	}
+	if len(v.LensStatus) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LensStatus"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteLensShareInput(v *DeleteLensShareInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteLensShareInput"}
+	if v.ShareId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ShareId"))
+	}
+	if v.LensAlias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LensAlias"))
+	}
+	if v.ClientRequestToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteWorkloadInput(v *DeleteWorkloadInput) error {
 	if v == nil {
 		return nil
@@ -841,6 +1117,21 @@ func validateOpDisassociateLensesInput(v *DisassociateLensesInput) error {
 	}
 }
 
+func validateOpExportLensInput(v *ExportLensInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExportLensInput"}
+	if v.LensAlias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LensAlias"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetAnswerInput(v *GetAnswerInput) error {
 	if v == nil {
 		return nil
@@ -854,6 +1145,21 @@ func validateOpGetAnswerInput(v *GetAnswerInput) error {
 	}
 	if v.QuestionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QuestionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetLensInput(v *GetLensInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetLensInput"}
+	if v.LensAlias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LensAlias"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -906,9 +1212,6 @@ func validateOpGetLensVersionDifferenceInput(v *GetLensVersionDifferenceInput) e
 	if v.LensAlias == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LensAlias"))
 	}
-	if v.BaseLensVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BaseLensVersion"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -938,6 +1241,24 @@ func validateOpGetWorkloadInput(v *GetWorkloadInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetWorkloadInput"}
 	if v.WorkloadId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkloadId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpImportLensInput(v *ImportLensInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImportLensInput"}
+	if v.JSONString == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JSONString"))
+	}
+	if v.ClientRequestToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -989,6 +1310,21 @@ func validateOpListLensReviewsInput(v *ListLensReviewsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListLensReviewsInput"}
 	if v.WorkloadId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkloadId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListLensSharesInput(v *ListLensSharesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListLensSharesInput"}
+	if v.LensAlias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LensAlias"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

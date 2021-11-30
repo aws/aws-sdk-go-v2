@@ -19,15 +19,15 @@ import (
 // (https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceImages.html).
 //
 // *
-// Only Windows 10 WorkSpace images can be programmatically updated at this
-// time.
+// Only Windows 10, Windows Sever 2016, and Windows Server 2019 WorkSpace images
+// can be programmatically updated at this time.
 //
-// * Microsoft Windows updates and other application updates are not
-// included in the update process.
+// * Microsoft Windows updates and
+// other application updates are not included in the update process.
 //
-// * The source WorkSpace image is not deleted.
-// You can delete the source image after you've verified your new updated image and
-// created a new bundle.
+// * The source
+// WorkSpace image is not deleted. You can delete the source image after you've
+// verified your new updated image and created a new bundle.
 func (c *Client) CreateUpdatedWorkspaceImage(ctx context.Context, params *CreateUpdatedWorkspaceImageInput, optFns ...func(*Options)) (*CreateUpdatedWorkspaceImageOutput, error) {
 	if params == nil {
 		params = &CreateUpdatedWorkspaceImageInput{}

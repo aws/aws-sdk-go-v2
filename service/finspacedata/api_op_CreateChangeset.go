@@ -4,6 +4,7 @@ package finspacedata
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/finspacedata/types"
@@ -11,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new changeset in a FinSpace dataset.
+// Creates a new Changeset in a FinSpace Dataset.
 func (c *Client) CreateChangeset(ctx context.Context, params *CreateChangesetInput, optFns ...func(*Options)) (*CreateChangesetOutput, error) {
 	if params == nil {
 		params = &CreateChangesetInput{}
@@ -27,55 +28,71 @@ func (c *Client) CreateChangeset(ctx context.Context, params *CreateChangesetInp
 	return out, nil
 }
 
+// The request for a CreateChangeset operation.
 type CreateChangesetInput struct {
 
-	// Option to indicate how a changeset will be applied to a dataset.
+	// Option to indicate how a Changeset will be applied to a Dataset.
 	//
 	// * REPLACE -
-	// Changeset will be considered as a replacement to all prior loaded changesets.
+	// Changeset will be considered as a replacement to all prior loaded Changesets.
 	//
 	// *
 	// APPEND - Changeset will be considered as an addition to the end of all prior
-	// loaded changesets.
+	// loaded Changesets.
+	//
+	// * MODIFY - Changeset is considered as a replacement to a
+	// specific prior ingested Changeset.
 	//
 	// This member is required.
 	ChangeType types.ChangeType
 
-	// The unique identifier for the FinSpace dataset in which the changeset will be
+	// The unique identifier for the FinSpace Dataset where the Changeset will be
 	// created.
 	//
 	// This member is required.
 	DatasetId *string
 
-	// Source path from which the files to create the changeset will be sourced.
+	// Options that define the structure of the source file(s) including the format
+	// type (formatType), header row (withHeader), data separation character
+	// (separator) and the type of compression (compression). formatType is a required
+	// attribute and can have the following values:
+	//
+	// * PARQUET - Parquet source file
+	// format.
+	//
+	// * CSV - CSV source file format.
+	//
+	// * JSON - JSON source file format.
+	//
+	// *
+	// XML - XML source file format.
+	//
+	// For example, you could specify the following for
+	// formatParams:  "formatParams": { "formatType": "CSV", "withHeader": "true",
+	// "separator": ",", "compression":"None" }
+	//
+	// This member is required.
+	FormatParams map[string]string
+
+	// Options that define the location of the data being ingested.
 	//
 	// This member is required.
 	SourceParams map[string]string
 
-	// Type of the data source from which the files to create the changeset will be
-	// sourced.
-	//
-	// * S3 - Amazon S3.
-	//
-	// This member is required.
-	SourceType types.SourceType
-
-	// Options that define the structure of the source file(s).
-	FormatParams map[string]string
-
-	// Format type of the input files being loaded into the changeset.
-	FormatType types.FormatType
-
-	// Metadata tags to apply to this changeset.
-	Tags map[string]string
+	// A token used to ensure idempotency.
+	ClientToken *string
 
 	noSmithyDocumentSerde
 }
 
+// The response from a CreateChangeset operation.
 type CreateChangesetOutput struct {
 
-	// Returns the changeset details.
-	Changeset *types.ChangesetInfo
+	// The unique identifier of the Changeset that is created.
+	ChangesetId *string
+
+	// The unique identifier for the FinSpace Dataset where the Changeset is created.
+	DatasetId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -131,6 +148,9 @@ func (c *Client) addOperationCreateChangesetMiddlewares(stack *middleware.Stack,
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opCreateChangesetMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateChangesetValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,6 +167,39 @@ func (c *Client) addOperationCreateChangesetMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpCreateChangeset struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpCreateChangeset) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpCreateChangeset) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*CreateChangesetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *CreateChangesetInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opCreateChangesetMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateChangeset{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opCreateChangeset(region string) *awsmiddleware.RegisterServiceMetadata {

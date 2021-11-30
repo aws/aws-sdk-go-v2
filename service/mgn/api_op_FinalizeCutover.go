@@ -64,6 +64,9 @@ type FinalizeCutoverOutput struct {
 	// Source server lifecycle state.
 	LifeCycle *types.LifeCycle
 
+	// Source server replication type.
+	ReplicationType types.ReplicationType
+
 	// Source server properties.
 	SourceProperties *types.SourceProperties
 
@@ -72,6 +75,9 @@ type FinalizeCutoverOutput struct {
 
 	// Source server Tags.
 	Tags map[string]string
+
+	// Source server vCenter client id.
+	VcenterClientID *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -11,17 +11,22 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of recommended items. The required input depends on the recipe
-// type used to create the solution backing the campaign, as follows:
+// Returns a list of recommended items. For campaigns, the campaign's Amazon
+// Resource Name (ARN) is required and the required user and item input depends on
+// the recipe type used to create the solution backing the campaign as follows:
 //
 // *
-// RELATED_ITEMS - itemId required, userId not used
+// USER_PERSONALIZATION - userId required, itemId not used
 //
-// * USER_PERSONALIZATION -
-// itemId optional, userId required
+// * RELATED_ITEMS -
+// itemId required, userId not used
 //
 // Campaigns that are backed by a solution
-// created using a recipe of type PERSONALIZED_RANKING use the API.
+// created using a recipe of type PERSONALIZED_RANKING use the API. For
+// recommenders, the recommender's ARN is required and the required item and user
+// input depends on the use case (domain-based recipe) backing the recommender. For
+// information on use case requirements see Choosing recommender use cases
+// (https://docs.aws.amazon.com/personalize/latest/dg/domain-use-cases.html).
 func (c *Client) GetRecommendations(ctx context.Context, params *GetRecommendationsInput, optFns ...func(*Options)) (*GetRecommendationsOutput, error) {
 	if params == nil {
 		params = &GetRecommendationsInput{}
@@ -41,8 +46,6 @@ type GetRecommendationsInput struct {
 
 	// The Amazon Resource Name (ARN) of the campaign to use for getting
 	// recommendations.
-	//
-	// This member is required.
 	CampaignArn *string
 
 	// The contextual metadata to use when getting recommendations. Contextual metadata
@@ -75,6 +78,11 @@ type GetRecommendationsInput struct {
 	// The number of results to return. The default is 25. The maximum is 500.
 	NumResults int32
 
+	// The Amazon Resource Name (ARN) of the recommender to use to get recommendations.
+	// Provide a recommender ARN if you created a Domain dataset group with a
+	// recommender for a domain use case.
+	RecommenderArn *string
+
 	// The user ID to provide recommendations for. Required for USER_PERSONALIZATION
 	// recipe type.
 	UserId *string
@@ -84,7 +92,7 @@ type GetRecommendationsInput struct {
 
 type GetRecommendationsOutput struct {
 
-	// A list of recommendations sorted in ascending order by prediction score. There
+	// A list of recommendations sorted in descending order by prediction score. There
 	// can be a maximum of 500 items in the list.
 	ItemList []types.PredictedItem
 
@@ -140,9 +148,6 @@ func (c *Client) addOperationGetRecommendationsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addOpGetRecommendationsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetRecommendations(options.Region), middleware.Before); err != nil {

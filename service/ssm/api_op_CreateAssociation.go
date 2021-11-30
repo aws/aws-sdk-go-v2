@@ -12,16 +12,16 @@ import (
 )
 
 // A State Manager association defines the state that you want to maintain on your
-// instances. For example, an association can specify that anti-virus software must
-// be installed and running on your instances, or that certain ports must be
-// closed. For static targets, the association specifies a schedule for when the
+// managed nodes. For example, an association can specify that anti-virus software
+// must be installed and running on your managed nodes, or that certain ports must
+// be closed. For static targets, the association specifies a schedule for when the
 // configuration is reapplied. For dynamic targets, such as an Amazon Web Services
 // resource group or an Amazon Web Services autoscaling group, State Manager, a
 // capability of Amazon Web Services Systems Manager applies the configuration when
-// new instances are added to the group. The association also specifies actions to
-// take when applying the configuration. For example, an association for anti-virus
-// software might run once a day. If the software isn't installed, then State
-// Manager installs it. If the software is installed, but the service isn't
+// new managed nodes are added to the group. The association also specifies actions
+// to take when applying the configuration. For example, an association for
+// anti-virus software might run once a day. If the software isn't installed, then
+// State Manager installs it. If the software is installed, but the service isn't
 // running, then the association might instruct State Manager to start the service.
 func (c *Client) CreateAssociation(ctx context.Context, params *CreateAssociationInput, optFns ...func(*Options)) (*CreateAssociationOutput, error) {
 	if params == nil {
@@ -41,7 +41,7 @@ func (c *Client) CreateAssociation(ctx context.Context, params *CreateAssociatio
 type CreateAssociationInput struct {
 
 	// The name of the SSM Command document or Automation runbook that contains the
-	// configuration information for the instance. You can specify Amazon Web
+	// configuration information for the managed node. You can specify Amazon Web
 	// Services-predefined documents, documents you created, or a document that is
 	// shared with you from another account. For Systems Manager documents (SSM
 	// documents) that are shared with you from other Amazon Web Services accounts, you
@@ -84,10 +84,10 @@ type CreateAssociationInput struct {
 	// version or the default version.
 	DocumentVersion *string
 
-	// The instance ID. InstanceId has been deprecated. To specify an instance ID for
-	// an association, use the Targets parameter. Requests that include the parameter
-	// InstanceID with Systems Manager documents (SSM documents) that use schema
-	// version 2.0 or later will fail. In addition, if you use the parameter
+	// The managed node ID. InstanceId has been deprecated. To specify a managed node
+	// ID for an association, use the Targets parameter. Requests that include the
+	// parameter InstanceID with Systems Manager documents (SSM documents) that use
+	// schema version 2.0 or later will fail. In addition, if you use the parameter
 	// InstanceId, you can't use the parameters AssociationName, DocumentVersion,
 	// MaxErrors, MaxConcurrency, OutputLocation, or ScheduleExpression. To use these
 	// parameters, you must use the Targets parameter.
@@ -96,10 +96,10 @@ type CreateAssociationInput struct {
 	// The maximum number of targets allowed to run the association at the same time.
 	// You can specify a number, for example 10, or a percentage of the target set, for
 	// example 10%. The default value is 100%, which means all targets run the
-	// association at the same time. If a new instance starts and attempts to run an
-	// association while Systems Manager is running MaxConcurrency associations, the
+	// association at the same time. If a new managed node starts and attempts to run
+	// an association while Systems Manager is running MaxConcurrency associations, the
 	// association is allowed to run. During the next association interval, the new
-	// instance will process its association within the limit specified for
+	// managed node will process its association within the limit specified for
 	// MaxConcurrency.
 	MaxConcurrency *string
 
@@ -109,7 +109,7 @@ type CreateAssociationInput struct {
 	// 10%. If you specify 3, for example, the system stops sending requests when the
 	// fourth error is received. If you specify 0, then the system stops sending
 	// requests after the first error is returned. If you run an association on 50
-	// instances and set MaxError to 10%, then the system stops sending the request
+	// managed nodes and set MaxError to 10%, then the system stops sending the request
 	// when the sixth error is received. Executions that are already running an
 	// association when MaxErrors is reached are allowed to complete, but some of these
 	// executions may fail as well. If you need to ensure that there won't be more than
@@ -143,12 +143,12 @@ type CreateAssociationInput struct {
 	// create an association in multiple Regions and multiple accounts.
 	TargetLocations []types.TargetLocation
 
-	// The targets for the association. You can target instances by using tags, Amazon
-	// Web Services resource groups, all instances in an Amazon Web Services account,
-	// or individual instance IDs. You can target all instances in an Amazon Web
-	// Services account by specifying the InstanceIds key with a value of *. For more
-	// information about choosing targets for an association, see Using targets and
-	// rate controls with State Manager associations
+	// The targets for the association. You can target managed nodes by using tags,
+	// Amazon Web Services resource groups, all managed nodes in an Amazon Web Services
+	// account, or individual managed node IDs. You can target all managed nodes in an
+	// Amazon Web Services account by specifying the InstanceIds key with a value of *.
+	// For more information about choosing targets for an association, see Using
+	// targets and rate controls with State Manager associations
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-state-manager-targets-and-rate-controls.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	Targets []types.Target

@@ -29,7 +29,7 @@ func (c *Client) DeleteFolderMembership(ctx context.Context, params *DeleteFolde
 
 type DeleteFolderMembershipInput struct {
 
-	// The AWS Account ID.
+	// The ID for the Amazon Web Services account that contains the folder.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -55,10 +55,10 @@ type DeleteFolderMembershipInput struct {
 
 type DeleteFolderMembershipOutput struct {
 
-	// The request ID.
+	// The Amazon Web Services request ID for this operation.
 	RequestId *string
 
-	// The status of deleting the asset. If succeeded, the status is SC_OK (200).
+	// The HTTP status of the request.
 	Status int32
 
 	// Metadata pertaining to the operation's result.

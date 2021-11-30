@@ -1624,9 +1624,6 @@ func validateOpImportStacksToStackSetInput(v *ImportStacksToStackSetInput) error
 	if v.StackSetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StackSetName"))
 	}
-	if v.StackIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StackIds"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

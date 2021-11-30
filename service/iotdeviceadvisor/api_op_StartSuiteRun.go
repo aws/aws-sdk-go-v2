@@ -12,7 +12,10 @@ import (
 	"time"
 )
 
-// Starts a Device Advisor test suite run.
+// Starts a Device Advisor test suite run. Requires permission to access the
+// StartSuiteRun
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) StartSuiteRun(ctx context.Context, params *StartSuiteRunInput, optFns ...func(*Options)) (*StartSuiteRunOutput, error) {
 	if params == nil {
 		params = &StartSuiteRunInput{}
@@ -30,7 +33,7 @@ func (c *Client) StartSuiteRun(ctx context.Context, params *StartSuiteRunInput, 
 
 type StartSuiteRunInput struct {
 
-	// Suite definition Id of the test suite.
+	// Suite definition ID of the test suite.
 	//
 	// This member is required.
 	SuiteDefinitionId *string
@@ -49,13 +52,13 @@ type StartSuiteRunInput struct {
 
 type StartSuiteRunOutput struct {
 
-	// Date (in Unix epoch time) when the suite run was created.
+	// Starts a Device Advisor test suite run based on suite create time.
 	CreatedAt *time.Time
 
-	// Amazon resource name of the started suite run.
+	// Amazon Resource Name (ARN) of the started suite run.
 	SuiteRunArn *string
 
-	// Suite Run Id of the started suite run.
+	// Suite Run ID of the started suite run.
 	SuiteRunId *string
 
 	// Metadata pertaining to the operation's result.

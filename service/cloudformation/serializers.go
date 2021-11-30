@@ -5849,11 +5849,23 @@ func awsAwsquery_serializeOpDocumentImportStacksToStackSetInput(v *ImportStacksT
 		}
 	}
 
+	if v.OrganizationalUnitIds != nil {
+		objectKey := object.Key("OrganizationalUnitIds")
+		if err := awsAwsquery_serializeDocumentOrganizationalUnitIdList(v.OrganizationalUnitIds, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.StackIds != nil {
 		objectKey := object.Key("StackIds")
 		if err := awsAwsquery_serializeDocumentStackIdList(v.StackIds, objectKey); err != nil {
 			return err
 		}
+	}
+
+	if v.StackIdsUrl != nil {
+		objectKey := object.Key("StackIdsUrl")
+		objectKey.String(*v.StackIdsUrl)
 	}
 
 	if v.StackSetName != nil {

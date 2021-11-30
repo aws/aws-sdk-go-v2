@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociate a lens from a workload. The AWS Well-Architected Framework lens
-// (wellarchitected) cannot be removed from a workload.
+// Disassociate a lens from a workload. Up to 10 lenses can be disassociated from a
+// workload in a single API operation. The Amazon Web Services Well-Architected
+// Framework lens (wellarchitected) cannot be removed from a workload.
 func (c *Client) DisassociateLenses(ctx context.Context, params *DisassociateLensesInput, optFns ...func(*Options)) (*DisassociateLensesOutput, error) {
 	if params == nil {
 		params = &DisassociateLensesInput{}
@@ -30,13 +31,14 @@ func (c *Client) DisassociateLenses(ctx context.Context, params *DisassociateLen
 // Input to disassociate lens reviews.
 type DisassociateLensesInput struct {
 
-	// List of lens aliases to associate or disassociate with a workload. Identify a
-	// lens using its LensSummary$LensAlias.
+	// List of lens aliases to associate or disassociate with a workload. Up to 10
+	// lenses can be specified. Identify a lens using its LensSummary$LensAlias.
 	//
 	// This member is required.
 	LensAliases []string
 
-	// The ID assigned to the workload. This ID is unique within an AWS Region.
+	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
+	// Region.
 	//
 	// This member is required.
 	WorkloadId *string

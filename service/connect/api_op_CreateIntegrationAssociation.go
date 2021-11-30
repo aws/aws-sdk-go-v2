@@ -57,7 +57,7 @@ type CreateIntegrationAssociationInput struct {
 	// integration type.
 	SourceType types.SourceType
 
-	// One or more tags.
+	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

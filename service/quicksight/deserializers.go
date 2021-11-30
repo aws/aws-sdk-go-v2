@@ -323,6 +323,9 @@ func awsRestjson1_deserializeOpErrorCreateAccountCustomization(response *smithyh
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
 
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("InternalFailureException", errorCode):
 		return awsRestjson1_deserializeErrorInternalFailureException(response, errorBody)
 
@@ -3680,6 +3683,9 @@ func awsRestjson1_deserializeOpErrorDeleteAccountCustomization(response *smithyh
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
 
 	case strings.EqualFold("InternalFailureException", errorCode):
 		return awsRestjson1_deserializeErrorInternalFailureException(response, errorBody)
@@ -8002,6 +8008,11 @@ func awsRestjson1_deserializeOpDocumentDescribeDashboardPermissionsOutput(v **De
 					return fmt.Errorf("expected RestrictiveResourceId to be of type string, got %T instead", value)
 				}
 				sv.DashboardId = ptr.String(jtv)
+			}
+
+		case "LinkSharingConfiguration":
+			if err := awsRestjson1_deserializeDocumentLinkSharingConfiguration(&sv.LinkSharingConfiguration, value); err != nil {
+				return err
 			}
 
 		case "Permissions":
@@ -18192,6 +18203,9 @@ func awsRestjson1_deserializeOpErrorUpdateAccountCustomization(response *smithyh
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
 
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("InternalFailureException", errorCode):
 		return awsRestjson1_deserializeErrorInternalFailureException(response, errorBody)
 
@@ -19287,6 +19301,11 @@ func awsRestjson1_deserializeOpDocumentUpdateDashboardPermissionsOutput(v **Upda
 					return fmt.Errorf("expected RestrictiveResourceId to be of type string, got %T instead", value)
 				}
 				sv.DashboardId = ptr.String(jtv)
+			}
+
+		case "LinkSharingConfiguration":
+			if err := awsRestjson1_deserializeDocumentLinkSharingConfiguration(&sv.LinkSharingConfiguration, value); err != nil {
+				return err
 			}
 
 		case "Permissions":
@@ -23472,6 +23491,15 @@ func awsRestjson1_deserializeDocumentAccountCustomization(v **types.AccountCusto
 
 	for key, value := range shape {
 		switch key {
+		case "DefaultEmailCustomizationTemplate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.DefaultEmailCustomizationTemplate = ptr.String(jtv)
+			}
+
 		case "DefaultTheme":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -26800,6 +26828,16 @@ loop:
 			uv = &types.DataSourceParametersMemberAwsIotAnalyticsParameters{Value: mv}
 			break loop
 
+		case "ExasolParameters":
+			var mv types.ExasolParameters
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentExasolParameters(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.DataSourceParametersMemberExasolParameters{Value: mv}
+			break loop
+
 		case "JiraParameters":
 			var mv types.JiraParameters
 			destAddr := &mv
@@ -27079,6 +27117,59 @@ func awsRestjson1_deserializeDocumentErrorInfo(v **types.ErrorInfo, value interf
 					return fmt.Errorf("expected IngestionErrorType to be of type string, got %T instead", value)
 				}
 				sv.Type = types.IngestionErrorType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentExasolParameters(v **types.ExasolParameters, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ExasolParameters
+	if *v == nil {
+		sv = &types.ExasolParameters{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Host":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Host to be of type string, got %T instead", value)
+				}
+				sv.Host = ptr.String(jtv)
+			}
+
+		case "Port":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Port to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Port = int32(i64)
 			}
 
 		default:
@@ -28764,6 +28855,42 @@ func awsRestjson1_deserializeDocumentLimitExceededException(v **types.LimitExcee
 					return fmt.Errorf("expected ExceptionResourceType to be of type string, got %T instead", value)
 				}
 				sv.ResourceType = types.ExceptionResourceType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLinkSharingConfiguration(v **types.LinkSharingConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LinkSharingConfiguration
+	if *v == nil {
+		sv = &types.LinkSharingConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Permissions":
+			if err := awsRestjson1_deserializeDocumentResourcePermissionList(&sv.Permissions, value); err != nil {
+				return err
 			}
 
 		default:

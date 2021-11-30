@@ -190,6 +190,26 @@ func (m *validateOpDeleteProfileObjectType) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetAutoMergingPreview struct {
+}
+
+func (*validateOpGetAutoMergingPreview) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAutoMergingPreview) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAutoMergingPreviewInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAutoMergingPreviewInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetDomain struct {
 }
 
@@ -205,6 +225,26 @@ func (m *validateOpGetDomain) HandleInitialize(ctx context.Context, in middlewar
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetDomainInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetIdentityResolutionJob struct {
+}
+
+func (*validateOpGetIdentityResolutionJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetIdentityResolutionJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetIdentityResolutionJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetIdentityResolutionJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -305,6 +345,26 @@ func (m *validateOpListAccountIntegrations) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListAccountIntegrationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListIdentityResolutionJobs struct {
+}
+
+func (*validateOpListIdentityResolutionJobs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListIdentityResolutionJobs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListIdentityResolutionJobsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListIdentityResolutionJobsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -606,8 +666,16 @@ func addOpDeleteProfileObjectTypeValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpDeleteProfileObjectType{}, middleware.After)
 }
 
+func addOpGetAutoMergingPreviewValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAutoMergingPreview{}, middleware.After)
+}
+
 func addOpGetDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDomain{}, middleware.After)
+}
+
+func addOpGetIdentityResolutionJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetIdentityResolutionJob{}, middleware.After)
 }
 
 func addOpGetIntegrationValidationMiddleware(stack *middleware.Stack) error {
@@ -628,6 +696,10 @@ func addOpGetProfileObjectTypeTemplateValidationMiddleware(stack *middleware.Sta
 
 func addOpListAccountIntegrationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAccountIntegrations{}, middleware.After)
+}
+
+func addOpListIdentityResolutionJobsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListIdentityResolutionJobs{}, middleware.After)
 }
 
 func addOpListIntegrationsValidationMiddleware(stack *middleware.Stack) error {
@@ -682,6 +754,78 @@ func addOpUpdateProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateProfile{}, middleware.After)
 }
 
+func validateAutoMerging(v *types.AutoMerging) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutoMerging"}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
+	}
+	if v.Consolidation != nil {
+		if err := validateConsolidation(v.Consolidation); err != nil {
+			invalidParams.AddNested("Consolidation", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ConflictResolution != nil {
+		if err := validateConflictResolution(v.ConflictResolution); err != nil {
+			invalidParams.AddNested("ConflictResolution", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConflictResolution(v *types.ConflictResolution) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConflictResolution"}
+	if len(v.ConflictResolvingModel) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ConflictResolvingModel"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConsolidation(v *types.Consolidation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Consolidation"}
+	if v.MatchingAttributesList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MatchingAttributesList"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateExportingConfig(v *types.ExportingConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExportingConfig"}
+	if v.S3Exporting != nil {
+		if err := validateS3ExportingConfig(v.S3Exporting); err != nil {
+			invalidParams.AddNested("S3Exporting", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateFlowDefinition(v *types.FlowDefinition) error {
 	if v == nil {
 		return nil
@@ -721,6 +865,24 @@ func validateFlowDefinition(v *types.FlowDefinition) error {
 	}
 }
 
+func validateJobSchedule(v *types.JobSchedule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "JobSchedule"}
+	if len(v.DayOfTheWeek) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DayOfTheWeek"))
+	}
+	if v.Time == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Time"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMarketoSourceProperties(v *types.MarketoSourceProperties) error {
 	if v == nil {
 		return nil
@@ -744,6 +906,21 @@ func validateMatchingRequest(v *types.MatchingRequest) error {
 	if v.Enabled == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
 	}
+	if v.JobSchedule != nil {
+		if err := validateJobSchedule(v.JobSchedule); err != nil {
+			invalidParams.AddNested("JobSchedule", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AutoMerging != nil {
+		if err := validateAutoMerging(v.AutoMerging); err != nil {
+			invalidParams.AddNested("AutoMerging", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ExportingConfig != nil {
+		if err := validateExportingConfig(v.ExportingConfig); err != nil {
+			invalidParams.AddNested("ExportingConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -761,6 +938,21 @@ func validateObjectFilter(v *types.ObjectFilter) error {
 	}
 	if v.Values == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3ExportingConfig(v *types.S3ExportingConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3ExportingConfig"}
+	if v.S3BucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3BucketName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1154,6 +1346,35 @@ func validateOpDeleteProfileObjectTypeInput(v *DeleteProfileObjectTypeInput) err
 	}
 }
 
+func validateOpGetAutoMergingPreviewInput(v *GetAutoMergingPreviewInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAutoMergingPreviewInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.Consolidation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Consolidation"))
+	} else if v.Consolidation != nil {
+		if err := validateConsolidation(v.Consolidation); err != nil {
+			invalidParams.AddNested("Consolidation", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ConflictResolution == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConflictResolution"))
+	} else if v.ConflictResolution != nil {
+		if err := validateConflictResolution(v.ConflictResolution); err != nil {
+			invalidParams.AddNested("ConflictResolution", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetDomainInput(v *GetDomainInput) error {
 	if v == nil {
 		return nil
@@ -1161,6 +1382,24 @@ func validateOpGetDomainInput(v *GetDomainInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetDomainInput"}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetIdentityResolutionJobInput(v *GetIdentityResolutionJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetIdentityResolutionJobInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1242,6 +1481,21 @@ func validateOpListAccountIntegrationsInput(v *ListAccountIntegrationsInput) err
 	invalidParams := smithy.InvalidParamsError{Context: "ListAccountIntegrationsInput"}
 	if v.Uri == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Uri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListIdentityResolutionJobsInput(v *ListIdentityResolutionJobsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListIdentityResolutionJobsInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the association for the specified target or instance. If you created
-// the association by using the Targets parameter, then you must retrieve the
-// association by using the association ID.
+// Describes the association for the specified target or managed node. If you
+// created the association by using the Targets parameter, then you must retrieve
+// the association by using the association ID.
 func (c *Client) DescribeAssociation(ctx context.Context, params *DescribeAssociationInput, optFns ...func(*Options)) (*DescribeAssociationOutput, error) {
 	if params == nil {
 		params = &DescribeAssociationInput{}
@@ -36,11 +36,11 @@ type DescribeAssociationInput struct {
 
 	// Specify the association version to retrieve. To view the latest version, either
 	// specify $LATEST for this parameter, or omit this parameter. To view a list of
-	// all associations for an instance, use ListAssociations. To get a list of
+	// all associations for a managed node, use ListAssociations. To get a list of
 	// versions for a specific association, use ListAssociationVersions.
 	AssociationVersion *string
 
-	// The instance ID.
+	// The managed node ID.
 	InstanceId *string
 
 	// The name of the SSM document.

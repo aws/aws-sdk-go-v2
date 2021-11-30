@@ -14162,6 +14162,15 @@ func awsAwsjson11_deserializeDocumentS3Settings(v **types.S3Settings, value inte
 				sv.DatePartitionSequence = types.DatePartitionSequenceValue(jtv)
 			}
 
+		case "DatePartitionTimezone":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.DatePartitionTimezone = ptr.String(jtv)
+			}
+
 		case "DictPageSizeLimit":
 			if value != nil {
 				jtv, ok := value.(json.Number)

@@ -3791,6 +3791,11 @@ func awsAwsjson11_deserializeDocumentTextTranslationJobProperties(v **types.Text
 				return err
 			}
 
+		case "Settings":
+			if err := awsAwsjson11_deserializeDocumentTranslationSettings(&sv.Settings, value); err != nil {
+				return err
+			}
+
 		case "SourceLanguageCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3898,6 +3903,46 @@ func awsAwsjson11_deserializeDocumentTooManyRequestsException(v **types.TooManyR
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTranslationSettings(v **types.TranslationSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TranslationSettings
+	if *v == nil {
+		sv = &types.TranslationSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Profanity":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Profanity to be of type string, got %T instead", value)
+				}
+				sv.Profanity = types.Profanity(jtv)
 			}
 
 		default:
@@ -4494,6 +4539,11 @@ func awsAwsjson11_deserializeOpDocumentTranslateTextOutput(v **TranslateTextOutp
 
 	for key, value := range shape {
 		switch key {
+		case "AppliedSettings":
+			if err := awsAwsjson11_deserializeDocumentTranslationSettings(&sv.AppliedSettings, value); err != nil {
+				return err
+			}
+
 		case "AppliedTerminologies":
 			if err := awsAwsjson11_deserializeDocumentAppliedTerminologyList(&sv.AppliedTerminologies, value); err != nil {
 				return err

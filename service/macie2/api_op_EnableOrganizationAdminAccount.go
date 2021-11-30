@@ -12,7 +12,7 @@ import (
 )
 
 // Designates an account as the delegated Amazon Macie administrator account for an
-// Amazon Web Services organization.
+// organization in Organizations.
 func (c *Client) EnableOrganizationAdminAccount(ctx context.Context, params *EnableOrganizationAdminAccountInput, optFns ...func(*Options)) (*EnableOrganizationAdminAccountOutput, error) {
 	if params == nil {
 		params = &EnableOrganizationAdminAccountInput{}

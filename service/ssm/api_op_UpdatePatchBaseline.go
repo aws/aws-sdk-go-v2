@@ -51,8 +51,8 @@ type UpdatePatchBaselineInput struct {
 	ApprovedPatchesComplianceLevel types.PatchComplianceLevel
 
 	// Indicates whether the list of approved patches includes non-security updates
-	// that should be applied to the instances. The default value is false. Applies to
-	// Linux instances only.
+	// that should be applied to the managed nodes. The default value is false. Applies
+	// to Linux managed nodes only.
 	ApprovedPatchesEnableNonSecurity bool
 
 	// A description of the patch baseline.
@@ -91,8 +91,9 @@ type UpdatePatchBaselineInput struct {
 	// are set to null.
 	Replace bool
 
-	// Information about the patches to use to update the instances, including target
-	// operating systems and source repositories. Applies to Linux instances only.
+	// Information about the patches to use to update the managed nodes, including
+	// target operating systems and source repositories. Applies to Linux managed nodes
+	// only.
 	Sources []types.PatchSource
 
 	noSmithyDocumentSerde
@@ -111,8 +112,8 @@ type UpdatePatchBaselineOutput struct {
 	ApprovedPatchesComplianceLevel types.PatchComplianceLevel
 
 	// Indicates whether the list of approved patches includes non-security updates
-	// that should be applied to the instances. The default value is false. Applies to
-	// Linux instances only.
+	// that should be applied to the managed nodes. The default value is false. Applies
+	// to Linux managed nodes only.
 	ApprovedPatchesEnableNonSecurity bool
 
 	// The ID of the deleted patch baseline.
@@ -144,8 +145,9 @@ type UpdatePatchBaselineOutput struct {
 	// entirely along with packages that include it as a dependency.
 	RejectedPatchesAction types.PatchAction
 
-	// Information about the patches to use to update the instances, including target
-	// operating systems and source repositories. Applies to Linux instances only.
+	// Information about the patches to use to update the managed nodes, including
+	// target operating systems and source repositories. Applies to Linux managed nodes
+	// only.
 	Sources []types.PatchSource
 
 	// Metadata pertaining to the operation's result.

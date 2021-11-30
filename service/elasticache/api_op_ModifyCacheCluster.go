@@ -83,7 +83,9 @@ type ModifyCacheClusterInput struct {
 	// (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html)
 	AuthTokenUpdateStrategy types.AuthTokenUpdateStrategyType
 
-	// This parameter is currently disabled.
+	// If you are running Redis engine version 6.0 or later, set this parameter to yes
+	// if you want to opt-in to the next auto minor version upgrade campaign. This
+	// parameter is disabled for previous versions.
 	AutoMinorVersionUpgrade *bool
 
 	// A list of cache node IDs to be removed. A node ID is a numeric identifier (0001,

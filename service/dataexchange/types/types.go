@@ -16,6 +16,39 @@ type Action struct {
 	noSmithyDocumentSerde
 }
 
+// The API Gateway API that is the asset.
+type ApiGatewayApiAsset struct {
+
+	// The API description of the API asset.
+	ApiDescription *string
+
+	// The API endpoint of the API asset.
+	ApiEndpoint *string
+
+	// The unique identifier of the API asset.
+	ApiId *string
+
+	// The API key of the API asset.
+	ApiKey *string
+
+	// The API name of the API asset.
+	ApiName *string
+
+	// The download URL of the API specification of the API asset.
+	ApiSpecificationDownloadUrl *string
+
+	// The date and time that the upload URL expires, in ISO 8601 format.
+	ApiSpecificationDownloadUrlExpiresAt *time.Time
+
+	// The protocol type of the API asset.
+	ProtocolType ProtocolType
+
+	// The stage of the API asset.
+	Stage *string
+
+	noSmithyDocumentSerde
+}
+
 // The destination for the asset.
 type AssetDestinationEntry struct {
 
@@ -38,6 +71,9 @@ type AssetDestinationEntry struct {
 // Information about the asset.
 type AssetDetails struct {
 
+	// Information about the API Gateway API asset.
+	ApiGatewayApiAsset *ApiGatewayApiAsset
+
 	// The Amazon Redshift datashare that is the asset.
 	RedshiftDataShareAsset *RedshiftDataShareAsset
 
@@ -47,11 +83,12 @@ type AssetDetails struct {
 	noSmithyDocumentSerde
 }
 
-// An asset in AWS Data Exchange is a piece of data. The asset can be a structured
-// data file, an image file, or some other data file that can be stored as an S3
-// object, or an Amazon Redshift datashare (Preview). When you create an import job
-// for your files, you create an asset in AWS Data Exchange for each of those
-// files.
+// An asset in AWS Data Exchange is a piece of data (S3 object) or a means of
+// fulfilling data (Amazon Redshift datashare or Amazon API Gateway API). The asset
+// can be a structured data file, an image file, or some other data file that can
+// be stored as an S3 object, an Amazon API Gateway API, or an Amazon Redshift
+// datashare (Preview). When you create an import job for your files, API Gateway
+// APIs, or Amazon Redshift datashares, you create an asset in AWS Data Exchange.
 type AssetEntry struct {
 
 	// The ARN for the asset.
@@ -86,7 +123,9 @@ type AssetEntry struct {
 
 	// The name of the asset. When importing from Amazon S3, the S3 object key is used
 	// as the asset name. When exporting to Amazon S3, the asset name is used as
-	// default target S3 object key.
+	// default target S3 object key. When importing from Amazon API Gateway API, the
+	// API name is used as the asset name. When importing from Amazon Redshift, the
+	// datashare name is used as the asset name.
 	//
 	// This member is required.
 	Name *string
@@ -427,6 +466,112 @@ type ExportServerSideEncryption struct {
 	noSmithyDocumentSerde
 }
 
+// The request details.
+type ImportAssetFromApiGatewayApiRequestDetails struct {
+
+	// The API Gateway API ID.
+	//
+	// This member is required.
+	ApiId *string
+
+	// The API name.
+	//
+	// This member is required.
+	ApiName *string
+
+	// The Base64-encoded MD5 hash of the OpenAPI 3.0 JSON API specification file. It
+	// is used to ensure the integrity of the file.
+	//
+	// This member is required.
+	ApiSpecificationMd5Hash *string
+
+	// The data set ID.
+	//
+	// This member is required.
+	DataSetId *string
+
+	// The protocol type.
+	//
+	// This member is required.
+	ProtocolType ProtocolType
+
+	// The revision ID.
+	//
+	// This member is required.
+	RevisionId *string
+
+	// The API stage.
+	//
+	// This member is required.
+	Stage *string
+
+	// The API description. Markdown supported.
+	ApiDescription *string
+
+	// The API Gateway API key.
+	ApiKey *string
+
+	noSmithyDocumentSerde
+}
+
+// The response details.
+type ImportAssetFromApiGatewayApiResponseDetails struct {
+
+	// The API ID.
+	//
+	// This member is required.
+	ApiId *string
+
+	// The API name.
+	//
+	// This member is required.
+	ApiName *string
+
+	// The Base64-encoded Md5 hash for the API asset, used to ensure the integrity of
+	// the API at that location.
+	//
+	// This member is required.
+	ApiSpecificationMd5Hash *string
+
+	// The upload URL of the API specification.
+	//
+	// This member is required.
+	ApiSpecificationUploadUrl *string
+
+	// The date and time that the upload URL expires, in ISO 8601 format.
+	//
+	// This member is required.
+	ApiSpecificationUploadUrlExpiresAt *time.Time
+
+	// The data set ID.
+	//
+	// This member is required.
+	DataSetId *string
+
+	// The protocol type.
+	//
+	// This member is required.
+	ProtocolType ProtocolType
+
+	// The revision ID.
+	//
+	// This member is required.
+	RevisionId *string
+
+	// The API stage.
+	//
+	// This member is required.
+	Stage *string
+
+	// The API description.
+	ApiDescription *string
+
+	// The API key.
+	ApiKey *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about the job error.
 type ImportAssetFromSignedUrlJobErrorDetails struct {
 
@@ -706,6 +851,9 @@ type RequestDetails struct {
 	// Details about the export to Amazon S3 request.
 	ExportRevisionsToS3 *ExportRevisionsToS3RequestDetails
 
+	// Information about the import asset from API Gateway API request.
+	ImportAssetFromApiGatewayApi *ImportAssetFromApiGatewayApiRequestDetails
+
 	// Details about the import from signed URL request.
 	ImportAssetFromSignedUrl *ImportAssetFromSignedUrlRequestDetails
 
@@ -729,6 +877,9 @@ type ResponseDetails struct {
 
 	// Details for the export revisions to Amazon S3 response.
 	ExportRevisionsToS3 *ExportRevisionsToS3ResponseDetails
+
+	// The response details.
+	ImportAssetFromApiGatewayApi *ImportAssetFromApiGatewayApiResponseDetails
 
 	// Details for the import from signed URL response.
 	ImportAssetFromSignedUrl *ImportAssetFromSignedUrlResponseDetails

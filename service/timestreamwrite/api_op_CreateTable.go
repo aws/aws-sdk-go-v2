@@ -14,13 +14,15 @@ import (
 )
 
 // The CreateTable operation adds a new table to an existing database in your
-// account. In an AWS account, table names must be at least unique within each
-// Region if they are in the same database. You may have identical table names in
-// the same Region if the tables are in seperate databases. While creating the
-// table, you must specify the table name, database name, and the retention
-// properties. Service quotas apply. For more information, see Access Management
-// (https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html) in
-// the Timestream Developer Guide.
+// account. In an Amazon Web Services account, table names must be at least unique
+// within each Region if they are in the same database. You may have identical
+// table names in the same Region if the tables are in separate databases. While
+// creating the table, you must specify the table name, database name, and the
+// retention properties. Service quotas apply
+// (https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html).
+// See code sample
+// (https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.create-table.html)
+// for details.
 func (c *Client) CreateTable(ctx context.Context, params *CreateTableInput, optFns ...func(*Options)) (*CreateTableOutput, error) {
 	if params == nil {
 		params = &CreateTableInput{}
@@ -47,6 +49,9 @@ type CreateTableInput struct {
 	//
 	// This member is required.
 	TableName *string
+
+	// Contains properties to set on the table when enabling magnetic store writes.
+	MagneticStoreWriteProperties *types.MagneticStoreWriteProperties
 
 	// The duration for which your time series data must be stored in the memory store
 	// and the magnetic store.

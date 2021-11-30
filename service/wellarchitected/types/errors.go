@@ -48,7 +48,7 @@ func (e *ConflictException) ErrorMessage() string {
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// There is a problem with the AWS Well-Architected Tool API service.
+// There is a problem with the Well-Architected Tool API service.
 type InternalServerException struct {
 	Message *string
 

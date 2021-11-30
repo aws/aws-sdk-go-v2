@@ -9,6 +9,7 @@
         "api_client.go",
         "api_op_CreateSuiteDefinition.go",
         "api_op_DeleteSuiteDefinition.go",
+        "api_op_GetEndpoint.go",
         "api_op_GetSuiteDefinition.go",
         "api_op_GetSuiteRun.go",
         "api_op_GetSuiteRunReport.go",

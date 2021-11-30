@@ -4432,6 +4432,70 @@ func (m *awsAwsquery_serializeOpDescribePartners) HandleSerialize(ctx context.Co
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpDescribeReservedNodeExchangeStatus struct {
+}
+
+func (*awsAwsquery_serializeOpDescribeReservedNodeExchangeStatus) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpDescribeReservedNodeExchangeStatus) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeReservedNodeExchangeStatusInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DescribeReservedNodeExchangeStatus")
+	body.Key("Version").String("2012-12-01")
+
+	if err := awsAwsquery_serializeOpDocumentDescribeReservedNodeExchangeStatusInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpDescribeReservedNodeOfferings struct {
 }
 
@@ -5432,6 +5496,70 @@ func (m *awsAwsquery_serializeOpGetClusterCredentials) HandleSerialize(ctx conte
 	body.Key("Version").String("2012-12-01")
 
 	if err := awsAwsquery_serializeOpDocumentGetClusterCredentialsInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpGetReservedNodeExchangeConfigurationOptions struct {
+}
+
+func (*awsAwsquery_serializeOpGetReservedNodeExchangeConfigurationOptions) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpGetReservedNodeExchangeConfigurationOptions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetReservedNodeExchangeConfigurationOptionsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("GetReservedNodeExchangeConfigurationOptions")
+	body.Key("Version").String("2012-12-01")
+
+	if err := awsAwsquery_serializeOpDocumentGetReservedNodeExchangeConfigurationOptionsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -7679,6 +7807,16 @@ func awsAwsquery_serializeDocumentResizeClusterMessage(v *types.ResizeClusterMes
 		objectKey.Integer(*v.NumberOfNodes)
 	}
 
+	if v.ReservedNodeId != nil {
+		objectKey := object.Key("ReservedNodeId")
+		objectKey.String(*v.ReservedNodeId)
+	}
+
+	if v.TargetReservedNodeOfferingId != nil {
+		objectKey := object.Key("TargetReservedNodeOfferingId")
+		objectKey.String(*v.TargetReservedNodeOfferingId)
+	}
+
 	return nil
 }
 
@@ -9838,6 +9976,33 @@ func awsAwsquery_serializeOpDocumentDescribePartnersInput(v *DescribePartnersInp
 	return nil
 }
 
+func awsAwsquery_serializeOpDocumentDescribeReservedNodeExchangeStatusInput(v *DescribeReservedNodeExchangeStatusInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Marker != nil {
+		objectKey := object.Key("Marker")
+		objectKey.String(*v.Marker)
+	}
+
+	if v.MaxRecords != nil {
+		objectKey := object.Key("MaxRecords")
+		objectKey.Integer(*v.MaxRecords)
+	}
+
+	if v.ReservedNodeExchangeRequestId != nil {
+		objectKey := object.Key("ReservedNodeExchangeRequestId")
+		objectKey.String(*v.ReservedNodeExchangeRequestId)
+	}
+
+	if v.ReservedNodeId != nil {
+		objectKey := object.Key("ReservedNodeId")
+		objectKey.String(*v.ReservedNodeId)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeOpDocumentDescribeReservedNodeOfferingsInput(v *DescribeReservedNodeOfferingsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -10268,6 +10433,38 @@ func awsAwsquery_serializeOpDocumentGetClusterCredentialsInput(v *GetClusterCred
 	if v.DurationSeconds != nil {
 		objectKey := object.Key("DurationSeconds")
 		objectKey.Integer(*v.DurationSeconds)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentGetReservedNodeExchangeConfigurationOptionsInput(v *GetReservedNodeExchangeConfigurationOptionsInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if len(v.ActionType) > 0 {
+		objectKey := object.Key("ActionType")
+		objectKey.String(string(v.ActionType))
+	}
+
+	if v.ClusterIdentifier != nil {
+		objectKey := object.Key("ClusterIdentifier")
+		objectKey.String(*v.ClusterIdentifier)
+	}
+
+	if v.Marker != nil {
+		objectKey := object.Key("Marker")
+		objectKey.String(*v.Marker)
+	}
+
+	if v.MaxRecords != nil {
+		objectKey := object.Key("MaxRecords")
+		objectKey.Integer(*v.MaxRecords)
+	}
+
+	if v.SnapshotIdentifier != nil {
+		objectKey := object.Key("SnapshotIdentifier")
+		objectKey.String(*v.SnapshotIdentifier)
 	}
 
 	return nil
@@ -10920,6 +11117,16 @@ func awsAwsquery_serializeOpDocumentResizeClusterInput(v *ResizeClusterInput, va
 		objectKey.Integer(*v.NumberOfNodes)
 	}
 
+	if v.ReservedNodeId != nil {
+		objectKey := object.Key("ReservedNodeId")
+		objectKey.String(*v.ReservedNodeId)
+	}
+
+	if v.TargetReservedNodeOfferingId != nil {
+		objectKey := object.Key("TargetReservedNodeOfferingId")
+		objectKey.String(*v.TargetReservedNodeOfferingId)
+	}
+
 	return nil
 }
 
@@ -11056,6 +11263,11 @@ func awsAwsquery_serializeOpDocumentRestoreFromClusterSnapshotInput(v *RestoreFr
 		objectKey.Boolean(*v.PubliclyAccessible)
 	}
 
+	if v.ReservedNodeId != nil {
+		objectKey := object.Key("ReservedNodeId")
+		objectKey.String(*v.ReservedNodeId)
+	}
+
 	if v.SnapshotClusterIdentifier != nil {
 		objectKey := object.Key("SnapshotClusterIdentifier")
 		objectKey.String(*v.SnapshotClusterIdentifier)
@@ -11069,6 +11281,11 @@ func awsAwsquery_serializeOpDocumentRestoreFromClusterSnapshotInput(v *RestoreFr
 	if v.SnapshotScheduleIdentifier != nil {
 		objectKey := object.Key("SnapshotScheduleIdentifier")
 		objectKey.String(*v.SnapshotScheduleIdentifier)
+	}
+
+	if v.TargetReservedNodeOfferingId != nil {
+		objectKey := object.Key("TargetReservedNodeOfferingId")
+		objectKey.String(*v.TargetReservedNodeOfferingId)
 	}
 
 	if v.VpcSecurityGroupIds != nil {

@@ -257,6 +257,16 @@ func (Event) Values() []Event {
 		"s3:Replication:OperationNotTracked",
 		"s3:Replication:OperationMissedThreshold",
 		"s3:Replication:OperationReplicatedAfterThreshold",
+		"s3:ObjectRestore:Delete",
+		"s3:LifecycleTransition",
+		"s3:IntelligentTiering",
+		"s3:ObjectAcl:Put",
+		"s3:LifecycleExpiration:*",
+		"s3:LifecycleExpiration:Delete",
+		"s3:LifecycleExpiration:DeleteMarkerCreated",
+		"s3:ObjectTagging:*",
+		"s3:ObjectTagging:Put",
+		"s3:ObjectTagging:Delete",
 	}
 }
 

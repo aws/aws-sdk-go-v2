@@ -29,32 +29,8 @@ func (m *validateOpGetPersonalizedRanking) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpGetRecommendations struct {
-}
-
-func (*validateOpGetRecommendations) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpGetRecommendations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*GetRecommendationsInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpGetRecommendationsInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 func addOpGetPersonalizedRankingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetPersonalizedRanking{}, middleware.After)
-}
-
-func addOpGetRecommendationsValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpGetRecommendations{}, middleware.After)
 }
 
 func validateOpGetPersonalizedRankingInput(v *GetPersonalizedRankingInput) error {
@@ -70,21 +46,6 @@ func validateOpGetPersonalizedRankingInput(v *GetPersonalizedRankingInput) error
 	}
 	if v.UserId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpGetRecommendationsInput(v *GetRecommendationsInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "GetRecommendationsInput"}
-	if v.CampaignArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CampaignArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

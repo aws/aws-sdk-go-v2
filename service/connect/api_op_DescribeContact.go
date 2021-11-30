@@ -12,7 +12,7 @@ import (
 )
 
 // This API is in preview release for Amazon Connect and is subject to change.
-// Describes the specified contact. Contact information is available in Amazon
+// Describes the specified contact. Contact information remains available in Amazon
 // Connect for 24 months, and then it is deleted.
 func (c *Client) DescribeContact(ctx context.Context, params *DescribeContactInput, optFns ...func(*Options)) (*DescribeContactOutput, error) {
 	if params == nil {
@@ -31,7 +31,7 @@ func (c *Client) DescribeContact(ctx context.Context, params *DescribeContactInp
 
 type DescribeContactInput struct {
 
-	// The identifier of the initial contact.
+	// The identifier of the contact.
 	//
 	// This member is required.
 	ContactId *string
