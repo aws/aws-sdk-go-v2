@@ -203,13 +203,22 @@ public class AddAwsConfigFields implements GoIntegration {
     }
 
     private void writeAwsConfigEndpointResolver(GoWriter writer) {
-        writer.openBlock("func $L(cfg aws.Config, o *Options) {", "}", RESOLVE_AWS_CONFIG_ENDPOINT_RESOLVER, () -> {
-            writer.openBlock("if cfg.$L == nil {", "}", ENDPOINT_RESOLVER_CONFIG_NAME, () -> writer.write("return"));
-            writer.write("o.$L = $L(cfg.$L, cfg.$L, $L())", ENDPOINT_RESOLVER_CONFIG_NAME,
-                    EndpointGenerator.AWS_ENDPOINT_RESOLVER_HELPER, ENDPOINT_RESOLVER_CONFIG_NAME,
-                    AWS_ENDPOINT_RESOLVER_WITH_OPTIONS,
-                    EndpointGenerator.RESOLVER_CONSTRUCTOR_NAME);
-        });
+        writer.pushState();
+        writer.putContext("resolverName", RESOLVE_AWS_CONFIG_ENDPOINT_RESOLVER);
+        writer.putContext("clientOption", ENDPOINT_RESOLVER_CONFIG_NAME);
+        writer.putContext("wrapperHelper", EndpointGenerator.AWS_ENDPOINT_RESOLVER_HELPER);
+        writer.putContext("awsResolver", ENDPOINT_RESOLVER_CONFIG_NAME);
+        writer.putContext("awsResolverWithOptions", AWS_ENDPOINT_RESOLVER_WITH_OPTIONS);
+        writer.putContext("newResolver", EndpointGenerator.RESOLVER_CONSTRUCTOR_NAME);
+        writer.write("""
+                     func $resolverName:L(cfg aws.Config, o *Options) {
+                         if cfg.$awsResolver:L == nil && cfg.$awsResolverWithOptions:L == nil {
+                             return
+                         }
+                         o.$clientOption:L = $wrapperHelper:L(cfg.$awsResolver:L, cfg.$awsResolverWithOptions:L, $newResolver:L())
+                     }
+                     """);
+        writer.popState();
     }
 
     @Override

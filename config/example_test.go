@@ -91,6 +91,20 @@ func ExampleWithEndpointResolver() {
 	_ = cfg
 }
 
+func ExampleWithEndpointResolverWithOptions() {
+	cfg, err := config.LoadDefaultConfig(context.TODO(),
+		config.WithEndpointResolverWithOptions(aws.EndpointResolverWithOptionsFunc(
+			func(service, region string, options ...interface{}) (aws.Endpoint, error) {
+				return aws.Endpoint{URL: "https://mock.amazonaws.com"}, nil
+			})),
+	)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+	_ = cfg
+}
+
 func ExampleWithHTTPClient() {
 	cfg, err := config.LoadDefaultConfig(context.TODO(),
 		config.WithHTTPClient(awshttp.NewBuildableClient().
