@@ -2,7 +2,7 @@
     "id": "f0080c1f-15ae-43c5-a697-801297110714",
     "type": "bugfix",
     "collapse": true,
-    "description": "Fixes a bug that prevented aws.EndpointResolverWithOptions from being used by the service client.",
+    "description": "Fixes a bug that prevented aws.EndpointResolverWithOptions from being used by the service client. ([#1514](https://github.com/aws/aws-sdk-go-v2/pull/1514))",
     "modules": [
         "internal/protocoltest/awsrestjson",
         "internal/protocoltest/ec2query",
