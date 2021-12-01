@@ -30,7 +30,7 @@ func swapECSContainerURI(path string) func() {
 	}
 }
 
-func setupCredentialsEndpoints(t *testing.T) (aws.EndpointResolver, func()) {
+func setupCredentialsEndpoints(t *testing.T) (aws.EndpointResolverWithOptions, func()) {
 	ecsMetadataServer := httptest.NewServer(http.HandlerFunc(
 		func(w http.ResponseWriter, r *http.Request) {
 			if r.URL.Path == "/ECS" {
@@ -95,8 +95,8 @@ func setupCredentialsEndpoints(t *testing.T) (aws.EndpointResolver, func()) {
 				UnixNano()/int64(time.Millisecond))))
 	}))
 
-	resolver := aws.EndpointResolverFunc(
-		func(service, region string) (aws.Endpoint, error) {
+	resolver := aws.EndpointResolverWithOptionsFunc(
+		func(service, region string, options ...interface{}) (aws.Endpoint, error) {
 			switch service {
 			case sts.ServiceID:
 				return aws.Endpoint{
@@ -394,7 +394,7 @@ func TestSharedConfigCredentialSource(t *testing.T) {
 			var credChain []string
 
 			loadOptions := []func(*LoadOptions) error{
-				WithEndpointResolver(endpointResolver),
+				WithEndpointResolverWithOptions(endpointResolver),
 				WithAPIOptions([]func(*middleware.Stack) error{
 					func(stack *middleware.Stack) error {
 						return stack.Initialize.Add(middleware.InitializeMiddlewareFunc("GetRoleArns", func(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler,
