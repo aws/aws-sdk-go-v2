@@ -32,9 +32,7 @@ import software.amazon.smithy.utils.SetUtils;
 public final class FilterShapes implements GoIntegration {
     private static final Logger LOGGER = Logger.getLogger(FilterShapes.class.getName());
 
-    private static final Set<ShapeId> SHAPE_IDS = SetUtils.of(
-            ShapeId.from("com.amazonaws.lexruntimev2#StartConversation")
-    );
+    private static final Set<ShapeId> SHAPE_IDS = SetUtils.of();
 
     public FilterShapes() {
     }

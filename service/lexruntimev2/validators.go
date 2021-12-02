@@ -110,6 +110,26 @@ func (m *validateOpRecognizeUtterance) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartConversation struct {
+}
+
+func (*validateOpStartConversation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartConversation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartConversationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartConversationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpDeleteSessionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteSession{}, middleware.After)
 }
@@ -128,6 +148,10 @@ func addOpRecognizeTextValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpRecognizeUtteranceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRecognizeUtterance{}, middleware.After)
+}
+
+func addOpStartConversationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartConversation{}, middleware.After)
 }
 
 func validateActiveContext(v *types.ActiveContext) error {
@@ -190,6 +214,21 @@ func validateActiveContextTimeToLive(v *types.ActiveContextTimeToLive) error {
 	}
 }
 
+func validateAudioInputEvent(v *types.AudioInputEvent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AudioInputEvent"}
+	if v.ContentType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContentType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateButton(v *types.Button) error {
 	if v == nil {
 		return nil
@@ -225,6 +264,31 @@ func validateButtonsList(v []types.Button) error {
 	}
 }
 
+func validateConfigurationEvent(v *types.ConfigurationEvent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConfigurationEvent"}
+	if v.ResponseContentType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResponseContentType"))
+	}
+	if v.SessionState != nil {
+		if err := validateSessionState(v.SessionState); err != nil {
+			invalidParams.AddNested("SessionState", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.WelcomeMessages != nil {
+		if err := validateMessages(v.WelcomeMessages); err != nil {
+			invalidParams.AddNested("WelcomeMessages", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDialogAction(v *types.DialogAction) error {
 	if v == nil {
 		return nil
@@ -232,6 +296,21 @@ func validateDialogAction(v *types.DialogAction) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DialogAction"}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDTMFInputEvent(v *types.DTMFInputEvent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DTMFInputEvent"}
+	if v.InputCharacter == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputCharacter"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -376,6 +455,55 @@ func validateSlots(v map[string]types.Slot) error {
 		if err := validateSlot(&value); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStartConversationRequestEventStream(v types.StartConversationRequestEventStream) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartConversationRequestEventStream"}
+	switch uv := v.(type) {
+	case *types.StartConversationRequestEventStreamMemberAudioInputEvent:
+		if err := validateAudioInputEvent(&uv.Value); err != nil {
+			invalidParams.AddNested("[AudioInputEvent]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.StartConversationRequestEventStreamMemberConfigurationEvent:
+		if err := validateConfigurationEvent(&uv.Value); err != nil {
+			invalidParams.AddNested("[ConfigurationEvent]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.StartConversationRequestEventStreamMemberDTMFInputEvent:
+		if err := validateDTMFInputEvent(&uv.Value); err != nil {
+			invalidParams.AddNested("[DTMFInputEvent]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.StartConversationRequestEventStreamMemberTextInputEvent:
+		if err := validateTextInputEvent(&uv.Value); err != nil {
+			invalidParams.AddNested("[TextInputEvent]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTextInputEvent(v *types.TextInputEvent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TextInputEvent"}
+	if v.Text == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Text"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -551,6 +679,30 @@ func validateOpRecognizeUtteranceInput(v *RecognizeUtteranceInput) error {
 	}
 	if v.RequestContentType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RequestContentType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartConversationInput(v *StartConversationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartConversationInput"}
+	if v.BotId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotId"))
+	}
+	if v.BotAliasId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotAliasId"))
+	}
+	if v.LocaleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocaleId"))
+	}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

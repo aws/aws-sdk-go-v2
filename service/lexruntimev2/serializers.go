@@ -6,6 +6,8 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream"
+	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream/eventstreamapi"
 	"github.com/aws/aws-sdk-go-v2/service/lexruntimev2/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/encoding/httpbinding"
@@ -551,6 +553,223 @@ func awsRestjson1_serializeOpHttpBindingsRecognizeUtteranceInput(v *RecognizeUtt
 	return nil
 }
 
+type awsRestjson1_serializeOpStartConversation struct {
+}
+
+func (*awsRestjson1_serializeOpStartConversation) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpStartConversation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartConversationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/bots/{botId}/botAliases/{botAliasId}/botLocales/{localeId}/sessions/{sessionId}/conversation")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsStartConversationInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/vnd.amazon.eventstream")
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsStartConversationInput(v *StartConversationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.BotAliasId == nil || len(*v.BotAliasId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member botAliasId must not be empty")}
+	}
+	if v.BotAliasId != nil {
+		if err := encoder.SetURI("botAliasId").String(*v.BotAliasId); err != nil {
+			return err
+		}
+	}
+
+	if v.BotId == nil || len(*v.BotId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member botId must not be empty")}
+	}
+	if v.BotId != nil {
+		if err := encoder.SetURI("botId").String(*v.BotId); err != nil {
+			return err
+		}
+	}
+
+	if len(v.ConversationMode) > 0 {
+		locationName := "X-Amz-Lex-Conversation-Mode"
+		encoder.SetHeader(locationName).String(string(v.ConversationMode))
+	}
+
+	if v.LocaleId == nil || len(*v.LocaleId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member localeId must not be empty")}
+	}
+	if v.LocaleId != nil {
+		if err := encoder.SetURI("localeId").String(*v.LocaleId); err != nil {
+			return err
+		}
+	}
+
+	if v.SessionId == nil || len(*v.SessionId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member sessionId must not be empty")}
+	}
+	if v.SessionId != nil {
+		if err := encoder.SetURI("sessionId").String(*v.SessionId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeEventStreamStartConversationRequestEventStream(v types.StartConversationRequestEventStream, msg *eventstream.Message) error {
+	if v == nil {
+		return fmt.Errorf("unexpected serialization of nil %T", v)
+	}
+
+	switch vv := v.(type) {
+	case *types.StartConversationRequestEventStreamMemberConfigurationEvent:
+		msg.Headers.Set(eventstreamapi.EventTypeHeader, eventstream.StringValue("ConfigurationEvent"))
+		return awsRestjson1_serializeEventMessageConfigurationEvent(&vv.Value, msg)
+
+	case *types.StartConversationRequestEventStreamMemberAudioInputEvent:
+		msg.Headers.Set(eventstreamapi.EventTypeHeader, eventstream.StringValue("AudioInputEvent"))
+		return awsRestjson1_serializeEventMessageAudioInputEvent(&vv.Value, msg)
+
+	case *types.StartConversationRequestEventStreamMemberDTMFInputEvent:
+		msg.Headers.Set(eventstreamapi.EventTypeHeader, eventstream.StringValue("DTMFInputEvent"))
+		return awsRestjson1_serializeEventMessageDTMFInputEvent(&vv.Value, msg)
+
+	case *types.StartConversationRequestEventStreamMemberTextInputEvent:
+		msg.Headers.Set(eventstreamapi.EventTypeHeader, eventstream.StringValue("TextInputEvent"))
+		return awsRestjson1_serializeEventMessageTextInputEvent(&vv.Value, msg)
+
+	case *types.StartConversationRequestEventStreamMemberPlaybackCompletionEvent:
+		msg.Headers.Set(eventstreamapi.EventTypeHeader, eventstream.StringValue("PlaybackCompletionEvent"))
+		return awsRestjson1_serializeEventMessagePlaybackCompletionEvent(&vv.Value, msg)
+
+	case *types.StartConversationRequestEventStreamMemberDisconnectionEvent:
+		msg.Headers.Set(eventstreamapi.EventTypeHeader, eventstream.StringValue("DisconnectionEvent"))
+		return awsRestjson1_serializeEventMessageDisconnectionEvent(&vv.Value, msg)
+
+	default:
+		return fmt.Errorf("unexpected event message type: %v", v)
+
+	}
+}
+func awsRestjson1_serializeEventMessageAudioInputEvent(v *types.AudioInputEvent, msg *eventstream.Message) error {
+	if v == nil {
+		return fmt.Errorf("unexpected serialization of nil %T", v)
+	}
+
+	msg.Headers.Set(eventstreamapi.MessageTypeHeader, eventstream.StringValue(eventstreamapi.EventMessageType))
+	msg.Headers.Set(eventstreamapi.ContentTypeHeader, eventstream.StringValue("application/json"))
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeDocumentAudioInputEvent(v, jsonEncoder.Value); err != nil {
+		return err
+	}
+	msg.Payload = jsonEncoder.Bytes()
+	return nil
+}
+
+func awsRestjson1_serializeEventMessageConfigurationEvent(v *types.ConfigurationEvent, msg *eventstream.Message) error {
+	if v == nil {
+		return fmt.Errorf("unexpected serialization of nil %T", v)
+	}
+
+	msg.Headers.Set(eventstreamapi.MessageTypeHeader, eventstream.StringValue(eventstreamapi.EventMessageType))
+	msg.Headers.Set(eventstreamapi.ContentTypeHeader, eventstream.StringValue("application/json"))
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeDocumentConfigurationEvent(v, jsonEncoder.Value); err != nil {
+		return err
+	}
+	msg.Payload = jsonEncoder.Bytes()
+	return nil
+}
+
+func awsRestjson1_serializeEventMessageDisconnectionEvent(v *types.DisconnectionEvent, msg *eventstream.Message) error {
+	if v == nil {
+		return fmt.Errorf("unexpected serialization of nil %T", v)
+	}
+
+	msg.Headers.Set(eventstreamapi.MessageTypeHeader, eventstream.StringValue(eventstreamapi.EventMessageType))
+	msg.Headers.Set(eventstreamapi.ContentTypeHeader, eventstream.StringValue("application/json"))
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeDocumentDisconnectionEvent(v, jsonEncoder.Value); err != nil {
+		return err
+	}
+	msg.Payload = jsonEncoder.Bytes()
+	return nil
+}
+
+func awsRestjson1_serializeEventMessageDTMFInputEvent(v *types.DTMFInputEvent, msg *eventstream.Message) error {
+	if v == nil {
+		return fmt.Errorf("unexpected serialization of nil %T", v)
+	}
+
+	msg.Headers.Set(eventstreamapi.MessageTypeHeader, eventstream.StringValue(eventstreamapi.EventMessageType))
+	msg.Headers.Set(eventstreamapi.ContentTypeHeader, eventstream.StringValue("application/json"))
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeDocumentDTMFInputEvent(v, jsonEncoder.Value); err != nil {
+		return err
+	}
+	msg.Payload = jsonEncoder.Bytes()
+	return nil
+}
+
+func awsRestjson1_serializeEventMessagePlaybackCompletionEvent(v *types.PlaybackCompletionEvent, msg *eventstream.Message) error {
+	if v == nil {
+		return fmt.Errorf("unexpected serialization of nil %T", v)
+	}
+
+	msg.Headers.Set(eventstreamapi.MessageTypeHeader, eventstream.StringValue(eventstreamapi.EventMessageType))
+	msg.Headers.Set(eventstreamapi.ContentTypeHeader, eventstream.StringValue("application/json"))
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeDocumentPlaybackCompletionEvent(v, jsonEncoder.Value); err != nil {
+		return err
+	}
+	msg.Payload = jsonEncoder.Bytes()
+	return nil
+}
+
+func awsRestjson1_serializeEventMessageTextInputEvent(v *types.TextInputEvent, msg *eventstream.Message) error {
+	if v == nil {
+		return fmt.Errorf("unexpected serialization of nil %T", v)
+	}
+
+	msg.Headers.Set(eventstreamapi.MessageTypeHeader, eventstream.StringValue(eventstreamapi.EventMessageType))
+	msg.Headers.Set(eventstreamapi.ContentTypeHeader, eventstream.StringValue("application/json"))
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeDocumentTextInputEvent(v, jsonEncoder.Value); err != nil {
+		return err
+	}
+	msg.Payload = jsonEncoder.Bytes()
+	return nil
+}
+
 func awsRestjson1_serializeDocumentActiveContext(v *types.ActiveContext, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -618,6 +837,33 @@ func awsRestjson1_serializeDocumentActiveContextTimeToLive(v *types.ActiveContex
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAudioInputEvent(v *types.AudioInputEvent, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AudioChunk != nil {
+		ok := object.Key("audioChunk")
+		ok.Base64EncodeBytes(v.AudioChunk)
+	}
+
+	if v.ClientTimestampMillis != 0 {
+		ok := object.Key("clientTimestampMillis")
+		ok.Long(v.ClientTimestampMillis)
+	}
+
+	if v.ContentType != nil {
+		ok := object.Key("contentType")
+		ok.String(*v.ContentType)
+	}
+
+	if v.EventId != nil {
+		ok := object.Key("eventId")
+		ok.String(*v.EventId)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentButton(v *types.Button, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -648,6 +894,54 @@ func awsRestjson1_serializeDocumentButtonsList(v []types.Button, value smithyjso
 	return nil
 }
 
+func awsRestjson1_serializeDocumentConfigurationEvent(v *types.ConfigurationEvent, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientTimestampMillis != 0 {
+		ok := object.Key("clientTimestampMillis")
+		ok.Long(v.ClientTimestampMillis)
+	}
+
+	if v.DisablePlayback {
+		ok := object.Key("disablePlayback")
+		ok.Boolean(v.DisablePlayback)
+	}
+
+	if v.EventId != nil {
+		ok := object.Key("eventId")
+		ok.String(*v.EventId)
+	}
+
+	if v.RequestAttributes != nil {
+		ok := object.Key("requestAttributes")
+		if err := awsRestjson1_serializeDocumentStringMap(v.RequestAttributes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ResponseContentType != nil {
+		ok := object.Key("responseContentType")
+		ok.String(*v.ResponseContentType)
+	}
+
+	if v.SessionState != nil {
+		ok := object.Key("sessionState")
+		if err := awsRestjson1_serializeDocumentSessionState(v.SessionState, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.WelcomeMessages != nil {
+		ok := object.Key("welcomeMessages")
+		if err := awsRestjson1_serializeDocumentMessages(v.WelcomeMessages, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDialogAction(v *types.DialogAction, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -665,6 +959,45 @@ func awsRestjson1_serializeDocumentDialogAction(v *types.DialogAction, value smi
 	if len(v.Type) > 0 {
 		ok := object.Key("type")
 		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDisconnectionEvent(v *types.DisconnectionEvent, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientTimestampMillis != 0 {
+		ok := object.Key("clientTimestampMillis")
+		ok.Long(v.ClientTimestampMillis)
+	}
+
+	if v.EventId != nil {
+		ok := object.Key("eventId")
+		ok.String(*v.EventId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDTMFInputEvent(v *types.DTMFInputEvent, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientTimestampMillis != 0 {
+		ok := object.Key("clientTimestampMillis")
+		ok.Long(v.ClientTimestampMillis)
+	}
+
+	if v.EventId != nil {
+		ok := object.Key("eventId")
+		ok.String(*v.EventId)
+	}
+
+	if v.InputCharacter != nil {
+		ok := object.Key("inputCharacter")
+		ok.String(*v.InputCharacter)
 	}
 
 	return nil
@@ -762,6 +1095,23 @@ func awsRestjson1_serializeDocumentMessages(v []types.Message, value smithyjson.
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPlaybackCompletionEvent(v *types.PlaybackCompletionEvent, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientTimestampMillis != 0 {
+		ok := object.Key("clientTimestampMillis")
+		ok.Long(v.ClientTimestampMillis)
+	}
+
+	if v.EventId != nil {
+		ok := object.Key("eventId")
+		ok.String(*v.EventId)
+	}
+
 	return nil
 }
 
@@ -864,6 +1214,28 @@ func awsRestjson1_serializeDocumentStringMap(v map[string]string, value smithyjs
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTextInputEvent(v *types.TextInputEvent, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientTimestampMillis != 0 {
+		ok := object.Key("clientTimestampMillis")
+		ok.Long(v.ClientTimestampMillis)
+	}
+
+	if v.EventId != nil {
+		ok := object.Key("eventId")
+		ok.String(*v.EventId)
+	}
+
+	if v.Text != nil {
+		ok := object.Key("text")
+		ok.String(*v.Text)
+	}
+
 	return nil
 }
 

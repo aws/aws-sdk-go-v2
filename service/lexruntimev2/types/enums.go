@@ -22,6 +22,24 @@ func (ConfirmationState) Values() []ConfirmationState {
 	}
 }
 
+type ConversationMode string
+
+// Enum values for ConversationMode
+const (
+	ConversationModeAudio ConversationMode = "AUDIO"
+	ConversationModeText  ConversationMode = "TEXT"
+)
+
+// Values returns all known values for ConversationMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConversationMode) Values() []ConversationMode {
+	return []ConversationMode{
+		"AUDIO",
+		"TEXT",
+	}
+}
+
 type DialogActionType string
 
 // Enum values for DialogActionType
@@ -45,6 +63,26 @@ func (DialogActionType) Values() []DialogActionType {
 		"ElicitIntent",
 		"ElicitSlot",
 		"None",
+	}
+}
+
+type InputMode string
+
+// Enum values for InputMode
+const (
+	InputModeText   InputMode = "Text"
+	InputModeSpeech InputMode = "Speech"
+	InputModeDtmf   InputMode = "DTMF"
+)
+
+// Values returns all known values for InputMode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (InputMode) Values() []InputMode {
+	return []InputMode{
+		"Text",
+		"Speech",
+		"DTMF",
 	}
 }
 
@@ -93,6 +131,26 @@ func (MessageContentType) Values() []MessageContentType {
 		"ImageResponseCard",
 		"PlainText",
 		"SSML",
+	}
+}
+
+type PlaybackInterruptionReason string
+
+// Enum values for PlaybackInterruptionReason
+const (
+	PlaybackInterruptionReasonDtmfStartDetected  PlaybackInterruptionReason = "DTMF_START_DETECTED"
+	PlaybackInterruptionReasonTextDetected       PlaybackInterruptionReason = "TEXT_DETECTED"
+	PlaybackInterruptionReasonVoiceStartDetected PlaybackInterruptionReason = "VOICE_START_DETECTED"
+)
+
+// Values returns all known values for PlaybackInterruptionReason. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PlaybackInterruptionReason) Values() []PlaybackInterruptionReason {
+	return []PlaybackInterruptionReason{
+		"DTMF_START_DETECTED",
+		"TEXT_DETECTED",
+		"VOICE_START_DETECTED",
 	}
 }
 
