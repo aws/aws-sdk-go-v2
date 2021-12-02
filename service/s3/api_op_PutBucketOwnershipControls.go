@@ -14,10 +14,10 @@ import (
 
 // Creates or modifies OwnershipControls for an Amazon S3 bucket. To use this
 // operation, you must have the s3:PutBucketOwnershipControls permission. For more
-// information about Amazon S3 permissions, see Specifying Permissions in a Policy
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html).
-// For information about Amazon S3 Object Ownership, see Using Object Ownership
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/about-object-ownership.html).
+// information about Amazon S3 permissions, see Specifying permissions in a policy
+// (https://docs.aws.amazon.com/AmazonS3/latest/user-guide/using-with-s3-actions.html).
+// For information about Amazon S3 Object Ownership, see Using object ownership
+// (https://docs.aws.amazon.com/AmazonS3/latest/user-guide/about-object-ownership.html).
 // The following operations are related to PutBucketOwnershipControls:
 //
 // *
@@ -46,8 +46,8 @@ type PutBucketOwnershipControlsInput struct {
 	// This member is required.
 	Bucket *string
 
-	// The OwnershipControls (BucketOwnerPreferred or ObjectWriter) that you want to
-	// apply to this Amazon S3 bucket.
+	// The OwnershipControls (BucketOwnerEnforced, BucketOwnerPreferred, or
+	// ObjectWriter) that you want to apply to this Amazon S3 bucket.
 	//
 	// This member is required.
 	OwnershipControls *types.OwnershipControls

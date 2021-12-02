@@ -62,6 +62,11 @@ type DescribeIndexOutput struct {
 	// *
 	// REGISTRY_AND_SHADOW_AND_CONNECTIVITY_STATUS - Your thing index contains registry
 	// data, shadow data, and thing connectivity status data.
+	//
+	// * MULTI_INDEXING_MODE -
+	// Your thing index contains multiple data sources. For more information, see
+	// GetIndexingConfiguration
+	// (https://docs.aws.amazon.com/iot/latest/apireference/API_GetIndexingConfiguration.html).
 	Schema *string
 
 	// Metadata pertaining to the operation's result.

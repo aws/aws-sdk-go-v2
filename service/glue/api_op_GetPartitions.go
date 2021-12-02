@@ -10,6 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"time"
 )
 
 // Retrieves information about the partitions in a table.
@@ -103,8 +104,16 @@ type GetPartitionsInput struct {
 	// partitions.
 	NextToken *string
 
+	// The time as of when to read the partition contents. If not set, the most recent
+	// transaction commit time will be used. Cannot be specified along with
+	// TransactionId.
+	QueryAsOfTime *time.Time
+
 	// The segment of the table's partitions to scan in this request.
 	Segment *types.Segment
+
+	// The transaction ID at which to read the partition contents.
+	TransactionId *string
 
 	noSmithyDocumentSerde
 }

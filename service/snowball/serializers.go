@@ -1687,6 +1687,13 @@ func awsAwsjson11_serializeDocumentOnDeviceServiceConfiguration(v *types.OnDevic
 		}
 	}
 
+	if v.TGWOnDeviceService != nil {
+		ok := object.Key("TGWOnDeviceService")
+		if err := awsAwsjson11_serializeDocumentTGWOnDeviceServiceConfiguration(v.TGWOnDeviceService, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -1782,6 +1789,23 @@ func awsAwsjson11_serializeDocumentTaxDocuments(v *types.TaxDocuments, value smi
 		if err := awsAwsjson11_serializeDocumentINDTaxDocuments(v.IND, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTGWOnDeviceServiceConfiguration(v *types.TGWOnDeviceServiceConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.StorageLimit != 0 {
+		ok := object.Key("StorageLimit")
+		ok.Integer(v.StorageLimit)
+	}
+
+	if len(v.StorageUnit) > 0 {
+		ok := object.Key("StorageUnit")
+		ok.String(string(v.StorageUnit))
 	}
 
 	return nil

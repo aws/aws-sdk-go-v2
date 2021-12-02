@@ -12451,6 +12451,11 @@ func awsAwsjson11_serializeOpDocumentBatchDeleteTableInput(v *BatchDeleteTableIn
 		}
 	}
 
+	if v.TransactionId != nil {
+		ok := object.Key("TransactionId")
+		ok.String(*v.TransactionId)
+	}
+
 	return nil
 }
 
@@ -13404,6 +13409,11 @@ func awsAwsjson11_serializeOpDocumentCreateTableInput(v *CreateTableInput, value
 		}
 	}
 
+	if v.TransactionId != nil {
+		ok := object.Key("TransactionId")
+		ok.String(*v.TransactionId)
+	}
+
 	return nil
 }
 
@@ -13848,6 +13858,11 @@ func awsAwsjson11_serializeOpDocumentDeleteTableInput(v *DeleteTableInput, value
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	if v.TransactionId != nil {
+		ok := object.Key("TransactionId")
+		ok.String(*v.TransactionId)
 	}
 
 	return nil
@@ -14603,6 +14618,11 @@ func awsAwsjson11_serializeOpDocumentGetPartitionsInput(v *GetPartitionsInput, v
 		ok.String(*v.NextToken)
 	}
 
+	if v.QueryAsOfTime != nil {
+		ok := object.Key("QueryAsOfTime")
+		ok.Double(smithytime.FormatEpochSeconds(*v.QueryAsOfTime))
+	}
+
 	if v.Segment != nil {
 		ok := object.Key("Segment")
 		if err := awsAwsjson11_serializeDocumentSegment(v.Segment, ok); err != nil {
@@ -14613,6 +14633,11 @@ func awsAwsjson11_serializeOpDocumentGetPartitionsInput(v *GetPartitionsInput, v
 	if v.TableName != nil {
 		ok := object.Key("TableName")
 		ok.String(*v.TableName)
+	}
+
+	if v.TransactionId != nil {
+		ok := object.Key("TransactionId")
+		ok.String(*v.TransactionId)
 	}
 
 	return nil
@@ -14848,6 +14873,16 @@ func awsAwsjson11_serializeOpDocumentGetTableInput(v *GetTableInput, value smith
 		ok.String(*v.Name)
 	}
 
+	if v.QueryAsOfTime != nil {
+		ok := object.Key("QueryAsOfTime")
+		ok.Double(smithytime.FormatEpochSeconds(*v.QueryAsOfTime))
+	}
+
+	if v.TransactionId != nil {
+		ok := object.Key("TransactionId")
+		ok.String(*v.TransactionId)
+	}
+
 	return nil
 }
 
@@ -14878,6 +14913,16 @@ func awsAwsjson11_serializeOpDocumentGetTablesInput(v *GetTablesInput, value smi
 	if v.NextToken != nil {
 		ok := object.Key("NextToken")
 		ok.String(*v.NextToken)
+	}
+
+	if v.QueryAsOfTime != nil {
+		ok := object.Key("QueryAsOfTime")
+		ok.Double(smithytime.FormatEpochSeconds(*v.QueryAsOfTime))
+	}
+
+	if v.TransactionId != nil {
+		ok := object.Key("TransactionId")
+		ok.String(*v.TransactionId)
 	}
 
 	return nil
@@ -16507,6 +16552,11 @@ func awsAwsjson11_serializeOpDocumentUpdateTableInput(v *UpdateTableInput, value
 		if err := awsAwsjson11_serializeDocumentTableInput(v.TableInput, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.TransactionId != nil {
+		ok := object.Key("TransactionId")
+		ok.String(*v.TransactionId)
 	}
 
 	return nil

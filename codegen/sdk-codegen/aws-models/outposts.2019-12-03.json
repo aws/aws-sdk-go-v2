@@ -599,6 +599,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tags to apply to the Outpost.</p>"
                     }
+                },
+                "SupportedHardwareType": {
+                    "target": "com.amazonaws.outposts#SupportedHardwareType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The type of hardware for this Outpost.\n    </p>"
+                    }
                 }
             }
         },
@@ -2125,6 +2131,12 @@
                 },
                 "SiteArn": {
                     "target": "com.amazonaws.outposts#SiteArn"
+                },
+                "SupportedHardwareType": {
+                    "target": "com.amazonaws.outposts#SupportedHardwareType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The hardware type. \n    </p>"
+                    }
                 }
             },
             "traits": {
@@ -2638,6 +2650,21 @@
                     "max": 1000
                 },
                 "smithy.api#pattern": "^[\\S \\n]+$"
+            }
+        },
+        "com.amazonaws.outposts#SupportedHardwareType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "RACK",
+                        "name": "RACK"
+                    },
+                    {
+                        "value": "SERVER",
+                        "name": "SERVER"
+                    }
+                ]
             }
         },
         "com.amazonaws.outposts#SupportedStorageEnum": {

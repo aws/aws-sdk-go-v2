@@ -14,16 +14,16 @@ import (
 
 // Creates an Amazon FSx for Lustre data repository task. You use data repository
 // tasks to perform bulk operations between your Amazon FSx file system and its
-// linked data repository. An example of a data repository task is exporting any
+// linked data repositories. An example of a data repository task is exporting any
 // data and metadata changes, including POSIX metadata, to files, directories, and
-// symbolic links (symlinks) from your FSx file system to its linked data
-// repository. A CreateDataRepositoryTask operation will fail if a data repository
-// is not linked to the FSx file system. To learn more about data repository tasks,
-// see Data Repository Tasks
+// symbolic links (symlinks) from your FSx file system to a linked data repository.
+// A CreateDataRepositoryTask operation will fail if a data repository is not
+// linked to the FSx file system. To learn more about data repository tasks, see
+// Data Repository Tasks
 // (https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-repository-tasks.html).
 // To learn more about linking a data repository to your file system, see Linking
 // your file system to an S3 bucket
-// (https://docs.aws.amazon.com/fsx/latest/LustreGuide/create-fs-linked-data-repo.html).
+// (https://docs.aws.amazon.com/fsx/latest/LustreGuide/create-dra-linked-data-repo.html).
 func (c *Client) CreateDataRepositoryTask(ctx context.Context, params *CreateDataRepositoryTaskInput, optFns ...func(*Options)) (*CreateDataRepositoryTaskOutput, error) {
 	if params == nil {
 		params = &CreateDataRepositoryTaskInput{}

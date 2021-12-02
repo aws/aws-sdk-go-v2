@@ -16,7 +16,11 @@ import (
 // specify a name, data source connector type and description for your data source.
 // You also specify configuration information for the data source connector.
 // CreateDataSource is a synchronous operation. The operation returns 200 if the
-// data source was successfully created. Otherwise, an exception is raised.
+// data source was successfully created. Otherwise, an exception is raised. Amazon
+// S3 and custom
+// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-custom.html) data
+// sources are the only supported data sources in the Amazon Web Services GovCloud
+// (US-West) region.
 func (c *Client) CreateDataSource(ctx context.Context, params *CreateDataSourceInput, optFns ...func(*Options)) (*CreateDataSourceOutput, error) {
 	if params == nil {
 		params = &CreateDataSourceInput{}
@@ -60,6 +64,14 @@ type CreateDataSourceInput struct {
 	// parameter is set to CUSTOM. If you do, you receive a ValidationException
 	// exception. The Configuration parameter is required for all other data sources.
 	Configuration *types.DataSourceConfiguration
+
+	// Configuration information for altering document metadata and content during the
+	// document ingestion process when you create a data source. For more information
+	// on how to create, modify and delete document metadata, or make other content
+	// alterations when you ingest documents into Amazon Kendra, see Customizing
+	// document metadata during the ingestion process
+	// (https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html).
+	CustomDocumentEnrichmentConfiguration *types.CustomDocumentEnrichmentConfiguration
 
 	// A description for the data source.
 	Description *string

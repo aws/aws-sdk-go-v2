@@ -10,6 +10,46 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAssociateEntitiesToExperience struct {
+}
+
+func (*validateOpAssociateEntitiesToExperience) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateEntitiesToExperience) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateEntitiesToExperienceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateEntitiesToExperienceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpAssociatePersonasToEntities struct {
+}
+
+func (*validateOpAssociatePersonasToEntities) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociatePersonasToEntities) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociatePersonasToEntitiesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociatePersonasToEntitiesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchDeleteDocument struct {
 }
 
@@ -110,6 +150,26 @@ func (m *validateOpCreateDataSource) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateExperience struct {
+}
+
+func (*validateOpCreateExperience) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateExperience) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateExperienceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateExperienceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateFaq struct {
 }
 
@@ -205,6 +265,26 @@ func (m *validateOpDeleteDataSource) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteDataSourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteExperience struct {
+}
+
+func (*validateOpDeleteExperience) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteExperience) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteExperienceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteExperienceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -330,6 +410,26 @@ func (m *validateOpDescribeDataSource) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeExperience struct {
+}
+
+func (*validateOpDescribeExperience) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeExperience) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeExperienceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeExperienceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeFaq struct {
 }
 
@@ -450,6 +550,46 @@ func (m *validateOpDescribeThesaurus) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateEntitiesFromExperience struct {
+}
+
+func (*validateOpDisassociateEntitiesFromExperience) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateEntitiesFromExperience) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateEntitiesFromExperienceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateEntitiesFromExperienceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociatePersonasFromEntities struct {
+}
+
+func (*validateOpDisassociatePersonasFromEntities) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociatePersonasFromEntities) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociatePersonasFromEntitiesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociatePersonasFromEntitiesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetQuerySuggestions struct {
 }
 
@@ -465,6 +605,26 @@ func (m *validateOpGetQuerySuggestions) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetQuerySuggestionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetSnapshots struct {
+}
+
+func (*validateOpGetSnapshots) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSnapshots) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSnapshotsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSnapshotsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -505,6 +665,66 @@ func (m *validateOpListDataSourceSyncJobs) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListDataSourceSyncJobsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListEntityPersonas struct {
+}
+
+func (*validateOpListEntityPersonas) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListEntityPersonas) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListEntityPersonasInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListEntityPersonasInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListExperienceEntities struct {
+}
+
+func (*validateOpListExperienceEntities) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListExperienceEntities) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListExperienceEntitiesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListExperienceEntitiesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListExperiences struct {
+}
+
+func (*validateOpListExperiences) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListExperiences) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListExperiencesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListExperiencesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -770,6 +990,26 @@ func (m *validateOpUpdateDataSource) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateExperience struct {
+}
+
+func (*validateOpUpdateExperience) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateExperience) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateExperienceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateExperienceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateIndex struct {
 }
 
@@ -850,6 +1090,14 @@ func (m *validateOpUpdateThesaurus) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAssociateEntitiesToExperienceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateEntitiesToExperience{}, middleware.After)
+}
+
+func addOpAssociatePersonasToEntitiesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociatePersonasToEntities{}, middleware.After)
+}
+
 func addOpBatchDeleteDocumentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchDeleteDocument{}, middleware.After)
 }
@@ -870,6 +1118,10 @@ func addOpCreateDataSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDataSource{}, middleware.After)
 }
 
+func addOpCreateExperienceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateExperience{}, middleware.After)
+}
+
 func addOpCreateFaqValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateFaq{}, middleware.After)
 }
@@ -888,6 +1140,10 @@ func addOpCreateThesaurusValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteDataSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDataSource{}, middleware.After)
+}
+
+func addOpDeleteExperienceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteExperience{}, middleware.After)
 }
 
 func addOpDeleteFaqValidationMiddleware(stack *middleware.Stack) error {
@@ -914,6 +1170,10 @@ func addOpDescribeDataSourceValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpDescribeDataSource{}, middleware.After)
 }
 
+func addOpDescribeExperienceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeExperience{}, middleware.After)
+}
+
 func addOpDescribeFaqValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeFaq{}, middleware.After)
 }
@@ -938,8 +1198,20 @@ func addOpDescribeThesaurusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeThesaurus{}, middleware.After)
 }
 
+func addOpDisassociateEntitiesFromExperienceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateEntitiesFromExperience{}, middleware.After)
+}
+
+func addOpDisassociatePersonasFromEntitiesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociatePersonasFromEntities{}, middleware.After)
+}
+
 func addOpGetQuerySuggestionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetQuerySuggestions{}, middleware.After)
+}
+
+func addOpGetSnapshotsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSnapshots{}, middleware.After)
 }
 
 func addOpListDataSourcesValidationMiddleware(stack *middleware.Stack) error {
@@ -948,6 +1220,18 @@ func addOpListDataSourcesValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListDataSourceSyncJobsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListDataSourceSyncJobs{}, middleware.After)
+}
+
+func addOpListEntityPersonasValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListEntityPersonas{}, middleware.After)
+}
+
+func addOpListExperienceEntitiesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListExperienceEntities{}, middleware.After)
+}
+
+func addOpListExperiencesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListExperiences{}, middleware.After)
 }
 
 func addOpListFaqsValidationMiddleware(stack *middleware.Stack) error {
@@ -1002,6 +1286,10 @@ func addOpUpdateDataSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDataSource{}, middleware.After)
 }
 
+func addOpUpdateExperienceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateExperience{}, middleware.After)
+}
+
 func addOpUpdateIndexValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateIndex{}, middleware.After)
 }
@@ -1025,6 +1313,23 @@ func validateAclConfiguration(v *types.AclConfiguration) error {
 	invalidParams := smithy.InvalidParamsError{Context: "AclConfiguration"}
 	if v.AllowedGroupsColumnName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AllowedGroupsColumnName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssociateEntityList(v []types.EntityConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateEntityList"}
+	for i := range v {
+		if err := validateEntityConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1299,6 +1604,33 @@ func validateConnectionConfiguration(v *types.ConnectionConfiguration) error {
 	}
 }
 
+func validateCustomDocumentEnrichmentConfiguration(v *types.CustomDocumentEnrichmentConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomDocumentEnrichmentConfiguration"}
+	if v.InlineConfigurations != nil {
+		if err := validateInlineCustomDocumentEnrichmentConfigurationList(v.InlineConfigurations); err != nil {
+			invalidParams.AddNested("InlineConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PreExtractionHookConfiguration != nil {
+		if err := validateHookConfiguration(v.PreExtractionHookConfiguration); err != nil {
+			invalidParams.AddNested("PreExtractionHookConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PostExtractionHookConfiguration != nil {
+		if err := validateHookConfiguration(v.PostExtractionHookConfiguration); err != nil {
+			invalidParams.AddNested("PostExtractionHookConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDatabaseConfiguration(v *types.DatabaseConfiguration) error {
 	if v == nil {
 		return nil
@@ -1503,6 +1835,23 @@ func validateDataSourceVpcConfiguration(v *types.DataSourceVpcConfiguration) err
 	}
 }
 
+func validateDisassociateEntityList(v []types.EntityConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateEntityList"}
+	for i := range v {
+		if err := validateEntityConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDocument(v *types.Document) error {
 	if v == nil {
 		return nil
@@ -1548,6 +1897,24 @@ func validateDocumentAttribute(v *types.DocumentAttribute) error {
 	}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDocumentAttributeCondition(v *types.DocumentAttributeCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DocumentAttributeCondition"}
+	if v.ConditionDocumentAttributeKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConditionDocumentAttributeKey"))
+	}
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1697,6 +2064,59 @@ func validateDocumentRelevanceOverrideConfigurationList(v []types.DocumentReleva
 	}
 }
 
+func validateEntityConfiguration(v *types.EntityConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EntityConfiguration"}
+	if v.EntityId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityId"))
+	}
+	if len(v.EntityType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEntityPersonaConfiguration(v *types.EntityPersonaConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EntityPersonaConfiguration"}
+	if v.EntityId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityId"))
+	}
+	if len(v.Persona) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Persona"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEntityPersonaConfigurationList(v []types.EntityPersonaConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EntityPersonaConfigurationList"}
+	for i := range v {
+		if err := validateEntityPersonaConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateGoogleDriveConfiguration(v *types.GoogleDriveConfiguration) error {
 	if v == nil {
 		return nil
@@ -1770,6 +2190,63 @@ func validateHierarchicalPrincipalList(v []types.HierarchicalPrincipal) error {
 	invalidParams := smithy.InvalidParamsError{Context: "HierarchicalPrincipalList"}
 	for i := range v {
 		if err := validateHierarchicalPrincipal(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHookConfiguration(v *types.HookConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HookConfiguration"}
+	if v.InvocationCondition != nil {
+		if err := validateDocumentAttributeCondition(v.InvocationCondition); err != nil {
+			invalidParams.AddNested("InvocationCondition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LambdaArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LambdaArn"))
+	}
+	if v.S3Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Bucket"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInlineCustomDocumentEnrichmentConfiguration(v *types.InlineCustomDocumentEnrichmentConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InlineCustomDocumentEnrichmentConfiguration"}
+	if v.Condition != nil {
+		if err := validateDocumentAttributeCondition(v.Condition); err != nil {
+			invalidParams.AddNested("Condition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInlineCustomDocumentEnrichmentConfigurationList(v []types.InlineCustomDocumentEnrichmentConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InlineCustomDocumentEnrichmentConfigurationList"}
+	for i := range v {
+		if err := validateInlineCustomDocumentEnrichmentConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2580,6 +3057,56 @@ func validateWorkDocsConfiguration(v *types.WorkDocsConfiguration) error {
 	}
 }
 
+func validateOpAssociateEntitiesToExperienceInput(v *AssociateEntitiesToExperienceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateEntitiesToExperienceInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if v.EntityList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityList"))
+	} else if v.EntityList != nil {
+		if err := validateAssociateEntityList(v.EntityList); err != nil {
+			invalidParams.AddNested("EntityList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociatePersonasToEntitiesInput(v *AssociatePersonasToEntitiesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociatePersonasToEntitiesInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if v.Personas == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Personas"))
+	} else if v.Personas != nil {
+		if err := validateEntityPersonaConfigurationList(v.Personas); err != nil {
+			invalidParams.AddNested("Personas", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchDeleteDocumentInput(v *BatchDeleteDocumentInput) error {
 	if v == nil {
 		return nil
@@ -2640,6 +3167,11 @@ func validateOpBatchPutDocumentInput(v *BatchPutDocumentInput) error {
 			invalidParams.AddNested("Documents", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.CustomDocumentEnrichmentConfiguration != nil {
+		if err := validateCustomDocumentEnrichmentConfiguration(v.CustomDocumentEnrichmentConfiguration); err != nil {
+			invalidParams.AddNested("CustomDocumentEnrichmentConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2685,6 +3217,29 @@ func validateOpCreateDataSourceInput(v *CreateDataSourceInput) error {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.CustomDocumentEnrichmentConfiguration != nil {
+		if err := validateCustomDocumentEnrichmentConfiguration(v.CustomDocumentEnrichmentConfiguration); err != nil {
+			invalidParams.AddNested("CustomDocumentEnrichmentConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateExperienceInput(v *CreateExperienceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateExperienceInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2843,6 +3398,24 @@ func validateOpDeleteDataSourceInput(v *DeleteDataSourceInput) error {
 	}
 }
 
+func validateOpDeleteExperienceInput(v *DeleteExperienceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteExperienceInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteFaqInput(v *DeleteFaqInput) error {
 	if v == nil {
 		return nil
@@ -2935,6 +3508,24 @@ func validateOpDescribeDataSourceInput(v *DescribeDataSourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeDataSourceInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeExperienceInput(v *DescribeExperienceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeExperienceInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
@@ -3050,6 +3641,52 @@ func validateOpDescribeThesaurusInput(v *DescribeThesaurusInput) error {
 	}
 }
 
+func validateOpDisassociateEntitiesFromExperienceInput(v *DisassociateEntitiesFromExperienceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateEntitiesFromExperienceInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if v.EntityList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityList"))
+	} else if v.EntityList != nil {
+		if err := validateDisassociateEntityList(v.EntityList); err != nil {
+			invalidParams.AddNested("EntityList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociatePersonasFromEntitiesInput(v *DisassociatePersonasFromEntitiesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociatePersonasFromEntitiesInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if v.EntityIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetQuerySuggestionsInput(v *GetQuerySuggestionsInput) error {
 	if v == nil {
 		return nil
@@ -3060,6 +3697,27 @@ func validateOpGetQuerySuggestionsInput(v *GetQuerySuggestionsInput) error {
 	}
 	if v.QueryText == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QueryText"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetSnapshotsInput(v *GetSnapshotsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSnapshotsInput"}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if len(v.Interval) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Interval"))
+	}
+	if len(v.MetricType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3091,6 +3749,57 @@ func validateOpListDataSourceSyncJobsInput(v *ListDataSourceSyncJobsInput) error
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListEntityPersonasInput(v *ListEntityPersonasInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListEntityPersonasInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListExperienceEntitiesInput(v *ListExperienceEntitiesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListExperienceEntitiesInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListExperiencesInput(v *ListExperiencesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListExperiencesInput"}
 	if v.IndexId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
 	}
@@ -3361,6 +4070,29 @@ func validateOpUpdateDataSourceInput(v *UpdateDataSourceInput) error {
 		if err := validateDataSourceConfiguration(v.Configuration); err != nil {
 			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.CustomDocumentEnrichmentConfiguration != nil {
+		if err := validateCustomDocumentEnrichmentConfiguration(v.CustomDocumentEnrichmentConfiguration); err != nil {
+			invalidParams.AddNested("CustomDocumentEnrichmentConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateExperienceInput(v *UpdateExperienceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateExperienceInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

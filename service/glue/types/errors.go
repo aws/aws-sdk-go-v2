@@ -318,6 +318,25 @@ func (e *InvalidInputException) ErrorMessage() string {
 func (e *InvalidInputException) ErrorCode() string             { return "InvalidInputException" }
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// An error that indicates your data is in an invalid state.
+type InvalidStateException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidStateException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidStateException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidStateException) ErrorCode() string             { return "InvalidStateException" }
+func (e *InvalidStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The machine learning transform is not ready to run.
 type MLTransformNotReadyException struct {
 	Message *string
@@ -374,6 +393,25 @@ func (e *OperationTimeoutException) ErrorMessage() string {
 }
 func (e *OperationTimeoutException) ErrorCode() string             { return "OperationTimeoutException" }
 func (e *OperationTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// A resource was not ready for a transaction.
+type ResourceNotReadyException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ResourceNotReadyException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourceNotReadyException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourceNotReadyException) ErrorCode() string             { return "ResourceNotReadyException" }
+func (e *ResourceNotReadyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A resource numerical limit was exceeded.
 type ResourceNumberLimitExceededException struct {

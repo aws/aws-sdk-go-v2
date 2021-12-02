@@ -129,7 +129,7 @@ type AuthenticationConfiguration struct {
 // user authentication.
 type BasicAuthenticationConfiguration struct {
 
-	// Your secret ARN, which you can create in AWS Secrets Manager
+	// Your secret ARN, which you can create in Secrets Manager
 	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html) You use
 	// a secret if basic authentication credentials are required to connect to a
 	// website. The secret stores your credentials of user name and password.
@@ -352,7 +352,7 @@ type ConfluenceBlogToIndexFieldMapping struct {
 // Provides configuration information for data sources that connect to Confluence.
 type ConfluenceConfiguration struct {
 
-	// The Amazon Resource Name (ARN) of an Secrets Managersecret that contains the
+	// The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the
 	// key/value pairs required to connect to your Confluence server. The secret must
 	// contain a JSON structure with the following keys:
 	//
@@ -537,6 +537,61 @@ type ConnectionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration information for your content sources, such as data sources, FAQs,
+// and content indexed directly via BatchPutDocument
+// (https://docs.aws.amazon.com/kendra/latest/dg/API_BatchPutDocument.html).
+type ContentSourceConfiguration struct {
+
+	// The identifier of the data sources you want to use for your Amazon Kendra
+	// experience.
+	DataSourceIds []string
+
+	// TRUE to use documents you indexed directly using the BatchPutDocument operation.
+	DirectPutContent bool
+
+	// The identifier of the FAQs that you want to use for your Amazon Kendra
+	// experience.
+	FaqIds []string
+
+	noSmithyDocumentSerde
+}
+
+// Provides the configuration information for altering document metadata and
+// content during the document ingestion process. For more information, see
+// Customizing document metadata during the ingestion process
+// (https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html).
+type CustomDocumentEnrichmentConfiguration struct {
+
+	// Configuration information to alter document attributes or metadata fields and
+	// content when ingesting documents into Amazon Kendra.
+	InlineConfigurations []InlineCustomDocumentEnrichmentConfiguration
+
+	// Configuration information for invoking a Lambda function in Lambda on the
+	// structured documents with their metadata and text extracted. You can use a
+	// Lambda function to apply advanced logic for creating, modifying, or deleting
+	// document metadata and content. For more information, see Advanced data
+	// manipulation
+	// (https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html#advanced-data-manipulation).
+	PostExtractionHookConfiguration *HookConfiguration
+
+	// Configuration information for invoking a Lambda function in Lambda on the
+	// original or raw documents before extracting their metadata and text. You can use
+	// a Lambda function to apply advanced logic for creating, modifying, or deleting
+	// document metadata and content. For more information, see Advanced data
+	// manipulation
+	// (https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html#advanced-data-manipulation).
+	PreExtractionHookConfiguration *HookConfiguration
+
+	// The Amazon Resource Name (ARN) of a role with permission to run
+	// PreExtractionHookConfiguration and PostExtractionHookConfiguration for altering
+	// document metadata and content during the document ingestion process. For more
+	// information, see IAM roles for Amazon Kendra
+	// (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html).
+	RoleArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Provides the information necessary to connect a database to an index.
 type DatabaseConfiguration struct {
 
@@ -570,7 +625,7 @@ type DatabaseConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration information for a Amazon Kendra data source.
+// Configuration information for an Amazon Kendra data source.
 type DataSourceConfiguration struct {
 
 	// Provides configuration information for connecting to a Confluence data source.
@@ -600,7 +655,7 @@ type DataSourceConfiguration struct {
 	// SharePoint site.
 	SharePointConfiguration *SharePointConfiguration
 
-	// Provides the configuration information required for Amazon Kendra web crawler.
+	// Provides the configuration information required for Amazon Kendra Web Crawler.
 	WebCrawlerConfiguration *WebCrawlerConfiguration
 
 	// Provides the configuration information to connect to WorkDocs as your data
@@ -842,6 +897,74 @@ type DocumentAttribute struct {
 	noSmithyDocumentSerde
 }
 
+// The condition used for the target document attribute or metadata field when
+// ingesting documents into Amazon Kendra. You use this with
+// DocumentAttributeTarget to apply the condition
+// (https://docs.aws.amazon.com/kendra/latest/dg/API_DocumentAttributeTarget.html).
+// For example, you can create the 'Department' target field and have it prefill
+// department names associated with the documents based on information in the
+// 'Source_URI' field. Set the condition that if the 'Source_URI' field contains
+// 'financial' in its URI value, then prefill the target field 'Department' with
+// the target value 'Finance' for the document. Amazon Kendra cannot create a
+// target field if it has not already been created as an index field. After you
+// create your index field, you can create a document metadata field using
+// DocumentAttributeTarget. Amazon Kendra then will map your newly created metadata
+// field to your index field.
+type DocumentAttributeCondition struct {
+
+	// The identifier of the document attribute used for the condition. For example,
+	// 'Source_URI' could be an identifier for the attribute or metadata field that
+	// contains source URIs associated with the documents. Amazon Kendra currently does
+	// not support _document_body as an attribute key used for the condition.
+	//
+	// This member is required.
+	ConditionDocumentAttributeKey *string
+
+	// The condition operator. For example, you can use 'Contains' to partially match a
+	// string.
+	//
+	// This member is required.
+	Operator ConditionOperator
+
+	// The value used by the operator. For example, you can specify the value
+	// 'financial' for strings in the 'Source_URI' field that partially match or
+	// contain this value.
+	ConditionOnValue *DocumentAttributeValue
+
+	noSmithyDocumentSerde
+}
+
+// The target document attribute or metadata field you want to alter when ingesting
+// documents into Amazon Kendra. For example, you can delete customer
+// identification numbers associated with the documents, stored in the document
+// metadata field called 'Customer_ID'. You set the target key as 'Customer_ID' and
+// the deletion flag to TRUE. This removes all customer ID values in the field
+// 'Customer_ID'. This would scrub personally identifiable information from each
+// document's metadata. Amazon Kendra cannot create a target field if it has not
+// already been created as an index field. After you create your index field, you
+// can create a document metadata field using DocumentAttributeTarget. Amazon
+// Kendra then will map your newly created metadata field to your index field. You
+// can also use this with DocumentAttributeCondition
+// (https://docs.aws.amazon.com/kendra/latest/dg/API_DocumentAttributeCondition.html).
+type DocumentAttributeTarget struct {
+
+	// The identifier of the target document attribute or metadata field. For example,
+	// 'Department' could be an identifier for the target attribute or metadata field
+	// that includes the department names associated with the documents.
+	TargetDocumentAttributeKey *string
+
+	// The target value you want to create for the target attribute. For example,
+	// 'Finance' could be the target value for the target attribute key 'Department'.
+	TargetDocumentAttributeValue *DocumentAttributeValue
+
+	// TRUE to delete the existing target value for your specified target attribute
+	// key. You cannot create a target value and set this to TRUE. To create a target
+	// value (TargetDocumentAttributeValue), set this to FALSE.
+	TargetDocumentAttributeValueDeletion bool
+
+	noSmithyDocumentSerde
+}
+
 // The value of a custom document attribute. You can only provide one value for a
 // custom attribute.
 type DocumentAttributeValue struct {
@@ -966,6 +1089,147 @@ type DocumentsMetadataConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Provides the configuration information of users or groups in your Amazon Web
+// Services SSO identity source to grant access your Amazon Kendra experience.
+type EntityConfiguration struct {
+
+	// The identifier of a user or group in your Amazon Web Services SSO identity
+	// source. For example, a user ID could be an email.
+	//
+	// This member is required.
+	EntityId *string
+
+	// Specifies whether you are configuring a User or a Group.
+	//
+	// This member is required.
+	EntityType EntityType
+
+	noSmithyDocumentSerde
+}
+
+// Information about the user entity.
+type EntityDisplayData struct {
+
+	// The first name of the user.
+	FirstName *string
+
+	// The name of the group.
+	GroupName *string
+
+	// The user name of the user.
+	IdentifiedUserName *string
+
+	// The last name of the user.
+	LastName *string
+
+	// The name of the user.
+	UserName *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides the configuration information of users or groups in your Amazon Web
+// Services SSO identity source for access to your Amazon Kendra experience.
+// Specific permissions are defined for each user or group once they are granted
+// access to your Amazon Kendra experience.
+type EntityPersonaConfiguration struct {
+
+	// The identifier of a user or group in your Amazon Web Services SSO identity
+	// source. For example, a user ID could be an email.
+	//
+	// This member is required.
+	EntityId *string
+
+	// The persona that defines the specific permissions of the user or group in your
+	// Amazon Web Services SSO identity source. The available personas or access roles
+	// are Owner and Viewer. For more information on these personas, see Providing
+	// access to your search page
+	// (https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html#access-search-experience).
+	//
+	// This member is required.
+	Persona Persona
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the configuration information for your Amazon Kendra experience. This
+// includes the data source IDs and/or FAQ IDs, and user or group information to
+// grant access to your Amazon Kendra experience.
+type ExperienceConfiguration struct {
+
+	// The identifiers of your data sources and FAQs. Or, you can specify that you want
+	// to use documents indexed via the BatchPutDocument operation. This is the content
+	// you want to use for your Amazon Kendra experience.
+	ContentSourceConfiguration *ContentSourceConfiguration
+
+	// The Amazon Web Services SSO field name that contains the identifiers of your
+	// users, such as their emails.
+	UserIdentityConfiguration *UserIdentityConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Provides the configuration information of the endpoint for your Amazon Kendra
+// experience.
+type ExperienceEndpoint struct {
+
+	// The endpoint of your Amazon Kendra experience.
+	Endpoint *string
+
+	// The type of endpoint for your Amazon Kendra experience. The type currently
+	// available is HOME, which is a unique and fully hosted URL to the home page of
+	// your Amazon Kendra experience.
+	EndpointType EndpointType
+
+	noSmithyDocumentSerde
+}
+
+// Summary information for users or groups in your Amazon Web Services SSO identity
+// source with granted access to your Amazon Kendra experience. You can create an
+// Amazon Kendra experience such as a search application. For more information on
+// creating a search application experience, see Building a search experience with
+// no code
+// (https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html).
+type ExperienceEntitiesSummary struct {
+
+	// Information about the user entity.
+	DisplayData *EntityDisplayData
+
+	// The identifier of a user or group in your Amazon Web Services SSO identity
+	// source. For example, a user ID could be an email.
+	EntityId *string
+
+	// Shows the type as User or Group.
+	EntityType EntityType
+
+	noSmithyDocumentSerde
+}
+
+// Summary information for your Amazon Kendra experience. You can create an Amazon
+// Kendra experience such as a search application. For more information on creating
+// a search application experience, see Building a search experience with no code
+// (https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html).
+type ExperiencesSummary struct {
+
+	// The date-time your Amazon Kendra experience was created.
+	CreatedAt *time.Time
+
+	// The endpoint URLs for your Amazon Kendra experiences. The URLs are unique and
+	// fully hosted by Amazon Web Services.
+	Endpoints []ExperienceEndpoint
+
+	// The identifier of your Amazon Kendra experience.
+	Id *string
+
+	// The name of your Amazon Kendra experience.
+	Name *string
+
+	// The processing status of your Amazon Kendra experience.
+	Status ExperienceStatus
+
+	noSmithyDocumentSerde
+}
+
 // Information about a document attribute
 type Facet struct {
 
@@ -989,6 +1253,21 @@ type FacetResult struct {
 	// The data type of the facet value. This is the same as the type defined for the
 	// index field when it was created.
 	DocumentAttributeValueType DocumentAttributeValueType
+
+	noSmithyDocumentSerde
+}
+
+// Information on the users or groups in your Amazon Web Services SSO identity
+// source that failed to properly configure with your Amazon Kendra experience.
+type FailedEntity struct {
+
+	// The identifier of the user or group in your Amazon Web Services SSO identity
+	// source. For example, a user ID could be an email.
+	EntityId *string
+
+	// The reason the user or group in your Amazon Web Services SSO identity source
+	// failed to properly configure with your Amazon Kendra experience.
+	ErrorMessage *string
 
 	noSmithyDocumentSerde
 }
@@ -1195,6 +1474,45 @@ type Highlight struct {
 	noSmithyDocumentSerde
 }
 
+// Provides the configuration information for invoking a Lambda function in Lambda
+// to alter document metadata and content when ingesting documents into Amazon
+// Kendra. You can configure your Lambda function using
+// PreExtractionHookConfiguration
+// (https://docs.aws.amazon.com/kendra/latest/dg/API_PreExtractionHookConfiguration.html)
+// if you want to apply advanced alterations on the original or raw documents. If
+// you want to apply advanced alterations on the Amazon Kendra structured
+// documents, you must configure your Lambda function using
+// PostExtractionHookConfiguration
+// (https://docs.aws.amazon.com/kendra/latest/dg/API_PostExtractionHookConfiguration.html).
+// You can only invoke one Lambda function. However, this function can invoke other
+// functions it requires. For more information, see Customizing document metadata
+// during the ingestion process
+// (https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html).
+type HookConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of a role with permission to run a Lambda
+	// function during ingestion. For more information, see IAM roles for Amazon Kendra
+	// (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html).
+	//
+	// This member is required.
+	LambdaArn *string
+
+	// Stores the original, raw documents or the structured, parsed documents before
+	// and after altering them. For more information, see Data contracts for Lambda
+	// functions
+	// (https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html#cde-data-contracts-lambda).
+	//
+	// This member is required.
+	S3Bucket *string
+
+	// The condition used for when a Lambda function should be invoked. For example,
+	// you can specify a condition that if there are empty date-time values, then
+	// Amazon Kendra should invoke a function that inserts the current date-time.
+	InvocationCondition *DocumentAttributeCondition
+
+	noSmithyDocumentSerde
+}
+
 // A summary of information about an index.
 type IndexConfigurationSummary struct {
 
@@ -1241,6 +1559,29 @@ type IndexStatistics struct {
 	//
 	// This member is required.
 	TextDocumentStatistics *TextDocumentStatistics
+
+	noSmithyDocumentSerde
+}
+
+// Provides the configuration information for applying basic logic to alter
+// document metadata and content when ingesting documents into Amazon Kendra. To
+// apply advanced logic, to go beyond what you can do with basic logic, see
+// HookConfiguration
+// (https://docs.aws.amazon.com/kendra/latest/dg/API_HookConfiguration.html). For
+// more information, see Customizing document metadata during the ingestion process
+// (https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html).
+type InlineCustomDocumentEnrichmentConfiguration struct {
+
+	// Configuration of the condition used for the target document attribute or
+	// metadata field when ingesting documents into Amazon Kendra.
+	Condition *DocumentAttributeCondition
+
+	// TRUE to delete content if the condition used for the target attribute is met.
+	DocumentContentDeletion bool
+
+	// Configuration of the target document attribute or metadata field when ingesting
+	// documents into Amazon Kendra. You can also include a value.
+	Target *DocumentAttributeTarget
 
 	noSmithyDocumentSerde
 }
@@ -1377,6 +1718,34 @@ type OneDriveUsers struct {
 	noSmithyDocumentSerde
 }
 
+// Summary information for users or groups in your Amazon Web Services SSO identity
+// source. This applies to users and groups with specific permissions that define
+// their level of access to your Amazon Kendra experience. You can create an Amazon
+// Kendra experience such as a search application. For more information on creating
+// a search application experience, see Building a search experience with no code
+// (https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html).
+type PersonasSummary struct {
+
+	// The date-time the summary information was created.
+	CreatedAt *time.Time
+
+	// The identifier of a user or group in your Amazon Web Services SSO identity
+	// source. For example, a user ID could be an email.
+	EntityId *string
+
+	// The persona that defines the specific permissions of the user or group in your
+	// Amazon Web Services SSO identity source. The available personas or access roles
+	// are Owner and Viewer. For more information on these personas, see Providing
+	// access to your search page
+	// (https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html#access-search-experience).
+	Persona Persona
+
+	// The date-time the summary information was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Provides user and group information for document access filtering.
 type Principal struct {
 
@@ -1418,7 +1787,7 @@ type ProxyConfiguration struct {
 	// This member is required.
 	Port *int32
 
-	// Your secret ARN, which you can create in AWS Secrets Manager
+	// Your secret ARN, which you can create in Secrets Manager
 	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html) The
 	// credentials are optional. You use a secret if web proxy credentials are required
 	// to connect to a website host. Amazon Kendra currently support basic
@@ -1885,7 +2254,7 @@ type Search struct {
 // Provides the configuration information of the seed or starting point URLs to
 // crawl. When selecting websites to index, you must adhere to the Amazon
 // Acceptable Use Policy (https://aws.amazon.com/aup/) and all other Amazon terms.
-// Remember that you must only use the Amazon Kendra web crawler to index your own
+// Remember that you must only use Amazon Kendra Web Crawler to index your own
 // webpages, or webpages that you have authorization to index.
 type SeedUrlConfiguration struct {
 
@@ -1950,12 +2319,12 @@ type ServiceNowConfiguration struct {
 
 	// Determines the type of authentication used to connect to the ServiceNow
 	// instance. If you choose HTTP_BASIC, Amazon Kendra is authenticated using the
-	// user name and password provided in the AWS Secrets Manager secret in the
-	// SecretArn field. When you choose OAUTH2, Amazon Kendra is authenticated using
-	// the OAuth token and secret provided in the Secrets Manager secret, and the user
-	// name and password are used to determine which information Amazon Kendra has
-	// access to. When you use OAUTH2 authentication, you must generate a token and a
-	// client secret using the ServiceNow console. For more information, see Using a
+	// user name and password provided in the Secrets Manager secret in the SecretArn
+	// field. When you choose OAUTH2, Amazon Kendra is authenticated using the OAuth
+	// token and secret provided in the Secrets Manager secret, and the user name and
+	// password are used to determine which information Amazon Kendra has access to.
+	// When you use OAUTH2 authentication, you must generate a token and a client
+	// secret using the ServiceNow console. For more information, see Using a
 	// ServiceNow data source
 	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-servicenow.html).
 	AuthenticationType ServiceNowAuthenticationType
@@ -2060,7 +2429,7 @@ type SharePointConfiguration struct {
 	// also need to provide the sever domain name as part of the credentials. For more
 	// information, see Using a Microsoft SharePoint Data Source
 	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html). For
-	// more information about Secrets Manager, see  What Is Secrets Manager
+	// more information about Secrets Manager see  What Is Secrets Manager
 	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html) in the
 	// Secrets Manager user guide.
 	//
@@ -2130,8 +2499,8 @@ type SharePointConfiguration struct {
 // Provides the configuration information of the sitemap URLs to crawl. When
 // selecting websites to index, you must adhere to the Amazon Acceptable Use Policy
 // (https://aws.amazon.com/aup/) and all other Amazon terms. Remember that you must
-// only use the Amazon Kendra web crawler to index your own webpages, or webpages
-// that you have authorization to index.
+// only use Amazon Kendra Web Crawler to index your own webpages, or webpages that
+// you have authorization to index.
 type SiteMapsConfiguration struct {
 
 	// The list of sitemap URLs of the websites you want to crawl. The list can include
@@ -2360,9 +2729,9 @@ type TimeRange struct {
 // Secure (HTTPS). If you receive an error when crawling a website, it could be
 // that the website is blocked from crawling. When selecting websites to index, you
 // must adhere to the Amazon Acceptable Use Policy (https://aws.amazon.com/aup/)
-// and all other Amazon terms. Remember that you must only use the Amazon Kendra
-// web crawler to index your own webpages, or webpages that you have authorization
-// to index.
+// and all other Amazon terms. Remember that you must only use Amazon Kendra Web
+// Crawler to index your own webpages, or webpages that you have authorization to
+// index.
 type Urls struct {
 
 	// Provides the configuration of the seed or starting point URLs of the websites
@@ -2412,26 +2781,44 @@ type UserContext struct {
 }
 
 // Provides the configuration information to fetch access levels of groups and
-// users from an AWS Single Sign-On identity source. This is useful for setting up
-// user context filtering, where Amazon Kendra filters search results for different
-// users based on their group's access to documents. You can also map your users to
-// their groups for user context filtering using the PutPrincipalMapping operation
-// (https://docs.aws.amazon.com/latest/dg/API_PutPrincipalMapping.html). To set up
-// an AWS SSO identity source in the console to use with Amazon Kendra, see Getting
-// started with an AWS SSO identity source
+// users from an Amazon Web Services Single Sign On identity source. This is useful
+// for setting up user context filtering, where Amazon Kendra filters search
+// results for different users based on their group's access to documents. You can
+// also map your users to their groups for user context filtering using the
+// PutPrincipalMapping operation
+// (https://docs.aws.amazon.com/kendra/latest/dg/API_PutPrincipalMapping.html). To
+// set up an Amazon Web Services SSO identity source in the console to use with
+// Amazon Kendra, see Getting started with an Amazon Web Services SSO identity
+// source
 // (https://docs.aws.amazon.com/kendra/latest/dg/getting-started-aws-sso.html). You
-// must also grant the required permissions to use AWS SSO with Amazon Kendra. For
-// more information, see IAM roles for AWS Single Sign-On
+// must also grant the required permissions to use Amazon Web Services SSO with
+// Amazon Kendra. For more information, see IAM roles for Amazon Web Services SSO
 // (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html#iam-roles-aws-sso).
 type UserGroupResolutionConfiguration struct {
 
 	// The identity store provider (mode) you want to use to fetch access levels of
-	// groups and users. AWS Single Sign-On is currently the only available mode. Your
-	// users and groups must exist in an AWS SSO identity source in order to use this
-	// mode.
+	// groups and users. Amazon Web Services Single Sign On is currently the only
+	// available mode. Your users and groups must exist in an Amazon Web Services SSO
+	// identity source in order to use this mode.
 	//
 	// This member is required.
 	UserGroupResolutionMode UserGroupResolutionMode
+
+	noSmithyDocumentSerde
+}
+
+// Configuration information for the identifiers of your users.
+type UserIdentityConfiguration struct {
+
+	// The Amazon Web Services SSO field name that contains the identifiers of your
+	// users, such as their emails. This is used for user context filtering
+	// (https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html) and for
+	// granting access to your Amazon Kendra experience. You must set up Amazon Web
+	// Services SSO with Amazon Kendra. You must include your users and groups in your
+	// Access Control List when you ingest documents into your index. For more
+	// information, see Getting started with an Amazon Web Services SSO identity source
+	// (https://docs.aws.amazon.com/kendra/latest/dg/getting-started-aws-sso.html).
+	IdentityAttributeName *string
 
 	noSmithyDocumentSerde
 }
@@ -2448,7 +2835,7 @@ type UserTokenConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the configuration information required for Amazon Kendra web crawler.
+// Provides the configuration information required for Amazon Kendra Web Crawler.
 type WebCrawlerConfiguration struct {
 
 	// Specifies the seed or starting point URLs of the websites or the sitemap URLs of
@@ -2458,9 +2845,8 @@ type WebCrawlerConfiguration struct {
 	// (HTTPS). If you receive an error when crawling a website, it could be that the
 	// website is blocked from crawling. When selecting websites to index, you must
 	// adhere to the Amazon Acceptable Use Policy (https://aws.amazon.com/aup/) and all
-	// other Amazon terms. Remember that you must only use the Amazon Kendra web
-	// crawler to index your own webpages, or webpages that you have authorization to
-	// index.
+	// other Amazon terms. Remember that you must only use Amazon Kendra Web Crawler to
+	// index your own webpages, or webpages that you have authorization to index.
 	//
 	// This member is required.
 	Urls *Urls
@@ -2469,10 +2855,9 @@ type WebCrawlerConfiguration struct {
 	// authentication. You can connect to websites using basic authentication of user
 	// name and password. You must provide the website host name and port number. For
 	// example, the host name of https://a.example.com/page1.html is "a.example.com"
-	// and the port is 443, the standard port for HTTPS. You use a secret in AWS
-	// Secrets Manager
-	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html) to
-	// store your authentication credentials.
+	// and the port is 443, the standard port for HTTPS. You use a secret in Secrets
+	// Manager (https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html)
+	// to store your authentication credentials.
 	AuthenticationConfiguration *AuthenticationConfiguration
 
 	// Specifies the number of levels in a website that you want to crawl. The first
@@ -2504,7 +2889,7 @@ type WebCrawlerConfiguration struct {
 	// example, the host name of https://a.example.com/page1.html is "a.example.com"
 	// and the port is 443, the standard port for HTTPS. Web proxy credentials are
 	// optional and you can use them to connect to a web proxy server that requires
-	// basic authentication. To store web proxy credentials, you use a secret in AWS
+	// basic authentication. To store web proxy credentials, you use a secret in
 	// Secrets Manager
 	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html).
 	ProxyConfiguration *ProxyConfiguration
@@ -2528,12 +2913,12 @@ type WebCrawlerConfiguration struct {
 type WorkDocsConfiguration struct {
 
 	// The identifier of the directory corresponding to your Amazon WorkDocs site
-	// repository. You can find the organization ID in the AWS Directory Service
+	// repository. You can find the organization ID in the Directory Service
 	// (https://console.aws.amazon.com/directoryservicev2/) by going to Active
 	// Directory, then Directories. Your Amazon WorkDocs site directory has an ID,
 	// which is the organization ID. You can also set up a new Amazon WorkDocs
-	// directory in the AWS Directory Service console and enable a Amazon WorkDocs site
-	// for the directory in the Amazon WorkDocs console.
+	// directory in the Directory Service console and enable a Amazon WorkDocs site for
+	// the directory in the Amazon WorkDocs console.
 	//
 	// This member is required.
 	OrganizationId *string

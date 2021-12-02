@@ -485,6 +485,9 @@ func awsAwsjson11_deserializeOpErrorBatchDeleteTable(response *smithyhttp.Respon
 	case strings.EqualFold("EntityNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorEntityNotFoundException(response, errorBody)
 
+	case strings.EqualFold("GlueEncryptionException", errorCode):
+		return awsAwsjson11_deserializeErrorGlueEncryptionException(response, errorBody)
+
 	case strings.EqualFold("InternalServiceException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServiceException(response, errorBody)
 
@@ -493,6 +496,9 @@ func awsAwsjson11_deserializeOpErrorBatchDeleteTable(response *smithyhttp.Respon
 
 	case strings.EqualFold("OperationTimeoutException", errorCode):
 		return awsAwsjson11_deserializeErrorOperationTimeoutException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotReadyException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceNotReadyException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -1201,6 +1207,9 @@ func awsAwsjson11_deserializeOpErrorBatchGetPartition(response *smithyhttp.Respo
 
 	case strings.EqualFold("InvalidInputException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidInputException(response, errorBody)
+
+	case strings.EqualFold("InvalidStateException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidStateException(response, errorBody)
 
 	case strings.EqualFold("OperationTimeoutException", errorCode):
 		return awsAwsjson11_deserializeErrorOperationTimeoutException(response, errorBody)
@@ -3794,6 +3803,9 @@ func awsAwsjson11_deserializeOpErrorCreateTable(response *smithyhttp.Response, m
 	case strings.EqualFold("OperationTimeoutException", errorCode):
 		return awsAwsjson11_deserializeErrorOperationTimeoutException(response, errorBody)
 
+	case strings.EqualFold("ResourceNotReadyException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceNotReadyException(response, errorBody)
+
 	case strings.EqualFold("ResourceNumberLimitExceededException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNumberLimitExceededException(response, errorBody)
 
@@ -6346,6 +6358,9 @@ func awsAwsjson11_deserializeOpErrorDeleteTable(response *smithyhttp.Response, m
 
 	case strings.EqualFold("OperationTimeoutException", errorCode):
 		return awsAwsjson11_deserializeErrorOperationTimeoutException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotReadyException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceNotReadyException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -10631,8 +10646,14 @@ func awsAwsjson11_deserializeOpErrorGetPartitions(response *smithyhttp.Response,
 	case strings.EqualFold("InvalidInputException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidInputException(response, errorBody)
 
+	case strings.EqualFold("InvalidStateException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidStateException(response, errorBody)
+
 	case strings.EqualFold("OperationTimeoutException", errorCode):
 		return awsAwsjson11_deserializeErrorOperationTimeoutException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotReadyException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceNotReadyException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -11953,6 +11974,9 @@ func awsAwsjson11_deserializeOpErrorGetTable(response *smithyhttp.Response, meta
 
 	case strings.EqualFold("OperationTimeoutException", errorCode):
 		return awsAwsjson11_deserializeErrorOperationTimeoutException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotReadyException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceNotReadyException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -19730,6 +19754,9 @@ func awsAwsjson11_deserializeOpErrorUpdateTable(response *smithyhttp.Response, m
 	case strings.EqualFold("OperationTimeoutException", errorCode):
 		return awsAwsjson11_deserializeErrorOperationTimeoutException(response, errorBody)
 
+	case strings.EqualFold("ResourceNotReadyException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceNotReadyException(response, errorBody)
+
 	case strings.EqualFold("ResourceNumberLimitExceededException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNumberLimitExceededException(response, errorBody)
 
@@ -20672,6 +20699,41 @@ func awsAwsjson11_deserializeErrorInvalidInputException(response *smithyhttp.Res
 	return output
 }
 
+func awsAwsjson11_deserializeErrorInvalidStateException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.InvalidStateException{}
+	err := awsAwsjson11_deserializeDocumentInvalidStateException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
 func awsAwsjson11_deserializeErrorMLTransformNotReadyException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -20762,6 +20824,41 @@ func awsAwsjson11_deserializeErrorOperationTimeoutException(response *smithyhttp
 
 	output := &types.OperationTimeoutException{}
 	err := awsAwsjson11_deserializeDocumentOperationTimeoutException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson11_deserializeErrorResourceNotReadyException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.ResourceNotReadyException{}
+	err := awsAwsjson11_deserializeDocumentResourceNotReadyException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -27697,6 +27794,46 @@ func awsAwsjson11_deserializeDocumentInvalidInputException(v **types.InvalidInpu
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentInvalidStateException(v **types.InvalidStateException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InvalidStateException
+	if *v == nil {
+		sv = &types.InvalidStateException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MessageString to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentJdbcTarget(v **types.JdbcTarget, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -31329,6 +31466,46 @@ func awsAwsjson11_deserializeDocumentRegistryListItem(v **types.RegistryListItem
 					return fmt.Errorf("expected UpdatedTimestamp to be of type string, got %T instead", value)
 				}
 				sv.UpdatedTime = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentResourceNotReadyException(v **types.ResourceNotReadyException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ResourceNotReadyException
+	if *v == nil {
+		sv = &types.ResourceNotReadyException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MessageString to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:

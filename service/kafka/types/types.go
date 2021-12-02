@@ -144,6 +144,46 @@ type CloudWatchLogs struct {
 }
 
 // Returns information about a cluster.
+type Cluster struct {
+
+	// The Amazon Resource Name (ARN) that uniquely identifies a cluster operation.
+	ActiveOperationArn *string
+
+	// The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+	ClusterArn *string
+
+	// The name of the cluster.
+	ClusterName *string
+
+	// Cluster Type.
+	ClusterType ClusterType
+
+	// The time when the cluster was created.
+	CreationTime *time.Time
+
+	// The current version of the MSK cluster.
+	CurrentVersion *string
+
+	// Information about the provisioned cluster.
+	Provisioned *Provisioned
+
+	// Information about the serverless cluster.
+	Serverless *Serverless
+
+	// The state of the cluster. The possible states are ACTIVE, CREATING, DELETING,
+	// FAILED, HEALING, MAINTENANCE, REBOOTING_BROKER, and UPDATING.
+	State ClusterState
+
+	// State Info for the Amazon MSK cluster.
+	StateInfo *StateInfo
+
+	// Tags attached to the cluster.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Returns information about a cluster.
 type ClusterInfo struct {
 
 	// Arn of active cluster operation.
@@ -625,6 +665,89 @@ type PrometheusInfo struct {
 	noSmithyDocumentSerde
 }
 
+// Provisioned cluster.
+type Provisioned struct {
+
+	// Information about the brokers.
+	//
+	// This member is required.
+	BrokerNodeGroupInfo *BrokerNodeGroupInfo
+
+	// The number of broker nodes in the cluster.
+	//
+	// This member is required.
+	NumberOfBrokerNodes int32
+
+	// Includes all client authentication information.
+	ClientAuthentication *ClientAuthentication
+
+	// Information about the Apache Kafka version deployed on the brokers.
+	CurrentBrokerSoftwareInfo *BrokerSoftwareInfo
+
+	// Includes all encryption-related information.
+	EncryptionInfo *EncryptionInfo
+
+	// Specifies the level of monitoring for the MSK cluster. The possible values are
+	// DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, and PER_TOPIC_PER_PARTITION.
+	EnhancedMonitoring EnhancedMonitoring
+
+	// Log delivery information for the cluster.
+	LoggingInfo *LoggingInfo
+
+	// The settings for open monitoring.
+	OpenMonitoring *OpenMonitoringInfo
+
+	// The connection string to use to connect to the Apache ZooKeeper cluster.
+	ZookeeperConnectString *string
+
+	// The connection string to use to connect to the Apache ZooKeeper cluster on a TLS
+	// port.
+	ZookeeperConnectStringTls *string
+
+	noSmithyDocumentSerde
+}
+
+// Provisioned cluster request.
+type ProvisionedRequest struct {
+
+	// Information about the brokers.
+	//
+	// This member is required.
+	BrokerNodeGroupInfo *BrokerNodeGroupInfo
+
+	// The Apache Kafka version that you want for the cluster.
+	//
+	// This member is required.
+	KafkaVersion *string
+
+	// The number of broker nodes in the cluster.
+	//
+	// This member is required.
+	NumberOfBrokerNodes int32
+
+	// Includes all client authentication information.
+	ClientAuthentication *ClientAuthentication
+
+	// Represents the configuration that you want Amazon MSK to use for the brokers in
+	// a cluster.
+	ConfigurationInfo *ConfigurationInfo
+
+	// Includes all encryption-related information.
+	EncryptionInfo *EncryptionInfo
+
+	// Specifies the level of monitoring for the MSK cluster. The possible values are
+	// DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, and PER_TOPIC_PER_PARTITION.
+	EnhancedMonitoring EnhancedMonitoring
+
+	// Log delivery information for the cluster.
+	LoggingInfo *LoggingInfo
+
+	// The settings for open monitoring.
+	OpenMonitoring *OpenMonitoringInfo
+
+	noSmithyDocumentSerde
+}
+
 // Public access control for brokers.
 type PublicAccess struct {
 
@@ -664,6 +787,52 @@ type Scram struct {
 
 	// SASL/SCRAM authentication is enabled or not.
 	Enabled bool
+
+	noSmithyDocumentSerde
+}
+
+// Serverless cluster.
+type Serverless struct {
+
+	// The configuration of the Amazon VPCs for the cluster.
+	//
+	// This member is required.
+	VpcConfigs []VpcConfig
+
+	// Includes all client authentication information.
+	ClientAuthentication *ServerlessClientAuthentication
+
+	noSmithyDocumentSerde
+}
+
+// Includes all client authentication information.
+type ServerlessClientAuthentication struct {
+
+	// Details for ClientAuthentication using SASL.
+	Sasl *ServerlessSasl
+
+	noSmithyDocumentSerde
+}
+
+// Serverless cluster request.
+type ServerlessRequest struct {
+
+	// The configuration of the Amazon VPCs for the cluster.
+	//
+	// This member is required.
+	VpcConfigs []VpcConfig
+
+	// Includes all client authentication information.
+	ClientAuthentication *ServerlessClientAuthentication
+
+	noSmithyDocumentSerde
+}
+
+// Details for client authentication using SASL.
+type ServerlessSasl struct {
+
+	// Indicates whether IAM access control is enabled.
+	Iam *Iam
 
 	noSmithyDocumentSerde
 }
@@ -717,6 +886,20 @@ type UnprocessedScramSecret struct {
 
 	// AWS Secrets Manager secret ARN.
 	SecretArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of the Amazon VPCs for the cluster.
+type VpcConfig struct {
+
+	// The IDs of the subnets associated with the cluster.
+	//
+	// This member is required.
+	SubnetIds []string
+
+	// The IDs of the security groups associated with the cluster.
+	SecurityGroupIds []string
 
 	noSmithyDocumentSerde
 }

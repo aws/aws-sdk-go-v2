@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a tag definition.
+// Returns an LF-tag definition.
 func (c *Client) GetLFTag(ctx context.Context, params *GetLFTagInput, optFns ...func(*Options)) (*GetLFTagOutput, error) {
 	if params == nil {
 		params = &GetLFTagInput{}
@@ -28,15 +28,15 @@ func (c *Client) GetLFTag(ctx context.Context, params *GetLFTagInput, optFns ...
 
 type GetLFTagInput struct {
 
-	// The key-name for the tag.
+	// The key-name for the LF-tag.
 	//
 	// This member is required.
 	TagKey *string
 
 	// The identifier for the Data Catalog. By default, the account ID. The Data
 	// Catalog is the persistent metadata store. It contains database definitions,
-	// table definitions, and other control information to manage your AWS Lake
-	// Formation environment.
+	// table definitions, and other control information to manage your Lake Formation
+	// environment.
 	CatalogId *string
 
 	noSmithyDocumentSerde
@@ -46,11 +46,11 @@ type GetLFTagOutput struct {
 
 	// The identifier for the Data Catalog. By default, the account ID. The Data
 	// Catalog is the persistent metadata store. It contains database definitions,
-	// table definitions, and other control information to manage your AWS Lake
-	// Formation environment.
+	// table definitions, and other control information to manage your Lake Formation
+	// environment.
 	CatalogId *string
 
-	// The key-name for the tag.
+	// The key-name for the LF-tag.
 	TagKey *string
 
 	// A list of possible values an attribute can take.
@@ -63,11 +63,11 @@ type GetLFTagOutput struct {
 }
 
 func (c *Client) addOperationGetLFTagMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetLFTag{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLFTag{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetLFTag{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetLFTag{}, middleware.After)
 	if err != nil {
 		return err
 	}

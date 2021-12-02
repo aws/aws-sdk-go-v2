@@ -38,17 +38,20 @@ import (
 // GetRecords can return. Consider your average record size when determining this
 // limit. The maximum number of records that can be returned per call is 10,000.
 // The size of the data returned by GetRecords varies depending on the utilization
-// of the shard. The maximum size of data that GetRecords can return is 10 MiB. If
-// a call returns this amount of data, subsequent calls made within the next 5
-// seconds throw ProvisionedThroughputExceededException. If there is insufficient
-// provisioned throughput on the stream, subsequent calls made within the next 1
-// second throw ProvisionedThroughputExceededException. GetRecords doesn't return
-// any data when it throws an exception. For this reason, we recommend that you
-// wait 1 second between calls to GetRecords. However, it's possible that the
-// application will get exceptions for longer than 1 second. To detect whether the
-// application is falling behind in processing, you can use the MillisBehindLatest
-// response attribute. You can also monitor the stream using CloudWatch metrics and
-// other mechanisms (see Monitoring
+// of the shard. It is recommended that consumer applications retrieve records via
+// the GetRecords command using the 5 TPS limit to remain caught up. Retrieving
+// records less frequently can lead to consumer applications falling behind. The
+// maximum size of data that GetRecords can return is 10 MiB. If a call returns
+// this amount of data, subsequent calls made within the next 5 seconds throw
+// ProvisionedThroughputExceededException. If there is insufficient provisioned
+// throughput on the stream, subsequent calls made within the next 1 second throw
+// ProvisionedThroughputExceededException. GetRecords doesn't return any data when
+// it throws an exception. For this reason, we recommend that you wait 1 second
+// between calls to GetRecords. However, it's possible that the application will
+// get exceptions for longer than 1 second. To detect whether the application is
+// falling behind in processing, you can use the MillisBehindLatest response
+// attribute. You can also monitor the stream using CloudWatch metrics and other
+// mechanisms (see Monitoring
 // (https://docs.aws.amazon.com/kinesis/latest/dev/monitoring.html) in the Amazon
 // Kinesis Data Streams Developer Guide). Each Amazon Kinesis record includes a
 // value, ApproximateArrivalTimestamp, that is set when a stream successfully
@@ -101,6 +104,8 @@ type GetRecordsOutput struct {
 	// This member is required.
 	Records []types.Record
 
+	// The list of the current shard's child shards, returned in the GetRecords API's
+	// response only when the end of the current shard is reached.
 	ChildShards []types.ChildShard
 
 	// The number of milliseconds the GetRecords response is from the tip of the

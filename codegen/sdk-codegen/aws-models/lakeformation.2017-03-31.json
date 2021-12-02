@@ -31,6 +31,21 @@
     "shapes": {
         "com.amazonaws.lakeformation#AWSLakeFormation": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "LakeFormation",
+                    "arnNamespace": "lakeformation",
+                    "cloudFormationName": "LakeFormation",
+                    "cloudTrailEventSource": "lakeformation.amazonaws.com",
+                    "endpointPrefix": "lakeformation"
+                },
+                "aws.auth#sigv4": {
+                    "name": "lakeformation"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<fullname>Lake Formation</fullname>\n         <p>Defines the public endpoint for the Lake Formation service.</p>",
+                "smithy.api#title": "AWS Lake Formation"
+            },
             "version": "2017-03-31",
             "operations": [
                 {
@@ -43,16 +58,37 @@
                     "target": "com.amazonaws.lakeformation#BatchRevokePermissions"
                 },
                 {
+                    "target": "com.amazonaws.lakeformation#CancelTransaction"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#CommitTransaction"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#CreateDataCellsFilter"
+                },
+                {
                     "target": "com.amazonaws.lakeformation#CreateLFTag"
                 },
                 {
+                    "target": "com.amazonaws.lakeformation#DeleteDataCellsFilter"
+                },
+                {
                     "target": "com.amazonaws.lakeformation#DeleteLFTag"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#DeleteObjectsOnCancel"
                 },
                 {
                     "target": "com.amazonaws.lakeformation#DeregisterResource"
                 },
                 {
                     "target": "com.amazonaws.lakeformation#DescribeResource"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#DescribeTransaction"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#ExtendTransaction"
                 },
                 {
                     "target": "com.amazonaws.lakeformation#GetDataLakeSettings"
@@ -64,10 +100,28 @@
                     "target": "com.amazonaws.lakeformation#GetLFTag"
                 },
                 {
+                    "target": "com.amazonaws.lakeformation#GetQueryState"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#GetQueryStatistics"
+                },
+                {
                     "target": "com.amazonaws.lakeformation#GetResourceLFTags"
                 },
                 {
+                    "target": "com.amazonaws.lakeformation#GetTableObjects"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#GetWorkUnitResults"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#GetWorkUnits"
+                },
+                {
                     "target": "com.amazonaws.lakeformation#GrantPermissions"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#ListDataCellsFilter"
                 },
                 {
                     "target": "com.amazonaws.lakeformation#ListLFTags"
@@ -77,6 +131,12 @@
                 },
                 {
                     "target": "com.amazonaws.lakeformation#ListResources"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#ListTableStorageOptimizers"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#ListTransactions"
                 },
                 {
                     "target": "com.amazonaws.lakeformation#PutDataLakeSettings"
@@ -97,27 +157,24 @@
                     "target": "com.amazonaws.lakeformation#SearchTablesByLFTags"
                 },
                 {
+                    "target": "com.amazonaws.lakeformation#StartQueryPlanning"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#StartTransaction"
+                },
+                {
                     "target": "com.amazonaws.lakeformation#UpdateLFTag"
                 },
                 {
                     "target": "com.amazonaws.lakeformation#UpdateResource"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#UpdateTableObjects"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#UpdateTableStorageOptimizer"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "LakeFormation",
-                    "arnNamespace": "lakeformation",
-                    "cloudFormationName": "LakeFormation",
-                    "cloudTrailEventSource": "lakeformation.amazonaws.com",
-                    "endpointPrefix": "lakeformation"
-                },
-                "aws.auth#sigv4": {
-                    "name": "lakeformation"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>AWS Lake Formation</fullname>\n         <p>Defines the public endpoint for the AWS Lake Formation service.</p>",
-                "smithy.api#title": "AWS Lake Formation"
-            }
+            ]
         },
         "com.amazonaws.lakeformation#AccessDeniedException": {
             "type": "structure",
@@ -131,7 +188,8 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Access to a resource was denied.</p>",
-                "smithy.api#error": "client"
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
             }
         },
         "com.amazonaws.lakeformation#AddLFTagsToResource": {
@@ -163,7 +221,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Attaches one or more tags to an existing resource.</p>"
+                "smithy.api#documentation": "<p>Attaches one or more LF-tags to an existing resource.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/AddLFTagsToResource",
+                    "code": 200
+                }
             }
         },
         "com.amazonaws.lakeformation#AddLFTagsToResourceRequest": {
@@ -172,20 +235,20 @@
                 "CatalogId": {
                     "target": "com.amazonaws.lakeformation#CatalogIdString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. </p>"
                     }
                 },
                 "Resource": {
                     "target": "com.amazonaws.lakeformation#Resource",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource to which to attach a tag.</p>",
+                        "smithy.api#documentation": "<p>The database, table, or column resource to which to attach an LF-tag.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "LFTags": {
                     "target": "com.amazonaws.lakeformation#LFTagsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags to attach to the resource.</p>",
+                        "smithy.api#documentation": "<p>The LF-tags to attach to the resource.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -200,6 +263,48 @@
                         "smithy.api#documentation": "<p>A list of failures to tag the resource.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.lakeformation#AddObjectInput": {
+            "type": "structure",
+            "members": {
+                "Uri": {
+                    "target": "com.amazonaws.lakeformation#URI",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location of the object.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.lakeformation#ETagString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 ETag of the object. Returned by <code>GetTableObjects</code> for validation and used to identify changes to the underlying data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Size": {
+                    "target": "com.amazonaws.lakeformation#ObjectSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size of the Amazon S3 object in bytes.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PartitionValues": {
+                    "target": "com.amazonaws.lakeformation#PartitionValuesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of partition values for the object. A value must be specified for each partition key associated with the table.</p>\n\t        <p>The supported data types are integer, long, date(yyyy-MM-dd), timestamp(yyyy-MM-dd HH:mm:ssXXX or yyyy-MM-dd HH:mm:ss\"), string and decimal.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A new object to add to the governed table.</p>"
+            }
+        },
+        "com.amazonaws.lakeformation#AllRowsWildcard": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that you pass to indicate you want all rows in a filter. </p>"
             }
         },
         "com.amazonaws.lakeformation#AlreadyExistsException": {
@@ -234,7 +339,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Batch operation to grant permissions to the principal.</p>"
+                "smithy.api#documentation": "<p>Batch operation to grant permissions to the principal.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/BatchGrantPermissions",
+                    "code": 200
+                }
             }
         },
         "com.amazonaws.lakeformation#BatchGrantPermissionsRequest": {
@@ -243,7 +353,7 @@
                 "CatalogId": {
                     "target": "com.amazonaws.lakeformation#CatalogIdString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. </p>"
                     }
                 },
                 "Entries": {
@@ -354,7 +464,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Batch operation to revoke permissions from the principal.</p>"
+                "smithy.api#documentation": "<p>Batch operation to revoke permissions from the principal.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/BatchRevokePermissions",
+                    "code": 200
+                }
             }
         },
         "com.amazonaws.lakeformation#BatchRevokePermissionsRequest": {
@@ -363,7 +478,7 @@
                 "CatalogId": {
                     "target": "com.amazonaws.lakeformation#CatalogIdString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. </p>"
                     }
                 },
                 "Entries": {
@@ -392,6 +507,62 @@
                 "smithy.api#box": {}
             }
         },
+        "com.amazonaws.lakeformation#CancelTransaction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lakeformation#CancelTransactionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lakeformation#CancelTransactionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#TransactionCommitInProgressException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#TransactionCommittedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Attempts to cancel the specified transaction. Returns an exception if the transaction was previously committed.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/CancelTransaction",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#CancelTransactionRequest": {
+            "type": "structure",
+            "members": {
+                "TransactionId": {
+                    "target": "com.amazonaws.lakeformation#TransactionIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The transaction to cancel.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#CancelTransactionResponse": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.lakeformation#CatalogIdString": {
             "type": "string",
             "traits": {
@@ -399,7 +570,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"
             }
         },
         "com.amazonaws.lakeformation#CatalogResource": {
@@ -421,12 +592,12 @@
                 "LFTags": {
                     "target": "com.amazonaws.lakeformation#LFTagsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags attached to a column resource.</p>"
+                        "smithy.api#documentation": "<p>The LF-tags attached to a column resource.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure containing the name of a column resource and the tags attached to it.</p>"
+                "smithy.api#documentation": "<p>A structure containing the name of a column resource and the LF-tags attached to it.</p>"
             }
         },
         "com.amazonaws.lakeformation#ColumnLFTagsList": {
@@ -453,6 +624,66 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A wildcard object, consisting of an optional list of excluded column names or indexes.</p>"
+            }
+        },
+        "com.amazonaws.lakeformation#CommitTransaction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lakeformation#CommitTransactionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lakeformation#CommitTransactionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#TransactionCanceledException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Attempts to commit the specified transaction. Returns an exception if the transaction was previously aborted. This API action is idempotent if called multiple times for the same transaction.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/CommitTransaction",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#CommitTransactionRequest": {
+            "type": "structure",
+            "members": {
+                "TransactionId": {
+                    "target": "com.amazonaws.lakeformation#TransactionIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The transaction to commit.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#CommitTransactionResponse": {
+            "type": "structure",
+            "members": {
+                "TransactionStatus": {
+                    "target": "com.amazonaws.lakeformation#TransactionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the transaction.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.lakeformation#ComparisonOperator": {
@@ -521,6 +752,62 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.lakeformation#CreateDataCellsFilter": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lakeformation#CreateDataCellsFilterRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lakeformation#CreateDataCellsFilterResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#AlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#ResourceNumberLimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a data cell filter to allow one to grant access to certain columns on certain rows.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/CreateDataCellsFilter",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#CreateDataCellsFilterRequest": {
+            "type": "structure",
+            "members": {
+                "TableData": {
+                    "target": "com.amazonaws.lakeformation#DataCellsFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>DataCellsFilter</code> structure containing information about the data cells filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#CreateDataCellsFilterResponse": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.lakeformation#CreateLFTag": {
             "type": "operation",
             "input": {
@@ -550,7 +837,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a tag with the specified name and values.</p>"
+                "smithy.api#documentation": "<p>Creates an LF-tag with the specified name and values.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/CreateLFTag",
+                    "code": 200
+                }
             }
         },
         "com.amazonaws.lakeformation#CreateLFTagRequest": {
@@ -559,13 +851,13 @@
                 "CatalogId": {
                     "target": "com.amazonaws.lakeformation#CatalogIdString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. </p>"
                     }
                 },
                 "TagKey": {
                     "target": "com.amazonaws.lakeformation#LFTagKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key-name for the tag.</p>",
+                        "smithy.api#documentation": "<p>The key-name for the LF-tag.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -582,13 +874,105 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.lakeformation#DataCellsFilter": {
+            "type": "structure",
+            "members": {
+                "TableCatalogId": {
+                    "target": "com.amazonaws.lakeformation#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the catalog to which the table belongs.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatabaseName": {
+                    "target": "com.amazonaws.lakeformation#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A database in the Glue Data Catalog.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TableName": {
+                    "target": "com.amazonaws.lakeformation#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A table in the database.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.lakeformation#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name given by the user to the data filter cell.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RowFilter": {
+                    "target": "com.amazonaws.lakeformation#RowFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A PartiQL predicate.</p>"
+                    }
+                },
+                "ColumnNames": {
+                    "target": "com.amazonaws.lakeformation#ColumnNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of column names.</p>"
+                    }
+                },
+                "ColumnWildcard": {
+                    "target": "com.amazonaws.lakeformation#ColumnWildcard",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A wildcard with exclusions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that describes certain columns on certain rows.</p>"
+            }
+        },
+        "com.amazonaws.lakeformation#DataCellsFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lakeformation#DataCellsFilter"
+            }
+        },
+        "com.amazonaws.lakeformation#DataCellsFilterResource": {
+            "type": "structure",
+            "members": {
+                "TableCatalogId": {
+                    "target": "com.amazonaws.lakeformation#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the catalog to which the table belongs.</p>"
+                    }
+                },
+                "DatabaseName": {
+                    "target": "com.amazonaws.lakeformation#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A database in the Glue Data Catalog.</p>"
+                    }
+                },
+                "TableName": {
+                    "target": "com.amazonaws.lakeformation#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the table.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.lakeformation#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the data cells filter. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure for a data cells filter resource. </p>"
+            }
+        },
         "com.amazonaws.lakeformation#DataLakePrincipal": {
             "type": "structure",
             "members": {
                 "DataLakePrincipalIdentifier": {
                     "target": "com.amazonaws.lakeformation#DataLakePrincipalString",
                     "traits": {
-                        "smithy.api#documentation": "<p>An identifier for the AWS Lake Formation principal.</p>"
+                        "smithy.api#documentation": "<p>An identifier for the Lake Formation principal.</p>"
                     }
                 }
             },
@@ -662,30 +1046,30 @@
                 "DataLakeAdmins": {
                     "target": "com.amazonaws.lakeformation#DataLakePrincipalList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of AWS Lake Formation principals. Supported principals are IAM users or IAM roles.</p>"
+                        "smithy.api#documentation": "<p>A list of Lake Formation principals. Supported principals are IAM users or IAM roles.</p>"
                     }
                 },
                 "CreateDatabaseDefaultPermissions": {
                     "target": "com.amazonaws.lakeformation#PrincipalPermissionsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure representing a list of up to three principal permissions entries for default create database permissions.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether access control on newly created database is managed by Lake Formation permissions or exclusively by IAM permissions. You can override this default setting when you create a database.</p>\n\t \n         <p>A null value indicates access control by Lake Formation permissions. A value that assigns ALL to IAM_ALLOWED_PRINCIPALS indicates access control by IAM permissions. This is referred to as the setting \"Use only IAM access control,\" and is for backward compatibility with the Glue permission model implemented by IAM permissions.</p>\n\t\n\t        <p>The only permitted values are an empty array or an array that contains a single JSON object that grants ALL to IAM_ALLOWED_PRINCIPALS.</p>\n\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/lake-formation/latest/dg/change-settings.html\">Changing the Default Security Settings for Your Data Lake</a>.</p>"
                     }
                 },
                 "CreateTableDefaultPermissions": {
                     "target": "com.amazonaws.lakeformation#PrincipalPermissionsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure representing a list of up to three principal permissions entries for default create table permissions.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether access control on newly created table is managed by Lake Formation permissions or exclusively by IAM permissions.</p>\n\t \n         <p>A null value indicates access control by Lake Formation permissions. A value that assigns ALL to IAM_ALLOWED_PRINCIPALS indicates access control by IAM permissions. This is referred to as the setting \"Use only IAM access control,\" and is for backward compatibility with the Glue permission model implemented by IAM permissions.</p>\n\t\n\t        <p>The only permitted values are an empty array or an array that contains a single JSON object that grants ALL to IAM_ALLOWED_PRINCIPALS.</p>\n  \n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/lake-formation/latest/dg/change-settings.html\">Changing the Default Security Settings for Your Data Lake</a>.</p>"
                     }
                 },
                 "TrustedResourceOwners": {
                     "target": "com.amazonaws.lakeformation#TrustedResourceOwners",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of the resource-owning account IDs that the caller's account can use to share their user access details (user ARNs). The user ARNs can be logged in the resource owner's AWS CloudTrail log.</p>\n\t\n\t        <p>You may want to specify this property when you are in a high-trust boundary, such as the same team or company. </p>"
+                        "smithy.api#documentation": "<p>A list of the resource-owning account IDs that the caller's account can use to share their user access details (user ARNs). The user ARNs can be logged in the resource owner's CloudTrail log.</p>\n\t\n\t        <p>You may want to specify this property when you are in a high-trust boundary, such as the same team or company. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure representing a list of AWS Lake Formation principals designated as data lake administrators and lists of principal permission entries for default create database and default create table permissions.</p>"
+                "smithy.api#documentation": "<p>A structure representing a list of Lake Formation principals designated as data lake administrators and lists of principal permission entries for default create database and default create table permissions.</p>"
             }
         },
         "com.amazonaws.lakeformation#DataLocationResource": {
@@ -694,7 +1078,7 @@
                 "CatalogId": {
                     "target": "com.amazonaws.lakeformation#CatalogIdString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the Data Catalog where the location is registered with AWS Lake Formation. By default, it is the account ID of the caller.</p>"
+                        "smithy.api#documentation": "<p>The identifier for the Data Catalog where the location is registered with Lake Formation. By default, it is the account ID of the caller.</p>"
                     }
                 },
                 "ResourceArn": {
@@ -736,6 +1120,79 @@
                 "smithy.api#documentation": "<p>A structure for the database object.</p>"
             }
         },
+        "com.amazonaws.lakeformation#DateTime": {
+            "type": "timestamp",
+            "traits": {
+                "smithy.api#timestampFormat": "date-time"
+            }
+        },
+        "com.amazonaws.lakeformation#DeleteDataCellsFilter": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lakeformation#DeleteDataCellsFilterRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lakeformation#DeleteDataCellsFilterResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a data cell filter.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/DeleteDataCellsFilter",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#DeleteDataCellsFilterRequest": {
+            "type": "structure",
+            "members": {
+                "TableCatalogId": {
+                    "target": "com.amazonaws.lakeformation#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the catalog to which the table belongs.</p>"
+                    }
+                },
+                "DatabaseName": {
+                    "target": "com.amazonaws.lakeformation#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A database in the Glue Data Catalog.</p>"
+                    }
+                },
+                "TableName": {
+                    "target": "com.amazonaws.lakeformation#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A table in the database.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.lakeformation#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name given by the user to the data filter cell.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#DeleteDataCellsFilterResponse": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.lakeformation#DeleteLFTag": {
             "type": "operation",
             "input": {
@@ -762,7 +1219,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified tag key name. If the attribute key does not exist or the tag does not exist, then the operation will not do anything. If the attribute key exists, then the operation checks if any resources are tagged with this attribute key, if yes, the API throws a 400 Exception with the message \"Delete not allowed\" as the tag key is still attached with resources. You can consider untagging resources with this tag key.</p>"
+                "smithy.api#documentation": "<p>Deletes the specified LF-tag key name. If the attribute key does not exist or the LF-tag does not exist, then the operation will not do anything. If the attribute key exists, then the operation checks if any resources are tagged with this attribute key, if yes, the API throws a 400 Exception with the message \"Delete not allowed\" as the LF-tag key is still attached with resources. You can consider untagging resources with this LF-tag key.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/DeleteLFTag",
+                    "code": 200
+                }
             }
         },
         "com.amazonaws.lakeformation#DeleteLFTagRequest": {
@@ -771,19 +1233,132 @@
                 "CatalogId": {
                     "target": "com.amazonaws.lakeformation#CatalogIdString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. </p>"
                     }
                 },
                 "TagKey": {
                     "target": "com.amazonaws.lakeformation#LFTagKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key-name for the tag to delete.</p>",
+                        "smithy.api#documentation": "<p>The key-name for the LF-tag to delete.</p>",
                         "smithy.api#required": {}
                     }
                 }
             }
         },
         "com.amazonaws.lakeformation#DeleteLFTagResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.lakeformation#DeleteObjectInput": {
+            "type": "structure",
+            "members": {
+                "Uri": {
+                    "target": "com.amazonaws.lakeformation#URI",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location of the object to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.lakeformation#ETagString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 ETag of the object. Returned by <code>GetTableObjects</code> for validation and used to identify changes to the underlying data.</p>"
+                    }
+                },
+                "PartitionValues": {
+                    "target": "com.amazonaws.lakeformation#PartitionValuesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of partition values for the object. A value must be specified for each partition key associated with the governed table.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object to delete from the governed table.</p>"
+            }
+        },
+        "com.amazonaws.lakeformation#DeleteObjectsOnCancel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lakeformation#DeleteObjectsOnCancelRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lakeformation#DeleteObjectsOnCancelResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#ResourceNotReadyException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#TransactionCanceledException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#TransactionCommittedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>For a specific governed table, provides a list of Amazon S3 objects that will be written during the current transaction and that can be automatically deleted\n      if the transaction is canceled. Without this call, no Amazon S3 objects are automatically deleted when a transaction cancels.\n    </p>\n         <p>\n      The Glue ETL library function <code>write_dynamic_frame.from_catalog()</code> includes an option to automatically \n      call <code>DeleteObjectsOnCancel</code> before writes. For more information, see \n      <a href=\"https://docs.aws.amazon.com/lake-formation/latest/dg/transactions-data-operations.html#rolling-back-writes\">Rolling Back Amazon S3 Writes</a>.\n    </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/DeleteObjectsOnCancel",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#DeleteObjectsOnCancelRequest": {
+            "type": "structure",
+            "members": {
+                "CatalogId": {
+                    "target": "com.amazonaws.lakeformation#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Glue data catalog that contains the governed table. Defaults to the current account ID.</p>"
+                    }
+                },
+                "DatabaseName": {
+                    "target": "com.amazonaws.lakeformation#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The database that contains the governed table.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TableName": {
+                    "target": "com.amazonaws.lakeformation#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the governed table.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TransactionId": {
+                    "target": "com.amazonaws.lakeformation#TransactionIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ID of the transaction that the writes occur in.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Objects": {
+                    "target": "com.amazonaws.lakeformation#VirtualObjectList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of VirtualObject structures, which indicates the Amazon S3 objects to be deleted if the transaction cancels.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#DeleteObjectsOnCancelResponse": {
             "type": "structure",
             "members": {}
         },
@@ -810,7 +1385,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deregisters the resource as managed by the Data Catalog.</p>\n\t\n         <p>When you deregister a path, Lake Formation removes the path from the inline policy attached to your service-linked role.</p>"
+                "smithy.api#documentation": "<p>Deregisters the resource as managed by the Data Catalog.</p>\n\t\n         <p>When you deregister a path, Lake Formation removes the path from the inline policy attached to your service-linked role.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/DeregisterResource",
+                    "code": 200
+                }
             }
         },
         "com.amazonaws.lakeformation#DeregisterResourceRequest": {
@@ -852,7 +1432,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the current data access role for the given resource registered in AWS Lake Formation.</p>"
+                "smithy.api#documentation": "<p>Retrieves the current data access role for the given resource registered in Lake Formation.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/DescribeResource",
+                    "code": 200
+                }
             }
         },
         "com.amazonaws.lakeformation#DescribeResourceRequest": {
@@ -873,7 +1458,61 @@
                 "ResourceInfo": {
                     "target": "com.amazonaws.lakeformation#ResourceInfo",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure containing information about an AWS Lake Formation resource.</p>"
+                        "smithy.api#documentation": "<p>A structure containing information about an Lake Formation resource.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#DescribeTransaction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lakeformation#DescribeTransactionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lakeformation#DescribeTransactionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the details of a single transaction.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/DescribeTransaction",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#DescribeTransactionRequest": {
+            "type": "structure",
+            "members": {
+                "TransactionId": {
+                    "target": "com.amazonaws.lakeformation#TransactionIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The transaction for which to return status.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#DescribeTransactionResponse": {
+            "type": "structure",
+            "members": {
+                "TransactionDescription": {
+                    "target": "com.amazonaws.lakeformation#TransactionDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a <code>TransactionDescription</code> object containing information about the transaction.</p>"
                     }
                 }
             }
@@ -885,7 +1524,7 @@
                     "min": 0,
                     "max": 2048
                 },
-                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
             }
         },
         "com.amazonaws.lakeformation#DetailsMap": {
@@ -894,12 +1533,22 @@
                 "ResourceShare": {
                     "target": "com.amazonaws.lakeformation#ResourceShareList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A resource share ARN for a catalog resource shared through AWS Resource Access Manager (AWS RAM).</p>"
+                        "smithy.api#documentation": "<p>A resource share ARN for a catalog resource shared through RAM.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure containing the additional details to be returned in the <code>AdditionalDetails</code> attribute of <code>PrincipalResourcePermissions</code>.</p>\n  \n         <p>If a catalog resource is shared through AWS Resource Access Manager (AWS RAM), then there will exist a corresponding RAM resource share ARN.</p>"
+                "smithy.api#documentation": "<p>A structure containing the additional details to be returned in the <code>AdditionalDetails</code> attribute of <code>PrincipalResourcePermissions</code>.</p>\n  \n         <p>If a catalog resource is shared through Resource Access Manager (RAM), then there will exist a corresponding RAM resource share ARN.</p>"
+            }
+        },
+        "com.amazonaws.lakeformation#ETagString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[\\p{L}\\p{N}\\p{P}]*$"
             }
         },
         "com.amazonaws.lakeformation#EntityNotFoundException": {
@@ -937,6 +1586,51 @@
                 "smithy.api#documentation": "<p>Contains details about an error.</p>"
             }
         },
+        "com.amazonaws.lakeformation#ErrorMessageString": {
+            "type": "string"
+        },
+        "com.amazonaws.lakeformation#ExecutionStatistics": {
+            "type": "structure",
+            "members": {
+                "AverageExecutionTimeMillis": {
+                    "target": "com.amazonaws.lakeformation#NumberOfMilliseconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The average time the request took to be executed.</p>"
+                    }
+                },
+                "DataScannedBytes": {
+                    "target": "com.amazonaws.lakeformation#NumberOfBytes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of data that was scanned in bytes.</p>"
+                    }
+                },
+                "WorkUnitsExecutedCount": {
+                    "target": "com.amazonaws.lakeformation#NumberOfItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of work units executed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Statistics related to the processing of a query statement.</p>"
+            }
+        },
+        "com.amazonaws.lakeformation#ExpiredException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.lakeformation#MessageString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message describing the error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about an error where the query request expired.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 410
+            }
+        },
         "com.amazonaws.lakeformation#Expression": {
             "type": "list",
             "member": {
@@ -948,6 +1642,61 @@
                     "max": 5
                 }
             }
+        },
+        "com.amazonaws.lakeformation#ExtendTransaction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lakeformation#ExtendTransactionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lakeformation#ExtendTransactionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#TransactionCanceledException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#TransactionCommitInProgressException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#TransactionCommittedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates to the service that the specified transaction is still active and should not be treated as idle and aborted.</p>\n\t\n\t        <p>Write transactions that remain idle for a long period are automatically aborted unless explicitly extended.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ExtendTransaction",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#ExtendTransactionRequest": {
+            "type": "structure",
+            "members": {
+                "TransactionId": {
+                    "target": "com.amazonaws.lakeformation#TransactionIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The transaction to extend.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#ExtendTransactionResponse": {
+            "type": "structure",
+            "members": {}
         },
         "com.amazonaws.lakeformation#FieldNameString": {
             "type": "string",
@@ -1026,7 +1775,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the list of the data lake administrators of a Lake Formation-managed data lake. </p>"
+                "smithy.api#documentation": "<p>Retrieves the list of the data lake administrators of a Lake Formation-managed data lake. </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetDataLakeSettings",
+                    "code": 200
+                }
             }
         },
         "com.amazonaws.lakeformation#GetDataLakeSettingsRequest": {
@@ -1035,7 +1789,7 @@
                 "CatalogId": {
                     "target": "com.amazonaws.lakeformation#CatalogIdString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. </p>"
                     }
                 }
             }
@@ -1046,7 +1800,7 @@
                 "DataLakeSettings": {
                     "target": "com.amazonaws.lakeformation#DataLakeSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure representing a list of AWS Lake Formation principals designated as data lake administrators.</p>"
+                        "smithy.api#documentation": "<p>A structure representing a list of Lake Formation principals designated as data lake administrators.</p>"
                     }
                 }
             }
@@ -1075,6 +1829,11 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns the Lake Formation permissions for a specified table or database resource located\n      at a path in Amazon S3. <code>GetEffectivePermissionsForPath</code> will not return databases and tables if the catalog is encrypted.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetEffectivePermissionsForPath",
+                    "code": 200
+                },
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1088,7 +1847,7 @@
                 "CatalogId": {
                     "target": "com.amazonaws.lakeformation#CatalogIdString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. </p>"
                     }
                 },
                 "ResourceArn": {
@@ -1155,7 +1914,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a tag definition.</p>"
+                "smithy.api#documentation": "<p>Returns an LF-tag definition.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetLFTag",
+                    "code": 200
+                }
             }
         },
         "com.amazonaws.lakeformation#GetLFTagRequest": {
@@ -1164,13 +1928,13 @@
                 "CatalogId": {
                     "target": "com.amazonaws.lakeformation#CatalogIdString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. </p>"
                     }
                 },
                 "TagKey": {
                     "target": "com.amazonaws.lakeformation#LFTagKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key-name for the tag.</p>",
+                        "smithy.api#documentation": "<p>The key-name for the LF-tag.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1182,19 +1946,176 @@
                 "CatalogId": {
                     "target": "com.amazonaws.lakeformation#CatalogIdString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. </p>"
                     }
                 },
                 "TagKey": {
                     "target": "com.amazonaws.lakeformation#LFTagKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key-name for the tag.</p>"
+                        "smithy.api#documentation": "<p>The key-name for the LF-tag.</p>"
                     }
                 },
                 "TagValues": {
                     "target": "com.amazonaws.lakeformation#TagValueList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of possible values an attribute can take.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#GetQueryState": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lakeformation#GetQueryStateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lakeformation#GetQueryStateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InvalidInputException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the state of a query previously submitted. Clients are expected to poll <code>GetQueryState</code> to monitor the current state of the planning before retrieving the work units. A query state is only visible to the principal that made the initial call to <code>StartQueryPlanning</code>.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "query-"
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetQueryState",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#GetQueryStateRequest": {
+            "type": "structure",
+            "members": {
+                "QueryId": {
+                    "target": "com.amazonaws.lakeformation#GetQueryStateRequestQueryIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the plan query operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#GetQueryStateRequestQueryIdString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#GetQueryStateResponse": {
+            "type": "structure",
+            "members": {
+                "Error": {
+                    "target": "com.amazonaws.lakeformation#ErrorMessageString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An error message when the operation fails.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.lakeformation#QueryStateString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of a query previously submitted. The possible states are:</p>\n\t\n\t        <ul>\n            <li>\n               <p>PENDING: the query is pending.</p>\n            </li>\n            <li>\n               <p>WORKUNITS_AVAILABLE: some work units are ready for retrieval and execution.</p>\n            </li>\n            <li>\n               <p>FINISHED: the query planning finished successfully, and all work units are ready for retrieval and execution.</p>\n            </li>\n            <li>\n               <p>ERROR: an error occurred with the query, such as an invalid query ID or a backend error.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure for the output.</p>"
+            }
+        },
+        "com.amazonaws.lakeformation#GetQueryStatistics": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lakeformation#GetQueryStatisticsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lakeformation#GetQueryStatisticsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#ExpiredException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#StatisticsNotReadyYetException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#ThrottledException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves statistics on the planning and execution of a query.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "query-"
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetQueryStatistics",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#GetQueryStatisticsRequest": {
+            "type": "structure",
+            "members": {
+                "QueryId": {
+                    "target": "com.amazonaws.lakeformation#GetQueryStatisticsRequestQueryIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the plan query operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#GetQueryStatisticsRequestQueryIdString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#GetQueryStatisticsResponse": {
+            "type": "structure",
+            "members": {
+                "ExecutionStatistics": {
+                    "target": "com.amazonaws.lakeformation#ExecutionStatistics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An <code>ExecutionStatistics</code> structure containing execution statistics.</p>"
+                    }
+                },
+                "PlanningStatistics": {
+                    "target": "com.amazonaws.lakeformation#PlanningStatistics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>PlanningStatistics</code> structure containing query planning statistics.</p>"
+                    }
+                },
+                "QuerySubmissionTime": {
+                    "target": "com.amazonaws.lakeformation#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the query was submitted.</p>"
                     }
                 }
             }
@@ -1228,7 +2149,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the tags applied to a resource.</p>"
+                "smithy.api#documentation": "<p>Returns the LF-tags applied to a resource.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetResourceLFTags",
+                    "code": 200
+                }
             }
         },
         "com.amazonaws.lakeformation#GetResourceLFTagsRequest": {
@@ -1237,20 +2163,20 @@
                 "CatalogId": {
                     "target": "com.amazonaws.lakeformation#CatalogIdString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. </p>"
                     }
                 },
                 "Resource": {
                     "target": "com.amazonaws.lakeformation#Resource",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource for which you want to return tags.</p>",
+                        "smithy.api#documentation": "<p>The database, table, or column resource for which you want to return LF-tags.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ShowAssignedLFTags": {
                     "target": "com.amazonaws.lakeformation#BooleanNullable",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether to show the assigned tags.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether to show the assigned LF-tags.</p>"
                     }
                 }
             }
@@ -1261,21 +2187,336 @@
                 "LFTagOnDatabase": {
                     "target": "com.amazonaws.lakeformation#LFTagsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of tags applied to a database resource.</p>"
+                        "smithy.api#documentation": "<p>A list of LF-tags applied to a database resource.</p>"
                     }
                 },
                 "LFTagsOnTable": {
                     "target": "com.amazonaws.lakeformation#LFTagsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of tags applied to a table resource.</p>"
+                        "smithy.api#documentation": "<p>A list of LF-tags applied to a table resource.</p>"
                     }
                 },
                 "LFTagsOnColumns": {
                     "target": "com.amazonaws.lakeformation#ColumnLFTagsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of tags applied to a column resource.</p>"
+                        "smithy.api#documentation": "<p>A list of LF-tags applied to a column resource.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.lakeformation#GetTableObjects": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lakeformation#GetTableObjectsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lakeformation#GetTableObjectsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#ResourceNotReadyException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#TransactionCanceledException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#TransactionCommittedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the set of Amazon S3 objects that make up the specified governed table. A transaction ID or timestamp can be specified for time-travel queries.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetTableObjects",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#GetTableObjectsRequest": {
+            "type": "structure",
+            "members": {
+                "CatalogId": {
+                    "target": "com.amazonaws.lakeformation#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The catalog containing the governed table. Defaults to the caller’s account.</p>"
+                    }
+                },
+                "DatabaseName": {
+                    "target": "com.amazonaws.lakeformation#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The database containing the governed table.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TableName": {
+                    "target": "com.amazonaws.lakeformation#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The governed table for which to retrieve objects.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TransactionId": {
+                    "target": "com.amazonaws.lakeformation#TransactionIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The transaction ID at which to read the governed table contents. If this transaction has aborted, an error is returned. If not set, defaults to the most recent committed transaction. Cannot be specified along with <code>QueryAsOfTime</code>.</p>"
+                    }
+                },
+                "QueryAsOfTime": {
+                    "target": "com.amazonaws.lakeformation#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time as of when to read the governed table contents. If not set, the most recent transaction commit time is used. Cannot be specified along with <code>TransactionId</code>.</p>"
+                    }
+                },
+                "PartitionPredicate": {
+                    "target": "com.amazonaws.lakeformation#PredicateString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A predicate to filter the objects returned based on the partition keys defined in the governed table.</p>\n\t        <ul>\n            <li>\n               <p>The comparison operators supported are: =, >, <, >=, <=</p>\n            </li>\n            <li>\n               <p>The logical operators supported are: AND</p>\n            </li>\n            <li>\n               <p>The data types supported are integer, long, date(yyyy-MM-dd), timestamp(yyyy-MM-dd HH:mm:ssXXX or yyyy-MM-dd HH:mm:ss\"), string and decimal.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.lakeformation#PageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how many values to return in a page.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.lakeformation#TokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token if this is not the first call to retrieve these objects.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#GetTableObjectsResponse": {
+            "type": "structure",
+            "members": {
+                "Objects": {
+                    "target": "com.amazonaws.lakeformation#PartitionedTableObjectsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects organized by partition keys.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.lakeformation#TokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token indicating whether additional data is available.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#GetWorkUnitResults": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lakeformation#GetWorkUnitResultsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lakeformation#GetWorkUnitResultsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#ExpiredException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#ThrottledException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the work units resulting from the query. Work units can be executed in any order and in parallel. </p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "data-"
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetWorkUnitResults",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#GetWorkUnitResultsRequest": {
+            "type": "structure",
+            "members": {
+                "QueryId": {
+                    "target": "com.amazonaws.lakeformation#GetWorkUnitResultsRequestQueryIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the plan query operation for which to get results.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WorkUnitId": {
+                    "target": "com.amazonaws.lakeformation#GetWorkUnitResultsRequestWorkUnitIdLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The work unit ID for which to get results. Value generated by enumerating <code>WorkUnitIdMin</code> to <code>WorkUnitIdMax</code> (inclusive) from the <code>WorkUnitRange</code> in the output of <code>GetWorkUnits</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WorkUnitToken": {
+                    "target": "com.amazonaws.lakeformation#SyntheticGetWorkUnitResultsRequestWorkUnitTokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A work token used to query the execution service. Token output from <code>GetWorkUnits</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#GetWorkUnitResultsRequestQueryIdString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#GetWorkUnitResultsRequestWorkUnitIdLong": {
+            "type": "long",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#GetWorkUnitResultsResponse": {
+            "type": "structure",
+            "members": {
+                "ResultStream": {
+                    "target": "com.amazonaws.lakeformation#ResultStream",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Rows returned from the <code>GetWorkUnitResults</code> operation as a stream of Apache Arrow v1.0 messages.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure for the output.</p>"
+            }
+        },
+        "com.amazonaws.lakeformation#GetWorkUnits": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lakeformation#GetWorkUnitsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lakeformation#GetWorkUnitsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#ExpiredException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#WorkUnitsNotReadyYetException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the work units generated by the <code>StartQueryPlanning</code> operation.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "query-"
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetWorkUnits",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "PageSize"
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#GetWorkUnitsRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.lakeformation#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token, if this is a continuation call.</p>"
+                    }
+                },
+                "PageSize": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size of each page to get in the Amazon Web Services service call. This does not affect the number of items returned in the command's output. Setting a smaller page size results in more calls to the Amazon Web Services service, retrieving fewer items in each call. This can help prevent the Amazon Web Services service calls from timing out.</p>"
+                    }
+                },
+                "QueryId": {
+                    "target": "com.amazonaws.lakeformation#GetWorkUnitsRequestQueryIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the plan query operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#GetWorkUnitsRequestQueryIdString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#GetWorkUnitsResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.lakeformation#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token for paginating the returned list of tokens, returned if the current segment of the list is not the last.</p>"
+                    }
+                },
+                "QueryId": {
+                    "target": "com.amazonaws.lakeformation#QueryIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the plan query operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WorkUnitRanges": {
+                    "target": "com.amazonaws.lakeformation#WorkUnitRangeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>WorkUnitRangeList</code> object that specifies the valid range of work unit IDs for querying the execution service.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure for the output.</p>"
             }
         },
         "com.amazonaws.lakeformation#GlueEncryptionException": {
@@ -1313,7 +2554,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Grants permissions to the principal to access metadata in the Data Catalog and data organized in underlying data storage such as Amazon S3.</p>\n\t        <p>For information about permissions, see <a href=\"https://docs-aws.amazon.com/lake-formation/latest/dg/security-data-access.html\">Security and Access Control to Metadata and Data</a>.</p>"
+                "smithy.api#documentation": "<p>Grants permissions to the principal to access metadata in the Data Catalog and data organized in underlying data storage such as Amazon S3.</p>\n\t        <p>For information about permissions, see <a href=\"https://docs-aws.amazon.com/lake-formation/latest/dg/security-data-access.html\">Security and Access Control to Metadata and Data</a>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GrantPermissions",
+                    "code": 200
+                }
             }
         },
         "com.amazonaws.lakeformation#GrantPermissionsRequest": {
@@ -1322,7 +2568,7 @@
                 "CatalogId": {
                     "target": "com.amazonaws.lakeformation#CatalogIdString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. </p>"
                     }
                 },
                 "Principal": {
@@ -1335,14 +2581,14 @@
                 "Resource": {
                     "target": "com.amazonaws.lakeformation#Resource",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource to which permissions are to be granted. Resources in AWS Lake Formation are the Data Catalog, databases, and tables.</p>",
+                        "smithy.api#documentation": "<p>The resource to which permissions are to be granted. Resources in Lake Formation are the Data Catalog, databases, and tables.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Permissions": {
                     "target": "com.amazonaws.lakeformation#PermissionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The permissions granted to the principal on the resource. AWS Lake Formation defines privileges to grant and revoke access to metadata in the Data Catalog and data organized in underlying data storage such as Amazon S3. AWS Lake Formation requires that each principal be authorized to perform a specific task on AWS Lake Formation resources. </p>",
+                        "smithy.api#documentation": "<p>The permissions granted to the principal on the resource. Lake Formation defines privileges to grant and revoke access to metadata in the Data Catalog and data organized in underlying data storage such as Amazon S3. Lake Formation requires that each principal be authorized to perform a specific task on Lake Formation resources. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1361,7 +2607,7 @@
         "com.amazonaws.lakeformation#IAMRoleArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "arn:aws:iam::[0-9]*:role/.*"
+                "smithy.api#pattern": "^arn:aws:iam::[0-9]*:role/"
             }
         },
         "com.amazonaws.lakeformation#Identifier": {
@@ -1385,7 +2631,8 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>An internal service error occurred.</p>",
-                "smithy.api#error": "server"
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
             }
         },
         "com.amazonaws.lakeformation#InvalidInputException": {
@@ -1400,7 +2647,8 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The input provided was not valid.</p>",
-                "smithy.api#error": "client"
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
             }
         },
         "com.amazonaws.lakeformation#LFTag": {
@@ -1409,7 +2657,7 @@
                 "TagKey": {
                     "target": "com.amazonaws.lakeformation#LFTagKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key-name for the tag.</p>",
+                        "smithy.api#documentation": "<p>The key-name for the LF-tag.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1422,7 +2670,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that allows an admin to grant user permissions on certain conditions. For example, granting a role access to all columns not tagged 'PII' of tables tagged 'Prod'.</p>"
+                "smithy.api#documentation": "<p>A structure that allows an admin to grant user permissions on certain conditions. For example, granting a role access to all columns that do not have the LF-tag 'PII' in tables that have the LF-tag 'Prod'.</p>"
             }
         },
         "com.amazonaws.lakeformation#LFTagError": {
@@ -1431,13 +2679,13 @@
                 "LFTag": {
                     "target": "com.amazonaws.lakeformation#LFTagPair",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key-name of the tag.</p>"
+                        "smithy.api#documentation": "<p>The key-name of the LF-tag.</p>"
                     }
                 },
                 "Error": {
                     "target": "com.amazonaws.lakeformation#ErrorDetail",
                     "traits": {
-                        "smithy.api#documentation": "<p>An error that occurred with the attachment or detachment of the tag.</p>"
+                        "smithy.api#documentation": "<p>An error that occurred with the attachment or detachment of the LF-tag.</p>"
                     }
                 }
             },
@@ -1467,13 +2715,13 @@
                 "CatalogId": {
                     "target": "com.amazonaws.lakeformation#CatalogIdString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. </p>"
                     }
                 },
                 "TagKey": {
                     "target": "com.amazonaws.lakeformation#NameString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key-name for the tag.</p>",
+                        "smithy.api#documentation": "<p>The key-name for the LF-tag.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1486,7 +2734,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure containing a tag key and values for a resource.</p>"
+                "smithy.api#documentation": "<p>A structure containing an LF-tag key and values for a resource.</p>"
             }
         },
         "com.amazonaws.lakeformation#LFTagPair": {
@@ -1495,13 +2743,13 @@
                 "CatalogId": {
                     "target": "com.amazonaws.lakeformation#CatalogIdString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. </p>"
                     }
                 },
                 "TagKey": {
                     "target": "com.amazonaws.lakeformation#LFTagKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key-name for the tag.</p>",
+                        "smithy.api#documentation": "<p>The key-name for the LF-tag.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1514,7 +2762,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure containing a tag key-value pair.</p>"
+                "smithy.api#documentation": "<p>A structure containing an LF-tag key-value pair.</p>"
             }
         },
         "com.amazonaws.lakeformation#LFTagPolicyResource": {
@@ -1523,26 +2771,26 @@
                 "CatalogId": {
                     "target": "com.amazonaws.lakeformation#CatalogIdString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. </p>"
                     }
                 },
                 "ResourceType": {
                     "target": "com.amazonaws.lakeformation#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource type for which the tag policy applies.</p>",
+                        "smithy.api#documentation": "<p>The resource type for which the LF-tag policy applies.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Expression": {
                     "target": "com.amazonaws.lakeformation#Expression",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of tag conditions that apply to the resource's tag policy.</p>",
+                        "smithy.api#documentation": "<p>A list of LF-tag conditions that apply to the resource's LF-tag policy.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure containing a list of tag conditions that apply to a resource's tag policy.</p>"
+                "smithy.api#documentation": "<p>A structure containing a list of LF-tag conditions that apply to a resource's LF-tag policy.</p>"
             }
         },
         "com.amazonaws.lakeformation#LFTagValue": {
@@ -1570,6 +2818,83 @@
         "com.amazonaws.lakeformation#LastModifiedTimestamp": {
             "type": "timestamp"
         },
+        "com.amazonaws.lakeformation#ListDataCellsFilter": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lakeformation#ListDataCellsFilterRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lakeformation#ListDataCellsFilterResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all the data cell filters on a table.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListDataCellsFilter",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "DataCellsFilters",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#ListDataCellsFilterRequest": {
+            "type": "structure",
+            "members": {
+                "Table": {
+                    "target": "com.amazonaws.lakeformation#TableResource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A table in the Glue Data Catalog.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.lakeformation#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token, if this is a continuation call.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.lakeformation#PageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum size of the response.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#ListDataCellsFilterResponse": {
+            "type": "structure",
+            "members": {
+                "DataCellsFilters": {
+                    "target": "com.amazonaws.lakeformation#DataCellsFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>DataCellFilter</code> structures.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.lakeformation#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token, if not all requested data cell filters have been returned.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.lakeformation#ListLFTags": {
             "type": "operation",
             "input": {
@@ -1579,6 +2904,9 @@
                 "target": "com.amazonaws.lakeformation#ListLFTagsResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#AccessDeniedException"
+                },
                 {
                     "target": "com.amazonaws.lakeformation#EntityNotFoundException"
                 },
@@ -1593,7 +2921,18 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists tags that the requester has permission to view. </p>"
+                "smithy.api#documentation": "<p>Lists LF-tags that the requester has permission to view. </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListLFTags",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "LFTags",
+                    "pageSize": "MaxResults"
+                }
             }
         },
         "com.amazonaws.lakeformation#ListLFTagsRequest": {
@@ -1602,13 +2941,13 @@
                 "CatalogId": {
                     "target": "com.amazonaws.lakeformation#CatalogIdString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. </p>"
                     }
                 },
                 "ResourceShareType": {
                     "target": "com.amazonaws.lakeformation#ResourceShareType",
                     "traits": {
-                        "smithy.api#documentation": "<p>If resource share type is <code>ALL</code>, returns both in-account tags and shared tags that the requester has permission to view. If resource share type is <code>FOREIGN</code>, returns all share tags that the requester can view. If no resource share type is passed, lists tags in the given catalog ID that the requester has permission to view.</p>"
+                        "smithy.api#documentation": "<p>If resource share type is <code>ALL</code>, returns both in-account LF-tags and shared LF-tags that the requester has permission to view. If resource share type is <code>FOREIGN</code>, returns all share LF-tags that the requester can view. If no resource share type is passed, lists LF-tags in the given catalog ID that the requester has permission to view.</p>"
                     }
                 },
                 "MaxResults": {
@@ -1631,7 +2970,7 @@
                 "LFTags": {
                     "target": "com.amazonaws.lakeformation#LFTagsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of tags that the requested has permission to view.</p>"
+                        "smithy.api#documentation": "<p>A list of LF-tags that the requested has permission to view.</p>"
                     }
                 },
                 "NextToken": {
@@ -1663,6 +3002,11 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns a list of the principal permissions on the resource, filtered by the permissions of the caller. For example, if you are granted an ALTER permission, you are able to see only the principal permissions for ALTER.</p>\n\t        <p>This operation returns only those permissions that have been explicitly granted.</p>\n\t        <p>For information about permissions, see <a href=\"https://docs-aws.amazon.com/lake-formation/latest/dg/security-data-access.html\">Security and Access Control to Metadata and Data</a>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListPermissions",
+                    "code": 200
+                },
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1676,7 +3020,7 @@
                 "CatalogId": {
                     "target": "com.amazonaws.lakeformation#CatalogIdString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. </p>"
                     }
                 },
                 "Principal": {
@@ -1707,6 +3051,12 @@
                     "target": "com.amazonaws.lakeformation#PageSize",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of results to return.</p>"
+                    }
+                },
+                "IncludeRelated": {
+                    "target": "com.amazonaws.lakeformation#TrueFalseString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates that related permissions should be included in the results.</p>"
                     }
                 }
             }
@@ -1749,6 +3099,11 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Lists the resources registered to be managed by the Data Catalog.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListResources",
+                    "code": 200
+                },
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1796,6 +3151,181 @@
                 }
             }
         },
+        "com.amazonaws.lakeformation#ListTableStorageOptimizers": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lakeformation#ListTableStorageOptimizersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lakeformation#ListTableStorageOptimizersResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InvalidInputException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the configuration of all storage optimizers associated with a specified table.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListTableStorageOptimizers",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#ListTableStorageOptimizersRequest": {
+            "type": "structure",
+            "members": {
+                "CatalogId": {
+                    "target": "com.amazonaws.lakeformation#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Catalog ID of the table.</p>"
+                    }
+                },
+                "DatabaseName": {
+                    "target": "com.amazonaws.lakeformation#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the database where the table is present.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TableName": {
+                    "target": "com.amazonaws.lakeformation#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the table.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StorageOptimizerType": {
+                    "target": "com.amazonaws.lakeformation#OptimizerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specific type of storage optimizers to list. The supported value is <code>compaction</code>.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.lakeformation#PageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of storage optimizers to return on each call.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.lakeformation#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token, if this is a continuation call.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#ListTableStorageOptimizersResponse": {
+            "type": "structure",
+            "members": {
+                "StorageOptimizerList": {
+                    "target": "com.amazonaws.lakeformation#StorageOptimizerList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the storage optimizers associated with a table.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.lakeformation#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token for paginating the returned list of tokens, returned if the current segment of the list is not the last.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#ListTransactions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lakeformation#ListTransactionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lakeformation#ListTransactionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns metadata about transactions and their status. To prevent the response from growing indefinitely, only uncommitted transactions and those available for time-travel queries are returned.</p>\n\t        <p>This operation can help you identify uncommitted transactions or to get information about transactions.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListTransactions",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#ListTransactionsRequest": {
+            "type": "structure",
+            "members": {
+                "CatalogId": {
+                    "target": "com.amazonaws.lakeformation#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The catalog for which to list transactions. Defaults to the account ID of the caller.</p>"
+                    }
+                },
+                "StatusFilter": {
+                    "target": "com.amazonaws.lakeformation#TransactionStatusFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A filter indicating the status of transactions to return. Options are ALL | COMPLETED | COMMITTED | ABORTED | ACTIVE. The default is <code>ALL</code>.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.lakeformation#PageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of transactions to return in a single call.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.lakeformation#TokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token if this is not the first call to retrieve transactions.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#ListTransactionsResponse": {
+            "type": "structure",
+            "members": {
+                "Transactions": {
+                    "target": "com.amazonaws.lakeformation#TransactionDescriptionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of transactions. The record for each transaction is a <code>TransactionDescription</code> object.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.lakeformation#TokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token indicating whether additional data is available.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.lakeformation#MessageString": {
             "type": "string"
         },
@@ -1806,7 +3336,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"
             }
         },
         "com.amazonaws.lakeformation#NullableBoolean": {
@@ -1814,6 +3344,18 @@
             "traits": {
                 "smithy.api#box": {}
             }
+        },
+        "com.amazonaws.lakeformation#NumberOfBytes": {
+            "type": "long"
+        },
+        "com.amazonaws.lakeformation#NumberOfItems": {
+            "type": "long"
+        },
+        "com.amazonaws.lakeformation#NumberOfMilliseconds": {
+            "type": "long"
+        },
+        "com.amazonaws.lakeformation#ObjectSize": {
+            "type": "long"
         },
         "com.amazonaws.lakeformation#OperationTimeoutException": {
             "type": "structure",
@@ -1830,6 +3372,25 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.lakeformation#OptimizerType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "COMPACTION",
+                        "name": "COMPACTION"
+                    },
+                    {
+                        "value": "GARBAGE_COLLECTION",
+                        "name": "GARBAGE_COLLECTION"
+                    },
+                    {
+                        "value": "ALL",
+                        "name": "GENERIC"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.lakeformation#PageSize": {
             "type": "integer",
             "traits": {
@@ -1838,6 +3399,53 @@
                     "min": 1,
                     "max": 1000
                 }
+            }
+        },
+        "com.amazonaws.lakeformation#PartitionObjects": {
+            "type": "structure",
+            "members": {
+                "PartitionValues": {
+                    "target": "com.amazonaws.lakeformation#PartitionValuesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of partition values.</p>"
+                    }
+                },
+                "Objects": {
+                    "target": "com.amazonaws.lakeformation#TableObjectList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of table objects</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure containing a list of partition values and table objects.</p>"
+            }
+        },
+        "com.amazonaws.lakeformation#PartitionValueString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#PartitionValuesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lakeformation#PartitionValueString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#PartitionedTableObjectsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lakeformation#PartitionObjects"
             }
         },
         "com.amazonaws.lakeformation#Permission": {
@@ -1911,6 +3519,48 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.lakeformation#Permission"
+            }
+        },
+        "com.amazonaws.lakeformation#PlanningStatistics": {
+            "type": "structure",
+            "members": {
+                "EstimatedDataToScanBytes": {
+                    "target": "com.amazonaws.lakeformation#NumberOfBytes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An estimate of the data that was scanned in bytes.</p>"
+                    }
+                },
+                "PlanningTimeMillis": {
+                    "target": "com.amazonaws.lakeformation#NumberOfMilliseconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that it took to process the request.</p>"
+                    }
+                },
+                "QueueTimeMillis": {
+                    "target": "com.amazonaws.lakeformation#NumberOfMilliseconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the request was in queue to be processed.</p>"
+                    }
+                },
+                "WorkUnitsGeneratedCount": {
+                    "target": "com.amazonaws.lakeformation#NumberOfItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of work units generated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Statistics related to the processing of a query statement.</p>"
+            }
+        },
+        "com.amazonaws.lakeformation#PredicateString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
             }
         },
         "com.amazonaws.lakeformation#PrincipalPermissions": {
@@ -2000,7 +3650,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sets the list of data lake administrators who have admin privileges on all resources managed by Lake Formation. For more information on admin privileges, see <a href=\"https://docs.aws.amazon.com/lake-formation/latest/dg/lake-formation-permissions.html\">Granting Lake Formation Permissions</a>.</p>\n\t\n\t        <p>This API replaces the current list of data lake admins with the new list being passed. To add an admin, fetch the current list and add the new admin to that list and pass that list in this API.</p>"
+                "smithy.api#documentation": "<p>Sets the list of data lake administrators who have admin privileges on all resources managed by Lake Formation. For more information on admin privileges, see <a href=\"https://docs.aws.amazon.com/lake-formation/latest/dg/lake-formation-permissions.html\">Granting Lake Formation Permissions</a>.</p>\n\t\n\t        <p>This API replaces the current list of data lake admins with the new list being passed. To add an admin, fetch the current list and add the new admin to that list and pass that list in this API.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/PutDataLakeSettings",
+                    "code": 200
+                }
             }
         },
         "com.amazonaws.lakeformation#PutDataLakeSettingsRequest": {
@@ -2009,13 +3664,13 @@
                 "CatalogId": {
                     "target": "com.amazonaws.lakeformation#CatalogIdString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. </p>"
                     }
                 },
                 "DataLakeSettings": {
                     "target": "com.amazonaws.lakeformation#DataLakeSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>A structure representing a list of AWS Lake Formation principals designated as data lake administrators.</p>",
+                        "smithy.api#documentation": "<p>A structure representing a list of Lake Formation principals designated as data lake administrators.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2024,6 +3679,93 @@
         "com.amazonaws.lakeformation#PutDataLakeSettingsResponse": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.lakeformation#QueryIdString": {
+            "type": "string"
+        },
+        "com.amazonaws.lakeformation#QueryParameterMap": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.lakeformation#QueryPlanningContext": {
+            "type": "structure",
+            "members": {
+                "CatalogId": {
+                    "target": "com.amazonaws.lakeformation#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Data Catalog where the partition in question resides. If none is provided, the Amazon Web Services account ID is used by default.</p>"
+                    }
+                },
+                "DatabaseName": {
+                    "target": "com.amazonaws.lakeformation#QueryPlanningContextDatabaseNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The database containing the table.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "QueryAsOfTime": {
+                    "target": "com.amazonaws.lakeformation#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time as of when to read the table contents. If not set, the most recent transaction commit time will be used. Cannot be specified along with <code>TransactionId</code>.</p>"
+                    }
+                },
+                "QueryParameters": {
+                    "target": "com.amazonaws.lakeformation#QueryParameterMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map consisting of key-value pairs.</p>"
+                    }
+                },
+                "TransactionId": {
+                    "target": "com.amazonaws.lakeformation#TransactionIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The transaction ID at which to read the table contents. If this transaction is not committed, the read will be treated as part of that transaction and will see its writes. If this transaction has aborted, an error will be returned. If not set, defaults to the most recent committed transaction. Cannot be specified along with <code>QueryAsOfTime</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure containing information about the query plan.</p>"
+            }
+        },
+        "com.amazonaws.lakeformation#QueryPlanningContextDatabaseNameString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                },
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"
+            }
+        },
+        "com.amazonaws.lakeformation#QueryStateString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PENDING",
+                        "name": "PENDING"
+                    },
+                    {
+                        "value": "WORKUNITS_AVAILABLE",
+                        "name": "WORKUNITS_AVAILABLE"
+                    },
+                    {
+                        "value": "ERROR",
+                        "name": "ERROR"
+                    },
+                    {
+                        "value": "FINISHED",
+                        "name": "FINISHED"
+                    },
+                    {
+                        "value": "EXPIRED",
+                        "name": "EXPIRED"
+                    }
+                ]
+            }
         },
         "com.amazonaws.lakeformation#RAMResourceShareArn": {
             "type": "string"
@@ -2038,7 +3780,13 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.lakeformation#AccessDeniedException"
+                },
+                {
                     "target": "com.amazonaws.lakeformation#AlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#EntityNotFoundException"
                 },
                 {
                     "target": "com.amazonaws.lakeformation#InternalServiceException"
@@ -2048,10 +3796,18 @@
                 },
                 {
                     "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#ResourceNumberLimitExceededException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Registers the resource as managed by the Data Catalog.</p>\n\t\n\t        <p>To add or update data, Lake Formation needs read/write access to the chosen Amazon S3 path. Choose a role that you know has permission to do this, or choose the AWSServiceRoleForLakeFormationDataAccess service-linked role. When you register the first Amazon S3 path, the service-linked role and a new inline policy are created on your behalf. Lake Formation adds the first path to the inline policy and attaches it to the service-linked role. When you register subsequent paths, Lake Formation adds the path to the existing policy.</p>\n\n         <p>The following request registers a new location and gives AWS Lake Formation permission to use the service-linked role to access that location.</p>\n\n         <p>\n            <code>ResourceArn = arn:aws:s3:::my-bucket\nUseServiceLinkedRole = true</code>\n         </p>\n\t\n\t        <p>If <code>UseServiceLinkedRole</code> is not set to true, you must provide or set the <code>RoleArn</code>:</p>\n\t\n         <p>\n            <code>arn:aws:iam::12345:role/my-data-access-role</code>\n         </p>"
+                "smithy.api#documentation": "<p>Registers the resource as managed by the Data Catalog.</p>\n\t\n         <p>To add or update data, Lake Formation needs read/write access to the chosen Amazon S3 path. Choose a role that you know has permission to do this, or choose the AWSServiceRoleForLakeFormationDataAccess service-linked role. When you register the first Amazon S3 path, the service-linked role and a new inline policy are created on your behalf. Lake Formation adds the first path to the inline policy and attaches it to the service-linked role. When you register subsequent paths, Lake Formation adds the path to the existing policy.</p>\n\n         <p>The following request registers a new location and gives Lake Formation permission to use the service-linked role to access that location.</p>\n\n         <p>\n            <code>ResourceArn = arn:aws:s3:::my-bucket\nUseServiceLinkedRole = true</code>\n         </p>\n\t\n\t        <p>If <code>UseServiceLinkedRole</code> is not set to true, you must provide or set the <code>RoleArn</code>:</p>\n\t\n         <p>\n            <code>arn:aws:iam::12345:role/my-data-access-role</code>\n         </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/RegisterResource",
+                    "code": 200
+                }
             }
         },
         "com.amazonaws.lakeformation#RegisterResourceRequest": {
@@ -2067,7 +3823,7 @@
                 "UseServiceLinkedRole": {
                     "target": "com.amazonaws.lakeformation#NullableBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Designates an AWS Identity and Access Management (IAM) service-linked role by registering this role with the Data Catalog. A service-linked role is a unique type of IAM role that is linked directly to Lake Formation.</p>\n \n         <p>For more information, see <a href=\"https://docs-aws.amazon.com/lake-formation/latest/dg/service-linked-roles.html\">Using Service-Linked Roles for Lake Formation</a>.</p>"
+                        "smithy.api#documentation": "<p>Designates an Identity and Access Management (IAM) service-linked role by registering this role with the Data Catalog. A service-linked role is a unique type of IAM role that is linked directly to Lake Formation.</p>\n \n         <p>For more information, see <a href=\"https://docs-aws.amazon.com/lake-formation/latest/dg/service-linked-roles.html\">Using Service-Linked Roles for Lake Formation</a>.</p>"
                     }
                 },
                 "RoleArn": {
@@ -2114,7 +3870,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes a tag from the resource. Only database, table, or tableWithColumns resource are allowed. To tag columns, use the column inclusion list in <code>tableWithColumns</code> to specify column input.</p>"
+                "smithy.api#documentation": "<p>Removes an LF-tag from the resource. Only database, table, or tableWithColumns resource are allowed. To tag columns, use the column inclusion list in <code>tableWithColumns</code> to specify column input.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/RemoveLFTagsFromResource",
+                    "code": 200
+                }
             }
         },
         "com.amazonaws.lakeformation#RemoveLFTagsFromResourceRequest": {
@@ -2123,20 +3884,20 @@
                 "CatalogId": {
                     "target": "com.amazonaws.lakeformation#CatalogIdString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. </p>"
                     }
                 },
                 "Resource": {
                     "target": "com.amazonaws.lakeformation#Resource",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource where you want to remove a tag.</p>",
+                        "smithy.api#documentation": "<p>The database, table, or column resource where you want to remove an LF-tag.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "LFTags": {
                     "target": "com.amazonaws.lakeformation#LFTagsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags to be removed from the resource.</p>",
+                        "smithy.api#documentation": "<p>The LF-tags to be removed from the resource.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2159,7 +3920,7 @@
                 "Catalog": {
                     "target": "com.amazonaws.lakeformation#CatalogResource",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. </p>"
                     }
                 },
                 "Database": {
@@ -2186,16 +3947,22 @@
                         "smithy.api#documentation": "<p>The location of an Amazon S3 path where permissions are granted or revoked. </p>"
                     }
                 },
+                "DataCellsFilter": {
+                    "target": "com.amazonaws.lakeformation#DataCellsFilterResource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A data cell filter.</p>"
+                    }
+                },
                 "LFTag": {
                     "target": "com.amazonaws.lakeformation#LFTagKeyResource",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tag key and values attached to a resource.</p>"
+                        "smithy.api#documentation": "<p>The LF-tag key and values attached to a resource.</p>"
                     }
                 },
                 "LFTagPolicy": {
                     "target": "com.amazonaws.lakeformation#LFTagPolicyResource",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of tag conditions that define a resource's tag policy.</p>"
+                        "smithy.api#documentation": "<p>A list of LF-tag conditions that define a resource's LF-tag policy.</p>"
                     }
                 }
             },
@@ -2229,13 +3996,29 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure containing information about an AWS Lake Formation resource.</p>"
+                "smithy.api#documentation": "<p>A structure containing information about an Lake Formation resource.</p>"
             }
         },
         "com.amazonaws.lakeformation#ResourceInfoList": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.lakeformation#ResourceInfo"
+            }
+        },
+        "com.amazonaws.lakeformation#ResourceNotReadyException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.lakeformation#MessageString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message describing the error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about an error related to a resource which is not ready for a transaction.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
             }
         },
         "com.amazonaws.lakeformation#ResourceNumberLimitExceededException": {
@@ -2289,6 +4072,15 @@
                 ]
             }
         },
+        "com.amazonaws.lakeformation#Result": {
+            "type": "string"
+        },
+        "com.amazonaws.lakeformation#ResultStream": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#streaming": {}
+            }
+        },
         "com.amazonaws.lakeformation#RevokePermissions": {
             "type": "operation",
             "input": {
@@ -2309,7 +4101,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Revokes permissions to the principal to access metadata in the Data Catalog and data organized in underlying data storage such as Amazon S3.</p>"
+                "smithy.api#documentation": "<p>Revokes permissions to the principal to access metadata in the Data Catalog and data organized in underlying data storage such as Amazon S3.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/RevokePermissions",
+                    "code": 200
+                }
             }
         },
         "com.amazonaws.lakeformation#RevokePermissionsRequest": {
@@ -2318,7 +4115,7 @@
                 "CatalogId": {
                     "target": "com.amazonaws.lakeformation#CatalogIdString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. </p>"
                     }
                 },
                 "Principal": {
@@ -2354,6 +4151,26 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.lakeformation#RowFilter": {
+            "type": "structure",
+            "members": {
+                "FilterExpression": {
+                    "target": "com.amazonaws.lakeformation#PredicateString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter expression.</p>"
+                    }
+                },
+                "AllRowsWildcard": {
+                    "target": "com.amazonaws.lakeformation#AllRowsWildcard",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A wildcard for all rows.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A PartiQL predicate.</p>"
+            }
+        },
         "com.amazonaws.lakeformation#SearchDatabasesByLFTags": {
             "type": "operation",
             "input": {
@@ -2383,7 +4200,18 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This operation allows a search on <code>DATABASE</code> resources by <code>TagCondition</code>. This operation is used by admins who want to grant user permissions on certain <code>TagConditions</code>. Before making a grant, the admin can use <code>SearchDatabasesByTags</code> to find all resources where the given <code>TagConditions</code> are valid to verify whether the returned resources can be shared.</p>"
+                "smithy.api#documentation": "<p>This operation allows a search on <code>DATABASE</code> resources by <code>TagCondition</code>. This operation is used by admins who want to grant user permissions on certain <code>TagConditions</code>. Before making a grant, the admin can use <code>SearchDatabasesByTags</code> to find all resources where the given <code>TagConditions</code> are valid to verify whether the returned resources can be shared.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/SearchDatabasesByLFTags",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "DatabaseList",
+                    "pageSize": "MaxResults"
+                }
             }
         },
         "com.amazonaws.lakeformation#SearchDatabasesByLFTagsRequest": {
@@ -2404,7 +4232,7 @@
                 "CatalogId": {
                     "target": "com.amazonaws.lakeformation#CatalogIdString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. </p>"
                     }
                 },
                 "Expression": {
@@ -2428,7 +4256,7 @@
                 "DatabaseList": {
                     "target": "com.amazonaws.lakeformation#DatabaseLFTagsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of databases that meet the tag conditions.</p>"
+                        "smithy.api#documentation": "<p>A list of databases that meet the LF-tag conditions.</p>"
                     }
                 }
             }
@@ -2462,7 +4290,18 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This operation allows a search on <code>TABLE</code> resources by <code>LFTag</code>s. This will be used by admins who want to grant user permissions on certain LFTags. Before making a grant, the admin can use <code>SearchTablesByLFTags</code> to find all resources where the given <code>LFTag</code>s are valid to verify whether the returned resources can be shared.</p>"
+                "smithy.api#documentation": "<p>This operation allows a search on <code>TABLE</code> resources by <code>LFTag</code>s. This will be used by admins who want to grant user permissions on certain LF-tags. Before making a grant, the admin can use <code>SearchTablesByLFTags</code> to find all resources where the given <code>LFTag</code>s are valid to verify whether the returned resources can be shared.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/SearchTablesByLFTags",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "TableList",
+                    "pageSize": "MaxResults"
+                }
             }
         },
         "com.amazonaws.lakeformation#SearchTablesByLFTagsRequest": {
@@ -2483,7 +4322,7 @@
                 "CatalogId": {
                     "target": "com.amazonaws.lakeformation#CatalogIdString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. </p>"
                     }
                 },
                 "Expression": {
@@ -2507,9 +4346,208 @@
                 "TableList": {
                     "target": "com.amazonaws.lakeformation#TableLFTagsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of tables that meet the tag conditions.</p>"
+                        "smithy.api#documentation": "<p>A list of tables that meet the LF-tag conditions.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.lakeformation#StartQueryPlanning": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lakeformation#StartQueryPlanningRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lakeformation#StartQueryPlanningResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#ThrottledException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Submits a request to process a query statement.</p>\n\t\n\t        <p>This operation generates work units that can be retrieved with the <code>GetWorkUnits</code> operation as soon as the query state is WORKUNITS_AVAILABLE or FINISHED.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "query-"
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/StartQueryPlanning",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#StartQueryPlanningRequest": {
+            "type": "structure",
+            "members": {
+                "QueryPlanningContext": {
+                    "target": "com.amazonaws.lakeformation#QueryPlanningContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure containing information about the query plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "QueryString": {
+                    "target": "com.amazonaws.lakeformation#SyntheticStartQueryPlanningRequestQueryString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A PartiQL query statement used as an input to the planner service.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#StartQueryPlanningResponse": {
+            "type": "structure",
+            "members": {
+                "QueryId": {
+                    "target": "com.amazonaws.lakeformation#QueryIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the plan query operation can be used to fetch the actual work unit descriptors that are produced as the result of the operation. The ID is also used to get the query state and as an input to the <code>Execute</code> operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure for the output.</p>"
+            }
+        },
+        "com.amazonaws.lakeformation#StartTransaction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lakeformation#StartTransactionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lakeformation#StartTransactionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts a new transaction and returns its transaction ID. Transaction IDs are opaque objects that you can use to identify a transaction.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/StartTransaction",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#StartTransactionRequest": {
+            "type": "structure",
+            "members": {
+                "TransactionType": {
+                    "target": "com.amazonaws.lakeformation#TransactionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether this transaction should be read only or read and write. Writes made using a read-only transaction ID will be rejected. Read-only transactions do not need to be committed. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#StartTransactionResponse": {
+            "type": "structure",
+            "members": {
+                "TransactionId": {
+                    "target": "com.amazonaws.lakeformation#TransactionIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An opaque identifier for the transaction.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#StatisticsNotReadyYetException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.lakeformation#MessageString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message describing the error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about an error related to statistics not being ready.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 420
+            }
+        },
+        "com.amazonaws.lakeformation#StorageOptimizer": {
+            "type": "structure",
+            "members": {
+                "StorageOptimizerType": {
+                    "target": "com.amazonaws.lakeformation#OptimizerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specific type of storage optimizer. The supported value is <code>compaction</code>.</p>"
+                    }
+                },
+                "Config": {
+                    "target": "com.amazonaws.lakeformation#StorageOptimizerConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of the storage optimizer configuration. Currently contains only one key-value pair: <code>is_enabled</code> indicates true or false for acceleration.</p>"
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "com.amazonaws.lakeformation#MessageString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that contains information about any error (if present).</p>\n\t\n\t        <p>When an acceleration result has an enabled status, the error message is empty.</p> \n\t        <p>When an acceleration result has a disabled status, the message describes an error or simply indicates \"disabled by the user\".</p>"
+                    }
+                },
+                "Warnings": {
+                    "target": "com.amazonaws.lakeformation#MessageString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that contains information about any warnings (if present).</p>"
+                    }
+                },
+                "LastRunDetails": {
+                    "target": "com.amazonaws.lakeformation#MessageString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When an acceleration result has an enabled status, contains the details of the last job run.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure describing the configuration and details of a storage optimizer.</p>"
+            }
+        },
+        "com.amazonaws.lakeformation#StorageOptimizerConfig": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.lakeformation#StorageOptimizerConfigKey"
+            },
+            "value": {
+                "target": "com.amazonaws.lakeformation#StorageOptimizerConfigValue"
+            }
+        },
+        "com.amazonaws.lakeformation#StorageOptimizerConfigKey": {
+            "type": "string"
+        },
+        "com.amazonaws.lakeformation#StorageOptimizerConfigMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.lakeformation#OptimizerType"
+            },
+            "value": {
+                "target": "com.amazonaws.lakeformation#StorageOptimizerConfig"
+            }
+        },
+        "com.amazonaws.lakeformation#StorageOptimizerConfigValue": {
+            "type": "string"
+        },
+        "com.amazonaws.lakeformation#StorageOptimizerList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lakeformation#StorageOptimizer"
             }
         },
         "com.amazonaws.lakeformation#StringValue": {
@@ -2521,10 +4559,60 @@
                 "target": "com.amazonaws.lakeformation#StringValue"
             }
         },
+        "com.amazonaws.lakeformation#SyntheticGetWorkUnitResultsRequestWorkUnitTokenString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.lakeformation#SyntheticStartQueryPlanningRequestQueryString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.lakeformation#TableLFTagsList": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.lakeformation#TaggedTable"
+            }
+        },
+        "com.amazonaws.lakeformation#TableObject": {
+            "type": "structure",
+            "members": {
+                "Uri": {
+                    "target": "com.amazonaws.lakeformation#URI",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location of the object.</p>"
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.lakeformation#ETagString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 ETag of the object. Returned by <code>GetTableObjects</code> for validation and used to identify changes to the underlying data.</p>"
+                    }
+                },
+                "Size": {
+                    "target": "com.amazonaws.lakeformation#ObjectSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size of the Amazon S3 object in bytes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the details of a governed table.</p>"
+            }
+        },
+        "com.amazonaws.lakeformation#TableObjectList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lakeformation#TableObject"
             }
         },
         "com.amazonaws.lakeformation#TableResource": {
@@ -2625,18 +4713,18 @@
                 "Database": {
                     "target": "com.amazonaws.lakeformation#DatabaseResource",
                     "traits": {
-                        "smithy.api#documentation": "<p>A database that has tags attached to it.</p>"
+                        "smithy.api#documentation": "<p>A database that has LF-tags attached to it.</p>"
                     }
                 },
                 "LFTags": {
                     "target": "com.amazonaws.lakeformation#LFTagsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of tags attached to the database.</p>"
+                        "smithy.api#documentation": "<p>A list of LF-tags attached to the database.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure describing a database resource with tags.</p>"
+                "smithy.api#documentation": "<p>A structure describing a database resource with LF-tags.</p>"
             }
         },
         "com.amazonaws.lakeformation#TaggedTable": {
@@ -2645,39 +4733,251 @@
                 "Table": {
                     "target": "com.amazonaws.lakeformation#TableResource",
                     "traits": {
-                        "smithy.api#documentation": "<p>A table that has tags attached to it.</p>"
+                        "smithy.api#documentation": "<p>A table that has LF-tags attached to it.</p>"
                     }
                 },
                 "LFTagOnDatabase": {
                     "target": "com.amazonaws.lakeformation#LFTagsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of tags attached to the database where the table resides.</p>"
+                        "smithy.api#documentation": "<p>A list of LF-tags attached to the database where the table resides.</p>"
                     }
                 },
                 "LFTagsOnTable": {
                     "target": "com.amazonaws.lakeformation#LFTagsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of tags attached to the table.</p>"
+                        "smithy.api#documentation": "<p>A list of LF-tags attached to the table.</p>"
                     }
                 },
                 "LFTagsOnColumns": {
                     "target": "com.amazonaws.lakeformation#ColumnLFTagsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of tags attached to columns in the table.</p>"
+                        "smithy.api#documentation": "<p>A list of LF-tags attached to columns in the table.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure describing a table resource with tags.</p>"
+                "smithy.api#documentation": "<p>A structure describing a table resource with LF-tags.</p>"
             }
+        },
+        "com.amazonaws.lakeformation#ThrottledException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.lakeformation#MessageString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message describing the error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about an error where the query request was throttled.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429,
+                "smithy.api#retryable": {
+                    "throttling": true
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#Timestamp": {
+            "type": "timestamp"
         },
         "com.amazonaws.lakeformation#Token": {
             "type": "string"
+        },
+        "com.amazonaws.lakeformation#TokenString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 4096
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#TransactionCanceledException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.lakeformation#MessageString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message describing the error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about an error related to a transaction that was cancelled.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.lakeformation#TransactionCommitInProgressException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.lakeformation#MessageString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message describing the error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about an error related to a transaction commit that was in progress.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.lakeformation#TransactionCommittedException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.lakeformation#MessageString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message describing the error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about an error where the specified transaction has already been committed and cannot be used for <code>UpdateTableObjects</code>.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.lakeformation#TransactionDescription": {
+            "type": "structure",
+            "members": {
+                "TransactionId": {
+                    "target": "com.amazonaws.lakeformation#TransactionIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the transaction.</p>"
+                    }
+                },
+                "TransactionStatus": {
+                    "target": "com.amazonaws.lakeformation#TransactionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A status of ACTIVE, COMMITTED, or ABORTED.</p>"
+                    }
+                },
+                "TransactionStartTime": {
+                    "target": "com.amazonaws.lakeformation#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the transaction started.</p>"
+                    }
+                },
+                "TransactionEndTime": {
+                    "target": "com.amazonaws.lakeformation#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the transaction committed or aborted, if it is not currently active.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains information about a transaction.</p>"
+            }
+        },
+        "com.amazonaws.lakeformation#TransactionDescriptionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lakeformation#TransactionDescription"
+            }
+        },
+        "com.amazonaws.lakeformation#TransactionIdString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[\\p{L}\\p{N}\\p{P}]*$"
+            }
+        },
+        "com.amazonaws.lakeformation#TransactionStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "COMMITTED",
+                        "name": "COMMITTED"
+                    },
+                    {
+                        "value": "ABORTED",
+                        "name": "ABORTED"
+                    },
+                    {
+                        "value": "COMMIT_IN_PROGRESS",
+                        "name": "COMMIT_IN_PROGRESS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lakeformation#TransactionStatusFilter": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ALL",
+                        "name": "ALL"
+                    },
+                    {
+                        "value": "COMPLETED",
+                        "name": "COMPLETED"
+                    },
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "COMMITTED",
+                        "name": "COMMITTED"
+                    },
+                    {
+                        "value": "ABORTED",
+                        "name": "ABORTED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lakeformation#TransactionType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "READ_AND_WRITE",
+                        "name": "READ_AND_WRITE"
+                    },
+                    {
+                        "value": "READ_ONLY",
+                        "name": "READ_ONLY"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lakeformation#TrueFalseString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                },
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"
+            }
         },
         "com.amazonaws.lakeformation#TrustedResourceOwners": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.lakeformation#CatalogIdString"
+            }
+        },
+        "com.amazonaws.lakeformation#URI": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
             }
         },
         "com.amazonaws.lakeformation#UpdateLFTag": {
@@ -2709,7 +5009,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the list of possible values for the specified tag key. If the tag does not exist, the operation throws an EntityNotFoundException. The values in the delete key values will be deleted from list of possible values. If any value in the delete key values is attached to a resource, then API errors out with a 400 Exception - \"Update not allowed\". Untag the attribute before deleting the tag key's value.  </p>"
+                "smithy.api#documentation": "<p>Updates the list of possible values for the specified LF-tag key. If the LF-tag does not exist, the operation throws an EntityNotFoundException. The values in the delete key values will be deleted from list of possible values. If any value in the delete key values is attached to a resource, then API errors out with a 400 Exception - \"Update not allowed\". Untag the attribute before deleting the LF-tag key's value. </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/UpdateLFTag",
+                    "code": 200
+                }
             }
         },
         "com.amazonaws.lakeformation#UpdateLFTagRequest": {
@@ -2718,26 +5023,26 @@
                 "CatalogId": {
                     "target": "com.amazonaws.lakeformation#CatalogIdString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. </p>"
                     }
                 },
                 "TagKey": {
                     "target": "com.amazonaws.lakeformation#LFTagKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key-name for the tag for which to add or delete values.</p>",
+                        "smithy.api#documentation": "<p>The key-name for the LF-tag for which to add or delete values.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "TagValuesToDelete": {
                     "target": "com.amazonaws.lakeformation#TagValueList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of tag values to delete from the tag.</p>"
+                        "smithy.api#documentation": "<p>A list of LF-tag values to delete from the LF-tag.</p>"
                     }
                 },
                 "TagValuesToAdd": {
                     "target": "com.amazonaws.lakeformation#TagValueList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of tag values to add from the tag.</p>"
+                        "smithy.api#documentation": "<p>A list of LF-tag values to add from the LF-tag.</p>"
                     }
                 }
             }
@@ -2769,7 +5074,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the data access role used for vending access to the given (registered) resource in AWS Lake Formation. </p>"
+                "smithy.api#documentation": "<p>Updates the data access role used for vending access to the given (registered) resource in Lake Formation. </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/UpdateResource",
+                    "code": 200
+                }
             }
         },
         "com.amazonaws.lakeformation#UpdateResourceRequest": {
@@ -2778,7 +5088,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.lakeformation#IAMRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new role to use for the given resource registered in AWS Lake Formation.</p>",
+                        "smithy.api#documentation": "<p>The new role to use for the given resource registered in Lake Formation.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2794,6 +5104,291 @@
         "com.amazonaws.lakeformation#UpdateResourceResponse": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.lakeformation#UpdateTableObjects": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lakeformation#UpdateTableObjectsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lakeformation#UpdateTableObjectsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#ResourceNotReadyException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#TransactionCanceledException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#TransactionCommitInProgressException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#TransactionCommittedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the manifest of Amazon S3 objects that make up the specified governed table.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/UpdateTableObjects",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#UpdateTableObjectsRequest": {
+            "type": "structure",
+            "members": {
+                "CatalogId": {
+                    "target": "com.amazonaws.lakeformation#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The catalog containing the governed table to update. Defaults to the caller’s account ID.</p>"
+                    }
+                },
+                "DatabaseName": {
+                    "target": "com.amazonaws.lakeformation#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The database containing the governed table to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TableName": {
+                    "target": "com.amazonaws.lakeformation#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The governed table to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TransactionId": {
+                    "target": "com.amazonaws.lakeformation#TransactionIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The transaction at which to do the write.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WriteOperations": {
+                    "target": "com.amazonaws.lakeformation#WriteOperationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>WriteOperation</code> objects that define an object to add to or delete from the manifest for a governed table.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#UpdateTableObjectsResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.lakeformation#UpdateTableStorageOptimizer": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lakeformation#UpdateTableStorageOptimizerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lakeformation#UpdateTableStorageOptimizerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InvalidInputException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the configuration of the storage optimizers for a table.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/UpdateTableStorageOptimizer",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#UpdateTableStorageOptimizerRequest": {
+            "type": "structure",
+            "members": {
+                "CatalogId": {
+                    "target": "com.amazonaws.lakeformation#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Catalog ID of the table.</p>"
+                    }
+                },
+                "DatabaseName": {
+                    "target": "com.amazonaws.lakeformation#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the database where the table is present.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TableName": {
+                    "target": "com.amazonaws.lakeformation#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the table for which to enable the storage optimizer.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StorageOptimizerConfig": {
+                    "target": "com.amazonaws.lakeformation#StorageOptimizerConfigMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the table for which to enable the storage optimizer.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#UpdateTableStorageOptimizerResponse": {
+            "type": "structure",
+            "members": {
+                "Result": {
+                    "target": "com.amazonaws.lakeformation#Result",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A response indicating the success of failure of the operation.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#VirtualObject": {
+            "type": "structure",
+            "members": {
+                "Uri": {
+                    "target": "com.amazonaws.lakeformation#URI",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path to the Amazon S3 object. Must start with s3://</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.lakeformation#ETagString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ETag of the Amazon S3 object.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that defines an Amazon S3 object to be deleted if a transaction cancels, provided that \n      <code>VirtualPut</code> was called before writing the object.</p>"
+            }
+        },
+        "com.amazonaws.lakeformation#VirtualObjectList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lakeformation#VirtualObject"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#WorkUnitIdLong": {
+            "type": "long"
+        },
+        "com.amazonaws.lakeformation#WorkUnitRange": {
+            "type": "structure",
+            "members": {
+                "WorkUnitIdMax": {
+                    "target": "com.amazonaws.lakeformation#WorkUnitIdLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the maximum work unit ID in the range. The maximum value is inclusive.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WorkUnitIdMin": {
+                    "target": "com.amazonaws.lakeformation#WorkUnitIdLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the minimum work unit ID in the range.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WorkUnitToken": {
+                    "target": "com.amazonaws.lakeformation#WorkUnitTokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A work token used to query the execution service.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the valid range of work unit IDs for querying the execution service.</p>"
+            }
+        },
+        "com.amazonaws.lakeformation#WorkUnitRangeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lakeformation#WorkUnitRange"
+            }
+        },
+        "com.amazonaws.lakeformation#WorkUnitTokenString": {
+            "type": "string"
+        },
+        "com.amazonaws.lakeformation#WorkUnitsNotReadyYetException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.lakeformation#MessageString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message describing the error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about an error related to work units not being ready.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 420
+            }
+        },
+        "com.amazonaws.lakeformation#WriteOperation": {
+            "type": "structure",
+            "members": {
+                "AddObject": {
+                    "target": "com.amazonaws.lakeformation#AddObjectInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new object to add to the governed table.</p>"
+                    }
+                },
+                "DeleteObject": {
+                    "target": "com.amazonaws.lakeformation#DeleteObjectInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object to delete from the governed table.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines an object to add to or delete from a governed table.</p>"
+            }
+        },
+        "com.amazonaws.lakeformation#WriteOperationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lakeformation#WriteOperation"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
         }
     }
 }

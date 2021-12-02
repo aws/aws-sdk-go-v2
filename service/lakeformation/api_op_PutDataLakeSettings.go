@@ -35,16 +35,16 @@ func (c *Client) PutDataLakeSettings(ctx context.Context, params *PutDataLakeSet
 
 type PutDataLakeSettingsInput struct {
 
-	// A structure representing a list of AWS Lake Formation principals designated as
-	// data lake administrators.
+	// A structure representing a list of Lake Formation principals designated as data
+	// lake administrators.
 	//
 	// This member is required.
 	DataLakeSettings *types.DataLakeSettings
 
 	// The identifier for the Data Catalog. By default, the account ID. The Data
 	// Catalog is the persistent metadata store. It contains database definitions,
-	// table definitions, and other control information to manage your AWS Lake
-	// Formation environment.
+	// table definitions, and other control information to manage your Lake Formation
+	// environment.
 	CatalogId *string
 
 	noSmithyDocumentSerde
@@ -58,11 +58,11 @@ type PutDataLakeSettingsOutput struct {
 }
 
 func (c *Client) addOperationPutDataLakeSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutDataLakeSettings{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutDataLakeSettings{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutDataLakeSettings{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutDataLakeSettings{}, middleware.After)
 	if err != nil {
 		return err
 	}

@@ -93,7 +93,7 @@ type DescribeIndexOutput struct {
 	UserContextPolicy types.UserContextPolicy
 
 	// Shows whether you have enabled the configuration for fetching access levels of
-	// groups and users from an AWS Single Sign-On identity source.
+	// groups and users from an Amazon Web Services Single Sign On identity source.
 	UserGroupResolutionConfiguration *types.UserGroupResolutionConfiguration
 
 	// The user token configuration for the Amazon Kendra index.

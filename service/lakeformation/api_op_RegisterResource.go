@@ -18,7 +18,7 @@ import (
 // created on your behalf. Lake Formation adds the first path to the inline policy
 // and attaches it to the service-linked role. When you register subsequent paths,
 // Lake Formation adds the path to the existing policy. The following request
-// registers a new location and gives AWS Lake Formation permission to use the
+// registers a new location and gives Lake Formation permission to use the
 // service-linked role to access that location. ResourceArn =
 // arn:aws:s3:::my-bucket UseServiceLinkedRole = true If UseServiceLinkedRole is
 // not set to true, you must provide or set the RoleArn:
@@ -48,7 +48,7 @@ type RegisterResourceInput struct {
 	// The identifier for the role that registers the resource.
 	RoleArn *string
 
-	// Designates an AWS Identity and Access Management (IAM) service-linked role by
+	// Designates an Identity and Access Management (IAM) service-linked role by
 	// registering this role with the Data Catalog. A service-linked role is a unique
 	// type of IAM role that is linked directly to Lake Formation. For more
 	// information, see Using Service-Linked Roles for Lake Formation
@@ -66,11 +66,11 @@ type RegisterResourceOutput struct {
 }
 
 func (c *Client) addOperationRegisterResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterResource{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterResource{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRegisterResource{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRegisterResource{}, middleware.After)
 	if err != nil {
 		return err
 	}

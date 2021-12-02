@@ -128,6 +128,24 @@ func (AddressAttributeName) Values() []AddressAttributeName {
 	}
 }
 
+type AddressFamily string
+
+// Enum values for AddressFamily
+const (
+	AddressFamilyIpv4 AddressFamily = "ipv4"
+	AddressFamilyIpv6 AddressFamily = "ipv6"
+)
+
+// Values returns all known values for AddressFamily. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AddressFamily) Values() []AddressFamily {
+	return []AddressFamily{
+		"ipv4",
+		"ipv6",
+	}
+}
+
 type Affinity string
 
 // Enum values for Affinity
@@ -1652,6 +1670,26 @@ func (FastSnapshotRestoreStateCode) Values() []FastSnapshotRestoreStateCode {
 	}
 }
 
+type FindingsFound string
+
+// Enum values for FindingsFound
+const (
+	FindingsFoundTrue    FindingsFound = "true"
+	FindingsFoundFalse   FindingsFound = "false"
+	FindingsFoundUnknown FindingsFound = "unknown"
+)
+
+// Values returns all known values for FindingsFound. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FindingsFound) Values() []FindingsFound {
+	return []FindingsFound{
+		"true",
+		"false",
+		"unknown",
+	}
+}
+
 type FleetActivityStatus string
 
 // Enum values for FleetActivityStatus
@@ -2880,6 +2918,18 @@ const (
 	InstanceTypeVt13xlarge      InstanceType = "vt1.3xlarge"
 	InstanceTypeVt16xlarge      InstanceType = "vt1.6xlarge"
 	InstanceTypeVt124xlarge     InstanceType = "vt1.24xlarge"
+	InstanceTypeIm4gn16xlarge   InstanceType = "im4gn.16xlarge"
+	InstanceTypeIm4gn2xlarge    InstanceType = "im4gn.2xlarge"
+	InstanceTypeIm4gn4xlarge    InstanceType = "im4gn.4xlarge"
+	InstanceTypeIm4gn8xlarge    InstanceType = "im4gn.8xlarge"
+	InstanceTypeIm4gnLarge      InstanceType = "im4gn.large"
+	InstanceTypeIm4gnXlarge     InstanceType = "im4gn.xlarge"
+	InstanceTypeIs4gen2xlarge   InstanceType = "is4gen.2xlarge"
+	InstanceTypeIs4gen4xlarge   InstanceType = "is4gen.4xlarge"
+	InstanceTypeIs4gen8xlarge   InstanceType = "is4gen.8xlarge"
+	InstanceTypeIs4genLarge     InstanceType = "is4gen.large"
+	InstanceTypeIs4genMedium    InstanceType = "is4gen.medium"
+	InstanceTypeIs4genXlarge    InstanceType = "is4gen.xlarge"
 	InstanceTypeG5gXlarge       InstanceType = "g5g.xlarge"
 	InstanceTypeG5g2xlarge      InstanceType = "g5g.2xlarge"
 	InstanceTypeG5g4xlarge      InstanceType = "g5g.4xlarge"
@@ -3341,6 +3391,18 @@ func (InstanceType) Values() []InstanceType {
 		"vt1.3xlarge",
 		"vt1.6xlarge",
 		"vt1.24xlarge",
+		"im4gn.16xlarge",
+		"im4gn.2xlarge",
+		"im4gn.4xlarge",
+		"im4gn.8xlarge",
+		"im4gn.large",
+		"im4gn.xlarge",
+		"is4gen.2xlarge",
+		"is4gen.4xlarge",
+		"is4gen.8xlarge",
+		"is4gen.large",
+		"is4gen.medium",
+		"is4gen.xlarge",
 		"g5g.xlarge",
 		"g5g.2xlarge",
 		"g5g.4xlarge",
@@ -3409,6 +3471,316 @@ func (InterfaceProtocolType) Values() []InterfaceProtocolType {
 	return []InterfaceProtocolType{
 		"VLAN",
 		"GRE",
+	}
+}
+
+type IpamAddressHistoryResourceType string
+
+// Enum values for IpamAddressHistoryResourceType
+const (
+	IpamAddressHistoryResourceTypeEip              IpamAddressHistoryResourceType = "eip"
+	IpamAddressHistoryResourceTypeVpc              IpamAddressHistoryResourceType = "vpc"
+	IpamAddressHistoryResourceTypeSubnet           IpamAddressHistoryResourceType = "subnet"
+	IpamAddressHistoryResourceTypeNetworkInterface IpamAddressHistoryResourceType = "network-interface"
+	IpamAddressHistoryResourceTypeInstance         IpamAddressHistoryResourceType = "instance"
+)
+
+// Values returns all known values for IpamAddressHistoryResourceType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (IpamAddressHistoryResourceType) Values() []IpamAddressHistoryResourceType {
+	return []IpamAddressHistoryResourceType{
+		"eip",
+		"vpc",
+		"subnet",
+		"network-interface",
+		"instance",
+	}
+}
+
+type IpamComplianceStatus string
+
+// Enum values for IpamComplianceStatus
+const (
+	IpamComplianceStatusCompliant    IpamComplianceStatus = "compliant"
+	IpamComplianceStatusNoncompliant IpamComplianceStatus = "noncompliant"
+	IpamComplianceStatusUnmanaged    IpamComplianceStatus = "unmanaged"
+	IpamComplianceStatusIgnored      IpamComplianceStatus = "ignored"
+)
+
+// Values returns all known values for IpamComplianceStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IpamComplianceStatus) Values() []IpamComplianceStatus {
+	return []IpamComplianceStatus{
+		"compliant",
+		"noncompliant",
+		"unmanaged",
+		"ignored",
+	}
+}
+
+type IpamManagementState string
+
+// Enum values for IpamManagementState
+const (
+	IpamManagementStateManaged   IpamManagementState = "managed"
+	IpamManagementStateUnmanaged IpamManagementState = "unmanaged"
+	IpamManagementStateIgnored   IpamManagementState = "ignored"
+)
+
+// Values returns all known values for IpamManagementState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IpamManagementState) Values() []IpamManagementState {
+	return []IpamManagementState{
+		"managed",
+		"unmanaged",
+		"ignored",
+	}
+}
+
+type IpamOverlapStatus string
+
+// Enum values for IpamOverlapStatus
+const (
+	IpamOverlapStatusOverlapping    IpamOverlapStatus = "overlapping"
+	IpamOverlapStatusNonoverlapping IpamOverlapStatus = "nonoverlapping"
+	IpamOverlapStatusIgnored        IpamOverlapStatus = "ignored"
+)
+
+// Values returns all known values for IpamOverlapStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IpamOverlapStatus) Values() []IpamOverlapStatus {
+	return []IpamOverlapStatus{
+		"overlapping",
+		"nonoverlapping",
+		"ignored",
+	}
+}
+
+type IpamPoolAllocationResourceType string
+
+// Enum values for IpamPoolAllocationResourceType
+const (
+	IpamPoolAllocationResourceTypeIpamPool          IpamPoolAllocationResourceType = "ipam-pool"
+	IpamPoolAllocationResourceTypeVpc               IpamPoolAllocationResourceType = "vpc"
+	IpamPoolAllocationResourceTypeEc2PublicIpv4Pool IpamPoolAllocationResourceType = "ec2-public-ipv4-pool"
+	IpamPoolAllocationResourceTypeCustom            IpamPoolAllocationResourceType = "custom"
+)
+
+// Values returns all known values for IpamPoolAllocationResourceType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (IpamPoolAllocationResourceType) Values() []IpamPoolAllocationResourceType {
+	return []IpamPoolAllocationResourceType{
+		"ipam-pool",
+		"vpc",
+		"ec2-public-ipv4-pool",
+		"custom",
+	}
+}
+
+type IpamPoolAwsService string
+
+// Enum values for IpamPoolAwsService
+const (
+	IpamPoolAwsServiceEc2 IpamPoolAwsService = "ec2"
+)
+
+// Values returns all known values for IpamPoolAwsService. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IpamPoolAwsService) Values() []IpamPoolAwsService {
+	return []IpamPoolAwsService{
+		"ec2",
+	}
+}
+
+type IpamPoolCidrFailureCode string
+
+// Enum values for IpamPoolCidrFailureCode
+const (
+	IpamPoolCidrFailureCodeCidrNotAvailable IpamPoolCidrFailureCode = "cidr-not-available"
+)
+
+// Values returns all known values for IpamPoolCidrFailureCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IpamPoolCidrFailureCode) Values() []IpamPoolCidrFailureCode {
+	return []IpamPoolCidrFailureCode{
+		"cidr-not-available",
+	}
+}
+
+type IpamPoolCidrState string
+
+// Enum values for IpamPoolCidrState
+const (
+	IpamPoolCidrStatePendingProvision   IpamPoolCidrState = "pending-provision"
+	IpamPoolCidrStateProvisioned        IpamPoolCidrState = "provisioned"
+	IpamPoolCidrStateFailedProvision    IpamPoolCidrState = "failed-provision"
+	IpamPoolCidrStatePendingDeprovision IpamPoolCidrState = "pending-deprovision"
+	IpamPoolCidrStateDeprovisioned      IpamPoolCidrState = "deprovisioned"
+	IpamPoolCidrStateFailedDeprovision  IpamPoolCidrState = "failed-deprovision"
+	IpamPoolCidrStatePendingImport      IpamPoolCidrState = "pending-import"
+	IpamPoolCidrStateFailedImport       IpamPoolCidrState = "failed-import"
+)
+
+// Values returns all known values for IpamPoolCidrState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IpamPoolCidrState) Values() []IpamPoolCidrState {
+	return []IpamPoolCidrState{
+		"pending-provision",
+		"provisioned",
+		"failed-provision",
+		"pending-deprovision",
+		"deprovisioned",
+		"failed-deprovision",
+		"pending-import",
+		"failed-import",
+	}
+}
+
+type IpamPoolState string
+
+// Enum values for IpamPoolState
+const (
+	IpamPoolStateCreateInProgress IpamPoolState = "create-in-progress"
+	IpamPoolStateCreateComplete   IpamPoolState = "create-complete"
+	IpamPoolStateCreateFailed     IpamPoolState = "create-failed"
+	IpamPoolStateModifyInProgress IpamPoolState = "modify-in-progress"
+	IpamPoolStateModifyComplete   IpamPoolState = "modify-complete"
+	IpamPoolStateModifyFailed     IpamPoolState = "modify-failed"
+	IpamPoolStateDeleteInProgress IpamPoolState = "delete-in-progress"
+	IpamPoolStateDeleteComplete   IpamPoolState = "delete-complete"
+	IpamPoolStateDeleteFailed     IpamPoolState = "delete-failed"
+)
+
+// Values returns all known values for IpamPoolState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IpamPoolState) Values() []IpamPoolState {
+	return []IpamPoolState{
+		"create-in-progress",
+		"create-complete",
+		"create-failed",
+		"modify-in-progress",
+		"modify-complete",
+		"modify-failed",
+		"delete-in-progress",
+		"delete-complete",
+		"delete-failed",
+	}
+}
+
+type IpamResourceType string
+
+// Enum values for IpamResourceType
+const (
+	IpamResourceTypeVpc            IpamResourceType = "vpc"
+	IpamResourceTypeSubnet         IpamResourceType = "subnet"
+	IpamResourceTypeEip            IpamResourceType = "eip"
+	IpamResourceTypePublicIpv4Pool IpamResourceType = "public-ipv4-pool"
+	IpamResourceTypeIpv6Pool       IpamResourceType = "ipv6-pool"
+)
+
+// Values returns all known values for IpamResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IpamResourceType) Values() []IpamResourceType {
+	return []IpamResourceType{
+		"vpc",
+		"subnet",
+		"eip",
+		"public-ipv4-pool",
+		"ipv6-pool",
+	}
+}
+
+type IpamScopeState string
+
+// Enum values for IpamScopeState
+const (
+	IpamScopeStateCreateInProgress IpamScopeState = "create-in-progress"
+	IpamScopeStateCreateComplete   IpamScopeState = "create-complete"
+	IpamScopeStateCreateFailed     IpamScopeState = "create-failed"
+	IpamScopeStateModifyInProgress IpamScopeState = "modify-in-progress"
+	IpamScopeStateModifyComplete   IpamScopeState = "modify-complete"
+	IpamScopeStateModifyFailed     IpamScopeState = "modify-failed"
+	IpamScopeStateDeleteInProgress IpamScopeState = "delete-in-progress"
+	IpamScopeStateDeleteComplete   IpamScopeState = "delete-complete"
+	IpamScopeStateDeleteFailed     IpamScopeState = "delete-failed"
+)
+
+// Values returns all known values for IpamScopeState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IpamScopeState) Values() []IpamScopeState {
+	return []IpamScopeState{
+		"create-in-progress",
+		"create-complete",
+		"create-failed",
+		"modify-in-progress",
+		"modify-complete",
+		"modify-failed",
+		"delete-in-progress",
+		"delete-complete",
+		"delete-failed",
+	}
+}
+
+type IpamScopeType string
+
+// Enum values for IpamScopeType
+const (
+	IpamScopeTypePublic  IpamScopeType = "public"
+	IpamScopeTypePrivate IpamScopeType = "private"
+)
+
+// Values returns all known values for IpamScopeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IpamScopeType) Values() []IpamScopeType {
+	return []IpamScopeType{
+		"public",
+		"private",
+	}
+}
+
+type IpamState string
+
+// Enum values for IpamState
+const (
+	IpamStateCreateInProgress IpamState = "create-in-progress"
+	IpamStateCreateComplete   IpamState = "create-complete"
+	IpamStateCreateFailed     IpamState = "create-failed"
+	IpamStateModifyInProgress IpamState = "modify-in-progress"
+	IpamStateModifyComplete   IpamState = "modify-complete"
+	IpamStateModifyFailed     IpamState = "modify-failed"
+	IpamStateDeleteInProgress IpamState = "delete-in-progress"
+	IpamStateDeleteComplete   IpamState = "delete-complete"
+	IpamStateDeleteFailed     IpamState = "delete-failed"
+)
+
+// Values returns all known values for IpamState. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (IpamState) Values() []IpamState {
+	return []IpamState{
+		"create-in-progress",
+		"create-complete",
+		"create-failed",
+		"modify-in-progress",
+		"modify-complete",
+		"modify-failed",
+		"delete-in-progress",
+		"delete-complete",
+		"delete-failed",
 	}
 }
 
@@ -4504,6 +4876,9 @@ const (
 	ResourceTypeInstance                                               ResourceType = "instance"
 	ResourceTypeInstanceEventWindow                                    ResourceType = "instance-event-window"
 	ResourceTypeInternetGateway                                        ResourceType = "internet-gateway"
+	ResourceTypeIpam                                                   ResourceType = "ipam"
+	ResourceTypeIpamPool                                               ResourceType = "ipam-pool"
+	ResourceTypeIpamScope                                              ResourceType = "ipam-scope"
 	ResourceTypeIpv4poolEc2                                            ResourceType = "ipv4pool-ec2"
 	ResourceTypeIpv6poolEc2                                            ResourceType = "ipv6pool-ec2"
 	ResourceTypeKeyPair                                                ResourceType = "key-pair"
@@ -4519,6 +4894,8 @@ const (
 	ResourceTypeNetworkInterface                                       ResourceType = "network-interface"
 	ResourceTypeNetworkInsightsAnalysis                                ResourceType = "network-insights-analysis"
 	ResourceTypeNetworkInsightsPath                                    ResourceType = "network-insights-path"
+	ResourceTypeNetworkInsightsAccessScope                             ResourceType = "network-insights-access-scope"
+	ResourceTypeNetworkInsightsAccessScopeAnalysis                     ResourceType = "network-insights-access-scope-analysis"
 	ResourceTypePlacementGroup                                         ResourceType = "placement-group"
 	ResourceTypePrefixList                                             ResourceType = "prefix-list"
 	ResourceTypeReplaceRootVolumeTask                                  ResourceType = "replace-root-volume-task"
@@ -4573,6 +4950,9 @@ func (ResourceType) Values() []ResourceType {
 		"instance",
 		"instance-event-window",
 		"internet-gateway",
+		"ipam",
+		"ipam-pool",
+		"ipam-scope",
 		"ipv4pool-ec2",
 		"ipv6pool-ec2",
 		"key-pair",
@@ -4588,6 +4968,8 @@ func (ResourceType) Values() []ResourceType {
 		"network-interface",
 		"network-insights-analysis",
 		"network-insights-path",
+		"network-insights-access-scope",
+		"network-insights-access-scope-analysis",
 		"placement-group",
 		"prefix-list",
 		"replace-root-volume-task",

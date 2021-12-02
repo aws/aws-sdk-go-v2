@@ -50,18 +50,21 @@ type DescribeArtifactOutput struct {
 	ArtifactType *string
 
 	// Information about the user who created or modified an experiment, trial, trial
-	// component, or project.
+	// component, lineage group, or project.
 	CreatedBy *types.UserContext
 
 	// When the artifact was created.
 	CreationTime *time.Time
 
 	// Information about the user who created or modified an experiment, trial, trial
-	// component, or project.
+	// component, lineage group, or project.
 	LastModifiedBy *types.UserContext
 
 	// When the artifact was last modified.
 	LastModifiedTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the lineage group.
+	LineageGroupArn *string
 
 	// Metadata properties of the tracking entity, trial, or trial component.
 	MetadataProperties *types.MetadataProperties

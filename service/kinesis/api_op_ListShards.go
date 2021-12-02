@@ -13,11 +13,15 @@ import (
 )
 
 // Lists the shards in a stream and provides information about each shard. This
-// operation has a limit of 100 transactions per second per data stream. This API
-// is a new operation that is used by the Amazon Kinesis Client Library (KCL). If
-// you have a fine-grained IAM policy that only allows specific operations, you
-// must update your policy to allow calls to this API. For more information, see
-// Controlling Access to Amazon Kinesis Data Streams Resources Using IAM
+// operation has a limit of 1000 transactions per second per data stream. This
+// action does not list expired shards. For information about expired shards, see
+// Data Routing, Data Persistence, and Shard State after a Reshard
+// (https://docs.aws.amazon.com/streams/latest/dev/kinesis-using-sdk-java-after-resharding.html#kinesis-using-sdk-java-resharding-data-routing).
+// This API is a new operation that is used by the Amazon Kinesis Client Library
+// (KCL). If you have a fine-grained IAM policy that only allows specific
+// operations, you must update your policy to allow calls to this API. For more
+// information, see Controlling Access to Amazon Kinesis Data Streams Resources
+// Using IAM
 // (https://docs.aws.amazon.com/streams/latest/dev/controlling-access.html).
 func (c *Client) ListShards(ctx context.Context, params *ListShardsInput, optFns ...func(*Options)) (*ListShardsOutput, error) {
 	if params == nil {
@@ -44,11 +48,11 @@ type ListShardsInput struct {
 	ExclusiveStartShardId *string
 
 	// The maximum number of shards to return in a single call to ListShards. The
-	// minimum value you can specify for this parameter is 1, and the maximum is
-	// 10,000, which is also the default. When the number of shards to be listed is
-	// greater than the value of MaxResults, the response contains a NextToken value
-	// that you can use in a subsequent call to ListShards to list the next set of
-	// shards.
+	// maximum number of shards to return in a single call. The default value is 1000.
+	// If you specify a value greater than 1000, at most 1000 results are returned.
+	// When the number of shards to be listed is greater than the value of MaxResults,
+	// the response contains a NextToken value that you can use in a subsequent call to
+	// ListShards to list the next set of shards.
 	MaxResults *int32
 
 	// When the number of shards in the data stream is greater than the default value
@@ -68,6 +72,21 @@ type ListShardsInput struct {
 	// call to ListShards, you get ExpiredNextTokenException.
 	NextToken *string
 
+	// Enables you to filter out the response of the ListShards API. You can only
+	// specify one filter at a time. If you use the ShardFilter parameter when invoking
+	// the ListShards API, the Type is the required property and must be specified. If
+	// you specify the AT_TRIM_HORIZON, FROM_TRIM_HORIZON, or AT_LATEST types, you do
+	// not need to specify either the ShardId or the Timestamp optional properties. If
+	// you specify the AFTER_SHARD_ID type, you must also provide the value for the
+	// optional ShardId property. The ShardId property is identical in fuctionality to
+	// the ExclusiveStartShardId parameter of the ListShards API. When ShardId property
+	// is specified, the response includes the shards starting with the shard whose ID
+	// immediately follows the ShardId that you provided. If you specify the
+	// AT_TIMESTAMP or FROM_TIMESTAMP_ID type, you must also provide the value for the
+	// optional Timestamp property. If you specify the AT_TIMESTAMP type, then all
+	// shards that were open at the provided timestamp are returned. If you specify the
+	// FROM_TIMESTAMP type, then all shards starting from the provided timestamp to TIP
+	// are returned.
 	ShardFilter *types.ShardFilter
 
 	// Specify this input parameter to distinguish data streams that have the same

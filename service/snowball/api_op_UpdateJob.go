@@ -51,8 +51,9 @@ type UpdateJobInput struct {
 	Notification *types.Notification
 
 	// Specifies the service or services on the Snow Family device that your
-	// transferred data will be exported from or imported into. AWS Snow Family
-	// supports Amazon S3 and NFS (Network File System).
+	// transferred data will be exported from or imported into. Amazon Web Services
+	// Snow Family supports Amazon S3 and NFS (Network File System) and the Amazon Web
+	// Services Storage Gateway service Tape Gateway type.
 	OnDeviceServiceConfiguration *types.OnDeviceServiceConfiguration
 
 	// The updated JobResource object, or the updated JobResource object.
@@ -60,8 +61,8 @@ type UpdateJobInput struct {
 
 	// The new role Amazon Resource Name (ARN) that you want to associate with this
 	// job. To create a role ARN, use the CreateRole
-	// (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html)AWS
-	// Identity and Access Management (IAM) API action.
+	// (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html)Identity
+	// and Access Management (IAM) API action.
 	RoleARN *string
 
 	// The updated shipping option value of this job's ShippingDetails object.

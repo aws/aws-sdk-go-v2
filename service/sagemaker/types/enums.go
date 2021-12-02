@@ -981,6 +981,26 @@ func (DirectInternetAccess) Values() []DirectInternetAccess {
 	}
 }
 
+type Direction string
+
+// Enum values for Direction
+const (
+	DirectionBoth        Direction = "Both"
+	DirectionAscendants  Direction = "Ascendants"
+	DirectionDescendants Direction = "Descendants"
+)
+
+// Values returns all known values for Direction. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Direction) Values() []Direction {
+	return []Direction{
+		"Both",
+		"Ascendants",
+		"Descendants",
+	}
+}
+
 type DomainStatus string
 
 // Enum values for DomainStatus
@@ -1826,6 +1846,28 @@ func (LabelingJobStatus) Values() []LabelingJobStatus {
 	}
 }
 
+type LineageType string
+
+// Enum values for LineageType
+const (
+	LineageTypeTrialComponent LineageType = "TrialComponent"
+	LineageTypeArtifact       LineageType = "Artifact"
+	LineageTypeContext        LineageType = "Context"
+	LineageTypeAction         LineageType = "Action"
+)
+
+// Values returns all known values for LineageType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (LineageType) Values() []LineageType {
+	return []LineageType{
+		"TrialComponent",
+		"Artifact",
+		"Context",
+		"Action",
+	}
+}
+
 type ListCompilationJobsSortBy string
 
 // Enum values for ListCompilationJobsSortBy
@@ -1887,6 +1929,27 @@ func (ListEdgePackagingJobsSortBy) Values() []ListEdgePackagingJobsSortBy {
 		"CREATION_TIME",
 		"LAST_MODIFIED_TIME",
 		"STATUS",
+	}
+}
+
+type ListInferenceRecommendationsJobsSortBy string
+
+// Enum values for ListInferenceRecommendationsJobsSortBy
+const (
+	ListInferenceRecommendationsJobsSortByName         ListInferenceRecommendationsJobsSortBy = "Name"
+	ListInferenceRecommendationsJobsSortByCreationTime ListInferenceRecommendationsJobsSortBy = "CreationTime"
+	ListInferenceRecommendationsJobsSortByStatus       ListInferenceRecommendationsJobsSortBy = "Status"
+)
+
+// Values returns all known values for ListInferenceRecommendationsJobsSortBy. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ListInferenceRecommendationsJobsSortBy) Values() []ListInferenceRecommendationsJobsSortBy {
+	return []ListInferenceRecommendationsJobsSortBy{
+		"Name",
+		"CreationTime",
+		"Status",
 	}
 }
 
@@ -1998,6 +2061,28 @@ func (ModelCacheSetting) Values() []ModelCacheSetting {
 	return []ModelCacheSetting{
 		"Enabled",
 		"Disabled",
+	}
+}
+
+type ModelMetadataFilterType string
+
+// Enum values for ModelMetadataFilterType
+const (
+	ModelMetadataFilterTypeDomain           ModelMetadataFilterType = "Domain"
+	ModelMetadataFilterTypeFramework        ModelMetadataFilterType = "Framework"
+	ModelMetadataFilterTypeTask             ModelMetadataFilterType = "Task"
+	ModelMetadataFilterTypeFrameworkversion ModelMetadataFilterType = "FrameworkVersion"
+)
+
+// Values returns all known values for ModelMetadataFilterType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ModelMetadataFilterType) Values() []ModelMetadataFilterType {
+	return []ModelMetadataFilterType{
+		"Domain",
+		"Framework",
+		"Task",
+		"FrameworkVersion",
 	}
 }
 
@@ -3030,6 +3115,50 @@ func (ProjectStatus) Values() []ProjectStatus {
 	}
 }
 
+type RecommendationJobStatus string
+
+// Enum values for RecommendationJobStatus
+const (
+	RecommendationJobStatusPending    RecommendationJobStatus = "PENDING"
+	RecommendationJobStatusInProgress RecommendationJobStatus = "IN_PROGRESS"
+	RecommendationJobStatusCompleted  RecommendationJobStatus = "COMPLETED"
+	RecommendationJobStatusFailed     RecommendationJobStatus = "FAILED"
+	RecommendationJobStatusStopping   RecommendationJobStatus = "STOPPING"
+	RecommendationJobStatusStopped    RecommendationJobStatus = "STOPPED"
+)
+
+// Values returns all known values for RecommendationJobStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RecommendationJobStatus) Values() []RecommendationJobStatus {
+	return []RecommendationJobStatus{
+		"PENDING",
+		"IN_PROGRESS",
+		"COMPLETED",
+		"FAILED",
+		"STOPPING",
+		"STOPPED",
+	}
+}
+
+type RecommendationJobType string
+
+// Enum values for RecommendationJobType
+const (
+	RecommendationJobTypeDefault  RecommendationJobType = "Default"
+	RecommendationJobTypeAdvanced RecommendationJobType = "Advanced"
+)
+
+// Values returns all known values for RecommendationJobType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RecommendationJobType) Values() []RecommendationJobType {
+	return []RecommendationJobType{
+		"Default",
+		"Advanced",
+	}
+}
+
 type RecordWrapper string
 
 // Enum values for RecordWrapper
@@ -3500,6 +3629,24 @@ func (SortExperimentsBy) Values() []SortExperimentsBy {
 	}
 }
 
+type SortLineageGroupsBy string
+
+// Enum values for SortLineageGroupsBy
+const (
+	SortLineageGroupsByName         SortLineageGroupsBy = "Name"
+	SortLineageGroupsByCreationTime SortLineageGroupsBy = "CreationTime"
+)
+
+// Values returns all known values for SortLineageGroupsBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SortLineageGroupsBy) Values() []SortLineageGroupsBy {
+	return []SortLineageGroupsBy{
+		"Name",
+		"CreationTime",
+	}
+}
+
 type SortOrder string
 
 // Enum values for SortOrder
@@ -3831,6 +3978,22 @@ func (TrafficRoutingConfigType) Values() []TrafficRoutingConfigType {
 		"ALL_AT_ONCE",
 		"CANARY",
 		"LINEAR",
+	}
+}
+
+type TrafficType string
+
+// Enum values for TrafficType
+const (
+	TrafficTypePhases TrafficType = "PHASES"
+)
+
+// Values returns all known values for TrafficType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (TrafficType) Values() []TrafficType {
+	return []TrafficType{
+		"PHASES",
 	}
 }
 

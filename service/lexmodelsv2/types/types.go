@@ -83,6 +83,35 @@ type AggregatedUtterancesSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The object containing information that associates the recommended intent/slot
+// type with a conversation.
+type AssociatedTranscript struct {
+
+	// The content of the transcript that meets the search filter criteria. For the
+	// JSON format of the transcript, see Output transcript format
+	// (https://docs.aws.amazon.com/lex/latest/dg/designing-output-format.html).
+	Transcript *string
+
+	noSmithyDocumentSerde
+}
+
+// Filters to search for the associated transcript.
+type AssociatedTranscriptFilter struct {
+
+	// The name of the field to use for filtering. The allowed names are IntentId and
+	// SlotTypeId.
+	//
+	// This member is required.
+	Name AssociatedTranscriptFilterName
+
+	// The values to use to filter the transcript.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
 // The location of audio log files collected when conversation logging is enabled
 // for a bot.
 type AudioLogDestination struct {
@@ -411,6 +440,59 @@ type BotLocaleSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The object representing the URL of the bot definition, the URL of the associated
+// transcript and a statistical summary of the bot recommendation results.
+type BotRecommendationResults struct {
+
+	// The presigned url link of the associated transcript.
+	AssociatedTranscriptsUrl *string
+
+	// The presigned URL link of the recommended bot definition.
+	BotLocaleExportUrl *string
+
+	// The statistical summary of the bot recommendation results.
+	Statistics *BotRecommendationResultStatistics
+
+	noSmithyDocumentSerde
+}
+
+// A statistical summary of the bot recommendation results.
+type BotRecommendationResultStatistics struct {
+
+	// Statistical information about about the intents associated with the bot
+	// recommendation results.
+	Intents *IntentStatistics
+
+	// Statistical information about the slot types associated with the bot
+	// recommendation results.
+	SlotTypes *SlotTypeStatistics
+
+	noSmithyDocumentSerde
+}
+
+// A summary of the bot recommendation.
+type BotRecommendationSummary struct {
+
+	// The unique identifier of the bot recommendation to be updated.
+	//
+	// This member is required.
+	BotRecommendationId *string
+
+	// The status of the bot recommendation. If the status is Failed, then the reasons
+	// for the failure are listed in the failureReasons field.
+	//
+	// This member is required.
+	BotRecommendationStatus BotRecommendationStatus
+
+	// A timestamp of the date and time that the bot recommendation was created.
+	CreationDateTime *time.Time
+
+	// A timestamp of the date and time that the bot recommendation was last updated.
+	LastUpdatedDateTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Specifies attributes for sorting a list of bots.
 type BotSortBy struct {
 
@@ -678,6 +760,23 @@ type DataPrivacy struct {
 	noSmithyDocumentSerde
 }
 
+// The object used for specifying the data range that the customer wants Amazon Lex
+// to read through in the input transcripts.
+type DateRangeFilter struct {
+
+	// A timestamp indicating the end date for the date range filter.
+	//
+	// This member is required.
+	EndDateTime *time.Time
+
+	// A timestamp indicating the start date for the date range filter.
+	//
+	// This member is required.
+	StartDateTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Settings that determine the Lambda function that Amazon Lex uses for processing
 // user responses.
 type DialogCodeHookSettings struct {
@@ -686,6 +785,24 @@ type DialogCodeHookSettings struct {
 	//
 	// This member is required.
 	Enabled bool
+
+	noSmithyDocumentSerde
+}
+
+// The object representing the passwords that were used to encrypt the data related
+// to the bot recommendation, as well as the KMS key ARN used to encrypt the
+// associated metadata.
+type EncryptionSetting struct {
+
+	// The password used to encrypt the associated transcript file.
+	AssociatedTranscriptsPassword *string
+
+	// The password used to encrypt the recommended bot recommendation file.
+	BotLocaleExportPassword *string
+
+	// The KMS key ARN used to encrypt the metadata associated with the bot
+	// recommendation.
+	KmsKeyArn *string
 
 	noSmithyDocumentSerde
 }
@@ -1074,6 +1191,16 @@ type IntentSortBy struct {
 	noSmithyDocumentSerde
 }
 
+// The object that contains the statistical summary of recommended intents
+// associated with the bot recommendation.
+type IntentStatistics struct {
+
+	// The number of recommended intents associated with the bot recommendation.
+	DiscoveredIntentCount *int32
+
+	noSmithyDocumentSerde
+}
+
 // Summary information about an intent returned by the ListIntents operation.
 type IntentSummary struct {
 
@@ -1142,6 +1269,18 @@ type LambdaCodeHook struct {
 	//
 	// This member is required.
 	LambdaARN *string
+
+	noSmithyDocumentSerde
+}
+
+// The object that contains transcript filter details that are associated with a
+// bot recommendation.
+type LexTranscriptFilter struct {
+
+	// The object that contains a date range filter that will be applied to the
+	// transcript. Specify this object if you want Amazon Lex to only read the files
+	// that are within the date range.
+	DateRangeFilter *DateRangeFilter
 
 	noSmithyDocumentSerde
 }
@@ -1230,6 +1369,19 @@ type OutputContext struct {
 	noSmithyDocumentSerde
 }
 
+// The object that contains a path format that will be applied when Amazon Lex
+// reads the transcript file in the bucket you provide. Specify this object if you
+// only want Lex to read a subset of files in your Amazon S3 bucket.
+type PathFormat struct {
+
+	// A list of Amazon S3 prefixes that points to sub-folders in the Amazon S3 bucket.
+	// Specify this list if you only want Lex to read the files under this set of
+	// sub-folders.
+	ObjectPrefixes []string
+
+	noSmithyDocumentSerde
+}
+
 // Defines an ASCII text message to send to the user.
 type PlainTextMessage struct {
 
@@ -1296,6 +1448,23 @@ type PromptSpecification struct {
 
 	// Indicates whether the user can interrupt a speech prompt from the bot.
 	AllowInterrupt *bool
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains a summary of a recommended intent.
+type RecommendedIntentSummary struct {
+
+	// The unique identifier of a recommended intent associated with the bot
+	// recommendation.
+	IntentId *string
+
+	// The name of a recommended intent associated with the bot recommendation.
+	IntentName *string
+
+	// The count of sample utterances of a recommended intent that is associated with a
+	// bot recommendation.
+	SampleUtterancesCount *int32
 
 	noSmithyDocumentSerde
 }
@@ -1374,6 +1543,38 @@ type S3BucketLogDestination struct {
 	// The Amazon Resource Name (ARN) of an AWS Key Management Service (KMS) key for
 	// encrypting audio log files stored in an S3 bucket.
 	KmsKeyArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The object representing the Amazon S3 bucket containing the transcript, as well
+// as the associated metadata.
+type S3BucketTranscriptSource struct {
+
+	// The name of the bucket containing the transcript and the associated metadata.
+	//
+	// This member is required.
+	S3BucketName *string
+
+	// The format of the transcript content. Currently, Genie only supports the Amazon
+	// Lex transcript format.
+	//
+	// This member is required.
+	TranscriptFormat TranscriptFormat
+
+	// The ARN of the KMS key that customer use to encrypt their Amazon S3 bucket. Only
+	// use this field if your bucket is encrypted using a customer managed KMS key.
+	KmsKeyArn *string
+
+	// The object that contains a path format that will be applied when Amazon Lex
+	// reads the transcript file in the bucket you provide. Specify this object if you
+	// only want Lex to read a subset of files in your Amazon S3 bucket.
+	PathFormat *PathFormat
+
+	// The object that contains the filter which will be applied when Amazon Lex reads
+	// through the Amazon S3 bucket. Specify this object if you want Amazon Lex to read
+	// only a subset of the Amazon S3 bucket based on the filter you provide.
+	TranscriptFilter *TranscriptFilter
 
 	noSmithyDocumentSerde
 }
@@ -1563,6 +1764,16 @@ type SlotTypeSortBy struct {
 	noSmithyDocumentSerde
 }
 
+// The object that contains the statistical summary of the recommended slot type
+// associated with the bot recommendation.
+type SlotTypeStatistics struct {
+
+	// The number of recommended slot types associated with the bot recommendation.
+	DiscoveredSlotTypeCount *int32
+
+	noSmithyDocumentSerde
+}
+
 // Provides summary information about a slot type.
 type SlotTypeSummary struct {
 
@@ -1746,6 +1957,26 @@ type TextLogSetting struct {
 	//
 	// This member is required.
 	Enabled bool
+
+	noSmithyDocumentSerde
+}
+
+// The object representing the filter that Amazon Lex will use to select the
+// appropriate transcript.
+type TranscriptFilter struct {
+
+	// The object representing the filter that Amazon Lex will use to select the
+	// appropriate transcript when the transcript format is the Amazon Lex format.
+	LexTranscriptFilter *LexTranscriptFilter
+
+	noSmithyDocumentSerde
+}
+
+// Indicates the setting of the location where the transcript is stored.
+type TranscriptSourceSetting struct {
+
+	// Indicates the setting of the Amazon S3 bucket where the transcript is stored.
+	S3BucketTranscriptSource *S3BucketTranscriptSource
 
 	noSmithyDocumentSerde
 }

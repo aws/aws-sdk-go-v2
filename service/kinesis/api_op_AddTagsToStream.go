@@ -10,13 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds or updates tags for the specified Kinesis data stream. Each time you invoke
-// this operation, you can specify up to 10 tags. If you want to add more than 10
-// tags to your stream, you can invoke this operation multiple times. In total,
-// each stream can have up to 50 tags. If tags have already been assigned to the
-// stream, AddTagsToStream overwrites any existing tags that correspond to the
-// specified tag keys. AddTagsToStream has a limit of five transactions per second
-// per account.
+// Adds or updates tags for the specified Kinesis data stream. You can assign up to
+// 50 tags to a data stream. If tags have already been assigned to the stream,
+// AddTagsToStream overwrites any existing tags that correspond to the specified
+// tag keys. AddTagsToStream has a limit of five transactions per second per
+// account.
 func (c *Client) AddTagsToStream(ctx context.Context, params *AddTagsToStreamInput, optFns ...func(*Options)) (*AddTagsToStreamOutput, error) {
 	if params == nil {
 		params = &AddTagsToStreamInput{}

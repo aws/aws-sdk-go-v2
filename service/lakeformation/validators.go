@@ -70,6 +70,66 @@ func (m *validateOpBatchRevokePermissions) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCancelTransaction struct {
+}
+
+func (*validateOpCancelTransaction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelTransaction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelTransactionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelTransactionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCommitTransaction struct {
+}
+
+func (*validateOpCommitTransaction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCommitTransaction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CommitTransactionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCommitTransactionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateDataCellsFilter struct {
+}
+
+func (*validateOpCreateDataCellsFilter) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateDataCellsFilter) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateDataCellsFilterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateDataCellsFilterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateLFTag struct {
 }
 
@@ -105,6 +165,26 @@ func (m *validateOpDeleteLFTag) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteLFTagInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteObjectsOnCancel struct {
+}
+
+func (*validateOpDeleteObjectsOnCancel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteObjectsOnCancel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteObjectsOnCancelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteObjectsOnCancelInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -150,6 +230,26 @@ func (m *validateOpDescribeResource) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeTransaction struct {
+}
+
+func (*validateOpDescribeTransaction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeTransaction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeTransactionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeTransactionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetEffectivePermissionsForPath struct {
 }
 
@@ -190,6 +290,46 @@ func (m *validateOpGetLFTag) HandleInitialize(ctx context.Context, in middleware
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetQueryState struct {
+}
+
+func (*validateOpGetQueryState) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetQueryState) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetQueryStateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetQueryStateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetQueryStatistics struct {
+}
+
+func (*validateOpGetQueryStatistics) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetQueryStatistics) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetQueryStatisticsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetQueryStatisticsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetResourceLFTags struct {
 }
 
@@ -205,6 +345,66 @@ func (m *validateOpGetResourceLFTags) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetResourceLFTagsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetTableObjects struct {
+}
+
+func (*validateOpGetTableObjects) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTableObjects) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTableObjectsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTableObjectsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetWorkUnitResults struct {
+}
+
+func (*validateOpGetWorkUnitResults) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetWorkUnitResults) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetWorkUnitResultsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetWorkUnitResultsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetWorkUnits struct {
+}
+
+func (*validateOpGetWorkUnits) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetWorkUnits) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetWorkUnitsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetWorkUnitsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -230,6 +430,26 @@ func (m *validateOpGrantPermissions) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListDataCellsFilter struct {
+}
+
+func (*validateOpListDataCellsFilter) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDataCellsFilter) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDataCellsFilterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDataCellsFilterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListPermissions struct {
 }
 
@@ -245,6 +465,26 @@ func (m *validateOpListPermissions) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListPermissionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListTableStorageOptimizers struct {
+}
+
+func (*validateOpListTableStorageOptimizers) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTableStorageOptimizers) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTableStorageOptimizersInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTableStorageOptimizersInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -370,6 +610,26 @@ func (m *validateOpSearchTablesByLFTags) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartQueryPlanning struct {
+}
+
+func (*validateOpStartQueryPlanning) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartQueryPlanning) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartQueryPlanningInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartQueryPlanningInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateLFTag struct {
 }
 
@@ -410,6 +670,46 @@ func (m *validateOpUpdateResource) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateTableObjects struct {
+}
+
+func (*validateOpUpdateTableObjects) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateTableObjects) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateTableObjectsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateTableObjectsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateTableStorageOptimizer struct {
+}
+
+func (*validateOpUpdateTableStorageOptimizer) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateTableStorageOptimizer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateTableStorageOptimizerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateTableStorageOptimizerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpAddLFTagsToResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAddLFTagsToResource{}, middleware.After)
 }
@@ -422,12 +722,28 @@ func addOpBatchRevokePermissionsValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpBatchRevokePermissions{}, middleware.After)
 }
 
+func addOpCancelTransactionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelTransaction{}, middleware.After)
+}
+
+func addOpCommitTransactionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCommitTransaction{}, middleware.After)
+}
+
+func addOpCreateDataCellsFilterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDataCellsFilter{}, middleware.After)
+}
+
 func addOpCreateLFTagValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateLFTag{}, middleware.After)
 }
 
 func addOpDeleteLFTagValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteLFTag{}, middleware.After)
+}
+
+func addOpDeleteObjectsOnCancelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteObjectsOnCancel{}, middleware.After)
 }
 
 func addOpDeregisterResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -438,6 +754,10 @@ func addOpDescribeResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeResource{}, middleware.After)
 }
 
+func addOpDescribeTransactionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeTransaction{}, middleware.After)
+}
+
 func addOpGetEffectivePermissionsForPathValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEffectivePermissionsForPath{}, middleware.After)
 }
@@ -446,16 +766,44 @@ func addOpGetLFTagValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetLFTag{}, middleware.After)
 }
 
+func addOpGetQueryStateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetQueryState{}, middleware.After)
+}
+
+func addOpGetQueryStatisticsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetQueryStatistics{}, middleware.After)
+}
+
 func addOpGetResourceLFTagsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetResourceLFTags{}, middleware.After)
+}
+
+func addOpGetTableObjectsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTableObjects{}, middleware.After)
+}
+
+func addOpGetWorkUnitResultsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetWorkUnitResults{}, middleware.After)
+}
+
+func addOpGetWorkUnitsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetWorkUnits{}, middleware.After)
 }
 
 func addOpGrantPermissionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGrantPermissions{}, middleware.After)
 }
 
+func addOpListDataCellsFilterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDataCellsFilter{}, middleware.After)
+}
+
 func addOpListPermissionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListPermissions{}, middleware.After)
+}
+
+func addOpListTableStorageOptimizersValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTableStorageOptimizers{}, middleware.After)
 }
 
 func addOpPutDataLakeSettingsValidationMiddleware(stack *middleware.Stack) error {
@@ -482,12 +830,42 @@ func addOpSearchTablesByLFTagsValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpSearchTablesByLFTags{}, middleware.After)
 }
 
+func addOpStartQueryPlanningValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartQueryPlanning{}, middleware.After)
+}
+
 func addOpUpdateLFTagValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateLFTag{}, middleware.After)
 }
 
 func addOpUpdateResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateResource{}, middleware.After)
+}
+
+func addOpUpdateTableObjectsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateTableObjects{}, middleware.After)
+}
+
+func addOpUpdateTableStorageOptimizerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateTableStorageOptimizer{}, middleware.After)
+}
+
+func validateAddObjectInput(v *types.AddObjectInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddObjectInput"}
+	if v.Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Uri"))
+	}
+	if v.ETag == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ETag"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateBatchPermissionsRequestEntry(v *types.BatchPermissionsRequestEntry) error {
@@ -542,6 +920,30 @@ func validateDatabaseResource(v *types.DatabaseResource) error {
 	}
 }
 
+func validateDataCellsFilter(v *types.DataCellsFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataCellsFilter"}
+	if v.TableCatalogId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableCatalogId"))
+	}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDataLocationResource(v *types.DataLocationResource) error {
 	if v == nil {
 		return nil
@@ -549,6 +951,21 @@ func validateDataLocationResource(v *types.DataLocationResource) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DataLocationResource"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDeleteObjectInput(v *types.DeleteObjectInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteObjectInput"}
+	if v.Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Uri"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -667,6 +1084,21 @@ func validateLFTagsList(v []types.LFTagPair) error {
 	}
 }
 
+func validateQueryPlanningContext(v *types.QueryPlanningContext) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QueryPlanningContext"}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateResource(v *types.Resource) error {
 	if v == nil {
 		return nil
@@ -742,6 +1174,77 @@ func validateTableWithColumnsResource(v *types.TableWithColumnsResource) error {
 	}
 }
 
+func validateVirtualObject(v *types.VirtualObject) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VirtualObject"}
+	if v.Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Uri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVirtualObjectList(v []types.VirtualObject) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VirtualObjectList"}
+	for i := range v {
+		if err := validateVirtualObject(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWriteOperation(v *types.WriteOperation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WriteOperation"}
+	if v.AddObject != nil {
+		if err := validateAddObjectInput(v.AddObject); err != nil {
+			invalidParams.AddNested("AddObject", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DeleteObject != nil {
+		if err := validateDeleteObjectInput(v.DeleteObject); err != nil {
+			invalidParams.AddNested("DeleteObject", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWriteOperationList(v []types.WriteOperation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WriteOperationList"}
+	for i := range v {
+		if err := validateWriteOperation(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAddLFTagsToResourceInput(v *AddLFTagsToResourceInput) error {
 	if v == nil {
 		return nil
@@ -806,6 +1309,55 @@ func validateOpBatchRevokePermissionsInput(v *BatchRevokePermissionsInput) error
 	}
 }
 
+func validateOpCancelTransactionInput(v *CancelTransactionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelTransactionInput"}
+	if v.TransactionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransactionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCommitTransactionInput(v *CommitTransactionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CommitTransactionInput"}
+	if v.TransactionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransactionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateDataCellsFilterInput(v *CreateDataCellsFilterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDataCellsFilterInput"}
+	if v.TableData == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableData"))
+	} else if v.TableData != nil {
+		if err := validateDataCellsFilter(v.TableData); err != nil {
+			invalidParams.AddNested("TableData", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateLFTagInput(v *CreateLFTagInput) error {
 	if v == nil {
 		return nil
@@ -831,6 +1383,34 @@ func validateOpDeleteLFTagInput(v *DeleteLFTagInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteLFTagInput"}
 	if v.TagKey == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKey"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteObjectsOnCancelInput(v *DeleteObjectsOnCancelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteObjectsOnCancelInput"}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if v.TransactionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransactionId"))
+	}
+	if v.Objects == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Objects"))
+	} else if v.Objects != nil {
+		if err := validateVirtualObjectList(v.Objects); err != nil {
+			invalidParams.AddNested("Objects", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -869,6 +1449,21 @@ func validateOpDescribeResourceInput(v *DescribeResourceInput) error {
 	}
 }
 
+func validateOpDescribeTransactionInput(v *DescribeTransactionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeTransactionInput"}
+	if v.TransactionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransactionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetEffectivePermissionsForPathInput(v *GetEffectivePermissionsForPathInput) error {
 	if v == nil {
 		return nil
@@ -899,6 +1494,36 @@ func validateOpGetLFTagInput(v *GetLFTagInput) error {
 	}
 }
 
+func validateOpGetQueryStateInput(v *GetQueryStateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetQueryStateInput"}
+	if v.QueryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetQueryStatisticsInput(v *GetQueryStatisticsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetQueryStatisticsInput"}
+	if v.QueryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetResourceLFTagsInput(v *GetResourceLFTagsInput) error {
 	if v == nil {
 		return nil
@@ -910,6 +1535,57 @@ func validateOpGetResourceLFTagsInput(v *GetResourceLFTagsInput) error {
 		if err := validateResource(v.Resource); err != nil {
 			invalidParams.AddNested("Resource", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetTableObjectsInput(v *GetTableObjectsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTableObjectsInput"}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetWorkUnitResultsInput(v *GetWorkUnitResultsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetWorkUnitResultsInput"}
+	if v.QueryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryId"))
+	}
+	if v.WorkUnitToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkUnitToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetWorkUnitsInput(v *GetWorkUnitsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetWorkUnitsInput"}
+	if v.QueryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -943,6 +1619,23 @@ func validateOpGrantPermissionsInput(v *GrantPermissionsInput) error {
 	}
 }
 
+func validateOpListDataCellsFilterInput(v *ListDataCellsFilterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDataCellsFilterInput"}
+	if v.Table != nil {
+		if err := validateTableResource(v.Table); err != nil {
+			invalidParams.AddNested("Table", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListPermissionsInput(v *ListPermissionsInput) error {
 	if v == nil {
 		return nil
@@ -952,6 +1645,24 @@ func validateOpListPermissionsInput(v *ListPermissionsInput) error {
 		if err := validateResource(v.Resource); err != nil {
 			invalidParams.AddNested("Resource", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListTableStorageOptimizersInput(v *ListTableStorageOptimizersInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTableStorageOptimizersInput"}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1079,6 +1790,28 @@ func validateOpSearchTablesByLFTagsInput(v *SearchTablesByLFTagsInput) error {
 	}
 }
 
+func validateOpStartQueryPlanningInput(v *StartQueryPlanningInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartQueryPlanningInput"}
+	if v.QueryPlanningContext == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryPlanningContext"))
+	} else if v.QueryPlanningContext != nil {
+		if err := validateQueryPlanningContext(v.QueryPlanningContext); err != nil {
+			invalidParams.AddNested("QueryPlanningContext", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.QueryString == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryString"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateLFTagInput(v *UpdateLFTagInput) error {
 	if v == nil {
 		return nil
@@ -1104,6 +1837,55 @@ func validateOpUpdateResourceInput(v *UpdateResourceInput) error {
 	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateTableObjectsInput(v *UpdateTableObjectsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateTableObjectsInput"}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if v.TransactionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransactionId"))
+	}
+	if v.WriteOperations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WriteOperations"))
+	} else if v.WriteOperations != nil {
+		if err := validateWriteOperationList(v.WriteOperations); err != nil {
+			invalidParams.AddNested("WriteOperations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateTableStorageOptimizerInput(v *UpdateTableStorageOptimizerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateTableStorageOptimizerInput"}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if v.StorageOptimizerConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StorageOptimizerConfig"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -111,15 +111,15 @@ type ClusterMetadata struct {
 	// The KmsKeyARN Amazon Resource Name (ARN) associated with this cluster. This ARN
 	// was created using the CreateKey
 	// (https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html) API
-	// action in AWS Key Management Service (AWS KMS).
+	// action in Key Management Service (KMS.
 	KmsKeyARN *string
 
 	// The Amazon Simple Notification Service (Amazon SNS) notification settings for
 	// this cluster.
 	Notification *Notification
 
-	// Represents metadata and configuration settings for services on an AWS Snow
-	// Family device.
+	// Represents metadata and configuration settings for services on an Amazon Web
+	// Services Snow Family device.
 	OnDeviceServiceConfiguration *OnDeviceServiceConfiguration
 
 	// The arrays of JobResource objects that can include updated S3Resource objects or
@@ -129,7 +129,7 @@ type ClusterMetadata struct {
 	// The role ARN associated with this cluster. This ARN was created using the
 	// CreateRole
 	// (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html) API
-	// action in AWS Identity and Access Management (IAM).
+	// action in Identity and Access Management (IAM).
 	RoleARN *string
 
 	// The shipping speed for each node in this cluster. This speed doesn't dictate how
@@ -152,11 +152,11 @@ type ClusterMetadata struct {
 	// to one-day shipping and two-day shipping.
 	ShippingOption ShippingOption
 
-	// The type of AWS Snow device to use for this cluster. For cluster jobs, AWS Snow
-	// Family currently supports only the EDGE device type.
+	// The type of Snowcone device to use for this cluster. For cluster jobs, Amazon
+	// Web Services Snow Family currently supports only the EDGE device type.
 	SnowballType SnowballType
 
-	// The tax documents required in your AWS Region.
+	// The tax documents required in your Amazon Web Services Region.
 	TaxDocuments *TaxDocuments
 
 	noSmithyDocumentSerde
@@ -178,8 +178,8 @@ type CompatibleImage struct {
 }
 
 // Defines the real-time status of a Snow device's data transfer while the device
-// is at AWS. This data is only available while a job has a JobState value of
-// InProgress, for both import and export jobs.
+// is at Amazon Web Services. This data is only available while a job has a
+// JobState value of InProgress, for both import and export jobs.
 type DataTransfer struct {
 
 	// The number of bytes transferred between a Snow device and Amazon S3.
@@ -204,7 +204,7 @@ type DataTransfer struct {
 // The container for SnowconeDeviceConfiguration.
 type DeviceConfiguration struct {
 
-	// Returns information about the device configuration for an AWS Snowcone job.
+	// Returns information about the device configuration for an Snowcone job.
 	SnowconeDeviceConfiguration *SnowconeDeviceConfiguration
 
 	noSmithyDocumentSerde
@@ -212,7 +212,8 @@ type DeviceConfiguration struct {
 
 // A JSON-formatted object that contains the IDs for an Amazon Machine Image (AMI),
 // including the Amazon EC2 AMI ID and the Snow device AMI ID. Each AMI has these
-// two IDs to simplify identifying the AMI in both the AWS Cloud and on the device.
+// two IDs to simplify identifying the AMI in both the Amazon Web Services Cloud
+// and on the device.
 type Ec2AmiResource struct {
 
 	// The ID of the AMI in Amazon EC2.
@@ -229,17 +230,18 @@ type Ec2AmiResource struct {
 // The container for the EventTriggerDefinition$EventResourceARN.
 type EventTriggerDefinition struct {
 
-	// The Amazon Resource Name (ARN) for any local Amazon S3 resource that is an AWS
+	// The Amazon Resource Name (ARN) for any local Amazon S3 resource that is an
 	// Lambda function's event trigger associated with this job.
 	EventResourceARN *string
 
 	noSmithyDocumentSerde
 }
 
-// The tax documents required in AWS Regions in India.
+// The tax documents required in Amazon Web Services Region in India.
 type INDTaxDocuments struct {
 
-	// The Goods and Services Tax (GST) documents required in AWS Regions in India.
+	// The Goods and Services Tax (GST) documents required in Amazon Web Services
+	// Region in India.
 	GSTIN *string
 
 	noSmithyDocumentSerde
@@ -325,8 +327,8 @@ type JobMetadata struct {
 	CreationDate *time.Time
 
 	// A value that defines the real-time status of a Snow device's data transfer while
-	// the device is at AWS. This data is only available while a job has a JobState
-	// value of InProgress, for both import and export jobs.
+	// the device is at Amazon Web Services. This data is only available while a job
+	// has a JobState value of InProgress, for both import and export jobs.
 	DataTransferProgress *DataTransfer
 
 	// The description of the job, provided at job creation.
@@ -355,10 +357,10 @@ type JobMetadata struct {
 	// The type of job.
 	JobType JobType
 
-	// The Amazon Resource Name (ARN) for the AWS Key Management Service (AWS KMS) key
+	// The Amazon Resource Name (ARN) for the Key Management Service (KMS) key
 	// associated with this job. This ARN was created using the CreateKey
 	// (https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html) API
-	// action in AWS KMS.
+	// action in KMS.
 	KmsKeyARN *string
 
 	// The ID of the long-term pricing type for the device.
@@ -369,8 +371,8 @@ type JobMetadata struct {
 	// the response syntax of the DescribeJob action in the JobMetadata data type.
 	Notification *Notification
 
-	// Represents metadata and configuration settings for services on an AWS Snow
-	// Family device.
+	// Represents metadata and configuration settings for services on an Amazon Web
+	// Services Snow Family device.
 	OnDeviceServiceConfiguration *OnDeviceServiceConfiguration
 
 	// Allows you to securely operate and manage Snowcone devices remotely from outside
@@ -385,7 +387,7 @@ type JobMetadata struct {
 
 	// The role ARN associated with this job. This ARN was created using the CreateRole
 	// (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html) API
-	// action in AWS Identity and Access Management (IAM).
+	// action in Identity and Access Management.
 	RoleARN *string
 
 	// A job's shipping information, including inbound and outbound tracking numbers
@@ -404,15 +406,16 @@ type JobMetadata struct {
 	// The type of device used with this job.
 	SnowballType SnowballType
 
-	// The metadata associated with the tax documents required in your AWS Region.
+	// The metadata associated with the tax documents required in your Amazon Web
+	// Services Region.
 	TaxDocuments *TaxDocuments
 
 	noSmithyDocumentSerde
 }
 
-// Contains an array of AWS resource objects. Each object represents an Amazon S3
-// bucket, an AWS Lambda function, or an Amazon Machine Image (AMI) based on Amazon
-// EC2 that is associated with a particular job.
+// Contains an array of Amazon Web Services resource objects. Each object
+// represents an Amazon S3 bucket, an Lambda function, or an Amazon Machine Image
+// (AMI) based on Amazon EC2 that is associated with a particular job.
 type JobResource struct {
 
 	// The Amazon Machine Images (AMIs) associated with this job.
@@ -451,8 +454,8 @@ type LambdaResource struct {
 	// associated with this job.
 	EventTriggers []EventTriggerDefinition
 
-	// An Amazon Resource Name (ARN) that represents an AWS Lambda function to be
-	// triggered by PUT object actions on the associated local Amazon S3 resource.
+	// An Amazon Resource Name (ARN) that represents an Lambda function to be triggered
+	// by PUT object actions on the associated local Amazon S3 resource.
 	LambdaArn *string
 
 	noSmithyDocumentSerde
@@ -490,17 +493,17 @@ type LongTermPricingListEntry struct {
 	// A new device that replaces a device that is ordered with long-term pricing.
 	ReplacementJob *string
 
-	// The type of AWS Snow Family device associated with this long-term pricing job.
+	// The type of Snow Family Devices associated with this long-term pricing job.
 	SnowballType SnowballType
 
 	noSmithyDocumentSerde
 }
 
-// An object that represents metadata and configuration settings for NFS service on
-// an AWS Snow Family device.
+// An object that represents the metadata and configuration settings for the NFS
+// (Network File System) service on an Amazon Web Services Snow Family device.
 type NFSOnDeviceServiceConfiguration struct {
 
-	// The maximum NFS storage for one Snowball Family device.
+	// The maximum NFS storage for one Snow Family device.
 	StorageLimit int32
 
 	// The scale unit of the NFS storage on the device. Valid values: TB.
@@ -527,8 +530,8 @@ type Notification struct {
 	// The new SNS TopicArn that you want to associate with this job. You can create
 	// Amazon Resource Names (ARNs) for topics by using the CreateTopic
 	// (https://docs.aws.amazon.com/sns/latest/api/API_CreateTopic.html) Amazon SNS API
-	// action. You can subscribe email addresses to an Amazon SNS topic through the AWS
-	// Management Console, or by using the Subscribe
+	// action. You can subscribe email addresses to an Amazon SNS topic through the
+	// Amazon Web Services Management Console, or by using the Subscribe
 	// (https://docs.aws.amazon.com/sns/latest/api/API_Subscribe.html) Amazon Simple
 	// Notification Service (Amazon SNS) API action.
 	SnsTopicARN *string
@@ -536,12 +539,16 @@ type Notification struct {
 	noSmithyDocumentSerde
 }
 
-// An object that represents metadata and configuration settings for services on an
-// AWS Snow Family device.
+// An object that represents the metadata and configuration settings for services
+// on an Amazon Web Services Snow Family device.
 type OnDeviceServiceConfiguration struct {
 
-	// Represents the NFS service on a Snow Family device.
+	// Represents the NFS (Network File System) service on a Snow Family device.
 	NFSOnDeviceService *NFSOnDeviceServiceConfiguration
+
+	// Represents the Storage Gateway service Tape Gateway type on a Snow Family
+	// device.
+	TGWOnDeviceService *TGWOnDeviceServiceConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -563,8 +570,8 @@ type S3Resource struct {
 	KeyRange *KeyRange
 
 	// Specifies the service or services on the Snow Family device that your
-	// transferred data will be exported from or imported into. AWS Snow Family
-	// supports Amazon S3 and NFS (Network File System).
+	// transferred data will be exported from or imported into. Amazon Web Services
+	// Snow Family supports Amazon S3 and NFS (Network File System).
 	TargetOnDeviceServices []TargetOnDeviceService
 
 	noSmithyDocumentSerde
@@ -589,8 +596,8 @@ type Shipment struct {
 // and shipping speed options.
 type ShippingDetails struct {
 
-	// The Status and TrackingNumber values for a Snow device being returned to AWS for
-	// a particular job.
+	// The Status and TrackingNumber values for a Snow device being returned to Amazon
+	// Web Services for a particular job.
 	InboundShipment *Shipment
 
 	// The Status and TrackingNumber values for a Snow device being delivered to the
@@ -621,18 +628,18 @@ type ShippingDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the device configuration for an AWS Snowcone job.
+// Specifies the device configuration for an Snowcone job.
 type SnowconeDeviceConfiguration struct {
 
-	// Configures the wireless connection for the AWS Snowcone device.
+	// Configures the wireless connection for the Snowcone device.
 	WirelessConnection *WirelessConnection
 
 	noSmithyDocumentSerde
 }
 
 // An object that represents the service or services on the Snow Family device that
-// your transferred data will be exported from or imported into. AWS Snow Family
-// supports Amazon S3 and NFS (Network File System).
+// your transferred data will be exported from or imported into. Amazon Web
+// Services Snow Family supports Amazon S3 and NFS (Network File System).
 type TargetOnDeviceService struct {
 
 	// Specifies the name of the service on the Snow Family device that your
@@ -646,19 +653,34 @@ type TargetOnDeviceService struct {
 	noSmithyDocumentSerde
 }
 
-// The tax documents required in your AWS Region.
+// The tax documents required in your Amazon Web Services Region.
 type TaxDocuments struct {
 
-	// The tax documents required in AWS Regions in India.
+	// The tax documents required in Amazon Web Services Region in India.
 	IND *INDTaxDocuments
 
 	noSmithyDocumentSerde
 }
 
-// Configures the wireless connection on an AWS Snowcone device.
+// An object that represents the metadata and configuration settings for the
+// Storage Gateway service Tape Gateway type on an Amazon Web Services Snow Family
+// device.
+type TGWOnDeviceServiceConfiguration struct {
+
+	// The maximum number of virtual tapes to store on one Snow Family device. Due to
+	// physical resource limitations, this value must be set to 80 for Snowball Edge.
+	StorageLimit int32
+
+	// The scale unit of the virtual tapes on the device.
+	StorageUnit StorageUnit
+
+	noSmithyDocumentSerde
+}
+
+// Configures the wireless connection on an Snowcone device.
 type WirelessConnection struct {
 
-	// Enables the Wi-Fi adapter on an AWS Snowcone device.
+	// Enables the Wi-Fi adapter on an Snowcone device.
 	IsWifiEnabled bool
 
 	noSmithyDocumentSerde

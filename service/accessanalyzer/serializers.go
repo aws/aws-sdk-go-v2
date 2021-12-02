@@ -2077,6 +2077,11 @@ func awsRestjson1_serializeOpDocumentValidatePolicyInput(v *ValidatePolicyInput,
 		ok.String(string(v.PolicyType))
 	}
 
+	if len(v.ValidatePolicyResourceType) > 0 {
+		ok := object.Key("validatePolicyResourceType")
+		ok.String(string(v.ValidatePolicyResourceType))
+	}
+
 	return nil
 }
 

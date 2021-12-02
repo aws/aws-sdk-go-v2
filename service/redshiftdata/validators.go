@@ -269,9 +269,6 @@ func validateOpBatchExecuteStatementInput(v *BatchExecuteStatementInput) error {
 	if v.Sqls == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Sqls"))
 	}
-	if v.ClusterIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
-	}
 	if v.Database == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Database"))
 	}
@@ -317,9 +314,6 @@ func validateOpDescribeTableInput(v *DescribeTableInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeTableInput"}
-	if v.ClusterIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
-	}
 	if v.Database == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Database"))
 	}
@@ -337,9 +331,6 @@ func validateOpExecuteStatementInput(v *ExecuteStatementInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ExecuteStatementInput"}
 	if v.Sql == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Sql"))
-	}
-	if v.ClusterIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
 	}
 	if v.Database == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Database"))
@@ -376,9 +367,6 @@ func validateOpListDatabasesInput(v *ListDatabasesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListDatabasesInput"}
-	if v.ClusterIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
-	}
 	if v.Database == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Database"))
 	}
@@ -394,9 +382,6 @@ func validateOpListSchemasInput(v *ListSchemasInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListSchemasInput"}
-	if v.ClusterIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
-	}
 	if v.Database == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Database"))
 	}
@@ -412,9 +397,6 @@ func validateOpListTablesInput(v *ListTablesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListTablesInput"}
-	if v.ClusterIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
-	}
 	if v.Database == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Database"))
 	}

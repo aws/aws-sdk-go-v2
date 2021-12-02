@@ -690,6 +690,9 @@ type NewPrivateVirtualInterface struct {
 	// The ID of the Direct Connect gateway.
 	DirectConnectGatewayId *string
 
+	// Indicates whether to enable or disable SiteLink.
+	EnableSiteLink *bool
+
 	// The maximum transmission unit (MTU), in bytes. The supported values are 1500 and
 	// 9001. The default value is 1500.
 	Mtu *int32
@@ -857,6 +860,9 @@ type NewTransitVirtualInterface struct {
 
 	// The ID of the Direct Connect gateway.
 	DirectConnectGatewayId *string
+
+	// Indicates whether to enable or disable SiteLink.
+	EnableSiteLink *bool
 
 	// The maximum transmission unit (MTU), in bytes. The supported values are 1500 and
 	// 9001. The default value is 1500.
@@ -1062,6 +1068,9 @@ type VirtualInterface struct {
 	// The routes to be advertised to the Amazon Web Services network in this Region.
 	// Applies to public virtual interfaces.
 	RouteFilterPrefixes []RouteFilterPrefix
+
+	// Indicates whether SiteLink is enabled.
+	SiteLinkEnabled *bool
 
 	// The tags associated with the virtual interface.
 	Tags []Tag

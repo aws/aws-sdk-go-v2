@@ -175,7 +175,7 @@ func (e *InvalidResourceException) ErrorMessage() string {
 func (e *InvalidResourceException) ErrorCode() string             { return "InvalidResourceException" }
 func (e *InvalidResourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The provided AWS Key Management Service key lacks the permissions to perform the
+// The provided Key Management Service key lacks the permissions to perform the
 // specified CreateJob or UpdateJob action.
 type KMSRequestFailedException struct {
 	Message *string
@@ -197,7 +197,7 @@ func (e *KMSRequestFailedException) ErrorFault() smithy.ErrorFault { return smit
 
 // You get this exception if you call CreateReturnShippingLabel and a valid return
 // shipping label already exists. In this case, use DescribeReturnShippingLabel to
-// get the url.
+// get the URL.
 type ReturnShippingLabelAlreadyExistsException struct {
 	Message *string
 
@@ -222,7 +222,7 @@ func (e *ReturnShippingLabelAlreadyExistsException) ErrorFault() smithy.ErrorFau
 
 // The address is either outside the serviceable area for your region, or an error
 // occurred. Check the address with your region's carrier and try again. If the
-// issue persists, contact AWS Support.
+// issue persists, contact Amazon Web Services Support.
 type UnsupportedAddressException struct {
 	Message *string
 

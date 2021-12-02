@@ -12,7 +12,8 @@ import (
 )
 
 // Provides a list of groups that are mapped to users before a given ordering or
-// timestamp identifier.
+// timestamp identifier. ListGroupsOlderThanOrderingId is currently not supported
+// in the Amazon Web Services GovCloud (US-West) region.
 func (c *Client) ListGroupsOlderThanOrderingId(ctx context.Context, params *ListGroupsOlderThanOrderingIdInput, optFns ...func(*Options)) (*ListGroupsOlderThanOrderingIdOutput, error) {
 	if params == nil {
 		params = &ListGroupsOlderThanOrderingIdInput{}

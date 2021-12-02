@@ -113,10 +113,21 @@ import (
 // List (ACL) Overview
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html) and Managing
 // ACLs Using the REST API
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-using-rest-api.html).
-// Storage Class Options You can use the CopyObject action to change the storage
-// class of an object that is already stored in Amazon S3 using the StorageClass
-// parameter. For more information, see Storage Classes
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-using-rest-api.html). If
+// the bucket that you're copying objects to uses the bucket owner enforced setting
+// for S3 Object Ownership, ACLs are disabled and no longer affect permissions.
+// Buckets that use this setting only accept PUT requests that don't specify an ACL
+// or PUT requests that specify bucket owner full control ACLs, such as the
+// bucket-owner-full-control canned ACL or an equivalent form of this ACL expressed
+// in the XML format. For more information, see  Controlling ownership of objects
+// and disabling ACLs
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html)
+// in the Amazon S3 User Guide. If your bucket uses the bucket owner enforced
+// setting for Object Ownership, all objects written to the bucket by any account
+// will be owned by the bucket owner. Storage Class Options You can use the
+// CopyObject action to change the storage class of an object that is already
+// stored in Amazon S3 using the StorageClass parameter. For more information, see
+// Storage Classes
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html) in
 // the Amazon S3 User Guide. Versioning By default, x-amz-copy-source identifies
 // the current version of an object to copy. If the current version is a delete

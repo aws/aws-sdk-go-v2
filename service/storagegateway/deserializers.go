@@ -12027,6 +12027,24 @@ func awsAwsjson11_deserializeDocumentGatewayInfo(v **types.GatewayInfo, value in
 				sv.GatewayType = ptr.String(jtv)
 			}
 
+		case "HostEnvironment":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HostEnvironment to be of type string, got %T instead", value)
+				}
+				sv.HostEnvironment = types.HostEnvironment(jtv)
+			}
+
+		case "HostEnvironmentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HostEnvironmentId to be of type string, got %T instead", value)
+				}
+				sv.HostEnvironmentId = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -16650,6 +16668,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeGatewayInformationOutput(v **Desc
 					return fmt.Errorf("expected HostEnvironment to be of type string, got %T instead", value)
 				}
 				sv.HostEnvironment = types.HostEnvironment(jtv)
+			}
+
+		case "HostEnvironmentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HostEnvironmentId to be of type string, got %T instead", value)
+				}
+				sv.HostEnvironmentId = ptr.String(jtv)
 			}
 
 		case "LastSoftwareUpdate":

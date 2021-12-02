@@ -3387,7 +3387,14 @@ type ThingDocument struct {
 	// service.
 	Connectivity *ThingConnectivity
 
-	// The shadow.
+	// Contains Device Defender data. For more information about Device Defender, see
+	// Device Defender
+	// (https://docs.aws.amazon.com/iot/latest/developerguide/device-defender.html).
+	DeviceDefender *string
+
+	// The unnamed shadow and named shadow. For more information about shadows, see IoT
+	// Device Shadow service.
+	// (https://docs.aws.amazon.com/iot/latest/developerguide/iot-device-shadows.html)
 	Shadow *string
 
 	// Thing group names.
@@ -3494,9 +3501,36 @@ type ThingIndexingConfiguration struct {
 	// Contains custom field names and their data type.
 	CustomFields []Field
 
+	// Device Defender indexing mode. Valid values are:
+	//
+	// * VIOLATIONS – Your thing
+	// index contains Device Defender violations. To enable Device Defender indexing,
+	// deviceDefenderIndexingMode must not be set to OFF.
+	//
+	// * OFF - Device Defender
+	// indexing is disabled.
+	//
+	// For more information about Device Defender violations,
+	// see Device Defender Detect.
+	// (https://docs.aws.amazon.com/iot/latest/developerguide/device-defender-detect.html)
+	DeviceDefenderIndexingMode DeviceDefenderIndexingMode
+
 	// Contains fields that are indexed and whose types are already known by the Fleet
 	// Indexing service.
 	ManagedFields []Field
+
+	// Named shadow indexing mode. Valid values are:
+	//
+	// * ON – Your thing index contains
+	// named shadow. To enable thing named shadow indexing, namedShadowIndexingMode
+	// must not be set to OFF.
+	//
+	// * OFF - Named shadow indexing is disabled.
+	//
+	// For more
+	// information about Shadows, see IoT Device Shadow service.
+	// (https://docs.aws.amazon.com/iot/latest/developerguide/iot-device-shadows.html)
+	NamedShadowIndexingMode NamedShadowIndexingMode
 
 	// Thing connectivity indexing mode. Valid values are:
 	//

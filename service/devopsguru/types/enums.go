@@ -40,6 +40,24 @@ func (AnomalyStatus) Values() []AnomalyStatus {
 	}
 }
 
+type AnomalyType string
+
+// Enum values for AnomalyType
+const (
+	AnomalyTypeCausal     AnomalyType = "CAUSAL"
+	AnomalyTypeContextual AnomalyType = "CONTEXTUAL"
+)
+
+// Values returns all known values for AnomalyType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AnomalyType) Values() []AnomalyType {
+	return []AnomalyType{
+		"CAUSAL",
+		"CONTEXTUAL",
+	}
+}
+
 type CloudWatchMetricDataStatusCode string
 
 // Enum values for CloudWatchMetricDataStatusCode
@@ -331,6 +349,7 @@ type ResourceCollectionType string
 const (
 	ResourceCollectionTypeAwsCloudFormation ResourceCollectionType = "AWS_CLOUD_FORMATION"
 	ResourceCollectionTypeAwsService        ResourceCollectionType = "AWS_SERVICE"
+	ResourceCollectionTypeAwsTags           ResourceCollectionType = "AWS_TAGS"
 )
 
 // Values returns all known values for ResourceCollectionType. Note that this can
@@ -340,6 +359,7 @@ func (ResourceCollectionType) Values() []ResourceCollectionType {
 	return []ResourceCollectionType{
 		"AWS_CLOUD_FORMATION",
 		"AWS_SERVICE",
+		"AWS_TAGS",
 	}
 }
 
@@ -430,10 +450,12 @@ type ValidationExceptionReason string
 
 // Enum values for ValidationExceptionReason
 const (
-	ValidationExceptionReasonUnknownOperation      ValidationExceptionReason = "UNKNOWN_OPERATION"
-	ValidationExceptionReasonCannotParse           ValidationExceptionReason = "CANNOT_PARSE"
-	ValidationExceptionReasonFieldValidationFailed ValidationExceptionReason = "FIELD_VALIDATION_FAILED"
-	ValidationExceptionReasonOther                 ValidationExceptionReason = "OTHER"
+	ValidationExceptionReasonUnknownOperation                      ValidationExceptionReason = "UNKNOWN_OPERATION"
+	ValidationExceptionReasonCannotParse                           ValidationExceptionReason = "CANNOT_PARSE"
+	ValidationExceptionReasonFieldValidationFailed                 ValidationExceptionReason = "FIELD_VALIDATION_FAILED"
+	ValidationExceptionReasonOther                                 ValidationExceptionReason = "OTHER"
+	ValidationExceptionReasonInvalidParameterCombination           ValidationExceptionReason = "INVALID_PARAMETER_COMBINATION"
+	ValidationExceptionReasonParameterInconsistentWithServiceState ValidationExceptionReason = "PARAMETER_INCONSISTENT_WITH_SERVICE_STATE"
 )
 
 // Values returns all known values for ValidationExceptionReason. Note that this
@@ -445,5 +467,7 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"CANNOT_PARSE",
 		"FIELD_VALIDATION_FAILED",
 		"OTHER",
+		"INVALID_PARAMETER_COMBINATION",
+		"PARAMETER_INCONSISTENT_WITH_SERVICE_STATE",
 	}
 }

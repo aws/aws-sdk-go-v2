@@ -1190,14 +1190,14 @@ type S3PublicAccessBlockConfiguration struct {
 // access preview assumes a secret without a policy. To propose deletion of an
 // existing policy, you can specify an empty string. If the proposed configuration
 // is for a new secret and you do not specify the KMS key ID, the access preview
-// uses the default CMK of the Amazon Web Services account. If you specify an empty
-// string for the KMS key ID, the access preview uses the default CMK of the Amazon
-// Web Services account. For more information about secret policy limits, see
-// Quotas for Secrets Manager.
+// uses the Amazon Web Services managed key aws/secretsmanager. If you specify an
+// empty string for the KMS key ID, the access preview uses the Amazon Web Services
+// managed key of the Amazon Web Services account. For more information about
+// secret policy limits, see Quotas for Secrets Manager.
 // (https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_limits.html).
 type SecretsManagerSecretConfiguration struct {
 
-	// The proposed ARN, key ID, or alias of the KMS customer master key (CMK).
+	// The proposed ARN, key ID, or alias of the KMS key.
 	KmsKeyId *string
 
 	// The proposed resource policy defining who can access or manage the secret.

@@ -7,6 +7,8 @@ import (
 	"time"
 )
 
+// Output parameter of the GetRecords API. The existing child shard of the current
+// shard.
 type ChildShard struct {
 
 	// The range of possible hash key values for the shard, which is a set of ordered
@@ -15,9 +17,13 @@ type ChildShard struct {
 	// This member is required.
 	HashKeyRange *HashKeyRange
 
+	// The current shard that is the parent of the existing child shard.
+	//
 	// This member is required.
 	ParentShards []string
 
+	// The shard ID of the existing child shard of the current shard.
+	//
 	// This member is required.
 	ShardId *string
 
@@ -229,8 +235,8 @@ type Record struct {
 	// * NONE: Do not encrypt the records in the stream.
 	//
 	// * KMS: Use
-	// server-side encryption on the records in the stream using a customer-managed AWS
-	// KMS key.
+	// server-side encryption on the records in the stream using a customer-managed
+	// Amazon Web Services KMS key.
 	EncryptionType EncryptionType
 
 	noSmithyDocumentSerde
@@ -279,19 +285,53 @@ type Shard struct {
 	noSmithyDocumentSerde
 }
 
+// The request parameter used to filter out the response of the ListShards API.
 type ShardFilter struct {
 
+	// The shard type specified in the ShardFilter parameter. This is a required
+	// property of the ShardFilter parameter. You can specify the following valid
+	// values:
+	//
+	// * AFTER_SHARD_ID - the response includes all the shards, starting with
+	// the shard whose ID immediately follows the ShardId that you provided.
+	//
+	// *
+	// AT_TRIM_HORIZON - the response includes all the shards that were open at
+	// TRIM_HORIZON.
+	//
+	// * FROM_TRIM_HORIZON - (default), the response includes all the
+	// shards within the retention period of the data stream (trim to tip).
+	//
+	// *
+	// AT_LATEST - the response includes only the currently open shards of the data
+	// stream.
+	//
+	// * AT_TIMESTAMP - the response includes all shards whose start timestamp
+	// is less than or equal to the given timestamp and end timestamp is greater than
+	// or equal to the given timestamp or still open.
+	//
+	// * FROM_TIMESTAMP - the response
+	// incldues all closed shards whose end timestamp is greater than or equal to the
+	// given timestamp and also all open shards. Corrected to TRIM_HORIZON of the data
+	// stream if FROM_TIMESTAMP is less than the TRIM_HORIZON value.
+	//
 	// This member is required.
 	Type ShardFilterType
 
+	// The exclusive start shardID speified in the ShardFilter parameter. This property
+	// can only be used if the AFTER_SHARD_ID shard type is specified.
 	ShardId *string
 
+	// The timestamps specified in the ShardFilter parameter. A timestamp is a Unix
+	// epoch date with precision in milliseconds. For example,
+	// 2016-04-04T19:58:46.480-00:00 or 1459799926.480. This property can only be used
+	// if FROM_TIMESTAMP or AT_TIMESTAMP shard types are specified.
 	Timestamp *time.Time
 
 	noSmithyDocumentSerde
 }
 
-//
+// The starting position in the data stream from which to start streaming.
 type StartingPosition struct {
 
 	// You can set the starting position to one of the following values:
@@ -391,13 +431,14 @@ type StreamDescription struct {
 	//
 	// * KMS:
 	// Use server-side encryption on the records in the stream using a customer-managed
-	// AWS KMS key.
+	// Amazon Web Services KMS key.
 	EncryptionType EncryptionType
 
-	// The GUID for the customer-managed AWS KMS key to use for encryption. This value
-	// can be a globally unique identifier, a fully specified ARN to either an alias or
-	// a key, or an alias name prefixed by "alias/".You can also use a master key owned
-	// by Kinesis Data Streams by specifying the alias aws/kinesis.
+	// The GUID for the customer-managed Amazon Web Services KMS key to use for
+	// encryption. This value can be a globally unique identifier, a fully specified
+	// ARN to either an alias or a key, or an alias name prefixed by "alias/".You can
+	// also use a master key owned by Kinesis Data Streams by specifying the alias
+	// aws/kinesis.
 	//
 	// * Key ARN example:
 	// arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
@@ -414,6 +455,11 @@ type StreamDescription struct {
 	// * Master key owned by Kinesis Data Streams:
 	// alias/aws/kinesis
 	KeyId *string
+
+	// Specifies the capacity mode to which you want to set your data stream.
+	// Currently, in Kinesis Data Streams, you can choose between an on-demand capacity
+	// mode and a provisioned capacity mode for your data streams.
+	StreamModeDetails *StreamModeDetails
 
 	noSmithyDocumentSerde
 }
@@ -482,10 +528,11 @@ type StreamDescriptionSummary struct {
 	// * NONE
 	EncryptionType EncryptionType
 
-	// The GUID for the customer-managed AWS KMS key to use for encryption. This value
-	// can be a globally unique identifier, a fully specified ARN to either an alias or
-	// a key, or an alias name prefixed by "alias/".You can also use a master key owned
-	// by Kinesis Data Streams by specifying the alias aws/kinesis.
+	// The GUID for the customer-managed Amazon Web Services KMS key to use for
+	// encryption. This value can be a globally unique identifier, a fully specified
+	// ARN to either an alias or a key, or an alias name prefixed by "alias/".You can
+	// also use a master key owned by Kinesis Data Streams by specifying the alias
+	// aws/kinesis.
 	//
 	// * Key ARN example:
 	// arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
@@ -502,6 +549,26 @@ type StreamDescriptionSummary struct {
 	// * Master key owned by Kinesis Data Streams:
 	// alias/aws/kinesis
 	KeyId *string
+
+	// Specifies the capacity mode to which you want to set your data stream.
+	// Currently, in Kinesis Data Streams, you can choose between an on-demand
+	// ycapacity mode and a provisioned capacity mode for your data streams.
+	StreamModeDetails *StreamModeDetails
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the capacity mode to which you want to set your data stream.
+// Currently, in Kinesis Data Streams, you can choose between an on-demand capacity
+// mode and a provisioned capacity mode for your data streams.
+type StreamModeDetails struct {
+
+	// Specifies the capacity mode to which you want to set your data stream.
+	// Currently, in Kinesis Data Streams, you can choose between an on-demand capacity
+	// mode and a provisioned capacity mode for your data streams.
+	//
+	// This member is required.
+	StreamMode StreamMode
 
 	noSmithyDocumentSerde
 }
@@ -531,6 +598,8 @@ type SubscribeToShardEvent struct {
 	// This member is required.
 	Records []Record
 
+	// The list of the child shards of the current shard, returned only at the end of
+	// the current shard.
 	ChildShards []ChildShard
 
 	noSmithyDocumentSerde

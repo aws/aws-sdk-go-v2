@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Amazon FSx for NetApp ONTAP storage volume.
+// Creates an Amazon FSx for NetApp ONTAP or Amazon FSx for OpenZFS storage volume.
 func (c *Client) CreateVolume(ctx context.Context, params *CreateVolumeInput, optFns ...func(*Options)) (*CreateVolumeOutput, error) {
 	if params == nil {
 		params = &CreateVolumeInput{}
@@ -30,12 +30,13 @@ func (c *Client) CreateVolume(ctx context.Context, params *CreateVolumeInput, op
 
 type CreateVolumeInput struct {
 
-	// Specifies the name of the volume you're creating.
+	// Specifies the name of the volume that you're creating.
 	//
 	// This member is required.
 	Name *string
 
-	// Specifies the type of volume to create; ONTAP is the only valid volume type.
+	// Specifies the type of volume to create; ONTAP and OPENZFS are the only valid
+	// volume types.
 	//
 	// This member is required.
 	VolumeType types.VolumeType
@@ -45,8 +46,11 @@ type CreateVolumeInput struct {
 	// the Command Line Interface (CLI) or an Amazon Web Services SDK.
 	ClientRequestToken *string
 
-	// Specifies the ONTAP configuration to use in creating the volume.
+	// Specifies the configuration to use when creating the ONTAP volume.
 	OntapConfiguration *types.CreateOntapVolumeConfiguration
+
+	// Specifies the configuration to use when creating the OpenZFS volume.
+	OpenZFSConfiguration *types.CreateOpenZFSVolumeConfiguration
 
 	// A list of Tag values, with a maximum of 50 elements.
 	Tags []types.Tag

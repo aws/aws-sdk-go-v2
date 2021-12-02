@@ -249,11 +249,12 @@ type HostEnvironment string
 
 // Enum values for HostEnvironment
 const (
-	HostEnvironmentVmware HostEnvironment = "VMWARE"
-	HostEnvironmentHyperV HostEnvironment = "HYPER-V"
-	HostEnvironmentEc2    HostEnvironment = "EC2"
-	HostEnvironmentKvm    HostEnvironment = "KVM"
-	HostEnvironmentOther  HostEnvironment = "OTHER"
+	HostEnvironmentVmware   HostEnvironment = "VMWARE"
+	HostEnvironmentHyperV   HostEnvironment = "HYPER-V"
+	HostEnvironmentEc2      HostEnvironment = "EC2"
+	HostEnvironmentKvm      HostEnvironment = "KVM"
+	HostEnvironmentOther    HostEnvironment = "OTHER"
+	HostEnvironmentSnowball HostEnvironment = "SNOWBALL"
 )
 
 // Values returns all known values for HostEnvironment. Note that this can be
@@ -266,6 +267,7 @@ func (HostEnvironment) Values() []HostEnvironment {
 		"EC2",
 		"KVM",
 		"OTHER",
+		"SNOWBALL",
 	}
 }
 

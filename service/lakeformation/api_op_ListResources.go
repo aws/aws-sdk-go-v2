@@ -58,11 +58,11 @@ type ListResourcesOutput struct {
 }
 
 func (c *Client) addOperationListResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListResources{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListResources{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListResources{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListResources{}, middleware.After)
 	if err != nil {
 		return err
 	}

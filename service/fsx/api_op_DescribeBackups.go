@@ -12,26 +12,27 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the description of specific Amazon FSx backups, if a BackupIds value is
+// Returns the description of a specific Amazon FSx backup, if a BackupIds value is
 // provided for that backup. Otherwise, it returns all backups owned by your Amazon
 // Web Services account in the Amazon Web Services Region of the endpoint that
 // you're calling. When retrieving all backups, you can optionally specify the
 // MaxResults parameter to limit the number of backups in a response. If more
 // backups remain, Amazon FSx returns a NextToken value in the response. In this
 // case, send a later request with the NextToken request parameter set to the value
-// of NextToken from the last response. This action is used in an iterative process
-// to retrieve a list of your backups. DescribeBackups is called first without a
-// NextTokenvalue. Then the action continues to be called with the NextToken
-// parameter set to the value of the last NextToken value until a response has no
-// NextToken. When using this action, keep the following in mind:
+// of the NextToken value from the last response. This operation is used in an
+// iterative process to retrieve a list of your backups. DescribeBackups is called
+// first without a NextToken value. Then the operation continues to be called with
+// the NextToken parameter set to the value of the last NextToken value until a
+// response has no NextToken value. When using this operation, keep the following
+// in mind:
 //
-// * The
-// implementation might return fewer than MaxResults backup descriptions while
-// still including a NextToken value.
+// * The operation might return fewer than the MaxResults value of backup
+// descriptions while still including a NextToken value.
 //
-// * The order of backups returned in the
-// response of one DescribeBackups call and the order of backups returned across
-// the responses of a multi-call iteration is unspecified.
+// * The order of the
+// backups returned in the response of one DescribeBackups call and the order of
+// the backups returned across the responses of a multi-call iteration is
+// unspecified.
 func (c *Client) DescribeBackups(ctx context.Context, params *DescribeBackupsInput, optFns ...func(*Options)) (*DescribeBackupsOutput, error) {
 	if params == nil {
 		params = &DescribeBackupsInput{}
@@ -47,39 +48,39 @@ func (c *Client) DescribeBackups(ctx context.Context, params *DescribeBackupsInp
 	return out, nil
 }
 
-// The request object for DescribeBackups operation.
+// The request object for the DescribeBackups operation.
 type DescribeBackupsInput struct {
 
-	// IDs of the backups you want to retrieve (String). This overrides any filters. If
-	// any IDs are not found, BackupNotFound will be thrown.
+	// The IDs of the backups that you want to retrieve. This parameter value overrides
+	// any filters. If any IDs aren't found, a BackupNotFound error occurs.
 	BackupIds []string
 
-	// Filters structure. Supported names are file-system-id, backup-type,
+	// The filters structure. The supported names are file-system-id, backup-type,
 	// file-system-type, and volume-id.
 	Filters []types.Filter
 
-	// Maximum number of backups to return in the response (integer). This parameter
-	// value must be greater than 0. The number of items that Amazon FSx returns is the
-	// minimum of the MaxResults parameter specified in the request and the service's
-	// internal maximum number of items per page.
+	// Maximum number of backups to return in the response. This parameter value must
+	// be greater than 0. The number of items that Amazon FSx returns is the minimum of
+	// the MaxResults parameter specified in the request and the service's internal
+	// maximum number of items per page.
 	MaxResults *int32
 
-	// Opaque pagination token returned from a previous DescribeBackups operation
-	// (String). If a token present, the action continues the list from where the
-	// returning call left off.
+	// An opaque pagination token returned from a previous DescribeBackups operation.
+	// If a token is present, the operation continues the list from where the returning
+	// call left off.
 	NextToken *string
 
 	noSmithyDocumentSerde
 }
 
-// Response object for DescribeBackups operation.
+// Response object for the DescribeBackups operation.
 type DescribeBackupsOutput struct {
 
 	// An array of backups.
 	Backups []types.Backup
 
-	// This is present if there are more backups than returned in the response
-	// (String). You can use the NextToken value in the later request to fetch the
+	// A NextToken value is present if there are more backups than returned in the
+	// response. You can use the NextToken value in the subsequent request to fetch the
 	// backups.
 	NextToken *string
 
@@ -159,10 +160,10 @@ var _ DescribeBackupsAPIClient = (*Client)(nil)
 
 // DescribeBackupsPaginatorOptions is the paginator options for DescribeBackups
 type DescribeBackupsPaginatorOptions struct {
-	// Maximum number of backups to return in the response (integer). This parameter
-	// value must be greater than 0. The number of items that Amazon FSx returns is the
-	// minimum of the MaxResults parameter specified in the request and the service's
-	// internal maximum number of items per page.
+	// Maximum number of backups to return in the response. This parameter value must
+	// be greater than 0. The number of items that Amazon FSx returns is the minimum of
+	// the MaxResults parameter specified in the request and the service's internal
+	// maximum number of items per page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -3214,6 +3214,11 @@ func awsAwsjson10_serializeDocumentCreateReplicationGroupMemberAction(v *types.C
 		ok.String(*v.RegionName)
 	}
 
+	if len(v.TableClassOverride) > 0 {
+		ok := object.Key("TableClassOverride")
+		ok.String(string(v.TableClassOverride))
+	}
+
 	return nil
 }
 
@@ -4177,6 +4182,11 @@ func awsAwsjson10_serializeDocumentReplicaSettingsUpdate(v *types.ReplicaSetting
 		ok.Long(*v.ReplicaProvisionedReadCapacityUnits)
 	}
 
+	if len(v.ReplicaTableClass) > 0 {
+		ok := object.Key("ReplicaTableClass")
+		ok.String(string(v.ReplicaTableClass))
+	}
+
 	return nil
 }
 
@@ -4546,6 +4556,11 @@ func awsAwsjson10_serializeDocumentUpdateReplicationGroupMemberAction(v *types.U
 		ok.String(*v.RegionName)
 	}
 
+	if len(v.TableClassOverride) > 0 {
+		ok := object.Key("TableClassOverride")
+		ok.String(string(v.TableClassOverride))
+	}
+
 	return nil
 }
 
@@ -4737,6 +4752,11 @@ func awsAwsjson10_serializeOpDocumentCreateTableInput(v *CreateTableInput, value
 		if err := awsAwsjson10_serializeDocumentStreamSpecification(v.StreamSpecification, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.TableClass) > 0 {
+		ok := object.Key("TableClass")
+		ok.String(string(v.TableClass))
 	}
 
 	if v.TableName != nil {
@@ -6007,6 +6027,11 @@ func awsAwsjson10_serializeOpDocumentUpdateTableInput(v *UpdateTableInput, value
 		if err := awsAwsjson10_serializeDocumentStreamSpecification(v.StreamSpecification, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.TableClass) > 0 {
+		ok := object.Key("TableClass")
+		ok.String(string(v.TableClass))
 	}
 
 	if v.TableName != nil {

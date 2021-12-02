@@ -11,13 +11,7 @@ import (
 )
 
 // Removes the Shield Response Team's (SRT) access to the specified Amazon S3
-// bucket containing the logs that you shared previously. To make a
-// DisassociateDRTLogBucket request, you must be subscribed to the Business Support
-// plan (https://aws.amazon.com/premiumsupport/business-support/) or the Enterprise
-// Support plan (https://aws.amazon.com/premiumsupport/enterprise-support/).
-// However, if you are not subscribed to one of these support plans, but had been
-// previously and had granted the SRT access to your account, you can submit a
-// DisassociateDRTLogBucket request to remove this access.
+// bucket containing the logs that you shared previously.
 func (c *Client) DisassociateDRTLogBucket(ctx context.Context, params *DisassociateDRTLogBucketInput, optFns ...func(*Options)) (*DisassociateDRTLogBucketOutput, error) {
 	if params == nil {
 		params = &DisassociateDRTLogBucketInput{}

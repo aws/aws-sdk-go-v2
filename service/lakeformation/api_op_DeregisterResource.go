@@ -46,11 +46,11 @@ type DeregisterResourceOutput struct {
 }
 
 func (c *Client) addOperationDeregisterResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeregisterResource{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeregisterResource{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeregisterResource{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeregisterResource{}, middleware.After)
 	if err != nil {
 		return err
 	}

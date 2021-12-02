@@ -40,8 +40,8 @@ type GetEffectivePermissionsForPathInput struct {
 
 	// The identifier for the Data Catalog. By default, the account ID. The Data
 	// Catalog is the persistent metadata store. It contains database definitions,
-	// table definitions, and other control information to manage your AWS Lake
-	// Formation environment.
+	// table definitions, and other control information to manage your Lake Formation
+	// environment.
 	CatalogId *string
 
 	// The maximum number of results to return.
@@ -69,11 +69,11 @@ type GetEffectivePermissionsForPathOutput struct {
 }
 
 func (c *Client) addOperationGetEffectivePermissionsForPathMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetEffectivePermissionsForPath{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEffectivePermissionsForPath{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetEffectivePermissionsForPath{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEffectivePermissionsForPath{}, middleware.After)
 	if err != nil {
 		return err
 	}

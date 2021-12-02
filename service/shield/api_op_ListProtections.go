@@ -30,17 +30,24 @@ func (c *Client) ListProtections(ctx context.Context, params *ListProtectionsInp
 
 type ListProtectionsInput struct {
 
-	// The maximum number of Protection objects to return. If you leave this blank,
-	// Shield Advanced returns the first 20 results. This is a maximum value. Shield
-	// Advanced might return the results in smaller batches. That is, the number of
-	// objects returned could be less than MaxResults, even if there are still more
-	// objects yet to return. If there are more objects to return, Shield Advanced
-	// returns a value in NextToken that you can use in your next request, to get the
-	// next batch of objects.
+	// The greatest number of objects that you want Shield Advanced to return to the
+	// list request. Shield Advanced might return fewer objects than you indicate in
+	// this setting, even if more objects are available. If there are more objects
+	// remaining, Shield Advanced will always also return a NextToken value in the
+	// response. The default setting is 20.
 	MaxResults *int32
 
-	// The ListProtectionsRequest.NextToken value from a previous call to
-	// ListProtections. Pass null if this is the first call.
+	// When you request a list of objects from Shield Advanced, if the response does
+	// not include all of the remaining available objects, Shield Advanced includes a
+	// NextToken value in the response. You can retrieve the next batch of objects by
+	// requesting the list again and providing the token that was returned by the prior
+	// call in your request. You can indicate the maximum number of objects that you
+	// want Shield Advanced to return for a single call with the MaxResults setting.
+	// Shield Advanced will not return more than MaxResults objects, but may return
+	// fewer, even if more objects are still available. Whenever more objects remain
+	// that Shield Advanced has not yet returned to you, the response will include a
+	// NextToken value. On your first call to a list operation, leave this setting
+	// empty.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -48,14 +55,16 @@ type ListProtectionsInput struct {
 
 type ListProtectionsOutput struct {
 
-	// If you specify a value for MaxResults and you have more Protections than the
-	// value of MaxResults, Shield Advanced returns a NextToken value in the response
-	// that allows you to list another group of Protections. For the second and
-	// subsequent ListProtections requests, specify the value of NextToken from the
-	// previous response to get information about another batch of Protections. Shield
-	// Advanced might return the list of Protection objects in batches smaller than the
-	// number specified by MaxResults. If there are more Protection objects to return,
-	// Shield Advanced will always also return a NextToken.
+	// When you request a list of objects from Shield Advanced, if the response does
+	// not include all of the remaining available objects, Shield Advanced includes a
+	// NextToken value in the response. You can retrieve the next batch of objects by
+	// requesting the list again and providing the token that was returned by the prior
+	// call in your request. You can indicate the maximum number of objects that you
+	// want Shield Advanced to return for a single call with the MaxResults setting.
+	// Shield Advanced will not return more than MaxResults objects, but may return
+	// fewer, even if more objects are still available. Whenever more objects remain
+	// that Shield Advanced has not yet returned to you, the response will include a
+	// NextToken value.
 	NextToken *string
 
 	// The array of enabled Protection objects.
@@ -137,13 +146,11 @@ var _ ListProtectionsAPIClient = (*Client)(nil)
 
 // ListProtectionsPaginatorOptions is the paginator options for ListProtections
 type ListProtectionsPaginatorOptions struct {
-	// The maximum number of Protection objects to return. If you leave this blank,
-	// Shield Advanced returns the first 20 results. This is a maximum value. Shield
-	// Advanced might return the results in smaller batches. That is, the number of
-	// objects returned could be less than MaxResults, even if there are still more
-	// objects yet to return. If there are more objects to return, Shield Advanced
-	// returns a value in NextToken that you can use in your next request, to get the
-	// next batch of objects.
+	// The greatest number of objects that you want Shield Advanced to return to the
+	// list request. Shield Advanced might return fewer objects than you indicate in
+	// this setting, even if more objects are available. If there are more objects
+	// remaining, Shield Advanced will always also return a NextToken value in the
+	// response. The default setting is 20.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

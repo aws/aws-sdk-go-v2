@@ -50,7 +50,7 @@ type DescribeContextOutput struct {
 	ContextType *string
 
 	// Information about the user who created or modified an experiment, trial, trial
-	// component, or project.
+	// component, lineage group, or project.
 	CreatedBy *types.UserContext
 
 	// When the context was created.
@@ -60,11 +60,14 @@ type DescribeContextOutput struct {
 	Description *string
 
 	// Information about the user who created or modified an experiment, trial, trial
-	// component, or project.
+	// component, lineage group, or project.
 	LastModifiedBy *types.UserContext
 
 	// When the context was last modified.
 	LastModifiedTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the lineage group.
+	LineageGroupArn *string
 
 	// A list of the context's properties.
 	Properties map[string]string

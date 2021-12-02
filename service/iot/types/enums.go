@@ -643,6 +643,24 @@ func (DeviceCertificateUpdateAction) Values() []DeviceCertificateUpdateAction {
 	}
 }
 
+type DeviceDefenderIndexingMode string
+
+// Enum values for DeviceDefenderIndexingMode
+const (
+	DeviceDefenderIndexingModeOff        DeviceDefenderIndexingMode = "OFF"
+	DeviceDefenderIndexingModeViolations DeviceDefenderIndexingMode = "VIOLATIONS"
+)
+
+// Values returns all known values for DeviceDefenderIndexingMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DeviceDefenderIndexingMode) Values() []DeviceDefenderIndexingMode {
+	return []DeviceDefenderIndexingMode{
+		"OFF",
+		"VIOLATIONS",
+	}
+}
+
 type DimensionType string
 
 // Enum values for DimensionType
@@ -1074,6 +1092,24 @@ func (ModelStatus) Values() []ModelStatus {
 		"PENDING_BUILD",
 		"ACTIVE",
 		"EXPIRED",
+	}
+}
+
+type NamedShadowIndexingMode string
+
+// Enum values for NamedShadowIndexingMode
+const (
+	NamedShadowIndexingModeOff NamedShadowIndexingMode = "OFF"
+	NamedShadowIndexingModeOn  NamedShadowIndexingMode = "ON"
+)
+
+// Values returns all known values for NamedShadowIndexingMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NamedShadowIndexingMode) Values() []NamedShadowIndexingMode {
+	return []NamedShadowIndexingMode{
+		"OFF",
+		"ON",
 	}
 }
 

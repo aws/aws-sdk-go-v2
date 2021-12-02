@@ -352,6 +352,24 @@ func (ResourceType) Values() []ResourceType {
 	}
 }
 
+type SupportedHardwareType string
+
+// Enum values for SupportedHardwareType
+const (
+	SupportedHardwareTypeRack   SupportedHardwareType = "RACK"
+	SupportedHardwareTypeServer SupportedHardwareType = "SERVER"
+)
+
+// Values returns all known values for SupportedHardwareType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SupportedHardwareType) Values() []SupportedHardwareType {
+	return []SupportedHardwareType{
+		"RACK",
+		"SERVER",
+	}
+}
+
 type SupportedStorageEnum string
 
 // Enum values for SupportedStorageEnum

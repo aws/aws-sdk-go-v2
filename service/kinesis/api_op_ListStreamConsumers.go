@@ -34,15 +34,16 @@ func (c *Client) ListStreamConsumers(ctx context.Context, params *ListStreamCons
 type ListStreamConsumersInput struct {
 
 	// The ARN of the Kinesis data stream for which you want to list the registered
-	// consumers. For more information, see Amazon Resource Names (ARNs) and AWS
-	// Service Namespaces
+	// consumers. For more information, see Amazon Resource Names (ARNs) and Amazon Web
+	// Services Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams).
 	//
 	// This member is required.
 	StreamARN *string
 
 	// The maximum number of consumers that you want a single call of
-	// ListStreamConsumers to return.
+	// ListStreamConsumers to return. The default value is 100. If you specify a value
+	// greater than 100, at most 100 results are returned.
 	MaxResults *int32
 
 	// When the number of consumers that are registered with the data stream is greater
@@ -173,7 +174,8 @@ var _ ListStreamConsumersAPIClient = (*Client)(nil)
 // ListStreamConsumers
 type ListStreamConsumersPaginatorOptions struct {
 	// The maximum number of consumers that you want a single call of
-	// ListStreamConsumers to return.
+	// ListStreamConsumers to return. The default value is 100. If you specify a value
+	// greater than 100, at most 100 results are returned.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

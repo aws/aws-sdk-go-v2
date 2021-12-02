@@ -57,6 +57,25 @@ func (AggregatedUtterancesSortAttribute) Values() []AggregatedUtterancesSortAttr
 	}
 }
 
+type AssociatedTranscriptFilterName string
+
+// Enum values for AssociatedTranscriptFilterName
+const (
+	AssociatedTranscriptFilterNameIntentId   AssociatedTranscriptFilterName = "IntentId"
+	AssociatedTranscriptFilterNameSlotTypeId AssociatedTranscriptFilterName = "SlotTypeId"
+)
+
+// Values returns all known values for AssociatedTranscriptFilterName. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AssociatedTranscriptFilterName) Values() []AssociatedTranscriptFilterName {
+	return []AssociatedTranscriptFilterName{
+		"IntentId",
+		"SlotTypeId",
+	}
+}
+
 type BotAliasStatus string
 
 // Enum values for BotAliasStatus
@@ -175,6 +194,7 @@ const (
 	BotLocaleStatusDeleting            BotLocaleStatus = "Deleting"
 	BotLocaleStatusNotBuilt            BotLocaleStatus = "NotBuilt"
 	BotLocaleStatusImporting           BotLocaleStatus = "Importing"
+	BotLocaleStatusProcessing          BotLocaleStatus = "Processing"
 )
 
 // Values returns all known values for BotLocaleStatus. Note that this can be
@@ -190,6 +210,35 @@ func (BotLocaleStatus) Values() []BotLocaleStatus {
 		"Deleting",
 		"NotBuilt",
 		"Importing",
+		"Processing",
+	}
+}
+
+type BotRecommendationStatus string
+
+// Enum values for BotRecommendationStatus
+const (
+	BotRecommendationStatusProcessing  BotRecommendationStatus = "Processing"
+	BotRecommendationStatusDeleting    BotRecommendationStatus = "Deleting"
+	BotRecommendationStatusDeleted     BotRecommendationStatus = "Deleted"
+	BotRecommendationStatusDownloading BotRecommendationStatus = "Downloading"
+	BotRecommendationStatusUpdating    BotRecommendationStatus = "Updating"
+	BotRecommendationStatusAvailable   BotRecommendationStatus = "Available"
+	BotRecommendationStatusFailed      BotRecommendationStatus = "Failed"
+)
+
+// Values returns all known values for BotRecommendationStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BotRecommendationStatus) Values() []BotRecommendationStatus {
+	return []BotRecommendationStatus{
+		"Processing",
+		"Deleting",
+		"Deleted",
+		"Downloading",
+		"Updating",
+		"Available",
+		"Failed",
 	}
 }
 
@@ -521,6 +570,7 @@ type MergeStrategy string
 const (
 	MergeStrategyOverwrite      MergeStrategy = "Overwrite"
 	MergeStrategyFailOnConflict MergeStrategy = "FailOnConflict"
+	MergeStrategyAppend         MergeStrategy = "Append"
 )
 
 // Values returns all known values for MergeStrategy. Note that this can be
@@ -530,6 +580,7 @@ func (MergeStrategy) Values() []MergeStrategy {
 	return []MergeStrategy{
 		"Overwrite",
 		"FailOnConflict",
+		"Append",
 	}
 }
 
@@ -548,6 +599,24 @@ func (ObfuscationSettingType) Values() []ObfuscationSettingType {
 	return []ObfuscationSettingType{
 		"None",
 		"DefaultObfuscation",
+	}
+}
+
+type SearchOrder string
+
+// Enum values for SearchOrder
+const (
+	SearchOrderAscending  SearchOrder = "Ascending"
+	SearchOrderDescending SearchOrder = "Descending"
+)
+
+// Values returns all known values for SearchOrder. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SearchOrder) Values() []SearchOrder {
+	return []SearchOrder{
+		"Ascending",
+		"Descending",
 	}
 }
 
@@ -726,6 +795,22 @@ func (TimeDimension) Values() []TimeDimension {
 		"Hours",
 		"Days",
 		"Weeks",
+	}
+}
+
+type TranscriptFormat string
+
+// Enum values for TranscriptFormat
+const (
+	TranscriptFormatLex TranscriptFormat = "Lex"
+)
+
+// Values returns all known values for TranscriptFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TranscriptFormat) Values() []TranscriptFormat {
+	return []TranscriptFormat{
+		"Lex",
 	}
 }
 

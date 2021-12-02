@@ -70,6 +70,12 @@ type DescribeModelPackageOutput struct {
 	// This member is required.
 	ModelPackageStatusDetails *types.ModelPackageStatusDetails
 
+	// An array of additional Inference Specification objects. Each additional
+	// Inference Specification specifies artifacts based on this model package that can
+	// be used on inference endpoints. Generally used with SageMaker Neo to store the
+	// compiled artifacts.
+	AdditionalInferenceSpecifications []types.AdditionalInferenceSpecificationDefinition
+
 	// A description provided for the model approval.
 	ApprovalDescription *string
 
@@ -78,18 +84,29 @@ type DescribeModelPackageOutput struct {
 	CertifyForMarketplace bool
 
 	// Information about the user who created or modified an experiment, trial, trial
-	// component, or project.
+	// component, lineage group, or project.
 	CreatedBy *types.UserContext
 
 	// The metadata properties associated with the model package versions.
 	CustomerMetadataProperties map[string]string
+
+	// The machine learning domain of the model package you specified. Common machine
+	// learning domains include computer vision and natural language processing.
+	Domain *string
+
+	// Represents the drift check baselines that can be used when the model monitor is
+	// set using the model package. For more information, see the topic on Drift
+	// Detection against Previous Baselines in SageMaker Pipelines
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-quality-clarify-baseline-lifecycle.html#pipelines-quality-clarify-baseline-drift-detection)
+	// in the Amazon SageMaker Developer Guide.
+	DriftCheckBaselines *types.DriftCheckBaselines
 
 	// Details about inference jobs that can be run with models based on this model
 	// package.
 	InferenceSpecification *types.InferenceSpecification
 
 	// Information about the user who created or modified an experiment, trial, trial
-	// component, or project.
+	// component, lineage group, or project.
 	LastModifiedBy *types.UserContext
 
 	// The last time the model package was modified.
@@ -114,8 +131,17 @@ type DescribeModelPackageOutput struct {
 	// The version of the model package.
 	ModelPackageVersion *int32
 
+	// The Amazon Simple Storage Service (Amazon S3) path where the sample payload are
+	// stored. This path points to a single gzip compressed tar archive (.tar.gz
+	// suffix).
+	SamplePayloadUrl *string
+
 	// Details about the algorithm that was used to create the model package.
 	SourceAlgorithmSpecification *types.SourceAlgorithmSpecification
+
+	// The machine learning task you specified that your model package accomplishes.
+	// Common machine learning tasks include object detection and image classification.
+	Task *string
 
 	// Configurations for one or more transform jobs that SageMaker runs to test the
 	// model package.

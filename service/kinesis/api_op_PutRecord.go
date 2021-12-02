@@ -124,8 +124,8 @@ type PutRecordOutput struct {
 	// * NONE: Do not encrypt the records in the stream.
 	//
 	// * KMS: Use
-	// server-side encryption on the records in the stream using a customer-managed AWS
-	// KMS key.
+	// server-side encryption on the records in the stream using a customer-managed
+	// Amazon Web Services KMS key.
 	EncryptionType types.EncryptionType
 
 	// Metadata pertaining to the operation's result.

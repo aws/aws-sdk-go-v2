@@ -134,6 +134,53 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    partitionRegexp.Aws,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "ap-northeast-1",
+			}: endpoints.Endpoint{
+				Hostname: "evidently.ap-northeast-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region: "ap-southeast-1",
+			}: endpoints.Endpoint{
+				Hostname: "evidently.ap-southeast-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region: "ap-southeast-2",
+			}: endpoints.Endpoint{
+				Hostname: "evidently.ap-southeast-2.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region: "eu-central-1",
+			}: endpoints.Endpoint{
+				Hostname: "evidently.eu-central-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region: "eu-north-1",
+			}: endpoints.Endpoint{
+				Hostname: "evidently.eu-north-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region: "eu-west-1",
+			}: endpoints.Endpoint{
+				Hostname: "evidently.eu-west-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region: "us-east-1",
+			}: endpoints.Endpoint{
+				Hostname: "evidently.us-east-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region: "us-east-2",
+			}: endpoints.Endpoint{
+				Hostname: "evidently.us-east-2.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region: "us-west-2",
+			}: endpoints.Endpoint{
+				Hostname: "evidently.us-west-2.amazonaws.com",
+			},
+		},
 	},
 	{
 		ID: "aws-cn",

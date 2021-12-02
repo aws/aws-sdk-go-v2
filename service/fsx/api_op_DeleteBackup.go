@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Amazon FSx backup, deleting its contents. After deletion, the backup
-// no longer exists, and its data is gone. The DeleteBackup call returns instantly.
-// The backup will not show up in later DescribeBackups calls. The data in a
-// deleted backup is also deleted and can't be recovered by any means.
+// Deletes an Amazon FSx backup. After deletion, the backup no longer exists, and
+// its data is gone. The DeleteBackup call returns instantly. The backup won't show
+// up in later DescribeBackups calls. The data in a deleted backup is also deleted
+// and can't be recovered by any means.
 func (c *Client) DeleteBackup(ctx context.Context, params *DeleteBackupInput, optFns ...func(*Options)) (*DeleteBackupOutput, error) {
 	if params == nil {
 		params = &DeleteBackupInput{}
@@ -31,28 +31,30 @@ func (c *Client) DeleteBackup(ctx context.Context, params *DeleteBackupInput, op
 	return out, nil
 }
 
-// The request object for DeleteBackup operation.
+// The request object for the DeleteBackup operation.
 type DeleteBackupInput struct {
 
-	// The ID of the backup you want to delete.
+	// The ID of the backup that you want to delete.
 	//
 	// This member is required.
 	BackupId *string
 
 	// A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent
-	// deletion. This is automatically filled on your behalf when using the CLI or SDK.
+	// deletion. This parameter is automatically filled on your behalf when using the
+	// CLI or SDK.
 	ClientRequestToken *string
 
 	noSmithyDocumentSerde
 }
 
-// The response object for DeleteBackup operation.
+// The response object for the DeleteBackup operation.
 type DeleteBackupOutput struct {
 
-	// The ID of the backup deleted.
+	// The ID of the backup that was deleted.
 	BackupId *string
 
-	// The lifecycle of the backup. Should be DELETED.
+	// The lifecycle status of the backup. If the DeleteBackup operation is successful,
+	// the status is DELETED.
 	Lifecycle types.BackupLifecycle
 
 	// Metadata pertaining to the operation's result.

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes a tag from the resource. Only database, table, or tableWithColumns
+// Removes an LF-tag from the resource. Only database, table, or tableWithColumns
 // resource are allowed. To tag columns, use the column inclusion list in
 // tableWithColumns to specify column input.
 func (c *Client) RemoveLFTagsFromResource(ctx context.Context, params *RemoveLFTagsFromResourceInput, optFns ...func(*Options)) (*RemoveLFTagsFromResourceOutput, error) {
@@ -31,20 +31,20 @@ func (c *Client) RemoveLFTagsFromResource(ctx context.Context, params *RemoveLFT
 
 type RemoveLFTagsFromResourceInput struct {
 
-	// The tags to be removed from the resource.
+	// The LF-tags to be removed from the resource.
 	//
 	// This member is required.
 	LFTags []types.LFTagPair
 
-	// The resource where you want to remove a tag.
+	// The database, table, or column resource where you want to remove an LF-tag.
 	//
 	// This member is required.
 	Resource *types.Resource
 
 	// The identifier for the Data Catalog. By default, the account ID. The Data
 	// Catalog is the persistent metadata store. It contains database definitions,
-	// table definitions, and other control information to manage your AWS Lake
-	// Formation environment.
+	// table definitions, and other control information to manage your Lake Formation
+	// environment.
 	CatalogId *string
 
 	noSmithyDocumentSerde
@@ -62,11 +62,11 @@ type RemoveLFTagsFromResourceOutput struct {
 }
 
 func (c *Client) addOperationRemoveLFTagsFromResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRemoveLFTagsFromResource{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveLFTagsFromResource{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRemoveLFTagsFromResource{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRemoveLFTagsFromResource{}, middleware.After)
 	if err != nil {
 		return err
 	}

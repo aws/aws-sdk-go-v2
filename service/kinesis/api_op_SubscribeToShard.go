@@ -29,9 +29,9 @@ import (
 // 4000 shards in one second. If you call SubscribeToShard again with the same
 // ConsumerARN and ShardId within 5 seconds of a successful call, you'll get a
 // ResourceInUseException. If you call SubscribeToShard 5 seconds or more after a
-// successful call, the first connection will expire and the second call will take
-// over the subscription. For an example of how to use this operations, see
-// Enhanced Fan-Out Using the Kinesis Data Streams API.
+// successful call, the second call takes over the subscription and the previous
+// connection expires or fails with a ResourceInUseException. For an example of how
+// to use this operations, see Enhanced Fan-Out Using the Kinesis Data Streams API.
 func (c *Client) SubscribeToShard(ctx context.Context, params *SubscribeToShardInput, optFns ...func(*Options)) (*SubscribeToShardOutput, error) {
 	if params == nil {
 		params = &SubscribeToShardInput{}
@@ -61,7 +61,7 @@ type SubscribeToShardInput struct {
 	// This member is required.
 	ShardId *string
 
-	//
+	// The starting position in the data stream from which to start streaming.
 	//
 	// This member is required.
 	StartingPosition *types.StartingPosition

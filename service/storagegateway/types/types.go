@@ -406,6 +406,14 @@ type GatewayInfo struct {
 	// The type of the gateway.
 	GatewayType *string
 
+	// The type of hardware or software platform on which the gateway is running.
+	HostEnvironment HostEnvironment
+
+	// A unique identifier for the specific instance of the host platform running the
+	// gateway. This value is only available for certain host environments, and its
+	// format depends on the host environment type.
+	HostEnvironmentId *string
+
 	noSmithyDocumentSerde
 }
 

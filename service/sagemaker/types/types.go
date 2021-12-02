@@ -53,6 +53,43 @@ type ActionSummary struct {
 	noSmithyDocumentSerde
 }
 
+// A structure of additional Inference Specification. Additional Inference
+// Specification specifies details about inference jobs that can be run with models
+// based on this model package
+type AdditionalInferenceSpecificationDefinition struct {
+
+	// The Amazon ECR registry path of the Docker image that contains the inference
+	// code.
+	//
+	// This member is required.
+	Containers []ModelPackageContainerDefinition
+
+	// A unique name to identify the additional inference specification. The name must
+	// be unique within the list of your additional inference specifications for a
+	// particular model package.
+	//
+	// This member is required.
+	Name *string
+
+	// A description of the additional Inference specification
+	Description *string
+
+	// The supported MIME types for the input data.
+	SupportedContentTypes []string
+
+	// A list of the instance types that are used to generate inferences in real-time.
+	SupportedRealtimeInferenceInstanceTypes []ProductionVariantInstanceType
+
+	// The supported MIME types for the output data.
+	SupportedResponseMIMETypes []string
+
+	// A list of the instance types on which a transformation job can be run or on
+	// which an endpoint can be deployed.
+	SupportedTransformInstanceTypes []TransformInstanceType
+
+	noSmithyDocumentSerde
+}
+
 // Edge Manager agent version.
 type AgentVersion struct {
 
@@ -1314,7 +1351,7 @@ type AssociationSummary struct {
 	AssociationType AssociationEdgeType
 
 	// Information about the user who created or modified an experiment, trial, trial
-	// component, or project.
+	// component, lineage group, or project.
 	CreatedBy *UserContext
 
 	// When the association was created.
@@ -1868,6 +1905,12 @@ type BatchDescribeModelPackageSummary struct {
 // Contains bias metrics for a model.
 type Bias struct {
 
+	//
+	PostTrainingReport *MetricsSource
+
+	//
+	PreTrainingReport *MetricsSource
+
 	// The bias report for a model
 	Report *MetricsSource
 
@@ -1991,6 +2034,22 @@ type CaptureOption struct {
 	//
 	// This member is required.
 	CaptureMode CaptureMode
+
+	noSmithyDocumentSerde
+}
+
+// Environment parameters you want to benchmark your load test against.
+type CategoricalParameter struct {
+
+	// The Name of the environment variable.
+	//
+	// This member is required.
+	Name *string
+
+	// The list of values you can pass.
+	//
+	// This member is required.
+	Value []string
 
 	noSmithyDocumentSerde
 }
@@ -2127,6 +2186,46 @@ type CheckpointConfig struct {
 	// (Optional) The local directory where checkpoints are written. The default
 	// directory is /opt/ml/checkpoints/.
 	LocalPath *string
+
+	noSmithyDocumentSerde
+}
+
+// The container for the metadata for the ClarifyCheck step. For more information,
+// see the topic on ClarifyCheck step
+// (https://docs.aws.amazon.com/sagemaker/latest/dg/build-and-manage-steps.html#step-type-clarify-check)
+// in the Amazon SageMaker Developer Guide.
+type ClarifyCheckStepMetadata struct {
+
+	// The Amazon S3 URI of baseline constraints file to be used for the drift check.
+	BaselineUsedForDriftCheckConstraints *string
+
+	// The Amazon S3 URI of the newly calculated baseline constraints file.
+	CalculatedBaselineConstraints *string
+
+	// The Amazon Resource Name (ARN) of the check processing job that was run by this
+	// step's execution.
+	CheckJobArn *string
+
+	// The type of the Clarify Check step
+	CheckType *string
+
+	// The model package group name.
+	ModelPackageGroupName *string
+
+	// This flag indicates if a newly calculated baseline can be accessed through step
+	// properties BaselineUsedForDriftCheckConstraints and
+	// BaselineUsedForDriftCheckStatistics. If it is set to False, the previous
+	// baseline of the configured check type must also be available. These can be
+	// accessed through the BaselineUsedForDriftCheckConstraints property.
+	RegisterNewBaseline bool
+
+	// This flag indicates if the drift check against the previous baseline will be
+	// skipped or not. If it is set to False, the previous baseline of the configured
+	// check type must be available.
+	SkipCheck bool
+
+	// The Amazon S3 URI of the violation report if violations are detected.
+	ViolationReport *string
 
 	noSmithyDocumentSerde
 }
@@ -2322,6 +2421,9 @@ type ContainerDefinition struct {
 	// Private Docker Registry for Real-Time Inference Containers
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-containers-inference-private.html)
 	ImageConfig *ImageConfig
+
+	// The inference specification name in the model package version.
+	InferenceSpecificationName *string
 
 	// Whether the container hosts a single model or multiple models.
 	Mode ContainerMode
@@ -2997,6 +3099,102 @@ type DomainSettingsForUpdate struct {
 	noSmithyDocumentSerde
 }
 
+// Represents the drift check baselines that can be used when the model monitor is
+// set using the model package.
+type DriftCheckBaselines struct {
+
+	// Represents the drift check bias baselines that can be used when the model
+	// monitor is set using the model package.
+	Bias *DriftCheckBias
+
+	// Represents the drift check explainability baselines that can be used when the
+	// model monitor is set using the model package.
+	Explainability *DriftCheckExplainability
+
+	// Represents the drift check model data quality baselines that can be used when
+	// the model monitor is set using the model package.
+	ModelDataQuality *DriftCheckModelDataQuality
+
+	// Represents the drift check model quality baselines that can be used when the
+	// model monitor is set using the model package.
+	ModelQuality *DriftCheckModelQuality
+
+	noSmithyDocumentSerde
+}
+
+// Represents the drift check bias baselines that can be used when the model
+// monitor is set using the model package.
+type DriftCheckBias struct {
+
+	// The bias config file for a model.
+	ConfigFile *FileSource
+
+	//
+	PostTrainingConstraints *MetricsSource
+
+	//
+	PreTrainingConstraints *MetricsSource
+
+	noSmithyDocumentSerde
+}
+
+// Represents the drift check explainability baselines that can be used when the
+// model monitor is set using the model package.
+type DriftCheckExplainability struct {
+
+	// The explainability config file for the model.
+	ConfigFile *FileSource
+
+	//
+	Constraints *MetricsSource
+
+	noSmithyDocumentSerde
+}
+
+// Represents the drift check data quality baselines that can be used when the
+// model monitor is set using the model package.
+type DriftCheckModelDataQuality struct {
+
+	//
+	Constraints *MetricsSource
+
+	//
+	Statistics *MetricsSource
+
+	noSmithyDocumentSerde
+}
+
+// Represents the drift check model quality baselines that can be used when the
+// model monitor is set using the model package.
+type DriftCheckModelQuality struct {
+
+	//
+	Constraints *MetricsSource
+
+	//
+	Statistics *MetricsSource
+
+	noSmithyDocumentSerde
+}
+
+// A directed edge connecting two lineage entities.
+type Edge struct {
+
+	// The type of the Association(Edge) between the source and destination. For
+	// example ContributedTo, Produced, or DerivedFrom.
+	AssociationType AssociationEdgeType
+
+	// The Amazon Resource Name (ARN) of the destination lineage entity of the directed
+	// edge.
+	DestinationArn *string
+
+	// The Amazon Resource Name (ARN) of the source lineage entity of the directed
+	// edge.
+	SourceArn *string
+
+	noSmithyDocumentSerde
+}
+
 // The model on the edge device.
 type EdgeModel struct {
 
@@ -3305,6 +3503,51 @@ type EndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+// The endpoint configuration for the load test.
+type EndpointInputConfiguration struct {
+
+	// The instance types to use for the load test.
+	//
+	// This member is required.
+	InstanceType ProductionVariantInstanceType
+
+	// The parameter you want to benchmark against.
+	EnvironmentParameterRanges *EnvironmentParameterRanges
+
+	// The inference specification name in the model package version.
+	InferenceSpecificationName *string
+
+	noSmithyDocumentSerde
+}
+
+// The endpoint configuration made by Inference Recommender during a recommendation
+// job.
+type EndpointOutputConfiguration struct {
+
+	// The name of the endpoint made during a recommendation job.
+	//
+	// This member is required.
+	EndpointName *string
+
+	// The number of instances recommended to launch initially.
+	//
+	// This member is required.
+	InitialInstanceCount int32
+
+	// The instance type recommended by Amazon SageMaker Inference Recommender.
+	//
+	// This member is required.
+	InstanceType ProductionVariantInstanceType
+
+	// The name of the production variant (deployed model) made during a recommendation
+	// job.
+	//
+	// This member is required.
+	VariantName *string
+
+	noSmithyDocumentSerde
+}
+
 // Provides summary information for an endpoint.
 type EndpointSummary struct {
 
@@ -3372,6 +3615,37 @@ type EndpointSummary struct {
 	noSmithyDocumentSerde
 }
 
+// A list of environment parameters suggested by the Amazon SageMaker Inference
+// Recommender.
+type EnvironmentParameter struct {
+
+	// The environment key suggested by the Amazon SageMaker Inference Recommender.
+	//
+	// This member is required.
+	Key *string
+
+	// The value suggested by the Amazon SageMaker Inference Recommender.
+	//
+	// This member is required.
+	Value *string
+
+	// The value type suggested by the Amazon SageMaker Inference Recommender.
+	//
+	// This member is required.
+	ValueType *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the range of environment parameters
+type EnvironmentParameterRanges struct {
+
+	// Specified a list of parameters for each category.
+	CategoricalParameterRanges []CategoricalParameter
+
+	noSmithyDocumentSerde
+}
+
 // The properties of an experiment as returned by the Search API.
 type Experiment struct {
 
@@ -3395,7 +3669,7 @@ type Experiment struct {
 	ExperimentName *string
 
 	// Information about the user who created or modified an experiment, trial, trial
-	// component, or project.
+	// component, lineage group, or project.
 	LastModifiedBy *UserContext
 
 	// When the experiment was last modified.
@@ -3592,6 +3866,23 @@ type FeatureGroupSummary struct {
 	// Notifies you if replicating data into the OfflineStore has failed. Returns
 	// either: Active or Blocked.
 	OfflineStoreStatus *OfflineStoreStatus
+
+	noSmithyDocumentSerde
+}
+
+// Contains details regarding the file source.
+type FileSource struct {
+
+	// The Amazon S3 URI for the file source.
+	//
+	// This member is required.
+	S3Uri *string
+
+	// The digest of the file source.
+	ContentDigest *string
+
+	// The type of content stored in the file source.
+	ContentType *string
 
 	noSmithyDocumentSerde
 }
@@ -5127,8 +5418,7 @@ type HumanTaskConfig struct {
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud.html) and video
 	// frame (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-video.html) labeling
 	// jobs, the maximum is 30 days (2952,000 seconds) for non-AL mode. For most users,
-	// the maximum is also 30 days. If you want to change these limits, contact Amazon
-	// Web Services Support.
+	// the maximum is also 30 days.
 	//
 	// This member is required.
 	TaskTimeLimitInSeconds *int32
@@ -5168,7 +5458,7 @@ type HumanTaskConfig struct {
 	//
 	// * If you choose a private or vendor workforce, the default value is
 	// 30 days (2592,000 seconds) for non-AL mode. For most users, the maximum is also
-	// 30 days. If you want to change this limit, contact Amazon Web Services Support.
+	// 30 days.
 	TaskAvailabilityLifetimeInSeconds *int32
 
 	// Keywords used to describe the task so that workers on Amazon Mechanical Turk can
@@ -5742,6 +6032,80 @@ type InferenceExecutionConfig struct {
 	//
 	// This member is required.
 	Mode InferenceExecutionMode
+
+	noSmithyDocumentSerde
+}
+
+// A list of recommendations made by Amazon SageMaker Inference Recommender.
+type InferenceRecommendation struct {
+
+	// Defines the endpoint configuration parameters.
+	//
+	// This member is required.
+	EndpointConfiguration *EndpointOutputConfiguration
+
+	// The metrics used to decide what recommendation to make.
+	//
+	// This member is required.
+	Metrics *RecommendationMetrics
+
+	// Defines the model configuration.
+	//
+	// This member is required.
+	ModelConfiguration *ModelConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains a list of recommendation jobs.
+type InferenceRecommendationsJob struct {
+
+	// A timestamp that shows when the job was created.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the recommendation job.
+	//
+	// This member is required.
+	JobArn *string
+
+	// The job description.
+	//
+	// This member is required.
+	JobDescription *string
+
+	// The name of the job.
+	//
+	// This member is required.
+	JobName *string
+
+	// The recommendation job type.
+	//
+	// This member is required.
+	JobType RecommendationJobType
+
+	// A timestamp that shows when the job was last modified.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker to
+	// perform tasks on your behalf.
+	//
+	// This member is required.
+	RoleArn *string
+
+	// The status of the job.
+	//
+	// This member is required.
+	Status RecommendationJobStatus
+
+	// A timestamp that shows when the job completed.
+	CompletionTime *time.Time
+
+	// If the job fails, provides information why the job failed.
+	FailureReason *string
 
 	noSmithyDocumentSerde
 }
@@ -6477,6 +6841,28 @@ type LambdaStepMetadata struct {
 	noSmithyDocumentSerde
 }
 
+// Lists a summary of the properties of a lineage group. A lineage group provides a
+// group of shareable lineage entity resources.
+type LineageGroupSummary struct {
+
+	// The creation time of the lineage group summary.
+	CreationTime *time.Time
+
+	// The display name of the lineage group summary.
+	DisplayName *string
+
+	// The last modified time of the lineage group summary.
+	LastModifiedTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the lineage group resource.
+	LineageGroupArn *string
+
+	// The name or Amazon Resource Name (ARN) of the lineage group.
+	LineageGroupName *string
+
+	noSmithyDocumentSerde
+}
+
 // Defines an Amazon Cognito or your own OIDC IdP user group that is part of a work
 // team.
 type MemberDefinition struct {
@@ -6661,6 +7047,19 @@ type ModelClientConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Defines the model configuration. Includes the specification name and environment
+// parameters.
+type ModelConfiguration struct {
+
+	// Defines the environment parameters that includes key, value types, and values.
+	EnvironmentParameters []EnvironmentParameter
+
+	// The inference specification name in the model package version.
+	InferenceSpecificationName *string
+
+	noSmithyDocumentSerde
+}
+
 // Data quality constraints and statistics for a model.
 type ModelDataQuality struct {
 
@@ -6756,6 +7155,88 @@ type ModelExplainabilityJobInput struct {
 	noSmithyDocumentSerde
 }
 
+// Input object for the model.
+type ModelInput struct {
+
+	// The input configuration object for the model.
+	//
+	// This member is required.
+	DataInputConfig *string
+
+	noSmithyDocumentSerde
+}
+
+// The model latency threshold.
+type ModelLatencyThreshold struct {
+
+	// The model latency percentile threshold.
+	Percentile *string
+
+	// The model latency percentile value in milliseconds.
+	ValueInMilliseconds int32
+
+	noSmithyDocumentSerde
+}
+
+// Part of the search expression. You can specify the name and value (domain, task,
+// framework, framework version, task, and model).
+type ModelMetadataFilter struct {
+
+	// The name of the of the model to filter by.
+	//
+	// This member is required.
+	Name ModelMetadataFilterType
+
+	// The value to filter the model metadata.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// One or more filters that searches for the specified resource or resources in a
+// search. All resource objects that satisfy the expression's condition are
+// included in the search results
+type ModelMetadataSearchExpression struct {
+
+	// A list of filter objects.
+	Filters []ModelMetadataFilter
+
+	noSmithyDocumentSerde
+}
+
+// A summary of the model metadata.
+type ModelMetadataSummary struct {
+
+	// The machine learning domain of the model.
+	//
+	// This member is required.
+	Domain *string
+
+	// The machine learning framework of the model.
+	//
+	// This member is required.
+	Framework *string
+
+	// The framework version of the model.
+	//
+	// This member is required.
+	FrameworkVersion *string
+
+	// The name of the model.
+	//
+	// This member is required.
+	Model *string
+
+	// The machine learning task of the model.
+	//
+	// This member is required.
+	Task *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains metrics captured from a model.
 type ModelMetrics struct {
 
@@ -6777,6 +7258,9 @@ type ModelMetrics struct {
 // A versioned model that can be deployed for SageMaker inference.
 type ModelPackage struct {
 
+	// An array of additional Inference Specification objects.
+	AdditionalInferenceSpecifications []AdditionalInferenceSpecificationDefinition
+
 	// A description provided when the model approval is set.
 	ApprovalDescription *string
 
@@ -6788,7 +7272,7 @@ type ModelPackage struct {
 	CertifyForMarketplace bool
 
 	// Information about the user who created or modified an experiment, trial, trial
-	// component, or project.
+	// component, lineage group, or project.
 	CreatedBy *UserContext
 
 	// The time that the model package was created.
@@ -6797,11 +7281,20 @@ type ModelPackage struct {
 	// The metadata properties for the model package.
 	CustomerMetadataProperties map[string]string
 
+	// The machine learning domain of your model package and its components. Common
+	// machine learning domains include computer vision and natural language
+	// processing.
+	Domain *string
+
+	// Represents the drift check baselines that can be used when the model monitor is
+	// set using the model package.
+	DriftCheckBaselines *DriftCheckBaselines
+
 	// Defines how to perform inference generation after a training job is run.
 	InferenceSpecification *InferenceSpecification
 
 	// Information about the user who created or modified an experiment, trial, trial
-	// component, or project.
+	// component, lineage group, or project.
 	LastModifiedBy *UserContext
 
 	// The last time the model package was modified.
@@ -6859,6 +7352,10 @@ type ModelPackage struct {
 	// The version number of a versioned model.
 	ModelPackageVersion *int32
 
+	// The Amazon Simple Storage Service path where the sample payload are stored. This
+	// path must point to a single gzip compressed tar archive (.tar.gz suffix).
+	SamplePayloadUrl *string
+
 	// A list of algorithms that were used to create a model package.
 	SourceAlgorithmSpecification *SourceAlgorithmSpecification
 
@@ -6867,6 +7364,10 @@ type ModelPackage struct {
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
 	// Web Services General Reference Guide.
 	Tags []Tag
+
+	// The machine learning task your model package accomplishes. Common machine
+	// learning tasks include object detection and image classification.
+	Task *string
 
 	// Specifies batch transform jobs that Amazon SageMaker runs to validate your model
 	// package.
@@ -6897,6 +7398,12 @@ type ModelPackageContainerDefinition struct {
 	// up to 16 entries in the map.
 	Environment map[string]string
 
+	// The machine learning framework of the model package container image.
+	Framework *string
+
+	// The framework version of the Model Package Container Image.
+	FrameworkVersion *string
+
 	// An MD5 hash of the training algorithm that identifies the Docker image used for
 	// training.
 	ImageDigest *string
@@ -6906,6 +7413,14 @@ type ModelPackageContainerDefinition struct {
 	// (.tar.gz suffix). The model artifacts must be in an S3 bucket that is in the
 	// same region as the model package.
 	ModelDataUrl *string
+
+	// A structure with Model Input details.
+	ModelInput *ModelInput
+
+	// The name of a pre-trained machine learning benchmarked by Amazon SageMaker
+	// Inference Recommender model that matches your model. You can find a list of
+	// benchmarked models by calling ListModelMetadata.
+	NearestModelName *string
 
 	// The Amazon Web Services Marketplace product ID of the model package.
 	ProductId *string
@@ -6917,7 +7432,7 @@ type ModelPackageContainerDefinition struct {
 type ModelPackageGroup struct {
 
 	// Information about the user who created or modified an experiment, trial, trial
-	// component, or project.
+	// component, lineage group, or project.
 	CreatedBy *UserContext
 
 	// The time that the model group was created.
@@ -8428,6 +8943,11 @@ type PendingProductionVariantSummary struct {
 	// The number of instances associated with the variant.
 	CurrentInstanceCount *int32
 
+	// The serverless configuration for the endpoint. Serverless Inference is in
+	// preview release for Amazon SageMaker and is subject to change. We do not
+	// recommend using this feature in production environments.
+	CurrentServerlessConfig *ProductionVariantServerlessConfig
+
 	// The weight associated with the variant.
 	CurrentWeight *float32
 
@@ -8439,6 +8959,12 @@ type PendingProductionVariantSummary struct {
 	// endpoint configuration for the endpoint. The value is taken from the request to
 	// the CreateEndpointConfig operation.
 	DesiredInstanceCount *int32
+
+	// The serverless configuration requested for this deployment, as specified in the
+	// endpoint configuration for the endpoint. Serverless Inference is in preview
+	// release for Amazon SageMaker and is subject to change. We do not recommend using
+	// this feature in production environments.
+	DesiredServerlessConfig *ProductionVariantServerlessConfig
 
 	// The requested weight for the variant in this deployment, as specified in the
 	// endpoint configuration for the endpoint. The value is taken from the request to
@@ -8455,18 +8981,33 @@ type PendingProductionVariantSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Defines the traffic pattern.
+type Phase struct {
+
+	// Specifies how long traffic phase should be.
+	DurationInSeconds *int32
+
+	// Specifies how many concurrent users to start with.
+	InitialNumberOfUsers *int32
+
+	// Specified how many new users to spawn in a minute.
+	SpawnRate *int32
+
+	noSmithyDocumentSerde
+}
+
 // A SageMaker Model Building Pipeline instance.
 type Pipeline struct {
 
 	// Information about the user who created or modified an experiment, trial, trial
-	// component, or project.
+	// component, lineage group, or project.
 	CreatedBy *UserContext
 
 	// The creation time of the pipeline.
 	CreationTime *time.Time
 
 	// Information about the user who created or modified an experiment, trial, trial
-	// component, or project.
+	// component, lineage group, or project.
 	LastModifiedBy *UserContext
 
 	// The time that the pipeline was last modified.
@@ -8503,7 +9044,7 @@ type Pipeline struct {
 type PipelineExecution struct {
 
 	// Information about the user who created or modified an experiment, trial, trial
-	// component, or project.
+	// component, lineage group, or project.
 	CreatedBy *UserContext
 
 	// The creation time of the pipeline execution.
@@ -8513,7 +9054,7 @@ type PipelineExecution struct {
 	FailureReason *string
 
 	// Information about the user who created or modified an experiment, trial, trial
-	// component, or project.
+	// component, lineage group, or project.
 	LastModifiedBy *UserContext
 
 	// The time that the pipeline execution was last modified.
@@ -8578,6 +9119,33 @@ type PipelineExecutionStepMetadata struct {
 	// generated token, and a list of output parameters.
 	Callback *CallbackStepMetadata
 
+	// Container for the metadata for a Clarify check step. The configurations and
+	// outcomes of the check step execution. This includes:
+	//
+	// * The type of the check
+	// conducted,
+	//
+	// * The Amazon S3 URIs of baseline constraints and statistics files to
+	// be used for the drift check.
+	//
+	// * The Amazon S3 URIs of newly calculated baseline
+	// constraints and statistics.
+	//
+	// * The model package group name provided.
+	//
+	// * The
+	// Amazon S3 URI of the violation report if violations detected.
+	//
+	// * The Amazon
+	// Resource Name (ARN) of check processing job initiated by the step execution.
+	//
+	// *
+	// The boolean flags indicating if the drift check is skipped.
+	//
+	// * If step property
+	// BaselineUsedForDriftCheck is set the same as CalculatedBaseline.
+	ClarifyCheck *ClarifyCheckStepMetadata
+
 	// The outcome of the condition evaluation that was run by this step execution.
 	Condition *ConditionStepMetadata
 
@@ -8592,6 +9160,33 @@ type PipelineExecutionStepMetadata struct {
 	// The Amazon Resource Name (ARN) of the processing job that was run by this step
 	// execution.
 	ProcessingJob *ProcessingJobStepMetadata
+
+	// The configurations and outcomes of the check step execution. This includes:
+	//
+	// *
+	// The type of the check conducted,
+	//
+	// * The Amazon S3 URIs of baseline constraints
+	// and statistics files to be used for the drift check.
+	//
+	// * The Amazon S3 URIs of
+	// newly calculated baseline constraints and statistics.
+	//
+	// * The model package group
+	// name provided.
+	//
+	// * The Amazon S3 URI of the violation report if violations
+	// detected.
+	//
+	// * The Amazon Resource Name (ARN) of check processing job initiated by
+	// the step execution.
+	//
+	// * The boolean flags indicating if the drift check is
+	// skipped.
+	//
+	// * If step property BaselineUsedForDriftCheck is set the same as
+	// CalculatedBaseline.
+	QualityCheck *QualityCheckStepMetadata
 
 	// The Amazon Resource Name (ARN) of the model package the model was registered to
 	// by this step execution.
@@ -9046,16 +9641,6 @@ type ProcessingStoppingCondition struct {
 // distribute traffic among the models by specifying variant weights.
 type ProductionVariant struct {
 
-	// Number of instances to launch initially.
-	//
-	// This member is required.
-	InitialInstanceCount *int32
-
-	// The ML compute instance type.
-	//
-	// This member is required.
-	InstanceType ProductionVariantInstanceType
-
 	// The name of the model that you want to host. This is the name that you specified
 	// when creating the model.
 	//
@@ -9077,11 +9662,23 @@ type ProductionVariant struct {
 	// process crashes.
 	CoreDumpConfig *ProductionVariantCoreDumpConfig
 
+	// Number of instances to launch initially.
+	InitialInstanceCount *int32
+
 	// Determines initial traffic distribution among all of the models that you specify
 	// in the endpoint configuration. The traffic to a production variant is determined
 	// by the ratio of the VariantWeight to the sum of all VariantWeight values across
 	// all ProductionVariants. If unspecified, it defaults to 1.0.
 	InitialVariantWeight *float32
+
+	// The ML compute instance type.
+	InstanceType ProductionVariantInstanceType
+
+	// The serverless configuration for an endpoint. Specifies a serverless endpoint
+	// configuration instead of an instance-based endpoint configuration. Serverless
+	// Inference is in preview release for Amazon SageMaker and is subject to change.
+	// We do not recommend using this feature in production environments.
+	ServerlessConfig *ProductionVariantServerlessConfig
 
 	noSmithyDocumentSerde
 }
@@ -9133,6 +9730,26 @@ type ProductionVariantCoreDumpConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Serverless Inference is in preview release for Amazon SageMaker and is subject
+// to change. We do not recommend using this feature in production environments.
+// Specifies the serverless configuration for an endpoint variant.
+type ProductionVariantServerlessConfig struct {
+
+	// The maximum number of concurrent invocations your serverless endpoint can
+	// process.
+	//
+	// This member is required.
+	MaxConcurrency *int32
+
+	// The memory size of your serverless endpoint. Valid values are in 1 GB
+	// increments: 1024 MB, 2048 MB, 3072 MB, 4096 MB, 5120 MB, or 6144 MB.
+	//
+	// This member is required.
+	MemorySizeInMB *int32
+
+	noSmithyDocumentSerde
+}
+
 // Describes the status of the production variant.
 type ProductionVariantStatus struct {
 
@@ -9180,6 +9797,11 @@ type ProductionVariantSummary struct {
 	// The number of instances associated with the variant.
 	CurrentInstanceCount *int32
 
+	// The serverless configuration for the endpoint. Serverless Inference is in
+	// preview release for Amazon SageMaker and is subject to change. We do not
+	// recommend using this feature in production environments.
+	CurrentServerlessConfig *ProductionVariantServerlessConfig
+
 	// The weight associated with the variant.
 	CurrentWeight *float32
 
@@ -9190,6 +9812,11 @@ type ProductionVariantSummary struct {
 	// The number of instances requested in the UpdateEndpointWeightsAndCapacities
 	// request.
 	DesiredInstanceCount *int32
+
+	// The serverless configuration requested for the endpoint update. Serverless
+	// Inference is in preview release for Amazon SageMaker and is subject to change.
+	// We do not recommend using this feature in production environments.
+	DesiredServerlessConfig *ProductionVariantServerlessConfig
 
 	// The requested weight, as specified in the UpdateEndpointWeightsAndCapacities
 	// request.
@@ -9321,7 +9948,7 @@ type Project struct {
 	CreationTime *time.Time
 
 	// Information about the user who created or modified an experiment, trial, trial
-	// component, or project.
+	// component, lineage group, or project.
 	LastModifiedBy *UserContext
 
 	// A timestamp container for when the project was last modified.
@@ -9654,6 +10281,165 @@ type PublicWorkforceTaskPrice struct {
 	// Defines the amount of money paid to an Amazon Mechanical Turk worker in United
 	// States dollars.
 	AmountInUsd *USD
+
+	noSmithyDocumentSerde
+}
+
+// Container for the metadata for a Quality check step. For more information, see
+// the topic on QualityCheck step
+// (https://docs.aws.amazon.com/sagemaker/latest/dg/build-and-manage-steps.html#step-type-quality-check)
+// in the Amazon SageMaker Developer Guide.
+type QualityCheckStepMetadata struct {
+
+	// The Amazon S3 URI of the baseline constraints file used for the drift check.
+	BaselineUsedForDriftCheckConstraints *string
+
+	// The Amazon S3 URI of the baseline statistics file used for the drift check.
+	BaselineUsedForDriftCheckStatistics *string
+
+	// The Amazon S3 URI of the newly calculated baseline constraints file.
+	CalculatedBaselineConstraints *string
+
+	// The Amazon S3 URI of the newly calculated baseline statistics file.
+	CalculatedBaselineStatistics *string
+
+	// The Amazon Resource Name (ARN) of the Quality check processing job that was run
+	// by this step execution.
+	CheckJobArn *string
+
+	// The type of the Quality check step.
+	CheckType *string
+
+	// The model package group name.
+	ModelPackageGroupName *string
+
+	// This flag indicates if a newly calculated baseline can be accessed through step
+	// properties BaselineUsedForDriftCheckConstraints and
+	// BaselineUsedForDriftCheckStatistics. If it is set to False, the previous
+	// baseline of the configured check type must also be available. These can be
+	// accessed through the BaselineUsedForDriftCheckConstraints and
+	// BaselineUsedForDriftCheckStatistics properties.
+	RegisterNewBaseline bool
+
+	// This flag indicates if the drift check against the previous baseline will be
+	// skipped or not. If it is set to False, the previous baseline of the configured
+	// check type must be available.
+	SkipCheck bool
+
+	// The Amazon S3 URI of violation report if violations are detected.
+	ViolationReport *string
+
+	noSmithyDocumentSerde
+}
+
+// A set of filters to narrow the set of lineage entities connected to the
+// StartArn(s) returned by the QueryLineage API action.
+type QueryFilters struct {
+
+	// Filter the lineage entities connected to the StartArn(s) after the create date.
+	CreatedAfter *time.Time
+
+	// Filter the lineage entities connected to the StartArn(s) by created date.
+	CreatedBefore *time.Time
+
+	// Filter the lineage entities connected to the StartArn(s) by the type of the
+	// lineage entity.
+	LineageTypes []LineageType
+
+	// Filter the lineage entities connected to the StartArn(s) after the last modified
+	// date.
+	ModifiedAfter *time.Time
+
+	// Filter the lineage entities connected to the StartArn(s) before the last
+	// modified date.
+	ModifiedBefore *time.Time
+
+	// Filter the lineage entities connected to the StartArn(s) by a set if property
+	// key value pairs. If multiple pairs are provided, an entity will be included in
+	// the results if it matches any of the provided pairs.
+	Properties map[string]string
+
+	// Filter the lineage entities connected to the StartArn by type. For example:
+	// DataSet, Model, Endpoint, or ModelDeployment.
+	Types []string
+
+	noSmithyDocumentSerde
+}
+
+// The input configuration of the recommendation job.
+type RecommendationJobInputConfig struct {
+
+	// The Amazon Resource Name (ARN) of a versioned model package.
+	//
+	// This member is required.
+	ModelPackageVersionArn *string
+
+	// Specifies the endpoint configuration to use for a job.
+	EndpointConfigurations []EndpointInputConfiguration
+
+	// Specifies the maximum duration of the job, in seconds.>
+	JobDurationInSeconds *int32
+
+	// Defines the resource limit of the job.
+	ResourceLimit *RecommendationJobResourceLimit
+
+	// Specifies the traffic pattern of the job.
+	TrafficPattern *TrafficPattern
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the maximum number of jobs that can run in parallel and the maximum
+// number of jobs that can run.
+type RecommendationJobResourceLimit struct {
+
+	// Defines the maximum number of load tests.
+	MaxNumberOfTests *int32
+
+	// Defines the maximum number of parallel load tests.
+	MaxParallelOfTests *int32
+
+	noSmithyDocumentSerde
+}
+
+// Specifies conditions for stopping a job. When a job reaches a stopping condition
+// limit, SageMaker ends the job.
+type RecommendationJobStoppingConditions struct {
+
+	// The maximum number of requests per minute expected for the endpoint.
+	MaxInvocations int32
+
+	// The interval of time taken by a model to respond as viewed from SageMaker. The
+	// interval includes the local communication time taken to send the request and to
+	// fetch the response from the container of a model and the time taken to complete
+	// the inference in the container.
+	ModelLatencyThresholds []ModelLatencyThreshold
+
+	noSmithyDocumentSerde
+}
+
+// The metrics of recommendations.
+type RecommendationMetrics struct {
+
+	// Defines the cost per hour for the instance.
+	//
+	// This member is required.
+	CostPerHour float32
+
+	// Defines the cost per inference for the instance .
+	//
+	// This member is required.
+	CostPerInference float32
+
+	// The expected maximum number of requests per minute for the instance.
+	//
+	// This member is required.
+	MaxInvocations int32
+
+	// The expected model latency at maximum invocation per minute for the instance.
+	//
+	// This member is required.
+	ModelLatency int32
 
 	noSmithyDocumentSerde
 }
@@ -10655,6 +11441,18 @@ type TensorBoardOutputConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Defines the traffic pattern of the load test.
+type TrafficPattern struct {
+
+	// Defines the phases traffic specification.
+	Phases []Phase
+
+	// Defines the traffic patterns.
+	TrafficType TrafficType
+
+	noSmithyDocumentSerde
+}
+
 // Defines the traffic routing strategy during an endpoint deployment to shift
 // traffic from the old fleet to the new fleet.
 type TrafficRoutingConfig struct {
@@ -11537,7 +12335,7 @@ type Trial struct {
 	ExperimentName *string
 
 	// Information about the user who created or modified an experiment, trial, trial
-	// component, or project.
+	// component, lineage group, or project.
 	LastModifiedBy *UserContext
 
 	// Who last modified the trial.
@@ -11586,11 +12384,14 @@ type TrialComponent struct {
 	InputArtifacts map[string]TrialComponentArtifact
 
 	// Information about the user who created or modified an experiment, trial, trial
-	// component, or project.
+	// component, lineage group, or project.
 	LastModifiedBy *UserContext
 
 	// When the component was last modified.
 	LastModifiedTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the lineage group resource.
+	LineageGroupArn *string
 
 	// Metadata properties of the tracking entity, trial, or trial component.
 	MetadataProperties *MetadataProperties
@@ -11722,7 +12523,7 @@ func (*TrialComponentParameterValueMemberStringValue) isTrialComponentParameterV
 type TrialComponentSimpleSummary struct {
 
 	// Information about the user who created or modified an experiment, trial, trial
-	// component, or project.
+	// component, lineage group, or project.
 	CreatedBy *UserContext
 
 	// When the component was created.
@@ -11995,7 +12796,7 @@ type USD struct {
 }
 
 // Information about the user who created or modified an experiment, trial, trial
-// component, or project.
+// component, lineage group, or project.
 type UserContext struct {
 
 	// The domain associated with the user.
@@ -12096,6 +12897,22 @@ type VariantProperty struct {
 	//
 	// This member is required.
 	VariantPropertyType VariantPropertyType
+
+	noSmithyDocumentSerde
+}
+
+// A lineage entity connected to the starting entity(ies).
+type Vertex struct {
+
+	// The Amazon Resource Name (ARN) of the lineage entity resource.
+	Arn *string
+
+	// The type of resource of the lineage entity.
+	LineageType LineageType
+
+	// The type of the lineage entity resource. For example: DataSet, Model, Endpoint,
+	// etc...
+	Type *string
 
 	noSmithyDocumentSerde
 }

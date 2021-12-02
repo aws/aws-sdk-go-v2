@@ -16,6 +16,8 @@ import (
 // or yet to be processed, when actions were last updated, when actions were
 // received by Amazon Kendra, the latest action that should process and apply after
 // other actions, and useful error messages if an action could not be processed.
+// DescribePrincipalMapping is currently not supported in the Amazon Web Services
+// GovCloud (US-West) region.
 func (c *Client) DescribePrincipalMapping(ctx context.Context, params *DescribePrincipalMappingInput, optFns ...func(*Options)) (*DescribePrincipalMappingOutput, error) {
 	if params == nil {
 		params = &DescribePrincipalMappingInput{}

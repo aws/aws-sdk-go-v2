@@ -29,7 +29,7 @@ func (c *Client) DescribeAttack(ctx context.Context, params *DescribeAttackInput
 
 type DescribeAttackInput struct {
 
-	// The unique identifier (ID) for the attack that to be described.
+	// The unique identifier (ID) for the attack.
 	//
 	// This member is required.
 	AttackId *string

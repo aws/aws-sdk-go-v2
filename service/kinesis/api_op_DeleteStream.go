@@ -20,8 +20,8 @@ import (
 // PutRecord, PutRecords, and GetRecords, on a stream in the DELETING state until
 // the stream deletion is complete. When you delete a stream, any shards in that
 // stream are also deleted, and any tags are dissociated from the stream. You can
-// use the DescribeStream operation to check the state of the stream, which is
-// returned in StreamStatus. DeleteStream has a limit of five transactions per
+// use the DescribeStreamSummary operation to check the state of the stream, which
+// is returned in StreamStatus. DeleteStream has a limit of five transactions per
 // second per account.
 func (c *Client) DeleteStream(ctx context.Context, params *DeleteStreamInput, optFns ...func(*Options)) (*DeleteStreamOutput, error) {
 	if params == nil {

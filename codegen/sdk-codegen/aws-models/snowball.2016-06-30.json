@@ -31,6 +31,21 @@
     "shapes": {
         "com.amazonaws.snowball#AWSIESnowballJobManagementService": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Snowball",
+                    "arnNamespace": "snowball",
+                    "cloudFormationName": "Snowball",
+                    "cloudTrailEventSource": "snowball.amazonaws.com",
+                    "endpointPrefix": "snowball"
+                },
+                "aws.auth#sigv4": {
+                    "name": "snowball"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<p>The Amazon Web Services Snow Family provides a petabyte-scale data transport solution that uses\n      secure devices to transfer large amounts of data between your on-premises data centers and\n      Amazon Simple Storage Service (Amazon S3). The Snow Family commands described here provide access to the same\n      functionality that is available in the Amazon Web Services Snow Family Management Console, which enables you to create\n      and manage jobs for a Snow Family device. To transfer data locally with a Snow Family device,\n      you'll need to use the Snowball Edge client or the Amazon S3 API Interface for Snowball or OpsHub for Snow Family. For more information, see the <a href=\"https://docs.aws.amazon.com/AWSImportExport/latest/ug/api-reference.html\">User Guide</a>.</p>",
+                "smithy.api#title": "Amazon Import/Export Snowball"
+            },
             "version": "2016-06-30",
             "operations": [
                 {
@@ -108,22 +123,7 @@
                 {
                     "target": "com.amazonaws.snowball#UpdateLongTermPricing"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Snowball",
-                    "arnNamespace": "snowball",
-                    "cloudFormationName": "Snowball",
-                    "cloudTrailEventSource": "snowball.amazonaws.com",
-                    "endpointPrefix": "snowball"
-                },
-                "aws.auth#sigv4": {
-                    "name": "snowball"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>AWS Snow Family is a petabyte-scale data transport solution that uses secure devices to\n      transfer large amounts of data between your on-premises data centers and Amazon Simple Storage\n      Service (Amazon S3). The Snow commands described here provide access to the same\n      functionality that is available in the AWS Snow Family Management Console, which enables you to\n      create and manage jobs for a Snow device. To transfer data locally with a Snow device, you'll\n      need to use the Snowball Edge client or the Amazon S3 API Interface for Snowball or AWS OpsHub for Snow Family. For more\n      information, see the <a href=\"https://docs.aws.amazon.com/AWSImportExport/latest/ug/api-reference.html\">User Guide</a>.</p>",
-                "smithy.api#title": "Amazon Import/Export Snowball"
-            }
+            ]
         },
         "com.amazonaws.snowball#Address": {
             "type": "structure",
@@ -214,7 +214,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The address that you want the Snow device(s) associated with a specific job to\n      be shipped to. Addresses are validated at the time of creation. The address you provide must\n      be located within the serviceable area of your region. Although no individual elements of the\n        <code>Address</code> are required, if the address is invalid or unsupported, then an\n      exception is thrown.</p>"
+                "smithy.api#documentation": "<p>The address that you want the Snow device(s) associated with a specific job to be\n      shipped to. Addresses are validated at the time of creation. The address you provide must be\n      located within the serviceable area of your region. Although no individual elements of the\n        <code>Address</code> are required, if the address is invalid or unsupported, then an\n      exception is thrown.</p>"
             }
         },
         "com.amazonaws.snowball#AddressId": {
@@ -402,13 +402,13 @@
                 "KmsKeyARN": {
                     "target": "com.amazonaws.snowball#KmsKeyARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>KmsKeyARN</code> Amazon Resource Name (ARN) associated with this cluster.\n      This ARN was created using the <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html\">CreateKey</a> API action in AWS Key\n      Management Service (AWS KMS).</p>"
+                        "smithy.api#documentation": "<p>The <code>KmsKeyARN</code> Amazon Resource Name (ARN) associated with this cluster.\n      This ARN was created using the <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html\">CreateKey</a> API action in Key Management Service (KMS.</p>"
                     }
                 },
                 "RoleARN": {
                     "target": "com.amazonaws.snowball#RoleARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The role ARN associated with this cluster. This ARN was created using the <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html\">CreateRole</a>\n      API action in AWS Identity and Access Management (IAM).</p>"
+                        "smithy.api#documentation": "<p>The role ARN associated with this cluster. This ARN was created using the <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html\">CreateRole</a>\n      API action in Identity and Access Management (IAM).</p>"
                     }
                 },
                 "ClusterState": {
@@ -426,7 +426,7 @@
                 "SnowballType": {
                     "target": "com.amazonaws.snowball#SnowballType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of AWS Snow device to use for this cluster. \n      </p>\n         <note>\n            <p>For cluster jobs, AWS Snow Family currently supports only the <code>EDGE</code> device type.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The type of Snowcone device to use for this cluster.\n      </p>\n         <note>\n            <p>For cluster jobs, Amazon Web Services Snow Family currently supports only the\n          <code>EDGE</code> device type.</p>\n         </note>"
                     }
                 },
                 "CreationDate": {
@@ -450,7 +450,7 @@
                 "ShippingOption": {
                     "target": "com.amazonaws.snowball#ShippingOption",
                     "traits": {
-                        "smithy.api#documentation": "<p>The shipping speed for each node in this cluster. This speed doesn't dictate how soon\n      you'll get each device, rather it represents how quickly each device moves to\n      its destination while in transit. Regional shipping speeds are as follows:</p>\n\n         <ul>\n            <li>\n               <p>In Australia, you have access to express shipping. Typically, devices shipped\n          express are delivered in about a day.</p>\n            </li>\n            <li>\n               <p>In the European Union (EU), you have access to express shipping. Typically,\n          Snow devices shipped express are delivered in about a day. In addition, most countries\n          in the EU have access to standard shipping, which typically takes less than a week, one\n          way.</p>\n            </li>\n            <li>\n               <p>In India, Snow devices are delivered in one to seven days.</p>\n            </li>\n            <li>\n               <p>In the US, you have access to one-day shipping and two-day shipping.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The shipping speed for each node in this cluster. This speed doesn't dictate how soon\n      you'll get each device, rather it represents how quickly each device moves to its destination\n      while in transit. Regional shipping speeds are as follows:</p>\n\n         <ul>\n            <li>\n               <p>In Australia, you have access to express shipping. Typically, devices shipped\n          express are delivered in about a day.</p>\n            </li>\n            <li>\n               <p>In the European Union (EU), you have access to express shipping. Typically, Snow\n          devices shipped express are delivered in about a day. In addition, most countries in the\n          EU have access to standard shipping, which typically takes less than a week, one\n          way.</p>\n            </li>\n            <li>\n               <p>In India, Snow devices are delivered in one to seven days.</p>\n            </li>\n            <li>\n               <p>In the US, you have access to one-day shipping and two-day shipping.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Notification": {
@@ -468,13 +468,13 @@
                 "TaxDocuments": {
                     "target": "com.amazonaws.snowball#TaxDocuments",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tax documents required in your AWS Region.</p>"
+                        "smithy.api#documentation": "<p>The tax documents required in your Amazon Web Services Region.</p>"
                     }
                 },
                 "OnDeviceServiceConfiguration": {
                     "target": "com.amazonaws.snowball#OnDeviceServiceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents metadata and configuration settings for services on an AWS Snow Family device.</p>"
+                        "smithy.api#documentation": "<p>Represents metadata and configuration settings for services on an Amazon Web Services Snow Family\n      device.</p>"
                     }
                 }
             },
@@ -546,7 +546,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You get this exception when you call <code>CreateReturnShippingLabel</code> more than once when other requests are not completed.</p>",
+                "smithy.api#documentation": "<p>You get this exception when you call <code>CreateReturnShippingLabel</code> more than once\n      when other requests are not completed.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -588,7 +588,7 @@
                 "AddressId": {
                     "target": "com.amazonaws.snowball#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The automatically generated ID for a specific address. You'll use this ID when you\n      create a job to specify which address you want the Snow device for that job shipped to.</p>"
+                        "smithy.api#documentation": "<p>The automatically generated ID for a specific address. You'll use this ID when you\n      create a job to specify which address you want the Snow device for that job shipped\n      to.</p>"
                     }
                 }
             }
@@ -632,14 +632,14 @@
                 "Resources": {
                     "target": "com.amazonaws.snowball#JobResource",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resources associated with the cluster job. These resources include Amazon S3\n      buckets and optional AWS Lambda functions written in the Python language. </p>",
+                        "smithy.api#documentation": "<p>The resources associated with the cluster job. These resources include Amazon S3\n      buckets and optional Lambda functions written in the Python language.\n    </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "OnDeviceServiceConfiguration": {
                     "target": "com.amazonaws.snowball#OnDeviceServiceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the service or services on the Snow Family device that your\n      transferred data will be exported from or imported into. AWS Snow Family supports Amazon S3 and NFS (Network File System).</p>"
+                        "smithy.api#documentation": "<p>Specifies the service or services on the Snow Family device that your transferred data\n      will be exported from or imported into. Amazon Web Services Snow Family device clusters support Amazon S3 and NFS\n      (Network File System).</p>"
                     }
                 },
                 "Description": {
@@ -658,27 +658,27 @@
                 "KmsKeyARN": {
                     "target": "com.amazonaws.snowball#KmsKeyARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>KmsKeyARN</code> value that you want to associate with this cluster.\n        <code>KmsKeyARN</code> values are created by using the <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html\">CreateKey</a> API action in AWS Key\n      Management Service (AWS KMS). </p>"
+                        "smithy.api#documentation": "<p>The <code>KmsKeyARN</code> value that you want to associate with this cluster.\n        <code>KmsKeyARN</code> values are created by using the <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html\">CreateKey</a> API action in Key Management Service (KMS). </p>"
                     }
                 },
                 "RoleARN": {
                     "target": "com.amazonaws.snowball#RoleARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>RoleARN</code> that you want to associate with this cluster.\n        <code>RoleArn</code> values are created by using the <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html\">CreateRole</a> API action in AWS\n      Identity and Access Management (IAM).</p>",
+                        "smithy.api#documentation": "<p>The <code>RoleARN</code> that you want to associate with this cluster.\n        <code>RoleArn</code> values are created by using the <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html\">CreateRole</a> API action in Identity and Access Management (IAM).</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "SnowballType": {
                     "target": "com.amazonaws.snowball#SnowballType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of AWS Snow Family device to use for this cluster. \n    </p>\n         <note>\n            <p>For cluster jobs, AWS Snow Family currently supports only the <code>EDGE</code> device type.</p>\n         </note>\n    \n         <p>For more information, see\n      \"https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i> or\n      \"https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The type of Snow Family Devices to use for this cluster. </p>\n         <note>\n            <p>For cluster jobs, Amazon Web Services Snow Family currently supports only the\n          <code>EDGE</code> device type.</p>\n         </note>\n    \n         <p>For more information, see\n      \"https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i> or\n      \"https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ShippingOption": {
                     "target": "com.amazonaws.snowball#ShippingOption",
                     "traits": {
-                        "smithy.api#documentation": "<p>The shipping speed for each node in this cluster. This speed doesn't dictate how soon\n      you'll get each Snowball Edge device, rather it represents how quickly each device moves to\n      its destination while in transit. Regional shipping speeds are as follows:\n    </p>\n         <ul>\n            <li>\n               <p>In Australia, you have access to express shipping. Typically, Snow devices shipped\n          express are delivered in about a day.</p>\n            </li>\n            <li>\n               <p>In the European Union (EU), you have access to express shipping. Typically,\n          Snow devices shipped express are delivered in about a day. In addition, most countries in the\n          EU have access to standard shipping, which typically takes less than a week, one\n          way.</p>\n            </li>\n            <li>\n               <p>In India, Snow devices are delivered in one to seven days.</p>\n            </li>\n            <li>\n               <p>In the United States of America (US), you have access to one-day shipping and\n          two-day shipping.</p>\n            </li>\n         </ul>\n\n         <ul>\n            <li>\n               <p>In Australia, you have access to express shipping. Typically, devices shipped\n          express are delivered in about a day.</p>\n            </li>\n            <li>\n               <p>In the European Union (EU), you have access to express shipping. Typically,\n          Snow devices shipped express are delivered in about a day. In addition, most countries\n          in the EU have access to standard shipping, which typically takes less than a week, one\n          way.</p>\n            </li>\n            <li>\n               <p>In India, Snow devices are delivered in one to seven days.</p>\n            </li>\n            <li>\n               <p>In the US, you have access to one-day shipping and two-day shipping.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The shipping speed for each node in this cluster. This speed doesn't dictate how soon\n      you'll get each Snowball Edge device, rather it represents how quickly each device moves to\n      its destination while in transit. Regional shipping speeds are as follows: </p>\n         <ul>\n            <li>\n               <p>In Australia, you have access to express shipping. Typically, Snow devices shipped\n          express are delivered in about a day.</p>\n            </li>\n            <li>\n               <p>In the European Union (EU), you have access to express shipping. Typically, Snow\n          devices shipped express are delivered in about a day. In addition, most countries in the\n          EU have access to standard shipping, which typically takes less than a week, one\n          way.</p>\n            </li>\n            <li>\n               <p>In India, Snow devices are delivered in one to seven days.</p>\n            </li>\n            <li>\n               <p>In the United States of America (US), you have access to one-day shipping and\n          two-day shipping.</p>\n            </li>\n         </ul>\n\n         <ul>\n            <li>\n               <p>In Australia, you have access to express shipping. Typically, devices shipped\n          express are delivered in about a day.</p>\n            </li>\n            <li>\n               <p>In the European Union (EU), you have access to express shipping. Typically, Snow\n          devices shipped express are delivered in about a day. In addition, most countries in the\n          EU have access to standard shipping, which typically takes less than a week, one\n          way.</p>\n            </li>\n            <li>\n               <p>In India, Snow devices are delivered in one to seven days.</p>\n            </li>\n            <li>\n               <p>In the US, you have access to one-day shipping and two-day shipping.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -697,7 +697,7 @@
                 "TaxDocuments": {
                     "target": "com.amazonaws.snowball#TaxDocuments",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tax documents required in your AWS Region.</p>"
+                        "smithy.api#documentation": "<p>The tax documents required in your Amazon Web Services Region.</p>"
                     }
                 },
                 "RemoteManagement": {
@@ -745,7 +745,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a job to import or export data between Amazon S3 and your on-premises data\n      center. Your AWS account must have the right trust policies and permissions in place to create\n      a job for a Snow device. If you're creating a job for a node in a cluster, you only need to provide\n      the <code>clusterId</code> value; the other job attributes are inherited from the cluster.\n    </p>\n         <note>\n            <p>Only the Snowball; Edge device type is supported when ordering clustered jobs.</p>\n            <p>The device capacity is optional.</p>\n            <p>Availability of device types differ by AWS Region. For more information about Region\n        availability, see <a href=\"https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/?p=ngi&loc=4\">AWS Regional Services</a>.</p>\n         </note>\n    \n         <p></p>\n    \n         <p class=\"title\">\n            <b>AWS Snow Family device types and their capacities.</b>\n         </p>\n         <ul>\n            <li>\n               <p>Snow Family device type: <b>SNC1_SSD</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T14</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowcone </p>\n                  </li>\n               </ul>\n        \n               <p></p>\n            </li>\n            <li>\n               <p>Snow Family device type: <b>SNC1_HDD</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T8</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowcone </p>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>EDGE_S</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T98</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowball Edge Storage Optimized for data transfer only </p>\n                  </li>\n               </ul>\n       \n        \n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>EDGE_CG</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T42</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowball Edge Compute Optimized with GPU</p>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>EDGE_C</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T42</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowball Edge Compute Optimized without GPU</p>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>EDGE</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T100</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowball Edge Storage Optimized with EC2 Compute</p>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>STANDARD</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T50</p>\n                  </li>\n                  <li>\n                     <p>Description: Original Snowball device</p>\n                     <note>\n                        <p>This device is only available in the Ningxia, Beijing, and Singapore AWS Regions. </p>\n                     </note>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>STANDARD</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T80</p>\n                  </li>\n                  <li>\n                     <p>Description: Original Snowball device</p>\n                     <note>\n                        <p>This device is only available in the Ningxia, Beijing, and Singapore AWS Regions. </p>\n                     </note>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Creates a job to import or export data between Amazon S3 and your on-premises data\n      center. Your Amazon Web Services account must have the right trust policies and permissions in\n      place to create a job for a Snow device. If you're creating a job for a node in a cluster, you\n      only need to provide the <code>clusterId</code> value; the other job attributes are inherited\n      from the cluster. </p>\n         <note>\n            <p>Only the Snowball; Edge device type is supported when ordering clustered jobs.</p>\n            <p>The device capacity is optional.</p>\n            <p>Availability of device types differ by Amazon Web Services Region. For more information\n        about Region availability, see <a href=\"https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/?p=ngi&loc=4\">Amazon Web Services Regional Services</a>.</p>\n         </note>\n\n         <p></p>\n\n         <p class=\"title\">\n            <b>Snow Family Devices and their capacities.</b>\n         </p>\n         <ul>\n            <li>\n               <p>Snow Family device type: <b>SNC1_SSD</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T14</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowcone </p>\n                  </li>\n               </ul>\n\n               <p></p>\n            </li>\n            <li>\n               <p>Snow Family device type: <b>SNC1_HDD</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T8</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowcone </p>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>EDGE_S</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T98</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowball Edge Storage Optimized for data transfer only </p>\n                  </li>\n               </ul>\n\n\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>EDGE_CG</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T42</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowball Edge Compute Optimized with GPU</p>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>EDGE_C</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T42</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowball Edge Compute Optimized without GPU</p>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>EDGE</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T100</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowball Edge Storage Optimized with EC2 Compute</p>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>STANDARD</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T50</p>\n                  </li>\n                  <li>\n                     <p>Description: Original Snowball device</p>\n                     <note>\n                        <p>This device is only available in the Ningxia, Beijing, and Singapore Amazon Web Services Region\n              </p>\n                     </note>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>STANDARD</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T80</p>\n                  </li>\n                  <li>\n                     <p>Description: Original Snowball device</p>\n                     <note>\n                        <p>This device is only available in the Ningxia, Beijing, and Singapore Amazon Web Services Region. </p>\n                     </note>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.snowball#CreateJobRequest": {
@@ -766,7 +766,7 @@
                 "OnDeviceServiceConfiguration": {
                     "target": "com.amazonaws.snowball#OnDeviceServiceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the service or services on the Snow Family device that your\n      transferred data will be exported from or imported into. AWS Snow Family supports Amazon S3 and NFS (Network File System).</p>"
+                        "smithy.api#documentation": "<p>Specifies the service or services on the Snow Family device that your transferred data\n      will be exported from or imported into. Amazon Web Services Snow Family supports Amazon S3 and NFS (Network File\n      System) and the Amazon Web Services Storage Gateway service Tape Gateway type.</p>"
                     }
                 },
                 "Description": {
@@ -784,13 +784,13 @@
                 "KmsKeyARN": {
                     "target": "com.amazonaws.snowball#KmsKeyARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>KmsKeyARN</code> that you want to associate with this job.\n        <code>KmsKeyARN</code>s are created using the <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html\">CreateKey</a> AWS Key Management\n      Service (KMS) API action.</p>"
+                        "smithy.api#documentation": "<p>The <code>KmsKeyARN</code> that you want to associate with this job.\n        <code>KmsKeyARN</code>s are created using the <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html\">CreateKey</a>\n      Key Management Service (KMS) API action.</p>"
                     }
                 },
                 "RoleARN": {
                     "target": "com.amazonaws.snowball#RoleARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>RoleARN</code> that you want to associate with this job.\n      <code>RoleArn</code>s are created using the <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html\">CreateRole</a> AWS Identity and\n      Access Management (IAM) API action.</p>"
+                        "smithy.api#documentation": "<p>The <code>RoleARN</code> that you want to associate with this job.\n      <code>RoleArn</code>s are created using the <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html\">CreateRole</a>\n      Identity and Access Management (IAM) API action.</p>"
                     }
                 },
                 "SnowballCapacityPreference": {
@@ -802,7 +802,7 @@
                 "ShippingOption": {
                     "target": "com.amazonaws.snowball#ShippingOption",
                     "traits": {
-                        "smithy.api#documentation": "<p>The shipping speed for this job. This speed doesn't dictate how soon you'll get the\n      Snow device, rather it represents how quickly the Snow device moves to its destination while in\n      transit. Regional shipping speeds are as follows:</p>\n\n         <ul>\n            <li>\n               <p>In Australia, you have access to express shipping. Typically, Snow devices shipped\n          express are delivered in about a day.</p>\n            </li>\n            <li>\n               <p>In the European Union (EU), you have access to express shipping. Typically,\n          Snow devices shipped express are delivered in about a day. In addition, most countries in the\n          EU have access to standard shipping, which typically takes less than a week, one\n          way.</p>\n            </li>\n            <li>\n               <p>In India, Snow devices are delivered in one to seven days.</p>\n            </li>\n            <li>\n               <p>In the US, you have access to one-day shipping and two-day shipping.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The shipping speed for this job. This speed doesn't dictate how soon you'll get the\n      Snow device, rather it represents how quickly the Snow device moves to its destination while\n      in transit. Regional shipping speeds are as follows:</p>\n\n         <ul>\n            <li>\n               <p>In Australia, you have access to express shipping. Typically, Snow devices shipped\n          express are delivered in about a day.</p>\n            </li>\n            <li>\n               <p>In the European Union (EU), you have access to express shipping. Typically, Snow\n          devices shipped express are delivered in about a day. In addition, most countries in the\n          EU have access to standard shipping, which typically takes less than a week, one\n          way.</p>\n            </li>\n            <li>\n               <p>In India, Snow devices are delivered in one to seven days.</p>\n            </li>\n            <li>\n               <p>In the US, you have access to one-day shipping and two-day shipping.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Notification": {
@@ -820,7 +820,7 @@
                 "SnowballType": {
                     "target": "com.amazonaws.snowball#SnowballType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of AWS Snow Family device to use for this job. \n      </p>\n         <note>\n            <p>For cluster jobs, AWS Snow Family currently supports only the <code>EDGE</code> device type.</p>\n         </note>\n         <p>The type of AWS Snow device to use for this job. Currently, the only supported\n      device type for cluster jobs is <code>EDGE</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html\">Snowball Edge Device\n      Options</a> in the Snowball Edge Developer Guide.</p>\n    \n         <p>For more information, see\n      \"https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i> or\n      \"https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The type of Snow Family Devices to use for this job.\n      </p>\n         <note>\n            <p>For cluster jobs, Amazon Web Services Snow Family currently supports only the\n          <code>EDGE</code> device type.</p>\n         </note>\n         <p>The type of Amazon Web Services Snow device to use for this job. Currently, the only\n      supported device type for cluster jobs is <code>EDGE</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html\">Snowball Edge Device\n        Options</a> in the Snowball Edge Developer Guide.</p>\n    \n         <p>For more information, see\n      \"https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i> or\n      \"https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i>.</p>"
                     }
                 },
                 "ForwardingAddressId": {
@@ -832,13 +832,13 @@
                 "TaxDocuments": {
                     "target": "com.amazonaws.snowball#TaxDocuments",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tax documents required in your AWS Region.</p>"
+                        "smithy.api#documentation": "<p>The tax documents required in your Amazon Web Services Region.</p>"
                     }
                 },
                 "DeviceConfiguration": {
                     "target": "com.amazonaws.snowball#DeviceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the device configuration for an AWS Snowcone job.</p>\n    \n         <p>For more information, see\n      \"https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i> or\n      \"https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Defines the device configuration for an Snowcone job.</p>\n    \n         <p>For more information, see\n      \"https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i> or\n      \"https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i>.</p>"
                     }
                 },
                 "RemoteManagement": {
@@ -880,7 +880,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a job with the long-term usage option for a device. The long-term usage is a\n      1-year or 3-year long-term pricing type for the device. You are billed upfront, and AWS\n      provides discounts for long-term pricing.\n      </p>"
+                "smithy.api#documentation": "<p>Creates a job with the long-term usage option for a device. The long-term usage is a\n      1-year or 3-year long-term pricing type for the device. You are billed upfront, and Amazon Web Services provides discounts for long-term pricing.\n      </p>"
             }
         },
         "com.amazonaws.snowball#CreateLongTermPricingRequest": {
@@ -896,13 +896,13 @@
                 "IsLongTermPricingAutoRenew": {
                     "target": "com.amazonaws.snowball#JavaBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the current long-term pricing type for the device should be renewed.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the current long-term pricing type for the device should be\n      renewed.</p>"
                     }
                 },
                 "SnowballType": {
                     "target": "com.amazonaws.snowball#SnowballType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of AWS Snow Family device to use for the long-term pricing job.</p>"
+                        "smithy.api#documentation": "<p>The type of Snow Family Devices to use for the long-term pricing job.</p>"
                     }
                 }
             }
@@ -944,7 +944,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a shipping label that will be used to return the Snow device to AWS.</p>"
+                "smithy.api#documentation": "<p>Creates a shipping label that will be used to return the Snow device to Amazon Web Services.</p>"
             }
         },
         "com.amazonaws.snowball#CreateReturnShippingLabelRequest": {
@@ -960,7 +960,7 @@
                 "ShippingOption": {
                     "target": "com.amazonaws.snowball#ShippingOption",
                     "traits": {
-                        "smithy.api#documentation": "<p>The shipping speed for a particular job. This speed doesn't dictate how soon the device is returned to AWS.\n      This speed represents how quickly it moves to its\n      destination while in transit. Regional shipping speeds are as follows:</p>"
+                        "smithy.api#documentation": "<p>The shipping speed for a particular job. This speed doesn't dictate how soon the device\n      is returned to Amazon Web Services. This speed represents how quickly it moves to its\n      destination while in transit. Regional shipping speeds are as follows:</p>"
                     }
                 }
             }
@@ -971,7 +971,7 @@
                 "Status": {
                     "target": "com.amazonaws.snowball#ShippingLabelStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status information of the task on a Snow device that is being returned to AWS.</p>"
+                        "smithy.api#documentation": "<p>The status information of the task on a Snow device that is being returned to Amazon Web Services.</p>"
                     }
                 }
             }
@@ -994,18 +994,18 @@
                 "TotalBytes": {
                     "target": "com.amazonaws.snowball#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total bytes of data for a transfer between a Snow device and Amazon S3. This value is\n      set to 0 (zero) until all the keys that will be transferred have been listed.</p>"
+                        "smithy.api#documentation": "<p>The total bytes of data for a transfer between a Snow device and Amazon S3. This value\n      is set to 0 (zero) until all the keys that will be transferred have been listed.</p>"
                     }
                 },
                 "TotalObjects": {
                     "target": "com.amazonaws.snowball#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total number of objects for a transfer between a Snow device and Amazon S3. This value\n      is set to 0 (zero) until all the keys that will be transferred have been listed.</p>"
+                        "smithy.api#documentation": "<p>The total number of objects for a transfer between a Snow device and Amazon S3. This\n      value is set to 0 (zero) until all the keys that will be transferred have been\n      listed.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines the real-time status of a Snow device's data transfer while the device is at AWS.\n      This data is only available while a job has a <code>JobState</code> value of\n        <code>InProgress</code>, for both import and export jobs.</p>"
+                "smithy.api#documentation": "<p>Defines the real-time status of a Snow device's data transfer while the device is at\n        Amazon Web Services. This data is only available while a job has a <code>JobState</code>\n      value of <code>InProgress</code>, for both import and export jobs.</p>"
             }
         },
         "com.amazonaws.snowball#DescribeAddress": {
@@ -1043,7 +1043,7 @@
                 "Address": {
                     "target": "com.amazonaws.snowball#Address",
                     "traits": {
-                        "smithy.api#documentation": "<p>The address that you want the Snow device(s) associated with a specific job to\n      be shipped to.</p>"
+                        "smithy.api#documentation": "<p>The address that you want the Snow device(s) associated with a specific job to be\n      shipped to.</p>"
                     }
                 }
             }
@@ -1214,7 +1214,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Information on the shipping label of a Snow device that is being returned to AWS.</p>"
+                "smithy.api#documentation": "<p>Information on the shipping label of a Snow device that is being returned to Amazon Web Services.</p>"
             }
         },
         "com.amazonaws.snowball#DescribeReturnShippingLabelRequest": {
@@ -1223,7 +1223,7 @@
                 "JobId": {
                     "target": "com.amazonaws.snowball#JobId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The automatically generated ID for a job, for example\n      <code>JID123e4567-e89b-12d3-a456-426655440000</code>.</p>",
+                        "smithy.api#documentation": "<p>The automatically generated ID for a job, for example\n        <code>JID123e4567-e89b-12d3-a456-426655440000</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1235,13 +1235,19 @@
                 "Status": {
                     "target": "com.amazonaws.snowball#ShippingLabelStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status information of the task on a Snow device that is being returned to AWS.</p>"
+                        "smithy.api#documentation": "<p>The status information of the task on a Snow device that is being returned to Amazon Web Services.</p>"
                     }
                 },
                 "ExpirationDate": {
                     "target": "com.amazonaws.snowball#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The expiration date of the current return shipping label.</p>"
+                    }
+                },
+                "ReturnShippingLabelURI": {
+                    "target": "com.amazonaws.snowball#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pre-signed Amazon S3 URI used to download the return shipping label.</p>"
                     }
                 }
             }
@@ -1252,7 +1258,7 @@
                 "SnowconeDeviceConfiguration": {
                     "target": "com.amazonaws.snowball#SnowconeDeviceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns information about the device configuration for an AWS Snowcone job.</p>"
+                        "smithy.api#documentation": "<p>Returns information about the device configuration for an Snowcone\n      job.</p>"
                     }
                 }
             },
@@ -1293,7 +1299,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A JSON-formatted object that contains the IDs for an Amazon Machine Image (AMI),\n      including the Amazon EC2 AMI ID and the Snow device AMI ID. Each AMI has these two IDs to\n      simplify identifying the AMI in both the AWS Cloud and on the device.</p>"
+                "smithy.api#documentation": "<p>A JSON-formatted object that contains the IDs for an Amazon Machine Image (AMI),\n      including the Amazon EC2 AMI ID and the Snow device AMI ID. Each AMI has these two IDs to\n      simplify identifying the AMI in both the Amazon Web Services Cloud and on the device.</p>"
             }
         },
         "com.amazonaws.snowball#Ec2AmiResourceList": {
@@ -1320,7 +1326,7 @@
                 "EventResourceARN": {
                     "target": "com.amazonaws.snowball#ResourceARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for any local Amazon S3 resource that is an AWS Lambda\n      function's event trigger associated with this job.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for any local Amazon S3 resource that is an Lambda function's event trigger associated with this job.</p>"
                     }
                 }
             },
@@ -1357,7 +1363,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a link to an Amazon S3 presigned URL for the manifest file associated with the\n      specified <code>JobId</code> value. You can access the manifest file for up to 60 minutes\n      after this request has been made. To access the manifest file after 60 minutes have passed,\n      you'll have to make another call to the <code>GetJobManifest</code> action.</p>\n\n         <p>The manifest is an encrypted file that you can download after your job enters the\n        <code>WithCustomer</code> status. The manifest is decrypted by using the\n      <code>UnlockCode</code> code value, when you pass both values to the Snow device through the\n      Snowball client when the client is started for the first time.</p>\n\n\n         <p>As a best practice, we recommend that you don't save a copy of an\n        <code>UnlockCode</code> value in the same location as the manifest file for that job. Saving\n      these separately helps prevent unauthorized parties from gaining access to the Snow device\n      associated with that job.</p>\n\n\n         <p>The credentials of a given job, including its manifest file and unlock code, expire 360\n      days after the job is created.</p>"
+                "smithy.api#documentation": "<p>Returns a link to an Amazon S3 presigned URL for the manifest file associated with the\n      specified <code>JobId</code> value. You can access the manifest file for up to 60 minutes\n      after this request has been made. To access the manifest file after 60 minutes have passed,\n      you'll have to make another call to the <code>GetJobManifest</code> action.</p>\n\n         <p>The manifest is an encrypted file that you can download after your job enters the\n        <code>WithCustomer</code> status. The manifest is decrypted by using the\n        <code>UnlockCode</code> code value, when you pass both values to the Snow device through the\n      Snowball client when the client is started for the first time.</p>\n\n\n         <p>As a best practice, we recommend that you don't save a copy of an\n        <code>UnlockCode</code> value in the same location as the manifest file for that job. Saving\n      these separately helps prevent unauthorized parties from gaining access to the Snow device\n      associated with that job.</p>\n\n\n         <p>The credentials of a given job, including its manifest file and unlock code, expire 360\n      days after the job is created.</p>"
             }
         },
         "com.amazonaws.snowball#GetJobManifestRequest": {
@@ -1400,7 +1406,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the <code>UnlockCode</code> code value for the specified job. A particular\n        <code>UnlockCode</code> value can be accessed for up to 360 days after the associated job\n      has been created.</p>\n\n         <p>The <code>UnlockCode</code> value is a 29-character code with 25 alphanumeric\n      characters and 4 hyphens. This code is used to decrypt the manifest file when it is passed\n      along with the manifest to the Snow device through the Snowball client when the client is started\n      for the first time.</p>\n\n         <p>As a best practice, we recommend that you don't save a copy of the\n        <code>UnlockCode</code> in the same location as the manifest file for that job. Saving these\n      separately helps prevent unauthorized parties from gaining access to the Snow device associated\n      with that job.</p>"
+                "smithy.api#documentation": "<p>Returns the <code>UnlockCode</code> code value for the specified job. A particular\n        <code>UnlockCode</code> value can be accessed for up to 360 days after the associated job\n      has been created.</p>\n\n         <p>The <code>UnlockCode</code> value is a 29-character code with 25 alphanumeric\n      characters and 4 hyphens. This code is used to decrypt the manifest file when it is passed\n      along with the manifest to the Snow device through the Snowball client when the client is\n      started for the first time.</p>\n\n         <p>As a best practice, we recommend that you don't save a copy of the\n        <code>UnlockCode</code> in the same location as the manifest file for that job. Saving these\n      separately helps prevent unauthorized parties from gaining access to the Snow device\n      associated with that job.</p>"
             }
         },
         "com.amazonaws.snowball#GetJobUnlockCodeRequest": {
@@ -1435,7 +1441,7 @@
                 "target": "com.amazonaws.snowball#GetSnowballUsageResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about the Snow Family service limit for your account, and also the\n      number of Snow devices your account has in use.</p>\n\n         <p>The default service limit for the number of Snow devices that you can have at one time is\n      1. If you want to increase your service limit, contact AWS Support.</p>"
+                "smithy.api#documentation": "<p>Returns information about the Snow Family service limit for your account, and also the\n      number of Snow devices your account has in use.</p>\n\n         <p>The default service limit for the number of Snow devices that you can have at one time\n      is 1. If you want to increase your service limit, contact Amazon Web Services Support.</p>"
             }
         },
         "com.amazonaws.snowball#GetSnowballUsageRequest": {
@@ -1476,7 +1482,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns an Amazon S3 presigned URL for an update file associated with a specified\n      <code>JobId</code>.</p>"
+                "smithy.api#documentation": "<p>Returns an Amazon S3 presigned URL for an update file associated with a specified\n        <code>JobId</code>.</p>"
             }
         },
         "com.amazonaws.snowball#GetSoftwareUpdatesRequest": {
@@ -1485,7 +1491,7 @@
                 "JobId": {
                     "target": "com.amazonaws.snowball#JobId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID for a job that you want to get the software update file for, for example\n      <code>JID123e4567-e89b-12d3-a456-426655440000</code>.</p>",
+                        "smithy.api#documentation": "<p>The ID for a job that you want to get the software update file for, for example\n        <code>JID123e4567-e89b-12d3-a456-426655440000</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1497,7 +1503,7 @@
                 "UpdatesURI": {
                     "target": "com.amazonaws.snowball#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 presigned URL for the update file associated with the specified\n      <code>JobId</code> value. The software update will be available for 2 days after this request is made. \n      To access an update after the 2 days have passed, you'll have to make another call to <code>GetSoftwareUpdates</code>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon S3 presigned URL for the update file associated with the specified\n        <code>JobId</code> value. The software update will be available for 2 days after this\n      request is made. To access an update after the 2 days have passed, you'll have to make another\n      call to <code>GetSoftwareUpdates</code>.</p>"
                     }
                 }
             }
@@ -1508,12 +1514,12 @@
                 "GSTIN": {
                     "target": "com.amazonaws.snowball#GSTIN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Goods and Services Tax (GST) documents required in AWS Regions in India.</p>"
+                        "smithy.api#documentation": "<p>The Goods and Services Tax (GST) documents required in Amazon Web Services Region in\n      India.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The tax documents required in AWS Regions in India.</p>"
+                "smithy.api#documentation": "<p>The tax documents required in Amazon Web Services Region in India.</p>"
             }
         },
         "com.amazonaws.snowball#Integer": {
@@ -1542,7 +1548,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Job or cluster creation failed. One or more inputs were invalid. Confirm that the\n      <a>CreateClusterRequest$SnowballType</a> value supports your <a>CreateJobRequest$JobType</a>, and try again.</p>",
+                "smithy.api#documentation": "<p>Job or cluster creation failed. One or more inputs were invalid. Confirm that the <a>CreateClusterRequest$SnowballType</a> value supports your <a>CreateJobRequest$JobType</a>, and try again.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -1622,7 +1628,7 @@
                 "IsMaster": {
                     "target": "com.amazonaws.snowball#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that indicates that this job is a main job. A main job represents a\n      successful request to create an export job. Main jobs aren't associated with any Snowballs.\n      Instead, each main job will have at least one job part, and each job part is associated with\n      a Snowball. It might take some time before the job parts associated with a particular main\n      job are listed, because they are created after the main job is created.</p>"
+                        "smithy.api#documentation": "<p>A value that indicates that this job is a main job. A main job represents a successful\n      request to create an export job. Main jobs aren't associated with any Snowballs. Instead, each\n      main job will have at least one job part, and each job part is associated with a Snowball. It\n      might take some time before the job parts associated with a particular main job are listed,\n      because they are created after the main job is created.</p>"
                     }
                 },
                 "JobType": {
@@ -1683,7 +1689,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains job logs. Whenever a Snow device is used to import data into or export data out of\n      Amazon S3, you'll have the option of downloading a PDF job report. Job logs are returned as a\n      part of the response syntax of the <code>DescribeJob</code> action in the\n        <code>JobMetadata</code> data type. The job logs can be accessed for up to 60 minutes after\n      this request has been made. To access any of the job logs after 60 minutes have passed, you'll\n      have to make another call to the <code>DescribeJob</code> action.</p>\n\n         <p>For import jobs, the PDF job report becomes available at the end of the import process.\n      For export jobs, your job report typically becomes available while the Snow device for your job\n      part is being delivered to you.</p>\n\n         <p>The job report provides you insight into the state of your Amazon S3 data transfer. The\n      report includes details about your job or job part for your records.</p>\n\n         <p>For deeper visibility into the status of your transferred objects, you can look at the\n      two associated logs: a success log and a failure log. The logs are saved in comma-separated\n      value (CSV) format, and the name of each log includes the ID of the job or job part that the\n      log describes.</p>"
+                "smithy.api#documentation": "<p>Contains job logs. Whenever a Snow device is used to import data into or export data\n      out of Amazon S3, you'll have the option of downloading a PDF job report. Job logs are\n      returned as a part of the response syntax of the <code>DescribeJob</code> action in the\n        <code>JobMetadata</code> data type. The job logs can be accessed for up to 60 minutes after\n      this request has been made. To access any of the job logs after 60 minutes have passed, you'll\n      have to make another call to the <code>DescribeJob</code> action.</p>\n\n         <p>For import jobs, the PDF job report becomes available at the end of the import process.\n      For export jobs, your job report typically becomes available while the Snow device for your\n      job part is being delivered to you.</p>\n\n         <p>The job report provides you insight into the state of your Amazon S3 data transfer. The\n      report includes details about your job or job part for your records.</p>\n\n         <p>For deeper visibility into the status of your transferred objects, you can look at the\n      two associated logs: a success log and a failure log. The logs are saved in comma-separated\n      value (CSV) format, and the name of each log includes the ID of the job or job part that the\n      log describes.</p>"
             }
         },
         "com.amazonaws.snowball#JobMetadata": {
@@ -1734,13 +1740,13 @@
                 "KmsKeyARN": {
                     "target": "com.amazonaws.snowball#KmsKeyARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the AWS Key Management Service (AWS KMS) key\n      associated with this job. This ARN was created using the <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html\">CreateKey</a> API action in AWS\n      KMS.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the Key Management Service (KMS) key\n      associated with this job. This ARN was created using the <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html\">CreateKey</a> API action in KMS.</p>"
                     }
                 },
                 "RoleARN": {
                     "target": "com.amazonaws.snowball#RoleARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The role ARN associated with this job. This ARN was created using the <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html\">CreateRole</a>\n      API action in AWS Identity and Access Management (IAM).</p>"
+                        "smithy.api#documentation": "<p>The role ARN associated with this job. This ARN was created using the <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html\">CreateRole</a>\n      API action in Identity and Access Management.</p>"
                     }
                 },
                 "AddressId": {
@@ -1770,13 +1776,13 @@
                 "DataTransferProgress": {
                     "target": "com.amazonaws.snowball#DataTransfer",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that defines the real-time status of a Snow device's data transfer while the\n      device is at AWS. This data is only available while a job has a <code>JobState</code> value of\n        <code>InProgress</code>, for both import and export jobs.</p>"
+                        "smithy.api#documentation": "<p>A value that defines the real-time status of a Snow device's data transfer while the\n      device is at Amazon Web Services. This data is only available while a job has a\n        <code>JobState</code> value of <code>InProgress</code>, for both import and export\n      jobs.</p>"
                     }
                 },
                 "JobLogInfo": {
                     "target": "com.amazonaws.snowball#JobLogs",
                     "traits": {
-                        "smithy.api#documentation": "<p>Links to Amazon S3 presigned URLs for the job report and logs. For import jobs, the PDF\n      job report becomes available at the end of the import process. For export jobs, your job\n      report typically becomes available while the Snow device for your job part is being delivered to\n      you.</p>"
+                        "smithy.api#documentation": "<p>Links to Amazon S3 presigned URLs for the job report and logs. For import jobs, the PDF\n      job report becomes available at the end of the import process. For export jobs, your job\n      report typically becomes available while the Snow device for your job part is being delivered\n      to you.</p>"
                     }
                 },
                 "ClusterId": {
@@ -1794,7 +1800,7 @@
                 "TaxDocuments": {
                     "target": "com.amazonaws.snowball#TaxDocuments",
                     "traits": {
-                        "smithy.api#documentation": "<p>The metadata associated with the tax documents required in your AWS Region.</p>"
+                        "smithy.api#documentation": "<p>The metadata associated with the tax documents required in your Amazon Web Services Region.</p>"
                     }
                 },
                 "DeviceConfiguration": {
@@ -1815,7 +1821,7 @@
                 "OnDeviceServiceConfiguration": {
                     "target": "com.amazonaws.snowball#OnDeviceServiceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents metadata and configuration settings for services on an AWS Snow Family device.</p>"
+                        "smithy.api#documentation": "<p>Represents metadata and configuration settings for services on an Amazon Web Services Snow Family\n      device.</p>"
                     }
                 }
             },
@@ -1852,7 +1858,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains an array of AWS resource objects. Each object represents an Amazon S3 bucket,\n      an AWS Lambda function, or an Amazon Machine Image (AMI) based on Amazon EC2 that is\n      associated with a particular job.</p>"
+                "smithy.api#documentation": "<p>Contains an array of Amazon Web Services resource objects. Each object represents an\n      Amazon S3 bucket, an Lambda function, or an Amazon Machine Image (AMI) based\n      on Amazon EC2 that is associated with a particular job.</p>"
             }
         },
         "com.amazonaws.snowball#JobState": {
@@ -1947,7 +1953,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The provided AWS Key Management Service key lacks the permissions to perform the\n      specified <a>CreateJob</a> or <a>UpdateJob</a> action.</p>",
+                "smithy.api#documentation": "<p>The provided Key Management Service key lacks the permissions to perform the specified\n        <a>CreateJob</a> or <a>UpdateJob</a> action.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -1987,7 +1993,7 @@
                 "LambdaArn": {
                     "target": "com.amazonaws.snowball#ResourceARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that represents an AWS Lambda function to be triggered by\n      PUT object actions on the associated local Amazon S3 resource.</p>"
+                        "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that represents an Lambda function to be\n      triggered by PUT object actions on the associated local Amazon S3 resource.</p>"
                     }
                 },
                 "EventTriggers": {
@@ -2136,7 +2142,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This action returns a list of the different Amazon EC2 Amazon Machine Images (AMIs)\n      that are owned by your AWS account that would be supported for use on a Snow device.\n      Currently, supported AMIs are based on the CentOS 7 (x86_64) - with Updates HVM, Ubuntu Server\n      14.04 LTS (HVM), and Ubuntu 16.04 LTS - Xenial (HVM) images, available on the AWS\n      Marketplace.</p>"
+                "smithy.api#documentation": "<p>This action returns a list of the different Amazon EC2 Amazon Machine Images (AMIs)\n      that are owned by your Amazon Web Services accountthat would be supported for use on a Snow\n      device. Currently, supported AMIs are based on the CentOS 7 (x86_64) - with Updates HVM,\n      Ubuntu Server 14.04 LTS (HVM), and Ubuntu 16.04 LTS - Xenial (HVM) images, available on the\n        Amazon Web Services Marketplace.</p>"
             }
         },
         "com.amazonaws.snowball#ListCompatibleImagesRequest": {
@@ -2272,7 +2278,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.snowball#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Because HTTP requests are stateless, this is the starting point for your next list of\n      <code>ListLongTermPricing</code> to return.</p>"
+                        "smithy.api#documentation": "<p>Because HTTP requests are stateless, this is the starting point for your next list of\n        <code>ListLongTermPricing</code> to return.</p>"
                     }
                 }
             }
@@ -2373,7 +2379,7 @@
                 "SnowballType": {
                     "target": "com.amazonaws.snowball#SnowballType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of AWS Snow Family device associated with this long-term pricing job.</p>"
+                        "smithy.api#documentation": "<p>The type of Snow Family Devices associated with this long-term pricing job.</p>"
                     }
                 },
                 "JobIds": {
@@ -2384,7 +2390,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Each <code>LongTermPricingListEntry</code> object contains information about a long-term pricing type.</p>"
+                "smithy.api#documentation": "<p>Each <code>LongTermPricingListEntry</code> object contains information about a long-term\n      pricing type.</p>"
             }
         },
         "com.amazonaws.snowball#LongTermPricingType": {
@@ -2408,7 +2414,7 @@
                 "StorageLimit": {
                     "target": "com.amazonaws.snowball#StorageLimit",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum NFS storage for one Snowball Family device.</p>"
+                        "smithy.api#documentation": "<p>The maximum NFS storage for one Snow Family device.</p>"
                     }
                 },
                 "StorageUnit": {
@@ -2419,7 +2425,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that represents metadata and configuration settings for NFS service on an AWS Snow Family device.</p>"
+                "smithy.api#documentation": "<p>An object that represents the metadata and configuration settings for the NFS (Network\n      File System) service on an Amazon Web Services Snow Family device.</p>"
             }
         },
         "com.amazonaws.snowball#Notification": {
@@ -2428,7 +2434,7 @@
                 "SnsTopicARN": {
                     "target": "com.amazonaws.snowball#SnsTopicARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new SNS <code>TopicArn</code> that you want to associate with this job. You can\n      create Amazon Resource Names (ARNs) for topics by using the <a href=\"https://docs.aws.amazon.com/sns/latest/api/API_CreateTopic.html\">CreateTopic</a> Amazon SNS API\n      action.</p>\n\n         <p>You can subscribe email addresses to an Amazon SNS topic through the AWS Management\n      Console, or by using the <a href=\"https://docs.aws.amazon.com/sns/latest/api/API_Subscribe.html\">Subscribe</a> Amazon Simple Notification Service (Amazon SNS) API action.</p>"
+                        "smithy.api#documentation": "<p>The new SNS <code>TopicArn</code> that you want to associate with this job. You can\n      create Amazon Resource Names (ARNs) for topics by using the <a href=\"https://docs.aws.amazon.com/sns/latest/api/API_CreateTopic.html\">CreateTopic</a> Amazon SNS API\n      action.</p>\n\n         <p>You can subscribe email addresses to an Amazon SNS topic through the Amazon Web Services Management Console, or by using the <a href=\"https://docs.aws.amazon.com/sns/latest/api/API_Subscribe.html\">Subscribe</a> Amazon Simple Notification\n      Service (Amazon SNS) API action.</p>"
                     }
                 },
                 "JobStatesToNotify": {
@@ -2454,12 +2460,18 @@
                 "NFSOnDeviceService": {
                     "target": "com.amazonaws.snowball#NFSOnDeviceServiceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents the NFS service on a Snow Family device.</p>"
+                        "smithy.api#documentation": "<p>Represents the NFS (Network File System) service on a Snow Family device.</p>"
+                    }
+                },
+                "TGWOnDeviceService": {
+                    "target": "com.amazonaws.snowball#TGWOnDeviceServiceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the Storage Gateway service Tape Gateway type on a Snow Family device.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that represents metadata and configuration settings for services on an AWS Snow Family device.</p>"
+                "smithy.api#documentation": "<p>An object that represents the metadata and configuration settings for services on an Amazon Web Services\n      Snow Family device.</p>"
             }
         },
         "com.amazonaws.snowball#RemoteManagement": {
@@ -2495,7 +2507,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You get this exception if you call <code>CreateReturnShippingLabel</code> and a valid return\n      shipping label already exists. In this case, use\n        <code>DescribeReturnShippingLabel</code> to get the url.</p>",
+                "smithy.api#documentation": "<p>You get this exception if you call <code>CreateReturnShippingLabel</code> and a valid\n      return shipping label already exists. In this case, use\n        <code>DescribeReturnShippingLabel</code> to get the URL.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -2527,7 +2539,7 @@
                 "TargetOnDeviceServices": {
                     "target": "com.amazonaws.snowball#TargetOnDeviceServiceList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the service or services on the Snow Family device that your\n      transferred data will be exported from or imported into. AWS Snow Family supports Amazon S3 and NFS (Network File System).</p>"
+                        "smithy.api#documentation": "<p>Specifies the service or services on the Snow Family device that your transferred data\n      will be exported from or imported into. Amazon Web Services Snow Family supports Amazon S3 and NFS (Network File\n      System).</p>"
                     }
                 }
             },
@@ -2582,13 +2594,13 @@
                 "ShippingOption": {
                     "target": "com.amazonaws.snowball#ShippingOption",
                     "traits": {
-                        "smithy.api#documentation": "<p>The shipping speed for a particular job. This speed doesn't dictate how soon you'll get\n      the Snow device from the job's creation date. This speed represents how quickly it moves to its\n      destination while in transit. Regional shipping speeds are as follows:</p>\n\n         <ul>\n            <li>\n               <p>In Australia, you have access to express shipping. Typically, Snow devices shipped\n          express are delivered in about a day.</p>\n            </li>\n            <li>\n               <p>In the European Union (EU), you have access to express shipping. Typically,\n          Snow devices shipped express are delivered in about a day. In addition, most countries in the\n          EU have access to standard shipping, which typically takes less than a week, one\n          way.</p>\n            </li>\n            <li>\n               <p>In India, Snow devices are delivered in one to seven days.</p>\n            </li>\n            <li>\n               <p>In the United States of America (US), you have access to one-day shipping and\n          two-day shipping.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The shipping speed for a particular job. This speed doesn't dictate how soon you'll get\n      the Snow device from the job's creation date. This speed represents how quickly it moves to\n      its destination while in transit. Regional shipping speeds are as follows:</p>\n\n         <ul>\n            <li>\n               <p>In Australia, you have access to express shipping. Typically, Snow devices shipped\n          express are delivered in about a day.</p>\n            </li>\n            <li>\n               <p>In the European Union (EU), you have access to express shipping. Typically, Snow\n          devices shipped express are delivered in about a day. In addition, most countries in the\n          EU have access to standard shipping, which typically takes less than a week, one\n          way.</p>\n            </li>\n            <li>\n               <p>In India, Snow devices are delivered in one to seven days.</p>\n            </li>\n            <li>\n               <p>In the United States of America (US), you have access to one-day shipping and\n          two-day shipping.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "InboundShipment": {
                     "target": "com.amazonaws.snowball#Shipment",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>Status</code> and <code>TrackingNumber</code> values for a Snow device being\n      returned to AWS for a particular job.</p>"
+                        "smithy.api#documentation": "<p>The <code>Status</code> and <code>TrackingNumber</code> values for a Snow device being\n      returned to Amazon Web Services for a particular job.</p>"
                     }
                 },
                 "OutboundShipment": {
@@ -2728,12 +2740,12 @@
                 "WirelessConnection": {
                     "target": "com.amazonaws.snowball#WirelessConnection",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configures the wireless connection for the AWS Snowcone device.</p>"
+                        "smithy.api#documentation": "<p>Configures the wireless connection for the Snowcone device.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the device configuration for an AWS Snowcone job. </p>"
+                "smithy.api#documentation": "<p>Specifies the device configuration for an Snowcone job.</p>"
             }
         },
         "com.amazonaws.snowball#SnsTopicARN": {
@@ -2774,24 +2786,44 @@
                 }
             }
         },
+        "com.amazonaws.snowball#TGWOnDeviceServiceConfiguration": {
+            "type": "structure",
+            "members": {
+                "StorageLimit": {
+                    "target": "com.amazonaws.snowball#StorageLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of virtual tapes to store on one Snow Family device. Due to physical\n      resource limitations, this value must be set to 80 for Snowball Edge.</p>"
+                    }
+                },
+                "StorageUnit": {
+                    "target": "com.amazonaws.snowball#StorageUnit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scale unit of the virtual tapes on the device.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that represents the metadata and configuration settings for the Storage Gateway\n      service Tape Gateway type on an Amazon Web Services Snow Family device.</p>"
+            }
+        },
         "com.amazonaws.snowball#TargetOnDeviceService": {
             "type": "structure",
             "members": {
                 "ServiceName": {
                     "target": "com.amazonaws.snowball#DeviceServiceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name of the service on the Snow Family device that your\n      transferred data will be exported from or imported into.</p>"
+                        "smithy.api#documentation": "<p>Specifies the name of the service on the Snow Family device that your transferred data\n      will be exported from or imported into.</p>"
                     }
                 },
                 "TransferOption": {
                     "target": "com.amazonaws.snowball#TransferOption",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the data is being imported or exported. You can import or export the data, or use it locally on the device.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the data is being imported or exported. You can import or export the\n      data, or use it locally on the device.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that represents the service or services on the Snow Family device that your\n      transferred data will be exported from or imported into. AWS Snow Family supports Amazon S3 and NFS (Network File System).</p>"
+                "smithy.api#documentation": "<p>An object that represents the service or services on the Snow Family device that your\n      transferred data will be exported from or imported into. Amazon Web Services Snow Family supports Amazon S3 and\n      NFS (Network File System).</p>"
             }
         },
         "com.amazonaws.snowball#TargetOnDeviceServiceList": {
@@ -2808,7 +2840,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The tax documents required in your AWS Region.</p>"
+                "smithy.api#documentation": "<p>The tax documents required in your Amazon Web Services Region.</p>"
             }
         },
         "com.amazonaws.snowball#Timestamp": {
@@ -2841,7 +2873,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The address is either outside the serviceable area for your region, or an error\n      occurred. Check the address with your region's carrier and try again. If the issue persists,\n      contact AWS Support.</p>",
+                "smithy.api#documentation": "<p>The address is either outside the serviceable area for your region, or an error\n      occurred. Check the address with your region's carrier and try again. If the issue persists,\n      contact Amazon Web Services Support.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -2887,7 +2919,7 @@
                 "RoleARN": {
                     "target": "com.amazonaws.snowball#RoleARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new role Amazon Resource Name (ARN) that you want to associate with this cluster.\n      To create a role ARN, use the <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html\">CreateRole</a> API action in AWS\n      Identity and Access Management (IAM).</p>"
+                        "smithy.api#documentation": "<p>The new role Amazon Resource Name (ARN) that you want to associate with this cluster.\n      To create a role ARN, use the <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html\">CreateRole</a> API action in Identity and Access Management (IAM).</p>"
                     }
                 },
                 "Description": {
@@ -2905,7 +2937,7 @@
                 "OnDeviceServiceConfiguration": {
                     "target": "com.amazonaws.snowball#OnDeviceServiceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the service or services on the Snow Family device that your\n      transferred data will be exported from or imported into. AWS Snow Family supports Amazon S3 and NFS (Network File System).</p>"
+                        "smithy.api#documentation": "<p>Specifies the service or services on the Snow Family device that your transferred data\n      will be exported from or imported into. Amazon Web Services Snow Family device clusters support Amazon S3 and NFS\n      (Network File System).</p>"
                     }
                 },
                 "AddressId": {
@@ -2983,7 +3015,7 @@
                 "RoleARN": {
                     "target": "com.amazonaws.snowball#RoleARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new role Amazon Resource Name (ARN) that you want to associate with this job. To\n      create a role ARN, use the <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html\">CreateRole</a>AWS Identity and Access\n      Management (IAM) API action.</p>"
+                        "smithy.api#documentation": "<p>The new role Amazon Resource Name (ARN) that you want to associate with this job. To\n      create a role ARN, use the <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html\">CreateRole</a>Identity and Access Management\n      (IAM) API action.</p>"
                     }
                 },
                 "Notification": {
@@ -3001,7 +3033,7 @@
                 "OnDeviceServiceConfiguration": {
                     "target": "com.amazonaws.snowball#OnDeviceServiceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the service or services on the Snow Family device that your\n      transferred data will be exported from or imported into. AWS Snow Family supports Amazon S3 and NFS (Network File System).</p>"
+                        "smithy.api#documentation": "<p>Specifies the service or services on the Snow Family device that your transferred data\n      will be exported from or imported into. Amazon Web Services Snow Family supports Amazon S3 and NFS (Network File\n      System) and the Amazon Web Services Storage Gateway service Tape Gateway type.</p>"
                     }
                 },
                 "AddressId": {
@@ -3066,14 +3098,14 @@
                 "JobId": {
                     "target": "com.amazonaws.snowball#JobId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The job ID of the job whose shipment date you want to update, for example\n      <code>JID123e4567-e89b-12d3-a456-426655440000</code>.</p>",
+                        "smithy.api#documentation": "<p>The job ID of the job whose shipment date you want to update, for example\n        <code>JID123e4567-e89b-12d3-a456-426655440000</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ShipmentState": {
                     "target": "com.amazonaws.snowball#ShipmentState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of a device when it is being shipped. </p>\n         <p>Set to <code>RECEIVED</code> when the device arrives at your location.</p>\n         <p>Set to <code>RETURNED</code> when you have returned the device to AWS.</p>",
+                        "smithy.api#documentation": "<p>The state of a device when it is being shipped. </p>\n         <p>Set to <code>RECEIVED</code> when the device arrives at your location.</p>\n         <p>Set to <code>RETURNED</code> when you have returned the device to Amazon Web Services.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3113,7 +3145,7 @@
                 "ReplacementJob": {
                     "target": "com.amazonaws.snowball#JobId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies that a device that is ordered with long-term pricing should be replaced with a new device.</p>"
+                        "smithy.api#documentation": "<p>Specifies that a device that is ordered with long-term pricing should be replaced with a\n      new device.</p>"
                     }
                 },
                 "IsLongTermPricingAutoRenew": {
@@ -3134,12 +3166,12 @@
                 "IsWifiEnabled": {
                     "target": "com.amazonaws.snowball#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enables the Wi-Fi adapter on an AWS Snowcone device.</p>"
+                        "smithy.api#documentation": "<p>Enables the Wi-Fi adapter on an Snowcone device.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configures the wireless connection on an AWS Snowcone device.</p>"
+                "smithy.api#documentation": "<p>Configures the wireless connection on an Snowcone device.</p>"
             }
         }
     }

@@ -210,6 +210,26 @@ func (m *validateOpDescribeProtectionGroup) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisableApplicationLayerAutomaticResponse struct {
+}
+
+func (*validateOpDisableApplicationLayerAutomaticResponse) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisableApplicationLayerAutomaticResponse) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisableApplicationLayerAutomaticResponseInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisableApplicationLayerAutomaticResponseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisassociateDRTLogBucket struct {
 }
 
@@ -245,6 +265,26 @@ func (m *validateOpDisassociateHealthCheck) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDisassociateHealthCheckInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpEnableApplicationLayerAutomaticResponse struct {
+}
+
+func (*validateOpEnableApplicationLayerAutomaticResponse) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpEnableApplicationLayerAutomaticResponse) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*EnableApplicationLayerAutomaticResponseInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpEnableApplicationLayerAutomaticResponseInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -330,6 +370,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateApplicationLayerAutomaticResponse struct {
+}
+
+func (*validateOpUpdateApplicationLayerAutomaticResponse) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateApplicationLayerAutomaticResponse) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateApplicationLayerAutomaticResponseInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateApplicationLayerAutomaticResponseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateEmergencyContactSettings struct {
 }
 
@@ -410,12 +470,20 @@ func addOpDescribeProtectionGroupValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpDescribeProtectionGroup{}, middleware.After)
 }
 
+func addOpDisableApplicationLayerAutomaticResponseValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisableApplicationLayerAutomaticResponse{}, middleware.After)
+}
+
 func addOpDisassociateDRTLogBucketValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateDRTLogBucket{}, middleware.After)
 }
 
 func addOpDisassociateHealthCheckValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateHealthCheck{}, middleware.After)
+}
+
+func addOpEnableApplicationLayerAutomaticResponseValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpEnableApplicationLayerAutomaticResponse{}, middleware.After)
 }
 
 func addOpListResourcesInProtectionGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -432,6 +500,10 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateApplicationLayerAutomaticResponseValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateApplicationLayerAutomaticResponse{}, middleware.After)
 }
 
 func addOpUpdateEmergencyContactSettingsValidationMiddleware(stack *middleware.Stack) error {
@@ -640,6 +712,21 @@ func validateOpDescribeProtectionGroupInput(v *DescribeProtectionGroupInput) err
 	}
 }
 
+func validateOpDisableApplicationLayerAutomaticResponseInput(v *DisableApplicationLayerAutomaticResponseInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisableApplicationLayerAutomaticResponseInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDisassociateDRTLogBucketInput(v *DisassociateDRTLogBucketInput) error {
 	if v == nil {
 		return nil
@@ -665,6 +752,24 @@ func validateOpDisassociateHealthCheckInput(v *DisassociateHealthCheckInput) err
 	}
 	if v.HealthCheckArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HealthCheckArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpEnableApplicationLayerAutomaticResponseInput(v *EnableApplicationLayerAutomaticResponseInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EnableApplicationLayerAutomaticResponseInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Action == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -731,6 +836,24 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateApplicationLayerAutomaticResponseInput(v *UpdateApplicationLayerAutomaticResponseInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateApplicationLayerAutomaticResponseInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Action == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

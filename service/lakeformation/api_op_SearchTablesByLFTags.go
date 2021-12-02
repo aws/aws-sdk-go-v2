@@ -4,6 +4,7 @@ package lakeformation
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
@@ -12,7 +13,7 @@ import (
 )
 
 // This operation allows a search on TABLE resources by LFTags. This will be used
-// by admins who want to grant user permissions on certain LFTags. Before making a
+// by admins who want to grant user permissions on certain LF-tags. Before making a
 // grant, the admin can use SearchTablesByLFTags to find all resources where the
 // given LFTags are valid to verify whether the returned resources can be shared.
 func (c *Client) SearchTablesByLFTags(ctx context.Context, params *SearchTablesByLFTagsInput, optFns ...func(*Options)) (*SearchTablesByLFTagsOutput, error) {
@@ -39,8 +40,8 @@ type SearchTablesByLFTagsInput struct {
 
 	// The identifier for the Data Catalog. By default, the account ID. The Data
 	// Catalog is the persistent metadata store. It contains database definitions,
-	// table definitions, and other control information to manage your AWS Lake
-	// Formation environment.
+	// table definitions, and other control information to manage your Lake Formation
+	// environment.
 	CatalogId *string
 
 	// The maximum number of results to return.
@@ -57,7 +58,7 @@ type SearchTablesByLFTagsOutput struct {
 	// A continuation token, present if the current list segment is not the last.
 	NextToken *string
 
-	// A list of tables that meet the tag conditions.
+	// A list of tables that meet the LF-tag conditions.
 	TableList []types.TaggedTable
 
 	// Metadata pertaining to the operation's result.
@@ -67,11 +68,11 @@ type SearchTablesByLFTagsOutput struct {
 }
 
 func (c *Client) addOperationSearchTablesByLFTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSearchTablesByLFTags{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchTablesByLFTags{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSearchTablesByLFTags{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchTablesByLFTags{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -127,6 +128,93 @@ func (c *Client) addOperationSearchTablesByLFTagsMiddlewares(stack *middleware.S
 		return err
 	}
 	return nil
+}
+
+// SearchTablesByLFTagsAPIClient is a client that implements the
+// SearchTablesByLFTags operation.
+type SearchTablesByLFTagsAPIClient interface {
+	SearchTablesByLFTags(context.Context, *SearchTablesByLFTagsInput, ...func(*Options)) (*SearchTablesByLFTagsOutput, error)
+}
+
+var _ SearchTablesByLFTagsAPIClient = (*Client)(nil)
+
+// SearchTablesByLFTagsPaginatorOptions is the paginator options for
+// SearchTablesByLFTags
+type SearchTablesByLFTagsPaginatorOptions struct {
+	// The maximum number of results to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// SearchTablesByLFTagsPaginator is a paginator for SearchTablesByLFTags
+type SearchTablesByLFTagsPaginator struct {
+	options   SearchTablesByLFTagsPaginatorOptions
+	client    SearchTablesByLFTagsAPIClient
+	params    *SearchTablesByLFTagsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewSearchTablesByLFTagsPaginator returns a new SearchTablesByLFTagsPaginator
+func NewSearchTablesByLFTagsPaginator(client SearchTablesByLFTagsAPIClient, params *SearchTablesByLFTagsInput, optFns ...func(*SearchTablesByLFTagsPaginatorOptions)) *SearchTablesByLFTagsPaginator {
+	if params == nil {
+		params = &SearchTablesByLFTagsInput{}
+	}
+
+	options := SearchTablesByLFTagsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &SearchTablesByLFTagsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *SearchTablesByLFTagsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next SearchTablesByLFTags page.
+func (p *SearchTablesByLFTagsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*SearchTablesByLFTagsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.SearchTablesByLFTags(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opSearchTablesByLFTags(region string) *awsmiddleware.RegisterServiceMetadata {

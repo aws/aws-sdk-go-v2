@@ -53,6 +53,14 @@ type DescribeDataSourceOutput struct {
 	// The Unix timestamp of when the data source was created.
 	CreatedAt *time.Time
 
+	// Configuration information for altering document metadata and content during the
+	// document ingestion process when you describe a data source. For more information
+	// on how to create, modify and delete document metadata, or make other content
+	// alterations when you ingest documents into Amazon Kendra, see Customizing
+	// document metadata during the ingestion process
+	// (https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html).
+	CustomDocumentEnrichmentConfiguration *types.CustomDocumentEnrichmentConfiguration
+
 	// The description of the data source.
 	Description *string
 

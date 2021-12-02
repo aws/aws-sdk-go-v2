@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Attaches one or more tags to an existing resource.
+// Attaches one or more LF-tags to an existing resource.
 func (c *Client) AddLFTagsToResource(ctx context.Context, params *AddLFTagsToResourceInput, optFns ...func(*Options)) (*AddLFTagsToResourceOutput, error) {
 	if params == nil {
 		params = &AddLFTagsToResourceInput{}
@@ -29,20 +29,20 @@ func (c *Client) AddLFTagsToResource(ctx context.Context, params *AddLFTagsToRes
 
 type AddLFTagsToResourceInput struct {
 
-	// The tags to attach to the resource.
+	// The LF-tags to attach to the resource.
 	//
 	// This member is required.
 	LFTags []types.LFTagPair
 
-	// The resource to which to attach a tag.
+	// The database, table, or column resource to which to attach an LF-tag.
 	//
 	// This member is required.
 	Resource *types.Resource
 
 	// The identifier for the Data Catalog. By default, the account ID. The Data
 	// Catalog is the persistent metadata store. It contains database definitions,
-	// table definitions, and other control information to manage your AWS Lake
-	// Formation environment.
+	// table definitions, and other control information to manage your Lake Formation
+	// environment.
 	CatalogId *string
 
 	noSmithyDocumentSerde
@@ -60,11 +60,11 @@ type AddLFTagsToResourceOutput struct {
 }
 
 func (c *Client) addOperationAddLFTagsToResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddLFTagsToResource{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpAddLFTagsToResource{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAddLFTagsToResource{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAddLFTagsToResource{}, middleware.After)
 	if err != nil {
 		return err
 	}

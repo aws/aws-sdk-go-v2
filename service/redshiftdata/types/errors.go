@@ -49,6 +49,25 @@ func (e *BatchExecuteStatementException) ErrorMessage() string {
 func (e *BatchExecuteStatementException) ErrorCode() string             { return "BatchExecuteStatementException" }
 func (e *BatchExecuteStatementException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
+// Connection to a database failed.
+type DatabaseConnectionException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *DatabaseConnectionException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DatabaseConnectionException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DatabaseConnectionException) ErrorCode() string             { return "DatabaseConnectionException" }
+func (e *DatabaseConnectionException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
 // The SQL statement encountered an environmental error while running.
 type ExecuteStatementException struct {
 	Message *string

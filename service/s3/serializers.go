@@ -576,6 +576,11 @@ func awsRestxml_serializeOpHttpBindingsCreateBucketInput(v *CreateBucketInput, e
 		encoder.SetHeader(locationName).Boolean(v.ObjectLockEnabledForBucket)
 	}
 
+	if len(v.ObjectOwnership) > 0 {
+		locationName := "X-Amz-Object-Ownership"
+		encoder.SetHeader(locationName).String(string(v.ObjectOwnership))
+	}
+
 	return nil
 }
 

@@ -16,13 +16,16 @@ import (
 // one of the following combinations of request parameters:
 //
 // * Secrets Manager -
-// specify the Amazon Resource Name (ARN) of the secret, the database name, and the
-// cluster identifier that matches the cluster in the secret.
+// when connecting to a cluster, specify the Amazon Resource Name (ARN) of the
+// secret, the database name, and the cluster identifier that matches the cluster
+// in the secret. When connecting to a serverless endpoint, specify the Amazon
+// Resource Name (ARN) of the secret and the database name.
 //
 // * Temporary
-// credentials - specify the cluster identifier, the database name, and the
-// database user name. Permission to call the redshift:GetClusterCredentials
-// operation is required to use this method.
+// credentials - when connecting to a cluster, specify the cluster identifier, the
+// database name, and the database user name. Also, permission to call the
+// redshift:GetClusterCredentials operation is required. When connecting to a
+// serverless endpoint, specify the database name.
 func (c *Client) BatchExecuteStatement(ctx context.Context, params *BatchExecuteStatementInput, optFns ...func(*Options)) (*BatchExecuteStatementOutput, error) {
 	if params == nil {
 		params = &BatchExecuteStatementInput{}
@@ -40,12 +43,6 @@ func (c *Client) BatchExecuteStatement(ctx context.Context, params *BatchExecute
 
 type BatchExecuteStatementInput struct {
 
-	// The cluster identifier. This parameter is required when authenticating using
-	// either Secrets Manager or temporary credentials.
-	//
-	// This member is required.
-	ClusterIdentifier *string
-
 	// The name of the database. This parameter is required when authenticating using
 	// either Secrets Manager or temporary credentials.
 	//
@@ -57,8 +54,12 @@ type BatchExecuteStatementInput struct {
 	// This member is required.
 	Sqls []string
 
-	// The database user name. This parameter is required when authenticating using
-	// temporary credentials.
+	// The cluster identifier. This parameter is required when connecting to a cluster
+	// and authenticating using either Secrets Manager or temporary credentials.
+	ClusterIdentifier *string
+
+	// The database user name. This parameter is required when connecting to a cluster
+	// and authenticating using temporary credentials.
 	DbUser *string
 
 	// The name or ARN of the secret that enables access to the database. This
@@ -78,7 +79,8 @@ type BatchExecuteStatementInput struct {
 
 type BatchExecuteStatementOutput struct {
 
-	// The cluster identifier.
+	// The cluster identifier. This parameter is not returned when connecting to a
+	// serverless endpoint.
 	ClusterIdentifier *string
 
 	// The date and time (UTC) the statement was created.

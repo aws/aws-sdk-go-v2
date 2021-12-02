@@ -242,6 +242,11 @@ func awsRestjson1_serializeOpDocumentCreateOutpostInput(v *CreateOutpostInput, v
 		ok.String(*v.SiteId)
 	}
 
+	if len(v.SupportedHardwareType) > 0 {
+		ok := object.Key("SupportedHardwareType")
+		ok.String(string(v.SupportedHardwareType))
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {

@@ -214,6 +214,10 @@ type CreateTableInput struct {
 	// written to the stream.
 	StreamSpecification *types.StreamSpecification
 
+	// The table class of the new table. Valid values are STANDARD and
+	// STANDARD_INFREQUENT_ACCESS.
+	TableClass types.TableClass
+
 	// A list of key-value pairs to label the table. For more information, see Tagging
 	// for DynamoDB
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html).

@@ -10107,6 +10107,15 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				return err
 			}
 
+		case "siteLinkEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected SiteLinkEnabled to be of type *bool, got %T instead", value)
+				}
+				sv.SiteLinkEnabled = ptr.Bool(jtv)
+			}
+
 		case "tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
@@ -11052,6 +11061,15 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				return err
 			}
 
+		case "siteLinkEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected SiteLinkEnabled to be of type *bool, got %T instead", value)
+				}
+				sv.SiteLinkEnabled = ptr.Bool(jtv)
+			}
+
 		case "tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
@@ -11310,6 +11328,15 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 		case "routeFilterPrefixes":
 			if err := awsAwsjson11_deserializeDocumentRouteFilterPrefixList(&sv.RouteFilterPrefixes, value); err != nil {
 				return err
+			}
+
+		case "siteLinkEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected SiteLinkEnabled to be of type *bool, got %T instead", value)
+				}
+				sv.SiteLinkEnabled = ptr.Bool(jtv)
 			}
 
 		case "tags":
@@ -12115,6 +12142,15 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 		case "routeFilterPrefixes":
 			if err := awsAwsjson11_deserializeDocumentRouteFilterPrefixList(&sv.RouteFilterPrefixes, value); err != nil {
 				return err
+			}
+
+		case "siteLinkEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected SiteLinkEnabled to be of type *bool, got %T instead", value)
+				}
+				sv.SiteLinkEnabled = ptr.Bool(jtv)
 			}
 
 		case "tags":
@@ -13338,6 +13374,15 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				return err
 			}
 
+		case "siteLinkEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected SiteLinkEnabled to be of type *bool, got %T instead", value)
+				}
+				sv.SiteLinkEnabled = ptr.Bool(jtv)
+			}
+
 		case "tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
@@ -13596,6 +13641,15 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 		case "routeFilterPrefixes":
 			if err := awsAwsjson11_deserializeDocumentRouteFilterPrefixList(&sv.RouteFilterPrefixes, value); err != nil {
 				return err
+			}
+
+		case "siteLinkEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected SiteLinkEnabled to be of type *bool, got %T instead", value)
+				}
+				sv.SiteLinkEnabled = ptr.Bool(jtv)
 			}
 
 		case "tags":
@@ -16277,6 +16331,15 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 		case "routeFilterPrefixes":
 			if err := awsAwsjson11_deserializeDocumentRouteFilterPrefixList(&sv.RouteFilterPrefixes, value); err != nil {
 				return err
+			}
+
+		case "siteLinkEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected SiteLinkEnabled to be of type *bool, got %T instead", value)
+				}
+				sv.SiteLinkEnabled = ptr.Bool(jtv)
 			}
 
 		case "tags":

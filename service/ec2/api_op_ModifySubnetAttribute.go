@@ -11,7 +11,26 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies a subnet attribute. You can only modify one attribute at a time.
+// Modifies a subnet attribute. You can only modify one attribute at a time. Use
+// this action to modify subnets on Amazon Web Services Outposts.
+//
+// * To modify a
+// subnet on an Outpost rack, set both MapCustomerOwnedIpOnLaunch and
+// CustomerOwnedIpv4Pool. These two parameters act as a single attribute.
+//
+// * To
+// modify a subnet on an Outpost server, set either EnableLniAtDeviceIndex or
+// DisableLniAtDeviceIndex.
+//
+// For more information about Amazon Web Services
+// Outposts, see the following:
+//
+// * Outpost servers
+// (https://docs.aws.amazon.com/outposts/latest/userguide/how-servers-work.html)
+//
+// *
+// Outpost racks
+// (https://docs.aws.amazon.com/outposts/latest/userguide/how-racks-work.html)
 func (c *Client) ModifySubnetAttribute(ctx context.Context, params *ModifySubnetAttributeInput, optFns ...func(*Options)) (*ModifySubnetAttributeOutput, error) {
 	if params == nil {
 		params = &ModifySubnetAttributeInput{}
@@ -46,9 +65,19 @@ type ModifySubnetAttributeInput struct {
 	// this value when you specify true for MapCustomerOwnedIpOnLaunch.
 	CustomerOwnedIpv4Pool *string
 
+	// Specify true to indicate that local network interfaces at the current position
+	// should be disabled.
+	DisableLniAtDeviceIndex *types.AttributeBooleanValue
+
 	// Indicates whether DNS queries made to the Amazon-provided DNS Resolver in this
 	// subnet should return synthetic IPv6 addresses for IPv4-only destinations.
 	EnableDns64 *types.AttributeBooleanValue
+
+	// Indicates the device position for local network interfaces in this subnet. For
+	// example, 1 indicates local network interfaces in this subnet are the secondary
+	// network interface (eth1). A local network interface cannot be the primary
+	// network interface (eth0).
+	EnableLniAtDeviceIndex *int32
 
 	// Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA
 	// records.

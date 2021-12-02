@@ -12,10 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Amazon FSx for NetApp ONTAP volume. When deleting a volume, you have
-// the option of creating a final backup. If you create a final backup, you have
-// the option to apply Tags to the backup. You need to have fsx:TagResource
-// permission in order to apply tags to the backup.
+// Deletes an Amazon FSx for NetApp ONTAP or Amazon FSx for OpenZFS volume.
 func (c *Client) DeleteVolume(ctx context.Context, params *DeleteVolumeInput, optFns ...func(*Options)) (*DeleteVolumeOutput, error) {
 	if params == nil {
 		params = &DeleteVolumeInput{}
@@ -33,7 +30,7 @@ func (c *Client) DeleteVolume(ctx context.Context, params *DeleteVolumeInput, op
 
 type DeleteVolumeInput struct {
 
-	// The ID of the volume you are deleting.
+	// The ID of the volume that you are deleting.
 	//
 	// This member is required.
 	VolumeId *string
@@ -44,21 +41,27 @@ type DeleteVolumeInput struct {
 	ClientRequestToken *string
 
 	// For Amazon FSx for ONTAP volumes, specify whether to take a final backup of the
-	// volume, and apply tags to the backup.
+	// volume and apply tags to the backup. To apply tags to the backup, you must have
+	// the fsx:TagResource permission.
 	OntapConfiguration *types.DeleteVolumeOntapConfiguration
+
+	// For Amazon FSx for OpenZFS volumes, specify whether to delete all child volumes
+	// and snapshots.
+	OpenZFSConfiguration *types.DeleteVolumeOpenZFSConfiguration
 
 	noSmithyDocumentSerde
 }
 
 type DeleteVolumeOutput struct {
 
-	// Describes the lifecycle state of the volume being deleted.
+	// The lifecycle state of the volume being deleted. If the DeleteVolume operation
+	// is successful, this value is DELETING.
 	Lifecycle types.VolumeLifecycle
 
 	// Returned after a DeleteVolume request, showing the status of the delete request.
 	OntapResponse *types.DeleteVolumeOntapResponse
 
-	// The ID of the volume being deleted.
+	// The ID of the volume that's being deleted.
 	VolumeId *string
 
 	// Metadata pertaining to the operation's result.

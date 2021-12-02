@@ -651,6 +651,24 @@ func (StreamViewType) Values() []StreamViewType {
 	}
 }
 
+type TableClass string
+
+// Enum values for TableClass
+const (
+	TableClassStandard                 TableClass = "STANDARD"
+	TableClassStandardInfrequentAccess TableClass = "STANDARD_INFREQUENT_ACCESS"
+)
+
+// Values returns all known values for TableClass. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (TableClass) Values() []TableClass {
+	return []TableClass{
+		"STANDARD",
+		"STANDARD_INFREQUENT_ACCESS",
+	}
+}
+
 type TableStatus string
 
 // Enum values for TableStatus

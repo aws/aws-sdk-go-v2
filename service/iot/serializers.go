@@ -20100,11 +20100,21 @@ func awsRestjson1_serializeDocumentThingIndexingConfiguration(v *types.ThingInde
 		}
 	}
 
+	if len(v.DeviceDefenderIndexingMode) > 0 {
+		ok := object.Key("deviceDefenderIndexingMode")
+		ok.String(string(v.DeviceDefenderIndexingMode))
+	}
+
 	if v.ManagedFields != nil {
 		ok := object.Key("managedFields")
 		if err := awsRestjson1_serializeDocumentFields(v.ManagedFields, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.NamedShadowIndexingMode) > 0 {
+		ok := object.Key("namedShadowIndexingMode")
+		ok.String(string(v.NamedShadowIndexingMode))
 	}
 
 	if len(v.ThingConnectivityIndexingMode) > 0 {

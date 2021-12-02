@@ -52324,6 +52324,15 @@ func awsRestjson1_deserializeDocumentThingDocument(v **types.ThingDocument, valu
 				return err
 			}
 
+		case "deviceDefender":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JsonDocument to be of type string, got %T instead", value)
+				}
+				sv.DeviceDefender = ptr.String(jtv)
+			}
+
 		case "shadow":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -52799,9 +52808,27 @@ func awsRestjson1_deserializeDocumentThingIndexingConfiguration(v **types.ThingI
 				return err
 			}
 
+		case "deviceDefenderIndexingMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeviceDefenderIndexingMode to be of type string, got %T instead", value)
+				}
+				sv.DeviceDefenderIndexingMode = types.DeviceDefenderIndexingMode(jtv)
+			}
+
 		case "managedFields":
 			if err := awsRestjson1_deserializeDocumentFields(&sv.ManagedFields, value); err != nil {
 				return err
+			}
+
+		case "namedShadowIndexingMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NamedShadowIndexingMode to be of type string, got %T instead", value)
+				}
+				sv.NamedShadowIndexingMode = types.NamedShadowIndexingMode(jtv)
 			}
 
 		case "thingConnectivityIndexingMode":

@@ -202,7 +202,7 @@ type SubStatementData struct {
 	Error *string
 
 	// A value that indicates whether the statement has a result set. The result set
-	// can be empty.
+	// can be empty. The value is true for an empty result set.
 	HasResultSet *bool
 
 	// The SQL statement text.

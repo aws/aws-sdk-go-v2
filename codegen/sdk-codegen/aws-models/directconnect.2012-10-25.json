@@ -881,7 +881,7 @@
                 "agreementName": {
                     "target": "com.amazonaws.directconnect#AgreementName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The name of the customer agreement.\n    </p>"
+                        "smithy.api#documentation": "<p>\n\n      The name of the customer agreement.\n\n    </p>"
                     }
                 }
             }
@@ -2938,7 +2938,7 @@
                 "virtualInterfaceName": {
                     "target": "com.amazonaws.directconnect#VirtualInterfaceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the virtual interface assigned by the customer network.</p>"
+                        "smithy.api#documentation": "<p>Provides the details about a virtual interface's router.</p>"
                     }
                 }
             }
@@ -3525,6 +3525,12 @@
             "traits": {
                 "smithy.api#documentation": "<p>A tag key was specified more than once.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.directconnect#EnableSiteLink": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
             }
         },
         "com.amazonaws.directconnect#EncryptionMode": {
@@ -4286,6 +4292,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tags associated with the private virtual interface.</p>"
                     }
+                },
+                "enableSiteLink": {
+                    "target": "com.amazonaws.directconnect#EnableSiteLink",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to enable or disable SiteLink.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4549,6 +4561,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tags associated with the transitive virtual interface.</p>"
                     }
+                },
+                "enableSiteLink": {
+                    "target": "com.amazonaws.directconnect#EnableSiteLink",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to enable or disable SiteLink.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4638,6 +4656,24 @@
         },
         "com.amazonaws.directconnect#OvertureService": {
             "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Direct Connect",
+                    "arnNamespace": "directconnect",
+                    "cloudFormationName": "DirectConnect",
+                    "cloudTrailEventSource": "directconnect.amazonaws.com",
+                    "endpointPrefix": "directconnect"
+                },
+                "aws.auth#sigv4": {
+                    "name": "directconnect"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<p>Direct Connect links your internal network to an Direct Connect location over a standard Ethernet fiber-optic cable. \n      One end of the cable is connected to your router, the other to an Direct Connect router. With this connection\n      in place, you can create virtual interfaces directly to the Amazon Web Services Cloud (for example, to Amazon EC2 \n      and Amazon S3) and to Amazon VPC, bypassing Internet service providers in your network path. A \n      connection provides access to all Amazon Web Services Regions except the China (Beijing) and (China) Ningxia Regions. \n      Amazon Web Services resources in the China Regions can only be accessed through locations associated with those Regions.</p>",
+                "smithy.api#title": "AWS Direct Connect",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://directconnect.amazonaws.com/doc/2012-10-25/"
+                }
+            },
             "version": "2012-10-25",
             "operations": [
                 {
@@ -4829,25 +4865,7 @@
                 {
                     "target": "com.amazonaws.directconnect#UpdateVirtualInterfaceAttributes"
                 }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Direct Connect",
-                    "arnNamespace": "directconnect",
-                    "cloudFormationName": "DirectConnect",
-                    "cloudTrailEventSource": "directconnect.amazonaws.com",
-                    "endpointPrefix": "directconnect"
-                },
-                "aws.auth#sigv4": {
-                    "name": "directconnect"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>Direct Connect links your internal network to an Direct Connect location over a standard Ethernet fiber-optic cable. \n      One end of the cable is connected to your router, the other to an Direct Connect router. With this connection\n      in place, you can create virtual interfaces directly to the Amazon Web Services Cloud (for example, to Amazon EC2 \n      and Amazon S3) and to Amazon VPC, bypassing Internet service providers in your network path. A \n      connection provides access to all Amazon Web Services Regions except the China (Beijing) and (China) Ningxia Regions. \n      Amazon Web Services resources in the China Regions can only be accessed through locations associated with those Regions.</p>",
-                "smithy.api#title": "AWS Direct Connect",
-                "smithy.api#xmlNamespace": {
-                    "uri": "http://directconnect.amazonaws.com/doc/2012-10-25/"
-                }
-            }
+            ]
         },
         "com.amazonaws.directconnect#OwnerAccount": {
             "type": "string"
@@ -4992,6 +5010,12 @@
         },
         "com.amazonaws.directconnect#SecretARN": {
             "type": "string"
+        },
+        "com.amazonaws.directconnect#SiteLinkEnabled": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
+            }
         },
         "com.amazonaws.directconnect#Software": {
             "type": "string"
@@ -5513,6 +5537,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 9001. The default value is 1500.</p>"
                     }
+                },
+                "enableSiteLink": {
+                    "target": "com.amazonaws.directconnect#EnableSiteLink",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to enable or disable SiteLink.</p>"
+                    }
+                },
+                "virtualInterfaceName": {
+                    "target": "com.amazonaws.directconnect#VirtualInterfaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the virtual private interface.</p>"
+                    }
                 }
             }
         },
@@ -5722,6 +5758,12 @@
                     "target": "com.amazonaws.directconnect#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags associated with the virtual interface.</p>"
+                    }
+                },
+                "siteLinkEnabled": {
+                    "target": "com.amazonaws.directconnect#SiteLinkEnabled",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether SiteLink is enabled.</p>"
                     }
                 }
             },

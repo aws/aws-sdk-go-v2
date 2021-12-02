@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a shipping label that will be used to return the Snow device to AWS.
+// Creates a shipping label that will be used to return the Snow device to Amazon
+// Web Services.
 func (c *Client) CreateReturnShippingLabel(ctx context.Context, params *CreateReturnShippingLabelInput, optFns ...func(*Options)) (*CreateReturnShippingLabelOutput, error) {
 	if params == nil {
 		params = &CreateReturnShippingLabelInput{}
@@ -36,8 +37,9 @@ type CreateReturnShippingLabelInput struct {
 	JobId *string
 
 	// The shipping speed for a particular job. This speed doesn't dictate how soon the
-	// device is returned to AWS. This speed represents how quickly it moves to its
-	// destination while in transit. Regional shipping speeds are as follows:
+	// device is returned to Amazon Web Services. This speed represents how quickly it
+	// moves to its destination while in transit. Regional shipping speeds are as
+	// follows:
 	ShippingOption types.ShippingOption
 
 	noSmithyDocumentSerde
@@ -46,7 +48,7 @@ type CreateReturnShippingLabelInput struct {
 type CreateReturnShippingLabelOutput struct {
 
 	// The status information of the task on a Snow device that is being returned to
-	// AWS.
+	// Amazon Web Services.
 	Status types.ShippingLabelStatus
 
 	// Metadata pertaining to the operation's result.

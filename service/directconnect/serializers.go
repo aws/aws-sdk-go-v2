@@ -3542,6 +3542,11 @@ func awsAwsjson11_serializeDocumentNewPrivateVirtualInterface(v *types.NewPrivat
 		ok.String(*v.DirectConnectGatewayId)
 	}
 
+	if v.EnableSiteLink != nil {
+		ok := object.Key("enableSiteLink")
+		ok.Boolean(*v.EnableSiteLink)
+	}
+
 	if v.Mtu != nil {
 		ok := object.Key("mtu")
 		ok.Integer(*v.Mtu)
@@ -3770,6 +3775,11 @@ func awsAwsjson11_serializeDocumentNewTransitVirtualInterface(v *types.NewTransi
 	if v.DirectConnectGatewayId != nil {
 		ok := object.Key("directConnectGatewayId")
 		ok.String(*v.DirectConnectGatewayId)
+	}
+
+	if v.EnableSiteLink != nil {
+		ok := object.Key("enableSiteLink")
+		ok.Boolean(*v.EnableSiteLink)
 	}
 
 	if v.Mtu != nil {
@@ -5206,6 +5216,11 @@ func awsAwsjson11_serializeOpDocumentUpdateVirtualInterfaceAttributesInput(v *Up
 	object := value.Object()
 	defer object.Close()
 
+	if v.EnableSiteLink != nil {
+		ok := object.Key("enableSiteLink")
+		ok.Boolean(*v.EnableSiteLink)
+	}
+
 	if v.Mtu != nil {
 		ok := object.Key("mtu")
 		ok.Integer(*v.Mtu)
@@ -5214,6 +5229,11 @@ func awsAwsjson11_serializeOpDocumentUpdateVirtualInterfaceAttributesInput(v *Up
 	if v.VirtualInterfaceId != nil {
 		ok := object.Key("virtualInterfaceId")
 		ok.String(*v.VirtualInterfaceId)
+	}
+
+	if v.VirtualInterfaceName != nil {
+		ok := object.Key("virtualInterfaceName")
+		ok.String(*v.VirtualInterfaceName)
 	}
 
 	return nil

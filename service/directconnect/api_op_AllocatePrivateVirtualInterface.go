@@ -113,6 +113,9 @@ type AllocatePrivateVirtualInterfaceOutput struct {
 	// Applies to public virtual interfaces.
 	RouteFilterPrefixes []types.RouteFilterPrefix
 
+	// Indicates whether SiteLink is enabled.
+	SiteLinkEnabled *bool
+
 	// The tags associated with the virtual interface.
 	Tags []types.Tag
 

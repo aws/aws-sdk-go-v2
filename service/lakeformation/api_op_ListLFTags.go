@@ -4,6 +4,7 @@ package lakeformation
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
@@ -11,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists tags that the requester has permission to view.
+// Lists LF-tags that the requester has permission to view.
 func (c *Client) ListLFTags(ctx context.Context, params *ListLFTagsInput, optFns ...func(*Options)) (*ListLFTagsOutput, error) {
 	if params == nil {
 		params = &ListLFTagsInput{}
@@ -31,8 +32,8 @@ type ListLFTagsInput struct {
 
 	// The identifier for the Data Catalog. By default, the account ID. The Data
 	// Catalog is the persistent metadata store. It contains database definitions,
-	// table definitions, and other control information to manage your AWS Lake
-	// Formation environment.
+	// table definitions, and other control information to manage your Lake Formation
+	// environment.
 	CatalogId *string
 
 	// The maximum number of results to return.
@@ -41,10 +42,11 @@ type ListLFTagsInput struct {
 	// A continuation token, if this is not the first call to retrieve this list.
 	NextToken *string
 
-	// If resource share type is ALL, returns both in-account tags and shared tags that
-	// the requester has permission to view. If resource share type is FOREIGN, returns
-	// all share tags that the requester can view. If no resource share type is passed,
-	// lists tags in the given catalog ID that the requester has permission to view.
+	// If resource share type is ALL, returns both in-account LF-tags and shared
+	// LF-tags that the requester has permission to view. If resource share type is
+	// FOREIGN, returns all share LF-tags that the requester can view. If no resource
+	// share type is passed, lists LF-tags in the given catalog ID that the requester
+	// has permission to view.
 	ResourceShareType types.ResourceShareType
 
 	noSmithyDocumentSerde
@@ -52,7 +54,7 @@ type ListLFTagsInput struct {
 
 type ListLFTagsOutput struct {
 
-	// A list of tags that the requested has permission to view.
+	// A list of LF-tags that the requested has permission to view.
 	LFTags []types.LFTagPair
 
 	// A continuation token, present if the current list segment is not the last.
@@ -65,11 +67,11 @@ type ListLFTagsOutput struct {
 }
 
 func (c *Client) addOperationListLFTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListLFTags{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLFTags{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListLFTags{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListLFTags{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -122,6 +124,91 @@ func (c *Client) addOperationListLFTagsMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	return nil
+}
+
+// ListLFTagsAPIClient is a client that implements the ListLFTags operation.
+type ListLFTagsAPIClient interface {
+	ListLFTags(context.Context, *ListLFTagsInput, ...func(*Options)) (*ListLFTagsOutput, error)
+}
+
+var _ ListLFTagsAPIClient = (*Client)(nil)
+
+// ListLFTagsPaginatorOptions is the paginator options for ListLFTags
+type ListLFTagsPaginatorOptions struct {
+	// The maximum number of results to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListLFTagsPaginator is a paginator for ListLFTags
+type ListLFTagsPaginator struct {
+	options   ListLFTagsPaginatorOptions
+	client    ListLFTagsAPIClient
+	params    *ListLFTagsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListLFTagsPaginator returns a new ListLFTagsPaginator
+func NewListLFTagsPaginator(client ListLFTagsAPIClient, params *ListLFTagsInput, optFns ...func(*ListLFTagsPaginatorOptions)) *ListLFTagsPaginator {
+	if params == nil {
+		params = &ListLFTagsInput{}
+	}
+
+	options := ListLFTagsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListLFTagsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListLFTagsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListLFTags page.
+func (p *ListLFTagsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListLFTagsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListLFTags(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListLFTags(region string) *awsmiddleware.RegisterServiceMetadata {

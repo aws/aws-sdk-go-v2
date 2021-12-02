@@ -38,9 +38,12 @@ type ListPermissionsInput struct {
 
 	// The identifier for the Data Catalog. By default, the account ID. The Data
 	// Catalog is the persistent metadata store. It contains database definitions,
-	// table definitions, and other control information to manage your AWS Lake
-	// Formation environment.
+	// table definitions, and other control information to manage your Lake Formation
+	// environment.
 	CatalogId *string
+
+	// Indicates that related permissions should be included in the results.
+	IncludeRelated *string
 
 	// The maximum number of results to return.
 	MaxResults *int32
@@ -79,11 +82,11 @@ type ListPermissionsOutput struct {
 }
 
 func (c *Client) addOperationListPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPermissions{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPermissions{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListPermissions{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPermissions{}, middleware.After)
 	if err != nil {
 		return err
 	}

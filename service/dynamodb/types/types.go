@@ -917,6 +917,10 @@ type CreateReplicationGroupMemberAction struct {
 	// table's provisioned throughput settings.
 	ProvisionedThroughputOverride *ProvisionedThroughputOverride
 
+	// Replica-specific table class. If not specified, uses the source table's table
+	// class.
+	TableClassOverride TableClass
+
 	noSmithyDocumentSerde
 }
 
@@ -2175,6 +2179,9 @@ type ReplicaDescription struct {
 	// percentage.
 	ReplicaStatusPercentProgress *string
 
+	// Contains details of the table class.
+	ReplicaTableClassSummary *TableClassSummary
+
 	noSmithyDocumentSerde
 }
 
@@ -2359,6 +2366,9 @@ type ReplicaSettingsDescription struct {
 	// * ACTIVE - The Region is ready for use.
 	ReplicaStatus ReplicaStatus
 
+	// Contains details of the table class.
+	ReplicaTableClassSummary *TableClassSummary
+
 	noSmithyDocumentSerde
 }
 
@@ -2383,6 +2393,10 @@ type ReplicaSettingsUpdate struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput)
 	// in the Amazon DynamoDB Developer Guide.
 	ReplicaProvisionedReadCapacityUnits *int64
+
+	// Replica-specific table class. If not specified, uses the source table's table
+	// class.
+	ReplicaTableClass TableClass
 
 	noSmithyDocumentSerde
 }
@@ -2646,6 +2660,19 @@ type TableAutoScalingDescription struct {
 	noSmithyDocumentSerde
 }
 
+// Contains details of the table class.
+type TableClassSummary struct {
+
+	// The date and time at which the table class was last updated.
+	LastUpdateDateTime *time.Time
+
+	// The table class of the specified table. Valid values are STANDARD and
+	// STANDARD_INFREQUENT_ACCESS.
+	TableClass TableClass
+
+	noSmithyDocumentSerde
+}
+
 // Represents the properties of a table.
 type TableDescription struct {
 
@@ -2867,6 +2894,9 @@ type TableDescription struct {
 	// The Amazon Resource Name (ARN) that uniquely identifies the table.
 	TableArn *string
 
+	// Contains details of the table class.
+	TableClassSummary *TableClassSummary
+
 	// Unique identifier for the table for which the backup was created.
 	TableId *string
 
@@ -3072,6 +3102,10 @@ type UpdateReplicationGroupMemberAction struct {
 	// Replica-specific provisioned throughput. If not specified, uses the source
 	// table's provisioned throughput settings.
 	ProvisionedThroughputOverride *ProvisionedThroughputOverride
+
+	// Replica-specific table class. If not specified, uses the source table's table
+	// class.
+	TableClassOverride TableClass
 
 	noSmithyDocumentSerde
 }

@@ -126,6 +126,10 @@ type DescribeCompilationJobOutput struct {
 	// Amazon S3.
 	ModelDigests *types.ModelDigests
 
+	// The Amazon Resource Name (ARN) of the versioned model package that was provided
+	// to SageMaker Neo when you initiated a compilation job.
+	ModelPackageVersionArn *string
+
 	// A VpcConfig object that specifies the VPC that you want your compilation job to
 	// connect to. Control access to your models by configuring the VPC. For more
 	// information, see Protect Compilation Jobs by Using an Amazon Virtual Private

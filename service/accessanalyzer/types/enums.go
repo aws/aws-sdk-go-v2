@@ -413,6 +413,28 @@ func (ValidatePolicyFindingType) Values() []ValidatePolicyFindingType {
 	}
 }
 
+type ValidatePolicyResourceType string
+
+// Enum values for ValidatePolicyResourceType
+const (
+	ValidatePolicyResourceTypeS3Bucket                  ValidatePolicyResourceType = "AWS::S3::Bucket"
+	ValidatePolicyResourceTypeS3AccessPoint             ValidatePolicyResourceType = "AWS::S3::AccessPoint"
+	ValidatePolicyResourceTypeS3MultiRegionAccessPoint  ValidatePolicyResourceType = "AWS::S3::MultiRegionAccessPoint"
+	ValidatePolicyResourceTypeS3ObjectLambdaAccessPoint ValidatePolicyResourceType = "AWS::S3ObjectLambda::AccessPoint"
+)
+
+// Values returns all known values for ValidatePolicyResourceType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ValidatePolicyResourceType) Values() []ValidatePolicyResourceType {
+	return []ValidatePolicyResourceType{
+		"AWS::S3::Bucket",
+		"AWS::S3::AccessPoint",
+		"AWS::S3::MultiRegionAccessPoint",
+		"AWS::S3ObjectLambda::AccessPoint",
+	}
+}
+
 type ValidationExceptionReason string
 
 // Enum values for ValidationExceptionReason

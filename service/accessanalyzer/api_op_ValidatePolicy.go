@@ -60,6 +60,17 @@ type ValidatePolicyInput struct {
 	// A token used for pagination of results returned.
 	NextToken *string
 
+	// The type of resource to attach to your resource policy. Specify a value for the
+	// policy validation resource type only if the policy type is RESOURCE_POLICY. For
+	// example, to validate a resource policy to attach to an Amazon S3 bucket, you can
+	// choose AWS::S3::Bucket for the policy validation resource type. For resource
+	// types not supported as valid values, IAM Access Analyzer runs policy checks that
+	// apply to all resource policies. For example, to validate a resource policy to
+	// attach to a KMS key, do not specify a value for the policy validation resource
+	// type and IAM Access Analyzer will run policy checks that apply to all resource
+	// policies.
+	ValidatePolicyResourceType types.ValidatePolicyResourceType
+
 	noSmithyDocumentSerde
 }
 

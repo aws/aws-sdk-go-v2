@@ -52,8 +52,8 @@ type UpdateClusterInput struct {
 	Notification *types.Notification
 
 	// Specifies the service or services on the Snow Family device that your
-	// transferred data will be exported from or imported into. AWS Snow Family
-	// supports Amazon S3 and NFS (Network File System).
+	// transferred data will be exported from or imported into. Amazon Web Services
+	// Snow Family device clusters support Amazon S3 and NFS (Network File System).
 	OnDeviceServiceConfiguration *types.OnDeviceServiceConfiguration
 
 	// The updated arrays of JobResource objects that can include updated S3Resource
@@ -63,7 +63,7 @@ type UpdateClusterInput struct {
 	// The new role Amazon Resource Name (ARN) that you want to associate with this
 	// cluster. To create a role ARN, use the CreateRole
 	// (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html) API
-	// action in AWS Identity and Access Management (IAM).
+	// action in Identity and Access Management (IAM).
 	RoleARN *string
 
 	// The updated shipping option value of this cluster's ShippingDetails object.

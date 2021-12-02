@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes one or more Amazon FSx for NetApp ONTAP volumes.
+// Describes one or more Amazon FSx for NetApp ONTAP or Amazon FSx for OpenZFS
+// volumes.
 func (c *Client) DescribeVolumes(ctx context.Context, params *DescribeVolumesInput, optFns ...func(*Options)) (*DescribeVolumesOutput, error) {
 	if params == nil {
 		params = &DescribeVolumesInput{}
@@ -30,7 +31,7 @@ func (c *Client) DescribeVolumes(ctx context.Context, params *DescribeVolumesInp
 
 type DescribeVolumesInput struct {
 
-	// Enter a filter name:value pair to view a select set of volumes.
+	// Enter a filter Name and Values pair to view a select set of volumes.
 	Filters []types.VolumeFilter
 
 	// The maximum number of resources to return in the response. This value must be an
@@ -42,7 +43,7 @@ type DescribeVolumesInput struct {
 	// request, where the previous NextToken value left off.
 	NextToken *string
 
-	// IDs of the volumes whose descriptions you want to retrieve.
+	// The IDs of the volumes whose descriptions you want to retrieve.
 	VolumeIds []string
 
 	noSmithyDocumentSerde

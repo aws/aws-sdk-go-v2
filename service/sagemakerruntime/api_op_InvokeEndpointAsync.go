@@ -20,9 +20,10 @@ import (
 // SageMaker strips all POST headers except those supported by the API. Amazon
 // SageMaker might add additional headers. You should not rely on the behavior of
 // headers outside those enumerated in the request syntax. Calls to
-// InvokeEndpointAsync are authenticated by using AWS Signature Version 4. For
-// information, see Authenticating Requests (AWS Signature Version 4)
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html)
+// InvokeEndpointAsync are authenticated by using Amazon Web Services Signature
+// Version 4. For information, see Authenticating Requests (Amazon Web Services
+// Signature Version 4)
+// (https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html)
 // in the Amazon S3 API Reference.
 func (c *Client) InvokeEndpointAsync(ctx context.Context, params *InvokeEndpointAsyncInput, optFns ...func(*Options)) (*InvokeEndpointAsyncOutput, error) {
 	if params == nil {
@@ -72,7 +73,8 @@ type InvokeEndpointAsyncInput struct {
 	// not set this value in the response, an empty value is returned. For example, if
 	// a custom attribute represents the trace ID, your model can prepend the custom
 	// attribute with Trace ID: in your post-processing function. This feature is
-	// currently supported in the AWS SDKs but not in the Amazon SageMaker Python SDK.
+	// currently supported in the Amazon Web Services SDKs but not in the Amazon
+	// SageMaker Python SDK.
 	CustomAttributes *string
 
 	// The identifier for the inference request. Amazon SageMaker will generate an

@@ -81,8 +81,9 @@ type CreateIndexInput struct {
 	// displayable.
 	UserContextPolicy types.UserContextPolicy
 
-	// Enables fetching access levels of groups and users from an AWS Single Sign-On
-	// identity source. To configure this, see UserGroupResolutionConfiguration
+	// Enables fetching access levels of groups and users from an Amazon Web Services
+	// Single Sign On identity source. To configure this, see
+	// UserGroupResolutionConfiguration
 	// (https://docs.aws.amazon.com/kendra/latest/dg/API_UserGroupResolutionConfiguration.html).
 	UserGroupResolutionConfiguration *types.UserGroupResolutionConfiguration
 

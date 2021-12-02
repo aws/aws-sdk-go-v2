@@ -129,7 +129,7 @@ func (e *KMSDisabledException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // for this request. For more information, see How Key State Affects Use of a
 // Customer Master Key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
-// AWS Key Management Service Developer Guide.
+// Amazon Web Services Key Management Service Developer Guide.
 type KMSInvalidStateException struct {
 	Message *string
 
@@ -168,7 +168,7 @@ func (e *KMSNotFoundException) ErrorMessage() string {
 func (e *KMSNotFoundException) ErrorCode() string             { return "KMSNotFoundException" }
 func (e *KMSNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The AWS access key ID needs a subscription for the service.
+// The Amazon Web Services access key ID needs a subscription for the service.
 type KMSOptInRequired struct {
 	Message *string
 
@@ -190,7 +190,7 @@ func (e *KMSOptInRequired) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 // The request was denied due to request throttling. For more information about
 // throttling, see Limits
 // (https://docs.aws.amazon.com/kms/latest/developerguide/limits.html#requests-per-second)
-// in the AWS Key Management Service Developer Guide.
+// in the Amazon Web Services Key Management Service Developer Guide.
 type KMSThrottlingException struct {
 	Message *string
 
@@ -234,9 +234,9 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // more information, see Streams Limits
 // (https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html)
 // in the Amazon Kinesis Data Streams Developer Guide, and Error Retries and
-// Exponential Backoff in AWS
-// (https://docs.aws.amazon.com/general/latest/gr/api-retries.html) in the AWS
-// General Reference.
+// Exponential Backoff in Amazon Web Services
+// (https://docs.aws.amazon.com/general/latest/gr/api-retries.html) in the Amazon
+// Web Services General Reference.
 type ProvisionedThroughputExceededException struct {
 	Message *string
 
@@ -298,3 +298,22 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+//
+type ValidationException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ValidationException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ValidationException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
+func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

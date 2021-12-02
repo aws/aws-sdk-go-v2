@@ -85,6 +85,25 @@ func (e *EntityNotFoundException) ErrorMessage() string {
 func (e *EntityNotFoundException) ErrorCode() string             { return "EntityNotFoundException" }
 func (e *EntityNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Contains details about an error where the query request expired.
+type ExpiredException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ExpiredException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ExpiredException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ExpiredException) ErrorCode() string             { return "ExpiredException" }
+func (e *ExpiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // An encryption operation failed.
 type GlueEncryptionException struct {
 	Message *string
@@ -161,6 +180,26 @@ func (e *OperationTimeoutException) ErrorMessage() string {
 func (e *OperationTimeoutException) ErrorCode() string             { return "OperationTimeoutException" }
 func (e *OperationTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Contains details about an error related to a resource which is not ready for a
+// transaction.
+type ResourceNotReadyException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ResourceNotReadyException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourceNotReadyException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourceNotReadyException) ErrorCode() string             { return "ResourceNotReadyException" }
+func (e *ResourceNotReadyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // A resource numerical limit was exceeded.
 type ResourceNumberLimitExceededException struct {
 	Message *string
@@ -183,3 +222,123 @@ func (e *ResourceNumberLimitExceededException) ErrorCode() string {
 func (e *ResourceNumberLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+
+// Contains details about an error related to statistics not being ready.
+type StatisticsNotReadyYetException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *StatisticsNotReadyYetException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *StatisticsNotReadyYetException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *StatisticsNotReadyYetException) ErrorCode() string             { return "StatisticsNotReadyYetException" }
+func (e *StatisticsNotReadyYetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// Contains details about an error where the query request was throttled.
+type ThrottledException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ThrottledException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ThrottledException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ThrottledException) ErrorCode() string             { return "ThrottledException" }
+func (e *ThrottledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// Contains details about an error related to a transaction that was cancelled.
+type TransactionCanceledException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *TransactionCanceledException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TransactionCanceledException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TransactionCanceledException) ErrorCode() string             { return "TransactionCanceledException" }
+func (e *TransactionCanceledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// Contains details about an error related to a transaction commit that was in
+// progress.
+type TransactionCommitInProgressException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *TransactionCommitInProgressException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TransactionCommitInProgressException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TransactionCommitInProgressException) ErrorCode() string {
+	return "TransactionCommitInProgressException"
+}
+func (e *TransactionCommitInProgressException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// Contains details about an error where the specified transaction has already been
+// committed and cannot be used for UpdateTableObjects.
+type TransactionCommittedException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *TransactionCommittedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TransactionCommittedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TransactionCommittedException) ErrorCode() string             { return "TransactionCommittedException" }
+func (e *TransactionCommittedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// Contains details about an error related to work units not being ready.
+type WorkUnitsNotReadyYetException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *WorkUnitsNotReadyYetException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *WorkUnitsNotReadyYetException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *WorkUnitsNotReadyYetException) ErrorCode() string             { return "WorkUnitsNotReadyYetException" }
+func (e *WorkUnitsNotReadyYetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

@@ -23,7 +23,8 @@ import (
 // see Filtering on user context
 // (https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html). If more
 // than five PUT actions for a group are currently processing, a validation
-// exception is thrown.
+// exception is thrown. PutPrincipalMapping is currently not supported in the
+// Amazon Web Services GovCloud (US-West) region.
 func (c *Client) PutPrincipalMapping(ctx context.Context, params *PutPrincipalMappingInput, optFns ...func(*Options)) (*PutPrincipalMappingOutput, error) {
 	if params == nil {
 		params = &PutPrincipalMappingInput{}
