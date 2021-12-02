@@ -24,6 +24,7 @@ import software.amazon.smithy.go.codegen.trait.PagingExtensionTrait;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.knowledge.PaginatedIndex;
 import software.amazon.smithy.model.knowledge.PaginationInfo;
+import software.amazon.smithy.model.knowledge.TopDownIndex;
 import software.amazon.smithy.model.shapes.MemberShape;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.ServiceShape;
@@ -51,7 +52,7 @@ public class S3PaginationExtensions implements GoIntegration {
         PaginatedIndex paginatedIndex = PaginatedIndex.of(model);
 
         Model.Builder builder = model.toBuilder();
-        for (ShapeId operation : service.getOperations()) {
+        for (OperationShape operation : TopDownIndex.of(model).getContainedOperations(service)) {
             Optional<PaginationInfo> optionalPaginationInfo = paginatedIndex.getPaginationInfo(service, operation);
             if (!optionalPaginationInfo.isPresent()) {
                 continue;

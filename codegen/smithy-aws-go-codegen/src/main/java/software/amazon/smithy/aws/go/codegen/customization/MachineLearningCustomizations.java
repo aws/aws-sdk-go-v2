@@ -13,6 +13,7 @@ import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
 import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.model.Model;
+import software.amazon.smithy.model.knowledge.TopDownIndex;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.model.shapes.Shape;
@@ -57,11 +58,9 @@ public class MachineLearningCustomizations implements GoIntegration {
             return;
         }
 
-        service.getAllOperations().stream()
-                .filter(shapeId -> shapeId.getName(service).equalsIgnoreCase("Predict"))
+        TopDownIndex.of(model).getContainedOperations(service).stream()
+                .filter(shape -> shape.getId().getName(service).equalsIgnoreCase("Predict"))
                 .findAny()
-                .map(model::expectShape)
-                .flatMap(Shape::asOperationShape)
                 .ifPresent(operation -> {
                     goDelegator.useShapeWriter(operation, writer -> writeEndpointAccessor(
                             writer, model, symbolProvider, operation));

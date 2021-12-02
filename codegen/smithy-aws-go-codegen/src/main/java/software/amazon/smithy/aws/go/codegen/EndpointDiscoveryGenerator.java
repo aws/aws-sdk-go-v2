@@ -24,6 +24,7 @@ import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.model.Model;
+import software.amazon.smithy.model.knowledge.TopDownIndex;
 import software.amazon.smithy.model.shapes.MemberShape;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.ServiceShape;
@@ -494,8 +495,7 @@ public class EndpointDiscoveryGenerator implements GoIntegration {
                 .build());
 
 
-        for (ShapeId operationId : service.getAllOperations()) {
-            OperationShape operation = model.expectShape(operationId, OperationShape.class);
+        for (OperationShape operation : TopDownIndex.of(model).getContainedOperations(service)) {
             String helperFuncName = generateAddDiscoverEndpointMiddlewareName(service, operation);
 
             Collection<Symbol> middlewareArgs = ListUtils.of(
@@ -556,8 +556,7 @@ public class EndpointDiscoveryGenerator implements GoIntegration {
         });
 
         // generate code specific to the operation
-        for (ShapeId id : service.getOperations()) {
-            OperationShape operation = model.expectShape(id, OperationShape.class);
+        for (OperationShape operation : TopDownIndex.of(model).getContainedOperations(service)) {
             goDelegator.useShapeWriter(operation, writer -> {
                 generateAddDiscoverEndpointMiddleware(model, symbolProvider, writer, service, operation);
                 generateFetchDiscoveredEndpointFunction(model, symbolProvider, writer, service, operation);

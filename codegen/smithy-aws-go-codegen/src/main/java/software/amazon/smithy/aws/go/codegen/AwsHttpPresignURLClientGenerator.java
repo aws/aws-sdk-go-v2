@@ -36,6 +36,7 @@ import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.model.Model;
+import software.amazon.smithy.model.knowledge.TopDownIndex;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.model.shapes.Shape;
@@ -198,8 +199,7 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
             writeConvertToPresignMiddleware(writer, model, symbolProvider, serviceShape);
         });
 
-        for (ShapeId operationId : serviceShape.getAllOperations()) {
-            OperationShape operationShape = model.expectShape(operationId, OperationShape.class);
+        for (OperationShape operationShape : TopDownIndex.of(model).getContainedOperations(serviceShape)) {
             if (!validOperations.contains(operationShape.getId())) {
                 continue;
             }
@@ -229,11 +229,11 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
         writer.writeDocs(
                 String.format(
                         "Presign%s is used to generate a presigned HTTP Request which contains presigned URL, signed headers "
-                                + "and HTTP method used.", operationSymbol.getName())
+                        + "and HTTP method used.", operationSymbol.getName())
         );
         writer.openBlock(
                 "func (c *$T) Presign$T(ctx context.Context, params $P, optFns ...func($P)) "
-                        + "($P, error) {", "}", presignClientSymbol, operationSymbol,
+                + "($P, error) {", "}", presignClientSymbol, operationSymbol,
                 operationInputSymbol, presignOptionsSymbol, v4PresignedHTTPRequestSymbol,
                 () -> {
                     writer.write("if params == nil { params = &$T{} }", operationInputSymbol).insertTrailingNewline();
@@ -338,17 +338,17 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                 smithyStack,
                 () -> {
                     Symbol smithyAfter = SymbolUtils.createValueSymbolBuilder("After",
-                            SmithyGoDependency.SMITHY_MIDDLEWARE)
+                                    SmithyGoDependency.SMITHY_MIDDLEWARE)
                             .build();
 
                     // Middleware to remove
                     Symbol requestInvocationID = SymbolUtils.createPointableSymbolBuilder(
-                            "ClientRequestID",
-                            AwsGoDependency.AWS_MIDDLEWARE)
+                                    "ClientRequestID",
+                                    AwsGoDependency.AWS_MIDDLEWARE)
                             .build();
 
                     Symbol presignMiddleware = SymbolUtils.createValueSymbolBuilder("NewPresignHTTPRequestMiddleware",
-                            AwsGoDependency.AWS_SIGNER_V4)
+                                    AwsGoDependency.AWS_SIGNER_V4)
                             .build();
 
                     // Middleware to add
@@ -385,25 +385,25 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                         writer.write("// add multi-region access point presigner");
 
                         // ==== multi-region access point support
-                       Symbol PresignConstructor =  SymbolUtils.createValueSymbolBuilder(
-                               "NewPresignHTTPRequestMiddleware", AwsCustomGoDependency.S3_CUSTOMIZATION
-                       ).build();
+                        Symbol PresignConstructor = SymbolUtils.createValueSymbolBuilder(
+                                "NewPresignHTTPRequestMiddleware", AwsCustomGoDependency.S3_CUSTOMIZATION
+                        ).build();
 
-                       Symbol PresignOptions = SymbolUtils.createValueSymbolBuilder(
-                         "PresignHTTPRequestMiddlewareOptions", AwsCustomGoDependency.S3_CUSTOMIZATION
-                       ).build();
+                        Symbol PresignOptions = SymbolUtils.createValueSymbolBuilder(
+                                "PresignHTTPRequestMiddlewareOptions", AwsCustomGoDependency.S3_CUSTOMIZATION
+                        ).build();
 
-                       Symbol RegisterPresigningMiddleware = SymbolUtils.createValueSymbolBuilder(
-                               "RegisterPreSigningMiddleware", AwsCustomGoDependency.S3_CUSTOMIZATION
-                       ).build();
+                        Symbol RegisterPresigningMiddleware = SymbolUtils.createValueSymbolBuilder(
+                                "RegisterPreSigningMiddleware", AwsCustomGoDependency.S3_CUSTOMIZATION
+                        ).build();
 
                         writer.openBlock("signermv := $T($T{", "})",
-                                PresignConstructor,PresignOptions, () -> {
-                           writer.write("CredentialsProvider : options.Credentials,");
-                           writer.write("V4Presigner : c.Presigner,");
-                           writer.write("V4aPresigner : c.presignerV4a,");
-                           writer.write("LogSigning : options.ClientLogMode.IsSigning(),");
-                        });
+                                PresignConstructor, PresignOptions, () -> {
+                                    writer.write("CredentialsProvider : options.Credentials,");
+                                    writer.write("V4Presigner : c.Presigner,");
+                                    writer.write("V4aPresigner : c.presignerV4a,");
+                                    writer.write("LogSigning : options.ClientLogMode.IsSigning(),");
+                                });
 
                         writer.write("err = $T(stack, signermv)", RegisterPresigningMiddleware);
                         writer.write("if err != nil { return err }");
@@ -420,7 +420,7 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                                 "AddExpiresOnPresignedURL",
                                 AwsCustomGoDependency.S3_CUSTOMIZATION).build();
                         writer.writeDocs("add middleware to set expiration for s3 presigned url, "
-                                + " if expiration is set to 0, this middleware sets a default expiration of 900 seconds");
+                                         + " if expiration is set to 0, this middleware sets a default expiration of 900 seconds");
                         writer.write("err = stack.Build.Add(&$T{ Expires: c.Expires, }, middleware.After)",
                                 expiresAsHeaderMiddleware);
                         writer.write("if err != nil { return err }");
@@ -506,7 +506,7 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
         // Helper function for NopClient
         writer.openBlock("func $L(o *Options) {", "}", NOP_HTTP_CLIENT_OPTION_FUNC_NAME, () -> {
             Symbol nopClientSymbol = SymbolUtils.createPointableSymbolBuilder("NopClient",
-                    SmithyGoDependency.SMITHY_HTTP_TRANSPORT)
+                            SmithyGoDependency.SMITHY_HTTP_TRANSPORT)
                     .build();
 
             writer.write("o.HTTPClient = $T{}", nopClientSymbol);
@@ -604,8 +604,8 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                 writer.write("");
                 writer.writeDocs(
                         String.format("Expires sets the expiration duration for the generated presign url. This should "
-                                + "be the duration in seconds the presigned URL should be considered valid for. If "
-                                + "not set or set to zero, presign url would default to expire after 900 seconds."
+                                      + "be the duration in seconds the presigned URL should be considered valid for. If "
+                                      + "not set or set to zero, presign url would default to expire after 900 seconds."
                         )
                 );
                 writer.write("Expires time.Duration");
@@ -632,7 +632,7 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
         writer.openBlock("func $L(optFns ...func(*Options)) func($P) {", "}",
                 PRESIGN_OPTIONS_FROM_CLIENT_OPTIONS, presignOptionsSymbol, () -> {
                     writer.write("return $L(optFns).options", presignOptionsFromClientOptionsInternal.getName());
-        });
+                });
 
         writer.insertTrailingNewline();
 
@@ -640,7 +640,7 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
         writer.openBlock("func (w $L) options (o $P) {", "}",
                 presignOptionsFromClientOptionsInternal.getName(), presignOptionsSymbol, () -> {
                     writer.write("o.ClientOptions = append(o.ClientOptions, w...)");
-        }).insertTrailingNewline();
+                }).insertTrailingNewline();
 
 
         // s3 specific helpers
@@ -653,7 +653,7 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
             writer.openBlock("func $L(dur time.Duration) func($P) {", "}",
                     PRESIGN_OPTIONS_FROM_EXPIRES, presignOptionsSymbol, () -> {
                         writer.write("return $L(dur).options", presignOptionsFromExpiresInternal.getName());
-            });
+                    });
 
             writer.insertTrailingNewline();
 
@@ -661,7 +661,7 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
             writer.openBlock("func (w $L) options (o $P) {", "}",
                     presignOptionsFromExpiresInternal.getName(), presignOptionsSymbol, () -> {
                         writer.write("o.Expires = time.Duration(w)");
-            }).insertTrailingNewline();
+                    }).insertTrailingNewline();
         }
     }
 
