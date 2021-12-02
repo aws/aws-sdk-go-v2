@@ -1,0 +1,9 @@
+{
+    "id": "b55ca4d6-6d1d-4102-baf0-cb7c49f3bde3",
+    "type": "bugfix",
+    "description": "Fixed a bug that prevented the resolution of the correct endpoint for some API operations.",
+    "modules": [
+        "service/evidently",
+        "service/location"
+    ]
+}

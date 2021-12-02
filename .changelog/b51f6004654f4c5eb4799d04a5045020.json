@@ -1,0 +1,17 @@
+{
+    "id": "b51f6004-654f-4c5e-b479-9d04a5045020",
+    "type": "bugfix",
+    "description": "Fixed an issue that prevent auto-filling of an API's idempotency parameters when not explictly provided by the caller.",
+    "modules": [
+        "service/accessanalyzer",
+        "service/amp",
+        "service/appmesh",
+        "service/braket",
+        "service/codeguruprofiler",
+        "service/grafana",
+        "service/nimble",
+        "service/proton",
+        "service/snowdevicemanagement",
+        "service/wisdom"
+    ]
+}
