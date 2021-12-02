@@ -4,6 +4,7 @@ package appmesh
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
@@ -130,6 +131,9 @@ func (c *Client) addOperationCreateVirtualServiceMiddlewares(stack *middleware.S
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opCreateVirtualServiceMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateVirtualServiceValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -146,6 +150,39 @@ func (c *Client) addOperationCreateVirtualServiceMiddlewares(stack *middleware.S
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpCreateVirtualService struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpCreateVirtualService) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpCreateVirtualService) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*CreateVirtualServiceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *CreateVirtualServiceInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opCreateVirtualServiceMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateVirtualService{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opCreateVirtualService(region string) *awsmiddleware.RegisterServiceMetadata {
