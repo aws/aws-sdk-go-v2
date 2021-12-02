@@ -1,8 +1,0 @@
-{
-    "id": "f0b24628-1bad-4ac2-85fe-7d8e7a342a7d",
-    "type": "feature",
-    "description": "Support has been added for the `StartConversation` API.",
-    "modules": [
-        "service/lexruntimev2"
-    ]
-}

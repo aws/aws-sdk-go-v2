@@ -1,3 +1,7 @@
+# v1.3.3 (2021-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.3.2 (2021-11-30)
 
 * **Bug Fix**: Fixed a race condition that caused concurrent calls relying on endpoint discovery to share the same `url.URL` reference in their operation's http.Request.

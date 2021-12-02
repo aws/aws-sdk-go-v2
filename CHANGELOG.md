@@ -1,3 +1,75 @@
+# Release (2021-12-02)
+
+## General Highlights
+* **Bug Fix**: Fixes a bug that prevented aws.EndpointResolverWithOptions from being used by the service client. ([#1514](https://github.com/aws/aws-sdk-go-v2/pull/1514))
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/config`: [v1.11.0](config/CHANGELOG.md#v1110-2021-12-02)
+  * **Feature**: Add support for specifying `EndpointResolverWithOptions` on `LoadOptions`, and associated `WithEndpointResolverWithOptions`.
+* `github.com/aws/aws-sdk-go-v2/service/accessanalyzer`: [v1.10.0](service/accessanalyzer/CHANGELOG.md#v1100-2021-12-02)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/applicationinsights`: [v1.9.0](service/applicationinsights/CHANGELOG.md#v190-2021-12-02)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/backupgateway`: [v1.0.0](service/backupgateway/CHANGELOG.md#v100-2021-12-02)
+  * **Release**: New AWS service client module
+* `github.com/aws/aws-sdk-go-v2/service/cloudhsm`: [v1.8.0](service/cloudhsm/CHANGELOG.md#v180-2021-12-02)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/devopsguru`: [v1.11.0](service/devopsguru/CHANGELOG.md#v1110-2021-12-02)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/directconnect`: [v1.12.0](service/directconnect/CHANGELOG.md#v1120-2021-12-02)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.10.0](service/dynamodb/CHANGELOG.md#v1100-2021-12-02)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.25.0](service/ec2/CHANGELOG.md#v1250-2021-12-02)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/evidently`: [v1.1.0](service/evidently/CHANGELOG.md#v110-2021-12-02)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.14.0](service/fsx/CHANGELOG.md#v1140-2021-12-02)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.16.0](service/glue/CHANGELOG.md#v1160-2021-12-02)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.1.0](service/inspector2/CHANGELOG.md#v110-2021-12-02)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.18.0](service/iot/CHANGELOG.md#v1180-2021-12-02)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/iottwinmaker`: [v1.0.0](service/iottwinmaker/CHANGELOG.md#v100-2021-12-02)
+  * **Release**: New AWS service client module
+* `github.com/aws/aws-sdk-go-v2/service/kafka`: [v1.11.0](service/kafka/CHANGELOG.md#v1110-2021-12-02)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/kendra`: [v1.17.0](service/kendra/CHANGELOG.md#v1170-2021-12-02)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/kinesis`: [v1.10.0](service/kinesis/CHANGELOG.md#v1100-2021-12-02)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/lakeformation`: [v1.10.0](service/lakeformation/CHANGELOG.md#v1100-2021-12-02)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelsv2`: [v1.14.0](service/lexmodelsv2/CHANGELOG.md#v1140-2021-12-02)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/lexruntimev2`: [v1.10.0](service/lexruntimev2/CHANGELOG.md#v1100-2021-12-02)
+  * **Feature**: Support has been added for the `StartConversation` API.
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.12.0](service/outposts/CHANGELOG.md#v1120-2021-12-02)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/rbin`: [v1.1.0](service/rbin/CHANGELOG.md#v110-2021-12-02)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/redshiftdata`: [v1.10.0](service/redshiftdata/CHANGELOG.md#v1100-2021-12-02)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/rum`: [v1.1.0](service/rum/CHANGELOG.md#v110-2021-12-02)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.21.0](service/s3/CHANGELOG.md#v1210-2021-12-02)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.20.0](service/sagemaker/CHANGELOG.md#v1200-2021-12-02)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerruntime`: [v1.11.0](service/sagemakerruntime/CHANGELOG.md#v1110-2021-12-02)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/shield`: [v1.11.0](service/shield/CHANGELOG.md#v1110-2021-12-02)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/snowball`: [v1.10.0](service/snowball/CHANGELOG.md#v1100-2021-12-02)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/storagegateway`: [v1.10.0](service/storagegateway/CHANGELOG.md#v1100-2021-12-02)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/workspacesweb`: [v1.0.0](service/workspacesweb/CHANGELOG.md#v100-2021-12-02)
+  * **Release**: New AWS service client module
+
 # Release (2021-11-30)
 
 ## General Highlights

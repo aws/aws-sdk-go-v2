@@ -1,8 +1,0 @@
-{
-    "id": "954dde13-60ef-407d-8ecb-138e35fd6534",
-    "type": "feature",
-    "description": "Add support for specifying `EndpointResolverWithOptions` on `LoadOptions`, and associated `WithEndpointResolverWithOptions`.",
-    "modules": [
-        "config"
-    ]
-}
